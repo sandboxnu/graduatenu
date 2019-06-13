@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-const INPUT = './Web\ Audit.html';
+const INPUT = '../Web\ Audit.html';
 const OUTPUT = 'parsed_audit.json';
 
 // general idea: mapping from key to look for in a line of text to a function able to parse that text
@@ -10,58 +10,46 @@ const OUTPUT = 'parsed_audit.json';
  */
 class AuditParser {
 
-	// matches 'key' - string to look for in a line of the file - to the method that should be called 
-	this.auditParse = {
-		'Major': function(text) {
-			this.addMajor(text);
-		},
-		'GRADUATION DATE:': function(text) {
-			this.addGradDate(text);			
-		},
-		'CATALOG YEAR': function(text) {
-			this.addAuditDate(text);
-		},
-		'No course taken pass/fail can be used toward NUPath.': function(lines, i) {
-			this.addNUPaths(lines, i);
-		},
-		'(FL|SP|S1|S2)': function(text) {
-			this.addCoursesTaken(text);
-		},
-		'Course List': function(text) {
-			this.addCourseRequirements(text);
-		}
-	};
-
-	// the completed json file
-	this.json = { 
-		completed: {
-			classes:[],
-			nupaths:[]
-		},
-		inprogress: {
-			classes:[],
-			nupaths:[]
-		},
-		requirements: {
-			classes:[],	
-			nupaths:[]
-		},
-		data: {
-
-		}
-	};
-
 	/**
 	 * Parses the degree audit with the complete path to the Degree\ Audit.html file into a usable JSON object, storing the object.
 	 */
 	constructor(filepath) {
+		// the completed json file
+		this.json = { 
+			completed: {
+				classes:[],
+				nupaths:[]
+			},
+			inprogress: {
+				classes:[],
+				nupaths:[]
+			},
+			requirements: {
+				classes:[],	
+				nupaths:[]
+			},
+			data: {
+
+			}
+		};
+		// matches 'key' - string to look for in a line of the file - to the method that should be called 
+		this.auditParse = {
+			'Major': this.addMajor,
+			'GRADUATION DATE:': this.addGradDate,
+			'CATALOG YEAR':this.addAuditDate,
+			'No course taken pass/fail can be used toward NUPath.':this.addNUPaths,
+			'(FL|SP|S1|S2)':this.addCoursesTaken,
+			'Course List': this.addCourseRequirements
+		};
+
+
 		fs.readFile(filepath, 'utf8', (err, data) => {
 			if(err) {throw err;}
 
 			var lines = data.split('\n');
 			for(var i = 0; i < lines.length; i++) {
 				for(var key in this.auditParse) {
-					if(this.contains(lines[i], key) {
+					if(this.contains(lines[i], key)) {
 						// a bit hacky, as the nupath parser is dependent upon reading multiple lines
 						// while the others operate utilizing just a single line of the audit
 						if(this.contains(key, 'No course taken pass/fail')) {
@@ -88,16 +76,13 @@ class AuditParser {
 	 */
 	writeFile(filename) {
 		fs.writeFileSync(filename, JSON.stringify(this.json));
-
 	}
 	/**
 	 * Adds the student's major if it is found.
 	 */
 	addMajor(text) {
-		// finds major
 		this.json.data.major = text.substring(text.search('>') + 1, text.search(' - Major'));
 	}
-
 
 	/**
 	 * Adds the student's graduation date if it is present.
@@ -110,12 +95,9 @@ class AuditParser {
 	 * Add the date the degree audit was created if it is found.
 	 */
 	addAuditDate(text) {
-		// finds year
 		this.json.data.year = text.substring(text.search('CATALOG YEAR:') + 'CATALOG YEAR: '.length, text.search('CATALOG YEAR:') + 'CATALOG YEAR: '.length + 4);
 	}
 
-
-	// TODO: this is now BROKEN - was reliant upon iterating through multiple lines of the file. consider a better way to do this.
 	/**
 	 * Finds NUPath requirements and adds them to the json file.
 	 */
@@ -139,6 +121,7 @@ class AuditParser {
 			}
 			i++;
 		}
+		return;
 	}
 
 	/**
@@ -167,28 +150,32 @@ class AuditParser {
 			this.json.completed.classes.push(course);
 		}
 
-		/**
-		 * Adds required courses and their information as is available.
-		 */
-		addCourseRequirements(text) {
-			// this part doesn't work! ends up in infinite loop ?? 
-			var courseList = text.substring(text.search('Course List') + 13).replace('<font>', '').split('<font class="auditPreviewText">').join('').split('</font>').join('TO');
-			var type = '';	
-			for(var i = 0; i < courseList.length; i++) {
+		return;
+	}
+	/**
+	 * Adds required courses and their information as is available.
+	 */
+	addCourseRequirements(text) {
+		// this part doesn't work! ends up in infinite loop ?? 
+		var courseList = text.substring(text.search('Course List') + 13).replace('<font>', '').split('<font class="auditPreviewText">').join('').split('</font>').join('TO');
+		var type = '';	
+		for(var i = 0; i < courseList.length; i++) {
 
-				var course = { };
-				if(this.contains(courseList[i], '\w\w') && !(courseList[i] == ' ' || courseList[i] == '')) {
-					course.attr = courseList[i].substring(0, 5); 
-					course.number = courseList[i].substring(5, 10);	
-					this.json.requirements.classes.push(course);
-				} else {
-					course.attr = type; 
-					course.number = courseList[i];
-					this.json.requirements.classes.push(course);
-				}
+			var course = { };
+			if(this.contains(courseList[i], '\w\w') && !(courseList[i] == ' ' || courseList[i] == '')) {
+				course.attr = courseList[i].substring(0, 5); 
+				course.number = courseList[i].substring(5, 10);	
+				this.json.requirements.classes.push(course);
+			} else {
+				course.attr = type; 
+				course.number = courseList[i];
+				this.json.requirements.classes.push(course);
 			}
 		}
+		return;
 	}
+}
 
-	const jsonreader = new AuditParser(INPUT);
-	jsonreader.writeFile(OUTPUT);
+
+const jsonreader = new AuditParser(INPUT);
+jsonreader.writeFile(OUTPUT);
