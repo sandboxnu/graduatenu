@@ -62,5 +62,9 @@ typings/
 
 # degree audit
 Web Audit.html
+
+Web\ Audit.html
+
+# for now - ensure that personal info is not leaked into repo
 *.html
 *.json

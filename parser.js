@@ -11,7 +11,7 @@ Relies on 'parser_funcs.js'
 */
 
 // input and output paths.
-const INPUT = './sampleData.json';
+const INPUT = './parsed_audit.json';
 const OUTPUT = './schedule.json';
 
 // parsing functions

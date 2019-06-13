@@ -1,6 +1,9 @@
 const fs = require('fs');
 
-fs.readFile('./Web\ Audit.html', 'utf8', (err, data) => {
+const INPUT = './Web\ Audit.html';
+const OUTPUT = 'parsed_audit.json';
+
+fs.readFile(INPUT, 'utf8', (err, data) => {
 	if(err) {throw err;}
 	// else, process the data
 
@@ -18,7 +21,7 @@ fs.readFile('./Web\ Audit.html', 'utf8', (err, data) => {
 			nupaths:[]
 		},
 		data: {
-		
+
 		}
 	};
 
@@ -36,7 +39,7 @@ fs.readFile('./Web\ Audit.html', 'utf8', (err, data) => {
 
 		if(contains(lines[i], 'GRADUATION DATE:')) {
 			json.data.grad = lines[i].substring(lines[i].search('GRADUATION DATE: ') + 'GRADUATION DATE: '.length, lines[i].search('GRADUATION DATE: ') + 'GRADUATION DATE:  '.length + 7);
-		
+
 		}
 
 		// finds all of the nupaths
@@ -110,7 +113,7 @@ fs.readFile('./Web\ Audit.html', 'utf8', (err, data) => {
 			var course = {};
 			var courseString = lines[i].substring(lines[i].search('(FL|SP|S1|S2)'));
 			course.hon = contains(lines[i], '\(HON\)');
-			
+
 			// ap courses that do not count for credit do not have numbers / attributes for corresponding college courses
 			if(!contains(courseString, 'NO AP')) {
 				course.attr = lines[i].substring(lines[i].search('(FL|SP|S1|S2)') + 5, lines[i].search('(FL|SP|S1|S2)') + 9).replace(' ', '');
@@ -119,7 +122,7 @@ fs.readFile('./Web\ Audit.html', 'utf8', (err, data) => {
 			course.credithours = courseString.substring(18, 22);
 			course.season = new RegExp('(FL|SP|S1|S2)').exec(lines[i])[0];
 			course.year = lines[i].substring(lines[i].search('(FL|SP|S1|S2)') + 2, lines[i].search('(FL|SP|S1|S2)') + 4);
-			
+
 			if(contains(courseString, 'IP')) {
 				json.inprogress.classes.push(course);			
 			} else {
@@ -129,8 +132,8 @@ fs.readFile('./Web\ Audit.html', 'utf8', (err, data) => {
 	}
 
 	console.log(json);
-	
-	fs.writeFileSync('parsed_audit.json', JSON.stringify(json));
+
+	fs.writeFileSync(OUTPUT, JSON.stringify(json));
 });
 
 function contains(text, lookfor) {
