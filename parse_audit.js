@@ -52,20 +52,18 @@ class AuditParser {
 	};
 
 	/**
-	 * Parses the degree audit with the given file name into a usable JSON object, storing the object.
+	 * Parses the degree audit with the complete path to the Degree\ Audit.html file into a usable JSON object, storing the object.
 	 */
-	constructor(filename) {
-
-		fs.readFile(filename, 'utf8', (err, data) => {
+	constructor(filepath) {
+		fs.readFile(filepath, 'utf8', (err, data) => {
 			if(err) {throw err;}
-			// else, process the data
-
 
 			var lines = data.split('\n');
 			for(var i = 0; i < lines.length; i++) {
 				for(var key in this.auditParse) {
 					if(this.contains(lines[i], key) {
 						// a bit hacky, as the nupath parser is dependent upon reading multiple lines
+						// while the others operate utilizing just a single line of the audit
 						if(this.contains(key, 'No course taken pass/fail')) {
 							this.auditParse[key](lines, i);
 						} else {
@@ -97,9 +95,7 @@ class AuditParser {
 	 */
 	addMajor(text) {
 		// finds major
-		if(this.contains(text, 'Major')) {
-			this.json.data.major = text.substring(text.search('>') + 1, text.search(' - Major'));
-		}
+		this.json.data.major = text.substring(text.search('>') + 1, text.search(' - Major'));
 	}
 
 
@@ -107,9 +103,7 @@ class AuditParser {
 	 * Adds the student's graduation date if it is present.
 	 */
 	addGradDate(text) {
-		if(this.contains(text, 'GRADUATION DATE:')) {
-			this.json.data.grad = text.substring(text.search('GRADUATION DATE: ') + 'GRADUATION DATE: '.length, text.search('GRADUATION DATE: ') + 'GRADUATION DATE:  '.length + 7);
-		}
+		this.json.data.grad = text.substring(text.search('GRADUATION DATE: ') + 'GRADUATION DATE: '.length, text.search('GRADUATION DATE: ') + 'GRADUATION DATE:  '.length + 7);
 	}
 
 	/**
@@ -117,9 +111,7 @@ class AuditParser {
 	 */
 	addAuditDate(text) {
 		// finds year
-		if(this.contains(text, 'CATALOG YEAR')) {
-			this.json.data.year = text.substring(text.search('CATALOG YEAR:') + 'CATALOG YEAR: '.length, text.search('CATALOG YEAR:') + 'CATALOG YEAR: '.length + 4);
-		}
+		this.json.data.year = text.substring(text.search('CATALOG YEAR:') + 'CATALOG YEAR: '.length, text.search('CATALOG YEAR:') + 'CATALOG YEAR: '.length + 4);
 	}
 
 
@@ -127,27 +119,25 @@ class AuditParser {
 	/**
 	 * Finds NUPath requirements and adds them to the json file.
 	 */
-	addNUPaths(text) {
+	addNUPaths(lines, i) {
 		// finds all of the nupaths
-		if(this.contains(text, 'No course taken pass/fail can be used toward NUpath.'))	{
-			i++;
-			while(this.contains(text, '<br>')) {
-				var toAdd = text.substring(text.indexOf("(") + 1, text.indexOf("(") + 3)
-				// omits bad stuff
-				if(this.contains(toAdd, '<') || contains(toAdd, '>')) {
-				}
-
-				else if(this.contains(text, 'OK')|| contains(lines[i], 'IP')) {
-					this.json.completed.nupaths.push(toAdd);				
-				}
-				else if(this.contains(text, 'IP')) {
-					this.json.inprogress.nupaths.push(toAdd);
-				}
-				else if(this.contains(text, 'NO')) {
-					this.json.requirements.nupaths.push(toAdd);				
-				}
-				i++;
+		i++;
+		while(this.contains(lines[i], '<br>')) {
+			var toAdd = lines[i].substring(lines[i].indexOf("(") + 1, lines[i].indexOf("(") + 3)
+			// omits bad stuff
+			if(this.contains(toAdd, '<') || contains(toAdd, '>')) {
 			}
+
+			else if(this.contains(lines[i], 'OK')) {
+				this.json.completed.nupaths.push(toAdd);				
+			}
+			else if(this.contains(lines[i], 'IP')) {
+				this.json.inprogress.nupaths.push(toAdd);
+			}
+			else if(this.contains(lines[i], 'NO')) {
+				this.json.requirements.nupaths.push(toAdd);				
+			}
+			i++;
 		}
 	}
 
@@ -156,35 +146,32 @@ class AuditParser {
 	 */
 	addCoursesTaken(text) {
 		// finds all courses taken, currently taking or scheduled to take
-		if(this.contains(text, 'FL') || this.contains(text, 'SP') || this.contains(text, 'S1') || this.contains(text, 'S2')) {
-			//TODO: this is hacky help
-			var course = {};
-			var courseString = text.substring(text.search('(FL|SP|S1|S2)'));
-			course.hon = this.contains(text, '\(HON\)');
 
-			// ap courses that do not count for credit do not have numbers / attributes for corresponding college courses
-			if(!this.contains(courseString, 'NO AP')) {
-				course.attr = text.substring(text.search('(FL|SP|S1|S2)') + 5, text.search('(FL|SP|S1|S2)') + 9).replace(' ', '');
-				course.number = courseString.substring(9, 14);
-			}
-			course.credithours = courseString.substring(18, 22);
-			course.season = new RegExp('(FL|SP|S1|S2)').exec(text)[0];
-			course.year = text.substring(text.search('(FL|SP|S1|S2)') + 2, text.search('(FL|SP|S1|S2)') + 4);
+		var course = {};
+		var courseString = text.substring(text.search('(FL|SP|S1|S2)'));
+		course.hon = this.contains(text, '\(HON\)');
 
-			if(this.contains(courseString, 'IP')) {
-				this.json.inprogress.classes.push(course);			
-			} else {
-				this.json.completed.classes.push(course);
-			}
+		// AP courses that do not count for credit do not have numbers / attributes for corresponding college courses
+		if(!this.contains(courseString, 'NO AP')) {
+			course.attr = text.substring(text.search('(FL|SP|S1|S2)') + 5, text.search('(FL|SP|S1|S2)') + 9).replace(' ', '');
+			course.number = courseString.substring(9, 14);
 		}
-	}
 
-	/**
-	 * Adds required courses and their information as is available.
-	 */
-	addCourseRequirements(text) {
-		// this part doesn't work! ends up in infinite loop ?? 
-		if(this.contains(text, 'Course List')) {
+		course.credithours = courseString.substring(18, 22);
+		course.season = new RegExp('(FL|SP|S1|S2)').exec(text)[0];
+		course.year = text.substring(text.search('(FL|SP|S1|S2)') + 2, text.search('(FL|SP|S1|S2)') + 4);
+
+		if(this.contains(courseString, 'IP')) {
+			this.json.inprogress.classes.push(course);			
+		} else {
+			this.json.completed.classes.push(course);
+		}
+
+		/**
+		 * Adds required courses and their information as is available.
+		 */
+		addCourseRequirements(text) {
+			// this part doesn't work! ends up in infinite loop ?? 
 			var courseList = text.substring(text.search('Course List') + 13).replace('<font>', '').split('<font class="auditPreviewText">').join('').split('</font>').join('TO');
 			var type = '';	
 			for(var i = 0; i < courseList.length; i++) {
@@ -202,7 +189,6 @@ class AuditParser {
 			}
 		}
 	}
-}
 
-const jsonreader = new AuditParser(INPUT);
-jsonreader.writeFile(OUTPUT);
+	const jsonreader = new AuditParser(INPUT);
+	jsonreader.writeFile(OUTPUT);
