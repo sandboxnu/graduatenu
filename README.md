@@ -1,5 +1,7 @@
 # scheduleneu
 
+run using node. 
+
 ## parse_degree_audit.js
 
 Expects a "Web Audit.html" degree audit, downloaded directly from the northeastern website. 
