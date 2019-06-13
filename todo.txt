@@ -1,0 +1,7 @@
+// TODO: remove this filebefore it is needed
+- create class accepting a file name as text
+- reads in file with file name specified
+- stores file by line ??
+- stores json file interpreted for sure
+- scans the file with a main method utilizing functions
+- read into javascript class based porgramming to do so
