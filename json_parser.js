@@ -15,7 +15,7 @@ const INPUT = './sampleData.json';
 const OUTPUT = './schedule.json';
 
 // parsing functions
-const parsing = require('./parser_funcs.js');
+const parsing = require('./json_parser_funcs.js');
 // file reading
 const fs = require('fs');
 
