@@ -12,10 +12,10 @@ class AuditParser {
 	/**
 	 * Parses the degree audit with the complete path to the Degree\ Audit.html file into a usable JSON object, storing the object.
 	 */
-	constructor(filepath) {
+	constructor() {
 		// matches 'key' - string to look for in a line of the file - to the method that should be called 
-		// the completed json file
-		var json = JSON.parse(JSON.stringify({ 
+		// the completed this.json file
+		this.json = JSON.parse(JSON.stringify({ 
 			completed: {
 				classes:[],
 				nupaths:[]
@@ -32,7 +32,10 @@ class AuditParser {
 			}
 		}));
 
-		var auditParse = {
+	}
+
+callThisAfter() {
+		this.auditParse = {
 			'Major': this.addMajor,
 			'GRADUATION DATE:': this.addGradDate,
 			'CATALOG YEAR':this.addAuditDate,
@@ -40,60 +43,63 @@ class AuditParser {
 			'(FL|SP|S1|S2)':this.addCoursesTaken,
 			'Course List': this.addCourseRequirements
 		};
+}
 
-
+callThisThird(filepath) {
 		fs.readFile(filepath, 'utf8', (err, info) => {
 			if(err) {throw err;}
 
 			var lines = info.split('\n');
 			for(var i = 0; i < lines.length; i++) {
-				for(var key in auditParse) {
+				for(var key in this.auditParse) {
 					if(contains(lines[i], key)) {
 						// a bit hacky, as the nupath parser is dependent upon reading multiple lines
 						// while the others operate utilizing just a single line of the audit
 						if(contains(key, 'No course taken pass/fail')) {
-							auditParse[key](json, lines, i);
+							this.json = this.auditParse[key](this.json, lines, i);
 						} else {
-							auditParse[key](json, lines[i]);
+							this.json = this.auditParse[key](this.json, lines[i]);
 						}
 						break;
 					}
 				}
 			}
 		});
-		fs.writeFileSync(OUTPUT, JSON.stringify(json));
-	}
-
-
+		fs.writeFileSync(OUTPUT, JSON.stringify(this.json));
+}
 	/**
 	 * Writes the generated JSON object to a file with the given name.
 	 */
 	writeFile(filename) {
-		//		fs.writeFileSync(filename, json);
+		//		fs.writeFileSync(filename, this.json);
 	}
 	/**
 	 * Adds the student's major if it is found.
 	 */
 	addMajor(json, text) {
-		json.info.major = text.substring(text.search('>') + 1, text.search(' - Major'));
+		this.json.info.major = text.substring(text.search('>') + 1, text.search(' - Major'));
+		return this.json;
 	}
 
 	/**
 	 * Adds the student's graduation date if it is present.
 	 */
 	addGradDate(json, text) {
-		json.info.grad = text.substring(text.search('GRADUATION DATE: ') + 'GRADUATION DATE: '.length, text.search('GRADUATION DATE: ') + 'GRADUATION DATE:  '.length + 7);
-	}
+		this.json.info.grad = text.substring(text.search('GRADUATION DATE: ') + 'GRADUATION DATE: '.length, text.search('GRADUATION DATE: ') + 'GRADUATION DATE:  '.length + 7);
+			return this.json;
+			}
+
 
 	/**
 	 * Add the date the degree audit was created if it is found.
 	 */
 	addAuditDate(json, text) {
-		json.info.year = text.substring(text.search('CATALOG YEAR:') + 'CATALOG YEAR: '.length, text.search('CATALOG YEAR:') + 'CATALOG YEAR: '.length + 4);
+		this.json.info.year = text.substring(text.search('CATALOG YEAR:') + 'CATALOG YEAR: '.length, text.search('CATALOG YEAR:') + 'CATALOG YEAR: '.length + 4);
+		return this.json;
 	}
 
 	/**
-	 * Finds NUPath requirements and adds them to the json file.
+	 * Finds NUPath requirements and adds them to the this.json file.
 	 */
 	addNUPaths(json, lines, i) {
 		// finds all of the nupaths
@@ -105,17 +111,17 @@ class AuditParser {
 			}
 
 			else if(contains(lines[i], 'OK')) {
-				json.completed.nupaths.push(toAdd);				
+				this.json.completed.nupaths.push(toAdd);				
 			}
 			else if(contains(lines[i], 'IP')) {
-				json.inprogress.nupaths.push(toAdd);
+				this.json.inprogress.nupaths.push(toAdd);
 			}
 			else if(contains(lines[i], 'NO')) {
-				json.requirements.nupaths.push(toAdd);				
+				this.json.requirements.nupaths.push(toAdd);				
 			}
 			i++;
 		}
-		return;
+		return this.json;
 	}
 
 	/**
@@ -139,12 +145,12 @@ class AuditParser {
 		course.year = text.substring(text.search('(FL|SP|S1|S2)') + 2, text.search('(FL|SP|S1|S2)') + 4);
 
 		if(contains(courseString, 'IP')) {
-			json.inprogress.classes.push(course);			
+			this.json.inprogress.classes.push(course);			
 		} else {
-			json.completed.classes.push(course);
+			this.json.completed.classes.push(course);
 		}
+		return this.json;
 
-		return;
 	}
 	/**
 	 * Adds required courses and their information as is available.
@@ -159,14 +165,14 @@ class AuditParser {
 			if(contains(courseList[i], '\w\w') && !(courseList[i] == ' ' || courseList[i] == '')) {
 				course.attr = courseList[i].substring(0, 5); 
 				course.number = courseList[i].substring(5, 10);	
-				json.requirements.classes.push(course);
+				this.json.requirements.classes.push(course);
 			} else {
 				course.attr = type; 
 				course.number = courseList[i];
-				json.requirements.classes.push(course);
+				this.json.requirements.classes.push(course);
 			}
 		}
-		return;
+		return this.json;
 	}
 }
 
@@ -178,4 +184,6 @@ function contains(text, lookfor) {
 	return -1 != text.search(lookfor);
 }
 
-let jsonreader = new AuditParser(INPUT);
+let jsonreader = new AuditParser();
+jsonreader.callThisAfter();
+jsonreader.callThisThird(INPUT);
