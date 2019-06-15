@@ -64,3 +64,6 @@ typings/
 Web Audit.html
 *.html
 *.json
+
+# avoid temp files
+*~
