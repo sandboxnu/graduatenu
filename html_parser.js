@@ -1,6 +1,9 @@
 const fs = require('fs');
 
-fs.readFile('./Web\ Audit.html', 'utf8', (err, data) => {
+const INPUT = './Web\ Audit.html';
+const OUTPUT = 'parsed_audit.json';
+
+fs.readFile(INPUT, 'utf8', (err, data) => {
 	if(err) {throw err;}
 	// else, process the data
 
@@ -63,6 +66,7 @@ fs.readFile('./Web\ Audit.html', 'utf8', (err, data) => {
 
 
 		// this part doesn't work! ends up in infinite loop ?? 
+		/*
 		else if(contains(lines[i], 'Course List')) {
 			var courseList = lines[i].substring(lines[i].search('Course List') + 13).replace('<font>', '').split('<font class="auditPreviewText">').join('').split('</font>').join('TO');
 			var type = '';	
@@ -89,6 +93,7 @@ fs.readFile('./Web\ Audit.html', 'utf8', (err, data) => {
 
 			console.log(courseList);
 		}
+		*/
 
 		//	else if(contains(lines[i], '<span class="auditPreviewText"><font class="auditPreviewText">       NUpath                                               ')) {
 
@@ -130,7 +135,7 @@ fs.readFile('./Web\ Audit.html', 'utf8', (err, data) => {
 
 	console.log(json);
 	
-	fs.writeFileSync('parsed_audit.json', JSON.stringify(json));
+	fs.writeFileSync(OUTPUT, JSON.stringify(json));
 });
 
 function contains(text, lookfor) {
