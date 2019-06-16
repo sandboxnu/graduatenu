@@ -11,11 +11,11 @@ Relies on 'parser_funcs.js'
 */
 
 // input and output paths.
-const INPUT = './sampleData.json';
+const INPUT = './parsed_audit.json';
 const OUTPUT = './schedule.json';
 
 // parsing functions
-const parsing = require('./parser_funcs.js');
+const parsing = require('./json_funcs.js');
 // file reading
 const fs = require('fs');
 
