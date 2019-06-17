@@ -7,11 +7,11 @@ Dependencies:
 
 To run:
 
-- Download your degree audit from the Northeastern MyPAWS degree audit system. Do this by clicking the 'printer-friendly' mode, then right-clicking the page and/or using a command line tool of your choice to obtain the degree audit file. Ensure that the file name is 'Degree\ Audit.html' and that it is located in this repository's file system.
-- Execute the command ``` node parse_audit.js ```
-- Execute ``` node parser.js ```
+- Download your degree audit from the Northeastern MyPAWS degree audit system. Do this by clicking the 'printer-friendly' mode, then right-clicking the page and/or using a command line tool of your choice to obtain the degree audit file. Ensure that the file name is 'Web\ Audit.html' and that it is located in this repository's file system.
+- Execute the command ``` node html_parser.js ```
+- Execute ``` node json_parser.js ```
 
-After this, an organized JSON file with information regarding your current degree trajectory should be present in the produced schedule.json file.
+After this, an organized JSON file with information regarding your current degree trajectory should be present in the produced ``` schedule.json ``` file.
 
 In the future, this functionality will comprise a portion of the backend of a web application designed to facilitate the simple creation of schedules via a degree audit and/or supplemental information provided by the end user.
 
