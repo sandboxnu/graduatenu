@@ -67,7 +67,15 @@ function get_nupaths(json, lines, i) {
         }
         i++;
     }
+}
 
+/**
+ * Determines whether a function contains a number.
+ * @param n  The String which could contain a number.
+ * https://stackoverflow.com/questions/5778020/check-whether-an-input-string-contains-a-number-in-javascript#28813213
+ */
+function hasNumber(n) {
+    return !isNaN(parseFloat(n)) && isFinite(n);
 }
 
 /**
@@ -75,27 +83,45 @@ function get_nupaths(json, lines, i) {
  * @param json  The json file to which the required courses should be added.
  * @param line  The line which contains these required courses.
  */
-function add_courses_to_take(json, line) {
-    var courseList = line.substring(line.search('Course List') + 13).replace('<font>', '').split('<font class="auditPreviewText">').join('').split('</font>').join('TO');
-    var type = '';	
+function add_courses_to_take(json, lines, j) {
+    var courseList = lines[j].substring(lines[j].search('Course List') + 13).replace('<font>', '').split('<font class="auditPreviewText">').join('').split('</font>');
+    var type = '';
+    var courses = [];
+    var seenEnumeration = false;
     for(var i = 0; i < courseList.length; i++) {
-
         var course = { };
-
-        if(!(courseList[i] == ' ' || courseList[i] == '') && contains(courseList[i], '\w\w')) {
-            course.attr = courseList[i].substring(0, 5); 
-            course.number = courseList[i].substring(5, 10);	
-            json.requirements.classes.push(course);
-        }
-
-        else {
-            course.attr = type; 
-            course.number = courseList[i];
-            json.requirements.classes.push(course);
+        if(!(courseList[i] == ' ' || courseList[i] == '' || courseList[i] == '****')) {
+            course.attr = courseList[i].substring(0, 4).split(' ').join('');
+            
+            if(contains(lines[j - 1], ' of the following courses')) {
+                if(!seenEnumeration) {
+                    course.list = [courseList[i].substring(4, 10)];
+                    course.num_required = lines[j - 1].substring(lines[j - 1].search('Complete') + 'Complete ('.length, lines[j - 1].search('Complete') + 'Complete ('.length+1) 
+                    seenEnumeration = true;
+                    courses.push(course);
+                } else {
+                    courses[courses.length - 1].list.push(courseList[i].substring(1, 5));
+                }
+            } 
+            
+            else if(hasNumber(course.attr)) {
+                course.number = courseList[i].substring(0, 5).split(' ').join('');
+                course.attr = type;
+                courses.push(course);
+            } 
+            
+            else if(course.attr == 'TO') {
+                courses[courses.length - 1].number2 = courseList[i].substring(4, 10);	
+            } 
+            
+            else {
+                type = course.attr;
+                course.number = courseList[i].substring(4, 10);	
+                courses.push(course);
+            }
         }
     }
-
-    console.log(courseList);
+    json.requirements.classes = [].concat(json.requirements.classes,courses);
 }
 
 /**
@@ -178,7 +204,7 @@ function audit_to_json(input, output) {
             // this part doesn't work! ends up in infinite loop ?? 
             // finds all of the courses required to be taken
             else if(contains(lines[i], 'Course List')) {
-                add_courses_to_take(json, lines[i]);
+                add_courses_to_take(json, lines, i);
             }
 
             // finds courses that have been taken
@@ -187,8 +213,7 @@ function audit_to_json(input, output) {
             }
         }
 
-        console.log(json);
-
+        console.log(json.requirements)
         fs.writeFileSync(output, JSON.stringify(json));
     });
 }
