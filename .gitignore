@@ -67,3 +67,6 @@ Web Audit.html
 
 # avoid temp files
 *~
+
+# for our mac users
+.DS_Store
