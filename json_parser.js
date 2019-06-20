@@ -129,6 +129,7 @@ function getFileAsJson(inputLocation) {
  */
 function download(url, dest, cb) {
   if (fs.existsSync(dest)) {
+    console.log("File " + url + " found, skipping download.");
     cb(undefined);
   } else {
     console.log("File " + url + " not found, downloading...");
