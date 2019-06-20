@@ -22,8 +22,8 @@ const FALL = 'https://searchneu.com/data/v2/getTermDump/neu.edu/201810.json';
 const SPRING = 'https://searchneu.com/data/v2/getTermDump/neu.edu/201830.json';
 
 // the filepath locations for storing fall and spring course data.
-const FALL_PATH = './course-data/201810.json';
-const SPRING_PATH = './course-data/201830.json';
+const FALL_PATH = './201810.json';
+const SPRING_PATH = './201830.json';
 
 /**
  * Data Definition:
@@ -131,11 +131,15 @@ function download(url, dest, cb) {
   if (fs.existsSync(dest)) {
     cb(undefined);
   } else {
+    console.log("File " + url + " not found, downloading...");
+
     var file = fs.createWriteStream(dest);
     var request = https.get(url, function(response) {
       response.pipe(file);
       file.on('finish', function() {
         file.close(cb);  // close() is async, call cb after close completes.
+
+        console.log("Download complete.");
       });
     }).on('error', function(err) { // Handle errors
       fs.unlink(dest); // Delete the file async. (But we don't check the result)
