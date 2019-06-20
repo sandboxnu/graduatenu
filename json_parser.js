@@ -145,13 +145,30 @@ function download(url, dest, cb) {
 };
 
 /**
+ * Grabs the data of a specified class.
+ * @param {JSON} classMap The classMap to get data from.
+ * @param {*} termId The termId of the classMap.
+ * @param {*} attribute The attribute (college abbreviation) of the target course.
+ * @param {*} courseNumber The course number of the target course.
+ */
+function getClassData(classMap, termId, attribute, courseNumber) {
+  // classes can be accessed by the 'neu.edu/201830/<COLLEGE>/<COURSE_NUMBER>' attribute of each "classmap"
+  // 201830 is spring, 201810 is fall.
+
+  let query = 'neu.edu/' + termId + '/' + attribute + '/' + courseNumber;
+  return classMap[query];
+}
+
+/**
  * Parses the provided JSON file to an output JSON file, organized chronologically.
  * @param {*} inputLocation The target filepath to input from.
  * @param {*} outputLocation The target filepath to output to.
+ * @param {JSON} springClassMap The classmap of spring classes.
+ * @param {JSON} fallClassMap The classmap of fall classes.
  */
-function parseJSON(inputLocation, outputLocation) {
+function toSchedule(inputLocation, outputLocation, springClassMap, fallClassMap) {
   // parse the json file
-  let old = getFileAsJson(INPUT);
+  let old = getFileAsJson(inputLocation);
 
   // get the completed, requirements, and otherInfo
   let completed = old.completed;
@@ -159,6 +176,9 @@ function parseJSON(inputLocation, outputLocation) {
   let otherInfo = old.otherInfo;
 
   let completedClasses = completed.classes;
+
+  // test getClassData
+  // console.log(getClassData(springClassMap, 201830, 'CS', 2510));
 
   // start at the lowest year
   let currentYear = getFirstYear(completedClasses);
@@ -170,10 +190,13 @@ function parseJSON(inputLocation, outputLocation) {
     currentYear = getNextYear(currentYear, completedClasses);
   }
 
+  // the output JSON
+  var JSONSchedule = JSON.stringify(schedule, null, 2);
+
   // output the file to ./schedule.json.
-  fs.writeFile(outputLocation, JSON.stringify(schedule, null, 2), (err) => {
+  fs.writeFile(outputLocation, JSONSchedule, (err) => {
     if (err) throw err;
-    console.log("success.");
+    console.log(schedule);
   });
 
   // somehow convert the rest of the stuff to a schedule. complete with coop cycles? 
@@ -184,10 +207,20 @@ function parseJSON(inputLocation, outputLocation) {
 // run the main program. 
 // ensures that spring and fall files are loaded before parsing schedule.
 download(SPRING, SPRING_PATH, (err) => {
-  if (err) {throw err;}
+  if (err) throw err;
   download(FALL, FALL_PATH, (err) => {
-    if (err) {throw err;}
-    parseJSON(INPUT,OUTPUT);
+    if (err) throw err;
+
+    var springJSON = getFileAsJson(SPRING_PATH);
+    var fallJSON = getFileAsJson(FALL_PATH);
+    var springClassMap = springJSON.classMap;
+    var fallClassMap = fallJSON.classMap;
+
+    // classes can be accessed by the 'neu.edu/201830/<COLLEGE>/<COURSE_NUMBER>' attribute of each "classmap"
+    // 201830 is spring, 201810 is fall.
+    
+    // parse json.
+    toSchedule(INPUT,OUTPUT, springClassMap, fallClassMap);
   })
 });
    
