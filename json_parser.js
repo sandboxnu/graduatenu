@@ -7,15 +7,23 @@
  */
 
 const fs = require('fs');
+const https = require('https');
 
 // input file path to JSON file to convert from.
 const INPUT = './parsed_audit.json';
-
 // the output file path to the JSON file to convert to. 
 const OUTPUT = './schedule.json';
 
 // the possible seasons to choose from.
 const SEASONS = ["SP", "S1", "S2", "FL"];
+
+// the download links for the fall and spring course data.
+const FALL = 'https://searchneu.com/data/v2/getTermDump/neu.edu/201810.json';
+const SPRING = 'https://searchneu.com/data/v2/getTermDump/neu.edu/201830.json';
+
+// the filepath locations for storing fall and spring course data.
+const FALL_PATH = './course-data/201810.json';
+const SPRING_PATH = './course-data/201830.json';
 
 /**
  * Data Definition:
@@ -114,6 +122,29 @@ function getFileAsJson(inputLocation) {
 }
 
 /**
+ * Downloads a file from a specified link, to a specified filepath. Only downloads if file does not exist.
+ * @param {*} url The url to download from.
+ * @param {*} dest The destination file path.
+ * @param {*} cb The callback function.
+ */
+function download(url, dest, cb) {
+  if (fs.existsSync(dest)) {
+    cb(undefined);
+  } else {
+    var file = fs.createWriteStream(dest);
+    var request = https.get(url, function(response) {
+      response.pipe(file);
+      file.on('finish', function() {
+        file.close(cb);  // close() is async, call cb after close completes.
+      });
+    }).on('error', function(err) { // Handle errors
+      fs.unlink(dest); // Delete the file async. (But we don't check the result)
+      if (cb) cb(err.message);
+    });
+  }
+};
+
+/**
  * Parses the provided JSON file to an output JSON file, organized chronologically.
  * @param {*} inputLocation The target filepath to input from.
  * @param {*} outputLocation The target filepath to output to.
@@ -151,4 +182,12 @@ function parseJSON(inputLocation, outputLocation) {
 }
 
 // run the main program. 
-parseJSON(INPUT, OUTPUT);
+// ensures that spring and fall files are loaded before parsing schedule.
+download(SPRING, SPRING_PATH, (err) => {
+  if (err) {throw err;}
+  download(FALL, FALL_PATH, (err) => {
+    if (err) {throw err;}
+    parseJSON(INPUT,OUTPUT);
+  })
+});
+   
