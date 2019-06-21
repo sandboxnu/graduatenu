@@ -204,11 +204,11 @@ function toSchedule(inputLocation, outputLocation, springClassMap, fallClassMap)
 
   // start at the lowest year
   let currentTerm = getFirstTerm(completedClasses);
-  let schedule = [];
+  let schedule = {completed: {classes: []}};
 
   // while we have a next year, append the year to a schedule.
   while (currentTerm) {
-    schedule.push(getClassesOfTerm(currentTerm, completedClasses));
+    schedule.completed.classes.push({termId: currentTerm, courses: getClassesOfTerm(currentTerm, completedClasses)});
     currentTerm = getNextTerm(currentTerm, completedClasses);
   }
 
