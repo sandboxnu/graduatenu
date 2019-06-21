@@ -98,7 +98,8 @@ function getClassesOfTerm(termId, classes) {
 
 /**
  * Grabs a file as JSON text.
- * @param {*} inputLocation The filepath of the input file to convert to JSON.
+ * @param {String} inputLocation The filepath of the input file to convert to JSON.
+ * @returns {JSON} The resulting JSON.
  */
 function getFileAsJson(inputLocation) {
   var data;
@@ -114,9 +115,9 @@ function getFileAsJson(inputLocation) {
 
 /**
  * Downloads a file from a specified link, to a specified filepath. Only downloads if file does not exist.
- * @param {*} url The url to download from.
- * @param {*} dest The destination file path.
- * @param {*} cb The callback function.
+ * @param {String} url The url to download from.
+ * @param {String} dest The destination file path.
+ * @param {String} cb The callback function.
  */
 function download(url, dest, cb) {
   if (fs.existsSync(dest)) {
@@ -144,6 +145,7 @@ function download(url, dest, cb) {
  * Returns if the classList contains the given class, by attr and course #.
  * @param {Class[]} classList The list of classes.
  * @param {Class} c The class to find.
+ * @returns {boolean} True if class is found.
  */
 function containsClass(classList, c) {
   let targetSubject = getClassSubject(c);
@@ -155,8 +157,9 @@ function containsClass(classList, c) {
 
 /**
  * Produces an array of the required classes not taken yet.
- * @param {Classes[]} required The remaining classes to take.
- * @param {Classes[]} completed The classes completed so far.
+ * @param {Class[]} required The remaining classes to take.
+ * @param {Class[]} completed The classes completed so far.
+ * @returns {Class[]} The required classes not taken yet.
  */
 function getRemainingRequirements(required, completed) {
   // keep the classes, if they are NOT in completed.
@@ -167,9 +170,9 @@ function getRemainingRequirements(required, completed) {
 /**
  * Grabs the data of a specified class.
  * @param {JSON} classMap The classMap to get data from.
- * @param {*} termId The termId of the classMap.
- * @param {*} attribute The attribute (college abbreviation) of the target course.
- * @param {*} courseNumber The course number of the target course.
+ * @param {number} termId The termId of the classMap.
+ * @param {String} attribute The attribute (college abbreviation) of the target course.
+ * @param {number} courseNumber The course number of the target course.
  * @returns {Object} The resulting class object (if found).
  */
 function getClassData(classMap, termId, attribute, courseNumber) {
@@ -182,8 +185,8 @@ function getClassData(classMap, termId, attribute, courseNumber) {
 
 /**
  * Parses the provided JSON file to an output JSON file, organized chronologically.
- * @param {*} inputLocation The target filepath to input from.
- * @param {*} outputLocation The target filepath to output to.
+ * @param {String} inputLocation The target filepath to input from.
+ * @param {String} outputLocation The target filepath to output to.
  * @param {JSON} springClassMap The classmap of spring classes.
  * @param {JSON} fallClassMap The classmap of fall classes.
  */
