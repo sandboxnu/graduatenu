@@ -171,15 +171,15 @@ function getRemainingRequirements(required, completed) {
  * Grabs the data of a specified class.
  * @param {JSON} classMap The classMap to get data from.
  * @param {number} termId The termId of the classMap.
- * @param {String} attribute The attribute (college abbreviation) of the target course.
- * @param {number} courseNumber The course number of the target course.
+ * @param {String} subject The subject (college abbreviation) of the target course.
+ * @param {number} classId course number of the target course.
  * @returns {Object} The resulting class object (if found).
  */
-function getClassData(classMap, termId, attribute, courseNumber) {
+function getClassData(classMap, termId, subject, classId) {
   // classes can be accessed by the 'neu.edu/201830/<COLLEGE>/<COURSE_NUMBER>' attribute of each "classmap"
   // 201830 is spring, 201810 is fall.
 
-  let query = 'neu.edu/' + termId + '/' + attribute + '/' + courseNumber;
+  let query = 'neu.edu/' + termId + '/' + subject+ '/' + classId;
   return classMap[query];
 }
 
@@ -187,10 +187,10 @@ function getClassData(classMap, termId, attribute, courseNumber) {
  * Parses the provided JSON file to an output JSON file, organized chronologically.
  * @param {String} inputLocation The target filepath to input from.
  * @param {String} outputLocation The target filepath to output to.
- * @param {JSON} springClassMap The classmap of spring classes.
- * @param {JSON} fallClassMap The classmap of fall classes.
+ * @param {Object} spring Spring classmap object, with fields termId and classMap.
+ * @param {Object} fall Fall classmap object, with fields termId and classMap.
  */
-function toSchedule(inputLocation, outputLocation, springClassMap, fallClassMap) {
+function toSchedule(inputLocation, outputLocation, spring, fall) {
   // parse the json file
   let audit = getFileAsJson(inputLocation);
 
@@ -199,6 +199,7 @@ function toSchedule(inputLocation, outputLocation, springClassMap, fallClassMap)
   let requirements = audit.requirements;
   let otherInfo = audit.otherInfo;
 
+  // get the completed classes, and required classes
   let completedClasses = completed.classes;
   let requiredClasses = requirements.classes;
 
@@ -212,13 +213,26 @@ function toSchedule(inputLocation, outputLocation, springClassMap, fallClassMap)
     currentTerm = getNextTerm(currentTerm, completedClasses);
   }
 
-  // test getClassData
-  // console.log(getClassData(springClassMap, 201830, 'CS', 2510));
-
   // the remaining classes to take.
   // needs to be tested.
   let remainingRequirements = getRemainingRequirements(requiredClasses, completedClasses);
   console.log("remaining requirements: \n" + JSON.stringify(remainingRequirements, null, 2));
+
+  // spring and fall termIds
+  let springId = spring.termId;
+  let fallId = fall.termId;
+
+  // classmaps, as JSON objects.
+  let springMap = spring.classMap;
+  let fallMap = fall.classMap;
+
+  // convert remainig courses to their detailed counterparts. use spring, because it's more recent.
+  remainingRequirements = remainingRequirements.map((cl) => 
+  (getClassData(springMap, springId, getClassSubject(cl), getClassClassId(cl))));
+
+  // console.log(getClassData(springMap, springId, "CS", 2550).prereqs);
+  // console.log(getClassData(fallMap, fallId, "CS", 2500))
+
 
   // the output JSON
   var JSONSchedule = JSON.stringify(schedule, null, 2);
@@ -250,7 +264,7 @@ download(SPRING, SPRING_PATH, (err) => {
     // 201830 is spring, 201810 is fall.
     
     // parse json.
-    toSchedule(INPUT,OUTPUT, springClassMap, fallClassMap);
+    toSchedule(INPUT,OUTPUT, {termId: 201830, classMap: springClassMap}, {termId: 201810, classMap: fallClassMap});
   })
 });
    
