@@ -105,7 +105,7 @@ function add_courses_to_take(json, lines, j) {
             } 
             
             else if(hasNumber(course.course.subject)) {
-                course.number = courseList[i].substring(0, 5).split(' ').join('');
+                course.classId = courseList[i].substring(0, 5).split(' ').join('');
                 course.course.subject = type;
                 courses.push(course);
             } 
@@ -116,7 +116,7 @@ function add_courses_to_take(json, lines, j) {
             
             else {
                 type = course.course.subject;
-                course.number = courseList[i].substring(4, 10);	
+                course.classId = courseList[i].substring(4, 10);	
                 courses.push(course);
             }
         }
@@ -137,7 +137,7 @@ function add_course_taken(json, line) {
     // ap courses that do not count for credit do not have numbers / attributes for corresponding college courses
     if(!contains(courseString, 'NO AP')) {
         course.course.subject = line.substring(line.search('(FL|SP|S1|S2)') + 5, line.search('(FL|SP|S1|S2)') + 9).replace(' ', '');
-        course.number = courseString.substring(9, 14);
+        course.classId = courseString.substring(9, 14);
     }
     course.credithours = courseString.substring(18, 22);
     course.season = new RegExp('(FL|SP|S1|S2)').exec(line)[0];
