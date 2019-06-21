@@ -49,6 +49,22 @@ function getClassSeason(c) {
   return c.season;
 }
 
+/**
+ * Gets the attribute of a class.
+ * @param {Class} c The target class.
+ */
+function getClassAttribute(c) {
+  return c.attr;
+}
+
+/**
+ * Gets the course number of a class.
+ * @param {Class} c The target class.
+ */
+function getClassNumber(c) {
+  return c.number;
+}
+
 // PARSING FUNCTIONS
 
 /**
@@ -150,6 +166,29 @@ function download(url, dest, cb) {
 };
 
 /**
+ * Returns if the classList contains the given class, by attr and course #.
+ * @param {Class[]} classList The list of classes.
+ * @param {Class} c The class to find.
+ */
+function containsClass(classList, c) {
+  let targetAttr = getClassAttribute(c);
+  let targetNumber = getClassNumber(c);
+  let filteredAttr = classList.filter((cl) => (getClassAttribute(cl) === targetAttr));
+  let filteredNumber = filteredAttr.filter((cl) => (getClassNumber(cl) === targetNumber));
+  return filteredNumber.length > 0;
+}
+
+/**
+ * Produces an array of the required classes not taken yet.
+ * @param {Classes[]} required The remaining classes to take.
+ * @param {Classes[]} completed The classes completed so far.
+ */
+function getRemainingRequirements(required, completed) {
+  let remaining = required.filter((cl) => (!containsClass(completed, cl)));
+  return remaining;
+}
+
+/**
  * Grabs the data of a specified class.
  * @param {JSON} classMap The classMap to get data from.
  * @param {*} termId The termId of the classMap.
@@ -173,17 +212,15 @@ function getClassData(classMap, termId, attribute, courseNumber) {
  */
 function toSchedule(inputLocation, outputLocation, springClassMap, fallClassMap) {
   // parse the json file
-  let old = getFileAsJson(inputLocation);
+  let audit = getFileAsJson(inputLocation);
 
   // get the completed, requirements, and otherInfo
-  let completed = old.completed;
-  let requirements = old.requirements;
-  let otherInfo = old.otherInfo;
+  let completed = audit.completed;
+  let requirements = audit.requirements;
+  let otherInfo = audit.otherInfo;
 
   let completedClasses = completed.classes;
-
-  // test getClassData
-  // console.log(getClassData(springClassMap, 201830, 'CS', 2510));
+  let requiredClasses = requirements.classes;
 
   // start at the lowest year
   let currentYear = getFirstYear(completedClasses);
@@ -194,6 +231,13 @@ function toSchedule(inputLocation, outputLocation, springClassMap, fallClassMap)
     schedule.push(makeYear(currentYear, completedClasses));
     currentYear = getNextYear(currentYear, completedClasses);
   }
+
+  // test getClassData
+  // console.log(getClassData(springClassMap, 201830, 'CS', 2510));
+
+  // the remaining classes to take.
+  // needs to be tested.
+  let remainingRequirements = getRemainingRequirements(requiredClasses, completedClasses);
 
   // the output JSON
   var JSONSchedule = JSON.stringify(schedule, null, 2);
