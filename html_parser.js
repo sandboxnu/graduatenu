@@ -91,7 +91,7 @@ function add_courses_to_take(json, lines, j) {
     for(var i = 0; i < courseList.length; i++) {
         var course = { };
         if(!(courseList[i] == ' ' || courseList[i] == '' || courseList[i] == '****')) {
-            course.attr = courseList[i].substring(0, 4).split(' ').join('');
+            course.course.subject = courseList[i].substring(0, 4).split(' ').join('');
             
             if(contains(lines[j - 1], ' of the following courses')) {
                 if(!seenEnumeration) {
@@ -104,18 +104,18 @@ function add_courses_to_take(json, lines, j) {
                 }
             } 
             
-            else if(hasNumber(course.attr)) {
+            else if(hasNumber(course.course.subject)) {
                 course.number = courseList[i].substring(0, 5).split(' ').join('');
-                course.attr = type;
+                course.course.subject = type;
                 courses.push(course);
             } 
             
-            else if(course.attr == 'TO') {
+            else if(course.course.subject == 'TO') {
                 courses[courses.length - 1].number2 = courseList[i].substring(4, 10);	
             } 
             
             else {
-                type = course.attr;
+                type = course.course.subject;
                 course.number = courseList[i].substring(4, 10);	
                 courses.push(course);
             }
@@ -136,7 +136,7 @@ function add_course_taken(json, line) {
 
     // ap courses that do not count for credit do not have numbers / attributes for corresponding college courses
     if(!contains(courseString, 'NO AP')) {
-        course.attr = line.substring(line.search('(FL|SP|S1|S2)') + 5, line.search('(FL|SP|S1|S2)') + 9).replace(' ', '');
+        course.course.subject = line.substring(line.search('(FL|SP|S1|S2)') + 5, line.search('(FL|SP|S1|S2)') + 9).replace(' ', '');
         course.number = courseString.substring(9, 14);
     }
     course.credithours = courseString.substring(18, 22);
