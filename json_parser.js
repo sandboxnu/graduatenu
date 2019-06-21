@@ -15,7 +15,8 @@ const INPUT = './parsed_audit.json';
 const OUTPUT = './schedule.json';
 
 // the possible seasons to choose from.
-const SEASONS = ["SP", "S1", "S2", "FL"];
+// [Fall, Spring, SummerI, SummerFUll, SummerII]
+const SEASONS = ["10", "30", "40", "50", "60"];
 
 // the download links for the fall and spring course data.
 const FALL = 'https://searchneu.com/data/v2/getTermDump/neu.edu/201810.json';
@@ -25,100 +26,74 @@ const SPRING = 'https://searchneu.com/data/v2/getTermDump/neu.edu/201830.json';
 const FALL_PATH = './201810.json';
 const SPRING_PATH = './201830.json';
 
-/**
- * Data Definition:
- * Class: attr: "string", number: 999, nupath: [...]
- * Year: '19', '18', etc.
+/* Data Definition:
+ * Class: subject: "string", classId: "999", termId: "201830", nupath: [...]
  */
 
 // ACCESSOR FUNCTIONS
 
 /**
- * Gets the year from a class.
+ * Gets the termId from a class.
  * @param {Class} c The target class.
+ * @returns {number} The termId of the class.
  */
-function getClassYear(c) {
-  return parseInt(c.year);
+function getClassTermId(c) {
+  return parseInt(c.termId);
 }
 
 /**
- * Gets the season from a class.
+ * Gets the subject of a class.
  * @param {Class} c The target class.
+ * @returns {String} The subject of the class.
  */
-function getClassSeason(c) {
-  return c.season;
+function getClassSubject(c) {
+  return c.subject;
 }
 
 /**
- * Gets the attribute of a class.
+ * Gets the classId  of a class.
  * @param {Class} c The target class.
+ * @returns {number} The classId of the class.
  */
-function getClassAttribute(c) {
-  return c.attr;
-}
-
-/**
- * Gets the course number of a class.
- * @param {Class} c The target class.
- */
-function getClassNumber(c) {
-  return c.number;
+function getClassClassId(c) {
+  return parseInt(c.classId);
 }
 
 // PARSING FUNCTIONS
 
 /**
- * Grabs the first year a class occurred. May return undefined if array is empty.
+ * Grabs the first termId a class occurred. May return undefined if array is empty.
  * @param {Class[]} classes Array of classes from which to grab years from.
+ * @returns {number} The first (lowest) termId in the list.
  */
-function getFirstYear(classes) {
-  let years = classes.map((c) => (getClassYear(c)));
-  let lowest = Math.min.apply(null, years);
+function getFirstTerm(classes) {
+  let terms = classes.map((c) => (getClassTermId(c)));
+  let lowest = Math.min.apply(null, terms);
   return lowest === Infinity ? undefined : lowest;
 }
 
 /**
- * Grabs the next year a class occurred, after the provided year. May return undefined if array is empty.
- * @param {Year} current The initial year.
+ * Grabs the next term a class occurred, after the provided term. May return undefined if array is empty.
+ * @param {number} current The initial term.
  * @param {Class[]} classes Array of classes from which to grab from.
+ * @returns {number} The next lowest termId found in the list.
  */
-function getNextYear(current, classes) {
-  let years = classes.map((c) => (getClassYear(c)));
-  let yearsGreater = years.filter((y) => (y > current));
-  let next = Math.min.apply(null, yearsGreater);
+function getNextTerm(current, classes) {
+  let terms = classes.map((c) => (getClassTermId(c)));
+  let termsGreater = terms.filter((y) => (y > current));
+  let next = Math.min.apply(null, termsGreater);
   return next === Infinity ? undefined : next;
 }
 
 /**
- * Filters an array for only the classes with the matching year and season.
- * @param {Year} year The target year.
- * @param {Season} season The target season.
+ * Filters an array for only the classes with the matching termId.
+ * @param {number} termId The termId to filter for.
  * @param {Class[]} classes Array of classes from which to grab from.
+ * @returns {Class[]} The classes with the provided termId. 
  */
-function classesOfYearSeason(year, season, classes) {
-  let ofYear = classes.filter((c) => (getClassYear(c) === year));
-  let ofYearSeason = ofYear.filter((c) => (getClassSeason(c) === season));
-  return ofYearSeason;
-}
-
-/**
- * Maps an array of seasons to the classes taken that year, that season.
- * @param {Year} year The year for which to make the array.
- * @param {Class[]} classes The list of classes to choose from.
- */
-function makeYear(year, classes) {
-  let yearSched = SEASONS.map((s) => (classesOfYearSeason(year, s, classes)));
-  return yearSched;
-}
-
-/**
- * Gets the last year classes were taken in the array.
- * @param {Class[]} classes The array of classes to choose from.
- */
-function getLastYear(classes) {
-  let years = classes.map((c) => (getClassYear(c)));
-  let highest = Math.max.apply(null, years);
-  return highest === Infinity ? undefined : highest;
+function getClassesOfTerm(termId, classes) {
+  let ofTerm = classes.filter((c) => (getClassTermId(c) === termId));
+  return ofTerm;
 }
 
 /**
@@ -171,10 +146,10 @@ function download(url, dest, cb) {
  * @param {Class} c The class to find.
  */
 function containsClass(classList, c) {
-  let targetAttr = getClassAttribute(c);
-  let targetNumber = getClassNumber(c);
-  let filteredAttr = classList.filter((cl) => (getClassAttribute(cl) === targetAttr));
-  let filteredNumber = filteredAttr.filter((cl) => (getClassNumber(cl) === targetNumber));
+  let targetSubject = getClassSubject(c);
+  let targetNumber = getClassClassId(c);
+  let filteredSubject = classList.filter((cl) => (getClassSubject(cl) === targetSubject));
+  let filteredNumber = filteredSubject.filter((cl) => (getClassClassId(cl) === targetNumber));
   return filteredNumber.length > 0;
 }
 
@@ -184,6 +159,7 @@ function containsClass(classList, c) {
  * @param {Classes[]} completed The classes completed so far.
  */
 function getRemainingRequirements(required, completed) {
+  // keep the classes, if they are NOT in completed.
   let remaining = required.filter((cl) => (!containsClass(completed, cl)));
   return remaining;
 }
@@ -194,6 +170,7 @@ function getRemainingRequirements(required, completed) {
  * @param {*} termId The termId of the classMap.
  * @param {*} attribute The attribute (college abbreviation) of the target course.
  * @param {*} courseNumber The course number of the target course.
+ * @returns {Object} The resulting class object (if found).
  */
 function getClassData(classMap, termId, attribute, courseNumber) {
   // classes can be accessed by the 'neu.edu/201830/<COLLEGE>/<COURSE_NUMBER>' attribute of each "classmap"
@@ -223,13 +200,13 @@ function toSchedule(inputLocation, outputLocation, springClassMap, fallClassMap)
   let requiredClasses = requirements.classes;
 
   // start at the lowest year
-  let currentYear = getFirstYear(completedClasses);
+  let currentTerm = getFirstTerm(completedClasses);
   let schedule = [];
 
   // while we have a next year, append the year to a schedule.
-  while (currentYear) {
-    schedule.push(makeYear(currentYear, completedClasses));
-    currentYear = getNextYear(currentYear, completedClasses);
+  while (currentTerm) {
+    schedule.push(getClassesOfTerm(currentTerm, completedClasses));
+    currentTerm = getNextTerm(currentTerm, completedClasses);
   }
 
   // test getClassData
@@ -238,6 +215,7 @@ function toSchedule(inputLocation, outputLocation, springClassMap, fallClassMap)
   // the remaining classes to take.
   // needs to be tested.
   let remainingRequirements = getRemainingRequirements(requiredClasses, completedClasses);
+  console.log(JSON.stringify(remainingRequirements, null, 2));
 
   // the output JSON
   var JSONSchedule = JSON.stringify(schedule, null, 2);
