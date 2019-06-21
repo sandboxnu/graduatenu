@@ -121,10 +121,10 @@ function getFileAsJson(inputLocation) {
  */
 function download(url, dest, cb) {
   if (fs.existsSync(dest)) {
-    console.log("File " + url + " found, skipping download.");
+    console.log("File " + dest + " found, skipping download.");
     cb(undefined);
   } else {
-    console.log("File " + url + " not found, downloading...");
+    console.log("File " + dest + " not found, downloading from " + url);
 
     var file = fs.createWriteStream(dest);
     var request = https.get(url, function(response) {
@@ -218,15 +218,15 @@ function toSchedule(inputLocation, outputLocation, springClassMap, fallClassMap)
   // the remaining classes to take.
   // needs to be tested.
   let remainingRequirements = getRemainingRequirements(requiredClasses, completedClasses);
-  console.log(JSON.stringify(remainingRequirements, null, 2));
+  console.log("remaining requirements: \n" + JSON.stringify(remainingRequirements, null, 2));
 
   // the output JSON
   var JSONSchedule = JSON.stringify(schedule, null, 2);
+  console.log("schedule: \n" + schedule);
 
   // output the file to ./schedule.json.
   fs.writeFile(outputLocation, JSONSchedule, (err) => {
     if (err) throw err;
-    console.log(schedule);
   });
 
   // somehow convert the rest of the stuff to a schedule. complete with coop cycles? 
