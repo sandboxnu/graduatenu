@@ -102,7 +102,7 @@ function getClassesOfTerm(termId, classes) {
  * @returns {JSON} The resulting JSON.
  */
 function getFileAsJson(inputLocation) {
-  var data;
+  let data;
   try {
     data = fs.readFileSync(inputLocation);
   } catch (err) {
@@ -117,29 +117,30 @@ function getFileAsJson(inputLocation) {
  * Downloads a file from a specified link, to a specified filepath. Only downloads if file does not exist.
  * @param {String} url The url to download from.
  * @param {String} dest The destination file path.
- * @param {String} cb The callback function.
+ * @returns {Promise} The eventual completion or failure of the download. Status either "Found" or "Downloaded". else err.
  */
-function download(url, dest, cb) {
+const download = (url, dest) => new Promise(function(resolve, reject) {
   if (fs.existsSync(dest)) {
     console.log("File " + dest + " found, skipping download.");
-    cb(undefined);
+    resolve(getFileAsJson(dest));
   } else {
     console.log("File " + dest + " not found, downloading from " + url);
 
-    var file = fs.createWriteStream(dest);
-    var request = https.get(url, function(response) {
+    let file = fs.createWriteStream(dest);
+    let request = https.get(url, function(response) {
       response.pipe(file);
       file.on('finish', function() {
         file.close(cb);  // close() is async, call cb after close completes.
 
         console.log("Download complete.");
+        resolve(getFileAsJson(dest));
       });
     }).on('error', function(err) { // Handle errors
       fs.unlink(dest); // Delete the file async. (But we don't check the result)
-      if (cb) cb(err.message);
+      reject(err);
     });
   }
-};
+});
 
 /**
  * Returns if the classList contains the given class, by attr and course #.
@@ -227,16 +228,17 @@ function toSchedule(inputLocation, outputLocation, spring, fall) {
   let fallMap = fall.classMap;
 
   // convert remainig courses to their detailed counterparts. use spring, because it's more recent.
-  remainingRequirements = remainingRequirements.map((cl) => 
-  (getClassData(springMap, springId, getClassSubject(cl), getClassClassId(cl))));
+  remainingRequirements = remainingRequirements.map(function(cl) {
+    return getClassData(springMap, springId, getClassSubject(cl), getClassClassId(cl));
+  });
 
   // console.log(getClassData(springMap, springId, "CS", 2550).prereqs);
   // console.log(getClassData(fallMap, fallId, "CS", 2500))
 
 
   // the output JSON
-  var JSONSchedule = JSON.stringify(schedule, null, 2);
-  console.log("schedule: \n" + schedule);
+  let JSONSchedule = JSON.stringify(schedule, null, 2);
+  console.log("schedule: \n" + JSONSchedule);
 
   // output the file to ./schedule.json.
   fs.writeFile(outputLocation, JSONSchedule, (err) => {
@@ -250,21 +252,10 @@ function toSchedule(inputLocation, outputLocation, spring, fall) {
 
 // run the main program. 
 // ensures that spring and fall files are loaded before parsing schedule.
-download(SPRING, SPRING_PATH, (err) => {
+Promise.all([download(SPRING, SPRING_PATH), download(FALL, FALL_PATH)])
+.then(results => {
+  toSchedule(INPUT, OUTPUT, results[0], results[1]);
+})
+.catch(err => {
   if (err) throw err;
-  download(FALL, FALL_PATH, (err) => {
-    if (err) throw err;
-
-    var springJSON = getFileAsJson(SPRING_PATH);
-    var fallJSON = getFileAsJson(FALL_PATH);
-    var springClassMap = springJSON.classMap;
-    var fallClassMap = fallJSON.classMap;
-
-    // classes can be accessed by the 'neu.edu/201830/<COLLEGE>/<COURSE_NUMBER>' attribute of each "classmap"
-    // 201830 is spring, 201810 is fall.
-    
-    // parse json.
-    toSchedule(INPUT,OUTPUT, {termId: 201830, classMap: springClassMap}, {termId: 201810, classMap: fallClassMap});
-  })
 });
-   
