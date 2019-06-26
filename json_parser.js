@@ -19,12 +19,19 @@ const OUTPUT = './schedule.json';
 const SEASONS = ["10", "30", "40", "50", "60"];
 
 // the download links for the fall and spring course data.
-const FALL = 'https://searchneu.com/data/v2/getTermDump/neu.edu/201810.json';
-const SPRING = 'https://searchneu.com/data/v2/getTermDump/neu.edu/201830.json';
+const FALL = 'https://searchneu.com/data/v2/getTermDump/neu.edu/2018' + SEASONS[0] + '.json';
+const SPRING = 'https://searchneu.com/data/v2/getTermDump/neu.edu/2018' + SEASONS[1] + '.json';
+const SUMMER1 = 'https://searchneu.com/data/v2/getTermDump/neu.edu/2018' + SEASONS[2] + '.json';
+const SUMMERF = 'https://searchneu.com/data/v2/getTermDump/neu.edu/2018' + SEASONS[3] + '.json';
+const SUMMER2 = 'https://searchneu.com/data/v2/getTermDump/neu.edu/2018' + SEASONS[4] + '.json';
+
 
 // the filepath locations for storing fall and spring course data.
-const FALL_PATH = './201810.json';
-const SPRING_PATH = './201830.json';
+const FALL_PATH = './2018' + SEASONS[0] + '.json';
+const SPRING_PATH = './2018' + SEASONS[1] + '.json';
+const SUMMER1_PATH = './2018' + SEASONS[2] + '.json';
+const SUMMERF_PATH = './2018' + SEASONS[3] + '.json';
+const SUMMER2_PATH = './2018' + SEASONS[4] + '.json';
 
 /* Data Definition:
  * Class: subject: "string", classId: "999", termId: "201830", nupath: [...]
@@ -99,18 +106,20 @@ function getClassesOfTerm(termId, classes) {
 /**
  * Grabs a file as JSON text.
  * @param {String} inputLocation The filepath of the input file to convert to JSON.
- * @returns {JSON} The resulting JSON.
+ * @returns {Promise} The resulting promise.
  */
 function getFileAsJson(inputLocation) {
-  let data;
-  try {
-    data = fs.readFileSync(inputLocation);
-  } catch (err) {
-    console.log("bad file path");
-    throw new Error("Error trying to read .json file. bad file path.");
-  }
-  
-  return JSON.parse(data);
+  return new Promise(function(resolve, reject) {
+    fs.readFile(inputLocation, (err, data) => {
+      if (err) reject(err);
+      try {
+        let parsedJSON = JSON.parse(data);
+        resolve(parsedJSON);
+      } catch (err) {
+        reject(err);
+      }
+    });
+  });
 }
 
 /**
@@ -122,7 +131,7 @@ function getFileAsJson(inputLocation) {
 const download = (url, dest) => new Promise(function(resolve, reject) {
   if (fs.existsSync(dest)) {
     console.log("File " + dest + " found, skipping download.");
-    resolve(getFileAsJson(dest));
+    resolve("Found");
   } else {
     console.log("File " + dest + " not found, downloading from " + url);
 
@@ -130,10 +139,11 @@ const download = (url, dest) => new Promise(function(resolve, reject) {
     let request = https.get(url, function(response) {
       response.pipe(file);
       file.on('finish', function() {
-        file.close(cb);  // close() is async, call cb after close completes.
-
-        console.log("Download complete.");
-        resolve(getFileAsJson(dest));
+        file.close(err => {
+          if (err) reject(err);
+          console.log("Download complete.");
+          resolve("Downloaded");
+        });  // close() is async
       });
     }).on('error', function(err) { // Handle errors
       fs.unlink(dest); // Delete the file async. (But we don't check the result)
@@ -188,13 +198,13 @@ function getClassData(classMap, termId, subject, classId) {
  * Parses the provided JSON file to an output JSON file, organized chronologically.
  * @param {String} inputLocation The target filepath to input from.
  * @param {String} outputLocation The target filepath to output to.
- * @param {Object} spring Spring classmap object, with fields termId and classMap.
- * @param {Object} fall Fall classmap object, with fields termId and classMap.
+ * @param {Object} spring Spring object, with fields termId and classMap.
+ * @param {Object} fall Fall object, with fields termId and classMap.
  */
 function toSchedule(inputLocation, outputLocation, spring, fall) {
   // parse the json file
-  let audit = getFileAsJson(inputLocation);
-
+  let audit = JSON.parse(fs.readFileSync(inputLocation));
+  
   // get the completed, requirements, and otherInfo
   let completed = audit.completed;
   let requirements = audit.requirements;
@@ -252,10 +262,28 @@ function toSchedule(inputLocation, outputLocation, spring, fall) {
 
 // run the main program. 
 // ensures that spring and fall files are loaded before parsing schedule.
-Promise.all([download(SPRING, SPRING_PATH), download(FALL, FALL_PATH)])
+Promise.all([
+  download(SPRING, SPRING_PATH), 
+  download(FALL, FALL_PATH),
+  download(SUMMER1, SUMMER1_PATH),
+  download(SUMMERF, SUMMERF_PATH),
+  download(SUMMER2, SUMMER2_PATH)])
+.then(results => {
+  return Promise.all([
+    getFileAsJson(FALL_PATH),
+    getFileAsJson(SPRING_PATH),
+    getFileAsJson(SUMMER1_PATH),
+    getFileAsJson(SUMMERF_PATH),
+    getFileAsJson(SUMMER2_PATH)])
+},
+err => {
+  console.log("error downloading files.");
+  console.log(err);
+})
 .then(results => {
   toSchedule(INPUT, OUTPUT, results[0], results[1]);
-})
-.catch(err => {
-  if (err) throw err;
+},
+err => {
+  console.log("error reading files as JSON.");
+  console.log(err);
 });
