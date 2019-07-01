@@ -195,6 +195,41 @@ function getClassData(classMap, termId, subject, classId) {
 }
 
 /**
+ * Adds the completed classes to the schedule. Does mutation.
+ * @param {JSON} schedule The schedule in JSON format. 
+ * @param {Class[]} completedClasses A list of the completed classes.
+ */
+function addCompleted(schedule, completedClasses) {
+  // start at the lowest year
+  let currentTerm = getFirstTerm(completedClasses);
+
+  // while we have a next year, append the year to a schedule.
+  while (currentTerm) {
+    schedule.completed.classes.push({termId: currentTerm, courses: getClassesOfTerm(currentTerm, completedClasses)});
+    currentTerm = getNextTerm(currentTerm, completedClasses);
+  }
+}
+
+// Graph for running topological sort on the prerequisites. 
+class Graph {
+  // constructor
+  Constructor(numVertices) {
+    this.numVertices = numVertices;
+    this.adjList = new Map();
+  }
+
+  // adds a vertex
+  addVertex(v) {
+    this.adjList.set(v, []);
+  }
+
+  // adds an edge
+  addEdge(v, w) {
+    this.adjList.get(v).push(w);
+  }
+}
+
+/**
  * Parses the provided JSON file to an output JSON file, organized chronologically.
  * @param {String} inputLocation The target filepath to input from.
  * @param {String} outputLocation The target filepath to output to.
@@ -214,15 +249,9 @@ function toSchedule(inputLocation, outputLocation, spring, fall) {
   let completedClasses = completed.classes;
   let requiredClasses = requirements.classes;
 
-  // start at the lowest year
-  let currentTerm = getFirstTerm(completedClasses);
   let schedule = {completed: {classes: []}};
-
-  // while we have a next year, append the year to a schedule.
-  while (currentTerm) {
-    schedule.completed.classes.push({termId: currentTerm, courses: getClassesOfTerm(currentTerm, completedClasses)});
-    currentTerm = getNextTerm(currentTerm, completedClasses);
-  }
+  
+  addCompleted(schedule, completedClasses);
 
   // the remaining classes to take.
   // needs to be tested.
@@ -255,8 +284,6 @@ function toSchedule(inputLocation, outputLocation, spring, fall) {
     if (err) throw err;
   });
 
-  // somehow convert the rest of the stuff to a schedule. complete with coop cycles? 
-  // need to somehow build a tree of the requirements for classes, and then grab from the bottom. 
   // TODO : convert 'requirements' into the rest of the schedule.
 }
 
@@ -281,6 +308,7 @@ err => {
   console.log(err);
 })
 .then(results => {
+  // for now, only take in the fall and spring semester data. 
   toSchedule(INPUT, OUTPUT, results[0], results[1]);
 },
 err => {
