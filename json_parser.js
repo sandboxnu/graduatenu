@@ -14,24 +14,29 @@ const INPUT = './parsed_audit.json';
 // the output file path to the JSON file to convert to. 
 const OUTPUT = './schedule.json';
 
+// the year
+const YEAR = '2019';
+
 // the possible seasons to choose from.
+// note that "years" begin in the fall of the previous year. 
 // [Fall, Spring, SummerI, SummerFUll, SummerII]
 const SEASONS = ["10", "30", "40", "50", "60"];
 
+const SEASON_LINKS = SEASONS.map(season => 'https://searchneu.com/data/v2/getTermDump/neu.edu/' + YEAR + season + '.json');
 // the download links for the fall and spring course data.
-const FALL = 'https://searchneu.com/data/v2/getTermDump/neu.edu/2018' + SEASONS[0] + '.json';
-const SPRING = 'https://searchneu.com/data/v2/getTermDump/neu.edu/2018' + SEASONS[1] + '.json';
-const SUMMER1 = 'https://searchneu.com/data/v2/getTermDump/neu.edu/2018' + SEASONS[2] + '.json';
-const SUMMERF = 'https://searchneu.com/data/v2/getTermDump/neu.edu/2018' + SEASONS[3] + '.json';
-const SUMMER2 = 'https://searchneu.com/data/v2/getTermDump/neu.edu/2018' + SEASONS[4] + '.json';
+const FALL = SEASON_LINKS[0];
+const SPRING = SEASON_LINKS[1];
+const SUMMER1 = SEASON_LINKS[2];
+const SUMMERF = SEASON_LINKS[3];
+const SUMMER2 = SEASON_LINKS[4];
 
-
+const SEASON_PATHS = SEASONS.map(season => './' + YEAR + season + '.json');
 // the filepath locations for storing fall and spring course data.
-const FALL_PATH = './2018' + SEASONS[0] + '.json';
-const SPRING_PATH = './2018' + SEASONS[1] + '.json';
-const SUMMER1_PATH = './2018' + SEASONS[2] + '.json';
-const SUMMERF_PATH = './2018' + SEASONS[3] + '.json';
-const SUMMER2_PATH = './2018' + SEASONS[4] + '.json';
+const FALL_PATH = SEASON_PATHS[0];
+const SPRING_PATH = SEASON_PATHS[1];
+const SUMMER1_PATH = SEASON_PATHS[2];
+const SUMMERF_PATH = SEASON_PATHS[3];
+const SUMMER2_PATH = SEASON_PATHS[4];
 
 /* Data Definition:
  * Class: subject: "string", classId: "999", termId: "201830", nupath: [...]
@@ -106,7 +111,7 @@ function getClassesOfTerm(termId, classes) {
 /**
  * Grabs a file as JSON text.
  * @param {String} inputLocation The filepath of the input file to convert to JSON.
- * @returns {Promise} The resulting promise.
+ * @returns {Promise} The resulting promise, resolved with the parsed JSON. 
  */
 function getFileAsJson(inputLocation) {
   return new Promise(function(resolve, reject) {
@@ -126,7 +131,7 @@ function getFileAsJson(inputLocation) {
  * Downloads a file from a specified link, to a specified filepath. Only downloads if file does not exist.
  * @param {String} url The url to download from.
  * @param {String} dest The destination file path.
- * @returns {Promise} The eventual completion or failure of the download. Status either "Found" or "Downloaded". else err.
+ * @returns {Promise} The resulting promise, resolved with "Found" or "Downloaded". 
  */
 const download = (url, dest) => new Promise(function(resolve, reject) {
   if (fs.existsSync(dest)) {
@@ -180,18 +185,17 @@ function getRemainingRequirements(required, completed) {
 
 /**
  * Grabs the data of a specified class.
- * @param {JSON} classMap The classMap to get data from.
- * @param {number} termId The termId of the classMap.
+ * @param {Object} classObj The class object containing a classMap and termId.
  * @param {String} subject The subject (college abbreviation) of the target course.
  * @param {number} classId course number of the target course.
  * @returns {Object} The resulting class object (if found).
  */
-function getClassData(classMap, termId, subject, classId) {
+function getClassData(classObj, subject, classId) {
   // classes can be accessed by the 'neu.edu/201830/<COLLEGE>/<COURSE_NUMBER>' attribute of each "classmap"
   // 201830 is spring, 201810 is fall.
 
-  let query = 'neu.edu/' + termId + '/' + subject+ '/' + classId;
-  return classMap[query];
+  let query = 'neu.edu/' + classObj.termId + '/' + subject+ '/' + classId;
+  return classObj.classMap[query];
 }
 
 /**
@@ -239,41 +243,30 @@ class Graph {
 function toSchedule(inputLocation, outputLocation, spring, fall) {
   // parse the json file
   let audit = JSON.parse(fs.readFileSync(inputLocation));
-  
-  // get the completed, requirements, and otherInfo
-  let completed = audit.completed;
-  let requirements = audit.requirements;
-  let otherInfo = audit.otherInfo;
 
-  // get the completed classes, and required classes
-  let completedClasses = completed.classes;
-  let requiredClasses = requirements.classes;
-
-  let schedule = {completed: {classes: []}};
+  let schedule = 
+  {
+    completed: {
+      classes: []
+    }
+  };
   
-  addCompleted(schedule, completedClasses);
+  addCompleted(schedule, audit.completed.classes);
 
   // the remaining classes to take.
   // needs to be tested.
-  let remainingRequirements = getRemainingRequirements(requiredClasses, completedClasses);
+  let remainingRequirements = getRemainingRequirements(audit.requirements.classes, audit.completed.classes);
   console.log("remaining requirements: \n" + JSON.stringify(remainingRequirements, null, 2));
-
-  // spring and fall termIds
-  let springId = spring.termId;
-  let fallId = fall.termId;
-
-  // classmaps, as JSON objects.
-  let springMap = spring.classMap;
-  let fallMap = fall.classMap;
 
   // convert remainig courses to their detailed counterparts. use spring, because it's more recent.
   remainingRequirements = remainingRequirements.map(function(cl) {
-    return getClassData(springMap, springId, getClassSubject(cl), getClassClassId(cl));
+    return getClassData(spring, getClassSubject(cl), getClassClassId(cl));
   });
-
-  // console.log(getClassData(springMap, springId, "CS", 2550).prereqs);
-  // console.log(getClassData(fallMap, fallId, "CS", 2500))
-
+  
+  console.log(getClassData(spring, "CS", 2550).prereqs);
+  console.log(getClassData(fall, "CS", 3000).prereqs);
+  console.log(getClassData(spring, "CS", 3500).prereqs);
+  // console.log(getClassData(fall, "CS", 2510))
 
   // the output JSON
   let JSONSchedule = JSON.stringify(schedule, null, 2);
