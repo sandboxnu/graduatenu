@@ -1,3 +1,9 @@
+#!/usr/bin/node
+// This line of the file makes this file easily executable from the command line.
+// Rather than running 'node ${filename}, the user need only make the file executable once
+// (chmod +x ${filename}) then can run the file wih ./${filename} (or can add the file to 
+// the user's 'bin' folder to permit execution from anywhere as the user).'
+
 /**
  * HTML Degree Audit parser built for Northeastern University's degree audit.
  * By Jacob Chvatal for Northeastern Sandbox.
@@ -7,6 +13,7 @@
  * classes and NUPaths taken and in progress as well as requirements to take.
  */
 
+// The FileStream library
 const fs = require('fs');
 
 // location of the input file
@@ -120,13 +127,13 @@ function add_courses_to_take(json, lines, j) {
 			} 
 
 			// finds the latter of a defined course range; the course can be any course within a range
-			else if(course.course.subject == 'TO') {
+			else if(course.subject == 'TO') {
 				courses[courses.length - 1].classId2 = courseList[i].substring(4, 10);	
 			} 
 
 			// the course is (likely) a standard course, create it with the expected information
 			else {
-				type = course.course.subject;
+				type = course.subject;
 				course.classId = courseList[i].substring(4, 10);	
 				courses.push(course);
 			}
@@ -147,21 +154,48 @@ function add_course_taken(json, line) {
 
 	// ap courses that do not count for credit do not have numbers / attributes for corresponding college courses
 	if(!contains(courseString, 'NO AP')) {
-		course.course.subject = line.substring(line.search('(FL|SP|S1|S2)') + 5, line.search('(FL|SP|S1|S2)') + 9).replace(' ', '');
+		course.subject = line.substring(line.search('(FL|SP|S1|S2)') + 5, line.search('(FL|SP|S1|S2)') + 9).replace(' ', '');
 		course.classId = courseString.substring(9, 14);
 	}
 
 	// locates the rest of the parameters with some regex magic
 	course.credithours = courseString.substring(18, 22);
 	course.season = new RegExp('(FL|SP|S1|S2)').exec(line)[0];
-	course.year = line.substring(line.search('(FL|SP|S1|S2)') + 2, line.search('(FL|SP|S1|S2)') + 4);
+    course.year = line.substring(line.search('(FL|SP|S1|S2)') + 2, line.search('(FL|SP|S1|S2)') + 4);
 
+    course.termId = get_termid(course.season, course.year);
 	// determines whether the course is 'in progress' or completed and sorts accordingly
 	if(contains(courseString, 'IP')) {
 		json.inprogress.classes.push(course);			
 	} else {
 		json.completed.classes.push(course);
-	}
+    }
+    console.log(course);
+}
+
+/**
+ * Determines the termId parameter of a course with the season and year of the course.
+ * @param {String} season   The season of the course ('FL', 'SP', 'S1', 'S2')
+ * @param {int} year        The year during which the course occurs (i.3. 2018, 2019)
+ * @return {int}            A six-digit integer representing the termId.
+ * @throws err              if the given year is not part of the enumeration specified.
+ */
+function get_termid(season, year) {
+    // Makes the assumption that all years will be in the 21st century
+    // As different technology will likely be used in 81 years, this is a valid assumption
+    let termid = "20" + year;
+    switch(season) {
+        case "FL":
+            return termid + "40";
+        case "SP":
+            return termid + "10";
+        case "S1":
+            return termid + "20";
+        case "S2":
+            return termid + "30";
+        default:
+            throw "The given season was not a member of the enumeration required."
+    }
 }
 
 /**
