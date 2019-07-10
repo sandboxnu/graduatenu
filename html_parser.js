@@ -170,7 +170,6 @@ function add_course_taken(json, line) {
 	} else {
 		json.completed.classes.push(course);
     }
-    console.log(course);
 }
 
 /**
@@ -263,8 +262,6 @@ function audit_to_json(input, output) {
 		}
 
 		// prints out the requirements to ensure they are in the correct format
-		// TODO: remove this print statement once the format has been validated
-		console.log(json.requirements)
 		fs.writeFileSync(output, JSON.stringify(json));
 	});
 }
