@@ -174,7 +174,7 @@ function add_course_taken(json, line) {
 
 /**
  * Determines the termId parameter of a course with the season and year of the course.
- * @param {String} season   The season of the course ('FL', 'SP', 'S1', 'S2')
+ * @param {String} season   The season of the course ('FL', 'SP', 'S1', 'S2', 'SF')
  * @param {int} year        The year during which the course occurs (i.3. 2018, 2019)
  * @return {int}            A six-digit integer representing the termId.
  * @throws err              if the given year is not part of the enumeration specified.
@@ -184,14 +184,19 @@ function get_termid(season, year) {
     // As different technology will likely be used in 81 years, this is a valid assumption
     let termid = "20" + year;
     switch(season) {
-        case "FL":
-            return termid + "40";
-        case "SP":
+	case "FL": 
+	    // Fall term: associated year is the same year as the following 
+	    // Spring term as per SearchNEU conventions
+	    termid = "20" + (year + 1);
             return termid + "10";
-        case "S1":
-            return termid + "20";
-        case "S2":
+        case "SP": // Spring term
             return termid + "30";
+        case "S1": // Summer 1 term
+            return termid + "40";
+        case "S2": // Summer 2 term
+            return termid + "60";
+	case "SM": // Full Summer term (typically reserved for graduate courses)
+	    return termid + "50";
         default:
             throw "The given season was not a member of the enumeration required."
     }
