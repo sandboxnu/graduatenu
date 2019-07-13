@@ -174,7 +174,7 @@ function add_course_taken(json, line) {
 
 /**
  * Determines the termId parameter of a course with the season and year of the course.
- * @param {String} season   The season of the course ('FL', 'SP', 'S1', 'S2', 'SF')
+ * @param {String} season   The season of the course ('FL', 'SP', 'S1', 'S2', 'SM')
  * @param {int} year        The year during which the course occurs (i.3. 2018, 2019)
  * @return {int}            A six-digit integer representing the termId.
  * @throws err              if the given year is not part of the enumeration specified.
