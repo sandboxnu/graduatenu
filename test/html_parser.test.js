@@ -1,5 +1,7 @@
-const html_parser = require("../src/html_parser.js");
+const html_parser = require('../src/html_parser.js');
 
-test('Confirms that the proper JSON file is produced', () => {
-    expect(audit_to_json("mock_audits/cs_audit.html")).toBe(3);
+// import audit_to_json from '../src/html_parser';
+
+test('Confirms that the proper JSON is produced', () => {
+    expect(html_parser.audit_to_json("../test/mock_audits/cs_audit.html")).toBe(undefined);
 });

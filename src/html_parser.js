@@ -282,4 +282,4 @@ function contains(text, lookfor) {
 // fs.writeFileSync(OUTPUT, JSON.stringify(audit_to_json(INPUT)));
 
 // functions to export for testing
-// module.exports = audit_to_json;
+module.exports.audit_to_json = audit_to_json;
