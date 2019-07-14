@@ -204,12 +204,9 @@ function get_termid(season, year) {
 
 /**
  * Converts an HTML degree audit file to a JSON file organizing the relevant information within.
- * @param {String} input     The local location of the 'Degree Audit.html' input file.
+ * @param {String} data     The data contained within a 'Degree Audit.html' input file.
  */
-function audit_to_json(input) {
-
-    let data = fs.readFileSync(input, 'utf8');
-    // else, process the data
+function audit_to_json(data) {
 
     json = { 
         completed: {
@@ -279,7 +276,7 @@ function contains(text, lookfor) {
 }
 
 // prints out the requirements to ensure they are in the correct format
-// fs.writeFileSync(OUTPUT, JSON.stringify(audit_to_json(INPUT)));
+// fs.writeFileSync(OUTPUT, JSON.stringify(audit_to_json(fs.readFileSync(INPUT, 'utf8')));
 
 // functions to export for testing
 module.exports.audit_to_json = audit_to_json;
