@@ -154,8 +154,8 @@ function add_course_taken(json, line) {
 
 	// ap courses that do not count for credit do not have numbers / attributes for corresponding college courses
 	if(!contains(courseString, 'NO AP')) {
-		course.subject = line.substring(line.search('(FL|SP|S1|S2)') + 5, line.search('(FL|SP|S1|S2)') + 9).replace(' ', '');
-		course.classId = courseString.substring(9, 14);
+		course.subject = line.substring(line.search('(FL|SP|S1|S2)') + 5, line.search('(FL|SP|S1|S2)') + 9).replace(' ', '').replace(' ', '');
+		course.classId = courseString.substring(9, 13);
 	}
 
 	// locates the rest of the parameters with some regex magic
@@ -187,7 +187,7 @@ function get_termid(season, year) {
 	case "FL": 
 	    // Fall term: associated year is the same year as the following 
 	    // Spring term as per SearchNEU conventions
-	    termid = "20" + (year + 1);
+	    termid = "20" + (Number(year) + 1);
             return termid + "10";
         case "SP": // Spring term
             return termid + "30";
