@@ -62,7 +62,6 @@ typings/
 
 # degree audit
 Web Audit.html
-*.html
 *.json
 
 # avoid temp files
