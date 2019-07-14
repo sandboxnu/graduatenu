@@ -17,7 +17,7 @@
 const fs = require('fs');
 
 // location of the input file
-const INPUT = '../Web\ Audit.html';
+const INPUT = './WebAudit.html';
 
 // location of the output file
 const OUTPUT = 'parsed_audit.json';
@@ -138,8 +138,9 @@ function add_courses_to_take(json, lines, j) {
 				courses.push(course);
 			}
 		}
-	}
+    }
 	json.requirements.classes = [].concat(json.requirements.classes, courses);
+    console.log(json.requirements.classes); // TODO: remove
 }
 
 /**
