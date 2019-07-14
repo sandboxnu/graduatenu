@@ -278,8 +278,8 @@ function contains(text, lookfor) {
     return -1 != text.search(lookfor);
 }
 
-// executes code
-console.log(audit_to_json(INPUT));
-
 // prints out the requirements to ensure they are in the correct format
-fs.writeFileSync(OUTPUT, JSON.stringify(audit_to_json(INPUT)));
+// fs.writeFileSync(OUTPUT, JSON.stringify(audit_to_json(INPUT)));
+
+// functions to export for testing
+// module.exports = audit_to_json;
