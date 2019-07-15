@@ -66,3 +66,4 @@ Web Audit.html
 
 # avoid temp files
 *~
+.DS_Store
