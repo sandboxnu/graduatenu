@@ -199,7 +199,7 @@ function getClassData(classObj, subject, classId) {
 }
 
 /**
- * Adds the completed classes to the schedule. Does mutation.
+ * Adds the completed classes to the schedule. Does mutation. Returns void.
  * @param {JSON} schedule The schedule in JSON format. 
  * @param {Class[]} completedClasses A list of the completed classes.
  */
@@ -234,6 +234,124 @@ class Graph {
 }
 
 /**
+ * Adds the required classes to the schedule. Does mutation. Returns void.
+ * @param {JSON} schedule The schedule in JSON format.
+ * @param {Class[]} completed The completed classes (in SearchNEU format).
+ * @param {Class[]} remainingRequirements The remaining requirements (in SearchNEU format).
+ */
+function addRequired(schedule, completed, remainingRequirements) {
+  // precondition: schedule is full up to some point. need to fill with remaining requirements.
+
+  // make a look up table for instant indexing:
+  let hasBeenCompleted = {};
+
+  // function to produce the "hashCode" of a class
+  let courseCode = course => getClassSubject(course) + getClassClassId(course);
+
+  // mark all the completed courses as completed, in our table object.
+  for (let course in completed) {
+    hasBeenCompleted[courseCode(course)] = true;
+  }
+
+  // a prereq is an object {} and has the following properties:
+  // "type": one of "and" or "or"
+  // "values": an array [] of course objects
+  
+  // a course is an object {} and has the following properties:
+  // "classId": 4 digit number in string format. ex "2500"
+  // "subject": the course attribute. ex "CS" or "MATH"
+  // "missing": if object property exists, then value is true (boolean). 
+
+  // corresponding prereqs for each of the courses.
+  // either removes or keeps prereq, if it's been completed. changes on "and" or "or" prereq type.
+  let allPrereqs = remainingRequirements.map(function(course) {
+
+    // this course's prereqs.
+    let coursePrereqObj = course.prereqs;
+
+    // if we have no prereqs, skip.
+    if (coursePrereqObj === undefined) {
+      return undefined;
+    }
+    // otherwise, filter out the completed prereqs.
+    else {
+      let newPrereqObj = 
+      {
+        "type": coursePrereqObj.type,
+        "values": []
+      };
+
+      // two cases: the prereq type is one of: "and" "or"
+      switch(coursePrereqObj.type) {
+
+        // "and" case: remove all completed courses. check if all removed, then return undefined. else keep.
+        case "and":
+
+          // conditionally add the non-completed prerequisite classes.
+          for (let course in coursePrereqObj.values) {
+
+            // if the course is marked as "missing", ignore it.
+            if (course.missing) {
+              continue;
+            }
+            // if the course has NOT been completed, add it.
+            else if (!hasBeenCompleted[courseCode(course)]) {
+              newPrereqObj.values.push(course);
+            }
+          }
+
+          // if all prereqs are satisfied, there are none left.
+          if (newPrereqObj === []) {
+            return undefined;
+          }
+
+          break;
+          
+        // "or" case: if any prereqs have been satisfied, return undefined. otherwise return unchanged.
+        case "or":
+
+          // if any one of the prereqs have been satisfied => return undefined.
+          for (let course in coursePrereqObj.values) {
+
+            // if the course is marked as "missing", ignore it.
+            if (course.missing) {
+              continue;
+            }
+            // if a course is completed, we are of [or] type so we are complete. return undefined.
+            else if (hasBeenCompleted[courseCode(course)]) {
+              return undefined;
+            }
+            // if not complete, add to newPrereqObj
+            else {
+              newPrereqObj.values.push(course);
+            }
+          }
+
+          break;
+
+        // in the default case, neither "or" or "and" cases were met. thrown an error.
+        default:
+          throw "property \"type\" of SearchNEU-style prereq object was not one of \"and\" or \"or\"";
+      }
+
+      return newPrereqObj;
+    }
+  }); 
+
+  // next, make the graph!
+  let topo = new Graph(remainingRequirements.length);
+
+  // add remainingRequirements to the graph.
+  for (let course in remainingRequirements) {
+    topo.addVertex(courseCode(course));
+  }
+
+  // add the prerequisite edges.
+  //todo
+  
+}
+
+/**
  * Parses the provided JSON file to an output JSON file, organized chronologically.
  * @param {String} inputLocation The target filepath to input from.
  * @param {String} outputLocation The target filepath to output to.
@@ -250,23 +368,15 @@ function toSchedule(inputLocation, outputLocation, spring, fall) {
       classes: []
     }
   };
+
+  // helper function to get SearchNEU data for a given course (assumes spring)
+  let getSearchNEUData = course => getClassData(spring, getClassSubject(course), getClassClassId(course));
   
   addCompleted(schedule, audit.completed.classes);
-
-  // the remaining classes to take.
-  // needs to be tested.
-  let remainingRequirements = getRemainingRequirements(audit.requirements.classes, audit.completed.classes);
-  console.log("remaining requirements: \n" + JSON.stringify(remainingRequirements, null, 2));
-
-  // convert remainig courses to their detailed counterparts. use spring, because it's more recent.
-  remainingRequirements = remainingRequirements.map(function(cl) {
-    return getClassData(spring, getClassSubject(cl), getClassClassId(cl));
-  });
-  
-  console.log(getClassData(spring, "CS", 2550).prereqs);
-  console.log(getClassData(fall, "CS", 3000).prereqs);
-  console.log(getClassData(spring, "CS", 3500).prereqs);
-  // console.log(getClassData(fall, "CS", 2510))
+  addRequired(
+    schedule, 
+    audit.completed.classes.map(course => getSearchNEUData(course)), 
+    getRemainingRequirements(audit.required.classes, audit.completed.classes).map(course => getSearchNEUData(course)));
 
   // the output JSON
   let JSONSchedule = JSON.stringify(schedule, null, 2);
@@ -276,8 +386,6 @@ function toSchedule(inputLocation, outputLocation, spring, fall) {
   fs.writeFile(outputLocation, JSONSchedule, (err) => {
     if (err) throw err;
   });
-
-  // TODO : convert 'requirements' into the rest of the schedule.
 }
 
 // run the main program. 
