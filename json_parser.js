@@ -10,9 +10,9 @@ const fs = require('fs');
 const https = require('https');
 
 // input file path to JSON file to convert from.
-const INPUT = './parsed_audit.json';
+const INPUT = '../parsed_audit.json';
 // the output file path to the JSON file to convert to. 
-const OUTPUT = './schedule.json';
+const OUTPUT = '../schedule.json';
 
 // the year
 const YEAR = '2019';
@@ -30,7 +30,7 @@ const SUMMER1 = SEASON_LINKS[2];
 const SUMMERF = SEASON_LINKS[3];
 const SUMMER2 = SEASON_LINKS[4];
 
-const SEASON_PATHS = SEASONS.map(season => './' + YEAR + season + '.json');
+const SEASON_PATHS = SEASONS.map(season => '../' + YEAR + season + '.json');
 // the filepath locations for storing fall and spring course data.
 const FALL_PATH = SEASON_PATHS[0];
 const SPRING_PATH = SEASON_PATHS[1];
@@ -217,7 +217,7 @@ function addCompleted(schedule, completedClasses) {
 // Graph for running topological sort on the prerequisites. 
 class Graph {
   // constructor
-  Constructor(numVertices) {
+  constructor(numVertices) {
     this.numVertices = numVertices;
     this.adjList = new Map();
   }
@@ -254,160 +254,191 @@ function addRequired(schedule, completed, remainingRequirements) {
   let hasBeenCompleted = {};
 
   // function to produce the "hashCode" of a class
-  let courseCode = course => getClassSubject(course) + getClassClassId(course);
-
+  let courseCode = course => ("" + getClassSubject(course) + getClassClassId(course));
+  
   // mark all the completed courses as completed, in our table object.
-  for (let course in completed) {
+  completed.forEach(function(course) {
     hasBeenCompleted[courseCode(course)] = true;
-  }
+  });
 
+  console.log(hasBeenCompleted);
+  
   // a prereq is an object {} and has the following properties:
   // "type": one of "and" or "or"
-  // "values": an array [] of course objects
+  // "values": an array [] of course objects or more prereqs
   
   // a course is an object {} and has the following properties:
   // "classId": 4 digit number in string format. ex "2500"
   // "subject": the course attribute. ex "CS" or "MATH"
   // "missing": if object property exists, then value is true (boolean). 
 
-  // corresponding prereqs for each of the courses.
-  // either removes or keeps prereq, if it's been completed. changes on "and" or "or" prereq type.
-  let allPrereqs = remainingRequirements.map(function(course) {
-
-    // this course's prereqs.
-    let coursePrereqObj = course.prereqs;
-
+  // filterPrereq: Object => Object
+  let filterPrereq = function(oldPrereqObj) {
     // if we have no prereqs, skip.
-    if (coursePrereqObj === undefined) {
+    if (oldPrereqObj === undefined) {
+      return undefined;
+    }    
+
+    switch(oldPrereqObj.type) {
+      case "and":
+      return filterAndPrereq(oldPrereqObj);
+      case "or":
+      return filterOrPrereq(oldPrereqObj);
+      default:
+      throw "property \"type\" of SearchNEU-style prereq object was not one of \"and\" or \"or\"";
+    }
+  }
+
+  // filterAndPrereq: Object => Object
+  let filterAndPrereq = function(andPrereq) {
+    let newPrereqObj = {"type": "and","values": []};
+
+    // conditionally add the non-completed prerequisite classes.
+    andPrereq.values.forEach(function(course) {
+      // if the course is marked as "missing", ignore it.
+      if (course.missing) {}
+      // if the course has NOT been completed, add it.
+      else if ("type" in course) {
+        course = filterPrereq(course);
+        if (course !== undefined) newPrereqObj.values.push(course);
+      }
+      else if (!hasBeenCompleted[courseCode(course)]) {
+        newPrereqObj.values.push(course);
+      }
+    });
+
+    // if we filtered them all out, return undefined (no more prereqs!)
+    return newPrereqObj.values.length === 0 ? undefined : newPrereqObj;
+  }
+
+  // filterOrPrereq: Object => Object
+  let filterOrPrereq = function(orPrereq) {
+    let newPrereqObj = {"type": "or","values": []};
+    let completed = false;
+
+    // if any one of the prereqs have been satisfied => return undefined.
+    orPrereq.values.forEach(function(course) {
+      // if the course is marked as "missing", ignore it.
+      if (course.missing) {}
+      // else if the course is another course object
+      else {
+        if ("type" in course) {
+          course = filterPrereq(course);
+        }
+
+        if (hasBeenCompleted[courseCode(course)] || course === undefined) {
+          completed = true;
+        }
+        else {
+          newPrereqObj.values.push(course);
+        }
+      }
+    });
+
+    // if none of the above ran, then return.
+    if (completed) {
       return undefined;
     }
-    // otherwise, filter out the completed prereqs.
+    else if (newPrereqObj.values.length === 1) {
+      return newPrereqObj.values[0];
+    }
     else {
-      let newPrereqObj = 
-      {
-        "type": coursePrereqObj.type,
-        "values": []
-      };
-
-      // two cases: the prereq type is one of: "and" "or"
-      switch(coursePrereqObj.type) {
-
-        // "and" case: remove all completed courses. check if all removed, then return undefined. else keep.
-        case "and":
-
-        // conditionally add the non-completed prerequisite classes.
-        for (let course in coursePrereqObj.values) {
-
-          // if the course is marked as "missing", ignore it.
-          if (course.missing) {
-            continue;
-          }
-          // if the course has NOT been completed, add it.
-          else if (!hasBeenCompleted[courseCode(course)]) {
-            newPrereqObj.values.push(course);
-          }
-        }
-
-        // if all prereqs are satisfied, there are none left.
-        if (newPrereqObj === []) {
-          return undefined;
-        }
-
-        break;
-        
-        // "or" case: if any prereqs have been satisfied, return undefined. otherwise return unchanged.
-        case "or":
-
-        // if any one of the prereqs have been satisfied => return undefined.
-        for (let course in coursePrereqObj.values) {
-
-          // if the course is marked as "missing", ignore it.
-          if (course.missing) {
-            continue;
-          }
-          // if a course is completed, we are of [or] type so we are complete. return undefined.
-          else if (hasBeenCompleted[courseCode(course)]) {
-            return undefined;
-          }
-          // if not complete, add to newPrereqObj
-          else {
-            newPrereqObj.values.push(course);
-          }
-        }
-
-        break;
-
-        // in the default case, neither "or" or "and" cases were met. thrown an error.
-        default:
-        throw "property \"type\" of SearchNEU-style prereq object was not one of \"and\" or \"or\"";
-      }
-
       return newPrereqObj;
     }
+  }
+
+  // corresponding prereqs for each of the courses.
+  // either removes or keeps prereq, if it's been completed. changes on "and" or "or" prereq type.
+  // a prereq is undefined if it does not exist. 
+  // removes prereq courses marked as "missing"
+  let allPrereqs = remainingRequirements.map(function(course) {
+    return filterPrereq(course.prereqs);
   }); 
+
+  remainingRequirements.map(function(course, index, array) {
+    if (course) {
+      let obj = {};
+      obj["code"] = courseCode(course);
+      obj["prereqs"] = allPrereqs[index];
+      obj["oldPrereqs"] = remainingRequirements[index].prereqs
+      console.log(JSON.stringify(obj, null, 2));
+      return;
+    }
+    else {
+      console.log(undefined);
+      return;
+    }
+  });
 
   // next, make the graph!
   let topo = new Graph(remainingRequirements.length);
 
   // add remainingRequirements to the graph.
-  for (let course in remainingRequirements) {
+  remainingRequirements.forEach(function(course) {
     topo.addVertex(courseCode(course));
-  }
+  });
 
   // add the prerequisite edges.
-  // process the "and" prereqs before the "or" prereqs.
-  for (let course in remainingRequirements) {
-    if (course.prereqs.type === "and") {
-      let to = courseCode(course);
+  // todo: need to be able to process nested edges.
 
-      for (let prereq in course.prereqs.values) {
-        // ignore missing courses.
-        if (prereq.missing) {
-          continue;
-        }
+  // process the "and" prereqs before the "or" prereqs.
+  allPrereqs.forEach(function(prereqs, index, array) {
+    // if the course has no prereqs, then skip.
+    if (prereqs === undefined) {
+      return;
+    }
+
+    if (prereqs.type === "and") {
+      let to = courseCode(remainingRequirements[index]);
+
+      prereqs.values.forEach(function(prereq) {
 
         let from = courseCode(prereq);
         topo.addVertex(from);
         topo.addEdge(from, to);
-      }
+      });
     }
-  }
+  });
 
   // process the "or" prereqs
-  for (let course in remainingRequirements) {
-    if (course.prereqs.type === "or") {
-      let to = courseCode(course);
+  // forEach expects a function callback with args[item, index, array]
+  allPrereqs.forEach(function(prereqs, index, array) {
+    // if the course has no prereqs, then skip.
+    if (prereqs === undefined) {
+      return;
+    }
+
+    if (prereqs.type === "or") {
+      let to = courseCode(remainingRequirements[index]);
       let satisfied = false;
 
       // for each of the prereq courses:
-      for (let prereq in course.prereqs.values) {
-        // ignore missing courses.
-        if (prereq.missing) {
-          continue;
-        }
+      prereqs.values.forEach(function(prereq) {
 
         let from = courseCode(prereq);
 
         // if any courses are satisfied, add the edge and break.
-        if (topo.hasVertex(from)) {
+        if (topo.hasVertex(from) && !satisfied) {
           topo.addEdge(from, to);
           satisfied = true;
-          break;
+          return;
         }
-      }
+      });
 
       // if none of the courses were satisfied, add the FIRST vertex and edge.
       if (!satisfied) {
-        let from = courseCode(course.prereqs.values[0]);
+        let from = courseCode(prereqs.values[0]);
         topo.addVertex(from);
         topo.addEdge(from, to);
       }
     }
-  }
+  });
 
   // we should now have a complete graph with edges.
   console.log(topo.adjList);
   
+  // perform topological sort
+  // todo
 }
 
 /**
@@ -430,18 +461,40 @@ function toSchedule(inputLocation, outputLocation, spring, fall) {
 
   // helper function to get SearchNEU data for a given course (assumes spring)
   let getSearchNEUData = course => getClassData(spring, getClassSubject(course), getClassClassId(course));
+  let courseCode = course => getClassSubject(course) + getClassClassId(course);
   
   addCompleted(schedule, audit.completed.classes);
-  addRequired(
-    schedule, 
-    audit.completed.classes.map(course => getSearchNEUData(course)), 
-    getRemainingRequirements(audit.required.classes, audit.completed.classes)
-    .map(course => getSearchNEUData(course)));
+  
+  let completed = audit.completed.classes.map(function(course) {
+    if (course) {
+      let result = getSearchNEUData(course);
+      
+      if (result) {
+        console.log("data found for: " + courseCode(course));
+        return result;
+      }
+      else {
+        console.log("data not found for: " + courseCode(course));
+        console.log(course);
+        return undefined;
+      }
+    }
+    else {
+      console.log("provided is undefined.");
+      return undefined;
+    }
+  }).filter(course => course ? true : false);
+
+  let remainingRequirements = 
+  ((arr => arr.slice(0, arr.length - 2))(getRemainingRequirements(audit.requirements.classes, audit.completed.classes)))
+  .map(course => getSearchNEUData(course));
+
+  addRequired(schedule, completed, remainingRequirements);
 
   // the output JSON
   let JSONSchedule = JSON.stringify(schedule, null, 2);
-  console.log("schedule: \n" + JSONSchedule);
-
+  // console.log("schedule: \n" + JSONSchedule);
+  
   // output the file to ./schedule.json.
   fs.writeFile(outputLocation, JSONSchedule, (err) => {
     if (err) throw err;
