@@ -362,7 +362,8 @@ function filterAndSimplifyPrereqs(completed, remainingRequirements) {
       return undefined;
     }
     else if (newPrereqObj.values.length === 1) {
-      return newPrereqObj.values[0];
+      // return newPrereqObj.values[0];
+      return {"type":"and", "values":[newPrereqObj.values[0]]};
     }
     else {
       return newPrereqObj;
@@ -489,7 +490,7 @@ function createPrerequisiteGraph(filteredRequirements) {
    */
   let markPrereq = function(to, prereq) {
     // if undefined, return
-    if (prereqs === undefined) {
+    if (prereq === undefined) {
       return;
     }
     
@@ -647,7 +648,10 @@ function addRequired(schedule, completed, remainingRequirements) {
   // we should now have a complete graph with edges.
   console.log(topo.adjList);
   
-  // perform topological sort/coffman algorithm.
+  // perform topological sort/coffman algorithm to produce an ordering with width 4.
+  // todo
+
+  // append the produced ordering to the schedule
   // todo
 }
 
@@ -659,6 +663,7 @@ function addRequired(schedule, completed, remainingRequirements) {
  * @param {Object} fall Fall object, with fields termId and classMap.
  */
 function toSchedule(inputLocation, outputLocation, spring, fall) {
+  
   // parse the json file
   let audit = JSON.parse(fs.readFileSync(inputLocation));
 
@@ -671,7 +676,7 @@ function toSchedule(inputLocation, outputLocation, spring, fall) {
 
   // helper function to get SearchNEU data for a given course (assumes spring)
   let getSearchNEUData = course => getClassData(spring, getClassSubject(course), getClassClassId(course));
-  
+
   // add the completed classes. this works!
   addCompleted(schedule, audit.completed.classes);
   
@@ -715,6 +720,30 @@ function toSchedule(inputLocation, outputLocation, spring, fall) {
   // the output JSON
   let JSONSchedule = JSON.stringify(schedule, null, 2);
   // console.log("schedule: \n" + JSONSchedule);
+
+  // testing to make full schedule
+  let allRequired = audit.requirements.classes.map(function(course) {
+    if (course) {
+      let result = getSearchNEUData(course);
+      
+      if (result) {
+        console.log("data found for: " + courseCode(course));
+        return result;
+      }
+      else {
+        console.log("data not found for: " + courseCode(course));
+        console.log(course);
+        return undefined;
+      }
+    }
+    else {
+      console.log("provided is undefined.");
+      return undefined;
+    }
+  }).filter(course => (course && !("list" in course)) ? true : false);
+
+  addRequired(schedule, [], [getSearchNEUData({"subject":"CS", "classId":"3500"})]);
+  // done testing
   
   // output the file to ./schedule.json.
   fs.writeFile(outputLocation, JSONSchedule, (err) => {
