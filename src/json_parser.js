@@ -30,6 +30,21 @@ const SUMMER1 = SEASON_LINKS[2];
 const SUMMERF = SEASON_LINKS[3];
 const SUMMER2 = SEASON_LINKS[4];
 
+/**
+ * Provides an array of the links to the classMap files for a specified year.
+ * @param {String} year The 4-digit year to retrieve links for
+ * @returns {String[]} The strings of the links for the five files.
+ */
+let getClassMapLinks = year => 
+SEASONS.map(season => 'https://searchneu.com/data/v2/getTermDump/neu.edu/' + year + season + '.json');
+
+/**
+ * Provides an array of filepath locations to the classMap files based on a provided year.
+ * @param {String} year The target year. expected as a string or number. in the form "2019".
+ * @returns {String[]} The names of the five files.
+ */
+let getClassMapFilePaths = year => SEASONS.map(season => '../' + year + season + '.json');
+
 const SEASON_PATHS = SEASONS.map(season => '../' + YEAR + season + '.json');
 // the filepath locations for storing fall and spring course data.
 const FALL_PATH = SEASON_PATHS[0];
@@ -158,6 +173,51 @@ const download = (url, dest) => new Promise(function(resolve, reject) {
 });
 
 /**
+ * Downloads all the files for a specified year, and attaches the produced JSONS to an object.
+ * @param {String} year the 4-digit year.
+ * @param {Object} classMapParent The parent object to attach classMaps to, under property termId.
+ * @returns {Promise} Whether or not the operation succeeded. "success" or "failure"
+ */
+let addClassMapsOfYear = function(year, classMapParent) {
+  let links = getClassMapLinks(year);
+  let paths = getClassMapFilePaths(year);
+  
+  // convert the above into an array of download calls.
+  // assume they are the same length.
+  let downloads = [];
+  for (let i = 0; i < links.length; i += 1) {
+    downloads.push(download(links[i], paths[i]));
+  }
+
+  // attempt to download everything
+  return Promise.all(downloads)
+  .then(results => {
+    // if the download succeeds, then try and read everything as JSON
+    let jsons = paths.map(path => getFileAsJson(path));
+    return Promise.all(jsons);
+  }, err => {
+    // if the download fails, then log the error.
+    console.log("error downloading files");
+    console.log("err");
+    return "failure";
+  })
+  .then(results => {
+    // if reading as JSON succeeds, then add all the JSONS to parent classMap.
+    results.forEach(function(item, index, arr) {
+      let classMap = item;
+      let termId = classMap.termId;
+      classMapParent[termId] = classMap;
+    });
+    return "success";
+  }, err => {
+    // if reading stuff as JSON fails, then log the error
+    console.log("failed reading items as JSON");
+    console.log(err);
+    return "failure";
+  });
+}
+
+/**
  * Returns if the classList contains the given class, by attr and course #.
  * @param {Class[]} classList The list of classes.
  * @param {Class} c The class to find.
@@ -194,8 +254,13 @@ function getClassData(classObj, subject, classId) {
   // classes can be accessed by the 'neu.edu/201830/<COLLEGE>/<COURSE_NUMBER>' attribute of each "classmap"
   // 201830 is spring, 201810 is fall.
 
-  let query = 'neu.edu/' + classObj.termId + '/' + subject+ '/' + classId;
-  return classObj.classMap[query];
+  if (classObj) {
+    let query = 'neu.edu/' + classObj.termId + '/' + subject+ '/' + classId;
+    return classObj.classMap[query];
+  } else {
+    return undefined;
+  }
+  
 }
 
 /**
@@ -659,10 +724,9 @@ function addRequired(schedule, completed, remainingRequirements) {
  * Parses the provided JSON file to an output JSON file, organized chronologically.
  * @param {String} inputLocation The target filepath to input from.
  * @param {String} outputLocation The target filepath to output to.
- * @param {Object} spring Spring object, with fields termId and classMap.
- * @param {Object} fall Fall object, with fields termId and classMap.
+ * @param {Object} classMapParent A classMap parent with each classMap under its corresponding termId.
  */
-function toSchedule(inputLocation, outputLocation, spring, fall) {
+function toSchedule(inputLocation, outputLocation, classMapParent) {
   
   // parse the json file
   let audit = JSON.parse(fs.readFileSync(inputLocation));
@@ -674,8 +738,29 @@ function toSchedule(inputLocation, outputLocation, spring, fall) {
     }
   };
 
-  // helper function to get SearchNEU data for a given course (assumes spring)
-  let getSearchNEUData = course => getClassData(spring, getClassSubject(course), getClassClassId(course));
+  /**
+   * Attempts to grab searchNEU data for a course, using that course's termId to lookup the corresponding file.
+   * If no termId is found, automatically uses the most recent semester on record.
+   * May return undefined.
+   * @param {Course} course A course object (hopefully).
+   */
+  let getSearchNEUData = function(course) {
+    let classMap = classMapParent[course.termId];
+    if (classMap) {
+      return getClassData(classMap, getClassSubject(course), getClassClassId(course));  
+    } else {
+      classMap = classMapParent[classMapParent.mostRecentSemester];
+      let data = getClassData(classMap, getClassSubject(course), getClassClassId(course));
+      if (data) {
+        return data;
+      } else {
+        console.log("classMap not found for course:\n" + (m => m ? m : JSON.stringify(course, null, 2))(courseCode(course)));
+        return undefined;
+      }
+    }
+    
+  }
+  
 
   // add the completed classes. this works!
   addCompleted(schedule, audit.completed.classes);
@@ -685,6 +770,7 @@ function toSchedule(inputLocation, outputLocation, spring, fall) {
   // todo: change this to use the specified year file of a class.
   // ex. HIST1110.termId => '201860' => lookup in '201860.json'
   // currently juse uses '201930' spring 2019 for everything by default.
+  // todo: change this to deal with class enums: {"list":["3302", 3308"], "num_required":"1"}
   let completed = audit.completed.classes.map(function(course) {
     if (course) {
       let result = getSearchNEUData(course);
@@ -703,15 +789,12 @@ function toSchedule(inputLocation, outputLocation, spring, fall) {
       console.log("provided is undefined.");
       return undefined;
     }
-  }).filter(course => course ? true : false);
+  }).filter(course => (course && !("list" in course)) ? true : false);
 
   // get the remaining required classes, in searchNEU format
   let remainingRequirements = getRemainingRequirements(audit.requirements.classes, audit.completed.classes)
-  .map(course => getSearchNEUData(course));
-
-  // todo: handle class unions in building the rest of the schedule. 
-  // temporarily remove the class union: remove this later.
-  remainingRequirements = (arr => arr.slice(0, arr.length - 2))(remainingRequirements);
+  .map(course => getSearchNEUData(course))
+  .filter(course => (course && !("list" in course)) ? true : false);
 
   // add the remaining required classes.
   // note, expects data in SearchNEU format
@@ -721,7 +804,7 @@ function toSchedule(inputLocation, outputLocation, spring, fall) {
   let JSONSchedule = JSON.stringify(schedule, null, 2);
   // console.log("schedule: \n" + JSONSchedule);
 
-  // testing to make full schedule
+  // TESTING. REMOVE LATER!
   let allRequired = audit.requirements.classes.map(function(course) {
     if (course) {
       let result = getSearchNEUData(course);
@@ -743,7 +826,7 @@ function toSchedule(inputLocation, outputLocation, spring, fall) {
   }).filter(course => (course && !("list" in course)) ? true : false);
 
   addRequired(schedule, [], [getSearchNEUData({"subject":"CS", "classId":"3500"})]);
-  // done testing
+  // END TESTING.
   
   // output the file to ./schedule.json.
   fs.writeFile(outputLocation, JSONSchedule, (err) => {
@@ -752,30 +835,19 @@ function toSchedule(inputLocation, outputLocation, spring, fall) {
 }
 
 // run the main program. 
-// ensures that spring and fall files are loaded before parsing schedule.
-Promise.all([
-  download(SPRING, SPRING_PATH), 
-  download(FALL, FALL_PATH),
-  download(SUMMER1, SUMMER1_PATH),
-  download(SUMMERF, SUMMERF_PATH),
-  download(SUMMER2, SUMMER2_PATH)])
-.then(results => {
-  return Promise.all([
-    getFileAsJson(FALL_PATH),
-    getFileAsJson(SPRING_PATH),
-    getFileAsJson(SUMMER1_PATH),
-    getFileAsJson(SUMMERF_PATH),
-    getFileAsJson(SUMMER2_PATH)])
-},
-err => {
-  console.log("error downloading files.");
+let classMapParent = {};
+let years = [2018, 2019];
+
+Promise.all(years.map(year => addClassMapsOfYear(year, classMapParent)))
+.then(result => {
+  // adds the most recent semester's termId as a property
+  let maxYear = Math.max.apply(null, years);
+  let maxSeason = Math.max.apply(null, SEASONS);
+  classMapParent["mostRecentSemester"] = "" + maxYear + maxSeason;
+
+  // success! now run the main code.
+  toSchedule(INPUT, OUTPUT, classMapParent);
+}, err => {
+  console.log("something went wrong with addClassMapsOfYear");
   console.log(err);
 })
-.then(results => {
-  // for now, only take in the fall and spring semester data. 
-  toSchedule(INPUT, OUTPUT, results[0], results[1]);
-},
-err => {
-  console.log("error reading files as JSON.");
-  console.log(err);
-});
