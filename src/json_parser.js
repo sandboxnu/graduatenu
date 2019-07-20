@@ -244,26 +244,6 @@ function getRemainingRequirements(required, completed) {
 }
 
 /**
- * Grabs the data of a specified class.
- * @param {Object} classObj The class object containing a classMap and termId.
- * @param {String} subject The subject (college abbreviation) of the target course.
- * @param {number} classId course number of the target course.
- * @returns {Object} The resulting class object (if found).
- */
-function getClassData(classObj, subject, classId) {
-  // classes can be accessed by the 'neu.edu/201830/<COLLEGE>/<COURSE_NUMBER>' attribute of each "classmap"
-  // 201830 is spring, 201810 is fall.
-
-  if (classObj) {
-    let query = 'neu.edu/' + classObj.termId + '/' + subject+ '/' + classId;
-    return classObj.classMap[query];
-  } else {
-    return undefined;
-  }
-  
-}
-
-/**
  * Adds the completed classes to the schedule. Does mutation. Returns void.
  * @param {JSON} schedule The schedule in JSON format. 
  * @param {Class[]} completedClasses A list of the completed classes.
@@ -721,6 +701,69 @@ function addRequired(schedule, completed, remainingRequirements) {
 }
 
 /**
+* Attempts to grab searchNEU data for a course, using that course's termId to lookup the corresponding file.
+* If no termId is found, automatically uses the most recent semester on record.
+* May return undefined.
+* @param {Course} course A course object (hopefully).
+* @param {Object} classMapParent The parent classMap object, with props "mostRecentSemester" and "allTermIds"
+* @returns {Object} Produces the corresponding searchNEU data for a class, if it exists. else => undefined.
+*/
+let getSearchNEUData = function(course, classMapParent) {
+  /**
+  * Grabs the data of a specified class.
+  * @param {Object} classObj The class object containing a classMap and termId.
+  * @param {String} subject The subject (college abbreviation) of the target course.
+  * @param {number} classId course number of the target course.
+  * @returns {Object} The resulting class object (if found).
+  */
+  function getClassData(classObj, subject, classId) {
+    // classes can be accessed by the 'neu.edu/201830/<COLLEGE>/<COURSE_NUMBER>' attribute of each "classmap"
+    if (classObj) {
+      let query = 'neu.edu/' + classObj.termId + '/' + subject+ '/' + classId;
+      return classObj.classMap[query];
+    } else return undefined;
+  }
+
+  // skip doing work if there's no work to do.
+  if (!course) {
+    return undefined;
+  }
+  
+  let subject = getClassSubject(course);
+  let classId = getClassClassId(course);
+  let termId = getClassTermId(course);
+  let classMap = classMapParent[termId];
+
+  if (classId && subject && termId && classMap) {
+    // if everything is valid, then query the classMap
+    console.log("data found for: " + subject + classId);
+    return getClassData(classMap, subject, classId);
+  } else if (subject && classId && !termId) {
+    // if only the subject and classId are valid, guess the termId from most recent => least recent
+    let allTermIds = classMapParent.allTermIds;
+    for (let i = 0; i < allTermIds.length; i += 1) {
+      termId = allTermIds[i];
+      classMap = classMapParent[termId];
+      let data = getClassData(classMap, subject, classId);
+      if (data) {
+        // if the data exists, then return. otherwise keep searching.
+        console.log("data found in term: " + termId + " for course: " + subject + classId);
+        return data;
+      }
+    }
+    // if not found, then return undefined
+    console.log("data not found for:");
+    console.log(course);
+    return undefined;
+  } else {
+    // if we have no subject and classId, then we don't even know what course to search for. 
+    console.log("data not found for:");
+    console.log(course);
+    return undefined;
+  }
+}
+
+/**
  * Parses the provided JSON file to an output JSON file, organized chronologically.
  * @param {String} inputLocation The target filepath to input from.
  * @param {String} outputLocation The target filepath to output to.
@@ -738,63 +781,25 @@ function toSchedule(inputLocation, outputLocation, classMapParent) {
     }
   };
 
-  /**
-   * Attempts to grab searchNEU data for a course, using that course's termId to lookup the corresponding file.
-   * If no termId is found, automatically uses the most recent semester on record.
-   * May return undefined.
-   * @param {Course} course A course object (hopefully).
-   */
-  let getSearchNEUData = function(course) {
-    let classMap = classMapParent[course.termId];
-    if (classMap) {
-      return getClassData(classMap, getClassSubject(course), getClassClassId(course));  
-    } else {
-      classMap = classMapParent[classMapParent.mostRecentSemester];
-      let data = getClassData(classMap, getClassSubject(course), getClassClassId(course));
-      if (data) {
-        return data;
-      } else {
-        console.log("classMap not found for course:\n" + (m => m ? m : JSON.stringify(course, null, 2))(courseCode(course)));
-        return undefined;
-      }
-    }
-    
-  }
-  
-
   // add the completed classes. this works!
   addCompleted(schedule, audit.completed.classes);
   
+  // keepIfDataExists: Class[] => Class[]
+  // maps from class to searchNEU lookup representation of class, otherwise filters out.
+  let lookupIfDataExists = classes => classes
+  .map(course => getSearchNEUData(course, classMapParent))
+  .filter(course => (course && !("list" in course)) ? true : false);
+
   // filter through the completed classes to pull up their data.
   // only keep the stuff with actual results.
   // todo: change this to use the specified year file of a class.
   // ex. HIST1110.termId => '201860' => lookup in '201860.json'
   // currently juse uses '201930' spring 2019 for everything by default.
   // todo: change this to deal with class enums: {"list":["3302", 3308"], "num_required":"1"}
-  let completed = audit.completed.classes.map(function(course) {
-    if (course) {
-      let result = getSearchNEUData(course);
-      
-      if (result) {
-        console.log("data found for: " + courseCode(course));
-        return result;
-      }
-      else {
-        console.log("data not found for: " + courseCode(course));
-        console.log(course);
-        return undefined;
-      }
-    }
-    else {
-      console.log("provided is undefined.");
-      return undefined;
-    }
-  }).filter(course => (course && !("list" in course)) ? true : false);
+  let completed = lookupIfDataExists(audit.completed.classes);
 
   // get the remaining required classes, in searchNEU format
-  let remainingRequirements = getRemainingRequirements(audit.requirements.classes, audit.completed.classes)
-  .map(course => getSearchNEUData(course))
-  .filter(course => (course && !("list" in course)) ? true : false);
+  let remainingRequirements = lookupIfDataExists(getRemainingRequirements(audit.requirements.classes, audit.completed.classes));
 
   // add the remaining required classes.
   // note, expects data in SearchNEU format
@@ -805,27 +810,9 @@ function toSchedule(inputLocation, outputLocation, classMapParent) {
   // console.log("schedule: \n" + JSONSchedule);
 
   // TESTING. REMOVE LATER!
-  let allRequired = audit.requirements.classes.map(function(course) {
-    if (course) {
-      let result = getSearchNEUData(course);
-      
-      if (result) {
-        console.log("data found for: " + courseCode(course));
-        return result;
-      }
-      else {
-        console.log("data not found for: " + courseCode(course));
-        console.log(course);
-        return undefined;
-      }
-    }
-    else {
-      console.log("provided is undefined.");
-      return undefined;
-    }
-  }).filter(course => (course && !("list" in course)) ? true : false);
+  let allRequired = lookupIfDataExists(audit.requirements.classes);
 
-  addRequired(schedule, [], [getSearchNEUData({"subject":"CS", "classId":"3500"})]);
+  addRequired(schedule, [], [getSearchNEUData({"subject":"CS", "classId":"3500"}, classMapParent)]);
   // END TESTING.
   
   // output the file to ./schedule.json.
@@ -844,6 +831,20 @@ Promise.all(years.map(year => addClassMapsOfYear(year, classMapParent)))
   let maxYear = Math.max.apply(null, years);
   let maxSeason = Math.max.apply(null, SEASONS);
   classMapParent["mostRecentSemester"] = "" + maxYear + maxSeason;
+
+  // adds all the termIds as a property (array form).
+  let allTermIds = [];
+  years.forEach(function(item, index, arr) {
+    let year = item;
+    SEASONS.forEach(function(item, index, arr) {
+      let season = item;
+      let termId = "" + year + season;
+      allTermIds.push(termId);
+    });
+  });
+  classMapParent["allTermIds"] = allTermIds;
+  // ensure that they are sorted greatest => least.
+  classMapParent.allTermIds.sort((a1, a2) => (a2 - a1));
 
   // success! now run the main code.
   toSchedule(INPUT, OUTPUT, classMapParent);
