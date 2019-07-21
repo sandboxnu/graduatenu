@@ -130,42 +130,94 @@ test('Ensures that the completed NUPaths are of the form required.', () => {
 });
 
 test('Ensures that the audits do not contain duplicate completed courses.', () => {
-     for(let i = 0; i < json_ex.length; i++) {
+    for(let i = 0; i < json_ex.length; i++) {
         for(let j = 0; j < json_ex[i].completed.classes.length; j++) { 
-          
+            let course = json_ex[i].completed.classes[j];
+            expect(contains_duplicate_course(json_ex[i].completed.classes, course)).toBeFalsy();
         }
      }
 });
 
 test('Ensures that the audits do not contain duplicate in-progress courses.', () => {
-    for(let i = 0; i < cs_json.completed.classes.length; i++) {
-
-    }
+    for(let i = 0; i < json_ex.length; i++) {
+        for(let j = 0; j < json_ex[i].inprogress.classes.length; j++) { 
+            let course = json_ex[i].inprogress.classes[j];
+            expect(contains_duplicate_course(json_ex[i].inprogress.classes, course)).toBeFalsy();
+        }
+     }
 });
 
 test('Ensures that the audits do not contain duplicate required courses.', () => {
-    for(let i = 0; i < cs_json.completed.classes.length; i++) {
-
-    }
+    
 });
 
 test('Ensures that the audits do not contain duplicate completed NUPaths.', () => {
-    for(let i = 0; i < cs_json.completed.classes.length; i++) {
-
+    for(let i = 0; i < json_ex.length; i++) {
+        for(let j = 0; j < json_ex[i].completed.nupaths.length; j++) { 
+            expect(contains_duplicate_nupath(json_ex[i].completed.nupaths, json_ex[i].completed.nupaths[i])).toBeFalsy();
+        }
     }
 });
 
 test('Ensures that the audits do not contain duplicate in-progress NUPaths.', () => {
-    for(let i = 0; i < cs_json.completed.classes.length; i++) {
-
+    for(let i = 0; i < json_ex.length; i++) {
+        for(let j = 0; j < json_ex[i].inprogress.nupaths.length; j++) { 
+            expect(contains_duplicate_nupath(json_ex[i].inprogress.nupaths, json_ex[i].inprogress.nupaths[i])).toBeFalsy();
+        }
     }
 });
 
 test('Ensures that the audits do not contain duplicate required NUPaths.', () => {
-    for(let i = 0; i < cs_json.completed.classes.length; i++) {
-
+    for(let i = 0; i < json_ex.length; i++) {
+        for(let j = 0; j < json_ex[i].requirements.nupaths.length; j++) { 
+            expect(contains_duplicate_nupath(json_ex[i].requirements.nupaths, json_ex[i].requirements.nupaths[i])).toBeFalsy();
+        }
     }
 });
+
+/**
+ * Determines whether an array contains more than one of the same course.
+ * Two courses are the same when they have the same subject, classId (e.g. CS1200), and are taken during the same term (e.g. 201810)
+ * @param {Array} arr   The array of courses which could contain the course.
+ * @param {JavaScript object}  The course which could be in the array.
+ * @return whether the array contains two or more of the course.
+ */
+function contains_duplicate_course(arr, course) {
+    let seen = false;
+    for(let i = 0; i < arr.length; i++) {
+        if(arr[i].classId === course.classId && arr[i].subject === course.subject && arr[i].termId === course.termId) { 
+            if(!seen) {
+                seen = true;
+            } else {
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
+
+/**
+ * Determines whether an array contains more than one of the same course.
+ * Two courses are the same when they have the same subject, classId (e.g. CS1200), and are taken during the same term (e.g. 201810)
+ * @param {Array} arr   The array of courses which could contain the course.
+ * @param {JavaScript object}  The course which could be in the array.
+ * @return whether the array contains two or more of the course.
+ */
+function contains_duplicate_nupath(arr, nupath) {
+    let seen = false;
+    for(let i = 0; i < arr.length; i++) {
+        if(arr[i] === nupath) { 
+            if(!seen) {
+                seen = true;
+            } else {
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
 
 
 test('Verifies that the CS degree audit is properly reproduced by the code', () => {
