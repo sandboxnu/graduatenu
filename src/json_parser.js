@@ -226,9 +226,13 @@ let addClassMapsOfYear = function(year, classMapParent) {
 function containsClass(classList, c) {
   let targetSubject = getClassSubject(c);
   let targetNumber = getClassClassId(c);
-  let filteredSubject = classList.filter((cl) => (getClassSubject(cl) === targetSubject));
-  let filteredNumber = filteredSubject.filter((cl) => (getClassClassId(cl) === targetNumber));
-  return filteredNumber.length > 0;
+  for (let i = 0; i < classList.length; i += 1) {
+    let item = classList[i];
+    if (getClassSubject(item) === targetSubject && getClassClassId(item) === targetNumber) {
+      return true;
+    }
+  }
+  return false;
 }
 
 /**
@@ -277,7 +281,9 @@ class Graph {
 
   // adds an edge
   addEdge(v, w) {
-    this.adjList.get(v).push(w);
+    if (!this.hasEdge(v, w)) {
+      this.adjList.get(v).push(w);
+    }
   }
 
   // returns if vertex exists in |V|
@@ -288,13 +294,15 @@ class Graph {
   // returns if edge exists in |V|
   hasEdge(from, to) {
     // if both vertices exist, test if edge exists.
-    if (this.hasVertex(from) && hasVertex(to)) {
+    if (this.hasVertex(from) && this.hasVertex(to)) {
+
       // does the adjList for "from" contain "to"?
-      this.adjList.get(from).forEach(function(item, index, arr) {
-        if (to === item) {
+      let list = this.adjList.get(from);
+      for (let i = 0; i < list.length; i += 1) {
+        if (list[i] == to) {
           return true;
         }
-      });
+      }
     }
 
     // wasn't found, return false;
@@ -314,10 +322,10 @@ let courseCode = course => ("" + getClassSubject(course) + getClassClassId(cours
  * Filters and simplifies the prereqs each course in remainingRequirements, updating the course.
  * If a prereq does not exist, then it is undefined. Ignores courses marked as "missing"
  * @param {Class[]} completed The completed classes (in SearchNEU format).
- * @param {Class[]} remainingRequirements The remaining requirements (in SearchNEU format).
+ * @param {Object} prereqObj The prereq object to filter
  * @returns {Class[]} remainingRequirements with each course.prereqs updated.
  */
-function filterAndSimplifyPrereqs(completed, remainingRequirements) {
+function filterAndSimplifyPrereqs(completed, prereqObj) {
 
   // a prereq is an object {} and has the following properties:
   // "type": one of "and" or "or"
@@ -424,13 +432,7 @@ function filterAndSimplifyPrereqs(completed, remainingRequirements) {
   });
 
   // update the prereqs of each remaining requirement to its simplified and filtered version.
-  remainingRequirements.forEach(function(item, index, array) {
-    let course = item;
-    course.prereqs = filterPrereq(course.prereqs);
-  }); 
-
-  // return the new updated remainingRequirements.
-  return remainingRequirements;
+  return filterPrereq(prereqObj);
 }
 
 /**
@@ -562,7 +564,8 @@ function createPrerequisiteGraph(completed, filteredRequirements, curriedGetSear
    * @param {PrereqObj} prereq The prerequisite object of the course we are computing prereqs for.
    */
   let markAndPrereq = function(to, prereq) {
-    // prereq is guaranteed to NOT be undefined.
+    prereq = filterAndSimplifyPrereqs(completed, prereq);
+    if (!prereq) return;
     
     // for each of the prereqs, add an edge from the prereq to us.
     prereq.values.forEach(function(course) {
@@ -583,10 +586,7 @@ function createPrerequisiteGraph(completed, filteredRequirements, curriedGetSear
         // next mark all the prerequisites of the local course itself, if they exist.
         let prereqCourseData = curriedGetSearchNEUData(course);
         if (prereqCourseData && prereqCourseData.prereqs) {
-          let nestedPrereqs = filterAndSimplifyPrereqs(completed, [prereqCourseData])[0].prereqs;
-          
-          console.log("attempting to log prereqs of: " + from + " with prereqs:");
-          console.log(nestedPrereqs);
+          let nestedPrereqs = filterAndSimplifyPrereqs(completed, prereqCourseData.prereqs);
           markPrereq(from, nestedPrereqs);
         }
       }
@@ -599,7 +599,8 @@ function createPrerequisiteGraph(completed, filteredRequirements, curriedGetSear
    * @param {PrereqObj} prereq The prerequisite object of the course we are compting prereqs for.
    */
   let markOrPrereq = function(to, prereq) {
-    // prereq guaranteed to NOT be undefined
+    prereq = filterAndSimplifyPrereqs(completed, prereq);
+    if (!prereq) return;
 
     let satisfied = false;
 
@@ -658,10 +659,7 @@ function createPrerequisiteGraph(completed, filteredRequirements, curriedGetSear
       let prereqCourseData = curriedGetSearchNEUData(course);
 
       if (prereqCourseData && prereqCourseData.prereqs) {
-        let nestedPrereqs = filterAndSimplifyPrereqs(completed, [prereqCourseData])[0].prereqs;
-        
-        console.log("attempting to log prereqs of: " + from + " with prereqs:");
-        console.log(nestedPrereqs);
+        let nestedPrereqs = filterAndSimplifyPrereqs(completed, prereqCourseData.prereqs);
         markPrereq(from, nestedPrereqs);
       }
     }
@@ -713,10 +711,10 @@ function addRequired(schedule, completed, remainingRequirements, curriedGetSearc
   // precondition: schedule is full up to some point. need to fill with remaining requirements.
   
   // filter and simplify the requirements according to completed classes.
-  let newRequirements = filterAndSimplifyPrereqs(completed, remainingRequirements);
+  // let newRequirements = filterAndSimplifyPrereqs(completed, remainingRequirements);
 
   // use those filtered classes to greate a prerequisite edge graph.
-  let topo = createPrerequisiteGraph(completed, newRequirements, curriedGetSearchNEUData);
+  let topo = createPrerequisiteGraph(completed, remainingRequirements, curriedGetSearchNEUData);
 
   // we should now have a complete graph with edges.
   console.log(topo.adjList);
@@ -825,11 +823,11 @@ function toSchedule(inputLocation, outputLocation, classMapParent) {
   // currently juse uses '201930' spring 2019 for everything by default.
   // todo: change this to deal with class enums: {"list":["3302", 3308"], "num_required":"1"}
   let completed = lookupIfDataExists(audit.completed.classes);
+  let required = lookupIfDataExists(audit.requirements.classes);
 
   // get the remaining required classes, in searchNEU format
-  let remainingRequirements = lookupIfDataExists(getRemainingRequirements(audit.requirements.classes, audit.completed.classes));
+  let remainingRequirements = getRemainingRequirements(required, completed);
 
-  // create a curried form of getSearchNEUData
   let curriedGetData = course => getSearchNEUData(course, classMapParent);
 
   // add the remaining required classes.
@@ -841,17 +839,8 @@ function toSchedule(inputLocation, outputLocation, classMapParent) {
   // console.log("schedule: \n" + JSONSchedule);
 
   // TESTING. REMOVE LATER!
-  // let allRequired = lookupIfDataExists(audit.requirements.classes);
-  
-
-  // getFileAsJson("../201960.json").then(json => {
-  //   let ood = json["classMap"]["neu.edu/201960/CS/3500"];
-  //   console.log("from direct: \n" + ood.prereqs);
-  //   addRequired(schedule, [], [ood], curriedGetData);
-  // });
-
-  // console.log("from parent:\n" + classMapParent["201960"]["classMap"]["neu.edu/201960/CS/3500"]["prereqs"]);
-  
+  let ood = curriedGetData({"subject":"CS","classId":"4400"})
+  addRequired(null, [], required, curriedGetData);
   // END TESTING.
   
   // output the file to ./schedule.json.
@@ -890,4 +879,4 @@ Promise.all(years.map(year => addClassMapsOfYear(year, classMapParent)))
 }, err => {
   console.log("something went wrong with addClassMapsOfYear");
   console.log(err);
-})
+});
