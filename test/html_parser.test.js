@@ -175,6 +175,33 @@ test('Ensures that the audits do not contain duplicate required NUPaths.', () =>
     }
 });
 
+test('Ensures that each audit contains all of the NUPath requirements.', () => {
+    for(let i = 0; i < json_ex.length; i++) {
+        let nupaths = ["ND","EI","IC","FQ","SI","AD","DD","ER","WF","WD","WI","EX","CE"];
+        for(let j = 0; j < json_ex[i].completed.nupaths.length; j++) {
+            let index = nupaths.indexOf(json_ex[i].completed.nupaths[j]);
+            if (index > -1) {
+                nupaths.splice(index, 1);
+            }
+        }
+        
+        for(let j = 0; j < json_ex[i].inprogress.nupaths.length; j++) {
+            let index = nupaths.indexOf(json_ex[i].inprogress.nupaths[j]);
+            if (index > -1) {
+                nupaths.splice(index, 1);
+            }
+        }
+        for(let j = 0; j < json_ex[i].requirements.nupaths.length; j++) {
+            let index = nupaths.indexOf(json_ex[i].requirements.nupaths[j]);
+            if (index > -1) {
+                nupaths.splice(index, 1);
+            }
+        }
+        
+        expect(nupaths.length === 0).toBeTruthy();
+    }
+}
+
 /**
  * Determines whether an array contains more than one of the same course.
  * Two courses are the same when they have the same subject, classId (e.g. CS1200), and are taken during the same term (e.g. 201810)
@@ -198,11 +225,10 @@ function contains_duplicate_course(arr, course) {
 }
 
 /**
- * Determines whether an array contains more than one of the same course.
- * Two courses are the same when they have the same subject, classId (e.g. CS1200), and are taken during the same term (e.g. 201810)
- * @param {Array} arr   The array of courses which could contain the course.
- * @param {JavaScript object}  The course which could be in the array.
- * @return whether the array contains two or more of the course.
+ * Determines whether an array contains more than one of the same nupath requirement.
+ * @param {Array} arr   The array of nupaths which could contain the nupath.
+ * @param {JavaScript object}  The nupath which could be in the array.
+ * @return whether the array contains two or more of the nupath.
  */
 function contains_duplicate_nupath(arr, nupath) {
     let seen = false;
