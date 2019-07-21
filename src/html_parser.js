@@ -17,7 +17,7 @@
 const fs = require('fs');
 
 // location of the input file
-const INPUT = '../../Web\ Audit.html';
+const INPUT = '../test/mock_audits/cs_math_grad_audit.html';
 
 // location of the output file
 const OUTPUT = 'parsed_audit.json';
@@ -93,7 +93,8 @@ function hasNumber(n) {
  * @param {String} line  The line which contains these required courses.
  */
 function add_courses_to_take(json, lines, j) {
-    let courseList = lines[j].substring(lines[j].search('Course List') + 13).replace('<font>', '').split('<font class="auditPreviewText">').join('').split('</font>');
+    let courseList = lines[j].substring(lines[j].search('Course List') + 13).replace('<font>', '').split('&amp; ').join('').split('<font class="auditPreviewText">').join('').split('</font>');    
+    console.log(courseList);
     let type = '';
     let courses = [];
     let seenEnumeration = false;
@@ -101,7 +102,7 @@ function add_courses_to_take(json, lines, j) {
         let course = { };
 
         // excludes empty spaces and wildcard characters from course list
-        if(!(courseList[i] == ' ' || courseList[i] == '' || courseList[i] == '****')) {
+        if(!(courseList[i] === ' ' || courseList[i] === '' || courseList[i] === '****' || contains(courseList[i], '&amp;'))) {
             course.subject = courseList[i].substring(0, 4).split(' ').join('');
 
             // determines whether we're looking at an enumeration (list of required courses of which 1+ should be taken)
@@ -149,26 +150,36 @@ function add_courses_to_take(json, lines, j) {
  */
 function add_course_taken(json, line) {
     let course = {};
-    let courseString = line.substring(line.search('(FL|SP|S1|S2)'));
+    let courseString = line.substring(line.search('(FL|SP|S1|S2|SM)'));
     course.hon = contains(line, '\(HON\)');
 
     // ap courses that do not count for credit do not have numbers / attributes for corresponding college courses
-    if(!contains(courseString, 'NO AP')) {
-        course.subject = line.substring(line.search('(FL|SP|S1|S2)') + 5, line.search('(FL|SP|S1|S2)') + 9).replace(' ', '').replace(' ', '');
+    if(!contains(courseString, '(NO AP|NO IB)')) {
+        course.subject = line.substring(line.search('(FL|SP|S1|S2|SM)') + 5, line.search('(FL|SP|S1|S2|SM)') + 9).replace(' ', '').replace(' ', '');
         course.classId = courseString.substring(9, 13);
     }
 
     // locates the rest of the parameters with some regex magic
     course.credithours = courseString.substring(18, 22);
-    course.season = new RegExp('(FL|SP|S1|S2)').exec(line)[0];
-    course.year = line.substring(line.search('(FL|SP|S1|S2)') + 2, line.search('(FL|SP|S1|S2)') + 4);
+    course.season = new RegExp('(FL|SP|S1|S2|SM)').exec(line)[0];
+    course.year = line.substring(line.search('(FL|SP|S1|S2|SM)') + 2, line.search('(FL|SP|S1|S2|SM)') + 4);
 
     course.termId = get_termid(course.season, course.year);
     // determines whether the course is 'in progress' or completed and sorts accordingly
+
+    if(isNaN(course.classId)) {
+        return; 
+        // not a valid course if the course id is not a number
+    }
+
     if(contains(courseString, 'IP')) {
-        json.inprogress.classes.push(course);			
+        if(!contains_course(json.inprogress.classes, course)) {
+            json.inprogress.classes.push(course);			
+        } 
     } else {
-        json.completed.classes.push(course);
+        if(!contains_course(json.completed.classes, course)) {
+            json.completed.classes.push(course);    
+        }
     }
 }
 
@@ -187,7 +198,7 @@ function get_termid(season, year) {
         case "FL": 
             // Fall term: associated year is the same year as the following 
             // Spring term as per SearchNEU conventions
-            termid = "20" + (Number(year) + 1);
+            termid = "20" + Number(Number(year) + 1);
             return termid + "10";
         case "SP": // Spring term
             return termid + "30";
@@ -256,7 +267,7 @@ function audit_to_json(data) {
         }
 
         // finds courses that have been taken
-        else if(contains(lines[i], 'FL') || contains(lines[i], 'SP') ||contains(lines[i], 'S1') || contains(lines[i], 'S2')) {
+        else if(contains(lines[i], '(FL|SP|S1|S2|SM)')) {
             add_course_taken(json, lines[i]);
         }
     }
@@ -275,8 +286,25 @@ function contains(text, lookfor) {
     return -1 != text.search(lookfor);
 }
 
+/**
+ * Determines whether an array already contains a course.
+ * Two courses are the same when they have the same subject, classId (e.g. CS1200), and are taken during the same term (e.g. 201810)
+ * @param {Array} arr   The array of courses which could contain the course.
+ * @param {JavaScript object}  The course which could be in the array.
+ * @return whether the array contains the course.
+ */
+function contains_course(arr, course) {
+    for(let i = 0; i < arr.length; i++) {
+        if(arr[i].classId === course.classId && arr[i].subject === course.subject && arr[i].termId === course.termId) { 
+            return true;
+        }
+    }
+
+    return false;
+}
+
 // prints out the requirements to ensure they are in the correct format
-// fs.writeFileSync(OUTPUT, JSON.stringify(audit_to_json(fs.readFileSync(INPUT, 'utf8')));
+// fs.writeFileSync(OUTPUT, JSON.stringify(audit_to_json(fs.readFileSync(INPUT, 'utf8'))));
 
 // functions to export for testing
 module.exports.audit_to_json = audit_to_json;
