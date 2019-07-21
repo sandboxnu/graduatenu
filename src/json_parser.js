@@ -436,10 +436,12 @@ function filterAndSimplifyPrereqs(completed, remainingRequirements) {
 /**
  * Produces a graph of the provided list of SearchNEU formatted class objects. 
  * Uses class prereqs to create edges. Uses courseCode to name nodes.
- * @param {Class[]} filteredRequirements A list of classes.
+ * @param {Class[]} completed The completed classes.
+ * @param {Class[]} filteredRequirements The remaining requirements to schedule.
+ * @param {Function} curriedGetSearchNEUData A function course => course, looks up searchNEUdata for a course.
  * @returns {Graph} The produced graph, complete with edges.
  */
-function createPrerequisiteGraph(filteredRequirements) {
+function createPrerequisiteGraph(completed, filteredRequirements, curriedGetSearchNEUData) {
 
   // make the graph
   // must exist as a reference for the helper functions.
@@ -451,7 +453,8 @@ function createPrerequisiteGraph(filteredRequirements) {
     graph.addVertex(courseCode(course));
   })
 
-  // helper functiosn for doing prereq graph edges.
+  // helper functions for doing prereq graph edges.
+  // rely on having local reference "graph" available.
 
   /**
    * Checks whether or not the prereq's edges exist in the graph "graph"
@@ -528,6 +531,8 @@ function createPrerequisiteGraph(filteredRequirements) {
     return false;
   }
 
+  // following functions rely on local reference "completed" 
+
   /**
    * Recursively adds the prereq edges of a prereq object to a graph, for a specified course.
    * @param {String} to The courseCode of the course we are computing prereqs for. Creates edges to here.
@@ -570,10 +575,20 @@ function createPrerequisiteGraph(filteredRequirements) {
         // if we are another prereq, mark.
         markPrereq(to, course);
       } else {
-        // if we are a defined cours, mark.
+        // if we are a defined course, mark.
         let from = courseCode(course);
         graph.addVertex(from);
         graph.addEdge(from, to); 
+
+        // next mark all the prerequisites of the local course itself, if they exist.
+        let prereqCourseData = curriedGetSearchNEUData(course);
+        if (prereqCourseData && prereqCourseData.prereqs) {
+          let nestedPrereqs = filterAndSimplifyPrereqs(completed, [prereqCourseData])[0].prereqs;
+          
+          console.log("attempting to log prereqs of: " + from + " with prereqs:");
+          console.log(nestedPrereqs);
+          markPrereq(from, nestedPrereqs);
+        }
       }
     });
   }
@@ -623,20 +638,32 @@ function createPrerequisiteGraph(filteredRequirements) {
     // if none of the courses were satisfied, add the last vertex and edge.
     // we'd prefer to add a normal prereq (non-nested) before a nested.
     if (!satisfied) {
-      let from;
+      let course;
 
       // find the proper index to add.
       if (lastNormalIndex !== -1) {
-        from = courseCode(prereq.values[lastNormalIndex]);
+        course = prereq.values[lastNormalIndex];
       } else if (lastNestedIndex !== -1) {
-        from = courseCode(prereq.values[lastNestedIndex]);
+        course = prereq.values[lastNestedIndex];
       } else {
         throw "empty prereq object!";
       }
 
-      // add the item at the index.
+      // if we are a defined course, mark.
+      let from = courseCode(course);
       graph.addVertex(from);
-      graph.addEdge(from, to);
+      graph.addEdge(from, to); 
+
+      // next mark all the prerequisites of the local course itself, if they exist.
+      let prereqCourseData = curriedGetSearchNEUData(course);
+
+      if (prereqCourseData && prereqCourseData.prereqs) {
+        let nestedPrereqs = filterAndSimplifyPrereqs(completed, [prereqCourseData])[0].prereqs;
+        
+        console.log("attempting to log prereqs of: " + from + " with prereqs:");
+        console.log(nestedPrereqs);
+        markPrereq(from, nestedPrereqs);
+      }
     }
   }
 
@@ -680,15 +707,16 @@ function createPrerequisiteGraph(filteredRequirements) {
  * @param {JSON} schedule The schedule in JSON format.
  * @param {Class[]} completed The completed classes (in SearchNEU format).
  * @param {Class[]} remainingRequirements The remaining requirements (in SearchNEU format).
+ * @param {Function} curriedGetSearchNEUData A function course => course that produces searchNEU data for a course.
  */
-function addRequired(schedule, completed, remainingRequirements) {
+function addRequired(schedule, completed, remainingRequirements, curriedGetSearchNEUData) {
   // precondition: schedule is full up to some point. need to fill with remaining requirements.
   
   // filter and simplify the requirements according to completed classes.
   let newRequirements = filterAndSimplifyPrereqs(completed, remainingRequirements);
 
   // use those filtered classes to greate a prerequisite edge graph.
-  let topo = createPrerequisiteGraph(newRequirements);
+  let topo = createPrerequisiteGraph(completed, newRequirements, curriedGetSearchNEUData);
 
   // we should now have a complete graph with edges.
   console.log(topo.adjList);
@@ -801,18 +829,29 @@ function toSchedule(inputLocation, outputLocation, classMapParent) {
   // get the remaining required classes, in searchNEU format
   let remainingRequirements = lookupIfDataExists(getRemainingRequirements(audit.requirements.classes, audit.completed.classes));
 
+  // create a curried form of getSearchNEUData
+  let curriedGetData = course => getSearchNEUData(course, classMapParent);
+
   // add the remaining required classes.
   // note, expects data in SearchNEU format
-  addRequired(schedule, completed, remainingRequirements);
+  addRequired(schedule, completed, remainingRequirements, curriedGetData);
 
   // the output JSON
   let JSONSchedule = JSON.stringify(schedule, null, 2);
   // console.log("schedule: \n" + JSONSchedule);
 
   // TESTING. REMOVE LATER!
-  let allRequired = lookupIfDataExists(audit.requirements.classes);
+  // let allRequired = lookupIfDataExists(audit.requirements.classes);
+  
 
-  addRequired(schedule, [], [getSearchNEUData({"subject":"CS", "classId":"3500"}, classMapParent)]);
+  // getFileAsJson("../201960.json").then(json => {
+  //   let ood = json["classMap"]["neu.edu/201960/CS/3500"];
+  //   console.log("from direct: \n" + ood.prereqs);
+  //   addRequired(schedule, [], [ood], curriedGetData);
+  // });
+
+  // console.log("from parent:\n" + classMapParent["201960"]["classMap"]["neu.edu/201960/CS/3500"]["prereqs"]);
+  
   // END TESTING.
   
   // output the file to ./schedule.json.
