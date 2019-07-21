@@ -17,7 +17,7 @@
 const fs = require('fs');
 
 // location of the input file
-const INPUT = '../test/mock_audits/cs_math_grad_audit.html';
+const INPUT = '../test/mock_audits/cs_audit.html';
 
 // location of the output file
 const OUTPUT = 'parsed_audit.json';
@@ -103,39 +103,39 @@ function add_courses_to_take(json, lines, j) {
 
         // excludes empty spaces and wildcard characters from course list
         if(!(courseList[i] === ' ' || courseList[i] === '' || courseList[i] === '****' || contains(courseList[i], '&amp;'))) {
-            course.subject = courseList[i].substring(0, 4).split(' ').join('');
+            course.subject = courseList[i].substring(0, 4).replace(/\s/g, '');
 
             // determines whether we're looking at an enumeration (list of required courses of which 1+ should be taken)
             if(contains(lines[j - 1], ' of the following courses')) {
                 // if the enumeration has not been seen before, create a new course
                 if(!seenEnumeration) {
-                    course.list = [courseList[i].substring(4, 10)];
+                    course.list = [courseList[i].substring(4, 10).replace(/\s/g, '')];
                     course.num_required = lines[j - 1].substring(lines[j - 1].search('Complete') + 'Complete ('.length, lines[j - 1].search('Complete') + 'Complete ('.length+1) 
                     seenEnumeration = true;
                     courses.push(course);
                     // if the enumeration has not been seen before, add this course's number to the course
                 } else {
-                    courses[courses.length - 1].list.push(courseList[i].substring(1, 5));
+                    courses[courses.length - 1].list.push(courseList[i].substring(1, 5).replace(/\s/g, ''));
                 }
             } 
 
             // if the written subject was actually a number, the course was referencing the subject provided by a previous line 
             // and as such did not restate the subject
             else if(hasNumber(course.subject)) {
-                course.classId = courseList[i].substring(0, 5).split(' ').join('');
+                course.classId = courseList[i].substring(0, 5).replace(/\s/g, '');
                 course.subject = type;
                 courses.push(course);
             } 
 
             // finds the latter of a defined course range; the course can be any course within a range
             else if(course.subject == 'TO') {
-                courses[courses.length - 1].classId2 = courseList[i].substring(4, 10);	
+                courses[courses.length - 1].classId2 = courseList[i].substring(4, 10).replace(/\s/g, '');
             } 
 
             // the course is (likely) a standard course, create it with the expected information
             else {
                 type = course.subject;
-                course.classId = courseList[i].substring(4, 10);	
+                course.classId = courseList[i].substring(4, 10).replace(/\s/g, '');
                 courses.push(course);
             }
         }
@@ -153,11 +153,13 @@ function add_course_taken(json, line) {
     let courseString = line.substring(line.search('(FL|SP|S1|S2|SM)'));
     course.hon = contains(line, '\(HON\)');
 
-    // ap courses that do not count for credit do not have numbers / attributes for corresponding college courses
-    if(!contains(courseString, '(NO AP|NO IB)')) {
-        course.subject = line.substring(line.search('(FL|SP|S1|S2|SM)') + 5, line.search('(FL|SP|S1|S2|SM)') + 9).replace(' ', '').replace(' ', '');
-        course.classId = courseString.substring(9, 13);
-    }
+    // ap courses that do not count for credit do not count for corresponding college courses
+    if(contains(courseString, '(NO AP|NO IB)')) {
+        return;
+    }    
+    
+    course.subject = line.substring(line.search('(FL|SP|S1|S2|SM)') + 5, line.search('(FL|SP|S1|S2|SM)') + 9).replace(' ', '').replace(' ', '');
+    course.classId = courseString.substring(9, 13);
 
     // locates the rest of the parameters with some regex magic
     course.credithours = courseString.substring(18, 22);
@@ -167,7 +169,7 @@ function add_course_taken(json, line) {
     course.termId = get_termid(course.season, course.year);
     // determines whether the course is 'in progress' or completed and sorts accordingly
 
-    if(isNaN(course.classId)) {
+    if(isNaN(course.classId) || course.classId == null || isNaN(course.credithours) || course.credithours == null) {
         return; 
         // not a valid course if the course id is not a number
     }
@@ -304,7 +306,6 @@ function contains_course(arr, course) {
 }
 
 // prints out the requirements to ensure they are in the correct format
-// fs.writeFileSync(OUTPUT, JSON.stringify(audit_to_json(fs.readFileSync(INPUT, 'utf8'))));
 
 // functions to export for testing
 module.exports.audit_to_json = audit_to_json;
