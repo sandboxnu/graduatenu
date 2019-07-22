@@ -1083,9 +1083,17 @@ test('Verifies that the CS Math degree audit is properly reproduced by the code'
                         "subject":"CS",
                         "classId":"1210"
                     },
-                    {  
+                    {
+                        "subject":"CS",
+                        "classId":"2801"
+                    }, 
+                    {
                         "subject":"CS",
                         "classId":"2510"
+                    },
+                    {  
+                        "subject":"CS",
+                        "classId":"2511"
                     },
                     {  
                         "subject":"CS",
@@ -1123,14 +1131,6 @@ test('Verifies that the CS Math degree audit is properly reproduced by the code'
                         "subject":"MATH",
                         "classId":"3001",
                         "classId2":"4999"
-                    },
-                    {
-                        "subject":"CS",
-                        "classId":"2801"
-                    },
-                    {
-                        "subject":"CS",
-                        "classId":"2511"
                     },
                     {  
                         "subject":"ENGW",

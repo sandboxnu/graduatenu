@@ -126,6 +126,7 @@ function add_courses_to_take(json, lines, j, subjectType) {
                 if(contains(lines[j - 1], ' of the following courses')) {
                     if(courses[courses.length - 1].list == null) {
                         courses[courses.length - 1].list = [courses[courses.length - 1].classId, maybeCourseNumber];
+                        courses[courses.length - 1].num_required = lines[j - 1].substring(lines[j - 1].search('Complete') + 'Complete ('.length, lines[j - 1].search('Complete') + 'Complete ('.length+1); 
                         delete courses[courses.length - 1].classId;
                     } else {
                         courses[courses.length - 1].list.push(maybeCourseNumber);
