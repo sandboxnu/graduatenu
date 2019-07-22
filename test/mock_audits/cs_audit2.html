@@ -1,0 +1,534 @@
+<!-- firstTime = 0 -->
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252"><title>Web Audit</title>
+ <style type="text/css">
+ <!--
+  body, a {font-family: arial, helvetica, sans-serif}
+  h1 {font-family: arial, helvetica, sans-serif; font-size: x-large; pause: 200% 150%}
+  h2 {font-family: arial, helvetica, sans-serif; font-size: large; pause: 200% 150%}
+  h3 {font-family: arial, helvetica, sans-serif; font-size: medium; pause: 200% 150%}
+  .auditText{font-family: Courier, Courier New, mono;}
+  .auditPreviewText{text-family: courier, courier new, mono; color:black; font-size:10pt;}
+ -->
+ </style>
+</head><body>
+<div align="center"><img src="Web%20Audit_files/myneupawslogo.gif" alt="Dars Header" border="0"></div>
+  <script language="JavaScript">
+  <!--
+  function openBrWindow(theURL,winName,features) { //v2.0
+    window.open(theURL,winName,features);
+  }
+  //-->
+  </script>
+<div align="center"><h1></h1></div>
+    <table summary="This table serves as a navigation bar.  Main menu items are in the first row. 
+    If sub menu items exist, they will appear in the column below the main menu item 
+    for the area of the web site you are currently in. " width="769" cellspacing="3" cellpadding="1" border="0" bgcolor="#FFFFFF">
+     <tbody><tr> 												
+       <th scope="col" abbr="Logout" width="122" bgcolor="#d2b48c" align="center"><a href="https://prod-web.neu.edu/wasapp/DARSStudent/LogoutServlet"><b>Logout</b></a></th> 	
+       <td width="122" bgcolor="white" align="center">&nbsp;</td> 		
+       <td width="17" bgcolor="white" align="center">&nbsp;</td> 		
+       <th scope="col" abbr="Courses" width="122" bgcolor="#d2b48c" align="center"><a href="https://prod-web.neu.edu/wasapp/DARSStudent/InstitutionCourseListServlet"><b>Courses</b></a></th> 								
+       <th scope="col" abbr="Audits" width="122" bgcolor="#ffe4c4" align="center"><a href="https://prod-web.neu.edu/wasapp/DARSStudent/ListAuditsServlet?instidq=73&amp;instcd=&amp;instid=002199"><b>Audits</b></a></th> 	
+       <th scope="col" abbr="What-if Courses" width="122" bgcolor="#d2b48c" align="center"><a href="https://prod-web.neu.edu/wasapp/DARSStudent/excWhatifServlet"><b>What-if Courses</b></a></th> 	
+     </tr> 	 											
+     <tr> 	 											
+       <td colspan="2" width="122" height="20" bgcolor="white" align="center">Email <a href="mailto:mypaws@neu.edu?subject=myPAWS Web feedback">mypaws@neu.edu</a></td> 		
+       <td width="17" bgcolor="white" align="center">&nbsp;</td> 		
+       <td width="122" bgcolor="white" align="center">&nbsp;</td> 		
+       <td width="122" bgcolor="#ffe4c4" align="center"><a href="https://prod-web.neu.edu/wasapp/DARSStudent/RequestAuditServlet">Request New</a></td> 	
+       <td width="122" bgcolor="white" align="center">&nbsp;</td> 		
+       <td width="122" bgcolor="white" align="center">&nbsp;</td> 		
+       <td width="122" bgcolor="white" align="center">&nbsp;</td> 		
+       <td width="122" bgcolor="white" align="center">&nbsp;</td> 		
+     </tr> 												
+     <tr> 												
+       <td width="122" height="20" bgcolor="white" align="center">&nbsp;</td> 		
+       <td width="122" bgcolor="white" align="center">&nbsp;</td> 		
+       <td width="17" bgcolor="white" align="center">&nbsp;</td> 		
+       <td width="122" bgcolor="white" align="center">&nbsp;</td> 		
+       <td width="122" bgcolor="#ffe4c4" align="center"><a href="#" onclick="openBrWindow('/darshtml/help/audit_FAQ.html','','scrollbars=yes,resizable=yes,width=750,height=550')">Audit Help</a></td> 	
+       <td width="122" bgcolor="white" align="center">&nbsp;</td> 		
+       <td width="122" bgcolor="white" align="center">&nbsp;</td> 		
+       <td width="122" bgcolor="white" align="center">&nbsp;</td> 		
+       <td width="122" bgcolor="white" align="center">&nbsp;</td> 		
+     </tr> 	 											
+    </tbody></table>  											
+<table width="100%" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td><a href="https://prod-web.neu.edu/wasapp/DARSStudent/ParseFriendlyServlet?DETAILS=2019072211350468&amp;int_seq_no=6718358"><font size="3">Printer Friendly Version</font></a></td>
+<td>
+</td></tr></tbody></table>
+<table width="100%" cellspacing="0" cellpadding="2" border="0" bgcolor="d2b48c">
+<tbody><tr><td>
+<table width="100%" cellspacing="0" cellpadding="2" border="0" bgcolor="ffffff">
+ <tbody><tr><td width="2%"><form name="back"><input type="button" value="              Back               " onclick="history.go(-1)"></form></td>
+    <td width="2%"><form name="increaseFontSize" method="post" action="ParseAuditServlet">
+      <input type="hidden" name="job_id" value="2019072211350468">
+      <input type="hidden" name="int_seq_no" value="6718358">
+      <input type="hidden" name="increaseFont" value="+1">
+      <input type="submit" name="changeFontSize" value=" Increase Font Size "></form></td>
+    <td width="2%"><form name="decreaseFontSize" method="post" action="ParseAuditServlet">
+      <input type="hidden" name="job_id" value="2019072211350468">
+      <input type="hidden" name="int_seq_no" value="6718358">
+      <input type="hidden" name="decreaseFont" value="-1">
+      <input type="submit" name="changeFontSize" value="Decrease Font Size"></form></td>
+    <td width="92%">&nbsp;</td>
+ </tr>
+<tr><td colspan="5" font="" size="2">
+<pre><a name="linkback"></a>
+<b><font class="auditText" size="2" color="black">PREPARED: 07/22/19 - 11:35                          999999999</font></b>
+<b><font class="auditText" size="2" color="black">FAYE            KAUDET                  GRADUATION DATE: 08/20/22</font></b>
+<b><font class="auditText" size="2" color="black">PROGRAM CODE: CCIS-CSCI-BSCS                 CATALOG YEAR: 201910</font></b>
+<b><font class="auditText" size="2" color="black">BSCS Computer Science</font></b>
+<b><font class="auditText" size="2" color="black">Computer Science - Major</font></b>
+ <br><a href="#link10"><img src="Web%20Audit_files/arrows_red_051.gif" alt="See Details" border="0" align="BOTTOM"></a> <font class="auditText" size="2" color="maroon"><b>NO     COMPUTER SCIENCE MAJOR REQUIREMENTS                       </b> </font>
+ <br><a href="#link67"><img src="Web%20Audit_files/arrows_red_051.gif" alt="See Details" border="0" align="BOTTOM"></a> <font class="auditText" size="2" color="navy"><b>IP     SUPPORTING COURSES for BS                                 </b> </font>
+ <br><a href="#link86"><img src="Web%20Audit_files/arrows_red_051.gif" alt="See Details" border="0" align="BOTTOM"></a> <font class="auditText" size="2" color="navy"><b>OK     SUPPORTING SCIENCE COURSES for BS                         </b> </font>
+ <br><a href="#link97"><img src="Web%20Audit_files/arrows_red_051.gif" alt="See Details" border="0" align="BOTTOM"></a> <font class="auditText" size="2" color="maroon"><b>NO     COMPUTER SCIENCE WRITING REQUIREMENT                      </b> </font>
+ <br><a href="#link109"><img src="Web%20Audit_files/arrows_red_051.gif" alt="See Details" border="0" align="BOTTOM"></a> <font class="auditText" size="2" color="maroon"><b>NO     REQUIRED GENERAL ELECTIVES                                </b> </font>
+ <br><a href="#link123"><img src="Web%20Audit_files/arrows_red_051.gif" alt="See Details" border="0" align="BOTTOM"></a> <font class="auditText" size="2" color="navy"><b>IP     MAJOR GPA REQUIREMENT                                     </b> </font>
+ <br><a href="#link128"><img src="Web%20Audit_files/arrows_red_051.gif" alt="See Details" border="0" align="BOTTOM"></a> <font class="auditText" size="2" color="navy"><b>IP     COMPUTER SCIENCE CREDIT REQUIREMENTS                      </b> </font>
+ <br><a href="#link172"><img src="Web%20Audit_files/arrows_red_051.gif" alt="See Details" border="0" align="BOTTOM"></a> <font class="auditText" size="2" color="maroon"><b>       ADDITIONAL COURSE INFORMATION                             </b> </font>
+ <br><a href="#link198"><img src="Web%20Audit_files/arrows_red_051.gif" alt="See Details" border="0" align="BOTTOM"></a> <font class="auditText" size="2" color="navy"><b>       NUpath                                                    </b> </font>
+<spacer type="HORIZONTAL"><font class="auditText" size="2"><font class="auditText" size="2" color="navy"><b>       See Individual Requirements for Completion Status Below   </b> </font>
+<spacer type="HORIZONTAL"><font class="auditText" size="2">
+<spacer type="HORIZONTAL"><font class="auditText" size="2"><font class="auditText" size="2" color="navy"><b>       For a list of course options, click "NUP" below:          </b> </font>
+<spacer type="HORIZONTAL"><font class="auditText" size="2"><font class="auditText" size="2" color="navy"><b>       <a href="http://www.neu.edu/registrar/db-ugd.html">NUP</a></b> </font>
+<spacer type="HORIZONTAL"><font class="auditText" size="2">
+<spacer type="HORIZONTAL"><font class="auditText" size="2"><font class="auditText" size="2" color="navy"><b>       NOTE: Only five of the first eight categories (through    </b> </font>
+<spacer type="HORIZONTAL"><font class="auditText" size="2"><font class="auditText" size="2" color="navy"><b>        Ethical Reasoning) may be satisfied by transfer work.    </b> </font>
+<spacer type="HORIZONTAL"><font class="auditText" size="2">
+<spacer type="HORIZONTAL"><font class="auditText" size="2"><font class="auditText" size="2" color="navy"><b>        No course taken pass/fail can be used toward NUpath.     </b> </font>
+ <br><a href="#link209"><img src="Web%20Audit_files/arrows_red_051.gif" alt="See Details" border="0" align="BOTTOM"></a> <font class="auditText" size="2" color="navy"><b>OK     NATURAL and DESIGNED WORLD (ND)                           </b> </font>
+ <br><a href="#link214"><img src="Web%20Audit_files/arrows_red_051.gif" alt="See Details" border="0" align="BOTTOM"></a> <font class="auditText" size="2" color="maroon"><b>NO     CREATIVE EXPRESSION/INNOVATION (EI)                       </b> </font>
+ <br><a href="#link218"><img src="Web%20Audit_files/arrows_red_051.gif" alt="See Details" border="0" align="BOTTOM"></a> <font class="auditText" size="2" color="navy"><b>OK     INTERPRETING CULTURE (IC)                                 </b> </font>
+ <br><a href="#link223"><img src="Web%20Audit_files/arrows_red_051.gif" alt="See Details" border="0" align="BOTTOM"></a> <font class="auditText" size="2" color="navy"><b>OK     FORMAL and QUANTITATIVE REASONING (FQ)                    </b> </font>
+ <br><a href="#link229"><img src="Web%20Audit_files/arrows_red_051.gif" alt="See Details" border="0" align="BOTTOM"></a> <font class="auditText" size="2" color="navy"><b>IP     SOCIETIES and INSTITUTIONS (SI)                           </b> </font>
+ <br><a href="#link234"><img src="Web%20Audit_files/arrows_red_051.gif" alt="See Details" border="0" align="BOTTOM"></a> <font class="auditText" size="2" color="navy"><b>OK     ANALYZING/USING DATA (AD)                                 </b> </font>
+ <br><a href="#link239"><img src="Web%20Audit_files/arrows_red_051.gif" alt="See Details" border="0" align="BOTTOM"></a> <font class="auditText" size="2" color="navy"><b>OK     DIFFERENCE and DIVERSITY (DD)                             </b> </font>
+ <br><a href="#link244"><img src="Web%20Audit_files/arrows_red_051.gif" alt="See Details" border="0" align="BOTTOM"></a> <font class="auditText" size="2" color="navy"><b>IP     ETHICAL REASONING (ER)                                    </b> </font>
+ <br><a href="#link249"><img src="Web%20Audit_files/arrows_red_051.gif" alt="See Details" border="0" align="BOTTOM"></a> <font class="auditText" size="2" color="navy"><b>OK     FIRST YEAR WRITING (WF)                                   </b> </font>
+ <br><a href="#link255"><img src="Web%20Audit_files/arrows_red_051.gif" alt="See Details" border="0" align="BOTTOM"></a> <font class="auditText" size="2" color="maroon"><b>NO     WRITING INTENSIVE (WI)                                    </b> </font>
+ <br><a href="#link260"><img src="Web%20Audit_files/arrows_red_051.gif" alt="See Details" border="0" align="BOTTOM"></a> <font class="auditText" size="2" color="maroon"><b>NO     ADVANCED WRITING IN THE DISCIPLINES (WD)                  </b> </font>
+ <br><a href="#link265"><img src="Web%20Audit_files/arrows_red_051.gif" alt="See Details" border="0" align="BOTTOM"></a> <font class="auditText" size="2" color="maroon"><b>NO     INTEGRATION EXPERIENCE (EX)                               </b> </font>
+ <br><a href="#link269"><img src="Web%20Audit_files/arrows_red_051.gif" alt="See Details" border="0" align="BOTTOM"></a> <font class="auditText" size="2" color="maroon"><b>NO     CAPSTONE EXPERIENCE (CE)                                  </b> </font>
+ <br><a href="#link277"><img src="Web%20Audit_files/arrows_red_051.gif" alt="See Details" border="0" align="BOTTOM"></a> <font class="auditText" size="2" color="maroon"><b>       GENERAL ELECTIVES                                         </b> </font>
+ <br><a href="#link284"><img src="Web%20Audit_files/arrows_red_051.gif" alt="See Details" border="0" align="BOTTOM"></a> 
+ <br><a href="#link305"><img src="Web%20Audit_files/arrows_red_051.gif" alt="See Details" border="0" align="BOTTOM"></a> <font class="auditText" size="2" color="maroon"><b>       HONORS COURSES                                            </b> </font>
+<spacer type="HORIZONTAL"><font class="auditText" size="2">
+<spacer type="HORIZONTAL"><font class="auditText" size="2"><font class="auditText" size="2" color="maroon"><b>       PLEASE NOTE: See the EARNED and NEEDS catagories below to </b> </font>
+<spacer type="HORIZONTAL"><font class="auditText" size="2"><font class="auditText" size="2" color="maroon"><b>       determine the number of honors courses that have been     </b> </font>
+<spacer type="HORIZONTAL"><font class="auditText" size="2"><font class="auditText" size="2" color="maroon"><b>       taken.                                                    </b> </font>
+<spacer type="HORIZONTAL"><font class="auditText" size="2">
+<spacer type="HORIZONTAL"><font class="auditText" size="2"><font class="auditText" size="2" color="maroon"><b>       If lecture and lab courses are both listed as honors they </b> </font>
+<spacer type="HORIZONTAL"><font class="auditText" size="2"><font class="auditText" size="2" color="maroon"><b>       will count as a single honors course. Students who go on  </b> </font>
+<spacer type="HORIZONTAL"><font class="auditText" size="2"><font class="auditText" size="2" color="maroon"><b>       an Honors dialogue will receive credit for two Honors     </b> </font>
+<spacer type="HORIZONTAL"><font class="auditText" size="2"><font class="auditText" size="2" color="maroon"><b>       courses.                                                  </b> </font>
+<spacer type="HORIZONTAL"><font class="auditText" size="2">
+ <br><a href="#link322"><img src="Web%20Audit_files/arrows_red_051.gif" alt="See Details" border="0" align="BOTTOM"></a> <font class="auditText" size="2" color="navy"><b>IP     RESIDENCY REQUIREMENT                                     </b> </font>
+<spacer type="HORIZONTAL"><font class="auditText" size="2"><font class="auditText" size="2" color="navy"><b>       A minimum of 64 hours are required at NU                  </b> </font>
+ <br><a href="#link330"><img src="Web%20Audit_files/arrows_red_051.gif" alt="See Details" border="0" align="BOTTOM"></a> <font class="auditText" size="2" color="maroon"><b>NO     UNIVERSITY WIDE REQUIREMENTS                              </b> </font>
+ <br><a href="#link343"><img src="Web%20Audit_files/arrows_red_051.gif" alt="See Details" border="0" align="BOTTOM"></a> <font class="auditText" size="2" color="navy"><b>       LEGEND                                                    </b> </font>
+<br><br><br><br><hr><br>
+<pre><br><br><hr>
+<font class="auditText" size="2" color="black">AT LEAST ONE REQUIREMENT HAS NOT BEEN SATISFIED</font>
+<br><br><hr>
+<font class="auditText" size="2" color="black">                                                   CS-MAJ        </font>
+ <a name="link10"></a><br><a href="#linkback"><img src="Web%20Audit_files/arrows_red_050.gif" alt="Back to Top" border="0"></a> <font class="auditText" size="2" color="maroon"><b>NO     COMPUTER SCIENCE MAJOR REQUIREMENTS                       </b> </font>
+<p>
+<i><font class="auditText" size="2" color="black">  -     COMPUTER SCIENCE OVERVIEW                                </font></i>
+<i><font class="auditText" size="2" color="black">         Complete the following (2) courses:                     </font></i>
+<font class="auditText" size="2" color="#008000">      FL18 CS  1200     1.00 A-     Leadership Skill Development </font>
+               <font class="auditText" size="2" color="black">       Course List: <font size="2" color="black"><a class="auditText" target="_blank" href="https://prod-web.neu.edu/wasapp/DARSAdvisor/BannerCourseRedirectServlet?subj_code_in=CS&amp;crse_numb_in=1210">CS  1210</a></font> </font>
+               <font class="auditText" size="2" color="black">          ADVISOR USE:<font size="2" color="black"><a class="auditText" target="_blank" href="https://prod-web.neu.edu/wasapp/DARSAdvisor/BannerCourseRedirectServlet?subj_code_in=CS-M&amp;crse_numb_in=AJOVA">CS-MAJOVA</a></font> </font>
+</p><p>
+<i><font class="auditText" size="2" color="black">  +     DISCRETE STRUCTURES                                      </font></i>
+<i><font class="auditText" size="2" color="black">         Complete the following (1) course with its (1)          </font></i>
+<i><font class="auditText" size="2" color="black">         corresponding lab. A grade of C- or higher is           </font></i>
+<i><font class="auditText" size="2" color="black">         required in CS  1800.                                   </font></i>
+<font class="auditText" size="2" color="#008000">      FL18 CS  1800     4.00 A      Discrete Structures          </font>
+<font class="auditText" size="2" color="#008000">      FL18 CS  1802     1.00 A      Seminar for CS 1800          </font>
+</p><p>
+</p><p>
+<i><font class="auditText" size="2" color="black">  +     COMPUTER SCIENCE FUNDAMENTAL COURSES                     </font></i>
+<font class="auditText" size="2" color="#008000">      FL18 CS  2500     4.00 A      Fundamentals of Computer Sci </font>
+<font class="auditText" size="2" color="#008000">      FL18 CS  2501     1.00 A      Lab for CS 2500              </font>
+<font class="auditText" size="2" color="#008000">      SP19 CS  2510     4.00 A-     Fundamentals of Computer Sci </font>
+<font class="auditText" size="2" color="#008000">      SP19 CS  2511     1.00 A-     Lab for CS 2510              </font>
+<font class="auditText" size="2" color="#008000">      SP19 CS  2800     4.00 A      Logic and Computation        </font>
+<font class="auditText" size="2" color="#008000">      SP19 CS  2801     1.00 A      Lab for CS 2800              </font>
+</p><p>
+<i><font class="auditText" size="2" color="black">IP-     COMPUTER SCIENCE REQUIRED COURSES                        </font></i>
+<i><font class="auditText" size="2" color="black">         Complete the following (7) courses:                     </font></i>
+<font class="auditText" size="2" color="#008000">      S219 CS  3000     4.00 RG  IP Algorithms &amp; Data            </font>
+<font class="auditText" size="2" color="#008000">      FL19 CS  3500     4.00 RG  IP Object-Oriented Design       </font>
+<font class="auditText" size="2" color="#008000">      FL19 CS  3650     4.00 RG  IP Computer Systems             </font>
+<font class="auditText" size="2" color="#008000">      FL19 CS  3800     4.00 RG  IP Theory of Computation        </font>
+               <font class="auditText" size="2" color="black">       Course List: <font size="2" color="black"><a class="auditText" target="_blank" href="https://prod-web.neu.edu/wasapp/DARSAdvisor/BannerCourseRedirectServlet?subj_code_in=CS&amp;crse_numb_in=3700">CS  3700</a></font> <font size="2" color="black"><a class="auditText" target="_blank" href="https://prod-web.neu.edu/wasapp/DARSAdvisor/BannerCourseRedirectServlet?subj_code_in=CS&amp;crse_numb_in=4400">4400</a></font> <font size="2" color="black"><a class="auditText" target="_blank" href="https://prod-web.neu.edu/wasapp/DARSAdvisor/BannerCourseRedirectServlet?subj_code_in=CS&amp;crse_numb_in=4500">4500</a></font> </font>
+               <font class="auditText" size="2" color="black">          ADVISOR USE:<font size="2" color="black"><a class="auditText" target="_blank" href="https://prod-web.neu.edu/wasapp/DARSAdvisor/BannerCourseRedirectServlet?subj_code_in=CS-M&amp;crse_numb_in=AJREQA">CS-MAJREQA</a></font> </font>
+</p><p>
+<i><font class="auditText" size="2" color="black">  -     COMPUTER SCIENCE SENIOR SEMINAR                          </font></i>
+<i><font class="auditText" size="2" color="black">         Complete the following (1) course:                      </font></i>
+               <font class="auditText" size="2" color="black">       Course List: <font size="2" color="black"><a class="auditText" target="_blank" href="https://prod-web.neu.edu/wasapp/DARSAdvisor/BannerCourseRedirectServlet?subj_code_in=THTR&amp;crse_numb_in=1170">THTR1170</a></font> </font>
+               <font class="auditText" size="2" color="black">          ADVISOR USE:<font size="2" color="black"><a class="auditText" target="_blank" href="https://prod-web.neu.edu/wasapp/DARSAdvisor/BannerCourseRedirectServlet?subj_code_in=CS-M&amp;crse_numb_in=AJSEMA">CS-MAJSEMA</a></font> </font>
+</p><p>
+<i><font class="auditText" size="2" color="black">  -     COMPUTER SCIENCE CAPSTONE                                </font></i>
+<i><font class="auditText" size="2" color="black">         Complete (1) of the following courses that fulfill      </font></i>
+<i><font class="auditText" size="2" color="black">         the University capstone requirement.                    </font></i>
+               <font class="auditText" size="2" color="black">       Course List: <font size="2" color="black"><a class="auditText" target="_blank" href="https://prod-web.neu.edu/wasapp/DARSAdvisor/BannerCourseRedirectServlet?subj_code_in=CS&amp;crse_numb_in=4100">CS  4100</a></font> <font size="2" color="black"><a class="auditText" target="_blank" href="https://prod-web.neu.edu/wasapp/DARSAdvisor/BannerCourseRedirectServlet?subj_code_in=CS&amp;crse_numb_in=4300">4300</a></font> <font size="2" color="black"><a class="auditText" target="_blank" href="https://prod-web.neu.edu/wasapp/DARSAdvisor/BannerCourseRedirectServlet?subj_code_in=CS&amp;crse_numb_in=4410">4410</a></font> <font size="2" color="black"><a class="auditText" target="_blank" href="https://prod-web.neu.edu/wasapp/DARSAdvisor/BannerCourseRedirectServlet?subj_code_in=CS&amp;crse_numb_in=4150">4150</a></font> <font size="2" color="black"><a class="auditText" target="_blank" href="https://prod-web.neu.edu/wasapp/DARSAdvisor/BannerCourseRedirectServlet?subj_code_in=CS&amp;crse_numb_in=4550">4550</a></font> <font size="2" color="black"><a class="auditText" target="_blank" href="https://prod-web.neu.edu/wasapp/DARSAdvisor/BannerCourseRedirectServlet?subj_code_in=CS&amp;crse_numb_in=4991">4991</a></font> <font size="2" color="black"><a class="auditText" target="_blank" href="https://prod-web.neu.edu/wasapp/DARSAdvisor/BannerCourseRedirectServlet?subj_code_in=IS&amp;crse_numb_in=4900">IS  4900</a></font> </font>
+               <font class="auditText" size="2" color="black">          ADVISOR USE:<font size="2" color="black"><a class="auditText" target="_blank" href="https://prod-web.neu.edu/wasapp/DARSAdvisor/BannerCourseRedirectServlet?subj_code_in=CS-M&amp;crse_numb_in=AJCAPA">CS-MAJCAPA</a></font> </font>
+</p><p>
+<i><font class="auditText" size="2" color="black">  -     COMPUTER SCIENCE UPPER DIVISION ELECTIVES                </font></i>
+<i><font class="auditText" size="2" color="black">         Complete 8SH of CS upper division electives.            </font></i>
+<i><font class="auditText" size="2" color="black">                                                                 </font></i>
+<i><font class="auditText" size="2" color="black">         With adviser approval, directed study, project study,   </font></i>
+<i><font class="auditText" size="2" color="black">         and appropriate graduate level courses may also be      </font></i>
+<i><font class="auditText" size="2" color="black">         taken as upper division electives.                      </font></i>
+<font class="auditText" size="2" color="#008000">      SP19 CS  2550     4.00 A      Foundations of Cybersecurity </font>
+               <font class="auditText" size="2" color="black">       -- NOT FROM: <font size="2" color="black"><a class="auditText" target="_blank" href="https://prod-web.neu.edu/wasapp/DARSAdvisor/BannerCourseRedirectServlet?subj_code_in=CS&amp;crse_numb_in=5010">CS  5010</a></font> <font size="2" color="black"><a class="auditText" target="_blank" href="https://prod-web.neu.edu/wasapp/DARSAdvisor/BannerCourseRedirectServlet?subj_code_in=DS&amp;crse_numb_in=4900">DS  4900</a></font> <font size="2" color="black"><a class="auditText" target="_blank" href="https://prod-web.neu.edu/wasapp/DARSAdvisor/BannerCourseRedirectServlet?subj_code_in=IS&amp;crse_numb_in=4900">IS  4900</a></font> </font>
+               <font class="auditText" size="2" color="black">       Course List: <font size="2" color="black"><a class="auditText" target="_blank" href="https://prod-web.neu.edu/wasapp/DARSAdvisor/BannerCourseRedirectServlet?subj_code_in=CS&amp;crse_numb_in=2500">CS  2500</a></font> TO <font size="2" color="black"><a class="auditText" target="_blank" href="https://prod-web.neu.edu/wasapp/DARSAdvisor/BannerCourseRedirectServlet?subj_code_in=CS&amp;crse_numb_in=7999">7999</a></font> <font size="2" color="black"><a class="auditText" target="_blank" href="https://prod-web.neu.edu/wasapp/DARSAdvisor/BannerCourseRedirectServlet?subj_code_in=DS&amp;crse_numb_in=2000">DS  2000</a></font> TO <font size="2" color="black"><a class="auditText" target="_blank" href="https://prod-web.neu.edu/wasapp/DARSAdvisor/BannerCourseRedirectServlet?subj_code_in=DS&amp;crse_numb_in=7999">7999</a></font> </font>
+               <font class="auditText" size="2" color="black">          <font size="2" color="black"><a class="auditText" target="_blank" href="https://prod-web.neu.edu/wasapp/DARSAdvisor/BannerCourseRedirectServlet?subj_code_in=IS&amp;crse_numb_in=2000">IS  2000</a></font> TO <font size="2" color="black"><a class="auditText" target="_blank" href="https://prod-web.neu.edu/wasapp/DARSAdvisor/BannerCourseRedirectServlet?subj_code_in=IS&amp;crse_numb_in=7999">7999</a></font> </font>
+               <font class="auditText" size="2" color="black">          ADVISOR USE:<font size="2" color="black"><a class="auditText" target="_blank" href="https://prod-web.neu.edu/wasapp/DARSAdvisor/BannerCourseRedirectServlet?subj_code_in=CS-M&amp;crse_numb_in=AJELECA">CS-MAJELECA</a></font> </font>
+<br><br></p><hr>
+<font class="auditText" size="2" color="black">                                                  CS-ADDBS       </font>
+ <a name="link67"></a><br><a href="#linkback"><img src="Web%20Audit_files/arrows_red_050.gif" alt="Back to Top" border="0"></a> <font class="auditText" size="2" color="navy"><b>IP     SUPPORTING COURSES for BS                                 </b> </font>
+<p>
+</p><p>
+<i><font class="auditText" size="2" color="black">IP+     MATHEMATICS COURSES                                      </font></i>
+<font class="auditText" size="2" color="#008000">      S218 MATH1341     4.00 T      Calculus BC ++               </font>
+<font class="auditText" size="2" color="#008000">                                    AP      : CALCAB SUBSCORE,CAL</font>
+<font class="auditText" size="2" color="#008000">      S218 MATH1342     4.00 T      Calculus BC ++               </font>
+<font class="auditText" size="2" color="#008000">                                    AP      : CALCAB SUBSCORE,CAL</font>
+<font class="auditText" size="2" color="#008000">      S219 MATH2331     4.00 RG  IP Linear Algebra               </font>
+<font class="auditText" size="2" color="#008000">      S119 MATH3081     4.00 A      Probability and Statistics   </font>
+</p><p>
+<i><font class="auditText" size="2" color="black">IP+     COMPUTING AND SOCIAL ISSUES                              </font></i>
+<i><font class="auditText" size="2" color="black">         Complete (1) of the following courses:                  </font></i>
+<font class="auditText" size="2" color="#008000">      FL19 PHIL1145     4.00 RG  IP Tech and Human Values (HON)  </font>
+</p><p>
+<i><font class="auditText" size="2" color="black">  +     ELECTRICAL ENGINEERING                                   </font></i>
+<font class="auditText" size="2" color="#008000">      S119 EECE2160     4.00 A      Embedded Des Enabling Robotic</font>
+<br><br></p><hr>
+<font class="auditText" size="2" color="black">                                                 CS-ADDBSS       </font>
+ <a name="link86"></a><br><a href="#linkback"><img src="Web%20Audit_files/arrows_red_050.gif" alt="Back to Top" border="0"></a> <font class="auditText" size="2" color="navy"><b>OK     SUPPORTING SCIENCE COURSES for BS                         </b> </font>
+<p>
+<i><font class="auditText" size="2" color="black">  +     PHYSICS:                                                 </font></i>
+<font class="auditText" size="2" color="#008000">      S218 PHYS1151     3.00 T      AP      : PHYSICS C-MECH     </font>
+<font class="auditText" size="2" color="#008000">      S218 PHYS1152     1.00 T      AP      : PHYSICS C-MECH     </font>
+<font class="auditText" size="2" color="#008000">      S218 PHYS1153     1.00 T      AP      : PHYSICS C-MECH     </font>
+<font class="auditText" size="2" color="#008000">      FL18 PHYS1155     3.00 A      Physics for Engineering  2   </font>
+<font class="auditText" size="2" color="#008000">      FL18 PHYS1156     1.00 A-     Lab for PHYS 1155            </font>
+<font class="auditText" size="2" color="#008000">      FL18 PHYS1157     1.00 A      Interact Learn for PHYS 1155 </font>
+<br><br></p><hr>
+<font class="auditText" size="2" color="black">                                                          CS-ENGL</font>
+ <a name="link97"></a><br><a href="#linkback"><img src="Web%20Audit_files/arrows_red_050.gif" alt="Back to Top" border="0"></a> <font class="auditText" size="2" color="maroon"><b>NO     COMPUTER SCIENCE WRITING REQUIREMENT                      </b> </font>
+<p>
+<i><font class="auditText" size="2" color="black">  +     COLLEGE WRITING                                          </font></i>
+<i><font class="auditText" size="2" color="black">         Complete the following (1) course:                      </font></i>
+<font class="auditText" size="2" color="#008000">      S218 ENGW1111     4.00 T      AP      : ENG LANG/COMP      </font>
+</p><p>
+<i><font class="auditText" size="2" color="black">  -     ADVANCED WRITING IN THE DISCIPLINES                      </font></i>
+<i><font class="auditText" size="2" color="black">         Complete (1) of the following courses.                  </font></i>
+               <font class="auditText" size="2" color="black">       Course List: <font size="2" color="black"><a class="auditText" target="_blank" href="https://prod-web.neu.edu/wasapp/DARSAdvisor/BannerCourseRedirectServlet?subj_code_in=ENGW&amp;crse_numb_in=3302">ENGW3302</a></font> <font size="2" color="black"><a class="auditText" target="_blank" href="https://prod-web.neu.edu/wasapp/DARSAdvisor/BannerCourseRedirectServlet?subj_code_in=ENGW&amp;crse_numb_in=3308">3308</a></font> <font size="2" color="black"><a class="auditText" target="_blank" href="https://prod-web.neu.edu/wasapp/DARSAdvisor/BannerCourseRedirectServlet?subj_code_in=ENGW&amp;crse_numb_in=3315">3315</a></font> </font>
+               <font class="auditText" size="2" color="black">          ADVISOR USE:<font size="2" color="black"><a class="auditText" target="_blank" href="https://prod-web.neu.edu/wasapp/DARSAdvisor/BannerCourseRedirectServlet?subj_code_in=CS-E&amp;crse_numb_in=NGLAWDA">CS-ENGLAWDA</a></font> </font>
+<br><br></p><hr>
+<font class="auditText" size="2" color="black">                                                         CS-ELE-8</font>
+ <a name="link109"></a><br><a href="#linkback"><img src="Web%20Audit_files/arrows_red_050.gif" alt="Back to Top" border="0"></a> <font class="auditText" size="2" color="maroon"><b>NO     REQUIRED GENERAL ELECTIVES                                </b> </font>
+<font class="auditText" size="2" color="black">    EARNED:                5 COURSES                             </font>
+<p>
+</p><p>
+<i><font class="auditText" size="2" color="black">  -      Complete 32 SH of general electives.                    </font></i>
+<font class="auditText" size="2" color="#008000">      S218 CS  1990     4.00 T   R  AP      : COMP SCI A         </font>
+<font class="auditText" size="2" color="#008000">      S218 CS  1990     4.00 T   R  AP      : COMP SCI PRINCI    </font>
+<font class="auditText" size="2" color="#008000">      S218 HIST1130     4.00 T      AP      : US HISTORY         </font>
+<font class="auditText" size="2" color="#008000">      FL18 MATH2321     4.00 A      Calculus 3 for Sci/Engr      </font>
+<font class="auditText" size="2" color="#008000">      SP19 HONR1310     4.00 A      Illusions of Reality         </font>
+<font class="auditText" size="2" color="black">         NEEDS:   12.0 HOURS                                     </font>
+               <font class="auditText" size="2" color="black">       Course List: <font size="2" color="black"><a class="auditText" target="_blank" href="https://prod-web.neu.edu/wasapp/DARSAdvisor/BannerCourseRedirectServlet?subj_code_in=&amp;crse_numb_in=">****</a></font> </font>
+               <font class="auditText" size="2" color="black">          ADVISOR USE:<font size="2" color="black"><a class="auditText" target="_blank" href="https://prod-web.neu.edu/wasapp/DARSAdvisor/BannerCourseRedirectServlet?subj_code_in=CS-O&amp;crse_numb_in=PENA">CS-OPENA</a></font> </font>
+<br><br></p><hr>
+ <a name="link123"></a><br><a href="#linkback"><img src="Web%20Audit_files/arrows_red_050.gif" alt="Back to Top" border="0"></a> <font class="auditText" size="2" color="navy"><b>IP     MAJOR GPA REQUIREMENT                                     </b> </font>
+<i><font class="auditText" size="2" color="black">IP+     Minimum 2.0 GPA required in all undergraduate CS and IS  </font></i>
+<i><font class="auditText" size="2" color="black">        courses.                                                 </font></i>
+<font class="auditText" size="2" color="black">           25.0 ATTEMPTED HOURS      98.0 POINTS  3.920 GPA      </font>
+<br><br><hr>
+ <a name="link128"></a><br><a href="#linkback"><img src="Web%20Audit_files/arrows_red_050.gif" alt="Back to Top" border="0"></a> <font class="auditText" size="2" color="navy"><b>IP     COMPUTER SCIENCE CREDIT REQUIREMENTS                      </b> </font>
+<p>
+<i><font class="auditText" size="2" color="black">IP+     Complete 60 in the major.                                </font></i>
+<i><font class="auditText" size="2" color="black">        Acceptable courses: CS courses(except CS  5010),         </font></i>
+<i><font class="auditText" size="2" color="black">        IS courses (except IS  4900) and DS courses.             </font></i>
+<font class="auditText" size="2" color="black">        (  83.0 EARNED HOURS )                                   </font>
+<font class="auditText" size="2" color="#008000">      S218 CS  1990     4.00 T   R  AP      : COMP SCI A         </font>
+<font class="auditText" size="2" color="#008000">      S218 CS  1990     4.00 T   R  AP      : COMP SCI PRINCI    </font>
+<font class="auditText" size="2" color="#008000">      S218 MATH1341     4.00 T      Calculus BC ++               </font>
+<font class="auditText" size="2" color="#008000">                                    AP      : CALCAB SUBSCORE,CAL</font>
+<font class="auditText" size="2" color="#008000">      S218 MATH1342     4.00 T      Calculus BC ++               </font>
+<font class="auditText" size="2" color="#008000">                                    AP      : CALCAB SUBSCORE,CAL</font>
+<font class="auditText" size="2" color="#008000">      S218 PHYS1151     3.00 T      AP      : PHYSICS C-MECH     </font>
+<font class="auditText" size="2" color="#008000">      S218 PHYS1152     1.00 T      AP      : PHYSICS C-MECH     </font>
+<font class="auditText" size="2" color="#008000">      S218 PHYS1153     1.00 T      AP      : PHYSICS C-MECH     </font>
+<font class="auditText" size="2" color="#008000">      FL18 CS  1200     1.00 A-     Leadership Skill Development </font>
+<font class="auditText" size="2" color="#008000">      FL18 CS  1800     4.00 A      Discrete Structures          </font>
+<font class="auditText" size="2" color="#008000">      FL18 CS  1802     1.00 A      Seminar for CS 1800          </font>
+<font class="auditText" size="2" color="#008000">      FL18 CS  2500     4.00 A      Fundamentals of Computer Sci </font>
+<font class="auditText" size="2" color="#008000">      FL18 CS  2501     1.00 A      Lab for CS 2500              </font>
+<font class="auditText" size="2" color="#008000">      FL18 PHYS1155     3.00 A      Physics for Engineering  2   </font>
+<font class="auditText" size="2" color="#008000">      FL18 PHYS1156     1.00 A-     Lab for PHYS 1155            </font>
+<font class="auditText" size="2" color="#008000">      FL18 PHYS1157     1.00 A      Interact Learn for PHYS 1155 </font>
+<font class="auditText" size="2" color="#008000">      SP19 CS  2510     4.00 A-     Fundamentals of Computer Sci </font>
+<font class="auditText" size="2" color="#008000">      SP19 CS  2511     1.00 A-     Lab for CS 2510              </font>
+<font class="auditText" size="2" color="#008000">      SP19 CS  2550     4.00 A      Foundations of Cybersecurity </font>
+<font class="auditText" size="2" color="#008000">      SP19 CS  2800     4.00 A      Logic and Computation        </font>
+<font class="auditText" size="2" color="#008000">      SP19 CS  2801     1.00 A      Lab for CS 2800              </font>
+<font class="auditText" size="2" color="#008000">      S119 EECE2160     4.00 A      Embedded Des Enabling Robotic</font>
+<font class="auditText" size="2" color="#008000">      S119 MATH3081     4.00 A      Probability and Statistics   </font>
+<font class="auditText" size="2" color="#008000">      S219 CS  3000     4.00 RG  IP Algorithms &amp; Data            </font>
+<font class="auditText" size="2" color="#008000">      S219 MATH2331     4.00 RG  IP Linear Algebra               </font>
+<font class="auditText" size="2" color="#008000">      FL19 CS  3500     4.00 RG  IP Object-Oriented Design       </font>
+<font class="auditText" size="2" color="#008000">      FL19 CS  3650     4.00 RG  IP Computer Systems             </font>
+<font class="auditText" size="2" color="#008000">      FL19 CS  3800     4.00 RG  IP Theory of Computation        </font>
+<font class="auditText" size="2" color="#008000">      FL19 PHIL1145     4.00 RG  IP Tech and Human Values (HON)  </font>
+<br><br></p><hr>
+<font class="auditText" size="2" color="black"> For students entering Fall 2012 and on: Only 32 semester        </font>
+<font class="auditText" size="2" color="black">hours of Advanced Credit (AP, IB, GCE, etc) transfer may         </font>
+<font class="auditText" size="2" color="black">count toward your total program hours however all accepted       </font>
+<font class="auditText" size="2" color="black">credit below may count towards course requirements. For          </font>
+<font class="auditText" size="2" color="black">actual credit accepted towards your degree, please refer         </font>
+<font class="auditText" size="2" color="black">to the "Transfer Credit Included in Total Hours" section         </font>
+<font class="auditText" size="2" color="black">within the "University Wide Requirements" area.                  </font>
+ <a name="link172"></a><br><a href="#linkback"><img src="Web%20Audit_files/arrows_red_050.gif" alt="Back to Top" border="0"></a> <font class="auditText" size="2" color="maroon"><b>       ADDITIONAL COURSE INFORMATION                             </b> </font>
+<p>
+<i><font class="auditText" size="2" color="black">             No Advanced Placement Credit Given                  </font></i>
+<font class="auditText" size="2" color="#008000">      S218 NO AP CREDIT 0.00 NT     AP      : ENG LIT/COMP       </font>
+<font class="auditText" size="2" color="#008000">      S218 NO AP CREDIT 0.00 NT     AP      : LATIN - VERGIL     </font>
+</p><p>
+<i><font class="auditText" size="2" color="black">        4 yr inst. Transfer Credit Accepted - 80 max.            </font></i>
+<font class="auditText" size="2" color="black">           29.0 HOURS ADDED                                      </font>
+</p><p>
+<i><font class="auditText" size="2" color="black">        Total Transfer Credit -  80 cr. max                      </font></i>
+<i><font class="auditText" size="2" color="black">          For students entering Fall 2012 and on: Only 32        </font></i>
+<i><font class="auditText" size="2" color="black">          semester hours of Advanced Credit (AP, IB, GCE, etc)   </font></i>
+<i><font class="auditText" size="2" color="black">          transfer may count toward your total program hours.    </font></i>
+<font class="auditText" size="2" color="black">           29.0 HOURS ADDED                                      </font>
+<font class="auditText" size="2" color="#008000">      S218 CS  1990     4.00 T   R  AP      : COMP SCI A         </font>
+<font class="auditText" size="2" color="#008000">      S218 CS  1990     4.00 T   R  AP      : COMP SCI PRINCI    </font>
+<font class="auditText" size="2" color="#008000">      S218 ENGW1111     4.00 T      AP      : ENG LANG/COMP      </font>
+<font class="auditText" size="2" color="#008000">      S218 HIST1130     4.00 T      AP      : US HISTORY         </font>
+<font class="auditText" size="2" color="#008000">      S218 MATH1341     4.00 T      Calculus BC ++               </font>
+<font class="auditText" size="2" color="#008000">                                    AP      : CALCAB SUBSCORE,CAL</font>
+<font class="auditText" size="2" color="#008000">      S218 MATH1342     4.00 T      Calculus BC ++               </font>
+<font class="auditText" size="2" color="#008000">                                    AP      : CALCAB SUBSCORE,CAL</font>
+<font class="auditText" size="2" color="#008000">      S218 PHYS1151     3.00 T      AP      : PHYSICS C-MECH     </font>
+<font class="auditText" size="2" color="#008000">      S218 PHYS1152     1.00 T      AP      : PHYSICS C-MECH     </font>
+<font class="auditText" size="2" color="#008000">      S218 PHYS1153     1.00 T      AP      : PHYSICS C-MECH     </font>
+<br><br></p><hr>
+ <a name="link198"></a><br><a href="#linkback"><img src="Web%20Audit_files/arrows_red_050.gif" alt="Back to Top" border="0"></a> <font class="auditText" size="2" color="navy"><b>       NUpath                                                    </b> </font>
+<font class="auditText" size="2" color="navy"><b>       See Individual Requirements for Completion Status Below   </b> </font>
+
+<font class="auditText" size="2" color="navy"><b>       For a list of course options, click "NUP" below:          </b> </font>
+<font class="auditText" size="2" color="navy"><b>       <a href="http://www.neu.edu/registrar/db-ugd.html">NUP</a></b> </font>
+
+<font class="auditText" size="2" color="navy"><b>       NOTE: Only five of the first eight categories (through    </b> </font>
+<font class="auditText" size="2" color="navy"><b>        Ethical Reasoning) may be satisfied by transfer work.    </b> </font>
+
+<font class="auditText" size="2" color="navy"><b>        No course taken pass/fail can be used toward NUpath.     </b> </font>
+<br><br><hr>
+ <a name="link209"></a><br><a href="#linkback"><img src="Web%20Audit_files/arrows_red_050.gif" alt="Back to Top" border="0"></a> <font class="auditText" size="2" color="navy"><b>OK     NATURAL and DESIGNED WORLD (ND)                           </b> </font>
+<p>
+<i><font class="auditText" size="2" color="black">  +     Complete (1) experience.                                 </font></i>
+<font class="auditText" size="2" color="#008000">      S218 PHYS1151     3.00 T      AP      : PHYSICS C-MECH     </font>
+<br><br></p><hr>
+ <a name="link214"></a><br><a href="#linkback"><img src="Web%20Audit_files/arrows_red_050.gif" alt="Back to Top" border="0"></a> <font class="auditText" size="2" color="maroon"><b>NO     CREATIVE EXPRESSION/INNOVATION (EI)                       </b> </font>
+<p>
+<i><font class="auditText" size="2" color="black">  -     Complete (1) experience.                                 </font></i>
+<br><br></p><hr>
+ <a name="link218"></a><br><a href="#linkback"><img src="Web%20Audit_files/arrows_red_050.gif" alt="Back to Top" border="0"></a> <font class="auditText" size="2" color="navy"><b>OK     INTERPRETING CULTURE (IC)                                 </b> </font>
+<p>
+<i><font class="auditText" size="2" color="black">  +     Complete (1) experience.                                 </font></i>
+<font class="auditText" size="2" color="#008000">      S218 HIST1130     4.00 T      AP      : US HISTORY         </font>
+<br><br></p><hr>
+ <a name="link223"></a><br><a href="#linkback"><img src="Web%20Audit_files/arrows_red_050.gif" alt="Back to Top" border="0"></a> <font class="auditText" size="2" color="navy"><b>OK     FORMAL and QUANTITATIVE REASONING (FQ)                    </b> </font>
+<p>
+<i><font class="auditText" size="2" color="black">  +     Complete (1) experience.                                 </font></i>
+<font class="auditText" size="2" color="#008000">      S218 MATH1341     4.00 T      Calculus BC ++               </font>
+<font class="auditText" size="2" color="#008000">                                    AP      : CALCAB SUBSCORE,CAL</font>
+<br><br></p><hr>
+ <a name="link229"></a><br><a href="#linkback"><img src="Web%20Audit_files/arrows_red_050.gif" alt="Back to Top" border="0"></a> <font class="auditText" size="2" color="navy"><b>IP     SOCIETIES and INSTITUTIONS (SI)                           </b> </font>
+<p>
+<i><font class="auditText" size="2" color="black">IP+     Complete (1) experience.                                 </font></i>
+<font class="auditText" size="2" color="#008000">      FL19 PHIL1145     4.00 RG  IP Tech and Human Values (HON)  </font>
+<br><br></p><hr>
+ <a name="link234"></a><br><a href="#linkback"><img src="Web%20Audit_files/arrows_red_050.gif" alt="Back to Top" border="0"></a> <font class="auditText" size="2" color="navy"><b>OK     ANALYZING/USING DATA (AD)                                 </b> </font>
+<p>
+<i><font class="auditText" size="2" color="black">  +     Complete (1) experience.                                 </font></i>
+<font class="auditText" size="2" color="#008000">      FL18 PHYS1156     1.00 A-     Lab for PHYS 1155            </font>
+<br><br></p><hr>
+ <a name="link239"></a><br><a href="#linkback"><img src="Web%20Audit_files/arrows_red_050.gif" alt="Back to Top" border="0"></a> <font class="auditText" size="2" color="navy"><b>OK     DIFFERENCE and DIVERSITY (DD)                             </b> </font>
+<p>
+<i><font class="auditText" size="2" color="black">  +     Complete (1) experience.                                 </font></i>
+<font class="auditText" size="2" color="#008000">      S218 HIST1130     4.00 T      AP      : US HISTORY         </font>
+<br><br></p><hr>
+ <a name="link244"></a><br><a href="#linkback"><img src="Web%20Audit_files/arrows_red_050.gif" alt="Back to Top" border="0"></a> <font class="auditText" size="2" color="navy"><b>IP     ETHICAL REASONING (ER)                                    </b> </font>
+<p>
+<i><font class="auditText" size="2" color="black">IP+     Complete (1) experience.                                 </font></i>
+<font class="auditText" size="2" color="#008000">      FL19 PHIL1145     4.00 RG  IP Tech and Human Values (HON)  </font>
+<br><br></p><hr>
+ <a name="link249"></a><br><a href="#linkback"><img src="Web%20Audit_files/arrows_red_050.gif" alt="Back to Top" border="0"></a> <font class="auditText" size="2" color="navy"><b>OK     FIRST YEAR WRITING (WF)                                   </b> </font>
+<p>
+<i><font class="auditText" size="2" color="black">  +     FIRST-YEAR WRITING                                       </font></i>
+<i><font class="auditText" size="2" color="black">         Complete the following (1) course.                      </font></i>
+<font class="auditText" size="2" color="#008000">      S218 ENGW1111     4.00 T      AP      : ENG LANG/COMP      </font>
+<br><br></p><hr>
+ <a name="link255"></a><br><a href="#linkback"><img src="Web%20Audit_files/arrows_red_050.gif" alt="Back to Top" border="0"></a> <font class="auditText" size="2" color="maroon"><b>NO     WRITING INTENSIVE (WI)                                    </b> </font>
+<p>
+<i><font class="auditText" size="2" color="black">  -     WRITING INTENSIVE                                        </font></i>
+<i><font class="auditText" size="2" color="black">         Complete (2) writing intensive courses in the major.    </font></i>
+<br><br></p><hr>
+ <a name="link260"></a><br><a href="#linkback"><img src="Web%20Audit_files/arrows_red_050.gif" alt="Back to Top" border="0"></a> <font class="auditText" size="2" color="maroon"><b>NO     ADVANCED WRITING IN THE DISCIPLINES (WD)                  </b> </font>
+<p>
+<i><font class="auditText" size="2" color="black">  -     ADVANCED WRITING IN THE DISCIPLINES                      </font></i>
+<i><font class="auditText" size="2" color="black">         Complete an approved advanced writing course.           </font></i>
+<br><br></p><hr>
+ <a name="link265"></a><br><a href="#linkback"><img src="Web%20Audit_files/arrows_red_050.gif" alt="Back to Top" border="0"></a> <font class="auditText" size="2" color="maroon"><b>NO     INTEGRATION EXPERIENCE (EX)                               </b> </font>
+<p>
+<i><font class="auditText" size="2" color="black">  -     Complete (1) experience.                                 </font></i>
+<br><br></p><hr>
+ <a name="link269"></a><br><a href="#linkback"><img src="Web%20Audit_files/arrows_red_050.gif" alt="Back to Top" border="0"></a> <font class="auditText" size="2" color="maroon"><b>NO     CAPSTONE EXPERIENCE (CE)                                  </b> </font>
+<p>
+<i><font class="auditText" size="2" color="black">  -     CAPSTONE                                                 </font></i>
+<i><font class="auditText" size="2" color="black">         Complete (1) capstone course within your major.         </font></i>
+<i><font class="auditText" size="2" color="black">                                                                 </font></i>
+<i><font class="auditText" size="2" color="black">        NOTE: Additional Capstone courses may be required by     </font></i>
+<i><font class="auditText" size="2" color="black">        the major or department.                                 </font></i>
+<br><br></p><hr>
+ <a name="link277"></a><br><a href="#linkback"><img src="Web%20Audit_files/arrows_red_050.gif" alt="Back to Top" border="0"></a> <font class="auditText" size="2" color="maroon"><b>       GENERAL ELECTIVES                                         </b> </font>
+<p>
+<i><font class="auditText" size="2" color="black">         Additional courses taken beyond college and major       </font></i>
+<i><font class="auditText" size="2" color="black">         course requirements to satisfy graduation credit        </font></i>
+<i><font class="auditText" size="2" color="black">         requirements.                                           </font></i>
+</p><p>
+<br><br></p><hr>
+ <a name="link284"></a><br><a href="#linkback"><img src="Web%20Audit_files/arrows_red_050.gif" alt="Back to Top" border="0"></a> 
+<p>
+<i><font class="auditText" size="2" color="black">           THE FOLLOWING COURSES ARE BEING EXCLUDED FROM THE     </font></i>
+<i><font class="auditText" size="2" color="black">           UNIVERSITY TOTAL HOURS:                               </font></i>
+</p><p>
+<i><font class="auditText" size="2" color="black">              Unacceptable Advanced Placement Grades             </font></i>
+<font class="auditText" size="2" color="#008000">      S218 NO AP CREDIT 0.00 NT     AP      : ENG LIT/COMP       </font>
+<font class="auditText" size="2" color="#008000">      S218 NO AP CREDIT 0.00 NT     AP      : LATIN - VERGIL     </font>
+</p><p>
+</p><p>
+<i><font class="auditText" size="2" color="black">IP         THE FOLLOWING COURSES ARE CURRENT REGISTERED          </font></i>
+<i><font class="auditText" size="2" color="black">           COURSES AND ARE BEING CALCULATED IN THE               </font></i>
+<i><font class="auditText" size="2" color="black">           OVERALL UNIVERSITY TOTAL:                             </font></i>
+<i><font class="auditText" size="2" color="black">                                                                 </font></i>
+<font class="auditText" size="2" color="#008000">      S219 CS  3000     4.00 RG  IP Algorithms &amp; Data            </font>
+<font class="auditText" size="2" color="#008000">      S219 MATH2331     4.00 RG  IP Linear Algebra               </font>
+<font class="auditText" size="2" color="#008000">      FL19 CS  3500     4.00 RG  IP Object-Oriented Design       </font>
+<font class="auditText" size="2" color="#008000">      FL19 CS  3650     4.00 RG  IP Computer Systems             </font>
+<font class="auditText" size="2" color="#008000">      FL19 CS  3800     4.00 RG  IP Theory of Computation        </font>
+<font class="auditText" size="2" color="#008000">      FL19 PHIL1145     4.00 RG  IP Tech and Human Values (HON)  </font>
+<br><br></p><hr>
+ <a name="link305"></a><br><a href="#linkback"><img src="Web%20Audit_files/arrows_red_050.gif" alt="Back to Top" border="0"></a> <font class="auditText" size="2" color="maroon"><b>       HONORS COURSES                                            </b> </font>
+
+<font class="auditText" size="2" color="maroon"><b>       PLEASE NOTE: See the EARNED and NEEDS catagories below to </b> </font>
+<font class="auditText" size="2" color="maroon"><b>       determine the number of honors courses that have been     </b> </font>
+<font class="auditText" size="2" color="maroon"><b>       taken.                                                    </b> </font>
+
+<font class="auditText" size="2" color="maroon"><b>       If lecture and lab courses are both listed as honors they </b> </font>
+<font class="auditText" size="2" color="maroon"><b>       will count as a single honors course. Students who go on  </b> </font>
+<font class="auditText" size="2" color="maroon"><b>       an Honors dialogue will receive credit for two Honors     </b> </font>
+<font class="auditText" size="2" color="maroon"><b>       courses.                                                  </b> </font>
+
+<font class="auditText" size="2" color="black">    EARNED:                2 COURSES  0 SUB-GROUPS               </font>
+<font class="auditText" size="2" color="black">--&gt; NEEDS:                 4 COURSES  1 SUB-GROUP                </font>
+<i><font class="auditText" size="2" color="black">IP                                                               </font></i>
+<font class="auditText" size="2" color="#008000">      SP19 HONR1310     4.00 A      Illusions of Reality         </font>
+<font class="auditText" size="2" color="#008000">      FL19 PHIL1145     4.00 RG  IP Tech and Human Values (HON)  </font>
+<br><br><hr>
+ <a name="link322"></a><br><a href="#linkback"><img src="Web%20Audit_files/arrows_red_050.gif" alt="Back to Top" border="0"></a> <font class="auditText" size="2" color="navy"><b>IP     RESIDENCY REQUIREMENT                                     </b> </font>
+<font class="auditText" size="2" color="navy"><b>       A minimum of 64 hours are required at NU                  </b> </font>
+<p>
+<i><font class="auditText" size="2" color="black">IP+     Students must earn a minimum of 64 Northeastern          </font></i>
+<i><font class="auditText" size="2" color="black">        University semester hours in order to receive a          </font></i>
+<i><font class="auditText" size="2" color="black">        bachelor's degree.                                       </font></i>
+<font class="auditText" size="2" color="black">           70.0 HOURS ADDED                                      </font>
+<br><br></p><hr>
+ <a name="link330"></a><br><a href="#linkback"><img src="Web%20Audit_files/arrows_red_050.gif" alt="Back to Top" border="0"></a> <font class="auditText" size="2" color="maroon"><b>NO     UNIVERSITY WIDE REQUIREMENTS                              </b> </font>
+<i><font class="auditText" size="2" color="black">IP-     REQUIRED PROGRAM HOURS                                   </font></i>
+<i><font class="auditText" size="2" color="black">        135 total semester hours required.                       </font></i>
+<font class="auditText" size="2" color="black">           99.0 HOURS ADDED                                      </font>
+<font class="auditText" size="2" color="black">         NEEDS:   36.0 HOURS                                     </font>
+<p>
+<i><font class="auditText" size="2" color="black">        Transfer Credit Included in Total Hours                  </font></i>
+<font class="auditText" size="2" color="black">           29.0 HOURS ADDED                                      </font>
+</p><p>
+<i><font class="auditText" size="2" color="black">  +     Minimum 2.0 GPA required                                 </font></i>
+<font class="auditText" size="2" color="black">        (  75.0 EARNED HOURS )26 COURSES TAKEN                   </font>
+<font class="auditText" size="2" color="black">           46.0 ATTEMPTED HOURS     181.6 POINTS  3.949 GPA      </font>
+<br><br></p><hr>
+ <a name="link343"></a><br><a href="#linkback"><img src="Web%20Audit_files/arrows_red_050.gif" alt="Back to Top" border="0"></a> <font class="auditText" size="2" color="navy"><b>       LEGEND                                                    </b> </font>
+<p>
+<i><font class="auditText" size="2" color="black">        * * * * * * * * * * * * * * * * * * * * * * * * * * * *  </font></i>
+<i><font class="auditText" size="2" color="black">              Explanation of symbols used in this audit          </font></i>
+<i><font class="auditText" size="2" color="black">                                                                 </font></i>
+<i><font class="auditText" size="2" color="black">            REQUIREMENTS                 COURSES                 </font></i>
+<i><font class="auditText" size="2" color="black">        OK = Req't Complete           IP = In Progress           </font></i>
+<i><font class="auditText" size="2" color="black">        NO = Req't Not Complete      (R) = Required crse         </font></i>
+<i><font class="auditText" size="2" color="black">        IP = OK if IP course graded    R = Repeatable            </font></i>
+<i><font class="auditText" size="2" color="black">        OR = Choose Either Requirement + = More Course Info      </font></i>
+<i><font class="auditText" size="2" color="black">        R  = Area Must be Completed   ++ = More Title Info       </font></i>
+<i><font class="auditText" size="2" color="black">        -  = Sub Req't Not Complete   RP = Repeated Crse         </font></i>
+<i><font class="auditText" size="2" color="black">        +  = (In Margin) Complete     &gt;X = Duplicate Crse        </font></i>
+<i><font class="auditText" size="2" color="black">        NA = Req't Not Applicable     WA = Weighted Average      </font></i>
+<i><font class="auditText" size="2" color="black">                                      RG = Currently Registered  </font></i>
+<i><font class="auditText" size="2" color="black">                                      NR = No Grade Reported     </font></i>
+<i><font class="auditText" size="2" color="black">        RT = In Progress Transfer     NT = Unacceptable T Grade  </font></i>
+<i><font class="auditText" size="2" color="black">        NRT= Blank/Unknown Transfer Grade                        </font></i>
+<i><font class="auditText" size="2" color="black">        &gt;S = Course has credit split elsewhere in the audit      </font></i>
+<i><font class="auditText" size="2" color="black">        &gt;D = Duplicate Course calculated in GPA                  </font></i>
+<i><font class="auditText" size="2" color="black">        * * * * * * * * * * * * * * * * * * * * * * * * * * * *  </font></i>
+<br><br></p><hr>
+<i><font class="auditText" size="2" color="black">                                  Disclaimer                     </font></i>
+<i><font class="auditText" size="2" color="black">This degree audit report from myPAWS (PERSONAL degree AUDIT      </font></i>
+<i><font class="auditText" size="2" color="black">WEB SYSTEM) is intended as a guide for advisors and students to  </font></i>
+<i><font class="auditText" size="2" color="black">evaluate progress toward degrees under semester curriculum. The  </font></i>
+<i><font class="auditText" size="2" color="black">student record includes all information from the official        </font></i>
+<i><font class="auditText" size="2" color="black">transcript except courses that have had substitutions posted to  </font></i>
+<i><font class="auditText" size="2" color="black">them. The Student Academic Transcript is the official student    </font></i>
+<i><font class="auditText" size="2" color="black">record. Discrepancies in GPA/QPA are due to timing. The official </font></i>
+<i><font class="auditText" size="2" color="black">QPA value is on the student transcript. Transition students      </font></i>
+<i><font class="auditText" size="2" color="black">should consult with advisors to confirm appropriate plans for    </font></i>
+<i><font class="auditText" size="2" color="black">completion of degree requirements.                               </font></i>
+<i><font class="auditText" size="2" color="black">                                                                 </font></i>
+<i><font class="auditText" size="2" color="black">                          Appropriate Use Statement              </font></i>
+<i><font class="auditText" size="2" color="black">DARS data is protected under FERPA and all other University      </font></i>
+<i><font class="auditText" size="2" color="black">Security and Information policies. All unauthorized access,      </font></i>
+<i><font class="auditText" size="2" color="black">manipulation and/or distribution of institutional data and/or    </font></i>
+<i><font class="auditText" size="2" color="black">data sources is prohibited. Sensitive institutional information  </font></i>
+<i><font class="auditText" size="2" color="black">is considered privileged, unless otherwise stated in writing, to </font></i>
+<i><font class="auditText" size="2" color="black">protect the confidentiality of information pertaining to faculty,</font></i>
+<i><font class="auditText" size="2" color="black"> staff, student, alumni and external constituents. The ability to</font></i>
+<i><font class="auditText" size="2" color="black"> access this information requires specific authorization.        </font></i>
+<i><font class="auditText" size="2" color="black">                                                                 </font></i>
+<br><br><hr>
+<font class="auditText" size="2" color="black">************************ END OF ANALYSIS ************************</font>
+</pre></font></spacer></font></spacer></font></spacer></font></spacer></font></spacer></font></spacer></font></spacer></font></spacer></font></spacer></font></spacer></font></spacer></font></spacer></font></spacer></font></spacer></font></spacer></font></spacer></font></spacer></font></spacer></font></spacer></font></spacer></pre></td></tr>
+ <tr><td width="2%"><form name="back"><input type="button" value="              Back               " onclick="history.go(-1)"></form></td>
+    <td width="2%"><form name="increaseFontSize" method="post" action="ParseAuditServlet">
+      <input type="hidden" name="job_id" value="2019072211350468">
+      <input type="hidden" name="int_seq_no" value="6718358">
+      <input type="hidden" name="increaseFont" value="+1">
+      <input type="submit" name="changeFontSize" value=" Increase Font Size "></form></td>
+    <td width="2%"><form name="decreaseFontSize" method="get" action="ParseAuditServlet">
+      <input type="hidden" name="job_id" value="2019072211350468">
+      <input type="hidden" name="int_seq_no" value="6718358">
+      <input type="hidden" name="decreaseFont" value="-1">
+      <input type="submit" name="changeFontSize" value="Decrease Font Size"></form></td>
+    <td width="92%">&nbsp;</td>
+ </tr>
+</tbody></table>
+</td></tr><tr><td bgcolor="#FFFFFF"><br><a href="https://prod-web.neu.edu/wasapp/DARSStudent/ParseFriendlyServlet?DETAILS=2019072211350468&amp;int_seq_no=6718358"><font size="2">Printer Friendly Version</font></a><br></td></tr>
+</tbody></table>
+
+</body></html>
