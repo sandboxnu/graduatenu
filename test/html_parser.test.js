@@ -3,21 +3,12 @@ const fs = require('fs');
 
 const cs_json = html_parser.audit_to_json(fs.readFileSync("./test/mock_audits/cs_audit.html", "utf-8"));
 const cs_json2 = html_parser.audit_to_json(fs.readFileSync("./test/mock_audits/cs_audit2.html", "utf-8"));
-// const cs_json3 = html_parser.audit_to_json(fs.readFileSync("./test/mock_audits/cs_audit3.html", "utf-8"));
 const cs_math_json = html_parser.audit_to_json(fs.readFileSync("./test/mock_audits/cs_math_grad_audit.html", "utf-8"));
-
-console.log(cs_json2.completed.classes);
-console.log(cs_json2.completed.nupaths);
-console.log(cs_json2.inprogress.classes);
-console.log(cs_json2.inprogress.nupaths);
-console.log(cs_json2.requirements.classes);
-console.log(cs_json2.requirements.nupaths);
 
 const json_ex = [];
 json_ex.push(cs_json);
 json_ex.push(cs_math_json);
 json_ex.push(cs_json2);
-// json_ex.push(cs_json3);
 
 test('Confirms that the generated JavaScript object is of the proper form', () => {
     for(let i = 0; i < json_ex.length; i++) {
@@ -1038,8 +1029,12 @@ test('Verifies that the second Computer Science degree audit is properly reprodu
                     },
                     { 
                         subject: 'CS', 
-                        list: [ '4100', '4300', '4410','4150','4550','4991','4900'],
+                        list: [ '4100', '4300', '4410','4150','4550','4991'],
                         num_required: '1'
+                    },
+                    {
+                        subject:'IS',
+                        classId:'4900'
                     },
                     { 
                         subject: 'CS', 
