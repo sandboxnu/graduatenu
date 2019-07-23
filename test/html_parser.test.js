@@ -1531,8 +1531,3 @@ test('Verifies that the CS Math degree audit is properly reproduced by the code'
             }
         });
 });
-
-test('Ensures that two different JavaScript objects produced from the same audit are identical', () => {
-    expect(cs_json).toStrictEqual(html_parser.audit_to_json(fs.readFileSync("./test/mock_audits/cs_audit.html", "utf-8")));
-    expect(cs_math_json).toStrictEqual(html_parser.audit_to_json(fs.readFileSync("./test/mock_audits/cs_math_grad_audit.html", "utf-8")));
-});
