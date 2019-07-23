@@ -6,6 +6,7 @@ const cs_json2 = html_parser.audit_to_json(fs.readFileSync("./test/mock_audits/c
 const cs_json3 = html_parser.audit_to_json(fs.readFileSync("./test/mock_audits/cs_audit3.html", "utf-8"));
 const cs_math_json = html_parser.audit_to_json(fs.readFileSync("./test/mock_audits/cs_math_grad_audit.html", "utf-8"));
 
+console.log(cs_json2.requirements.classes);
 // this one is abnormally large (about 1000x larger)
 // const me_json = html_parser.audit_to_json(fs.readFileSync("./test/mock_audits/me_audit.html"), "utf-8");
 

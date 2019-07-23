@@ -63,15 +63,16 @@ function get_nupaths(json, lines, i) {
 
         // gets the NUPath abbreviation, omitting other information and unwanted HTML tags
         if(contains(toAdd, '<') || contains(toAdd, '>')) {
+            return;
         }
 
-        else if(contains(lines[i], 'OK')|| contains(lines[i], 'IP')) {
+        else if(contains(lines[i], '>OK ') && !json.completed.nupaths.includes(toAdd)) {
             json.completed.nupaths.push(toAdd);				
         }
-        else if(contains(lines[i], 'IP')) {
+        else if(contains(lines[i], '>IP ') && !json.inprogress.nupaths.includes(toAdd)) {
             json.inprogress.nupaths.push(toAdd);
         }
-        else if(contains(lines[i], 'NO')) {
+        else if(contains(lines[i], '>NO ') && !json.requirements.nupaths.includes(toAdd)) {
             json.requirements.nupaths.push(toAdd);				
         }
         i++;
