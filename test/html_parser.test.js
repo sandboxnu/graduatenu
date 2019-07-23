@@ -3,17 +3,17 @@ const fs = require('fs');
 
 const cs_json = html_parser.audit_to_json(fs.readFileSync("./test/mock_audits/cs_audit.html", "utf-8"));
 const cs_json2 = html_parser.audit_to_json(fs.readFileSync("./test/mock_audits/cs_audit2.html", "utf-8"));
-//const cs_json3 = html_parser.audit_to_json(fs.readFileSync("./test/mock_audits/cs_audit3.html", "utf-8"));
+const cs_json3 = html_parser.audit_to_json(fs.readFileSync("./test/mock_audits/cs_audit3.html", "utf-8"));
 const cs_math_json = html_parser.audit_to_json(fs.readFileSync("./test/mock_audits/cs_math_grad_audit.html", "utf-8"));
 
 // this one is abnormally large (about 1000x larger)
-//const me_json = html_parser.audit_to_json(fs.readFileSync("./test/mock_audits/me_audit.html"), "utf-8");
+// const me_json = html_parser.audit_to_json(fs.readFileSync("./test/mock_audits/me_audit.html"), "utf-8");
 
 const json_ex = [];
 json_ex.push(cs_json);
 json_ex.push(cs_math_json);
 json_ex.push(cs_json2);
-//json_ex.push(cs_json3);
+json_ex.push(cs_json3);
 
 test('Confirms that the generated JavaScript object is of the proper form', () => {
     for(let i = 0; i < json_ex.length; i++) {
@@ -134,8 +134,8 @@ test('Ensures that the required NUPaths are of the form required.', () => {
 test('Ensures that the in-progress NUPaths are of the form required.', () => {
     for(let i = 0; i < json_ex.length; i++) {
         for(let j = 0; j < json_ex[i].inprogress.nupaths.length; j++) { 
-            expect(json_ex[i].inprogress.nupaths[i]).toBeDefined(); 
-            expect(json_ex[i].inprogress.nupaths[i]).toMatch(/ND|EI|IC|FQ|SI|AD|DD|ER|WF|WD|WI|EX|CE/);
+            expect(json_ex[i].inprogress.nupaths[j]).toBeDefined(); 
+            expect(json_ex[i].inprogress.nupaths[j]).toMatch(/ND|EI|IC|FQ|SI|AD|DD|ER|WF|WD|WI|EX|CE/);
         }
     }
 });
@@ -575,8 +575,6 @@ test('Verifies that the CS degree audit is properly reproduced by the code', () 
                     "AD",
                     "ER",
                     "WF",
-                    "WD",
-                    "CE"
                 ]
             },
             "inprogress":{  
@@ -646,7 +644,7 @@ test('Verifies that the CS degree audit is properly reproduced by the code', () 
                     }
                 ],
                 "nupaths":[  
-
+                    "CE"
                 ]
             },
             "requirements":{  
@@ -700,6 +698,7 @@ test('Verifies that the CS degree audit is properly reproduced by the code', () 
                     "IC",
                     "DD",
                     "WI",
+                    "WD",
                     "EX"
                 ]
             },
@@ -1024,7 +1023,6 @@ test('Verifies that the CS Math degree audit is properly reproduced by the code'
                     "DD",
                     "ER",
                     "WF",
-                    "WD"
                 ]
             },
             "inprogress":{  
@@ -1094,7 +1092,6 @@ test('Verifies that the CS Math degree audit is properly reproduced by the code'
                     }
                 ],
                 "nupaths":[  
-
                 ]
             },
             "requirements":{  
@@ -1164,6 +1161,7 @@ test('Verifies that the CS Math degree audit is properly reproduced by the code'
                 ],
                 "nupaths":[  
                     "WI",
+                    "WD",
                     "EX",
                     "CE"
                 ]
