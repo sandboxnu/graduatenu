@@ -28,7 +28,7 @@ const OUTPUT = 'parsed_audit.json';
  * @param {String} line  The line at which the major can be found.
  */
 function identify_major(json, line) {
-    json.data.major = line.substring(line.search('>') + 1, line.search(' - Major'));
+    json.data.major = line.substring(line.search('\">') + 2, line.search(' - Major')); 
 }
 
 /**
