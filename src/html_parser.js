@@ -95,7 +95,7 @@ function hasNumber(n) {
  */
 function add_courses_to_take(json, lines, j, subjectType) {
     let courseList = lines[j].substring(lines[j].search('Course List') + 13).replace(/<font>/g, '').replace(/<font class="auditPreviewText">/g, '').replace(/\*\*\*\*/g, '').replace(/\s/g, '').split('</font>');
-    
+
     // last two elements are always empty, as each of these lines ends with two </font> tags
     courseList.pop();
     courseList.pop();
@@ -118,6 +118,7 @@ function add_courses_to_take(json, lines, j, subjectType) {
         if(!(courseList[i] === '')) {
 
             let maybeCourseNumber = courseList[i].substring(0, 4);
+
             // THREE CASES
             // IT'S A NUMBER: IT IS A COURSE WITH THE PREVIOUS TYPE LISTED, use the type as previously defined'
             if(!isNaN(maybeCourseNumber)) {
@@ -125,18 +126,30 @@ function add_courses_to_take(json, lines, j, subjectType) {
 
                 // determines whether we're looking at an enumeration (list of required courses of which 1+ should be taken)
                 if(contains(lines[j - 1], ' of the following courses')) {
+
                     if(courses[courses.length - 1].list == null) {
                         courses[courses.length - 1].list = [courses[courses.length - 1].classId, maybeCourseNumber];
                         courses[courses.length - 1].num_required = lines[j - 1].substring(lines[j - 1].search('Complete') + 'Complete ('.length, lines[j - 1].search('Complete') + 'Complete ('.length+1); 
+                        delete courses[courses.length - 1].classId;
+
+                    } else {
+                        courses[courses.length - 1].list.push(maybeCourseNumber);
+                    }
+
+                } else if(contains(lines[j - 2], ' of the following courses')) { 
+
+                    // there is always a line of white space after course requirements, so picking up a course number
+                    // from a line two previous to this one is not an issue
+                    if(courses[courses.length - 1].list == null) {
+                        courses[courses.length - 1].list = [courses[courses.length - 1].classId, maybeCourseNumber];
+                        courses[courses.length - 1].num_required = lines[j - 2].substring(lines[j - 2].search('Complete') + 'Complete ('.length, lines[j - 2].search('Complete') + 'Complete ('.length+1); 
                         delete courses[courses.length - 1].classId;
                     } else {
                         courses[courses.length - 1].list.push(maybeCourseNumber);
                     }
 
-
-                }
-                // else, it is another required course with the previous type
-                else {
+                    // else, it is another required course with the previous type
+                } else {
                     course.classId = maybeCourseNumber;
                     course.subject = type;
                     courses.push(course);
@@ -154,7 +167,7 @@ function add_courses_to_take(json, lines, j, subjectType) {
                 while(contains(maybeCourseNumber.substring(0, subjEnd), '[0-9]')) {
                     subjEnd = subjEnd - 1;
                 }
- 
+
                 type = maybeCourseNumber.substring(0, subjEnd);
                 course.subject = type;
                 course.classId = courseList[i].substring(subjEnd, subjEnd + 4);

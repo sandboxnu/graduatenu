@@ -3,18 +3,21 @@ const fs = require('fs');
 
 const cs_json = html_parser.audit_to_json(fs.readFileSync("./test/mock_audits/cs_audit.html", "utf-8"));
 const cs_json2 = html_parser.audit_to_json(fs.readFileSync("./test/mock_audits/cs_audit2.html", "utf-8"));
-const cs_json3 = html_parser.audit_to_json(fs.readFileSync("./test/mock_audits/cs_audit3.html", "utf-8"));
+// const cs_json3 = html_parser.audit_to_json(fs.readFileSync("./test/mock_audits/cs_audit3.html", "utf-8"));
 const cs_math_json = html_parser.audit_to_json(fs.readFileSync("./test/mock_audits/cs_math_grad_audit.html", "utf-8"));
 
+console.log(cs_json2.completed.classes);
+console.log(cs_json2.completed.nupaths);
+console.log(cs_json2.inprogress.classes);
+console.log(cs_json2.inprogress.nupaths);
 console.log(cs_json2.requirements.classes);
-// this one is abnormally large (about 1000x larger)
-// const me_json = html_parser.audit_to_json(fs.readFileSync("./test/mock_audits/me_audit.html"), "utf-8");
+console.log(cs_json2.requirements.nupaths);
 
 const json_ex = [];
 json_ex.push(cs_json);
 json_ex.push(cs_math_json);
 json_ex.push(cs_json2);
-json_ex.push(cs_json3);
+// json_ex.push(cs_json3);
 
 test('Confirms that the generated JavaScript object is of the proper form', () => {
     for(let i = 0; i < json_ex.length; i++) {
@@ -104,11 +107,11 @@ test('Ensures that all of the courses required to take are of the form required.
             expect(json_ex[i].requirements.classes[j].subject).toMatch(/^[A-Z]{2,4}$/);
 
             if(typeof json_ex[i].requirements.classes[j].classId  === 'undefined') {
-                
+
                 expect(json_ex[i].requirements.classes[j].list).toBeDefined();
                 expect(json_ex[i].requirements.classes[j].num_required).toBeDefined();
                 expect(json_ex[i].requirements.classes[j].num_required).toMatch(/^[\d]$/);
-                
+
                 for(let k = 0; k < json_ex[i].requirements.classes[j].list.length; k++) {
                     // assumes that no more than 9 classes will be required
                     expect(json_ex[i].requirements.classes[j].list[k]).toMatch(/^[\d]{4}$/);    
@@ -701,6 +704,365 @@ test('Verifies that the CS degree audit is properly reproduced by the code', () 
                     "WI",
                     "WD",
                     "EX"
+                ]
+            },
+            "data":{  
+                "grad":"08/20/22",
+                "year":"2019",
+                "major":"Computer Science"
+            }
+        });
+});
+test('Verifies that the second Computer Science degree audit is properly reproduced by the code', () => {
+    expect(cs_json2).toStrictEqual(
+        {
+            "completed":{
+                "classes": [ 
+                    { hon: false,
+                        subject: 'CS',
+                        classId: '1200',
+                        credithours: '1.00',
+                        season: 'FL',
+                        year: '18',
+                        termId: '201910' 
+                    },
+                    { 
+                        hon: false,
+                        subject: 'CS',
+                        classId: '1800',
+                        credithours: '4.00',
+                        season: 'FL',
+                        year: '18',
+                        termId: '201910' 
+                    },
+                    { 
+                        hon: false,
+                        subject: 'CS',
+                        classId: '1802',
+                        credithours: '1.00',
+                        season: 'FL',
+                        year: '18',
+                        termId: '201910' 
+                    },
+                    { 
+                        hon: false,
+                        subject: 'CS',
+                        classId: '2500',
+                        credithours: '4.00',
+                        season: 'FL',
+                        year: '18',
+                        termId: '201910' 
+                    },
+                    { 
+                        hon: false,
+                        subject: 'CS',
+                        classId: '2501',
+                        credithours: '1.00',
+                        season: 'FL',
+                        year: '18',
+                        termId: '201910' 
+                    },
+                    { 
+                        hon: false,
+                        subject: 'CS',
+                        classId: '2510',
+                        credithours: '4.00',
+                        season: 'SP',
+                        year: '19',
+                        termId: '201930' 
+                    },
+                    { 
+                        hon: false,
+                        subject: 'CS',
+                        classId: '2511',
+                        credithours: '1.00',
+                        season: 'SP',
+                        year: '19',
+                        termId: '201930' 
+                    },
+                    { 
+                        hon: false,
+                        subject: 'CS',
+                        classId: '2800',
+                        credithours: '4.00',
+                        season: 'SP',
+                        year: '19',
+                        termId: '201930' 
+                    },
+                    { 
+                        hon: false,
+                        subject: 'CS',
+                        classId: '2801',
+                        credithours: '1.00',
+                        season: 'SP',
+                        year: '19',
+                        termId: '201930' 
+                    },
+                    { 
+                        hon: false,
+                        subject: 'CS',
+                        classId: '2550',
+                        credithours: '4.00',
+                        season: 'SP',
+                        year: '19',
+                        termId: '201930' 
+                    },
+                    { 
+                        hon: false,
+                        subject: 'MATH',
+                        classId: '1341',
+                        credithours: '4.00',
+                        season: 'S2',
+                        year: '18',
+                        termId: '201860' 
+                    },
+                    { 
+                        hon: false,
+                        subject: 'MATH',
+                        classId: '1342',
+                        credithours: '4.00',
+                        season: 'S2',
+                        year: '18',
+                        termId: '201860' 
+                    },
+                    { 
+                        hon: false,
+                        subject: 'MATH',
+                        classId: '3081',
+                        credithours: '4.00',
+                        season: 'S1',
+                        year: '19',
+                        termId: '201940' 
+                    },
+                    { 
+                        hon: false,
+                        subject: 'EECE',
+                        classId: '2160',
+                        credithours: '4.00',
+                        season: 'S1',
+                        year: '19',
+                        termId: '201940' 
+                    },
+                    { 
+                        hon: false,
+                        subject: 'PHYS',
+                        classId: '1151',
+                        credithours: '3.00',
+                        season: 'S2',
+                        year: '18',
+                        termId: '201860' 
+                    },
+                    { 
+                        hon: false,
+                        subject: 'PHYS',
+                        classId: '1152',
+                        credithours: '1.00',
+                        season: 'S2',
+                        year: '18',
+                        termId: '201860' 
+                    },
+                    { 
+                        hon: false,
+                        subject: 'PHYS',
+                        classId: '1153',
+                        credithours: '1.00',
+                        season: 'S2',
+                        year: '18',
+                        termId: '201860' 
+                    },
+                    { 
+                        hon: false,
+                        subject: 'PHYS',
+                        classId: '1155',
+                        credithours: '3.00',
+                        season: 'FL',
+                        year: '18',
+                        termId: '201910' 
+                    },
+                    { 
+                        hon: false,
+                        subject: 'PHYS',
+                        classId: '1156',
+                        credithours: '1.00',
+                        season: 'FL',
+                        year: '18',
+                        termId: '201910' 
+                    },
+                    { 
+                        hon: false,
+                        subject: 'PHYS',
+                        classId: '1157',
+                        credithours: '1.00',
+                        season: 'FL',
+                        year: '18',
+                        termId: '201910' 
+                    },
+                    { 
+                        hon: false,
+                        subject: 'ENGW',
+                        classId: '1111',
+                        credithours: '4.00',
+                        season: 'S2',
+                        year: '18',
+                        termId: '201860' 
+                    },
+                    { 
+                        hon: false,
+                        subject: 'CS',
+                        classId: '1990',
+                        credithours: '4.00',
+                        season: 'S2',
+                        year: '18',
+                        termId: '201860' 
+                    },
+                    { 
+                        hon: false,
+                        subject: 'HIST',
+                        classId: '1130',
+                        credithours: '4.00',
+                        season: 'S2',
+                        year: '18',
+                        termId: '201860' 
+                    },
+                    { 
+                        hon: false,
+                        subject: 'MATH',
+                        classId: '2321',
+                        credithours: '4.00',
+                        season: 'FL',
+                        year: '18',
+                        termId: '201910' 
+                    },
+                    { 
+                        hon: true,
+                        subject: 'HONR',
+                        classId: '1310',
+                        credithours: '4.00',
+                        season: 'SP',
+                        year: '19',
+                        termId: '201930' 
+                    } 
+                ],
+                "nupaths": [ 
+                    'ND', 
+                    'IC', 
+                    'FQ', 
+                    'AD', 
+                    'DD', 
+                    'WF'
+                ]
+            },
+            "inprogress":{
+                "classes": [ 
+                    { 
+                        hon: false,
+                        subject: 'CS',
+                        classId: '3000',
+                        credithours: '4.00',
+                        season: 'S2',
+                        year: '19',
+                        termId: '201960' 
+                    },
+                    { 
+                        hon: false,
+                        subject: 'CS',
+                        classId: '3500',
+                        credithours: '4.00',
+                        season: 'FL',
+                        year: '19',
+                        termId: '202010' 
+                    },
+                    { 
+                        hon: false,
+                        subject: 'CS',
+                        classId: '3650',
+                        credithours: '4.00',
+                        season: 'FL',
+                        year: '19',
+                        termId: '202010' 
+                    },
+                    { 
+                        hon: false,
+                        subject: 'CS',
+                        classId: '3800',
+                        credithours: '4.00',
+                        season: 'FL',
+                        year: '19',
+                        termId: '202010' 
+                    },
+                    { 
+                        hon: false,
+                        subject: 'MATH',
+                        classId: '2331',
+                        credithours: '4.00',
+                        season: 'S2',
+                        year: '19',
+                        termId: '201960' 
+                    },
+                    { 
+                        hon: true,
+                        subject: 'PHIL',
+                        classId: '1145',
+                        credithours: '4.00',
+                        season: 'FL',
+                        year: '19',
+                        termId: '202010' 
+                    } 
+                ],
+                "nupaths":[
+                    'SI',
+                    'ER' 
+                ]
+            },
+            "requirements":{
+                "classes": [ 
+                    { 
+                        subject: 'CS', 
+                        classId: '1210' 
+                    },
+                    { 
+                        subject: 'CS', 
+                        classId: '3700' 
+                    },
+                    { 
+                        subject: 'CS', 
+                        classId: '4400'
+                    },
+                    { 
+                        subject: 'CS', 
+                        classId: '4500' 
+                    },
+                    { 
+                        subject: 'THTR', 
+                        classId: '1170' 
+                    },
+                    { 
+                        subject: 'CS', 
+                        list: [ '4100', '4300', '4410','4150','4550','4991','4900'],
+                        num_required: '1'
+                    },
+                    { 
+                        subject: 'CS', 
+                        classId: '2500', 
+                        classId2: '7999' 
+                    },
+                    { 
+                        subject: 'DS', 
+                        classId: '2000', 
+                        classId2: '7999' 
+                    },
+                    { 
+                        subject: 'ENGW',
+                        list: [ '3302', '3308', '3315' ],
+                        num_required: '1' 
+                    } 
+                ],
+                "nupaths": [ 
+                    'EI', 
+                    'WI', 
+                    'WD', 
+                    'EX', 
+                    'CE' 
                 ]
             },
             "data":{  
