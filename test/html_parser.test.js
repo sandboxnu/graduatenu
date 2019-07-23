@@ -3,19 +3,17 @@ const fs = require('fs');
 
 const cs_json = html_parser.audit_to_json(fs.readFileSync("./test/mock_audits/cs_audit.html", "utf-8"));
 const cs_json2 = html_parser.audit_to_json(fs.readFileSync("./test/mock_audits/cs_audit2.html", "utf-8"));
-const cs_json3 = html_parser.audit_to_json(fs.readFileSync("./test/mock_audits/cs_audit3.html", "utf-8"));
+//const cs_json3 = html_parser.audit_to_json(fs.readFileSync("./test/mock_audits/cs_audit3.html", "utf-8"));
 const cs_math_json = html_parser.audit_to_json(fs.readFileSync("./test/mock_audits/cs_math_grad_audit.html", "utf-8"));
 
 // this one is abnormally large (about 1000x larger)
-const me_json = html_parser.audit_to_json(fs.readFileSync("./test/mock_audits/me_audit.html"), "utf-8");
-
-
+//const me_json = html_parser.audit_to_json(fs.readFileSync("./test/mock_audits/me_audit.html"), "utf-8");
 
 const json_ex = [];
 json_ex.push(cs_json);
 json_ex.push(cs_math_json);
 json_ex.push(cs_json2);
-json_ex.push(cs_json3);
+//json_ex.push(cs_json3);
 
 test('Confirms that the generated JavaScript object is of the proper form', () => {
     for(let i = 0; i < json_ex.length; i++) {
@@ -103,9 +101,23 @@ test('Ensures that all of the courses required to take are of the form required.
             expect(json_ex[i].requirements.classes[j]).toBeDefined(); 
             expect(json_ex[i].requirements.classes[j].subject).toBeDefined();
             expect(json_ex[i].requirements.classes[j].subject).toMatch(/^[A-Z]{2,4}$/);
-            // expect(json_ex[i].requirements.classes[j].classId).toBeDefined();
-            // expect(json_ex[i].requirements.classes[j].classId).toMatch(/^[\d]{4}$/);
-            // TODO: if they do not have a classId, they have something else
+
+            if(typeof json_ex[i].requirements.classes[j].classId  === 'undefined') {
+                
+                expect(json_ex[i].requirements.classes[j].list).toBeDefined();
+                expect(json_ex[i].requirements.classes[j].num_required).toBeDefined();
+                expect(json_ex[i].requirements.classes[j].num_required).toMatch(/^[\d]$/);
+                
+                for(let k = 0; k < json_ex[i].requirements.classes[j].list.length; k++) {
+                    // assumes that no more than 9 classes will be required
+                    expect(json_ex[i].requirements.classes[j].list[k]).toMatch(/^[\d]{4}$/);    
+                }
+            } else {
+                expect(json_ex[i].requirements.classes[j].classId).toMatch(/^[\d]{4}$/);
+                if(typeof json_ex[i].requirements.classes[j].classId2 !== 'undefined') {
+                    expect(json_ex[i].requirements.classes[j].classId2).toMatch(/^[\d]{4}$/);
+                }
+            }
         }
     }
 });
