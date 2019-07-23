@@ -62,8 +62,10 @@ typings/
 
 # degree audit
 Web Audit.html
-*.html
 *.json
+
+# we still want package.json!
+!package.json
 
 # avoid temp files
 *~

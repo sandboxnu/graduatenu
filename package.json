@@ -1,0 +1,16 @@
+{
+  "name": "scheduleneu",
+  "version": "1.0.0",
+  "description": "A degree scheduling service for Northeastern students.",
+  "main": "//TODO: find entry point",
+  "repository": "https://github.com/sandboxneu/scheduleneu.git",
+  "author": "Jacob Chvatal and Alexander Takayama of Northeastern Sandbox",
+  "license": "MIT",
+  "private": false,
+  "devDependencies": {
+    "jest": "^24.8.0"
+  },
+  "scripts": {
+      "test": "jest"
+  }
+}
