@@ -195,6 +195,7 @@ function add_course_taken(json, line) {
 
     course.subject = line.substring(line.search('(FL|SP|S1|S2|SM)') + 5, line.search('(FL|SP|S1|S2|SM)') + 9).replace(' ', '').replace(' ', '');
     course.classId = courseString.substring(9, 13);
+    course.name = courseString.substring(30, courseString.search('</font>')).replace(/\s/g, '');
 
     // locates the rest of the parameters with some regex magic
     course.credithours = courseString.substring(18, 22);
@@ -209,7 +210,7 @@ function add_course_taken(json, line) {
         // not a valid course if the course id is not a number
     }
 
-    if(contains(courseString, 'IP')) {
+    if(contains(courseString, ' IP ')) {
         if(!contains_course(json.inprogress.classes, course)) {
             json.inprogress.classes.push(course);			
         } 

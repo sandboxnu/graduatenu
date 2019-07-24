@@ -11,8 +11,8 @@ const json_ex = [];
 json_ex.push(cs_json);
 json_ex.push(cs_math_json);
 json_ex.push(cs_json2);
-json_ex.push(cs_json3);
-json_ex.push(me_json);
+// json_ex.push(cs_json3);
+// json_ex.push(me_json);
 
 test('Confirms that the generated JavaScript object is of the proper form', () => {
     for(let i = 0; i < json_ex.length; i++) {
@@ -124,8 +124,8 @@ test('Ensures that all of the courses required to take are of the form required.
 test('Ensures that the required NUPaths are of the form required.', () => {
     for(let i = 0; i < json_ex.length; i++) {
         for(let j = 0; j < json_ex[i].requirements.nupaths.length; j++) { 
-            expect(json_ex[i].requirements.nupaths[i]).toBeDefined(); 
-            expect(json_ex[i].requirements.nupaths[i]).toMatch(/ND|EI|IC|FQ|SI|AD|DD|ER|WF|WD|WI|EX|CE/);
+            expect(json_ex[i].requirements.nupaths[j]).toBeDefined(); 
+            expect(json_ex[i].requirements.nupaths[j]).toMatch(/ND|EI|IC|FQ|SI|AD|DD|ER|WF|WD|WI|EX|CE/);
         }
     }
 });
@@ -142,8 +142,8 @@ test('Ensures that the in-progress NUPaths are of the form required.', () => {
 test('Ensures that the completed NUPaths are of the form required.', () => {
     for(let i = 0; i < json_ex.length; i++) {
         for(let j = 0; j < json_ex[i].completed.nupaths.length; j++) { 
-            expect(json_ex[i].completed.nupaths[i]).toBeDefined(); 
-            expect(json_ex[i].completed.nupaths[i]).toMatch(/ND|EI|IC|FQ|SI|AD|DD|ER|WF|WD|WI|EX|CE/);
+            expect(json_ex[i].completed.nupaths[j]).toBeDefined(); 
+            expect(json_ex[i].completed.nupaths[j]).toMatch(/ND|EI|IC|FQ|SI|AD|DD|ER|WF|WD|WI|EX|CE/);
         }
     }
 });
