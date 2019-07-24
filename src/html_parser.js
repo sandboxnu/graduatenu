@@ -193,14 +193,14 @@ function add_course_taken(json, line) {
         return;
     }    
 
-    course.subject = line.substring(line.search('(FL|SP|S1|S2|SM)') + 5, line.search('(FL|SP|S1|S2|SM)') + 9).replace(' ', '').replace(' ', '');
+    course.subject = courseString.substring(4, 9).replace(/\s/g, '');
     course.classId = courseString.substring(9, 13);
     course.name = courseString.substring(30, courseString.search('</font>')).replace(/\s/g, '');
 
     // locates the rest of the parameters with some regex magic
     course.credithours = courseString.substring(18, 22);
-    course.season = new RegExp('(FL|SP|S1|S2|SM)').exec(line)[0];
-    course.year = line.substring(line.search('(FL|SP|S1|S2|SM)') + 2, line.search('(FL|SP|S1|S2|SM)') + 4);
+    course.season = courseString.substring(0, 2);
+    course.year = courseString.substring(2, 4);
 
     course.termId = get_termid(course.season, course.year);
     // determines whether the course is 'in progress' or completed and sorts accordingly
@@ -211,13 +211,12 @@ function add_course_taken(json, line) {
     }
 
     if(contains(courseString, ' IP ')) {
-        if(!contains_course(json.inprogress.classes, course)) {
-            json.inprogress.classes.push(course);			
-        } 
-    } else {
-        if(!contains_course(json.completed.classes, course)) {
+    if(!contains_course(json.inprogress.classes, course)) {
+        json.inprogress.classes.push(course);		
+    }
+     
+    } else if(!contains_course(json.completed.classes, course)) {
             json.completed.classes.push(course);    
-        }
     }
 }
 
@@ -333,7 +332,7 @@ function contains(text, lookfor) {
  */
 function contains_course(arr, course) {
     for(let i = 0; i < arr.length; i++) {
-        if(arr[i].classId === course.classId && arr[i].subject === course.subject && arr[i].termId === course.termId) { 
+        if(arr[i].classId === course.classId && arr[i].subject === course.subject && arr[i].termId === course.termId && arr[i].name === course.name) { 
             return true;
         }
     }
