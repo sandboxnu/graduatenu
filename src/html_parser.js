@@ -195,7 +195,7 @@ function add_course_taken(json, line) {
 
     course.subject = courseString.substring(4, 9).replace(/\s/g, '');
     course.classId = courseString.substring(9, 13);
-    course.name = courseString.substring(30, courseString.search('</font>')).replace(/\s/g, '');
+    course.name = courseString.substring(30, courseString.search('</font>')).replace(/\s/g, '').replace('&amp;', '&').replace('(HON)','').replace(';X','');
 
     // locates the rest of the parameters with some regex magic
     course.credithours = courseString.substring(18, 22);
