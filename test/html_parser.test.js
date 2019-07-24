@@ -11,8 +11,8 @@ const json_ex = [];
 json_ex.push(cs_json);
 json_ex.push(cs_math_json);
 json_ex.push(cs_json2);
-// json_ex.push(cs_json3);
-// json_ex.push(me_json);
+//json_ex.push(cs_json3);
+//json_ex.push(me_json);
 
 test('Confirms that the generated JavaScript object is of the proper form', () => {
     for(let i = 0; i < json_ex.length; i++) {
@@ -58,6 +58,7 @@ test('Ensures that all of the complete course information is of the form require
             expect(typeof json_ex[i].completed.classes[j].hon === typeof true).toBeTruthy();
             expect(json_ex[i].completed.classes[j].subject).toBeDefined();
             expect(json_ex[i].completed.classes[j].subject).toMatch(/^[A-Z]{2,4}$/);
+            expect(json_ex[i].completed.classes[j].name).toBeDefined();
             expect(json_ex[i].completed.classes[j].classId).toBeDefined();
             expect(json_ex[i].completed.classes[j].classId).toMatch(/^[\d]{4}$/);
             expect(json_ex[i].completed.classes[j].credithours).toBeDefined();
@@ -80,6 +81,7 @@ test('Ensures that all of the in-progress course information is of the form requ
             expect(typeof json_ex[i].inprogress.classes[j].hon === typeof true).toBeTruthy();
             expect(json_ex[i].inprogress.classes[j].subject).toBeDefined();
             expect(json_ex[i].inprogress.classes[j].subject).toMatch(/^[A-Z]{2,4}$/);
+            expect(json_ex[i].inprogress.classes[j].name).toBeDefined();
             expect(json_ex[i].inprogress.classes[j].classId).toBeDefined();
             expect(json_ex[i].inprogress.classes[j].classId).toMatch(/^[\d]{4}$/);
             expect(json_ex[i].inprogress.classes[j].credithours).toBeDefined();
