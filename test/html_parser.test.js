@@ -3,12 +3,16 @@ const fs = require('fs');
 
 const cs_json = html_parser.audit_to_json(fs.readFileSync("./test/mock_audits/cs_audit.html", "utf-8"));
 const cs_json2 = html_parser.audit_to_json(fs.readFileSync("./test/mock_audits/cs_audit2.html", "utf-8"));
+const cs_json3 = html_parser.audit_to_json(fs.readFileSync("./test/mock_audits/cs_audit3.html", "utf-8"));
 const cs_math_json = html_parser.audit_to_json(fs.readFileSync("./test/mock_audits/cs_math_grad_audit.html", "utf-8"));
+const me_json = html_parser.audit_to_json(fs.readFileSync("./test/mock_audits/me_audit.html", "utf-8"));
 
 const json_ex = [];
 json_ex.push(cs_json);
 json_ex.push(cs_math_json);
 json_ex.push(cs_json2);
+json_ex.push(cs_json3);
+json_ex.push(me_json);
 
 test('Confirms that the generated JavaScript object is of the proper form', () => {
     for(let i = 0; i < json_ex.length; i++) {
