@@ -5,7 +5,7 @@
   "main": "//TODO: find entry point",
   "repository": "https://github.com/sandboxneu/scheduleneu.git",
   "author": "Jacob Chvatal and Alexander Takayama of Northeastern Sandbox",
-  "license": "MIT",
+  "license": "AGPL-3.0-or-later",
   "private": false,
   "devDependencies": {
     "jest": "^24.8.0"
