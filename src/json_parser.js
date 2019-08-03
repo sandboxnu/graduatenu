@@ -266,9 +266,10 @@ function addCompleted(schedule, completedClasses) {
 // Graph for running topological sort on the prerequisites. 
 class Graph {
   // constructor
-  constructor(numVertices) {
-    this.numVertices = numVertices;
+  constructor() {
     this.adjList = new Map();
+    this.numIncoming = new Map();
+    this.vertices = [];
   }
 
   // adds a vertex
@@ -276,6 +277,8 @@ class Graph {
     // if the vertex is already added, don't overwrite the data!
     if (!this.hasVertex(v)) {
       this.adjList.set(v, []);
+      this.numIncoming.set(v, 0);
+      this.vertices.push(v);
     }
   }
 
@@ -283,6 +286,7 @@ class Graph {
   addEdge(v, w) {
     if (!this.hasEdge(v, w)) {
       this.adjList.get(v).push(w);
+      this.numIncoming.set(w, this.numIncoming.get(w) + 1);
     }
   }
 
@@ -308,7 +312,141 @@ class Graph {
     // wasn't found, return false;
     return false;
   }
+
+  // produces a coffman graham list
+  // expects a DAG.
+  toCoffmanGraham(width) {
+
+    // produced order
+    let order = [];
+
+    // ready list, incoming neighbors map, incoming # map, added index map
+    let ready = [];
+    let incomingNeighbors = new Map();
+    let numIncomingNeighbors = new Map();
+    let addedIndex = new Map();
+
+    // initialize the lists of all the vertices for incoming neighbors
+    this.vertices.forEach(v => incomingNeighbors.set(v, []));
+
+    // build ready list, incoming neighbors map, incoming # map, added index map
+    this.vertices.forEach(v => {
+
+      // add each node with zero incoming edges to ready
+      if (this.numIncoming.get(v) == 0) ready.push(v);
+
+      // add each one of the neighbors of v to v's incoming neighbors map
+      this.adjList.get(v).forEach(n => incomingNeighbors.get(n).push(v));
+
+      // duplicate the entry for numIncomingNeighbors from this.numIncoming
+      numIncomingNeighbors.set(v, this.numIncoming.get(v));
+
+      // set the addedIndex entry to -1.
+      addedIndex.set(v, -1);
+    });
+
+    // has next vertex
+    let hasNextVertex = () => ready.length > 0;
+
+    // grabs a vertex v such that the most recent incoming neighbor of v comes before any other vertex that could be added instead of v.
+    // breaks ties by using the second most recent incoming neighbor, and so on.
+    let getNextVertex = () => {
+      // make sure we have a next vertex.
+      if (!hasNextVertex()) return;
+
+      // track the best vertex.
+      let bestVertex = ready[0];
+      let indexBestVertex = 0;
+
+      // our possible candidates include everything in ready[]. starts at index 1.
+      for (let i = 1; i < ready.length; i += 1) {
+        let v = ready[i];
+
+        if (addedIndex.get(v) < addedIndex.get(bestVertex)) {
+          // if we are strictly better (more previous), then set and move on.
+          bestVertex = v;
+          indexBestVertex = i;
+        } else if (addedIndex.get(v) == addedIndex.get(bestVertex)) {
+          // if we are the same, need to break ties 
+          // ties broken by using index of second most recently added incoming neighbor, etc., etc.
+
+          // get the incoming neighbors of contesting vertices.
+          // map incoming vertices to their index in ready (if it exists).
+          // sort greatest => least.
+          let incomingV = incomingNeighbors.get(v).map(v => ready.indexOf(v)).sort((a1, a2) => (a1 - a2));
+          let incomingBest = incomingNeighbors.get(bestVertex).map(v => ready.indexOf(v)).sort((a1, a2) => (a1 - a2));
+
+          // whether or not we broke the tie.
+          let tiebroke = false;
+          
+          // the very first thing in both lists SHOULD be what we compared earlier (which should be equal).
+          // go down the list until one of them isn't the same as the other.
+          for (let i = 0; i < Math.min(incomingV.length, incomingBest.length); i += 1) {
+
+            // if they are not equal, choose the one that has the lower index.
+            if (incomingV[i] != incomingBest[i]) {
+              tiebroke = true;
+              if (incomingV[i] < incomingBest[i]) {
+                // use v, as incoming
+                bestVertex = v;
+                indexBestVertex = i;
+              } else {
+                // otherwise, not == and v !< best => v > best, keep best.
+              }
+              break;
+            }
+          }
+
+          // if we did not successfully tiebreak, then use the one with fewer incoming edges.
+          if (!tiebroke && incomingV.length < incomingBest.length) {
+            bestVertex = v;
+            indexBestVertex = i;
+          }
+
+        }
+      }
+
+      // we have now selected a vertex to return. now we need to update tables.
+      // ready, incoming neighbors, numincoming neighbors, added index.
+
+      // remove from ready, update order.
+      order.push(ready[indexBestVertex]);
+      let orderedIndex = order.length - 1;
+
+      // for each of the outgoing neighbors of bestVertex, update numIncoming and addedIndex.
+      this.adjList.get(bestVertex).forEach(v => {
+
+        // update numincoming
+        numIncomingNeighbors.set(v, numIncomingNeighbors.get(v) - 1);
+
+        // potentially add the vertex to ready
+        if (numIncomingNeighbors.get(v) == 0) {
+          ready.push(v);
+        }
+
+        // update the addedIndex
+        // invariant: orderedIndex will always be greater than addedIndex
+        addedIndex.set(v, orderedIndex);
+      });
+
+      // we are done. return the selected vertex.
+      return ready.splice(indexBestVertex, indexBestVertex + 1)[0];
+    }
+    
+    // while we have things to add, add them to order.
+    while (hasNextVertex()) {
+
+      // this says "get", but it itself mutated order (adds to).
+      getNextVertex();
+    }
+    
+    // todo: convert topological sorted list to a coffman graham schedule of witdh "width"
+
+    return order;
+  }
 }
+
+
 
 // the following functions are for prerequisite parsing. a prerequisite object is defined below:
 
@@ -447,13 +585,13 @@ function createPrerequisiteGraph(completed, filteredRequirements, curriedGetSear
 
   // make the graph
   // must exist as a reference for the helper functions.
-  let graph = new Graph(filteredRequirements.length);
+  let graph = new Graph();
 
   // add all vertices to the graph.
   // must be added for the helper functions.
   filteredRequirements.forEach(function(course) {
     graph.addVertex(courseCode(course));
-  })
+  });
 
   // helper functions for doing prereq graph edges.
   // rely on having local reference "graph" available.
@@ -721,6 +859,7 @@ function addRequired(schedule, completed, remainingRequirements, curriedGetSearc
   
   // perform topological sort/coffman algorithm to produce an ordering with width 4.
   // todo
+  console.log(topo.toCoffmanGraham(4));
 
   // append the produced ordering to the schedule
   // todo
@@ -818,9 +957,6 @@ function toSchedule(inputLocation, outputLocation, classMapParent) {
 
   // filter through the completed classes to pull up their data.
   // only keep the stuff with actual results.
-  // todo: change this to use the specified year file of a class.
-  // ex. HIST1110.termId => '201860' => lookup in '201860.json'
-  // currently juse uses '201930' spring 2019 for everything by default.
   // todo: change this to deal with class enums: {"list":["3302", 3308"], "num_required":"1"}
   let completed = lookupIfDataExists(audit.completed.classes);
   let required = lookupIfDataExists(audit.requirements.classes);
