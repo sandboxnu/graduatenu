@@ -440,9 +440,52 @@ class Graph {
       getNextVertex();
     }
     
-    // todo: convert topological sorted list to a coffman graham schedule of witdh "width"
+    // convert topological sorted list to a coffman graham schedule of width "width".
 
-    return order;
+    // Assign the vertices of G to levels in the reverse of the topological ordering constructed in the previous step. 
+    // For each vertex v, 
+    // add v to a level: 
+    // that is at least one step higher than the highest level of any outgoing neighbor of v,
+    // that does not already have W elements assigned to it,
+    // and that is as low as possible subject to these two constraints.
+
+    let schedule = [];
+
+    // keep track of the index of nodes that have been added.
+    let nodeLevel = new Map();
+    let bottomFilled = -1;
+
+    // For each vertex v,
+    while (order.length > 0) {
+      let toAdd = order.pop();
+      let outgoing = this.adjList.get(toAdd);
+
+      let levels = outgoing.map(neighbor => nodeLevel.get(neighbor)).filter(keep => keep);
+      levels.push(-1);
+
+      let earliestLevel = Math.max.apply(null, levels);
+
+      let added = false;
+      let currentLevel = earliestLevel + 1;
+
+      while (!added) {
+        if (schedule.length > currentLevel && schedule[currentLevel].length < width) {
+          // case that current level is not yet full.
+          schedule[currentLevel].push(toAdd);
+          nodeLevel.set(toAdd, currentLevel);
+          added = true;
+        } else if (schedule.length <= currentLevel) {
+          // case that current level does not exist.
+          schedule.push([toAdd]);
+          nodeLevel.set(toAdd, currentLevel);
+          added = true;
+        }
+        currentLevel += 1;
+      }
+
+    }
+
+    return schedule;
   }
 }
 
@@ -858,11 +901,11 @@ function addRequired(schedule, completed, remainingRequirements, curriedGetSearc
   console.log(topo.adjList);
   
   // perform topological sort/coffman algorithm to produce an ordering with width 4.
-  // todo
-  console.log(topo.toCoffmanGraham(4));
+  let coffmanGraham = topo.toCoffmanGraham(4);
+  console.log(coffmanGraham);
 
-  // append the produced ordering to the schedule
-  // todo
+  // adds the produced ordering to the schedule under the property "scheduled".
+  schedule.scheduled = coffmanGraham;
 }
 
 /**
@@ -976,7 +1019,7 @@ function toSchedule(inputLocation, outputLocation, classMapParent) {
 
   // TESTING. REMOVE LATER!
   let ood = curriedGetData({"subject":"CS","classId":"4400"})
-  addRequired(null, [], required, curriedGetData);
+  addRequired({}, [], required, curriedGetData);
   // END TESTING.
   
   // output the file to ./schedule.json.
