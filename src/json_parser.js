@@ -312,9 +312,12 @@ class Graph {
     // wasn't found, return false;
     return false;
   }
-
-  // produces a coffman graham list
-  // expects a DAG.
+  
+  /**
+   * Produces a 2D array with nested arrays having length "width" using the Coffman/Graham's algorithm.
+   * Only guaranteed to work on DAGs. 
+   * @param {number} width The width of the schedule to produce.
+   */
   toCoffmanGraham(width) {
 
     // produced order
@@ -440,6 +443,30 @@ class Graph {
       getNextVertex();
     }
     
+    // ensure "order" is valid topological ordering.
+    let ensureTopological = function(topo, constraint) {
+
+      // build lookup table : vertex => index in list
+      let indices = new Map();
+      topo.forEach((v, idx) => indices.set(v, idx));
+
+      // for each vertex in the list,
+      for (let i = 0; i < topo.length; i += 1) {
+
+        // v must come before all neighbors of v.
+        let v = topo[i];
+
+        constraint.get(v).forEach(neighbor => {
+          if (!(i < indices.get(neighbor))) {
+            // if the index of ourselves is not less than the index of our neighbor, throw error.
+            throw console.trace("Ordering was not topological. Vertex: " + v + " did not come before " + neighbor);
+          }
+        });
+      }
+    }
+
+    ensureTopological(order, this.adjList);
+
     // convert topological sorted list to a coffman graham schedule of width "width".
 
     // Assign the vertices of G to levels in the reverse of the topological ordering constructed in the previous step. 
@@ -450,7 +477,7 @@ class Graph {
     // and that is as low as possible subject to these two constraints.
 
     let schedule = [];
-
+    console.log(order);
     // keep track of the index of nodes that have been added.
     let nodeLevel = new Map();
     let bottomFilled = -1;
@@ -487,6 +514,57 @@ class Graph {
 
     return schedule;
   }
+
+  /**
+   * Produced the transitive reduction of this graph.
+   * @returns {Map} The resulting adjacency matrix of this graph.
+   */
+  toTransitiveReduction() {
+
+    let transReduc = new Map();
+
+    // for each of the vertices, run a BFS. 
+    this.vertices.forEach(v => {
+
+      // use object to keep track of whether we have seen nodes, how we got to them "from", and their "distance"
+      let visited = {};
+      // we have seen ourselves.
+      visited[v] = {}; 
+      visited[v]["from"] = v;
+      visited[v]["distance"] = -1;
+
+      // run BFS beginning with the neighbors of v. beginning distance is 0.
+      let stk = this.adjList.get(v);
+      let currentDistance = 0;
+
+      // while we still have things to look at,
+      while (stk.length > 0) {
+        
+        // the next iteration (distance += 1).
+        let newStk = [];
+        stk.forEach(n => {
+          if (n in visited) {
+            // if we have already visited n, we may have to delete an edge.
+            // 3 cases:
+            // current distance is greater than the previous distance => remove previous edge
+            // current distance is less than the previous distance => remove this edge
+            // current distance is equal to the previous distance => remove either of them
+          } else {
+            // if we have not visited n:
+            // mark it as visited.
+            // record how we got to it.
+            // record the current distance.
+
+            // todo: finish implementing transitive reduction.
+          }
+        });
+      }
+    });
+  }
+
+  /**
+   * Produces the node that is furthest away from this node. 
+   */
 }
 
 
@@ -533,7 +611,7 @@ function filterAndSimplifyPrereqs(completed, prereqObj) {
       case "or":
       return filterOrPrereq(oldPrereqObj);
       default:
-      throw "property \"type\" of SearchNEU-style prereq object was not one of \"and\" or \"or\"";
+      throw console.trace("property \"type\" of SearchNEU-style prereq object was not one of \"and\" or \"or\"");
     }
   }
 
@@ -655,7 +733,7 @@ function createPrerequisiteGraph(completed, filteredRequirements, curriedGetSear
     } else if (prereq.type === "or") {
       return doesOrPrereqExist(to, prereq);
     } else {
-      throw "prereq not one of and or or";
+      throw console.trace("prereq not one of and or or");
     }
   }
 
@@ -735,7 +813,7 @@ function createPrerequisiteGraph(completed, filteredRequirements, curriedGetSear
       markOrPrereq(to, prereq);
     } else {
       // otherwise throw error.
-      throw "prereq was not of either \"and\" or \"or\" type!";
+      throw console.trace("prereq was not of either \"and\" or \"or\" type!");
     }
   }
   
@@ -828,7 +906,7 @@ function createPrerequisiteGraph(completed, filteredRequirements, curriedGetSear
       } else if (lastNestedIndex !== -1) {
         course = prereq.values[lastNestedIndex];
       } else {
-        throw "empty prereq object!";
+        throw console.trace("empty prereq object!");
       }
 
       // if we are a defined course, mark.
