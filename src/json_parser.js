@@ -336,7 +336,9 @@ class Graph {
     this.vertices.forEach(v => {
 
       // add each node with zero incoming edges to ready
-      if (this.numIncoming.get(v) == 0) ready.push(v);
+      if (this.numIncoming.get(v) == 0) {
+        ready.push(v);
+      }
 
       // add each one of the neighbors of v to v's incoming neighbors map
       this.adjList.get(v).forEach(n => incomingNeighbors.get(n).push(v));
@@ -376,8 +378,8 @@ class Graph {
           // get the incoming neighbors of contesting vertices.
           // map incoming vertices to their index in ready (if it exists).
           // sort greatest => least.
-          let incomingV = incomingNeighbors.get(v).map(v => ready.indexOf(v)).sort((a1, a2) => (a1 - a2));
-          let incomingBest = incomingNeighbors.get(bestVertex).map(v => ready.indexOf(v)).sort((a1, a2) => (a1 - a2));
+          let incomingV = incomingNeighbors.get(v).map(ne => ready.indexOf(ne)).sort((a1, a2) => (a2 - a1));
+          let incomingBest = incomingNeighbors.get(bestVertex).map(ne => ready.indexOf(ne)).sort((a1, a2) => (a2 - a1));
 
           // whether or not we broke the tie.
           let tiebroke = false;
@@ -414,12 +416,13 @@ class Graph {
 
       // remove from ready, update order.
       order.push(ready[indexBestVertex]);
+      // the index that we added ready[indexBestVertex] at in order.
       let orderedIndex = order.length - 1;
 
       // for each of the outgoing neighbors of bestVertex, update numIncoming and addedIndex.
       this.adjList.get(bestVertex).forEach(v => {
 
-        // update numincoming
+        // update numIncomingNeighbors.
         numIncomingNeighbors.set(v, numIncomingNeighbors.get(v) - 1);
 
         // potentially add the vertex to ready
@@ -469,47 +472,57 @@ class Graph {
 
     // convert topological sorted list to a coffman graham schedule of width "width".
 
-    // Assign the vertices of G to levels in the reverse of the topological ordering constructed in the previous step. 
-    // For each vertex v, 
-    // add v to a level: 
-    // that is at least one step higher than the highest level of any outgoing neighbor of v,
-    // that does not already have W elements assigned to it,
-    // and that is as low as possible subject to these two constraints.
+    // If, while at a particular round, the next task to be scheduled has a dependency that’s also scheduled for that same round,
+    // we have no choice but to leave the remaining CPUs unused and start the next round
+    
+    let schedule = [[]];
+    let currentLevel = 0;
 
-    let schedule = [];
-    console.log(order);
-    // keep track of the index of nodes that have been added.
-    let nodeLevel = new Map();
-    let bottomFilled = -1;
+    let conflictExist = (level, toAdd) => {
 
-    // For each vertex v,
-    while (order.length > 0) {
-      let toAdd = order.pop();
-      let outgoing = this.adjList.get(toAdd);
+      // keep track of stuff we have seen.
+      let seen = {};
 
-      let levels = outgoing.map(neighbor => nodeLevel.get(neighbor)).filter(keep => keep);
-      levels.push(-1);
+      // for each one of the things already added,
+      // does toAdd come after the thing already added?
+      let check = schedule[level];
+      let newCheck = [];
+      // while we still ahve stuff to check,
+      while (check.length > 0) {
 
-      let earliestLevel = Math.max.apply(null, levels);
-
-      let added = false;
-      let currentLevel = earliestLevel + 1;
-
-      while (!added) {
-        if (schedule.length > currentLevel && schedule[currentLevel].length < width) {
-          // case that current level is not yet full.
-          schedule[currentLevel].push(toAdd);
-          nodeLevel.set(toAdd, currentLevel);
-          added = true;
-        } else if (schedule.length <= currentLevel) {
-          // case that current level does not exist.
-          schedule.push([toAdd]);
-          nodeLevel.set(toAdd, currentLevel);
-          added = true;
+        // check them.
+        for (let i = 0; i < check.length; i += 1) {
+          let v = check[i];
+          if (!(v in seen)) {
+            // if it's the item, then return true, (a conflict exists).
+            if (v === toAdd) {
+              return true;
+            } else {
+              // if we haven't seen the item, then add all the neighbors of item to newCheck.
+              seen[v] = true;
+              this.adjList.get(v).forEach(neighbor => {
+                newCheck.push(neighbor);
+              });
+            }
+          }
         }
-        currentLevel += 1;
+        check = newCheck;
+        newCheck = [];
       }
 
+      return false;
+      
+    }
+
+    for (let i = 0; i < order.length; i += 1) {
+      let v = order[i];
+      if (schedule[currentLevel].length < width && !conflictExist(currentLevel, v)) {
+          // if no conflict exists, add.
+          schedule[currentLevel].push(v);
+      } else {
+        currentLevel += 1;
+        schedule.push([v]);
+      }
     }
 
     return schedule;
