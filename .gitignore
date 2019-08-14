@@ -72,3 +72,6 @@ Web Audit.html
 
 # for our mac users
 .DS_Store
+
+# sample json file for testing json_parser. remove later.
+!sampleScheduleOutput.json

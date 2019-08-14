@@ -1,0 +1,308 @@
+{
+  "completed": {
+    "classes": [
+      {
+        "termId": 201860,
+        "courses": [
+          {
+            "hon": false,
+            "subject": "MATH",
+            "classId": "1341",
+            "credithours": "4.00",
+            "season": "S2",
+            "year": "18",
+            "termId": "201860"
+          },
+          {
+            "hon": false,
+            "subject": "MATH",
+            "classId": "1342",
+            "credithours": "4.00",
+            "season": "S2",
+            "year": "18",
+            "termId": "201860"
+          },
+          {
+            "hon": false,
+            "subject": "BIOL",
+            "classId": "1111",
+            "credithours": "4.00",
+            "season": "S2",
+            "year": "18",
+            "termId": "201860"
+          },
+          {
+            "hon": false,
+            "subject": "BIOL",
+            "classId": "1112",
+            "credithours": "1.00",
+            "season": "S2",
+            "year": "18",
+            "termId": "201860"
+          },
+          {
+            "hon": false,
+            "subject": "BIOL",
+            "classId": "1113",
+            "credithours": "4.00",
+            "season": "S2",
+            "year": "18",
+            "termId": "201860"
+          },
+          {
+            "hon": false,
+            "subject": "BIOL",
+            "classId": "1114",
+            "credithours": "1.00",
+            "season": "S2",
+            "year": "18",
+            "termId": "201860"
+          },
+          {
+            "hon": false,
+            "subject": "ENGW",
+            "classId": "1111",
+            "credithours": "8.00",
+            "season": "S2",
+            "year": "18",
+            "termId": "201860"
+          },
+          {
+            "hon": false,
+            "subject": "CS",
+            "classId": "1990",
+            "credithours": "4.00",
+            "season": "S2",
+            "year": "18",
+            "termId": "201860"
+          },
+          {
+            "hon": false,
+            "subject": "ECON",
+            "classId": "1115",
+            "credithours": "4.00",
+            "season": "S2",
+            "year": "18",
+            "termId": "201860"
+          },
+          {
+            "hon": false,
+            "subject": "ECON",
+            "classId": "1116",
+            "credithours": "4.00",
+            "season": "S2",
+            "year": "18",
+            "termId": "201860"
+          },
+          {
+            "hon": false,
+            "subject": "HIST",
+            "classId": "1110",
+            "credithours": "4.00",
+            "season": "S2",
+            "year": "18",
+            "termId": "201860"
+          },
+          {
+            "hon": false,
+            "subject": "MATH",
+            "classId": "2280",
+            "credithours": "4.00",
+            "season": "S2",
+            "year": "18",
+            "termId": "201860"
+          },
+          {
+            "hon": false,
+            "subject": "PHYS",
+            "classId": "1151",
+            "credithours": "3.00",
+            "season": "S2",
+            "year": "18",
+            "termId": "201860"
+          },
+          {
+            "hon": false,
+            "subject": "PHYS",
+            "classId": "1152",
+            "credithours": "1.00",
+            "season": "S2",
+            "year": "18",
+            "termId": "201860"
+          },
+          {
+            "hon": false,
+            "subject": "PHYS",
+            "classId": "1153",
+            "credithours": "1.00",
+            "season": "S2",
+            "year": "18",
+            "termId": "201860"
+          },
+          {
+            "hon": false,
+            "subject": "PSYC",
+            "classId": "1101",
+            "credithours": "4.00",
+            "season": "S2",
+            "year": "18",
+            "termId": "201860"
+          }
+        ]
+      },
+      {
+        "termId": 201910,
+        "courses": [
+          {
+            "hon": false,
+            "subject": "CS",
+            "classId": "1200",
+            "credithours": "1.00",
+            "season": "FL",
+            "year": "18",
+            "termId": "201910"
+          },
+          {
+            "hon": true,
+            "subject": "CS",
+            "classId": "1800",
+            "credithours": "4.00",
+            "season": "FL",
+            "year": "18",
+            "termId": "201910"
+          },
+          {
+            "hon": true,
+            "subject": "CS",
+            "classId": "1802",
+            "credithours": "1.00",
+            "season": "FL",
+            "year": "18",
+            "termId": "201910"
+          },
+          {
+            "hon": false,
+            "subject": "CS",
+            "classId": "2500",
+            "credithours": "4.00",
+            "season": "FL",
+            "year": "18",
+            "termId": "201910"
+          },
+          {
+            "hon": false,
+            "subject": "CS",
+            "classId": "2501",
+            "credithours": "1.00",
+            "season": "FL",
+            "year": "18",
+            "termId": "201910"
+          },
+          {
+            "hon": false,
+            "subject": "MATH",
+            "classId": "2331",
+            "credithours": "4.00",
+            "season": "FL",
+            "year": "18",
+            "termId": "201910"
+          },
+          {
+            "hon": true,
+            "subject": "PHIL",
+            "classId": "1145",
+            "credithours": "4.00",
+            "season": "FL",
+            "year": "18",
+            "termId": "201910"
+          },
+          {
+            "hon": true,
+            "subject": "HONR",
+            "classId": "1102",
+            "credithours": "1.00",
+            "season": "FL",
+            "year": "18",
+            "termId": "201910"
+          }
+        ]
+      },
+      {
+        "termId": 201930,
+        "courses": [
+          {
+            "hon": false,
+            "subject": "CS",
+            "classId": "2510",
+            "credithours": "4.00",
+            "season": "SP",
+            "year": "19",
+            "termId": "201930"
+          },
+          {
+            "hon": false,
+            "subject": "CS",
+            "classId": "2511",
+            "credithours": "1.00",
+            "season": "SP",
+            "year": "19",
+            "termId": "201930"
+          },
+          {
+            "hon": false,
+            "subject": "CS",
+            "classId": "2800",
+            "credithours": "4.00",
+            "season": "SP",
+            "year": "19",
+            "termId": "201930"
+          },
+          {
+            "hon": false,
+            "subject": "CS",
+            "classId": "2801",
+            "credithours": "1.00",
+            "season": "SP",
+            "year": "19",
+            "termId": "201930"
+          },
+          {
+            "hon": false,
+            "subject": "CS",
+            "classId": "3200",
+            "credithours": "4.00",
+            "season": "SP",
+            "year": "19",
+            "termId": "201930"
+          },
+          {
+            "hon": false,
+            "subject": "CS",
+            "classId": "3950",
+            "credithours": "2.00",
+            "season": "SP",
+            "year": "19",
+            "termId": "201930"
+          }
+        ]
+      }
+    ]
+  },
+  "scheduled": [
+    [
+      "CS1210",
+      "CS3700",
+      "CS3800",
+      "THTR1170"
+    ],
+    [
+      "DS2000",
+      "CS3500",
+      "CS3000"
+    ],
+    [
+      "CS4500",
+      "CS4400"
+    ]
+  ]
+}
