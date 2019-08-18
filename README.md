@@ -1,6 +1,6 @@
-# ScheduleNEU
+# GraduateNU
 
-An automatic schedule builder utilizing your current degree audit information.
+An automatic plan builder utilizing your current degree audit information to help you graduate.
 
 Dependencies:
 - Node.js
