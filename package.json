@@ -8,9 +8,9 @@
   "license": "AGPL-3.0-or-later",
   "private": false,
   "devDependencies": {
-    "jest": "^24.8.0"
+    "jest": "^24.9.0"
   },
   "scripts": {
-      "test": "jest"
+    "test": "jest"
   }
 }
