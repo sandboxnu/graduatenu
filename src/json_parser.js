@@ -9,11 +9,6 @@
 const fs = require('fs');
 const https = require('https');
 
-// input file path to JSON file to convert from.
-const INPUT = '../parsed_audit.json';
-// the output file path to the JSON file to convert to. 
-const OUTPUT = '../schedule.json';
-
 // the year
 const YEAR = '2019';
 
@@ -150,10 +145,10 @@ function getFileAsJson(inputLocation) {
  */
 const download = (url, dest) => new Promise(function(resolve, reject) {
   if (fs.existsSync(dest)) {
-    console.log("File " + dest + " found, skipping download.");
+    // console.log("File " + dest + " found, skipping download.");
     resolve("Found");
   } else {
-    console.log("File " + dest + " not found, downloading from " + url);
+    // console.log("File " + dest + " not found, downloading from " + url);
 
     let file = fs.createWriteStream(dest);
     let request = https.get(url, function(response) {
@@ -161,7 +156,7 @@ const download = (url, dest) => new Promise(function(resolve, reject) {
       file.on('finish', function() {
         file.close(err => {
           if (err) reject(err);
-          console.log("Download complete.");
+          // console.log("Download complete.");
           resolve("Downloaded");
         });  // close() is async
       });
@@ -197,8 +192,8 @@ let addClassMapsOfYear = function(year, classMapParent) {
     return Promise.all(jsons);
   }, err => {
     // if the download fails, then log the error.
-    console.log("error downloading files");
-    console.log("err");
+    // console.log("error downloading files");
+    // console.log("err");
     return "failure";
   })
   .then(results => {
@@ -211,8 +206,8 @@ let addClassMapsOfYear = function(year, classMapParent) {
     return "success";
   }, err => {
     // if reading stuff as JSON fails, then log the error
-    console.log("failed reading items as JSON");
-    console.log(err);
+    // console.log("failed reading items as JSON");
+    // console.log(err);
     return "failure";
   });
 }
@@ -319,7 +314,75 @@ class Graph {
    * @param {number} width The width of the schedule to produce.
    */
   toCoffmanGraham(width) {
+    
+    // technically for coffman/graham, we need to find the transitive reduction for this DAG before computing topological ordering.
+    // but we'll skip it for now.
+    // todo: implement transitive reduction.
 
+    // convert topological sorted list to a coffman graham schedule of width "width".
+    let order = this.toTopologicalOrdering();
+
+    // If, while at a particular round, the next task to be scheduled has a dependency that’s also scheduled for that same round,
+    // we have no choice but to leave the remaining CPUs unused and start the next round
+    
+    let schedule = [[]];
+    let currentLevel = 0;
+
+    let conflictExist = (level, toAdd) => {
+
+      // keep track of stuff we have seen.
+      let seen = {};
+
+      // for each one of the things already added,
+      // does toAdd come after the thing already added?
+      let check = schedule[level];
+      let newCheck = [];
+      // while we still ahve stuff to check,
+      while (check.length > 0) {
+
+        // check them.
+        for (let i = 0; i < check.length; i += 1) {
+          let v = check[i];
+          if (!(v in seen)) {
+            // if it's the item, then return true, (a conflict exists).
+            if (v === toAdd) {
+              return true;
+            } else {
+              // if we haven't seen the item, then add all the neighbors of item to newCheck.
+              seen[v] = true;
+              this.adjList.get(v).forEach(neighbor => {
+                newCheck.push(neighbor);
+              });
+            }
+          }
+        }
+        check = newCheck;
+        newCheck = [];
+      }
+
+      return false;
+      
+    }
+
+    for (let i = 0; i < order.length; i += 1) {
+      let v = order[i];
+      if (schedule[currentLevel].length < width && !conflictExist(currentLevel, v)) {
+          // if no conflict exists, add.
+          schedule[currentLevel].push(v);
+      } else {
+        currentLevel += 1;
+        schedule.push([v]);
+      }
+    }
+
+    return schedule;
+  }
+
+  /**
+   * Produces a valid topological ordering for this graph.
+   * Tiebreaks by choosing vertices with the earliest most recently added incoming neighbor of v, or vertices with less incoming neighbors.
+   */
+  toTopologicalOrdering() {
     // produced order
     let order = [];
 
@@ -445,139 +508,9 @@ class Graph {
       // this says "get", but it itself mutated order (adds to).
       getNextVertex();
     }
-    
-    // ensure "order" is valid topological ordering.
-    let ensureTopological = function(topo, constraint) {
 
-      // build lookup table : vertex => index in list
-      let indices = new Map();
-      topo.forEach((v, idx) => indices.set(v, idx));
-
-      // for each vertex in the list,
-      for (let i = 0; i < topo.length; i += 1) {
-
-        // v must come before all neighbors of v.
-        let v = topo[i];
-
-        constraint.get(v).forEach(neighbor => {
-          if (!(i < indices.get(neighbor))) {
-            // if the index of ourselves is not less than the index of our neighbor, throw error.
-            throw console.trace("Ordering was not topological. Vertex: " + v + " did not come before " + neighbor);
-          }
-        });
-      }
-    }
-
-    ensureTopological(order, this.adjList);
-
-    // convert topological sorted list to a coffman graham schedule of width "width".
-
-    // If, while at a particular round, the next task to be scheduled has a dependency that’s also scheduled for that same round,
-    // we have no choice but to leave the remaining CPUs unused and start the next round
-    
-    let schedule = [[]];
-    let currentLevel = 0;
-
-    let conflictExist = (level, toAdd) => {
-
-      // keep track of stuff we have seen.
-      let seen = {};
-
-      // for each one of the things already added,
-      // does toAdd come after the thing already added?
-      let check = schedule[level];
-      let newCheck = [];
-      // while we still ahve stuff to check,
-      while (check.length > 0) {
-
-        // check them.
-        for (let i = 0; i < check.length; i += 1) {
-          let v = check[i];
-          if (!(v in seen)) {
-            // if it's the item, then return true, (a conflict exists).
-            if (v === toAdd) {
-              return true;
-            } else {
-              // if we haven't seen the item, then add all the neighbors of item to newCheck.
-              seen[v] = true;
-              this.adjList.get(v).forEach(neighbor => {
-                newCheck.push(neighbor);
-              });
-            }
-          }
-        }
-        check = newCheck;
-        newCheck = [];
-      }
-
-      return false;
-      
-    }
-
-    for (let i = 0; i < order.length; i += 1) {
-      let v = order[i];
-      if (schedule[currentLevel].length < width && !conflictExist(currentLevel, v)) {
-          // if no conflict exists, add.
-          schedule[currentLevel].push(v);
-      } else {
-        currentLevel += 1;
-        schedule.push([v]);
-      }
-    }
-
-    return schedule;
+    return order;
   }
-
-  /**
-   * Produced the transitive reduction of this graph.
-   * @returns {Map} The resulting adjacency matrix of this graph.
-   */
-  toTransitiveReduction() {
-
-    let transReduc = new Map();
-
-    // for each of the vertices, run a BFS. 
-    this.vertices.forEach(v => {
-
-      // use object to keep track of whether we have seen nodes, how we got to them "from", and their "distance"
-      let visited = {};
-      // we have seen ourselves.
-      visited[v] = {}; 
-      visited[v]["from"] = v;
-      visited[v]["distance"] = -1;
-
-      // run BFS beginning with the neighbors of v. beginning distance is 0.
-      let stk = this.adjList.get(v);
-      let currentDistance = 0;
-
-      // while we still have things to look at,
-      while (stk.length > 0) {
-        
-        // the next iteration (distance += 1).
-        let newStk = [];
-        stk.forEach(n => {
-          if (n in visited) {
-            // if we have already visited n, we may have to delete an edge.
-            // 3 cases:
-            // current distance is greater than the previous distance => remove previous edge
-            // current distance is less than the previous distance => remove this edge
-            // current distance is equal to the previous distance => remove either of them
-          } else {
-            // if we have not visited n:
-            // mark it as visited.
-            // record how we got to it.
-            // record the current distance.
-
-            // todo: finish implementing transitive reduction.
-          }
-        });
-      }
-    });
-  }
-
-  /**
-   * Produces the node that is furthest away from this node. 
-   */
 }
 
 
@@ -989,11 +922,11 @@ function addRequired(schedule, completed, remainingRequirements, curriedGetSearc
   let topo = createPrerequisiteGraph(completed, remainingRequirements, curriedGetSearchNEUData);
 
   // we should now have a complete graph with edges.
-  console.log(topo.adjList);
+  // console.log(topo.adjList);
   
   // perform topological sort/coffman algorithm to produce an ordering with width 4.
   let coffmanGraham = topo.toCoffmanGraham(4);
-  console.log(coffmanGraham);
+  // console.log(coffmanGraham);
 
   // adds the produced ordering to the schedule under the property "scheduled".
   schedule.scheduled = coffmanGraham;
@@ -1035,7 +968,7 @@ let getSearchNEUData = function(course, classMapParent) {
 
   if (classId && subject && termId && classMap) {
     // if everything is valid, then query the classMap
-    console.log("data found for: " + subject + classId);
+    // console.log("data found for: " + subject + classId);
     return getClassData(classMap, subject, classId);
   } else if (subject && classId && !termId) {
     // if only the subject and classId are valid, guess the termId from most recent => least recent
@@ -1046,32 +979,32 @@ let getSearchNEUData = function(course, classMapParent) {
       let data = getClassData(classMap, subject, classId);
       if (data) {
         // if the data exists, then return. otherwise keep searching.
-        console.log("data found in term: " + termId + " for course: " + subject + classId);
+        // console.log("data found in term: " + termId + " for course: " + subject + classId);
         return data;
       }
     }
     // if not found, then return undefined
-    console.log("data not found for:");
-    console.log(course);
+    // console.log("data not found for:");
+    // console.log(course);
     return undefined;
   } else {
     // if we have no subject and classId, then we don't even know what course to search for. 
-    console.log("data not found for:");
-    console.log(course);
+    // console.log("data not found for:");
+    // console.log(course);
     return undefined;
   }
 }
 
 /**
  * Parses the provided JSON file to an output JSON file, organized chronologically.
- * @param {String} inputLocation The target filepath to input from.
- * @param {String} outputLocation The target filepath to output to.
+ * @param {String} input The input of a file.
  * @param {Object} classMapParent A classMap parent with each classMap under its corresponding termId.
+ * @returns {Promise} The resulting schedule object.
  */
-function toSchedule(inputLocation, outputLocation, classMapParent) {
+function toSchedule(input, classMapParent) {
   
   // parse the json file
-  let audit = JSON.parse(fs.readFileSync(inputLocation));
+  let audit = JSON.parse(input);
 
   let schedule = 
   {
@@ -1104,49 +1037,53 @@ function toSchedule(inputLocation, outputLocation, classMapParent) {
   // note, expects data in SearchNEU format
   addRequired(schedule, completed, remainingRequirements, curriedGetData);
 
-  // the output JSON
-  let JSONSchedule = JSON.stringify(schedule, null, 2);
-  // console.log("schedule: \n" + JSONSchedule);
+  return new Promise((resolve, reject) => resolve(schedule));
+}
 
-  // TESTING. REMOVE LATER!
-  let ood = curriedGetData({"subject":"CS","classId":"4400"})
-  addRequired({}, [], required, curriedGetData);
-  // END TESTING.
+/**
+ * Runs the main program.
+ * @param {Object} input The input object to read from.
+ * @returns {Promise} A promise, resolved with the value of the returned schedule.
+ */
+let json_to_schedule = (inputPath) => {
   
-  // output the file to ./schedule.json.
-  fs.writeFile(outputLocation, JSONSchedule, (err) => {
-    if (err) throw err;
+  let classMapParent = {};
+  let years = [2018, 2019];
+
+  return Promise.all(years.map(year => addClassMapsOfYear(year, classMapParent)))
+  .then(result => {
+    // adds the most recent semester's termId as a property
+    let maxYear = Math.max.apply(null, years);
+    let maxSeason = Math.max.apply(null, SEASONS);
+    classMapParent["mostRecentSemester"] = "" + maxYear + maxSeason;
+    
+    // adds all the termIds as a property (array form).
+    let allTermIds = [];
+    years.forEach(function(item, index, arr) {
+      let year = item;
+      SEASONS.forEach(function(item, index, arr) {
+        let season = item;
+        let termId = "" + year + season;
+        allTermIds.push(termId);
+      });
+    });
+    classMapParent["allTermIds"] = allTermIds;
+    // ensure that they are sorted greatest => least.
+    classMapParent.allTermIds.sort((a1, a2) => (a2 - a1));
+    
+    // success! now run the main code.
+    return toSchedule(inputPath, classMapParent);
+  }, err => {
+    // console.log("something went wrong with addClassMapsOfYear");
+    // console.log(err);
+  }).then(result => {
+    console.log(JSON.stringify(result, null, 2));
+    return result;
   });
 }
 
-// run the main program. 
-let classMapParent = {};
-let years = [2018, 2019];
+// export json_to_schedule.
+module.exports.json_to_schedule = json_to_schedule;
 
-Promise.all(years.map(year => addClassMapsOfYear(year, classMapParent)))
-.then(result => {
-  // adds the most recent semester's termId as a property
-  let maxYear = Math.max.apply(null, years);
-  let maxSeason = Math.max.apply(null, SEASONS);
-  classMapParent["mostRecentSemester"] = "" + maxYear + maxSeason;
-
-  // adds all the termIds as a property (array form).
-  let allTermIds = [];
-  years.forEach(function(item, index, arr) {
-    let year = item;
-    SEASONS.forEach(function(item, index, arr) {
-      let season = item;
-      let termId = "" + year + season;
-      allTermIds.push(termId);
-    });
-  });
-  classMapParent["allTermIds"] = allTermIds;
-  // ensure that they are sorted greatest => least.
-  classMapParent.allTermIds.sort((a1, a2) => (a2 - a1));
-
-  // success! now run the main code.
-  toSchedule(INPUT, OUTPUT, classMapParent);
-}, err => {
-  console.log("something went wrong with addClassMapsOfYear");
-  console.log(err);
-});
+// export Graph class for testing.
+module.exports.Graph = Graph;
