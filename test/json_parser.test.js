@@ -204,14 +204,22 @@ expect.extend({
 });
 
 // test json_parser.json_to_schedule(...)
+const json_loader = require('../src/json_loader.js');
 const json_parser = require('../src/json_parser.js');
+
 const fs = require('fs');
+
+// the classMapParent constant
+const PARENT = json_loader.loadClassMaps();
 
 let schedules = [];
 
-// all promises.
-let cs_sched = json_parser.json_to_schedule(fs.readFileSync('./test/mock_parsed_audits/cs_json.json', 'utf-8'));
-let cs_sched2 = json_parser.json_to_schedule(fs.readFileSync('./test/mock_parsed_audits/cs_json2.json', 'utf-8'));
+let cs_sched = PARENT.then(result => {
+  return json_parser.toSchedule(fs.readFileSync('./test/mock_parsed_audits/cs_json.json', 'utf-8'), result);
+});
+let cs_sched2 = PARENT.then(result => {
+  return json_parser.toSchedule(fs.readFileSync('./test/mock_parsed_audits/cs_json2.json', 'utf-8'), result);
+});
 // const tempSchedule = JSON.parse(fs.readFileSync('./test/mock_parsed_audits/sampleScheduleOutput.json', 'utf-8'));
 
 schedules.push(cs_sched);
