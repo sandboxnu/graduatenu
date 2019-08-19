@@ -66,7 +66,7 @@ typings/
 !cs_audit2.html
 !cs_audit3.html
 !cs_math_grad_audit.html
-me_audit.html
+!me_audit.html
 
 # parsed degree jsons for testing.
 *.json
