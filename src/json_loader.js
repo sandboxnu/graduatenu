@@ -34,9 +34,9 @@ SEASONS.map(season => 'https://searchneu.com/data/v2/getTermDump/neu.edu/' + yea
  * @param {String} year The target year. expected as a string or number. in the form "2019".
  * @returns {String[]} The names of the five files.
  */
-let getClassMapFilePaths = year => SEASONS.map(season => '../' + year + season + '.json');
+let getClassMapFilePaths = year => SEASONS.map(season => './' + year + season + '.json');
 
-const SEASON_PATHS = SEASONS.map(season => '../' + YEAR + season + '.json');
+const SEASON_PATHS = SEASONS.map(season => './' + YEAR + season + '.json');
 // the filepath locations for storing fall and spring course data.
 const FALL_PATH = SEASON_PATHS[0];
 const SPRING_PATH = SEASON_PATHS[1];
