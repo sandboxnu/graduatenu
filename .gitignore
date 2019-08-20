@@ -60,9 +60,18 @@ typings/
 # next.js build output
 .next
 
-# degree audit
-Web Audit.html
+# degree audits for testing.
+*.html
+!cs_audit.html
+!cs_audit2.html
+!cs_audit3.html
+!cs_math_grad_audit.html
+!me_audit.html
+
+# parsed degree jsons for testing.
 *.json
+!cs_json.json
+!cs_json2.json
 
 # we still want package.json!
 !package.json
@@ -72,6 +81,3 @@ Web Audit.html
 
 # for our mac users
 .DS_Store
-
-# sample json file for testing json_parser. remove later.
-!sampleScheduleOutput.json
