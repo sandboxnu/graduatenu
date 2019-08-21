@@ -1,8 +1,3 @@
-#!/usr/bin/node
-// This line of the file makes this file easily executable from the command line.
-// Rather than running 'node ${filename}, the user need only make the file executable once
-// (chmod +x ${filename}) then can run the file wih ./${filename} (or can add the file to 
-// the user's 'bin' folder to permit execution from anywhere as the user).'
 
 /**
  * HTML Degree Audit parser built for Northeastern University's degree audit.
