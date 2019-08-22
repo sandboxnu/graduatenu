@@ -76,6 +76,9 @@ typings/
 # we still want package.json!
 !package.json
 
+# include TypeScript config
+!tsconfig.json
+
 # avoid temp files
 *~
 
