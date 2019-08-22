@@ -8,8 +8,7 @@
  * classes and NUPaths taken and in progress as well as requirements to take.
  */
 
-// The FileStream library
-const fs = require('fs');
+import * as fs from "fs";
 
 // location of the input file
 const INPUT = '../test/mock_audits/cs_audit.html';
@@ -22,16 +21,16 @@ const OUTPUT = 'parsed_audit.json';
  * @param {JSON}   json  The json file to which the major should be added.
  * @param {String} line  The line at which the major can be found.
  */
-function identify_major(json, line) {
+function identify_major(json: JSON, line: String) {
     json.data.major = line.substring(line.search('\">') + 2, line.search(' - Major')); 
 }
 
 /**
  * Gets the year this degree audit was created.
- * @param {JSON} json  The json file to which the major should be added.
- * @param {String}     The line containing the year.
+ * @param {JSON} json       The JSON file to which the major should be added.
+ * @param {String} line     The line containing the year.
  */
-function get_year(json, line) {
+function get_year(json: JSON, line: String) {
     json.data.year = line.substring(line.search('CATALOG YEAR:') + 'CATALOG YEAR: '.length, line.search('CATALOG YEAR:') + 'CATALOG YEAR: '.length + 4);
 }
 
@@ -40,7 +39,7 @@ function get_year(json, line) {
  * @param {JSON} json  The json file to which this graduation date should be added.
  * @param {String} line The line which contains the graduation date desired.
  */
-function get_grad_date(json, line) {
+function get_grad_date(json: JSON, line: String) {
     json.data.grad = line.substring(line.search('GRADUATION DATE: ') + 'GRADUATION DATE: '.length, line.search('GRADUATION DATE: ') + 'GRADUATION DATE:  '.length + 7);
 }
 
@@ -50,7 +49,7 @@ function get_grad_date(json, line) {
  * @param {String} lines  The lines to be scanned for the NUPaths.
  * @param {Integer} i     The index of the line at which we currently stand.
  */
-function get_nupaths(json, lines, i) {
+function get_nupaths(json: JSON, lines , i: BigInteger) {
     i++;
     // while there is another line with another listed NUPath (they alone use the HTML tag)
     while(contains(lines[i], '<br>')) {
@@ -83,6 +82,13 @@ function hasNumber(n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
 }
 
+
+
+interface RequiredCourse {
+    subject: string,
+    classId: number,
+}
+
 /**
  * Adds the courses required by the degree audit to be taken to the JSON.
  * @param {JSON} json  	 The json file to which the required courses should be added.
@@ -95,11 +101,11 @@ function add_courses_to_take(json, lines, j, subjectType) {
     courseList.pop();
     courseList.pop();
 
-    let type = subjectType;
+    let type: string = subjectType;
     let courses = [];
-    let seenEnumeration = false;
-    for(let i = 0; i < courseList.length; i++) {
-        let course = { };
+    let seenEnumeration: boolean = false;
+    for(let i: number = 0; i < courseList.length; i++) {
+        let course = { } as RequiredCourse;
 
         // called on next line to pick up future courses if relevant
         if(contains(courseList[i],'&amp;')) {
@@ -173,13 +179,25 @@ function add_courses_to_take(json, lines, j, subjectType) {
     json.requirements.classes = [].concat(json.requirements.classes, courses);
 }
 
+
+interface TakenCourse {
+    hon: boolean,
+    subject: string,
+    classId: number,
+    name: string,
+    creditHours: number,
+    season: string,
+    year: number,
+    termId: string,
+}
+
 /**
  * Adds the courses taken so far to the current JSON file.
  * @param {JSON} json 	 The JSON file to which the courses to be taken should be added.
  * @param {String} line  The line which contains the course taken.
  */
 function add_course_taken(json, line) {
-    let course = {};
+    let course = {} as TakenCourse;
     let courseString = line.substring(line.search('(FL|SP|S1|S2|SM)'));
     course.hon = contains(line, '\(HON\)');
 
@@ -193,14 +211,14 @@ function add_course_taken(json, line) {
     course.name = courseString.substring(30, courseString.search('</font>')).replace(/\s/g, '').replace('&amp;', '&').replace('(HON)','').replace(';X','');
 
     // locates the rest of the parameters with some regex magic
-    course.credithours = courseString.substring(18, 22);
+    course.creditHours = courseString.substring(18, 22);
     course.season = courseString.substring(0, 2);
     course.year = courseString.substring(2, 4);
 
     course.termId = get_termid(course.season, course.year);
     // determines whether the course is 'in progress' or completed and sorts accordingly
 
-    if(isNaN(course.classId) || course.classId == null || isNaN(course.credithours) || course.credithours == null) {
+    if(isNaN(course.classId) || course.classId == null || isNaN(course.creditHours) || course.credithours == null) {
         return; 
         // not a valid course if the course id is not a number
     }
@@ -222,7 +240,7 @@ function add_course_taken(json, line) {
  * @return {int}            A six-digit integer representing the termId.
  * @throws err              if the given year is not part of the enumeration specified.
  */
-function get_termid(season, year) {
+function get_termid(season: string, year: number) {
     // Makes the assumption that all years will be in the 21st century
     // As different technology will likely be used in 81 years, this is a valid assumption
     let termid = "20" + year;
@@ -251,7 +269,7 @@ function get_termid(season, year) {
  */
 function audit_to_json(data) {
 
-    json = { 
+    let json = { 
         completed: {
             classes:[],
             nupaths:[]
@@ -335,7 +353,4 @@ function contains_course(arr, course) {
     return false;
 }
 
-// prints out the requirements to ensure they are in the correct format
-
-// functions to export for testing
 module.exports.audit_to_json = audit_to_json;
