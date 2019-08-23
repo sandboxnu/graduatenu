@@ -8,6 +8,7 @@
  */
 
 import * as fs from "fs";
+import { CompleteCourse, NUPaths, CompleteCourses, RequiredCourses, InitialScheduleRep,  } from "./course_types";
 
 interface AuditMapping {
     [key:string] : Function;
@@ -22,14 +23,14 @@ class AuditToJSON {
     protected auditYear: number;
     protected gradDate: string;
 
-    protected completeNUPaths: Array<string>;
-    protected completeCourses: Array<Course>;
+    protected completeNUPaths: NUPaths;
+    protected completeCourses: CompleteCourses;
 
-    protected ipNUPaths: Array<string>;
-    protected ipCourses: Array<Course>;
+    protected ipNUPaths: NUPaths;
+    protected ipCourses: CompleteCourses;
 
-    protected requiredNUPaths: Array<string>;
-    protected requiredCourses: Array<Course>;
+    protected requiredNUPaths: NUPaths;
+    protected requiredCourses: RequiredCourses;
 
     /**
      * Extracts relevant data from a Northeastern degree audit.
@@ -58,6 +59,38 @@ class AuditToJSON {
                 }
             })
         }
+    }
+
+    /**
+     * Encapsulates all of the information parsed from the degree
+     * audit into a single JavaScript object.
+     * @returns a JavaScript object with all of the degree audit data this class possesses.
+     */
+    public exportData(): InitialScheduleRep {
+        let json = {} as InitialScheduleRep;
+        json.completed = {
+            courses: this.completeCourses,
+            nupaths: this.completeNUPaths
+        };
+
+        json.inprogress = {
+            courses: this.ipCourses,
+            nupaths: this.ipNUPaths
+        }
+
+        json.requirements = {
+            courses: this.requiredCourses,
+            nupaths: this.requiredNUPaths
+        }
+        
+        json.data = {
+            majors: this.majors,
+            minors: this.minors,
+            auditYear: this.auditYear,
+            gradDate: this.gradDate
+        }
+
+        return json;
     }
 
     /**
@@ -92,15 +125,19 @@ class AuditToJSON {
         let nupathInd: number = line.indexOf("(") + 1;
         let toAdd = line.substring(nupathInd, nupathInd + 2);
         
-        if(!json.completed.nupaths.includes(toAdd)) {
-            switch(toAdd) {
-                case '>OK ':
-                    json.completed.nupaths.push(toAdd);	
-                case '>IP ':
-                    json.inprogress.nupaths.push(toAdd);
-                case '>NO ':
-                    json.requirements.nupaths.push(toAdd);
-            }
+        switch(toAdd) {
+            case '>OK ':
+                if(!this.completeNUPaths.includes(toAdd)) {
+                    this.completeNUPaths.push(toAdd);	
+                }
+            case '>IP ':
+                if(!this.ipNUPaths.includes(toAdd)) {
+                    this.ipNUPaths.push(toAdd);	
+                }
+            case '>NO ':
+                if(!this.completeNUPaths.includes(toAdd)) {
+                    this.completeNUPaths.push(toAdd);	
+                }
         }
     }
 
@@ -161,14 +198,14 @@ class AuditToJSON {
         }
 
         return false;
-}
+    }
 
     /**
     * Adds the courses taken so far to the current JSON file.
     * @param {string} line  The line which contains the course taken.
     */
     private add_course_taken(line: string) :void {
-        let course = {};
+        let course = {} as CompleteCourse;
         let courseString = line.substring(line.search('(FL|SP|S1|S2|SM)'));
         course.hon = contains(line, '\(HON\)');
 
@@ -178,15 +215,15 @@ class AuditToJSON {
         }    
 
         course.subject = courseString.substring(4, 9).replace(/\s/g, '');
-        course.classId = courseString.substring(9, 13);
+        course.classId = parseInt(courseString.substring(9, 13));
         course.name = courseString.substring(30, courseString.search('</font>')).replace(/\s/g, '').replace('&amp;', '&').replace('(HON)','').replace(';X','');
 
         // locates the rest of the parameters with some regex magic
-        course.creditHours = courseString.substring(18, 22);
+        course.creditHours = parseFloat(courseString.substring(18, 22));
         course.season = courseString.substring(0, 2);
-        course.year = courseString.substring(2, 4);
+        course.year = parseInt(courseString.substring(2, 4));
 
-        course.termId = get_termid(course.season, course.year);
+        course.termId = this.get_termid(course.season, course.year);
         // determines whether the course is 'in progress' or completed and sorts accordingly
 
         if(isNaN(course.classId) || course.classId == null || isNaN(course.creditHours) || course.credithours == null) {
@@ -195,12 +232,11 @@ class AuditToJSON {
         }
 
         if(contains(courseString, ' IP ')) {
-        if(!contains_course(json.inprogress.classes, course)) {
-            json.inprogress.classes.push(course);		
-        }
-        
-        } else if(!contains_course(json.completed.classes, course)) {
-            json.completed.classes.push(course);    
+            if(!this.contains_course(this.ipCourses, course)) {
+                this.ipCourses.push(course);		
+            }
+        } else if(!this.contains_course(this.completeCourses, course)) {
+            this.completeCourses.push(course);    
         }
     }
 
@@ -220,7 +256,7 @@ class AuditToJSON {
         let courses = [];
         let seenEnumeration: boolean = false;
         for(let i: number = 0; i < courseList.length; i++) {
-            let course = { } as RequiredCourse;
+            let course = { };
 
             // called on next line to pick up future courses if relevant
             if(contains(courseList[i],'&amp;')) {
@@ -295,7 +331,6 @@ class AuditToJSON {
     }
 }
 
-
 /**
  * Determines whether a function contains a number.
  * @param {string} n  The String which could contain a number.
@@ -307,12 +342,19 @@ function hasNumber(n: string) :boolean {
 
 /**
  * Determines whether a line of text contains a pattern to match.
- * @param {string} text			The text which may contain the pattern.
- * @param {string} lookfor	    The text to match or pattern to look for in the code.
- * @return {boolean} 	        True if the text contains or matches lookfor, false otherwise.
+ * @param text -The text which may contain the pattern.
+ * @param lookfor - The text to match or pattern to look for in the code.
+ * @returns true if the text contains or matches lookfor, false otherwise.
  */
 function contains(text: string, lookfor: string): boolean {
     return -1 != text.search(lookfor);
 }
 
-module.exports.audit_to_json = audit_to_json;
+/**
+ * Convenience function to collect relevant information from a degree audit to JS Object form.
+ * @param path - The path to the degree audit HTML file.
+ * @returns a JavaScript object with all of the relevant data from the degree audit.
+ */
+export function audit_to_json(path: string) :InitialScheduleRep {
+    return new AuditToJSON(path).exportData();
+}
