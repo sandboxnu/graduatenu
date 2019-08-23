@@ -10,13 +10,16 @@
 import * as fs from "fs";
 import { CompleteCourse, NUPaths, CompleteCourses, RequiredCourses, InitialScheduleRep,  } from "./course_types";
 
+/**
+ * Represents a mapping between different textual identifiers for data and the functions that operate on that data.
+ */
 interface AuditMapping {
     [key:string] : Function;
 }
 
 class AuditToJSON {
 
-    // double majors?
+    // protected designation is for possible access by external class in same package without export
     protected majors: Array<string>;
     protected minors: Array<string>;
 
@@ -41,6 +44,8 @@ class AuditToJSON {
         // begin looking for specific elements of the degree audit to parse to JSON format if present
         let lines :Array<string> = audit.split('\n');
 
+        // TODO: filter out all HTML tags here, and format courses to take in a nicer fashion
+
         let auditMapping: AuditMapping = {
             'Major': this.add_major,
             'CATALOG YEAR': this.add_year,
@@ -55,9 +60,14 @@ class AuditToJSON {
         for(let i: number = 0; i < lines.length; i++) {
             Object.keys(auditMapping).forEach((key: string) => {
                 if(contains(lines[i], key)) {
-                    auditMapping[key](lines[i]);
+                    if(key === 'Course List') {
+                        // required courses currently operate differently from other courses
+                        auditMapping[key](lines, i);
+                    } else {
+                        auditMapping[key](lines[i]);
+                    }
                 }
-            })
+            });
         }
     }
 
@@ -206,31 +216,29 @@ class AuditToJSON {
     */
     private add_course_taken(line: string) :void {
         let course = {} as CompleteCourse;
-        let courseString = line.substring(line.search('(FL|SP|S1|S2|SM)'));
-        course.hon = contains(line, '\(HON\)');
-
-        // ap courses that do not count for credit do not count for corresponding college courses
-        if(contains(courseString, '(NO AP|NO IB)')) {
+        let courseString : string = line.substring(line.search('(FL|SP|S1|S2|SM)'));
+        
+         // ap courses that do not count for credit do not count for corresponding college courses
+         if(contains(courseString, '(NO AP|NO IB)')) {
             return;
-        }    
+        }  
 
-        course.subject = courseString.substring(4, 9).replace(/\s/g, '');
         course.classId = parseInt(courseString.substring(9, 13));
-        course.name = courseString.substring(30, courseString.search('</font>')).replace(/\s/g, '').replace('&amp;', '&').replace('(HON)','').replace(';X','');
-
-        // locates the rest of the parameters with some regex magic
-        course.creditHours = parseFloat(courseString.substring(18, 22));
-        course.season = courseString.substring(0, 2);
-        course.year = parseInt(courseString.substring(2, 4));
-
-        course.termId = this.get_termid(course.season, course.year);
-        // determines whether the course is 'in progress' or completed and sorts accordingly
-
         if(isNaN(course.classId) || course.classId == null || isNaN(course.creditHours) || course.credithours == null) {
             return; 
             // not a valid course if the course id is not a number
         }
 
+        // identifies all of the course parameters with some spacing heuristics and regex magic
+        course.hon = contains(line, '\(HON\)');
+        course.subject = courseString.substring(4, 9).replace(/\s/g, '');
+        course.name = courseString.substring(30, courseString.search('</font>')).replace(/\s/g, '').replace('&amp;', '&').replace('(HON)','').replace(';X','');
+        course.creditHours = parseFloat(courseString.substring(18, 22));
+        course.season = courseString.substring(0, 2);
+        course.year = parseInt(courseString.substring(2, 4));
+        course.termId = this.get_termid(course.season, course.year);
+
+        // determines whether the course is 'in progress' or completed and sorts accordingly
         if(contains(courseString, ' IP ')) {
             if(!this.contains_course(this.ipCourses, course)) {
                 this.ipCourses.push(course);		
