@@ -1,4 +1,4 @@
-import {audit_to_json} from "../src";
+import { audit_to_json } from "../src";
 import * as fs from "fs";
 
 const cs_json = audit_to_json(fs.readFileSync("./test/mock_audits/cs_audit.html", "utf-8"));
@@ -14,39 +14,12 @@ json_ex.push(cs_json2);
 //json_ex.push(cs_json3);
 //json_ex.push(me_json);
 
-test('Confirms that the generated JavaScript object is of the proper form', () => {
+test('Confirms that the generated JavaScript object has the proper format for supplemental data', () => {
     for(let i = 0; i < json_ex.length; i++) {
         expect(json_ex[i]).toBeDefined();
-
-        // data
-        expect(json_ex[i].data).toBeDefined();
-        expect(json_ex[i].data.grad).toBeDefined();
         expect(json_ex[i].data.grad).toMatch(/^[0-3][0-9]\/[0-3][0-9]\/[0-9][0-9]$/);
-
-        expect(json_ex[i].data.year).toBeDefined();
         expect(json_ex[i].data.year).toMatch(/^20[0-9][0-9]$/);
-
-        expect(json_ex[i].data.major).toBeDefined();
         expect(json_ex[i].data.major).toMatch(/^[a-zA-Z ]+$/);
-
-        // completed
-        expect(json_ex[i].completed).toBeDefined();
-        expect(json_ex[i].completed.classes).toBeDefined();
-        expect(Array.isArray(json_ex[i].completed.classes)).toBeTruthy();
-        expect(json_ex[i].completed.nupaths).toBeDefined(); expect(Array.isArray(json_ex[i].completed.nupaths)).toBeTruthy(); 
-        // in progress
-        expect(json_ex[i].inprogress).toBeDefined();
-        expect(json_ex[i].inprogress.classes).toBeDefined();
-        expect(Array.isArray(json_ex[i].inprogress.classes)).toBeTruthy();
-        expect(json_ex[i].inprogress.nupaths).toBeDefined();
-        expect(Array.isArray(json_ex[i].inprogress.nupaths)).toBeTruthy();
-
-        // to be completed
-        expect(json_ex[i].completed).toBeDefined();
-        expect(json_ex[i].completed.classes).toBeDefined();
-        expect(Array.isArray(json_ex[i].completed.classes)).toBeTruthy();
-        expect(json_ex[i].completed.nupaths).toBeDefined();
-        expect(Array.isArray(json_ex[i].completed.nupaths)).toBeTruthy();
     }
 });
 
