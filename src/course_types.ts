@@ -26,6 +26,10 @@ export interface CompleteCourse extends Course {
     termId: number
 }
 
+/**
+ * A catch-all interface for the old requirement format.
+ * This will be replaced with the future representations (found below).
+ */
 export interface OldRequirement {
     classId?: number,
     subject?: string,
@@ -109,8 +113,9 @@ export interface CompleteCourses extends Array<CompleteCourse>{};
 
 /**
  * A list of requirements as yet to be fulfilled.
+ * The OldRequirement stipulation will be replaced with the Requirement interface in the future.
  */
-export interface RequiredCourses extends Array<Requirement>{};
+export interface RequiredCourses extends Array<OldRequirement>{};
 
 /**
  * Encapsulates the completed courses and NUPath requirements.
