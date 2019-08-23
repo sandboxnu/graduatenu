@@ -90,14 +90,14 @@ export interface SimpleRequiredCourse extends RequiredCourse {
 /**
  * A list of two-character abbreviations for Northeastern's NUPath academic breadth requirements.
  */
-interface NUPaths extends Array<string>{};
+export interface NUPaths extends Array<string>{};
 
 /**
  * A list of courses already taken, complete with all of the information available on the degree audit.
  */
-interface CompleteCourses extends Array<CompleteCourse>{};
+export interface CompleteCourses extends Array<CompleteCourse>{};
 
 /**
  * A list of requirements as yet to be fulfilled.
  */
-interface RequiredCourses extends Array<Requirement>{};
+export interface RequiredCourses extends Array<Requirement>{};
