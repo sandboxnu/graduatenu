@@ -53,21 +53,12 @@ test('Confirms that the generated JavaScript object is of the proper form', () =
 test('Ensures that all of the complete course information is of the form required.', () => {
     for(let i = 0; i < json_ex.length; i++) {
         for(let j = 0; j < json_ex[i].completed.classes.length; j++) {
-            expect(json_ex[i].completed.classes[j]).toBeDefined();
-            expect(json_ex[i].completed.classes[j].hon).toBeDefined();
             expect(typeof json_ex[i].completed.classes[j].hon === typeof true).toBeTruthy();
-            expect(json_ex[i].completed.classes[j].subject).toBeDefined();
             expect(json_ex[i].completed.classes[j].subject).toMatch(/^[A-Z]{2,4}$/);
-            expect(json_ex[i].completed.classes[j].name).toBeDefined();
-            expect(json_ex[i].completed.classes[j].classId).toBeDefined();
             expect(json_ex[i].completed.classes[j].classId).toMatch(/^[\d]{4}$/);
-            expect(json_ex[i].completed.classes[j].credithours).toBeDefined();
             expect(json_ex[i].completed.classes[j].credithours).toMatch(/^[\d]\.00/);
-            expect(json_ex[i].completed.classes[j].season).toBeDefined();
             expect(json_ex[i].completed.classes[j].season).toMatch(/FL|SP|S1|S2|SM/);
-            expect(json_ex[i].completed.classes[j].year).toBeDefined();
             expect(json_ex[i].completed.classes[j].year).toMatch(/^\d\d$/);
-            expect(json_ex[i].completed.classes[j].termId).toBeDefined();
             expect(json_ex[i].completed.classes[j].termId).toMatch(/^20\d\d[1-6]0$/);
         }
     }
@@ -76,21 +67,11 @@ test('Ensures that all of the complete course information is of the form require
 test('Ensures that all of the in-progress course information is of the form required.', () => {
     for(let i = 0; i < json_ex.length; i++) {
         for(let j = 0; j < json_ex[i].inprogress.classes.length; j++) { 
-            expect(json_ex[i].inprogress.classes[j]).toBeDefined(); 
-            expect(json_ex[i].inprogress.classes[j].hon).toBeDefined();
-            expect(typeof json_ex[i].inprogress.classes[j].hon === typeof true).toBeTruthy();
-            expect(json_ex[i].inprogress.classes[j].subject).toBeDefined();
             expect(json_ex[i].inprogress.classes[j].subject).toMatch(/^[A-Z]{2,4}$/);
-            expect(json_ex[i].inprogress.classes[j].name).toBeDefined();
-            expect(json_ex[i].inprogress.classes[j].classId).toBeDefined();
             expect(json_ex[i].inprogress.classes[j].classId).toMatch(/^[\d]{4}$/);
-            expect(json_ex[i].inprogress.classes[j].credithours).toBeDefined();
             expect(json_ex[i].inprogress.classes[j].credithours).toMatch(/^[\d]\.00$/);
-            expect(json_ex[i].inprogress.classes[j].season).toBeDefined();
             expect(json_ex[i].inprogress.classes[j].season).toMatch(/FL|SP|S1|S2|SM/);
-            expect(json_ex[i].inprogress.classes[j].year).toBeDefined();
             expect(json_ex[i].inprogress.classes[j].year).toMatch(/^\d\d$/);
-            expect(json_ex[i].inprogress.classes[j].termId).toBeDefined();
             expect(json_ex[i].inprogress.classes[j].termId).toMatch(/^20\d\d[1-6]0$/);
         }
     }
@@ -99,14 +80,9 @@ test('Ensures that all of the in-progress course information is of the form requ
 test('Ensures that all of the courses required to take are of the form required.', () => {
     for(let i = 0; i < json_ex.length; i++) {
         for(let j = 0; j < json_ex[i].requirements.classes.length; j++) { 
-            expect(json_ex[i].requirements.classes[j]).toBeDefined(); 
-            expect(json_ex[i].requirements.classes[j].subject).toBeDefined();
             expect(json_ex[i].requirements.classes[j].subject).toMatch(/^[A-Z]{2,4}$/);
 
             if(typeof json_ex[i].requirements.classes[j].classId  === 'undefined') {
-
-                expect(json_ex[i].requirements.classes[j].list).toBeDefined();
-                expect(json_ex[i].requirements.classes[j].num_required).toBeDefined();
                 expect(json_ex[i].requirements.classes[j].num_required).toMatch(/^[\d]$/);
 
                 for(let k = 0; k < json_ex[i].requirements.classes[j].list.length; k++) {
@@ -126,7 +102,6 @@ test('Ensures that all of the courses required to take are of the form required.
 test('Ensures that the required NUPaths are of the form required.', () => {
     for(let i = 0; i < json_ex.length; i++) {
         for(let j = 0; j < json_ex[i].requirements.nupaths.length; j++) { 
-            expect(json_ex[i].requirements.nupaths[j]).toBeDefined(); 
             expect(json_ex[i].requirements.nupaths[j]).toMatch(/ND|EI|IC|FQ|SI|AD|DD|ER|WF|WD|WI|EX|CE/);
         }
     }
@@ -135,7 +110,6 @@ test('Ensures that the required NUPaths are of the form required.', () => {
 test('Ensures that the in-progress NUPaths are of the form required.', () => {
     for(let i = 0; i < json_ex.length; i++) {
         for(let j = 0; j < json_ex[i].inprogress.nupaths.length; j++) { 
-            expect(json_ex[i].inprogress.nupaths[j]).toBeDefined(); 
             expect(json_ex[i].inprogress.nupaths[j]).toMatch(/ND|EI|IC|FQ|SI|AD|DD|ER|WF|WD|WI|EX|CE/);
         }
     }
@@ -144,7 +118,6 @@ test('Ensures that the in-progress NUPaths are of the form required.', () => {
 test('Ensures that the completed NUPaths are of the form required.', () => {
     for(let i = 0; i < json_ex.length; i++) {
         for(let j = 0; j < json_ex[i].completed.nupaths.length; j++) { 
-            expect(json_ex[i].completed.nupaths[j]).toBeDefined(); 
             expect(json_ex[i].completed.nupaths[j]).toMatch(/ND|EI|IC|FQ|SI|AD|DD|ER|WF|WD|WI|EX|CE/);
         }
     }
