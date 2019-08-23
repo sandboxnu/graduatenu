@@ -1,11 +1,11 @@
-const html_parser = require('../src/html_parser.js');
-const fs = require('fs');
+import {audit_to_json} from "../src";
+import * as fs from "fs";
 
-const cs_json = html_parser.audit_to_json(fs.readFileSync("./test/mock_audits/cs_audit.html", "utf-8"));
-const cs_json2 = html_parser.audit_to_json(fs.readFileSync("./test/mock_audits/cs_audit2.html", "utf-8"));
-const cs_json3 = html_parser.audit_to_json(fs.readFileSync("./test/mock_audits/cs_audit3.html", "utf-8"));
-const cs_math_json = html_parser.audit_to_json(fs.readFileSync("./test/mock_audits/cs_math_grad_audit.html", "utf-8"));
-const me_json = html_parser.audit_to_json(fs.readFileSync("./test/mock_audits/me_audit.html", "utf-8"));
+const cs_json = audit_to_json(fs.readFileSync("./test/mock_audits/cs_audit.html", "utf-8"));
+const cs_json2 = audit_to_json(fs.readFileSync("./test/mock_audits/cs_audit2.html", "utf-8"));
+const cs_json3 = audit_to_json(fs.readFileSync("./test/mock_audits/cs_audit3.html", "utf-8"));
+const cs_math_json = audit_to_json(fs.readFileSync("./test/mock_audits/cs_math_grad_audit.html", "utf-8"));
+const me_json = audit_to_json(fs.readFileSync("./test/mock_audits/me_audit.html", "utf-8"));
 
 const json_ex = [];
 json_ex.push(cs_json);

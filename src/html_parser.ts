@@ -7,7 +7,6 @@
  * classes and NUPaths taken and in progress as well as requirements to take.
  */
 
-import * as fs from "fs";
 import { CompleteCourse, NUPaths, CompleteCourses, RequiredCourses, InitialScheduleRep, OldRequirement  } from "./course_types";
 
 /**
