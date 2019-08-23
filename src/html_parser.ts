@@ -50,6 +50,8 @@ class AuditToJSON {
             'Course List': this.add_courses_to_take
         }
 
+        // If a key matches an indicator associated with a desired piece of info,
+        // call its associated function to retrieve its info
         for(let i: number = 0; i < lines.length; i++) {
             Object.keys(auditMapping).forEach((key: string) => {
                 if(contains(lines[i], key)) {
