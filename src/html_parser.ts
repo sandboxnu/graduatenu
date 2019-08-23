@@ -61,7 +61,6 @@ class AuditToJSON {
         }
     }
 
-
     /**
      * Gets the major associated with this degree audit.
      * @param {string} line  The line at which the major can be found.
@@ -119,8 +118,8 @@ class AuditToJSON {
     /**
      * Determines the termId parameter of a course with the season and year of the course.
      * @param {string} season   The season of the course ('FL', 'SP', 'S1', 'S2', 'SM')
-     * @param {int} year        The year during which the course occurs (i.3. 2018, 2019)
-     * @return {int}            A six-digit integer representing the termId.
+     * @param {number} year     The year during which the course occurs (i.3. 2018, 2019)
+     * @return {number}         A six-digit integer representing the termId.
      * @throws err              if the given year is not part of the enumeration specified.
      */
     private get_termid(season: string, year: number) :number {
@@ -131,7 +130,7 @@ class AuditToJSON {
             case "FL": 
                 // Fall term: associated year is the same year as the following 
                 // Spring term as per SearchNEU conventions
-                termid = "20" + Number(Number(year) + 1);
+                termid = "20" + Number(year) + 1;
                 termid = termid + "10"; break;
             case "SP": // Spring term
                 termid = termid + "30"; break;
