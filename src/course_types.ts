@@ -1,9 +1,4 @@
 /**
- * Describes a generic Course offered by Northeastern.
- */
-export interface ICourse {}
-
-/**
  * Describes a completed Course with all of the course information provided by the Northeastern degree audit.
  * @param hon - True if this course is Honors, false otherwise.
  * @param subject - The subject of this course (such as Computer Science - "CS" - or Psychology)
@@ -14,7 +9,7 @@ export interface ICourse {}
  * @param year - The year during which this course was taken.
  * @param termId - Northeastern's identifier for the term during which this course was taken.
  */
-export interface ICompleteCourse extends ICourse {
+export interface ICompleteCourse {
     hon: boolean;
     subject: string;
     classId: number;
@@ -52,7 +47,7 @@ export interface IRequirement {
  * Describes a course with incomplete course information that has not yet been taken.\
  * @param type - The type of course this is.
  */
-export interface IRequiredCourse extends ICourse {
+export interface IRequiredCourse {
     type: string;
 }
 

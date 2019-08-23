@@ -13,6 +13,8 @@ import { ICompleteCourse, ICompleteCourses, IInitialScheduleRep, INUPaths, IOldR
  * Represents a mapping between different textual identifiers for data and the functions that operate on that data.
  */
 interface IAuditMapping {
+    // TODO: Remove TSLint stipulation when code is fixed for Requirements
+    // tslint:disable-next-line: ban-types
     [key: string]: Function;
 }
 
@@ -192,9 +194,9 @@ class AuditToJSON {
      * @return whether the array contains the course.
      */
     private contains_course(arr, course) {
-        for (let i: number = 0; i < arr.length; i++) {
-            if (arr[i].classId === course.classId && arr[i].subject === course.subject
-                && arr[i].termId === course.termId && arr[i].name === course.name) {
+        for (const row of arr) {
+            if (row.classId === course.classId && row.subject === course.subject
+                && row.termId === course.termId && row.name === course.name) {
                 return true;
             }
         }
