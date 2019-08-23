@@ -10,13 +10,9 @@
 
 import * as fs from "fs";
 
-// location of the input file
-const INPUT = '../test/mock_audits/cs_audit.html';
-
-// location of the output file
-const OUTPUT = 'parsed_audit.json';
-
-
+/**
+ * Accepts a degree audit and 
+ */
 class AuditToJSON {
 
     // double majors?
