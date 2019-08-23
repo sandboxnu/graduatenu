@@ -126,7 +126,8 @@ class AuditToJSON {
      * @param line The line which contains the graduation date desired.
      */
     private add_grad_date(line: string): void {
-        this.gradDate = line.substring(line.search("GRADUATION DATE: ") + "GRADUATION DATE: ".length, line.search("GRADUATION DATE: ") + "GRADUATION DATE:  ".length + 7);
+        const dateInd = line.search("GRADUATION DATE: ") + "GRADUATION DATE: ".length;
+        this.gradDate = line.substring(dateInd, dateInd + 7);
     }
 
     /**
@@ -251,7 +252,7 @@ class AuditToJSON {
      * Adds the courses required by the degree audit to be taken to the JSON.
      * @param line  The line which contains these required courses.
      */
-    private add_courses_to_take(lines, j, subjectType): void {
+    private add_courses_to_take(lines: string[], j: number, subjectType: string): void {
         const courseList = lines[j].substring(lines[j].search("Course List") + 13).replace(/<font>/g, "")
         .replace(/<font class="auditPreviewText">/g, "").replace(/\*\*\*\*/g, "").replace(/\s/g, "").split("</font>");
 
@@ -280,7 +281,8 @@ class AuditToJSON {
 
                 // THREE CASES
                 // IT'S A NUMBER: IT IS A COURSE WITH THE PREVIOUS TYPE LISTED, use the type as previously defined'
-                if (!isNaN(maybeCourseNumber)) {
+                if (!isNaN(parseInt(maybeCourseNumber, 10))) {
+                    // TODO: this parsing may not work
                     course.subject = type;
 
                     // determines whether we're looking at an enumeration
