@@ -38,34 +38,34 @@ test("Ensures that all of the complete course information is of the form require
 });
 
 test("Ensures that all of the in-progress course information is of the form required.", () => {
-    for (let i = 0; i < json_ex.length; i++) {
-        for (let j = 0; j < json_ex[i].inprogress.classes.length; j++) {
-            expect(json_ex[i].inprogress.classes[j].subject).toMatch(/^[A-Z]{2,4}$/);
-            expect(json_ex[i].inprogress.classes[j].classId).toMatch(/^[\d]{4}$/);
-            expect(json_ex[i].inprogress.classes[j].credithours).toMatch(/^[\d]\.00$/);
-            expect(json_ex[i].inprogress.classes[j].season).toMatch(/FL|SP|S1|S2|SM/);
-            expect(json_ex[i].inprogress.classes[j].year).toMatch(/^\d\d$/);
-            expect(json_ex[i].inprogress.classes[j].termId).toMatch(/^20\d\d[1-6]0$/);
+    for (let i = 0; i < jsonEx.length; i++) {
+        for (let j = 0; j < jsonEx[i].inprogress.classes.length; j++) {
+            expect(jsonEx[i].inprogress.classes[j].subject).toMatch(/^[A-Z]{2,4}$/);
+            expect(jsonEx[i].inprogress.classes[j].classId).toMatch(/^[\d]{4}$/);
+            expect(jsonEx[i].inprogress.classes[j].credithours).toMatch(/^[\d]\.00$/);
+            expect(jsonEx[i].inprogress.classes[j].season).toMatch(/FL|SP|S1|S2|SM/);
+            expect(jsonEx[i].inprogress.classes[j].year).toMatch(/^\d\d$/);
+            expect(jsonEx[i].inprogress.classes[j].termId).toMatch(/^20\d\d[1-6]0$/);
         }
     }
 });
 
 test("Ensures that all of the courses required to take are of the form required.", () => {
-    for (let i = 0; i < json_ex.length; i++) {
-        for (let j = 0; j < json_ex[i].requirements.classes.length; j++) {
-            expect(json_ex[i].requirements.classes[j].subject).toMatch(/^[A-Z]{2,4}$/);
+    for (let i = 0; i < jsonEx.length; i++) {
+        for (let j = 0; j < jsonEx[i].requirements.classes.length; j++) {
+            expect(jsonEx[i].requirements.classes[j].subject).toMatch(/^[A-Z]{2,4}$/);
 
-            if (typeof json_ex[i].requirements.classes[j].classId  === "undefined") {
-                expect(json_ex[i].requirements.classes[j].num_required).toMatch(/^[\d]$/);
+            if (typeof jsonEx[i].requirements.classes[j].classId  === "undefined") {
+                expect(jsonEx[i].requirements.classes[j].num_required).toMatch(/^[\d]$/);
 
-                for (let k = 0; k < json_ex[i].requirements.classes[j].list.length; k++) {
+                for (let k = 0; k < jsonEx[i].requirements.classes[j].list.length; k++) {
                     // assumes that no more than 9 classes will be required
-                    expect(json_ex[i].requirements.classes[j].list[k]).toMatch(/^[\d]{4}$/);
+                    expect(jsonEx[i].requirements.classes[j].list[k]).toMatch(/^[\d]{4}$/);
                 }
             } else {
-                expect(json_ex[i].requirements.classes[j].classId).toMatch(/^[\d]{4}$/);
-                if (typeof json_ex[i].requirements.classes[j].classId2 !== "undefined") {
-                    expect(json_ex[i].requirements.classes[j].classId2).toMatch(/^[\d]{4}$/);
+                expect(jsonEx[i].requirements.classes[j].classId).toMatch(/^[\d]{4}$/);
+                if (typeof jsonEx[i].requirements.classes[j].classId2 !== "undefined") {
+                    expect(jsonEx[i].requirements.classes[j].classId2).toMatch(/^[\d]{4}$/);
                 }
             }
         }
@@ -73,38 +73,41 @@ test("Ensures that all of the courses required to take are of the form required.
 });
 
 test("Ensures that the required NUPaths are of the form required.", () => {
-    for (let i = 0; i < json_ex.length; i++) {
-        for (let j = 0; j < json_ex[i].requirements.nupaths.length; j++) {
-            expect(json_ex[i].requirements.nupaths[j]).toMatch(/ND|EI|IC|FQ|SI|AD|DD|ER|WF|WD|WI|EX|CE/);
+    for (let i = 0; i < jsonEx.length; i++) {
+        for (let j = 0; j < jsonEx[i].requirements.nupaths.length; j++) {
+            expect(jsonEx[i].requirements.nupaths[j]).toMatch(/ND|EI|IC|FQ|SI|AD|DD|ER|WF|WD|WI|EX|CE/);
         }
     }
 });
 
 test("Ensures that the in-progress NUPaths are of the form required.", () => {
-    for (let i = 0; i < json_ex.length; i++) {
-        for (let j = 0; j < json_ex[i].inprogress.nupaths.length; j++) {
-            expect(json_ex[i].inprogress.nupaths[j]).toMatch(/ND|EI|IC|FQ|SI|AD|DD|ER|WF|WD|WI|EX|CE/);
+    for (let i = 0; i < jsonEx.length; i++) {
+        for (let j = 0; j < jsonEx[i].inprogress.nupaths.length; j++) {
+            expect(jsonEx[i].inprogress.nupaths[j]).toMatch(/ND|EI|IC|FQ|SI|AD|DD|ER|WF|WD|WI|EX|CE/);
         }
     }
 });
 
 test("Ensures that the completed NUPaths are of the form required.", () => {
-    for (let i = 0; i < json_ex.length; i++) {
-        for (let j = 0; j < json_ex[i].completed.nupaths.length; j++) {
-            expect(json_ex[i].completed.nupaths[j]).toMatch(/ND|EI|IC|FQ|SI|AD|DD|ER|WF|WD|WI|EX|CE/);
+    for (let i = 0; i < jsonEx.length; i++) {
+        for (let j = 0; j < jsonEx[i].completed.nupaths.length; j++) {
+            expect(jsonEx[i].completed.nupaths[j]).toMatch(/ND|EI|IC|FQ|SI|AD|DD|ER|WF|WD|WI|EX|CE/);
         }
     }
 });
 
 test("Ensures that the audits do not contain duplicate completed courses.", () => {
-    for (let i = 0; i < json_ex.length; i++) {
+    for (let i = 0; i < jsonEx.length; i++) {
         let duplicates = false;
-        for (let j = 0; j < json_ex[i].completed.classes.length; j++) {
-            const course = json_ex[i].completed.classes[j];
+        for (let j = 0; j < jsonEx[i].completed.classes.length; j++) {
+            const course = jsonEx[i].completed.classes[j];
             let seen = false;
 
-            for (let k = 0; k < json_ex[i].completed.classes.length; k++) {
-                if (course.classId === json_ex[i].completed.classes[k].classId && course.subject === json_ex[i].completed.classes[k].subject && course.termId === json_ex[i].completed.classes[k].termId && course.name === json_ex[i].completed.classes[k].name) {
+            for (let k = 0; k < jsonEx[i].completed.classes.length; k++) {
+                if (course.classId === jsonEx[i].completed.classes[k].classId
+                    && course.subject === jsonEx[i].completed.classes[k].subject
+                    && course.termId === jsonEx[i].completed.classes[k].termId
+                    && course.name === jsonEx[i].completed.classes[k].name) {
                     if (!seen) {
                         seen = true;
                     } else {
@@ -120,14 +123,16 @@ test("Ensures that the audits do not contain duplicate completed courses.", () =
 });
 
 test("Ensures that the audits do not contain duplicate in-progress courses.", () => {
-    for (let i = 0; i < json_ex.length; i++) {
+    for (let i = 0; i < jsonEx.length; i++) {
         let duplicates = false;
-        for (let j = 0; j < json_ex[i].inprogress.classes.length; j++) {
-            const course = json_ex[i].inprogress.classes[j];
+        for (let j = 0; j < jsonEx[i].inprogress.classes.length; j++) {
+            const course = jsonEx[i].inprogress.classes[j];
             let seen = false;
 
-            for (let k = 0; k < json_ex[i].inprogress.classes.length; k++) {
-                if (course.classId === json_ex[i].inprogress.classes[k].classId && course.subject === json_ex[i].inprogress.classes[k].subject && course.termId === json_ex[i].inprogress.classes[k].termId) {
+            for (let k = 0; k < jsonEx[i].inprogress.classes.length; k++) {
+                if (course.classId === jsonEx[i].inprogress.classes[k].classId 
+                    && course.subject === jsonEx[i].inprogress.classes[k].subject 
+                    && course.termId === jsonEx[i].inprogress.classes[k].termId) {
                     if (!seen) {
                         seen = true;
                     } else {
@@ -147,13 +152,13 @@ test("Ensures that the audits do not contain duplicate required courses.", () =>
 });
 
 test("Ensures that the audits do not contain duplicate completed NUPaths.", () => {
-    for (let i = 0; i < json_ex.length; i++) {
+    for (let i = 0; i < jsonEx.length; i++) {
         let duplicates = false;
-        for (let j = 0; j < json_ex[i].completed.nupaths.length; j++) {
+        for (let j = 0; j < jsonEx[i].completed.nupaths.length; j++) {
             let seen = false;
-            const nupath = json_ex[i].completed.nupaths[j];
-            for (let k = 0; k < json_ex[i].completed.nupaths.length; k++) {
-                if (json_ex[i].completed.nupaths[k] === nupath) {
+            const nupath = jsonEx[i].completed.nupaths[j];
+            for (let k = 0; k < jsonEx[i].completed.nupaths.length; k++) {
+                if (jsonEx[i].completed.nupaths[k] === nupath) {
                     if (!seen) {
                         seen = true;
                     } else {
@@ -169,13 +174,13 @@ test("Ensures that the audits do not contain duplicate completed NUPaths.", () =
 });
 
 test("Ensures that the audits do not contain duplicate in-progress NUPaths.", () => {
-    for (let i = 0; i < json_ex.length; i++) {
+    for (let i = 0; i < jsonEx.length; i++) {
         let duplicates = false;
-        for (let j = 0; j < json_ex[i].inprogress.nupaths.length; j++) {
+        for (let j = 0; j < jsonEx[i].inprogress.nupaths.length; j++) {
             let seen = false;
-            const nupath = json_ex[i].inprogress.nupaths[j];
-            for (let k = 0; k < json_ex[i].inprogress.nupaths.length; k++) {
-                if (json_ex[i].inprogress.nupaths[k] === nupath) {
+            const nupath = jsonEx[i].inprogress.nupaths[j];
+            for (let k = 0; k < jsonEx[i].inprogress.nupaths.length; k++) {
+                if (jsonEx[i].inprogress.nupaths[k] === nupath) {
                     if (!seen) {
                         seen = true;
                     } else {
@@ -191,13 +196,13 @@ test("Ensures that the audits do not contain duplicate in-progress NUPaths.", ()
 });
 
 test("Ensures that the audits do not contain duplicate required NUPaths.", () => {
-    for (let i = 0; i < json_ex.length; i++) {
+    for (let i = 0; i < jsonEx.length; i++) {
         let duplicates = false;
-        for (let j = 0; j < json_ex[i].requirements.nupaths.length; j++) {
+        for (let j = 0; j < jsonEx[i].requirements.nupaths.length; j++) {
             let seen = false;
-            const nupath = json_ex[i].requirements.nupaths[j];
-            for (let k = 0; k < json_ex[i].requirements.nupaths.length; k++) {
-                if (json_ex[i].requirements.nupaths[k] === nupath) {
+            const nupath = jsonEx[i].requirements.nupaths[j];
+            for (let k = 0; k < jsonEx[i].requirements.nupaths.length; k++) {
+                if (jsonEx[i].requirements.nupaths[k] === nupath) {
                     if (!seen) {
                         seen = true;
                     } else {
@@ -213,23 +218,23 @@ test("Ensures that the audits do not contain duplicate required NUPaths.", () =>
 });
 
 test("Ensures that each audit contains all of the NUPath requirements.", () => {
-    for (let i = 0; i < json_ex.length; i++) {
+    for (let i = 0; i < jsonEx.length; i++) {
         const nupaths = ["ND", "EI", "IC", "FQ", "SI", "AD", "DD", "ER", "WF", "WD", "WI", "EX", "CE"];
-        for (let j = 0; j < json_ex[i].completed.nupaths.length; j++) {
-            const index = nupaths.indexOf(json_ex[i].completed.nupaths[j]);
+        for (let j = 0; j < jsonEx[i].completed.nupaths.length; j++) {
+            const index = nupaths.indexOf(jsonEx[i].completed.nupaths[j]);
             if (index > -1) {
                 nupaths.splice(index, 1);
             }
         }
 
-        for (let j = 0; j < json_ex[i].inprogress.nupaths.length; j++) {
-            const index = nupaths.indexOf(json_ex[i].inprogress.nupaths[j]);
+        for (let j = 0; j < jsonEx[i].inprogress.nupaths.length; j++) {
+            const index = nupaths.indexOf(jsonEx[i].inprogress.nupaths[j]);
             if (index > -1) {
                 nupaths.splice(index, 1);
             }
         }
-        for (let j = 0; j < json_ex[i].requirements.nupaths.length; j++) {
-            const index = nupaths.indexOf(json_ex[i].requirements.nupaths[j]);
+        for (let j = 0; j < jsonEx[i].requirements.nupaths.length; j++) {
+            const index = nupaths.indexOf(jsonEx[i].requirements.nupaths[j]);
             if (index > -1) {
                 nupaths.splice(index, 1);
             }
