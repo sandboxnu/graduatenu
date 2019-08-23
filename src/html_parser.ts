@@ -7,32 +7,32 @@
  * classes and NUPaths taken and in progress as well as requirements to take.
  */
 
-import { CompleteCourse, NUPaths, CompleteCourses, RequiredCourses, InitialScheduleRep, OldRequirement  } from "./course_types";
+import { ICompleteCourse, ICompleteCourses, IInitialScheduleRep, INUPaths, IOldRequirement, IRequiredCourses  } from "./course_types";
 
 /**
  * Represents a mapping between different textual identifiers for data and the functions that operate on that data.
  */
-interface AuditMapping {
-    [key:string] : Function;
+interface IAuditMapping {
+    [key: string]: Function;
 }
 
 class AuditToJSON {
 
     // protected designation is for possible access by external class in same package without export
-    protected majors: Array<string>;
-    protected minors: Array<string>;
+    protected majors: string[];
+    protected minors: string[];
 
     protected auditYear: number;
     protected gradDate: string;
 
-    protected completeNUPaths: NUPaths;
-    protected completeCourses: CompleteCourses;
+    protected completeNUPaths: INUPaths;
+    protected completeCourses: ICompleteCourses;
 
-    protected ipNUPaths: NUPaths;
-    protected ipCourses: CompleteCourses;
+    protected ipNUPaths: INUPaths;
+    protected ipCourses: ICompleteCourses;
 
-    protected requiredNUPaths: NUPaths;
-    protected requiredCourses: RequiredCourses;
+    protected requiredNUPaths: INUPaths;
+    protected requiredCourses: IRequiredCourses;
 
     /**
      * Extracts relevant data from a Northeastern degree audit.
@@ -41,25 +41,25 @@ class AuditToJSON {
     public constructor(audit: string) {
         // iterate line by line, identifying characteristics of the degree audit to
         // begin looking for specific elements of the degree audit to parse to JSON format if present
-        let lines :Array<string> = audit.split('\n');
+        const lines: string[] = audit.split("\n");
 
         // TODO: filter out all HTML tags here, and format courses to take in a nicer fashion
 
-        let auditMapping: AuditMapping = {
-            'Major': this.add_major,
-            'CATALOG YEAR': this.add_year,
-            'GRADUATION DATE:': this.add_grad_date,
-            '(FL|SP|S1|S2|SM)': this.add_course_taken,
-            '(>OK |>IP |>NO )': this.get_nupaths,
-            'Course List': this.add_courses_to_take
-        }
+        const auditMapping: IAuditMapping = {
+            "(>OK |>IP |>NO )": this.get_nupaths,
+            "(FL|SP|S1|S2|SM)": this.add_course_taken,
+            "CATALOG YEAR": this.add_year,
+            "Course List": this.add_courses_to_take,
+            "GRADUATION DATE:": this.add_grad_date,
+            "Major": this.add_major,
+        };
 
         // If a key matches an indicator associated with a desired piece of info,
         // call its associated function to retrieve its info
-        for(let i: number = 0; i < lines.length; i++) {
+        for (let i: number = 0; i < lines.length; i++) {
             Object.keys(auditMapping).forEach((key: string) => {
-                if(contains(lines[i], key)) {
-                    if(key === 'Course List') {
+                if (contains(lines[i], key)) {
+                    if (key === "Course List") {
                         // required courses currently operate differently from other courses
                         auditMapping[key](lines, i);
                     } else {
@@ -75,29 +75,29 @@ class AuditToJSON {
      * audit into a single JavaScript object.
      * @returns a JavaScript object with all of the degree audit data this class possesses.
      */
-    public exportData(): InitialScheduleRep {
-        let json = {} as InitialScheduleRep;
+    public exportData(): IInitialScheduleRep {
+        const json = {} as IInitialScheduleRep;
         json.completed = {
             courses: this.completeCourses,
-            nupaths: this.completeNUPaths
+            nupaths: this.completeNUPaths,
         };
 
         json.inprogress = {
             courses: this.ipCourses,
-            nupaths: this.ipNUPaths
-        }
+            nupaths: this.ipNUPaths,
+        };
 
         json.requirements = {
             courses: this.requiredCourses,
-            nupaths: this.requiredNUPaths
-        }
-        
+            nupaths: this.requiredNUPaths,
+        };
+
         json.data = {
+            auditYear: this.auditYear,
+            gradDate: this.gradDate,
             majors: this.majors,
             minors: this.minors,
-            auditYear: this.auditYear,
-            gradDate: this.gradDate
-        }
+        };
 
         return json;
     }
@@ -106,46 +106,47 @@ class AuditToJSON {
      * Gets the major associated with this degree audit.
      * @param {string} line  The line at which the major can be found.
      */
-    private add_major(line: string) :void {
-        this.majors.push(line.substring(line.search('\">') + 2, line.search(' - Major'))); 
+    private add_major(line: string): void {
+        this.majors.push(line.substring(line.search('\">') + 2, line.search(" - Major")));
     }
 
     /**
      * Gets the year this degree audit was created.
-     * @param {String} line     The line containing the year.
+     * @param line     The line containing the year.
      */
-    private add_year(line: String) :void {
-        this.auditYear = parseInt(line.substring(line.search('CATALOG YEAR:') + 'CATALOG YEAR: '.length, line.search('CATALOG YEAR:') + 'CATALOG YEAR: '.length + 4));
+    private add_year(line: string): void {
+        const yearInd = line.search("CATALOG YEAR:") + "CATALOG YEAR: ".length;
+        this.auditYear = parseInt(line.substring(yearInd, yearInd + 4), 10);
     }
 
     /**
      * Gets the expected graduation date of the degree audit.
-     * @param {String} line The line which contains the graduation date desired.
+     * @param line The line which contains the graduation date desired.
      */
-    private add_grad_date(line: string) :void {
-        this.gradDate = line.substring(line.search('GRADUATION DATE: ') + 'GRADUATION DATE: '.length, line.search('GRADUATION DATE: ') + 'GRADUATION DATE:  '.length + 7);
+    private add_grad_date(line: string): void {
+        this.gradDate = line.substring(line.search("GRADUATION DATE: ") + "GRADUATION DATE: ".length, line.search("GRADUATION DATE: ") + "GRADUATION DATE:  ".length + 7);
     }
 
     /**
      * Gets a NUPath associated with this degree audit.
      * @param {string} line  The line that contains a NUPath mentioned in the audit.
      */
-    private get_nupaths(line: string) :void {
-        let nupathInd: number = line.indexOf("(") + 1;
-        let toAdd = line.substring(nupathInd, nupathInd + 2);
-        
-        switch(toAdd) {
-            case '>OK ':
-                if(!this.completeNUPaths.includes(toAdd)) {
-                    this.completeNUPaths.push(toAdd);	
+    private get_nupaths(line: string): void {
+        const nupathInd: number = line.indexOf("(") + 1;
+        const toAdd = line.substring(nupathInd, nupathInd + 2);
+
+        switch (toAdd) {
+            case ">OK ":
+                if (!this.completeNUPaths.includes(toAdd)) {
+                    this.completeNUPaths.push(toAdd);
                 }
-            case '>IP ':
-                if(!this.ipNUPaths.includes(toAdd)) {
-                    this.ipNUPaths.push(toAdd);	
+            case ">IP ":
+                if (!this.ipNUPaths.includes(toAdd)) {
+                    this.ipNUPaths.push(toAdd);
                 }
-            case '>NO ':
-                if(!this.completeNUPaths.includes(toAdd)) {
-                    this.completeNUPaths.push(toAdd);	
+            case ">NO ":
+                if (!this.completeNUPaths.includes(toAdd)) {
+                    this.completeNUPaths.push(toAdd);
                 }
         }
     }
@@ -157,51 +158,43 @@ class AuditToJSON {
      * @return {number}         A six-digit integer representing the termId.
      * @throws err              if the given year is not part of the enumeration specified.
      */
-    private get_termid(season: string, year: number) :number {
+    private get_termid(season: string, year: number): number {
         // Makes the assumption that all years will be in the 21st century
         // As different technology will likely be used in 81 years, this is a valid assumption
-        let termid :string = "20" + year;
-        
-        /**
-        let termToNumber = {
-            "FL": "10", // Fall term: associated year is considered the same year as the following 
-            "SP": "30", // Spring term
-            "S1": "40", // Summer 1 term
-            "S2": "60", // Summer 2 term
-            "SM": "50"  // Full Summer term (typically reserved for graduate courses)
-        };
-         */
+        let termid: string = "20" + year;
 
-        switch(season) {
-            case "FL": 
+        switch (season) {
+            case "FL":
                 // Spring term as per SearchNEU conventions
                 termid = "20" + Number(year) + 1;
                 termid = termid + "10"; break;
-            case "SP": 
+            case "SP":
                 termid = termid + "30"; break;
-            case "S1": 
+            case "S1":
                 termid = termid + "40"; break;
-            case "S2": 
+            case "S2":
                 termid = termid + "60"; break;
-            case "SM": 
+            case "SM":
                 termid = termid + "50"; break;
             default:
-                throw "The given season was not a member of the enumeration required."
+                throw new Error("The given season was not a member of the enumeration required.");
         }
 
-        return parseInt(termid);
+        return parseInt(termid, 10);
     }
 
     /**
      * Determines whether an array already contains a course.
-     * Two courses are the same when they have the same subject, classId (e.g. CS1200), and are taken during the same term (e.g. 201810)
+     * Two courses are the same when they have the same subject, classId (e.g. CS1200),
+     * and are taken during the same term (e.g. 201810)
      * @param {Array} arr   The array of courses which could contain the course.
      * @param {Object} course The course which could be in the array.
      * @return whether the array contains the course.
      */
     private contains_course(arr, course) {
-        for(let i: number = 0; i < arr.length; i++) {
-            if(arr[i].classId === course.classId && arr[i].subject === course.subject && arr[i].termId === course.termId && arr[i].name === course.name) { 
+        for (let i: number = 0; i < arr.length; i++) {
+            if (arr[i].classId === course.classId && arr[i].subject === course.subject
+                && arr[i].termId === course.termId && arr[i].name === course.name) {
                 return true;
             }
         }
@@ -210,41 +203,43 @@ class AuditToJSON {
     }
 
     /**
-    * Adds the courses taken so far to the current JSON file.
-    * @param {string} line  The line which contains the course taken.
-    */
-    private add_course_taken(line: string) :void {
-        let course = {} as CompleteCourse;
-        let courseString : string = line.substring(line.search('(FL|SP|S1|S2|SM)'));
-        
-         // ap courses that do not count for credit do not count for corresponding college courses
-         if(contains(courseString, '(NO AP|NO IB)')) {
-            return;
-        }  
+     * Adds the courses taken so far to the current JSON file.
+     * @param {string} line  The line which contains the course taken.
+     */
+    private add_course_taken(line: string): void {
+        const course = {} as ICompleteCourse;
+        const courseString: string = line.substring(line.search("(FL|SP|S1|S2|SM)"));
 
-        course.classId = parseInt(courseString.substring(9, 13));
+         // ap courses that do not count for credit do not count for corresponding college courses
+        if (contains(courseString, "(NO AP|NO IB)")) {
+            return;
+        }
+
+        course.classId = parseInt(courseString.substring(9, 13), 10);
         course.creditHours = parseFloat(courseString.substring(18, 22));
 
-        if(isNaN(course.classId) || course.classId == null || isNaN(course.creditHours) || course.creditHours == null) {
-            return; 
+        if (isNaN(course.classId) || course.classId == null
+        || isNaN(course.creditHours) || course.creditHours == null) {
+            return;
             // not a valid course if the course id is not a number
         }
 
         // identifies all of the course parameters with some spacing heuristics and regex magic
-        course.hon = contains(line, '\(HON\)');
-        course.subject = courseString.substring(4, 9).replace(/\s/g, '');
-        course.name = courseString.substring(30, courseString.search('</font>')).replace(/\s/g, '').replace('&amp;', '&').replace('(HON)','').replace(';X','');
+        course.hon = contains(line, "\(HON\)");
+        course.subject = courseString.substring(4, 9).replace(/\s/g, "");
+        course.name = courseString.substring(30, courseString.search("</font>"))
+        .replace(/\s/g, "").replace("&amp;", "&").replace("(HON)", "").replace(";X", "");
         course.season = courseString.substring(0, 2);
-        course.year = parseInt(courseString.substring(2, 4));
+        course.year = parseInt(courseString.substring(2, 4), 10);
         course.termId = this.get_termid(course.season, course.year);
 
         // determines whether the course is 'in progress' or completed and sorts accordingly
-        if(contains(courseString, ' IP ')) {
-            if(!this.contains_course(this.ipCourses, course)) {
-                this.ipCourses.push(course);		
+        if (contains(courseString, " IP ")) {
+            if (!this.contains_course(this.ipCourses, course)) {
+                this.ipCourses.push(course);
             }
-        } else if(!this.contains_course(this.completeCourses, course)) {
-            this.completeCourses.push(course);    
+        } else if (!this.contains_course(this.completeCourses, course)) {
+            this.completeCourses.push(course);
         }
     }
 
@@ -252,58 +247,60 @@ class AuditToJSON {
      // not going to elaborate upon types until completing the issue for fixing this function's format
     /**
      * Adds the courses required by the degree audit to be taken to the JSON.
-     * @param {string} line  The line which contains these required courses.
+     * @param line  The line which contains these required courses.
      */
-    private add_courses_to_take(lines, j, subjectType) :void {
-        let courseList = lines[j].substring(lines[j].search('Course List') + 13).replace(/<font>/g, '').replace(/<font class="auditPreviewText">/g, '').replace(/\*\*\*\*/g, '').replace(/\s/g, '').split('</font>');
+    private add_courses_to_take(lines, j, subjectType): void {
+        const courseList = lines[j].substring(lines[j].search("Course List") + 13).replace(/<font>/g, "")
+        .replace(/<font class="auditPreviewText">/g, "").replace(/\*\*\*\*/g, "").replace(/\s/g, "").split("</font>");
 
         // last two elements are always empty, as each of these lines ends with two </font> tags
         courseList.pop();
         courseList.pop();
 
         let type: string = subjectType;
-        let courses = [];
-        let seenEnumeration: boolean = false;
-        for(let i: number = 0; i < courseList.length; i++) {
-            let course = { } as OldRequirement;
+        const courses = [];
+        const seenEnumeration: boolean = false;
+        for (let i: number = 0; i < courseList.length; i++) {
+            const course = { } as IOldRequirement;
 
             // called on next line to pick up future courses if relevant
-            if(contains(courseList[i],'&amp;')) {
+            if (contains(courseList[i], "&amp;")) {
                 this.add_courses_to_take(lines, j + 1, type);
             }
 
             // remove the potential and sign
-            courseList[i] = courseList[i].replace(/&amp;/g, '');
+            courseList[i] = courseList[i].replace(/&amp;/g, "");
 
             // if the course is not empty [ it contains some info ]
-            if(!(courseList[i] === '')) {
+            if (!(courseList[i] === "")) {
 
-                let maybeCourseNumber = courseList[i].substring(0, 4);
+                const maybeCourseNumber = courseList[i].substring(0, 4);
 
                 // THREE CASES
                 // IT'S A NUMBER: IT IS A COURSE WITH THE PREVIOUS TYPE LISTED, use the type as previously defined'
-                if(!isNaN(maybeCourseNumber)) {
+                if (!isNaN(maybeCourseNumber)) {
                     course.subject = type;
 
-                    // determines whether we're looking at an enumeration (list of required courses of which 1+ should be taken)
-                    if(contains(lines[j - 1], ' of the following courses')) {
+                    // determines whether we're looking at an enumeration
+                    // (list of required courses of which 1+ should be taken)
+                    if (contains(lines[j - 1], " of the following courses")) {
 
-                        if(courses[courses.length - 1].list == null) {
+                        if (courses[courses.length - 1].list == null) {
                             courses[courses.length - 1].list = [courses[courses.length - 1].classId, maybeCourseNumber];
-                            courses[courses.length - 1].num_required = lines[j - 1].substring(lines[j - 1].search('Complete') + 'Complete ('.length, lines[j - 1].search('Complete') + 'Complete ('.length+1); 
+                            courses[courses.length - 1].num_required = lines[j - 1].substring(lines[j - 1].search("Complete") + "Complete (".length, lines[j - 1].search("Complete") + "Complete (".length + 1);
                             delete courses[courses.length - 1].classId;
 
                         } else {
                             courses[courses.length - 1].list.push(maybeCourseNumber);
                         }
 
-                    } else if(contains(lines[j - 2], ' of the following courses')) { 
+                    } else if (contains(lines[j - 2], " of the following courses")) {
 
-                        // there is always a line of white space after course requirements, so picking up a course number
-                        // from a line two previous to this one is not an issue
-                        if(courses[courses.length - 1].list == null) {
+                        // there is always a line of white space after course requirements,
+                        // so picking up a course number from a line two previous to this one is not an issue
+                        if (courses[courses.length - 1].list == null) {
                             courses[courses.length - 1].list = [courses[courses.length - 1].classId, maybeCourseNumber];
-                            courses[courses.length - 1].num_required = lines[j - 2].substring(lines[j - 2].search('Complete') + 'Complete ('.length, lines[j - 2].search('Complete') + 'Complete ('.length+1); 
+                            courses[courses.length - 1].num_required = lines[j - 2].substring(lines[j - 2].search("Complete") + "Complete (".length, lines[j - 2].search("Complete") + "Complete (".length + 1);
                             delete courses[courses.length - 1].classId;
                         } else {
                             courses[courses.length - 1].list.push(maybeCourseNumber);
@@ -315,17 +312,11 @@ class AuditToJSON {
                         course.subject = type;
                         courses.push(course);
                     }
-                }
-
-                // ITS 'TO12' OR TO AND 2 NUMBERS: a range of courses
-                else if(maybeCourseNumber.substring(0, 2) === 'TO') {
+                } else if (maybeCourseNumber.substring(0, 2) === "TO") {
                     courses[courses.length - 1].classId2 = courseList[i].substring(2, 7);
-                }
-
-                // its part of a course name along with part of the number (e.g. ENGL or CS10))
-                else {
+                } else {
                     let subjEnd = 4;
-                    while(contains(maybeCourseNumber.substring(0, subjEnd), '[0-9]')) {
+                    while (contains(maybeCourseNumber.substring(0, subjEnd), "[0-9]")) {
                         subjEnd = subjEnd - 1;
                     }
 
@@ -345,7 +336,7 @@ class AuditToJSON {
  * @param {string} n  The String which could contain a number.
  * https://stackoverflow.com/questions/5778020/check-whether-an-input-string-contains-a-number-in-javascript#28813213
  */
-function hasNumber(n: string) :boolean {
+function hasNumber(n: string): boolean {
     return !isNaN(parseFloat(n)) && isFinite(parseFloat(n));
 }
 
@@ -356,7 +347,7 @@ function hasNumber(n: string) :boolean {
  * @returns true if the text contains or matches lookfor, false otherwise.
  */
 function contains(text: string, lookfor: string): boolean {
-    return -1 != text.search(lookfor);
+    return -1 !== text.search(lookfor);
 }
 
 /**
@@ -364,6 +355,6 @@ function contains(text: string, lookfor: string): boolean {
  * @param path - The path to the degree audit HTML file.
  * @returns a JavaScript object with all of the relevant data from the degree audit.
  */
-export function audit_to_json(path: string) :InitialScheduleRep {
+export function audit_to_json(path: string): IInitialScheduleRep {
     return new AuditToJSON(path).exportData();
 }

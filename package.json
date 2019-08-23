@@ -13,9 +13,20 @@
     "ts-jest": "^24.0.2"
   },
   "scripts": {
+    "lint": "tslint -c tslint.json 'src/**/*.{ts,tsx}'",
+    "pretest": "yarn lint",
     "test": "jest"
   },
   "dependencies": {
-    "@types/jest": "^24.0.18"
+    "@types/jest": "^24.0.18",
+    "tslint": "^5.19.0",
+    "typescript": "^3.5.3"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ]
   }
 }
