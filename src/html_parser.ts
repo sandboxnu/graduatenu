@@ -46,7 +46,7 @@ class AuditToJSON {
             'CATALOG YEAR': this.add_year,
             'GRADUATION DATE:': this.add_grad_date,
             '(FL|SP|S1|S2|SM)': this.add_course_taken,
-            'No course taken pass/fail can be used toward NUpath.': this.get_nupaths,
+            '(>OK |>IP |>NO )': this.get_nupaths,
             'Course List': this.add_courses_to_take
         }
 
@@ -85,33 +85,23 @@ class AuditToJSON {
         this.gradDate = line.substring(line.search('GRADUATION DATE: ') + 'GRADUATION DATE: '.length, line.search('GRADUATION DATE: ') + 'GRADUATION DATE:  '.length + 7);
     }
 
-    // TODO: clean this function up
     /**
-     * Gets the NUPaths associated with this degree audit.
-     * @param {String} lines  The lines to be scanned for the NUPaths.
-     * @param {Integer} i     The index of the line at which we currently stand.
+     * Gets a NUPath associated with this degree audit.
+     * @param {string} line  The line that contains a NUPath mentioned in the audit.
      */
-    private get_nupaths(lines: string, i: BigInteger) :void {
-        i++;
-        // while there is another line with another listed NUPath (they alone use the HTML tag)
-        while(contains(lines[i], '<br>')) {
-            let toAdd = lines[i].substring(lines[i].indexOf("(") + 1, lines[i].indexOf("(") + 3)
-
-            // gets the NUPath abbreviation, omitting other information and unwanted HTML tags
-            if(contains(toAdd, '<') || contains(toAdd, '>')) {
-                return;
+    private get_nupaths(line: string) :void {
+        let nupathInd: number = line.indexOf("(") + 1;
+        let toAdd = line.substring(nupathInd, nupathInd + 2);
+        
+        if(!json.completed.nupaths.includes(toAdd)) {
+            switch(toAdd) {
+                case '>OK ':
+                    json.completed.nupaths.push(toAdd);	
+                case '>IP ':
+                    json.inprogress.nupaths.push(toAdd);
+                case '>NO ':
+                    json.requirements.nupaths.push(toAdd);
             }
-
-            else if(contains(lines[i], '>OK ') && !json.completed.nupaths.includes(toAdd)) {
-                json.completed.nupaths.push(toAdd);				
-            }
-            else if(contains(lines[i], '>IP ') && !json.inprogress.nupaths.includes(toAdd)) {
-                json.inprogress.nupaths.push(toAdd);
-            }
-            else if(contains(lines[i], '>NO ') && !json.requirements.nupaths.includes(toAdd)) {
-                json.requirements.nupaths.push(toAdd);				
-            }
-            i++;
         }
     }
 
@@ -127,6 +117,7 @@ class AuditToJSON {
         // As different technology will likely be used in 81 years, this is a valid assumption
         let termid :string = "20" + year;
         
+        /**
         let termToNumber = {
             "FL": "10", // Fall term: associated year is considered the same year as the following 
             "SP": "30", // Spring term
@@ -134,6 +125,7 @@ class AuditToJSON {
             "S2": "60", // Summer 2 term
             "SM": "50"  // Full Summer term (typically reserved for graduate courses)
         };
+         */
 
         switch(season) {
             case "FL": 
