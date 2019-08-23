@@ -126,19 +126,27 @@ class AuditToJSON {
         // Makes the assumption that all years will be in the 21st century
         // As different technology will likely be used in 81 years, this is a valid assumption
         let termid :string = "20" + year;
+        
+        let termToNumber = {
+            "FL": "10", // Fall term: associated year is considered the same year as the following 
+            "SP": "30", // Spring term
+            "S1": "40", // Summer 1 term
+            "S2": "60", // Summer 2 term
+            "SM": "50"  // Full Summer term (typically reserved for graduate courses)
+        };
+
         switch(season) {
             case "FL": 
-                // Fall term: associated year is the same year as the following 
                 // Spring term as per SearchNEU conventions
                 termid = "20" + Number(year) + 1;
                 termid = termid + "10"; break;
-            case "SP": // Spring term
+            case "SP": 
                 termid = termid + "30"; break;
-            case "S1": // Summer 1 term
+            case "S1": 
                 termid = termid + "40"; break;
-            case "S2": // Summer 2 term
+            case "S2": 
                 termid = termid + "60"; break;
-            case "SM": // Full Summer term (typically reserved for graduate courses)
+            case "SM": 
                 termid = termid + "50"; break;
             default:
                 throw "The given season was not a member of the enumeration required."
