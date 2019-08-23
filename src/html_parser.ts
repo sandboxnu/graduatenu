@@ -10,9 +10,10 @@
 
 import * as fs from "fs";
 
-/**
- * Accepts a degree audit and 
- */
+interface AuditMapping {
+    [key:string] : Function;
+}
+
 class AuditToJSON {
 
     // double majors?
@@ -38,38 +39,23 @@ class AuditToJSON {
     public constructor(audit: string) {
         // iterate line by line, identifying characteristics of the degree audit to
         // begin looking for specific elements of the degree audit to parse to JSON format if present
-        let lines = audit.split('\n');
-        for(let i = 0; i < lines.length; i++) {
+        let lines :Array<string> = audit.split('\n');
 
-            // finds major
-            if(contains(lines[i], 'Major')) {
-                this.add_major(lines[i]);
-            } 
+        let auditMapping: AuditMapping = {
+            'Major': this.add_major,
+            'CATALOG YEAR': this.add_year,
+            'GRADUATION DATE:': this.add_grad_date,
+            '(FL|SP|S1|S2|SM)': this.add_course_taken,
+            'No course taken pass/fail can be used toward NUpath.': this.get_nupaths,
+            'Course List': this.add_courses_to_take
+        }
 
-            // finds year
-            else if(contains(lines[i], 'CATALOG YEAR')) {
-                this.add_year(lines[i]);
-            }
-
-            // finds graduation date
-            else if(contains(lines[i], 'GRADUATION DATE:')) {
-                this.add_grad_date(lines[i]);	
-            }
-
-            // finds all of the nupaths
-            else if(contains(lines[i], 'No course taken pass/fail can be used toward NUpath.'))	{
-                this.get_nupaths(lines, i);
-            }
-
-            // finds all of the courses required to be taken
-            else if(contains(lines[i], 'Course List')) {
-                this.add_courses_to_take(lines, i, '');
-            }
-
-            // finds courses that have been taken
-            else if(contains(lines[i], '(FL|SP|S1|S2|SM)')) {
-                this.add_course_taken(lines[i]);
-            }
+        for(let i: number = 0; i < lines.length; i++) {
+            Object.keys(auditMapping).forEach((key: string) => {
+                if(contains(lines[i], key)) {
+                    auditMapping[key](lines[i]);
+                }
+            })
         }
     }
 
