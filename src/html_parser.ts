@@ -38,7 +38,7 @@ class AuditToJSON {
 
     /**
      * Extracts relevant data from a Northeastern degree audit.
-     * @param {String} audit     The stringified data contained within a 'Degree Audit.html' input file.
+     * @param audit - The stringified data contained within a 'Degree Audit.html' input file.
      */
     public constructor(audit: string) {
         // iterate line by line, identifying characteristics of the degree audit to
@@ -106,7 +106,7 @@ class AuditToJSON {
 
     /**
      * Gets the major associated with this degree audit.
-     * @param {string} line  The line at which the major can be found.
+     * @param line - The line at which the major can be found.
      */
     private add_major(line: string): void {
         this.majors.push(line.substring(line.search('\">') + 2, line.search(" - Major")));
@@ -114,7 +114,7 @@ class AuditToJSON {
 
     /**
      * Gets the year this degree audit was created.
-     * @param line     The line containing the year.
+     * @param line - The line containing the year.
      */
     private add_year(line: string): void {
         const yearInd = line.search("CATALOG YEAR:") + "CATALOG YEAR: ".length;
@@ -123,7 +123,7 @@ class AuditToJSON {
 
     /**
      * Gets the expected graduation date of the degree audit.
-     * @param line The line which contains the graduation date desired.
+     * @param line - The line which contains the graduation date desired.
      */
     private add_grad_date(line: string): void {
         const dateInd = line.search("GRADUATION DATE: ") + "GRADUATION DATE: ".length;
@@ -132,7 +132,7 @@ class AuditToJSON {
 
     /**
      * Gets a NUPath associated with this degree audit.
-     * @param {string} line  The line that contains a NUPath mentioned in the audit.
+     * @param line - The line that contains a NUPath mentioned in the audit.
      */
     private get_nupaths(line: string): void {
         const nupathInd: number = line.indexOf("(") + 1;
@@ -156,10 +156,10 @@ class AuditToJSON {
 
     /**
      * Determines the termId parameter of a course with the season and year of the course.
-     * @param {string} season   The season of the course ('FL', 'SP', 'S1', 'S2', 'SM')
-     * @param {number} year     The year during which the course occurs (i.3. 2018, 2019)
-     * @return {number}         A six-digit integer representing the termId.
-     * @throws err              if the given year is not part of the enumeration specified.
+     * @param season - The season of the course ('FL', 'SP', 'S1', 'S2', 'SM')
+     * @param year - The year during which the course occurs (i.3. 2018, 2019)
+     * @returns a six-digit integer representing the termId.
+     * @throws err if the given year is not part of the enumeration specified.
      */
     private get_termid(season: string, year: number): number {
         // Makes the assumption that all years will be in the 21st century
@@ -190,9 +190,9 @@ class AuditToJSON {
      * Determines whether an array already contains a course.
      * Two courses are the same when they have the same subject, classId (e.g. CS1200),
      * and are taken during the same term (e.g. 201810)
-     * @param {Array} arr   The array of courses which could contain the course.
-     * @param {Object} course The course which could be in the array.
-     * @return whether the array contains the course.
+     * @param arr - The array of courses which could contain the course.
+     * @param course - The course which could be in the array.
+     * @returns whether the array contains the course.
      */
     private contains_course(arr, course) {
         for (const row of arr) {
@@ -207,7 +207,7 @@ class AuditToJSON {
 
     /**
      * Adds the courses taken so far to the current JSON file.
-     * @param {string} line  The line which contains the course taken.
+     * @param line - The line which contains the course taken.
      */
     private add_course_taken(line: string): void {
         const course = {} as ICompleteCourse;
@@ -250,7 +250,7 @@ class AuditToJSON {
      // not going to elaborate upon types until completing the issue for fixing this function's format
     /**
      * Adds the courses required by the degree audit to be taken to the JSON.
-     * @param line  The line which contains these required courses.
+     * @param line - The line which contains these required courses.
      */
     private add_courses_to_take(lines: string[], j: number, subjectType: string): void {
         const courseList = lines[j].substring(lines[j].search("Course List") + 13).replace(/<font>/g, "")
@@ -312,7 +312,7 @@ class AuditToJSON {
 
                         // else, it is another required course with the previous type
                     } else {
-                        course.classId = maybeCourseNumber;
+                        course.classId = parseInt(maybeCourseNumber, 10);
                         course.subject = type;
                         courses.push(course);
                     }
@@ -326,7 +326,7 @@ class AuditToJSON {
 
                     type = maybeCourseNumber.substring(0, subjEnd);
                     course.subject = type;
-                    course.classId = courseList[i].substring(subjEnd, subjEnd + 4);
+                    course.classId = parseInt(courseList[i].substring(subjEnd, subjEnd + 4), 10);
                     courses.push(course);
                 }
             }
