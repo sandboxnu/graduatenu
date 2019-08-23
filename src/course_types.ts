@@ -26,6 +26,16 @@ export interface CompleteCourse extends Course {
     termId: number
 }
 
+export interface OldRequirement {
+    classId?: number,
+    subject?: string,
+    classId2?: number,
+    list?: Array<OldRequirement>,
+}
+
+
+// These are future representations that are not yet used or implemented. They will be used in the future.
+
 /**
  * A course(s) required for the student that have not yet been taken.
  * @param creditsRequired - The number of credit hours required to be taken.

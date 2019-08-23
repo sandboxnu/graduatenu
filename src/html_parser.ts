@@ -8,7 +8,7 @@
  */
 
 import * as fs from "fs";
-import { CompleteCourse, NUPaths, CompleteCourses, RequiredCourses, InitialScheduleRep,  } from "./course_types";
+import { CompleteCourse, NUPaths, CompleteCourses, RequiredCourses, InitialScheduleRep, OldRequirement  } from "./course_types";
 
 /**
  * Represents a mapping between different textual identifiers for data and the functions that operate on that data.
@@ -224,7 +224,9 @@ class AuditToJSON {
         }  
 
         course.classId = parseInt(courseString.substring(9, 13));
-        if(isNaN(course.classId) || course.classId == null || isNaN(course.creditHours) || course.credithours == null) {
+        course.creditHours = parseFloat(courseString.substring(18, 22));
+
+        if(isNaN(course.classId) || course.classId == null || isNaN(course.creditHours) || course.creditHours == null) {
             return; 
             // not a valid course if the course id is not a number
         }
@@ -233,7 +235,6 @@ class AuditToJSON {
         course.hon = contains(line, '\(HON\)');
         course.subject = courseString.substring(4, 9).replace(/\s/g, '');
         course.name = courseString.substring(30, courseString.search('</font>')).replace(/\s/g, '').replace('&amp;', '&').replace('(HON)','').replace(';X','');
-        course.creditHours = parseFloat(courseString.substring(18, 22));
         course.season = courseString.substring(0, 2);
         course.year = parseInt(courseString.substring(2, 4));
         course.termId = this.get_termid(course.season, course.year);
@@ -249,11 +250,12 @@ class AuditToJSON {
     }
 
      // TODO: fix this up
+     // not going to elaborate upon types until completing the issue for fixing this function's format
     /**
      * Adds the courses required by the degree audit to be taken to the JSON.
-     * @param {String} line  The line which contains these required courses.
+     * @param {string} line  The line which contains these required courses.
      */
-    private add_courses_to_take(lines, j, subjectType) {
+    private add_courses_to_take(lines, j, subjectType) :void {
         let courseList = lines[j].substring(lines[j].search('Course List') + 13).replace(/<font>/g, '').replace(/<font class="auditPreviewText">/g, '').replace(/\*\*\*\*/g, '').replace(/\s/g, '').split('</font>');
 
         // last two elements are always empty, as each of these lines ends with two </font> tags
@@ -264,11 +266,11 @@ class AuditToJSON {
         let courses = [];
         let seenEnumeration: boolean = false;
         for(let i: number = 0; i < courseList.length; i++) {
-            let course = { };
+            let course = { } as OldRequirement;
 
             // called on next line to pick up future courses if relevant
             if(contains(courseList[i],'&amp;')) {
-                add_courses_to_take(json, lines, j + 1, type);
+                this.add_courses_to_take(lines, j + 1, type);
             }
 
             // remove the potential and sign
@@ -335,7 +337,7 @@ class AuditToJSON {
                 }
             }
         }
-        json.requirements.classes = [].concat(json.requirements.classes, courses);
+        this.requiredCourses = [].concat(this.requiredCourses, courses);
     }
 }
 
@@ -345,7 +347,7 @@ class AuditToJSON {
  * https://stackoverflow.com/questions/5778020/check-whether-an-input-string-contains-a-number-in-javascript#28813213
  */
 function hasNumber(n: string) :boolean {
-    return !isNaN(parseFloat(n)) && isFinite(n);
+    return !isNaN(parseFloat(n)) && isFinite(parseFloat(n));
 }
 
 /**
