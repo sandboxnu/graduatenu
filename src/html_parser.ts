@@ -1,4 +1,3 @@
-
 /**
  * HTML Degree Audit parser built for Northeastern University's degree audit.
  * By Jacob Chvatal for Northeastern Sandbox.
@@ -169,7 +168,7 @@ class AuditToJSON {
     * @param {string} line  The line which contains the course taken.
     */
     private add_course_taken(line: string) :void {
-        let course = {} as TakenCourse;
+        let course = {};
         let courseString = line.substring(line.search('(FL|SP|S1|S2|SM)'));
         course.hon = contains(line, '\(HON\)');
 
