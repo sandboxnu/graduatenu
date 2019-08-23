@@ -126,7 +126,8 @@ class AuditToJSON {
      * @param line The line which contains the graduation date desired.
      */
     private add_grad_date(line: string): void {
-        this.gradDate = line.substring(line.search("GRADUATION DATE: ") + "GRADUATION DATE: ".length, line.search("GRADUATION DATE: ") + "GRADUATION DATE:  ".length + 7);
+        const dateInd = line.search("GRADUATION DATE: ") + "GRADUATION DATE: ".length;
+        this.gradDate = line.substring(dateInd, dateInd + 7);
     }
 
     /**
