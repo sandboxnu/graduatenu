@@ -271,12 +271,16 @@ class AuditToJSON {
                     if (contains(lines[j - 1], " of the following courses")) {
 
                         if (courses[courses.length - 1].list == null) {
-                            courses[courses.length - 1].list = [courses[courses.length - 1].classId, maybeCourseNumber];
-                            courses[courses.length - 1].num_required = lines[j - 1].substring(lines[j - 1].search("Complete") + "Complete (".length, lines[j - 1].search("Complete") + "Complete (".length + 1);
+                            courses[courses.length - 1].list
+                            = [courses[courses.length - 1].classId, parseInt(maybeCourseNumber, 10)];
+
+                            courses[courses.length - 1].num_required = parseInt(lines[j - 1]
+                                .substring(lines[j - 1].search("Complete") + "Complete (".length,
+                             lines[j - 1].search("Complete") + "Complete (".length + 1), 10);
                             delete courses[courses.length - 1].classId;
 
                         } else {
-                            courses[courses.length - 1].list.push(maybeCourseNumber);
+                            courses[courses.length - 1]!.list!.push(parseInt(maybeCourseNumber, 10));
                         }
 
                     } else if (contains(lines[j - 2], " of the following courses")) {
@@ -284,11 +288,18 @@ class AuditToJSON {
                         // there is always a line of white space after course requirements,
                         // so picking up a course number from a line two previous to this one is not an issue
                         if (courses[courses.length - 1].list == null) {
-                            courses[courses.length - 1].list = [courses[courses.length - 1].classId, maybeCourseNumber];
-                            courses[courses.length - 1].num_required = lines[j - 2].substring(lines[j - 2].search("Complete") + "Complete (".length, lines[j - 2].search("Complete") + "Complete (".length + 1);
+                            courses[courses.length - 1].list
+                            = [courses[courses.length - 1].classId as number, parseInt(maybeCourseNumber, 10)];
+
+                            courses[courses.length - 1].num_required
+                            = parseInt(lines[j - 2].substring(lines[j - 2].search("Complete") + "Complete (".length,
+                                lines[j - 2].search("Complete") + "Complete (".length + 1), 10);
+
                             delete courses[courses.length - 1].classId;
                         } else {
-                            courses[courses.length - 1].list.push(maybeCourseNumber);
+                            if (courses[courses.length - 1].list !== undefined) {
+                                courses[courses.length - 1]!.list!.push(parseInt(maybeCourseNumber, 10));
+                            }
                         }
 
                         // else, it is another required course with the previous type
@@ -312,7 +323,8 @@ class AuditToJSON {
                 }
             }
         }
-        this.requiredCourses = [].concat(this.requiredCourses, courses);
+
+        this.requiredCourses = this.requiredCourses.concat(courses as IRequiredCourses);
     }
 }
 

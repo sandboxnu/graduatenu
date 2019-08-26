@@ -45,10 +45,11 @@ export interface ICompleteCourse {
  * This will be replaced with the future representations (found below).
  */
 export interface IOldRequirement {
-    classId?: number;
+    classId: number;
     subject?: string;
+    num_required?: number;
     classId2?: number;
-    list?: IOldRequirement[];
+    list?: number[];
 }
 
 // These are future representations that are not yet used or implemented. They will be used in the future.
