@@ -7,7 +7,7 @@
  * classes and NUPaths taken and in progress as well as requirements to take.
  */
 
-import { ICompleteCourse, ICompleteCourses, IInitialScheduleRep, NUPath, IOldRequirement, IRequiredCourses  } from "./course_types";
+import { ICompleteCourse, ICompleteCourses, IInitialScheduleRep, IOldRequirement, IRequiredCourses, NUPath  } from "./course_types";
 
 class AuditToJSON {
 
