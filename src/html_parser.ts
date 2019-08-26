@@ -119,7 +119,7 @@ class AuditToJSON {
      */
     private get_nupaths(line: string): void {
         const nupathInd: number = line.indexOf("(") + 1;
-        const toAdd = line.substring(nupathInd, nupathInd + 2);
+        const toAdd = line.substring(nupathInd, nupathInd + 2) as NUPath;
 
         if (contains(line, ">OK ")) {
             if (!this.completeNUPaths.includes(toAdd)) {
