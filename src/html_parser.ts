@@ -329,7 +329,7 @@ class AuditToJSON {
             }
         }
 
-        this.requiredCourses = this.requiredCourses.concat(courses as IRequiredCourses);
+        this.requiredCourses = this.requiredCourses.concat(courses as IOldRequirement[]);
     }
 }
 
