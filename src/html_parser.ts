@@ -9,15 +9,6 @@
 
 import { ICompleteCourse, ICompleteCourses, IInitialScheduleRep, INUPaths, IOldRequirement, IRequiredCourses  } from "./course_types";
 
-/**
- * Represents a mapping between different textual identifiers for data and the functions that operate on that data.
- */
-interface IAuditMapping {
-    // TODO: Remove TSLint stipulation when code is fixed for Requirements
-    // tslint:disable-next-line: ban-types
-    [key: string]: Function;
-}
-
 class AuditToJSON {
 
     // protected designation is for possible access by external class in same package without export
@@ -43,32 +34,24 @@ class AuditToJSON {
     public constructor(audit: string) {
         // iterate line by line, identifying characteristics of the degree audit to
         // begin looking for specific elements of the degree audit to parse to JSON format if present
+
+        // TODO: filter out all HTML tags here, making text identifiers independent of them
         const lines: string[] = audit.split("\n");
 
-        // TODO: filter out all HTML tags here, and format courses to take in a nicer fashion
-
-        const auditMapping: IAuditMapping = {
-            "(>OK |>IP |>NO )": this.get_nupaths,
-            "(FL|SP|S1|S2|SM)": this.add_course_taken,
-            "CATALOG YEAR": this.add_year,
-            "Course List": this.add_courses_to_take,
-            "GRADUATION DATE:": this.add_grad_date,
-            "Major": this.add_major,
-        };
-
-        // If a key matches an indicator associated with a desired piece of info,
-        // call its associated function to retrieve its info
         for (let i: number = 0; i < lines.length; i++) {
-            Object.keys(auditMapping).forEach((key: string) => {
-                if (contains(lines[i], key)) {
-                    if (key === "Course List") {
-                        // required courses currently operate differently from other courses
-                        auditMapping[key](lines, i);
-                    } else {
-                        auditMapping[key](lines[i]);
-                    }
-                }
-            });
+            if (contains(lines[i], "(>OK |>IP |>NO )")) {
+                this.get_nupaths(lines[i]);
+            } else if (contains(lines[i], "(FL|SP|S1|S2|SM)")) {
+                this.add_course_taken(lines[i]);
+            } else if (contains(lines[i], "CATALOG YEAR")) {
+                this.add_year(lines[i]);
+            } else if (contains(lines[i], "Course List")) {
+                this.add_courses_to_take(lines, i, "");
+            } else if (contains(lines[i], "GRADUATION DATE:")) {
+                this.add_grad_date(lines[i]);
+            } else if (contains(lines[i], "Major")) {
+                this.add_major(lines[i]);
+            }
         }
     }
 
