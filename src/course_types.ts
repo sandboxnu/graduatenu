@@ -270,10 +270,12 @@ export interface INEUOrPrereq {
  * A SearchNEU prerequisite course.
  * @param classId The course number of this prerequisite course.
  * @param subject The subject of this prerequisite course.
+ * @param missing True if the class is missing.
  */
 export interface INEUPrereqCourse {
     classId: string;
     subject: string;
+    missing?: true;
 }
 
 // types for json_parser.ts
