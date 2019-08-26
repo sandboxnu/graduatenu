@@ -1,4 +1,5 @@
 import * as fs from "fs";
+import { ICompleteCourse, IInitialScheduleRep } from "../src/course_types";
 import { audit_to_json } from "../src/html_parser";
 
 const csJson = audit_to_json(fs.readFileSync("./test/mock_audits/cs_audit.html", "utf-8"));
@@ -7,29 +8,54 @@ const csJson3 = audit_to_json(fs.readFileSync("./test/mock_audits/cs_audit3.html
 const csMathJson = audit_to_json(fs.readFileSync("./test/mock_audits/cs_math_grad_audit.html", "utf-8"));
 const meJson = audit_to_json(fs.readFileSync("./test/mock_audits/me_audit.html", "utf-8"));
 
-const jsonEx = [];
+const jsonEx: IInitialScheduleRep[] = [];
 jsonEx.push(csJson);
 jsonEx.push(csMathJson);
 jsonEx.push(csJson2);
 // json_ex.push(cs_json3);
 // json_ex.push(me_json);
 
+expect.extend({
+    toHaveValidCompleteCourseForm(received: ICompleteCourse[]) {
+        for (const completedCourse of received) {
+            expect(typeof completedCourse.hon === typeof true).toBeTruthy();
+            expect(completedCourse.subject).toMatch(/^[A-Z]{2,4}$/);
+            expect(completedCourse.classId).toMatch(/^[\d]{4}$/);
+            expect(completedCourse.creditHours).toMatch(/^[\d]\.00/);
+            expect(completedCourse.season).toMatch(/FL|SP|S1|S2|SM/);
+            expect(completedCourse.year).toMatch(/^\d\d$/);
+            expect(completedCourse.termId).toMatch(/^20\d\d[1-6]0$/);
+        }
+
+        return {
+            message: () => `Expected ${received} to have courses with data of the proper form.`,
+            pass: true,
+        };
+    },
+});
+
 test("Confirms that the generated JavaScript object has the proper format for supplemental data", () => {
     for (const audit of jsonEx) {
-        expect(audit).toBeDefined();
-        expect(audit.data.grad).toMatch(/^[0-3][0-9]\/[0-3][0-9]\/[0-9][0-9]$/);
-        expect(audit.data.year).toMatch(/^20[0-9][0-9]$/);
-        expect(audit.data.major).toMatch(/^[a-zA-Z ]+$/);
+        expect(audit.data.gradDate).toMatch(/^[0-3][0-9]\/[0-3][0-9]\/[0-9][0-9]$/);
+        expect(audit.data.auditYear).toMatch(/^20[0-9][0-9]$/);
+
+        for (const major of audit.data.majors) {
+            expect(major).toMatch(/^[a-zA-Z ]+$/);
+        }
+
+        for (const minor of audit.data.minors) {
+            expect(minor).toMatch(/^[a-zA-Z ]+$/);
+        }
     }
 });
 
 test("Ensures that all of the complete course information is of the form required.", () => {
     for (const audit of jsonEx) {
-        for (const completedCourse of audit.completed.classes) {
+        for (const completedCourse of audit.completed.courses) {
             expect(typeof completedCourse.hon === typeof true).toBeTruthy();
             expect(completedCourse.subject).toMatch(/^[A-Z]{2,4}$/);
             expect(completedCourse.classId).toMatch(/^[\d]{4}$/);
-            expect(completedCourse.credithours).toMatch(/^[\d]\.00/);
+            expect(completedCourse.creditHours).toMatch(/^[\d]\.00/);
             expect(completedCourse.season).toMatch(/FL|SP|S1|S2|SM/);
             expect(completedCourse.year).toMatch(/^\d\d$/);
             expect(completedCourse.termId).toMatch(/^20\d\d[1-6]0$/);
@@ -38,60 +64,28 @@ test("Ensures that all of the complete course information is of the form require
 });
 
 test("Ensures that all of the in-progress course information is of the form required.", () => {
-    for (let i = 0; i < jsonEx.length; i++) {
-        for (let j = 0; j < jsonEx[i].inprogress.classes.length; j++) {
-            expect(jsonEx[i].inprogress.classes[j].subject).toMatch(/^[A-Z]{2,4}$/);
-            expect(jsonEx[i].inprogress.classes[j].classId).toMatch(/^[\d]{4}$/);
-            expect(jsonEx[i].inprogress.classes[j].credithours).toMatch(/^[\d]\.00$/);
-            expect(jsonEx[i].inprogress.classes[j].season).toMatch(/FL|SP|S1|S2|SM/);
-            expect(jsonEx[i].inprogress.classes[j].year).toMatch(/^\d\d$/);
-            expect(jsonEx[i].inprogress.classes[j].termId).toMatch(/^20\d\d[1-6]0$/);
-        }
+    for (const audit of jsonEx) {
+        expect(audit.inprogress.courses)
     }
 });
 
 test("Ensures that all of the courses required to take are of the form required.", () => {
-    for (let i = 0; i < jsonEx.length; i++) {
-        for (let j = 0; j < jsonEx[i].requirements.classes.length; j++) {
-            expect(jsonEx[i].requirements.classes[j].subject).toMatch(/^[A-Z]{2,4}$/);
+    for (const audit of jsonEx) {
+        for (const requiredCourse of audit.requirements.courses) {
+            expect(requiredCourse.subject).toMatch(/^[A-Z]{2,4}$/);
 
-            if (typeof jsonEx[i].requirements.classes[j].classId  === "undefined") {
-                expect(jsonEx[i].requirements.classes[j].num_required).toMatch(/^[\d]$/);
+            if (typeof requiredCourse.classId  === "undefined") {
+                expect(requiredCourse.num_required).toMatch(/^[\d]$/);
 
-                for (let k = 0; k < jsonEx[i].requirements.classes[j].list.length; k++) {
-                    // assumes that no more than 9 classes will be required
-                    expect(jsonEx[i].requirements.classes[j].list[k]).toMatch(/^[\d]{4}$/);
+                for (const course of requiredCourse.list) {
+                    expect(course).toMatch(/^[\d]{4}$/);
                 }
             } else {
-                expect(jsonEx[i].requirements.classes[j].classId).toMatch(/^[\d]{4}$/);
-                if (typeof jsonEx[i].requirements.classes[j].classId2 !== "undefined") {
-                    expect(jsonEx[i].requirements.classes[j].classId2).toMatch(/^[\d]{4}$/);
+                expect(requiredCourse.classId).toMatch(/^[\d]{4}$/);
+                if (typeof requiredCourse.classId2 !== "undefined") {
+                    expect(requiredCourse.classId2).toMatch(/^[\d]{4}$/);
                 }
             }
-        }
-    }
-});
-
-test("Ensures that the required NUPaths are of the form required.", () => {
-    for (let i = 0; i < jsonEx.length; i++) {
-        for (let j = 0; j < jsonEx[i].requirements.nupaths.length; j++) {
-            expect(jsonEx[i].requirements.nupaths[j]).toMatch(/ND|EI|IC|FQ|SI|AD|DD|ER|WF|WD|WI|EX|CE/);
-        }
-    }
-});
-
-test("Ensures that the in-progress NUPaths are of the form required.", () => {
-    for (let i = 0; i < jsonEx.length; i++) {
-        for (let j = 0; j < jsonEx[i].inprogress.nupaths.length; j++) {
-            expect(jsonEx[i].inprogress.nupaths[j]).toMatch(/ND|EI|IC|FQ|SI|AD|DD|ER|WF|WD|WI|EX|CE/);
-        }
-    }
-});
-
-test("Ensures that the completed NUPaths are of the form required.", () => {
-    for (let i = 0; i < jsonEx.length; i++) {
-        for (let j = 0; j < jsonEx[i].completed.nupaths.length; j++) {
-            expect(jsonEx[i].completed.nupaths[j]).toMatch(/ND|EI|IC|FQ|SI|AD|DD|ER|WF|WD|WI|EX|CE/);
         }
     }
 });
@@ -99,15 +93,15 @@ test("Ensures that the completed NUPaths are of the form required.", () => {
 test("Ensures that the audits do not contain duplicate completed courses.", () => {
     for (let i = 0; i < jsonEx.length; i++) {
         let duplicates = false;
-        for (let j = 0; j < jsonEx[i].completed.classes.length; j++) {
-            const course = jsonEx[i].completed.classes[j];
+        for (let j = 0; j < jsonEx[i].completed.courses.length; j++) {
+            const course = jsonEx[i].completed.courses[j];
             let seen = false;
 
-            for (let k = 0; k < jsonEx[i].completed.classes.length; k++) {
-                if (course.classId === jsonEx[i].completed.classes[k].classId
-                    && course.subject === jsonEx[i].completed.classes[k].subject
-                    && course.termId === jsonEx[i].completed.classes[k].termId
-                    && course.name === jsonEx[i].completed.classes[k].name) {
+            for (let k = 0; k < jsonEx[i].completed.courses.length; k++) {
+                if (course.classId === jsonEx[i].completed.courses[k].classId
+                    && course.subject === jsonEx[i].completed.courses[k].subject
+                    && course.termId === jsonEx[i].completed.courses[k].termId
+                    && course.name === jsonEx[i].completed.courses[k].name) {
                     if (!seen) {
                         seen = true;
                     } else {
@@ -125,14 +119,14 @@ test("Ensures that the audits do not contain duplicate completed courses.", () =
 test("Ensures that the audits do not contain duplicate in-progress courses.", () => {
     for (let i = 0; i < jsonEx.length; i++) {
         let duplicates = false;
-        for (let j = 0; j < jsonEx[i].inprogress.classes.length; j++) {
-            const course = jsonEx[i].inprogress.classes[j];
+        for (let j = 0; j < jsonEx[i].inprogress.courses.length; j++) {
+            const course = jsonEx[i].inprogress.courses[j];
             let seen = false;
 
-            for (let k = 0; k < jsonEx[i].inprogress.classes.length; k++) {
-                if (course.classId === jsonEx[i].inprogress.classes[k].classId 
-                    && course.subject === jsonEx[i].inprogress.classes[k].subject 
-                    && course.termId === jsonEx[i].inprogress.classes[k].termId) {
+            for (let k = 0; k < jsonEx[i].inprogress.courses.length; k++) {
+                if (course.classId === jsonEx[i].inprogress.courses[k].classId 
+                    && course.subject === jsonEx[i].inprogress.courses[k].subject 
+                    && course.termId === jsonEx[i].inprogress.courses[k].termId) {
                     if (!seen) {
                         seen = true;
                     } else {
@@ -248,7 +242,7 @@ test("Verifies that the CS degree audit is properly reproduced by the code", () 
     expect(csJson).toStrictEqual(
         {
             completed: {
-                classes: [
+                courses: [
                     {
                         classId: "1200",
                         creditHours: "1.00",
@@ -560,7 +554,7 @@ test("Verifies that the CS degree audit is properly reproduced by the code", () 
                 ],
             },
             inprogress: {
-                classes: [
+                courses: [
                     {
                         hon: false,
                         subject: "CS",
@@ -637,7 +631,7 @@ test("Verifies that the CS degree audit is properly reproduced by the code", () 
                 ],
             },
             requirements: {
-                classes: [
+                courses: [
                     {
                         subject: "CS",
                         classId: "1210",
@@ -702,7 +696,7 @@ test("Verifies that the second Computer Science degree audit is properly reprodu
     expect(csJson2).toStrictEqual(
         {
             completed: {
-                classes: [
+                courses: [
                     { hon: false,
                         subject: "CS",
                         classId: "1200",
@@ -973,7 +967,7 @@ test("Verifies that the second Computer Science degree audit is properly reprodu
                 ],
             },
             inprogress: {
-                classes: [
+                courses: [
                     {
                         hon: false,
                         subject: "CS",
@@ -1041,7 +1035,7 @@ test("Verifies that the second Computer Science degree audit is properly reprodu
                 ],
             },
             requirements: {
-                classes: [
+                courses: [
                     {
                         subject: "CS",
                         classId: "1210",
@@ -1107,7 +1101,7 @@ test("Verifies that the CS Math degree audit is properly reproduced by the code"
     expect(csMathJson).toStrictEqual(
         {
             completed: {
-                classes: [
+                courses: [
                     {
                         hon: false,
                         subject: "CS",
@@ -1482,7 +1476,7 @@ test("Verifies that the CS Math degree audit is properly reproduced by the code"
                 ],
             },
             inprogress: {
-                classes: [
+                courses: [
                     {
                         hon: false,
                         subject: "CS",
@@ -1558,7 +1552,7 @@ test("Verifies that the CS Math degree audit is properly reproduced by the code"
                 ],
             },
             requirements: {
-                classes: [
+                courses: [
                     {
                         subject: "CS",
                         classId: "1210",

@@ -115,23 +115,12 @@ export interface ISimpleRequiredCourse extends IRequiredCourse {
 }
 
 /**
- * A list of courses already taken, complete with all of the information available on the degree audit.
- */
-export interface ICompleteCourses extends Array<ICompleteCourse> {}
-
-/**
- * A list of requirements as yet to be fulfilled.
- * The OldRequirement stipulation will be replaced with the Requirement interface in the future.
- */
-export interface IRequiredCourses extends Array<IOldRequirement> {}
-
-/**
  * Encapsulates the completed courses and NUPath requirements.
  * @param courses - Courses that the student has completed.
  * @param nupaths - NUPaths that the completed courses satisfy.
  */
 export interface ICompleted {
-    courses: ICompleteCourses;
+    courses: ICompleteCourse[];
     nupaths: NUPath[];
 }
 
@@ -141,7 +130,7 @@ export interface ICompleted {
  * @param nupaths - The NUPaths that will be satisfied by the in-progress courses.
  */
 export interface IP {
-    courses: ICompleteCourses;
+    courses: ICompleteCourse[];
     nupaths: NUPath[];
 }
 
@@ -151,7 +140,7 @@ export interface IP {
  * @param nupaths - The NUPaths that have not yet been satisfied.
  */
 export interface IRequirements {
-    courses: IRequiredCourses;
+    courses: IOldRequirement[];
     nupaths: NUPath[];
 }
 
