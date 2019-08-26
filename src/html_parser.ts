@@ -194,7 +194,7 @@ class AuditToJSON {
      * @param course - The course which could be in the array.
      * @returns whether the array contains the course.
      */
-    private contains_course(arr: [], course: Course): boolean {
+    private contains_course(arr: ICompleteCourse[], course: ICompleteCourse): boolean {
         for (const row of arr) {
             if (row.classId === course.classId && row.subject === course.subject
                 && row.termId === course.termId && row.name === course.name) {
