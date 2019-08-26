@@ -300,7 +300,7 @@ class AuditToJSON {
                         courses.push(course);
                     }
                 } else if (maybeCourseNumber.substring(0, 2) === "TO") {
-                    courses[courses.length - 1].classId2 = courseList[i].substring(2, 7);
+                    courses[courses.length - 1].classId2 = parseInt(courseList[i].substring(2, 7), 10);
                 } else {
                     let subjEnd = 4;
                     while (contains(maybeCourseNumber.substring(0, subjEnd), "[0-9]")) {
