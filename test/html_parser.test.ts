@@ -245,7 +245,7 @@ test("Verifies that the CS degree audit is properly reproduced by the code", () 
                     season: "FL",
                     subject: "CS",
                     termId: "201910",
-                    year: "18"
+                    year: "18",
                 }, {
                     classId: "1800",
                     credithours: "4.00",
@@ -254,7 +254,7 @@ test("Verifies that the CS degree audit is properly reproduced by the code", () 
                     season: "FL",
                     subject: "CS",
                     termId: "201910",
-                    year: "18"
+                    year: "18",
                 }, {
                     classId: "1802",
                     credithours: "1.00",
@@ -263,7 +263,7 @@ test("Verifies that the CS degree audit is properly reproduced by the code", () 
                     season: "FL",
                     subject: "CS",
                     termId: "201910",
-                    year: "18"
+                    year: "18",
                 }, {
                     classId: "2500",
                     credithours: "4.00",
@@ -272,7 +272,7 @@ test("Verifies that the CS degree audit is properly reproduced by the code", () 
                     season: "FL",
                     subject: "CS",
                     termId: "201910",
-                    year: "18"
+                    year: "18",
                 }, {
                     classId: "2501",
                     credithours: "1.00",
@@ -281,7 +281,7 @@ test("Verifies that the CS degree audit is properly reproduced by the code", () 
                     season: "FL",
                     subject: "CS",
                     termId: "201910",
-                    year: "18"
+                    year: "18",
                 }, {
                     classId: "2510",
                     credithours: "4.00",
@@ -290,7 +290,7 @@ test("Verifies that the CS degree audit is properly reproduced by the code", () 
                     season: "SP",
                     subject: "CS",
                     termId: "201930",
-                    year: "19"
+                    year: "19",
                 }, {
                     classId: "2511",
                     credithours: "1.00",
@@ -299,7 +299,7 @@ test("Verifies that the CS degree audit is properly reproduced by the code", () 
                     season: "SP",
                     subject: "CS",
                     termId: "201930",
-                    year: "19"
+                    year: "19",
                 }, {
                     classId: "2800",
                     credithours: "4.00",
@@ -308,7 +308,7 @@ test("Verifies that the CS degree audit is properly reproduced by the code", () 
                     season: "SP",
                     subject: "CS",
                     termId: "201930",
-                    year: "19"
+                    year: "19",
                 }, {
                     classId: "2801",
                     credithours: "1.00",
@@ -317,7 +317,7 @@ test("Verifies that the CS degree audit is properly reproduced by the code", () 
                     season: "SP",
                     subject: "CS",
                     termId: "201930",
-                    year: "19"
+                    year: "19",
                 }, {
                     classId: "3200",
                     credithours: "4.00",
@@ -326,7 +326,7 @@ test("Verifies that the CS degree audit is properly reproduced by the code", () 
                     season: "SP",
                     subject: "CS",
                     termId: "201930",
-                    year: "19"
+                    year: "19",
                 }, {
                     classId: "3950",
                     credithours: "2.00",
@@ -335,7 +335,7 @@ test("Verifies that the CS degree audit is properly reproduced by the code", () 
                     season: "SP",
                     subject: "CS",
                     termId: "201930",
-                    year: "19"
+                    year: "19",
                 }, {
                     classId: "1341",
                     credithours: "4.00",
@@ -344,7 +344,7 @@ test("Verifies that the CS degree audit is properly reproduced by the code", () 
                     season: "S2",
                     subject: "MATH",
                     termId: "201860",
-                    year: "18"
+                    year: "18",
                 }, {
                     classId: "1342",
                     credithours: "4.00",
@@ -353,7 +353,7 @@ test("Verifies that the CS degree audit is properly reproduced by the code", () 
                     season: "S2",
                     subject: "MATH",
                     termId: "201860",
-                    year: "18"
+                    year: "18",
                 }, {
                     classId: "2331",
                     credithours: "4.00",
@@ -362,7 +362,7 @@ test("Verifies that the CS degree audit is properly reproduced by the code", () 
                     season: "FL",
                     subject: "MATH",
                     termId: "201910",
-                    year: "18"
+                    year: "18",
                 }, {
                     classId: "1145",
                     credithours: "4.00",
@@ -371,7 +371,7 @@ test("Verifies that the CS degree audit is properly reproduced by the code", () 
                     season: "FL",
                     subject: "PHIL",
                     termId: "201910",
-                    year: "18"
+                    year: "18",
                 }, {
                     classId: "1111",
                     credithours: "4.00",
