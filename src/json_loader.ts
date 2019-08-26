@@ -7,20 +7,15 @@ import { get } from "https";
 import { INEUClassMap, INEUParentMap } from "./course_types";
 
 // the year
-const YEAR = "2019";
+const YEAR: number = 2019;
 
 // the possible seasons to choose from.
 // note that "years" begin in the fall of the previous year.
 // [Fall, Spring, SummerI, SummerFUll, SummerII]
-const SEASONS = ["10", "30", "40", "50", "60"];
+const SEASONS: number[] = [10, 30, 40, 50, 60];
 
-const SEASON_LINKS = SEASONS.map((season) => "https://searchneu.com/data/v2/getTermDump/neu.edu/" + YEAR + season + ".json");
-// the download links for the fall and spring course data.
-const FALL = SEASON_LINKS[0];
-const SPRING = SEASON_LINKS[1];
-const SUMMER1 = SEASON_LINKS[2];
-const SUMMERF = SEASON_LINKS[3];
-const SUMMER2 = SEASON_LINKS[4];
+const SEASON_LINKS: string[] =
+SEASONS.map((season) => "https://searchneu.com/data/v2/getTermDump/neu.edu/" + YEAR + season + ".json");
 
 /**
  * Provides an array of the links to the classMap files for a specified year.
@@ -37,20 +32,14 @@ SEASONS.map((season) => "https://searchneu.com/data/v2/getTermDump/neu.edu/" + y
  */
 const getClassMapFilePaths = (year: number): string[] => SEASONS.map((season) => "./" + year + season + ".json");
 
-const SEASON_PATHS = SEASONS.map((season) => "./" + YEAR + season + ".json");
-// the filepath locations for storing fall and spring course data.
-const FALL_PATH = SEASON_PATHS[0];
-const SPRING_PATH = SEASON_PATHS[1];
-const SUMMER1_PATH = SEASON_PATHS[2];
-const SUMMERF_PATH = SEASON_PATHS[3];
-const SUMMER2_PATH = SEASON_PATHS[4];
+const SEASON_PATHS: string[] = SEASONS.map((season) => "./" + YEAR + season + ".json");
 
 /**
  * Grabs a file as JSON text.
  * @param inputLocation The filepath of the input file to convert to JSON.
  * @returns The resulting promise, resolved with the parsed JSON.
  */
-function getFileAsJson(inputLocation: string | PathLike): Promise<any> {
+const getFileAsJson = (inputLocation: string | PathLike): Promise<any> => {
   return new Promise<any>((resolve, reject) => {
     readFile(inputLocation, (err, data) => {
       if (err) { reject(err); }
@@ -62,7 +51,7 @@ function getFileAsJson(inputLocation: string | PathLike): Promise<any> {
       }
     });
   });
-}
+};
 
 /**
  * Downloads a file from a specified link, to a specified filepath. Only downloads if file does not exist.
@@ -122,8 +111,8 @@ const addClassMapsOfYear = async (year: number, classMapParent: INEUParentMap): 
   // if reading as JSON succeeds, then add all the JSONS to parent classMap.
   jsonsResult.forEach((item: any) => {
     const classMap: INEUClassMap = item;
-    const termId: string = classMap.termId;
-    classMapParent[termId] = classMap;
+    const termId: number = classMap.termId;
+    classMapParent["" + termId] = classMap;
   });
 
   return "success";
@@ -139,25 +128,25 @@ const loadClassMaps = async (): Promise<INEUParentMap> => {
   const years: number[] = [2018, 2019];
 
   // declare classMapParent, and add the classMaps of the years.
-  const classMapParent: INEUParentMap = {mostRecentSemester: "gets overwritten later", allTermIds: []};
+  const classMapParent: INEUParentMap = {mostRecentSemester: 0, allTermIds: []};
   const result: string[] = await Promise.all(years.map((year: number) => addClassMapsOfYear(year, classMapParent)));
 
   // adds the most recent semester's termId as a property to classMapParent.
   const maxYear = Math.max.apply(null, years);
   const maxSeason = Math.max.apply(null, SEASONS);
-  classMapParent.mostRecentSemester = "" + maxYear + maxSeason;
+  classMapParent.mostRecentSemester = maxYear + maxSeason;
 
   // adds all the termIds as a property (array form) to classMapParent, sorted.
-  const allTermIds: string[] = [];
+  const allTermIds: number[] = [];
   years.forEach((year: number) => {
-    SEASONS.forEach((season: string) => {
-      const termId: string = "" + year + season;
+    SEASONS.forEach((season: number) => {
+      const termId: number = year + season;
       allTermIds.push(termId);
     });
   });
 
   // ensure that they are sorted greatest => least, and set the property in classMapParent.
-  classMapParent.allTermIds.sort((a1: string, a2: string) => (a2.localeCompare(a1)));
+  classMapParent.allTermIds.sort((a1: number, a2: number) => (a2 - a1));
   classMapParent.allTermIds = allTermIds;
 
   // success! now we're done.

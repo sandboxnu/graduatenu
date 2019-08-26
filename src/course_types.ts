@@ -176,8 +176,8 @@ export interface IInitialScheduleRep {
  * @param allTermIds A list of all the termIds contained in the intermediate map object.
  */
 export interface INEUParentMap {
-    mostRecentSemester: string;
-    allTermIds: string[];
+    mostRecentSemester: number;
+    allTermIds: number[];
     [key: string]: any;
 }
 
@@ -188,7 +188,7 @@ export interface INEUParentMap {
  * @param termId The termId of this term.
  */
 export interface INEUClassMap {
-    termId: string;
+    termId: number;
     [key: string]: any;
 }
 
@@ -223,7 +223,7 @@ export interface INEUCourse {
     name: string;
     url: string;
     lastUpdateTime: number;
-    termId: string;
+    termId: number;
     host: string;
     subject: string;
     optPrereqsFor?: INEUPrereqCourse[];
@@ -257,5 +257,27 @@ export interface INEUOrPrereq {
  */
 export interface INEUPrereqCourse {
     classId: string;
+    subject: string;
+}
+
+// types for json_parser.ts
+
+/**
+ * A Schedule.
+ * @param completed The completed courses.
+ * @param scheduled The scheduled courses.
+ */
+export interface ISchedule {
+    completed: ICompleteCourse[];
+    scheduled: IScheduleCourse[];
+}
+
+/**
+ * A scheduled course.
+ * @param classId The course number of the scheduled course.
+ * @param subject The subject of the scheduled course.
+ */
+export interface IScheduleCourse {
+    classId: number;
     subject: string;
 }
