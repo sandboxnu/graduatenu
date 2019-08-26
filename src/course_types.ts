@@ -1,4 +1,24 @@
 /**
+ * Describes an abbreviation for one of Northeastern's NUPath academic breadth requirements.
+ * Each two-character NUPath directly corresponds to Northeastern's abbreviation of the requirement.
+ */
+export enum NUPath {
+    ND = "ND",
+    EI = "EI",
+    IC = "IC",
+    FQ = "FQ",
+    SI = "SI",
+    AD = "AD",
+    DD = "DD",
+    ER = "ER",
+    WF = "WF",
+    WD = "WD",
+    WI = "WI",
+    EX = "EX",
+    CE = "CE",
+}
+
+/**
  * Describes a completed Course with all of the course information provided by the Northeastern degree audit.
  * @param hon - True if this course is Honors, false otherwise.
  * @param subject - The subject of this course (such as Computer Science - "CS" - or Psychology)
@@ -94,11 +114,6 @@ export interface ISimpleRequiredCourse extends IRequiredCourse {
 }
 
 /**
- * A list of two-character abbreviations for Northeastern's NUPath academic breadth requirements.
- */
-export interface INUPaths extends Array<string> {}
-
-/**
  * A list of courses already taken, complete with all of the information available on the degree audit.
  */
 export interface ICompleteCourses extends Array<ICompleteCourse> {}
@@ -116,7 +131,7 @@ export interface IRequiredCourses extends Array<IOldRequirement> {}
  */
 export interface ICompleted {
     courses: ICompleteCourses;
-    nupaths: INUPaths;
+    nupaths: NUPath[];
 }
 
 /**
@@ -126,7 +141,7 @@ export interface ICompleted {
  */
 export interface IP {
     courses: ICompleteCourses;
-    nupaths: INUPaths;
+    nupaths: NUPath[];
 }
 
 /**
@@ -136,7 +151,7 @@ export interface IP {
  */
 export interface IRequirements {
     courses: IRequiredCourses;
-    nupaths: INUPaths;
+    nupaths: NUPath[];
 }
 
 /**

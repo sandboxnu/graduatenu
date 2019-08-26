@@ -7,7 +7,7 @@
  * classes and NUPaths taken and in progress as well as requirements to take.
  */
 
-import { ICompleteCourse, ICompleteCourses, IInitialScheduleRep, INUPaths, IOldRequirement, IRequiredCourses  } from "./course_types";
+import { ICompleteCourse, ICompleteCourses, IInitialScheduleRep, NUPath, IOldRequirement, IRequiredCourses  } from "./course_types";
 
 class AuditToJSON {
 
@@ -18,13 +18,13 @@ class AuditToJSON {
     protected auditYear: number;
     protected gradDate: string;
 
-    protected completeNUPaths: INUPaths;
+    protected completeNUPaths: NUPath[];
     protected completeCourses: ICompleteCourses;
 
-    protected ipNUPaths: INUPaths;
+    protected ipNUPaths: NUPath[];
     protected ipCourses: ICompleteCourses;
 
-    protected requiredNUPaths: INUPaths;
+    protected requiredNUPaths: NUPath[];
     protected requiredCourses: IRequiredCourses;
 
     /**
