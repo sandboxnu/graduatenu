@@ -166,3 +166,80 @@ export interface IInitialScheduleRep {
     requirements: IRequirements;
     data: ISupplementalInfo;
 }
+
+// json_loader.ts types for ScheduleNEU json file reading.
+
+/**
+ * Represents an object containing a bunch of child classMaps.
+ * Additionally contains classMaps, under property <termId>. Value of type INEUClassMap.
+ * @param mostRecentSemester The most recent termId (relative to the present).
+ * @param allTermIds A list of all the termIds contained in the intermediate map object.
+ */
+export interface INEUParentMap {
+    mostRecentSemester: string;
+    allTermIds: string[];
+    [key: string]: any;
+}
+
+/**
+ * A SearchNEU-style classMap. Holds course data for a certain termId.
+ * Keys are in format: "neu.edu/<termId>/<subject>/<classId>" with value type INEUCourse.
+ * Contains additional misc. information. See raw JSON.
+ * @param termId The termId of this term.
+ */
+export interface INEUClassMap {
+    termId: string;
+    [key: string]: any;
+}
+
+/**
+ * A SearchNEU-style course, holding verbose information.
+ * @param crns A list of the CRNS of the course.
+ * @param prereqs A prereq object, if the course has prereqs.
+ * @param coreqs A prereq object, if hte course has coreqs.
+ * @param maxCredits The max credits available for this course.
+ * @param minCredits The min credits available for this course.
+ * @param desc A description of the course.
+ * @param classId The course #.
+ * @param prettyUrl A URL to a pretty version of the course info.
+ * @param name The name of the course.
+ * @param url A URL to the course info.
+ * @param lastUpdateTime The last time the course was updated.
+ * @param termId The term # of the course.
+ */
+export interface INEUCourse {
+    crns: string[];
+    prereqs?: INEUAndPrereq | INEUOrPrereq;
+    coreqs?: INEUAndPrereq | INEUOrPrereq;
+    maxCredits: number;
+    minCredits: number;
+    desc: string;
+    classId: string;
+    prettyUrl: string;
+    name: string;
+    url: string;
+    lastUpdateTime: number;
+    termId: string;
+    host: string;
+    subject: string;
+    optPrereqsFor?: INEUPrereqCourse[];
+    prereqsFor?: INEUPrereqCourse[];
+}
+
+// tslint:disable-next-line: no-empty-interface
+interface INEUPrereq {}
+
+interface INEUAndPrereq extends INEUPrereq {
+    type: "and";
+    values: INEUPrereq[];
+}
+
+interface INEUOrPrereq extends INEUPrereq {
+    type: "or";
+    values: INEUPrereq[];
+}
+
+interface INEUPrereqCourse extends INEUPrereq {
+    classId: string;
+    subject: string;
+}
