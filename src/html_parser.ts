@@ -121,19 +121,18 @@ class AuditToJSON {
         const nupathInd: number = line.indexOf("(") + 1;
         const toAdd = line.substring(nupathInd, nupathInd + 2);
 
-        switch (toAdd) {
-            case ">OK ":
-                if (!this.completeNUPaths.includes(toAdd)) {
-                    this.completeNUPaths.push(toAdd);
-                }
-            case ">IP ":
-                if (!this.ipNUPaths.includes(toAdd)) {
-                    this.ipNUPaths.push(toAdd);
-                }
-            case ">NO ":
-                if (!this.completeNUPaths.includes(toAdd)) {
-                    this.completeNUPaths.push(toAdd);
-                }
+        if (contains(line, ">OK ")) {
+            if (!this.completeNUPaths.includes(toAdd)) {
+                this.completeNUPaths.push(toAdd);
+            }
+        } else if (contains(line, ">IP ")) {
+            if (!this.ipNUPaths.includes(toAdd)) {
+                this.ipNUPaths.push(toAdd);
+            }
+        } else if (contains(line, ">NO ")) {
+            if (!this.completeNUPaths.includes(toAdd)) {
+                this.completeNUPaths.push(toAdd);
+            }
         }
     }
 
