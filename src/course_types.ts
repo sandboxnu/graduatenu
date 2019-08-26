@@ -205,7 +205,11 @@ export interface INEUClassMap {
  * @param name The name of the course.
  * @param url A URL to the course info.
  * @param lastUpdateTime The last time the course was updated.
- * @param termId The term # of the course.
+ * @param termId The term id of the course. Format <4digityear><season>.
+ * @param host The host domain.
+ * @param subject The subject of the course.
+ * @param optPrereqsFor Courses that this course is an optional prerequisite for.
+ * @param prereqsFor Courses that this course is a prerequisite for.
  */
 export interface INEUCourse {
     crns: string[];
@@ -226,20 +230,32 @@ export interface INEUCourse {
     prereqsFor?: INEUPrereqCourse[];
 }
 
-// tslint:disable-next-line: no-empty-interface
-interface INEUPrereq {}
-
-interface INEUAndPrereq extends INEUPrereq {
+/**
+ * A SearchNEU AND prerequisite object.
+ * @param type The type of the SearchNEU prerequisite.
+ * @param values The prerequisites that must be completed for this prereq. to be marked as done.
+ */
+export interface INEUAndPrereq {
     type: "and";
-    values: INEUPrereq[];
+    values: Array<INEUAndPrereq | INEUOrPrereq | INEUPrereqCourse>;
 }
 
-interface INEUOrPrereq extends INEUPrereq {
+/**
+ * A SearchNEU OR prerequisite object.
+ * @param type The type of the SearchNEU prerequisite.
+ * @param values The prerequisites of which one must be completed for this prerequisite to be marked as done.
+ */
+export interface INEUOrPrereq {
     type: "or";
-    values: INEUPrereq[];
+    values: Array<INEUAndPrereq | INEUOrPrereq | INEUPrereqCourse>;
 }
 
-interface INEUPrereqCourse extends INEUPrereq {
+/**
+ * A SearchNEU prerequisite course.
+ * @param classId The course number of this prerequisite course.
+ * @param subject The subject of this prerequisite course.
+ */
+export interface INEUPrereqCourse {
     classId: string;
     subject: string;
 }
