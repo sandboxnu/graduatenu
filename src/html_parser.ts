@@ -149,17 +149,16 @@ class AuditToJSON {
         let termid: string = "20" + year;
 
         switch (season) {
-            case "FL":
-                // Spring term as per SearchNEU conventions
+            case "FL": // Fall term
                 termid = "20" + Number(year) + 1;
                 termid = termid + "10"; break;
-            case "SP":
+            case "SP": // Spring term
                 termid = termid + "30"; break;
-            case "S1":
+            case "S1": // Summer 1 term
                 termid = termid + "40"; break;
-            case "S2":
+            case "S2": // Summer 2 term
                 termid = termid + "60"; break;
-            case "SM":
+            case "SM": // Full Summer term
                 termid = termid + "50"; break;
             default:
                 throw new Error("The given season was not a member of the enumeration required.");
