@@ -7,7 +7,8 @@
  * classes and NUPaths taken and in progress as well as requirements to take.
  */
 
-import { ICompleteCourse, ICompleteCourses, IInitialScheduleRep, IOldRequirement, IRequiredCourses, NUPath  } from "./course_types";
+import { ICompleteCourse, IInitialScheduleRep,
+     IOldRequirement, NUPath, Season  } from "./course_types";
 
 class AuditToJSON {
 
@@ -16,16 +17,16 @@ class AuditToJSON {
     protected minors: string[];
 
     protected auditYear: number;
-    protected gradDate: string;
+    protected gradDate: Date;
 
     protected completeNUPaths: NUPath[];
-    protected completeCourses: ICompleteCourses;
+    protected completeCourses: ICompleteCourse[];
 
     protected ipNUPaths: NUPath[];
-    protected ipCourses: ICompleteCourses;
+    protected ipCourses: ICompleteCourse[];
 
     protected requiredNUPaths: NUPath[];
-    protected requiredCourses: IRequiredCourses;
+    protected requiredCourses: IOldRequirement[];
 
     /**
      * Extracts relevant data from a Northeastern degree audit.
@@ -110,7 +111,11 @@ class AuditToJSON {
      */
     private add_grad_date(line: string): void {
         const dateInd = line.search("GRADUATION DATE: ") + "GRADUATION DATE: ".length;
-        this.gradDate = line.substring(dateInd, dateInd + 7);
+        this.gradDate = new Date(
+            parseInt("20" + line.substring(dateInd + 5, dateInd + 7), 10),
+            parseInt(line.substring(dateInd, dateInd + 2), 10),
+            parseInt(line.substring(dateInd + 3, dateInd + 5), 10),
+        );
     }
 
     /**
@@ -213,7 +218,7 @@ class AuditToJSON {
         course.subject = courseString.substring(4, 9).replace(/\s/g, "");
         course.name = courseString.substring(30, courseString.search("</font>"))
         .replace(/\s/g, "").replace("&amp;", "&").replace("(HON)", "").replace(";X", "");
-        course.season = courseString.substring(0, 2);
+        course.season = courseString.substring(0, 2) as Season;
         course.year = parseInt(courseString.substring(2, 4), 10);
         course.termId = this.get_termid(course.season, course.year);
 

@@ -18,7 +18,6 @@ jsonEx.push(csJson2);
 expect.extend({
     toHaveValidCompleteCourseForm(received: ICompleteCourse[]) {
         for (const completedCourse of received) {
-            expect(typeof completedCourse.hon === typeof true).toBeTruthy();
             expect(completedCourse.subject).toMatch(/^[A-Z]{2,4}$/);
             expect(completedCourse.classId).toMatch(/^[\d]{4}$/);
             expect(completedCourse.creditHours).toMatch(/^[\d]\.00/);
@@ -65,7 +64,7 @@ test("Ensures that all of the complete course information is of the form require
 
 test("Ensures that all of the in-progress course information is of the form required.", () => {
     for (const audit of jsonEx) {
-        expect(audit.inprogress.courses)
+        // TODO: figure out how to work a custom matcher here
     }
 });
 

@@ -19,6 +19,17 @@ export enum NUPath {
 }
 
 /**
+ * Represents one of the seasons in which a student can take a course, as abbreviated by Northeastern.
+ */
+export enum Season {
+    FL = "FL",
+    SP = "SP",
+    S1 = "S1",
+    S2 = "S2",
+    SF = "SF",
+}
+
+/**
  * Describes a completed Course with all of the course information provided by the Northeastern degree audit.
  * @param hon - True if this course is Honors, false otherwise.
  * @param subject - The subject of this course (such as Computer Science - "CS" - or Psychology)
@@ -35,7 +46,7 @@ export interface ICompleteCourse {
     classId: number;
     name: string;
     creditHours: number;
-    season: string;
+    season: Season;
     year: number;
     termId: number;
 }
@@ -155,7 +166,7 @@ export interface ISupplementalInfo {
     majors: string[];
     minors: string[];
     auditYear: number;
-    gradDate: string;
+    gradDate: Date;
 }
 
 /**
