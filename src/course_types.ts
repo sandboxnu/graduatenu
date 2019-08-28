@@ -194,7 +194,7 @@ export interface IInitialScheduleRep {
 export interface INEUParentMap {
     mostRecentSemester: number;
     allTermIds: number[];
-    [key: string]: any;
+    classMapMap: {[key: string]: INEUClassMap};
 }
 
 /**
@@ -205,7 +205,7 @@ export interface INEUParentMap {
  */
 export interface INEUClassMap {
     termId: number;
-    [key: string]: any;
+    classMap: {[key: string]: INEUCourse};
 }
 
 /**
@@ -234,7 +234,7 @@ export interface INEUCourse {
     maxCredits: number;
     minCredits: number;
     desc: string;
-    classId: string;
+    classId: number;
     prettyUrl: string;
     name: string;
     url: string;
@@ -273,7 +273,7 @@ export interface INEUOrPrereq {
  * @param missing True if the class is missing.
  */
 export interface INEUPrereqCourse {
-    classId: string;
+    classId: number;
     subject: string;
     missing?: true;
 }
@@ -287,7 +287,7 @@ export interface INEUPrereqCourse {
  */
 export interface ISchedule {
     completed: ICompleteCourse[];
-    scheduled: IScheduleCourse[];
+    scheduled: IScheduleCourse[][];
 }
 
 /**
