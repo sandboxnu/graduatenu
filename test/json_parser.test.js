@@ -204,7 +204,7 @@ expect.extend({
 });
 
 // test json_parser.json_to_schedule(...)
-const json_loader = require('../src/json_loader.js');
+const json_loader = require('../src/json_loader.ts');
 const json_parser = require('../src/json_parser.js');
 
 const fs = require('fs');

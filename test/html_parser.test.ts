@@ -2,19 +2,24 @@ import * as fs from "fs";
 import { ICompleteCourse, IInitialScheduleRep } from "../src/course_types";
 import { audit_to_json } from "../src/html_parser";
 
+// Computer Science BS
 const csJson = audit_to_json(fs.readFileSync("./test/mock_audits/cs_audit.html", "utf-8"));
 const csJson2 = audit_to_json(fs.readFileSync("./test/mock_audits/cs_audit2.html", "utf-8"));
 const csJson3 = audit_to_json(fs.readFileSync("./test/mock_audits/cs_audit3.html", "utf-8"));
+
+// Computer Science / Math Dual BS
 const csMathJson = audit_to_json(fs.readFileSync("./test/mock_audits/cs_math_grad_audit.html", "utf-8"));
+
+// Mechanical Engineering BS
 const meJson = audit_to_json(fs.readFileSync("./test/mock_audits/me_audit.html", "utf-8"));
 
-const jsonEx: IInitialScheduleRep[] = [];
-jsonEx.push(csJson);
-jsonEx.push(csMathJson);
-jsonEx.push(csJson2);
+// Set of initial schedules to be used for formatting validation
+const jsonEx: IInitialScheduleRep[] = [csJson, csJson2, csMathJson];
+
 // json_ex.push(cs_json3);
 // json_ex.push(me_json);
 
+// Validation of parsed audit components that is stricter than TypeScript's type declaration capabilities
 expect.extend({
     toHaveValidCompleteCourseForm(received: ICompleteCourse[]) {
         for (const completedCourse of received) {
@@ -123,8 +128,8 @@ test("Ensures that the audits do not contain duplicate in-progress courses.", ()
             let seen = false;
 
             for (let k = 0; k < jsonEx[i].inprogress.courses.length; k++) {
-                if (course.classId === jsonEx[i].inprogress.courses[k].classId 
-                    && course.subject === jsonEx[i].inprogress.courses[k].subject 
+                if (course.classId === jsonEx[i].inprogress.courses[k].classId
+                    && course.subject === jsonEx[i].inprogress.courses[k].subject
                     && course.termId === jsonEx[i].inprogress.courses[k].termId) {
                     if (!seen) {
                         seen = true;
@@ -139,7 +144,7 @@ test("Ensures that the audits do not contain duplicate in-progress courses.", ()
         }
     }
 });
- 
+
 test("Ensures that the audits do not contain duplicate completed NUPaths.", () => {
     for (let i = 0; i < jsonEx.length; i++) {
         let duplicates = false;
