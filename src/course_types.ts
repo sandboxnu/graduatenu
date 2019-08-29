@@ -71,34 +71,26 @@ export interface IOldRequirement {
  */
 export interface IRequirement {
     creditsRequired: number;
-    courses: IRequiredCourse[];
+    courses: Array<IOrCourse | IAndCourse | ICourseRange | ISimpleRequiredCourse>;
 }
 
 // TODO: with interfaces, the additional type parameter may not be necessary
 /**
- * Describes a course with incomplete course information that has not yet been taken.\
- * @param type - The type of course this is.
- */
-export interface IRequiredCourse {
-    type: string;
-}
-
-/**
  * An 'OR' set of courses.
  * @param courses: A list of courses, one of which can be taken to satisfy this requirement.
  */
-export interface IOrCourse extends IRequiredCourse {
+export interface IOrCourse {
     type: "OR";
-    courses: IRequiredCourse[];
+    courses: Array<IOrCourse | IAndCourse | ICourseRange | ISimpleRequiredCourse>;
 }
 
 /**
  * An 'AND' series of courses.
  * @param courses - A list of courses, all of which must be taken to satisfy this requirement.
  */
-export interface IAndCourse extends IRequiredCourse {
+export interface IAndCourse {
     type: "AND";
-    courses: IRequiredCourse[];
+    courses: Array<IOrCourse | IAndCourse | ICourseRange | ISimpleRequiredCourse>;
 }
 
 /**
@@ -107,7 +99,7 @@ export interface IAndCourse extends IRequiredCourse {
  * @param idRangeStart - The classId at the start of the course range.
  * @param idRangeEnd - The classId at the end of the course range.
  */
-export interface ICourseRange extends IRequiredCourse {
+export interface ICourseRange {
     type: "RANGE";
     subject: string;
     idRangeStart: number;
@@ -119,7 +111,7 @@ export interface ICourseRange extends IRequiredCourse {
  * @param classId - The numeric ID of the course.
  * @param subject - The subject that the course is concerned with, such as CS (Computer Science).
  */
-export interface ISimpleRequiredCourse extends IRequiredCourse {
+export interface ISimpleRequiredCourse {
     type: "COURSE";
     classId: number;
     subject: string;
