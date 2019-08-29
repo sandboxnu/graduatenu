@@ -1,5 +1,5 @@
 import { ICompleteCourse, IInitialScheduleRep, INEUAndPrereq, INEUClassMap, INEUCourse, INEUOrPrereq, INEUParentMap,
-  INEUPrereqCourse, IRequiredCourse, IRequirement, ISchedule, IScheduleCourse, ISimpleRequiredCourse } from "./course_types";
+  INEUPrereqCourse, IRequiredCourse, IRequirement, ISchedule, IScheduleCourse, ISimpleRequiredCourse, IAndCourse } from "./course_types";
 
 /**
  * Returns if the classList contains the given class, by attr and course #.
@@ -883,7 +883,7 @@ const getSearchNEUData = (
  * @param classMapParent A classMap parent with each classMap under its corresponding termId.
  * @returns The resulting schedule object.
  */
-function toSchedule(audit: IInitialScheduleRep, classMapParent: INEUParentMap) {
+const toSchedule = (audit: IInitialScheduleRep, classMapParent: INEUParentMap): ISchedule => {
 
   const schedule: ISchedule = {
     completed: [],
@@ -893,16 +893,15 @@ function toSchedule(audit: IInitialScheduleRep, classMapParent: INEUParentMap) {
   // add the completed classes. this works!
   addCompleted(schedule, audit.completed.courses);
 
-  // need to still add the NUPaths, audit.completed.nupaths
+  // need to still add the remaining NUPaths, audit.completed.nupaths
 
-  // keepIfDataExists: Class[] => Class[]
   // maps from class to searchNEU lookup representation of class, otherwise filters out.
   const lookupIfDataExists = (classes: IRequirement[]): INEUCourse[] => {
-    const neuVersion = classes.map(c => getSearchNEUData(c, classMapParent));
+    const neuVersion = classes.map((c) => getSearchNEUData(c, classMapParent));
     // let clean = neuVersion.filter((course): IRequiredCourse => course);
     const clean = neuVersion.filter((course: IRequiredCourse) => (course && !("list" in course)) ? true : false);
     return clean;
-  }
+  };
 
   // filter through the completed classes to pull up their data.
   // only keep the stuff with actual results.
