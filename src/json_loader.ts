@@ -112,7 +112,7 @@ const addClassMapsOfYear = async (year: number, classMapParent: INEUParentMap): 
   jsonsResult.forEach((item: any) => {
     const classMap: INEUClassMap = item;
     const termId: number = classMap.termId;
-    classMapParent["" + termId] = classMap;
+    classMapParent.classMapMap["" + termId] = classMap;
   });
 
   return "success";
@@ -128,7 +128,7 @@ const loadClassMaps = async (): Promise<INEUParentMap> => {
   const years: number[] = [2018, 2019];
 
   // declare classMapParent, and add the classMaps of the years.
-  const classMapParent: INEUParentMap = {mostRecentSemester: 0, allTermIds: []};
+  const classMapParent: INEUParentMap = {mostRecentSemester: 0, allTermIds: [], classMapMap: {}};
   const result: string[] = await Promise.all(years.map((year: number) => addClassMapsOfYear(year, classMapParent)));
 
   // adds the most recent semester's termId as a property to classMapParent.
