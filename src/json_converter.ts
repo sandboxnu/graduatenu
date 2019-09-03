@@ -6,27 +6,19 @@
 
 // the following code assumes that ranges have a credits required.
 
-import { IAndCourse, INEUCourse, IRequiredCourse, IRequirement, IOrCourse, ICourseRange, ISimpleRequiredCourse } from "./course_types";
+import { IAndCourse, ICourseRange, INEUCourse, IOrCourse, IRequirement, IScheduleCourse, ISimpleRequiredCourse } from "./course_types";
 
-/**
- * Represents a discrete choice.
- */
-class UserChoice {
-
-  private choices: IRequiredCourse[];
-  private credits?: number;
-
-  public constructor(choices: IRequiredCourse[], credits: number) {
-    this.choices = choices;
-    this.credits = credits;
-  }
+interface IUserChoice {
+  choices: Array<IAndCourse | IOrCourse | ICourseRange | ISimpleRequiredCourse>;
+  credits?: number;
+  isRange?: boolean;
 }
 
 /**
  * Parses an IRequirement to a choice or a course, to show to the user.
  * @param req The IRequirement to parse.
  */
-const parseRequirement = (req: IRequirement): Array<UserChoice | INEUCourse> => {
+const parseRequirement = (req: IRequirement): Array<IUserChoice | IScheduleCourse> => {
 
   // Pray we have only one item.
   if (req.courses.length === 1) {
@@ -35,15 +27,15 @@ const parseRequirement = (req: IRequirement): Array<UserChoice | INEUCourse> => 
 
   // If we have more than one item, we need to wait for the user to choose.
   // todo: or do we? May be able to logic something out here.
-  return [new UserChoice(req.courses)];
+  return [{choices: req.courses}];
 };
 
 /**
  * Parses a IRequiredCourse to prepare to show to the user.
  * @param rcourse The IRequiredCourse to parse.
- * @param creds The number of credits required.
  */
-const parseRequiredCourse = (rCourse: IRequiredCourse, creds: number): Array<UserChoice | INEUCourse> => {
+const parseRequiredCourse = (rCourse: IAndCourse | IOrCourse | ICourseRange | ISimpleRequiredCourse):
+Array<IUserChoice | IScheduleCourse> => {
 
   // We have a IOrCourse, IAndCourse, ICourseRange, or ISimpleRequiredCourse.
   // Assume that credits only matter if we have a ICourseRange.
@@ -53,7 +45,7 @@ const parseRequiredCourse = (rCourse: IRequiredCourse, creds: number): Array<Use
     case "OR":
       return parseRequiredOr(rCourse);
     case "RANGE":
-      return parseRequiredRange(rCourse, creds);
+      return parseRequiredRange(rCourse);
     case "COURSE":
       return parseRequiredSimple(rCourse);
   }
@@ -62,13 +54,12 @@ const parseRequiredCourse = (rCourse: IRequiredCourse, creds: number): Array<Use
 /**
  * Parses an IANDCourse to present to the user.
  * @param req The IAndCourse to parse.
- * @param creds The number of credits remaining.
  */
-const parseRequiredAnd = (req: IAndCourse): Array<UserChoice | INEUCourse> => {
+const parseRequiredAnd = (req: IAndCourse): Array<IUserChoice | IScheduleCourse> => {
 
   // We have an AND. Every branch must be completed, but this also means we can "flatten" the results.
   // Assume credits only matter if we have a range.
-  const results = req.courses.map((subReq) => (parseRequiredCourse(subReq, 0)));
+  const results = req.courses.map((subReq) => (parseRequiredCourse(subReq)));
 
   // Array.prototype.flat() not yet supported on typescript :(
   // return results.flat();
@@ -78,24 +69,30 @@ const parseRequiredAnd = (req: IAndCourse): Array<UserChoice | INEUCourse> => {
 /**
  * Parses an IORCourse to present to the user.
  * @param req The IORCourse requirement to parse.
- * @param creds The number of remaining credits.
  */
-const parseRequiredOr = (req: IOrCourse, creds: number): Array<UserChoice | INEUCourse> => {
+const parseRequiredOr = (req: IOrCourse): Array<IUserChoice | IScheduleCourse> => {
 
   // We have an OR. Not every branch needs to be completed.
   // Make the user choose.
-  return [new UserChoice(req.courses, creds)];
+  return [{choices: req.courses}];
 };
 
-const parseRequiredRange = (req: ICourseRange, creds: number): Array<UserChoice | INEUCourse> => {
+/**
+ * Parses an ICourseRange to present to the user.
+ * @param req The ICourseRange requirement to parse.
+ */
+const parseRequiredRange = (req: ICourseRange): Array<IUserChoice | IScheduleCourse> => {
 
   // We have a selection. Make the user choose.
-  return [new UserChoice([req], creds)];
+  return [{choices: [req], isRange: true}];
 };
 
-const parseRequiredSimple = (req: ISimpleRequiredCourse, creds: number): Array<UserChoice | INEUCourse> => {
+/**
+ * Parses an ISimpleRequiredCourse to present to the user.
+ * @param req The ISimpleRequiredCourse to parse.
+ */
+const parseRequiredSimple = (req: ISimpleRequiredCourse): Array<IUserChoice | IScheduleCourse> => {
 
   // We have a simple course. Return its equivalent.
-  return []
-}
-// final function.
+  return [{subject: req.subject, classId: req.classId}];
+};
