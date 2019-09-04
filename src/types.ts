@@ -243,6 +243,11 @@ export interface INEUCourse {
     prereqsFor?: INEUPrereqCourse[];
 }
 
+
+/**
+ * A SearchNEU prerequisite object.
+ */
+export type INEUPrereq = INEUAndPrereq | INEUOrPrereq | INEUPrereqCourse;
 /**
  * A SearchNEU AND prerequisite object.
  * @param type The type of the SearchNEU prerequisite.
@@ -250,7 +255,7 @@ export interface INEUCourse {
  */
 export interface INEUAndPrereq {
     type: "and";
-    values: Array<INEUAndPrereq | INEUOrPrereq | INEUPrereqCourse>;
+    values: INEUPrereq[];
 }
 
 /**
@@ -260,7 +265,7 @@ export interface INEUAndPrereq {
  */
 export interface INEUOrPrereq {
     type: "or";
-    values: Array<INEUAndPrereq | INEUOrPrereq | INEUPrereqCourse>;
+    values: INEUPrereq[];
 }
 
 /**

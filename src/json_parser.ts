@@ -1,5 +1,5 @@
 import { ICompleteCourse, IInitialScheduleRep, INEUAndPrereq, INEUClassMap, INEUCourse, INEUOrPrereq, INEUParentMap,
-  INEUPrereqCourse, IRequiredCourse, IRequirement, ISchedule, IScheduleCourse, ISimpleRequiredCourse, IAndCourse } from "./types";
+INEUPrereq, INEUPrereqCourse, IRequiredCourse, ISchedule, IScheduleCourse, Requirement } from "./types";
 
 /**
  * Returns if the classList contains the given class, by attr and course #.
@@ -692,7 +692,7 @@ const createPrerequisiteGraph =
 
     // for each of the prereq courses:
     for (let i = 0; i < parsedPrereq.values.length; i += 1) {
-      const subPrereq: INEUAndPrereq | INEUOrPrereq | INEUPrereqCourse = parsedPrereq.values[i];
+      const subPrereq: INEUPrereq = parsedPrereq.values[i];
 
       if ("type" in subPrereq) {
         // we have a nested or prereq. what a pain.
@@ -790,7 +790,7 @@ const createPrerequisiteGraph =
  * @param remainingRequirements The remaining requirements (in SearchNEU format).
  * @param curriedGetSearchNEUData A function course => course that produces searchNEU data for a course.
  */
-const addRequired = (schedule: ISchedule, completed: ICompleteCourse[], remainingRequirements: IRequirement[],
+const addRequired = (schedule: ISchedule, completed: ICompleteCourse[], remainingRequirements: Requirement[],
                      curriedGetSearchNEUData: (arg0: ICompleteCourse | ISimpleRequiredCourse | INEUCourse |
                       INEUPrereqCourse | IScheduleCourse) => INEUCourse | undefined): void => {
   // precondition: schedule is full up to some point. need to fill with remaining requirements.
@@ -810,7 +810,7 @@ const addRequired = (schedule: ISchedule, completed: ICompleteCourse[], remainin
 
   // adds the produced ordering to the schedule under the property "scheduled".
   schedule.scheduled = coffmanGraham;
-}
+};
 
 /**
  * Attempts to grab searchNEU data for a course, using that course's termId to lookup the corresponding file.
@@ -896,7 +896,7 @@ const toSchedule = (audit: IInitialScheduleRep, classMapParent: INEUParentMap): 
   // need to still add the remaining NUPaths, audit.completed.nupaths
 
   // maps from class to searchNEU lookup representation of class, otherwise filters out.
-  const lookupIfDataExists = (classes: IRequirement[]): INEUCourse[] => {
+  const lookupIfDataExists = (classes: Requirement[]): INEUCourse[] => {
     const neuVersion = classes.map((c) => getSearchNEUData(c, classMapParent));
     // let clean = neuVersion.filter((course): IRequiredCourse => course);
     const clean = neuVersion.filter((course: IRequiredCourse) => (course && !("list" in course)) ? true : false);
@@ -919,7 +919,7 @@ const toSchedule = (audit: IInitialScheduleRep, classMapParent: INEUParentMap): 
   addRequired(schedule, completed, remainingRequirements, curriedGetData);
 
   return schedule;
-}
+};
 
 // export toSchedule function.
 module.exports.toSchedule = toSchedule;
