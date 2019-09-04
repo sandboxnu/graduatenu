@@ -6,7 +6,7 @@
 
 // the following code assumes that ranges have a credits required.
 
-import { IAndCourse, ICourseRange, INEUCourse, IOrCourse, IRequirement, IScheduleCourse, ISimpleRequiredCourse } from "./course_types";
+import { IAndCourse, ICourseRange, INEUCourse, IOrCourse, IRequirement, IScheduleCourse, ISimpleRequiredCourse } from "./types";
 
 interface IUserChoice {
   choices: Array<IAndCourse | IOrCourse | ICourseRange | ISimpleRequiredCourse>;

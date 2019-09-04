@@ -8,7 +8,7 @@
  */
 
 import { ICompleteCourse, IInitialScheduleRep,
-     IOldRequirement, NUPath, Season  } from "./course_types";
+     IOldRequirement, NUPath, Season  } from "./types";
 
 class AuditToJSON {
 

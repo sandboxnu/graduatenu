@@ -63,16 +63,10 @@ export interface IOldRequirement {
     list?: number[];
 }
 
-// These are future representations that are not yet used or implemented. They will be used in the future.
 /**
- * A course(s) required for the student that have not yet been taken.
- * @param creditsRequired - The number of credit hours required to be taken.
- * @param courses - One or more courses able to be used to satisfy the credit requirement.
+ * Represents a degree requirement that has not yet been satisfied.
  */
-export interface IRequirement {
-    creditsRequired: number;
-    courses: Array<IOrCourse | IAndCourse | ICourseRange | ISimpleRequiredCourse>;
-}
+export type Requirement = IOrCourse | IAndCourse | ICourseRange | IRequiredCourse;
 
 // TODO: with interfaces, the additional type parameter may not be necessary
 /**
@@ -81,7 +75,7 @@ export interface IRequirement {
  */
 export interface IOrCourse {
     type: "OR";
-    courses: Array<IOrCourse | IAndCourse | ICourseRange | ISimpleRequiredCourse>;
+    courses: Requirement[];
 }
 
 /**
@@ -90,7 +84,18 @@ export interface IOrCourse {
  */
 export interface IAndCourse {
     type: "AND";
-    courses: Array<IOrCourse | IAndCourse | ICourseRange | ISimpleRequiredCourse>;
+    courses: Requirement[];
+}
+
+/**
+ * A variety of ranges of courses, one or more of which can be taken to satisfy
+ * the number of credits required.
+ * @param creditsRequired - The number of credits required to be taken from the provided ranges.
+ * @param ranges - The ranges of courses from which courses can be selected.
+ */
+export interface ICourseRange {
+    creditsRequired: number;
+    ranges: ISubjectRange[];
 }
 
 /**
@@ -99,7 +104,7 @@ export interface IAndCourse {
  * @param idRangeStart - The classId at the start of the course range.
  * @param idRangeEnd - The classId at the end of the course range.
  */
-export interface ICourseRange {
+export interface ISubjectRange {
     type: "RANGE";
     subject: string;
     idRangeStart: number;
@@ -111,7 +116,7 @@ export interface ICourseRange {
  * @param classId - The numeric ID of the course.
  * @param subject - The subject that the course is concerned with, such as CS (Computer Science).
  */
-export interface ISimpleRequiredCourse {
+export interface IRequiredCourse {
     type: "COURSE";
     classId: number;
     subject: string;

@@ -1,5 +1,5 @@
 import { ICompleteCourse, IInitialScheduleRep, INEUAndPrereq, INEUClassMap, INEUCourse, INEUOrPrereq, INEUParentMap,
-  INEUPrereqCourse, IRequiredCourse, IRequirement, ISchedule, IScheduleCourse, ISimpleRequiredCourse, IAndCourse } from "./course_types";
+  INEUPrereqCourse, IRequiredCourse, IRequirement, ISchedule, IScheduleCourse, ISimpleRequiredCourse, IAndCourse } from "./types";
 
 /**
  * Returns if the classList contains the given class, by attr and course #.

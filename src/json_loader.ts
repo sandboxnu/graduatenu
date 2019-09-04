@@ -4,7 +4,7 @@
 
 import { createWriteStream, existsSync, PathLike, readFile, unlink } from "fs";
 import { get } from "https";
-import { INEUClassMap, INEUParentMap } from "./course_types";
+import { INEUClassMap, INEUParentMap } from "./types";
 
 // the year
 const YEAR: number = 2019;
