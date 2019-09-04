@@ -148,7 +148,7 @@ export interface IP {
  * @param nupaths - The NUPaths that have not yet been satisfied.
  */
 export interface IRequirements {
-    courses: IOldRequirement[];
+    courses: Requirement[];
     nupaths: NUPath[];
 }
 

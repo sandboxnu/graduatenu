@@ -369,7 +369,7 @@ class Graph<T> {
  * @param course The course to get the code of.
  * @returns The courseCode of the course.
  */
-const courseCode = (course: ICompleteCourse | ISimpleRequiredCourse | INEUCourse | INEUPrereqCourse |
+const courseCode = (course: ICompleteCourse | IRequiredCourse | INEUCourse | INEUPrereqCourse |
   IScheduleCourse) => ("" + course.subject + course.classId);
 
 /**
@@ -523,7 +523,7 @@ undefined | INEUAndPrereq | INEUOrPrereq => {
  */
 const createPrerequisiteGraph =
 (completed: ICompleteCourse[], filteredRequirements: IRequiredCourse[],
- curriedGetSearchNEUData: (arg0: ICompleteCourse | ISimpleRequiredCourse | INEUCourse | INEUPrereqCourse |
+ curriedGetSearchNEUData: (arg0: ICompleteCourse | IRequiredCourse | INEUCourse | INEUPrereqCourse |
   IScheduleCourse) => INEUCourse | undefined): Graph<string> => {
    // todo: replace input types with IHasSubject and IHasClassId and IHasTermId
 
@@ -791,7 +791,7 @@ const createPrerequisiteGraph =
  * @param curriedGetSearchNEUData A function course => course that produces searchNEU data for a course.
  */
 const addRequired = (schedule: ISchedule, completed: ICompleteCourse[], remainingRequirements: Requirement[],
-                     curriedGetSearchNEUData: (arg0: ICompleteCourse | ISimpleRequiredCourse | INEUCourse |
+                     curriedGetSearchNEUData: (arg0: ICompleteCourse | IRequiredCourse | INEUCourse |
                       INEUPrereqCourse | IScheduleCourse) => INEUCourse | undefined): void => {
   // precondition: schedule is full up to some point. need to fill with remaining requirements.
 
@@ -821,7 +821,7 @@ const addRequired = (schedule: ISchedule, completed: ICompleteCourse[], remainin
  * @returns Produces the corresponding searchNEU data for a class, if it exists. else => undefined.
  */
 const getSearchNEUData = (
-  course: ICompleteCourse | ISimpleRequiredCourse | INEUCourse | INEUPrereqCourse | IScheduleCourse,
+  course: ICompleteCourse | IRequiredCourse | INEUCourse | INEUPrereqCourse | IScheduleCourse,
   classMapParent: INEUParentMap): INEUCourse | undefined => {
   /**
    * Grabs the data of a specified class.
@@ -906,8 +906,8 @@ const toSchedule = (audit: IInitialScheduleRep, classMapParent: INEUParentMap): 
   // filter through the completed classes to pull up their data.
   // only keep the stuff with actual results.
   // todo: change this to deal with class enums:
-  const completed = lookupIfDataExists(audit.completed.classes);
-  const required = lookupIfDataExists(audit.requirements.classes);
+  const completed = lookupIfDataExists(audit.completed.courses);
+  const required = lookupIfDataExists(audit.requirements.courses);
 
   // get the remaining required classes, in searchNEU format
   const remainingRequirements = getRemainingRequirements(required, completed);
