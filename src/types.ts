@@ -243,7 +243,6 @@ export interface INEUCourse {
     prereqsFor?: INEUPrereqCourse[];
 }
 
-
 /**
  * A SearchNEU prerequisite object.
  */
