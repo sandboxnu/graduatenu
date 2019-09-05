@@ -300,3 +300,10 @@ export interface IScheduleCourse {
     classId: number;
     subject: string;
 }
+
+// types for json_converter.ts
+
+/**
+ * A UserChoice is one of OR or RANGE.
+ */
+export type UserChoice = ICourseRange | IOrCourse;

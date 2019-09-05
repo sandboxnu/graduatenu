@@ -6,18 +6,14 @@
 
 // the following code assumes that ranges have a credits required.
 
-import { IAndCourse, ICourseRange, IOrCourse, IRequiredCourse, IScheduleCourse, Requirement } from "./types";
-
-/**
- * A UserChoice is one of OR or RANGE.
- */
-type UserChoice = ICourseRange | IOrCourse;
+import { IAndCourse, ICourseRange, IOrCourse, IRequiredCourse, IScheduleCourse, Requirement,
+  UserChoice } from "./types";
 
 /**
  * Parses a Requirement to a choice or a course, to show to the user.
  * @param req The Requirement to parse.
  */
-const parseRequirement = (req: Requirement): Array<UserChoice | IScheduleCourse> => {
+export const parseRequirement = (req: Requirement): Array<UserChoice | IScheduleCourse> => {
 
   // We have a IOrCourse, IAndCourse, ICourseRange, or ISimpleRequiredCourse.
   // Assume that credits only matter if we have a ICourseRange.
