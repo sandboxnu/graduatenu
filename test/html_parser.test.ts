@@ -1,6 +1,6 @@
 import * as fs from "fs";
 import { audit_to_json } from "../src/html_parser";
-import { ICompleteCourse, IInitialScheduleRep } from "../src/types";
+import { ICompleteCourse, IInitialScheduleRep, ISubjectRange } from "../src/types";
 
 // Computer Science BS
 const csJson = audit_to_json(fs.readFileSync("./test/mock_audits/cs_audit.html", "utf-8"));
@@ -75,20 +75,24 @@ test("Ensures that all of the in-progress course information is of the form requ
 
 test("Ensures that all of the courses required to take are of the form required.", () => {
     for (const audit of jsonEx) {
-        for (const requiredCourse of audit.requirements.courses) {
-            expect(requiredCourse.subject).toMatch(/^[A-Z]{2,4}$/);
-
-            if (typeof requiredCourse.classId  === "undefined") {
-                expect(requiredCourse.num_required).toMatch(/^[\d]$/);
-
-                for (const course of requiredCourse.list) {
-                    expect(course).toMatch(/^[\d]{4}$/);
-                }
-            } else {
-                expect(requiredCourse.classId).toMatch(/^[\d]{4}$/);
-                if (typeof requiredCourse.classId2 !== "undefined") {
-                    expect(requiredCourse.classId2).toMatch(/^[\d]{4}$/);
-                }
+        for (const requirement of audit.requirements.courses) {
+            switch (requirement.type) {
+                case "AND":
+                    break;
+                case "OR":
+                    break;
+                case "COURSE":
+                    expect(requirement.subject).toMatch(/^[A-Z]{2,4}$/);
+                    expect(requirement.classId).toMatch(/^[\d]{4}$/);
+                    break;
+                case "RANGE":
+                    expect(requirement.creditsRequired).toMatch(/^[\d].[\d]{2}$/);
+                    for (const subjRange of requirement.ranges) {
+                        expect(subjRange.subject).toMatch(/^[A-Z]{2,4}$/);
+                        expect(subjRange.idRangeStart).toMatch(/^[\d]{4}$/);
+                        expect(subjRange.idRangeEnd).toMatch(/^[\d]{4}$/);
+                    }
+                    break;
             }
         }
     }

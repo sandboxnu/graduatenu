@@ -123,61 +123,37 @@ export interface IRequiredCourse {
 }
 
 /**
- * Encapsulates the completed courses and NUPath requirements.
- * @param courses - Courses that the student has completed.
- * @param nupaths - NUPaths that the completed courses satisfy.
- */
-export interface ICompleted {
-    courses: ICompleteCourse[];
-    nupaths: NUPath[];
-}
-
-/**
- * Encapsulates the courses and NUPaths that will be satisfied by the student's current and/or scheduled courses.
- * @param courses - The courses the student is currently taking or has scheduled for.
- * @param nupaths - The NUPaths that will be satisfied by the in-progress courses.
- */
-export interface IP {
-    courses: ICompleteCourse[];
-    nupaths: NUPath[];
-}
-
-/**
- * Encapsulates the requirements to be met.
- * @param courses - The course requirements that have not yet been met.
- * @param nupaths - The NUPaths that have not yet been satisfied.
- */
-export interface IRequirements {
-    courses: Requirement[];
-    nupaths: NUPath[];
-}
-
-/**
- * Encapsulates supplemental degree audit information that isn't a course or NUPath.
- * @param majors - The major(s) the student intends to obtain degrees for.
- * @param minors - The minor(s) the student intends to obtain.
- * @param auditYear - The year the degree audit was created.
- * @param gradDate - The expected graduation date of the student.
- */
-export interface ISupplementalInfo {
-    majors: string[];
-    minors: string[];
-    auditYear: number;
-    gradDate: Date;
-}
-
-/**
  * Represents an initial schedule representation as crafted via the degree audit.
  * @param completed - The completed courses and NUPaths.
  * @param inprogress - The in-progress courses and NUPaths.
  * @param requirements - The requirements for courses and NUPaths yet to be satisfied.
  * @param data - Supplemental information about the student's academic path.
+ * @param majors - The major(s) the student intends to obtain degrees for.
+ * @param minors - The minor(s) the student intends to obtain.
+ * @param auditYear - The year the degree audit was created.
+ * @param gradDate - The expected graduation date of the student.
+ * @param nupaths - The NUPaths required or satisfied.
+ * @param courses - The courses required or satisfied.
  */
 export interface IInitialScheduleRep {
-    completed: ICompleted;
-    inprogress: IP;
-    requirements: IRequirements;
-    data: ISupplementalInfo;
+    completed: {
+        nupaths: NUPath[];
+        courses: ICompleteCourse[];
+    };
+    inprogress: {
+        courses: ICompleteCourse[];
+        nupaths: NUPath[];
+    };
+    requirements: {
+        courses: Requirement[];
+        nupaths: NUPath[];
+    };
+    data: {
+        majors: string[];
+        minors: string[];
+        auditYear: number;
+        gradDate: Date;
+    };
 }
 
 // json_loader.ts types for ScheduleNEU json file reading.
