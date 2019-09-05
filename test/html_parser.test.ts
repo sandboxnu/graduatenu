@@ -1418,5 +1418,5 @@ test("Verifies that the CS Math degree audit is properly reproduced by the code"
                 }],
                 nupaths: ["WI", "WD", "EX", "CE"],
             },
-        };);
-})
+        });
+});
