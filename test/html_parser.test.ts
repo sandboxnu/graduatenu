@@ -1,6 +1,6 @@
 import * as fs from "fs";
 import { audit_to_json } from "../src/html_parser";
-import { ICompleteCourse, IInitialScheduleRep } from "../src/types";
+import { ICompleteCourse, IInitialScheduleRep, ISubjectRange } from "../src/types";
 
 // Computer Science BS
 const csJson = audit_to_json(fs.readFileSync("./test/mock_audits/cs_audit.html", "utf-8"));
@@ -75,37 +75,40 @@ test("Ensures that all of the in-progress course information is of the form requ
 
 test("Ensures that all of the courses required to take are of the form required.", () => {
     for (const audit of jsonEx) {
-        for (const requiredCourse of audit.requirements.courses) {
-            expect(requiredCourse.subject).toMatch(/^[A-Z]{2,4}$/);
-
-            if (typeof requiredCourse.classId  === "undefined") {
-                expect(requiredCourse.num_required).toMatch(/^[\d]$/);
-
-                for (const course of requiredCourse.list) {
-                    expect(course).toMatch(/^[\d]{4}$/);
-                }
-            } else {
-                expect(requiredCourse.classId).toMatch(/^[\d]{4}$/);
-                if (typeof requiredCourse.classId2 !== "undefined") {
-                    expect(requiredCourse.classId2).toMatch(/^[\d]{4}$/);
-                }
+        for (const requirement of audit.requirements.courses) {
+            switch (requirement.type) {
+                case "AND":
+                    break;
+                case "OR":
+                    break;
+                case "COURSE":
+                    expect(requirement.subject).toMatch(/^[A-Z]{2,4}$/);
+                    expect(requirement.classId).toMatch(/^[\d]{4}$/);
+                    break;
+                case "RANGE":
+                    expect(requirement.creditsRequired).toMatch(/^[\d].[\d]{2}$/);
+                    for (const subjRange of requirement.ranges) {
+                        expect(subjRange.subject).toMatch(/^[A-Z]{2,4}$/);
+                        expect(subjRange.idRangeStart).toMatch(/^[\d]{4}$/);
+                        expect(subjRange.idRangeEnd).toMatch(/^[\d]{4}$/);
+                    }
+                    break;
             }
         }
     }
 });
 
 test("Ensures that the audits do not contain duplicate completed courses.", () => {
-    for (let i = 0; i < jsonEx.length; i++) {
+    for (const audit of jsonEx) {
         let duplicates = false;
-        for (let j = 0; j < jsonEx[i].completed.courses.length; j++) {
-            const course = jsonEx[i].completed.courses[j];
+        for (const course of audit.completed.courses) {
             let seen = false;
 
-            for (let k = 0; k < jsonEx[i].completed.courses.length; k++) {
-                if (course.classId === jsonEx[i].completed.courses[k].classId
-                    && course.subject === jsonEx[i].completed.courses[k].subject
-                    && course.termId === jsonEx[i].completed.courses[k].termId
-                    && course.name === jsonEx[i].completed.courses[k].name) {
+            for (const course2 of audit.completed.courses) {
+                if (course.classId === course2.classId
+                    && course.subject === course2.subject
+                    && course.termId === course2.termId
+                    && course.name === course2.name) {
                     if (!seen) {
                         seen = true;
                     } else {
@@ -121,16 +124,15 @@ test("Ensures that the audits do not contain duplicate completed courses.", () =
 });
 
 test("Ensures that the audits do not contain duplicate in-progress courses.", () => {
-    for (let i = 0; i < jsonEx.length; i++) {
+    for (const audit of jsonEx) {
         let duplicates = false;
-        for (let j = 0; j < jsonEx[i].inprogress.courses.length; j++) {
-            const course = jsonEx[i].inprogress.courses[j];
+        for (const course of audit.inprogress.courses) {
             let seen = false;
 
-            for (let k = 0; k < jsonEx[i].inprogress.courses.length; k++) {
-                if (course.classId === jsonEx[i].inprogress.courses[k].classId
-                    && course.subject === jsonEx[i].inprogress.courses[k].subject
-                    && course.termId === jsonEx[i].inprogress.courses[k].termId) {
+            for (const course2 of audit.completed.courses) {
+                if (course.classId === course2.classId
+                    && course.subject === course2.subject
+                    && course.termId === course2.termId) {
                     if (!seen) {
                         seen = true;
                     } else {
@@ -146,13 +148,12 @@ test("Ensures that the audits do not contain duplicate in-progress courses.", ()
 });
 
 test("Ensures that the audits do not contain duplicate completed NUPaths.", () => {
-    for (let i = 0; i < jsonEx.length; i++) {
+    for (const audit of jsonEx) {
         let duplicates = false;
-        for (let j = 0; j < jsonEx[i].completed.nupaths.length; j++) {
+        for (const nupath of audit.completed.nupaths) {
             let seen = false;
-            const nupath = jsonEx[i].completed.nupaths[j];
-            for (let k = 0; k < jsonEx[i].completed.nupaths.length; k++) {
-                if (jsonEx[i].completed.nupaths[k] === nupath) {
+            for (const nupath2 of audit.completed.nupaths) {
+                if (nupath2 === nupath) {
                     if (!seen) {
                         seen = true;
                     } else {
@@ -168,13 +169,12 @@ test("Ensures that the audits do not contain duplicate completed NUPaths.", () =
 });
 
 test("Ensures that the audits do not contain duplicate in-progress NUPaths.", () => {
-    for (let i = 0; i < jsonEx.length; i++) {
+    for (const audit of jsonEx) {
         let duplicates = false;
-        for (let j = 0; j < jsonEx[i].inprogress.nupaths.length; j++) {
+        for (const nupath of audit.inprogress.nupaths) {
             let seen = false;
-            const nupath = jsonEx[i].inprogress.nupaths[j];
-            for (let k = 0; k < jsonEx[i].inprogress.nupaths.length; k++) {
-                if (jsonEx[i].inprogress.nupaths[k] === nupath) {
+            for (const nupath2 of audit.inprogress.nupaths) {
+                if (nupath2 === nupath) {
                     if (!seen) {
                         seen = true;
                     } else {
@@ -190,13 +190,12 @@ test("Ensures that the audits do not contain duplicate in-progress NUPaths.", ()
 });
 
 test("Ensures that the audits do not contain duplicate required NUPaths.", () => {
-    for (let i = 0; i < jsonEx.length; i++) {
+    for (const audit of jsonEx) {
         let duplicates = false;
-        for (let j = 0; j < jsonEx[i].requirements.nupaths.length; j++) {
+        for (const nupath of audit.requirements.nupaths) {
             let seen = false;
-            const nupath = jsonEx[i].requirements.nupaths[j];
-            for (let k = 0; k < jsonEx[i].requirements.nupaths.length; k++) {
-                if (jsonEx[i].requirements.nupaths[k] === nupath) {
+            for (const nupath2 of audit.requirements.nupaths) {
+                if (nupath2 === nupath) {
                     if (!seen) {
                         seen = true;
                     } else {
@@ -212,23 +211,23 @@ test("Ensures that the audits do not contain duplicate required NUPaths.", () =>
 });
 
 test("Ensures that each audit contains all of the NUPath requirements.", () => {
-    for (let i = 0; i < jsonEx.length; i++) {
+    for (const audit of jsonEx) {
         const nupaths = ["ND", "EI", "IC", "FQ", "SI", "AD", "DD", "ER", "WF", "WD", "WI", "EX", "CE"];
-        for (let j = 0; j < jsonEx[i].completed.nupaths.length; j++) {
-            const index = nupaths.indexOf(jsonEx[i].completed.nupaths[j]);
+        for (const nupath of audit.completed.nupaths) {
+            const index = nupaths.indexOf(nupath);
             if (index > -1) {
                 nupaths.splice(index, 1);
             }
         }
 
-        for (let j = 0; j < jsonEx[i].inprogress.nupaths.length; j++) {
-            const index = nupaths.indexOf(jsonEx[i].inprogress.nupaths[j]);
+        for (const nupath of audit.completed.nupaths) {
+            const index = nupaths.indexOf(nupath);
             if (index > -1) {
                 nupaths.splice(index, 1);
             }
         }
-        for (let j = 0; j < jsonEx[i].requirements.nupaths.length; j++) {
-            const index = nupaths.indexOf(jsonEx[i].requirements.nupaths[j]);
+        for (const nupath of audit.completed.nupaths) {
+            const index = nupaths.indexOf(nupath);
             if (index > -1) {
                 nupaths.splice(index, 1);
             }
@@ -1419,5 +1418,5 @@ test("Verifies that the CS Math degree audit is properly reproduced by the code"
                 }],
                 nupaths: ["WI", "WD", "EX", "CE"],
             },
-        });
-});
+        };);
+})
