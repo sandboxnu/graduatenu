@@ -21,20 +21,6 @@ const containsClass = (classList: ICompleteCourse[], target: ICompleteCourse): b
 };
 
 /**
- * Produces an array of the required classes not taken yet.
- * @param required The remaining classes to take.
- * @param completed The classes completed so far.
- * @returns The required classes not taken yet.
- */
-const getRemainingRequirements = (required: IRequiredCourse[], completed: ICompleteCourse[]): IRequiredCourse[] => {
-
-  // Keep the classes, if they are NOT in completed.
-  // todo: take care of being able to parse all IRequiredCourse.
-  const remaining: IRequiredCourse[] = required.filter((cl) => (!containsClass(completed, cl)));
-  return remaining;
-};
-
-/**
  * Adds the completed classes to the schedule. Does mutation. Returns void.
  * @param schedule The schedule in JSON format.
  * @param completedClasses A list of the completed classes.
@@ -895,10 +881,14 @@ const toSchedule = (audit: IInitialScheduleRep, classMapParent: INEUParentMap): 
 
   // need to still add the remaining NUPaths, audit.completed.nupaths
 
-  // maps from class to searchNEU lookup representation of class, otherwise filters out.
-  const lookupIfDataExists = (classes: Requirement[]): INEUCourse[] => {
-    const neuVersion = classes.map((c) => getSearchNEUData(c, classMapParent));
-    // let clean = neuVersion.filter((course): IRequiredCourse => course);
+  /**
+   * Looks up a course's information, if it exists. Otherwise returns the unchanged course.
+   * @param course The course to lookup information for.
+   */
+  const lookupIfDataExists = (course: IRequiredCourse): INEUCourse => {
+
+    // The SearchNEU version of the course
+    const neuVersionMaybe: INEUCourse | undefined = getSearchNEUData(course, classMapParent);
     const clean = neuVersion.filter((course: IRequiredCourse) => (course && !("list" in course)) ? true : false);
     return clean;
   };
@@ -909,14 +899,11 @@ const toSchedule = (audit: IInitialScheduleRep, classMapParent: INEUParentMap): 
   const completed = lookupIfDataExists(audit.completed.courses);
   const required = lookupIfDataExists(audit.requirements.courses);
 
-  // get the remaining required classes, in searchNEU format
-  const remainingRequirements = getRemainingRequirements(required, completed);
-
   const curriedGetData = (course) => getSearchNEUData(course, classMapParent);
 
   // add the remaining required classes.
   // note, expects data in SearchNEU format
-  addRequired(schedule, completed, remainingRequirements, curriedGetData);
+  addRequired(schedule, completed, required, curriedGetData);
 
   return schedule;
 };
