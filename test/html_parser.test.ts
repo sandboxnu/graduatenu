@@ -1,6 +1,6 @@
 import * as fs from "fs";
-import { ICompleteCourse, IInitialScheduleRep } from "../src/course_types";
 import { audit_to_json } from "../src/html_parser";
+import { ICompleteCourse, IInitialScheduleRep } from "../src/types";
 
 // Computer Science BS
 const csJson = audit_to_json(fs.readFileSync("./test/mock_audits/cs_audit.html", "utf-8"));
