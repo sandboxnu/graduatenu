@@ -1,5 +1,6 @@
+import { parseRequirement } from "./json_converter";
 import { ICompleteCourse, IInitialScheduleRep, INEUAndPrereq, INEUClassMap, INEUCourse, INEUOrPrereq, INEUParentMap,
-INEUPrereq, INEUPrereqCourse, IRequiredCourse, ISchedule, IScheduleCourse, Requirement } from "./types";
+INEUPrereq, INEUPrereqCourse, IRequiredCourse, ISchedule, IScheduleCourse, Requirement, UserChoice, IOrCourse, ICourseRange } from "./types";
 
 /**
  * Returns if the classList contains the given class, by attr and course #.
@@ -881,23 +882,26 @@ const toSchedule = (audit: IInitialScheduleRep, classMapParent: INEUParentMap): 
 
   // need to still add the remaining NUPaths, audit.completed.nupaths
 
-  /**
-   * Looks up a course's information, if it exists. Otherwise returns the unchanged course.
-   * @param course The course to lookup information for.
-   */
-  const lookupIfDataExists = (course: IRequiredCourse): INEUCourse => {
+  // convert the stuff to userchoice | schedulecourse.
+  const requirements: Requirement[] = audit.requirements.courses;
+  const converted: Array<Array<UserChoice | IScheduleCourse>> = requirements
+  .map((course: Requirement) => parseRequirement(course));
+  const flattened: Array<UserChoice | IScheduleCourse> = converted.reduce((acc, val) => acc.concat(val), []);
+  const filtered: IScheduleCourse[] = flattened
+  .filter((course: UserChoice | IScheduleCourse): boolean => (!("type" in course)));
 
-    // The SearchNEU version of the course
-    const neuVersionMaybe: INEUCourse | undefined = getSearchNEUData(course, classMapParent);
-    const clean = neuVersion.filter((course: IRequiredCourse) => (course && !("list" in course)) ? true : false);
-    return clean;
-  };
+  function temp(course: UserChoice | IScheduleCourse): undefined | IScheduleCourse {
+    if (!("type" in course)) {
+      return course;
+    } else {
+      return undefined;
+    }
+  }
 
   // filter through the completed classes to pull up their data.
   // only keep the stuff with actual results.
-  // todo: change this to deal with class enums:
-  const completed = lookupIfDataExists(audit.completed.courses);
-  const required = lookupIfDataExists(audit.requirements.courses);
+  const completed = audit.completed.courses.map((course: ICompleteCourse) => lookupIfDataExists(course));
+  // const required = audit.requirements.courses.map((course: IReqlookupIfDataExists(audit.requirements.courses);
 
   const curriedGetData = (course) => getSearchNEUData(course, classMapParent);
 
