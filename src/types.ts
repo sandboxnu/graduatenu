@@ -94,6 +94,7 @@ export interface IAndCourse {
  * @param ranges - The ranges of courses from which courses can be selected.
  */
 export interface ICourseRange {
+    type: "RANGE";
     creditsRequired: number;
     ranges: ISubjectRange[];
 }
@@ -105,7 +106,6 @@ export interface ICourseRange {
  * @param idRangeEnd - The classId at the end of the course range.
  */
 export interface ISubjectRange {
-    type: "RANGE";
     subject: string;
     idRangeStart: number;
     idRangeEnd: number;
