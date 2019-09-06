@@ -122,7 +122,7 @@ const addClassMapsOfYear = async (year: number, classMapParent: INEUParentMap): 
  * Produces the classMapParent object containing all classMap course information.
  * @returns A promise, resolved with the classMapParent object.
  */
-const loadClassMaps = async (): Promise<INEUParentMap> => {
+export const loadClassMaps = async (): Promise<INEUParentMap> => {
 
   // the years to load classMaps for.
   const years: number[] = [2018, 2019];
@@ -152,5 +152,3 @@ const loadClassMaps = async (): Promise<INEUParentMap> => {
   // success! now we're done.
   return classMapParent;
 };
-
-module.exports.loadClassMaps = loadClassMaps;

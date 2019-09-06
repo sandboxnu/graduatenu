@@ -9,10 +9,10 @@ expect.extend({
     expect(received).toBeInstanceOf(Object);
 
     // ensure that 'completed' property exists, with correct property format.
-    expect(received).toHaveProperty('completed');
+    expect(received).toHaveProperty("completed");
 
     // ensure that 'scheduled' property exists, is defined, and is an Array.
-    expect(received).toHaveProperty('scheduled');
+    expect(received).toHaveProperty("scheduled");
 
     return {
       message: () => `expected ${received} not to have valid schedule properties.`,
@@ -30,7 +30,7 @@ expect.extend({
     expect(received).toBeInstanceOf(Object);
 
     // ensure that schedule.completed.classes field exists, with correct property format.
-    expect(received).toHaveProperty('classes');
+    expect(received).toHaveProperty("classes");
     expect(received.classes).toBeDefined();
     expect(received.classes).toBeInstanceOf(Array);
 
@@ -47,15 +47,15 @@ expect.extend({
     // yeah, I know it doesn't make sense for received.classes to not be an array of classes. Sorry.
     expect(received).toBeDefined();
     expect(received).toBeInstanceOf(Object);
-    
+
     // ensures received has property 'termId', that is a number that matches 20xx[1-6]0.
-    expect(received).toHaveProperty('termId');
+    expect(received).toHaveProperty("termId");
     expect(received.termId).toBeDefined();
     // expect(received.termId).toBeInstanceOf(Number);
     expect("" + received.termId).toMatch(/^20\d\d[1-6]0$/);
-    
+
     // ensures received has property 'courses', that is an Array of courses.
-    expect(received).toHaveProperty('courses');
+    expect(received).toHaveProperty("courses");
     expect(received.courses).toBeDefined();
     expect(received.courses).toBeInstanceOf(Array);
 
@@ -74,10 +74,10 @@ expect.extend({
 
     // todo: add the name property to list of tests.
     // ensure that received contains the following properties, and that they are all defined.
-    let props = ['hon', 'subject', 'classId', 'credithours', 'season', 'year', 'termId'];
-    for (let i = 0; i < props.length; i += 1) {
-      expect(received).toHaveProperty(props[i]);
-      expect(received[props[i]]).toBeDefined();
+    const props = ["hon", "subject", "classId", "credithours", "season", "year", "termId"];
+    for (const prop of props) {
+      expect(received).toHaveProperty(prop);
+      expect(received[prop]).toBeDefined();
     }
 
     // ensure the properties' values are well formed.
@@ -88,7 +88,7 @@ expect.extend({
     expect(received.year).toMatch(/^\d\d$/);
     expect(received.termId).toMatch(/^20\d\d[1-6]0$/);
     // expect(received.name).toBeInstanceOf(String);
-    
+
     return {
       message: () => `expected ${received} not to have valid course properties`,
       pass: true,
@@ -105,18 +105,15 @@ expect.extend({
     expect(received).toBeInstanceOf(Array);
 
     // ensure that each item in received is an Array of courses.
-    for (let i = 0; i < received.length; i += 1) {
-
-      let item = received[i];
+    for (const item of received) {
 
       expect(item).toBeDefined();
       expect(item).toBeInstanceOf(Array);
 
       // we should never have more than 4 courses in a semester.
       expect(item.length).toBeLessThanOrEqual(4);
-      
-      for (let j = 0; j < item.length; j += 1) {
-        let itemCourse = item[j];
+
+      for (const itemCourse of item) {
 
         expect(itemCourse).toBeDefined();
         // expect(itemCourse).toBeInstanceOf(String);
@@ -131,7 +128,7 @@ expect.extend({
 
   // custom matcher for checking that certain keys are in a map.
   toBeInMap(received, map) {
-    let key = received;
+    const key = received;
     if (map.has(key)) {
       return {
         message: () => `expected ${key} to not be in map ${map}`,
@@ -148,7 +145,7 @@ expect.extend({
   // custom matcher for checking a topological ordering is valid according to a constraint.
   // expects an Array[X], and a Map<X, Array[X]>.
   toBeValidTopologicalOrdering(received, constraint) {
-    let topo = received;
+    const topo = received;
 
     // double check topo : Array[X]
     expect(topo).toBeDefined();
@@ -157,35 +154,35 @@ expect.extend({
     // double check constraint : Map<X, Array[X]>.
     expect(constraint).toBeDefined();
     expect(constraint).toBeInstanceOf(Map);
-    
+
     // check that all Array[X] values of the Map are valid vertices in the Graph.
-    let iterator = constraint.values();
+    const iterator = constraint.values();
     let mapValues = iterator.next();
     while (!mapValues.done) {
 
       // check that the values are defined.
-      let vals = mapValues.value;
+      const vals = mapValues.value;
       expect(vals).toBeDefined();
       expect(vals).toBeInstanceOf(Array);
 
       // check that all values are in the map.
       // all vertices can only point to vertices that are in the Graph.
-      vals.forEach(val => expect(val).toBeInMap(constraint));
+      vals.forEach((val) => expect(val).toBeInMap(constraint));
 
       // iterate next.
       mapValues = iterator.next();
     }
 
-    let indices = new Map();
+    const indices = new Map();
     topo.forEach((v, idx) => indices.set(v, idx));
-    
+
     // for each vertex in the list,
     for (let i = 0; i < topo.length; i += 1) {
-      
+
       // v must come before all neighbors of v.
-      let v = topo[i];
-      
-      constraint.get(v).forEach(neighbor => {
+      const v = topo[i];
+
+      constraint.get(v).forEach((neighbor) => {
         if (!(i < indices.get(neighbor))) {
           // if the index of ourselves is not less than the index of our neighbor, throw error.
           return {
@@ -204,64 +201,61 @@ expect.extend({
 });
 
 // test json_parser.json_to_schedule(...)
-const json_loader = require('../src/json_loader.ts');
-const json_parser = require('../src/json_parser.ts');
+import { loadClassMaps } from "../src/json_loader";
+import { Graph, toSchedule } from "../src/json_parser";
 
-const fs = require('fs');
+import fs from "fs";
+import { ISchedule } from "../src/types";
 
 // the classMapParent constant
-const PARENT = json_loader.loadClassMaps();
+const PARENT = loadClassMaps();
 
-let schedules = [];
+const schedules = [];
 
-let cs_sched = PARENT.then(result => {
-  return json_parser.toSchedule(fs.readFileSync('./test/mock_parsed_audits/cs_json.json', 'utf-8'), result);
+const csSched = PARENT.then((result) => {
+  return toSchedule(JSON.parse(fs.readFileSync("./test/mock_parsed_audits/cs_json.json", "utf-8")), result);
 });
-let cs_sched2 = PARENT.then(result => {
-  return json_parser.toSchedule(fs.readFileSync('./test/mock_parsed_audits/cs_json2.json', 'utf-8'), result);
+const csSched2 = PARENT.then((result) => {
+  return toSchedule(JSON.parse(fs.readFileSync("./test/mock_parsed_audits/cs_json2.json", "utf-8")), result);
 });
 // const tempSchedule = JSON.parse(fs.readFileSync('./test/mock_parsed_audits/sampleScheduleOutput.json', 'utf-8'));
 
-schedules.push(cs_sched);
-schedules.push(cs_sched2);
+schedules.push(csSched);
+schedules.push(csSched2);
 // schedules.push(tempSchedule);
 
+for (const schedule of schedules) {
 
-for (let i = 0; i < schedules.length; i += 1) {
-  let schedule = schedules[i];
-  
   // tests that 'schedule' is well formed.
-  test('Ensures that schedule has well formed properties and types.', async () => {
+  test("Ensures that schedule has well formed properties and types.", async () => {
     const result = await schedule;
     expect(result).toHaveValidScheduleProperties();
   });
-  
+
   // test that 'schedule.completed' is well formed.
-  test('Ensures that schedule.completed has well formed properties and types.', async () => {
+  test("Ensures that schedule.completed has well formed properties and types.", async () => {
     const result = await schedule;
     expect(result.completed).toHaveValidScheduleCompletedProperties();
   });
-  
-  test('Ensures that term and course objects in schedule are well formed.', async () => {
+
+  test("Ensures that term and course objects in schedule are well formed.", async () => {
     const result = await schedule;
-    
+
     // test that each item in 'schedule.completed.classes' is well formed.
-    for (let objIndex = 0; objIndex < result.completed.classes.length; objIndex += 1) {
-      
-      let termObj = result.completed.classes[objIndex];
+    for (const termObj of result.completed.classes) {
+
       expect(termObj).toHaveValidScheduleCompletedClassesProperties();
-      
+
       // test that each item in 'schedule.completed.classes[objIndex].courses' is well formed.
-      for (let courseIdx = 0; courseIdx < termObj.courses.length; courseIdx += 1) {
-        
-        let courseObj = termObj.courses[courseIdx];
+      for (const courseObj of termObj.courses) {
+
         expect(courseObj).toBeValidCourse();
       }
     }
   });
-  
+
   // test that 'schedule.scheduled' is well formed.
-  test('Ensures that schedule.scheduled has well formed properties and types.', async () => {
+  test("Ensures that schedule.scheduled has well formed properties and types.", async () => {
     const result = await schedule;
     expect(result.scheduled).toHaveValidScheduleScheduledProperties();
   });
@@ -271,8 +265,7 @@ for (let i = 0; i < schedules.length; i += 1) {
 
 // tests to ensure Graph.prototype.toTopologicalOrdering() works properly.
 
-const Graph = json_parser.Graph;
-let g = new Graph();
+const g: Graph<string> = new Graph();
 g.addVertex("a");
 g.addVertex("b");
 g.addVertex("c");
@@ -282,4 +275,3 @@ g.addEdge("b", "c");
 g.addEdge("b", "d");
 g.addEdge("c", "d");
 expect(g.toTopologicalOrdering()).toBeValidTopologicalOrdering(g.adjList);
-
