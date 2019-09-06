@@ -1,6 +1,6 @@
 import { parseRequirement } from "./json_converter";
-import { ICompleteCourse, IInitialScheduleRep, INEUAndPrereq, INEUClassMap, INEUCourse, INEUOrPrereq, INEUParentMap,
-INEUPrereq, INEUPrereqCourse, IRequiredCourse, ISchedule, IScheduleCourse, Requirement, UserChoice, IOrCourse, ICourseRange } from "./types";
+import { ICompleteCourse, IInitialScheduleRep, INEUAndPrereq, INEUClassMap, INEUCourse, INEUOrPrereq,
+INEUParentMap, INEUPrereq, INEUPrereqCourse, IRequiredCourse, ISchedule, IScheduleCourse, Requirement, UserChoice } from "./types";
 
 /**
  * Returns if the classList contains the given class, by attr and course #.
@@ -38,7 +38,7 @@ const addCompleted = (schedule: ISchedule, completedClasses: ICompleteCourse[]):
  * @param numIncoming The number of incoming edges each vertex has.
  * @param vertices The vertices of the Graph.
  */
-class Graph<T> {
+export class Graph<T> {
 
   // fields
   private adjList: Map<T, T[]>;
@@ -509,7 +509,7 @@ undefined | INEUAndPrereq | INEUOrPrereq => {
  * @returns The produced graph, complete with edges.
  */
 const createPrerequisiteGraph =
-(completed: ICompleteCourse[], filteredRequirements: IRequiredCourse[],
+(completed: ICompleteCourse[], filteredRequirements: INEUCourse[],
  curriedGetSearchNEUData: (arg0: ICompleteCourse | IRequiredCourse | INEUCourse | INEUPrereqCourse |
   IScheduleCourse) => INEUCourse | undefined): Graph<string> => {
    // todo: replace input types with IHasSubject and IHasClassId and IHasTermId
@@ -757,12 +757,10 @@ const createPrerequisiteGraph =
 
     // if the course has no prereqs, then skip.
     if (prereqs === undefined) {
-      return;
-    }
-
-    // if any of the prereqs have been completed, abort.
-    if (prereqs.type === "or") {
-      markOrPrereq(courseCode(course), course.prereqs);
+      continue;
+    } else if (prereqs.type === "or") {
+      // if any of the prereqs have been completed, abort.
+      markOrPrereq(courseCode(course), prereqs);
     }
   }
 
@@ -777,7 +775,7 @@ const createPrerequisiteGraph =
  * @param remainingRequirements The remaining requirements (in SearchNEU format).
  * @param curriedGetSearchNEUData A function course => course that produces searchNEU data for a course.
  */
-const addRequired = (schedule: ISchedule, completed: ICompleteCourse[], remainingRequirements: Requirement[],
+const addRequired = (schedule: ISchedule, completed: ICompleteCourse[], remainingRequirements: INEUCourse[],
                      curriedGetSearchNEUData: (arg0: ICompleteCourse | IRequiredCourse | INEUCourse |
                       INEUPrereqCourse | IScheduleCourse) => INEUCourse | undefined): void => {
   // precondition: schedule is full up to some point. need to fill with remaining requirements.
@@ -870,7 +868,7 @@ const getSearchNEUData = (
  * @param classMapParent A classMap parent with each classMap under its corresponding termId.
  * @returns The resulting schedule object.
  */
-const toSchedule = (audit: IInitialScheduleRep, classMapParent: INEUParentMap): ISchedule => {
+export const toSchedule = (audit: IInitialScheduleRep, classMapParent: INEUParentMap): ISchedule => {
 
   const schedule: ISchedule = {
     completed: [],
@@ -912,8 +910,3 @@ const toSchedule = (audit: IInitialScheduleRep, classMapParent: INEUParentMap): 
   return schedule;
 };
 
-// export toSchedule function.
-module.exports.toSchedule = toSchedule;
-
-// export Graph class for testing.
-module.exports.Graph = Graph;
