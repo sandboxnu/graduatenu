@@ -1,4 +1,4 @@
-const html_parser = require('../src/html_parser.js');
+const html_parser = require('../src/html_parser.ts');
 const fs = require('fs');
 
 const cs_json = html_parser.audit_to_json(fs.readFileSync("./test/mock_audits/cs_audit.html", "utf-8"));
