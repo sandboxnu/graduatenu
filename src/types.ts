@@ -145,7 +145,7 @@ export interface IInitialScheduleRep {
         nupaths: NUPath[];
     };
     requirements: {
-        courses: Requirement[];
+        courses: IOldRequirement[];
         nupaths: NUPath[];
     };
     data: {

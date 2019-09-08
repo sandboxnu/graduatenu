@@ -1,6 +1,6 @@
 // test json_parser.json_to_schedule(...)
-const json_loader = require('../build/json_loader.js');
-const json_parser = require('../build/json_parser.js');
+const json_loader = require('../build/json_loader.ts');
+const json_parser = require('../build/json_parser.ts');
 
 const fs = require('fs');
 
