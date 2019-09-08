@@ -366,7 +366,7 @@ const courseCode = (course: ICompleteCourse | IRequiredCourse | INEUCourse | INE
  * @param prereqObj The prereq object to filter
  * @returns The simplified prerequisite object.
  */
-const filterAndSimplifyPrereqs = (completed: ICompleteCourse[], prereqObj: INEUAndPrereq | INEUOrPrereq):
+const filterAndSimplifyPrereqs = (completed: INEUCourse[], prereqObj: INEUAndPrereq | INEUOrPrereq):
 undefined | INEUAndPrereq | INEUOrPrereq => {
 
   // a prereq is an object and has the following properties:
@@ -509,7 +509,7 @@ undefined | INEUAndPrereq | INEUOrPrereq => {
  * @returns The produced graph, complete with edges.
  */
 const createPrerequisiteGraph =
-(completed: ICompleteCourse[], filteredRequirements: INEUCourse[],
+(completed: INEUCourse[], filteredRequirements: INEUCourse[],
  curriedGetSearchNEUData: (arg0: ICompleteCourse | IRequiredCourse | INEUCourse | INEUPrereqCourse |
   IScheduleCourse) => INEUCourse | undefined): Graph<string> => {
    // todo: replace input types with IHasSubject and IHasClassId and IHasTermId
@@ -775,7 +775,7 @@ const createPrerequisiteGraph =
  * @param remainingRequirements The remaining requirements (in SearchNEU format).
  * @param curriedGetSearchNEUData A function course => course that produces searchNEU data for a course.
  */
-const addRequired = (schedule: ISchedule, completed: ICompleteCourse[], remainingRequirements: INEUCourse[],
+const addRequired = (schedule: ISchedule, completed: INEUCourse[], remainingRequirements: INEUCourse[],
                      curriedGetSearchNEUData: (arg0: ICompleteCourse | IRequiredCourse | INEUCourse |
                       INEUPrereqCourse | IScheduleCourse) => INEUCourse | undefined): void => {
   // precondition: schedule is full up to some point. need to fill with remaining requirements.
@@ -888,6 +888,7 @@ export const toSchedule = (audit: IInitialScheduleRep, classMapParent: INEUParen
   const filtered: IScheduleCourse[] = flattened
   .filter((course: UserChoice | IScheduleCourse): boolean => (!("type" in course)));
 
+  // schedule course -> ineu course map, then pass to completed param
   function temp(course: UserChoice | IScheduleCourse): undefined | IScheduleCourse {
     if (!("type" in course)) {
       return course;
@@ -898,15 +899,17 @@ export const toSchedule = (audit: IInitialScheduleRep, classMapParent: INEUParen
 
   // filter through the completed classes to pull up their data.
   // only keep the stuff with actual results.
-  const completed = audit.completed.courses.map((course: ICompleteCourse) => lookupIfDataExists(course));
+  const completed = audit.completed.courses.map((course: ICompleteCourse) => getSearchNEUData(course, classMapParent));
   // const required = audit.requirements.courses.map((course: IReqlookupIfDataExists(audit.requirements.courses);
 
-  const curriedGetData = (course) => getSearchNEUData(course, classMapParent);
+  const curriedGetData = (course: ICompleteCourse | IRequiredCourse | INEUCourse |
+    INEUPrereqCourse | IScheduleCourse) => getSearchNEUData(course, classMapParent);
 
   // add the remaining required classes.
   // note, expects data in SearchNEU format
-  addRequired(schedule, completed, required, curriedGetData);
+
+  // only pass this function scheduled courses, not choices for user
+  addRequired(schedule, completed, audit.requirements.courses, curriedGetData);
 
   return schedule;
 };
-
