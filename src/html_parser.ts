@@ -252,6 +252,8 @@ class AuditToJSON {
 
      // TODO: fix this up
      // not going to elaborate upon types until completing the issue for fixing this function's format
+     // This can be fixed by removing all of the HTML tags and instead using a spacing heuristic
+     // to snag the course numbers
     /**
      * Adds the courses required by the degree audit to be taken to the JSON.
      * @param line - The line which contains these required courses.
@@ -261,8 +263,8 @@ class AuditToJSON {
         .replace(/<font class="auditPreviewText">/g, "").replace(/\*\*\*\*/g, "").replace(/\s/g, "").split("</font>");
 
         // last two elements are always empty, as each of these lines ends with two </font> tags
-        // courseList.pop();
-        // courseList.pop();
+        courseList.pop();
+        courseList.pop();
 
         let type: string = subjectType;
         const courses = [];
