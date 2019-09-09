@@ -37,6 +37,19 @@ class AuditToJSON {
         // begin looking for specific elements of the degree audit to parse to JSON format if present
 
         // TODO: filter out all HTML tags here, making text identifiers independent of them
+
+        this.majors = [];
+        this.minors = [];
+
+        this.completeNUPaths = [];
+        this.completeCourses = [];
+
+        this.ipNUPaths = [];
+        this.ipCourses = [];
+
+        this.requiredNUPaths = [];
+        this.requiredCourses = [];
+
         const lines: string[] = audit.split("\n");
 
         for (let i: number = 0; i < lines.length; i++) {
@@ -111,8 +124,9 @@ class AuditToJSON {
      */
     private add_grad_date(line: string): void {
         const dateInd = line.search("GRADUATION DATE: ") + "GRADUATION DATE: ".length;
+
         this.gradDate = new Date(
-            parseInt("20" + line.substring(dateInd + 5, dateInd + 7), 10),
+            parseInt("20".concat(line.substring(dateInd + 6, dateInd + 8)), 10),
             parseInt(line.substring(dateInd, dateInd + 2), 10),
             parseInt(line.substring(dateInd + 3, dateInd + 5), 10),
         );
@@ -123,6 +137,10 @@ class AuditToJSON {
      * @param line - The line that contains a NUPath mentioned in the audit.
      */
     private get_nupaths(line: string): void {
+        if (-1 === line.indexOf("(")) {
+            return;
+        }
+
         const nupathInd: number = line.indexOf("(") + 1;
         const toAdd = line.substring(nupathInd, nupathInd + 2) as NUPath;
 
@@ -135,8 +153,8 @@ class AuditToJSON {
                 this.ipNUPaths.push(toAdd);
             }
         } else if (contains(line, ">NO ")) {
-            if (!this.completeNUPaths.includes(toAdd)) {
-                this.completeNUPaths.push(toAdd);
+            if (!this.requiredNUPaths.includes(toAdd)) {
+                this.requiredNUPaths.push(toAdd);
             }
         }
     }
@@ -155,7 +173,7 @@ class AuditToJSON {
 
         switch (season) {
             case "FL": // Fall term
-                termid = "20" + Number(year) + 1;
+                termid = "20" + Number(Number(year) + 1);
                 termid = termid + "10"; break;
             case "SP": // Spring term
                 termid = termid + "30"; break;
@@ -243,8 +261,8 @@ class AuditToJSON {
         .replace(/<font class="auditPreviewText">/g, "").replace(/\*\*\*\*/g, "").replace(/\s/g, "").split("</font>");
 
         // last two elements are always empty, as each of these lines ends with two </font> tags
-        courseList.pop();
-        courseList.pop();
+        // courseList.pop();
+        // courseList.pop();
 
         let type: string = subjectType;
         const courses = [];
