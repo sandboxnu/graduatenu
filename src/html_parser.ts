@@ -114,8 +114,9 @@ class AuditToJSON {
      * @param line - The line containing the year.
      */
     private add_year(line: string): void {
-        const yearInd = line.search("CATALOG YEAR:") + "CATALOG YEAR: ".length;
-        this.auditYear = parseInt(line.substring(yearInd, yearInd + 4), 10);
+        const yearInd = line.search("CATALOG YEAR: ") + "CATALOG YEAR: ".length;
+        // TODO: error arises here with cs_math degree audit; why?
+        this.auditYear = parseInt(line.substring(yearInd, yearInd + 4).replace(/\s/g, ""), 10);
     }
 
     /**
