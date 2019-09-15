@@ -1,6 +1,7 @@
 import { parseRequirement } from "./json_converter";
 import { ICompleteCourse, IInitialScheduleRep, INEUAndPrereq, INEUClassMap, INEUCourse, INEUOrPrereq,
-INEUParentMap, INEUPrereq, INEUPrereqCourse, IRequiredCourse, ISchedule, IScheduleCourse, Requirement, UserChoice } from "./types";
+INEUParentMap, INEUPrereq, INEUPrereqCourse, IOldRequirement, IRequiredCourse, ISchedule,
+IScheduleCourse, UserChoice } from "./types";
 
 /**
  * Returns if the classList contains the given class, by attr and course #.
@@ -806,7 +807,7 @@ const addRequired = (schedule: ISchedule, completed: INEUCourse[], remainingRequ
  * @returns Produces the corresponding searchNEU data for a class, if it exists. else => undefined.
  */
 const getSearchNEUData = (
-  course: ICompleteCourse | IRequiredCourse | INEUCourse | INEUPrereqCourse | IScheduleCourse,
+  course: ICompleteCourse | IRequiredCourse | INEUCourse | INEUPrereqCourse | IScheduleCourse | IOldRequirement,
   classMapParent: INEUParentMap): INEUCourse | undefined => {
   /**
    * Grabs the data of a specified class.
@@ -826,13 +827,14 @@ const getSearchNEUData = (
     return undefined;
   }
 
-  const subject: string = course.subject;
-  const classId: number = course.classId;
-  let termId;
-  if (course.termId) {
+  const subject: string | undefined = course.subject;
+  const classId: number | undefined = course.classId;
+  let termId: number | undefined;
+  let classMap: INEUClassMap | undefined;
+  if ("termId" in course) {
     termId = course.termId;
+    classMap = classMapParent.classMapMap[termId];
   }
-  let classMap: INEUClassMap = classMapParent.classMapMap[termId];
 
   if (classId && subject && termId && classMap) {
     // if everything is valid, then query the classMap
@@ -881,13 +883,8 @@ export const toSchedule = (audit: IInitialScheduleRep, classMapParent: INEUParen
   // need to still add the remaining NUPaths, audit.completed.nupaths
 
   // convert the stuff to userchoice | schedulecourse.
-  const requirements: Requirement[] = audit.requirements.courses;
-  const converted: Array<Array<UserChoice | IScheduleCourse>> = requirements
-  .map((course: Requirement) => parseRequirement(course));
-  const flattened: Array<UserChoice | IScheduleCourse> = converted.reduce((acc, val) => acc.concat(val), []);
-  const filtered: IScheduleCourse[] = flattened
-  .filter((course: UserChoice | IScheduleCourse): boolean => (!("type" in course)));
 
+  // todo: convert from IOldRequirement to Requirement representation.
   // schedule course -> ineu course map, then pass to completed param
   function temp(course: UserChoice | IScheduleCourse): undefined | IScheduleCourse {
     if (!("type" in course)) {
@@ -897,19 +894,39 @@ export const toSchedule = (audit: IInitialScheduleRep, classMapParent: INEUParen
     }
   }
 
+  // const requirements: Requirement[] = audit.requirements.courses;
+  // const converted: Array<Array<UserChoice | IScheduleCourse>> = requirements
+  // .map((course: Requirement) => parseRequirement(course));
+  // const flattened: Array<UserChoice | IScheduleCourse> = converted.reduce((acc, val) => acc.concat(val), []);
+  // const filtered: IScheduleCourse[] = flattened
+  // .filter((course: UserChoice | IScheduleCourse): boolean => (!("type" in course)));
+
+  const curriedGetData = (course: ICompleteCourse | IRequiredCourse | INEUCourse |
+    INEUPrereqCourse | IScheduleCourse | IOldRequirement) => getSearchNEUData(course, classMapParent);
+
+  // remove null stuff. typescript is annoying.
+  function filterUndefined<T>(toFilter: Array<T | undefined>): T[] {
+    const result: T[] = [];
+    for (const maybeUndefined of toFilter) {
+      if (maybeUndefined) {
+        result.push(maybeUndefined);
+      }
+    }
+    return result;
+  }
+
   // filter through the completed classes to pull up their data.
   // only keep the stuff with actual results.
   const completed = audit.completed.courses.map((course: ICompleteCourse) => getSearchNEUData(course, classMapParent));
-  // const required = audit.requirements.courses.map((course: IReqlookupIfDataExists(audit.requirements.courses);
-
-  const curriedGetData = (course: ICompleteCourse | IRequiredCourse | INEUCourse |
-    INEUPrereqCourse | IScheduleCourse) => getSearchNEUData(course, classMapParent);
+  const required = audit.requirements.courses.map((course) => curriedGetData(course));
+  const completedFiltered: INEUCourse[] = filterUndefined(completed);
+  const requiredFiltered: INEUCourse[] = filterUndefined(required);
 
   // add the remaining required classes.
   // note, expects data in SearchNEU format
 
   // only pass this function scheduled courses, not choices for user
-  addRequired(schedule, completed, audit.requirements.courses, curriedGetData);
+  addRequired(schedule, completedFiltered, requiredFiltered, curriedGetData);
 
   return schedule;
 };

@@ -53,7 +53,7 @@ export interface ICompleteCourse {
 
 /**
  * A catch-all interface for the old requirement format.
- * This will be replaced with the future representations (found below).
+ * todo: This will be replaced with the future representations (found below).
  */
 export interface IOldRequirement {
     classId: number;
@@ -264,7 +264,8 @@ export interface INEUPrereqCourse {
  */
 export interface ISchedule {
     completed: ICompleteCourse[];
-    scheduled: IScheduleCourse[][];
+    scheduled: string[][];
+    // todo: scheduled: IScheduleCourse[][];
 }
 
 /**
