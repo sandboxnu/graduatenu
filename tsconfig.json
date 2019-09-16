@@ -4,15 +4,7 @@
         "allowJs": true,
         "target": "es6",
         "noImplicitAny": true,
-        "strictNullChecks": true,
-        "plugins": [
-            {
-                "name": "typescript-tslint-plugin",
-                "jsEnable": false,
-                "alwaysShowRuleFailuresAsWarnings": true,
-                "suppressWhileTypeErrorsPresent": false
-            }
-        ]
+        "strictNullChecks": true
     },
     "include": [
         "./src/**/*"
