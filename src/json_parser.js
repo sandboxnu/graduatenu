@@ -11,6 +11,7 @@
 
 // ACCESSOR FUNCTIONS
 
+
 /**
  * Gets the termId from a class.
  * @param {Class} c The target class.
