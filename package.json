@@ -8,28 +8,21 @@
   "license": "AGPL-3.0-or-later",
   "private": false,
   "devDependencies": {
-    "@types/node": "^12.7.2",
+    "typescript": "^3.6.2",
     "jest": "^24.9.0",
-    "ts-jest": "^24.0.2"
+    "@types/node": "^12.7.2",
+    "@types/jest": "^24.0.18"
   },
   "scripts": {
-    "lint": "tslint -c tslint.json 'src/**/*.{ts,tsx}'",
-    "pretest": "yarn lint",
     "test": "jest"
   },
   "dependencies": {
-    "@types/jest": "^24.0.18",
-    "tslint": "^5.19.0",
-    "typescript": "^3.6.2"
   },
   "jest": {
     "moduleFileExtensions": [
       "ts",
       "tsx",
       "js"
-    ],
-    "transform": {
-      "\\.(ts|tsx)$": "ts-jest"
-    }
+    ]
   }
 }
