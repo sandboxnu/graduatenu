@@ -26,51 +26,6 @@ expect.extend({
     };
   },
 
-  // custom matcher for checking schedule.completed property form.
-  toHaveValidScheduleCompletedProperties(received) {
-
-    // received is 'schedule.completed'.
-
-    // ensure that schedule.completed is defined, and is an Object.
-    expect(received).toBeDefined();
-    expect(received).toBeInstanceOf(Object);
-
-    // ensure that schedule.completed.classes field exists, with correct property format.
-    expect(received).toHaveProperty('classes');
-    expect(received.classes).toBeDefined();
-    expect(received.classes).toBeInstanceOf(Array);
-
-    return {
-      message: () => `expected ${received} not to have valid schedule.completed properties.`,
-      pass: true,
-    };
-  },
-
-  // custom matcher for checking schedule.completed.classes property form.
-  toHaveValidScheduleCompletedClassesProperties(received) {
-
-    // received.classes should be an Array of Objects with termId and courses properties.
-    // yeah, I know it doesn't make sense for received.classes to not be an array of classes. Sorry.
-    expect(received).toBeDefined();
-    expect(received).toBeInstanceOf(Object);
-    
-    // ensures received has property 'termId', that is a number that matches 20xx[1-6]0.
-    expect(received).toHaveProperty('termId');
-    expect(received.termId).toBeDefined();
-    // expect(received.termId).toBeInstanceOf(Number);
-    expect("" + received.termId).toMatch(/^20\d\d[1-6]0$/);
-    
-    // ensures received has property 'courses', that is an Array of courses.
-    expect(received).toHaveProperty('courses');
-    expect(received.courses).toBeDefined();
-    expect(received.courses).toBeInstanceOf(Array);
-
-    return {
-      message: `expected ${received} to not have valid schedule.completed.classes properties.`,
-      pass: true,
-    };
-  },
-
   // custom matcher to ensure received is a valid course.
   toBeValidCourse(received) {
 
@@ -80,19 +35,28 @@ expect.extend({
 
     // todo: add the name property to list of tests.
     // ensure that received contains the following properties, and that they are all defined.
-    let props = ['hon', 'subject', 'classId', 'credithours', 'season', 'year', 'termId'];
+    let props = ['hon', 'subject', 'classId', 'creditHours', 'season', 'year', 'termId'];
     for (let i = 0; i < props.length; i += 1) {
       expect(received).toHaveProperty(props[i]);
       expect(received[props[i]]).toBeDefined();
     }
 
     // ensure the properties' values are well formed.
+
+    // subject
     expect(received.subject).toMatch(/^[A-Z]{2,4}$/);
-    expect(received.classId).toMatch(/^[\d]{4}$/);
-    expect(received.credithours).toMatch(/^[\d]\.00/);
+    // classId
+    expect(received.classId).toBeGreaterThanOrEqual(1000);
+    expect(received.classId).toBeLessThanOrEqual(9999);
+    // creditHours
+    expect(received.creditHours).toBeGreaterThan(0);
+    expect(received.creditHours).toBeLessThanOrEqual(8);
+    // season
     expect(received.season).toMatch(/FL|SP|S1|S2|SM/);
-    expect(received.year).toMatch(/^\d\d$/);
-    expect(received.termId).toMatch(/^20\d\d[1-6]0$/);
+    // year. 19 for 2019.
+    expect(received.year).toBeGreaterThan(0);
+    // termId
+    expect("" + received.termId).toMatch(/^20\d\d[1-6]0$/);
     // expect(received.name).toBeInstanceOf(String);
     
     return {
@@ -215,10 +179,14 @@ const PARENT = json_loader.loadClassMaps();
 let schedules = [];
 
 let cs_sched = PARENT.then(result => {
-  return json_parser.toSchedule(fs.readFileSync('./test/mock_parsed_audits/cs_json.json', 'utf-8'), result);
+  const file_text = fs.readFileSync('./test/mock_parsed_audits/cs_json.json', 'utf-8');
+  const file_object = JSON.parse(file_text);
+  return json_parser.toSchedule(file_object, result);
 });
 let cs_sched2 = PARENT.then(result => {
-  return json_parser.toSchedule(fs.readFileSync('./test/mock_parsed_audits/cs_json2.json', 'utf-8'), result);
+  const file_text = fs.readFileSync('./test/mock_parsed_audits/cs_json2.json', 'utf-8');
+  const file_object = JSON.parse(file_text);
+  return json_parser.toSchedule(file_object, result);
 });
 // const tempSchedule = JSON.parse(fs.readFileSync('./test/mock_parsed_audits/sampleScheduleOutput.json', 'utf-8'));
 
@@ -237,26 +205,22 @@ for (let i = 0; i < schedules.length; i += 1) {
   });
   
   // test that 'schedule.completed' is well formed.
-  test('Ensures that schedule.completed has well formed properties and types.', async () => {
+  test('Ensures that schedule.completed is an Array', async () => {
     const result = await schedule;
-    expect(result.completed).toHaveValidScheduleCompletedProperties();
+    expect(result.completed).toBeDefined();
+    expect(result.completed).toBeInstanceOf(Array);
   });
   
-  test('Ensures that term and course objects in schedule are well formed.', async () => {
+  // test that 'schedule.completed' contains classes that are well formed.
+  test('Ensures that course objects in schedule.completed are well formed.', async () => {
     const result = await schedule;
     
     // test that each item in 'schedule.completed.classes' is well formed.
-    for (let objIndex = 0; objIndex < result.completed.classes.length; objIndex += 1) {
+    for (let objIndex = 0; objIndex < result.completed.length; objIndex += 1) {
       
-      let termObj = result.completed.classes[objIndex];
-      expect(termObj).toHaveValidScheduleCompletedClassesProperties();
+      const courseObj = result.completed[objIndex];
       
-      // test that each item in 'schedule.completed.classes[objIndex].courses' is well formed.
-      for (let courseIdx = 0; courseIdx < termObj.courses.length; courseIdx += 1) {
-        
-        let courseObj = termObj.courses[courseIdx];
-        expect(courseObj).toBeValidCourse();
-      }
+      expect(courseObj).toBeValidCourse();
     }
   });
   
