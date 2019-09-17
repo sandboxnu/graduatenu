@@ -55,10 +55,10 @@ class AuditToJSON {
         for (let i: number = 0; i < lines.length; i++) {
             if (contains(lines[i], "(>OK |>IP |>NO )")) {
                 this.get_nupaths(lines[i]);
-            } else if (contains(lines[i], "(FL|SP|S1|S2|SM)")) {
-                this.add_course_taken(lines[i]);
             } else if (contains(lines[i], "CATALOG YEAR")) {
                 this.add_year(lines[i]);
+            } else if (contains(lines[i], "(FL|SP|S1|S2|SM)")) {
+                this.add_course_taken(lines[i]);
             } else if (contains(lines[i], "Course List")) {
                 this.add_courses_to_take(lines, i, "");
             } else if (contains(lines[i], "GRADUATION DATE:")) {
@@ -115,7 +115,6 @@ class AuditToJSON {
      */
     private add_year(line: string): void {
         const yearInd = line.search("CATALOG YEAR: ") + "CATALOG YEAR: ".length;
-        // TODO: error arises here with cs_math degree audit; why?
         this.auditYear = parseInt(line.substring(yearInd, yearInd + 4).replace(/\s/g, ""), 10);
     }
 
