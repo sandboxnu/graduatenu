@@ -1,305 +1,305 @@
 {
   "completed": {
-    "classes": [
+    "courses": [
       {
+        "classId": 1200,
+        "creditHours": 1,
         "hon": false,
         "subject": "CS",
-        "classId": "1200",
         "name": "LeadershipSkillDevelopment",
-        "credithours": "1.00",
         "season": "FL",
-        "year": "18",
-        "termId": "201910"
+        "year": 18,
+        "termId": 201910
       },
       {
+        "classId": 1800,
+        "creditHours": 4,
         "hon": true,
         "subject": "CS",
-        "classId": "1800",
         "name": "DiscreteStructures",
-        "credithours": "4.00",
         "season": "FL",
-        "year": "18",
-        "termId": "201910"
+        "year": 18,
+        "termId": 201910
       },
       {
+        "classId": 1802,
+        "creditHours": 1,
         "hon": true,
         "subject": "CS",
-        "classId": "1802",
         "name": "SeminarforCS1800",
-        "credithours": "1.00",
         "season": "FL",
-        "year": "18",
-        "termId": "201910"
+        "year": 18,
+        "termId": 201910
       },
       {
+        "classId": 2500,
+        "creditHours": 4,
         "hon": false,
         "subject": "CS",
-        "classId": "2500",
         "name": "FundamentalsofComputerSci",
-        "credithours": "4.00",
         "season": "FL",
-        "year": "18",
-        "termId": "201910"
+        "year": 18,
+        "termId": 201910
       },
       {
+        "classId": 2501,
+        "creditHours": 1,
         "hon": false,
         "subject": "CS",
-        "classId": "2501",
         "name": "LabforCS2500",
-        "credithours": "1.00",
         "season": "FL",
-        "year": "18",
-        "termId": "201910"
+        "year": 18,
+        "termId": 201910
       },
       {
+        "classId": 2510,
+        "creditHours": 4,
         "hon": false,
         "subject": "CS",
-        "classId": "2510",
         "name": "FundamentalsofComputerSci",
-        "credithours": "4.00",
         "season": "SP",
-        "year": "19",
-        "termId": "201930"
+        "year": 19,
+        "termId": 201930
       },
       {
+        "classId": 2511,
+        "creditHours": 1,
         "hon": false,
         "subject": "CS",
-        "classId": "2511",
         "name": "LabforCS2510",
-        "credithours": "1.00",
         "season": "SP",
-        "year": "19",
-        "termId": "201930"
+        "year": 19,
+        "termId": 201930
       },
       {
+        "classId": 2800,
+        "creditHours": 4,
         "hon": false,
         "subject": "CS",
-        "classId": "2800",
         "name": "LogicandComputation",
-        "credithours": "4.00",
         "season": "SP",
-        "year": "19",
-        "termId": "201930"
+        "year": 19,
+        "termId": 201930
       },
       {
+        "classId": 2801,
+        "creditHours": 1,
         "hon": false,
         "subject": "CS",
-        "classId": "2801",
         "name": "LabforCS2800",
-        "credithours": "1.00",
         "season": "SP",
-        "year": "19",
-        "termId": "201930"
+        "year": 19,
+        "termId": 201930
       },
       {
+        "classId": 3200,
+        "creditHours": 4,
         "hon": false,
         "subject": "CS",
-        "classId": "3200",
         "name": "DatabaseDesign",
-        "credithours": "4.00",
         "season": "SP",
-        "year": "19",
-        "termId": "201930"
+        "year": 19,
+        "termId": 201930
       },
       {
+        "classId": 3950,
+        "creditHours": 2,
         "hon": false,
         "subject": "CS",
-        "classId": "3950",
         "name": "IntrotoCSResearch",
-        "credithours": "2.00",
         "season": "SP",
-        "year": "19",
-        "termId": "201930"
+        "year": 19,
+        "termId": 201930
       },
       {
+        "classId": 1341,
+        "creditHours": 4,
         "hon": false,
         "subject": "MATH",
-        "classId": "1341",
         "name": "CalculusBC++",
-        "credithours": "4.00",
         "season": "S2",
-        "year": "18",
-        "termId": "201860"
+        "year": 18,
+        "termId": 201860
       },
       {
+        "classId": 1342,
+        "creditHours": 4,
         "hon": false,
         "subject": "MATH",
-        "classId": "1342",
         "name": "CalculusBC++",
-        "credithours": "4.00",
         "season": "S2",
-        "year": "18",
-        "termId": "201860"
+        "year": 18,
+        "termId": 201860
       },
       {
+        "classId": 2331,
+        "creditHours": 4,
         "hon": false,
         "subject": "MATH",
-        "classId": "2331",
         "name": "LinearAlgebra",
-        "credithours": "4.00",
         "season": "FL",
-        "year": "18",
-        "termId": "201910"
+        "year": 18,
+        "termId": 201910
       },
       {
+        "classId": 1145,
+        "creditHours": 4,
         "hon": true,
         "subject": "PHIL",
-        "classId": "1145",
         "name": "TechandHumanValues",
-        "credithours": "4.00",
         "season": "FL",
-        "year": "18",
-        "termId": "201910"
+        "year": 18,
+        "termId": 201910
       },
       {
+        "classId": 1111,
+        "creditHours": 4,
         "hon": false,
         "subject": "BIOL",
-        "classId": "1111",
         "name": "AP:BIOLOGY",
-        "credithours": "4.00",
         "season": "S2",
-        "year": "18",
-        "termId": "201860"
+        "year": 18,
+        "termId": 201860
       },
       {
+        "classId": 1112,
+        "creditHours": 1,
         "hon": false,
         "subject": "BIOL",
-        "classId": "1112",
         "name": "AP:BIOLOGY",
-        "credithours": "1.00",
         "season": "S2",
-        "year": "18",
-        "termId": "201860"
+        "year": 18,
+        "termId": 201860
       },
       {
+        "classId": 1113,
+        "creditHours": 4,
         "hon": false,
         "subject": "BIOL",
-        "classId": "1113",
         "name": "AP:BIOLOGY",
-        "credithours": "4.00",
         "season": "S2",
-        "year": "18",
-        "termId": "201860"
+        "year": 18,
+        "termId": 201860
       },
       {
+        "classId": 1114,
+        "creditHours": 1,
         "hon": false,
         "subject": "BIOL",
-        "classId": "1114",
         "name": "AP:BIOLOGY",
-        "credithours": "1.00",
         "season": "S2",
-        "year": "18",
-        "termId": "201860"
+        "year": 18,
+        "termId": 201860
       },
       {
+        "classId": 1111,
+        "creditHours": 8,
         "hon": false,
         "subject": "ENGW",
-        "classId": "1111",
         "name": "AP:ENGLANG/COMP,ENGL",
-        "credithours": "8.00",
         "season": "S2",
-        "year": "18",
-        "termId": "201860"
+        "year": 18,
+        "termId": 201860
       },
       {
+        "classId": 1990,
+        "creditHours": 4,
         "hon": false,
         "subject": "CS",
-        "classId": "1990",
         "name": "AP:COMPSCIA",
-        "credithours": "4.00",
         "season": "S2",
-        "year": "18",
-        "termId": "201860"
+        "year": 18,
+        "termId": 201860
       },
       {
+        "classId": 1115,
+        "creditHours": 4,
         "hon": false,
         "subject": "ECON",
-        "classId": "1115",
         "name": "AP:ECON-MAC",
-        "credithours": "4.00",
         "season": "S2",
-        "year": "18",
-        "termId": "201860"
+        "year": 18,
+        "termId": 201860
       },
       {
+        "classId": 1116,
+        "creditHours": 4,
         "hon": false,
         "subject": "ECON",
-        "classId": "1116",
         "name": "AP:ECON-MIC",
-        "credithours": "4.00",
         "season": "S2",
-        "year": "18",
-        "termId": "201860"
+        "year": 18,
+        "termId": 201860
       },
       {
+        "classId": 1110,
+        "creditHours": 4,
         "hon": false,
         "subject": "HIST",
-        "classId": "1110",
         "name": "AP:WORLDHISTORY",
-        "credithours": "4.00",
         "season": "S2",
-        "year": "18",
-        "termId": "201860"
+        "year": 18,
+        "termId": 201860
       },
       {
+        "classId": 2280,
+        "creditHours": 4,
         "hon": false,
         "subject": "MATH",
-        "classId": "2280",
         "name": "AP:STATISTICS",
-        "credithours": "4.00",
         "season": "S2",
-        "year": "18",
-        "termId": "201860"
+        "year": 18,
+        "termId": 201860
       },
       {
+        "classId": 1151,
+        "creditHours": 3,
         "hon": false,
         "subject": "PHYS",
-        "classId": "1151",
         "name": "AP:PHYSICSC-MECH",
-        "credithours": "3.00",
         "season": "S2",
-        "year": "18",
-        "termId": "201860"
+        "year": 18,
+        "termId": 201860
       },
       {
+        "classId": 1152,
+        "creditHours": 1,
         "hon": false,
         "subject": "PHYS",
-        "classId": "1152",
         "name": "AP:PHYSICSC-MECH",
-        "credithours": "1.00",
         "season": "S2",
-        "year": "18",
-        "termId": "201860"
+        "year": 18,
+        "termId": 201860
       },
       {
+        "classId": 1153,
+        "creditHours": 1,
         "hon": false,
         "subject": "PHYS",
-        "classId": "1153",
         "name": "AP:PHYSICSC-MECH",
-        "credithours": "1.00",
         "season": "S2",
-        "year": "18",
-        "termId": "201860"
+        "year": 18,
+        "termId": 201860
       },
       {
+        "classId": 1101,
+        "creditHours": 4,
         "hon": false,
         "subject": "PSYC",
-        "classId": "1101",
         "name": "AP:PSYCHOLOGY",
-        "credithours": "4.00",
         "season": "S2",
-        "year": "18",
-        "termId": "201860"
+        "year": 18,
+        "termId": 201860
       },
       {
+        "classId": 1102,
+        "creditHours": 1,
         "hon": true,
         "subject": "HONR",
-        "classId": "1102",
         "name": "HonorsDiscovery",
-        "credithours": "1.00",
         "season": "FL",
-        "year": "18",
-        "termId": "201910"
+        "year": 18,
+        "termId": 201910
       }
     ],
     "nupaths": [
@@ -312,76 +312,76 @@
     ]
   },
   "inprogress": {
-    "classes": [
+    "courses": [
       {
+        "classId": 3000,
+        "creditHours": 4,
         "hon": false,
         "subject": "CS",
-        "classId": "3000",
         "name": "Algorithms&Data",
-        "credithours": "4.00",
         "season": "FL",
-        "year": "19",
-        "termId": "202010"
+        "year": 19,
+        "termId": 202010
       },
       {
+        "classId": 3500,
+        "creditHours": 4,
         "hon": false,
         "subject": "CS",
-        "classId": "3500",
         "name": "Object-OrientedDesign",
-        "credithours": "4.00",
         "season": "S1",
-        "year": "19",
-        "termId": "201940"
+        "year": 19,
+        "termId": 201940
       },
       {
+        "classId": 3650,
+        "creditHours": 4,
         "hon": false,
         "subject": "CS",
-        "classId": "3650",
         "name": "ComputerSystems",
-        "credithours": "4.00",
         "season": "FL",
-        "year": "19",
-        "termId": "202010"
+        "year": 19,
+        "termId": 202010
       },
       {
+        "classId": 4100,
+        "creditHours": 4,
         "hon": false,
         "subject": "CS",
-        "classId": "4100",
         "name": "ArtificialIntelligence",
-        "credithours": "4.00",
         "season": "FL",
-        "year": "19",
-        "termId": "202010"
+        "year": 19,
+        "termId": 202010
       },
       {
+        "classId": 4950,
+        "creditHours": 1,
         "hon": false,
         "subject": "CS",
-        "classId": "4950",
         "name": "MachineLearnResearchSemina",
-        "credithours": "1.00",
         "season": "FL",
-        "year": "19",
-        "termId": "202010"
+        "year": 19,
+        "termId": 202010
       },
       {
+        "classId": 3081,
+        "creditHours": 4,
         "hon": false,
         "subject": "MATH",
-        "classId": "3081",
         "name": "ProbabilityandStatistics",
-        "credithours": "4.00",
         "season": "FL",
-        "year": "19",
-        "termId": "202010"
+        "year": 19,
+        "termId": 202010
       },
       {
+        "classId": 2160,
+        "creditHours": 4,
         "hon": false,
         "subject": "EECE",
-        "classId": "2160",
         "name": "EmbeddedDesEnablingRobotic",
-        "credithours": "4.00",
         "season": "S1",
-        "year": "19",
-        "termId": "201940"
+        "year": 19,
+        "termId": 201940
       }
     ],
     "nupaths": [
@@ -389,49 +389,49 @@
     ]
   },
   "requirements": {
-    "classes": [
+    "courses": [
       {
         "subject": "CS",
-        "classId": "1210"
+        "classId": 1210
       },
       {
         "subject": "CS",
-        "classId": "3700"
+        "classId": 3700
       },
       {
         "subject": "CS",
-        "classId": "3800"
+        "classId": 3800
       },
       {
         "subject": "CS",
-        "classId": "4400"
+        "classId": 4400
       },
       {
         "subject": "CS",
-        "classId": "4500"
+        "classId": 4500
       },
       {
         "subject": "THTR",
-        "classId": "1170"
+        "classId": 1170
       },
       {
         "subject": "CS",
-        "classId": "2500",
-        "classId2": "7999"
+        "classId": 2500,
+        "classId2": 7999
       },
       {
         "subject": "DS",
-        "classId": "2000",
-        "classId2": "7999"
+        "classId": 2000,
+        "classId2": 7999
       },
       {
         "subject": "ENGW",
         "list": [
-          "3302",
-          "3308",
-          "3315"
+          3302,
+          3308,
+          3315
         ],
-        "num_required": "1"
+        "num_required": 1
       }
     ],
     "nupaths": [
@@ -444,8 +444,11 @@
     ]
   },
   "data": {
-    "grad": "08/20/22",
-    "year": "2019",
-    "major": "Computer Science"
+    "auditYear": 2019,
+    "gradDate": "2022-09-20T04:00:00.000Z",
+    "majors": [
+      "Computer Science"
+    ],
+    "minors": []
   }
 }
