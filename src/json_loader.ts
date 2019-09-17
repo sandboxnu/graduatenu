@@ -134,13 +134,13 @@ export const loadClassMaps = async (): Promise<INEUParentMap> => {
   // adds the most recent semester's termId as a property to classMapParent.
   const maxYear = Math.max.apply(null, years);
   const maxSeason = Math.max.apply(null, SEASONS);
-  classMapParent.mostRecentSemester = maxYear + maxSeason;
+  classMapParent.mostRecentSemester = (maxYear * 100) + maxSeason;
 
   // adds all the termIds as a property (array form) to classMapParent, sorted.
   const allTermIds: number[] = [];
   years.forEach((year: number) => {
     SEASONS.forEach((season: number) => {
-      const termId: number = year + season;
+      const termId: number = (year * 100) + season;
       allTermIds.push(termId);
     });
   });
