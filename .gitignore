@@ -87,3 +87,6 @@ typings/
 
 # for our mac users
 .DS_Store
+
+# avoid build files
+build/**/*
