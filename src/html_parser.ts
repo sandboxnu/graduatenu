@@ -57,10 +57,10 @@ class AuditToJSON {
                 this.get_nupaths(lines[i]);
             } else if (contains(lines[i], "CATALOG YEAR")) {
                 this.add_year(lines[i]);
-            } else if (contains(lines[i], "(FL|SP|S1|S2|SM)")) {
-                this.add_course_taken(lines[i]);
             } else if (contains(lines[i], "Course List")) {
                 this.add_courses_to_take(lines, i, "");
+            } else if (contains(lines[i], "(FL|SP|S1|S2|SM)")) {
+                this.add_course_taken(lines[i]);
             } else if (contains(lines[i], "GRADUATION DATE:")) {
                 this.add_grad_date(lines[i]);
             } else if (contains(lines[i], "Major")) {
