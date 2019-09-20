@@ -1,16 +1,32 @@
 {
-  "name": "scheduleneu",
+  "name": "graduatenu",
   "version": "1.0.0",
   "description": "A degree scheduling service for Northeastern students.",
-  "main": "//TODO: find entry point",
-  "repository": "https://github.com/sandboxneu/scheduleneu.git",
+  "main": "// TODO: find entry point",
+  "repository": "https://github.com/sandboxneu/graduatenu.git",
   "author": "Jacob Chvatal and Alexander Takayama of Northeastern Sandbox",
   "license": "AGPL-3.0-or-later",
   "private": false,
   "devDependencies": {
-    "jest": "^24.9.0"
+    "typescript": "^3.6.2",
+    "jest": "^24.9.0",
+    "@types/node": "^12.7.2",
+    "@types/jest": "^24.0.18",
+    "ts-jest": "^24.0.2"
   },
   "scripts": {
     "test": "jest"
+  },
+  "dependencies": {
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "transform": {
+      "\\.(ts|tsx)$": "ts-jest"
+    }
   }
 }

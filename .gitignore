@@ -76,8 +76,17 @@ typings/
 # we still want package.json!
 !package.json
 
+# include tslint config
+!tsconfig.json
+
+# include TypeScript config
+!tslint.json
+
 # avoid temp files
 *~
 
 # for our mac users
 .DS_Store
+
+# avoid build files
+build/**/*
