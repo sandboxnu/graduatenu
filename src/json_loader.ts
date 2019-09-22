@@ -33,6 +33,7 @@ if (!existsSync(DIR)) {
  * @param year The 4-digit year to retrieve links for
  * @returns The strings of the links for the five files.
  */
+// note: we need to do year*100 because the termId is supposed to be 6 digits: the year (4digits) followed by season (2digit).
 const getClassMapLinks = (year: number): string[] =>
 SEASONS.map((season) => getClassMapLinkForTermId((year * 100) + season));
 
@@ -41,6 +42,7 @@ SEASONS.map((season) => getClassMapLinkForTermId((year * 100) + season));
  * @param year The target year. expected as a string or number. in the form "2019".
  * @returns The names of the five files.
  */
+// note: we need to do year*100 because the termId is supposed to be 6 digits: the year (4digits) followed by season (2digit).
 const getClassMapFilePaths = (year: number): string[] => SEASONS.map((season) => getClassMapLinkLocal((year * 100) + season));
 
 /**
