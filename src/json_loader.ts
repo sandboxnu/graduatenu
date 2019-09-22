@@ -47,7 +47,12 @@ const getFileAsJson = (inputLocation: string | PathLike): Promise<any> => {
         const parsedJSON = JSON.parse(data.toString());
         resolve(parsedJSON);
       } catch (err) {
-        reject(err);
+        unlink(inputLocation, (err) => {
+          if (err) {
+            throw err;
+          }
+        });
+        resolve("Failed to parse JSON");
       }
     });
   });
@@ -109,11 +114,24 @@ const addClassMapsOfYear = async (year: number, classMapParent: INEUParentMap): 
   const jsonsResult: any[] = await Promise.all(jsons);
 
   // if reading as JSON succeeds, then add all the JSONS to parent classMap.
-  jsonsResult.forEach((item: any) => {
-    const classMap: INEUClassMap = item;
-    const termId: number = classMap.termId;
-    classMapParent.classMapMap["" + termId] = classMap;
-  });
+  for (const item of jsonsResult) {
+    // item will be undefined if failed to download/parse as json.
+    if (item === "Failed to parse JSON") {
+      continue;
+    } else {
+      const classMap: INEUClassMap = item;
+
+      // termId will actually be a String, because of its format in the file.
+      let termId: number = classMap.termId;
+      if (typeof termId === "string") {
+        termId = parseInt(termId);
+      }
+      classMapParent.classMapMap["" + termId] = classMap;
+      
+      // add this termId to the list of termids.
+      classMapParent.allTermIds.push(termId);
+    }
+  }
 
   return "success";
 };
@@ -128,27 +146,17 @@ export const loadClassMaps = async (): Promise<INEUParentMap> => {
   const years: number[] = [2018, 2019];
 
   // declare classMapParent, and add the classMaps of the years.
+  // also takes care of adding termids to parent.
   const classMapParent: INEUParentMap = {mostRecentSemester: 0, allTermIds: [], classMapMap: {}};
   const result: string[] = await Promise.all(years.map((year: number) => addClassMapsOfYear(year, classMapParent)));
 
   // adds the most recent semester's termId as a property to classMapParent.
-  const maxYear = Math.max.apply(null, years);
-  const maxSeason = Math.max.apply(null, SEASONS);
-  classMapParent.mostRecentSemester = (maxYear * 100) + maxSeason;
-
-  // adds all the termIds as a property (array form) to classMapParent, sorted.
-  const allTermIds: number[] = [];
-  years.forEach((year: number) => {
-    SEASONS.forEach((season: number) => {
-      const termId: number = (year * 100) + season;
-      allTermIds.push(termId);
-    });
-  });
+  const maxTermId = Math.max.apply(null, classMapParent.allTermIds);
+  classMapParent.mostRecentSemester = maxTermId;
 
   // ensure that they are sorted greatest => least, and set the property in classMapParent.
   classMapParent.allTermIds.sort((a1: number, a2: number) => (a2 - a1));
-  classMapParent.allTermIds = allTermIds;
-
+  
   // success! now we're done.
   return classMapParent;
 };
