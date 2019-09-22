@@ -2,20 +2,31 @@
  * This file has functions that load the classmaps that json_parser.js requires in order to lookup course information.
  */
 
-import { createWriteStream, existsSync, PathLike, readFile, unlink } from "fs";
+import { createWriteStream, existsSync, PathLike, readFile, unlink, mkdirSync } from "fs";
 import { get } from "https";
 import { INEUClassMap, INEUParentMap } from "./types";
-
-// the year
-const YEAR: number = 2019;
 
 // the possible seasons to choose from.
 // note that "years" begin in the fall of the previous year.
 // [Fall, Spring, SummerI, SummerFUll, SummerII]
 const SEASONS: number[] = [10, 30, 40, 50, 60];
 
-const SEASON_LINKS: string[] =
-SEASONS.map((season) => "https://searchneu.com/data/v2/getTermDump/neu.edu/" + YEAR + season + ".json");
+// files are hosted by SearchNEU at the following link, where ${TERMID} is replaced by a termId:
+// https://searchneu.com/data/v2/getTermDump/neu.edu/${TERMID}.json
+const getClassMapLinkForTermId = (termId: number) => {
+  return `https://searchneu.com/data/v2/getTermDump/neu.edu/${termId}.json`;
+}
+
+// files are downloaded and stored locally at the following path:
+// ./maps/${TERMID}.json
+const DIR = 'maps';
+const getClassMapLinkLocal = (termId: number) => {
+  return `./${DIR}/${termId}.json`;
+}
+// also ensure that the maps folder is created
+if (!existsSync(DIR)) {
+  mkdirSync(DIR);
+}
 
 /**
  * Provides an array of the links to the classMap files for a specified year.
@@ -23,16 +34,14 @@ SEASONS.map((season) => "https://searchneu.com/data/v2/getTermDump/neu.edu/" + Y
  * @returns The strings of the links for the five files.
  */
 const getClassMapLinks = (year: number): string[] =>
-SEASONS.map((season) => "https://searchneu.com/data/v2/getTermDump/neu.edu/" + year + season + ".json");
+SEASONS.map((season) => getClassMapLinkForTermId((year * 100) + season));
 
 /**
  * Provides an array of filepath locations to the classMap files based on a provided year.
  * @param year The target year. expected as a string or number. in the form "2019".
  * @returns The names of the five files.
  */
-const getClassMapFilePaths = (year: number): string[] => SEASONS.map((season) => "./" + year + season + ".json");
-
-const SEASON_PATHS: string[] = SEASONS.map((season) => "./" + YEAR + season + ".json");
+const getClassMapFilePaths = (year: number): string[] => SEASONS.map((season) => getClassMapLinkLocal((year * 100) + season));
 
 /**
  * Grabs a file as JSON text.
