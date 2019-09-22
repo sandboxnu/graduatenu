@@ -288,3 +288,21 @@ export interface IScheduleCourse {
  * A UserChoice is one of OR or RANGE.
  */
 export type UserChoice = ICourseRange | IOrCourse;
+
+/**
+ * A Major, containing all the requirements.
+ * @param name The name of the major.
+ * @param requirements A list of required courses for the major.
+ * @param yearVersion Which major version the user has, based on the year.
+ * @param isLanguageRequired True if a language is required.
+ * @param totalCreditsRequired The total number of credit-hours required for the major.
+ * @param nupaths The nupaths required for the major.
+ */
+export interface IMajor {
+    name: string;
+    requirements: Requirement[];
+    yearVersion: number;
+    isLanguageRequired: boolean;
+    totalCreditsRequired: number;
+    nupaths: NUPath[];
+}
