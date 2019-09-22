@@ -66,7 +66,11 @@ export interface IOldRequirement {
 /**
  * Represents a degree requirement that has not yet been satisfied.
  */
-export type Requirement = IOrCourse | IAndCourse | ICourseRange | IRequiredCourse;
+export type Requirement =
+    | IOrCourse
+    | IAndCourse
+    | ICourseRange
+    | IRequiredCourse;
 
 // TODO: with interfaces, the additional type parameter may not be necessary
 /**
@@ -167,7 +171,7 @@ export interface IInitialScheduleRep {
 export interface INEUParentMap {
     mostRecentSemester: number;
     allTermIds: number[];
-    classMapMap: {[key: string]: INEUClassMap};
+    classMapMap: { [key: string]: INEUClassMap };
 }
 
 /**
@@ -178,7 +182,7 @@ export interface INEUParentMap {
  */
 export interface INEUClassMap {
     termId: number;
-    classMap: {[key: string]: INEUCourse};
+    classMap: { [key: string]: INEUCourse };
 }
 
 /**
