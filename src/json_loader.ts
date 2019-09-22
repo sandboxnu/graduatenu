@@ -2,37 +2,48 @@
  * This file has functions that load the classmaps that json_parser.js requires in order to lookup course information.
  */
 
-import { createWriteStream, existsSync, PathLike, readFile, unlink } from "fs";
+import { createWriteStream, existsSync, PathLike, readFile, unlink, mkdirSync } from "fs";
 import { get } from "https";
 import { INEUClassMap, INEUParentMap } from "./types";
-
-// the year
-const YEAR: number = 2019;
 
 // the possible seasons to choose from.
 // note that "years" begin in the fall of the previous year.
 // [Fall, Spring, SummerI, SummerFUll, SummerII]
 const SEASONS: number[] = [10, 30, 40, 50, 60];
 
-const SEASON_LINKS: string[] =
-SEASONS.map((season) => "https://searchneu.com/data/v2/getTermDump/neu.edu/" + YEAR + season + ".json");
+// files are hosted by SearchNEU at the following link, where ${TERMID} is replaced by a termId:
+// https://searchneu.com/data/v2/getTermDump/neu.edu/${TERMID}.json
+const getClassMapLinkForTermId = (termId: number) => {
+  return `https://searchneu.com/data/v2/getTermDump/neu.edu/${termId}.json`;
+}
+
+// files are downloaded and stored locally at the following path:
+// ./maps/${TERMID}.json
+const DIR = 'maps';
+const getClassMapLinkLocal = (termId: number) => {
+  return `./${DIR}/${termId}.json`;
+}
+// also ensure that the maps folder is created
+if (!existsSync(DIR)) {
+  mkdirSync(DIR);
+}
 
 /**
  * Provides an array of the links to the classMap files for a specified year.
  * @param year The 4-digit year to retrieve links for
  * @returns The strings of the links for the five files.
  */
+// note: we need to do year*100 because the termId is supposed to be 6 digits: the year (4digits) followed by season (2digit).
 const getClassMapLinks = (year: number): string[] =>
-SEASONS.map((season) => "https://searchneu.com/data/v2/getTermDump/neu.edu/" + year + season + ".json");
+SEASONS.map((season) => getClassMapLinkForTermId((year * 100) + season));
 
 /**
  * Provides an array of filepath locations to the classMap files based on a provided year.
  * @param year The target year. expected as a string or number. in the form "2019".
  * @returns The names of the five files.
  */
-const getClassMapFilePaths = (year: number): string[] => SEASONS.map((season) => "./" + year + season + ".json");
-
-const SEASON_PATHS: string[] = SEASONS.map((season) => "./" + YEAR + season + ".json");
+// note: we need to do year*100 because the termId is supposed to be 6 digits: the year (4digits) followed by season (2digit).
+const getClassMapFilePaths = (year: number): string[] => SEASONS.map((season) => getClassMapLinkLocal((year * 100) + season));
 
 /**
  * Grabs a file as JSON text.
@@ -47,7 +58,12 @@ const getFileAsJson = (inputLocation: string | PathLike): Promise<any> => {
         const parsedJSON = JSON.parse(data.toString());
         resolve(parsedJSON);
       } catch (err) {
-        reject(err);
+        unlink(inputLocation, (err) => {
+          if (err) {
+            throw err;
+          }
+        });
+        resolve("Failed to parse JSON");
       }
     });
   });
@@ -109,11 +125,24 @@ const addClassMapsOfYear = async (year: number, classMapParent: INEUParentMap): 
   const jsonsResult: any[] = await Promise.all(jsons);
 
   // if reading as JSON succeeds, then add all the JSONS to parent classMap.
-  jsonsResult.forEach((item: any) => {
-    const classMap: INEUClassMap = item;
-    const termId: number = classMap.termId;
-    classMapParent.classMapMap["" + termId] = classMap;
-  });
+  for (const item of jsonsResult) {
+    // item will be undefined if failed to download/parse as json.
+    if (item === "Failed to parse JSON") {
+      continue;
+    } else {
+      const classMap: INEUClassMap = item;
+
+      // termId will actually be a String, because of its format in the file.
+      let termId: number = classMap.termId;
+      if (typeof termId === "string") {
+        termId = parseInt(termId);
+      }
+      classMapParent.classMapMap["" + termId] = classMap;
+      
+      // add this termId to the list of termids.
+      classMapParent.allTermIds.push(termId);
+    }
+  }
 
   return "success";
 };
@@ -128,27 +157,17 @@ export const loadClassMaps = async (): Promise<INEUParentMap> => {
   const years: number[] = [2018, 2019];
 
   // declare classMapParent, and add the classMaps of the years.
+  // also takes care of adding termids to parent.
   const classMapParent: INEUParentMap = {mostRecentSemester: 0, allTermIds: [], classMapMap: {}};
   const result: string[] = await Promise.all(years.map((year: number) => addClassMapsOfYear(year, classMapParent)));
 
   // adds the most recent semester's termId as a property to classMapParent.
-  const maxYear = Math.max.apply(null, years);
-  const maxSeason = Math.max.apply(null, SEASONS);
-  classMapParent.mostRecentSemester = (maxYear * 100) + maxSeason;
-
-  // adds all the termIds as a property (array form) to classMapParent, sorted.
-  const allTermIds: number[] = [];
-  years.forEach((year: number) => {
-    SEASONS.forEach((season: number) => {
-      const termId: number = (year * 100) + season;
-      allTermIds.push(termId);
-    });
-  });
+  const maxTermId = Math.max.apply(null, classMapParent.allTermIds);
+  classMapParent.mostRecentSemester = maxTermId;
 
   // ensure that they are sorted greatest => least, and set the property in classMapParent.
   classMapParent.allTermIds.sort((a1: number, a2: number) => (a2 - a1));
-  classMapParent.allTermIds = allTermIds;
-
+  
   // success! now we're done.
   return classMapParent;
 };
