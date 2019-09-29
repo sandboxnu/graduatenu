@@ -306,3 +306,20 @@ export interface IMajor {
     totalCreditsRequired: number;
     nupaths: NUPath[];
 }
+
+export interface INewSchedule {
+    majors: string;
+    termIds: number[];
+    schedule: {[key: number]: INewScheduleSemester}
+}
+
+export interface INewScheduleSemester {
+    termId: number;
+    courses: INewScheduleCourse[];
+}
+
+export interface INewScheduleCourse {
+    subject: string;
+    classId: number;
+    prereqs?: INEUAndPrereq | INEUOrPrereq | undefined;
+}
