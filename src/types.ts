@@ -289,37 +289,121 @@ export interface IScheduleCourse {
  */
 export type UserChoice = ICourseRange | IOrCourse;
 
+// types added for new data representation stuff.
+
 /**
  * A Major, containing all the requirements.
  * @param name The name of the major.
- * @param requirements A list of required courses for the major.
+ * @param sections a list of the sections of this major
+ * @param sectionMap an object containing the sections of this major.
  * @param yearVersion Which major version the user has, based on the year.
  * @param isLanguageRequired True if a language is required.
  * @param totalCreditsRequired The total number of credit-hours required for the major.
  * @param nupaths The nupaths required for the major.
  */
-export interface IMajor {
+export interface Major {
     name: string;
-    requirements: Requirement[];
+    sections: string[];
+    sectionMap: {[key: string]: ANDSection | ORSection }
     yearVersion: number;
     isLanguageRequired: boolean;
     totalCreditsRequired: number;
     nupaths: NUPath[];
 }
 
-export interface INewSchedule {
-    majors: string;
-    termIds: number[];
-    schedule: {[key: number]: INewScheduleSemester}
+/**
+ * A section that must have everything completed in it.
+ * @param type the type of the section
+ * @param requirements the requirements of the section
+ * @param name the name of the section
+ */
+export interface ANDSection {
+    type: "AND";
+    requirements: Requirement[];
+    name: string;
 }
 
-export interface INewScheduleSemester {
-    termId: number;
-    courses: INewScheduleCourse[];
+/**
+ * A section that has a credit requirement
+ * @param type the type of this requirement
+ * @param requirements the possible choices for earning credits
+ * @param numCreditsMin the minimum number of credits needed to satisfy this major
+ * @param numCreditsMax the maximum number of credits needed to satisfy this major
+ * @param name the name of this section
+ */
+export interface ORSection {
+    type: "OR";
+    requirements: Requirement[];
+    numCreditsMin: number;
+    numCreditsMax: number;
+    name: string;
 }
 
-export interface INewScheduleCourse {
-    subject: string;
+/**
+ * A Schedule
+ * @param years a list of the years of this object
+ * @param yearMap an object containing the year objects of this schedule
+ * @param id the id number of this schedule
+ */
+export interface Schedule {
+    years: number[];
+    yearMap: {
+        [key: number]: ScheduleYear;
+    }
+    id: number;
+}
+
+/**
+ * A ScheduleYear, representing a year of a schedule
+ * @param year the year 
+ * @param fall the fall term 
+ * @param spring the spring term
+ * @param summer1 the summer 1 term
+ * @param summer2 the summer 2 term
+ * @param isSummerFull true if the summer1 should hold the classes for summer full.
+ */
+export interface ScheduleYear {
+    year: number;
+    fall: ScheduleTerm;
+    spring: ScheduleTerm;
+    sumemer1: ScheduleTerm;
+    summer2: ScheduleTerm;
+    isSummerFull: boolean;
+}
+
+/**
+ * A ScheduleTerm, representing a term of a scheudle
+ * @param status the status of this term, on coop, classes, or inactive.
+ * @param classes a list of the classes of this term.
+ */
+export interface ScheduleTerm {
+    status: Status;
+    classes: ScheduleCourse[];
+}
+
+/**
+ * A Statis is one of on CO-OP, CLASSES, or INACTIVE
+ */
+enum Status {
+    COOP = "COOP",
+    CLASSES = "CLASSES",
+    INACTIVE = "INACTIVE",
+}
+
+/**
+ * A course of a schedule
+ * @param classId the classId of this course
+ * @param subject the subject of this course
+ * @param prereqs the prerequisites for this course
+ * @param coreqs the corequisites for this course
+ * @param numCreditsMin the minimum number of credits this course gives
+ * @param numCreditsMax the maximum number of credits this course gives
+ */
+export interface ScheduleCourse {
     classId: number;
-    prereqs?: INEUAndPrereq | INEUOrPrereq | undefined;
+    subject: string;
+    prereqs: INEUAndPrereq | INEUOrPrereq;
+    coreqs: INEUAndPrereq | INEUOrPrereq;
+    numCreditsMin: number;
+    numCreditsMax: number;
 }
