@@ -366,17 +366,25 @@ export interface ScheduleYear {
     year: number;
     fall: ScheduleTerm;
     spring: ScheduleTerm;
-    sumemer1: ScheduleTerm;
+    summer1: ScheduleTerm;
     summer2: ScheduleTerm;
     isSummerFull: boolean;
 }
 
 /**
  * A ScheduleTerm, representing a term of a scheudle
+ * @param season the season of this term
+ * @param year the year of this term
+ * @param termId the termId of this term
+ * @param id the unique id of this term
  * @param status the status of this term, on coop, classes, or inactive.
  * @param classes a list of the classes of this term.
  */
 export interface ScheduleTerm {
+    season: Season;
+    year: number;
+    termId: number;
+    id: number;
     status: Status;
     classes: ScheduleCourse[];
 }
