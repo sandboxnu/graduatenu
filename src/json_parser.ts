@@ -870,7 +870,7 @@ const addRequired = (
  * @param classMapParent The parent classMap object, with props "mostRecentSemester" and "allTermIds"
  * @returns Produces the corresponding searchNEU data for a class, if it exists. else => undefined.
  */
-const getSearchNEUData = (
+export const getSearchNEUData = (
     course:
         | ICompleteCourse
         | IRequiredCourse
