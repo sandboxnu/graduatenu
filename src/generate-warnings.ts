@@ -1,5 +1,5 @@
-import { Schedule, ScheduleCourse, INEUAndPrereq, INEUOrPrereq, ScheduleTerm } from "./types";
-import { courseCode } from "./json_parser";
+import { Schedule, ScheduleCourse, INEUAndPrereq, INEUOrPrereq, ScheduleTerm, IInitialScheduleRep, INEUCourse, ICompleteCourse, ScheduleYear, Season, Status, INEUParentMap } from "./types";
+import { courseCode, getSearchNEUData } from "./json_parser";
 
 /**
  * This module contains functions that generate warnings based off a schedule input.
@@ -32,7 +32,7 @@ interface CourseTakenTracker {
 * @param prereq The prerequisite object to add an edge for (maybe).
 * @returns true if the full prereq exists in the graph "graph'"
 */
-const doesPrereqExist = (prereq: INEUAndPrereq | INEUOrPrereq, tracker: CourseTakenTracker): boolean => {
+const doesPrereqExist = (prereq: INEUAndPrereq | INEUOrPrereq, tracker: CourseTakenTracker): string | undefined => {
   // if prereq is "and", check and.
   if (prereq.type === "and") {
       return doesAndPrereqExist(prereq, tracker);
@@ -47,26 +47,26 @@ const doesPrereqExist = (prereq: INEUAndPrereq | INEUOrPrereq, tracker: CourseTa
 * @param prereq The prerequisite objec to add an edge for (maybe).
 * @returns true if the full prereq exists in the graph "graph"
 */
-const doesAndPrereqExist = (prereq: INEUAndPrereq, tracker: CourseTakenTracker): boolean => {
+const doesAndPrereqExist = (prereq: INEUAndPrereq, tracker: CourseTakenTracker): string | undefined => {
   // make sure each of the values exists.
   for (const item of prereq.values) {
       if ("type" in item) {
           // does the graph contain the entire prereq?
-          if (!doesPrereqExist(item, tracker)) {
-              return false;
+          let prereqResult = doesPrereqExist(item, tracker);
+          if (prereqResult) {
+            return `AND: {${prereqResult}}`;
           }
       } else {
           const from = courseCode(item);
-          
           // does the graph contain an edge?
           if (!tracker.contains(courseCode(item))) {
-              return false;
+              return `AND: ${courseCode(item)}`;
           }
       }
   }
   
   // if we hit this point, everything passed.
-  return true;
+  return undefined;
 };
 
 /**
@@ -75,23 +75,30 @@ const doesAndPrereqExist = (prereq: INEUAndPrereq, tracker: CourseTakenTracker):
 * @param prereq The prerequisite object to add an edge for (mabye).
 * @returns true if the full prerequisite object exists in the graph "graph"
 */
-const doesOrPrereqExist = (prereq: INEUOrPrereq, tracker: CourseTakenTracker): boolean => {
+const doesOrPrereqExist = (prereq: INEUOrPrereq, tracker: CourseTakenTracker): string | undefined => {
   // if any one of the prereqs exists, return true.
   for (const item of prereq.values) {
       if ("type" in item) {
-          if (doesPrereqExist(item, tracker)) {
-              return true;
+        let prereqResult = doesPrereqExist(item, tracker);
+          if (prereqResult === undefined) {
+              return undefined;
           }
       } else {
           const from = courseCode(item);
           if (tracker.contains(courseCode(item))) {
-              return true;
+              return undefined;
           }
       }
   }
   
   // nothing existed, so return false
-  return false;
+  return `OR: ${prereq.values.map(function(prereq) {
+    if ("type" in prereq) {
+      return "{Object}";
+    } else {
+      return courseCode(prereq);
+    }
+  })}`;
 };
 
 /**
@@ -117,29 +124,29 @@ export function produceWarnings(schedule: Schedule): IWarning[] {
   };
 
   // list of warnings
-  const warnings: IWarning[] = [];
+  let warnings: IWarning[] = [];
 
   // for each of the years in schedule, retrieve the corresponding map.
   for (const yearNum of schedule.years) {
     const year = schedule.yearMap[yearNum];
 
     // check all courses for warnings, and then add them, term by term.
-    warnings.concat(produceAllWarnings(year.fall, tracker));
+    warnings = warnings.concat(produceAllWarnings(year.fall, tracker));
     addCoursesToTracker(year.fall, tracker);
 
-    warnings.concat(produceAllWarnings(year.spring, tracker));
+    warnings = warnings.concat(produceAllWarnings(year.spring, tracker));
     addCoursesToTracker(year.spring, tracker);
     
     // if is summer full, only check summer I.
     // shouldn't matter, summerII would just be empty.
     if (year.isSummerFull) {
-      warnings.concat(produceAllWarnings(year.summer1, tracker));
+      warnings = warnings.concat(produceAllWarnings(year.summer1, tracker));
       addCoursesToTracker(year.summer1, tracker);
     } else {
-      warnings.concat(produceAllWarnings(year.summer1, tracker));
+      warnings = warnings.concat(produceAllWarnings(year.summer1, tracker));
       addCoursesToTracker(year.summer1, tracker);
 
-      warnings.concat(produceAllWarnings(year.summer2, tracker));
+      warnings = warnings.concat(produceAllWarnings(year.summer2, tracker));
       addCoursesToTracker(year.summer2, tracker);
     
     }
@@ -166,11 +173,11 @@ function addCoursesToTracker(toAdd: ScheduleTerm, tracker: CourseTakenTracker): 
  * @param tracker the course taken tracker
  */
 function produceAllWarnings(term: ScheduleTerm, tracker: CourseTakenTracker): IWarning[] {
-  const warnings: IWarning[] = [];
-  warnings.concat(checkPrerequisites(term.classes, tracker, term.termId));
-  warnings.concat(checkCorequisites(term.classes, tracker, term.termId));
-  warnings.concat(checkSemesterCredits(term.classes, tracker, term.termId));
-  warnings.concat(checkSemesterOverload(term.classes, tracker, term.termId));
+  let warnings: IWarning[] = [];
+  warnings = warnings.concat(checkPrerequisites(term.classes, tracker, term.termId));
+  warnings = warnings.concat(checkCorequisites(term.classes, tracker, term.termId));
+  warnings = warnings.concat(checkSemesterCredits(term.classes, tracker, term.termId));
+  warnings = warnings.concat(checkSemesterOverload(term.classes, tracker, term.termId));
   return warnings;
   
 }
@@ -186,12 +193,15 @@ function checkPrerequisites(toCheck: ScheduleCourse[], tracker: CourseTakenTrack
 
     // tracker has all courses taken.
     for (const course of toCheck) {
-      if (!doesPrereqExist(course.prereqs, tracker)) {
-        // if prereq doesn't exist, produce a warning.
-        warnings.push({
-          message: `${courseCode(course)}: prereqs not satisfied.`,
-          termId: termId
-        });
+      if (course.prereqs) {
+        let prereqResult = doesPrereqExist(course.prereqs, tracker);
+        if (prereqResult) {
+          // if prereq doesn't exist, produce a warning.
+          warnings.push({
+            message: `${courseCode(course)}: prereqs not satisfied: ${prereqResult}`,
+            termId: termId
+          });
+        }
       }
     }
     return warnings;
@@ -228,11 +238,15 @@ function checkCorequisites(toCheck: ScheduleCourse[], tracker: CourseTakenTracke
 
     // check each course.
     for (const course of toCheck) {
-      if (!doesPrereqExist(course.coreqs, coreqTracker)) {
-        warnings.push({
-          message: `${courseCode(course)}: coreqs not satisfied.`,
-          termId: termId,
-        });
+      if (course.coreqs) {
+        let prereqResult = doesPrereqExist(course.coreqs, coreqTracker)
+        if (prereqResult) {
+          warnings.push({
+            message: `${courseCode(course)}: coreqs not satisfied: ${prereqResult}`,
+            termId: termId,
+          });
+        }
+        
       }
     }
 
@@ -291,4 +305,156 @@ function checkSemesterOverload(toCheck: ScheduleCourse[], tracker: CourseTakenTr
       return [];
     }
     
+}
+
+/**
+ * converts from old schedule to new schedule
+ * @param sched the old schedule.
+ */
+export function oldToNew(old: IInitialScheduleRep, parent: INEUParentMap): Schedule {
+
+  const byTermId: {
+    termIds: number[],
+    termMap: {[key: number]: ScheduleCourse[]}
+  } = {
+    termIds: [],
+    termMap: {}
+  };
+
+  // parse all courses in dude.
+  let allCourses: ICompleteCourse[] = [];
+  allCourses = allCourses.concat(old.completed.courses);
+  allCourses = allCourses.concat(old.inprogress.courses);
+  for (const course of allCourses) {
+
+    // if doesn't include termId, add.
+    if (!byTermId.termIds.includes(course.termId)) {
+      byTermId.termIds.push(course.termId);
+      byTermId.termMap[course.termId] = [];
+    }
+
+    // get the searchNEU version.
+    const detailed: INEUCourse | undefined = getSearchNEUData(course, parent);
+    if (detailed) {
+      byTermId.termMap[detailed.termId].push({
+        classId: detailed.classId,
+        subject: detailed.subject,
+        prereqs: detailed.prereqs,
+        coreqs: detailed.coreqs,
+        numCreditsMin: detailed.minCredits,
+        numCreditsMax: detailed.maxCredits,
+      });
+    } else {
+      // it probably exists, but might not in the termId.
+      const mostRecent: INEUCourse | undefined = getSearchNEUData({
+        subject: course.subject, 
+        classId: course.classId
+      }, parent);
+
+      if (mostRecent) {
+        byTermId.termMap[course.termId].push({
+          classId: course.classId,
+          subject: course.subject,
+          prereqs: mostRecent.prereqs,
+          coreqs: mostRecent.coreqs,
+          numCreditsMin: mostRecent.minCredits,
+          numCreditsMax: mostRecent.maxCredits,
+        });
+      } else {
+        byTermId.termMap[course.termId].push({
+          classId: course.classId,
+          subject: course.subject,
+          prereqs: undefined,
+          coreqs: undefined,
+          numCreditsMin: course.creditHours,
+          numCreditsMax: course.creditHours,
+        });
+      }
+    }
+    
+  }
+
+  // add to the born child.
+  const born: Schedule = {
+    years: [],
+    yearMap: {},
+    id: 0
+  }
+
+  // get all the years
+  let years: number[] = [];
+  for (const termId of byTermId.termIds) {
+    if (!years.includes(Math.floor(termId / 100))) {
+      years.push(Math.floor(termId / 100));
+    }
+  }
+
+  // create each year object
+  for (const year of years) {
+    const yearObject: ScheduleYear = {
+      year: year,
+      fall: {
+        season: Season.FL,
+        year: year,
+        termId: (year * 100) + 10,
+        id: 10,
+        status: Status.INACTIVE,
+        classes: [],
+      },
+      spring: {
+        season: Season.SP,
+        year: year,
+        termId: (year * 100) + 30,
+        id: 30,
+        status: Status.INACTIVE,
+        classes: [],
+      },
+      summer1: {
+        season: Season.S1,
+        year: year,
+        termId: (year * 100) + 40,
+        id: 40,
+        status: Status.INACTIVE,
+        classes: [],
+      },
+      summer2: {
+        season: Season.S2,
+        year: year,
+        termId: (year * 100) + 60,
+        id: 60,
+        status: Status.INACTIVE,
+        classes: [],
+      },
+      isSummerFull: false
+    };
+
+    if (byTermId.termMap[(year * 100) + 10]) {
+      for (const course of byTermId.termMap[(year * 100) + 10]) {
+        yearObject.fall.status = Status.CLASSES;
+        yearObject.fall.classes.push(course);
+      }
+    }
+    if (byTermId.termMap[((year * 100) + 30)]) {
+      for (const course of byTermId.termMap[(year * 100) + 30]) {
+        yearObject.spring.status = Status.CLASSES;
+        yearObject.spring.classes.push(course);
+      }
+    }
+    if (byTermId.termMap[((year * 100) + 40)]) {
+      for (const course of byTermId.termMap[(year * 100) + 40]) {
+        yearObject.summer1.status = Status.CLASSES;
+        yearObject.summer1.classes.push(course);
+      }
+    }
+    if (byTermId.termMap[((year * 100) + 60)]) {
+      for (const course of byTermId.termMap[(year * 100) + 60]) {
+        yearObject.summer2.status = Status.CLASSES;
+        yearObject.summer2.classes.push(course);
+      }
+    }
+    born.years.push(year);
+    born.yearMap[year] = yearObject;
+  }
+
+  return born;
 }
