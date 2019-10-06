@@ -1,24 +1,32 @@
 {
-    "private": true,
-    "workspaces": [
-        "frontend",
-        "backend"
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "start": "cd frontend && react-scripts start",
+    "build": "cd frontend && react-scripts build",
+    "test": "jest",
+    "eject": "cd frontend && react-scripts eject",
+    "type-check": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "husky": "^3.0.5"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
     ],
-    "scripts": {
-        "start": "cd frontend && react-scripts start",
-        "build": "cd frontend && react-scripts build",
-        "test": "jest",
-        "eject": "cd frontend && react-scripts eject",
-        "type-check": "tsc --noEmit"
-    },
-    "jest": {
-        "moduleFileExtensions": [
-            "ts",
-            "tsx",
-            "js"
-        ],
-        "transform": {
-            "\\.(ts|tsx)$": "ts-jest"
-        }
+    "transform": {
+      "\\.(ts|tsx)$": "ts-jest"
     }
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
+  }
 }
