@@ -10,5 +10,15 @@
         "test": "jest",
         "eject": "cd frontend && react-scripts eject",
         "type-check": "tsc --noEmit"
+    },
+    "jest": {
+        "moduleFileExtensions": [
+            "ts",
+            "tsx",
+            "js"
+        ],
+        "transform": {
+            "\\.(ts|tsx)$": "ts-jest"
+        }
     }
 }
