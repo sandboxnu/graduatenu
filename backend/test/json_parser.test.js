@@ -2,8 +2,6 @@
 const json_loader = require("../src/json_loader.ts");
 const json_parser = require("../src/json_parser.ts");
 
-import {} from "./mock_parsed_audits/";
-
 const fs = require("fs");
 
 // custom matchers for Jest testing.
