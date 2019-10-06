@@ -1,39 +1,32 @@
 {
-    "name": "graduatenu",
-    "version": "1.0.0",
-    "description": "A degree scheduling service for Northeastern students.",
-    "main": "// TODO: find entry point",
-    "repository": "https://github.com/sandboxneu/graduatenu.git",
-    "author": "Jacob Chvatal and Alexander Takayama of Northeastern Sandbox",
-    "license": "AGPL-3.0-or-later",
-    "private": false,
-    "devDependencies": {
-        "@types/jest": "^24.0.18",
-        "@types/node": "^12.7.2",
-        "husky": "^3.0.5",
-        "jest": "^24.9.0",
-        "prettier": "1.18.2",
-        "pretty-quick": "^1.11.1",
-        "ts-jest": "^24.0.2",
-        "typescript": "^3.6.2"
-    },
-    "husky": {
-        "hooks": {
-            "pre-commit": "pretty-quick --staged"
-        }
-    },
-    "scripts": {
-        "test": "jest"
-    },
-    "dependencies": {},
-    "jest": {
-        "moduleFileExtensions": [
-            "ts",
-            "tsx",
-            "js"
-        ],
-        "transform": {
-            "\\.(ts|tsx)$": "ts-jest"
-        }
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "start": "cd frontend && react-scripts start",
+    "build": "cd frontend && react-scripts build",
+    "test": "jest",
+    "eject": "cd frontend && react-scripts eject",
+    "type-check": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "husky": "^3.0.5"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "transform": {
+      "\\.(ts|tsx)$": "ts-jest"
     }
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
+  }
 }

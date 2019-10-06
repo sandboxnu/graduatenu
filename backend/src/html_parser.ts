@@ -42,6 +42,10 @@ class AuditToJSON {
 
         // TODO: filter out all HTML tags here, making text identifiers independent of them
 
+        // TODO: fix temp variables
+        this.auditYear = 0;
+        this.gradDate = new Date();
+
         this.majors = [];
         this.minors = [];
 
