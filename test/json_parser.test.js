@@ -258,4 +258,7 @@ g.addEdge("a", "b");
 g.addEdge("b", "c");
 g.addEdge("b", "d");
 g.addEdge("c", "d");
-expect(g.toTopologicalOrdering()).toBeValidTopologicalOrdering(g.adjList);
+test("Test that toTopologicalOrdering() produces a topological ordering", () => {
+    expect(g.toTopologicalOrdering()).toBeValidTopologicalOrdering(g.adjList);
+});
+
