@@ -392,7 +392,7 @@ export interface ScheduleTerm {
 /**
  * A Statis is one of on CO-OP, CLASSES, or INACTIVE
  */
-enum Status {
+export enum Status {
     COOP = "COOP",
     CLASSES = "CLASSES",
     INACTIVE = "INACTIVE",
@@ -410,8 +410,8 @@ enum Status {
 export interface ScheduleCourse {
     classId: number;
     subject: string;
-    prereqs: INEUAndPrereq | INEUOrPrereq;
-    coreqs: INEUAndPrereq | INEUOrPrereq;
+    prereqs?: INEUAndPrereq | INEUOrPrereq;
+    coreqs?: INEUAndPrereq | INEUOrPrereq;
     numCreditsMin: number;
     numCreditsMax: number;
 }
