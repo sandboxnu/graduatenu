@@ -27,8 +27,6 @@ test("Tests warnings produce properly for cs_sched_1.json", () => {
   let cs_sched_obj = JSON.parse(cs_sched);
   let cs_sched_warn = warning_generator.produceWarnings(cs_sched_obj);
   
-  console.log(cs_sched_warn);
-  
   expect(cs_sched_warn.length).toBeGreaterThan(0);
   
   for (const warning of cs_sched_warn) {
@@ -84,9 +82,7 @@ test("Tests warnings produce properly for cs_sched_2.json", () => {
   let cs_sched = fs.readFileSync("./test/mock_schedules/cs_sched_2.json", "utf-8");
   let cs_sched_obj = JSON.parse(cs_sched);
   let cs_sched_warn = warning_generator.produceWarnings(cs_sched_obj);
-  
-  console.log(cs_sched_warn);
-  
+
   expect(cs_sched_warn.length).toBeGreaterThan(0);
   
   for (const warning of cs_sched_warn) {
