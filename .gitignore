@@ -62,16 +62,14 @@ typings/
 
 # degree audits for testing.
 *.html
-!cs_audit.html
-!cs_audit2.html
-!cs_audit3.html
-!cs_math_grad_audit.html
-!me_audit.html
+!test/mock_audits/*
 
 # parsed degree jsons for testing.
 *.json
-!cs_json.json
-!cs_json2.json
+!test/mock_parsed_audits/*
+
+# schedules for testing
+!test/mock_schedules/*
 
 # we still want package.json!
 !package.json
