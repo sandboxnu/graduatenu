@@ -304,7 +304,7 @@ export type UserChoice = ICourseRange | IOrCourse;
 export interface Major {
     name: string;
     sections: string[];
-    sectionMap: {[key: string]: ANDSection | ORSection }
+    sectionMap: { [key: string]: ANDSection | ORSection };
     yearVersion: number;
     isLanguageRequired: boolean;
     totalCreditsRequired: number;
@@ -349,14 +349,14 @@ export interface Schedule {
     years: number[];
     yearMap: {
         [key: number]: ScheduleYear;
-    }
+    };
     id: number;
 }
 
 /**
  * A ScheduleYear, representing a year of a schedule
- * @param year the year 
- * @param fall the fall term 
+ * @param year the year
+ * @param fall the fall term
  * @param spring the spring term
  * @param summer1 the summer 1 term
  * @param summer2 the summer 2 term
@@ -414,4 +414,21 @@ export interface ScheduleCourse {
     coreqs?: INEUAndPrereq | INEUOrPrereq;
     numCreditsMin: number;
     numCreditsMax: number;
+}
+
+/**
+ * A Warning.
+ */
+export interface IWarning {
+    message: string;
+    termId: number;
+}
+
+/**
+ * Given the {@function courseCode} returns true if the course has been taken.
+ */
+export interface CourseTakenTracker {
+    contains: (input: string) => boolean;
+    addCourses: (toAdd: string[]) => void;
+    addCourse: (toAdd: string) => void;
 }

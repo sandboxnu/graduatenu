@@ -14,6 +14,7 @@ import {
     ISchedule,
     IScheduleCourse,
     UserChoice,
+    CourseTakenTracker,
 } from "./types";
 
 /**
@@ -370,90 +371,111 @@ export class Graph<T> {
  * @param course The course to get the code of.
  * @returns The courseCode of the course.
  */
-export const courseCode = (course: ICompleteCourse | IRequiredCourse | INEUCourse | INEUPrereqCourse | IScheduleCourse) => {
+export const courseCode = (
+    course:
+        | ICompleteCourse
+        | IRequiredCourse
+        | INEUCourse
+        | INEUPrereqCourse
+        | IScheduleCourse
+) => {
     return "" + course.subject + course.classId;
 };
 
-
 /**
-* Checks whether or not the prereq's edges exist in the graph "graph"
-* @param to The classCode of the node to point to
-* @param prereq The prerequisite object to add an edge for (maybe).
-* @returns true if the full prereq exists in the graph "graph'"
-*/
-export const doesPrereqExist = (to: string, prereq: INEUAndPrereq | INEUOrPrereq, graph: Graph<String>): boolean => {
+ * Checks whether or not the prereq's edges exist in the graph "graph"
+ * @param to The classCode of the node to point to
+ * @param prereq The prerequisite object to add an edge for (maybe).
+ * @returns true if the full prereq exists in the graph "graph'"
+ */
+export const doesPrereqExist = (
+    prereq: INEUAndPrereq | INEUOrPrereq,
+    tracker: CourseTakenTracker
+): string | undefined => {
     // if prereq is "and", check and.
     if (prereq.type === "and") {
-        return doesAndPrereqExist(to, prereq, graph);
+        return doesAndPrereqExist(prereq, tracker);
     } else {
-        return doesOrPrereqExist(to, prereq, graph);
+        return doesOrPrereqExist(prereq, tracker);
     }
 };
 
 /**
-*
-* @param to The classCode of the node to point to
-* @param prereq The prerequisite objec to add an edge for (maybe).
-* @returns true if the full prereq exists in the graph "graph"
-*/
-const doesAndPrereqExist = (to: string, prereq: INEUAndPrereq, graph: Graph<String>): boolean => {
+ *
+ * @param to The classCode of the node to point to
+ * @param prereq The prerequisite objec to add an edge for (maybe).
+ * @returns true if the full prereq exists in the graph "graph"
+ */
+const doesAndPrereqExist = (
+    prereq: INEUAndPrereq,
+    tracker: CourseTakenTracker
+): string | undefined => {
     // make sure each of the values exists.
     for (const item of prereq.values) {
         if ("type" in item) {
             // does the graph contain the entire prereq?
-            if (!doesPrereqExist(to, item, graph)) {
-                return false;
+            let prereqResult = doesPrereqExist(item, tracker);
+            if (prereqResult) {
+                return `AND: {${prereqResult}}`;
             }
         } else {
             const from = courseCode(item);
-            
             // does the graph contain an edge?
-            if (!graph.hasEdge(from, to)) {
-                return false;
+            if (!tracker.contains(courseCode(item))) {
+                return `AND: ${courseCode(item)}`;
             }
         }
     }
-    
+
     // if we hit this point, everything passed.
-    return true;
+    return undefined;
 };
 
 /**
-*
-* @param to The classCode of the node to point to
-* @param prereq The prerequisite object to add an edge for (mabye).
-* @returns true if the full prerequisite object exists in the graph "graph"
-*/
-const doesOrPrereqExist = (to: string, prereq: INEUOrPrereq, graph: Graph<String>): boolean => {
+ *
+ * @param to The classCode of the node to point to
+ * @param prereq The prerequisite object to add an edge for (mabye).
+ * @returns true if the full prerequisite object exists in the graph "graph"
+ */
+const doesOrPrereqExist = (
+    prereq: INEUOrPrereq,
+    tracker: CourseTakenTracker
+): string | undefined => {
     // if any one of the prereqs exists, return true.
     for (const item of prereq.values) {
         if ("type" in item) {
-            if (doesPrereqExist(to, item, graph)) {
-                return true;
+            let prereqResult = doesPrereqExist(item, tracker);
+            if (prereqResult === undefined) {
+                return undefined;
             }
         } else {
-            const from = courseCode(item);
-            if (graph.hasEdge(from, to)) {
-                return true;
+            if (tracker.contains(courseCode(item))) {
+                return undefined;
             }
         }
     }
-    
+
     // nothing existed, so return false
-    return false;
+    return `OR: ${prereq.values.map(function(prereq) {
+        if ("type" in prereq) {
+            return "{Object}";
+        } else {
+            return courseCode(prereq);
+        }
+    })}`;
 };
 
 /**
-* Filters and simplifies the provided prereq object.
-* If a prereq does not exist, then it is undefined. Ignores courses marked as "missing".
-* @param completed The completed classes (in SearchNEU format).
-* @param prereqObj The prereq object to filter
-* @returns The simplified prerequisite object.
-*/
+ * Filters and simplifies the provided prereq object.
+ * If a prereq does not exist, then it is undefined. Ignores courses marked as "missing".
+ * @param completed The completed classes (in SearchNEU format).
+ * @param prereqObj The prereq object to filter
+ * @returns The simplified prerequisite object.
+ */
 const filterAndSimplifyPrereqs = (
     completed: INEUCourse[],
     prereqObj: INEUAndPrereq | INEUOrPrereq
-    ): undefined | INEUAndPrereq | INEUOrPrereq => {
+): undefined | INEUAndPrereq | INEUOrPrereq => {
     // a prereq is an object and has the following properties:
     // "type": one of "and" or "or"
     // "values": an array [] of course objects or more prereqs
@@ -633,6 +655,12 @@ const createPrerequisiteGraph = (
 
     // helper functions for doing prereq graph edges.
     // rely on having local reference "graph" available.
+    const tracker: CourseTakenTracker = {
+        contains: (code: string) => !graph.hasVertex(code),
+        addCourse: (code: string) => graph.addVertex(code),
+        addCourses: (toAdd: string[]) =>
+            toAdd.map(single => graph.addVertex(single)),
+    };
 
     // following functions rely on local reference "completed"
 
@@ -736,7 +764,7 @@ const createPrerequisiteGraph = (
 
                 // if we already have the prereq, then mark.
                 // todo: get rid of calling doesPrereqExist causing circular loops.
-                if (doesPrereqExist(to, subPrereq, graph)) {
+                if (doesPrereqExist(subPrereq, tracker)) {
                     markPrereq(to, prereq);
                     return;
                 }

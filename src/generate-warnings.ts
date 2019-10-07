@@ -11,8 +11,10 @@ import {
     Season,
     Status,
     INEUParentMap,
+    CourseTakenTracker,
+    IWarning,
 } from "./types";
-import { courseCode, getSearchNEUData } from "./json_parser";
+import { courseCode, getSearchNEUData, doesPrereqExist } from "./json_parser";
 
 /**
  * This module contains functions that generate warnings based off a schedule input.
@@ -21,106 +23,6 @@ import { courseCode, getSearchNEUData } from "./json_parser";
  *
  * Functions produce warnings in the same order, where each list corresponds to each semester.
  */
-
-/**
- * A Warning.
- */
-interface IWarning {
-    message: string;
-    termId: number;
-}
-
-/**
- * Given the {@function courseCode} returns true if the course has been taken.
- */
-interface CourseTakenTracker {
-    contains: (input: string) => boolean;
-    addCourses: (toAdd: string[]) => void;
-    addCourse: (toAdd: string) => void;
-}
-
-/**
- * Checks whether or not the prereq's edges exist in the graph "graph"
- * @param to The classCode of the node to point to
- * @param prereq The prerequisite object to add an edge for (maybe).
- * @returns true if the full prereq exists in the graph "graph'"
- */
-const doesPrereqExist = (
-    prereq: INEUAndPrereq | INEUOrPrereq,
-    tracker: CourseTakenTracker
-): string | undefined => {
-    // if prereq is "and", check and.
-    if (prereq.type === "and") {
-        return doesAndPrereqExist(prereq, tracker);
-    } else {
-        return doesOrPrereqExist(prereq, tracker);
-    }
-};
-
-/**
- *
- * @param to The classCode of the node to point to
- * @param prereq The prerequisite objec to add an edge for (maybe).
- * @returns true if the full prereq exists in the graph "graph"
- */
-const doesAndPrereqExist = (
-    prereq: INEUAndPrereq,
-    tracker: CourseTakenTracker
-): string | undefined => {
-    // make sure each of the values exists.
-    for (const item of prereq.values) {
-        if ("type" in item) {
-            // does the graph contain the entire prereq?
-            let prereqResult = doesPrereqExist(item, tracker);
-            if (prereqResult) {
-                return `AND: {${prereqResult}}`;
-            }
-        } else {
-            const from = courseCode(item);
-            // does the graph contain an edge?
-            if (!tracker.contains(courseCode(item))) {
-                return `AND: ${courseCode(item)}`;
-            }
-        }
-    }
-
-    // if we hit this point, everything passed.
-    return undefined;
-};
-
-/**
- *
- * @param to The classCode of the node to point to
- * @param prereq The prerequisite object to add an edge for (mabye).
- * @returns true if the full prerequisite object exists in the graph "graph"
- */
-const doesOrPrereqExist = (
-    prereq: INEUOrPrereq,
-    tracker: CourseTakenTracker
-): string | undefined => {
-    // if any one of the prereqs exists, return true.
-    for (const item of prereq.values) {
-        if ("type" in item) {
-            let prereqResult = doesPrereqExist(item, tracker);
-            if (prereqResult === undefined) {
-                return undefined;
-            }
-        } else {
-            if (tracker.contains(courseCode(item))) {
-                return undefined;
-            }
-        }
-    }
-
-    // nothing existed, so return false
-    return `OR: ${prereq.values.map(function(prereq) {
-        if ("type" in prereq) {
-            return "{Object}";
-        } else {
-            return courseCode(prereq);
-        }
-    })}`;
-};
 
 /**
  * Produces warnings for a schedule.
