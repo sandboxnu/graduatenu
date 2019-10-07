@@ -71,6 +71,9 @@ typings/
 # schedules for testing
 !test/mock_schedules/*
 
+# searchNEU classmap jsons.
+!maps/*
+
 # we still want package.json!
 !package.json
 
