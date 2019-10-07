@@ -22,7 +22,7 @@ const fs = require("fs");
 test("Tests warnings produce properly for cs_sched_1.json", () => {
   // read in a schedule
   let cs_sched = fs.readFileSync(
-    "./test/mock_schedules/cs_sched_1.json",
+    "./backend/test/mock_schedules/cs_sched_1.json",
     "utf-8"
   );
   let cs_sched_obj = JSON.parse(cs_sched);
@@ -79,7 +79,7 @@ test("Tests warnings produce properly for cs_sched_1.json", () => {
 test("Tests warnings produce properly for cs_sched_2.json", () => {
   // read in a schedule
   let cs_sched = fs.readFileSync(
-    "./test/mock_schedules/cs_sched_2.json",
+    "./backend/test/mock_schedules/cs_sched_2.json",
     "utf-8"
   );
   let cs_sched_obj = JSON.parse(cs_sched);
