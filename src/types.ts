@@ -390,7 +390,7 @@ export interface ScheduleTerm {
 }
 
 /**
- * A Statis is one of on CO-OP, CLASSES, or INACTIVE
+ * A Status is one of on CO-OP, CLASSES, or INACTIVE
  */
 export enum Status {
     COOP = "COOP",
