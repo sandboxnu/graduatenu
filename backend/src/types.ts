@@ -3,30 +3,30 @@
  * Each two-character NUPath directly corresponds to Northeastern's abbreviation of the requirement.
  */
 export enum NUPath {
-    ND = "ND",
-    EI = "EI",
-    IC = "IC",
-    FQ = "FQ",
-    SI = "SI",
-    AD = "AD",
-    DD = "DD",
-    ER = "ER",
-    WF = "WF",
-    WD = "WD",
-    WI = "WI",
-    EX = "EX",
-    CE = "CE",
+  ND = "ND",
+  EI = "EI",
+  IC = "IC",
+  FQ = "FQ",
+  SI = "SI",
+  AD = "AD",
+  DD = "DD",
+  ER = "ER",
+  WF = "WF",
+  WD = "WD",
+  WI = "WI",
+  EX = "EX",
+  CE = "CE",
 }
 
 /**
  * Represents one of the seasons in which a student can take a course, as abbreviated by Northeastern.
  */
 export enum Season {
-    FL = "FL",
-    SP = "SP",
-    S1 = "S1",
-    S2 = "S2",
-    SF = "SF",
+  FL = "FL",
+  SP = "SP",
+  S1 = "S1",
+  S2 = "S2",
+  SF = "SF",
 }
 
 /**
@@ -41,14 +41,14 @@ export enum Season {
  * @param termId - Northeastern's identifier for the term during which this course was taken.
  */
 export interface ICompleteCourse {
-    hon: boolean;
-    subject: string;
-    classId: number;
-    name: string;
-    creditHours: number;
-    season: Season;
-    year: number;
-    termId: number;
+  hon: boolean;
+  subject: string;
+  classId: number;
+  name: string;
+  creditHours: number;
+  season: Season;
+  year: number;
+  termId: number;
 }
 
 /**
@@ -56,21 +56,21 @@ export interface ICompleteCourse {
  * todo: This will be replaced with the future representations (found below).
  */
 export interface IOldRequirement {
-    classId: number;
-    subject?: string;
-    num_required?: number;
-    classId2?: number;
-    list?: number[];
+  classId: number;
+  subject?: string;
+  num_required?: number;
+  classId2?: number;
+  list?: number[];
 }
 
 /**
  * Represents a degree requirement that has not yet been satisfied.
  */
 export type Requirement =
-    | IOrCourse
-    | IAndCourse
-    | ICourseRange
-    | IRequiredCourse;
+  | IOrCourse
+  | IAndCourse
+  | ICourseRange
+  | IRequiredCourse;
 
 // TODO: with interfaces, the additional type parameter may not be necessary
 /**
@@ -78,8 +78,8 @@ export type Requirement =
  * @param courses: A list of courses, one of which can be taken to satisfy this requirement.
  */
 export interface IOrCourse {
-    type: "OR";
-    courses: Requirement[];
+  type: "OR";
+  courses: Requirement[];
 }
 
 /**
@@ -87,8 +87,8 @@ export interface IOrCourse {
  * @param courses - A list of courses, all of which must be taken to satisfy this requirement.
  */
 export interface IAndCourse {
-    type: "AND";
-    courses: Requirement[];
+  type: "AND";
+  courses: Requirement[];
 }
 
 /**
@@ -98,9 +98,9 @@ export interface IAndCourse {
  * @param ranges - The ranges of courses from which courses can be selected.
  */
 export interface ICourseRange {
-    type: "RANGE";
-    creditsRequired: number;
-    ranges: ISubjectRange[];
+  type: "RANGE";
+  creditsRequired: number;
+  ranges: ISubjectRange[];
 }
 
 /**
@@ -110,9 +110,9 @@ export interface ICourseRange {
  * @param idRangeEnd - The classId at the end of the course range.
  */
 export interface ISubjectRange {
-    subject: string;
-    idRangeStart: number;
-    idRangeEnd: number;
+  subject: string;
+  idRangeStart: number;
+  idRangeEnd: number;
 }
 
 /**
@@ -121,9 +121,9 @@ export interface ISubjectRange {
  * @param subject - The subject that the course is concerned with, such as CS (Computer Science).
  */
 export interface IRequiredCourse {
-    type: "COURSE";
-    classId: number;
-    subject: string;
+  type: "COURSE";
+  classId: number;
+  subject: string;
 }
 
 /**
@@ -140,24 +140,24 @@ export interface IRequiredCourse {
  * @param courses - The courses required or satisfied.
  */
 export interface IInitialScheduleRep {
-    completed: {
-        nupaths: NUPath[];
-        courses: ICompleteCourse[];
-    };
-    inprogress: {
-        courses: ICompleteCourse[];
-        nupaths: NUPath[];
-    };
-    requirements: {
-        courses: IOldRequirement[];
-        nupaths: NUPath[];
-    };
-    data: {
-        majors: string[];
-        minors: string[];
-        auditYear: number;
-        gradDate: Date;
-    };
+  completed: {
+    nupaths: NUPath[];
+    courses: ICompleteCourse[];
+  };
+  inprogress: {
+    courses: ICompleteCourse[];
+    nupaths: NUPath[];
+  };
+  requirements: {
+    courses: IOldRequirement[];
+    nupaths: NUPath[];
+  };
+  data: {
+    majors: string[];
+    minors: string[];
+    auditYear: number;
+    gradDate: Date;
+  };
 }
 
 // json_loader.ts types for ScheduleNEU json file reading.
@@ -169,9 +169,9 @@ export interface IInitialScheduleRep {
  * @param allTermIds A list of all the termIds contained in the intermediate map object.
  */
 export interface INEUParentMap {
-    mostRecentSemester: number;
-    allTermIds: number[];
-    classMapMap: { [key: string]: INEUClassMap };
+  mostRecentSemester: number;
+  allTermIds: number[];
+  classMapMap: { [key: string]: INEUClassMap };
 }
 
 /**
@@ -181,8 +181,8 @@ export interface INEUParentMap {
  * @param termId The termId of this term.
  */
 export interface INEUClassMap {
-    termId: number;
-    classMap: { [key: string]: INEUCourse };
+  termId: number;
+  classMap: { [key: string]: INEUCourse };
 }
 
 /**
@@ -205,22 +205,22 @@ export interface INEUClassMap {
  * @param prereqsFor Courses that this course is a prerequisite for.
  */
 export interface INEUCourse {
-    crns: string[];
-    prereqs?: INEUAndPrereq | INEUOrPrereq;
-    coreqs?: INEUAndPrereq | INEUOrPrereq;
-    maxCredits: number;
-    minCredits: number;
-    desc: string;
-    classId: number;
-    prettyUrl: string;
-    name: string;
-    url: string;
-    lastUpdateTime: number;
-    termId: number;
-    host: string;
-    subject: string;
-    optPrereqsFor?: INEUPrereqCourse[];
-    prereqsFor?: INEUPrereqCourse[];
+  crns: string[];
+  prereqs?: INEUAndPrereq | INEUOrPrereq;
+  coreqs?: INEUAndPrereq | INEUOrPrereq;
+  maxCredits: number;
+  minCredits: number;
+  desc: string;
+  classId: number;
+  prettyUrl: string;
+  name: string;
+  url: string;
+  lastUpdateTime: number;
+  termId: number;
+  host: string;
+  subject: string;
+  optPrereqsFor?: INEUPrereqCourse[];
+  prereqsFor?: INEUPrereqCourse[];
 }
 
 /**
@@ -233,8 +233,8 @@ export type INEUPrereq = INEUAndPrereq | INEUOrPrereq | INEUPrereqCourse;
  * @param values The prerequisites that must be completed for this prereq. to be marked as done.
  */
 export interface INEUAndPrereq {
-    type: "and";
-    values: INEUPrereq[];
+  type: "and";
+  values: INEUPrereq[];
 }
 
 /**
@@ -243,8 +243,8 @@ export interface INEUAndPrereq {
  * @param values The prerequisites of which one must be completed for this prerequisite to be marked as done.
  */
 export interface INEUOrPrereq {
-    type: "or";
-    values: INEUPrereq[];
+  type: "or";
+  values: INEUPrereq[];
 }
 
 /**
@@ -254,9 +254,9 @@ export interface INEUOrPrereq {
  * @param missing True if the class is missing.
  */
 export interface INEUPrereqCourse {
-    classId: number;
-    subject: string;
-    missing?: true;
+  classId: number;
+  subject: string;
+  missing?: true;
 }
 
 // types for json_parser.ts
@@ -267,9 +267,9 @@ export interface INEUPrereqCourse {
  * @param scheduled The scheduled courses.
  */
 export interface ISchedule {
-    completed: ICompleteCourse[];
-    scheduled: string[][];
-    // todo: scheduled: IScheduleCourse[][];
+  completed: ICompleteCourse[];
+  scheduled: string[][];
+  // todo: scheduled: IScheduleCourse[][];
 }
 
 /**
@@ -278,8 +278,8 @@ export interface ISchedule {
  * @param subject The subject of the scheduled course.
  */
 export interface IScheduleCourse {
-    classId: number;
-    subject: string;
+  classId: number;
+  subject: string;
 }
 
 // types for json_converter.ts
@@ -288,3 +288,147 @@ export interface IScheduleCourse {
  * A UserChoice is one of OR or RANGE.
  */
 export type UserChoice = ICourseRange | IOrCourse;
+
+// types added for new data representation stuff.
+
+/**
+ * A Major, containing all the requirements.
+ * @param name The name of the major.
+ * @param sections a list of the sections of this major
+ * @param sectionMap an object containing the sections of this major.
+ * @param yearVersion Which major version the user has, based on the year.
+ * @param isLanguageRequired True if a language is required.
+ * @param totalCreditsRequired The total number of credit-hours required for the major.
+ * @param nupaths The nupaths required for the major.
+ */
+export interface Major {
+  name: string;
+  sections: string[];
+  sectionMap: { [key: string]: ANDSection | ORSection };
+  yearVersion: number;
+  isLanguageRequired: boolean;
+  totalCreditsRequired: number;
+  nupaths: NUPath[];
+}
+
+/**
+ * A section that must have everything completed in it.
+ * @param type the type of the section
+ * @param requirements the requirements of the section
+ * @param name the name of the section
+ */
+export interface ANDSection {
+  type: "AND";
+  requirements: Requirement[];
+  name: string;
+}
+
+/**
+ * A section that has a credit requirement
+ * @param type the type of this requirement
+ * @param requirements the possible choices for earning credits
+ * @param numCreditsMin the minimum number of credits needed to satisfy this major
+ * @param numCreditsMax the maximum number of credits needed to satisfy this major
+ * @param name the name of this section
+ */
+export interface ORSection {
+  type: "OR";
+  requirements: Requirement[];
+  numCreditsMin: number;
+  numCreditsMax: number;
+  name: string;
+}
+
+/**
+ * A Schedule
+ * @param years a list of the years of this object
+ * @param yearMap an object containing the year objects of this schedule
+ * @param id the id number of this schedule
+ */
+export interface Schedule {
+  years: number[];
+  yearMap: {
+    [key: number]: ScheduleYear;
+  };
+  id: number;
+}
+
+/**
+ * A ScheduleYear, representing a year of a schedule
+ * @param year the year
+ * @param fall the fall term
+ * @param spring the spring term
+ * @param summer1 the summer 1 term
+ * @param summer2 the summer 2 term
+ * @param isSummerFull true if the summer1 should hold the classes for summer full.
+ */
+export interface ScheduleYear {
+  year: number;
+  fall: ScheduleTerm;
+  spring: ScheduleTerm;
+  summer1: ScheduleTerm;
+  summer2: ScheduleTerm;
+  isSummerFull: boolean;
+}
+
+/**
+ * A ScheduleTerm, representing a term of a scheudle
+ * @param season the season of this term
+ * @param year the year of this term
+ * @param termId the termId of this term
+ * @param id the unique id of this term
+ * @param status the status of this term, on coop, classes, or inactive.
+ * @param classes a list of the classes of this term.
+ */
+export interface ScheduleTerm {
+  season: Season;
+  year: number;
+  termId: number;
+  id: number;
+  status: Status;
+  classes: ScheduleCourse[];
+}
+
+/**
+ * A Status is one of on CO-OP, CLASSES, or INACTIVE
+ */
+export enum Status {
+  COOP = "COOP",
+  CLASSES = "CLASSES",
+  INACTIVE = "INACTIVE",
+}
+
+/**
+ * A course of a schedule
+ * @param classId the classId of this course
+ * @param subject the subject of this course
+ * @param prereqs the prerequisites for this course
+ * @param coreqs the corequisites for this course
+ * @param numCreditsMin the minimum number of credits this course gives
+ * @param numCreditsMax the maximum number of credits this course gives
+ */
+export interface ScheduleCourse {
+  classId: number;
+  subject: string;
+  prereqs?: INEUAndPrereq | INEUOrPrereq;
+  coreqs?: INEUAndPrereq | INEUOrPrereq;
+  numCreditsMin: number;
+  numCreditsMax: number;
+}
+
+/**
+ * A Warning.
+ */
+export interface IWarning {
+  message: string;
+  termId: number;
+}
+
+/**
+ * Given the {@function courseCode} returns true if the course has been taken.
+ */
+export interface CourseTakenTracker {
+  contains: (input: string) => boolean;
+  addCourses: (toAdd: string[]) => void;
+  addCourse: (toAdd: string) => void;
+}
