@@ -83,6 +83,9 @@ typings/
 # include TypeScript config
 !tslint.json
 
+# include Zeit now
+!now.json
+
 # avoid temp files
 *~
 
