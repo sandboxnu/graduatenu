@@ -1,23 +1,25 @@
-export interface Schedule {
-	classes: ClassMap
-	semesters: SemesterMap
-}
+export interface LOL {}
 
-export interface ClassMap {
-	[id: string]: Class
-}
+// export interface Schedule {
+// 	classes: ClassMap
+// 	semesters: SemesterMap
+// }
 
-export interface Class {
-	id: string
-	title: string
-}
+// export interface ClassMap {
+// 	[id: string]: Class
+// }
 
-export interface SemesterMap {
-	[id: string]: Semester
-}
+// export interface Class {
+// 	id: string
+// 	title: string
+// }
 
-export interface Semester {
-	id: string
-	title: string
-	classIds: string[]
-}
+// export interface SemesterMap {
+// 	[id: string]: Semester
+// }
+
+// export interface Semester {
+// 	id: string
+// 	title: string
+// 	classIds: string[]
+// }
