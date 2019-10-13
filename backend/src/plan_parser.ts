@@ -7,7 +7,6 @@ import {
   Season,
   Status,
 } from "./types";
-import { array } from "prop-types";
 
 /**
  * Produces the {@interface Schedule}s for a given plan of study for a major.
@@ -45,29 +44,39 @@ function buildSchedule($: CheerioStatic, table: CheerioElement): Schedule {
   let totalCredits = "";
 
   // table elements
-  const tableRows: CheerioElement[] = table.childNodes;
+  const tableRows: CheerioElement[] = [];
+  $(table)
+    .find("tr")
+    .each((index, tableRow) => {
+      // track the table number.
+      const rowClassName = $(tableRow).attr("class");
+
+      // todo: for some reason there are also row elements that aren't even/odd/plangridsum/term/year? figure it out.
+      if (/^odd/.test(rowClassName) || /^even/.test(rowClassName)) {
+        // iterate through the values of the row.
+        const tableCells: CheerioElement[] = [];
+        $(tableRow)
+          .find("td")
+          .each((index, el) => {
+            tableCells.push(el);
+          });
+
+        // is a mutator
+        addCourses($, tableCells, fall, spring, summer1, summer2);
+      } else if (/^plangridsum/.test(rowClassName)) {
+        // make a new year with the existing data
+        years.push(
+          buildYear(tableRow.childNodes, fall, spring, summer1, summer2)
+        );
+      } else if (/^plangridtotal/.test(rowClassName)) {
+        totalCredits = $(tableRow)
+          .find("td")
+          .text();
+      }
+    });
 
   // for each of the rows, do something.
   for (const tableRow of tableRows) {
-    // track the table number.
-    const rowClassName = $(tableRow).attr("class");
-
-    // todo: for some reason there are also row elements that aren't even/odd/plangridsum/term/year? figure it out.
-    if (/^odd/.test(rowClassName) || /^even/.test(rowClassName)) {
-      // iterate through the values of the row.
-
-      // is a mutator
-      addCourses($, tableRow.childNodes, fall, spring, summer1, summer2);
-    } else if (/^plangridsum/.test(rowClassName)) {
-      // make a new year with the existing data
-      years.push(
-        buildYear(tableRow.childNodes, fall, spring, summer1, summer2)
-      );
-    } else if (/^plangridtotal/.test(rowClassName)) {
-      totalCredits = $(tableRow)
-        .find("td")
-        .text();
-    }
   }
 
   // build the schedule, and return.
@@ -117,7 +126,7 @@ function addCourses(
 
   console.log(nodes.length);
   for (const tableCell of nodes) {
-    console.log(tableCell.attribs);
+    //console.log($(tableCell))
 
     if (tableCell.type !== "tag") {
       continue;
