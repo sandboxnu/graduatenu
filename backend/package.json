@@ -1,33 +1,35 @@
 {
-    "name": "backend",
-    "version": "1.0.0",
-    "description": "A degree scheduling service for Northeastern students.",
-    "dependencies": {
-        "cross-env": "5.0.5"
-    },
-    "devDependencies": {
-        "@types/jest": "^24.0.18",
-        "@types/node": "^12.7.2",
-        "husky": "^3.0.5",
-        "prettier": "1.18.2",
-        "pretty-quick": "^1.11.1",
-        "typescript": "^3.6.3",
-        "ts-jest": "^24.0.2",
-        "jest": "^24.9.0"
-    },
-    "husky": {
-        "hooks": {
-            "pre-commit": "pretty-quick --staged"
-        }
-    },
-    "jest": {
-        "moduleFileExtensions": [
-            "ts",
-            "tsx",
-            "js"
-        ],
-        "transform": {
-            "\\.(ts|tsx)$": "ts-jest"
-        }
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "A degree scheduling service for Northeastern students.",
+  "dependencies": {
+    "cross-env": "5.0.5"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.18",
+    "@types/node": "^12.7.2",
+    "husky": "^3.0.5",
+    "jest": "^24.9.0",
+    "prettier": "1.18.2",
+    "pretty-quick": "^1.11.1",
+    "ts-jest": "^24.0.2",
+    "typescript": "^3.6.3",
+    "@types/cheerio": "^0.22.13",
+    "cheerio": "^1.0.0-rc.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
     }
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "transform": {
+      "\\.(ts|tsx)$": "ts-jest"
+    }
+  }
 }
