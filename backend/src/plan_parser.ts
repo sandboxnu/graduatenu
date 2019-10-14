@@ -92,9 +92,9 @@ function buildScheduleFromYears(
   years = years.map(function(year: ScheduleYear, index: number): ScheduleYear {
     for (const term of [year.fall, year.spring, year.summer1, year.summer2]) {
       // set this one first, uses termId (two digits).
-      term.id = BASE_YEAR * 100 + term.termId + index;
+      term.id = BASE_YEAR + term.termId + index;
       // set this one second, is year shifted two digits left, plus existing termId (one of 10, 30, 40, 60).
-      term.termId = BASE_YEAR * 100 + term.termId;
+      term.termId = (BASE_YEAR + index) * 100 + term.termId;
       // the year is base year plus the index of the year.
       term.year = BASE_YEAR + index;
     }
@@ -129,7 +129,10 @@ function addCourses(
   $(tableRow)
     .find("td")
     .each((index, tableCell) => {
-      const tableCellClass = $(tableCell).attr("class");
+      let tableCellClass = $(tableCell).attr("class");
+      if (tableCellClass) {
+        tableCellClass = tableCellClass.replace(/\s\s+/g, "");
+      }
 
       if (tableCellClass === "codecol") {
         /**
@@ -141,7 +144,10 @@ function addCourses(
          * is Elective
          * some text
          */
-        const tableCellText = $(tableCell).text();
+        let tableCellText = $(tableCell).text();
+        if (tableCellText) {
+          tableCellText = tableCellText.replace(/\s\s+/g, "");
+        }
         if ($(tableCell).find("a")) {
           // has an <a>
           hasCode = true; // has an hours column.
@@ -167,10 +173,13 @@ function addCourses(
         if (hasCode) {
           // we have a code
           hours = $(tableCell).text();
+          if (hours) {
+            hours = hours.replace(/\s\s+g/, "");
+          }
           hasCode = false;
 
           // add the course
-          const subjectAndClassId: string[] = code.split(" ");
+          const subjectAndClassId: string[] = code.split(/\s/);
           produced.push({
             subject: subjectAndClassId[0],
             classId: parseInt(subjectAndClassId[1]),
@@ -178,9 +187,9 @@ function addCourses(
             numCreditsMax: parseInt(hours),
           });
 
-          if (parseInt(subjectAndClassId[1]) === NaN) {
-            throw code;
-          }
+          // if (isNaN(parseInt(subjectAndClassId[1]))) {
+          //   throw "start:" + code + ":" + JSON.stringify(subjectAndClassId) + ":end";
+          // }
         } else {
           // otherwise, we didn't have a course, so just push the item.
           produced.push(code);

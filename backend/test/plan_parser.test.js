@@ -14,6 +14,7 @@ test("Ensures that the pos parser correctly converts the BSCS plan of study.", (
 
   // get the schedules.
   const schedules = plan_parser.planOfStudyToSchedule(plaintext);
+  fs.writeFileSync("./schedules.json", JSON.stringify(schedules[0], null, 2));
 
   // should test every schedule produced.
   expect(schedules).toBeValidModernScheduleList();
@@ -105,7 +106,7 @@ expect.extend({
             yearNumber * 100 + seasonIds[seasonsIndex]
           );
           expect(term.id).toEqual(
-            yearNumber * 100 + seasonIds[seasonsIndex] + seasonsIndex
+            yearNumber + seasonIds[seasonsIndex] + seasonsIndex
           );
           expect(term.status).toMatch(/COOP|CLASSES|INACTIVE/);
 
