@@ -1,35 +1,40 @@
 const plan_parser = require("../src/plan_parser.ts");
 const fs = require("fs");
+const http = require("http");
 
-// tests using BSCS plan of study. downloaded from:
-// "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-science/bscs/#planofstudytext"
+// plans of study to run tests on.
+const links = [
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-science/bscs/#planofstudytext",
+  "http://catalog.northeastern.edu/undergraduate/arts-media-design/art-design/design-bfa/#newitemtext",
+  "http://catalog.northeastern.edu/undergraduate/social-sciences-humanities/english/english-graphic-information-design-ba/#planofstudytext",
+  "http://catalog.northeastern.edu/undergraduate/science/marine-environmental/environmental-science-bs/#planofstudytext",
+  "http://catalog.northeastern.edu/undergraduate/science/marine-environmental/marine-biology-bs/#planofstudytext",
+  "http://catalog.northeastern.edu/undergraduate/business/business-administration-bsba/#planofstudytext",
+  "http://catalog.northeastern.edu/undergraduate/engineering/mechanical-industrial/bsme/#planofstudytext",
+];
 
-// test for schedule formation.
-test("Ensures that the pos parser correctly converts the BSCS plan of study.", () => {
-  // the plan of study, as plaintext.
-  const plaintext = fs.readFileSync(
-    "./backend/test/Computer Science, BSCS < Northeastern University.html",
-    "utf-8"
-  );
-
-  // get the schedules.
-  const schedules = plan_parser.planOfStudyToSchedule(plaintext);
-  // fs.writeFileSync("./schedules.json", JSON.stringify(schedules[0], null, 2));
-
-  // should test every schedule produced.
-  expect(schedules).toBeValidModernScheduleList();
+// download all the links async, stored as strings.
+const plans = links.map(link => {
+  return new Promise((resolve, reject) => {
+    http
+      .get(link, response => {
+        resolve(response);
+      })
+      .on("error", err => {
+        reject(err);
+      });
+  });
 });
 
-// test for schedule formation.
-test("Ensures that the plan parser correctly converts the BFA Design plan of study.", () => {
-  const plaintext = fs.readFileSync(
-    "./backend/test/Design, BFA < Northeastern University.html",
-    "utf-8"
+// run tests on the results.
+plans.map((plan, index) => {
+  test(
+    "Ensures that scraper correctly converts plan of study no. " + index,
+    async () => {
+      const schedules = plan_parser.planOfStudyToSchedule(await plan);
+      expect(schedules).toBeValidModernScheduleList();
+    }
   );
-
-  const schedules = plan_parser.planOfStudyToSchedule(plaintext);
-
-  expect(schedules).toBeValidModernScheduleList();
 });
 
 // custom matchers for Jest testing.
