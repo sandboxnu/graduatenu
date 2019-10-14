@@ -30,9 +30,52 @@ const camd_architecture = [
   // "http://catalog.northeastern.edu/undergraduate/arts-media-design/architecture/urban-landscape-studies-minor/",
 ];
 
+const khoury = [
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-science/bscs/#planofstudytext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-science/bacs/#planofstudytext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/cybersecurity/cybersecurity-bs/#planofstudytext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/data-science/data-science-bs/#planofstudytext",
+  // combined majors
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-design-bs/#planofstudytext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-game-development-bs/#planofstudytext",
+  "http://catalog.northeastern.edu/undergraduate/engineering/electrical-computer/computer-engineering-computer-science-bscompe/#planofstudytext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/data-science-psychology-bs/#planofstudytext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/data-science-mathematics-bs/#planofstudytext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/data-science-journalism-bs/#planofstudytext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/data-science-health-science-bs/#planofstudytext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/data-science-environmental-science-bs/#planofstudytext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/data-science-ecology-evolutionary-biology-bs/#planofstudytext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/data-science-business-administration-bs/#planofstudytext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/data-science-behavioral-neuroscience-bs/#planofstudytext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/data-science-biology-bs/#planofstudytext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/data-science-biochemistry-bs/#planofstudytext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/cybersecurity-economics-bs/#planofstudytext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-science/cybersecurity-criminal-justice-bs/#planofstudytext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-science/cybersecurity-business-administration-bs/#planofstudytext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-sociology-bs/#planofstudytext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-political-science-bs/#planofstudytext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-physics-bs/#planofstudytext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-philosophy-bs/#planofstudytext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-concentration-music-composition-technology-bs/#planofstudytext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-media-arts-bs/#planofstudytext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-mathematics-bs/#planofstudytext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-linguistics-bs/#planofstudytext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-journalism-bs/#planofstudytext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-history-bs/#planofstudytext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-environmental-science-bs/#planofstudytext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-english-bs/#planofstudytext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/economics-bs/#planofstudytext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-criminal-justice-bs/#planofstudytext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-communication-studies-bs/#planofstudytext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-cognitive-psychology-bs/#planofstudytext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-business-administration-bs/#planofstudytext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-biology-bs/#planofstudytext",
+];
+
 // runs tests
 runTestsOnLinks(general);
 runTestsOnLinks(camd_architecture);
+runTestsOnLinks(khoury);
 
 /**
  * Runs tests on an array of links.
