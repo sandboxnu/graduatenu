@@ -3,7 +3,7 @@ const fs = require("fs");
 const http = require("http");
 
 // plans of study to run tests on.
-const links = [
+const general = [
   "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-science/bscs/#planofstudytext",
   "http://catalog.northeastern.edu/undergraduate/arts-media-design/art-design/design-bfa/#newitemtext",
   "http://catalog.northeastern.edu/undergraduate/social-sciences-humanities/english/english-graphic-information-design-ba/#planofstudytext",
@@ -13,29 +13,55 @@ const links = [
   "http://catalog.northeastern.edu/undergraduate/engineering/mechanical-industrial/bsme/#planofstudytext",
 ];
 
-// download all the links async, stored as strings.
-const plans = links.map(link => {
-  return new Promise((resolve, reject) => {
-    http
-      .get(link, response => {
-        resolve(response);
-      })
-      .on("error", err => {
-        reject(err);
-      });
-  });
-});
+const camd_architecture = [
+  "http://catalog.northeastern.edu/undergraduate/arts-media-design/architecture/architecture-bs/#planofstudytext",
+  "http://catalog.northeastern.edu/undergraduate/arts-media-design/architecture/architectural-studies-bs/#planofstudytext",
+  "http://catalog.northeastern.edu/undergraduate/arts-media-design/architecture/landscape-architecture-bla/#planofstudytext",
+  // no plan of study available.
+  // "http://catalog.northeastern.edu/undergraduate/arts-media-design/architecture/architecture-english-bs/",
+  "http://catalog.northeastern.edu/undergraduate/arts-media-design/architecture/architecture-graphic-information-design-bs/#planofstudytext",
+  "http://catalog.northeastern.edu/undergraduate/engineering/civil-environmental/civil-engineering-architectural-studies-bsce/#planofstudytext",
+  "http://catalog.northeastern.edu/undergraduate/engineering/civil-environmental/environmental-engineering-landscape-architecture-bsenve/#planofstudytext",
+  "http://catalog.northeastern.edu/undergraduate/science/marine-environmental/environmental-science-landscape-architecture-bs/#planofstudytext",
+  // no plan of study available for minors
+  // "http://catalog.northeastern.edu/undergraduate/arts-media-design/architecture/architectural-history-minor/",
+  // "http://catalog.northeastern.edu/undergraduate/arts-media-design/architecture/architectural-science-systems-minor/",
+  // "http://catalog.northeastern.edu/undergraduate/arts-media-design/architecture/urban-landscape-studies-minor/",
+];
 
-// run tests on the results.
-plans.map((plan, index) => {
-  test(
-    "Ensures that scraper correctly converts plan of study no. " + index,
-    async () => {
-      const schedules = plan_parser.planOfStudyToSchedule(await plan);
-      expect(schedules).toBeValidModernScheduleList();
-    }
-  );
-});
+// runs tests
+runTestsOnLinks(general);
+runTestsOnLinks(camd_architecture);
+
+/**
+ * Runs tests on an array of links.
+ * @param {string[]} links the links to plans of study to test on.
+ */
+function runTestsOnLinks(links) {
+  // download all the links async, stored as strings.
+  const plans = links.map(link => {
+    return new Promise((resolve, reject) => {
+      http
+        .get(link, response => {
+          resolve(response);
+        })
+        .on("error", err => {
+          reject(err);
+        });
+    });
+  });
+
+  // run tests on the results.
+  plans.map((plan, index) => {
+    test(
+      "Ensures that scraper correctly converts plan of study no. " + index,
+      async () => {
+        const schedules = plan_parser.planOfStudyToSchedule(await plan);
+        expect(schedules).toBeValidModernScheduleList();
+      }
+    );
+  });
+}
 
 // custom matchers for Jest testing.
 expect.extend({
