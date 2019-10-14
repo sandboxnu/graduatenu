@@ -4,7 +4,7 @@ const fs = require("fs");
 // tests using BSCS plan of study. downloaded from:
 // "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-science/bscs/#planofstudytext"
 
-// test for deep equality
+// test for schedule formation.
 test("Ensures that the pos parser correctly converts the BSCS plan of study.", () => {
   // the plan of study, as plaintext.
   const plaintext = fs.readFileSync(
@@ -14,9 +14,21 @@ test("Ensures that the pos parser correctly converts the BSCS plan of study.", (
 
   // get the schedules.
   const schedules = plan_parser.planOfStudyToSchedule(plaintext);
-  fs.writeFileSync("./schedules.json", JSON.stringify(schedules[0], null, 2));
+  // fs.writeFileSync("./schedules.json", JSON.stringify(schedules[0], null, 2));
 
   // should test every schedule produced.
+  expect(schedules).toBeValidModernScheduleList();
+});
+
+// test for schedule formation.
+test("Ensures that the plan parser correctly converts the BFA Design plan of study.", () => {
+  const plaintext = fs.readFileSync(
+    "./backend/test/Design, BFA < Northeastern University.html",
+    "utf-8"
+  );
+
+  const schedules = plan_parser.planOfStudyToSchedule(plaintext);
+
   expect(schedules).toBeValidModernScheduleList();
 });
 
@@ -105,9 +117,7 @@ expect.extend({
           expect(term.termId).toEqual(
             yearNumber * 100 + seasonIds[seasonsIndex]
           );
-          expect(term.id).toEqual(
-            yearNumber + seasonIds[seasonsIndex] + seasonsIndex
-          );
+          expect(term.id).toEqual(yearNumber + seasonIds[seasonsIndex]);
           expect(term.status).toMatch(/COOP|CLASSES|INACTIVE/);
 
           // classes should be defined.
@@ -139,7 +149,7 @@ expect.extend({
               expect(course).toHaveProperty("numCreditsMax");
 
               // expect some things about each property.
-              expect(course.classId).toBeGreaterThan(1000);
+              expect(course.classId).toBeGreaterThan(999);
               expect(course.subject.length).toBeGreaterThanOrEqual(2);
               expect(course.numCreditsMin).toBeGreaterThan(0);
               expect(course.numCreditsMax).toBeGreaterThan(0);
