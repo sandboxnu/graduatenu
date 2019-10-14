@@ -23,7 +23,9 @@ export function planOfStudyToSchedule(planofstudy: string): Schedule[] {
 
   // for each of the plans, produce a schedule.
   $(".sc_plangrid tbody").each((planIndex, table) => {
-    schedules.push(buildSchedule($, table));
+    const schedule = buildSchedule($, table);
+    schedule.id = planIndex;
+    schedules.push(schedule);
   });
 
   return schedules;
@@ -39,7 +41,7 @@ function buildSchedule($: CheerioStatic, table: CheerioElement): Schedule {
   const years: ScheduleYear[] = [];
 
   // information for the current year we're parsing
-  let rows: Array<Array<string | ScheduleCourse>> = [[], [], [], []];
+  let rows: Array<Array<string | ScheduleCourse>> = [];
   let totalCredits = "";
 
   // table elements
@@ -51,15 +53,14 @@ function buildSchedule($: CheerioStatic, table: CheerioElement): Schedule {
       const rowClassName = $(tableRow).attr("class");
 
       if (/^odd/.test(rowClassName) || /^even/.test(rowClassName)) {
+        // should be always length 4.
         const courses = addCourses($, tableRow);
-        for (let i = 0; i < 4; i += 1) {
-          rows[i].push(courses[i]);
-        }
+        rows.push(courses);
       } else if (/^plangridsum/.test(rowClassName)) {
         // make a new year with the existing data
         const flipped = rows[0].map((col, i) => rows.map(row => row[i]));
         years.push(buildYear($, flipped));
-        rows = [[], [], [], []];
+        rows = [];
       } else if (/^plangridtotal/.test(rowClassName)) {
         totalCredits = $(tableRow)
           .find("td")
@@ -97,6 +98,7 @@ function buildScheduleFromYears(
       // the year is base year plus the index of the year.
       term.year = BASE_YEAR + index;
     }
+    year.year = BASE_YEAR + index;
     return year;
   });
 
@@ -147,24 +149,24 @@ function addCourses(
         } else if (tableCellText === "Co-op") {
           // is Co-op
           hasCode = false; // has no hours column.
-          code = tableCellText;
+          code = "Co-op";
         } else if (tableCellText === "Vacation") {
           // is Vacation
           hasCode = false; // has no hours column.
-          code = tableCellText;
+          code = "Vacation";
         } else if (tableCellText === "Elective") {
           // is Elective
           hasCode = true; // has an hours colum.
-          code = tableCellText;
+          code = "Elective";
         } else {
           // is some text.
           hasCode = true;
-          code = tableCellText;
+          code = tableCellText; // whatever the text is.
         }
       } else if (tableCellClass === "hourscol") {
         if (hasCode) {
           // we have a code
-          code = $(tableCell).text();
+          hours = $(tableCell).text();
           hasCode = false;
 
           // add the course
@@ -175,6 +177,10 @@ function addCourses(
             numCreditsMin: parseInt(hours),
             numCreditsMax: parseInt(hours),
           });
+
+          if (parseInt(subjectAndClassId[1]) === NaN) {
+            throw code;
+          }
         } else {
           // otherwise, we didn't have a course, so just push the item.
           produced.push(code);
@@ -202,7 +208,8 @@ function buildYear(
 ): ScheduleYear {
   // invariant: seasons array is length 4.
   if (seasons.length !== 4) {
-    throw "Expected seasons to be length 4";
+    throw "Expected seasons to be length 4, was " +
+      JSON.stringify(seasons, null, 2);
   }
 
   const seasonEnums: Season[] = [Season.FL, Season.SP, Season.S1, Season.S2];
