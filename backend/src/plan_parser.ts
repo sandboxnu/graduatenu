@@ -120,10 +120,9 @@ function addCourses(
   tableRow: CheerioElement
 ): Array<ScheduleCourse | string> {
   // invariant: each codecol is always followed by an hourscol. also can have colspan, if no class is present.
-  let code = "";
-  let hours = "";
-  let hasCode = false;
   let produced: Array<ScheduleCourse | string> = [];
+
+  const cells: Array<{ class: string; text: string }> = [];
 
   // iterate through each of the cells.
   $(tableRow)
@@ -134,71 +133,78 @@ function addCourses(
         tableCellClass = tableCellClass.replace(/\s\s+/g, "");
       }
 
-      if (tableCellClass === "codecol") {
-        /**
-         * cases for code:
-         *
-         * has an <a> tag, is a real course.
-         * is Co-op
-         * is Vacation
-         * is Elective
-         * some text
-         */
-        let tableCellText = $(tableCell).text();
-        if (tableCellText) {
-          tableCellText = tableCellText.replace(/\s\s+/g, "");
-        }
-        if ($(tableCell).find("a")) {
-          // has an <a>
-          hasCode = true; // has an hours column.
-          code = tableCellText;
-        } else if (tableCellText === "Co-op") {
-          // is Co-op
-          hasCode = false; // has no hours column.
-          code = "Co-op";
-        } else if (tableCellText === "Vacation") {
-          // is Vacation
-          hasCode = false; // has no hours column.
-          code = "Vacation";
-        } else if (tableCellText === "Elective") {
-          // is Elective
-          hasCode = true; // has an hours colum.
-          code = "Elective";
-        } else {
-          // is some text.
-          hasCode = true;
-          code = tableCellText; // whatever the text is.
-        }
-      } else if (tableCellClass === "hourscol") {
-        if (hasCode) {
-          // we have a code
-          hours = $(tableCell).text();
-          if (hours) {
-            hours = hours.replace(/\s\s+g/, "");
-          }
-          hasCode = false;
-
-          // add the course
-          const subjectAndClassId: string[] = code.split(/\s/);
-          produced.push({
-            subject: subjectAndClassId[0],
-            classId: parseInt(subjectAndClassId[1]),
-            numCreditsMin: parseInt(hours),
-            numCreditsMax: parseInt(hours),
-          });
-
-          // if (isNaN(parseInt(subjectAndClassId[1]))) {
-          //   throw "start:" + code + ":" + JSON.stringify(subjectAndClassId) + ":end";
-          // }
-        } else {
-          // otherwise, we didn't have a course, so just push the item.
-          produced.push(code);
-        }
-      } else {
-        // undefined. we have a column.
-        produced.push("");
+      let tableCellText = $(tableCell).text();
+      if (tableCellText) {
+        tableCellText = tableCellText.replace(/\s\s+/g, "");
       }
+
+      // push item.
+      cells.push({
+        class: tableCellClass,
+        text: tableCellText,
+      });
     });
+
+  // parse each of the cells
+  let i = 0;
+  while (i < cells.length) {
+    const cell = cells[i];
+
+    switch (cell.class) {
+      case "codecol":
+        switch (cell.text) {
+          case "Co-op":
+            produced.push("Co-op");
+            i += 1;
+            break;
+          case "Vacation":
+            produced.push("Vacation");
+            i += 1;
+            break;
+          case "Elective":
+            produced.push({
+              classId: 9999,
+              subject: "Elective",
+              numCreditsMin: parseInt(cells[i + 1].text),
+              numCreditsMax: parseInt(cells[i + 1].text),
+            });
+            i += 1;
+            break;
+          default:
+            // either course, or random elective.
+            // if second word is a number, then we have a course.
+            if (!isNaN(parseInt(cell.text.split(/\s/)[1]))) {
+              produced.push({
+                classId: parseInt(cell.text.split(/\s/)[1]),
+                subject: cell.text.split(/\s/)[0],
+                numCreditsMin: parseInt(cells[i + 1].text),
+                numCreditsMax: parseInt(cells[i + 1].text),
+              });
+              i += 1;
+            } else {
+              // we have a random elective.
+              produced.push({
+                classId: 9999,
+                subject: cell.text,
+                numCreditsMin: parseInt(cells[i + 1].text),
+                numCreditsMax: parseInt(cells[i + 1].text),
+              });
+              i += 1;
+            }
+        }
+        break;
+      case undefined:
+        // we had a colspan. empty.
+        produced.push("");
+        break;
+      case "hourscol":
+        throw "Has an hourscol. Should never occur.";
+      default:
+        throw "Reached default case. Should never occur.";
+    }
+
+    i += 1;
+  }
 
   return produced;
 }
@@ -227,8 +233,18 @@ function buildYear(
 
   // iterate over each of the seasons, building up terms.
   for (let i = 0; i < 4; i += 1) {
-    // declare status and classes.
-    let status = Status.CLASSES;
+    let status: Status;
+    // change status depending on what the first string is (invariant).
+    if (seasons[i][0] === "Co-op") {
+      status = Status.COOP;
+    } else if (seasons[i][0] === "Vacation" || seasons[i][0] === "") {
+      status = Status.INACTIVE;
+    } else if (seasons[i].length > 1) {
+      status = Status.CLASSES;
+    } else {
+      throw "List of classes was not coop, vacation, or length > 1.";
+    }
+
     let classes: ScheduleCourse[] = seasons[i].reduce(function(
       accumulator: ScheduleCourse[],
       item: ScheduleCourse | string
@@ -239,13 +255,6 @@ function buildYear(
       return accumulator;
     },
     []);
-
-    // change status depending on what the first string is (invariant).
-    if (seasons[i][0] === "Co-op") {
-      status = Status.COOP;
-    } else if (seasons[i][0] === "Vacation") {
-      status = Status.INACTIVE;
-    }
 
     // add term to the list of terms.
     terms.push({
