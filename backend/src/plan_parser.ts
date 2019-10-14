@@ -8,6 +8,9 @@ import {
   Status,
 } from "./types";
 
+// the year to use as the first year of the schedule.
+const BASE_YEAR: number = 1000;
+
 /**
  * Produces the {@interface Schedule}s for a given plan of study for a major.
  * @param link the link to the plan of study to download.
@@ -36,11 +39,7 @@ function buildSchedule($: CheerioStatic, table: CheerioElement): Schedule {
   const years: ScheduleYear[] = [];
 
   // information for the current year we're parsing
-  const fall: ScheduleCourse[] | Status.COOP | Status.INACTIVE = [];
-  const spring: ScheduleCourse[] | Status.COOP | Status.INACTIVE = [];
-  const summer1: ScheduleCourse[] | Status.COOP | Status.INACTIVE = [];
-  const summer2: ScheduleCourse[] | Status.COOP | Status.INACTIVE = [];
-
+  let rows: Array<Array<string | ScheduleCourse>> = [[], [], [], []];
   let totalCredits = "";
 
   // table elements
@@ -51,23 +50,16 @@ function buildSchedule($: CheerioStatic, table: CheerioElement): Schedule {
       // track the table number.
       const rowClassName = $(tableRow).attr("class");
 
-      // todo: for some reason there are also row elements that aren't even/odd/plangridsum/term/year? figure it out.
       if (/^odd/.test(rowClassName) || /^even/.test(rowClassName)) {
-        // iterate through the values of the row.
-        const tableCells: CheerioElement[] = [];
-        $(tableRow)
-          .find("td")
-          .each((index, el) => {
-            tableCells.push(el);
-          });
-
-        // is a mutator
-        addCourses($, tableCells, fall, spring, summer1, summer2);
+        const courses = addCourses($, tableRow);
+        for (let i = 0; i < 4; i += 1) {
+          rows[i].push(courses[i]);
+        }
       } else if (/^plangridsum/.test(rowClassName)) {
         // make a new year with the existing data
-        years.push(
-          buildYear(tableRow.childNodes, fall, spring, summer1, summer2)
-        );
+        const flipped = rows[0].map((col, i) => rows.map(row => row[i]));
+        years.push(buildYear($, flipped));
+        rows = [[], [], [], []];
       } else if (/^plangridtotal/.test(rowClassName)) {
         totalCredits = $(tableRow)
           .find("td")
@@ -75,18 +67,14 @@ function buildSchedule($: CheerioStatic, table: CheerioElement): Schedule {
       }
     });
 
-  // for each of the rows, do something.
-  for (const tableRow of tableRows) {
-  }
-
   // build the schedule, and return.
   return buildScheduleFromYears(years, totalCredits);
 }
 
 /**
- *
- * @param years
- * @param totalCredits
+ * Constructs a schedule from a list of {@interface ScheduleYear}s.
+ * @param years the list of years
+ * @param totalCredits the total credits of the schedule
  */
 function buildScheduleFromYears(
   years: ScheduleYear[],
@@ -97,6 +85,20 @@ function buildScheduleFromYears(
     yearMap: {},
     id: 0,
   };
+
+  // all of the years of each year should be zero.
+  // all the termIds (of the seasons) should be 10, 30, 40, 60
+  years = years.map(function(year: ScheduleYear, index: number): ScheduleYear {
+    for (const term of [year.fall, year.spring, year.summer1, year.summer2]) {
+      // set this one first, uses termId (two digits).
+      term.id = BASE_YEAR * 100 + term.termId + index;
+      // set this one second, is year shifted two digits left, plus existing termId (one of 10, 30, 40, 60).
+      term.termId = BASE_YEAR * 100 + term.termId;
+      // the year is base year plus the index of the year.
+      term.year = BASE_YEAR + index;
+    }
+    return year;
+  });
 
   // add each of the years to schedule
   for (const year of years) {
@@ -113,59 +115,77 @@ function buildScheduleFromYears(
  */
 function addCourses(
   $: CheerioStatic,
-  nodes: CheerioElement[],
-  fall: ScheduleCourse[] | Status.COOP | Status.INACTIVE,
-  spring: ScheduleCourse[] | Status.COOP | Status.INACTIVE,
-  summer1: ScheduleCourse[] | Status.COOP | Status.INACTIVE,
-  summer2: ScheduleCourse[] | Status.COOP | Status.INACTIVE
-): void {
-  // invariant: there will be exactly 4 codecol and 4 hourscol elements.
-  let cellIndex = 0;
+  tableRow: CheerioElement
+): Array<ScheduleCourse | string> {
+  // invariant: each codecol is always followed by an hourscol. also can have colspan, if no class is present.
   let code = "";
   let hours = "";
+  let hasCode = false;
+  let produced: Array<ScheduleCourse | string> = [];
 
-  console.log(nodes.length);
-  for (const tableCell of nodes) {
-    //console.log($(tableCell))
+  // iterate through each of the cells.
+  $(tableRow)
+    .find("td")
+    .each((index, tableCell) => {
+      const tableCellClass = $(tableCell).attr("class");
 
-    if (tableCell.type !== "tag") {
-      continue;
-    }
+      if (tableCellClass === "codecol") {
+        /**
+         * cases for code:
+         *
+         * has an <a> tag, is a real course.
+         * is Co-op
+         * is Vacation
+         * is Elective
+         * some text
+         */
+        const tableCellText = $(tableCell).text();
+        if ($(tableCell).find("a")) {
+          // has an <a>
+          hasCode = true; // has an hours column.
+          code = tableCellText;
+        } else if (tableCellText === "Co-op") {
+          // is Co-op
+          hasCode = false; // has no hours column.
+          code = tableCellText;
+        } else if (tableCellText === "Vacation") {
+          // is Vacation
+          hasCode = false; // has no hours column.
+          code = tableCellText;
+        } else if (tableCellText === "Elective") {
+          // is Elective
+          hasCode = true; // has an hours colum.
+          code = tableCellText;
+        } else {
+          // is some text.
+          hasCode = true;
+          code = tableCellText;
+        }
+      } else if (tableCellClass === "hourscol") {
+        if (hasCode) {
+          // we have a code
+          code = $(tableCell).text();
+          hasCode = false;
 
-    const tableCellName = $(tableCell).attr("class");
-    if (/codecol/.test(tableCellName)) {
-      code = $(tableCell).text()
-        ? $(tableCell)
-            .find("a")
-            .text()
-        : $(tableCell).text();
-    } else if (/hourscol/.test(tableCellName)) {
-      hours = $(tableCell).text(); // could be undefined.
-    }
-  }
-}
+          // add the course
+          const subjectAndClassId: string[] = code.split(" ");
+          produced.push({
+            subject: subjectAndClassId[0],
+            classId: parseInt(subjectAndClassId[1]),
+            numCreditsMin: parseInt(hours),
+            numCreditsMax: parseInt(hours),
+          });
+        } else {
+          // otherwise, we didn't have a course, so just push the item.
+          produced.push(code);
+        }
+      } else {
+        // undefined. we have a column.
+        produced.push("");
+      }
+    });
 
-/**
- * Adds a row's data to the provided arrays.
- * @param nodes the course information for the provided row
- * @param fall the fall data
- * @param spring the spring data
- * @param summer1 summer1 data
- * @param summer2 summer2 data
- */
-function addCourse(nodes: CheerioElement[]): ScheduleCourse {
-  // invariant: length of nodes is 8.
-  // pattern is codecol, hourscol, codecol, hourscol...
-
-  for (const el of nodes) {
-  }
-
-  return {
-    classId: 2500,
-    subject: "CS",
-    numCreditsMax: 4,
-    numCreditsMin: 4,
-  };
+  return produced;
 }
 
 /**
@@ -177,72 +197,60 @@ function addCourse(nodes: CheerioElement[]): ScheduleCourse {
  * @param summer2 the summer2 data
  */
 function buildYear(
-  nodes: CheerioElement[],
-  fall: ScheduleCourse[] | Status.COOP | Status.INACTIVE,
-  spring: ScheduleCourse[] | Status.COOP | Status.INACTIVE,
-  summer1: ScheduleCourse[] | Status.COOP | Status.INACTIVE,
-  summer2: ScheduleCourse[] | Status.COOP | Status.INACTIVE
+  $: CheerioStatic,
+  seasons: Array<Array<ScheduleCourse | string>>
 ): ScheduleYear {
+  // invariant: seasons array is length 4.
+  if (seasons.length !== 4) {
+    throw "Expected seasons to be length 4";
+  }
+
+  const seasonEnums: Season[] = [Season.FL, Season.SP, Season.S1, Season.S2];
+  const seasonTermIds: number[] = [10, 30, 40, 60];
+  const terms: ScheduleTerm[] = [];
+
+  // iterate over each of the seasons, building up terms.
+  for (let i = 0; i < 4; i += 1) {
+    // declare status and classes.
+    let status = Status.CLASSES;
+    let classes: ScheduleCourse[] = seasons[i].reduce(function(
+      accumulator: ScheduleCourse[],
+      item: ScheduleCourse | string
+    ): ScheduleCourse[] {
+      if (typeof item !== "string") {
+        accumulator.push(item);
+      }
+      return accumulator;
+    },
+    []);
+
+    // change status depending on what the first string is (invariant).
+    if (seasons[i][0] === "Co-op") {
+      status = Status.COOP;
+    } else if (seasons[i][0] === "Vacation") {
+      status = Status.INACTIVE;
+    }
+
+    // add term to the list of terms.
+    terms.push({
+      season: seasonEnums[i],
+      termId: seasonTermIds[i],
+      year: 0,
+      id: i,
+      status: status,
+      classes: classes,
+    });
+  }
+
+  // declare the year.
   const year: ScheduleYear = {
-    fall: {
-      season: Season.FL,
-      termId: 9999,
-      year: 0,
-      id: 0,
-      status: Status.CLASSES,
-      classes: [],
-    },
-    spring: {
-      season: Season.SP,
-      termId: 9999,
-      year: 0,
-      id: 0,
-      status: Status.CLASSES,
-      classes: [],
-    },
-    summer1: {
-      season: Season.S1,
-      termId: 9999,
-      year: 0,
-      id: 0,
-      status: Status.CLASSES,
-      classes: [],
-    },
-    summer2: {
-      season: Season.S2,
-      termId: 9999,
-      year: 0,
-      id: 0,
-      status: Status.CLASSES,
-      classes: [],
-    },
+    fall: terms[0],
+    spring: terms[1],
+    summer1: terms[2],
+    summer2: terms[3],
     year: 0,
     isSummerFull: false,
   };
-
-  if (fall === Status.COOP || fall === Status.INACTIVE) {
-    year.fall.status = fall;
-  } else {
-    year.fall.classes = fall;
-  }
-
-  if (spring === Status.COOP || spring === Status.INACTIVE) {
-    year.spring.status = spring;
-  } else {
-    year.spring.classes = spring;
-  }
-
-  if (summer1 === Status.COOP || summer1 === Status.INACTIVE) {
-    year.summer1.status = summer1;
-  } else {
-    year.summer1.classes = summer1;
-  }
-
-  if (summer2 === Status.COOP || summer2 === Status.INACTIVE) {
-    year.summer2.status = summer2;
-  } else {
-    year.summer2.classes = summer2;
-  }
 
   return year;
 }
