@@ -53,7 +53,7 @@ function buildSchedule($: CheerioStatic, table: CheerioElement): Schedule {
       const rowClassName = $(tableRow).attr("class");
 
       if (/^odd/.test(rowClassName) || /^even/.test(rowClassName)) {
-        // should be always length 4.
+        // is not always length 4, depends on how many semesters we have.
         const courses = addCourses($, tableRow);
         rows.push(courses);
       } else if (/^plangridsum/.test(rowClassName)) {
@@ -136,6 +136,9 @@ function addCourses(
       let tableCellText = $(tableCell).text();
       if (tableCellText) {
         tableCellText = tableCellText.replace(/\s\s+/g, "");
+        if (/Co-op/.test(tableCellText)) {
+          tableCellText = "Co-op";
+        }
       }
 
       // push item.
@@ -147,6 +150,7 @@ function addCourses(
 
   // parse each of the cells
   let i = 0;
+  let credits = 0;
   while (i < cells.length) {
     const cell = cells[i];
 
@@ -162,32 +166,36 @@ function addCourses(
             i += 1;
             break;
           case "Elective":
+            credits = parseInt(cells[i + 1].text);
             produced.push({
               classId: 9999,
               subject: "Elective",
-              numCreditsMin: parseInt(cells[i + 1].text),
-              numCreditsMax: parseInt(cells[i + 1].text),
+              numCreditsMin: !isNaN(credits) ? credits : 9999,
+              numCreditsMax: !isNaN(credits) ? credits : 9999,
             });
             i += 1;
             break;
           default:
             // either course, or random elective.
-            // if second word is a number, then we have a course.
-            if (!isNaN(parseInt(cell.text.split(/\s/)[1]))) {
+            // if second word is a number, with exactly 2 sections, then we have a course.
+            const split = cell.text.split(/\s/);
+            credits = parseInt(cells[i + 1].text);
+            if (!isNaN(parseInt(split[1])) && split.length == 2) {
               produced.push({
-                classId: parseInt(cell.text.split(/\s/)[1]),
-                subject: cell.text.split(/\s/)[0],
-                numCreditsMin: parseInt(cells[i + 1].text),
-                numCreditsMax: parseInt(cells[i + 1].text),
+                classId: parseInt(split[1]),
+                subject: split[0],
+                numCreditsMin: !isNaN(credits) ? credits : 9999,
+                numCreditsMax: !isNaN(credits) ? credits : 9999,
               });
               i += 1;
             } else {
               // we have a random elective.
+
               produced.push({
                 classId: 9999,
                 subject: cell.text,
-                numCreditsMin: parseInt(cells[i + 1].text),
-                numCreditsMax: parseInt(cells[i + 1].text),
+                numCreditsMin: !isNaN(credits) ? credits : 9999,
+                numCreditsMax: !isNaN(credits) ? credits : 9999,
               });
               i += 1;
             }
@@ -221,50 +229,65 @@ function buildYear(
   $: CheerioStatic,
   seasons: Array<Array<ScheduleCourse | string>>
 ): ScheduleYear {
-  // invariant: seasons array is length 4.
-  if (seasons.length !== 4) {
-    throw "Expected seasons to be length 4, was " +
-      JSON.stringify(seasons, null, 2);
-  }
+  // seasons array is not always 4! could be 3 (no summer 2), or 5 (including summer full, as 5th).
 
-  const seasonEnums: Season[] = [Season.FL, Season.SP, Season.S1, Season.S2];
-  const seasonTermIds: number[] = [10, 30, 40, 60];
+  const seasonEnums: Season[] = [
+    Season.FL,
+    Season.SP,
+    Season.S1,
+    Season.S2,
+    Season.SF,
+  ];
+  const seasonTermIds: number[] = [10, 30, 40, 60, 50];
   const terms: ScheduleTerm[] = [];
 
   // iterate over each of the seasons, building up terms.
-  for (let i = 0; i < 4; i += 1) {
-    let status: Status;
-    // change status depending on what the first string is (invariant).
-    if (seasons[i][0] === "Co-op") {
-      status = Status.COOP;
-    } else if (seasons[i][0] === "Vacation" || seasons[i][0] === "") {
-      status = Status.INACTIVE;
-    } else if (seasons[i].length > 1) {
-      status = Status.CLASSES;
-    } else {
-      throw "List of classes was not coop, vacation, or length > 1.";
-    }
-
-    let classes: ScheduleCourse[] = seasons[i].reduce(function(
-      accumulator: ScheduleCourse[],
-      item: ScheduleCourse | string
-    ): ScheduleCourse[] {
-      if (typeof item !== "string") {
-        accumulator.push(item);
+  for (let i = 0; i < 5; i += 1) {
+    if (seasons[i]) {
+      let status: Status;
+      // change status depending on what the first string is (invariant).
+      if (seasons[i][0] === "Co-op") {
+        status = Status.COOP;
+      } else if (seasons[i][0] === "Vacation" || seasons[i][0] === "") {
+        status = Status.INACTIVE;
+      } else if (seasons[i].length > 1) {
+        status = Status.CLASSES;
+      } else {
+        // we didn't have anything, so our status is inactive.
+        status = Status.INACTIVE;
       }
-      return accumulator;
-    },
-    []);
 
-    // add term to the list of terms.
-    terms.push({
-      season: seasonEnums[i],
-      termId: seasonTermIds[i],
-      year: 0,
-      id: i,
-      status: status,
-      classes: classes,
-    });
+      let classes: ScheduleCourse[] = seasons[i].reduce(function(
+        accumulator: ScheduleCourse[],
+        item: ScheduleCourse | string
+      ): ScheduleCourse[] {
+        if (typeof item !== "string") {
+          accumulator.push(item);
+        }
+        return accumulator;
+      },
+      []);
+
+      // add term to the list of terms.
+      terms.push({
+        season: seasonEnums[i],
+        termId: seasonTermIds[i],
+        year: 0,
+        id: i,
+        status: status,
+        classes: classes,
+      });
+    } else {
+      // the season did not exist. we don't have a season!
+      terms.push({
+        season: seasonEnums[i],
+        termId: seasonTermIds[i],
+        year: 0,
+        id: i,
+        status: Status.INACTIVE,
+        classes: [],
+      });
+    }
   }
 
   // declare the year.
@@ -276,6 +299,17 @@ function buildYear(
     year: 0,
     isSummerFull: false,
   };
+
+  // if we aren't inactive for summerfull, then we ARE summerfull.
+  if (terms[4].status !== Status.INACTIVE) {
+    year.summer1.classes = terms[4].classes;
+    year.summer2.classes = terms[4].classes;
+
+    year.summer1.status = terms[4].status;
+    year.summer2.status = terms[4].status;
+
+    year.isSummerFull = true;
+  }
 
   return year;
 }

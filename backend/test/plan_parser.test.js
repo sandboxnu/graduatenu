@@ -1,6 +1,6 @@
 const plan_parser = require("../src/plan_parser.ts");
 const fs = require("fs");
-const http = require("http");
+const rp = require("request-promise");
 
 // plans of study to run tests on.
 const general = [
@@ -16,6 +16,7 @@ const general = [
 const camd_architecture = [
   "http://catalog.northeastern.edu/undergraduate/arts-media-design/architecture/architecture-bs/#planofstudytext",
   "http://catalog.northeastern.edu/undergraduate/arts-media-design/architecture/architectural-studies-bs/#planofstudytext",
+  // this one's weird - only has 3 columns instead of normal 4.
   "http://catalog.northeastern.edu/undergraduate/arts-media-design/architecture/landscape-architecture-bla/#planofstudytext",
   // no plan of study available.
   // "http://catalog.northeastern.edu/undergraduate/arts-media-design/architecture/architecture-english-bs/",
@@ -39,17 +40,7 @@ runTestsOnLinks(camd_architecture);
  */
 function runTestsOnLinks(links) {
   // download all the links async, stored as strings.
-  const plans = links.map(link => {
-    return new Promise((resolve, reject) => {
-      http
-        .get(link, response => {
-          resolve(response);
-        })
-        .on("error", err => {
-          reject(err);
-        });
-    });
-  });
+  const plans = links.map(link => rp(link));
 
   // run tests on the results.
   plans.map((plan, index) => {
@@ -62,6 +53,17 @@ function runTestsOnLinks(links) {
     );
   });
 }
+
+// store as a file.
+// test("Ensures that scraper correctly converts plan of study no.", async () => {
+//   const plan = rp(camd_architecture[2]);
+//   const schedules = plan_parser.planOfStudyToSchedule(await plan);
+
+//   // log the file to output.
+//   fs.writeFileSync("./schedules2.json", JSON.stringify(schedules, null, 2));
+//   expect(schedules).toBeValidModernScheduleList();
+
+// });
 
 // custom matchers for Jest testing.
 expect.extend({
@@ -156,8 +158,11 @@ expect.extend({
           expect(term.classes).toBeInstanceOf(Array);
 
           // check classes length based on status.
-          if (/COOP|INACTIVE/.test(term.status)) {
-            // if we are on coop or inactive, there should be zero courses.
+          if (/COOP/.test(term.status)) {
+            // if on coop, we may be taking online courses.
+            expect(term.classes.length).toBeGreaterThanOrEqual(0);
+          } else if (/INACTIVE/.test(term.status)) {
+            // if we are inactive, there should be zero courses.
             expect(term.classes.length).toEqual(0);
           } else {
             // we should have courses.
@@ -182,8 +187,9 @@ expect.extend({
               // expect some things about each property.
               expect(course.classId).toBeGreaterThan(999);
               expect(course.subject.length).toBeGreaterThanOrEqual(2);
-              expect(course.numCreditsMin).toBeGreaterThan(0);
-              expect(course.numCreditsMax).toBeGreaterThan(0);
+              // apparently 0 credit courses exist...
+              expect(course.numCreditsMin).toBeGreaterThanOrEqual(0);
+              expect(course.numCreditsMax).toBeGreaterThanOrEqual(0);
             }
           }
         }
