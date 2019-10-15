@@ -136,9 +136,6 @@ function addCourses(
       let tableCellText = $(tableCell).text();
       if (tableCellText) {
         tableCellText = tableCellText.replace(/\s\s+/g, "");
-        if (/Co-op/.test(tableCellText)) {
-          tableCellText = "Co-op";
-        }
       }
 
       // push item.
@@ -148,6 +145,14 @@ function addCourses(
       });
     });
 
+  // regular expressions for course types.
+  const coopMatch: RegExp = new RegExp(/Co-op/);
+  const vacationMatch: RegExp = new RegExp(/Vacation/);
+  const electiveMatch: RegExp = new RegExp(/(e|E)lective/);
+  const multiCourseMatch: RegExp = new RegExp(
+    /([A-Z]{2,})\s(\d{4})(and)\s([A-Z]{2,})\s(\d{4})/
+  );
+
   // parse each of the cells
   let i = 0;
   let credits = 0;
@@ -156,55 +161,66 @@ function addCourses(
 
     switch (cell.class) {
       case "codecol":
-        switch (cell.text) {
-          case "Co-op":
-            produced.push("Co-op");
-            i += 1;
-            break;
-          case "Vacation":
-            produced.push("Vacation");
-            i += 1;
-            break;
-          case "Elective":
-            credits = parseInt(cells[i + 1].text);
+        if (coopMatch.test(cell.text)) {
+          produced.push("Co-op");
+          i += 1;
+          break;
+        } else if (vacationMatch.test(cell.text)) {
+          produced.push("Vacation");
+          i += 1;
+          break;
+        } else if (electiveMatch.test(cell.text)) {
+          credits = parseInt(cells[i + 1].text);
+          produced.push({
+            classId: 9999,
+            subject: "Elective",
+            numCreditsMin: !isNaN(credits) ? credits : 9999,
+            numCreditsMax: !isNaN(credits) ? credits : 9999,
+          });
+          i += 1;
+          break;
+        } else if ("" === cell.text) {
+          // There are sometimes random codecols that are blank.
+          produced.push("");
+          // Assume that an hourscol follows, get rid of it too.
+          i += 1;
+          break;
+        } else if (multiCourseMatch.test(cell.text)) {
+          // if we have a multicourse, like CS 1800 and CS 2500
+          const split = cell.text.split(/and\s|\s/);
+          credits = parseInt(cells[i + 1].text);
+          // second course unfortunately has to have 0 credits.
+          produced.push({
+            classId: parseInt(split[1]),
+            subject: "" + split,
+            numCreditsMin: !isNaN(credits) ? credits : 9999,
+            numCreditsMax: !isNaN(credits) ? credits : 9999,
+          });
+          i += 1;
+        } else {
+          // either course, or random elective.
+          // if second word is a number, with exactly 2 sections, then we have a course.
+          const split = cell.text.split(/\s/);
+          credits = parseInt(cells[i + 1].text);
+          if (!isNaN(parseInt(split[1])) && split.length == 2) {
             produced.push({
-              classId: 9999,
-              subject: "Elective",
+              classId: parseInt(split[1]),
+              subject: split[0],
               numCreditsMin: !isNaN(credits) ? credits : 9999,
               numCreditsMax: !isNaN(credits) ? credits : 9999,
             });
             i += 1;
-            break;
-          case "":
-            // There are sometimes random codecols that are blank.
-            produced.push("");
-            // Assume that an hourscol follows, get rid of it too.
-            i += 1;
-            break;
-          default:
-            // either course, or random elective.
-            // if second word is a number, with exactly 2 sections, then we have a course.
-            const split = cell.text.split(/\s/);
-            credits = parseInt(cells[i + 1].text);
-            if (!isNaN(parseInt(split[1])) && split.length == 2) {
-              produced.push({
-                classId: parseInt(split[1]),
-                subject: split[0],
-                numCreditsMin: !isNaN(credits) ? credits : 9999,
-                numCreditsMax: !isNaN(credits) ? credits : 9999,
-              });
-              i += 1;
-            } else {
-              // we have a random elective.
+          } else {
+            // we have a random elective.
 
-              produced.push({
-                classId: 9999,
-                subject: cell.text,
-                numCreditsMin: !isNaN(credits) ? credits : 9999,
-                numCreditsMax: !isNaN(credits) ? credits : 9999,
-              });
-              i += 1;
-            }
+            produced.push({
+              classId: 9999,
+              subject: cell.text,
+              numCreditsMin: !isNaN(credits) ? credits : 9999,
+              numCreditsMax: !isNaN(credits) ? credits : 9999,
+            });
+            i += 1;
+          }
         }
         break;
       case undefined:
@@ -268,7 +284,26 @@ function buildYear(
         item: ScheduleCourse | string
       ): ScheduleCourse[] {
         if (typeof item !== "string") {
-          accumulator.push(item);
+          const parsedMultiCourseMatch: RegExp = new RegExp(
+            /[A-Z]{2,},\d{4},[A-Z]{2,},\d{4}/
+          );
+          if (parsedMultiCourseMatch.test(item.subject)) {
+            const split = item.subject.split(",");
+            accumulator.push({
+              classId: parseInt(split[1]),
+              subject: split[0],
+              numCreditsMin: item.numCreditsMin,
+              numCreditsMax: item.numCreditsMax,
+            });
+            accumulator.push({
+              classId: parseInt(split[3]),
+              subject: split[2],
+              numCreditsMin: 0,
+              numCreditsMax: 0,
+            });
+          } else {
+            accumulator.push(item);
+          }
         }
         return accumulator;
       },
