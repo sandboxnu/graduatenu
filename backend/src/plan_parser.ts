@@ -175,6 +175,12 @@ function addCourses(
             });
             i += 1;
             break;
+          case "":
+            // There are sometimes random codecols that are blank.
+            produced.push("");
+            // Assume that an hourscol follows, get rid of it too.
+            i += 1;
+            break;
           default:
             // either course, or random elective.
             // if second word is a number, with exactly 2 sections, then we have a course.
