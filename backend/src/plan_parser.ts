@@ -266,13 +266,15 @@ function buildYear(
   // iterate over each of the seasons, building up terms.
   for (let i = 0; i < 5; i += 1) {
     if (seasons[i]) {
+      seasons[i] = seasons[i].filter(item => item !== "");
+
       let status: Status;
       // change status depending on what the first string is (invariant).
       if (seasons[i][0] === "Co-op") {
         status = Status.COOP;
-      } else if (seasons[i][0] === "Vacation" || seasons[i][0] === "") {
+      } else if (seasons[i][0] === "Vacation") {
         status = Status.INACTIVE;
-      } else if (seasons[i].length > 1) {
+      } else if (seasons[i].length > 0) {
         status = Status.CLASSES;
       } else {
         // we didn't have anything, so our status is inactive.
