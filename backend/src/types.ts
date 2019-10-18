@@ -304,7 +304,7 @@ export type UserChoice = ICourseRange | IOrCourse;
 export interface Major {
   name: string;
   sections: string[];
-  sectionMap: { [key: string]: ANDSection | ORSection };
+  sectionMap: { [key: string]: ANDSection | ORSection | RANGESection };
   yearVersion: number;
   isLanguageRequired: boolean;
   totalCreditsRequired: number;
@@ -333,6 +333,22 @@ export interface ANDSection {
  */
 export interface ORSection {
   type: "OR";
+  requirements: Requirement[];
+  numCreditsMin: number;
+  numCreditsMax: number;
+  name: string;
+}
+
+/**
+ * A section that has a credit requirement, that can be fulfilled by taking courses in any of the range requirements.
+ * @param type the type of this requirement
+ * @param requirements the possible choices for earning credits
+ * @param numCreditsMin the minimum number of credits needed to satisfy this major
+ * @param numCreditsMax the maximum number of credits needed to satisfy this major
+ * @param name the name of this section
+ */
+export interface RANGESection {
+  type: "RANGE";
   requirements: Requirement[];
   numCreditsMin: number;
   numCreditsMax: number;
