@@ -1,10 +1,10 @@
 import * as React from "react";
 import styled from "styled-components";
-import { ISchedule } from "../../../../backend/src/types";
+import { Schedule } from "../../models/types";
 import { CLASS_BLOCK_WIDTH } from "../../constants";
 
 interface YearBottomProps {
-  schedule: ISchedule;
+  schedule: Schedule;
 }
 
 const Container = styled.div`

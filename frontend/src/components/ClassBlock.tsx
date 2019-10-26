@@ -1,10 +1,10 @@
 import React from "react";
 import { Draggable } from "react-beautiful-dnd";
-import { IScheduleCourse } from "../../../backend/src/types";
+import { ScheduleCourse } from "../models/types";
 import { CLASS_BLOCK_WIDTH, CLASS_BLOCK_HEIGHT } from "../constants";
 
 interface ClassBlockProps {
-  class: IScheduleCourse;
+  class: ScheduleCourse;
   index: number;
 }
 

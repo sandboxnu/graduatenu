@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 import { DragDropContext } from "react-beautiful-dnd";
 import { mockData } from "./data/mockData";
-import { ISemester, ISchedule } from "../../backend/src/types";
+import { ScheduleTerm, Schedule, ScheduleYear } from "./models/types";
 import styled from "styled-components";
 import { Year } from "./components/Year/Year";
 
@@ -34,7 +34,7 @@ const ButtonText = styled.div`
 `;
 
 interface AppState {
-  schedule: ISchedule;
+  schedule: Schedule;
 }
 
 export default class App extends React.Component<{}, AppState> {
@@ -55,28 +55,42 @@ export default class App extends React.Component<{}, AppState> {
       return;
     }
 
-    const startSemester = this.state.schedule.semesters[source.droppableId];
-    const finishSemester = this.state.schedule.semesters[
-      destination.droppableId
-    ];
+    // const startSemester = this.state.schedule.semesters[source.droppableId];
+    const sourceDrop = source.droppableId.split(" ");
+    const startYear: ScheduleYear = this.state.schedule.yearMap[sourceDrop[1]];
+    const startSemester: ScheduleTerm = (startYear as any)[sourceDrop[0]];
+
+    const destDrop = destination.droppableId.split(" ");
+    const finishYear: ScheduleYear = this.state.schedule.yearMap[destDrop[1]];
+    const finishSemester: ScheduleTerm = (finishYear as any)[destDrop[0]];
 
     if (startSemester === finishSemester) {
-      const newClassOrder = Array.from(startSemester.classIds);
+      const newClassOrder = Array.from(startSemester.classes);
+      const movedClass = newClassOrder[source.index];
       newClassOrder.splice(source.index, 1);
-      newClassOrder.splice(destination.index, 0, draggableId);
+      newClassOrder.splice(destination.index, 0, movedClass);
 
-      const newSemester: ISemester = {
+      const newSemester: ScheduleTerm = {
         ...startSemester,
-        classIds: newClassOrder,
+        classes: newClassOrder,
       };
 
       const newState: AppState = {
         ...this.state,
         schedule: {
           ...this.state.schedule,
-          semesters: {
-            ...this.state.schedule.semesters,
-            [newSemester.id]: newSemester,
+          // semesters: {
+          //   ...this.state.schedule.semesters,
+          //   [newSemester.id]: newSemester,
+          // },
+          yearMap: {
+            ...this.state.schedule.yearMap,
+            [Number(newSemester.id.split(" ")[1])]: {
+              ...this.state.schedule.yearMap[
+                Number(newSemester.id.split(" ")[1])
+              ],
+              [newSemester.id.split(" ")[0]]: newSemester,
+            },
           },
         },
       };
@@ -85,32 +99,69 @@ export default class App extends React.Component<{}, AppState> {
       return;
     }
 
-    const startClassIds = Array.from(startSemester.classIds);
-    startClassIds.splice(source.index, 1);
-    const newStartSemester: ISemester = {
+    const startClasses = Array.from(startSemester.classes);
+    const movedClass = startClasses[source.index];
+    startClasses.splice(source.index, 1);
+    const newStartSemester: ScheduleTerm = {
       ...startSemester,
-      classIds: startClassIds,
+      classes: startClasses,
     };
 
-    const finishClassIds = Array.from(finishSemester.classIds);
-    finishClassIds.splice(destination.index, 0, draggableId);
-    const newFinishSemester: ISemester = {
+    const finishClasses = Array.from(finishSemester.classes);
+    finishClasses.splice(destination.index, 0, movedClass);
+    const newFinishSemester: ScheduleTerm = {
       ...finishSemester,
-      classIds: finishClassIds,
+      classes: finishClasses,
     };
 
-    const newState: AppState = {
-      ...this.state,
-      schedule: {
-        ...this.state.schedule,
-        semesters: {
-          ...this.state.schedule.semesters,
-          [newStartSemester.id]: newStartSemester,
-          [newFinishSemester.id]: newFinishSemester,
+    let newState: AppState;
+
+    if (
+      Number(newStartSemester.id.split(" ")[1]) ===
+      Number(newFinishSemester.id.split(" ")[1])
+    ) {
+      // in same year
+      newState = {
+        ...this.state,
+        schedule: {
+          ...this.state.schedule,
+          yearMap: {
+            ...this.state.schedule.yearMap,
+            [Number(newStartSemester.id.split(" ")[1])]: {
+              ...this.state.schedule.yearMap[
+                Number(newStartSemester.id.split(" ")[1])
+              ],
+              [newStartSemester.id.split(" ")[0]]: newStartSemester,
+              [newFinishSemester.id.split(" ")[0]]: newFinishSemester,
+            },
+          },
         },
-      },
-    };
+      };
+    } else {
+      newState = {
+        ...this.state,
+        schedule: {
+          ...this.state.schedule,
+          yearMap: {
+            ...this.state.schedule.yearMap,
+            [Number(newStartSemester.id.split(" ")[1])]: {
+              ...this.state.schedule.yearMap[
+                Number(newStartSemester.id.split(" ")[1])
+              ],
+              [newStartSemester.id.split(" ")[0]]: newStartSemester,
+            },
+            [Number(newFinishSemester.id.split(" ")[1])]: {
+              ...this.state.schedule.yearMap[
+                Number(newFinishSemester.id.split(" ")[1])
+              ],
+              [newFinishSemester.id.split(" ")[0]]: newFinishSemester,
+            },
+          },
+        },
+      };
+    }
 
+    console.log(" ");
     this.setState(newState);
   };
 

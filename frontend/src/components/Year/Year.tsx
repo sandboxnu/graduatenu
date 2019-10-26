@@ -2,12 +2,12 @@ import * as React from "react";
 import styled from "styled-components";
 import { YearTop } from "./YearTop";
 import SemesterBlock from "../SemesterBlock";
-import { ISchedule } from "../../../../backend/src/types";
+import { Schedule } from "../../models/types";
 import { YearBottom } from "./YearBottom";
 
 export interface IYearProps {
   index: number;
-  schedule: ISchedule;
+  schedule: Schedule;
 }
 
 const YearText = styled.h3`
@@ -25,20 +25,12 @@ export class Year extends React.Component<IYearProps> {
     return (
       <div style={{ marginBottom: 12 }}>
         <YearText>Year {index + 1}</YearText>
-        <YearTop></YearTop>
+        <YearTop />
         <YearBody>
-          <SemesterBlock
-            semester={schedule.semesters["semester-" + (1 + 4 * index)]}
-          />
-          <SemesterBlock
-            semester={schedule.semesters["semester-" + (2 + 4 * index)]}
-          />
-          <SemesterBlock
-            semester={schedule.semesters["semester-" + (3 + 4 * index)]}
-          />
-          <SemesterBlock
-            semester={schedule.semesters["semester-" + (4 + 4 * index)]}
-          />
+          <SemesterBlock semester={schedule.yearMap[index + 1].fall} />
+          <SemesterBlock semester={schedule.yearMap[index + 1].spring} />
+          <SemesterBlock semester={schedule.yearMap[index + 1].summer1} />
+          <SemesterBlock semester={schedule.yearMap[index + 1].summer2} />
         </YearBody>
         <YearBottom schedule={schedule}></YearBottom>
       </div>
