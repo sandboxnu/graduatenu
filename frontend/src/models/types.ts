@@ -292,6 +292,7 @@ export interface CourseTakenTracker {
  * @param season - The season during which this course was taken.
  * @param year - The year during which this course was taken.
  * @param termId - Northeastern's identifier for the term during which this course was taken.
+ * @param dndId a unique ID for the course for dnd purposes, ex "course-1"
  */
 export interface ICompleteCourse {
   hon: boolean;
@@ -302,6 +303,7 @@ export interface ICompleteCourse {
   season: Season;
   year: number;
   termId: number;
+  dndId: string;
 }
 
 /**

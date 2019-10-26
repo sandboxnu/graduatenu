@@ -297,6 +297,7 @@ export function oldToNew(
         coreqs: detailed.coreqs,
         numCreditsMin: detailed.minCredits,
         numCreditsMax: detailed.maxCredits,
+        dndId: course.dndId,
       });
     } else {
       // it probably exists, but might not in the termId.
@@ -316,6 +317,7 @@ export function oldToNew(
           coreqs: mostRecent.coreqs,
           numCreditsMin: mostRecent.minCredits,
           numCreditsMax: mostRecent.maxCredits,
+          dndId: course.dndId,
         });
       } else {
         byTermId.termMap[course.termId].push({
@@ -325,6 +327,7 @@ export function oldToNew(
           coreqs: undefined,
           numCreditsMin: course.creditHours,
           numCreditsMax: course.creditHours,
+          dndId: course.dndId,
         });
       }
     }
@@ -334,7 +337,7 @@ export function oldToNew(
   const born: Schedule = {
     years: [],
     yearMap: {},
-    id: 0,
+    id: "example-schedule",
   };
 
   // get all the years
@@ -353,7 +356,8 @@ export function oldToNew(
         season: Season.FL,
         year: year,
         termId: year * 100 + 10,
-        id: 10,
+        // id: 10,
+        id: "fall 1",
         status: Status.INACTIVE,
         classes: [],
       },
@@ -361,7 +365,8 @@ export function oldToNew(
         season: Season.SP,
         year: year,
         termId: year * 100 + 30,
-        id: 30,
+        // id: 30,
+        id: "spring 1",
         status: Status.INACTIVE,
         classes: [],
       },
@@ -369,7 +374,8 @@ export function oldToNew(
         season: Season.S1,
         year: year,
         termId: year * 100 + 40,
-        id: 40,
+        // id: 40,
+        id: "summer1 1",
         status: Status.INACTIVE,
         classes: [],
       },
@@ -377,7 +383,8 @@ export function oldToNew(
         season: Season.S2,
         year: year,
         termId: year * 100 + 60,
-        id: 60,
+        // id: 60,
+        id: "summer2 1",
         status: Status.INACTIVE,
         classes: [],
       },

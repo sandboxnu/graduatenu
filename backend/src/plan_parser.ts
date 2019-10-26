@@ -24,7 +24,7 @@ export function planOfStudyToSchedule(planofstudy: string): Schedule[] {
   // for each of the plans, produce a schedule.
   $(".sc_plangrid tbody").each((planIndex, table) => {
     const schedule = buildSchedule($, table);
-    schedule.id = planIndex;
+    schedule.id = String(planIndex);
     schedules.push(schedule);
   });
 
@@ -84,7 +84,7 @@ function buildScheduleFromYears(
   const schedule: Schedule = {
     years: [],
     yearMap: {},
-    id: 0,
+    id: "example-schedule",
   };
 
   // all of the years of each year should be zero.
@@ -92,7 +92,7 @@ function buildScheduleFromYears(
   years = years.map(function(year: ScheduleYear, index: number): ScheduleYear {
     for (const term of [year.fall, year.spring, year.summer1, year.summer2]) {
       // set this one first, uses termId (two digits).
-      term.id = BASE_YEAR + term.termId + index;
+      term.id = String(BASE_YEAR + term.termId + index);
       // set this one second, is year shifted two digits left, plus existing termId (one of 10, 30, 40, 60).
       term.termId = (BASE_YEAR + index) * 100 + term.termId;
       // the year is base year plus the index of the year.
@@ -176,6 +176,7 @@ function addCourses(
             subject: "Elective",
             numCreditsMin: !isNaN(credits) ? credits : 9999,
             numCreditsMax: !isNaN(credits) ? credits : 9999,
+            dndId: "class-" + i,
           });
           i += 1;
           break;
@@ -195,6 +196,7 @@ function addCourses(
             subject: "" + split,
             numCreditsMin: !isNaN(credits) ? credits : 9999,
             numCreditsMax: !isNaN(credits) ? credits : 9999,
+            dndId: "class-" + i,
           });
           i += 1;
         } else {
@@ -208,6 +210,7 @@ function addCourses(
               subject: split[0],
               numCreditsMin: !isNaN(credits) ? credits : 9999,
               numCreditsMax: !isNaN(credits) ? credits : 9999,
+              dndId: "class-" + i,
             });
             i += 1;
           } else {
@@ -218,6 +221,7 @@ function addCourses(
               subject: cell.text,
               numCreditsMin: !isNaN(credits) ? credits : 9999,
               numCreditsMax: !isNaN(credits) ? credits : 9999,
+              dndId: "class-9999" + i,
             });
             i += 1;
           }
@@ -283,7 +287,8 @@ function buildYear(
 
       let classes: ScheduleCourse[] = seasons[i].reduce(function(
         accumulator: ScheduleCourse[],
-        item: ScheduleCourse | string
+        item: ScheduleCourse | string,
+        index: number
       ): ScheduleCourse[] {
         if (typeof item !== "string") {
           const parsedMultiCourseMatch: RegExp = new RegExp(
@@ -296,12 +301,14 @@ function buildYear(
               subject: split[0],
               numCreditsMin: item.numCreditsMin,
               numCreditsMax: item.numCreditsMax,
+              dndId: "class-" + String(i) + String(index) + "1",
             });
             accumulator.push({
               classId: parseInt(split[3]),
               subject: split[2],
               numCreditsMin: 0,
               numCreditsMax: 0,
+              dndId: "class-" + String(i) + String(index) + "2",
             });
           } else {
             accumulator.push(item);
@@ -316,7 +323,7 @@ function buildYear(
         season: seasonEnums[i],
         termId: seasonTermIds[i],
         year: 0,
-        id: i,
+        id: convertSeasonEnumToText(seasonEnums[i]) + "0",
         status: status,
         classes: classes,
       });
@@ -326,7 +333,7 @@ function buildYear(
         season: seasonEnums[i],
         termId: seasonTermIds[i],
         year: 0,
-        id: i,
+        id: convertSeasonEnumToText(seasonEnums[i]) + "0",
         status: Status.INACTIVE,
         classes: [],
       });
@@ -355,4 +362,20 @@ function buildYear(
   }
 
   return year;
+}
+
+function convertSeasonEnumToText(season: Season): string {
+  if (season === "SP") {
+    return "spring";
+  }
+  if (season == "FL") {
+    return "fall";
+  }
+  if (season == "S1") {
+    return "summer1";
+  }
+  if (season == "S2") {
+    return "summer2";
+  }
+  return "";
 }
