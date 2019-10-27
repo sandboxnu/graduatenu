@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "A degree scheduling service for Northeastern students.",
   "dependencies": {
+    "@types/request-promise": "^4.1.44",
     "cross-env": "5.0.5",
     "dataloader": "^1.4.0"
   },
