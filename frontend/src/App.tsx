@@ -6,6 +6,8 @@ import { DNDScheduleTerm, DNDSchedule, DNDScheduleYear } from "./models/types";
 import styled from "styled-components";
 import { Year } from "./components/Year/Year";
 import { convertTermIdToYear, convertTermIdToSeason } from "./utils";
+import { DropDownModal } from "./components/DropDownModal";
+import { CLASS_BLOCK_WIDTH } from "./constants";
 
 const Container = styled.div`
   display: flex;
@@ -15,6 +17,14 @@ const Container = styled.div`
   align-items: start;
   margin: 30px;
   background-color: "#ff76ff";
+`;
+
+const CompletedCoursesWrapper = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: start;
+  width: ${CLASS_BLOCK_WIDTH * 4 + 25}px;
 `;
 
 const ButtonWrapper = styled.div`
@@ -182,14 +192,18 @@ export default class App extends React.Component<{}, AppState> {
           <div>
             <h2>Plan Of Study</h2>
           </div>
-          <ButtonWrapper>
+          {/* <ButtonWrapper>
             <Button onClick={() => {}}>
               <ButtonText>Add a class</ButtonText>
             </Button>
             <Button onClick={() => {}}>
               <ButtonText>Search</ButtonText>
             </Button>
-          </ButtonWrapper>
+          </ButtonWrapper> */}
+          <CompletedCoursesWrapper>
+            <h3>Completed Courses</h3>
+            <DropDownModal schedule={this.state.schedule}></DropDownModal>
+          </CompletedCoursesWrapper>
           <Year index={0} schedule={this.state.schedule}></Year>
           <Year index={1} schedule={this.state.schedule}></Year>
           {/* <Year index={2} schedule={this.state.schedule}></Year>
