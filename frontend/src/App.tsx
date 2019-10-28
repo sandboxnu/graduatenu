@@ -2,9 +2,10 @@ import React from "react";
 import "./App.css";
 import { DragDropContext } from "react-beautiful-dnd";
 import { mockData } from "./data/mockData";
-import { ScheduleTerm, Schedule, ScheduleYear } from "./models/types";
+import { DNDScheduleTerm, DNDSchedule, DNDScheduleYear } from "./models/types";
 import styled from "styled-components";
 import { Year } from "./components/Year/Year";
+import { convertTermIdToYear, convertTermIdToSeason } from "./utils";
 
 const Container = styled.div`
   display: flex;
@@ -34,7 +35,7 @@ const ButtonText = styled.div`
 `;
 
 interface AppState {
-  schedule: Schedule;
+  schedule: DNDSchedule;
 }
 
 export default class App extends React.Component<{}, AppState> {
@@ -55,14 +56,23 @@ export default class App extends React.Component<{}, AppState> {
       return;
     }
 
-    // const startSemester = this.state.schedule.semesters[source.droppableId];
-    const sourceDrop = source.droppableId.split(" ");
-    const startYear: ScheduleYear = this.state.schedule.yearMap[sourceDrop[1]];
-    const startSemester: ScheduleTerm = (startYear as any)[sourceDrop[0]];
+    const sourceSemesterSeason = convertTermIdToSeason(source.droppableId);
+    const sourceSemesterYear = convertTermIdToYear(source.droppableId);
+    const startYear: DNDScheduleYear = this.state.schedule.yearMap[
+      sourceSemesterYear
+    ];
+    const startSemester: DNDScheduleTerm = (startYear as any)[
+      sourceSemesterSeason
+    ];
 
-    const destDrop = destination.droppableId.split(" ");
-    const finishYear: ScheduleYear = this.state.schedule.yearMap[destDrop[1]];
-    const finishSemester: ScheduleTerm = (finishYear as any)[destDrop[0]];
+    const destSemesterSeason = convertTermIdToSeason(destination.droppableId);
+    const destSemesterYear = convertTermIdToYear(destination.droppableId);
+    const finishYear: DNDScheduleYear = this.state.schedule.yearMap[
+      destSemesterYear
+    ];
+    const finishSemester: DNDScheduleTerm = (finishYear as any)[
+      destSemesterSeason
+    ];
 
     if (startSemester === finishSemester) {
       const newClassOrder = Array.from(startSemester.classes);
@@ -70,10 +80,13 @@ export default class App extends React.Component<{}, AppState> {
       newClassOrder.splice(source.index, 1);
       newClassOrder.splice(destination.index, 0, movedClass);
 
-      const newSemester: ScheduleTerm = {
+      const newSemester: DNDScheduleTerm = {
         ...startSemester,
         classes: newClassOrder,
       };
+
+      const newSemesterYear = convertTermIdToYear(newSemester.termId);
+      const newSemesterSeason = convertTermIdToSeason(newSemester.termId);
 
       const newState: AppState = {
         ...this.state,
@@ -85,11 +98,9 @@ export default class App extends React.Component<{}, AppState> {
           // },
           yearMap: {
             ...this.state.schedule.yearMap,
-            [Number(newSemester.id.split(" ")[1])]: {
-              ...this.state.schedule.yearMap[
-                Number(newSemester.id.split(" ")[1])
-              ],
-              [newSemester.id.split(" ")[0]]: newSemester,
+            [newSemesterYear]: {
+              ...this.state.schedule.yearMap[newSemesterYear],
+              [newSemesterSeason]: newSemester,
             },
           },
         },
@@ -102,24 +113,30 @@ export default class App extends React.Component<{}, AppState> {
     const startClasses = Array.from(startSemester.classes);
     const movedClass = startClasses[source.index];
     startClasses.splice(source.index, 1);
-    const newStartSemester: ScheduleTerm = {
+    const newStartSemester: DNDScheduleTerm = {
       ...startSemester,
       classes: startClasses,
     };
 
     const finishClasses = Array.from(finishSemester.classes);
     finishClasses.splice(destination.index, 0, movedClass);
-    const newFinishSemester: ScheduleTerm = {
+    const newFinishSemester: DNDScheduleTerm = {
       ...finishSemester,
       classes: finishClasses,
     };
 
+    const newStartSemesterYear = convertTermIdToYear(newStartSemester.termId);
+    const newStartSemesterSeason = convertTermIdToSeason(
+      newStartSemester.termId
+    );
+    const newFinishSemesterYear = convertTermIdToYear(newFinishSemester.termId);
+    const newFinishSemesterSeason = convertTermIdToSeason(
+      newFinishSemester.termId
+    );
+
     let newState: AppState;
 
-    if (
-      Number(newStartSemester.id.split(" ")[1]) ===
-      Number(newFinishSemester.id.split(" ")[1])
-    ) {
+    if (newStartSemesterYear === newFinishSemesterYear) {
       // in same year
       newState = {
         ...this.state,
@@ -127,12 +144,10 @@ export default class App extends React.Component<{}, AppState> {
           ...this.state.schedule,
           yearMap: {
             ...this.state.schedule.yearMap,
-            [Number(newStartSemester.id.split(" ")[1])]: {
-              ...this.state.schedule.yearMap[
-                Number(newStartSemester.id.split(" ")[1])
-              ],
-              [newStartSemester.id.split(" ")[0]]: newStartSemester,
-              [newFinishSemester.id.split(" ")[0]]: newFinishSemester,
+            [newStartSemesterYear]: {
+              ...this.state.schedule.yearMap[newStartSemesterYear],
+              [newStartSemesterSeason]: newStartSemester,
+              [newFinishSemesterSeason]: newFinishSemester,
             },
           },
         },
@@ -144,24 +159,19 @@ export default class App extends React.Component<{}, AppState> {
           ...this.state.schedule,
           yearMap: {
             ...this.state.schedule.yearMap,
-            [Number(newStartSemester.id.split(" ")[1])]: {
-              ...this.state.schedule.yearMap[
-                Number(newStartSemester.id.split(" ")[1])
-              ],
-              [newStartSemester.id.split(" ")[0]]: newStartSemester,
+            [newStartSemesterYear]: {
+              ...this.state.schedule.yearMap[newStartSemesterYear],
+              [newStartSemesterSeason]: newStartSemester,
             },
-            [Number(newFinishSemester.id.split(" ")[1])]: {
-              ...this.state.schedule.yearMap[
-                Number(newFinishSemester.id.split(" ")[1])
-              ],
-              [newFinishSemester.id.split(" ")[0]]: newFinishSemester,
+            [newFinishSemesterYear]: {
+              ...this.state.schedule.yearMap[newFinishSemesterYear],
+              [newFinishSemesterSeason]: newFinishSemester,
             },
           },
         },
       };
     }
 
-    console.log(" ");
     this.setState(newState);
   };
 

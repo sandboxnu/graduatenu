@@ -92,7 +92,7 @@ function buildScheduleFromYears(
   years = years.map(function(year: ScheduleYear, index: number): ScheduleYear {
     for (const term of [year.fall, year.spring, year.summer1, year.summer2]) {
       // set this one first, uses termId (two digits).
-      term.id = String(BASE_YEAR + term.termId + index);
+      term.id = BASE_YEAR + term.termId + index;
       // set this one second, is year shifted two digits left, plus existing termId (one of 10, 30, 40, 60).
       term.termId = (BASE_YEAR + index) * 100 + term.termId;
       // the year is base year plus the index of the year.
@@ -176,7 +176,6 @@ function addCourses(
             subject: "Elective",
             numCreditsMin: !isNaN(credits) ? credits : 9999,
             numCreditsMax: !isNaN(credits) ? credits : 9999,
-            dndId: "class-" + i,
           });
           i += 1;
           break;
@@ -196,7 +195,6 @@ function addCourses(
             subject: "" + split,
             numCreditsMin: !isNaN(credits) ? credits : 9999,
             numCreditsMax: !isNaN(credits) ? credits : 9999,
-            dndId: "class-" + i,
           });
           i += 1;
         } else {
@@ -210,7 +208,6 @@ function addCourses(
               subject: split[0],
               numCreditsMin: !isNaN(credits) ? credits : 9999,
               numCreditsMax: !isNaN(credits) ? credits : 9999,
-              dndId: "class-" + i,
             });
             i += 1;
           } else {
@@ -221,7 +218,6 @@ function addCourses(
               subject: cell.text,
               numCreditsMin: !isNaN(credits) ? credits : 9999,
               numCreditsMax: !isNaN(credits) ? credits : 9999,
-              dndId: "class-9999" + i,
             });
             i += 1;
           }
@@ -301,14 +297,12 @@ function buildYear(
               subject: split[0],
               numCreditsMin: item.numCreditsMin,
               numCreditsMax: item.numCreditsMax,
-              dndId: "class-" + String(i) + String(index) + "1",
             });
             accumulator.push({
               classId: parseInt(split[3]),
               subject: split[2],
               numCreditsMin: 0,
               numCreditsMax: 0,
-              dndId: "class-" + String(i) + String(index) + "2",
             });
           } else {
             accumulator.push(item);
@@ -323,7 +317,7 @@ function buildYear(
         season: seasonEnums[i],
         termId: seasonTermIds[i],
         year: 0,
-        id: convertSeasonEnumToText(seasonEnums[i]) + "0",
+        id: i,
         status: status,
         classes: classes,
       });
@@ -333,7 +327,7 @@ function buildYear(
         season: seasonEnums[i],
         termId: seasonTermIds[i],
         year: 0,
-        id: convertSeasonEnumToText(seasonEnums[i]) + "0",
+        id: i,
         status: Status.INACTIVE,
         classes: [],
       });

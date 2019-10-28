@@ -187,9 +187,15 @@ export interface ORSection {
 export interface Schedule {
   years: number[];
   yearMap: {
-    [key: number]: ScheduleYear;
+    [key: number]: ScheduleYear | DNDScheduleYear; // type error if we don't do this
   };
   id: string;
+}
+
+export interface DNDSchedule extends Schedule {
+  yearMap: {
+    [key: number]: DNDScheduleYear;
+  };
 }
 
 /**
@@ -210,6 +216,13 @@ export interface ScheduleYear {
   isSummerFull: boolean;
 }
 
+export interface DNDScheduleYear extends ScheduleYear {
+  fall: DNDScheduleTerm;
+  spring: DNDScheduleTerm;
+  summer1: DNDScheduleTerm;
+  summer2: DNDScheduleTerm;
+}
+
 /**
  * A ScheduleTerm, representing a term of a scheudle
  * @param season the season of this term
@@ -223,9 +236,13 @@ export interface ScheduleTerm {
   season: Season;
   year: number;
   termId: number;
-  id: string;
+  id: number;
   status: Status;
   classes: ScheduleCourse[];
+}
+
+export interface DNDScheduleTerm extends ScheduleTerm {
+  classes: DNDScheduleCourse[];
 }
 
 /**
@@ -254,6 +271,9 @@ export interface ScheduleCourse {
   coreqs?: INEUAndPrereq | INEUOrPrereq;
   numCreditsMin: number;
   numCreditsMax: number;
+}
+
+export interface DNDScheduleCourse extends ScheduleCourse {
   dndId: string;
 }
 
@@ -292,7 +312,6 @@ export interface CourseTakenTracker {
  * @param season - The season during which this course was taken.
  * @param year - The year during which this course was taken.
  * @param termId - Northeastern's identifier for the term during which this course was taken.
- * @param dndId a unique ID for the course for dnd purposes, ex "course-1"
  */
 export interface ICompleteCourse {
   hon: boolean;
@@ -303,7 +322,6 @@ export interface ICompleteCourse {
   season: Season;
   year: number;
   termId: number;
-  dndId: string;
 }
 
 /**

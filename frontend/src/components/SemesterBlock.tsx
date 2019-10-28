@@ -1,15 +1,14 @@
 import React from "react";
-import { mockData } from "../data/mockData";
 import { Droppable } from "react-beautiful-dnd";
 import ClassList from "./ClassList";
 import ClassBlock from "./ClassBlock";
 import EmptyBlock from "./EmptyBlock";
-import { ScheduleTerm } from "../models/types";
+import { DNDScheduleTerm } from "../models/types";
 import { AddButton } from "./Year/AddButton";
 import styled from "styled-components";
 
 interface SemesterBlockProps {
-  semester: ScheduleTerm;
+  semester: DNDScheduleTerm;
 }
 
 const Container = styled.div`
@@ -27,7 +26,7 @@ export default class SemesterBlock extends React.Component<SemesterBlockProps> {
   render() {
     return (
       <Container>
-        <Droppable droppableId={this.props.semester.id.toString()}>
+        <Droppable droppableId={this.props.semester.termId.toString()}>
           {provided => (
             <ClassList
               innerRef={provided.innerRef as any}
