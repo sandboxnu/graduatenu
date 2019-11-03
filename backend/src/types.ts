@@ -303,8 +303,8 @@ export type UserChoice = ICourseRange | IOrCourse;
  */
 export interface Major {
   name: string;
-  sections: string[];
-  sectionMap: { [key: string]: ANDSection | ORSection | RANGESection };
+  requirementGroups: string[];
+  requirementGroupMap: { [key: string]: ANDSection | ORSection | RANGESection };
   yearVersion: number;
   isLanguageRequired: boolean;
   totalCreditsRequired: number;
@@ -349,7 +349,7 @@ export interface ORSection {
  */
 export interface RANGESection {
   type: "RANGE";
-  requirements: Requirement[];
+  requirements: ICourseRange[];
   numCreditsMin: number;
   numCreditsMax: number;
   name: string;
