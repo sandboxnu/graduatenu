@@ -23,12 +23,15 @@ interface SimpleCourse {
 /**
  * The result of a prereq query for a class.
  */
-interface PrereqQueryResult {
+interface NonEmptyQueryResult {
   prereqs?: INEUOrPrereq | INEUAndPrereq;
   coreqs?: INEUOrPrereq | INEUAndPrereq;
-  maxCredits: number;
-  minCredits: number;
 }
+
+type PrereqQueryResult = undefined | NonEmptyQueryResult;
+
+// keep track of the total number of requests made.
+let totalNumRequests = 0;
 
 /**
  * Asynchronously adds prereqs to a Schedule.
@@ -38,15 +41,24 @@ interface PrereqQueryResult {
 export async function addPrereqsToSchedules(
   schedules: Schedule[]
 ): Promise<Schedule[]> {
+  // set the total to zero
+  totalNumRequests = 0;
+
   // the loader to use for building a
   const loader = new DataLoader<SimpleCourse, PrereqQueryResult>(
     (keys: SimpleCourse[]) => queryCoursePrereqData(keys)
   );
 
   // return the results
-  return Promise.all(
+  let results = await Promise.all(
     schedules.map((sched: Schedule) => prereqifySchedule(sched, loader))
   );
+
+  // log the total number of requests.
+  console.log("total: " + totalNumRequests);
+  totalNumRequests = 0;
+
+  return results;
 }
 
 /**
@@ -149,6 +161,7 @@ async function prereqifyScheduleCourse(
       termId: termId,
     });
   } catch (err) {
+    throw err;
     // if we error, then return the previous course.
     return course;
   }
@@ -176,14 +189,13 @@ async function queryCoursePrereqData(
 ): Promise<PrereqQueryResult[]> {
   // for each one of the courses, map to a string.
   const courseSchema: string[] = courses.map((course: SimpleCourse) => {
-    return `
-    class(classId: ${course.classId}, subject: \"${course.subject}\") { 
-      occurrence(termId: ${course.termId}) { 
+    return `class(classId: ${course.classId}, subject: "${course.subject}") { 
+      occurrence(termId: ${202010}) {
         prereqs 
-        coreqs 
+        coreqs
+        name
       }
-    }
-    `;
+    }`;
   });
 
   // build the query schema
@@ -191,8 +203,7 @@ async function queryCoursePrereqData(
   query {
     ${courseSchema.reduce(
       (accumulator: string, currentValue: string, index: number) => {
-        accumulator += `\"${String(index)}\": ${currentValue}\n`;
-        return accumulator;
+        return accumulator + `course${String(index)}: ${currentValue}\n`;
       },
       ""
     )}
@@ -200,13 +211,37 @@ async function queryCoursePrereqData(
   `;
 
   // make the request.
-  const queryResult = await request("https://searchneu.com/graphql", {
-    body: querySchema,
+  let queryResult = await request({
+    uri: "https://searchneu.com/graphql",
+    method: "POST",
+    body: JSON.stringify({ query: querySchema }),
+    headers: {
+      "Content-type": "application/json",
+    },
   });
+  totalNumRequests += 1;
+
+  // result comes back as json, so we need to parse it.
+  // it is an object, with a data field.
+
+  // the data.
+  let data = JSON.parse(queryResult).data;
 
   const result: PrereqQueryResult[] = [];
   for (let i = 0; i < courses.length; i += 1) {
-    result.push(queryResult[i]);
+    // each course property is an object, containing an "occurrence" property object.
+    // the occurrence is then guaranteed to have the properties we requested:
+    // - prereqs
+    // - corereqs
+    // - name
+
+    // if the result was found (aka results were not null), then push
+    const current = data[`course${i}`];
+    if (current) {
+      result.push(current.occurrence);
+    } else {
+      result.push(undefined);
+    }
   }
 
   // todo: flesh out the provided request.
