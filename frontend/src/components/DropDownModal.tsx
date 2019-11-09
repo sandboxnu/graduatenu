@@ -1,16 +1,16 @@
 import * as React from "react";
 import styled from "styled-components";
 import { DNDSchedule } from "../models/types";
+import ExpandMoreOutlinedIcon from "@material-ui/icons/ExpandMoreOutlined";
 
 const Wrapper = styled.div`
   display: flex;
-  flex: 1;
+  flex-direction: column;
 `;
 
 const TopInfo = styled.div`
   display: flex;
-  flex: 1;
-  height: 65px;
+  height: 70px;
   background-color: #fafafa;
   flex-direction: row;
   justify-content: space-around;
@@ -19,7 +19,6 @@ const TopInfo = styled.div`
 
 const BottomInfo = styled.div`
   display: flex;
-  flex: 1;
   height: 200px;
   background-color: #fafafa;
 `;
@@ -43,13 +42,18 @@ export class DropDownModal extends React.Component<
     };
   }
 
+  handleClick() {
+    this.setState({ expanded: !this.state.expanded });
+  }
+
   render() {
     return (
       <Wrapper>
-        <TopInfo>
+        <TopInfo onClick={this.handleClick.bind(this)}>
           <p>4 courses</p>
           <p>16 credits</p>
           <p>Freshman Standing</p>
+          <ExpandMoreOutlinedIcon></ExpandMoreOutlinedIcon>
         </TopInfo>
         {this.state.expanded && <BottomInfo></BottomInfo>}
       </Wrapper>
