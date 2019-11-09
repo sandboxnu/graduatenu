@@ -20,7 +20,7 @@ import {
   courseCode,
   doesPrereqExist,
   getSearchNEUData,
-} from "../../frontend/src/generate-warnings";
+} from "../../frontend/src/utils/generate-warnings";
 
 /**
  * Returns if the classList contains the given class, by attr and course #.

@@ -18,7 +18,7 @@ import {
   IScheduleCourse,
   IOldRequirement,
   INEUClassMap,
-} from "../../frontend/src/models/types";
+} from "../models/types";
 
 /**
  * This module contains functions that generate warnings based off a schedule input.
