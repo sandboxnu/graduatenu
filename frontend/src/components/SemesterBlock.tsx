@@ -4,7 +4,7 @@ import ClassList from "./ClassList";
 import ClassBlock from "./ClassBlock";
 import EmptyBlock from "./EmptyBlock";
 import { AddClassModal } from "./AddClassModal";
-import { DNDScheduleTerm } from "../models/types";
+import { DNDScheduleTerm, ScheduleCourse } from "../models/types";
 import { AddButton } from "./Year/AddButton";
 import styled from "styled-components";
 
@@ -21,6 +21,7 @@ const AddButtonContainer = styled.div`
 
 interface SemesterBlockProps {
   semester: DNDScheduleTerm;
+  handleAddClasses: (courses: ScheduleCourse[]) => void;
 }
 
 interface SemesterBlockState {
@@ -52,6 +53,7 @@ export default class SemesterBlock extends React.Component<
         <AddClassModal
           visible={this.state.modalVisible}
           handleClose={this.hideModal.bind(this)}
+          handleSubmit={this.props.handleAddClasses}
         ></AddClassModal>
 
         <Container>

@@ -3,16 +3,7 @@ import styled from "styled-components";
 import { ScheduleCourse } from "../models/types";
 import { XButton } from "./common/XButton";
 import { fetchCourse } from "../api";
-
-const ShowWrapper = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.4);
-  display: block;
-`;
+import { Modal } from "@material-ui/core";
 
 const InnerSection = styled.section`
   position: fixed;
@@ -25,27 +16,49 @@ const InnerSection = styled.section`
   padding: 12px;
 `;
 
+const CloseButtonWrapper = styled.div`
+  position: absolute;
+  top: 12px;
+  right: 18px;
+`;
+
 const StyledLabel = styled.label`
   display: flex;
   flex-direction: column;
 `;
 
 const FormRow = styled.div`
-    display: flex;
-    flex: 1;
-    flex-direction: row:
-    justify-content: space-around
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 `;
 
 const QueuedClass = styled.div`
-    border: 1px solid black
-    margin: 12px;
-    display: flex;
-    flex-direction: row;
+  border: 1px solid black;
+  margin: 4px;
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  padding: 4px;
+`;
+
+const ErrorTextWrapper = styled.div`
+  display: flex;
+  flex: 1;
+  margin: 8px;
+  flex-direction: row;
+  justify-content: center;
+`;
+
+const ErrorText = styled.p`
+  color: red;
+  text-align: center;
 `;
 
 interface AddClassModalProps {
   handleClose: () => void;
+  handleSubmit: (courses: ScheduleCourse[]) => void;
   visible: boolean;
 }
 
@@ -53,6 +66,7 @@ interface AddClassModalState {
   formSubject: string;
   formClassId: string;
   queuedCourses: ScheduleCourse[];
+  errorText?: string;
 }
 
 export class AddClassModal extends React.Component<
@@ -65,6 +79,7 @@ export class AddClassModal extends React.Component<
       formSubject: "",
       formClassId: "",
       queuedCourses: [],
+      errorText: undefined,
     };
   }
 
@@ -77,19 +92,30 @@ export class AddClassModal extends React.Component<
   }
 
   async handleSearch() {
-    const courseToAdd = await fetchCourse(
-      this.state.formSubject,
-      this.state.formClassId
-    );
+    const { formSubject, formClassId, queuedCourses } = this.state;
+    const courseToAdd = await fetchCourse(formSubject, formClassId);
 
-    this.setState({
-      queuedCourses: [...this.state.queuedCourses, courseToAdd],
-    });
+    if (courseToAdd == null) {
+      this.setState({
+        errorText:
+          "Could not find " + formSubject + formClassId + " in course catalog",
+      });
+    } else {
+      this.setState({
+        queuedCourses: [...queuedCourses, courseToAdd],
+        errorText: undefined,
+      });
+    }
+  }
+
+  handleSubmit() {
+    this.props.handleSubmit(this.state.queuedCourses);
+    this.props.handleClose();
   }
 
   removeQueuedClass(index: number) {
     const newCourses = this.state.queuedCourses.filter(
-      (course: ScheduleCourse, i: number) => i !== index
+      (_, i: number) => i !== index
     );
     this.setState({
       queuedCourses: newCourses,
@@ -99,11 +125,17 @@ export class AddClassModal extends React.Component<
   renderQueuedClasses() {
     return (
       <div>
+        {!!this.state.errorText && (
+          <ErrorTextWrapper>
+            <ErrorText>{this.state.errorText}</ErrorText>
+          </ErrorTextWrapper>
+        )}
         {this.state.queuedCourses.map(
           (course: ScheduleCourse, index: number) => {
             return (
               <QueuedClass>
-                <p>{course.subject + course.classId + " " + course.name}</p>
+                <p style={{ width: 80 }}>{course.subject + course.classId}</p>
+                <p>{course.name}</p>
                 <XButton
                   onClick={this.removeQueuedClass.bind(this, index)}
                 ></XButton>
@@ -117,10 +149,19 @@ export class AddClassModal extends React.Component<
 
   render() {
     const { visible, handleClose } = this.props;
-    return visible ? (
-      <ShowWrapper>
+    return (
+      <Modal
+        style={{ outline: 0 }}
+        open={visible}
+        onClose={handleClose}
+        aria-labelledby="simple-modal-title"
+        aria-describedby="simple-modal-description"
+      >
         <InnerSection>
-          <h1>Add classes</h1>
+          <CloseButtonWrapper>
+            <XButton onClick={handleClose}></XButton>
+          </CloseButtonWrapper>
+          <h1 id="simple-modal-title">Add classes</h1>
           <form>
             <FormRow>
               <StyledLabel>
@@ -143,11 +184,16 @@ export class AddClassModal extends React.Component<
           </form>
           <button onClick={this.handleSearch.bind(this)}>Search</button>
           {this.renderQueuedClasses()}
-          <button onClick={handleClose}>Close</button>
+          <button
+            onClick={this.handleSubmit.bind(this)}
+            disabled={this.state.queuedCourses.length === 0}
+          >
+            {this.state.queuedCourses.length === 1
+              ? "Add Class"
+              : "Add Classes"}
+          </button>
         </InnerSection>
-      </ShowWrapper>
-    ) : (
-      <div></div>
+      </Modal>
     );
   }
 }

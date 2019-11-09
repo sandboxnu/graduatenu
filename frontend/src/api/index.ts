@@ -3,7 +3,7 @@ import { ScheduleCourse } from "../models/types";
 export const fetchCourse = async (
   subject: string,
   classId: string
-): Promise<ScheduleCourse> => {
+): Promise<ScheduleCourse | null> => {
   const response = await fetch("https://searchneu.com/graphql", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -17,6 +17,10 @@ export const fetchCourse = async (
     }),
   });
   const json = (await response.json()).data.class;
+
+  if (json == null) {
+    return null;
+  }
 
   json.numCreditsMin = 4;
   json.numCreditsMax = 4;
