@@ -188,30 +188,25 @@ export default class App extends React.Component<{}, AppState> {
     const year = convertTermIdToYear(termId);
     const season = convertTermIdToSeason(termId);
 
-    this.setState(
-      {
-        ...this.state,
-        schedule: {
-          ...this.state.schedule,
-          yearMap: {
-            ...this.state.schedule.yearMap,
-            [year]: {
-              ...this.state.schedule.yearMap[year],
-              [season]: {
-                ...(this.state.schedule.yearMap[year] as any)[season],
-                classes: [
-                  ...(this.state.schedule.yearMap[year] as any)[season].classes,
-                  ...dndCourses,
-                ],
-              },
+    this.setState({
+      ...this.state,
+      schedule: {
+        ...this.state.schedule,
+        yearMap: {
+          ...this.state.schedule.yearMap,
+          [year]: {
+            ...this.state.schedule.yearMap[year],
+            [season]: {
+              ...(this.state.schedule.yearMap[year] as any)[season],
+              classes: [
+                ...(this.state.schedule.yearMap[year] as any)[season].classes,
+                ...dndCourses,
+              ],
             },
           },
         },
       },
-      () => {
-        console.log(this.state);
-      }
-    );
+    });
   };
 
   convertToDNDCourses = (courses: ScheduleCourse[]): DNDScheduleCourse[] => {
