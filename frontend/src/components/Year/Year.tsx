@@ -1,39 +1,40 @@
-import * as React from 'react'
-import styled from 'styled-components'
-import { YearTop } from './YearTop'
-import SemesterBlock from '../SemesterBlock'
-import { Schedule } from '../../models'
-import { YearBottom } from './YearBottom'
+import * as React from "react";
+import styled from "styled-components";
+import { YearTop } from "./YearTop";
+import SemesterBlock from "../SemesterBlock";
+import { DNDSchedule } from "../../models/types";
+import { YearBottom } from "./YearBottom";
 
 export interface IYearProps {
-	index: number
-	schedule: Schedule
+  index: number;
+  schedule: DNDSchedule;
 }
 
 const YearText = styled.h3`
-	margin-bottom: 8px;
-`
+  margin-bottom: 8px;
+`;
 
 const YearBody = styled.div`
-	display: flex;
-	flex-direction: row;
-`
+  display: flex;
+  flex-direction: row;
+`;
 
 export class Year extends React.Component<IYearProps> {
-	render() {
-		const { index, schedule } = this.props
-		return (
-			<div style={{ marginBottom: 12 }}>
-				<YearText>Year {index + 1}</YearText>
-				<YearTop></YearTop>
-				<YearBody>
-					<SemesterBlock semester={schedule.semesters['semester-' + (1 + 4 * index)]} />
-					<SemesterBlock semester={schedule.semesters['semester-' + (2 + 4 * index)]} />
-					<SemesterBlock semester={schedule.semesters['semester-' + (3 + 4 * index)]} />
-					<SemesterBlock semester={schedule.semesters['semester-' + (4 + 4 * index)]} />
-				</YearBody>
-				<YearBottom schedule={schedule}></YearBottom>
-			</div>
-		)
-	}
+  render() {
+    const { index, schedule } = this.props;
+    const year = schedule.years[index];
+    return (
+      <div style={{ marginBottom: 12 }}>
+        <YearText>{year}</YearText>
+        <YearTop />
+        <YearBody>
+          <SemesterBlock semester={schedule.yearMap[year].fall} />
+          <SemesterBlock semester={schedule.yearMap[year].spring} />
+          <SemesterBlock semester={schedule.yearMap[year].summer1} />
+          <SemesterBlock semester={schedule.yearMap[year].summer2} />
+        </YearBody>
+        <YearBottom schedule={schedule}></YearBottom>
+      </div>
+    );
+  }
 }

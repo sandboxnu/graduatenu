@@ -7,34 +7,34 @@
 // the following code assumes that ranges have a credits required.
 
 import {
-    IAndCourse,
-    ICourseRange,
-    IOrCourse,
-    IRequiredCourse,
-    IScheduleCourse,
-    Requirement,
-    UserChoice,
-} from "./types";
+  IAndCourse,
+  ICourseRange,
+  IOrCourse,
+  IRequiredCourse,
+  IScheduleCourse,
+  Requirement,
+  UserChoice,
+} from "../../frontend/src/models/types";
 
 /**
  * Parses a Requirement to a choice or a course, to show to the user.
  * @param req The Requirement to parse.
  */
 export const parseRequirement = (
-    req: Requirement
+  req: Requirement
 ): Array<UserChoice | IScheduleCourse> => {
-    // We have a IOrCourse, IAndCourse, ICourseRange, or ISimpleRequiredCourse.
-    // Assume that credits only matter if we have a ICourseRange.
-    switch (req.type) {
-        case "AND":
-            return parseRequiredAnd(req);
-        case "OR":
-            return parseRequiredOr(req);
-        case "RANGE":
-            return parseRequiredRange(req);
-        case "COURSE":
-            return parseRequiredSimple(req);
-    }
+  // We have a IOrCourse, IAndCourse, ICourseRange, or ISimpleRequiredCourse.
+  // Assume that credits only matter if we have a ICourseRange.
+  switch (req.type) {
+    case "AND":
+      return parseRequiredAnd(req);
+    case "OR":
+      return parseRequiredOr(req);
+    case "RANGE":
+      return parseRequiredRange(req);
+    case "COURSE":
+      return parseRequiredSimple(req);
+  }
 };
 
 /**
@@ -42,15 +42,15 @@ export const parseRequirement = (
  * @param req The IAndCourse to parse.
  */
 const parseRequiredAnd = (
-    req: IAndCourse
+  req: IAndCourse
 ): Array<UserChoice | IScheduleCourse> => {
-    // We have an AND. Every branch must be completed, but this also means we can "flatten" the results.
-    const results = req.courses.map(subReq => parseRequirement(subReq));
+  // We have an AND. Every branch must be completed, but this also means we can "flatten" the results.
+  const results = req.courses.map(subReq => parseRequirement(subReq));
 
-    // Array.prototype.flat() not yet supported on typescript :(
-    // return results.flat();
-    // Array.prototype.reduce: [Y, X => Y], Y => Y
-    return results.reduce((acc, val) => acc.concat(val), []);
+  // Array.prototype.flat() not yet supported on typescript :(
+  // return results.flat();
+  // Array.prototype.reduce: [Y, X => Y], Y => Y
+  return results.reduce((acc, val) => acc.concat(val), []);
 };
 
 /**
@@ -58,11 +58,11 @@ const parseRequiredAnd = (
  * @param req The IORCourse requirement to parse.
  */
 const parseRequiredOr = (
-    req: IOrCourse
+  req: IOrCourse
 ): Array<UserChoice | IScheduleCourse> => {
-    // We have an OR. Not every branch needs to be completed.
-    // Make the user choose.
-    return [req];
+  // We have an OR. Not every branch needs to be completed.
+  // Make the user choose.
+  return [req];
 };
 
 /**
@@ -70,10 +70,10 @@ const parseRequiredOr = (
  * @param req The ICourseRange requirement to parse.
  */
 const parseRequiredRange = (
-    req: ICourseRange
+  req: ICourseRange
 ): Array<UserChoice | IScheduleCourse> => {
-    // We have a selection. Make the user choose.
-    return [req];
+  // We have a selection. Make the user choose.
+  return [req];
 };
 
 /**
@@ -81,8 +81,8 @@ const parseRequiredRange = (
  * @param req The ISimpleRequiredCourse to parse.
  */
 const parseRequiredSimple = (
-    req: IRequiredCourse
+  req: IRequiredCourse
 ): Array<UserChoice | IScheduleCourse> => {
-    // We have a simple course. Return its equivalent.
-    return [{ subject: req.subject, classId: req.classId }];
+  // We have a simple course. Return its equivalent.
+  return [{ subject: req.subject, classId: req.classId }];
 };

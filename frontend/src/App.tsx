@@ -1,135 +1,201 @@
-import React from 'react'
-import './App.css'
-import SemesterBlock from './components/SemesterBlock'
-import { DragDropContext } from 'react-beautiful-dnd'
-import { mockData } from './data/mockData'
-import { Semester, Schedule } from './models'
-import styled from 'styled-components'
-import { Year } from './components/Year/Year'
+import React from "react";
+import "./App.css";
+import { DragDropContext } from "react-beautiful-dnd";
+import { mockData } from "./data/mockData";
+import { DNDScheduleTerm, DNDSchedule, DNDScheduleYear } from "./models/types";
+import styled from "styled-components";
+import { Year } from "./components/Year/Year";
+import { convertTermIdToYear, convertTermIdToSeason } from "./utils";
 
 const Container = styled.div`
-	display: flex;
-	flex: 1;
-	flex-direction: column;
-	justify-content: start;
-	align-items: start;
-	margin: 30px;
-	background-color: '#ff76ff';
-`
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  margin: 30px;
+  background-color: "#ff76ff";
+`;
 
 const ButtonWrapper = styled.div`
-	display: flex;
-	flex-direction: row;
-	margin-bottom: 12px;
-`
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 12px;
+`;
 
 const Button = styled.button`
 	width: 100px;
 	border 1px solid black;
 	padding: 8px;
 	margin-right: 20px;
-`
+`;
 
 const ButtonText = styled.div`
-	text-align: center;
-`
+  text-align: center;
+`;
 
 interface AppState {
-	schedule: Schedule
+  schedule: DNDSchedule;
 }
 
 export default class App extends React.Component<{}, AppState> {
-	constructor(props: any) {
-		super(props)
+  constructor(props: any) {
+    super(props);
 
-		this.state = { schedule: mockData }
-	}
+    this.state = { schedule: mockData };
+  }
 
-	onDragEnd = (result: any) => {
-		const { destination, source, draggableId } = result
+  onDragEnd = (result: any) => {
+    const { destination, source, draggableId } = result;
 
-		if (!destination || (destination.droppableId === source.droppableId && destination.index === source.index)) {
-			return
-		}
+    if (
+      !destination ||
+      (destination.droppableId === source.droppableId &&
+        destination.index === source.index)
+    ) {
+      return;
+    }
 
-		const startSemester = this.state.schedule.semesters[source.droppableId]
-		const finishSemester = this.state.schedule.semesters[destination.droppableId]
+    const sourceSemesterSeason = convertTermIdToSeason(source.droppableId);
+    const sourceSemesterYear = convertTermIdToYear(source.droppableId);
+    const startYear: DNDScheduleYear = this.state.schedule.yearMap[
+      sourceSemesterYear
+    ];
+    const startSemester: DNDScheduleTerm = (startYear as any)[
+      sourceSemesterSeason
+    ];
 
-		if (startSemester === finishSemester) {
-			const newClassOrder = Array.from(startSemester.classIds)
-			newClassOrder.splice(source.index, 1)
-			newClassOrder.splice(destination.index, 0, draggableId)
+    const destSemesterSeason = convertTermIdToSeason(destination.droppableId);
+    const destSemesterYear = convertTermIdToYear(destination.droppableId);
+    const finishYear: DNDScheduleYear = this.state.schedule.yearMap[
+      destSemesterYear
+    ];
+    const finishSemester: DNDScheduleTerm = (finishYear as any)[
+      destSemesterSeason
+    ];
 
-			const newSemester: Semester = {
-				...startSemester,
-				classIds: newClassOrder
-			}
+    if (startSemester === finishSemester) {
+      const newClassOrder = Array.from(startSemester.classes);
+      const movedClass = newClassOrder[source.index];
+      newClassOrder.splice(source.index, 1);
+      newClassOrder.splice(destination.index, 0, movedClass);
 
-			const newState: AppState = {
-				...this.state,
-				schedule: {
-					...this.state.schedule,
-					semesters: {
-						...this.state.schedule.semesters,
-						[newSemester.id]: newSemester
-					}
-				}
-			}
+      const newSemester: DNDScheduleTerm = {
+        ...startSemester,
+        classes: newClassOrder,
+      };
 
-			this.setState(newState)
-			return
-		}
+      const newSemesterYear = convertTermIdToYear(newSemester.termId);
+      const newSemesterSeason = convertTermIdToSeason(newSemester.termId);
 
-		const startClassIds = Array.from(startSemester.classIds)
-		startClassIds.splice(source.index, 1)
-		const newStartSemester: Semester = {
-			...startSemester,
-			classIds: startClassIds
-		}
+      const newState: AppState = {
+        ...this.state,
+        schedule: {
+          ...this.state.schedule,
+          // semesters: {
+          //   ...this.state.schedule.semesters,
+          //   [newSemester.id]: newSemester,
+          // },
+          yearMap: {
+            ...this.state.schedule.yearMap,
+            [newSemesterYear]: {
+              ...this.state.schedule.yearMap[newSemesterYear],
+              [newSemesterSeason]: newSemester,
+            },
+          },
+        },
+      };
 
-		const finishClassIds = Array.from(finishSemester.classIds)
-		finishClassIds.splice(destination.index, 0, draggableId)
-		const newFinishSemester: Semester = {
-			...finishSemester,
-			classIds: finishClassIds
-		}
+      this.setState(newState);
+      return;
+    }
 
-		const newState: AppState = {
-			...this.state,
-			schedule: {
-				...this.state.schedule,
-				semesters: {
-					...this.state.schedule.semesters,
-					[newStartSemester.id]: newStartSemester,
-					[newFinishSemester.id]: newFinishSemester
-				}
-			}
-		}
+    const startClasses = Array.from(startSemester.classes);
+    const movedClass = startClasses[source.index];
+    startClasses.splice(source.index, 1);
+    const newStartSemester: DNDScheduleTerm = {
+      ...startSemester,
+      classes: startClasses,
+    };
 
-		this.setState(newState)
-	}
+    const finishClasses = Array.from(finishSemester.classes);
+    finishClasses.splice(destination.index, 0, movedClass);
+    const newFinishSemester: DNDScheduleTerm = {
+      ...finishSemester,
+      classes: finishClasses,
+    };
 
-	render() {
-		return (
-			<DragDropContext onDragEnd={this.onDragEnd}>
-				<Container>
-					<div>
-						<h2>Plan Of Study</h2>
-					</div>
-					<ButtonWrapper>
-						<Button onClick={() => {}}>
-							<ButtonText>Add a class</ButtonText>
-						</Button>
-						<Button onClick={() => {}}>
-							<ButtonText>Search</ButtonText>
-						</Button>
-					</ButtonWrapper>
-					<Year index={0} schedule={this.state.schedule}></Year>
-					<Year index={1} schedule={this.state.schedule}></Year>
-					{/* <Year index={2} schedule={this.state.schedule}></Year>
+    const newStartSemesterYear = convertTermIdToYear(newStartSemester.termId);
+    const newStartSemesterSeason = convertTermIdToSeason(
+      newStartSemester.termId
+    );
+    const newFinishSemesterYear = convertTermIdToYear(newFinishSemester.termId);
+    const newFinishSemesterSeason = convertTermIdToSeason(
+      newFinishSemester.termId
+    );
+
+    let newState: AppState;
+
+    if (newStartSemesterYear === newFinishSemesterYear) {
+      // in same year
+      newState = {
+        ...this.state,
+        schedule: {
+          ...this.state.schedule,
+          yearMap: {
+            ...this.state.schedule.yearMap,
+            [newStartSemesterYear]: {
+              ...this.state.schedule.yearMap[newStartSemesterYear],
+              [newStartSemesterSeason]: newStartSemester,
+              [newFinishSemesterSeason]: newFinishSemester,
+            },
+          },
+        },
+      };
+    } else {
+      newState = {
+        ...this.state,
+        schedule: {
+          ...this.state.schedule,
+          yearMap: {
+            ...this.state.schedule.yearMap,
+            [newStartSemesterYear]: {
+              ...this.state.schedule.yearMap[newStartSemesterYear],
+              [newStartSemesterSeason]: newStartSemester,
+            },
+            [newFinishSemesterYear]: {
+              ...this.state.schedule.yearMap[newFinishSemesterYear],
+              [newFinishSemesterSeason]: newFinishSemester,
+            },
+          },
+        },
+      };
+    }
+
+    this.setState(newState);
+  };
+
+  render() {
+    return (
+      <DragDropContext onDragEnd={this.onDragEnd}>
+        <Container>
+          <div>
+            <h2>Plan Of Study</h2>
+          </div>
+          <ButtonWrapper>
+            <Button onClick={() => {}}>
+              <ButtonText>Add a class</ButtonText>
+            </Button>
+            <Button onClick={() => {}}>
+              <ButtonText>Search</ButtonText>
+            </Button>
+          </ButtonWrapper>
+          <Year index={0} schedule={this.state.schedule}></Year>
+          <Year index={1} schedule={this.state.schedule}></Year>
+          {/* <Year index={2} schedule={this.state.schedule}></Year>
 					<Year index={3} schedule={this.state.schedule}></Year> */}
-				</Container>
-			</DragDropContext>
-		)
-	}
+        </Container>
+      </DragDropContext>
+    );
+  }
 }

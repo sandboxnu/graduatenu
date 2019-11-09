@@ -6,7 +6,7 @@ import {
   ScheduleTerm,
   Season,
   Status,
-} from "./types";
+} from "../../frontend/src/models/types";
 
 // the year to use as the first year of the schedule.
 const BASE_YEAR: number = 1000;
@@ -24,7 +24,7 @@ export function planOfStudyToSchedule(planofstudy: string): Schedule[] {
   // for each of the plans, produce a schedule.
   $(".sc_plangrid tbody").each((planIndex, table) => {
     const schedule = buildSchedule($, table);
-    schedule.id = planIndex;
+    schedule.id = String(planIndex);
     schedules.push(schedule);
   });
 
@@ -84,7 +84,7 @@ function buildScheduleFromYears(
   const schedule: Schedule = {
     years: [],
     yearMap: {},
-    id: 0,
+    id: "example-schedule",
   };
 
   // all of the years of each year should be zero.
@@ -283,7 +283,8 @@ function buildYear(
 
       let classes: ScheduleCourse[] = seasons[i].reduce(function(
         accumulator: ScheduleCourse[],
-        item: ScheduleCourse | string
+        item: ScheduleCourse | string,
+        index: number
       ): ScheduleCourse[] {
         if (typeof item !== "string") {
           const parsedMultiCourseMatch: RegExp = new RegExp(
@@ -355,4 +356,20 @@ function buildYear(
   }
 
   return year;
+}
+
+function convertSeasonEnumToText(season: Season): string {
+  if (season === "SP") {
+    return "spring";
+  }
+  if (season == "FL") {
+    return "fall";
+  }
+  if (season == "S1") {
+    return "summer1";
+  }
+  if (season == "S2") {
+    return "summer2";
+  }
+  return "";
 }

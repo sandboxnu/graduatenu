@@ -13,7 +13,7 @@ import {
   INEUParentMap,
   CourseTakenTracker,
   IWarning,
-} from "./types";
+} from "../../frontend/src/models/types";
 import { courseCode, getSearchNEUData, doesPrereqExist } from "./json_parser";
 
 /**
@@ -334,7 +334,7 @@ export function oldToNew(
   const born: Schedule = {
     years: [],
     yearMap: {},
-    id: 0,
+    id: "example-schedule",
   };
 
   // get all the years

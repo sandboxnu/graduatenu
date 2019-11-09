@@ -135,7 +135,7 @@ expect.extend({
       // make sure they are of proper tyes
       expect(schedule.years).toBeInstanceOf(Array);
       expect(schedule.yearMap).toBeInstanceOf(Object);
-      expect(schedule.id).toEqual(scheduleIndex);
+      expect(Number(schedule.id)).toEqual(scheduleIndex);
 
       // all of the years should be properties of yearMap.
       const yearMap = schedule.yearMap;
@@ -190,10 +190,10 @@ expect.extend({
           // check properties of term.
           expect(term.season).toEqual(seasons[seasonsIndex]);
           expect(term.year).toEqual(yearNumber);
-          expect(term.termId).toEqual(
+          expect(Number(term.termId)).toEqual(
             yearNumber * 100 + seasonIds[seasonsIndex]
           );
-          expect(term.id).toEqual(yearNumber + seasonIds[seasonsIndex]);
+          expect(Number(term.id)).toEqual(yearNumber + seasonIds[seasonsIndex]);
           expect(term.status).toMatch(/COOP|CLASSES|INACTIVE/);
 
           // classes should be defined.

@@ -203,9 +203,15 @@ export interface RANGESection {
 export interface Schedule {
   years: number[];
   yearMap: {
-    [key: number]: ScheduleYear;
+    [key: number]: ScheduleYear | DNDScheduleYear; // type error if we don't do this
   };
-  id: number;
+  id: string;
+}
+
+export interface DNDSchedule extends Schedule {
+  yearMap: {
+    [key: number]: DNDScheduleYear;
+  };
 }
 
 /**
@@ -226,6 +232,13 @@ export interface ScheduleYear {
   isSummerFull: boolean;
 }
 
+export interface DNDScheduleYear extends ScheduleYear {
+  fall: DNDScheduleTerm;
+  spring: DNDScheduleTerm;
+  summer1: DNDScheduleTerm;
+  summer2: DNDScheduleTerm;
+}
+
 /**
  * A ScheduleTerm, representing a term of a scheudle
  * @param season the season of this term
@@ -242,6 +255,10 @@ export interface ScheduleTerm {
   id: number;
   status: Status;
   classes: ScheduleCourse[];
+}
+
+export interface DNDScheduleTerm extends ScheduleTerm {
+  classes: DNDScheduleCourse[];
 }
 
 /**
@@ -261,6 +278,7 @@ export enum Status {
  * @param coreqs the corequisites for this course
  * @param numCreditsMin the minimum number of credits this course gives
  * @param numCreditsMax the maximum number of credits this course gives
+ * @param dndId a unique ID for the course for dnd purposes, ex "course-1"
  */
 export interface ScheduleCourse {
   classId: number;
@@ -269,6 +287,10 @@ export interface ScheduleCourse {
   coreqs?: INEUAndPrereq | INEUOrPrereq;
   numCreditsMin: number;
   numCreditsMax: number;
+}
+
+export interface DNDScheduleCourse extends ScheduleCourse {
+  dndId: string;
 }
 
 /**
