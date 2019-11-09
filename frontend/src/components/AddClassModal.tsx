@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { NamedScheduleCourse } from "../models/types";
 import { XButton } from "./common/XButton";
 import { fetchCourse } from "../api";
-import { Modal } from "@material-ui/core";
+import { Modal, CircularProgress } from "@material-ui/core";
 
 const InnerSection = styled.section`
   position: fixed;
@@ -13,7 +13,10 @@ const InnerSection = styled.section`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  padding: 12px;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const CloseButtonWrapper = styled.div`
@@ -33,9 +36,24 @@ const FormRow = styled.div`
   justify-content: space-around;
 `;
 
+const SearchButton = styled.button`
+  margin: 8px;
+`;
+
+const SubmitButton = styled.button`
+  margin: 8px;
+`;
+
+const QueuedClassesWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
 const QueuedClass = styled.div`
   border: 1px solid black;
-  margin: 4px;
+  margin-top: 4px;
+  margin-bottom: 4px;
   display: flex;
   flex-direction: row;
   justify-content: start;
@@ -67,6 +85,7 @@ interface AddClassModalState {
   formClassId: string;
   queuedCourses: NamedScheduleCourse[];
   errorText?: string;
+  isLoading: boolean;
 }
 
 export class AddClassModal extends React.Component<
@@ -80,6 +99,7 @@ export class AddClassModal extends React.Component<
       formClassId: "",
       queuedCourses: [],
       errorText: undefined,
+      isLoading: false,
     };
   }
 
@@ -93,15 +113,25 @@ export class AddClassModal extends React.Component<
 
   async handleSearch() {
     const { formSubject, formClassId, queuedCourses } = this.state;
-    const courseToAdd = await fetchCourse(formSubject, formClassId);
+
+    this.setState({
+      isLoading: true,
+    });
+
+    const courseToAdd = await fetchCourse(
+      formSubject.toUpperCase(),
+      formClassId
+    );
 
     if (courseToAdd == null) {
       this.setState({
+        isLoading: false,
         errorText:
           "Could not find " + formSubject + formClassId + " in course catalog",
       });
     } else {
       this.setState({
+        isLoading: false,
         queuedCourses: [...queuedCourses, courseToAdd],
         errorText: undefined,
       });
@@ -124,17 +154,18 @@ export class AddClassModal extends React.Component<
 
   renderQueuedClasses() {
     return (
-      <div>
+      <QueuedClassesWrapper>
         {!!this.state.errorText && (
           <ErrorTextWrapper>
             <ErrorText>{this.state.errorText}</ErrorText>
           </ErrorTextWrapper>
         )}
+        {!!this.state.isLoading && <CircularProgress />}
         {this.state.queuedCourses.map(
           (course: NamedScheduleCourse, index: number) => {
             return (
               <QueuedClass>
-                <p style={{ width: 80 }}>{course.subject + course.classId}</p>
+                <p style={{ width: 90 }}>{course.subject + course.classId}</p>
                 <p>{course.name}</p>
                 <XButton
                   onClick={this.removeQueuedClass.bind(this, index)}
@@ -143,7 +174,7 @@ export class AddClassModal extends React.Component<
             );
           }
         )}
-      </div>
+      </QueuedClassesWrapper>
     );
   }
 
@@ -153,6 +184,7 @@ export class AddClassModal extends React.Component<
       formClassId: "",
       queuedCourses: [],
       errorText: undefined,
+      isLoading: false,
     });
     this.props.handleClose();
   }
@@ -178,6 +210,7 @@ export class AddClassModal extends React.Component<
                 Subject:
                 <input
                   type="text"
+                  placeholder="CS"
                   value={this.state.formSubject}
                   onChange={this.handleSubjectChange.bind(this)}
                 ></input>
@@ -186,22 +219,25 @@ export class AddClassModal extends React.Component<
                 Class ID:
                 <input
                   type="text"
+                  placeholder="3500"
                   value={this.state.formClassId}
                   onChange={this.handleClassIdChange.bind(this)}
                 ></input>
               </StyledLabel>
             </FormRow>
           </form>
-          <button onClick={this.handleSearch.bind(this)}>Search</button>
+          <SearchButton onClick={this.handleSearch.bind(this)}>
+            Search
+          </SearchButton>
           {this.renderQueuedClasses()}
-          <button
+          <SubmitButton
             onClick={this.handleSubmit.bind(this)}
             disabled={this.state.queuedCourses.length === 0}
           >
             {this.state.queuedCourses.length === 1
               ? "Add Class"
               : "Add Classes"}
-          </button>
+          </SubmitButton>
         </InnerSection>
       </Modal>
     );
