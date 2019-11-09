@@ -31,7 +31,7 @@ export class Year extends React.Component<IYearProps> {
     const year = schedule.years[index];
     return (
       <div style={{ marginBottom: 12 }}>
-        <YearText>{year}</YearText>
+        <YearText>{year + " - " + (year + 1)}</YearText>
         <YearTop />
         <YearBody>
           <SemesterBlock

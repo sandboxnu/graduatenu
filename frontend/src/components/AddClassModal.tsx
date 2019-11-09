@@ -110,7 +110,7 @@ export class AddClassModal extends React.Component<
 
   handleSubmit() {
     this.props.handleSubmit(this.state.queuedCourses);
-    this.props.handleClose();
+    this.prepareToClose();
   }
 
   removeQueuedClass(index: number) {
@@ -147,19 +147,29 @@ export class AddClassModal extends React.Component<
     );
   }
 
+  prepareToClose() {
+    this.setState({
+      formSubject: "",
+      formClassId: "",
+      queuedCourses: [],
+      errorText: undefined,
+    });
+    this.props.handleClose();
+  }
+
   render() {
-    const { visible, handleClose } = this.props;
+    const { visible } = this.props;
     return (
       <Modal
         style={{ outline: 0 }}
         open={visible}
-        onClose={handleClose}
+        onClose={this.prepareToClose.bind(this)}
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
       >
         <InnerSection>
           <CloseButtonWrapper>
-            <XButton onClick={handleClose}></XButton>
+            <XButton onClick={this.prepareToClose.bind(this)}></XButton>
           </CloseButtonWrapper>
           <h1 id="simple-modal-title">Add classes</h1>
           <form>

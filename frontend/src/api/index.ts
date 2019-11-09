@@ -4,6 +4,10 @@ export const fetchCourse = async (
   subject: string,
   classId: string
 ): Promise<ScheduleCourse | null> => {
+  if (subject.length < 2 || classId.length !== 4 || isNaN(+classId)) {
+    return null;
+  }
+
   const response = await fetch("https://searchneu.com/graphql", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
