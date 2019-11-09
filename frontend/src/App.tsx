@@ -46,7 +46,7 @@ export default class App extends React.Component<{}, AppState> {
   }
 
   onDragEnd = (result: any) => {
-    const { destination, source, draggableId } = result;
+    const { destination, source } = result;
 
     if (
       !destination ||
