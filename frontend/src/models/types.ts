@@ -286,10 +286,13 @@ export interface ScheduleCourse {
   coreqs?: INEUAndPrereq | INEUOrPrereq;
   numCreditsMin: number;
   numCreditsMax: number;
-  name?: string;
 }
 
-export interface DNDScheduleCourse extends ScheduleCourse {
+export interface NamedScheduleCourse extends ScheduleCourse {
+  name: string;
+}
+
+export interface DNDScheduleCourse extends NamedScheduleCourse {
   dndId: string;
 }
 

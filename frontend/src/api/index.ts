@@ -1,9 +1,9 @@
-import { ScheduleCourse } from "../models/types";
+import { NamedScheduleCourse } from "../models/types";
 
 export const fetchCourse = async (
   subject: string,
   classId: string
-): Promise<ScheduleCourse | null> => {
+): Promise<NamedScheduleCourse | null> => {
   if (subject.length < 2 || classId.length !== 4 || isNaN(+classId)) {
     return null;
   }

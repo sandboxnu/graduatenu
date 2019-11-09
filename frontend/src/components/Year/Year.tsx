@@ -2,13 +2,13 @@ import * as React from "react";
 import styled from "styled-components";
 import { YearTop } from "./YearTop";
 import SemesterBlock from "../SemesterBlock";
-import { DNDSchedule, ScheduleCourse } from "../../models/types";
+import { DNDSchedule, NamedScheduleCourse } from "../../models/types";
 import { YearBottom } from "./YearBottom";
 
 export interface IYearProps {
   index: number;
   schedule: DNDSchedule;
-  handleAddClasses: (courses: ScheduleCourse[], termId: number) => void;
+  handleAddClasses: (courses: NamedScheduleCourse[], termId: number) => void;
 }
 
 const YearText = styled.h3`
@@ -22,7 +22,7 @@ const YearBody = styled.div`
 
 export class Year extends React.Component<IYearProps> {
   addClassesWrapper = (termId: number) => {
-    return (courses: ScheduleCourse[]) =>
+    return (courses: NamedScheduleCourse[]) =>
       this.props.handleAddClasses(courses, termId);
   };
 

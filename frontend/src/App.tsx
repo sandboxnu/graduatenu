@@ -6,8 +6,8 @@ import {
   DNDScheduleTerm,
   DNDSchedule,
   DNDScheduleYear,
-  ScheduleCourse,
   DNDScheduleCourse,
+  NamedScheduleCourse,
 } from "./models/types";
 import styled from "styled-components";
 import { Year } from "./components/Year/Year";
@@ -182,7 +182,7 @@ export default class App extends React.Component<{}, AppState> {
     this.setState(newState);
   };
 
-  handleAddClasses = (courses: ScheduleCourse[], termId: number) => {
+  handleAddClasses = (courses: NamedScheduleCourse[], termId: number) => {
     // convert to DNDScheduleCourses
     const dndCourses = this.convertToDNDCourses(courses);
     const year = convertTermIdToYear(termId);
@@ -209,7 +209,9 @@ export default class App extends React.Component<{}, AppState> {
     });
   };
 
-  convertToDNDCourses = (courses: ScheduleCourse[]): DNDScheduleCourse[] => {
+  convertToDNDCourses = (
+    courses: NamedScheduleCourse[]
+  ): DNDScheduleCourse[] => {
     var list: DNDScheduleCourse[] = [];
     var counter = this.state.currentClassCounter;
     for (const course of courses) {

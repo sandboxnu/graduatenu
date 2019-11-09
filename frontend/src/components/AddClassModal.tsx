@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { ScheduleCourse } from "../models/types";
+import { NamedScheduleCourse } from "../models/types";
 import { XButton } from "./common/XButton";
 import { fetchCourse } from "../api";
 import { Modal } from "@material-ui/core";
@@ -58,14 +58,14 @@ const ErrorText = styled.p`
 
 interface AddClassModalProps {
   handleClose: () => void;
-  handleSubmit: (courses: ScheduleCourse[]) => void;
+  handleSubmit: (courses: NamedScheduleCourse[]) => void;
   visible: boolean;
 }
 
 interface AddClassModalState {
   formSubject: string;
   formClassId: string;
-  queuedCourses: ScheduleCourse[];
+  queuedCourses: NamedScheduleCourse[];
   errorText?: string;
 }
 
@@ -131,7 +131,7 @@ export class AddClassModal extends React.Component<
           </ErrorTextWrapper>
         )}
         {this.state.queuedCourses.map(
-          (course: ScheduleCourse, index: number) => {
+          (course: NamedScheduleCourse, index: number) => {
             return (
               <QueuedClass>
                 <p style={{ width: 80 }}>{course.subject + course.classId}</p>
