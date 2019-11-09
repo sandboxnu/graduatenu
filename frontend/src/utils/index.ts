@@ -1,3 +1,10 @@
+import {
+  Schedule,
+  ScheduleTerm,
+  DNDSchedule,
+  DNDScheduleCourse,
+} from "../models/types";
+
 export function convertTermIdToSeason(termId: number): string {
   const seasonId = termId % 100;
 
@@ -15,4 +22,15 @@ export function convertTermIdToSeason(termId: number): string {
 
 export function convertTermIdToYear(termId: number): number {
   return Math.trunc(termId / 100);
+}
+
+export function sumCreditsInSemester(
+  schedule: DNDSchedule,
+  year: number,
+  season: string
+): number {
+  return (schedule.yearMap[year] as any)[season].classes.reduce(
+    (acc: number, curr: DNDScheduleCourse) => acc + curr.numCreditsMax,
+    0
+  );
 }

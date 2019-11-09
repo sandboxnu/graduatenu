@@ -59,7 +59,7 @@ export class Year extends React.Component<IYearProps> {
             )}
           />
         </YearBody>
-        <YearBottom schedule={schedule}></YearBottom>
+        <YearBottom schedule={schedule} year={year}></YearBottom>
       </div>
     );
   }
