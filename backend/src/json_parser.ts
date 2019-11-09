@@ -16,6 +16,11 @@ import {
   UserChoice,
   CourseTakenTracker,
 } from "../../frontend/src/models/types";
+import {
+  courseCode,
+  doesPrereqExist,
+  getSearchNEUData,
+} from "../../frontend/src/generate-warnings";
 
 /**
  * Returns if the classList contains the given class, by attr and course #.
@@ -363,105 +368,6 @@ export class Graph<T> {
 }
 
 // the following functions are for prerequisite parsing. a prerequisite object is defined below:
-
-/**
- * Produces a string of the course's subject followed by classId.
- * @param course The course to get the code of.
- * @returns The courseCode of the course.
- */
-export const courseCode = (
-  course:
-    | ICompleteCourse
-    | IRequiredCourse
-    | INEUCourse
-    | INEUPrereqCourse
-    | IScheduleCourse
-) => {
-  return "" + course.subject + course.classId;
-};
-
-/**
- * Checks whether or not the prereq's edges exist in the graph "graph"
- * @param to The classCode of the node to point to
- * @param prereq The prerequisite object to add an edge for (maybe).
- * @returns true if the full prereq exists in the graph "graph'"
- */
-export const doesPrereqExist = (
-  prereq: INEUAndPrereq | INEUOrPrereq,
-  tracker: CourseTakenTracker
-): string | undefined => {
-  // if prereq is "and", check and.
-  if (prereq.type === "and") {
-    return doesAndPrereqExist(prereq, tracker);
-  } else {
-    return doesOrPrereqExist(prereq, tracker);
-  }
-};
-
-/**
- *
- * @param to The classCode of the node to point to
- * @param prereq The prerequisite objec to add an edge for (maybe).
- * @returns true if the full prereq exists in the graph "graph"
- */
-const doesAndPrereqExist = (
-  prereq: INEUAndPrereq,
-  tracker: CourseTakenTracker
-): string | undefined => {
-  // make sure each of the values exists.
-  for (const item of prereq.values) {
-    if ("type" in item) {
-      // does the graph contain the entire prereq?
-      let prereqResult = doesPrereqExist(item, tracker);
-      if (prereqResult) {
-        return `AND: {${prereqResult}}`;
-      }
-    } else {
-      const from = courseCode(item);
-      // does the graph contain an edge?
-      if (!tracker.contains(courseCode(item))) {
-        return `AND: ${courseCode(item)}`;
-      }
-    }
-  }
-
-  // if we hit this point, everything passed.
-  return undefined;
-};
-
-/**
- *
- * @param to The classCode of the node to point to
- * @param prereq The prerequisite object to add an edge for (mabye).
- * @returns true if the full prerequisite object exists in the graph "graph"
- */
-const doesOrPrereqExist = (
-  prereq: INEUOrPrereq,
-  tracker: CourseTakenTracker
-): string | undefined => {
-  // if any one of the prereqs exists, return true.
-  for (const item of prereq.values) {
-    if ("type" in item) {
-      let prereqResult = doesPrereqExist(item, tracker);
-      if (prereqResult === undefined) {
-        return undefined;
-      }
-    } else {
-      if (tracker.contains(courseCode(item))) {
-        return undefined;
-      }
-    }
-  }
-
-  // nothing existed, so return false
-  return `OR: ${prereq.values.map(function(prereq) {
-    if ("type" in prereq) {
-      return "{Object}";
-    } else {
-      return courseCode(prereq);
-    }
-  })}`;
-};
 
 /**
  * Filters and simplifies the provided prereq object.
@@ -880,93 +786,6 @@ const addRequired = (
 
   // adds the produced ordering to the schedule under the property "scheduled".
   schedule.scheduled = coffmanGraham;
-};
-
-/**
- * Attempts to grab searchNEU data for a course, using that course's termId to lookup the corresponding file.
- * If no termId is found, automatically uses the most recent semester on record.
- * May return undefined.
- * @param course A course object (hopefully).
- * @param classMapParent The parent classMap object, with props "mostRecentSemester" and "allTermIds"
- * @returns Produces the corresponding searchNEU data for a class, if it exists. else => undefined.
- */
-export const getSearchNEUData = (
-  course:
-    | ICompleteCourse
-    | IRequiredCourse
-    | INEUCourse
-    | INEUPrereqCourse
-    | IScheduleCourse
-    | IOldRequirement,
-  classMapParent: INEUParentMap
-): INEUCourse | undefined => {
-  /**
-   * Grabs the data of a specified class.
-   * @param classObj The class object containing a classMap and termId.
-   * @param subject The subject (college abbreviation) of the target course.
-   * @param classId course number of the target course.
-   * @returns The resulting class object (if found).
-   */
-  function getClassData(
-    classObj: INEUClassMap,
-    potentialSubject: string,
-    potentialClassId: number
-  ) {
-    // classes can be accessed by the 'neu.edu/201830/<COLLEGE>/<COURSE_NUMBER>' attribute of each "classmap"
-    const query =
-      "neu.edu/" +
-      classObj.termId +
-      "/" +
-      potentialSubject +
-      "/" +
-      potentialClassId;
-    return classObj.classMap[query];
-  }
-
-  // skip doing work if there's no work to do.
-  if (!course) {
-    return undefined;
-  }
-
-  const subject: string | undefined = course.subject;
-  const classId: number | undefined = course.classId;
-  let termId: number | undefined;
-  let classMap: INEUClassMap | undefined;
-  if ("termId" in course) {
-    termId = course.termId;
-    classMap = classMapParent.classMapMap[termId];
-  }
-
-  if (classId && subject && termId && classMap) {
-    // if everything is valid, then query the classMap
-    // console.log("data found for: " + subject + classId);
-    return getClassData(classMap, subject, classId);
-  } else if (subject && classId && !termId) {
-    // if only the subject and classId are valid, guess the termId from most recent => least recent
-    const allTermIds = classMapParent.allTermIds;
-    for (const currentTermId of allTermIds) {
-      classMap = classMapParent.classMapMap[currentTermId];
-      const data: INEUCourse | undefined = getClassData(
-        classMap,
-        subject,
-        classId
-      );
-      if (data) {
-        // if the data exists, then return. otherwise keep searching.
-        // console.log("data found in term: " + termId + " for course: " + subject + classId);
-        return data;
-      }
-    }
-    // if not found, then return undefined
-    // console.log("data not found for:");
-    // console.log(course);
-    return undefined;
-  } else {
-    // if we have no subject and classId, then we don't even know what course to search for.
-    // console.log("data not found for:");
-    // console.log(course);
-    return undefined;
-  }
 };
 
 /**
