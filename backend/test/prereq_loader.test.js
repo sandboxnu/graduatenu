@@ -661,6 +661,26 @@ test("Ensure that prereqs are successfully added to Computer Science BSCS plans 
   expect(200).toEqual(200);
 });
 
+// const fs = require('fs');
+// test("Writes testing files for mitch", async () => {
+//     const links = [
+//       "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-science/bscs/",
+//       "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/science/biochemistry/biochemistry-bs/",
+//       "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/science/mathematics/mathematics-bs/"
+//     ];
+
+//     const pages = await Promise.all(links.map((link) => rp(link)));
+
+//     const schedules = pages.map((page) => plan_parser.planOfStudyToSchedule(page));
+
+//     const withPrereqs = await Promise.all(schedules.map((plans) => prereq_loader.addPrereqsToSchedules(plans)));
+
+//     for (let i = 0; i < withPrereqs.length; i += 1) {
+//       fs.writeFile(`schedules${i}.json`, withPrereqs[i]);
+//     }
+//     expect(true).toBeTruthy();
+// });
+
 // this works:
 /* const querySchema = `
 query {
