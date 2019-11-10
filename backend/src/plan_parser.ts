@@ -6,6 +6,8 @@ import {
   ScheduleTerm,
   Season,
   Status,
+  SeasonEnum,
+  StatusEnum,
 } from "../../frontend/src/models/types";
 
 // the year to use as the first year of the schedule.
@@ -254,11 +256,11 @@ function buildYear(
   // seasons array is not always 4! could be 3 (no summer 2), or 5 (including summer full, as 5th).
 
   const seasonEnums: Season[] = [
-    Season.FL,
-    Season.SP,
-    Season.S1,
-    Season.S2,
-    Season.SF,
+    SeasonEnum.FL,
+    SeasonEnum.SP,
+    SeasonEnum.S1,
+    SeasonEnum.S2,
+    SeasonEnum.SF,
   ];
   const seasonTermIds: number[] = [10, 30, 40, 60, 50];
   const terms: ScheduleTerm[] = [];
@@ -271,14 +273,14 @@ function buildYear(
       let status: Status;
       // change status depending on what the first string is (invariant).
       if (seasons[i][0] === "Co-op") {
-        status = Status.COOP;
+        status = StatusEnum.COOP;
       } else if (seasons[i][0] === "Vacation") {
-        status = Status.INACTIVE;
+        status = StatusEnum.INACTIVE;
       } else if (seasons[i].length > 0) {
-        status = Status.CLASSES;
+        status = StatusEnum.CLASSES;
       } else {
         // we didn't have anything, so our status is inactive.
-        status = Status.INACTIVE;
+        status = StatusEnum.INACTIVE;
       }
 
       let classes: ScheduleCourse[] = seasons[i].reduce(function(
@@ -328,7 +330,7 @@ function buildYear(
         termId: seasonTermIds[i],
         year: 0,
         id: i,
-        status: Status.INACTIVE,
+        status: StatusEnum.INACTIVE,
         classes: [],
       });
     }
@@ -345,7 +347,7 @@ function buildYear(
   };
 
   // if we aren't inactive for summerfull, then we ARE summerfull.
-  if (terms[4].status !== Status.INACTIVE) {
+  if (terms[4].status !== StatusEnum.INACTIVE) {
     year.summer1.classes = terms[4].classes;
     year.summer2.classes = terms[4].classes;
 
