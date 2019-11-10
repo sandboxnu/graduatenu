@@ -281,7 +281,7 @@ export enum Status {
  * @param dndId a unique ID for the course for dnd purposes, ex "course-1"
  */
 export interface ScheduleCourse {
-  classId: number;
+  classId: string;
   subject: string;
   prereqs?: INEUAndPrereq | INEUOrPrereq;
   coreqs?: INEUAndPrereq | INEUOrPrereq;
