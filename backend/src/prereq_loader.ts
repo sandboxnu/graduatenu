@@ -55,7 +55,7 @@ export async function addPrereqsToSchedules(
   );
 
   // log the total number of requests.
-  console.log("total: " + totalNumRequests);
+  // console.log("total: " + totalNumRequests);
   totalNumRequests = 0;
 
   return results;
