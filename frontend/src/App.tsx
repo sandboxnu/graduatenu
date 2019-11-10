@@ -175,6 +175,12 @@ export default class App extends React.Component<{}, AppState> {
     this.setState(newState);
   };
 
+  renderYears() {
+    return this.state.schedule.years.map((year: number, index: number) => (
+      <Year index={index} schedule={this.state.schedule}></Year>
+    ));
+  }
+
   render() {
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
@@ -190,10 +196,7 @@ export default class App extends React.Component<{}, AppState> {
               <ButtonText>Search</ButtonText>
             </Button>
           </ButtonWrapper>
-          <Year index={0} schedule={this.state.schedule}></Year>
-          <Year index={1} schedule={this.state.schedule}></Year>
-          {/* <Year index={2} schedule={this.state.schedule}></Year>
-					<Year index={3} schedule={this.state.schedule}></Year> */}
+          {this.renderYears()}
         </Container>
       </DragDropContext>
     );
