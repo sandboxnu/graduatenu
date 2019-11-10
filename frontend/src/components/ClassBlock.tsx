@@ -2,6 +2,39 @@ import React from "react";
 import { Draggable } from "react-beautiful-dnd";
 import { DNDScheduleCourse } from "../models/types";
 import { CLASS_BLOCK_WIDTH, CLASS_BLOCK_HEIGHT } from "../constants";
+import styled from "styled-components";
+
+const Block = styled.div`
+  width: ${CLASS_BLOCK_WIDTH}px;
+  height: ${CLASS_BLOCK_HEIGHT}px;
+  border-radius: 4px;
+  margin: 1px;
+  display: flex;
+  flex-direction: row;
+`;
+
+const Indent = styled.div`
+  width: 20px;
+  background-color: rgba(173, 198, 255, 0.9);
+`;
+
+const ClassBlockBody = styled.div`
+  background-color: rgba(173, 198, 255, 0.3);
+  padding-left: 8px;
+  flex: 1;
+`;
+
+const TextWrapper = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding-top: 7px;
+  align-items: start;
+`;
+
+const Subtitle = styled.div`
+  font-size: 11px;
+`;
 
 interface ClassBlockProps {
   class: DNDScheduleCourse;
@@ -13,28 +46,21 @@ export default class ClassBlock extends React.Component<ClassBlockProps> {
     return (
       <Draggable draggableId={this.props.class.dndId} index={this.props.index}>
         {provided => (
-          <div
+          <Block
             {...provided.draggableProps}
             {...provided.dragHandleProps}
             ref={provided.innerRef}
           >
-            <div style={blockStyle}>
-              <p style={{ textAlign: "center" }}>
-                {this.props.class.subject + this.props.class.classId}
-              </p>
-            </div>
-          </div>
+            <Indent />
+            <ClassBlockBody>
+              <TextWrapper>
+                <div>{this.props.class.subject + this.props.class.classId}</div>
+                <Subtitle>{"Object-Oriented Design"}</Subtitle>
+              </TextWrapper>
+            </ClassBlockBody>
+          </Block>
         )}
       </Draggable>
     );
   }
 }
-
-const blockStyle = {
-  width: CLASS_BLOCK_WIDTH,
-  height: CLASS_BLOCK_HEIGHT,
-  backgroundColor: "#808080",
-  border: "1px solid black",
-  borderRadius: 2,
-  margin: 1,
-};
