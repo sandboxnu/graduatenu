@@ -21,6 +21,7 @@ export enum NUPath {
 /**
  * Represents one of the seasons in which a student can take a course, as abbreviated by Northeastern.
  */
+export type SeasonKey = keyof typeof Season;
 export enum Season {
   FL = "FL",
   SP = "SP",
@@ -144,7 +145,7 @@ export interface Major {
   name: string;
   requirementGroups: string[];
   requirementGroupMap: { [key: string]: ANDSection | ORSection | RANGESection };
-  yearVersion: number;
+  yearVersion: string;
   isLanguageRequired: boolean;
   totalCreditsRequired: number;
   nupaths: NUPath[];
@@ -203,7 +204,7 @@ export interface RANGESection {
 export interface Schedule {
   years: number[];
   yearMap: {
-    [key: number]: ScheduleYear | DNDScheduleYear; // type error if we don't do this
+    [key: number]: ScheduleYear;
   };
   id: string;
 }
@@ -249,11 +250,11 @@ export interface DNDScheduleYear extends ScheduleYear {
  * @param classes a list of the classes of this term.
  */
 export interface ScheduleTerm {
-  season: Season;
+  season: Season | SeasonKey;
   year: number;
   termId: number;
   id: number;
-  status: Status;
+  status: Status | StatusKey;
   classes: ScheduleCourse[];
 }
 
@@ -264,6 +265,7 @@ export interface DNDScheduleTerm extends ScheduleTerm {
 /**
  * A Status is one of on CO-OP, CLASSES, or INACTIVE
  */
+export type StatusKey = keyof typeof Status;
 export enum Status {
   COOP = "COOP",
   CLASSES = "CLASSES",

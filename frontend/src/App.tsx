@@ -6,9 +6,8 @@ import { DNDScheduleTerm, DNDSchedule, DNDScheduleYear } from "./models/types";
 import styled from "styled-components";
 import { Year } from "./components/Year/Year";
 import { convertTermIdToYear, convertTermIdToSeason } from "./utils";
-import { Select, MenuItem, InputLabel, TextField } from "@material-ui/core";
+import { TextField } from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
-import { majors } from "./constants";
 
 const Container = styled.div`
   display: flex;
@@ -39,13 +38,14 @@ const ButtonText = styled.div`
 
 interface AppState {
   schedule: DNDSchedule;
+  major?: any[];
 }
 
 export default class App extends React.Component<{}, AppState> {
   constructor(props: any) {
     super(props);
 
-    this.state = { schedule: mockData };
+    this.state = { schedule: mockData, major: undefined };
   }
 
   onDragEnd = (result: any) => {
@@ -178,12 +178,19 @@ export default class App extends React.Component<{}, AppState> {
     this.setState(newState);
   };
 
+  onChooseMajor(event: React.ChangeEvent<{}>, value: any) {
+    // const major = majors.find((m: any) => m.name === value);
+    // this.setState({
+    //   major: major,
+    // });
+  }
+
   renderMajorDropDown() {
     return (
       <Autocomplete
         style={{ width: 300 }}
         disableListWrap
-        options={majors}
+        // options={majors}
         renderInput={params => (
           <TextField
             {...params}
@@ -192,6 +199,7 @@ export default class App extends React.Component<{}, AppState> {
             fullWidth
           />
         )}
+        onChange={this.onChooseMajor.bind(this)}
       ></Autocomplete>
     );
   }
