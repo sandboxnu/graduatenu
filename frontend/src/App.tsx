@@ -6,6 +6,9 @@ import { DNDScheduleTerm, DNDSchedule, DNDScheduleYear } from "./models/types";
 import styled from "styled-components";
 import { Year } from "./components/Year/Year";
 import { convertTermIdToYear, convertTermIdToSeason } from "./utils";
+import { Select, MenuItem, InputLabel, TextField } from "@material-ui/core";
+import { Autocomplete } from "@material-ui/lab";
+import { majors } from "./constants";
 
 const Container = styled.div`
   display: flex;
@@ -175,6 +178,24 @@ export default class App extends React.Component<{}, AppState> {
     this.setState(newState);
   };
 
+  renderMajorDropDown() {
+    return (
+      <Autocomplete
+        style={{ width: 300 }}
+        disableListWrap
+        options={majors}
+        renderInput={params => (
+          <TextField
+            {...params}
+            variant="outlined"
+            label="Select A Major"
+            fullWidth
+          />
+        )}
+      ></Autocomplete>
+    );
+  }
+
   render() {
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
@@ -190,6 +211,7 @@ export default class App extends React.Component<{}, AppState> {
               <ButtonText>Search</ButtonText>
             </Button>
           </ButtonWrapper>
+          {this.renderMajorDropDown()}
           <Year index={0} schedule={this.state.schedule}></Year>
           <Year index={1} schedule={this.state.schedule}></Year>
           {/* <Year index={2} schedule={this.state.schedule}></Year>
