@@ -3,11 +3,12 @@ import { Draggable } from "react-beautiful-dnd";
 import { DNDScheduleCourse } from "../models/types";
 import { CLASS_BLOCK_WIDTH, CLASS_BLOCK_HEIGHT } from "../constants";
 import styled from "styled-components";
+import { Card } from "@material-ui/core";
 
-const Block = styled.div`
+const Block = styled(Card)`
   width: ${CLASS_BLOCK_WIDTH}px;
   height: ${CLASS_BLOCK_HEIGHT}px;
-  border-radius: 4px;
+  border-radius: 2px;
   margin: 1px;
   display: flex;
   flex-direction: row;
