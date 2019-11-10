@@ -182,9 +182,9 @@ export default class App extends React.Component<{}, AppState> {
     this.setState(newState);
   };
 
-  handleAddClasses = (courses: NamedScheduleCourse[], termId: number) => {
+  handleAddClasses = async (courses: NamedScheduleCourse[], termId: number) => {
     // convert to DNDScheduleCourses
-    const dndCourses = this.convertToDNDCourses(courses);
+    const dndCourses = await this.convertToDNDCourses(courses);
     const year = convertTermIdToYear(termId);
     const season = convertTermIdToSeason(termId);
 
@@ -209,19 +209,19 @@ export default class App extends React.Component<{}, AppState> {
     });
   };
 
-  convertToDNDCourses = (
+  convertToDNDCourses = async (
     courses: NamedScheduleCourse[]
-  ): DNDScheduleCourse[] => {
+  ): Promise<DNDScheduleCourse[]> => {
     var list: DNDScheduleCourse[] = [];
     var counter = this.state.currentClassCounter;
     for (const course of courses) {
+      counter++;
       list.push({
         ...course,
         dndId: String(counter),
       });
-      counter++;
     }
-    this.setState({
+    await this.setState({
       currentClassCounter: counter,
     });
     return list;
@@ -231,7 +231,7 @@ export default class App extends React.Component<{}, AppState> {
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
         <Container>
-          <div>
+          <div onClick={() => console.log(this.state)}>
             <h2>Plan Of Study</h2>
           </div>
           <ButtonWrapper>
