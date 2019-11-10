@@ -676,7 +676,7 @@ test("Ensure that prereqs are successfully added to Computer Science BSCS plans 
 //     const withPrereqs = await Promise.all(schedules.map((plans) => prereq_loader.addPrereqsToSchedules(plans)));
 
 //     for (let i = 0; i < withPrereqs.length; i += 1) {
-//       fs.writeFile(`schedules${i}.json`, withPrereqs[i]);
+//       fs.writeFile(`schedules${i}.json`, JSON.stringify(withPrereqs[i], null, 2));
 //     }
 //     expect(true).toBeTruthy();
 // });
