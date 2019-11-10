@@ -23,13 +23,13 @@ test("Ensure that prereqs are successfully added to Computer Science BSCS plans 
           id: 1010,
           classes: [
             {
-              classId: 1200,
+              classId: "1200",
               subject: "CS",
               numCreditsMin: 1,
               numCreditsMax: 1,
             },
             {
-              classId: 1800,
+              classId: "1800",
               subject: "CS",
               numCreditsMin: 5,
               numCreditsMax: 5,
@@ -44,7 +44,7 @@ test("Ensure that prereqs are successfully added to Computer Science BSCS plans 
               },
             },
             {
-              classId: 1802,
+              classId: "1802",
               subject: "CS",
               numCreditsMin: 0,
               numCreditsMax: 0,
@@ -59,7 +59,7 @@ test("Ensure that prereqs are successfully added to Computer Science BSCS plans 
               },
             },
             {
-              classId: 2500,
+              classId: "2500",
               subject: "CS",
               numCreditsMin: 5,
               numCreditsMax: 5,
@@ -74,7 +74,7 @@ test("Ensure that prereqs are successfully added to Computer Science BSCS plans 
               },
             },
             {
-              classId: 2501,
+              classId: "2501",
               subject: "CS",
               numCreditsMin: 0,
               numCreditsMax: 0,
@@ -89,13 +89,13 @@ test("Ensure that prereqs are successfully added to Computer Science BSCS plans 
               },
             },
             {
-              classId: 1365,
+              classId: "1365",
               subject: "MATH",
               numCreditsMin: 4,
               numCreditsMax: 4,
             },
             {
-              classId: 1111,
+              classId: "1111",
               subject: "ENGW",
               numCreditsMin: 4,
               numCreditsMax: 4,
@@ -110,7 +110,7 @@ test("Ensure that prereqs are successfully added to Computer Science BSCS plans 
           id: 1030,
           classes: [
             {
-              classId: 2510,
+              classId: "2510",
               subject: "CS",
               numCreditsMin: 5,
               numCreditsMax: 5,
@@ -134,7 +134,7 @@ test("Ensure that prereqs are successfully added to Computer Science BSCS plans 
               },
             },
             {
-              classId: 2511,
+              classId: "2511",
               subject: "CS",
               numCreditsMin: 0,
               numCreditsMax: 0,
@@ -149,7 +149,7 @@ test("Ensure that prereqs are successfully added to Computer Science BSCS plans 
               },
             },
             {
-              classId: 2810,
+              classId: "2810",
               subject: "CS",
               numCreditsMin: 4,
               numCreditsMax: 4,
@@ -168,13 +168,13 @@ test("Ensure that prereqs are successfully added to Computer Science BSCS plans 
               },
             },
             {
-              classId: 9999,
+              classId: "9999",
               subject: "Elective",
               numCreditsMin: 5,
               numCreditsMax: 5,
             },
             {
-              classId: 9999,
+              classId: "9999",
               subject: "Elective",
               numCreditsMin: 4,
               numCreditsMax: 4,
@@ -189,7 +189,7 @@ test("Ensure that prereqs are successfully added to Computer Science BSCS plans 
           id: 1040,
           classes: [
             {
-              classId: 3500,
+              classId: "3500",
               subject: "CS",
               numCreditsMin: 4,
               numCreditsMax: 4,
@@ -213,7 +213,7 @@ test("Ensure that prereqs are successfully added to Computer Science BSCS plans 
               },
             },
             {
-              classId: 9999,
+              classId: "9999",
               subject: "Elective",
               numCreditsMin: 4,
               numCreditsMax: 4,
@@ -228,13 +228,13 @@ test("Ensure that prereqs are successfully added to Computer Science BSCS plans 
           id: 1060,
           classes: [
             {
-              classId: 1341,
+              classId: "1341",
               subject: "MATH",
               numCreditsMin: 4,
               numCreditsMax: 4,
             },
             {
-              classId: 3000,
+              classId: "3000",
               subject: "CS",
               numCreditsMin: 4,
               numCreditsMax: 4,
@@ -290,7 +290,7 @@ test("Ensure that prereqs are successfully added to Computer Science BSCS plans 
           id: 1011,
           classes: [
             {
-              classId: 3650,
+              classId: "3650",
               subject: "CS",
               numCreditsMin: 4,
               numCreditsMax: 4,
@@ -314,7 +314,7 @@ test("Ensure that prereqs are successfully added to Computer Science BSCS plans 
               },
             },
             {
-              classId: 2160,
+              classId: "2160",
               subject: "EECE",
               numCreditsMin: 4,
               numCreditsMax: 4,
@@ -337,19 +337,19 @@ test("Ensure that prereqs are successfully added to Computer Science BSCS plans 
               },
             },
             {
-              classId: 9999,
+              classId: "9999",
               subject: "Concentration course",
               numCreditsMin: 4,
               numCreditsMax: 4,
             },
             {
-              classId: 9999,
+              classId: "9999",
               subject: "Elective",
               numCreditsMin: 4,
               numCreditsMax: 4,
             },
             {
-              classId: 1210,
+              classId: "1210",
               subject: "CS",
               numCreditsMin: 1,
               numCreditsMax: 1,
@@ -389,13 +389,13 @@ test("Ensure that prereqs are successfully added to Computer Science BSCS plans 
           id: 1061,
           classes: [
             {
-              classId: 9999,
+              classId: "9999",
               subject: "Elective",
               numCreditsMin: 4,
               numCreditsMax: 4,
             },
             {
-              classId: 9999,
+              classId: "9999",
               subject: "Elective",
               numCreditsMin: 4,
               numCreditsMax: 4,
@@ -414,7 +414,7 @@ test("Ensure that prereqs are successfully added to Computer Science BSCS plans 
           id: 1012,
           classes: [
             {
-              classId: 3800,
+              classId: "3800",
               subject: "CS",
               numCreditsMin: 4,
               numCreditsMax: 4,
@@ -448,25 +448,25 @@ test("Ensure that prereqs are successfully added to Computer Science BSCS plans 
               },
             },
             {
-              classId: 1170,
+              classId: "1170",
               subject: "THTR",
               numCreditsMin: 1,
               numCreditsMax: 1,
             },
             {
-              classId: 9999,
+              classId: "9999",
               subject: "Concentration course",
               numCreditsMin: 4,
               numCreditsMax: 4,
             },
             {
-              classId: 9999,
+              classId: "9999",
               subject: "Elective",
               numCreditsMin: 4,
               numCreditsMax: 4,
             },
             {
-              classId: 9999,
+              classId: "9999",
               subject: "Computing and social issues",
               numCreditsMin: 4,
               numCreditsMax: 4,
@@ -497,7 +497,7 @@ test("Ensure that prereqs are successfully added to Computer Science BSCS plans 
           id: 1062,
           classes: [
             {
-              classId: 3302,
+              classId: "3302",
               subject: "ENGW",
               numCreditsMin: 4,
               numCreditsMax: 4,
@@ -526,7 +526,7 @@ test("Ensure that prereqs are successfully added to Computer Science BSCS plans 
               },
             },
             {
-              classId: 9999,
+              classId: "9999",
               subject: "Elective",
               numCreditsMin: 4,
               numCreditsMax: 4,
@@ -545,7 +545,7 @@ test("Ensure that prereqs are successfully added to Computer Science BSCS plans 
           id: 1013,
           classes: [
             {
-              classId: 4500,
+              classId: "4500",
               subject: "CS",
               numCreditsMin: 4,
               numCreditsMax: 4,
@@ -583,19 +583,19 @@ test("Ensure that prereqs are successfully added to Computer Science BSCS plans 
               },
             },
             {
-              classId: 9999,
+              classId: "9999",
               subject: "Elective",
               numCreditsMin: 4,
               numCreditsMax: 4,
             },
             {
-              classId: 9999,
+              classId: "9999",
               subject: "Concentration course",
               numCreditsMin: 4,
               numCreditsMax: 4,
             },
             {
-              classId: 9999,
+              classId: "9999",
               subject: "Elective",
               numCreditsMin: 5,
               numCreditsMax: 5,
@@ -610,25 +610,25 @@ test("Ensure that prereqs are successfully added to Computer Science BSCS plans 
           id: 1033,
           classes: [
             {
-              classId: 9999,
+              classId: "9999",
               subject: "Concentration course",
               numCreditsMin: 4,
               numCreditsMax: 4,
             },
             {
-              classId: 9999,
+              classId: "9999",
               subject: "Elective",
               numCreditsMin: 4,
               numCreditsMax: 4,
             },
             {
-              classId: 9999,
+              classId: "9999",
               subject: "Security course",
               numCreditsMin: 4,
               numCreditsMax: 4,
             },
             {
-              classId: 9999,
+              classId: "9999",
               subject: "Elective",
               numCreditsMin: 4,
               numCreditsMax: 4,
@@ -655,7 +655,7 @@ test("Ensure that prereqs are successfully added to Computer Science BSCS plans 
         isSummerFull: false,
       },
     },
-    id: 0,
+    id: "0",
   });
 
   expect(200).toEqual(200);
