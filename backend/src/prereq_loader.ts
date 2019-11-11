@@ -34,13 +34,15 @@ type PrereqQueryResult = undefined | NonEmptyQueryResult;
  * Asynchronously adds prereqs to a Schedule.
  * Does not do mutation.
  * @param schedules the schedule to add prereqs to
+ * @param year the year to grab prereqs from (always uses fall).
  */
 export async function addPrereqsToSchedules(
-  schedules: Schedule[]
+  schedules: Schedule[],
+  year: number
 ): Promise<Schedule[]> {
   // the loader to use for building a
   const loader = new DataLoader<SimpleCourse, PrereqQueryResult>(
-    (keys: SimpleCourse[]) => queryCoursePrereqData(keys)
+    (keys: SimpleCourse[]) => queryCoursePrereqData(keys, year)
   );
 
   // return the results
@@ -175,12 +177,16 @@ async function prereqifyScheduleCourse(
  * @param courses the courses to lookup prereqs for
  */
 async function queryCoursePrereqData(
-  courses: SimpleCourse[]
+  courses: SimpleCourse[],
+  year: number
 ): Promise<PrereqQueryResult[]> {
+  // the termId to grab prereqs from (is the year, with the season, which is always fall).
+  const termId = year * 100 + 10;
+
   // for each one of the courses, map to a string.
   const courseSchema: string[] = courses.map((course: SimpleCourse) => {
     return `class(classId: ${course.classId}, subject: "${course.subject}") { 
-      occurrence(termId: ${202010}) {
+      occurrence(termId: ${termId}) {
         prereqs 
         coreqs
         name
