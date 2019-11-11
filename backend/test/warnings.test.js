@@ -1,4 +1,4 @@
-const warning_generator = require("../src/generate-warnings.ts");
+const warning_generator = require("../../frontend/src/utils/generate-warnings.ts");
 const fs = require("fs");
 
 // the following code converts parsed audits into new schedules:

@@ -1,20 +1,17 @@
 import {
   Schedule,
+  IWarning,
+  CourseTakenTracker,
+  ScheduleTerm,
   ScheduleCourse,
+  ICompleteCourse,
+  IRequiredCourse,
+  INEUCourse,
+  INEUPrereqCourse,
+  IScheduleCourse,
   INEUAndPrereq,
   INEUOrPrereq,
-  ScheduleTerm,
-  IInitialScheduleRep,
-  INEUCourse,
-  ICompleteCourse,
-  ScheduleYear,
-  Season,
-  Status,
-  INEUParentMap,
-  CourseTakenTracker,
-  IWarning,
-} from "../../frontend/src/models/types";
-import { courseCode, getSearchNEUData, doesPrereqExist } from "./json_parser";
+} from "../models/types";
 
 /**
  * This module contains functions that generate warnings based off a schedule input.
@@ -261,156 +258,105 @@ function checkSemesterOverload(
 }
 
 /**
- * converts from old schedule to new schedule
- * @param sched the old schedule.
+ * Prereq Validation code follows
  */
-export function oldToNew(
-  old: IInitialScheduleRep,
-  parent: INEUParentMap
-): Schedule {
-  const byTermId: {
-    termIds: number[];
-    termMap: { [key: number]: ScheduleCourse[] };
-  } = {
-    termIds: [],
-    termMap: {},
-  };
 
-  // parse all courses in dude.
-  let allCourses: ICompleteCourse[] = [];
-  allCourses = allCourses.concat(old.completed.courses);
-  allCourses = allCourses.concat(old.inprogress.courses);
-  for (const course of allCourses) {
-    // if doesn't include termId, add.
-    if (!byTermId.termIds.includes(course.termId)) {
-      byTermId.termIds.push(course.termId);
-      byTermId.termMap[course.termId] = [];
-    }
+/**
+ * Produces a string of the course's subject followed by classId.
+ * @param course The course to get the code of.
+ * @returns The courseCode of the course.
+ */
+export const courseCode = (
+  course:
+    | ICompleteCourse
+    | IRequiredCourse
+    | INEUCourse
+    | INEUPrereqCourse
+    | IScheduleCourse
+    | ScheduleCourse
+) => {
+  return "" + course.subject + course.classId;
+};
 
-    // get the searchNEU version.
-    const detailed: INEUCourse | undefined = getSearchNEUData(course, parent);
-    if (detailed) {
-      byTermId.termMap[detailed.termId].push({
-        classId: detailed.classId,
-        subject: detailed.subject,
-        prereqs: detailed.prereqs,
-        coreqs: detailed.coreqs,
-        numCreditsMin: detailed.minCredits,
-        numCreditsMax: detailed.maxCredits,
-      });
+/**
+ * Checks whether or not the prereq's edges exist in the graph "graph"
+ * @param to The classCode of the node to point to
+ * @param prereq The prerequisite object to add an edge for (maybe).
+ * @returns true if the full prereq exists in the graph "graph'"
+ */
+export const doesPrereqExist = (
+  prereq: INEUAndPrereq | INEUOrPrereq,
+  tracker: CourseTakenTracker
+): string | undefined => {
+  // if prereq is "and", check and.
+  if (prereq.type === "and") {
+    return doesAndPrereqExist(prereq, tracker);
+  } else {
+    return doesOrPrereqExist(prereq, tracker);
+  }
+};
+
+/**
+ *
+ * @param to The classCode of the node to point to
+ * @param prereq The prerequisite objec to add an edge for (maybe).
+ * @returns true if the full prereq exists in the graph "graph"
+ */
+const doesAndPrereqExist = (
+  prereq: INEUAndPrereq,
+  tracker: CourseTakenTracker
+): string | undefined => {
+  // make sure each of the values exists.
+  for (const item of prereq.values) {
+    if ("type" in item) {
+      // does the graph contain the entire prereq?
+      let prereqResult = doesPrereqExist(item, tracker);
+      if (prereqResult) {
+        return `AND: {${prereqResult}}`;
+      }
     } else {
-      // it probably exists, but might not in the termId.
-      const mostRecent: INEUCourse | undefined = getSearchNEUData(
-        {
-          subject: course.subject,
-          classId: course.classId,
-        },
-        parent
-      );
-
-      if (mostRecent) {
-        byTermId.termMap[course.termId].push({
-          classId: course.classId,
-          subject: course.subject,
-          prereqs: mostRecent.prereqs,
-          coreqs: mostRecent.coreqs,
-          numCreditsMin: mostRecent.minCredits,
-          numCreditsMax: mostRecent.maxCredits,
-        });
-      } else {
-        byTermId.termMap[course.termId].push({
-          classId: course.classId,
-          subject: course.subject,
-          prereqs: undefined,
-          coreqs: undefined,
-          numCreditsMin: course.creditHours,
-          numCreditsMax: course.creditHours,
-        });
+      const from = courseCode(item);
+      // does the graph contain an edge?
+      if (!tracker.contains(courseCode(item))) {
+        return `AND: ${courseCode(item)}`;
       }
     }
   }
 
-  // add to the born child.
-  const born: Schedule = {
-    years: [],
-    yearMap: {},
-    id: "example-schedule",
-  };
+  // if we hit this point, everything passed.
+  return undefined;
+};
 
-  // get all the years
-  let years: number[] = [];
-  for (const termId of byTermId.termIds) {
-    if (!years.includes(Math.floor(termId / 100))) {
-      years.push(Math.floor(termId / 100));
+/**
+ *
+ * @param to The classCode of the node to point to
+ * @param prereq The prerequisite object to add an edge for (mabye).
+ * @returns true if the full prerequisite object exists in the graph "graph"
+ */
+const doesOrPrereqExist = (
+  prereq: INEUOrPrereq,
+  tracker: CourseTakenTracker
+): string | undefined => {
+  // if any one of the prereqs exists, return true.
+  for (const item of prereq.values) {
+    if ("type" in item) {
+      let prereqResult = doesPrereqExist(item, tracker);
+      if (prereqResult === undefined) {
+        return undefined;
+      }
+    } else {
+      if (tracker.contains(courseCode(item))) {
+        return undefined;
+      }
     }
   }
 
-  // create each year object
-  for (const year of years) {
-    const yearObject: ScheduleYear = {
-      year: year,
-      fall: {
-        season: Season.FL,
-        year: year,
-        termId: year * 100 + 10,
-        id: 10,
-        status: Status.INACTIVE,
-        classes: [],
-      },
-      spring: {
-        season: Season.SP,
-        year: year,
-        termId: year * 100 + 30,
-        id: 30,
-        status: Status.INACTIVE,
-        classes: [],
-      },
-      summer1: {
-        season: Season.S1,
-        year: year,
-        termId: year * 100 + 40,
-        id: 40,
-        status: Status.INACTIVE,
-        classes: [],
-      },
-      summer2: {
-        season: Season.S2,
-        year: year,
-        termId: year * 100 + 60,
-        id: 60,
-        status: Status.INACTIVE,
-        classes: [],
-      },
-      isSummerFull: false,
-    };
-
-    if (byTermId.termMap[year * 100 + 10]) {
-      for (const course of byTermId.termMap[year * 100 + 10]) {
-        yearObject.fall.status = Status.CLASSES;
-        yearObject.fall.classes.push(course);
-      }
+  // nothing existed, so return false
+  return `OR: ${prereq.values.map(function(prereq) {
+    if ("type" in prereq) {
+      return "{Object}";
+    } else {
+      return courseCode(prereq);
     }
-    if (byTermId.termMap[year * 100 + 30]) {
-      for (const course of byTermId.termMap[year * 100 + 30]) {
-        yearObject.spring.status = Status.CLASSES;
-        yearObject.spring.classes.push(course);
-      }
-    }
-    if (byTermId.termMap[year * 100 + 40]) {
-      for (const course of byTermId.termMap[year * 100 + 40]) {
-        yearObject.summer1.status = Status.CLASSES;
-        yearObject.summer1.classes.push(course);
-      }
-    }
-    if (byTermId.termMap[year * 100 + 60]) {
-      for (const course of byTermId.termMap[year * 100 + 60]) {
-        yearObject.summer2.status = Status.CLASSES;
-        yearObject.summer2.classes.push(course);
-      }
-    }
-    born.years.push(year);
-    born.yearMap[year] = yearObject;
-  }
-
-  return born;
-}
+  })}`;
+};
