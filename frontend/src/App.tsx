@@ -2,12 +2,18 @@ import React from "react";
 import "./App.css";
 import { DragDropContext } from "react-beautiful-dnd";
 import { mockData } from "./data/mockData";
-import { DNDScheduleTerm, DNDSchedule, DNDScheduleYear } from "./models/types";
+import {
+  DNDScheduleTerm,
+  DNDSchedule,
+  DNDScheduleYear,
+  Major,
+} from "./models/types";
 import styled from "styled-components";
 import { Year } from "./components/Year/Year";
 import { convertTermIdToYear, convertTermIdToSeason } from "./utils";
 import { TextField } from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
+import { majors } from "./majors";
 
 const Container = styled.div`
   display: flex;
@@ -38,7 +44,7 @@ const ButtonText = styled.div`
 
 interface AppState {
   schedule: DNDSchedule;
-  major?: any[];
+  major?: Major;
 }
 
 export default class App extends React.Component<{}, AppState> {
@@ -179,10 +185,15 @@ export default class App extends React.Component<{}, AppState> {
   };
 
   onChooseMajor(event: React.ChangeEvent<{}>, value: any) {
-    // const major = majors.find((m: any) => m.name === value);
-    // this.setState({
-    //   major: major,
-    // });
+    const maj = majors.find((m: any) => m.name === value);
+
+    if (!maj) {
+      console.log("Not good");
+    } else {
+      this.setState({
+        major: maj,
+      });
+    }
   }
 
   renderMajorDropDown() {
@@ -190,7 +201,7 @@ export default class App extends React.Component<{}, AppState> {
       <Autocomplete
         style={{ width: 300 }}
         disableListWrap
-        // options={majors}
+        options={majors.map(maj => maj.name)}
         renderInput={params => (
           <TextField
             {...params}

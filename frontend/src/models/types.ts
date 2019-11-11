@@ -145,7 +145,7 @@ export interface Major {
   name: string;
   requirementGroups: string[];
   requirementGroupMap: { [key: string]: ANDSection | ORSection | RANGESection };
-  yearVersion: string;
+  yearVersion: number;
   isLanguageRequired: boolean;
   totalCreditsRequired: number;
   nupaths: NUPath[];
