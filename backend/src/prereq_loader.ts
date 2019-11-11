@@ -27,10 +27,8 @@ interface NonEmptyQueryResult {
   coreqs?: INEUOrPrereq | INEUAndPrereq;
 }
 
+// prereq query results can be undefined, if the target class doesn't exist.
 type PrereqQueryResult = undefined | NonEmptyQueryResult;
-
-// keep track of the total number of requests made.
-let totalNumRequests = 0;
 
 /**
  * Asynchronously adds prereqs to a Schedule.
@@ -40,9 +38,6 @@ let totalNumRequests = 0;
 export async function addPrereqsToSchedules(
   schedules: Schedule[]
 ): Promise<Schedule[]> {
-  // set the total to zero
-  totalNumRequests = 0;
-
   // the loader to use for building a
   const loader = new DataLoader<SimpleCourse, PrereqQueryResult>(
     (keys: SimpleCourse[]) => queryCoursePrereqData(keys)
@@ -52,10 +47,6 @@ export async function addPrereqsToSchedules(
   let results = await Promise.all(
     schedules.map((sched: Schedule) => prereqifySchedule(sched, loader))
   );
-
-  // log the total number of requests.
-  // console.log("total: " + totalNumRequests);
-  totalNumRequests = 0;
 
   return results;
 }
@@ -82,7 +73,7 @@ async function prereqifySchedule(
 
   // reconstructs a year
   return {
-    years: schedule.years.slice(0),
+    years: schedule.years,
     yearMap: newYearMap,
     id: schedule.id,
   };
@@ -218,7 +209,6 @@ async function queryCoursePrereqData(
       "Content-type": "application/json",
     },
   });
-  totalNumRequests += 1;
 
   // result comes back as json, so we need to parse it.
   // it is an object, with a data field.
