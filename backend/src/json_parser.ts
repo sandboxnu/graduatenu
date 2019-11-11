@@ -17,8 +17,8 @@ import {
   Schedule,
   ScheduleCourse,
   ScheduleYear,
-  Season,
-  Status,
+  SeasonEnum,
+  StatusEnum,
 } from "../../frontend/src/models/types";
 import {
   courseCode,
@@ -56,7 +56,7 @@ export function oldToNew(
     const detailed: INEUCourse | undefined = getSearchNEUData(course, parent);
     if (detailed) {
       byTermId.termMap[detailed.termId].push({
-        classId: detailed.classId,
+        classId: String(detailed.classId),
         subject: detailed.subject,
         prereqs: detailed.prereqs,
         coreqs: detailed.coreqs,
@@ -75,7 +75,7 @@ export function oldToNew(
 
       if (mostRecent) {
         byTermId.termMap[course.termId].push({
-          classId: course.classId,
+          classId: String(course.classId),
           subject: course.subject,
           prereqs: mostRecent.prereqs,
           coreqs: mostRecent.coreqs,
@@ -84,7 +84,7 @@ export function oldToNew(
         });
       } else {
         byTermId.termMap[course.termId].push({
-          classId: course.classId,
+          classId: String(course.classId),
           subject: course.subject,
           prereqs: undefined,
           coreqs: undefined,
@@ -115,35 +115,35 @@ export function oldToNew(
     const yearObject: ScheduleYear = {
       year: year,
       fall: {
-        season: Season.FL,
+        season: SeasonEnum.FL,
         year: year,
         termId: year * 100 + 10,
         id: 10,
-        status: Status.INACTIVE,
+        status: StatusEnum.INACTIVE,
         classes: [],
       },
       spring: {
-        season: Season.SP,
+        season: SeasonEnum.SP,
         year: year,
         termId: year * 100 + 30,
         id: 30,
-        status: Status.INACTIVE,
+        status: StatusEnum.INACTIVE,
         classes: [],
       },
       summer1: {
-        season: Season.S1,
+        season: SeasonEnum.S1,
         year: year,
         termId: year * 100 + 40,
         id: 40,
-        status: Status.INACTIVE,
+        status: StatusEnum.INACTIVE,
         classes: [],
       },
       summer2: {
-        season: Season.S2,
+        season: SeasonEnum.S2,
         year: year,
         termId: year * 100 + 60,
         id: 60,
-        status: Status.INACTIVE,
+        status: StatusEnum.INACTIVE,
         classes: [],
       },
       isSummerFull: false,
@@ -151,25 +151,25 @@ export function oldToNew(
 
     if (byTermId.termMap[year * 100 + 10]) {
       for (const course of byTermId.termMap[year * 100 + 10]) {
-        yearObject.fall.status = Status.CLASSES;
+        yearObject.fall.status = StatusEnum.CLASSES;
         yearObject.fall.classes.push(course);
       }
     }
     if (byTermId.termMap[year * 100 + 30]) {
       for (const course of byTermId.termMap[year * 100 + 30]) {
-        yearObject.spring.status = Status.CLASSES;
+        yearObject.spring.status = StatusEnum.CLASSES;
         yearObject.spring.classes.push(course);
       }
     }
     if (byTermId.termMap[year * 100 + 40]) {
       for (const course of byTermId.termMap[year * 100 + 40]) {
-        yearObject.summer1.status = Status.CLASSES;
+        yearObject.summer1.status = StatusEnum.CLASSES;
         yearObject.summer1.classes.push(course);
       }
     }
     if (byTermId.termMap[year * 100 + 60]) {
       for (const course of byTermId.termMap[year * 100 + 60]) {
-        yearObject.summer2.status = Status.CLASSES;
+        yearObject.summer2.status = StatusEnum.CLASSES;
         yearObject.summer2.classes.push(course);
       }
     }
@@ -227,7 +227,7 @@ export const getSearchNEUData = (
   }
 
   const subject: string | undefined = course.subject;
-  const classId: number | undefined = course.classId;
+  const classId: number | undefined = Number(course.classId);
   let termId: number | undefined;
   let classMap: INEUClassMap | undefined;
   if ("termId" in course) {
