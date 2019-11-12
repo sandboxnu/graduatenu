@@ -192,6 +192,15 @@ export default class App extends React.Component<{}, AppState> {
     this.setState(newState);
   };
 
+  renderYears() {
+    return this.state.schedule.years.map((year: number, index: number) => (
+      <Year
+        index={index}
+        schedule={this.state.schedule}
+        handleAddClasses={this.handleAddClasses.bind(this)}
+      />
+    ));
+  }
   handleAddClasses = async (courses: NamedScheduleCourse[], termId: number) => {
     // convert to DNDScheduleCourses
     const dndCourses = await this.convertToDNDCourses(courses);
@@ -248,10 +257,7 @@ export default class App extends React.Component<{}, AppState> {
             <h3>Completed Courses</h3>
             <DropDownModal schedule={this.state.schedule}></DropDownModal>
           </CompletedCoursesWrapper>
-          <Year index={0} schedule={this.state.schedule}></Year>
-          <Year index={1} schedule={this.state.schedule}></Year>
-          {/* <Year index={2} schedule={this.state.schedule}></Year>
-					<Year index={3} schedule={this.state.schedule}></Year> */}
+          {this.renderYears()}
         </Container>
       </DragDropContext>
     );
