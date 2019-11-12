@@ -4,6 +4,7 @@ import { YearTop } from "./YearTop";
 import SemesterBlock from "../SemesterBlock";
 import { DNDSchedule, NamedScheduleCourse } from "../../models/types";
 import { YearBottom } from "./YearBottom";
+import { SEMESTER_MIN_HEIGHT } from "../../constants";
 
 export interface IYearProps {
   index: number;
@@ -18,6 +19,7 @@ const YearText = styled.h3`
 const YearBody = styled.div`
   display: flex;
   flex-direction: row;
+  min-height: ${SEMESTER_MIN_HEIGHT}px;
 `;
 
 export class Year extends React.Component<IYearProps> {

@@ -24,11 +24,15 @@ const PlansSection = styled.div`
 `;
 
 const PlanCard = styled(Card)`
-  width: 50px;
-  height: 50px;
+  width: 100px;
+  height: 100px;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-around;
   align-items: center;
+  border: 1px solid black;
+  margin-left: 4px;
+  margin-right: 4px;
 `;
 
 export interface ChooseMajorPlanModalProps {
@@ -57,6 +61,7 @@ export class ChooseMajorPlanModal extends React.Component<
     return this.getPlans().map((plan: Schedule, index: number) => (
       <PlanCard onClick={this.choosePlan.bind(this, index)}>
         <p>Plan {index + 1}</p>
+        <p>{plan.years.length} Years</p>
       </PlanCard>
     ));
   }
