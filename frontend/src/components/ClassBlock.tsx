@@ -20,7 +20,10 @@ export default class ClassBlock extends React.Component<ClassBlockProps> {
           >
             <div style={blockStyle}>
               <p style={{ textAlign: "center" }}>
-                {this.props.class.subject + this.props.class.classId}
+                {this.props.class.subject +
+                  String(this.props.class.classId) +
+                  " " +
+                  this.props.class.name}
               </p>
             </div>
           </div>

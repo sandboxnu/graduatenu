@@ -7,6 +7,8 @@ import {
   DNDSchedule,
   DNDScheduleYear,
   Major,
+  DNDScheduleCourse,
+  NamedScheduleCourse,
 } from "./models/types";
 import styled from "styled-components";
 import { Year } from "./components/Year/Year";
@@ -45,17 +47,22 @@ const ButtonText = styled.div`
 interface AppState {
   schedule: DNDSchedule;
   major?: Major;
+  currentClassCounter: number; // used for DND purposes, every class needs a unique ID
 }
 
 export default class App extends React.Component<{}, AppState> {
   constructor(props: any) {
     super(props);
 
-    this.state = { schedule: mockData, major: undefined };
+    this.state = {
+      schedule: mockData,
+      major: undefined,
+      currentClassCounter: 0,
+    };
   }
 
   onDragEnd = (result: any) => {
-    const { destination, source, draggableId } = result;
+    const { destination, source } = result;
 
     if (
       !destination ||
@@ -214,12 +221,56 @@ export default class App extends React.Component<{}, AppState> {
       ></Autocomplete>
     );
   }
+  handleAddClasses = async (courses: NamedScheduleCourse[], termId: number) => {
+    // convert to DNDScheduleCourses
+    const dndCourses = await this.convertToDNDCourses(courses);
+    const year = convertTermIdToYear(termId);
+    const season = convertTermIdToSeason(termId);
+
+    this.setState({
+      ...this.state,
+      schedule: {
+        ...this.state.schedule,
+        yearMap: {
+          ...this.state.schedule.yearMap,
+          [year]: {
+            ...this.state.schedule.yearMap[year],
+            [season]: {
+              ...(this.state.schedule.yearMap[year] as any)[season],
+              classes: [
+                ...(this.state.schedule.yearMap[year] as any)[season].classes,
+                ...dndCourses,
+              ],
+            },
+          },
+        },
+      },
+    });
+  };
+
+  convertToDNDCourses = async (
+    courses: NamedScheduleCourse[]
+  ): Promise<DNDScheduleCourse[]> => {
+    var list: DNDScheduleCourse[] = [];
+    var counter = this.state.currentClassCounter;
+    for (const course of courses) {
+      counter++;
+      list.push({
+        ...course,
+        dndId: String(counter),
+      });
+    }
+    await this.setState({
+      currentClassCounter: counter,
+    });
+    return list;
+  };
 
   render() {
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
         <Container>
-          <div>
+          <div onClick={() => console.log(this.state)}>
             <h2>Plan Of Study</h2>
           </div>
           <ButtonWrapper>
@@ -231,8 +282,16 @@ export default class App extends React.Component<{}, AppState> {
             </Button>
           </ButtonWrapper>
           {this.renderMajorDropDown()}
-          <Year index={0} schedule={this.state.schedule}></Year>
-          <Year index={1} schedule={this.state.schedule}></Year>
+          <Year
+            index={0}
+            schedule={this.state.schedule}
+            handleAddClasses={this.handleAddClasses.bind(this)}
+          ></Year>
+          <Year
+            index={1}
+            schedule={this.state.schedule}
+            handleAddClasses={this.handleAddClasses.bind(this)}
+          ></Year>
           {/* <Year index={2} schedule={this.state.schedule}></Year>
 					<Year index={3} schedule={this.state.schedule}></Year> */}
         </Container>

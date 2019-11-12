@@ -280,7 +280,6 @@ export enum StatusEnum {
  * @param coreqs the corequisites for this course
  * @param numCreditsMin the minimum number of credits this course gives
  * @param numCreditsMax the maximum number of credits this course gives
- * @param dndId a unique ID for the course for dnd purposes, ex "course-1"
  */
 export interface ScheduleCourse {
   classId: string;
@@ -291,7 +290,11 @@ export interface ScheduleCourse {
   numCreditsMax: number;
 }
 
-export interface DNDScheduleCourse extends ScheduleCourse {
+export interface NamedScheduleCourse extends ScheduleCourse {
+  name: string;
+}
+
+export interface DNDScheduleCourse extends NamedScheduleCourse {
   dndId: string;
 }
 

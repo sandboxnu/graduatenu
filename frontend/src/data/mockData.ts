@@ -11,6 +11,7 @@ const mockClass = (num: number): DNDScheduleCourse => ({
   numCreditsMin: 4,
   numCreditsMax: 4,
   dndId: "class-" + num,
+  name: "Object-Oriented Design",
 });
 
 export const mockData: DNDSchedule = {

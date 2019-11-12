@@ -1,10 +1,12 @@
 import * as React from "react";
 import styled from "styled-components";
-import { Schedule } from "../../models/types";
+import { DNDSchedule } from "../../models/types";
 import { CLASS_BLOCK_WIDTH } from "../../constants";
+import { sumCreditsInSemester } from "../../utils";
 
 interface YearBottomProps {
-  schedule: Schedule;
+  schedule: DNDSchedule;
+  year: number;
 }
 
 const Container = styled.div`
@@ -15,20 +17,28 @@ const Container = styled.div`
   border: 1px solid black;
 `;
 
-export const YearBottom: React.SFC<YearBottomProps> = props => {
+export const YearBottom: React.SFC<YearBottomProps> = ({ schedule, year }) => {
   return (
     <Container>
       <div style={divStyle}>
-        <p style={pStyle as any}>00</p>
+        <p style={pStyle as any}>
+          {sumCreditsInSemester(schedule, year, "fall")}
+        </p>
       </div>
       <div style={divStyle}>
-        <p style={pStyle as any}>00</p>
+        <p style={pStyle as any}>
+          {sumCreditsInSemester(schedule, year, "spring")}
+        </p>
       </div>
       <div style={divStyle}>
-        <p style={pStyle as any}>00</p>
+        <p style={pStyle as any}>
+          {sumCreditsInSemester(schedule, year, "summer1")}
+        </p>
       </div>
       <div style={divStyle}>
-        <p style={pStyle as any}>00</p>
+        <p style={pStyle as any}>
+          {sumCreditsInSemester(schedule, year, "summer2")}
+        </p>
       </div>
     </Container>
   );
