@@ -1,4 +1,6 @@
 import * as React from "react";
+import { Fab } from "@material-ui/core";
+import AddIcon from "@material-ui/icons/Add";
 
 interface AddButtonProps {
   onClick?: () => void;
@@ -6,26 +8,8 @@ interface AddButtonProps {
 
 export const AddButton: React.SFC<AddButtonProps> = props => {
   return (
-    <button onClick={props.onClick} style={buttonStyle}>
-      <p
-        style={{
-          textAlign: "center",
-          fontSize: 16,
-          position: "relative",
-          top: -16,
-        }}
-      >
-        +
-      </p>
-    </button>
+    <Fab color="primary" aria-label="add" size="small" onClick={props.onClick}>
+      <AddIcon />
+    </Fab>
   );
-};
-
-const buttonStyle = {
-  borderRadius: "50%",
-  width: 25,
-  height: 25,
-  justifyContent: "center",
-  alignItems: "center",
-  alignContent: "center",
 };
