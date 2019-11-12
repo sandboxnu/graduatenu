@@ -9,6 +9,7 @@ import {
   Major,
   DNDScheduleCourse,
   NamedScheduleCourse,
+  Schedule,
 } from "./models/types";
 import styled from "styled-components";
 import { Year } from "./components/Year/Year";
@@ -16,6 +17,7 @@ import { convertTermIdToYear, convertTermIdToSeason } from "./utils";
 import { TextField } from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
 import { majors } from "./majors";
+import { ChooseMajorPlanModal } from "./components/ChooseMajorPlanModal";
 
 const Container = styled.div`
   display: flex;
@@ -48,6 +50,7 @@ interface AppState {
   schedule: DNDSchedule;
   major?: Major;
   currentClassCounter: number; // used for DND purposes, every class needs a unique ID
+  chooseMajorModalVisible: boolean;
 }
 
 export default class App extends React.Component<{}, AppState> {
@@ -58,6 +61,7 @@ export default class App extends React.Component<{}, AppState> {
       schedule: mockData,
       major: undefined,
       currentClassCounter: 0,
+      chooseMajorModalVisible: false,
     };
   }
 
@@ -194,12 +198,8 @@ export default class App extends React.Component<{}, AppState> {
   onChooseMajor(event: React.ChangeEvent<{}>, value: any) {
     const maj = majors.find((m: any) => m.name === value);
 
-    if (!maj) {
-      console.log("Not good");
-    } else {
-      this.setState({
-        major: maj,
-      });
+    if (maj !== this.state.major) {
+      this.setState({ chooseMajorModalVisible: true, major: maj });
     }
   }
 
@@ -218,7 +218,7 @@ export default class App extends React.Component<{}, AppState> {
           />
         )}
         onChange={this.onChooseMajor.bind(this)}
-      ></Autocomplete>
+      />
     );
   }
   handleAddClasses = async (courses: NamedScheduleCourse[], termId: number) => {
@@ -266,9 +266,51 @@ export default class App extends React.Component<{}, AppState> {
     return list;
   };
 
+  convertToDNDSchedule = async (schedule: Schedule): Promise<DNDSchedule> => {
+    const newSchedule = schedule as DNDSchedule;
+    for (const year of Object.keys(schedule.yearMap)) {
+      newSchedule.yearMap[
+        year as any
+      ].fall.classes = await this.convertToDNDCourses(newSchedule.yearMap[
+        year as any
+      ].fall.classes as NamedScheduleCourse[]);
+      newSchedule.yearMap[
+        year as any
+      ].spring.classes = await this.convertToDNDCourses(newSchedule.yearMap[
+        year as any
+      ].spring.classes as NamedScheduleCourse[]);
+      newSchedule.yearMap[
+        year as any
+      ].summer1.classes = await this.convertToDNDCourses(newSchedule.yearMap[
+        year as any
+      ].summer1.classes as NamedScheduleCourse[]);
+      newSchedule.yearMap[
+        year as any
+      ].summer2.classes = await this.convertToDNDCourses(newSchedule.yearMap[
+        year as any
+      ].summer2.classes as NamedScheduleCourse[]);
+    }
+    return newSchedule;
+  };
+
+  async setSchedule(schedule: Schedule) {
+    const dndSchedule = await this.convertToDNDSchedule(schedule);
+    this.setState({ schedule: dndSchedule });
+  }
+
+  hideChooseMajorPlanModal() {
+    this.setState({ chooseMajorModalVisible: false });
+  }
+
   render() {
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
+        <ChooseMajorPlanModal
+          visible={this.state.chooseMajorModalVisible}
+          handleClose={this.hideChooseMajorPlanModal.bind(this)}
+          handleSubmit={this.setSchedule.bind(this)}
+          major={this.state.major!}
+        ></ChooseMajorPlanModal>
         <Container>
           <div onClick={() => console.log(this.state)}>
             <h2>Plan Of Study</h2>
