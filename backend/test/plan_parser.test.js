@@ -228,7 +228,7 @@ expect.extend({
               expect(course).toHaveProperty("numCreditsMax");
 
               // expect some things about each property.
-              expect(course.classId).toBeGreaterThan(999);
+              expect(Number(course.classId)).toBeGreaterThan(999);
               expect(course.subject.length).toBeGreaterThanOrEqual(2);
               // apparently 0 credit courses exist...
               expect(course.numCreditsMin).toBeGreaterThanOrEqual(0);

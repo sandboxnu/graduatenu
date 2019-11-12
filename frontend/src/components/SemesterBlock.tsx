@@ -3,55 +3,88 @@ import { Droppable } from "react-beautiful-dnd";
 import ClassList from "./ClassList";
 import ClassBlock from "./ClassBlock";
 import EmptyBlock from "./EmptyBlock";
-import { DNDScheduleTerm } from "../models/types";
+import { AddClassModal } from "./AddClassModal";
+import { DNDScheduleTerm, NamedScheduleCourse } from "../models/types";
 import { AddButton } from "./Year/AddButton";
 import styled from "styled-components";
 
-interface SemesterBlockProps {
-  semester: DNDScheduleTerm;
-}
-
 const Container = styled.div`
   border: 1px solid black;
+  position: relative;
 `;
 
 const AddButtonContainer = styled.div`
-	position: relative;
-	right: 0px
+	position: absolute;
+	right: 8px
 	bottom: 0px
 	zIndex: 1
 `;
 
-export default class SemesterBlock extends React.Component<SemesterBlockProps> {
+interface SemesterBlockProps {
+  semester: DNDScheduleTerm;
+  handleAddClasses: (courses: NamedScheduleCourse[]) => void;
+}
+
+interface SemesterBlockState {
+  modalVisible: boolean;
+}
+
+export default class SemesterBlock extends React.Component<
+  SemesterBlockProps,
+  SemesterBlockState
+> {
+  constructor(props: SemesterBlockProps) {
+    super(props);
+    this.state = {
+      modalVisible: false,
+    };
+  }
+
+  showModal() {
+    this.setState({ modalVisible: true });
+  }
+
+  hideModal() {
+    this.setState({ modalVisible: false });
+  }
+
   render() {
     return (
-      <Container>
-        <Droppable droppableId={this.props.semester.termId.toString()}>
-          {provided => (
-            <ClassList
-              innerRef={provided.innerRef as any}
-              {...provided.droppableProps}
-            >
-              {this.props.semester.classes.map((scheduleCourse, index) => {
-                if (!!scheduleCourse) {
-                  return (
-                    <ClassBlock
-                      key={index}
-                      class={scheduleCourse}
-                      index={index}
-                    />
-                  );
-                }
-                return <EmptyBlock key={index} />;
-              })}
-              {provided.placeholder}
-            </ClassList>
-          )}
-        </Droppable>
-        <AddButtonContainer>
-          <AddButton></AddButton>
-        </AddButtonContainer>
-      </Container>
+      <div>
+        <AddClassModal
+          visible={this.state.modalVisible}
+          handleClose={this.hideModal.bind(this)}
+          handleSubmit={this.props.handleAddClasses}
+        ></AddClassModal>
+
+        <Container>
+          <Droppable droppableId={this.props.semester.termId.toString()}>
+            {provided => (
+              <ClassList
+                innerRef={provided.innerRef as any}
+                {...provided.droppableProps}
+              >
+                {this.props.semester.classes.map((scheduleCourse, index) => {
+                  if (!!scheduleCourse) {
+                    return (
+                      <ClassBlock
+                        key={index}
+                        class={scheduleCourse}
+                        index={index}
+                      />
+                    );
+                  }
+                  return <EmptyBlock key={index} />;
+                })}
+                {provided.placeholder}
+              </ClassList>
+            )}
+          </Droppable>
+          <AddButtonContainer>
+            <AddButton onClick={this.showModal.bind(this)}></AddButton>
+          </AddButtonContainer>
+        </Container>
+      </div>
     );
   }
 }
