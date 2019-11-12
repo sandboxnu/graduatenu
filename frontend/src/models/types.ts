@@ -21,8 +21,8 @@ export enum NUPath {
 /**
  * Represents one of the seasons in which a student can take a course, as abbreviated by Northeastern.
  */
-export type SeasonKey = keyof typeof Season;
-export enum Season {
+export type Season = keyof typeof SeasonEnum;
+export enum SeasonEnum {
   FL = "FL",
   SP = "SP",
   S1 = "S1",
@@ -124,7 +124,7 @@ export interface INEUOrPrereq {
  * @param missing True if the class is missing.
  */
 export interface INEUPrereqCourse {
-  classId: number;
+  classId: string;
   subject: string;
   missing?: true;
 }
@@ -250,11 +250,11 @@ export interface DNDScheduleYear extends ScheduleYear {
  * @param classes a list of the classes of this term.
  */
 export interface ScheduleTerm {
-  season: Season | SeasonKey;
+  season: Season | SeasonEnum;
   year: number;
   termId: number;
   id: number;
-  status: Status | StatusKey;
+  status: Status | StatusEnum;
   classes: ScheduleCourse[];
 }
 
@@ -265,8 +265,8 @@ export interface DNDScheduleTerm extends ScheduleTerm {
 /**
  * A Status is one of on CO-OP, CLASSES, or INACTIVE
  */
-export type StatusKey = keyof typeof Status;
-export enum Status {
+export type Status = keyof typeof StatusEnum;
+export enum StatusEnum {
   COOP = "COOP",
   CLASSES = "CLASSES",
   INACTIVE = "INACTIVE",
@@ -283,7 +283,7 @@ export enum Status {
  * @param dndId a unique ID for the course for dnd purposes, ex "course-1"
  */
 export interface ScheduleCourse {
-  classId: number;
+  classId: string;
   subject: string;
   prereqs?: INEUAndPrereq | INEUOrPrereq;
   coreqs?: INEUAndPrereq | INEUOrPrereq;
