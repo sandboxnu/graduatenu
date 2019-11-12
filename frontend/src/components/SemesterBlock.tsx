@@ -15,8 +15,8 @@ const Container = styled.div`
 
 const AddButtonContainer = styled.div`
 	position: absolute;
-	right: 8px
-	bottom: 0px
+	right: 6px
+	bottom: 6px
 	zIndex: 1
 `;
 
