@@ -3,6 +3,7 @@ import { Schedule, Major } from "../models/types";
 import { Modal, Card } from "@material-ui/core";
 import { plans } from "../plans";
 import styled from "styled-components";
+import { getNumCoops, isSpringCycle } from "../utils";
 
 const InnerSection = styled.section`
   position: fixed;
@@ -25,7 +26,7 @@ const PlansSection = styled.div`
 
 const PlanCard = styled(Card)`
   width: 100px;
-  height: 100px;
+  height: 200px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -62,6 +63,8 @@ export class ChooseMajorPlanModal extends React.Component<
       <PlanCard onClick={this.choosePlan.bind(this, index)}>
         <p>Plan {index + 1}</p>
         <p>{plan.years.length} Years</p>
+        <p>{getNumCoops(plan)} Co-ops</p>
+        <p>{isSpringCycle(plan) ? "Spring" : "Fall"} Cycle</p>
       </PlanCard>
     ));
   }
