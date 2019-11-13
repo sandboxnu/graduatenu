@@ -12,6 +12,14 @@ import {
 import styled from "styled-components";
 import { Year } from "./components/Year/Year";
 import { convertTermIdToYear, convertTermIdToSeason } from "./utils";
+import { Sidebar } from "./components/Sidebar/Sidebar";
+
+const OuterContainer = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  justify-content: space-between;
+`;
 
 const Container = styled.div`
   display: flex;
@@ -238,22 +246,25 @@ export default class App extends React.Component<{}, AppState> {
 
   render() {
     return (
-      <DragDropContext onDragEnd={this.onDragEnd}>
-        <Container>
-          <div onClick={() => console.log(this.state)}>
-            <h2>Plan Of Study</h2>
-          </div>
-          <ButtonWrapper>
-            <Button onClick={() => {}}>
-              <ButtonText>Add a class</ButtonText>
-            </Button>
-            <Button onClick={() => {}}>
-              <ButtonText>Search</ButtonText>
-            </Button>
-          </ButtonWrapper>
-          {this.renderYears()}
-        </Container>
-      </DragDropContext>
+      <OuterContainer>
+        <DragDropContext onDragEnd={this.onDragEnd}>
+          <Container>
+            <div onClick={() => console.log(this.state)}>
+              <h2>Plan Of Study</h2>
+            </div>
+            <ButtonWrapper>
+              <Button onClick={() => {}}>
+                <ButtonText>Add a class</ButtonText>
+              </Button>
+              <Button onClick={() => {}}>
+                <ButtonText>Search</ButtonText>
+              </Button>
+            </ButtonWrapper>
+            {this.renderYears()}
+          </Container>
+        </DragDropContext>
+        <Sidebar schedule={this.state.schedule}></Sidebar>
+      </OuterContainer>
     );
   }
 }

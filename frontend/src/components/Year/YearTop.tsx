@@ -1,6 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
-import { CLASS_BLOCK_WIDTH } from "../../constants";
+import { CLASS_BLOCK_WIDTH, GraduateGrey } from "../../constants";
 import { ThreeDots } from "../common/ThreeDots";
 
 interface YearTopProps {}
@@ -9,7 +9,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: row;
   height: 100;
-  background-color: #dbdbdb;
+  background-color: ${GraduateGrey};
 `;
 
 const SemesterText = styled.p`
