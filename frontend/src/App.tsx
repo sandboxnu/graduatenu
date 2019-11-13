@@ -112,10 +112,6 @@ export default class App extends React.Component<{}, AppState> {
         ...this.state,
         schedule: {
           ...this.state.schedule,
-          // semesters: {
-          //   ...this.state.schedule.semesters,
-          //   [newSemester.id]: newSemester,
-          // },
           yearMap: {
             ...this.state.schedule.yearMap,
             [newSemesterYear]: {
@@ -205,11 +201,13 @@ export default class App extends React.Component<{}, AppState> {
     ));
   }
 
-  onChooseMajor(event: React.ChangeEvent<{}>, value: any) {
+  onChooseMajor(event: React.SyntheticEvent<{}>, value: any) {
     const maj = majors.find((m: any) => m.name === value);
 
-    if (maj !== this.state.major) {
+    if (!!maj) {
       this.setState({ chooseMajorModalVisible: true, major: maj });
+    } else {
+      this.setState({ major: maj });
     }
   }
 
@@ -227,6 +225,7 @@ export default class App extends React.Component<{}, AppState> {
             fullWidth
           />
         )}
+        value={!!this.state.major ? this.state.major.name + " " : ""}
         onChange={this.onChooseMajor.bind(this)}
       />
     );
