@@ -2,6 +2,7 @@ import React from "react";
 import { DNDSchedule, Major } from "../../models/types";
 import styled from "styled-components";
 import { GraduateGrey } from "../../constants";
+import { RequirementSection } from "./RequirementSection";
 
 const Container = styled.div`
   display: flex;
@@ -9,13 +10,39 @@ const Container = styled.div`
   width: 200px;
   background-color: ${GraduateGrey};
   border-left: 1px solid black;
+  padding: 12px;
+`;
+
+const MajorTitle = styled.p`
+  font-size: 20px;
+  font-weight: bold;
 `;
 
 interface Props {
   schedule: DNDSchedule;
-  // major: Major;
+  major?: Major;
 }
 
-export const Sidebar: React.FC<Props> = ({ schedule }) => {
-  return <Container></Container>;
+export const Sidebar: React.FC<Props> = ({ schedule, major }) => {
+  if (!major) {
+    return (
+      <Container>
+        <MajorTitle>No major selected</MajorTitle>
+      </Container>
+    );
+  }
+
+  return (
+    <Container>
+      <MajorTitle>{major.name}</MajorTitle>
+      {major.requirementGroups.map((req, index) => {
+        return (
+          <RequirementSection
+            title={req}
+            contents={major.requirementGroupMap[req]}
+          ></RequirementSection>
+        );
+      })}
+    </Container>
+  );
 };
