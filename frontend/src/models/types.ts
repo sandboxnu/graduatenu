@@ -144,12 +144,14 @@ export interface INEUPrereqCourse {
 export interface Major {
   name: string;
   requirementGroups: string[];
-  requirementGroupMap: { [key: string]: ANDSection | ORSection | RANGESection };
+  requirementGroupMap: { [key: string]: IMajorRequirementGroup };
   yearVersion: number;
   isLanguageRequired: boolean;
   totalCreditsRequired: number;
   nupaths: NUPath[];
 }
+
+export type IMajorRequirementGroup = ANDSection | ORSection | RANGESection;
 
 /**
  * A section that must have everything completed in it.
@@ -304,6 +306,14 @@ export interface DNDScheduleCourse extends NamedScheduleCourse {
 export interface IWarning {
   message: string;
   termId: number;
+}
+
+/**
+ * An Unsatisfied Requirement
+ */
+export interface IRequirementGroupWarning {
+  message: string;
+  requirementGroup: string;
 }
 
 /**
