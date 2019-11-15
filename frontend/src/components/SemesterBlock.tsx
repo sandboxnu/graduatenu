@@ -20,6 +20,15 @@ const AddButtonContainer = styled.div`
 	zIndex: 1
 `;
 
+const NoClassBlock = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: grey;
+`;
+
 interface SemesterBlockProps {
   semester: DNDScheduleTerm;
   handleAddClasses: (courses: NamedScheduleCourse[]) => void;
@@ -48,6 +57,36 @@ export default class SemesterBlock extends React.Component<
     this.setState({ modalVisible: false });
   }
 
+  renderBody() {
+    const status = this.props.semester.status;
+    if (status === "CLASSES" || status === "HOVERINACTIVE") {
+      return this.props.semester.classes.map((scheduleCourse, index) => {
+        if (!!scheduleCourse) {
+          return (
+            <ClassBlock key={index} class={scheduleCourse} index={index} />
+          );
+        }
+        return <EmptyBlock key={index} />;
+      });
+    }
+
+    if (status === "COOP") {
+      return (
+        <NoClassBlock>
+          <p>CO-OP</p>
+        </NoClassBlock>
+      );
+    }
+
+    if (status === "INACTIVE") {
+      return (
+        <NoClassBlock>
+          <p>VACATION</p>
+        </NoClassBlock>
+      );
+    }
+  }
+
   render() {
     return (
       <div>
@@ -64,18 +103,7 @@ export default class SemesterBlock extends React.Component<
                 innerRef={provided.innerRef as any}
                 {...provided.droppableProps}
               >
-                {this.props.semester.classes.map((scheduleCourse, index) => {
-                  if (!!scheduleCourse) {
-                    return (
-                      <ClassBlock
-                        key={index}
-                        class={scheduleCourse}
-                        index={index}
-                      />
-                    );
-                  }
-                  return <EmptyBlock key={index} />;
-                })}
+                {this.renderBody()}
                 {provided.placeholder}
               </ClassList>
             )}
