@@ -110,3 +110,80 @@ test("Tests warnings produce properly for cs_sched_2.json", () => {
     termId: 201860,
   });
 });
+
+test("perfect schedule, no requirement group warnings", () => {
+  let cs_sched = fs.readFileSync(
+    "./backend/test/mock_schedules/cs_pos_1.json",
+    "utf-8"
+  );
+  let cs_sched_obj = JSON.parse(cs_sched);
+
+  let csMajor = fs.readFileSync(
+    "./backend/test/mock_majors/bscs.json",
+    "utf-8"
+  );
+
+  let csMajor_obj = JSON.parse(csMajor);
+
+  let reqWarnings = warning_generator.produceRequirementGroupWarning(
+    cs_sched_obj,
+    csMajor_obj
+  );
+  console.log(reqWarnings);
+  expect(reqWarnings.length).toBe(0);
+});
+
+test("Requirement group warnings produced appropriately", () => {
+  let cs_sched = fs.readFileSync(
+    "./backend/test/mock_schedules/cs_sched_1.json",
+    "utf-8"
+  );
+  let cs_sched_obj = JSON.parse(cs_sched);
+
+  let csMajor = fs.readFileSync(
+    "./backend/test/mock_majors/bscs.json",
+    "utf-8"
+  );
+
+  let csMajor_obj = JSON.parse(csMajor);
+
+  let reqWarnings = warning_generator.produceRequirementGroupWarning(
+    cs_sched_obj,
+    csMajor_obj
+  );
+
+  expect(reqWarnings.length).toBeGreaterThan(0);
+
+  for (const warning of reqWarnings) {
+    expect(warning).toBeDefined();
+    expect(warning).toHaveProperty("message");
+    expect(warning).toHaveProperty("requirementGroup");
+  }
+
+  expect(reqWarnings).toContainEqual({
+    message: "Computer Science Overview: requirement not satisfied: CS 1210",
+    requirementGroup: "Computer Science Overview",
+  });
+
+  expect(reqWarnings).toContainEqual({
+    message:
+      "Computer Science Required Courses: requirement not satisfied: CS 3700 AND CS 3800 AND CS 4400 AND (CS 4500 and CS 4501)",
+    requirementGroup: "Computer Science Required Courses",
+  });
+
+  expect(reqWarnings).toContainEqual({
+    message: "Presentation Requirement: requirement not satisfied: THTR 1170",
+    requirementGroup: "Presentation Requirement",
+  });
+
+  expect(reqWarnings).toContainEqual({
+    message: "Science Requirement: completed 15 credits of 10 (max required)",
+    requirementGroup: "Science Requirement",
+  });
+
+  expect(reqWarnings).toContainEqual({
+    message:
+      "Advanced Writing in the Disciplines: requirement not satisfied: (ENGW 3302 or ENGW 3315)",
+    requirementGroup: "Advanced Writing in the Disciplines",
+  });
+});
