@@ -11,6 +11,14 @@ import {
   IScheduleCourse,
   INEUAndPrereq,
   INEUOrPrereq,
+  Major,
+  IRequirementGroupWarning,
+  IMajorRequirementGroup,
+  Requirement,
+  ISubjectRange,
+  IAndCourse,
+  ICourseRange,
+  IOrCourse,
 } from "../models/types";
 
 /**
@@ -76,6 +84,296 @@ export function produceWarnings(schedule: Schedule): IWarning[] {
 }
 
 /**
+ * Identify unsatisfied requirements given a major and a schedule.
+ * @param schedule
+ * @param major
+ */
+export function produceRequirementGroupWarning(
+  schedule: Schedule,
+  major: Major
+): IRequirementGroupWarning[] {
+  // holds courses that are currently on the schedule.
+  const taken: Map<string, number> = new Map<string, number>();
+
+  //add courses from the schedule to a Map: string => number (produceCourseCode => creditHours)
+  schedule.years.sort((n1, n2) => n1 - n2);
+  for (const yearNum of schedule.years) {
+    const year = schedule.yearMap[yearNum];
+
+    // add courses, term by term.
+    addCoursesToMap(year.fall, taken);
+
+    addCoursesToMap(year.spring, taken);
+
+    // if is summer full, only check summer I.
+    // shouldn't matter, summerII would just be empty.
+    if (year.isSummerFull) {
+      addCoursesToMap(year.summer1, taken);
+    } else {
+      addCoursesToMap(year.summer1, taken);
+      addCoursesToMap(year.summer2, taken);
+    }
+  }
+
+  let requirementGroups: string[] = major.requirementGroups;
+  let res: IRequirementGroupWarning[] = [];
+  for (const name of requirementGroups) {
+    let requirementGroup: IMajorRequirementGroup =
+      major.requirementGroupMap[name];
+    let unsatisfiedRequirement:
+      | IRequirementGroupWarning
+      | undefined = produceUnsatifiedRequirement(requirementGroup, taken);
+    if (unsatisfiedRequirement) {
+      res.push(unsatisfiedRequirement);
+    }
+  }
+  return res;
+}
+
+/**
+ * Produce an IUnsatisfiedRequirementGroup object if the requirementGroup hasn't been fully satisfied. Undefined otherwise.
+ * @param requirementGroup the requirement group to check.
+ * @param taken the Map of courses a student has on their schedule right now.
+ */
+function produceUnsatifiedRequirement(
+  requirementGroup: IMajorRequirementGroup,
+  taken: Map<string, number>
+): IRequirementGroupWarning | undefined {
+  let satisfied: Map<string, number> = new Map<string, number>();
+  let messages: string[] = [];
+  for (const requirement of requirementGroup.requirements) {
+    let message: string | undefined = processRequirement(
+      requirement,
+      taken,
+      satisfied
+    );
+    if (message) {
+      messages.push(message);
+    }
+  }
+  switch (requirementGroup.type) {
+    case "AND": {
+      if (messages.length > 0) {
+        let reqGroupMessage: string = `${
+          requirementGroup.name
+        }: requirement not satisfied: ${messages.join(" AND ")}`;
+        let res: IRequirementGroupWarning = {
+          message: reqGroupMessage,
+          requirementGroup: requirementGroup.name,
+        };
+        return res;
+      } else {
+        return undefined;
+      }
+    }
+    case "OR": {
+      let minCredsRequired: number = requirementGroup.numCreditsMin;
+      let maxCredsRequired: number = requirementGroup.numCreditsMax;
+      let sectionCredsCompleted: number = 0;
+
+      satisfied.forEach((value: number, key: string) => {
+        sectionCredsCompleted += value;
+      });
+      if (sectionCredsCompleted < minCredsRequired) {
+        let reqGroupMessage: string = `${
+          requirementGroup.name
+        }: requirement not satisfied:
+        need ${minCredsRequired -
+          sectionCredsCompleted} credits from: ${messages.join(" OR ")}`;
+        let res: IRequirementGroupWarning = {
+          message: reqGroupMessage,
+          requirementGroup: requirementGroup.name,
+        };
+        return res;
+      } else if (sectionCredsCompleted > maxCredsRequired) {
+        let reqGroupMessage: string = `${requirementGroup.name}: completed ${sectionCredsCompleted} of ${maxCredsRequired} (max required)`;
+        let res: IRequirementGroupWarning = {
+          message: reqGroupMessage,
+          requirementGroup: requirementGroup.name,
+        };
+        return res;
+      } else {
+        return undefined;
+      }
+    }
+    case "RANGE": {
+      // a range section only contains an ICourseRange. So if that wasn't satisfied, simply return the warning generated.
+      if (messages.length > 0) {
+        let reqGroupMessage: string = `${requirementGroup.name}: requirement not satisfied: ${messages[0]}`;
+        let res: IRequirementGroupWarning = {
+          message: reqGroupMessage,
+          requirementGroup: requirementGroup.name,
+        };
+        return res;
+      } else {
+        return undefined;
+      }
+    }
+    default: {
+      return undefined;
+    }
+  }
+}
+
+/**
+ * Produce a message listing unsatisfied requirements if requirement hasn't been fully satisfied. Undefined otherwise.
+ * @param requirement the requirement to check
+ * @param taken the Map of courses a student has on their schedule right now
+ * @param satisfied a hash set of courses that satisfy the top-level requirement.
+ */
+function processRequirement(
+  requirement: Requirement,
+  taken: Map<string, number>,
+  satisfied: Map<string, number>
+): string | undefined {
+  switch (requirement.type) {
+    case "AND": {
+      return processIAndCourse(requirement, taken, satisfied);
+    }
+    case "OR": {
+      return processIOrCourse(requirement, taken, satisfied);
+    }
+    case "RANGE": {
+      return processICourseRange(requirement, taken, satisfied);
+    }
+    // requirement is unsatisfied if doesn't exist in the taken map.
+    case "COURSE": {
+      return processIRequiredCourse(requirement, taken, satisfied);
+    }
+  }
+}
+
+/**
+ * Processes an IAndCourse requirement.
+ * @param requirement the requirement to check
+ * @param taken the Map of courses a student has on their schedule right now
+ * @param satisfied a hash set of courses that satisfy the top-level requirement.
+ */
+function processIAndCourse(
+  requirement: IAndCourse,
+  taken: Map<string, number>,
+  satisfied: Map<string, number>
+): string | undefined {
+  // requirement is unsatisfied if none of the requirements in the list has been satisfied.
+  let processReqMessages: string[] | undefined = processRequirementCourses(
+    requirement.courses,
+    taken,
+    satisfied
+  );
+  if (processReqMessages) {
+    let reqMessage = `(${processReqMessages.join(" and ")})`;
+    return reqMessage;
+  } else {
+    return undefined;
+  }
+}
+
+/**
+ * Processes an IOrCourse requirement.
+ * @param requirement the requirement to check
+ * @param taken the Map of courses a student has on their schedule right now
+ * @param satisfied a hash set of courses that satisfy the top-level requirement.
+ */
+function processIOrCourse(
+  requirement: IOrCourse,
+  taken: Map<string, number>,
+  satisfied: Map<string, number>
+): string | undefined {
+  // requirement is unsatisfied if all of the requirements in the list have not been satisfied.
+  let processReqMessages: string[] = processRequirementCourses(
+    requirement.courses,
+    taken,
+    satisfied
+  );
+  if (processReqMessages.length === requirement.courses.length) {
+    let reqMessage = `(${processReqMessages.join(" or ")})`;
+    return reqMessage;
+  } else {
+    return undefined;
+  }
+}
+
+/**
+ * Processes an ICourseRange requirement.
+ * @param requirement the requirement to check
+ * @param taken the Map of courses a student has on their schedule right now
+ * @param satisfied a hash set of courses that satisfy the top-level requirement.
+ */
+function processICourseRange(
+  requirement: ICourseRange,
+  taken: Map<string, number>,
+  satisfied: Map<string, number>
+): string | undefined {
+  // requirement is unsatisfied if the numCredits for the courseRange hasn't been satisfied.
+  let numCreditsrequired: number = requirement.creditsRequired;
+  let rangeCreditsCompleted: number = 0;
+
+  //loop through the taken courses and check if it is in one of the subject ranges for this ICourseRange.
+  taken.forEach((value: number, key: string) => {
+    if (courseInSubjectRanges(key, requirement.ranges)) {
+      satisfied.set(key, value);
+      rangeCreditsCompleted += value;
+    }
+  });
+
+  if (rangeCreditsCompleted >= numCreditsrequired) {
+    // ICourseRange satisfied
+    return undefined;
+  } else {
+    return `(complete ${numCreditsrequired -
+      rangeCreditsCompleted} number of credits from 
+      ${concatSubjectRanges(requirement.ranges)})`;
+  }
+}
+
+/**
+ * Processes an IRequiredCourse requirement.
+ * @param requirement the requirement to check
+ * @param taken the Map of courses a student has on their schedule right now
+ * @param satisfied a hash set of courses that satisfy the top-level requirement.
+ */
+function processIRequiredCourse(
+  requirement: IRequiredCourse,
+  taken: Map<string, number>,
+  satisfied: Map<string, number>
+): string | undefined {
+  // requirement is unsatisfied if doesn't exist in the taken map.
+  let code: string = produceCourseCode(requirement);
+  let creditHours: number | undefined = taken.get(code);
+  if (creditHours) {
+    satisfied.set(code, creditHours);
+    return undefined;
+  } else {
+    return code;
+  }
+}
+
+/**
+ * Produce a message for each unsatisfied requirement. Undefined if all requirements in list satisfied.
+ * @param requirements list of requirements
+ * @param taken the Map of courses a student has on their schedule right now
+ * @param satisfied a hash set of courses that satisfy the top-level requirement.
+ */
+function processRequirementCourses(
+  requirements: Requirement[],
+  taken: Map<string, number>,
+  satisfied: Map<string, number>
+): string[] {
+  let res: string[] = [];
+  for (const requirement of requirements) {
+    let processedReq: string | undefined = processRequirement(
+      requirement,
+      taken,
+      satisfied
+    );
+    if (processedReq) {
+      res.push(processedReq);
+    }
+  }
+  return res;
+}
+
+/**
  * adds {@type ScheduleCourse}s to a tracker.
  * @param toAdd courses to add
  * @param tracker tracker to add to
@@ -87,6 +385,69 @@ function addCoursesToTracker(
   for (const course of toAdd.classes) {
     tracker.addCourse(courseCode(course));
   }
+}
+
+/**
+ * Add courses from a ScheduleTerm to a Map of coursecode to creditHours
+ * @param toAdd the ScheduleTerm
+ * @param taken the Map
+ */
+function addCoursesToMap(
+  toAdd: ScheduleTerm,
+  taken: Map<string, number>
+): void {
+  for (const course of toAdd.classes) {
+    taken.set(produceCourseCode(course), course.numCreditsMin);
+  }
+}
+
+/**
+ * Check if a course is in one of the subject ranges
+ * @param courseCode the course to check
+ * @param ranges the ranges to check against.
+ */
+function courseInSubjectRanges(
+  courseCode: string,
+  ranges: ISubjectRange[]
+): boolean {
+  let splitArr: string[] = courseCode.split(" ");
+  if (splitArr.length < 2) {
+    return false;
+  }
+
+  // is the course in one of the subject ranges?
+  let subject: string = splitArr[0];
+  let courseID: number = parseInt(splitArr[1]);
+  for (const subjRange of ranges) {
+    if (
+      subjRange.subject === subject &&
+      subjRange.idRangeStart <= courseID &&
+      courseID <= subjRange.idRangeEnd
+    ) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
+/**
+ * Sting concatenation of subject ranges
+ * @param ranges the subject ranges.
+ */
+function concatSubjectRanges(ranges: ISubjectRange[]): string {
+  let res: string = "";
+  for (const range of ranges) {
+    let rangeString: string =
+      range.subject +
+      " " +
+      range.idRangeStart.toString() +
+      "-" +
+      range.idRangeEnd.toString();
+    res += rangeString;
+  }
+
+  return res;
 }
 
 /**
@@ -276,6 +637,23 @@ export const courseCode = (
     | ScheduleCourse
 ) => {
   return "" + course.subject + course.classId;
+};
+
+/**
+ * Produces a string of the course's subject followed by classId separated by a space.
+ * @param course The course to get the code of.
+ * @returns The courseCode of the course.
+ */
+export const produceCourseCode = (
+  course:
+    | ICompleteCourse
+    | IRequiredCourse
+    | INEUCourse
+    | INEUPrereqCourse
+    | IScheduleCourse
+    | ScheduleCourse
+) => {
+  return "" + course.subject + " " + course.classId;
 };
 
 /**
