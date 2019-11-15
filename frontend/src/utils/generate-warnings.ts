@@ -186,7 +186,7 @@ function produceUnsatifiedRequirement(
         };
         return res;
       } else if (sectionCredsCompleted > maxCredsRequired) {
-        let reqGroupMessage: string = `${requirementGroup.name}: completed ${sectionCredsCompleted} of ${maxCredsRequired} (max required)`;
+        let reqGroupMessage: string = `${requirementGroup.name}: completed ${sectionCredsCompleted} credits of ${maxCredsRequired} (max required)`;
         let res: IRequirementGroupWarning = {
           message: reqGroupMessage,
           requirementGroup: requirementGroup.name,
@@ -255,12 +255,12 @@ function processIAndCourse(
   satisfied: Map<string, number>
 ): string | undefined {
   // requirement is unsatisfied if none of the requirements in the list has been satisfied.
-  let processReqMessages: string[] | undefined = processRequirementCourses(
+  let processReqMessages: string[] = processRequirementCourses(
     requirement.courses,
     taken,
     satisfied
   );
-  if (processReqMessages) {
+  if (processReqMessages.length > 0) {
     let reqMessage = `(${processReqMessages.join(" and ")})`;
     return reqMessage;
   } else {
@@ -340,7 +340,7 @@ function processIRequiredCourse(
   // requirement is unsatisfied if doesn't exist in the taken map.
   let code: string = produceCourseCode(requirement);
   let creditHours: number | undefined = taken.get(code);
-  if (creditHours) {
+  if (creditHours !== undefined) {
     satisfied.set(code, creditHours);
     return undefined;
   } else {
