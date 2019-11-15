@@ -270,6 +270,8 @@ export enum StatusEnum {
   COOP = "COOP",
   CLASSES = "CLASSES",
   INACTIVE = "INACTIVE",
+  HOVERINACTIVE = "HOVERINACTIVE",
+  HOVERCOOP = "HOVERCOOP",
 }
 
 /**
