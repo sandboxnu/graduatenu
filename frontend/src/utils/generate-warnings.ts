@@ -177,8 +177,7 @@ function produceUnsatifiedRequirement(
       if (sectionCredsCompleted < minCredsRequired) {
         let reqGroupMessage: string = `${
           requirementGroup.name
-        }: requirement not satisfied:
-        need ${minCredsRequired -
+        }: requirement not satisfied: need ${minCredsRequired -
           sectionCredsCompleted} credits from: ${messages.join(" OR ")}`;
         let res: IRequirementGroupWarning = {
           message: reqGroupMessage,
