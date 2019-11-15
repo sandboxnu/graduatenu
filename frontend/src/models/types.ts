@@ -134,8 +134,8 @@ export interface INEUPrereqCourse {
 /**
  * A Major, containing all the requirements.
  * @param name The name of the major.
- * @param sections a list of the sections of this major
- * @param sectionMap an object containing the sections of this major.
+ * @param requirementGroups a list of the sections of this major
+ * @param requirementGroupMap an object containing the sections of this major.
  * @param yearVersion Which major version the user has, based on the year.
  * @param isLanguageRequired True if a language is required.
  * @param totalCreditsRequired The total number of credit-hours required for the major.
