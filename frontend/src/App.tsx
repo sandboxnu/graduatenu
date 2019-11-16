@@ -77,9 +77,7 @@ export default class App extends React.Component<{}, AppState> {
     ];
     const destSemester: DNDScheduleTerm = (destYear as any)[destSemesterSeason];
 
-    console.log(this.state);
     this.removeHovers(destSemester);
-    console.log(this.state);
 
     if (
       destSemester.status === "INACTIVE" ||
@@ -231,23 +229,24 @@ export default class App extends React.Component<{}, AppState> {
     this.setState(newState);
   };
 
+  isCoopOrVacation(currSemester: DNDScheduleTerm): boolean {
+    return currSemester.status.includes("HOVER");
+  }
+
   removeHovers(currSemester: DNDScheduleTerm) {
     for (const yearnum of this.state.schedule.years) {
       const year = this.state.schedule.yearMap[yearnum];
       console.log(year.summer1.status.toString());
-      if (year.fall.status.includes("HOVER") && year.fall !== currSemester) {
+      if (this.isCoopOrVacation(year.fall) && year.fall !== currSemester) {
         year.fall.status = year.fall.status.replace("HOVER", "") as Status;
         this.updateSemester(yearnum, "fall", year.fall);
       }
-      if (
-        year.spring.status.includes("HOVER") &&
-        year.spring !== currSemester
-      ) {
+      if (this.isCoopOrVacation(year.spring) && year.spring !== currSemester) {
         year.spring.status = year.spring.status.replace("HOVER", "") as Status;
         this.updateSemester(yearnum, "spring", year.spring);
       }
       if (
-        year.summer1.status.includes("HOVER") &&
+        this.isCoopOrVacation(year.summer1) &&
         year.summer1 !== currSemester
       ) {
         year.summer1.status = year.summer1.status.replace(
@@ -257,7 +256,7 @@ export default class App extends React.Component<{}, AppState> {
         this.updateSemester(yearnum, "summer1", year.summer1);
       }
       if (
-        year.summer2.status.includes("HOVER") &&
+        this.isCoopOrVacation(year.summer2) &&
         year.summer2 !== currSemester
       ) {
         year.summer2.status = year.summer2.status.replace(
