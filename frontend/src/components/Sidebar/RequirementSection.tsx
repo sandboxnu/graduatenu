@@ -7,6 +7,13 @@ import {
   ISubjectRange,
 } from "../../models/types";
 import styled from "styled-components";
+import CheckIcon from "@material-ui/icons/Check";
+import ClearIcon from "@material-ui/icons/Clear";
+
+const CourseWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
 
 const CourseText = styled.p`
   font-size: 12px;
@@ -102,14 +109,18 @@ export class RequirementSection extends React.Component<
   }
 
   renderCourse(course: IRequiredCourse, noMargin: boolean = false) {
-    if (noMargin) {
-      return (
-        <CourseTextNoMargin>
-          {course.subject + course.classId}
-        </CourseTextNoMargin>
-      );
-    }
-    return <CourseText>{course.subject + course.classId}</CourseText>;
+    return (
+      <CourseWrapper>
+        <CheckIcon color="action" fontSize="small"></CheckIcon>
+        {noMargin ? (
+          <CourseTextNoMargin>
+            {course.subject + course.classId}
+          </CourseTextNoMargin>
+        ) : (
+          <CourseText>{course.subject + course.classId}</CourseText>
+        )}
+      </CourseWrapper>
+    );
   }
 
   convertTypeToText(type: string) {
