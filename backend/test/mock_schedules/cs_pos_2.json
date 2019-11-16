@@ -769,20 +769,14 @@
             "numCreditsMax": 0
           },
           {
-            "classId": "4100",
-            "subject": "CS",
+            "classId": "9999",
+            "subject": "Computer science capstone",
             "numCreditsMin": 4,
             "numCreditsMax": 4
           },
           {
             "classId": "9999",
             "subject": "Elective",
-            "numCreditsMin": 4,
-            "numCreditsMax": 4
-          },
-          {
-            "classId": "4400",
-            "subject": "DS",
             "numCreditsMin": 4,
             "numCreditsMax": 4
           }
