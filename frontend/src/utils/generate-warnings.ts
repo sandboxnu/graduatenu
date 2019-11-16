@@ -91,6 +91,28 @@ export function produceWarnings(schedule: Schedule): IWarning[] {
 }
 
 /**
+ * Identify a list of satisfied requirements given a major and a schedule.
+ * @param schedule the schedule to check requirements for.
+ * @param major the major to check requirements against.
+ */
+export function produceSatisfiedReqGroups(
+  schedule: Schedule,
+  major: Major
+): string[] {
+  let reqWarnings: IRequirementGroupWarning[] = produceRequirementGroupWarning(
+    schedule,
+    major
+  );
+  let reqGroups: Set<string> = new Set(major.requirementGroups);
+
+  for (const unsatisfiedWarning of reqWarnings) {
+    reqGroups.delete(unsatisfiedWarning.requirementGroup);
+  }
+
+  return Array.from(reqGroups);
+}
+
+/**
  * Identify unsatisfied requirements given a major and a schedule.
  * @param schedule the schedule to check requirements for.
  * @param major the major to check requirements against.
@@ -172,6 +194,12 @@ function produceUnsatifiedRequirement(
   }
 }
 
+/**
+ * Produce an IUnsatisfiedRequirementGroup object if the given ANDSection hasn't been fully satisfied. Undefined otherwise.
+ * @param requirementGroup the requirement group to check.
+ * @param taken the Map of courses a student has on their schedule right now.
+ * @param coursesUsed a set of courses which already satisfy some requirement for the major.
+ */
 function processAndSection(
   requirementGroup: ANDSection,
   taken: Map<string, number>,
@@ -210,6 +238,12 @@ function processAndSection(
   }
 }
 
+/**
+ * Produce an IUnsatisfiedRequirementGroup object if the given ORSection hasn't been fully satisfied. Undefined otherwise.
+ * @param requirementGroup the requirement group to check.
+ * @param taken the Map of courses a student has on their schedule right now.
+ * @param coursesUsed a set of courses which already satisfy some requirement for the major.
+ */
 function processOrSection(
   requirementGroup: ORSection,
   taken: Map<string, number>,
@@ -253,6 +287,12 @@ function processOrSection(
   }
 }
 
+/**
+ * Produce an IUnsatisfiedRequirementGroup object if the given ANDSection hasn't been fully satisfied. Undefined otherwise.
+ * @param requirementGroup the requirement group to check.
+ * @param taken the Map of courses a student has on their schedule right now.
+ * @param coursesUsed a set of courses which already satisfy some requirement for the major.
+ */
 function processRangeSection(
   requirementGroup: RANGESection,
   taken: Map<string, number>,

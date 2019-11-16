@@ -129,7 +129,27 @@ test("perfect schedule, no requirement group warnings for cs_pos_1.json", () => 
     cs_sched_obj,
     csMajor_obj
   );
+  let satisfiedGroups = warning_generator.produceSatisfiedReqGroups(
+    cs_sched_obj,
+    csMajor_obj
+  );
+
   expect(reqWarnings.length).toBe(0);
+
+  expect(satisfiedGroups).toStrictEqual([
+    "Computer Science Overview",
+    "Computer Science Fundamental Courses",
+    "Computer Science Required Courses",
+    "Presentation Requirement",
+    "Computer Science Capstone",
+    "Computer Science Elective Courses",
+    "Mathematics Courses",
+    "Computing and Social Issues",
+    "Electrical Engineering",
+    "Science Requirement",
+    "College Writing",
+    "Advanced Writing in the Disciplines",
+  ]);
 });
 
 test("Range section warning produced for cs_pos_2.json", () => {
@@ -151,7 +171,26 @@ test("Range section warning produced for cs_pos_2.json", () => {
     csMajor_obj
   );
 
+  let satisfiedGroups = warning_generator.produceSatisfiedReqGroups(
+    cs_sched_obj,
+    csMajor_obj
+  );
+
   expect(reqWarnings.length).toBe(1);
+
+  expect(satisfiedGroups).toStrictEqual([
+    "Computer Science Overview",
+    "Computer Science Fundamental Courses",
+    "Computer Science Required Courses",
+    "Presentation Requirement",
+    "Computer Science Capstone",
+    "Mathematics Courses",
+    "Computing and Social Issues",
+    "Electrical Engineering",
+    "Science Requirement",
+    "College Writing",
+    "Advanced Writing in the Disciplines",
+  ]);
 
   expect(reqWarnings).toContainEqual({
     message:
@@ -178,8 +217,22 @@ test("Requirement group warnings produced appropriately for cs_sched_1.json", ()
     cs_sched_obj,
     csMajor_obj
   );
+  let satisfiedGroups = warning_generator.produceSatisfiedReqGroups(
+    cs_sched_obj,
+    csMajor_obj
+  );
 
   expect(reqWarnings.length).toBeGreaterThan(0);
+
+  expect(satisfiedGroups).toStrictEqual([
+    "Computer Science Fundamental Courses",
+    "Computer Science Capstone",
+    "Mathematics Courses",
+    "Computing and Social Issues",
+    "Electrical Engineering",
+    "Science Requirement",
+    "College Writing",
+  ]);
 
   for (const warning of reqWarnings) {
     expect(warning).toBeDefined();
@@ -228,8 +281,21 @@ test("Requirement group warnings produced appropriately for cs_sched_2.json", ()
     cs_sched_obj,
     csMajor_obj
   );
+  let satisfiedGroups = warning_generator.produceSatisfiedReqGroups(
+    cs_sched_obj,
+    csMajor_obj
+  );
 
   expect(reqWarnings.length).toBeGreaterThan(0);
+
+  expect(satisfiedGroups).toStrictEqual([
+    "Computer Science Fundamental Courses",
+    "Mathematics Courses",
+    "Computing and Social Issues",
+    "Electrical Engineering",
+    "Science Requirement",
+    "College Writing",
+  ]);
 
   for (const warning of reqWarnings) {
     expect(warning).toBeDefined();
