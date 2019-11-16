@@ -11,6 +11,7 @@ import styled from "styled-components";
 const Container = styled.div`
   border: 1px solid black;
   position: relative;
+  height: 100%;
 `;
 
 const AddButtonContainer = styled.div`
