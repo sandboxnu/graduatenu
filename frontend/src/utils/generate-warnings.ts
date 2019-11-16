@@ -19,7 +19,14 @@ import {
   IAndCourse,
   ICourseRange,
   IOrCourse,
+  ANDSection,
+  ORSection,
+  RANGESection,
 } from "../models/types";
+
+interface CreditHourTracker {
+  hoursCompleted: number;
+}
 
 /**
  * This module contains functions that generate warnings based off a schedule input.
@@ -85,8 +92,8 @@ export function produceWarnings(schedule: Schedule): IWarning[] {
 
 /**
  * Identify unsatisfied requirements given a major and a schedule.
- * @param schedule
- * @param major
+ * @param schedule the schedule to check requirements for.
+ * @param major the major to check requirements against.
  */
 export function produceRequirementGroupWarning(
   schedule: Schedule,
@@ -94,6 +101,7 @@ export function produceRequirementGroupWarning(
 ): IRequirementGroupWarning[] {
   // holds courses that are currently on the schedule.
   const taken: Map<string, number> = new Map<string, number>();
+  const coursesUsed: Set<string> = new Set<string>();
 
   //add courses from the schedule to a Map: string => number (produceCourseCode => creditHours)
   schedule.years.sort((n1, n2) => n1 - n2);
@@ -120,9 +128,16 @@ export function produceRequirementGroupWarning(
   for (const name of requirementGroups) {
     let requirementGroup: IMajorRequirementGroup =
       major.requirementGroupMap[name];
+    // todo: if req group is RangeSection or contains a ICourseRange process after all other requirement groups.
+    // this is because these reqs can be satisfied by a wide range of courses, and you don't want it using up
+    // a course that is need to satisfy a more constrained requirement.
     let unsatisfiedRequirement:
       | IRequirementGroupWarning
-      | undefined = produceUnsatifiedRequirement(requirementGroup, taken);
+      | undefined = produceUnsatifiedRequirement(
+      requirementGroup,
+      taken,
+      coursesUsed
+    );
     if (unsatisfiedRequirement) {
       res.push(unsatisfiedRequirement);
     }
@@ -134,79 +149,22 @@ export function produceRequirementGroupWarning(
  * Produce an IUnsatisfiedRequirementGroup object if the requirementGroup hasn't been fully satisfied. Undefined otherwise.
  * @param requirementGroup the requirement group to check.
  * @param taken the Map of courses a student has on their schedule right now.
+ * @param coursesUsed a set of courses which already satisfy some requirement for the major.
  */
 function produceUnsatifiedRequirement(
   requirementGroup: IMajorRequirementGroup,
-  taken: Map<string, number>
+  taken: Map<string, number>,
+  coursesUsed: Set<string>
 ): IRequirementGroupWarning | undefined {
-  let satisfied: Map<string, number> = new Map<string, number>();
-  let messages: string[] = [];
-  for (const requirement of requirementGroup.requirements) {
-    let message: string | undefined = processRequirement(
-      requirement,
-      taken,
-      satisfied
-    );
-    if (message) {
-      messages.push(message);
-    }
-  }
   switch (requirementGroup.type) {
     case "AND": {
-      if (messages.length > 0) {
-        let reqGroupMessage: string = `${
-          requirementGroup.name
-        }: requirement not satisfied: ${messages.join(" AND ")}`;
-        let res: IRequirementGroupWarning = {
-          message: reqGroupMessage,
-          requirementGroup: requirementGroup.name,
-        };
-        return res;
-      } else {
-        return undefined;
-      }
+      return processAndSection(requirementGroup, taken, coursesUsed);
     }
     case "OR": {
-      let minCredsRequired: number = requirementGroup.numCreditsMin;
-      let maxCredsRequired: number = requirementGroup.numCreditsMax;
-      let sectionCredsCompleted: number = 0;
-
-      satisfied.forEach((value: number, key: string) => {
-        sectionCredsCompleted += value;
-      });
-      if (sectionCredsCompleted < minCredsRequired) {
-        let reqGroupMessage: string = `${
-          requirementGroup.name
-        }: requirement not satisfied: need ${minCredsRequired -
-          sectionCredsCompleted} credits from: ${messages.join(" OR ")}`;
-        let res: IRequirementGroupWarning = {
-          message: reqGroupMessage,
-          requirementGroup: requirementGroup.name,
-        };
-        return res;
-      } else if (sectionCredsCompleted > maxCredsRequired) {
-        let reqGroupMessage: string = `${requirementGroup.name}: completed ${sectionCredsCompleted} credits of ${maxCredsRequired} (max required)`;
-        let res: IRequirementGroupWarning = {
-          message: reqGroupMessage,
-          requirementGroup: requirementGroup.name,
-        };
-        return res;
-      } else {
-        return undefined;
-      }
+      return processOrSection(requirementGroup, taken, coursesUsed);
     }
     case "RANGE": {
-      // a range section only contains an ICourseRange. So if that wasn't satisfied, simply return the warning generated.
-      if (messages.length > 0) {
-        let reqGroupMessage: string = `${requirementGroup.name}: requirement not satisfied: ${messages[0]}`;
-        let res: IRequirementGroupWarning = {
-          message: reqGroupMessage,
-          requirementGroup: requirementGroup.name,
-        };
-        return res;
-      } else {
-        return undefined;
-      }
+      return processRangeSection(requirementGroup, taken, coursesUsed);
     }
     default: {
       return undefined;
@@ -214,30 +172,174 @@ function produceUnsatifiedRequirement(
   }
 }
 
+function processAndSection(
+  requirementGroup: ANDSection,
+  taken: Map<string, number>,
+  coursesUsed: Set<string>
+): IRequirementGroupWarning | undefined {
+  let satisfied: CreditHourTracker = {
+    hoursCompleted: 0,
+  };
+  let messages: string[] = [];
+  for (const requirement of requirementGroup.requirements) {
+    let message: string | undefined = processRequirement(
+      requirement,
+      taken,
+      satisfied,
+      coursesUsed,
+      // zero because the credit hours don't matter in an AndSection--need to satisfy all requirements.
+      0
+    );
+    if (message) {
+      messages.push(message);
+    }
+  }
+
+  //if any of the requirements were not satisfied produce warning.
+  if (messages.length > 0) {
+    let reqGroupMessage: string = `${
+      requirementGroup.name
+    }: requirement not satisfied: ${messages.join(" AND ")}`;
+    let res: IRequirementGroupWarning = {
+      message: reqGroupMessage,
+      requirementGroup: requirementGroup.name,
+    };
+    return res;
+  } else {
+    return undefined;
+  }
+}
+
+function processOrSection(
+  requirementGroup: ORSection,
+  taken: Map<string, number>,
+  coursesUsed: Set<string>
+): IRequirementGroupWarning | undefined {
+  let satisfied: CreditHourTracker = {
+    hoursCompleted: 0,
+  };
+  let messages: string[] = [];
+  let minCredsRequired: number = requirementGroup.numCreditsMin;
+  for (const requirement of requirementGroup.requirements) {
+    let message: string | undefined = processRequirement(
+      requirement,
+      taken,
+      satisfied,
+      coursesUsed,
+      minCredsRequired
+    );
+    if (message) {
+      messages.push(message);
+    }
+
+    //if the number of credits has been satisfied, we're good, don't need to look at rest of the requirements
+    if (satisfied.hoursCompleted >= minCredsRequired) {
+      return undefined;
+    }
+  }
+
+  if (satisfied.hoursCompleted < minCredsRequired) {
+    let reqGroupMessage: string = `${
+      requirementGroup.name
+    }: requirement not satisfied: need ${minCredsRequired -
+      satisfied.hoursCompleted} credits from: ${messages.join(" OR ")}`;
+    let res: IRequirementGroupWarning = {
+      message: reqGroupMessage,
+      requirementGroup: requirementGroup.name,
+    };
+    return res;
+  } else {
+    return undefined;
+  }
+}
+
+function processRangeSection(
+  requirementGroup: RANGESection,
+  taken: Map<string, number>,
+  coursesUsed: Set<string>
+): IRequirementGroupWarning | undefined {
+  let satisfied: CreditHourTracker = {
+    hoursCompleted: 0,
+  };
+  let messages: string[] = [];
+  for (const requirement of requirementGroup.requirements) {
+    let message: string | undefined = processRequirement(
+      requirement,
+      taken,
+      satisfied,
+      coursesUsed,
+      requirementGroup.numCreditsMin
+    );
+    if (message) {
+      messages.push(message);
+    }
+  }
+
+  // a range section only contains an ICourseRange. So if that wasn't satisfied, simply return the warning generated.
+  if (messages.length > 0) {
+    let reqGroupMessage: string = `${requirementGroup.name}: requirement not satisfied: ${messages[0]}`;
+    let res: IRequirementGroupWarning = {
+      message: reqGroupMessage,
+      requirementGroup: requirementGroup.name,
+    };
+    return res;
+  } else {
+    return undefined;
+  }
+}
+
 /**
  * Produce a message listing unsatisfied requirements if requirement hasn't been fully satisfied. Undefined otherwise.
  * @param requirement the requirement to check
  * @param taken the Map of courses a student has on their schedule right now
- * @param satisfied a hash set of courses that satisfy the top-level requirement.
+ * @param satisfied a tracker of the hours satisfied for the top-level requirement.
+ * @param coursesUsed a set of courses which already satisfy some requirement for the major.
+ * @param creditHoursNeeded num hours need to satisfy top-level requirement.
  */
 function processRequirement(
   requirement: Requirement,
   taken: Map<string, number>,
-  satisfied: Map<string, number>
+  satisfied: CreditHourTracker,
+  coursesUsed: Set<string>,
+  creditHoursNeeded: number
 ): string | undefined {
   switch (requirement.type) {
     case "AND": {
-      return processIAndCourse(requirement, taken, satisfied);
+      return processIAndCourse(
+        requirement,
+        taken,
+        satisfied,
+        coursesUsed,
+        creditHoursNeeded
+      );
     }
     case "OR": {
-      return processIOrCourse(requirement, taken, satisfied);
+      return processIOrCourse(
+        requirement,
+        taken,
+        satisfied,
+        coursesUsed,
+        creditHoursNeeded
+      );
     }
     case "RANGE": {
-      return processICourseRange(requirement, taken, satisfied);
+      return processICourseRange(
+        requirement,
+        taken,
+        satisfied,
+        coursesUsed,
+        creditHoursNeeded
+      );
     }
     // requirement is unsatisfied if doesn't exist in the taken map.
     case "COURSE": {
-      return processIRequiredCourse(requirement, taken, satisfied);
+      return processIRequiredCourse(
+        requirement,
+        taken,
+        satisfied,
+        coursesUsed,
+        creditHoursNeeded
+      );
     }
   }
 }
@@ -246,18 +348,24 @@ function processRequirement(
  * Processes an IAndCourse requirement.
  * @param requirement the requirement to check
  * @param taken the Map of courses a student has on their schedule right now
- * @param satisfied a hash set of courses that satisfy the top-level requirement.
+ * @param satisfied a tracker of the hours satisfied for the top-level requirement.
+ * @param coursesUsed a set of courses which already satisfy some requirement for the major.
+ * @param creditHoursNeeded num hours need to satisfy top-level requirement.
  */
 function processIAndCourse(
   requirement: IAndCourse,
   taken: Map<string, number>,
-  satisfied: Map<string, number>
+  satisfied: CreditHourTracker,
+  coursesUsed: Set<string>,
+  creditHoursNeeded: number
 ): string | undefined {
-  // requirement is unsatisfied if none of the requirements in the list has been satisfied.
+  // requirement is unsatisfied if even one of the requirements in the list is unsatisfied.
   let processReqMessages: string[] = processRequirementCourses(
     requirement.courses,
     taken,
-    satisfied
+    satisfied,
+    coursesUsed,
+    creditHoursNeeded
   );
   if (processReqMessages.length > 0) {
     let reqMessage = `(${processReqMessages.join(" and ")})`;
@@ -271,18 +379,24 @@ function processIAndCourse(
  * Processes an IOrCourse requirement.
  * @param requirement the requirement to check
  * @param taken the Map of courses a student has on their schedule right now
- * @param satisfied a hash set of courses that satisfy the top-level requirement.
+ * @param satisfied a tracker of the hours satisfied for the top-level requirement.
+ * @param coursesUsed a set of courses which already satisfy some requirement for the major.
+ * @param creditHoursNeeded num hours need to satisfy top-level requirement.
  */
 function processIOrCourse(
   requirement: IOrCourse,
   taken: Map<string, number>,
-  satisfied: Map<string, number>
+  satisfied: CreditHourTracker,
+  coursesUsed: Set<string>,
+  creditHoursNeeded: number
 ): string | undefined {
   // requirement is unsatisfied if all of the requirements in the list have not been satisfied.
   let processReqMessages: string[] = processRequirementCourses(
     requirement.courses,
     taken,
-    satisfied
+    satisfied,
+    coursesUsed,
+    creditHoursNeeded
   );
   if (processReqMessages.length === requirement.courses.length) {
     let reqMessage = `(${processReqMessages.join(" or ")})`;
@@ -296,12 +410,16 @@ function processIOrCourse(
  * Processes an ICourseRange requirement.
  * @param requirement the requirement to check
  * @param taken the Map of courses a student has on their schedule right now
- * @param satisfied a hash set of courses that satisfy the top-level requirement.
+ * @param satisfied a tracker of the hours satisfied for the top-level requirement.
+ * @param coursesUsed a set of courses which already satisfy some requirement for the major.
+ * @param creditHoursNeeded num hours need to satisfy top-level requirement.
  */
 function processICourseRange(
   requirement: ICourseRange,
   taken: Map<string, number>,
-  satisfied: Map<string, number>
+  satisfied: CreditHourTracker,
+  coursesUsed: Set<string>,
+  creditHoursNeeded: number
 ): string | undefined {
   // requirement is unsatisfied if the numCredits for the courseRange hasn't been satisfied.
   let numCreditsrequired: number = requirement.creditsRequired;
@@ -309,9 +427,14 @@ function processICourseRange(
 
   //loop through the taken courses and check if it is in one of the subject ranges for this ICourseRange.
   taken.forEach((value: number, key: string) => {
-    if (courseInSubjectRanges(key, requirement.ranges)) {
-      satisfied.set(key, value);
-      rangeCreditsCompleted += value;
+    //check the global map to see if it has not already been used.
+    if (!coursesUsed.has(key)) {
+      if (courseInSubjectRanges(key, requirement.ranges)) {
+        // use the course
+        satisfied.hoursCompleted += value;
+        coursesUsed.add(key);
+        rangeCreditsCompleted += value;
+      }
     }
   });
 
@@ -320,8 +443,9 @@ function processICourseRange(
     return undefined;
   } else {
     return `(complete ${numCreditsrequired -
-      rangeCreditsCompleted} number of credits from 
-      ${concatSubjectRanges(requirement.ranges)})`;
+      rangeCreditsCompleted} credits from ${concatSubjectRanges(
+      requirement.ranges
+    )})`;
   }
 }
 
@@ -329,18 +453,23 @@ function processICourseRange(
  * Processes an IRequiredCourse requirement.
  * @param requirement the requirement to check
  * @param taken the Map of courses a student has on their schedule right now
- * @param satisfied a hash set of courses that satisfy the top-level requirement.
+ * @param satisfied a tracker of the hours satisfied for the top-level requirement.
+ * @param coursesUsed a set of courses which already satisfy some requirement for the major.
+ * @param creditHoursNeeded num hours need to satisfy top-level requirement.
  */
 function processIRequiredCourse(
   requirement: IRequiredCourse,
   taken: Map<string, number>,
-  satisfied: Map<string, number>
+  satisfied: CreditHourTracker,
+  coursesUsed: Set<string>,
+  creditHoursNeeded: number
 ): string | undefined {
   // requirement is unsatisfied if doesn't exist in the taken map.
   let code: string = produceCourseCode(requirement);
   let creditHours: number | undefined = taken.get(code);
   if (creditHours !== undefined) {
-    satisfied.set(code, creditHours);
+    satisfied.hoursCompleted += creditHours;
+    coursesUsed.add(code);
     return undefined;
   } else {
     return code;
@@ -351,22 +480,38 @@ function processIRequiredCourse(
  * Produce a message for each unsatisfied requirement. Undefined if all requirements in list satisfied.
  * @param requirements list of requirements
  * @param taken the Map of courses a student has on their schedule right now
- * @param satisfied a hash set of courses that satisfy the top-level requirement.
+ * @param satisfied a tracker of the hours satisfied for the top-level requirement.
+ * @param coursesUsed a set of courses which already satisfy some requirement for the major.
+ * @param creditHoursNeeded num hours need to satisfy top-level requirement.
  */
 function processRequirementCourses(
   requirements: Requirement[],
   taken: Map<string, number>,
-  satisfied: Map<string, number>
+  satisfied: CreditHourTracker,
+  coursesUsed: Set<string>,
+  creditHoursNeeded: number
 ): string[] {
   let res: string[] = [];
   for (const requirement of requirements) {
     let processedReq: string | undefined = processRequirement(
       requirement,
       taken,
-      satisfied
+      satisfied,
+      coursesUsed,
+      creditHoursNeeded
     );
     if (processedReq) {
       res.push(processedReq);
+    }
+    // if credit hours have been satisifed, don't process any other courses in the list.
+    // ---bug: Co-reqs have zero credits on the schedule, so creditHoursNeeded will be satisifed with
+    // just the primary course--without checking to see if co-req is on the schedule too.
+    // ---fix: give co-reqs their respective credit-hours in schedule.
+    if (
+      creditHoursNeeded !== 0 &&
+      satisfied.hoursCompleted >= creditHoursNeeded
+    ) {
+      break;
     }
   }
   return res;
@@ -435,7 +580,7 @@ function courseInSubjectRanges(
  * @param ranges the subject ranges.
  */
 function concatSubjectRanges(ranges: ISubjectRange[]): string {
-  let res: string = "";
+  let res: string[] = [];
   for (const range of ranges) {
     let rangeString: string =
       range.subject +
@@ -443,10 +588,10 @@ function concatSubjectRanges(ranges: ISubjectRange[]): string {
       range.idRangeStart.toString() +
       "-" +
       range.idRangeEnd.toString();
-    res += rangeString;
+    res.push(rangeString);
   }
 
-  return res;
+  return res.join(" ");
 }
 
 /**
