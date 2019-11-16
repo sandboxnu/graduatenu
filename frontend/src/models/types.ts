@@ -204,7 +204,7 @@ export interface RANGESection {
 export interface Schedule {
   years: number[];
   yearMap: {
-    [key: string]: ScheduleYear | DNDScheduleYear; // type error if we don't do this
+    [key: number]: ScheduleYear;
   };
   id: string;
 }
@@ -250,11 +250,11 @@ export interface DNDScheduleYear extends ScheduleYear {
  * @param classes a list of the classes of this term.
  */
 export interface ScheduleTerm {
-  season: Season;
+  season: Season | SeasonEnum;
   year: number;
   termId: number;
   id: number;
-  status: Status;
+  status: Status | StatusEnum;
   classes: ScheduleCourse[];
 }
 

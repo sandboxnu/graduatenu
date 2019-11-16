@@ -11,12 +11,13 @@ import styled from "styled-components";
 const Container = styled.div`
   border: 1px solid black;
   position: relative;
+  height: 100%;
 `;
 
 const AddButtonContainer = styled.div`
 	position: absolute;
-	right: 8px
-	bottom: 0px
+	right: 6px
+	bottom: 6px
 	zIndex: 1
 `;
 
