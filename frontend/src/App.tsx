@@ -14,8 +14,6 @@ import {
 import styled from "styled-components";
 import { Year } from "./components/Year/Year";
 import { convertTermIdToYear, convertTermIdToSeason } from "./utils";
-import { DropDownModal } from "./components/DropDownModal";
-import { CLASS_BLOCK_WIDTH } from "./constants";
 import { TextField } from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
 import { majors } from "./majors";
@@ -29,14 +27,6 @@ const Container = styled.div`
   align-items: start;
   margin: 30px;
   background-color: "#ff76ff";
-`;
-
-const CompletedCoursesWrapper = styled.div`
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  justify-content: start;
-  width: ${CLASS_BLOCK_WIDTH * 4 + 25}px;
 `;
 
 const ButtonWrapper = styled.div`
@@ -335,11 +325,15 @@ export default class App extends React.Component<{}, AppState> {
           <div onClick={() => console.log(this.state)}>
             <h2>Plan Of Study</h2>
           </div>
+          <ButtonWrapper>
+            <Button onClick={() => {}}>
+              <ButtonText>Add a class</ButtonText>
+            </Button>
+            <Button onClick={() => {}}>
+              <ButtonText>Search</ButtonText>
+            </Button>
+          </ButtonWrapper>
           {this.renderMajorDropDown()}
-          <CompletedCoursesWrapper>
-            <h3>Completed Courses</h3>
-            <DropDownModal schedule={this.state.schedule}></DropDownModal>
-          </CompletedCoursesWrapper>
           {this.renderYears()}
         </Container>
       </DragDropContext>
