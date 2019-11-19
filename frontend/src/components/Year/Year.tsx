@@ -2,7 +2,12 @@ import * as React from "react";
 import styled from "styled-components";
 import { YearTop } from "./YearTop";
 import SemesterBlock from "../SemesterBlock";
-import { DNDSchedule, NamedScheduleCourse } from "../../models/types";
+import {
+  DNDSchedule,
+  NamedScheduleCourse,
+  Status,
+  SeasonWord,
+} from "../../models/types";
 import { YearBottom } from "./YearBottom";
 import { SEMESTER_MIN_HEIGHT } from "../../constants";
 
@@ -10,6 +15,11 @@ export interface IYearProps {
   index: number;
   schedule: DNDSchedule;
   handleAddClasses: (courses: NamedScheduleCourse[], termId: number) => void;
+  handleStatusChange: (
+    newStatus: Status,
+    tappedSemester: SeasonWord,
+    year: number
+  ) => void;
 }
 
 const YearText = styled.h3`
@@ -34,7 +44,11 @@ export class Year extends React.Component<IYearProps> {
     return (
       <div style={{ marginBottom: 12 }}>
         <YearText>{year + " - " + (year + 1)}</YearText>
-        <YearTop />
+        <YearTop
+          handleStatusChange={(newStatus: Status, tappedSemester: SeasonWord) =>
+            this.props.handleStatusChange(newStatus, tappedSemester, year)
+          }
+        />
         <YearBody>
           <SemesterBlock
             semester={schedule.yearMap[year].fall}

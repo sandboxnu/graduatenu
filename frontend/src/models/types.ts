@@ -29,6 +29,7 @@ export enum SeasonEnum {
   S2 = "S2",
   SF = "SF",
 }
+export type SeasonWord = "fall" | "spring" | "summer1" | "summer2";
 
 /**
  * Represents a degree requirement that has not yet been satisfied.
