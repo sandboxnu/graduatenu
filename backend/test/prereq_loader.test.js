@@ -829,10 +829,15 @@ test("Ensure that prereqs and coreqs for CS 2810 are successfully added to a sch
     },
   };
 
-  const withPrereqsCoreqs = await prereq_loader.addPrereqsToSchedules(
+  const enhancedSchedules = await prereq_loader.addPrereqsToSchedules(
     [mockSched],
     2020
   );
+
+  expect(enhancedSchedules).toBeDefined();
+  expect(enhancedSchedules.length).toEqual(1);
+
+  const withPrereqsCoreqs = enhancedSchedules[0];
 
   // ensure that the property exists, first of all.
   expect(withPrereqsCoreqs).toBeDefined();
@@ -855,18 +860,18 @@ test("Ensure that prereqs and coreqs for CS 2810 are successfully added to a sch
 
   // checks on the prereqs/coreqs.
   const prereqs = cs2810.prereqs;
-  const prereqs = cs2810.coreqs;
+  const coreqs = cs2810.coreqs;
 
   // strict check on the prereqs.
   expect(prereqs).toStrictEqual({
     type: "and",
     values: [
       {
-        classId: 1800,
+        classId: "1800",
         subject: "CS",
       },
       {
-        classId: 2500,
+        classId: "2500",
         subject: "CS",
       },
     ],
