@@ -123,16 +123,16 @@ export class Onboarding extends React.Component {
           <ContentWall></ContentWall>
           <Content>
             {this.renderInfoCard(
-              "Build",
-              "Help us build a personalized multi-semester schedule by simply answering a few questions."
+              "Start",
+              "Just answer a couple questions and get started with a multi-year plan for your classes."
             )}
             {this.renderInfoCard(
               "Personalize",
-              "Help us build a personalized multi-semester schedule by simply answering a few questions."
+              "Pick the classes you want. We’ll take care of the NUPaths, prereqs, and everything in between."
             )}
             {this.renderInfoCard(
               "Graduate",
-              "Help us build a personalized multi-semester schedule by simply answering a few questions."
+              "Build a plan of study that lets you graduate faster, with better classes, and lot less headaches."
             )}
           </Content>
           <ContentWall></ContentWall>
