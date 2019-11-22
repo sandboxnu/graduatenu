@@ -28,6 +28,14 @@ test("Ensure that prereqs are successfully added to Computer Science BSCS plans 
               subject: "CS",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              prereqs: {
+                type: "and",
+                values: [],
+              },
+              coreqs: {
+                type: "and",
+                values: [],
+              },
             },
             {
               classId: "1800",
@@ -42,6 +50,10 @@ test("Ensure that prereqs are successfully added to Computer Science BSCS plans 
                     subject: "CS",
                   },
                 ],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
               },
             },
             {
@@ -58,6 +70,10 @@ test("Ensure that prereqs are successfully added to Computer Science BSCS plans 
                   },
                 ],
               },
+              prereqs: {
+                type: "and",
+                values: [],
+              },
             },
             {
               classId: "2500",
@@ -72,6 +88,10 @@ test("Ensure that prereqs are successfully added to Computer Science BSCS plans 
                     subject: "CS",
                   },
                 ],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
               },
             },
             {
@@ -88,18 +108,38 @@ test("Ensure that prereqs are successfully added to Computer Science BSCS plans 
                   },
                 ],
               },
+              prereqs: {
+                type: "and",
+                values: [],
+              },
             },
             {
               classId: "1365",
               subject: "MATH",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              coreqs: {
+                type: "and",
+                values: [],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
+              },
             },
             {
               classId: "1111",
               subject: "ENGW",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              coreqs: {
+                type: "and",
+                values: [],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
+              },
             },
           ],
           status: "CLASSES",
@@ -148,6 +188,10 @@ test("Ensure that prereqs are successfully added to Computer Science BSCS plans 
                   },
                 ],
               },
+              prereqs: {
+                type: "and",
+                values: [],
+              },
             },
             {
               classId: "2810",
@@ -166,6 +210,10 @@ test("Ensure that prereqs are successfully added to Computer Science BSCS plans 
                     subject: "CS",
                   },
                 ],
+              },
+              coreqs: {
+                type: "and",
+                values: [],
               },
             },
             {
@@ -212,6 +260,10 @@ test("Ensure that prereqs are successfully added to Computer Science BSCS plans 
                   },
                 ],
               },
+              coreqs: {
+                type: "and",
+                values: [],
+              },
             },
             {
               classId: "9999",
@@ -233,6 +285,14 @@ test("Ensure that prereqs are successfully added to Computer Science BSCS plans 
               subject: "MATH",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              coreqs: {
+                type: "and",
+                values: [],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
+              },
             },
             {
               classId: "3000",
@@ -276,6 +336,10 @@ test("Ensure that prereqs are successfully added to Computer Science BSCS plans 
                   },
                 ],
               },
+              coreqs: {
+                type: "and",
+                values: [],
+              },
             },
           ],
           status: "CLASSES",
@@ -313,6 +377,10 @@ test("Ensure that prereqs are successfully added to Computer Science BSCS plans 
                   },
                 ],
               },
+              coreqs: {
+                type: "and",
+                values: [],
+              },
             },
             {
               classId: "2160",
@@ -335,6 +403,10 @@ test("Ensure that prereqs are successfully added to Computer Science BSCS plans 
                     subject: "CS",
                   },
                 ],
+              },
+              coreqs: {
+                type: "and",
+                values: [],
               },
             },
             {
@@ -362,6 +434,10 @@ test("Ensure that prereqs are successfully added to Computer Science BSCS plans 
                     subject: "CS",
                   },
                 ],
+              },
+              coreqs: {
+                type: "and",
+                values: [],
               },
             },
           ],
@@ -447,12 +523,24 @@ test("Ensure that prereqs are successfully added to Computer Science BSCS plans 
                   },
                 ],
               },
+              coreqs: {
+                type: "and",
+                values: [],
+              },
             },
             {
               classId: "1170",
               subject: "THTR",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              coreqs: {
+                type: "and",
+                values: [],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
+              },
             },
             {
               classId: "9999",
@@ -525,6 +613,10 @@ test("Ensure that prereqs are successfully added to Computer Science BSCS plans 
                   },
                 ],
               },
+              coreqs: {
+                type: "and",
+                values: [],
+              },
             },
             {
               classId: "9999",
@@ -581,6 +673,10 @@ test("Ensure that prereqs are successfully added to Computer Science BSCS plans 
                     ],
                   },
                 ],
+              },
+              coreqs: {
+                type: "and",
+                values: [],
               },
             },
             {
