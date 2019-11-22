@@ -8,6 +8,7 @@ import {
 } from "../../frontend/src/models/types";
 import DataLoader from "dataloader";
 import request from "request-promise";
+import { type } from "os";
 
 /**
  * Courses should have at least a classId and a subject, in order to query them.
@@ -30,6 +31,11 @@ interface NonEmptyQueryResult {
 // prereq query results can be undefined, if the target class doesn't exist.
 type PrereqQueryResult = undefined | NonEmptyQueryResult;
 
+// the curried loader function, expects a termId before producing a loader.
+type CurriedTermIdLoader = (
+  termId: number
+) => DataLoader<SimpleCourse, PrereqQueryResult>;
+
 /**
  * Asynchronously adds prereqs to a Schedule.
  * Does not do mutation.
@@ -40,14 +46,18 @@ export async function addPrereqsToSchedules(
   schedules: Schedule[],
   year: number
 ): Promise<Schedule[]> {
-  // the loader to use for building a
-  const loader = new DataLoader<SimpleCourse, PrereqQueryResult>(
-    (keys: SimpleCourse[]) => queryCoursePrereqData(keys, year)
-  );
+  // doubly curried loader.
+  // here we give it the year.
+  // next parameter given is the termId.
+  // last parameter is the loader parameter.
+  const almostLoader: CurriedTermIdLoader = (termId: number) =>
+    new DataLoader<SimpleCourse, PrereqQueryResult>((keys: SimpleCourse[]) =>
+      queryCoursePrereqData(keys, year, termId)
+    );
 
   // return the results
   let results = await Promise.all(
-    schedules.map((sched: Schedule) => prereqifySchedule(sched, loader))
+    schedules.map((sched: Schedule) => prereqifySchedule(sched, almostLoader))
   );
 
   return results;
@@ -60,7 +70,7 @@ export async function addPrereqsToSchedules(
  */
 async function prereqifySchedule(
   schedule: Schedule,
-  loader: DataLoader<SimpleCourse, PrereqQueryResult>
+  almostLoader: CurriedTermIdLoader
 ): Promise<Schedule> {
   // does not do mutation!
   const newYearMap: { [key: number]: ScheduleYear } = {};
@@ -69,7 +79,7 @@ async function prereqifySchedule(
   for (const year of schedule.years) {
     newYearMap[year] = await prereqifyScheduleYear(
       schedule.yearMap[year],
-      loader
+      almostLoader
     );
   }
 
@@ -88,14 +98,14 @@ async function prereqifySchedule(
  */
 async function prereqifyScheduleYear(
   yearObj: ScheduleYear,
-  loader: DataLoader<SimpleCourse, PrereqQueryResult>
+  almostLoader: CurriedTermIdLoader
 ): Promise<ScheduleYear> {
   return {
     year: yearObj.year,
-    fall: await prereqifyScheduleTerm(yearObj.fall, loader),
-    spring: await prereqifyScheduleTerm(yearObj.spring, loader),
-    summer1: await prereqifyScheduleTerm(yearObj.summer1, loader),
-    summer2: await prereqifyScheduleTerm(yearObj.summer2, loader),
+    fall: await prereqifyScheduleTerm(yearObj.fall, almostLoader(10)),
+    spring: await prereqifyScheduleTerm(yearObj.spring, almostLoader(30)),
+    summer1: await prereqifyScheduleTerm(yearObj.summer1, almostLoader(40)),
+    summer2: await prereqifyScheduleTerm(yearObj.summer2, almostLoader(60)),
     isSummerFull: yearObj.isSummerFull,
   };
 }
@@ -178,10 +188,11 @@ async function prereqifyScheduleCourse(
  */
 async function queryCoursePrereqData(
   courses: SimpleCourse[],
-  year: number
+  year: number,
+  term: number
 ): Promise<PrereqQueryResult[]> {
   // the termId to grab prereqs from (is the year, with the season, which is always fall).
-  const termId = year * 100 + 10;
+  const termId = year * 100 + term;
 
   // for each one of the courses, map to a string.
   const courseSchema: string[] = courses.map((course: SimpleCourse) => {
