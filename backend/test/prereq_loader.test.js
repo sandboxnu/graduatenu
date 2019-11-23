@@ -9,8 +9,7 @@ test("Ensure that prereqs are successfully added to Computer Science BSCS plans 
   const schedules = plan_parser.planOfStudyToSchedule(page);
 
   const enhancedSchedules = await prereq_loader.addPrereqsToSchedules(
-    schedules,
-    2020
+    schedules
   );
   expect(enhancedSchedules[0]).toStrictEqual({
     years: [1000, 1001, 1002, 1003],
