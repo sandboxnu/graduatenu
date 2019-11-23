@@ -8,7 +8,6 @@ import {
 } from "../../frontend/src/models/types";
 import DataLoader from "dataloader";
 import request from "request-promise";
-import { type } from "os";
 
 /**
  * Courses should have at least a classId and a subject, in order to query them.
@@ -43,21 +42,20 @@ type CurriedTermIdLoader = (
  * @param year the year to grab prereqs from (always uses fall).
  */
 export async function addPrereqsToSchedules(
-  schedules: Schedule[],
-  year: number
+  schedules: Schedule[]
 ): Promise<Schedule[]> {
   // doubly curried loader.
   // here we give it the year.
   // next parameter given is the termId.
   // last parameter is the loader parameter.
-  const almostLoader: CurriedTermIdLoader = (termId: number) =>
-    new DataLoader<SimpleCourse, PrereqQueryResult>((keys: SimpleCourse[]) =>
-      queryCoursePrereqData(keys, year, termId)
-    );
+  const loader: DataLoader<SimpleCourse, PrereqQueryResult> = new DataLoader<
+    SimpleCourse,
+    PrereqQueryResult
+  >(queryCoursePrereqData);
 
   // return the results
   let results = await Promise.all(
-    schedules.map((sched: Schedule) => prereqifySchedule(sched, almostLoader))
+    schedules.map((sched: Schedule) => prereqifySchedule(sched, loader))
   );
 
   return results;
@@ -70,7 +68,7 @@ export async function addPrereqsToSchedules(
  */
 async function prereqifySchedule(
   schedule: Schedule,
-  almostLoader: CurriedTermIdLoader
+  loader: DataLoader<SimpleCourse, PrereqQueryResult>
 ): Promise<Schedule> {
   // does not do mutation!
   const newYearMap: { [key: number]: ScheduleYear } = {};
@@ -79,7 +77,7 @@ async function prereqifySchedule(
   for (const year of schedule.years) {
     newYearMap[year] = await prereqifyScheduleYear(
       schedule.yearMap[year],
-      almostLoader
+      loader
     );
   }
 
@@ -98,14 +96,14 @@ async function prereqifySchedule(
  */
 async function prereqifyScheduleYear(
   yearObj: ScheduleYear,
-  almostLoader: CurriedTermIdLoader
+  loader: DataLoader<SimpleCourse, PrereqQueryResult>
 ): Promise<ScheduleYear> {
   return {
     year: yearObj.year,
-    fall: await prereqifyScheduleTerm(yearObj.fall, almostLoader(10)),
-    spring: await prereqifyScheduleTerm(yearObj.spring, almostLoader(30)),
-    summer1: await prereqifyScheduleTerm(yearObj.summer1, almostLoader(40)),
-    summer2: await prereqifyScheduleTerm(yearObj.summer2, almostLoader(60)),
+    fall: await prereqifyScheduleTerm(yearObj.fall, loader),
+    spring: await prereqifyScheduleTerm(yearObj.spring, loader),
+    summer1: await prereqifyScheduleTerm(yearObj.summer1, loader),
+    summer2: await prereqifyScheduleTerm(yearObj.summer2, loader),
     isSummerFull: yearObj.isSummerFull,
   };
 }
@@ -187,17 +185,13 @@ async function prereqifyScheduleCourse(
  * @param courses the courses to lookup prereqs for
  */
 async function queryCoursePrereqData(
-  courses: SimpleCourse[],
-  year: number,
-  term: number
+  courses: SimpleCourse[]
 ): Promise<PrereqQueryResult[]> {
-  // the termId to grab prereqs from (is the year, with the season, which is always fall).
-  const termId = year * 100 + term;
-
   // for each one of the courses, map to a string.
+  // automatically use the latest occurrence.
   const courseSchema: string[] = courses.map((course: SimpleCourse) => {
     return `class(classId: ${course.classId}, subject: "${course.subject}") { 
-      occurrence(termId: ${termId}) {
+      latestOccurrence {
         prereqs 
         coreqs
         name
@@ -235,7 +229,8 @@ async function queryCoursePrereqData(
 
   const result: PrereqQueryResult[] = [];
   for (let i = 0; i < courses.length; i += 1) {
-    // each course property is an object, containing an "occurrence" property object.
+    // each course${i} property is either null, or an object containing a
+    // "latestOccurrence" property object.
     // the occurrence is then guaranteed to have the properties we requested:
     // - prereqs
     // - corereqs
@@ -246,7 +241,7 @@ async function queryCoursePrereqData(
     // if the result was found (aka results were not null), then push
     const current = data[`course${i}`];
     if (current) {
-      result.push(current.occurrence);
+      result.push(current.latestOccurrence);
     } else {
       result.push(undefined);
     }
