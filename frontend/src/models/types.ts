@@ -151,6 +151,9 @@ export interface Major {
   nupaths: NUPath[];
 }
 
+/**
+ * A generic Major requirment group.
+ */
 export type IMajorRequirementGroup = ANDSection | ORSection | RANGESection;
 
 /**
@@ -191,7 +194,7 @@ export interface ORSection {
  */
 export interface RANGESection {
   type: "RANGE";
-  requirements: ICourseRange[];
+  requirements: ICourseRange;
   numCreditsMin: number;
   numCreditsMax: number;
   name: string;
@@ -309,7 +312,7 @@ export interface IWarning {
 }
 
 /**
- * An Unsatisfied Requirement
+ * An Unsatisfied Major Requirement Group.
  */
 export interface IRequirementGroupWarning {
   message: string;

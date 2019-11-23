@@ -194,7 +194,7 @@ test("Range section warning produced for cs_pos_2.json", () => {
 
   expect(reqWarnings).toContainEqual({
     message:
-      "Computer Science Elective Courses: requirement not satisfied: (complete 8 credits from CS 2500-5010 IS 2000-4900 DS 2000-4900)",
+      "requirement not satisfied: (complete 8 credits from CS 2500-5010 IS 2000-4900 DS 2000-4900)",
     requirementGroup: "Computer Science Elective Courses",
   });
 });
@@ -222,7 +222,7 @@ test("Requirement group warnings produced appropriately for cs_sched_1.json", ()
     csMajor_obj
   );
 
-  expect(reqWarnings.length).toBeGreaterThan(0);
+  expect(reqWarnings.length).toEqual(5);
 
   expect(satisfiedGroups).toStrictEqual([
     "Computer Science Fundamental Courses",
@@ -241,24 +241,23 @@ test("Requirement group warnings produced appropriately for cs_sched_1.json", ()
   }
 
   expect(reqWarnings).toContainEqual({
-    message: "Computer Science Overview: requirement not satisfied: CS 1210",
+    message: "requirement not satisfied: CS1210",
     requirementGroup: "Computer Science Overview",
   });
 
   expect(reqWarnings).toContainEqual({
     message:
-      "Computer Science Required Courses: requirement not satisfied: CS 3700 AND CS 3800 AND CS 4400 AND (CS 4500 and CS 4501)",
+      "requirement not satisfied: CS3700 AND CS3800 AND CS4400 AND (CS4500 and CS4501)",
     requirementGroup: "Computer Science Required Courses",
   });
 
   expect(reqWarnings).toContainEqual({
-    message: "Presentation Requirement: requirement not satisfied: THTR 1170",
+    message: "requirement not satisfied: THTR1170",
     requirementGroup: "Presentation Requirement",
   });
 
   expect(reqWarnings).toContainEqual({
-    message:
-      "Advanced Writing in the Disciplines: requirement not satisfied: (ENGW 3302 or ENGW 3315)",
+    message: "requirement not satisfied: (ENGW3302 or ENGW3315)",
     requirementGroup: "Advanced Writing in the Disciplines",
   });
 });
@@ -286,7 +285,7 @@ test("Requirement group warnings produced appropriately for cs_sched_2.json", ()
     csMajor_obj
   );
 
-  expect(reqWarnings.length).toBeGreaterThan(0);
+  expect(reqWarnings.length).toEqual(6);
 
   expect(satisfiedGroups).toStrictEqual([
     "Computer Science Fundamental Courses",
@@ -305,33 +304,32 @@ test("Requirement group warnings produced appropriately for cs_sched_2.json", ()
 
   // and course
   expect(reqWarnings).toContainEqual({
-    message: "Computer Science Overview: requirement not satisfied: CS 1210",
+    message: "requirement not satisfied: CS1210",
     requirementGroup: "Computer Science Overview",
   });
 
   //and section
   expect(reqWarnings).toContainEqual({
     message:
-      "Computer Science Required Courses: requirement not satisfied: CS 3700 AND CS 4400 AND (CS 4500 and CS 4501)",
+      "requirement not satisfied: CS3700 AND CS4400 AND (CS4500 and CS4501)",
     requirementGroup: "Computer Science Required Courses",
   });
 
   //and section
   expect(reqWarnings).toContainEqual({
-    message: "Presentation Requirement: requirement not satisfied: THTR 1170",
+    message: "requirement not satisfied: THTR1170",
     requirementGroup: "Presentation Requirement",
   });
 
   //or section
   expect(reqWarnings).toContainEqual({
     message:
-      "Computer Science Capstone: requirement not satisfied: need 4 credits from: (CS 4100 or CS 4300 or CS 4410 or CS 4150 or CS 4550 or CS 4991 or IS 4900)",
+      "requirement not satisfied: need 4 credits from: (CS4100 or CS4300 or CS4410 or CS4150 or CS4550 or CS4991 or IS4900)",
     requirementGroup: "Computer Science Capstone",
   });
 
   expect(reqWarnings).toContainEqual({
-    message:
-      "Advanced Writing in the Disciplines: requirement not satisfied: (ENGW 3302 or ENGW 3315)",
+    message: "requirement not satisfied: (ENGW3302 or ENGW3315)",
     requirementGroup: "Advanced Writing in the Disciplines",
   });
 });
