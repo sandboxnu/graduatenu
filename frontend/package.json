@@ -6,6 +6,8 @@
     "@material-ui/core": "^4.6.0",
     "@material-ui/icons": "^4.5.1",
     "@material-ui/lab": "^4.0.0-alpha.31",
+    "@types/react-router": "^5.1.3",
+    "@types/react-router-dom": "^5.1.2",
     "apollo-boost": "^0.4.4",
     "cross-env": "5.0.5",
     "graphql-tag": "^2.10.1",
@@ -13,6 +15,8 @@
     "react-apollo": "^3.1.3",
     "react-beautiful-dnd": "^11.0.5",
     "react-dom": "^16.9.0",
+    "react-router": "^5.1.2",
+    "react-router-dom": "^5.1.2",
     "react-scripts": "^3.1.2",
     "styled-components": "^4.4.0"
   },

@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 import { DNDSchedule } from "../../models/types";
-import { CLASS_BLOCK_WIDTH } from "../../constants";
+import { CLASS_BLOCK_WIDTH, GraduateGrey } from "../../constants";
 import { sumCreditsInSemester } from "../../utils";
 
 interface YearBottomProps {
@@ -13,7 +13,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: row;
   height: 100;
-  background-color: #dbdbdb;
+  background-color: ${GraduateGrey};
   border: 1px solid black;
 `;
 
