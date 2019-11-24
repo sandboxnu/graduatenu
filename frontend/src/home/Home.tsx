@@ -9,6 +9,8 @@ import {
   DNDScheduleCourse,
   NamedScheduleCourse,
   Schedule,
+  Status,
+  SeasonWord,
 } from "../models/types";
 import styled from "styled-components";
 import { Year } from "../components/Year/Year";
@@ -189,6 +191,7 @@ export class Home extends React.Component<{}, AppState> {
         index={index}
         schedule={this.state.schedule}
         handleAddClasses={this.handleAddClasses.bind(this)}
+        handleStatusChange={this.handleStatusChange.bind(this)}
       />
     ));
   }
@@ -302,6 +305,33 @@ export class Home extends React.Component<{}, AppState> {
 
   hideChooseMajorPlanModal() {
     this.setState({ chooseMajorModalVisible: false });
+  }
+
+  handleStatusChange(
+    newStatus: Status,
+    tappedSemester: SeasonWord,
+    year: number
+  ) {
+    const semester = this.state.schedule.yearMap[year][tappedSemester];
+    if (newStatus === "INACTIVE" && semester.classes.length !== 0) {
+      // show dialog
+    }
+    this.setState({
+      ...this.state,
+      schedule: {
+        ...this.state.schedule,
+        yearMap: {
+          ...this.state.schedule.yearMap,
+          [year]: {
+            ...this.state.schedule.yearMap[year],
+            [tappedSemester]: {
+              ...this.state.schedule.yearMap[year][tappedSemester],
+              status: newStatus,
+            },
+          },
+        },
+      },
+    });
   }
 
   render() {
