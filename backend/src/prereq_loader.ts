@@ -30,11 +30,6 @@ interface NonEmptyQueryResult {
 // prereq query results can be undefined, if the target class doesn't exist.
 type PrereqQueryResult = undefined | NonEmptyQueryResult;
 
-// the curried loader function, expects a termId before producing a loader.
-type CurriedTermIdLoader = (
-  termId: number
-) => DataLoader<SimpleCourse, PrereqQueryResult>;
-
 /**
  * Asynchronously adds prereqs to a Schedule.
  * Does not do mutation.
@@ -161,9 +156,8 @@ async function prereqifyScheduleCourse(
       termId: termId,
     });
   } catch (err) {
+    // if we get an error, better to throw and see what went wrong, vs silently failing.
     throw err;
-    // if we error, then return the previous course.
-    return course;
   }
 
   // optionally add prereqs, coreqs to object.
