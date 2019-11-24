@@ -10,6 +10,8 @@ import {
   DNDScheduleCourse,
   NamedScheduleCourse,
   Schedule,
+  Status,
+  SeasonWord,
 } from "./models/types";
 import styled from "styled-components";
 import { Year } from "./components/Year/Year";
@@ -74,6 +76,39 @@ export default class App extends React.Component<{}, AppState> {
       chooseMajorModalVisible: false,
     };
   }
+
+  onDragUpdate = (update: any) => {
+    const { destination } = update;
+    if (!destination || !destination.droppableId) return;
+
+    const destSemesterSeason = convertTermIdToSeason(destination.droppableId);
+    const destSemesterYear = convertTermIdToYear(destination.droppableId);
+    const destYear: DNDScheduleYear = this.state.schedule.yearMap[
+      destSemesterYear
+    ];
+    const destSemester: DNDScheduleTerm = (destYear as any)[destSemesterSeason];
+
+    this.removeHovers(destSemester);
+
+    if (
+      destSemester.status === "INACTIVE" ||
+      destSemester.status === "COOP" ||
+      destSemester.status === "HOVERINACTIVE" ||
+      destSemester.status === "HOVERCOOP"
+    ) {
+      if (destSemester.status === "INACTIVE") {
+        destSemester.status = "HOVERINACTIVE";
+      } else if (destSemester.status === "COOP") {
+        destSemester.status = "HOVERCOOP";
+      } else if (destSemester.status === "HOVERINACTIVE") {
+        destSemester.status = "INACTIVE";
+      } else if (destSemester.status === "HOVERCOOP") {
+        destSemester.status = "COOP";
+      }
+
+      this.updateSemester(destSemesterYear, destSemesterSeason, destSemester);
+    }
+  };
 
   onDragEnd = (result: any) => {
     const { destination, source } = result;
@@ -160,6 +195,13 @@ export default class App extends React.Component<{}, AppState> {
       newFinishSemester.termId
     );
 
+    if (
+      newFinishSemester.status === "INACTIVE" ||
+      newFinishSemester.status === "HOVERINACTIVE"
+    ) {
+      newFinishSemester.status = "CLASSES";
+    }
+
     let newState: AppState;
 
     if (newStartSemesterYear === newFinishSemesterYear) {
@@ -201,12 +243,74 @@ export default class App extends React.Component<{}, AppState> {
     this.setState(newState);
   };
 
+  isCoopOrVacation(currSemester: DNDScheduleTerm): boolean {
+    return currSemester.status.includes("HOVER");
+  }
+
+  removeHovers(currSemester: DNDScheduleTerm) {
+    for (const yearnum of this.state.schedule.years) {
+      const year = this.state.schedule.yearMap[yearnum];
+      console.log(year.summer1.status.toString());
+      if (this.isCoopOrVacation(year.fall) && year.fall !== currSemester) {
+        year.fall.status = year.fall.status.replace("HOVER", "") as Status;
+        this.updateSemester(yearnum, "fall", year.fall);
+      }
+      if (this.isCoopOrVacation(year.spring) && year.spring !== currSemester) {
+        year.spring.status = year.spring.status.replace("HOVER", "") as Status;
+        this.updateSemester(yearnum, "spring", year.spring);
+      }
+      if (
+        this.isCoopOrVacation(year.summer1) &&
+        year.summer1 !== currSemester
+      ) {
+        year.summer1.status = year.summer1.status.replace(
+          "HOVER",
+          ""
+        ) as Status;
+        this.updateSemester(yearnum, "summer1", year.summer1);
+      }
+      if (
+        this.isCoopOrVacation(year.summer2) &&
+        year.summer2 !== currSemester
+      ) {
+        year.summer2.status = year.summer2.status.replace(
+          "HOVER",
+          ""
+        ) as Status;
+        this.updateSemester(yearnum, "summer2", year.summer2);
+      }
+    }
+  }
+
+  updateSemester(
+    yearnum: number,
+    season: string,
+    updatedSemester: DNDScheduleTerm
+  ) {
+    const newState: AppState = {
+      ...this.state,
+      schedule: {
+        ...this.state.schedule,
+        yearMap: {
+          ...this.state.schedule.yearMap,
+          [yearnum]: {
+            ...this.state.schedule.yearMap[yearnum],
+            [season]: updatedSemester,
+          },
+        },
+      },
+    };
+
+    this.setState(newState);
+  }
+
   renderYears() {
     return this.state.schedule.years.map((year: number, index: number) => (
       <Year
         index={index}
         schedule={this.state.schedule}
         handleAddClasses={this.handleAddClasses.bind(this)}
+        handleStatusChange={this.handleStatusChange.bind(this)}
       />
     ));
   }
@@ -322,9 +426,39 @@ export default class App extends React.Component<{}, AppState> {
     this.setState({ chooseMajorModalVisible: false });
   }
 
+  handleStatusChange(
+    newStatus: Status,
+    tappedSemester: SeasonWord,
+    year: number
+  ) {
+    const semester = this.state.schedule.yearMap[year][tappedSemester];
+    if (newStatus === "INACTIVE" && semester.classes.length !== 0) {
+      // show dialog
+    }
+    this.setState({
+      ...this.state,
+      schedule: {
+        ...this.state.schedule,
+        yearMap: {
+          ...this.state.schedule.yearMap,
+          [year]: {
+            ...this.state.schedule.yearMap[year],
+            [tappedSemester]: {
+              ...this.state.schedule.yearMap[year][tappedSemester],
+              status: newStatus,
+            },
+          },
+        },
+      },
+    });
+  }
+
   render() {
     return (
-      <DragDropContext onDragEnd={this.onDragEnd}>
+      <DragDropContext
+        onDragEnd={this.onDragEnd}
+        onDragUpdate={this.onDragUpdate}
+      >
         <ChooseMajorPlanModal
           visible={this.state.chooseMajorModalVisible}
           handleClose={this.hideChooseMajorPlanModal.bind(this)}

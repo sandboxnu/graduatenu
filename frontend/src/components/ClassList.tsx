@@ -7,6 +7,7 @@ const Wrapper = styled.div`
   min-height: ${SEMESTER_MIN_HEIGHT}px;
   flex-direction: column;
   width: ${CLASS_BLOCK_WIDTH + 4}px;
+  height: 100%;
 `;
 
 interface ClassListProps {
