@@ -28,6 +28,7 @@ const NoClassBlock = styled.div`
   justify-content: center;
   align-items: center;
   background-color: grey;
+  height: 100%;
 `;
 
 interface SemesterBlockProps {

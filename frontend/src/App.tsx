@@ -185,7 +185,10 @@ export default class App extends React.Component<{}, AppState> {
       newFinishSemester.termId
     );
 
-    if (newFinishSemester.status === "INACTIVE") {
+    if (
+      newFinishSemester.status === "INACTIVE" ||
+      newFinishSemester.status === "HOVERINACTIVE"
+    ) {
       newFinishSemester.status = "CLASSES";
     }
 
