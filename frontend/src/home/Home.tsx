@@ -13,7 +13,6 @@ import {
 import styled from "styled-components";
 import { Year } from "../components/Year/Year";
 import { convertTermIdToYear, convertTermIdToSeason } from "../utils";
-import { Sidebar } from "../components/Sidebar/Sidebar";
 import { TextField, Button } from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
 import { majors } from "../majors";
@@ -323,10 +322,6 @@ export class Home extends React.Component<{}, AppState> {
             {this.renderYears()}
           </Container>
         </DragDropContext>
-        <Sidebar
-          schedule={this.state.schedule}
-          major={this.state.major}
-        ></Sidebar>
       </OuterContainer>
     );
   }
