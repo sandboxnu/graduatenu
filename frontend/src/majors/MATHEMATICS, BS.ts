@@ -95,19 +95,17 @@ export const mathMajor: Major = {
       name: "Mathematics Electives",
       numCreditsMin: 16,
       numCreditsMax: 16,
-      requirements: [
-        {
-          type: "RANGE",
-          creditsRequired: 16,
-          ranges: [
-            {
-              subject: "MATH",
-              idRangeStart: 3101,
-              idRangeEnd: 4899,
-            },
-          ],
-        },
-      ],
+      requirements: {
+        type: "RANGE",
+        creditsRequired: 16,
+        ranges: [
+          {
+            subject: "MATH",
+            idRangeStart: 3101,
+            idRangeEnd: 4899,
+          },
+        ],
+      },
     },
     "Physics 1": {
       type: "OR",
