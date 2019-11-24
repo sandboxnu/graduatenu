@@ -1,46 +1,15 @@
 import * as React from "react";
+import { IconButton } from "@material-ui/core";
+import MoreVertIcon from "@material-ui/icons/MoreVert";
 
 interface ThreeDotsProps {
-  onClick: () => void;
+  onClick: (event: any) => void;
 }
 
 export const ThreeDots: React.SFC<ThreeDotsProps> = props => {
   return (
-    <div
-      onClick={props.onClick}
-      style={{
-        display: "flex",
-        justifyContent: "space-around",
-        flexDirection: "row",
-        alignItems: "center",
-        width: 25,
-        height: 25,
-      }}
-    >
-      <div
-        style={{
-          backgroundColor: "black",
-          borderRadius: "50%",
-          width: 5,
-          height: 5,
-        }}
-      ></div>
-      <div
-        style={{
-          backgroundColor: "black",
-          borderRadius: "50%",
-          width: 5,
-          height: 5,
-        }}
-      ></div>
-      <div
-        style={{
-          backgroundColor: "black",
-          borderRadius: "50%",
-          width: 5,
-          height: 5,
-        }}
-      ></div>
-    </div>
+    <IconButton onClick={props.onClick}>
+      <MoreVertIcon color="action"></MoreVertIcon>
+    </IconButton>
   );
 };

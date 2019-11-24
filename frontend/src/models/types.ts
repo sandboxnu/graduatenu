@@ -29,6 +29,7 @@ export enum SeasonEnum {
   S2 = "S2",
   SF = "SF",
 }
+export type SeasonWord = "fall" | "spring" | "summer1" | "summer2";
 
 /**
  * Represents a degree requirement that has not yet been satisfied.
@@ -38,8 +39,6 @@ export type Requirement =
   | IAndCourse
   | ICourseRange
   | IRequiredCourse;
-
-export type RequirementGroup = ANDSection | ORSection | RANGESection;
 
 // TODO: with interfaces, the additional type parameter may not be necessary
 /**
@@ -136,8 +135,8 @@ export interface INEUPrereqCourse {
 /**
  * A Major, containing all the requirements.
  * @param name The name of the major.
- * @param sections a list of the sections of this major
- * @param sectionMap an object containing the sections of this major.
+ * @param requirementGroups a list of the sections of this major
+ * @param requirementGroupMap an object containing the sections of this major.
  * @param yearVersion Which major version the user has, based on the year.
  * @param isLanguageRequired True if a language is required.
  * @param totalCreditsRequired The total number of credit-hours required for the major.
@@ -146,12 +145,17 @@ export interface INEUPrereqCourse {
 export interface Major {
   name: string;
   requirementGroups: string[];
-  requirementGroupMap: { [key: string]: RequirementGroup };
+  requirementGroupMap: { [key: string]: IMajorRequirementGroup };
   yearVersion: number;
   isLanguageRequired: boolean;
   totalCreditsRequired: number;
   nupaths: NUPath[];
 }
+
+/**
+ * A generic Major requirment group.
+ */
+export type IMajorRequirementGroup = ANDSection | ORSection | RANGESection;
 
 /**
  * A section that must have everything completed in it.
@@ -191,7 +195,7 @@ export interface ORSection {
  */
 export interface RANGESection {
   type: "RANGE";
-  requirements: ICourseRange[];
+  requirements: ICourseRange;
   numCreditsMin: number;
   numCreditsMax: number;
   name: string;
@@ -272,6 +276,8 @@ export enum StatusEnum {
   COOP = "COOP",
   CLASSES = "CLASSES",
   INACTIVE = "INACTIVE",
+  HOVERINACTIVE = "HOVERINACTIVE",
+  HOVERCOOP = "HOVERCOOP",
 }
 
 /**
@@ -306,6 +312,14 @@ export interface DNDScheduleCourse extends NamedScheduleCourse {
 export interface IWarning {
   message: string;
   termId: number;
+}
+
+/**
+ * An Unsatisfied Major Requirement Group.
+ */
+export interface IRequirementGroupWarning {
+  message: string;
+  requirementGroup: string;
 }
 
 /**

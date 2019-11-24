@@ -218,29 +218,27 @@ export const csMajor: Major = {
       name: "Computer Science Elective Courses",
       numCreditsMin: 8,
       numCreditsMax: 8,
-      requirements: [
-        {
-          type: "RANGE",
-          creditsRequired: 8,
-          ranges: [
-            {
-              subject: "CS",
-              idRangeStart: 2500,
-              idRangeEnd: 5010,
-            },
-            {
-              subject: "IS",
-              idRangeStart: 2000,
-              idRangeEnd: 4900,
-            },
-            {
-              subject: "DS",
-              idRangeStart: 2000,
-              idRangeEnd: 4900,
-            },
-          ],
-        },
-      ],
+      requirements: {
+        type: "RANGE",
+        creditsRequired: 8,
+        ranges: [
+          {
+            subject: "CS",
+            idRangeStart: 2500,
+            idRangeEnd: 5010,
+          },
+          {
+            subject: "IS",
+            idRangeStart: 2000,
+            idRangeEnd: 4900,
+          },
+          {
+            subject: "DS",
+            idRangeStart: 2000,
+            idRangeEnd: 4900,
+          },
+        ],
+      },
     },
     "Mathematics Courses": {
       type: "AND",

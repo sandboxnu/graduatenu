@@ -110,3 +110,226 @@ test("Tests warnings produce properly for cs_sched_2.json", () => {
     termId: 201860,
   });
 });
+
+test("perfect schedule, no requirement group warnings for cs_pos_1.json", () => {
+  let cs_sched = fs.readFileSync(
+    "./backend/test/mock_schedules/cs_pos_1.json",
+    "utf-8"
+  );
+  let cs_sched_obj = JSON.parse(cs_sched);
+
+  let csMajor = fs.readFileSync(
+    "./backend/test/mock_majors/bscs.json",
+    "utf-8"
+  );
+
+  let csMajor_obj = JSON.parse(csMajor);
+
+  let reqWarnings = warning_generator.produceRequirementGroupWarning(
+    cs_sched_obj,
+    csMajor_obj
+  );
+  let satisfiedGroups = warning_generator.produceSatisfiedReqGroups(
+    cs_sched_obj,
+    csMajor_obj
+  );
+
+  expect(reqWarnings.length).toBe(0);
+
+  expect(satisfiedGroups).toStrictEqual([
+    "Computer Science Overview",
+    "Computer Science Fundamental Courses",
+    "Computer Science Required Courses",
+    "Presentation Requirement",
+    "Computer Science Capstone",
+    "Computer Science Elective Courses",
+    "Mathematics Courses",
+    "Computing and Social Issues",
+    "Electrical Engineering",
+    "Science Requirement",
+    "College Writing",
+    "Advanced Writing in the Disciplines",
+  ]);
+});
+
+test("Range section warning produced for cs_pos_2.json", () => {
+  let cs_sched = fs.readFileSync(
+    "./backend/test/mock_schedules/cs_pos_2.json",
+    "utf-8"
+  );
+  let cs_sched_obj = JSON.parse(cs_sched);
+
+  let csMajor = fs.readFileSync(
+    "./backend/test/mock_majors/bscs.json",
+    "utf-8"
+  );
+
+  let csMajor_obj = JSON.parse(csMajor);
+
+  let reqWarnings = warning_generator.produceRequirementGroupWarning(
+    cs_sched_obj,
+    csMajor_obj
+  );
+
+  let satisfiedGroups = warning_generator.produceSatisfiedReqGroups(
+    cs_sched_obj,
+    csMajor_obj
+  );
+
+  expect(reqWarnings.length).toBe(1);
+
+  expect(satisfiedGroups).toStrictEqual([
+    "Computer Science Overview",
+    "Computer Science Fundamental Courses",
+    "Computer Science Required Courses",
+    "Presentation Requirement",
+    "Computer Science Capstone",
+    "Mathematics Courses",
+    "Computing and Social Issues",
+    "Electrical Engineering",
+    "Science Requirement",
+    "College Writing",
+    "Advanced Writing in the Disciplines",
+  ]);
+
+  expect(reqWarnings).toContainEqual({
+    message:
+      "requirement not satisfied: (complete 8 credits from CS 2500-5010 IS 2000-4900 DS 2000-4900)",
+    requirementGroup: "Computer Science Elective Courses",
+  });
+});
+
+test("Requirement group warnings produced appropriately for cs_sched_1.json", () => {
+  let cs_sched = fs.readFileSync(
+    "./backend/test/mock_schedules/cs_sched_1.json",
+    "utf-8"
+  );
+  let cs_sched_obj = JSON.parse(cs_sched);
+
+  let csMajor = fs.readFileSync(
+    "./backend/test/mock_majors/bscs.json",
+    "utf-8"
+  );
+
+  let csMajor_obj = JSON.parse(csMajor);
+
+  let reqWarnings = warning_generator.produceRequirementGroupWarning(
+    cs_sched_obj,
+    csMajor_obj
+  );
+  let satisfiedGroups = warning_generator.produceSatisfiedReqGroups(
+    cs_sched_obj,
+    csMajor_obj
+  );
+
+  expect(reqWarnings.length).toEqual(5);
+
+  expect(satisfiedGroups).toStrictEqual([
+    "Computer Science Fundamental Courses",
+    "Computer Science Capstone",
+    "Mathematics Courses",
+    "Computing and Social Issues",
+    "Electrical Engineering",
+    "Science Requirement",
+    "College Writing",
+  ]);
+
+  for (const warning of reqWarnings) {
+    expect(warning).toBeDefined();
+    expect(warning).toHaveProperty("message");
+    expect(warning).toHaveProperty("requirementGroup");
+  }
+
+  expect(reqWarnings).toContainEqual({
+    message: "requirement not satisfied: CS1210",
+    requirementGroup: "Computer Science Overview",
+  });
+
+  expect(reqWarnings).toContainEqual({
+    message:
+      "requirement not satisfied: CS3700 AND CS3800 AND CS4400 AND (CS4500 and CS4501)",
+    requirementGroup: "Computer Science Required Courses",
+  });
+
+  expect(reqWarnings).toContainEqual({
+    message: "requirement not satisfied: THTR1170",
+    requirementGroup: "Presentation Requirement",
+  });
+
+  expect(reqWarnings).toContainEqual({
+    message: "requirement not satisfied: (ENGW3302 or ENGW3315)",
+    requirementGroup: "Advanced Writing in the Disciplines",
+  });
+});
+
+test("Requirement group warnings produced appropriately for cs_sched_2.json", () => {
+  let cs_sched = fs.readFileSync(
+    "./backend/test/mock_schedules/cs_sched_2.json",
+    "utf-8"
+  );
+  let cs_sched_obj = JSON.parse(cs_sched);
+
+  let csMajor = fs.readFileSync(
+    "./backend/test/mock_majors/bscs.json",
+    "utf-8"
+  );
+
+  let csMajor_obj = JSON.parse(csMajor);
+
+  let reqWarnings = warning_generator.produceRequirementGroupWarning(
+    cs_sched_obj,
+    csMajor_obj
+  );
+  let satisfiedGroups = warning_generator.produceSatisfiedReqGroups(
+    cs_sched_obj,
+    csMajor_obj
+  );
+
+  expect(reqWarnings.length).toEqual(6);
+
+  expect(satisfiedGroups).toStrictEqual([
+    "Computer Science Fundamental Courses",
+    "Mathematics Courses",
+    "Computing and Social Issues",
+    "Electrical Engineering",
+    "Science Requirement",
+    "College Writing",
+  ]);
+
+  for (const warning of reqWarnings) {
+    expect(warning).toBeDefined();
+    expect(warning).toHaveProperty("message");
+    expect(warning).toHaveProperty("requirementGroup");
+  }
+
+  // and course
+  expect(reqWarnings).toContainEqual({
+    message: "requirement not satisfied: CS1210",
+    requirementGroup: "Computer Science Overview",
+  });
+
+  //and section
+  expect(reqWarnings).toContainEqual({
+    message:
+      "requirement not satisfied: CS3700 AND CS4400 AND (CS4500 and CS4501)",
+    requirementGroup: "Computer Science Required Courses",
+  });
+
+  //and section
+  expect(reqWarnings).toContainEqual({
+    message: "requirement not satisfied: THTR1170",
+    requirementGroup: "Presentation Requirement",
+  });
+
+  //or section
+  expect(reqWarnings).toContainEqual({
+    message:
+      "requirement not satisfied: need 4 credits from: (CS4100 or CS4300 or CS4410 or CS4150 or CS4550 or CS4991 or IS4900)",
+    requirementGroup: "Computer Science Capstone",
+  });
+
+  expect(reqWarnings).toContainEqual({
+    message: "requirement not satisfied: (ENGW3302 or ENGW3315)",
+    requirementGroup: "Advanced Writing in the Disciplines",
+  });
+});
