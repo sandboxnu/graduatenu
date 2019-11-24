@@ -9,8 +9,7 @@ test("Ensure that prereqs are successfully added to Computer Science BSCS plans 
   const schedules = plan_parser.planOfStudyToSchedule(page);
 
   const enhancedSchedules = await prereq_loader.addPrereqsToSchedules(
-    schedules,
-    2020
+    schedules
   );
   expect(enhancedSchedules[0]).toStrictEqual({
     years: [1000, 1001, 1002, 1003],
@@ -28,6 +27,14 @@ test("Ensure that prereqs are successfully added to Computer Science BSCS plans 
               subject: "CS",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              prereqs: {
+                type: "and",
+                values: [],
+              },
+              coreqs: {
+                type: "and",
+                values: [],
+              },
             },
             {
               classId: "1800",
@@ -42,6 +49,10 @@ test("Ensure that prereqs are successfully added to Computer Science BSCS plans 
                     subject: "CS",
                   },
                 ],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
               },
             },
             {
@@ -58,6 +69,10 @@ test("Ensure that prereqs are successfully added to Computer Science BSCS plans 
                   },
                 ],
               },
+              prereqs: {
+                type: "and",
+                values: [],
+              },
             },
             {
               classId: "2500",
@@ -72,6 +87,10 @@ test("Ensure that prereqs are successfully added to Computer Science BSCS plans 
                     subject: "CS",
                   },
                 ],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
               },
             },
             {
@@ -88,18 +107,38 @@ test("Ensure that prereqs are successfully added to Computer Science BSCS plans 
                   },
                 ],
               },
+              prereqs: {
+                type: "and",
+                values: [],
+              },
             },
             {
               classId: "1365",
               subject: "MATH",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              coreqs: {
+                type: "and",
+                values: [],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
+              },
             },
             {
               classId: "1111",
               subject: "ENGW",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              coreqs: {
+                type: "and",
+                values: [],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
+              },
             },
           ],
           status: "CLASSES",
@@ -148,6 +187,10 @@ test("Ensure that prereqs are successfully added to Computer Science BSCS plans 
                   },
                 ],
               },
+              prereqs: {
+                type: "and",
+                values: [],
+              },
             },
             {
               classId: "2810",
@@ -166,6 +209,10 @@ test("Ensure that prereqs are successfully added to Computer Science BSCS plans 
                     subject: "CS",
                   },
                 ],
+              },
+              coreqs: {
+                type: "and",
+                values: [],
               },
             },
             {
@@ -212,6 +259,10 @@ test("Ensure that prereqs are successfully added to Computer Science BSCS plans 
                   },
                 ],
               },
+              coreqs: {
+                type: "and",
+                values: [],
+              },
             },
             {
               classId: "9999",
@@ -233,6 +284,14 @@ test("Ensure that prereqs are successfully added to Computer Science BSCS plans 
               subject: "MATH",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              coreqs: {
+                type: "and",
+                values: [],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
+              },
             },
             {
               classId: "3000",
@@ -276,6 +335,10 @@ test("Ensure that prereqs are successfully added to Computer Science BSCS plans 
                   },
                 ],
               },
+              coreqs: {
+                type: "and",
+                values: [],
+              },
             },
           ],
           status: "CLASSES",
@@ -313,6 +376,10 @@ test("Ensure that prereqs are successfully added to Computer Science BSCS plans 
                   },
                 ],
               },
+              coreqs: {
+                type: "and",
+                values: [],
+              },
             },
             {
               classId: "2160",
@@ -335,6 +402,10 @@ test("Ensure that prereqs are successfully added to Computer Science BSCS plans 
                     subject: "CS",
                   },
                 ],
+              },
+              coreqs: {
+                type: "and",
+                values: [],
               },
             },
             {
@@ -362,6 +433,10 @@ test("Ensure that prereqs are successfully added to Computer Science BSCS plans 
                     subject: "CS",
                   },
                 ],
+              },
+              coreqs: {
+                type: "and",
+                values: [],
               },
             },
           ],
@@ -447,12 +522,24 @@ test("Ensure that prereqs are successfully added to Computer Science BSCS plans 
                   },
                 ],
               },
+              coreqs: {
+                type: "and",
+                values: [],
+              },
             },
             {
               classId: "1170",
               subject: "THTR",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              coreqs: {
+                type: "and",
+                values: [],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
+              },
             },
             {
               classId: "9999",
@@ -525,6 +612,10 @@ test("Ensure that prereqs are successfully added to Computer Science BSCS plans 
                   },
                 ],
               },
+              coreqs: {
+                type: "and",
+                values: [],
+              },
             },
             {
               classId: "9999",
@@ -581,6 +672,10 @@ test("Ensure that prereqs are successfully added to Computer Science BSCS plans 
                     ],
                   },
                 ],
+              },
+              coreqs: {
+                type: "and",
+                values: [],
               },
             },
             {
@@ -664,6 +759,128 @@ test("Ensure that prereqs are successfully added to Computer Science BSCS plans 
   }
 
   expect(200).toEqual(200);
+});
+
+test("Ensure that prereqs and coreqs for CS 2810 are successfully added to a schedule containing just CS 2810.", async () => {
+  const mockSched = {
+    years: [1000],
+    yearMap: {
+      "1000": {
+        year: 1000,
+        fall: {
+          season: "FL",
+          year: 1000,
+          termId: 100010,
+          id: 1010,
+          classes: [],
+          status: "INACTIVE",
+        },
+        spring: {
+          season: "SP",
+          year: 1000,
+          termId: 100030,
+          id: 1030,
+          classes: [
+            {
+              classId: "2810",
+              subject: "CS",
+              numCreditsMin: 4,
+              numCreditsMax: 4,
+              prereqs: {
+                type: "and",
+                values: [
+                  {
+                    classId: "1800",
+                    subject: "CS",
+                  },
+                  {
+                    classId: "2500",
+                    subject: "CS",
+                  },
+                ],
+              },
+              coreqs: {
+                type: "and",
+                values: [],
+              },
+            },
+          ],
+          status: "CLASSES",
+        },
+        summer1: {
+          season: "S1",
+          year: 1000,
+          termId: 100040,
+          id: 1040,
+          classes: [],
+          status: "INACTIVE",
+        },
+        summer2: {
+          season: "S2",
+          year: 1000,
+          termId: 100060,
+          id: 1060,
+          classes: [],
+          status: "INACTIVE",
+        },
+        isSummerFull: false,
+      },
+    },
+  };
+
+  const enhancedSchedules = await prereq_loader.addPrereqsToSchedules(
+    [mockSched],
+    2020
+  );
+
+  expect(enhancedSchedules).toBeDefined();
+  expect(enhancedSchedules.length).toEqual(1);
+
+  const withPrereqsCoreqs = enhancedSchedules[0];
+
+  // ensure that the property exists, first of all.
+  expect(withPrereqsCoreqs).toBeDefined();
+  expect(withPrereqsCoreqs).toHaveProperty("yearMap");
+  expect(withPrereqsCoreqs.yearMap).toHaveProperty("1000");
+  expect(withPrereqsCoreqs.yearMap[1000]).toHaveProperty("spring");
+  expect(withPrereqsCoreqs.yearMap[1000].spring).toHaveProperty("classes");
+
+  // check that the array has the one element.
+  expect(withPrereqsCoreqs.yearMap[1000].spring.classes).toBeInstanceOf(Array);
+  expect(withPrereqsCoreqs.yearMap[1000].spring.classes.length).toEqual(1);
+
+  // cs 2810, with now updated prereqs/coreqs.
+  const cs2810 = withPrereqsCoreqs.yearMap[1000].spring.classes[0];
+
+  // expect the prereqs to exist.
+  expect(cs2810).toBeInstanceOf(Object);
+  expect(cs2810).toHaveProperty("prereqs");
+  expect(cs2810).toHaveProperty("coreqs");
+
+  // checks on the prereqs/coreqs.
+  const prereqs = cs2810.prereqs;
+  const coreqs = cs2810.coreqs;
+
+  // strict check on the prereqs.
+  expect(prereqs).toStrictEqual({
+    type: "and",
+    values: [
+      {
+        classId: "1800",
+        subject: "CS",
+      },
+      {
+        classId: "2500",
+        subject: "CS",
+      },
+    ],
+  });
+
+  // strict check on the coreqs.
+  expect(coreqs).toStrictEqual({
+    type: "and",
+    values: [],
+  });
 });
 
 // const fs = require('fs');

@@ -37,13 +37,16 @@ type PrereqQueryResult = undefined | NonEmptyQueryResult;
  * @param year the year to grab prereqs from (always uses fall).
  */
 export async function addPrereqsToSchedules(
-  schedules: Schedule[],
-  year: number
+  schedules: Schedule[]
 ): Promise<Schedule[]> {
-  // the loader to use for building a
-  const loader = new DataLoader<SimpleCourse, PrereqQueryResult>(
-    (keys: SimpleCourse[]) => queryCoursePrereqData(keys, year)
-  );
+  // doubly curried loader.
+  // here we give it the year.
+  // next parameter given is the termId.
+  // last parameter is the loader parameter.
+  const loader: DataLoader<SimpleCourse, PrereqQueryResult> = new DataLoader<
+    SimpleCourse,
+    PrereqQueryResult
+  >(queryCoursePrereqData);
 
   // return the results
   let results = await Promise.all(
@@ -153,9 +156,8 @@ async function prereqifyScheduleCourse(
       termId: termId,
     });
   } catch (err) {
+    // if we get an error, better to throw and see what went wrong, vs silently failing.
     throw err;
-    // if we error, then return the previous course.
-    return course;
   }
 
   // optionally add prereqs, coreqs to object.
@@ -177,16 +179,13 @@ async function prereqifyScheduleCourse(
  * @param courses the courses to lookup prereqs for
  */
 async function queryCoursePrereqData(
-  courses: SimpleCourse[],
-  year: number
+  courses: SimpleCourse[]
 ): Promise<PrereqQueryResult[]> {
-  // the termId to grab prereqs from (is the year, with the season, which is always fall).
-  const termId = year * 100 + 10;
-
   // for each one of the courses, map to a string.
+  // automatically use the latest occurrence.
   const courseSchema: string[] = courses.map((course: SimpleCourse) => {
     return `class(classId: ${course.classId}, subject: "${course.subject}") { 
-      occurrence(termId: ${termId}) {
+      latestOccurrence {
         prereqs 
         coreqs
         name
@@ -224,7 +223,8 @@ async function queryCoursePrereqData(
 
   const result: PrereqQueryResult[] = [];
   for (let i = 0; i < courses.length; i += 1) {
-    // each course property is an object, containing an "occurrence" property object.
+    // each course${i} property is either null, or an object containing a
+    // "latestOccurrence" property object.
     // the occurrence is then guaranteed to have the properties we requested:
     // - prereqs
     // - corereqs
@@ -235,7 +235,7 @@ async function queryCoursePrereqData(
     // if the result was found (aka results were not null), then push
     const current = data[`course${i}`];
     if (current) {
-      result.push(current.occurrence);
+      result.push(current.latestOccurrence);
     } else {
       result.push(undefined);
     }
