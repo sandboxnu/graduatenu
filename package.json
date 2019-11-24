@@ -7,7 +7,7 @@
   "scripts": {
     "start": "cd frontend && react-scripts start",
     "build": "cd frontend && react-scripts build",
-    "test": "jest",
+    "test": "jest --testPathIgnorePatterns prereq_loader",
     "eject": "cd frontend && react-scripts eject",
     "type-check": "tsc --noEmit"
   },
