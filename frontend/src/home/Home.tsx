@@ -20,12 +20,22 @@ import { Autocomplete } from "@material-ui/lab";
 import { majors } from "../majors";
 import { ChooseMajorPlanModal } from "../components/ChooseMajorPlanModal";
 import { Link } from "react-router-dom";
+import { CLASS_BLOCK_WIDTH } from "../constants";
+import { DropDownModal } from "../components/DropDownModal";
 
 const OuterContainer = styled.div`
   display: flex;
   flex: 1;
   flex-direction: row;
   justify-content: space-between;
+`;
+
+const CompletedCoursesWrapper = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: start;
+  width: ${CLASS_BLOCK_WIDTH * 4 + 25}px;
 `;
 
 const Container = styled.div`
@@ -349,6 +359,10 @@ export class Home extends React.Component<{}, AppState> {
               <h2>Plan Of Study</h2>
             </div>
             {this.renderMajorDropDown()}
+            <CompletedCoursesWrapper>
+              <h3>Completed Courses</h3>
+              <DropDownModal schedule={this.state.schedule}></DropDownModal>
+            </CompletedCoursesWrapper>
             {this.renderYears()}
           </Container>
         </DragDropContext>
