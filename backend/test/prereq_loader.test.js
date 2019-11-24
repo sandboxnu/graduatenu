@@ -653,16 +653,6 @@ test("Ensure that prereqs are successfully added to Computer Science BSCS plans 
                     values: [
                       {
                         classId: "1111",
-                        subject: "ENGL",
-                        missing: true,
-                      },
-                      {
-                        classId: "1102",
-                        subject: "ENGL",
-                        missing: true,
-                      },
-                      {
-                        classId: "1111",
                         subject: "ENGW",
                       },
                       {
