@@ -22,6 +22,7 @@ import { ChooseMajorPlanModal } from "../components/ChooseMajorPlanModal";
 import { Link } from "react-router-dom";
 import { CLASS_BLOCK_WIDTH } from "../constants";
 import { DropDownModal } from "../components/DropDownModal";
+import { Sidebar } from "../components/Sidebar/Sidebar";
 
 const OuterContainer = styled.div`
   display: flex;
@@ -366,6 +367,10 @@ export class Home extends React.Component<{}, AppState> {
             {this.renderYears()}
           </Container>
         </DragDropContext>
+        <Sidebar
+          schedule={this.state.schedule}
+          major={this.state.major}
+        ></Sidebar>
       </OuterContainer>
     );
   }
