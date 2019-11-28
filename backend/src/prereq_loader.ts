@@ -20,11 +20,15 @@ interface SimpleCourse {
 }
 
 /**
- * The result of a prereq query for a class.
+ * The result of a prereq query for a class. If this interface is changed, then the schema query needs
+ * to also be changes (see the latestOccurrence, line ~194).
  */
 interface NonEmptyQueryResult {
+  maxCredits: number;
+  minCredits: number;
   prereqs?: INEUOrPrereq | INEUAndPrereq;
   coreqs?: INEUOrPrereq | INEUAndPrereq;
+  name: string;
 }
 
 // prereq query results can be undefined, if the target class doesn't exist.
@@ -145,6 +149,7 @@ async function prereqifyScheduleCourse(
     subject: course.subject,
     numCreditsMin: course.numCreditsMin,
     numCreditsMax: course.numCreditsMax,
+    name: "",
   };
 
   let queryResult: PrereqQueryResult;
@@ -166,8 +171,9 @@ async function prereqifyScheduleCourse(
     queryResult.prereqs
       ? (prereqified.prereqs = queryResult.prereqs)
       : undefined;
-    // prereqified.numCreditsMax = queryResult.maxCredits;
-    // prereqified.numCreditsMin = queryResult.minCredits;
+    prereqified.numCreditsMax = queryResult.maxCredits;
+    prereqified.numCreditsMin = queryResult.minCredits;
+    prereqified.name = queryResult.name;
     return prereqified;
   } else {
     return course;
@@ -189,6 +195,8 @@ async function queryCoursePrereqData(
         prereqs 
         coreqs
         name
+        minCredits
+        maxCredits
       }
     }`;
   });
