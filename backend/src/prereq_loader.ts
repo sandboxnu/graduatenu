@@ -24,8 +24,8 @@ interface SimpleCourse {
  * to also be changes (see the latestOccurrence, line ~194).
  */
 interface NonEmptyQueryResult {
-  maxCredits: number;
-  minCredits: number;
+  maxCredits?: number;
+  minCredits?: number;
   prereqs?: INEUOrPrereq | INEUAndPrereq;
   coreqs?: INEUOrPrereq | INEUAndPrereq;
   name: string;
@@ -171,8 +171,12 @@ async function prereqifyScheduleCourse(
     queryResult.prereqs
       ? (prereqified.prereqs = queryResult.prereqs)
       : undefined;
-    prereqified.numCreditsMax = queryResult.maxCredits;
-    prereqified.numCreditsMin = queryResult.minCredits;
+    prereqified.numCreditsMax = queryResult.maxCredits
+      ? queryResult.maxCredits
+      : 0;
+    prereqified.numCreditsMin = queryResult.minCredits
+      ? queryResult.minCredits
+      : 0;
     prereqified.name = queryResult.name;
     return prereqified;
   } else {
