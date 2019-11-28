@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { NamedScheduleCourse } from "../models/types";
+import { ScheduleCourse } from "../models/types";
 import { XButton } from "./common/XButton";
 import { fetchCourse } from "../api";
 import { Modal, CircularProgress } from "@material-ui/core";
@@ -76,14 +76,14 @@ const ErrorText = styled.p`
 
 interface AddClassModalProps {
   handleClose: () => void;
-  handleSubmit: (courses: NamedScheduleCourse[]) => void;
+  handleSubmit: (courses: ScheduleCourse[]) => void;
   visible: boolean;
 }
 
 interface AddClassModalState {
   formSubject: string;
   formClassId: string;
-  queuedCourses: NamedScheduleCourse[];
+  queuedCourses: ScheduleCourse[];
   errorText?: string;
   isLoading: boolean;
 }
@@ -162,7 +162,7 @@ export class AddClassModal extends React.Component<
         )}
         {!!this.state.isLoading && <CircularProgress />}
         {this.state.queuedCourses.map(
-          (course: NamedScheduleCourse, index: number) => {
+          (course: ScheduleCourse, index: number) => {
             return (
               <QueuedClass>
                 <p style={{ width: 90 }}>{course.subject + course.classId}</p>

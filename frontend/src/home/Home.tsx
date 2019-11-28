@@ -7,7 +7,7 @@ import {
   DNDScheduleYear,
   Major,
   DNDScheduleCourse,
-  NamedScheduleCourse,
+  ScheduleCourse,
   Schedule,
   Status,
   SeasonWord,
@@ -236,7 +236,7 @@ export class Home extends React.Component<{}, AppState> {
     );
   }
 
-  handleAddClasses = async (courses: NamedScheduleCourse[], termId: number) => {
+  handleAddClasses = async (courses: ScheduleCourse[], termId: number) => {
     // convert to DNDScheduleCourses
     const dndCourses = await this.convertToDNDCourses(courses);
     const year = convertTermIdToYear(termId);
@@ -264,7 +264,7 @@ export class Home extends React.Component<{}, AppState> {
   };
 
   convertToDNDCourses = async (
-    courses: NamedScheduleCourse[]
+    courses: ScheduleCourse[]
   ): Promise<DNDScheduleCourse[]> => {
     var list: DNDScheduleCourse[] = [];
     var counter = this.state.currentClassCounter;
@@ -288,22 +288,22 @@ export class Home extends React.Component<{}, AppState> {
         year as any
       ].fall.classes = await this.convertToDNDCourses(newSchedule.yearMap[
         year as any
-      ].fall.classes as NamedScheduleCourse[]);
+      ].fall.classes as ScheduleCourse[]);
       newSchedule.yearMap[
         year as any
       ].spring.classes = await this.convertToDNDCourses(newSchedule.yearMap[
         year as any
-      ].spring.classes as NamedScheduleCourse[]);
+      ].spring.classes as ScheduleCourse[]);
       newSchedule.yearMap[
         year as any
       ].summer1.classes = await this.convertToDNDCourses(newSchedule.yearMap[
         year as any
-      ].summer1.classes as NamedScheduleCourse[]);
+      ].summer1.classes as ScheduleCourse[]);
       newSchedule.yearMap[
         year as any
       ].summer2.classes = await this.convertToDNDCourses(newSchedule.yearMap[
         year as any
-      ].summer2.classes as NamedScheduleCourse[]);
+      ].summer2.classes as ScheduleCourse[]);
     }
     return newSchedule;
   };
