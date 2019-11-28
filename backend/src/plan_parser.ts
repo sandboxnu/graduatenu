@@ -178,7 +178,7 @@ function addCourses(
             subject: "XXXX",
             numCreditsMin: !isNaN(credits) ? credits : 9999,
             numCreditsMax: !isNaN(credits) ? credits : 9999,
-            name: "Elective",
+            name: cell.text,
           });
           i += 1;
           break;
