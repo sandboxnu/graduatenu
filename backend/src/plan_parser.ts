@@ -175,10 +175,10 @@ function addCourses(
           credits = parseInt(cells[i + 1].text);
           produced.push({
             classId: String(9999),
-            subject: "Elective",
+            subject: "XXXX",
             numCreditsMin: !isNaN(credits) ? credits : 9999,
             numCreditsMax: !isNaN(credits) ? credits : 9999,
-            name: "",
+            name: "Elective",
           });
           i += 1;
           break;
@@ -189,7 +189,7 @@ function addCourses(
           i += 1;
           break;
         } else if (multiCourseMatch.test(cell.text)) {
-          // if we have a multicourse, like CS 1800 and CS 2500
+          // if we have a multicourse, like "CS 1800 and CS 1802"
           const split = cell.text.split(/and\s|\s/);
           credits = parseInt(cells[i + 1].text);
           // second course unfortunately has to have 0 credits.
@@ -220,10 +220,10 @@ function addCourses(
 
             produced.push({
               classId: "9999",
-              subject: cell.text,
+              subject: "XXXX",
               numCreditsMin: !isNaN(credits) ? credits : 9999,
               numCreditsMax: !isNaN(credits) ? credits : 9999,
-              name: "",
+              name: cell.text,
             });
             i += 1;
           }
