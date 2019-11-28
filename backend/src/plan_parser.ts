@@ -178,6 +178,7 @@ function addCourses(
             subject: "Elective",
             numCreditsMin: !isNaN(credits) ? credits : 9999,
             numCreditsMax: !isNaN(credits) ? credits : 9999,
+            name: "",
           });
           i += 1;
           break;
@@ -197,6 +198,7 @@ function addCourses(
             subject: "" + split,
             numCreditsMin: !isNaN(credits) ? credits : 9999,
             numCreditsMax: !isNaN(credits) ? credits : 9999,
+            name: "",
           });
           i += 1;
         } else {
@@ -210,6 +212,7 @@ function addCourses(
               subject: split[0],
               numCreditsMin: !isNaN(credits) ? credits : 9999,
               numCreditsMax: !isNaN(credits) ? credits : 9999,
+              name: "",
             });
             i += 1;
           } else {
@@ -220,6 +223,7 @@ function addCourses(
               subject: cell.text,
               numCreditsMin: !isNaN(credits) ? credits : 9999,
               numCreditsMax: !isNaN(credits) ? credits : 9999,
+              name: "",
             });
             i += 1;
           }
@@ -299,12 +303,14 @@ function buildYear(
               subject: split[0],
               numCreditsMin: item.numCreditsMin,
               numCreditsMax: item.numCreditsMax,
+              name: "",
             });
             accumulator.push({
               classId: split[3],
               subject: split[2],
               numCreditsMin: 0,
               numCreditsMax: 0,
+              name: "",
             });
           } else {
             accumulator.push(item);
