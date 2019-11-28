@@ -12,7 +12,7 @@ export const fetchCourse = async (
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      query: `{ class(subject: \"${subject}\", classId: ${classId}) {
+      query: `{ class(subject: "${subject}", classId: ${classId}) {
           name
           subject
           classId

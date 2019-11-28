@@ -15,11 +15,10 @@ import {
 import styled from "styled-components";
 import { Year } from "../components/Year/Year";
 import { convertTermIdToYear, convertTermIdToSeason } from "../utils";
-import { TextField, Button } from "@material-ui/core";
+import { TextField } from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
 import { majors } from "../majors";
 import { ChooseMajorPlanModal } from "../components/ChooseMajorPlanModal";
-import { Link } from "react-router-dom";
 import { CLASS_BLOCK_WIDTH } from "../constants";
 import { DropDownModal } from "../components/DropDownModal";
 
