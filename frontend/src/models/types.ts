@@ -290,6 +290,7 @@ export enum StatusEnum {
  * @param numCreditsMax the maximum number of credits this course gives
  */
 export interface ScheduleCourse {
+  name: string;
   classId: string;
   subject: string;
   prereqs?: INEUAndPrereq | INEUOrPrereq;
@@ -298,11 +299,7 @@ export interface ScheduleCourse {
   numCreditsMax: number;
 }
 
-export interface NamedScheduleCourse extends ScheduleCourse {
-  name: string;
-}
-
-export interface DNDScheduleCourse extends NamedScheduleCourse {
+export interface DNDScheduleCourse extends ScheduleCourse {
   dndId: string;
 }
 
