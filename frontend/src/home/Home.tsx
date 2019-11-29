@@ -15,11 +15,10 @@ import {
 import styled from "styled-components";
 import { Year } from "../components/Year/Year";
 import { convertTermIdToYear, convertTermIdToSeason } from "../utils";
-import { TextField, Button } from "@material-ui/core";
+import { TextField } from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
 import { majors } from "../majors";
 import { ChooseMajorPlanModal } from "../components/ChooseMajorPlanModal";
-import { Link } from "react-router-dom";
 import { CLASS_BLOCK_WIDTH } from "../constants";
 import { DropDownModal } from "../components/DropDownModal";
 import { Sidebar } from "../components/Sidebar/Sidebar";
@@ -33,7 +32,6 @@ const OuterContainer = styled.div`
 
 const CompletedCoursesWrapper = styled.div`
   display: flex;
-  flex: 1;
   flex-direction: column;
   justify-content: start;
   width: ${CLASS_BLOCK_WIDTH * 4 + 25}px;
@@ -199,6 +197,7 @@ export class Home extends React.Component<{}, AppState> {
   renderYears() {
     return this.state.schedule.years.map((year: number, index: number) => (
       <Year
+        key={index}
         index={index}
         schedule={this.state.schedule}
         handleAddClasses={this.handleAddClasses.bind(this)}

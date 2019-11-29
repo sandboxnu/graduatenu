@@ -43,6 +43,7 @@ export const Sidebar: React.FC<Props> = ({ schedule, major }) => {
           <RequirementSection
             title={req}
             contents={major.requirementGroupMap[req]}
+            warning={warnings.find(w => w.requirementGroup === req)}
           ></RequirementSection>
         );
       })}

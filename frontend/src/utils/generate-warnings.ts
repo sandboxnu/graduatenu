@@ -184,6 +184,9 @@ function produceUnsatifiedRequirement(
   taken: Map<string, HashableCourse>,
   coursesUsed: Set<string>
 ): IRequirementGroupWarning | undefined {
+  if (!requirementGroup) {
+    return undefined;
+  }
   switch (requirementGroup.type) {
     case "AND": {
       return processAndSection(requirementGroup, taken, coursesUsed);

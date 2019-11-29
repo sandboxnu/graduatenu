@@ -5,11 +5,23 @@ import {
   IRequiredCourse,
   ICourseRange,
   ISubjectRange,
+  IRequirementGroupWarning,
 } from "../../models/types";
 import styled from "styled-components";
 import CheckIcon from "@material-ui/icons/Check";
 import ClearIcon from "@material-ui/icons/Clear";
-import { produceRequirementGroupWarning } from "../../utils/generate-warnings";
+
+const TitleWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  margin-top: 8px;
+`;
+
+const TitleText = styled.p`
+  margin-top: 0px;
+  margin-left: 4px;
+`;
 
 const CourseWrapper = styled.div`
   display: flex;
@@ -43,6 +55,7 @@ const ANDORText = styled.p`
 interface RequirementSectionProps {
   title: string;
   contents: IMajorRequirementGroup;
+  warning?: IRequirementGroupWarning;
 }
 
 export class RequirementSection extends React.Component<
@@ -112,7 +125,6 @@ export class RequirementSection extends React.Component<
   renderCourse(course: IRequiredCourse, noMargin: boolean = false) {
     return (
       <CourseWrapper>
-        <CheckIcon color="action" fontSize="small"></CheckIcon>
         {noMargin ? (
           <CourseTextNoMargin>
             {course.subject + course.classId}
@@ -133,11 +145,20 @@ export class RequirementSection extends React.Component<
   }
 
   render() {
-    const { title, contents } = this.props;
+    const { title, contents, warning } = this.props;
 
     return (
       <div>
-        {!!title && <p>{title}</p>}
+        {!!title && (
+          <TitleWrapper>
+            {!!warning ? (
+              <ClearIcon color="action" fontSize="small"></ClearIcon>
+            ) : (
+              <CheckIcon color="action" fontSize="small"></CheckIcon>
+            )}
+            <TitleText>{title}</TitleText>
+          </TitleWrapper>
+        )}
         {!!contents &&
           contents.type !== "RANGE" &&
           this.parseRequirements(contents.requirements)}
