@@ -56,7 +56,7 @@ export default class ClassBlock extends React.Component<ClassBlockProps> {
             <ClassBlockBody>
               <TextWrapper>
                 <div>{this.props.class.subject + this.props.class.classId}</div>
-                <Subtitle>{"Object-Oriented Design"}</Subtitle>
+                <Subtitle>{this.props.class.name}</Subtitle>
               </TextWrapper>
             </ClassBlockBody>
           </Block>

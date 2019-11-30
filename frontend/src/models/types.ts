@@ -21,7 +21,6 @@ export enum NUPath {
 /**
  * Represents one of the seasons in which a student can take a course, as abbreviated by Northeastern.
  */
-export type Season = keyof typeof SeasonEnum;
 export enum SeasonEnum {
   FL = "FL",
   SP = "SP",
@@ -29,6 +28,7 @@ export enum SeasonEnum {
   S2 = "S2",
   SF = "SF",
 }
+export type Season = keyof typeof SeasonEnum;
 export type SeasonWord = "fall" | "spring" | "summer1" | "summer2";
 
 /**
@@ -271,7 +271,6 @@ export interface DNDScheduleTerm extends ScheduleTerm {
 /**
  * A Status is one of on CO-OP, CLASSES, or INACTIVE
  */
-export type Status = keyof typeof StatusEnum;
 export enum StatusEnum {
   COOP = "COOP",
   CLASSES = "CLASSES",
@@ -279,6 +278,7 @@ export enum StatusEnum {
   HOVERINACTIVE = "HOVERINACTIVE",
   HOVERCOOP = "HOVERCOOP",
 }
+export type Status = keyof typeof StatusEnum;
 
 /**
  * A course of a schedule
@@ -290,6 +290,7 @@ export enum StatusEnum {
  * @param numCreditsMax the maximum number of credits this course gives
  */
 export interface ScheduleCourse {
+  name: string;
   classId: string;
   subject: string;
   prereqs?: INEUAndPrereq | INEUOrPrereq;
@@ -298,11 +299,7 @@ export interface ScheduleCourse {
   numCreditsMax: number;
 }
 
-export interface NamedScheduleCourse extends ScheduleCourse {
-  name: string;
-}
-
-export interface DNDScheduleCourse extends NamedScheduleCourse {
+export interface DNDScheduleCourse extends ScheduleCourse {
   dndId: string;
 }
 

@@ -4,7 +4,7 @@ import ClassList from "./ClassList";
 import ClassBlock from "./ClassBlock";
 import EmptyBlock from "./EmptyBlock";
 import { AddClassModal } from "./AddClassModal";
-import { DNDScheduleTerm, NamedScheduleCourse } from "../models/types";
+import { DNDScheduleTerm, ScheduleCourse } from "../models/types";
 import { AddButton } from "./Year/AddButton";
 import styled from "styled-components";
 
@@ -33,7 +33,7 @@ const NoClassBlock = styled.div`
 
 interface SemesterBlockProps {
   semester: DNDScheduleTerm;
-  handleAddClasses: (courses: NamedScheduleCourse[]) => void;
+  handleAddClasses: (courses: ScheduleCourse[]) => void;
 }
 
 interface SemesterBlockState {

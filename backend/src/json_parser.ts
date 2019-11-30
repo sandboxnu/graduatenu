@@ -62,6 +62,7 @@ export function oldToNew(
         coreqs: detailed.coreqs,
         numCreditsMin: detailed.minCredits,
         numCreditsMax: detailed.maxCredits,
+        name: detailed.name,
       });
     } else {
       // it probably exists, but might not in the termId.
@@ -81,6 +82,7 @@ export function oldToNew(
           coreqs: mostRecent.coreqs,
           numCreditsMin: mostRecent.minCredits,
           numCreditsMax: mostRecent.maxCredits,
+          name: mostRecent.name,
         });
       } else {
         byTermId.termMap[course.termId].push({
@@ -90,6 +92,7 @@ export function oldToNew(
           coreqs: undefined,
           numCreditsMin: course.creditHours,
           numCreditsMax: course.creditHours,
+          name: course.name,
         });
       }
     }

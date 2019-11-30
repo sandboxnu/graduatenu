@@ -4,7 +4,7 @@ import { YearTop } from "./YearTop";
 import SemesterBlock from "../SemesterBlock";
 import {
   DNDSchedule,
-  NamedScheduleCourse,
+  ScheduleCourse,
   Status,
   SeasonWord,
 } from "../../models/types";
@@ -14,7 +14,7 @@ import { SEMESTER_MIN_HEIGHT } from "../../constants";
 export interface IYearProps {
   index: number;
   schedule: DNDSchedule;
-  handleAddClasses: (courses: NamedScheduleCourse[], termId: number) => void;
+  handleAddClasses: (courses: ScheduleCourse[], termId: number) => void;
   handleStatusChange: (
     newStatus: Status,
     tappedSemester: SeasonWord,
@@ -34,7 +34,7 @@ const YearBody = styled.div`
 
 export class Year extends React.Component<IYearProps> {
   addClassesWrapper = (termId: number) => {
-    return (courses: NamedScheduleCourse[]) =>
+    return (courses: ScheduleCourse[]) =>
       this.props.handleAddClasses(courses, termId);
   };
 
