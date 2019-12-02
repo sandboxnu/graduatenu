@@ -1,7 +1,7 @@
 import React from "react";
 import { Droppable } from "react-beautiful-dnd";
 import ClassList from "./ClassList";
-import ClassBlock from "./ClassBlock";
+import ClassBlock from "./ClassBlocks/ClassBlock";
 import EmptyBlock from "./EmptyBlock";
 import { AddClassModal } from "./AddClassModal";
 import { DNDScheduleTerm, ScheduleCourse } from "../models/types";
