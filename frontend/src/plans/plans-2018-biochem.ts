@@ -17,48 +17,37 @@ export const bioChemPlans: Schedule[] = [
               subject: "BIOL",
               numCreditsMin: 4,
               numCreditsMax: 4,
-              coreqs: {
-                type: "and",
-                values: [
-                  {
-                    classId: "1108",
-                    subject: "BIOL",
-                  },
-                ],
-              },
+              name: "",
             },
             {
               classId: "1108",
               subject: "BIOL",
               numCreditsMin: 1,
               numCreditsMax: 1,
-              coreqs: {
-                type: "and",
-                values: [
-                  {
-                    classId: "1107",
-                    subject: "BIOL",
-                  },
-                ],
-              },
+              name: "",
             },
             {
               classId: "1211",
               subject: "CHEM",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "General Chemistry 1",
               coreqs: {
                 type: "and",
                 values: [
                   {
-                    classId: "1212",
                     subject: "CHEM",
+                    classId: "1212",
                   },
                   {
-                    classId: "1213",
                     subject: "CHEM",
+                    classId: "1213",
                   },
                 ],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
               },
             },
             {
@@ -66,18 +55,23 @@ export const bioChemPlans: Schedule[] = [
               subject: "CHEM",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              name: "Lab for CHEM 1211",
               coreqs: {
                 type: "and",
                 values: [
                   {
-                    classId: "1211",
                     subject: "CHEM",
+                    classId: "1211",
                   },
                   {
-                    classId: "1213",
                     subject: "CHEM",
+                    classId: "1213",
                   },
                 ],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
               },
             },
             {
@@ -85,18 +79,23 @@ export const bioChemPlans: Schedule[] = [
               subject: "CHEM",
               numCreditsMin: 0,
               numCreditsMax: 0,
+              name: "Recitation for CHEM 1211",
               coreqs: {
                 type: "and",
                 values: [
                   {
-                    classId: "1211",
                     subject: "CHEM",
+                    classId: "1211",
                   },
                   {
-                    classId: "1212",
                     subject: "CHEM",
+                    classId: "1212",
                   },
                 ],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
               },
             },
             {
@@ -104,18 +103,29 @@ export const bioChemPlans: Schedule[] = [
               subject: "MATH",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Calculus and Differential Equations for Biology 1",
+              coreqs: {
+                type: "and",
+                values: [],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
+              },
             },
             {
               classId: "9999",
-              subject: "Elective",
+              subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Elective 1",
             },
             {
               classId: "1000",
               subject: "BIOC",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              name: "",
             },
           ],
           status: "CLASSES",
@@ -131,6 +141,11 @@ export const bioChemPlans: Schedule[] = [
               subject: "BIOL",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Inquiries in Biological Sciences",
+              coreqs: {
+                type: "and",
+                values: [],
+              },
               prereqs: {
                 type: "or",
                 values: [
@@ -142,6 +157,7 @@ export const bioChemPlans: Schedule[] = [
                   {
                     classId: "1107",
                     subject: "BIOL",
+                    missing: true,
                   },
                   {
                     classId: "1111",
@@ -155,16 +171,17 @@ export const bioChemPlans: Schedule[] = [
               subject: "CHEM",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "General Chemistry 2 (HON)",
               coreqs: {
                 type: "and",
                 values: [
                   {
-                    classId: "1215",
                     subject: "CHEM",
+                    classId: "1215",
                   },
                   {
-                    classId: "1216",
                     subject: "CHEM",
+                    classId: "1216",
                   },
                 ],
               },
@@ -183,18 +200,23 @@ export const bioChemPlans: Schedule[] = [
               subject: "CHEM",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              name: "Lab for CHEM 1214",
               coreqs: {
                 type: "and",
                 values: [
                   {
-                    classId: "1214",
                     subject: "CHEM",
+                    classId: "1214",
                   },
                   {
-                    classId: "1216",
                     subject: "CHEM",
+                    classId: "1216",
                   },
                 ],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
               },
             },
             {
@@ -202,18 +224,23 @@ export const bioChemPlans: Schedule[] = [
               subject: "CHEM",
               numCreditsMin: 0,
               numCreditsMax: 0,
+              name: "Recitation for CHEM 1214",
               coreqs: {
                 type: "and",
                 values: [
                   {
-                    classId: "1214",
                     subject: "CHEM",
+                    classId: "1214",
                   },
                   {
-                    classId: "1215",
                     subject: "CHEM",
+                    classId: "1215",
                   },
                 ],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
               },
             },
             {
@@ -221,12 +248,26 @@ export const bioChemPlans: Schedule[] = [
               subject: "ENGW",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "First-Year Writing",
+              coreqs: {
+                type: "and",
+                values: [],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
+              },
             },
             {
               classId: "1252",
               subject: "MATH",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Calc & Diff Eq -Biol 2 (HON)",
+              coreqs: {
+                type: "and",
+                values: [],
+              },
               prereqs: {
                 type: "and",
                 values: [
@@ -251,6 +292,11 @@ export const bioChemPlans: Schedule[] = [
               subject: "BIOL",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Genetics and Molecular Biology",
+              coreqs: {
+                type: "and",
+                values: [],
+              },
               prereqs: {
                 type: "and",
                 values: [
@@ -282,6 +328,7 @@ export const bioChemPlans: Schedule[] = [
                       {
                         classId: "2290",
                         subject: "EEMB",
+                        missing: true,
                       },
                       {
                         classId: "2400",
@@ -290,6 +337,10 @@ export const bioChemPlans: Schedule[] = [
                       },
                       {
                         classId: "2400",
+                        subject: "EEMB",
+                      },
+                      {
+                        classId: "1105",
                         subject: "EEMB",
                       },
                     ],
@@ -304,6 +355,7 @@ export const bioChemPlans: Schedule[] = [
                       {
                         classId: "1217",
                         subject: "CHEM",
+                        missing: true,
                       },
                       {
                         classId: "1151",
@@ -323,6 +375,11 @@ export const bioChemPlans: Schedule[] = [
               subject: "BIOL",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              name: "Lab for BIOL 2301",
+              coreqs: {
+                type: "and",
+                values: [],
+              },
               prereqs: {
                 type: "and",
                 values: [
@@ -335,9 +392,10 @@ export const bioChemPlans: Schedule[] = [
             },
             {
               classId: "9999",
-              subject: "Elective",
+              subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Elective 2",
             },
           ],
           status: "CLASSES",
@@ -350,15 +408,17 @@ export const bioChemPlans: Schedule[] = [
           classes: [
             {
               classId: "9999",
-              subject: "Elective",
+              subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Elective 3",
             },
             {
               classId: "9999",
-              subject: "Elective",
+              subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Elective 4",
             },
           ],
           status: "CLASSES",
@@ -378,6 +438,11 @@ export const bioChemPlans: Schedule[] = [
               subject: "BIOL",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Biology Project Lab",
+              coreqs: {
+                type: "and",
+                values: [],
+              },
               prereqs: {
                 type: "and",
                 values: [
@@ -393,12 +458,13 @@ export const bioChemPlans: Schedule[] = [
               subject: "CHEM",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Organic Chemistry 1",
               coreqs: {
                 type: "and",
                 values: [
                   {
-                    classId: "2312",
                     subject: "CHEM",
+                    classId: "2312",
                   },
                 ],
               },
@@ -416,6 +482,7 @@ export const bioChemPlans: Schedule[] = [
                   {
                     classId: "1220",
                     subject: "CHEM",
+                    missing: true,
                   },
                   {
                     classId: "1161",
@@ -429,14 +496,19 @@ export const bioChemPlans: Schedule[] = [
               subject: "CHEM",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              name: "Lab for CHEM 2311",
               coreqs: {
                 type: "and",
                 values: [
                   {
-                    classId: "2311",
                     subject: "CHEM",
+                    classId: "2311",
                   },
                 ],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
               },
             },
             {
@@ -444,6 +516,11 @@ export const bioChemPlans: Schedule[] = [
               subject: "PHYS",
               numCreditsMin: 3,
               numCreditsMax: 3,
+              name: "Physics for Engineering 1",
+              coreqs: {
+                type: "and",
+                values: [],
+              },
               prereqs: {
                 type: "or",
                 values: [
@@ -479,18 +556,37 @@ export const bioChemPlans: Schedule[] = [
               subject: "PHYS",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              name: "Lab for PHYS 1151 (HON)",
+              coreqs: {
+                type: "and",
+                values: [],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
+              },
             },
             {
               classId: "1153",
               subject: "PHYS",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              name: "Interactive Learning Seminar for PHYS 1151",
+              coreqs: {
+                type: "and",
+                values: [],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
+              },
             },
             {
               classId: "9999",
-              subject: "Elective",
+              subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Elective 5",
             },
           ],
           status: "CLASSES",
@@ -506,12 +602,13 @@ export const bioChemPlans: Schedule[] = [
               subject: "CHEM",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Organic Chemistry 2",
               coreqs: {
                 type: "and",
                 values: [
                   {
-                    classId: "2314",
                     subject: "CHEM",
+                    classId: "2314",
                   },
                 ],
               },
@@ -534,14 +631,19 @@ export const bioChemPlans: Schedule[] = [
               subject: "CHEM",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              name: "Lab for CHEM 2313",
               coreqs: {
                 type: "and",
                 values: [
                   {
-                    classId: "2313",
                     subject: "CHEM",
+                    classId: "2313",
                   },
                 ],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
               },
             },
             {
@@ -549,12 +651,13 @@ export const bioChemPlans: Schedule[] = [
               subject: "PHYS",
               numCreditsMin: 3,
               numCreditsMax: 3,
+              name: "Physics for Engineering 2",
               coreqs: {
                 type: "and",
                 values: [
                   {
-                    classId: "1157",
                     subject: "PHYS",
+                    classId: "1157",
                   },
                 ],
               },
@@ -571,6 +674,7 @@ export const bioChemPlans: Schedule[] = [
                       {
                         classId: "1161",
                         subject: "PHYS",
+                        missing: true,
                       },
                       {
                         classId: "1171",
@@ -603,39 +707,64 @@ export const bioChemPlans: Schedule[] = [
               subject: "PHYS",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              name: "Lab for PHYS 1155",
+              coreqs: {
+                type: "and",
+                values: [],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
+              },
             },
             {
               classId: "1157",
               subject: "PHYS",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              name: "Interactive Learning Seminar for PHYS 1155",
               coreqs: {
                 type: "and",
                 values: [
                   {
-                    classId: "1155",
                     subject: "PHYS",
+                    classId: "1155",
                   },
                 ],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
               },
             },
             {
               classId: "9999",
-              subject: "Elective",
+              subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Elective 6",
             },
             {
               classId: "9999",
-              subject: "Elective",
+              subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Elective 7",
             },
             {
               classId: "2000",
               subject: "EESC",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              name: "Professional Development for Co-op",
+              coreqs: {
+                type: "and",
+                values: [],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
+              },
             },
           ],
           status: "CLASSES",
@@ -651,12 +780,13 @@ export const bioChemPlans: Schedule[] = [
               subject: "BIOL",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Biochemistry",
               coreqs: {
                 type: "and",
                 values: [
                   {
-                    classId: "3612",
                     subject: "BIOL",
+                    classId: "3612",
                   },
                 ],
               },
@@ -711,21 +841,27 @@ export const bioChemPlans: Schedule[] = [
               subject: "BIOL",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              name: "Lab for BIOL 3611",
               coreqs: {
                 type: "and",
                 values: [
                   {
-                    classId: "3611",
                     subject: "BIOL",
+                    classId: "3611",
                   },
                 ],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
               },
             },
             {
               classId: "9999",
-              subject: "Elective",
+              subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Elective 8",
             },
           ],
           status: "CLASSES",
@@ -761,12 +897,13 @@ export const bioChemPlans: Schedule[] = [
               subject: "CHEM",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Physical Chemistry",
               coreqs: {
                 type: "and",
                 values: [
                   {
-                    classId: "3432",
                     subject: "CHEM",
+                    classId: "3432",
                   },
                 ],
               },
@@ -774,14 +911,23 @@ export const bioChemPlans: Schedule[] = [
                 type: "and",
                 values: [
                   {
+                    classId: "1214",
+                    subject: "CHEM",
+                  },
+                  {
+                    classId: "1220",
+                    subject: "CHEM",
+                    missing: true,
+                  },
+                  {
                     type: "or",
                     values: [
                       {
-                        classId: "1214",
+                        classId: "1151",
                         subject: "CHEM",
                       },
                       {
-                        classId: "1220",
+                        classId: "1161",
                         subject: "CHEM",
                       },
                     ],
@@ -790,11 +936,11 @@ export const bioChemPlans: Schedule[] = [
                     type: "or",
                     values: [
                       {
-                        classId: "1342",
+                        classId: "1252",
                         subject: "MATH",
                       },
                       {
-                        classId: "1252",
+                        classId: "1342",
                         subject: "MATH",
                       },
                     ],
@@ -817,6 +963,7 @@ export const bioChemPlans: Schedule[] = [
                       {
                         classId: "1175",
                         subject: "PHYS",
+                        missing: true,
                       },
                     ],
                   },
@@ -828,14 +975,19 @@ export const bioChemPlans: Schedule[] = [
               subject: "CHEM",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              name: "Lab for CHEM 3431",
               coreqs: {
                 type: "and",
                 values: [
                   {
-                    classId: "3431",
                     subject: "CHEM",
+                    classId: "3431",
                   },
                 ],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
               },
             },
             {
@@ -843,25 +995,18 @@ export const bioChemPlans: Schedule[] = [
               subject: "CHEM",
               numCreditsMin: 4,
               numCreditsMax: 4,
-              prereqs: {
-                type: "or",
-                values: [
-                  {
-                    classId: "2313",
-                    subject: "CHEM",
-                  },
-                  {
-                    classId: "2317",
-                    subject: "CHEM",
-                  },
-                ],
-              },
+              name: "",
             },
             {
               classId: "3307",
               subject: "ENGW",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Advanced Writing in the Sciences",
+              coreqs: {
+                type: "and",
+                values: [],
+              },
               prereqs: {
                 type: "or",
                 values: [
@@ -888,9 +1033,10 @@ export const bioChemPlans: Schedule[] = [
             },
             {
               classId: "9999",
-              subject: "Elective",
+              subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Elective 9",
             },
           ],
           status: "CLASSES",
@@ -906,6 +1052,11 @@ export const bioChemPlans: Schedule[] = [
               subject: "BIOL",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Cell and Molecular Biology",
+              coreqs: {
+                type: "and",
+                values: [],
+              },
               prereqs: {
                 type: "or",
                 values: [
@@ -923,9 +1074,10 @@ export const bioChemPlans: Schedule[] = [
             },
             {
               classId: "9999",
-              subject: "Elective",
+              subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Elective 10",
             },
           ],
           status: "CLASSES",
@@ -950,27 +1102,31 @@ export const bioChemPlans: Schedule[] = [
           classes: [
             {
               classId: "9999",
-              subject: "Elective",
+              subject: "XXXX",
               numCreditsMin: 5,
               numCreditsMax: 5,
+              name: "BIOL or CHEM advanced elective",
             },
             {
               classId: "9999",
-              subject: "Elective",
+              subject: "XXXX",
               numCreditsMin: 5,
               numCreditsMax: 5,
+              name: "BIOL or CHEM advanced elective",
             },
             {
               classId: "9999",
-              subject: "Elective",
+              subject: "XXXX",
               numCreditsMin: 5,
               numCreditsMax: 5,
+              name: "BIOL or CHEM advanced elective",
             },
             {
               classId: "9999",
-              subject: "CHEM 4750 or BIOL4701",
+              subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "CHEM 4750 or BIOL4701",
             },
           ],
           status: "CLASSES",
@@ -1020,48 +1176,37 @@ export const bioChemPlans: Schedule[] = [
               subject: "BIOL",
               numCreditsMin: 4,
               numCreditsMax: 4,
-              coreqs: {
-                type: "and",
-                values: [
-                  {
-                    classId: "1108",
-                    subject: "BIOL",
-                  },
-                ],
-              },
+              name: "",
             },
             {
               classId: "1108",
               subject: "BIOL",
               numCreditsMin: 1,
               numCreditsMax: 1,
-              coreqs: {
-                type: "and",
-                values: [
-                  {
-                    classId: "1107",
-                    subject: "BIOL",
-                  },
-                ],
-              },
+              name: "",
             },
             {
               classId: "1211",
               subject: "CHEM",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "General Chemistry 1",
               coreqs: {
                 type: "and",
                 values: [
                   {
-                    classId: "1212",
                     subject: "CHEM",
+                    classId: "1212",
                   },
                   {
-                    classId: "1213",
                     subject: "CHEM",
+                    classId: "1213",
                   },
                 ],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
               },
             },
             {
@@ -1069,18 +1214,23 @@ export const bioChemPlans: Schedule[] = [
               subject: "CHEM",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              name: "Lab for CHEM 1211",
               coreqs: {
                 type: "and",
                 values: [
                   {
-                    classId: "1211",
                     subject: "CHEM",
+                    classId: "1211",
                   },
                   {
-                    classId: "1213",
                     subject: "CHEM",
+                    classId: "1213",
                   },
                 ],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
               },
             },
             {
@@ -1088,18 +1238,23 @@ export const bioChemPlans: Schedule[] = [
               subject: "CHEM",
               numCreditsMin: 0,
               numCreditsMax: 0,
+              name: "Recitation for CHEM 1211",
               coreqs: {
                 type: "and",
                 values: [
                   {
-                    classId: "1211",
                     subject: "CHEM",
+                    classId: "1211",
                   },
                   {
-                    classId: "1212",
                     subject: "CHEM",
+                    classId: "1212",
                   },
                 ],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
               },
             },
             {
@@ -1107,18 +1262,29 @@ export const bioChemPlans: Schedule[] = [
               subject: "MATH",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Calculus and Differential Equations for Biology 1",
+              coreqs: {
+                type: "and",
+                values: [],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
+              },
             },
             {
               classId: "9999",
-              subject: "Elective",
+              subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Elective 1",
             },
             {
               classId: "1000",
               subject: "BIOC",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              name: "",
             },
           ],
           status: "CLASSES",
@@ -1134,6 +1300,11 @@ export const bioChemPlans: Schedule[] = [
               subject: "BIOL",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Inquiries in Biological Sciences",
+              coreqs: {
+                type: "and",
+                values: [],
+              },
               prereqs: {
                 type: "or",
                 values: [
@@ -1145,6 +1316,7 @@ export const bioChemPlans: Schedule[] = [
                   {
                     classId: "1107",
                     subject: "BIOL",
+                    missing: true,
                   },
                   {
                     classId: "1111",
@@ -1158,16 +1330,17 @@ export const bioChemPlans: Schedule[] = [
               subject: "CHEM",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "General Chemistry 2 (HON)",
               coreqs: {
                 type: "and",
                 values: [
                   {
-                    classId: "1215",
                     subject: "CHEM",
+                    classId: "1215",
                   },
                   {
-                    classId: "1216",
                     subject: "CHEM",
+                    classId: "1216",
                   },
                 ],
               },
@@ -1186,18 +1359,23 @@ export const bioChemPlans: Schedule[] = [
               subject: "CHEM",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              name: "Lab for CHEM 1214",
               coreqs: {
                 type: "and",
                 values: [
                   {
-                    classId: "1214",
                     subject: "CHEM",
+                    classId: "1214",
                   },
                   {
-                    classId: "1216",
                     subject: "CHEM",
+                    classId: "1216",
                   },
                 ],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
               },
             },
             {
@@ -1205,18 +1383,23 @@ export const bioChemPlans: Schedule[] = [
               subject: "CHEM",
               numCreditsMin: 0,
               numCreditsMax: 0,
+              name: "Recitation for CHEM 1214",
               coreqs: {
                 type: "and",
                 values: [
                   {
-                    classId: "1214",
                     subject: "CHEM",
+                    classId: "1214",
                   },
                   {
-                    classId: "1215",
                     subject: "CHEM",
+                    classId: "1215",
                   },
                 ],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
               },
             },
             {
@@ -1224,12 +1407,26 @@ export const bioChemPlans: Schedule[] = [
               subject: "ENGW",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "First-Year Writing",
+              coreqs: {
+                type: "and",
+                values: [],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
+              },
             },
             {
               classId: "1252",
               subject: "MATH",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Calc & Diff Eq -Biol 2 (HON)",
+              coreqs: {
+                type: "and",
+                values: [],
+              },
               prereqs: {
                 type: "and",
                 values: [
@@ -1254,6 +1451,11 @@ export const bioChemPlans: Schedule[] = [
               subject: "BIOL",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Genetics and Molecular Biology",
+              coreqs: {
+                type: "and",
+                values: [],
+              },
               prereqs: {
                 type: "and",
                 values: [
@@ -1285,6 +1487,7 @@ export const bioChemPlans: Schedule[] = [
                       {
                         classId: "2290",
                         subject: "EEMB",
+                        missing: true,
                       },
                       {
                         classId: "2400",
@@ -1293,6 +1496,10 @@ export const bioChemPlans: Schedule[] = [
                       },
                       {
                         classId: "2400",
+                        subject: "EEMB",
+                      },
+                      {
+                        classId: "1105",
                         subject: "EEMB",
                       },
                     ],
@@ -1307,6 +1514,7 @@ export const bioChemPlans: Schedule[] = [
                       {
                         classId: "1217",
                         subject: "CHEM",
+                        missing: true,
                       },
                       {
                         classId: "1151",
@@ -1326,6 +1534,11 @@ export const bioChemPlans: Schedule[] = [
               subject: "BIOL",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              name: "Lab for BIOL 2301",
+              coreqs: {
+                type: "and",
+                values: [],
+              },
               prereqs: {
                 type: "and",
                 values: [
@@ -1338,9 +1551,10 @@ export const bioChemPlans: Schedule[] = [
             },
             {
               classId: "9999",
-              subject: "Elective",
+              subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Elective 2",
             },
           ],
           status: "CLASSES",
@@ -1353,15 +1567,17 @@ export const bioChemPlans: Schedule[] = [
           classes: [
             {
               classId: "9999",
-              subject: "Elective",
+              subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Elective 3",
             },
             {
               classId: "9999",
-              subject: "Elective",
+              subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Elective 4",
             },
           ],
           status: "CLASSES",
@@ -1381,6 +1597,11 @@ export const bioChemPlans: Schedule[] = [
               subject: "BIOL",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Biology Project Lab",
+              coreqs: {
+                type: "and",
+                values: [],
+              },
               prereqs: {
                 type: "and",
                 values: [
@@ -1396,12 +1617,13 @@ export const bioChemPlans: Schedule[] = [
               subject: "CHEM",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Organic Chemistry 1",
               coreqs: {
                 type: "and",
                 values: [
                   {
-                    classId: "2312",
                     subject: "CHEM",
+                    classId: "2312",
                   },
                 ],
               },
@@ -1419,6 +1641,7 @@ export const bioChemPlans: Schedule[] = [
                   {
                     classId: "1220",
                     subject: "CHEM",
+                    missing: true,
                   },
                   {
                     classId: "1161",
@@ -1432,14 +1655,19 @@ export const bioChemPlans: Schedule[] = [
               subject: "CHEM",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              name: "Lab for CHEM 2311",
               coreqs: {
                 type: "and",
                 values: [
                   {
-                    classId: "2311",
                     subject: "CHEM",
+                    classId: "2311",
                   },
                 ],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
               },
             },
             {
@@ -1447,6 +1675,11 @@ export const bioChemPlans: Schedule[] = [
               subject: "PHYS",
               numCreditsMin: 3,
               numCreditsMax: 3,
+              name: "Physics for Engineering 1",
+              coreqs: {
+                type: "and",
+                values: [],
+              },
               prereqs: {
                 type: "or",
                 values: [
@@ -1482,24 +1715,52 @@ export const bioChemPlans: Schedule[] = [
               subject: "PHYS",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              name: "Lab for PHYS 1151 (HON)",
+              coreqs: {
+                type: "and",
+                values: [],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
+              },
             },
             {
               classId: "1153",
               subject: "PHYS",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              name: "Interactive Learning Seminar for PHYS 1151",
+              coreqs: {
+                type: "and",
+                values: [],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
+              },
             },
             {
               classId: "9999",
-              subject: "Elective",
+              subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Elective 5",
             },
             {
               classId: "2000",
               subject: "EESC",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              name: "Professional Development for Co-op",
+              coreqs: {
+                type: "and",
+                values: [],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
+              },
             },
           ],
           status: "CLASSES",
@@ -1531,12 +1792,13 @@ export const bioChemPlans: Schedule[] = [
               subject: "CHEM",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Organic Chemistry 2",
               coreqs: {
                 type: "and",
                 values: [
                   {
-                    classId: "2314",
                     subject: "CHEM",
+                    classId: "2314",
                   },
                 ],
               },
@@ -1559,21 +1821,27 @@ export const bioChemPlans: Schedule[] = [
               subject: "CHEM",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              name: "Lab for CHEM 2313",
               coreqs: {
                 type: "and",
                 values: [
                   {
-                    classId: "2313",
                     subject: "CHEM",
+                    classId: "2313",
                   },
                 ],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
               },
             },
             {
               classId: "9999",
-              subject: "Elective",
+              subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Elective 6",
             },
           ],
           status: "CLASSES",
@@ -1593,12 +1861,13 @@ export const bioChemPlans: Schedule[] = [
               subject: "BIOL",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Biochemistry",
               coreqs: {
                 type: "and",
                 values: [
                   {
-                    classId: "3612",
                     subject: "BIOL",
+                    classId: "3612",
                   },
                 ],
               },
@@ -1653,14 +1922,19 @@ export const bioChemPlans: Schedule[] = [
               subject: "BIOL",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              name: "Lab for BIOL 3611",
               coreqs: {
                 type: "and",
                 values: [
                   {
-                    classId: "3611",
                     subject: "BIOL",
+                    classId: "3611",
                   },
                 ],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
               },
             },
             {
@@ -1668,12 +1942,13 @@ export const bioChemPlans: Schedule[] = [
               subject: "PHYS",
               numCreditsMin: 3,
               numCreditsMax: 3,
+              name: "Physics for Engineering 2",
               coreqs: {
                 type: "and",
                 values: [
                   {
-                    classId: "1157",
                     subject: "PHYS",
+                    classId: "1157",
                   },
                 ],
               },
@@ -1690,6 +1965,7 @@ export const bioChemPlans: Schedule[] = [
                       {
                         classId: "1161",
                         subject: "PHYS",
+                        missing: true,
                       },
                       {
                         classId: "1171",
@@ -1722,20 +1998,34 @@ export const bioChemPlans: Schedule[] = [
               subject: "PHYS",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              name: "Lab for PHYS 1155",
+              coreqs: {
+                type: "and",
+                values: [],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
+              },
             },
             {
               classId: "1157",
               subject: "PHYS",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              name: "Interactive Learning Seminar for PHYS 1155",
               coreqs: {
                 type: "and",
                 values: [
                   {
-                    classId: "1155",
                     subject: "PHYS",
+                    classId: "1155",
                   },
                 ],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
               },
             },
             {
@@ -1743,6 +2033,11 @@ export const bioChemPlans: Schedule[] = [
               subject: "ENGW",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Advanced Writing in the Sciences",
+              coreqs: {
+                type: "and",
+                values: [],
+              },
               prereqs: {
                 type: "or",
                 values: [
@@ -1769,9 +2064,10 @@ export const bioChemPlans: Schedule[] = [
             },
             {
               classId: "9999",
-              subject: "Elective",
+              subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Elective 7",
             },
           ],
           status: "CLASSES",
@@ -1803,6 +2099,11 @@ export const bioChemPlans: Schedule[] = [
               subject: "BIOL",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Cell and Molecular Biology",
+              coreqs: {
+                type: "and",
+                values: [],
+              },
               prereqs: {
                 type: "or",
                 values: [
@@ -1820,9 +2121,10 @@ export const bioChemPlans: Schedule[] = [
             },
             {
               classId: "9999",
-              subject: "Elective",
+              subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Elective 8",
             },
           ],
           status: "CLASSES",
@@ -1842,12 +2144,13 @@ export const bioChemPlans: Schedule[] = [
               subject: "CHEM",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Physical Chemistry",
               coreqs: {
                 type: "and",
                 values: [
                   {
-                    classId: "3432",
                     subject: "CHEM",
+                    classId: "3432",
                   },
                 ],
               },
@@ -1855,14 +2158,23 @@ export const bioChemPlans: Schedule[] = [
                 type: "and",
                 values: [
                   {
+                    classId: "1214",
+                    subject: "CHEM",
+                  },
+                  {
+                    classId: "1220",
+                    subject: "CHEM",
+                    missing: true,
+                  },
+                  {
                     type: "or",
                     values: [
                       {
-                        classId: "1214",
+                        classId: "1151",
                         subject: "CHEM",
                       },
                       {
-                        classId: "1220",
+                        classId: "1161",
                         subject: "CHEM",
                       },
                     ],
@@ -1871,11 +2183,11 @@ export const bioChemPlans: Schedule[] = [
                     type: "or",
                     values: [
                       {
-                        classId: "1342",
+                        classId: "1252",
                         subject: "MATH",
                       },
                       {
-                        classId: "1252",
+                        classId: "1342",
                         subject: "MATH",
                       },
                     ],
@@ -1898,6 +2210,7 @@ export const bioChemPlans: Schedule[] = [
                       {
                         classId: "1175",
                         subject: "PHYS",
+                        missing: true,
                       },
                     ],
                   },
@@ -1909,14 +2222,19 @@ export const bioChemPlans: Schedule[] = [
               subject: "CHEM",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              name: "Lab for CHEM 3431",
               coreqs: {
                 type: "and",
                 values: [
                   {
-                    classId: "3431",
                     subject: "CHEM",
+                    classId: "3431",
                   },
                 ],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
               },
             },
             {
@@ -1924,31 +2242,21 @@ export const bioChemPlans: Schedule[] = [
               subject: "CHEM",
               numCreditsMin: 4,
               numCreditsMax: 4,
-              prereqs: {
-                type: "or",
-                values: [
-                  {
-                    classId: "2313",
-                    subject: "CHEM",
-                  },
-                  {
-                    classId: "2317",
-                    subject: "CHEM",
-                  },
-                ],
-              },
+              name: "",
             },
             {
               classId: "9999",
-              subject: "Elective",
+              subject: "XXXX",
               numCreditsMin: 5,
               numCreditsMax: 5,
+              name: "BIOL or CHEM advanced elective",
             },
             {
               classId: "9999",
-              subject: "Elective",
+              subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Elective 9",
             },
           ],
           status: "CLASSES",
@@ -1961,27 +2269,31 @@ export const bioChemPlans: Schedule[] = [
           classes: [
             {
               classId: "9999",
-              subject: "Elective",
+              subject: "XXXX",
               numCreditsMin: 5,
               numCreditsMax: 5,
+              name: "BIOL or CHEM advanced elective",
             },
             {
               classId: "9999",
-              subject: "Elective",
+              subject: "XXXX",
               numCreditsMin: 5,
               numCreditsMax: 5,
+              name: "BIOL or CHEM advanced elective",
             },
             {
               classId: "9999",
-              subject: "CHEM 4750 or BIOL4701",
+              subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "CHEM 4750 or BIOL4701",
             },
             {
               classId: "9999",
-              subject: "Elective",
+              subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Elective 10",
             },
           ],
           status: "CLASSES",
@@ -2023,48 +2335,37 @@ export const bioChemPlans: Schedule[] = [
               subject: "BIOL",
               numCreditsMin: 4,
               numCreditsMax: 4,
-              coreqs: {
-                type: "and",
-                values: [
-                  {
-                    classId: "1108",
-                    subject: "BIOL",
-                  },
-                ],
-              },
+              name: "",
             },
             {
               classId: "1108",
               subject: "BIOL",
               numCreditsMin: 1,
               numCreditsMax: 1,
-              coreqs: {
-                type: "and",
-                values: [
-                  {
-                    classId: "1107",
-                    subject: "BIOL",
-                  },
-                ],
-              },
+              name: "",
             },
             {
               classId: "1211",
               subject: "CHEM",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "General Chemistry 1",
               coreqs: {
                 type: "and",
                 values: [
                   {
-                    classId: "1212",
                     subject: "CHEM",
+                    classId: "1212",
                   },
                   {
-                    classId: "1213",
                     subject: "CHEM",
+                    classId: "1213",
                   },
                 ],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
               },
             },
             {
@@ -2072,18 +2373,23 @@ export const bioChemPlans: Schedule[] = [
               subject: "CHEM",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              name: "Lab for CHEM 1211",
               coreqs: {
                 type: "and",
                 values: [
                   {
-                    classId: "1211",
                     subject: "CHEM",
+                    classId: "1211",
                   },
                   {
-                    classId: "1213",
                     subject: "CHEM",
+                    classId: "1213",
                   },
                 ],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
               },
             },
             {
@@ -2091,18 +2397,23 @@ export const bioChemPlans: Schedule[] = [
               subject: "CHEM",
               numCreditsMin: 0,
               numCreditsMax: 0,
+              name: "Recitation for CHEM 1211",
               coreqs: {
                 type: "and",
                 values: [
                   {
-                    classId: "1211",
                     subject: "CHEM",
+                    classId: "1211",
                   },
                   {
-                    classId: "1212",
                     subject: "CHEM",
+                    classId: "1212",
                   },
                 ],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
               },
             },
             {
@@ -2110,18 +2421,29 @@ export const bioChemPlans: Schedule[] = [
               subject: "MATH",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Calculus and Differential Equations for Biology 1",
+              coreqs: {
+                type: "and",
+                values: [],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
+              },
             },
             {
               classId: "9999",
-              subject: "Elective",
+              subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Elective 1",
             },
             {
               classId: "1000",
               subject: "BIOC",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              name: "",
             },
           ],
           status: "CLASSES",
@@ -2137,6 +2459,11 @@ export const bioChemPlans: Schedule[] = [
               subject: "BIOL",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Inquiries in Biological Sciences",
+              coreqs: {
+                type: "and",
+                values: [],
+              },
               prereqs: {
                 type: "or",
                 values: [
@@ -2148,6 +2475,7 @@ export const bioChemPlans: Schedule[] = [
                   {
                     classId: "1107",
                     subject: "BIOL",
+                    missing: true,
                   },
                   {
                     classId: "1111",
@@ -2161,16 +2489,17 @@ export const bioChemPlans: Schedule[] = [
               subject: "CHEM",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "General Chemistry 2 (HON)",
               coreqs: {
                 type: "and",
                 values: [
                   {
-                    classId: "1215",
                     subject: "CHEM",
+                    classId: "1215",
                   },
                   {
-                    classId: "1216",
                     subject: "CHEM",
+                    classId: "1216",
                   },
                 ],
               },
@@ -2189,18 +2518,23 @@ export const bioChemPlans: Schedule[] = [
               subject: "CHEM",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              name: "Lab for CHEM 1214",
               coreqs: {
                 type: "and",
                 values: [
                   {
-                    classId: "1214",
                     subject: "CHEM",
+                    classId: "1214",
                   },
                   {
-                    classId: "1216",
                     subject: "CHEM",
+                    classId: "1216",
                   },
                 ],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
               },
             },
             {
@@ -2208,18 +2542,23 @@ export const bioChemPlans: Schedule[] = [
               subject: "CHEM",
               numCreditsMin: 0,
               numCreditsMax: 0,
+              name: "Recitation for CHEM 1214",
               coreqs: {
                 type: "and",
                 values: [
                   {
-                    classId: "1214",
                     subject: "CHEM",
+                    classId: "1214",
                   },
                   {
-                    classId: "1215",
                     subject: "CHEM",
+                    classId: "1215",
                   },
                 ],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
               },
             },
             {
@@ -2227,6 +2566,11 @@ export const bioChemPlans: Schedule[] = [
               subject: "MATH",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Calc & Diff Eq -Biol 2 (HON)",
+              coreqs: {
+                type: "and",
+                values: [],
+              },
               prereqs: {
                 type: "and",
                 values: [
@@ -2242,6 +2586,15 @@ export const bioChemPlans: Schedule[] = [
               subject: "ENGW",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "First-Year Writing",
+              coreqs: {
+                type: "and",
+                values: [],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
+              },
             },
           ],
           status: "CLASSES",
@@ -2257,6 +2610,11 @@ export const bioChemPlans: Schedule[] = [
               subject: "BIOL",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Genetics and Molecular Biology",
+              coreqs: {
+                type: "and",
+                values: [],
+              },
               prereqs: {
                 type: "and",
                 values: [
@@ -2288,6 +2646,7 @@ export const bioChemPlans: Schedule[] = [
                       {
                         classId: "2290",
                         subject: "EEMB",
+                        missing: true,
                       },
                       {
                         classId: "2400",
@@ -2296,6 +2655,10 @@ export const bioChemPlans: Schedule[] = [
                       },
                       {
                         classId: "2400",
+                        subject: "EEMB",
+                      },
+                      {
+                        classId: "1105",
                         subject: "EEMB",
                       },
                     ],
@@ -2310,6 +2673,7 @@ export const bioChemPlans: Schedule[] = [
                       {
                         classId: "1217",
                         subject: "CHEM",
+                        missing: true,
                       },
                       {
                         classId: "1151",
@@ -2329,6 +2693,11 @@ export const bioChemPlans: Schedule[] = [
               subject: "BIOL",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              name: "Lab for BIOL 2301",
+              coreqs: {
+                type: "and",
+                values: [],
+              },
               prereqs: {
                 type: "and",
                 values: [
@@ -2341,9 +2710,10 @@ export const bioChemPlans: Schedule[] = [
             },
             {
               classId: "9999",
-              subject: "Elective",
+              subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Elective 2",
             },
           ],
           status: "CLASSES",
@@ -2371,6 +2741,11 @@ export const bioChemPlans: Schedule[] = [
               subject: "BIOL",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Biology Project Lab",
+              coreqs: {
+                type: "and",
+                values: [],
+              },
               prereqs: {
                 type: "and",
                 values: [
@@ -2386,12 +2761,13 @@ export const bioChemPlans: Schedule[] = [
               subject: "CHEM",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Organic Chemistry 1",
               coreqs: {
                 type: "and",
                 values: [
                   {
-                    classId: "2312",
                     subject: "CHEM",
+                    classId: "2312",
                   },
                 ],
               },
@@ -2409,6 +2785,7 @@ export const bioChemPlans: Schedule[] = [
                   {
                     classId: "1220",
                     subject: "CHEM",
+                    missing: true,
                   },
                   {
                     classId: "1161",
@@ -2422,14 +2799,19 @@ export const bioChemPlans: Schedule[] = [
               subject: "CHEM",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              name: "Lab for CHEM 2311",
               coreqs: {
                 type: "and",
                 values: [
                   {
-                    classId: "2311",
                     subject: "CHEM",
+                    classId: "2311",
                   },
                 ],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
               },
             },
             {
@@ -2437,6 +2819,11 @@ export const bioChemPlans: Schedule[] = [
               subject: "PHYS",
               numCreditsMin: 3,
               numCreditsMax: 3,
+              name: "Physics for Engineering 1",
+              coreqs: {
+                type: "and",
+                values: [],
+              },
               prereqs: {
                 type: "or",
                 values: [
@@ -2472,18 +2859,37 @@ export const bioChemPlans: Schedule[] = [
               subject: "PHYS",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              name: "Lab for PHYS 1151 (HON)",
+              coreqs: {
+                type: "and",
+                values: [],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
+              },
             },
             {
               classId: "1153",
               subject: "PHYS",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              name: "Interactive Learning Seminar for PHYS 1151",
+              coreqs: {
+                type: "and",
+                values: [],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
+              },
             },
             {
               classId: "9999",
-              subject: "Elective",
+              subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Elective 3",
             },
           ],
           status: "CLASSES",
@@ -2499,12 +2905,13 @@ export const bioChemPlans: Schedule[] = [
               subject: "CHEM",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Organic Chemistry 2",
               coreqs: {
                 type: "and",
                 values: [
                   {
-                    classId: "2314",
                     subject: "CHEM",
+                    classId: "2314",
                   },
                 ],
               },
@@ -2527,14 +2934,19 @@ export const bioChemPlans: Schedule[] = [
               subject: "CHEM",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              name: "Lab for CHEM 2313",
               coreqs: {
                 type: "and",
                 values: [
                   {
-                    classId: "2313",
                     subject: "CHEM",
+                    classId: "2313",
                   },
                 ],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
               },
             },
             {
@@ -2542,12 +2954,13 @@ export const bioChemPlans: Schedule[] = [
               subject: "PHYS",
               numCreditsMin: 3,
               numCreditsMax: 3,
+              name: "Physics for Engineering 2",
               coreqs: {
                 type: "and",
                 values: [
                   {
-                    classId: "1157",
                     subject: "PHYS",
+                    classId: "1157",
                   },
                 ],
               },
@@ -2564,6 +2977,7 @@ export const bioChemPlans: Schedule[] = [
                       {
                         classId: "1161",
                         subject: "PHYS",
+                        missing: true,
                       },
                       {
                         classId: "1171",
@@ -2596,39 +3010,64 @@ export const bioChemPlans: Schedule[] = [
               subject: "PHYS",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              name: "Lab for PHYS 1155",
+              coreqs: {
+                type: "and",
+                values: [],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
+              },
             },
             {
               classId: "1157",
               subject: "PHYS",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              name: "Interactive Learning Seminar for PHYS 1155",
               coreqs: {
                 type: "and",
                 values: [
                   {
-                    classId: "1155",
                     subject: "PHYS",
+                    classId: "1155",
                   },
                 ],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
               },
             },
             {
               classId: "9999",
-              subject: "Elective",
+              subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Elective 4",
             },
             {
               classId: "9999",
-              subject: "Elective",
+              subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Elective 5",
             },
             {
               classId: "2000",
               subject: "EESC",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              name: "Professional Development for Co-op",
+              coreqs: {
+                type: "and",
+                values: [],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
+              },
             },
           ],
           status: "CLASSES",
@@ -2644,12 +3083,13 @@ export const bioChemPlans: Schedule[] = [
               subject: "BIOL",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Biochemistry",
               coreqs: {
                 type: "and",
                 values: [
                   {
-                    classId: "3612",
                     subject: "BIOL",
+                    classId: "3612",
                   },
                 ],
               },
@@ -2704,21 +3144,27 @@ export const bioChemPlans: Schedule[] = [
               subject: "BIOL",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              name: "Lab for BIOL 3611",
               coreqs: {
                 type: "and",
                 values: [
                   {
-                    classId: "3611",
                     subject: "BIOL",
+                    classId: "3611",
                   },
                 ],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
               },
             },
             {
               classId: "9999",
-              subject: "Elective",
+              subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Elective 6",
             },
           ],
           status: "CLASSES",
@@ -2754,6 +3200,11 @@ export const bioChemPlans: Schedule[] = [
               subject: "BIOL",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Cell and Molecular Biology",
+              coreqs: {
+                type: "and",
+                values: [],
+              },
               prereqs: {
                 type: "or",
                 values: [
@@ -2774,12 +3225,13 @@ export const bioChemPlans: Schedule[] = [
               subject: "CHEM",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Physical Chemistry",
               coreqs: {
                 type: "and",
                 values: [
                   {
-                    classId: "3432",
                     subject: "CHEM",
+                    classId: "3432",
                   },
                 ],
               },
@@ -2787,14 +3239,23 @@ export const bioChemPlans: Schedule[] = [
                 type: "and",
                 values: [
                   {
+                    classId: "1214",
+                    subject: "CHEM",
+                  },
+                  {
+                    classId: "1220",
+                    subject: "CHEM",
+                    missing: true,
+                  },
+                  {
                     type: "or",
                     values: [
                       {
-                        classId: "1214",
+                        classId: "1151",
                         subject: "CHEM",
                       },
                       {
-                        classId: "1220",
+                        classId: "1161",
                         subject: "CHEM",
                       },
                     ],
@@ -2803,11 +3264,11 @@ export const bioChemPlans: Schedule[] = [
                     type: "or",
                     values: [
                       {
-                        classId: "1342",
+                        classId: "1252",
                         subject: "MATH",
                       },
                       {
-                        classId: "1252",
+                        classId: "1342",
                         subject: "MATH",
                       },
                     ],
@@ -2830,6 +3291,7 @@ export const bioChemPlans: Schedule[] = [
                       {
                         classId: "1175",
                         subject: "PHYS",
+                        missing: true,
                       },
                     ],
                   },
@@ -2841,14 +3303,19 @@ export const bioChemPlans: Schedule[] = [
               subject: "CHEM",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              name: "Lab for CHEM 3431",
               coreqs: {
                 type: "and",
                 values: [
                   {
-                    classId: "3431",
                     subject: "CHEM",
+                    classId: "3431",
                   },
                 ],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
               },
             },
             {
@@ -2856,6 +3323,11 @@ export const bioChemPlans: Schedule[] = [
               subject: "ENGW",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Advanced Writing in the Sciences",
+              coreqs: {
+                type: "and",
+                values: [],
+              },
               prereqs: {
                 type: "or",
                 values: [
@@ -2882,9 +3354,10 @@ export const bioChemPlans: Schedule[] = [
             },
             {
               classId: "9999",
-              subject: "Elective",
+              subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Elective 7",
             },
           ],
           status: "CLASSES",
@@ -2928,37 +3401,28 @@ export const bioChemPlans: Schedule[] = [
               subject: "CHEM",
               numCreditsMin: 4,
               numCreditsMax: 4,
-              prereqs: {
-                type: "or",
-                values: [
-                  {
-                    classId: "2313",
-                    subject: "CHEM",
-                  },
-                  {
-                    classId: "2317",
-                    subject: "CHEM",
-                  },
-                ],
-              },
+              name: "",
             },
             {
               classId: "9999",
-              subject: "Elective",
+              subject: "XXXX",
               numCreditsMin: 5,
               numCreditsMax: 5,
+              name: "BIOL or CHEM advanced elective",
             },
             {
               classId: "9999",
-              subject: "Elective",
+              subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Elective 8",
             },
             {
               classId: "9999",
-              subject: "Elective",
+              subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Elective 9",
             },
           ],
           status: "CLASSES",
@@ -2999,27 +3463,31 @@ export const bioChemPlans: Schedule[] = [
           classes: [
             {
               classId: "9999",
-              subject: "Elective",
+              subject: "XXXX",
               numCreditsMin: 5,
               numCreditsMax: 5,
+              name: "BIOL or CHEM advanced elective",
             },
             {
               classId: "9999",
-              subject: "Elective",
+              subject: "XXXX",
               numCreditsMin: 5,
               numCreditsMax: 5,
+              name: "BIOL or CHEM advanced elective",
             },
             {
               classId: "9999",
-              subject: "CHEM 4750 or BIOL4701",
+              subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "CHEM 4750 or BIOL4701",
             },
             {
               classId: "9999",
-              subject: "Elective",
+              subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Elective 10",
             },
           ],
           status: "CLASSES",
@@ -3061,48 +3529,37 @@ export const bioChemPlans: Schedule[] = [
               subject: "BIOL",
               numCreditsMin: 4,
               numCreditsMax: 4,
-              coreqs: {
-                type: "and",
-                values: [
-                  {
-                    classId: "1108",
-                    subject: "BIOL",
-                  },
-                ],
-              },
+              name: "",
             },
             {
               classId: "1108",
               subject: "BIOL",
               numCreditsMin: 1,
               numCreditsMax: 1,
-              coreqs: {
-                type: "and",
-                values: [
-                  {
-                    classId: "1107",
-                    subject: "BIOL",
-                  },
-                ],
-              },
+              name: "",
             },
             {
               classId: "1211",
               subject: "CHEM",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "General Chemistry 1",
               coreqs: {
                 type: "and",
                 values: [
                   {
-                    classId: "1212",
                     subject: "CHEM",
+                    classId: "1212",
                   },
                   {
-                    classId: "1213",
                     subject: "CHEM",
+                    classId: "1213",
                   },
                 ],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
               },
             },
             {
@@ -3110,18 +3567,23 @@ export const bioChemPlans: Schedule[] = [
               subject: "CHEM",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              name: "Lab for CHEM 1211",
               coreqs: {
                 type: "and",
                 values: [
                   {
-                    classId: "1211",
                     subject: "CHEM",
+                    classId: "1211",
                   },
                   {
-                    classId: "1213",
                     subject: "CHEM",
+                    classId: "1213",
                   },
                 ],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
               },
             },
             {
@@ -3129,18 +3591,23 @@ export const bioChemPlans: Schedule[] = [
               subject: "CHEM",
               numCreditsMin: 0,
               numCreditsMax: 0,
+              name: "Recitation for CHEM 1211",
               coreqs: {
                 type: "and",
                 values: [
                   {
-                    classId: "1211",
                     subject: "CHEM",
+                    classId: "1211",
                   },
                   {
-                    classId: "1212",
                     subject: "CHEM",
+                    classId: "1212",
                   },
                 ],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
               },
             },
             {
@@ -3148,18 +3615,29 @@ export const bioChemPlans: Schedule[] = [
               subject: "MATH",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Calculus and Differential Equations for Biology 1",
+              coreqs: {
+                type: "and",
+                values: [],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
+              },
             },
             {
               classId: "9999",
-              subject: "Elective",
+              subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Elective 1",
             },
             {
               classId: "1000",
               subject: "BIOC",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              name: "",
             },
           ],
           status: "CLASSES",
@@ -3175,6 +3653,11 @@ export const bioChemPlans: Schedule[] = [
               subject: "BIOL",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Inquiries in Biological Sciences",
+              coreqs: {
+                type: "and",
+                values: [],
+              },
               prereqs: {
                 type: "or",
                 values: [
@@ -3186,6 +3669,7 @@ export const bioChemPlans: Schedule[] = [
                   {
                     classId: "1107",
                     subject: "BIOL",
+                    missing: true,
                   },
                   {
                     classId: "1111",
@@ -3199,16 +3683,17 @@ export const bioChemPlans: Schedule[] = [
               subject: "CHEM",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "General Chemistry 2 (HON)",
               coreqs: {
                 type: "and",
                 values: [
                   {
-                    classId: "1215",
                     subject: "CHEM",
+                    classId: "1215",
                   },
                   {
-                    classId: "1216",
                     subject: "CHEM",
+                    classId: "1216",
                   },
                 ],
               },
@@ -3227,18 +3712,23 @@ export const bioChemPlans: Schedule[] = [
               subject: "CHEM",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              name: "Lab for CHEM 1214",
               coreqs: {
                 type: "and",
                 values: [
                   {
-                    classId: "1214",
                     subject: "CHEM",
+                    classId: "1214",
                   },
                   {
-                    classId: "1216",
                     subject: "CHEM",
+                    classId: "1216",
                   },
                 ],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
               },
             },
             {
@@ -3246,18 +3736,23 @@ export const bioChemPlans: Schedule[] = [
               subject: "CHEM",
               numCreditsMin: 0,
               numCreditsMax: 0,
+              name: "Recitation for CHEM 1214",
               coreqs: {
                 type: "and",
                 values: [
                   {
-                    classId: "1214",
                     subject: "CHEM",
+                    classId: "1214",
                   },
                   {
-                    classId: "1215",
                     subject: "CHEM",
+                    classId: "1215",
                   },
                 ],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
               },
             },
             {
@@ -3265,6 +3760,11 @@ export const bioChemPlans: Schedule[] = [
               subject: "MATH",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Calc & Diff Eq -Biol 2 (HON)",
+              coreqs: {
+                type: "and",
+                values: [],
+              },
               prereqs: {
                 type: "and",
                 values: [
@@ -3280,6 +3780,15 @@ export const bioChemPlans: Schedule[] = [
               subject: "ENGW",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "First-Year Writing",
+              coreqs: {
+                type: "and",
+                values: [],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
+              },
             },
           ],
           status: "CLASSES",
@@ -3295,6 +3804,11 @@ export const bioChemPlans: Schedule[] = [
               subject: "BIOL",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Genetics and Molecular Biology",
+              coreqs: {
+                type: "and",
+                values: [],
+              },
               prereqs: {
                 type: "and",
                 values: [
@@ -3326,6 +3840,7 @@ export const bioChemPlans: Schedule[] = [
                       {
                         classId: "2290",
                         subject: "EEMB",
+                        missing: true,
                       },
                       {
                         classId: "2400",
@@ -3334,6 +3849,10 @@ export const bioChemPlans: Schedule[] = [
                       },
                       {
                         classId: "2400",
+                        subject: "EEMB",
+                      },
+                      {
+                        classId: "1105",
                         subject: "EEMB",
                       },
                     ],
@@ -3348,6 +3867,7 @@ export const bioChemPlans: Schedule[] = [
                       {
                         classId: "1217",
                         subject: "CHEM",
+                        missing: true,
                       },
                       {
                         classId: "1151",
@@ -3367,6 +3887,11 @@ export const bioChemPlans: Schedule[] = [
               subject: "BIOL",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              name: "Lab for BIOL 2301",
+              coreqs: {
+                type: "and",
+                values: [],
+              },
               prereqs: {
                 type: "and",
                 values: [
@@ -3379,9 +3904,10 @@ export const bioChemPlans: Schedule[] = [
             },
             {
               classId: "9999",
-              subject: "Elective",
+              subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Elective 2",
             },
           ],
           status: "CLASSES",
@@ -3409,6 +3935,11 @@ export const bioChemPlans: Schedule[] = [
               subject: "BIOL",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Biology Project Lab",
+              coreqs: {
+                type: "and",
+                values: [],
+              },
               prereqs: {
                 type: "and",
                 values: [
@@ -3424,12 +3955,13 @@ export const bioChemPlans: Schedule[] = [
               subject: "CHEM",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Organic Chemistry 1",
               coreqs: {
                 type: "and",
                 values: [
                   {
-                    classId: "2312",
                     subject: "CHEM",
+                    classId: "2312",
                   },
                 ],
               },
@@ -3447,6 +3979,7 @@ export const bioChemPlans: Schedule[] = [
                   {
                     classId: "1220",
                     subject: "CHEM",
+                    missing: true,
                   },
                   {
                     classId: "1161",
@@ -3460,14 +3993,19 @@ export const bioChemPlans: Schedule[] = [
               subject: "CHEM",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              name: "Lab for CHEM 2311",
               coreqs: {
                 type: "and",
                 values: [
                   {
-                    classId: "2311",
                     subject: "CHEM",
+                    classId: "2311",
                   },
                 ],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
               },
             },
             {
@@ -3475,6 +4013,11 @@ export const bioChemPlans: Schedule[] = [
               subject: "PHYS",
               numCreditsMin: 3,
               numCreditsMax: 3,
+              name: "Physics for Engineering 1",
+              coreqs: {
+                type: "and",
+                values: [],
+              },
               prereqs: {
                 type: "or",
                 values: [
@@ -3510,24 +4053,52 @@ export const bioChemPlans: Schedule[] = [
               subject: "PHYS",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              name: "Lab for PHYS 1151 (HON)",
+              coreqs: {
+                type: "and",
+                values: [],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
+              },
             },
             {
               classId: "1153",
               subject: "PHYS",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              name: "Interactive Learning Seminar for PHYS 1151",
+              coreqs: {
+                type: "and",
+                values: [],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
+              },
             },
             {
               classId: "9999",
-              subject: "Elective",
+              subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Elective 3",
             },
             {
               classId: "2000",
               subject: "EESC",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              name: "Professional Development for Co-op",
+              coreqs: {
+                type: "and",
+                values: [],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
+              },
             },
           ],
           status: "CLASSES",
@@ -3559,12 +4130,13 @@ export const bioChemPlans: Schedule[] = [
               subject: "CHEM",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Organic Chemistry 2",
               coreqs: {
                 type: "and",
                 values: [
                   {
-                    classId: "2314",
                     subject: "CHEM",
+                    classId: "2314",
                   },
                 ],
               },
@@ -3587,21 +4159,27 @@ export const bioChemPlans: Schedule[] = [
               subject: "CHEM",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              name: "Lab for CHEM 2313",
               coreqs: {
                 type: "and",
                 values: [
                   {
-                    classId: "2313",
                     subject: "CHEM",
+                    classId: "2313",
                   },
                 ],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
               },
             },
             {
               classId: "9999",
-              subject: "Elective",
+              subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Elective 4",
             },
           ],
           status: "CLASSES",
@@ -3621,12 +4199,13 @@ export const bioChemPlans: Schedule[] = [
               subject: "BIOL",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Biochemistry",
               coreqs: {
                 type: "and",
                 values: [
                   {
-                    classId: "3612",
                     subject: "BIOL",
+                    classId: "3612",
                   },
                 ],
               },
@@ -3681,14 +4260,19 @@ export const bioChemPlans: Schedule[] = [
               subject: "BIOL",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              name: "Lab for BIOL 3611",
               coreqs: {
                 type: "and",
                 values: [
                   {
-                    classId: "3611",
                     subject: "BIOL",
+                    classId: "3611",
                   },
                 ],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
               },
             },
             {
@@ -3696,12 +4280,13 @@ export const bioChemPlans: Schedule[] = [
               subject: "PHYS",
               numCreditsMin: 3,
               numCreditsMax: 3,
+              name: "Physics for Engineering 2",
               coreqs: {
                 type: "and",
                 values: [
                   {
-                    classId: "1157",
                     subject: "PHYS",
+                    classId: "1157",
                   },
                 ],
               },
@@ -3718,6 +4303,7 @@ export const bioChemPlans: Schedule[] = [
                       {
                         classId: "1161",
                         subject: "PHYS",
+                        missing: true,
                       },
                       {
                         classId: "1171",
@@ -3750,20 +4336,34 @@ export const bioChemPlans: Schedule[] = [
               subject: "PHYS",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              name: "Lab for PHYS 1155",
+              coreqs: {
+                type: "and",
+                values: [],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
+              },
             },
             {
               classId: "1157",
               subject: "PHYS",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              name: "Interactive Learning Seminar for PHYS 1155",
               coreqs: {
                 type: "and",
                 values: [
                   {
-                    classId: "1155",
                     subject: "PHYS",
+                    classId: "1155",
                   },
                 ],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
               },
             },
             {
@@ -3771,6 +4371,11 @@ export const bioChemPlans: Schedule[] = [
               subject: "ENGW",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Advanced Writing in the Sciences",
+              coreqs: {
+                type: "and",
+                values: [],
+              },
               prereqs: {
                 type: "or",
                 values: [
@@ -3797,9 +4402,10 @@ export const bioChemPlans: Schedule[] = [
             },
             {
               classId: "9999",
-              subject: "Elective",
+              subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Elective 5",
             },
           ],
           status: "CLASSES",
@@ -3843,6 +4449,11 @@ export const bioChemPlans: Schedule[] = [
               subject: "BIOL",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Cell and Molecular Biology",
+              coreqs: {
+                type: "and",
+                values: [],
+              },
               prereqs: {
                 type: "or",
                 values: [
@@ -3863,12 +4474,13 @@ export const bioChemPlans: Schedule[] = [
               subject: "CHEM",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Physical Chemistry",
               coreqs: {
                 type: "and",
                 values: [
                   {
-                    classId: "3432",
                     subject: "CHEM",
+                    classId: "3432",
                   },
                 ],
               },
@@ -3876,14 +4488,23 @@ export const bioChemPlans: Schedule[] = [
                 type: "and",
                 values: [
                   {
+                    classId: "1214",
+                    subject: "CHEM",
+                  },
+                  {
+                    classId: "1220",
+                    subject: "CHEM",
+                    missing: true,
+                  },
+                  {
                     type: "or",
                     values: [
                       {
-                        classId: "1214",
+                        classId: "1151",
                         subject: "CHEM",
                       },
                       {
-                        classId: "1220",
+                        classId: "1161",
                         subject: "CHEM",
                       },
                     ],
@@ -3892,11 +4513,11 @@ export const bioChemPlans: Schedule[] = [
                     type: "or",
                     values: [
                       {
-                        classId: "1342",
+                        classId: "1252",
                         subject: "MATH",
                       },
                       {
-                        classId: "1252",
+                        classId: "1342",
                         subject: "MATH",
                       },
                     ],
@@ -3919,6 +4540,7 @@ export const bioChemPlans: Schedule[] = [
                       {
                         classId: "1175",
                         subject: "PHYS",
+                        missing: true,
                       },
                     ],
                   },
@@ -3930,14 +4552,19 @@ export const bioChemPlans: Schedule[] = [
               subject: "CHEM",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              name: "Lab for CHEM 3431",
               coreqs: {
                 type: "and",
                 values: [
                   {
-                    classId: "3431",
                     subject: "CHEM",
+                    classId: "3431",
                   },
                 ],
+              },
+              prereqs: {
+                type: "and",
+                values: [],
               },
             },
             {
@@ -3945,25 +4572,14 @@ export const bioChemPlans: Schedule[] = [
               subject: "CHEM",
               numCreditsMin: 4,
               numCreditsMax: 4,
-              prereqs: {
-                type: "or",
-                values: [
-                  {
-                    classId: "2313",
-                    subject: "CHEM",
-                  },
-                  {
-                    classId: "2317",
-                    subject: "CHEM",
-                  },
-                ],
-              },
+              name: "",
             },
             {
               classId: "9999",
-              subject: "Elective",
+              subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Elective 6",
             },
           ],
           status: "CLASSES",
@@ -4004,27 +4620,31 @@ export const bioChemPlans: Schedule[] = [
           classes: [
             {
               classId: "9999",
-              subject: "Elective",
+              subject: "XXXX",
               numCreditsMin: 5,
               numCreditsMax: 5,
+              name: "BIOL or CHEM advanced elective",
             },
             {
               classId: "9999",
-              subject: "Elective",
+              subject: "XXXX",
               numCreditsMin: 5,
               numCreditsMax: 5,
+              name: "BIOL or CHEM advanced elective",
             },
             {
               classId: "9999",
-              subject: "Elective",
+              subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Elective 7",
             },
             {
               classId: "9999",
-              subject: "Elective",
+              subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Elective 8",
             },
           ],
           status: "CLASSES",
@@ -4037,27 +4657,31 @@ export const bioChemPlans: Schedule[] = [
           classes: [
             {
               classId: "9999",
-              subject: "Elective",
+              subject: "XXXX",
               numCreditsMin: 5,
               numCreditsMax: 5,
+              name: "BIOL or CHEM advanced elective",
             },
             {
               classId: "9999",
-              subject: "CHEM 4750 or BIOL4701",
+              subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "CHEM 4750 or BIOL4701",
             },
             {
               classId: "9999",
-              subject: "Elective",
+              subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Elective 9",
             },
             {
               classId: "9999",
-              subject: "Elective",
+              subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              name: "Elective 10",
             },
           ],
           status: "CLASSES",

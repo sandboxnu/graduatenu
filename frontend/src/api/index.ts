@@ -1,9 +1,9 @@
-import { NamedScheduleCourse } from "../models/types";
+import { ScheduleCourse } from "../models/types";
 
 export const fetchCourse = async (
   subject: string,
   classId: string
-): Promise<NamedScheduleCourse | null> => {
+): Promise<ScheduleCourse | null> => {
   if (subject.length < 2 || classId.length !== 4 || isNaN(+classId)) {
     return null;
   }
@@ -12,7 +12,7 @@ export const fetchCourse = async (
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      query: `{ class(subject: \"${subject}\", classId: ${classId}) {
+      query: `{ class(subject: "${subject}", classId: ${classId}) {
           name
           subject
           classId

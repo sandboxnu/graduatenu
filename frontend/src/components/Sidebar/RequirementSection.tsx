@@ -10,6 +10,7 @@ import {
 import styled from "styled-components";
 import CheckIcon from "@material-ui/icons/Check";
 import ClearIcon from "@material-ui/icons/Clear";
+import { styled as materialStyled } from "@material-ui/styles";
 
 const TitleWrapper = styled.div`
   display: flex;
@@ -51,6 +52,10 @@ const ANDORText = styled.p`
   font-size: 11px;
   margin: 4px;
 `;
+
+const MyCheckIcon = materialStyled(CheckIcon)({
+  color: "green",
+});
 
 interface RequirementSectionProps {
   title: string;
@@ -152,9 +157,9 @@ export class RequirementSection extends React.Component<
         {!!title && (
           <TitleWrapper>
             {!!warning ? (
-              <ClearIcon color="action" fontSize="small"></ClearIcon>
+              <ClearIcon color="error" fontSize="small"></ClearIcon>
             ) : (
-              <CheckIcon color="action" fontSize="small"></CheckIcon>
+              <MyCheckIcon fontSize="small"></MyCheckIcon>
             )}
             <TitleText>{title}</TitleText>
           </TitleWrapper>
