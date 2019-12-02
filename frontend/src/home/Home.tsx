@@ -382,7 +382,6 @@ class HomeComponent extends React.Component<HomeProps, HomeState> {
             handleSubmit={this.setSchedule.bind(this)}
             major={this.state.major!}
           ></ChooseMajorPlanModal>
-          {/* {this.renderWarnings()} */}
           <Container>
             <div onClick={() => console.log(this.state)}>
               <h2>Plan Of Study</h2>

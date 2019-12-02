@@ -5,7 +5,7 @@ import { Home } from "./Home";
 export const HomeWrapper: React.FC = () => {
   return (
     <ToastProvider placement="bottom-right">
-      <Home></Home>
+      <Home />
     </ToastProvider>
   );
 };
