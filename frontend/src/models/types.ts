@@ -314,6 +314,15 @@ export interface IWarning {
   termId: number;
 }
 
+export interface PrereqCoreqWarning {
+  message: string;
+  termId: number;
+  year: number;
+  season: Season;
+  subject: string;
+  classId: string;
+}
+
 /**
  * An Unsatisfied Major Requirement Group.
  */
