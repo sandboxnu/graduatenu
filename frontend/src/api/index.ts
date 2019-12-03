@@ -12,21 +12,36 @@ export const fetchCourse = async (
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      query: `{ class(subject: "${subject}", classId: ${classId}) {
-          name
-          subject
-          classId
+      query: `{ 
+        class(subject: "${subject}", classId: ${classId}) {
+          latestOccurrence {
+            name
+            subject
+            classId
+            maxCredits
+            minCredits
+            prereqs
+            coreqs
+          }
         }
       }`,
     }),
   });
-  const json = (await response.json()).data.class;
+  const json = await response.json();
 
-  if (json == null) {
+  if (
+    json &&
+    json.data &&
+    json.data.class &&
+    json.data.class.latestOccurrence
+  ) {
+    const course: ScheduleCourse = json.data.class.latestOccurrence;
+    course.numCreditsMax = json.data.class.latestOccurrence.maxCredits;
+    course.numCreditsMin = json.data.class.latestOccurrence.minCredits;
+    delete json.data.class.latestOccurrence.maxCredits;
+    delete json.data.class.latestOccurrence.minCredits;
+    return course;
+  } else {
     return null;
   }
-
-  json.numCreditsMin = 4;
-  json.numCreditsMax = 4;
-  return json;
 };
