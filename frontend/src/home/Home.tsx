@@ -22,6 +22,7 @@ import { majors } from "../majors";
 import { ChooseMajorPlanModal } from "../components/ChooseMajorPlanModal";
 import { CLASS_BLOCK_WIDTH } from "../constants";
 import { DropDownModal } from "../components/DropDownModal";
+import { Sidebar } from "../components/Sidebar/Sidebar";
 import { produceWarnings } from "../utils/generate-warnings";
 import { withToast } from "./toastHook";
 import { AppearanceTypes } from "react-toast-notifications";
@@ -35,7 +36,6 @@ const OuterContainer = styled.div`
 
 const CompletedCoursesWrapper = styled.div`
   display: flex;
-  flex: 1;
   flex-direction: column;
   justify-content: start;
   width: ${CLASS_BLOCK_WIDTH * 4 + 25}px;
@@ -405,6 +405,10 @@ class HomeComponent extends React.Component<HomeProps, HomeState> {
             {this.renderYears()}
           </Container>
         </DragDropContext>
+        <Sidebar
+          schedule={this.state.schedule}
+          major={this.state.major}
+        ></Sidebar>
       </OuterContainer>
     );
   }
