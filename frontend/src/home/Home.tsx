@@ -346,7 +346,10 @@ class HomeComponent extends React.Component<HomeProps, HomeState> {
 
   async setSchedule(schedule: Schedule) {
     const dndSchedule = await this.convertToDNDSchedule(schedule);
-    this.setState({ schedule: dndSchedule });
+    const newState: HomeState = { ...this.state, schedule: dndSchedule };
+    this.setState(newState, () => {
+      this.updateWarnings(newState);
+    });
   }
 
   hideChooseMajorPlanModal() {
