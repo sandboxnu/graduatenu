@@ -2,6 +2,7 @@ import * as React from "react";
 import styled from "styled-components";
 import { DNDSchedule } from "../models/types";
 import ExpandMoreOutlinedIcon from "@material-ui/icons/ExpandMoreOutlined";
+import ExpandLessOutlinedIcon from "@material-ui/icons/ExpandLessOutlined";
 
 const Wrapper = styled.div`
   display: flex;
@@ -53,7 +54,11 @@ export class DropDownModal extends React.Component<
           <p>4 courses</p>
           <p>16 credits</p>
           <p>Freshman Standing</p>
-          <ExpandMoreOutlinedIcon></ExpandMoreOutlinedIcon>
+          {this.state.expanded ? (
+            <ExpandLessOutlinedIcon />
+          ) : (
+            <ExpandMoreOutlinedIcon />
+          )}
         </TopInfo>
         {this.state.expanded && <BottomInfo></BottomInfo>}
       </Wrapper>

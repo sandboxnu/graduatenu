@@ -11,6 +11,15 @@ import styled from "styled-components";
 import CheckIcon from "@material-ui/icons/Check";
 import ClearIcon from "@material-ui/icons/Clear";
 import { styled as materialStyled } from "@material-ui/styles";
+import ExpandMoreOutlinedIcon from "@material-ui/icons/ExpandMoreOutlined";
+import ExpandLessOutlinedIcon from "@material-ui/icons/ExpandLessOutlined";
+
+const SectionHeaderWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
 
 const TitleWrapper = styled.div`
   display: flex;
@@ -63,9 +72,22 @@ interface RequirementSectionProps {
   warning?: IRequirementGroupWarning;
 }
 
+interface RequirementSectionState {
+  expanded: boolean;
+}
+
 export class RequirementSection extends React.Component<
-  RequirementSectionProps
+  RequirementSectionProps,
+  RequirementSectionState
 > {
+  constructor(props: RequirementSectionProps) {
+    super(props);
+
+    this.state = {
+      expanded: true,
+    };
+  }
+
   parseRequirements(reqs: Requirement[]) {
     return reqs.map(r => this.renderRequirement(r));
   }
@@ -149,27 +171,44 @@ export class RequirementSection extends React.Component<
     return type;
   }
 
+  expandSection() {
+    this.setState({
+      expanded: !this.state.expanded,
+    });
+  }
+
   render() {
     const { title, contents, warning } = this.props;
 
     return (
       <div>
         {!!title && (
-          <TitleWrapper>
-            {!!warning ? (
-              <ClearIcon color="error" fontSize="small"></ClearIcon>
+          <SectionHeaderWrapper>
+            <TitleWrapper onClick={this.expandSection.bind(this)}>
+              {!!warning ? (
+                <ClearIcon color="error" fontSize="small"></ClearIcon>
+              ) : (
+                <MyCheckIcon fontSize="small"></MyCheckIcon>
+              )}
+              <TitleText>{title}</TitleText>
+            </TitleWrapper>
+            {this.state.expanded ? (
+              <ExpandLessOutlinedIcon />
             ) : (
-              <MyCheckIcon fontSize="small"></MyCheckIcon>
+              <ExpandMoreOutlinedIcon />
             )}
-            <TitleText>{title}</TitleText>
-          </TitleWrapper>
+          </SectionHeaderWrapper>
         )}
-        {!!contents &&
-          contents.type !== "RANGE" &&
-          this.parseRequirements(contents.requirements)}
-        {!!contents &&
-          contents.type === "RANGE" &&
-          this.handleRange(contents.requirements)}
+        {this.state.expanded && (
+          <div>
+            {!!contents &&
+              contents.type !== "RANGE" &&
+              this.parseRequirements(contents.requirements)}
+            {!!contents &&
+              contents.type === "RANGE" &&
+              this.handleRange(contents.requirements)}
+          </div>
+        )}
       </div>
     );
   }
