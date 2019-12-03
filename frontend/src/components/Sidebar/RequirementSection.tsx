@@ -24,12 +24,11 @@ const SectionHeaderWrapper = styled.div`
 const TitleWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: start;
+  align-items: center;
   margin-top: 8px;
 `;
 
-const TitleText = styled.p`
-  margin-top: 0px;
+const TitleText = styled.div`
   margin-left: 4px;
 `;
 
@@ -84,7 +83,7 @@ export class RequirementSection extends React.Component<
     super(props);
 
     this.state = {
-      expanded: true,
+      expanded: !!props.warning,
     };
   }
 
@@ -183,8 +182,8 @@ export class RequirementSection extends React.Component<
     return (
       <div>
         {!!title && (
-          <SectionHeaderWrapper>
-            <TitleWrapper onClick={this.expandSection.bind(this)}>
+          <SectionHeaderWrapper onClick={this.expandSection.bind(this)}>
+            <TitleWrapper>
               {!!warning ? (
                 <ClearIcon color="error" fontSize="small"></ClearIcon>
               ) : (
