@@ -205,22 +205,26 @@ class HomeComponent extends React.Component<HomeProps, HomeState> {
     }
 
     this.setState(newState, () => {
-      const warnings = produceWarnings(newState.schedule);
-      this.setState({
-        warnings: warnings,
-      });
-
-      // remove existing toasts
-      this.props.toastStack.forEach(t => this.props.removeToast(t.id));
-
-      // add new toasts
-      warnings.forEach(w => {
-        this.props.addToast(w.message, {
-          appearance: "warning",
-        });
-      });
+      this.updateWarnings(newState);
     });
   };
+
+  updateWarnings(newState: HomeState) {
+    const warnings = produceWarnings(newState.schedule);
+    this.setState({
+      warnings: warnings,
+    });
+
+    // remove existing toasts
+    this.props.toastStack.forEach(t => this.props.removeToast(t.id));
+
+    // add new toasts
+    warnings.forEach(w => {
+      this.props.addToast(w.message, {
+        appearance: "warning",
+      });
+    });
+  }
 
   renderYears() {
     return this.state.schedule.years.map((year: number, index: number) => (
@@ -270,7 +274,7 @@ class HomeComponent extends React.Component<HomeProps, HomeState> {
     const year = convertTermIdToYear(termId);
     const season = convertTermIdToSeason(termId);
 
-    this.setState({
+    const newState = {
       ...this.state,
       schedule: {
         ...this.state.schedule,
@@ -288,6 +292,10 @@ class HomeComponent extends React.Component<HomeProps, HomeState> {
           },
         },
       },
+    };
+
+    this.setState(newState, () => {
+      this.updateWarnings(newState);
     });
   };
 
