@@ -87,6 +87,12 @@ export class RequirementSection extends React.Component<
     };
   }
 
+  componentWillReceiveProps(nextProps: RequirementSectionProps) {
+    this.setState({
+      expanded: !!nextProps.warning,
+    });
+  }
+
   parseRequirements(reqs: Requirement[]) {
     return reqs.map(r => this.renderRequirement(r));
   }
