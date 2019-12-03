@@ -3,7 +3,7 @@ import { Schedule, Major } from "../models/types";
 import { Modal, Card } from "@material-ui/core";
 import { plans } from "../plans";
 import styled from "styled-components";
-import { getNumCoops, isSpringCycle } from "../utils";
+import { getNumCoops, isSpringCycle } from "../utils/schedule-helpers";
 
 const InnerSection = styled.section`
   position: fixed;

@@ -2,7 +2,7 @@ import * as React from "react";
 import styled from "styled-components";
 import { DNDSchedule } from "../../models/types";
 import { CLASS_BLOCK_WIDTH, GraduateGrey } from "../../constants";
-import { sumCreditsInSemester } from "../../utils";
+import { sumCreditsInSemester } from "../../utils/schedule-helpers";
 
 interface YearBottomProps {
   schedule: DNDSchedule;
