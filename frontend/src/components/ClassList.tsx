@@ -14,7 +14,7 @@ interface ClassListProps {
   innerRef: React.RefObject<HTMLDivElement>;
 }
 
-export default class ClassList extends React.Component<ClassListProps> {
+export class ClassList extends React.Component<ClassListProps> {
   render() {
     return <Wrapper ref={this.props.innerRef}>{this.props.children}</Wrapper>;
   }

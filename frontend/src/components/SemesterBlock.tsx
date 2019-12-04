@@ -1,11 +1,9 @@
 import React from "react";
 import { Droppable } from "react-beautiful-dnd";
-import ClassList from "./ClassList";
-import ClassBlock from "./ClassBlocks/ClassBlock";
-import EmptyBlock from "./EmptyBlock";
-import { AddClassModal } from "./AddClassModal";
+import { ClassBlock } from "./ClassBlocks";
+import { AddClassModal, ClassList, EmptyBlock } from ".";
 import { DNDScheduleTerm, ScheduleCourse } from "../models/types";
-import { AddButton } from "./Year/AddButton";
+import { AddButton } from "./Year";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -40,7 +38,7 @@ interface SemesterBlockState {
   modalVisible: boolean;
 }
 
-export default class SemesterBlock extends React.Component<
+export class SemesterBlock extends React.Component<
   SemesterBlockProps,
   SemesterBlockState
 > {

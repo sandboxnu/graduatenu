@@ -32,7 +32,7 @@ interface ClassBlockProps {
   index: number;
 }
 
-export default class ClassBlock extends React.Component<ClassBlockProps> {
+export class ClassBlock extends React.Component<ClassBlockProps> {
   render() {
     const numCredits = this.props.class.numCreditsMax;
     var height = CLASS_BLOCK_HEIGHT;
