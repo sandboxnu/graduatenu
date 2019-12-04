@@ -1,6 +1,7 @@
 import React from "react";
 import { Droppable } from "react-beautiful-dnd";
-import { ClassList, ClassBlock, EmptyBlock, AddClassModal } from ".";
+import { ClassBlock } from "./ClassBlocks";
+import { AddClassModal, ClassList, EmptyBlock } from ".";
 import { DNDScheduleTerm, ScheduleCourse } from "../models/types";
 import { AddButton } from "./Year";
 import styled from "styled-components";
