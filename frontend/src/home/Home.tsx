@@ -13,7 +13,7 @@ import {
   DNDScheduleTerm,
 } from "../models/types";
 import styled from "styled-components";
-import { Year } from "../components/Year/Year";
+import { Year } from "../components/Year";
 import {
   convertTermIdToYear,
   convertTermIdToSeason,
@@ -21,18 +21,18 @@ import {
   convertToDNDCourses,
   isCoopOrVacation,
   addClassToSchedule,
-} from "../utils/schedule-helpers";
+  produceWarnings,
+  moveCourse,
+} from "../utils";
 import { TextField } from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
 import { majors } from "../majors";
-import { ChooseMajorPlanModal } from "../components/ChooseMajorPlanModal";
+import { ChooseMajorPlanModal } from "../components";
 import { CLASS_BLOCK_WIDTH } from "../constants";
-import { DropDownModal } from "../components/DropDownModal";
-import { Sidebar } from "../components/Sidebar/Sidebar";
-import { produceWarnings } from "../utils/generate-warnings";
+import { DropDownModal } from "../components";
+import { Sidebar } from "../components/Sidebar";
 import { withToast } from "./toastHook";
 import { AppearanceTypes } from "react-toast-notifications";
-import { moveCourse } from "../utils/dnd-helpers";
 
 const OuterContainer = styled.div`
   display: flex;

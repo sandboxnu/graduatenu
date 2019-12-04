@@ -1,6 +1,6 @@
 import { HomeState } from "../home/Home";
-import { convertTermIdToSeason, convertTermIdToYear } from "./schedule-helpers";
-import { DNDScheduleYear, DNDScheduleTerm, DNDSchedule } from "../models/types";
+import { convertTermIdToSeason, convertTermIdToYear } from ".";
+import { DNDScheduleYear, DNDScheduleTerm } from "../models/types";
 
 export function moveCourse(
   state: HomeState,

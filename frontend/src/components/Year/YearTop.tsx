@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 import { CLASS_BLOCK_WIDTH, GraduateGrey } from "../../constants";
-import { ThreeDots } from "../common/ThreeDots";
+import { ThreeDots } from "../common";
 import { Menu, MenuItem } from "@material-ui/core";
 import { SeasonWord, Status } from "../../models/types";
 

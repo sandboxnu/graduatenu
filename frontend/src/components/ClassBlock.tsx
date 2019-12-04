@@ -42,7 +42,7 @@ interface ClassBlockProps {
   index: number;
 }
 
-export default class ClassBlock extends React.Component<ClassBlockProps> {
+export class ClassBlock extends React.Component<ClassBlockProps> {
   render() {
     return (
       <Draggable draggableId={this.props.class.dndId} index={this.props.index}>

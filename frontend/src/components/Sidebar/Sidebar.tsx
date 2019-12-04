@@ -2,8 +2,8 @@ import React from "react";
 import { DNDSchedule, Major } from "../../models/types";
 import styled from "styled-components";
 import { GraduateGrey } from "../../constants";
-import { RequirementSection } from "./RequirementSection";
-import { produceRequirementGroupWarning } from "../../utils/generate-warnings";
+import { RequirementSection } from ".";
+import { produceRequirementGroupWarning } from "../../utils";
 
 const Container = styled.div`
   display: flex;

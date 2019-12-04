@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { ScheduleCourse } from "../models/types";
-import { XButton } from "./common/XButton";
+import { XButton } from "./common";
 import { fetchCourse } from "../api";
 import { Modal, CircularProgress } from "@material-ui/core";
 
