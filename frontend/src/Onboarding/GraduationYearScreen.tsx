@@ -5,37 +5,45 @@ import { GenericQuestionTemplate } from "./GenericQuestionScreen";
 import { NextButton } from "../components/common/NextButton";
 
 interface State {
-  textFieldStr: string;
+  year: number;
 }
 
-class NameComponent extends React.Component<RouteComponentProps, State> {
+class GraduationYearComponent extends React.Component<
+  RouteComponentProps,
+  State
+> {
   constructor(props: RouteComponentProps) {
     super(props);
 
     this.state = {
-      textFieldStr: "",
+      year: 0,
     };
   }
 
-  onChange(e: React.ChangeEvent<HTMLInputElement>) {
+  onChange(e: any) {
     this.setState({
-      textFieldStr: e.target.value,
+      year: Number(e.target.value),
     });
   }
 
   render() {
     return (
-      <GenericQuestionTemplate question="What is your full name?">
+      <GenericQuestionTemplate question="What is your expected graduation year?">
         <TextField
           id="standard-basic"
-          value={this.state.textFieldStr}
+          value={this.state.year}
           onChange={this.onChange.bind(this)}
-          placeholder="John Smith"
+          placeholder="2022"
         />
         <Link
           to={{
-            pathname: "/academicYear",
-            state: { userData: { fullName: this.state.textFieldStr } },
+            pathname: "/major",
+            state: {
+              userData: {
+                ...this.props.location.state.userData,
+                graduationYear: this.state.year,
+              },
+            },
           }}
           style={{ textDecoration: "none" }}
         >
@@ -46,4 +54,4 @@ class NameComponent extends React.Component<RouteComponentProps, State> {
   }
 }
 
-export const NameScreen = withRouter(NameComponent);
+export const GraduationYearScreen = withRouter(GraduationYearComponent);

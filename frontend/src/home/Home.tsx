@@ -11,6 +11,7 @@ import {
   IWarning,
   DNDScheduleYear,
   DNDScheduleTerm,
+  IUserData,
 } from "../models/types";
 import styled from "styled-components";
 import { Year } from "../components/Year";
@@ -33,6 +34,8 @@ import { DropDownModal } from "../components";
 import { Sidebar } from "../components/Sidebar";
 import { withToast } from "./toastHook";
 import { AppearanceTypes } from "react-toast-notifications";
+import { withRouter, RouteComponentProps } from "react-router-dom";
+import { plans } from "../plans";
 
 const OuterContainer = styled.div`
   display: flex;
@@ -76,17 +79,25 @@ export interface HomeState {
   warnings: IWarning[];
 }
 
-class HomeComponent extends React.Component<HomeProps, HomeState> {
-  constructor(props: any) {
+type Props = HomeProps & RouteComponentProps;
+
+class HomeComponent extends React.Component<Props, HomeState> {
+  constructor(props: Props) {
     super(props);
+
+    const userData: IUserData = props.location.state.userData;
 
     this.state = {
       schedule: mockData,
-      major: undefined,
+      major: userData.major,
       currentClassCounter: 0,
       chooseMajorModalVisible: false,
       warnings: [],
     };
+
+    if (!!userData.major) {
+      this.setSchedule(plans[userData.major.name][0]);
+    }
   }
 
   onDragEnd = (result: any) => {
@@ -343,4 +354,4 @@ class HomeComponent extends React.Component<HomeProps, HomeState> {
   }
 }
 
-export const Home = withToast(HomeComponent);
+export const Home = withRouter(withToast(HomeComponent));

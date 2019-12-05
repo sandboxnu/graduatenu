@@ -5,37 +5,43 @@ import { GenericQuestionTemplate } from "./GenericQuestionScreen";
 import { NextButton } from "../components/common/NextButton";
 
 interface State {
-  textFieldStr: string;
+  minors: string[];
 }
 
-class NameComponent extends React.Component<RouteComponentProps, State> {
+class MinorsComponent extends React.Component<RouteComponentProps, State> {
   constructor(props: RouteComponentProps) {
     super(props);
 
     this.state = {
-      textFieldStr: "",
+      minors: [],
     };
   }
 
   onChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const minors = e.target.value.split(", ");
     this.setState({
-      textFieldStr: e.target.value,
+      minors: minors,
     });
   }
 
   render() {
     return (
-      <GenericQuestionTemplate question="What is your full name?">
+      <GenericQuestionTemplate question="Any minors?">
         <TextField
           id="standard-basic"
-          value={this.state.textFieldStr}
+          value={this.state.minors.join(", ")}
           onChange={this.onChange.bind(this)}
-          placeholder="John Smith"
+          placeholder="Business Administration, Marketing"
         />
         <Link
           to={{
-            pathname: "/academicYear",
-            state: { userData: { fullName: this.state.textFieldStr } },
+            pathname: "/home",
+            state: {
+              userData: {
+                ...this.props.location.state.userData,
+                minors: this.state.minors,
+              },
+            },
           }}
           style={{ textDecoration: "none" }}
         >
@@ -46,4 +52,4 @@ class NameComponent extends React.Component<RouteComponentProps, State> {
   }
 }
 
-export const NameScreen = withRouter(NameComponent);
+export const MinorsScreen = withRouter(MinorsComponent);
