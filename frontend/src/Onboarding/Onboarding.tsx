@@ -112,7 +112,7 @@ export class Onboarding extends React.Component {
               and build a personalized plan of study.
             </DescriptionText>
             <Link
-              to={{ pathname: "/name", state: { fullName: "Nils Backe" } }}
+              to={{ pathname: "/name", state: { userData: {} } }}
               style={{ textDecoration: "none" }}
             >
               <Button variant="contained" color="secondary">
