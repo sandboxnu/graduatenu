@@ -6,6 +6,7 @@ import { NextButton } from "../components/common/NextButton";
 
 interface State {
   textFieldStr: string;
+  beenEdited: boolean;
 }
 
 class NameComponent extends React.Component<RouteComponentProps, State> {
@@ -14,33 +15,48 @@ class NameComponent extends React.Component<RouteComponentProps, State> {
 
     this.state = {
       textFieldStr: "",
+      beenEdited: false,
     };
   }
 
   onChange(e: React.ChangeEvent<HTMLInputElement>) {
     this.setState({
       textFieldStr: e.target.value,
+      beenEdited: true,
     });
   }
 
   render() {
+    const { textFieldStr, beenEdited } = this.state;
     return (
       <GenericQuestionTemplate question="What is your full name?">
         <TextField
           id="standard-basic"
-          value={this.state.textFieldStr}
+          value={textFieldStr}
           onChange={this.onChange.bind(this)}
           placeholder="John Smith"
+          error={textFieldStr.length === 0 && beenEdited}
+          helperText={
+            textFieldStr.length === 0 &&
+            beenEdited &&
+            "Please enter a valid name"
+          }
         />
-        <Link
-          to={{
-            pathname: "/academicYear",
-            state: { userData: { fullName: this.state.textFieldStr } },
-          }}
-          style={{ textDecoration: "none" }}
-        >
-          <NextButton />
-        </Link>
+        {textFieldStr.length !== 0 ? (
+          <Link
+            to={{
+              pathname: "/academicYear",
+              state: { userData: { fullName: textFieldStr } },
+            }}
+            style={{ textDecoration: "none" }}
+          >
+            <NextButton />
+          </Link>
+        ) : (
+          <div onClick={() => this.setState({ beenEdited: true })}>
+            <NextButton />
+          </div>
+        )}
       </GenericQuestionTemplate>
     );
   }

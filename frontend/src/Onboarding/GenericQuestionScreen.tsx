@@ -13,7 +13,7 @@ const Box = styled.div`
   border: 1px solid black;
   padding: 18px;
   height: 225px;
-  width: 400px;
+  width: 500px;
   display: flex;
   flex-direction: column;
 `;

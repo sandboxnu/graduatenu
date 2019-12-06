@@ -334,6 +334,7 @@ export interface IUserData {
   graduationYear?: number;
   major?: Major;
   minors?: string[];
+  plan?: Schedule;
 }
 
 /** ------------------------------------------------------------------------

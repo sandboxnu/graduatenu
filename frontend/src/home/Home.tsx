@@ -24,11 +24,11 @@ import {
   addClassToSchedule,
   produceWarnings,
   moveCourse,
+  planToString,
 } from "../utils";
 import { TextField } from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
 import { majors } from "../majors";
-import { ChooseMajorPlanModal } from "../components";
 import { CLASS_BLOCK_WIDTH } from "../constants";
 import { DropDownModal } from "../components";
 import { Sidebar } from "../components/Sidebar";
@@ -61,6 +61,11 @@ const Container = styled.div`
   background-color: "#ff76ff";
 `;
 
+const DropDownWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
 interface HomeProps {
   addToast: (message: string, options: any) => void;
   removeToast: (id: string) => void;
@@ -73,9 +78,9 @@ interface HomeProps {
 
 export interface HomeState {
   schedule: DNDSchedule;
+  planStr?: string;
   major?: Major;
   currentClassCounter: number; // used for DND purposes, every class needs a unique ID
-  chooseMajorModalVisible: boolean;
   warnings: IWarning[];
 }
 
@@ -91,12 +96,12 @@ class HomeComponent extends React.Component<Props, HomeState> {
       schedule: mockData,
       major: userData.major,
       currentClassCounter: 0,
-      chooseMajorModalVisible: false,
+      planStr: undefined,
       warnings: [],
     };
 
-    if (!!userData.major) {
-      this.setSchedule(plans[userData.major.name][0]);
+    if (!!userData.plan) {
+      this.setSchedule(userData.plan);
     }
   }
 
@@ -216,10 +221,26 @@ class HomeComponent extends React.Component<Props, HomeState> {
   onChooseMajor(event: React.SyntheticEvent<{}>, value: any) {
     const maj = majors.find((m: any) => m.name === value);
 
-    if (!!maj) {
-      this.setState({ chooseMajorModalVisible: true, major: maj });
-    } else {
-      this.setState({ major: maj });
+    this.setState({ major: maj, planStr: undefined });
+  }
+
+  onChoosePlan(event: React.SyntheticEvent<{}>, value: any) {
+    if (value === "None") {
+      this.setState({
+        planStr: undefined,
+      });
+      return;
+    }
+
+    const plan = plans[this.state.major!.name].find(
+      (p: Schedule) => planToString(p) === value
+    );
+
+    if (plan) {
+      this.setSchedule(plan);
+      this.setState({
+        planStr: planToString(plan),
+      });
     }
   }
 
@@ -260,10 +281,6 @@ class HomeComponent extends React.Component<Props, HomeState> {
     });
   }
 
-  hideChooseMajorPlanModal() {
-    this.setState({ chooseMajorModalVisible: false });
-  }
-
   handleStatusChange(
     newStatus: Status,
     tappedSemester: SeasonWord,
@@ -294,7 +311,7 @@ class HomeComponent extends React.Component<Props, HomeState> {
   renderMajorDropDown() {
     return (
       <Autocomplete
-        style={{ width: 300 }}
+        style={{ width: 300, marginRight: 18 }}
         disableListWrap
         options={majors.map(maj => maj.name)}
         renderInput={params => (
@@ -307,6 +324,29 @@ class HomeComponent extends React.Component<Props, HomeState> {
         )}
         value={!!this.state.major ? this.state.major.name + " " : ""}
         onChange={this.onChooseMajor.bind(this)}
+      />
+    );
+  }
+
+  renderPlansDropDown() {
+    return (
+      <Autocomplete
+        style={{ width: 300 }}
+        disableListWrap
+        options={[
+          "None",
+          ...plans[this.state.major!.name].map(p => planToString(p)),
+        ]}
+        renderInput={params => (
+          <TextField
+            {...params}
+            variant="outlined"
+            label="Select A Plan"
+            fullWidth
+          />
+        )}
+        value={this.state.planStr || ""}
+        onChange={this.onChoosePlan.bind(this)}
       />
     );
   }
@@ -324,31 +364,29 @@ class HomeComponent extends React.Component<Props, HomeState> {
   }
 
   render() {
+    const { major, schedule } = this.state;
     return (
       <OuterContainer>
         <DragDropContext
           onDragEnd={this.onDragEnd}
           onDragUpdate={this.onDragUpdate}
         >
-          <ChooseMajorPlanModal
-            visible={this.state.chooseMajorModalVisible}
-            handleClose={this.hideChooseMajorPlanModal.bind(this)}
-            handleSubmit={this.setSchedule.bind(this)}
-            major={this.state.major!}
-          />
           <Container>
             <div onClick={() => console.log(this.state)}>
               <h2>Plan Of Study</h2>
             </div>
-            {this.renderMajorDropDown()}
+            <DropDownWrapper>
+              {this.renderMajorDropDown()}
+              {!!major && this.renderPlansDropDown()}
+            </DropDownWrapper>
             <CompletedCoursesWrapper>
               <h3>Completed Courses</h3>
-              <DropDownModal schedule={this.state.schedule} />
+              <DropDownModal schedule={schedule} />
             </CompletedCoursesWrapper>
             {this.renderYears()}
           </Container>
         </DragDropContext>
-        <Sidebar schedule={this.state.schedule} major={this.state.major} />
+        <Sidebar schedule={schedule} major={major} />
       </OuterContainer>
     );
   }
