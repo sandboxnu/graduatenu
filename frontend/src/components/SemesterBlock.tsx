@@ -2,7 +2,11 @@ import React from "react";
 import { Droppable } from "react-beautiful-dnd";
 import { ClassBlock } from "./ClassBlocks";
 import { AddClassModal, ClassList, EmptyBlock } from ".";
-import { DNDScheduleTerm, ScheduleCourse } from "../models/types";
+import {
+  DNDScheduleTerm,
+  ScheduleCourse,
+  CourseWarning,
+} from "../models/types";
 import { AddButton } from "./Year";
 import styled from "styled-components";
 
@@ -32,6 +36,7 @@ const NoClassBlock = styled.div`
 interface SemesterBlockProps {
   semester: DNDScheduleTerm;
   handleAddClasses: (courses: ScheduleCourse[]) => void;
+  courseWarnings: CourseWarning[];
 }
 
 interface SemesterBlockState {
@@ -58,12 +63,24 @@ export class SemesterBlock extends React.Component<
   }
 
   renderBody() {
-    const status = this.props.semester.status;
+    const { semester, courseWarnings } = this.props;
+    const status = semester.status;
     if (status === "CLASSES" || status === "HOVERINACTIVE") {
-      return this.props.semester.classes.map((scheduleCourse, index) => {
+      return semester.classes.map((scheduleCourse, index) => {
         if (!!scheduleCourse) {
           return (
-            <ClassBlock key={index} class={scheduleCourse} index={index} />
+            <ClassBlock
+              key={index}
+              class={scheduleCourse}
+              index={index}
+              warning={
+                !!courseWarnings.find(
+                  w =>
+                    w.subject + w.classId ===
+                    scheduleCourse.subject + scheduleCourse.classId
+                )
+              }
+            />
           );
         }
         return <EmptyBlock key={index} />;

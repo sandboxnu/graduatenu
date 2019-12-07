@@ -16,13 +16,15 @@ const Block = styled(Card)<any>`
   flex-direction: row;
 `;
 
-const Indent = styled.div`
+const Indent = styled.div<any>`
   width: 20px;
-  background-color: rgba(173, 198, 255, 0.9);
+  background-color: ${props =>
+    props.warning ? "rgba(175, 50, 50, 0.9)" : "rgba(173, 198, 255, 0.9)"};
 `;
 
-const ClassBlockBody = styled.div`
-  background-color: rgba(173, 198, 255, 0.3);
+const ClassBlockBody = styled.div<any>`
+  background-color: ${props =>
+    props.warning ? "rgba(216, 86, 86, 0.9)" : "rgba(173, 198, 255, 0.3)"};
   padding-left: 8px;
   flex: 1;
 `;
@@ -30,6 +32,7 @@ const ClassBlockBody = styled.div`
 interface ClassBlockProps {
   class: DNDScheduleCourse;
   index: number;
+  warning: boolean;
 }
 
 export class ClassBlock extends React.Component<ClassBlockProps> {
@@ -67,8 +70,8 @@ export class ClassBlock extends React.Component<ClassBlockProps> {
             ref={provided.innerRef}
             height={height}
           >
-            <Indent />
-            <ClassBlockBody>
+            <Indent warning={this.props.warning} />
+            <ClassBlockBody warning={this.props.warning}>
               {numCredits > 2 ? (
                 <LargeClassBlock course={this.props.class} />
               ) : (

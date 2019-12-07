@@ -11,6 +11,7 @@ import {
   IWarning,
   DNDScheduleYear,
   DNDScheduleTerm,
+  CourseWarning,
 } from "../models/types";
 import styled from "styled-components";
 import { Year } from "../components/Year";
@@ -74,6 +75,7 @@ export interface HomeState {
   currentClassCounter: number; // used for DND purposes, every class needs a unique ID
   chooseMajorModalVisible: boolean;
   warnings: IWarning[];
+  courseWarnings: CourseWarning[];
 }
 
 class HomeComponent extends React.Component<HomeProps, HomeState> {
@@ -86,6 +88,7 @@ class HomeComponent extends React.Component<HomeProps, HomeState> {
       currentClassCounter: 0,
       chooseMajorModalVisible: false,
       warnings: [],
+      courseWarnings: [],
     };
   }
 
@@ -190,6 +193,7 @@ class HomeComponent extends React.Component<HomeProps, HomeState> {
     const normal = container.normalWarnings;
     this.setState({
       warnings: normal,
+      courseWarnings: container.courseWarnings,
     });
 
     // remove existing toasts
@@ -309,6 +313,9 @@ class HomeComponent extends React.Component<HomeProps, HomeState> {
         schedule={this.state.schedule}
         handleAddClasses={this.handleAddClasses.bind(this)}
         handleStatusChange={this.handleStatusChange.bind(this)}
+        courseWarnings={this.state.courseWarnings.filter(
+          w => convertTermIdToYear(w.termId) === year
+        )}
       />
     ));
   }
