@@ -668,9 +668,11 @@ function produceSpecificCourseWarnings(
   tracker: CourseTakenTracker
 ): CourseWarning[] {
   let warnings: CourseWarning[] = [];
-  warnings = warnings.concat(checkCorequisites(term.classes, tracker, term.id));
   warnings = warnings.concat(
-    checkPrerequisites(term.classes, tracker, term.id)
+    checkCorequisites(term.classes, tracker, term.termId)
+  );
+  warnings = warnings.concat(
+    checkPrerequisites(term.classes, tracker, term.termId)
   );
   return warnings;
 }
