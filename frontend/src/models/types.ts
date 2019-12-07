@@ -311,13 +311,20 @@ export interface IWarning {
   termId: number;
 }
 
-export interface PrereqCoreqWarning {
-  message: string;
-  termId: number;
-  year: number;
-  season: Season;
+/**
+ * A CourseWarning, specific to a single course, in a single term(id).
+ */
+export interface CourseWarning extends IWarning {
   subject: string;
   classId: string;
+}
+
+/**
+ * A Container for different types of warnings.
+ */
+export interface WarningContainer {
+  normalWarnings: IWarning[];
+  courseWarnings: CourseWarning[];
 }
 
 /**
