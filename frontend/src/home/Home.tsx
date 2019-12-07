@@ -2,26 +2,37 @@ import React from "react";
 import { DragDropContext } from "react-beautiful-dnd";
 import { mockData } from "../data/mockData";
 import {
-  DNDScheduleTerm,
   DNDSchedule,
-  DNDScheduleYear,
   Major,
-  DNDScheduleCourse,
-  NamedScheduleCourse,
+  ScheduleCourse,
   Schedule,
   Status,
   SeasonWord,
+  IWarning,
+  DNDScheduleYear,
+  DNDScheduleTerm,
 } from "../models/types";
 import styled from "styled-components";
-import { Year } from "../components/Year/Year";
-import { convertTermIdToYear, convertTermIdToSeason } from "../utils";
-import { TextField, Button } from "@material-ui/core";
+import { Year } from "../components/Year";
+import {
+  convertTermIdToYear,
+  convertTermIdToSeason,
+  convertToDNDSchedule,
+  convertToDNDCourses,
+  isCoopOrVacation,
+  addClassToSchedule,
+  produceWarnings,
+  moveCourse,
+} from "../utils";
+import { TextField } from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
 import { majors } from "../majors";
-import { ChooseMajorPlanModal } from "../components/ChooseMajorPlanModal";
-import { Link } from "react-router-dom";
+import { ChooseMajorPlanModal } from "../components";
 import { CLASS_BLOCK_WIDTH } from "../constants";
-import { DropDownModal } from "../components/DropDownModal";
+import { DropDownModal } from "../components";
+import { Sidebar } from "../components/Sidebar";
+import { withToast } from "./toastHook";
+import { AppearanceTypes } from "react-toast-notifications";
 
 const OuterContainer = styled.div`
   display: flex;
@@ -32,7 +43,6 @@ const OuterContainer = styled.div`
 
 const CompletedCoursesWrapper = styled.div`
   display: flex;
-  flex: 1;
   flex-direction: column;
   justify-content: start;
   width: ${CLASS_BLOCK_WIDTH * 4 + 25}px;
@@ -48,15 +58,25 @@ const Container = styled.div`
   background-color: "#ff76ff";
 `;
 
-interface AppState {
+interface HomeProps {
+  addToast: (message: string, options: any) => void;
+  removeToast: (id: string) => void;
+  toastStack: {
+    content: React.ReactNode;
+    id: string;
+    appearance: AppearanceTypes;
+  }[];
+}
+
+export interface HomeState {
   schedule: DNDSchedule;
   major?: Major;
   currentClassCounter: number; // used for DND purposes, every class needs a unique ID
   chooseMajorModalVisible: boolean;
-  toOnboarding: boolean;
+  warnings: IWarning[];
 }
 
-export class Home extends React.Component<{}, AppState> {
+class HomeComponent extends React.Component<HomeProps, HomeState> {
   constructor(props: any) {
     super(props);
 
@@ -65,145 +85,121 @@ export class Home extends React.Component<{}, AppState> {
       major: undefined,
       currentClassCounter: 0,
       chooseMajorModalVisible: false,
-      toOnboarding: true,
+      warnings: [],
     };
   }
 
   onDragEnd = (result: any) => {
     const { destination, source } = result;
 
-    if (
-      !destination ||
-      (destination.droppableId === source.droppableId &&
-        destination.index === source.index)
-    ) {
-      return;
-    }
+    const newState = moveCourse(this.state, destination, source);
 
-    const sourceSemesterSeason = convertTermIdToSeason(source.droppableId);
-    const sourceSemesterYear = convertTermIdToYear(source.droppableId);
-    const startYear: DNDScheduleYear = this.state.schedule.yearMap[
-      sourceSemesterYear
-    ];
-    const startSemester: DNDScheduleTerm = (startYear as any)[
-      sourceSemesterSeason
-    ];
+    if (newState) {
+      this.setState(newState, () => {
+        this.updateWarnings(newState);
+      });
+    }
+  };
+
+  onDragUpdate = (update: any) => {
+    const { destination } = update;
+    if (!destination || !destination.droppableId) return;
 
     const destSemesterSeason = convertTermIdToSeason(destination.droppableId);
     const destSemesterYear = convertTermIdToYear(destination.droppableId);
-    const finishYear: DNDScheduleYear = this.state.schedule.yearMap[
+    const destYear: DNDScheduleYear = this.state.schedule.yearMap[
       destSemesterYear
     ];
-    const finishSemester: DNDScheduleTerm = (finishYear as any)[
-      destSemesterSeason
-    ];
+    const destSemester: DNDScheduleTerm = (destYear as any)[destSemesterSeason];
 
-    if (startSemester === finishSemester) {
-      const newClassOrder = Array.from(startSemester.classes);
-      const movedClass = newClassOrder[source.index];
-      newClassOrder.splice(source.index, 1);
-      newClassOrder.splice(destination.index, 0, movedClass);
+    this.removeHovers(destSemester);
 
-      const newSemester: DNDScheduleTerm = {
-        ...startSemester,
-        classes: newClassOrder,
-      };
+    if (
+      destSemester.status === "INACTIVE" ||
+      destSemester.status === "COOP" ||
+      destSemester.status === "HOVERINACTIVE" ||
+      destSemester.status === "HOVERCOOP"
+    ) {
+      if (destSemester.status === "INACTIVE") {
+        destSemester.status = "HOVERINACTIVE";
+      } else if (destSemester.status === "COOP") {
+        destSemester.status = "HOVERCOOP";
+      } else if (destSemester.status === "HOVERINACTIVE") {
+        destSemester.status = "INACTIVE";
+      } else if (destSemester.status === "HOVERCOOP") {
+        destSemester.status = "COOP";
+      }
 
-      const newSemesterYear = convertTermIdToYear(newSemester.termId);
-      const newSemesterSeason = convertTermIdToSeason(newSemester.termId);
-
-      const newState: AppState = {
-        ...this.state,
-        schedule: {
-          ...this.state.schedule,
-          yearMap: {
-            ...this.state.schedule.yearMap,
-            [newSemesterYear]: {
-              ...this.state.schedule.yearMap[newSemesterYear],
-              [newSemesterSeason]: newSemester,
-            },
-          },
-        },
-      };
-
-      this.setState(newState);
-      return;
+      this.updateSemester(destSemesterYear, destSemesterSeason, destSemester);
     }
-
-    const startClasses = Array.from(startSemester.classes);
-    const movedClass = startClasses[source.index];
-    startClasses.splice(source.index, 1);
-    const newStartSemester: DNDScheduleTerm = {
-      ...startSemester,
-      classes: startClasses,
-    };
-
-    const finishClasses = Array.from(finishSemester.classes);
-    finishClasses.splice(destination.index, 0, movedClass);
-    const newFinishSemester: DNDScheduleTerm = {
-      ...finishSemester,
-      classes: finishClasses,
-    };
-
-    const newStartSemesterYear = convertTermIdToYear(newStartSemester.termId);
-    const newStartSemesterSeason = convertTermIdToSeason(
-      newStartSemester.termId
-    );
-    const newFinishSemesterYear = convertTermIdToYear(newFinishSemester.termId);
-    const newFinishSemesterSeason = convertTermIdToSeason(
-      newFinishSemester.termId
-    );
-
-    let newState: AppState;
-
-    if (newStartSemesterYear === newFinishSemesterYear) {
-      // in same year
-      newState = {
-        ...this.state,
-        schedule: {
-          ...this.state.schedule,
-          yearMap: {
-            ...this.state.schedule.yearMap,
-            [newStartSemesterYear]: {
-              ...this.state.schedule.yearMap[newStartSemesterYear],
-              [newStartSemesterSeason]: newStartSemester,
-              [newFinishSemesterSeason]: newFinishSemester,
-            },
-          },
-        },
-      };
-    } else {
-      newState = {
-        ...this.state,
-        schedule: {
-          ...this.state.schedule,
-          yearMap: {
-            ...this.state.schedule.yearMap,
-            [newStartSemesterYear]: {
-              ...this.state.schedule.yearMap[newStartSemesterYear],
-              [newStartSemesterSeason]: newStartSemester,
-            },
-            [newFinishSemesterYear]: {
-              ...this.state.schedule.yearMap[newFinishSemesterYear],
-              [newFinishSemesterSeason]: newFinishSemester,
-            },
-          },
-        },
-      };
-    }
-
-    this.setState(newState);
   };
 
-  renderYears() {
-    return this.state.schedule.years.map((year: number, index: number) => (
-      <Year
-        index={index}
-        schedule={this.state.schedule}
-        handleAddClasses={this.handleAddClasses.bind(this)}
-        handleStatusChange={this.handleStatusChange.bind(this)}
-      />
-    ));
+  removeHovers(currSemester: DNDScheduleTerm) {
+    for (const yearnum of this.state.schedule.years) {
+      const year = this.state.schedule.yearMap[yearnum];
+      console.log(year.summer1.status.toString());
+      if (isCoopOrVacation(year.fall) && year.fall !== currSemester) {
+        year.fall.status = year.fall.status.replace("HOVER", "") as Status;
+        this.updateSemester(yearnum, "fall", year.fall);
+      }
+      if (isCoopOrVacation(year.spring) && year.spring !== currSemester) {
+        year.spring.status = year.spring.status.replace("HOVER", "") as Status;
+        this.updateSemester(yearnum, "spring", year.spring);
+      }
+      if (isCoopOrVacation(year.summer1) && year.summer1 !== currSemester) {
+        year.summer1.status = year.summer1.status.replace(
+          "HOVER",
+          ""
+        ) as Status;
+        this.updateSemester(yearnum, "summer1", year.summer1);
+      }
+      if (isCoopOrVacation(year.summer2) && year.summer2 !== currSemester) {
+        year.summer2.status = year.summer2.status.replace(
+          "HOVER",
+          ""
+        ) as Status;
+        this.updateSemester(yearnum, "summer2", year.summer2);
+      }
+    }
+  }
+
+  updateSemester(
+    yearnum: number,
+    season: string,
+    updatedSemester: DNDScheduleTerm
+  ) {
+    const newState: HomeState = {
+      ...this.state,
+      schedule: {
+        ...this.state.schedule,
+        yearMap: {
+          ...this.state.schedule.yearMap,
+          [yearnum]: {
+            ...this.state.schedule.yearMap[yearnum],
+            [season]: updatedSemester,
+          },
+        },
+      },
+    };
+
+    this.setState(newState);
+  }
+
+  updateWarnings(newState: HomeState) {
+    const warnings = produceWarnings(newState.schedule);
+    this.setState({
+      warnings: warnings,
+    });
+
+    // remove existing toasts
+    this.props.toastStack.forEach(t => this.props.removeToast(t.id));
+
+    // add new toasts
+    warnings.forEach(w => {
+      this.props.addToast(w.message, {
+        appearance: "warning",
+      });
+    });
   }
 
   onChooseMajor(event: React.SyntheticEvent<{}>, value: any) {
@@ -216,101 +212,41 @@ export class Home extends React.Component<{}, AppState> {
     }
   }
 
-  renderMajorDropDown() {
-    return (
-      <Autocomplete
-        style={{ width: 300 }}
-        disableListWrap
-        options={majors.map(maj => maj.name)}
-        renderInput={params => (
-          <TextField
-            {...params}
-            variant="outlined"
-            label="Select A Major"
-            fullWidth
-          />
-        )}
-        value={!!this.state.major ? this.state.major.name + " " : ""}
-        onChange={this.onChooseMajor.bind(this)}
-      />
-    );
-  }
-
-  handleAddClasses = async (courses: NamedScheduleCourse[], termId: number) => {
+  handleAddClasses = async (courses: ScheduleCourse[], termId: number) => {
     // convert to DNDScheduleCourses
-    const dndCourses = await this.convertToDNDCourses(courses);
+    const [dndCourses, counter] = await convertToDNDCourses(
+      courses,
+      this.state.currentClassCounter
+    );
     const year = convertTermIdToYear(termId);
     const season = convertTermIdToSeason(termId);
 
-    this.setState({
-      ...this.state,
-      schedule: {
-        ...this.state.schedule,
-        yearMap: {
-          ...this.state.schedule.yearMap,
-          [year]: {
-            ...this.state.schedule.yearMap[year],
-            [season]: {
-              ...(this.state.schedule.yearMap[year] as any)[season],
-              classes: [
-                ...(this.state.schedule.yearMap[year] as any)[season].classes,
-                ...dndCourses,
-              ],
-            },
-          },
-        },
-      },
-    });
-  };
+    const newState = addClassToSchedule(
+      this.state,
+      year,
+      season,
+      counter,
+      dndCourses
+    );
 
-  convertToDNDCourses = async (
-    courses: NamedScheduleCourse[]
-  ): Promise<DNDScheduleCourse[]> => {
-    var list: DNDScheduleCourse[] = [];
-    var counter = this.state.currentClassCounter;
-    for (const course of courses) {
-      counter++;
-      list.push({
-        ...course,
-        dndId: String(counter),
-      });
-    }
-    await this.setState({
-      currentClassCounter: counter,
+    this.setState(newState, () => {
+      this.updateWarnings(newState);
     });
-    return list;
-  };
-
-  convertToDNDSchedule = async (schedule: Schedule): Promise<DNDSchedule> => {
-    const newSchedule = schedule as DNDSchedule;
-    for (const year of Object.keys(schedule.yearMap)) {
-      newSchedule.yearMap[
-        year as any
-      ].fall.classes = await this.convertToDNDCourses(newSchedule.yearMap[
-        year as any
-      ].fall.classes as NamedScheduleCourse[]);
-      newSchedule.yearMap[
-        year as any
-      ].spring.classes = await this.convertToDNDCourses(newSchedule.yearMap[
-        year as any
-      ].spring.classes as NamedScheduleCourse[]);
-      newSchedule.yearMap[
-        year as any
-      ].summer1.classes = await this.convertToDNDCourses(newSchedule.yearMap[
-        year as any
-      ].summer1.classes as NamedScheduleCourse[]);
-      newSchedule.yearMap[
-        year as any
-      ].summer2.classes = await this.convertToDNDCourses(newSchedule.yearMap[
-        year as any
-      ].summer2.classes as NamedScheduleCourse[]);
-    }
-    return newSchedule;
   };
 
   async setSchedule(schedule: Schedule) {
-    const dndSchedule = await this.convertToDNDSchedule(schedule);
-    this.setState({ schedule: dndSchedule });
+    const [dndSchedule, counter] = await convertToDNDSchedule(
+      schedule,
+      this.state.currentClassCounter
+    );
+    const newState: HomeState = {
+      ...this.state,
+      schedule: dndSchedule,
+      currentClassCounter: counter,
+    };
+    this.setState(newState, () => {
+      this.updateWarnings(newState);
+    });
   }
 
   hideChooseMajorPlanModal() {
@@ -344,16 +280,51 @@ export class Home extends React.Component<{}, AppState> {
     });
   }
 
+  renderMajorDropDown() {
+    return (
+      <Autocomplete
+        style={{ width: 300 }}
+        disableListWrap
+        options={majors.map(maj => maj.name)}
+        renderInput={params => (
+          <TextField
+            {...params}
+            variant="outlined"
+            label="Select A Major"
+            fullWidth
+          />
+        )}
+        value={!!this.state.major ? this.state.major.name + " " : ""}
+        onChange={this.onChooseMajor.bind(this)}
+      />
+    );
+  }
+
+  renderYears() {
+    return this.state.schedule.years.map((year: number, index: number) => (
+      <Year
+        key={index}
+        index={index}
+        schedule={this.state.schedule}
+        handleAddClasses={this.handleAddClasses.bind(this)}
+        handleStatusChange={this.handleStatusChange.bind(this)}
+      />
+    ));
+  }
+
   render() {
     return (
       <OuterContainer>
-        <DragDropContext onDragEnd={this.onDragEnd}>
+        <DragDropContext
+          onDragEnd={this.onDragEnd}
+          onDragUpdate={this.onDragUpdate}
+        >
           <ChooseMajorPlanModal
             visible={this.state.chooseMajorModalVisible}
             handleClose={this.hideChooseMajorPlanModal.bind(this)}
             handleSubmit={this.setSchedule.bind(this)}
             major={this.state.major!}
-          ></ChooseMajorPlanModal>
+          />
           <Container>
             <div onClick={() => console.log(this.state)}>
               <h2>Plan Of Study</h2>
@@ -361,12 +332,15 @@ export class Home extends React.Component<{}, AppState> {
             {this.renderMajorDropDown()}
             <CompletedCoursesWrapper>
               <h3>Completed Courses</h3>
-              <DropDownModal schedule={this.state.schedule}></DropDownModal>
+              <DropDownModal schedule={this.state.schedule} />
             </CompletedCoursesWrapper>
             {this.renderYears()}
           </Container>
         </DragDropContext>
+        <Sidebar schedule={this.state.schedule} major={this.state.major} />
       </OuterContainer>
     );
   }
 }
+
+export const Home = withToast(HomeComponent);

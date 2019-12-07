@@ -175,9 +175,10 @@ function addCourses(
           credits = parseInt(cells[i + 1].text);
           produced.push({
             classId: String(9999),
-            subject: "Elective",
+            subject: "XXXX",
             numCreditsMin: !isNaN(credits) ? credits : 9999,
             numCreditsMax: !isNaN(credits) ? credits : 9999,
+            name: cell.text,
           });
           i += 1;
           break;
@@ -188,7 +189,7 @@ function addCourses(
           i += 1;
           break;
         } else if (multiCourseMatch.test(cell.text)) {
-          // if we have a multicourse, like CS 1800 and CS 2500
+          // if we have a multicourse, like "CS 1800 and CS 1802"
           const split = cell.text.split(/and\s|\s/);
           credits = parseInt(cells[i + 1].text);
           // second course unfortunately has to have 0 credits.
@@ -197,6 +198,7 @@ function addCourses(
             subject: "" + split,
             numCreditsMin: !isNaN(credits) ? credits : 9999,
             numCreditsMax: !isNaN(credits) ? credits : 9999,
+            name: "",
           });
           i += 1;
         } else {
@@ -210,6 +212,7 @@ function addCourses(
               subject: split[0],
               numCreditsMin: !isNaN(credits) ? credits : 9999,
               numCreditsMax: !isNaN(credits) ? credits : 9999,
+              name: "",
             });
             i += 1;
           } else {
@@ -217,9 +220,10 @@ function addCourses(
 
             produced.push({
               classId: "9999",
-              subject: cell.text,
+              subject: "XXXX",
               numCreditsMin: !isNaN(credits) ? credits : 9999,
               numCreditsMax: !isNaN(credits) ? credits : 9999,
+              name: cell.text,
             });
             i += 1;
           }
@@ -299,12 +303,14 @@ function buildYear(
               subject: split[0],
               numCreditsMin: item.numCreditsMin,
               numCreditsMax: item.numCreditsMax,
+              name: "",
             });
             accumulator.push({
               classId: split[3],
               subject: split[2],
               numCreditsMin: 0,
               numCreditsMax: 0,
+              name: "",
             });
           } else {
             accumulator.push(item);
