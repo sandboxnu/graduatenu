@@ -186,16 +186,17 @@ class HomeComponent extends React.Component<HomeProps, HomeState> {
   }
 
   updateWarnings(newState: HomeState) {
-    const warnings = produceWarnings(newState.schedule);
+    const container = produceWarnings(newState.schedule);
+    const normal = container.normalWarnings;
     this.setState({
-      warnings: warnings,
+      warnings: normal,
     });
 
     // remove existing toasts
     this.props.toastStack.forEach(t => this.props.removeToast(t.id));
 
     // add new toasts
-    warnings.forEach(w => {
+    normal.forEach(w => {
       this.props.addToast(w.message, {
         appearance: "warning",
       });
