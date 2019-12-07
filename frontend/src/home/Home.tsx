@@ -238,9 +238,6 @@ class HomeComponent extends React.Component<Props, HomeState> {
 
     if (plan) {
       this.setSchedule(plan);
-      this.setState({
-        planStr: planToString(plan),
-      });
     }
   }
 
@@ -275,6 +272,7 @@ class HomeComponent extends React.Component<Props, HomeState> {
       ...this.state,
       schedule: dndSchedule,
       currentClassCounter: counter,
+      planStr: planToString(schedule),
     };
     this.setState(newState, () => {
       this.updateWarnings(newState);
@@ -345,7 +343,7 @@ class HomeComponent extends React.Component<Props, HomeState> {
             fullWidth
           />
         )}
-        value={this.state.planStr || ""}
+        value={this.state.planStr || "None"}
         onChange={this.onChoosePlan.bind(this)}
       />
     );
@@ -364,6 +362,7 @@ class HomeComponent extends React.Component<Props, HomeState> {
   }
 
   render() {
+    console.log("planStr " + this.state.planStr);
     const { major, schedule } = this.state;
     return (
       <OuterContainer>
