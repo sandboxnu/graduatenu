@@ -1,6 +1,7 @@
 import {
   Schedule,
   IWarning,
+  CourseWarning,
   CourseTakenTracker,
   ScheduleTerm,
   ScheduleCourse,
@@ -22,6 +23,7 @@ import {
   ANDSection,
   ORSection,
   RANGESection,
+  WarningContainer,
 } from "../models/types";
 
 interface CreditHourTracker {
@@ -45,8 +47,9 @@ interface HashableCourse {
 /**
  * Produces warnings for a schedule.
  * @param schedule the schedule
+ * @returns a container holding the produced warnings.
  */
-export function produceWarnings(schedule: Schedule): IWarning[] {
+export function produceWarnings(schedule: Schedule): WarningContainer {
   // holds courses that are taken.
   const taken: Set<string> = new Set();
   // custom tracker
@@ -62,8 +65,19 @@ export function produceWarnings(schedule: Schedule): IWarning[] {
     },
   };
 
-  // list of warnings
-  let warnings: IWarning[] = [];
+  // store the two types of warnings.
+  let normal: IWarning[] = [];
+  let courseSpecific: CourseWarning[] = [];
+
+  // computes a season's worth of warnings, updating as needed.
+  function computeSeason(term: ScheduleTerm): void {
+    // check all courses for warnings, and then add them, term by term.
+    normal = normal.concat(produceNormalWarnings(term, tracker));
+    courseSpecific = courseSpecific.concat(
+      produceSpecificCourseWarnings(term, tracker)
+    );
+    addCoursesToTracker(term, tracker);
+  }
 
   // for each of the years in schedule, retrieve the corresponding map.
   // smallest to biggest.
@@ -71,29 +85,22 @@ export function produceWarnings(schedule: Schedule): IWarning[] {
   for (const yearNum of schedule.years) {
     const year = schedule.yearMap[yearNum];
 
-    // check all courses for warnings, and then add them, term by term.
-    warnings = warnings.concat(produceAllWarnings(year.fall, tracker));
-    addCoursesToTracker(year.fall, tracker);
+    computeSeason(year.fall);
+    computeSeason(year.spring);
 
-    warnings = warnings.concat(produceAllWarnings(year.spring, tracker));
-    addCoursesToTracker(year.spring, tracker);
-
-    // if is summer full, only check summer I.
-    // shouldn't matter, summerII would just be empty.
-    if (year.isSummerFull) {
-      warnings = warnings.concat(produceAllWarnings(year.summer1, tracker));
-      addCoursesToTracker(year.summer1, tracker);
-    } else {
-      warnings = warnings.concat(produceAllWarnings(year.summer1, tracker));
-      addCoursesToTracker(year.summer1, tracker);
-
-      warnings = warnings.concat(produceAllWarnings(year.summer2, tracker));
-      addCoursesToTracker(year.summer2, tracker);
+    // check summerI (could be summer full).
+    computeSeason(year.summer1);
+    // if summerfull, then no summer2. if not summerfull, then we have summer2.
+    if (!year.isSummerFull) {
+      computeSeason(year.summer2);
     }
   }
 
   // return the warnings.
-  return warnings;
+  return {
+    normalWarnings: normal,
+    courseWarnings: courseSpecific,
+  };
 }
 
 /**
@@ -642,22 +649,28 @@ function concatSubjectRanges(ranges: ISubjectRange[]): string {
  * @param classesToCheck the classes to check
  * @param tracker the course taken tracker
  */
-function produceAllWarnings(
+function produceNormalWarnings(
   term: ScheduleTerm,
   tracker: CourseTakenTracker
 ): IWarning[] {
   let warnings: IWarning[] = [];
   warnings = warnings.concat(
-    checkPrerequisites(term.classes, tracker, term.termId)
-  );
-  warnings = warnings.concat(
-    checkCorequisites(term.classes, tracker, term.termId)
-  );
-  warnings = warnings.concat(
     checkSemesterCredits(term.classes, tracker, term.termId)
   );
   warnings = warnings.concat(
     checkSemesterOverload(term.classes, tracker, term.termId)
+  );
+  return warnings;
+}
+
+function produceSpecificCourseWarnings(
+  term: ScheduleTerm,
+  tracker: CourseTakenTracker
+): CourseWarning[] {
+  let warnings: CourseWarning[] = [];
+  warnings = warnings.concat(checkCorequisites(term.classes, tracker, term.id));
+  warnings = warnings.concat(
+    checkPrerequisites(term.classes, tracker, term.id)
   );
   return warnings;
 }
@@ -671,9 +684,9 @@ function checkPrerequisites(
   toCheck: ScheduleCourse[],
   tracker: CourseTakenTracker,
   termId: number
-): IWarning[] {
+): CourseWarning[] {
   // the warnings produced.
-  const warnings: IWarning[] = [];
+  const warnings: CourseWarning[] = [];
 
   // tracker has all courses taken.
   for (const course of toCheck) {
@@ -682,6 +695,8 @@ function checkPrerequisites(
       if (prereqResult) {
         // if prereq doesn't exist, produce a warning.
         warnings.push({
+          subject: course.subject,
+          classId: course.classId,
           message: `${courseCode(
             course
           )}: prereqs not satisfied: ${prereqResult}`,
@@ -702,7 +717,7 @@ function checkCorequisites(
   toCheck: ScheduleCourse[],
   tracker: CourseTakenTracker,
   termId: number
-): IWarning[] {
+): CourseWarning[] {
   // construct the tracker.
   const coreqSet: Set<string> = new Set();
   const coreqTracker: CourseTakenTracker = {
@@ -723,7 +738,7 @@ function checkCorequisites(
   }
 
   // the list of warnings.
-  const warnings: IWarning[] = [];
+  const warnings: CourseWarning[] = [];
 
   // check each course.
   for (const course of toCheck) {
@@ -731,6 +746,8 @@ function checkCorequisites(
       let prereqResult = doesPrereqExist(course.coreqs, coreqTracker);
       if (prereqResult) {
         warnings.push({
+          subject: course.subject,
+          classId: course.classId,
           message: `${courseCode(
             course
           )}: coreqs not satisfied: ${prereqResult}`,
