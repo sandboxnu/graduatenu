@@ -73,13 +73,11 @@ export class SemesterBlock extends React.Component<
               key={index}
               class={scheduleCourse}
               index={index}
-              warning={
-                !!courseWarnings.find(
-                  w =>
-                    w.subject + w.classId ===
-                    scheduleCourse.subject + scheduleCourse.classId
-                )
-              }
+              warning={courseWarnings.find(
+                w =>
+                  w.subject + w.classId ===
+                  scheduleCourse.subject + scheduleCourse.classId
+              )}
             />
           );
         }

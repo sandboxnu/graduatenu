@@ -1,9 +1,9 @@
 import React from "react";
-import { Draggable } from "react-beautiful-dnd";
-import { DNDScheduleCourse } from "../../models/types";
+import { Draggable, DraggableProvided } from "react-beautiful-dnd";
+import { DNDScheduleCourse, CourseWarning } from "../../models/types";
 import { CLASS_BLOCK_WIDTH, CLASS_BLOCK_HEIGHT } from "../../constants";
 import styled from "styled-components";
-import { Card } from "@material-ui/core";
+import { Card, Tooltip } from "@material-ui/core";
 import { LargeClassBlock } from "./LargeClassBlock";
 import { SmallClassBlock } from "./SmallClassBlock";
 
@@ -32,7 +32,7 @@ const ClassBlockBody = styled.div<any>`
 interface ClassBlockProps {
   class: DNDScheduleCourse;
   index: number;
-  warning: boolean;
+  warning?: CourseWarning;
 }
 
 export class ClassBlock extends React.Component<ClassBlockProps> {
@@ -63,24 +63,37 @@ export class ClassBlock extends React.Component<ClassBlockProps> {
 
     return (
       <Draggable draggableId={this.props.class.dndId} index={this.props.index}>
-        {provided => (
-          <Block
-            {...provided.draggableProps}
-            {...provided.dragHandleProps}
-            ref={provided.innerRef}
-            height={height}
-          >
-            <Indent warning={this.props.warning} />
-            <ClassBlockBody warning={this.props.warning}>
-              {numCredits > 2 ? (
-                <LargeClassBlock course={this.props.class} />
-              ) : (
-                <SmallClassBlock course={this.props.class} />
-              )}
-            </ClassBlockBody>
-          </Block>
-        )}
+        {provided =>
+          !!this.props.warning ? (
+            <Tooltip title={this.props.warning.message} placement="top">
+              {this.renderBody(provided, height)}
+            </Tooltip>
+          ) : (
+            this.renderBody(provided, height)
+          )
+        }
       </Draggable>
+    );
+  }
+
+  renderBody(provided: DraggableProvided, height: number) {
+    const numCredits = this.props.class.numCreditsMax;
+    return (
+      <Block
+        {...provided.draggableProps}
+        {...provided.dragHandleProps}
+        ref={provided.innerRef}
+        height={height}
+      >
+        <Indent warning={this.props.warning} />
+        <ClassBlockBody warning={this.props.warning}>
+          {numCredits > 2 ? (
+            <LargeClassBlock course={this.props.class} />
+          ) : (
+            <SmallClassBlock course={this.props.class} />
+          )}
+        </ClassBlockBody>
+      </Block>
     );
   }
 }
