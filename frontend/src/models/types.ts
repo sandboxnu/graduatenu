@@ -312,6 +312,22 @@ export interface IWarning {
 }
 
 /**
+ * A CourseWarning, specific to a single course, in a single term(id).
+ */
+export interface CourseWarning extends IWarning {
+  subject: string;
+  classId: string;
+}
+
+/**
+ * A Container for different types of warnings.
+ */
+export interface WarningContainer {
+  normalWarnings: IWarning[];
+  courseWarnings: CourseWarning[];
+}
+
+/**
  * An Unsatisfied Major Requirement Group.
  */
 export interface IRequirementGroupWarning {

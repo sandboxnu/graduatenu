@@ -19,6 +19,68 @@ const fs = require("fs");
 //   fs.writeFileSync("./test/mock_schedules/cs_sched_2.json", cs_new_text);
 // });
 
+expect.extend({
+  /**
+   * Ensures that a warning container and its warnings are well-formed
+   * @param {*} received the warning container to check
+   */
+  toBeValidWarningContainer(received) {
+    // warning container.
+    let container = received;
+
+    // check container is well formed.
+    expect(container).toHaveProperty("normalWarnings");
+    expect(container).toHaveProperty("courseWarnings");
+    const normal = container.normalWarnings;
+    const specific = container.courseWarnings;
+    expect(normal).toBeInstanceOf(Array);
+    expect(specific).toBeInstanceOf(Array);
+
+    // check that all the warnings are well-formed.
+    for (const warning of normal) {
+      expect(warning).toBeDefined();
+      expect(warning).toHaveProperty("message");
+      expect(warning).toHaveProperty("termId");
+    }
+    // check that all the specific warnings are well-formed.
+    for (const warning of specific) {
+      expect(warning).toBeDefined();
+      expect(warning).toHaveProperty("message");
+      expect(warning).toHaveProperty("termId");
+      expect(warning).toHaveProperty("subject");
+      expect(warning).toHaveProperty("classId");
+    }
+
+    return {
+      message: () =>
+        `expected ${received} not to have well-formed warning container properties.`,
+      pass: true,
+    };
+  },
+
+  /**
+   * Checks that warnings are contained in a list of warnings.
+   * Also checks that lists are the same length.
+   * Assumes that the container is well-formed.
+   * @param {*} received the list of warnings.
+   * @param {*} normal the warnings to contain
+   */
+  toContainWarnings(received, normal) {
+    // check length
+    expect(received.length).toEqual(normal.length);
+    // check contained.
+    for (warning of normal) {
+      expect(received).toContainEqual(warning);
+    }
+
+    return {
+      message: () =>
+        `expected ${received} not to contain all expected warnings.`,
+      pass: true,
+    };
+  },
+});
+
 test("Tests warnings produce properly for cs_sched_1.json", () => {
   // read in a schedule
   let cs_sched = fs.readFileSync(
@@ -26,54 +88,68 @@ test("Tests warnings produce properly for cs_sched_1.json", () => {
     "utf-8"
   );
   let cs_sched_obj = JSON.parse(cs_sched);
-  let cs_sched_warn = warning_generator.produceWarnings(cs_sched_obj);
 
-  expect(cs_sched_warn.length).toBeGreaterThan(0);
+  // warning container.
+  let container = warning_generator.produceWarnings(cs_sched_obj);
 
-  for (const warning of cs_sched_warn) {
-    expect(warning).toBeDefined();
-    expect(warning).toHaveProperty("message");
-    expect(warning).toHaveProperty("termId");
-  }
+  // check container is well formed.
+  expect(container).toBeValidWarningContainer();
+  const normal = container.normalWarnings;
+  const specific = container.courseWarnings;
 
-  expect(cs_sched_warn).toContainEqual({
-    message: "Enrolled in a max of 20 credits. May be over-enrolled.",
-    termId: 201910,
-  });
-  expect(cs_sched_warn).toContainEqual({
-    message: "Enrolled in a min of 20 credits. May be over-enrolled.",
-    termId: 201910,
-  });
-  expect(cs_sched_warn).toContainEqual({
-    message: "BIOL1112: prereqs not satisfied: AND: BIOL1111",
-    termId: 201860,
-  });
-  expect(cs_sched_warn).toContainEqual({
-    message:
-      "BIOL1113: prereqs not satisfied: OR: BIOL1101,BIOL1107,BIOL1111,BIOL1115",
-    termId: 201860,
-  });
-  expect(cs_sched_warn).toContainEqual({
-    message: "BIOL1114: prereqs not satisfied: AND: BIOL1113",
-    termId: 201860,
-  });
-  expect(cs_sched_warn).toContainEqual({
-    message:
-      "PHYS1151: prereqs not satisfied: OR: MATH1241,MATH1251,MATH1340,MATH1341,MATH1342,MATH2321",
-    termId: 201860,
-  });
-  expect(cs_sched_warn).toContainEqual({
-    message: "Enrolled in a max of 51 credits. May be over-enrolled.",
-    termId: 201860,
-  });
-  expect(cs_sched_warn).toContainEqual({
-    message: "Enrolled in a min of 48 credits. May be over-enrolled.",
-    termId: 201860,
-  });
-  expect(cs_sched_warn).toContainEqual({
-    message: "Overloaded: Enrolled in 10 four-credit courses.",
-    termId: 201860,
-  });
+  // normal warnings.
+  expect(normal).toContainWarnings([
+    {
+      message: "Enrolled in a max of 20 credits. May be over-enrolled.",
+      termId: 201910,
+    },
+    {
+      message: "Enrolled in a min of 20 credits. May be over-enrolled.",
+      termId: 201910,
+    },
+    {
+      message: "Enrolled in a max of 51 credits. May be over-enrolled.",
+      termId: 201860,
+    },
+    {
+      message: "Enrolled in a min of 48 credits. May be over-enrolled.",
+      termId: 201860,
+    },
+    {
+      message: "Overloaded: Enrolled in 10 four-credit courses.",
+      termId: 201860,
+    },
+  ]);
+
+  // specific warnings.
+  expect(specific).toContainWarnings([
+    {
+      message: "BIOL1112: prereqs not satisfied: AND: BIOL1111",
+      termId: 201860,
+      subject: "BIOL",
+      classId: "1112",
+    },
+    {
+      message:
+        "BIOL1113: prereqs not satisfied: OR: BIOL1101,BIOL1107,BIOL1111,BIOL1115",
+      termId: 201860,
+      subject: "BIOL",
+      classId: "1113",
+    },
+    {
+      message: "BIOL1114: prereqs not satisfied: AND: BIOL1113",
+      termId: 201860,
+      subject: "BIOL",
+      classId: "1114",
+    },
+    {
+      message:
+        "PHYS1151: prereqs not satisfied: OR: MATH1241,MATH1251,MATH1340,MATH1341,MATH1342,MATH2321",
+      termId: 201860,
+      subject: "PHYS",
+      classId: "1151",
+    },
+  ]);
 });
 
 test("Tests warnings produce properly for cs_sched_2.json", () => {
@@ -83,32 +159,40 @@ test("Tests warnings produce properly for cs_sched_2.json", () => {
     "utf-8"
   );
   let cs_sched_obj = JSON.parse(cs_sched);
-  let cs_sched_warn = warning_generator.produceWarnings(cs_sched_obj);
+  let container = warning_generator.produceWarnings(cs_sched_obj);
 
-  expect(cs_sched_warn.length).toBeGreaterThan(0);
+  expect(container).toBeValidWarningContainer();
+  const normal = container.normalWarnings;
+  const specific = container.courseWarnings;
 
-  for (const warning of cs_sched_warn) {
-    expect(warning).toBeDefined();
-    expect(warning).toHaveProperty("message");
-    expect(warning).toHaveProperty("termId");
-  }
+  expect(normal).toContainWarnings([
+    {
+      message: "Enrolled in a max of 20 credits. May be over-enrolled.",
+      termId: 201910,
+    },
+    {
+      message: "Enrolled in a min of 20 credits. May be over-enrolled.",
+      termId: 201910,
+    },
+    {
+      message: "Enrolled in a max of 29 credits. May be over-enrolled.",
+      termId: 201860,
+    },
+    {
+      message: "Enrolled in a min of 23 credits. May be over-enrolled.",
+      termId: 201860,
+    },
+  ]);
 
-  expect(cs_sched_warn).toContainEqual({
-    message: "Enrolled in a max of 20 credits. May be over-enrolled.",
-    termId: 201910,
-  });
-  expect(cs_sched_warn).toContainEqual({
-    message: "Enrolled in a min of 20 credits. May be over-enrolled.",
-    termId: 201910,
-  });
-  expect(cs_sched_warn).toContainEqual({
-    message: "Enrolled in a max of 29 credits. May be over-enrolled.",
-    termId: 201860,
-  });
-  expect(cs_sched_warn).toContainEqual({
-    message: "Enrolled in a min of 23 credits. May be over-enrolled.",
-    termId: 201860,
-  });
+  expect(specific).toContainWarnings([
+    {
+      classId: "1151",
+      message:
+        "PHYS1151: prereqs not satisfied: OR: MATH1241,MATH1251,MATH1340,MATH1341,MATH1342,MATH2321",
+      subject: "PHYS",
+      termId: 201860,
+    },
+  ]);
 });
 
 test("perfect schedule, no requirement group warnings for cs_pos_1.json", () => {

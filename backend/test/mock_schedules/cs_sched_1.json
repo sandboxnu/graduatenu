@@ -38,19 +38,43 @@
             "classId": "1341",
             "subject": "MATH",
             "numCreditsMin": 4,
-            "numCreditsMax": 4
+            "numCreditsMax": 4,
+            "prereqs": {
+              "type": "and",
+              "values": []
+            },
+            "coreqs": {
+              "type": "and",
+              "values": []
+            }
           },
           {
             "classId": "1342",
             "subject": "MATH",
             "numCreditsMin": 4,
-            "numCreditsMax": 4
+            "numCreditsMax": 4,
+            "prereqs": {
+              "type": "and",
+              "values": []
+            },
+            "coreqs": {
+              "type": "and",
+              "values": []
+            }
           },
           {
             "classId": "1111",
             "subject": "BIOL",
             "numCreditsMin": 4,
-            "numCreditsMax": 4
+            "numCreditsMax": 4,
+            "prereqs": {
+              "type": "and",
+              "values": []
+            },
+            "coreqs": {
+              "type": "and",
+              "values": []
+            }
           },
           {
             "classId": "1112",
@@ -65,7 +89,11 @@
               ]
             },
             "numCreditsMin": 1,
-            "numCreditsMax": 1
+            "numCreditsMax": 1,
+            "coreqs": {
+              "values": [],
+              "type": "and"
+            }
           },
           {
             "classId": "1113",
@@ -93,7 +121,11 @@
               ]
             },
             "numCreditsMin": 4,
-            "numCreditsMax": 4
+            "numCreditsMax": 4,
+            "coreqs": {
+              "type": "and",
+              "values": []
+            }
           },
           {
             "classId": "1114",
@@ -108,25 +140,53 @@
               ]
             },
             "numCreditsMin": 1,
-            "numCreditsMax": 1
+            "numCreditsMax": 1,
+            "coreqs": {
+              "values": [],
+              "type": "and"
+            }
           },
           {
             "classId": "1111",
             "subject": "ENGW",
             "numCreditsMin": 4,
-            "numCreditsMax": 4
+            "numCreditsMax": 4,
+            "prereqs": {
+              "type": "and",
+              "values": []
+            },
+            "coreqs": {
+              "type": "and",
+              "values": []
+            }
           },
           {
             "classId": "1990",
             "subject": "CS",
             "numCreditsMin": 1,
-            "numCreditsMax": 4
+            "numCreditsMax": 4,
+            "prereqs": {
+              "type": "and",
+              "values": []
+            },
+            "coreqs": {
+              "type": "and",
+              "values": []
+            }
           },
           {
             "classId": "1115",
             "subject": "ECON",
             "numCreditsMin": 4,
-            "numCreditsMax": 4
+            "numCreditsMax": 4,
+            "prereqs": {
+              "type": "and",
+              "values": []
+            },
+            "coreqs": {
+              "type": "and",
+              "values": []
+            }
           },
           {
             "classId": "1116",
