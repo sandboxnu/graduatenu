@@ -1,9 +1,9 @@
 import React from "react";
-import { Draggable } from "react-beautiful-dnd";
-import { DNDScheduleCourse } from "../../models/types";
+import { Draggable, DraggableProvided } from "react-beautiful-dnd";
+import { DNDScheduleCourse, CourseWarning } from "../../models/types";
 import { CLASS_BLOCK_WIDTH, CLASS_BLOCK_HEIGHT } from "../../constants";
 import styled from "styled-components";
-import { Card } from "@material-ui/core";
+import { Card, Tooltip } from "@material-ui/core";
 import { LargeClassBlock } from "./LargeClassBlock";
 import { SmallClassBlock } from "./SmallClassBlock";
 
@@ -16,13 +16,15 @@ const Block = styled(Card)<any>`
   flex-direction: row;
 `;
 
-const Indent = styled.div`
+const Indent = styled.div<any>`
   width: 20px;
-  background-color: rgba(173, 198, 255, 0.9);
+  background-color: ${props =>
+    props.warning ? "rgba(175, 50, 50, 0.9)" : "rgba(173, 198, 255, 0.9)"};
 `;
 
-const ClassBlockBody = styled.div`
-  background-color: rgba(173, 198, 255, 0.3);
+const ClassBlockBody = styled.div<any>`
+  background-color: ${props =>
+    props.warning ? "rgba(216, 86, 86, 0.9)" : "rgba(173, 198, 255, 0.3)"};
   padding-left: 8px;
   flex: 1;
 `;
@@ -30,6 +32,7 @@ const ClassBlockBody = styled.div`
 interface ClassBlockProps {
   class: DNDScheduleCourse;
   index: number;
+  warning?: CourseWarning;
 }
 
 export class ClassBlock extends React.Component<ClassBlockProps> {
@@ -60,24 +63,37 @@ export class ClassBlock extends React.Component<ClassBlockProps> {
 
     return (
       <Draggable draggableId={this.props.class.dndId} index={this.props.index}>
-        {provided => (
-          <Block
-            {...provided.draggableProps}
-            {...provided.dragHandleProps}
-            ref={provided.innerRef}
-            height={height}
-          >
-            <Indent />
-            <ClassBlockBody>
-              {numCredits > 2 ? (
-                <LargeClassBlock course={this.props.class} />
-              ) : (
-                <SmallClassBlock course={this.props.class} />
-              )}
-            </ClassBlockBody>
-          </Block>
-        )}
+        {provided =>
+          !!this.props.warning ? (
+            <Tooltip title={this.props.warning.message} placement="top">
+              {this.renderBody(provided, height)}
+            </Tooltip>
+          ) : (
+            this.renderBody(provided, height)
+          )
+        }
       </Draggable>
+    );
+  }
+
+  renderBody(provided: DraggableProvided, height: number) {
+    const numCredits = this.props.class.numCreditsMax;
+    return (
+      <Block
+        {...provided.draggableProps}
+        {...provided.dragHandleProps}
+        ref={provided.innerRef}
+        height={height}
+      >
+        <Indent warning={this.props.warning} />
+        <ClassBlockBody warning={this.props.warning}>
+          {numCredits > 2 ? (
+            <LargeClassBlock course={this.props.class} />
+          ) : (
+            <SmallClassBlock course={this.props.class} />
+          )}
+        </ClassBlockBody>
+      </Block>
     );
   }
 }

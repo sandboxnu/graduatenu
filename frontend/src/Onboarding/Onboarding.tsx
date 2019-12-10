@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { GraduateGrey } from "../constants";
 import { Button, Card } from "@material-ui/core";
+import picture from "../assets/landingils.png";
 
 const Container = styled.div`
   display: flex;
@@ -36,11 +37,10 @@ const DescriptionText = styled.p`
   margin-bottom: 30px;
 `;
 
-const GraduateLogo = styled.div`
-  height: 200px;
-  width: 200px;
-  background-color: grey;
-  margin: 50px;
+const GraduateLogo = styled.img`
+  height: 250px;
+  width: 175px;
+  align-self: center;
 `;
 
 const ContentWrapper = styled.div`
@@ -120,7 +120,7 @@ export class Onboarding extends React.Component {
               </Button>
             </Link>
           </BodyText>
-          <GraduateLogo></GraduateLogo>
+          <GraduateLogo src={picture} alt="picture"></GraduateLogo>
         </Body>
         <ContentWrapper>
           <ContentWall></ContentWall>

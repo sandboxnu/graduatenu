@@ -12,6 +12,7 @@ import {
   DNDScheduleYear,
   DNDScheduleTerm,
   IUserData,
+  CourseWarning,
 } from "../models/types";
 import styled from "styled-components";
 import { Year } from "../components/Year";
@@ -82,6 +83,7 @@ export interface HomeState {
   major?: Major;
   currentClassCounter: number; // used for DND purposes, every class needs a unique ID
   warnings: IWarning[];
+  courseWarnings: CourseWarning[];
 }
 
 type Props = HomeProps & RouteComponentProps;
@@ -98,6 +100,7 @@ class HomeComponent extends React.Component<Props, HomeState> {
       currentClassCounter: 0,
       planStr: undefined,
       warnings: [],
+      courseWarnings: [],
     };
 
     if (!!userData.plan) {
@@ -202,16 +205,18 @@ class HomeComponent extends React.Component<Props, HomeState> {
   }
 
   updateWarnings(newState: HomeState) {
-    const warnings = produceWarnings(newState.schedule);
+    const container = produceWarnings(newState.schedule);
+    const normal = container.normalWarnings;
     this.setState({
-      warnings: warnings,
+      warnings: normal,
+      courseWarnings: container.courseWarnings,
     });
 
     // remove existing toasts
     this.props.toastStack.forEach(t => this.props.removeToast(t.id));
 
     // add new toasts
-    warnings.forEach(w => {
+    normal.forEach(w => {
       this.props.addToast(w.message, {
         appearance: "warning",
       });
@@ -357,6 +362,9 @@ class HomeComponent extends React.Component<Props, HomeState> {
         schedule={this.state.schedule}
         handleAddClasses={this.handleAddClasses.bind(this)}
         handleStatusChange={this.handleStatusChange.bind(this)}
+        courseWarnings={this.state.courseWarnings.filter(
+          w => convertTermIdToYear(w.termId) === year
+        )}
       />
     ));
   }

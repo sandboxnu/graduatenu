@@ -7,8 +7,10 @@ import {
   ScheduleCourse,
   Status,
   SeasonWord,
+  CourseWarning,
 } from "../../models/types";
 import { SEMESTER_MIN_HEIGHT } from "../../constants";
+import { convertTermIdToSeason } from "../../utils";
 
 export interface IYearProps {
   index: number;
@@ -19,6 +21,7 @@ export interface IYearProps {
     tappedSemester: SeasonWord,
     year: number
   ) => void;
+  courseWarnings: CourseWarning[];
 }
 
 const YearText = styled.h3`
@@ -54,11 +57,17 @@ export class Year extends React.Component<IYearProps> {
             handleAddClasses={this.addClassesWrapper(
               schedule.yearMap[year].fall.termId
             )}
+            courseWarnings={this.props.courseWarnings.filter(
+              w => convertTermIdToSeason(w.termId) === "fall"
+            )}
           />
           <SemesterBlock
             semester={schedule.yearMap[year].spring}
             handleAddClasses={this.addClassesWrapper(
               schedule.yearMap[year].spring.termId
+            )}
+            courseWarnings={this.props.courseWarnings.filter(
+              w => convertTermIdToSeason(w.termId) === "spring"
             )}
           />
           <SemesterBlock
@@ -66,15 +75,21 @@ export class Year extends React.Component<IYearProps> {
             handleAddClasses={this.addClassesWrapper(
               schedule.yearMap[year].summer1.termId
             )}
+            courseWarnings={this.props.courseWarnings.filter(
+              w => convertTermIdToSeason(w.termId) === "summer1"
+            )}
           />
           <SemesterBlock
             semester={schedule.yearMap[year].summer2}
             handleAddClasses={this.addClassesWrapper(
               schedule.yearMap[year].summer2.termId
             )}
+            courseWarnings={this.props.courseWarnings.filter(
+              w => convertTermIdToSeason(w.termId) === "summer2"
+            )}
           />
         </YearBody>
-        <YearBottom schedule={schedule} year={year}></YearBottom>
+        <YearBottom schedule={schedule} year={year} />
       </div>
     );
   }
