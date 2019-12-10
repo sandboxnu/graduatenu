@@ -153,7 +153,7 @@ class HomeComponent extends React.Component<Props, HomeState> {
   removeHovers(currSemester: DNDScheduleTerm) {
     for (const yearnum of this.state.schedule.years) {
       const year = this.state.schedule.yearMap[yearnum];
-      console.log(year.summer1.status.toString());
+      // console.log(year.summer1.status.toString());
       if (isCoopOrVacation(year.fall) && year.fall !== currSemester) {
         year.fall.status = year.fall.status.replace("HOVER", "") as Status;
         this.updateSemester(yearnum, "fall", year.fall);
@@ -362,7 +362,7 @@ class HomeComponent extends React.Component<Props, HomeState> {
   }
 
   render() {
-    console.log("planStr " + this.state.planStr);
+    // console.log("planStr " + this.state.planStr);
     const { major, schedule } = this.state;
     return (
       <OuterContainer>
@@ -371,7 +371,7 @@ class HomeComponent extends React.Component<Props, HomeState> {
           onDragUpdate={this.onDragUpdate}
         >
           <Container>
-            <div onClick={() => console.log(this.state)}>
+            <div /* onClick={() => console.log(this.state)} */>
               <h2>Plan Of Study</h2>
             </div>
             <DropDownWrapper>
