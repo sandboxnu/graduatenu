@@ -53,20 +53,24 @@ function buildSchedule($: CheerioStatic, table: CheerioElement): Schedule {
     .each((index, tableRow) => {
       // track the table number.
       const rowClassName = $(tableRow).attr("class");
-
-      if (/^odd/.test(rowClassName) || /^even/.test(rowClassName)) {
-        // is not always length 4, depends on how many semesters we have.
-        const courses = addCourses($, tableRow);
-        rows.push(courses);
-      } else if (/^plangridsum/.test(rowClassName)) {
-        // make a new year with the existing data
-        const flipped = rows[0].map((col, i) => rows.map(row => row[i]));
-        years.push(buildYear($, flipped));
-        rows = [];
-      } else if (/^plangridtotal/.test(rowClassName)) {
-        totalCredits = $(tableRow)
-          .find("td")
-          .text();
+      if (!!rowClassName) {
+        if (/^odd/.test(rowClassName) || /^even/.test(rowClassName)) {
+          // is not always length 4, depends on how many semesters we have.
+          const courses = addCourses($, tableRow);
+          rows.push(courses);
+        } else if (/^plangridsum/.test(rowClassName)) {
+          // make a new year with the existing data
+          const flipped = rows[0].map((col, i) => rows.map(row => row[i]));
+          years.push(buildYear($, flipped));
+          rows = [];
+        } else if (/^plangridtotal/.test(rowClassName)) {
+          totalCredits = $(tableRow)
+            .find("td")
+            .text();
+        }
+      } else {
+        // should never get here. If we do, error.
+        throw 'attribute "class" was not found tableRow.';
       }
     });
 
@@ -131,18 +135,21 @@ function addCourses(
     .find("td")
     .each((index, tableCell) => {
       let tableCellClass = $(tableCell).attr("class");
+      // get rid of whitespace.
       if (tableCellClass) {
         tableCellClass = tableCellClass.replace(/\s\s+/g, "");
       }
 
       let tableCellText = $(tableCell).text();
+      // get rid of whitespace.
       if (tableCellText) {
         tableCellText = tableCellText.replace(/\s\s+/g, "");
       }
 
       // push item.
       cells.push({
-        class: tableCellClass,
+        // if class is undefined, then we had a colspan. mark as accordingly.
+        class: !!tableCellClass ? tableCellClass : "colspan",
         text: tableCellText,
       });
     });
@@ -229,7 +236,7 @@ function addCourses(
           }
         }
         break;
-      case undefined:
+      case "colspan":
         // we had a colspan. empty.
         produced.push("");
         break;
