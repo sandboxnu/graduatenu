@@ -11,6 +11,7 @@ import {
   IWarning,
   DNDScheduleYear,
   DNDScheduleTerm,
+  IUserData,
   CourseWarning,
 } from "../models/types";
 import styled from "styled-components";
@@ -24,16 +25,18 @@ import {
   addClassToSchedule,
   produceWarnings,
   moveCourse,
+  planToString,
 } from "../utils";
 import { TextField } from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
 import { majors } from "../majors";
-import { ChooseMajorPlanModal } from "../components";
 import { CLASS_BLOCK_WIDTH } from "../constants";
 import { DropDownModal } from "../components";
 import { Sidebar } from "../components/Sidebar";
 import { withToast } from "./toastHook";
 import { AppearanceTypes } from "react-toast-notifications";
+import { withRouter, RouteComponentProps } from "react-router-dom";
+import { plans } from "../plans";
 
 const OuterContainer = styled.div`
   display: flex;
@@ -59,6 +62,11 @@ const Container = styled.div`
   background-color: "#ff76ff";
 `;
 
+const DropDownWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
 interface HomeProps {
   addToast: (message: string, options: any) => void;
   removeToast: (id: string) => void;
@@ -71,25 +79,33 @@ interface HomeProps {
 
 export interface HomeState {
   schedule: DNDSchedule;
+  planStr?: string;
   major?: Major;
   currentClassCounter: number; // used for DND purposes, every class needs a unique ID
-  chooseMajorModalVisible: boolean;
   warnings: IWarning[];
   courseWarnings: CourseWarning[];
 }
 
-class HomeComponent extends React.Component<HomeProps, HomeState> {
-  constructor(props: any) {
+type Props = HomeProps & RouteComponentProps;
+
+class HomeComponent extends React.Component<Props, HomeState> {
+  constructor(props: Props) {
     super(props);
+
+    const userData: IUserData = props.location.state.userData;
 
     this.state = {
       schedule: mockData,
-      major: undefined,
+      major: userData.major,
       currentClassCounter: 0,
-      chooseMajorModalVisible: false,
+      planStr: undefined,
       warnings: [],
       courseWarnings: [],
     };
+
+    if (!!userData.plan) {
+      this.setSchedule(userData.plan);
+    }
   }
 
   onDragEnd = (result: any) => {
@@ -140,7 +156,7 @@ class HomeComponent extends React.Component<HomeProps, HomeState> {
   removeHovers(currSemester: DNDScheduleTerm) {
     for (const yearnum of this.state.schedule.years) {
       const year = this.state.schedule.yearMap[yearnum];
-      console.log(year.summer1.status.toString());
+      // console.log(year.summer1.status.toString());
       if (isCoopOrVacation(year.fall) && year.fall !== currSemester) {
         year.fall.status = year.fall.status.replace("HOVER", "") as Status;
         this.updateSemester(yearnum, "fall", year.fall);
@@ -210,10 +226,23 @@ class HomeComponent extends React.Component<HomeProps, HomeState> {
   onChooseMajor(event: React.SyntheticEvent<{}>, value: any) {
     const maj = majors.find((m: any) => m.name === value);
 
-    if (!!maj) {
-      this.setState({ chooseMajorModalVisible: true, major: maj });
-    } else {
-      this.setState({ major: maj });
+    this.setState({ major: maj, planStr: undefined });
+  }
+
+  onChoosePlan(event: React.SyntheticEvent<{}>, value: any) {
+    if (value === "None") {
+      this.setState({
+        planStr: undefined,
+      });
+      return;
+    }
+
+    const plan = plans[this.state.major!.name].find(
+      (p: Schedule) => planToString(p) === value
+    );
+
+    if (plan) {
+      this.setSchedule(plan);
     }
   }
 
@@ -248,14 +277,11 @@ class HomeComponent extends React.Component<HomeProps, HomeState> {
       ...this.state,
       schedule: dndSchedule,
       currentClassCounter: counter,
+      planStr: planToString(schedule),
     };
     this.setState(newState, () => {
       this.updateWarnings(newState);
     });
-  }
-
-  hideChooseMajorPlanModal() {
-    this.setState({ chooseMajorModalVisible: false });
   }
 
   handleStatusChange(
@@ -288,7 +314,7 @@ class HomeComponent extends React.Component<HomeProps, HomeState> {
   renderMajorDropDown() {
     return (
       <Autocomplete
-        style={{ width: 300 }}
+        style={{ width: 300, marginRight: 18 }}
         disableListWrap
         options={majors.map(maj => maj.name)}
         renderInput={params => (
@@ -301,6 +327,29 @@ class HomeComponent extends React.Component<HomeProps, HomeState> {
         )}
         value={!!this.state.major ? this.state.major.name + " " : ""}
         onChange={this.onChooseMajor.bind(this)}
+      />
+    );
+  }
+
+  renderPlansDropDown() {
+    return (
+      <Autocomplete
+        style={{ width: 300 }}
+        disableListWrap
+        options={[
+          "None",
+          ...plans[this.state.major!.name].map(p => planToString(p)),
+        ]}
+        renderInput={params => (
+          <TextField
+            {...params}
+            variant="outlined"
+            label="Select A Plan"
+            fullWidth
+          />
+        )}
+        value={this.state.planStr || "None"}
+        onChange={this.onChoosePlan.bind(this)}
       />
     );
   }
@@ -321,34 +370,33 @@ class HomeComponent extends React.Component<HomeProps, HomeState> {
   }
 
   render() {
+    // console.log("planStr " + this.state.planStr);
+    const { major, schedule } = this.state;
     return (
       <OuterContainer>
         <DragDropContext
           onDragEnd={this.onDragEnd}
           onDragUpdate={this.onDragUpdate}
         >
-          <ChooseMajorPlanModal
-            visible={this.state.chooseMajorModalVisible}
-            handleClose={this.hideChooseMajorPlanModal.bind(this)}
-            handleSubmit={this.setSchedule.bind(this)}
-            major={this.state.major!}
-          />
           <Container>
-            <div onClick={() => console.log(this.state)}>
+            <div /* onClick={() => console.log(this.state)} */>
               <h2>Plan Of Study</h2>
             </div>
-            {this.renderMajorDropDown()}
+            <DropDownWrapper>
+              {this.renderMajorDropDown()}
+              {!!major && this.renderPlansDropDown()}
+            </DropDownWrapper>
             <CompletedCoursesWrapper>
               <h3>Completed Courses</h3>
-              <DropDownModal schedule={this.state.schedule} />
+              <DropDownModal schedule={schedule} />
             </CompletedCoursesWrapper>
             {this.renderYears()}
           </Container>
         </DragDropContext>
-        <Sidebar schedule={this.state.schedule} major={this.state.major} />
+        <Sidebar schedule={schedule} major={major} />
       </OuterContainer>
     );
   }
 }
 
-export const Home = withToast(HomeComponent);
+export const Home = withRouter(withToast(HomeComponent));

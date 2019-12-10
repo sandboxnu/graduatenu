@@ -111,7 +111,10 @@ export class Onboarding extends React.Component {
               Navigate the depths of the Northeastern graduation requirements
               and build a personalized plan of study.
             </DescriptionText>
-            <Link to="/home" style={{ textDecoration: "none" }}>
+            <Link
+              to={{ pathname: "/name", state: { userData: {} } }}
+              style={{ textDecoration: "none" }}
+            >
               <Button variant="contained" color="secondary">
                 Get Started
               </Button>

@@ -49,6 +49,12 @@ export function getNumCoops(schedule: Schedule): number {
   return num;
 }
 
+export function planToString(plan: Schedule): string {
+  return `${plan.years.length} Years, ${getNumCoops(plan)} Co-ops, ${
+    isSpringCycle(plan) ? "Spring" : "Fall"
+  } Cycle`;
+}
+
 export function isSpringCycle(schedule: Schedule): boolean {
   for (const year of schedule.years) {
     const yearSch = schedule.yearMap[year];

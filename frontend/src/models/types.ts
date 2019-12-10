@@ -344,6 +344,15 @@ export interface CourseTakenTracker {
   addCourse: (toAdd: string) => void;
 }
 
+export interface IUserData {
+  fullName?: string;
+  academicYear?: number;
+  graduationYear?: number;
+  major?: Major;
+  minors?: string[];
+  plan?: Schedule;
+}
+
 /** ------------------------------------------------------------------------
  *
  *            OLD STUFF FOLLOWS ! This stuff is big outdated and is only
