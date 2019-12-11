@@ -51,6 +51,7 @@ const CompletedCoursesWrapper = styled.div`
   flex-direction: column;
   justify-content: start;
   width: ${CLASS_BLOCK_WIDTH * 4 + 25}px;
+  margin-bottom: 12px;
 `;
 
 const Container = styled.div`
@@ -93,18 +94,20 @@ class HomeComponent extends React.Component<Props, HomeState> {
   constructor(props: Props) {
     super(props);
 
-    const userData: IUserData = props.location.state.userData;
+    const userData: IUserData = props.location.state
+      ? props.location.state.userData
+      : undefined;
 
     this.state = {
       schedule: mockData,
-      major: userData.major,
+      major: userData ? userData.major : undefined,
       currentClassCounter: 0,
       planStr: undefined,
       warnings: [],
       courseWarnings: [],
     };
 
-    if (!!userData.plan) {
+    if (!!userData && !!userData.plan) {
       this.setSchedule(userData.plan);
     }
   }
@@ -220,6 +223,7 @@ class HomeComponent extends React.Component<Props, HomeState> {
     normal.forEach(w => {
       this.props.addToast(w.message, {
         appearance: "warning",
+        autoDismiss: true,
       });
     });
   }

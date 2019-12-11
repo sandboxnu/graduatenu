@@ -10,6 +10,7 @@ const Container = styled.div`
   flex-direction: row;
   height: 100;
   background-color: ${GraduateGrey};
+  margin-top: 16px;
 `;
 
 const SemesterText = styled.p`
@@ -17,6 +18,7 @@ const SemesterText = styled.p`
 `;
 
 interface YearTopProps {
+  year: number;
   handleStatusChange: (newStatus: Status, tappedSemester: SeasonWord) => void;
 }
 
@@ -49,28 +51,29 @@ export class YearTop extends React.Component<YearTopProps, YearTopState> {
   };
 
   render() {
+    const { year } = this.props;
     return (
       <Container>
         <div style={textContainerStyle}>
-          <SemesterText>Fall</SemesterText>
+          <SemesterText>Fall {year}</SemesterText>
           <ThreeDots
             onClick={(event: any) => this.handleClick(event, "fall")}
           ></ThreeDots>
         </div>
         <div style={textContainerStyle}>
-          <SemesterText>Spring</SemesterText>
+          <SemesterText>Spring {year + 1}</SemesterText>
           <ThreeDots
             onClick={(event: any) => this.handleClick(event, "spring")}
           ></ThreeDots>
         </div>
         <div style={textContainerStyle}>
-          <SemesterText>Summer 1</SemesterText>
+          <SemesterText>Summer I {year + 1}</SemesterText>
           <ThreeDots
             onClick={(event: any) => this.handleClick(event, "summer1")}
           ></ThreeDots>
         </div>
         <div style={textContainerStyle}>
-          <SemesterText>Summer 2</SemesterText>
+          <SemesterText>Summer II {year + 1}</SemesterText>
           <ThreeDots
             onClick={(event: any) => this.handleClick(event, "summer2")}
           ></ThreeDots>
