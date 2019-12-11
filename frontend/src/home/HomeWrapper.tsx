@@ -4,7 +4,7 @@ import { Home } from "./Home";
 
 export const HomeWrapper: React.FC = () => {
   return (
-    <ToastProvider placement="bottom-right">
+    <ToastProvider placement="bottom-right" autoDismissTimeout={10000}>
       <Home />
     </ToastProvider>
   );

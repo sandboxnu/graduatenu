@@ -24,10 +24,6 @@ export interface IYearProps {
   courseWarnings: CourseWarning[];
 }
 
-const YearText = styled.h3`
-  margin-bottom: 8px;
-`;
-
 const YearBody = styled.div`
   display: flex;
   flex-direction: row;
@@ -45,11 +41,11 @@ export class Year extends React.Component<IYearProps> {
     const year = schedule.years[index];
     return (
       <div style={{ marginBottom: 12 }}>
-        <YearText>{year + " - " + (year + 1)}</YearText>
         <YearTop
           handleStatusChange={(newStatus: Status, tappedSemester: SeasonWord) =>
             this.props.handleStatusChange(newStatus, tappedSemester, year)
           }
+          year={year}
         />
         <YearBody>
           <SemesterBlock
