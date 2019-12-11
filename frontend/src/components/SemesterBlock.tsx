@@ -6,6 +6,7 @@ import {
   DNDScheduleTerm,
   ScheduleCourse,
   CourseWarning,
+  DNDScheduleCourse,
 } from "../models/types";
 import { AddButton } from "./Year";
 import styled from "styled-components";
@@ -37,6 +38,7 @@ interface SemesterBlockProps {
   semester: DNDScheduleTerm;
   handleAddClasses: (courses: ScheduleCourse[]) => void;
   courseWarnings: CourseWarning[];
+  onDeleteClass: (course: DNDScheduleCourse) => void;
 }
 
 interface SemesterBlockState {
@@ -78,6 +80,7 @@ export class SemesterBlock extends React.Component<
                   w.subject + w.classId ===
                   scheduleCourse.subject + scheduleCourse.classId
               )}
+              onDelete={this.props.onDeleteClass}
             />
           );
         }

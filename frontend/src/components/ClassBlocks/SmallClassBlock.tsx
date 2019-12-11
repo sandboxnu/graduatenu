@@ -30,20 +30,16 @@ const Subtitle = styled.div`
   text-overflow: ellipsis;
 `;
 
-const MyDeleteIcon = styled(DeleteIcon)`
-  margin-right: 8px;
-  height: 4px;
-  width: 4px;
-`;
-
 interface SmallClassBlockProps {
   course: DNDScheduleCourse;
   hovering: boolean;
+  onDelete: () => void;
 }
 
 export const SmallClassBlock: React.FC<SmallClassBlockProps> = ({
   course,
   hovering,
+  onDelete,
 }) => {
   return (
     <Wrapper>
@@ -52,7 +48,9 @@ export const SmallClassBlock: React.FC<SmallClassBlockProps> = ({
         <Subtitle>{course.name}</Subtitle>
       </TextWrapper>
       <div style={{ visibility: hovering ? "visible" : "hidden" }}>
-        <MyDeleteIcon onClick={() => void 0} />
+        <IconButton onClick={onDelete} size="small" style={{ marginRight: 9 }}>
+          <DeleteIcon />
+        </IconButton>
       </div>
     </Wrapper>
   );

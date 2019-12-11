@@ -18,11 +18,13 @@ const Subtitle = styled.div`
 interface LargeClassBlockProps {
   course: DNDScheduleCourse;
   hovering: boolean;
+  onDelete: () => void;
 }
 
 export const LargeClassBlock: React.FC<LargeClassBlockProps> = ({
   course,
   hovering,
+  onDelete,
 }) => {
   return (
     <Wrapper>
@@ -31,7 +33,7 @@ export const LargeClassBlock: React.FC<LargeClassBlockProps> = ({
         <Subtitle>{course.name}</Subtitle>
       </div>
       <div style={{ visibility: hovering ? "visible" : "hidden" }}>
-        <IconButton onClick={() => void 0}>
+        <IconButton onClick={onDelete}>
           <DeleteIcon />
         </IconButton>
       </div>

@@ -12,6 +12,7 @@ import {
   DNDScheduleYear,
   DNDScheduleTerm,
   CourseWarning,
+  DNDScheduleCourse,
 } from "../models/types";
 import styled from "styled-components";
 import { Year } from "../components/Year";
@@ -285,6 +286,30 @@ class HomeComponent extends React.Component<HomeProps, HomeState> {
     });
   }
 
+  deleteCourse(semester: DNDScheduleTerm, course: DNDScheduleCourse) {
+    const { year, termId } = semester;
+    const season = convertTermIdToSeason(termId);
+    const newSchedule: DNDSchedule = {
+      ...this.state.schedule,
+      yearMap: {
+        ...this.state.schedule.yearMap,
+        [year]: {
+          ...this.state.schedule.yearMap[year],
+          [season]: {
+            ...(this.state.schedule.yearMap[year] as any)[season],
+            classes: [
+              ...(this.state.schedule.yearMap[year] as any)[
+                season
+              ].classes.filter((c: DNDScheduleCourse) => c !== course),
+            ],
+          },
+        },
+      },
+    };
+
+    this.setSchedule(newSchedule);
+  }
+
   renderMajorDropDown() {
     return (
       <Autocomplete
@@ -316,6 +341,7 @@ class HomeComponent extends React.Component<HomeProps, HomeState> {
         courseWarnings={this.state.courseWarnings.filter(
           w => convertTermIdToYear(w.termId) === year
         )}
+        onDeleteClass={this.deleteCourse.bind(this)}
       />
     ));
   }

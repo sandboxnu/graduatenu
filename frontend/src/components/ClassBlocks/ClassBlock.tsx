@@ -33,6 +33,7 @@ interface ClassBlockProps {
   class: DNDScheduleCourse;
   index: number;
   warning?: CourseWarning;
+  onDelete: (course: DNDScheduleCourse) => void;
 }
 
 interface ClassBlockState {
@@ -76,11 +77,13 @@ export class ClassBlock extends React.Component<
               <LargeClassBlock
                 course={this.props.class}
                 hovering={this.state.hovering}
+                onDelete={() => this.props.onDelete(this.props.class)}
               />
             ) : (
               <SmallClassBlock
                 course={this.props.class}
                 hovering={this.state.hovering}
+                onDelete={() => this.props.onDelete(this.props.class)}
               />
             )}
           </ClassBlockBody>
@@ -95,16 +98,16 @@ export class ClassBlock extends React.Component<
 
     switch (numCredits) {
       case 0:
-        height = CLASS_BLOCK_HEIGHT - 30;
-        break;
-      case 1:
-        height = CLASS_BLOCK_HEIGHT - 30;
-        break;
-      case 2:
         height = CLASS_BLOCK_HEIGHT - 20;
         break;
-      case 3:
+      case 1:
+        height = CLASS_BLOCK_HEIGHT - 20;
+        break;
+      case 2:
         height = CLASS_BLOCK_HEIGHT - 10;
+        break;
+      case 3:
+        height = CLASS_BLOCK_HEIGHT;
         break;
       case 4:
         height = CLASS_BLOCK_HEIGHT;
