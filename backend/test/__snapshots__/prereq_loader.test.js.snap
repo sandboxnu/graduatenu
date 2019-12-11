@@ -1537,9 +1537,22 @@ Object {
           },
           Object {
             "classId": "4501",
-            "name": "",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "4500",
+                  "subject": "CS",
+                },
+              ],
+            },
+            "name": "Recitation for CS 4500",
             "numCreditsMax": 0,
             "numCreditsMin": 0,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
             "subject": "CS",
           },
           Object {
@@ -1645,16 +1658,71 @@ Object {
           },
           Object {
             "classId": "1161",
-            "name": "",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "1162",
+                  "subject": "PHYS",
+                },
+                Object {
+                  "classId": "1163",
+                  "subject": "PHYS",
+                },
+              ],
+            },
+            "name": "Physics 1",
             "numCreditsMax": 4,
             "numCreditsMin": 4,
+            "prereqs": Object {
+              "type": "or",
+              "values": Array [
+                Object {
+                  "classId": "1241",
+                  "subject": "MATH",
+                },
+                Object {
+                  "classId": "1251",
+                  "subject": "MATH",
+                },
+                Object {
+                  "classId": "1341",
+                  "subject": "MATH",
+                },
+                Object {
+                  "classId": "1342",
+                  "subject": "MATH",
+                },
+                Object {
+                  "classId": "2321",
+                  "subject": "MATH",
+                },
+              ],
+            },
             "subject": "PHYS",
           },
           Object {
             "classId": "1162",
-            "name": "",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "1161",
+                  "subject": "PHYS",
+                },
+                Object {
+                  "classId": "1163",
+                  "subject": "PHYS",
+                },
+              ],
+            },
+            "name": "Lab for PHYS 1161 (HON)",
             "numCreditsMax": 1,
             "numCreditsMin": 1,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
             "subject": "PHYS",
           },
           Object {
@@ -2359,16 +2427,71 @@ Object {
         "classes": Array [
           Object {
             "classId": "1161",
-            "name": "",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "1162",
+                  "subject": "PHYS",
+                },
+                Object {
+                  "classId": "1163",
+                  "subject": "PHYS",
+                },
+              ],
+            },
+            "name": "Physics 1",
             "numCreditsMax": 4,
             "numCreditsMin": 4,
+            "prereqs": Object {
+              "type": "or",
+              "values": Array [
+                Object {
+                  "classId": "1241",
+                  "subject": "MATH",
+                },
+                Object {
+                  "classId": "1251",
+                  "subject": "MATH",
+                },
+                Object {
+                  "classId": "1341",
+                  "subject": "MATH",
+                },
+                Object {
+                  "classId": "1342",
+                  "subject": "MATH",
+                },
+                Object {
+                  "classId": "2321",
+                  "subject": "MATH",
+                },
+              ],
+            },
             "subject": "PHYS",
           },
           Object {
             "classId": "1162",
-            "name": "",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "1161",
+                  "subject": "PHYS",
+                },
+                Object {
+                  "classId": "1163",
+                  "subject": "PHYS",
+                },
+              ],
+            },
+            "name": "Lab for PHYS 1161 (HON)",
             "numCreditsMax": 1,
             "numCreditsMin": 1,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
             "subject": "PHYS",
           },
           Object {
@@ -3110,16 +3233,42 @@ Object {
         "classes": Array [
           Object {
             "classId": "1107",
-            "name": "",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "1108",
+                  "subject": "BIOL",
+                },
+              ],
+            },
+            "name": "Foundations of Biology",
             "numCreditsMax": 4,
             "numCreditsMin": 4,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
             "subject": "BIOL",
           },
           Object {
             "classId": "1108",
-            "name": "",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "1107",
+                  "subject": "BIOL",
+                },
+              ],
+            },
+            "name": "Lab for BIOL 1107",
             "numCreditsMax": 1,
             "numCreditsMin": 1,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
             "subject": "BIOL",
           },
           Object {
@@ -3218,9 +3367,17 @@ Object {
           },
           Object {
             "classId": "1000",
-            "name": "",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "Biochemistry at Northeastern",
             "numCreditsMax": 1,
             "numCreditsMin": 1,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
             "subject": "BIOC",
           },
         ],
@@ -4089,9 +4246,26 @@ Object {
           },
           Object {
             "classId": "4620",
-            "name": "",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "Introduction to Protein Chemistry",
             "numCreditsMax": 4,
             "numCreditsMin": 4,
+            "prereqs": Object {
+              "type": "or",
+              "values": Array [
+                Object {
+                  "classId": "2313",
+                  "subject": "CHEM",
+                },
+                Object {
+                  "classId": "2317",
+                  "subject": "CHEM",
+                },
+              ],
+            },
             "subject": "CHEM",
           },
           Object {
@@ -4277,16 +4451,42 @@ Object {
         "classes": Array [
           Object {
             "classId": "1107",
-            "name": "",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "1108",
+                  "subject": "BIOL",
+                },
+              ],
+            },
+            "name": "Foundations of Biology",
             "numCreditsMax": 4,
             "numCreditsMin": 4,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
             "subject": "BIOL",
           },
           Object {
             "classId": "1108",
-            "name": "",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "1107",
+                  "subject": "BIOL",
+                },
+              ],
+            },
+            "name": "Lab for BIOL 1107",
             "numCreditsMax": 1,
             "numCreditsMin": 1,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
             "subject": "BIOL",
           },
           Object {
@@ -4385,9 +4585,17 @@ Object {
           },
           Object {
             "classId": "1000",
-            "name": "",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "Biochemistry at Northeastern",
             "numCreditsMax": 1,
             "numCreditsMin": 1,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
             "subject": "BIOC",
           },
         ],
@@ -5343,9 +5551,26 @@ Object {
           },
           Object {
             "classId": "4620",
-            "name": "",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "Introduction to Protein Chemistry",
             "numCreditsMax": 4,
             "numCreditsMin": 4,
+            "prereqs": Object {
+              "type": "or",
+              "values": Array [
+                Object {
+                  "classId": "2313",
+                  "subject": "CHEM",
+                },
+                Object {
+                  "classId": "2317",
+                  "subject": "CHEM",
+                },
+              ],
+            },
             "subject": "CHEM",
           },
           Object {
@@ -5444,16 +5669,42 @@ Object {
         "classes": Array [
           Object {
             "classId": "1107",
-            "name": "",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "1108",
+                  "subject": "BIOL",
+                },
+              ],
+            },
+            "name": "Foundations of Biology",
             "numCreditsMax": 4,
             "numCreditsMin": 4,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
             "subject": "BIOL",
           },
           Object {
             "classId": "1108",
-            "name": "",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "1107",
+                  "subject": "BIOL",
+                },
+              ],
+            },
+            "name": "Lab for BIOL 1107",
             "numCreditsMax": 1,
             "numCreditsMin": 1,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
             "subject": "BIOL",
           },
           Object {
@@ -5552,9 +5803,17 @@ Object {
           },
           Object {
             "classId": "1000",
-            "name": "",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "Biochemistry at Northeastern",
             "numCreditsMax": 1,
             "numCreditsMin": 1,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
             "subject": "BIOC",
           },
         ],
@@ -6511,9 +6770,26 @@ Object {
         "classes": Array [
           Object {
             "classId": "4620",
-            "name": "",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "Introduction to Protein Chemistry",
             "numCreditsMax": 4,
             "numCreditsMin": 4,
+            "prereqs": Object {
+              "type": "or",
+              "values": Array [
+                Object {
+                  "classId": "2313",
+                  "subject": "CHEM",
+                },
+                Object {
+                  "classId": "2317",
+                  "subject": "CHEM",
+                },
+              ],
+            },
             "subject": "CHEM",
           },
           Object {
@@ -6647,16 +6923,42 @@ Object {
         "classes": Array [
           Object {
             "classId": "1107",
-            "name": "",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "1108",
+                  "subject": "BIOL",
+                },
+              ],
+            },
+            "name": "Foundations of Biology",
             "numCreditsMax": 4,
             "numCreditsMin": 4,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
             "subject": "BIOL",
           },
           Object {
             "classId": "1108",
-            "name": "",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "1107",
+                  "subject": "BIOL",
+                },
+              ],
+            },
+            "name": "Lab for BIOL 1107",
             "numCreditsMax": 1,
             "numCreditsMin": 1,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
             "subject": "BIOL",
           },
           Object {
@@ -6755,9 +7057,17 @@ Object {
           },
           Object {
             "classId": "1000",
-            "name": "",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "Biochemistry at Northeastern",
             "numCreditsMax": 1,
             "numCreditsMin": 1,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
             "subject": "BIOC",
           },
         ],
@@ -7690,9 +8000,26 @@ Object {
           },
           Object {
             "classId": "4620",
-            "name": "",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "Introduction to Protein Chemistry",
             "numCreditsMax": 4,
             "numCreditsMin": 4,
+            "prereqs": Object {
+              "type": "or",
+              "values": Array [
+                Object {
+                  "classId": "2313",
+                  "subject": "CHEM",
+                },
+                Object {
+                  "classId": "2317",
+                  "subject": "CHEM",
+                },
+              ],
+            },
             "subject": "CHEM",
           },
           Object {
