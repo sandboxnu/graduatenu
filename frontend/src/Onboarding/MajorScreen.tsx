@@ -9,24 +9,36 @@ import { Major, Schedule } from "../models/types";
 import styled from "styled-components";
 import { plans } from "../plans";
 import { planToString } from "../utils";
+import { connect } from "react-redux";
+import { setMajorAction, setPlanStrAction } from "../state/actions/userActions";
+import { Dispatch } from "redux";
+import { setScheduleAction } from "../state/actions/scheduleActions";
 
 const DropDownWrapper = styled.div`
   display: flex;
   flex-direction: row;
 `;
 
-interface State {
-  major?: Major;
-  plan?: Schedule;
+interface MajorScreenProps {
+  setMajor: (major?: Major) => void;
+  setPlanStr: (planStr?: string) => void;
+  setPlan: (plan: Schedule) => void;
 }
 
-class MajorComponent extends React.Component<RouteComponentProps, State> {
-  constructor(props: RouteComponentProps) {
+interface MajorScreenState {
+  major?: Major;
+  planStr?: string;
+}
+
+type Props = MajorScreenProps & RouteComponentProps;
+
+class MajorComponent extends React.Component<Props, MajorScreenState> {
+  constructor(props: Props) {
     super(props);
 
     this.state = {
       major: undefined,
-      plan: undefined,
+      planStr: undefined,
     };
   }
 
@@ -37,11 +49,20 @@ class MajorComponent extends React.Component<RouteComponentProps, State> {
   }
 
   onChoosePlan(event: React.SyntheticEvent<{}>, value: any) {
-    const plan = plans[this.state.major!.name].find(
-      (p: Schedule) => planToString(p) === value
-    );
+    this.setState({ planStr: value });
+  }
 
-    this.setState({ plan: plan });
+  onSubmit() {
+    this.props.setMajor(this.state.major);
+    this.props.setPlanStr(this.state.planStr);
+
+    if (this.state.planStr) {
+      const plan = plans[this.state.major!.name].find(
+        (p: Schedule) => planToString(p) === this.state.planStr
+      );
+
+      this.props.setPlan(plan!);
+    }
   }
 
   renderMajorDropDown() {
@@ -78,7 +99,7 @@ class MajorComponent extends React.Component<RouteComponentProps, State> {
             fullWidth
           />
         )}
-        value={!!this.state.plan ? planToString(this.state.plan) + " " : ""}
+        value={this.state.planStr || ""}
         onChange={this.onChoosePlan.bind(this)}
       />
     );
@@ -94,14 +115,8 @@ class MajorComponent extends React.Component<RouteComponentProps, State> {
         <Link
           to={{
             pathname: "/home", // change to "/minors" to go to the minors screen
-            state: {
-              userData: {
-                ...this.props.location.state.userData,
-                major: this.state.major,
-                plan: this.state.plan,
-              },
-            },
           }}
+          onClick={this.onSubmit.bind(this)}
           style={{ textDecoration: "none" }}
         >
           <NextButton />
@@ -111,4 +126,13 @@ class MajorComponent extends React.Component<RouteComponentProps, State> {
   }
 }
 
-export const MajorScreen = withRouter(MajorComponent);
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  setMajor: (major?: Major) => dispatch(setMajorAction(major)),
+  setPlanStr: (planStr?: string) => dispatch(setPlanStrAction(planStr)),
+  setPlan: (plan: Schedule) => dispatch(setScheduleAction(plan)),
+});
+
+export const MajorScreen = connect(
+  null,
+  mapDispatchToProps
+)(withRouter(MajorComponent));

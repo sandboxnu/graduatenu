@@ -3,14 +3,23 @@ import { withRouter, RouteComponentProps, Link } from "react-router-dom";
 import { TextField } from "@material-ui/core";
 import { GenericQuestionTemplate } from "./GenericQuestionScreen";
 import { NextButton } from "../components/common/NextButton";
+import { connect } from "react-redux";
+import { Dispatch } from "redux";
+import { setFullNameAction } from "../state/actions/userActions";
 
-interface State {
+interface NameScreenProps {
+  setFullName: (fullName: string) => void;
+}
+
+interface NameScreenState {
   textFieldStr: string;
   beenEdited: boolean;
 }
 
-class NameComponent extends React.Component<RouteComponentProps, State> {
-  constructor(props: RouteComponentProps) {
+type Props = NameScreenProps & RouteComponentProps;
+
+class NameComponent extends React.Component<Props, NameScreenState> {
+  constructor(props: Props) {
     super(props);
 
     this.state = {
@@ -46,8 +55,8 @@ class NameComponent extends React.Component<RouteComponentProps, State> {
           <Link
             to={{
               pathname: "/academicYear",
-              state: { userData: { fullName: textFieldStr } },
             }}
+            onClick={() => this.props.setFullName(this.state.textFieldStr)}
             style={{ textDecoration: "none" }}
           >
             <NextButton />
@@ -62,4 +71,11 @@ class NameComponent extends React.Component<RouteComponentProps, State> {
   }
 }
 
-export const NameScreen = withRouter(NameComponent);
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  setFullName: (fullName: string) => dispatch(setFullNameAction(fullName)),
+});
+
+export const NameScreen = connect(
+  null,
+  mapDispatchToProps
+)(withRouter(NameComponent));

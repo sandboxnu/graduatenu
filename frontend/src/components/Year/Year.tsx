@@ -8,6 +8,7 @@ import {
   Status,
   SeasonWord,
   CourseWarning,
+  DNDScheduleTerm,
 } from "../../models/types";
 import { SEMESTER_MIN_HEIGHT } from "../../constants";
 import { convertTermIdToSeason } from "../../utils";
@@ -15,7 +16,10 @@ import { convertTermIdToSeason } from "../../utils";
 export interface IYearProps {
   index: number;
   schedule: DNDSchedule;
-  handleAddClasses: (courses: ScheduleCourse[], termId: number) => void;
+  handleAddClasses: (
+    courses: ScheduleCourse[],
+    semester: DNDScheduleTerm
+  ) => void;
   handleStatusChange: (
     newStatus: Status,
     tappedSemester: SeasonWord,
@@ -35,9 +39,9 @@ const YearBody = styled.div`
 `;
 
 export class Year extends React.Component<IYearProps> {
-  addClassesWrapper = (termId: number) => {
+  addClassesWrapper = (semester: DNDScheduleTerm) => {
     return (courses: ScheduleCourse[]) =>
-      this.props.handleAddClasses(courses, termId);
+      this.props.handleAddClasses(courses, semester);
   };
 
   render() {
@@ -55,7 +59,7 @@ export class Year extends React.Component<IYearProps> {
           <SemesterBlock
             semester={schedule.yearMap[year].fall}
             handleAddClasses={this.addClassesWrapper(
-              schedule.yearMap[year].fall.termId
+              schedule.yearMap[year].fall
             )}
             courseWarnings={this.props.courseWarnings.filter(
               w => convertTermIdToSeason(w.termId) === "fall"
@@ -64,7 +68,7 @@ export class Year extends React.Component<IYearProps> {
           <SemesterBlock
             semester={schedule.yearMap[year].spring}
             handleAddClasses={this.addClassesWrapper(
-              schedule.yearMap[year].spring.termId
+              schedule.yearMap[year].spring
             )}
             courseWarnings={this.props.courseWarnings.filter(
               w => convertTermIdToSeason(w.termId) === "spring"
@@ -73,7 +77,7 @@ export class Year extends React.Component<IYearProps> {
           <SemesterBlock
             semester={schedule.yearMap[year].summer1}
             handleAddClasses={this.addClassesWrapper(
-              schedule.yearMap[year].summer1.termId
+              schedule.yearMap[year].summer1
             )}
             courseWarnings={this.props.courseWarnings.filter(
               w => convertTermIdToSeason(w.termId) === "summer1"
@@ -82,7 +86,7 @@ export class Year extends React.Component<IYearProps> {
           <SemesterBlock
             semester={schedule.yearMap[year].summer2}
             handleAddClasses={this.addClassesWrapper(
-              schedule.yearMap[year].summer2.termId
+              schedule.yearMap[year].summer2
             )}
             courseWarnings={this.props.courseWarnings.filter(
               w => convertTermIdToSeason(w.termId) === "summer2"

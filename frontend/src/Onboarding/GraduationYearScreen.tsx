@@ -9,17 +9,26 @@ import {
 } from "@material-ui/core";
 import { GenericQuestionTemplate } from "./GenericQuestionScreen";
 import { NextButton } from "../components/common/NextButton";
+import { setGraduationYearAction } from "../state/actions/userActions";
+import { Dispatch } from "redux";
+import { connect } from "react-redux";
 
-interface State {
+interface GraduationYearScreenProps {
+  setGraduationYear: (graduationYear: number) => void;
+}
+
+interface GraduationYearScreenState {
   year?: number;
   beenEdited: boolean;
 }
 
+type Props = GraduationYearScreenProps & RouteComponentProps;
+
 class GraduationYearComponent extends React.Component<
-  RouteComponentProps,
-  State
+  Props,
+  GraduationYearScreenState
 > {
-  constructor(props: RouteComponentProps) {
+  constructor(props: Props) {
     super(props);
 
     this.state = {
@@ -63,13 +72,8 @@ class GraduationYearComponent extends React.Component<
           <Link
             to={{
               pathname: "/major",
-              state: {
-                userData: {
-                  ...this.props.location.state.userData,
-                  graduationYear: year,
-                },
-              },
             }}
+            onClick={() => this.props.setGraduationYear(this.state.year!)}
             style={{ textDecoration: "none" }}
           >
             <NextButton />
@@ -84,4 +88,12 @@ class GraduationYearComponent extends React.Component<
   }
 }
 
-export const GraduationYearScreen = withRouter(GraduationYearComponent);
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  setGraduationYear: (academicYear: number) =>
+    dispatch(setGraduationYearAction(academicYear)),
+});
+
+export const GraduationYearScreen = connect(
+  null,
+  mapDispatchToProps
+)(withRouter(GraduationYearComponent));

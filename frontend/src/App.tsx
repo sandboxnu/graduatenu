@@ -7,10 +7,12 @@ import { AcademicYearScreen } from "./Onboarding/AcademicYearScreen";
 import { GraduationYearScreen } from "./Onboarding/GraduationYearScreen";
 import { MajorScreen } from "./Onboarding/MajorScreen";
 import { MinorsScreen } from "./Onboarding/MinorsScreen";
+import { Provider } from "react-redux";
+import { Store } from "redux";
 
-export default class App extends React.Component {
-  render() {
-    return (
+export const App = ({ store }: { store: Store }) => {
+  return (
+    <Provider store={store}>
       <Router>
         <Switch>
           <Route path="/home" component={HomeWrapper} />
@@ -22,6 +24,6 @@ export default class App extends React.Component {
           <Route path="/" component={Onboarding} />
         </Switch>
       </Router>
-    );
-  }
-}
+    </Provider>
+  );
+};

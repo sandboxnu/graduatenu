@@ -94,10 +94,12 @@ export class RequirementSection extends React.Component<
   }
 
   parseRequirements(reqs: Requirement[]) {
-    return reqs.map(r => this.renderRequirement(r));
+    return reqs.map((r: Requirement, index: number) => (
+      <div key={index + 10000}>{this.renderRequirement(r, index)}</div>
+    ));
   }
 
-  renderRequirement(req: Requirement) {
+  renderRequirement(req: Requirement, index: number) {
     if (req.type === "COURSE") {
       return this.renderCourse(req as IRequiredCourse);
     }
@@ -112,7 +114,7 @@ export class RequirementSection extends React.Component<
       req.courses.filter(c => c.type === "COURSE").length === 2
     ) {
       return (
-        <CourseAndLabWrapper>
+        <CourseAndLabWrapper key={index}>
           {this.renderCourse(req.courses[0] as IRequiredCourse, true)}
           <CourseText> and </CourseText>
           {this.renderCourse(req.courses[1] as IRequiredCourse, true)}
@@ -121,17 +123,21 @@ export class RequirementSection extends React.Component<
     }
 
     return (
-      <div>
+      <div key={index.toString()}>
         <ANDORText>{this.convertTypeToText(req.type)}</ANDORText>
         {req.courses
           .filter(c => c.type === "COURSE")
           .map(c => this.renderCourse(c as IRequiredCourse))}
         {req.courses
           .filter(c => c.type === "AND")
-          .map(c => this.renderRequirement(c))}
+          .map((c: Requirement, index: number) =>
+            this.renderRequirement(c, index)
+          )}
         {req.courses
           .filter(c => c.type === "OR")
-          .map(c => this.renderRequirement(c))}
+          .map((c: Requirement, index: number) =>
+            this.renderRequirement(c, index)
+          )}
       </div>
     );
   }
@@ -143,9 +149,9 @@ export class RequirementSection extends React.Component<
           Complete {req.creditsRequired} credits from the following courses that
           are not already required:
         </ANDORText>
-        {req.ranges.map((r: ISubjectRange) => {
+        {req.ranges.map((r: ISubjectRange, index: number) => {
           return (
-            <CourseText>
+            <CourseText key={r.subject + r.idRangeStart + " - " + r.idRangeEnd}>
               {r.subject + r.idRangeStart + " through " + r.idRangeEnd}
             </CourseText>
           );
@@ -156,7 +162,7 @@ export class RequirementSection extends React.Component<
 
   renderCourse(course: IRequiredCourse, noMargin: boolean = false) {
     return (
-      <CourseWrapper>
+      <CourseWrapper key={course.subject + course.classId + course.type}>
         {noMargin ? (
           <CourseTextNoMargin>
             {course.subject + course.classId}

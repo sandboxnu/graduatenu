@@ -1,6 +1,5 @@
 import React from "react";
 import { DragDropContext } from "react-beautiful-dnd";
-import { mockData } from "../data/mockData";
 import {
   DNDSchedule,
   Major,
@@ -11,19 +10,15 @@ import {
   IWarning,
   DNDScheduleYear,
   DNDScheduleTerm,
-  IUserData,
   CourseWarning,
+  DNDScheduleCourse,
 } from "../models/types";
 import styled from "styled-components";
 import { Year } from "../components/Year";
 import {
   convertTermIdToYear,
   convertTermIdToSeason,
-  convertToDNDSchedule,
-  convertToDNDCourses,
   isCoopOrVacation,
-  addClassToSchedule,
-  produceWarnings,
   moveCourse,
   planToString,
 } from "../utils";
@@ -37,6 +32,25 @@ import { withToast } from "./toastHook";
 import { AppearanceTypes } from "react-toast-notifications";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import { plans } from "../plans";
+import { connect } from "react-redux";
+import { AppState } from "../state/reducers/state";
+import { Dispatch } from "redux";
+import {
+  getScheduleFromState,
+  getPlanStrFromState,
+  getMajorFromState,
+  getWarningsFromState,
+  getCourseWarningsFromState,
+} from "../state";
+import {
+  addClassesAction,
+  removeClassAction,
+  changeSemesterStatusAction,
+  updateSemesterAction,
+  setScheduleAction,
+  setDNDScheduleAction,
+} from "../state/actions/scheduleActions";
+import { setPlanStrAction, setMajorAction } from "../state/actions/userActions";
 
 const OuterContainer = styled.div`
   display: flex;
@@ -75,49 +89,47 @@ interface HomeProps {
     id: string;
     appearance: AppearanceTypes;
   }[];
-}
-
-export interface HomeState {
   schedule: DNDSchedule;
-  planStr?: string;
   major?: Major;
-  currentClassCounter: number; // used for DND purposes, every class needs a unique ID
+  planStr?: string;
   warnings: IWarning[];
   courseWarnings: CourseWarning[];
+  addClasses: (courses: ScheduleCourse[], semester: DNDScheduleTerm) => void;
+  removeClass: (course: DNDScheduleCourse, semester: DNDScheduleTerm) => void;
+  changeSemesterStatus: (
+    newStatus: Status,
+    year: number,
+    season: SeasonWord
+  ) => void;
+  updateSemester: (
+    year: number,
+    season: SeasonWord,
+    newSemester: DNDScheduleTerm
+  ) => void;
+  setPlanStr: (planStr?: string) => void;
+  setSchedule: (schedule: Schedule) => void;
+  setDNDSchedule: (schedule: DNDSchedule) => void;
+  setMajor: (major?: Major) => void;
 }
 
 type Props = HomeProps & RouteComponentProps;
 
-class HomeComponent extends React.Component<Props, HomeState> {
-  constructor(props: Props) {
-    super(props);
-
-    const userData: IUserData = props.location.state.userData;
-
-    this.state = {
-      schedule: mockData,
-      major: userData.major,
-      currentClassCounter: 0,
-      planStr: undefined,
-      warnings: [],
-      courseWarnings: [],
-    };
-
-    if (!!userData.plan) {
-      this.setSchedule(userData.plan);
+class HomeComponent extends React.Component<Props> {
+  componentWillReceiveProps(nextProps: Props) {
+    if (nextProps.warnings !== this.props.warnings) {
+      this.updateWarnings();
     }
   }
 
   onDragEnd = (result: any) => {
     const { destination, source } = result;
 
-    const newState = moveCourse(this.state, destination, source);
-
-    if (newState) {
-      this.setState(newState, () => {
-        this.updateWarnings(newState);
-      });
-    }
+    moveCourse(
+      this.props.schedule,
+      destination,
+      source,
+      this.props.setDNDSchedule
+    );
   };
 
   onDragUpdate = (update: any) => {
@@ -126,10 +138,12 @@ class HomeComponent extends React.Component<Props, HomeState> {
 
     const destSemesterSeason = convertTermIdToSeason(destination.droppableId);
     const destSemesterYear = convertTermIdToYear(destination.droppableId);
-    const destYear: DNDScheduleYear = this.state.schedule.yearMap[
+    const destYear: DNDScheduleYear = this.props.schedule.yearMap[
       destSemesterYear
     ];
-    const destSemester: DNDScheduleTerm = (destYear as any)[destSemesterSeason];
+    const destSemester: DNDScheduleTerm = JSON.parse(
+      JSON.stringify((destYear as any)[destSemesterSeason])
+    ); // deep copy
 
     this.removeHovers(destSemester);
 
@@ -154,8 +168,10 @@ class HomeComponent extends React.Component<Props, HomeState> {
   };
 
   removeHovers(currSemester: DNDScheduleTerm) {
-    for (const yearnum of this.state.schedule.years) {
-      const year = this.state.schedule.yearMap[yearnum];
+    for (const yearnum of this.props.schedule.years) {
+      const year = JSON.parse(
+        JSON.stringify(this.props.schedule.yearMap[yearnum])
+      ); // deep copy
       // console.log(year.summer1.status.toString());
       if (isCoopOrVacation(year.fall) && year.fall !== currSemester) {
         year.fall.status = year.fall.status.replace("HOVER", "") as Status;
@@ -184,39 +200,18 @@ class HomeComponent extends React.Component<Props, HomeState> {
 
   updateSemester(
     yearnum: number,
-    season: string,
+    season: SeasonWord,
     updatedSemester: DNDScheduleTerm
   ) {
-    const newState: HomeState = {
-      ...this.state,
-      schedule: {
-        ...this.state.schedule,
-        yearMap: {
-          ...this.state.schedule.yearMap,
-          [yearnum]: {
-            ...this.state.schedule.yearMap[yearnum],
-            [season]: updatedSemester,
-          },
-        },
-      },
-    };
-
-    this.setState(newState);
+    this.props.updateSemester(yearnum, season, updatedSemester);
   }
 
-  updateWarnings(newState: HomeState) {
-    const container = produceWarnings(newState.schedule);
-    const normal = container.normalWarnings;
-    this.setState({
-      warnings: normal,
-      courseWarnings: container.courseWarnings,
-    });
-
+  updateWarnings() {
     // remove existing toasts
     this.props.toastStack.forEach(t => this.props.removeToast(t.id));
 
     // add new toasts
-    normal.forEach(w => {
+    this.props.warnings.forEach(w => {
       this.props.addToast(w.message, {
         appearance: "warning",
       });
@@ -225,90 +220,42 @@ class HomeComponent extends React.Component<Props, HomeState> {
 
   onChooseMajor(event: React.SyntheticEvent<{}>, value: any) {
     const maj = majors.find((m: any) => m.name === value);
-
-    this.setState({ major: maj, planStr: undefined });
+    this.props.setMajor(maj);
   }
 
   onChoosePlan(event: React.SyntheticEvent<{}>, value: any) {
     if (value === "None") {
-      this.setState({
-        planStr: undefined,
-      });
+      this.props.setPlanStr(undefined);
       return;
     }
 
-    const plan = plans[this.state.major!.name].find(
+    const plan = plans[this.props.major!.name].find(
       (p: Schedule) => planToString(p) === value
     );
 
     if (plan) {
-      this.setSchedule(plan);
+      this.props.setPlanStr(value);
+      this.props.setSchedule(plan);
     }
   }
 
-  handleAddClasses = async (courses: ScheduleCourse[], termId: number) => {
-    // convert to DNDScheduleCourses
-    const [dndCourses, counter] = await convertToDNDCourses(
-      courses,
-      this.state.currentClassCounter
-    );
-    const year = convertTermIdToYear(termId);
-    const season = convertTermIdToSeason(termId);
-
-    const newState = addClassToSchedule(
-      this.state,
-      year,
-      season,
-      counter,
-      dndCourses
-    );
-
-    this.setState(newState, () => {
-      this.updateWarnings(newState);
-    });
+  handleAddClasses = async (
+    courses: ScheduleCourse[],
+    semester: DNDScheduleTerm
+  ) => {
+    this.props.addClasses(courses, semester);
   };
-
-  async setSchedule(schedule: Schedule) {
-    const [dndSchedule, counter] = await convertToDNDSchedule(
-      schedule,
-      this.state.currentClassCounter
-    );
-    const newState: HomeState = {
-      ...this.state,
-      schedule: dndSchedule,
-      currentClassCounter: counter,
-      planStr: planToString(schedule),
-    };
-    this.setState(newState, () => {
-      this.updateWarnings(newState);
-    });
-  }
 
   handleStatusChange(
     newStatus: Status,
     tappedSemester: SeasonWord,
     year: number
   ) {
-    const semester = this.state.schedule.yearMap[year][tappedSemester];
+    const semester = this.props.schedule.yearMap[year][tappedSemester];
     if (newStatus === "INACTIVE" && semester.classes.length !== 0) {
       // show dialog
     }
-    this.setState({
-      ...this.state,
-      schedule: {
-        ...this.state.schedule,
-        yearMap: {
-          ...this.state.schedule.yearMap,
-          [year]: {
-            ...this.state.schedule.yearMap[year],
-            [tappedSemester]: {
-              ...this.state.schedule.yearMap[year][tappedSemester],
-              status: newStatus,
-            },
-          },
-        },
-      },
-    });
+    this.props.changeSemesterStatus(newStatus, year, tappedSemester);
   }
 
   renderMajorDropDown() {
@@ -325,7 +272,7 @@ class HomeComponent extends React.Component<Props, HomeState> {
             fullWidth
           />
         )}
-        value={!!this.state.major ? this.state.major.name + " " : ""}
+        value={!!this.props.major ? this.props.major.name + " " : ""}
         onChange={this.onChooseMajor.bind(this)}
       />
     );
@@ -338,7 +285,7 @@ class HomeComponent extends React.Component<Props, HomeState> {
         disableListWrap
         options={[
           "None",
-          ...plans[this.state.major!.name].map(p => planToString(p)),
+          ...plans[this.props.major!.name].map(p => planToString(p)),
         ]}
         renderInput={params => (
           <TextField
@@ -348,21 +295,21 @@ class HomeComponent extends React.Component<Props, HomeState> {
             fullWidth
           />
         )}
-        value={this.state.planStr || "None"}
+        value={this.props.planStr || "None"}
         onChange={this.onChoosePlan.bind(this)}
       />
     );
   }
 
   renderYears() {
-    return this.state.schedule.years.map((year: number, index: number) => (
+    return this.props.schedule.years.map((year: number, index: number) => (
       <Year
         key={index}
         index={index}
-        schedule={this.state.schedule}
+        schedule={this.props.schedule}
         handleAddClasses={this.handleAddClasses.bind(this)}
         handleStatusChange={this.handleStatusChange.bind(this)}
-        courseWarnings={this.state.courseWarnings.filter(
+        courseWarnings={this.props.courseWarnings.filter(
           w => convertTermIdToYear(w.termId) === year
         )}
       />
@@ -370,8 +317,7 @@ class HomeComponent extends React.Component<Props, HomeState> {
   }
 
   render() {
-    // console.log("planStr " + this.state.planStr);
-    const { major, schedule } = this.state;
+    const { schedule, major } = this.props;
     return (
       <OuterContainer>
         <DragDropContext
@@ -393,10 +339,40 @@ class HomeComponent extends React.Component<Props, HomeState> {
             {this.renderYears()}
           </Container>
         </DragDropContext>
-        <Sidebar schedule={schedule} major={major} />
+        <Sidebar />
       </OuterContainer>
     );
   }
 }
 
-export const Home = withRouter(withToast(HomeComponent));
+const mapStateToProps = (state: AppState) => ({
+  schedule: getScheduleFromState(state),
+  planStr: getPlanStrFromState(state),
+  major: getMajorFromState(state),
+  warnings: getWarningsFromState(state),
+  courseWarnings: getCourseWarningsFromState(state),
+});
+
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  addClasses: (courses: ScheduleCourse[], semester: DNDScheduleTerm) =>
+    dispatch(addClassesAction(courses, semester)),
+  removeClass: (course: DNDScheduleCourse, semester: DNDScheduleTerm) =>
+    dispatch(removeClassAction(course, semester)),
+  changeSemesterStatus: (newStatus: Status, year: number, season: SeasonWord) =>
+    dispatch(changeSemesterStatusAction(newStatus, year, season)),
+  updateSemester: (
+    year: number,
+    season: SeasonWord,
+    newSemester: DNDScheduleTerm
+  ) => dispatch(updateSemesterAction(year, season, newSemester)),
+  setPlanStr: (planStr?: string) => dispatch(setPlanStrAction(planStr)),
+  setSchedule: (schedule: Schedule) => dispatch(setScheduleAction(schedule)),
+  setDNDSchedule: (schedule: DNDSchedule) =>
+    dispatch(setDNDScheduleAction(schedule)),
+  setMajor: (major?: Major) => dispatch(setMajorAction(major)),
+});
+
+export const Home = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(withToast(HomeComponent)));

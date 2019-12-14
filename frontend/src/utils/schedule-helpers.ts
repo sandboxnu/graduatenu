@@ -4,10 +4,10 @@ import {
   Schedule,
   ScheduleCourse,
   DNDScheduleTerm,
+  SeasonWord,
 } from "../models/types";
-import { HomeState } from "../home/Home";
 
-export function convertTermIdToSeason(termId: number): string {
+export function convertTermIdToSeason(termId: number): SeasonWord {
   const seasonId = termId % 100;
 
   if (seasonId === 10) {
@@ -70,34 +70,34 @@ export function isSpringCycle(schedule: Schedule): boolean {
   return false;
 }
 
-export const convertToDNDSchedule = async (
+export const convertToDNDSchedule = (
   schedule: Schedule,
   counter: number
-): Promise<[DNDSchedule, number]> => {
+): [DNDSchedule, number] => {
   const newSchedule = schedule as DNDSchedule;
   for (const year of Object.keys(schedule.yearMap)) {
-    var result = await convertToDNDCourses(
+    var result = convertToDNDCourses(
       newSchedule.yearMap[year as any].fall.classes as ScheduleCourse[],
       counter
     );
     newSchedule.yearMap[year as any].fall.classes = result[0];
     counter = result[1];
 
-    result = await convertToDNDCourses(
+    result = convertToDNDCourses(
       newSchedule.yearMap[year as any].spring.classes as ScheduleCourse[],
       counter
     );
     newSchedule.yearMap[year as any].spring.classes = result[0];
     counter = result[1];
 
-    result = await convertToDNDCourses(
+    result = convertToDNDCourses(
       newSchedule.yearMap[year as any].summer1.classes as ScheduleCourse[],
       counter
     );
     newSchedule.yearMap[year as any].summer1.classes = result[0];
     counter = result[1];
 
-    result = await convertToDNDCourses(
+    result = convertToDNDCourses(
       newSchedule.yearMap[year as any].summer2.classes as ScheduleCourse[],
       counter
     );
@@ -107,10 +107,10 @@ export const convertToDNDSchedule = async (
   return [newSchedule, counter];
 };
 
-export const convertToDNDCourses = async (
+export const convertToDNDCourses = (
   courses: ScheduleCourse[],
   counter: number
-): Promise<[DNDScheduleCourse[], number]> => {
+): [DNDScheduleCourse[], number] => {
   var list: DNDScheduleCourse[] = [];
   for (const course of courses) {
     counter++;
@@ -124,34 +124,4 @@ export const convertToDNDCourses = async (
 
 export function isCoopOrVacation(currSemester: DNDScheduleTerm): boolean {
   return currSemester.status.includes("HOVER");
-}
-
-export function addClassToSchedule(
-  state: HomeState,
-  year: number,
-  season: string,
-  counter: number,
-  dndCourses: DNDScheduleCourse[]
-): HomeState {
-  const newState = {
-    ...state,
-    currentClassCounter: counter,
-    schedule: {
-      ...state.schedule,
-      yearMap: {
-        ...state.schedule.yearMap,
-        [year]: {
-          ...state.schedule.yearMap[year],
-          [season]: {
-            ...(state.schedule.yearMap[year] as any)[season],
-            classes: [
-              ...(state.schedule.yearMap[year] as any)[season].classes,
-              ...dndCourses,
-            ],
-          },
-        },
-      },
-    },
-  };
-  return newState;
 }

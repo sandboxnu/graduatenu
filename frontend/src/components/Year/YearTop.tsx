@@ -80,7 +80,11 @@ export class YearTop extends React.Component<YearTopProps, YearTopState> {
           anchorEl={this.state.anchorEl}
           keepMounted
           open={Boolean(this.state.anchorEl)}
-          onClose={this.handleClose}
+          onClose={() =>
+            this.setState({
+              anchorEl: null,
+            })
+          }
         >
           <MenuItem onClick={() => this.handleClose("CLASSES")}>
             Set as Classes
