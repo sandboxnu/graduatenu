@@ -1,5 +1,11 @@
 import { AppState } from "./reducers/state";
-import { DNDSchedule, Major, CourseWarning, IWarning } from "../models/types";
+import {
+  DNDSchedule,
+  Major,
+  CourseWarning,
+  IWarning,
+  DNDScheduleTerm,
+} from "../models/types";
 
 export const getScheduleFromState = (state: AppState): DNDSchedule =>
   state.schedule.schedule;
@@ -13,5 +19,8 @@ export const getMajorFromState = (state: AppState): Major | undefined =>
 export const getWarningsFromState = (state: AppState): IWarning[] =>
   state.schedule.warnings;
 
-export const getCourseWarningsFromState = (state: AppState): CourseWarning[] =>
-  state.schedule.courseWarnings;
+export const getCourseWarningsFromState = (
+  state: AppState,
+  semester: DNDScheduleTerm
+): CourseWarning[] =>
+  state.schedule.courseWarnings.filter(w => w.termId === semester.termId);

@@ -4,12 +4,17 @@ import { CLASS_BLOCK_WIDTH, GraduateGrey } from "../../constants";
 import { ThreeDots } from "../common";
 import { Menu, MenuItem } from "@material-ui/core";
 import { SeasonWord, Status } from "../../models/types";
+import { connect } from "react-redux";
+import { Dispatch } from "redux";
+import { changeSemesterStatusAction } from "../../state/actions/scheduleActions";
+import { AppState } from "../../state/reducers/state";
 
 const Container = styled.div`
   display: flex;
   flex-direction: row;
   height: 100;
   background-color: ${GraduateGrey};
+  margin-top: 16px;
 `;
 
 const SemesterText = styled.p`
@@ -17,16 +22,26 @@ const SemesterText = styled.p`
 `;
 
 interface YearTopProps {
-  handleStatusChange: (newStatus: Status, tappedSemester: SeasonWord) => void;
+  year: number;
 }
+
+interface ReduxDispatchYearTopProps {
+  handleStatusChange: (
+    newStatus: Status,
+    year: number,
+    tappedSemester: SeasonWord
+  ) => void;
+}
+
+type Props = YearTopProps & ReduxDispatchYearTopProps;
 
 interface YearTopState {
   anchorEl: Element | null;
   tappedSemester: SeasonWord | null;
 }
 
-export class YearTop extends React.Component<YearTopProps, YearTopState> {
-  constructor(props: any) {
+class YearTopComponent extends React.Component<Props, YearTopState> {
+  constructor(props: Props) {
     super(props);
 
     this.state = {
@@ -45,32 +60,33 @@ export class YearTop extends React.Component<YearTopProps, YearTopState> {
   handleClose = async (newStatus: Status) => {
     const tappedSemester = this.state.tappedSemester;
     await this.setState({ anchorEl: null, tappedSemester: null });
-    this.props.handleStatusChange(newStatus, tappedSemester!);
+    this.props.handleStatusChange(newStatus, this.props.year, tappedSemester!);
   };
 
   render() {
+    const { year } = this.props;
     return (
       <Container>
         <div style={textContainerStyle}>
-          <SemesterText>Fall</SemesterText>
+          <SemesterText>Fall {year}</SemesterText>
           <ThreeDots
             onClick={(event: any) => this.handleClick(event, "fall")}
           ></ThreeDots>
         </div>
         <div style={textContainerStyle}>
-          <SemesterText>Spring</SemesterText>
+          <SemesterText>Spring {year + 1}</SemesterText>
           <ThreeDots
             onClick={(event: any) => this.handleClick(event, "spring")}
           ></ThreeDots>
         </div>
         <div style={textContainerStyle}>
-          <SemesterText>Summer 1</SemesterText>
+          <SemesterText>Summer I {year + 1}</SemesterText>
           <ThreeDots
             onClick={(event: any) => this.handleClick(event, "summer1")}
           ></ThreeDots>
         </div>
         <div style={textContainerStyle}>
-          <SemesterText>Summer 2</SemesterText>
+          <SemesterText>Summer II {year + 1}</SemesterText>
           <ThreeDots
             onClick={(event: any) => this.handleClick(event, "summer2")}
           ></ThreeDots>
@@ -110,3 +126,21 @@ const textContainerStyle: React.CSSProperties = {
   justifyContent: "space-between",
   alignItems: "center",
 };
+
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  handleStatusChange: (
+    newStatus: Status,
+    year: number,
+    tappedSemester: SeasonWord
+  ) => dispatch(changeSemesterStatusAction(newStatus, year, tappedSemester)),
+});
+
+export const YearTop = connect<
+  {},
+  ReduxDispatchYearTopProps,
+  YearTopProps,
+  AppState
+>(
+  null,
+  mapDispatchToProps
+)(YearTopComponent);

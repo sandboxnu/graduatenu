@@ -6,9 +6,18 @@ import {
   DNDScheduleTerm,
   ScheduleCourse,
   CourseWarning,
+  DNDScheduleCourse,
 } from "../models/types";
 import { AddButton } from "./Year";
 import styled from "styled-components";
+import { AppState } from "../state/reducers/state";
+import { connect } from "react-redux";
+import { getCourseWarningsFromState } from "../state";
+import { Dispatch } from "redux";
+import {
+  addClassesAction,
+  removeClassAction,
+} from "../state/actions/scheduleActions";
 
 const Container = styled.div`
   border: 1px solid black;
@@ -33,21 +42,35 @@ const NoClassBlock = styled.div`
   height: 100%;
 `;
 
-interface SemesterBlockProps {
-  semester: DNDScheduleTerm;
-  handleAddClasses: (courses: ScheduleCourse[]) => void;
+interface ReduxStoreSemesterBlockProps {
   courseWarnings: CourseWarning[];
 }
+
+interface ReduxDispatchSemesterBlockProps {
+  handleAddClasses: (
+    courses: ScheduleCourse[],
+    semester: DNDScheduleTerm
+  ) => void;
+  onDeleteClass: (course: DNDScheduleCourse, semester: DNDScheduleTerm) => void;
+}
+
+interface SemesterBlockProps {
+  semester: DNDScheduleTerm;
+}
+
+type Props = SemesterBlockProps &
+  ReduxStoreSemesterBlockProps &
+  ReduxDispatchSemesterBlockProps;
 
 interface SemesterBlockState {
   modalVisible: boolean;
 }
 
-export class SemesterBlock extends React.Component<
-  SemesterBlockProps,
+class SemesterBlockComponent extends React.Component<
+  Props,
   SemesterBlockState
 > {
-  constructor(props: SemesterBlockProps) {
+  constructor(props: Props) {
     super(props);
     this.state = {
       modalVisible: false,
@@ -63,7 +86,7 @@ export class SemesterBlock extends React.Component<
   }
 
   renderBody() {
-    const { semester, courseWarnings } = this.props;
+    const { semester, courseWarnings, onDeleteClass } = this.props;
     const status = semester.status;
     if (status === "CLASSES" || status === "HOVERINACTIVE") {
       return semester.classes.map((scheduleCourse, index) => {
@@ -78,6 +101,7 @@ export class SemesterBlock extends React.Component<
                   w.subject + w.classId ===
                   scheduleCourse.subject + scheduleCourse.classId
               )}
+              onDelete={() => onDeleteClass(scheduleCourse, semester)}
             />
           );
         }
@@ -108,7 +132,9 @@ export class SemesterBlock extends React.Component<
         <AddClassModal
           visible={this.state.modalVisible}
           handleClose={this.hideModal.bind(this)}
-          handleSubmit={this.props.handleAddClasses}
+          handleSubmit={(courses: ScheduleCourse[]) =>
+            this.props.handleAddClasses(courses, this.props.semester)
+          }
         ></AddClassModal>
 
         <Container>
@@ -131,3 +157,24 @@ export class SemesterBlock extends React.Component<
     );
   }
 }
+
+const mapStateToProps = (state: AppState, ownProps: SemesterBlockProps) => ({
+  courseWarnings: getCourseWarningsFromState(state, ownProps.semester),
+});
+
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  handleAddClasses: (courses: ScheduleCourse[], semester: DNDScheduleTerm) =>
+    dispatch(addClassesAction(courses, semester)),
+  onDeleteClass: (course: DNDScheduleCourse, semester: DNDScheduleTerm) =>
+    dispatch(removeClassAction(course, semester)),
+});
+
+export const SemesterBlock = connect<
+  ReduxStoreSemesterBlockProps,
+  ReduxDispatchSemesterBlockProps,
+  SemesterBlockProps,
+  AppState
+>(
+  mapStateToProps,
+  mapDispatchToProps
+)(SemesterBlockComponent);

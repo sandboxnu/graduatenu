@@ -1,8 +1,8 @@
 import { DNDSchedule, IWarning, CourseWarning } from "../../models/types";
 import { mockData } from "../../data/mockData";
 import produce from "immer";
-import { StateType, getType } from "typesafe-actions";
-import { ScheduleAction, UserAction } from "../actions";
+import { getType } from "typesafe-actions";
+import { ScheduleAction } from "../actions";
 import {
   addClassesAction,
   removeClassAction,
@@ -69,9 +69,11 @@ export const scheduleReducer = (
       case getType(removeClassAction): {
         const { course, semester } = action.payload;
         const season = convertTermIdToSeason(semester.termId);
-        draft.schedule.yearMap[semester.year][season].classes.filter(
-          c => c !== course
-        );
+        draft.schedule.yearMap[semester.year][
+          season
+        ].classes = draft.schedule.yearMap[semester.year][
+          season
+        ].classes.filter(c => c.dndId !== course.dndId);
 
         const container = produceWarnings(
           JSON.parse(JSON.stringify(draft.schedule)) // deep copy of schedule, because schedule is modified

@@ -1,6 +1,6 @@
 import { Major } from "../../models/types";
 import produce from "immer";
-import { StateType, getType } from "typesafe-actions";
+import { getType } from "typesafe-actions";
 import { UserAction } from "../actions";
 import {
   setMajorAction,

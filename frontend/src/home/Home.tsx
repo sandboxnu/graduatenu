@@ -3,15 +3,12 @@ import { DragDropContext } from "react-beautiful-dnd";
 import {
   DNDSchedule,
   Major,
-  ScheduleCourse,
   Schedule,
   Status,
   SeasonWord,
   IWarning,
   DNDScheduleYear,
   DNDScheduleTerm,
-  CourseWarning,
-  DNDScheduleCourse,
 } from "../models/types";
 import styled from "styled-components";
 import { Year } from "../components/Year";
@@ -40,12 +37,8 @@ import {
   getPlanStrFromState,
   getMajorFromState,
   getWarningsFromState,
-  getCourseWarningsFromState,
 } from "../state";
 import {
-  addClassesAction,
-  removeClassAction,
-  changeSemesterStatusAction,
   updateSemesterAction,
   setScheduleAction,
   setDNDScheduleAction,
@@ -64,6 +57,7 @@ const CompletedCoursesWrapper = styled.div`
   flex-direction: column;
   justify-content: start;
   width: ${CLASS_BLOCK_WIDTH * 4 + 25}px;
+  margin-bottom: 12px;
 `;
 
 const Container = styled.div`
@@ -81,7 +75,7 @@ const DropDownWrapper = styled.div`
   flex-direction: row;
 `;
 
-interface HomeProps {
+interface ToastHomeProps {
   addToast: (message: string, options: any) => void;
   removeToast: (id: string) => void;
   toastStack: {
@@ -89,18 +83,16 @@ interface HomeProps {
     id: string;
     appearance: AppearanceTypes;
   }[];
+}
+
+interface ReduxStoreHomeProps {
   schedule: DNDSchedule;
   major?: Major;
   planStr?: string;
   warnings: IWarning[];
-  courseWarnings: CourseWarning[];
-  addClasses: (courses: ScheduleCourse[], semester: DNDScheduleTerm) => void;
-  removeClass: (course: DNDScheduleCourse, semester: DNDScheduleTerm) => void;
-  changeSemesterStatus: (
-    newStatus: Status,
-    year: number,
-    season: SeasonWord
-  ) => void;
+}
+
+interface ReduxDispatchHomeProps {
   updateSemester: (
     year: number,
     season: SeasonWord,
@@ -112,13 +104,29 @@ interface HomeProps {
   setMajor: (major?: Major) => void;
 }
 
-type Props = HomeProps & RouteComponentProps;
+type Props = ToastHomeProps &
+  ReduxStoreHomeProps &
+  ReduxDispatchHomeProps &
+  RouteComponentProps;
 
 class HomeComponent extends React.Component<Props> {
   componentWillReceiveProps(nextProps: Props) {
     if (nextProps.warnings !== this.props.warnings) {
       this.updateWarnings();
     }
+  }
+
+  updateWarnings() {
+    // remove existing toasts
+    this.props.toastStack.forEach(t => this.props.removeToast(t.id));
+
+    // add new toasts
+    this.props.warnings.forEach(w => {
+      this.props.addToast(w.message, {
+        appearance: "warning",
+        autoDismiss: true,
+      });
+    });
   }
 
   onDragEnd = (result: any) => {
@@ -163,7 +171,11 @@ class HomeComponent extends React.Component<Props> {
         destSemester.status = "COOP";
       }
 
-      this.updateSemester(destSemesterYear, destSemesterSeason, destSemester);
+      this.props.updateSemester(
+        destSemesterYear,
+        destSemesterSeason,
+        destSemester
+      );
     }
   };
 
@@ -175,47 +187,27 @@ class HomeComponent extends React.Component<Props> {
       // console.log(year.summer1.status.toString());
       if (isCoopOrVacation(year.fall) && year.fall !== currSemester) {
         year.fall.status = year.fall.status.replace("HOVER", "") as Status;
-        this.updateSemester(yearnum, "fall", year.fall);
+        this.props.updateSemester(yearnum, "fall", year.fall);
       }
       if (isCoopOrVacation(year.spring) && year.spring !== currSemester) {
         year.spring.status = year.spring.status.replace("HOVER", "") as Status;
-        this.updateSemester(yearnum, "spring", year.spring);
+        this.props.updateSemester(yearnum, "spring", year.spring);
       }
       if (isCoopOrVacation(year.summer1) && year.summer1 !== currSemester) {
         year.summer1.status = year.summer1.status.replace(
           "HOVER",
           ""
         ) as Status;
-        this.updateSemester(yearnum, "summer1", year.summer1);
+        this.props.updateSemester(yearnum, "summer1", year.summer1);
       }
       if (isCoopOrVacation(year.summer2) && year.summer2 !== currSemester) {
         year.summer2.status = year.summer2.status.replace(
           "HOVER",
           ""
         ) as Status;
-        this.updateSemester(yearnum, "summer2", year.summer2);
+        this.props.updateSemester(yearnum, "summer2", year.summer2);
       }
     }
-  }
-
-  updateSemester(
-    yearnum: number,
-    season: SeasonWord,
-    updatedSemester: DNDScheduleTerm
-  ) {
-    this.props.updateSemester(yearnum, season, updatedSemester);
-  }
-
-  updateWarnings() {
-    // remove existing toasts
-    this.props.toastStack.forEach(t => this.props.removeToast(t.id));
-
-    // add new toasts
-    this.props.warnings.forEach(w => {
-      this.props.addToast(w.message, {
-        appearance: "warning",
-      });
-    });
   }
 
   onChooseMajor(event: React.SyntheticEvent<{}>, value: any) {
@@ -237,25 +229,6 @@ class HomeComponent extends React.Component<Props> {
       this.props.setPlanStr(value);
       this.props.setSchedule(plan);
     }
-  }
-
-  handleAddClasses = async (
-    courses: ScheduleCourse[],
-    semester: DNDScheduleTerm
-  ) => {
-    this.props.addClasses(courses, semester);
-  };
-
-  handleStatusChange(
-    newStatus: Status,
-    tappedSemester: SeasonWord,
-    year: number
-  ) {
-    const semester = this.props.schedule.yearMap[year][tappedSemester];
-    if (newStatus === "INACTIVE" && semester.classes.length !== 0) {
-      // show dialog
-    }
-    this.props.changeSemesterStatus(newStatus, year, tappedSemester);
   }
 
   renderMajorDropDown() {
@@ -303,16 +276,7 @@ class HomeComponent extends React.Component<Props> {
 
   renderYears() {
     return this.props.schedule.years.map((year: number, index: number) => (
-      <Year
-        key={index}
-        index={index}
-        schedule={this.props.schedule}
-        handleAddClasses={this.handleAddClasses.bind(this)}
-        handleStatusChange={this.handleStatusChange.bind(this)}
-        courseWarnings={this.props.courseWarnings.filter(
-          w => convertTermIdToYear(w.termId) === year
-        )}
-      />
+      <Year key={index} index={index} schedule={this.props.schedule} />
     ));
   }
 
@@ -350,16 +314,9 @@ const mapStateToProps = (state: AppState) => ({
   planStr: getPlanStrFromState(state),
   major: getMajorFromState(state),
   warnings: getWarningsFromState(state),
-  courseWarnings: getCourseWarningsFromState(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  addClasses: (courses: ScheduleCourse[], semester: DNDScheduleTerm) =>
-    dispatch(addClassesAction(courses, semester)),
-  removeClass: (course: DNDScheduleCourse, semester: DNDScheduleTerm) =>
-    dispatch(removeClassAction(course, semester)),
-  changeSemesterStatus: (newStatus: Status, year: number, season: SeasonWord) =>
-    dispatch(changeSemesterStatusAction(newStatus, year, season)),
   updateSemester: (
     year: number,
     season: SeasonWord,
@@ -372,7 +329,12 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   setMajor: (major?: Major) => dispatch(setMajorAction(major)),
 });
 
-export const Home = connect(
+export const Home = connect<
+  ReduxStoreHomeProps,
+  ReduxDispatchHomeProps,
+  {},
+  AppState
+>(
   mapStateToProps,
   mapDispatchToProps
 )(withRouter(withToast(HomeComponent)));

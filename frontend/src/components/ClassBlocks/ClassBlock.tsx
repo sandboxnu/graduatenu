@@ -33,25 +33,87 @@ interface ClassBlockProps {
   class: DNDScheduleCourse;
   index: number;
   warning?: CourseWarning;
+  onDelete: (course: DNDScheduleCourse) => void;
 }
 
-export class ClassBlock extends React.Component<ClassBlockProps> {
+interface ClassBlockState {
+  hovering: boolean;
+}
+
+export class ClassBlock extends React.Component<
+  ClassBlockProps,
+  ClassBlockState
+> {
+  constructor(props: ClassBlockProps) {
+    super(props);
+
+    this.state = {
+      hovering: false,
+    };
+  }
+
+  handleMouseEnter() {
+    this.setState({
+      hovering: true,
+    });
+  }
+
+  handleMouseLeave() {
+    this.setState({
+      hovering: false,
+    });
+  }
+
+  renderBody(provided: DraggableProvided, height: number) {
+    const numCredits = this.props.class.numCreditsMax;
+    return (
+      <div
+        onMouseEnter={this.handleMouseEnter.bind(this)}
+        onMouseLeave={this.handleMouseLeave.bind(this)}
+      >
+        <Block
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+          ref={provided.innerRef}
+          height={height}
+        >
+          <Indent warning={this.props.warning} />
+          <ClassBlockBody warning={this.props.warning}>
+            {numCredits > 2 ? (
+              <LargeClassBlock
+                course={this.props.class}
+                hovering={this.state.hovering}
+                onDelete={() => this.props.onDelete(this.props.class)}
+              />
+            ) : (
+              <SmallClassBlock
+                course={this.props.class}
+                hovering={this.state.hovering}
+                onDelete={() => this.props.onDelete(this.props.class)}
+              />
+            )}
+          </ClassBlockBody>
+        </Block>
+      </div>
+    );
+  }
+
   render() {
     const numCredits = this.props.class.numCreditsMax;
     var height = CLASS_BLOCK_HEIGHT;
 
     switch (numCredits) {
       case 0:
-        height = CLASS_BLOCK_HEIGHT - 30;
-        break;
-      case 1:
-        height = CLASS_BLOCK_HEIGHT - 30;
-        break;
-      case 2:
         height = CLASS_BLOCK_HEIGHT - 20;
         break;
-      case 3:
+      case 1:
+        height = CLASS_BLOCK_HEIGHT - 20;
+        break;
+      case 2:
         height = CLASS_BLOCK_HEIGHT - 10;
+        break;
+      case 3:
+        height = CLASS_BLOCK_HEIGHT;
         break;
       case 4:
         height = CLASS_BLOCK_HEIGHT;
@@ -73,27 +135,6 @@ export class ClassBlock extends React.Component<ClassBlockProps> {
           )
         }
       </Draggable>
-    );
-  }
-
-  renderBody(provided: DraggableProvided, height: number) {
-    const numCredits = this.props.class.numCreditsMax;
-    return (
-      <Block
-        {...provided.draggableProps}
-        {...provided.dragHandleProps}
-        ref={provided.innerRef}
-        height={height}
-      >
-        <Indent warning={this.props.warning} />
-        <ClassBlockBody warning={this.props.warning}>
-          {numCredits > 2 ? (
-            <LargeClassBlock course={this.props.class} />
-          ) : (
-            <SmallClassBlock course={this.props.class} />
-          )}
-        </ClassBlockBody>
-      </Block>
     );
   }
 }

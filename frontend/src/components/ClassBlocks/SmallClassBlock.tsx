@@ -1,14 +1,22 @@
 import React from "react";
 import styled from "styled-components";
 import { DNDScheduleCourse } from "../../models/types";
+import DeleteIcon from "@material-ui/icons/Delete";
+import { IconButton } from "@material-ui/core";
 
-const TextWrapper = styled.div`
+const Wrapper = styled.div`
   display: flex;
   flex: 1;
   flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const TextWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
   justify-content: start;
   align-items: center;
-  margin-top: 1px;
 `;
 
 const Title = styled.div`
@@ -24,13 +32,26 @@ const Subtitle = styled.div`
 
 interface SmallClassBlockProps {
   course: DNDScheduleCourse;
+  hovering: boolean;
+  onDelete: () => void;
 }
 
-export const SmallClassBlock: React.FC<SmallClassBlockProps> = ({ course }) => {
+export const SmallClassBlock: React.FC<SmallClassBlockProps> = ({
+  course,
+  hovering,
+  onDelete,
+}) => {
   return (
-    <TextWrapper>
-      <Title>{course.subject + course.classId}</Title>
-      <Subtitle>{course.name}</Subtitle>
-    </TextWrapper>
+    <Wrapper>
+      <TextWrapper>
+        <Title>{course.subject + course.classId}</Title>
+        <Subtitle>{course.name}</Subtitle>
+      </TextWrapper>
+      <div style={{ visibility: hovering ? "visible" : "hidden" }}>
+        <IconButton onClick={onDelete} size="small" style={{ marginRight: 9 }}>
+          <DeleteIcon />
+        </IconButton>
+      </div>
+    </Wrapper>
   );
 };
