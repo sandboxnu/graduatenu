@@ -7,6 +7,7 @@
     "@material-ui/icons": "^4.5.1",
     "@material-ui/lab": "^4.0.0-alpha.31",
     "@material-ui/styles": "^4.7.1",
+    "@react-native-community/async-storage": "^1.7.1",
     "apollo-boost": "^0.4.4",
     "cross-env": "5.0.5",
     "graphql-tag": "^2.10.1",
@@ -22,6 +23,7 @@
     "react-toast-notifications": "^2.4.0",
     "redux": "^4.0.4",
     "redux-logger": "^3.0.6",
+    "redux-persist": "^6.0.0",
     "styled-components": "^4.4.0",
     "typesafe-actions": "^5.1.0"
   },
@@ -34,6 +36,7 @@
     "@types/react-router-dom": "^5.1.2",
     "@types/react-toast-notifications": "^2.0.0",
     "@types/redux-logger": "^3.0.7",
+    "@types/redux-persist": "^4.3.1",
     "@types/styled-components": "^4.1.19",
     "husky": "^3.0.5",
     "jest": "^24.9.0",
