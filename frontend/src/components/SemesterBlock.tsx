@@ -7,29 +7,33 @@ import {
   ScheduleCourse,
   CourseWarning,
   DNDScheduleCourse,
+  IWarning,
 } from "../models/types";
 import { AddButton } from "./Year";
 import styled from "styled-components";
 import { AppState } from "../state/reducers/state";
 import { connect } from "react-redux";
-import { getCourseWarningsFromState } from "../state";
+import { getCourseWarningsFromState, getWarningsFromState } from "../state";
 import { Dispatch } from "redux";
 import {
   addClassesAction,
   removeClassAction,
 } from "../state/actions/scheduleActions";
+import { Tooltip } from "@material-ui/core";
 
-const Container = styled.div`
+const Container = styled.div<any>`
   border: 1px solid black;
   position: relative;
   height: 100%;
+  background-color: ${props =>
+    props.warning ? "rgba(216, 86, 86, 0.9)" : "rgb(255, 255, 255, 0)"};
 `;
 
 const AddButtonContainer = styled.div`
 	position: absolute;
 	right: 6px
 	bottom: 6px
-	zIndex: 1
+	z-index: 1;
 `;
 
 const NoClassBlock = styled.div`
@@ -44,6 +48,7 @@ const NoClassBlock = styled.div`
 
 interface ReduxStoreSemesterBlockProps {
   courseWarnings: CourseWarning[];
+  warning?: IWarning;
 }
 
 interface ReduxDispatchSemesterBlockProps {
@@ -126,6 +131,27 @@ class SemesterBlockComponent extends React.Component<
     }
   }
 
+  renderContainer() {
+    return (
+      <Container warning={!!this.props.warning}>
+        <Droppable droppableId={this.props.semester.termId.toString()}>
+          {provided => (
+            <ClassList
+              innerRef={provided.innerRef as any}
+              {...provided.droppableProps}
+            >
+              {this.renderBody()}
+              {provided.placeholder}
+            </ClassList>
+          )}
+        </Droppable>
+        <AddButtonContainer>
+          <AddButton onClick={this.showModal.bind(this)}></AddButton>
+        </AddButtonContainer>
+      </Container>
+    );
+  }
+
   render() {
     return (
       <div>
@@ -136,29 +162,27 @@ class SemesterBlockComponent extends React.Component<
             this.props.handleAddClasses(courses, this.props.semester)
           }
         ></AddClassModal>
-
-        <Container>
-          <Droppable droppableId={this.props.semester.termId.toString()}>
-            {provided => (
-              <ClassList
-                innerRef={provided.innerRef as any}
-                {...provided.droppableProps}
-              >
-                {this.renderBody()}
-                {provided.placeholder}
-              </ClassList>
-            )}
-          </Droppable>
-          <AddButtonContainer>
-            <AddButton onClick={this.showModal.bind(this)}></AddButton>
-          </AddButtonContainer>
-        </Container>
+        {!!this.props.warning ? (
+          <Tooltip title={this.props.warning.message} placement="top">
+            {this.renderContainer()}
+          </Tooltip>
+        ) : (
+          this.renderContainer()
+        )}
       </div>
     );
   }
 }
 
 const mapStateToProps = (state: AppState, ownProps: SemesterBlockProps) => ({
+  warning:
+    getWarningsFromState(state).filter(
+      w => w.termId === ownProps.semester.termId
+    ).length > 0
+      ? getWarningsFromState(state).filter(
+          w => w.termId === ownProps.semester.termId
+        )[0]
+      : undefined,
   courseWarnings: getCourseWarningsFromState(state, ownProps.semester),
 });
 
