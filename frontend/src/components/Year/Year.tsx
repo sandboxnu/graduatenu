@@ -2,7 +2,7 @@ import * as React from "react";
 import styled from "styled-components";
 import { YearTop, YearBottom } from ".";
 import { SemesterBlock } from "../";
-import { DNDSchedule, Status, SeasonWord } from "../../models/types";
+import { DNDSchedule } from "../../models/types";
 import { SEMESTER_MIN_HEIGHT } from "../../constants";
 
 export interface IYearProps {

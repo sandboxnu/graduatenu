@@ -885,7 +885,6 @@ const doesAndPrereqExist = (
         return `AND: {${prereqResult}}`;
       }
     } else {
-      const from = courseCode(item);
       // does the graph contain an edge?
       if (!tracker.contains(courseCode(item))) {
         return `AND: ${courseCode(item)}`;
