@@ -52,9 +52,15 @@ export class ClassBlock extends React.Component<
     };
   }
 
-  handleMouseHover() {
+  handleMouseEnter() {
     this.setState({
-      hovering: !this.state.hovering,
+      hovering: true,
+    });
+  }
+
+  handleMouseLeave() {
+    this.setState({
+      hovering: false,
     });
   }
 
@@ -62,8 +68,8 @@ export class ClassBlock extends React.Component<
     const numCredits = this.props.class.numCreditsMax;
     return (
       <div
-        onMouseEnter={this.handleMouseHover.bind(this)}
-        onMouseLeave={this.handleMouseHover.bind(this)}
+        onMouseEnter={this.handleMouseEnter.bind(this)}
+        onMouseLeave={this.handleMouseLeave.bind(this)}
       >
         <Block
           {...provided.draggableProps}

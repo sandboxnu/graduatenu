@@ -1,9 +1,12 @@
 import * as React from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import styled from "styled-components";
 import { GraduateGrey } from "../constants";
 import { Button, Card } from "@material-ui/core";
 import picture from "../assets/landingils.png";
+import { connect } from "react-redux";
+import { getFullNameFromState } from "../state";
+import { AppState } from "../state/reducers/state";
 
 const Container = styled.div`
   display: flex;
@@ -87,7 +90,11 @@ const CardTitleText = styled.h2`
   margin-bottom: 2px;
 `;
 
-export class Onboarding extends React.Component {
+interface OnboardingProps {
+  fullName: string;
+}
+
+class OnboardingComponent extends React.Component<OnboardingProps> {
   renderInfoCard(title: string, desc: string) {
     return (
       <InfoCard>
@@ -101,6 +108,11 @@ export class Onboarding extends React.Component {
   }
 
   render() {
+    // fullName will be an empty string if this is the user's first time visiting the site
+    if (!!this.props.fullName) {
+      return <Redirect to="/home" />;
+    }
+
     return (
       <Container>
         <Header></Header>
@@ -144,3 +156,9 @@ export class Onboarding extends React.Component {
     );
   }
 }
+
+const mapStateToProps = (state: AppState) => ({
+  fullName: getFullNameFromState(state),
+});
+
+export const Onboarding = connect(mapStateToProps)(OnboardingComponent);

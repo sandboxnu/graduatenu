@@ -4,6 +4,10 @@ import { CLASS_BLOCK_WIDTH, GraduateGrey } from "../../constants";
 import { ThreeDots } from "../common";
 import { Menu, MenuItem } from "@material-ui/core";
 import { SeasonWord, Status } from "../../models/types";
+import { connect } from "react-redux";
+import { Dispatch } from "redux";
+import { changeSemesterStatusAction } from "../../state/actions/scheduleActions";
+import { AppState } from "../../state/reducers/state";
 
 const Container = styled.div`
   display: flex;
@@ -19,16 +23,25 @@ const SemesterText = styled.p`
 
 interface YearTopProps {
   year: number;
-  handleStatusChange: (newStatus: Status, tappedSemester: SeasonWord) => void;
 }
+
+interface ReduxDispatchYearTopProps {
+  handleStatusChange: (
+    newStatus: Status,
+    year: number,
+    tappedSemester: SeasonWord
+  ) => void;
+}
+
+type Props = YearTopProps & ReduxDispatchYearTopProps;
 
 interface YearTopState {
   anchorEl: Element | null;
   tappedSemester: SeasonWord | null;
 }
 
-export class YearTop extends React.Component<YearTopProps, YearTopState> {
-  constructor(props: any) {
+class YearTopComponent extends React.Component<Props, YearTopState> {
+  constructor(props: Props) {
     super(props);
 
     this.state = {
@@ -47,7 +60,7 @@ export class YearTop extends React.Component<YearTopProps, YearTopState> {
   handleClose = async (newStatus: Status) => {
     const tappedSemester = this.state.tappedSemester;
     await this.setState({ anchorEl: null, tappedSemester: null });
-    this.props.handleStatusChange(newStatus, tappedSemester!);
+    this.props.handleStatusChange(newStatus, this.props.year, tappedSemester!);
   };
 
   render() {
@@ -83,7 +96,11 @@ export class YearTop extends React.Component<YearTopProps, YearTopState> {
           anchorEl={this.state.anchorEl}
           keepMounted
           open={Boolean(this.state.anchorEl)}
-          onClose={this.handleClose}
+          onClose={() =>
+            this.setState({
+              anchorEl: null,
+            })
+          }
         >
           <MenuItem onClick={() => this.handleClose("CLASSES")}>
             Set as Classes
@@ -109,3 +126,21 @@ const textContainerStyle: React.CSSProperties = {
   justifyContent: "space-between",
   alignItems: "center",
 };
+
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  handleStatusChange: (
+    newStatus: Status,
+    year: number,
+    tappedSemester: SeasonWord
+  ) => dispatch(changeSemesterStatusAction(newStatus, year, tappedSemester)),
+});
+
+export const YearTop = connect<
+  {},
+  ReduxDispatchYearTopProps,
+  YearTopProps,
+  AppState
+>(
+  null,
+  mapDispatchToProps
+)(YearTopComponent);

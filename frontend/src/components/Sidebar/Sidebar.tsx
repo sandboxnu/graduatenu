@@ -4,6 +4,9 @@ import styled from "styled-components";
 import { GraduateGrey } from "../../constants";
 import { RequirementSection } from ".";
 import { produceRequirementGroupWarning } from "../../utils";
+import { AppState } from "../../state/reducers/state";
+import { getScheduleFromState, getMajorFromState } from "../../state";
+import { connect } from "react-redux";
 
 const Container = styled.div`
   display: flex;
@@ -24,7 +27,7 @@ interface Props {
   major?: Major;
 }
 
-export const Sidebar: React.FC<Props> = ({ schedule, major }) => {
+const SidebarComponent: React.FC<Props> = ({ schedule, major }) => {
   if (!major) {
     return (
       <Container>
@@ -33,7 +36,10 @@ export const Sidebar: React.FC<Props> = ({ schedule, major }) => {
     );
   }
 
-  const warnings = produceRequirementGroupWarning(schedule, major);
+  const warnings = produceRequirementGroupWarning(
+    JSON.parse(JSON.stringify(schedule)),
+    major
+  ); // deep copy of schedule
 
   return (
     <Container>
@@ -44,9 +50,17 @@ export const Sidebar: React.FC<Props> = ({ schedule, major }) => {
             title={req}
             contents={major.requirementGroupMap[req]}
             warning={warnings.find(w => w.requirementGroup === req)}
+            key={index}
           ></RequirementSection>
         );
       })}
     </Container>
   );
 };
+
+const mapStateToProps = (state: AppState) => ({
+  schedule: getScheduleFromState(state),
+  major: getMajorFromState(state),
+});
+
+export const Sidebar = connect(mapStateToProps)(SidebarComponent);

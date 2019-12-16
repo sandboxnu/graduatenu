@@ -1,12 +1,12 @@
-import { HomeState } from "../home/Home";
 import { convertTermIdToSeason, convertTermIdToYear } from ".";
-import { DNDScheduleYear, DNDScheduleTerm } from "../models/types";
+import { DNDScheduleYear, DNDScheduleTerm, DNDSchedule } from "../models/types";
 
 export function moveCourse(
-  state: HomeState,
+  schedule: DNDSchedule,
   destination: any,
-  source: any
-): HomeState | undefined {
+  source: any,
+  setSchedule: (schedule: DNDSchedule) => void
+) {
   if (
     !destination ||
     (destination.droppableId === source.droppableId &&
@@ -17,19 +17,17 @@ export function moveCourse(
 
   const sourceSemesterSeason = convertTermIdToSeason(source.droppableId);
   const sourceSemesterYear = convertTermIdToYear(source.droppableId);
-  const startYear: DNDScheduleYear = state.schedule.yearMap[sourceSemesterYear];
+  const startYear: DNDScheduleYear = schedule.yearMap[sourceSemesterYear];
   const startSemester: DNDScheduleTerm = (startYear as any)[
     sourceSemesterSeason
   ];
 
   const destSemesterSeason = convertTermIdToSeason(destination.droppableId);
   const destSemesterYear = convertTermIdToYear(destination.droppableId);
-  const finishYear: DNDScheduleYear = state.schedule.yearMap[destSemesterYear];
+  const finishYear: DNDScheduleYear = schedule.yearMap[destSemesterYear];
   const finishSemester: DNDScheduleTerm = (finishYear as any)[
     destSemesterSeason
   ];
-
-  var newState: HomeState;
 
   if (startSemester === finishSemester) {
     const newClassOrder = Array.from(startSemester.classes);
@@ -45,19 +43,17 @@ export function moveCourse(
     const newSemesterYear = convertTermIdToYear(newSemester.termId);
     const newSemesterSeason = convertTermIdToSeason(newSemester.termId);
 
-    newState = {
-      ...state,
-      schedule: {
-        ...state.schedule,
-        yearMap: {
-          ...state.schedule.yearMap,
-          [newSemesterYear]: {
-            ...state.schedule.yearMap[newSemesterYear],
-            [newSemesterSeason]: newSemester,
-          },
+    setSchedule({
+      ...schedule,
+      yearMap: {
+        ...schedule.yearMap,
+        [newSemesterYear]: {
+          ...schedule.yearMap[newSemesterYear],
+          [newSemesterSeason]: newSemester,
         },
       },
-    };
+    });
+    return;
   } else {
     const startClasses = Array.from(startSemester.classes);
     const movedClass = startClasses[source.index];
@@ -94,40 +90,34 @@ export function moveCourse(
 
     if (newStartSemesterYear === newFinishSemesterYear) {
       // in same year
-      newState = {
-        ...state,
-        schedule: {
-          ...state.schedule,
-          yearMap: {
-            ...state.schedule.yearMap,
-            [newStartSemesterYear]: {
-              ...state.schedule.yearMap[newStartSemesterYear],
-              [newStartSemesterSeason]: newStartSemester,
-              [newFinishSemesterSeason]: newFinishSemester,
-            },
+      setSchedule({
+        ...schedule,
+        yearMap: {
+          ...schedule.yearMap,
+          [newStartSemesterYear]: {
+            ...schedule.yearMap[newStartSemesterYear],
+            [newStartSemesterSeason]: newStartSemester,
+            [newFinishSemesterSeason]: newFinishSemester,
           },
         },
-      };
+      });
+      return;
     } else {
-      newState = {
-        ...state,
-        schedule: {
-          ...state.schedule,
-          yearMap: {
-            ...state.schedule.yearMap,
-            [newStartSemesterYear]: {
-              ...state.schedule.yearMap[newStartSemesterYear],
-              [newStartSemesterSeason]: newStartSemester,
-            },
-            [newFinishSemesterYear]: {
-              ...state.schedule.yearMap[newFinishSemesterYear],
-              [newFinishSemesterSeason]: newFinishSemester,
-            },
+      setSchedule({
+        ...schedule,
+        yearMap: {
+          ...schedule.yearMap,
+          [newStartSemesterYear]: {
+            ...schedule.yearMap[newStartSemesterYear],
+            [newStartSemesterSeason]: newStartSemester,
+          },
+          [newFinishSemesterYear]: {
+            ...schedule.yearMap[newFinishSemesterYear],
+            [newFinishSemesterSeason]: newFinishSemester,
           },
         },
-      };
+      });
+      return;
     }
   }
-
-  return newState;
 }
