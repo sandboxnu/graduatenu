@@ -95,7 +95,7 @@ export class RequirementSection extends React.Component<
 
   parseRequirements(reqs: Requirement[]) {
     return reqs.map((r: Requirement, index: number) => (
-      <div key={index + 10000}>{this.renderRequirement(r, index)}</div>
+      <div key={index}>{this.renderRequirement(r, index)}</div>
     ));
   }
 
