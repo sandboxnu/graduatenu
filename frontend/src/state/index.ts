@@ -7,6 +7,9 @@ import {
   DNDScheduleTerm,
 } from "../models/types";
 
+export const getFullNameFromState = (state: AppState): string =>
+  state.user.fullName;
+
 export const getScheduleFromState = (state: AppState): DNDSchedule =>
   state.schedule.present.schedule;
 

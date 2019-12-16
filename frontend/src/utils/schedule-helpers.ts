@@ -111,7 +111,7 @@ export const convertToDNDCourses = (
   courses: ScheduleCourse[],
   counter: number
 ): [DNDScheduleCourse[], number] => {
-  var list: DNDScheduleCourse[] = [];
+  const list: DNDScheduleCourse[] = [];
   for (const course of courses) {
     counter++;
     list.push({
