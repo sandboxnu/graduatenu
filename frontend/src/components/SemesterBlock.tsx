@@ -48,7 +48,7 @@ const NoClassBlock = styled.div`
 
 interface ReduxStoreSemesterBlockProps {
   courseWarnings: CourseWarning[];
-  warning?: IWarning;
+  warnings: IWarning[];
 }
 
 interface ReduxDispatchSemesterBlockProps {
@@ -131,9 +131,19 @@ class SemesterBlockComponent extends React.Component<
     }
   }
 
+  renderTooltip() {
+    return (
+      <div style={{ display: "flex", flexDirection: "column" }}>
+        {this.props.warnings.map(w => {
+          return <span>{w.message}</span>;
+        })}
+      </div>
+    );
+  }
+
   renderContainer() {
     return (
-      <Container warning={!!this.props.warning}>
+      <Container warning={this.props.warnings.length > 0}>
         <Droppable droppableId={this.props.semester.termId.toString()}>
           {provided => (
             <ClassList
@@ -162,8 +172,8 @@ class SemesterBlockComponent extends React.Component<
             this.props.handleAddClasses(courses, this.props.semester)
           }
         ></AddClassModal>
-        {!!this.props.warning ? (
-          <Tooltip title={this.props.warning.message} placement="top">
+        {this.props.warnings.length > 0 ? (
+          <Tooltip title={this.renderTooltip()} placement="top" arrow>
             {this.renderContainer()}
           </Tooltip>
         ) : (
@@ -175,14 +185,9 @@ class SemesterBlockComponent extends React.Component<
 }
 
 const mapStateToProps = (state: AppState, ownProps: SemesterBlockProps) => ({
-  warning:
-    getWarningsFromState(state).filter(
-      w => w.termId === ownProps.semester.termId
-    ).length > 0
-      ? getWarningsFromState(state).filter(
-          w => w.termId === ownProps.semester.termId
-        )[0]
-      : undefined,
+  warnings: getWarningsFromState(state).filter(
+    w => w.termId === ownProps.semester.termId
+  ),
   courseWarnings: getCourseWarningsFromState(state, ownProps.semester),
 });
 
