@@ -1,4 +1,9 @@
-import { DNDSchedule, IWarning, CourseWarning } from "../../models/types";
+import {
+  DNDSchedule,
+  IWarning,
+  CourseWarning,
+  DNDScheduleCourse,
+} from "../../models/types";
 import { mockData } from "../../data/mockData";
 import produce from "immer";
 import { getType } from "typesafe-actions";
@@ -10,6 +15,7 @@ import {
   updateSemesterAction,
   setScheduleAction,
   setDNDScheduleAction,
+  addCompletedCourses,
 } from "../actions/scheduleActions";
 import {
   convertTermIdToSeason,
@@ -25,6 +31,7 @@ export interface ScheduleState {
   schedule: DNDSchedule;
   warnings: IWarning[];
   courseWarnings: CourseWarning[];
+  completedCourses: DNDScheduleCourse[];
 }
 
 const initialState: ScheduleState = {
@@ -34,6 +41,7 @@ const initialState: ScheduleState = {
   schedule: mockData,
   warnings: [],
   courseWarnings: [],
+  completedCourses: [],
 };
 
 export const scheduleReducer = (
@@ -129,6 +137,17 @@ export const scheduleReducer = (
 
         draft.warnings = container.normalWarnings;
         draft.courseWarnings = container.courseWarnings;
+
+        return draft;
+      }
+      case getType(addCompletedCourses): {
+        const [dndCourses, newCounter] = convertToDNDCourses(
+          action.payload.completedCourses,
+          draft.currentClassCounter
+        );
+
+        draft.currentClassCounter = newCounter;
+        draft.completedCourses.push(...dndCourses);
 
         return draft;
       }
