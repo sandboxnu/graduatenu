@@ -36,10 +36,7 @@ const SidebarComponent: React.FC<Props> = ({ schedule, major }) => {
     );
   }
 
-  const warnings = produceRequirementGroupWarning(
-    JSON.parse(JSON.stringify(schedule)),
-    major
-  ); // deep copy of schedule
+  const warnings = produceRequirementGroupWarning(schedule, major);
 
   return (
     <Container>

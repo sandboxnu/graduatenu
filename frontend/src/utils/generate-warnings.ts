@@ -81,8 +81,9 @@ export function produceWarnings(schedule: Schedule): WarningContainer {
 
   // for each of the years in schedule, retrieve the corresponding map.
   // smallest to biggest.
-  schedule.years.sort((n1, n2) => n1 - n2);
-  for (const yearNum of schedule.years) {
+  const sorted = schedule.years.slice();
+  sorted.sort((n1, n2) => n1 - n2);
+  for (const yearNum of sorted) {
     const year = schedule.yearMap[yearNum];
 
     computeSeason(year.fall);
@@ -139,8 +140,9 @@ export function produceRequirementGroupWarning(
   const coursesUsed: Set<string> = new Set<string>();
 
   //add courses from the schedule to a Map: string => number (produceCourseCode => creditHours)
-  schedule.years.sort((n1, n2) => n1 - n2);
-  for (const yearNum of schedule.years) {
+  const sorted = schedule.years.slice();
+  sorted.sort((n1, n2) => n1 - n2);
+  for (const yearNum of sorted) {
     const year = schedule.yearMap[yearNum];
 
     // add courses, term by term.
