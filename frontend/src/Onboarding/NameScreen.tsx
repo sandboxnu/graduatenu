@@ -14,6 +14,7 @@ import {
 } from "../state/reducers/apiReducer";
 import { fetchMajors } from "../utils/fetchMajors";
 import { Major } from "../models/types";
+import Loader from "react-loader-spinner";
 
 interface NameScreenProps {
   setFullName: (fullName: string) => void;
@@ -41,11 +42,13 @@ class NameComponent extends React.Component<Props, NameScreenState> {
   }
 
   componentWillMount() {
+    console.log("componentWillMount");
     const { fetchMajors } = this.props;
     fetchMajors();
   }
 
   shouldComponentRender() {
+    console.log("shouldComponentRender");
     const { isFetchingMajors } = this.props;
     if (isFetchingMajors === false) return false;
     // more tests
@@ -61,6 +64,19 @@ class NameComponent extends React.Component<Props, NameScreenState> {
 
   render() {
     const { textFieldStr, beenEdited } = this.state;
+    const { isFetchingMajors, majors } = this.props;
+    console.log(isFetchingMajors);
+    console.log(majors);
+    if (!this.shouldComponentRender())
+      return (
+        <Loader
+          type="Puff"
+          color="#00BFFF"
+          height={100}
+          width={100}
+          timeout={3000} //3 secs
+        />
+      );
     return (
       <GenericQuestionTemplate question="What is your full name?">
         <TextField
@@ -105,7 +121,7 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
   bindActionCreators(
     {
       fetchMajors: fetchMajors,
-      setFullName: (fullName: string) => setFullNameAction(fullName),
+      setFullName: setFullNameAction,
     },
     dispatch
   );
