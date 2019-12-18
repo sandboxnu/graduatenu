@@ -21,6 +21,7 @@ interface NameScreenProps {
   fetchMajors: typeof fetchMajors;
   isFetchingMajors: boolean;
   majors: Major[];
+  majorsError: string;
 }
 
 interface NameScreenState {
@@ -64,9 +65,9 @@ class NameComponent extends React.Component<Props, NameScreenState> {
 
   render() {
     const { textFieldStr, beenEdited } = this.state;
-    const { isFetchingMajors, majors } = this.props;
-    console.log(isFetchingMajors);
-    console.log(majors);
+    // const { isFetchingMajors, majors } = this.props;
+    // // console.log(isFetchingMajors);
+    // // console.log(majors);
     if (!this.shouldComponentRender())
       return (
         <Loader

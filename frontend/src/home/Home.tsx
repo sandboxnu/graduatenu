@@ -27,7 +27,6 @@ import {
   Button,
 } from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
-import { majors } from "../majors";
 import { CLASS_BLOCK_WIDTH } from "../constants";
 import { DropDownModal } from "../components";
 import { Sidebar } from "../components/Sidebar";
@@ -50,7 +49,12 @@ import {
   setDNDScheduleAction,
   setCoopCycle,
 } from "../state/actions/scheduleActions";
+<<<<<<< HEAD
 import { setMajorAction } from "../state/actions/userActions";
+=======
+import { setPlanStrAction, setMajorAction } from "../state/actions/userActions";
+import { getMajors } from "../state/reducers/apiReducer";
+>>>>>>> 5a11390... ys - use majors from store.
 
 const OuterContainer = styled.div`
   display: flex;
@@ -102,6 +106,7 @@ interface ReduxStoreHomeProps {
   major?: Major;
   planStr?: string;
   warnings: IWarning[];
+  majors: Major[];
 }
 
 interface ReduxDispatchHomeProps {
@@ -227,7 +232,7 @@ class HomeComponent extends React.Component<Props> {
   }
 
   onChooseMajor(event: React.SyntheticEvent<{}>, value: any) {
-    const maj = majors.find((m: any) => m.name === value);
+    const maj = this.props.majors.find((m: any) => m.name === value);
     this.props.setMajor(maj);
   }
 
@@ -251,7 +256,7 @@ class HomeComponent extends React.Component<Props> {
       <Autocomplete
         style={{ width: 300, marginRight: 18 }}
         disableListWrap
-        options={majors.map(maj => maj.name)}
+        options={this.props.majors.map(maj => maj.name)}
         renderInput={params => (
           <TextField
             {...params}
@@ -372,6 +377,7 @@ const mapStateToProps = (state: AppState) => ({
   planStr: getPlanStrFromState(state),
   major: getMajorFromState(state),
   warnings: getWarningsFromState(state),
+  majors: getMajors(state.majors),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({

@@ -4,7 +4,6 @@ import { TextField } from "@material-ui/core";
 import { GenericQuestionTemplate } from "./GenericQuestionScreen";
 import { NextButton } from "../components/common/NextButton";
 import { Autocomplete } from "@material-ui/lab";
-import { majors } from "../majors";
 import { Major, Schedule } from "../models/types";
 import styled from "styled-components";
 import { plans } from "../plans";
@@ -13,6 +12,9 @@ import { connect } from "react-redux";
 import { setMajorAction } from "../state/actions/userActions";
 import { Dispatch } from "redux";
 import { setCoopCycle } from "../state/actions/scheduleActions";
+import { setScheduleAction } from "../state/actions/scheduleActions";
+import { getMajors } from "../state/reducers/apiReducer";
+import { AppState } from "../state/reducers/state";
 
 const DropDownWrapper = styled.div`
   display: flex;
@@ -22,6 +24,9 @@ const DropDownWrapper = styled.div`
 interface MajorScreenProps {
   setMajor: (major?: Major) => void;
   setCoopCycle: (plan: Schedule) => void;
+  setPlanStr: (planStr?: string) => void;
+  setPlan: (plan: Schedule) => void;
+  majors: Major[];
 }
 
 interface MajorScreenState {
@@ -42,7 +47,7 @@ class MajorComponent extends React.Component<Props, MajorScreenState> {
   }
 
   onChooseMajor(event: React.SyntheticEvent<{}>, value: any) {
-    const maj = majors.find((m: any) => m.name === value);
+    const maj = this.props.majors.find((m: any) => m.name === value);
 
     this.setState({ major: maj });
   }
@@ -68,7 +73,7 @@ class MajorComponent extends React.Component<Props, MajorScreenState> {
       <Autocomplete
         style={{ width: 300, marginRight: 18 }}
         disableListWrap
-        options={majors.map(maj => maj.name)}
+        options={this.props.majors.map(maj => maj.name)}
         renderInput={params => (
           <TextField
             {...params}
@@ -123,6 +128,10 @@ class MajorComponent extends React.Component<Props, MajorScreenState> {
     );
   }
 }
+
+const mapStateToProps = (state: AppState) => ({
+  majors: getMajors(state.majors),
+});
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   setMajor: (major?: Major) => dispatch(setMajorAction(major)),
