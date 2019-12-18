@@ -4,11 +4,22 @@ import { TextField } from "@material-ui/core";
 import { GenericQuestionTemplate } from "./GenericQuestionScreen";
 import { NextButton } from "../components/common/NextButton";
 import { connect } from "react-redux";
-import { Dispatch } from "redux";
+import { Dispatch, bindActionCreators } from "redux";
 import { setFullNameAction } from "../state/actions/userActions";
+import {
+  MajorApiState,
+  getMajors,
+  getMajorsLoadingFlag,
+  getMajorsError,
+} from "../state/reducers/apiReducer";
+import { fetchMajors } from "../utils/fetchMajors";
+import { Major } from "../models/types";
 
 interface NameScreenProps {
   setFullName: (fullName: string) => void;
+  fetchMajors: typeof fetchMajors;
+  isFetchingMajors: boolean;
+  majors: Major[];
 }
 
 interface NameScreenState {
@@ -21,11 +32,24 @@ type Props = NameScreenProps & RouteComponentProps;
 class NameComponent extends React.Component<Props, NameScreenState> {
   constructor(props: Props) {
     super(props);
+    this.shouldComponentRender = this.shouldComponentRender.bind(this);
 
     this.state = {
       textFieldStr: "",
       beenEdited: false,
     };
+  }
+
+  componentWillMount() {
+    const { fetchMajors } = this.props;
+    fetchMajors();
+  }
+
+  shouldComponentRender() {
+    const { isFetchingMajors } = this.props;
+    if (isFetchingMajors === false) return false;
+    // more tests
+    return true;
   }
 
   onChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -71,11 +95,22 @@ class NameComponent extends React.Component<Props, NameScreenState> {
   }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-  setFullName: (fullName: string) => dispatch(setFullNameAction(fullName)),
+const mapStateToProps = (state: MajorApiState) => ({
+  majorsError: getMajorsError(state),
+  majors: getMajors(state),
+  isFetchingMajors: getMajorsLoadingFlag(state),
 });
 
+const mapDispatchToProps = (dispatch: Dispatch) =>
+  bindActionCreators(
+    {
+      fetchMajors: fetchMajors,
+      setFullName: (fullName: string) => setFullNameAction(fullName),
+    },
+    dispatch
+  );
+
 export const NameScreen = connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(withRouter(NameComponent));

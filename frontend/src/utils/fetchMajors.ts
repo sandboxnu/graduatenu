@@ -27,15 +27,19 @@ const generateQueryString = (majorIds: string[]): string => {
   return res;
 };
 
-const parseMajors = (res: object): Major[] => {
+const parseMajors = (res: any): Major[] => {
+  console.log(res);
   const majors: Major[] = [];
-  for (let key in res) {
-    majors.push(res[key].latestOccurrence.requirements);
+  for (const key of Object.keys(res)) {
+    if (res.hasOwnProperty(key)) {
+      majors.push(res[key].latestOccurrence.requirements);
+    }
   }
   return majors;
 };
 
-function fetchMajors() {
+export function fetchMajors() {
+  console.log("here");
   return (dispatch: Dispatch) => {
     const queryString: string = generateQueryString(majorIds);
     dispatch(fetchMajorsPendingAction());
@@ -51,7 +55,7 @@ function fetchMajors() {
         if (res.error) {
           throw res.error;
         }
-        const majors: Major[] = parseMajors(res);
+        const majors: Major[] = parseMajors(res.data);
         dispatch(fetchMajorsSuccessAction(majors));
         return majors;
       })
@@ -60,5 +64,3 @@ function fetchMajors() {
       });
   };
 }
-
-export default fetchMajors;
