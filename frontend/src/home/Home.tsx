@@ -49,12 +49,8 @@ import {
   setDNDScheduleAction,
   setCoopCycle,
 } from "../state/actions/scheduleActions";
-<<<<<<< HEAD
 import { setMajorAction } from "../state/actions/userActions";
-=======
-import { setPlanStrAction, setMajorAction } from "../state/actions/userActions";
-import { getMajors } from "../state/reducers/apiReducer";
->>>>>>> 5a11390... ys - use majors from store.
+import { getMajors } from "../state";
 
 const OuterContainer = styled.div`
   display: flex;
@@ -377,7 +373,7 @@ const mapStateToProps = (state: AppState) => ({
   planStr: getPlanStrFromState(state),
   major: getMajorFromState(state),
   warnings: getWarningsFromState(state),
-  majors: getMajors(state.majors),
+  majors: getMajors(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({

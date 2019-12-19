@@ -6,11 +6,11 @@ import { MajorApiState, majorsReducer } from "./apiReducer";
 export interface AppState {
   schedule: ScheduleState;
   user: UserState;
-  majors: MajorApiState;
+  majorState: MajorApiState;
 }
 
 export const rootReducer = combineReducers({
   schedule: scheduleReducer,
   user: userReducer,
-  majors: majorsReducer,
+  majorState: majorsReducer,
 });

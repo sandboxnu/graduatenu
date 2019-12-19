@@ -44,8 +44,3 @@ export const majorsReducer = (
     }
   });
 };
-
-export const getMajors = (state: MajorApiState) => state.majors;
-export const getMajorsLoadingFlag = (state: MajorApiState) =>
-  state.isFetchingMajors;
-export const getMajorsError = (state: MajorApiState) => state.majorsError;

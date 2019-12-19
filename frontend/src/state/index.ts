@@ -22,6 +22,13 @@ export const getMajorFromState = (state: AppState): Major | undefined =>
 export const getWarningsFromState = (state: AppState): IWarning[] =>
   state.schedule.present.warnings;
 
+export const getMajors = (state: AppState) => state.majorState.majors;
+
+export const getMajorsLoadingFlag = (state: AppState) =>
+  state.majorState.isFetchingMajors;
+
+export const getMajorsError = (state: AppState) => state.majorState.majorsError;
+
 export const getCourseWarningsFromState = (
   state: AppState,
   semester: DNDScheduleTerm

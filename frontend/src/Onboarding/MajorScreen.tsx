@@ -13,7 +13,7 @@ import { setMajorAction } from "../state/actions/userActions";
 import { Dispatch } from "redux";
 import { setCoopCycle } from "../state/actions/scheduleActions";
 import { setScheduleAction } from "../state/actions/scheduleActions";
-import { getMajors } from "../state/reducers/apiReducer";
+import { getMajors } from "../state";
 import { AppState } from "../state/reducers/state";
 
 const DropDownWrapper = styled.div`
@@ -130,7 +130,7 @@ class MajorComponent extends React.Component<Props, MajorScreenState> {
 }
 
 const mapStateToProps = (state: AppState) => ({
-  majors: getMajors(state.majors),
+  majors: getMajors(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
@@ -139,6 +139,6 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 });
 
 export const MajorScreen = connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(withRouter(MajorComponent));

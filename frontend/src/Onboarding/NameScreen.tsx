@@ -6,15 +6,11 @@ import { NextButton } from "../components/common/NextButton";
 import { connect } from "react-redux";
 import { Dispatch, bindActionCreators } from "redux";
 import { setFullNameAction } from "../state/actions/userActions";
-import {
-  MajorApiState,
-  getMajors,
-  getMajorsLoadingFlag,
-  getMajorsError,
-} from "../state/reducers/apiReducer";
+import { getMajors, getMajorsLoadingFlag, getMajorsError } from "../state";
 import { fetchMajors } from "../utils/fetchMajors";
 import { Major } from "../models/types";
 import Loader from "react-loader-spinner";
+import { AppState } from "../state/reducers/state";
 
 interface NameScreenProps {
   setFullName: (fullName: string) => void;
@@ -65,54 +61,57 @@ class NameComponent extends React.Component<Props, NameScreenState> {
 
   render() {
     const { textFieldStr, beenEdited } = this.state;
+    const { isFetchingMajors } = this.props;
     // const { isFetchingMajors, majors } = this.props;
     // // console.log(isFetchingMajors);
     // // console.log(majors);
-    if (!this.shouldComponentRender())
+    if (isFetchingMajors) {
       return (
         <Loader
           type="Puff"
           color="#00BFFF"
           height={100}
           width={100}
-          timeout={3000} //3 secs
+          timeout={5000} //5 secs
         />
       );
-    return (
-      <GenericQuestionTemplate question="What is your full name?">
-        <TextField
-          id="standard-basic"
-          value={textFieldStr}
-          onChange={this.onChange.bind(this)}
-          placeholder="John Smith"
-          error={textFieldStr.length === 0 && beenEdited}
-          helperText={
-            textFieldStr.length === 0 &&
-            beenEdited &&
-            "Please enter a valid name"
-          }
-        />
-        {textFieldStr.length !== 0 ? (
-          <Link
-            to={{
-              pathname: "/academicYear",
-            }}
-            onClick={() => this.props.setFullName(this.state.textFieldStr)}
-            style={{ textDecoration: "none" }}
-          >
-            <NextButton />
-          </Link>
-        ) : (
-          <div onClick={() => this.setState({ beenEdited: true })}>
-            <NextButton />
-          </div>
-        )}
-      </GenericQuestionTemplate>
-    );
+    } else {
+      return (
+        <GenericQuestionTemplate question="What is your full name?">
+          <TextField
+            id="standard-basic"
+            value={textFieldStr}
+            onChange={this.onChange.bind(this)}
+            placeholder="John Smith"
+            error={textFieldStr.length === 0 && beenEdited}
+            helperText={
+              textFieldStr.length === 0 &&
+              beenEdited &&
+              "Please enter a valid name"
+            }
+          />
+          {textFieldStr.length !== 0 ? (
+            <Link
+              to={{
+                pathname: "/academicYear",
+              }}
+              onClick={() => this.props.setFullName(this.state.textFieldStr)}
+              style={{ textDecoration: "none" }}
+            >
+              <NextButton />
+            </Link>
+          ) : (
+            <div onClick={() => this.setState({ beenEdited: true })}>
+              <NextButton />
+            </div>
+          )}
+        </GenericQuestionTemplate>
+      );
+    }
   }
 }
 
-const mapStateToProps = (state: MajorApiState) => ({
+const mapStateToProps = (state: AppState) => ({
   majorsError: getMajorsError(state),
   majors: getMajors(state),
   isFetchingMajors: getMajorsLoadingFlag(state),

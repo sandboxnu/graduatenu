@@ -5,30 +5,29 @@ import {
 } from "../state/actions/majorsActions";
 import { Dispatch } from "redux";
 import { Major } from "../models/types";
+import { majorIds } from "../majors";
 
-const majorIds = [
-  "computer-information-science/computer-science/bscs",
-  "science/biochemistry/biochemistry-bs",
-  "science/mathematics/mathematics-bs",
-];
+const majorSchema: string[] = majorIds.map((majorId: string) => {
+  return `major(majorId: "${majorId}") {
+        latestOccurrence {
+            requirements
+        }
+    }`;
+});
 
-const generateQueryString = (majorIds: string[]): string => {
-  let res: string = "";
-  for (const { majorId, index } of majorIds.map((majorId, index) => ({
-    majorId,
-    index,
-  }))) {
-    res += `major${index}: major(majorId: ${majorId}) {
-                                latestOccurrence {
-                                    requirements
-                                    }
-                            }`;
-  }
-  return res;
-};
+// build the query schema
+const querySchema: string = `
+query {
+${majorSchema.reduce(
+  (accumulator: string, currentValue: string, index: number) => {
+    return accumulator + `major${String(index)}: ${currentValue}\n`;
+  },
+  ""
+)}
+}
+`;
 
 const parseMajors = (res: any): Major[] => {
-  console.log(res);
   const majors: Major[] = [];
   for (const key of Object.keys(res)) {
     if (res.hasOwnProperty(key)) {
@@ -39,16 +38,12 @@ const parseMajors = (res: any): Major[] => {
 };
 
 export function fetchMajors() {
-  console.log("here");
   return (dispatch: Dispatch) => {
-    const queryString: string = generateQueryString(majorIds);
     dispatch(fetchMajorsPendingAction());
     fetch("https://searchneu.com/graphql", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        query: `{${queryString}}`,
-      }),
+      body: JSON.stringify({ query: querySchema }),
     })
       .then(res => res.json())
       .then(res => {
