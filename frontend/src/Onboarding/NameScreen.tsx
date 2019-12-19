@@ -30,7 +30,6 @@ type Props = NameScreenProps & RouteComponentProps;
 class NameComponent extends React.Component<Props, NameScreenState> {
   constructor(props: Props) {
     super(props);
-    this.shouldComponentRender = this.shouldComponentRender.bind(this);
 
     this.state = {
       textFieldStr: "",
@@ -39,17 +38,8 @@ class NameComponent extends React.Component<Props, NameScreenState> {
   }
 
   componentWillMount() {
-    console.log("componentWillMount");
     const { fetchMajors } = this.props;
     fetchMajors();
-  }
-
-  shouldComponentRender() {
-    console.log("shouldComponentRender");
-    const { isFetchingMajors } = this.props;
-    if (isFetchingMajors === false) return false;
-    // more tests
-    return true;
   }
 
   onChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -62,9 +52,6 @@ class NameComponent extends React.Component<Props, NameScreenState> {
   render() {
     const { textFieldStr, beenEdited } = this.state;
     const { isFetchingMajors } = this.props;
-    // const { isFetchingMajors, majors } = this.props;
-    // // console.log(isFetchingMajors);
-    // // console.log(majors);
     if (isFetchingMajors) {
       return (
         <Loader
