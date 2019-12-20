@@ -6,14 +6,13 @@ import { NextButton } from "../components/common/NextButton";
 import { Autocomplete } from "@material-ui/lab";
 import { Major, Schedule } from "../models/types";
 import styled from "styled-components";
-import { plans } from "../plans";
 import { planToString } from "../utils";
 import { connect } from "react-redux";
 import { setMajorAction } from "../state/actions/userActions";
 import { Dispatch } from "redux";
 import { setCoopCycle } from "../state/actions/scheduleActions";
 import { setScheduleAction } from "../state/actions/scheduleActions";
-import { getMajors } from "../state";
+import { getMajors, getPlans } from "../state";
 import { AppState } from "../state/reducers/state";
 
 const DropDownWrapper = styled.div`
@@ -27,6 +26,7 @@ interface MajorScreenProps {
   setPlanStr: (planStr?: string) => void;
   setPlan: (plan: Schedule) => void;
   majors: Major[];
+  plans: Record<string, Schedule[]>;
 }
 
 interface MajorScreenState {
@@ -60,7 +60,7 @@ class MajorComponent extends React.Component<Props, MajorScreenState> {
     this.props.setMajor(this.state.major);
 
     if (this.state.planStr) {
-      const plan = plans[this.state.major!.name].find(
+      const plan = this.props.plans[this.state.major!.name].find(
         (p: Schedule) => planToString(p) === this.state.planStr
       );
 
@@ -93,7 +93,9 @@ class MajorComponent extends React.Component<Props, MajorScreenState> {
       <Autocomplete
         style={{ width: 300 }}
         disableListWrap
-        options={plans[this.state.major!.name].map(p => planToString(p))}
+        options={this.props.plans[this.state.major!.name].map(p =>
+          planToString(p)
+        )}
         renderInput={params => (
           <TextField
             {...params}
@@ -131,6 +133,7 @@ class MajorComponent extends React.Component<Props, MajorScreenState> {
 
 const mapStateToProps = (state: AppState) => ({
   majors: getMajors(state),
+  plans: getPlans(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({

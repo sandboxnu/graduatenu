@@ -6,18 +6,18 @@ import { NextButton } from "../components/common/NextButton";
 import { connect } from "react-redux";
 import { Dispatch, bindActionCreators } from "redux";
 import { setFullNameAction } from "../state/actions/userActions";
-import { getMajors, getMajorsLoadingFlag, getMajorsError } from "../state";
+import { getMajorsLoadingFlag, getPlansLoadingFlag } from "../state";
 import { fetchMajors } from "../utils/fetchMajors";
-import { Major } from "../models/types";
+import { fetchPlans } from "../utils/fetchPlans";
 import Loader from "react-loader-spinner";
 import { AppState } from "../state/reducers/state";
 
 interface NameScreenProps {
   setFullName: (fullName: string) => void;
   fetchMajors: typeof fetchMajors;
+  fetchPlans: typeof fetchPlans;
   isFetchingMajors: boolean;
-  majors: Major[];
-  majorsError: string;
+  isFetchingPlans: boolean;
 }
 
 interface NameScreenState {
@@ -38,8 +38,9 @@ class NameComponent extends React.Component<Props, NameScreenState> {
   }
 
   componentWillMount() {
-    const { fetchMajors } = this.props;
+    const { fetchMajors, fetchPlans } = this.props;
     fetchMajors();
+    fetchPlans();
   }
 
   onChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -51,8 +52,8 @@ class NameComponent extends React.Component<Props, NameScreenState> {
 
   render() {
     const { textFieldStr, beenEdited } = this.state;
-    const { isFetchingMajors } = this.props;
-    if (isFetchingMajors) {
+    const { isFetchingMajors, isFetchingPlans } = this.props;
+    if (isFetchingMajors || isFetchingPlans) {
       return (
         <Loader
           type="Puff"
@@ -99,15 +100,15 @@ class NameComponent extends React.Component<Props, NameScreenState> {
 }
 
 const mapStateToProps = (state: AppState) => ({
-  majorsError: getMajorsError(state),
-  majors: getMajors(state),
   isFetchingMajors: getMajorsLoadingFlag(state),
+  isFetchingPlans: getPlansLoadingFlag(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) =>
   bindActionCreators(
     {
       fetchMajors: fetchMajors,
+      fetchPlans: fetchPlans,
       setFullName: setFullNameAction,
     },
     dispatch

@@ -29,6 +29,13 @@ export const getMajorsLoadingFlag = (state: AppState) =>
 
 export const getMajorsError = (state: AppState) => state.majorState.majorsError;
 
+export const getPlans = (state: AppState) => state.plansState.plans;
+
+export const getPlansLoadingFlag = (state: AppState) =>
+  state.plansState.isFetchingPlans;
+
+export const getPlansError = (state: AppState) => state.plansState.plansError;
+
 export const getCourseWarningsFromState = (
   state: AppState,
   semester: DNDScheduleTerm

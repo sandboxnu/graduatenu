@@ -33,7 +33,6 @@ import { Sidebar } from "../components/Sidebar";
 import { withToast } from "./toastHook";
 import { AppearanceTypes } from "react-toast-notifications";
 import { withRouter, RouteComponentProps } from "react-router-dom";
-import { plans } from "../plans";
 import { connect } from "react-redux";
 import { AppState } from "../state/reducers/state";
 import { Dispatch } from "redux";
@@ -50,7 +49,7 @@ import {
   setCoopCycle,
 } from "../state/actions/scheduleActions";
 import { setMajorAction } from "../state/actions/userActions";
-import { getMajors } from "../state";
+import { getMajors, getPlans } from "../state";
 
 const OuterContainer = styled.div`
   display: flex;
@@ -103,6 +102,7 @@ interface ReduxStoreHomeProps {
   planStr?: string;
   warnings: IWarning[];
   majors: Major[];
+  plans: Record<string, Schedule[]>;
 }
 
 interface ReduxDispatchHomeProps {
@@ -238,7 +238,7 @@ class HomeComponent extends React.Component<Props> {
       return;
     }
 
-    const plan = plans[this.props.major!.name].find(
+    const plan = this.props.plans[this.props.major!.name].find(
       (p: Schedule) => planToString(p) === value
     );
 
@@ -274,7 +274,7 @@ class HomeComponent extends React.Component<Props> {
         disableListWrap
         options={[
           "None",
-          ...plans[this.props.major!.name].map(p => planToString(p)),
+          ...this.props.plans[this.props.major!.name].map(p => planToString(p)),
         ]}
         renderInput={params => (
           <TextField
@@ -374,6 +374,7 @@ const mapStateToProps = (state: AppState) => ({
   major: getMajorFromState(state),
   warnings: getWarningsFromState(state),
   majors: getMajors(state),
+  plans: getPlans(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
