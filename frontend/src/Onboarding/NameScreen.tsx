@@ -11,6 +11,7 @@ import { fetchMajors } from "../utils/fetchMajors";
 import { fetchPlans } from "../utils/fetchPlans";
 import Loader from "react-loader-spinner";
 import { AppState } from "../state/reducers/state";
+import styled from "styled-components";
 
 interface NameScreenProps {
   setFullName: (fullName: string) => void;
@@ -26,6 +27,14 @@ interface NameScreenState {
 }
 
 type Props = NameScreenProps & RouteComponentProps;
+
+const SpinnerWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 700px;
+`;
 
 class NameComponent extends React.Component<Props, NameScreenState> {
   constructor(props: Props) {
@@ -55,13 +64,15 @@ class NameComponent extends React.Component<Props, NameScreenState> {
     const { isFetchingMajors, isFetchingPlans } = this.props;
     if (isFetchingMajors || isFetchingPlans) {
       return (
-        <Loader
-          type="Puff"
-          color="#00BFFF"
-          height={100}
-          width={100}
-          timeout={5000} //5 secs
-        />
+        <SpinnerWrapper>
+          <Loader
+            type="Puff"
+            color="#f50057"
+            height={100}
+            width={100}
+            timeout={5000} //5 secs
+          />
+        </SpinnerWrapper>
       );
     } else {
       return (
