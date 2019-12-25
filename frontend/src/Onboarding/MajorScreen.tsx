@@ -12,8 +12,14 @@ import { setMajorAction } from "../state/actions/userActions";
 import { Dispatch } from "redux";
 import { setCoopCycle } from "../state/actions/scheduleActions";
 import { setScheduleAction } from "../state/actions/scheduleActions";
-import { getMajors, getPlans } from "../state";
+import {
+  getMajors,
+  getPlans,
+  getMajorsLoadingFlag,
+  getPlansLoadingFlag,
+} from "../state";
 import { AppState } from "../state/reducers/state";
+import Loader from "react-loader-spinner";
 
 const DropDownWrapper = styled.div`
   display: flex;
@@ -27,12 +33,22 @@ interface MajorScreenProps {
   setPlan: (plan: Schedule) => void;
   majors: Major[];
   plans: Record<string, Schedule[]>;
+  isFetchingMajors: boolean;
+  isFetchingPlans: boolean;
 }
 
 interface MajorScreenState {
   major?: Major;
   planStr?: string;
 }
+
+const SpinnerWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 700px;
+`;
 
 type Props = MajorScreenProps & RouteComponentProps;
 
@@ -111,29 +127,45 @@ class MajorComponent extends React.Component<Props, MajorScreenState> {
   }
 
   render() {
-    return (
-      <GenericQuestionTemplate question="What is your major?">
-        <DropDownWrapper>
-          {this.renderMajorDropDown()}
-          {!!this.state.major && this.renderCoopCycleDropDown()}
-        </DropDownWrapper>
-        <Link
-          to={{
-            pathname: "/home", // change to "/minors" to go to the minors screen
-          }}
-          onClick={this.onSubmit.bind(this)}
-          style={{ textDecoration: "none" }}
-        >
-          <NextButton />
-        </Link>
-      </GenericQuestionTemplate>
-    );
+    const { isFetchingMajors, isFetchingPlans } = this.props;
+    if (isFetchingMajors || isFetchingPlans) {
+      return (
+        <SpinnerWrapper>
+          <Loader
+            type="Puff"
+            color="#f50057"
+            height={100}
+            width={100}
+            timeout={5000} //5 secs
+          />
+        </SpinnerWrapper>
+      );
+    } else {
+      return (
+        <GenericQuestionTemplate question="What is your major?">
+          <DropDownWrapper>
+            {this.renderMajorDropDown()}
+            {!!this.state.major && this.renderCoopCycleDropDown()}
+          </DropDownWrapper>
+          <Link
+            to={{
+              pathname: "/home", // change to "/minors" to go to the minors screen
+            }}
+            onClick={this.onSubmit.bind(this)}
+            style={{ textDecoration: "none" }}
+          >
+            <NextButton />
+          </Link>
+        </GenericQuestionTemplate>
+      );
   }
 }
 
 const mapStateToProps = (state: AppState) => ({
   majors: getMajors(state),
   plans: getPlans(state),
+  isFetchingMajors: getMajorsLoadingFlag(state),
+  isFetchingPlans: getPlansLoadingFlag(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({

@@ -7,6 +7,8 @@ import picture from "../assets/landingils.png";
 import { connect } from "react-redux";
 import { getFullNameFromState } from "../state";
 import { AppState } from "../state/reducers/state";
+import { Dispatch, bindActionCreators } from "redux";
+import { fetchMajorsAndPlans } from "../utils/fetchMajorsAndPlans";
 
 const Container = styled.div`
   display: flex;
@@ -92,6 +94,7 @@ const CardTitleText = styled.h2`
 
 interface OnboardingProps {
   fullName: string;
+  fetchMajorsAndPlans: typeof fetchMajorsAndPlans;
 }
 
 class OnboardingComponent extends React.Component<OnboardingProps> {
@@ -105,6 +108,11 @@ class OnboardingComponent extends React.Component<OnboardingProps> {
         </CardBody>
       </InfoCard>
     );
+  }
+
+  componentWillMount() {
+    const { fetchMajorsAndPlans } = this.props;
+    fetchMajorsAndPlans();
   }
 
   render() {
@@ -161,4 +169,15 @@ const mapStateToProps = (state: AppState) => ({
   fullName: getFullNameFromState(state),
 });
 
-export const Onboarding = connect(mapStateToProps)(OnboardingComponent);
+const mapDispatchToProps = (dispatch: Dispatch) =>
+  bindActionCreators(
+    {
+      fetchMajorsAndPlans: fetchMajorsAndPlans,
+    },
+    dispatch
+  );
+
+export const Onboarding = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(OnboardingComponent);
