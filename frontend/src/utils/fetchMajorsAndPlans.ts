@@ -1,16 +1,23 @@
 import {
+  fetchPlansPendingAction,
+  fetchPlansSuccessAction,
+  fetchPlansErrorAction,
+} from "../state/actions/plansActions";
+import {
   fetchMajorsPendingAction,
   fetchMajorsSuccessAction,
   fetchMajorsErrorAction,
 } from "../state/actions/majorsActions";
 import { Dispatch } from "redux";
 import { Major } from "../models/types";
-import { majorIds } from "../majors";
+import { majorIds, majorMap } from "../majors";
+import { Schedule } from "../models/types";
 
 const majorSchema: string[] = majorIds.map((majorId: string) => {
   return `major(majorId: "${majorId}") {
         latestOccurrence {
             requirements
+            plansOfStudy
         }
     }`;
 });
@@ -37,9 +44,22 @@ const parseMajors = (res: any): Major[] => {
   return majors;
 };
 
-export function fetchMajors() {
+const parsePlans = (res: any): Record<string, Schedule[]> => {
+  const record: Record<string, Schedule[]> = {};
+  Object.keys(res).forEach((key, index) => {
+    if (res.hasOwnProperty(key)) {
+      record[majorMap[majorIds[index]]] =
+        res[key].latestOccurrence.plansOfStudy;
+      index++;
+    }
+  });
+  return record;
+};
+
+export function fetchMajorsAndPlans() {
   return (dispatch: Dispatch) => {
     dispatch(fetchMajorsPendingAction());
+    dispatch(fetchPlansPendingAction());
     fetch("https://searchneu.com/graphql", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -51,11 +71,14 @@ export function fetchMajors() {
           throw res.error;
         }
         const majors: Major[] = parseMajors(res.data);
+        const record: Record<string, Schedule[]> = parsePlans(res.data);
         dispatch(fetchMajorsSuccessAction(majors));
+        dispatch(fetchPlansSuccessAction(record));
         return majors;
       })
       .catch(error => {
         dispatch(fetchMajorsErrorAction(error));
+        dispatch(fetchPlansErrorAction(error));
       });
   };
 }
