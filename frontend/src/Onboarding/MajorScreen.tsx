@@ -113,9 +113,9 @@ class MajorComponent extends React.Component<Props, MajorScreenState> {
           {!!this.state.major && this.renderPlansDropDown()}
         </DropDownWrapper>
         <Link
-          to={{
-            pathname: "/home", // change to "/minors" to go to the minors screen
-          }}
+          to={
+            !!this.state.major ? "/completedCourses" : "/home" // change to "/minors" to go to the minors screen
+          }
           onClick={this.onSubmit.bind(this)}
           style={{ textDecoration: "none" }}
         >
@@ -132,7 +132,9 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   setPlan: (plan: Schedule) => dispatch(setScheduleAction(plan)),
 });
 
-export const MajorScreen = connect(
-  null,
-  mapDispatchToProps
-)(withRouter(MajorComponent));
+export const MajorScreen = withRouter(
+  connect(
+    null,
+    mapDispatchToProps
+  )(MajorComponent)
+);
