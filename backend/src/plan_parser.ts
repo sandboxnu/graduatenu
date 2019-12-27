@@ -271,7 +271,7 @@ function buildYear(
     SeasonEnum.SP,
     SeasonEnum.S1,
     SeasonEnum.S2,
-    SeasonEnum.SF,
+    SeasonEnum.SM,
   ];
   const seasonTermIds: number[] = [10, 30, 40, 60, 50];
   const terms: ScheduleTerm[] = [];

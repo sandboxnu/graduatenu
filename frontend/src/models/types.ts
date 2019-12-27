@@ -26,7 +26,7 @@ export enum SeasonEnum {
   SP = "SP",
   S1 = "S1",
   S2 = "S2",
-  SF = "SF",
+  SM = "SM",
 }
 export type Season = keyof typeof SeasonEnum;
 export type SeasonWord = "fall" | "spring" | "summer1" | "summer2";
