@@ -1,5 +1,5 @@
 import React from "react";
-import { DragDropContext } from "react-beautiful-dnd";
+import { DragDropContext, DropResult } from "react-beautiful-dnd";
 import {
   DNDSchedule,
   Major,
@@ -9,6 +9,7 @@ import {
   IWarning,
   DNDScheduleYear,
   DNDScheduleTerm,
+  DNDScheduleCourse,
 } from "../models/types";
 import styled from "styled-components";
 import { Year } from "../components/Year";
@@ -18,6 +19,11 @@ import {
   isCoopOrVacation,
   moveCourse,
   planToString,
+  COMPLETED_COURSES_AREA_DROPPABLE_ID,
+  moveCourseInCompletedCourses,
+  moveCourseFromCompletedCourses,
+  moveCourseToCompletedCourses,
+  moveCourseInSameCompletedCoursesSection,
 } from "../utils";
 import { TextField } from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
@@ -37,13 +43,17 @@ import {
   getPlanStrFromState,
   getMajorFromState,
   getWarningsFromState,
+  getCompletedCoursesFromState,
 } from "../state";
 import {
   updateSemesterAction,
   setScheduleAction,
   setDNDScheduleAction,
+  setCompletedCourses,
+  setCompletedCoursesFromMap,
 } from "../state/actions/scheduleActions";
 import { setPlanStrAction, setMajorAction } from "../state/actions/userActions";
+import { ICompletedCoursesMap } from "../state/reducers/scheduleReducer";
 
 const OuterContainer = styled.div`
   display: flex;
@@ -90,6 +100,7 @@ interface ReduxStoreHomeProps {
   major?: Major;
   planStr?: string;
   warnings: IWarning[];
+  completedCourses: ICompletedCoursesMap;
 }
 
 interface ReduxDispatchHomeProps {
@@ -102,6 +113,7 @@ interface ReduxDispatchHomeProps {
   setSchedule: (schedule: Schedule) => void;
   setDNDSchedule: (schedule: DNDSchedule) => void;
   setMajor: (major?: Major) => void;
+  setCompletedCoursesFromMap: (courses: ICompletedCoursesMap) => void;
 }
 
 type Props = ToastHomeProps &
@@ -129,8 +141,70 @@ class HomeComponent extends React.Component<Props> {
     });
   }
 
-  onDragEnd = (result: any) => {
+  onDragEnd = (result: DropResult) => {
     const { destination, source } = result;
+
+    if (
+      destination &&
+      destination.droppableId.includes(COMPLETED_COURSES_AREA_DROPPABLE_ID) &&
+      destination.droppableId === source.droppableId
+    ) {
+      // to and from completed courses section
+      moveCourseInSameCompletedCoursesSection(
+        this.props.completedCourses,
+        destination,
+        source,
+        this.props.setCompletedCoursesFromMap
+      );
+      return;
+    }
+
+    if (
+      destination &&
+      destination.droppableId.includes(COMPLETED_COURSES_AREA_DROPPABLE_ID) &&
+      source.droppableId.includes(COMPLETED_COURSES_AREA_DROPPABLE_ID)
+    ) {
+      // to and from completed courses section
+      moveCourseInCompletedCourses(
+        this.props.completedCourses,
+        destination,
+        source,
+        this.props.setCompletedCoursesFromMap
+      );
+      return;
+    }
+
+    if (
+      destination &&
+      destination.droppableId.includes(COMPLETED_COURSES_AREA_DROPPABLE_ID)
+    ) {
+      // from schedule to completed courses section
+      moveCourseToCompletedCourses(
+        this.props.completedCourses,
+        destination,
+        source,
+        this.props.schedule,
+        this.props.setDNDSchedule,
+        this.props.setCompletedCoursesFromMap
+      );
+      return;
+    }
+
+    if (
+      destination &&
+      source.droppableId.includes(COMPLETED_COURSES_AREA_DROPPABLE_ID)
+    ) {
+      // from completed courses section to schedule
+      moveCourseFromCompletedCourses(
+        this.props.completedCourses,
+        destination,
+        source,
+        this.props.schedule,
+        this.props.setDNDSchedule,
+        this.props.setCompletedCoursesFromMap
+      );
+      return;
+    }
 
     moveCourse(
       this.props.schedule,
@@ -142,7 +216,12 @@ class HomeComponent extends React.Component<Props> {
 
   onDragUpdate = (update: any) => {
     const { destination } = update;
-    if (!destination || !destination.droppableId) return;
+    if (
+      !destination ||
+      !destination.droppableId ||
+      destination.droppableId.includes(COMPLETED_COURSES_AREA_DROPPABLE_ID)
+    )
+      return;
 
     const destSemesterSeason = convertTermIdToSeason(destination.droppableId);
     const destSemesterYear = convertTermIdToYear(destination.droppableId);
@@ -298,7 +377,7 @@ class HomeComponent extends React.Component<Props> {
             </DropDownWrapper>
             <CompletedCoursesWrapper>
               <h3>Completed Courses</h3>
-              <DropDownModal schedule={schedule} />
+              <DropDownModal />
             </CompletedCoursesWrapper>
             {this.renderYears()}
           </Container>
@@ -314,6 +393,7 @@ const mapStateToProps = (state: AppState) => ({
   planStr: getPlanStrFromState(state),
   major: getMajorFromState(state),
   warnings: getWarningsFromState(state),
+  completedCourses: getCompletedCoursesFromState(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
@@ -327,6 +407,8 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   setDNDSchedule: (schedule: DNDSchedule) =>
     dispatch(setDNDScheduleAction(schedule)),
   setMajor: (major?: Major) => dispatch(setMajorAction(major)),
+  setCompletedCoursesFromMap: (courses: ICompletedCoursesMap) =>
+    dispatch(setCompletedCoursesFromMap(courses)),
 });
 
 export const Home = connect<

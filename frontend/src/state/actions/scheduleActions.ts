@@ -8,6 +8,7 @@ import {
   Schedule,
   DNDSchedule,
 } from "../../models/types";
+import { ICompletedCoursesMap } from "../reducers/scheduleReducer";
 
 export const addClassesAction = createAction(
   "schedule/ADD_CLASSES",
@@ -56,4 +57,19 @@ export const setDNDScheduleAction = createAction(
 export const addCompletedCourses = createAction(
   "schedule/ADD_COMPLETED_COURSES",
   (completedCourses: ScheduleCourse[]) => ({ completedCourses })
+)();
+
+export const setCompletedCourses = createAction(
+  "schedule/SET_COMPLETED_COURSES",
+  (completedCourses: ScheduleCourse[]) => ({ completedCourses })
+)();
+
+export const setCompletedCoursesFromMap = createAction(
+  "schedule/SET_COMPLETED_COURSES_FROM_MAP",
+  (completedCourses: ICompletedCoursesMap) => ({ completedCourses })
+)();
+
+export const removeCompletedCoursesAction = createAction(
+  "schedule/REMOVE_COMPLETED_COURSES",
+  (completedCourse: DNDScheduleCourse) => ({ completedCourse })
 )();

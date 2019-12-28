@@ -11,7 +11,7 @@ import {
   ISubjectRange,
 } from "../models/types";
 import { getMajorFromState } from "../state";
-import { addCompletedCourses } from "../state/actions/scheduleActions";
+import { setCompletedCourses } from "../state/actions/scheduleActions";
 import styled from "styled-components";
 import { Checkbox } from "@material-ui/core";
 import { fetchCourse } from "../api";
@@ -230,15 +230,15 @@ class CompletedCoursesComponent extends Component<Props, State> {
   renderSection(requirementGroup: string) {
     const reqs = this.props.major.requirementGroupMap[requirementGroup];
     if (!reqs) {
-      return <div />;
+      return <div key={requirementGroup} />;
     }
 
     if (reqs.type === "RANGE") {
-      return <div />;
+      return <div key={requirementGroup} />;
     }
 
     return (
-      <div>
+      <div key={requirementGroup}>
         <TitleText>{requirementGroup}</TitleText>
         {this.parseRequirements(reqs.requirements)}
       </div>
@@ -272,7 +272,7 @@ const mapStateToProps = (state: AppState) => ({
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   setCompletedCourses: (completedCourses: ScheduleCourse[]) =>
-    dispatch(addCompletedCourses(completedCourses)),
+    dispatch(setCompletedCourses(completedCourses)),
 });
 
 export const CompletedCoursesScreen = withRouter(

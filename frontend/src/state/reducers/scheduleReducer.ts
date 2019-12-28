@@ -16,6 +16,9 @@ import {
   setScheduleAction,
   setDNDScheduleAction,
   addCompletedCourses,
+  removeCompletedCoursesAction,
+  setCompletedCourses,
+  setCompletedCoursesFromMap,
 } from "../actions/scheduleActions";
 import {
   convertTermIdToSeason,
@@ -23,6 +26,7 @@ import {
   convertToDNDCourses,
   produceWarnings,
 } from "../../utils";
+import { getNumberOfCompletedCourses } from "../../utils/completed-courses-helpers";
 
 export interface ScheduleState {
   currentClassCounter: number;
@@ -31,7 +35,11 @@ export interface ScheduleState {
   schedule: DNDSchedule;
   warnings: IWarning[];
   courseWarnings: CourseWarning[];
-  completedCourses: DNDScheduleCourse[];
+  completedCourses: ICompletedCoursesMap;
+}
+
+export interface ICompletedCoursesMap {
+  [idx: number]: DNDScheduleCourse[]; // 0 1 2 3
 }
 
 const initialState: ScheduleState = {
@@ -41,7 +49,7 @@ const initialState: ScheduleState = {
   schedule: mockData,
   warnings: [],
   courseWarnings: [],
-  completedCourses: [],
+  completedCourses: { 0: [], 1: [], 2: [], 3: [] },
 };
 
 export const scheduleReducer = (
@@ -147,8 +155,60 @@ export const scheduleReducer = (
         );
 
         draft.currentClassCounter = newCounter;
-        draft.completedCourses.push(...dndCourses);
 
+        const totalClasses =
+          getNumberOfCompletedCourses(draft.completedCourses) +
+          action.payload.completedCourses.length;
+        const maxCoursesPerColumn =
+          totalClasses < 20 ? 5 : totalClasses / 4 + 1;
+
+        for (let i = 0; i < 4; i++) {
+          while (draft.completedCourses[i].length < maxCoursesPerColumn) {
+            if (dndCourses.length === 0) {
+              return draft;
+            }
+            draft.completedCourses[i].push(dndCourses.shift()!);
+          }
+        }
+
+        return draft;
+      }
+      case getType(setCompletedCourses): {
+        const [dndCourses, newCounter] = convertToDNDCourses(
+          action.payload.completedCourses,
+          draft.currentClassCounter
+        );
+        draft.currentClassCounter = newCounter;
+
+        const totalClasses = action.payload.completedCourses.length;
+        const maxCoursesPerColumn =
+          totalClasses < 20 ? 5 : totalClasses / 4 + 1;
+
+        for (let i = 0; i < 4; i++) {
+          // clear array
+          draft.completedCourses[i] = [];
+        }
+
+        for (let i = 0; i < 4; i++) {
+          while (draft.completedCourses[i].length < maxCoursesPerColumn) {
+            if (dndCourses.length === 0) {
+              return draft;
+            }
+            draft.completedCourses[i].push(dndCourses.shift()!);
+          }
+        }
+        return draft;
+      }
+      case getType(setCompletedCoursesFromMap): {
+        draft.completedCourses = action.payload.completedCourses;
+        return draft;
+      }
+      case getType(removeCompletedCoursesAction): {
+        for (let i = 0; i < 4; i++) {
+          draft.completedCourses[i] = draft.completedCourses[i].filter(
+            c => c.dndId !== action.payload.completedCourse.dndId
+          );
+        }
         return draft;
       }
     }

@@ -1,5 +1,10 @@
 import { convertTermIdToSeason, convertTermIdToYear } from ".";
 import { DNDScheduleYear, DNDScheduleTerm, DNDSchedule } from "../models/types";
+import { DraggableLocation } from "react-beautiful-dnd";
+import { ICompletedCoursesMap } from "../state/reducers/scheduleReducer";
+import { getIndexFromCompletedCoursesDNDID } from "./completed-courses-helpers";
+
+export const COMPLETED_COURSES_AREA_DROPPABLE_ID = "completed-courses-dropdown";
 
 export function moveCourse(
   schedule: DNDSchedule,
@@ -12,7 +17,7 @@ export function moveCourse(
     (destination.droppableId === source.droppableId &&
       destination.index === source.index)
   ) {
-    return undefined;
+    return;
   }
 
   const sourceSemesterSeason = convertTermIdToSeason(source.droppableId);
@@ -120,4 +125,147 @@ export function moveCourse(
       return;
     }
   }
+}
+
+export function moveCourseInSameCompletedCoursesSection(
+  completedCourses: ICompletedCoursesMap,
+  destination: DraggableLocation,
+  source: DraggableLocation,
+  setCompletedCourses: (courses: ICompletedCoursesMap) => void
+) {
+  const completedCoursesCopy = { ...completedCourses };
+
+  const idx = getIndexFromCompletedCoursesDNDID(source.droppableId);
+
+  const newClassOrder = Array.from(completedCourses[idx]);
+  const movedClass = newClassOrder[source.index];
+  newClassOrder.splice(source.index, 1);
+  newClassOrder.splice(destination.index, 0, movedClass);
+  completedCoursesCopy[idx] = newClassOrder;
+
+  setCompletedCourses(completedCoursesCopy);
+}
+
+export function moveCourseInCompletedCourses(
+  completedCourses: ICompletedCoursesMap,
+  destination: DraggableLocation,
+  source: DraggableLocation,
+  setCompletedCourses: (courses: ICompletedCoursesMap) => void
+) {
+  const completedCoursesCopy = { ...completedCourses };
+
+  const sourceIdx = getIndexFromCompletedCoursesDNDID(source.droppableId);
+  const destIdx = getIndexFromCompletedCoursesDNDID(destination.droppableId);
+
+  const startClasses = Array.from(completedCourses[sourceIdx]);
+  const movedClass = startClasses[source.index];
+  startClasses.splice(source.index, 1);
+  completedCoursesCopy[sourceIdx] = startClasses;
+
+  const finishClasses = Array.from(completedCourses[destIdx]);
+  finishClasses.splice(destination.index, 0, movedClass);
+  completedCoursesCopy[destIdx] = finishClasses;
+
+  setCompletedCourses(completedCoursesCopy);
+}
+
+export function moveCourseToCompletedCourses(
+  completedCourses: ICompletedCoursesMap,
+  destination: DraggableLocation,
+  source: DraggableLocation,
+  schedule: DNDSchedule,
+  setDNDSchedule: (schedule: DNDSchedule) => void,
+  setCompletedCourses: (courses: ICompletedCoursesMap) => void
+) {
+  const completedCoursesCopy = { ...completedCourses };
+
+  const destIdx = getIndexFromCompletedCoursesDNDID(destination.droppableId);
+
+  const sourceSemesterSeason = convertTermIdToSeason(
+    Number(source.droppableId)
+  );
+  const sourceSemesterYear = convertTermIdToYear(Number(source.droppableId));
+  const startYear: DNDScheduleYear = schedule.yearMap[sourceSemesterYear];
+  const startSemester: DNDScheduleTerm = (startYear as any)[
+    sourceSemesterSeason
+  ];
+
+  const startClasses = Array.from(startSemester.classes);
+  const movedClass = startClasses[source.index];
+  startClasses.splice(source.index, 1);
+  const newStartSemester: DNDScheduleTerm = {
+    ...startSemester,
+    classes: startClasses,
+  };
+
+  const finishClasses = Array.from(completedCourses[destIdx]);
+  finishClasses.splice(destination.index, 0, movedClass);
+  completedCoursesCopy[destIdx] = finishClasses;
+
+  const newStartSemesterYear = convertTermIdToYear(newStartSemester.termId);
+  const newStartSemesterSeason = convertTermIdToSeason(newStartSemester.termId);
+
+  setCompletedCourses(completedCoursesCopy);
+  setDNDSchedule({
+    ...schedule,
+    yearMap: {
+      ...schedule.yearMap,
+      [newStartSemesterYear]: {
+        ...schedule.yearMap[newStartSemesterYear],
+        [newStartSemesterSeason]: newStartSemester,
+      },
+    },
+  });
+}
+
+export function moveCourseFromCompletedCourses(
+  completedCourses: ICompletedCoursesMap,
+  destination: DraggableLocation,
+  source: DraggableLocation,
+  schedule: DNDSchedule,
+  setDNDSchedule: (schedule: DNDSchedule) => void,
+  setCompletedCourses: (courses: ICompletedCoursesMap) => void
+) {
+  const completedCoursesCopy = { ...completedCourses };
+
+  const sourceIdx = getIndexFromCompletedCoursesDNDID(source.droppableId);
+
+  const startClasses = Array.from(completedCourses[sourceIdx]);
+  const movedClass = startClasses[source.index];
+  startClasses.splice(source.index, 1);
+  completedCoursesCopy[sourceIdx] = startClasses;
+
+  const destSemesterSeason = convertTermIdToSeason(
+    Number(destination.droppableId)
+  );
+  const destSemesterYear = convertTermIdToYear(Number(destination.droppableId));
+  const finishYear: DNDScheduleYear = schedule.yearMap[destSemesterYear];
+  const finishSemester: DNDScheduleTerm = (finishYear as any)[
+    destSemesterSeason
+  ];
+
+  const finishClasses = Array.from(finishSemester.classes);
+  finishClasses.splice(destination.index, 0, movedClass);
+  const newFinishSemester: DNDScheduleTerm = {
+    ...finishSemester,
+    classes: finishClasses,
+  };
+
+  const newFinishSemesterYear = convertTermIdToYear(newFinishSemester.termId);
+  const newFinishSemesterSeason = convertTermIdToSeason(
+    newFinishSemester.termId
+  );
+
+  setCompletedCourses(completedCoursesCopy);
+
+  setDNDSchedule({
+    ...schedule,
+    yearMap: {
+      ...schedule.yearMap,
+      [newFinishSemesterYear]: {
+        ...schedule.yearMap[newFinishSemesterYear],
+        [newFinishSemesterSeason]: newFinishSemester,
+      },
+    },
+  });
 }

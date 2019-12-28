@@ -15,7 +15,8 @@
     "jsx": "react",
     "outDir": "./build",
     "noImplicitAny": true,
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "suppressImplicitAnyIndexErrors": true
   },
   "include": ["src", "backend/src/**/*", "frontend/**/*"]
 }

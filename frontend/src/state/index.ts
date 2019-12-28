@@ -6,6 +6,7 @@ import {
   IWarning,
   DNDScheduleTerm,
 } from "../models/types";
+import { ICompletedCoursesMap } from "./reducers/scheduleReducer";
 
 export const getFullNameFromState = (state: AppState): string =>
   state.user.fullName;
@@ -27,3 +28,7 @@ export const getCourseWarningsFromState = (
   semester: DNDScheduleTerm
 ): CourseWarning[] =>
   state.schedule.courseWarnings.filter(w => w.termId === semester.termId);
+
+export const getCompletedCoursesFromState = (
+  state: AppState
+): ICompletedCoursesMap => state.schedule.completedCourses;
