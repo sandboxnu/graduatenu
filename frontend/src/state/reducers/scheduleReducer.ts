@@ -10,6 +10,7 @@ import {
   updateSemesterAction,
   setScheduleAction,
   setDNDScheduleAction,
+  undoRemoveClassAction,
 } from "../actions/scheduleActions";
 import {
   convertTermIdToSeason,
@@ -19,6 +20,11 @@ import {
 } from "../../utils";
 
 export interface ScheduleState {
+  past?: ScheduleStateSlice;
+  present: ScheduleStateSlice;
+}
+
+export interface ScheduleStateSlice {
   currentClassCounter: number;
   isScheduleLoading: boolean; // not used right now
   scheduleError: string; // not used right now
@@ -28,12 +34,14 @@ export interface ScheduleState {
 }
 
 const initialState: ScheduleState = {
-  currentClassCounter: 0,
-  isScheduleLoading: false,
-  scheduleError: "",
-  schedule: mockData,
-  warnings: [],
-  courseWarnings: [],
+  present: {
+    currentClassCounter: 0,
+    isScheduleLoading: false,
+    scheduleError: "",
+    schedule: mockData,
+    warnings: [],
+    courseWarnings: [],
+  },
 };
 
 export const scheduleReducer = (
@@ -48,57 +56,65 @@ export const scheduleReducer = (
 
         const [dndCourses, newCounter] = convertToDNDCourses(
           courses,
-          draft.currentClassCounter
+          draft.present.currentClassCounter
         );
 
-        draft.currentClassCounter = newCounter;
+        draft.present.currentClassCounter = newCounter;
 
-        draft.schedule.yearMap[semester.year][season].classes.push(
+        draft.present.schedule.yearMap[semester.year][season].classes.push(
           ...dndCourses
         );
 
         const container = produceWarnings(
-          JSON.parse(JSON.stringify(draft.schedule)) // deep copy of schedule, because schedule is modified
+          JSON.parse(JSON.stringify(draft.present.schedule)) // deep copy of schedule, because schedule is modified
         );
 
-        draft.warnings = container.normalWarnings;
-        draft.courseWarnings = container.courseWarnings;
+        draft.present.warnings = container.normalWarnings;
+        draft.present.courseWarnings = container.courseWarnings;
 
         return draft;
       }
       case getType(removeClassAction): {
         const { course, semester } = action.payload;
         const season = convertTermIdToSeason(semester.termId);
-        draft.schedule.yearMap[semester.year][
+
+        // save prev state with a deep copy
+        draft.past = JSON.parse(JSON.stringify(draft.present));
+
+        draft.present.schedule.yearMap[semester.year][
           season
-        ].classes = draft.schedule.yearMap[semester.year][
+        ].classes = draft.present.schedule.yearMap[semester.year][
           season
         ].classes.filter(c => c.dndId !== course.dndId);
 
         const container = produceWarnings(
-          JSON.parse(JSON.stringify(draft.schedule)) // deep copy of schedule, because schedule is modified
+          JSON.parse(JSON.stringify(draft.present.schedule)) // deep copy of schedule, because schedule is modified
         );
 
-        draft.warnings = container.normalWarnings;
-        draft.courseWarnings = container.courseWarnings;
+        draft.present.warnings = container.normalWarnings;
+        draft.present.courseWarnings = container.courseWarnings;
 
+        return draft;
+      }
+      case getType(undoRemoveClassAction): {
+        draft.present = JSON.parse(JSON.stringify(draft.past));
         return draft;
       }
       case getType(changeSemesterStatusAction): {
         const { newStatus, year, season } = action.payload;
-        draft.schedule.yearMap[year][season].status = newStatus;
+        draft.present.schedule.yearMap[year][season].status = newStatus;
         return draft;
       }
       case getType(updateSemesterAction): {
         const { year, season, newSemester } = action.payload;
-        draft.schedule.yearMap[year][season] = newSemester;
+        draft.present.schedule.yearMap[year][season] = newSemester;
 
         const container = produceWarnings(
-          JSON.parse(JSON.stringify(draft.schedule)) // deep copy of schedule, because schedule is modified
+          JSON.parse(JSON.stringify(draft.present.schedule)) // deep copy of schedule, because schedule is modified
         );
 
-        draft.warnings = container.normalWarnings;
-        draft.courseWarnings = container.courseWarnings;
+        draft.present.warnings = container.normalWarnings;
+        draft.present.courseWarnings = container.courseWarnings;
 
         return draft;
       }
@@ -106,29 +122,29 @@ export const scheduleReducer = (
         const { schedule } = action.payload;
         const [newSchedule, newCounter] = convertToDNDSchedule(
           schedule,
-          draft.currentClassCounter
+          draft.present.currentClassCounter
         );
-        draft.schedule = newSchedule;
-        draft.currentClassCounter = newCounter;
+        draft.present.schedule = newSchedule;
+        draft.present.currentClassCounter = newCounter;
 
         const container = produceWarnings(
           JSON.parse(JSON.stringify(action.payload.schedule)) // deep copy of schedule, because schedule is modified
         );
 
-        draft.warnings = container.normalWarnings;
-        draft.courseWarnings = container.courseWarnings;
+        draft.present.warnings = container.normalWarnings;
+        draft.present.courseWarnings = container.courseWarnings;
 
         return draft;
       }
       case getType(setDNDScheduleAction): {
-        draft.schedule = action.payload.schedule;
+        draft.present.schedule = action.payload.schedule;
 
         const container = produceWarnings(
           JSON.parse(JSON.stringify(action.payload.schedule)) // deep copy of schedule, because schedule is modified
         );
 
-        draft.warnings = container.normalWarnings;
-        draft.courseWarnings = container.courseWarnings;
+        draft.present.warnings = container.normalWarnings;
+        draft.present.courseWarnings = container.courseWarnings;
 
         return draft;
       }

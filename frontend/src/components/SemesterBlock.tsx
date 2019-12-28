@@ -18,7 +18,10 @@ import { Dispatch } from "redux";
 import {
   addClassesAction,
   removeClassAction,
+  undoRemoveClassAction,
 } from "../state/actions/scheduleActions";
+import { Snackbar, Button, IconButton } from "@material-ui/core";
+import CloseIcon from "@material-ui/icons/Close";
 import { Tooltip } from "@material-ui/core";
 
 const Container = styled.div<any>`
@@ -57,6 +60,7 @@ interface ReduxDispatchSemesterBlockProps {
     semester: DNDScheduleTerm
   ) => void;
   onDeleteClass: (course: DNDScheduleCourse, semester: DNDScheduleTerm) => void;
+  onUndoDeleteClass: () => void;
 }
 
 interface SemesterBlockProps {
@@ -69,6 +73,8 @@ type Props = SemesterBlockProps &
 
 interface SemesterBlockState {
   modalVisible: boolean;
+  snackbarOpen: boolean;
+  deletedClass?: DNDScheduleCourse;
 }
 
 class SemesterBlockComponent extends React.Component<
@@ -79,6 +85,8 @@ class SemesterBlockComponent extends React.Component<
     super(props);
     this.state = {
       modalVisible: false,
+      snackbarOpen: false,
+      deletedClass: undefined,
     };
   }
 
@@ -90,8 +98,46 @@ class SemesterBlockComponent extends React.Component<
     this.setState({ modalVisible: false });
   }
 
+  openSnackbar = () => {
+    this.setState({
+      snackbarOpen: true,
+    });
+  };
+
+  handleSnackbarClose = (
+    event: React.SyntheticEvent<any, Event>,
+    reason: string
+  ) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    this.setState({
+      snackbarOpen: false,
+    });
+  };
+
+  onDeleteClass = (course: DNDScheduleCourse, semester: DNDScheduleTerm) => {
+    this.setState(
+      {
+        snackbarOpen: true,
+        deletedClass: course,
+      },
+      () => this.props.onDeleteClass(course, semester)
+    );
+  };
+
+  undoButtonPressed = () => {
+    this.setState(
+      {
+        snackbarOpen: false,
+      },
+      this.props.onUndoDeleteClass
+    );
+  };
+
   renderBody() {
-    const { semester, courseWarnings, onDeleteClass } = this.props;
+    const { semester, courseWarnings } = this.props;
     const status = semester.status;
     if (status === "CLASSES" || status === "HOVERINACTIVE") {
       return semester.classes.map((scheduleCourse, index) => {
@@ -106,7 +152,7 @@ class SemesterBlockComponent extends React.Component<
                   w.subject + w.classId ===
                   scheduleCourse.subject + scheduleCourse.classId
               )}
-              onDelete={() => onDeleteClass(scheduleCourse, semester)}
+              onDelete={this.onDeleteClass.bind(this, scheduleCourse, semester)}
             />
           );
         }
@@ -163,10 +209,54 @@ class SemesterBlockComponent extends React.Component<
   }
 
   render() {
+    const { snackbarOpen, deletedClass, modalVisible } = this.state;
     return (
       <div>
+        <Snackbar
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "left",
+          }}
+          open={snackbarOpen}
+          onClose={this.handleSnackbarClose.bind(this)}
+          autoHideDuration={5000}
+          message={
+            <span>
+              {!!deletedClass
+                ? "Removed " +
+                  deletedClass.subject +
+                  deletedClass.classId +
+                  ": " +
+                  deletedClass.name
+                : "Removed Class"}
+            </span>
+          }
+          action={[
+            <Button
+              key="undo"
+              color="secondary"
+              size="small"
+              onClick={this.undoButtonPressed.bind(this)}
+            >
+              UNDO
+            </Button>,
+            <IconButton
+              key="close"
+              aria-label="close"
+              color="inherit"
+              onClick={() =>
+                this.setState({
+                  snackbarOpen: false,
+                })
+              }
+            >
+              <CloseIcon />
+            </IconButton>,
+          ]}
+        />
+
         <AddClassModal
-          visible={this.state.modalVisible}
+          visible={modalVisible}
           handleClose={this.hideModal.bind(this)}
           handleSubmit={(courses: ScheduleCourse[]) =>
             this.props.handleAddClasses(courses, this.props.semester)
@@ -196,6 +286,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     dispatch(addClassesAction(courses, semester)),
   onDeleteClass: (course: DNDScheduleCourse, semester: DNDScheduleTerm) =>
     dispatch(removeClassAction(course, semester)),
+  onUndoDeleteClass: () => dispatch(undoRemoveClassAction()),
 });
 
 export const SemesterBlock = connect<
