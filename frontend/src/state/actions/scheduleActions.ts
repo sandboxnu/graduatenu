@@ -26,6 +26,11 @@ export const removeClassAction = createAction(
   })
 )();
 
+export const undoRemoveClassAction = createAction(
+  "schedule/UNDO_REMOVE_CLASS",
+  () => void 0
+)();
+
 export const changeSemesterStatusAction = createAction(
   "schedule/CHANGE_STATUS",
   (newStatus: Status, year: number, season: SeasonWord) => ({

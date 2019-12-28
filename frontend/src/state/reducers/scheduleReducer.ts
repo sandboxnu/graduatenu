@@ -19,6 +19,7 @@ import {
   removeCompletedCoursesAction,
   setCompletedCourses,
   setCompletedCoursesFromMap,
+  undoRemoveClassAction,
 } from "../actions/scheduleActions";
 import {
   convertTermIdToSeason,
@@ -29,6 +30,11 @@ import {
 import { getNumberOfCompletedCourses } from "../../utils/completed-courses-helpers";
 
 export interface ScheduleState {
+  past?: ScheduleStateSlice;
+  present: ScheduleStateSlice;
+}
+
+export interface ScheduleStateSlice {
   currentClassCounter: number;
   isScheduleLoading: boolean; // not used right now
   scheduleError: string; // not used right now
@@ -43,13 +49,15 @@ export interface ICompletedCoursesMap {
 }
 
 const initialState: ScheduleState = {
-  currentClassCounter: 0,
-  isScheduleLoading: false,
-  scheduleError: "",
-  schedule: mockData,
-  warnings: [],
-  courseWarnings: [],
-  completedCourses: { 0: [], 1: [], 2: [], 3: [] },
+  present: {
+    currentClassCounter: 0,
+    isScheduleLoading: false,
+    scheduleError: "",
+    schedule: mockData,
+    warnings: [],
+    courseWarnings: [],
+    completedCourses: { 0: [], 1: [], 2: [], 3: [] },
+  },
 };
 
 export const scheduleReducer = (
@@ -64,57 +72,65 @@ export const scheduleReducer = (
 
         const [dndCourses, newCounter] = convertToDNDCourses(
           courses,
-          draft.currentClassCounter
+          draft.present.currentClassCounter
         );
 
-        draft.currentClassCounter = newCounter;
+        draft.present.currentClassCounter = newCounter;
 
-        draft.schedule.yearMap[semester.year][season].classes.push(
+        draft.present.schedule.yearMap[semester.year][season].classes.push(
           ...dndCourses
         );
 
         const container = produceWarnings(
-          JSON.parse(JSON.stringify(draft.schedule)) // deep copy of schedule, because schedule is modified
+          JSON.parse(JSON.stringify(draft.present.schedule)) // deep copy of schedule, because schedule is modified
         );
 
-        draft.warnings = container.normalWarnings;
-        draft.courseWarnings = container.courseWarnings;
+        draft.present.warnings = container.normalWarnings;
+        draft.present.courseWarnings = container.courseWarnings;
 
         return draft;
       }
       case getType(removeClassAction): {
         const { course, semester } = action.payload;
         const season = convertTermIdToSeason(semester.termId);
-        draft.schedule.yearMap[semester.year][
+
+        // save prev state with a deep copy
+        draft.past = JSON.parse(JSON.stringify(draft.present));
+
+        draft.present.schedule.yearMap[semester.year][
           season
-        ].classes = draft.schedule.yearMap[semester.year][
+        ].classes = draft.present.schedule.yearMap[semester.year][
           season
         ].classes.filter(c => c.dndId !== course.dndId);
 
         const container = produceWarnings(
-          JSON.parse(JSON.stringify(draft.schedule)) // deep copy of schedule, because schedule is modified
+          JSON.parse(JSON.stringify(draft.present.schedule)) // deep copy of schedule, because schedule is modified
         );
 
-        draft.warnings = container.normalWarnings;
-        draft.courseWarnings = container.courseWarnings;
+        draft.present.warnings = container.normalWarnings;
+        draft.present.courseWarnings = container.courseWarnings;
 
+        return draft;
+      }
+      case getType(undoRemoveClassAction): {
+        draft.present = JSON.parse(JSON.stringify(draft.past));
         return draft;
       }
       case getType(changeSemesterStatusAction): {
         const { newStatus, year, season } = action.payload;
-        draft.schedule.yearMap[year][season].status = newStatus;
+        draft.present.schedule.yearMap[year][season].status = newStatus;
         return draft;
       }
       case getType(updateSemesterAction): {
         const { year, season, newSemester } = action.payload;
-        draft.schedule.yearMap[year][season] = newSemester;
+        draft.present.schedule.yearMap[year][season] = newSemester;
 
         const container = produceWarnings(
-          JSON.parse(JSON.stringify(draft.schedule)) // deep copy of schedule, because schedule is modified
+          JSON.parse(JSON.stringify(draft.present.schedule)) // deep copy of schedule, because schedule is modified
         );
 
-        draft.warnings = container.normalWarnings;
-        draft.courseWarnings = container.courseWarnings;
+        draft.present.warnings = container.normalWarnings;
+        draft.present.courseWarnings = container.courseWarnings;
 
         return draft;
       }
@@ -122,52 +138,54 @@ export const scheduleReducer = (
         const { schedule } = action.payload;
         const [newSchedule, newCounter] = convertToDNDSchedule(
           schedule,
-          draft.currentClassCounter
+          draft.present.currentClassCounter
         );
-        draft.schedule = newSchedule;
-        draft.currentClassCounter = newCounter;
+        draft.present.schedule = newSchedule;
+        draft.present.currentClassCounter = newCounter;
 
         const container = produceWarnings(
           JSON.parse(JSON.stringify(action.payload.schedule)) // deep copy of schedule, because schedule is modified
         );
 
-        draft.warnings = container.normalWarnings;
-        draft.courseWarnings = container.courseWarnings;
+        draft.present.warnings = container.normalWarnings;
+        draft.present.courseWarnings = container.courseWarnings;
 
         return draft;
       }
       case getType(setDNDScheduleAction): {
-        draft.schedule = action.payload.schedule;
+        draft.present.schedule = action.payload.schedule;
 
         const container = produceWarnings(
           JSON.parse(JSON.stringify(action.payload.schedule)) // deep copy of schedule, because schedule is modified
         );
 
-        draft.warnings = container.normalWarnings;
-        draft.courseWarnings = container.courseWarnings;
+        draft.present.warnings = container.normalWarnings;
+        draft.present.courseWarnings = container.courseWarnings;
 
         return draft;
       }
       case getType(addCompletedCourses): {
         const [dndCourses, newCounter] = convertToDNDCourses(
           action.payload.completedCourses,
-          draft.currentClassCounter
+          draft.present.currentClassCounter
         );
 
-        draft.currentClassCounter = newCounter;
+        draft.present.currentClassCounter = newCounter;
 
         const totalClasses =
-          getNumberOfCompletedCourses(draft.completedCourses) +
+          getNumberOfCompletedCourses(draft.present.completedCourses) +
           action.payload.completedCourses.length;
         const maxCoursesPerColumn =
           totalClasses < 20 ? 5 : totalClasses / 4 + 1;
 
         for (let i = 0; i < 4; i++) {
-          while (draft.completedCourses[i].length < maxCoursesPerColumn) {
+          while (
+            draft.present.completedCourses[i].length < maxCoursesPerColumn
+          ) {
             if (dndCourses.length === 0) {
               return draft;
             }
-            draft.completedCourses[i].push(dndCourses.shift()!);
+            draft.present.completedCourses[i].push(dndCourses.shift()!);
           }
         }
 
@@ -176,9 +194,9 @@ export const scheduleReducer = (
       case getType(setCompletedCourses): {
         const [dndCourses, newCounter] = convertToDNDCourses(
           action.payload.completedCourses,
-          draft.currentClassCounter
+          draft.present.currentClassCounter
         );
-        draft.currentClassCounter = newCounter;
+        draft.present.currentClassCounter = newCounter;
 
         const totalClasses = action.payload.completedCourses.length;
         const maxCoursesPerColumn =
@@ -186,28 +204,30 @@ export const scheduleReducer = (
 
         for (let i = 0; i < 4; i++) {
           // clear array
-          draft.completedCourses[i] = [];
+          draft.present.completedCourses[i] = [];
         }
 
         for (let i = 0; i < 4; i++) {
-          while (draft.completedCourses[i].length < maxCoursesPerColumn) {
+          while (
+            draft.present.completedCourses[i].length < maxCoursesPerColumn
+          ) {
             if (dndCourses.length === 0) {
               return draft;
             }
-            draft.completedCourses[i].push(dndCourses.shift()!);
+            draft.present.completedCourses[i].push(dndCourses.shift()!);
           }
         }
         return draft;
       }
       case getType(setCompletedCoursesFromMap): {
-        draft.completedCourses = action.payload.completedCourses;
+        draft.present.completedCourses = action.payload.completedCourses;
         return draft;
       }
       case getType(removeCompletedCoursesAction): {
         for (let i = 0; i < 4; i++) {
-          draft.completedCourses[i] = draft.completedCourses[i].filter(
-            c => c.dndId !== action.payload.completedCourse.dndId
-          );
+          draft.present.completedCourses[i] = draft.present.completedCourses[
+            i
+          ].filter(c => c.dndId !== action.payload.completedCourse.dndId);
         }
         return draft;
       }

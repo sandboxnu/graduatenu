@@ -5,6 +5,7 @@ import {
   ScheduleCourse,
   DNDScheduleTerm,
   SeasonWord,
+  IWarning,
 } from "../models/types";
 
 export function convertTermIdToSeason(termId: number): SeasonWord {

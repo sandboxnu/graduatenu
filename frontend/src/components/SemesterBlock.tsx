@@ -7,29 +7,36 @@ import {
   ScheduleCourse,
   CourseWarning,
   DNDScheduleCourse,
+  IWarning,
 } from "../models/types";
 import { AddButton } from "./Year";
 import styled from "styled-components";
 import { AppState } from "../state/reducers/state";
 import { connect } from "react-redux";
-import { getCourseWarningsFromState } from "../state";
+import { getCourseWarningsFromState, getWarningsFromState } from "../state";
 import { Dispatch } from "redux";
 import {
   addClassesAction,
   removeClassAction,
+  undoRemoveClassAction,
 } from "../state/actions/scheduleActions";
+import { Snackbar, Button, IconButton } from "@material-ui/core";
+import CloseIcon from "@material-ui/icons/Close";
+import { Tooltip } from "@material-ui/core";
 
-const Container = styled.div`
+const Container = styled.div<any>`
   border: 1px solid black;
   position: relative;
   height: 100%;
+  background-color: ${props =>
+    props.warning ? "rgba(216, 86, 86, 0.9)" : "rgb(255, 255, 255, 0)"};
 `;
 
 const AddButtonContainer = styled.div`
 	position: absolute;
 	right: 6px
 	bottom: 6px
-	zIndex: 1
+	z-index: 1;
 `;
 
 const NoClassBlock = styled.div`
@@ -44,6 +51,7 @@ const NoClassBlock = styled.div`
 
 interface ReduxStoreSemesterBlockProps {
   courseWarnings: CourseWarning[];
+  warnings: IWarning[];
 }
 
 interface ReduxDispatchSemesterBlockProps {
@@ -52,6 +60,7 @@ interface ReduxDispatchSemesterBlockProps {
     semester: DNDScheduleTerm
   ) => void;
   onDeleteClass: (course: DNDScheduleCourse, semester: DNDScheduleTerm) => void;
+  onUndoDeleteClass: () => void;
 }
 
 interface SemesterBlockProps {
@@ -64,6 +73,8 @@ type Props = SemesterBlockProps &
 
 interface SemesterBlockState {
   modalVisible: boolean;
+  snackbarOpen: boolean;
+  deletedClass?: DNDScheduleCourse;
 }
 
 class SemesterBlockComponent extends React.Component<
@@ -74,6 +85,8 @@ class SemesterBlockComponent extends React.Component<
     super(props);
     this.state = {
       modalVisible: false,
+      snackbarOpen: false,
+      deletedClass: undefined,
     };
   }
 
@@ -85,8 +98,46 @@ class SemesterBlockComponent extends React.Component<
     this.setState({ modalVisible: false });
   }
 
+  openSnackbar = () => {
+    this.setState({
+      snackbarOpen: true,
+    });
+  };
+
+  handleSnackbarClose = (
+    event: React.SyntheticEvent<any, Event>,
+    reason: string
+  ) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    this.setState({
+      snackbarOpen: false,
+    });
+  };
+
+  onDeleteClass = (course: DNDScheduleCourse, semester: DNDScheduleTerm) => {
+    this.setState(
+      {
+        snackbarOpen: true,
+        deletedClass: course,
+      },
+      () => this.props.onDeleteClass(course, semester)
+    );
+  };
+
+  undoButtonPressed = () => {
+    this.setState(
+      {
+        snackbarOpen: false,
+      },
+      this.props.onUndoDeleteClass
+    );
+  };
+
   renderBody() {
-    const { semester, courseWarnings, onDeleteClass } = this.props;
+    const { semester, courseWarnings } = this.props;
     const status = semester.status;
     if (status === "CLASSES" || status === "HOVERINACTIVE") {
       return semester.classes.map((scheduleCourse, index) => {
@@ -101,7 +152,7 @@ class SemesterBlockComponent extends React.Component<
                   w.subject + w.classId ===
                   scheduleCourse.subject + scheduleCourse.classId
               )}
-              onDelete={() => onDeleteClass(scheduleCourse, semester)}
+              onDelete={this.onDeleteClass.bind(this, scheduleCourse, semester)}
             />
           );
         }
@@ -126,39 +177,107 @@ class SemesterBlockComponent extends React.Component<
     }
   }
 
+  renderTooltip() {
+    return (
+      <div style={{ display: "flex", flexDirection: "column" }}>
+        {this.props.warnings.map(w => {
+          return <span>{w.message}</span>;
+        })}
+      </div>
+    );
+  }
+
+  renderContainer() {
+    return (
+      <Container warning={this.props.warnings.length > 0}>
+        <Droppable droppableId={this.props.semester.termId.toString()}>
+          {provided => (
+            <ClassList
+              innerRef={provided.innerRef as any}
+              {...provided.droppableProps}
+            >
+              {this.renderBody()}
+              {provided.placeholder}
+            </ClassList>
+          )}
+        </Droppable>
+        <AddButtonContainer>
+          <AddButton onClick={this.showModal.bind(this)}></AddButton>
+        </AddButtonContainer>
+      </Container>
+    );
+  }
+
   render() {
+    const { snackbarOpen, deletedClass, modalVisible } = this.state;
     return (
       <div>
+        <Snackbar
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "left",
+          }}
+          open={snackbarOpen}
+          onClose={this.handleSnackbarClose.bind(this)}
+          autoHideDuration={5000}
+          message={
+            <span>
+              {!!deletedClass
+                ? "Removed " +
+                  deletedClass.subject +
+                  deletedClass.classId +
+                  ": " +
+                  deletedClass.name
+                : "Removed Class"}
+            </span>
+          }
+          action={[
+            <Button
+              key="undo"
+              color="secondary"
+              size="small"
+              onClick={this.undoButtonPressed.bind(this)}
+            >
+              UNDO
+            </Button>,
+            <IconButton
+              key="close"
+              aria-label="close"
+              color="inherit"
+              onClick={() =>
+                this.setState({
+                  snackbarOpen: false,
+                })
+              }
+            >
+              <CloseIcon />
+            </IconButton>,
+          ]}
+        />
+
         <AddClassModal
-          visible={this.state.modalVisible}
+          visible={modalVisible}
           handleClose={this.hideModal.bind(this)}
           handleSubmit={(courses: ScheduleCourse[]) =>
             this.props.handleAddClasses(courses, this.props.semester)
           }
         ></AddClassModal>
-
-        <Container>
-          <Droppable droppableId={this.props.semester.termId.toString()}>
-            {provided => (
-              <ClassList
-                innerRef={provided.innerRef as any}
-                {...provided.droppableProps}
-              >
-                {this.renderBody()}
-                {provided.placeholder}
-              </ClassList>
-            )}
-          </Droppable>
-          <AddButtonContainer>
-            <AddButton onClick={this.showModal.bind(this)}></AddButton>
-          </AddButtonContainer>
-        </Container>
+        {this.props.warnings.length > 0 ? (
+          <Tooltip title={this.renderTooltip()} placement="top" arrow>
+            {this.renderContainer()}
+          </Tooltip>
+        ) : (
+          this.renderContainer()
+        )}
       </div>
     );
   }
 }
 
 const mapStateToProps = (state: AppState, ownProps: SemesterBlockProps) => ({
+  warnings: getWarningsFromState(state).filter(
+    w => w.termId === ownProps.semester.termId
+  ),
   courseWarnings: getCourseWarningsFromState(state, ownProps.semester),
 });
 
@@ -167,6 +286,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     dispatch(addClassesAction(courses, semester)),
   onDeleteClass: (course: DNDScheduleCourse, semester: DNDScheduleTerm) =>
     dispatch(removeClassAction(course, semester)),
+  onUndoDeleteClass: () => dispatch(undoRemoveClassAction()),
 });
 
 export const SemesterBlock = connect<
