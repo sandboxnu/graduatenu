@@ -22,11 +22,11 @@ const Wrapper = styled.div`
   display: flex;
   flex: 1;
   justify-content: center;
-  height: 100vh;
 `;
 
 const Box = styled.div`
   margin-top: 20vh;
+  margin-bottom: 20vh;
   border: 1px solid black;
   padding: 18px;
   width: 500px;
@@ -73,10 +73,6 @@ const CourseAndLabWrapper = styled.div`
 const ANDORText = styled.p`
   font-size: 11px;
   margin: 4px;
-`;
-
-const BottomSpace = styled.div`
-  margin-bottom: 20vh;
 `;
 
 interface CompletedCoursesScreenProps {
@@ -259,7 +255,6 @@ class CompletedCoursesComponent extends Component<Props, State> {
           >
             <NextButton />
           </Link>
-          <BottomSpace />
         </Box>
       </Wrapper>
     );
