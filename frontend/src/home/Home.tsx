@@ -18,8 +18,14 @@ import {
   isCoopOrVacation,
   moveCourse,
   planToString,
+  scheduleHasClasses,
 } from "../utils";
-import { TextField } from "@material-ui/core";
+import {
+  TextField,
+  Checkbox,
+  FormControlLabel,
+  Button,
+} from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
 import { majors } from "../majors";
 import { CLASS_BLOCK_WIDTH } from "../constants";
@@ -42,8 +48,9 @@ import {
   updateSemesterAction,
   setScheduleAction,
   setDNDScheduleAction,
+  setCoopCycle,
 } from "../state/actions/scheduleActions";
-import { setPlanStrAction, setMajorAction } from "../state/actions/userActions";
+import { setMajorAction } from "../state/actions/userActions";
 
 const OuterContainer = styled.div`
   display: flex;
@@ -73,6 +80,11 @@ const Container = styled.div`
 const DropDownWrapper = styled.div`
   display: flex;
   flex-direction: row;
+  align-items: center;
+`;
+
+const CheckboxWrapper = styled.div`
+  margin-left: 18px;
 `;
 
 interface ToastHomeProps {
@@ -98,7 +110,7 @@ interface ReduxDispatchHomeProps {
     season: SeasonWord,
     newSemester: DNDScheduleTerm
   ) => void;
-  setPlanStr: (planStr?: string) => void;
+  setCoopCycle: (schedule?: Schedule) => void;
   setSchedule: (schedule: Schedule) => void;
   setDNDSchedule: (schedule: DNDSchedule) => void;
   setMajor: (major?: Major) => void;
@@ -217,7 +229,7 @@ class HomeComponent extends React.Component<Props> {
 
   onChoosePlan(event: React.SyntheticEvent<{}>, value: any) {
     if (value === "None") {
-      this.props.setPlanStr(undefined);
+      this.props.setCoopCycle(undefined);
       return;
     }
 
@@ -226,8 +238,7 @@ class HomeComponent extends React.Component<Props> {
     );
 
     if (plan) {
-      this.props.setPlanStr(value);
-      this.props.setSchedule(plan);
+      this.props.setCoopCycle(plan);
     }
   }
 
@@ -274,6 +285,46 @@ class HomeComponent extends React.Component<Props> {
     );
   }
 
+  renderSetClassesButton() {
+    return (
+      <Button
+        variant="contained"
+        color="secondary"
+        style={{ marginLeft: 18 }}
+        onClick={() => this.addClassesFromPOS()}
+      >
+        Set schedule to example from plan of study
+      </Button>
+    );
+  }
+
+  addClassesFromPOS() {
+    const plan = plans[this.props.major!.name].find(
+      (p: Schedule) => planToString(p) === this.props.planStr!
+    );
+    this.props.setSchedule(plan!);
+  }
+
+  renderClearScheduleButton() {
+    return (
+      <Button
+        variant="contained"
+        color="secondary"
+        style={{ marginLeft: 18 }}
+        onClick={() => this.clearSchedule()}
+      >
+        Clear Schedule
+      </Button>
+    );
+  }
+
+  clearSchedule() {
+    const plan = plans[this.props.major!.name].find(
+      (p: Schedule) => planToString(p) === this.props.planStr!
+    );
+    this.props.setCoopCycle(plan!);
+  }
+
   renderYears() {
     return this.props.schedule.years.map((year: number, index: number) => (
       <Year key={index} index={index} schedule={this.props.schedule} />
@@ -281,7 +332,7 @@ class HomeComponent extends React.Component<Props> {
   }
 
   render() {
-    const { schedule, major } = this.props;
+    const { schedule, major, planStr } = this.props;
     return (
       <OuterContainer>
         <DragDropContext
@@ -295,6 +346,9 @@ class HomeComponent extends React.Component<Props> {
             <DropDownWrapper>
               {this.renderMajorDropDown()}
               {!!major && this.renderPlansDropDown()}
+              {!!major && !!planStr && !scheduleHasClasses(this.props.schedule)
+                ? this.renderSetClassesButton()
+                : !!major && !!planStr && this.renderClearScheduleButton()}
             </DropDownWrapper>
             <CompletedCoursesWrapper>
               <h3>Completed Courses</h3>
@@ -322,7 +376,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     season: SeasonWord,
     newSemester: DNDScheduleTerm
   ) => dispatch(updateSemesterAction(year, season, newSemester)),
-  setPlanStr: (planStr?: string) => dispatch(setPlanStrAction(planStr)),
+  setCoopCycle: (schedule?: Schedule) => dispatch(setCoopCycle(schedule)),
   setSchedule: (schedule: Schedule) => dispatch(setScheduleAction(schedule)),
   setDNDSchedule: (schedule: DNDSchedule) =>
     dispatch(setDNDScheduleAction(schedule)),

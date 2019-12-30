@@ -180,8 +180,8 @@ class SemesterBlockComponent extends React.Component<
   renderTooltip() {
     return (
       <div style={{ display: "flex", flexDirection: "column" }}>
-        {this.props.warnings.map(w => {
-          return <span>{w.message}</span>;
+        {this.props.warnings.map((w, index) => {
+          return <span key={index}>{w.message}</span>;
         })}
       </div>
     );

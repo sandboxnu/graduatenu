@@ -10,9 +10,9 @@ import styled from "styled-components";
 import { plans } from "../plans";
 import { planToString } from "../utils";
 import { connect } from "react-redux";
-import { setMajorAction, setPlanStrAction } from "../state/actions/userActions";
+import { setMajorAction } from "../state/actions/userActions";
 import { Dispatch } from "redux";
-import { setScheduleAction } from "../state/actions/scheduleActions";
+import { setCoopCycle } from "../state/actions/scheduleActions";
 
 const DropDownWrapper = styled.div`
   display: flex;
@@ -21,8 +21,7 @@ const DropDownWrapper = styled.div`
 
 interface MajorScreenProps {
   setMajor: (major?: Major) => void;
-  setPlanStr: (planStr?: string) => void;
-  setPlan: (plan: Schedule) => void;
+  setCoopCycle: (plan: Schedule) => void;
 }
 
 interface MajorScreenState {
@@ -54,14 +53,13 @@ class MajorComponent extends React.Component<Props, MajorScreenState> {
 
   onSubmit() {
     this.props.setMajor(this.state.major);
-    this.props.setPlanStr(this.state.planStr);
 
     if (this.state.planStr) {
       const plan = plans[this.state.major!.name].find(
         (p: Schedule) => planToString(p) === this.state.planStr
       );
 
-      this.props.setPlan(plan!);
+      this.props.setCoopCycle(plan!);
     }
   }
 
@@ -85,7 +83,7 @@ class MajorComponent extends React.Component<Props, MajorScreenState> {
     );
   }
 
-  renderPlansDropDown() {
+  renderCoopCycleDropDown() {
     return (
       <Autocomplete
         style={{ width: 300 }}
@@ -95,7 +93,7 @@ class MajorComponent extends React.Component<Props, MajorScreenState> {
           <TextField
             {...params}
             variant="outlined"
-            label="Select A Plan"
+            label="Select A Co-op Cycle"
             fullWidth
           />
         )}
@@ -110,7 +108,7 @@ class MajorComponent extends React.Component<Props, MajorScreenState> {
       <GenericQuestionTemplate question="What is your major?">
         <DropDownWrapper>
           {this.renderMajorDropDown()}
-          {!!this.state.major && this.renderPlansDropDown()}
+          {!!this.state.major && this.renderCoopCycleDropDown()}
         </DropDownWrapper>
         <Link
           to={{
@@ -128,8 +126,7 @@ class MajorComponent extends React.Component<Props, MajorScreenState> {
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   setMajor: (major?: Major) => dispatch(setMajorAction(major)),
-  setPlanStr: (planStr?: string) => dispatch(setPlanStrAction(planStr)),
-  setPlan: (plan: Schedule) => dispatch(setScheduleAction(plan)),
+  setCoopCycle: (plan: Schedule) => dispatch(setCoopCycle(plan)),
 });
 
 export const MajorScreen = connect(
