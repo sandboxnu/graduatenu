@@ -1,14 +1,15 @@
 import { Major } from "../../models/types";
 import produce from "immer";
 import { getType } from "typesafe-actions";
-import { UserAction } from "../actions";
+import { UserAction, ScheduleAction } from "../actions";
 import {
   setMajorAction,
-  setPlanStrAction,
   setFullNameAction,
   setAcademicYearAction,
   setGraduationYearAction,
 } from "../actions/userActions";
+import { setCoopCycle } from "../actions/scheduleActions";
+import { planToString } from "../../utils";
 
 export interface UserState {
   fullName: string;
@@ -28,12 +29,16 @@ const initialState: UserState = {
 
 export const userReducer = (
   state: UserState = initialState,
-  action: UserAction
+  action: UserAction | ScheduleAction
 ) => {
   return produce(state, draft => {
     switch (action.type) {
-      case getType(setPlanStrAction): {
-        draft.planStr = action.payload.planStr;
+      case getType(setCoopCycle): {
+        if (action.payload.schedule) {
+          draft.planStr = planToString(action.payload.schedule);
+        } else {
+          draft.planStr = undefined;
+        }
         return draft;
       }
       case getType(setMajorAction): {

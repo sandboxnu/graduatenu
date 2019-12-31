@@ -22,13 +22,6 @@ export const setGraduationYearAction = createAction(
   })
 )();
 
-export const setPlanStrAction = createAction(
-  "user/SET_PLAN_STR",
-  (planStr?: string) => ({
-    planStr,
-  })
-)();
-
 export const setMajorAction = createAction(
   "user/SET_MAJOR",
   (major?: Major) => ({
