@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "A degree scheduling service for Northeastern students.",
   "engines": {
-    "node": "13.x"
+    "node": "12.x"
   },
   "dependencies": {
     "@material-ui/core": "^4.6.0",
