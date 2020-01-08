@@ -1,6 +1,9 @@
 {
   "name": "GraduateNU",
   "private": true,
+  "engines": {
+    "node": "13.x"
+  },
   "homepage": "https://graduatenu.com",
   "workspaces": [
     "frontend",
