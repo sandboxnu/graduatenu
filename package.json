@@ -1,5 +1,7 @@
 {
+  "name": "GraduateNU",
   "private": true,
+  "homepage": "https://graduatenu.com",
   "workspaces": [
     "frontend",
     "backend"
