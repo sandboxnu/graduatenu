@@ -118,9 +118,9 @@ class OnboardingComponent extends React.Component<OnboardingProps> {
         <Header></Header>
         <Body>
           <BodyText>
-            <TitleText>Graduate, on time.</TitleText>
+            <TitleText>Graduate on time.</TitleText>
             <DescriptionText>
-              Navigate the depths of the Northeastern graduation requirements
+              Navigate the Northeastern graduation requirements
               and build a personalized plan of study.
             </DescriptionText>
             <Link
