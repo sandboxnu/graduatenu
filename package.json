@@ -2,7 +2,7 @@
   "name": "GraduateNU",
   "private": true,
   "engines": {
-    "node": "12.x"
+    "node": "13.x"
   },
   "homepage": "https://graduatenu.com",
   "workspaces": [
@@ -34,9 +34,5 @@
       "pre-commit": "pretty-quick --staged"
     }
   },
-  "dependencies": {
-    "react-loader-spinner": "^3.1.5",
-    "react-redux": "^7.1.3",
-    "redux-thunk": "^2.3.0"
-  }
+  "dependencies": {}
 }
