@@ -4,12 +4,14 @@ on: [push]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-    
+
     steps:
-    - uses: actions/checkout@v1
-    - name: Run Jest tests
-      run: |
-        yarn
-        yarn test
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "13.x"
+      - name: Run Jest tests
+        run: |
+          yarn install
+          yarn test
