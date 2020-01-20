@@ -16,6 +16,6 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
       - name: Run Jest Tests
-      - run: |
+        run: |
           yarn install
           yarn test
