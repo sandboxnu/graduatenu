@@ -20,12 +20,7 @@ import {
   planToString,
   scheduleHasClasses,
 } from "../utils";
-import {
-  TextField,
-  Checkbox,
-  FormControlLabel,
-  Button,
-} from "@material-ui/core";
+import { TextField, Button } from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
 import { CLASS_BLOCK_WIDTH } from "../constants";
 import { DropDownModal } from "../components";
