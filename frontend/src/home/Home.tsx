@@ -304,7 +304,7 @@ class HomeComponent extends React.Component<Props> {
   }
 
   addClassesFromPOS() {
-    const plan = plans[this.props.major!.name].find(
+    const plan = this.props.plans[this.props.major!.name].find(
       (p: Schedule) => planToString(p) === this.props.planStr!
     );
     this.props.setSchedule(plan!);
@@ -324,7 +324,7 @@ class HomeComponent extends React.Component<Props> {
   }
 
   clearSchedule() {
-    const plan = plans[this.props.major!.name].find(
+    const plan = this.props.plans[this.props.major!.name].find(
       (p: Schedule) => planToString(p) === this.props.planStr!
     );
     this.props.setCoopCycle(plan!);

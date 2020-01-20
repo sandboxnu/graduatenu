@@ -158,6 +158,7 @@ class MajorComponent extends React.Component<Props, MajorScreenState> {
           </Link>
         </GenericQuestionTemplate>
       );
+    }
   }
 }
 
