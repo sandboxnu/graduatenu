@@ -1,7 +1,13 @@
 import { load } from "cheerio";
-import { Major, IMajorRequirementGroup, ANDSection, RANGESection } from "../../frontend/src/models/types";
+import { Major, IMajorRequirementGroup, ANDSection, RANGESection, ORSection } from "../../frontend/src/models/types";
 
 const rp = require("request-promise");
+
+enum SectionType {
+    AND,
+    OR,
+    RANGE
+}
 
 // Dictionary for ORSection keywords, maps from keyword/phrase -> number of credits
 let ORTagMap: {[key: string]: number} = {
@@ -68,6 +74,7 @@ function createRequirementGroupMap($: CheerioStatic, table: CheerioElement): { [
             rows.push(tableRow);   
         }
     });
+    return requirementGroupMap;
 }
 
 /**
@@ -76,26 +83,44 @@ function createRequirementGroupMap($: CheerioStatic, table: CheerioElement): { [
  * @param rows the given list of rows within this major requirement group
  */
 function createRequirementGroup($: CheerioStatic, rows: CheerioElement[]): IMajorRequirementGroup {
-    // Initialize to AND, requirement group only contains comments for OR/RANGE section
-    let sectionType: string = "AND";
+    //default section type set to AND.
+    let sectionType: SectionType = SectionType.AND;
 
     rows.forEach((row: CheerioElement, index: number) => {
         // a courselistcomment is present in this row
         if ($("span.courselistcomment").length > 0) {
-            if (($("span.courselistcomment").text() in ORTagMap)) {
-
-            } else if (RANGETagMap.keyContains($("span.courselistcomment").text)) {
-
+            if (ORTagMap.hasOwnProperty($("span.courselistcomment").text())) {
+                //detected OR Tag; change section type to OR
+                sectionType = SectionType.OR;
+            } else if (RANGETagMap.hasOwnProperty($("span.courselistcomment").text())) {
+                sectionType = SectionType.RANGE;
             }
         }
-        currentRow.find("span.courselistcomment").each(function() {
-            let commentSpan = $(this);
-        });
-    })
+    });
 
-    let requirementGroup: ANDSection = processAndSection(rows);
-    let requirementGroup: ORSection = processOrSection(rows);
-    let requirementGroup: RANGESection = processRangeSection(rows);
+    // convert the sectionType to a number.
+    switch(+sectionType) {
+        case SectionType.AND:
+            return processAndSection(rows);
+        case SectionType.OR:
+            return processOrSection(rows);
+        case SectionType.RANGE:
+            return processRangeSection(rows);
+        default:
+
+    }
+}
+
+function processAndSection(rows: CheerioElement[]): ANDSection {
+
+}
+
+function processOrSection(rows: CheerioElement[]): ORSection {
+
+}
+
+function processRangeSection(rows: CheerioElement[]): RANGESection {
+    
 }
 
 function scrapeMajor1DataFromCatalog($: CheerioStatic) {
