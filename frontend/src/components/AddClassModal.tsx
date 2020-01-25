@@ -295,6 +295,6 @@ const mapStateToProps = (state: AppState) => ({
   schedule: getScheduleFromState(state),
 });
 
-export const ThisSchedule = connect(mapStateToProps)(
+export const AddClass = connect(mapStateToProps)(
   withRouter(withToast(AddClassModal))
 );

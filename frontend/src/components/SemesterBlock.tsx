@@ -261,6 +261,7 @@ class SemesterBlockComponent extends React.Component<
           handleSubmit={(courses: ScheduleCourse[]) =>
             this.props.handleAddClasses(courses, this.props.semester)
           }
+          schedule={{ yearMap: {}, years: [], id: "" }}
         ></AddClassModal>
         {this.props.warnings.length > 0 ? (
           <Tooltip title={this.renderTooltip()} placement="top" arrow>
