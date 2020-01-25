@@ -14,7 +14,7 @@ import { AppState } from "../state/reducers/state";
 import { getScheduleFromState } from "../state";
 import { connect } from "react-redux";
 import { withRouter, RouteComponentProps } from "react-router-dom";
-import { withToast } from "d:/Documents/Northeastern/graduatenu/frontend/src/home/toastHook";
+import { withToast } from "../home/toastHook";
 ////
 
 const InnerSection = styled.section`
@@ -147,7 +147,7 @@ export class AddClassModal extends React.Component<
       this.setState({
         isLoading: false,
         queuedCourses: [...queuedCourses, courseToAdd],
-        errorText: courseToAdd.name + "already exists in your schedule",
+        errorText: courseToAdd.name + " already exists in your schedule",
       });
     } else {
       this.setState({
@@ -174,9 +174,9 @@ export class AddClassModal extends React.Component<
 
   isCourseInTerm(courseToAdd: ScheduleCourse, term: DNDScheduleTerm) {
     for (let course of term.classes) {
+      // courseToAdd's classId is an int, so we're casting in order to compare accurately
       if (
-        courseToAdd.classId === course.classId &&
-        courseToAdd.name === course.name &&
+        String(courseToAdd.classId) === String(course.classId) &&
         courseToAdd.subject === course.subject
       ) {
         return true;

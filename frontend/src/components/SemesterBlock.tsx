@@ -1,7 +1,7 @@
 import React from "react";
 import { Droppable } from "react-beautiful-dnd";
 import { ClassBlock } from "./ClassBlocks";
-import { AddClassModal, ClassList, EmptyBlock } from ".";
+import { AddClass, ClassList, EmptyBlock } from ".";
 import {
   DNDScheduleTerm,
   ScheduleCourse,
@@ -255,14 +255,13 @@ class SemesterBlockComponent extends React.Component<
           ]}
         />
 
-        <AddClassModal
+        <AddClass
           visible={modalVisible}
           handleClose={this.hideModal.bind(this)}
           handleSubmit={(courses: ScheduleCourse[]) =>
             this.props.handleAddClasses(courses, this.props.semester)
           }
-          schedule={{ yearMap: {}, years: [], id: "" }}
-        ></AddClassModal>
+        ></AddClass>
         {this.props.warnings.length > 0 ? (
           <Tooltip title={this.renderTooltip()} placement="top" arrow>
             {this.renderContainer()}
