@@ -51,16 +51,24 @@ interface HashableCourse {
  */
 export function produceWarnings(schedule: Schedule): WarningContainer {
   // holds courses that are taken.
-  const taken: Set<string> = new Set();
+  const taken: Map<string, number> = new Map<string, number>();
   // custom tracker
   const tracker: CourseTakenTracker = {
     contains: (courseCode: string) => taken.has(courseCode),
-    addCourse: (toAdd: string) => {
-      taken.add(toAdd);
+    addCourse: (toAdd: string, termId: number) => {
+      taken.set(toAdd, termId);
     },
-    addCourses: (toAdd: string[]) => {
+    addCourses: (toAdd: string[], termId: number) => {
       for (const course of toAdd) {
-        taken.add(course);
+        taken.set(course, termId);
+      }
+    },
+    getTermId: (courseCode: string) => {
+      const getVal: number | undefined = taken.get(courseCode);
+      if (getVal != undefined) {
+        return getVal;
+      } else {
+        throw new Error("this value is not in the tracker");
       }
     },
   };
@@ -71,6 +79,7 @@ export function produceWarnings(schedule: Schedule): WarningContainer {
 
   // computes a season's worth of warnings, updating as needed.
   function computeSeason(term: ScheduleTerm): void {
+    console.log("THIS TERM IS :" + term.termId);
     // check all courses for warnings, and then add them, term by term.
     normal = normal.concat(produceNormalWarnings(term, tracker));
     courseSpecific = courseSpecific.concat(
@@ -579,7 +588,7 @@ function addCoursesToTracker(
   tracker: CourseTakenTracker
 ): void {
   for (const course of toAdd.classes) {
-    tracker.addCourse(courseCode(course));
+    tracker.addCourse(courseCode(course), toAdd.termId);
   }
 }
 
@@ -665,6 +674,11 @@ function produceNormalWarnings(
   return warnings;
 }
 
+/**
+ * Produces all course specific warnings for a given set of courses
+ * @param term the classes to check
+ * @param tracker the course taken traker
+ */
 function produceSpecificCourseWarnings(
   term: ScheduleTerm,
   tracker: CourseTakenTracker
@@ -676,13 +690,59 @@ function produceSpecificCourseWarnings(
   warnings = warnings.concat(
     checkPrerequisites(term.classes, tracker, term.termId)
   );
+  ///// ADD CODE HERE TO CHECK IF THERE ARE DUPLICATES
+  warnings = warnings.concat(
+    checkDuplicates(term.classes, tracker, term.termId)
+  );
+  ////////////// END ///////////
+  return warnings;
+}
+
+/**
+ * Checks that the courses are not duplicates.
+ * @param toCheck The schedule to check.
+ * @param tracker tracker for courses taken
+ * @param termId the id for this term for the warning
+ */
+function checkDuplicates(
+  toCheck: ScheduleCourse[],
+  tracker: CourseTakenTracker,
+  termId: number
+): CourseWarning[] {
+  const warnings: CourseWarning[] = [];
+  for (const course of toCheck) {
+    if (tracker.contains(courseCode(course))) {
+      warnings.push({
+        subject: course.subject,
+        classId: course.classId,
+        message: `${courseCode(course)}: is in your schedule multiple times`,
+        termId: termId,
+      });
+      warnings.push({
+        subject: course.subject,
+        classId: course.classId,
+        message: `${courseCode(course)}: is in your schedule multiple times`,
+        termId: tracker.getTermId(courseCode(course)),
+      });
+    } else if (toCheck.includes(course)) {
+      /////// THIS NEEDS TO BE FIXED
+      warnings.push({
+        subject: course.subject,
+        classId: course.classId,
+        message: `${courseCode(course)}: is in your schedule multiple times`,
+        termId: termId,
+      });
+      ////// OOPS
+    }
+  }
   return warnings;
 }
 
 /**
  * Checks that course prerequisites are met for each semester.
- * @param schedule The schedule to check.
+ * @param toCheck The schedule to check.
  * @param tracker tracker for courses taken
+ * @param termId the id for this term for the warning
  */
 function checkPrerequisites(
   toCheck: ScheduleCourse[],
@@ -723,22 +783,30 @@ function checkCorequisites(
   termId: number
 ): CourseWarning[] {
   // construct the tracker.
-  const coreqSet: Set<string> = new Set();
+  const coreqMap: Map<string, number> = new Map<string, number>();
   const coreqTracker: CourseTakenTracker = {
-    contains: (code: string) => coreqSet.has(code),
-    addCourses: function(courses: string[]): void {
+    contains: (code: string) => coreqMap.has(code),
+    addCourses: function(courses: string[], termId: number): void {
       for (const course of courses) {
-        coreqSet.add(course);
+        coreqMap.set(course, termId);
       }
     },
-    addCourse: function(course: string): void {
-      coreqSet.add(course);
+    addCourse: function(course: string, termId: number): void {
+      coreqMap.set(course, termId);
+    },
+    getTermId: (courseCode: string) => {
+      const getVal: number | undefined = coreqMap.get(courseCode);
+      if (getVal != undefined) {
+        return getVal;
+      } else {
+        throw new Error("this value is not in the tracker");
+      }
     },
   };
 
   // add warnings.
   for (const course of toCheck) {
-    coreqTracker.addCourse(courseCode(course));
+    coreqTracker.addCourse(courseCode(course), termId);
   }
 
   // the list of warnings.
