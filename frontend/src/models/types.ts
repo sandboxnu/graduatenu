@@ -38,7 +38,8 @@ export type Requirement =
   | IOrCourse
   | IAndCourse
   | ICourseRange
-  | IRequiredCourse;
+  | IRequiredCourse
+  | ISubjectRange;
 
 // TODO: with interfaces, the additional type parameter may not be necessary
 /**
