@@ -33,7 +33,7 @@ interface CreditRange {
   seasonMax : number;
   seasonMin : number; 
 }
-
+//added a comment 
 //hard coded map of string --> creditRange 
 let seasonCreditTracker : {[key : string] : CreditRange} = {"SM" : {seasonMax : 18, seasonMin : 12},
                                                             "S1" : {seasonMax : 9, seasonMin : 4},
