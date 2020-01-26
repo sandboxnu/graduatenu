@@ -24,7 +24,22 @@ import {
   ORSection,
   RANGESection,
   WarningContainer,
+  SeasonEnum,
+  Season,
 } from "../models/types";
+
+//interface to track the min and max credits per season 
+interface CreditRange {
+  seasonMax : number;
+  seasonMin : number; 
+}
+
+//hard coded map of string --> creditRange 
+let seasonCreditTracker : {[key : string] : CreditRange} = {"SM" : {seasonMax : 18, seasonMin : 12},
+                                                            "S1" : {seasonMax : 9, seasonMin : 4},
+                                                            "S2" : {seasonMax : 9, seasonMin : 4},
+                                                            "FL" : {seasonMax : 18, seasonMin : 12},
+                                                            "SP" : {seasonMax : 18, seasonMin : 12}}; 
 
 interface CreditHourTracker {
   hoursCompleted: number;
@@ -712,7 +727,7 @@ function produceNormalWarnings(
 ): IWarning[] {
   let warnings: IWarning[] = [];
   warnings = warnings.concat(
-    checkSemesterCredits(term.classes, tracker, term.termId)
+    checkSemesterCredits(term.classes, tracker, term.termId, term.season)
   );
   warnings = warnings.concat(
     checkSemesterOverload(term.classes, tracker, term.termId)
@@ -846,25 +861,44 @@ function checkCorequisites(
 function checkSemesterCredits(
   toCheck: ScheduleCourse[],
   tracker: CourseTakenTracker,
-  termId: number
+  termId: number,
+  season:  Season | SeasonEnum
 ): IWarning[] {
   let maxCredits = 0;
   let minCredits = 0;
   for (const course of toCheck) {
     maxCredits += course.numCreditsMax;
-    minCredits += course.numCreditsMin;
+    minCredits += course.numCreditsMin; //use this one! 
   }
 
+  let maxSeasonCredits = seasonCreditTracker[keyof season]; 
+
+
+  
   const warnings: IWarning[] = [];
-  if (maxCredits >= 19) {
-    warnings.push({
+  if (maxCredits >= maxSeasonCredits) {
+    warnings.push({ 
       message: `Enrolled in a max of ${maxCredits} credits. May be over-enrolled.`,
       termId: termId,
     });
   }
-  if (minCredits >= 19) {
+  if (minCredits >= maxSeasonCredits) {
     warnings.push({
       message: `Enrolled in a min of ${minCredits} credits. May be over-enrolled.`,
+      termId: termId,
+    });
+  }
+
+  //ensuring that we throw an error when mincredits is less than 12
+  if (minCredits < minSeasonCredits) {
+    warnings.push({
+      message: `Enrolled in a min of ${minCredits} credits. May be under-enrolled.`,
+      termId: termId,
+    });
+  }
+  if (maxCredits < minSeasonCredits) {
+    warnings.push({
+      message: `Enrolled in a max of ${maxCredits} credits. May be under-enrolled.`,
       termId: termId,
     });
   }
