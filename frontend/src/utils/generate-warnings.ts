@@ -79,7 +79,6 @@ export function produceWarnings(schedule: Schedule): WarningContainer {
 
   // computes a season's worth of warnings, updating as needed.
   function computeSeason(term: ScheduleTerm): void {
-    console.log("THIS TERM IS :" + term.termId);
     // check all courses for warnings, and then add them, term by term.
     normal = normal.concat(produceNormalWarnings(term, tracker));
     courseSpecific = courseSpecific.concat(
@@ -710,8 +709,12 @@ function checkDuplicates(
   termId: number
 ): CourseWarning[] {
   const warnings: CourseWarning[] = [];
-  for (const course of toCheck) {
-    if (tracker.contains(courseCode(course))) {
+  for (let i = 0; i < toCheck.length; i++) {
+    const course = toCheck[i];
+    if (
+      courseCode(course) != "XXXX9999" &&
+      tracker.contains(courseCode(course))
+    ) {
       warnings.push({
         subject: course.subject,
         classId: course.classId,
@@ -724,15 +727,16 @@ function checkDuplicates(
         message: `${courseCode(course)}: is in your schedule multiple times`,
         termId: tracker.getTermId(courseCode(course)),
       });
-    } else if (toCheck.includes(course)) {
-      /////// THIS NEEDS TO BE FIXED
+    } else if (
+      courseCode(course) != "XXXX9999" &&
+      toCheck.filter(item => courseCode(item) == courseCode(course)).length > 1
+    ) {
       warnings.push({
         subject: course.subject,
         classId: course.classId,
         message: `${courseCode(course)}: is in your schedule multiple times`,
         termId: termId,
       });
-      ////// OOPS
     }
   }
   return warnings;
