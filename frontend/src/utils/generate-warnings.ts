@@ -713,7 +713,7 @@ function checkDuplicates(
   for (let i = 0; i < toCheck.length; i++) {
     const course = toCheck[i];
     if (
-      all_fillers.includes(courseCode(course)) &&
+      !all_fillers.includes(courseCode(course)) &&
       tracker.contains(courseCode(course))
     ) {
       warnings.push({
