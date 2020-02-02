@@ -36,6 +36,9 @@ interface HashableCourse {
   credits: number;
 }
 
+// CourseCodes for all filler objects in example plans of study
+const all_fillers = ["XXXX9999"];
+
 /**
  * This module contains functions that generate warnings based off a schedule input.
  *
@@ -710,7 +713,7 @@ function checkDuplicates(
   for (let i = 0; i < toCheck.length; i++) {
     const course = toCheck[i];
     if (
-      courseCode(course) != "XXXX9999" &&
+      all_fillers.includes(courseCode(course)) &&
       tracker.contains(courseCode(course))
     ) {
       warnings.push({
