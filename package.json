@@ -33,9 +33,5 @@
     "hooks": {
       "pre-commit": "pretty-quick --staged"
     }
-  },
-  "dependencies": {
-    "prettier": "^1.19.1",
-    "react": "^16.12.0"
   }
 }
