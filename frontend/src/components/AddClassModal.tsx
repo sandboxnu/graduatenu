@@ -9,13 +9,11 @@ import {
 import { XButton } from "./common";
 import { fetchCourse } from "../api";
 import { Modal, CircularProgress } from "@material-ui/core";
-////
 import { AppState } from "../state/reducers/state";
 import { getScheduleFromState } from "../state";
 import { connect } from "react-redux";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import { withToast } from "../home/toastHook";
-////
 
 const InnerSection = styled.section`
   position: fixed;
@@ -158,6 +156,12 @@ export class AddClassModal extends React.Component<
     }
   }
 
+  /**
+   *  Determines if this course is in the given schedule
+   * @param courseToAdd the course that is being checked
+   * @param schedule the schedule being checked
+   * @returns whether or not this course is in the schedule
+   */
   isCourseInSchedule(courseToAdd: ScheduleCourse, schedule: DNDSchedule) {
     for (let year of schedule.years) {
       if (
@@ -172,6 +176,12 @@ export class AddClassModal extends React.Component<
     return false;
   }
 
+  /**
+   *  Determines if this course is in the given term
+   * @param courseToAdd the course that is being checked
+   * @param term the term being checked
+   * @returns whether or not this course is in the term
+   */
   isCourseInTerm(courseToAdd: ScheduleCourse, term: DNDScheduleTerm) {
     for (let course of term.classes) {
       // courseToAdd's classId is an int, so we're casting in order to compare accurately
