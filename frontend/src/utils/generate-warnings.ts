@@ -689,11 +689,9 @@ function produceSpecificCourseWarnings(
   warnings = warnings.concat(
     checkPrerequisites(term.classes, tracker, term.termId)
   );
-  ///// ADD CODE HERE TO CHECK IF THERE ARE DUPLICATES
   warnings = warnings.concat(
     checkDuplicates(term.classes, tracker, term.termId)
   );
-  ////////////// END ///////////
   return warnings;
 }
 
