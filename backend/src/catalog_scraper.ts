@@ -385,7 +385,7 @@ function parseOrCourseFromSubHeader(
     type: "OR",
     courses: [],
   };
-  //to be added to the andCourse if there is an indent comment that is an ORTag.
+  //to be added to the orCourse if there is an indent comment that is an ORTag.
   let andIndentReq: IAndCourse = {
     type: "AND",
     courses: [],
