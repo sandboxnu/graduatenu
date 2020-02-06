@@ -33,10 +33,10 @@ enum SubHeaderReqType {
   IAndCourse,
   IOrCourse,
   ICourseRange,
-  IRequiredCourse,
 }
 
 //todo: might want to only pass down rows after the comment.
+//todo: go through code and figure out where to break;
 
 // Dictionary for ORSection keywords, maps from keyword/phrase -> number of credits
 let ORTagMap: { [key: string]: number } = {
@@ -134,7 +134,8 @@ function createRequirementGroup(
   let sectionType: SectionType = SectionType.AND;
 
   //do a pass through the rows to figure out what type of requirment group they represent.
-  rows.forEach((row: CheerioElement, index: number) => {
+  for (let i = 0; i < rows.length; i++) {
+    let row: CheerioElement = rows[i];
     let currentRow: Cheerio = $(row);
     let commentSpan: Cheerio = currentRow.find("span.courselistcomment");
     // a courselistcomment is present in this row
@@ -142,11 +143,14 @@ function createRequirementGroup(
       if (ORTagMap.hasOwnProperty(commentSpan.text())) {
         //detected OR Tag; change section type to OR
         sectionType = SectionType.OR;
+        break;
       } else if (RANGETagMap.hasOwnProperty(commentSpan.text())) {
+        //detected Range Tag; change section type to Range
         sectionType = SectionType.RANGE;
+        break;
       }
     }
-  });
+  }
 
   // convert the sectionType to a number.
   switch (+sectionType) {
@@ -180,7 +184,8 @@ function processAndSection(
   if (subHeaders) {
     //Need to accumlate rows between the sub headers and process them as a single requirement.
     let subHeaderRows: CheerioElement[] = [];
-    rows.forEach((row: CheerioElement, index: number) => {
+    for (let i = 0; i < rows.length; i++) {
+      let row: CheerioElement = rows[i];
       let currentRow: Cheerio = $(row);
       if (
         currentRow.find("span.areasubheader").length !== 0 &&
@@ -199,7 +204,19 @@ function processAndSection(
         //todo: probably only want to process the rows after the subheader row itself.
         subHeaderRows.push(row);
       }
-    });
+    }
+
+    //process last subheader
+    if (subHeaderRows.length > 0) {
+      //process the accumulated subheader rows
+      let requirement: Requirement | undefined = parseSubHeaderRequirement(
+        $,
+        subHeaderRows
+      );
+      if (requirement) {
+        andSection.requirements.push(requirement);
+      }
+    }
   } else {
     //can parse the rows as indivdual requirements
     let containsOrRow: boolean = false;
@@ -249,37 +266,40 @@ function parseSubHeaderRequirement(
 ): Requirement | undefined {
   //Assume, IAndCourse as default sub header type.
   let subHeaderReqType: SubHeaderReqType = SubHeaderReqType.IAndCourse;
+  //for course range.
+  let numCredits: number = 0;
 
   //need to detect the type of requirement the subheader represents.
-  subHeaderRows.forEach((row: CheerioElement, index: number) => {
+  for (let i = 0; i < subHeaderRows.length; i++) {
+    let row: CheerioElement = subHeaderRows[i];
     let currentRow: Cheerio = $(row);
     let commentSpan: Cheerio = currentRow.find("span.courselistcomment");
     //get the class names for the comment span.
     let commentClasses: string | undefined = commentSpan.attr("class");
     if (commentClasses) {
-      let isCommentIndented: boolean = commentClasses.includes("commentindent");
-      if (!isCommentIndented) {
-        // a courselistcomment is present in one of the rows, that isn't an idented comment.
-        if (ORTagMap.hasOwnProperty(commentSpan.text())) {
-          //detected OR Tag; change section type to OR
-          subHeaderReqType = SubHeaderReqType.IOrCourse;
-        } else if (RANGETagMap.hasOwnProperty(commentSpan.text())) {
-          subHeaderReqType = SubHeaderReqType.ICourseRange;
-        }
+      // a courselistcomment is present in one of the rows, that isn't an idented comment.
+      if (ORTagMap.hasOwnProperty(commentSpan.text())) {
+        //detected OR Tag; change section type to OR
+        subHeaderReqType = SubHeaderReqType.IOrCourse;
+        //break so the type is not overridden.
+        break;
+      } else if (RANGETagMap.hasOwnProperty(commentSpan.text())) {
+        subHeaderReqType = SubHeaderReqType.ICourseRange;
+        //break so the type is not overridden.
+        break;
       }
     }
-  });
+  }
 
   // convert the subHeaderReqType to a number.
   switch (+subHeaderReqType) {
+    //dispatch rows to appriopriate functions.
     case SubHeaderReqType.IAndCourse:
       return parseAndCourseFromSubHeader($, subHeaderRows);
     case SubHeaderReqType.IOrCourse:
       return parseOrCourseFromSubHeader($, subHeaderRows);
     case SubHeaderReqType.ICourseRange:
-      return parseCourseRangeFromSubHeader($, subHeaderRows);
-    case SubHeaderReqType.IRequiredCourse:
-      return parseRequiredCourseFromSubHeader($, subHeaderRows);
+      return parseCourseRangeFromSubHeader($, subHeaderRows, numCredits);
     default:
       return undefined;
   }
@@ -293,68 +313,36 @@ function parseAndCourseFromSubHeader(
     type: "AND",
     courses: [],
   };
-  //to be added to the andCourse if there is an indent comment that is an ORTag.
-  let orIndentReq: IOrCourse = {
-    type: "OR",
-    courses: [],
-  };
-  //to be added to the andCourse if there is an indent comment that is an RangeTag.
-  let rangeIndentReq: ICourseRange = {
-    type: "RANGE",
-    creditsRequired: 0,
-    ranges: [],
-  };
-
-  // This enum type is only used if a "commentindent" is detected.
-  // assume, IAndCourse as default sub header type.
-  let indentBlockType: SubHeaderReqType = SubHeaderReqType.IAndCourse;
+  //does it contain a comment indent block?
   let containsCommentIdent: boolean = false;
+  //only to be used if an indent block is detected.
+  let indentBlockRows: CheerioElement[] = [];
 
-  //loop through the rows and add them as a requirement to andCourse.course
-  subHeaderRows.forEach((row: CheerioElement, index: number) => {
+  //loop through the rows and add them as a requirement to andCourse.courses
+  for (let i = 0; i < subHeaderRows.length; i++) {
+    let row: CheerioElement = subHeaderRows[i];
     let currentRow: Cheerio = $(row);
     let commentSpan: Cheerio = currentRow.find("span.commentindent");
     if (commentSpan.length > 0) {
       containsCommentIdent = true;
-      if (ORTagMap.hasOwnProperty(commentSpan.text())) {
-        //detected OR Tag; parse subsequent rows as a IOrCourse
-        indentBlockType = SubHeaderReqType.IOrCourse;
-      } else if (RANGETagMap.hasOwnProperty(commentSpan.text())) {
-        //detected Range Tag; parse subsequent rows as a ICourseRange
-        indentBlockType = SubHeaderReqType.IOrCourse;
-        //parse out the number of credits required.
-        rangeIndentReq.creditsRequired = parseInt(
-          currentRow.find("td.hourscol").text()
+      if (indentBlockRows.length > 0) {
+        //process the accumulated indentBlockRows as per their type.
+        let requirement: Requirement | undefined = parseSubHeaderRequirement(
+          $,
+          indentBlockRows
         );
+        if (requirement) {
+          andCourse.courses.push(requirement);
+        }
+        //reset the indent block rows. Needs the commentspan row too, to dispatch to correct function.
+        indentBlockRows = [row];
+      } else {
+        indentBlockRows.push(row);
       }
     } else {
       if (containsCommentIdent) {
-        //comment indent was detected, process row as per the detected indentBlockType.
-        switch (+indentBlockType) {
-          case SubHeaderReqType.IOrCourse:
-            //process row as an indivdual requirement and push to andCourse.courses
-            let requirement: Requirement | undefined = parseRowAsRequirement(
-              $,
-              row
-            );
-            if (requirement) {
-              orIndentReq.courses.push(requirement);
-            }
-            break;
-          case SubHeaderReqType.ICourseRange:
-            //process row as a subject range.
-            let subjectRange: ISubjectRange | undefined = parseSubjectRangeRow(
-              $,
-              row
-            );
-            if (subjectRange) {
-              rangeIndentReq.ranges.push(subjectRange);
-            }
-            break;
-          default:
-            //do nothing. technically shouldn't get here.
-            break;
-        }
+        //push the row onto the indentBlockRows.
+        indentBlockRows.push(row);
       } else {
         //process row as an indivdual requirement and push to andCourse.courses
         let requirement: Requirement | undefined = parseRowAsRequirement(
@@ -366,13 +354,17 @@ function parseAndCourseFromSubHeader(
         }
       }
     }
-  });
-  //add in the IOrCourse or the ICourseRange if it is non-empty.
-  if (orIndentReq.courses.length > 0) {
-    andCourse.courses.push(orIndentReq);
   }
-  if (rangeIndentReq.ranges.length > 0) {
-    andCourse.courses.push(rangeIndentReq);
+
+  //process the last indent block's rows.
+  if (indentBlockRows.length > 0) {
+    let requirement: Requirement | undefined = parseSubHeaderRequirement(
+      $,
+      indentBlockRows
+    );
+    if (requirement) {
+      andCourse.courses.push(requirement);
+    }
   }
   return andCourse;
 }
@@ -385,68 +377,36 @@ function parseOrCourseFromSubHeader(
     type: "OR",
     courses: [],
   };
-  //to be added to the orCourse if there is an indent comment that is an ORTag.
-  let andIndentReq: IAndCourse = {
-    type: "AND",
-    courses: [],
-  };
-  //to be added to the andCourse if there is an indent comment that is an RangeTag.
-  let rangeIndentReq: ICourseRange = {
-    type: "RANGE",
-    creditsRequired: 0,
-    ranges: [],
-  };
-
-  // This enum type is only used if a "commentindent" is detected.
-  // assume, IAndCourse as default sub header type.
-  let indentBlockType: SubHeaderReqType = SubHeaderReqType.IAndCourse;
+  //does it contain a comment indent block?
   let containsCommentIdent: boolean = false;
+  //only to be used if an indent block is detected.
+  let indentBlockRows: CheerioElement[] = [];
 
-  //loop through the rows and add them as a requirement to andCourse.course
-  subHeaderRows.forEach((row: CheerioElement, index: number) => {
+  //loop through the rows and add them as a requirement to andCourse.courses
+  for (let i = 0; i < subHeaderRows.length; i++) {
+    let row: CheerioElement = subHeaderRows[i];
     let currentRow: Cheerio = $(row);
     let commentSpan: Cheerio = currentRow.find("span.commentindent");
     if (commentSpan.length > 0) {
       containsCommentIdent = true;
-      if (ORTagMap.hasOwnProperty(commentSpan.text())) {
-        //detected OR Tag; parse subsequent rows as a IOrCourse
-        indentBlockType = SubHeaderReqType.IOrCourse;
-      } else if (RANGETagMap.hasOwnProperty(commentSpan.text())) {
-        //detected Range Tag; parse subsequent rows as a ICourseRange
-        indentBlockType = SubHeaderReqType.IOrCourse;
-        //parse out the number of credits required.
-        rangeIndentReq.creditsRequired = parseInt(
-          currentRow.find("td.hourscol").text()
+      if (indentBlockRows.length > 0) {
+        //process the accumulated indentBlockRows as per their type.
+        let requirement: Requirement | undefined = parseSubHeaderRequirement(
+          $,
+          indentBlockRows
         );
+        if (requirement) {
+          orCourse.courses.push(requirement);
+        }
+        //reset the indent block rows. Needs the commentspan row too, to dispatch to correct function.
+        indentBlockRows = [row];
+      } else {
+        indentBlockRows.push(row);
       }
     } else {
       if (containsCommentIdent) {
-        //comment indent was detected, process row as per the detected indentBlockType.
-        switch (+indentBlockType) {
-          case SubHeaderReqType.IOrCourse:
-            //process row as an indivdual requirement and push to andCourse.courses
-            let requirement: Requirement | undefined = parseRowAsRequirement(
-              $,
-              row
-            );
-            if (requirement) {
-              andIndentReq.courses.push(requirement);
-            }
-            break;
-          case SubHeaderReqType.ICourseRange:
-            //process row as a subject range.
-            let subjectRange: ISubjectRange | undefined = parseSubjectRangeRow(
-              $,
-              row
-            );
-            if (subjectRange) {
-              rangeIndentReq.ranges.push(subjectRange);
-            }
-            break;
-          default:
-            //do nothing. technically shouldn't get here.
-            break;
-        }
+        //push the row onto the indentBlockRows.
+        indentBlockRows.push(row);
       } else {
         //process row as an indivdual requirement and push to andCourse.courses
         let requirement: Requirement | undefined = parseRowAsRequirement(
@@ -458,26 +418,44 @@ function parseOrCourseFromSubHeader(
         }
       }
     }
-  });
-  //add in the IOrCourse or the ICourseRange if it is non-empty.
-  if (andIndentReq.courses.length > 0) {
-    orCourse.courses.push(andIndentReq);
   }
-  if (rangeIndentReq.ranges.length > 0) {
-    orCourse.courses.push(rangeIndentReq);
+
+  //process the last indent block's rows.
+  if (indentBlockRows.length > 0) {
+    let requirement: Requirement | undefined = parseSubHeaderRequirement(
+      $,
+      indentBlockRows
+    );
+    if (requirement) {
+      orCourse.courses.push(requirement);
+    }
   }
   return orCourse;
 }
 
 function parseCourseRangeFromSubHeader(
   $: CheerioStatic,
-  subHeaderRows: CheerioElement[]
-): ICourseRange {}
+  subHeaderRows: CheerioElement[],
+  numCredits: number
+): ICourseRange {
+  let courseRange: ICourseRange = {
+    type: "RANGE",
+    creditsRequired: numCredits,
+    ranges: [],
+  };
+  //Note: assuming that no indent blocks within a CourseRange subheader. If there ends up being one,
+  //      adapt function to handle like parseAndCourseFromSubHeader
 
-function parseRequiredCourseFromSubHeader(
-  $: CheerioStatic,
-  subHeaderRows: CheerioElement[]
-): IRequiredCourse {}
+  //loop through the rows and add them as a requirement to andCourse.courses
+  for (let i = 0; i < subHeaderRows.length; i++) {
+    let row: CheerioElement = subHeaderRows[i];
+    let currentRow: Cheerio = $(row);
+    //process row as an indivdual requirement and push to andCourse.courses
+    let requirement: ISubjectRange | undefined = parseSubjectRangeRow($, row);
+  }
+
+  return courseRange;
+}
 
 /**
  * A function that given a row, converts it into a Requirement type.
@@ -659,13 +637,14 @@ function createRequiredCourse(
  * @param rows the list of rows.
  */
 function findReqGroupName($: CheerioStatic, rows: CheerioElement[]): string {
-  rows.forEach((row: CheerioElement, index: number) => {
+  for (let i = 0; i < rows.length; i++) {
+    let row: CheerioElement = rows[i];
     let currentRow: Cheerio = $(row);
     let nameSpan: Cheerio = currentRow.find("span.areaheader");
     if (nameSpan.length !== 0) {
       return nameSpan.text();
     }
-  });
+  }
   return "";
 }
 
@@ -677,14 +656,15 @@ function findReqGroupName($: CheerioStatic, rows: CheerioElement[]): string {
  */
 function containsSubHeaders($: CheerioStatic, rows: CheerioElement[]): boolean {
   //Do a pass first pass through to see if there are any subheaders.
-  rows.forEach((row: CheerioElement, index: number) => {
+  for (let i = 0; i < rows.length; i++) {
+    let row: CheerioElement = rows[i];
     let currentRow: Cheerio = $(row);
     //check if an areasubheader row exists
     let subHeaderSpan: Cheerio = currentRow.find("span.areasubheader");
     if (subHeaderSpan.length !== 0) {
       return true;
     }
-  });
+  }
   return false;
 }
 
