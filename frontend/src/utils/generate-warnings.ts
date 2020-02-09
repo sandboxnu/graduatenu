@@ -107,6 +107,7 @@ export function produceWarnings(schedule: Schedule): WarningContainer {
       computeSeason(year.summer2);
     }
   }
+  // PUT IN DUPLICATE WARNING STUFF HERE
 
   // return the warnings.
   return {
