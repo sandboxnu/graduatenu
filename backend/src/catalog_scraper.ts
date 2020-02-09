@@ -1,4 +1,4 @@
-import { load } from "cheerio";
+var cheerio = require("cheerio");
 import {
   Major,
   IMajorRequirementGroup,
@@ -75,14 +75,12 @@ function catalogToMajor(link: string) {
   rp(options)
     .then(($: CheerioStatic) => scrapeMajorDataFromCatalog($))
     .then((scrapedMajor: Major) => {
-      //write the parse major data to database?
-      let parsedMajorObject = parseMajorData(scrapedMajor);
       console.log(
         "--------------------Parsed major object--------------------"
       );
-      console.log(JSON.stringify(parsedMajorObject));
+      console.log(JSON.stringify(scrapedMajor));
     })
-    .catch(function(err) {
+    .catch(function(err: string) {
       console.log(err);
     });
 }
@@ -111,7 +109,6 @@ function scrapeMajorDataFromCatalog($: CheerioStatic): Promise<Major> {
   });
 }
 
-//maybe move the code in here upto the previous function.
 function createRequirementGroupMap(
   $: CheerioStatic
 ): { [key: string]: IMajorRequirementGroup } {
@@ -729,6 +726,7 @@ function parseSubjectRangeRow(
     );
   }
   let courseRange: ISubjectRange = {
+    type: "SubjectRange",
     subject: subject,
     idRangeStart: idRangeStart,
     idRangeEnd: idRangeEnd,
@@ -857,3 +855,7 @@ function createIOrCourse(reqList: Requirement[]): IOrCourse {
     courses: reqList,
   };
 }
+
+catalogToMajor(
+  "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-science/bscs/#programrequirementstext"
+);

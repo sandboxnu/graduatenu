@@ -79,6 +79,7 @@ export interface ICourseRange {
  * @param idRangeEnd - The classId at the end of the course range.
  */
 export interface ISubjectRange {
+  type: "SubjectRange";
   subject: string;
   idRangeStart: number;
   idRangeEnd: number;
