@@ -141,7 +141,8 @@ function createRequirementGroupMap(
           | IMajorRequirementGroup
           | undefined = createRequirementGroup($, rows);
         if (requirementGroup) {
-          requirementGroupMap[requirementGroup.name] = requirementGroup;
+          if (requirementGroup.requirements)
+            requirementGroupMap[requirementGroup.name] = requirementGroup;
         }
       }
     }
@@ -213,7 +214,7 @@ function createRequirementGroup(
 function processAndSection(
   $: CheerioStatic,
   rows: CheerioElement[]
-): ANDSection {
+): ANDSection | undefined {
   let andSection: ANDSection = {
     type: "AND",
     name: findReqGroupName($, rows),
@@ -283,7 +284,12 @@ function processAndSection(
       andSection.requirements = reqList;
     }
   }
-  return andSection;
+
+  if (andSection.requirements.length > 0) {
+    return andSection;
+  } else {
+    return undefined;
+  }
 }
 
 function processOrSection(
@@ -291,7 +297,7 @@ function processOrSection(
   rows: CheerioElement[],
   minCredits: number,
   maxCredits: number
-): ORSection {
+): ORSection | undefined {
   let orSection: ORSection = {
     type: "OR",
     name: findReqGroupName($, rows),
@@ -363,7 +369,11 @@ function processOrSection(
       orSection.requirements = reqList;
     }
   }
-  return orSection;
+  if (orSection.requirements.length > 0) {
+    return orSection;
+  } else {
+    return undefined;
+  }
 }
 
 function processRangeSection(
@@ -371,7 +381,7 @@ function processRangeSection(
   rows: CheerioElement[],
   minCredits: number,
   maxCredits: number
-): RANGESection {
+): RANGESection | undefined {
   let courseRange: ICourseRange = {
     type: "RANGE",
     creditsRequired: minCredits,
@@ -399,7 +409,11 @@ function processRangeSection(
     }
   }
 
-  return rangeSection;
+  if (courseRange.ranges.length > 0) {
+    return rangeSection;
+  } else {
+    return undefined;
+  }
 }
 
 /**
@@ -461,7 +475,7 @@ function parseSubHeaderRequirement(
 function parseAndCourseFromSubHeader(
   $: CheerioStatic,
   subHeaderRows: CheerioElement[]
-): IAndCourse {
+): IAndCourse | undefined {
   let andCourse: IAndCourse = {
     type: "AND",
     courses: [],
@@ -521,13 +535,18 @@ function parseAndCourseFromSubHeader(
       andCourse.courses.push(requirement);
     }
   }
-  return andCourse;
+
+  if (andCourse.courses.length > 0) {
+    return andCourse;
+  } else {
+    return undefined;
+  }
 }
 
 function parseOrCourseFromSubHeader(
   $: CheerioStatic,
   subHeaderRows: CheerioElement[]
-): IOrCourse {
+): IOrCourse | undefined {
   let orCourse: IOrCourse = {
     type: "OR",
     courses: [],
@@ -587,14 +606,19 @@ function parseOrCourseFromSubHeader(
       orCourse.courses.push(requirement);
     }
   }
-  return orCourse;
+
+  if (orCourse.courses.length > 0) {
+    return orCourse;
+  } else {
+    return undefined;
+  }
 }
 
 function parseCourseRangeFromSubHeader(
   $: CheerioStatic,
   subHeaderRows: CheerioElement[],
   numCredits: number
-): ICourseRange {
+): ICourseRange | undefined {
   let courseRange: ICourseRange = {
     type: "RANGE",
     creditsRequired: numCredits,
@@ -613,7 +637,11 @@ function parseCourseRangeFromSubHeader(
     }
   }
 
-  return courseRange;
+  if (courseRange.ranges.length > 0) {
+    return courseRange;
+  } else {
+    return undefined;
+  }
 }
 
 function parseIndentBlockRequirement(
