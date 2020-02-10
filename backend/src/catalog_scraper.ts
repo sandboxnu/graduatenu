@@ -220,7 +220,6 @@ function processAndSection(
     name: findReqGroupName($, rows),
     requirements: [],
   };
-  console.log("processing " + andSection.name);
   let subHeaders: boolean = containsSubHeaders($, rows);
   //todo: probably won't actually show up anywhere, but if there's rows above the subheader, might not be processed correctly.
   if (subHeaders) {
@@ -305,7 +304,6 @@ function processOrSection(
     numCreditsMax: maxCredits,
     requirements: [],
   };
-  console.log("processing " + orSection.name);
   let subHeaders: boolean = containsSubHeaders($, rows);
   //todo: probably won't actually show up anywhere, but if there's rows above the subheader, might not be processed correctly.
   if (subHeaders) {
@@ -395,7 +393,6 @@ function processRangeSection(
     numCreditsMax: maxCredits,
     requirements: courseRange,
   };
-  console.log("processing " + rangeSection.name);
   //Note: Assuming that a range section probably does not have any subheaders. If there ends up being one,
   //      adapt function to handle like parseAndSection.
 
@@ -551,7 +548,6 @@ function parseOrCourseFromSubHeader(
     type: "OR",
     courses: [],
   };
-  console.log("OrCourse, num rows: " + subHeaderRows);
   //does it contain a comment indent block?
   let containsCommentIdent: boolean = false;
   //only to be used if an indent block is detected.
@@ -597,7 +593,6 @@ function parseOrCourseFromSubHeader(
 
   //process the last indent block's rows.
   if (indentBlockRows.length > 0) {
-    console.log("indentBlockRow" + indentBlockRows.length);
     let requirement: Requirement | undefined = parseIndentBlockRequirement(
       $,
       indentBlockRows
@@ -805,7 +800,10 @@ function parseRowAsRequirement(
   }
 }
 
-function parseAndRow($: CheerioStatic, row: CheerioElement): IAndCourse {
+function parseAndRow(
+  $: CheerioStatic,
+  row: CheerioElement
+): IAndCourse | undefined {
   let andCourse: IAndCourse = {
     type: "AND",
     courses: [],
@@ -823,10 +821,18 @@ function parseAndRow($: CheerioStatic, row: CheerioElement): IAndCourse {
       );
       andCourse.courses.push(requiredCourse);
     });
-  return andCourse;
+
+  if (andCourse.courses.length > 0) {
+    return andCourse;
+  } else {
+    return undefined;
+  }
 }
 
-function parseOrRow($: CheerioStatic, row: CheerioElement): IOrCourse {
+function parseOrRow(
+  $: CheerioStatic,
+  row: CheerioElement
+): IOrCourse | undefined {
   let orCourse: IOrCourse = {
     type: "OR",
     courses: [],
@@ -844,15 +850,22 @@ function parseOrRow($: CheerioStatic, row: CheerioElement): IOrCourse {
       );
       orCourse.courses.push(requiredCourse);
     });
-  return orCourse;
+  if (orCourse.courses.length > 0) {
+    return orCourse;
+  } else {
+    return undefined;
+  }
 }
 
 function parseSubjectRangeRow(
   $: CheerioStatic,
   row: CheerioElement
-): ISubjectRange {
+): ISubjectRange | undefined {
   let currentRow: Cheerio = $(row);
-  let anchors: Cheerio = currentRow.find("td.codecol a");
+  let anchors: Cheerio = currentRow.find("span.courselistcomment a");
+  if (anchors.length == 0) {
+    return;
+  }
 
   //the length should be === 2.
   let anchorsArray: CheerioElement[] = anchors.toArray();
@@ -887,6 +900,7 @@ function parseSubjectRangeRow(
     idRangeStart: idRangeStart,
     idRangeEnd: idRangeEnd,
   };
+
   return courseRange;
 }
 
