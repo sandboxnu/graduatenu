@@ -173,6 +173,11 @@ function createRequirementGroup(
       if (ORTagMap.hasOwnProperty(commentSpan.text())) {
         //detected OR Tag; change section type to OR
         sectionType = SectionType.OR;
+        let credsRange: CreditsRange = processHoursText(
+          currentRow.find("td.hourscol").text()
+        );
+        minCredits = credsRange.numCreditsMin;
+        maxCredits = credsRange.numCreditsMax;
         break;
       } else if (RANGETagMap.hasOwnProperty(commentSpan.text())) {
         //detected Range Tag; change section type to Range
@@ -225,7 +230,7 @@ function processAndSection(
       let currentRow: Cheerio = $(row);
       if (
         currentRow.find("span.areasubheader").length !== 0 &&
-        rows.length > 0
+        subHeaderRows.length > 0
       ) {
         //process the accumulated subheader rows
         let requirement: Requirement | undefined = parseSubHeaderRequirement(
@@ -305,7 +310,7 @@ function processOrSection(
       let currentRow: Cheerio = $(row);
       if (
         currentRow.find("span.areasubheader").length !== 0 &&
-        rows.length > 0
+        subHeaderRows.length > 0
       ) {
         //process the accumulated subheader rows
         let requirement: Requirement | undefined = parseSubHeaderRequirement(
@@ -419,19 +424,22 @@ function parseSubHeaderRequirement(
     //get the class names for the comment span.
     let commentClasses: string | undefined = commentSpan.attr("class");
     if (commentClasses) {
-      // a courselistcomment is present in one of the rows, that isn't an idented comment.
-      if (ORTagMap.hasOwnProperty(commentSpan.text())) {
-        //detected OR Tag; change section type to OR
-        subHeaderReqType = SubHeaderReqType.IOrCourse;
-        //break so the type is not overridden.
-        break;
-      } else if (RANGETagMap.hasOwnProperty(commentSpan.text())) {
-        subHeaderReqType = SubHeaderReqType.ICourseRange;
-        //break so the type is not overridden.
-        numCredits = processHoursText(currentRow.find("td.hourscol").text())
-          .numCreditsMin;
-        parseInt(currentRow.find("td.hourscol").text());
-        break;
+      //Don't consider indent comments to determine subheadertype.
+      if (!commentClasses.includes("commentindent")) {
+        // a courselistcomment is present in one of the rows, that isn't an idented comment.
+        if (ORTagMap.hasOwnProperty(commentSpan.text())) {
+          //detected OR Tag; change section type to OR
+          subHeaderReqType = SubHeaderReqType.IOrCourse;
+          //break so the type is not overridden.
+          break;
+        } else if (RANGETagMap.hasOwnProperty(commentSpan.text())) {
+          subHeaderReqType = SubHeaderReqType.ICourseRange;
+          //break so the type is not overridden.
+          numCredits = processHoursText(currentRow.find("td.hourscol").text())
+            .numCreditsMin;
+          parseInt(currentRow.find("td.hourscol").text());
+          break;
+        }
       }
     }
   }
@@ -473,7 +481,7 @@ function parseAndCourseFromSubHeader(
       if (indentBlockRows.length > 0) {
         //process the accumulated indentBlockRows as per their type.
         //todo: call parseIndentBlockRequirements
-        let requirement: Requirement | undefined = parseSubHeaderRequirement(
+        let requirement: Requirement | undefined = parseIndentBlockRequirement(
           $,
           indentBlockRows
         );
@@ -505,7 +513,7 @@ function parseAndCourseFromSubHeader(
   //process the last indent block's rows.
   if (indentBlockRows.length > 0) {
     //todo: call parseIndentBlockRequirements
-    let requirement: Requirement | undefined = parseSubHeaderRequirement(
+    let requirement: Requirement | undefined = parseIndentBlockRequirement(
       $,
       indentBlockRows
     );
@@ -539,7 +547,7 @@ function parseOrCourseFromSubHeader(
       containsCommentIdent = true;
       if (indentBlockRows.length > 0) {
         //process the accumulated indentBlockRows as per their type.
-        let requirement: Requirement | undefined = parseSubHeaderRequirement(
+        let requirement: Requirement | undefined = parseIndentBlockRequirement(
           $,
           indentBlockRows
         );
@@ -571,7 +579,7 @@ function parseOrCourseFromSubHeader(
   //process the last indent block's rows.
   if (indentBlockRows.length > 0) {
     console.log("indentBlockRow" + indentBlockRows.length);
-    let requirement: Requirement | undefined = parseSubHeaderRequirement(
+    let requirement: Requirement | undefined = parseIndentBlockRequirement(
       $,
       indentBlockRows
     );
