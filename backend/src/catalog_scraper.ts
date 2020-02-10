@@ -127,7 +127,7 @@ function createRequirementGroupMap(
             let requirementGroup:
               | IMajorRequirementGroup
               | undefined = createRequirementGroup($, rows);
-            rows = [];
+            rows = [tableRow];
             if (requirementGroup) {
               requirementGroupMap[requirementGroup.name] = requirementGroup;
             }
@@ -214,6 +214,7 @@ function processAndSection(
     name: findReqGroupName($, rows),
     requirements: [],
   };
+  console.log("processing " + andSection.name);
   let subHeaders: boolean = containsSubHeaders($, rows);
   //todo: probably won't actually show up anywhere, but if there's rows above the subheader, might not be processed correctly.
   if (subHeaders) {
@@ -234,7 +235,7 @@ function processAndSection(
         if (requirement) {
           andSection.requirements.push(requirement);
         }
-        subHeaderRows = [];
+        subHeaderRows = [row];
       } else {
         //todo: probably only want to process the rows after the subheader row itself.
         subHeaderRows.push(row);
@@ -293,6 +294,7 @@ function processOrSection(
     numCreditsMax: maxCredits,
     requirements: [],
   };
+  console.log("processing " + orSection.name);
   let subHeaders: boolean = containsSubHeaders($, rows);
   //todo: probably won't actually show up anywhere, but if there's rows above the subheader, might not be processed correctly.
   if (subHeaders) {
@@ -313,7 +315,7 @@ function processOrSection(
         if (requirement) {
           orSection.requirements.push(requirement);
         }
-        subHeaderRows = [];
+        subHeaderRows = [row];
       } else {
         //todo: probably only want to process the rows after the subheader row itself.
         subHeaderRows.push(row);
@@ -378,7 +380,7 @@ function processRangeSection(
     numCreditsMax: maxCredits,
     requirements: courseRange,
   };
-
+  console.log("processing " + rangeSection.name);
   //Note: Assuming that a range section probably does not have any subheaders. If there ends up being one,
   //      adapt function to handle like parseAndSection.
 
@@ -470,6 +472,7 @@ function parseAndCourseFromSubHeader(
       containsCommentIdent = true;
       if (indentBlockRows.length > 0) {
         //process the accumulated indentBlockRows as per their type.
+        //todo: call parseIndentBlockRequirements
         let requirement: Requirement | undefined = parseSubHeaderRequirement(
           $,
           indentBlockRows
@@ -501,6 +504,7 @@ function parseAndCourseFromSubHeader(
 
   //process the last indent block's rows.
   if (indentBlockRows.length > 0) {
+    //todo: call parseIndentBlockRequirements
     let requirement: Requirement | undefined = parseSubHeaderRequirement(
       $,
       indentBlockRows
@@ -520,6 +524,7 @@ function parseOrCourseFromSubHeader(
     type: "OR",
     courses: [],
   };
+  console.log("OrCourse, num rows: " + subHeaderRows);
   //does it contain a comment indent block?
   let containsCommentIdent: boolean = false;
   //only to be used if an indent block is detected.
@@ -565,6 +570,7 @@ function parseOrCourseFromSubHeader(
 
   //process the last indent block's rows.
   if (indentBlockRows.length > 0) {
+    console.log("indentBlockRow" + indentBlockRows.length);
     let requirement: Requirement | undefined = parseSubHeaderRequirement(
       $,
       indentBlockRows
@@ -588,6 +594,120 @@ function parseCourseRangeFromSubHeader(
   };
   //Note: assuming that no indent blocks within a CourseRange subheader. If there ends up being one,
   //      adapt function to handle like parseAndCourseFromSubHeader
+
+  //loop through the rows and add them as a requirement to andCourse.courses
+  for (let i = 0; i < subHeaderRows.length; i++) {
+    let row: CheerioElement = subHeaderRows[i];
+    //process row as an indivdual requirement and push to andCourse.courses
+    let requirement: ISubjectRange | undefined = parseSubjectRangeRow($, row);
+    if (requirement) {
+      courseRange.ranges.push(requirement);
+    }
+  }
+
+  return courseRange;
+}
+
+function parseIndentBlockRequirement(
+  $: CheerioStatic,
+  indentBlockRows: CheerioElement[]
+): Requirement | undefined {
+  //Assume, IAndCourse as default indent block type.
+  let indentBlockReqType: SubHeaderReqType = SubHeaderReqType.IAndCourse;
+  //for course range.
+  let numCredits: number = 0;
+
+  //need to detect the type of requirement the subheader represents.
+  for (let i = 0; i < indentBlockRows.length; i++) {
+    let row: CheerioElement = indentBlockRows[i];
+    let currentRow: Cheerio = $(row);
+    let commentSpan: Cheerio = currentRow.find("span.courselistcomment");
+    //get the class names for the comment span.
+    let commentClasses: string | undefined = commentSpan.attr("class");
+    if (commentClasses) {
+      // a courselistcomment is present in one of the rows, that isn't an idented comment.
+      if (ORTagMap.hasOwnProperty(commentSpan.text())) {
+        //detected OR Tag; change req type to OR
+        indentBlockReqType = SubHeaderReqType.IOrCourse;
+        //break so the type is not overridden.
+        break;
+      } else if (RANGETagMap.hasOwnProperty(commentSpan.text())) {
+        //detected Range Tag; change req type to Range
+        indentBlockReqType = SubHeaderReqType.ICourseRange;
+        //break so the type is not overridden.
+        numCredits = processHoursText(currentRow.find("td.hourscol").text())
+          .numCreditsMin;
+        parseInt(currentRow.find("td.hourscol").text());
+        break;
+      }
+    }
+  }
+
+  // convert the subHeaderReqType to a number.
+  switch (+indentBlockReqType) {
+    //dispatch rows to appriopriate functions.
+    case SubHeaderReqType.IAndCourse:
+      return parseAndCourseFromIndentBlock($, indentBlockRows);
+    case SubHeaderReqType.IOrCourse:
+      return parseOrCourseFromIndentBlock($, indentBlockRows);
+    case SubHeaderReqType.ICourseRange:
+      return parseCourseRangeFromIndentBlock($, indentBlockRows, numCredits);
+    default:
+      return undefined;
+  }
+}
+
+function parseAndCourseFromIndentBlock(
+  $: CheerioStatic,
+  subHeaderRows: CheerioElement[]
+): IAndCourse {
+  let andCourse: IAndCourse = {
+    type: "AND",
+    courses: [],
+  };
+
+  //loop through the rows and add them as a requirement to andCourse.courses
+  for (let i = 0; i < subHeaderRows.length; i++) {
+    let row: CheerioElement = subHeaderRows[i];
+    //process row as an indivdual requirement and push to andCourse.courses
+    let requirement: Requirement | undefined = parseRowAsRequirement($, row);
+    if (requirement) {
+      andCourse.courses.push(requirement);
+    }
+  }
+  return andCourse;
+}
+
+function parseOrCourseFromIndentBlock(
+  $: CheerioStatic,
+  subHeaderRows: CheerioElement[]
+): IOrCourse {
+  let orCourse: IOrCourse = {
+    type: "OR",
+    courses: [],
+  };
+  //loop through the rows and add them as a requirement to andCourse.courses
+  for (let i = 0; i < subHeaderRows.length; i++) {
+    let row: CheerioElement = subHeaderRows[i];
+    //process row as an indivdual requirement and push to andCourse.courses
+    let requirement: Requirement | undefined = parseRowAsRequirement($, row);
+    if (requirement) {
+      orCourse.courses.push(requirement);
+    }
+  }
+  return orCourse;
+}
+
+function parseCourseRangeFromIndentBlock(
+  $: CheerioStatic,
+  subHeaderRows: CheerioElement[],
+  numCredits: number
+): ICourseRange {
+  let courseRange: ICourseRange = {
+    type: "RANGE",
+    creditsRequired: numCredits,
+    ranges: [],
+  };
 
   //loop through the rows and add them as a requirement to andCourse.courses
   for (let i = 0; i < subHeaderRows.length; i++) {
