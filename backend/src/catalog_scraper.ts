@@ -16,12 +16,18 @@ import { number } from "prop-types";
 
 const rp = require("request-promise");
 
+/**
+ * Enumeration of valid sections types.
+ */
 enum SectionType {
   AND,
   OR,
   RANGE,
 }
 
+/**
+ * Enumeration of valid row types.
+ */
 enum RowType {
   AndRow,
   OrRow,
@@ -29,19 +35,22 @@ enum RowType {
   RequiredCourseRow,
 }
 
+/**
+ * Enumeration of valid subheader types.
+ */
 enum SubHeaderReqType {
   IAndCourse,
   IOrCourse,
   ICourseRange,
 }
 
+/**
+ * An object that represents a credit range.
+ */
 interface CreditsRange {
   numCreditsMin: number;
   numCreditsMax: number;
 }
-
-//todo: might want to only pass down rows after the comment.
-//todo: go through code and figure out where to break;
 
 // Dictionary for ORSection keywords, maps from keyword/phrase -> number of credits
 let ORTagMap: { [key: string]: number } = {
@@ -85,6 +94,10 @@ function catalogToMajor(link: string) {
     });
 }
 
+/**
+ * Produce a major object from the loaded up cheerio DOM.
+ * @param $ the Cheeriostatic selector function used to query the DOM.
+ */
 function scrapeMajorDataFromCatalog($: CheerioStatic): Promise<Major> {
   return new Promise<Major>((resolve, reject) => {
     let name: string = $("#content .page-title").text();
@@ -109,6 +122,10 @@ function scrapeMajorDataFromCatalog($: CheerioStatic): Promise<Major> {
   });
 }
 
+/**
+ * A function that creates the Requirment group map for a Major.
+ * @param $ the Cheeriostatic selector function used to query the DOM.
+ */
 function createRequirementGroupMap(
   $: CheerioStatic
 ): { [key: string]: IMajorRequirementGroup } {
@@ -242,7 +259,6 @@ function processAndSection(
         }
         subHeaderRows = [row];
       } else {
-        //todo: probably only want to process the rows after the subheader row itself.
         subHeaderRows.push(row);
       }
     }
@@ -291,6 +307,11 @@ function processAndSection(
   }
 }
 
+/**
+ * A function that takes in a list of rows, and converts them into an ORSection representation.
+ * @param $ the Cheeriostatic selector function used to query the DOM.
+ * @param rows the rows to be processed.
+ */
 function processOrSection(
   $: CheerioStatic,
   rows: CheerioElement[],
@@ -326,7 +347,6 @@ function processOrSection(
         }
         subHeaderRows = [row];
       } else {
-        //todo: probably only want to process the rows after the subheader row itself.
         subHeaderRows.push(row);
       }
     }
@@ -374,6 +394,11 @@ function processOrSection(
   }
 }
 
+/**
+ * A function that takes in a list of rows, and converts them into an RANGESection representation.
+ * @param $ the Cheeriostatic selector function used to query the DOM.
+ * @param rows the rows to be processed.
+ */
 function processRangeSection(
   $: CheerioStatic,
   rows: CheerioElement[],
@@ -469,6 +494,11 @@ function parseSubHeaderRequirement(
   }
 }
 
+/**
+ * Interprets the list of subheader rows as an IAndCourse Requirement.
+ * @param $ the selector function used to query the DOM.
+ * @param subHeaderRows the rows that make up the subHeader.
+ */
 function parseAndCourseFromSubHeader(
   $: CheerioStatic,
   subHeaderRows: CheerioElement[]
@@ -491,7 +521,6 @@ function parseAndCourseFromSubHeader(
       containsCommentIdent = true;
       if (indentBlockRows.length > 0) {
         //process the accumulated indentBlockRows as per their type.
-        //todo: call parseIndentBlockRequirements
         let requirement: Requirement | undefined = parseIndentBlockRequirement(
           $,
           indentBlockRows
@@ -523,7 +552,6 @@ function parseAndCourseFromSubHeader(
 
   //process the last indent block's rows.
   if (indentBlockRows.length > 0) {
-    //todo: call parseIndentBlockRequirements
     let requirement: Requirement | undefined = parseIndentBlockRequirement(
       $,
       indentBlockRows
@@ -540,6 +568,11 @@ function parseAndCourseFromSubHeader(
   }
 }
 
+/**
+ * Interprets the list of subheader rows as an IOrCourse Requirement.
+ * @param $ the selector function used to query the DOM.
+ * @param subHeaderRows the rows that make up the subHeader.
+ */
 function parseOrCourseFromSubHeader(
   $: CheerioStatic,
   subHeaderRows: CheerioElement[]
@@ -609,6 +642,11 @@ function parseOrCourseFromSubHeader(
   }
 }
 
+/**
+ * Interprets the list of subheader rows as an ICourseRange Requirement.
+ * @param $ the selector function used to query the DOM.
+ * @param subHeaderRows the rows that make up the subHeader.
+ */
 function parseCourseRangeFromSubHeader(
   $: CheerioStatic,
   subHeaderRows: CheerioElement[],
@@ -639,6 +677,11 @@ function parseCourseRangeFromSubHeader(
   }
 }
 
+/**
+ * Interprets the list of indent block rows as a Requirement.
+ * @param $ the selector function used to query the DOM.
+ * @param indentBlockRows the rows that make up the subHeader.
+ */
 function parseIndentBlockRequirement(
   $: CheerioStatic,
   indentBlockRows: CheerioElement[]
@@ -688,6 +731,11 @@ function parseIndentBlockRequirement(
   }
 }
 
+/**
+ * Interprets the list of indent block rows as an IAndCourse Requirement.
+ * @param $ the selector function used to query the DOM.
+ * @param indentBlockRows the rows that make up the subHeader.
+ */
 function parseAndCourseFromIndentBlock(
   $: CheerioStatic,
   subHeaderRows: CheerioElement[]
@@ -709,6 +757,11 @@ function parseAndCourseFromIndentBlock(
   return andCourse;
 }
 
+/**
+ * Interprets the list of indent block rows as an IOrCourse Requirement.
+ * @param $ the selector function used to query the DOM.
+ * @param indentBlockRows the rows that make up the subHeader.
+ */
 function parseOrCourseFromIndentBlock(
   $: CheerioStatic,
   subHeaderRows: CheerioElement[]
@@ -729,6 +782,11 @@ function parseOrCourseFromIndentBlock(
   return orCourse;
 }
 
+/**
+ * Interprets the list of indent block rows as an IRangeCourse Requirement.
+ * @param $ the selector function used to query the DOM.
+ * @param indentBlockRows the rows that make up the subHeader.
+ */
 function parseCourseRangeFromIndentBlock(
   $: CheerioStatic,
   subHeaderRows: CheerioElement[],
@@ -800,6 +858,11 @@ function parseRowAsRequirement(
   }
 }
 
+/**
+ * A function that given a row, converts it into an IAndCourse Requirement type.
+ * @param $ the selector function used to query the DOM.
+ * @param row the row to be proccessed.
+ */
 function parseAndRow(
   $: CheerioStatic,
   row: CheerioElement
@@ -829,6 +892,11 @@ function parseAndRow(
   }
 }
 
+/**
+ * A function that given a row, converts it into an IOrCourse Requirement type.
+ * @param $ the selector function used to query the DOM.
+ * @param row the row to be proccessed.
+ */
 function parseOrRow(
   $: CheerioStatic,
   row: CheerioElement
@@ -857,6 +925,11 @@ function parseOrRow(
   }
 }
 
+/**
+ * A function that given a row, converts it into an ISubjectRange Requirement type.
+ * @param $ the selector function used to query the DOM.
+ * @param row the row to be proccessed.
+ */
 function parseSubjectRangeRow(
   $: CheerioStatic,
   row: CheerioElement
@@ -904,6 +977,11 @@ function parseSubjectRangeRow(
   return courseRange;
 }
 
+/**
+ * A function that given a row, converts it into an IRequiredCourse Requirement type.
+ * @param $ the selector function used to query the DOM.
+ * @param row the row to be proccessed.
+ */
 function parseRequiredRow(
   $: CheerioStatic,
   row: CheerioElement
@@ -935,6 +1013,11 @@ function parseRequiredRow(
   return requiredCourse;
 }
 
+/**
+ * Create an IRequiredCourse type for a course.
+ * @param subject the subject tag
+ * @param classId the course number
+ */
 function createRequiredCourse(
   subject: string,
   classId: number
@@ -984,6 +1067,10 @@ function containsSubHeaders($: CheerioStatic, rows: CheerioElement[]): boolean {
   return false;
 }
 
+/**
+ * Helper function that processes the hours text into a CreditRange
+ * @param text the hours text
+ */
 function processHoursText(text: string): CreditsRange {
   //split by hyphen to get the range.
   let split: string[] = text.split("-");
@@ -1016,8 +1103,8 @@ function isOrRow($: CheerioStatic, row: CheerioElement): boolean {
 }
 
 /**
- *
- * @param reqList
+ * Create a basic IOrCourse with courses set to reqlist.
+ * @param reqList the list of requirements that are or constrained.
  */
 function createIOrCourse(reqList: Requirement[]): IOrCourse {
   return {
@@ -1026,6 +1113,9 @@ function createIOrCourse(reqList: Requirement[]): IOrCourse {
   };
 }
 
+/**
+ * testing. move to test file.
+ */
 catalogToMajor(
   "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-science/bscs/#programrequirementstext"
 );
