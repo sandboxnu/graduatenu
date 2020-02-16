@@ -64,7 +64,7 @@ export function produceWarnings(schedule: Schedule): WarningContainer {
   // custom tracker
   const tracker: CourseTakenTracker = {
     contains: (courseCode: string) => taken.has(courseCode),
-    addCourse: (toAdd: ScheduleCourse, termId: number) => {
+    addCourse: (toAdd: ScheduleCourse | INEUCourse, termId: number) => {
       const code = courseCode(toAdd);
       const allTerms = taken.get(code);
       if (allTerms != undefined) {
@@ -72,13 +72,13 @@ export function produceWarnings(schedule: Schedule): WarningContainer {
       } else {
         var courseI: CourseInfo = {
           subject: toAdd.subject,
-          classId: toAdd.classId,
+          classId: toAdd.classId.toString(),
           terms: [termId],
         };
         taken.set(code, courseI);
       }
     },
-    addCourses: (toAdd: ScheduleCourse[], termId: number) => {
+    addCourses: (toAdd: ScheduleCourse[] | INEUCourse[], termId: number) => {
       for (const course of toAdd) {
         const code = courseCode(course);
         const allTerms = taken.get(code);
@@ -87,7 +87,7 @@ export function produceWarnings(schedule: Schedule): WarningContainer {
         } else {
           var courseI: CourseInfo = {
             subject: course.subject,
-            classId: course.classId,
+            classId: course.classId.toString(),
             terms: [termId],
           };
           taken.set(code, courseI);
@@ -787,13 +787,19 @@ function checkCorequisites(
   const coreqMap: Map<string, number> = new Map<string, number>();
   const coreqTracker: CourseTakenTracker = {
     contains: (code: string) => coreqMap.has(code),
-    addCourses: function(courses: ScheduleCourse[], termId: number): void {
+    addCourses: function(
+      courses: ScheduleCourse[] | INEUCourse[],
+      termId: number
+    ): void {
       for (const course of courses) {
         const code = courseCode(course);
         coreqMap.set(code, termId);
       }
     },
-    addCourse: function(course: ScheduleCourse, termId: number): void {
+    addCourse: function(
+      course: ScheduleCourse | INEUCourse,
+      termId: number
+    ): void {
       const code = courseCode(course);
       coreqMap.set(code, termId);
     },

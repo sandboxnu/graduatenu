@@ -67,9 +67,6 @@ expect.extend({
    */
   toContainWarnings(received, normal) {
     // check length
-    received.forEach(function(warn) {
-      console.log(warn.message);
-    });
     expect(received.length).toEqual(normal.length);
     // check contained.
     for (warning of normal) {
@@ -194,15 +191,16 @@ test("Tests warnings produce properly for cs_sched_2.json", () => {
       subject: "PHYS",
       termId: 201860,
     },
+
     {
       classId: "1990",
-      message: "CS1990: is in your schedule multiple times",
+      message: "CS1990: appears in your schedule multiple times",
       subject: "CS",
       termId: 201860, // FIND OUT WHICH TERM ID THIS SHOULD BE
     },
     {
       classId: "1990",
-      message: "CS1990: is in your schedule multiple times",
+      message: "CS1990: appears in your schedule multiple times",
       subject: "CS",
       termId: 201860,
     },
