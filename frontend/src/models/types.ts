@@ -340,9 +340,9 @@ export interface IRequirementGroupWarning {
  */
 export interface CourseTakenTracker {
   contains: (input: string) => boolean;
-  addCourses: (toAdd: string[], termId: number) => void;
-  addCourse: (toAdd: string, termId: number) => void;
-  getTermId: (course: string) => number;
+  addCourses: (toAdd: ScheduleCourse[], termId: number) => void;
+  addCourse: (toAdd: ScheduleCourse, termId: number) => void;
+  getTermIds: (course: string) => number[];
 }
 
 export interface IUserData {

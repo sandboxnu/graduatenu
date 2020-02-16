@@ -806,7 +806,7 @@ const createPrerequisiteGraph = (
     addCourse: (code: string) => graph.addVertex(code),
     addCourses: (toAdd: string[]) =>
       toAdd.map(single => graph.addVertex(single)),
-    getTermId: (course: string) => 0, // This callback is to be used generate-warnings.ts
+    getTermIds: (course: string) => [], // This callback is to be used generate-warnings.ts
   };
 
   // following functions rely on local reference "completed"
