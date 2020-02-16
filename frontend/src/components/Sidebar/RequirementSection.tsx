@@ -13,6 +13,8 @@ import ClearIcon from "@material-ui/icons/Clear";
 import { styled as materialStyled } from "@material-ui/styles";
 import ExpandMoreOutlinedIcon from "@material-ui/icons/ExpandMoreOutlined";
 import ExpandLessOutlinedIcon from "@material-ui/icons/ExpandLessOutlined";
+import { SidebarAddButton } from "./SidebarAddButton";
+import { SidebarAddClassModal } from "./SidebarAddClassModal";
 
 const SectionHeaderWrapper = styled.div`
   display: flex;
@@ -35,6 +37,7 @@ const TitleText = styled.div`
 const CourseWrapper = styled.div`
   display: flex;
   flex-direction: row;
+  margin-bottom: 4px;
 `;
 
 const CourseText = styled.p`
@@ -73,6 +76,8 @@ interface RequirementSectionProps {
 
 interface RequirementSectionState {
   expanded: boolean;
+  modalVisible: boolean;
+  selectedCourses: IRequiredCourse[];
 }
 
 export class RequirementSection extends React.Component<
@@ -84,7 +89,26 @@ export class RequirementSection extends React.Component<
 
     this.state = {
       expanded: !!props.warning,
+      modalVisible: false,
+      selectedCourses: [
+        {
+          type: "COURSE",
+          classId: 0,
+          subject: "",
+        },
+      ],
     };
+  }
+
+  showModal(courses: IRequiredCourse[]) {
+    this.setState({
+      modalVisible: true,
+      selectedCourses: courses,
+    });
+  }
+
+  hideModal() {
+    this.setState({ modalVisible: false });
   }
 
   componentWillReceiveProps(nextProps: RequirementSectionProps) {
@@ -115,9 +139,10 @@ export class RequirementSection extends React.Component<
     ) {
       return (
         <CourseAndLabWrapper key={index}>
-          {this.renderCourse(req.courses[0] as IRequiredCourse, true)}
+          {this.renderCourse(req.courses[0] as IRequiredCourse, true, false)}
           <CourseText> and </CourseText>
-          {this.renderCourse(req.courses[1] as IRequiredCourse, true)}
+          {this.renderCourse(req.courses[1] as IRequiredCourse, true, true, req
+            .courses[0] as IRequiredCourse)}
         </CourseAndLabWrapper>
       );
     }
@@ -160,7 +185,12 @@ export class RequirementSection extends React.Component<
     );
   }
 
-  renderCourse(course: IRequiredCourse, noMargin: boolean = false) {
+  renderCourse(
+    course: IRequiredCourse,
+    noMargin: boolean = false,
+    addButton: boolean = true,
+    andCourse?: IRequiredCourse
+  ) {
     return (
       <CourseWrapper key={course.subject + course.classId + course.type}>
         {noMargin ? (
@@ -169,6 +199,14 @@ export class RequirementSection extends React.Component<
           </CourseTextNoMargin>
         ) : (
           <CourseText>{course.subject + course.classId}</CourseText>
+        )}
+        {addButton && andCourse && (
+          <SidebarAddButton
+            onClick={() => this.showModal([andCourse, course])}
+          />
+        )}
+        {addButton && !andCourse && (
+          <SidebarAddButton onClick={() => this.showModal([course])} />
         )}
       </CourseWrapper>
     );
@@ -190,6 +228,7 @@ export class RequirementSection extends React.Component<
 
   render() {
     const { title, contents, warning } = this.props;
+    const { modalVisible } = this.state;
 
     return (
       <div>
@@ -220,6 +259,13 @@ export class RequirementSection extends React.Component<
               this.handleRange(contents.requirements)}
           </div>
         )}
+
+        <SidebarAddClassModal
+          visible={modalVisible}
+          handleClose={this.hideModal.bind(this)}
+          handleSubmit={this.hideModal.bind(this)}
+          selectedCourses={this.state.selectedCourses}
+        ></SidebarAddClassModal>
       </div>
     );
   }
