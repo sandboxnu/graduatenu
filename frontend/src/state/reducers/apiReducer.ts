@@ -15,12 +15,18 @@ import {
 } from "../actions/plansActions";
 import produce from "immer";
 
+/**
+ * State to capture the major api fetch process.
+ */
 export interface MajorApiState {
   isFetchingMajors: boolean;
   majors: Major[];
   majorsError: string;
 }
 
+/**
+ * State to capture the plan api fetch process.
+ */
 export interface PlansApiState {
   isFetchingPlans: boolean;
   plans: Record<string, Schedule[]>;
@@ -39,6 +45,11 @@ const initialStatePlans: PlansApiState = {
   plansError: "",
 };
 
+/**
+ * function object that handles how actions should update the MajorApiState portion of the AppState.
+ * @param state the major api state.
+ * @param action a union type of all major fetch related actions
+ */
 export const majorsReducer = (
   state: MajorApiState = initialState,
   action: MajorsApiAction
@@ -64,6 +75,11 @@ export const majorsReducer = (
   });
 };
 
+/**
+ * function object that handles how actions should update the PlanApiState portion of the AppState.
+ * @param state the major api state.
+ * @param action a union type of all plan fetch related actions
+ */
 export const plansReducer = (
   state: PlansApiState = initialStatePlans,
   action: PlansApiAction

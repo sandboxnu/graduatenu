@@ -163,6 +163,10 @@ class MajorComponent extends React.Component<Props, MajorScreenState> {
   }
 }
 
+/**
+ * Callback to be passed into connect, to make properties of the AppState available as this components props.
+ * @param state the AppState
+ */
 const mapStateToProps = (state: AppState) => ({
   majors: getMajors(state),
   plans: getPlans(state),
@@ -170,11 +174,20 @@ const mapStateToProps = (state: AppState) => ({
   isFetchingPlans: getPlansLoadingFlag(state),
 });
 
+/**
+ * Callback to be passed into connect, responsible for dispatching redux actions to update the appstate.
+ * @param dispatch responsible for dispatching actions to the redux store.
+ */
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   setMajor: (major?: Major) => dispatch(setMajorAction(major)),
   setCoopCycle: (plan: Schedule) => dispatch(setCoopCycle(plan)),
 });
 
+/**
+ * Convert this React component to a component that's connected to the redux store.
+ * When rendering the connecting component, the props assigned in mapStateToProps, do not need to
+ * be passed down as props from the parent component.
+ */
 export const MajorScreen = connect(
   mapStateToProps,
   mapDispatchToProps

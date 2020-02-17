@@ -13,6 +13,7 @@ import { Major } from "../models/types";
 import { majorIds, majorMap } from "../majors";
 import { Schedule } from "../models/types";
 
+//graphql schema for searchNEU's majors endpoint.
 const majorSchema: string[] = majorIds.map((majorId: string) => {
   return `major(majorId: "${majorId}") {
         latestOccurrence {
@@ -22,7 +23,7 @@ const majorSchema: string[] = majorIds.map((majorId: string) => {
     }`;
 });
 
-// build the query schema
+// build a GraphQL query
 const querySchema: string = `
 query {
 ${majorSchema.reduce(
@@ -34,6 +35,7 @@ ${majorSchema.reduce(
 }
 `;
 
+//parse out major objects from the response.
 const parseMajors = (res: any): Major[] => {
   const majors: Major[] = [];
   for (const key of Object.keys(res)) {
@@ -44,6 +46,7 @@ const parseMajors = (res: any): Major[] => {
   return majors;
 };
 
+//parse out plan objects from the response.
 const parsePlans = (res: any): Record<string, Schedule[]> => {
   const record: Record<string, Schedule[]> = {};
   Object.keys(res).forEach((key, index) => {
@@ -56,6 +59,7 @@ const parsePlans = (res: any): Record<string, Schedule[]> => {
   return record;
 };
 
+//use fetch utility to make a post request to the searchNEU graphql api endpoint.
 export function fetchMajorsAndPlans() {
   return (dispatch: Dispatch) => {
     dispatch(fetchMajorsPendingAction());
