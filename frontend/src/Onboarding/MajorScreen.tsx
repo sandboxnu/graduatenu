@@ -11,7 +11,7 @@ import { connect } from "react-redux";
 import { setMajorAction } from "../state/actions/userActions";
 import { Dispatch } from "redux";
 import { setCoopCycle } from "../state/actions/scheduleActions";
-import { setScheduleAction } from "../state/actions/scheduleActions";
+
 import {
   getMajors,
   getPlans,
@@ -129,6 +129,7 @@ class MajorComponent extends React.Component<Props, MajorScreenState> {
   render() {
     const { isFetchingMajors, isFetchingPlans } = this.props;
     if (isFetchingMajors || isFetchingPlans) {
+      //render a spinnner if the majors/plans are still being fetched.
       return (
         <SpinnerWrapper>
           <Loader

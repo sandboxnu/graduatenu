@@ -8,7 +8,7 @@ import { connect } from "react-redux";
 import { getFullNameFromState } from "../state";
 import { AppState } from "../state/reducers/state";
 import { Dispatch, bindActionCreators } from "redux";
-import { fetchMajorsAndPlans } from "../utils/fetchMajorsAndPlans";
+import { fetchMajorsAndPlans as fMAP } from "../utils/fetchMajorsAndPlans";
 
 const Container = styled.div`
   display: flex;
@@ -94,7 +94,7 @@ const CardTitleText = styled.h2`
 
 interface OnboardingProps {
   fullName: string;
-  fetchMajorsAndPlans: typeof fetchMajorsAndPlans;
+  fetchMajorsAndPlans: typeof fMAP; // using type of here to annotate the prop with it's correct type
 }
 
 class OnboardingComponent extends React.Component<OnboardingProps> {
@@ -111,8 +111,7 @@ class OnboardingComponent extends React.Component<OnboardingProps> {
   }
 
   componentWillMount() {
-    const { fetchMajorsAndPlans } = this.props;
-    fetchMajorsAndPlans();
+    this.props.fetchMajorsAndPlans();
   }
 
   render() {
@@ -128,8 +127,8 @@ class OnboardingComponent extends React.Component<OnboardingProps> {
           <BodyText>
             <TitleText>Graduate on time.</TitleText>
             <DescriptionText>
-              Navigate the Northeastern graduation requirements
-              and build a personalized plan of study.
+              Navigate the Northeastern graduation requirements and build a
+              personalized plan of study.
             </DescriptionText>
             <Link
               to={{ pathname: "/name", state: { userData: {} } }}
@@ -172,7 +171,7 @@ const mapStateToProps = (state: AppState) => ({
 const mapDispatchToProps = (dispatch: Dispatch) =>
   bindActionCreators(
     {
-      fetchMajorsAndPlans: fetchMajorsAndPlans,
+      fetchMajorsAndPlans: fMAP,
     },
     dispatch
   );

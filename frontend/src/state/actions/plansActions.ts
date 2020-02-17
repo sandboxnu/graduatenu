@@ -12,6 +12,7 @@ export const fetchPlansPendingAction = createAction(
 
 export const fetchPlansSuccessAction = createAction(
   "plans/FETCH_PLANS_SUCCESS",
+  // Record: TS utility that maps properties of one type to another.
   (plans: Record<string, Schedule[]>) => ({
     plans,
   })
