@@ -130,6 +130,6 @@ catalogToMajor(
   "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-science/bscs/#programrequirementstext"
 ).then((scrapedMajor: Major) => {
   //uncomment following lines to log output.
-  console.log("--------------------Parsed major object--------------------");
-  console.log(JSON.stringify(scrapedMajor));
+  // console.log("--------------------Parsed major object--------------------");
+  // console.log(JSON.stringify(scrapedMajor));
 });
