@@ -14,6 +14,4 @@ test("ensure that catalog_scraper produces the expected output for supported maj
     major = await catalogToMajor(link);
     expect(major).toMatchSnapshot();
   }
-
-  console.log("here");
 });
