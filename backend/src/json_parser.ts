@@ -803,9 +803,13 @@ const createPrerequisiteGraph = (
   // rely on having local reference "graph" available.
   const tracker: CourseTakenTracker = {
     contains: (code: string) => !graph.hasVertex(code),
-    addCourse: (code: string) => graph.addVertex(code),
-    addCourses: (toAdd: string[]) =>
-      toAdd.map(single => graph.addVertex(single)),
+    addCourse: (course: ScheduleCourse | INEUCourse) =>
+      graph.addVertex(courseCode(course)),
+    addCourses: (toAdd: ScheduleCourse[] | INEUCourse[]) =>
+      toAdd.forEach((single: ScheduleCourse | INEUCourse) =>
+        graph.addVertex(courseCode(single))
+      ),
+    getTermIds: (course: string) => [], // This callback is to be used generate-warnings.ts
   };
 
   // following functions rely on local reference "completed"

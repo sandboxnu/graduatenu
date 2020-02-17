@@ -160,7 +160,6 @@ test("Tests warnings produce properly for cs_sched_2.json", () => {
   );
   let cs_sched_obj = JSON.parse(cs_sched);
   let container = warning_generator.produceWarnings(cs_sched_obj);
-
   expect(container).toBeValidWarningContainer();
   const normal = container.normalWarnings;
   const specific = container.courseWarnings;
@@ -190,6 +189,19 @@ test("Tests warnings produce properly for cs_sched_2.json", () => {
       message:
         "PHYS1151: prereqs not satisfied: OR: MATH1241,MATH1251,MATH1340,MATH1341,MATH1342,MATH2321",
       subject: "PHYS",
+      termId: 201860,
+    },
+
+    {
+      classId: "1990",
+      message: "CS1990: appears in your schedule multiple times",
+      subject: "CS",
+      termId: 201860, // FIND OUT WHICH TERM ID THIS SHOULD BE
+    },
+    {
+      classId: "1990",
+      message: "CS1990: appears in your schedule multiple times",
+      subject: "CS",
       termId: 201860,
     },
   ]);
