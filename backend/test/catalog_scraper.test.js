@@ -1,4 +1,4 @@
-var catalogToMajor = require("../src/catalog_scraper.ts");
+var catalogToMajor = require("../src/catalog-scraper/catalog_scraper.ts");
 
 // majors to run tests on
 
