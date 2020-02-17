@@ -12,7 +12,6 @@ import {
   IRequiredCourse,
   ISubjectRange,
 } from "../../frontend/src/models/types";
-import { number } from "prop-types";
 
 const rp = require("request-promise");
 
@@ -73,25 +72,24 @@ let RANGETagMap: { [key: string]: number } = {
  * Scrapes the major data from the given course catalog URL.
  * @param link the URL string of the course catalog page to be parsed
  */
-function catalogToMajor(link: string) {
-  var options = {
-    uri: link,
-    transform: function(body: string) {
-      return cheerio.load(body);
-    },
-  };
+function catalogToMajor(link: string): Promise<Major> {
+  return new Promise<Major>((resolve, reject) => {
+    var options = {
+      uri: link,
+      transform: function(body: string) {
+        return cheerio.load(body);
+      },
+    };
 
-  rp(options)
-    .then(($: CheerioStatic) => scrapeMajorDataFromCatalog($))
-    .then((scrapedMajor: Major) => {
-      console.log(
-        "--------------------Parsed major object--------------------"
-      );
-      console.log(JSON.stringify(scrapedMajor));
-    })
-    .catch(function(err: string) {
-      console.log(err);
-    });
+    rp(options)
+      .then(($: CheerioStatic) => scrapeMajorDataFromCatalog($))
+      .then((scrapedMajor: Major) => {
+        resolve(scrapedMajor);
+      })
+      .catch(function(err: string) {
+        console.log(err);
+      });
+  });
 }
 
 /**
@@ -1113,9 +1111,17 @@ function createIOrCourse(reqList: Requirement[]): IOrCourse {
   };
 }
 
+module.exports = catalogToMajor;
+
 /**
  * testing. move to test file.
  */
 catalogToMajor(
   "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-science/bscs/#programrequirementstext"
-);
+).then((scrapedMajor: Major) => {
+  //uncomment following lines to log output.
+  // console.log(
+  //   "--------------------Parsed major object--------------------"
+  // );
+  // console.log(JSON.stringify(scrapedMajor));
+});
