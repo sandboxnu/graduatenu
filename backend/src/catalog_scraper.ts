@@ -43,6 +43,28 @@ enum SubHeaderReqType {
   ICourseRange,
 }
 
+type ScraperRequirement = Requirement | ISubjectRange;
+
+/**
+ * a predicate for Requirement.
+ * @param scraperReq the ScraperRequirement
+ */
+function isRequirement(
+  scraperReq: ScraperRequirement
+): scraperReq is Requirement {
+  return (scraperReq as Requirement).type !== undefined;
+}
+
+/**
+ * a predicate for ISubjectRange.
+ * @param scraperReq the ScraperRequirement
+ */
+function isSubjectRange(
+  scraperReq: ScraperRequirement
+): scraperReq is ISubjectRange {
+  return (scraperReq as ISubjectRange).idRangeStart !== undefined;
+}
+
 /**
  * An object that represents a credit range.
  */
@@ -281,9 +303,14 @@ function processAndSection(
         //if the row has an or prefix, set the contains flag.
         containsOrRow = true;
       }
-      let requirement: Requirement | undefined = parseRowAsRequirement($, row);
+      let requirement: ScraperRequirement | undefined = parseRowAsRequirement(
+        $,
+        row
+      );
       if (requirement) {
-        reqList.push(requirement);
+        if (isRequirement(requirement)) {
+          reqList.push(requirement);
+        }
       }
     });
 
@@ -369,9 +396,14 @@ function processOrSection(
         //if the row has an or prefix, set the contains flag.
         containsOrRow = true;
       }
-      let requirement: Requirement | undefined = parseRowAsRequirement($, row);
+      let requirement: ScraperRequirement | undefined = parseRowAsRequirement(
+        $,
+        row
+      );
       if (requirement) {
-        reqList.push(requirement);
+        if (isRequirement(requirement)) {
+          reqList.push(requirement);
+        }
       }
     });
 
@@ -537,12 +569,14 @@ function parseAndCourseFromSubHeader(
         indentBlockRows.push(row);
       } else {
         //process row as an indivdual requirement and push to andCourse.courses
-        let requirement: Requirement | undefined = parseRowAsRequirement(
+        let requirement: ScraperRequirement | undefined = parseRowAsRequirement(
           $,
           row
         );
         if (requirement) {
-          andCourse.courses.push(requirement);
+          if (isRequirement(requirement)) {
+            andCourse.courses.push(requirement);
+          }
         }
       }
     }
@@ -611,12 +645,14 @@ function parseOrCourseFromSubHeader(
         indentBlockRows.push(row);
       } else {
         //process row as an indivdual requirement and push to andCourse.courses
-        let requirement: Requirement | undefined = parseRowAsRequirement(
+        let requirement: ScraperRequirement | undefined = parseRowAsRequirement(
           $,
           row
         );
         if (requirement) {
-          orCourse.courses.push(requirement);
+          if (isRequirement(requirement)) {
+            orCourse.courses.push(requirement);
+          }
         }
       }
     }
@@ -747,9 +783,14 @@ function parseAndCourseFromIndentBlock(
   for (let i = 0; i < subHeaderRows.length; i++) {
     let row: CheerioElement = subHeaderRows[i];
     //process row as an indivdual requirement and push to andCourse.courses
-    let requirement: Requirement | undefined = parseRowAsRequirement($, row);
+    let requirement: ScraperRequirement | undefined = parseRowAsRequirement(
+      $,
+      row
+    );
     if (requirement) {
-      andCourse.courses.push(requirement);
+      if (isRequirement(requirement)) {
+        andCourse.courses.push(requirement);
+      }
     }
   }
   return andCourse;
@@ -772,9 +813,14 @@ function parseOrCourseFromIndentBlock(
   for (let i = 0; i < subHeaderRows.length; i++) {
     let row: CheerioElement = subHeaderRows[i];
     //process row as an indivdual requirement and push to andCourse.courses
-    let requirement: Requirement | undefined = parseRowAsRequirement($, row);
+    let requirement: ScraperRequirement | undefined = parseRowAsRequirement(
+      $,
+      row
+    );
     if (requirement) {
-      orCourse.courses.push(requirement);
+      if (isRequirement(requirement)) {
+        orCourse.courses.push(requirement);
+      }
     }
   }
   return orCourse;
@@ -817,7 +863,7 @@ function parseCourseRangeFromIndentBlock(
 function parseRowAsRequirement(
   $: CheerioStatic,
   row: CheerioElement
-): Requirement | undefined {
+): ScraperRequirement | undefined {
   let currentRow: Cheerio = $(row);
   if (currentRow.find("a").length === 0) {
     // the row doesn't have any course information to be parsed in most cases.
@@ -966,7 +1012,6 @@ function parseSubjectRangeRow(
     );
   }
   let courseRange: ISubjectRange = {
-    type: "SubjectRange",
     subject: subject,
     idRangeStart: idRangeStart,
     idRangeEnd: idRangeEnd,
