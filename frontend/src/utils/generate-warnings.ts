@@ -140,7 +140,7 @@ export function produceWarnings(schedule: Schedule): WarningContainer {
   // warn each course that has more than 1 term listed for taking the course
   taken.forEach((courseIn: CourseInfo, code: string) => {
     const toWarn = tracker.getTermIds(code);
-    if (toWarn.length > 1) {
+    if (toWarn.length > 1 && !all_fillers.includes(code)) {
       toWarn.forEach((termVal: number) => {
         courseSpecific.push({
           subject: courseIn.subject,
