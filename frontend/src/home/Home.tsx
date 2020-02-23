@@ -124,6 +124,7 @@ type Props = ToastHomeProps &
 class HomeComponent extends React.Component<Props> {
   componentWillReceiveProps(nextProps: Props) {
     if (nextProps.warnings !== this.props.warnings) {
+      console.log("here");
       this.updateWarnings();
     }
   }
@@ -132,12 +133,18 @@ class HomeComponent extends React.Component<Props> {
     // remove existing toasts
     this.props.toastStack.forEach(t => this.props.removeToast(t.id));
 
-    // add new toasts
+    let numWarnings: number = 0;
+    console.log("warnings length" + this.props.warnings.length);
     this.props.warnings.forEach(w => {
-      this.props.addToast(w.message, {
-        appearance: "warning",
-        autoDismiss: true,
-      });
+      //ensuring we only propogate 5 toasts at a time
+      numWarnings++;
+      if (numWarnings <= 5) {
+        // add new toasts
+        this.props.addToast(w.message, {
+          appearance: "warning",
+          autoDismiss: true,
+        });
+      }
     });
   }
 
