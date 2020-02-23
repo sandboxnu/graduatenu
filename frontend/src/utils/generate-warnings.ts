@@ -738,10 +738,9 @@ function produceNormalWarnings(
   warnings = warnings.concat(
     checkSemesterCredits(term.classes, tracker, term.termId, term.season)
   );
-  console.log("current warnings" + warnings);
-  // warnings = warnings.concat(
-  //   checkSemesterOverload(term.classes, tracker, term.termId)
-  // );
+  warnings = warnings.concat(
+    checkSemesterOverload(term.classes, tracker, term.termId)
+  );
   return warnings;
 }
 
@@ -874,7 +873,6 @@ function checkSemesterCredits(
   termId: number,
   season: Season | SeasonEnum
 ): IWarning[] {
-  console.log(toCheck);
   let maxCredits = 0;
   let minCredits = 0;
   for (const course of toCheck) {
@@ -890,9 +888,6 @@ function checkSemesterCredits(
 
   //defining a list of IWarnings to return later.
   const warnings: IWarning[] = [];
-
-  console.log("Max Credits for this Season: " + maxSeasonCredits);
-  console.log("Current Credits for this Semester: " + minCredits);
 
   //if currently planning to few credits for the given season (needs at least one credit to throw warning).
   if (minSeasonCredits > minCredits && minCredits > 0) {
