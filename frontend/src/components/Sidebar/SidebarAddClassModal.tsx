@@ -5,6 +5,7 @@ import {
   DNDScheduleTerm,
   DNDSchedule,
   IRequiredCourse,
+  DNDScheduleYear,
 } from "../../models/types";
 import { XButton } from "../common";
 import { Modal } from "@material-ui/core";
@@ -104,12 +105,19 @@ export class SidebarAddClassModalComponent extends React.Component<
     this.mapScheduleToSemesters();
   }
 
+  /**
+   * Keeps track of the currently selected semester in the form.
+   * @param event the change event
+   */
   handleSemesterChange(event: React.ChangeEvent<HTMLSelectElement>) {
     this.setState({
       formSemester: this.state.semesters[Number(event.target.value)],
     });
   }
 
+  /**
+   * Called when the user presses 'add classes', submits the designated courses to the selected semester.
+   */
   async handleSubmit() {
     await this.mapRequirementToSchedule();
 
@@ -120,6 +128,9 @@ export class SidebarAddClassModalComponent extends React.Component<
     this.prepareToClose();
   }
 
+  /**
+   * Necessary operations to close this modal.
+   */
   prepareToClose() {
     this.setState({
       queuedCourses: [],
@@ -127,10 +138,13 @@ export class SidebarAddClassModalComponent extends React.Component<
     this.props.handleClose();
   }
 
+  /**
+   * Maps each semester from the current DNDSchedule into a list of semesters for use in input.
+   */
   mapScheduleToSemesters() {
-    let semesterList = [];
-    let schedule = this.props.schedule;
-    let years = [];
+    let semesterList: DNDScheduleTerm[] = [];
+    let schedule: DNDSchedule = this.props.schedule;
+    let years: DNDScheduleYear[] = [];
     for (let i of schedule.years) {
       years.push(schedule.yearMap[i]);
     }
@@ -148,19 +162,22 @@ export class SidebarAddClassModalComponent extends React.Component<
     });
   }
 
+  /**
+   * Fetches the ScheduleCourse objects of each selected course adds each course to the queuedCourses state.
+   */
   async mapRequirementToSchedule() {
     this.setState({
       queuedCourses: [],
     });
 
     for (let i in this.props.selectedCourses) {
-      const courseToAdd = await fetchCourse(
+      const courseToAdd: ScheduleCourse | null = await fetchCourse(
         this.props.selectedCourses[i].subject.toUpperCase(),
         this.props.selectedCourses[i].classId.toString()
       );
 
       if (courseToAdd != null) {
-        let curCourses = this.state.queuedCourses.slice();
+        let curCourses: ScheduleCourse[] = this.state.queuedCourses.slice();
         curCourses.push(courseToAdd);
         this.setState({
           queuedCourses: curCourses,
@@ -237,15 +254,28 @@ export class SidebarAddClassModalComponent extends React.Component<
   }
 }
 
+/**
+ * Callback to be passed into connect, to make the schedule property of AppState available as this component's props.
+ * @param state the AppState
+ */
 const mapStateToProps = (state: AppState) => ({
   schedule: getScheduleFromState(state),
 });
 
+/**
+ * Callback to be passed into connect, responsible for dispatching redux actions to update the AppState.
+ * @param dispatch responsible for dispatching actions to the redux store
+ */
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   handleAddClasses: (courses: ScheduleCourse[], semester: DNDScheduleTerm) =>
     dispatch(addClassesAction(courses, semester)),
 });
 
+/**
+ * Convert this react component into a component that is connected to the redux store.
+ * When rendering this connected component, the props assigned in mapStateToProps
+ * don't need to be passed down as props from the parent component.
+ */
 export const SidebarAddClassModal = connect<
   ReduxStoreSidebarAddClassModalProps,
   ReduxDispatchSidebarAddClassModalProps,

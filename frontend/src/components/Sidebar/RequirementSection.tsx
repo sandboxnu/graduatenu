@@ -100,6 +100,10 @@ export class RequirementSection extends React.Component<
     };
   }
 
+  /**
+   * Shows this SidebarAddClassModal and passes the given courses to the modal.
+   * @param courses the list of courses that triggered the showModal call
+   */
   showModal(courses: IRequiredCourse[]) {
     this.setState({
       modalVisible: true,
@@ -107,6 +111,9 @@ export class RequirementSection extends React.Component<
     });
   }
 
+  /**
+   * Hides this SidebarAddClassModal.
+   */
   hideModal() {
     this.setState({ modalVisible: false });
   }
@@ -117,12 +124,21 @@ export class RequirementSection extends React.Component<
     });
   }
 
+  /**
+   * Maps the given list of requirements to the render function.
+   * @param reqs the list of requirements to be rendered
+   */
   parseRequirements(reqs: Requirement[]) {
     return reqs.map((r: Requirement, index: number) => (
       <div key={index}>{this.renderRequirement(r, index)}</div>
     ));
   }
 
+  /**
+   * Handles each Requirement type to render the given Requirement at the given index.
+   * @param req the requirement to be rendered
+   * @param index the designated index of this requirement
+   */
   renderRequirement(req: Requirement, index: number) {
     if (req.type === "COURSE") {
       return this.renderCourse(req as IRequiredCourse);
@@ -167,6 +183,10 @@ export class RequirementSection extends React.Component<
     );
   }
 
+  /**
+   * Renders a given ICourseRange as a sidebar requirement
+   * @param req the given course range to be rendered
+   */
   handleRange(req: ICourseRange) {
     return (
       <div>
@@ -185,6 +205,13 @@ export class RequirementSection extends React.Component<
     );
   }
 
+  /**
+   * Renders the given course as a sidebar course.
+   * @param course the given IRequiredCourse
+   * @param noMargin determines if this sidebar course should have a margin or not
+   * @param addButton determines if this sidebar course should have a SidebarAddButton
+   * @param andCourse true if the given course is an and course
+   */
   renderCourse(
     course: IRequiredCourse,
     noMargin: boolean = false,
@@ -212,6 +239,10 @@ export class RequirementSection extends React.Component<
     );
   }
 
+  /**
+   * Translates type to desired display text in sidebar.
+   * @param type the given Requirement type
+   */
   convertTypeToText(type: string) {
     if (type === "OR") {
       return "Complete one of the following:";
@@ -220,6 +251,9 @@ export class RequirementSection extends React.Component<
     return type;
   }
 
+  /**
+   * Updates the state to show more of this requirement section.
+   */
   expandSection() {
     this.setState({
       expanded: !this.state.expanded,
