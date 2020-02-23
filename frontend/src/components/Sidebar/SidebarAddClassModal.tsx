@@ -134,6 +134,7 @@ export class SidebarAddClassModalComponent extends React.Component<
   prepareToClose() {
     this.setState({
       queuedCourses: [],
+      formSemester: this.state.semesters[0],
     });
     this.props.handleClose();
   }
