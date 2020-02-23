@@ -122,7 +122,7 @@ type Props = ToastHomeProps &
   RouteComponentProps;
 
 class HomeComponent extends React.Component<Props> {
-  componentWillReceiveProps(nextProps: Props) {
+  componentDidUpdate(nextProps: Props) {
     if (nextProps.warnings !== this.props.warnings) {
       console.log("here");
       this.updateWarnings();
@@ -134,7 +134,7 @@ class HomeComponent extends React.Component<Props> {
     this.props.toastStack.forEach(t => this.props.removeToast(t.id));
 
     let numWarnings: number = 0;
-    console.log("warnings length" + this.props.warnings.length);
+    //console.log("warnings length " + this.props.warnings.length);
     this.props.warnings.forEach(w => {
       //ensuring we only propogate 5 toasts at a time
       numWarnings++;
@@ -144,6 +144,7 @@ class HomeComponent extends React.Component<Props> {
           appearance: "warning",
           autoDismiss: true,
         });
+        console.log(this.props);
       }
     });
   }
