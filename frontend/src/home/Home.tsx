@@ -20,21 +20,14 @@ import {
   planToString,
   scheduleHasClasses,
 } from "../utils";
-import {
-  TextField,
-  Checkbox,
-  FormControlLabel,
-  Button,
-} from "@material-ui/core";
+import { TextField, Button } from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
-import { majors } from "../majors";
 import { CLASS_BLOCK_WIDTH } from "../constants";
 import { DropDownModal } from "../components";
 import { Sidebar } from "../components/Sidebar";
 import { withToast } from "./toastHook";
 import { AppearanceTypes } from "react-toast-notifications";
 import { withRouter, RouteComponentProps } from "react-router-dom";
-import { plans } from "../plans";
 import { connect } from "react-redux";
 import { AppState } from "../state/reducers/state";
 import { Dispatch } from "redux";
@@ -51,6 +44,7 @@ import {
   setCoopCycle,
 } from "../state/actions/scheduleActions";
 import { setMajorAction } from "../state/actions/userActions";
+import { getMajors, getPlans } from "../state";
 
 const OuterContainer = styled.div`
   display: flex;
@@ -102,6 +96,8 @@ interface ReduxStoreHomeProps {
   major?: Major;
   planStr?: string;
   warnings: IWarning[];
+  majors: Major[];
+  plans: Record<string, Schedule[]>;
 }
 
 interface ReduxDispatchHomeProps {
@@ -227,7 +223,7 @@ class HomeComponent extends React.Component<Props> {
   }
 
   onChooseMajor(event: React.SyntheticEvent<{}>, value: any) {
-    const maj = majors.find((m: any) => m.name === value);
+    const maj = this.props.majors.find((m: any) => m.name === value);
     this.props.setMajor(maj);
   }
 
@@ -237,7 +233,7 @@ class HomeComponent extends React.Component<Props> {
       return;
     }
 
-    const plan = plans[this.props.major!.name].find(
+    const plan = this.props.plans[this.props.major!.name].find(
       (p: Schedule) => planToString(p) === value
     );
 
@@ -251,7 +247,7 @@ class HomeComponent extends React.Component<Props> {
       <Autocomplete
         style={{ width: 300, marginRight: 18 }}
         disableListWrap
-        options={majors.map(maj => maj.name)}
+        options={this.props.majors.map(maj => maj.name)}
         renderInput={params => (
           <TextField
             {...params}
@@ -273,7 +269,7 @@ class HomeComponent extends React.Component<Props> {
         disableListWrap
         options={[
           "None",
-          ...plans[this.props.major!.name].map(p => planToString(p)),
+          ...this.props.plans[this.props.major!.name].map(p => planToString(p)),
         ]}
         renderInput={params => (
           <TextField
@@ -303,7 +299,7 @@ class HomeComponent extends React.Component<Props> {
   }
 
   addClassesFromPOS() {
-    const plan = plans[this.props.major!.name].find(
+    const plan = this.props.plans[this.props.major!.name].find(
       (p: Schedule) => planToString(p) === this.props.planStr!
     );
     this.props.setSchedule(plan!);
@@ -323,7 +319,7 @@ class HomeComponent extends React.Component<Props> {
   }
 
   clearSchedule() {
-    const plan = plans[this.props.major!.name].find(
+    const plan = this.props.plans[this.props.major!.name].find(
       (p: Schedule) => planToString(p) === this.props.planStr!
     );
     this.props.setCoopCycle(plan!);
@@ -372,6 +368,8 @@ const mapStateToProps = (state: AppState) => ({
   planStr: getPlanStrFromState(state),
   major: getMajorFromState(state),
   warnings: getWarningsFromState(state),
+  majors: getMajors(state),
+  plans: getPlans(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({

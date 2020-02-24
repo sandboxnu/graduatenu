@@ -4,12 +4,18 @@ on: [push]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-    
+    strategy:
+      matrix:
+        node: ["12", "13"]
+    name: Node ${{ matrix.node }} compatibility
     steps:
-    - uses: actions/checkout@v1
-    - name: Run Jest tests
-      run: |
-        yarn
-        yarn test
+      - uses: actions/checkout@v1
+      - name: Setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Run Jest Tests
+        run: |
+          yarn install
+          yarn test

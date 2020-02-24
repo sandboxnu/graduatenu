@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { Link, Redirect } from "react-router-dom";
 import styled from "styled-components";
 import { GraduateGrey } from "../constants";
@@ -7,6 +7,8 @@ import picture from "../assets/landingils.png";
 import { connect } from "react-redux";
 import { getFullNameFromState } from "../state";
 import { AppState } from "../state/reducers/state";
+import { Dispatch, bindActionCreators } from "redux";
+import { fetchMajorsAndPlans as fMAP } from "../utils/fetchMajorsAndPlans";
 
 const Container = styled.div`
   display: flex;
@@ -92,6 +94,7 @@ const CardTitleText = styled.h2`
 
 interface OnboardingProps {
   fullName: string;
+  fetchMajorsAndPlans: typeof fMAP; // using type of here to annotate the prop with it's correct type
 }
 
 class OnboardingComponent extends React.Component<OnboardingProps> {
@@ -107,6 +110,11 @@ class OnboardingComponent extends React.Component<OnboardingProps> {
     );
   }
 
+  componentWillMount() {
+    // make an API request to searchNEU to get the supported majors and their corresponding plans.
+    this.props.fetchMajorsAndPlans();
+  }
+
   render() {
     // fullName will be an empty string if this is the user's first time visiting the site
     if (!!this.props.fullName) {
@@ -120,8 +128,8 @@ class OnboardingComponent extends React.Component<OnboardingProps> {
           <BodyText>
             <TitleText>Graduate on time.</TitleText>
             <DescriptionText>
-              Navigate the Northeastern graduation requirements
-              and build a personalized plan of study.
+              Navigate the Northeastern graduation requirements and build a
+              personalized plan of study.
             </DescriptionText>
             <Link
               to={{ pathname: "/name", state: { userData: {} } }}
@@ -161,4 +169,24 @@ const mapStateToProps = (state: AppState) => ({
   fullName: getFullNameFromState(state),
 });
 
-export const Onboarding = connect(mapStateToProps)(OnboardingComponent);
+/**
+ * Callback to be passed into connect, responsible for dispatching redux actions to update the appstate.
+ * @param dispatch responsible for dispatching actions to the redux store.
+ */
+const mapDispatchToProps = (dispatch: Dispatch) =>
+  bindActionCreators(
+    {
+      fetchMajorsAndPlans: fMAP,
+    },
+    dispatch
+  );
+
+/**
+ * Convert this React component to a component that's connected to the redux store.
+ * When rendering the connecting component, the props assigned in mapStateToProps, do not need to
+ * be passed down as props from the parent component.
+ */
+export const Onboarding = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(OnboardingComponent);

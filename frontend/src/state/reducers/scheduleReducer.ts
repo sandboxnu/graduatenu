@@ -120,7 +120,7 @@ export const scheduleReducer = (
         return draft;
       }
       case getType(setScheduleAction): {
-        const { schedule } = action.payload;
+        const schedule = JSON.parse(JSON.stringify(action.payload.schedule)); /// deep copy of schedule, because schedule is modified
         const [newSchedule, newCounter] = convertToDNDSchedule(
           JSON.parse(JSON.stringify(schedule)),
           draft.present.currentClassCounter
