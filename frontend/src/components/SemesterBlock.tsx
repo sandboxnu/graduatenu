@@ -33,10 +33,10 @@ const Container = styled.div<any>`
 `;
 
 const AddButtonContainer = styled.div`
-	position: absolute;
-	right: 6px
-	bottom: 6px
-	z-index: 1;
+  position: absolute;
+  right: 6px;
+  bottom: 6px;
+  z-index: 1;
 `;
 
 const NoClassBlock = styled.div`
