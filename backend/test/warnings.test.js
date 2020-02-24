@@ -100,24 +100,18 @@ test("Tests warnings produce properly for cs_sched_1.json", () => {
   // normal warnings.
   expect(normal).toContainWarnings([
     {
-      message: "Enrolled in a max of 20 credits. May be over-enrolled.",
-      termId: 201910,
-    },
-    {
-      message: "Enrolled in a min of 20 credits. May be over-enrolled.",
-      termId: 201910,
-    },
-    {
-      message: "Enrolled in a max of 51 credits. May be over-enrolled.",
-      termId: 201860,
-    },
-    {
-      message: "Enrolled in a min of 48 credits. May be over-enrolled.",
+      message:
+        "Currently enrolled in 48 credit(s). May be over-enrolled. Maximum credits for this term 9.",
       termId: 201860,
     },
     {
       message: "Overloaded: Enrolled in 10 four-credit courses.",
       termId: 201860,
+    },
+    {
+      message:
+        "Currently enrolled in 20 credit(s). May be over-enrolled. Maximum credits for this term 18.",
+      termId: 201910,
     },
   ]);
 
@@ -163,23 +157,16 @@ test("Tests warnings produce properly for cs_sched_2.json", () => {
   expect(container).toBeValidWarningContainer();
   const normal = container.normalWarnings;
   const specific = container.courseWarnings;
-
   expect(normal).toContainWarnings([
     {
-      message: "Enrolled in a max of 20 credits. May be over-enrolled.",
-      termId: 201910,
-    },
-    {
-      message: "Enrolled in a min of 20 credits. May be over-enrolled.",
-      termId: 201910,
-    },
-    {
-      message: "Enrolled in a max of 29 credits. May be over-enrolled.",
+      message:
+        "Currently enrolled in 23 credit(s). May be over-enrolled. Maximum credits for this term 9.",
       termId: 201860,
     },
     {
-      message: "Enrolled in a min of 23 credits. May be over-enrolled.",
-      termId: 201860,
+      message:
+        "Currently enrolled in 20 credit(s). May be over-enrolled. Maximum credits for this term 18.",
+      termId: 201910,
     },
   ]);
 

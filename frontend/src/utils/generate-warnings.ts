@@ -24,7 +24,31 @@ import {
   ORSection,
   RANGESection,
   WarningContainer,
+  SeasonEnum,
+  Season,
 } from "../models/types";
+
+/*
+CreditRange interface to track the min and max credits for a particular season. 
+seasonMax = a number representing the max numebr of credits you can take without over-loading. 
+seasonMin = a number representing the min number of credits you can take without under-loading.  
+*/
+interface CreditRange {
+  seasonMax: number;
+  seasonMin: number;
+}
+
+/*
+seasonCreditTracker is an object of string --> creditRange object. 
+This object is meant to encode max and min credit per season. 
+*/
+let seasonCreditTracker: { [key: string]: CreditRange } = {
+  SM: { seasonMax: 18, seasonMin: 12 },
+  S1: { seasonMax: 9, seasonMin: 4 },
+  S2: { seasonMax: 9, seasonMin: 4 },
+  FL: { seasonMax: 18, seasonMin: 12 },
+  SP: { seasonMax: 18, seasonMin: 12 },
+};
 
 interface CreditHourTracker {
   hoursCompleted: number;
@@ -712,7 +736,7 @@ function produceNormalWarnings(
 ): IWarning[] {
   let warnings: IWarning[] = [];
   warnings = warnings.concat(
-    checkSemesterCredits(term.classes, tracker, term.termId)
+    checkSemesterCredits(term.classes, tracker, term.termId, term.season)
   );
   warnings = warnings.concat(
     checkSemesterOverload(term.classes, tracker, term.termId)
@@ -846,25 +870,37 @@ function checkCorequisites(
 function checkSemesterCredits(
   toCheck: ScheduleCourse[],
   tracker: CourseTakenTracker,
-  termId: number
+  termId: number,
+  season: Season | SeasonEnum
 ): IWarning[] {
   let maxCredits = 0;
   let minCredits = 0;
   for (const course of toCheck) {
     maxCredits += course.numCreditsMax;
-    minCredits += course.numCreditsMin;
+    minCredits += course.numCreditsMin; //use this one!
   }
 
+  //minSeasonCredits is the minimum number of credits to not be under enrolled for the given season.
+  let minSeasonCredits = seasonCreditTracker[season].seasonMin;
+
+  //maxSeasonCredits is the maximum number of credits to not be over enrolled for the given season.
+  let maxSeasonCredits = seasonCreditTracker[season].seasonMax;
+
+  //defining a list of IWarnings to return later.
   const warnings: IWarning[] = [];
-  if (maxCredits >= 19) {
+
+  //if currently planning to few credits for the given season (needs at least one credit to throw warning).
+  if (minSeasonCredits > minCredits && minCredits > 0) {
     warnings.push({
-      message: `Enrolled in a max of ${maxCredits} credits. May be over-enrolled.`,
+      message: `Currently enrolled in ${minCredits} credits(s). May be under-enrolled. Minimum credits for this term ${minSeasonCredits}.`,
       termId: termId,
     });
   }
-  if (minCredits >= 19) {
+
+  //if currently planning to overload credits  for this season. Throws warning.
+  if (minCredits > maxSeasonCredits) {
     warnings.push({
-      message: `Enrolled in a min of ${minCredits} credits. May be over-enrolled.`,
+      message: `Currently enrolled in ${minCredits} credit(s). May be over-enrolled. Maximum credits for this term ${maxSeasonCredits}.`,
       termId: termId,
     });
   }

@@ -122,7 +122,7 @@ type Props = ToastHomeProps &
   RouteComponentProps;
 
 class HomeComponent extends React.Component<Props> {
-  componentWillReceiveProps(nextProps: Props) {
+  componentDidUpdate(nextProps: Props) {
     if (nextProps.warnings !== this.props.warnings) {
       this.updateWarnings();
     }
@@ -132,12 +132,17 @@ class HomeComponent extends React.Component<Props> {
     // remove existing toasts
     this.props.toastStack.forEach(t => this.props.removeToast(t.id));
 
-    // add new toasts
+    let numWarnings: number = 0;
     this.props.warnings.forEach(w => {
-      this.props.addToast(w.message, {
-        appearance: "warning",
-        autoDismiss: true,
-      });
+      //ensuring we only propogate 5 toasts at a time
+      numWarnings++;
+      if (numWarnings <= 5) {
+        // add new toasts
+        this.props.addToast(w.message, {
+          appearance: "warning",
+          autoDismiss: true,
+        });
+      }
     });
   }
 
@@ -196,7 +201,6 @@ class HomeComponent extends React.Component<Props> {
       const year = JSON.parse(
         JSON.stringify(this.props.schedule.yearMap[yearnum])
       ); // deep copy
-      // console.log(year.summer1.status.toString());
       if (isCoopOrVacation(year.fall) && year.fall !== currSemester) {
         year.fall.status = year.fall.status.replace("HOVER", "") as Status;
         this.props.updateSemester(yearnum, "fall", year.fall);
