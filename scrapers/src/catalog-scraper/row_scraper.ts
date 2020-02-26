@@ -131,7 +131,8 @@ export function parseSubjectRangeRow(
   row: CheerioElement
 ): ISubjectRange | undefined {
   let currentRow: Cheerio = $(row);
-  let anchors: Cheerio = currentRow.find("span.courselistcomment a");
+  //let anchors: Cheerio = currentRow.find("span.courselistcomment a");
+  let anchors: Cheerio = currentRow.find(".courselistcomment.commentindent");
   if (anchors.length == 0) {
     return;
   }
@@ -139,9 +140,15 @@ export function parseSubjectRangeRow(
   //the length should be === 2.
   let anchorsArray: CheerioElement[] = anchors.toArray();
   let lowerAnchor: Cheerio = $(anchorsArray[0]);
-  let splitLowerAnchor: string[] = lowerAnchor
+  let splitByChar: string[] = lowerAnchor
     .text()
     .split(String.fromCharCode(160));
+  let splitLowerAnchor: string[] = [];
+  splitByChar.forEach(element => {
+    splitLowerAnchor = splitLowerAnchor.concat(
+      element.split(String.fromCharCode(32))
+    );
+  });
 
   //first item in the array is the subject
   let subject: string = splitLowerAnchor[0];
@@ -152,16 +159,12 @@ export function parseSubjectRangeRow(
   //default to 9999, if upper bound does not exist.
   let idRangeEnd: number = 9999;
   if (
-    !currentRow
-      .find("span.courselistcomment")
-      .text()
-      .includes("or higher")
+    !splitLowerAnchor.includes("higher") &&
+    !splitLowerAnchor.includes("or")
   ) {
     // upper bound exists, get range end.
-    let upperAnchor: Cheerio = $(anchorsArray[1]);
-    idRangeEnd = parseInt(
-      upperAnchor.text().split(String.fromCharCode(160))[1]
-    );
+    //let upperAnchor: Cheerio = $(anchorsArray[1]);
+    idRangeEnd = parseInt(splitLowerAnchor[4]);
   }
   let courseRange: ISubjectRange = {
     subject: subject,

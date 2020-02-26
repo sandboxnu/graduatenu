@@ -22,6 +22,17 @@ export const ORTagMap: { [key: string]: number } = {
 // Dictionary for RANGESection keywords, maps from keyword/phrase -> number of credits
 export const RANGETagMap: { [key: string]: number } = {
   "Complete 8 credits of CS, IS or DS classes that are not already required. Choose courses within the following ranges:": 8,
+  "Complete 4 credits of CS, IS, or DS classes that are not already required. Choose courses within the following ranges:": 4,
+  "Complete 8 credits of CS, IS or, DS classes that are not already required. Choose courses within the following ranges:": 8,
+  "Complete eight credits of CS, IS or, DS classes that are not already required. Choose courses within the following ranges:": 8,
+  "Complete 12 credits of CS, IS or, DS classes that are not already required. Choose courses within the following ranges:": 12,
+  "Complete 12 credits of CS, IS, or DS classes that are not already required. Choose courses within the following ranges:": 12,
+  "Complete 12 credits of upper-division CS, IS, and DS courses that are not already required. Choose courses within the following ranges:": 12,
+  "Complete twelve credits of CS, IS or DS classes that are not already required. Choose courses within the following ranges:": 12,
+
+  "Complete one from the following:": 4,
+  "Complete four courses in the following range:": 16,
+  "Complete three courses in the following range:": 12,
 };
 
 /**
@@ -127,9 +138,9 @@ module.exports = catalogToMajor;
  * testing. move to test file.
  */
 catalogToMajor(
-  "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-science/bscs/#programrequirementstext"
+  "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-communication-studies-bs/#programrequirementstext"
 ).then((scrapedMajor: Major) => {
   //uncomment following lines to log output.
-  // console.log("--------------------Parsed major object--------------------");
-  // console.log(JSON.stringify(scrapedMajor));
+  console.log("--------------------Parsed major object--------------------");
+  console.log(JSON.stringify(scrapedMajor));
 });

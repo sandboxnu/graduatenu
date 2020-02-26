@@ -5,6 +5,9 @@ var catalogToMajor = require("../src/catalog-scraper/catalog_scraper.ts");
 // majors on which the scraper has been verified to run correctly:
 const supported = [
   "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-science/bscs/#programrequirementstext",
+  "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/bs/#programrequirementstext",
+  "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-cognitive-psychology-bs/#programrequirementstext",
+  "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/information-science-cognitive-psychology-bs/#programrequirementstext",
 ];
 
 //run tests

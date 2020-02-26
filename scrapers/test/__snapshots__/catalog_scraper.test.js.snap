@@ -744,3 +744,1238 @@ Object {
   "yearVersion": 2018,
 }
 `;
+
+exports[`ensure that catalog_scraper produces the expected output for supported majors. 2`] = `
+Object {
+  "isLanguageRequired": false,
+  "name": "Computer Science and Information Science, BS",
+  "nupaths": Array [],
+  "requirementGroupMap": Object {
+    "Advanced Writing in the Disciplines": Object {
+      "name": "Advanced Writing in the Disciplines",
+      "requirements": Array [
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 3302,
+              "subject": "ENGW",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 3315,
+              "subject": "ENGW",
+              "type": "COURSE",
+            },
+          ],
+          "type": "OR",
+        },
+      ],
+      "type": "AND",
+    },
+    "Calculus": Object {
+      "name": "Calculus",
+      "requirements": Array [
+        Object {
+          "classId": 1341,
+          "subject": "MATH",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 1342,
+          "subject": "MATH",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 2331,
+          "subject": "MATH",
+          "type": "COURSE",
+        },
+      ],
+      "type": "AND",
+    },
+    "College Writing": Object {
+      "name": "College Writing",
+      "requirements": Array [
+        Object {
+          "classId": 1111,
+          "subject": "ENGW",
+          "type": "COURSE",
+        },
+      ],
+      "type": "AND",
+    },
+    "Computer Science Fundamental Courses": Object {
+      "name": "Computer Science Fundamental Courses",
+      "requirements": Array [
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 1800,
+              "subject": "CS",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 1802,
+              "subject": "CS",
+              "type": "COURSE",
+            },
+          ],
+          "type": "AND",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 2500,
+              "subject": "CS",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 2501,
+              "subject": "CS",
+              "type": "COURSE",
+            },
+          ],
+          "type": "AND",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 2510,
+              "subject": "CS",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 2511,
+              "subject": "CS",
+              "type": "COURSE",
+            },
+          ],
+          "type": "AND",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 2800,
+              "subject": "CS",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 2801,
+              "subject": "CS",
+              "type": "COURSE",
+            },
+          ],
+          "type": "AND",
+        },
+      ],
+      "type": "AND",
+    },
+    "Computer Science Overview": Object {
+      "name": "Computer Science Overview",
+      "requirements": Array [
+        Object {
+          "classId": 1200,
+          "subject": "CS",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 1210,
+          "subject": "CS",
+          "type": "COURSE",
+        },
+      ],
+      "type": "AND",
+    },
+    "Computer Science Required Courses": Object {
+      "name": "Computer Science Required Courses",
+      "requirements": Array [
+        Object {
+          "classId": 3000,
+          "subject": "CS",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3200,
+          "subject": "CS",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3500,
+          "subject": "CS",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3650,
+          "subject": "CS",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3700,
+          "subject": "CS",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3800,
+          "subject": "CS",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4400,
+          "subject": "CS",
+          "type": "COURSE",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 4500,
+              "subject": "CS",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 4501,
+              "subject": "CS",
+              "type": "COURSE",
+            },
+          ],
+          "type": "AND",
+        },
+      ],
+      "type": "AND",
+    },
+    "Computing and Social Issues": Object {
+      "name": "Computing and Social Issues",
+      "numCreditsMax": 4,
+      "numCreditsMin": 4,
+      "requirements": Array [
+        Object {
+          "classId": 3418,
+          "subject": "ANTH",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 5240,
+          "subject": "IA",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 2102,
+          "subject": "INSH",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 1145,
+          "subject": "PHIL",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 1280,
+          "subject": "SOCL",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3485,
+          "subject": "SOCL",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4528,
+          "subject": "SOCL",
+          "type": "COURSE",
+        },
+      ],
+      "type": "OR",
+    },
+    "Psychology": Object {
+      "name": "Psychology",
+      "requirements": Array [
+        Object {
+          "classId": 1101,
+          "subject": "PSYC",
+          "type": "COURSE",
+        },
+      ],
+      "type": "AND",
+    },
+    "Required Courses in Information Science": Object {
+      "name": "Required Courses in Information Science",
+      "requirements": Array [
+        Object {
+          "classId": 2000,
+          "subject": "IS",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3500,
+          "subject": "IS",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4300,
+          "subject": "IS",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4800,
+          "subject": "IS",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4900,
+          "subject": "IS",
+          "type": "COURSE",
+        },
+      ],
+      "type": "AND",
+    },
+    "Statistics": Object {
+      "name": "Statistics",
+      "requirements": Array [
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 2320,
+              "subject": "PSYC",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 2350,
+              "subject": "ECON",
+              "type": "COURSE",
+            },
+          ],
+          "type": "OR",
+        },
+      ],
+      "type": "AND",
+    },
+  },
+  "requirementGroups": Array [
+    "Computer Science Overview",
+    "Computer Science Fundamental Courses",
+    "Computer Science Required Courses",
+    "Required Courses in Information Science",
+    "Computing and Social Issues",
+    "Psychology",
+    "Calculus",
+    "Statistics",
+    "College Writing",
+    "Advanced Writing in the Disciplines",
+  ],
+  "totalCreditsRequired": 0,
+  "yearVersion": 2018,
+}
+`;
+
+exports[`ensure that catalog_scraper produces the expected output for supported majors. 3`] = `
+Object {
+  "isLanguageRequired": false,
+  "name": "Computer Science and Cognitive Psychology, BS",
+  "nupaths": Array [],
+  "requirementGroupMap": Object {
+    "Advanced Psychology": Object {
+      "name": "Advanced Psychology",
+      "requirements": Array [
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 3452,
+              "subject": "PSYC",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 3458,
+              "subject": "PSYC",
+              "type": "COURSE",
+            },
+          ],
+          "type": "OR",
+        },
+      ],
+      "type": "AND",
+    },
+    "Advanced Writing in the Disciplines": Object {
+      "name": "Advanced Writing in the Disciplines",
+      "requirements": Array [
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 3302,
+              "subject": "ENGW",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 3315,
+              "subject": "ENGW",
+              "type": "COURSE",
+            },
+          ],
+          "type": "OR",
+        },
+      ],
+      "type": "AND",
+    },
+    "Calculus": Object {
+      "name": "Calculus",
+      "requirements": Array [
+        Object {
+          "classId": 1341,
+          "subject": "MATH",
+          "type": "COURSE",
+        },
+      ],
+      "type": "AND",
+    },
+    "College Writing": Object {
+      "name": "College Writing",
+      "requirements": Array [
+        Object {
+          "classId": 1111,
+          "subject": "ENGW",
+          "type": "COURSE",
+        },
+      ],
+      "type": "AND",
+    },
+    "Computer Science Elective Courses": Object {
+      "name": "Computer Science Elective Courses",
+      "numCreditsMax": 12,
+      "numCreditsMin": 12,
+      "requirements": Object {
+        "creditsRequired": 12,
+        "ranges": Array [
+          Object {
+            "idRangeEnd": 9999,
+            "idRangeStart": 2500,
+            "subject": "CS",
+          },
+          Object {
+            "idRangeEnd": 9999,
+            "idRangeStart": 2000,
+            "subject": "IS",
+          },
+          Object {
+            "idRangeEnd": 9999,
+            "idRangeStart": 2000,
+            "subject": "DS",
+          },
+        ],
+        "type": "RANGE",
+      },
+      "type": "RANGE",
+    },
+    "Computer Science Fundamental Courses": Object {
+      "name": "Computer Science Fundamental Courses",
+      "requirements": Array [
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 1800,
+              "subject": "CS",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 1802,
+              "subject": "CS",
+              "type": "COURSE",
+            },
+          ],
+          "type": "AND",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 2500,
+              "subject": "CS",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 2501,
+              "subject": "CS",
+              "type": "COURSE",
+            },
+          ],
+          "type": "AND",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 2510,
+              "subject": "CS",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 2511,
+              "subject": "CS",
+              "type": "COURSE",
+            },
+          ],
+          "type": "AND",
+        },
+      ],
+      "type": "AND",
+    },
+    "Computer Science Overview": Object {
+      "name": "Computer Science Overview",
+      "requirements": Array [
+        Object {
+          "classId": 1200,
+          "subject": "CS",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 1210,
+          "subject": "CS",
+          "type": "COURSE",
+        },
+      ],
+      "type": "AND",
+    },
+    "Computer Science Required Courses": Object {
+      "name": "Computer Science Required Courses",
+      "requirements": Array [
+        Object {
+          "classId": 3000,
+          "subject": "CS",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3500,
+          "subject": "CS",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4100,
+          "subject": "CS",
+          "type": "COURSE",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 4500,
+              "subject": "CS",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 4501,
+              "subject": "CS",
+              "type": "COURSE",
+            },
+          ],
+          "type": "AND",
+        },
+        Object {
+          "classId": 4300,
+          "subject": "IS",
+          "type": "COURSE",
+        },
+      ],
+      "type": "AND",
+    },
+    "Computing and Social Issues": Object {
+      "name": "Computing and Social Issues",
+      "numCreditsMax": 4,
+      "numCreditsMin": 4,
+      "requirements": Array [
+        Object {
+          "classId": 3418,
+          "subject": "ANTH",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 5240,
+          "subject": "IA",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 2102,
+          "subject": "INSH",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 1145,
+          "subject": "PHIL",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 1280,
+          "subject": "SOCL",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3485,
+          "subject": "SOCL",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4528,
+          "subject": "SOCL",
+          "type": "COURSE",
+        },
+      ],
+      "type": "OR",
+    },
+    "Laboratory in Psychology": Object {
+      "name": "Laboratory in Psychology",
+      "numCreditsMax": 4,
+      "numCreditsMin": 4,
+      "requirements": Array [
+        Object {
+          "classId": 4610,
+          "subject": "PSYC",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4612,
+          "subject": "PSYC",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4622,
+          "subject": "PSYC",
+          "type": "COURSE",
+        },
+      ],
+      "type": "OR",
+    },
+    "Presentation Requirement": Object {
+      "name": "Presentation Requirement",
+      "requirements": Array [
+        Object {
+          "classId": 1170,
+          "subject": "THTR",
+          "type": "COURSE",
+        },
+      ],
+      "type": "AND",
+    },
+    "Psychology Electives": Object {
+      "name": "Psychology Electives",
+      "numCreditsMax": 8,
+      "numCreditsMin": 8,
+      "requirements": Array [
+        Object {
+          "classId": 3402,
+          "subject": "PSYC",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3404,
+          "subject": "PSYC",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3450,
+          "subject": "PSYC",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3451,
+          "subject": "PSYC",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3452,
+          "subject": "PSYC",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3458,
+          "subject": "PSYC",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4512,
+          "subject": "PSYC",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4520,
+          "subject": "PSYC",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4524,
+          "subject": "PSYC",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4610,
+          "subject": "PSYC",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4612,
+          "subject": "PSYC",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4622,
+          "subject": "PSYC",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4628,
+          "subject": "PSYC",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4658,
+          "subject": "PSYC",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4660,
+          "subject": "PSYC",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4668,
+          "subject": "PSYC",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4674,
+          "subject": "PSYC",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4676,
+          "subject": "PSYC",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4970,
+          "subject": "PSYC",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4971,
+          "subject": "PSYC",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4991,
+          "subject": "PSYC",
+          "type": "COURSE",
+        },
+      ],
+      "type": "OR",
+    },
+    "Required Courses": Object {
+      "name": "Required Courses",
+      "requirements": Array [
+        Object {
+          "classId": 1101,
+          "subject": "PSYC",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 2320,
+          "subject": "PSYC",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3464,
+          "subject": "PSYC",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3466,
+          "subject": "PSYC",
+          "type": "COURSE",
+        },
+      ],
+      "type": "AND",
+    },
+    "Seminar in Psychology": Object {
+      "name": "Seminar in Psychology",
+      "numCreditsMax": 4,
+      "numCreditsMin": 4,
+      "requirements": Array [
+        Object {
+          "classId": 4658,
+          "subject": "PSYC",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4660,
+          "subject": "PSYC",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4668,
+          "subject": "PSYC",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4674,
+          "subject": "PSYC",
+          "type": "COURSE",
+        },
+      ],
+      "type": "OR",
+    },
+  },
+  "requirementGroups": Array [
+    "Computer Science Overview",
+    "Computer Science Fundamental Courses",
+    "Computer Science Required Courses",
+    "Presentation Requirement",
+    "Computer Science Elective Courses",
+    "Required Courses",
+    "Advanced Psychology",
+    "Laboratory in Psychology",
+    "Seminar in Psychology",
+    "Psychology Electives",
+    "Calculus",
+    "Computing and Social Issues",
+    "College Writing",
+    "Advanced Writing in the Disciplines",
+  ],
+  "totalCreditsRequired": 0,
+  "yearVersion": 2018,
+}
+`;
+
+exports[`ensure that catalog_scraper produces the expected output for supported majors. 4`] = `
+Object {
+  "isLanguageRequired": false,
+  "name": "Information Science and Cognitive Psychology, BS",
+  "nupaths": Array [],
+  "requirementGroupMap": Object {
+    "Advanced Psychology": Object {
+      "name": "Advanced Psychology",
+      "requirements": Array [
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 3452,
+              "subject": "PSYC",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 3458,
+              "subject": "PSYC",
+              "type": "COURSE",
+            },
+          ],
+          "type": "OR",
+        },
+      ],
+      "type": "AND",
+    },
+    "Advanced Writing in the Disciplines": Object {
+      "name": "Advanced Writing in the Disciplines",
+      "requirements": Array [
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 3302,
+              "subject": "ENGW",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 3315,
+              "subject": "ENGW",
+              "type": "COURSE",
+            },
+          ],
+          "type": "OR",
+        },
+      ],
+      "type": "AND",
+    },
+    "Calculus": Object {
+      "name": "Calculus",
+      "requirements": Array [
+        Object {
+          "classId": 1341,
+          "subject": "MATH",
+          "type": "COURSE",
+        },
+      ],
+      "type": "AND",
+    },
+    "College Writing": Object {
+      "name": "College Writing",
+      "requirements": Array [
+        Object {
+          "classId": 1111,
+          "subject": "ENGW",
+          "type": "COURSE",
+        },
+      ],
+      "type": "AND",
+    },
+    "Computer Science Fundamental Courses": Object {
+      "name": "Computer Science Fundamental Courses",
+      "requirements": Array [
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 1800,
+              "subject": "CS",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 1802,
+              "subject": "CS",
+              "type": "COURSE",
+            },
+          ],
+          "type": "AND",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 2500,
+              "subject": "CS",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 2501,
+              "subject": "CS",
+              "type": "COURSE",
+            },
+          ],
+          "type": "AND",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 2510,
+              "subject": "CS",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 2511,
+              "subject": "CS",
+              "type": "COURSE",
+            },
+          ],
+          "type": "AND",
+        },
+      ],
+      "type": "AND",
+    },
+    "Computer Science Overview": Object {
+      "name": "Computer Science Overview",
+      "requirements": Array [
+        Object {
+          "classId": 1200,
+          "subject": "CS",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 1210,
+          "subject": "CS",
+          "type": "COURSE",
+        },
+      ],
+      "type": "AND",
+    },
+    "Computer Science Required Courses": Object {
+      "name": "Computer Science Required Courses",
+      "requirements": Array [
+        Object {
+          "classId": 3000,
+          "subject": "CS",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3500,
+          "subject": "CS",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4100,
+          "subject": "CS",
+          "type": "COURSE",
+        },
+      ],
+      "type": "AND",
+    },
+    "Computing and Social Issues": Object {
+      "name": "Computing and Social Issues",
+      "numCreditsMax": 4,
+      "numCreditsMin": 4,
+      "requirements": Array [
+        Object {
+          "classId": 3418,
+          "subject": "ANTH",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 5240,
+          "subject": "IA",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 2102,
+          "subject": "INSH",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 1145,
+          "subject": "PHIL",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 1280,
+          "subject": "SOCL",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3485,
+          "subject": "SOCL",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4528,
+          "subject": "SOCL",
+          "type": "COURSE",
+        },
+      ],
+      "type": "OR",
+    },
+    "Information Science Required Courses": Object {
+      "name": "Information Science Required Courses",
+      "requirements": Array [
+        Object {
+          "classId": 2000,
+          "subject": "IS",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3500,
+          "subject": "IS",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4300,
+          "subject": "IS",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4800,
+          "subject": "IS",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4900,
+          "subject": "IS",
+          "type": "COURSE",
+        },
+      ],
+      "type": "AND",
+    },
+    "Laboratory in Psychology": Object {
+      "name": "Laboratory in Psychology",
+      "numCreditsMax": 4,
+      "numCreditsMin": 4,
+      "requirements": Array [
+        Object {
+          "classId": 4610,
+          "subject": "PSYC",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4612,
+          "subject": "PSYC",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4622,
+          "subject": "PSYC",
+          "type": "COURSE",
+        },
+      ],
+      "type": "OR",
+    },
+    "Psychology Electives": Object {
+      "name": "Psychology Electives",
+      "numCreditsMax": 8,
+      "numCreditsMin": 8,
+      "requirements": Array [
+        Object {
+          "classId": 3402,
+          "subject": "PSYC",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3404,
+          "subject": "PSYC",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3450,
+          "subject": "PSYC",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3451,
+          "subject": "PSYC",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3452,
+          "subject": "PSYC",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3458,
+          "subject": "PSYC",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4512,
+          "subject": "PSYC",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4520,
+          "subject": "PSYC",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4524,
+          "subject": "PSYC",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4610,
+          "subject": "PSYC",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4612,
+          "subject": "PSYC",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4622,
+          "subject": "PSYC",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4628,
+          "subject": "PSYC",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4658,
+          "subject": "PSYC",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4660,
+          "subject": "PSYC",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4668,
+          "subject": "PSYC",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4674,
+          "subject": "PSYC",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4676,
+          "subject": "PSYC",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4970,
+          "subject": "PSYC",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4971,
+          "subject": "PSYC",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4991,
+          "subject": "PSYC",
+          "type": "COURSE",
+        },
+      ],
+      "type": "OR",
+    },
+    "Required Courses": Object {
+      "name": "Required Courses",
+      "requirements": Array [
+        Object {
+          "classId": 1101,
+          "subject": "PSYC",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 2320,
+          "subject": "PSYC",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3464,
+          "subject": "PSYC",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3466,
+          "subject": "PSYC",
+          "type": "COURSE",
+        },
+      ],
+      "type": "AND",
+    },
+    "Seminar in Psychology": Object {
+      "name": "Seminar in Psychology",
+      "numCreditsMax": 4,
+      "numCreditsMin": 4,
+      "requirements": Array [
+        Object {
+          "classId": 4658,
+          "subject": "PSYC",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4660,
+          "subject": "PSYC",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4668,
+          "subject": "PSYC",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4674,
+          "subject": "PSYC",
+          "type": "COURSE",
+        },
+      ],
+      "type": "OR",
+    },
+  },
+  "requirementGroups": Array [
+    "Computer Science Overview",
+    "Computer Science Fundamental Courses",
+    "Computer Science Required Courses",
+    "Information Science Required Courses",
+    "Required Courses",
+    "Advanced Psychology",
+    "Laboratory in Psychology",
+    "Seminar in Psychology",
+    "Psychology Electives",
+    "Calculus",
+    "Computing and Social Issues",
+    "College Writing",
+    "Advanced Writing in the Disciplines",
+  ],
+  "totalCreditsRequired": 0,
+  "yearVersion": 2018,
+}
+`;
