@@ -16,20 +16,32 @@ export const ORTagMap: { [key: string]: number } = {
   "Complete three of the following:": 12,
   "Complete two courses for one of the following science categories:": 10,
   "Complete five courses from the following:": 20,
+  "Complete one course from the following:": 4,
+  "Complete two courses from the following lists:": 8,
+  "Students are required to complete one of the following foci (two courses total):": 8,
+  "Complete one of the following courses. This course may also be used to fulfill an additional English requirement below:": 4,
+  "Complete at least two of the following:": 8,
+  "Complete four of the following:": 16,
+  "Complete six of the following:": 24,
   // TODO: Data-Science-Related Electives: "Complete six courses from categories A and B, at least three of which must be from B"
 };
 
 // Dictionary for RANGESection keywords, maps from keyword/phrase -> number of credits
 export const RANGETagMap: { [key: string]: number } = {
-  "Complete 8 credits of CS, IS or DS classes that are not already required. Choose courses within the following ranges:": 8,
   "Complete 4 credits of CS, IS, or DS classes that are not already required. Choose courses within the following ranges:": 4,
+  "Complete 4 credits of CS, IS, or DS courses that are not already required. Choose courses within the following range:": 4,
+  "Complete 8 credits of CS, IS or DS classes that are not already required. Choose courses within the following ranges:": 8,
   "Complete 8 credits of CS, IS or, DS classes that are not already required. Choose courses within the following ranges:": 8,
+  "Complete 8 credits of CS, IS, or DS classes that are not already required. Choose courses within the following ranges:": 8,
   "Complete eight credits of CS, IS or, DS classes that are not already required. Choose courses within the following ranges:": 8,
+  "Complete eight credits of CS, IS or DS classes that are not already required. Choose courses within the following ranges:": 8,
   "Complete 12 credits of CS, IS or, DS classes that are not already required. Choose courses within the following ranges:": 12,
   "Complete 12 credits of CS, IS, or DS classes that are not already required. Choose courses within the following ranges:": 12,
   "Complete 12 credits of upper-division CS, IS, and DS courses that are not already required. Choose courses within the following ranges:": 12,
   "Complete twelve credits of CS, IS or DS classes that are not already required. Choose courses within the following ranges:": 12,
+  "Complete 16 credits of CS, IS, or DS classes that are not already required. Choose courses within the following ranges:": 16,
 
+  "Complete one of the following, not taken to fulfill previous requirements:": 4,
   "Complete one from the following:": 4,
   "Complete four courses in the following range:": 16,
   "Complete three courses in the following range:": 12,
@@ -138,9 +150,10 @@ module.exports = catalogToMajor;
  * testing. move to test file.
  */
 catalogToMajor(
-  "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-communication-studies-bs/#programrequirementstext"
+  "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/engineering/electrical-computer/computer-engineering-computer-science-bscompe/#programrequirementstext"
 ).then((scrapedMajor: Major) => {
   //uncomment following lines to log output.
+
   console.log("--------------------Parsed major object--------------------");
   console.log(JSON.stringify(scrapedMajor));
 });
