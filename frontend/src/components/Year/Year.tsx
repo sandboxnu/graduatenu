@@ -1,6 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
-import { YearTop, YearBottom } from ".";
+import { YearTop } from ".";
 import { SemesterBlock } from "../";
 import { DNDSchedule } from "../../models/types";
 import { SEMESTER_MIN_HEIGHT } from "../../constants";
@@ -21,7 +21,7 @@ export class Year extends React.Component<IYearProps> {
     const { index, schedule } = this.props;
     const year = schedule.years[index];
     return (
-      <div style={{ marginBottom: 12 }}>
+      <div style={{ width: "100%", marginBottom: 12 }}>
         <YearTop year={year} />
         <YearBody>
           <SemesterBlock semester={schedule.yearMap[year].fall} />
@@ -29,7 +29,6 @@ export class Year extends React.Component<IYearProps> {
           <SemesterBlock semester={schedule.yearMap[year].summer1} />
           <SemesterBlock semester={schedule.yearMap[year].summer2} />
         </YearBody>
-        <YearBottom schedule={schedule} year={year} />
       </div>
     );
   }

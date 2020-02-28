@@ -1,6 +1,5 @@
 import * as React from "react";
 import styled from "styled-components";
-import { CLASS_BLOCK_WIDTH, GraduateGrey } from "../../constants";
 import { ThreeDots } from "../common";
 import { Menu, MenuItem } from "@material-ui/core";
 import { SeasonWord, Status } from "../../models/types";
@@ -12,13 +11,18 @@ import { AppState } from "../../state/reducers/state";
 const Container = styled.div`
   display: flex;
   flex-direction: row;
-  height: 100;
-  background-color: ${GraduateGrey};
+  height: 36px;
+  background-color: #eb5757;
+  border: 1px solid #eb5757;
+  box-sizing: border-box;
   margin-top: 16px;
 `;
 
 const SemesterText = styled.p`
   text-align: left;
+  font-weight: 500;
+  font-size: 16px;
+  color: white;
 `;
 
 interface YearTopProps {
@@ -118,13 +122,13 @@ class YearTopComponent extends React.Component<Props, YearTopState> {
 }
 
 const textContainerStyle: React.CSSProperties = {
-  width: CLASS_BLOCK_WIDTH,
   marginLeft: 6,
   marginRight: 0,
   display: "flex",
   flexDirection: "row",
   justifyContent: "space-between",
   alignItems: "center",
+  flex: 1,
 };
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
