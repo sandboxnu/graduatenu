@@ -22,8 +22,6 @@ import {
 } from "../utils";
 import { TextField, Button } from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
-import { CLASS_BLOCK_WIDTH } from "../constants";
-import { DropDownModal } from "../components";
 import { Sidebar } from "../components/Sidebar";
 import { withToast } from "./toastHook";
 import { AppearanceTypes } from "react-toast-notifications";
@@ -53,17 +51,13 @@ const OuterContainer = styled.div`
   justify-content: space-between;
 `;
 
-const CompletedCoursesWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  width: ${CLASS_BLOCK_WIDTH * 4 + 25}px;
-  margin-bottom: 12px;
+const SidebarContainer = styled.div`
+  flex: 1;
 `;
 
 const Container = styled.div`
   display: flex;
-  flex: 1;
+  flex: 5;
   flex-direction: column;
   justify-content: start;
   align-items: start;
@@ -75,10 +69,6 @@ const DropDownWrapper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-`;
-
-const CheckboxWrapper = styled.div`
-  margin-left: 18px;
 `;
 
 interface ToastHomeProps {
@@ -340,7 +330,10 @@ class HomeComponent extends React.Component<Props> {
           onDragUpdate={this.onDragUpdate}
         >
           <Container>
-            <div /* onClick={() => console.log(this.state)} */>
+            <div>
+              <div>
+                <h1>GraduateNU</h1>
+              </div>
               <h2>Plan Of Study</h2>
             </div>
             <DropDownWrapper>
@@ -350,14 +343,12 @@ class HomeComponent extends React.Component<Props> {
                 ? this.renderSetClassesButton()
                 : !!major && !!planStr && this.renderClearScheduleButton()}
             </DropDownWrapper>
-            <CompletedCoursesWrapper>
-              <h3>Completed Courses</h3>
-              <DropDownModal schedule={schedule} />
-            </CompletedCoursesWrapper>
             {this.renderYears()}
           </Container>
         </DragDropContext>
-        <Sidebar />
+        <SidebarContainer>
+          <Sidebar />
+        </SidebarContainer>
       </OuterContainer>
     );
   }

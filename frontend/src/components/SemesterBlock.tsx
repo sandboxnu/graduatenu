@@ -1,6 +1,7 @@
 import React from "react";
 import { Droppable } from "react-beautiful-dnd";
 import { ClassBlock } from "./ClassBlocks";
+import { AddBlock } from "./ClassBlocks/AddBlock";
 import { AddClass, ClassList, EmptyBlock } from ".";
 import {
   DNDScheduleTerm,
@@ -9,7 +10,6 @@ import {
   DNDScheduleCourse,
   IWarning,
 } from "../models/types";
-import { AddButton } from "./Year";
 import styled from "styled-components";
 import { AppState } from "../state/reducers/state";
 import { connect } from "react-redux";
@@ -23,20 +23,28 @@ import {
 import { Snackbar, Button, IconButton } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 import { Tooltip } from "@material-ui/core";
+import { SEMESTER_MIN_HEIGHT } from "../constants";
+
+const OutsideContainer = styled.div`
+  flex: 1;
+  width: 200px;
+`;
 
 const Container = styled.div<any>`
-  border: 1px solid black;
+  border: 1px solid rgba(235, 87, 87, 0.5);
+  box-sizing: border-box;
   position: relative;
   height: 100%;
   background-color: ${props =>
     props.warning ? "rgba(216, 86, 86, 0.9)" : "rgb(255, 255, 255, 0)"};
 `;
 
-const AddButtonContainer = styled.div`
-  position: absolute;
-  right: 6px;
-  bottom: 6px;
-  z-index: 1;
+const ClassListWrapper = styled.div`
+  display: flex;
+  min-height: ${SEMESTER_MIN_HEIGHT}px;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
 `;
 
 const NoClassBlock = styled.div`
@@ -190,20 +198,20 @@ class SemesterBlockComponent extends React.Component<
   renderContainer() {
     return (
       <Container warning={this.props.warnings.length > 0}>
-        <Droppable droppableId={this.props.semester.termId.toString()}>
-          {provided => (
-            <ClassList
-              innerRef={provided.innerRef as any}
-              {...provided.droppableProps}
-            >
-              {this.renderBody()}
-              {provided.placeholder}
-            </ClassList>
-          )}
-        </Droppable>
-        <AddButtonContainer>
-          <AddButton onClick={this.showModal.bind(this)}></AddButton>
-        </AddButtonContainer>
+        <ClassListWrapper>
+          <Droppable droppableId={this.props.semester.termId.toString()}>
+            {provided => (
+              <ClassList
+                innerRef={provided.innerRef as any}
+                {...provided.droppableProps}
+              >
+                {this.renderBody()}
+                {provided.placeholder}
+                <AddBlock onClick={this.showModal.bind(this)} />
+              </ClassList>
+            )}
+          </Droppable>
+        </ClassListWrapper>
       </Container>
     );
   }
@@ -211,7 +219,7 @@ class SemesterBlockComponent extends React.Component<
   render() {
     const { snackbarOpen, deletedClass, modalVisible } = this.state;
     return (
-      <div>
+      <OutsideContainer>
         <Snackbar
           anchorOrigin={{
             vertical: "bottom",
@@ -269,7 +277,7 @@ class SemesterBlockComponent extends React.Component<
         ) : (
           this.renderContainer()
         )}
-      </div>
+      </OutsideContainer>
     );
   }
 }
