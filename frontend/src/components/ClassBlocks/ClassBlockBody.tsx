@@ -33,13 +33,13 @@ const Subtitle = styled.div`
   overflow: hidden;
 `;
 
-interface LargeClassBlockProps {
+interface ClassBlockBodyProps {
   course: DNDScheduleCourse;
   hovering: boolean;
   onDelete: () => void;
 }
 
-export const LargeClassBlock: React.FC<LargeClassBlockProps> = ({
+export const ClassBlockBody: React.FC<ClassBlockBodyProps> = ({
   course,
   hovering,
   onDelete,
