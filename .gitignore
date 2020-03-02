@@ -62,14 +62,15 @@ typings/
 
 # degree audits for testing.
 *.html
-!test/mock_audits/*
+!scrapers/test/mock_audits/*
 
 # parsed degree jsons for testing.
 *.json
-!test/mock_parsed_audits/*
+!scrapers/test/mock_parsed_audits/*
+!scrapers/test/mock_majors/*
 
 # schedules for testing
-!test/mock_schedules/*
+!scrapers/test/mock_schedules/*
 
 # searchNEU classmap jsons.
 !maps/*
