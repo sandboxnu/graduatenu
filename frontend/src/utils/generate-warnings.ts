@@ -24,7 +24,31 @@ import {
   ORSection,
   RANGESection,
   WarningContainer,
+  SeasonEnum,
+  Season,
 } from "../models/types";
+
+/*
+CreditRange interface to track the min and max credits for a particular season. 
+seasonMax = a number representing the max numebr of credits you can take without over-loading. 
+seasonMin = a number representing the min number of credits you can take without under-loading.  
+*/
+interface CreditRange {
+  seasonMax: number;
+  seasonMin: number;
+}
+
+/*
+seasonCreditTracker is an object of string --> creditRange object. 
+This object is meant to encode max and min credit per season. 
+*/
+let seasonCreditTracker: { [key: string]: CreditRange } = {
+  SM: { seasonMax: 18, seasonMin: 12 },
+  S1: { seasonMax: 9, seasonMin: 4 },
+  S2: { seasonMax: 9, seasonMin: 4 },
+  FL: { seasonMax: 18, seasonMin: 12 },
+  SP: { seasonMax: 18, seasonMin: 12 },
+};
 
 interface CreditHourTracker {
   hoursCompleted: number;
@@ -35,6 +59,15 @@ interface HashableCourse {
   classId: string;
   credits: number;
 }
+
+interface CourseInfo {
+  subject: string;
+  classId: string;
+  terms: number[];
+}
+
+// CourseCodes for all filler objects in example plans of study
+const all_fillers = ["XXXX9999"];
 
 /**
  * This module contains functions that generate warnings based off a schedule input.
@@ -51,16 +84,46 @@ interface HashableCourse {
  */
 export function produceWarnings(schedule: Schedule): WarningContainer {
   // holds courses that are taken.
-  const taken: Set<string> = new Set();
+  const taken: Map<string, CourseInfo> = new Map<string, CourseInfo>();
   // custom tracker
   const tracker: CourseTakenTracker = {
     contains: (courseCode: string) => taken.has(courseCode),
-    addCourse: (toAdd: string) => {
-      taken.add(toAdd);
+    addCourse: (toAdd: ScheduleCourse | INEUCourse, termId: number) => {
+      const code = courseCode(toAdd);
+      const allTerms = taken.get(code);
+      if (allTerms != undefined) {
+        allTerms.terms.push(termId);
+      } else {
+        var courseI: CourseInfo = {
+          subject: toAdd.subject,
+          classId: toAdd.classId.toString(),
+          terms: [termId],
+        };
+        taken.set(code, courseI);
+      }
     },
-    addCourses: (toAdd: string[]) => {
+    addCourses: (toAdd: ScheduleCourse[] | INEUCourse[], termId: number) => {
       for (const course of toAdd) {
-        taken.add(course);
+        const code = courseCode(course);
+        const allTerms = taken.get(code);
+        if (allTerms != undefined) {
+          allTerms.terms.push(termId);
+        } else {
+          var courseI: CourseInfo = {
+            subject: course.subject,
+            classId: course.classId.toString(),
+            terms: [termId],
+          };
+          taken.set(code, courseI);
+        }
+      }
+    },
+    getTermIds: (courseCode: string) => {
+      const getVal: CourseInfo | undefined = taken.get(courseCode);
+      if (getVal != undefined) {
+        return getVal.terms;
+      } else {
+        return [];
       }
     },
   };
@@ -96,6 +159,22 @@ export function produceWarnings(schedule: Schedule): WarningContainer {
       computeSeason(year.summer2);
     }
   }
+
+  // Iterate through each CourseInfo in the taken tracker and
+  // warn each course that has more than 1 term listed for taking the course
+  taken.forEach((courseIn: CourseInfo, code: string) => {
+    const toWarn = tracker.getTermIds(code);
+    if (toWarn.length > 1 && !all_fillers.includes(code)) {
+      toWarn.forEach((termVal: number) => {
+        courseSpecific.push({
+          subject: courseIn.subject,
+          classId: courseIn.classId,
+          message: `${code}: appears in your schedule multiple times`,
+          termId: termVal,
+        });
+      });
+    }
+  });
 
   // return the warnings.
   return {
@@ -579,7 +658,7 @@ function addCoursesToTracker(
   tracker: CourseTakenTracker
 ): void {
   for (const course of toAdd.classes) {
-    tracker.addCourse(courseCode(course));
+    tracker.addCourse(course, toAdd.termId);
   }
 }
 
@@ -657,7 +736,7 @@ function produceNormalWarnings(
 ): IWarning[] {
   let warnings: IWarning[] = [];
   warnings = warnings.concat(
-    checkSemesterCredits(term.classes, tracker, term.termId)
+    checkSemesterCredits(term.classes, tracker, term.termId, term.season)
   );
   warnings = warnings.concat(
     checkSemesterOverload(term.classes, tracker, term.termId)
@@ -665,6 +744,11 @@ function produceNormalWarnings(
   return warnings;
 }
 
+/**
+ * Produces all course specific warnings for a given set of courses
+ * @param term the classes to check
+ * @param tracker the course taken traker
+ */
 function produceSpecificCourseWarnings(
   term: ScheduleTerm,
   tracker: CourseTakenTracker
@@ -681,8 +765,9 @@ function produceSpecificCourseWarnings(
 
 /**
  * Checks that course prerequisites are met for each semester.
- * @param schedule The schedule to check.
+ * @param toCheck The schedule to check.
  * @param tracker tracker for courses taken
+ * @param termId the id for this term for the warning
  */
 function checkPrerequisites(
   toCheck: ScheduleCourse[],
@@ -723,22 +808,35 @@ function checkCorequisites(
   termId: number
 ): CourseWarning[] {
   // construct the tracker.
-  const coreqSet: Set<string> = new Set();
+  const coreqMap: Map<string, number> = new Map<string, number>();
   const coreqTracker: CourseTakenTracker = {
-    contains: (code: string) => coreqSet.has(code),
-    addCourses: function(courses: string[]): void {
+    contains: (code: string) => coreqMap.has(code),
+    addCourses: function(
+      courses: ScheduleCourse[] | INEUCourse[],
+      termId: number
+    ): void {
       for (const course of courses) {
-        coreqSet.add(course);
+        const code = courseCode(course);
+        coreqMap.set(code, termId);
       }
     },
-    addCourse: function(course: string): void {
-      coreqSet.add(course);
+    addCourse: function(
+      course: ScheduleCourse | INEUCourse,
+      termId: number
+    ): void {
+      const code = courseCode(course);
+      coreqMap.set(code, termId);
+    },
+    getTermIds: (courseCode: string) => {
+      return Array.from(coreqMap.entries())
+        .filter((e: [string, number]) => e[0] == courseCode)
+        .map((e: [string, number]) => e[1]);
     },
   };
 
   // add warnings.
   for (const course of toCheck) {
-    coreqTracker.addCourse(courseCode(course));
+    coreqTracker.addCourse(course, termId);
   }
 
   // the list of warnings.
@@ -772,25 +870,37 @@ function checkCorequisites(
 function checkSemesterCredits(
   toCheck: ScheduleCourse[],
   tracker: CourseTakenTracker,
-  termId: number
+  termId: number,
+  season: Season | SeasonEnum
 ): IWarning[] {
   let maxCredits = 0;
   let minCredits = 0;
   for (const course of toCheck) {
     maxCredits += course.numCreditsMax;
-    minCredits += course.numCreditsMin;
+    minCredits += course.numCreditsMin; //use this one!
   }
 
+  //minSeasonCredits is the minimum number of credits to not be under enrolled for the given season.
+  let minSeasonCredits = seasonCreditTracker[season].seasonMin;
+
+  //maxSeasonCredits is the maximum number of credits to not be over enrolled for the given season.
+  let maxSeasonCredits = seasonCreditTracker[season].seasonMax;
+
+  //defining a list of IWarnings to return later.
   const warnings: IWarning[] = [];
-  if (maxCredits >= 19) {
+
+  //if currently planning to few credits for the given season (needs at least one credit to throw warning).
+  if (minSeasonCredits > minCredits && minCredits > 0) {
     warnings.push({
-      message: `Enrolled in a max of ${maxCredits} credits. May be over-enrolled.`,
+      message: `Currently enrolled in ${minCredits} credits(s). May be under-enrolled. Minimum credits for this term ${minSeasonCredits}.`,
       termId: termId,
     });
   }
-  if (minCredits >= 19) {
+
+  //if currently planning to overload credits  for this season. Throws warning.
+  if (minCredits > maxSeasonCredits) {
     warnings.push({
-      message: `Enrolled in a min of ${minCredits} credits. May be over-enrolled.`,
+      message: `Currently enrolled in ${minCredits} credit(s). May be over-enrolled. Maximum credits for this term ${maxSeasonCredits}.`,
       termId: termId,
     });
   }

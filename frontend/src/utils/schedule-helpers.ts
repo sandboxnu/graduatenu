@@ -75,7 +75,7 @@ export const convertToDNDSchedule = (
   schedule: Schedule,
   counter: number
 ): [DNDSchedule, number] => {
-  const newSchedule = schedule as DNDSchedule;
+  const newSchedule = JSON.parse(JSON.stringify(schedule)) as DNDSchedule;
   for (const year of Object.keys(schedule.yearMap)) {
     var result = convertToDNDCourses(
       newSchedule.yearMap[year as any].fall.classes as ScheduleCourse[],
@@ -125,4 +125,19 @@ export const convertToDNDCourses = (
 
 export function isCoopOrVacation(currSemester: DNDScheduleTerm): boolean {
   return currSemester.status.includes("HOVER");
+}
+
+export function scheduleHasClasses(schedule: Schedule): boolean {
+  for (const y of schedule.years) {
+    const year = schedule.yearMap[y];
+    if (
+      year.fall.classes.length !== 0 ||
+      year.spring.classes.length !== 0 ||
+      year.summer1.classes.length !== 0 ||
+      year.summer2.classes.length !== 0
+    ) {
+      return true;
+    }
+  }
+  return false;
 }

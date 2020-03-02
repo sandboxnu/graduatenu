@@ -54,6 +54,11 @@ export const setScheduleAction = createAction(
   (schedule: Schedule) => ({ schedule })
 )();
 
+export const setCoopCycle = createAction(
+  "schedule/SET_COOP_CYCLE",
+  (schedule?: Schedule) => ({ schedule })
+)();
+
 export const setDNDScheduleAction = createAction(
   "schedule/SET_DND_SCHEDULE",
   (schedule: DNDSchedule) => ({ schedule })

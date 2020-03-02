@@ -1,7 +1,7 @@
 import React from "react";
 import { Droppable } from "react-beautiful-dnd";
 import { ClassBlock } from "./ClassBlocks";
-import { AddClassModal, ClassList, EmptyBlock } from ".";
+import { AddClass, ClassList, EmptyBlock } from ".";
 import {
   DNDScheduleTerm,
   ScheduleCourse,
@@ -33,10 +33,10 @@ const Container = styled.div<any>`
 `;
 
 const AddButtonContainer = styled.div`
-	position: absolute;
-	right: 6px
-	bottom: 6px
-	z-index: 1;
+  position: absolute;
+  right: 6px;
+  bottom: 6px;
+  z-index: 1;
 `;
 
 const NoClassBlock = styled.div`
@@ -180,8 +180,8 @@ class SemesterBlockComponent extends React.Component<
   renderTooltip() {
     return (
       <div style={{ display: "flex", flexDirection: "column" }}>
-        {this.props.warnings.map(w => {
-          return <span>{w.message}</span>;
+        {this.props.warnings.map((w, index) => {
+          return <span key={index}>{w.message}</span>;
         })}
       </div>
     );
@@ -255,13 +255,13 @@ class SemesterBlockComponent extends React.Component<
           ]}
         />
 
-        <AddClassModal
+        <AddClass
           visible={modalVisible}
           handleClose={this.hideModal.bind(this)}
           handleSubmit={(courses: ScheduleCourse[]) =>
             this.props.handleAddClasses(courses, this.props.semester)
           }
-        ></AddClassModal>
+        ></AddClass>
         {this.props.warnings.length > 0 ? (
           <Tooltip title={this.renderTooltip()} placement="top" arrow>
             {this.renderContainer()}

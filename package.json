@@ -1,5 +1,10 @@
 {
+  "name": "GraduateNU",
   "private": true,
+  "engines": {
+    "node": ">= 12.x"
+  },
+  "homepage": "https://graduatenu.com",
   "workspaces": [
     "frontend",
     "backend"
@@ -28,5 +33,6 @@
     "hooks": {
       "pre-commit": "pretty-quick --staged"
     }
-  }
+  },
+  "dependencies": {}
 }

@@ -20,6 +20,7 @@ import {
   setCompletedCourses,
   setCompletedCoursesFromMap,
   undoRemoveClassAction,
+  setCoopCycle,
 } from "../actions/scheduleActions";
 import {
   convertTermIdToSeason,
@@ -135,7 +136,26 @@ export const scheduleReducer = (
         return draft;
       }
       case getType(setScheduleAction): {
+        const schedule = JSON.parse(JSON.stringify(action.payload.schedule)); /// deep copy of schedule, because schedule is modified
+        const [newSchedule, newCounter] = convertToDNDSchedule(
+          JSON.parse(JSON.stringify(schedule)),
+          draft.present.currentClassCounter
+        );
+        draft.present.schedule = newSchedule;
+        draft.present.currentClassCounter = newCounter;
+
+        const container = produceWarnings(schedule);
+
+        draft.present.warnings = container.normalWarnings;
+        draft.present.courseWarnings = container.courseWarnings;
+
+        return draft;
+      }
+      case getType(setCoopCycle): {
         const { schedule } = action.payload;
+        if (!schedule) {
+          return draft;
+        }
         const [newSchedule, newCounter] = convertToDNDSchedule(
           schedule,
           draft.present.currentClassCounter
@@ -143,12 +163,25 @@ export const scheduleReducer = (
         draft.present.schedule = newSchedule;
         draft.present.currentClassCounter = newCounter;
 
-        const container = produceWarnings(
-          JSON.parse(JSON.stringify(action.payload.schedule)) // deep copy of schedule, because schedule is modified
+        // remove all classes
+        const yearMapCopy = JSON.parse(
+          JSON.stringify(draft.present.schedule.yearMap)
         );
+        for (const y of draft.present.schedule.years) {
+          const year = JSON.parse(
+            JSON.stringify(draft.present.schedule.yearMap[y])
+          );
+          year.fall.classes = [];
+          year.spring.classes = [];
+          year.summer1.classes = [];
+          year.summer2.classes = [];
+          yearMapCopy[y] = year;
+        }
+        draft.present.schedule.yearMap = yearMapCopy;
 
-        draft.present.warnings = container.normalWarnings;
-        draft.present.courseWarnings = container.courseWarnings;
+        // clear all warnings
+        draft.present.warnings = [];
+        draft.present.courseWarnings = [];
 
         return draft;
       }

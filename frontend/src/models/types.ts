@@ -26,7 +26,7 @@ export enum SeasonEnum {
   SP = "SP",
   S1 = "S1",
   S2 = "S2",
-  SF = "SF",
+  SM = "SM",
 }
 export type Season = keyof typeof SeasonEnum;
 export type SeasonWord = "fall" | "spring" | "summer1" | "summer2";
@@ -340,8 +340,9 @@ export interface IRequirementGroupWarning {
  */
 export interface CourseTakenTracker {
   contains: (input: string) => boolean;
-  addCourses: (toAdd: string[]) => void;
-  addCourse: (toAdd: string) => void;
+  addCourses: (toAdd: ScheduleCourse[] | INEUCourse[], termId: number) => void;
+  addCourse: (toAdd: ScheduleCourse | INEUCourse, termId: number) => void;
+  getTermIds: (course: string) => number[];
 }
 
 export interface IUserData {

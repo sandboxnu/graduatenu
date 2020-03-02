@@ -1,9 +1,19 @@
 import React from "react";
 import styled from "styled-components";
-import { ScheduleCourse } from "../models/types";
+import {
+  ScheduleCourse,
+  DNDSchedule,
+  DNDScheduleTerm,
+  DNDScheduleCourse,
+} from "../models/types";
 import { XButton } from "./common";
 import { fetchCourse } from "../api";
 import { Modal, CircularProgress } from "@material-ui/core";
+import { AppState } from "../state/reducers/state";
+import { getScheduleFromState } from "../state";
+import { connect } from "react-redux";
+import { withRouter, RouteComponentProps } from "react-router-dom";
+import { withToast } from "../home/toastHook";
 
 const InnerSection = styled.section`
   position: fixed;
@@ -78,6 +88,7 @@ interface AddClassModalProps {
   handleClose: () => void;
   handleSubmit: (courses: ScheduleCourse[]) => void;
   visible: boolean;
+  schedule: DNDSchedule;
 }
 
 interface AddClassModalState {
@@ -123,11 +134,18 @@ export class AddClassModal extends React.Component<
       formClassId
     );
 
+    // Make a function to recur down the schedule and determing if courseToAdd is in it
     if (courseToAdd == null) {
       this.setState({
         isLoading: false,
         errorText:
           "Could not find " + formSubject + formClassId + " in course catalog",
+      });
+    } else if (this.isCourseInSchedule(courseToAdd, this.props.schedule)) {
+      this.setState({
+        isLoading: false,
+        queuedCourses: [...queuedCourses, courseToAdd],
+        errorText: courseToAdd.name + " already exists in your schedule",
       });
     } else {
       this.setState({
@@ -136,6 +154,45 @@ export class AddClassModal extends React.Component<
         errorText: undefined,
       });
     }
+  }
+
+  /**
+   *  Determines if this course is in the given schedule
+   * @param courseToAdd the course that is being checked
+   * @param schedule the schedule being checked
+   * @returns whether or not this course is in the schedule
+   */
+  isCourseInSchedule(courseToAdd: ScheduleCourse, schedule: DNDSchedule) {
+    for (let year of schedule.years) {
+      if (
+        this.isCourseInTerm(courseToAdd, schedule.yearMap[year].spring) ||
+        this.isCourseInTerm(courseToAdd, schedule.yearMap[year].fall) ||
+        this.isCourseInTerm(courseToAdd, schedule.yearMap[year].summer1) ||
+        this.isCourseInTerm(courseToAdd, schedule.yearMap[year].summer2)
+      ) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  /**
+   *  Determines if this course is in the given term
+   * @param courseToAdd the course that is being checked
+   * @param term the term being checked
+   * @returns whether or not this course is in the term
+   */
+  isCourseInTerm(courseToAdd: ScheduleCourse, term: DNDScheduleTerm) {
+    for (let course of term.classes) {
+      // courseToAdd's classId is an int, so we're casting in order to compare accurately
+      if (
+        String(courseToAdd.classId) === String(course.classId) &&
+        courseToAdd.subject === course.subject
+      ) {
+        return true;
+      }
+    }
+    return false;
   }
 
   handleSubmit() {
@@ -243,3 +300,11 @@ export class AddClassModal extends React.Component<
     );
   }
 }
+
+const mapStateToProps = (state: AppState) => ({
+  schedule: getScheduleFromState(state),
+});
+
+export const AddClass = connect(mapStateToProps)(
+  withRouter(withToast(AddClassModal))
+);

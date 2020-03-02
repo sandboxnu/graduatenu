@@ -1539,12 +1539,7 @@ Object {
             "classId": "4501",
             "coreqs": Object {
               "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "4500",
-                  "subject": "CS",
-                },
-              ],
+              "values": Array [],
             },
             "name": "Recitation for CS 4500",
             "numCreditsMax": 0,
@@ -1716,7 +1711,7 @@ Object {
                 },
               ],
             },
-            "name": "Lab for PHYS 1161 (HON)",
+            "name": "Lab for PHYS 1161",
             "numCreditsMax": 1,
             "numCreditsMin": 1,
             "prereqs": Object {
@@ -1795,7 +1790,6 @@ Object {
                     },
                     Object {
                       "classId": "1161",
-                      "missing": true,
                       "subject": "PHYS",
                     },
                     Object {
@@ -1836,7 +1830,7 @@ Object {
                 },
               ],
             },
-            "name": "Lab for PHYS 1165 (HON)",
+            "name": "Lab for PHYS 1165",
             "numCreditsMax": 1,
             "numCreditsMin": 1,
             "prereqs": Object {
@@ -2067,7 +2061,7 @@ Object {
               "type": "and",
               "values": Array [],
             },
-            "name": "Interdiscip Adv Writing - SOL",
+            "name": "Interdisciplinary Advanced Writing in the Disciplines",
             "numCreditsMax": 4,
             "numCreditsMin": 4,
             "prereqs": Object {
@@ -2485,7 +2479,7 @@ Object {
                 },
               ],
             },
-            "name": "Lab for PHYS 1161 (HON)",
+            "name": "Lab for PHYS 1161",
             "numCreditsMax": 1,
             "numCreditsMin": 1,
             "prereqs": Object {
@@ -2601,7 +2595,6 @@ Object {
                     },
                     Object {
                       "classId": "1161",
-                      "missing": true,
                       "subject": "PHYS",
                     },
                     Object {
@@ -2642,7 +2635,7 @@ Object {
                 },
               ],
             },
-            "name": "Lab for PHYS 1165 (HON)",
+            "name": "Lab for PHYS 1165",
             "numCreditsMax": 1,
             "numCreditsMin": 1,
             "prereqs": Object {
@@ -2940,7 +2933,7 @@ Object {
               "type": "and",
               "values": Array [],
             },
-            "name": "Interdiscip Adv Writing - SOL",
+            "name": "Interdisciplinary Advanced Writing in the Disciplines",
             "numCreditsMax": 4,
             "numCreditsMin": 4,
             "prereqs": Object {
@@ -3409,7 +3402,6 @@ Object {
                 },
                 Object {
                   "classId": "1107",
-                  "missing": true,
                   "subject": "BIOL",
                 },
                 Object {
@@ -3435,7 +3427,7 @@ Object {
                 },
               ],
             },
-            "name": "General Chemistry 2 (HON)",
+            "name": "General Chemistry 2",
             "numCreditsMax": 4,
             "numCreditsMin": 4,
             "prereqs": Object {
@@ -3518,7 +3510,7 @@ Object {
               "type": "and",
               "values": Array [],
             },
-            "name": "Calc & Diff Eq -Biol 2 (HON)",
+            "name": "Calculus and Differential Equations for Biology 2",
             "numCreditsMax": 4,
             "numCreditsMin": 4,
             "prereqs": Object {
@@ -3579,8 +3571,11 @@ Object {
                       "subject": "BIOL",
                     },
                     Object {
+                      "classId": "1105",
+                      "subject": "EEMB",
+                    },
+                    Object {
                       "classId": "2290",
-                      "missing": true,
                       "subject": "EEMB",
                     },
                     Object {
@@ -3590,10 +3585,6 @@ Object {
                     },
                     Object {
                       "classId": "2400",
-                      "subject": "EEMB",
-                    },
-                    Object {
-                      "classId": "1105",
                       "subject": "EEMB",
                     },
                   ],
@@ -3607,7 +3598,6 @@ Object {
                     },
                     Object {
                       "classId": "1217",
-                      "missing": true,
                       "subject": "CHEM",
                     },
                     Object {
@@ -3733,7 +3723,6 @@ Object {
                 },
                 Object {
                   "classId": "1220",
-                  "missing": true,
                   "subject": "CHEM",
                 },
                 Object {
@@ -3810,7 +3799,7 @@ Object {
               "type": "and",
               "values": Array [],
             },
-            "name": "Lab for PHYS 1151 (HON)",
+            "name": "Lab for PHYS 1151",
             "numCreditsMax": 1,
             "numCreditsMin": 1,
             "prereqs": Object {
@@ -3926,7 +3915,6 @@ Object {
                     },
                     Object {
                       "classId": "1161",
-                      "missing": true,
                       "subject": "PHYS",
                     },
                     Object {
@@ -4164,17 +4152,21 @@ Object {
               "type": "and",
               "values": Array [
                 Object {
-                  "classId": "1214",
-                  "subject": "CHEM",
-                },
-                Object {
-                  "classId": "1220",
-                  "missing": true,
-                  "subject": "CHEM",
-                },
-                Object {
                   "type": "or",
                   "values": Array [
+                    Object {
+                      "type": "and",
+                      "values": Array [
+                        Object {
+                          "classId": "1214",
+                          "subject": "CHEM",
+                        },
+                        Object {
+                          "classId": "1220",
+                          "subject": "CHEM",
+                        },
+                      ],
+                    },
                     Object {
                       "classId": "1151",
                       "subject": "CHEM",
@@ -4215,7 +4207,6 @@ Object {
                     },
                     Object {
                       "classId": "1175",
-                      "missing": true,
                       "subject": "PHYS",
                     },
                   ],
@@ -4627,7 +4618,6 @@ Object {
                 },
                 Object {
                   "classId": "1107",
-                  "missing": true,
                   "subject": "BIOL",
                 },
                 Object {
@@ -4653,7 +4643,7 @@ Object {
                 },
               ],
             },
-            "name": "General Chemistry 2 (HON)",
+            "name": "General Chemistry 2",
             "numCreditsMax": 4,
             "numCreditsMin": 4,
             "prereqs": Object {
@@ -4736,7 +4726,7 @@ Object {
               "type": "and",
               "values": Array [],
             },
-            "name": "Calc & Diff Eq -Biol 2 (HON)",
+            "name": "Calculus and Differential Equations for Biology 2",
             "numCreditsMax": 4,
             "numCreditsMin": 4,
             "prereqs": Object {
@@ -4797,8 +4787,11 @@ Object {
                       "subject": "BIOL",
                     },
                     Object {
+                      "classId": "1105",
+                      "subject": "EEMB",
+                    },
+                    Object {
                       "classId": "2290",
-                      "missing": true,
                       "subject": "EEMB",
                     },
                     Object {
@@ -4808,10 +4801,6 @@ Object {
                     },
                     Object {
                       "classId": "2400",
-                      "subject": "EEMB",
-                    },
-                    Object {
-                      "classId": "1105",
                       "subject": "EEMB",
                     },
                   ],
@@ -4825,7 +4814,6 @@ Object {
                     },
                     Object {
                       "classId": "1217",
-                      "missing": true,
                       "subject": "CHEM",
                     },
                     Object {
@@ -4951,7 +4939,6 @@ Object {
                 },
                 Object {
                   "classId": "1220",
-                  "missing": true,
                   "subject": "CHEM",
                 },
                 Object {
@@ -5028,7 +5015,7 @@ Object {
               "type": "and",
               "values": Array [],
             },
-            "name": "Lab for PHYS 1151 (HON)",
+            "name": "Lab for PHYS 1151",
             "numCreditsMax": 1,
             "numCreditsMin": 1,
             "prereqs": Object {
@@ -5275,7 +5262,6 @@ Object {
                     },
                     Object {
                       "classId": "1161",
-                      "missing": true,
                       "subject": "PHYS",
                     },
                     Object {
@@ -5469,17 +5455,21 @@ Object {
               "type": "and",
               "values": Array [
                 Object {
-                  "classId": "1214",
-                  "subject": "CHEM",
-                },
-                Object {
-                  "classId": "1220",
-                  "missing": true,
-                  "subject": "CHEM",
-                },
-                Object {
                   "type": "or",
                   "values": Array [
+                    Object {
+                      "type": "and",
+                      "values": Array [
+                        Object {
+                          "classId": "1214",
+                          "subject": "CHEM",
+                        },
+                        Object {
+                          "classId": "1220",
+                          "subject": "CHEM",
+                        },
+                      ],
+                    },
                     Object {
                       "classId": "1151",
                       "subject": "CHEM",
@@ -5520,7 +5510,6 @@ Object {
                     },
                     Object {
                       "classId": "1175",
-                      "missing": true,
                       "subject": "PHYS",
                     },
                   ],
@@ -5845,7 +5834,6 @@ Object {
                 },
                 Object {
                   "classId": "1107",
-                  "missing": true,
                   "subject": "BIOL",
                 },
                 Object {
@@ -5871,7 +5859,7 @@ Object {
                 },
               ],
             },
-            "name": "General Chemistry 2 (HON)",
+            "name": "General Chemistry 2",
             "numCreditsMax": 4,
             "numCreditsMin": 4,
             "prereqs": Object {
@@ -5939,7 +5927,7 @@ Object {
               "type": "and",
               "values": Array [],
             },
-            "name": "Calc & Diff Eq -Biol 2 (HON)",
+            "name": "Calculus and Differential Equations for Biology 2",
             "numCreditsMax": 4,
             "numCreditsMin": 4,
             "prereqs": Object {
@@ -6015,8 +6003,11 @@ Object {
                       "subject": "BIOL",
                     },
                     Object {
+                      "classId": "1105",
+                      "subject": "EEMB",
+                    },
+                    Object {
                       "classId": "2290",
-                      "missing": true,
                       "subject": "EEMB",
                     },
                     Object {
@@ -6026,10 +6017,6 @@ Object {
                     },
                     Object {
                       "classId": "2400",
-                      "subject": "EEMB",
-                    },
-                    Object {
-                      "classId": "1105",
                       "subject": "EEMB",
                     },
                   ],
@@ -6043,7 +6030,6 @@ Object {
                     },
                     Object {
                       "classId": "1217",
-                      "missing": true,
                       "subject": "CHEM",
                     },
                     Object {
@@ -6154,7 +6140,6 @@ Object {
                 },
                 Object {
                   "classId": "1220",
-                  "missing": true,
                   "subject": "CHEM",
                 },
                 Object {
@@ -6231,7 +6216,7 @@ Object {
               "type": "and",
               "values": Array [],
             },
-            "name": "Lab for PHYS 1151 (HON)",
+            "name": "Lab for PHYS 1151",
             "numCreditsMax": 1,
             "numCreditsMin": 1,
             "prereqs": Object {
@@ -6347,7 +6332,6 @@ Object {
                     },
                     Object {
                       "classId": "1161",
-                      "missing": true,
                       "subject": "PHYS",
                     },
                     Object {
@@ -6610,17 +6594,21 @@ Object {
               "type": "and",
               "values": Array [
                 Object {
-                  "classId": "1214",
-                  "subject": "CHEM",
-                },
-                Object {
-                  "classId": "1220",
-                  "missing": true,
-                  "subject": "CHEM",
-                },
-                Object {
                   "type": "or",
                   "values": Array [
+                    Object {
+                      "type": "and",
+                      "values": Array [
+                        Object {
+                          "classId": "1214",
+                          "subject": "CHEM",
+                        },
+                        Object {
+                          "classId": "1220",
+                          "subject": "CHEM",
+                        },
+                      ],
+                    },
                     Object {
                       "classId": "1151",
                       "subject": "CHEM",
@@ -6661,7 +6649,6 @@ Object {
                     },
                     Object {
                       "classId": "1175",
-                      "missing": true,
                       "subject": "PHYS",
                     },
                   ],
@@ -7099,7 +7086,6 @@ Object {
                 },
                 Object {
                   "classId": "1107",
-                  "missing": true,
                   "subject": "BIOL",
                 },
                 Object {
@@ -7125,7 +7111,7 @@ Object {
                 },
               ],
             },
-            "name": "General Chemistry 2 (HON)",
+            "name": "General Chemistry 2",
             "numCreditsMax": 4,
             "numCreditsMin": 4,
             "prereqs": Object {
@@ -7193,7 +7179,7 @@ Object {
               "type": "and",
               "values": Array [],
             },
-            "name": "Calc & Diff Eq -Biol 2 (HON)",
+            "name": "Calculus and Differential Equations for Biology 2",
             "numCreditsMax": 4,
             "numCreditsMin": 4,
             "prereqs": Object {
@@ -7269,8 +7255,11 @@ Object {
                       "subject": "BIOL",
                     },
                     Object {
+                      "classId": "1105",
+                      "subject": "EEMB",
+                    },
+                    Object {
                       "classId": "2290",
-                      "missing": true,
                       "subject": "EEMB",
                     },
                     Object {
@@ -7280,10 +7269,6 @@ Object {
                     },
                     Object {
                       "classId": "2400",
-                      "subject": "EEMB",
-                    },
-                    Object {
-                      "classId": "1105",
                       "subject": "EEMB",
                     },
                   ],
@@ -7297,7 +7282,6 @@ Object {
                     },
                     Object {
                       "classId": "1217",
-                      "missing": true,
                       "subject": "CHEM",
                     },
                     Object {
@@ -7408,7 +7392,6 @@ Object {
                 },
                 Object {
                   "classId": "1220",
-                  "missing": true,
                   "subject": "CHEM",
                 },
                 Object {
@@ -7485,7 +7468,7 @@ Object {
               "type": "and",
               "values": Array [],
             },
-            "name": "Lab for PHYS 1151 (HON)",
+            "name": "Lab for PHYS 1151",
             "numCreditsMax": 1,
             "numCreditsMin": 1,
             "prereqs": Object {
@@ -7732,7 +7715,6 @@ Object {
                     },
                     Object {
                       "classId": "1161",
-                      "missing": true,
                       "subject": "PHYS",
                     },
                     Object {
@@ -7918,17 +7900,21 @@ Object {
               "type": "and",
               "values": Array [
                 Object {
-                  "classId": "1214",
-                  "subject": "CHEM",
-                },
-                Object {
-                  "classId": "1220",
-                  "missing": true,
-                  "subject": "CHEM",
-                },
-                Object {
                   "type": "or",
                   "values": Array [
+                    Object {
+                      "type": "and",
+                      "values": Array [
+                        Object {
+                          "classId": "1214",
+                          "subject": "CHEM",
+                        },
+                        Object {
+                          "classId": "1220",
+                          "subject": "CHEM",
+                        },
+                      ],
+                    },
                     Object {
                       "classId": "1151",
                       "subject": "CHEM",
@@ -7969,7 +7955,6 @@ Object {
                     },
                     Object {
                       "classId": "1175",
-                      "missing": true,
                       "subject": "PHYS",
                     },
                   ],
