@@ -298,7 +298,12 @@ Object {
             "classId": "3000",
             "coreqs": Object {
               "type": "and",
-              "values": Array [],
+              "values": Array [
+                Object {
+                  "classId": "3001",
+                  "subject": "CS",
+                },
+              ],
             },
             "name": "Algorithms and Data",
             "numCreditsMax": 4,
@@ -1079,7 +1084,12 @@ Object {
             "classId": "3000",
             "coreqs": Object {
               "type": "and",
-              "values": Array [],
+              "values": Array [
+                Object {
+                  "classId": "3001",
+                  "subject": "CS",
+                },
+              ],
             },
             "name": "Algorithms and Data",
             "numCreditsMax": 4,
