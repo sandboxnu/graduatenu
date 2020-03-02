@@ -1,6 +1,10 @@
 import { ICompletedCoursesMap } from "../state/reducers/scheduleReducer";
 
 export function sumCreditsFromList(courses: ICompletedCoursesMap): number {
+  if (!courses) {
+    return 0;
+  }
+  
   let sum = 0;
   for (let i = 0; i < 4; i++) {
     for (const course of courses[i]) {
@@ -30,6 +34,10 @@ export function getStandingFromCompletedCourses(
 export function getNumberOfCompletedCourses(
   courses: ICompletedCoursesMap
 ): number {
+  if (!courses) {
+    return 0;
+  }
+
   let sum = 0;
   for (let i = 0; i < 4; i++) {
     sum += courses[i].length;

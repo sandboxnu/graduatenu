@@ -6,6 +6,7 @@ import { NextButton } from "../components/common/NextButton";
 import { Autocomplete } from "@material-ui/lab";
 import { Major, Schedule } from "../models/types";
 import styled from "styled-components";
+import { plans } from "../plans";
 import { planToString } from "../utils";
 import { connect } from "react-redux";
 import { setMajorAction } from "../state/actions/userActions";
@@ -126,6 +127,26 @@ class MajorComponent extends React.Component<Props, MajorScreenState> {
     );
   }
 
+  renderPlansDropDown() {
+    return (
+      <Autocomplete
+        style={{ width: 300 }}
+        disableListWrap
+        options={plans[this.state.major!.name].map(p => planToString(p))}
+        renderInput={params => (
+          <TextField
+            {...params}
+            variant="outlined"
+            label="Select A Plan"
+            fullWidth
+          />
+        )}
+        value={this.state.planStr || ""}
+        onChange={this.onChoosePlan.bind(this)}
+      />
+    );
+  }
+
   render() {
     const { isFetchingMajors, isFetchingPlans } = this.props;
     if (isFetchingMajors || isFetchingPlans) {
@@ -162,6 +183,7 @@ class MajorComponent extends React.Component<Props, MajorScreenState> {
     }
   }
 }
+
 
 /**
  * Callback to be passed into connect, to make properties of the AppState available as this components props.

@@ -52,7 +52,7 @@ import {
   setCompletedCoursesFromMap,
   setCoopCycle,
 } from "../state/actions/scheduleActions";
-import { setPlanStrAction, setMajorAction } from "../state/actions/userActions";
+import { setMajorAction } from "../state/actions/userActions";
 import { ICompletedCoursesMap } from "../state/reducers/scheduleReducer";
 import { getMajors, getPlans } from "../state";
 
