@@ -4,8 +4,10 @@ import {
   IRequiredCourse,
   IOrCourse,
   ISubjectRange,
+  Requirement,
 } from "../../../frontend/src/models/types";
-import { createRequiredCourse } from "../utils/scraper_utils";
+import { createRequiredCourse, isRequirement } from "../utils/scraper_utils";
+import { RANGECourseSet } from "./catalog_scraper";
 
 /**
  * A function that given a row, converts it into a Requirement type.
@@ -15,7 +17,7 @@ import { createRequiredCourse } from "../utils/scraper_utils";
 export function parseRowAsRequirement(
   $: CheerioStatic,
   row: CheerioElement
-): ScraperRequirement | undefined {
+): Requirement | undefined {
   let currentRow: Cheerio = $(row);
   if (currentRow.find("a").length === 0) {
     // the row doesn't have any course information to be parsed in most cases.
@@ -45,8 +47,6 @@ export function parseRowAsRequirement(
       return parseAndRow($, row);
     case RowType.OrRow:
       return parseOrRow($, row);
-    case RowType.SubjectRangeRow:
-      return parseSubjectRangeRow($, row);
     case RowType.RequiredCourseRow:
       return parseRequiredRow($, row);
     default:
@@ -121,6 +121,33 @@ function parseOrRow(
   }
 }
 
+function parseAsFullRange(
+  $: CheerioStatic,
+  row: CheerioElement
+): Array<ISubjectRange> {
+  let currentRow: Cheerio = $(row);
+  let anchors: Cheerio = currentRow.find(".courselistcomment");
+  if (anchors.length == 0) {
+    return [];
+  }
+  let ranges: Array<ISubjectRange> = [];
+  let possibleKeys: Array<string> = anchors
+    .text()
+    .split(String.fromCharCode(32));
+  RANGECourseSet.filter(value => possibleKeys.includes(value)).forEach(
+    (subject: string) => {
+      //Potentially add a check to ensure that the subject keywords are followed by "course" or "elective", but unsure
+      let courseRange: ISubjectRange = {
+        subject: subject,
+        idRangeStart: 0,
+        idRangeEnd: 9999,
+      };
+      ranges.push(courseRange);
+    }
+  );
+  return ranges;
+}
+
 /**
  * A function that given a row, converts it into an ISubjectRange Requirement type.
  * @param $ the selector function used to query the DOM.
@@ -129,12 +156,12 @@ function parseOrRow(
 export function parseSubjectRangeRow(
   $: CheerioStatic,
   row: CheerioElement
-): ISubjectRange | undefined {
+): Array<ISubjectRange> {
   let currentRow: Cheerio = $(row);
-  //let anchors: Cheerio = currentRow.find("span.courselistcomment a");
   let anchors: Cheerio = currentRow.find(".courselistcomment.commentindent");
+
   if (anchors.length == 0) {
-    return;
+    return parseAsFullRange($, row);
   }
 
   //the length should be === 2.
@@ -172,7 +199,7 @@ export function parseSubjectRangeRow(
     idRangeEnd: idRangeEnd,
   };
 
-  return courseRange;
+  return [courseRange];
 }
 
 /**

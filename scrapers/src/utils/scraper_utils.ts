@@ -48,6 +48,14 @@ export function isSubjectRange(
 }
 
 /**
+ * a predicate for ISubjectRange.
+ * @param scraperReq the ScraperRequirement
+ */
+export function isIOrCourse(req: Requirement): req is IOrCourse {
+  return (req as IOrCourse).courses !== undefined;
+}
+
+/**
  * Create an IRequiredCourse type for a course.
  * @param subject the subject tag
  * @param classId the course number
@@ -125,9 +133,17 @@ export function isOrRow($: CheerioStatic, row: CheerioElement): boolean {
  * Create a basic IOrCourse with courses set to reqlist.
  * @param reqList the list of requirements that are or constrained.
  */
-export function createIOrCourse(reqList: Requirement[]): IOrCourse {
-  return {
-    type: "OR",
-    courses: reqList,
-  };
+export function createIOrCourse(
+  join: Requirement,
+  curReq: Requirement
+): IOrCourse {
+  if (isIOrCourse(curReq)) {
+    curReq.courses.push(join);
+    return curReq;
+  } else {
+    return {
+      type: "OR",
+      courses: [curReq, join],
+    };
+  }
 }

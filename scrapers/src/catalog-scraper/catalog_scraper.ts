@@ -2,6 +2,7 @@ var cheerio = require("cheerio");
 import {
   Major,
   IMajorRequirementGroup,
+  Concentrations,
 } from "../../../frontend/src/models/types";
 import { createRequirementGroup } from "./reqGroup_scraper";
 
@@ -40,12 +41,28 @@ export const RANGETagMap: { [key: string]: number } = {
   "Complete 12 credits of upper-division CS, IS, and DS courses that are not already required. Choose courses within the following ranges:": 12,
   "Complete twelve credits of CS, IS or DS classes that are not already required. Choose courses within the following ranges:": 12,
   "Complete 16 credits of CS, IS, or DS classes that are not already required. Choose courses within the following ranges:": 16,
+  "Complete 16 credits of upper-division CS, IS, or DS courses that are not already required. Choose courses within the following ranges:": 16,
 
   "Complete one of the following, not taken to fulfill previous requirements:": 4,
   "Complete one from the following:": 4,
   "Complete four courses in the following range:": 16,
   "Complete three courses in the following range:": 12,
 };
+
+// Set for RANGESections that only indicate the major in which they are allowed to take electives
+export const RANGECourseSet: Array<string> = [
+  "GAME",
+  "CRIM",
+  "ENGL",
+  "ARTD",
+  "ARTE",
+  "ARTF",
+  "ARTG",
+  "ARTH",
+  "ARTS",
+  "JRNL",
+  "PHIL",
+];
 
 /**
  * Scrapes the major data from the given course catalog URL.
@@ -94,6 +111,11 @@ function scrapeMajorDataFromCatalog($: CheerioStatic): Promise<Major> {
       isLanguageRequired: false,
       nupaths: [],
       totalCreditsRequired: 0,
+      // concentrations: { // Temporary place holder for concentrations
+      //   minOptions: 0,
+      //   maxOptions: 0,
+      //   requirementGroupMap: [],
+      // },
     };
     resolve(major);
   });
@@ -123,6 +145,12 @@ function createRequirementGroupMap(
               | undefined = createRequirementGroup($, rows);
             rows = [tableRow];
             if (requirementGroup) {
+              // ****** temporary way to ensure that names do not overlap ******
+              /*
+              while(requirementGroupMap[requirementGroup.name] != undefined) {
+                requirementGroup.name = requirementGroup.name + "_";
+              }
+              */
               requirementGroupMap[requirementGroup.name] = requirementGroup;
             }
           } else {
@@ -136,6 +164,12 @@ function createRequirementGroupMap(
           | undefined = createRequirementGroup($, rows);
         if (requirementGroup) {
           if (requirementGroup.requirements)
+            // ****** temporary way to ensure that names do not overlap ******
+            /*
+            while(requirementGroupMap[requirementGroup.name] != undefined) {
+              requirementGroup.name = requirementGroup.name + "_";
+            }
+            */
             requirementGroupMap[requirementGroup.name] = requirementGroup;
         }
       }
@@ -150,7 +184,7 @@ module.exports = catalogToMajor;
  * testing. move to test file.
  */
 catalogToMajor(
-  "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/engineering/electrical-computer/computer-engineering-computer-science-bscompe/#programrequirementstext"
+  "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-science/cybersecurity-criminal-justice-bs/"
 ).then((scrapedMajor: Major) => {
   //uncomment following lines to log output.
 
