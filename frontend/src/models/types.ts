@@ -47,6 +47,8 @@ export type Requirement =
  */
 export interface IOrCourse {
   type: "OR";
+  //numCreditsMin: number;
+  //numCreditsMax: number;
   courses: Requirement[];
 }
 
@@ -68,6 +70,7 @@ export interface IAndCourse {
 export interface ICourseRange {
   type: "RANGE";
   creditsRequired: number;
+  // Potentially add a min/mas to ICourseRange
   ranges: ISubjectRange[];
 }
 
@@ -150,6 +153,16 @@ export interface Major {
   isLanguageRequired: boolean;
   totalCreditsRequired: number;
   nupaths: NUPath[];
+  //concentrations: Concentrations;
+}
+
+/**
+ * TODO.........
+ */
+export interface Concentrations {
+  minOptions: number;
+  maxOptions: number;
+  requirementGroupMap: IMajorRequirementGroup[];
 }
 
 /**
