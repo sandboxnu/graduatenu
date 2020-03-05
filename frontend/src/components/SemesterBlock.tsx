@@ -47,16 +47,6 @@ const ClassListWrapper = styled.div`
   height: 100%;
 `;
 
-const NoClassBlock = styled.div`
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: grey;
-  height: 100%;
-`;
-
 interface ReduxStoreSemesterBlockProps {
   courseWarnings: CourseWarning[];
   warnings: IWarning[];
@@ -166,22 +156,6 @@ class SemesterBlockComponent extends React.Component<
         }
         return <EmptyBlock key={index} />;
       });
-    }
-
-    if (status === "COOP") {
-      return (
-        <NoClassBlock>
-          <p>CO-OP</p>
-        </NoClassBlock>
-      );
-    }
-
-    if (status === "INACTIVE") {
-      return (
-        <NoClassBlock>
-          <p>VACATION</p>
-        </NoClassBlock>
-      );
     }
   }
 
