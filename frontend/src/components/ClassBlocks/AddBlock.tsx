@@ -60,21 +60,19 @@ export class AddBlock extends React.Component<AddBlockProps> {
 
   render() {
     return (
-      <div
+      <Block
         onMouseEnter={this.handleMouseEnter.bind(this)}
         onMouseLeave={this.handleMouseLeave.bind(this)}
         onClick={this.props.onClick}
       >
-        <Block>
-          <AddBlockBody>
-            <Wrapper>
-              <TitleWrapper>
-                <Title>+ Add Class</Title>
-              </TitleWrapper>
-            </Wrapper>
-          </AddBlockBody>
-        </Block>
-      </div>
+        <AddBlockBody>
+          <Wrapper>
+            <TitleWrapper>
+              <Title>+ Add Class</Title>
+            </TitleWrapper>
+          </Wrapper>
+        </AddBlockBody>
+      </Block>
     );
   }
 }
