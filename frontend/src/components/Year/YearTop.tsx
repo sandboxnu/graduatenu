@@ -64,7 +64,7 @@ const Container = styled.div`
 
 const SemesterText = styled.p`
   text-align: left;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 16px;
   color: white;
 `;
@@ -172,7 +172,10 @@ class YearTopComponent extends React.Component<Props, YearTopState> {
     return (
       <Container>
         <div style={textContainerStyle}>
-          <SemesterText>Fall {year} - </SemesterText>
+          <SemesterText>
+            Fall {year}
+            <span style={{ fontWeight: "normal" }}> - </span>
+          </SemesterText>
           <SemesterType
             id="simple-menu"
             value={this.state.fallStatus}
