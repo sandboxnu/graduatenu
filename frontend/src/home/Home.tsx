@@ -43,6 +43,7 @@ import {
 } from "../state/actions/scheduleActions";
 import { setMajorAction } from "../state/actions/userActions";
 import { getMajors, getPlans } from "../state";
+import EditIcon from "@material-ui/icons/Edit";
 
 const OuterContainer = styled.div`
   display: flex;
@@ -69,6 +70,45 @@ const DropDownWrapper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+`;
+
+const HomeTop = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+`;
+
+const HomeText = styled.a`
+  font-weight: bold;
+  font-size: 36px;
+  text-decoration: none;
+  color: black;
+`;
+
+const HomePlan = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
+
+const MajorText = styled.div`
+  font-weight: 500;
+  font-size: 16px;
+  margin-right: 4px;
+`;
+
+const PlanText = styled.div`
+  font-weight: normal;
+  font-size: 16px;
+  margin-right: 6px;
+`;
+
+const EditPlanIcon = styled(EditIcon)<any>`
+  width: 14px;
+  height: 15px;
+  color: #bdbdbd;
 `;
 
 interface ToastHomeProps {
@@ -330,12 +370,17 @@ class HomeComponent extends React.Component<Props> {
           onDragUpdate={this.onDragUpdate}
         >
           <Container>
-            <div>
-              <div>
-                <h1>GraduateNU</h1>
-              </div>
-              <h2>Plan Of Study</h2>
-            </div>
+            <HomeTop>
+              <HomeText href="#">GraduateNU</HomeText>
+              <HomePlan>
+                <MajorText>
+                  {!!this.props.major ? this.props.major.name + ": " : ""}
+                </MajorText>
+                <PlanText>{this.props.planStr || "None"}</PlanText>
+                <EditPlanIcon />
+              </HomePlan>
+            </HomeTop>
+            <h2>Plan Of Study</h2>
             <DropDownWrapper>
               {this.renderMajorDropDown()}
               {!!major && this.renderPlansDropDown()}
