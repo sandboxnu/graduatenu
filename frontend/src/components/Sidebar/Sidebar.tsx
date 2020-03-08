@@ -10,7 +10,6 @@ import { connect } from "react-redux";
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
   background: #f2f2f2;
   box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.25);
   padding: 12px;
@@ -18,7 +17,11 @@ const Container = styled.div`
 
 const MajorTitle = styled.p`
   font-size: 20px;
-  font-weight: bold;
+  font-weight: 600;
+  line-height: 24px;
+  margin-right: 48px;
+  margin-left: 4px;
+  margin-bottom: 12px;
 `;
 
 interface Props {
