@@ -160,10 +160,10 @@ export class RequirementSection extends React.Component<
     ) {
       return (
         <CourseAndLabWrapper key={index}>
-          {this.renderCourse(req.courses[0] as IRequiredCourse, true, true)}
+          {this.renderCourse(req.courses[0] as IRequiredCourse, true, true, req
+            .courses[1] as IRequiredCourse)}
           <CourseText> and </CourseText>
-          {this.renderCourse(req.courses[1] as IRequiredCourse, true, false, req
-            .courses[0] as IRequiredCourse)}
+          {this.renderCourse(req.courses[1] as IRequiredCourse, true, false)}
         </CourseAndLabWrapper>
       );
     }
@@ -227,7 +227,7 @@ export class RequirementSection extends React.Component<
       <CourseWrapper key={course.subject + course.classId + course.type}>
         {addButton && andCourse && (
           <SidebarAddButton
-            onClick={() => this.showModal([andCourse, course])}
+            onClick={() => this.showModal([course, andCourse])}
           />
         )}
         {addButton && !andCourse && (
