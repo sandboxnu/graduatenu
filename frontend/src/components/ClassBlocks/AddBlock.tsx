@@ -12,6 +12,7 @@ const Block = styled(Card)<any>`
   display: flex;
   flex-direction: row;
   width: 101px;
+  cursor: pointer;
 `;
 
 const AddBlockBody = styled.div<any>`

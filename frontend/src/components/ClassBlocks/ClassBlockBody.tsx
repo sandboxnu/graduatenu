@@ -10,12 +10,14 @@ const Wrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   height: 100%;
+  min-width: 0;
 `;
 
 const TitleWrapper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  min-width: 0;
 `;
 
 const Title = styled.div`
@@ -25,12 +27,13 @@ const Title = styled.div`
 `;
 
 const Subtitle = styled.div`
-  /* TODO: Fix set width to dynamically change based on parent width. */
-  width: 130px;
+  margin-right: 10px;
   font-size: 11px;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  flex: 1;
+  min-width: 0;
 `;
 
 interface ClassBlockBodyProps {

@@ -7,16 +7,18 @@ import { ClassBlockBody } from "./ClassBlockBody";
 
 const Block = styled(Card)<any>`
   height: 30px;
-  border-radius: 2px;
+  border-radius: 4px;
   margin: 10px 8px 0px 8px;
   display: flex;
   flex-direction: row;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.15);
 `;
 
 const ClassBlockBodyContainer = styled.div<any>`
-  background-color: #c4c4c4;
+  background-color: #e0e0e0;
   padding-left: 8px;
   flex: 1;
+  min-width: 0;
 `;
 
 interface ClassBlockProps {
