@@ -59,7 +59,7 @@ const Container = styled.div`
   background-color: #eb5757;
   border: 1px solid #eb5757;
   box-sizing: border-box;
-  margin-top: 16px;
+  margin-top: 0px;
 `;
 
 const SemesterText = styled.p`

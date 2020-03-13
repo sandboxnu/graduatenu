@@ -21,7 +21,7 @@ export class Year extends React.Component<IYearProps> {
     const { index, schedule } = this.props;
     const year = schedule.years[index];
     return (
-      <div style={{ width: "100%", marginBottom: 12 }}>
+      <div style={{ width: "100%", marginBottom: 28 }}>
         <YearTop
           year={year}
           fallStatus={schedule.yearMap[year].fall.status}
