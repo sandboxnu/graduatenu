@@ -36,7 +36,7 @@ const Container = styled.div<any>`
   position: relative;
   height: 100%;
   background-color: ${props =>
-    props.warning ? "rgba(216, 86, 86, 0.9)" : "rgb(255, 255, 255, 0)"};
+    props.warning ? "rgba(235, 87, 87, 0.6)" : "rgb(255, 255, 255, 0)"};
 `;
 
 const ClassListWrapper = styled.div`

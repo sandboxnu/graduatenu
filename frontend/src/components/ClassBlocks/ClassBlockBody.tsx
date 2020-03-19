@@ -27,7 +27,7 @@ const Title = styled.div`
 `;
 
 const Subtitle = styled.div`
-  margin-right: 10px;
+  margin-right: 36px;
   font-size: 11px;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -60,8 +60,14 @@ export const ClassBlockBody: React.FC<ClassBlockBodyProps> = ({
           visibility: hovering ? "visible" : "hidden",
         }}
       >
-        <IconButton onClick={onDelete}>
-          <DeleteIcon />
+        <IconButton
+          onClick={onDelete}
+          style={{ color: "rgba(102, 102, 102, 0.3)" }}
+          disableRipple
+          disableFocusRipple
+          disableTouchRipple
+        >
+          <DeleteIcon fontSize="inherit" />
         </IconButton>
       </div>
     </Wrapper>
