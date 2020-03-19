@@ -17,11 +17,7 @@ import {
   convertTermIdToSeason,
   isCoopOrVacation,
   moveCourse,
-  planToString,
-  scheduleHasClasses,
 } from "../utils";
-import { TextField, Button } from "@material-ui/core";
-import { Autocomplete } from "@material-ui/lab";
 import { Sidebar } from "../components/Sidebar";
 import { withToast } from "./toastHook";
 import { AppearanceTypes } from "react-toast-notifications";
@@ -43,7 +39,7 @@ import {
 } from "../state/actions/scheduleActions";
 import { setMajorAction } from "../state/actions/userActions";
 import { getMajors, getPlans } from "../state";
-import EditIcon from "@material-ui/icons/Edit";
+import { EditPlanPopper } from "./EditPlanPopper";
 
 const OuterContainer = styled.div`
   display: flex;
@@ -66,18 +62,13 @@ const Container = styled.div`
   background-color: "#ff76ff";
 `;
 
-const DropDownWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-`;
-
 const HomeTop = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
   width: 100%;
   justify-content: space-between;
+  margin-bottom: 6px;
 `;
 
 const HomeText = styled.a`
@@ -102,13 +93,7 @@ const MajorText = styled.div`
 const PlanText = styled.div`
   font-weight: normal;
   font-size: 16px;
-  margin-right: 6px;
-`;
-
-const EditPlanIcon = styled(EditIcon)<any>`
-  width: 14px;
-  height: 15px;
-  color: #bdbdbd;
+  margin-right: 4px;
 `;
 
 interface ToastHomeProps {
@@ -252,109 +237,6 @@ class HomeComponent extends React.Component<Props> {
     }
   }
 
-  onChooseMajor(event: React.SyntheticEvent<{}>, value: any) {
-    const maj = this.props.majors.find((m: any) => m.name === value);
-    this.props.setMajor(maj);
-  }
-
-  onChoosePlan(event: React.SyntheticEvent<{}>, value: any) {
-    if (value === "None") {
-      this.props.setCoopCycle(undefined);
-      return;
-    }
-
-    const plan = this.props.plans[this.props.major!.name].find(
-      (p: Schedule) => planToString(p) === value
-    );
-
-    if (plan) {
-      this.props.setCoopCycle(plan);
-    }
-  }
-
-  renderMajorDropDown() {
-    return (
-      <Autocomplete
-        style={{ width: 300, marginRight: 18 }}
-        disableListWrap
-        options={this.props.majors.map(maj => maj.name)}
-        renderInput={params => (
-          <TextField
-            {...params}
-            variant="outlined"
-            label="Select A Major"
-            fullWidth
-          />
-        )}
-        value={!!this.props.major ? this.props.major.name + " " : ""}
-        onChange={this.onChooseMajor.bind(this)}
-      />
-    );
-  }
-
-  renderPlansDropDown() {
-    return (
-      <Autocomplete
-        style={{ width: 300 }}
-        disableListWrap
-        options={[
-          "None",
-          ...this.props.plans[this.props.major!.name].map(p => planToString(p)),
-        ]}
-        renderInput={params => (
-          <TextField
-            {...params}
-            variant="outlined"
-            label="Select A Plan"
-            fullWidth
-          />
-        )}
-        value={this.props.planStr || "None"}
-        onChange={this.onChoosePlan.bind(this)}
-      />
-    );
-  }
-
-  renderSetClassesButton() {
-    return (
-      <Button
-        variant="contained"
-        color="secondary"
-        style={{ marginLeft: 18 }}
-        onClick={() => this.addClassesFromPOS()}
-      >
-        Set schedule to example from plan of study
-      </Button>
-    );
-  }
-
-  addClassesFromPOS() {
-    const plan = this.props.plans[this.props.major!.name].find(
-      (p: Schedule) => planToString(p) === this.props.planStr!
-    );
-    this.props.setSchedule(plan!);
-  }
-
-  renderClearScheduleButton() {
-    return (
-      <Button
-        variant="contained"
-        color="secondary"
-        style={{ marginLeft: 18 }}
-        onClick={() => this.clearSchedule()}
-      >
-        Clear Schedule
-      </Button>
-    );
-  }
-
-  clearSchedule() {
-    const plan = this.props.plans[this.props.major!.name].find(
-      (p: Schedule) => planToString(p) === this.props.planStr!
-    );
-    this.props.setCoopCycle(plan!);
-  }
-
   renderYears() {
     return this.props.schedule.years.map((year: number, index: number) => (
       <Year key={index} index={index} schedule={this.props.schedule} />
@@ -362,7 +244,6 @@ class HomeComponent extends React.Component<Props> {
   }
 
   render() {
-    const { schedule, major, planStr } = this.props;
     return (
       <OuterContainer>
         <DragDropContext
@@ -377,17 +258,12 @@ class HomeComponent extends React.Component<Props> {
                   {!!this.props.major ? this.props.major.name + ": " : ""}
                 </MajorText>
                 <PlanText>{this.props.planStr || "None"}</PlanText>
-                <EditPlanIcon />
+                <EditPlanPopper />
               </HomePlan>
             </HomeTop>
-            <h2>Plan Of Study</h2>
-            <DropDownWrapper>
-              {this.renderMajorDropDown()}
-              {!!major && this.renderPlansDropDown()}
-              {!!major && !!planStr && !scheduleHasClasses(this.props.schedule)
-                ? this.renderSetClassesButton()
-                : !!major && !!planStr && this.renderClearScheduleButton()}
-            </DropDownWrapper>
+            <HomePlan>
+              <h2>Plan Of Study</h2>
+            </HomePlan>
             {this.renderYears()}
           </Container>
         </DragDropContext>
