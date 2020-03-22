@@ -157,7 +157,7 @@ export interface Major {
 }
 
 /**
- * TODO.........
+ * A list of concentration options and the min/max number of concentrations they can do
  */
 export interface Concentrations {
   minOptions: number;

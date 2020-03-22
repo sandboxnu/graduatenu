@@ -34,6 +34,7 @@ export const RANGETagMap: { [key: string]: number } = {
   "Complete 8 credits of CS, IS or DS classes that are not already required. Choose courses within the following ranges:": 8,
   "Complete 8 credits of CS, IS or, DS classes that are not already required. Choose courses within the following ranges:": 8,
   "Complete 8 credits of CS, IS, or DS classes that are not already required. Choose courses within the following ranges:": 8,
+  "Complete 8 credits of upper-division CS, IS, or DS classes that are not already required. Choose courses within the following ranges:": 8,
   "Complete eight credits of CS, IS or, DS classes that are not already required. Choose courses within the following ranges:": 8,
   "Complete eight credits of CS, IS or DS classes that are not already required. Choose courses within the following ranges:": 8,
   "Complete 12 credits of CS, IS or, DS classes that are not already required. Choose courses within the following ranges:": 12,
@@ -111,7 +112,7 @@ function scrapeMajorDataFromCatalog($: CheerioStatic): Promise<Major> {
       isLanguageRequired: false,
       nupaths: [],
       totalCreditsRequired: 0,
-      // concentrations: { // Temporary place holder for concentrations
+      // concentrations: {
       //   minOptions: 0,
       //   maxOptions: 0,
       //   requirementGroupMap: [],
@@ -145,12 +146,6 @@ function createRequirementGroupMap(
               | undefined = createRequirementGroup($, rows);
             rows = [tableRow];
             if (requirementGroup) {
-              // ****** temporary way to ensure that names do not overlap ******
-              /*
-              while(requirementGroupMap[requirementGroup.name] != undefined) {
-                requirementGroup.name = requirementGroup.name + "_";
-              }
-              */
               requirementGroupMap[requirementGroup.name] = requirementGroup;
             }
           } else {
@@ -164,12 +159,6 @@ function createRequirementGroupMap(
           | undefined = createRequirementGroup($, rows);
         if (requirementGroup) {
           if (requirementGroup.requirements)
-            // ****** temporary way to ensure that names do not overlap ******
-            /*
-            while(requirementGroupMap[requirementGroup.name] != undefined) {
-              requirementGroup.name = requirementGroup.name + "_";
-            }
-            */
             requirementGroupMap[requirementGroup.name] = requirementGroup;
         }
       }
@@ -184,7 +173,7 @@ module.exports = catalogToMajor;
  * testing. move to test file.
  */
 catalogToMajor(
-  "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-science/cybersecurity-criminal-justice-bs/"
+  "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/information-science-journalism-bs/#programrequirementstext"
 ).then((scrapedMajor: Major) => {
   //uncomment following lines to log output.
 

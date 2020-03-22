@@ -12,6 +12,14 @@ const supported = [
   "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-political-science-bs/#programrequirementstext",
   "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-linguistics-bs/#programrequirementstext",
   "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-mathematics-bs/#programrequirementstext",
+
+  "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-communication-studies-bs/#programrequirementstext",
+  "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-criminal-justice-bs/#programrequirementstext",
+  "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/information-science-journalism-bs/#programrequirementstext",
+
+  // This major parses correctly, but has a "Take two courses, at least one of which is at the 4000 or 5000 level, from the following:"
+  // which is not handled, and has courses double listed in one location which may not parse correctly (?)
+  //"http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-philosophy-bs/#programrequirementstext",
 ];
 
 //run tests
