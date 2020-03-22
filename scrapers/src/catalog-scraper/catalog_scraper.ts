@@ -29,11 +29,10 @@ export const ORTagMap: { [key: string]: number } = {
   "Complete at least two of the following:": 8,
   "Complete four of the following:": 16,
   "Complete six of the following:": 24,
-
   "Complete four economics electives with no more than two below 3000:": 16,
-  "Take two courses, at least one of which is at the 4000 or 5000 level, from the following:": 8,
 
   "Complete one course from one of the following groups:": 4,
+  "Take two courses, at least one of which is at the 4000 or 5000 level, from the following:": 8,
   // TODO: Data-Science-Related Electives: "Complete six courses from categories A and B, at least three of which must be from B"
 };
 
@@ -185,7 +184,7 @@ module.exports = catalogToMajor;
  * testing. move to test file.
  */
 catalogToMajor(
-  "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/cybersecurity-economics-bs/#programrequirementstext"
+  "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/economics-bs/#programrequirementstext"
 ).then((scrapedMajor: Major) => {
   //uncomment following lines to log output.
 

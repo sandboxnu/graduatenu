@@ -4911,3 +4911,1773 @@ Object {
   "yearVersion": 2018,
 }
 `;
+
+exports[`ensure that catalog_scraper produces the expected output for supported majors. 12`] = `
+Object {
+  "isLanguageRequired": false,
+  "name": "Computer Science and Media Arts, BS",
+  "nupaths": Array [],
+  "requirementGroupMap": Object {
+    "": Object {
+      "name": "",
+      "requirements": Array [
+        Object {
+          "classId": 4300,
+          "subject": "CS",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4300,
+          "subject": "IS",
+          "type": "COURSE",
+        },
+      ],
+      "type": "AND",
+    },
+    "Advanced Writing in the Disciplines": Object {
+      "name": "Advanced Writing in the Disciplines",
+      "requirements": Array [
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 3302,
+              "subject": "ENGW",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 3315,
+              "subject": "ENGW",
+              "type": "COURSE",
+            },
+          ],
+          "type": "OR",
+        },
+      ],
+      "type": "AND",
+    },
+    "College Writing": Object {
+      "name": "College Writing",
+      "requirements": Array [
+        Object {
+          "classId": 1111,
+          "subject": "ENGW",
+          "type": "COURSE",
+        },
+      ],
+      "type": "AND",
+    },
+    "Computer Science Elective Courses": Object {
+      "name": "Computer Science Elective Courses",
+      "numCreditsMax": 8,
+      "numCreditsMin": 8,
+      "requirements": Object {
+        "creditsRequired": 8,
+        "ranges": Array [
+          Object {
+            "idRangeEnd": 9999,
+            "idRangeStart": 2500,
+            "subject": "CS",
+          },
+          Object {
+            "idRangeEnd": 9999,
+            "idRangeStart": 2000,
+            "subject": "IS",
+          },
+          Object {
+            "idRangeEnd": 9999,
+            "idRangeStart": 2000,
+            "subject": "DS",
+          },
+        ],
+        "type": "RANGE",
+      },
+      "type": "RANGE",
+    },
+    "Computer Science Fundamental Courses": Object {
+      "name": "Computer Science Fundamental Courses",
+      "requirements": Array [
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 1800,
+              "subject": "CS",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 1802,
+              "subject": "CS",
+              "type": "COURSE",
+            },
+          ],
+          "type": "AND",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 2500,
+              "subject": "CS",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 2501,
+              "subject": "CS",
+              "type": "COURSE",
+            },
+          ],
+          "type": "AND",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 2510,
+              "subject": "CS",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 2511,
+              "subject": "CS",
+              "type": "COURSE",
+            },
+          ],
+          "type": "AND",
+        },
+      ],
+      "type": "AND",
+    },
+    "Computer Science Overview": Object {
+      "name": "Computer Science Overview",
+      "requirements": Array [
+        Object {
+          "classId": 1200,
+          "subject": "CS",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 1210,
+          "subject": "CS",
+          "type": "COURSE",
+        },
+      ],
+      "type": "AND",
+    },
+    "Computer Science Required Courses": Object {
+      "name": "Computer Science Required Courses",
+      "requirements": Array [
+        Object {
+          "classId": 3000,
+          "subject": "CS",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3200,
+          "subject": "CS",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3500,
+          "subject": "CS",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4300,
+          "subject": "CS",
+          "type": "COURSE",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 4500,
+              "subject": "CS",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 4501,
+              "subject": "CS",
+              "type": "COURSE",
+            },
+          ],
+          "type": "AND",
+        },
+        Object {
+          "classId": 4300,
+          "subject": "IS",
+          "type": "COURSE",
+        },
+      ],
+      "type": "AND",
+    },
+    "Computing and Social Issues": Object {
+      "name": "Computing and Social Issues",
+      "numCreditsMax": 4,
+      "numCreditsMin": 4,
+      "requirements": Array [
+        Object {
+          "classId": 3418,
+          "subject": "ANTH",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 5240,
+          "subject": "IA",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 2102,
+          "subject": "INSH",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 1145,
+          "subject": "PHIL",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 1280,
+          "subject": "SOCL",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3485,
+          "subject": "SOCL",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4528,
+          "subject": "SOCL",
+          "type": "COURSE",
+        },
+      ],
+      "type": "OR",
+    },
+    "Mathematics Requirement": Object {
+      "name": "Mathematics Requirement",
+      "requirements": Array [
+        Object {
+          "classId": 2331,
+          "subject": "MATH",
+          "type": "COURSE",
+        },
+      ],
+      "type": "AND",
+    },
+    "Media Arts Capstone Requirement": Object {
+      "name": "Media Arts Capstone Requirement",
+      "requirements": Array [
+        Object {
+          "classId": 4530,
+          "subject": "ARTD",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4670,
+          "subject": "ARTD",
+          "type": "COURSE",
+        },
+      ],
+      "type": "AND",
+    },
+    "Media Arts Electives": Object {
+      "name": "Media Arts Electives",
+      "numCreditsMax": 24,
+      "numCreditsMin": 24,
+      "requirements": Array [
+        Object {
+          "classId": 2223,
+          "subject": "ARTF",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 2360,
+          "subject": "ARTD",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 2370,
+          "subject": "ARTD",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 2380,
+          "subject": "ARTD",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3460,
+          "subject": "ARTD",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4565,
+          "subject": "ARTD",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4660,
+          "subject": "ARTD",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4661,
+          "subject": "ARTD",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3470,
+          "subject": "ARTD",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3471,
+          "subject": "ARTD",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3472,
+          "subject": "ARTD",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3473,
+          "subject": "ARTD",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4570,
+          "subject": "ARTD",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4575,
+          "subject": "ARTD",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4577,
+          "subject": "ARTD",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3480,
+          "subject": "ARTD",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 5582,
+          "subject": "ARTD",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 2212,
+          "subject": "ARTH",
+          "type": "COURSE",
+        },
+      ],
+      "type": "OR",
+    },
+    "Presentation Requirement": Object {
+      "name": "Presentation Requirement",
+      "requirements": Array [
+        Object {
+          "classId": 1170,
+          "subject": "THTR",
+          "type": "COURSE",
+        },
+      ],
+      "type": "AND",
+    },
+    "Required Media Arts Courses": Object {
+      "name": "Required Media Arts Courses",
+      "requirements": Array [
+        Object {
+          "classId": 1120,
+          "subject": "ARTF",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 1122,
+          "subject": "ARTF",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 1124,
+          "subject": "ARTF",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 2100,
+          "subject": "ARTD",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 2220,
+          "subject": "ARTF",
+          "type": "COURSE",
+        },
+      ],
+      "type": "AND",
+    },
+  },
+  "requirementGroups": Array [
+    "Computer Science Overview",
+    "Computer Science Fundamental Courses",
+    "Computer Science Required Courses",
+    "Presentation Requirement",
+    "Computer Science Elective Courses",
+    "College Writing",
+    "Advanced Writing in the Disciplines",
+    "Required Media Arts Courses",
+    "Media Arts Electives",
+    "Media Arts Capstone Requirement",
+    "Mathematics Requirement",
+    "Computing and Social Issues",
+    "",
+  ],
+  "totalCreditsRequired": 0,
+  "yearVersion": 2018,
+}
+`;
+
+exports[`ensure that catalog_scraper produces the expected output for supported majors. 13`] = `
+Object {
+  "isLanguageRequired": false,
+  "name": "Computer Science and Philosophy, BS",
+  "nupaths": Array [],
+  "requirementGroupMap": Object {
+    "": Object {
+      "name": "",
+      "requirements": Array [
+        Object {
+          "classId": 3800,
+          "subject": "CS",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4515,
+          "subject": "PHIL",
+          "type": "COURSE",
+        },
+      ],
+      "type": "AND",
+    },
+    "Advanced Writing in the Disciplines": Object {
+      "name": "Advanced Writing in the Disciplines",
+      "numCreditsMax": 4,
+      "numCreditsMin": 4,
+      "requirements": Array [
+        Object {
+          "classId": 3302,
+          "subject": "ENGW",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3309,
+          "subject": "ENGW",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3315,
+          "subject": "ENGW",
+          "type": "COURSE",
+        },
+      ],
+      "type": "OR",
+    },
+    "College Writing": Object {
+      "name": "College Writing",
+      "requirements": Array [
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 1111,
+              "subject": "ENGW",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 1102,
+              "subject": "ENGW",
+              "type": "COURSE",
+            },
+          ],
+          "type": "OR",
+        },
+      ],
+      "type": "AND",
+    },
+    "Computer Science Elective Courses": Object {
+      "name": "Computer Science Elective Courses",
+      "numCreditsMax": 8,
+      "numCreditsMin": 8,
+      "requirements": Object {
+        "creditsRequired": 8,
+        "ranges": Array [
+          Object {
+            "idRangeEnd": 9999,
+            "idRangeStart": 2500,
+            "subject": "CS",
+          },
+          Object {
+            "idRangeEnd": 9999,
+            "idRangeStart": 2000,
+            "subject": "IS",
+          },
+          Object {
+            "idRangeEnd": 9999,
+            "idRangeStart": 2000,
+            "subject": "DS",
+          },
+        ],
+        "type": "RANGE",
+      },
+      "type": "RANGE",
+    },
+    "Computer Science Fundamental Courses": Object {
+      "name": "Computer Science Fundamental Courses",
+      "requirements": Array [
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 1800,
+              "subject": "CS",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 1802,
+              "subject": "CS",
+              "type": "COURSE",
+            },
+          ],
+          "type": "AND",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 2500,
+              "subject": "CS",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 2501,
+              "subject": "CS",
+              "type": "COURSE",
+            },
+          ],
+          "type": "AND",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 2510,
+              "subject": "CS",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 2511,
+              "subject": "CS",
+              "type": "COURSE",
+            },
+          ],
+          "type": "AND",
+        },
+      ],
+      "type": "AND",
+    },
+    "Computer Science Overview": Object {
+      "name": "Computer Science Overview",
+      "requirements": Array [
+        Object {
+          "classId": 1200,
+          "subject": "CS",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 1210,
+          "subject": "CS",
+          "type": "COURSE",
+        },
+      ],
+      "type": "AND",
+    },
+    "Computer Science Required Courses": Object {
+      "name": "Computer Science Required Courses",
+      "requirements": Array [
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 2800,
+              "subject": "CS",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 2801,
+              "subject": "CS",
+              "type": "COURSE",
+            },
+          ],
+          "type": "AND",
+        },
+        Object {
+          "classId": 3000,
+          "subject": "CS",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3500,
+          "subject": "CS",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3800,
+          "subject": "CS",
+          "type": "COURSE",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 4500,
+              "subject": "CS",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 4501,
+              "subject": "CS",
+              "type": "COURSE",
+            },
+          ],
+          "type": "AND",
+        },
+      ],
+      "type": "AND",
+    },
+    "Electives": Object {
+      "name": "Electives",
+      "numCreditsMax": 12,
+      "numCreditsMin": 12,
+      "requirements": Object {
+        "creditsRequired": 12,
+        "ranges": Array [
+          Object {
+            "idRangeEnd": 9999,
+            "idRangeStart": 0,
+            "subject": "PHIL",
+          },
+        ],
+        "type": "RANGE",
+      },
+      "type": "RANGE",
+    },
+    "Philosophy Required Courses": Object {
+      "name": "Philosophy Required Courses",
+      "requirements": Array [
+        Object {
+          "classId": 1115,
+          "subject": "PHIL",
+          "type": "COURSE",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 2325,
+              "subject": "PHIL",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 2325,
+              "subject": "POLS",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 2330,
+              "subject": "PHIL",
+              "type": "COURSE",
+            },
+          ],
+          "type": "OR",
+        },
+        Object {
+          "classId": 1145,
+          "subject": "PHIL",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4515,
+          "subject": "PHIL",
+          "type": "COURSE",
+        },
+      ],
+      "type": "AND",
+    },
+    "Philosophy Restricted Electives": Object {
+      "name": "Philosophy Restricted Electives",
+      "numCreditsMax": 8,
+      "numCreditsMin": 8,
+      "requirements": Array [
+        Object {
+          "classId": 3343,
+          "subject": "PHIL",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3435,
+          "subject": "PHIL",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3460,
+          "subject": "PHIL",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4390,
+          "subject": "PHIL",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4500,
+          "subject": "PHIL",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4510,
+          "subject": "PHIL",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4535,
+          "subject": "PHIL",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4547,
+          "subject": "PHIL",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4606,
+          "subject": "PHIL",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4903,
+          "subject": "PHIL",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4906,
+          "subject": "PHIL",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 5001,
+          "subject": "PHIL",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 5011,
+          "subject": "PHIL",
+          "type": "COURSE",
+        },
+      ],
+      "type": "OR",
+    },
+    "Presentation Requirement": Object {
+      "name": "Presentation Requirement",
+      "requirements": Array [
+        Object {
+          "classId": 1170,
+          "subject": "THTR",
+          "type": "COURSE",
+        },
+      ],
+      "type": "AND",
+    },
+  },
+  "requirementGroups": Array [
+    "Computer Science Overview",
+    "Computer Science Fundamental Courses",
+    "Computer Science Required Courses",
+    "Presentation Requirement",
+    "Computer Science Elective Courses",
+    "Philosophy Required Courses",
+    "Philosophy Restricted Electives",
+    "Electives",
+    "",
+    "College Writing",
+    "Advanced Writing in the Disciplines",
+  ],
+  "totalCreditsRequired": 0,
+  "yearVersion": 2018,
+}
+`;
+
+exports[`ensure that catalog_scraper produces the expected output for supported majors. 14`] = `
+Object {
+  "isLanguageRequired": false,
+  "name": "Cybersecurity and Economics, BS",
+  "nupaths": Array [],
+  "requirementGroupMap": Object {
+    "": Object {
+      "name": "",
+      "requirements": Array [
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 1341,
+              "subject": "MATH",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 1231,
+              "subject": "MATH",
+              "type": "COURSE",
+            },
+          ],
+          "type": "OR",
+        },
+      ],
+      "type": "AND",
+    },
+    "Advanced Writing in the Disciplines": Object {
+      "name": "Advanced Writing in the Disciplines",
+      "numCreditsMax": 4,
+      "numCreditsMin": 4,
+      "requirements": Array [
+        Object {
+          "classId": 3302,
+          "subject": "ENGW",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3308,
+          "subject": "ENGW",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3311,
+          "subject": "ENGW",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3315,
+          "subject": "ENGW",
+          "type": "COURSE",
+        },
+      ],
+      "type": "OR",
+    },
+    "Capstone": Object {
+      "name": "Capstone",
+      "numCreditsMax": 4,
+      "numCreditsMin": 4,
+      "requirements": Array [
+        Object {
+          "classId": 4692,
+          "subject": "ECON",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4930,
+          "subject": "CS",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4940,
+          "subject": "CS",
+          "type": "COURSE",
+        },
+      ],
+      "type": "OR",
+    },
+    "College Writing": Object {
+      "name": "College Writing",
+      "numCreditsMax": 4,
+      "numCreditsMin": 4,
+      "requirements": Array [
+        Object {
+          "classId": 1111,
+          "subject": "ENGW",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 1102,
+          "subject": "ENGW",
+          "type": "COURSE",
+        },
+      ],
+      "type": "OR",
+    },
+    "Computer Science Fundamentals Courses": Object {
+      "name": "Computer Science Fundamentals Courses",
+      "requirements": Array [
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 2500,
+              "subject": "CS",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 2501,
+              "subject": "CS",
+              "type": "COURSE",
+            },
+          ],
+          "type": "AND",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 2510,
+              "subject": "CS",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 2511,
+              "subject": "CS",
+              "type": "COURSE",
+            },
+          ],
+          "type": "AND",
+        },
+      ],
+      "type": "AND",
+    },
+    "Computer Science Overview": Object {
+      "name": "Computer Science Overview",
+      "requirements": Array [
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 1200,
+              "subject": "CS",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 1000,
+              "subject": "ECON",
+              "type": "COURSE",
+            },
+          ],
+          "type": "OR",
+        },
+        Object {
+          "classId": 1210,
+          "subject": "CS",
+          "type": "COURSE",
+        },
+      ],
+      "type": "AND",
+    },
+    "Computer Science Required Courses": Object {
+      "name": "Computer Science Required Courses",
+      "requirements": Array [
+        Object {
+          "classId": 3000,
+          "subject": "CS",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3500,
+          "subject": "CS",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3650,
+          "subject": "CS",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3700,
+          "subject": "CS",
+          "type": "COURSE",
+        },
+      ],
+      "type": "AND",
+    },
+    "Computer Science Senior Seminar": Object {
+      "name": "Computer Science Senior Seminar",
+      "requirements": Array [
+        Object {
+          "classId": 1170,
+          "subject": "THTR",
+          "type": "COURSE",
+        },
+      ],
+      "type": "AND",
+    },
+    "Cybersecurity Elective": Object {
+      "name": "Cybersecurity Elective",
+      "numCreditsMax": 4,
+      "numCreditsMin": 4,
+      "requirements": Array [
+        Object {
+          "classId": 2800,
+          "subject": "CS",
+          "type": "COURSE",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 4710,
+              "subject": "CS",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 6710,
+              "subject": "CS",
+              "type": "COURSE",
+            },
+          ],
+          "type": "OR",
+        },
+        Object {
+          "classId": 5770,
+          "subject": "CS",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4770,
+          "subject": "CS",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4400,
+          "subject": "CS",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4500,
+          "subject": "CS",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4240,
+          "subject": "CS",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4300,
+          "subject": "DS",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4400,
+          "subject": "DS",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 5200,
+          "subject": "IA",
+          "type": "COURSE",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 5210,
+              "subject": "IA",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 5211,
+              "subject": "IA",
+              "type": "COURSE",
+            },
+          ],
+          "type": "AND",
+        },
+        Object {
+          "classId": 4300,
+          "subject": "IS",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 2160,
+          "subject": "EECE",
+          "type": "COURSE",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 2322,
+              "subject": "EECE",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 2323,
+              "subject": "EECE",
+              "type": "COURSE",
+            },
+          ],
+          "type": "AND",
+        },
+        Object {
+          "classId": 3324,
+          "subject": "EECE",
+          "type": "COURSE",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 4534,
+              "subject": "EECE",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 4535,
+              "subject": "EECE",
+              "type": "COURSE",
+            },
+          ],
+          "type": "AND",
+        },
+        Object {
+          "classId": 3527,
+          "subject": "MATH",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4575,
+          "subject": "MATH",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 2551,
+          "subject": "COMM",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 2200,
+          "subject": "CRIM",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3030,
+          "subject": "CRIM",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4040,
+          "subject": "CRIM",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3400,
+          "subject": "CRIM",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 1101,
+          "subject": "LPSC",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 2301,
+          "subject": "LPSC",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3303,
+          "subject": "LPSC",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 1145,
+          "subject": "PHIL",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 2390,
+          "subject": "POLS",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3307,
+          "subject": "POLS",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3324,
+          "subject": "POLS",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3406,
+          "subject": "POLS",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3408,
+          "subject": "POLS",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3420,
+          "subject": "POLS",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3423,
+          "subject": "POLS",
+          "type": "COURSE",
+        },
+      ],
+      "type": "OR",
+    },
+    "Cybersecurity Required Courses": Object {
+      "name": "Cybersecurity Required Courses",
+      "requirements": Array [
+        Object {
+          "classId": 2550,
+          "subject": "CS",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3740,
+          "subject": "CS",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4740,
+          "subject": "CS",
+          "type": "COURSE",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 4170,
+              "subject": "CS",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 5240,
+              "subject": "IA",
+              "type": "COURSE",
+            },
+          ],
+          "type": "OR",
+        },
+      ],
+      "type": "AND",
+    },
+    "Discrete Structures": Object {
+      "name": "Discrete Structures",
+      "requirements": Array [
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 1800,
+              "subject": "CS",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 1802,
+              "subject": "CS",
+              "type": "COURSE",
+            },
+          ],
+          "type": "AND",
+        },
+      ],
+      "type": "AND",
+    },
+    "Electives": Object {
+      "name": "Electives",
+      "numCreditsMax": 16,
+      "numCreditsMin": 16,
+      "requirements": Object {
+        "creditsRequired": 16,
+        "ranges": Array [
+          Object {
+            "idRangeEnd": 2999,
+            "idRangeStart": 1001,
+            "subject": "ECON",
+          },
+          Object {
+            "idRangeEnd": 5999,
+            "idRangeStart": 3000,
+            "subject": "ECON",
+          },
+        ],
+        "type": "RANGE",
+      },
+      "type": "RANGE",
+    },
+    "Integrative Requirement ": Object {
+      "name": "Integrative Requirement ",
+      "requirements": Array [
+        Object {
+          "classId": 2560,
+          "subject": "ECON",
+          "type": "COURSE",
+        },
+      ],
+      "type": "AND",
+    },
+    "Required Courses": Object {
+      "name": "Required Courses",
+      "requirements": Array [
+        Object {
+          "classId": 1115,
+          "subject": "ECON",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 1116,
+          "subject": "ECON",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 2315,
+          "subject": "ECON",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 2316,
+          "subject": "ECON",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 2350,
+          "subject": "ECON",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 2560,
+          "subject": "ECON",
+          "type": "COURSE",
+        },
+      ],
+      "type": "AND",
+    },
+  },
+  "requirementGroups": Array [
+    "Computer Science Overview",
+    "Discrete Structures",
+    "Computer Science Fundamentals Courses",
+    "Computer Science Required Courses",
+    "Cybersecurity Required Courses",
+    "Cybersecurity Elective",
+    "Computer Science Senior Seminar",
+    "",
+    "College Writing",
+    "Advanced Writing in the Disciplines",
+    "Required Courses",
+    "Electives",
+    "Capstone",
+    "Integrative Requirement ",
+  ],
+  "totalCreditsRequired": 0,
+  "yearVersion": 2018,
+}
+`;
+
+exports[`ensure that catalog_scraper produces the expected output for supported majors. 15`] = `
+Object {
+  "isLanguageRequired": false,
+  "name": "Computer Science and Economics, BS",
+  "nupaths": Array [],
+  "requirementGroupMap": Object {
+    "": Object {
+      "name": "",
+      "requirements": Array [
+        Object {
+          "classId": 2000,
+          "subject": "IS",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 2560,
+          "subject": "ECON",
+          "type": "COURSE",
+        },
+      ],
+      "type": "AND",
+    },
+    "Advanced Writing in the Disciplines": Object {
+      "name": "Advanced Writing in the Disciplines",
+      "numCreditsMax": 4,
+      "numCreditsMin": 4,
+      "requirements": Array [
+        Object {
+          "classId": 3302,
+          "subject": "ENGW",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3308,
+          "subject": "ENGW",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3315,
+          "subject": "ENGW",
+          "type": "COURSE",
+        },
+      ],
+      "type": "OR",
+    },
+    "College Writing": Object {
+      "name": "College Writing",
+      "requirements": Array [
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 1111,
+              "subject": "ENGW",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 1102,
+              "subject": "ENGW",
+              "type": "COURSE",
+            },
+          ],
+          "type": "OR",
+        },
+      ],
+      "type": "AND",
+    },
+    "Computer Science Elective Courses": Object {
+      "name": "Computer Science Elective Courses",
+      "numCreditsMax": 12,
+      "numCreditsMin": 12,
+      "requirements": Object {
+        "creditsRequired": 12,
+        "ranges": Array [
+          Object {
+            "idRangeEnd": 9999,
+            "idRangeStart": 2500,
+            "subject": "CS",
+          },
+          Object {
+            "idRangeEnd": 9999,
+            "idRangeStart": 2000,
+            "subject": "IS",
+          },
+          Object {
+            "idRangeEnd": 9999,
+            "idRangeStart": 2000,
+            "subject": "DS",
+          },
+        ],
+        "type": "RANGE",
+      },
+      "type": "RANGE",
+    },
+    "Computer Science Fundamental Courses": Object {
+      "name": "Computer Science Fundamental Courses",
+      "requirements": Array [
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 1800,
+              "subject": "CS",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 1802,
+              "subject": "CS",
+              "type": "COURSE",
+            },
+          ],
+          "type": "AND",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 2500,
+              "subject": "CS",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 2501,
+              "subject": "CS",
+              "type": "COURSE",
+            },
+          ],
+          "type": "AND",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 2510,
+              "subject": "CS",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 2511,
+              "subject": "CS",
+              "type": "COURSE",
+            },
+          ],
+          "type": "AND",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 2800,
+              "subject": "CS",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 2801,
+              "subject": "CS",
+              "type": "COURSE",
+            },
+          ],
+          "type": "AND",
+        },
+      ],
+      "type": "AND",
+    },
+    "Computer Science Overview": Object {
+      "name": "Computer Science Overview",
+      "requirements": Array [
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 1200,
+              "subject": "CS",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 1000,
+              "subject": "ECON",
+              "type": "COURSE",
+            },
+          ],
+          "type": "OR",
+        },
+        Object {
+          "classId": 1210,
+          "subject": "CS",
+          "type": "COURSE",
+        },
+      ],
+      "type": "AND",
+    },
+    "Computer Science Required Courses": Object {
+      "name": "Computer Science Required Courses",
+      "requirements": Array [
+        Object {
+          "classId": 3000,
+          "subject": "CS",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3200,
+          "subject": "CS",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3500,
+          "subject": "CS",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 2000,
+          "subject": "IS",
+          "type": "COURSE",
+        },
+      ],
+      "type": "AND",
+    },
+    "Computing and Social Issues": Object {
+      "name": "Computing and Social Issues",
+      "numCreditsMax": 4,
+      "numCreditsMin": 4,
+      "requirements": Array [
+        Object {
+          "classId": 4528,
+          "subject": "SOCL",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3485,
+          "subject": "SOCL",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 1280,
+          "subject": "SOCL",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3418,
+          "subject": "ANTH",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 1145,
+          "subject": "PHIL",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 5240,
+          "subject": "IA",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 2102,
+          "subject": "INSH",
+          "type": "COURSE",
+        },
+      ],
+      "type": "OR",
+    },
+    "Economics Capstone": Object {
+      "name": "Economics Capstone",
+      "requirements": Array [
+        Object {
+          "classId": 4692,
+          "subject": "ECON",
+          "type": "COURSE",
+        },
+      ],
+      "type": "AND",
+    },
+    "Economics Electives": Object {
+      "name": "Economics Electives",
+      "numCreditsMax": 16,
+      "numCreditsMin": 16,
+      "requirements": Array [
+        Object {
+          "classId": 1230,
+          "subject": "ECON",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 1240,
+          "subject": "ECON",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 1290,
+          "subject": "ECON",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3420,
+          "subject": "ECON",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3423,
+          "subject": "ECON",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3424,
+          "subject": "ECON",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3425,
+          "subject": "ECON",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3440,
+          "subject": "ECON",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4635,
+          "subject": "ECON",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4681,
+          "subject": "ECON",
+          "type": "COURSE",
+        },
+      ],
+      "type": "OR",
+    },
+    "Mathematics": Object {
+      "name": "Mathematics",
+      "requirements": Array [
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 1231,
+              "subject": "MATH",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 1341,
+              "subject": "MATH",
+              "type": "COURSE",
+            },
+          ],
+          "type": "OR",
+        },
+      ],
+      "type": "AND",
+    },
+    "Presentation Requirement": Object {
+      "name": "Presentation Requirement",
+      "requirements": Array [
+        Object {
+          "classId": 1170,
+          "subject": "THTR",
+          "type": "COURSE",
+        },
+      ],
+      "type": "AND",
+    },
+    "Required Economics Courses": Object {
+      "name": "Required Economics Courses",
+      "requirements": Array [
+        Object {
+          "classId": 1115,
+          "subject": "ECON",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 1116,
+          "subject": "ECON",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 2315,
+          "subject": "ECON",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 2316,
+          "subject": "ECON",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 2350,
+          "subject": "ECON",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 2560,
+          "subject": "ECON",
+          "type": "COURSE",
+        },
+      ],
+      "type": "AND",
+    },
+  },
+  "requirementGroups": Array [
+    "Computer Science Overview",
+    "Computer Science Fundamental Courses",
+    "Computer Science Required Courses",
+    "Presentation Requirement",
+    "Computer Science Elective Courses",
+    "Required Economics Courses",
+    "Economics Electives",
+    "Economics Capstone",
+    "",
+    "Mathematics",
+    "Computing and Social Issues",
+    "College Writing",
+    "Advanced Writing in the Disciplines",
+  ],
+  "totalCreditsRequired": 0,
+  "yearVersion": 2018,
+}
+`;
