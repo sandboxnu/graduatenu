@@ -20,6 +20,9 @@ const supported = [
   // This major parses correctly, but has a "Take two courses, at least one of which is at the 4000 or 5000 level, from the following:"
   // which is not handled, and has courses double listed in one location which may not parse correctly (?)
   //"http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-philosophy-bs/#programrequirementstext",
+
+  // "Complete four ECON electives with at least two numbered at ECON 3000 or above."
+  // "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/cybersecurity-economics-bs/#programrequirementstext"
 ];
 
 //run tests

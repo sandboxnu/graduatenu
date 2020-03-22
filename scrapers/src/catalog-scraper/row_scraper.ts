@@ -218,12 +218,21 @@ function parseRequiredRow(
   //the length should be === 1.
   let loadedAnchor: Cheerio = $(anchorsArray[0]);
   //length of this array === 2.
-  let splitAnchor: string[] = loadedAnchor
+
+  let splitByChar: string[] = loadedAnchor
     .text()
     .split(String.fromCharCode(160));
+  //console.log(splitByChar);
+  let splitAnchor: string[] = [];
+  splitByChar.forEach(element => {
+    splitAnchor = splitAnchor.concat(element.split(String.fromCharCode(32)));
+  });
 
   //first item in the array is the subject
   let subject: string = splitAnchor[0];
+  if (subject.length > 4) {
+    subject = subject.slice(0, 4);
+  }
 
   //second item in array is the course number.
   let classId: number = parseInt(splitAnchor[1]);

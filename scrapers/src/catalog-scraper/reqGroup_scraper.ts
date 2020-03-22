@@ -12,7 +12,12 @@ import {
   ISubjectRange,
 } from "../../../frontend/src/models/types";
 import { SectionType, CreditsRange, ScraperRequirement } from "../models/types";
-import { ORTagMap, RANGETagMap, RANGECourseSet } from "./catalog_scraper";
+import {
+  ORTagMap,
+  RANGETagMap,
+  RANGECourseSet,
+  SubheaderTagSet,
+} from "./catalog_scraper";
 import {
   processHoursText,
   findReqGroupName,
@@ -37,6 +42,7 @@ export function createRequirementGroup(
   let sectionType: SectionType = SectionType.AND;
   let minCredits: number = 0;
   let maxCredits: number = 0;
+  let subheader: boolean = false;
 
   //do a pass through the rows to figure out what type of requirment group they represent.
   for (let i = 0; i < rows.length; i++) {
@@ -45,6 +51,10 @@ export function createRequirementGroup(
     let commentSpan: Cheerio = currentRow.find("span.courselistcomment");
     // a courselistcomment is present in this row
     if (commentSpan.length > 0) {
+      if (SubheaderTagSet.includes(commentSpan.text())) {
+        subheader = true;
+      }
+
       if (ORTagMap.hasOwnProperty(commentSpan.text())) {
         //detected OR Tag; change section type to OR
         sectionType = SectionType.OR;
@@ -96,10 +106,10 @@ export function createRequirementGroup(
   // convert the sectionType to a number.
   switch (+sectionType) {
     case SectionType.AND:
-      let x = processAndSection($, rows);
+      let x = processAndSection($, rows, subheader);
       return x;
     case SectionType.OR:
-      return processOrSection($, rows, minCredits, maxCredits);
+      return processOrSection($, rows, minCredits, maxCredits, subheader);
     case SectionType.RANGE:
       return processRangeSection($, rows, minCredits, maxCredits);
     default:
@@ -114,7 +124,8 @@ export function createRequirementGroup(
  */
 function processAndSection(
   $: CheerioStatic,
-  rows: CheerioElement[]
+  rows: CheerioElement[],
+  is_subheader: boolean
 ): ANDSection | undefined {
   let andSection: ANDSection = {
     type: "AND",
@@ -123,7 +134,7 @@ function processAndSection(
   };
   let subHeaders: boolean = containsSubHeaders($, rows);
   //todo: probably won't actually show up anywhere, but if there's rows above the subheader, might not be processed correctly.
-  if (subHeaders) {
+  if (subHeaders && is_subheader) {
     //// THIS MIGHT BE AN ISSUE FOR THE DESIGN MAJORS //////////////
     //Need to accumlate rows between the sub headers and process them as a single requirement.
     let subHeaderRows: CheerioElement[] = [];
@@ -196,7 +207,8 @@ function processOrSection(
   $: CheerioStatic,
   rows: CheerioElement[],
   minCredits: number,
-  maxCredits: number
+  maxCredits: number,
+  is_subheader: boolean
 ): ORSection | undefined {
   let orSection: ORSection = {
     type: "OR",
@@ -207,7 +219,7 @@ function processOrSection(
   };
   let subHeaders: boolean = containsSubHeaders($, rows);
   //todo: probably won't actually show up anywhere, but if there's rows above the subheader, might not be processed correctly.
-  if (subHeaders) {
+  if (subHeaders && is_subheader) {
     //Need to accumlate rows between the sub headers and process them as a single requirement.
     let subHeaderRows: CheerioElement[] = [];
     for (let i = 0; i < rows.length; i++) {
