@@ -189,5 +189,5 @@ catalogToMajor(
   //uncomment following lines to log output.
 
   console.log("--------------------Parsed major object--------------------");
-  console.log(JSON.stringify(scrapedMajor));
+  //console.log(JSON.stringify(scrapedMajor));
 });
