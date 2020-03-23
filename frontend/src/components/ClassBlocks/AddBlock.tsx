@@ -46,13 +46,22 @@ interface AddBlockProps {
   onClick?: () => void;
 }
 
+/**
+ * A block component that allows the user to add classes in the corresponding semester.
+ */
 export class AddBlock extends React.Component<AddBlockProps> {
+  /**
+   * Toggles this component's hovering state as true when the mouse enters the block.
+   */
   handleMouseEnter() {
     this.setState({
       hovering: true,
     });
   }
 
+  /**
+   * Toggles this component's hovering state as false when the mouse leaves the block.
+   */
   handleMouseLeave() {
     this.setState({
       hovering: false,

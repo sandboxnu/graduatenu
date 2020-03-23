@@ -111,8 +111,6 @@ interface ReduxStoreHomeProps {
   major?: Major;
   planStr?: string;
   warnings: IWarning[];
-  majors: Major[];
-  plans: Record<string, Schedule[]>;
 }
 
 interface ReduxDispatchHomeProps {
@@ -121,10 +119,7 @@ interface ReduxDispatchHomeProps {
     season: SeasonWord,
     newSemester: DNDScheduleTerm
   ) => void;
-  setCoopCycle: (schedule?: Schedule) => void;
-  setSchedule: (schedule: Schedule) => void;
   setDNDSchedule: (schedule: DNDSchedule) => void;
-  setMajor: (major?: Major) => void;
 }
 
 type Props = ToastHomeProps &
@@ -280,8 +275,6 @@ const mapStateToProps = (state: AppState) => ({
   planStr: getPlanStrFromState(state),
   major: getMajorFromState(state),
   warnings: getWarningsFromState(state),
-  majors: getMajors(state),
-  plans: getPlans(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
@@ -290,11 +283,8 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     season: SeasonWord,
     newSemester: DNDScheduleTerm
   ) => dispatch(updateSemesterAction(year, season, newSemester)),
-  setCoopCycle: (schedule?: Schedule) => dispatch(setCoopCycle(schedule)),
-  setSchedule: (schedule: Schedule) => dispatch(setScheduleAction(schedule)),
   setDNDSchedule: (schedule: DNDSchedule) =>
     dispatch(setDNDScheduleAction(schedule)),
-  setMajor: (major?: Major) => dispatch(setMajorAction(major)),
 });
 
 export const Home = connect<

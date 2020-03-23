@@ -42,6 +42,9 @@ interface ClassBlockBodyProps {
   onDelete: () => void;
 }
 
+/**
+ * A component to dynamically render the text/body contents of a class block.
+ */
 export const ClassBlockBody: React.FC<ClassBlockBodyProps> = ({
   course,
   hovering,
