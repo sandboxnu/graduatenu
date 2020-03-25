@@ -13,7 +13,7 @@ Object {
               "type": "and",
               "values": Array [],
             },
-            "name": "Leadership Skill Development",
+            "name": "First Year Seminar",
             "numCreditsMax": 1,
             "numCreditsMin": 1,
             "prereqs": Object {
@@ -298,7 +298,12 @@ Object {
             "classId": "3000",
             "coreqs": Object {
               "type": "and",
-              "values": Array [],
+              "values": Array [
+                Object {
+                  "classId": "3001",
+                  "subject": "CS",
+                },
+              ],
             },
             "name": "Algorithms and Data",
             "numCreditsMax": 4,
@@ -791,7 +796,7 @@ Object {
               "type": "and",
               "values": Array [],
             },
-            "name": "Leadership Skill Development",
+            "name": "First Year Seminar",
             "numCreditsMax": 1,
             "numCreditsMin": 1,
             "prereqs": Object {
@@ -1079,7 +1084,12 @@ Object {
             "classId": "3000",
             "coreqs": Object {
               "type": "and",
-              "values": Array [],
+              "values": Array [
+                Object {
+                  "classId": "3001",
+                  "subject": "CS",
+                },
+              ],
             },
             "name": "Algorithms and Data",
             "numCreditsMax": 4,
@@ -3225,107 +3235,124 @@ Object {
       "fall": Object {
         "classes": Array [
           Object {
-            "classId": "1200",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "name": "First Year Seminar",
-            "numCreditsMax": 1,
-            "numCreditsMin": 1,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "subject": "CS",
-          },
-          Object {
-            "classId": "1800",
+            "classId": "1107",
             "coreqs": Object {
               "type": "and",
               "values": Array [
                 Object {
-                  "classId": "1802",
-                  "subject": "CS",
+                  "classId": "1108",
+                  "subject": "BIOL",
                 },
               ],
             },
-            "name": "Discrete Structures",
+            "name": "Foundations of Biology",
             "numCreditsMax": 4,
             "numCreditsMin": 4,
             "prereqs": Object {
               "type": "and",
               "values": Array [],
             },
-            "subject": "CS",
+            "subject": "BIOL",
           },
           Object {
-            "classId": "1802",
+            "classId": "1108",
             "coreqs": Object {
               "type": "and",
               "values": Array [
                 Object {
-                  "classId": "1800",
-                  "subject": "CS",
+                  "classId": "1107",
+                  "subject": "BIOL",
                 },
               ],
             },
-            "name": "Seminar for CS 1800",
+            "name": "Lab for BIOL 1107",
             "numCreditsMax": 1,
             "numCreditsMin": 1,
             "prereqs": Object {
               "type": "and",
               "values": Array [],
             },
-            "subject": "CS",
+            "subject": "BIOL",
           },
           Object {
-            "classId": "2500",
+            "classId": "1211",
             "coreqs": Object {
               "type": "and",
               "values": Array [
                 Object {
-                  "classId": "2501",
-                  "subject": "CS",
+                  "classId": "1212",
+                  "subject": "CHEM",
+                },
+                Object {
+                  "classId": "1213",
+                  "subject": "CHEM",
                 },
               ],
             },
-            "name": "Fundamentals of Computer Science 1",
+            "name": "General Chemistry 1",
             "numCreditsMax": 4,
             "numCreditsMin": 4,
             "prereqs": Object {
               "type": "and",
               "values": Array [],
             },
-            "subject": "CS",
+            "subject": "CHEM",
           },
           Object {
-            "classId": "2501",
+            "classId": "1212",
             "coreqs": Object {
               "type": "and",
               "values": Array [
                 Object {
-                  "classId": "2500",
-                  "subject": "CS",
+                  "classId": "1211",
+                  "subject": "CHEM",
+                },
+                Object {
+                  "classId": "1213",
+                  "subject": "CHEM",
                 },
               ],
             },
-            "name": "Lab for CS 2500",
+            "name": "Lab for CHEM 1211",
             "numCreditsMax": 1,
             "numCreditsMin": 1,
             "prereqs": Object {
               "type": "and",
               "values": Array [],
             },
-            "subject": "CS",
+            "subject": "CHEM",
           },
           Object {
-            "classId": "1365",
+            "classId": "1213",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "1211",
+                  "subject": "CHEM",
+                },
+                Object {
+                  "classId": "1212",
+                  "subject": "CHEM",
+                },
+              ],
+            },
+            "name": "Recitation for CHEM 1211",
+            "numCreditsMax": 0,
+            "numCreditsMin": 0,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "subject": "CHEM",
+          },
+          Object {
+            "classId": "1251",
             "coreqs": Object {
               "type": "and",
               "values": Array [],
             },
-            "name": "Introduction to Mathematical Reasoning",
+            "name": "Calculus and Differential Equations for Biology 1",
             "numCreditsMax": 4,
             "numCreditsMin": 4,
             "prereqs": Object {
@@ -3333,6 +3360,144 @@ Object {
               "values": Array [],
             },
             "subject": "MATH",
+          },
+          Object {
+            "classId": "9999",
+            "name": "Elective 1",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "subject": "XXXX",
+          },
+          Object {
+            "classId": "1000",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "Biochemistry at Northeastern",
+            "numCreditsMax": 1,
+            "numCreditsMin": 1,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "subject": "BIOC",
+          },
+        ],
+        "id": 1010,
+        "season": "FL",
+        "status": "CLASSES",
+        "termId": 100010,
+        "year": 1000,
+      },
+      "isSummerFull": false,
+      "spring": Object {
+        "classes": Array [
+          Object {
+            "classId": "2299",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "Inquiries in Biological Sciences",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "prereqs": Object {
+              "type": "or",
+              "values": Array [
+                Object {
+                  "classId": "1101",
+                  "missing": true,
+                  "subject": "BIOL",
+                },
+                Object {
+                  "classId": "1107",
+                  "subject": "BIOL",
+                },
+                Object {
+                  "classId": "1111",
+                  "subject": "BIOL",
+                },
+              ],
+            },
+            "subject": "BIOL",
+          },
+          Object {
+            "classId": "1214",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "1215",
+                  "subject": "CHEM",
+                },
+                Object {
+                  "classId": "1216",
+                  "subject": "CHEM",
+                },
+              ],
+            },
+            "name": "General Chemistry 2",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "1211",
+                  "subject": "CHEM",
+                },
+              ],
+            },
+            "subject": "CHEM",
+          },
+          Object {
+            "classId": "1215",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "1214",
+                  "subject": "CHEM",
+                },
+                Object {
+                  "classId": "1216",
+                  "subject": "CHEM",
+                },
+              ],
+            },
+            "name": "Lab for CHEM 1214",
+            "numCreditsMax": 1,
+            "numCreditsMin": 1,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "subject": "CHEM",
+          },
+          Object {
+            "classId": "1216",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "1214",
+                  "subject": "CHEM",
+                },
+                Object {
+                  "classId": "1215",
+                  "subject": "CHEM",
+                },
+              ],
+            },
+            "name": "Recitation for CHEM 1214",
+            "numCreditsMax": 0,
+            "numCreditsMin": 0,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "subject": "CHEM",
           },
           Object {
             "classId": "1111",
@@ -3349,98 +3514,25 @@ Object {
             },
             "subject": "ENGW",
           },
-        ],
-        "id": 1010,
-        "season": "FL",
-        "status": "CLASSES",
-        "termId": 100010,
-        "year": 1000,
-      },
-      "isSummerFull": false,
-      "spring": Object {
-        "classes": Array [
           Object {
-            "classId": "2510",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "2511",
-                  "subject": "CS",
-                },
-              ],
-            },
-            "name": "Fundamentals of Computer Science 2",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "2500",
-                  "subject": "CS",
-                },
-              ],
-            },
-            "subject": "CS",
-          },
-          Object {
-            "classId": "2511",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "2510",
-                  "subject": "CS",
-                },
-              ],
-            },
-            "name": "Lab for CS 2510",
-            "numCreditsMax": 1,
-            "numCreditsMin": 1,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "subject": "CS",
-          },
-          Object {
-            "classId": "2810",
+            "classId": "1252",
             "coreqs": Object {
               "type": "and",
               "values": Array [],
             },
-            "name": "Mathematics of Data Models",
+            "name": "Calculus and Differential Equations for Biology 2",
             "numCreditsMax": 4,
             "numCreditsMin": 4,
             "prereqs": Object {
               "type": "and",
               "values": Array [
                 Object {
-                  "classId": "1800",
-                  "subject": "CS",
-                },
-                Object {
-                  "classId": "2500",
-                  "subject": "CS",
+                  "classId": "1251",
+                  "subject": "MATH",
                 },
               ],
             },
-            "subject": "CS",
-          },
-          Object {
-            "classId": "9999",
-            "name": "Science elective with lab",
-            "numCreditsMax": 5,
-            "numCreditsMin": 5,
-            "subject": "XXXX",
-          },
-          Object {
-            "classId": "9999",
-            "name": "Elective",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "subject": "XXXX",
+            "subject": "MATH",
           },
         ],
         "id": 1030,
@@ -3452,37 +3544,109 @@ Object {
       "summer1": Object {
         "classes": Array [
           Object {
-            "classId": "3500",
+            "classId": "2301",
             "coreqs": Object {
               "type": "and",
               "values": Array [],
             },
-            "name": "Object-Oriented Design",
+            "name": "Genetics and Molecular Biology",
             "numCreditsMax": 4,
             "numCreditsMin": 4,
             "prereqs": Object {
-              "type": "or",
+              "type": "and",
               "values": Array [
                 Object {
-                  "classId": "2510",
-                  "subject": "CS",
+                  "type": "or",
+                  "values": Array [
+                    Object {
+                      "classId": "1103",
+                      "missing": true,
+                      "subject": "BIOL",
+                    },
+                    Object {
+                      "classId": "1113",
+                      "subject": "BIOL",
+                    },
+                    Object {
+                      "classId": "1115",
+                      "subject": "BIOL",
+                    },
+                    Object {
+                      "classId": "2297",
+                      "missing": true,
+                      "subject": "BIOL",
+                    },
+                    Object {
+                      "classId": "2299",
+                      "subject": "BIOL",
+                    },
+                    Object {
+                      "classId": "1105",
+                      "subject": "EEMB",
+                    },
+                    Object {
+                      "classId": "2290",
+                      "subject": "EEMB",
+                    },
+                    Object {
+                      "classId": "2400",
+                      "missing": true,
+                      "subject": "ENVR",
+                    },
+                    Object {
+                      "classId": "2400",
+                      "subject": "EEMB",
+                    },
+                  ],
                 },
                 Object {
-                  "classId": "1500",
-                  "missing": true,
-                  "subject": "CS",
-                },
-                Object {
-                  "classId": "2560",
-                  "subject": "EECE",
+                  "type": "or",
+                  "values": Array [
+                    Object {
+                      "classId": "1211",
+                      "subject": "CHEM",
+                    },
+                    Object {
+                      "classId": "1217",
+                      "subject": "CHEM",
+                    },
+                    Object {
+                      "classId": "1151",
+                      "subject": "CHEM",
+                    },
+                    Object {
+                      "classId": "1161",
+                      "subject": "CHEM",
+                    },
+                  ],
                 },
               ],
             },
-            "subject": "CS",
+            "subject": "BIOL",
+          },
+          Object {
+            "classId": "2302",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "Lab for BIOL 2301",
+            "numCreditsMax": 1,
+            "numCreditsMin": 1,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "2301",
+                  "subject": "BIOL",
+                },
+              ],
+            },
+            "subject": "BIOL",
           },
           Object {
             "classId": "9999",
-            "name": "Elective",
+            "name": "Elective 2",
             "numCreditsMax": 4,
             "numCreditsMin": 4,
             "subject": "XXXX",
@@ -3497,72 +3661,18 @@ Object {
       "summer2": Object {
         "classes": Array [
           Object {
-            "classId": "1341",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "name": "Calculus 1 for Science and Engineering",
+            "classId": "9999",
+            "name": "Elective 3",
             "numCreditsMax": 4,
             "numCreditsMin": 4,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "subject": "MATH",
+            "subject": "XXXX",
           },
           Object {
-            "classId": "3000",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "3001",
-                  "subject": "CS",
-                },
-              ],
-            },
-            "name": "Algorithms and Data",
+            "classId": "9999",
+            "name": "Elective 4",
             "numCreditsMax": 4,
             "numCreditsMin": 4,
-            "prereqs": Object {
-              "type": "or",
-              "values": Array [
-                Object {
-                  "classId": "1500",
-                  "missing": true,
-                  "subject": "CS",
-                },
-                Object {
-                  "type": "and",
-                  "values": Array [
-                    Object {
-                      "classId": "2510",
-                      "subject": "CS",
-                    },
-                    Object {
-                      "classId": "1800",
-                      "subject": "CS",
-                    },
-                  ],
-                },
-                Object {
-                  "classId": "2160",
-                  "subject": "EECE",
-                },
-                Object {
-                  "classId": "2162",
-                  "missing": true,
-                  "subject": "EECE",
-                },
-                Object {
-                  "classId": "2164",
-                  "missing": true,
-                  "subject": "EECE",
-                },
-              ],
-            },
-            "subject": "CS",
+            "subject": "XXXX",
           },
         ],
         "id": 1060,
@@ -3577,95 +3687,158 @@ Object {
       "fall": Object {
         "classes": Array [
           Object {
-            "classId": "3650",
+            "classId": "2309",
             "coreqs": Object {
               "type": "and",
               "values": Array [],
             },
-            "name": "Computer Systems",
+            "name": "Biology Project Lab",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "2301",
+                  "subject": "BIOL",
+                },
+              ],
+            },
+            "subject": "BIOL",
+          },
+          Object {
+            "classId": "2311",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "2312",
+                  "subject": "CHEM",
+                },
+              ],
+            },
+            "name": "Organic Chemistry 1",
             "numCreditsMax": 4,
             "numCreditsMin": 4,
             "prereqs": Object {
               "type": "or",
               "values": Array [
                 Object {
-                  "classId": "2510",
-                  "subject": "CS",
+                  "classId": "1151",
+                  "subject": "CHEM",
                 },
                 Object {
-                  "classId": "1500",
-                  "missing": true,
-                  "subject": "CS",
+                  "classId": "1214",
+                  "subject": "CHEM",
                 },
                 Object {
-                  "classId": "2560",
-                  "subject": "EECE",
+                  "classId": "1220",
+                  "subject": "CHEM",
+                },
+                Object {
+                  "classId": "1161",
+                  "subject": "CHEM",
                 },
               ],
             },
-            "subject": "CS",
+            "subject": "CHEM",
           },
           Object {
-            "classId": "2160",
+            "classId": "2312",
             "coreqs": Object {
               "type": "and",
-              "values": Array [],
-            },
-            "name": "Embedded Design: Enabling Robotics",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "prereqs": Object {
-              "type": "or",
               "values": Array [
                 Object {
-                  "classId": "1111",
-                  "subject": "GE",
-                },
-                Object {
-                  "classId": "1502",
-                  "subject": "GE",
-                },
-                Object {
-                  "classId": "3500",
-                  "subject": "CS",
+                  "classId": "2311",
+                  "subject": "CHEM",
                 },
               ],
             },
-            "subject": "EECE",
-          },
-          Object {
-            "classId": "9999",
-            "name": "Concentration course",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "subject": "XXXX",
-          },
-          Object {
-            "classId": "9999",
-            "name": "Elective",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "subject": "XXXX",
-          },
-          Object {
-            "classId": "1210",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "name": "Professional Development for Khoury Co-op",
+            "name": "Lab for CHEM 2311",
             "numCreditsMax": 1,
             "numCreditsMin": 1,
             "prereqs": Object {
               "type": "and",
+              "values": Array [],
+            },
+            "subject": "CHEM",
+          },
+          Object {
+            "classId": "1151",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "Physics for Engineering 1",
+            "numCreditsMax": 3,
+            "numCreditsMin": 3,
+            "prereqs": Object {
+              "type": "or",
               "values": Array [
                 Object {
-                  "classId": "2510",
-                  "subject": "CS",
+                  "classId": "1241",
+                  "subject": "MATH",
+                },
+                Object {
+                  "classId": "1251",
+                  "subject": "MATH",
+                },
+                Object {
+                  "classId": "1340",
+                  "subject": "MATH",
+                },
+                Object {
+                  "classId": "1341",
+                  "subject": "MATH",
+                },
+                Object {
+                  "classId": "1342",
+                  "subject": "MATH",
+                },
+                Object {
+                  "classId": "2321",
+                  "subject": "MATH",
                 },
               ],
             },
-            "subject": "CS",
+            "subject": "PHYS",
+          },
+          Object {
+            "classId": "1152",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "Lab for PHYS 1151",
+            "numCreditsMax": 1,
+            "numCreditsMin": 1,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "subject": "PHYS",
+          },
+          Object {
+            "classId": "1153",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "Interactive Learning Seminar for PHYS 1151",
+            "numCreditsMax": 1,
+            "numCreditsMin": 1,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "subject": "PHYS",
+          },
+          Object {
+            "classId": "9999",
+            "name": "Elective 5",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "subject": "XXXX",
           },
         ],
         "id": 1011,
@@ -3676,41 +3849,284 @@ Object {
       },
       "isSummerFull": false,
       "spring": Object {
-        "classes": Array [],
-        "id": 1031,
-        "season": "SP",
-        "status": "COOP",
-        "termId": 100130,
-        "year": 1001,
-      },
-      "summer1": Object {
-        "classes": Array [],
-        "id": 1041,
-        "season": "S1",
-        "status": "COOP",
-        "termId": 100140,
-        "year": 1001,
-      },
-      "summer2": Object {
         "classes": Array [
           Object {
+            "classId": "2313",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "2314",
+                  "subject": "CHEM",
+                },
+              ],
+            },
+            "name": "Organic Chemistry 2",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "prereqs": Object {
+              "type": "or",
+              "values": Array [
+                Object {
+                  "classId": "2311",
+                  "subject": "CHEM",
+                },
+                Object {
+                  "classId": "2315",
+                  "subject": "CHEM",
+                },
+              ],
+            },
+            "subject": "CHEM",
+          },
+          Object {
+            "classId": "2314",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "2313",
+                  "subject": "CHEM",
+                },
+              ],
+            },
+            "name": "Lab for CHEM 2313",
+            "numCreditsMax": 1,
+            "numCreditsMin": 1,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "subject": "CHEM",
+          },
+          Object {
+            "classId": "1155",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "1157",
+                  "subject": "PHYS",
+                },
+              ],
+            },
+            "name": "Physics for Engineering 2",
+            "numCreditsMax": 3,
+            "numCreditsMin": 3,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "type": "or",
+                  "values": Array [
+                    Object {
+                      "classId": "1151",
+                      "subject": "PHYS",
+                    },
+                    Object {
+                      "classId": "1161",
+                      "subject": "PHYS",
+                    },
+                    Object {
+                      "classId": "1171",
+                      "subject": "PHYS",
+                    },
+                  ],
+                },
+                Object {
+                  "type": "or",
+                  "values": Array [
+                    Object {
+                      "classId": "1252",
+                      "subject": "MATH",
+                    },
+                    Object {
+                      "classId": "1342",
+                      "subject": "MATH",
+                    },
+                    Object {
+                      "classId": "2321",
+                      "subject": "MATH",
+                    },
+                  ],
+                },
+              ],
+            },
+            "subject": "PHYS",
+          },
+          Object {
+            "classId": "1156",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "Lab for PHYS 1155",
+            "numCreditsMax": 1,
+            "numCreditsMin": 1,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "subject": "PHYS",
+          },
+          Object {
+            "classId": "1157",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "1155",
+                  "subject": "PHYS",
+                },
+              ],
+            },
+            "name": "Interactive Learning Seminar for PHYS 1155",
+            "numCreditsMax": 1,
+            "numCreditsMin": 1,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "subject": "PHYS",
+          },
+          Object {
             "classId": "9999",
-            "name": "Elective",
+            "name": "Elective 6",
             "numCreditsMax": 4,
             "numCreditsMin": 4,
             "subject": "XXXX",
           },
           Object {
             "classId": "9999",
-            "name": "Elective",
+            "name": "Elective 7",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "subject": "XXXX",
+          },
+          Object {
+            "classId": "2000",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "Professional Development for Co-op",
+            "numCreditsMax": 1,
+            "numCreditsMin": 1,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "subject": "EESC",
+          },
+        ],
+        "id": 1031,
+        "season": "SP",
+        "status": "CLASSES",
+        "termId": 100130,
+        "year": 1001,
+      },
+      "summer1": Object {
+        "classes": Array [
+          Object {
+            "classId": "3611",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "3612",
+                  "subject": "BIOL",
+                },
+              ],
+            },
+            "name": "Biochemistry",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "2301",
+                  "subject": "BIOL",
+                },
+                Object {
+                  "type": "or",
+                  "values": Array [
+                    Object {
+                      "classId": "2313",
+                      "subject": "CHEM",
+                    },
+                    Object {
+                      "classId": "2317",
+                      "subject": "CHEM",
+                    },
+                  ],
+                },
+                Object {
+                  "type": "or",
+                  "values": Array [
+                    Object {
+                      "classId": "1111",
+                      "missing": true,
+                      "subject": "ENGL",
+                    },
+                    Object {
+                      "classId": "1102",
+                      "missing": true,
+                      "subject": "ENGL",
+                    },
+                    Object {
+                      "classId": "1111",
+                      "subject": "ENGW",
+                    },
+                    Object {
+                      "classId": "1102",
+                      "subject": "ENGW",
+                    },
+                  ],
+                },
+              ],
+            },
+            "subject": "BIOL",
+          },
+          Object {
+            "classId": "3612",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "3611",
+                  "subject": "BIOL",
+                },
+              ],
+            },
+            "name": "Lab for BIOL 3611",
+            "numCreditsMax": 1,
+            "numCreditsMin": 1,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "subject": "BIOL",
+          },
+          Object {
+            "classId": "9999",
+            "name": "Elective 8",
             "numCreditsMax": 4,
             "numCreditsMin": 4,
             "subject": "XXXX",
           },
         ],
+        "id": 1041,
+        "season": "S1",
+        "status": "CLASSES",
+        "termId": 100140,
+        "year": 1001,
+      },
+      "summer2": Object {
+        "classes": Array [],
         "id": 1061,
         "season": "S2",
-        "status": "CLASSES",
+        "status": "COOP",
         "termId": 100160,
         "year": 1001,
       },
@@ -3718,115 +4134,148 @@ Object {
     },
     "1002": Object {
       "fall": Object {
+        "classes": Array [],
+        "id": 1012,
+        "season": "FL",
+        "status": "COOP",
+        "termId": 100210,
+        "year": 1002,
+      },
+      "isSummerFull": false,
+      "spring": Object {
         "classes": Array [
           Object {
-            "classId": "3800",
+            "classId": "3431",
             "coreqs": Object {
               "type": "and",
-              "values": Array [],
-            },
-            "name": "Theory of Computation",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "prereqs": Object {
-              "type": "or",
               "values": Array [
                 Object {
-                  "classId": "1500",
-                  "missing": true,
-                  "subject": "CS",
-                },
-                Object {
-                  "classId": "2510",
-                  "subject": "CS",
-                },
-                Object {
-                  "classId": "2160",
-                  "subject": "EECE",
-                },
-                Object {
-                  "classId": "2162",
-                  "missing": true,
-                  "subject": "EECE",
-                },
-                Object {
-                  "classId": "2164",
-                  "missing": true,
-                  "subject": "EECE",
+                  "classId": "3432",
+                  "subject": "CHEM",
                 },
               ],
             },
-            "subject": "CS",
+            "name": "Physical Chemistry",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "type": "or",
+                  "values": Array [
+                    Object {
+                      "type": "and",
+                      "values": Array [
+                        Object {
+                          "classId": "1214",
+                          "subject": "CHEM",
+                        },
+                        Object {
+                          "classId": "1220",
+                          "subject": "CHEM",
+                        },
+                      ],
+                    },
+                    Object {
+                      "classId": "1151",
+                      "subject": "CHEM",
+                    },
+                    Object {
+                      "classId": "1161",
+                      "subject": "CHEM",
+                    },
+                  ],
+                },
+                Object {
+                  "type": "or",
+                  "values": Array [
+                    Object {
+                      "classId": "1252",
+                      "subject": "MATH",
+                    },
+                    Object {
+                      "classId": "1342",
+                      "subject": "MATH",
+                    },
+                  ],
+                },
+                Object {
+                  "type": "or",
+                  "values": Array [
+                    Object {
+                      "classId": "1147",
+                      "subject": "PHYS",
+                    },
+                    Object {
+                      "classId": "1155",
+                      "subject": "PHYS",
+                    },
+                    Object {
+                      "classId": "1165",
+                      "subject": "PHYS",
+                    },
+                    Object {
+                      "classId": "1175",
+                      "subject": "PHYS",
+                    },
+                  ],
+                },
+              ],
+            },
+            "subject": "CHEM",
           },
           Object {
-            "classId": "1170",
+            "classId": "3432",
             "coreqs": Object {
               "type": "and",
-              "values": Array [],
+              "values": Array [
+                Object {
+                  "classId": "3431",
+                  "subject": "CHEM",
+                },
+              ],
             },
-            "name": "The Eloquent Presenter",
+            "name": "Lab for CHEM 3431",
             "numCreditsMax": 1,
             "numCreditsMin": 1,
             "prereqs": Object {
               "type": "and",
               "values": Array [],
             },
-            "subject": "THTR",
+            "subject": "CHEM",
           },
           Object {
-            "classId": "9999",
-            "name": "Concentration course",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "subject": "XXXX",
-          },
-          Object {
-            "classId": "9999",
-            "name": "Elective",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "subject": "XXXX",
-          },
-          Object {
-            "classId": "9999",
-            "name": "Computing and social issues",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "subject": "XXXX",
-          },
-        ],
-        "id": 1012,
-        "season": "FL",
-        "status": "CLASSES",
-        "termId": 100210,
-        "year": 1002,
-      },
-      "isSummerFull": false,
-      "spring": Object {
-        "classes": Array [],
-        "id": 1032,
-        "season": "SP",
-        "status": "COOP",
-        "termId": 100230,
-        "year": 1002,
-      },
-      "summer1": Object {
-        "classes": Array [],
-        "id": 1042,
-        "season": "S1",
-        "status": "COOP",
-        "termId": 100240,
-        "year": 1002,
-      },
-      "summer2": Object {
-        "classes": Array [
-          Object {
-            "classId": "3302",
+            "classId": "4620",
             "coreqs": Object {
               "type": "and",
               "values": Array [],
             },
-            "name": "Advanced Writing in the Technical Professions",
+            "name": "Introduction to Protein Chemistry",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "prereqs": Object {
+              "type": "or",
+              "values": Array [
+                Object {
+                  "classId": "2313",
+                  "subject": "CHEM",
+                },
+                Object {
+                  "classId": "2317",
+                  "subject": "CHEM",
+                },
+              ],
+            },
+            "subject": "CHEM",
+          },
+          Object {
+            "classId": "3307",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "Advanced Writing in the Sciences",
             "numCreditsMax": 4,
             "numCreditsMin": 4,
             "prereqs": Object {
@@ -3856,15 +4305,64 @@ Object {
           },
           Object {
             "classId": "9999",
-            "name": "Elective",
+            "name": "Elective 9",
             "numCreditsMax": 4,
             "numCreditsMin": 4,
             "subject": "XXXX",
           },
         ],
+        "id": 1032,
+        "season": "SP",
+        "status": "CLASSES",
+        "termId": 100230,
+        "year": 1002,
+      },
+      "summer1": Object {
+        "classes": Array [
+          Object {
+            "classId": "4707",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "Cell and Molecular Biology",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "prereqs": Object {
+              "type": "or",
+              "values": Array [
+                Object {
+                  "classId": "2323",
+                  "missing": true,
+                  "subject": "BIOL",
+                },
+                Object {
+                  "classId": "3611",
+                  "subject": "BIOL",
+                },
+              ],
+            },
+            "subject": "BIOL",
+          },
+          Object {
+            "classId": "9999",
+            "name": "Elective 10",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "subject": "XXXX",
+          },
+        ],
+        "id": 1042,
+        "season": "S1",
+        "status": "CLASSES",
+        "termId": 100240,
+        "year": 1002,
+      },
+      "summer2": Object {
+        "classes": Array [],
         "id": 1062,
         "season": "S2",
-        "status": "CLASSES",
+        "status": "COOP",
         "termId": 100260,
         "year": 1002,
       },
@@ -3874,57 +4372,31 @@ Object {
       "fall": Object {
         "classes": Array [
           Object {
-            "classId": "4500",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "name": "Software Development",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "3500",
-                  "subject": "CS",
-                },
-                Object {
-                  "type": "or",
-                  "values": Array [
-                    Object {
-                      "classId": "1111",
-                      "subject": "ENGW",
-                    },
-                    Object {
-                      "classId": "1102",
-                      "subject": "ENGW",
-                    },
-                  ],
-                },
-              ],
-            },
-            "subject": "CS",
-          },
-          Object {
             "classId": "9999",
-            "name": "Khoury elective",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "subject": "XXXX",
-          },
-          Object {
-            "classId": "9999",
-            "name": "Concentration course",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "subject": "XXXX",
-          },
-          Object {
-            "classId": "9999",
-            "name": "Science elective with lab",
+            "name": "BIOL or CHEM advanced elective",
             "numCreditsMax": 5,
             "numCreditsMin": 5,
+            "subject": "XXXX",
+          },
+          Object {
+            "classId": "9999",
+            "name": "BIOL or CHEM advanced elective",
+            "numCreditsMax": 5,
+            "numCreditsMin": 5,
+            "subject": "XXXX",
+          },
+          Object {
+            "classId": "9999",
+            "name": "BIOL or CHEM advanced elective",
+            "numCreditsMax": 5,
+            "numCreditsMin": 5,
+            "subject": "XXXX",
+          },
+          Object {
+            "classId": "9999",
+            "name": "CHEM 4750 or BIOL4701",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
             "subject": "XXXX",
           },
         ],
@@ -3936,39 +4408,10 @@ Object {
       },
       "isSummerFull": false,
       "spring": Object {
-        "classes": Array [
-          Object {
-            "classId": "9999",
-            "name": "Concentration course",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "subject": "XXXX",
-          },
-          Object {
-            "classId": "9999",
-            "name": "Khoury elective",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "subject": "XXXX",
-          },
-          Object {
-            "classId": "9999",
-            "name": "Security course",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "subject": "XXXX",
-          },
-          Object {
-            "classId": "9999",
-            "name": "Elective",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "subject": "XXXX",
-          },
-        ],
+        "classes": Array [],
         "id": 1033,
         "season": "SP",
-        "status": "CLASSES",
+        "status": "INACTIVE",
         "termId": 100330,
         "year": 1003,
       },
@@ -4008,107 +4451,124 @@ Object {
       "fall": Object {
         "classes": Array [
           Object {
-            "classId": "1200",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "name": "First Year Seminar",
-            "numCreditsMax": 1,
-            "numCreditsMin": 1,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "subject": "CS",
-          },
-          Object {
-            "classId": "1800",
+            "classId": "1107",
             "coreqs": Object {
               "type": "and",
               "values": Array [
                 Object {
-                  "classId": "1802",
-                  "subject": "CS",
+                  "classId": "1108",
+                  "subject": "BIOL",
                 },
               ],
             },
-            "name": "Discrete Structures",
+            "name": "Foundations of Biology",
             "numCreditsMax": 4,
             "numCreditsMin": 4,
             "prereqs": Object {
               "type": "and",
               "values": Array [],
             },
-            "subject": "CS",
+            "subject": "BIOL",
           },
           Object {
-            "classId": "1802",
+            "classId": "1108",
             "coreqs": Object {
               "type": "and",
               "values": Array [
                 Object {
-                  "classId": "1800",
-                  "subject": "CS",
+                  "classId": "1107",
+                  "subject": "BIOL",
                 },
               ],
             },
-            "name": "Seminar for CS 1800",
+            "name": "Lab for BIOL 1107",
             "numCreditsMax": 1,
             "numCreditsMin": 1,
             "prereqs": Object {
               "type": "and",
               "values": Array [],
             },
-            "subject": "CS",
+            "subject": "BIOL",
           },
           Object {
-            "classId": "2500",
+            "classId": "1211",
             "coreqs": Object {
               "type": "and",
               "values": Array [
                 Object {
-                  "classId": "2501",
-                  "subject": "CS",
+                  "classId": "1212",
+                  "subject": "CHEM",
+                },
+                Object {
+                  "classId": "1213",
+                  "subject": "CHEM",
                 },
               ],
             },
-            "name": "Fundamentals of Computer Science 1",
+            "name": "General Chemistry 1",
             "numCreditsMax": 4,
             "numCreditsMin": 4,
             "prereqs": Object {
               "type": "and",
               "values": Array [],
             },
-            "subject": "CS",
+            "subject": "CHEM",
           },
           Object {
-            "classId": "2501",
+            "classId": "1212",
             "coreqs": Object {
               "type": "and",
               "values": Array [
                 Object {
-                  "classId": "2500",
-                  "subject": "CS",
+                  "classId": "1211",
+                  "subject": "CHEM",
+                },
+                Object {
+                  "classId": "1213",
+                  "subject": "CHEM",
                 },
               ],
             },
-            "name": "Lab for CS 2500",
+            "name": "Lab for CHEM 1211",
             "numCreditsMax": 1,
             "numCreditsMin": 1,
             "prereqs": Object {
               "type": "and",
               "values": Array [],
             },
-            "subject": "CS",
+            "subject": "CHEM",
           },
           Object {
-            "classId": "1365",
+            "classId": "1213",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "1211",
+                  "subject": "CHEM",
+                },
+                Object {
+                  "classId": "1212",
+                  "subject": "CHEM",
+                },
+              ],
+            },
+            "name": "Recitation for CHEM 1211",
+            "numCreditsMax": 0,
+            "numCreditsMin": 0,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "subject": "CHEM",
+          },
+          Object {
+            "classId": "1251",
             "coreqs": Object {
               "type": "and",
               "values": Array [],
             },
-            "name": "Introduction to Mathematical Reasoning",
+            "name": "Calculus and Differential Equations for Biology 1",
             "numCreditsMax": 4,
             "numCreditsMin": 4,
             "prereqs": Object {
@@ -4116,6 +4576,144 @@ Object {
               "values": Array [],
             },
             "subject": "MATH",
+          },
+          Object {
+            "classId": "9999",
+            "name": "Elective 1",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "subject": "XXXX",
+          },
+          Object {
+            "classId": "1000",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "Biochemistry at Northeastern",
+            "numCreditsMax": 1,
+            "numCreditsMin": 1,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "subject": "BIOC",
+          },
+        ],
+        "id": 1010,
+        "season": "FL",
+        "status": "CLASSES",
+        "termId": 100010,
+        "year": 1000,
+      },
+      "isSummerFull": false,
+      "spring": Object {
+        "classes": Array [
+          Object {
+            "classId": "2299",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "Inquiries in Biological Sciences",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "prereqs": Object {
+              "type": "or",
+              "values": Array [
+                Object {
+                  "classId": "1101",
+                  "missing": true,
+                  "subject": "BIOL",
+                },
+                Object {
+                  "classId": "1107",
+                  "subject": "BIOL",
+                },
+                Object {
+                  "classId": "1111",
+                  "subject": "BIOL",
+                },
+              ],
+            },
+            "subject": "BIOL",
+          },
+          Object {
+            "classId": "1214",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "1215",
+                  "subject": "CHEM",
+                },
+                Object {
+                  "classId": "1216",
+                  "subject": "CHEM",
+                },
+              ],
+            },
+            "name": "General Chemistry 2",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "1211",
+                  "subject": "CHEM",
+                },
+              ],
+            },
+            "subject": "CHEM",
+          },
+          Object {
+            "classId": "1215",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "1214",
+                  "subject": "CHEM",
+                },
+                Object {
+                  "classId": "1216",
+                  "subject": "CHEM",
+                },
+              ],
+            },
+            "name": "Lab for CHEM 1214",
+            "numCreditsMax": 1,
+            "numCreditsMin": 1,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "subject": "CHEM",
+          },
+          Object {
+            "classId": "1216",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "1214",
+                  "subject": "CHEM",
+                },
+                Object {
+                  "classId": "1215",
+                  "subject": "CHEM",
+                },
+              ],
+            },
+            "name": "Recitation for CHEM 1214",
+            "numCreditsMax": 0,
+            "numCreditsMin": 0,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "subject": "CHEM",
           },
           Object {
             "classId": "1111",
@@ -4132,98 +4730,25 @@ Object {
             },
             "subject": "ENGW",
           },
-        ],
-        "id": 1010,
-        "season": "FL",
-        "status": "CLASSES",
-        "termId": 100010,
-        "year": 1000,
-      },
-      "isSummerFull": false,
-      "spring": Object {
-        "classes": Array [
           Object {
-            "classId": "2510",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "2511",
-                  "subject": "CS",
-                },
-              ],
-            },
-            "name": "Fundamentals of Computer Science 2",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "2500",
-                  "subject": "CS",
-                },
-              ],
-            },
-            "subject": "CS",
-          },
-          Object {
-            "classId": "2511",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "2510",
-                  "subject": "CS",
-                },
-              ],
-            },
-            "name": "Lab for CS 2510",
-            "numCreditsMax": 1,
-            "numCreditsMin": 1,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "subject": "CS",
-          },
-          Object {
-            "classId": "2810",
+            "classId": "1252",
             "coreqs": Object {
               "type": "and",
               "values": Array [],
             },
-            "name": "Mathematics of Data Models",
+            "name": "Calculus and Differential Equations for Biology 2",
             "numCreditsMax": 4,
             "numCreditsMin": 4,
             "prereqs": Object {
               "type": "and",
               "values": Array [
                 Object {
-                  "classId": "1800",
-                  "subject": "CS",
-                },
-                Object {
-                  "classId": "2500",
-                  "subject": "CS",
+                  "classId": "1251",
+                  "subject": "MATH",
                 },
               ],
             },
-            "subject": "CS",
-          },
-          Object {
-            "classId": "9999",
-            "name": "Science elective with lab",
-            "numCreditsMax": 5,
-            "numCreditsMin": 5,
-            "subject": "XXXX",
-          },
-          Object {
-            "classId": "9999",
-            "name": "Elective",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "subject": "XXXX",
+            "subject": "MATH",
           },
         ],
         "id": 1030,
@@ -4233,18 +4758,142 @@ Object {
         "year": 1000,
       },
       "summer1": Object {
-        "classes": Array [],
+        "classes": Array [
+          Object {
+            "classId": "2301",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "Genetics and Molecular Biology",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "type": "or",
+                  "values": Array [
+                    Object {
+                      "classId": "1103",
+                      "missing": true,
+                      "subject": "BIOL",
+                    },
+                    Object {
+                      "classId": "1113",
+                      "subject": "BIOL",
+                    },
+                    Object {
+                      "classId": "1115",
+                      "subject": "BIOL",
+                    },
+                    Object {
+                      "classId": "2297",
+                      "missing": true,
+                      "subject": "BIOL",
+                    },
+                    Object {
+                      "classId": "2299",
+                      "subject": "BIOL",
+                    },
+                    Object {
+                      "classId": "1105",
+                      "subject": "EEMB",
+                    },
+                    Object {
+                      "classId": "2290",
+                      "subject": "EEMB",
+                    },
+                    Object {
+                      "classId": "2400",
+                      "missing": true,
+                      "subject": "ENVR",
+                    },
+                    Object {
+                      "classId": "2400",
+                      "subject": "EEMB",
+                    },
+                  ],
+                },
+                Object {
+                  "type": "or",
+                  "values": Array [
+                    Object {
+                      "classId": "1211",
+                      "subject": "CHEM",
+                    },
+                    Object {
+                      "classId": "1217",
+                      "subject": "CHEM",
+                    },
+                    Object {
+                      "classId": "1151",
+                      "subject": "CHEM",
+                    },
+                    Object {
+                      "classId": "1161",
+                      "subject": "CHEM",
+                    },
+                  ],
+                },
+              ],
+            },
+            "subject": "BIOL",
+          },
+          Object {
+            "classId": "2302",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "Lab for BIOL 2301",
+            "numCreditsMax": 1,
+            "numCreditsMin": 1,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "2301",
+                  "subject": "BIOL",
+                },
+              ],
+            },
+            "subject": "BIOL",
+          },
+          Object {
+            "classId": "9999",
+            "name": "Elective 2",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "subject": "XXXX",
+          },
+        ],
         "id": 1040,
         "season": "S1",
-        "status": "INACTIVE",
+        "status": "CLASSES",
         "termId": 100040,
         "year": 1000,
       },
       "summer2": Object {
-        "classes": Array [],
+        "classes": Array [
+          Object {
+            "classId": "9999",
+            "name": "Elective 3",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "subject": "XXXX",
+          },
+          Object {
+            "classId": "9999",
+            "name": "Elective 4",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "subject": "XXXX",
+          },
+        ],
         "id": 1060,
         "season": "S2",
-        "status": "INACTIVE",
+        "status": "CLASSES",
         "termId": 100060,
         "year": 1000,
       },
@@ -4254,128 +4903,173 @@ Object {
       "fall": Object {
         "classes": Array [
           Object {
-            "classId": "3500",
+            "classId": "2309",
             "coreqs": Object {
               "type": "and",
               "values": Array [],
             },
-            "name": "Object-Oriented Design",
+            "name": "Biology Project Lab",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "2301",
+                  "subject": "BIOL",
+                },
+              ],
+            },
+            "subject": "BIOL",
+          },
+          Object {
+            "classId": "2311",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "2312",
+                  "subject": "CHEM",
+                },
+              ],
+            },
+            "name": "Organic Chemistry 1",
             "numCreditsMax": 4,
             "numCreditsMin": 4,
             "prereqs": Object {
               "type": "or",
               "values": Array [
                 Object {
-                  "classId": "2510",
-                  "subject": "CS",
+                  "classId": "1151",
+                  "subject": "CHEM",
                 },
                 Object {
-                  "classId": "1500",
-                  "missing": true,
-                  "subject": "CS",
+                  "classId": "1214",
+                  "subject": "CHEM",
                 },
                 Object {
-                  "classId": "2560",
-                  "subject": "EECE",
+                  "classId": "1220",
+                  "subject": "CHEM",
+                },
+                Object {
+                  "classId": "1161",
+                  "subject": "CHEM",
                 },
               ],
             },
-            "subject": "CS",
+            "subject": "CHEM",
           },
           Object {
-            "classId": "1341",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "name": "Calculus 1 for Science and Engineering",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "subject": "MATH",
-          },
-          Object {
-            "classId": "3000",
+            "classId": "2312",
             "coreqs": Object {
               "type": "and",
               "values": Array [
                 Object {
-                  "classId": "3001",
-                  "subject": "CS",
+                  "classId": "2311",
+                  "subject": "CHEM",
                 },
               ],
             },
-            "name": "Algorithms and Data",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
+            "name": "Lab for CHEM 2311",
+            "numCreditsMax": 1,
+            "numCreditsMin": 1,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "subject": "CHEM",
+          },
+          Object {
+            "classId": "1151",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "Physics for Engineering 1",
+            "numCreditsMax": 3,
+            "numCreditsMin": 3,
             "prereqs": Object {
               "type": "or",
               "values": Array [
                 Object {
-                  "classId": "1500",
-                  "missing": true,
-                  "subject": "CS",
+                  "classId": "1241",
+                  "subject": "MATH",
                 },
                 Object {
-                  "type": "and",
-                  "values": Array [
-                    Object {
-                      "classId": "2510",
-                      "subject": "CS",
-                    },
-                    Object {
-                      "classId": "1800",
-                      "subject": "CS",
-                    },
-                  ],
+                  "classId": "1251",
+                  "subject": "MATH",
                 },
                 Object {
-                  "classId": "2160",
-                  "subject": "EECE",
+                  "classId": "1340",
+                  "subject": "MATH",
                 },
                 Object {
-                  "classId": "2162",
-                  "missing": true,
-                  "subject": "EECE",
+                  "classId": "1341",
+                  "subject": "MATH",
                 },
                 Object {
-                  "classId": "2164",
-                  "missing": true,
-                  "subject": "EECE",
+                  "classId": "1342",
+                  "subject": "MATH",
+                },
+                Object {
+                  "classId": "2321",
+                  "subject": "MATH",
                 },
               ],
             },
-            "subject": "CS",
+            "subject": "PHYS",
+          },
+          Object {
+            "classId": "1152",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "Lab for PHYS 1151",
+            "numCreditsMax": 1,
+            "numCreditsMin": 1,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "subject": "PHYS",
+          },
+          Object {
+            "classId": "1153",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "Interactive Learning Seminar for PHYS 1151",
+            "numCreditsMax": 1,
+            "numCreditsMin": 1,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "subject": "PHYS",
           },
           Object {
             "classId": "9999",
-            "name": "Elective",
+            "name": "Elective 5",
             "numCreditsMax": 4,
             "numCreditsMin": 4,
             "subject": "XXXX",
           },
           Object {
-            "classId": "1210",
+            "classId": "2000",
             "coreqs": Object {
               "type": "and",
               "values": Array [],
             },
-            "name": "Professional Development for Khoury Co-op",
+            "name": "Professional Development for Co-op",
             "numCreditsMax": 1,
             "numCreditsMin": 1,
             "prereqs": Object {
               "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "2510",
-                  "subject": "CS",
-                },
-              ],
+              "values": Array [],
             },
-            "subject": "CS",
+            "subject": "EESC",
           },
         ],
         "id": 1011,
@@ -4402,10 +5096,67 @@ Object {
         "year": 1001,
       },
       "summer2": Object {
-        "classes": Array [],
+        "classes": Array [
+          Object {
+            "classId": "2313",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "2314",
+                  "subject": "CHEM",
+                },
+              ],
+            },
+            "name": "Organic Chemistry 2",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "prereqs": Object {
+              "type": "or",
+              "values": Array [
+                Object {
+                  "classId": "2311",
+                  "subject": "CHEM",
+                },
+                Object {
+                  "classId": "2315",
+                  "subject": "CHEM",
+                },
+              ],
+            },
+            "subject": "CHEM",
+          },
+          Object {
+            "classId": "2314",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "2313",
+                  "subject": "CHEM",
+                },
+              ],
+            },
+            "name": "Lab for CHEM 2313",
+            "numCreditsMax": 1,
+            "numCreditsMin": 1,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "subject": "CHEM",
+          },
+          Object {
+            "classId": "9999",
+            "name": "Elective 6",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "subject": "XXXX",
+          },
+        ],
         "id": 1061,
         "season": "S2",
-        "status": "INACTIVE",
+        "status": "CLASSES",
         "termId": 100160,
         "year": 1001,
       },
@@ -4415,101 +5166,216 @@ Object {
       "fall": Object {
         "classes": Array [
           Object {
-            "classId": "3800",
+            "classId": "3611",
             "coreqs": Object {
               "type": "and",
-              "values": Array [],
-            },
-            "name": "Theory of Computation",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "prereqs": Object {
-              "type": "or",
               "values": Array [
                 Object {
-                  "classId": "1500",
-                  "missing": true,
-                  "subject": "CS",
-                },
-                Object {
-                  "classId": "2510",
-                  "subject": "CS",
-                },
-                Object {
-                  "classId": "2160",
-                  "subject": "EECE",
-                },
-                Object {
-                  "classId": "2162",
-                  "missing": true,
-                  "subject": "EECE",
-                },
-                Object {
-                  "classId": "2164",
-                  "missing": true,
-                  "subject": "EECE",
+                  "classId": "3612",
+                  "subject": "BIOL",
                 },
               ],
             },
-            "subject": "CS",
-          },
-          Object {
-            "classId": "3650",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "name": "Computer Systems",
+            "name": "Biochemistry",
             "numCreditsMax": 4,
             "numCreditsMin": 4,
             "prereqs": Object {
-              "type": "or",
+              "type": "and",
               "values": Array [
                 Object {
-                  "classId": "2510",
-                  "subject": "CS",
+                  "classId": "2301",
+                  "subject": "BIOL",
                 },
                 Object {
-                  "classId": "1500",
-                  "missing": true,
-                  "subject": "CS",
+                  "type": "or",
+                  "values": Array [
+                    Object {
+                      "classId": "2313",
+                      "subject": "CHEM",
+                    },
+                    Object {
+                      "classId": "2317",
+                      "subject": "CHEM",
+                    },
+                  ],
                 },
                 Object {
-                  "classId": "2560",
-                  "subject": "EECE",
+                  "type": "or",
+                  "values": Array [
+                    Object {
+                      "classId": "1111",
+                      "missing": true,
+                      "subject": "ENGL",
+                    },
+                    Object {
+                      "classId": "1102",
+                      "missing": true,
+                      "subject": "ENGL",
+                    },
+                    Object {
+                      "classId": "1111",
+                      "subject": "ENGW",
+                    },
+                    Object {
+                      "classId": "1102",
+                      "subject": "ENGW",
+                    },
+                  ],
                 },
               ],
             },
-            "subject": "CS",
+            "subject": "BIOL",
           },
           Object {
-            "classId": "9999",
-            "name": "Science elective with lab",
-            "numCreditsMax": 5,
-            "numCreditsMin": 5,
-            "subject": "XXXX",
-          },
-          Object {
-            "classId": "9999",
-            "name": "Concentration course",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "subject": "XXXX",
-          },
-          Object {
-            "classId": "1170",
+            "classId": "3612",
             "coreqs": Object {
               "type": "and",
-              "values": Array [],
+              "values": Array [
+                Object {
+                  "classId": "3611",
+                  "subject": "BIOL",
+                },
+              ],
             },
-            "name": "The Eloquent Presenter",
+            "name": "Lab for BIOL 3611",
             "numCreditsMax": 1,
             "numCreditsMin": 1,
             "prereqs": Object {
               "type": "and",
               "values": Array [],
             },
-            "subject": "THTR",
+            "subject": "BIOL",
+          },
+          Object {
+            "classId": "1155",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "1157",
+                  "subject": "PHYS",
+                },
+              ],
+            },
+            "name": "Physics for Engineering 2",
+            "numCreditsMax": 3,
+            "numCreditsMin": 3,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "type": "or",
+                  "values": Array [
+                    Object {
+                      "classId": "1151",
+                      "subject": "PHYS",
+                    },
+                    Object {
+                      "classId": "1161",
+                      "subject": "PHYS",
+                    },
+                    Object {
+                      "classId": "1171",
+                      "subject": "PHYS",
+                    },
+                  ],
+                },
+                Object {
+                  "type": "or",
+                  "values": Array [
+                    Object {
+                      "classId": "1252",
+                      "subject": "MATH",
+                    },
+                    Object {
+                      "classId": "1342",
+                      "subject": "MATH",
+                    },
+                    Object {
+                      "classId": "2321",
+                      "subject": "MATH",
+                    },
+                  ],
+                },
+              ],
+            },
+            "subject": "PHYS",
+          },
+          Object {
+            "classId": "1156",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "Lab for PHYS 1155",
+            "numCreditsMax": 1,
+            "numCreditsMin": 1,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "subject": "PHYS",
+          },
+          Object {
+            "classId": "1157",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "1155",
+                  "subject": "PHYS",
+                },
+              ],
+            },
+            "name": "Interactive Learning Seminar for PHYS 1155",
+            "numCreditsMax": 1,
+            "numCreditsMin": 1,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "subject": "PHYS",
+          },
+          Object {
+            "classId": "3307",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "Advanced Writing in the Sciences",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "prereqs": Object {
+              "type": "or",
+              "values": Array [
+                Object {
+                  "classId": "1102",
+                  "subject": "ENGW",
+                },
+                Object {
+                  "classId": "1111",
+                  "subject": "ENGW",
+                },
+                Object {
+                  "classId": "1102",
+                  "missing": true,
+                  "subject": "ENGL",
+                },
+                Object {
+                  "classId": "1111",
+                  "missing": true,
+                  "subject": "ENGL",
+                },
+              ],
+            },
+            "subject": "ENGW",
+          },
+          Object {
+            "classId": "9999",
+            "name": "Elective 7",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "subject": "XXXX",
           },
         ],
         "id": 1012,
@@ -4538,15 +5404,33 @@ Object {
       "summer2": Object {
         "classes": Array [
           Object {
-            "classId": "9999",
-            "name": "Elective",
+            "classId": "4707",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "Cell and Molecular Biology",
             "numCreditsMax": 4,
             "numCreditsMin": 4,
-            "subject": "XXXX",
+            "prereqs": Object {
+              "type": "or",
+              "values": Array [
+                Object {
+                  "classId": "2323",
+                  "missing": true,
+                  "subject": "BIOL",
+                },
+                Object {
+                  "classId": "3611",
+                  "subject": "BIOL",
+                },
+              ],
+            },
+            "subject": "BIOL",
           },
           Object {
             "classId": "9999",
-            "name": "Elective",
+            "name": "Elective 8",
             "numCreditsMax": 4,
             "numCreditsMin": 4,
             "subject": "XXXX",
@@ -4564,29 +5448,140 @@ Object {
       "fall": Object {
         "classes": Array [
           Object {
-            "classId": "9999",
-            "name": "Concentration course",
+            "classId": "3431",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "3432",
+                  "subject": "CHEM",
+                },
+              ],
+            },
+            "name": "Physical Chemistry",
             "numCreditsMax": 4,
             "numCreditsMin": 4,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "type": "or",
+                  "values": Array [
+                    Object {
+                      "type": "and",
+                      "values": Array [
+                        Object {
+                          "classId": "1214",
+                          "subject": "CHEM",
+                        },
+                        Object {
+                          "classId": "1220",
+                          "subject": "CHEM",
+                        },
+                      ],
+                    },
+                    Object {
+                      "classId": "1151",
+                      "subject": "CHEM",
+                    },
+                    Object {
+                      "classId": "1161",
+                      "subject": "CHEM",
+                    },
+                  ],
+                },
+                Object {
+                  "type": "or",
+                  "values": Array [
+                    Object {
+                      "classId": "1252",
+                      "subject": "MATH",
+                    },
+                    Object {
+                      "classId": "1342",
+                      "subject": "MATH",
+                    },
+                  ],
+                },
+                Object {
+                  "type": "or",
+                  "values": Array [
+                    Object {
+                      "classId": "1147",
+                      "subject": "PHYS",
+                    },
+                    Object {
+                      "classId": "1155",
+                      "subject": "PHYS",
+                    },
+                    Object {
+                      "classId": "1165",
+                      "subject": "PHYS",
+                    },
+                    Object {
+                      "classId": "1175",
+                      "subject": "PHYS",
+                    },
+                  ],
+                },
+              ],
+            },
+            "subject": "CHEM",
+          },
+          Object {
+            "classId": "3432",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "3431",
+                  "subject": "CHEM",
+                },
+              ],
+            },
+            "name": "Lab for CHEM 3431",
+            "numCreditsMax": 1,
+            "numCreditsMin": 1,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "subject": "CHEM",
+          },
+          Object {
+            "classId": "4620",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "Introduction to Protein Chemistry",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "prereqs": Object {
+              "type": "or",
+              "values": Array [
+                Object {
+                  "classId": "2313",
+                  "subject": "CHEM",
+                },
+                Object {
+                  "classId": "2317",
+                  "subject": "CHEM",
+                },
+              ],
+            },
+            "subject": "CHEM",
+          },
+          Object {
+            "classId": "9999",
+            "name": "BIOL or CHEM advanced elective",
+            "numCreditsMax": 5,
+            "numCreditsMin": 5,
             "subject": "XXXX",
           },
           Object {
             "classId": "9999",
-            "name": "Concentration course",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "subject": "XXXX",
-          },
-          Object {
-            "classId": "9999",
-            "name": "Elective",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "subject": "XXXX",
-          },
-          Object {
-            "classId": "9999",
-            "name": "Elective",
+            "name": "Elective 9",
             "numCreditsMax": 4,
             "numCreditsMin": 4,
             "subject": "XXXX",
@@ -4600,10 +5595,39 @@ Object {
       },
       "isSummerFull": false,
       "spring": Object {
-        "classes": Array [],
+        "classes": Array [
+          Object {
+            "classId": "9999",
+            "name": "BIOL or CHEM advanced elective",
+            "numCreditsMax": 5,
+            "numCreditsMin": 5,
+            "subject": "XXXX",
+          },
+          Object {
+            "classId": "9999",
+            "name": "BIOL or CHEM advanced elective",
+            "numCreditsMax": 5,
+            "numCreditsMin": 5,
+            "subject": "XXXX",
+          },
+          Object {
+            "classId": "9999",
+            "name": "CHEM 4750 or BIOL4701",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "subject": "XXXX",
+          },
+          Object {
+            "classId": "9999",
+            "name": "Elective 10",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "subject": "XXXX",
+          },
+        ],
         "id": 1033,
         "season": "SP",
-        "status": "COOP",
+        "status": "CLASSES",
         "termId": 100330,
         "year": 1003,
       },
@@ -4611,217 +5635,19 @@ Object {
         "classes": Array [],
         "id": 1043,
         "season": "S1",
-        "status": "COOP",
+        "status": "INACTIVE",
         "termId": 100340,
         "year": 1003,
       },
       "summer2": Object {
-        "classes": Array [
-          Object {
-            "classId": "3302",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "name": "Advanced Writing in the Technical Professions",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "prereqs": Object {
-              "type": "or",
-              "values": Array [
-                Object {
-                  "classId": "1102",
-                  "subject": "ENGW",
-                },
-                Object {
-                  "classId": "1111",
-                  "subject": "ENGW",
-                },
-                Object {
-                  "classId": "1102",
-                  "missing": true,
-                  "subject": "ENGL",
-                },
-                Object {
-                  "classId": "1111",
-                  "missing": true,
-                  "subject": "ENGL",
-                },
-              ],
-            },
-            "subject": "ENGW",
-          },
-          Object {
-            "classId": "9999",
-            "name": "Elective",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "subject": "XXXX",
-          },
-        ],
+        "classes": Array [],
         "id": 1063,
         "season": "S2",
-        "status": "CLASSES",
+        "status": "INACTIVE",
         "termId": 100360,
         "year": 1003,
       },
       "year": 1003,
-    },
-    "1004": Object {
-      "fall": Object {
-        "classes": Array [
-          Object {
-            "classId": "2160",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "name": "Embedded Design: Enabling Robotics",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "prereqs": Object {
-              "type": "or",
-              "values": Array [
-                Object {
-                  "classId": "1111",
-                  "subject": "GE",
-                },
-                Object {
-                  "classId": "1502",
-                  "subject": "GE",
-                },
-                Object {
-                  "classId": "3500",
-                  "subject": "CS",
-                },
-              ],
-            },
-            "subject": "EECE",
-          },
-          Object {
-            "classId": "9999",
-            "name": "Khoury elective",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "subject": "XXXX",
-          },
-          Object {
-            "classId": "9999",
-            "name": "Khoury elective",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "subject": "XXXX",
-          },
-          Object {
-            "classId": "9999",
-            "name": "Concentration course",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "subject": "XXXX",
-          },
-        ],
-        "id": 1014,
-        "season": "FL",
-        "status": "CLASSES",
-        "termId": 100410,
-        "year": 1004,
-      },
-      "isSummerFull": false,
-      "spring": Object {
-        "classes": Array [
-          Object {
-            "classId": "4500",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "name": "Software Development",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "3500",
-                  "subject": "CS",
-                },
-                Object {
-                  "type": "or",
-                  "values": Array [
-                    Object {
-                      "classId": "1111",
-                      "subject": "ENGW",
-                    },
-                    Object {
-                      "classId": "1102",
-                      "subject": "ENGW",
-                    },
-                  ],
-                },
-              ],
-            },
-            "subject": "CS",
-          },
-          Object {
-            "classId": "4501",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "name": "Recitation for CS 4500",
-            "numCreditsMax": 0,
-            "numCreditsMin": 0,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "subject": "CS",
-          },
-          Object {
-            "classId": "9999",
-            "name": "Computing and social issues",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "subject": "XXXX",
-          },
-          Object {
-            "classId": "9999",
-            "name": "Security course",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "subject": "XXXX",
-          },
-          Object {
-            "classId": "9999",
-            "name": "Elective",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "subject": "XXXX",
-          },
-        ],
-        "id": 1034,
-        "season": "SP",
-        "status": "CLASSES",
-        "termId": 100430,
-        "year": 1004,
-      },
-      "summer1": Object {
-        "classes": Array [],
-        "id": 1044,
-        "season": "S1",
-        "status": "INACTIVE",
-        "termId": 100440,
-        "year": 1004,
-      },
-      "summer2": Object {
-        "classes": Array [],
-        "id": 1064,
-        "season": "S2",
-        "status": "INACTIVE",
-        "termId": 100460,
-        "year": 1004,
-      },
-      "year": 1004,
     },
   },
   "years": Array [
@@ -4829,2444 +5655,11 @@ Object {
     1001,
     1002,
     1003,
-    1004,
   ],
 }
 `;
 
 exports[`Ensure that prereqs are successfully dded to Biochemistry plans of study. 3`] = `
-Object {
-  "id": "0",
-  "yearMap": Object {
-    "1000": Object {
-      "fall": Object {
-        "classes": Array [
-          Object {
-            "classId": "1107",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "1108",
-                  "subject": "BIOL",
-                },
-              ],
-            },
-            "name": "Foundations of Biology",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "subject": "BIOL",
-          },
-          Object {
-            "classId": "1108",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "1107",
-                  "subject": "BIOL",
-                },
-              ],
-            },
-            "name": "Lab for BIOL 1107",
-            "numCreditsMax": 1,
-            "numCreditsMin": 1,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "subject": "BIOL",
-          },
-          Object {
-            "classId": "1211",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "1212",
-                  "subject": "CHEM",
-                },
-                Object {
-                  "classId": "1213",
-                  "subject": "CHEM",
-                },
-              ],
-            },
-            "name": "General Chemistry 1",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "subject": "CHEM",
-          },
-          Object {
-            "classId": "1212",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "1211",
-                  "subject": "CHEM",
-                },
-                Object {
-                  "classId": "1213",
-                  "subject": "CHEM",
-                },
-              ],
-            },
-            "name": "Lab for CHEM 1211",
-            "numCreditsMax": 1,
-            "numCreditsMin": 1,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "subject": "CHEM",
-          },
-          Object {
-            "classId": "1213",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "1211",
-                  "subject": "CHEM",
-                },
-                Object {
-                  "classId": "1212",
-                  "subject": "CHEM",
-                },
-              ],
-            },
-            "name": "Recitation for CHEM 1211",
-            "numCreditsMax": 0,
-            "numCreditsMin": 0,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "subject": "CHEM",
-          },
-          Object {
-            "classId": "1251",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "name": "Calculus and Differential Equations for Biology 1",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "subject": "MATH",
-          },
-          Object {
-            "classId": "9999",
-            "name": "Elective 1",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "subject": "XXXX",
-          },
-          Object {
-            "classId": "1000",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "name": "Biochemistry at Northeastern",
-            "numCreditsMax": 1,
-            "numCreditsMin": 1,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "subject": "BIOC",
-          },
-        ],
-        "id": 1010,
-        "season": "FL",
-        "status": "CLASSES",
-        "termId": 100010,
-        "year": 1000,
-      },
-      "isSummerFull": false,
-      "spring": Object {
-        "classes": Array [
-          Object {
-            "classId": "2299",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "name": "Inquiries in Biological Sciences",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "prereqs": Object {
-              "type": "or",
-              "values": Array [
-                Object {
-                  "classId": "1101",
-                  "missing": true,
-                  "subject": "BIOL",
-                },
-                Object {
-                  "classId": "1107",
-                  "subject": "BIOL",
-                },
-                Object {
-                  "classId": "1111",
-                  "subject": "BIOL",
-                },
-              ],
-            },
-            "subject": "BIOL",
-          },
-          Object {
-            "classId": "1214",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "1215",
-                  "subject": "CHEM",
-                },
-                Object {
-                  "classId": "1216",
-                  "subject": "CHEM",
-                },
-              ],
-            },
-            "name": "General Chemistry 2",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "1211",
-                  "subject": "CHEM",
-                },
-              ],
-            },
-            "subject": "CHEM",
-          },
-          Object {
-            "classId": "1215",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "1214",
-                  "subject": "CHEM",
-                },
-                Object {
-                  "classId": "1216",
-                  "subject": "CHEM",
-                },
-              ],
-            },
-            "name": "Lab for CHEM 1214",
-            "numCreditsMax": 1,
-            "numCreditsMin": 1,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "subject": "CHEM",
-          },
-          Object {
-            "classId": "1216",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "1214",
-                  "subject": "CHEM",
-                },
-                Object {
-                  "classId": "1215",
-                  "subject": "CHEM",
-                },
-              ],
-            },
-            "name": "Recitation for CHEM 1214",
-            "numCreditsMax": 0,
-            "numCreditsMin": 0,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "subject": "CHEM",
-          },
-          Object {
-            "classId": "1111",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "name": "First-Year Writing",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "subject": "ENGW",
-          },
-          Object {
-            "classId": "1252",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "name": "Calculus and Differential Equations for Biology 2",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "1251",
-                  "subject": "MATH",
-                },
-              ],
-            },
-            "subject": "MATH",
-          },
-        ],
-        "id": 1030,
-        "season": "SP",
-        "status": "CLASSES",
-        "termId": 100030,
-        "year": 1000,
-      },
-      "summer1": Object {
-        "classes": Array [
-          Object {
-            "classId": "2301",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "name": "Genetics and Molecular Biology",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [
-                Object {
-                  "type": "or",
-                  "values": Array [
-                    Object {
-                      "classId": "1103",
-                      "missing": true,
-                      "subject": "BIOL",
-                    },
-                    Object {
-                      "classId": "1113",
-                      "subject": "BIOL",
-                    },
-                    Object {
-                      "classId": "1115",
-                      "subject": "BIOL",
-                    },
-                    Object {
-                      "classId": "2297",
-                      "missing": true,
-                      "subject": "BIOL",
-                    },
-                    Object {
-                      "classId": "2299",
-                      "subject": "BIOL",
-                    },
-                    Object {
-                      "classId": "1105",
-                      "subject": "EEMB",
-                    },
-                    Object {
-                      "classId": "2290",
-                      "subject": "EEMB",
-                    },
-                    Object {
-                      "classId": "2400",
-                      "missing": true,
-                      "subject": "ENVR",
-                    },
-                    Object {
-                      "classId": "2400",
-                      "subject": "EEMB",
-                    },
-                  ],
-                },
-                Object {
-                  "type": "or",
-                  "values": Array [
-                    Object {
-                      "classId": "1211",
-                      "subject": "CHEM",
-                    },
-                    Object {
-                      "classId": "1217",
-                      "subject": "CHEM",
-                    },
-                    Object {
-                      "classId": "1151",
-                      "subject": "CHEM",
-                    },
-                    Object {
-                      "classId": "1161",
-                      "subject": "CHEM",
-                    },
-                  ],
-                },
-              ],
-            },
-            "subject": "BIOL",
-          },
-          Object {
-            "classId": "2302",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "name": "Lab for BIOL 2301",
-            "numCreditsMax": 1,
-            "numCreditsMin": 1,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "2301",
-                  "subject": "BIOL",
-                },
-              ],
-            },
-            "subject": "BIOL",
-          },
-          Object {
-            "classId": "9999",
-            "name": "Elective 2",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "subject": "XXXX",
-          },
-        ],
-        "id": 1040,
-        "season": "S1",
-        "status": "CLASSES",
-        "termId": 100040,
-        "year": 1000,
-      },
-      "summer2": Object {
-        "classes": Array [
-          Object {
-            "classId": "9999",
-            "name": "Elective 3",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "subject": "XXXX",
-          },
-          Object {
-            "classId": "9999",
-            "name": "Elective 4",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "subject": "XXXX",
-          },
-        ],
-        "id": 1060,
-        "season": "S2",
-        "status": "CLASSES",
-        "termId": 100060,
-        "year": 1000,
-      },
-      "year": 1000,
-    },
-    "1001": Object {
-      "fall": Object {
-        "classes": Array [
-          Object {
-            "classId": "2309",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "name": "Biology Project Lab",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "2301",
-                  "subject": "BIOL",
-                },
-              ],
-            },
-            "subject": "BIOL",
-          },
-          Object {
-            "classId": "2311",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "2312",
-                  "subject": "CHEM",
-                },
-              ],
-            },
-            "name": "Organic Chemistry 1",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "prereqs": Object {
-              "type": "or",
-              "values": Array [
-                Object {
-                  "classId": "1151",
-                  "subject": "CHEM",
-                },
-                Object {
-                  "classId": "1214",
-                  "subject": "CHEM",
-                },
-                Object {
-                  "classId": "1220",
-                  "subject": "CHEM",
-                },
-                Object {
-                  "classId": "1161",
-                  "subject": "CHEM",
-                },
-              ],
-            },
-            "subject": "CHEM",
-          },
-          Object {
-            "classId": "2312",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "2311",
-                  "subject": "CHEM",
-                },
-              ],
-            },
-            "name": "Lab for CHEM 2311",
-            "numCreditsMax": 1,
-            "numCreditsMin": 1,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "subject": "CHEM",
-          },
-          Object {
-            "classId": "1151",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "name": "Physics for Engineering 1",
-            "numCreditsMax": 3,
-            "numCreditsMin": 3,
-            "prereqs": Object {
-              "type": "or",
-              "values": Array [
-                Object {
-                  "classId": "1241",
-                  "subject": "MATH",
-                },
-                Object {
-                  "classId": "1251",
-                  "subject": "MATH",
-                },
-                Object {
-                  "classId": "1340",
-                  "subject": "MATH",
-                },
-                Object {
-                  "classId": "1341",
-                  "subject": "MATH",
-                },
-                Object {
-                  "classId": "1342",
-                  "subject": "MATH",
-                },
-                Object {
-                  "classId": "2321",
-                  "subject": "MATH",
-                },
-              ],
-            },
-            "subject": "PHYS",
-          },
-          Object {
-            "classId": "1152",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "name": "Lab for PHYS 1151",
-            "numCreditsMax": 1,
-            "numCreditsMin": 1,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "subject": "PHYS",
-          },
-          Object {
-            "classId": "1153",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "name": "Interactive Learning Seminar for PHYS 1151",
-            "numCreditsMax": 1,
-            "numCreditsMin": 1,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "subject": "PHYS",
-          },
-          Object {
-            "classId": "9999",
-            "name": "Elective 5",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "subject": "XXXX",
-          },
-        ],
-        "id": 1011,
-        "season": "FL",
-        "status": "CLASSES",
-        "termId": 100110,
-        "year": 1001,
-      },
-      "isSummerFull": false,
-      "spring": Object {
-        "classes": Array [
-          Object {
-            "classId": "2313",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "2314",
-                  "subject": "CHEM",
-                },
-              ],
-            },
-            "name": "Organic Chemistry 2",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "prereqs": Object {
-              "type": "or",
-              "values": Array [
-                Object {
-                  "classId": "2311",
-                  "subject": "CHEM",
-                },
-                Object {
-                  "classId": "2315",
-                  "subject": "CHEM",
-                },
-              ],
-            },
-            "subject": "CHEM",
-          },
-          Object {
-            "classId": "2314",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "2313",
-                  "subject": "CHEM",
-                },
-              ],
-            },
-            "name": "Lab for CHEM 2313",
-            "numCreditsMax": 1,
-            "numCreditsMin": 1,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "subject": "CHEM",
-          },
-          Object {
-            "classId": "1155",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "1157",
-                  "subject": "PHYS",
-                },
-              ],
-            },
-            "name": "Physics for Engineering 2",
-            "numCreditsMax": 3,
-            "numCreditsMin": 3,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [
-                Object {
-                  "type": "or",
-                  "values": Array [
-                    Object {
-                      "classId": "1151",
-                      "subject": "PHYS",
-                    },
-                    Object {
-                      "classId": "1161",
-                      "subject": "PHYS",
-                    },
-                    Object {
-                      "classId": "1171",
-                      "subject": "PHYS",
-                    },
-                  ],
-                },
-                Object {
-                  "type": "or",
-                  "values": Array [
-                    Object {
-                      "classId": "1252",
-                      "subject": "MATH",
-                    },
-                    Object {
-                      "classId": "1342",
-                      "subject": "MATH",
-                    },
-                    Object {
-                      "classId": "2321",
-                      "subject": "MATH",
-                    },
-                  ],
-                },
-              ],
-            },
-            "subject": "PHYS",
-          },
-          Object {
-            "classId": "1156",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "name": "Lab for PHYS 1155",
-            "numCreditsMax": 1,
-            "numCreditsMin": 1,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "subject": "PHYS",
-          },
-          Object {
-            "classId": "1157",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "1155",
-                  "subject": "PHYS",
-                },
-              ],
-            },
-            "name": "Interactive Learning Seminar for PHYS 1155",
-            "numCreditsMax": 1,
-            "numCreditsMin": 1,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "subject": "PHYS",
-          },
-          Object {
-            "classId": "9999",
-            "name": "Elective 6",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "subject": "XXXX",
-          },
-          Object {
-            "classId": "9999",
-            "name": "Elective 7",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "subject": "XXXX",
-          },
-          Object {
-            "classId": "2000",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "name": "Professional Development for Co-op",
-            "numCreditsMax": 1,
-            "numCreditsMin": 1,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "subject": "EESC",
-          },
-        ],
-        "id": 1031,
-        "season": "SP",
-        "status": "CLASSES",
-        "termId": 100130,
-        "year": 1001,
-      },
-      "summer1": Object {
-        "classes": Array [
-          Object {
-            "classId": "3611",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "3612",
-                  "subject": "BIOL",
-                },
-              ],
-            },
-            "name": "Biochemistry",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "2301",
-                  "subject": "BIOL",
-                },
-                Object {
-                  "type": "or",
-                  "values": Array [
-                    Object {
-                      "classId": "2313",
-                      "subject": "CHEM",
-                    },
-                    Object {
-                      "classId": "2317",
-                      "subject": "CHEM",
-                    },
-                  ],
-                },
-                Object {
-                  "type": "or",
-                  "values": Array [
-                    Object {
-                      "classId": "1111",
-                      "missing": true,
-                      "subject": "ENGL",
-                    },
-                    Object {
-                      "classId": "1102",
-                      "missing": true,
-                      "subject": "ENGL",
-                    },
-                    Object {
-                      "classId": "1111",
-                      "subject": "ENGW",
-                    },
-                    Object {
-                      "classId": "1102",
-                      "subject": "ENGW",
-                    },
-                  ],
-                },
-              ],
-            },
-            "subject": "BIOL",
-          },
-          Object {
-            "classId": "3612",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "3611",
-                  "subject": "BIOL",
-                },
-              ],
-            },
-            "name": "Lab for BIOL 3611",
-            "numCreditsMax": 1,
-            "numCreditsMin": 1,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "subject": "BIOL",
-          },
-          Object {
-            "classId": "9999",
-            "name": "Elective 8",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "subject": "XXXX",
-          },
-        ],
-        "id": 1041,
-        "season": "S1",
-        "status": "CLASSES",
-        "termId": 100140,
-        "year": 1001,
-      },
-      "summer2": Object {
-        "classes": Array [],
-        "id": 1061,
-        "season": "S2",
-        "status": "COOP",
-        "termId": 100160,
-        "year": 1001,
-      },
-      "year": 1001,
-    },
-    "1002": Object {
-      "fall": Object {
-        "classes": Array [],
-        "id": 1012,
-        "season": "FL",
-        "status": "COOP",
-        "termId": 100210,
-        "year": 1002,
-      },
-      "isSummerFull": false,
-      "spring": Object {
-        "classes": Array [
-          Object {
-            "classId": "3431",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "3432",
-                  "subject": "CHEM",
-                },
-              ],
-            },
-            "name": "Physical Chemistry",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [
-                Object {
-                  "type": "or",
-                  "values": Array [
-                    Object {
-                      "type": "and",
-                      "values": Array [
-                        Object {
-                          "classId": "1214",
-                          "subject": "CHEM",
-                        },
-                        Object {
-                          "classId": "1220",
-                          "subject": "CHEM",
-                        },
-                      ],
-                    },
-                    Object {
-                      "classId": "1151",
-                      "subject": "CHEM",
-                    },
-                    Object {
-                      "classId": "1161",
-                      "subject": "CHEM",
-                    },
-                  ],
-                },
-                Object {
-                  "type": "or",
-                  "values": Array [
-                    Object {
-                      "classId": "1252",
-                      "subject": "MATH",
-                    },
-                    Object {
-                      "classId": "1342",
-                      "subject": "MATH",
-                    },
-                  ],
-                },
-                Object {
-                  "type": "or",
-                  "values": Array [
-                    Object {
-                      "classId": "1147",
-                      "subject": "PHYS",
-                    },
-                    Object {
-                      "classId": "1155",
-                      "subject": "PHYS",
-                    },
-                    Object {
-                      "classId": "1165",
-                      "subject": "PHYS",
-                    },
-                    Object {
-                      "classId": "1175",
-                      "subject": "PHYS",
-                    },
-                  ],
-                },
-              ],
-            },
-            "subject": "CHEM",
-          },
-          Object {
-            "classId": "3432",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "3431",
-                  "subject": "CHEM",
-                },
-              ],
-            },
-            "name": "Lab for CHEM 3431",
-            "numCreditsMax": 1,
-            "numCreditsMin": 1,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "subject": "CHEM",
-          },
-          Object {
-            "classId": "4620",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "name": "Introduction to Protein Chemistry",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "prereqs": Object {
-              "type": "or",
-              "values": Array [
-                Object {
-                  "classId": "2313",
-                  "subject": "CHEM",
-                },
-                Object {
-                  "classId": "2317",
-                  "subject": "CHEM",
-                },
-              ],
-            },
-            "subject": "CHEM",
-          },
-          Object {
-            "classId": "3307",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "name": "Advanced Writing in the Sciences",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "prereqs": Object {
-              "type": "or",
-              "values": Array [
-                Object {
-                  "classId": "1102",
-                  "subject": "ENGW",
-                },
-                Object {
-                  "classId": "1111",
-                  "subject": "ENGW",
-                },
-                Object {
-                  "classId": "1102",
-                  "missing": true,
-                  "subject": "ENGL",
-                },
-                Object {
-                  "classId": "1111",
-                  "missing": true,
-                  "subject": "ENGL",
-                },
-              ],
-            },
-            "subject": "ENGW",
-          },
-          Object {
-            "classId": "9999",
-            "name": "Elective 9",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "subject": "XXXX",
-          },
-        ],
-        "id": 1032,
-        "season": "SP",
-        "status": "CLASSES",
-        "termId": 100230,
-        "year": 1002,
-      },
-      "summer1": Object {
-        "classes": Array [
-          Object {
-            "classId": "4707",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "name": "Cell and Molecular Biology",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "prereqs": Object {
-              "type": "or",
-              "values": Array [
-                Object {
-                  "classId": "2323",
-                  "missing": true,
-                  "subject": "BIOL",
-                },
-                Object {
-                  "classId": "3611",
-                  "subject": "BIOL",
-                },
-              ],
-            },
-            "subject": "BIOL",
-          },
-          Object {
-            "classId": "9999",
-            "name": "Elective 10",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "subject": "XXXX",
-          },
-        ],
-        "id": 1042,
-        "season": "S1",
-        "status": "CLASSES",
-        "termId": 100240,
-        "year": 1002,
-      },
-      "summer2": Object {
-        "classes": Array [],
-        "id": 1062,
-        "season": "S2",
-        "status": "COOP",
-        "termId": 100260,
-        "year": 1002,
-      },
-      "year": 1002,
-    },
-    "1003": Object {
-      "fall": Object {
-        "classes": Array [
-          Object {
-            "classId": "9999",
-            "name": "BIOL or CHEM advanced elective",
-            "numCreditsMax": 5,
-            "numCreditsMin": 5,
-            "subject": "XXXX",
-          },
-          Object {
-            "classId": "9999",
-            "name": "BIOL or CHEM advanced elective",
-            "numCreditsMax": 5,
-            "numCreditsMin": 5,
-            "subject": "XXXX",
-          },
-          Object {
-            "classId": "9999",
-            "name": "BIOL or CHEM advanced elective",
-            "numCreditsMax": 5,
-            "numCreditsMin": 5,
-            "subject": "XXXX",
-          },
-          Object {
-            "classId": "9999",
-            "name": "CHEM 4750 or BIOL4701",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "subject": "XXXX",
-          },
-        ],
-        "id": 1013,
-        "season": "FL",
-        "status": "CLASSES",
-        "termId": 100310,
-        "year": 1003,
-      },
-      "isSummerFull": false,
-      "spring": Object {
-        "classes": Array [],
-        "id": 1033,
-        "season": "SP",
-        "status": "INACTIVE",
-        "termId": 100330,
-        "year": 1003,
-      },
-      "summer1": Object {
-        "classes": Array [],
-        "id": 1043,
-        "season": "S1",
-        "status": "INACTIVE",
-        "termId": 100340,
-        "year": 1003,
-      },
-      "summer2": Object {
-        "classes": Array [],
-        "id": 1063,
-        "season": "S2",
-        "status": "INACTIVE",
-        "termId": 100360,
-        "year": 1003,
-      },
-      "year": 1003,
-    },
-  },
-  "years": Array [
-    1000,
-    1001,
-    1002,
-    1003,
-  ],
-}
-`;
-
-exports[`Ensure that prereqs are successfully dded to Biochemistry plans of study. 4`] = `
-Object {
-  "id": "1",
-  "yearMap": Object {
-    "1000": Object {
-      "fall": Object {
-        "classes": Array [
-          Object {
-            "classId": "1107",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "1108",
-                  "subject": "BIOL",
-                },
-              ],
-            },
-            "name": "Foundations of Biology",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "subject": "BIOL",
-          },
-          Object {
-            "classId": "1108",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "1107",
-                  "subject": "BIOL",
-                },
-              ],
-            },
-            "name": "Lab for BIOL 1107",
-            "numCreditsMax": 1,
-            "numCreditsMin": 1,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "subject": "BIOL",
-          },
-          Object {
-            "classId": "1211",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "1212",
-                  "subject": "CHEM",
-                },
-                Object {
-                  "classId": "1213",
-                  "subject": "CHEM",
-                },
-              ],
-            },
-            "name": "General Chemistry 1",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "subject": "CHEM",
-          },
-          Object {
-            "classId": "1212",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "1211",
-                  "subject": "CHEM",
-                },
-                Object {
-                  "classId": "1213",
-                  "subject": "CHEM",
-                },
-              ],
-            },
-            "name": "Lab for CHEM 1211",
-            "numCreditsMax": 1,
-            "numCreditsMin": 1,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "subject": "CHEM",
-          },
-          Object {
-            "classId": "1213",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "1211",
-                  "subject": "CHEM",
-                },
-                Object {
-                  "classId": "1212",
-                  "subject": "CHEM",
-                },
-              ],
-            },
-            "name": "Recitation for CHEM 1211",
-            "numCreditsMax": 0,
-            "numCreditsMin": 0,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "subject": "CHEM",
-          },
-          Object {
-            "classId": "1251",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "name": "Calculus and Differential Equations for Biology 1",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "subject": "MATH",
-          },
-          Object {
-            "classId": "9999",
-            "name": "Elective 1",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "subject": "XXXX",
-          },
-          Object {
-            "classId": "1000",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "name": "Biochemistry at Northeastern",
-            "numCreditsMax": 1,
-            "numCreditsMin": 1,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "subject": "BIOC",
-          },
-        ],
-        "id": 1010,
-        "season": "FL",
-        "status": "CLASSES",
-        "termId": 100010,
-        "year": 1000,
-      },
-      "isSummerFull": false,
-      "spring": Object {
-        "classes": Array [
-          Object {
-            "classId": "2299",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "name": "Inquiries in Biological Sciences",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "prereqs": Object {
-              "type": "or",
-              "values": Array [
-                Object {
-                  "classId": "1101",
-                  "missing": true,
-                  "subject": "BIOL",
-                },
-                Object {
-                  "classId": "1107",
-                  "subject": "BIOL",
-                },
-                Object {
-                  "classId": "1111",
-                  "subject": "BIOL",
-                },
-              ],
-            },
-            "subject": "BIOL",
-          },
-          Object {
-            "classId": "1214",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "1215",
-                  "subject": "CHEM",
-                },
-                Object {
-                  "classId": "1216",
-                  "subject": "CHEM",
-                },
-              ],
-            },
-            "name": "General Chemistry 2",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "1211",
-                  "subject": "CHEM",
-                },
-              ],
-            },
-            "subject": "CHEM",
-          },
-          Object {
-            "classId": "1215",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "1214",
-                  "subject": "CHEM",
-                },
-                Object {
-                  "classId": "1216",
-                  "subject": "CHEM",
-                },
-              ],
-            },
-            "name": "Lab for CHEM 1214",
-            "numCreditsMax": 1,
-            "numCreditsMin": 1,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "subject": "CHEM",
-          },
-          Object {
-            "classId": "1216",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "1214",
-                  "subject": "CHEM",
-                },
-                Object {
-                  "classId": "1215",
-                  "subject": "CHEM",
-                },
-              ],
-            },
-            "name": "Recitation for CHEM 1214",
-            "numCreditsMax": 0,
-            "numCreditsMin": 0,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "subject": "CHEM",
-          },
-          Object {
-            "classId": "1111",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "name": "First-Year Writing",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "subject": "ENGW",
-          },
-          Object {
-            "classId": "1252",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "name": "Calculus and Differential Equations for Biology 2",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "1251",
-                  "subject": "MATH",
-                },
-              ],
-            },
-            "subject": "MATH",
-          },
-        ],
-        "id": 1030,
-        "season": "SP",
-        "status": "CLASSES",
-        "termId": 100030,
-        "year": 1000,
-      },
-      "summer1": Object {
-        "classes": Array [
-          Object {
-            "classId": "2301",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "name": "Genetics and Molecular Biology",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [
-                Object {
-                  "type": "or",
-                  "values": Array [
-                    Object {
-                      "classId": "1103",
-                      "missing": true,
-                      "subject": "BIOL",
-                    },
-                    Object {
-                      "classId": "1113",
-                      "subject": "BIOL",
-                    },
-                    Object {
-                      "classId": "1115",
-                      "subject": "BIOL",
-                    },
-                    Object {
-                      "classId": "2297",
-                      "missing": true,
-                      "subject": "BIOL",
-                    },
-                    Object {
-                      "classId": "2299",
-                      "subject": "BIOL",
-                    },
-                    Object {
-                      "classId": "1105",
-                      "subject": "EEMB",
-                    },
-                    Object {
-                      "classId": "2290",
-                      "subject": "EEMB",
-                    },
-                    Object {
-                      "classId": "2400",
-                      "missing": true,
-                      "subject": "ENVR",
-                    },
-                    Object {
-                      "classId": "2400",
-                      "subject": "EEMB",
-                    },
-                  ],
-                },
-                Object {
-                  "type": "or",
-                  "values": Array [
-                    Object {
-                      "classId": "1211",
-                      "subject": "CHEM",
-                    },
-                    Object {
-                      "classId": "1217",
-                      "subject": "CHEM",
-                    },
-                    Object {
-                      "classId": "1151",
-                      "subject": "CHEM",
-                    },
-                    Object {
-                      "classId": "1161",
-                      "subject": "CHEM",
-                    },
-                  ],
-                },
-              ],
-            },
-            "subject": "BIOL",
-          },
-          Object {
-            "classId": "2302",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "name": "Lab for BIOL 2301",
-            "numCreditsMax": 1,
-            "numCreditsMin": 1,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "2301",
-                  "subject": "BIOL",
-                },
-              ],
-            },
-            "subject": "BIOL",
-          },
-          Object {
-            "classId": "9999",
-            "name": "Elective 2",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "subject": "XXXX",
-          },
-        ],
-        "id": 1040,
-        "season": "S1",
-        "status": "CLASSES",
-        "termId": 100040,
-        "year": 1000,
-      },
-      "summer2": Object {
-        "classes": Array [
-          Object {
-            "classId": "9999",
-            "name": "Elective 3",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "subject": "XXXX",
-          },
-          Object {
-            "classId": "9999",
-            "name": "Elective 4",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "subject": "XXXX",
-          },
-        ],
-        "id": 1060,
-        "season": "S2",
-        "status": "CLASSES",
-        "termId": 100060,
-        "year": 1000,
-      },
-      "year": 1000,
-    },
-    "1001": Object {
-      "fall": Object {
-        "classes": Array [
-          Object {
-            "classId": "2309",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "name": "Biology Project Lab",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "2301",
-                  "subject": "BIOL",
-                },
-              ],
-            },
-            "subject": "BIOL",
-          },
-          Object {
-            "classId": "2311",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "2312",
-                  "subject": "CHEM",
-                },
-              ],
-            },
-            "name": "Organic Chemistry 1",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "prereqs": Object {
-              "type": "or",
-              "values": Array [
-                Object {
-                  "classId": "1151",
-                  "subject": "CHEM",
-                },
-                Object {
-                  "classId": "1214",
-                  "subject": "CHEM",
-                },
-                Object {
-                  "classId": "1220",
-                  "subject": "CHEM",
-                },
-                Object {
-                  "classId": "1161",
-                  "subject": "CHEM",
-                },
-              ],
-            },
-            "subject": "CHEM",
-          },
-          Object {
-            "classId": "2312",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "2311",
-                  "subject": "CHEM",
-                },
-              ],
-            },
-            "name": "Lab for CHEM 2311",
-            "numCreditsMax": 1,
-            "numCreditsMin": 1,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "subject": "CHEM",
-          },
-          Object {
-            "classId": "1151",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "name": "Physics for Engineering 1",
-            "numCreditsMax": 3,
-            "numCreditsMin": 3,
-            "prereqs": Object {
-              "type": "or",
-              "values": Array [
-                Object {
-                  "classId": "1241",
-                  "subject": "MATH",
-                },
-                Object {
-                  "classId": "1251",
-                  "subject": "MATH",
-                },
-                Object {
-                  "classId": "1340",
-                  "subject": "MATH",
-                },
-                Object {
-                  "classId": "1341",
-                  "subject": "MATH",
-                },
-                Object {
-                  "classId": "1342",
-                  "subject": "MATH",
-                },
-                Object {
-                  "classId": "2321",
-                  "subject": "MATH",
-                },
-              ],
-            },
-            "subject": "PHYS",
-          },
-          Object {
-            "classId": "1152",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "name": "Lab for PHYS 1151",
-            "numCreditsMax": 1,
-            "numCreditsMin": 1,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "subject": "PHYS",
-          },
-          Object {
-            "classId": "1153",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "name": "Interactive Learning Seminar for PHYS 1151",
-            "numCreditsMax": 1,
-            "numCreditsMin": 1,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "subject": "PHYS",
-          },
-          Object {
-            "classId": "9999",
-            "name": "Elective 5",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "subject": "XXXX",
-          },
-          Object {
-            "classId": "2000",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "name": "Professional Development for Co-op",
-            "numCreditsMax": 1,
-            "numCreditsMin": 1,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "subject": "EESC",
-          },
-        ],
-        "id": 1011,
-        "season": "FL",
-        "status": "CLASSES",
-        "termId": 100110,
-        "year": 1001,
-      },
-      "isSummerFull": false,
-      "spring": Object {
-        "classes": Array [],
-        "id": 1031,
-        "season": "SP",
-        "status": "COOP",
-        "termId": 100130,
-        "year": 1001,
-      },
-      "summer1": Object {
-        "classes": Array [],
-        "id": 1041,
-        "season": "S1",
-        "status": "COOP",
-        "termId": 100140,
-        "year": 1001,
-      },
-      "summer2": Object {
-        "classes": Array [
-          Object {
-            "classId": "2313",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "2314",
-                  "subject": "CHEM",
-                },
-              ],
-            },
-            "name": "Organic Chemistry 2",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "prereqs": Object {
-              "type": "or",
-              "values": Array [
-                Object {
-                  "classId": "2311",
-                  "subject": "CHEM",
-                },
-                Object {
-                  "classId": "2315",
-                  "subject": "CHEM",
-                },
-              ],
-            },
-            "subject": "CHEM",
-          },
-          Object {
-            "classId": "2314",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "2313",
-                  "subject": "CHEM",
-                },
-              ],
-            },
-            "name": "Lab for CHEM 2313",
-            "numCreditsMax": 1,
-            "numCreditsMin": 1,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "subject": "CHEM",
-          },
-          Object {
-            "classId": "9999",
-            "name": "Elective 6",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "subject": "XXXX",
-          },
-        ],
-        "id": 1061,
-        "season": "S2",
-        "status": "CLASSES",
-        "termId": 100160,
-        "year": 1001,
-      },
-      "year": 1001,
-    },
-    "1002": Object {
-      "fall": Object {
-        "classes": Array [
-          Object {
-            "classId": "3611",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "3612",
-                  "subject": "BIOL",
-                },
-              ],
-            },
-            "name": "Biochemistry",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "2301",
-                  "subject": "BIOL",
-                },
-                Object {
-                  "type": "or",
-                  "values": Array [
-                    Object {
-                      "classId": "2313",
-                      "subject": "CHEM",
-                    },
-                    Object {
-                      "classId": "2317",
-                      "subject": "CHEM",
-                    },
-                  ],
-                },
-                Object {
-                  "type": "or",
-                  "values": Array [
-                    Object {
-                      "classId": "1111",
-                      "missing": true,
-                      "subject": "ENGL",
-                    },
-                    Object {
-                      "classId": "1102",
-                      "missing": true,
-                      "subject": "ENGL",
-                    },
-                    Object {
-                      "classId": "1111",
-                      "subject": "ENGW",
-                    },
-                    Object {
-                      "classId": "1102",
-                      "subject": "ENGW",
-                    },
-                  ],
-                },
-              ],
-            },
-            "subject": "BIOL",
-          },
-          Object {
-            "classId": "3612",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "3611",
-                  "subject": "BIOL",
-                },
-              ],
-            },
-            "name": "Lab for BIOL 3611",
-            "numCreditsMax": 1,
-            "numCreditsMin": 1,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "subject": "BIOL",
-          },
-          Object {
-            "classId": "1155",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "1157",
-                  "subject": "PHYS",
-                },
-              ],
-            },
-            "name": "Physics for Engineering 2",
-            "numCreditsMax": 3,
-            "numCreditsMin": 3,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [
-                Object {
-                  "type": "or",
-                  "values": Array [
-                    Object {
-                      "classId": "1151",
-                      "subject": "PHYS",
-                    },
-                    Object {
-                      "classId": "1161",
-                      "subject": "PHYS",
-                    },
-                    Object {
-                      "classId": "1171",
-                      "subject": "PHYS",
-                    },
-                  ],
-                },
-                Object {
-                  "type": "or",
-                  "values": Array [
-                    Object {
-                      "classId": "1252",
-                      "subject": "MATH",
-                    },
-                    Object {
-                      "classId": "1342",
-                      "subject": "MATH",
-                    },
-                    Object {
-                      "classId": "2321",
-                      "subject": "MATH",
-                    },
-                  ],
-                },
-              ],
-            },
-            "subject": "PHYS",
-          },
-          Object {
-            "classId": "1156",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "name": "Lab for PHYS 1155",
-            "numCreditsMax": 1,
-            "numCreditsMin": 1,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "subject": "PHYS",
-          },
-          Object {
-            "classId": "1157",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "1155",
-                  "subject": "PHYS",
-                },
-              ],
-            },
-            "name": "Interactive Learning Seminar for PHYS 1155",
-            "numCreditsMax": 1,
-            "numCreditsMin": 1,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "subject": "PHYS",
-          },
-          Object {
-            "classId": "3307",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "name": "Advanced Writing in the Sciences",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "prereqs": Object {
-              "type": "or",
-              "values": Array [
-                Object {
-                  "classId": "1102",
-                  "subject": "ENGW",
-                },
-                Object {
-                  "classId": "1111",
-                  "subject": "ENGW",
-                },
-                Object {
-                  "classId": "1102",
-                  "missing": true,
-                  "subject": "ENGL",
-                },
-                Object {
-                  "classId": "1111",
-                  "missing": true,
-                  "subject": "ENGL",
-                },
-              ],
-            },
-            "subject": "ENGW",
-          },
-          Object {
-            "classId": "9999",
-            "name": "Elective 7",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "subject": "XXXX",
-          },
-        ],
-        "id": 1012,
-        "season": "FL",
-        "status": "CLASSES",
-        "termId": 100210,
-        "year": 1002,
-      },
-      "isSummerFull": false,
-      "spring": Object {
-        "classes": Array [],
-        "id": 1032,
-        "season": "SP",
-        "status": "COOP",
-        "termId": 100230,
-        "year": 1002,
-      },
-      "summer1": Object {
-        "classes": Array [],
-        "id": 1042,
-        "season": "S1",
-        "status": "COOP",
-        "termId": 100240,
-        "year": 1002,
-      },
-      "summer2": Object {
-        "classes": Array [
-          Object {
-            "classId": "4707",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "name": "Cell and Molecular Biology",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "prereqs": Object {
-              "type": "or",
-              "values": Array [
-                Object {
-                  "classId": "2323",
-                  "missing": true,
-                  "subject": "BIOL",
-                },
-                Object {
-                  "classId": "3611",
-                  "subject": "BIOL",
-                },
-              ],
-            },
-            "subject": "BIOL",
-          },
-          Object {
-            "classId": "9999",
-            "name": "Elective 8",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "subject": "XXXX",
-          },
-        ],
-        "id": 1062,
-        "season": "S2",
-        "status": "CLASSES",
-        "termId": 100260,
-        "year": 1002,
-      },
-      "year": 1002,
-    },
-    "1003": Object {
-      "fall": Object {
-        "classes": Array [
-          Object {
-            "classId": "3431",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "3432",
-                  "subject": "CHEM",
-                },
-              ],
-            },
-            "name": "Physical Chemistry",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [
-                Object {
-                  "type": "or",
-                  "values": Array [
-                    Object {
-                      "type": "and",
-                      "values": Array [
-                        Object {
-                          "classId": "1214",
-                          "subject": "CHEM",
-                        },
-                        Object {
-                          "classId": "1220",
-                          "subject": "CHEM",
-                        },
-                      ],
-                    },
-                    Object {
-                      "classId": "1151",
-                      "subject": "CHEM",
-                    },
-                    Object {
-                      "classId": "1161",
-                      "subject": "CHEM",
-                    },
-                  ],
-                },
-                Object {
-                  "type": "or",
-                  "values": Array [
-                    Object {
-                      "classId": "1252",
-                      "subject": "MATH",
-                    },
-                    Object {
-                      "classId": "1342",
-                      "subject": "MATH",
-                    },
-                  ],
-                },
-                Object {
-                  "type": "or",
-                  "values": Array [
-                    Object {
-                      "classId": "1147",
-                      "subject": "PHYS",
-                    },
-                    Object {
-                      "classId": "1155",
-                      "subject": "PHYS",
-                    },
-                    Object {
-                      "classId": "1165",
-                      "subject": "PHYS",
-                    },
-                    Object {
-                      "classId": "1175",
-                      "subject": "PHYS",
-                    },
-                  ],
-                },
-              ],
-            },
-            "subject": "CHEM",
-          },
-          Object {
-            "classId": "3432",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "3431",
-                  "subject": "CHEM",
-                },
-              ],
-            },
-            "name": "Lab for CHEM 3431",
-            "numCreditsMax": 1,
-            "numCreditsMin": 1,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "subject": "CHEM",
-          },
-          Object {
-            "classId": "4620",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "name": "Introduction to Protein Chemistry",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "prereqs": Object {
-              "type": "or",
-              "values": Array [
-                Object {
-                  "classId": "2313",
-                  "subject": "CHEM",
-                },
-                Object {
-                  "classId": "2317",
-                  "subject": "CHEM",
-                },
-              ],
-            },
-            "subject": "CHEM",
-          },
-          Object {
-            "classId": "9999",
-            "name": "BIOL or CHEM advanced elective",
-            "numCreditsMax": 5,
-            "numCreditsMin": 5,
-            "subject": "XXXX",
-          },
-          Object {
-            "classId": "9999",
-            "name": "Elective 9",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "subject": "XXXX",
-          },
-        ],
-        "id": 1013,
-        "season": "FL",
-        "status": "CLASSES",
-        "termId": 100310,
-        "year": 1003,
-      },
-      "isSummerFull": false,
-      "spring": Object {
-        "classes": Array [
-          Object {
-            "classId": "9999",
-            "name": "BIOL or CHEM advanced elective",
-            "numCreditsMax": 5,
-            "numCreditsMin": 5,
-            "subject": "XXXX",
-          },
-          Object {
-            "classId": "9999",
-            "name": "BIOL or CHEM advanced elective",
-            "numCreditsMax": 5,
-            "numCreditsMin": 5,
-            "subject": "XXXX",
-          },
-          Object {
-            "classId": "9999",
-            "name": "CHEM 4750 or BIOL4701",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "subject": "XXXX",
-          },
-          Object {
-            "classId": "9999",
-            "name": "Elective 10",
-            "numCreditsMax": 4,
-            "numCreditsMin": 4,
-            "subject": "XXXX",
-          },
-        ],
-        "id": 1033,
-        "season": "SP",
-        "status": "CLASSES",
-        "termId": 100330,
-        "year": 1003,
-      },
-      "summer1": Object {
-        "classes": Array [],
-        "id": 1043,
-        "season": "S1",
-        "status": "INACTIVE",
-        "termId": 100340,
-        "year": 1003,
-      },
-      "summer2": Object {
-        "classes": Array [],
-        "id": 1063,
-        "season": "S2",
-        "status": "INACTIVE",
-        "termId": 100360,
-        "year": 1003,
-      },
-      "year": 1003,
-    },
-  },
-  "years": Array [
-    1000,
-    1001,
-    1002,
-    1003,
-  ],
-}
-`;
-
-exports[`Ensure that prereqs are successfully dded to Biochemistry plans of study. 5`] = `
 Object {
   "id": "2",
   "yearMap": Object {
@@ -8518,7 +6911,7 @@ Object {
 }
 `;
 
-exports[`Ensure that prereqs are successfully dded to Biochemistry plans of study. 6`] = `
+exports[`Ensure that prereqs are successfully dded to Biochemistry plans of study. 4`] = `
 Object {
   "id": "3",
   "yearMap": Object {
