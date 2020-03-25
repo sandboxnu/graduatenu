@@ -3225,6 +3225,1623 @@ Object {
       "fall": Object {
         "classes": Array [
           Object {
+            "classId": "1200",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "First Year Seminar",
+            "numCreditsMax": 1,
+            "numCreditsMin": 1,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "subject": "CS",
+          },
+          Object {
+            "classId": "1800",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "1802",
+                  "subject": "CS",
+                },
+              ],
+            },
+            "name": "Discrete Structures",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "subject": "CS",
+          },
+          Object {
+            "classId": "1802",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "1800",
+                  "subject": "CS",
+                },
+              ],
+            },
+            "name": "Seminar for CS 1800",
+            "numCreditsMax": 1,
+            "numCreditsMin": 1,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "subject": "CS",
+          },
+          Object {
+            "classId": "2500",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "2501",
+                  "subject": "CS",
+                },
+              ],
+            },
+            "name": "Fundamentals of Computer Science 1",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "subject": "CS",
+          },
+          Object {
+            "classId": "2501",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "2500",
+                  "subject": "CS",
+                },
+              ],
+            },
+            "name": "Lab for CS 2500",
+            "numCreditsMax": 1,
+            "numCreditsMin": 1,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "subject": "CS",
+          },
+          Object {
+            "classId": "1365",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "Introduction to Mathematical Reasoning",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "subject": "MATH",
+          },
+          Object {
+            "classId": "1111",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "First-Year Writing",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "subject": "ENGW",
+          },
+        ],
+        "id": 1010,
+        "season": "FL",
+        "status": "CLASSES",
+        "termId": 100010,
+        "year": 1000,
+      },
+      "isSummerFull": false,
+      "spring": Object {
+        "classes": Array [
+          Object {
+            "classId": "2510",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "2511",
+                  "subject": "CS",
+                },
+              ],
+            },
+            "name": "Fundamentals of Computer Science 2",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "2500",
+                  "subject": "CS",
+                },
+              ],
+            },
+            "subject": "CS",
+          },
+          Object {
+            "classId": "2511",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "2510",
+                  "subject": "CS",
+                },
+              ],
+            },
+            "name": "Lab for CS 2510",
+            "numCreditsMax": 1,
+            "numCreditsMin": 1,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "subject": "CS",
+          },
+          Object {
+            "classId": "2810",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "Mathematics of Data Models",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "1800",
+                  "subject": "CS",
+                },
+                Object {
+                  "classId": "2500",
+                  "subject": "CS",
+                },
+              ],
+            },
+            "subject": "CS",
+          },
+          Object {
+            "classId": "9999",
+            "name": "Science elective with lab",
+            "numCreditsMax": 5,
+            "numCreditsMin": 5,
+            "subject": "XXXX",
+          },
+          Object {
+            "classId": "9999",
+            "name": "Elective",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "subject": "XXXX",
+          },
+        ],
+        "id": 1030,
+        "season": "SP",
+        "status": "CLASSES",
+        "termId": 100030,
+        "year": 1000,
+      },
+      "summer1": Object {
+        "classes": Array [
+          Object {
+            "classId": "3500",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "Object-Oriented Design",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "prereqs": Object {
+              "type": "or",
+              "values": Array [
+                Object {
+                  "classId": "2510",
+                  "subject": "CS",
+                },
+                Object {
+                  "classId": "1500",
+                  "missing": true,
+                  "subject": "CS",
+                },
+                Object {
+                  "classId": "2560",
+                  "subject": "EECE",
+                },
+              ],
+            },
+            "subject": "CS",
+          },
+          Object {
+            "classId": "9999",
+            "name": "Elective",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "subject": "XXXX",
+          },
+        ],
+        "id": 1040,
+        "season": "S1",
+        "status": "CLASSES",
+        "termId": 100040,
+        "year": 1000,
+      },
+      "summer2": Object {
+        "classes": Array [
+          Object {
+            "classId": "1341",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "Calculus 1 for Science and Engineering",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "subject": "MATH",
+          },
+          Object {
+            "classId": "3000",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "3001",
+                  "subject": "CS",
+                },
+              ],
+            },
+            "name": "Algorithms and Data",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "prereqs": Object {
+              "type": "or",
+              "values": Array [
+                Object {
+                  "classId": "1500",
+                  "missing": true,
+                  "subject": "CS",
+                },
+                Object {
+                  "type": "and",
+                  "values": Array [
+                    Object {
+                      "classId": "2510",
+                      "subject": "CS",
+                    },
+                    Object {
+                      "classId": "1800",
+                      "subject": "CS",
+                    },
+                  ],
+                },
+                Object {
+                  "classId": "2160",
+                  "subject": "EECE",
+                },
+                Object {
+                  "classId": "2162",
+                  "missing": true,
+                  "subject": "EECE",
+                },
+                Object {
+                  "classId": "2164",
+                  "missing": true,
+                  "subject": "EECE",
+                },
+              ],
+            },
+            "subject": "CS",
+          },
+        ],
+        "id": 1060,
+        "season": "S2",
+        "status": "CLASSES",
+        "termId": 100060,
+        "year": 1000,
+      },
+      "year": 1000,
+    },
+    "1001": Object {
+      "fall": Object {
+        "classes": Array [
+          Object {
+            "classId": "3650",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "Computer Systems",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "prereqs": Object {
+              "type": "or",
+              "values": Array [
+                Object {
+                  "classId": "2510",
+                  "subject": "CS",
+                },
+                Object {
+                  "classId": "1500",
+                  "missing": true,
+                  "subject": "CS",
+                },
+                Object {
+                  "classId": "2560",
+                  "subject": "EECE",
+                },
+              ],
+            },
+            "subject": "CS",
+          },
+          Object {
+            "classId": "2160",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "Embedded Design: Enabling Robotics",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "prereqs": Object {
+              "type": "or",
+              "values": Array [
+                Object {
+                  "classId": "1111",
+                  "subject": "GE",
+                },
+                Object {
+                  "classId": "1502",
+                  "subject": "GE",
+                },
+                Object {
+                  "classId": "3500",
+                  "subject": "CS",
+                },
+              ],
+            },
+            "subject": "EECE",
+          },
+          Object {
+            "classId": "9999",
+            "name": "Concentration course",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "subject": "XXXX",
+          },
+          Object {
+            "classId": "9999",
+            "name": "Elective",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "subject": "XXXX",
+          },
+          Object {
+            "classId": "1210",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "Professional Development for Khoury Co-op",
+            "numCreditsMax": 1,
+            "numCreditsMin": 1,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "2510",
+                  "subject": "CS",
+                },
+              ],
+            },
+            "subject": "CS",
+          },
+        ],
+        "id": 1011,
+        "season": "FL",
+        "status": "CLASSES",
+        "termId": 100110,
+        "year": 1001,
+      },
+      "isSummerFull": false,
+      "spring": Object {
+        "classes": Array [],
+        "id": 1031,
+        "season": "SP",
+        "status": "COOP",
+        "termId": 100130,
+        "year": 1001,
+      },
+      "summer1": Object {
+        "classes": Array [],
+        "id": 1041,
+        "season": "S1",
+        "status": "COOP",
+        "termId": 100140,
+        "year": 1001,
+      },
+      "summer2": Object {
+        "classes": Array [
+          Object {
+            "classId": "9999",
+            "name": "Elective",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "subject": "XXXX",
+          },
+          Object {
+            "classId": "9999",
+            "name": "Elective",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "subject": "XXXX",
+          },
+        ],
+        "id": 1061,
+        "season": "S2",
+        "status": "CLASSES",
+        "termId": 100160,
+        "year": 1001,
+      },
+      "year": 1001,
+    },
+    "1002": Object {
+      "fall": Object {
+        "classes": Array [
+          Object {
+            "classId": "3800",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "Theory of Computation",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "prereqs": Object {
+              "type": "or",
+              "values": Array [
+                Object {
+                  "classId": "1500",
+                  "missing": true,
+                  "subject": "CS",
+                },
+                Object {
+                  "classId": "2510",
+                  "subject": "CS",
+                },
+                Object {
+                  "classId": "2160",
+                  "subject": "EECE",
+                },
+                Object {
+                  "classId": "2162",
+                  "missing": true,
+                  "subject": "EECE",
+                },
+                Object {
+                  "classId": "2164",
+                  "missing": true,
+                  "subject": "EECE",
+                },
+              ],
+            },
+            "subject": "CS",
+          },
+          Object {
+            "classId": "1170",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "The Eloquent Presenter",
+            "numCreditsMax": 1,
+            "numCreditsMin": 1,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "subject": "THTR",
+          },
+          Object {
+            "classId": "9999",
+            "name": "Concentration course",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "subject": "XXXX",
+          },
+          Object {
+            "classId": "9999",
+            "name": "Elective",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "subject": "XXXX",
+          },
+          Object {
+            "classId": "9999",
+            "name": "Computing and social issues",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "subject": "XXXX",
+          },
+        ],
+        "id": 1012,
+        "season": "FL",
+        "status": "CLASSES",
+        "termId": 100210,
+        "year": 1002,
+      },
+      "isSummerFull": false,
+      "spring": Object {
+        "classes": Array [],
+        "id": 1032,
+        "season": "SP",
+        "status": "COOP",
+        "termId": 100230,
+        "year": 1002,
+      },
+      "summer1": Object {
+        "classes": Array [],
+        "id": 1042,
+        "season": "S1",
+        "status": "COOP",
+        "termId": 100240,
+        "year": 1002,
+      },
+      "summer2": Object {
+        "classes": Array [
+          Object {
+            "classId": "3302",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "Advanced Writing in the Technical Professions",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "prereqs": Object {
+              "type": "or",
+              "values": Array [
+                Object {
+                  "classId": "1102",
+                  "subject": "ENGW",
+                },
+                Object {
+                  "classId": "1111",
+                  "subject": "ENGW",
+                },
+                Object {
+                  "classId": "1102",
+                  "missing": true,
+                  "subject": "ENGL",
+                },
+                Object {
+                  "classId": "1111",
+                  "missing": true,
+                  "subject": "ENGL",
+                },
+              ],
+            },
+            "subject": "ENGW",
+          },
+          Object {
+            "classId": "9999",
+            "name": "Elective",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "subject": "XXXX",
+          },
+        ],
+        "id": 1062,
+        "season": "S2",
+        "status": "CLASSES",
+        "termId": 100260,
+        "year": 1002,
+      },
+      "year": 1002,
+    },
+    "1003": Object {
+      "fall": Object {
+        "classes": Array [
+          Object {
+            "classId": "4500",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "Software Development",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "3500",
+                  "subject": "CS",
+                },
+                Object {
+                  "type": "or",
+                  "values": Array [
+                    Object {
+                      "classId": "1111",
+                      "subject": "ENGW",
+                    },
+                    Object {
+                      "classId": "1102",
+                      "subject": "ENGW",
+                    },
+                  ],
+                },
+              ],
+            },
+            "subject": "CS",
+          },
+          Object {
+            "classId": "9999",
+            "name": "Khoury elective",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "subject": "XXXX",
+          },
+          Object {
+            "classId": "9999",
+            "name": "Concentration course",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "subject": "XXXX",
+          },
+          Object {
+            "classId": "9999",
+            "name": "Science elective with lab",
+            "numCreditsMax": 5,
+            "numCreditsMin": 5,
+            "subject": "XXXX",
+          },
+        ],
+        "id": 1013,
+        "season": "FL",
+        "status": "CLASSES",
+        "termId": 100310,
+        "year": 1003,
+      },
+      "isSummerFull": false,
+      "spring": Object {
+        "classes": Array [
+          Object {
+            "classId": "9999",
+            "name": "Concentration course",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "subject": "XXXX",
+          },
+          Object {
+            "classId": "9999",
+            "name": "Khoury elective",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "subject": "XXXX",
+          },
+          Object {
+            "classId": "9999",
+            "name": "Security course",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "subject": "XXXX",
+          },
+          Object {
+            "classId": "9999",
+            "name": "Elective",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "subject": "XXXX",
+          },
+        ],
+        "id": 1033,
+        "season": "SP",
+        "status": "CLASSES",
+        "termId": 100330,
+        "year": 1003,
+      },
+      "summer1": Object {
+        "classes": Array [],
+        "id": 1043,
+        "season": "S1",
+        "status": "INACTIVE",
+        "termId": 100340,
+        "year": 1003,
+      },
+      "summer2": Object {
+        "classes": Array [],
+        "id": 1063,
+        "season": "S2",
+        "status": "INACTIVE",
+        "termId": 100360,
+        "year": 1003,
+      },
+      "year": 1003,
+    },
+  },
+  "years": Array [
+    1000,
+    1001,
+    1002,
+    1003,
+  ],
+}
+`;
+
+exports[`Ensure that prereqs are successfully dded to Biochemistry plans of study. 2`] = `
+Object {
+  "id": "1",
+  "yearMap": Object {
+    "1000": Object {
+      "fall": Object {
+        "classes": Array [
+          Object {
+            "classId": "1200",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "First Year Seminar",
+            "numCreditsMax": 1,
+            "numCreditsMin": 1,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "subject": "CS",
+          },
+          Object {
+            "classId": "1800",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "1802",
+                  "subject": "CS",
+                },
+              ],
+            },
+            "name": "Discrete Structures",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "subject": "CS",
+          },
+          Object {
+            "classId": "1802",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "1800",
+                  "subject": "CS",
+                },
+              ],
+            },
+            "name": "Seminar for CS 1800",
+            "numCreditsMax": 1,
+            "numCreditsMin": 1,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "subject": "CS",
+          },
+          Object {
+            "classId": "2500",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "2501",
+                  "subject": "CS",
+                },
+              ],
+            },
+            "name": "Fundamentals of Computer Science 1",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "subject": "CS",
+          },
+          Object {
+            "classId": "2501",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "2500",
+                  "subject": "CS",
+                },
+              ],
+            },
+            "name": "Lab for CS 2500",
+            "numCreditsMax": 1,
+            "numCreditsMin": 1,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "subject": "CS",
+          },
+          Object {
+            "classId": "1365",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "Introduction to Mathematical Reasoning",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "subject": "MATH",
+          },
+          Object {
+            "classId": "1111",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "First-Year Writing",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "subject": "ENGW",
+          },
+        ],
+        "id": 1010,
+        "season": "FL",
+        "status": "CLASSES",
+        "termId": 100010,
+        "year": 1000,
+      },
+      "isSummerFull": false,
+      "spring": Object {
+        "classes": Array [
+          Object {
+            "classId": "2510",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "2511",
+                  "subject": "CS",
+                },
+              ],
+            },
+            "name": "Fundamentals of Computer Science 2",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "2500",
+                  "subject": "CS",
+                },
+              ],
+            },
+            "subject": "CS",
+          },
+          Object {
+            "classId": "2511",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "2510",
+                  "subject": "CS",
+                },
+              ],
+            },
+            "name": "Lab for CS 2510",
+            "numCreditsMax": 1,
+            "numCreditsMin": 1,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "subject": "CS",
+          },
+          Object {
+            "classId": "2810",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "Mathematics of Data Models",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "1800",
+                  "subject": "CS",
+                },
+                Object {
+                  "classId": "2500",
+                  "subject": "CS",
+                },
+              ],
+            },
+            "subject": "CS",
+          },
+          Object {
+            "classId": "9999",
+            "name": "Science elective with lab",
+            "numCreditsMax": 5,
+            "numCreditsMin": 5,
+            "subject": "XXXX",
+          },
+          Object {
+            "classId": "9999",
+            "name": "Elective",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "subject": "XXXX",
+          },
+        ],
+        "id": 1030,
+        "season": "SP",
+        "status": "CLASSES",
+        "termId": 100030,
+        "year": 1000,
+      },
+      "summer1": Object {
+        "classes": Array [],
+        "id": 1040,
+        "season": "S1",
+        "status": "INACTIVE",
+        "termId": 100040,
+        "year": 1000,
+      },
+      "summer2": Object {
+        "classes": Array [],
+        "id": 1060,
+        "season": "S2",
+        "status": "INACTIVE",
+        "termId": 100060,
+        "year": 1000,
+      },
+      "year": 1000,
+    },
+    "1001": Object {
+      "fall": Object {
+        "classes": Array [
+          Object {
+            "classId": "3500",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "Object-Oriented Design",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "prereqs": Object {
+              "type": "or",
+              "values": Array [
+                Object {
+                  "classId": "2510",
+                  "subject": "CS",
+                },
+                Object {
+                  "classId": "1500",
+                  "missing": true,
+                  "subject": "CS",
+                },
+                Object {
+                  "classId": "2560",
+                  "subject": "EECE",
+                },
+              ],
+            },
+            "subject": "CS",
+          },
+          Object {
+            "classId": "1341",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "Calculus 1 for Science and Engineering",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "subject": "MATH",
+          },
+          Object {
+            "classId": "3000",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "3001",
+                  "subject": "CS",
+                },
+              ],
+            },
+            "name": "Algorithms and Data",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "prereqs": Object {
+              "type": "or",
+              "values": Array [
+                Object {
+                  "classId": "1500",
+                  "missing": true,
+                  "subject": "CS",
+                },
+                Object {
+                  "type": "and",
+                  "values": Array [
+                    Object {
+                      "classId": "2510",
+                      "subject": "CS",
+                    },
+                    Object {
+                      "classId": "1800",
+                      "subject": "CS",
+                    },
+                  ],
+                },
+                Object {
+                  "classId": "2160",
+                  "subject": "EECE",
+                },
+                Object {
+                  "classId": "2162",
+                  "missing": true,
+                  "subject": "EECE",
+                },
+                Object {
+                  "classId": "2164",
+                  "missing": true,
+                  "subject": "EECE",
+                },
+              ],
+            },
+            "subject": "CS",
+          },
+          Object {
+            "classId": "9999",
+            "name": "Elective",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "subject": "XXXX",
+          },
+          Object {
+            "classId": "1210",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "Professional Development for Khoury Co-op",
+            "numCreditsMax": 1,
+            "numCreditsMin": 1,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "2510",
+                  "subject": "CS",
+                },
+              ],
+            },
+            "subject": "CS",
+          },
+        ],
+        "id": 1011,
+        "season": "FL",
+        "status": "CLASSES",
+        "termId": 100110,
+        "year": 1001,
+      },
+      "isSummerFull": false,
+      "spring": Object {
+        "classes": Array [],
+        "id": 1031,
+        "season": "SP",
+        "status": "COOP",
+        "termId": 100130,
+        "year": 1001,
+      },
+      "summer1": Object {
+        "classes": Array [],
+        "id": 1041,
+        "season": "S1",
+        "status": "COOP",
+        "termId": 100140,
+        "year": 1001,
+      },
+      "summer2": Object {
+        "classes": Array [],
+        "id": 1061,
+        "season": "S2",
+        "status": "INACTIVE",
+        "termId": 100160,
+        "year": 1001,
+      },
+      "year": 1001,
+    },
+    "1002": Object {
+      "fall": Object {
+        "classes": Array [
+          Object {
+            "classId": "3800",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "Theory of Computation",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "prereqs": Object {
+              "type": "or",
+              "values": Array [
+                Object {
+                  "classId": "1500",
+                  "missing": true,
+                  "subject": "CS",
+                },
+                Object {
+                  "classId": "2510",
+                  "subject": "CS",
+                },
+                Object {
+                  "classId": "2160",
+                  "subject": "EECE",
+                },
+                Object {
+                  "classId": "2162",
+                  "missing": true,
+                  "subject": "EECE",
+                },
+                Object {
+                  "classId": "2164",
+                  "missing": true,
+                  "subject": "EECE",
+                },
+              ],
+            },
+            "subject": "CS",
+          },
+          Object {
+            "classId": "3650",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "Computer Systems",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "prereqs": Object {
+              "type": "or",
+              "values": Array [
+                Object {
+                  "classId": "2510",
+                  "subject": "CS",
+                },
+                Object {
+                  "classId": "1500",
+                  "missing": true,
+                  "subject": "CS",
+                },
+                Object {
+                  "classId": "2560",
+                  "subject": "EECE",
+                },
+              ],
+            },
+            "subject": "CS",
+          },
+          Object {
+            "classId": "9999",
+            "name": "Science elective with lab",
+            "numCreditsMax": 5,
+            "numCreditsMin": 5,
+            "subject": "XXXX",
+          },
+          Object {
+            "classId": "9999",
+            "name": "Concentration course",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "subject": "XXXX",
+          },
+          Object {
+            "classId": "1170",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "The Eloquent Presenter",
+            "numCreditsMax": 1,
+            "numCreditsMin": 1,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "subject": "THTR",
+          },
+        ],
+        "id": 1012,
+        "season": "FL",
+        "status": "CLASSES",
+        "termId": 100210,
+        "year": 1002,
+      },
+      "isSummerFull": false,
+      "spring": Object {
+        "classes": Array [],
+        "id": 1032,
+        "season": "SP",
+        "status": "COOP",
+        "termId": 100230,
+        "year": 1002,
+      },
+      "summer1": Object {
+        "classes": Array [],
+        "id": 1042,
+        "season": "S1",
+        "status": "COOP",
+        "termId": 100240,
+        "year": 1002,
+      },
+      "summer2": Object {
+        "classes": Array [
+          Object {
+            "classId": "9999",
+            "name": "Elective",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "subject": "XXXX",
+          },
+          Object {
+            "classId": "9999",
+            "name": "Elective",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "subject": "XXXX",
+          },
+        ],
+        "id": 1062,
+        "season": "S2",
+        "status": "CLASSES",
+        "termId": 100260,
+        "year": 1002,
+      },
+      "year": 1002,
+    },
+    "1003": Object {
+      "fall": Object {
+        "classes": Array [
+          Object {
+            "classId": "9999",
+            "name": "Concentration course",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "subject": "XXXX",
+          },
+          Object {
+            "classId": "9999",
+            "name": "Concentration course",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "subject": "XXXX",
+          },
+          Object {
+            "classId": "9999",
+            "name": "Elective",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "subject": "XXXX",
+          },
+          Object {
+            "classId": "9999",
+            "name": "Elective",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "subject": "XXXX",
+          },
+        ],
+        "id": 1013,
+        "season": "FL",
+        "status": "CLASSES",
+        "termId": 100310,
+        "year": 1003,
+      },
+      "isSummerFull": false,
+      "spring": Object {
+        "classes": Array [],
+        "id": 1033,
+        "season": "SP",
+        "status": "COOP",
+        "termId": 100330,
+        "year": 1003,
+      },
+      "summer1": Object {
+        "classes": Array [],
+        "id": 1043,
+        "season": "S1",
+        "status": "COOP",
+        "termId": 100340,
+        "year": 1003,
+      },
+      "summer2": Object {
+        "classes": Array [
+          Object {
+            "classId": "3302",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "Advanced Writing in the Technical Professions",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "prereqs": Object {
+              "type": "or",
+              "values": Array [
+                Object {
+                  "classId": "1102",
+                  "subject": "ENGW",
+                },
+                Object {
+                  "classId": "1111",
+                  "subject": "ENGW",
+                },
+                Object {
+                  "classId": "1102",
+                  "missing": true,
+                  "subject": "ENGL",
+                },
+                Object {
+                  "classId": "1111",
+                  "missing": true,
+                  "subject": "ENGL",
+                },
+              ],
+            },
+            "subject": "ENGW",
+          },
+          Object {
+            "classId": "9999",
+            "name": "Elective",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "subject": "XXXX",
+          },
+        ],
+        "id": 1063,
+        "season": "S2",
+        "status": "CLASSES",
+        "termId": 100360,
+        "year": 1003,
+      },
+      "year": 1003,
+    },
+    "1004": Object {
+      "fall": Object {
+        "classes": Array [
+          Object {
+            "classId": "2160",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "Embedded Design: Enabling Robotics",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "prereqs": Object {
+              "type": "or",
+              "values": Array [
+                Object {
+                  "classId": "1111",
+                  "subject": "GE",
+                },
+                Object {
+                  "classId": "1502",
+                  "subject": "GE",
+                },
+                Object {
+                  "classId": "3500",
+                  "subject": "CS",
+                },
+              ],
+            },
+            "subject": "EECE",
+          },
+          Object {
+            "classId": "9999",
+            "name": "Khoury elective",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "subject": "XXXX",
+          },
+          Object {
+            "classId": "9999",
+            "name": "Khoury elective",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "subject": "XXXX",
+          },
+          Object {
+            "classId": "9999",
+            "name": "Concentration course",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "subject": "XXXX",
+          },
+        ],
+        "id": 1014,
+        "season": "FL",
+        "status": "CLASSES",
+        "termId": 100410,
+        "year": 1004,
+      },
+      "isSummerFull": false,
+      "spring": Object {
+        "classes": Array [
+          Object {
+            "classId": "4500",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "Software Development",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "3500",
+                  "subject": "CS",
+                },
+                Object {
+                  "type": "or",
+                  "values": Array [
+                    Object {
+                      "classId": "1111",
+                      "subject": "ENGW",
+                    },
+                    Object {
+                      "classId": "1102",
+                      "subject": "ENGW",
+                    },
+                  ],
+                },
+              ],
+            },
+            "subject": "CS",
+          },
+          Object {
+            "classId": "4501",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "Recitation for CS 4500",
+            "numCreditsMax": 0,
+            "numCreditsMin": 0,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "subject": "CS",
+          },
+          Object {
+            "classId": "9999",
+            "name": "Computing and social issues",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "subject": "XXXX",
+          },
+          Object {
+            "classId": "9999",
+            "name": "Security course",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "subject": "XXXX",
+          },
+          Object {
+            "classId": "9999",
+            "name": "Elective",
+            "numCreditsMax": 4,
+            "numCreditsMin": 4,
+            "subject": "XXXX",
+          },
+        ],
+        "id": 1034,
+        "season": "SP",
+        "status": "CLASSES",
+        "termId": 100430,
+        "year": 1004,
+      },
+      "summer1": Object {
+        "classes": Array [],
+        "id": 1044,
+        "season": "S1",
+        "status": "INACTIVE",
+        "termId": 100440,
+        "year": 1004,
+      },
+      "summer2": Object {
+        "classes": Array [],
+        "id": 1064,
+        "season": "S2",
+        "status": "INACTIVE",
+        "termId": 100460,
+        "year": 1004,
+      },
+      "year": 1004,
+    },
+  },
+  "years": Array [
+    1000,
+    1001,
+    1002,
+    1003,
+    1004,
+  ],
+}
+`;
+
+exports[`Ensure that prereqs are successfully dded to Biochemistry plans of study. 3`] = `
+Object {
+  "id": "0",
+  "yearMap": Object {
+    "1000": Object {
+      "fall": Object {
+        "classes": Array [
+          Object {
             "classId": "1107",
             "coreqs": Object {
               "type": "and",
@@ -4433,7 +6050,7 @@ Object {
 }
 `;
 
-exports[`Ensure that prereqs are successfully dded to Biochemistry plans of study. 2`] = `
+exports[`Ensure that prereqs are successfully dded to Biochemistry plans of study. 4`] = `
 Object {
   "id": "1",
   "yearMap": Object {
@@ -5649,7 +7266,7 @@ Object {
 }
 `;
 
-exports[`Ensure that prereqs are successfully dded to Biochemistry plans of study. 3`] = `
+exports[`Ensure that prereqs are successfully dded to Biochemistry plans of study. 5`] = `
 Object {
   "id": "2",
   "yearMap": Object {
@@ -6901,7 +8518,7 @@ Object {
 }
 `;
 
-exports[`Ensure that prereqs are successfully dded to Biochemistry plans of study. 4`] = `
+exports[`Ensure that prereqs are successfully dded to Biochemistry plans of study. 6`] = `
 Object {
   "id": "3",
   "yearMap": Object {
