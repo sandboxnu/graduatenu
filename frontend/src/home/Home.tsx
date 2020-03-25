@@ -17,13 +17,7 @@ import {
   convertTermIdToSeason,
   isCoopOrVacation,
   moveCourse,
-  planToString,
-  scheduleHasClasses,
 } from "../utils";
-import { TextField, Button } from "@material-ui/core";
-import { Autocomplete } from "@material-ui/lab";
-import { CLASS_BLOCK_WIDTH } from "../constants";
-import { DropDownModal } from "../components";
 import { Sidebar } from "../components/Sidebar";
 import { withToast } from "./toastHook";
 import { AppearanceTypes } from "react-toast-notifications";
@@ -45,6 +39,7 @@ import {
 } from "../state/actions/scheduleActions";
 import { setMajorAction } from "../state/actions/userActions";
 import { getMajors, getPlans } from "../state";
+import { EditPlanPopper } from "./EditPlanPopper";
 
 const OuterContainer = styled.div`
   display: flex;
@@ -53,17 +48,13 @@ const OuterContainer = styled.div`
   justify-content: space-between;
 `;
 
-const CompletedCoursesWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  width: ${CLASS_BLOCK_WIDTH * 4 + 25}px;
-  margin-bottom: 12px;
+const SidebarContainer = styled.div`
+  flex: 1;
 `;
 
 const Container = styled.div`
   display: flex;
-  flex: 1;
+  flex: 5;
   flex-direction: column;
   justify-content: start;
   align-items: start;
@@ -71,14 +62,38 @@ const Container = styled.div`
   background-color: "#ff76ff";
 `;
 
-const DropDownWrapper = styled.div`
+const HomeTop = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+  margin-bottom: 6px;
+`;
+
+const HomeText = styled.a`
+  font-weight: bold;
+  font-size: 36px;
+  text-decoration: none;
+  color: black;
+`;
+
+const HomePlan = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
 `;
 
-const CheckboxWrapper = styled.div`
-  margin-left: 18px;
+const MajorText = styled.div`
+  font-weight: 500;
+  font-size: 16px;
+  margin-right: 4px;
+`;
+
+const PlanText = styled.div`
+  font-weight: normal;
+  font-size: 16px;
+  margin-right: 4px;
 `;
 
 interface ToastHomeProps {
@@ -96,8 +111,6 @@ interface ReduxStoreHomeProps {
   major?: Major;
   planStr?: string;
   warnings: IWarning[];
-  majors: Major[];
-  plans: Record<string, Schedule[]>;
 }
 
 interface ReduxDispatchHomeProps {
@@ -106,10 +119,7 @@ interface ReduxDispatchHomeProps {
     season: SeasonWord,
     newSemester: DNDScheduleTerm
   ) => void;
-  setCoopCycle: (schedule?: Schedule) => void;
-  setSchedule: (schedule: Schedule) => void;
   setDNDSchedule: (schedule: DNDSchedule) => void;
-  setMajor: (major?: Major) => void;
 }
 
 type Props = ToastHomeProps &
@@ -222,109 +232,6 @@ class HomeComponent extends React.Component<Props> {
     }
   }
 
-  onChooseMajor(event: React.SyntheticEvent<{}>, value: any) {
-    const maj = this.props.majors.find((m: any) => m.name === value);
-    this.props.setMajor(maj);
-  }
-
-  onChoosePlan(event: React.SyntheticEvent<{}>, value: any) {
-    if (value === "None") {
-      this.props.setCoopCycle(undefined);
-      return;
-    }
-
-    const plan = this.props.plans[this.props.major!.name].find(
-      (p: Schedule) => planToString(p) === value
-    );
-
-    if (plan) {
-      this.props.setCoopCycle(plan);
-    }
-  }
-
-  renderMajorDropDown() {
-    return (
-      <Autocomplete
-        style={{ width: 300, marginRight: 18 }}
-        disableListWrap
-        options={this.props.majors.map(maj => maj.name)}
-        renderInput={params => (
-          <TextField
-            {...params}
-            variant="outlined"
-            label="Select A Major"
-            fullWidth
-          />
-        )}
-        value={!!this.props.major ? this.props.major.name + " " : ""}
-        onChange={this.onChooseMajor.bind(this)}
-      />
-    );
-  }
-
-  renderPlansDropDown() {
-    return (
-      <Autocomplete
-        style={{ width: 300 }}
-        disableListWrap
-        options={[
-          "None",
-          ...this.props.plans[this.props.major!.name].map(p => planToString(p)),
-        ]}
-        renderInput={params => (
-          <TextField
-            {...params}
-            variant="outlined"
-            label="Select A Plan"
-            fullWidth
-          />
-        )}
-        value={this.props.planStr || "None"}
-        onChange={this.onChoosePlan.bind(this)}
-      />
-    );
-  }
-
-  renderSetClassesButton() {
-    return (
-      <Button
-        variant="contained"
-        color="secondary"
-        style={{ marginLeft: 18 }}
-        onClick={() => this.addClassesFromPOS()}
-      >
-        Set schedule to example from plan of study
-      </Button>
-    );
-  }
-
-  addClassesFromPOS() {
-    const plan = this.props.plans[this.props.major!.name].find(
-      (p: Schedule) => planToString(p) === this.props.planStr!
-    );
-    this.props.setSchedule(plan!);
-  }
-
-  renderClearScheduleButton() {
-    return (
-      <Button
-        variant="contained"
-        color="secondary"
-        style={{ marginLeft: 18 }}
-        onClick={() => this.clearSchedule()}
-      >
-        Clear Schedule
-      </Button>
-    );
-  }
-
-  clearSchedule() {
-    const plan = this.props.plans[this.props.major!.name].find(
-      (p: Schedule) => planToString(p) === this.props.planStr!
-    );
-    this.props.setCoopCycle(plan!);
-  }
-
   renderYears() {
     return this.props.schedule.years.map((year: number, index: number) => (
       <Year key={index} index={index} schedule={this.props.schedule} />
@@ -332,7 +239,6 @@ class HomeComponent extends React.Component<Props> {
   }
 
   render() {
-    const { schedule, major, planStr } = this.props;
     return (
       <OuterContainer>
         <DragDropContext
@@ -340,24 +246,25 @@ class HomeComponent extends React.Component<Props> {
           onDragUpdate={this.onDragUpdate}
         >
           <Container>
-            <div /* onClick={() => console.log(this.state)} */>
+            <HomeTop>
+              <HomeText href="#">GraduateNU</HomeText>
+              <HomePlan>
+                <MajorText>
+                  {!!this.props.major ? this.props.major.name + ": " : ""}
+                </MajorText>
+                <PlanText>{this.props.planStr || "None"}</PlanText>
+                <EditPlanPopper />
+              </HomePlan>
+            </HomeTop>
+            <HomePlan>
               <h2>Plan Of Study</h2>
-            </div>
-            <DropDownWrapper>
-              {this.renderMajorDropDown()}
-              {!!major && this.renderPlansDropDown()}
-              {!!major && !!planStr && !scheduleHasClasses(this.props.schedule)
-                ? this.renderSetClassesButton()
-                : !!major && !!planStr && this.renderClearScheduleButton()}
-            </DropDownWrapper>
-            <CompletedCoursesWrapper>
-              <h3>Completed Courses</h3>
-              <DropDownModal schedule={schedule} />
-            </CompletedCoursesWrapper>
+            </HomePlan>
             {this.renderYears()}
           </Container>
         </DragDropContext>
-        <Sidebar />
+        <SidebarContainer>
+          <Sidebar />
+        </SidebarContainer>
       </OuterContainer>
     );
   }
@@ -368,8 +275,6 @@ const mapStateToProps = (state: AppState) => ({
   planStr: getPlanStrFromState(state),
   major: getMajorFromState(state),
   warnings: getWarningsFromState(state),
-  majors: getMajors(state),
-  plans: getPlans(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
@@ -378,11 +283,8 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     season: SeasonWord,
     newSemester: DNDScheduleTerm
   ) => dispatch(updateSemesterAction(year, season, newSemester)),
-  setCoopCycle: (schedule?: Schedule) => dispatch(setCoopCycle(schedule)),
-  setSchedule: (schedule: Schedule) => dispatch(setScheduleAction(schedule)),
   setDNDSchedule: (schedule: DNDSchedule) =>
     dispatch(setDNDScheduleAction(schedule)),
-  setMajor: (major?: Major) => dispatch(setMajorAction(major)),
 });
 
 export const Home = connect<

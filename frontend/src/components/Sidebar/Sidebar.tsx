@@ -1,7 +1,6 @@
 import React from "react";
 import { DNDSchedule, Major } from "../../models/types";
 import styled from "styled-components";
-import { GraduateGrey } from "../../constants";
 import { RequirementSection } from ".";
 import { produceRequirementGroupWarning } from "../../utils";
 import { AppState } from "../../state/reducers/state";
@@ -11,15 +10,18 @@ import { connect } from "react-redux";
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  width: 200px;
-  background-color: ${GraduateGrey};
-  border-left: 1px solid black;
+  background: #f2f2f2;
+  box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.25);
   padding: 12px;
 `;
 
 const MajorTitle = styled.p`
   font-size: 20px;
-  font-weight: bold;
+  font-weight: 600;
+  line-height: 24px;
+  margin-right: 48px;
+  margin-left: 4px;
+  margin-bottom: 12px;
 `;
 
 interface Props {

@@ -21,6 +21,7 @@ const SectionHeaderWrapper = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  margin-top: 4px;
 `;
 
 const TitleWrapper = styled.div`
@@ -28,25 +29,30 @@ const TitleWrapper = styled.div`
   flex-direction: row;
   align-items: center;
   margin-top: 8px;
+  margin-bottom: 5px;
 `;
 
 const TitleText = styled.div`
   margin-left: 4px;
+  margin-right: 10px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
 `;
 
 const CourseWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  margin-bottom: 4px;
+  align-items: center;
 `;
 
 const CourseText = styled.p`
-  font-size: 12px;
+  font-size: 14px;
   margin: 4px;
 `;
 
 const CourseTextNoMargin = styled.p`
-  font-size: 12px;
+  font-size: 14px;
   margin: 0px;
   margin-top: 4px;
   margin-bottom: 4px;
@@ -56,11 +62,10 @@ const CourseAndLabWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  margin-left: 4px;
 `;
 
 const ANDORText = styled.p`
-  font-size: 11px;
+  font-size: 14px;
   margin: 4px;
 `;
 
@@ -155,10 +160,10 @@ export class RequirementSection extends React.Component<
     ) {
       return (
         <CourseAndLabWrapper key={index}>
-          {this.renderCourse(req.courses[0] as IRequiredCourse, true, false)}
+          {this.renderCourse(req.courses[0] as IRequiredCourse, true, true, req
+            .courses[1] as IRequiredCourse)}
           <CourseText> and </CourseText>
-          {this.renderCourse(req.courses[1] as IRequiredCourse, true, true, req
-            .courses[0] as IRequiredCourse)}
+          {this.renderCourse(req.courses[1] as IRequiredCourse, true, false)}
         </CourseAndLabWrapper>
       );
     }
@@ -220,20 +225,20 @@ export class RequirementSection extends React.Component<
   ) {
     return (
       <CourseWrapper key={course.subject + course.classId + course.type}>
+        {addButton && andCourse && (
+          <SidebarAddButton
+            onClick={() => this.showModal([course, andCourse])}
+          />
+        )}
+        {addButton && !andCourse && (
+          <SidebarAddButton onClick={() => this.showModal([course])} />
+        )}
         {noMargin ? (
           <CourseTextNoMargin>
             {course.subject + course.classId}
           </CourseTextNoMargin>
         ) : (
           <CourseText>{course.subject + course.classId}</CourseText>
-        )}
-        {addButton && andCourse && (
-          <SidebarAddButton
-            onClick={() => this.showModal([andCourse, course])}
-          />
-        )}
-        {addButton && !andCourse && (
-          <SidebarAddButton onClick={() => this.showModal([course])} />
         )}
       </CourseWrapper>
     );
@@ -269,18 +274,18 @@ export class RequirementSection extends React.Component<
         {!!title && (
           <SectionHeaderWrapper onClick={this.expandSection.bind(this)}>
             <TitleWrapper>
-              {!!warning ? (
+              {/* {!!warning ? (
                 <ClearIcon color="error" fontSize="small"></ClearIcon>
               ) : (
                 <MyCheckIcon fontSize="small"></MyCheckIcon>
-              )}
+              )} */}
               <TitleText>{title}</TitleText>
             </TitleWrapper>
-            {this.state.expanded ? (
+            {/* {this.state.expanded ? (
               <ExpandLessOutlinedIcon />
             ) : (
               <ExpandMoreOutlinedIcon />
-            )}
+            )} */}
           </SectionHeaderWrapper>
         )}
         {this.state.expanded && (

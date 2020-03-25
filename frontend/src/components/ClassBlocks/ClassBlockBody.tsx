@@ -10,12 +10,14 @@ const Wrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   height: 100%;
+  min-width: 0;
 `;
 
 const TitleWrapper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  min-width: 0;
 `;
 
 const Title = styled.div`
@@ -25,21 +27,25 @@ const Title = styled.div`
 `;
 
 const Subtitle = styled.div`
-  /* TODO: Fix set width to dynamically change based on parent width. */
-  width: 130px;
+  margin-right: 36px;
   font-size: 11px;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  flex: 1;
+  min-width: 0;
 `;
 
-interface LargeClassBlockProps {
+interface ClassBlockBodyProps {
   course: DNDScheduleCourse;
   hovering: boolean;
   onDelete: () => void;
 }
 
-export const LargeClassBlock: React.FC<LargeClassBlockProps> = ({
+/**
+ * A component to dynamically render the text/body contents of a class block.
+ */
+export const ClassBlockBody: React.FC<ClassBlockBodyProps> = ({
   course,
   hovering,
   onDelete,
@@ -57,8 +63,14 @@ export const LargeClassBlock: React.FC<LargeClassBlockProps> = ({
           visibility: hovering ? "visible" : "hidden",
         }}
       >
-        <IconButton onClick={onDelete}>
-          <DeleteIcon />
+        <IconButton
+          onClick={onDelete}
+          style={{ color: "rgba(102, 102, 102, 0.3)" }}
+          disableRipple
+          disableFocusRipple
+          disableTouchRipple
+        >
+          <DeleteIcon fontSize="inherit" />
         </IconButton>
       </div>
     </Wrapper>

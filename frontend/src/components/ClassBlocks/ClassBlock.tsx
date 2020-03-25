@@ -1,32 +1,24 @@
 import React from "react";
 import { Draggable, DraggableProvided } from "react-beautiful-dnd";
 import { DNDScheduleCourse, CourseWarning } from "../../models/types";
-import { CLASS_BLOCK_WIDTH, CLASS_BLOCK_HEIGHT } from "../../constants";
 import styled from "styled-components";
 import { Card, Tooltip } from "@material-ui/core";
-import { LargeClassBlock } from "./LargeClassBlock";
-import { SmallClassBlock } from "./SmallClassBlock";
+import { ClassBlockBody } from "./ClassBlockBody";
 
 const Block = styled(Card)<any>`
-  width: ${CLASS_BLOCK_WIDTH}px;
-  height: ${props => props.height}px;
-  border-radius: 2px;
-  margin: 1px;
+  height: 30px;
+  border-radius: 4px;
+  margin: 10px 8px 0px 8px;
   display: flex;
   flex-direction: row;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.15);
 `;
 
-const Indent = styled.div<any>`
-  width: 20px;
-  background-color: ${props =>
-    props.warning ? "rgba(175, 50, 50, 0.9)" : "rgba(173, 198, 255, 0.9)"};
-`;
-
-const ClassBlockBody = styled.div<any>`
-  background-color: ${props =>
-    props.warning ? "rgba(216, 86, 86, 0.9)" : "rgba(173, 198, 255, 0.3)"};
+const ClassBlockBodyContainer = styled.div<any>`
+  background-color: #e0e0e0;
   padding-left: 8px;
   flex: 1;
+  min-width: 0;
 `;
 
 interface ClassBlockProps {
@@ -64,8 +56,7 @@ export class ClassBlock extends React.Component<
     });
   }
 
-  renderBody(provided: DraggableProvided, height: number) {
-    const numCredits = this.props.class.numCreditsMax;
+  renderBody(provided: DraggableProvided) {
     return (
       <div
         onMouseEnter={this.handleMouseEnter.bind(this)}
@@ -75,63 +66,29 @@ export class ClassBlock extends React.Component<
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           ref={provided.innerRef}
-          height={height}
         >
-          <Indent warning={this.props.warning} />
-          <ClassBlockBody warning={this.props.warning}>
-            {numCredits > 2 ? (
-              <LargeClassBlock
-                course={this.props.class}
-                hovering={this.state.hovering}
-                onDelete={() => this.props.onDelete(this.props.class)}
-              />
-            ) : (
-              <SmallClassBlock
-                course={this.props.class}
-                hovering={this.state.hovering}
-                onDelete={() => this.props.onDelete(this.props.class)}
-              />
-            )}
-          </ClassBlockBody>
+          <ClassBlockBodyContainer warning={this.props.warning}>
+            <ClassBlockBody
+              course={this.props.class}
+              hovering={this.state.hovering}
+              onDelete={() => this.props.onDelete(this.props.class)}
+            />
+          </ClassBlockBodyContainer>
         </Block>
       </div>
     );
   }
 
   render() {
-    const numCredits = this.props.class.numCreditsMax;
-    var height = CLASS_BLOCK_HEIGHT;
-
-    switch (numCredits) {
-      case 0:
-        height = CLASS_BLOCK_HEIGHT - 20;
-        break;
-      case 1:
-        height = CLASS_BLOCK_HEIGHT - 20;
-        break;
-      case 2:
-        height = CLASS_BLOCK_HEIGHT - 10;
-        break;
-      case 3:
-        height = CLASS_BLOCK_HEIGHT;
-        break;
-      case 4:
-        height = CLASS_BLOCK_HEIGHT;
-        break;
-      case 5:
-        height = CLASS_BLOCK_HEIGHT + 10;
-        break;
-    }
-
     return (
       <Draggable draggableId={this.props.class.dndId} index={this.props.index}>
         {provided =>
           !!this.props.warning ? (
             <Tooltip title={this.props.warning.message} placement="top">
-              {this.renderBody(provided, height)}
+              {this.renderBody(provided)}
             </Tooltip>
           ) : (
-            this.renderBody(provided, height)
+            this.renderBody(provided)
           )
         }
       </Draggable>
