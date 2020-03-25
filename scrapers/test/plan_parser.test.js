@@ -101,6 +101,7 @@ test("ensure that supported majors are still correct, unchanged.", async () => {
  * @param {string[]} links the links to plans of study to test on.
  */
 function runTestsOnLinks(links) {
+  jest.setTimeout(30000);
   // download all the links async, stored as strings.
   const plans = links.map(link => rp(link));
 
