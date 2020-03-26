@@ -6,15 +6,21 @@ import {
   DNDSchedule,
   IRequiredCourse,
   DNDScheduleYear,
+  Status,
+  SeasonWord,
 } from "../../models/types";
 import { XButton } from "../common";
 import { Modal } from "@material-ui/core";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
-import { addClassesAction } from "../../state/actions/scheduleActions";
+import {
+  addClassesAction,
+  changeSemesterStatusAction,
+} from "../../state/actions/scheduleActions";
 import { getScheduleFromState } from "../../state";
 import { AppState } from "../../state/reducers/state";
 import { fetchCourse } from "../../api";
+import { convertTermIdToSeason } from "../../utils/schedule-helpers";
 
 const InnerSection = styled.section`
   position: fixed;
@@ -59,6 +65,11 @@ interface ReduxDispatchSidebarAddClassModalProps {
   handleAddClasses: (
     courses: ScheduleCourse[],
     semester: DNDScheduleTerm
+  ) => void;
+  handleStatusChange: (
+    newStatus: Status,
+    year: number,
+    tappedSemester: SeasonWord
   ) => void;
 }
 
@@ -124,6 +135,11 @@ export class SidebarAddClassModalComponent extends React.Component<
     this.props.handleAddClasses(
       this.state.queuedCourses,
       this.state.formSemester
+    );
+    this.props.handleStatusChange(
+      "CLASSES",
+      this.state.formSemester.year,
+      convertTermIdToSeason(this.state.formSemester.termId)
     );
     this.prepareToClose();
   }
@@ -270,6 +286,11 @@ const mapStateToProps = (state: AppState) => ({
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   handleAddClasses: (courses: ScheduleCourse[], semester: DNDScheduleTerm) =>
     dispatch(addClassesAction(courses, semester)),
+  handleStatusChange: (
+    newStatus: Status,
+    year: number,
+    tappedSemester: SeasonWord
+  ) => dispatch(changeSemesterStatusAction(newStatus, year, tappedSemester)),
 });
 
 /**
