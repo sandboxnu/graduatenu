@@ -6,7 +6,6 @@ import { NameScreen } from "./Onboarding/NameScreen";
 import { AcademicYearScreen } from "./Onboarding/AcademicYearScreen";
 import { GraduationYearScreen } from "./Onboarding/GraduationYearScreen";
 import { MajorScreen } from "./Onboarding/MajorScreen";
-import { MinorsScreen } from "./Onboarding/MinorsScreen";
 import { Provider } from "react-redux";
 import { Store } from "redux";
 import { PersistGate } from "redux-persist/integration/react";
@@ -29,7 +28,6 @@ export const App = ({
             <Route path="/academicYear" component={AcademicYearScreen} />
             <Route path="/graduationYear" component={GraduationYearScreen} />
             <Route path="/major" component={MajorScreen} />
-            <Route path="/minors" component={MinorsScreen} />
             <Route path="/" component={Onboarding} />
           </Switch>
         </Router>
