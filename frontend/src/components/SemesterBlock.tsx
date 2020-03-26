@@ -9,6 +9,8 @@ import {
   CourseWarning,
   DNDScheduleCourse,
   IWarning,
+  Status,
+  SeasonWord,
 } from "../models/types";
 import styled from "styled-components";
 import { AppState } from "../state/reducers/state";
@@ -19,11 +21,13 @@ import {
   addClassesAction,
   removeClassAction,
   undoRemoveClassAction,
+  changeSemesterStatusAction,
 } from "../state/actions/scheduleActions";
 import { Snackbar, Button, IconButton } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 import { Tooltip } from "@material-ui/core";
 import { SEMESTER_MIN_HEIGHT } from "../constants";
+import { convertTermIdToSeason } from "../utils/schedule-helpers";
 
 const OutsideContainer = styled.div`
   flex: 1;
@@ -59,6 +63,11 @@ interface ReduxDispatchSemesterBlockProps {
   ) => void;
   onDeleteClass: (course: DNDScheduleCourse, semester: DNDScheduleTerm) => void;
   onUndoDeleteClass: () => void;
+  handleStatusChange: (
+    newStatus: Status,
+    year: number,
+    tappedSemester: SeasonWord
+  ) => void;
 }
 
 interface SemesterBlockProps {
@@ -240,9 +249,16 @@ class SemesterBlockComponent extends React.Component<
         <AddClass
           visible={modalVisible}
           handleClose={this.hideModal.bind(this)}
-          handleSubmit={(courses: ScheduleCourse[]) =>
-            this.props.handleAddClasses(courses, this.props.semester)
-          }
+          handleSubmit={(courses: ScheduleCourse[]) => {
+            if (this.props.semester.status !== "CLASSES") {
+              this.props.handleStatusChange(
+                "CLASSES",
+                this.props.semester.year,
+                convertTermIdToSeason(this.props.semester.termId)!
+              );
+            }
+            this.props.handleAddClasses(courses, this.props.semester);
+          }}
         ></AddClass>
         {this.props.warnings.length > 0 ? (
           <Tooltip title={this.renderTooltip()} placement="top" arrow>
@@ -269,6 +285,11 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   onDeleteClass: (course: DNDScheduleCourse, semester: DNDScheduleTerm) =>
     dispatch(removeClassAction(course, semester)),
   onUndoDeleteClass: () => dispatch(undoRemoveClassAction()),
+  handleStatusChange: (
+    newStatus: Status,
+    year: number,
+    tappedSemester: SeasonWord
+  ) => dispatch(changeSemesterStatusAction(newStatus, year, tappedSemester)),
 });
 
 export const SemesterBlock = connect<
