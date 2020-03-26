@@ -250,6 +250,7 @@ class SemesterBlockComponent extends React.Component<
           visible={modalVisible}
           handleClose={this.hideModal.bind(this)}
           handleSubmit={(courses: ScheduleCourse[]) => {
+            // Change this semester status upon adding a class if it's not already a CLASSES semester.
             if (this.props.semester.status !== "CLASSES") {
               this.props.handleStatusChange(
                 "CLASSES",
@@ -257,6 +258,8 @@ class SemesterBlockComponent extends React.Component<
                 convertTermIdToSeason(this.props.semester.termId)!
               );
             }
+
+            // Add the given courses to this semester through redux
             this.props.handleAddClasses(courses, this.props.semester);
           }}
         ></AddClass>

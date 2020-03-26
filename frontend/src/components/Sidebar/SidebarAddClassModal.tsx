@@ -127,7 +127,8 @@ export class SidebarAddClassModalComponent extends React.Component<
   }
 
   /**
-   * Called when the user presses 'add classes', submits the designated courses to the selected semester.
+   * Called when the user presses 'add classes'.
+   * Adds the designated courses to the selected semester and changes selected semester's status to "CLASSES".
    */
   async handleSubmit() {
     await this.mapRequirementToSchedule();
