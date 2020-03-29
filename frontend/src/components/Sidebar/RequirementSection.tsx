@@ -6,6 +6,8 @@ import {
   ICourseRange,
   ISubjectRange,
   IRequirementGroupWarning,
+  DNDScheduleCourse,
+  ScheduleCourse,
 } from "../../models/types";
 import styled from "styled-components";
 import CheckIcon from "@material-ui/icons/Check";
@@ -15,6 +17,9 @@ import ExpandMoreOutlinedIcon from "@material-ui/icons/ExpandMoreOutlined";
 import ExpandLessOutlinedIcon from "@material-ui/icons/ExpandLessOutlined";
 import { SidebarAddButton } from "./SidebarAddButton";
 import { SidebarAddClassModal } from "./SidebarAddClassModal";
+import { ClassBlock } from "../ClassBlocks/ClassBlock";
+import { convertToDNDCourses } from "../../utils/schedule-helpers";
+import { fetchCourse } from "../../api";
 
 const SectionHeaderWrapper = styled.div`
   display: flex;
@@ -83,6 +88,7 @@ interface RequirementSectionState {
   expanded: boolean;
   modalVisible: boolean;
   selectedCourses: IRequiredCourse[];
+  classData: { [id: string]: DNDScheduleCourse };
 }
 
 export class RequirementSection extends React.Component<
@@ -102,6 +108,7 @@ export class RequirementSection extends React.Component<
           subject: "",
         },
       ],
+      classData: {},
     };
   }
 
@@ -126,6 +133,71 @@ export class RequirementSection extends React.Component<
   componentWillReceiveProps(nextProps: RequirementSectionProps) {
     this.setState({
       expanded: !!nextProps.warning,
+    });
+  }
+
+  /**
+   * Fetches class data for each requirement upon loading this component.
+   */
+  async componentDidMount() {
+    this.fetchClassData();
+  }
+
+  /**
+   * Fetches course data for each non range requirement in this RequirementSection.
+   * Transforms each IRequiredCourse into its corresponding DNDScheduleCourse.
+   * Stores each DNDScheduleCourse into this.state.classData
+   */
+  async fetchClassData() {
+    if (this.props.contents.type === "RANGE") {
+      return;
+    }
+
+    let requirements: Requirement[] = this.props.contents.requirements.filter(
+      requirement => requirement.type !== "RANGE"
+    );
+    let promises: Promise<ScheduleCourse | null>[] = [];
+
+    function addPromiseForRequirements(reqs: Requirement[]) {
+      for (const r of requirements) {
+        if (r.type === "COURSE") {
+          promises.push(
+            fetchCourse(r.subject.toUpperCase(), r.classId.toString())
+          );
+        }
+        if (r.type === "AND" || r.type === "OR") {
+          addPromiseForRequirements(r.courses);
+        }
+      }
+    }
+
+    // EFFECT: mutates promises
+    addPromiseForRequirements(requirements);
+
+    // resolve promises
+    let scheduleCourses: (ScheduleCourse | null)[] = await Promise.all(
+      promises
+    );
+    // filter out null scheduleCourses
+    let filteredScheduleCourses: ScheduleCourse[] = scheduleCourses.filter(
+      (scheduleCourse): scheduleCourse is ScheduleCourse =>
+        scheduleCourse !== null
+    );
+
+    let dndCourses: DNDScheduleCourse[] = filteredScheduleCourses.map(
+      (scheduleCourse: ScheduleCourse) => {
+        return convertToDNDCourses([scheduleCourse!], 0)[0][0];
+      }
+    );
+
+    let classData: { [id: string]: DNDScheduleCourse } = {};
+
+    for (const course of dndCourses) {
+      classData[course.subject + course.classId] = course;
+    }
+
+    this.setState({
+      classData,
     });
   }
 
@@ -210,6 +282,27 @@ export class RequirementSection extends React.Component<
     );
   }
 
+  async getDNDCourse(
+    course: IRequiredCourse
+  ): Promise<DNDScheduleCourse | null> {
+    let convertedCourse: DNDScheduleCourse;
+
+    let scheduleCourse: ScheduleCourse | null = await fetchCourse(
+      course.subject.toUpperCase(),
+      course.classId.toString()
+    );
+
+    if (scheduleCourse == null) {
+      return null;
+    } else {
+      convertedCourse = convertToDNDCourses([scheduleCourse!], 0)[0][0];
+      return convertedCourse;
+    }
+    // .then(response => {
+    //   convertedCourse = convertToDNDCourses([response!], 0)[0][0];
+    // });
+  }
+
   /**
    * Renders the given course as a sidebar course.
    * @param course the given IRequiredCourse
@@ -217,31 +310,47 @@ export class RequirementSection extends React.Component<
    * @param addButton determines if this sidebar course should have a SidebarAddButton
    * @param andCourse true if the given course is an and course
    */
-  renderCourse(
+  async renderCourse(
     course: IRequiredCourse,
     noMargin: boolean = false,
     addButton: boolean = true,
     andCourse?: IRequiredCourse
-  ) {
-    return (
-      <CourseWrapper key={course.subject + course.classId + course.type}>
-        {addButton && andCourse && (
-          <SidebarAddButton
-            onClick={() => this.showModal([course, andCourse])}
-          />
-        )}
-        {addButton && !andCourse && (
-          <SidebarAddButton onClick={() => this.showModal([course])} />
-        )}
-        {noMargin ? (
-          <CourseTextNoMargin>
-            {course.subject + course.classId}
-          </CourseTextNoMargin>
-        ) : (
-          <CourseText>{course.subject + course.classId}</CourseText>
-        )}
-      </CourseWrapper>
-    );
+  ): Promise<JSX.Element | null> {
+    const convertedCourse: DNDScheduleCourse = this.state.classData[
+      course.subject + course.classId
+    ];
+
+    if (convertedCourse == null) {
+      return null;
+    } else {
+      return (
+        <ClassBlock
+          class={convertedCourse}
+          index={0}
+          onDelete={() => {
+            console.log("oops");
+          }}
+        ></ClassBlock>
+      );
+    }
+
+    // <CourseWrapper key={course.subject + course.classId + course.type}>
+    //   {addButton && andCourse && (
+    //     <SidebarAddButton
+    //       onClick={() => this.showModal([course, andCourse])}
+    //     />
+    //   )}
+    //   {addButton && !andCourse && (
+    //     <SidebarAddButton onClick={() => this.showModal([course])} />
+    //   )}
+    //   {noMargin ? (
+    //     <CourseTextNoMargin>
+    //       {course.subject + course.classId}
+    //     </CourseTextNoMargin>
+    //   ) : (
+    //     <CourseText>{course.subject + course.classId}</CourseText>
+    //   )}
+    // </CourseWrapper>
   }
 
   /**
