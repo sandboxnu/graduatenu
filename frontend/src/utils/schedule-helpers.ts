@@ -117,7 +117,9 @@ export const convertToDNDCourses = (
     counter++;
     list.push({
       ...course,
-      dndId: String(counter),
+      dndId: String(
+        course.subject.toUpperCase() + " " + course.classId + " " + counter
+      ),
     });
   }
   return [list, counter];
