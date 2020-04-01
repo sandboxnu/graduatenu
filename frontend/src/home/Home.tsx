@@ -17,6 +17,7 @@ import {
   convertTermIdToSeason,
   isCoopOrVacation,
   moveCourse,
+  addCourseFromSidebar,
 } from "../utils";
 import { Sidebar } from "../components/Sidebar";
 import { withToast } from "./toastHook";
@@ -152,7 +153,32 @@ class HomeComponent extends React.Component<Props> {
     });
   }
 
-  onDragEnd = (result: any) => {
+  onDragEnd = async (result: any) => {
+    const { destination, source, draggableId } = result;
+
+    // if drag is coming from the sidebar
+    if (isNaN(Number(source.droppableId))) {
+      console.log("add course from sidebar");
+      console.log(draggableId);
+      addCourseFromSidebar(
+        this.props.schedule,
+        destination,
+        source,
+        this.props.setDNDSchedule,
+        draggableId
+      );
+    } else {
+      console.log("normal move");
+      moveCourse(
+        this.props.schedule,
+        destination,
+        source,
+        this.props.setDNDSchedule
+      );
+    }
+  };
+
+  onSidebarDragEnd = (result: any) => {
     const { destination, source } = result;
 
     moveCourse(
@@ -164,7 +190,12 @@ class HomeComponent extends React.Component<Props> {
   };
 
   onDragUpdate = (update: any) => {
-    const { destination } = update;
+    const { destination, source } = update;
+
+    if (isNaN(Number(source.droppableId))) {
+      return;
+    }
+
     if (!destination || !destination.droppableId) return;
 
     const destSemesterSeason = convertTermIdToSeason(destination.droppableId);
@@ -261,10 +292,10 @@ class HomeComponent extends React.Component<Props> {
             </HomePlan>
             {this.renderYears()}
           </Container>
+          <SidebarContainer>
+            <Sidebar />
+          </SidebarContainer>
         </DragDropContext>
-        <SidebarContainer>
-          <Sidebar />
-        </SidebarContainer>
       </OuterContainer>
     );
   }
