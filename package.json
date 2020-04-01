@@ -11,7 +11,7 @@
     "api"
   ],
   "scripts": {
-    "start": "cd frontend && react-scripts start",
+    "start": "cd frontend && react-scripts start & cd api && rails server -b 127.0.0.1 -p 3001",
     "build": "cd frontend && react-scripts build",
     "test": "jest",
     "eject": "cd frontend && react-scripts eject",
