@@ -23,6 +23,7 @@ const ClassBlockBodyContainer = styled.div<any>`
 
 interface ClassBlockProps {
   class: DNDScheduleCourse;
+  lab?: DNDScheduleCourse;
   index: number;
   warning?: CourseWarning;
   onDelete: (course: DNDScheduleCourse) => void;
@@ -79,9 +80,20 @@ export class ClassBlock extends React.Component<
     );
   }
 
+  /**
+   * Returns this ClassBlock's draggableId based on whether or not it contains a lab.
+   */
+  getDraggableId() {
+    if (this.props.lab) {
+      return this.props.class.dndId + " " + this.props.lab.dndId;
+    } else {
+      return this.props.class.dndId;
+    }
+  }
+
   render() {
     return (
-      <Draggable draggableId={this.props.class.dndId} index={this.props.index}>
+      <Draggable draggableId={this.getDraggableId()} index={this.props.index}>
         {provided =>
           !!this.props.warning ? (
             <Tooltip title={this.props.warning.message} placement="top">

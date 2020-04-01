@@ -153,6 +153,7 @@ export async function addCourseFromSidebar(
     courseData[0],
     courseData[1]
   );
+
   if (scheduleCourse === null) {
     return;
   }
@@ -163,7 +164,18 @@ export async function addCourseFromSidebar(
   )[0][0];
 
   const finishClasses = Array.from(finishSemester.classes);
-  finishClasses.splice(destination.index, 0, movedClass);
+
+  // account for CourseAndLab blocks
+  let scheduleCourseLab: ScheduleCourse | null = null;
+  let movedLab: DNDScheduleCourse;
+  if (courseData.length === 6) {
+    scheduleCourseLab = await fetchCourse(courseData[3], courseData[4]);
+    movedLab = convertToDNDCourses([scheduleCourseLab!], 0)[0][0];
+    finishClasses.splice(destination.index, 0, movedClass, movedLab);
+  } else {
+    finishClasses.splice(destination.index, 0, movedClass);
+  }
+
   const newFinishSemester: DNDScheduleTerm = {
     ...finishSemester,
     classes: finishClasses,

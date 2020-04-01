@@ -236,8 +236,8 @@ export class RequirementSection extends React.Component<
         <CourseAndLabWrapper key={index}>
           {this.renderCourse(req.courses[0] as IRequiredCourse, true, true, req
             .courses[1] as IRequiredCourse)}
-          <CourseText> and </CourseText>
-          {this.renderCourse(req.courses[1] as IRequiredCourse, true, false)}
+          {/* <CourseText> and </CourseText>
+          {this.renderCourse(req.courses[1] as IRequiredCourse, true, false)} */}
         </CourseAndLabWrapper>
       );
     }
@@ -322,18 +322,39 @@ export class RequirementSection extends React.Component<
       course.subject + course.classId
     ];
 
-    if (convertedCourse == null) {
-      return null;
+    if (andCourse) {
+      const convertedLab: DNDScheduleCourse = this.state.classData[
+        andCourse.subject + andCourse.classId
+      ];
+
+      if (convertedCourse == null) {
+        return null;
+      } else {
+        return (
+          <ClassBlock
+            class={convertedCourse}
+            lab={convertedLab}
+            index={0}
+            onDelete={() => {
+              console.log("oops");
+            }}
+          ></ClassBlock>
+        );
+      }
     } else {
-      return (
-        <ClassBlock
-          class={convertedCourse}
-          index={0}
-          onDelete={() => {
-            console.log("oops");
-          }}
-        ></ClassBlock>
-      );
+      if (convertedCourse == null) {
+        return null;
+      } else {
+        return (
+          <ClassBlock
+            class={convertedCourse}
+            index={0}
+            onDelete={() => {
+              console.log("oops");
+            }}
+          ></ClassBlock>
+        );
+      }
     }
 
     // return (
