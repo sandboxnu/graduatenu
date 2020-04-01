@@ -10,6 +10,7 @@
     "scrapers",
     "api"
   ],
+  "proxy": "http://localhost:3001",
   "scripts": {
     "start": "cd frontend && react-scripts start & cd api && rails server -b 127.0.0.1 -p 3001",
     "build": "cd frontend && react-scripts build",
