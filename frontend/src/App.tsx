@@ -5,6 +5,7 @@ import { HomeWrapper } from "./home/HomeWrapper";
 import { NameScreen } from "./Onboarding/NameScreen";
 import { AcademicYearScreen } from "./Onboarding/AcademicYearScreen";
 import { GraduationYearScreen } from "./Onboarding/GraduationYearScreen";
+import { OnboardingInfoScreen } from "./Onboarding/OnboardingInfoScreen";
 import { MajorScreen } from "./Onboarding/MajorScreen";
 import { Provider } from "react-redux";
 import { Store } from "redux";
@@ -28,6 +29,7 @@ export const App = ({
             <Route path="/academicYear" component={AcademicYearScreen} />
             <Route path="/graduationYear" component={GraduationYearScreen} />
             <Route path="/major" component={MajorScreen} />
+            <Route path="/onboarding" component={OnboardingInfoScreen} />
             <Route path="/" component={Onboarding} />
           </Switch>
         </Router>
