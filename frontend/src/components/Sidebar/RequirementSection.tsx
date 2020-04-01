@@ -20,6 +20,8 @@ import { SidebarAddClassModal } from "./SidebarAddClassModal";
 import { ClassBlock } from "../ClassBlocks/ClassBlock";
 import { convertToDNDCourses } from "../../utils/schedule-helpers";
 import { fetchCourse } from "../../api";
+import { Droppable } from "react-beautiful-dnd";
+import { ClassList } from "../ClassList";
 
 const SectionHeaderWrapper = styled.div`
   display: flex;
@@ -140,7 +142,7 @@ export class RequirementSection extends React.Component<
    * Fetches class data for each requirement upon loading this component.
    */
   async componentDidMount() {
-    this.fetchClassData();
+    await this.fetchClassData();
   }
 
   /**
@@ -159,7 +161,7 @@ export class RequirementSection extends React.Component<
     let promises: Promise<ScheduleCourse | null>[] = [];
 
     function addPromiseForRequirements(reqs: Requirement[]) {
-      for (const r of requirements) {
+      for (const r of reqs) {
         if (r.type === "COURSE") {
           promises.push(
             fetchCourse(r.subject.toUpperCase(), r.classId.toString())
@@ -310,12 +312,12 @@ export class RequirementSection extends React.Component<
    * @param addButton determines if this sidebar course should have a SidebarAddButton
    * @param andCourse true if the given course is an and course
    */
-  async renderCourse(
+  renderCourse(
     course: IRequiredCourse,
     noMargin: boolean = false,
     addButton: boolean = true,
     andCourse?: IRequiredCourse
-  ): Promise<JSX.Element | null> {
+  ) {
     const convertedCourse: DNDScheduleCourse = this.state.classData[
       course.subject + course.classId
     ];
@@ -334,23 +336,25 @@ export class RequirementSection extends React.Component<
       );
     }
 
-    // <CourseWrapper key={course.subject + course.classId + course.type}>
-    //   {addButton && andCourse && (
-    //     <SidebarAddButton
-    //       onClick={() => this.showModal([course, andCourse])}
-    //     />
-    //   )}
-    //   {addButton && !andCourse && (
-    //     <SidebarAddButton onClick={() => this.showModal([course])} />
-    //   )}
-    //   {noMargin ? (
-    //     <CourseTextNoMargin>
-    //       {course.subject + course.classId}
-    //     </CourseTextNoMargin>
-    //   ) : (
-    //     <CourseText>{course.subject + course.classId}</CourseText>
-    //   )}
-    // </CourseWrapper>
+    // return (
+    //   <CourseWrapper key={course.subject + course.classId + course.type}>
+    //     {addButton && andCourse && (
+    //       <SidebarAddButton
+    //         onClick={() => this.showModal([course, andCourse])}
+    //       />
+    //     )}
+    //     {addButton && !andCourse && (
+    //       <SidebarAddButton onClick={() => this.showModal([course])} />
+    //     )}
+    //     {noMargin ? (
+    //       <CourseTextNoMargin>
+    //         {course.subject + course.classId}
+    //       </CourseTextNoMargin>
+    //     ) : (
+    //       <CourseText>{course.subject + course.classId}</CourseText>
+    //     )}
+    //   </CourseWrapper>
+    // );
   }
 
   /**
@@ -398,14 +402,32 @@ export class RequirementSection extends React.Component<
           </SectionHeaderWrapper>
         )}
         {this.state.expanded && (
-          <div>
-            {!!contents &&
-              contents.type !== "RANGE" &&
-              this.parseRequirements(contents.requirements)}
-            {!!contents &&
-              contents.type === "RANGE" &&
-              this.handleRange(contents.requirements)}
-          </div>
+          <Droppable droppableId={this.props.title}>
+            {provided => (
+              <ClassList
+                innerRef={provided.innerRef as any}
+                {...provided.droppableProps}
+              >
+                <div>
+                  {!!contents &&
+                    contents.type !== "RANGE" &&
+                    this.parseRequirements(contents.requirements)}
+                  {!!contents &&
+                    contents.type === "RANGE" &&
+                    this.handleRange(contents.requirements)}
+                </div>
+                {provided.placeholder}
+              </ClassList>
+            )}
+          </Droppable>
+          // <div>
+          //   {!!contents &&
+          //     contents.type !== "RANGE" &&
+          //     this.parseRequirements(contents.requirements)}
+          //   {!!contents &&
+          //     contents.type === "RANGE" &&
+          //     this.handleRange(contents.requirements)}
+          // </div>
         )}
 
         <SidebarAddClassModal
