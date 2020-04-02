@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
     before_action :authenticate_user!
+
+    #simply render user information for authenicated user, no additional processing required.
     def show
     end
 
