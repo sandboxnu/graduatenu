@@ -22,13 +22,14 @@ import { convertToDNDCourses } from "../../utils/schedule-helpers";
 import { fetchCourse } from "../../api";
 import { Droppable } from "react-beautiful-dnd";
 import { ClassList } from "../ClassList";
+import { SidebarClassBlock } from "./SidebarClassBlock";
 
 const SectionHeaderWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-top: 4px;
+  margin-top: 6px;
 `;
 
 const TitleWrapper = styled.div`
@@ -36,7 +37,7 @@ const TitleWrapper = styled.div`
   flex-direction: row;
   align-items: center;
   margin-top: 8px;
-  margin-bottom: 5px;
+  margin-bottom: 1px;
 `;
 
 const TitleText = styled.div`
@@ -79,6 +80,13 @@ const ANDORText = styled.p`
 const MyCheckIcon = materialStyled(CheckIcon)({
   color: "green",
 });
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+`;
 
 interface RequirementSectionProps {
   title: string;
@@ -331,29 +339,18 @@ export class RequirementSection extends React.Component<
         return null;
       } else {
         return (
-          <ClassBlock
-            class={convertedCourse}
-            lab={convertedLab}
+          <SidebarClassBlock
+            class={course}
+            lab={andCourse}
             index={0}
-            onDelete={() => {
-              console.log("oops");
-            }}
-          ></ClassBlock>
+          ></SidebarClassBlock>
         );
       }
     } else {
       if (convertedCourse == null) {
         return null;
       } else {
-        return (
-          <ClassBlock
-            class={convertedCourse}
-            index={0}
-            onDelete={() => {
-              console.log("oops");
-            }}
-          ></ClassBlock>
-        );
+        return <SidebarClassBlock class={course} index={0}></SidebarClassBlock>;
       }
     }
 
@@ -425,8 +422,8 @@ export class RequirementSection extends React.Component<
         {this.state.expanded && (
           <Droppable droppableId={this.props.title}>
             {provided => (
-              <ClassList
-                innerRef={provided.innerRef as any}
+              <Wrapper
+                ref={provided.innerRef as any}
                 {...provided.droppableProps}
               >
                 <div>
@@ -438,7 +435,7 @@ export class RequirementSection extends React.Component<
                     this.handleRange(contents.requirements)}
                 </div>
                 {provided.placeholder}
-              </ClassList>
+              </Wrapper>
             )}
           </Droppable>
           // <div>

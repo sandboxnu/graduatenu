@@ -168,8 +168,8 @@ export async function addCourseFromSidebar(
   // account for CourseAndLab blocks
   let scheduleCourseLab: ScheduleCourse | null = null;
   let movedLab: DNDScheduleCourse;
-  if (courseData.length === 6) {
-    scheduleCourseLab = await fetchCourse(courseData[3], courseData[4]);
+  if (courseData.length === 4) {
+    scheduleCourseLab = await fetchCourse(courseData[2], courseData[3]);
     movedLab = convertToDNDCourses([scheduleCourseLab!], 0)[0][0];
     finishClasses.splice(destination.index, 0, movedClass, movedLab);
   } else {
