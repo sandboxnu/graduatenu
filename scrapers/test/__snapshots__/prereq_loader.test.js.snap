@@ -4165,17 +4165,12 @@ Object {
                   "type": "or",
                   "values": Array [
                     Object {
-                      "type": "and",
-                      "values": Array [
-                        Object {
-                          "classId": "1214",
-                          "subject": "CHEM",
-                        },
-                        Object {
-                          "classId": "1220",
-                          "subject": "CHEM",
-                        },
-                      ],
+                      "classId": "1214",
+                      "subject": "CHEM",
+                    },
+                    Object {
+                      "classId": "1220",
+                      "subject": "CHEM",
                     },
                     Object {
                       "classId": "1151",
@@ -5468,17 +5463,12 @@ Object {
                   "type": "or",
                   "values": Array [
                     Object {
-                      "type": "and",
-                      "values": Array [
-                        Object {
-                          "classId": "1214",
-                          "subject": "CHEM",
-                        },
-                        Object {
-                          "classId": "1220",
-                          "subject": "CHEM",
-                        },
-                      ],
+                      "classId": "1214",
+                      "subject": "CHEM",
+                    },
+                    Object {
+                      "classId": "1220",
+                      "subject": "CHEM",
                     },
                     Object {
                       "classId": "1151",
@@ -6607,17 +6597,12 @@ Object {
                   "type": "or",
                   "values": Array [
                     Object {
-                      "type": "and",
-                      "values": Array [
-                        Object {
-                          "classId": "1214",
-                          "subject": "CHEM",
-                        },
-                        Object {
-                          "classId": "1220",
-                          "subject": "CHEM",
-                        },
-                      ],
+                      "classId": "1214",
+                      "subject": "CHEM",
+                    },
+                    Object {
+                      "classId": "1220",
+                      "subject": "CHEM",
                     },
                     Object {
                       "classId": "1151",
@@ -7913,17 +7898,12 @@ Object {
                   "type": "or",
                   "values": Array [
                     Object {
-                      "type": "and",
-                      "values": Array [
-                        Object {
-                          "classId": "1214",
-                          "subject": "CHEM",
-                        },
-                        Object {
-                          "classId": "1220",
-                          "subject": "CHEM",
-                        },
-                      ],
+                      "classId": "1214",
+                      "subject": "CHEM",
+                    },
+                    Object {
+                      "classId": "1220",
+                      "subject": "CHEM",
                     },
                     Object {
                       "classId": "1151",
