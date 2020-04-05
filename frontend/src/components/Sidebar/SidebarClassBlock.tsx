@@ -1,10 +1,6 @@
 import React from "react";
 import { Draggable, DraggableProvided } from "react-beautiful-dnd";
-import {
-  DNDScheduleCourse,
-  CourseWarning,
-  IRequiredCourse,
-} from "../../models/types";
+import { CourseWarning, IRequiredCourse } from "../../models/types";
 import styled from "styled-components";
 import { Card, Tooltip } from "@material-ui/core";
 
@@ -24,6 +20,13 @@ const Block = styled(Card)<any>`
 
 const SidebarClassBlockBodyContainer = styled.div<any>`
   background-color: #e5e5e5;
+  padding-left: 5px;
+  flex: 1;
+  min-width: 0;
+`;
+
+const CompletedSidebarClassBlockBodyContainer = styled.div<any>`
+  background-color: #cee2d6;
   padding-left: 5px;
   flex: 1;
   min-width: 0;
@@ -51,11 +54,19 @@ const Title = styled.div`
   margin-right: 4px;
 `;
 
+const CompletedTitle = styled.div`
+  color: #5d6b63;
+  font-weight: normal;
+  font-size: 14px;
+  margin-right: 4px;
+`;
+
 interface SidebarClassBlockProps {
   class: IRequiredCourse;
   lab?: IRequiredCourse;
   index: number;
   warning?: CourseWarning;
+  completed: boolean;
 }
 
 interface SidebarClassBlockState {
@@ -72,6 +83,11 @@ export class SidebarClassBlock extends React.Component<
     this.state = {
       hovering: false,
     };
+  }
+
+  componentDidMount() {
+    console.log(this.props.class);
+    console.log(this.props.completed);
   }
 
   handleMouseEnter() {
@@ -97,26 +113,56 @@ export class SidebarClassBlock extends React.Component<
           {...provided.dragHandleProps}
           ref={provided.innerRef}
         >
-          <SidebarClassBlockBodyContainer warning={this.props.warning}>
-            <Wrapper>
-              <TitleWrapper>
-                {this.props.lab && (
-                  <Title>
-                    {this.props.class.subject +
-                      " " +
-                      this.props.class.classId +
-                      " and " +
-                      this.props.lab.classId}
-                  </Title>
-                )}
-                {!this.props.lab && (
-                  <Title>
-                    {this.props.class.subject + " " + this.props.class.classId}
-                  </Title>
-                )}
-              </TitleWrapper>
-            </Wrapper>
-          </SidebarClassBlockBodyContainer>
+          {this.props.completed && (
+            <CompletedSidebarClassBlockBodyContainer
+              warning={this.props.warning}
+            >
+              <Wrapper>
+                <TitleWrapper>
+                  {this.props.lab && (
+                    <CompletedTitle>
+                      {this.props.class.subject +
+                        " " +
+                        this.props.class.classId +
+                        " and " +
+                        this.props.lab.classId}
+                    </CompletedTitle>
+                  )}
+                  {!this.props.lab && (
+                    <CompletedTitle>
+                      {this.props.class.subject +
+                        " " +
+                        this.props.class.classId}
+                    </CompletedTitle>
+                  )}
+                </TitleWrapper>
+              </Wrapper>
+            </CompletedSidebarClassBlockBodyContainer>
+          )}
+          {!this.props.completed && (
+            <SidebarClassBlockBodyContainer warning={this.props.warning}>
+              <Wrapper>
+                <TitleWrapper>
+                  {this.props.lab && (
+                    <Title>
+                      {this.props.class.subject +
+                        " " +
+                        this.props.class.classId +
+                        " and " +
+                        this.props.lab.classId}
+                    </Title>
+                  )}
+                  {!this.props.lab && (
+                    <Title>
+                      {this.props.class.subject +
+                        " " +
+                        this.props.class.classId}
+                    </Title>
+                  )}
+                </TitleWrapper>
+              </Wrapper>
+            </SidebarClassBlockBodyContainer>
+          )}
         </Block>
       </div>
     );
@@ -146,7 +192,11 @@ export class SidebarClassBlock extends React.Component<
   render() {
     return (
       <DraggableContainer>
-        <Draggable draggableId={this.getDraggableId()} index={this.props.index}>
+        <Draggable
+          isDragDisabled={this.props.completed}
+          draggableId={this.getDraggableId()}
+          index={this.props.index}
+        >
           {provided => {
             return !!this.props.warning ? (
               <Tooltip title={this.props.warning.message} placement="top">

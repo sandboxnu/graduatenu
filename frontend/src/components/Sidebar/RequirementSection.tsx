@@ -92,6 +92,7 @@ interface RequirementSectionProps {
   title: string;
   contents: IMajorRequirementGroup;
   warning?: IRequirementGroupWarning;
+  completedCourses: string[];
 }
 
 interface RequirementSectionState {
@@ -150,7 +151,7 @@ export class RequirementSection extends React.Component<
    * Fetches class data for each requirement upon loading this component.
    */
   async componentDidMount() {
-    await this.fetchClassData();
+    // await this.fetchClassData();
   }
 
   /**
@@ -335,7 +336,7 @@ export class RequirementSection extends React.Component<
         andCourse.subject + andCourse.classId
       ];
 
-      if (convertedCourse == null) {
+      if (course == null) {
         return null;
       } else {
         return (
@@ -343,14 +344,30 @@ export class RequirementSection extends React.Component<
             class={course}
             lab={andCourse}
             index={0}
+            completed={
+              this.props.completedCourses.includes(
+                course.subject + course.classId
+              ) &&
+              this.props.completedCourses.includes(
+                andCourse.subject + andCourse.classId
+              )
+            }
           ></SidebarClassBlock>
         );
       }
     } else {
-      if (convertedCourse == null) {
+      if (course == null) {
         return null;
       } else {
-        return <SidebarClassBlock class={course} index={0}></SidebarClassBlock>;
+        return (
+          <SidebarClassBlock
+            class={course}
+            index={0}
+            completed={this.props.completedCourses.includes(
+              course.subject + course.classId
+            )}
+          ></SidebarClassBlock>
+        );
       }
     }
 
