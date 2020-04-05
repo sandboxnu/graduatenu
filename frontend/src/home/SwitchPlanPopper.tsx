@@ -3,21 +3,21 @@ import { MenuItem, Menu } from "@material-ui/core";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import styled from "styled-components";
-import { connect } from "react-redux";
-import { AppState } from "../state/reducers/state";
-import { Dispatch } from "redux";
-import {
-  getScheduleFromState,
-  getPlanStrFromState,
-  getMajorFromState,
-} from "../state";
-import {
-  setScheduleAction,
-  setCoopCycle,
-} from "../state/actions/scheduleActions";
-import { setMajorAction } from "../state/actions/userActions";
-import { getMajors, getPlans } from "../state";
-import { DNDSchedule, Major, Schedule } from "../models/types";
+// import { connect } from "react-redux";
+// import { AppState } from "../state/reducers/state";
+// import { Dispatch } from "redux";
+// import {
+//   getScheduleFromState,
+//   getPlanStrFromState,
+//   getMajorFromState,
+// } from "../state";
+// import {
+//   setScheduleAction,
+//   setCoopCycle,
+// } from "../state/actions/scheduleActions";
+// import { setMajorAction } from "../state/actions/userActions";
+// import { getMajors, getPlans } from "../state";
+// import { DNDSchedule, Major, Schedule } from "../models/types";
 
 const SwitchPlanContainer = styled.div`
   display: flex;
@@ -31,21 +31,21 @@ const SwitchPlanMenu = styled(Menu)`
   margin-left: 20px;
 `;
 
-interface ReduxStoreEditPlanProps {
-  schedule: DNDSchedule;
-  major?: Major;
-  planStr?: string;
-  majors: Major[];
-  plans: Record<string, Schedule[]>;
-}
+// interface ReduxStoreEditPlanProps {
+//   schedule: DNDSchedule;
+//   major?: Major;
+//   planStr?: string;
+//   majors: Major[];
+//   plans: Record<string, Schedule[]>;
+// }
 
-interface ReduxDispatchEditPlanProps {
-  setCoopCycle: (schedule?: Schedule) => void;
-  setSchedule: (schedule: Schedule) => void;
-  setMajor: (major?: Major) => void;
-}
+// interface ReduxDispatchEditPlanProps {
+//   setCoopCycle: (schedule?: Schedule) => void;
+//   setSchedule: (schedule: Schedule) => void;
+//   setMajor: (major?: Major) => void;
+// }
 
-type Props = ReduxStoreEditPlanProps & ReduxDispatchEditPlanProps;
+// type Props = ReduxStoreEditPlanProps & ReduxDispatchEditPlanProps;
 
 // Plan dummy data
 const plans = [
@@ -66,7 +66,7 @@ const plans = [
   },
 ];
 
-export const SwitchPlanPopperComponent = (props: Props) => {
+export const SwitchPlanPopper = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [plan, setPlan] = useState("Primary Plan");
 
@@ -123,26 +123,26 @@ export const SwitchPlanPopperComponent = (props: Props) => {
   );
 };
 
-const mapStateToProps = (state: AppState) => ({
-  schedule: getScheduleFromState(state),
-  planStr: getPlanStrFromState(state),
-  major: getMajorFromState(state),
-  majors: getMajors(state),
-  plans: getPlans(state),
-});
+// const mapStateToProps = (state: AppState) => ({
+//   schedule: getScheduleFromState(state),
+//   planStr: getPlanStrFromState(state),
+//   major: getMajorFromState(state),
+//   majors: getMajors(state),
+//   plans: getPlans(state),
+// });
 
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-  setCoopCycle: (schedule?: Schedule) => dispatch(setCoopCycle(schedule)),
-  setSchedule: (schedule: Schedule) => dispatch(setScheduleAction(schedule)),
-  setMajor: (major?: Major) => dispatch(setMajorAction(major)),
-});
+// const mapDispatchToProps = (dispatch: Dispatch) => ({
+//   setCoopCycle: (schedule?: Schedule) => dispatch(setCoopCycle(schedule)),
+//   setSchedule: (schedule: Schedule) => dispatch(setScheduleAction(schedule)),
+//   setMajor: (major?: Major) => dispatch(setMajorAction(major)),
+// });
 
-export const SwitchPlanPopper = connect<
-  ReduxStoreEditPlanProps,
-  ReduxDispatchEditPlanProps,
-  {},
-  AppState
->(
-  mapStateToProps,
-  mapDispatchToProps
-)(SwitchPlanPopperComponent);
+// export const SwitchPlanPopper = connect<
+//   ReduxStoreEditPlanProps,
+//   ReduxDispatchEditPlanProps,
+//   {},
+//   AppState
+// >(
+//   mapStateToProps,
+//   mapDispatchToProps
+// )(SwitchPlanPopperComponent);
