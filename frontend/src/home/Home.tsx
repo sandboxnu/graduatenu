@@ -40,6 +40,7 @@ import {
 import { setMajorAction } from "../state/actions/userActions";
 import { getMajors, getPlans } from "../state";
 import { EditPlanPopper } from "./EditPlanPopper";
+import { SwitchPlanPopper } from "./SwitchPlanPopper";
 
 const OuterContainer = styled.div`
   display: flex;
@@ -257,7 +258,8 @@ class HomeComponent extends React.Component<Props> {
               </HomePlan>
             </HomeTop>
             <HomePlan>
-              <h2>Plan Of Study</h2>
+              <h2>Plan Of Study&nbsp;</h2>
+              <SwitchPlanPopper />
             </HomePlan>
             {this.renderYears()}
           </Container>
