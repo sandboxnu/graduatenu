@@ -522,3 +522,10 @@ export interface IScheduleCourse {
  * A UserChoice is one of OR or RANGE.
  */
 export type UserChoice = ICourseRange | IOrCourse;
+
+/**
+ * Map of all course completed prior to the semester
+ */
+export interface ICompletedCoursesMap {
+  [idx: number]: DNDScheduleCourse[]; // 0 1 2 3
+}

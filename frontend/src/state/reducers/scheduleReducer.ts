@@ -1,4 +1,9 @@
-import { DNDSchedule, IWarning, CourseWarning } from "../../models/types";
+import {
+  DNDSchedule,
+  IWarning,
+  CourseWarning,
+  ICompletedCoursesMap,
+} from "../../models/types";
 import { mockData } from "../../data/mockData";
 import produce from "immer";
 import { getType } from "typesafe-actions";
@@ -12,6 +17,10 @@ import {
   setDNDScheduleAction,
   undoRemoveClassAction,
   setCoopCycle,
+  addCompletedCourses,
+  removeCompletedCoursesAction,
+  setCompletedCourses,
+  setCompletedCoursesFromMap,
 } from "../actions/scheduleActions";
 import {
   convertTermIdToSeason,
@@ -32,6 +41,7 @@ export interface ScheduleStateSlice {
   schedule: DNDSchedule;
   warnings: IWarning[];
   courseWarnings: CourseWarning[];
+  completedCourses: ICompletedCoursesMap;
 }
 
 const initialState: ScheduleState = {
@@ -42,6 +52,7 @@ const initialState: ScheduleState = {
     schedule: mockData,
     warnings: [],
     courseWarnings: [],
+    completedCourses: { 0: [], 1: [], 2: [], 3: [] },
   },
 };
 

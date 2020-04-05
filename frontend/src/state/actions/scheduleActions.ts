@@ -7,6 +7,7 @@ import {
   SeasonWord,
   Schedule,
   DNDSchedule,
+  ICompletedCoursesMap,
 } from "../../models/types";
 
 export const addClassesAction = createAction(
@@ -61,4 +62,24 @@ export const setCoopCycle = createAction(
 export const setDNDScheduleAction = createAction(
   "schedule/SET_DND_SCHEDULE",
   (schedule: DNDSchedule) => ({ schedule })
+)();
+
+export const addCompletedCourses = createAction(
+  "schedule/ADD_COMPLETED_COURSES",
+  (completedCourses: ScheduleCourse[]) => ({ completedCourses })
+)();
+
+export const setCompletedCourses = createAction(
+  "schedule/SET_COMPLETED_COURSES",
+  (completedCourses: ScheduleCourse[]) => ({ completedCourses })
+)();
+
+export const setCompletedCoursesFromMap = createAction(
+  "schedule/SET_COMPLETED_COURSES_FROM_MAP",
+  (completedCourses: ICompletedCoursesMap) => ({ completedCourses })
+)();
+
+export const removeCompletedCoursesAction = createAction(
+  "schedule/REMOVE_COMPLETED_COURSES",
+  (completedCourse: DNDScheduleCourse) => ({ completedCourse })
 )();
