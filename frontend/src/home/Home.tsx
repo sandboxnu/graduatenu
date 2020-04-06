@@ -158,8 +158,6 @@ class HomeComponent extends React.Component<Props> {
 
     // if drag is coming from the sidebar
     if (isNaN(Number(source.droppableId))) {
-      console.log("add course from sidebar");
-      console.log(draggableId);
       addCourseFromSidebar(
         this.props.schedule,
         destination,
@@ -168,7 +166,6 @@ class HomeComponent extends React.Component<Props> {
         draggableId
       );
     } else {
-      console.log("normal move");
       moveCourse(
         this.props.schedule,
         destination,

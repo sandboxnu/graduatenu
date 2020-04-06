@@ -1,6 +1,6 @@
 import React from "react";
 import { Draggable, DraggableProvided } from "react-beautiful-dnd";
-import { CourseWarning, IRequiredCourse } from "../../models/types";
+import { CourseWarning, DNDScheduleCourse } from "../../models/types";
 import styled from "styled-components";
 import { Card, Tooltip } from "@material-ui/core";
 
@@ -62,8 +62,8 @@ const CompletedTitle = styled.div`
 `;
 
 interface SidebarClassBlockProps {
-  class: IRequiredCourse;
-  lab?: IRequiredCourse;
+  class: DNDScheduleCourse;
+  lab?: DNDScheduleCourse;
   index: number;
   warning?: CourseWarning;
   completed: boolean;
@@ -83,11 +83,6 @@ export class SidebarClassBlock extends React.Component<
     this.state = {
       hovering: false,
     };
-  }
-
-  componentDidMount() {
-    console.log(this.props.class);
-    console.log(this.props.completed);
   }
 
   handleMouseEnter() {
@@ -189,6 +184,14 @@ export class SidebarClassBlock extends React.Component<
     }
   }
 
+  getTitle() {
+    if (this.props.lab) {
+      return this.props.class.name + " and " + this.props.lab.name;
+    } else {
+      return this.props.class.name;
+    }
+  }
+
   render() {
     return (
       <DraggableContainer>
@@ -198,12 +201,10 @@ export class SidebarClassBlock extends React.Component<
           index={this.props.index}
         >
           {provided => {
-            return !!this.props.warning ? (
-              <Tooltip title={this.props.warning.message} placement="top">
+            return (
+              <Tooltip title={this.getTitle()} placement="top">
                 {this.renderBody(provided)}
               </Tooltip>
-            ) : (
-              this.renderBody(provided)
             );
           }}
         </Draggable>
