@@ -11,17 +11,13 @@ import {
 } from "../../models/types";
 import styled from "styled-components";
 import CheckIcon from "@material-ui/icons/Check";
-import ClearIcon from "@material-ui/icons/Clear";
 import { styled as materialStyled } from "@material-ui/styles";
 import ExpandMoreOutlinedIcon from "@material-ui/icons/ExpandMoreOutlined";
 import ExpandLessOutlinedIcon from "@material-ui/icons/ExpandLessOutlined";
-import { SidebarAddButton } from "./SidebarAddButton";
 import { SidebarAddClassModal } from "./SidebarAddClassModal";
-import { ClassBlock } from "../ClassBlocks/ClassBlock";
 import { convertToDNDCourses } from "../../utils/schedule-helpers";
 import { fetchCourse } from "../../api";
 import { Droppable } from "react-beautiful-dnd";
-import { ClassList } from "../ClassList";
 import { SidebarClassBlock } from "./SidebarClassBlock";
 
 const SectionHeaderWrapper = styled.div`
@@ -29,14 +25,13 @@ const SectionHeaderWrapper = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-top: 6px;
+  margin-top: 14px;
 `;
 
 const TitleWrapper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-top: 8px;
   margin-bottom: 1px;
 `;
 
@@ -46,6 +41,15 @@ const TitleText = styled.div`
   font-weight: 600;
   font-size: 14px;
   cursor: pointer;
+`;
+
+const CompletedTitleText = styled.div`
+  margin-left: 4px;
+  margin-right: 10px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  color: rgba(21, 116, 62, 0.68);
 `;
 
 const CourseWrapper = styled.div`
@@ -151,7 +155,7 @@ export class RequirementSection extends React.Component<
    * Fetches class data for each requirement upon loading this component.
    */
   async componentDidMount() {
-    // await this.fetchClassData();
+    await this.fetchClassData();
   }
 
   /**
@@ -160,11 +164,13 @@ export class RequirementSection extends React.Component<
    * Stores each DNDScheduleCourse into this.state.classData
    */
   async fetchClassData() {
-    if (this.props.contents.type === "RANGE") {
+    let majorRequirementGroup: IMajorRequirementGroup = this.props.contents;
+
+    if (majorRequirementGroup.type === "RANGE") {
       return;
     }
 
-    let requirements: Requirement[] = this.props.contents.requirements.filter(
+    let requirements: Requirement[] = majorRequirementGroup.requirements.filter(
       requirement => requirement.type !== "RANGE"
     );
     let promises: Promise<ScheduleCourse | null>[] = [];
@@ -243,8 +249,10 @@ export class RequirementSection extends React.Component<
     ) {
       return (
         <CourseAndLabWrapper key={index}>
-          {this.renderCourse(req.courses[0] as IRequiredCourse, true, true, req
-            .courses[1] as IRequiredCourse)}
+          {this.renderCourse(
+            req.courses[0] as IRequiredCourse,
+            req.courses[1] as IRequiredCourse
+          )}
           {/* <CourseText> and </CourseText>
           {this.renderCourse(req.courses[1] as IRequiredCourse, true, false)} */}
         </CourseAndLabWrapper>
@@ -293,27 +301,6 @@ export class RequirementSection extends React.Component<
     );
   }
 
-  async getDNDCourse(
-    course: IRequiredCourse
-  ): Promise<DNDScheduleCourse | null> {
-    let convertedCourse: DNDScheduleCourse;
-
-    let scheduleCourse: ScheduleCourse | null = await fetchCourse(
-      course.subject.toUpperCase(),
-      course.classId.toString()
-    );
-
-    if (scheduleCourse == null) {
-      return null;
-    } else {
-      convertedCourse = convertToDNDCourses([scheduleCourse!], 0)[0][0];
-      return convertedCourse;
-    }
-    // .then(response => {
-    //   convertedCourse = convertToDNDCourses([response!], 0)[0][0];
-    // });
-  }
-
   /**
    * Renders the given course as a sidebar course.
    * @param course the given IRequiredCourse
@@ -321,12 +308,7 @@ export class RequirementSection extends React.Component<
    * @param addButton determines if this sidebar course should have a SidebarAddButton
    * @param andCourse true if the given course is an and course
    */
-  renderCourse(
-    course: IRequiredCourse,
-    noMargin: boolean = false,
-    addButton: boolean = true,
-    andCourse?: IRequiredCourse
-  ) {
+  renderCourse(course: IRequiredCourse, andCourse?: IRequiredCourse) {
     const convertedCourse: DNDScheduleCourse = this.state.classData[
       course.subject + course.classId
     ];
@@ -336,13 +318,19 @@ export class RequirementSection extends React.Component<
         andCourse.subject + andCourse.classId
       ];
 
-      if (course == null) {
+      if (convertedCourse == null) {
         return null;
       } else {
         return (
           <SidebarClassBlock
-            class={course}
-            lab={andCourse}
+            key={
+              course.subject +
+              course.classId +
+              andCourse.subject +
+              andCourse.classId
+            }
+            class={convertedCourse}
+            lab={convertedLab}
             index={0}
             completed={
               this.props.completedCourses.includes(
@@ -356,12 +344,13 @@ export class RequirementSection extends React.Component<
         );
       }
     } else {
-      if (course == null) {
+      if (convertedCourse == null) {
         return null;
       } else {
         return (
           <SidebarClassBlock
-            class={course}
+            key={course.subject + course.classId}
+            class={convertedCourse}
             index={0}
             completed={this.props.completedCourses.includes(
               course.subject + course.classId
@@ -422,22 +411,26 @@ export class RequirementSection extends React.Component<
         {!!title && (
           <SectionHeaderWrapper onClick={this.expandSection.bind(this)}>
             <TitleWrapper>
-              {/* {!!warning ? (
-                <ClearIcon color="error" fontSize="small"></ClearIcon>
+              {!!warning ? (
+                <TitleText>{title}</TitleText>
               ) : (
-                <MyCheckIcon fontSize="small"></MyCheckIcon>
-              )} */}
-              <TitleText>{title}</TitleText>
+                <CompletedTitleText>{title}</CompletedTitleText>
+              )}
             </TitleWrapper>
-            {/* {this.state.expanded ? (
-              <ExpandLessOutlinedIcon />
+
+            {this.state.expanded ? (
+              <ExpandLessOutlinedIcon
+                htmlColor={warning ? "#666666" : "rgba(21, 116, 62, 0.68)"}
+              />
             ) : (
-              <ExpandMoreOutlinedIcon />
-            )} */}
+              <ExpandMoreOutlinedIcon
+                htmlColor={warning ? "#666666" : "rgba(21, 116, 62, 0.68)"}
+              />
+            )}
           </SectionHeaderWrapper>
         )}
         {this.state.expanded && (
-          <Droppable droppableId={this.props.title}>
+          <Droppable isDropDisabled={true} droppableId={this.props.title}>
             {provided => (
               <Wrapper
                 ref={provided.innerRef as any}
@@ -455,14 +448,6 @@ export class RequirementSection extends React.Component<
               </Wrapper>
             )}
           </Droppable>
-          // <div>
-          //   {!!contents &&
-          //     contents.type !== "RANGE" &&
-          //     this.parseRequirements(contents.requirements)}
-          //   {!!contents &&
-          //     contents.type === "RANGE" &&
-          //     this.handleRange(contents.requirements)}
-          // </div>
         )}
 
         <SidebarAddClassModal
