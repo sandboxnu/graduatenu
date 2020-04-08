@@ -1,0 +1,1 @@
+cd api && rails server -b 127.0.0.1 -p 3001 & cd frontend && yarn start
