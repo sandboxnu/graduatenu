@@ -7,41 +7,36 @@ import {
   Major,
   IRequiredCourse,
   Requirement,
-  ICourseRange,
-  ISubjectRange,
 } from "../models/types";
 import { getMajorFromState } from "../state";
 import { setCompletedCourses } from "../state/actions/scheduleActions";
 import styled from "styled-components";
-import { Checkbox } from "@material-ui/core";
+import Checkbox from "@material-ui/core/Checkbox";
 import { fetchCourse } from "../api";
 import { NextButton } from "../components/common/NextButton";
 import { Link, withRouter, RouteComponentProps } from "react-router-dom";
+import { GenericOnboardingTemplate } from "./GenericOnboarding";
+import Paper from "@material-ui/core/Paper";
+import CheckBoxIcon from "@material-ui/icons/CheckBox";
+import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
+import Grid from "@material-ui/core/Grid";
+import { Link as ButtonLink, Button } from "@material-ui/core";
+import Collapse from "@material-ui/core/Collapse";
 
-const Wrapper = styled.div`
-  display: flex;
-  flex: 1;
-  justify-content: center;
+const MainTitleText = styled.div`
+  font-size: 16px;
+  margin-left: 4px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-weight: 500;
 `;
-
-const Box = styled.div`
-  margin-top: 20vh;
-  margin-bottom: 20vh;
-  border: 1px solid black;
-  padding: 18px;
-  width: 500px;
-  display: flex;
-  flex-direction: column;
-`;
-
-const Title = styled.h2``;
-
-const Question = styled.p``;
 
 const TitleText = styled.div`
+  font-size: 12px;
   margin-left: 4px;
-  margin-top: 8px;
+  margin-top: 16px;
   margin-bottom: 8px;
+  font-weight: 500;
 `;
 
 const CourseWrapper = styled.div`
@@ -51,29 +46,29 @@ const CourseWrapper = styled.div`
 `;
 
 const CourseText = styled.p`
-  font-size: 14px;
-  margin: 4px;
+  font-size: 12px;
+  margin: 1px;
+  font-weight: 400;
 `;
 
-const CourseTextNoMargin = styled.p`
-  font-size: 14px;
-  margin: 0px;
-  margin-top: 4px;
-  margin-bottom: 4px;
-`;
+function flatten(reqs: Requirement[]): IRequiredCourse[][] {
+  return reqs.map(flattenOne).reduce((array, cur) => array.concat(cur), []);
+}
 
-const CourseAndLabWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  margin-left: 4px;
-`;
-
-const ANDORText = styled.p`
-  font-size: 11px;
-  margin: 4px;
-`;
+function flattenOne(req: Requirement): IRequiredCourse[][] {
+  if (req.type === "COURSE") {
+    return [[req as IRequiredCourse]];
+  } else if (
+    req.type === "AND" &&
+    req.courses.filter(c => c.type === "COURSE").length
+  ) {
+    return [req.courses as IRequiredCourse[]];
+  } else if (req.type === "AND" || req.type === "OR") {
+    return flatten(req.courses);
+  } else {
+    return [];
+  }
+}
 
 interface CompletedCoursesScreenProps {
   major: Major;
@@ -84,14 +79,20 @@ type Props = CompletedCoursesScreenProps & RouteComponentProps;
 
 interface State {
   selectedCourses: ScheduleCourse[];
+  expandedSections: Map<String, Boolean>;
 }
 
 class CompletedCoursesComponent extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
+    let expanded = new Map<String, Boolean>();
+    this.props.major.requirementGroups.forEach(reqGroups =>
+      expanded.set(reqGroups, false)
+    );
 
     this.state = {
       selectedCourses: [],
+      expandedSections: expanded,
     };
   }
 
@@ -99,7 +100,7 @@ class CompletedCoursesComponent extends Component<Props, State> {
     this.props.setCompletedCourses(this.state.selectedCourses);
   }
 
-  async handleChecked(e: any, course: IRequiredCourse) {
+  async onChecked(e: any, course: IRequiredCourse) {
     const checked = e.target.checked;
 
     if (checked) {
@@ -113,8 +114,7 @@ class CompletedCoursesComponent extends Component<Props, State> {
         });
       }
     } else {
-      const courses = this.state.selectedCourses;
-      courses.filter(
+      let courses = this.state.selectedCourses.filter(
         c =>
           c.subject !== course.subject && c.classId !== String(course.classId)
       );
@@ -124,102 +124,49 @@ class CompletedCoursesComponent extends Component<Props, State> {
     }
   }
 
-  renderCourse(
-    course: IRequiredCourse,
-    noMargin: boolean = false,
-    checkbox: boolean = true
-  ) {
+  onExpand(requirementGroup: string, change: Boolean) {
+    this.state.expandedSections.set(requirementGroup, change);
+    this.setState({
+      expandedSections: this.state.expandedSections,
+    });
+  }
+
+  renderShowLink(requirementGroup: string, more: boolean) {
+    let variable = more ? "more" : "less";
     return (
-      <CourseWrapper key={course.subject + course.classId + course.type}>
-        {checkbox && (
-          <Checkbox
-            value="primary"
-            color="primary"
-            onChange={e => this.handleChecked(e, course)}
-          />
-        )}
-        {noMargin ? (
-          <CourseTextNoMargin>
-            {course.subject + course.classId}
-          </CourseTextNoMargin>
-        ) : (
-          <CourseText>{course.subject + course.classId}</CourseText>
-        )}
+      <ButtonLink
+        component="button"
+        underline="always"
+        onClick={() => {
+          this.onExpand(requirementGroup, more);
+        }}
+        style={{ color: "#EB5757" }}
+      >
+        <CourseText>{"See " + variable + "..."}</CourseText>
+      </ButtonLink>
+    );
+  }
+
+  renderCourse(courses: IRequiredCourse[]) {
+    let allCourse = courses.map(course => course.subject + course.classId);
+    return (
+      <CourseWrapper key={allCourse[0]}>
+        <Checkbox
+          style={{ width: 2, height: 2 }}
+          icon={<CheckBoxOutlineBlankIcon style={{ fontSize: 20 }} />}
+          checkedIcon={
+            <CheckBoxIcon style={{ fontSize: 20, color: "#EB5757" }} />
+          }
+          onChange={e => courses.forEach(course => this.onChecked(e, course))}
+        />
+        <CourseText>{allCourse.join(" and ")}</CourseText>
       </CourseWrapper>
     );
   }
 
-  handleRange(req: ICourseRange) {
-    return (
-      <div>
-        <ANDORText style={{ marginBottom: 8 }}>
-          Complete {req.creditsRequired} credits from the following courses that
-          are not already required:
-        </ANDORText>
-        {req.ranges.map((r: ISubjectRange, index: number) => {
-          return (
-            <CourseText key={r.subject + r.idRangeStart + " - " + r.idRangeEnd}>
-              {r.subject + r.idRangeStart + " through " + r.idRangeEnd}
-            </CourseText>
-          );
-        })}
-      </div>
-    );
-  }
-
-  renderRequirement(req: Requirement, index: number) {
-    if (req.type === "COURSE") {
-      return this.renderCourse(req as IRequiredCourse);
-    }
-
-    if (req.type === "RANGE") {
-      return this.handleRange(req as ICourseRange);
-    }
-
-    if (
-      req.type === "AND" &&
-      req.courses.length === 2 &&
-      req.courses.filter(c => c.type === "COURSE").length === 2
-    ) {
-      return (
-        <CourseAndLabWrapper key={index}>
-          <Checkbox
-            value="primary"
-            color="primary"
-            onChange={e => {
-              this.handleChecked(e, req.courses[0] as IRequiredCourse);
-              this.handleChecked(e, req.courses[1] as IRequiredCourse);
-            }}
-          />
-          {this.renderCourse(req.courses[0] as IRequiredCourse, true, false)}
-          <CourseText> and </CourseText>
-          {this.renderCourse(req.courses[1] as IRequiredCourse, true, false)}
-        </CourseAndLabWrapper>
-      );
-    }
-
-    return (
-      <div key={index.toString()}>
-        {req.courses
-          .filter(c => c.type === "COURSE")
-          .map(c => this.renderCourse(c as IRequiredCourse))}
-        {req.courses
-          .filter(c => c.type === "AND")
-          .map((c: Requirement, index: number) =>
-            this.renderRequirement(c, index)
-          )}
-        {req.courses
-          .filter(c => c.type === "OR")
-          .map((c: Requirement, index: number) =>
-            this.renderRequirement(c, index)
-          )}
-      </div>
-    );
-  }
-
-  parseRequirements(reqs: Requirement[]) {
-    return reqs.map((r: Requirement, index: number) => (
-      <div key={index}>{this.renderRequirement(r, index)}</div>
+  parseCourseRequirements(reqs: IRequiredCourse[][]) {
+    return reqs.map((r: IRequiredCourse[], index: number) => (
+      <div key={index}>{this.renderCourse(r)}</div>
     ));
   }
 
@@ -232,31 +179,78 @@ class CompletedCoursesComponent extends Component<Props, State> {
     if (reqs.type === "RANGE") {
       return <div key={requirementGroup} />;
     }
-
-    return (
-      <div key={requirementGroup}>
-        <TitleText>{requirementGroup}</TitleText>
-        {this.parseRequirements(reqs.requirements)}
-      </div>
-    );
+    let allCourse = flatten(reqs.requirements);
+    if (allCourse.length <= 4) {
+      return (
+        <div key={requirementGroup}>
+          <TitleText>{requirementGroup}</TitleText>
+          {this.parseCourseRequirements(allCourse)}
+        </div>
+      );
+    } else {
+      return (
+        <div key={requirementGroup}>
+          <TitleText>{requirementGroup}</TitleText>
+          {this.parseCourseRequirements(allCourse.slice(0, 4))}
+          <Collapse
+            in={!this.state.expandedSections.get(requirementGroup)}
+            unmountOnExit
+          >
+            {this.renderShowLink(requirementGroup, true)}
+          </Collapse>
+          <Collapse
+            in={!!this.state.expandedSections.get(requirementGroup)}
+            unmountOnExit
+          >
+            {this.parseCourseRequirements(allCourse.slice(4, allCourse.length))}
+            {this.renderShowLink(requirementGroup, false)}
+          </Collapse>
+        </div>
+      );
+    }
   }
 
   render() {
+    let reqLen = this.props.major.requirementGroups.length;
+    let split = Math.floor(reqLen / 2) + 1;
     return (
-      <Wrapper>
-        <Box>
-          <Title>Course List</Title>
-          <Question>Which classes have you taken?</Question>
-          {this.props.major.requirementGroups.map(r => this.renderSection(r))}
-          <Link
-            to={"/home"}
-            onClick={this.onSubmit.bind(this)}
-            style={{ textDecoration: "none" }}
-          >
-            <NextButton />
-          </Link>
-        </Box>
-      </Wrapper>
+      <GenericOnboardingTemplate screen={1}>
+        <MainTitleText>Completed courses:</MainTitleText>
+        <Paper
+          elevation={0}
+          style={{
+            minWidth: 800,
+            maxWidth: 800,
+            minHeight: 300,
+            maxHeight: 300,
+            overflow: "auto",
+          }}
+        >
+          <Grid container justify="space-evenly">
+            <Grid key={0} item>
+              <Paper elevation={0} style={{ minWidth: 300, maxWidth: 400 }}>
+                {this.props.major.requirementGroups
+                  .slice(0, split)
+                  .map(r => this.renderSection(r))}
+              </Paper>
+            </Grid>
+            <Grid key={1} item>
+              <Paper elevation={0} style={{ minWidth: 300, maxWidth: 400 }}>
+                {this.props.major.requirementGroups
+                  .slice(split, reqLen)
+                  .map(r => this.renderSection(r))}
+              </Paper>
+            </Grid>
+          </Grid>
+        </Paper>
+        <Link
+          to={"/home"}
+          onClick={this.onSubmit.bind(this)}
+          style={{ textDecoration: "none" }}
+        >
+          <NextButton />
+        </Link>
+      </GenericOnboardingTemplate>
     );
   }
 }
