@@ -1,24 +1,55 @@
 const prereq_loader = require("../src/prereq_loader");
 const rp = require("request-promise");
 const plan_parser = require("../src/plan_parser");
+const supported = [
+  "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-science/bscs/#planofstudytext",
+  "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/bs/#planofstudytext",
+  "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-cognitive-psychology-bs/#planofstudytext",
+  "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/information-science-cognitive-psychology-bs/#planofstudytext",
+  "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/data-science-health-science-bs/#planofstudytext",
+  "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-political-science-bs/#planofstudytext",
+  "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-linguistics-bs/#planofstudytext",
+  "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-mathematics-bs/#planofstudytext",
 
-test("Ensure that prereqs are successfully added to Computer Science BSCS plans of study.", async () => {
-  const link =
-    "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-science/bscs/#plnanofstudytext";
-  await testScheduleLinkPrereqs(link);
-});
+  "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-communication-studies-bs/#planofstudytext",
+  "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-criminal-justice-bs/#planofstudytext",
+  "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/information-science-journalism-bs/#planofstudytext",
+  "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-media-arts-bs/#planofstudytext",
 
-test("Ensure that prereqs are successfully dded to Biochemistry plans of study.", async () => {
-  const link =
-    "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/science/biochemistry/biochemistry-bs/";
-  await testScheduleLinkPrereqs(link);
-});
+  // This major parses correctly, but has a "Take two courses, at least one of which is at the 4000 or 5000 level, from the following:"
+  // which is not handled, and has courses double listed in one location which may not parse correctly (?)
+  "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-philosophy-bs/#planofstudytext",
 
-test("Ensure that prereqs are successfully added to Mathematics plans of study.", async () => {
-  const link =
-    "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/science/mathematics/mathematics-bs/";
-  await testScheduleLinkPrereqs(link);
-});
+  // "Complete four ECON electives with at least two numbered at ECON 3000 or above."
+  "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/cybersecurity-economics-bs/#planofstudytext",
+
+  // "Complete four economics electives with no more than two below 3000:"
+  "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/economics-bs/#planofstudytext",
+  "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/science/biochemistry/biochemistry-bs/#planofstudytext",
+  "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/science/mathematics/mathematics-bs/#planofstudytext",
+];
+
+runTestsOnLinks(supported);
+
+/**
+ * Runs tests on an array of links.
+ * @param {string[]} links the links to plans of study to test on.
+ */
+function runTestsOnLinks(links) {
+  jest.setTimeout(100000);
+
+  // run tests on the results.
+  links.map((link, index) => {
+    test(
+      "Ensures that scraper correctly add pre-reqs for major no. " +
+        index +
+        "'s plans of study",
+      async () => {
+        await testScheduleLinkPrereqs(link);
+      }
+    );
+  });
+}
 
 /**
  * Downloads a page, scrapes a plan, enhances the schedule, and then compares it to a snapshot.
