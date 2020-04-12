@@ -187,6 +187,6 @@ catalogToMajor(
   "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/economics-bs/#programrequirementstext"
 ).then((scrapedMajor: Major) => {
   //uncomment following lines to log output.
-  // console.log("--------------------Parsed major object--------------------");
+  //console.log("--------------------Parsed major object--------------------");
   //console.log(JSON.stringify(scrapedMajor));
 });

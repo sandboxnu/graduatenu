@@ -6681,3 +6681,698 @@ Object {
   "yearVersion": 2018,
 }
 `;
+
+exports[`ensure that catalog_scraper produces the expected output for supported majors. 16`] = `
+Object {
+  "isLanguageRequired": false,
+  "name": "Biochemistry, BS",
+  "nupaths": Array [],
+  "requirementGroupMap": Object {
+    "Biochemistry Courses": Object {
+      "name": "Biochemistry Courses",
+      "requirements": Array [
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 3611,
+              "subject": "BIOL",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 3612,
+              "subject": "BIOL",
+              "type": "COURSE",
+            },
+          ],
+          "type": "AND",
+        },
+        Object {
+          "classId": 4707,
+          "subject": "BIOL",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4620,
+          "subject": "CHEM",
+          "type": "COURSE",
+        },
+      ],
+      "type": "AND",
+    },
+    "Biology Foundations": Object {
+      "name": "Biology Foundations",
+      "requirements": Array [
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 1107,
+              "subject": "BIOL",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 1108,
+              "subject": "BIOL",
+              "type": "COURSE",
+            },
+          ],
+          "type": "AND",
+        },
+        Object {
+          "classId": 2299,
+          "subject": "BIOL",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 2309,
+          "subject": "BIOL",
+          "type": "COURSE",
+        },
+      ],
+      "type": "AND",
+    },
+    "Capstone": Object {
+      "name": "Capstone",
+      "requirements": Array [
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 4701,
+              "subject": "BIOL",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 4750,
+              "subject": "CHEM",
+              "type": "COURSE",
+            },
+          ],
+          "type": "OR",
+        },
+      ],
+      "type": "AND",
+    },
+    "Experiential Learning Introduction": Object {
+      "name": "Experiential Learning Introduction",
+      "requirements": Array [
+        Object {
+          "classId": 2000,
+          "subject": "EESC",
+          "type": "COURSE",
+        },
+      ],
+      "type": "AND",
+    },
+    "General Chemistry 1": Object {
+      "name": "General Chemistry 1",
+      "requirements": Array [
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 1211,
+              "subject": "CHEM",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 1212,
+              "subject": "CHEM",
+              "type": "COURSE",
+            },
+          ],
+          "type": "AND",
+        },
+      ],
+      "type": "AND",
+    },
+    "General Chemistry 2": Object {
+      "name": "General Chemistry 2",
+      "requirements": Array [
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 1214,
+              "subject": "CHEM",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 1215,
+              "subject": "CHEM",
+              "type": "COURSE",
+            },
+          ],
+          "type": "AND",
+        },
+      ],
+      "type": "AND",
+    },
+    "Genetics and Molecular Biology": Object {
+      "name": "Genetics and Molecular Biology",
+      "requirements": Array [
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 2301,
+              "subject": "BIOL",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 2302,
+              "subject": "BIOL",
+              "type": "COURSE",
+            },
+          ],
+          "type": "AND",
+        },
+      ],
+      "type": "AND",
+    },
+    "Introduction to College": Object {
+      "name": "Introduction to College",
+      "requirements": Array [
+        Object {
+          "classId": 1000,
+          "subject": "BIOC",
+          "type": "COURSE",
+        },
+      ],
+      "type": "AND",
+    },
+    "Mathematics Courses": Object {
+      "name": "Mathematics Courses",
+      "requirements": Array [
+        Object {
+          "classId": 1251,
+          "subject": "MATH",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 1252,
+          "subject": "MATH",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 1341,
+          "subject": "MATH",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 1342,
+          "subject": "MATH",
+          "type": "COURSE",
+        },
+      ],
+      "type": "AND",
+    },
+    "Organic Chemistry 1": Object {
+      "name": "Organic Chemistry 1",
+      "requirements": Array [
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 2311,
+              "subject": "CHEM",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 2312,
+              "subject": "CHEM",
+              "type": "COURSE",
+            },
+          ],
+          "type": "AND",
+        },
+      ],
+      "type": "AND",
+    },
+    "Organic Chemistry 2": Object {
+      "name": "Organic Chemistry 2",
+      "requirements": Array [
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 2313,
+              "subject": "CHEM",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 2314,
+              "subject": "CHEM",
+              "type": "COURSE",
+            },
+          ],
+          "type": "AND",
+        },
+      ],
+      "type": "AND",
+    },
+    "Physical Chemistry ": Object {
+      "name": "Physical Chemistry ",
+      "requirements": Array [
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 3431,
+              "subject": "CHEM",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 3432,
+              "subject": "CHEM",
+              "type": "COURSE",
+            },
+          ],
+          "type": "AND",
+        },
+      ],
+      "type": "AND",
+    },
+    "Physics Courses": Object {
+      "name": "Physics Courses",
+      "requirements": Array [
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 1171,
+              "subject": "PHYS",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 1172,
+              "subject": "PHYS",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 1173,
+              "subject": "PHYS",
+              "type": "COURSE",
+            },
+          ],
+          "type": "AND",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 1151,
+              "subject": "PHYS",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 1152,
+              "subject": "PHYS",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 1153,
+              "subject": "PHYS",
+              "type": "COURSE",
+            },
+          ],
+          "type": "AND",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 1145,
+              "subject": "PHYS",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 1146,
+              "subject": "PHYS",
+              "type": "COURSE",
+            },
+          ],
+          "type": "AND",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 1161,
+              "subject": "PHYS",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 1162,
+              "subject": "PHYS",
+              "type": "COURSE",
+            },
+          ],
+          "type": "AND",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 1175,
+              "subject": "PHYS",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 1176,
+              "subject": "PHYS",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 1177,
+              "subject": "PHYS",
+              "type": "COURSE",
+            },
+          ],
+          "type": "AND",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 1155,
+              "subject": "PHYS",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 1156,
+              "subject": "PHYS",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 1157,
+              "subject": "PHYS",
+              "type": "COURSE",
+            },
+          ],
+          "type": "AND",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 1147,
+              "subject": "PHYS",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 1148,
+              "subject": "PHYS",
+              "type": "COURSE",
+            },
+          ],
+          "type": "AND",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 1165,
+              "subject": "PHYS",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 1166,
+              "subject": "PHYS",
+              "type": "COURSE",
+            },
+          ],
+          "type": "AND",
+        },
+      ],
+      "type": "AND",
+    },
+    "Research Option": Object {
+      "name": "Research Option",
+      "requirements": Array [
+        Object {
+          "classId": 4991,
+          "subject": "BIOC",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4970,
+          "subject": "BIOC",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4971,
+          "subject": "BIOC",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4994,
+          "subject": "BIOC",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4991,
+          "subject": "BIOL",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4970,
+          "subject": "BIOL",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4901,
+          "subject": "CHEM",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4750,
+          "subject": "CHEM",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4970,
+          "subject": "CHEM",
+          "type": "COURSE",
+        },
+      ],
+      "type": "AND",
+    },
+  },
+  "requirementGroups": Array [
+    "Introduction to College",
+    "Biology Foundations",
+    "Genetics and Molecular Biology",
+    "General Chemistry 1",
+    "General Chemistry 2",
+    "Organic Chemistry 1",
+    "Organic Chemistry 2",
+    "Physical Chemistry ",
+    "Biochemistry Courses",
+    "Experiential Learning Introduction",
+    "Capstone",
+    "Research Option",
+    "Mathematics Courses",
+    "Physics Courses",
+  ],
+  "totalCreditsRequired": 0,
+  "yearVersion": 2018,
+}
+`;
+
+exports[`ensure that catalog_scraper produces the expected output for supported majors. 17`] = `
+Object {
+  "isLanguageRequired": false,
+  "name": "Mathematics, BS",
+  "nupaths": Array [],
+  "requirementGroupMap": Object {
+    "Calculus": Object {
+      "name": "Calculus",
+      "requirements": Array [
+        Object {
+          "classId": 1341,
+          "subject": "MATH",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 1342,
+          "subject": "MATH",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 2321,
+          "subject": "MATH",
+          "type": "COURSE",
+        },
+      ],
+      "type": "AND",
+    },
+    "Capstone": Object {
+      "name": "Capstone",
+      "numCreditsMax": 4,
+      "numCreditsMin": 4,
+      "requirements": Array [
+        Object {
+          "classId": 4025,
+          "subject": "MATH",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 5131,
+          "subject": "MATH",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4020,
+          "subject": "MATH",
+          "type": "COURSE",
+        },
+      ],
+      "type": "OR",
+    },
+    "Co-op Reflections": Object {
+      "name": "Co-op Reflections",
+      "requirements": Array [
+        Object {
+          "classId": 3000,
+          "subject": "MATH",
+          "type": "COURSE",
+        },
+      ],
+      "type": "AND",
+    },
+    "Intermediate and Advanced Mathematics": Object {
+      "name": "Intermediate and Advanced Mathematics",
+      "requirements": Array [
+        Object {
+          "classId": 2331,
+          "subject": "MATH",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 2341,
+          "subject": "MATH",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3081,
+          "subject": "MATH",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3150,
+          "subject": "MATH",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3175,
+          "subject": "MATH",
+          "type": "COURSE",
+        },
+      ],
+      "type": "AND",
+    },
+    "Mathematics Electives": Object {
+      "name": "Mathematics Electives",
+      "numCreditsMax": 16,
+      "numCreditsMin": 16,
+      "requirements": Object {
+        "creditsRequired": 16,
+        "ranges": Array [
+          Object {
+            "idRangeEnd": 4899,
+            "idRangeStart": 3101,
+            "subject": "MATH",
+          },
+        ],
+        "type": "RANGE",
+      },
+      "type": "RANGE",
+    },
+    "Problem Solving": Object {
+      "name": "Problem Solving",
+      "requirements": Array [
+        Object {
+          "classId": 1365,
+          "subject": "MATH",
+          "type": "COURSE",
+        },
+      ],
+      "type": "AND",
+    },
+    "Required Physics": Object {
+      "name": "Required Physics",
+      "numCreditsMax": 5,
+      "numCreditsMin": 5,
+      "requirements": Array [
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 1161,
+              "subject": "PHYS",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 1162,
+              "subject": "PHYS",
+              "type": "COURSE",
+            },
+          ],
+          "type": "AND",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 1151,
+              "subject": "PHYS",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 1152,
+              "subject": "PHYS",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 1153,
+              "subject": "PHYS",
+              "type": "COURSE",
+            },
+          ],
+          "type": "AND",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 1165,
+              "subject": "PHYS",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 1166,
+              "subject": "PHYS",
+              "type": "COURSE",
+            },
+          ],
+          "type": "AND",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 1155,
+              "subject": "PHYS",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 1156,
+              "subject": "PHYS",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 1157,
+              "subject": "PHYS",
+              "type": "COURSE",
+            },
+          ],
+          "type": "AND",
+        },
+      ],
+      "type": "OR",
+    },
+  },
+  "requirementGroups": Array [
+    "Problem Solving",
+    "Calculus",
+    "Intermediate and Advanced Mathematics",
+    "Co-op Reflections",
+    "Mathematics Electives",
+    "Required Physics",
+    "Capstone",
+  ],
+  "totalCreditsRequired": 0,
+  "yearVersion": 2018,
+}
+`;

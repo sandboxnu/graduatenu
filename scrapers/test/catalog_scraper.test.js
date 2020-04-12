@@ -27,10 +27,13 @@ const supported = [
 
   // "Complete four economics electives with no more than two below 3000:"
   "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/economics-bs/#programrequirementstext",
+  "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/science/biochemistry/biochemistry-bs/#programrequirementstext",
+  "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/science/mathematics/mathematics-bs/#programrequirementstext",
 ];
 
 //run tests
 test("ensure that catalog_scraper produces the expected output for supported majors.", async () => {
+  jest.setTimeout(100000);
   // for each of the majors, create promises that resolve to the Major object.
   for (link of supported) {
     major = await catalogToMajor(link);
