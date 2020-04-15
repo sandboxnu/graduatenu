@@ -60,7 +60,7 @@ export function createRequirementGroup(
       if (ORTagMap.hasOwnProperty(commentSpan.text())) {
         //detected OR Tag; change section type to OR
         sectionType = SectionType.OR;
-        if (currentRow.find("td.hourscol").length !== 0) {
+        if (currentRow.find("td.hourscol").text().length !== 0) {
           let credsRange: CreditsRange = processHoursText(
             currentRow.find("td.hourscol").text()
           );
@@ -76,11 +76,10 @@ export function createRequirementGroup(
       } else if (RANGETagMap.hasOwnProperty(commentSpan.text())) {
         //detected Range Tag; change section type to Range
         sectionType = SectionType.RANGE;
-        if (currentRow.find("td.hourscol").length !== 0) {
+        if (currentRow.find("td.hourscol").text().length !== 0) {
           let credsRange: CreditsRange = processHoursText(
             currentRow.find("td.hourscol").text()
           );
-
           minCredits = credsRange.numCreditsMin;
           maxCredits = credsRange.numCreditsMax;
         } else {
