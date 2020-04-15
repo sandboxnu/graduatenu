@@ -217,21 +217,22 @@ function parseRequiredRow(
 
   //the length should be === 1.
   let loadedAnchor: Cheerio = $(anchorsArray[0]);
-  //length of this array === 2.
 
+  // split the text by spaces and also char(160) if it is present
   let splitByChar: string[] = loadedAnchor
     .text()
     .split(String.fromCharCode(160));
-  //console.log(splitByChar);
   let splitAnchor: string[] = [];
   splitByChar.forEach(element => {
     splitAnchor = splitAnchor.concat(element.split(String.fromCharCode(32)));
   });
 
   //first item in the array is the subject
+  //This is for the occasional edge case where a course is enlisted under two different subjects
+  // Looks something like ENGL/JWSS 3686
   let subject: string = splitAnchor[0];
   if (subject.length > 4) {
-    subject = subject.slice(0, 4);
+    subject = subject.split(String.fromCharCode(47))[0];
   }
 
   //second item in array is the course number.

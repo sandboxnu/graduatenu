@@ -48,7 +48,7 @@ export function isSubjectRange(
 }
 
 /**
- * a predicate for ISubjectRange.
+ * a predicate for IOrCourse.
  * @param scraperReq the ScraperRequirement
  */
 export function isIOrCourse(req: Requirement): req is IOrCourse {

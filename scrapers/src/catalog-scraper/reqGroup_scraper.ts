@@ -51,6 +51,8 @@ export function createRequirementGroup(
     let commentSpan: Cheerio = currentRow.find("span.courselistcomment");
     // a courselistcomment is present in this row
     if (commentSpan.length > 0) {
+      // If it is a section where subheaders are parsed as seperate
+      // subcategories (otherwise subheaders will just be ignored)
       if (SubheaderTagSet.includes(commentSpan.text())) {
         subheader = true;
       }
@@ -58,12 +60,14 @@ export function createRequirementGroup(
       if (ORTagMap.hasOwnProperty(commentSpan.text())) {
         //detected OR Tag; change section type to OR
         sectionType = SectionType.OR;
-        let credsRange: CreditsRange = processHoursText(
-          currentRow.find("td.hourscol").text()
-        );
-        minCredits = credsRange.numCreditsMin;
-        maxCredits = credsRange.numCreditsMax;
-        if (isNaN(minCredits) && isNaN(maxCredits)) {
+        if (currentRow.find("td.hourscol").length !== 0) {
+          let credsRange: CreditsRange = processHoursText(
+            currentRow.find("td.hourscol").text()
+          );
+
+          minCredits = credsRange.numCreditsMin;
+          maxCredits = credsRange.numCreditsMax;
+        } else {
           let cred = ORTagMap[commentSpan.text()];
           minCredits = cred;
           maxCredits = cred;
@@ -72,13 +76,15 @@ export function createRequirementGroup(
       } else if (RANGETagMap.hasOwnProperty(commentSpan.text())) {
         //detected Range Tag; change section type to Range
         sectionType = SectionType.RANGE;
-        let credsRange: CreditsRange = processHoursText(
-          currentRow.find("td.hourscol").text()
-        );
-        minCredits = credsRange.numCreditsMin;
-        maxCredits = credsRange.numCreditsMax;
-        if (isNaN(minCredits) && isNaN(maxCredits)) {
-          let cred = RANGETagMap[commentSpan.text()];
+        if (currentRow.find("td.hourscol").length !== 0) {
+          let credsRange: CreditsRange = processHoursText(
+            currentRow.find("td.hourscol").text()
+          );
+
+          minCredits = credsRange.numCreditsMin;
+          maxCredits = credsRange.numCreditsMax;
+        } else {
+          let cred = ORTagMap[commentSpan.text()];
           minCredits = cred;
           maxCredits = cred;
         }
@@ -91,7 +97,8 @@ export function createRequirementGroup(
             .includes(item)
         )
       ) {
-        //detected Range Tag; change section type to Range
+        //detected a subject that has a boundless Range (no specified min or max course number) within the
+        //comment
         sectionType = SectionType.RANGE;
         let credsRange: CreditsRange = processHoursText(
           currentRow.find("td.hourscol").text()
@@ -106,8 +113,7 @@ export function createRequirementGroup(
   // convert the sectionType to a number.
   switch (+sectionType) {
     case SectionType.AND:
-      let x = processAndSection($, rows, subheader);
-      return x;
+      return processAndSection($, rows, subheader);
     case SectionType.OR:
       return processOrSection($, rows, minCredits, maxCredits, subheader);
     case SectionType.RANGE:
@@ -135,7 +141,6 @@ function processAndSection(
   let subHeaders: boolean = containsSubHeaders($, rows);
   //todo: probably won't actually show up anywhere, but if there's rows above the subheader, might not be processed correctly.
   if (subHeaders && is_subheader) {
-    //// THIS MIGHT BE AN ISSUE FOR THE DESIGN MAJORS //////////////
     //Need to accumlate rows between the sub headers and process them as a single requirement.
     let subHeaderRows: CheerioElement[] = [];
     for (let i = 0; i < rows.length; i++) {
