@@ -240,10 +240,9 @@ function parseCourseRangeFromSubHeader(
   for (let i = 0; i < subHeaderRows.length; i++) {
     let row: CheerioElement = subHeaderRows[i];
     //process row as an indivdual requirement and push to andCourse.courses
-    let requirement: ISubjectRange | undefined = parseSubjectRangeRow($, row);
-    if (requirement) {
-      courseRange.ranges.push(requirement);
-    }
+
+    let requirements: Array<ISubjectRange> = parseSubjectRangeRow($, row);
+    courseRange.ranges = courseRange.ranges.concat(requirements);
   }
 
   if (courseRange.ranges.length > 0) {
@@ -388,10 +387,8 @@ function parseCourseRangeFromIndentBlock(
   for (let i = 0; i < subHeaderRows.length; i++) {
     let row: CheerioElement = subHeaderRows[i];
     //process row as an indivdual requirement and push to andCourse.courses
-    let requirement: ISubjectRange | undefined = parseSubjectRangeRow($, row);
-    if (requirement) {
-      courseRange.ranges.push(requirement);
-    }
+    let requirements: Array<ISubjectRange> = parseSubjectRangeRow($, row);
+    courseRange.ranges = courseRange.ranges.concat(requirements);
   }
 
   return courseRange;
