@@ -69,40 +69,14 @@ interface SidebarClassBlockProps {
   completed: boolean;
 }
 
-interface SidebarClassBlockState {
-  hovering: boolean;
-}
-
-export class SidebarClassBlock extends React.Component<
-  SidebarClassBlockProps,
-  SidebarClassBlockState
-> {
+export class SidebarClassBlock extends React.Component<SidebarClassBlockProps> {
   constructor(props: SidebarClassBlockProps) {
     super(props);
-
-    this.state = {
-      hovering: false,
-    };
-  }
-
-  handleMouseEnter() {
-    this.setState({
-      hovering: true,
-    });
-  }
-
-  handleMouseLeave() {
-    this.setState({
-      hovering: false,
-    });
   }
 
   renderBody(provided: DraggableProvided) {
     return (
-      <div
-        onMouseEnter={this.handleMouseEnter.bind(this)}
-        onMouseLeave={this.handleMouseLeave.bind(this)}
-      >
+      <div>
         <Block
           {...provided.draggableProps}
           {...provided.dragHandleProps}

@@ -253,8 +253,6 @@ export class RequirementSection extends React.Component<
             req.courses[0] as IRequiredCourse,
             req.courses[1] as IRequiredCourse
           )}
-          {/* <CourseText> and </CourseText>
-          {this.renderCourse(req.courses[1] as IRequiredCourse, true, false)} */}
         </CourseAndLabWrapper>
       );
     }
@@ -302,11 +300,9 @@ export class RequirementSection extends React.Component<
   }
 
   /**
-   * Renders the given course as a sidebar course.
+   * Renders the given course as a draggable SidebarClassBlock.
    * @param course the given IRequiredCourse
-   * @param noMargin determines if this sidebar course should have a margin or not
-   * @param addButton determines if this sidebar course should have a SidebarAddButton
-   * @param andCourse true if the given course is an and course
+   * @param andCourse? only received by this function if the given course is an and course
    */
   renderCourse(course: IRequiredCourse, andCourse?: IRequiredCourse) {
     const convertedCourse: DNDScheduleCourse = this.state.classData[
@@ -359,26 +355,6 @@ export class RequirementSection extends React.Component<
         );
       }
     }
-
-    // return (
-    //   <CourseWrapper key={course.subject + course.classId + course.type}>
-    //     {addButton && andCourse && (
-    //       <SidebarAddButton
-    //         onClick={() => this.showModal([course, andCourse])}
-    //       />
-    //     )}
-    //     {addButton && !andCourse && (
-    //       <SidebarAddButton onClick={() => this.showModal([course])} />
-    //     )}
-    //     {noMargin ? (
-    //       <CourseTextNoMargin>
-    //         {course.subject + course.classId}
-    //       </CourseTextNoMargin>
-    //     ) : (
-    //       <CourseText>{course.subject + course.classId}</CourseText>
-    //     )}
-    //   </CourseWrapper>
-    // );
   }
 
   /**

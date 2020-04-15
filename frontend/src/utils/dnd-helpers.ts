@@ -9,6 +9,13 @@ import {
 import { fetchCourse } from "../api";
 import { convertToDNDCourses } from ".";
 
+/**
+ * Utility function to move a DNDCourse between semesters upon a drag movement.
+ * @param schedule the schedule context of the moving course
+ * @param destination the DND object referring to the target semester to be moved to
+ * @param source the DND object referring to the semester the course is being moved from
+ * @param setSchedule function to update the given schedule after operations are performed
+ */
 export function moveCourse(
   schedule: DNDSchedule,
   destination: any,
