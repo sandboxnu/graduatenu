@@ -12,16 +12,13 @@ const Wrapper = styled.div`
   display: flex;
   flex: 1;
   align-items: center;
-  justify-content: center;
+  flex-direction: column;
   height: 100vh;
 `;
 
 const TitleLocation = styled.div`
-  margin: auto;
-  position: absolute;
+  margin-top: 96px;
   width: 256;
-  height: 28px;
-  top: 96px;
   font-family: .Helvetica Neue DeskInterface;
   font-style: normal;
   font-weight: bold;
@@ -32,7 +29,6 @@ const TitleLocation = styled.div`
 
 const Box = styled.div`
   border: 1px solid white;
-  height: 350px;
   width: 500px;
   align-items: center;
   display: flex;
@@ -41,11 +37,12 @@ const Box = styled.div`
 
 const DotWrapper = styled.div`
   display: flex;
-  position: absolute;
   width: 256;
   height: 11px;
-  top: 130px;
+  margin-top: 6px;
+  margin-bottom: 34px;
 `;
+
 const useStyles = makeStyles({
   root: {
     height: 15,
