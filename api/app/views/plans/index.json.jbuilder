@@ -1,3 +1,3 @@
-json.user do |json|
-  json.partial! 'plans/plan', plan: @plan
+json.array! @plans do |plan|
+  json.partial! 'plans/plan', plan: plan
 end

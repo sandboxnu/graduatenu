@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     devise_for :users, controllers: { sessions: :sessions }, path_names: { sign_in: :login }
 
     resource :user, only: [:show, :update]
-
-    resource :plan, only: [:create, :delete, :update, :show, :index]
+      #resource :plan, only: [:create, :delete, :update, :show, :index]
+    resources :plans
   end
 end
