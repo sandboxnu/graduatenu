@@ -1,7 +1,7 @@
 class PlansController < ApplicationController
 
   before_action :set_user
-  before_action :set_user_plan, only: [:update, :destroy]
+  before_action :set_user_plan, only: [:show, :update, :destroy]
 
   #returns all the plans
   def index
@@ -80,12 +80,12 @@ class PlansController < ApplicationController
 
   #sets the current user
   def set_user
-    @user = User.find(@current_user_id)
+    @user = User.find(@current_user_id) #add error handling, when @current_user_id does not exist
   end
 
   #sets the plan for the current user
   def set_user_plan
-    @plan = Plan.find_by(id: params[:id], user_id: @current_user_id)
+    @plan = Plan.find_by(id: params[:id], user_id: params[:user_id]) # add error handling, when @current_user_id does not exist
   end
 
   def authorized
