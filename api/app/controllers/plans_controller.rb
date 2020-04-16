@@ -8,10 +8,11 @@ class PlansController < ApplicationController
     @plans = Plan.where(user_id: @current_user_id)
   end
 
-  #shows a
+  # shows a
   # handled by before action
   def show
     if @plan
+      
       render :show
     else
       render json: {error: "No such plan."}, status: :unprocessable_entity
@@ -20,23 +21,14 @@ class PlansController < ApplicationController
 
   #creates a plan
   def create
-    @plan = Plan.new(plan_params)
-    @plan.schedule = params[:plan][:schedule]
-    @plan.user_id = @current_user_id
-
-
-    if @plan.save!
+    params_copy = plan_params.clone()
+    params_copy[:user_id] = @current_user_id
+    
+    if @plan = Plan.create!(params_copy)
       render :show
     else
-      render json: {error: "Cannot make Plan."}, status: :unprocessable_entity
+      render json: {error: "Unable to store Plan."}, status: :unprocessable_entity
     end
-    #@user.plans.create!(plan_params)
-    #params_copy = plan_params.clone()
-    #params_copy[:user_id] = @current_user_id
-
-    #params_copy[:schedule] = params[:plan ][:schedule]
-
-    #@plan = Plan.create!(params_copy)
   end
 
   #update a plan
@@ -60,10 +52,7 @@ class PlansController < ApplicationController
 
   #parameters
   def plan_params
-    #params.require(:plan).permit(:name, :link_sharing_enabled).tap do |whitelisted|
-    #  whitelisted[:schedule] = params[:plan][:schedule]
-    #end
-    params.require(:plan).permit(:name, :link_sharing_enabled, :schedule => Hash)
+    params.require(:plan).permit(:name, :link_sharing_enabled, schedule: {}) # (schedule: {}) allows you to store an arbitrary hash with unspecified schema
   end
 
   #sets the current user
