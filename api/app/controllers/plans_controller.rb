@@ -1,50 +1,73 @@
 class PlansController < ApplicationController
 
   before_action :set_user
-  before_action :set_user_plan, only: [:show, :update, :destroy]
+  before_action :set_user_plan, only: [:update, :destroy]
 
   #returns all the plans
   def index
-    @plans = Plan.where(user_id: @current_user_id)
+    if authorized
+      @plans = Plan.where(user_id: params[:user_id])
+    else
+      render json: {error: "Unauthorized."}, status: :unprocessable_entity
+    end
   end
 
   # shows a
   # handled by before action
   def show
-    if @plan
-      
-      render :show
+    if authorized
+      if @plan
+        render :show
+      else
+        render json: {error: "No such plan."}, status: :unprocessable_entity
+      end
     else
-      render json: {error: "No such plan."}, status: :unprocessable_entity
+      if @plan.link_sharing_enabled
+        render :show
+      else
+        render json: {error: "Unauthorized."}, status: :unprocessable_entity
+      end
     end
   end
 
   #creates a plan
   def create
-    params_copy = plan_params.clone()
-    params_copy[:user_id] = @current_user_id
-    
-    if @plan = Plan.create!(params_copy)
-      render :show
+    if authorized
+      params_copy = plan_params.clone()
+      params_copy[:user_id] = @current_user_id
+
+      if @plan = Plan.create!(params_copy)
+        render :show
+      else
+        render json: {error: "Unable to store Plan."}, status: :unprocessable_entity
+      end
     else
-      render json: {error: "Unable to store Plan."}, status: :unprocessable_entity
+      render json: {error: "Unauthorized."}, status: :unprocessable_entity
     end
   end
 
   #update a plan
   def update
-    @plan.update(plan_params) #same body + updated fields in request body
-    render :show
+    if authorized
+      @plan.update(plan_params) #same body + updated fields in request body
+      render :show
+    else
+      render json: {error: "Unauthorized."}, status: :unprocessable_entity
+    end
   end
 
   #finds a plan by id then destroys it
   # #just needs the id in the body
   def destroy
-    if @plan
-      @plan.destroy()
-      render :show
+    if authorized
+      if @plan
+        @plan.destroy()
+        render :show
+      else
+        render json: {error: "No such plan."}, status: :unprocessable_entity
+      end
     else
-      render json: {error: "No such plan."}, status: :unprocessable_entity
+      render json: {error: "Unauthorized."}, status: :unprocessable_entity
     end
   end
 
@@ -63,5 +86,9 @@ class PlansController < ApplicationController
   #sets the plan for the current user
   def set_user_plan
     @plan = Plan.find_by(id: params[:id], user_id: @current_user_id)
+  end
+
+  def authorized
+    @current_user_id == Integer(params[:user_id])
   end
 end
