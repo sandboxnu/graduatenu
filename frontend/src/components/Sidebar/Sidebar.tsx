@@ -1,8 +1,11 @@
 import React from "react";
-import { DNDSchedule, Major } from "../../models/types";
+import { DNDSchedule, Major, IRequiredCourse } from "../../models/types";
 import styled from "styled-components";
 import { RequirementSection } from ".";
-import { produceRequirementGroupWarning } from "../../utils";
+import {
+  produceRequirementGroupWarning,
+  getCompletedCourseStrings,
+} from "../../utils";
 import { AppState } from "../../state/reducers/state";
 import { getScheduleFromState, getMajorFromState } from "../../state";
 import { connect } from "react-redux";
@@ -12,14 +15,14 @@ const Container = styled.div`
   flex-direction: column;
   background: #f2f2f2;
   box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.25);
-  padding: 12px;
+  padding: 21px 12px 12px 10px;
 `;
 
 const MajorTitle = styled.p`
   font-size: 20px;
   font-weight: 600;
   line-height: 24px;
-  margin-right: 48px;
+  margin-right: 12px;
   margin-left: 4px;
   margin-bottom: 12px;
 `;
@@ -39,6 +42,7 @@ const SidebarComponent: React.FC<Props> = ({ schedule, major }) => {
   }
 
   const warnings = produceRequirementGroupWarning(schedule, major);
+  const completedCourses: string[] = getCompletedCourseStrings(schedule);
 
   return (
     <Container>
@@ -49,7 +53,8 @@ const SidebarComponent: React.FC<Props> = ({ schedule, major }) => {
             title={req}
             contents={major.requirementGroupMap[req]}
             warning={warnings.find(w => w.requirementGroup === req)}
-            key={index}
+            key={index + major.name}
+            completedCourses={completedCourses}
           ></RequirementSection>
         );
       })}
