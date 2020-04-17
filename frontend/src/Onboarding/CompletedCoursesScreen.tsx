@@ -11,17 +11,19 @@ import {
 import { getMajorFromState } from "../state";
 import { setCompletedCourses } from "../state/actions/scheduleActions";
 import styled from "styled-components";
-import Checkbox from "@material-ui/core/Checkbox";
 import { fetchCourse } from "../api";
 import { NextButton } from "../components/common/NextButton";
 import { Link, withRouter, RouteComponentProps } from "react-router-dom";
 import { GenericOnboardingTemplate } from "./GenericOnboarding";
-import Paper from "@material-ui/core/Paper";
 import CheckBoxIcon from "@material-ui/icons/CheckBox";
 import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
-import Grid from "@material-ui/core/Grid";
-import { Link as ButtonLink, Button } from "@material-ui/core";
-import Collapse from "@material-ui/core/Collapse";
+import {
+  Link as ButtonLink,
+  Collapse,
+  Grid,
+  Paper,
+  Checkbox,
+} from "@material-ui/core";
 
 const MainTitleText = styled.div`
   font-size: 16px;
