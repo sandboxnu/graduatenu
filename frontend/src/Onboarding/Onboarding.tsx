@@ -132,7 +132,7 @@ class OnboardingComponent extends React.Component<OnboardingProps> {
               personalized plan of study.
             </DescriptionText>
             <Link
-              to={{ pathname: "/name", state: { userData: {} } }}
+              to={{ pathname: "/onboarding", state: { userData: {} } }}
               style={{ textDecoration: "none" }}
             >
               <Button variant="contained" color="secondary">
