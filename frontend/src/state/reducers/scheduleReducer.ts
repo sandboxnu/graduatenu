@@ -1,4 +1,9 @@
-import { DNDSchedule, IWarning, CourseWarning } from "../../models/types";
+import {
+  DNDSchedule,
+  IWarning,
+  CourseWarning,
+  ICompletedCoursesMap,
+} from "../../models/types";
 import { mockData } from "../../data/mockData";
 import produce from "immer";
 import { getType } from "typesafe-actions";
@@ -12,12 +17,17 @@ import {
   setDNDScheduleAction,
   undoRemoveClassAction,
   setCoopCycle,
+  addCompletedCourses,
+  removeCompletedCoursesAction,
+  setCompletedCourses,
+  setCompletedCoursesFromMap,
 } from "../actions/scheduleActions";
 import {
   convertTermIdToSeason,
   convertToDNDSchedule,
   convertToDNDCourses,
   produceWarnings,
+  getNumberOfCompletedCourses,
 } from "../../utils";
 
 export interface ScheduleState {
@@ -32,6 +42,7 @@ export interface ScheduleStateSlice {
   schedule: DNDSchedule;
   warnings: IWarning[];
   courseWarnings: CourseWarning[];
+  completedCourses: ICompletedCoursesMap;
 }
 
 const initialState: ScheduleState = {
@@ -42,6 +53,7 @@ const initialState: ScheduleState = {
     schedule: mockData,
     warnings: [],
     courseWarnings: [],
+    completedCourses: { 0: [], 1: [], 2: [], 3: [] },
   },
 };
 
@@ -179,6 +191,73 @@ export const scheduleReducer = (
         draft.present.warnings = container.normalWarnings;
         draft.present.courseWarnings = container.courseWarnings;
 
+        return draft;
+      }
+      case getType(addCompletedCourses): {
+        const [dndCourses, newCounter] = convertToDNDCourses(
+          action.payload.completedCourses,
+          draft.present.currentClassCounter
+        );
+
+        draft.present.currentClassCounter = newCounter;
+
+        const totalClasses =
+          getNumberOfCompletedCourses(draft.present.completedCourses) +
+          action.payload.completedCourses.length;
+        const maxCoursesPerColumn =
+          totalClasses < 20 ? 5 : totalClasses / 4 + 1;
+
+        for (let i = 0; i < 4; i++) {
+          while (
+            draft.present.completedCourses[i].length < maxCoursesPerColumn
+          ) {
+            if (dndCourses.length === 0) {
+              return draft;
+            }
+            draft.present.completedCourses[i].push(dndCourses.shift()!);
+          }
+        }
+
+        return draft;
+      }
+      case getType(setCompletedCourses): {
+        const [dndCourses, newCounter] = convertToDNDCourses(
+          action.payload.completedCourses,
+          draft.present.currentClassCounter
+        );
+        draft.present.currentClassCounter = newCounter;
+
+        const totalClasses = action.payload.completedCourses.length;
+        const maxCoursesPerColumn =
+          totalClasses < 20 ? 5 : totalClasses / 4 + 1;
+
+        for (let i = 0; i < 4; i++) {
+          // clear array
+          draft.present.completedCourses[i] = [];
+        }
+
+        for (let i = 0; i < 4; i++) {
+          while (
+            draft.present.completedCourses[i].length < maxCoursesPerColumn
+          ) {
+            if (dndCourses.length === 0) {
+              return draft;
+            }
+            draft.present.completedCourses[i].push(dndCourses.shift()!);
+          }
+        }
+        return draft;
+      }
+      case getType(setCompletedCoursesFromMap): {
+        draft.present.completedCourses = action.payload.completedCourses;
+        return draft;
+      }
+      case getType(removeCompletedCoursesAction): {
+        for (let i = 0; i < 4; i++) {
+          draft.present.completedCourses[i] = draft.present.completedCourses[
+            i
+          ].filter(c => c.dndId !== action.payload.completedCourse.dndId);
+        }
         return draft;
       }
     }

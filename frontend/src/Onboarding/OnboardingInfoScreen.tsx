@@ -351,9 +351,9 @@ class OnboardingScreenComponent extends React.Component<
 
           {textFieldStr.length !== 0 && !!year && !!gradYear ? (
             <Link
-              to={{
-                pathname: "/home",
-              }}
+              to={
+                !!this.state.major ? "/completedCourses" : "/home" // change to "/minors" to go to the minors screen
+              }
               onClick={this.onSubmit.bind(this)}
               style={{ textDecoration: "none" }}
             >
