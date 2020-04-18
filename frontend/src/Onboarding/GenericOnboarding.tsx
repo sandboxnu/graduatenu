@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import FiberManualRecordIcon from "@material-ui/icons/FiberManualRecord";
 import { red, green, blue, grey } from "@material-ui/core/colors";
 import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";

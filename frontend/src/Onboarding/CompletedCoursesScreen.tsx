@@ -17,12 +17,15 @@ import { Link, withRouter, RouteComponentProps } from "react-router-dom";
 import { GenericOnboardingTemplate } from "./GenericOnboarding";
 import CheckBoxIcon from "@material-ui/icons/CheckBox";
 import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
+import { AddClassModal } from "../components/AddClassModal";
+import { AddBlock } from "../components/ClassBlocks/AddBlock";
 import {
   Link as ButtonLink,
   Collapse,
   Grid,
   Paper,
   Checkbox,
+  Button,
 } from "@material-ui/core";
 
 const MainTitleText = styled.div`
@@ -82,6 +85,8 @@ type Props = CompletedCoursesScreenProps & RouteComponentProps;
 interface State {
   selectedCourses: ScheduleCourse[];
   expandedSections: Map<String, Boolean>;
+  modalVisible: boolean;
+  otherCourses: IRequiredCourse[][];
 }
 
 class CompletedCoursesComponent extends Component<Props, State> {
@@ -91,11 +96,22 @@ class CompletedCoursesComponent extends Component<Props, State> {
     this.props.major.requirementGroups.forEach(reqGroups =>
       expanded.set(reqGroups, false)
     );
+    expanded.set("Other Courses", true);
 
     this.state = {
       selectedCourses: [],
       expandedSections: expanded,
+      modalVisible: false,
+      otherCourses: [],
     };
+  }
+
+  hideModal() {
+    this.setState({ modalVisible: false });
+  }
+
+  showModal() {
+    this.setState({ modalVisible: true });
   }
 
   onSubmit() {
@@ -181,18 +197,24 @@ class CompletedCoursesComponent extends Component<Props, State> {
     if (reqs.type === "RANGE") {
       return <div key={requirementGroup} />;
     }
-    let allCourse = flatten(reqs.requirements);
+    return (
+      <div key={requirementGroup}>
+        <TitleText>{requirementGroup}</TitleText>
+        {this.renderAllCourses(flatten(reqs.requirements), requirementGroup)}
+      </div>
+    );
+  }
+
+  renderAllCourses(allCourse: IRequiredCourse[][], requirementGroup: string) {
     if (allCourse.length <= 4) {
       return (
-        <div key={requirementGroup}>
-          <TitleText>{requirementGroup}</TitleText>
+        <div key={requirementGroup + " Courses"}>
           {this.parseCourseRequirements(allCourse)}
         </div>
       );
     } else {
       return (
-        <div key={requirementGroup}>
-          <TitleText>{requirementGroup}</TitleText>
+        <div key={requirementGroup + " Courses"}>
           {this.parseCourseRequirements(allCourse.slice(0, 4))}
           <Collapse
             in={!this.state.expandedSections.get(requirementGroup)}
@@ -210,6 +232,29 @@ class CompletedCoursesComponent extends Component<Props, State> {
         </div>
       );
     }
+  }
+
+  addOtherCourses(courses: ScheduleCourse[]) {
+    let reqCourseMap = courses.map((course: ScheduleCourse) => [
+      {
+        type: "COURSE",
+        classId: +course.classId,
+        subject: course.subject,
+      } as IRequiredCourse,
+    ]);
+    this.setState({
+      otherCourses: [...this.state.otherCourses, ...reqCourseMap],
+    });
+  }
+
+  renderOtherCourseSection() {
+    return (
+      <div key="other courses">
+        <TitleText>Other Courses</TitleText>
+        <AddBlock onClick={this.showModal.bind(this)} />
+        {this.renderAllCourses(this.state.otherCourses, "Other Courses")}
+      </div>
+    );
   }
 
   render() {
@@ -237,6 +282,7 @@ class CompletedCoursesComponent extends Component<Props, State> {
               </Paper>
             </Grid>
             <Grid key={1} item>
+              {this.renderOtherCourseSection()}
               <Paper elevation={0} style={{ minWidth: 300, maxWidth: 400 }}>
                 {this.props.major.requirementGroups
                   .slice(split, reqLen)
@@ -245,6 +291,12 @@ class CompletedCoursesComponent extends Component<Props, State> {
             </Grid>
           </Grid>
         </Paper>
+        <AddClassModal
+          schedule={undefined}
+          visible={this.state.modalVisible}
+          handleClose={this.hideModal.bind(this)}
+          handleSubmit={courses => this.addOtherCourses(courses)}
+        ></AddClassModal>
         <Link
           to={"/home"}
           onClick={this.onSubmit.bind(this)}
