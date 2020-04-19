@@ -4,8 +4,10 @@ import {
   IRequiredCourse,
   IOrCourse,
   ISubjectRange,
+  Requirement,
 } from "../../../frontend/src/models/types";
-import { createRequiredCourse } from "../utils/scraper_utils";
+import { createRequiredCourse, isRequirement } from "../utils/scraper_utils";
+import { RANGECourseSet } from "./catalog_scraper";
 
 /**
  * A function that given a row, converts it into a Requirement type.
@@ -15,7 +17,7 @@ import { createRequiredCourse } from "../utils/scraper_utils";
 export function parseRowAsRequirement(
   $: CheerioStatic,
   row: CheerioElement
-): ScraperRequirement | undefined {
+): Requirement | undefined {
   let currentRow: Cheerio = $(row);
   if (currentRow.find("a").length === 0) {
     // the row doesn't have any course information to be parsed in most cases.
@@ -45,8 +47,6 @@ export function parseRowAsRequirement(
       return parseAndRow($, row);
     case RowType.OrRow:
       return parseOrRow($, row);
-    case RowType.SubjectRangeRow:
-      return parseSubjectRangeRow($, row);
     case RowType.RequiredCourseRow:
       return parseRequiredRow($, row);
     default:
@@ -121,6 +121,33 @@ function parseOrRow(
   }
 }
 
+function parseAsFullRange(
+  $: CheerioStatic,
+  row: CheerioElement
+): Array<ISubjectRange> {
+  let currentRow: Cheerio = $(row);
+  let anchors: Cheerio = currentRow.find(".courselistcomment");
+  if (anchors.length == 0) {
+    return [];
+  }
+  let ranges: Array<ISubjectRange> = [];
+  let possibleKeys: Array<string> = anchors
+    .text()
+    .split(String.fromCharCode(32));
+  RANGECourseSet.filter(value => possibleKeys.includes(value)).forEach(
+    (subject: string) => {
+      //Potentially add a check to ensure that the subject keywords are followed by "course" or "elective", but unsure
+      let courseRange: ISubjectRange = {
+        subject: subject,
+        idRangeStart: 0,
+        idRangeEnd: 9999,
+      };
+      ranges.push(courseRange);
+    }
+  );
+  return ranges;
+}
+
 /**
  * A function that given a row, converts it into an ISubjectRange Requirement type.
  * @param $ the selector function used to query the DOM.
@@ -129,19 +156,26 @@ function parseOrRow(
 export function parseSubjectRangeRow(
   $: CheerioStatic,
   row: CheerioElement
-): ISubjectRange | undefined {
+): Array<ISubjectRange> {
   let currentRow: Cheerio = $(row);
-  let anchors: Cheerio = currentRow.find("span.courselistcomment a");
+  let anchors: Cheerio = currentRow.find(".courselistcomment.commentindent");
+
   if (anchors.length == 0) {
-    return;
+    return parseAsFullRange($, row);
   }
 
   //the length should be === 2.
   let anchorsArray: CheerioElement[] = anchors.toArray();
   let lowerAnchor: Cheerio = $(anchorsArray[0]);
-  let splitLowerAnchor: string[] = lowerAnchor
+  let splitByChar: string[] = lowerAnchor
     .text()
     .split(String.fromCharCode(160));
+  let splitLowerAnchor: string[] = [];
+  splitByChar.forEach(element => {
+    splitLowerAnchor = splitLowerAnchor.concat(
+      element.split(String.fromCharCode(32))
+    );
+  });
 
   //first item in the array is the subject
   let subject: string = splitLowerAnchor[0];
@@ -152,16 +186,12 @@ export function parseSubjectRangeRow(
   //default to 9999, if upper bound does not exist.
   let idRangeEnd: number = 9999;
   if (
-    !currentRow
-      .find("span.courselistcomment")
-      .text()
-      .includes("or higher")
+    !splitLowerAnchor.includes("higher") &&
+    !splitLowerAnchor.includes("or")
   ) {
     // upper bound exists, get range end.
-    let upperAnchor: Cheerio = $(anchorsArray[1]);
-    idRangeEnd = parseInt(
-      upperAnchor.text().split(String.fromCharCode(160))[1]
-    );
+    //let upperAnchor: Cheerio = $(anchorsArray[1]);
+    idRangeEnd = parseInt(splitLowerAnchor[4]);
   }
   let courseRange: ISubjectRange = {
     subject: subject,
@@ -169,7 +199,7 @@ export function parseSubjectRangeRow(
     idRangeEnd: idRangeEnd,
   };
 
-  return courseRange;
+  return [courseRange];
 }
 
 /**
@@ -187,13 +217,23 @@ function parseRequiredRow(
 
   //the length should be === 1.
   let loadedAnchor: Cheerio = $(anchorsArray[0]);
-  //length of this array === 2.
-  let splitAnchor: string[] = loadedAnchor
+
+  // split the text by spaces and also char(160) if it is present
+  let splitByChar: string[] = loadedAnchor
     .text()
     .split(String.fromCharCode(160));
+  let splitAnchor: string[] = [];
+  splitByChar.forEach(element => {
+    splitAnchor = splitAnchor.concat(element.split(String.fromCharCode(32)));
+  });
 
   //first item in the array is the subject
+  //This is for the occasional edge case where a course is enlisted under two different subjects
+  // Looks something like ENGL/JWSS 3686
   let subject: string = splitAnchor[0];
+  if (subject.length > 4) {
+    subject = subject.split(String.fromCharCode(47))[0];
+  }
 
   //second item in array is the course number.
   let classId: number = parseInt(splitAnchor[1]);

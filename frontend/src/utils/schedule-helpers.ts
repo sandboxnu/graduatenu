@@ -1,11 +1,13 @@
 import {
   DNDSchedule,
+  DNDScheduleYear,
   DNDScheduleCourse,
   Schedule,
   ScheduleCourse,
   DNDScheduleTerm,
   SeasonWord,
   IWarning,
+  IRequiredCourse,
 } from "../models/types";
 
 export function convertTermIdToSeason(termId: number): SeasonWord {
@@ -117,7 +119,9 @@ export const convertToDNDCourses = (
     counter++;
     list.push({
       ...course,
-      dndId: String(counter),
+      dndId: String(
+        course.subject.toUpperCase() + " " + course.classId + " " + counter
+      ),
     });
   }
   return [list, counter];
@@ -140,4 +144,34 @@ export function scheduleHasClasses(schedule: Schedule): boolean {
     }
   }
   return false;
+}
+
+/**
+ * Returns the course strings of every completed course in the given schedule.
+ * @param schedule the given schedule to parse
+ */
+export function getCompletedCourseStrings(schedule: DNDSchedule): string[] {
+  let fulfilled: string[] = [];
+
+  for (const y of schedule.years) {
+    const year: DNDScheduleYear = schedule.yearMap[y];
+
+    for (const course of year.fall.classes) {
+      fulfilled.push(course.subject + course.classId);
+    }
+
+    for (const course of year.spring.classes) {
+      fulfilled.push(course.subject + course.classId);
+    }
+
+    for (const course of year.summer1.classes) {
+      fulfilled.push(course.subject + course.classId);
+    }
+
+    for (const course of year.summer2.classes) {
+      fulfilled.push(course.subject + course.classId);
+    }
+  }
+
+  return fulfilled;
 }

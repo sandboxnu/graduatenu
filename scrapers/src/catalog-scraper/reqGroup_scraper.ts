@@ -12,7 +12,12 @@ import {
   ISubjectRange,
 } from "../../../frontend/src/models/types";
 import { SectionType, CreditsRange, ScraperRequirement } from "../models/types";
-import { ORTagMap, RANGETagMap } from "./catalog_scraper";
+import {
+  ORTagMap,
+  RANGETagMap,
+  RANGECourseSet,
+  SubheaderTagSet,
+} from "./catalog_scraper";
 import {
   processHoursText,
   findReqGroupName,
@@ -37,6 +42,7 @@ export function createRequirementGroup(
   let sectionType: SectionType = SectionType.AND;
   let minCredits: number = 0;
   let maxCredits: number = 0;
+  let subheader: boolean = false;
 
   //do a pass through the rows to figure out what type of requirment group they represent.
   for (let i = 0; i < rows.length; i++) {
@@ -45,17 +51,53 @@ export function createRequirementGroup(
     let commentSpan: Cheerio = currentRow.find("span.courselistcomment");
     // a courselistcomment is present in this row
     if (commentSpan.length > 0) {
+      // If it is a section where subheaders are parsed as seperate
+      // subcategories (otherwise subheaders will just be ignored)
+      if (SubheaderTagSet.includes(commentSpan.text())) {
+        subheader = true;
+      }
+
       if (ORTagMap.hasOwnProperty(commentSpan.text())) {
         //detected OR Tag; change section type to OR
         sectionType = SectionType.OR;
-        let credsRange: CreditsRange = processHoursText(
-          currentRow.find("td.hourscol").text()
-        );
-        minCredits = credsRange.numCreditsMin;
-        maxCredits = credsRange.numCreditsMax;
+        if (currentRow.find("td.hourscol").text().length !== 0) {
+          let credsRange: CreditsRange = processHoursText(
+            currentRow.find("td.hourscol").text()
+          );
+
+          minCredits = credsRange.numCreditsMin;
+          maxCredits = credsRange.numCreditsMax;
+        } else {
+          let cred = ORTagMap[commentSpan.text()];
+          minCredits = cred;
+          maxCredits = cred;
+        }
         break;
       } else if (RANGETagMap.hasOwnProperty(commentSpan.text())) {
         //detected Range Tag; change section type to Range
+        sectionType = SectionType.RANGE;
+        if (currentRow.find("td.hourscol").text().length !== 0) {
+          let credsRange: CreditsRange = processHoursText(
+            currentRow.find("td.hourscol").text()
+          );
+          minCredits = credsRange.numCreditsMin;
+          maxCredits = credsRange.numCreditsMax;
+        } else {
+          let cred = ORTagMap[commentSpan.text()];
+          minCredits = cred;
+          maxCredits = cred;
+        }
+        break;
+      } else if (
+        RANGECourseSet.some(item =>
+          commentSpan
+            .text()
+            .split(String.fromCharCode(32))
+            .includes(item)
+        )
+      ) {
+        //detected a subject that has a boundless Range (no specified min or max course number) within the
+        //comment
         sectionType = SectionType.RANGE;
         let credsRange: CreditsRange = processHoursText(
           currentRow.find("td.hourscol").text()
@@ -70,9 +112,9 @@ export function createRequirementGroup(
   // convert the sectionType to a number.
   switch (+sectionType) {
     case SectionType.AND:
-      return processAndSection($, rows);
+      return processAndSection($, rows, subheader);
     case SectionType.OR:
-      return processOrSection($, rows, minCredits, maxCredits);
+      return processOrSection($, rows, minCredits, maxCredits, subheader);
     case SectionType.RANGE:
       return processRangeSection($, rows, minCredits, maxCredits);
     default:
@@ -87,7 +129,8 @@ export function createRequirementGroup(
  */
 function processAndSection(
   $: CheerioStatic,
-  rows: CheerioElement[]
+  rows: CheerioElement[],
+  is_subheader: boolean
 ): ANDSection | undefined {
   let andSection: ANDSection = {
     type: "AND",
@@ -96,7 +139,7 @@ function processAndSection(
   };
   let subHeaders: boolean = containsSubHeaders($, rows);
   //todo: probably won't actually show up anywhere, but if there's rows above the subheader, might not be processed correctly.
-  if (subHeaders) {
+  if (subHeaders && is_subheader) {
     //Need to accumlate rows between the sub headers and process them as a single requirement.
     let subHeaderRows: CheerioElement[] = [];
     for (let i = 0; i < rows.length; i++) {
@@ -135,31 +178,21 @@ function processAndSection(
     //can parse the rows as indivdual requirements
     let containsOrRow: boolean = false;
     let reqList: Requirement[] = [];
-    rows.forEach((row: CheerioElement, index: number) => {
-      if (isOrRow($, row)) {
-        //if the row has an or prefix, set the contains flag.
-        containsOrRow = true;
-      }
-      let requirement: ScraperRequirement | undefined = parseRowAsRequirement(
-        $,
-        row
-      );
-      if (requirement) {
-        if (isRequirement(requirement)) {
-          reqList.push(requirement);
+    rows.forEach((row: CheerioElement) => {
+      let requirement: Requirement | undefined = parseRowAsRequirement($, row);
+
+      if (requirement && isRequirement(requirement)) {
+        if (isOrRow($, row)) {
+          let orVal = reqList.pop();
+          if (orVal) {
+            requirement = createIOrCourse(requirement, orVal);
+          }
         }
+        reqList.push(requirement);
       }
     });
 
-    if (containsOrRow) {
-      //we need to do this because of the weird formatting for or classes, where part of the "or chain"
-      //may appear on a separate row. eg: BSCS Advanced writing section.
-      //Note: this may not be generalized enough.
-      //todo: generalize.
-      andSection.requirements.push(createIOrCourse(reqList));
-    } else {
-      andSection.requirements = reqList;
-    }
+    andSection.requirements = reqList;
   }
 
   if (andSection.requirements.length > 0) {
@@ -178,7 +211,8 @@ function processOrSection(
   $: CheerioStatic,
   rows: CheerioElement[],
   minCredits: number,
-  maxCredits: number
+  maxCredits: number,
+  is_subheader: boolean
 ): ORSection | undefined {
   let orSection: ORSection = {
     type: "OR",
@@ -189,7 +223,7 @@ function processOrSection(
   };
   let subHeaders: boolean = containsSubHeaders($, rows);
   //todo: probably won't actually show up anywhere, but if there's rows above the subheader, might not be processed correctly.
-  if (subHeaders) {
+  if (subHeaders && is_subheader) {
     //Need to accumlate rows between the sub headers and process them as a single requirement.
     let subHeaderRows: CheerioElement[] = [];
     for (let i = 0; i < rows.length; i++) {
@@ -226,33 +260,25 @@ function processOrSection(
     }
   } else {
     //can parse the rows as indivdual requirements
-    let containsOrRow: boolean = false;
     let reqList: Requirement[] = [];
-    rows.forEach((row: CheerioElement, index: number) => {
-      if (isOrRow($, row)) {
-        //if the row has an or prefix, set the contains flag.
-        containsOrRow = true;
-      }
+    rows.forEach((row: CheerioElement) => {
       let requirement: ScraperRequirement | undefined = parseRowAsRequirement(
         $,
         row
       );
-      if (requirement) {
-        if (isRequirement(requirement)) {
-          reqList.push(requirement);
+
+      if (requirement && isRequirement(requirement)) {
+        if (isOrRow($, row)) {
+          let orVal = reqList.pop();
+          if (orVal) {
+            requirement = createIOrCourse(requirement, orVal);
+          }
         }
+        reqList.push(requirement);
       }
     });
 
-    if (containsOrRow) {
-      //we need to do this because of the weird formatting for or classes, where part of the "or chain"
-      //may appear on a separate row. eg: BSCS Advanced writing section.
-      //Note: this may not be generalized enough.
-      //todo: generalize.
-      orSection.requirements.push(createIOrCourse(reqList));
-    } else {
-      orSection.requirements = reqList;
-    }
+    orSection.requirements = reqList;
   }
   if (orSection.requirements.length > 0) {
     return orSection;
@@ -292,10 +318,8 @@ function processRangeSection(
   for (let i = 0; i < rows.length; i++) {
     let row: CheerioElement = rows[i];
     //process row as an indivdual requirement and push to andCourse.courses
-    let requirement: ISubjectRange | undefined = parseSubjectRangeRow($, row);
-    if (requirement) {
-      courseRange.ranges.push(requirement);
-    }
+    let requirements: Array<ISubjectRange> = parseSubjectRangeRow($, row);
+    courseRange.ranges = courseRange.ranges.concat(requirements);
   }
 
   if (courseRange.ranges.length > 0) {
