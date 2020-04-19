@@ -19,17 +19,18 @@ class ApplicationController < ActionController::API
 
     #added academic/graduation year
     def configure_permitted_parameters
+
         devise_parameter_sanitizer.permit(:sign_up, keys: [:username, :email, :password, :academic_year, :graduation_year])
         devise_parameter_sanitizer.permit(:account_update, keys: [:email, :password, :password_confirmation, :current_password])
     end
 
     #authenticate  user by checking if incoming request has a valid JWT token
+
     def authenticate_user
         if request.headers['Authorization'].present?
           authenticate_or_request_with_http_token do |token|
             begin
               jwt_payload = JWT.decode(token, Rails.application.secrets.secret_key_base).first
-    
               #remember the currently authenicated users id.
               @current_user_id = jwt_payload['id']
             rescue JWT::ExpiredSignature, JWT::VerificationError, JWT::DecodeError
