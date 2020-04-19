@@ -2,7 +2,7 @@ import {
   DNDSchedule,
   IWarning,
   CourseWarning,
-  ICompletedCoursesMap,
+  ScheduleCourse,
 } from "../../models/types";
 import { mockData } from "../../data/mockData";
 import produce from "immer";
@@ -17,17 +17,15 @@ import {
   setDNDScheduleAction,
   undoRemoveClassAction,
   setCoopCycle,
-  addCompletedCourses,
-  removeCompletedCoursesAction,
   setCompletedCourses,
-  setCompletedCoursesFromMap,
 } from "../actions/scheduleActions";
 import {
   convertTermIdToSeason,
   convertToDNDSchedule,
   convertToDNDCourses,
   produceWarnings,
-  getNumberOfCompletedCourses,
+  divideIntoTerms,
+  sumCreditsFromList,
 } from "../../utils";
 
 export interface ScheduleState {
@@ -42,7 +40,7 @@ export interface ScheduleStateSlice {
   schedule: DNDSchedule;
   warnings: IWarning[];
   courseWarnings: CourseWarning[];
-  completedCourses: ICompletedCoursesMap;
+  creditsTaken: number;
 }
 
 const initialState: ScheduleState = {
@@ -53,7 +51,7 @@ const initialState: ScheduleState = {
     schedule: mockData,
     warnings: [],
     courseWarnings: [],
-    completedCourses: { 0: [], 1: [], 2: [], 3: [] },
+    creditsTaken: 0,
   },
 };
 
@@ -193,71 +191,37 @@ export const scheduleReducer = (
 
         return draft;
       }
-      case getType(addCompletedCourses): {
-        const [dndCourses, newCounter] = convertToDNDCourses(
-          action.payload.completedCourses,
-          draft.present.currentClassCounter
-        );
-
-        draft.present.currentClassCounter = newCounter;
-
-        const totalClasses =
-          getNumberOfCompletedCourses(draft.present.completedCourses) +
-          action.payload.completedCourses.length;
-        const maxCoursesPerColumn =
-          totalClasses < 20 ? 5 : totalClasses / 4 + 1;
-
-        for (let i = 0; i < 4; i++) {
-          while (
-            draft.present.completedCourses[i].length < maxCoursesPerColumn
-          ) {
-            if (dndCourses.length === 0) {
-              return draft;
-            }
-            draft.present.completedCourses[i].push(dndCourses.shift()!);
-          }
-        }
-
-        return draft;
-      }
       case getType(setCompletedCourses): {
         const [dndCourses, newCounter] = convertToDNDCourses(
-          action.payload.completedCourses,
+          // sort the completed courses so that when we add it to the schedule, it'll be more or less in order
+          // for some reason it doesn't register classID as a string so I use toString
+          action.payload.completedCourses.sort(
+            (course1: ScheduleCourse, course2: ScheduleCourse) =>
+              course1.classId
+                .toString()
+                .localeCompare(course2.classId.toString())
+          ),
           draft.present.currentClassCounter
         );
         draft.present.currentClassCounter = newCounter;
-
-        const totalClasses = action.payload.completedCourses.length;
-        const maxCoursesPerColumn =
-          totalClasses < 20 ? 5 : totalClasses / 4 + 1;
-
-        for (let i = 0; i < 4; i++) {
-          // clear array
-          draft.present.completedCourses[i] = [];
-        }
-
-        for (let i = 0; i < 4; i++) {
-          while (
-            draft.present.completedCourses[i].length < maxCoursesPerColumn
-          ) {
-            if (dndCourses.length === 0) {
-              return draft;
-            }
-            draft.present.completedCourses[i].push(dndCourses.shift()!);
+        draft.present.creditsTaken = sumCreditsFromList(dndCourses);
+        let allTerms = divideIntoTerms(dndCourses);
+        for (let i = 0; i < allTerms.length; i++) {
+          let term = allTerms[i];
+          let thisYear = draft.present.schedule.years[Math.floor(i / 2)];
+          // if it's even, add to fall, else spring
+          if (i % 2 == 0) {
+            draft.present.schedule.yearMap[thisYear].fall.classes = term;
+          } else {
+            draft.present.schedule.yearMap[thisYear].spring.classes = term;
           }
         }
-        return draft;
-      }
-      case getType(setCompletedCoursesFromMap): {
-        draft.present.completedCourses = action.payload.completedCourses;
-        return draft;
-      }
-      case getType(removeCompletedCoursesAction): {
-        for (let i = 0; i < 4; i++) {
-          draft.present.completedCourses[i] = draft.present.completedCourses[
-            i
-          ].filter(c => c.dndId !== action.payload.completedCourse.dndId);
-        }
+
+        const schedule = JSON.parse(JSON.stringify(draft.present.schedule));
+        const container = produceWarnings(schedule);
+
+        draft.present.warnings = container.normalWarnings;
+        draft.present.courseWarnings = container.courseWarnings;
         return draft;
       }
     }

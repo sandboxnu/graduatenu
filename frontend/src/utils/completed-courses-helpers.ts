@@ -1,23 +1,19 @@
-import { ICompletedCoursesMap } from "../models/types";
+import { DNDScheduleCourse, DNDSchedule } from "../models/types";
 
-export function sumCreditsFromList(courses: ICompletedCoursesMap): number {
+export function sumCreditsFromList(courses: DNDScheduleCourse[]): number {
   if (!courses) {
     return 0;
   }
 
   let sum = 0;
-  for (let i = 0; i < 4; i++) {
-    for (const course of courses[i]) {
-      sum += course.numCreditsMax;
-    }
+  for (const course of courses) {
+    sum += course.numCreditsMax;
   }
   return sum;
 }
 
-export function getStandingFromCompletedCourses(
-  courses: ICompletedCoursesMap
-): string {
-  const credits = sumCreditsFromList(courses);
+export function getStandingFromCompletedCourses(credits: number): string {
+  //const credits = sumCreditsFromList(courses);
 
   if (credits < 32) {
     return "Freshman";
@@ -31,20 +27,19 @@ export function getStandingFromCompletedCourses(
   return "Senior";
 }
 
-export function getNumberOfCompletedCourses(
-  courses: ICompletedCoursesMap
-): number {
-  if (!courses) {
-    return 0;
+export function divideIntoTerms(courses: DNDScheduleCourse[]) {
+  let creditCount = 0;
+  let allTerms: DNDScheduleCourse[][] = [];
+  let currentTerm: DNDScheduleCourse[] = [];
+  for (let course of courses) {
+    if (creditCount + course.numCreditsMax > 19) {
+      allTerms.push(currentTerm);
+      currentTerm = [];
+      creditCount = 0;
+    }
+    currentTerm.push(course);
+    creditCount += course.numCreditsMax;
   }
-
-  let sum = 0;
-  for (let i = 0; i < 4; i++) {
-    sum += courses[i].length;
-  }
-  return sum;
-}
-
-export function getIndexFromCompletedCoursesDNDID(dndId: string): number {
-  return Number(dndId[dndId.length - 1]);
+  allTerms.push(currentTerm);
+  return allTerms;
 }

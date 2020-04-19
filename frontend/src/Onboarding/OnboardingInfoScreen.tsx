@@ -93,6 +93,8 @@ interface MajorScreenState {
   planStr?: string;
 }
 
+const marginSpace = 12;
+
 type OnboardingScreenState = NameScreenState &
   AcademicYearScreenState &
   GraduationYearScreenState &
@@ -180,7 +182,7 @@ class OnboardingScreenComponent extends React.Component<
   renderMajorDropDown() {
     return (
       <Autocomplete
-        style={{ width: 326, marginTop: 4, marginBottom: 8 }}
+        style={{ width: 326, marginBottom: marginSpace }}
         disableListWrap
         options={this.props.majors.map(maj => maj.name)}
         renderInput={params => (
@@ -210,7 +212,7 @@ class OnboardingScreenComponent extends React.Component<
         onChange={this.onChangeName.bind(this)}
         placeholder="John Smith"
         error={textFieldStr.length === 0 && beenEditedName}
-        style={{ marginTop: 36, marginBottom: 0, minWidth: 326 }}
+        style={{ marginTop: 36, marginBottom: marginSpace, minWidth: 326 }}
         helperText={
           (" H " && (!beenEditedName || textFieldStr.length !== 0)) ||
           (textFieldStr.length === 0 &&
@@ -229,7 +231,7 @@ class OnboardingScreenComponent extends React.Component<
       <FormControl variant="outlined" error={!year && beenEditedYear}>
         <InputLabel
           id="demo-simple-select-outlined-label"
-          style={{ marginTop: 4 }}
+          style={{ marginBottom: marginSpace }}
         >
           Academic Year
         </InputLabel>
@@ -238,7 +240,7 @@ class OnboardingScreenComponent extends React.Component<
           id="demo-simple-select-outlined"
           value={year}
           onChange={this.onChangeYear.bind(this)}
-          style={{ marginTop: 4, minWidth: 326 }}
+          style={{ marginBottom: marginSpace, minWidth: 326 }}
           labelWidth={110}
         >
           <MenuItem value={1}>1st Year</MenuItem>
@@ -262,7 +264,7 @@ class OnboardingScreenComponent extends React.Component<
       <FormControl variant="outlined" error={!gradYear && beenEditedGrad}>
         <InputLabel
           id="demo-simple-select-outlined-label"
-          style={{ marginTop: 4 }}
+          style={{ marginBottom: marginSpace }}
         >
           Graduation Year
         </InputLabel>
@@ -271,7 +273,7 @@ class OnboardingScreenComponent extends React.Component<
           id="demo-simple-select-outlined"
           value={gradYear}
           onChange={this.onChangeGradYear.bind(this)}
-          style={{ marginTop: 4, minWidth: 326 }}
+          style={{ marginBottom: marginSpace, minWidth: 326 }}
           labelWidth={115}
         >
           <MenuItem value={2019}>2019</MenuItem>
@@ -295,7 +297,7 @@ class OnboardingScreenComponent extends React.Component<
   renderCoopCycleDropDown() {
     return (
       <Autocomplete
-        style={{ width: 326, marginTop: 12, marginBottom: 8 }}
+        style={{ width: 326, marginBottom: marginSpace }}
         disableListWrap
         options={this.props.plans[this.state.major!.name].map(p =>
           planToString(p)
