@@ -32,7 +32,7 @@ export function divideIntoTerms(courses: DNDScheduleCourse[]) {
   let allTerms: DNDScheduleCourse[][] = [];
   let currentTerm: DNDScheduleCourse[] = [];
   for (let course of courses) {
-    if (creditCount + course.numCreditsMax > 19) {
+    if (creditCount + course.numCreditsMax > 18) {
       allTerms.push(currentTerm);
       currentTerm = [];
       creditCount = 0;
