@@ -56,6 +56,11 @@ const CourseText = styled.p`
   font-weight: 400;
 `;
 
+/**
+ * Flattens the Requirement[] into only a list of Requirements/Requirement sets
+ * This means that all inner lists will only contain one class or a list of the primary class and its labs/recitations
+ * @param reqs
+ */
 function flatten(reqs: Requirement[]): IRequiredCourse[][] {
   return reqs.map(flattenOne).reduce((array, cur) => array.concat(cur), []);
 }
@@ -142,6 +147,7 @@ class CompletedCoursesComponent extends Component<Props, State> {
     }
   }
 
+  // changes the expanding state of the specific section
   onExpand(requirementGroup: string, change: Boolean) {
     this.state.expandedSections.set(requirementGroup, change);
     this.setState({
@@ -149,6 +155,7 @@ class CompletedCoursesComponent extends Component<Props, State> {
     });
   }
 
+  // renders the link for show more or show less for the specific requirementGroup, depending on the boolean
   renderShowLink(requirementGroup: string, more: boolean) {
     let variable = more ? "more" : "less";
     return (
@@ -165,6 +172,7 @@ class CompletedCoursesComponent extends Component<Props, State> {
     );
   }
 
+  // Renders one course/courseset (if it contains labs/recitiations, and seperated)
   renderCourse(courses: IRequiredCourse[]) {
     let allCourse = courses.map(course => course.subject + course.classId);
     return (
@@ -182,12 +190,15 @@ class CompletedCoursesComponent extends Component<Props, State> {
     );
   }
 
+  // Renders all course requirements in the list
   parseCourseRequirements(reqs: IRequiredCourse[][]) {
     return reqs.map((r: IRequiredCourse[], index: number) => (
       <div key={index}>{this.renderCourse(r)}</div>
     ));
   }
 
+  // renders an entire requirement section if it has specific classes specified
+  // with the title of the section
   renderSection(requirementGroup: string) {
     const reqs = this.props.major.requirementGroupMap[requirementGroup];
     if (!reqs) {
@@ -205,6 +216,7 @@ class CompletedCoursesComponent extends Component<Props, State> {
     );
   }
 
+  // Renders the courses as either collpasable if it is less than 4 or a standard list of classes
   renderAllCourses(allCourse: IRequiredCourse[][], requirementGroup: string) {
     if (allCourse.length <= 4) {
       return (
@@ -234,6 +246,8 @@ class CompletedCoursesComponent extends Component<Props, State> {
     }
   }
 
+  // Adds the "other courses" to the state in the form of a IRequiredCourse[][] so that they can be
+  // processed by renderAllCourses
   addOtherCourses(courses: ScheduleCourse[]) {
     let reqCourseMap = courses.map((course: ScheduleCourse) => [
       {
@@ -247,6 +261,8 @@ class CompletedCoursesComponent extends Component<Props, State> {
     });
   }
 
+  // renders the "Other Course" section with a button to display the add coursese modal and
+  // displays all already added courses under the button.
   renderOtherCourseSection() {
     return (
       <div key="other courses">
@@ -275,7 +291,7 @@ class CompletedCoursesComponent extends Component<Props, State> {
         >
           <Grid container justify="space-evenly">
             <Grid key={0} item>
-              <Paper elevation={0} style={{ minWidth: 300, maxWidth: 400 }}>
+              <Paper elevation={0} style={{ minWidth: 350, maxWidth: 400 }}>
                 {this.props.major.requirementGroups
                   .slice(0, split)
                   .map(r => this.renderSection(r))}
@@ -283,7 +299,7 @@ class CompletedCoursesComponent extends Component<Props, State> {
             </Grid>
             <Grid key={1} item>
               {this.renderOtherCourseSection()}
-              <Paper elevation={0} style={{ minWidth: 300, maxWidth: 400 }}>
+              <Paper elevation={0} style={{ minWidth: 350, maxWidth: 400 }}>
                 {this.props.major.requirementGroups
                   .slice(split, reqLen)
                   .map(r => this.renderSection(r))}

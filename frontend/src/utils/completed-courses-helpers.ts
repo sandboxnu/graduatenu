@@ -27,6 +27,10 @@ export function getStandingFromCompletedCourses(credits: number): string {
   return "Senior";
 }
 
+/**
+ * Divides the Courses into the a list containing the approximate courses that
+ * they should be able to take in one term (less than 19)
+ */
 export function divideIntoTerms(courses: DNDScheduleCourse[]) {
   let creditCount = 0;
   let allTerms: DNDScheduleCourse[][] = [];
