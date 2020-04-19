@@ -201,6 +201,25 @@ export interface RANGESection {
   name: string;
 }
 
+export interface ScheduleSlice {
+  currentClassCounter: number;
+  isScheduleLoading: boolean; // not used right now
+  scheduleError: string; // not used right now
+  schedule: DNDSchedule;
+  warnings: IWarning[];
+  courseWarnings: CourseWarning[];
+}
+
+export interface PastPresentSchedule {
+  past?: ScheduleSlice;
+  present: ScheduleSlice;
+}
+
+export interface NamedSchedule {
+  name: string;
+  schedule: PastPresentSchedule;
+}
+
 /**
  * A Schedule
  * @param years a list of the years of this object

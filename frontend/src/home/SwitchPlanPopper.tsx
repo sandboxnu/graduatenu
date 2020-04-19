@@ -1,23 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import { MenuItem, Menu } from "@material-ui/core";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import styled from "styled-components";
-// import { connect } from "react-redux";
-// import { AppState } from "../state/reducers/state";
-// import { Dispatch } from "redux";
-// import {
-//   getScheduleFromState,
-//   getPlanStrFromState,
-//   getMajorFromState,
-// } from "../state";
-// import {
-//   setScheduleAction,
-//   setCoopCycle,
-// } from "../state/actions/scheduleActions";
-// import { setMajorAction } from "../state/actions/userActions";
-// import { getMajors, getPlans } from "../state";
-// import { DNDSchedule, Major, Schedule } from "../models/types";
+import { connect } from "react-redux";
+import { AppState } from "../state/reducers/state";
+import { Dispatch } from "redux";
+import { getSchedulesFromState, getActiveScheduleFromState } from "../state";
+import {
+  setActiveScheduleAction,
+  removeScheduleAction,
+  addScheduleAction,
+} from "../state/actions/schedulesActions";
+import { NamedSchedule, PastPresentSchedule } from "../models/types";
 
 const SwitchPlanContainer = styled.div`
   display: flex;
@@ -31,118 +26,125 @@ const SwitchPlanMenu = styled(Menu)`
   margin-left: 20px;
 `;
 
-// interface ReduxStoreEditPlanProps {
-//   schedule: DNDSchedule;
-//   major?: Major;
-//   planStr?: string;
-//   majors: Major[];
-//   plans: Record<string, Schedule[]>;
-// }
+interface ReduxStoreSwitchSchedulesProps {
+  activeSchedule: NamedSchedule;
+  schedules: NamedSchedule[];
+}
 
-// interface ReduxDispatchEditPlanProps {
-//   setCoopCycle: (schedule?: Schedule) => void;
-//   setSchedule: (schedule: Schedule) => void;
-//   setMajor: (major?: Major) => void;
-// }
+interface ReduxDispatchSwitchSchedulesProps {
+  setActiveSchedule: (activeSchedule: number) => void;
+  addSchedule: (name: string, schedule: PastPresentSchedule) => void;
+  removeSchedule: (name: string, schedule: PastPresentSchedule) => void;
+}
 
-// type Props = ReduxStoreEditPlanProps & ReduxDispatchEditPlanProps;
+type Props = ReduxStoreSwitchSchedulesProps & ReduxDispatchSwitchSchedulesProps;
 
-// Plan dummy data
-const plans = [
-  {
-    id: 1,
-    name: "Primary Plan",
-    value: "primary_plan",
-  },
-  {
-    id: 2,
-    name: "Secondary Plan",
-    value: "secondary_plan",
-  },
-  {
-    id: 3,
-    name: "Tertiary Plan",
-    value: "tertiary_plan",
-  },
-];
+interface SwitchSchedulePopperState {
+  anchorEl: null | HTMLElement;
+}
 
-export const SwitchPlanPopper = () => {
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const [plan, setPlan] = useState("Primary Plan");
+export class SwitchPlanPopperComponent extends React.Component<
+  Props,
+  SwitchSchedulePopperState
+> {
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      anchorEl: null,
+    };
+  }
 
   /**
    * Toggles opening the SwitchPlanPopper when the plan name is clicked.
    * @param event mouse event trigger
    */
-  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
+  handleClick(event: React.MouseEvent<HTMLElement>) {
+    if (this.state.anchorEl === null) {
+      this.setState({
+        anchorEl: event.currentTarget,
+      });
+    } else {
+      this.setState({
+        anchorEl: null,
+      });
+    }
+  }
 
   /**
-   * Updates this user's plan based on the plan selected in the dropdown.
+   * Updates this user's active schedule based on the schedule selected in the dropdown.
    */
-  const onChoosePlan = (value: string) => {
-    setPlan(value);
-    setAnchorEl(null);
-  };
+  onChoosePlan(value: string) {
+    const newSchedule = this.props.schedules.find(s => s.name === value);
+    if (newSchedule) {
+      const newActive = this.props.schedules.indexOf(newSchedule);
+      this.props.setActiveSchedule(newActive);
+      this.setState({
+        anchorEl: null,
+      });
+    }
+  }
 
   /**
    * Enables hiding the popper by clicking anywhere else on the screen.
    */
-  const handleClickAway = () => {
-    setAnchorEl(null);
-  };
+  handleClickAway() {
+    this.setState({
+      anchorEl: null,
+    });
+  }
 
-  return (
-    <div>
-      <SwitchPlanContainer onClick={event => handleClick(event)}>
-        <h2>{`- ${plan}`}</h2>
-        {Boolean(anchorEl) ? (
-          <KeyboardArrowUpIcon />
-        ) : (
-          <KeyboardArrowDownIcon />
-        )}
-      </SwitchPlanContainer>
-      <SwitchPlanMenu
-        id={"simple-popper"}
-        open={Boolean(anchorEl)}
-        anchorEl={anchorEl}
-        onClose={handleClickAway}
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "left",
-        }}
-      >
-        {plans.map(plan => (
-          <MenuItem onClick={() => onChoosePlan(plan.name)} key={plan.value}>
-            {plan.name}
-          </MenuItem>
-        ))}
-      </SwitchPlanMenu>
-    </div>
-  );
-};
+  render() {
+    return (
+      <div>
+        <SwitchPlanContainer onClick={event => this.handleClick(event)}>
+          <h2>{`- ${this.props.activeSchedule.name}`}</h2>
+          {Boolean(this.state.anchorEl) ? (
+            <KeyboardArrowUpIcon />
+          ) : (
+            <KeyboardArrowDownIcon />
+          )}
+        </SwitchPlanContainer>
+        <SwitchPlanMenu
+          id={"simple-popper"}
+          open={Boolean(this.state.anchorEl)}
+          anchorEl={this.state.anchorEl}
+          onClose={this.handleClickAway}
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "left",
+          }}
+        >
+          {this.props.schedules.map(s => (
+            <MenuItem onClick={() => this.onChoosePlan(s.name)} key={s.name}>
+              {s.name}
+            </MenuItem>
+          ))}
+        </SwitchPlanMenu>
+      </div>
+    );
+  }
+}
 
-// const mapStateToProps = (state: AppState) => ({
-//   schedule: getScheduleFromState(state),
-//   planStr: getPlanStrFromState(state),
-//   major: getMajorFromState(state),
-//   majors: getMajors(state),
-//   plans: getPlans(state),
-// });
+const mapStateToProps = (state: AppState) => ({
+  activeSchedule: getActiveScheduleFromState(state),
+  schedules: getSchedulesFromState(state),
+});
 
-// const mapDispatchToProps = (dispatch: Dispatch) => ({
-//   setCoopCycle: (schedule?: Schedule) => dispatch(setCoopCycle(schedule)),
-//   setSchedule: (schedule: Schedule) => dispatch(setScheduleAction(schedule)),
-//   setMajor: (major?: Major) => dispatch(setMajorAction(major)),
-// });
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  setActiveSchedule: (activeSchedule: number) =>
+    dispatch(setActiveScheduleAction(activeSchedule)),
+  addSchedule: (name: string, schedule: PastPresentSchedule) =>
+    dispatch(addScheduleAction(schedule, name)),
+  removeSchedule: (name: string, schedule: PastPresentSchedule) =>
+    dispatch(removeScheduleAction(schedule, name)),
+});
 
-// export const SwitchPlanPopper = connect<
-//   ReduxStoreEditPlanProps,
-//   ReduxDispatchEditPlanProps,
-//   {},
-//   AppState
-// >(
-//   mapStateToProps,
-//   mapDispatchToProps
-// )(SwitchPlanPopperComponent);
+export const SwitchPlanPopper = connect<
+  ReduxStoreSwitchSchedulesProps,
+  ReduxDispatchSwitchSchedulesProps,
+  {},
+  AppState
+>(
+  mapStateToProps,
+  mapDispatchToProps
+)(SwitchPlanPopperComponent);

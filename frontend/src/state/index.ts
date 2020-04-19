@@ -6,6 +6,7 @@ import {
   IWarning,
   DNDScheduleTerm,
   Schedule,
+  NamedSchedule,
 } from "../models/types";
 
 /**
@@ -99,3 +100,19 @@ export const getCourseWarningsFromState = (
   state.schedule.present.courseWarnings.filter(
     w => w.termId === semester.termId
   );
+
+/**
+ * Get the list of schedule names from the AppState
+ * @param state the AppState
+ */
+export const getSchedulesFromState = (state: AppState): NamedSchedule[] =>
+  state.schedules.schedules;
+
+/**
+ * Get the active schedule from the AppState
+ * @param state the AppState
+ */
+export const getActiveScheduleFromState = (state: AppState): NamedSchedule => {
+  console.log(state);
+  return state.schedules.schedules[state.schedules.activeSchedule];
+};
