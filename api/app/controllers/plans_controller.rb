@@ -49,8 +49,12 @@ class PlansController < ApplicationController
   #update a plan
   def update
     if authorized
-      @plan.update(plan_params) #same body + updated fields in request body
-      render :show
+      if @plan
+        @plan.update(plan_params) #same body + updated fields in request body
+        render :show
+      else
+        render json: {error: "No such plan."}, status: :unprocessable_entity
+      end
     else
       render json: {error: "Unauthorized."}, status: :unprocessable_entity
     end
@@ -80,7 +84,11 @@ class PlansController < ApplicationController
 
   #sets the current user
   def set_user
-    @user = User.find(@current_user_id) #add error handling, when @current_user_id does not exist
+    if signed_in?
+      @user = User.find(@current_user_id) #add error handling, when @current_user_id does not exist
+    else
+      render json: {error: "Unauthorized."}, status: :unprocessable_entity
+    end
   end
 
   #sets the plan for the current user
