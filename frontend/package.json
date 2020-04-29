@@ -31,7 +31,8 @@
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.3.0",
     "styled-components": "^4.4.0",
-    "typesafe-actions": "^5.1.0"
+    "typesafe-actions": "^5.1.0",
+    "xlsx": "^0.15.6"
   },
   "devDependencies": {
     "@types/jest": "^24.0.18",
