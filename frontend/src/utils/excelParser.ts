@@ -9,32 +9,6 @@ import {
     StatusEnum
 } from "../models/types";
 
-// Fall Columns
-const FALL_COURSE_ID_COLUMN: String = 'G'
-const FALL_COURSE_NAME_COLUMN: String = 'H'
-const FALL_CREDIT_NUM_COLUMN: String = 'I'
-
-// Spring Columns
-const SPRING_COURSE_ID_COLUMN: String = 'J'
-const SPRING_COURSE_NAME_COLUMN: String = 'K'
-const SPRING_CREDIT_NUM_COLUMN: String = 'L'
-
-// Summer 1 Columns
-const SUMMER1_COURSE_ID_COLUMN: String = 'M'
-const SUMMER1_COURSE_NAME_COLUMN: String = 'N'
-const SUMMER1_CREDIT_NUM_COLUMN: String = 'O'
-
-// Summer 2 Columns
-const SUMMER2_COURSE_ID_COLUMN: String = 'P'
-const SUMMER2_COURSE_NAME_COLUMN: String = 'Q'
-const SUMMER2_CREDIT_NUM_COLUMN: String = 'R'
-
-// Planned Hours Cell
-const YEAR_COLUMN = 'D';
-
-// Start row
-const STARTING_ROW = 12
-
 const BASE_YEAR: number = 1000;
 
 
@@ -55,13 +29,23 @@ export function ExcelToSchedule(file : File) {
 function parseExcel(worksheet : XLSX.WorkSheet) {
     let startCellIdx = getStartCellIndex(worksheet);
     console.log(startCellIdx);
+    console.log(startCellIdx.length)
+    if (startCellIdx.length < 2) {
+        throw "Parsing Error";
+    }
 
-    let fall = parseColumn(worksheet, SeasonEnum.FL, FALL_COURSE_ID_COLUMN, FALL_COURSE_NAME_COLUMN, FALL_CREDIT_NUM_COLUMN);
-    let spring = parseColumn(worksheet, SeasonEnum.SP, SPRING_COURSE_ID_COLUMN, SPRING_COURSE_NAME_COLUMN, SPRING_CREDIT_NUM_COLUMN);
-    let summerOne = parseColumn(worksheet, SeasonEnum.S1, SUMMER1_COURSE_ID_COLUMN, SUMMER1_COURSE_NAME_COLUMN, SUMMER1_CREDIT_NUM_COLUMN);
-    let summerTwo = parseColumn(worksheet, SeasonEnum.S2, SUMMER2_COURSE_ID_COLUMN, SUMMER2_COURSE_NAME_COLUMN, SUMMER2_CREDIT_NUM_COLUMN);
+    let column: string = startCellIdx.charAt(0).toUpperCase();
+
+    let fall = parseColumn(worksheet, SeasonEnum.FL, getIncrementedChar(column, 3), getIncrementedChar(column, 4), getIncrementedChar(column, 5), startCellIdx);
+    let spring = parseColumn(worksheet, SeasonEnum.SP, getIncrementedChar(column, 6), getIncrementedChar(column, 7), getIncrementedChar(column, 8), startCellIdx);
+    let summerOne = parseColumn(worksheet, SeasonEnum.S1, getIncrementedChar(column, 9), getIncrementedChar(column, 10), getIncrementedChar(column, 11), startCellIdx);
+    let summerTwo = parseColumn(worksheet, SeasonEnum.S2, getIncrementedChar(column, 12), getIncrementedChar(column, 13), getIncrementedChar(column, 14), startCellIdx);
     const schedule: Schedule = createSchedule(fall, spring, summerOne, summerTwo);
     console.log(schedule);
+}
+
+function getIncrementedChar(c: string, num: number): string {
+    return String.fromCharCode(c.charCodeAt(0) + num);
 }
 
 function getStartCellIndex(worksheet: XLSX.WorkSheet): string {
@@ -116,12 +100,14 @@ function createYears(fall: ScheduleTerm[], spring: ScheduleTerm[], summerOne: Sc
 function parseColumn(
     worksheet: XLSX.WorkSheet,
     season: SeasonEnum,
-    classIdColumn: String, 
-    classNameColumn: String, 
-    classCreditColumn: String
+    classIdColumn: string, 
+    classNameColumn: string, 
+    classCreditColumn: string,
+    startCellIdx: string
     ): ScheduleTerm[] {
 
-    let currentRowNumber = STARTING_ROW;
+    let currentRowNumber: number = parseInt(startCellIdx.substring(1)) + 2;
+    const YEAR_COLUMN = startCellIdx.charAt(0);
     // ClassId
     let classIdCell;
     let classIdSubject: string;
@@ -132,7 +118,7 @@ function parseColumn(
     let classCreditCell;
     let classCredit: string;
     //Year
-    let yearCell;;
+    let yearCell;
     let year: string;
 
     let currentYear = BASE_YEAR;
@@ -171,7 +157,11 @@ function parseColumn(
             currentScheduleTerm = generateNewScheduleTerm(season, currentYear);
         }
         
-        if (classIdSubject.length > 0 && !classIdSubject.includes("SEMESTER")) {
+        if (classIdSubject.length > 0 
+            && !classIdSubject.includes("SEMESTER")
+            && !classIdSubject.includes("FALL ")
+            && !classIdSubject.includes("SPRING ")
+            && !classIdSubject.includes("SUMMER ")) {
             if (classIdSubject == 'CO-OP') {
                 isCoop = true
             } else {
