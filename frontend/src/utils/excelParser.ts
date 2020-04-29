@@ -1,5 +1,4 @@
 import XLSX from 'xlsx';
-
 import {
     Schedule,
     ScheduleCourse,
@@ -8,43 +7,55 @@ import {
     ScheduleTerm,
     StatusEnum
 } from "../models/types";
+import { convertSeasonToTermId } from './schedule-helpers';
 
 const BASE_YEAR: number = 1000;
 
-
-export function ExcelToSchedule(file : File) {
+export function ExcelToSchedule(file : File): Schedule {
     const reader = new FileReader();
         reader.onload = function(e : any) {
         if (e != null && e.target != null) {
                 const data = new Uint8Array(e.target.result);
                 const workbook = XLSX.read(data, {type: 'array'});
-                const first_worksheet = workbook.Sheets[workbook.SheetNames[0]];
-                console.log(first_worksheet['A2'])
-                parseExcel(first_worksheet);
+                const worksheet = workbook.Sheets[workbook.SheetNames[0]];
+                return parseExcelAndCreateSchedule(worksheet);
             }
         };
     reader.readAsArrayBuffer(file);
+
+    return {
+        years: [],
+        yearMap: {},
+        id: "excel-schedule",
+    };
 }
 
-function parseExcel(worksheet : XLSX.WorkSheet) {
+function parseExcelAndCreateSchedule(worksheet : XLSX.WorkSheet): Schedule {
+    // Find beginning of table
     let startCellIdx = getStartCellIndex(worksheet);
-    console.log(startCellIdx);
-    console.log(startCellIdx.length)
     if (startCellIdx.length < 2) {
         throw "Parsing Error";
     }
 
+    // Get columns that need to be parsed
     let column: string = startCellIdx.charAt(0).toUpperCase();
+    const fallColumns: string[] = [getChar(column, 3), getChar(column, 4), getChar(column, 5)];
+    const springColumns: string[] = [getChar(column, 6), getChar(column, 7), getChar(column, 8)];
+    const summerOneColumns: string[] = [getChar(column, 9), getChar(column, 10), getChar(column, 11)];
+    const summerTwoColumns: string[] = [getChar(column, 12), getChar(column, 13), getChar(column, 14)];
 
-    let fall = parseColumn(worksheet, SeasonEnum.FL, getIncrementedChar(column, 3), getIncrementedChar(column, 4), getIncrementedChar(column, 5), startCellIdx);
-    let spring = parseColumn(worksheet, SeasonEnum.SP, getIncrementedChar(column, 6), getIncrementedChar(column, 7), getIncrementedChar(column, 8), startCellIdx);
-    let summerOne = parseColumn(worksheet, SeasonEnum.S1, getIncrementedChar(column, 9), getIncrementedChar(column, 10), getIncrementedChar(column, 11), startCellIdx);
-    let summerTwo = parseColumn(worksheet, SeasonEnum.S2, getIncrementedChar(column, 12), getIncrementedChar(column, 13), getIncrementedChar(column, 14), startCellIdx);
-    const schedule: Schedule = createSchedule(fall, spring, summerOne, summerTwo);
+    // Parse the columns
+    let fall = parseColumn(worksheet, SeasonEnum.FL, fallColumns, startCellIdx);
+    let spring = parseColumn(worksheet, SeasonEnum.SP, springColumns, startCellIdx);
+    let summerOne = parseColumn(worksheet, SeasonEnum.S1, summerOneColumns, startCellIdx);
+    let summerTwo = parseColumn(worksheet, SeasonEnum.S2, summerTwoColumns, startCellIdx);
+
+    const schedule = createSchedule(fall, spring, summerOne, summerTwo);
     console.log(schedule);
+    return schedule;
 }
 
-function getIncrementedChar(c: string, num: number): string {
+function getChar(c: string, num: number): string {
     return String.fromCharCode(c.charCodeAt(0) + num);
 }
 
@@ -63,7 +74,12 @@ function getStartCellIndex(worksheet: XLSX.WorkSheet): string {
     return "";
 }
 
-function createSchedule(fall: ScheduleTerm[], spring: ScheduleTerm[], summerOne: ScheduleTerm[], summerTwo: ScheduleTerm[]): Schedule {
+function createSchedule(
+    fall: ScheduleTerm[], 
+    spring: ScheduleTerm[], 
+    summerOne: ScheduleTerm[], 
+    summerTwo: ScheduleTerm[]
+    ): Schedule {
     const schedule: Schedule = {
         years: [],
         yearMap: {},
@@ -78,8 +94,15 @@ function createSchedule(fall: ScheduleTerm[], spring: ScheduleTerm[], summerOne:
     return schedule;
 }
 
-function createYears(fall: ScheduleTerm[], spring: ScheduleTerm[], summerOne: ScheduleTerm[], summerTwo: ScheduleTerm[]): ScheduleYear[] {
-    if (fall.length !== spring.length && spring.length !== summerOne.length && summerOne.length !== summerTwo.length) {
+function createYears(
+    fall: ScheduleTerm[], 
+    spring: ScheduleTerm[], 
+    summerOne: ScheduleTerm[], 
+    summerTwo: ScheduleTerm[]
+    ): ScheduleYear[] {
+    if (fall.length !== spring.length 
+        && spring.length !== summerOne.length 
+        && summerOne.length !== summerTwo.length) {
         throw "parser parsed inconsitently";
     }
 
@@ -100,9 +123,7 @@ function createYears(fall: ScheduleTerm[], spring: ScheduleTerm[], summerOne: Sc
 function parseColumn(
     worksheet: XLSX.WorkSheet,
     season: SeasonEnum,
-    classIdColumn: string, 
-    classNameColumn: string, 
-    classCreditColumn: string,
+    columns: string[],
     startCellIdx: string
     ): ScheduleTerm[] {
 
@@ -128,13 +149,14 @@ function parseColumn(
     
     let parsedClasses: ScheduleCourse[] = [];
     let isCoop = false;
+
     while (currentRowNumber < 100) {
         // Get classinfo
-        classIdCell = classIdColumn + currentRowNumber.toString();
+        classIdCell = columns[0] + currentRowNumber.toString();
         classIdSubject = getCellValue(worksheet[classIdCell]).toUpperCase();
-        classNameCell = classNameColumn + currentRowNumber.toString();
+        classNameCell = columns[1] + currentRowNumber.toString();
         className = getCellValue(worksheet[classNameCell]).toUpperCase();
-        classCreditCell = classCreditColumn + currentRowNumber.toString();
+        classCreditCell = columns[2] + currentRowNumber.toString();
         classCredit = getCellValue(worksheet[classCreditCell]).toUpperCase();
 
         // Update year info 
@@ -181,7 +203,12 @@ function getCellValue(cell: XLSX.CellObject): string {
     return '';
 }
 
-function appendTerm(scheduleTerms: ScheduleTerm[], termToAppend: ScheduleTerm, parsedClasses: ScheduleCourse[], isCoop: boolean): ScheduleTerm[] {
+function appendTerm(
+    scheduleTerms: ScheduleTerm[], 
+    termToAppend: ScheduleTerm, 
+    parsedClasses: ScheduleCourse[], 
+    isCoop: boolean
+    ): ScheduleTerm[] {
     // Append old term
     if (isCoop) {
         termToAppend.status = StatusEnum.COOP;
@@ -195,12 +222,14 @@ function appendTerm(scheduleTerms: ScheduleTerm[], termToAppend: ScheduleTerm, p
 }
 
 function generateNewScheduleTerm(season: SeasonEnum, year: number): ScheduleTerm {
-    // TODO: Update termId and id
+    let termId = convertSeasonToTermId(season)
+    let id = year + termId;
+
     const scheduleTerm: ScheduleTerm = {
         season: season,
         year: year,
-        termId: 9999,
-        id: 9999,
+        termId: year * 100 + termId,
+        id: id,
         classes: [],
         status: StatusEnum.INACTIVE
     }

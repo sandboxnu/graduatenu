@@ -13,7 +13,7 @@ export class FileSelector extends React.Component {
         if (e != null && e.target != null) {
             console.log(e.target.files);
             const file = e.target.files[0]
-            ExcelToSchedule(file)
+            console.log(ExcelToSchedule(file))
         }
         
     }
