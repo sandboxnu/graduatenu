@@ -13,44 +13,36 @@ const Container = styled.div`
     margin: 0px;
 `;
 
-
 interface Props {
     setSchedule: ((schedule: Schedule) => void)
 }
 
-export class ExcelUpload extends React.Component<Props> {
-    constructor(props: any) {
-        super(props);
-        this.onUpload = this.onUpload.bind(this);
+function onUpload(e : any, setSchedule: ((schedule: Schedule) => any)) {
+    if (e != null && e.target != null) {
+        console.log(e.target.files);
+        const file = e.target.files[0]
+        excelToSchedule(file, setSchedule)
     }
+}
 
-    async onUpload(e : any) {
-        if (e != null && e.target != null) {
-            console.log(e.target.files);
-            const file = e.target.files[0]
-            excelToSchedule(file, this.props.setSchedule)
-        }
-    }
-
-    render () {
-        return(
-            <Container>
-                <Tooltip 
-                    title="Auto-populate your schedule with your excel plan of study. Reach out to your advisor if you don't have it!"
-                    placement="left"
-                    arrow>
-                    <Button
-                        variant="contained"
-                        component="label">
-                        Upload Plan Of Study
-                        <input
-                            type="file"
-                            accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-                            style={{ display: "none" }}
-                            onChange={ (e) => this.onUpload(e) }/>
-                    </Button>
-                </Tooltip>
-            </Container>
-        );
-    }
+export const ExcelUpload: React.FC<Props> = (props) => {
+    return(
+        <Container>
+            <Tooltip 
+                title="Auto-populate your schedule with your excel plan of study. Reach out to your advisor if you don't have it!"
+                placement="left"
+                arrow>
+                <Button
+                    variant="contained"
+                    component="label">
+                    Upload Plan Of Study
+                    <input
+                        type="file"
+                        accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                        style={{ display: "none" }}
+                        onChange={ (e) => onUpload(e, props.setSchedule)}/>
+                </Button>
+            </Tooltip>
+        </Container>
+    );
 }
