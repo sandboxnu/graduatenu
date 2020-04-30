@@ -87,6 +87,14 @@ const HomePlan = styled.div`
   align-items: center;
 `;
 
+const HomeAboveSchedule = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+`;
+
 const MajorText = styled.div`
   font-weight: 500;
   font-size: 16px;
@@ -292,11 +300,11 @@ class HomeComponent extends React.Component<Props> {
                 <EditPlanPopper />
               </HomePlan>
             </HomeTop>
-            <HomePlan>
+            <HomeAboveSchedule>
               <h2>Plan Of Study</h2>
-            </HomePlan>
-            <ExcelUpload
+              <ExcelUpload
               setSchedule={this.setSchedule.bind(this)}/>
+            </HomeAboveSchedule>
             {this.renderYears()}
           </Container>
           <SidebarContainer>
