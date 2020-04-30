@@ -11,7 +11,7 @@ import { convertSeasonToTermId } from './schedule-helpers';
 
 const BASE_YEAR: number = 1000;
 
-export function ExcelToSchedule(file: File, callback: ((schedule: Schedule) => any)) {
+export function excelToSchedule(file: File, callback: ((schedule: Schedule) => any)) {
     const reader = new FileReader();
     reader.onload = function(e : any) {
     if (e != null && e.target != null) {

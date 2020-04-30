@@ -1,8 +1,7 @@
 import * as React from "react";
-import { ExcelToSchedule } from "../utils/excelParser"
+import { excelToSchedule } from "../utils/excelParser"
 import { Schedule } from "../models/types"
 import styled from "styled-components";
-import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
 import Tooltip from '@material-ui/core/Tooltip';
 
@@ -29,7 +28,7 @@ export class ExcelUpload extends React.Component<Props> {
         if (e != null && e.target != null) {
             console.log(e.target.files);
             const file = e.target.files[0]
-            ExcelToSchedule(file, this.props.setSchedule)
+            excelToSchedule(file, this.props.setSchedule)
         }
     }
 
