@@ -42,7 +42,7 @@ import {
 import { setMajorAction } from "../state/actions/userActions";
 import { getMajors, getPlans } from "../state";
 import { EditPlanPopper } from "./EditPlanPopper";
-import { ExcelUpload as ExcelUpload } from "../components/ExcelUpload";
+import { ExcelUpload } from "../components/ExcelUpload";
 
 const OuterContainer = styled.div`
   display: flex;

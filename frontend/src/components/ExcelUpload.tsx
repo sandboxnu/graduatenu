@@ -15,17 +15,17 @@ const Container = styled.div`
 `;
 
 
-interface props {
+interface Props {
     setSchedule: ((schedule: Schedule) => void)
 }
 
-export class ExcelUpload extends React.Component<props> {
+export class ExcelUpload extends React.Component<Props> {
     constructor(props: any) {
         super(props);
-        this.handleChange = this.handleChange.bind(this);
+        this.onUpload = this.onUpload.bind(this);
     }
 
-    async handleChange(e : any) {
+    async onUpload(e : any) {
         if (e != null && e.target != null) {
             console.log(e.target.files);
             const file = e.target.files[0]
@@ -48,7 +48,7 @@ export class ExcelUpload extends React.Component<props> {
                             type="file"
                             accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
                             style={{ display: "none" }}
-                            onChange={ (e) => this.handleChange(e) }/>
+                            onChange={ (e) => this.onUpload(e) }/>
                     </Button>
                 </Tooltip>
             </Container>
