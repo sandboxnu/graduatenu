@@ -9,7 +9,6 @@ import { getFullNameFromState } from "../state";
 import { AppState } from "../state/reducers/state";
 import { Dispatch, bindActionCreators } from "redux";
 import { fetchMajorsAndPlans as fMAP } from "../utils/fetchMajorsAndPlans";
-import { FileSelector } from "../components/FileSelector"
 
 const Container = styled.div`
   display: flex;
@@ -161,7 +160,6 @@ class OnboardingComponent extends React.Component<OnboardingProps> {
           </Content>
           <ContentWall></ContentWall>
         </ContentWrapper>
-        <FileSelector/>
       </Container>
     );
   }

@@ -18,6 +18,7 @@ import {
   isCoopOrVacation,
   moveCourse,
   addCourseFromSidebar,
+  convertToDNDSchedule,
 } from "../utils";
 import { Sidebar } from "../components/Sidebar";
 import { withToast } from "./toastHook";
@@ -41,6 +42,7 @@ import {
 import { setMajorAction } from "../state/actions/userActions";
 import { getMajors, getPlans } from "../state";
 import { EditPlanPopper } from "./EditPlanPopper";
+import { ExcelUpload as ExcelUpload } from "../components/ExcelUpload";
 
 const OuterContainer = styled.div`
   display: flex;
@@ -266,6 +268,12 @@ class HomeComponent extends React.Component<Props> {
     ));
   }
 
+  setSchedule(schedule: Schedule) {
+    console.log(schedule);
+    const [dndschedule, counter] = convertToDNDSchedule(schedule, 0);
+    this.props.setDNDSchedule(dndschedule);
+  }
+
   render() {
     return (
       <OuterContainer>
@@ -287,6 +295,8 @@ class HomeComponent extends React.Component<Props> {
             <HomePlan>
               <h2>Plan Of Study</h2>
             </HomePlan>
+            <ExcelUpload
+              setSchedule={this.setSchedule.bind(this)}/>
             {this.renderYears()}
           </Container>
           <SidebarContainer>

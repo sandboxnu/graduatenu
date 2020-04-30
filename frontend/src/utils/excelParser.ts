@@ -11,23 +11,17 @@ import { convertSeasonToTermId } from './schedule-helpers';
 
 const BASE_YEAR: number = 1000;
 
-export function ExcelToSchedule(file : File): Schedule {
+export function ExcelToSchedule(file: File, callback: ((schedule: Schedule) => any)) {
     const reader = new FileReader();
-        reader.onload = function(e : any) {
-        if (e != null && e.target != null) {
-                const data = new Uint8Array(e.target.result);
-                const workbook = XLSX.read(data, {type: 'array'});
-                const worksheet = workbook.Sheets[workbook.SheetNames[0]];
-                return parseExcelAndCreateSchedule(worksheet);
-            }
-        };
-    reader.readAsArrayBuffer(file);
-
-    return {
-        years: [],
-        yearMap: {},
-        id: "excel-schedule",
+    reader.onload = function(e : any) {
+    if (e != null && e.target != null) {
+            const data = new Uint8Array(e.target.result);
+            const workbook = XLSX.read(data, {type: 'array'});
+            const worksheet = workbook.Sheets[workbook.SheetNames[0]];
+            callback(parseExcelAndCreateSchedule(worksheet));
+        }
     };
+    reader.readAsArrayBuffer(file);
 }
 
 function parseExcelAndCreateSchedule(worksheet : XLSX.WorkSheet): Schedule {
@@ -51,7 +45,6 @@ function parseExcelAndCreateSchedule(worksheet : XLSX.WorkSheet): Schedule {
     let summerTwo = parseColumn(worksheet, SeasonEnum.S2, summerTwoColumns, startCellIdx);
 
     const schedule = createSchedule(fall, spring, summerOne, summerTwo);
-    console.log(schedule);
     return schedule;
 }
 
@@ -241,8 +234,8 @@ function getScheduleCourse(classIdSubject: string, name: string, credits: string
     let classId = "9999";
     let subject = "XXXX";
     if (splitIdSubject.length > 1) {
-        classId = splitIdSubject[0]
-        subject = splitIdSubject[1]
+        subject = splitIdSubject[0].trim();
+        classId = splitIdSubject[1].trim();
     }
 
     let parsedClass: ScheduleCourse = {
