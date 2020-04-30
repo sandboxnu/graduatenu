@@ -4,6 +4,8 @@ import { Schedule } from "../models/types"
 import styled from "styled-components";
 import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
+import Tooltip from '@material-ui/core/Tooltip';
+
 
 const Container = styled.div`
     position: relative;
@@ -12,15 +14,6 @@ const Container = styled.div`
     margin: 0px;
 `;
 
-const ButtonAndDescription = styled.div`
-    display: flex;
-    flex-direction: column;
-`;
-
-const Description = styled.div`
-    margin: 5px;
-    font-size: 0.5em;
-`;
 
 interface props {
     setSchedule: ((schedule: Schedule) => void)
@@ -43,7 +36,10 @@ export class ExcelUpload extends React.Component<props> {
     render () {
         return(
             <Container>
-                <ButtonAndDescription>
+                <Tooltip 
+                    title="Auto-populate your schedule with your excel plan of study. Reach out to your advisor if you don't have it!"
+                    placement="left"
+                    arrow>
                     <Button
                         variant="contained"
                         component="label">
@@ -54,12 +50,8 @@ export class ExcelUpload extends React.Component<props> {
                             style={{ display: "none" }}
                             onChange={ (e) => this.handleChange(e) }/>
                     </Button>
-                    <Description>
-                        Upload the Excel sheet from your advisor!
-                    </Description>
-                </ButtonAndDescription>
+                </Tooltip>
             </Container>
-            
         );
     }
 }
