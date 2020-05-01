@@ -148,7 +148,7 @@ function parseColumn(
         classIdCell = columns[0] + currentRowNumber.toString();
         classIdSubject = getCellValue(worksheet[classIdCell]).toUpperCase();
         classNameCell = columns[1] + currentRowNumber.toString();
-        className = getCellValue(worksheet[classNameCell]).toUpperCase();
+        className = getCellValue(worksheet[classNameCell]);
         classCreditCell = columns[2] + currentRowNumber.toString();
         classCredit = getCellValue(worksheet[classCreditCell]).toUpperCase();
 
@@ -230,12 +230,16 @@ function generateNewScheduleTerm(season: SeasonEnum, year: number): ScheduleTerm
 }
 
 function getScheduleCourse(classIdSubject: string, name: string, credits: string): ScheduleCourse {
-    let splitIdSubject = classIdSubject.split(" ");
+    let splitIdSubject = splitClassIdSubject(classIdSubject);
     let classId = "9999";
     let subject = "XXXX";
     if (splitIdSubject.length > 1) {
         subject = splitIdSubject[0].trim();
         classId = splitIdSubject[1].trim();
+        // Check if classId is not a number
+        if (isNaN(parseInt(classId))) {
+            classId = "9999";
+        }
     }
 
     let parsedClass: ScheduleCourse = {
@@ -247,4 +251,8 @@ function getScheduleCourse(classIdSubject: string, name: string, credits: string
     }
 
     return parsedClass;
+}
+
+function splitClassIdSubject(classIdSubject: string) {
+    return classIdSubject.replace(/\'/g, '').split(/(\d+)/).filter(Boolean);
 }

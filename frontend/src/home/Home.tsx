@@ -43,6 +43,7 @@ import { setMajorAction } from "../state/actions/userActions";
 import { getMajors, getPlans } from "../state";
 import { EditPlanPopper } from "./EditPlanPopper";
 import { ExcelUpload } from "../components/ExcelUpload";
+import { addPrereqsToSchedule } from "../common/prereq_loader"
 
 const OuterContainer = styled.div`
   display: flex;
@@ -276,9 +277,12 @@ class HomeComponent extends React.Component<Props> {
     ));
   }
 
-  setSchedule(schedule: Schedule) {
+  
+  async setSchedule(schedule: Schedule) {
     console.log(schedule);
-    const [dndschedule, counter] = convertToDNDSchedule(schedule, 0);
+    let preReqSched = await addPrereqsToSchedule(schedule);
+    console.log(preReqSched);
+    const [dndschedule, counter] = convertToDNDSchedule(preReqSched, 0);
     this.props.setDNDSchedule(dndschedule);
   }
 

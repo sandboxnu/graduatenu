@@ -19,7 +19,6 @@ interface Props {
 
 function onUpload(e : any, setSchedule: ((schedule: Schedule) => any)) {
     if (e != null && e.target != null) {
-        console.log(e.target.files);
         const file = e.target.files[0]
         excelToSchedule(file, setSchedule)
     }
