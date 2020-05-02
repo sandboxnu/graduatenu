@@ -352,7 +352,8 @@ class OnboardingScreenComponent extends React.Component<
           {textFieldStr.length !== 0 && !!year && !!gradYear ? (
             <Link
               to={{
-                pathname: "/home",
+                // TODO: change this to /home, and completed courses Next Link to /signup
+                pathname: "/signup",
               }}
               onClick={this.onSubmit.bind(this)}
               style={{ textDecoration: "none" }}
