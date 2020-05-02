@@ -5,7 +5,6 @@ import styled from "styled-components";
 import { TextField, Button } from "@material-ui/core";
 import { AppState } from "../state/reducers/state";
 import { Major } from "../models/types";
-import { PrimaryButton } from "../components/common/PrimaryButton";
 
 const Wrapper = styled.div`
   display: flex;
@@ -26,7 +25,7 @@ const Title = styled.div`
 
 const Subtitle = styled.div`
   margin-top: 8px;
-  margin-bottom: 2px;
+  margin-bottom: 0;
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
@@ -63,7 +62,7 @@ interface SignupScreenState {
   validConfirm: boolean;
 }
 
-class SignupScreenComponent extends React.Component<
+class LoginScreenComponent extends React.Component<
   SignupScreenReduxProps & RouteComponentProps<{}>,
   SignupScreenState
 > {
@@ -236,6 +235,7 @@ class SignupScreenComponent extends React.Component<
           (textFieldStr.length === 0 && beenEdited) || !this.state.validConfirm
         }
         style={{
+          marginBottom: 16,
           minWidth: 326,
         }}
         helperText={
@@ -270,18 +270,25 @@ class SignupScreenComponent extends React.Component<
         </Box>
 
         <Subtitle>
-          Already a member? Log in{" "}
-          <Link style={{ color: "#EB5757" }} to="/login">
-            here
-          </Link>{" "}
-          or{" "}
-          <Link style={{ color: "#EB5757" }} to="/home">
-            continue as guest
-          </Link>
+          Already a member? Log in <Link to="/login">here</Link> or{" "}
+          <Link to="/home">continue as guest</Link>
         </Subtitle>
-        <div onClick={this.submit.bind(this)}>
-          <PrimaryButton>Sign Up</PrimaryButton>
-        </div>
+        <Button
+          variant="contained"
+          color="secondary"
+          style={{
+            maxWidth: "100px",
+            maxHeight: "36px",
+            minWidth: "100px",
+            minHeight: "36px",
+            backgroundColor: "#EB5757",
+            marginTop: "26px",
+            marginBottom: 12,
+          }}
+          onClick={this.submit.bind(this)}
+        >
+          Sign Up
+        </Button>
       </Wrapper>
     );
   }
@@ -304,6 +311,6 @@ const mapStateToProps = (state: AppState) => ({
  * When rendering the connecting component, the props assigned in mapStateToProps, do not need to
  * be passed down as props from the parent component.
  */
-export const SignupScreen = connect(mapStateToProps)(
-  withRouter(SignupScreenComponent)
+export const LoginScreen = connect(mapStateToProps)(
+  withRouter(LoginScreenComponent)
 );
