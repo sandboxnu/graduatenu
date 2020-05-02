@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { withRouter, RouteComponentProps, Link } from "react-router-dom";
 import styled from "styled-components";
-import { TextField, Button } from "@material-ui/core";
+import { TextField } from "@material-ui/core";
 import { AppState } from "../state/reducers/state";
 import { Major } from "../models/types";
 import { PrimaryButton } from "../components/common/PrimaryButton";
@@ -32,6 +32,7 @@ const Subtitle = styled.div`
   font-weight: normal;
   font-size: 14px;
   line-height: 16px;
+  width: 326px;
 `;
 
 const Box = styled.div`
@@ -84,6 +85,10 @@ class SignupScreenComponent extends React.Component<
     };
   }
 
+  /**
+   * All of the different functions that modify the stored TextField values as they are changed.
+   */
+
   onChangeEmail(e: React.ChangeEvent<HTMLInputElement>) {
     this.setState({
       emailStr: e.target.value,
@@ -105,6 +110,10 @@ class SignupScreenComponent extends React.Component<
     });
   }
 
+  /**
+   * Validates user input, then sends a sign up request to the backend using the input data.
+   * Checks response for error messages, then redirects user to /home if the sign up succeeds.
+   */
   submit() {
     const validEmail: boolean = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(
       this.state.emailStr
@@ -129,7 +138,6 @@ class SignupScreenComponent extends React.Component<
           graduation_year: this.props.graduationYear,
         },
       };
-      console.log(JSON.stringify(user));
 
       fetch(`/api/users`, {
         method: "POST",
@@ -144,7 +152,6 @@ class SignupScreenComponent extends React.Component<
             this.setState({
               errorEmail: response.errors.email,
             });
-            console.log(response.errors.email);
           } else {
             this.props.history.push("/home");
           }

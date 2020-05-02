@@ -2,9 +2,17 @@ import React from "react";
 import { connect } from "react-redux";
 import { withRouter, RouteComponentProps, Link } from "react-router-dom";
 import styled from "styled-components";
-import { TextField, Button } from "@material-ui/core";
-import { AppState } from "../state/reducers/state";
-import { Major } from "../models/types";
+import { TextField } from "@material-ui/core";
+import { Major, Schedule } from "../models/types";
+import { PrimaryButton } from "../components/common/PrimaryButton";
+import { Dispatch } from "redux";
+import {
+  setFullNameAction,
+  setMajorAction,
+  setAcademicYearAction,
+  setGraduationYearAction,
+} from "../state/actions/userActions";
+import { setCoopCycle } from "../state/actions/scheduleActions";
 
 const Wrapper = styled.div`
   display: flex;
@@ -25,12 +33,13 @@ const Title = styled.div`
 
 const Subtitle = styled.div`
   margin-top: 8px;
-  margin-bottom: 0;
+  margin-bottom: 2px;
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
   line-height: 16px;
+  width: 326px;
 `;
 
 const Box = styled.div`
@@ -41,47 +50,43 @@ const Box = styled.div`
   flex-direction: column;
 `;
 
-interface SignupScreenReduxProps {
-  fullName: string;
-  academicYear: number;
-  graduationYear: number;
-  major?: Major;
-  planStr?: string;
+interface LoginScreenReduxProps {
+  setFullName: (fullName: string) => void;
+  setAcademicYear: (academicYear: number) => void;
+  setGraduationYear: (graduationYear: number) => void;
+  setMajor: (major?: Major) => void;
+  setCoopCycle: (plan: Schedule) => void;
 }
 
-interface SignupScreenState {
+interface LoginScreenState {
   emailStr: string;
   passwordStr: string;
-  confirmPasswordStr: string;
   beenEditedEmail: boolean;
   beenEditedPassword: boolean;
-  beenEditedConfirmPassword: boolean;
   validEmail: boolean;
-  errorEmail?: string;
-  validPassword: boolean;
-  validConfirm: boolean;
+  error?: string;
 }
 
 class LoginScreenComponent extends React.Component<
-  SignupScreenReduxProps & RouteComponentProps<{}>,
-  SignupScreenState
+  LoginScreenReduxProps & RouteComponentProps<{}>,
+  LoginScreenState
 > {
-  constructor(props: SignupScreenReduxProps & RouteComponentProps<{}>) {
+  constructor(props: LoginScreenReduxProps & RouteComponentProps<{}>) {
     super(props);
 
     this.state = {
       emailStr: "",
       passwordStr: "",
-      confirmPasswordStr: "",
       beenEditedEmail: false,
       beenEditedPassword: false,
-      beenEditedConfirmPassword: false,
       validEmail: true,
-      errorEmail: undefined,
-      validPassword: true,
-      validConfirm: true,
+      error: undefined,
     };
   }
+
+  /**
+   * All of the different functions that modify the stored TextField values as they are changed.
+   */
 
   onChangeEmail(e: React.ChangeEvent<HTMLInputElement>) {
     this.setState({
@@ -97,40 +102,29 @@ class LoginScreenComponent extends React.Component<
     });
   }
 
-  onChangeConfirmPassword(e: React.ChangeEvent<HTMLInputElement>) {
-    this.setState({
-      confirmPasswordStr: e.target.value,
-      beenEditedConfirmPassword: true,
-    });
-  }
-
+  /**
+   * Validates user input, then sends a log in request to the backend using the input data.
+   * Checks response for error messages. If the log in succeeds, dispatch actions to set
+   * user attributes obtained from the response object, then redirects user to /home.
+   */
   submit() {
     const validEmail: boolean = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(
       this.state.emailStr
     );
-    const validPassword: boolean = this.state.passwordStr.length >= 6;
-    const validConfirm: boolean =
-      this.state.passwordStr === this.state.confirmPasswordStr;
 
     this.setState({
       validEmail,
-      validPassword,
-      validConfirm,
     });
 
-    if (validEmail && validPassword && validConfirm) {
+    if (validEmail) {
       const user = {
         user: {
           email: this.state.emailStr,
           password: this.state.passwordStr,
-          username: this.props.fullName,
-          academic_year: this.props.academicYear,
-          graduation_year: this.props.graduationYear,
         },
       };
-      console.log(JSON.stringify(user));
 
-      fetch(`/api/users`, {
+      fetch(`/api/users/login`, {
         method: "POST",
         body: JSON.stringify(user),
         headers: {
@@ -141,10 +135,13 @@ class LoginScreenComponent extends React.Component<
         .then(response => {
           if (response.errors) {
             this.setState({
-              errorEmail: response.errors.email,
+              error: "invalid",
             });
-            console.log(response.errors.email);
           } else {
+            console.log(response);
+            this.props.setFullName(response.user.username);
+            this.props.setAcademicYear(response.user.academicYear);
+            this.props.setGraduationYear(response.user.graduationYear);
             this.props.history.push("/home");
           }
         });
@@ -166,7 +163,7 @@ class LoginScreenComponent extends React.Component<
         error={
           (textFieldStr.length === 0 && beenEdited) ||
           !this.state.validEmail ||
-          !!this.state.errorEmail
+          !!this.state.error
         }
         style={{
           marginTop: 48,
@@ -174,7 +171,7 @@ class LoginScreenComponent extends React.Component<
           minWidth: 326,
         }}
         helperText={
-          (this.state.errorEmail && "Email has already been registered") ||
+          (this.state.error && "Email or password is invalid") ||
           (!this.state.validEmail && "Please enter a valid email") ||
           ("" && (!beenEdited || textFieldStr.length !== 0)) ||
           (textFieldStr.length === 0 &&
@@ -197,49 +194,12 @@ class LoginScreenComponent extends React.Component<
         variant="outlined"
         value={textFieldStr}
         onChange={this.onChangePassword.bind(this)}
-        error={
-          (textFieldStr.length === 0 && beenEdited) ||
-          !this.state.validPassword ||
-          !this.state.validConfirm
-        }
+        error={(textFieldStr.length === 0 && beenEdited) || !!this.state.error}
         style={{
-          marginBottom: 16,
           minWidth: 326,
         }}
         helperText={
-          (!this.state.validPassword &&
-            "Password must be at least 6 characters") ||
-          (!this.state.validConfirm && "Passwords do not match") ||
-          ("" && (!beenEdited || textFieldStr.length !== 0)) ||
-          (textFieldStr.length === 0 &&
-            beenEdited &&
-            "Please enter a valid password")
-        }
-        type="password"
-      />
-    );
-  }
-
-  /**
-   * Renders the confirm password text field
-   */
-  renderConfirmPasswordTextField(textFieldStr: string, beenEdited: boolean) {
-    return (
-      <TextField
-        id="outlined-basic"
-        label="Confirm Password"
-        variant="outlined"
-        value={textFieldStr}
-        onChange={this.onChangeConfirmPassword.bind(this)}
-        error={
-          (textFieldStr.length === 0 && beenEdited) || !this.state.validConfirm
-        }
-        style={{
-          marginBottom: 16,
-          minWidth: 326,
-        }}
-        helperText={
-          (!this.state.validConfirm && "Passwords do not match") ||
+          (this.state.error && "Email or password is invalid") ||
           ("" && (!beenEdited || textFieldStr.length !== 0)) ||
           (textFieldStr.length === 0 &&
             beenEdited &&
@@ -253,7 +213,7 @@ class LoginScreenComponent extends React.Component<
   render() {
     return (
       <Wrapper>
-        <Title>Sign Up</Title>
+        <Title>Log In</Title>
         <Box>
           {this.renderEmailTextField(
             this.state.emailStr,
@@ -263,47 +223,38 @@ class LoginScreenComponent extends React.Component<
             this.state.passwordStr,
             this.state.beenEditedPassword
           )}
-          {this.renderConfirmPasswordTextField(
-            this.state.confirmPasswordStr,
-            this.state.beenEditedConfirmPassword
-          )}
         </Box>
 
         <Subtitle>
-          Already a member? Log in <Link to="/login">here</Link> or{" "}
-          <Link to="/home">continue as guest</Link>
+          New here? Sign up{" "}
+          <Link style={{ color: "#EB5757" }} to="/signup">
+            here
+          </Link>{" "}
+          or{" "}
+          <Link style={{ color: "#EB5757" }} to="/home">
+            continue as guest
+          </Link>
         </Subtitle>
-        <Button
-          variant="contained"
-          color="secondary"
-          style={{
-            maxWidth: "100px",
-            maxHeight: "36px",
-            minWidth: "100px",
-            minHeight: "36px",
-            backgroundColor: "#EB5757",
-            marginTop: "26px",
-            marginBottom: 12,
-          }}
-          onClick={this.submit.bind(this)}
-        >
-          Sign Up
-        </Button>
+        <div onClick={this.submit.bind(this)}>
+          <PrimaryButton>Log In</PrimaryButton>
+        </div>
       </Wrapper>
     );
   }
 }
 
 /**
- * Callback to be passed into connect, to make properties of the AppState available as this components props.
- * @param state the AppState
+ * Callback to be passed into connect, responsible for dispatching redux actions to update the appstate.
+ * @param dispatch responsible for dispatching actions to the redux store.
  */
-const mapStateToProps = (state: AppState) => ({
-  fullName: state.user.fullName,
-  academicYear: state.user.academicYear,
-  graduationYear: state.user.graduationYear,
-  major: state.user.major,
-  planStr: state.user.planStr,
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  setFullName: (fullName: string) => dispatch(setFullNameAction(fullName)),
+  setAcademicYear: (academicYear: number) =>
+    dispatch(setAcademicYearAction(academicYear)),
+  setGraduationYear: (academicYear: number) =>
+    dispatch(setGraduationYearAction(academicYear)),
+  setMajor: (major?: Major) => dispatch(setMajorAction(major)),
+  setCoopCycle: (plan: Schedule) => dispatch(setCoopCycle(plan)),
 });
 
 /**
@@ -311,6 +262,7 @@ const mapStateToProps = (state: AppState) => ({
  * When rendering the connecting component, the props assigned in mapStateToProps, do not need to
  * be passed down as props from the parent component.
  */
-export const LoginScreen = connect(mapStateToProps)(
-  withRouter(LoginScreenComponent)
-);
+export const LoginScreen = connect(
+  null,
+  mapDispatchToProps
+)(withRouter(LoginScreenComponent));
