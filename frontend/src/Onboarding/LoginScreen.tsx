@@ -120,24 +120,22 @@ class LoginScreenComponent extends React.Component<
 
     if (validEmail) {
       const user: ILoginData = {
-          email: this.state.emailStr,
-          password: this.state.passwordStr,
+        email: this.state.emailStr,
+        password: this.state.passwordStr,
       };
 
-      loginUser(user)
-        .then(response => {
-          if (response.errors) {
-            this.setState({
-              error: "invalid",
-            });
-          } else {
-            console.log(response);
-            this.props.setFullName(response.user.username);
-            this.props.setAcademicYear(response.user.academicYear);
-            this.props.setGraduationYear(response.user.graduationYear);
-            this.props.history.push("/home");
-          }
-        });
+      loginUser(user).then(response => {
+        if (response.errors) {
+          this.setState({
+            error: "invalid",
+          });
+        } else {
+          this.props.setFullName(response.user.username);
+          this.props.setAcademicYear(response.user.academicYear);
+          this.props.setGraduationYear(response.user.graduationYear);
+          this.props.history.push("/home");
+        }
+      });
     }
   }
 
