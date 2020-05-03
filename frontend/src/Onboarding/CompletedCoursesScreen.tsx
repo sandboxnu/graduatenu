@@ -137,6 +137,7 @@ class CompletedCoursesComponent extends Component<Props, State> {
         });
       }
     } else {
+      console.log("filtered");
       let courses = this.state.selectedCourses.filter(
         c =>
           c.subject !== course.subject && c.classId !== String(course.classId)
@@ -178,6 +179,8 @@ class CompletedCoursesComponent extends Component<Props, State> {
     return (
       <CourseWrapper key={allCourse[0]}>
         <Checkbox
+          // checked={this.state.selectedCourses.some((s) => s.subject == courses[0].subject &&
+          //   s.classId == String(courses[0].classId))}
           style={{ width: 2, height: 2 }}
           icon={<CheckBoxOutlineBlankIcon style={{ fontSize: 20 }} />}
           checkedIcon={
@@ -239,7 +242,6 @@ class CompletedCoursesComponent extends Component<Props, State> {
             unmountOnExit
           >
             {this.parseCourseRequirements(allCourse.slice(4, allCourse.length))}
-            {this.renderShowLink(requirementGroup, false)}
           </Collapse>
         </div>
       );

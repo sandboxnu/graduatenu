@@ -27,23 +27,30 @@ export function getStandingFromCompletedCourses(credits: number): string {
   return "Senior";
 }
 
-/**
- * Divides the Courses into the a list containing the approximate courses that
- * they should be able to take in one term (less than 19)
- */
-export function divideIntoTerms(courses: DNDScheduleCourse[]) {
-  let creditCount = 0;
-  let allTerms: DNDScheduleCourse[][] = [];
-  let currentTerm: DNDScheduleCourse[] = [];
-  for (let course of courses) {
-    if (creditCount + course.numCreditsMax > 18) {
-      allTerms.push(currentTerm);
-      currentTerm = [];
-      creditCount = 0;
-    }
-    currentTerm.push(course);
-    creditCount += course.numCreditsMax;
+export function numToTerm(index: number, schedule: DNDSchedule) {
+  let year = schedule.yearMap[schedule.years[Math.floor(index / 4)]];
+  if (index % 4 == 0) {
+    return year.fall;
+  } else if (index % 4 == 1) {
+    return year.spring;
+  } else if (index % 4 == 2) {
+    return year.summer1;
+  } else {
+    return year.summer2;
   }
-  allTerms.push(currentTerm);
-  return allTerms;
+}
+
+export function getNextTerm(is_summer: boolean, classes: DNDScheduleCourse[]) {
+  let maxCredits = is_summer ? 9 : 18;
+  let counter = 0;
+  let credits = 0;
+  while (classes.length > counter) {
+    if (classes[counter].numCreditsMax + credits <= maxCredits) {
+      credits += classes[counter].numCreditsMax;
+      counter = counter + 1;
+    } else {
+      break;
+    }
+  }
+  return classes.splice(0, counter);
 }

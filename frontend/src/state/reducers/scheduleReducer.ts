@@ -24,8 +24,9 @@ import {
   convertToDNDSchedule,
   convertToDNDCourses,
   produceWarnings,
-  divideIntoTerms,
   sumCreditsFromList,
+  numToTerm,
+  getNextTerm,
 } from "../../utils";
 
 export interface ScheduleState {
@@ -205,19 +206,29 @@ export const scheduleReducer = (
         );
         draft.present.currentClassCounter = newCounter;
         draft.present.creditsTaken = sumCreditsFromList(dndCourses);
-        let allTerms = divideIntoTerms(dndCourses);
-        for (let i = 0; i < allTerms.length; i++) {
-          let term = allTerms[i];
-          let thisYear = draft.present.schedule.years[Math.floor(i / 2)];
-          // if it's even, add to fall, else spring
-          if (i % 2 == 0) {
-            draft.present.schedule.yearMap[thisYear].fall.classes = term;
-          } else {
-            draft.present.schedule.yearMap[thisYear].spring.classes = term;
+        let curSchedule = draft.present.schedule;
+        let classTerm = 0;
+        while (
+          dndCourses.length != 0 ||
+          classTerm >= curSchedule.years.length * 4
+        ) {
+          let curTerm = numToTerm(classTerm, curSchedule);
+          while (
+            classTerm + 1 <= curSchedule.years.length * 4 &&
+            curTerm.status != "CLASSES"
+          ) {
+            classTerm += 1;
+            curTerm = numToTerm(classTerm, curSchedule);
           }
+          let newCourses = getNextTerm(
+            classTerm % 4 == 2 || classTerm % 4 == 3,
+            dndCourses
+          );
+          curTerm.classes = newCourses;
+          classTerm += 1;
         }
 
-        const schedule = JSON.parse(JSON.stringify(draft.present.schedule));
+        const schedule = JSON.parse(JSON.stringify(curSchedule));
         const container = produceWarnings(schedule);
 
         draft.present.warnings = container.normalWarnings;
