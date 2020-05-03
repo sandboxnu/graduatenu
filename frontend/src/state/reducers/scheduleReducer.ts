@@ -4,7 +4,7 @@ import {
   CourseWarning,
   ScheduleCourse,
 } from "../../models/types";
-import { mockData } from "../../data/mockData";
+import { mockEmptySchedule } from "../../data/mockData";
 import produce from "immer";
 import { getType } from "typesafe-actions";
 import { ScheduleAction } from "../actions";
@@ -49,7 +49,7 @@ const initialState: ScheduleState = {
     currentClassCounter: 0,
     isScheduleLoading: false,
     scheduleError: "",
-    schedule: mockData,
+    schedule: mockEmptySchedule,
     warnings: [],
     courseWarnings: [],
     creditsTaken: 0,
