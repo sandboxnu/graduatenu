@@ -25,7 +25,6 @@ import {
   Grid,
   Paper,
   Checkbox,
-  Button,
 } from "@material-ui/core";
 
 const MainTitleText = styled.div`
@@ -123,6 +122,12 @@ class CompletedCoursesComponent extends Component<Props, State> {
     this.props.setCompletedCourses(this.state.selectedCourses);
   }
 
+  /**
+   * Handles a class when it has been checked off. If it is being unchecked, it removes it,
+   * and if it is being checked, it converts it to a ScheduleCourse and adds it to selected courses
+   * @param e
+   * @param course
+   */
   async onChecked(e: any, course: IRequiredCourse) {
     const checked = e.target.checked;
 

@@ -208,11 +208,14 @@ export const scheduleReducer = (
         draft.present.creditsTaken = sumCreditsFromList(dndCourses);
         let curSchedule = draft.present.schedule;
         let classTerm = 0;
+        // while there are still completed classes left to take and we have not passed the number of terms
+        // in the schedule
         while (
           dndCourses.length != 0 ||
           classTerm >= curSchedule.years.length * 4
         ) {
           let curTerm = numToTerm(classTerm, curSchedule);
+          // while the current term is not a class term, continue searching for the next class term.
           while (
             classTerm + 1 <= curSchedule.years.length * 4 &&
             curTerm.status != "CLASSES"
