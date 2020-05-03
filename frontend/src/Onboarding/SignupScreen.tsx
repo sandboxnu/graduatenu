@@ -7,6 +7,8 @@ import { AppState } from "../state/reducers/state";
 import { Major, IUserData } from "../models/types";
 import { PrimaryButton } from "../components/common/PrimaryButton";
 import { registerUser } from "../services/UserService";
+import { Dispatch } from "redux";
+import { setTokenAction } from "../state/actions/userActions";
 
 const Wrapper = styled.div`
   display: flex;
@@ -44,13 +46,21 @@ const Box = styled.div`
   flex-direction: column;
 `;
 
-interface SignupScreenReduxProps {
+interface ReduxStoreSignupScreenProps {
   fullName: string;
   academicYear: number;
   graduationYear: number;
   major?: Major;
   planStr?: string;
 }
+
+interface ReduxDispatchSignupScreenProps {
+  setToken: (token: string) => void;
+}
+
+type Props = ReduxStoreSignupScreenProps &
+  ReduxDispatchSignupScreenProps &
+  RouteComponentProps<{}>;
 
 interface SignupScreenState {
   emailStr: string;
@@ -65,11 +75,8 @@ interface SignupScreenState {
   validConfirm: boolean;
 }
 
-class SignupScreenComponent extends React.Component<
-  SignupScreenReduxProps & RouteComponentProps<{}>,
-  SignupScreenState
-> {
-  constructor(props: SignupScreenReduxProps & RouteComponentProps<{}>) {
+class SignupScreenComponent extends React.Component<Props, SignupScreenState> {
+  constructor(props: Props) {
     super(props);
 
     this.state = {
@@ -145,6 +152,7 @@ class SignupScreenComponent extends React.Component<
             errorEmail: response.errors.email,
           });
         } else {
+          this.props.setToken(response.user.token);
           this.props.history.push("/home");
         }
       });
@@ -299,10 +307,19 @@ const mapStateToProps = (state: AppState) => ({
 });
 
 /**
+ * Callback to be passed into connect, responsible for dispatching redux actions to update the appstate.
+ * @param dispatch responsible for dispatching actions to the redux store.
+ */
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  setToken: (token: string) => dispatch(setTokenAction(token)),
+});
+
+/**
  * Convert this React component to a component that's connected to the redux store.
  * When rendering the connecting component, the props assigned in mapStateToProps, do not need to
  * be passed down as props from the parent component.
  */
-export const SignupScreen = connect(mapStateToProps)(
-  withRouter(SignupScreenComponent)
-);
+export const SignupScreen = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(SignupScreenComponent));

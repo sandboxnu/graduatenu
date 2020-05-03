@@ -11,6 +11,7 @@ import {
   setMajorAction,
   setAcademicYearAction,
   setGraduationYearAction,
+  setTokenAction,
 } from "../state/actions/userActions";
 import { setCoopCycle } from "../state/actions/scheduleActions";
 import { loginUser } from "../services/UserService";
@@ -51,13 +52,16 @@ const Box = styled.div`
   flex-direction: column;
 `;
 
-interface LoginScreenReduxProps {
+interface ReduxStoreLoginScreenProps {
   setFullName: (fullName: string) => void;
   setAcademicYear: (academicYear: number) => void;
   setGraduationYear: (graduationYear: number) => void;
   setMajor: (major?: Major) => void;
   setCoopCycle: (plan: Schedule) => void;
+  setToken: (token: string) => void;
 }
+
+type Props = ReduxStoreLoginScreenProps & RouteComponentProps<{}>;
 
 interface LoginScreenState {
   emailStr: string;
@@ -68,11 +72,8 @@ interface LoginScreenState {
   error?: string;
 }
 
-class LoginScreenComponent extends React.Component<
-  LoginScreenReduxProps & RouteComponentProps<{}>,
-  LoginScreenState
-> {
-  constructor(props: LoginScreenReduxProps & RouteComponentProps<{}>) {
+class LoginScreenComponent extends React.Component<Props, LoginScreenState> {
+  constructor(props: Props) {
     super(props);
 
     this.state = {
@@ -133,6 +134,7 @@ class LoginScreenComponent extends React.Component<
           this.props.setFullName(response.user.username);
           this.props.setAcademicYear(response.user.academicYear);
           this.props.setGraduationYear(response.user.graduationYear);
+          this.props.setToken(response.user.token);
           this.props.history.push("/home");
         }
       });
@@ -246,6 +248,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     dispatch(setGraduationYearAction(academicYear)),
   setMajor: (major?: Major) => dispatch(setMajorAction(major)),
   setCoopCycle: (plan: Schedule) => dispatch(setCoopCycle(plan)),
+  setToken: (token: string) => dispatch(setTokenAction(token)),
 });
 
 /**
