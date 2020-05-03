@@ -4,8 +4,9 @@ import { withRouter, RouteComponentProps, Link } from "react-router-dom";
 import styled from "styled-components";
 import { TextField } from "@material-ui/core";
 import { AppState } from "../state/reducers/state";
-import { Major } from "../models/types";
+import { Major, IUserData } from "../models/types";
 import { PrimaryButton } from "../components/common/PrimaryButton";
+import { registerUser } from "../services/UserService";
 
 const Wrapper = styled.div`
   display: flex;
@@ -115,6 +116,7 @@ class SignupScreenComponent extends React.Component<
    * Checks response for error messages, then redirects user to /home if the sign up succeeds.
    */
   submit() {
+    // Regex to determine if email string is a valid address
     const validEmail: boolean = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(
       this.state.emailStr
     );
@@ -129,33 +131,23 @@ class SignupScreenComponent extends React.Component<
     });
 
     if (validEmail && validPassword && validConfirm) {
-      const user = {
-        user: {
-          email: this.state.emailStr,
-          password: this.state.passwordStr,
-          username: this.props.fullName,
-          academic_year: this.props.academicYear,
-          graduation_year: this.props.graduationYear,
-        },
+      const user: IUserData = {
+        email: this.state.emailStr,
+        password: this.state.passwordStr,
+        username: this.props.fullName,
+        academic_year: this.props.academicYear,
+        graduation_year: this.props.graduationYear,
       };
 
-      fetch(`/api/users`, {
-        method: "POST",
-        body: JSON.stringify(user),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-        .then(response => response.json())
-        .then(response => {
-          if (response.errors) {
-            this.setState({
-              errorEmail: response.errors.email,
-            });
-          } else {
-            this.props.history.push("/home");
-          }
-        });
+      registerUser(user).then(response => {
+        if (response.errors) {
+          this.setState({
+            errorEmail: response.errors.email,
+          });
+        } else {
+          this.props.history.push("/home");
+        }
+      });
     }
   }
 

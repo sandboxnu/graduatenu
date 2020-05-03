@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { withRouter, RouteComponentProps, Link } from "react-router-dom";
 import styled from "styled-components";
 import { TextField } from "@material-ui/core";
-import { Major, Schedule } from "../models/types";
+import { Major, Schedule, ILoginData } from "../models/types";
 import { PrimaryButton } from "../components/common/PrimaryButton";
 import { Dispatch } from "redux";
 import {
@@ -13,6 +13,7 @@ import {
   setGraduationYearAction,
 } from "../state/actions/userActions";
 import { setCoopCycle } from "../state/actions/scheduleActions";
+import { loginUser } from "../services/UserService";
 
 const Wrapper = styled.div`
   display: flex;
@@ -108,6 +109,7 @@ class LoginScreenComponent extends React.Component<
    * user attributes obtained from the response object, then redirects user to /home.
    */
   submit() {
+    // Regex to determine if email string is a valid address
     const validEmail: boolean = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(
       this.state.emailStr
     );
@@ -117,21 +119,12 @@ class LoginScreenComponent extends React.Component<
     });
 
     if (validEmail) {
-      const user = {
-        user: {
+      const user: ILoginData = {
           email: this.state.emailStr,
           password: this.state.passwordStr,
-        },
       };
 
-      fetch(`/api/users/login`, {
-        method: "POST",
-        body: JSON.stringify(user),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-        .then(response => response.json())
+      loginUser(user)
         .then(response => {
           if (response.errors) {
             this.setState({
