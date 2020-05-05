@@ -50,12 +50,12 @@ const OuterContainer = styled.div`
 `;
 
 const SidebarContainer = styled.div`
-  flex: 1;
+  flex: 4;
 `;
 
 const Container = styled.div`
   display: flex;
-  flex: 5;
+  flex: 19;
   flex-direction: column;
   justify-content: start;
   align-items: start;

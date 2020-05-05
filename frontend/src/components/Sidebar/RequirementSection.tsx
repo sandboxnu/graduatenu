@@ -37,10 +37,23 @@ const TitleWrapper = styled.div`
 
 const TitleText = styled.div`
   margin-left: 4px;
-  margin-right: 10px;
   font-weight: 600;
   font-size: 14px;
   cursor: pointer;
+`;
+
+const SubtitleWrapper = styled.div`
+  margin-top: 4px;
+`;
+
+const SubtitleText = styled.div<any>`
+  margin-left: ${props => 4 + props.level * 10 + "px"};
+  font-weight: 600;
+  font-size: 12px;
+`;
+
+const Separator = styled.div`
+  height: 14px;
 `;
 
 const CompletedTitleText = styled.div`
@@ -223,8 +236,11 @@ export class RequirementSection extends React.Component<
    * @param reqs the list of requirements to be rendered
    */
   parseRequirements(reqs: Requirement[]) {
+    // iterate through reqs and make a list of
     return reqs.map((r: Requirement, index: number) => (
-      <div key={index}>{this.renderRequirement(r, index)}</div>
+      <div key={index}>
+        {this.renderRequirement(r, index, 0, reqs.length !== 1)}
+      </div>
     ));
   }
 
@@ -232,10 +248,17 @@ export class RequirementSection extends React.Component<
    * Handles each Requirement type to render the given Requirement at the given index.
    * @param req the requirement to be rendered
    * @param index the designated index of this requirement
+   * @param level the current indentation level of this requirement
+   * @param top determines if this requirement is at top level
    */
-  renderRequirement(req: Requirement, index: number) {
+  renderRequirement(
+    req: Requirement,
+    index: number,
+    level: number,
+    top: boolean
+  ) {
     if (req.type === "COURSE") {
-      return this.renderCourse(req as IRequiredCourse);
+      return this.renderCourse(level, req as IRequiredCourse);
     }
 
     if (req.type === "RANGE") {
@@ -250,6 +273,7 @@ export class RequirementSection extends React.Component<
       return (
         <CourseAndLabWrapper key={index}>
           {this.renderCourse(
+            level,
             req.courses[0] as IRequiredCourse,
             req.courses[1] as IRequiredCourse
           )}
@@ -259,19 +283,24 @@ export class RequirementSection extends React.Component<
 
     return (
       <div key={index.toString()}>
-        <ANDORText>{this.convertTypeToText(req.type)}</ANDORText>
+        {this.convertTypeToText(req.type, level, top, index)}
         {req.courses
           .filter(c => c.type === "COURSE")
-          .map(c => this.renderCourse(c as IRequiredCourse))}
+          .map(c => this.renderCourse(level, c as IRequiredCourse))}
         {req.courses
           .filter(c => c.type === "AND")
           .map((c: Requirement, index: number) =>
-            this.renderRequirement(c, index)
+            this.renderRequirement(
+              c,
+              index,
+              level + 1,
+              req.type === "AND" ? false : true
+            )
           )}
         {req.courses
           .filter(c => c.type === "OR")
           .map((c: Requirement, index: number) =>
-            this.renderRequirement(c, index)
+            this.renderRequirement(c, index, level + 1, false)
           )}
       </div>
     );
@@ -301,10 +330,15 @@ export class RequirementSection extends React.Component<
 
   /**
    * Renders the given course as a draggable SidebarClassBlock.
+   * @param level the current indentation level for this course block
    * @param course the given IRequiredCourse
    * @param andCourse? only received by this function if the given course is an and course
    */
-  renderCourse(course: IRequiredCourse, andCourse?: IRequiredCourse) {
+  renderCourse(
+    level: number,
+    course: IRequiredCourse,
+    andCourse?: IRequiredCourse
+  ) {
     const convertedCourse: DNDScheduleCourse = this.state.classData[
       course.subject + course.classId
     ];
@@ -336,6 +370,7 @@ export class RequirementSection extends React.Component<
                 andCourse.subject + andCourse.classId
               )
             }
+            level={level}
           ></SidebarClassBlock>
         );
       }
@@ -351,6 +386,7 @@ export class RequirementSection extends React.Component<
             completed={this.props.completedCourses.includes(
               course.subject + course.classId
             )}
+            level={level}
           ></SidebarClassBlock>
         );
       }
@@ -360,10 +396,25 @@ export class RequirementSection extends React.Component<
   /**
    * Translates type to desired display text in sidebar.
    * @param type the given Requirement type
+   * @param level the current indentation level for this display text
+   * @param top determines if this display text is at top level
    */
-  convertTypeToText(type: string) {
+  convertTypeToText(type: string, level: number, top: boolean, index: number) {
     if (type === "OR") {
-      return "Complete one of the following:";
+      return (
+        <SubtitleWrapper>
+          {top && <Separator />}
+          <SubtitleText level={top ? level + 1 : level}>
+            Complete one of the following:
+          </SubtitleText>
+        </SubtitleWrapper>
+      );
+    }
+    if (type === "AND") {
+      if (index !== 0 && top) {
+        return <Separator />;
+      }
+      return "";
     }
 
     return type;
@@ -404,6 +455,13 @@ export class RequirementSection extends React.Component<
               />
             )}
           </SectionHeaderWrapper>
+        )}
+        {!!contents && contents.type === "OR" && (
+          <SubtitleWrapper>
+            <SubtitleText level={0}>
+              Complete one of the following:
+            </SubtitleText>
+          </SubtitleWrapper>
         )}
         {this.state.expanded && (
           <Droppable isDropDisabled={true} droppableId={this.props.title}>

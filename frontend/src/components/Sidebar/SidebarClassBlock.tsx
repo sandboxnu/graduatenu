@@ -6,7 +6,7 @@ import { Card, Tooltip } from "@material-ui/core";
 
 const DraggableContainer = styled.div<any>`
   flex: 1;
-  margin: 5px 0px 0px 4px;
+  margin: 5px 0px 0px ${props => 4 + props.level * 10 + "px"};
 `;
 
 const Block = styled(Card)<any>`
@@ -67,6 +67,7 @@ interface SidebarClassBlockProps {
   index: number;
   warning?: CourseWarning;
   completed: boolean;
+  level: number;
 }
 
 export class SidebarClassBlock extends React.Component<SidebarClassBlockProps> {
@@ -168,7 +169,7 @@ export class SidebarClassBlock extends React.Component<SidebarClassBlockProps> {
 
   render() {
     return (
-      <DraggableContainer>
+      <DraggableContainer level={this.props.level}>
         <Draggable
           isDragDisabled={this.props.completed}
           draggableId={this.getDraggableId()}
