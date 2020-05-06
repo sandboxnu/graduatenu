@@ -98,13 +98,6 @@ const MyCheckIcon = materialStyled(CheckIcon)({
   color: "green",
 });
 
-const Wrapper = styled.div`
-  /* display: flex;
-  flex-direction: column; */
-  /* width: 100%;
-  height: 100%; */
-`;
-
 interface RequirementSectionProps {
   title: string;
   contents: IMajorRequirementGroup;
@@ -242,7 +235,6 @@ export class RequirementSection extends React.Component<
    * @param reqs the list of requirements to be rendered
    */
   parseRequirements(reqs: Requirement[]) {
-    // iterate through reqs and make a list of
     return reqs.map((r: Requirement, index: number) => (
       <div key={index}>
         {this.renderRequirement(r, index, 0, reqs.length !== 1)}
@@ -296,12 +288,7 @@ export class RequirementSection extends React.Component<
         {req.courses
           .filter(c => c.type === "AND")
           .map((c: Requirement, index: number) =>
-            this.renderRequirement(
-              c,
-              index,
-              level + 1,
-              req.type === "AND" ? false : true
-            )
+            this.renderRequirement(c, index, level + 1, req.type !== "AND")
           )}
         {req.courses
           .filter(c => c.type === "OR")
@@ -472,10 +459,7 @@ export class RequirementSection extends React.Component<
         {this.state.expanded && (
           <Droppable isDropDisabled={true} droppableId={this.props.title}>
             {provided => (
-              <Wrapper
-                ref={provided.innerRef as any}
-                {...provided.droppableProps}
-              >
+              <div ref={provided.innerRef as any} {...provided.droppableProps}>
                 {!!contents &&
                   contents.type !== "RANGE" &&
                   this.parseRequirements(contents.requirements)}
@@ -483,7 +467,7 @@ export class RequirementSection extends React.Component<
                   contents.type === "RANGE" &&
                   this.handleRange(contents.requirements)}
                 {provided.placeholder}
-              </Wrapper>
+              </div>
             )}
           </Droppable>
         )}

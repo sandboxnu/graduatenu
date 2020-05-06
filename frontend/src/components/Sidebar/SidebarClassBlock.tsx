@@ -9,10 +9,6 @@ const DraggableContainer = styled.div<any>`
   margin: 5px 0px 0px ${props => 4 + props.level * 10 + "px"};
 `;
 
-const Placeholder = styled.div`
-  height: 25px;
-`;
-
 const Block = styled(Card)<any>`
   height: 25px;
   border-radius: 4px;
@@ -65,14 +61,6 @@ const CompletedTitle = styled.div`
   margin-right: 4px;
 `;
 
-const Item = styled.div``;
-
-const Clone = styled(Item)`
-  ~ div {
-    transform: none !important;
-  }
-`;
-
 interface SidebarClassBlockProps {
   class: DNDScheduleCourse;
   lab?: DNDScheduleCourse;
@@ -89,7 +77,7 @@ export class SidebarClassBlock extends React.Component<SidebarClassBlockProps> {
 
   renderBody(provided: DraggableProvided) {
     return (
-      <Item>
+      <div>
         <Block
           {...provided.draggableProps}
           {...provided.dragHandleProps}
@@ -146,7 +134,7 @@ export class SidebarClassBlock extends React.Component<SidebarClassBlockProps> {
             </SidebarClassBlockBodyContainer>
           )}
         </Block>
-      </Item>
+      </div>
     );
   }
 
@@ -187,21 +175,17 @@ export class SidebarClassBlock extends React.Component<SidebarClassBlockProps> {
           draggableId={this.getDraggableId()}
           index={this.props.index}
         >
-          {(provided, snapshot) => {
+          {provided => {
             return (
-              <React.Fragment>
-                <Tooltip
-                  title={this.getTitle()}
-                  placement="top"
-                  PopperProps={{
-                    disablePortal: true,
-                  }}
-                >
-                  {this.renderBody(provided)}
-                </Tooltip>
-                {/* {snapshot.isDragging && <Placeholder></Placeholder>} */}
-                {/* {snapshot.isDragging && <Clone>{this.renderBody(provided)}</Clone>} */}
-              </React.Fragment>
+              <Tooltip
+                title={this.getTitle()}
+                placement="top"
+                PopperProps={{
+                  disablePortal: true,
+                }}
+              >
+                {this.renderBody(provided)}
+              </Tooltip>
             );
           }}
         </Draggable>
