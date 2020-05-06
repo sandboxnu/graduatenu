@@ -99,10 +99,10 @@ const MyCheckIcon = materialStyled(CheckIcon)({
 });
 
 const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
+  /* display: flex;
+  flex-direction: column; */
+  /* width: 100%;
+  height: 100%; */
 `;
 
 interface RequirementSectionProps {
@@ -117,6 +117,7 @@ interface RequirementSectionState {
   modalVisible: boolean;
   selectedCourses: IRequiredCourse[];
   classData: { [id: string]: DNDScheduleCourse };
+  indexData: { [id: string]: number };
 }
 
 export class RequirementSection extends React.Component<
@@ -137,6 +138,7 @@ export class RequirementSection extends React.Component<
         },
       ],
       classData: {},
+      indexData: {},
     };
   }
 
@@ -221,13 +223,17 @@ export class RequirementSection extends React.Component<
     );
 
     let classData: { [id: string]: DNDScheduleCourse } = {};
+    let indexData: { [id: string]: number } = {};
 
-    for (const course of dndCourses) {
+    for (let i = 0; i < dndCourses.length; i++) {
+      let course: DNDScheduleCourse = dndCourses[i];
       classData[course.subject + course.classId] = course;
+      indexData[course.subject + course.classId] = i;
     }
 
     this.setState({
       classData,
+      indexData,
     });
   }
 
@@ -361,7 +367,7 @@ export class RequirementSection extends React.Component<
             }
             class={convertedCourse}
             lab={convertedLab}
-            index={0}
+            index={this.state.indexData[course.subject + course.classId]}
             completed={
               this.props.completedCourses.includes(
                 course.subject + course.classId
@@ -382,7 +388,7 @@ export class RequirementSection extends React.Component<
           <SidebarClassBlock
             key={course.subject + course.classId}
             class={convertedCourse}
-            index={0}
+            index={this.state.indexData[course.subject + course.classId]}
             completed={this.props.completedCourses.includes(
               course.subject + course.classId
             )}
@@ -470,14 +476,12 @@ export class RequirementSection extends React.Component<
                 ref={provided.innerRef as any}
                 {...provided.droppableProps}
               >
-                <div>
-                  {!!contents &&
-                    contents.type !== "RANGE" &&
-                    this.parseRequirements(contents.requirements)}
-                  {!!contents &&
-                    contents.type === "RANGE" &&
-                    this.handleRange(contents.requirements)}
-                </div>
+                {!!contents &&
+                  contents.type !== "RANGE" &&
+                  this.parseRequirements(contents.requirements)}
+                {!!contents &&
+                  contents.type === "RANGE" &&
+                  this.handleRange(contents.requirements)}
                 {provided.placeholder}
               </Wrapper>
             )}
