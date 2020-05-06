@@ -456,7 +456,7 @@ export class RequirementSection extends React.Component<
             )}
           </SectionHeaderWrapper>
         )}
-        {!!contents && contents.type === "OR" && (
+        {this.state.expanded && !!contents && contents.type === "OR" && (
           <SubtitleWrapper>
             <SubtitleText level={0}>
               Complete one of the following:

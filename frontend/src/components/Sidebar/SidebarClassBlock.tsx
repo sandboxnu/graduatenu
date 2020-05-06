@@ -177,7 +177,13 @@ export class SidebarClassBlock extends React.Component<SidebarClassBlockProps> {
         >
           {provided => {
             return (
-              <Tooltip title={this.getTitle()} placement="top">
+              <Tooltip
+                title={this.getTitle()}
+                placement="top"
+                PopperProps={{
+                  disablePortal: true,
+                }}
+              >
                 {this.renderBody(provided)}
               </Tooltip>
             );
