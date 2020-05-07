@@ -1,5 +1,5 @@
 import { createAction } from "typesafe-actions";
-import { Major } from "../../models/types";
+import { Major } from "graduate-common";
 
 export const setFullNameAction = createAction(
   "user/SET_FULL_NAME",

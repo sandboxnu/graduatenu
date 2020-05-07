@@ -1,5 +1,6 @@
 import React from "react";
-import { DNDSchedule, Major, IRequiredCourse } from "../../models/types";
+import { DNDSchedule } from "../../models/types";
+import { Major, IRequiredCourse } from "graduate-common";
 import styled from "styled-components";
 import { RequirementSection } from ".";
 import {

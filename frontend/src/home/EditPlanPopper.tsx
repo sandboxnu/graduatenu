@@ -19,7 +19,8 @@ import {
 } from "../state/actions/scheduleActions";
 import { setMajorAction } from "../state/actions/userActions";
 import { getMajors, getPlans } from "../state";
-import { DNDSchedule, Major, Schedule } from "../models/types";
+import { DNDSchedule } from "../models/types";
+import { Major, Schedule } from "graduate-common";
 import { planToString, scheduleHasClasses } from "../utils";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 

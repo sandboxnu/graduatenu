@@ -5,9 +5,11 @@ import {
   IRequiredCourse,
   ICourseRange,
   ISubjectRange,
+  ScheduleCourse,
+} from "graduate-common";
+import {
   IRequirementGroupWarning,
   DNDScheduleCourse,
-  ScheduleCourse,
 } from "../../models/types";
 import styled from "styled-components";
 import CheckIcon from "@material-ui/icons/Check";

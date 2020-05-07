@@ -2,14 +2,15 @@ import React from "react";
 import { DragDropContext } from "react-beautiful-dnd";
 import {
   DNDSchedule,
-  Major,
-  Schedule,
-  Status,
-  SeasonWord,
   IWarning,
   DNDScheduleYear,
-  DNDScheduleTerm,
+  DNDScheduleTerm
 } from "../models/types";
+import {
+  Major,
+  Status,
+  SeasonWord
+} from "graduate-common";
 import styled from "styled-components";
 import { Year } from "../components/Year";
 import {
