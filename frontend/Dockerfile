@@ -1,10 +1,11 @@
 # build environment
-FROM node:11-alpine as build
+FROM node:12-alpine as build
 WORKDIR /app
 COPY package.json /app/package.json
-COPY yarn.lock /app/yarn.lock
-RUN yarn install --production
-COPY . /app
+RUN yarn install 
+COPY ./src /app/src
+COPY ./public /app/public
+COPY ./tsconfig.json /app/tsconfig.json
 RUN yarn build
 
 # production environment
