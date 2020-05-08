@@ -282,7 +282,7 @@ class CompletedCoursesComponent extends Component<Props, State> {
 
   render() {
     let reqLen = this.props.major.requirementGroups.length;
-    let split = Math.floor(reqLen / 2) + 1;
+    let split = Math.floor(reqLen / 2);
     return (
       <GenericOnboardingTemplate screen={1}>
         <MainTitleText>Completed courses:</MainTitleText>
@@ -293,7 +293,8 @@ class CompletedCoursesComponent extends Component<Props, State> {
             maxWidth: 800,
             minHeight: 300,
             maxHeight: 300,
-            overflow: "auto",
+            overflow: "-moz-scrollbars-vertical",
+            overflowY: "scroll",
           }}
         >
           <Grid container justify="space-evenly">
