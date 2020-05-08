@@ -55,7 +55,7 @@ const CourseText = styled.p`
   font-weight: 400;
 `;
 
-const ScrollWrapper = styled.div`
+const ScrollWrapper = styled.body`
   &::-webkit-scrollbar {
     -webkit-appearance: none;
     width: 7px;
