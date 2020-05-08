@@ -10,7 +10,7 @@ import {
 import {
   SeasonEnum,
   StatusEnum
-} from "../../frontend/src/models/types"
+} from "../../frontend/src/models/types";
 
 // the year to use as the first year of the schedule.
 const BASE_YEAR: number = 1000;
