@@ -87,6 +87,9 @@ typings/
 # include Zeit now
 !now.json
 
+# task definition should be included
+!task-definition.json
+
 # avoid temp files
 *~
 
