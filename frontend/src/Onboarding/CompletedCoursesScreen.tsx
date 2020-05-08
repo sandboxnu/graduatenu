@@ -55,7 +55,7 @@ const CourseText = styled.p`
   font-weight: 400;
 `;
 
-const ScrollWrapper = styled.body`
+const ScrollWrapper = styled.div`
   &::-webkit-scrollbar-thumb:hover {
     background-color: rgba(0, 0, 0, 0.5);
   }
@@ -65,7 +65,7 @@ const ScrollWrapper = styled.body`
     border-color: transparent;
     border-radius: 9px 8px 8px 9px;
     border-style: solid;
-    border-width: 3px 3px 3px 4px; /* Workaround because margins aren't supported */
+    border-width: 3px 3px 3px 4px;
     box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
   }
   &::-webkit-scrollbar {
@@ -314,37 +314,36 @@ class CompletedCoursesComponent extends Component<Props, State> {
     return (
       <GenericOnboardingTemplate screen={1}>
         <MainTitleText>Completed courses:</MainTitleText>
-        <ScrollWrapper>
-          <Paper
-            elevation={0}
-            style={{
-              minWidth: 800,
-              maxWidth: 800,
-              minHeight: 300,
-              maxHeight: 300,
-              overflow: "-moz-scrollbars-vertical",
-              overflowY: "scroll",
-            }}
-          >
-            <Grid container justify="space-evenly">
-              <Grid key={0} item>
-                <Paper elevation={0} style={{ minWidth: 350, maxWidth: 400 }}>
-                  {this.props.major.requirementGroups
-                    .slice(0, split)
-                    .map(r => this.renderSection(r))}
-                </Paper>
-              </Grid>
-              <Grid key={1} item>
-                {this.renderOtherCourseSection()}
-                <Paper elevation={0} style={{ minWidth: 350, maxWidth: 400 }}>
-                  {this.props.major.requirementGroups
-                    .slice(split, reqLen)
-                    .map(r => this.renderSection(r))}
-                </Paper>
-              </Grid>
+        <Paper
+          elevation={0}
+          style={{
+            minWidth: 800,
+            maxWidth: 800,
+            minHeight: 300,
+            maxHeight: 300,
+            overflow: "-moz-scrollbars-vertical",
+            overflowY: "scroll",
+          }}
+          component={ScrollWrapper}
+        >
+          <Grid container justify="space-evenly">
+            <Grid key={0} item>
+              <Paper elevation={0} style={{ minWidth: 350, maxWidth: 400 }}>
+                {this.props.major.requirementGroups
+                  .slice(0, split)
+                  .map(r => this.renderSection(r))}
+              </Paper>
             </Grid>
-          </Paper>
-        </ScrollWrapper>
+            <Grid key={1} item>
+              {this.renderOtherCourseSection()}
+              <Paper elevation={0} style={{ minWidth: 350, maxWidth: 400 }}>
+                {this.props.major.requirementGroups
+                  .slice(split, reqLen)
+                  .map(r => this.renderSection(r))}
+              </Paper>
+            </Grid>
+          </Grid>
+        </Paper>
         <AddClassModal
           schedule={undefined}
           visible={this.state.modalVisible}
