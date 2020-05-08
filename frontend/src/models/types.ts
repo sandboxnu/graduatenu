@@ -5,6 +5,48 @@ import {
   ScheduleCourse
 } from "graduate-common"
 
+/**
+ * Describes an abbreviation for one of Northeastern's NUPath academic breadth requirements.
+ * Each two-character NUPath directly corresponds to Northeastern's abbreviation of the requirement.
+ */
+export enum NUPathEnum {
+  ND = "ND",
+  EI = "EI",
+  IC = "IC",
+  FQ = "FQ",
+  SI = "SI",
+  AD = "AD",
+  DD = "DD",
+  ER = "ER",
+  WF = "WF",
+  WD = "WD",
+  WI = "WI",
+  EX = "EX",
+  CE = "CE",
+}
+
+/**
+ * Represents one of the seasons in which a student can take a course, as abbreviated by Northeastern.
+ */
+export enum SeasonEnum {
+  FL = "FL",
+  SP = "SP",
+  S1 = "S1",
+  S2 = "S2",
+  SM = "SM",
+}
+
+/**
+ * A Status is one of on CO-OP, CLASSES, or INACTIVE
+ */
+export enum StatusEnum {
+  COOP = "COOP",
+  CLASSES = "CLASSES",
+  INACTIVE = "INACTIVE",
+  HOVERINACTIVE = "HOVERINACTIVE",
+  HOVERCOOP = "HOVERCOOP",
+}
+
 export interface DNDSchedule extends Schedule {
   yearMap: {
     [key: number]: DNDScheduleYear;

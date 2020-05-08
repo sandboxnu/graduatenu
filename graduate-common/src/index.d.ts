@@ -2,7 +2,7 @@
  * Describes an abbreviation for one of Northeastern's NUPath academic breadth requirements.
  * Each two-character NUPath directly corresponds to Northeastern's abbreviation of the requirement.
  */
-export enum NUPath {
+export const enum NUPathEnum {
   ND = "ND",
   EI = "EI",
   IC = "IC",
@@ -21,13 +21,27 @@ export enum NUPath {
 /**
  * Represents one of the seasons in which a student can take a course, as abbreviated by Northeastern.
  */
-export enum SeasonEnum {
+export const enum SeasonEnum {
   FL = "FL",
   SP = "SP",
   S1 = "S1",
   S2 = "S2",
   SM = "SM",
 }
+
+/**
+ * A Status is one of on CO-OP, CLASSES, or INACTIVE
+ */
+export const enum StatusEnum {
+  COOP = "COOP",
+  CLASSES = "CLASSES",
+  INACTIVE = "INACTIVE",
+  HOVERINACTIVE = "HOVERINACTIVE",
+  HOVERCOOP = "HOVERCOOP",
+}
+
+export type NUPath = keyof typeof NUPathEnum;
+export type Status = keyof typeof StatusEnum;
 export type Season = keyof typeof SeasonEnum;
 export type SeasonWord = "fall" | "spring" | "summer1" | "summer2";
 
@@ -152,7 +166,7 @@ export interface Major {
   yearVersion: number;
   isLanguageRequired: boolean;
   totalCreditsRequired: number;
-  nupaths: NUPath[];
+  nupaths: NUPathEnum[];
   //concentrations: Concentrations;
 }
 
@@ -265,18 +279,6 @@ export interface ScheduleTerm {
 }
 
 /**
- * A Status is one of on CO-OP, CLASSES, or INACTIVE
- */
-export enum StatusEnum {
-  COOP = "COOP",
-  CLASSES = "CLASSES",
-  INACTIVE = "INACTIVE",
-  HOVERINACTIVE = "HOVERINACTIVE",
-  HOVERCOOP = "HOVERCOOP",
-}
-export type Status = keyof typeof StatusEnum;
-
-/**
  * A course of a schedule
  * @param classId the classId of this course
  * @param subject the subject of this course
@@ -371,16 +373,16 @@ export interface IOldRequirement {
  */
 export interface IInitialScheduleRep {
   completed: {
-    nupaths: NUPath[];
+    nupaths: NUPathEnum[];
     courses: ICompleteCourse[];
   };
   inprogress: {
     courses: ICompleteCourse[];
-    nupaths: NUPath[];
+    nupaths: NUPathEnum[];
   };
   requirements: {
     courses: IOldRequirement[];
-    nupaths: NUPath[];
+    nupaths: NUPathEnum[];
   };
   data: {
     majors: string[];

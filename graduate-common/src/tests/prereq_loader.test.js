@@ -1,4 +1,4 @@
-const prereq_loader = require("../src/prereq_loader");
+const prereq_loader = require("../prereq_loader");
 const rp = require("request-promise");
 const plan_parser = require("../../../scrapers/src/plan_parser");
 const supported = [

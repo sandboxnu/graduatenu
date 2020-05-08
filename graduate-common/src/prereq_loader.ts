@@ -5,7 +5,7 @@ import {
   ScheduleYear,
   ScheduleTerm,
   ScheduleCourse,
-} from "../../frontend/src/models/types";
+} from "./index";
 import DataLoader from "dataloader";
 import request from "request-promise";
 

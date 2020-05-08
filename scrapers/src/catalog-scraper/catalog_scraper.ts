@@ -3,7 +3,7 @@ import {
   Major,
   IMajorRequirementGroup,
   Concentrations,
-} from "../../../frontend/src/models/types";
+} from "graduate-common";
 import { createRequirementGroup } from "./reqGroup_scraper";
 
 const rp = require("request-promise");

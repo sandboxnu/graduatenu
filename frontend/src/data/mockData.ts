@@ -1,8 +1,9 @@
 import {
   DNDSchedule,
   DNDScheduleCourse,
+  SeasonEnum, 
+  StatusEnum
 } from "../models/types";
-import { SeasonEnum, StatusEnum } from "graduate-common";
 
 const mockClass = (num: number): DNDScheduleCourse => ({
   classId: "3500",

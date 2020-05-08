@@ -35,12 +35,8 @@ import {
 } from "../state";
 import {
   updateSemesterAction,
-  setScheduleAction,
   setDNDScheduleAction,
-  setCoopCycle,
 } from "../state/actions/scheduleActions";
-import { setMajorAction } from "../state/actions/userActions";
-import { getMajors, getPlans } from "../state";
 import { EditPlanPopper } from "./EditPlanPopper";
 
 const OuterContainer = styled.div`
