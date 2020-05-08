@@ -71,7 +71,7 @@ export const GenericOnboardingTemplate: React.FC<Props> = ({
   const classes = useStyles();
   return (
     <Wrapper>
-      <TitleLocation>Let's get to know you</TitleLocation>
+      <TitleLocation>Let's get to know you!</TitleLocation>
 
       <ThemeProvider theme={theme}>
         <DotWrapper>
