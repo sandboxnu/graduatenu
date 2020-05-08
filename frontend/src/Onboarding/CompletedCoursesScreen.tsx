@@ -55,6 +55,17 @@ const CourseText = styled.p`
   font-weight: 400;
 `;
 
+const ScrollWrapper = styled.p`
+&::-webkit-scrollbar {
+  -webkit-appearance: none;
+  background-color: #FAFAFA;
+  width: 16px;
+&::-webkit-scrollbar-track:vertical {
+  border-left: 1px solid #E7E7E7;
+  box-shadow: 1px 0 1px 0 #F6F6F6 inset, -1px 0 1px 0 #F6F6F6 inset;
+}
+`;
+
 /**
  * Flattens the Requirement[] into only a list of Requirements/Requirement sets
  * This means that all inner lists will only contain one class or a list of the primary class and its labs/recitations
@@ -286,35 +297,37 @@ class CompletedCoursesComponent extends Component<Props, State> {
     return (
       <GenericOnboardingTemplate screen={1}>
         <MainTitleText>Completed courses:</MainTitleText>
-        <Paper
-          elevation={0}
-          style={{
-            minWidth: 800,
-            maxWidth: 800,
-            minHeight: 300,
-            maxHeight: 300,
-            overflow: "-moz-scrollbars-vertical",
-            overflowY: "scroll",
-          }}
-        >
-          <Grid container justify="space-evenly">
-            <Grid key={0} item>
-              <Paper elevation={0} style={{ minWidth: 350, maxWidth: 400 }}>
-                {this.props.major.requirementGroups
-                  .slice(0, split)
-                  .map(r => this.renderSection(r))}
-              </Paper>
+        <ScrollWrapper>
+          <Paper
+            elevation={0}
+            style={{
+              minWidth: 800,
+              maxWidth: 800,
+              minHeight: 300,
+              maxHeight: 300,
+              overflow: "-moz-scrollbars-vertical",
+              overflowY: "scroll",
+            }}
+          >
+            <Grid container justify="space-evenly">
+              <Grid key={0} item>
+                <Paper elevation={0} style={{ minWidth: 350, maxWidth: 400 }}>
+                  {this.props.major.requirementGroups
+                    .slice(0, split)
+                    .map(r => this.renderSection(r))}
+                </Paper>
+              </Grid>
+              <Grid key={1} item>
+                {this.renderOtherCourseSection()}
+                <Paper elevation={0} style={{ minWidth: 350, maxWidth: 400 }}>
+                  {this.props.major.requirementGroups
+                    .slice(split, reqLen)
+                    .map(r => this.renderSection(r))}
+                </Paper>
+              </Grid>
             </Grid>
-            <Grid key={1} item>
-              {this.renderOtherCourseSection()}
-              <Paper elevation={0} style={{ minWidth: 350, maxWidth: 400 }}>
-                {this.props.major.requirementGroups
-                  .slice(split, reqLen)
-                  .map(r => this.renderSection(r))}
-              </Paper>
-            </Grid>
-          </Grid>
-        </Paper>
+          </Paper>
+        </ScrollWrapper>
         <AddClassModal
           schedule={undefined}
           visible={this.state.modalVisible}
