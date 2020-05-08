@@ -11,12 +11,9 @@ import {
   ICompleteCourse,
   IInitialScheduleRep,
   IOldRequirement,
-} from "graduate-common";
-
-import {
   Season,
-  NUPathEnum
-} from "../../frontend/src/models/types"
+  NUPath
+} from "graduate-common";
 
 class AuditToJSON {
   // protected designation is for possible access by external class in same package without export
@@ -26,13 +23,13 @@ class AuditToJSON {
   protected auditYear: number;
   protected gradDate: Date;
 
-  protected completeNUPaths: NUPathEnum[];
+  protected completeNUPaths: NUPath[];
   protected completeCourses: ICompleteCourse[];
 
-  protected ipNUPaths: NUPathEnum[];
+  protected ipNUPaths: NUPath[];
   protected ipCourses: ICompleteCourse[];
 
-  protected requiredNUPaths: NUPathEnum[];
+  protected requiredNUPaths: NUPath[];
   protected requiredCourses: IOldRequirement[];
 
   /**
@@ -159,7 +156,7 @@ class AuditToJSON {
     }
 
     const nupathInd: number = line.indexOf("(") + 1;
-    const toAdd = line.substring(nupathInd, nupathInd + 2) as NUPathEnum;
+    const toAdd = line.substring(nupathInd, nupathInd + 2) as NUPath;
 
     if (contains(line, ">OK ")) {
       if (!this.completeNUPaths.includes(toAdd)) {
