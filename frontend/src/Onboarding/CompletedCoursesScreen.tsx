@@ -56,14 +56,15 @@ const CourseText = styled.p`
 `;
 
 const ScrollWrapper = styled.p`
-&::-webkit-scrollbar {
-  -webkit-appearance: none;
-  background-color: #FAFAFA;
-  width: 16px;
-&::-webkit-scrollbar-track:vertical {
-  border-left: 1px solid #E7E7E7;
-  box-shadow: 1px 0 1px 0 #F6F6F6 inset, -1px 0 1px 0 #F6F6F6 inset;
-}
+  &::-webkit-scrollbar {
+    -webkit-appearance: none;
+    background-color: #fafafa;
+    width: 16px;
+  }
+  &::-webkit-scrollbar-track:vertical {
+    border-left: 1px solid #e7e7e7;
+    box-shadow: 1px 0 1px 0 #f6f6f6 inset, -1px 0 1px 0 #f6f6f6 inset;
+  }
 `;
 
 /**
