@@ -65,6 +65,22 @@ const ScrollWrapper = styled.p`
     border-left: 1px solid #e7e7e7;
     box-shadow: 1px 0 1px 0 #f6f6f6 inset, -1px 0 1px 0 #f6f6f6 inset;
   }
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  &::-webkit-scrollbar-thumb {
+    background-clip: padding-box;
+    background-color: #c1c1c1;
+    border-color: transparent;
+    border-radius: 9px 8px 8px 9px;
+    border-style: solid;
+    border-width: 3px 3px 3px 4px; /* Workaround because margins aren't supported */
+    box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
+  }
+  &::-webkit-scrollbar-track:horizontal {
+    border-top: 1px solid #e7e7e7;
+    box-shadow: 0 1px 1px 0 #f6f6f6 inset, 0 -1px 1px 0 #f6f6f6 inset;
+  }
 `;
 
 /**
