@@ -44,6 +44,10 @@
         {
           "name": "RAILS_LOG_TO_STDOUT",
           "value": "ENABLE"
+        },
+        {
+          "name": "RAILS_MASTER_KEY",
+          "value": "e1d7b93b075de2f3cc3a9c69fa97a897"
         }
       ],
       "resourceRequirements": null,
