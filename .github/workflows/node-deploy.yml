@@ -28,7 +28,7 @@ on:
     branches:
       - deployment
 
-name: Deploy to Amazon ECS
+name: Deploy node frontend to Amazon ECS
 
 jobs:
   deploy:
@@ -50,21 +50,6 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
-      - name: Build, tag, and push rails image to Amazon ECR
-        id: build-rails-image
-        env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: graduatenu-rails
-          IMAGE_TAG: ${{ github.sha }}
-        run: |
-          # Build a docker container and
-          # push it to ECR so that it can
-          # be deployed to ECS.
-          cd api
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-          echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
-
       - name: Build, tag, and push node image to Amazon ECR
         id: build-node-image
         env:
@@ -80,29 +65,13 @@ jobs:
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
 
-      - name: Fill in the new image ID in the rails ECS task definition
-        id: rails-task-def
-        uses: aws-actions/amazon-ecs-render-task-definition@v1
-        with:
-          task-definition: rails-task-definition.json
-          container-name: rails
-          image: ${{ steps.build-rails-image.outputs.image }}
-
       - name: Fill in the new image ID in the node ECS task definition
         id: node-task-def
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
           task-definition: node-task-definition.json
           container-name: node
-          image: ${{ steps.build-rails-image.outputs.image }}
-
-      - name: Deploy rails ECS task definition
-        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
-        with:
-          task-definition: ${{ steps.rails-task-def.outputs.task-definition }}
-          service: api #put in environment
-          cluster: graduatenu-cluster #put in environment
-          wait-for-service-stability: true
+          image: ${{ steps.build-node-image.outputs.image }}
 
       - name: Deploy node ECS task definition
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
