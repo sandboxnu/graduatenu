@@ -70,12 +70,7 @@ const ScrollWrapper = styled.div`
   }
   &::-webkit-scrollbar {
     -webkit-appearance: none;
-    background-color: #fafafa;
     width: 16px;
-  }
-  &::-webkit-scrollbar-track:horizontal {
-    border-top: 1px solid #e7e7e7;
-    box-shadow: 0 1px 1px 0 #f6f6f6 inset, 0 -1px 1px 0 #f6f6f6 inset;
   }
   &::-webkit-scrollbar-track:vertical {
     border-left: 1px solid #e7e7e7;
