@@ -69,7 +69,7 @@ jobs:
         id: node-task-def
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
-          task-definition: ./infrastructure/deployment/node-task-definition.json
+          task-definition: ./infrastructure/deployment/staging/node-task-definition.json
           container-name: node
           image: ${{ steps.build-node-image.outputs.image }}
 

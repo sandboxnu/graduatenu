@@ -69,7 +69,7 @@ jobs:
         id: rails-task-def
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
-          task-definition: ./infrastructure/deployment/rails-task-definition.json
+          task-definition: ./infrastructure/deployment/staging/rails-task-definition.json
           container-name: rails
           image: ${{ steps.build-rails-image.outputs.image }}
 
