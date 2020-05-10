@@ -3,6 +3,7 @@ import {
   Major,
   IMajorRequirementGroup,
   Concentrations,
+  Concentration,
 } from "../../../frontend/src/models/types";
 import { createRequirementGroup } from "./reqGroup_scraper";
 
@@ -111,9 +112,11 @@ function scrapeMajorDataFromCatalog($: CheerioStatic): Promise<Major> {
       .text()
       .split(" ")[0];
     let yearVersion: number = parseInt(catalogYear.split("-")[0]);
+    let resultArray = createRequirementGroupMap($);
     let requirementGroupMap: {
       [key: string]: IMajorRequirementGroup;
-    } = createRequirementGroupMap($);
+    } = resultArray[0];
+    let concentrationOptions = resultArray[1];
     let requirementGroups: string[] = Object.keys(requirementGroupMap);
     let major: Major = {
       name: name,
@@ -123,11 +126,11 @@ function scrapeMajorDataFromCatalog($: CheerioStatic): Promise<Major> {
       isLanguageRequired: false,
       nupaths: [],
       totalCreditsRequired: 0,
-      // concentrations: {
-      //   minOptions: 0,
-      //   maxOptions: 0,
-      //   requirementGroupMap: [],
-      // },
+      concentrations: {
+        minOptions: concentrationOptions.length > 0 ? 1 : 0,
+        maxOptions: concentrationOptions.length > 0 ? 1 : 0,
+        concentrationOptions: concentrationOptions,
+      },
     };
     resolve(major);
   });
@@ -139,42 +142,93 @@ function scrapeMajorDataFromCatalog($: CheerioStatic): Promise<Major> {
  */
 function createRequirementGroupMap(
   $: CheerioStatic
-): { [key: string]: IMajorRequirementGroup } {
+): [{ [key: string]: IMajorRequirementGroup }, Concentration[]] {
   let requirementGroupMap: { [key: string]: IMajorRequirementGroup } = {};
-  $("#programrequirementstextcontainer table.sc_courselist").each(
-    (index: number, table: CheerioElement) => {
-      let rows: CheerioElement[] = [];
-      $(table)
-        .find("tr")
-        .each((index: number, tableRow: CheerioElement) => {
-          let currentRow: Cheerio = $(tableRow);
-          if (
-            currentRow.find("span.areaheader").length !== 0 &&
-            rows.length > 0
-          ) {
-            let requirementGroup:
-              | IMajorRequirementGroup
-              | undefined = createRequirementGroup($, rows);
-            rows = [tableRow];
-            if (requirementGroup) {
-              requirementGroupMap[requirementGroup.name] = requirementGroup;
-            }
-          } else {
-            rows.push(tableRow);
-          }
+  let is_concentration = false;
+  let current_header = "";
+  let current_concentration = "";
+  let concentrations: Concentration[] = [];
+  $("#programrequirementstextcontainer")
+    .children()
+    .each((index: number, table: CheerioElement) => {
+      if (table.name == "h2") {
+        is_concentration = $(table)
+          .text()
+          .includes("Concentration");
+        current_header = $(table).text();
+      }
+      if (table.name == "h3") {
+        current_concentration = $(table).text();
+        current_concentration = current_concentration.replace(
+          "Concentration in ",
+          ""
+        );
+        current_concentration = current_concentration.replace(
+          "Concentration: ",
+          ""
+        );
+      }
+      if (
+        !is_concentration &&
+        table.name == "table" &&
+        table.attribs["class"] == "sc_courselist"
+      ) {
+        requirementGroupMap = tableToReqGroup(
+          $,
+          table,
+          current_header,
+          requirementGroupMap
+        );
+      }
+      if (
+        is_concentration &&
+        table.name == "table" &&
+        table.attribs["class"] == "sc_courselist"
+      ) {
+        let groups = tableToReqGroup($, table, current_header);
+        concentrations.push({
+          name: current_concentration,
+          requirementGroups: Object.keys(groups),
+          requirementGroupMap: groups,
         });
-      //process last requirement group for the table
-      if (rows.length > 0) {
+      }
+    });
+  return [requirementGroupMap, concentrations];
+}
+
+function tableToReqGroup(
+  $: CheerioStatic,
+  table: CheerioElement,
+  current_header: string,
+  requirementGroupMap: { [key: string]: IMajorRequirementGroup } = {}
+): { [key: string]: IMajorRequirementGroup } {
+  let rows: CheerioElement[] = [];
+  $(table)
+    .find("tr")
+    .each((index: number, tableRow: CheerioElement) => {
+      let currentRow: Cheerio = $(tableRow);
+      if (currentRow.find("span.areaheader").length !== 0 && rows.length > 0) {
         let requirementGroup:
           | IMajorRequirementGroup
-          | undefined = createRequirementGroup($, rows);
+          | undefined = createRequirementGroup($, rows, current_header);
+        rows = [tableRow];
         if (requirementGroup) {
-          if (requirementGroup.requirements)
-            requirementGroupMap[requirementGroup.name] = requirementGroup;
+          requirementGroupMap[requirementGroup.name] = requirementGroup;
         }
+      } else {
+        rows.push(tableRow);
       }
+    });
+  //process last requirement group for the table
+  if (rows.length > 0) {
+    let requirementGroup:
+      | IMajorRequirementGroup
+      | undefined = createRequirementGroup($, rows, current_header);
+    if (requirementGroup) {
+      if (requirementGroup.requirements)
+        requirementGroupMap[requirementGroup.name] = requirementGroup;
     }
-  );
+  }
   return requirementGroupMap;
 }
 
@@ -184,9 +238,9 @@ module.exports = catalogToMajor;
  * testing. move to test file.
  */
 catalogToMajor(
-  "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/economics-bs/#programrequirementstext"
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-science/bscs/#programrequirementstext"
 ).then((scrapedMajor: Major) => {
   //uncomment following lines to log output.
-  //console.log("--------------------Parsed major object--------------------");
-  //console.log(JSON.stringify(scrapedMajor));
+  console.log("--------------------Parsed major object--------------------");
+  console.log(JSON.stringify(scrapedMajor));
 });

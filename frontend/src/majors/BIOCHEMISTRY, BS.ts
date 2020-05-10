@@ -1,4 +1,4 @@
-import { Major } from "../models/types";
+import { Major, Concentrations } from "../models/types";
 
 export const biochemMajor: Major = {
   name: "Biochemistry, BS",
@@ -6,6 +6,11 @@ export const biochemMajor: Major = {
   isLanguageRequired: false,
   totalCreditsRequired: 0,
   nupaths: [],
+  concentrations: {
+    concentrationOptions: [],
+    maxOptions: 0,
+    minOptions: 0,
+  },
   requirementGroups: [
     "Introduction to College",
     "Foundations",

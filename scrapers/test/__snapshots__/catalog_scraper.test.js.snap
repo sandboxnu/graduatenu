@@ -2,6 +2,11 @@
 
 exports[`ensure that catalog_scraper produces the expected output for supported majors. 1`] = `
 Object {
+  "concentrations": Object {
+    "concentrationOptions": Array [],
+    "maxOptions": 0,
+    "minOptions": 0,
+  },
   "isLanguageRequired": false,
   "name": "Computer Science, BSCS",
   "nupaths": Array [],
@@ -747,6 +752,11 @@ Object {
 
 exports[`ensure that catalog_scraper produces the expected output for supported majors. 2`] = `
 Object {
+  "concentrations": Object {
+    "concentrationOptions": Array [],
+    "maxOptions": 0,
+    "minOptions": 0,
+  },
   "isLanguageRequired": false,
   "name": "Computer Science and Information Science, BS",
   "nupaths": Array [],
@@ -1068,6 +1078,11 @@ Object {
 
 exports[`ensure that catalog_scraper produces the expected output for supported majors. 3`] = `
 Object {
+  "concentrations": Object {
+    "concentrationOptions": Array [],
+    "maxOptions": 0,
+    "minOptions": 0,
+  },
   "isLanguageRequired": false,
   "name": "Computer Science and Cognitive Psychology, BS",
   "nupaths": Array [],
@@ -1539,6 +1554,11 @@ Object {
 
 exports[`ensure that catalog_scraper produces the expected output for supported majors. 4`] = `
 Object {
+  "concentrations": Object {
+    "concentrationOptions": Array [],
+    "maxOptions": 0,
+    "minOptions": 0,
+  },
   "isLanguageRequired": false,
   "name": "Information Science and Cognitive Psychology, BS",
   "nupaths": Array [],
@@ -1982,31 +2002,15 @@ Object {
 
 exports[`ensure that catalog_scraper produces the expected output for supported majors. 5`] = `
 Object {
+  "concentrations": Object {
+    "concentrationOptions": Array [],
+    "maxOptions": 0,
+    "minOptions": 0,
+  },
   "isLanguageRequired": false,
   "name": "Data Science and Health Science, BS",
   "nupaths": Array [],
   "requirementGroupMap": Object {
-    "": Object {
-      "name": "",
-      "requirements": Array [
-        Object {
-          "courses": Array [
-            Object {
-              "classId": 1341,
-              "subject": "MATH",
-              "type": "COURSE",
-            },
-            Object {
-              "classId": 1241,
-              "subject": "MATH",
-              "type": "COURSE",
-            },
-          ],
-          "type": "OR",
-        },
-      ],
-      "type": "AND",
-    },
     "Advanced Writing in the Disciplines": Object {
       "name": "Advanced Writing in the Disciplines",
       "requirements": Array [
@@ -2356,6 +2360,27 @@ Object {
       ],
       "type": "OR",
     },
+    "Supporting Courses for Data Science": Object {
+      "name": "Supporting Courses for Data Science",
+      "requirements": Array [
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 1341,
+              "subject": "MATH",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 1241,
+              "subject": "MATH",
+              "type": "COURSE",
+            },
+          ],
+          "type": "OR",
+        },
+      ],
+      "type": "AND",
+    },
     "Upper-Division Elective": Object {
       "name": "Upper-Division Elective",
       "numCreditsMax": 4,
@@ -2400,7 +2425,7 @@ Object {
     "Computer Science Foundation",
     "Information Science Requirement",
     "Data Science Foundations",
-    "",
+    "Supporting Courses for Data Science",
     "College Writing",
     "Advanced Writing in the Disciplines",
     "Public Health Core",
@@ -2418,53 +2443,15 @@ Object {
 
 exports[`ensure that catalog_scraper produces the expected output for supported majors. 6`] = `
 Object {
+  "concentrations": Object {
+    "concentrationOptions": Array [],
+    "maxOptions": 0,
+    "minOptions": 0,
+  },
   "isLanguageRequired": false,
   "name": "Computer Science and Political Science, BS",
   "nupaths": Array [],
   "requirementGroupMap": Object {
-    "": Object {
-      "name": "",
-      "numCreditsMax": 4,
-      "numCreditsMin": 4,
-      "requirements": Array [
-        Object {
-          "classId": 4528,
-          "subject": "SOCL",
-          "type": "COURSE",
-        },
-        Object {
-          "classId": 3485,
-          "subject": "SOCL",
-          "type": "COURSE",
-        },
-        Object {
-          "classId": 1280,
-          "subject": "SOCL",
-          "type": "COURSE",
-        },
-        Object {
-          "classId": 3418,
-          "subject": "ANTH",
-          "type": "COURSE",
-        },
-        Object {
-          "classId": 1145,
-          "subject": "PHIL",
-          "type": "COURSE",
-        },
-        Object {
-          "classId": 5240,
-          "subject": "IA",
-          "type": "COURSE",
-        },
-        Object {
-          "classId": 2102,
-          "subject": "INSH",
-          "type": "COURSE",
-        },
-      ],
-      "type": "OR",
-    },
     "Advanced Writing in the Disciplines": Object {
       "name": "Advanced Writing in the Disciplines",
       "numCreditsMax": 4,
@@ -2775,6 +2762,49 @@ Object {
       ],
       "type": "AND",
     },
+    "Supporting Course": Object {
+      "name": "Supporting Course",
+      "numCreditsMax": 4,
+      "numCreditsMin": 4,
+      "requirements": Array [
+        Object {
+          "classId": 4528,
+          "subject": "SOCL",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3485,
+          "subject": "SOCL",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 1280,
+          "subject": "SOCL",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3418,
+          "subject": "ANTH",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 1145,
+          "subject": "PHIL",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 5240,
+          "subject": "IA",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 2102,
+          "subject": "INSH",
+          "type": "COURSE",
+        },
+      ],
+      "type": "OR",
+    },
   },
   "requirementGroups": Array [
     "Computer Science Overview",
@@ -2787,7 +2817,7 @@ Object {
     "Political Science Capstone",
     "Political Science Electives",
     "Integrative Requirement",
-    "",
+    "Supporting Course",
     "College Writing",
     "Advanced Writing in the Disciplines",
   ],
@@ -2798,6 +2828,11 @@ Object {
 
 exports[`ensure that catalog_scraper produces the expected output for supported majors. 7`] = `
 Object {
+  "concentrations": Object {
+    "concentrationOptions": Array [],
+    "maxOptions": 0,
+    "minOptions": 0,
+  },
   "isLanguageRequired": false,
   "name": "Computer Science and Linguistics, BS",
   "nupaths": Array [],
@@ -3311,53 +3346,15 @@ Object {
 
 exports[`ensure that catalog_scraper produces the expected output for supported majors. 8`] = `
 Object {
+  "concentrations": Object {
+    "concentrationOptions": Array [],
+    "maxOptions": 0,
+    "minOptions": 0,
+  },
   "isLanguageRequired": false,
   "name": "Computer Science and Mathematics, BS",
   "nupaths": Array [],
   "requirementGroupMap": Object {
-    "": Object {
-      "name": "",
-      "numCreditsMax": 4,
-      "numCreditsMin": 4,
-      "requirements": Array [
-        Object {
-          "classId": 3418,
-          "subject": "ANTH",
-          "type": "COURSE",
-        },
-        Object {
-          "classId": 5240,
-          "subject": "IA",
-          "type": "COURSE",
-        },
-        Object {
-          "classId": 2102,
-          "subject": "INSH",
-          "type": "COURSE",
-        },
-        Object {
-          "classId": 1145,
-          "subject": "PHIL",
-          "type": "COURSE",
-        },
-        Object {
-          "classId": 1280,
-          "subject": "SOCL",
-          "type": "COURSE",
-        },
-        Object {
-          "classId": 3485,
-          "subject": "SOCL",
-          "type": "COURSE",
-        },
-        Object {
-          "classId": 4528,
-          "subject": "SOCL",
-          "type": "COURSE",
-        },
-      ],
-      "type": "OR",
-    },
     "Advanced Writing in the Disciplines": Object {
       "name": "Advanced Writing in the Disciplines",
       "requirements": Array [
@@ -3620,6 +3617,49 @@ Object {
       ],
       "type": "AND",
     },
+    "Supporting Course": Object {
+      "name": "Supporting Course",
+      "numCreditsMax": 4,
+      "numCreditsMin": 4,
+      "requirements": Array [
+        Object {
+          "classId": 3418,
+          "subject": "ANTH",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 5240,
+          "subject": "IA",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 2102,
+          "subject": "INSH",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 1145,
+          "subject": "PHIL",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 1280,
+          "subject": "SOCL",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 3485,
+          "subject": "SOCL",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4528,
+          "subject": "SOCL",
+          "type": "COURSE",
+        },
+      ],
+      "type": "OR",
+    },
   },
   "requirementGroups": Array [
     "Computer Science Overview",
@@ -3630,7 +3670,7 @@ Object {
     "Calculus Courses",
     "Mathematics Courses",
     "Mathematics Electives",
-    "",
+    "Supporting Course",
     "College Writing",
     "Advanced Writing in the Disciplines",
   ],
@@ -3641,6 +3681,11 @@ Object {
 
 exports[`ensure that catalog_scraper produces the expected output for supported majors. 9`] = `
 Object {
+  "concentrations": Object {
+    "concentrationOptions": Array [],
+    "maxOptions": 0,
+    "minOptions": 0,
+  },
   "isLanguageRequired": false,
   "name": "Computer Science and Communication Studies, BS",
   "nupaths": Array [],
@@ -4100,38 +4145,15 @@ Object {
 
 exports[`ensure that catalog_scraper produces the expected output for supported majors. 10`] = `
 Object {
+  "concentrations": Object {
+    "concentrationOptions": Array [],
+    "maxOptions": 0,
+    "minOptions": 0,
+  },
   "isLanguageRequired": false,
   "name": "Computer Science and Criminal Justice, BS",
   "nupaths": Array [],
   "requirementGroupMap": Object {
-    "": Object {
-      "name": "",
-      "numCreditsMax": 4,
-      "numCreditsMin": 4,
-      "requirements": Array [
-        Object {
-          "classId": 4040,
-          "subject": "CRIM",
-          "type": "COURSE",
-        },
-        Object {
-          "classId": 4630,
-          "subject": "CRIM",
-          "type": "COURSE",
-        },
-        Object {
-          "classId": 4800,
-          "subject": "CRIM",
-          "type": "COURSE",
-        },
-        Object {
-          "classId": 4900,
-          "subject": "CRIM",
-          "type": "COURSE",
-        },
-      ],
-      "type": "OR",
-    },
     "Advanced Writing in the Disciplines": Object {
       "name": "Advanced Writing in the Disciplines",
       "numCreditsMax": 4,
@@ -4408,6 +4430,34 @@ Object {
       ],
       "type": "AND",
     },
+    "Integrative Course Requirement": Object {
+      "name": "Integrative Course Requirement",
+      "numCreditsMax": 4,
+      "numCreditsMin": 4,
+      "requirements": Array [
+        Object {
+          "classId": 4040,
+          "subject": "CRIM",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4630,
+          "subject": "CRIM",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4800,
+          "subject": "CRIM",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4900,
+          "subject": "CRIM",
+          "type": "COURSE",
+        },
+      ],
+      "type": "OR",
+    },
     "Presentation Requirement": Object {
       "name": "Presentation Requirement",
       "requirements": Array [
@@ -4531,7 +4581,7 @@ Object {
     "Survey Elective",
     "System-Wide Elective",
     "Criminal Justice Elective",
-    "",
+    "Integrative Course Requirement",
     "Computing and Social Issues",
     "College Writing",
     "Advanced Writing in the Disciplines",
@@ -4543,31 +4593,15 @@ Object {
 
 exports[`ensure that catalog_scraper produces the expected output for supported majors. 11`] = `
 Object {
+  "concentrations": Object {
+    "concentrationOptions": Array [],
+    "maxOptions": 0,
+    "minOptions": 0,
+  },
   "isLanguageRequired": false,
   "name": "Information Science and Journalism, BS",
   "nupaths": Array [],
   "requirementGroupMap": Object {
-    "": Object {
-      "name": "",
-      "requirements": Array [
-        Object {
-          "classId": 2201,
-          "subject": "JRNL",
-          "type": "COURSE",
-        },
-        Object {
-          "classId": 2301,
-          "subject": "JRNL",
-          "type": "COURSE",
-        },
-        Object {
-          "classId": 4650,
-          "subject": "JRNL",
-          "type": "COURSE",
-        },
-      ],
-      "type": "AND",
-    },
     "Advanced Writing in the Disciplines": Object {
       "name": "Advanced Writing in the Disciplines",
       "requirements": Array [
@@ -4829,6 +4863,27 @@ Object {
       },
       "type": "RANGE",
     },
+    "Journalism Major Requirements": Object {
+      "name": "Journalism Major Requirements",
+      "requirements": Array [
+        Object {
+          "classId": 2201,
+          "subject": "JRNL",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 2301,
+          "subject": "JRNL",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4650,
+          "subject": "JRNL",
+          "type": "COURSE",
+        },
+      ],
+      "type": "AND",
+    },
     "Journalism-Related Requirement": Object {
       "name": "Journalism-Related Requirement",
       "requirements": Array [
@@ -4895,7 +4950,7 @@ Object {
     "Computer Science Required Courses",
     "Information Science Required Courses",
     "Information Science Elective (Integrative)",
-    "",
+    "Journalism Major Requirements",
     "Journalism Courses",
     "Required Journalism",
     "Journalism Electives",
@@ -4914,26 +4969,15 @@ Object {
 
 exports[`ensure that catalog_scraper produces the expected output for supported majors. 12`] = `
 Object {
+  "concentrations": Object {
+    "concentrationOptions": Array [],
+    "maxOptions": 0,
+    "minOptions": 0,
+  },
   "isLanguageRequired": false,
   "name": "Computer Science and Media Arts, BS",
   "nupaths": Array [],
   "requirementGroupMap": Object {
-    "": Object {
-      "name": "",
-      "requirements": Array [
-        Object {
-          "classId": 4300,
-          "subject": "CS",
-          "type": "COURSE",
-        },
-        Object {
-          "classId": 4300,
-          "subject": "IS",
-          "type": "COURSE",
-        },
-      ],
-      "type": "AND",
-    },
     "Advanced Writing in the Disciplines": Object {
       "name": "Advanced Writing in the Disciplines",
       "requirements": Array [
@@ -5149,6 +5193,22 @@ Object {
       ],
       "type": "OR",
     },
+    "Integrative Courses": Object {
+      "name": "Integrative Courses",
+      "requirements": Array [
+        Object {
+          "classId": 4300,
+          "subject": "CS",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4300,
+          "subject": "IS",
+          "type": "COURSE",
+        },
+      ],
+      "type": "AND",
+    },
     "Mathematics Requirement": Object {
       "name": "Mathematics Requirement",
       "requirements": Array [
@@ -5330,7 +5390,7 @@ Object {
     "Media Arts Capstone Requirement",
     "Mathematics Requirement",
     "Computing and Social Issues",
-    "",
+    "Integrative Courses",
   ],
   "totalCreditsRequired": 0,
   "yearVersion": 2018,
@@ -5339,26 +5399,15 @@ Object {
 
 exports[`ensure that catalog_scraper produces the expected output for supported majors. 13`] = `
 Object {
+  "concentrations": Object {
+    "concentrationOptions": Array [],
+    "maxOptions": 0,
+    "minOptions": 0,
+  },
   "isLanguageRequired": false,
   "name": "Computer Science and Philosophy, BS",
   "nupaths": Array [],
   "requirementGroupMap": Object {
-    "": Object {
-      "name": "",
-      "requirements": Array [
-        Object {
-          "classId": 3800,
-          "subject": "CS",
-          "type": "COURSE",
-        },
-        Object {
-          "classId": 4515,
-          "subject": "PHIL",
-          "type": "COURSE",
-        },
-      ],
-      "type": "AND",
-    },
     "Advanced Writing in the Disciplines": Object {
       "name": "Advanced Writing in the Disciplines",
       "numCreditsMax": 4,
@@ -5565,6 +5614,22 @@ Object {
       },
       "type": "RANGE",
     },
+    "Integrative Course Requirement ": Object {
+      "name": "Integrative Course Requirement ",
+      "requirements": Array [
+        Object {
+          "classId": 3800,
+          "subject": "CS",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 4515,
+          "subject": "PHIL",
+          "type": "COURSE",
+        },
+      ],
+      "type": "AND",
+    },
     "Philosophy Required Courses": Object {
       "name": "Philosophy Required Courses",
       "requirements": Array [
@@ -5700,7 +5765,7 @@ Object {
     "Philosophy Required Courses",
     "Philosophy Restricted Electives",
     "Electives",
-    "",
+    "Integrative Course Requirement ",
     "College Writing",
     "Advanced Writing in the Disciplines",
   ],
@@ -5711,31 +5776,15 @@ Object {
 
 exports[`ensure that catalog_scraper produces the expected output for supported majors. 14`] = `
 Object {
+  "concentrations": Object {
+    "concentrationOptions": Array [],
+    "maxOptions": 0,
+    "minOptions": 0,
+  },
   "isLanguageRequired": false,
   "name": "Cybersecurity and Economics, BS",
   "nupaths": Array [],
   "requirementGroupMap": Object {
-    "": Object {
-      "name": "",
-      "requirements": Array [
-        Object {
-          "courses": Array [
-            Object {
-              "classId": 1341,
-              "subject": "MATH",
-              "type": "COURSE",
-            },
-            Object {
-              "classId": 1231,
-              "subject": "MATH",
-              "type": "COURSE",
-            },
-          ],
-          "type": "OR",
-        },
-      ],
-      "type": "AND",
-    },
     "Advanced Writing in the Disciplines": Object {
       "name": "Advanced Writing in the Disciplines",
       "numCreditsMax": 4,
@@ -6248,6 +6297,27 @@ Object {
       ],
       "type": "AND",
     },
+    "Supporting Course": Object {
+      "name": "Supporting Course",
+      "requirements": Array [
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 1341,
+              "subject": "MATH",
+              "type": "COURSE",
+            },
+            Object {
+              "classId": 1231,
+              "subject": "MATH",
+              "type": "COURSE",
+            },
+          ],
+          "type": "OR",
+        },
+      ],
+      "type": "AND",
+    },
   },
   "requirementGroups": Array [
     "Computer Science Overview",
@@ -6257,7 +6327,7 @@ Object {
     "Cybersecurity Required Courses",
     "Cybersecurity Elective",
     "Computer Science Senior Seminar",
-    "",
+    "Supporting Course",
     "College Writing",
     "Advanced Writing in the Disciplines",
     "Required Courses",
@@ -6272,26 +6342,15 @@ Object {
 
 exports[`ensure that catalog_scraper produces the expected output for supported majors. 15`] = `
 Object {
+  "concentrations": Object {
+    "concentrationOptions": Array [],
+    "maxOptions": 0,
+    "minOptions": 0,
+  },
   "isLanguageRequired": false,
   "name": "Computer Science and Economics, BS",
   "nupaths": Array [],
   "requirementGroupMap": Object {
-    "": Object {
-      "name": "",
-      "requirements": Array [
-        Object {
-          "classId": 2000,
-          "subject": "IS",
-          "type": "COURSE",
-        },
-        Object {
-          "classId": 2560,
-          "subject": "ECON",
-          "type": "COURSE",
-        },
-      ],
-      "type": "AND",
-    },
     "Advanced Writing in the Disciplines": Object {
       "name": "Advanced Writing in the Disciplines",
       "numCreditsMax": 4,
@@ -6593,6 +6652,22 @@ Object {
       ],
       "type": "OR",
     },
+    "Integrative Course Requirement": Object {
+      "name": "Integrative Course Requirement",
+      "requirements": Array [
+        Object {
+          "classId": 2000,
+          "subject": "IS",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 2560,
+          "subject": "ECON",
+          "type": "COURSE",
+        },
+      ],
+      "type": "AND",
+    },
     "Mathematics": Object {
       "name": "Mathematics",
       "requirements": Array [
@@ -6671,7 +6746,7 @@ Object {
     "Required Economics Courses",
     "Economics Electives",
     "Economics Capstone",
-    "",
+    "Integrative Course Requirement",
     "Mathematics",
     "Computing and Social Issues",
     "College Writing",
@@ -6684,6 +6759,11 @@ Object {
 
 exports[`ensure that catalog_scraper produces the expected output for supported majors. 16`] = `
 Object {
+  "concentrations": Object {
+    "concentrationOptions": Array [],
+    "maxOptions": 0,
+    "minOptions": 0,
+  },
   "isLanguageRequired": false,
   "name": "Biochemistry, BS",
   "nupaths": Array [],
@@ -7166,6 +7246,11 @@ Object {
 
 exports[`ensure that catalog_scraper produces the expected output for supported majors. 17`] = `
 Object {
+  "concentrations": Object {
+    "concentrationOptions": Array [],
+    "maxOptions": 0,
+    "minOptions": 0,
+  },
   "isLanguageRequired": false,
   "name": "Mathematics, BS",
   "nupaths": Array [],

@@ -6,6 +6,11 @@ export const csMajor: Major = {
   isLanguageRequired: false,
   totalCreditsRequired: 0,
   nupaths: [],
+  concentrations: {
+    concentrationOptions: [],
+    maxOptions: 0,
+    minOptions: 0,
+  },
   requirementGroups: [
     "Computer Science Overview",
     "Computer Science Fundamental Courses",

@@ -36,7 +36,8 @@ import { parseRowAsRequirement, parseSubjectRangeRow } from "./row_scraper";
  */
 export function createRequirementGroup(
   $: CheerioStatic,
-  rows: CheerioElement[]
+  rows: CheerioElement[],
+  current_header: string
 ): IMajorRequirementGroup | undefined {
   //default section type set to AND.
   let sectionType: SectionType = SectionType.AND;
@@ -110,16 +111,24 @@ export function createRequirementGroup(
   }
 
   // convert the sectionType to a number.
+  let returnVal = undefined;
   switch (+sectionType) {
     case SectionType.AND:
-      return processAndSection($, rows, subheader);
+      returnVal = processAndSection($, rows, subheader);
+      break;
     case SectionType.OR:
-      return processOrSection($, rows, minCredits, maxCredits, subheader);
+      returnVal = processOrSection($, rows, minCredits, maxCredits, subheader);
+      break;
     case SectionType.RANGE:
-      return processRangeSection($, rows, minCredits, maxCredits);
+      returnVal = processRangeSection($, rows, minCredits, maxCredits);
+      break;
     default:
-      return undefined;
+      break;
   }
+  if (returnVal && returnVal.name == "") {
+    returnVal.name = current_header;
+  }
+  return returnVal;
 }
 
 /**

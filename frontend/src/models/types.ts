@@ -153,16 +153,23 @@ export interface Major {
   isLanguageRequired: boolean;
   totalCreditsRequired: number;
   nupaths: NUPath[];
-  //concentrations: Concentrations;
+  concentrations: Concentrations;
 }
 
 /**
- * A list of concentration options and the min/max number of concentrations they can do
+ * A map of concentration options (name of concentrations and their requirements) and the min/max
+ * number of concentrations they can do
  */
 export interface Concentrations {
   minOptions: number;
   maxOptions: number;
-  requirementGroupMap: IMajorRequirementGroup[];
+  concentrationOptions: Concentration[];
+}
+
+export interface Concentration {
+  name: string;
+  requirementGroups: string[];
+  requirementGroupMap: { [key: string]: IMajorRequirementGroup };
 }
 
 /**

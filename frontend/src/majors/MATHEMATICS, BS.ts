@@ -6,6 +6,11 @@ export const mathMajor: Major = {
   isLanguageRequired: false,
   totalCreditsRequired: 0,
   nupaths: [],
+  concentrations: {
+    concentrationOptions: [],
+    maxOptions: 0,
+    minOptions: 0,
+  },
   requirementGroups: [
     "Problem Solving",
     "Calculus",
