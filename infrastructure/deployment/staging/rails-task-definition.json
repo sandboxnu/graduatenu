@@ -21,7 +21,7 @@
       "environment": [
         {
           "name": "POSTGRES_HOST",
-          "value": "graduatenu-prod.cmknhxcoikji.us-east-1.rds.amazonaws.com"
+          "value": "graduatenu-staging.cmknhxcoikji.us-east-1.rds.amazonaws.com"
         },
         {
           "name": "POSTGRES_PASSWORD",
