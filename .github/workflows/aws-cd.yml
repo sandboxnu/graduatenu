@@ -56,8 +56,11 @@ jobs:
           echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
 
       - name: Update & Deploy ECS task definitions
-        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         run: |
           # - create new revision for task definition with latest image.
           # - redeploy ECS services with the latest revision.
           ./infrastructure/deployment/redeploy.sh staging
+
+      - name: Logout of Amazon ECR
+        if: always()
+        run: docker logout ${{ steps.login-ecr.outputs.registry }}
