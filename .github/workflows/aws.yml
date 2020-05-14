@@ -3,7 +3,7 @@ on:
     branches:
       - deployment
 
-name: Deploy node frontend to Amazon ECS
+name: Deploy containers to Amazon ECS
 
 jobs:
   deploy:
@@ -25,6 +25,21 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
+      - name: Build, tag, and push rails image to Amazon ECR
+        id: build-rails-image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: graduatenu-rails
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          # Build a docker container and
+          # push it to ECR so that it can
+          # be deployed to ECS.
+          cd api
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY
+          echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+
       - name: Build, tag, and push node image to Amazon ECR
         id: build-node-image
         env:
@@ -37,22 +52,12 @@ jobs:
           # be deployed to ECS.
           cd frontend
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-          docker tag $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:staging 
           docker push $ECR_REGISTRY/$ECR_REPOSITORY
           echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
 
-      - name: Fill in the new image ID in the node ECS task definition
-        id: node-task-def
-        uses: aws-actions/amazon-ecs-render-task-definition@v1
-        with:
-          task-definition: ./infrastructure/deployment/staging/node-task-definition.json
-          container-name: node
-          image: ${{ steps.build-node-image.outputs.image }}
-
-      - name: Deploy node ECS task definition
+      - name: Update & Deploy ECS task definitions
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
-        with:
-          task-definition: ${{ steps.node-task-def.outputs.task-definition }}
-          service: web #put in environment
-          cluster: graduatenu-cluster #put in environment
-          wait-for-service-stability: true
+        run: |
+          # - create new revision for task definition with latest image.
+          # - redeploy ECS services with the latest revision.
+          ./infrastructure/deployment/redeploy.sh staging
