@@ -1,13 +1,13 @@
 on:
   push:
     branches:
-      - deployment
+      - master
 
 name: Deploy containers to Amazon ECS
 
 jobs:
   deploy:
-    name: Deploy
+    name: Continuous delivery to AWS
     runs-on: ubuntu-latest
 
     steps:
