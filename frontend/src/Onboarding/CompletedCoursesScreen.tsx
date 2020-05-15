@@ -165,7 +165,6 @@ class CompletedCoursesComponent extends Component<Props, State> {
         });
       }
     } else {
-      console.log("filtered");
       let courses = this.state.selectedCourses.filter(
         c =>
           c.subject !== course.subject && c.classId !== String(course.classId)
@@ -186,7 +185,7 @@ class CompletedCoursesComponent extends Component<Props, State> {
 
   // renders the link for show more or show less for the specific requirementGroup, depending on the boolean
   renderShowLink(requirementGroup: string, more: boolean) {
-    let variable = more ? "more" : "less";
+    let more_less_string = more ? "more" : "less";
     return (
       <ButtonLink
         component="button"
@@ -196,7 +195,7 @@ class CompletedCoursesComponent extends Component<Props, State> {
         }}
         style={{ color: "#EB5757" }}
       >
-        <CourseText>{"See " + variable + "..."}</CourseText>
+        <CourseText>{"See " + more_less_string + "..."}</CourseText>
       </ButtonLink>
     );
   }
@@ -207,8 +206,6 @@ class CompletedCoursesComponent extends Component<Props, State> {
     return (
       <CourseWrapper key={allCourse[0]}>
         <Checkbox
-          // checked={this.state.selectedCourses.some((s) => s.subject == courses[0].subject &&
-          //   s.classId == String(courses[0].classId))}
           style={{ width: 2, height: 2 }}
           icon={<CheckBoxOutlineBlankIcon style={{ fontSize: 20 }} />}
           checkedIcon={
