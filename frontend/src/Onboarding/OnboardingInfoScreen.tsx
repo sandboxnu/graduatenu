@@ -352,9 +352,7 @@ class OnboardingScreenComponent extends React.Component<
           {textFieldStr.length !== 0 && !!year && !!gradYear ? (
             <Link
               to={{
-                // TODO: After completed course screen is merged,
-                // change this to /home, and completed courses Next Link to /signup
-                pathname: "/signup",
+                pathname: "/home",
               }}
               onClick={this.onSubmit.bind(this)}
               style={{ textDecoration: "none" }}
