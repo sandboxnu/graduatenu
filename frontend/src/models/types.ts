@@ -358,13 +358,23 @@ export interface CourseTakenTracker {
   getTermIds: (course: string) => number[];
 }
 
+/**
+ * A model for data pertaining to a User object.
+ */
 export interface IUserData {
-  fullName?: string;
-  academicYear?: number;
-  graduationYear?: number;
-  major?: Major;
-  minors?: string[];
-  plan?: Schedule;
+  email: string;
+  username: string;
+  password: string;
+  academic_year?: number;
+  graduation_year?: number;
+}
+
+/**
+ * A model for data pertaining to a user login object.
+ */
+export interface ILoginData {
+  email: string;
+  password: string;
 }
 
 /** ------------------------------------------------------------------------
