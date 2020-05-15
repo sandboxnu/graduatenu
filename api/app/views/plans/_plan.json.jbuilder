@@ -1,1 +1,1 @@
-json.(plan, :id, :name, :link_sharing_enabled, :schedule)
+json.(plan, :id, :name, :link_sharing_enabled, :schedule, :major, :planString)
