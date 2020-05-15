@@ -135,6 +135,18 @@ export interface ILoginData {
   password: string;
 }
 
+/**
+ * A model for data pertaining to a Plan object.
+ */
+export interface IPlanData {
+  id: number;
+  name: string;
+  linkSharingEnabled: boolean;
+  schedule: Schedule;
+  major: string;
+  planString: string;
+}
+
 /** ------------------------------------------------------------------------
  *
  *            OLD STUFF FOLLOWS ! This stuff is big outdated and is only

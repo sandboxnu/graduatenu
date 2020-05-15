@@ -39,6 +39,10 @@ import {
   setDNDScheduleAction,
 } from "../state/actions/scheduleActions";
 import { EditPlanPopper } from "./EditPlanPopper";
+import {
+  createPlanForUser,
+  findAllPlansForUser,
+} from "../services/PlanService";
 
 const OuterContainer = styled.div`
   display: flex;
@@ -137,6 +141,15 @@ type Props = ToastHomeProps &
   RouteComponentProps;
 
 class HomeComponent extends React.Component<Props> {
+  // componentDidMount() {
+  //   findAllPlansForUser(
+  //     4,
+  //     "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6NCwiZXhwIjoxNTk0NzU0NzI4fQ.qrYKcNpqHaKSMTXveXXQGc_GP7xDAV0bibkMMxRsMTI"
+  //   ).then(response => console.log(response));
+  //   console.log("test");
+  //   console.log("test");
+  // }
+
   componentDidUpdate(nextProps: Props) {
     if (nextProps.warnings !== this.props.warnings) {
       this.updateWarnings();
@@ -284,7 +297,7 @@ class HomeComponent extends React.Component<Props> {
           <LeftScroll className="hide-scrollbar">
             <Container>
               <HomeTop>
-                <HomeText href="#">GraduateNU</HomeText>
+                <HomeText href="#">GraduateNUs</HomeText>
                 <HomePlan>
                   <MajorText>
                     {!!this.props.major ? this.props.major.name + ": " : ""}
