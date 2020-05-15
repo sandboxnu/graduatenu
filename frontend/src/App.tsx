@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Onboarding } from "./Onboarding/Onboarding";
 import { HomeWrapper } from "./home/HomeWrapper";
 import { OnboardingInfoScreen } from "./Onboarding/OnboardingInfoScreen";
+import { CompletedCoursesScreen } from "./Onboarding/CompletedCoursesScreen";
 import { Provider } from "react-redux";
 import { Store } from "redux";
 import { PersistGate } from "redux-persist/integration/react";
@@ -22,6 +23,10 @@ export const App = ({
           <Switch>
             <Route path="/home" component={HomeWrapper} />
             <Route path="/onboarding" component={OnboardingInfoScreen} />
+            <Route
+              path="/completedCourses"
+              component={CompletedCoursesScreen}
+            />
             <Route path="/" component={Onboarding} />
           </Switch>
         </Router>

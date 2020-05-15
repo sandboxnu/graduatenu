@@ -89,6 +89,13 @@ export const getPlansError = (state: AppState): string =>
   state.plansState.plansError;
 
 /**
+ * Get the plans loading error message from the AppState
+ * @param state the AppState
+ */
+export const getTakenCredits = (state: AppState): number =>
+  state.schedule.present.creditsTaken;
+
+/**
  * Get the course specific warnings from the AppState
  * @param state the AppState
  */
