@@ -7,7 +7,7 @@ import {
   Major,
   IRequiredCourse,
   Requirement,
-} from "../models/types";
+} from "graduate-common";
 import { getMajorFromState } from "../state";
 import { setCompletedCourses } from "../state/actions/scheduleActions";
 import styled from "styled-components";
