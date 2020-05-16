@@ -18,11 +18,17 @@ import {
   setCoopCycle,
 } from "../state/actions/scheduleActions";
 import { setMajorAction } from "../state/actions/userActions";
-import { getMajors, getPlans } from "../state";
 import { DNDSchedule } from "../models/types";
 import { Major, Schedule } from "graduate-common";
+import {
+  getMajors,
+  getPlans,
+  getTakenCredits,
+  getFullNameFromState,
+} from "../state";
 import { planToString, scheduleHasClasses } from "../utils";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
+import { getStandingFromCompletedCourses } from "../utils";
 
 const PlanPopper = styled(Popper)<any>`
   margin-top: 4px;
@@ -66,6 +72,8 @@ interface ReduxStoreEditPlanProps {
   planStr?: string;
   majors: Major[];
   plans: Record<string, Schedule[]>;
+  creditsTaken: number;
+  name: string;
 }
 
 interface ReduxDispatchEditPlanProps {
@@ -237,9 +245,13 @@ export class EditPlanPopperComponent extends React.Component<
         >
           <ClickAwayListener onClickAway={this.handleClickAway.bind(this)}>
             <PlanCard>
-              <NameText>John Smith</NameText>
-              <StandingText>Sophomore Standing</StandingText>
-              <StandingText>62 Credits Completed</StandingText>
+              <NameText>{this.props.name}</NameText>
+              <StandingText>
+                {getStandingFromCompletedCourses(this.props.creditsTaken)}
+              </StandingText>
+              <StandingText>
+                {this.props.creditsTaken + " Credits Completed"}
+              </StandingText>
               {this.renderMajorDropDown()}
               {!!this.props.major && this.renderPlansDropDown()}
               {!!this.props.major &&
@@ -263,6 +275,8 @@ const mapStateToProps = (state: AppState) => ({
   major: getMajorFromState(state),
   majors: getMajors(state),
   plans: getPlans(state),
+  creditsTaken: getTakenCredits(state),
+  name: getFullNameFromState(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({

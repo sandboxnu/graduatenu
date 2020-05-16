@@ -1,4 +1,5 @@
 import React from "react";
+import "./Scrollbar.css";
 import { DragDropContext } from "react-beautiful-dnd";
 import {
   DNDSchedule,
@@ -41,18 +42,28 @@ import { EditPlanPopper } from "./EditPlanPopper";
 
 const OuterContainer = styled.div`
   display: flex;
-  flex: 1;
   flex-direction: row;
-  justify-content: space-between;
+  overflow: hidden;
 `;
 
 const SidebarContainer = styled.div`
-  flex: 1;
+  height: 100vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  flex: 4;
+  position: relative;
+  box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.25);
+`;
+
+const LeftScroll = styled.div`
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  flex: 19;
 `;
 
 const Container = styled.div`
   display: flex;
-  flex: 5;
   flex-direction: column;
   justify-content: start;
   align-items: start;
@@ -270,22 +281,25 @@ class HomeComponent extends React.Component<Props> {
           onDragEnd={this.onDragEnd}
           onDragUpdate={this.onDragUpdate}
         >
-          <Container>
-            <HomeTop>
-              <HomeText href="#">GraduateNU</HomeText>
+          <LeftScroll className="hide-scrollbar">
+            <Container>
+              <HomeTop>
+                <HomeText href="#">GraduateNU</HomeText>
+                <HomePlan>
+                  <MajorText>
+                    {!!this.props.major ? this.props.major.name + ": " : ""}
+                  </MajorText>
+                  <PlanText>{this.props.planStr || "None"}</PlanText>
+                  <EditPlanPopper />
+                </HomePlan>
+              </HomeTop>
               <HomePlan>
-                <MajorText>
-                  {!!this.props.major ? this.props.major.name + ": " : ""}
-                </MajorText>
-                <PlanText>{this.props.planStr || "None"}</PlanText>
-                <EditPlanPopper />
+                <h2>Plan Of Study</h2>
               </HomePlan>
-            </HomeTop>
-            <HomePlan>
-              <h2>Plan Of Study</h2>
-            </HomePlan>
-            {this.renderYears()}
-          </Container>
+              {this.renderYears()}
+            </Container>
+          </LeftScroll>
+
           <SidebarContainer>
             <Sidebar />
           </SidebarContainer>

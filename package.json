@@ -13,7 +13,8 @@
   ],
   "proxy": "http://localhost:3001",
   "scripts": {
-    "start": "./api/start-db-container.sh && ./run-servers.sh",
+    "start": "cd api && ./compose-build.sh && cd ../ && ./run-servers.sh dev-build",
+    "prod-start": "cd api && ./compose-build.sh && cd ../ && ./run-servers.sh prod-build",
     "build": "cd frontend && CI=false react-scripts build",
     "test": "jest",
     "eject": "cd frontend && react-scripts eject",

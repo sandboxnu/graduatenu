@@ -28,8 +28,7 @@ import { SEMESTER_MIN_HEIGHT } from "../constants";
 import { convertTermIdToSeason } from "../utils/schedule-helpers";
 
 const OutsideContainer = styled.div`
-  flex: 1;
-  width: 200px;
+  width: 25%;
 `;
 
 const Container = styled.div<any>`

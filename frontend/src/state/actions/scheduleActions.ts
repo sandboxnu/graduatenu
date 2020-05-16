@@ -64,3 +64,8 @@ export const setDNDScheduleAction = createAction(
   "schedule/SET_DND_SCHEDULE",
   (schedule: DNDSchedule) => ({ schedule })
 )();
+
+export const setCompletedCourses = createAction(
+  "schedule/SET_COMPLETED_COURSES",
+  (completedCourses: ScheduleCourse[]) => ({ completedCourses })
+)();
