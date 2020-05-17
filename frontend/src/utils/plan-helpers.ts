@@ -1,0 +1,14 @@
+import { Major } from "../models/types";
+
+/**
+ * Finds a major from the given list of majors with the given name.
+ * @param name    the name of the major being searched
+ * @param majors  the list of majors to filter through
+ */
+export function findMajorFromName(name: string, majors: Major[]): Major {
+  let major: Major | undefined = majors.find(major => major.name === name);
+  if (!major) {
+    throw Error("Major name not found.");
+  }
+  return major;
+}

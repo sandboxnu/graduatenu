@@ -5,13 +5,10 @@ import {
   DNDSchedule,
   IWarning,
   DNDScheduleYear,
-  DNDScheduleTerm
+  DNDScheduleTerm,
+  IPlanData,
 } from "../models/types";
-import {
-  Major,
-  Status,
-  SeasonWord
-} from "graduate-common";
+import { Major, Status, SeasonWord } from "graduate-common";
 import styled from "styled-components";
 import { Year } from "../components/Year";
 import {
@@ -33,16 +30,25 @@ import {
   getPlanStrFromState,
   getMajorFromState,
   getWarningsFromState,
+  getTokenFromState,
+  getUserId,
 } from "../state";
 import {
   updateSemesterAction,
   setDNDScheduleAction,
 } from "../state/actions/scheduleActions";
+import {
+  setLinkSharingAction,
+  setPlanNameAction,
+  setMajorPlanAction,
+} from "../state/actions/userActions";
+import { getMajors, getPlans } from "../state";
 import { EditPlanPopper } from "./EditPlanPopper";
 import {
   createPlanForUser,
   findAllPlansForUser,
 } from "../services/PlanService";
+import { findMajorFromName } from "../utils/plan-helpers";
 
 const OuterContainer = styled.div`
   display: flex;
@@ -124,6 +130,9 @@ interface ReduxStoreHomeProps {
   major?: Major;
   planStr?: string;
   warnings: IWarning[];
+  token?: string;
+  userId?: number;
+  majors: Major[];
 }
 
 interface ReduxDispatchHomeProps {
@@ -133,6 +142,9 @@ interface ReduxDispatchHomeProps {
     newSemester: DNDScheduleTerm
   ) => void;
   setDNDSchedule: (schedule: DNDSchedule) => void;
+  setMajorPlans: (major: Major, planStr: string) => void;
+  setPlanName: (name: string) => void;
+  setLinkSharing: (linkSharing: boolean) => void;
 }
 
 type Props = ToastHomeProps &
@@ -141,14 +153,33 @@ type Props = ToastHomeProps &
   RouteComponentProps;
 
 class HomeComponent extends React.Component<Props> {
-  // componentDidMount() {
-  //   findAllPlansForUser(
-  //     4,
-  //     "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6NCwiZXhwIjoxNTk0NzU0NzI4fQ.qrYKcNpqHaKSMTXveXXQGc_GP7xDAV0bibkMMxRsMTI"
-  //   ).then(response => console.log(response));
-  //   console.log("test");
-  //   console.log("test");
-  // }
+  componentDidMount() {
+    // if a user is not logged in, that means that they're a guest and the schedule should be stored in redux
+    // when a user logs out, clear the plan and user info redux
+    // only update the plan in api when save plan is pressed
+
+    // when a user first signs up, register the base plan and schedule in api
+    // if a user is currently logged in, fetch their plan and store in redux
+    // TODO: prevent schedule flicker with persisted/default schedule before loading
+
+    // If this is true, then a user is currently logged in and we can fetch their plan
+    if (this.props.token && this.props.userId) {
+      findAllPlansForUser(this.props.userId, this.props.token).then(
+        (plans: IPlanData[]) => {
+          // Once multiple plans are supported, this can be changed to the last used plan
+          let plan: IPlanData = plans[0];
+
+          this.props.setDNDSchedule(plan.schedule);
+          this.props.setMajorPlans(
+            findMajorFromName(plan.major, this.props.majors),
+            plan.planString
+          );
+          this.props.setPlanName(plan.name);
+          this.props.setLinkSharing(plan.link_sharing_enabled);
+        }
+      );
+    }
+  }
 
   componentDidUpdate(nextProps: Props) {
     if (nextProps.warnings !== this.props.warnings) {
@@ -327,6 +358,9 @@ const mapStateToProps = (state: AppState) => ({
   planStr: getPlanStrFromState(state),
   major: getMajorFromState(state),
   warnings: getWarningsFromState(state),
+  token: getTokenFromState(state),
+  userId: getUserId(state),
+  majors: getMajors(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
@@ -337,6 +371,11 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   ) => dispatch(updateSemesterAction(year, season, newSemester)),
   setDNDSchedule: (schedule: DNDSchedule) =>
     dispatch(setDNDScheduleAction(schedule)),
+  setPlanName: (name: string) => dispatch(setPlanNameAction(name)),
+  setLinkSharing: (linkSharing: boolean) =>
+    dispatch(setLinkSharingAction(linkSharing)),
+  setMajorPlans: (major: Major, planStr: string) =>
+    dispatch(setMajorPlanAction(major, planStr)),
 });
 
 export const Home = connect<

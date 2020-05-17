@@ -9,6 +9,10 @@ import {
   setGraduationYearAction,
   setTokenAction,
   setUserIdAction,
+  addPlanIdAction,
+  setLinkSharingAction,
+  setPlanNameAction,
+  setMajorPlanAction,
 } from "../actions/userActions";
 import { setCoopCycle } from "../actions/scheduleActions";
 import { planToString } from "../../utils";
@@ -17,20 +21,29 @@ export interface UserState {
   fullName: string;
   academicYear: number;
   graduationYear: number;
-  major?: Major;
-  planStr?: string;
+  planIds: number[];
   token?: string; // if a token and userId are undefined, then no user is logged in
   userId?: number;
+
+  // TODO: after plan reducer is made, move these fields
+  planName: string;
+  major?: Major;
+  planStr?: string;
+  linkSharing: boolean;
 }
 
 const initialState: UserState = {
   fullName: "",
   academicYear: 0,
   graduationYear: 0,
-  major: undefined,
-  planStr: "",
+  planIds: [],
   token: undefined,
   userId: undefined,
+
+  major: undefined,
+  planStr: "",
+  planName: "",
+  linkSharing: false,
 };
 
 export const userReducer = (
@@ -70,6 +83,23 @@ export const userReducer = (
       }
       case getType(setUserIdAction): {
         draft.userId = action.payload.id;
+        return draft;
+      }
+      case getType(addPlanIdAction): {
+        draft.planIds.push(action.payload.planId);
+        return draft;
+      }
+      case getType(setLinkSharingAction): {
+        draft.linkSharing = action.payload.linkSharing;
+        return draft;
+      }
+      case getType(setPlanNameAction): {
+        draft.planName = action.payload.name;
+        return draft;
+      }
+      case getType(setMajorPlanAction): {
+        draft.major = action.payload.major;
+        draft.planStr = action.payload.planStr;
         return draft;
       }
     }

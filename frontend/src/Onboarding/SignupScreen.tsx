@@ -9,7 +9,13 @@ import { IUserData, DNDSchedule } from "../models/types";
 import { PrimaryButton } from "../components/common/PrimaryButton";
 import { registerUser } from "../services/UserService";
 import { Dispatch } from "redux";
-import { setTokenAction, setUserIdAction } from "../state/actions/userActions";
+import {
+  addPlanIdAction,
+  setTokenAction,
+  setUserIdAction,
+  setPlanNameAction,
+  setLinkSharingAction,
+} from "../state/actions/userActions";
 import { createPlanForUser } from "../services/PlanService";
 import { getScheduleFromState } from "../state";
 
@@ -61,6 +67,9 @@ interface ReduxStoreSignupScreenProps {
 interface ReduxDispatchSignupScreenProps {
   setToken: (token: string) => void;
   setUserId: (id: number) => void;
+  addPlanId: (planId: number) => void;
+  setPlanName: (name: string) => void;
+  setLinkSharing: (linkSharing: boolean) => void;
 }
 
 type Props = ReduxStoreSignupScreenProps &
@@ -164,6 +173,10 @@ class SignupScreenComponent extends React.Component<Props, SignupScreenState> {
               schedule: this.props.schedule,
               major: this.props.major.name,
               planString: this.props.planStr ? this.props.planStr : "None",
+            }).then(plan => {
+              this.props.addPlanId(plan.id);
+              this.props.setPlanName(plan.name);
+              this.props.setLinkSharing(plan.link_sharing_enabled);
             });
           }
           this.props.setUserId(response.user.id);
@@ -329,6 +342,10 @@ const mapStateToProps = (state: AppState) => ({
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   setToken: (token: string) => dispatch(setTokenAction(token)),
   setUserId: (id: number) => dispatch(setUserIdAction(id)),
+  addPlanId: (planId: number) => dispatch(addPlanIdAction(planId)),
+  setPlanName: (name: string) => dispatch(setPlanNameAction(name)),
+  setLinkSharing: (linkSharing: boolean) =>
+    dispatch(setLinkSharingAction(linkSharing)),
 });
 
 /**

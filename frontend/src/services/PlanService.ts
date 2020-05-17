@@ -1,4 +1,4 @@
-import { IPlanData } from "../models/types";
+import { ICreatePlanData } from "../models/types";
 
 export const findAllPlansForUser = (userId: number, userToken: string) =>
   fetch(`/api/users/${userId}/plans`, {
@@ -11,7 +11,7 @@ export const findAllPlansForUser = (userId: number, userToken: string) =>
 export const createPlanForUser = (
   userId: number,
   userToken: string,
-  plan: IPlanData
+  plan: ICreatePlanData
 ) =>
   fetch(`/api/users/${userId}/plans`, {
     method: "POST",

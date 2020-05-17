@@ -42,3 +42,32 @@ export const setUserIdAction = createAction(
     id,
   })
 )();
+
+export const addPlanIdAction = createAction(
+  "user/ADD_PLAN_ID",
+  (planId: number) => ({
+    planId,
+  })
+)();
+
+export const setPlanNameAction = createAction(
+  "user/SET_PLAN_NAME",
+  (name: string) => ({
+    name,
+  })
+)();
+
+export const setLinkSharingAction = createAction(
+  "user/SET_LINK_SHARING",
+  (linkSharing: boolean) => ({
+    linkSharing,
+  })
+)();
+
+export const setMajorPlanAction = createAction(
+  "user/SET_MAJOR_PLAN",
+  (major: Major, planStr: string) => ({
+    major,
+    planStr,
+  })
+)();

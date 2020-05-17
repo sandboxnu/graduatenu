@@ -12,6 +12,20 @@ import { Major, Schedule } from "graduate-common";
  */
 
 /**
+ * Get a users JWT token from the AppState
+ * @param state the AppState
+ */
+export const getTokenFromState = (state: AppState): string | undefined =>
+  state.user.token;
+
+/**
+ * Get a users id number from the AppState
+ * @param state the AppState
+ */
+export const getUserId = (state: AppState): number | undefined =>
+  state.user.userId;
+
+/**
  * Get a users fullname from the AppState
  * @param state the AppState
  */
