@@ -7,6 +7,7 @@ import {
   setFullNameAction,
   setAcademicYearAction,
   setGraduationYearAction,
+  setTokenAction,
 } from "../actions/userActions";
 import { setCoopCycle } from "../actions/scheduleActions";
 import { planToString } from "../../utils";
@@ -17,6 +18,7 @@ export interface UserState {
   graduationYear: number;
   major?: Major;
   planStr?: string;
+  token: string;
 }
 
 const initialState: UserState = {
@@ -25,6 +27,7 @@ const initialState: UserState = {
   graduationYear: 0,
   major: undefined,
   planStr: "",
+  token: "",
 };
 
 export const userReducer = (
@@ -56,6 +59,10 @@ export const userReducer = (
       }
       case getType(setGraduationYearAction): {
         draft.graduationYear = action.payload.graduationYear;
+        return draft;
+      }
+      case getType(setTokenAction): {
+        draft.token = action.payload.token;
         return draft;
       }
     }

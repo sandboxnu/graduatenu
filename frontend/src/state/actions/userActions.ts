@@ -28,3 +28,10 @@ export const setMajorAction = createAction(
     major,
   })
 )();
+
+export const setTokenAction = createAction(
+  "user/SET_TOKEN",
+  (token: string) => ({
+    token,
+  })
+)();

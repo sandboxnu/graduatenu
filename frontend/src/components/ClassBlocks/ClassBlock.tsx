@@ -15,7 +15,7 @@ const Block = styled(Card)<any>`
 `;
 
 const ClassBlockBodyContainer = styled.div<any>`
-  background-color: #e0e0e0;
+  background-color: ${props => (props.warning ? "#F8CECE" : "#E0E0E0")};
   padding-left: 8px;
   flex: 1;
   min-width: 0;
