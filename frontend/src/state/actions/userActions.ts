@@ -35,3 +35,10 @@ export const setTokenAction = createAction(
     token,
   })
 )();
+
+export const setUserIdAction = createAction(
+  "user/SET_USER_ID",
+  (id: number) => ({
+    id,
+  })
+)();

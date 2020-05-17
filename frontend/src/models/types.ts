@@ -139,9 +139,8 @@ export interface ILoginData {
  * A model for data pertaining to a Plan object.
  */
 export interface IPlanData {
-  id: number;
   name: string;
-  linkSharingEnabled: boolean;
+  link_sharing_enabled: boolean;
   schedule: Schedule;
   major: string;
   planString: string;

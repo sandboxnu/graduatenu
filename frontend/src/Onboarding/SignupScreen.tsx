@@ -5,11 +5,13 @@ import styled from "styled-components";
 import { TextField } from "@material-ui/core";
 import { AppState } from "../state/reducers/state";
 import { Major } from "graduate-common";
-import {  IUserData } from "../models/types";
+import { IUserData, DNDSchedule } from "../models/types";
 import { PrimaryButton } from "../components/common/PrimaryButton";
 import { registerUser } from "../services/UserService";
 import { Dispatch } from "redux";
-import { setTokenAction } from "../state/actions/userActions";
+import { setTokenAction, setUserIdAction } from "../state/actions/userActions";
+import { createPlanForUser } from "../services/PlanService";
+import { getScheduleFromState } from "../state";
 
 const Wrapper = styled.div`
   display: flex;
@@ -53,10 +55,12 @@ interface ReduxStoreSignupScreenProps {
   graduationYear: number;
   major?: Major;
   planStr?: string;
+  schedule: DNDSchedule;
 }
 
 interface ReduxDispatchSignupScreenProps {
   setToken: (token: string) => void;
+  setUserId: (id: number) => void;
 }
 
 type Props = ReduxStoreSignupScreenProps &
@@ -153,6 +157,16 @@ class SignupScreenComponent extends React.Component<Props, SignupScreenState> {
             errorEmail: response.errors.email,
           });
         } else {
+          if (this.props.major) {
+            createPlanForUser(response.user.id, response.user.token, {
+              name: "Plan 1",
+              link_sharing_enabled: false,
+              schedule: this.props.schedule,
+              major: this.props.major.name,
+              planString: this.props.planStr ? this.props.planStr : "None",
+            });
+          }
+          this.props.setUserId(response.user.id);
           this.props.setToken(response.user.token);
           this.props.history.push("/home");
         }
@@ -305,6 +319,7 @@ const mapStateToProps = (state: AppState) => ({
   graduationYear: state.user.graduationYear,
   major: state.user.major,
   planStr: state.user.planStr,
+  schedule: getScheduleFromState(state),
 });
 
 /**
@@ -313,6 +328,7 @@ const mapStateToProps = (state: AppState) => ({
  */
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   setToken: (token: string) => dispatch(setTokenAction(token)),
+  setUserId: (id: number) => dispatch(setUserIdAction(id)),
 });
 
 /**

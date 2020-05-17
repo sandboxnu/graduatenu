@@ -17,6 +17,7 @@ export const createPlanForUser = (
     method: "POST",
     body: JSON.stringify({ plan: plan }),
     headers: {
+      "Content-Type": "application/json",
       Authorization: "Token " + userToken,
     },
   }).then(response => response.json());
