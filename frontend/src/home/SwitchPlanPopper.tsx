@@ -27,7 +27,7 @@ const SwitchPlanMenu = styled(Menu)`
 `;
 
 interface ReduxStoreSwitchSchedulesProps {
-  activeSchedule: NamedSchedule;
+  // activeSchedule: NamedSchedule;
   schedules: NamedSchedule[];
 }
 
@@ -94,10 +94,12 @@ export class SwitchPlanPopperComponent extends React.Component<
   }
 
   render() {
+    console.log(this.props);
     return (
       <div>
         <SwitchPlanContainer onClick={event => this.handleClick(event)}>
-          <h2>{`- ${this.props.activeSchedule.name}`}</h2>
+          {/* <h2>{`- ${this.props.activeSchedule.name}`}</h2> */}
+          <h2>{`- hello`}</h2>
           {Boolean(this.state.anchorEl) ? (
             <KeyboardArrowUpIcon />
           ) : (
@@ -126,8 +128,8 @@ export class SwitchPlanPopperComponent extends React.Component<
 }
 
 const mapStateToProps = (state: AppState) => ({
-  activeSchedule: getActiveScheduleFromState(state),
   schedules: getSchedulesFromState(state),
+  // activeSchedule: getActiveScheduleFromState(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({

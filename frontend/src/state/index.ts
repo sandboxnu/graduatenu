@@ -113,6 +113,5 @@ export const getSchedulesFromState = (state: AppState): NamedSchedule[] =>
  * @param state the AppState
  */
 export const getActiveScheduleFromState = (state: AppState): NamedSchedule => {
-  console.log(state);
   return state.schedules.schedules[state.schedules.activeSchedule];
 };

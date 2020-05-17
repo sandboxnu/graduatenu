@@ -21,7 +21,7 @@ const initialState: SchedulesState = {
       name: "sample-schedule",
       schedule: {
         present: {
-          currentClassCounter: 0,
+          currentClassCounter: 100,
           isScheduleLoading: false,
           scheduleError: "",
           schedule: mockData,
