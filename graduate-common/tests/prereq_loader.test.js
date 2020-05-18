@@ -1,6 +1,6 @@
-const prereq_loader = require("../prereq_loader");
+const prereq_loader = require("../src/prereq_loader");
 const rp = require("request-promise");
-const plan_parser = require("../../../scrapers/src/plan_parser");
+const plan_parser = require("backend/src/plan_parser");
 const supported = [
   "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-science/bscs/#planofstudytext",
   "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/bs/#planofstudytext",
