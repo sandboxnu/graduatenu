@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 import { MenuItem } from "@material-ui/core";
-import { SeasonWord, Status } from "../../models/types";
+import { SeasonWord, Status } from "graduate-common";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
 import { changeSemesterStatusAction } from "../../state/actions/scheduleActions";

@@ -1,13 +1,15 @@
 import { createAction } from "typesafe-actions";
 import {
-  ScheduleCourse,
   DNDScheduleCourse,
   DNDScheduleTerm,
-  Status,
-  SeasonWord,
-  Schedule,
   DNDSchedule,
 } from "../../models/types";
+import {
+  ScheduleCourse,
+  Status,
+  SeasonWord,
+  Schedule
+} from "graduate-common";
 
 export const addClassesAction = createAction(
   "schedule/ADD_CLASSES",

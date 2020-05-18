@@ -8,5 +8,5 @@ fi
 if [[ "dev-build" = "$1" ]]; then
     cd api && docker-compose up & cd frontend && yarn start
 else
-    cd api && docker-compose up & cd frontend && docker build -t frontend . && docker run -p 3000:80 frontend
+    cd api && docker-compose up & docker build -t frontend -f frontend/Dockerfile . && docker run -p 3000:80 frontend
 fi

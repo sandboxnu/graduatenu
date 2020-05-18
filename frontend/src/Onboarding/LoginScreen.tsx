@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 import { withRouter, RouteComponentProps, Link } from "react-router-dom";
 import styled from "styled-components";
 import { TextField } from "@material-ui/core";
-import { Major, Schedule, ILoginData } from "../models/types";
+import { Major, Schedule } from "graduate-common";
+import { ILoginData } from "../models/types"
 import { PrimaryButton } from "../components/common/PrimaryButton";
 import { Dispatch } from "redux";
 import {

@@ -1,11 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import {
-  ScheduleCourse,
   DNDSchedule,
   DNDScheduleTerm,
-  DNDScheduleCourse,
 } from "../models/types";
+import { ScheduleCourse } from "graduate-common";
 import { XButton } from "./common";
 import { fetchCourse } from "../api";
 import { Modal, CircularProgress } from "@material-ui/core";

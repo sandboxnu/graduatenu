@@ -1,4 +1,4 @@
-import { Major } from "../../models/types";
+import { Major } from "graduate-common";
 import { createAction } from "typesafe-actions";
 
 /**

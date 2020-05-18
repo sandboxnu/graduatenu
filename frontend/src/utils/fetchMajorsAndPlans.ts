@@ -9,9 +9,8 @@ import {
   fetchMajorsErrorAction,
 } from "../state/actions/majorsActions";
 import { Dispatch } from "redux";
-import { Major } from "../models/types";
+import { Major, Schedule } from "graduate-common";
 import { majorIds, majorMap } from "../majors";
-import { Schedule } from "../models/types";
 
 //graphql schema for searchNEU's majors endpoint.
 const majorSchema: string[] = majorIds.map((majorId: string) => {

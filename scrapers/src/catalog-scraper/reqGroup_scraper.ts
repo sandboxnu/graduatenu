@@ -10,7 +10,7 @@ import {
   ICourseRange,
   IRequiredCourse,
   ISubjectRange,
-} from "../../../frontend/src/models/types";
+} from "graduate-common";
 import { SectionType, CreditsRange, ScraperRequirement } from "../models/types";
 import {
   ORTagMap,
