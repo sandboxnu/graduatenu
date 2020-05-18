@@ -1,13 +1,15 @@
 import { createAction } from "typesafe-actions";
 import {
-  ScheduleCourse,
   DNDScheduleCourse,
   DNDScheduleTerm,
-  Status,
-  SeasonWord,
-  Schedule,
   DNDSchedule,
 } from "../../models/types";
+import {
+  ScheduleCourse,
+  Status,
+  SeasonWord,
+  Schedule
+} from "graduate-common";
 
 export const addClassesAction = createAction(
   "schedule/ADD_CLASSES",
@@ -61,4 +63,9 @@ export const setCoopCycle = createAction(
 export const setDNDScheduleAction = createAction(
   "schedule/SET_DND_SCHEDULE",
   (schedule: DNDSchedule) => ({ schedule })
+)();
+
+export const setCompletedCourses = createAction(
+  "schedule/SET_COMPLETED_COURSES",
+  (completedCourses: ScheduleCourse[]) => ({ completedCourses })
 )();

@@ -4,7 +4,7 @@ import {
   IOrCourse,
   ICourseRange,
   ISubjectRange,
-} from "../../../frontend/src/models/types";
+} from "graduate-common";
 import { SubHeaderReqType, ScraperRequirement } from "../models/types";
 import { ORTagMap, RANGETagMap } from "./catalog_scraper";
 import { processHoursText, isRequirement } from "../utils/scraper_utils";

@@ -1,5 +1,10 @@
-import { DNDSchedule, IWarning, CourseWarning } from "../../models/types";
-import { mockData } from "../../data/mockData";
+import { ScheduleCourse } from "graduate-common";
+import {
+  DNDSchedule,
+  IWarning,
+  CourseWarning,
+} from "../../models/types";
+import { mockEmptySchedule } from "../../data/mockData";
 import produce from "immer";
 import { getType } from "typesafe-actions";
 import { ScheduleAction } from "../actions";
@@ -12,12 +17,16 @@ import {
   setDNDScheduleAction,
   undoRemoveClassAction,
   setCoopCycle,
+  setCompletedCourses,
 } from "../actions/scheduleActions";
 import {
   convertTermIdToSeason,
   convertToDNDSchedule,
   convertToDNDCourses,
   produceWarnings,
+  sumCreditsFromList,
+  numToTerm,
+  getNextTerm,
 } from "../../utils";
 
 export interface ScheduleState {
@@ -32,6 +41,7 @@ export interface ScheduleStateSlice {
   schedule: DNDSchedule;
   warnings: IWarning[];
   courseWarnings: CourseWarning[];
+  creditsTaken: number;
 }
 
 const initialState: ScheduleState = {
@@ -39,9 +49,10 @@ const initialState: ScheduleState = {
     currentClassCounter: 0,
     isScheduleLoading: false,
     scheduleError: "",
-    schedule: mockData,
+    schedule: mockEmptySchedule,
     warnings: [],
     courseWarnings: [],
+    creditsTaken: 0,
   },
 };
 
@@ -179,6 +190,52 @@ export const scheduleReducer = (
         draft.present.warnings = container.normalWarnings;
         draft.present.courseWarnings = container.courseWarnings;
 
+        return draft;
+      }
+      case getType(setCompletedCourses): {
+        const [dndCourses, newCounter] = convertToDNDCourses(
+          // sort the completed courses so that when we add it to the schedule, it'll be more or less in order
+          // for some reason it doesn't register classID as a string so I use toString
+          action.payload.completedCourses.sort(
+            (course1: ScheduleCourse, course2: ScheduleCourse) =>
+              course1.classId
+                .toString()
+                .localeCompare(course2.classId.toString())
+          ),
+          draft.present.currentClassCounter
+        );
+        draft.present.currentClassCounter = newCounter;
+        draft.present.creditsTaken = sumCreditsFromList(dndCourses);
+        let curSchedule = draft.present.schedule;
+        let classTerm = 0;
+        // while there are still completed classes left to take and we have not passed the number of terms
+        // in the schedule
+        while (
+          dndCourses.length != 0 ||
+          classTerm >= curSchedule.years.length * 4
+        ) {
+          let curTerm = numToTerm(classTerm, curSchedule);
+          // while the current term is not a class term, continue searching for the next class term.
+          while (
+            classTerm + 1 <= curSchedule.years.length * 4 &&
+            curTerm.status != "CLASSES"
+          ) {
+            classTerm += 1;
+            curTerm = numToTerm(classTerm, curSchedule);
+          }
+          let newCourses = getNextTerm(
+            classTerm % 4 == 2 || classTerm % 4 == 3,
+            dndCourses
+          );
+          curTerm.classes = newCourses;
+          classTerm += 1;
+        }
+
+        const schedule = JSON.parse(JSON.stringify(curSchedule));
+        const container = produceWarnings(schedule);
+
+        draft.present.warnings = container.normalWarnings;
+        draft.present.courseWarnings = container.courseWarnings;
         return draft;
       }
     }

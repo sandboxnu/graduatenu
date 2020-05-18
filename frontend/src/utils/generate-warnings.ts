@@ -1,7 +1,11 @@
 import {
-  Schedule,
   IWarning,
   CourseWarning,
+  IRequirementGroupWarning,
+  WarningContainer,
+} from "../models/types";
+import {
+  Schedule,
   CourseTakenTracker,
   ScheduleTerm,
   ScheduleCourse,
@@ -13,7 +17,6 @@ import {
   INEUAndPrereq,
   INEUOrPrereq,
   Major,
-  IRequirementGroupWarning,
   IMajorRequirementGroup,
   Requirement,
   ISubjectRange,
@@ -23,11 +26,9 @@ import {
   ANDSection,
   ORSection,
   RANGESection,
-  WarningContainer,
   SeasonEnum,
   Season,
-} from "../models/types";
-
+} from "graduate-common";
 /*
 CreditRange interface to track the min and max credits for a particular season. 
 seasonMax = a number representing the max numebr of credits you can take without over-loading. 

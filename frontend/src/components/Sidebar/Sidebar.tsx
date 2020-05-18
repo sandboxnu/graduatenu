@@ -1,5 +1,6 @@
 import React from "react";
-import { DNDSchedule, Major, IRequiredCourse } from "../../models/types";
+import { DNDSchedule } from "../../models/types";
+import { Major, IRequiredCourse } from "graduate-common";
 import styled from "styled-components";
 import { RequirementSection } from ".";
 import {
@@ -14,7 +15,6 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   background: #f2f2f2;
-  box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.25);
   padding: 21px 12px 12px 10px;
 `;
 

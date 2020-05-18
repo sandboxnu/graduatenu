@@ -5,13 +5,11 @@ import { AddBlock } from "./ClassBlocks/AddBlock";
 import { AddClass, ClassList, EmptyBlock } from ".";
 import {
   DNDScheduleTerm,
-  ScheduleCourse,
   CourseWarning,
   DNDScheduleCourse,
-  IWarning,
-  Status,
-  SeasonWord,
+  IWarning
 } from "../models/types";
+import {ScheduleCourse, Status, SeasonWord} from "graduate-common";
 import styled from "styled-components";
 import { AppState } from "../state/reducers/state";
 import { connect } from "react-redux";
@@ -30,8 +28,7 @@ import { SEMESTER_MIN_HEIGHT } from "../constants";
 import { convertTermIdToSeason } from "../utils/schedule-helpers";
 
 const OutsideContainer = styled.div`
-  flex: 1;
-  width: 200px;
+  width: 25%;
 `;
 
 const Container = styled.div<any>`

@@ -5,7 +5,7 @@ import {
   ScheduleYear,
   ScheduleTerm,
   ScheduleCourse,
-} from "../models/types";
+} from "./index";
 import DataLoader from "dataloader";
 import request from "request-promise";
 
@@ -56,24 +56,6 @@ export async function addPrereqsToSchedules(
   let results = await Promise.all(
     schedules.map((sched: Schedule) => prereqifySchedule(sched, loader))
   );
-
-  return results;
-}
-
-export async function addPrereqsToSchedule(
-  schedule: Schedule
-): Promise<Schedule> {
-  // doubly curried loader.
-  // here we give it the year.
-  // next parameter given is the termId.
-  // last parameter is the loader parameter.
-  const loader: DataLoader<SimpleCourse, PrereqQueryResult> = new DataLoader<
-    SimpleCourse,
-    PrereqQueryResult
-  >(queryCoursePrereqData);
-
-  // return the results
-  let results = await prereqifySchedule(schedule, loader);
 
   return results;
 }
@@ -185,8 +167,10 @@ async function prereqifyScheduleCourse(
 
   // optionally add prereqs, coreqs to object.
   if (queryResult) {
-    prereqified.coreqs = queryResult.coreqs ? queryResult.coreqs : undefined;
-    prereqified.prereqs = queryResult.prereqs ? queryResult.prereqs : undefined;
+    queryResult.coreqs ? (prereqified.coreqs = queryResult.coreqs) : undefined;
+    queryResult.prereqs
+      ? (prereqified.prereqs = queryResult.prereqs)
+      : undefined;
     prereqified.numCreditsMax = queryResult.maxCredits
       ? queryResult.maxCredits
       : 0;
@@ -233,7 +217,6 @@ async function queryCoursePrereqData(
   }
   `;
 
-  //console.log(courses)
   // make the request.
   let queryResult = await request({
     uri: "https://searchneu.com/graphql",

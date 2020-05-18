@@ -1,11 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import {
-  ScheduleCourse,
   DNDSchedule,
   DNDScheduleTerm,
-  DNDScheduleCourse,
 } from "../models/types";
+import { ScheduleCourse } from "graduate-common";
 import { XButton } from "./common";
 import { fetchCourse } from "../api";
 import { Modal, CircularProgress } from "@material-ui/core";
@@ -88,7 +87,7 @@ interface AddClassModalProps {
   handleClose: () => void;
   handleSubmit: (courses: ScheduleCourse[]) => void;
   visible: boolean;
-  schedule: DNDSchedule;
+  schedule: DNDSchedule | undefined;
 }
 
 interface AddClassModalState {
@@ -141,7 +140,10 @@ export class AddClassModal extends React.Component<
         errorText:
           "Could not find " + formSubject + formClassId + " in course catalog",
       });
-    } else if (this.isCourseInSchedule(courseToAdd, this.props.schedule)) {
+    } else if (
+      this.props.schedule !== undefined &&
+      this.isCourseInSchedule(courseToAdd, this.props.schedule)
+    ) {
       this.setState({
         isLoading: false,
         queuedCourses: [...queuedCourses, courseToAdd],

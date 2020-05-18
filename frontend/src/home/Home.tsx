@@ -1,15 +1,18 @@
 import React from "react";
+import "./Scrollbar.css";
 import { DragDropContext } from "react-beautiful-dnd";
 import {
   DNDSchedule,
-  Major,
-  Schedule,
-  Status,
-  SeasonWord,
   IWarning,
   DNDScheduleYear,
-  DNDScheduleTerm,
+  DNDScheduleTerm
 } from "../models/types";
+import {
+  Major,
+  Status,
+  SeasonWord,
+  Schedule
+} from "graduate-common";
 import styled from "styled-components";
 import { Year } from "../components/Year";
 import {
@@ -35,30 +38,35 @@ import {
 } from "../state";
 import {
   updateSemesterAction,
-  setScheduleAction,
   setDNDScheduleAction,
-  setCoopCycle,
 } from "../state/actions/scheduleActions";
-import { setMajorAction } from "../state/actions/userActions";
-import { getMajors, getPlans } from "../state";
 import { EditPlanPopper } from "./EditPlanPopper";
 import { ExcelUpload } from "../components/ExcelUpload";
-import { addPrereqsToSchedule } from "../common/prereq_loader"
 
 const OuterContainer = styled.div`
   display: flex;
-  flex: 1;
   flex-direction: row;
-  justify-content: space-between;
+  overflow: hidden;
 `;
 
 const SidebarContainer = styled.div`
-  flex: 1;
+  height: 100vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  flex: 4;
+  position: relative;
+  box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.25);
+`;
+
+const LeftScroll = styled.div`
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  flex: 19;
 `;
 
 const Container = styled.div`
   display: flex;
-  flex: 5;
   flex-direction: column;
   justify-content: start;
   align-items: start;
@@ -280,7 +288,8 @@ class HomeComponent extends React.Component<Props> {
   
   async setSchedule(schedule: Schedule) {
     console.log(schedule);
-    let preReqSched = await addPrereqsToSchedule(schedule);
+    //let preReqSched = await addPrereqsToSchedule(schedule);
+    const preReqSched = schedule;
     console.log(preReqSched);
     const [dndschedule, counter] = convertToDNDSchedule(preReqSched, 0);
     this.props.setDNDSchedule(dndschedule);
@@ -293,30 +302,30 @@ class HomeComponent extends React.Component<Props> {
           onDragEnd={this.onDragEnd}
           onDragUpdate={this.onDragUpdate}
         >
-          <Container>
-            <HomeTop>
-              <HomeText href="#">GraduateNU</HomeText>
-              <HomePlan>
-                <MajorText>
-                  {!!this.props.major ? this.props.major.name + ": " : ""}
-                </MajorText>
-                <PlanText>{this.props.planStr || "None"}</PlanText>
-                <EditPlanPopper />
-              </HomePlan>
-            </HomeTop>
-            <HomeAboveSchedule>
-              <h2>Plan Of Study</h2>
-              <ExcelUpload
-              setSchedule={this.setSchedule.bind(this)}/>
-            </HomeAboveSchedule>
-            {this.renderYears()}
-          </Container>
+          <LeftScroll className="hide-scrollbar">
+            <Container>
+              <HomeTop>
+                <HomeText href="#">GraduateNU</HomeText>
+                <HomePlan>
+                  <MajorText>
+                    {!!this.props.major ? this.props.major.name + ": " : ""}
+                  </MajorText>
+                  <PlanText>{this.props.planStr || "None"}</PlanText>
+                  <EditPlanPopper />
+                </HomePlan>
+              </HomeTop>
+              <HomeAboveSchedule>
+                <h2>Plan Of Study</h2>
+                <ExcelUpload setSchedule={this.setSchedule.bind(this)}/>
+              </HomeAboveSchedule>
+              {this.renderYears()}
+            </Container>
+          </LeftScroll>
           <SidebarContainer>
             <Sidebar />
           </SidebarContainer>
         </DragDropContext>
-      </OuterContainer>
-    );
+      </OuterContainer>);
   }
 }
 

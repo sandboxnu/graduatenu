@@ -2,11 +2,13 @@ import XLSX from 'xlsx';
 import {
     Schedule,
     ScheduleCourse,
-    SeasonEnum,
     ScheduleYear,
-    ScheduleTerm,
+    ScheduleTerm
+} from "graduate-common";
+import {
+    SeasonEnum,
     StatusEnum
-} from "../models/types";
+} from "../models/types"
 import { convertSeasonToTermId } from './schedule-helpers';
 
 const BASE_YEAR: number = 1000;
