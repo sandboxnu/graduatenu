@@ -171,12 +171,12 @@ class SignupScreenComponent extends React.Component<Props, SignupScreenState> {
               name: "Plan 1",
               link_sharing_enabled: false,
               schedule: this.props.schedule,
-              major: this.props.major.name,
+              major: this.props.major ? this.props.major.name : "",
               planString: this.props.planStr ? this.props.planStr : "None",
-            }).then(plan => {
-              this.props.addPlanId(plan.id);
-              this.props.setPlanName(plan.name);
-              this.props.setLinkSharing(plan.link_sharing_enabled);
+            }).then(res => {
+              this.props.addPlanId(res.plan.id);
+              this.props.setPlanName(res.plan.name);
+              this.props.setLinkSharing(res.plan.link_sharing_enabled);
             });
           }
           this.props.setUserId(response.user.id);
