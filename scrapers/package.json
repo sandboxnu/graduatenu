@@ -1,7 +1,7 @@
 {
-  "name": "backend",
+  "name": "scrapers",
   "version": "1.0.0",
-  "description": "A degree scheduling service for Northeastern students.",
+  "description": "scrapers used to generate essential data such as majors and plans",
   "dependencies": {
     "@types/request-promise": "^4.1.44",
     "cross-env": "5.0.5",
