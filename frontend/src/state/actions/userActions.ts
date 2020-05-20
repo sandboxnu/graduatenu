@@ -71,3 +71,10 @@ export const setMajorPlanAction = createAction(
     planStr,
   })
 )();
+
+export const setPlanIdsAction = createAction(
+  "user/SET_PLAN_IDS",
+  (planIds: number[]) => ({
+    planIds,
+  })
+)();

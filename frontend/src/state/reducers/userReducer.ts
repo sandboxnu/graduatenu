@@ -13,6 +13,7 @@ import {
   setLinkSharingAction,
   setPlanNameAction,
   setMajorPlanAction,
+  setPlanIdsAction,
 } from "../actions/userActions";
 import { setCoopCycle } from "../actions/scheduleActions";
 import { planToString } from "../../utils";
@@ -87,6 +88,10 @@ export const userReducer = (
       }
       case getType(addPlanIdAction): {
         draft.planIds.push(action.payload.planId);
+        return draft;
+      }
+      case getType(setPlanIdsAction): {
+        draft.planIds = action.payload.planIds;
         return draft;
       }
       case getType(setLinkSharingAction): {

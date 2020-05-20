@@ -44,6 +44,7 @@ import {
   setLinkSharingAction,
   setPlanNameAction,
   setMajorPlanAction,
+  setPlanIdsAction,
 } from "../state/actions/userActions";
 import { getMajors, getPlans } from "../state";
 import { EditPlanPopper } from "./EditPlanPopper";
@@ -169,6 +170,7 @@ interface ReduxDispatchHomeProps {
   setMajorPlans: (major: Major | undefined, planStr: string) => void;
   setPlanName: (name: string) => void;
   setLinkSharing: (linkSharing: boolean) => void;
+  setPlanIds: (planIds: number[]) => void;
 }
 
 type Props = ToastHomeProps &
@@ -189,13 +191,6 @@ class HomeComponent extends React.Component<Props, HomeState> {
   }
 
   componentDidMount() {
-    // if a user is not logged in, that means that they're a guest and the schedule should be stored in redux
-    // when a user logs out, clear the plan and user info redux
-
-    // only update the plan in api when save plan is pressed
-    // when a user first signs up, register the base plan and schedule in api
-    // if a user is currently logged in, fetch their plan and store in redux
-
     // If this is true, then a user is currently logged in and we can fetch their plan
     if (this.props.token && this.props.userId) {
       findAllPlansForUser(this.props.userId, this.props.token).then(
@@ -203,6 +198,7 @@ class HomeComponent extends React.Component<Props, HomeState> {
           // Once multiple plans are supported, this can be changed to the last used plan
           let plan: IPlanData = plans[0];
 
+          this.props.setPlanIds(plans.map(plan => plan.id));
           this.props.setDNDSchedule(plan.schedule);
           this.props.setMajorPlans(
             findMajorFromName(plan.major, this.props.majors),
@@ -470,6 +466,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     dispatch(setLinkSharingAction(linkSharing)),
   setMajorPlans: (major: Major | undefined, planStr: string) =>
     dispatch(setMajorPlanAction(major, planStr)),
+  setPlanIds: (planIds: number[]) => dispatch(setPlanIdsAction(planIds)),
 });
 
 export const Home = connect<
