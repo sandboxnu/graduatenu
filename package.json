@@ -21,7 +21,7 @@
     "type-check": "tsc --noEmit"
   },
   "devDependencies": {
-    "husky": "^4.2.3"
+    "husky": "^4.2.5"
   },
   "jest": {
     "moduleFileExtensions": [
