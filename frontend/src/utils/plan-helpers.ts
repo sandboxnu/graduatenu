@@ -1,4 +1,4 @@
-import { Major } from "../models/types";
+import { Major } from "graduate-common";
 
 /**
  * Finds a major from the given list of majors with the given name.
