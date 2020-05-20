@@ -66,7 +66,7 @@ export const setLinkSharingAction = createAction(
 
 export const setMajorPlanAction = createAction(
   "user/SET_MAJOR_PLAN",
-  (major: Major, planStr: string) => ({
+  (major: Major | undefined, planStr: string) => ({
     major,
     planStr,
   })

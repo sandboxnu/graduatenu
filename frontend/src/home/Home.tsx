@@ -32,6 +32,9 @@ import {
   getWarningsFromState,
   getTokenFromState,
   getUserId,
+  getPlanNameFromState,
+  getPlanIdsFromState,
+  getLinkSharingFromState,
 } from "../state";
 import {
   updateSemesterAction,
@@ -47,8 +50,11 @@ import { EditPlanPopper } from "./EditPlanPopper";
 import {
   createPlanForUser,
   findAllPlansForUser,
+  updatePlanForUser,
 } from "../services/PlanService";
 import { findMajorFromName } from "../utils/plan-helpers";
+import { Button } from "@material-ui/core";
+import Loader from "react-loader-spinner";
 
 const OuterContainer = styled.div`
   display: flex;
@@ -79,6 +85,15 @@ const Container = styled.div`
   align-items: start;
   margin: 30px;
   background-color: "#ff76ff";
+`;
+
+const SpinnerWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 60vh;
 `;
 
 const HomeTop = styled.div`
@@ -115,6 +130,12 @@ const PlanText = styled.div`
   margin-right: 4px;
 `;
 
+const SavePlanButton = styled(Button)<any>`
+  background: #e0e0e0;
+  font-weight: normal;
+  float: right;
+`;
+
 interface ToastHomeProps {
   addToast: (message: string, options: any) => void;
   removeToast: (id: string) => void;
@@ -133,6 +154,9 @@ interface ReduxStoreHomeProps {
   token?: string;
   userId?: number;
   majors: Major[];
+  planIds: number[];
+  planName: string | undefined;
+  linkSharing: boolean;
 }
 
 interface ReduxDispatchHomeProps {
@@ -142,7 +166,7 @@ interface ReduxDispatchHomeProps {
     newSemester: DNDScheduleTerm
   ) => void;
   setDNDSchedule: (schedule: DNDSchedule) => void;
-  setMajorPlans: (major: Major, planStr: string) => void;
+  setMajorPlans: (major: Major | undefined, planStr: string) => void;
   setPlanName: (name: string) => void;
   setLinkSharing: (linkSharing: boolean) => void;
 }
@@ -152,15 +176,25 @@ type Props = ToastHomeProps &
   ReduxDispatchHomeProps &
   RouteComponentProps;
 
-class HomeComponent extends React.Component<Props> {
+interface HomeState {
+  fetchedPlan: boolean;
+}
+
+class HomeComponent extends React.Component<Props, HomeState> {
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      fetchedPlan: false,
+    };
+  }
+
   componentDidMount() {
     // if a user is not logged in, that means that they're a guest and the schedule should be stored in redux
     // when a user logs out, clear the plan and user info redux
-    // only update the plan in api when save plan is pressed
 
+    // only update the plan in api when save plan is pressed
     // when a user first signs up, register the base plan and schedule in api
     // if a user is currently logged in, fetch their plan and store in redux
-    // TODO: prevent schedule flicker with persisted/default schedule before loading
 
     // If this is true, then a user is currently logged in and we can fetch their plan
     if (this.props.token && this.props.userId) {
@@ -176,6 +210,10 @@ class HomeComponent extends React.Component<Props> {
           );
           this.props.setPlanName(plan.name);
           this.props.setLinkSharing(plan.link_sharing_enabled);
+
+          this.setState({
+            fetchedPlan: true,
+          });
         }
       );
     }
@@ -313,9 +351,56 @@ class HomeComponent extends React.Component<Props> {
   }
 
   renderYears() {
-    return this.props.schedule.years.map((year: number, index: number) => (
-      <Year key={index} index={index} schedule={this.props.schedule} />
-    ));
+    // If a user is currently logged in, wait until plans are fetched to render
+    if (this.props.token && this.props.userId) {
+      if (this.state.fetchedPlan) {
+        return this.props.schedule.years.map((year: number, index: number) => (
+          <Year key={index} index={index} schedule={this.props.schedule} />
+        ));
+      } else {
+        return (
+          <SpinnerWrapper>
+            <Loader
+              type="Puff"
+              color="#f50057"
+              height={100}
+              width={100}
+              timeout={5000} //5 secs
+            />
+          </SpinnerWrapper>
+        );
+      }
+    } else {
+      return this.props.schedule.years.map((year: number, index: number) => (
+        <Year key={index} index={index} schedule={this.props.schedule} />
+      ));
+    }
+  }
+
+  /**
+   * If a user is currently logged in, updates the current plan under this user.
+   * Only supports updating a user's singular plan, can be modified later to
+   * update a specific plan.
+   */
+  savePlan() {
+    // If this is true, then a user is currently logged in and we can update their plan
+    if (this.props.token && this.props.userId) {
+      updatePlanForUser(
+        this.props.userId,
+        this.props.token,
+        this.props.planIds[0],
+        {
+          id: this.props.planIds[0],
+          name: this.props.planName ? this.props.planName : "",
+          link_sharing_enabled: this.props.linkSharing,
+          schedule: this.props.schedule,
+          major: this.props.major ? this.props.major.name : "",
+          planString: this.props.planStr ? this.props.planStr : "None",
+        }
+      ).then(plan => alert("Your plan has been saved."));
+    } else {
+      alert("You must be logged in to save your plan.");
+    }
   }
 
   render() {
@@ -328,7 +413,7 @@ class HomeComponent extends React.Component<Props> {
           <LeftScroll className="hide-scrollbar">
             <Container>
               <HomeTop>
-                <HomeText href="#">GraduateNUs</HomeText>
+                <HomeText href="#">GraduateNU</HomeText>
                 <HomePlan>
                   <MajorText>
                     {!!this.props.major ? this.props.major.name + ": " : ""}
@@ -337,9 +422,15 @@ class HomeComponent extends React.Component<Props> {
                   <EditPlanPopper />
                 </HomePlan>
               </HomeTop>
-              <HomePlan>
+              <HomeTop>
                 <h2>Plan Of Study</h2>
-              </HomePlan>
+                <SavePlanButton
+                  variant="contained"
+                  onClick={this.savePlan.bind(this)}
+                >
+                  Save Plan
+                </SavePlanButton>
+              </HomeTop>
               {this.renderYears()}
             </Container>
           </LeftScroll>
@@ -361,6 +452,9 @@ const mapStateToProps = (state: AppState) => ({
   token: getTokenFromState(state),
   userId: getUserId(state),
   majors: getMajors(state),
+  planName: getPlanNameFromState(state),
+  planIds: getPlanIdsFromState(state),
+  linkSharing: getLinkSharingFromState(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
@@ -374,7 +468,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   setPlanName: (name: string) => dispatch(setPlanNameAction(name)),
   setLinkSharing: (linkSharing: boolean) =>
     dispatch(setLinkSharingAction(linkSharing)),
-  setMajorPlans: (major: Major, planStr: string) =>
+  setMajorPlans: (major: Major | undefined, planStr: string) =>
     dispatch(setMajorPlanAction(major, planStr)),
 });
 

@@ -26,6 +26,27 @@ export const getUserId = (state: AppState): number | undefined =>
   state.user.userId;
 
 /**
+ * Get a users plan name from the AppState
+ * @param state the AppState
+ */
+export const getPlanNameFromState = (state: AppState): string | undefined =>
+  state.user.planName;
+
+/**
+ * Get a users list of plan ids from the AppState
+ * @param state the AppState
+ */
+export const getPlanIdsFromState = (state: AppState): number[] =>
+  state.user.planIds;
+
+/**
+ * Get a users plan link sharing status from the AppState
+ * @param state the AppState
+ */
+export const getLinkSharingFromState = (state: AppState): boolean =>
+  state.user.linkSharing;
+
+/**
  * Get a users fullname from the AppState
  * @param state the AppState
  */
