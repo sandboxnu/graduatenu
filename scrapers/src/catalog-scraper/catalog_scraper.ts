@@ -34,6 +34,8 @@ export const ORTagMap: { [key: string]: number } = {
 
   "Complete one course from one of the following groups:": 4,
   "Take two courses, at least one of which is at the 4000 or 5000 level, from the following:": 8,
+  "Complete one of the following courses not already taken:": 4,
+  "Complete two of the following courses not already taken:": 8,
   // TODO: Data-Science-Related Electives: "Complete six courses from categories A and B, at least three of which must be from B"
 };
 
@@ -60,6 +62,8 @@ export const RANGETagMap: { [key: string]: number } = {
   "Complete three courses in the following range:": 12,
 
   "Complete four ECON electives with at least two numbered at ECON 3000 or above.": 16,
+
+  "Complete 8 credits of CS, CY, DS, or IS classes that are not already required. Choose courses within the following ranges:": 8,
 };
 
 // Set for RANGESections that only indicate the major in which they are allowed to take electives

@@ -38,17 +38,22 @@ export type Requirement =
   | IOrCourse
   | IAndCourse
   | ICourseRange
-  | IRequiredCourse;
+  | IRequiredCourse
+  | ICreditRangeCourse;
 
-// TODO: with interfaces, the additional type parameter may not be necessary
+export interface ICreditRangeCourse {
+  type: "CREDITS";
+  minCredits: number;
+  courses: Requirement[];
+}
+
 /**
  * An 'OR' set of courses.
  * @param courses: A list of courses, one of which can be taken to satisfy this requirement.
  */
 export interface IOrCourse {
   type: "OR";
-  //numCreditsMin: number;
-  //numCreditsMax: number;
+  // numCreditsMin: number;
   courses: Requirement[];
 }
 

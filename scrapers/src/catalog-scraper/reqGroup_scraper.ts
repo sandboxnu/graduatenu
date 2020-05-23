@@ -10,6 +10,7 @@ import {
   ICourseRange,
   IRequiredCourse,
   ISubjectRange,
+  ICreditRangeCourse,
 } from "../../../frontend/src/models/types";
 import { SectionType, CreditsRange, ScraperRequirement } from "../models/types";
 import {
@@ -50,6 +51,7 @@ export function createRequirementGroup(
     let row: CheerioElement = rows[i];
     let currentRow: Cheerio = $(row);
     let commentSpan: Cheerio = currentRow.find("span.courselistcomment");
+    let classTD: Cheerio = currentRow.find("td.codecol");
     // a courselistcomment is present in this row
     if (commentSpan.length > 0) {
       // If it is a section where subheaders are parsed as seperate
@@ -73,7 +75,6 @@ export function createRequirementGroup(
           minCredits = cred;
           maxCredits = cred;
         }
-        break;
       } else if (RANGETagMap.hasOwnProperty(commentSpan.text())) {
         //detected Range Tag; change section type to Range
         sectionType = SectionType.RANGE;
@@ -107,6 +108,14 @@ export function createRequirementGroup(
         maxCredits = credsRange.numCreditsMax;
         break;
       }
+    } else if (sectionType === SectionType.OR && classTD.length > 0) {
+      let div = classTD.find("div");
+      if (div.length == 0) {
+        sectionType = SectionType.AND;
+      }
+      break;
+    } else if (classTD.length > 0) {
+      break;
     }
   }
 
@@ -185,21 +194,86 @@ function processAndSection(
     }
   } else {
     //can parse the rows as indivdual requirements
-    let containsOrRow: boolean = false;
     let reqList: Requirement[] = [];
+    let is_creditCourse: number | undefined = undefined;
+    let orCreditsList: Requirement[] = [];
     rows.forEach((row: CheerioElement) => {
       let requirement: Requirement | undefined = parseRowAsRequirement($, row);
-
-      if (requirement && isRequirement(requirement)) {
+      if (requirement) {
         if (isOrRow($, row)) {
-          let orVal = reqList.pop();
+          // takes the most recently added value to add to the or
+          let orVal = is_creditCourse ? orCreditsList.pop() : reqList.pop();
           if (orVal) {
             requirement = createIOrCourse(requirement, orVal);
           }
         }
-        reqList.push(requirement);
+
+        if (is_creditCourse && $(row).find("td.codecol div").length === 0) {
+          console.log("FOUND YAY!");
+          is_creditCourse = undefined;
+        }
+
+        if (is_creditCourse) {
+          orCreditsList.push(requirement);
+        } else {
+          reqList.push(requirement);
+        }
+      } else if (
+        ORTagMap.hasOwnProperty(
+          $(row)
+            .find("span.courselistcomment")
+            .text()
+        )
+      ) {
+        if (is_creditCourse) {
+          let nextCourse: ICreditRangeCourse = {
+            type: "CREDITS",
+            minCredits: is_creditCourse,
+            courses: orCreditsList,
+          };
+          reqList.push(nextCourse);
+          is_creditCourse =
+            $(row)
+              .find("td.hourscol")
+              .text().length > 0
+              ? processHoursText(
+                  $(row)
+                    .find("td.hourscol")
+                    .text()
+                ).numCreditsMin
+              : ORTagMap[
+                  $(row)
+                    .find("span.courselistcomment")
+                    .text()
+                ];
+          orCreditsList = [];
+        } else {
+          is_creditCourse =
+            $(row)
+              .find("td.hourscol")
+              .text().length > 0
+              ? processHoursText(
+                  $(row)
+                    .find("td.hourscol")
+                    .text()
+                ).numCreditsMin
+              : ORTagMap[
+                  $(row)
+                    .find("span.courselistcomment")
+                    .text()
+                ];
+        }
+        console.log(is_creditCourse);
       }
     });
+    if (is_creditCourse) {
+      let nextCourse: ICreditRangeCourse = {
+        type: "CREDITS",
+        minCredits: is_creditCourse,
+        courses: orCreditsList,
+      };
+      reqList.push(nextCourse);
+    }
 
     andSection.requirements = reqList;
   }
@@ -271,10 +345,7 @@ function processOrSection(
     //can parse the rows as indivdual requirements
     let reqList: Requirement[] = [];
     rows.forEach((row: CheerioElement) => {
-      let requirement: ScraperRequirement | undefined = parseRowAsRequirement(
-        $,
-        row
-      );
+      let requirement: Requirement | undefined = parseRowAsRequirement($, row);
 
       if (requirement && isRequirement(requirement)) {
         if (isOrRow($, row)) {
