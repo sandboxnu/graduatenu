@@ -1,14 +1,16 @@
 import React from "react";
 import styled from "styled-components";
 import {
-  ScheduleCourse,
   DNDScheduleTerm,
   DNDSchedule,
-  IRequiredCourse,
   DNDScheduleYear,
+} from "../../models/types";
+import {
+  IRequiredCourse,
+  ScheduleCourse,
   Status,
   SeasonWord,
-} from "../../models/types";
+} from "graduate-common";
 import { XButton } from "../common";
 import { Modal } from "@material-ui/core";
 import { connect } from "react-redux";

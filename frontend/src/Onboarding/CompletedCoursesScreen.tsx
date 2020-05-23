@@ -7,7 +7,7 @@ import {
   Major,
   IRequiredCourse,
   Requirement,
-} from "../models/types";
+} from "graduate-common";
 import { getMajorFromState } from "../state";
 import { setCompletedCourses } from "../state/actions/scheduleActions";
 import styled from "styled-components";
@@ -343,7 +343,7 @@ class CompletedCoursesComponent extends Component<Props, State> {
           handleSubmit={courses => this.addOtherCourses(courses)}
         ></AddClassModal>
         <Link
-          to={"/home"}
+          to={"/signup"}
           onClick={this.onSubmit.bind(this)}
           style={{ textDecoration: "none" }}
         >

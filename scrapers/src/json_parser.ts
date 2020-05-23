@@ -17,13 +17,12 @@ import {
   Schedule,
   ScheduleCourse,
   ScheduleYear,
-  SeasonEnum,
-  StatusEnum,
-} from "../../frontend/src/models/types";
+} from "graduate-common";
 import {
   courseCode,
   doesPrereqExist,
 } from "../../frontend/src/utils/generate-warnings";
+import { SeasonEnum, StatusEnum } from "../../frontend/src/models/types";
 
 /**
  * converts from old schedule to new schedule

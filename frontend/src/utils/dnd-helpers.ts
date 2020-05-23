@@ -4,8 +4,8 @@ import {
   DNDScheduleTerm,
   DNDSchedule,
   DNDScheduleCourse,
-  ScheduleCourse,
 } from "../models/types";
+import { ScheduleCourse } from "graduate-common";
 import { fetchCourse } from "../api";
 import { convertToDNDCourses } from ".";
 

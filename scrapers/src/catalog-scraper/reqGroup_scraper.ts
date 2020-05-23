@@ -11,7 +11,7 @@ import {
   IRequiredCourse,
   ISubjectRange,
   ICreditRangeCourse,
-} from "../../../frontend/src/models/types";
+} from "graduate-common";
 import { SectionType, CreditsRange, ScraperRequirement } from "../models/types";
 import {
   ORTagMap,

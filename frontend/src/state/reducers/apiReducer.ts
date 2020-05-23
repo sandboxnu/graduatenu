@@ -1,5 +1,4 @@
-import { Major } from "../../models/types";
-import { Schedule } from "../../models/types";
+import { Major, Schedule } from "graduate-common";
 import { MajorsApiAction } from "../actions";
 import { PlansApiAction } from "../actions";
 import { getType } from "typesafe-actions";

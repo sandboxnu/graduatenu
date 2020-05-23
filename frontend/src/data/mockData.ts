@@ -1,8 +1,8 @@
 import {
   DNDSchedule,
+  DNDScheduleCourse,
   SeasonEnum,
   StatusEnum,
-  DNDScheduleCourse,
 } from "../models/types";
 
 const mockClass = (num: number): DNDScheduleCourse => ({

@@ -17,5 +17,5 @@
     "noImplicitAny": true,
     "strictNullChecks": true
   },
-  "include": ["src", "backend/src/**/*", "frontend/**/*"]
+  "include": ["src", "scrapers/src/**/*", "frontend/**/*"]
 }

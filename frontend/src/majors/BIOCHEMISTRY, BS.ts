@@ -1,4 +1,4 @@
-import { Major, Concentrations } from "../models/types";
+import { Major, Concentrations } from "graduate-common";
 
 export const biochemMajor: Major = {
   name: "Biochemistry, BS",
