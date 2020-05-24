@@ -11,7 +11,8 @@ import {
   Major,
   Status,
   SeasonWord,
-  Schedule
+  Schedule,
+  addPrereqsToSchedule
 } from "graduate-common";
 import styled from "styled-components";
 import { Year } from "../components/Year";
@@ -288,8 +289,7 @@ class HomeComponent extends React.Component<Props> {
   
   async setSchedule(schedule: Schedule) {
     console.log(schedule);
-    //let preReqSched = await addPrereqsToSchedule(schedule);
-    const preReqSched = schedule;
+    let preReqSched = await addPrereqsToSchedule(schedule);
     console.log(preReqSched);
     const [dndschedule, counter] = convertToDNDSchedule(preReqSched, 0);
     this.props.setDNDSchedule(dndschedule);
