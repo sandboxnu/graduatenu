@@ -18,6 +18,7 @@ import {
   RANGETagMap,
   RANGECourseSet,
   SubheaderTagSet,
+  IgnoreTags,
 } from "./catalog_scraper";
 import {
   processHoursText,
@@ -107,6 +108,8 @@ export function createRequirementGroup(
         minCredits = credsRange.numCreditsMin;
         maxCredits = credsRange.numCreditsMax;
         break;
+      } else if (IgnoreTags.includes(commentSpan.text())) {
+        return undefined;
       }
     } else if (sectionType === SectionType.OR && classTD.length > 0) {
       let div = classTD.find("div");
@@ -209,7 +212,6 @@ function processAndSection(
         }
 
         if (is_creditCourse && $(row).find("td.codecol div").length === 0) {
-          console.log("FOUND YAY!");
           is_creditCourse = undefined;
         }
 
@@ -263,7 +265,6 @@ function processAndSection(
                     .text()
                 ];
         }
-        console.log(is_creditCourse);
       }
     });
     if (is_creditCourse) {

@@ -16,6 +16,7 @@ export const SubheaderTagSet: Array<string> = [
 
 // Dictionary for ORSection keywords, maps from keyword/phrase -> number of credits
 export const ORTagMap: { [key: string]: number } = {
+  "Choose one of the following:": 4,
   "Complete one of the following:": 4,
   "Then complete one of the following:": 4,
   "Complete one of the following sequences:": 10,
@@ -39,10 +40,15 @@ export const ORTagMap: { [key: string]: number } = {
   // TODO: Data-Science-Related Electives: "Complete six courses from categories A and B, at least three of which must be from B"
 };
 
+export const IgnoreTags: string[] = [
+  "Note: The following courses do not count toward this concentration:",
+];
+
 // Dictionary for RANGESection keywords, maps from keyword/phrase -> number of credits
 export const RANGETagMap: { [key: string]: number } = {
   "Complete 4 credits of CS, IS, or DS classes that are not already required. Choose courses within the following ranges:": 4,
   "Complete 4 credits of CS, IS, or DS courses that are not already required. Choose courses within the following range:": 4,
+  "Complete four credits of CS, IS, or DS classes that are not already required. Choose courses within the following ranges:": 4,
   "Complete 8 credits of CS, IS or DS classes that are not already required. Choose courses within the following ranges:": 8,
   "Complete 8 credits of CS, IS or, DS classes that are not already required. Choose courses within the following ranges:": 8,
   "Complete 8 credits of CS, IS, or DS classes that are not already required. Choose courses within the following ranges:": 8,
@@ -242,7 +248,7 @@ module.exports = catalogToMajor;
  * testing. move to test file.
  */
 catalogToMajor(
-  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-science/bscs/#programrequirementstext"
+  "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/data-science-biochemistry-bs/#programrequirementstext"
 ).then((scrapedMajor: Major) => {
   //uncomment following lines to log output.
   console.log("--------------------Parsed major object--------------------");

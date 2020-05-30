@@ -29,6 +29,14 @@ const supported = [
   "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/economics-bs/#programrequirementstext",
   "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/science/biochemistry/biochemistry-bs/#programrequirementstext",
   "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/science/mathematics/mathematics-bs/#programrequirementstext",
+
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-science/bscs/#programrequirementstext",
+  "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-business-administration-bs/#programrequirementstext",
+  "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-english-bs/#programrequirementstext",
+  "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-environmental-science-bs/#programrequirementstext",
+  "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-science/cybersecurity-business-administration-bs/#programrequirementstext",
+  "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-science/cybersecurity-criminal-justice-bs/",
+  "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/data-science-biochemistry-bs/#programrequirementstext",
 ];
 
 //run tests

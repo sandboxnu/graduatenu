@@ -52,7 +52,9 @@ export function isSubjectRange(
  * @param scraperReq the ScraperRequirement
  */
 export function isIOrCourse(req: Requirement): req is IOrCourse {
-  return (req as IOrCourse).courses !== undefined;
+  return (
+    (req as IOrCourse).courses !== undefined && (req as IOrCourse).type == "OR"
+  );
 }
 
 /**
