@@ -39,6 +39,7 @@ import {
   setDNDScheduleAction,
 } from "../state/actions/scheduleActions";
 import { EditPlanPopper } from "./EditPlanPopper";
+import { Profile } from "../profile/Profile"
 
 const OuterContainer = styled.div`
   display: flex;
@@ -276,36 +277,39 @@ class HomeComponent extends React.Component<Props> {
 
   render() {
     return (
-      <OuterContainer>
-        <DragDropContext
-          onDragEnd={this.onDragEnd}
-          onDragUpdate={this.onDragUpdate}
-        >
-          <LeftScroll className="hide-scrollbar">
-            <Container>
-              <HomeTop>
-                <HomeText href="#">GraduateNU</HomeText>
-                <HomePlan>
-                  <MajorText>
-                    {!!this.props.major ? this.props.major.name + ": " : ""}
-                  </MajorText>
-                  <PlanText>{this.props.planStr || "None"}</PlanText>
-                  <EditPlanPopper />
-                </HomePlan>
-              </HomeTop>
-              <HomePlan>
-                <h2>Plan Of Study</h2>
-              </HomePlan>
-              {this.renderYears()}
-            </Container>
-          </LeftScroll>
-
-          <SidebarContainer>
-            <Sidebar />
-          </SidebarContainer>
-        </DragDropContext>
-      </OuterContainer>
+      <Profile/>
     );
+    // return (
+    //   <OuterContainer>
+    //     <DragDropContext
+    //       onDragEnd={this.onDragEnd}
+    //       onDragUpdate={this.onDragUpdate}
+    //     >
+    //       <LeftScroll className="hide-scrollbar">
+    //         <Container>
+    //           <HomeTop>
+    //             <HomeText href="#">GraduateNU</HomeText>
+    //             <HomePlan>
+    //               <MajorText>
+    //                 {!!this.props.major ? this.props.major.name + ": " : ""}
+    //               </MajorText>
+    //               <PlanText>{this.props.planStr || "None"}</PlanText>
+    //               <EditPlanPopper />
+    //             </HomePlan>
+    //           </HomeTop>
+    //           <HomePlan>
+    //             <h2>Plan Of Study</h2>
+    //           </HomePlan>
+    //           {this.renderYears()}
+    //         </Container>
+    //       </LeftScroll>
+
+    //       <SidebarContainer>
+    //         <Sidebar />
+    //       </SidebarContainer>
+    //     </DragDropContext>
+    //   </OuterContainer>
+    // );
   }
 }
 

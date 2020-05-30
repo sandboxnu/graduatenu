@@ -9,28 +9,24 @@ import {
 
 const ColorButton = withStyles((theme: Theme) => ({
   root: {
-    color: "#ffffff",
-    width: "100px",
+    color: "#EB5757",
+    width: "200px;",
     height: "36px",
-    backgroundColor: "#EB5757",
+    borderColor: "#EB5757",
+    backgroundColor: "#ffffff",
     "&:hover": {
       backgroundColor: "#DB4747",
+      color: "#ffffff",
+      borderColor: "#EB5757",
     },
   },
 }))(Button);
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    margin: {
-      marginTop: "24px",
-    },
-  })
-);
 
-export function PrimaryButton(props: any) {
-  const classes = useStyles();
+
+export const OutlinedButton: React.FC = props => {
   return (
-    <ColorButton variant="contained" color="primary" className={classes.margin} disabled={props.disabled}>
+    <ColorButton variant="outlined" color="primary">
       {props.children}
     </ColorButton>
   );
