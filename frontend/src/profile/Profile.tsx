@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
 import styled from "styled-components";
 import { OutlinedButton } from '../components/common/OutlinedButton';
 import { PrimaryButton } from '../components/common/PrimaryButton';
@@ -7,6 +9,21 @@ import Autocomplete from "@material-ui/lab/Autocomplete";
 import { ChangePasswordModal } from "./ChangePasswordModal"
 import { IconButton } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
+import {
+    setMajorAction,
+} from "../state/actions/userActions";
+import { setCoopCycle } from "../state/actions/scheduleActions";
+import {
+    getMajors,
+    getPlans,
+    getMajorsLoadingFlag,
+    getPlansLoadingFlag,
+    getMajorFromState
+  } from "../state";
+import { Dispatch } from "redux";
+import { Major, Schedule } from "graduate-common";
+import { AppState } from "../state/reducers/state";
+import { planToString } from "../utils";
 
 const OuterContainer = styled.div`
     width: 50%;
@@ -60,7 +77,7 @@ const ItemEntry = styled.p`
 `;
 
 
-function ProfileName(props: any) {
+const ProfileName = (props: any) => {
     return (
         <ProfileEntryContainer>
             <ItemTitle> Name </ItemTitle>
@@ -80,15 +97,14 @@ function ProfileName(props: any) {
     );
 }
 
-function ProfileMajor(props: any) {
+const ProfileMajor = (props: any) => {
     return (
         <ProfileEntryContainer>
             <ItemTitle> Major </ItemTitle>
             {props.isEdit && 
                 <Autocomplete
                     disableListWrap
-                    //options={props.majors.map((maj: { name: any; }) => maj.name)}
-                    options={["major", "major 2", "major 3"]}
+                    options={props.majors.map((maj: { name: any; }) => maj.name)}
                     renderInput={params => (
                     <TextField
                         {...params}
@@ -107,15 +123,16 @@ function ProfileMajor(props: any) {
     );
 }
 
-function ProfileCoop(props: any) {
+const ProfileCoop = (props: any) => {
     return (
         <ProfileEntryContainer>
             <ItemTitle> Co-op Cycle </ItemTitle>
             {props.isEdit && 
                 <Autocomplete
                     disableListWrap
-                    //options={props.majors.map((maj: { name: any; }) => maj.name)}
-                    options={["coop 1", "coop 2"]}
+                    options={props.plans[props.major.name].map((p: Schedule) =>
+                        planToString(p)
+                    )}
                     renderInput={params => (
                     <TextField
                         {...params}
@@ -134,15 +151,14 @@ function ProfileCoop(props: any) {
     );
 }
 
-function ProfileAdvisor(props: any) {
+const ProfileAdvisor = (props: any) => {
     return (
         <ProfileEntryContainer>
             <ItemTitle> Advisor </ItemTitle>
             {props.isEdit && 
                 <Autocomplete
                     disableListWrap
-                    //options={props.majors.map((maj: { name: any; }) => maj.name)}
-                    options={["test", "test 2"]}
+                    options={["advisor", "advisor 2", "advisor 3"]}
                     renderInput={params => (
                     <TextField
                         {...params}
@@ -162,7 +178,7 @@ function ProfileAdvisor(props: any) {
 }
 
 
-function ProfileEmail(props: any) {
+const ProfileEmail = (props: any) => {
     return (
         <ProfileEntryContainer>
             <ItemTitle> Email </ItemTitle>
@@ -182,12 +198,13 @@ function ProfileEmail(props: any) {
     );
 }
 
-function save(setEdit: Function) {
+const save = (setEdit: Function) => {
     console.log("TEST");
     setEdit(false);
     // TODO: Save
 }
-function SaveButton(props: any) {
+
+const SaveButton = (props: any) => {
     return (
         <div onClick={() => save(props.setEdit)}>
             <PrimaryButton>
@@ -205,7 +222,7 @@ const ChangePassword: React.FC = (props: any) => {
             <ProfileEntryContainer>
                 <ItemTitle> Password </ItemTitle>
                 <div onClick={() => setOpen(true)}>
-                    <OutlinedButton>Log In</OutlinedButton>
+                    <OutlinedButton>Change Password</OutlinedButton>
                 </div>
             </ProfileEntryContainer>
             <ChangePasswordModal
@@ -215,13 +232,17 @@ const ChangePassword: React.FC = (props: any) => {
     );
 }
 
-export const Profile: React.FC = (props: any) => {
+export const ProfileComponent: React.FC = (props: any) => {
+    console.log(props.major)
     const [isEdit, setEdit] = useState(false);
     const [name, setName] = useState("John");
-    const [major, setMajor] = useState("major");
+    const [major, setMajor] = useState(props.major);
     const [advisor, setAdvisor] = useState("Andrea");
     const [email, setEmail] = useState("test@email.com");
     const [coop, setCoop] = useState("coop")
+    const { isFetchingMajors, isFetchingPlans, majors, plans } = props;
+
+    // TODO: Deal with loading state
 
     return (
         <OuterContainer> 
@@ -246,8 +267,9 @@ export const Profile: React.FC = (props: any) => {
                             setName={setName}/>
                         <ProfileMajor
                             isEdit={isEdit}
-                            major={major}
-                            setMajor={setMajor}/>
+                            major={major.name}
+                            setMajor={setMajor}
+                            majors={majors}/>
                         <ProfileAdvisor
                             isEdit={isEdit}
                             advisor={advisor}
@@ -261,7 +283,9 @@ export const Profile: React.FC = (props: any) => {
                         <ProfileCoop
                             isEdit={isEdit}
                             coop={coop}
-                            setCoop={setCoop}/>
+                            setCoop={setCoop}
+                            plans={plans}
+                            major={major}/>
                         <ChangePassword/>
                     </ProfileColumn>
                 </DataContainer>
@@ -271,3 +295,34 @@ export const Profile: React.FC = (props: any) => {
     )
 }
 
+/**
+ * Callback to be passed into connect, to make properties of the AppState available as this components props.
+ * @param state the AppState
+ */
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+    setMajor: (major?: Major) => dispatch(setMajorAction(major)),
+    setCoopCycle: (plan: Schedule) => dispatch(setCoopCycle(plan)),
+});
+  
+/**
+ * Callback to be passed into connect, responsible for dispatching redux actions to update the appstate.
+ * @param dispatch responsible for dispatching actions to the redux store.
+ */
+const mapStateToProps = (state: AppState) => ({
+    major: getMajorFromState(state),
+    majors: getMajors(state),
+    plans: getPlans(state),
+    isFetchingMajors: getMajorsLoadingFlag(state),
+    isFetchingPlans: getPlansLoadingFlag(state),
+});
+
+/**
+ * Convert this React component to a component that's connected to the redux store.
+ * When rendering the connecting component, the props assigned in mapStateToProps, do not need to
+ * be passed down as props from the parent component.
+ */
+export const Profile = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(withRouter(ProfileComponent));
+  
