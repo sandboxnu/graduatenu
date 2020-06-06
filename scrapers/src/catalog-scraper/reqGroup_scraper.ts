@@ -76,6 +76,11 @@ export function createRequirementGroup(
           minCredits = cred;
           maxCredits = cred;
         }
+      } else if (
+        sectionType === SectionType.OR &&
+        currentRow.find("span.courselistcomment.commentindent").length > 0
+      ) {
+        break;
       } else if (RANGETagMap.hasOwnProperty(commentSpan.text())) {
         //detected Range Tag; change section type to Range
         sectionType = SectionType.RANGE;
@@ -86,7 +91,7 @@ export function createRequirementGroup(
           minCredits = credsRange.numCreditsMin;
           maxCredits = credsRange.numCreditsMax;
         } else {
-          let cred = ORTagMap[commentSpan.text()];
+          let cred = RANGETagMap[commentSpan.text()];
           minCredits = cred;
           maxCredits = cred;
         }
@@ -99,8 +104,7 @@ export function createRequirementGroup(
             .includes(item)
         )
       ) {
-        //detected a subject that has a boundless Range (no specified min or max course number) within the
-        //comment
+        //detected a subject that has a boundless Range (no specified min or max course number) within the comment
         sectionType = SectionType.RANGE;
         let credsRange: CreditsRange = processHoursText(
           currentRow.find("td.hourscol").text()

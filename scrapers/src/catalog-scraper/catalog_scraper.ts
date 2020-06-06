@@ -37,6 +37,7 @@ export const ORTagMap: { [key: string]: number } = {
   "Take two courses, at least one of which is at the 4000 or 5000 level, from the following:": 8,
   "Complete one of the following courses not already taken:": 4,
   "Complete two of the following courses not already taken:": 8,
+  "Complete two courses from the following:": 8,
   // TODO: Data-Science-Related Electives: "Complete six courses from categories A and B, at least three of which must be from B"
 };
 
@@ -74,6 +75,31 @@ export const RANGETagMap: { [key: string]: number } = {
 
 // Set for RANGESections that only indicate the major in which they are allowed to take electives
 export const RANGECourseSet: Array<string> = [
+  "GAME",
+  "CRIM",
+  "ENGL",
+  "ARTD",
+  "ARTE",
+  "ARTF",
+  "ARTG",
+  "ARTH",
+  "ARTS",
+  "JRNL",
+  "PHIL",
+];
+
+export const ValidSubjects: string[] = [
+  "COMM",
+  "POLS",
+  "ECON",
+  "HSCI",
+  "PHTH",
+  "CS",
+  "IS",
+  "DS",
+  "CY",
+  "MATH",
+  "PHIL",
   "GAME",
   "CRIM",
   "ENGL",
@@ -248,7 +274,7 @@ module.exports = catalogToMajor;
  * testing. move to test file.
  */
 catalogToMajor(
-  "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/data-science-biochemistry-bs/#programrequirementstext"
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-science/bscs/#programrequirementstext"
 ).then((scrapedMajor: Major) => {
   //uncomment following lines to log output.
   console.log("--------------------Parsed major object--------------------");

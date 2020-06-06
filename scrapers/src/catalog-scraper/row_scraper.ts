@@ -5,9 +5,10 @@ import {
   IOrCourse,
   ISubjectRange,
   Requirement,
+  ICourseRange,
 } from "graduate-common";
 import { createRequiredCourse, isRequirement } from "../utils/scraper_utils";
-import { RANGECourseSet } from "./catalog_scraper";
+import { RANGECourseSet, ValidSubjects } from "./catalog_scraper";
 
 /**
  * A function that given a row, converts it into a Requirement type.
@@ -19,7 +20,8 @@ export function parseRowAsRequirement(
   row: CheerioElement
 ): Requirement | undefined {
   let currentRow: Cheerio = $(row);
-  if (currentRow.find("a").length === 0) {
+  let rangeSpan = currentRow.find("span.courselistcomment.commentindent");
+  if (currentRow.find("a").length === 0 && rangeSpan.length === 0) {
     // the row doesn't have any course information to be parsed in most cases.
     // expections exist, for eg: some biochemistry courses appear as a comment.
     // todo: handle the expections.
@@ -28,8 +30,6 @@ export function parseRowAsRequirement(
   //default to assume that row is a base case Required Course
   let rowType: RowType = RowType.RequiredCourseRow;
   let codeColSpan = currentRow.find("td.codecol span");
-  let rangeSpan = currentRow.find("span.courselistcomment");
-
   if (codeColSpan.length !== 0) {
     if (codeColSpan.text().includes("and")) {
       rowType = RowType.AndRow;
@@ -49,6 +49,16 @@ export function parseRowAsRequirement(
       return parseOrRow($, row);
     case RowType.RequiredCourseRow:
       return parseRequiredRow($, row);
+    case RowType.SubjectRangeRow:
+      let subjectRanges = parseSubjectRangeRow($, row);
+      if (subjectRanges.length !== 0) {
+        return {
+          type: "RANGE",
+          creditsRequired: 4,
+          ranges: subjectRanges,
+        } as ICourseRange;
+      }
+      return undefined;
     default:
       return undefined;
   }
@@ -134,7 +144,13 @@ function parseAsFullRange(
   let possibleKeys: Array<string> = anchors
     .text()
     .split(String.fromCharCode(32));
-  RANGECourseSet.filter(value => possibleKeys.includes(value)).forEach(
+  let splitPossibleKeys: string[] = [];
+  possibleKeys.forEach(element => {
+    splitPossibleKeys = splitPossibleKeys.concat(
+      element.split(String.fromCharCode(44))
+    );
+  });
+  RANGECourseSet.filter(value => splitPossibleKeys.includes(value)).forEach(
     (subject: string) => {
       //Potentially add a check to ensure that the subject keywords are followed by "course" or "elective", but unsure
       let courseRange: ISubjectRange = {
@@ -160,7 +176,7 @@ export function parseSubjectRangeRow(
   let currentRow: Cheerio = $(row);
   let anchors: Cheerio = currentRow.find(".courselistcomment.commentindent");
 
-  if (anchors.length == 0) {
+  if (anchors.length === 0 || anchors.text().includes("course")) {
     return parseAsFullRange($, row);
   }
 
@@ -198,8 +214,11 @@ export function parseSubjectRangeRow(
     idRangeStart: idRangeStart,
     idRangeEnd: idRangeEnd,
   };
-
-  return [courseRange];
+  if (ValidSubjects.includes(courseRange.subject)) {
+    return [courseRange];
+  } else {
+    return [];
+  }
 }
 
 /**
@@ -210,13 +229,16 @@ export function parseSubjectRangeRow(
 function parseRequiredRow(
   $: CheerioStatic,
   row: CheerioElement
-): IRequiredCourse {
+): IRequiredCourse | undefined {
   let currentRow: Cheerio = $(row);
   let anchors: Cheerio = currentRow.find("td.codecol a");
   let anchorsArray: CheerioElement[] = anchors.toArray();
 
   //the length should be === 1.
   let loadedAnchor: Cheerio = $(anchorsArray[0]);
+  if (loadedAnchor.length === 0) {
+    return undefined;
+  }
 
   // split the text by spaces and also char(160) if it is present
   let splitByChar: string[] = loadedAnchor
