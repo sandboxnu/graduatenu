@@ -270,10 +270,7 @@ export const ProfileComponent: React.FC = (props: any) => {
                             major={major.name}
                             setMajor={setMajor}
                             majors={majors}/>
-                        <ProfileAdvisor
-                            isEdit={isEdit}
-                            advisor={advisor}
-                            setAdvisor={setAdvisor}/>
+                        <ChangePassword/>
                     </ProfileColumn>
                     <ProfileColumn> 
                         <ProfileEmail
@@ -286,7 +283,6 @@ export const ProfileComponent: React.FC = (props: any) => {
                             setCoop={setCoop}
                             plans={plans}
                             major={major}/>
-                        <ChangePassword/>
                     </ProfileColumn>
                 </DataContainer>
                {isEdit && <SaveButton setEdit={setEdit}/>}
