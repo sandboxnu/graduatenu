@@ -7,9 +7,9 @@ import {
   DNDScheduleTerm,
   CourseWarning,
   DNDScheduleCourse,
-  IWarning
+  IWarning,
 } from "../models/types";
-import {ScheduleCourse, Status, SeasonWord} from "graduate-common";
+import { ScheduleCourse, Status, SeasonWord } from "graduate-common";
 import styled from "styled-components";
 import { AppState } from "../state/reducers/state";
 import { connect } from "react-redux";
@@ -140,6 +140,26 @@ class SemesterBlockComponent extends React.Component<
     );
   };
 
+  /**
+   * Filters through the given list of course warnings to find all warnings for the given course
+   * @param courseWarnings the list of course warnings to search through
+   * @param course the search course
+   */
+  findCourseWarnings(
+    courseWarnings: CourseWarning[],
+    course: DNDScheduleCourse
+  ) {
+    const result: CourseWarning[] = courseWarnings.filter(
+      w => w.subject + w.classId === course.subject + course.classId
+    );
+
+    if (result.length === 0) {
+      return undefined;
+    } else {
+      return result;
+    }
+  }
+
   renderBody() {
     const { semester, courseWarnings } = this.props;
     const status = semester.status;
@@ -151,11 +171,7 @@ class SemesterBlockComponent extends React.Component<
               key={index}
               class={scheduleCourse}
               index={index}
-              warning={courseWarnings.find(
-                w =>
-                  w.subject + w.classId ===
-                  scheduleCourse.subject + scheduleCourse.classId
-              )}
+              warnings={this.findCourseWarnings(courseWarnings, scheduleCourse)}
               onDelete={this.onDeleteClass.bind(this, scheduleCourse, semester)}
             />
           );
