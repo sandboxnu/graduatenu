@@ -25,7 +25,7 @@ interface ClassBlockProps {
   class: DNDScheduleCourse;
   lab?: DNDScheduleCourse;
   index: number;
-  warning?: CourseWarning;
+  warnings?: CourseWarning[];
   onDelete: (course: DNDScheduleCourse) => void;
 }
 
@@ -68,7 +68,7 @@ export class ClassBlock extends React.Component<
           {...provided.dragHandleProps}
           ref={provided.innerRef}
         >
-          <ClassBlockBodyContainer warning={this.props.warning}>
+          <ClassBlockBodyContainer warning={this.props.warnings}>
             <ClassBlockBody
               course={this.props.class}
               hovering={this.state.hovering}
@@ -91,12 +91,29 @@ export class ClassBlock extends React.Component<
     }
   }
 
+  /**
+   * Returns this ClassBlock's Tooltip title node corresponding to its warnings.
+   */
+  getTooltipTitle() {
+    if (this.props.warnings) {
+      return (
+        <div>
+          {this.props.warnings.map(warning => (
+            <div>{warning.message}</div>
+          ))}
+        </div>
+      );
+    } else {
+      return "";
+    }
+  }
+
   render() {
     return (
       <Draggable draggableId={this.getDraggableId()} index={this.props.index}>
         {provided =>
-          !!this.props.warning ? (
-            <Tooltip title={this.props.warning.message} placement="top">
+          !!this.props.warnings ? (
+            <Tooltip title={this.getTooltipTitle()} placement="top">
               {this.renderBody(provided)}
             </Tooltip>
           ) : (
