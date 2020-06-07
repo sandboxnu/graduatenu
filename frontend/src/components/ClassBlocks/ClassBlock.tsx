@@ -113,7 +113,7 @@ export class ClassBlock extends React.Component<
       <Draggable draggableId={this.getDraggableId()} index={this.props.index}>
         {provided =>
           !!this.props.warnings ? (
-            <Tooltip title={this.getTooltipTitle()} placement="top">
+            <Tooltip title={this.getTooltipTitle()} placement="bottom">
               {this.renderBody(provided)}
             </Tooltip>
           ) : (
