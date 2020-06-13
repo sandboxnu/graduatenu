@@ -28,10 +28,10 @@ import {
 } from "@material-ui/core";
 
 const MainTitleText = styled.div`
-  font-size: 16px;
+  font-size: 18px;
   margin-left: 4px;
   margin-top: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
   font-weight: 500;
 `;
 

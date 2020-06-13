@@ -40,12 +40,13 @@ const DotWrapper = styled.div`
   width: 256;
   height: 11px;
   margin-top: 6px;
-  margin-bottom: 34px;
+  margin-bottom: 48px;
 `;
 
 const useStyles = makeStyles({
   root: {
     height: 15,
+    paddingLeft: 8,
   },
 });
 
@@ -57,7 +58,7 @@ const theme = createMuiTheme({
   },
 });
 
-const steps = ["", ""];
+const steps = ["", "", ""];
 
 interface Props {
   screen: number;
@@ -77,7 +78,7 @@ export const GenericOnboardingTemplate: React.FC<Props> = ({
         <DotWrapper>
           <Stepper activeStep={screen} style={{ minWidth: 300 }}>
             {steps.map(label => (
-              <Step key={label} style={{ color: red[400] }}>
+              <Step key={label} style={{ color: red[400], padding: 0 }}>
                 <StepLabel StepIconProps={{ classes: { root: classes.root } }}>
                   {label}
                 </StepLabel>
