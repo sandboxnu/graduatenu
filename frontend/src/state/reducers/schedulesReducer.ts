@@ -18,20 +18,7 @@ const initialState: SchedulesState = {
   activeSchedule: 0,
   schedules: [
     {
-      name: "sample-schedule",
-      schedule: {
-        present: {
-          currentClassCounter: 100,
-          isScheduleLoading: false,
-          scheduleError: "",
-          schedule: mockData,
-          warnings: [],
-          courseWarnings: [],
-        },
-      },
-    },
-    {
-      name: "sample-schedule-2",
+      name: "Schedule 1",
       schedule: {
         present: {
           currentClassCounter: 100,
