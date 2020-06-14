@@ -42,7 +42,7 @@ const InnerContainer = styled.div`
     border: 3px solid #EB5757;
     box-sizing: border-box;
     margin: 10%;
-    padding: 30px 20% 70px 30px;
+    padding: 30px 20% 40px 30px;
 `;
 
 const ProfileTitle = styled.h1`
@@ -68,7 +68,7 @@ const ProfileColumn = styled.div`
 const ProfileEntryContainer = styled.div`
     display: flex;
     flex-direction: column;
-    padding: 15px 0px 0px 0px;
+    padding: 15px 0px 15px 0px;
 `;
 
 const ItemTitle = styled.p`
