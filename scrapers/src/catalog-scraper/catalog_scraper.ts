@@ -9,6 +9,11 @@ import { createRequirementGroup } from "./reqGroup_scraper";
 
 const rp = require("request-promise");
 
+export const ANDSectionHeader: string[] = [
+  "Intermediate and Advanced Biology Electives",
+  "History Electives",
+];
+
 export const SubheaderTagSet: Array<string> = [
   "Complete two courses for one of the following science categories:",
   "Students are required to complete one of the following foci (two courses total):",
@@ -38,6 +43,10 @@ export const ORTagMap: { [key: string]: number } = {
   "Complete one of the following courses not already taken:": 4,
   "Complete two of the following courses not already taken:": 8,
   "Complete two courses from the following:": 8,
+  "Complete two biology courses (with corequisite labs if offered). Choose one of these two courses from the following list:": 8,
+  "Complete one sociology elective in each of the following ranges:": 12,
+  "Complete one introductory course from the following:": 4,
+  "Complete one capstone experience from the following:": 4,
   // TODO: Data-Science-Related Electives: "Complete six courses from categories A and B, at least three of which must be from B"
 };
 
@@ -71,6 +80,14 @@ export const RANGETagMap: { [key: string]: number } = {
   "Complete four ECON electives with at least two numbered at ECON 3000 or above.": 16,
 
   "Complete 8 credits of CS, CY, DS, or IS classes that are not already required. Choose courses within the following ranges:": 8,
+  "Choose the second elective from the following list:": 4,
+  "Complete three intermediate/advanced-level courses:": 12,
+  "Complete one advanced-level course:": 4,
+  "Complete one sociology elective in each of the following ranges:": 4,
+
+  "Complete four credits of CS, CY, DS, or IS classes that are not already required. Choose courses within the following ranges:": 4,
+  "Complete twelve credits of CS, CY, DS, or IS classes that are not already required. Choose courses within the following ranges:": 12,
+  "Complete 12 credits of CS, CY, DS, or IS classes that are not already required. Choose courses within the following ranges:": 12,
 };
 
 // Set for RANGESections that only indicate the major in which they are allowed to take electives
@@ -86,6 +103,7 @@ export const RANGECourseSet: Array<string> = [
   "ARTS",
   "JRNL",
   "PHIL",
+  "HIST",
 ];
 
 export const ValidSubjects: string[] = [
@@ -102,6 +120,7 @@ export const ValidSubjects: string[] = [
   "PHIL",
   "GAME",
   "CRIM",
+  "EECE",
   "ENGL",
   "ARTD",
   "ARTE",
@@ -111,6 +130,7 @@ export const ValidSubjects: string[] = [
   "ARTS",
   "JRNL",
   "PHIL",
+  "SOCL",
 ];
 
 /**
@@ -188,9 +208,13 @@ function createRequirementGroupMap(
     .children()
     .each((index: number, table: CheerioElement) => {
       if (table.name == "h2") {
-        is_concentration = $(table)
-          .text()
-          .includes("Concentration");
+        is_concentration =
+          $(table)
+            .text()
+            .includes("Concentration") ||
+          $(table)
+            .text()
+            .includes("Options");
         current_header = $(table).text();
       }
       if (table.name == "h3") {
@@ -223,7 +247,10 @@ function createRequirementGroupMap(
       ) {
         let groups = tableToReqGroup($, table, current_header);
         concentrations.push({
-          name: current_concentration,
+          name:
+            current_concentration.length > 0
+              ? current_concentration
+              : Object.keys(groups)[0],
           requirementGroups: Object.keys(groups),
           requirementGroupMap: groups,
         });
@@ -274,7 +301,7 @@ module.exports = catalogToMajor;
  * testing. move to test file.
  */
 catalogToMajor(
-  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-science/bscs/#programrequirementstext"
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-communication-studies-bs/#programrequirementstext"
 ).then((scrapedMajor: Major) => {
   //uncomment following lines to log output.
   console.log("--------------------Parsed major object--------------------");

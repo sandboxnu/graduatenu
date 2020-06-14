@@ -53,6 +53,7 @@ export type Requirement = IOrCourse | IAndCourse | ICourseRange | IRequiredCours
 export interface ICreditRangeCourse {
   type: 'CREDITS';
   minCredits: number;
+  maxCredits: number;
   courses: Requirement[];
 }
 
@@ -63,8 +64,6 @@ export interface ICreditRangeCourse {
  */
 export interface IOrCourse {
   type: 'OR';
-  //numCreditsMin: number;
-  //numCreditsMax: number;
   courses: Requirement[];
 }
 

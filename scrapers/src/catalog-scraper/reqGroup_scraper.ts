@@ -12,13 +12,19 @@ import {
   ISubjectRange,
   ICreditRangeCourse,
 } from "graduate-common";
-import { SectionType, CreditsRange, ScraperRequirement } from "../models/types";
+import {
+  SectionType,
+  CreditsRange,
+  ScraperRequirement,
+  SubSectionType,
+} from "../models/types";
 import {
   ORTagMap,
   RANGETagMap,
   RANGECourseSet,
   SubheaderTagSet,
   IgnoreTags,
+  ANDSectionHeader,
 } from "./catalog_scraper";
 import {
   processHoursText,
@@ -60,8 +66,10 @@ export function createRequirementGroup(
       if (SubheaderTagSet.includes(commentSpan.text())) {
         subheader = true;
       }
-
-      if (ORTagMap.hasOwnProperty(commentSpan.text())) {
+      if (ANDSectionHeader.includes(commentSpan.text())) {
+        sectionType = SectionType.AND;
+        break;
+      } else if (ORTagMap.hasOwnProperty(commentSpan.text())) {
         //detected OR Tag; change section type to OR
         sectionType = SectionType.OR;
         if (currentRow.find("td.hourscol").text().length !== 0) {
@@ -200,87 +208,7 @@ function processAndSection(
       }
     }
   } else {
-    //can parse the rows as indivdual requirements
-    let reqList: Requirement[] = [];
-    let is_creditCourse: number | undefined = undefined;
-    let orCreditsList: Requirement[] = [];
-    rows.forEach((row: CheerioElement) => {
-      let requirement: Requirement | undefined = parseRowAsRequirement($, row);
-      if (requirement) {
-        if (isOrRow($, row)) {
-          // takes the most recently added value to add to the or
-          let orVal = is_creditCourse ? orCreditsList.pop() : reqList.pop();
-          if (orVal) {
-            requirement = createIOrCourse(requirement, orVal);
-          }
-        }
-
-        if (is_creditCourse && $(row).find("td.codecol div").length === 0) {
-          is_creditCourse = undefined;
-        }
-
-        if (is_creditCourse) {
-          orCreditsList.push(requirement);
-        } else {
-          reqList.push(requirement);
-        }
-      } else if (
-        ORTagMap.hasOwnProperty(
-          $(row)
-            .find("span.courselistcomment")
-            .text()
-        )
-      ) {
-        if (is_creditCourse) {
-          let nextCourse: ICreditRangeCourse = {
-            type: "CREDITS",
-            minCredits: is_creditCourse,
-            courses: orCreditsList,
-          };
-          reqList.push(nextCourse);
-          is_creditCourse =
-            $(row)
-              .find("td.hourscol")
-              .text().length > 0
-              ? processHoursText(
-                  $(row)
-                    .find("td.hourscol")
-                    .text()
-                ).numCreditsMin
-              : ORTagMap[
-                  $(row)
-                    .find("span.courselistcomment")
-                    .text()
-                ];
-          orCreditsList = [];
-        } else {
-          is_creditCourse =
-            $(row)
-              .find("td.hourscol")
-              .text().length > 0
-              ? processHoursText(
-                  $(row)
-                    .find("td.hourscol")
-                    .text()
-                ).numCreditsMin
-              : ORTagMap[
-                  $(row)
-                    .find("span.courselistcomment")
-                    .text()
-                ];
-        }
-      }
-    });
-    if (is_creditCourse) {
-      let nextCourse: ICreditRangeCourse = {
-        type: "CREDITS",
-        minCredits: is_creditCourse,
-        courses: orCreditsList,
-      };
-      reqList.push(nextCourse);
-    }
-
-    andSection.requirements = reqList;
+    andSection.requirements = createAndReqList($, rows);
   }
 
   if (andSection.requirements.length > 0) {
@@ -288,6 +216,118 @@ function processAndSection(
   } else {
     return undefined;
   }
+}
+
+function createAndReqList(
+  $: CheerioStatic,
+  rows: CheerioElement[]
+): Requirement[] {
+  let seperate_sections: Map<
+    CheerioElement[],
+    [SubSectionType, number]
+  > = splitRows($, rows);
+  let reqList: Requirement[] = [];
+  Array.from(seperate_sections.entries()).forEach(
+    ([sectionRows, [type, credits]]) => {
+      let requirements = [];
+      switch (+type) {
+        case SubSectionType.COURSES:
+          requirements = evaluateRows($, sectionRows);
+          reqList = reqList.concat(requirements);
+          break;
+        case SubSectionType.CREDIT:
+          requirements = evaluateRows($, sectionRows);
+          if (requirements.length !== 0) {
+            reqList.push({
+              type: "CREDITS",
+              minCredits: credits,
+              maxCredits: credits,
+              courses: requirements,
+            });
+          }
+          break;
+        case SubSectionType.RANGE:
+          let range = processCourseRange($, sectionRows, credits);
+          reqList.push(range);
+          break;
+        default:
+          break;
+      }
+    }
+  );
+  return reqList;
+}
+
+function evaluateRows($: CheerioStatic, rows: CheerioElement[]) {
+  let reqList: Requirement[] = [];
+  rows.forEach((row: CheerioElement) => {
+    let requirement: Requirement | undefined = parseRowAsRequirement($, row);
+
+    if (requirement && isRequirement(requirement)) {
+      if (isOrRow($, row)) {
+        let orVal = reqList.pop();
+        if (orVal) {
+          requirement = createIOrCourse(requirement, orVal);
+        }
+      }
+      reqList.push(requirement);
+    }
+  });
+  return reqList;
+}
+
+function splitRows(
+  $: CheerioStatic,
+  rows: CheerioElement[]
+): Map<CheerioElement[], [SubSectionType, number]> {
+  let split = new Map<CheerioElement[], [SubSectionType, number]>();
+  let sectionType = SubSectionType.COURSES;
+  let credits = 0;
+  let rowCollection: CheerioElement[] = [];
+  rows.forEach((row: CheerioElement) => {
+    let comment = $(row)
+      .find("span.courselistcomment")
+      .text();
+    if (comment.length > 0) {
+      if (ORTagMap.hasOwnProperty(comment)) {
+        if (rowCollection.length !== 0) {
+          split.set(rowCollection, [sectionType, credits]);
+          rowCollection = [];
+        }
+        credits = processHoursText(
+          $(row)
+            .find("td.hourscol")
+            .text(),
+          ORTagMap[comment]
+        ).numCreditsMin;
+        sectionType = SubSectionType.CREDIT;
+      } else if (RANGETagMap.hasOwnProperty(comment)) {
+        if (rowCollection.length !== 0) {
+          split.set(rowCollection, [sectionType, credits]);
+          rowCollection = [];
+        }
+        credits = processHoursText(
+          $(row)
+            .find("td.hourscol")
+            .text(),
+          RANGETagMap[comment]
+        ).numCreditsMin;
+        sectionType = SubSectionType.RANGE;
+      } else {
+        rowCollection.push(row);
+      }
+    } else {
+      if (
+        sectionType == SubSectionType.CREDIT &&
+        $(row).find("div.blockindent").length == 0
+      ) {
+        sectionType = SubSectionType.COURSES;
+      }
+      rowCollection.push(row);
+    }
+  });
+  split.set(rowCollection, [sectionType, credits]);
+  return split;
 }
 
 /**
@@ -383,11 +423,7 @@ function processRangeSection(
   minCredits: number,
   maxCredits: number
 ): RANGESection | undefined {
-  let courseRange: ICourseRange = {
-    type: "RANGE",
-    creditsRequired: minCredits,
-    ranges: [],
-  };
+  let courseRange: ICourseRange = processCourseRange($, rows, minCredits);
 
   let rangeSection: RANGESection = {
     type: "RANGE",
@@ -396,9 +432,23 @@ function processRangeSection(
     numCreditsMax: maxCredits,
     requirements: courseRange,
   };
-  //Note: Assuming that a range section probably does not have any subheaders. If there ends up being one,
-  //      adapt function to handle like parseAndSection.
+  if (courseRange.ranges.length > 0) {
+    return rangeSection;
+  } else {
+    return undefined;
+  }
+}
 
+function processCourseRange(
+  $: CheerioStatic,
+  rows: CheerioElement[],
+  minCredits: number
+) {
+  let courseRange: ICourseRange = {
+    type: "RANGE",
+    creditsRequired: minCredits,
+    ranges: [],
+  };
   //loop through the rows and add them as a requirement to andCourse.courses
   for (let i = 0; i < rows.length; i++) {
     let row: CheerioElement = rows[i];
@@ -406,10 +456,5 @@ function processRangeSection(
     let requirements: Array<ISubjectRange> = parseSubjectRangeRow($, row);
     courseRange.ranges = courseRange.ranges.concat(requirements);
   }
-
-  if (courseRange.ranges.length > 0) {
-    return rangeSection;
-  } else {
-    return undefined;
-  }
+  return courseRange;
 }

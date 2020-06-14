@@ -131,7 +131,7 @@ function parseOrRow(
   }
 }
 
-function parseAsFullRange(
+function parseAsCommentRange(
   $: CheerioStatic,
   row: CheerioElement
 ): Array<ISubjectRange> {
@@ -150,9 +150,9 @@ function parseAsFullRange(
       element.split(String.fromCharCode(44))
     );
   });
+  // Assumes all comment ranges have full range tags
   RANGECourseSet.filter(value => splitPossibleKeys.includes(value)).forEach(
     (subject: string) => {
-      //Potentially add a check to ensure that the subject keywords are followed by "course" or "elective", but unsure
       let courseRange: ISubjectRange = {
         subject: subject,
         idRangeStart: 0,
@@ -161,6 +161,17 @@ function parseAsFullRange(
       ranges.push(courseRange);
     }
   );
+  // Edge cases where a comment has weird formatting for a non-ful range tag
+  if (
+    ranges.length === 1 &&
+    possibleKeys.includes("or") &&
+    possibleKeys.includes("above.")
+  ) {
+    ranges[0].idRangeStart = parseInt(
+      possibleKeys[possibleKeys.lastIndexOf("above.") - 2]
+    );
+  }
+
   return ranges;
 }
 
@@ -174,10 +185,15 @@ export function parseSubjectRangeRow(
   row: CheerioElement
 ): Array<ISubjectRange> {
   let currentRow: Cheerio = $(row);
-  let anchors: Cheerio = currentRow.find(".courselistcomment.commentindent");
+  let anchors: Cheerio = currentRow.find(".courselistcomment");
 
-  if (anchors.length === 0 || anchors.text().includes("course")) {
-    return parseAsFullRange($, row);
+  if (
+    anchors.length === 0 ||
+    ((anchors.text().includes("course") ||
+      anchors.text().includes("elective")) &&
+      !anchors.text().includes("to"))
+  ) {
+    return parseAsCommentRange($, row);
   }
 
   //the length should be === 2.
@@ -192,7 +208,6 @@ export function parseSubjectRangeRow(
       element.split(String.fromCharCode(32))
     );
   });
-
   //first item in the array is the subject
   let subject: string = splitLowerAnchor[0];
 
@@ -201,13 +216,12 @@ export function parseSubjectRangeRow(
 
   //default to 9999, if upper bound does not exist.
   let idRangeEnd: number = 9999;
-  if (
-    !splitLowerAnchor.includes("higher") &&
-    !splitLowerAnchor.includes("or")
-  ) {
+  if (splitLowerAnchor.includes("to")) {
+    let index = splitLowerAnchor.indexOf("to");
     // upper bound exists, get range end.
-    //let upperAnchor: Cheerio = $(anchorsArray[1]);
-    idRangeEnd = parseInt(splitLowerAnchor[4]);
+    subject = splitLowerAnchor[index - 2];
+    idRangeStart = parseInt(splitLowerAnchor[index - 1]);
+    idRangeEnd = parseInt(splitLowerAnchor[index + 2]);
   }
   let courseRange: ISubjectRange = {
     subject: subject,
