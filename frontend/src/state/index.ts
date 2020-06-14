@@ -39,6 +39,15 @@ export const getPlanStrFromState = (state: AppState): string | undefined =>
 export const getMajorFromState = (state: AppState): Major | undefined =>
   state.user.major;
 
+export const getToken = (state: AppState): string =>
+  state.user.token;
+
+export const getId = (state: AppState): number =>
+  state.user.id;
+
+export const getEmail = (state: AppState): string =>
+  state.user.email;
+
 /**
  * Get the warnings generated from the AppState
  * @param state the AppState
@@ -93,7 +102,7 @@ export const getPlansError = (state: AppState): string =>
  */
 export const getTakenCredits = (state: AppState): number =>
   state.schedule.present.creditsTaken;
-
+ 
 /**
  * Get the course specific warnings from the AppState
  * @param state the AppState

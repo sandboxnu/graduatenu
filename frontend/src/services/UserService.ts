@@ -1,4 +1,4 @@
-import { IUserData, ILoginData } from "../models/types";
+import { IUserData, ILoginData, IUpdateUserData } from "../models/types";
 
 /**
  * Service function object to register a given User.
@@ -23,5 +23,20 @@ export const loginUser = (user: ILoginData) =>
     body: JSON.stringify({ user: user }),
     headers: {
       "Content-Type": "application/json",
+    },
+  }).then(response => response.json());
+
+  /**
+ * Service function object to update the user data
+ * @param userData 
+ */
+export const updateUser = (userData: IUpdateUserData) => 
+  fetch(`/api/users/${userData.id}`, {
+    method: "PUT",
+    body: JSON.stringify({ user: userData }),
+    headers: {
+      "Content-Type": "application/json",
+      "key": "Authorization",
+      "value": userData.token
     },
   }).then(response => response.json());

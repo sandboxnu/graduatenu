@@ -35,3 +35,17 @@ export const setTokenAction = createAction(
     token,
   })
 )();
+
+export const setIdAction = createAction(
+  "user/SET_ID",
+  (id: number) => ({
+    id,
+  })
+)();
+
+export const setEmailAction = createAction(
+  "user/SET_EMAIL",
+  (email: string) => ({
+    email,
+  })
+)();

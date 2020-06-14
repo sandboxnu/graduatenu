@@ -11,19 +11,25 @@ import { IconButton } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
 import {
     setMajorAction,
+    setFullNameAction,
+    setEmailAction
 } from "../state/actions/userActions";
 import { setCoopCycle } from "../state/actions/scheduleActions";
 import {
     getMajors,
     getPlans,
-    getMajorsLoadingFlag,
-    getPlansLoadingFlag,
-    getMajorFromState
+    getMajorFromState,
+    getScheduleFromState,
+    getFullNameFromState,
+    getToken,
+    getId,
+    getEmail
   } from "../state";
 import { Dispatch } from "redux";
 import { Major, Schedule } from "graduate-common";
 import { AppState } from "../state/reducers/state";
 import { planToString } from "../utils";
+import { updateUser } from "../services/UserService"
 
 const OuterContainer = styled.div`
     width: 50%;
@@ -77,6 +83,21 @@ const ItemEntry = styled.p`
 `;
 
 
+interface SaveProps {
+    setEdit: Function,
+    name: string,
+    email: string,
+    major: Major,
+    coop: Schedule,
+    token: string,
+    id: number
+}
+
+interface ChangePasswordProps {
+    token: string,
+    id: number,
+}
+
 const ProfileName = (props: any) => {
     return (
         <ProfileEntryContainer>
@@ -113,7 +134,7 @@ const ProfileMajor = (props: any) => {
                     />
                     )}
                     value={props.major}
-                    onChange={(event: React.SyntheticEvent<{}>, value: any) => props.setMajor(value)}
+                    onChange={(event: React.SyntheticEvent<{}>, value: any) => props.setMajor(props.majors.find((m: Major) => m.name == value))}
                 />
             }
             {!props.isEdit && 
@@ -141,7 +162,8 @@ const ProfileCoop = (props: any) => {
                     />
                     )}
                     value={props.coop}
-                    onChange={(event: React.SyntheticEvent<{}>, value: any) => props.setCoop(value)}
+                    onChange={(event: React.SyntheticEvent<{}>, value: any) => 
+                        props.setCoop(props.plans[props.major.name].find((p: Schedule) => planToString(p) === value))}
                 />
             }
             {!props.isEdit && 
@@ -198,15 +220,25 @@ const ProfileEmail = (props: any) => {
     );
 }
 
-const save = (setEdit: Function) => {
-    console.log("TEST");
+const save = ({setEdit, name, email, major, coop, token, id}: SaveProps) => {
+    console.log("SAVE");
+    console.log(token);
+    console.log(id);
     setEdit(false);
-    // TODO: Save
+    setFullNameAction(name);
+    setMajorAction(major);
+    setCoopCycle(coop);
+    const update = {
+        token: token,
+        id: id,
+        email: email,
+    }
+    updateUser(update);
 }
 
-const SaveButton = (props: any) => {
+const SaveButton = (props: SaveProps) => {
     return (
-        <div onClick={() => save(props.setEdit)}>
+        <div onClick={() => save(props)}>
             <PrimaryButton>
                 Save 
             </PrimaryButton>
@@ -214,7 +246,7 @@ const SaveButton = (props: any) => {
     );
 }
 
-const ChangePassword: React.FC = (props: any) => {
+const ChangePassword = (props: ChangePasswordProps) => {
     const [open, setOpen] = React.useState(false);
 
     return (
@@ -233,15 +265,13 @@ const ChangePassword: React.FC = (props: any) => {
 }
 
 export const ProfileComponent: React.FC = (props: any) => {
-    console.log(props.major)
     const [isEdit, setEdit] = useState(false);
-    const [name, setName] = useState("John");
+    const [name, setName] = useState(props.name);
     const [major, setMajor] = useState(props.major);
-    const [advisor, setAdvisor] = useState("Andrea");
-    const [email, setEmail] = useState("test@email.com");
-    const [coop, setCoop] = useState("coop")
-    const { isFetchingMajors, isFetchingPlans, majors, plans } = props;
-
+    const [advisor, setAdvisor] = useState("");
+    const [email, setEmail] = useState(props.email);
+    const [coop, setCoop] = useState(props.coop)
+    const { majors, plans } = props;
     // TODO: Deal with loading state
 
     return (
@@ -249,15 +279,17 @@ export const ProfileComponent: React.FC = (props: any) => {
             <InnerContainer>
                 <ProfileTitleContainer>
                     <ProfileTitle> Profile </ProfileTitle>
-                    <IconButton
-                        onClick={() => setEdit(true)}
-                        style={{ color: "rgba(102, 102, 102, 0.3)" }}
-                        disableRipple
-                        disableFocusRipple
-                        disableTouchRipple
-                    >
-                        <EditIcon fontSize="default" />
-                    </IconButton>
+                    {!isEdit && 
+                        <IconButton
+                            onClick={() => setEdit(true)}
+                            style={{ color: "rgba(102, 102, 102, 0.3)" }}
+                            disableRipple
+                            disableFocusRipple
+                            disableTouchRipple
+                        >
+                            <EditIcon fontSize="default" />
+                        </IconButton>
+                    }
                 </ProfileTitleContainer>
                 <DataContainer>
                     <ProfileColumn> 
@@ -270,7 +302,9 @@ export const ProfileComponent: React.FC = (props: any) => {
                             major={major.name}
                             setMajor={setMajor}
                             majors={majors}/>
-                        <ChangePassword/>
+                        <ChangePassword
+                            token={props.token}
+                            id={props.id}/>
                     </ProfileColumn>
                     <ProfileColumn> 
                         <ProfileEmail
@@ -279,13 +313,22 @@ export const ProfileComponent: React.FC = (props: any) => {
                             setEmail={setEmail}/>
                         <ProfileCoop
                             isEdit={isEdit}
-                            coop={coop}
+                            coop={planToString(coop)}
                             setCoop={setCoop}
                             plans={plans}
                             major={major}/>
                     </ProfileColumn>
                 </DataContainer>
-               {isEdit && <SaveButton setEdit={setEdit}/>}
+               {isEdit && 
+                <SaveButton 
+                    setEdit={setEdit}
+                    name={name}
+                    email={email}
+                    major={major}
+                    coop={coop}
+                    token={props.token}
+                    id={props.id}/>
+               }
             </InnerContainer>
         </OuterContainer>
     )
@@ -298,6 +341,8 @@ export const ProfileComponent: React.FC = (props: any) => {
 const mapDispatchToProps = (dispatch: Dispatch) => ({
     setMajor: (major?: Major) => dispatch(setMajorAction(major)),
     setCoopCycle: (plan: Schedule) => dispatch(setCoopCycle(plan)),
+    setFullName: (fullName: string) => dispatch(setFullNameAction(fullName)),
+    setEmail: (email: string) => dispatch(setEmailAction(email))
 });
   
 /**
@@ -305,11 +350,14 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
  * @param dispatch responsible for dispatching actions to the redux store.
  */
 const mapStateToProps = (state: AppState) => ({
+    name: getFullNameFromState(state),
     major: getMajorFromState(state),
+    coop: getScheduleFromState(state),
     majors: getMajors(state),
     plans: getPlans(state),
-    isFetchingMajors: getMajorsLoadingFlag(state),
-    isFetchingPlans: getPlansLoadingFlag(state),
+    token: getToken(state),
+    id: getId(state),
+    email: getEmail(state),
 });
 
 /**

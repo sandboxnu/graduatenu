@@ -8,6 +8,7 @@ import {
   setAcademicYearAction,
   setGraduationYearAction,
   setTokenAction,
+  setIdAction,
 } from "../actions/userActions";
 import { setCoopCycle } from "../actions/scheduleActions";
 import { planToString } from "../../utils";
@@ -19,6 +20,8 @@ export interface UserState {
   major?: Major;
   planStr?: string;
   token: string;
+  id: number;
+  email: string;
 }
 
 const initialState: UserState = {
@@ -28,6 +31,8 @@ const initialState: UserState = {
   major: undefined,
   planStr: "",
   token: "",
+  id: 0,
+  email: "",
 };
 
 export const userReducer = (
@@ -63,6 +68,10 @@ export const userReducer = (
       }
       case getType(setTokenAction): {
         draft.token = action.payload.token;
+        return draft;
+      }
+      case getType(setIdAction): {
+        draft.id = action.payload.id;
         return draft;
       }
     }

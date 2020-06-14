@@ -135,6 +135,17 @@ export interface ILoginData {
   password: string;
 }
 
+/**
+ * A model for data pertaining to a User object.
+ */
+export interface IUpdateUserData {
+  token: string,
+  id: number,
+  email?: string;
+  academic_year?: number;
+  graduation_year?: number;
+}
+
 /** ------------------------------------------------------------------------
  *
  *            OLD STUFF FOLLOWS ! This stuff is big outdated and is only
