@@ -1,13 +1,13 @@
 import { AppState } from "./reducers/state";
 import {
   DNDSchedule,
-  Major,
   CourseWarning,
   IWarning,
   DNDScheduleTerm,
   Schedule,
   NamedSchedule,
 } from "../models/types";
+import { Major, Schedule } from "graduate-common";
 
 /**
  * Utility functions to help extract data from the AppState

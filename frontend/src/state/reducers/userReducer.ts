@@ -1,4 +1,4 @@
-import { Major } from "../../models/types";
+import { Major } from "graduate-common";
 import produce from "immer";
 import { getType } from "typesafe-actions";
 import { UserAction, ScheduleAction } from "../actions";

@@ -18,13 +18,14 @@ import {
   setCoopCycle,
 } from "../state/actions/scheduleActions";
 import { setMajorAction } from "../state/actions/userActions";
+import { DNDSchedule } from "../models/types";
+import { Major, Schedule } from "graduate-common";
 import {
   getMajors,
   getPlans,
   getTakenCredits,
   getFullNameFromState,
 } from "../state";
-import { DNDSchedule, Major, Schedule } from "../models/types";
 import { planToString, scheduleHasClasses } from "../utils";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import { getStandingFromCompletedCourses } from "../utils";

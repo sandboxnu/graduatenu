@@ -1,4 +1,4 @@
-import { ScheduleCourse } from "../models/types";
+import { ScheduleCourse } from "graduate-common";
 
 export const fetchCourse = async (
   subject: string,

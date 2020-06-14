@@ -50,8 +50,7 @@ jobs:
           # Build a docker container and
           # push it to ECR so that it can
           # be deployed to ECS.
-          cd frontend
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f frontend/Dockerfile .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY
           echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
 
@@ -59,7 +58,7 @@ jobs:
         run: |
           # - create new revision for task definition with latest image.
           # - redeploy ECS services with the latest revision.
-          ./infrastructure/deployment/redeploy.sh staging
+          ./infrastructure/deploy/redeploy.sh staging
 
       - name: Logout of Amazon ECR
         if: always()
