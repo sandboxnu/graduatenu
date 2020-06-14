@@ -30,6 +30,19 @@ const initialState: SchedulesState = {
         },
       },
     },
+    {
+      name: "sample-schedule-2",
+      schedule: {
+        present: {
+          currentClassCounter: 100,
+          isScheduleLoading: false,
+          scheduleError: "",
+          schedule: mockData,
+          warnings: [],
+          courseWarnings: [],
+        },
+      },
+    },
   ],
 };
 

@@ -4,7 +4,6 @@ import {
   CourseWarning,
   IWarning,
   DNDScheduleTerm,
-  Schedule,
   NamedSchedule,
 } from "../models/types";
 import { Major, Schedule } from "graduate-common";
