@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import { OutlinedButton } from '../components/common/OutlinedButton';
@@ -82,6 +82,19 @@ const ItemEntry = styled.p`
     padding: 0;
 `;
 
+const Container = styled.div`
+`;
+
+const HeaderRow = styled.div`
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 20px 0px 20px;
+`;
+
+const StyledLink = styled(Link)`
+  padding: 20px 0px 0px 0px;
+  color: #EB5757;
+`
 
 interface SaveProps {
     setEdit: Function,
@@ -275,62 +288,68 @@ export const ProfileComponent: React.FC = (props: any) => {
     // TODO: Deal with loading state
 
     return (
-        <OuterContainer> 
-            <InnerContainer>
-                <ProfileTitleContainer>
-                    <ProfileTitle> Profile </ProfileTitle>
-                    {!isEdit && 
-                        <IconButton
-                            onClick={() => setEdit(true)}
-                            style={{ color: "rgba(102, 102, 102, 0.3)" }}
-                            disableRipple
-                            disableFocusRipple
-                            disableTouchRipple
-                        >
-                            <EditIcon fontSize="default" />
-                        </IconButton>
-                    }
-                </ProfileTitleContainer>
-                <DataContainer>
-                    <ProfileColumn> 
-                        <ProfileName
-                            isEdit={isEdit}
-                            name={name}
-                            setName={setName}/>
-                        <ProfileMajor
-                            isEdit={isEdit}
-                            major={major.name}
-                            setMajor={setMajor}
-                            majors={majors}/>
-                        <ChangePassword
-                            token={props.token}
-                            id={props.id}/>
-                    </ProfileColumn>
-                    <ProfileColumn> 
-                        <ProfileEmail
-                            isEdit={isEdit}
-                            email={email}
-                            setEmail={setEmail}/>
-                        <ProfileCoop
-                            isEdit={isEdit}
-                            coop={planToString(coop)}
-                            setCoop={setCoop}
-                            plans={plans}
-                            major={major}/>
-                    </ProfileColumn>
-                </DataContainer>
-               {isEdit && 
-                <SaveButton 
-                    setEdit={setEdit}
-                    name={name}
-                    email={email}
-                    major={major}
-                    coop={coop}
-                    token={props.token}
-                    id={props.id}/>
-               }
-            </InnerContainer>
-        </OuterContainer>
+        <Container>
+            <HeaderRow>
+                <h1>GraduateNU</h1>
+                <StyledLink to="/home">Go to Plans</StyledLink>
+            </HeaderRow>
+            <OuterContainer>                 
+                <InnerContainer>
+                    <ProfileTitleContainer>
+                        <ProfileTitle> Profile </ProfileTitle>
+                        {!isEdit && 
+                            <IconButton
+                                onClick={() => setEdit(true)}
+                                style={{ color: "rgba(102, 102, 102, 0.3)" }}
+                                disableRipple
+                                disableFocusRipple
+                                disableTouchRipple
+                            >
+                                <EditIcon fontSize="default" />
+                            </IconButton>
+                        }
+                    </ProfileTitleContainer>
+                    <DataContainer>
+                        <ProfileColumn> 
+                            <ProfileName
+                                isEdit={isEdit}
+                                name={name}
+                                setName={setName}/>
+                            <ProfileMajor
+                                isEdit={isEdit}
+                                major={major.name}
+                                setMajor={setMajor}
+                                majors={majors}/>
+                            <ChangePassword
+                                token={props.token}
+                                id={props.id}/>
+                        </ProfileColumn>
+                        <ProfileColumn> 
+                            <ProfileEmail
+                                isEdit={isEdit}
+                                email={email}
+                                setEmail={setEmail}/>
+                            <ProfileCoop
+                                isEdit={isEdit}
+                                coop={planToString(coop)}
+                                setCoop={setCoop}
+                                plans={plans}
+                                major={major}/>
+                        </ProfileColumn>
+                    </DataContainer>
+                {isEdit && 
+                    <SaveButton 
+                        setEdit={setEdit}
+                        name={name}
+                        email={email}
+                        major={major}
+                        coop={coop}
+                        token={props.token}
+                        id={props.id}/>
+                }
+                </InnerContainer>
+            </OuterContainer>
+        </Container>
     )
 }
 
