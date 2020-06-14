@@ -8,7 +8,8 @@ import {
   ScheduleCourse,
   Status,
   SeasonWord,
-  Schedule
+  Schedule,
+  IRequiredCourse,
 } from "graduate-common";
 
 export const addClassesAction = createAction(
@@ -68,4 +69,9 @@ export const setDNDScheduleAction = createAction(
 export const setCompletedCourses = createAction(
   "schedule/SET_COMPLETED_COURSES",
   (completedCourses: ScheduleCourse[]) => ({ completedCourses })
+)();
+
+export const setCompletedRequirements = createAction(
+  "schedule/SET_COMPLETED_REQUIREMENTS",
+  (completedRequirements: IRequiredCourse[]) => ({ completedRequirements })
 )();

@@ -1,9 +1,5 @@
-import { ScheduleCourse } from "graduate-common";
-import {
-  DNDSchedule,
-  IWarning,
-  CourseWarning,
-} from "../../models/types";
+import { ScheduleCourse, IRequiredCourse } from "graduate-common";
+import { DNDSchedule, IWarning, CourseWarning } from "../../models/types";
 import { mockEmptySchedule } from "../../data/mockData";
 import produce from "immer";
 import { getType } from "typesafe-actions";
@@ -18,6 +14,7 @@ import {
   undoRemoveClassAction,
   setCoopCycle,
   setCompletedCourses,
+  setCompletedRequirements,
 } from "../actions/scheduleActions";
 import {
   convertTermIdToSeason,
@@ -42,6 +39,8 @@ export interface ScheduleStateSlice {
   warnings: IWarning[];
   courseWarnings: CourseWarning[];
   creditsTaken: number;
+  completedRequirements: IRequiredCourse[];
+  transferCourses: ScheduleCourse[];
 }
 
 const initialState: ScheduleState = {
@@ -53,6 +52,8 @@ const initialState: ScheduleState = {
     warnings: [],
     courseWarnings: [],
     creditsTaken: 0,
+    completedRequirements: [],
+    transferCourses: [],
   },
 };
 
@@ -190,6 +191,11 @@ export const scheduleReducer = (
         draft.present.warnings = container.normalWarnings;
         draft.present.courseWarnings = container.courseWarnings;
 
+        return draft;
+      }
+      case getType(setCompletedRequirements): {
+        draft.present.completedRequirements =
+          action.payload.completedRequirements;
         return draft;
       }
       case getType(setCompletedCourses): {

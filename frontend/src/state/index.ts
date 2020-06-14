@@ -5,7 +5,7 @@ import {
   IWarning,
   DNDScheduleTerm,
 } from "../models/types";
-import { Major, Schedule } from "graduate-common";
+import { Major, Schedule, IRequiredCourse } from "graduate-common";
 
 /**
  * Utility functions to help extract data from the AppState
@@ -24,6 +24,14 @@ export const getFullNameFromState = (state: AppState): string =>
  */
 export const getScheduleFromState = (state: AppState): DNDSchedule =>
   state.schedule.present.schedule;
+
+/**
+ * Get the list of completed requirements from the AppState
+ * @param state the AppState
+ */
+export const getCompletedRequirementsFromState = (
+  state: AppState
+): IRequiredCourse[] => state.schedule.present.completedRequirements;
 
 /**
  * Get the selected planName from the AppState

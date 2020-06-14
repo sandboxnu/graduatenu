@@ -10,6 +10,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import { Persistor } from "redux-persist";
 import { SignupScreen } from "./Onboarding/SignupScreen";
 import { LoginScreen } from "./Onboarding/LoginScreen";
+import { TransferCoursesScreen } from "./Onboarding/TransferCoursesScreen";
 
 export const App = ({
   store,
@@ -31,6 +32,7 @@ export const App = ({
               path="/completedCourses"
               component={CompletedCoursesScreen}
             />
+            <Route path="/transferCourses" component={TransferCoursesScreen} />
             <Route path="/" component={Onboarding} />
           </Switch>
         </Router>
