@@ -163,7 +163,11 @@ class SemesterBlockComponent extends React.Component<
   renderBody() {
     const { semester, courseWarnings } = this.props;
     const status = semester.status;
-    if (status === "CLASSES" || status === "HOVERINACTIVE") {
+    if (
+      status === "CLASSES" ||
+      status === "HOVERINACTIVE" ||
+      status === "COOP"
+    ) {
       return semester.classes.map((scheduleCourse, index) => {
         if (!!scheduleCourse) {
           return (
@@ -264,12 +268,17 @@ class SemesterBlockComponent extends React.Component<
           handleClose={this.hideModal.bind(this)}
           handleSubmit={(courses: ScheduleCourse[]) => {
             // Change this semester status upon adding a class if it's not already a CLASSES semester.
-            if (this.props.semester.status !== "CLASSES") {
+            if (
+              this.props.semester.status !== "CLASSES" &&
+              this.props.semester.status !== "COOP"
+            ) {
               this.props.handleStatusChange(
                 "CLASSES",
                 this.props.semester.year,
                 convertTermIdToSeason(this.props.semester.termId)!
               );
+            } else {
+              console.log("did not switch class block status!");
             }
 
             // Add the given courses to this semester through redux

@@ -4,13 +4,12 @@ import {
   DNDScheduleTerm,
   DNDSchedule,
   DNDScheduleYear,
-
 } from "../../models/types";
-import {   
+import {
   IRequiredCourse,
   ScheduleCourse,
   Status,
-  SeasonWord 
+  SeasonWord,
 } from "graduate-common";
 import { XButton } from "../common";
 import { Modal } from "@material-ui/core";
@@ -140,11 +139,22 @@ export class SidebarAddClassModalComponent extends React.Component<
       this.state.queuedCourses,
       this.state.formSemester
     );
-    this.props.handleStatusChange(
-      "CLASSES",
-      this.state.formSemester.year,
-      convertTermIdToSeason(this.state.formSemester.termId)
-    );
+    /**
+     * checks that the semester is not currently classes or coop.
+     */
+    if (
+      this.state.formSemester.status !== "CLASSES" &&
+      this.state.formSemester.status !== "COOP"
+    ) {
+      console.log("sidebar - status change");
+      this.props.handleStatusChange(
+        "CLASSES",
+        this.state.formSemester.year,
+        convertTermIdToSeason(this.state.formSemester.termId)
+      );
+    } else {
+      console.log("sidebar - no status change");
+    }
     this.prepareToClose();
   }
 
