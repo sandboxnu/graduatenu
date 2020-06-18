@@ -145,10 +145,11 @@ class SignupScreenComponent extends React.Component<Props, SignupScreenState> {
         username: this.props.fullName,
         academic_year: this.props.academicYear,
         graduation_year: this.props.graduationYear,
+        major: this.props.major?.name,
+        coop_cycle: this.props.planStr,
       };
-
       registerUser(user).then(response => {
-        if (response.errors) {
+        if (!!response.errors) {
           this.setState({
             errorEmail: response.errors.email,
           });

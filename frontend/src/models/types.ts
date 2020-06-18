@@ -125,6 +125,8 @@ export interface IUserData {
   password: string;
   academic_year?: number;
   graduation_year?: number;
+  major?: string;
+  coop_cycle?: string;
 }
 
 /**

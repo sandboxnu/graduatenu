@@ -4,7 +4,7 @@ import { withRouter, RouteComponentProps, Link } from "react-router-dom";
 import styled from "styled-components";
 import { TextField } from "@material-ui/core";
 import { Major, Schedule } from "graduate-common";
-import { ILoginData } from "../models/types"
+import { ILoginData } from "../models/types";
 import { PrimaryButton } from "../components/common/PrimaryButton";
 import { Dispatch } from "redux";
 import {
@@ -132,6 +132,7 @@ class LoginScreenComponent extends React.Component<Props, LoginScreenState> {
             error: "invalid",
           });
         } else {
+          console.log(response.user);
           this.props.setFullName(response.user.username);
           this.props.setAcademicYear(response.user.academicYear);
           this.props.setGraduationYear(response.user.graduationYear);
