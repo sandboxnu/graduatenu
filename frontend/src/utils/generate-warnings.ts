@@ -28,6 +28,7 @@ import {
   RANGESection,
   SeasonEnum,
   Season,
+  StatusEnum,
 } from "graduate-common";
 /*
 CreditRange interface to track the min and max credits for a particular season. 
@@ -737,7 +738,13 @@ function produceNormalWarnings(
 ): IWarning[] {
   let warnings: IWarning[] = [];
   warnings = warnings.concat(
-    checkSemesterCredits(term.classes, tracker, term.termId, term.season)
+    checkSemesterCredits(
+      term.classes,
+      tracker,
+      term.termId,
+      term.season,
+      term.status
+    )
   );
   warnings = warnings.concat(
     checkSemesterOverload(term.classes, tracker, term.termId)
@@ -872,7 +879,8 @@ function checkSemesterCredits(
   toCheck: ScheduleCourse[],
   tracker: CourseTakenTracker,
   termId: number,
-  season: Season | SeasonEnum
+  season: Season | SeasonEnum,
+  status: StatusEnum
 ): IWarning[] {
   let maxCredits = 0;
   let minCredits = 0;
@@ -897,7 +905,6 @@ function checkSemesterCredits(
   } else {
     minSeasonCredits = 0;
     maxSeasonCredits = 5; //this is coded as 5 instead of 4 for a single class + lab
-    console.log("changed max season credit ");
   }
 
   //if currently planning too few credits for the given season (needs at least one credit to throw warning).
