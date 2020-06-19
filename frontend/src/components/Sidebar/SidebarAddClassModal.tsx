@@ -139,22 +139,11 @@ export class SidebarAddClassModalComponent extends React.Component<
       this.state.queuedCourses,
       this.state.formSemester
     );
-
-    /**
-     * checks that the semester is not currently classes or coop.
-     */
-
-    /*if (this.state.formSemester.status !== "CLASSES" && this.state.formSemester.status !== "COOP") {
-      console.log("sidebar - status change");
-      this.props.handleStatusChange(
-        "CLASSES",
-        this.state.formSemester.year,
-        convertTermIdToSeason(this.state.formSemester.termId)
-      );
-    } else {
-      console.log("sidebar - no status change");
-    }
-    */
+    this.props.handleStatusChange(
+      "CLASSES",
+      this.state.formSemester.year,
+      convertTermIdToSeason(this.state.formSemester.termId)
+    );
     this.prepareToClose();
   }
 
