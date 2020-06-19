@@ -881,16 +881,26 @@ function checkSemesterCredits(
     minCredits += course.numCreditsMin; //use this one!
   }
 
-  //minSeasonCredits is the minimum number of credits to not be under enrolled for the given season.
-  let minSeasonCredits = seasonCreditTracker[season].seasonMin;
-
-  //maxSeasonCredits is the maximum number of credits to not be over enrolled for the given season.
-  let maxSeasonCredits = seasonCreditTracker[season].seasonMax;
-
   //defining a list of IWarnings to return later.
   const warnings: IWarning[] = [];
 
-  //if currently planning to few credits for the given season (needs at least one credit to throw warning).
+  let minSeasonCredits;
+  let maxSeasonCredits;
+
+  //taking classes normally
+  if (status == "CLASSES") {
+    //minSeasonCredits is the minimum number of credits to not be under enrolled for the given season.
+    minSeasonCredits = seasonCreditTracker[season].seasonMin;
+
+    //maxSeasonCredits is the maximum number of credits to not be over enrolled for the given season.
+    maxSeasonCredits = seasonCreditTracker[season].seasonMax;
+  } else {
+    minSeasonCredits = 0;
+    maxSeasonCredits = 5; //this is coded as 5 instead of 4 for a single class + lab
+    console.log("changed max season credit ");
+  }
+
+  //if currently planning too few credits for the given season (needs at least one credit to throw warning).
   if (minSeasonCredits > minCredits && minCredits > 0) {
     warnings.push({
       message: `Currently enrolled in ${minCredits} credits(s). May be under-enrolled. Minimum credits for this term ${minSeasonCredits}.`,

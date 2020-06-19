@@ -277,8 +277,6 @@ class SemesterBlockComponent extends React.Component<
                 this.props.semester.year,
                 convertTermIdToSeason(this.props.semester.termId)!
               );
-            } else {
-              console.log("did not switch class block status!");
             }
 
             // Add the given courses to this semester through redux
