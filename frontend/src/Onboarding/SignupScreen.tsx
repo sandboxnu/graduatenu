@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { TextField } from "@material-ui/core";
 import { AppState } from "../state/reducers/state";
 import { Major } from "graduate-common";
-import {  IUserData } from "../models/types";
+import { IUserData } from "../models/types";
 import { PrimaryButton } from "../components/common/PrimaryButton";
 import { registerUser } from "../services/UserService";
 import { Dispatch } from "redux";
@@ -145,6 +145,8 @@ class SignupScreenComponent extends React.Component<Props, SignupScreenState> {
         username: this.props.fullName,
         academic_year: this.props.academicYear,
         graduation_year: this.props.graduationYear,
+        major: this.props.major ? this.props.major.name : undefined,
+        coop_cycle: this.props.planStr ? this.props.planStr : undefined,
       };
 
       registerUser(user).then(response => {
