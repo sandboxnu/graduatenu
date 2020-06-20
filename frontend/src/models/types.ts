@@ -7,8 +7,8 @@ import {
   INEUOrPrereq,
   INEUPrereqCourse,
   ICourseRange,
-  IOrCourse
-} from "graduate-common"
+  IOrCourse,
+} from "graduate-common";
 
 /**
  * Describes an abbreviation for one of Northeastern's NUPath academic breadth requirements.
@@ -81,7 +81,6 @@ export interface IWarning {
   termId: number;
 }
 
-
 /**
  * A CourseWarning, specific to a single course, in a single term(id).
  */
@@ -125,6 +124,8 @@ export interface IUserData {
   password: string;
   academic_year?: number;
   graduation_year?: number;
+  major?: string;
+  coop_cycle?: string;
 }
 
 /**
