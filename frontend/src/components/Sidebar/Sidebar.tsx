@@ -1,6 +1,6 @@
 import React from "react";
 import { DNDSchedule } from "../../models/types";
-import { Major, IRequiredCourse } from "graduate-common";
+import { Major, IRequiredCourse, ScheduleCourse } from "graduate-common";
 import styled from "styled-components";
 import { RequirementSection } from ".";
 import {
@@ -8,7 +8,11 @@ import {
   getCompletedCourseStrings,
 } from "../../utils";
 import { AppState } from "../../state/reducers/state";
-import { getScheduleFromState, getMajorFromState } from "../../state";
+import {
+  getScheduleFromState,
+  getMajorFromState,
+  getTransferCoursesFromState,
+} from "../../state";
 import { connect } from "react-redux";
 
 const Container = styled.div`
@@ -30,9 +34,14 @@ const MajorTitle = styled.p`
 interface Props {
   schedule: DNDSchedule;
   major?: Major;
+  transferCourses: ScheduleCourse[];
 }
 
-const SidebarComponent: React.FC<Props> = ({ schedule, major }) => {
+const SidebarComponent: React.FC<Props> = ({
+  schedule,
+  major,
+  transferCourses,
+}) => {
   if (!major) {
     return (
       <Container>
@@ -43,6 +52,9 @@ const SidebarComponent: React.FC<Props> = ({ schedule, major }) => {
 
   const warnings = produceRequirementGroupWarning(schedule, major);
   const completedCourses: string[] = getCompletedCourseStrings(schedule);
+  const completedCourseStrings: string[] = completedCourses.concat(
+    ...transferCourses.map(course => course.subject + course.classId)
+  );
 
   return (
     <Container>
@@ -54,7 +66,7 @@ const SidebarComponent: React.FC<Props> = ({ schedule, major }) => {
             contents={major.requirementGroupMap[req]}
             warning={warnings.find(w => w.requirementGroup === req)}
             key={index + major.name}
-            completedCourses={completedCourses}
+            completedCourses={completedCourseStrings}
           ></RequirementSection>
         );
       })}
@@ -65,6 +77,7 @@ const SidebarComponent: React.FC<Props> = ({ schedule, major }) => {
 const mapStateToProps = (state: AppState) => ({
   schedule: getScheduleFromState(state),
   major: getMajorFromState(state),
+  transferCourses: getTransferCoursesFromState(state),
 });
 
 export const Sidebar = connect(mapStateToProps)(SidebarComponent);
