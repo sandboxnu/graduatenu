@@ -9,7 +9,10 @@ import {
   Requirement,
 } from "graduate-common";
 import { getMajorFromState, getCompletedRequirementsFromState } from "../state";
-import { setCompletedCourses } from "../state/actions/scheduleActions";
+import {
+  setCompletedCourses,
+  setTransferCourses,
+} from "../state/actions/scheduleActions";
 import styled from "styled-components";
 import { fetchCourse } from "../api";
 import { NextButton } from "../components/common/NextButton";
@@ -104,13 +107,15 @@ interface TransferCoursesScreenProps {
   major: Major;
   completedRequirements: IRequiredCourse[];
   setCompletedCourses: (completedCourses: ScheduleCourse[]) => void;
-  transfer?: boolean;
+  setTransferCourses: (transferCourses: ScheduleCourse[]) => void;
 }
 
 type Props = TransferCoursesScreenProps & RouteComponentProps;
 
 interface State {
   selectedCourses: ScheduleCourse[];
+  selectedRequirements: IRequiredCourse[];
+  completedNonTransfer: IRequiredCourse[];
 }
 
 class TransferCoursesComponent extends Component<Props, State> {
@@ -119,11 +124,34 @@ class TransferCoursesComponent extends Component<Props, State> {
 
     this.state = {
       selectedCourses: [],
+      selectedRequirements: [],
+      completedNonTransfer: props.completedRequirements,
     };
   }
 
-  onSubmit() {
-    this.props.setCompletedCourses(this.state.selectedCourses);
+  /**
+   * Separate transfer and non transfer courses, convert non transfer completed courses
+   * into ScheduleCourses, and populate redux store.
+   */
+  async onSubmit() {
+    let completedNonTransfer = this.state.completedNonTransfer.filter(
+      req => !this.state.selectedRequirements.includes(req)
+    );
+    let completed: ScheduleCourse[] = [];
+
+    for (let course of completedNonTransfer) {
+      const scheduleCourse = await fetchCourse(
+        course.subject,
+        String(course.classId)
+      );
+
+      if (scheduleCourse) {
+        completed.push(scheduleCourse);
+      }
+    }
+
+    this.props.setCompletedCourses(completed);
+    this.props.setTransferCourses(this.state.selectedCourses);
   }
 
   /**
@@ -142,6 +170,10 @@ class TransferCoursesComponent extends Component<Props, State> {
       );
       if (scheduleCourse) {
         this.setState({
+          selectedRequirements: [...this.state.selectedRequirements, course],
+        });
+
+        this.setState({
           selectedCourses: [...this.state.selectedCourses, scheduleCourse],
         });
       }
@@ -152,6 +184,11 @@ class TransferCoursesComponent extends Component<Props, State> {
       );
       this.setState({
         selectedCourses: courses,
+      });
+
+      let reqs = this.state.selectedRequirements.filter(r => r !== course);
+      this.setState({
+        selectedRequirements: reqs,
       });
     }
   }
@@ -276,7 +313,7 @@ class TransferCoursesComponent extends Component<Props, State> {
           </Grid>
         </Paper>
         <Link
-          to={this.props.transfer ? "/signup" : "/transferCourses"}
+          to={"/signup"}
           onClick={this.onSubmit.bind(this)}
           style={{ textDecoration: "none" }}
         >
@@ -295,6 +332,8 @@ const mapStateToProps = (state: AppState) => ({
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   setCompletedCourses: (completedCourses: ScheduleCourse[]) =>
     dispatch(setCompletedCourses(completedCourses)),
+  setTransferCourses: (transferCourses: ScheduleCourse[]) =>
+    dispatch(setTransferCourses(transferCourses)),
 });
 
 export const TransferCoursesScreen = withRouter(

@@ -335,7 +335,11 @@ class CompletedCoursesComponent extends Component<Props, State> {
           handleSubmit={courses => this.addOtherCourses(courses)}
         ></AddClassModal>
         <Link
-          to={"/transferCourses"}
+          to={
+            this.state.completedRequirements.length === 0
+              ? "/signup"
+              : "/transferCourses"
+          }
           onClick={this.onSubmit.bind(this)}
           style={{ textDecoration: "none" }}
         >

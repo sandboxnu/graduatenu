@@ -15,6 +15,7 @@ import {
   setCoopCycle,
   setCompletedCourses,
   setCompletedRequirements,
+  setTransferCourses,
 } from "../actions/scheduleActions";
 import {
   convertTermIdToSeason,
@@ -242,6 +243,23 @@ export const scheduleReducer = (
 
         draft.present.warnings = container.normalWarnings;
         draft.present.courseWarnings = container.courseWarnings;
+        return draft;
+      }
+      case getType(setTransferCourses): {
+        draft.present.transferCourses = action.payload.transferCourses;
+
+        const [dndCourses, newCounter] = convertToDNDCourses(
+          action.payload.transferCourses.sort(
+            (course1: ScheduleCourse, course2: ScheduleCourse) =>
+              course1.classId
+                .toString()
+                .localeCompare(course2.classId.toString())
+          ),
+          draft.present.currentClassCounter
+        );
+
+        draft.present.currentClassCounter += newCounter;
+        draft.present.creditsTaken += sumCreditsFromList(dndCourses);
         return draft;
       }
     }
