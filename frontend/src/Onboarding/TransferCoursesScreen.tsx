@@ -298,17 +298,16 @@ class TransferCoursesComponent extends Component<Props, State> {
           <Grid container justify="space-evenly">
             <Grid key={0} item>
               <Paper elevation={0} style={{ minWidth: 350, maxWidth: 400 }}>
-                {this.props.major.requirementGroups
-                  .slice(0, split)
-                  .map(r => this.renderSection(r))}
+                {this.props.major.requirementGroups.map(r =>
+                  this.renderSection(r)
+                )}
               </Paper>
             </Grid>
             <Grid key={1} item>
-              <Paper elevation={0} style={{ minWidth: 350, maxWidth: 400 }}>
-                {this.props.major.requirementGroups
-                  .slice(split, reqLen)
-                  .map(r => this.renderSection(r))}
-              </Paper>
+              <Paper
+                elevation={0}
+                style={{ minWidth: 350, maxWidth: 400 }}
+              ></Paper>
             </Grid>
           </Grid>
         </Paper>
