@@ -737,13 +737,14 @@ function produceNormalWarnings(
   tracker: CourseTakenTracker
 ): IWarning[] {
   let warnings: IWarning[] = [];
+  let status: StatusEnum = term.status as StatusEnum;
   warnings = warnings.concat(
     checkSemesterCredits(
       term.classes,
       tracker,
       term.termId,
       term.season,
-      term.status
+      status
     )
   );
   warnings = warnings.concat(
