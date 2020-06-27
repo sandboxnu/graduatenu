@@ -12,6 +12,7 @@ const rp = require("request-promise");
 export const ANDSectionHeader: string[] = [
   "Intermediate and Advanced Biology Electives",
   "History Electives",
+  // "Sociology Electives",
 ];
 
 export const SubheaderTagSet: Array<string> = [
@@ -23,6 +24,7 @@ export const SubheaderTagSet: Array<string> = [
 export const ORTagMap: { [key: string]: number } = {
   "Choose one of the following:": 4,
   "Complete one of the following:": 4,
+  "Complete one of the following: ": 4,
   "Then complete one of the following:": 4,
   "Complete one of the following sequences:": 10,
   "Complete two of the following:": 8,
@@ -44,9 +46,11 @@ export const ORTagMap: { [key: string]: number } = {
   "Complete two of the following courses not already taken:": 8,
   "Complete two courses from the following:": 8,
   "Complete two biology courses (with corequisite labs if offered). Choose one of these two courses from the following list:": 8,
-  "Complete one sociology elective in each of the following ranges:": 12,
   "Complete one introductory course from the following:": 4,
   "Complete one capstone experience from the following:": 4,
+  "Complete three courses from the following:": 12,
+  "Complete either one computer science capstone or the physics capstone:": 4,
+  "Complete one of the following lecture/lab pairs. PHYS 1145/PHYS 1146 is recommended:": 4,
   // TODO: Data-Science-Related Electives: "Complete six courses from categories A and B, at least three of which must be from B"
 };
 
@@ -79,15 +83,26 @@ export const RANGETagMap: { [key: string]: number } = {
 
   "Complete four ECON electives with at least two numbered at ECON 3000 or above.": 16,
 
-  "Complete 8 credits of CS, CY, DS, or IS classes that are not already required. Choose courses within the following ranges:": 8,
   "Choose the second elective from the following list:": 4,
   "Complete three intermediate/advanced-level courses:": 12,
   "Complete one advanced-level course:": 4,
-  "Complete one sociology elective in each of the following ranges:": 4,
+  // "Complete one sociology elective in each of the following ranges:": 4,
 
   "Complete four credits of CS, CY, DS, or IS classes that are not already required. Choose courses within the following ranges:": 4,
+  "Complete 4 credits of CS, CY, DS, or IS classes that are not already required. Choose courses within the following ranges:": 4,
+  "Complete 4 credits of CS, CY, DS, or IS courses that are not already required. Choose courses within the following range:": 4,
+  "Complete 8 credits of CS, CY, DS, or IS classes that are not already required. Choose courses within the following ranges:": 8,
+  "Complete 8 credits of CS, CY, DS or IS classes that are not already required. Choose courses within the following ranges:": 8,
+  "Complete 8 credits of upper-division CS, CY, DS, or IS classes that are not already required. Choose courses within the following ranges:": 8,
+  "Complete eight credits of CS, CY, DS, or IS classes that are not already required. Choose courses within the following ranges:": 8,
   "Complete twelve credits of CS, CY, DS, or IS classes that are not already required. Choose courses within the following ranges:": 12,
   "Complete 12 credits of CS, CY, DS, or IS classes that are not already required. Choose courses within the following ranges:": 12,
+  "Complete 12 credits of upper-division CS, CY, DS, or IS courses that are not already required. Choose courses within the following ranges:": 12,
+  "Complete 12 credits of upper-division CS, CY, DS, or IS classes that are not already required. Choose courses within the following ranges:": 12,
+  "Comment: Complete 12 credits of CS, CY, DS, or IS classes that are not already required. Choose courses within the following ranges:": 12,
+  "Complete 16 credits of upper-division CS, CY, DS, or IS courses that are not already required. Choose courses within the following ranges:": 16,
+  "Complete one course from the following": 4,
+  "Complete four credits from the following list, not taken to fulfill previous requirements:": 4,
 };
 
 // Set for RANGESections that only indicate the major in which they are allowed to take electives
@@ -131,6 +146,11 @@ export const ValidSubjects: string[] = [
   "JRNL",
   "PHIL",
   "SOCL",
+  "BIOL",
+  "CHEM",
+  "EEMB",
+  "ENVR",
+  "PHYS",
 ];
 
 /**
@@ -301,7 +321,7 @@ module.exports = catalogToMajor;
  * testing. move to test file.
  */
 catalogToMajor(
-  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-communication-studies-bs/#programrequirementstext"
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/data-science-biology-bs/#programrequirementstext"
 ).then((scrapedMajor: Major) => {
   //uncomment following lines to log output.
   console.log("--------------------Parsed major object--------------------");

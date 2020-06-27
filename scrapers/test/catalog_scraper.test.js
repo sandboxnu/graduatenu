@@ -43,12 +43,30 @@ const supported2018_2019 = [
   "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/engineering/electrical-computer/computer-engineering-computer-science-bscompe/#programrequirementstext",
   "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-history-bs/#programrequirementstext",
   "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-game-development-bs/#programrequirementstext",
+  "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-sociology-bs/#programrequirementstext",
 ];
 
 const supported2019_2020 = [
   "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-science/bscs/#programrequirementstext",
   "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-business-administration-bs/#programrequirementstext",
   "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-cognitive-psychology-bs/#programrequirementstext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-communication-studies-bs/#programrequirementstext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-criminal-justice-bs/#programrequirementstext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/economics-bs/#programrequirementstext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-english-bs/#programrequirementstext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-environmental-science-bs/#programrequirementstext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-game-development-bs/#programrequirementstext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-history-bs/#programrequirementstext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-linguistics-bs/#programrequirementstext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-mathematics-bs/#programrequirementstext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-concentration-music-composition-technology-bs/#programrequirementstext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-philosophy-bs/#programrequirementstext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-political-science-bs/#programrequirementstext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-sociology-bs/#programrequirementstext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-science/cybersecurity-business-administration-bs/#programrequirementstext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-science/cybersecurity-criminal-justice-bs/#programrequirementstext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/cybersecurity-economics-bs/#programrequirementstext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/data-science-biochemistry-bs/#programrequirementstext",
 ];
 
 //run tests

@@ -21,7 +21,11 @@ export function parseRowAsRequirement(
 ): Requirement | undefined {
   let currentRow: Cheerio = $(row);
   let rangeSpan = currentRow.find("span.courselistcomment.commentindent");
-  if (currentRow.find("a").length === 0 && rangeSpan.length === 0) {
+  if (
+    currentRow.find("a").length === 0 &&
+    currentRow.find("td.codecol").length === 0 &&
+    rangeSpan.length === 0
+  ) {
     // the row doesn't have any course information to be parsed in most cases.
     // expections exist, for eg: some biochemistry courses appear as a comment.
     // todo: handle the expections.
@@ -251,7 +255,11 @@ function parseRequiredRow(
   //the length should be === 1.
   let loadedAnchor: Cheerio = $(anchorsArray[0]);
   if (loadedAnchor.length === 0) {
-    return undefined;
+    anchorsArray = currentRow.find("td.codecol").toArray();
+    loadedAnchor = $(anchorsArray[0]);
+    if (loadedAnchor.length === 0) {
+      return undefined;
+    }
   }
 
   // split the text by spaces and also char(160) if it is present
