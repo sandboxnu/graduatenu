@@ -7,7 +7,7 @@ export const biochemMajor: Major = {
   totalCreditsRequired: 0,
   nupaths: [],
   concentrations: {
-    concentrationOptions: [],
+    requirementGroupMap: [],
     maxOptions: 0,
     minOptions: 0,
   },
