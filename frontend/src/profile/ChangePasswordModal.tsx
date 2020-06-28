@@ -39,7 +39,7 @@ const changePassword = (
   confirmPassword: string, 
   setError: (error: string) => void, 
   setOpen: (isOpen: boolean) => void) => {
-  const changePasswordBody = {
+  const changePasswordBody: IUpdateUserPassword = {
     old_password: oldPassword,
     new_password: newPassword,
     confirm_password: confirmPassword
@@ -60,61 +60,59 @@ export function ChangePasswordModal (props: any) {
     const newPasswordErrorText = newPassword === confirmPassword ? "" : "Passwords don't match";
   
     return (
-        <div>
-            <Modal
-                disableAutoFocus={true}
-                open={props.open}
-                onClose={() => props.setOpen(false)}
-                aria-labelledby="simple-modal-title"
-                aria-describedby="simple-modal-description"
-            >
-              <OuterContainer>
-                <InnerContainer>
-                    <h2 id="simple-modal-title">Change Password</h2>
-                    <TextField
-                      id="outlined-basic"
-                      type="password"
-                      variant="outlined"
-                      value={oldPassword}
-                      error = {error != null && error.length !== 0 && error === "Unauthorized" }
-                      onChange={e => setOldPassword(e.target.value)}
-                      helperText={error != null && error.length !== 0 && error === "Unauthorized" ? "Wrong Password": "" }
-                      placeholder="Old Password"
-                    />
-                    <Spacer/>
-                    <TextField
-                      id="outlined-basic"
-                      type="password"
-                      variant="outlined"
-                      error = {newPasswordErrorText.length === 0 ? false: true }
-                      value={newPassword}
-                      onChange={e => setNewPassword(e.target.value)}
-                      placeholder="New Password"
-                      helperText={newPasswordErrorText}
-                    />
-                    <Spacer/>
-                    <TextField
-                      id="outlined-basic"
-                      type="password"
-                      variant="outlined"
-                      error = {newPasswordErrorText.length === 0 ? false: true }
-                      value={confirmPassword}
-                      onChange={e => setConfirmPassword(e.target.value)}
-                      placeholder="Confirm Password"
-                      helperText={newPasswordErrorText}
-                    />
-                    <ButtonContainer>
-                        <PrimaryButton
-                          onClick={() => changePassword(props.token, oldPassword, newPassword, confirmPassword, setError, props.setOpen)}
-                          disabled={newPasswordErrorText.length !== 0 
-                          || newPassword.length === 0 
-                          || oldPassword.length === 0}>
-                          Change 
-                        </PrimaryButton>
-                    </ButtonContainer>
-                </InnerContainer>
-              </OuterContainer>
-            </Modal>
-        </div>
+          <Modal
+              disableAutoFocus={true}
+              open={props.open}
+              onClose={() => props.setOpen(false)}
+              aria-labelledby="simple-modal-title"
+              aria-describedby="simple-modal-description"
+          >
+            <OuterContainer>
+              <InnerContainer>
+                  <h2 id="simple-modal-title">Change Password</h2>
+                  <TextField
+                    id="outlined-basic"
+                    type="password"
+                    variant="outlined"
+                    value={oldPassword}
+                    error = {error != null && error.length !== 0 && error === "Unauthorized" }
+                    onChange={e => setOldPassword(e.target.value)}
+                    helperText={error != null && error.length !== 0 && error === "Unauthorized" ? "Wrong Password": "" }
+                    placeholder="Old Password"
+                  />
+                  <Spacer/>
+                  <TextField
+                    id="outlined-basic"
+                    type="password"
+                    variant="outlined"
+                    error = {newPasswordErrorText.length === 0 ? false: true }
+                    value={newPassword}
+                    onChange={e => setNewPassword(e.target.value)}
+                    placeholder="New Password"
+                    helperText={newPasswordErrorText}
+                  />
+                  <Spacer/>
+                  <TextField
+                    id="outlined-basic"
+                    type="password"
+                    variant="outlined"
+                    error = {newPasswordErrorText.length === 0 ? false: true }
+                    value={confirmPassword}
+                    onChange={e => setConfirmPassword(e.target.value)}
+                    placeholder="Confirm Password"
+                    helperText={newPasswordErrorText}
+                  />
+                  <ButtonContainer>
+                      <PrimaryButton
+                        onClick={() => changePassword(props.token, oldPassword, newPassword, confirmPassword, setError, props.setOpen)}
+                        disabled={newPasswordErrorText.length !== 0 
+                        || newPassword.length === 0 
+                        || oldPassword.length === 0}>
+                        Change 
+                      </PrimaryButton>
+                  </ButtonContainer>
+              </InnerContainer>
+            </OuterContainer>
+          </Modal>
     );
 }
