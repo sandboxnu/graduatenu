@@ -138,7 +138,6 @@ class LoginScreenComponent extends React.Component<Props, LoginScreenState> {
             error: "invalid",
           });
         } else {
-          console.log(response);
           this.props.setFullName(response.user.username);
           this.props.setAcademicYear(response.user.academicYear);
           this.props.setGraduationYear(response.user.graduationYear);

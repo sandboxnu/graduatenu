@@ -52,5 +52,4 @@ export const updatePassword = (token: string, userPassword: IUpdateUserPassword)
       "Content-Type": "application/json",
       "Authorization": "Token " + token
     },
-  })
-  .then(response => response.json())
+  }).then(response => response.json())

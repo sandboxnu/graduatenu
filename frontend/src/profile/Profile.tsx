@@ -97,6 +97,32 @@ const StyledLink = styled(Link)`
   padding: 20px 0px 0px 0px;
   color: #EB5757;
 `
+interface ProfileNameProps {
+    name: string,
+    isEdit: boolean,
+    setName: (name: string) => void
+}
+
+interface ProfileMajorProps {
+    major: string,
+    isEdit: boolean,
+    majors: Major[],
+    setMajor: (major: Major | undefined) => void
+}
+
+interface ProfileCoopProps {
+    major: Major,
+    coop: string,
+    isEdit: boolean,
+    plans: Record<string, Schedule[]>,
+    setCoop: (coop: Schedule | undefined) => void
+}
+
+interface ProfileEmailProps {
+    email: string,
+    isEdit: boolean,
+    setEmail: (email: string) => void
+}
 
 interface SaveProps {
     setEdit: Function,
@@ -117,7 +143,7 @@ interface ChangePasswordProps {
     id: number,
 }
 
-const ProfileName = (props: any) => {
+const ProfileName = (props: ProfileNameProps) => {
     return (
         <ProfileEntryContainer>
             <ItemTitle> Name </ItemTitle>
@@ -137,7 +163,7 @@ const ProfileName = (props: any) => {
     );
 }
 
-const ProfileMajor = (props: any) => {
+const ProfileMajor = (props: ProfileMajorProps) => {
     return (
         <ProfileEntryContainer>
             <ItemTitle> Major </ItemTitle>
@@ -163,7 +189,7 @@ const ProfileMajor = (props: any) => {
     );
 }
 
-const ProfileCoop = (props: any) => {
+const ProfileCoop = (props: ProfileCoopProps) => {
     return (
         <ProfileEntryContainer>
             <ItemTitle> Co-op Cycle </ItemTitle>
@@ -192,6 +218,8 @@ const ProfileCoop = (props: any) => {
     );
 }
 
+/* 
+TODO: // Add Advsisors to profile page once we support them
 const ProfileAdvisor = (props: any) => {
     return (
         <ProfileEntryContainer>
@@ -217,9 +245,9 @@ const ProfileAdvisor = (props: any) => {
         </ProfileEntryContainer>
     );
 }
+*/
 
-
-const ProfileEmail = (props: any) => {
+const ProfileEmail = (props: ProfileEmailProps) => {
     return (
         <ProfileEntryContainer>
             <ItemTitle> Email </ItemTitle>
