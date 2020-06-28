@@ -52,9 +52,11 @@ const SidebarComponent: React.FC<Props> = ({
 
   const warnings = produceRequirementGroupWarning(schedule, major);
   const completedCourses: string[] = getCompletedCourseStrings(schedule);
-  const completedCourseStrings: string[] = completedCourses.concat(
-    ...transferCourses.map(course => course.subject + course.classId)
-  );
+  const completedCourseStrings: string[] = transferCourses
+    ? completedCourses.concat(
+        ...transferCourses.map(course => course.subject + course.classId)
+      )
+    : completedCourses;
 
   return (
     <Container>
