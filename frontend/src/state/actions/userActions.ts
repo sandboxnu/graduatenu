@@ -49,3 +49,10 @@ export const setEmailAction = createAction(
     email,
   })
 )();
+
+export const setUserCoopCycleAction = createAction(
+  "user/SET_COOP_CYCLE",
+  (coopCycle: string) => ({
+    coopCycle,
+  })
+)();

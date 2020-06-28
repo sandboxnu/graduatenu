@@ -137,14 +137,31 @@ export interface ILoginData {
 }
 
 /**
+ * Data needed to update a user
+ */
+export interface IUpdateUser {
+  token: string,
+  id: number
+}
+
+/**
  * A model for data pertaining to a User object.
  */
 export interface IUpdateUserData {
-  token: string,
-  id: number,
   email?: string;
+  major?: String;
   academic_year?: number;
   graduation_year?: number;
+  coop_cycle?: string;
+}
+
+/**
+ * A model for data pertaining to a User object.
+ */
+export interface IUpdateUserPassword {
+  old_password: string;
+  new_password: string;
+  confirm_password: string;
 }
 
 /** ------------------------------------------------------------------------

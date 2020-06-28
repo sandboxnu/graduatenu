@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export function PrimaryButton(props: any) {
   const classes = useStyles();
   return (
-    <ColorButton variant="contained" color="primary" className={classes.margin} disabled={props.disabled}>
+    <ColorButton variant="contained" color="primary" className={classes.margin} disabled={props.disabled} onClick={props.onClick}>
       {props.children}
     </ColorButton>
   );

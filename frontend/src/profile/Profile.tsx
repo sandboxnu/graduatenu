@@ -30,6 +30,8 @@ import { Major, Schedule } from "graduate-common";
 import { AppState } from "../state/reducers/state";
 import { planToString } from "../utils";
 import { updateUser } from "../services/UserService"
+import { IUpdateUser, IUpdateUserData } from "../models/types";
+
 
 const OuterContainer = styled.div`
     width: 50%;
@@ -238,24 +240,28 @@ const save = ({setEdit, name, email, major, coop, token, id}: SaveProps) => {
     console.log(token);
     console.log(id);
     setEdit(false);
+    setEmailAction(email);
     setFullNameAction(name);
     setMajorAction(major);
     setCoopCycle(coop);
-    const update = {
+    const user: IUpdateUser = {
         token: token,
-        id: id,
+        id: id
+    };
+    const updateUserData: IUpdateUserData = {
         email: email,
-    }
-    updateUser(update);
+        major: major.name,
+        coop_cycle: planToString(coop)
+    };
+    updateUser(user, updateUserData);
 }
 
 const SaveButton = (props: SaveProps) => {
     return (
-        <div onClick={() => save(props)}>
-            <PrimaryButton>
-                Save 
-            </PrimaryButton>
-        </div>
+        <PrimaryButton
+            onClick={() => save(props)}>
+            Save 
+        </PrimaryButton>
     );
 }
 
@@ -272,7 +278,8 @@ const ChangePassword = (props: ChangePasswordProps) => {
             </ProfileEntryContainer>
             <ChangePasswordModal
                 open={open}
-                setOpen={setOpen}/>
+                setOpen={setOpen}
+                token={props.token}/>
       </div>
     );
 }
@@ -285,6 +292,8 @@ export const ProfileComponent: React.FC = (props: any) => {
     const [email, setEmail] = useState(props.email);
     const [coop, setCoop] = useState(props.coop)
     const { majors, plans } = props;
+    console.log(props.major);
+    console.log(props.token);
     console.log(props.email);
     console.log(props.id);
     // TODO: Deal with loading state
@@ -319,7 +328,7 @@ export const ProfileComponent: React.FC = (props: any) => {
                                 setName={setName}/>
                             <ProfileMajor
                                 isEdit={isEdit}
-                                major={"asdf"}
+                                major={major.name}
                                 setMajor={setMajor}
                                 majors={majors}/>
                             <ChangePassword

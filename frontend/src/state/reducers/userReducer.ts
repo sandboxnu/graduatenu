@@ -9,6 +9,8 @@ import {
   setGraduationYearAction,
   setTokenAction,
   setIdAction,
+  setUserCoopCycleAction,
+  setEmailAction
 } from "../actions/userActions";
 import { setCoopCycle } from "../actions/scheduleActions";
 import { planToString } from "../../utils";
@@ -22,6 +24,7 @@ export interface UserState {
   token: string;
   id: number;
   email: string;
+  coopCycle: string;
 }
 
 const initialState: UserState = {
@@ -33,6 +36,7 @@ const initialState: UserState = {
   token: "",
   id: 0,
   email: "",
+  coopCycle: "",
 };
 
 export const userReducer = (
@@ -72,6 +76,14 @@ export const userReducer = (
       }
       case getType(setIdAction): {
         draft.id = action.payload.id;
+        return draft;
+      }
+      case getType(setEmailAction): {
+        draft.email = action.payload.email;
+        return draft;
+      }
+      case getType(setUserCoopCycleAction): {
+        draft.coopCycle = action.payload.coopCycle;
         return draft;
       }
     }

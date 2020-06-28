@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { Modal, TextField } from "@material-ui/core";
 import { PrimaryButton } from '../components/common/PrimaryButton';
+import { IUpdateUserPassword } from "../models/types";
+import { updatePassword } from "../services/UserService"
 
 const OuterContainer = styled.div`
   width: 30%;
@@ -30,10 +32,31 @@ const ButtonContainer = styled.div`
   margin-right:0;
 `;
 
+const changePassword = (
+  token: string, 
+  oldPassword: string, 
+  newPassword: string, 
+  confirmPassword: string, 
+  setError: (error: string) => void, 
+  setOpen: (isOpen: boolean) => void) => {
+  const changePasswordBody = {
+    old_password: oldPassword,
+    new_password: newPassword,
+    confirm_password: confirmPassword
+  }
+  updatePassword(token, changePasswordBody).then(response => {
+    setError(response.error);
+    if (response.error === undefined) {
+      setOpen(false)
+    }
+  });
+}
+
 export function ChangePasswordModal (props: any) {
     const [oldPassword, setOldPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [error, setError] = useState("");
     const newPasswordErrorText = newPassword === confirmPassword ? "" : "Passwords don't match";
   
     return (
@@ -53,7 +76,9 @@ export function ChangePasswordModal (props: any) {
                       type="password"
                       variant="outlined"
                       value={oldPassword}
+                      error = {error != null && error.length !== 0 && error === "Unauthorized" }
                       onChange={e => setOldPassword(e.target.value)}
+                      helperText={error != null && error.length !== 0 && error === "Unauthorized" ? "Wrong Password": "" }
                       placeholder="Old Password"
                     />
                     <Spacer/>
@@ -79,12 +104,13 @@ export function ChangePasswordModal (props: any) {
                       helperText={newPasswordErrorText}
                     />
                     <ButtonContainer>
-                      <PrimaryButton
-                        disabled={newPasswordErrorText.length !== 0 
-                        || newPassword.length === 0 
-                        || oldPassword.length === 0}>
-                         Change 
-                      </PrimaryButton>
+                        <PrimaryButton
+                          onClick={() => changePassword(props.token, oldPassword, newPassword, confirmPassword, setError, props.setOpen)}
+                          disabled={newPasswordErrorText.length !== 0 
+                          || newPassword.length === 0 
+                          || oldPassword.length === 0}>
+                          Change 
+                        </PrimaryButton>
                     </ButtonContainer>
                 </InnerContainer>
               </OuterContainer>

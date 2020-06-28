@@ -12,8 +12,10 @@ import { Dispatch } from "redux";
 import { 
   setTokenAction,
   setIdAction,
-  setEmailAction 
+  setEmailAction,
+  setUserCoopCycleAction, 
 } from "../state/actions/userActions";
+import { setCoopCycle } from "../state/actions/scheduleActions";
 
 const Wrapper = styled.div`
   display: flex;
@@ -63,6 +65,8 @@ interface ReduxDispatchSignupScreenProps {
   setToken: (token: string) => void;
   setId: (id: number) => void;
   setEmail: (email: string) => void;
+  setMajor: (major: string) => void;
+  setUserCoopCycle: (coopCycle: string) => void;
 }
 
 type Props = ReduxStoreSignupScreenProps &
@@ -161,9 +165,11 @@ class SignupScreenComponent extends React.Component<Props, SignupScreenState> {
             errorEmail: response.errors.email,
           });
         } else {
+          console.log(response);
           this.props.setToken(response.user.token);
           this.props.setId(response.user.id);
           this.props.setEmail(response.user.email);
+          this.props.setUserCoopCycle(response.user.coopCycle);
           this.props.history.push("/home");
         }
       });
@@ -324,7 +330,8 @@ const mapStateToProps = (state: AppState) => ({
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   setToken: (token: string) => dispatch(setTokenAction(token)),
   setId: (id: number) => dispatch(setIdAction(id)),
-  setEmail: (email: string) => dispatch(setEmailAction(email))
+  setEmail: (email: string) => dispatch(setEmailAction(email)),
+  setUserCoopCycle: (coopCycle: string) => dispatch(setUserCoopCycleAction(coopCycle))
 });
 
 /**
