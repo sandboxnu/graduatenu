@@ -41,6 +41,9 @@ export enum SeasonEnum {
   SM = "SM",
 }
 
+/**
+ * Represents a schedule with loading and error information
+ */
 export interface ScheduleSlice {
   currentClassCounter: number;
   isScheduleLoading: boolean; // not used right now
@@ -50,11 +53,17 @@ export interface ScheduleSlice {
   courseWarnings: CourseWarning[];
 }
 
+/**
+ * Represents a schedule, in its present and past state
+ */
 export interface PastPresentSchedule {
   past?: ScheduleSlice;
   present: ScheduleSlice;
 }
 
+/**
+ * Represents a schedule with a string name, for better display of plans dropdown
+ */
 export interface NamedSchedule {
   name: string;
   schedule: PastPresentSchedule;
