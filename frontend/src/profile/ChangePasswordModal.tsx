@@ -57,7 +57,8 @@ export function ChangePasswordModal (props: any) {
     const [newPassword, setNewPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [error, setError] = useState("");
-    const newPasswordErrorText = newPassword === confirmPassword ? "" : "Passwords don't match";
+    const passwordLengthErrorText = newPassword.length > 0 && newPassword.length < 6 ? "Must be atleast 6 characters" : "";
+    const confirmPasswordErrorText = newPassword === confirmPassword ? "" : "Passwords don't match";
   
     return (
           <Modal
@@ -85,27 +86,27 @@ export function ChangePasswordModal (props: any) {
                     id="outlined-basic"
                     type="password"
                     variant="outlined"
-                    error = {newPasswordErrorText.length === 0 ? false: true }
+                    error = {passwordLengthErrorText.length === 0 ? false: true }
                     value={newPassword}
                     onChange={e => setNewPassword(e.target.value)}
                     placeholder="New Password"
-                    helperText={newPasswordErrorText}
+                    helperText={passwordLengthErrorText}
                   />
                   <Spacer/>
                   <TextField
                     id="outlined-basic"
                     type="password"
                     variant="outlined"
-                    error = {newPasswordErrorText.length === 0 ? false: true }
+                    error = {confirmPasswordErrorText.length === 0 ? false: true }
                     value={confirmPassword}
                     onChange={e => setConfirmPassword(e.target.value)}
                     placeholder="Confirm Password"
-                    helperText={newPasswordErrorText}
+                    helperText={confirmPasswordErrorText}
                   />
                   <ButtonContainer>
                       <PrimaryButton
                         onClick={() => changePassword(props.token, oldPassword, newPassword, confirmPassword, setError, props.setOpen)}
-                        disabled={newPasswordErrorText.length !== 0 
+                        disabled={confirmPasswordErrorText.length !== 0 
                         || newPassword.length === 0 
                         || oldPassword.length === 0}>
                         Change 
