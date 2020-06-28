@@ -105,7 +105,11 @@ interface SaveProps {
     major: Major,
     coop: Schedule,
     token: string,
-    id: number
+    id: number,
+    setMajorAction: (major?: Major) => void,
+    setCoopCycleAction: (plan: Schedule) => void,
+    setFullNameAction: (fullName: string) => void,
+    setEmailAction: (email: string) => void,
 }
 
 interface ChangePasswordProps {
@@ -235,23 +239,21 @@ const ProfileEmail = (props: any) => {
     );
 }
 
-const save = ({setEdit, name, email, major, coop, token, id}: SaveProps) => {
-    console.log("SAVE");
-    console.log(token);
-    console.log(id);
-    setEdit(false);
-    setEmailAction(email);
-    setFullNameAction(name);
-    setMajorAction(major);
-    setCoopCycle(coop);
+const save = (props: SaveProps) => {
+    props.setEdit(false);
+    props.setMajorAction(props.major);
+    props.setFullNameAction(props.name);
+    props.setEmailAction(props.email);
+    props.setCoopCycleAction(props.coop);
+
     const user: IUpdateUser = {
-        token: token,
-        id: id
+        token: props.token,
+        id: props.id
     };
     const updateUserData: IUpdateUserData = {
-        email: email,
-        major: major.name,
-        coop_cycle: planToString(coop)
+        email: props.email,
+        major: props.major.name,
+        coop_cycle: planToString(props.coop)
     };
     updateUser(user, updateUserData);
 }
@@ -292,10 +294,7 @@ export const ProfileComponent: React.FC = (props: any) => {
     const [email, setEmail] = useState(props.email);
     const [coop, setCoop] = useState(props.coop)
     const { majors, plans } = props;
-    console.log(props.major);
-    console.log(props.token);
     console.log(props.email);
-    console.log(props.id);
     // TODO: Deal with loading state
 
     return (
@@ -356,7 +355,11 @@ export const ProfileComponent: React.FC = (props: any) => {
                         major={major}
                         coop={coop}
                         token={props.token}
-                        id={props.id}/>
+                        id={props.id}
+                        setMajorAction={props.setMajorAction}
+                        setCoopCycleAction={props.setCoopCycleAction}
+                        setFullNameAction={props.setFullNameAction}
+                        setEmailAction={props.setEmailAction}/>
                 }
                 </InnerContainer>
             </OuterContainer>
@@ -369,10 +372,10 @@ export const ProfileComponent: React.FC = (props: any) => {
  * @param state the AppState
  */
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-    setMajor: (major?: Major) => dispatch(setMajorAction(major)),
-    setCoopCycle: (plan: Schedule) => dispatch(setCoopCycle(plan)),
-    setFullName: (fullName: string) => dispatch(setFullNameAction(fullName)),
-    setEmail: (email: string) => dispatch(setEmailAction(email))
+    setMajorAction: (major?: Major) => dispatch(setMajorAction(major)),
+    setCoopCycleAction: (plan: Schedule) => dispatch(setCoopCycle(plan)),
+    setFullNameAction: (fullName: string) => dispatch(setFullNameAction(fullName)),
+    setEmailAction: (email: string) => dispatch(setEmailAction(email))
 });
   
 /**

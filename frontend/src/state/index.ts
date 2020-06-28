@@ -39,15 +39,26 @@ export const getPlanStrFromState = (state: AppState): string | undefined =>
 export const getMajorFromState = (state: AppState): Major | undefined =>
   state.user.major;
 
+/**
+ * Get the user token from the AppState
+ * @param state the AppState
+ */
 export const getToken = (state: AppState): string =>
   state.user.token;
 
+/**
+ * Get the user id from the AppState
+ * @param state the AppState
+ */
 export const getId = (state: AppState): number =>
   state.user.id;
 
-export const getEmail = (state: AppState): string =>
+/**
+ * Get the user email from the AppState
+ * @param state the AppState
+ */
+export const getEmail = (state: AppState): string => 
   state.user.email;
-
 /**
  * Get the warnings generated from the AppState
  * @param state the AppState

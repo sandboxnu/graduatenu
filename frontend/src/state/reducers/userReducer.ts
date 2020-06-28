@@ -35,7 +35,7 @@ const initialState: UserState = {
   planStr: "",
   token: "",
   id: 0,
-  email: "",
+  email: "test@gmail.com",
   coopCycle: "",
 };
 
