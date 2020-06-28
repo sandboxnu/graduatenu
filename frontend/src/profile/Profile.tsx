@@ -285,6 +285,8 @@ export const ProfileComponent: React.FC = (props: any) => {
     const [email, setEmail] = useState(props.email);
     const [coop, setCoop] = useState(props.coop)
     const { majors, plans } = props;
+    console.log(props.email);
+    console.log(props.id);
     // TODO: Deal with loading state
 
     return (
@@ -317,7 +319,7 @@ export const ProfileComponent: React.FC = (props: any) => {
                                 setName={setName}/>
                             <ProfileMajor
                                 isEdit={isEdit}
-                                major={major.name}
+                                major={"asdf"}
                                 setMajor={setMajor}
                                 majors={majors}/>
                             <ChangePassword

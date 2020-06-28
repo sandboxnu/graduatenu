@@ -63,6 +63,7 @@ interface ReduxStoreLoginScreenProps {
   setCoopCycle: (plan: Schedule) => void;
   setToken: (token: string) => void;
   setId: (id: number) => void;
+  setEmail: (email: string) => void;
 }
 
 type Props = ReduxStoreLoginScreenProps & RouteComponentProps<{}>;
@@ -141,6 +142,7 @@ class LoginScreenComponent extends React.Component<Props, LoginScreenState> {
           this.props.setGraduationYear(response.user.graduationYear);
           this.props.setToken(response.user.token);
           this.props.setId(response.user.id);
+          this.props.setEmail(response.user.email);
           this.props.history.push("/home");
         }
       });
