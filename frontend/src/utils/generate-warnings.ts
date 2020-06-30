@@ -747,9 +747,6 @@ function produceNormalWarnings(
       status
     )
   );
-  warnings = warnings.concat(
-    checkSemesterOverload(term.classes, tracker, term.termId)
-  );
   return warnings;
 }
 
@@ -896,63 +893,39 @@ function checkSemesterCredits(
   let minSeasonCredits;
   let maxSeasonCredits;
 
-  //taking classes normally
+  //if they are taking classes normally: set minCredits and maxCredits based on Season.
   if (status == "CLASSES") {
     //minSeasonCredits is the minimum number of credits to not be under enrolled for the given season.
     minSeasonCredits = seasonCreditTracker[season].seasonMin;
-
     //maxSeasonCredits is the maximum number of credits to not be over enrolled for the given season.
     maxSeasonCredits = seasonCreditTracker[season].seasonMax;
+
+    //if they are taking classes on coop: set maxCredits to 5.
   } else {
     minSeasonCredits = 0;
     maxSeasonCredits = 5; //this is coded as 5 instead of 4 for a single class + lab
   }
 
-  //if currently planning too few credits for the given season (needs at least one credit to throw warning).
-  if (minSeasonCredits > minCredits && minCredits > 0) {
-    warnings.push({
-      message: `Currently enrolled in ${minCredits} credits(s). May be under-enrolled. Minimum credits for this term ${minSeasonCredits}.`,
-      termId: termId,
-    });
-  }
+  //checks the semester is classes or coop before throwing warnings.
+  //no warnings can be thrown during an inactive semester.
+  if (status == "CLASSES" || status == "COOP") {
+    //if currently planning too few credits for the given season (needs at least one credit to throw warning).
+    if (minSeasonCredits > minCredits && minCredits > 0) {
+      warnings.push({
+        message: `Currently enrolled in ${minCredits} credits(s). May be under-enrolled. Minimum credits for this term ${minSeasonCredits}.`,
+        termId: termId,
+      });
+    }
 
-  //if currently planning to overload credits  for this season. Throws warning.
-  if (minCredits > maxSeasonCredits) {
-    warnings.push({
-      message: `Currently enrolled in ${minCredits} credit(s). May be over-enrolled. Maximum credits for this term ${maxSeasonCredits}.`,
-      termId: termId,
-    });
-  }
-  return warnings;
-}
-
-/**
- * Checks that per-semester 4-credit course counts don't exceed 4.
- * @param schedule The schedule to check.
- * @param tracker tracker for courses taken
- */
-function checkSemesterOverload(
-  toCheck: ScheduleCourse[],
-  tracker: CourseTakenTracker,
-  termId: number
-): IWarning[] {
-  let numFourCrediters = 0;
-  for (const course of toCheck) {
-    if (course.numCreditsMin >= 4) {
-      numFourCrediters += 1;
+    //if currently planning to overload credits  for this season. Throws warning.
+    if (minCredits > maxSeasonCredits) {
+      warnings.push({
+        message: `Currently enrolled in ${minCredits} credit(s). May be over-enrolled. Maximum credits for this term ${maxSeasonCredits}.`,
+        termId: termId,
+      });
     }
   }
-
-  if (numFourCrediters > 4) {
-    return [
-      {
-        message: `Overloaded: Enrolled in ${numFourCrediters} four-credit courses.`,
-        termId: termId,
-      },
-    ];
-  } else {
-    return [];
-  }
+  return warnings;
 }
 
 /**
