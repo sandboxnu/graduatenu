@@ -7,11 +7,7 @@ import { connect } from "react-redux";
 import { AppState } from "../state/reducers/state";
 import { Dispatch } from "redux";
 import { getSchedulesFromState, getActiveScheduleFromState } from "../state";
-import {
-  setActiveScheduleAction,
-  removeScheduleAction,
-  addScheduleAction,
-} from "../state/actions/schedulesActions";
+import { setActiveScheduleAction } from "../state/actions/schedulesActions";
 import { NamedSchedule, PastPresentSchedule } from "../models/types";
 
 const SwitchPlanContainer = styled.div`
@@ -33,8 +29,6 @@ interface ReduxStoreSwitchSchedulesProps {
 
 interface ReduxDispatchSwitchSchedulesProps {
   setActiveSchedule: (activeSchedule: number) => void;
-  addSchedule: (name: string, schedule: PastPresentSchedule) => void;
-  removeSchedule: (name: string, schedule: PastPresentSchedule) => void;
 }
 
 type Props = ReduxStoreSwitchSchedulesProps & ReduxDispatchSwitchSchedulesProps;
@@ -133,10 +127,6 @@ const mapStateToProps = (state: AppState) => ({
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   setActiveSchedule: (activeSchedule: number) =>
     dispatch(setActiveScheduleAction(activeSchedule)),
-  addSchedule: (name: string, schedule: PastPresentSchedule) =>
-    dispatch(addScheduleAction(schedule, name)),
-  removeSchedule: (name: string, schedule: PastPresentSchedule) =>
-    dispatch(removeScheduleAction(schedule, name)),
 });
 
 export const SwitchPlanPopper = connect<
