@@ -3,11 +3,7 @@ import { mockData } from "../../data/mockData";
 import produce from "immer";
 import { getType } from "typesafe-actions";
 import { SchedulesAction } from "../actions";
-import {
-  addScheduleAction,
-  removeScheduleAction,
-  setActiveScheduleAction,
-} from "../actions/schedulesActions";
+import { setActiveScheduleAction } from "../actions/schedulesActions";
 
 export interface SchedulesState {
   activeSchedule: number;
@@ -39,22 +35,6 @@ export const schedulesReducer = (
 ) => {
   return produce(state, draft => {
     switch (action.type) {
-      case getType(addScheduleAction): {
-        const { schedule, name } = action.payload;
-
-        draft.schedules.push({ name: name, schedule: schedule });
-
-        return draft;
-      }
-      case getType(removeScheduleAction): {
-        const { schedule, name } = action.payload;
-
-        draft.schedules.filter(
-          (s: NamedSchedule) => name !== s.name && schedule !== s.schedule
-        );
-
-        return draft;
-      }
       case getType(setActiveScheduleAction): {
         const { activeSchedule } = action.payload;
 
