@@ -149,7 +149,8 @@ export interface IUpdateUser {
  */
 export interface IUpdateUserData {
   email?: string;
-  major?: String;
+  major?: string;
+  username?: string;
   academic_year?: number;
   graduation_year?: number;
   coop_cycle?: string;

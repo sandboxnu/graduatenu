@@ -279,10 +279,12 @@ const save = (props: SaveProps) => {
         id: props.id
     };
     const updateUserData: IUpdateUserData = {
+        username: props.name,
         email: props.email,
         major: props.major.name,
         coop_cycle: planToString(props.coop)
     };
+    console.log(updateUserData);
     updateUser(user, updateUserData);
 }
 
