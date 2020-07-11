@@ -2,57 +2,53 @@
  * Describes an abbreviation for one of Northeastern's NUPath academic breadth requirements.
  * Each two-character NUPath directly corresponds to Northeastern's abbreviation of the requirement.
  */
- enum NUPathEnum {
-  ND = "ND",
-  EI = "EI",
-  IC = "IC",
-  FQ = "FQ",
-  SI = "SI",
-  AD = "AD",
-  DD = "DD",
-  ER = "ER",
-  WF = "WF",
-  WD = "WD",
-  WI = "WI",
-  EX = "EX",
-  CE = "CE",
+enum NUPathEnum {
+  ND = 'ND',
+  EI = 'EI',
+  IC = 'IC',
+  FQ = 'FQ',
+  SI = 'SI',
+  AD = 'AD',
+  DD = 'DD',
+  ER = 'ER',
+  WF = 'WF',
+  WD = 'WD',
+  WI = 'WI',
+  EX = 'EX',
+  CE = 'CE',
 }
 
 /**
  * Represents one of the seasons in which a student can take a course, as abbreviated by Northeastern.
  */
 enum SeasonEnum {
-  FL = "FL",
-  SP = "SP",
-  S1 = "S1",
-  S2 = "S2",
-  SM = "SM",
+  FL = 'FL',
+  SP = 'SP',
+  S1 = 'S1',
+  S2 = 'S2',
+  SM = 'SM',
 }
 
 /**
  * A Status is one of on CO-OP, CLASSES, or INACTIVE
  */
 enum StatusEnum {
-  COOP = "COOP",
-  CLASSES = "CLASSES",
-  INACTIVE = "INACTIVE",
-  HOVERINACTIVE = "HOVERINACTIVE",
-  HOVERCOOP = "HOVERCOOP",
+  COOP = 'COOP',
+  CLASSES = 'CLASSES',
+  INACTIVE = 'INACTIVE',
+  HOVERINACTIVE = 'HOVERINACTIVE',
+  HOVERCOOP = 'HOVERCOOP',
 }
 
 export type NUPath = keyof typeof NUPathEnum;
 export type Status = keyof typeof StatusEnum;
 export type Season = keyof typeof SeasonEnum;
-export type SeasonWord = "fall" | "spring" | "summer1" | "summer2";
+export type SeasonWord = 'fall' | 'spring' | 'summer1' | 'summer2';
 
 /**
  * Represents a degree requirement that has not yet been satisfied.
  */
-export type Requirement =
-  | IOrCourse
-  | IAndCourse
-  | ICourseRange
-  | IRequiredCourse;
+export type Requirement = IOrCourse | IAndCourse | ICourseRange | IRequiredCourse;
 
 // TODO: with interfaces, the additional type parameter may not be necessary
 /**
@@ -60,7 +56,7 @@ export type Requirement =
  * @param courses: A list of courses, one of which can be taken to satisfy this requirement.
  */
 export interface IOrCourse {
-  type: "OR";
+  type: 'OR';
   //numCreditsMin: number;
   //numCreditsMax: number;
   courses: Requirement[];
@@ -71,7 +67,7 @@ export interface IOrCourse {
  * @param courses - A list of courses, all of which must be taken to satisfy this requirement.
  */
 export interface IAndCourse {
-  type: "AND";
+  type: 'AND';
   courses: Requirement[];
 }
 
@@ -82,7 +78,7 @@ export interface IAndCourse {
  * @param ranges - The ranges of courses from which courses can be selected.
  */
 export interface ICourseRange {
-  type: "RANGE";
+  type: 'RANGE';
   creditsRequired: number;
   // Potentially add a min/mas to ICourseRange
   ranges: ISubjectRange[];
@@ -106,7 +102,7 @@ export interface ISubjectRange {
  * @param subject - The subject that the course is concerned with, such as CS (Computer Science).
  */
 export interface IRequiredCourse {
-  type: "COURSE";
+  type: 'COURSE';
   classId: number;
   subject: string;
 }
@@ -121,7 +117,7 @@ export type INEUPrereq = INEUAndPrereq | INEUOrPrereq | INEUPrereqCourse;
  * @param values The prerequisites that must be completed for this prereq. to be marked as done.
  */
 export interface INEUAndPrereq {
-  type: "and";
+  type: 'and';
   values: INEUPrereq[];
 }
 
@@ -131,7 +127,7 @@ export interface INEUAndPrereq {
  * @param values The prerequisites of which one must be completed for this prerequisite to be marked as done.
  */
 export interface INEUOrPrereq {
-  type: "or";
+  type: 'or';
   values: INEUPrereq[];
 }
 
@@ -191,7 +187,7 @@ export type IMajorRequirementGroup = ANDSection | ORSection | RANGESection;
  * @param name the name of the section
  */
 export interface ANDSection {
-  type: "AND";
+  type: 'AND';
   requirements: Requirement[];
   name: string;
 }
@@ -205,7 +201,7 @@ export interface ANDSection {
  * @param name the name of this section
  */
 export interface ORSection {
-  type: "OR";
+  type: 'OR';
   requirements: Requirement[];
   numCreditsMin: number;
   numCreditsMax: number;
@@ -221,7 +217,7 @@ export interface ORSection {
  * @param name the name of this section
  */
 export interface RANGESection {
-  type: "RANGE";
+  type: 'RANGE';
   requirements: ICourseRange;
   numCreditsMin: number;
   numCreditsMax: number;
