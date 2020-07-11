@@ -111,6 +111,14 @@ export const scheduleReducer = (
       case getType(changeSemesterStatusAction): {
         const { newStatus, year, season } = action.payload;
         draft.present.schedule.yearMap[year][season].status = newStatus;
+
+        const container = produceWarnings(
+          JSON.parse(JSON.stringify(draft.present.schedule)) // deep copy of schedule, because schedule is modified
+        );
+
+        draft.present.warnings = container.normalWarnings;
+        draft.present.courseWarnings = container.courseWarnings;
+
         return draft;
       }
       case getType(updateSemesterAction): {
