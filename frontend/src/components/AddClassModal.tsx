@@ -1,9 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import {
-  DNDSchedule,
-  DNDScheduleTerm,
-} from "../models/types";
+import { DNDSchedule, DNDScheduleTerm } from "../models/types";
 import { ScheduleCourse } from "graduate-common";
 import { XButton } from "./common";
 import { fetchCourse } from "../api";

@@ -1,9 +1,5 @@
 import { ScheduleCourse } from "graduate-common";
-import {
-  DNDSchedule,
-  IWarning,
-  CourseWarning,
-} from "../../models/types";
+import { DNDSchedule, IWarning, CourseWarning } from "../../models/types";
 import { mockEmptySchedule } from "../../data/mockData";
 import produce from "immer";
 import { getType } from "typesafe-actions";
