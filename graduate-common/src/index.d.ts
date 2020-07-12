@@ -173,6 +173,9 @@ export interface Major {
 
 /**
  * A list of concentration options and the min/max number of concentrations they can do
+ * @param minOptions Minimum required concentrations
+ * @param maxOptions Maximum number of concentrations they can take
+ * @param concentrationOptions All of the concentrations that they can choose from
  */
 export interface Concentrations {
   minOptions: number;
@@ -180,6 +183,12 @@ export interface Concentrations {
   concentrationOptions: Concentration[];
 }
 
+/**
+ * A single Concentration and it's requirements
+ * @param name The name of the concentration
+ * @param requirementGroups a list of the sections of this concentration
+ * @param requirementGroupMap an object containing the sections of this concentration
+ */
 export interface Concentration {
   name: string;
   requirementGroups: string[];

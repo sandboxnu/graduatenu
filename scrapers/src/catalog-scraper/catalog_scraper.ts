@@ -213,7 +213,7 @@ function scrapeMajorDataFromCatalog($: CheerioStatic): Promise<Major> {
 }
 
 /**
- * A function that creates the Requirment group map for a Major.
+ * A function that creates the Requirment group map and concentrations for a Major.
  * @param $ the Cheeriostatic selector function used to query the DOM.
  */
 function createRequirementGroupMap(
@@ -228,6 +228,7 @@ function createRequirementGroupMap(
     .children()
     .each((index: number, table: CheerioElement) => {
       if (table.name == "h2") {
+        // Determines if the major has concentrations based on if the header name includes Concentrations or Options
         is_concentration =
           $(table)
             .text()
@@ -238,6 +239,7 @@ function createRequirementGroupMap(
         current_header = $(table).text();
       }
       if (table.name == "h3") {
+        // Determines the name of the current concentration based on the subheader
         current_concentration = $(table).text();
         current_concentration = current_concentration.replace(
           "Concentration in ",
@@ -248,6 +250,7 @@ function createRequirementGroupMap(
           ""
         );
       }
+      // Parsing as a normal req group
       if (
         !is_concentration &&
         table.name == "table" &&
@@ -260,6 +263,7 @@ function createRequirementGroupMap(
           requirementGroupMap
         );
       }
+      // Parsing as a concentration
       if (
         is_concentration &&
         table.name == "table" &&

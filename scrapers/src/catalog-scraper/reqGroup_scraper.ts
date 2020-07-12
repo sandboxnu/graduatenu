@@ -124,6 +124,7 @@ export function createRequirementGroup(
         return undefined;
       }
     } else if (sectionType === SectionType.OR && classTD.length > 0) {
+      // If it's a class and the current row is a class, check if there's an indent (only classes with indents are OR Sections)
       let div = classTD.find("div");
       if (div.length == 0) {
         sectionType = SectionType.AND;

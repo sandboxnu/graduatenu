@@ -135,6 +135,12 @@ function parseOrRow(
   }
 }
 
+/**
+ * Parses a comment section as a full range (0 - 9999) based on the subject(s) mentioned in the
+ * comment
+ * @param $
+ * @param row
+ */
 function parseAsCommentRange(
   $: CheerioStatic,
   row: CheerioElement
@@ -190,7 +196,7 @@ export function parseSubjectRangeRow(
 ): Array<ISubjectRange> {
   let currentRow: Cheerio = $(row);
   let anchors: Cheerio = currentRow.find(".courselistcomment");
-
+  // If the anchor isn't indented as a comment or contains "course" or "elevtive" it could be a full range
   if (
     anchors.length === 0 ||
     ((anchors.text().includes("course") ||
@@ -220,9 +226,13 @@ export function parseSubjectRangeRow(
 
   //default to 9999, if upper bound does not exist.
   let idRangeEnd: number = 9999;
+
+  // TODO: In the future, possibly loop through each "to" if there are multiple ranges in
+  // a single header
   if (splitLowerAnchor.includes("to")) {
+    // find the location of "to" if it's included, because that word should be the midpoint of
+    // the course start and end
     let index = splitLowerAnchor.indexOf("to");
-    // upper bound exists, get range end.
     subject = splitLowerAnchor[index - 2];
     idRangeStart = parseInt(splitLowerAnchor[index - 1]);
     idRangeEnd = parseInt(splitLowerAnchor[index + 2]);
