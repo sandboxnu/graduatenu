@@ -283,7 +283,7 @@ export class RequirementSection extends React.Component<
 
     return (
       <div key={index.toString()}>
-        {this.convertTypeToText(req.type, level, top, index)}
+        {this.convertTypeToText(req, level, top, index)}
         {req.courses
           .filter(c => c.type === "COURSE")
           .map(c => this.renderCourse(level, c as IRequiredCourse))}
@@ -293,7 +293,9 @@ export class RequirementSection extends React.Component<
             this.renderRequirement(c, index, level + 1, req.type !== "AND")
           )}
         {req.courses
-          .filter(c => c.type === "OR")
+          .filter(
+            c => c.type === "OR" || c.type === "CREDITS" || c.type === "RANGE"
+          )
           .map((c: Requirement, index: number) =>
             this.renderRequirement(c, index, level + 1, false)
           )}
@@ -309,7 +311,7 @@ export class RequirementSection extends React.Component<
     return (
       <div>
         <ANDORText style={{ marginBottom: 8 }}>
-          Complete {req.creditsRequired} credits from the following courses that
+          Complete {req.creditsRequired} credits from the following ranges that
           are not already required:
         </ANDORText>
         {req.ranges.map((r: ISubjectRange, index: number) => {
@@ -394,8 +396,13 @@ export class RequirementSection extends React.Component<
    * @param level the current indentation level for this display text
    * @param top determines if this display text is at top level
    */
-  convertTypeToText(type: string, level: number, top: boolean, index: number) {
-    if (type === "OR") {
+  convertTypeToText(
+    req: Requirement,
+    level: number,
+    top: boolean,
+    index: number
+  ) {
+    if (req.type === "OR") {
       return (
         <SubtitleWrapper>
           {top && <Separator />}
@@ -405,14 +412,25 @@ export class RequirementSection extends React.Component<
         </SubtitleWrapper>
       );
     }
-    if (type === "AND") {
+    if (req.type === "CREDITS") {
+      return (
+        <SubtitleWrapper>
+          {top && <Separator />}
+          <SubtitleText level={top ? level + 1 : level}>
+            Complete {req.minCredits} to {req.maxCredits} credits from the
+            following courses:
+          </SubtitleText>
+        </SubtitleWrapper>
+      );
+    }
+    if (req.type === "AND") {
       if (index !== 0 && top) {
         return <Separator />;
       }
       return "";
     }
 
-    return type;
+    return req.type;
   }
 
   /**
