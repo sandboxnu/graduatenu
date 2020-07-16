@@ -8,6 +8,7 @@ import { Status } from "graduate-common";
 interface Props {
   status: Status;
   onChange: (event: any) => void;
+  year: number;
 }
 
 const Container = withStyles(theme => ({
@@ -61,7 +62,9 @@ export const SemesterType: React.SFC<Props> = props => {
       onChange={(event: any) => props.onChange(event)}
     >
       <MenuItem value={"CLASSES"}>Classes</MenuItem>
-      <MenuItem value={"COOP"}>Co-op</MenuItem>
+      <MenuItem value={"COOP"} disabled={props.year === 1}>
+        Co-op
+      </MenuItem>
       <MenuItem value={"INACTIVE"}>Vacation</MenuItem>
     </Container>
   );

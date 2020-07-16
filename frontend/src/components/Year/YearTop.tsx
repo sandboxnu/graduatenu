@@ -6,6 +6,9 @@ import { Dispatch } from "redux";
 import { changeSemesterStatusAction } from "../../state/actions/scheduleActions";
 import { AppState } from "../../state/reducers/state";
 import { SemesterType } from "./SemesterType";
+import { getScheduleFromState } from "../../state";
+import { DNDSchedule } from "../../models/types";
+import { getPositionOfYearInSchedule } from "../../utils";
 
 const Container = styled.div`
   display: flex;
@@ -32,6 +35,10 @@ interface YearTopProps {
   summer2Status: Status;
 }
 
+interface ReduxStoreYearTopProps {
+  schedule: DNDSchedule;
+}
+
 interface ReduxDispatchYearTopProps {
   handleStatusChange: (
     newStatus: Status,
@@ -40,7 +47,7 @@ interface ReduxDispatchYearTopProps {
   ) => void;
 }
 
-type Props = YearTopProps & ReduxDispatchYearTopProps;
+type Props = YearTopProps & ReduxStoreYearTopProps & ReduxDispatchYearTopProps;
 
 interface YearTopState {
   tappedSemester: SeasonWord | null;
@@ -123,7 +130,8 @@ class YearTopComponent extends React.Component<Props, YearTopState> {
   };
 
   render() {
-    const { year } = this.props;
+    const { year, schedule } = this.props;
+    const yearPosition = getPositionOfYearInSchedule(schedule, year);
     return (
       <Container>
         <div style={textContainerStyle}>
@@ -132,6 +140,7 @@ class YearTopComponent extends React.Component<Props, YearTopState> {
             <span style={{ fontWeight: "normal" }}> - </span>
           </SemesterText>
           <SemesterType
+            year={yearPosition}
             status={this.state.fallStatus}
             onChange={(event: any) => this.handleChange(event, "fall")}
           />
@@ -139,6 +148,7 @@ class YearTopComponent extends React.Component<Props, YearTopState> {
         <div style={textContainerStyle}>
           <SemesterText>Spring {year + 1} - </SemesterText>
           <SemesterType
+            year={yearPosition}
             status={this.state.springStatus}
             onChange={(event: any) => this.handleChange(event, "spring")}
           />
@@ -146,6 +156,7 @@ class YearTopComponent extends React.Component<Props, YearTopState> {
         <div style={textContainerStyle}>
           <SemesterText>Summer I {year + 1} - </SemesterText>
           <SemesterType
+            year={yearPosition}
             status={this.state.summer1Status}
             onChange={(event: any) => this.handleChange(event, "summer1")}
           />
@@ -153,6 +164,7 @@ class YearTopComponent extends React.Component<Props, YearTopState> {
         <div style={textContainerStyle}>
           <SemesterText>Summer II {year + 1} - </SemesterText>
           <SemesterType
+            year={yearPosition}
             status={this.state.summer2Status}
             onChange={(event: any) => this.handleChange(event, "summer2")}
           />
@@ -171,6 +183,10 @@ const textContainerStyle: React.CSSProperties = {
   flex: 1,
 };
 
+const mapStateToProps = (state: AppState) => ({
+  schedule: getScheduleFromState(state),
+});
+
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   handleStatusChange: (
     newStatus: Status,
@@ -180,11 +196,11 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 });
 
 export const YearTop = connect<
-  {},
+  ReduxStoreYearTopProps,
   ReduxDispatchYearTopProps,
   YearTopProps,
   AppState
 >(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(YearTopComponent);
