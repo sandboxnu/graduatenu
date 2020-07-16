@@ -121,6 +121,7 @@ export class EditPlanPopperComponent extends React.Component<
   onChooseMajor(event: React.SyntheticEvent<{}>, value: any) {
     const maj = this.props.majors.find((m: any) => m.name === value);
     this.props.setMajor(maj);
+    this.props.setCoopCycle(undefined);
   }
 
   /**
