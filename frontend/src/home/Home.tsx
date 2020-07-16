@@ -5,13 +5,9 @@ import {
   DNDSchedule,
   IWarning,
   DNDScheduleYear,
-  DNDScheduleTerm
+  DNDScheduleTerm,
 } from "../models/types";
-import {
-  Major,
-  Status,
-  SeasonWord
-} from "graduate-common";
+import { Major, Status, SeasonWord } from "graduate-common";
 import styled from "styled-components";
 import { Year } from "../components/Year";
 import {
@@ -39,6 +35,7 @@ import {
   setDNDScheduleAction,
 } from "../state/actions/scheduleActions";
 import { EditPlanPopper } from "./EditPlanPopper";
+import { SwitchPlanPopper } from "./SwitchPlanPopper";
 
 const OuterContainer = styled.div`
   display: flex;
@@ -294,7 +291,8 @@ class HomeComponent extends React.Component<Props> {
                 </HomePlan>
               </HomeTop>
               <HomePlan>
-                <h2>Plan Of Study</h2>
+                <h2>Plan Of Study&nbsp;</h2>
+                <SwitchPlanPopper />
               </HomePlan>
               {this.renderYears()}
             </Container>

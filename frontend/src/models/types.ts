@@ -42,6 +42,34 @@ export enum SeasonEnum {
 }
 
 /**
+ * Represents a schedule with loading and error information
+ */
+export interface ScheduleSlice {
+  currentClassCounter: number;
+  isScheduleLoading: boolean; // not used right now
+  scheduleError: string; // not used right now
+  schedule: DNDSchedule;
+  warnings: IWarning[];
+  courseWarnings: CourseWarning[];
+}
+
+/**
+ * Represents a schedule, in its present and past state
+ */
+export interface PastPresentSchedule {
+  past?: ScheduleSlice;
+  present: ScheduleSlice;
+}
+
+/**
+ * Represents a schedule with a string name, for better display of plans dropdown
+ */
+export interface NamedSchedule {
+  name: string;
+  schedule: PastPresentSchedule;
+}
+
+/**
  * A Status is one of on CO-OP, CLASSES, or INACTIVE
  */
 export enum StatusEnum {

@@ -97,7 +97,6 @@ export function moveCourse(
     if (
       newFinishSemester.status === "INACTIVE" ||
       newFinishSemester.status === "HOVERINACTIVE" ||
-      newFinishSemester.status === "COOP" ||
       newFinishSemester.status === "HOVERCOOP"
     ) {
       newFinishSemester.status = "CLASSES";
@@ -196,7 +195,6 @@ export async function addCourseFromSidebar(
   if (
     newFinishSemester.status === "INACTIVE" ||
     newFinishSemester.status === "HOVERINACTIVE" ||
-    newFinishSemester.status === "COOP" ||
     newFinishSemester.status === "HOVERCOOP"
   ) {
     newFinishSemester.status = "CLASSES";
