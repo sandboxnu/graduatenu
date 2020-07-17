@@ -4,12 +4,14 @@ import { DNDSchedule, DNDScheduleTerm } from "../models/types";
 import { ScheduleCourse } from "graduate-common";
 import { XButton } from "./common";
 import { fetchCourse } from "../api";
-import { Modal, CircularProgress } from "@material-ui/core";
+import { Modal, CircularProgress, TextField } from "@material-ui/core";
 import { AppState } from "../state/reducers/state";
 import { getScheduleFromState } from "../state";
 import { connect } from "react-redux";
-import { withRouter, RouteComponentProps } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { withToast } from "../home/toastHook";
+import { NextButton } from "./common/NextButton";
+import { NonDraggableClassBlock } from "./ClassBlocks/NonDraggableClassBlock";
 
 const InnerSection = styled.section`
   position: fixed;
@@ -23,6 +25,7 @@ const InnerSection = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
+  outline: none;
 `;
 
 const CloseButtonWrapper = styled.div`
@@ -31,40 +34,16 @@ const CloseButtonWrapper = styled.div`
   right: 18px;
 `;
 
-const StyledLabel = styled.label`
+const FormColumn = styled.div`
   display: flex;
   flex-direction: column;
-`;
-
-const FormRow = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-`;
-
-const SearchButton = styled.button`
-  margin: 8px;
-`;
-
-const SubmitButton = styled.button`
-  margin: 8px;
 `;
 
 const QueuedClassesWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-`;
-
-const QueuedClass = styled.div`
-  border: 1px solid black;
-  margin-top: 4px;
-  margin-bottom: 4px;
-  display: flex;
-  flex-direction: row;
-  justify-content: start;
-  align-items: center;
-  padding: 4px;
+  margin-top: 24px;
 `;
 
 const ErrorTextWrapper = styled.div`
@@ -220,17 +199,46 @@ export class AddClassModal extends React.Component<
         {this.state.queuedCourses.map(
           (course: ScheduleCourse, index: number) => {
             return (
-              <QueuedClass>
-                <p style={{ width: 90 }}>{course.subject + course.classId}</p>
-                <p>{course.name}</p>
-                <XButton
-                  onClick={this.removeQueuedClass.bind(this, index)}
-                ></XButton>
-              </QueuedClass>
+              <NonDraggableClassBlock
+                course={course}
+                onDelete={this.removeQueuedClass.bind(this, index)}
+              />
             );
           }
         )}
       </QueuedClassesWrapper>
+    );
+  }
+
+  renderSubjectTextField() {
+    return (
+      <TextField
+        id="outlined-basic"
+        label="Subject"
+        variant="outlined"
+        value={this.state.formSubject}
+        onChange={this.handleSubjectChange.bind(this)}
+        placeholder="CS"
+        error={this.state.formSubject.length === 0}
+        style={{ marginTop: 36, minWidth: 326 }}
+        color="secondary"
+      />
+    );
+  }
+
+  renderClassIDTextField() {
+    return (
+      <TextField
+        id="outlined-basic"
+        label="Class ID"
+        variant="outlined"
+        value={this.state.formClassId}
+        onChange={this.handleClassIdChange.bind(this)}
+        placeholder="3500"
+        error={this.state.formClassId.length === 0}
+        style={{ marginTop: 12, marginBottom: 12, minWidth: 326 }}
+        color="secondary"
+      />
     );
   }
 
@@ -249,7 +257,7 @@ export class AddClassModal extends React.Component<
     const { visible } = this.props;
     return (
       <Modal
-        style={{ outline: 0 }}
+        style={{ outline: "none" }}
         open={visible}
         onClose={this.prepareToClose.bind(this)}
         aria-labelledby="simple-modal-title"
@@ -260,40 +268,21 @@ export class AddClassModal extends React.Component<
             <XButton onClick={this.prepareToClose.bind(this)}></XButton>
           </CloseButtonWrapper>
           <h1 id="simple-modal-title">Add classes</h1>
-          <form>
-            <FormRow>
-              <StyledLabel>
-                Subject:
-                <input
-                  type="text"
-                  placeholder="CS"
-                  value={this.state.formSubject}
-                  onChange={this.handleSubjectChange.bind(this)}
-                ></input>
-              </StyledLabel>
-              <StyledLabel>
-                Class ID:
-                <input
-                  type="text"
-                  placeholder="3500"
-                  value={this.state.formClassId}
-                  onChange={this.handleClassIdChange.bind(this)}
-                ></input>
-              </StyledLabel>
-            </FormRow>
-          </form>
-          <SearchButton onClick={this.handleSearch.bind(this)}>
-            Search
-          </SearchButton>
+          <FormColumn>
+            {this.renderSubjectTextField()}
+            {this.renderClassIDTextField()}
+          </FormColumn>
+          <NextButton text="Search" onClick={this.handleSearch.bind(this)} />
           {this.renderQueuedClasses()}
-          <SubmitButton
+          <NextButton
+            text={
+              this.state.queuedCourses.length === 1
+                ? "Add Class"
+                : "Add Classes"
+            }
             onClick={this.handleSubmit.bind(this)}
             disabled={this.state.queuedCourses.length === 0}
-          >
-            {this.state.queuedCourses.length === 1
-              ? "Add Class"
-              : "Add Classes"}
-          </SubmitButton>
+          />
         </InnerSection>
       </Modal>
     );

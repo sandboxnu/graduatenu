@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { DNDScheduleCourse } from "../../models/types";
+import { ScheduleCourse } from "graduate-common";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { IconButton } from "@material-ui/core";
 
@@ -37,7 +37,7 @@ const Subtitle = styled.div`
 `;
 
 interface ClassBlockBodyProps {
-  course: DNDScheduleCourse;
+  course: ScheduleCourse;
   hovering: boolean;
   onDelete: () => void;
 }
