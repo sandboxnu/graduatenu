@@ -31,7 +31,7 @@ export const App = ({
               path="/completedCourses"
               component={CompletedCoursesScreen}
             />
-            <Route path="/" component={Onboarding} />
+            <Route exact path="/" component={Onboarding} />
           </Switch>
         </Router>
       </PersistGate>
