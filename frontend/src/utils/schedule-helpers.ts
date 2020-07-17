@@ -189,3 +189,7 @@ export function getPositionOfYearInSchedule(
   }
   return index + 1;
 }
+
+export function isYearInPast(year: number): boolean {
+  return new Date().getFullYear() > year + 1;
+}
