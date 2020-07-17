@@ -4,13 +4,12 @@ import {
   DNDScheduleTerm,
   DNDSchedule,
   DNDScheduleYear,
-
 } from "../../models/types";
-import {   
+import {
   IRequiredCourse,
   ScheduleCourse,
   Status,
-  SeasonWord 
+  SeasonWord
 } from "graduate-common";
 import { XButton } from "../common";
 import { Modal } from "@material-ui/core";

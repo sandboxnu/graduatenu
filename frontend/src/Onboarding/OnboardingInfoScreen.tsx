@@ -353,7 +353,7 @@ class OnboardingScreenComponent extends React.Component<
 
           {textFieldStr.length !== 0 && !!year && !!gradYear ? (
             <Link
-              to={!!this.state.major ? "/completedCourses" : "/home"}
+              to={!!this.state.major ? "/completedCourses" : "/signup"}
               onClick={this.onSubmit.bind(this)}
               style={{ textDecoration: "none" }}
             >

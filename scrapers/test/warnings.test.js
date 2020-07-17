@@ -105,10 +105,6 @@ test("Tests warnings produce properly for cs_sched_1.json", () => {
       termId: 201860,
     },
     {
-      message: "Overloaded: Enrolled in 10 four-credit courses.",
-      termId: 201860,
-    },
-    {
       message:
         "Currently enrolled in 20 credit(s). May be over-enrolled. Maximum credits for this term 18.",
       termId: 201910,
