@@ -19,6 +19,13 @@ export const getFullNameFromState = (state: AppState): string =>
   state.user.fullName;
 
 /**
+ * Get a users fullname from the AppState
+ * @param state the AppState
+ */
+export const getUserCoopCycleFromState = (state: AppState): string =>
+  state.user.coopCycle;
+
+/**
  * Get the schedule object from the AppState
  * @param state the AppState
  */

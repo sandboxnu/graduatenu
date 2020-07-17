@@ -12,14 +12,14 @@ import EditIcon from '@material-ui/icons/Edit';
 import {
     setMajorAction,
     setFullNameAction,
-    setEmailAction
+    setEmailAction,
+    setUserCoopCycleAction
 } from "../state/actions/userActions";
-import { setCoopCycle } from "../state/actions/scheduleActions";
 import {
     getMajors,
     getPlans,
     getMajorFromState,
-    getScheduleFromState,
+    getUserCoopCycleFromState,
     getFullNameFromState,
     getToken,
     getId,
@@ -129,11 +129,11 @@ interface SaveProps {
     name: string,
     email: string,
     major: Major,
-    coop: Schedule,
+    coop: string,
     token: string,
     id: number,
     setMajorAction: (major?: Major) => void,
-    setCoopCycleAction: (plan: Schedule) => void,
+    setCoopCycleAction: (plan: string) => void,
     setFullNameAction: (fullName: string) => void,
     setEmailAction: (email: string) => void,
 }
@@ -208,7 +208,7 @@ const ProfileCoop = (props: ProfileCoopProps) => {
                     )}
                     value={props.coop}
                     onChange={(event: React.SyntheticEvent<{}>, value: any) => 
-                        props.setCoop(props.plans[props.major.name].find((p: Schedule) => planToString(p) === value))}
+                        props.setCoop(value)}
                 />
             }
             {!props.isEdit && 
@@ -282,9 +282,8 @@ const save = (props: SaveProps) => {
         username: props.name,
         email: props.email,
         major: props.major.name,
-        coop_cycle: planToString(props.coop)
+        coop_cycle: props.coop
     };
-    console.log(updateUserData);
     updateUser(user, updateUserData);
 }
 
@@ -324,9 +323,8 @@ export const ProfileComponent: React.FC = (props: any) => {
     const [email, setEmail] = useState(props.email);
     const [coop, setCoop] = useState(props.coop)
     const { majors, plans } = props;
-    console.log(props.email);
-    // TODO: Deal with loading state
 
+    console.log(props);
     return (
         <Container>
             <HeaderRow>
@@ -357,24 +355,28 @@ export const ProfileComponent: React.FC = (props: any) => {
                                 setName={setName}/>
                             <ProfileMajor
                                 isEdit={isEdit}
-                                major={major.name}
+                                major={major == undefined ? "" : major.name}
                                 setMajor={setMajor}
                                 majors={majors}/>
-                            <ChangePassword
-                                token={props.token}
-                                id={props.id}/>
+                            { (props.token != undefined && props.token > 0) && 
+                                <ChangePassword
+                                    token={props.token}
+                                    id={props.id}/>
+                            }
                         </ProfileColumn>
                         <ProfileColumn> 
                             <ProfileEmail
                                 isEdit={isEdit}
                                 email={email}
                                 setEmail={setEmail}/>
-                            <ProfileCoop
-                                isEdit={isEdit}
-                                coop={planToString(coop)}
-                                setCoop={setCoop}
-                                plans={plans}
-                                major={major}/>
+                            {major != undefined &&
+                                <ProfileCoop
+                                    isEdit={isEdit}
+                                    coop={coop == undefined ? "" : coop}
+                                    setCoop={setCoop}
+                                    plans={plans}
+                                    major={major}/>
+                            }
                         </ProfileColumn>
                     </DataContainer>
                 {isEdit && 
@@ -403,7 +405,7 @@ export const ProfileComponent: React.FC = (props: any) => {
  */
 const mapDispatchToProps = (dispatch: Dispatch) => ({
     setMajorAction: (major?: Major) => dispatch(setMajorAction(major)),
-    setCoopCycleAction: (plan: Schedule) => dispatch(setCoopCycle(plan)),
+    setCoopCycleAction: (plan: string) => dispatch(setUserCoopCycleAction(plan)),
     setFullNameAction: (fullName: string) => dispatch(setFullNameAction(fullName)),
     setEmailAction: (email: string) => dispatch(setEmailAction(email))
 });
@@ -415,7 +417,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 const mapStateToProps = (state: AppState) => ({
     name: getFullNameFromState(state),
     major: getMajorFromState(state),
-    coop: getScheduleFromState(state),
+    coop: getUserCoopCycleFromState(state),
     majors: getMajors(state),
     plans: getPlans(state),
     token: getToken(state),

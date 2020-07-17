@@ -165,7 +165,6 @@ class SignupScreenComponent extends React.Component<Props, SignupScreenState> {
             errorEmail: response.errors.email,
           });
         } else {
-          console.log(response);
           this.props.setToken(response.user.token);
           this.props.setId(response.user.id);
           this.props.setEmail(response.user.email);
