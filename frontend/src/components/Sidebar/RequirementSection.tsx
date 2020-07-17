@@ -12,8 +12,6 @@ import {
   DNDScheduleCourse,
 } from "../../models/types";
 import styled from "styled-components";
-import CheckIcon from "@material-ui/icons/Check";
-import { styled as materialStyled } from "@material-ui/styles";
 import ExpandMoreOutlinedIcon from "@material-ui/icons/ExpandMoreOutlined";
 import ExpandLessOutlinedIcon from "@material-ui/icons/ExpandLessOutlined";
 import { SidebarAddClassModal } from "./SidebarAddClassModal";
@@ -96,10 +94,6 @@ const ANDORText = styled.p`
   font-size: 14px;
   margin: 4px;
 `;
-
-const MyCheckIcon = materialStyled(CheckIcon)({
-  color: "green",
-});
 
 interface RequirementSectionProps {
   title: string;
