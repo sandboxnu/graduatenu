@@ -150,7 +150,7 @@ class OnboardingScreenComponent extends React.Component<
   onChangeMajor(event: React.SyntheticEvent<{}>, value: any) {
     const maj = this.props.majors.find((m: any) => m.name === value);
 
-    this.setState({ major: maj });
+    this.setState({ major: maj, planStr: "" });
   }
 
   onChangePlan(event: React.SyntheticEvent<{}>, value: any) {
