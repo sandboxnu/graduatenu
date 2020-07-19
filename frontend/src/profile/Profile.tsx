@@ -164,6 +164,7 @@ const ProfileName = (props: ProfileNameProps) => {
 }
 
 const ProfileMajor = (props: ProfileMajorProps) => {
+    const val = props.major != "" ? props.major : "None Selected";
     return (
         <ProfileEntryContainer>
             <ItemTitle> Major </ItemTitle>
@@ -178,18 +179,19 @@ const ProfileMajor = (props: ProfileMajorProps) => {
                         fullWidth
                     />
                     )}
-                    value={props.major}
+                    value={val}
                     onChange={(event: React.SyntheticEvent<{}>, value: any) => props.setMajor(props.majors.find((m: Major) => m.name == value))}
                 />
             }
             {!props.isEdit && 
-                <ItemEntry> {props.major} </ItemEntry>
+                <ItemEntry> {val} </ItemEntry>
             }
         </ProfileEntryContainer>
     );
 }
 
 const ProfileCoop = (props: ProfileCoopProps) => {
+    const val = props.coop != "" ? props.coop : "None Selected";
     return (
         <ProfileEntryContainer>
             <ItemTitle> Co-op Cycle </ItemTitle>
@@ -206,13 +208,13 @@ const ProfileCoop = (props: ProfileCoopProps) => {
                         fullWidth
                     />
                     )}
-                    value={props.coop}
+                    value={val}
                     onChange={(event: React.SyntheticEvent<{}>, value: any) => 
                         props.setCoop(value)}
                 />
             }
             {!props.isEdit && 
-                <ItemEntry> {props.coop} </ItemEntry>
+                <ItemEntry> {val} </ItemEntry>
             }
         </ProfileEntryContainer>
     );
@@ -278,11 +280,12 @@ const save = (props: SaveProps) => {
         token: props.token,
         id: props.id
     };
+
     const updateUserData: IUpdateUserData = {
         username: props.name,
         email: props.email,
-        major: props.major.name,
-        coop_cycle: props.coop
+        major: props.major != undefined ? props.major.name : "",
+        coop_cycle: props.coop != undefined && props.coop != "None Selected" ? props.coop : "",
     };
     updateUser(user, updateUserData);
 }
@@ -358,7 +361,7 @@ export const ProfileComponent: React.FC = (props: any) => {
                                 major={major == undefined ? "" : major.name}
                                 setMajor={setMajor}
                                 majors={majors}/>
-                            { (props.token != undefined && props.token > 0) && 
+                            { (props.token != undefined && props.token.length > 0) && 
                                 <ChangePassword
                                     token={props.token}
                                     id={props.id}/>

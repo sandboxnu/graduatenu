@@ -1,5 +1,5 @@
 import React from "react";
-import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
+import { withRouter, RouteComponentProps, Link } from "react-router-dom";
 import Popper from "@material-ui/core/Popper";
 import { Autocomplete } from "@material-ui/lab";
 import { TextField, Button } from "@material-ui/core";
@@ -33,6 +33,22 @@ import { getStandingFromCompletedCourses } from "../utils";
 const PlanPopper = styled(Popper)<any>`
   margin-top: 4px;
 `;
+
+const TopRow = styled.div`
+  display: flex;
+  justify-content: space-between;
+`
+
+const EditProfileButton = styled(Link)`
+  font-size: 0.8em;
+  color: #EB5757;
+  &:focus, &:visited, &:link{
+    text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+`
 
 const PlanCard = styled.div<any>`
   width: 266px;
@@ -245,7 +261,13 @@ export class EditPlanPopperComponent extends React.Component<
         >
           <ClickAwayListener onClickAway={this.handleClickAway.bind(this)}>
             <PlanCard>
-              <NameText>{this.props.name}</NameText>
+              <TopRow>
+                <NameText>{this.props.name}</NameText>
+                <EditProfileButton
+                  to="/profile">
+                    Edit Profile
+                </EditProfileButton>
+               </TopRow>
               <StandingText>
                 {getStandingFromCompletedCourses(this.props.creditsTaken)}
               </StandingText>
