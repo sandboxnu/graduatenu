@@ -26,6 +26,7 @@ const InnerSection = styled.section`
   flex-direction: column;
   align-items: center;
   outline: none;
+  padding-bottom: 24px;
 `;
 
 const CloseButtonWrapper = styled.div`
@@ -219,9 +220,7 @@ export class AddClassModal extends React.Component<
         value={this.state.formSubject}
         onChange={this.handleSubjectChange.bind(this)}
         placeholder="CS"
-        error={this.state.formSubject.length === 0}
         style={{ marginTop: 36, minWidth: 326 }}
-        color="secondary"
       />
     );
   }
@@ -235,9 +234,7 @@ export class AddClassModal extends React.Component<
         value={this.state.formClassId}
         onChange={this.handleClassIdChange.bind(this)}
         placeholder="3500"
-        error={this.state.formClassId.length === 0}
         style={{ marginTop: 12, marginBottom: 12, minWidth: 326 }}
-        color="secondary"
       />
     );
   }
