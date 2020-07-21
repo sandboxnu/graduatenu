@@ -20,6 +20,13 @@ export const getFullNameFromState = (state: AppState): string =>
   state.user.fullName;
 
 /**
+ * Get a users academic year from the AppState
+ * @param state the AppState
+ */
+export const getAcademicYearFromState = (state: AppState): number =>
+  state.user.academicYear;
+
+/**
  * Get the schedule object from the AppState
  * @param state the AppState
  */

@@ -190,6 +190,6 @@ export function getPositionOfYearInSchedule(
   return index + 1;
 }
 
-export function isYearInPast(year: number): boolean {
-  return new Date().getFullYear() > year + 1;
+export function isYearInPast(yearIndex: number, academicYear: number): boolean {
+  return academicYear > yearIndex + 1;
 }

@@ -7,11 +7,20 @@ import { SEMESTER_MIN_HEIGHT } from "../../constants";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import { isYearInPast } from "../../utils";
+import { getAcademicYearFromState } from "../../state";
+import { AppState } from "../../state/reducers/state";
+import { connect } from "react-redux";
 
-interface Props {
+interface ReduxStoreYearProps {
+  academicYear: number;
+}
+
+interface YearProps {
   index: number;
   schedule: DNDSchedule;
 }
+
+type Props = ReduxStoreYearProps & YearProps;
 
 interface State {
   expanded: boolean;
@@ -31,14 +40,12 @@ const YearBody = styled.div`
   min-height: ${SEMESTER_MIN_HEIGHT}px;
 `;
 
-export class Year extends React.Component<Props, State> {
+class YearComponent extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
-    const year = props.schedule.years[props.index];
-
     this.state = {
-      expanded: !isYearInPast(year),
+      expanded: !isYearInPast(props.index, props.academicYear),
     };
   }
 
@@ -82,3 +89,11 @@ export class Year extends React.Component<Props, State> {
     );
   }
 }
+
+const mapStateToProps = (state: AppState) => ({
+  academicYear: getAcademicYearFromState(state),
+});
+
+export const Year = connect<ReduxStoreYearProps, {}, {}, AppState>(
+  mapStateToProps
+)(YearComponent);
