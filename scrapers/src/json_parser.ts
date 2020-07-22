@@ -17,7 +17,7 @@ import {
   Schedule,
   ScheduleCourse,
   ScheduleYear,
-} from "graduate-common";
+} from "../../common/types";
 import {
   courseCode,
   doesPrereqExist,

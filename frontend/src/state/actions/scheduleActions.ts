@@ -4,7 +4,7 @@ import {
   DNDScheduleTerm,
   DNDSchedule,
 } from "../../models/types";
-import { ScheduleCourse, Status, SeasonWord, Schedule } from "graduate-common";
+import { ScheduleCourse, Status, SeasonWord, Schedule } from "../../../../common/types";
 
 export const addClassesAction = createAction(
   "schedule/ADD_CLASSES",

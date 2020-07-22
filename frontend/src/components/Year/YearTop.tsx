@@ -1,6 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
-import { SeasonWord, Status } from "graduate-common";
+import { SeasonWord, Status } from "../../../../common/types";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
 import { changeSemesterStatusAction } from "../../state/actions/scheduleActions";
