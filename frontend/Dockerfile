@@ -2,7 +2,7 @@
 FROM node:12-alpine as build
 WORKDIR /app
 COPY frontend/package.json /app/package.json
-COPY graduate-common /graduate-common
+COPY common /common
 RUN yarn install 
 COPY frontend/src /app/src
 COPY frontend/public /app/public
