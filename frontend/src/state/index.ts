@@ -209,3 +209,12 @@ export const isUserLoggedIn = (state: AppState): boolean => {
 export const getClosedYearsFromState = (state: AppState): Set<number> => {
   return state.schedule.present.closedYears;
 };
+
+/**
+ * Get the active current class counter from the AppState
+ * @param state the AppState
+ */
+export const getCurrentClassCounterFromState = (state: AppState): number => {
+  return state.schedules.schedules[state.schedules.activeSchedule].schedule
+    .present.currentClassCounter;
+};

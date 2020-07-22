@@ -19,7 +19,15 @@ import { convertToDNDCourses } from "../../utils/schedule-helpers";
 import { fetchCourse } from "../../api";
 import { Droppable } from "react-beautiful-dnd";
 import { SidebarClassBlock } from "./SidebarClassBlock";
+<<<<<<< HEAD
 import { FormatListNumberedRounded } from "@material-ui/icons";
+=======
+import { connect } from "react-redux";
+import { AppState } from "../../state/reducers/state";
+import { getCurrentClassCounterFromState } from "../../state";
+import { setCurrentClassCounter } from "../../state/actions/scheduleActions";
+import { Dispatch } from "redux";
+>>>>>>> fix duplicate draggable id bug
 
 const SectionHeaderWrapper = styled.div`
   display: flex;
@@ -66,22 +74,9 @@ const CompletedTitleText = styled.div`
   color: rgba(21, 116, 62, 0.68);
 `;
 
-const CourseWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-`;
-
 const CourseText = styled.p`
   font-size: 14px;
   margin: 4px;
-`;
-
-const CourseTextNoMargin = styled.p`
-  font-size: 14px;
-  margin: 0px;
-  margin-top: 4px;
-  margin-bottom: 4px;
 `;
 
 const CourseAndLabWrapper = styled.div`
@@ -102,6 +97,16 @@ interface RequirementSectionProps {
   completedCourses: string[];
 }
 
+interface ReduxStoreProps {
+  currentClassCounter: number;
+}
+
+interface ReduxDispatchProps {
+  setCurrentClassCounter: (currentClassCounter: number) => void;
+}
+
+type Props = RequirementSectionProps & ReduxStoreProps & ReduxDispatchProps;
+
 interface RequirementSectionState {
   expanded: boolean;
   modalVisible: boolean;
@@ -110,13 +115,17 @@ interface RequirementSectionState {
   indexData: { [id: string]: number };
 }
 
-export class RequirementSection extends React.Component<
-  RequirementSectionProps,
+class RequirementSectionComponent extends React.Component<
+  Props,
   RequirementSectionState
 > {
+<<<<<<< HEAD
   _isMounted: boolean;
 
   constructor(props: RequirementSectionProps) {
+=======
+  constructor(props: Props) {
+>>>>>>> fix duplicate draggable id bug
     super(props);
 
     // TODO note that this is an antipattern introduced to solve
@@ -223,7 +232,12 @@ export class RequirementSection extends React.Component<
 
     let dndCourses: DNDScheduleCourse[] = filteredScheduleCourses.map(
       (scheduleCourse: ScheduleCourse) => {
-        return convertToDNDCourses([scheduleCourse!], 0)[0][0];
+        const [newCourses, counter] = convertToDNDCourses(
+          [scheduleCourse!],
+          this.props.currentClassCounter
+        );
+        this.props.setCurrentClassCounter(counter);
+        return newCourses[0];
       }
     );
 
@@ -512,3 +526,22 @@ export class RequirementSection extends React.Component<
     );
   }
 }
+
+const mapStateToProps = (state: AppState) => ({
+  currentClassCounter: getCurrentClassCounterFromState(state),
+});
+
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  setCurrentClassCounter: (currentClassCounter: number) =>
+    dispatch(setCurrentClassCounter(currentClassCounter)),
+});
+
+export const RequirementSection = connect<
+  ReduxStoreProps,
+  ReduxDispatchProps,
+  RequirementSectionProps,
+  AppState
+>(
+  mapStateToProps,
+  mapDispatchToProps
+)(RequirementSectionComponent);

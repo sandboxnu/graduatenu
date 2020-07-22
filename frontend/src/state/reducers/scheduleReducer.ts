@@ -18,6 +18,7 @@ import {
   setScheduleMajor,
   toggleYearExpanded,
   setClosedYearsToYearsInThePast,
+  setCurrentClassCounter,
 } from "../actions/scheduleActions";
 import { setSchedules } from "../actions/schedulesActions";
 import {
@@ -267,7 +268,6 @@ export const scheduleReducer = (
         draft.present.courseWarnings = container.courseWarnings;
         return draft;
       }
-
       case getType(setNamedSchedule): {
         const namedSchedule = action.payload.namedSchedule.schedule.present;
         draft.present.warnings = namedSchedule.warnings;
@@ -307,6 +307,9 @@ export const scheduleReducer = (
         } else {
           draft.present.closedYears.add(idx);
         }
+      }
+      case getType(setCurrentClassCounter): {
+        draft.present.currentClassCounter = action.payload.currentClassCounter;
         return draft;
       }
     }
