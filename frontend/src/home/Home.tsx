@@ -7,7 +7,8 @@ import {
   DNDScheduleYear,
   DNDScheduleTerm,
 } from "../models/types";
-import { Major, Status, SeasonWord } from "graduate-common";
+import { Major, Status, SeasonWord } from "../../../common/types";
+import { addPrereqsToSchedules } from "../../../common";
 import styled from "styled-components";
 import { Year } from "../components/Year";
 import {

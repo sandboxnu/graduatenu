@@ -1,4 +1,4 @@
-import { Schedule, INEUAndPrereq, INEUOrPrereq, ScheduleYear, ScheduleTerm, ScheduleCourse } from './index';
+import { Schedule, INEUAndPrereq, INEUOrPrereq, ScheduleYear, ScheduleTerm, ScheduleCourse } from './types';
 import DataLoader from 'dataloader';
 import request from 'request-promise';
 

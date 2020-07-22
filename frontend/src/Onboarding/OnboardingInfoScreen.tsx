@@ -6,7 +6,7 @@ import { NextButton } from "../components/common/NextButton";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import { Dispatch } from "redux";
-import { Major, Schedule } from "graduate-common";
+import { Major, Schedule } from "../../../common/types";
 import { planToString } from "../utils";
 import {
   setFullNameAction,

@@ -6,7 +6,7 @@ import {
   ScheduleTerm,
   Season,
   Status,
-} from "graduate-common";
+} from "../../common/types";
 import { SeasonEnum, StatusEnum } from "../../frontend/src/models/types";
 
 // the year to use as the first year of the schedule.

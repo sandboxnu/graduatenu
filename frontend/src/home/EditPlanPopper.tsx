@@ -19,7 +19,7 @@ import {
 } from "../state/actions/scheduleActions";
 import { setMajorAction } from "../state/actions/userActions";
 import { DNDSchedule } from "../models/types";
-import { Major, Schedule } from "graduate-common";
+import { Major, Schedule } from "../../../common/types";
 import {
   getMajors,
   getPlans,
