@@ -14,7 +14,6 @@
     "@material-ui/styles": "^4.7.1",
     "apollo-boost": "^0.4.4",
     "cross-env": "5.0.5",
-    "graduate-common": "file:../graduate-common",
     "graphql-tag": "^2.10.1",
     "immer": "^5.0.1",
     "js-levenshtein": "^1.1.6",

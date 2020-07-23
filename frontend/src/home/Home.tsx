@@ -5,15 +5,10 @@ import {
   DNDSchedule,
   IWarning,
   DNDScheduleYear,
-  DNDScheduleTerm
+  DNDScheduleTerm,
 } from "../models/types";
-import {
-  Major,
-  Status,
-  SeasonWord,
-  Schedule,
-  addPrereqsToSchedule
-} from "graduate-common";
+import { Schedule, Major, Status, SeasonWord } from "../../../common/types";
+import { addPrereqsToSchedule } from "../../../common";
 import styled from "styled-components";
 import { Year } from "../components/Year";
 import {
@@ -43,6 +38,7 @@ import {
 } from "../state/actions/scheduleActions";
 import { EditPlanPopper } from "./EditPlanPopper";
 import { ExcelUpload } from "../components/ExcelUpload";
+import { SwitchPlanPopper } from "./SwitchPlanPopper";
 
 const OuterContainer = styled.div`
   display: flex;
@@ -316,6 +312,7 @@ class HomeComponent extends React.Component<Props> {
               </HomeTop>
               <HomeAboveSchedule>
                 <h2>Plan Of Study</h2>
+                <SwitchPlanPopper />
                 <ExcelUpload setSchedule={this.setSchedule.bind(this)}/>
               </HomeAboveSchedule>
               {this.renderYears()}

@@ -7,9 +7,9 @@ import {
   DNDScheduleTerm,
   CourseWarning,
   DNDScheduleCourse,
-  IWarning
+  IWarning,
 } from "../models/types";
-import {ScheduleCourse, Status, SeasonWord} from "graduate-common";
+import { ScheduleCourse, Status, SeasonWord } from "../../../common/types";
 import styled from "styled-components";
 import { AppState } from "../state/reducers/state";
 import { connect } from "react-redux";
@@ -140,10 +140,34 @@ class SemesterBlockComponent extends React.Component<
     );
   };
 
+  /**
+   * Filters through the given list of course warnings to find all warnings for the given course
+   * @param courseWarnings the list of course warnings to search through
+   * @param course the search course
+   */
+  findCourseWarnings(
+    courseWarnings: CourseWarning[],
+    course: DNDScheduleCourse
+  ) {
+    const result: CourseWarning[] = courseWarnings.filter(
+      w => w.subject + w.classId === course.subject + course.classId
+    );
+
+    if (result.length === 0) {
+      return undefined;
+    } else {
+      return result;
+    }
+  }
+
   renderBody() {
     const { semester, courseWarnings } = this.props;
     const status = semester.status;
-    if (status === "CLASSES" || status === "HOVERINACTIVE") {
+    if (
+      status === "CLASSES" ||
+      status === "HOVERINACTIVE" ||
+      status === "COOP"
+    ) {
       return semester.classes.map((scheduleCourse, index) => {
         if (!!scheduleCourse) {
           return (
@@ -151,11 +175,7 @@ class SemesterBlockComponent extends React.Component<
               key={index}
               class={scheduleCourse}
               index={index}
-              warning={courseWarnings.find(
-                w =>
-                  w.subject + w.classId ===
-                  scheduleCourse.subject + scheduleCourse.classId
-              )}
+              warnings={this.findCourseWarnings(courseWarnings, scheduleCourse)}
               onDelete={this.onDeleteClass.bind(this, scheduleCourse, semester)}
             />
           );
@@ -248,7 +268,10 @@ class SemesterBlockComponent extends React.Component<
           handleClose={this.hideModal.bind(this)}
           handleSubmit={(courses: ScheduleCourse[]) => {
             // Change this semester status upon adding a class if it's not already a CLASSES semester.
-            if (this.props.semester.status !== "CLASSES") {
+            if (
+              this.props.semester.status !== "CLASSES" &&
+              this.props.semester.status !== "COOP"
+            ) {
               this.props.handleStatusChange(
                 "CLASSES",
                 this.props.semester.year,

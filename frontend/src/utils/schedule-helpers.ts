@@ -5,13 +5,9 @@ import {
   DNDScheduleTerm,
 } from "../models/types";
 import {
-  Schedule,
-  ScheduleCourse,
-  SeasonWord,
-} from "graduate-common";
-import {
     SeasonEnum
 } from "../models/types"
+import { Schedule, ScheduleCourse, SeasonWord } from "../../../common/types";
 
 export function convertTermIdToSeason(termId: number): SeasonWord {
   const seasonId = termId % 100;
@@ -188,4 +184,22 @@ export function getCompletedCourseStrings(schedule: DNDSchedule): string[] {
   }
 
   return fulfilled;
+}
+
+/**
+ * Given a schedule and a year, return the position (1-indexed) of the given year in the schedule (1, 2, 3, 4, etc)
+ * Returns -1 if year is not found in the schedule
+ * @param schedule the given schedule to locate the year
+ * @param year the given year
+ */
+export function getPositionOfYearInSchedule(
+  schedule: DNDSchedule,
+  year: number
+): number {
+  const index = schedule.years.findIndex(y => y === year);
+
+  if (index === -1) {
+    return index;
+  }
+  return index + 1;
 }

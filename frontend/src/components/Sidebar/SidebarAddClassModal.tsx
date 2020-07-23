@@ -4,14 +4,13 @@ import {
   DNDScheduleTerm,
   DNDSchedule,
   DNDScheduleYear,
-
 } from "../../models/types";
-import {   
+import {
   IRequiredCourse,
   ScheduleCourse,
   Status,
-  SeasonWord 
-} from "graduate-common";
+  SeasonWord
+} from "../../../../common/types";
 import { XButton } from "../common";
 import { Modal } from "@material-ui/core";
 import { connect } from "react-redux";

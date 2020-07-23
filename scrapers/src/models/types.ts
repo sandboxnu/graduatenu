@@ -2,7 +2,7 @@
  * This file contains types that are used only in the backend directory of this project.
  */
 
-import { Requirement, ISubjectRange } from "graduate-common";
+import { Requirement, ISubjectRange } from "../../../common/types";
 
 /**
  * Describes an abbreviation for one of Northeastern's NUPath academic breadth requirements.

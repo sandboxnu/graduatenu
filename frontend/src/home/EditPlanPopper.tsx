@@ -19,7 +19,7 @@ import {
 } from "../state/actions/scheduleActions";
 import { setMajorAction } from "../state/actions/userActions";
 import { DNDSchedule } from "../models/types";
-import { Major, Schedule } from "graduate-common";
+import { Major, Schedule } from "../../../common/types";
 import {
   getMajors,
   getPlans,
@@ -121,6 +121,7 @@ export class EditPlanPopperComponent extends React.Component<
   onChooseMajor(event: React.SyntheticEvent<{}>, value: any) {
     const maj = this.props.majors.find((m: any) => m.name === value);
     this.props.setMajor(maj);
+    this.props.setCoopCycle(undefined);
   }
 
   /**
