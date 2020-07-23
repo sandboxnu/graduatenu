@@ -5,6 +5,7 @@ import {
   WarningContainer,
 } from "../models/types";
 import {
+  SeasonEnum,
   Schedule,
   CourseTakenTracker,
   ScheduleTerm,
@@ -26,7 +27,6 @@ import {
   ANDSection,
   ORSection,
   RANGESection,
-  SeasonEnum,
   Season,
   StatusEnum,
 } from "../../../common/types";

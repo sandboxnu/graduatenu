@@ -1,3 +1,3 @@
 export const Greeter = (name: string) => `Hello ${name}`; 
 
-export { addPrereqsToSchedules } from "./prereq_loader";
+export { addPrereqsToSchedule, addPrereqsToSchedules } from "./prereq_loader";
