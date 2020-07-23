@@ -13,6 +13,7 @@ import {
   setMajorAction,
   setAcademicYearAction,
   setGraduationYearAction,
+  setCatalogYearAction,
 } from "../state/actions/userActions";
 import { setCoopCycle } from "../state/actions/scheduleActions";
 import Loader from "react-loader-spinner";
@@ -68,10 +69,15 @@ interface MajorScreenProps {
   isFetchingPlans: boolean;
 }
 
+interface CatalogYearScreenProps {
+  setCatalogYear: (catalogYear: number) => void;
+}
+
 type OnboardingScreenProps = NameScreenProps &
   AcademicYearScreenProps &
   GraduationYearScreenProps &
-  MajorScreenProps;
+  MajorScreenProps &
+  CatalogYearScreenProps;
 
 interface NameScreenState {
   textFieldStr: string;
@@ -93,12 +99,17 @@ interface MajorScreenState {
   planStr?: string;
 }
 
+interface CatalogYearScreenState {
+  catalogYear?: number;
+}
+
 const marginSpace = 12;
 
 type OnboardingScreenState = NameScreenState &
   AcademicYearScreenState &
   GraduationYearScreenState &
-  MajorScreenState;
+  MajorScreenState &
+  CatalogYearScreenState;
 
 type Props = OnboardingScreenProps & RouteComponentProps;
 
@@ -113,6 +124,7 @@ class OnboardingScreenComponent extends React.Component<
       textFieldStr: "",
       year: undefined,
       gradYear: undefined,
+      catalogYear: undefined,
       beenEditedName: false,
       beenEditedYear: false,
       beenEditedGrad: false,
@@ -147,6 +159,12 @@ class OnboardingScreenComponent extends React.Component<
     });
   }
 
+  onChangeCatalogYear(e: any) {
+    this.setState({
+      catalogYear: Number(e.target.value),
+    });
+  }
+
   onChangeMajor(event: React.SyntheticEvent<{}>, value: any) {
     const maj = this.props.majors.find((m: any) => m.name === value);
 
@@ -166,6 +184,7 @@ class OnboardingScreenComponent extends React.Component<
     this.props.setFullName(this.state.textFieldStr);
     this.props.setAcademicYear(this.state.year!);
     this.props.setGraduationYear(this.state.gradYear!);
+    this.props.setCatalogYear(this.state.catalogYear!);
 
     if (this.state.planStr) {
       const plan = this.props.plans[this.state.major!.name].find(
@@ -316,11 +335,36 @@ class OnboardingScreenComponent extends React.Component<
     );
   }
 
+  /**
+   * Renders the catalog drop down
+   */
+  renderCatalogYearSelect() {
+    //options?
+    return (
+      <Autocomplete
+        style={{ width: 326, marginBottom: marginSpace }}
+        disableListWrap
+        options={this.props.majors.map(maj => maj.yearVersion.toString())} //map by year then filter for repeats (also do for major dropdown)
+        renderInput={params => (
+          <TextField
+            {...params}
+            variant="outlined"
+            label="Select A Catalog Year"
+            fullWidth
+          />
+        )}
+        value={!!this.state.major ? this.state.major.name + " " : ""}
+        onChange={this.onChangeMajor.bind(this)}
+      />
+    );
+  }
+
   render() {
     const {
       gradYear,
       year,
       textFieldStr,
+      catalogYear,
       beenEditedName,
       beenEditedGrad,
       beenEditedYear,
@@ -350,6 +394,8 @@ class OnboardingScreenComponent extends React.Component<
           {this.renderGradYearSelect(gradYear, beenEditedGrad)}
           {this.renderMajorDropDown()}
           {!!this.state.major && this.renderCoopCycleDropDown()}
+          {this.renderCatalogYearSelect()}
+          {!!this.state.catalogYear && this.renderMajorDropDown()}
 
           {textFieldStr.length !== 0 && !!year && !!gradYear ? (
             <Link
@@ -390,6 +436,8 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     dispatch(setGraduationYearAction(academicYear)),
   setMajor: (major?: Major) => dispatch(setMajorAction(major)),
   setCoopCycle: (plan: Schedule) => dispatch(setCoopCycle(plan)),
+  setCatalogYear: (catalogYear?: number) =>
+    dispatch(setCatalogYearAction(catalogYear)),
 });
 
 /**
