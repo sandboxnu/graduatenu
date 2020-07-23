@@ -4,7 +4,7 @@ import {
     ScheduleCourse,
     ScheduleYear,
     ScheduleTerm
-} from "graduate-common";
+} from "../../../common/types";
 import {
     SeasonEnum,
     StatusEnum

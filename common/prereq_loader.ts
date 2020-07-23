@@ -171,8 +171,8 @@ async function prereqifyScheduleCourse(
 
   // optionally add prereqs, coreqs to object.
   if (queryResult) {
-    queryResult.coreqs ? (prereqified.coreqs = queryResult.coreqs) : undefined;
-    queryResult.prereqs ? (prereqified.prereqs = queryResult.prereqs) : undefined;
+    prereqified.coreqs = queryResult.coreqs ? queryResult.coreqs : undefined;
+    prereqified.prereqs = queryResult.prereqs ? queryResult.prereqs : undefined;
     prereqified.numCreditsMax = queryResult.maxCredits ? queryResult.maxCredits : 0;
     prereqified.numCreditsMin = queryResult.minCredits ? queryResult.minCredits : 0;
     prereqified.name = queryResult.name;

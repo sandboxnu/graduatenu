@@ -1,6 +1,6 @@
 import * as React from "react";
 import { excelToSchedule } from "../utils/excelParser"
-import { Schedule } from "graduate-common"
+import { Schedule } from "../../../common/types"
 import styled from "styled-components";
 import Button from '@material-ui/core/Button';
 import Tooltip from '@material-ui/core/Tooltip';

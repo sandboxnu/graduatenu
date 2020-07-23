@@ -284,9 +284,7 @@ class HomeComponent extends React.Component<Props> {
 
   
   async setSchedule(schedule: Schedule) {
-    console.log(schedule);
     let preReqSched = await addPrereqsToSchedule(schedule);
-    console.log(preReqSched);
     const [dndschedule, counter] = convertToDNDSchedule(preReqSched, 0);
     this.props.setDNDSchedule(dndschedule);
   }
@@ -311,8 +309,10 @@ class HomeComponent extends React.Component<Props> {
                 </HomePlan>
               </HomeTop>
               <HomeAboveSchedule>
-                <h2>Plan Of Study</h2>
-                <SwitchPlanPopper />
+                <HomePlan>
+                  <h2>Plan Of Study</h2>
+                  <SwitchPlanPopper />
+                </HomePlan>
                 <ExcelUpload setSchedule={this.setSchedule.bind(this)}/>
               </HomeAboveSchedule>
               {this.renderYears()}
