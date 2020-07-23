@@ -8,7 +8,7 @@ import {
   DNDScheduleTerm,
 } from "../models/types";
 import { Schedule, Major, Status, SeasonWord } from "../../../common/types";
-import { addPrereqsToSchedule } from "../../../common";
+import { addPrereqsToSchedule } from "../../../common/prereq_loader";
 import styled from "styled-components";
 import { Year } from "../components/Year";
 import {
