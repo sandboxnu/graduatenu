@@ -2,6 +2,7 @@
 FROM node:12-alpine as build
 WORKDIR /app
 COPY frontend/package.json /app/package.json
+COPY frontend/config-overrides.js /app/config-overrides.js
 COPY common /common
 RUN yarn install 
 COPY frontend/src /app/src
