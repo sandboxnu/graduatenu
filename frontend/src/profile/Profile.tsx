@@ -133,7 +133,7 @@ interface SaveProps {
     token: string,
     id: number,
     setMajorAction: (major?: Major) => void,
-    setCoopCycleAction: (plan: string) => void,
+    setUserCoopCycleAction: (plan: string) => void,
     setFullNameAction: (fullName: string) => void,
     setEmailAction: (email: string) => void,
 }
@@ -274,7 +274,7 @@ const save = (props: SaveProps) => {
     props.setMajorAction(props.major);
     props.setFullNameAction(props.name);
     props.setEmailAction(props.email);
-    props.setCoopCycleAction(props.coop);
+    props.setUserCoopCycleAction(props.coop);
 
     const user: IUpdateUser = {
         token: props.token,
@@ -392,7 +392,7 @@ export const ProfileComponent: React.FC = (props: any) => {
                         token={props.token}
                         id={props.id}
                         setMajorAction={props.setMajorAction}
-                        setCoopCycleAction={props.setCoopCycleAction}
+                        setUserCoopCycleAction={props.setUserCoopCycleAction}
                         setFullNameAction={props.setFullNameAction}
                         setEmailAction={props.setEmailAction}/>
                 }
@@ -408,7 +408,7 @@ export const ProfileComponent: React.FC = (props: any) => {
  */
 const mapDispatchToProps = (dispatch: Dispatch) => ({
     setMajorAction: (major?: Major) => dispatch(setMajorAction(major)),
-    setCoopCycleAction: (plan: string) => dispatch(setUserCoopCycleAction(plan)),
+    setUserCoopCycleAction: (plan: string) => dispatch(setUserCoopCycleAction(plan)),
     setFullNameAction: (fullName: string) => dispatch(setFullNameAction(fullName)),
     setEmailAction: (email: string) => dispatch(setEmailAction(email))
 });
