@@ -5,6 +5,7 @@ import {
   WarningContainer,
 } from "../models/types";
 import {
+  SeasonEnum,
   Schedule,
   CourseTakenTracker,
   ScheduleTerm,
@@ -26,10 +27,9 @@ import {
   ANDSection,
   ORSection,
   RANGESection,
-  SeasonEnum,
   Season,
   StatusEnum,
-} from "graduate-common";
+} from "../../../common/types";
 /*
 CreditRange interface to track the min and max credits for a particular season. 
 seasonMax = a number representing the max numebr of credits you can take without over-loading. 

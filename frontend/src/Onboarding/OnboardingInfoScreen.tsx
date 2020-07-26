@@ -6,7 +6,7 @@ import { NextButton } from "../components/common/NextButton";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import { Dispatch } from "redux";
-import { Major, Schedule } from "graduate-common";
+import { Major, Schedule } from "../../../common/types";
 import { planToString } from "../utils";
 import {
   setFullNameAction,
@@ -150,7 +150,7 @@ class OnboardingScreenComponent extends React.Component<
   onChangeMajor(event: React.SyntheticEvent<{}>, value: any) {
     const maj = this.props.majors.find((m: any) => m.name === value);
 
-    this.setState({ major: maj });
+    this.setState({ major: maj, planStr: "" });
   }
 
   onChangePlan(event: React.SyntheticEvent<{}>, value: any) {

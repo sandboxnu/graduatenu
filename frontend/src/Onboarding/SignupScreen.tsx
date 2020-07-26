@@ -4,7 +4,7 @@ import { withRouter, RouteComponentProps, Link } from "react-router-dom";
 import styled from "styled-components";
 import { TextField } from "@material-ui/core";
 import { AppState } from "../state/reducers/state";
-import { Major } from "graduate-common";
+import { Major } from "../../../common/types";
 import { IUserData } from "../models/types";
 import { PrimaryButton } from "../components/common/PrimaryButton";
 import { registerUser } from "../services/UserService";

@@ -7,7 +7,8 @@ import {
   DNDScheduleYear,
   DNDScheduleTerm,
 } from "../models/types";
-import { Major, Status, SeasonWord } from "graduate-common";
+import { Schedule, Major, Status, SeasonWord } from "../../../common/types";
+import { addPrereqsToSchedule } from "../../../common/prereq_loader";
 import styled from "styled-components";
 import { Year } from "../components/Year";
 import {
@@ -16,6 +17,7 @@ import {
   isCoopOrVacation,
   moveCourse,
   addCourseFromSidebar,
+  convertToDNDSchedule,
 } from "../utils";
 import { Sidebar } from "../components/Sidebar";
 import { withToast } from "./toastHook";
@@ -35,7 +37,7 @@ import {
   setDNDScheduleAction,
 } from "../state/actions/scheduleActions";
 import { EditPlanPopper } from "./EditPlanPopper";
-import { Profile } from "../profile/Profile"
+import { ExcelUpload } from "../components/ExcelUpload";
 import { SwitchPlanPopper } from "./SwitchPlanPopper";
 
 const OuterContainer = styled.div`
@@ -89,6 +91,14 @@ const HomePlan = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+`;
+
+const HomeAboveSchedule = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
 `;
 
 const MajorText = styled.div`
@@ -272,6 +282,13 @@ class HomeComponent extends React.Component<Props> {
     ));
   }
 
+  
+  async setSchedule(schedule: Schedule) {
+    let preReqSched = await addPrereqsToSchedule(schedule);
+    const [dndschedule, counter] = convertToDNDSchedule(preReqSched, 0);
+    this.props.setDNDSchedule(dndschedule);
+  }
+
   render() {
     return (
       <OuterContainer>
@@ -291,20 +308,21 @@ class HomeComponent extends React.Component<Props> {
                   <EditPlanPopper />
                 </HomePlan>
               </HomeTop>
-              <HomePlan>
-                <h2>Plan Of Study&nbsp;</h2>
-                <SwitchPlanPopper />
-              </HomePlan>
+              <HomeAboveSchedule>
+                <HomePlan>
+                  <h2>Plan Of Study</h2>
+                  <SwitchPlanPopper />
+                </HomePlan>
+                <ExcelUpload setSchedule={this.setSchedule.bind(this)}/>
+              </HomeAboveSchedule>
               {this.renderYears()}
             </Container>
           </LeftScroll>
-
           <SidebarContainer>
             <Sidebar />
           </SidebarContainer>
         </DragDropContext>
-      </OuterContainer>
-    );
+      </OuterContainer>);
   }
 }
 

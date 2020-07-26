@@ -8,7 +8,7 @@ import {
   INEUPrereqCourse,
   ICourseRange,
   IOrCourse,
-} from "graduate-common";
+} from "../../../common/types";
 
 /**
  * Describes an abbreviation for one of Northeastern's NUPath academic breadth requirements.

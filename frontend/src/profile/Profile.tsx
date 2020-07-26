@@ -26,7 +26,7 @@ import {
     getEmail
   } from "../state";
 import { Dispatch } from "redux";
-import { Major, Schedule } from "graduate-common";
+import { Major, Schedule } from "../../../common/types";
 import { AppState } from "../state/reducers/state";
 import { planToString } from "../utils";
 import { updateUser } from "../services/UserService"

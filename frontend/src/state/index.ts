@@ -6,7 +6,7 @@ import {
   DNDScheduleTerm,
   NamedSchedule,
 } from "../models/types";
-import { Major, Schedule } from "graduate-common";
+import { Major, Schedule } from "../../../common/types";
 
 /**
  * Utility functions to help extract data from the AppState

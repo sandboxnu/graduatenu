@@ -10,7 +10,7 @@ import {
   ScheduleCourse,
   Status,
   SeasonWord
-} from "graduate-common";
+} from "../../../../common/types";
 import { XButton } from "../common";
 import { Modal } from "@material-ui/core";
 import { connect } from "react-redux";

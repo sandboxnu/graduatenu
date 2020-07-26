@@ -4,7 +4,10 @@ import {
   DNDScheduleCourse,
   DNDScheduleTerm,
 } from "../models/types";
-import { Schedule, ScheduleCourse, SeasonWord } from "graduate-common";
+import {
+    SeasonEnum
+} from "../models/types"
+import { Schedule, ScheduleCourse, SeasonWord } from "../../../common/types";
 
 export function convertTermIdToSeason(termId: number): SeasonWord {
   const seasonId = termId % 100;
@@ -19,6 +22,17 @@ export function convertTermIdToSeason(termId: number): SeasonWord {
     return "summer1";
   }
   return "summer2";
+}
+
+export function convertSeasonToTermId(season: SeasonEnum): number {
+  if (season === SeasonEnum.FL) {
+    return 10;
+  } else if (season === SeasonEnum.SP) {
+    return 30;
+  } else if (season === SeasonEnum.S1) {
+    return 40;
+  } 
+  return 60;
 }
 
 export function convertTermIdToYear(termId: number): number {

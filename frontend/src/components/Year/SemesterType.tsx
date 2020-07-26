@@ -3,7 +3,7 @@ import Select from "@material-ui/core/Select";
 import { withStyles } from "@material-ui/core/styles";
 import InputBase from "@material-ui/core/InputBase";
 import { MenuItem } from "@material-ui/core";
-import { Status } from "graduate-common";
+import { Status } from "../../../../common/types";
 
 interface Props {
   status: Status;
