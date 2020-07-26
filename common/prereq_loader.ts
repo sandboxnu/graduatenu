@@ -1,4 +1,4 @@
-import { Schedule, INEUAndPrereq, INEUOrPrereq, ScheduleYear, ScheduleTerm, ScheduleCourse } from './index';
+import { Schedule, INEUAndPrereq, INEUOrPrereq, ScheduleYear, ScheduleTerm, ScheduleCourse } from './types';
 import DataLoader from 'dataloader';
 import request from 'request-promise';
 
@@ -26,6 +26,27 @@ interface NonEmptyQueryResult {
 
 // prereq query results can be undefined, if the target class doesn't exist.
 type PrereqQueryResult = undefined | NonEmptyQueryResult;
+
+/**
+ * Asynchronously adds prereqs to a Schedule.
+ * Does not do mutation.
+ * @param schedule the schedule to add prereqs to
+ * @param year the year to grab prereqs from (always uses fall).
+ */
+export async function addPrereqsToSchedule(schedule: Schedule): Promise<Schedule> {
+  // doubly curried loader.
+  // here we give it the year.
+  // next parameter given is the termId.
+  // last parameter is the loader parameter.
+  const loader: DataLoader<SimpleCourse, PrereqQueryResult> = new DataLoader<SimpleCourse, PrereqQueryResult>(
+    queryCoursePrereqData,
+  );
+
+  // return the results
+  let results = await prereqifySchedule(schedule, loader);
+
+  return results;
+}
 
 /**
  * Asynchronously adds prereqs to a Schedule.
@@ -150,8 +171,8 @@ async function prereqifyScheduleCourse(
 
   // optionally add prereqs, coreqs to object.
   if (queryResult) {
-    queryResult.coreqs ? (prereqified.coreqs = queryResult.coreqs) : undefined;
-    queryResult.prereqs ? (prereqified.prereqs = queryResult.prereqs) : undefined;
+    prereqified.coreqs = queryResult.coreqs ? queryResult.coreqs : undefined;
+    prereqified.prereqs = queryResult.prereqs ? queryResult.prereqs : undefined;
     prereqified.numCreditsMax = queryResult.maxCredits ? queryResult.maxCredits : 0;
     prereqified.numCreditsMin = queryResult.minCredits ? queryResult.minCredits : 0;
     prereqified.name = queryResult.name;

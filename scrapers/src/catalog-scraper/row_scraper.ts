@@ -5,7 +5,7 @@ import {
   IOrCourse,
   ISubjectRange,
   Requirement,
-} from "graduate-common";
+} from "../../../common/types";
 import { createRequiredCourse, isRequirement } from "../utils/scraper_utils";
 import { RANGECourseSet } from "./catalog_scraper";
 

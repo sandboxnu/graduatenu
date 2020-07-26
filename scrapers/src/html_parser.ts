@@ -12,7 +12,7 @@ import {
   IInitialScheduleRep,
   IOldRequirement,
   Season,
-} from "graduate-common";
+} from "../../common/types";
 
 import { NUPathEnum } from "../../frontend/src/models/types";
 

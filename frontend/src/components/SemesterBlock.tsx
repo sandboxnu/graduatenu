@@ -9,7 +9,7 @@ import {
   DNDScheduleCourse,
   IWarning,
 } from "../models/types";
-import { ScheduleCourse, Status, SeasonWord } from "graduate-common";
+import { ScheduleCourse, Status, SeasonWord } from "../../../common/types";
 import styled from "styled-components";
 import { AppState } from "../state/reducers/state";
 import { connect } from "react-redux";

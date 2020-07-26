@@ -5,7 +5,7 @@ import {
   DNDSchedule,
   DNDScheduleCourse,
 } from "../models/types";
-import { ScheduleCourse } from "graduate-common";
+import { ScheduleCourse } from "../../../common/types";
 import { fetchCourse } from "../api";
 import { convertToDNDCourses } from ".";
 

@@ -11,7 +11,7 @@ import {
   mkdirSync,
 } from "fs";
 import { get } from "https";
-import { INEUClassMap, INEUParentMap } from "graduate-common";
+import { INEUClassMap, INEUParentMap } from "../../common/types";
 
 // the possible seasons to choose from.
 // note that "years" begin in the fall of the previous year.

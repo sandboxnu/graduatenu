@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Schedule, Major } from "graduate-common";
+import { Schedule, Major } from "../../../common/types";
 import { Modal, Card } from "@material-ui/core";
 import { plans } from "../plans";
 import styled from "styled-components";
