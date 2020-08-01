@@ -1,4 +1,4 @@
-import { Major } from "graduate-common";
+import { Major } from "../../../common/types";
 
 /**
  * Finds a major from the given list of majors with the given name.

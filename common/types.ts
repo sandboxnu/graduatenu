@@ -2,7 +2,7 @@
  * Describes an abbreviation for one of Northeastern's NUPath academic breadth requirements.
  * Each two-character NUPath directly corresponds to Northeastern's abbreviation of the requirement.
  */
- enum NUPathEnum {
+export enum NUPathEnum {
   ND = "ND",
   EI = "EI",
   IC = "IC",
@@ -21,7 +21,7 @@
 /**
  * Represents one of the seasons in which a student can take a course, as abbreviated by Northeastern.
  */
-enum SeasonEnum {
+export enum SeasonEnum {
   FL = "FL",
   SP = "SP",
   S1 = "S1",
@@ -32,7 +32,7 @@ enum SeasonEnum {
 /**
  * A Status is one of on CO-OP, CLASSES, or INACTIVE
  */
-enum StatusEnum {
+export enum StatusEnum {
   COOP = "COOP",
   CLASSES = "CLASSES",
   INACTIVE = "INACTIVE",

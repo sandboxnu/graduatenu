@@ -8,8 +8,8 @@ import {
   ScheduleCourse,
   Status,
   SeasonWord,
-  Schedule
-} from "graduate-common";
+  Schedule,
+} from "../../../../common/types";
 
 export const addClassesAction = createAction(
   "schedule/ADD_CLASSES",

@@ -12,11 +12,9 @@ import {
   IInitialScheduleRep,
   IOldRequirement,
   Season,
-} from "graduate-common";
+} from "../../common/types";
 
-import {
-  NUPathEnum
-} from "../../frontend/src/models/types";
+import { NUPathEnum } from "../../frontend/src/models/types";
 
 class AuditToJSON {
   // protected designation is for possible access by external class in same package without export

@@ -4,7 +4,7 @@ import { withRouter, RouteComponentProps, Link } from "react-router-dom";
 import styled from "styled-components";
 import { TextField } from "@material-ui/core";
 import { AppState } from "../state/reducers/state";
-import { Major } from "graduate-common";
+import { Major } from "../../../common/types";
 import { IUserData, DNDSchedule } from "../models/types";
 import { PrimaryButton } from "../components/common/PrimaryButton";
 import { registerUser } from "../services/UserService";
@@ -158,6 +158,8 @@ class SignupScreenComponent extends React.Component<Props, SignupScreenState> {
         username: this.props.fullName,
         academic_year: this.props.academicYear,
         graduation_year: this.props.graduationYear,
+        major: this.props.major ? this.props.major.name : undefined,
+        coop_cycle: this.props.planStr ? this.props.planStr : undefined,
       };
 
       registerUser(user).then(response => {
@@ -166,19 +168,17 @@ class SignupScreenComponent extends React.Component<Props, SignupScreenState> {
             errorEmail: response.errors.email,
           });
         } else {
-          if (this.props.major) {
-            createPlanForUser(response.user.id, response.user.token, {
-              name: "Plan 1",
-              link_sharing_enabled: false,
-              schedule: this.props.schedule,
-              major: this.props.major ? this.props.major.name : "",
-              planString: this.props.planStr ? this.props.planStr : "None",
-            }).then(res => {
-              this.props.addPlanId(res.plan.id);
-              this.props.setPlanName(res.plan.name);
-              this.props.setLinkSharing(res.plan.link_sharing_enabled);
-            });
-          }
+          createPlanForUser(response.user.id, response.user.token, {
+            name: "Plan 1",
+            link_sharing_enabled: false,
+            schedule: this.props.schedule,
+            major: this.props.major ? this.props.major.name : "",
+            planString: this.props.planStr ? this.props.planStr : "None",
+          }).then(res => {
+            this.props.addPlanId(res.plan.id);
+            this.props.setPlanName(res.plan.name);
+            this.props.setLinkSharing(res.plan.link_sharing_enabled);
+          });
           this.props.setUserId(response.user.id);
           this.props.setToken(response.user.token);
           this.props.history.push("/home");

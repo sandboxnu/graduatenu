@@ -4,7 +4,7 @@ import {
   ISubjectRange,
   IRequiredCourse,
   IOrCourse,
-} from "graduate-common";
+} from "../../../common/types";
 
 /**
  * Helper function that processes the hours text into a CreditRange

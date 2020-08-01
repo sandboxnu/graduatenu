@@ -8,7 +8,8 @@ import {
   DNDScheduleTerm,
   IPlanData,
 } from "../models/types";
-import { Major, Status, SeasonWord } from "graduate-common";
+import { Schedule, Major, Status, SeasonWord } from "../../../common/types";
+import { addPrereqsToSchedule } from "../../../common/prereq_loader";
 import styled from "styled-components";
 import { Year } from "../components/Year";
 import {
@@ -17,6 +18,7 @@ import {
   isCoopOrVacation,
   moveCourse,
   addCourseFromSidebar,
+  convertToDNDSchedule,
 } from "../utils";
 import { Sidebar } from "../components/Sidebar";
 import { withToast } from "./toastHook";
@@ -54,8 +56,16 @@ import {
   updatePlanForUser,
 } from "../services/PlanService";
 import { findMajorFromName } from "../utils/plan-helpers";
-import { Button } from "@material-ui/core";
+import { Button, ButtonBase } from "@material-ui/core";
 import Loader from "react-loader-spinner";
+import { ExcelUpload } from "../components/ExcelUpload";
+import { SwitchPlanPopper } from "./SwitchPlanPopper";
+import {
+  createStyles,
+  withStyles,
+  makeStyles,
+  Theme,
+} from "@material-ui/core/styles";
 
 const OuterContainer = styled.div`
   display: flex;
@@ -119,6 +129,14 @@ const HomePlan = styled.div`
   align-items: center;
 `;
 
+const HomeAboveSchedule = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+`;
+
 const MajorText = styled.div`
   font-weight: 500;
   font-size: 16px;
@@ -131,10 +149,27 @@ const PlanText = styled.div`
   margin-right: 4px;
 `;
 
+const HomeButtons = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 800px;
+  padding: 10px 0;
+`;
+
 const SavePlanButton = styled(Button)<any>`
   background: #e0e0e0;
   font-weight: normal;
   float: right;
+  margin: 10px;
+`;
+
+const SavePlanContainer = styled.div`
+  position: relative;
+  align-items: flex-end;
+  padding: 10px;
+  margin: 0px;
 `;
 
 interface ToastHomeProps {
@@ -180,6 +215,7 @@ type Props = ToastHomeProps &
 
 interface HomeState {
   fetchedPlan: boolean;
+  planCount: number;
 }
 
 class HomeComponent extends React.Component<Props, HomeState> {
@@ -187,6 +223,7 @@ class HomeComponent extends React.Component<Props, HomeState> {
     super(props);
     this.state = {
       fetchedPlan: false,
+      planCount: 1,
     };
   }
 
@@ -209,6 +246,7 @@ class HomeComponent extends React.Component<Props, HomeState> {
 
           this.setState({
             fetchedPlan: true,
+            planCount: plans.length,
           });
         }
       );
@@ -378,7 +416,7 @@ class HomeComponent extends React.Component<Props, HomeState> {
    * Only supports updating a user's singular plan, can be modified later to
    * update a specific plan.
    */
-  savePlan() {
+  updatePlan() {
     // If this is true, then a user is currently logged in and we can update their plan
     if (this.props.token && this.props.userId) {
       updatePlanForUser(
@@ -397,6 +435,35 @@ class HomeComponent extends React.Component<Props, HomeState> {
     } else {
       alert("You must be logged in to save your plan.");
     }
+  }
+
+  /**
+   * If a user is currently logged in, saves the current plan under this user.
+   * Only supports updating a user's singular plan, can be modified later to
+   * update a specific plan.
+   */
+  savePlan() {
+    // If this is true, then a user is currently logged in and we can update their plan
+    if (this.props.token && this.props.userId) {
+      createPlanForUser(this.props.userId, this.props.token, {
+        name: `Schedule${this.state.planCount + 1}`,
+        link_sharing_enabled: this.props.linkSharing,
+        schedule: this.props.schedule,
+        major: this.props.major ? this.props.major.name : "",
+        planString: this.props.planStr ? this.props.planStr : "None",
+      }).then(plan => {
+        this.setState({ planCount: this.state.planCount + 1 });
+        alert("Your plan has been saved.");
+      });
+    } else {
+      alert("You must be logged in to save your plan.");
+    }
+  }
+
+  async setSchedule(schedule: Schedule) {
+    let preReqSched = await addPrereqsToSchedule(schedule);
+    const [dndschedule, counter] = convertToDNDSchedule(preReqSched, 0);
+    this.props.setDNDSchedule(dndschedule);
   }
 
   render() {
@@ -418,19 +485,37 @@ class HomeComponent extends React.Component<Props, HomeState> {
                   <EditPlanPopper />
                 </HomePlan>
               </HomeTop>
-              <HomeTop>
-                <h2>Plan Of Study</h2>
-                <SavePlanButton
-                  variant="contained"
-                  onClick={this.savePlan.bind(this)}
-                >
-                  Save Plan
-                </SavePlanButton>
-              </HomeTop>
+              <HomeAboveSchedule>
+                <HomePlan>
+                  <h2>Plan Of Study</h2>
+                  {this.props.token && this.props.userId && (
+                    <SwitchPlanPopper />
+                  )}
+                </HomePlan>
+                <HomeButtons>
+                  <SavePlanContainer>
+                    <SavePlanButton
+                      variant="contained"
+                      onClick={this.savePlan.bind(this)}
+                    >
+                      Save Plan
+                    </SavePlanButton>
+                  </SavePlanContainer>
+
+                  <SavePlanContainer>
+                    <SavePlanButton
+                      variant="contained"
+                      onClick={this.updatePlan.bind(this)}
+                    >
+                      Update Plan
+                    </SavePlanButton>
+                  </SavePlanContainer>
+                  <ExcelUpload setSchedule={this.setSchedule.bind(this)} />
+                </HomeButtons>
+              </HomeAboveSchedule>
               {this.renderYears()}
             </Container>
           </LeftScroll>
-
           <SidebarContainer>
             <Sidebar />
           </SidebarContainer>

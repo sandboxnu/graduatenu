@@ -14,7 +14,7 @@ import {
   IScheduleCourse,
   Requirement,
   UserChoice,
-} from "graduate-common";
+} from "../../common/types";
 
 /**
  * Parses a Requirement to a choice or a course, to show to the user.
