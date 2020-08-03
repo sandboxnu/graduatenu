@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { ScheduleCourse } from "graduate-common";
+import { ScheduleCourse } from "../../../../common/types";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { IconButton } from "@material-ui/core";
 
