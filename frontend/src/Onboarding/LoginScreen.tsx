@@ -9,7 +9,7 @@ import { PrimaryButton } from "../components/common/PrimaryButton";
 import { Dispatch } from "redux";
 import {
   setFullNameAction,
-  setMajorAction,
+  setDeclaredMajorAction,
   setAcademicYearAction,
   setGraduationYearAction,
   setTokenAction,
@@ -256,7 +256,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     dispatch(setAcademicYearAction(academicYear)),
   setGraduationYear: (academicYear: number) =>
     dispatch(setGraduationYearAction(academicYear)),
-  setMajor: (major?: Major) => dispatch(setMajorAction(major)),
+  setMajor: (major?: Major) => dispatch(setDeclaredMajorAction(major)),
   setCoopCycle: (plan: Schedule) => dispatch(setCoopCycle(plan)),
   setUserCoopCycle: (coopCycle: string) => dispatch(setUserCoopCycleAction(coopCycle)),
   setToken: (token: string) => dispatch(setTokenAction(token)),

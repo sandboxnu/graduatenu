@@ -50,8 +50,8 @@ export const getPlanStrFromState = (state: AppState): string | undefined =>
  * Get the selected major object from the AppState
  * @param state the AppState
  */
-export const getMajorFromState = (state: AppState): Major | undefined =>
-  state.user.major;
+export const getDeclaredMajorFromState = (state: AppState): Major | undefined =>
+  state.user.declaredMajor;
 
 /**
  * Get the user token from the AppState

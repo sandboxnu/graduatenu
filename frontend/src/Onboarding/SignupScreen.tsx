@@ -318,7 +318,7 @@ const mapStateToProps = (state: AppState) => ({
   fullName: state.user.fullName,
   academicYear: state.user.academicYear,
   graduationYear: state.user.graduationYear,
-  major: state.user.major,
+  major: state.user.declaredMajor,
   planStr: state.user.planStr,
 });
 

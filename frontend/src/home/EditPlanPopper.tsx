@@ -11,13 +11,13 @@ import { Dispatch } from "redux";
 import {
   getScheduleFromState,
   getPlanStrFromState,
-  getMajorFromState,
+  getDeclaredMajorFromState,
 } from "../state";
 import {
   setScheduleAction,
   setCoopCycle,
 } from "../state/actions/scheduleActions";
-import { setMajorAction } from "../state/actions/userActions";
+import { setDeclaredMajorAction } from "../state/actions/userActions";
 import { DNDSchedule } from "../models/types";
 import { Major, Schedule } from "../../../common/types";
 import {
@@ -295,7 +295,7 @@ export class EditPlanPopperComponent extends React.Component<
 const mapStateToProps = (state: AppState) => ({
   schedule: getScheduleFromState(state),
   planStr: getPlanStrFromState(state),
-  major: getMajorFromState(state),
+  major: getDeclaredMajorFromState(state),
   majors: getMajors(state),
   plans: getPlans(state),
   creditsTaken: getTakenCredits(state),
@@ -305,7 +305,7 @@ const mapStateToProps = (state: AppState) => ({
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   setCoopCycle: (schedule?: Schedule) => dispatch(setCoopCycle(schedule)),
   setSchedule: (schedule: Schedule) => dispatch(setScheduleAction(schedule)),
-  setMajor: (major?: Major) => dispatch(setMajorAction(major)),
+  setMajor: (major?: Major) => dispatch(setDeclaredMajorAction(major)),
 });
 
 export const EditPlanPopper = connect<

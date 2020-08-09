@@ -18,7 +18,7 @@ import {
 import {
     getMajors,
     getPlans,
-    getMajorFromState,
+    getDeclaredMajorFromState,
     getUserCoopCycleFromState,
     getFullNameFromState,
     getToken,
@@ -419,7 +419,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
  */
 const mapStateToProps = (state: AppState) => ({
     name: getFullNameFromState(state),
-    major: getMajorFromState(state),
+    major: getDeclaredMajorFromState(state),
     coop: getUserCoopCycleFromState(state),
     majors: getMajors(state),
     plans: getPlans(state),
