@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { TextField } from "@material-ui/core";
 import { AppState } from "../state/reducers/state";
 import { Major } from "../../../common/types";
-import { IUserData, DNDSchedule } from "../models/types";
+import { IUserData, DNDSchedule, ScheduleSlice } from "../models/types";
 import { PrimaryButton } from "../components/common/PrimaryButton";
 import { registerUser } from "../services/UserService";
 import { Dispatch } from "redux";
@@ -17,7 +17,7 @@ import {
   setLinkSharingAction,
 } from "../state/actions/userActions";
 import { createPlanForUser } from "../services/PlanService";
-import { getScheduleFromState } from "../state";
+import { getScheduleDataFromState } from "../state";
 
 const Wrapper = styled.div`
   display: flex;
@@ -62,6 +62,7 @@ interface ReduxStoreSignupScreenProps {
   major?: Major;
   planStr?: string;
   schedule: DNDSchedule;
+  getCurrentScheduleData: () => ScheduleSlice;
 }
 
 interface ReduxDispatchSignupScreenProps {
@@ -168,12 +169,16 @@ class SignupScreenComponent extends React.Component<Props, SignupScreenState> {
             errorEmail: response.errors.email,
           });
         } else {
+          const scheduleData: ScheduleSlice = this.props.getCurrentScheduleData();
           createPlanForUser(response.user.id, response.user.token, {
             name: "Plan 1",
             link_sharing_enabled: false,
             schedule: this.props.schedule,
             major: this.props.major ? this.props.major.name : "",
             planString: this.props.planStr ? this.props.planStr : "None",
+            // course_counter: scheduleData.currentClassCounter,
+            // warnings: scheduleData.warnings,
+            // course_warnings: scheduleData.courseWarnings,
           }).then(res => {
             this.props.addPlanId(res.plan.id);
             this.props.setPlanName(res.plan.name);
@@ -332,7 +337,7 @@ const mapStateToProps = (state: AppState) => ({
   graduationYear: state.user.graduationYear,
   major: state.user.major,
   planStr: state.user.planStr,
-  schedule: getScheduleFromState(state),
+  getCurrentScheduleData: () => getScheduleDataFromState(state),
 });
 
 /**

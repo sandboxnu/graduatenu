@@ -8,7 +8,9 @@ import { AppState } from "../state/reducers/state";
 import { Dispatch } from "redux";
 import { getSchedulesFromState, getActiveScheduleFromState } from "../state";
 import { setActiveScheduleAction } from "../state/actions/schedulesActions";
-import { NamedSchedule, PastPresentSchedule } from "../models/types";
+// import { setNamedSchedule } from "../state/actions/scheduleActions";
+import { NamedSchedule } from "../models/types";
+import { Schedule } from "../../../common/types";
 
 const SwitchPlanContainer = styled.div`
   display: flex;
@@ -72,6 +74,7 @@ export class SwitchPlanPopperComponent extends React.Component<
     if (newSchedule) {
       const newActive = this.props.schedules.indexOf(newSchedule);
       this.props.setActiveSchedule(newActive);
+      //this.props.setNamedSchedule(newSchedule);
       this.setState({
         anchorEl: null,
       });

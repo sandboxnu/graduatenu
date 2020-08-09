@@ -139,6 +139,9 @@ class LoginScreenComponent extends React.Component<Props, LoginScreenState> {
           this.props.setGraduationYear(response.user.graduationYear);
           this.props.setToken(response.user.token);
           this.props.setUserId(response.user.id);
+          /**
+           * TODO: NEEDS TO SET USER PLANS AND MAJOR/COOP CYCLE HERE AS WELL
+           */
           this.props.history.push("/home");
         }
       });

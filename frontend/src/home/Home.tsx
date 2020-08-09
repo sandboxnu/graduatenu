@@ -7,6 +7,8 @@ import {
   DNDScheduleYear,
   DNDScheduleTerm,
   IPlanData,
+  NamedSchedule,
+  ScheduleSlice,
 } from "../models/types";
 import { Schedule, Major, Status, SeasonWord } from "../../../common/types";
 import { addPrereqsToSchedule } from "../../../common/prereq_loader";
@@ -37,6 +39,7 @@ import {
   getPlanNameFromState,
   getPlanIdsFromState,
   getLinkSharingFromState,
+  getScheduleDataFromState,
 } from "../state";
 import {
   updateSemesterAction,
@@ -48,6 +51,10 @@ import {
   setMajorPlanAction,
   setPlanIdsAction,
 } from "../state/actions/userActions";
+import {
+  updateActiveSchedule,
+  addNewSchedule,
+} from "../state/actions/schedulesActions";
 import { getMajors, getPlans } from "../state";
 import { EditPlanPopper } from "./EditPlanPopper";
 import {
@@ -56,16 +63,10 @@ import {
   updatePlanForUser,
 } from "../services/PlanService";
 import { findMajorFromName } from "../utils/plan-helpers";
-import { Button, ButtonBase } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import Loader from "react-loader-spinner";
 import { ExcelUpload } from "../components/ExcelUpload";
 import { SwitchPlanPopper } from "./SwitchPlanPopper";
-import {
-  createStyles,
-  withStyles,
-  makeStyles,
-  Theme,
-} from "@material-ui/core/styles";
 
 const OuterContainer = styled.div`
   display: flex;
@@ -158,14 +159,14 @@ const HomeButtons = styled.div`
   padding: 10px 0;
 `;
 
-const SavePlanButton = styled(Button)<any>`
+const PlanPopperButton = styled(Button)<any>`
   background: #e0e0e0;
   font-weight: normal;
   float: right;
   margin: 10px;
 `;
 
-const SavePlanContainer = styled.div`
+const PlanContainer = styled.div`
   position: relative;
   align-items: flex-end;
   padding: 10px;
@@ -193,6 +194,7 @@ interface ReduxStoreHomeProps {
   planIds: number[];
   planName: string | undefined;
   linkSharing: boolean;
+  getCurrentScheduleData: () => ScheduleSlice;
 }
 
 interface ReduxDispatchHomeProps {
@@ -206,6 +208,8 @@ interface ReduxDispatchHomeProps {
   setPlanName: (name: string) => void;
   setLinkSharing: (linkSharing: boolean) => void;
   setPlanIds: (planIds: number[]) => void;
+  addNewSchedule: (newSchedule: NamedSchedule) => void;
+  updateActiveSchedule: (updatedSchedule: NamedSchedule) => void;
 }
 
 type Props = ToastHomeProps &
@@ -419,6 +423,7 @@ class HomeComponent extends React.Component<Props, HomeState> {
   updatePlan() {
     // If this is true, then a user is currently logged in and we can update their plan
     if (this.props.token && this.props.userId) {
+      const scheduleData: ScheduleSlice = this.props.getCurrentScheduleData();
       updatePlanForUser(
         this.props.userId,
         this.props.token,
@@ -430,6 +435,9 @@ class HomeComponent extends React.Component<Props, HomeState> {
           schedule: this.props.schedule,
           major: this.props.major ? this.props.major.name : "",
           planString: this.props.planStr ? this.props.planStr : "None",
+          // course_counter: scheduleData.currentClassCounter,
+          // warnings: scheduleData.warnings,
+          // course_warnings: scheduleData.courseWarnings,
         }
       ).then(plan => alert("Your plan has been saved."));
     } else {
@@ -445,13 +453,21 @@ class HomeComponent extends React.Component<Props, HomeState> {
   savePlan() {
     // If this is true, then a user is currently logged in and we can update their plan
     if (this.props.token && this.props.userId) {
+      const scheduleData: ScheduleSlice = this.props.getCurrentScheduleData();
       createPlanForUser(this.props.userId, this.props.token, {
         name: `Schedule${this.state.planCount + 1}`,
         link_sharing_enabled: this.props.linkSharing,
         schedule: this.props.schedule,
         major: this.props.major ? this.props.major.name : "",
         planString: this.props.planStr ? this.props.planStr : "None",
+        // course_counter: scheduleData.currentClassCounter,
+        // warnings: scheduleData.warnings,
+        // course_warnings: scheduleData.courseWarnings,
       }).then(plan => {
+        this.props.addNewSchedule({
+          name: plan.plan.name,
+          schedule: plan.plan.schedule,
+        });
         this.setState({ planCount: this.state.planCount + 1 });
         alert("Your plan has been saved.");
       });
@@ -493,23 +509,23 @@ class HomeComponent extends React.Component<Props, HomeState> {
                   )}
                 </HomePlan>
                 <HomeButtons>
-                  <SavePlanContainer>
-                    <SavePlanButton
+                  <PlanContainer>
+                    <PlanPopperButton
                       variant="contained"
                       onClick={this.savePlan.bind(this)}
                     >
                       Save Plan
-                    </SavePlanButton>
-                  </SavePlanContainer>
+                    </PlanPopperButton>
+                  </PlanContainer>
 
-                  <SavePlanContainer>
-                    <SavePlanButton
+                  <PlanContainer>
+                    <PlanPopperButton
                       variant="contained"
                       onClick={this.updatePlan.bind(this)}
                     >
                       Update Plan
-                    </SavePlanButton>
-                  </SavePlanContainer>
+                    </PlanPopperButton>
+                  </PlanContainer>
                   <ExcelUpload setSchedule={this.setSchedule.bind(this)} />
                 </HomeButtons>
               </HomeAboveSchedule>
@@ -536,6 +552,7 @@ const mapStateToProps = (state: AppState) => ({
   planName: getPlanNameFromState(state),
   planIds: getPlanIdsFromState(state),
   linkSharing: getLinkSharingFromState(state),
+  getCurrentScheduleData: () => getScheduleDataFromState(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
@@ -552,6 +569,10 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   setMajorPlans: (major: Major | undefined, planStr: string) =>
     dispatch(setMajorPlanAction(major, planStr)),
   setPlanIds: (planIds: number[]) => dispatch(setPlanIdsAction(planIds)),
+  addNewSchedule: (newSchedule: NamedSchedule) =>
+    dispatch(addNewSchedule(newSchedule)),
+  updateActiveSchedule: (updatedSchedule: NamedSchedule) =>
+    dispatch(updateActiveSchedule(updatedSchedule)),
 });
 
 export const Home = connect<

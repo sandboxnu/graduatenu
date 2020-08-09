@@ -174,6 +174,9 @@ export interface IPlanData {
   schedule: DNDSchedule;
   major: string;
   planString: string;
+  // warnings: IWarning[];
+  // course_warnings: CourseWarning[];
+  // course_counter: number;
 }
 
 /**
@@ -185,6 +188,9 @@ export interface ICreatePlanData {
   schedule: DNDSchedule;
   major: string;
   planString: string;
+  // warnings: IWarning[];
+  // course_warnings: CourseWarning[];
+  // course_counter: number;
 }
 
 /** ------------------------------------------------------------------------

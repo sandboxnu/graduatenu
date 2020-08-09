@@ -5,6 +5,7 @@ import {
   IWarning,
   DNDScheduleTerm,
   NamedSchedule,
+  ScheduleSlice,
 } from "../models/types";
 import { Major, Schedule } from "../../../common/types";
 
@@ -148,6 +149,14 @@ export const getCourseWarningsFromState = (
   state.schedule.present.courseWarnings.filter(
     w => w.termId === semester.termId
   );
+
+/**
+ *
+ * @param state
+ */
+export const getScheduleDataFromState = (state: AppState): ScheduleSlice => {
+  return state.schedule.present;
+};
 
 /**
  * Get the list of schedule names from the AppState

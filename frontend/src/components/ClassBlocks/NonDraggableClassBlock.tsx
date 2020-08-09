@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Card } from "@material-ui/core";
 import { ClassBlockBody } from "./ClassBlockBody";
-import { ScheduleCourse } from "graduate-common";
+import { ScheduleCourse } from "../../../../common/types";
 import { GraduateGrey } from "../../constants";
 
 const Block = styled(Card)`
