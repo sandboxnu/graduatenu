@@ -3,7 +3,7 @@ import produce from "immer";
 import { getType } from "typesafe-actions";
 import { UserAction, ScheduleAction } from "../actions";
 import {
-  setMajorAction,
+  setDeclaredMajorAction,
   setFullNameAction,
   setAcademicYearAction,
   setGraduationYearAction,
@@ -19,7 +19,7 @@ export interface UserState {
   fullName: string;
   academicYear: number;
   graduationYear: number;
-  major?: Major;
+  declaredMajor?: Major;
   planStr?: string;
   token: string;
   id: number;
@@ -31,7 +31,7 @@ const initialState: UserState = {
   fullName: "",
   academicYear: 0,
   graduationYear: 0,
-  major: undefined,
+  declaredMajor: undefined,
   planStr: "",
   token: "",
   id: 0,
@@ -53,8 +53,8 @@ export const userReducer = (
         }
         return draft;
       }
-      case getType(setMajorAction): {
-        draft.major = action.payload.major;
+      case getType(setDeclaredMajorAction): {
+        draft.declaredMajor = action.payload.major;
         draft.planStr = undefined;
         return draft;
       }

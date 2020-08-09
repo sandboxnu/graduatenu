@@ -26,6 +26,12 @@ export const getFullNameFromState = (state: AppState): string =>
 export const getUserCoopCycleFromState = (state: AppState): string =>
   state.user.coopCycle;
 
+ /* Get a users academic year from the AppState
+ * @param state the AppState
+ */
+export const getAcademicYearFromState = (state: AppState): number =>
+  state.user.academicYear;
+
 /**
  * Get the schedule object from the AppState
  * @param state the AppState

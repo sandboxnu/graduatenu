@@ -3,7 +3,7 @@ name: CI
 on: [push]
 
 jobs:
-  build:
+  run-tests:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -19,3 +19,22 @@ jobs:
         run: |
           yarn install
           yarn test
+  build-frontend-image:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build Docker image for frontend
+        run: |
+          docker build -t frontend -f frontend/Dockerfile .
+  build-api-image:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build Docker image for api
+        run: |
+          cd api
+          docker build -t api .
