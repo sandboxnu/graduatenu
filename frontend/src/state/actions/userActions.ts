@@ -22,7 +22,7 @@ export const setGraduationYearAction = createAction(
   })
 )();
 
-export const setMajorAction = createAction(
+export const setDeclaredMajorAction = createAction(
   "user/SET_MAJOR",
   (major?: Major) => ({
     major,

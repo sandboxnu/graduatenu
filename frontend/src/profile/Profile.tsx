@@ -10,7 +10,7 @@ import { ChangePasswordModal } from "./ChangePasswordModal"
 import { IconButton } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
 import {
-    setMajorAction,
+    setDeclaredMajorAction,
     setFullNameAction,
     setEmailAction,
     setUserCoopCycleAction
@@ -132,7 +132,7 @@ interface SaveProps {
     coop: string,
     token: string,
     id: number,
-    setMajorAction: (major?: Major) => void,
+    setDeclaredMajorAction: (major?: Major) => void,
     setUserCoopCycleAction: (plan: string) => void,
     setFullNameAction: (fullName: string) => void,
     setEmailAction: (email: string) => void,
@@ -271,7 +271,7 @@ const ProfileEmail = (props: ProfileEmailProps) => {
 
 const save = (props: SaveProps) => {
     props.setEdit(false);
-    props.setMajorAction(props.major);
+    props.setDeclaredMajorAction(props.major);
     props.setFullNameAction(props.name);
     props.setEmailAction(props.email);
     props.setUserCoopCycleAction(props.coop);
@@ -391,7 +391,7 @@ export const ProfileComponent: React.FC = (props: any) => {
                         coop={coop}
                         token={props.token}
                         id={props.id}
-                        setMajorAction={props.setMajorAction}
+                        setDeclaredMajorAction={props.setDeclaredMajorAction}
                         setUserCoopCycleAction={props.setUserCoopCycleAction}
                         setFullNameAction={props.setFullNameAction}
                         setEmailAction={props.setEmailAction}/>
@@ -407,7 +407,7 @@ export const ProfileComponent: React.FC = (props: any) => {
  * @param state the AppState
  */
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-    setMajorAction: (major?: Major) => dispatch(setMajorAction(major)),
+    setDeclaredMajorAction: (major?: Major) => dispatch(setDeclaredMajorAction(major)),
     setUserCoopCycleAction: (plan: string) => dispatch(setUserCoopCycleAction(plan)),
     setFullNameAction: (fullName: string) => dispatch(setFullNameAction(fullName)),
     setEmailAction: (email: string) => dispatch(setEmailAction(email))
