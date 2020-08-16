@@ -20,7 +20,7 @@ class ApplicationController < ActionController::API
     #added academic/graduation year
     def configure_permitted_parameters
 
-        devise_parameter_sanitizer.permit(:sign_up, keys: [:username, :email, :password, :academic_year, :graduation_year, :major, :coop_cycle])
+        devise_parameter_sanitizer.permit(:sign_up, keys: [:username, :email, :password, :academic_year, :graduation_year, :major, :coop_cycle, :catalog_year])
         devise_parameter_sanitizer.permit(:account_update, keys: [:email, :password, :password_confirmation, :current_password])
     end
 
