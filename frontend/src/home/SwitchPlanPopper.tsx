@@ -8,7 +8,7 @@ import { AppState } from "../state/reducers/state";
 import { Dispatch } from "redux";
 import { getSchedulesFromState, getActiveScheduleFromState } from "../state";
 import { setActiveScheduleAction } from "../state/actions/schedulesActions";
-// import { setNamedSchedule } from "../state/actions/scheduleActions";
+import { setNamedSchedule } from "../state/actions/scheduleActions";
 import { NamedSchedule } from "../models/types";
 import { Schedule } from "../../../common/types";
 
@@ -31,6 +31,7 @@ interface ReduxStoreSwitchSchedulesProps {
 
 interface ReduxDispatchSwitchSchedulesProps {
   setActiveSchedule: (activeSchedule: number) => void;
+  setNamedSchedule: (newSchedule: NamedSchedule) => void;
 }
 
 type Props = ReduxStoreSwitchSchedulesProps & ReduxDispatchSwitchSchedulesProps;
@@ -74,7 +75,7 @@ export class SwitchPlanPopperComponent extends React.Component<
     if (newSchedule) {
       const newActive = this.props.schedules.indexOf(newSchedule);
       this.props.setActiveSchedule(newActive);
-      //this.props.setNamedSchedule(newSchedule);
+      this.props.setNamedSchedule(newSchedule);
       this.setState({
         anchorEl: null,
       });
@@ -130,6 +131,8 @@ const mapStateToProps = (state: AppState) => ({
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   setActiveSchedule: (activeSchedule: number) =>
     dispatch(setActiveScheduleAction(activeSchedule)),
+  setNamedSchedule: (newSchedule: NamedSchedule) =>
+    dispatch(setNamedSchedule(newSchedule)),
 });
 
 export const SwitchPlanPopper = connect<

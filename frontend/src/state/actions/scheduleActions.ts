@@ -3,6 +3,7 @@ import {
   DNDScheduleCourse,
   DNDScheduleTerm,
   DNDSchedule,
+  NamedSchedule,
 } from "../../models/types";
 import {
   ScheduleCourse,
@@ -68,4 +69,9 @@ export const setDNDScheduleAction = createAction(
 export const setCompletedCourses = createAction(
   "schedule/SET_COMPLETED_COURSES",
   (completedCourses: ScheduleCourse[]) => ({ completedCourses })
+)();
+
+export const setNamedSchedule = createAction(
+  "schedule/SET_NAMED_SCHEDULE",
+  (namedSchedule: NamedSchedule) => ({ namedSchedule })
 )();

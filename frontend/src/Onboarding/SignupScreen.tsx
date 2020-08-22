@@ -16,6 +16,8 @@ import {
   setPlanNameAction,
   setLinkSharingAction,
 } from "../state/actions/userActions";
+import { addNewSchedule } from "../state/actions/schedulesActions";
+
 import { createPlanForUser } from "../services/PlanService";
 import { getScheduleDataFromState } from "../state";
 
@@ -71,6 +73,7 @@ interface ReduxDispatchSignupScreenProps {
   addPlanId: (planId: number) => void;
   setPlanName: (name: string) => void;
   setLinkSharing: (linkSharing: boolean) => void;
+  addNewSchedule: (name: string, newSchedule: ScheduleSlice) => void;
 }
 
 type Props = ReduxStoreSignupScreenProps &
@@ -173,16 +176,20 @@ class SignupScreenComponent extends React.Component<Props, SignupScreenState> {
           createPlanForUser(response.user.id, response.user.token, {
             name: "Plan 1",
             link_sharing_enabled: false,
-            schedule: this.props.schedule,
+            schedule: scheduleData.schedule,
             major: this.props.major ? this.props.major.name : "",
             planString: this.props.planStr ? this.props.planStr : "None",
-            // course_counter: scheduleData.currentClassCounter,
-            // warnings: scheduleData.warnings,
-            // course_warnings: scheduleData.courseWarnings,
-          }).then(res => {
-            this.props.addPlanId(res.plan.id);
-            this.props.setPlanName(res.plan.name);
-            this.props.setLinkSharing(res.plan.link_sharing_enabled);
+            course_counter: scheduleData.currentClassCounter,
+            warnings: scheduleData.warnings,
+            course_warnings: scheduleData.courseWarnings,
+          }).then(plan => {
+            this.props.addNewSchedule(
+              plan.plan.name,
+              plan.plan as ScheduleSlice
+            );
+            this.props.addPlanId(plan.plan.id);
+            this.props.setPlanName(plan.plan.name);
+            this.props.setLinkSharing(plan.plan.link_sharing_enabled);
           });
           this.props.setUserId(response.user.id);
           this.props.setToken(response.user.token);
@@ -349,6 +356,9 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   setUserId: (id: number) => dispatch(setUserIdAction(id)),
   addPlanId: (planId: number) => dispatch(addPlanIdAction(planId)),
   setPlanName: (name: string) => dispatch(setPlanNameAction(name)),
+  addNewSchedule: (name: string, newSchedule: ScheduleSlice) =>
+    dispatch(addNewSchedule(name, newSchedule)),
+
   setLinkSharing: (linkSharing: boolean) =>
     dispatch(setLinkSharingAction(linkSharing)),
 });

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_19_220046) do
+ActiveRecord::Schema.define(version: 2020_08_02_185055) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,9 @@ ActiveRecord::Schema.define(version: 2020_06_19_220046) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "major"
     t.string "planString"
+    t.json "course_warnings", default: [], array: true
+    t.json "warnings", default: [], array: true
+    t.integer "course_counter"
     t.index ["user_id"], name: "index_plans_on_user_id"
   end
 

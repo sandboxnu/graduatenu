@@ -208,8 +208,8 @@ interface ReduxDispatchHomeProps {
   setPlanName: (name: string) => void;
   setLinkSharing: (linkSharing: boolean) => void;
   setPlanIds: (planIds: number[]) => void;
-  addNewSchedule: (newSchedule: NamedSchedule) => void;
-  updateActiveSchedule: (updatedSchedule: NamedSchedule) => void;
+  addNewSchedule: (name: string, newSchedule: ScheduleSlice) => void;
+  updateActiveSchedule: (updatedSchedule: ScheduleSlice) => void;
 }
 
 type Props = ToastHomeProps &
@@ -435,9 +435,9 @@ class HomeComponent extends React.Component<Props, HomeState> {
           schedule: this.props.schedule,
           major: this.props.major ? this.props.major.name : "",
           planString: this.props.planStr ? this.props.planStr : "None",
-          // course_counter: scheduleData.currentClassCounter,
-          // warnings: scheduleData.warnings,
-          // course_warnings: scheduleData.courseWarnings,
+          course_counter: scheduleData.currentClassCounter,
+          warnings: scheduleData.warnings,
+          course_warnings: scheduleData.courseWarnings,
         }
       ).then(plan => alert("Your plan has been saved."));
     } else {
@@ -455,19 +455,16 @@ class HomeComponent extends React.Component<Props, HomeState> {
     if (this.props.token && this.props.userId) {
       const scheduleData: ScheduleSlice = this.props.getCurrentScheduleData();
       createPlanForUser(this.props.userId, this.props.token, {
-        name: `Schedule${this.state.planCount + 1}`,
+        name: `Schedule ${this.state.planCount + 1}`,
         link_sharing_enabled: this.props.linkSharing,
         schedule: this.props.schedule,
         major: this.props.major ? this.props.major.name : "",
         planString: this.props.planStr ? this.props.planStr : "None",
-        // course_counter: scheduleData.currentClassCounter,
-        // warnings: scheduleData.warnings,
-        // course_warnings: scheduleData.courseWarnings,
+        course_counter: scheduleData.currentClassCounter,
+        warnings: scheduleData.warnings,
+        course_warnings: scheduleData.courseWarnings,
       }).then(plan => {
-        this.props.addNewSchedule({
-          name: plan.plan.name,
-          schedule: plan.plan.schedule,
-        });
+        this.props.addNewSchedule(plan.plan.name, plan.plan as ScheduleSlice);
         this.setState({ planCount: this.state.planCount + 1 });
         alert("Your plan has been saved.");
       });
@@ -569,9 +566,9 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   setMajorPlans: (major: Major | undefined, planStr: string) =>
     dispatch(setMajorPlanAction(major, planStr)),
   setPlanIds: (planIds: number[]) => dispatch(setPlanIdsAction(planIds)),
-  addNewSchedule: (newSchedule: NamedSchedule) =>
-    dispatch(addNewSchedule(newSchedule)),
-  updateActiveSchedule: (updatedSchedule: NamedSchedule) =>
+  addNewSchedule: (name: string, newSchedule: ScheduleSlice) =>
+    dispatch(addNewSchedule(name, newSchedule)),
+  updateActiveSchedule: (updatedSchedule: ScheduleSlice) =>
     dispatch(updateActiveSchedule(updatedSchedule)),
 });
 

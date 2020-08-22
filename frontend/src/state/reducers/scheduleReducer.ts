@@ -1,5 +1,10 @@
 import { ScheduleCourse } from "../../../../common/types";
-import { DNDSchedule, IWarning, CourseWarning } from "../../models/types";
+import {
+  DNDSchedule,
+  IWarning,
+  CourseWarning,
+  NamedSchedule,
+} from "../../models/types";
 import { mockEmptySchedule } from "../../data/mockData";
 import produce from "immer";
 import { getType } from "typesafe-actions";
@@ -14,6 +19,7 @@ import {
   undoRemoveClassAction,
   setCoopCycle,
   setCompletedCourses,
+  setNamedSchedule,
 } from "../actions/scheduleActions";
 import {
   convertTermIdToSeason,
@@ -240,6 +246,16 @@ export const scheduleReducer = (
 
         draft.present.warnings = container.normalWarnings;
         draft.present.courseWarnings = container.courseWarnings;
+        return draft;
+      }
+
+      case getType(setNamedSchedule): {
+        const namedSchedule = action.payload.namedSchedule.schedule.present;
+        draft.present.warnings = namedSchedule.warnings;
+        draft.present.courseWarnings = namedSchedule.courseWarnings;
+        draft.present.currentClassCounter = namedSchedule.currentClassCounter;
+        draft.present.schedule = namedSchedule.schedule;
+        draft.present.warnings = namedSchedule.warnings;
         return draft;
       }
     }

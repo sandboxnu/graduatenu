@@ -17,19 +17,19 @@ export interface SchedulesState {
 const initialState: SchedulesState = {
   activeSchedule: 0,
   schedules: [
-    {
-      name: "Schedule 1",
-      schedule: {
-        present: {
-          currentClassCounter: 100,
-          isScheduleLoading: false,
-          scheduleError: "",
-          schedule: mockData,
-          warnings: [],
-          courseWarnings: [],
-        },
-      },
-    },
+    // {
+    //   name: "Schedule 1",
+    //   schedule: {
+    //     present: {
+    //       currentClassCounter: 100,
+    //       isScheduleLoading: false,
+    //       scheduleError: "",
+    //       schedule: mockData,
+    //       warnings: [],
+    //       courseWarnings: [],
+    //     },
+    //   },
+    // },
   ],
 };
 
@@ -49,14 +49,21 @@ export const schedulesReducer = (
       case getType(updateActiveSchedule): {
         const { updatedActiveSchedule } = action.payload;
 
-        draft.schedules[draft.activeSchedule] = updatedActiveSchedule;
+        draft.schedules[
+          draft.activeSchedule
+        ].schedule.present = updatedActiveSchedule;
 
         return draft;
       }
       case getType(addNewSchedule): {
-        const { newSchedule } = action.payload;
+        const { name, newSchedule } = action.payload;
 
-        draft.schedules.push(newSchedule);
+        const namedSchedule = {
+          name: name,
+          schedule: { present: newSchedule },
+        };
+
+        draft.schedules.push(namedSchedule);
         draft.activeSchedule = draft.schedules.length - 1;
 
         return draft;
