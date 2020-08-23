@@ -29,7 +29,7 @@ import { Dispatch } from "redux";
 import {
   getScheduleFromState,
   getPlanStrFromState,
-  getMajorFromState,
+  getDeclaredMajorFromState,
   getWarningsFromState,
 } from "../state";
 import {
@@ -329,7 +329,7 @@ class HomeComponent extends React.Component<Props> {
 const mapStateToProps = (state: AppState) => ({
   schedule: getScheduleFromState(state),
   planStr: getPlanStrFromState(state),
-  major: getMajorFromState(state),
+  major: getDeclaredMajorFromState(state),
   warnings: getWarningsFromState(state),
 });
 

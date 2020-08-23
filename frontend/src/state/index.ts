@@ -20,7 +20,13 @@ export const getFullNameFromState = (state: AppState): string =>
   state.user.fullName;
 
 /**
- * Get a users academic year from the AppState
+ * Get a users fullname from the AppState
+ * @param state the AppState
+ */
+export const getUserCoopCycleFromState = (state: AppState): string =>
+  state.user.coopCycle;
+
+ /* Get a users academic year from the AppState
  * @param state the AppState
  */
 export const getAcademicYearFromState = (state: AppState): number =>
@@ -44,9 +50,29 @@ export const getPlanStrFromState = (state: AppState): string | undefined =>
  * Get the selected major object from the AppState
  * @param state the AppState
  */
-export const getMajorFromState = (state: AppState): Major | undefined =>
-  state.user.major;
+export const getDeclaredMajorFromState = (state: AppState): Major | undefined =>
+  state.user.declaredMajor;
 
+/**
+ * Get the user token from the AppState
+ * @param state the AppState
+ */
+export const getToken = (state: AppState): string =>
+  state.user.token;
+
+/**
+ * Get the user id from the AppState
+ * @param state the AppState
+ */
+export const getId = (state: AppState): number =>
+  state.user.id;
+
+/**
+ * Get the user email from the AppState
+ * @param state the AppState
+ */
+export const getEmail = (state: AppState): string => 
+  state.user.email;
 /**
  * Get the warnings generated from the AppState
  * @param state the AppState
@@ -101,7 +127,7 @@ export const getPlansError = (state: AppState): string =>
  */
 export const getTakenCredits = (state: AppState): number =>
   state.schedule.present.creditsTaken;
-
+ 
 /**
  * Get the course specific warnings from the AppState
  * @param state the AppState

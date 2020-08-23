@@ -164,6 +164,35 @@ export interface ILoginData {
   password: string;
 }
 
+/**
+ * Data needed to update a user
+ */
+export interface IUpdateUser {
+  token: string,
+  id: number
+}
+
+/**
+ * A model for data pertaining to a User object.
+ */
+export interface IUpdateUserData {
+  email?: string;
+  major?: string;
+  username?: string;
+  academic_year?: number;
+  graduation_year?: number;
+  coop_cycle?: string;
+}
+
+/**
+ * A model for data pertaining to a User object.
+ */
+export interface IUpdateUserPassword {
+  old_password: string;
+  new_password: string;
+  confirm_password: string;
+}
+
 /** ------------------------------------------------------------------------
  *
  *            OLD STUFF FOLLOWS ! This stuff is big outdated and is only

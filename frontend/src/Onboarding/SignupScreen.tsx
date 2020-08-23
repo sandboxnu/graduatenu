@@ -9,7 +9,13 @@ import { IUserData } from "../models/types";
 import { PrimaryButton } from "../components/common/PrimaryButton";
 import { registerUser } from "../services/UserService";
 import { Dispatch } from "redux";
-import { setTokenAction } from "../state/actions/userActions";
+import { 
+  setTokenAction,
+  setIdAction,
+  setEmailAction,
+  setUserCoopCycleAction, 
+} from "../state/actions/userActions";
+import { setCoopCycle } from "../state/actions/scheduleActions";
 
 const Wrapper = styled.div`
   display: flex;
@@ -57,6 +63,10 @@ interface ReduxStoreSignupScreenProps {
 
 interface ReduxDispatchSignupScreenProps {
   setToken: (token: string) => void;
+  setId: (id: number) => void;
+  setEmail: (email: string) => void;
+  setMajor: (major: string) => void;
+  setUserCoopCycle: (coopCycle: string) => void;
 }
 
 type Props = ReduxStoreSignupScreenProps &
@@ -156,6 +166,9 @@ class SignupScreenComponent extends React.Component<Props, SignupScreenState> {
           });
         } else {
           this.props.setToken(response.user.token);
+          this.props.setId(response.user.id);
+          this.props.setEmail(response.user.email);
+          this.props.setUserCoopCycle(response.user.coopCycle);
           this.props.history.push("/home");
         }
       });
@@ -305,7 +318,7 @@ const mapStateToProps = (state: AppState) => ({
   fullName: state.user.fullName,
   academicYear: state.user.academicYear,
   graduationYear: state.user.graduationYear,
-  major: state.user.major,
+  major: state.user.declaredMajor,
   planStr: state.user.planStr,
 });
 
@@ -315,6 +328,9 @@ const mapStateToProps = (state: AppState) => ({
  */
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   setToken: (token: string) => dispatch(setTokenAction(token)),
+  setId: (id: number) => dispatch(setIdAction(id)),
+  setEmail: (email: string) => dispatch(setEmailAction(email)),
+  setUserCoopCycle: (coopCycle: string) => dispatch(setUserCoopCycleAction(coopCycle))
 });
 
 /**

@@ -9,10 +9,13 @@ import { PrimaryButton } from "../components/common/PrimaryButton";
 import { Dispatch } from "redux";
 import {
   setFullNameAction,
-  setMajorAction,
+  setDeclaredMajorAction,
   setAcademicYearAction,
   setGraduationYearAction,
   setTokenAction,
+  setIdAction,
+  setEmailAction,
+  setUserCoopCycleAction,
 } from "../state/actions/userActions";
 import { setCoopCycle } from "../state/actions/scheduleActions";
 import { loginUser } from "../services/UserService";
@@ -59,7 +62,10 @@ interface ReduxStoreLoginScreenProps {
   setGraduationYear: (graduationYear: number) => void;
   setMajor: (major?: Major) => void;
   setCoopCycle: (plan: Schedule) => void;
+  setUserCoopCycle: (coopCycle: string) => void;
   setToken: (token: string) => void;
+  setId: (id: number) => void;
+  setEmail: (email: string) => void;
 }
 
 type Props = ReduxStoreLoginScreenProps & RouteComponentProps<{}>;
@@ -136,6 +142,9 @@ class LoginScreenComponent extends React.Component<Props, LoginScreenState> {
           this.props.setAcademicYear(response.user.academicYear);
           this.props.setGraduationYear(response.user.graduationYear);
           this.props.setToken(response.user.token);
+          this.props.setId(response.user.id);
+          this.props.setEmail(response.user.email);
+          this.props.setUserCoopCycle(response.user.coopCycle);
           this.props.history.push("/home");
         }
       });
@@ -247,9 +256,12 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     dispatch(setAcademicYearAction(academicYear)),
   setGraduationYear: (academicYear: number) =>
     dispatch(setGraduationYearAction(academicYear)),
-  setMajor: (major?: Major) => dispatch(setMajorAction(major)),
+  setMajor: (major?: Major) => dispatch(setDeclaredMajorAction(major)),
   setCoopCycle: (plan: Schedule) => dispatch(setCoopCycle(plan)),
+  setUserCoopCycle: (coopCycle: string) => dispatch(setUserCoopCycleAction(coopCycle)),
   setToken: (token: string) => dispatch(setTokenAction(token)),
+  setId: (id: number) => dispatch(setIdAction(id)),
+  setEmail: (email: string) => dispatch(setEmailAction(email))
 });
 
 /**

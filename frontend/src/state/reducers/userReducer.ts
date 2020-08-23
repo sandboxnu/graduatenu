@@ -3,11 +3,14 @@ import produce from "immer";
 import { getType } from "typesafe-actions";
 import { UserAction, ScheduleAction } from "../actions";
 import {
-  setMajorAction,
+  setDeclaredMajorAction,
   setFullNameAction,
   setAcademicYearAction,
   setGraduationYearAction,
   setTokenAction,
+  setIdAction,
+  setUserCoopCycleAction,
+  setEmailAction
 } from "../actions/userActions";
 import { setCoopCycle } from "../actions/scheduleActions";
 import { planToString } from "../../utils";
@@ -16,18 +19,24 @@ export interface UserState {
   fullName: string;
   academicYear: number;
   graduationYear: number;
-  major?: Major;
+  declaredMajor?: Major;
   planStr?: string;
   token: string;
+  id: number;
+  email: string;
+  coopCycle: string;
 }
 
 const initialState: UserState = {
   fullName: "",
   academicYear: 0,
   graduationYear: 0,
-  major: undefined,
+  declaredMajor: undefined,
   planStr: "",
   token: "",
+  id: 0,
+  email: "",
+  coopCycle: "",
 };
 
 export const userReducer = (
@@ -44,8 +53,8 @@ export const userReducer = (
         }
         return draft;
       }
-      case getType(setMajorAction): {
-        draft.major = action.payload.major;
+      case getType(setDeclaredMajorAction): {
+        draft.declaredMajor = action.payload.major;
         draft.planStr = undefined;
         return draft;
       }
@@ -63,6 +72,18 @@ export const userReducer = (
       }
       case getType(setTokenAction): {
         draft.token = action.payload.token;
+        return draft;
+      }
+      case getType(setIdAction): {
+        draft.id = action.payload.id;
+        return draft;
+      }
+      case getType(setEmailAction): {
+        draft.email = action.payload.email;
+        return draft;
+      }
+      case getType(setUserCoopCycleAction): {
+        draft.coopCycle = action.payload.coopCycle;
         return draft;
       }
     }
