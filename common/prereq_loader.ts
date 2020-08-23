@@ -205,8 +205,8 @@ async function queryCoursePrereqData(courses: SimpleCourse[]): Promise<PrereqQue
   const querySchema: string = `
   query {
     ${courseSchema.reduce((accumulator: string, currentValue: string, index: number) => {
-      return accumulator + `course${String(index)}: ${currentValue}\n`;
-    }, '')}
+    return accumulator + `course${String(index)}: ${currentValue}\n`;
+  }, '')}
   }
   `;
 
