@@ -1,5 +1,5 @@
 import { createAction } from "typesafe-actions";
-import { ScheduleSlice } from "../../models/types";
+import { ScheduleSlice, NamedSchedule } from "../../models/types";
 
 export const setActiveScheduleAction = createAction(
   "schedules/SET_ACTIVE_SCHEDULE",
@@ -11,7 +11,12 @@ export const addNewSchedule = createAction(
   (name: string, newSchedule: ScheduleSlice) => ({ name, newSchedule })
 )();
 
+export const setSchedules = createAction(
+  "schedules/SET_SCHEDULE",
+  (schedules: NamedSchedule[]) => ({ schedules })
+)();
+
 export const updateActiveSchedule = createAction(
   "schedules/UPDATE_ACTIVE_SCHEDULE",
-  (updatedActiveSchedule: ScheduleSlice) => ({ updatedActiveSchedule })
+  (updatedSchedule: ScheduleSlice) => ({ updatedSchedule })
 )();

@@ -439,7 +439,15 @@ class HomeComponent extends React.Component<Props, HomeState> {
           warnings: scheduleData.warnings,
           course_warnings: scheduleData.courseWarnings,
         }
-      ).then(plan => alert("Your plan has been saved."));
+      ).then(plan => {
+        this.props.updateActiveSchedule({
+          ...plan.plan,
+          currentClassCounter: plan.plan.courseCounter,
+          isScheduleLoading: false,
+          scheduleError: "",
+        } as ScheduleSlice);
+        alert("Your plan has been updated.");
+      });
     } else {
       alert("You must be logged in to save your plan.");
     }
@@ -464,7 +472,12 @@ class HomeComponent extends React.Component<Props, HomeState> {
         warnings: scheduleData.warnings,
         course_warnings: scheduleData.courseWarnings,
       }).then(plan => {
-        this.props.addNewSchedule(plan.plan.name, plan.plan as ScheduleSlice);
+        this.props.addNewSchedule(plan.plan.name, {
+          ...plan.plan,
+          currentClassCounter: plan.plan.courseCounter,
+          isScheduleLoading: false,
+          scheduleError: "",
+        } as ScheduleSlice);
         this.setState({ planCount: this.state.planCount + 1 });
         alert("Your plan has been saved.");
       });

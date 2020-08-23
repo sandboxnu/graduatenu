@@ -4,19 +4,22 @@ import { withRouter, RouteComponentProps, Link } from "react-router-dom";
 import styled from "styled-components";
 import { TextField } from "@material-ui/core";
 import { Major, Schedule } from "../../../common/types";
-import { ILoginData } from "../models/types";
+import { ILoginData, ScheduleSlice, NamedSchedule } from "../models/types";
 import { PrimaryButton } from "../components/common/PrimaryButton";
 import { Dispatch } from "redux";
+import { AppState } from "../state/reducers/state";
 import {
   setFullNameAction,
-  setMajorAction,
+  setMajorPlanAction,
   setAcademicYearAction,
   setGraduationYearAction,
   setTokenAction,
   setUserIdAction,
 } from "../state/actions/userActions";
-import { setCoopCycle } from "../state/actions/scheduleActions";
+import { getMajors } from "../state";
+import { setSchedules } from "../state/actions/schedulesActions";
 import { loginUser } from "../services/UserService";
+import { findAllPlansForUser } from "../services/PlanService";
 
 const Wrapper = styled.div`
   display: flex;
@@ -58,13 +61,20 @@ interface ReduxStoreLoginScreenProps {
   setFullName: (fullName: string) => void;
   setAcademicYear: (academicYear: number) => void;
   setGraduationYear: (graduationYear: number) => void;
-  setMajor: (major?: Major) => void;
+  setMajorPlan: (major: Major | undefined, planStr: string) => void;
   setCoopCycle: (plan: Schedule) => void;
   setToken: (token: string) => void;
   setUserId: (id: number) => void;
+  setSchedules: (schedules: NamedSchedule[]) => void;
+  setPlanStr: (planStr: string) => void;
+}
+interface ReduxStoreSignupScreenProps {
+  majors: Major[];
 }
 
-type Props = ReduxStoreLoginScreenProps & RouteComponentProps<{}>;
+type Props = ReduxStoreLoginScreenProps &
+  ReduxStoreSignupScreenProps &
+  RouteComponentProps<{}>;
 
 interface LoginScreenState {
   emailStr: string;
@@ -139,6 +149,27 @@ class LoginScreenComponent extends React.Component<Props, LoginScreenState> {
           this.props.setGraduationYear(response.user.graduationYear);
           this.props.setToken(response.user.token);
           this.props.setUserId(response.user.id);
+          findAllPlansForUser(response.user.id, response.user.token).then(
+            plans => {
+              const namedSchedules = plans.map((plan: any) => ({
+                name: plan.name,
+                schedule: {
+                  present: {
+                    ...plan,
+                    currentClassCounter: plan.courseCounter,
+                    isScheduleLoading: false,
+                    scheduleError: "",
+                  } as ScheduleSlice,
+                },
+              }));
+              this.props.setSchedules(namedSchedules);
+              this.props.setMajorPlan(
+                this.props.majors.find((m: any) => m.name === plans[0].major),
+                plans[0].planString ? plans[0].planString : ""
+              );
+              //namedSchedules[0].schedule.present.schedule;
+            }
+          );
           /**
            * TODO: NEEDS TO SET USER PLANS AND MAJOR/COOP CYCLE HERE AS WELL
            */
@@ -253,10 +284,20 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     dispatch(setAcademicYearAction(academicYear)),
   setGraduationYear: (academicYear: number) =>
     dispatch(setGraduationYearAction(academicYear)),
-  setMajor: (major?: Major) => dispatch(setMajorAction(major)),
-  setCoopCycle: (plan: Schedule) => dispatch(setCoopCycle(plan)),
+  setMajorPlan: (major: Major | undefined, planStr: string) =>
+    dispatch(setMajorPlanAction(major, planStr)),
   setToken: (token: string) => dispatch(setTokenAction(token)),
   setUserId: (id: number) => dispatch(setUserIdAction(id)),
+  setSchedules: (schedules: NamedSchedule[]) =>
+    dispatch(setSchedules(schedules)),
+});
+
+/**
+ * Callback to be passed into connect, responsible for dispatching redux actions to update the appstate.
+ * @param dispatch responsible for dispatching actions to the redux store.
+ */
+const mapStateToProps = (state: AppState) => ({
+  majors: getMajors(state),
 });
 
 /**
@@ -265,6 +306,6 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
  * be passed down as props from the parent component.
  */
 export const LoginScreen = connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(withRouter(LoginScreenComponent));

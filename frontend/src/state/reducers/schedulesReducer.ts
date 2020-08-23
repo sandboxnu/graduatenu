@@ -7,6 +7,7 @@ import {
   setActiveScheduleAction,
   updateActiveSchedule,
   addNewSchedule,
+  setSchedules,
 } from "../actions/schedulesActions";
 
 export interface SchedulesState {
@@ -16,21 +17,7 @@ export interface SchedulesState {
 
 const initialState: SchedulesState = {
   activeSchedule: 0,
-  schedules: [
-    // {
-    //   name: "Schedule 1",
-    //   schedule: {
-    //     present: {
-    //       currentClassCounter: 100,
-    //       isScheduleLoading: false,
-    //       scheduleError: "",
-    //       schedule: mockData,
-    //       warnings: [],
-    //       courseWarnings: [],
-    //     },
-    //   },
-    // },
-  ],
+  schedules: [],
 };
 
 export const schedulesReducer = (
@@ -47,11 +34,11 @@ export const schedulesReducer = (
         return draft;
       }
       case getType(updateActiveSchedule): {
-        const { updatedActiveSchedule } = action.payload;
+        const { updatedSchedule } = action.payload;
 
         draft.schedules[
           draft.activeSchedule
-        ].schedule.present = updatedActiveSchedule;
+        ].schedule.present = updatedSchedule;
 
         return draft;
       }
@@ -65,6 +52,14 @@ export const schedulesReducer = (
 
         draft.schedules.push(namedSchedule);
         draft.activeSchedule = draft.schedules.length - 1;
+
+        return draft;
+      }
+      case getType(setSchedules): {
+        const { schedules } = action.payload;
+
+        draft.schedules = schedules;
+        draft.activeSchedule = 0;
 
         return draft;
       }
