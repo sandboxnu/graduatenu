@@ -149,34 +149,35 @@ class LoginScreenComponent extends React.Component<Props, LoginScreenState> {
           this.props.setGraduationYear(response.user.graduationYear);
           this.props.setToken(response.user.token);
           this.props.setUserId(response.user.id);
-          findAllPlansForUser(response.user.id, response.user.token).then(
-            plans => {
-              const namedSchedules = plans.map((plan: any) => ({
-                name: plan.name,
-                schedule: {
-                  present: {
-                    ...plan,
-                    currentClassCounter: plan.courseCounter,
-                    isScheduleLoading: false,
-                    scheduleError: "",
-                  } as ScheduleSlice,
-                },
-              }));
-              this.props.setSchedules(namedSchedules);
-              this.props.setMajorPlan(
-                this.props.majors.find((m: any) => m.name === plans[0].major),
-                plans[0].planString ? plans[0].planString : ""
-              );
-              //namedSchedules[0].schedule.present.schedule;
-            }
-          );
-          /**
-           * TODO: NEEDS TO SET USER PLANS AND MAJOR/COOP CYCLE HERE AS WELL
-           */
           this.props.history.push("/home");
+          this.findUserPlans(response);
         }
       });
     }
+  }
+
+  /**
+   * Finds all of the user plans and sets the state based on the plan's information.
+   */
+  findUserPlans(response: any) {
+    findAllPlansForUser(response.user.id, response.user.token).then(plans => {
+      const namedSchedules = plans.map((plan: any) => ({
+        name: plan.name,
+        schedule: {
+          present: {
+            ...plan,
+            currentClassCounter: plan.courseCounter,
+            isScheduleLoading: false,
+            scheduleError: "",
+          } as ScheduleSlice,
+        },
+      }));
+      this.props.setSchedules(namedSchedules);
+      this.props.setMajorPlan(
+        this.props.majors.find((m: any) => m.name === plans[0].major),
+        plans[0].planString ? plans[0].planString : ""
+      );
+    });
   }
 
   /**
