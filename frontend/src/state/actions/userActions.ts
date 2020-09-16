@@ -22,7 +22,7 @@ export const setGraduationYearAction = createAction(
   })
 )();
 
-export const setMajorAction = createAction(
+export const setDeclaredMajorAction = createAction(
   "user/SET_MAJOR",
   (major?: Major) => ({
     major,
@@ -76,5 +76,18 @@ export const setPlanIdsAction = createAction(
   "user/SET_PLAN_IDS",
   (planIds: number[]) => ({
     planIds,
+  })
+)();
+export const setEmailAction = createAction(
+  "user/SET_EMAIL",
+  (email: string) => ({
+    email,
+  })
+)();
+
+export const setUserCoopCycleAction = createAction(
+  "user/SET_COOP_CYCLE",
+  (coopCycle: string) => ({
+    coopCycle,
   })
 )();

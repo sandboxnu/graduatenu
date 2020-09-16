@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Popper from "@material-ui/core/Popper";
 import { Autocomplete } from "@material-ui/lab";
 import { TextField, Button } from "@material-ui/core";
@@ -10,13 +11,13 @@ import { Dispatch } from "redux";
 import {
   getScheduleFromState,
   getPlanStrFromState,
-  getMajorFromState,
+  getDeclaredMajorFromState,
 } from "../state";
 import {
   setScheduleAction,
   setCoopCycle,
 } from "../state/actions/scheduleActions";
-import { setMajorAction } from "../state/actions/userActions";
+import { setDeclaredMajorAction } from "../state/actions/userActions";
 import { DNDSchedule } from "../models/types";
 import { Major, Schedule } from "../../../common/types";
 import {
@@ -31,6 +32,24 @@ import { getStandingFromCompletedCourses } from "../utils";
 
 const PlanPopper = styled(Popper)<any>`
   margin-top: 4px;
+`;
+
+const TopRow = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const EditProfileButton = styled(Link)`
+  font-size: 0.8em;
+  color: #eb5757;
+  &:focus,
+  &:visited,
+  &:link {
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 `;
 
 const PlanCard = styled.div<any>`
@@ -245,7 +264,12 @@ export class EditPlanPopperComponent extends React.Component<
         >
           <ClickAwayListener onClickAway={this.handleClickAway.bind(this)}>
             <PlanCard>
-              <NameText>{this.props.name}</NameText>
+              <TopRow>
+                <NameText>{this.props.name}</NameText>
+                <EditProfileButton to="/profile">
+                  Edit Profile
+                </EditProfileButton>
+              </TopRow>
               <StandingText>
                 {getStandingFromCompletedCourses(this.props.creditsTaken)}
               </StandingText>
@@ -272,7 +296,7 @@ export class EditPlanPopperComponent extends React.Component<
 const mapStateToProps = (state: AppState) => ({
   schedule: getScheduleFromState(state),
   planStr: getPlanStrFromState(state),
-  major: getMajorFromState(state),
+  major: getDeclaredMajorFromState(state),
   majors: getMajors(state),
   plans: getPlans(state),
   creditsTaken: getTakenCredits(state),
@@ -282,7 +306,7 @@ const mapStateToProps = (state: AppState) => ({
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   setCoopCycle: (schedule?: Schedule) => dispatch(setCoopCycle(schedule)),
   setSchedule: (schedule: Schedule) => dispatch(setScheduleAction(schedule)),
-  setMajor: (major?: Major) => dispatch(setMajorAction(major)),
+  setMajor: (major?: Major) => dispatch(setDeclaredMajorAction(major)),
 });
 
 export const EditPlanPopper = connect<

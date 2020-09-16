@@ -10,7 +10,7 @@ import { Major, Schedule } from "../../../common/types";
 import { planToString } from "../utils";
 import {
   setFullNameAction,
-  setMajorAction,
+  setDeclaredMajorAction,
   setAcademicYearAction,
   setGraduationYearAction,
 } from "../state/actions/userActions";
@@ -38,6 +38,11 @@ const SpinnerWrapper = styled.div`
   justify-content: center;
   align-items: center;
   height: 700px;
+`;
+
+const DropDownWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
 `;
 
 interface NameScreenProps {
@@ -383,7 +388,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     dispatch(setAcademicYearAction(academicYear)),
   setGraduationYear: (academicYear: number) =>
     dispatch(setGraduationYearAction(academicYear)),
-  setMajor: (major?: Major) => dispatch(setMajorAction(major)),
+  setMajor: (major?: Major) => dispatch(setDeclaredMajorAction(major)),
   setCoopCycle: (plan: Schedule) => dispatch(setCoopCycle(plan)),
 });
 

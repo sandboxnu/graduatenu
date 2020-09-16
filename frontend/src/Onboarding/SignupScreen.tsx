@@ -15,11 +15,14 @@ import {
   setUserIdAction,
   setPlanNameAction,
   setLinkSharingAction,
+  setEmailAction,
+  setUserCoopCycleAction,
 } from "../state/actions/userActions";
 import { addNewSchedule } from "../state/actions/schedulesActions";
 
 import { createPlanForUser } from "../services/PlanService";
 import { getScheduleDataFromState } from "../state";
+import { setCoopCycle } from "../state/actions/scheduleActions";
 
 const Wrapper = styled.div`
   display: flex;
@@ -74,6 +77,9 @@ interface ReduxDispatchSignupScreenProps {
   setPlanName: (name: string) => void;
   setLinkSharing: (linkSharing: boolean) => void;
   addNewSchedule: (name: string, newSchedule: ScheduleSlice) => void;
+  setEmail: (email: string) => void;
+  setMajor: (major: string) => void;
+  setUserCoopCycle: (coopCycle: string) => void;
 }
 
 type Props = ReduxStoreSignupScreenProps &
@@ -193,6 +199,8 @@ class SignupScreenComponent extends React.Component<Props, SignupScreenState> {
           });
           this.props.setUserId(response.user.id);
           this.props.setToken(response.user.token);
+          this.props.setEmail(response.user.email);
+          this.props.setUserCoopCycle(response.user.coopCycle);
           this.props.history.push("/home");
         }
       });
@@ -342,7 +350,7 @@ const mapStateToProps = (state: AppState) => ({
   fullName: state.user.fullName,
   academicYear: state.user.academicYear,
   graduationYear: state.user.graduationYear,
-  major: state.user.major,
+  major: state.user.declaredMajor,
   planStr: state.user.planStr,
   getCurrentScheduleData: () => getScheduleDataFromState(state),
 });
@@ -361,6 +369,9 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 
   setLinkSharing: (linkSharing: boolean) =>
     dispatch(setLinkSharingAction(linkSharing)),
+  setEmail: (email: string) => dispatch(setEmailAction(email)),
+  setUserCoopCycle: (coopCycle: string) =>
+    dispatch(setUserCoopCycleAction(coopCycle)),
 });
 
 /**

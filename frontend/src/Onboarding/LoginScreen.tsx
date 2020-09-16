@@ -15,11 +15,15 @@ import {
   setGraduationYearAction,
   setTokenAction,
   setUserIdAction,
+  setDeclaredMajorAction,
+  setEmailAction,
+  setUserCoopCycleAction,
 } from "../state/actions/userActions";
 import { getMajors } from "../state";
 import { setSchedules } from "../state/actions/schedulesActions";
 import { loginUser } from "../services/UserService";
 import { findAllPlansForUser } from "../services/PlanService";
+import { setCoopCycle } from "../state/actions/scheduleActions";
 
 const Wrapper = styled.div`
   display: flex;
@@ -63,6 +67,7 @@ interface ReduxStoreLoginScreenProps {
   setGraduationYear: (graduationYear: number) => void;
   setMajorPlan: (major: Major | undefined, planStr: string) => void;
   setCoopCycle: (plan: Schedule) => void;
+  setUserCoopCycle: (coopCycle: string) => void;
   setToken: (token: string) => void;
   setUserId: (id: number) => void;
   setSchedules: (schedules: NamedSchedule[]) => void;
@@ -70,6 +75,8 @@ interface ReduxStoreLoginScreenProps {
 }
 interface ReduxStoreSignupScreenProps {
   majors: Major[];
+  setId: (id: number) => void;
+  setEmail: (email: string) => void;
 }
 
 type Props = ReduxStoreLoginScreenProps &
@@ -149,6 +156,9 @@ class LoginScreenComponent extends React.Component<Props, LoginScreenState> {
           this.props.setGraduationYear(response.user.graduationYear);
           this.props.setToken(response.user.token);
           this.props.setUserId(response.user.id);
+          this.props.setId(response.user.id);
+          this.props.setEmail(response.user.email);
+          this.props.setUserCoopCycle(response.user.coopCycle);
           this.props.history.push("/home");
           this.findUserPlans(response);
         }
@@ -291,6 +301,11 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   setUserId: (id: number) => dispatch(setUserIdAction(id)),
   setSchedules: (schedules: NamedSchedule[]) =>
     dispatch(setSchedules(schedules)),
+  setMajor: (major?: Major) => dispatch(setDeclaredMajorAction(major)),
+  setCoopCycle: (plan: Schedule) => dispatch(setCoopCycle(plan)),
+  setUserCoopCycle: (coopCycle: string) =>
+    dispatch(setUserCoopCycleAction(coopCycle)),
+  setEmail: (email: string) => dispatch(setEmailAction(email)),
 });
 
 /**

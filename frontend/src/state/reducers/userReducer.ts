@@ -3,7 +3,7 @@ import produce from "immer";
 import { getType } from "typesafe-actions";
 import { UserAction, ScheduleAction } from "../actions";
 import {
-  setMajorAction,
+  setDeclaredMajorAction,
   setFullNameAction,
   setAcademicYearAction,
   setGraduationYearAction,
@@ -14,6 +14,8 @@ import {
   setPlanNameAction,
   setMajorPlanAction,
   setPlanIdsAction,
+  setUserCoopCycleAction,
+  setEmailAction,
 } from "../actions/userActions";
 import { setCoopCycle } from "../actions/scheduleActions";
 import { planToString } from "../../utils";
@@ -28,9 +30,11 @@ export interface UserState {
 
   // TODO: after plan reducer is made, move these fields
   planName: string;
-  major?: Major;
   planStr?: string;
   linkSharing: boolean;
+  declaredMajor?: Major;
+  email: string;
+  coopCycle: string;
 }
 
 const initialState: UserState = {
@@ -40,11 +44,12 @@ const initialState: UserState = {
   planIds: [],
   token: undefined,
   userId: undefined,
-
-  major: undefined,
   planStr: "",
   planName: "",
   linkSharing: false,
+  declaredMajor: undefined,
+  email: "",
+  coopCycle: "",
 };
 
 export const userReducer = (
@@ -61,8 +66,8 @@ export const userReducer = (
         }
         return draft;
       }
-      case getType(setMajorAction): {
-        draft.major = action.payload.major;
+      case getType(setDeclaredMajorAction): {
+        draft.declaredMajor = action.payload.major;
         draft.planStr = undefined;
         return draft;
       }
@@ -102,10 +107,18 @@ export const userReducer = (
         draft.planName = action.payload.name;
         return draft;
       }
-      case getType(setMajorPlanAction): {
-        draft.major = action.payload.major;
-        draft.planStr = action.payload.planStr;
+
+      case getType(setEmailAction): {
+        draft.email = action.payload.email;
         return draft;
+      }
+      case getType(setUserCoopCycleAction): {
+        draft.coopCycle = action.payload.coopCycle;
+        return draft;
+      }
+      case getType(setMajorPlanAction): {
+        draft.declaredMajor = action.payload.major;
+        draft.planStr = action.payload.planStr;
       }
     }
   });

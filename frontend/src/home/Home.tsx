@@ -32,7 +32,7 @@ import { Dispatch } from "redux";
 import {
   getScheduleFromState,
   getPlanStrFromState,
-  getMajorFromState,
+  getDeclaredMajorFromState,
   getWarningsFromState,
   getTokenFromState,
   getUserId,
@@ -554,7 +554,7 @@ class HomeComponent extends React.Component<Props, HomeState> {
 const mapStateToProps = (state: AppState) => ({
   schedule: getScheduleFromState(state),
   planStr: getPlanStrFromState(state),
-  major: getMajorFromState(state),
+  major: getDeclaredMajorFromState(state),
   warnings: getWarningsFromState(state),
   token: getTokenFromState(state),
   userId: getUserId(state),
