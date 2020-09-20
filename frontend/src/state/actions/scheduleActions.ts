@@ -10,6 +10,7 @@ import {
   Status,
   SeasonWord,
   Schedule,
+  Major,
 } from "../../../../common/types";
 
 export const addClassesAction = createAction(
@@ -54,6 +55,11 @@ export const updateSemesterAction = createAction(
 export const setScheduleAction = createAction(
   "schedule/SET_SCHEDULE",
   (schedule: Schedule) => ({ schedule })
+)();
+
+export const setScheduleMajor = createAction(
+  "schedule.SET_SCHEDULE_MAJOR",
+  (major?: Major) => ({ major })
 )();
 
 export const setCoopCycle = createAction(

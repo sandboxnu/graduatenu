@@ -20,6 +20,7 @@ import {
   setCoopCycle,
   setCompletedCourses,
   setNamedSchedule,
+  setScheduleMajor,
 } from "../actions/scheduleActions";
 import { setSchedules } from "../actions/schedulesActions";
 import {
@@ -195,6 +196,15 @@ export const scheduleReducer = (
 
         // set the coop cycle
         draft.present.coopCycle = coopCycle;
+
+        return draft;
+      }
+      case getType(setScheduleMajor): {
+        const { major } = action.payload;
+        if (!major) {
+          return draft;
+        }
+        draft.present.major = major.name;
 
         return draft;
       }

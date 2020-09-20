@@ -185,8 +185,8 @@ interface ToastHomeProps {
 
 interface ReduxStoreHomeProps {
   schedule: DNDSchedule;
-  major?: Major;
-  planStr?: string;
+  major: string;
+  planStr: string;
   warnings: IWarning[];
   token?: string;
   userId?: number;
@@ -433,7 +433,7 @@ class HomeComponent extends React.Component<Props, HomeState> {
           name: this.props.planName ? this.props.planName : "",
           link_sharing_enabled: this.props.linkSharing,
           schedule: this.props.schedule,
-          major: this.props.major ? this.props.major.name : "",
+          major: this.props.major,
           planString: this.props.planStr ? this.props.planStr : "None",
           course_counter: scheduleData.currentClassCounter,
           warnings: scheduleData.warnings,
@@ -467,8 +467,8 @@ class HomeComponent extends React.Component<Props, HomeState> {
         name: `Schedule ${this.state.planCount + 1}`,
         link_sharing_enabled: this.props.linkSharing,
         schedule: this.props.schedule,
-        major: this.props.major ? this.props.major.name : "",
-        planString: this.props.planStr ? this.props.planStr : "None",
+        major: this.props.major,
+        planString: this.props.planStr,
         course_counter: scheduleData.currentClassCounter,
         warnings: scheduleData.warnings,
         course_warnings: scheduleData.courseWarnings,
@@ -506,9 +506,7 @@ class HomeComponent extends React.Component<Props, HomeState> {
               <HomeTop>
                 <HomeText href="#">GraduateNU</HomeText>
                 <HomePlan>
-                  <MajorText>
-                    {!!this.props.major ? this.props.major.name + ": " : ""}
-                  </MajorText>
+                  <MajorText>{this.props.major}</MajorText>
                   <PlanText>{this.props.planStr || "None"}</PlanText>
                   <EditPlanPopper />
                 </HomePlan>
@@ -555,8 +553,8 @@ class HomeComponent extends React.Component<Props, HomeState> {
 
 const mapStateToProps = (state: AppState) => ({
   schedule: getScheduleFromState(state),
-  planStr: getPlanStrFromState(state),
-  major: getDeclaredMajorFromState(state),
+  planStr: getScheduleDataFromState(state).coopCycle,
+  major: getScheduleDataFromState(state).major,
   warnings: getWarningsFromState(state),
   token: getTokenFromState(state),
   userId: getUserId(state),
