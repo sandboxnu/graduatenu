@@ -45,6 +45,8 @@ export interface ScheduleStateSlice {
   warnings: IWarning[];
   courseWarnings: CourseWarning[];
   creditsTaken: number;
+  major: string;
+  coopCycle: string;
 }
 
 const initialState: ScheduleState = {
@@ -56,6 +58,8 @@ const initialState: ScheduleState = {
     warnings: [],
     courseWarnings: [],
     creditsTaken: 0,
+    major: "",
+    coopCycle: "",
   },
 };
 
@@ -158,7 +162,7 @@ export const scheduleReducer = (
         return draft;
       }
       case getType(setCoopCycle): {
-        const { schedule } = action.payload;
+        const { coopCycle, schedule } = action.payload;
         if (!schedule) {
           return draft;
         }
@@ -188,6 +192,9 @@ export const scheduleReducer = (
         // clear all warnings
         draft.present.warnings = [];
         draft.present.courseWarnings = [];
+
+        // set the coop cycle
+        draft.present.coopCycle = coopCycle;
 
         return draft;
       }
@@ -256,7 +263,8 @@ export const scheduleReducer = (
         draft.present.courseWarnings = namedSchedule.courseWarnings;
         draft.present.currentClassCounter = namedSchedule.currentClassCounter;
         draft.present.schedule = namedSchedule.schedule;
-        draft.present.warnings = namedSchedule.warnings;
+        draft.present.major = namedSchedule.major;
+        draft.present.coopCycle = namedSchedule.coopCycle;
         return draft;
       }
       case getType(setSchedules): {

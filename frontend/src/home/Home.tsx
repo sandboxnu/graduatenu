@@ -442,6 +442,7 @@ class HomeComponent extends React.Component<Props, HomeState> {
       ).then(plan => {
         this.props.updateActiveSchedule({
           ...plan.plan,
+          coopCycle: plan.plan.planString,
           currentClassCounter: plan.plan.courseCounter,
           isScheduleLoading: false,
           scheduleError: "",
@@ -474,6 +475,7 @@ class HomeComponent extends React.Component<Props, HomeState> {
       }).then(plan => {
         this.props.addNewSchedule(plan.plan.name, {
           ...plan.plan,
+          coopCycle: plan.plan.planString,
           currentClassCounter: plan.plan.courseCounter,
           isScheduleLoading: false,
           scheduleError: "",

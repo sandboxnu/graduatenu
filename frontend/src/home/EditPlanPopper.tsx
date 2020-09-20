@@ -95,7 +95,7 @@ interface ReduxStoreEditPlanProps {
 }
 
 interface ReduxDispatchEditPlanProps {
-  setCoopCycle: (schedule?: Schedule) => void;
+  setCoopCycle: (coopCycle: string, schedule?: Schedule) => void;
   setSchedule: (schedule: Schedule) => void;
   setMajor: (major?: Major) => void;
 }
@@ -139,7 +139,7 @@ export class EditPlanPopperComponent extends React.Component<
   onChooseMajor(event: React.SyntheticEvent<{}>, value: any) {
     const maj = this.props.majors.find((m: any) => m.name === value);
     this.props.setMajor(maj);
-    this.props.setCoopCycle(undefined);
+    this.props.setCoopCycle("");
   }
 
   /**
@@ -147,7 +147,7 @@ export class EditPlanPopperComponent extends React.Component<
    */
   onChoosePlan(event: React.SyntheticEvent<{}>, value: any) {
     if (value === "None") {
-      this.props.setCoopCycle(undefined);
+      this.props.setCoopCycle("");
       return;
     }
 
@@ -156,7 +156,7 @@ export class EditPlanPopperComponent extends React.Component<
     );
 
     if (plan) {
-      this.props.setCoopCycle(plan);
+      this.props.setCoopCycle("", plan);
     }
   }
 
@@ -240,7 +240,7 @@ export class EditPlanPopperComponent extends React.Component<
     const plan = this.props.plans[this.props.major!.name].find(
       (p: Schedule) => planToString(p) === this.props.planStr!
     );
-    this.props.setCoopCycle(plan!);
+    this.props.setCoopCycle(this.props.planStr || "", plan!);
   }
 
   /**
@@ -304,7 +304,8 @@ const mapStateToProps = (state: AppState) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  setCoopCycle: (schedule?: Schedule) => dispatch(setCoopCycle(schedule)),
+  setCoopCycle: (coopCycle: string, schedule?: Schedule) =>
+    dispatch(setCoopCycle(coopCycle, schedule)),
   setSchedule: (schedule: Schedule) => dispatch(setScheduleAction(schedule)),
   setMajor: (major?: Major) => dispatch(setDeclaredMajorAction(major)),
 });

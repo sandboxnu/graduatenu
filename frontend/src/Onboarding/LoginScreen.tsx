@@ -66,7 +66,6 @@ interface ReduxStoreLoginScreenProps {
   setAcademicYear: (academicYear: number) => void;
   setGraduationYear: (graduationYear: number) => void;
   setMajorPlan: (major: Major | undefined, planStr: string) => void;
-  setCoopCycle: (plan: Schedule) => void;
   setUserCoopCycle: (coopCycle: string) => void;
   setToken: (token: string) => void;
   setUserId: (id: number) => void;
@@ -179,6 +178,8 @@ class LoginScreenComponent extends React.Component<Props, LoginScreenState> {
             currentClassCounter: plan.courseCounter,
             isScheduleLoading: false,
             scheduleError: "",
+            major: plan.major,
+            coopCycle: plan.coopCycle,
           } as ScheduleSlice,
         },
       }));
@@ -302,7 +303,6 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   setSchedules: (schedules: NamedSchedule[]) =>
     dispatch(setSchedules(schedules)),
   setMajor: (major?: Major) => dispatch(setDeclaredMajorAction(major)),
-  setCoopCycle: (plan: Schedule) => dispatch(setCoopCycle(plan)),
   setUserCoopCycle: (coopCycle: string) =>
     dispatch(setUserCoopCycleAction(coopCycle)),
   setEmail: (email: string) => dispatch(setEmailAction(email)),
