@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { TextField } from "@material-ui/core";
 import { AppState } from "../state/reducers/state";
 import { Major } from "graduate-common";
-import { IUserData } from "../models/types";
+import {  IUserData } from "../models/types";
 import { PrimaryButton } from "../components/common/PrimaryButton";
 import { registerUser } from "../services/UserService";
 import { Dispatch } from "redux";

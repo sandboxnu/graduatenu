@@ -4,7 +4,11 @@ import {
   DNDScheduleCourse,
   DNDScheduleTerm,
 } from "../models/types";
-import { Schedule, ScheduleCourse, SeasonWord } from "graduate-common";
+import {
+  Schedule,
+  ScheduleCourse,
+  SeasonWord,
+} from "graduate-common";
 
 export function convertTermIdToSeason(termId: number): SeasonWord {
   const seasonId = termId % 100;

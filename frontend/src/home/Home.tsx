@@ -5,9 +5,13 @@ import {
   DNDSchedule,
   IWarning,
   DNDScheduleYear,
-  DNDScheduleTerm,
+  DNDScheduleTerm
 } from "../models/types";
-import { Major, Status, SeasonWord } from "graduate-common";
+import {
+  Major,
+  Status,
+  SeasonWord
+} from "graduate-common";
 import styled from "styled-components";
 import { Year } from "../components/Year";
 import {
