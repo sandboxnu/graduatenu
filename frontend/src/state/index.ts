@@ -56,7 +56,7 @@ export const getFullNameFromState = (state: AppState): string =>
   state.user.fullName;
 
 /**
- * Get a users fullname from the AppState
+ * Get a users coop cycle from the AppState
  * @param state the AppState
  */
 export const getUserCoopCycleFromState = (state: AppState): string =>
@@ -88,10 +88,6 @@ export const getPlanStrFromState = (state: AppState): string | undefined =>
  */
 export const getDeclaredMajorFromState = (state: AppState): Major | undefined =>
   state.user.declaredMajor;
-
-export const getScheduleMajorFromState = (
-  state: AppState
-): string | undefined => state.schedule.present.major;
 
 /**
  * Get the user email from the AppState

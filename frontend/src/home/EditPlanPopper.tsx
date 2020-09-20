@@ -87,7 +87,7 @@ const SetButton = styled(Button)<any>`
 interface ReduxStoreEditPlanProps {
   schedule: DNDSchedule;
   major: string;
-  planStr?: string;
+  planStr: string;
   majors: Major[];
   plans: Record<string, Schedule[]>;
   creditsTaken: number;
@@ -146,17 +146,13 @@ export class EditPlanPopperComponent extends React.Component<
    * Updates this user's plan based on the plan selected in the dropdown.
    */
   onChoosePlan(event: React.SyntheticEvent<{}>, value: any) {
-    if (value === "None") {
-      this.props.setCoopCycle("");
-      return;
-    }
-
     const plan = this.props.plans[this.props.major].find(
       (p: Schedule) => planToString(p) === value
     );
 
     if (plan) {
-      this.props.setCoopCycle("", plan);
+      const chosenCoopCycle = value === "None" ? "" : value;
+      this.props.setCoopCycle(chosenCoopCycle, plan);
     }
   }
 
@@ -175,7 +171,7 @@ export class EditPlanPopperComponent extends React.Component<
             margin="dense"
           />
         )}
-        value={!!this.props.major ? this.props.major + " " : ""}
+        value={this.props.major}
         onChange={this.onChooseMajor.bind(this)}
       />
     );
@@ -295,7 +291,7 @@ export class EditPlanPopperComponent extends React.Component<
 
 const mapStateToProps = (state: AppState) => ({
   schedule: getScheduleFromState(state),
-  planStr: getPlanStrFromState(state),
+  planStr: getScheduleDataFromState(state).coopCycle,
   major: getScheduleDataFromState(state).major,
   majors: getMajors(state),
   plans: getPlans(state),
