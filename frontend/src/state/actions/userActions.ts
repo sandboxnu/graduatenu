@@ -36,13 +36,48 @@ export const setTokenAction = createAction(
   })
 )();
 
-export const setIdAction = createAction(
-  "user/SET_ID",
+export const setUserIdAction = createAction(
+  "user/SET_USER_ID",
   (id: number) => ({
     id,
   })
 )();
 
+export const addPlanIdAction = createAction(
+  "user/ADD_PLAN_ID",
+  (planId: number) => ({
+    planId,
+  })
+)();
+
+export const setPlanNameAction = createAction(
+  "user/SET_PLAN_NAME",
+  (name: string) => ({
+    name,
+  })
+)();
+
+export const setLinkSharingAction = createAction(
+  "user/SET_LINK_SHARING",
+  (linkSharing: boolean) => ({
+    linkSharing,
+  })
+)();
+
+export const setMajorPlanAction = createAction(
+  "user/SET_MAJOR_PLAN",
+  (major: Major | undefined, planStr: string) => ({
+    major,
+    planStr,
+  })
+)();
+
+export const setPlanIdsAction = createAction(
+  "user/SET_PLAN_IDS",
+  (planIds: number[]) => ({
+    planIds,
+  })
+)();
 export const setEmailAction = createAction(
   "user/SET_EMAIL",
   (email: string) => ({

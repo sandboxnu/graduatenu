@@ -165,11 +165,39 @@ export interface ILoginData {
 }
 
 /**
+ * A model for data pertaining to a Plan object.
+ */
+export interface IPlanData {
+  id: number;
+  name: string;
+  link_sharing_enabled: boolean;
+  schedule: DNDSchedule;
+  major: string;
+  planString: string;
+  warnings: IWarning[];
+  course_warnings: CourseWarning[];
+  course_counter: number;
+}
+
+/**
+ * A model for data pertaining to a create plan request.
+ */
+export interface ICreatePlanData {
+  name: string;
+  link_sharing_enabled: boolean;
+  schedule: DNDSchedule;
+  major: string;
+  planString: string;
+  warnings: IWarning[];
+  course_warnings: CourseWarning[];
+  course_counter: number;
+}
+/*
  * Data needed to update a user
  */
 export interface IUpdateUser {
-  token: string,
-  id: number
+  token: string;
+  id: number;
 }
 
 /**

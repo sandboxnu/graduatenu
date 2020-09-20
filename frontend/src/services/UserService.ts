@@ -1,4 +1,10 @@
-import { IUserData, ILoginData, IUpdateUser, IUpdateUserData, IUpdateUserPassword } from "../models/types";
+import {
+  IUserData,
+  ILoginData,
+  IUpdateUser,
+  IUpdateUserData,
+  IUpdateUserPassword,
+} from "../models/types";
 
 /**
  * Service function object to register a given User.
@@ -26,30 +32,33 @@ export const loginUser = (user: ILoginData) =>
     },
   }).then(response => response.json());
 
-  /**
+/**
  * Service function object to update the user data
- * @param userData 
+ * @param userData
  */
-export const updateUser = (user: IUpdateUser, userData: IUpdateUserData) => 
+export const updateUser = (user: IUpdateUser, userData: IUpdateUserData) =>
   fetch(`/api/users/${user.id}`, {
     method: "PUT",
     body: JSON.stringify({ user: userData }),
     headers: {
       "Content-Type": "application/json",
-      "Authorization": "Token " + user.token
+      Authorization: "Token " + user.token,
     },
   }).then(response => response.json());
 
-  /**
+/**
  * Service function object to update the user data
- * @param userData 
+ * @param userData
  */
-export const updatePassword = (token: string, userPassword: IUpdateUserPassword) => 
+export const updatePassword = (
+  token: string,
+  userPassword: IUpdateUserPassword
+) =>
   fetch(`/api/users/password`, {
     method: "PUT",
     body: JSON.stringify({ user: userPassword }),
     headers: {
       "Content-Type": "application/json",
-      "Authorization": "Token " + token
+      Authorization: "Token " + token,
     },
-  }).then(response => response.json())
+  }).then(response => response.json());

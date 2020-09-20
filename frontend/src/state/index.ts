@@ -5,12 +5,48 @@ import {
   IWarning,
   DNDScheduleTerm,
   NamedSchedule,
+  ScheduleSlice,
 } from "../models/types";
 import { Major, Schedule } from "../../../common/types";
 
 /**
  * Utility functions to help extract data from the AppState
  */
+
+/**
+ * Get a users JWT token from the AppState
+ * @param state the AppState
+ */
+export const getTokenFromState = (state: AppState): string | undefined =>
+  state.user.token;
+
+/**
+ * Get a users id number from the AppState
+ * @param state the AppState
+ */
+export const getUserId = (state: AppState): number | undefined =>
+  state.user.userId;
+
+/**
+ * Get a users plan name from the AppState
+ * @param state the AppState
+ */
+export const getPlanNameFromState = (state: AppState): string | undefined =>
+  state.user.planName;
+
+/**
+ * Get a users list of plan ids from the AppState
+ * @param state the AppState
+ */
+export const getPlanIdsFromState = (state: AppState): number[] =>
+  state.user.planIds;
+
+/**
+ * Get a users plan link sharing status from the AppState
+ * @param state the AppState
+ */
+export const getLinkSharingFromState = (state: AppState): boolean =>
+  state.user.linkSharing;
 
 /**
  * Get a users fullname from the AppState
@@ -26,7 +62,7 @@ export const getFullNameFromState = (state: AppState): string =>
 export const getUserCoopCycleFromState = (state: AppState): string =>
   state.user.coopCycle;
 
- /* Get a users academic year from the AppState
+/* Get a users academic year from the AppState
  * @param state the AppState
  */
 export const getAcademicYearFromState = (state: AppState): number =>
@@ -54,25 +90,10 @@ export const getDeclaredMajorFromState = (state: AppState): Major | undefined =>
   state.user.declaredMajor;
 
 /**
- * Get the user token from the AppState
- * @param state the AppState
- */
-export const getToken = (state: AppState): string =>
-  state.user.token;
-
-/**
- * Get the user id from the AppState
- * @param state the AppState
- */
-export const getId = (state: AppState): number =>
-  state.user.id;
-
-/**
  * Get the user email from the AppState
  * @param state the AppState
  */
-export const getEmail = (state: AppState): string => 
-  state.user.email;
+export const getEmail = (state: AppState): string => state.user.email;
 /**
  * Get the warnings generated from the AppState
  * @param state the AppState
@@ -127,7 +148,7 @@ export const getPlansError = (state: AppState): string =>
  */
 export const getTakenCredits = (state: AppState): number =>
   state.schedule.present.creditsTaken;
- 
+
 /**
  * Get the course specific warnings from the AppState
  * @param state the AppState
@@ -139,6 +160,14 @@ export const getCourseWarningsFromState = (
   state.schedule.present.courseWarnings.filter(
     w => w.termId === semester.termId
   );
+
+/**
+ *
+ * @param state
+ */
+export const getScheduleDataFromState = (state: AppState): ScheduleSlice => {
+  return state.schedule.present;
+};
 
 /**
  * Get the list of schedule names from the AppState

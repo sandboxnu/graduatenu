@@ -3,8 +3,14 @@ import {
   DNDScheduleCourse,
   DNDScheduleTerm,
   DNDSchedule,
+  NamedSchedule,
 } from "../../models/types";
-import { ScheduleCourse, Status, SeasonWord, Schedule } from "../../../../common/types";
+import {
+  ScheduleCourse,
+  Status,
+  SeasonWord,
+  Schedule,
+} from "../../../../common/types";
 
 export const addClassesAction = createAction(
   "schedule/ADD_CLASSES",
@@ -63,4 +69,9 @@ export const setDNDScheduleAction = createAction(
 export const setCompletedCourses = createAction(
   "schedule/SET_COMPLETED_COURSES",
   (completedCourses: ScheduleCourse[]) => ({ completedCourses })
+)();
+
+export const setNamedSchedule = createAction(
+  "schedule/SET_NAMED_SCHEDULE",
+  (namedSchedule: NamedSchedule) => ({ namedSchedule })
 )();

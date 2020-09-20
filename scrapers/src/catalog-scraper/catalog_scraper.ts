@@ -1,5 +1,9 @@
 var cheerio = require("cheerio");
-import { Major, IMajorRequirementGroup, Concentrations } from "../../../common/types";
+import {
+  Major,
+  IMajorRequirementGroup,
+  Concentrations,
+} from "../../../common/types";
 import { createRequirementGroup } from "./reqGroup_scraper";
 
 const rp = require("request-promise");

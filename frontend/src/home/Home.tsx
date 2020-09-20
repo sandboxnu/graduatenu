@@ -6,6 +6,9 @@ import {
   IWarning,
   DNDScheduleYear,
   DNDScheduleTerm,
+  IPlanData,
+  NamedSchedule,
+  ScheduleSlice,
 } from "../models/types";
 import { Schedule, Major, Status, SeasonWord } from "../../../common/types";
 import { addPrereqsToSchedule } from "../../../common/prereq_loader";
@@ -31,12 +34,37 @@ import {
   getPlanStrFromState,
   getDeclaredMajorFromState,
   getWarningsFromState,
+  getTokenFromState,
+  getUserId,
+  getPlanNameFromState,
+  getPlanIdsFromState,
+  getLinkSharingFromState,
+  getScheduleDataFromState,
 } from "../state";
 import {
   updateSemesterAction,
   setDNDScheduleAction,
 } from "../state/actions/scheduleActions";
+import {
+  setLinkSharingAction,
+  setPlanNameAction,
+  setMajorPlanAction,
+  setPlanIdsAction,
+} from "../state/actions/userActions";
+import {
+  updateActiveSchedule,
+  addNewSchedule,
+} from "../state/actions/schedulesActions";
+import { getMajors, getPlans } from "../state";
 import { EditPlanPopper } from "./EditPlanPopper";
+import {
+  createPlanForUser,
+  findAllPlansForUser,
+  updatePlanForUser,
+} from "../services/PlanService";
+import { findMajorFromName } from "../utils/plan-helpers";
+import { Button } from "@material-ui/core";
+import Loader from "react-loader-spinner";
 import { ExcelUpload } from "../components/ExcelUpload";
 import { SwitchPlanPopper } from "./SwitchPlanPopper";
 
@@ -69,6 +97,15 @@ const Container = styled.div`
   align-items: start;
   margin: 30px;
   background-color: "#ff76ff";
+`;
+
+const SpinnerWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 60vh;
 `;
 
 const HomeTop = styled.div`
@@ -113,6 +150,29 @@ const PlanText = styled.div`
   margin-right: 4px;
 `;
 
+const HomeButtons = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 800px;
+  padding: 10px 0;
+`;
+
+const PlanPopperButton = styled(Button)<any>`
+  background: #e0e0e0;
+  font-weight: normal;
+  float: right;
+  margin: 10px;
+`;
+
+const PlanContainer = styled.div`
+  position: relative;
+  align-items: flex-end;
+  padding: 10px;
+  margin: 0px;
+`;
+
 interface ToastHomeProps {
   addToast: (message: string, options: any) => void;
   removeToast: (id: string) => void;
@@ -128,6 +188,13 @@ interface ReduxStoreHomeProps {
   major?: Major;
   planStr?: string;
   warnings: IWarning[];
+  token?: string;
+  userId?: number;
+  majors: Major[];
+  planIds: number[];
+  planName: string | undefined;
+  linkSharing: boolean;
+  getCurrentScheduleData: () => ScheduleSlice;
 }
 
 interface ReduxDispatchHomeProps {
@@ -137,6 +204,12 @@ interface ReduxDispatchHomeProps {
     newSemester: DNDScheduleTerm
   ) => void;
   setDNDSchedule: (schedule: DNDSchedule) => void;
+  setMajorPlans: (major: Major | undefined, planStr: string) => void;
+  setPlanName: (name: string) => void;
+  setLinkSharing: (linkSharing: boolean) => void;
+  setPlanIds: (planIds: number[]) => void;
+  addNewSchedule: (name: string, newSchedule: ScheduleSlice) => void;
+  updateActiveSchedule: (updatedSchedule: ScheduleSlice) => void;
 }
 
 type Props = ToastHomeProps &
@@ -144,7 +217,46 @@ type Props = ToastHomeProps &
   ReduxDispatchHomeProps &
   RouteComponentProps;
 
-class HomeComponent extends React.Component<Props> {
+interface HomeState {
+  fetchedPlan: boolean;
+  planCount: number;
+}
+
+class HomeComponent extends React.Component<Props, HomeState> {
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      fetchedPlan: false,
+      planCount: 1,
+    };
+  }
+
+  componentDidMount() {
+    // If this is true, then a user is currently logged in and we can fetch their plan
+    if (this.props.token && this.props.userId) {
+      findAllPlansForUser(this.props.userId, this.props.token).then(
+        (plans: IPlanData[]) => {
+          // Once multiple plans are supported, this can be changed to the last used plan
+          let plan: IPlanData = plans[0];
+
+          this.props.setPlanIds(plans.map(plan => plan.id));
+          this.props.setDNDSchedule(plan.schedule);
+          this.props.setMajorPlans(
+            findMajorFromName(plan.major, this.props.majors),
+            plan.planString
+          );
+          this.props.setPlanName(plan.name);
+          this.props.setLinkSharing(plan.link_sharing_enabled);
+
+          this.setState({
+            fetchedPlan: true,
+            planCount: plans.length,
+          });
+        }
+      );
+    }
+  }
+
   componentDidUpdate(nextProps: Props) {
     if (nextProps.warnings !== this.props.warnings) {
       this.updateWarnings();
@@ -277,12 +389,103 @@ class HomeComponent extends React.Component<Props> {
   }
 
   renderYears() {
-    return this.props.schedule.years.map((year: number, index: number) => (
-      <Year key={index} index={index} schedule={this.props.schedule} />
-    ));
+    // If a user is currently logged in, wait until plans are fetched to render
+    if (this.props.token && this.props.userId) {
+      if (this.state.fetchedPlan) {
+        return this.props.schedule.years.map((year: number, index: number) => (
+          <Year key={index} index={index} schedule={this.props.schedule} />
+        ));
+      } else {
+        return (
+          <SpinnerWrapper>
+            <Loader
+              type="Puff"
+              color="#f50057"
+              height={100}
+              width={100}
+              timeout={5000} //5 secs
+            />
+          </SpinnerWrapper>
+        );
+      }
+    } else {
+      return this.props.schedule.years.map((year: number, index: number) => (
+        <Year key={index} index={index} schedule={this.props.schedule} />
+      ));
+    }
   }
 
-  
+  /**
+   * If a user is currently logged in, updates the current plan under this user.
+   * Only supports updating a user's singular plan, can be modified later to
+   * update a specific plan.
+   */
+  updatePlan() {
+    // If this is true, then a user is currently logged in and we can update their plan
+    if (this.props.token && this.props.userId) {
+      const scheduleData: ScheduleSlice = this.props.getCurrentScheduleData();
+      updatePlanForUser(
+        this.props.userId,
+        this.props.token,
+        this.props.planIds[0],
+        {
+          id: this.props.planIds[0],
+          name: this.props.planName ? this.props.planName : "",
+          link_sharing_enabled: this.props.linkSharing,
+          schedule: this.props.schedule,
+          major: this.props.major ? this.props.major.name : "",
+          planString: this.props.planStr ? this.props.planStr : "None",
+          course_counter: scheduleData.currentClassCounter,
+          warnings: scheduleData.warnings,
+          course_warnings: scheduleData.courseWarnings,
+        }
+      ).then(plan => {
+        this.props.updateActiveSchedule({
+          ...plan.plan,
+          currentClassCounter: plan.plan.courseCounter,
+          isScheduleLoading: false,
+          scheduleError: "",
+        } as ScheduleSlice);
+        alert("Your plan has been updated.");
+      });
+    } else {
+      alert("You must be logged in to save your plan.");
+    }
+  }
+
+  /**
+   * If a user is currently logged in, saves the current plan under this user.
+   * Only supports updating a user's singular plan, can be modified later to
+   * update a specific plan.
+   */
+  savePlan() {
+    // If this is true, then a user is currently logged in and we can update their plan
+    if (this.props.token && this.props.userId) {
+      const scheduleData: ScheduleSlice = this.props.getCurrentScheduleData();
+      createPlanForUser(this.props.userId, this.props.token, {
+        name: `Schedule ${this.state.planCount + 1}`,
+        link_sharing_enabled: this.props.linkSharing,
+        schedule: this.props.schedule,
+        major: this.props.major ? this.props.major.name : "",
+        planString: this.props.planStr ? this.props.planStr : "None",
+        course_counter: scheduleData.currentClassCounter,
+        warnings: scheduleData.warnings,
+        course_warnings: scheduleData.courseWarnings,
+      }).then(plan => {
+        this.props.addNewSchedule(plan.plan.name, {
+          ...plan.plan,
+          currentClassCounter: plan.plan.courseCounter,
+          isScheduleLoading: false,
+          scheduleError: "",
+        } as ScheduleSlice);
+        this.setState({ planCount: this.state.planCount + 1 });
+        alert("Your plan has been saved.");
+      });
+    } else {
+      alert("You must be logged in to save your plan.");
+    }
+  }
+
   async setSchedule(schedule: Schedule) {
     let preReqSched = await addPrereqsToSchedule(schedule);
     const [dndschedule, counter] = convertToDNDSchedule(preReqSched, 0);
@@ -311,9 +514,30 @@ class HomeComponent extends React.Component<Props> {
               <HomeAboveSchedule>
                 <HomePlan>
                   <h2>Plan Of Study</h2>
-                  <SwitchPlanPopper />
+                  {this.props.token && this.props.userId && (
+                    <SwitchPlanPopper />
+                  )}
                 </HomePlan>
-                <ExcelUpload setSchedule={this.setSchedule.bind(this)}/>
+                <HomeButtons>
+                  <PlanContainer>
+                    <PlanPopperButton
+                      variant="contained"
+                      onClick={this.savePlan.bind(this)}
+                    >
+                      Save Plan
+                    </PlanPopperButton>
+                  </PlanContainer>
+
+                  <PlanContainer>
+                    <PlanPopperButton
+                      variant="contained"
+                      onClick={this.updatePlan.bind(this)}
+                    >
+                      Update Plan
+                    </PlanPopperButton>
+                  </PlanContainer>
+                  <ExcelUpload setSchedule={this.setSchedule.bind(this)} />
+                </HomeButtons>
               </HomeAboveSchedule>
               {this.renderYears()}
             </Container>
@@ -322,7 +546,8 @@ class HomeComponent extends React.Component<Props> {
             <Sidebar />
           </SidebarContainer>
         </DragDropContext>
-      </OuterContainer>);
+      </OuterContainer>
+    );
   }
 }
 
@@ -331,6 +556,13 @@ const mapStateToProps = (state: AppState) => ({
   planStr: getPlanStrFromState(state),
   major: getDeclaredMajorFromState(state),
   warnings: getWarningsFromState(state),
+  token: getTokenFromState(state),
+  userId: getUserId(state),
+  majors: getMajors(state),
+  planName: getPlanNameFromState(state),
+  planIds: getPlanIdsFromState(state),
+  linkSharing: getLinkSharingFromState(state),
+  getCurrentScheduleData: () => getScheduleDataFromState(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
@@ -341,6 +573,16 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   ) => dispatch(updateSemesterAction(year, season, newSemester)),
   setDNDSchedule: (schedule: DNDSchedule) =>
     dispatch(setDNDScheduleAction(schedule)),
+  setPlanName: (name: string) => dispatch(setPlanNameAction(name)),
+  setLinkSharing: (linkSharing: boolean) =>
+    dispatch(setLinkSharingAction(linkSharing)),
+  setMajorPlans: (major: Major | undefined, planStr: string) =>
+    dispatch(setMajorPlanAction(major, planStr)),
+  setPlanIds: (planIds: number[]) => dispatch(setPlanIdsAction(planIds)),
+  addNewSchedule: (name: string, newSchedule: ScheduleSlice) =>
+    dispatch(addNewSchedule(name, newSchedule)),
+  updateActiveSchedule: (updatedSchedule: ScheduleSlice) =>
+    dispatch(updateActiveSchedule(updatedSchedule)),
 });
 
 export const Home = connect<

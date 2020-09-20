@@ -1,5 +1,5 @@
 import React from "react";
-import { withRouter, RouteComponentProps, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Popper from "@material-ui/core/Popper";
 import { Autocomplete } from "@material-ui/lab";
 import { TextField, Button } from "@material-ui/core";
@@ -37,18 +37,20 @@ const PlanPopper = styled(Popper)<any>`
 const TopRow = styled.div`
   display: flex;
   justify-content: space-between;
-`
+`;
 
 const EditProfileButton = styled(Link)`
   font-size: 0.8em;
-  color: #EB5757;
-  &:focus, &:visited, &:link{
+  color: #eb5757;
+  &:focus,
+  &:visited,
+  &:link {
     text-decoration: none;
-  &:hover {
-    text-decoration: underline;
+    &:hover {
+      text-decoration: underline;
+    }
   }
-}
-`
+`;
 
 const PlanCard = styled.div<any>`
   width: 266px;
@@ -264,11 +266,10 @@ export class EditPlanPopperComponent extends React.Component<
             <PlanCard>
               <TopRow>
                 <NameText>{this.props.name}</NameText>
-                <EditProfileButton
-                  to="/profile">
-                    Edit Profile
+                <EditProfileButton to="/profile">
+                  Edit Profile
                 </EditProfileButton>
-               </TopRow>
+              </TopRow>
               <StandingText>
                 {getStandingFromCompletedCourses(this.props.creditsTaken)}
               </StandingText>

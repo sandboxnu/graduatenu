@@ -79,7 +79,9 @@ class PlansController < ApplicationController
 
   #parameters
   def plan_params
-    params.require(:plan).permit(:name, :link_sharing_enabled, schedule: {}) # (schedule: {}) allows you to store an arbitrary hash with unspecified schema
+     # (schedule: {}) allows you to store an arbitrary hash with unspecified schema
+    params.require(:plan).permit(:name, :link_sharing_enabled, :major, :planString, :course_counter, 
+    warnings: [:message, :termId], course_warnings: [:message, :termId, :subject, :classId], schedule: {})
   end
 
   #sets the current user

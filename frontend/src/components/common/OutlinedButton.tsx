@@ -22,8 +22,6 @@ const ColorButton = withStyles((theme: Theme) => ({
   },
 }))(Button);
 
-
-
 export const OutlinedButton: React.FC = props => {
   return (
     <ColorButton variant="outlined" color="primary">

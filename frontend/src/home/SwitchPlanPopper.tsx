@@ -8,13 +8,23 @@ import { AppState } from "../state/reducers/state";
 import { Dispatch } from "redux";
 import { getSchedulesFromState, getActiveScheduleFromState } from "../state";
 import { setActiveScheduleAction } from "../state/actions/schedulesActions";
-import { NamedSchedule, PastPresentSchedule } from "../models/types";
+import { setNamedSchedule } from "../state/actions/scheduleActions";
+import { NamedSchedule } from "../models/types";
+import Loader from "react-loader-spinner";
 
 const SwitchPlanContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
   cursor: pointer;
+`;
+const SpinnerWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 60vh;
 `;
 
 const SwitchPlanMenu = styled(Menu)`
@@ -29,6 +39,7 @@ interface ReduxStoreSwitchSchedulesProps {
 
 interface ReduxDispatchSwitchSchedulesProps {
   setActiveSchedule: (activeSchedule: number) => void;
+  setNamedSchedule: (newSchedule: NamedSchedule) => void;
 }
 
 type Props = ReduxStoreSwitchSchedulesProps & ReduxDispatchSwitchSchedulesProps;
@@ -72,6 +83,7 @@ export class SwitchPlanPopperComponent extends React.Component<
     if (newSchedule) {
       const newActive = this.props.schedules.indexOf(newSchedule);
       this.props.setActiveSchedule(newActive);
+      this.props.setNamedSchedule(newSchedule);
       this.setState({
         anchorEl: null,
       });
@@ -88,7 +100,7 @@ export class SwitchPlanPopperComponent extends React.Component<
   }
 
   render() {
-    return (
+    return this.props.activeSchedule ? (
       <div>
         <SwitchPlanContainer onClick={event => this.handleClick(event)}>
           <h2>{`- ${this.props.activeSchedule.name}`}</h2>
@@ -115,6 +127,16 @@ export class SwitchPlanPopperComponent extends React.Component<
           ))}
         </SwitchPlanMenu>
       </div>
+    ) : (
+      <SpinnerWrapper>
+        <Loader
+          type="Puff"
+          color="#f50057"
+          height={100}
+          width={100}
+          timeout={5000} //5 secs
+        />
+      </SpinnerWrapper>
     );
   }
 }
@@ -127,6 +149,8 @@ const mapStateToProps = (state: AppState) => ({
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   setActiveSchedule: (activeSchedule: number) =>
     dispatch(setActiveScheduleAction(activeSchedule)),
+  setNamedSchedule: (newSchedule: NamedSchedule) =>
+    dispatch(setNamedSchedule(newSchedule)),
 });
 
 export const SwitchPlanPopper = connect<

@@ -4,9 +4,7 @@ import {
   DNDScheduleCourse,
   DNDScheduleTerm,
 } from "../models/types";
-import {
-    SeasonEnum
-} from "../models/types"
+import { SeasonEnum } from "../models/types";
 import { Schedule, ScheduleCourse, SeasonWord } from "../../../common/types";
 
 export function convertTermIdToSeason(termId: number): SeasonWord {
@@ -31,7 +29,7 @@ export function convertSeasonToTermId(season: SeasonEnum): number {
     return 30;
   } else if (season === SeasonEnum.S1) {
     return 40;
-  } 
+  }
   return 60;
 }
 

@@ -5,16 +5,23 @@ import styled from "styled-components";
 import { TextField } from "@material-ui/core";
 import { AppState } from "../state/reducers/state";
 import { Major } from "../../../common/types";
-import { IUserData } from "../models/types";
+import { IUserData, DNDSchedule, ScheduleSlice } from "../models/types";
 import { PrimaryButton } from "../components/common/PrimaryButton";
 import { registerUser } from "../services/UserService";
 import { Dispatch } from "redux";
-import { 
+import {
+  addPlanIdAction,
   setTokenAction,
-  setIdAction,
+  setUserIdAction,
+  setPlanNameAction,
+  setLinkSharingAction,
   setEmailAction,
-  setUserCoopCycleAction, 
+  setUserCoopCycleAction,
 } from "../state/actions/userActions";
+import { addNewSchedule } from "../state/actions/schedulesActions";
+
+import { createPlanForUser } from "../services/PlanService";
+import { getScheduleDataFromState } from "../state";
 import { setCoopCycle } from "../state/actions/scheduleActions";
 
 const Wrapper = styled.div`
@@ -59,11 +66,17 @@ interface ReduxStoreSignupScreenProps {
   graduationYear: number;
   major?: Major;
   planStr?: string;
+  schedule: DNDSchedule;
+  getCurrentScheduleData: () => ScheduleSlice;
 }
 
 interface ReduxDispatchSignupScreenProps {
   setToken: (token: string) => void;
-  setId: (id: number) => void;
+  setUserId: (id: number) => void;
+  addPlanId: (planId: number) => void;
+  setPlanName: (name: string) => void;
+  setLinkSharing: (linkSharing: boolean) => void;
+  addNewSchedule: (name: string, newSchedule: ScheduleSlice) => void;
   setEmail: (email: string) => void;
   setMajor: (major: string) => void;
   setUserCoopCycle: (coopCycle: string) => void;
@@ -165,8 +178,27 @@ class SignupScreenComponent extends React.Component<Props, SignupScreenState> {
             errorEmail: response.errors.email,
           });
         } else {
+          const scheduleData: ScheduleSlice = this.props.getCurrentScheduleData();
+          createPlanForUser(response.user.id, response.user.token, {
+            name: "Plan 1",
+            link_sharing_enabled: false,
+            schedule: scheduleData.schedule,
+            major: this.props.major ? this.props.major.name : "",
+            planString: this.props.planStr ? this.props.planStr : "None",
+            course_counter: scheduleData.currentClassCounter,
+            warnings: scheduleData.warnings,
+            course_warnings: scheduleData.courseWarnings,
+          }).then(plan => {
+            this.props.addNewSchedule(
+              plan.plan.name,
+              plan.plan as ScheduleSlice
+            );
+            this.props.addPlanId(plan.plan.id);
+            this.props.setPlanName(plan.plan.name);
+            this.props.setLinkSharing(plan.plan.link_sharing_enabled);
+          });
+          this.props.setUserId(response.user.id);
           this.props.setToken(response.user.token);
-          this.props.setId(response.user.id);
           this.props.setEmail(response.user.email);
           this.props.setUserCoopCycle(response.user.coopCycle);
           this.props.history.push("/home");
@@ -320,6 +352,7 @@ const mapStateToProps = (state: AppState) => ({
   graduationYear: state.user.graduationYear,
   major: state.user.declaredMajor,
   planStr: state.user.planStr,
+  getCurrentScheduleData: () => getScheduleDataFromState(state),
 });
 
 /**
@@ -328,9 +361,17 @@ const mapStateToProps = (state: AppState) => ({
  */
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   setToken: (token: string) => dispatch(setTokenAction(token)),
-  setId: (id: number) => dispatch(setIdAction(id)),
+  setUserId: (id: number) => dispatch(setUserIdAction(id)),
+  addPlanId: (planId: number) => dispatch(addPlanIdAction(planId)),
+  setPlanName: (name: string) => dispatch(setPlanNameAction(name)),
+  addNewSchedule: (name: string, newSchedule: ScheduleSlice) =>
+    dispatch(addNewSchedule(name, newSchedule)),
+
+  setLinkSharing: (linkSharing: boolean) =>
+    dispatch(setLinkSharingAction(linkSharing)),
   setEmail: (email: string) => dispatch(setEmailAction(email)),
-  setUserCoopCycle: (coopCycle: string) => dispatch(setUserCoopCycleAction(coopCycle))
+  setUserCoopCycle: (coopCycle: string) =>
+    dispatch(setUserCoopCycleAction(coopCycle)),
 });
 
 /**

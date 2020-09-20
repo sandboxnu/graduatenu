@@ -8,9 +8,14 @@ import {
   setAcademicYearAction,
   setGraduationYearAction,
   setTokenAction,
-  setIdAction,
+  setUserIdAction,
+  addPlanIdAction,
+  setLinkSharingAction,
+  setPlanNameAction,
+  setMajorPlanAction,
+  setPlanIdsAction,
   setUserCoopCycleAction,
-  setEmailAction
+  setEmailAction,
 } from "../actions/userActions";
 import { setCoopCycle } from "../actions/scheduleActions";
 import { planToString } from "../../utils";
@@ -19,10 +24,15 @@ export interface UserState {
   fullName: string;
   academicYear: number;
   graduationYear: number;
-  declaredMajor?: Major;
+  planIds: number[];
+  token?: string; // if a token and userId are undefined, then no user is logged in
+  userId?: number;
+
+  // TODO: after plan reducer is made, move these fields
+  planName: string;
   planStr?: string;
-  token: string;
-  id: number;
+  linkSharing: boolean;
+  declaredMajor?: Major;
   email: string;
   coopCycle: string;
 }
@@ -31,10 +41,13 @@ const initialState: UserState = {
   fullName: "",
   academicYear: 0,
   graduationYear: 0,
-  declaredMajor: undefined,
+  planIds: [],
+  token: undefined,
+  userId: undefined,
   planStr: "",
-  token: "",
-  id: 0,
+  planName: "",
+  linkSharing: false,
+  declaredMajor: undefined,
   email: "",
   coopCycle: "",
 };
@@ -74,10 +87,27 @@ export const userReducer = (
         draft.token = action.payload.token;
         return draft;
       }
-      case getType(setIdAction): {
-        draft.id = action.payload.id;
+      case getType(setUserIdAction): {
+        draft.userId = action.payload.id;
         return draft;
       }
+      case getType(addPlanIdAction): {
+        draft.planIds.push(action.payload.planId);
+        return draft;
+      }
+      case getType(setPlanIdsAction): {
+        draft.planIds = action.payload.planIds;
+        return draft;
+      }
+      case getType(setLinkSharingAction): {
+        draft.linkSharing = action.payload.linkSharing;
+        return draft;
+      }
+      case getType(setPlanNameAction): {
+        draft.planName = action.payload.name;
+        return draft;
+      }
+
       case getType(setEmailAction): {
         draft.email = action.payload.email;
         return draft;
@@ -85,6 +115,10 @@ export const userReducer = (
       case getType(setUserCoopCycleAction): {
         draft.coopCycle = action.payload.coopCycle;
         return draft;
+      }
+      case getType(setMajorPlanAction): {
+        draft.declaredMajor = action.payload.major;
+        draft.planStr = action.payload.planStr;
       }
     }
   });
