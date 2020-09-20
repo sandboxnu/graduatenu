@@ -9,7 +9,7 @@ import {
   fetchMajorsErrorAction,
 } from "../state/actions/majorsActions";
 import { Dispatch } from "redux";
-import { Major, Schedule } from "graduate-common";
+import { Major, Schedule } from "../../../common/types";
 import { majorIds, majorMap } from "../majors";
 
 //graphql schema for searchNEU's majors endpoint.

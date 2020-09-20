@@ -124,3 +124,6 @@ yarn-debug.log*
 yarn-error.log*
 
 !index.html
+
+.idea/
+graduatenu.code-workspace

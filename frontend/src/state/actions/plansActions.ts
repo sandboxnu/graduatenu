@@ -1,4 +1,4 @@
-import { Schedule } from "graduate-common";
+import { Schedule } from "../../../../common/types";
 import { createAction } from "typesafe-actions";
 
 /**

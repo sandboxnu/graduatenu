@@ -1,13 +1,14 @@
-import { ScheduleCourse } from "graduate-common";
+import { ScheduleCourse } from "../../../../common/types";
 import {
   DNDSchedule,
   IWarning,
   CourseWarning,
+  NamedSchedule,
 } from "../../models/types";
 import { mockEmptySchedule } from "../../data/mockData";
 import produce from "immer";
 import { getType } from "typesafe-actions";
-import { ScheduleAction } from "../actions";
+import { ScheduleAction, SchedulesAction } from "../actions";
 import {
   addClassesAction,
   removeClassAction,
@@ -18,7 +19,9 @@ import {
   undoRemoveClassAction,
   setCoopCycle,
   setCompletedCourses,
+  setNamedSchedule,
 } from "../actions/scheduleActions";
+import { setSchedules } from "../actions/schedulesActions";
 import {
   convertTermIdToSeason,
   convertToDNDSchedule,
@@ -58,7 +61,7 @@ const initialState: ScheduleState = {
 
 export const scheduleReducer = (
   state: ScheduleState = initialState,
-  action: ScheduleAction
+  action: ScheduleAction | SchedulesAction
 ) => {
   return produce(state, draft => {
     switch (action.type) {
@@ -115,6 +118,14 @@ export const scheduleReducer = (
       case getType(changeSemesterStatusAction): {
         const { newStatus, year, season } = action.payload;
         draft.present.schedule.yearMap[year][season].status = newStatus;
+
+        const container = produceWarnings(
+          JSON.parse(JSON.stringify(draft.present.schedule)) // deep copy of schedule, because schedule is modified
+        );
+
+        draft.present.warnings = container.normalWarnings;
+        draft.present.courseWarnings = container.courseWarnings;
+
         return draft;
       }
       case getType(updateSemesterAction): {
@@ -236,6 +247,25 @@ export const scheduleReducer = (
 
         draft.present.warnings = container.normalWarnings;
         draft.present.courseWarnings = container.courseWarnings;
+        return draft;
+      }
+
+      case getType(setNamedSchedule): {
+        const namedSchedule = action.payload.namedSchedule.schedule.present;
+        draft.present.warnings = namedSchedule.warnings;
+        draft.present.courseWarnings = namedSchedule.courseWarnings;
+        draft.present.currentClassCounter = namedSchedule.currentClassCounter;
+        draft.present.schedule = namedSchedule.schedule;
+        draft.present.warnings = namedSchedule.warnings;
+        return draft;
+      }
+      case getType(setSchedules): {
+        const namedSchedule = action.payload.schedules[0].schedule.present;
+        draft.present.warnings = namedSchedule.warnings;
+        draft.present.courseWarnings = namedSchedule.courseWarnings;
+        draft.present.currentClassCounter = namedSchedule.currentClassCounter;
+        draft.present.schedule = namedSchedule.schedule;
+        draft.present.warnings = namedSchedule.warnings;
         return draft;
       }
     }

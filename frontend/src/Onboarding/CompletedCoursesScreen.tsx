@@ -7,8 +7,8 @@ import {
   Major,
   IRequiredCourse,
   Requirement,
-} from "graduate-common";
-import { getMajorFromState } from "../state";
+} from "../../../common/types";
+import { getDeclaredMajorFromState } from "../state";
 import { setCompletedCourses } from "../state/actions/scheduleActions";
 import styled from "styled-components";
 import { fetchCourse } from "../api";
@@ -355,7 +355,7 @@ class CompletedCoursesComponent extends Component<Props, State> {
 }
 
 const mapStateToProps = (state: AppState) => ({
-  major: getMajorFromState(state)!,
+  major: getDeclaredMajorFromState(state)!,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({

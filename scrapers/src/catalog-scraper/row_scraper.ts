@@ -6,7 +6,7 @@ import {
   ISubjectRange,
   Requirement,
   ICourseRange,
-} from "graduate-common";
+} from "../../../common/types";
 import { createRequiredCourse, isRequirement } from "../utils/scraper_utils";
 import { RANGECourseSet, ValidSubjects } from "./catalog_scraper";
 

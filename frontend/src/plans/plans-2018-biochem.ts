@@ -1,4 +1,4 @@
-import { Schedule } from "graduate-common";
+import { Schedule } from "../../../common/types";
 
 export const bioChemPlans: Schedule[] = [
   {

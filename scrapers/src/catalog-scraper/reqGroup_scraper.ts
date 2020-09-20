@@ -11,7 +11,7 @@ import {
   IRequiredCourse,
   ISubjectRange,
   ICreditRangeCourse,
-} from "graduate-common";
+} from "../../../common/types";
 import {
   SectionType,
   CreditsRange,

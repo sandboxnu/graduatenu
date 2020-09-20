@@ -1,6 +1,6 @@
 import React from "react";
 import { DNDSchedule } from "../../models/types";
-import { Major, IRequiredCourse } from "graduate-common";
+import { Major, IRequiredCourse } from "../../../../common/types";
 import styled from "styled-components";
 import { RequirementSection } from ".";
 import {
@@ -8,7 +8,7 @@ import {
   getCompletedCourseStrings,
 } from "../../utils";
 import { AppState } from "../../state/reducers/state";
-import { getScheduleFromState, getMajorFromState } from "../../state";
+import { getScheduleFromState, getDeclaredMajorFromState } from "../../state";
 import { connect } from "react-redux";
 
 const Container = styled.div`
@@ -64,7 +64,7 @@ const SidebarComponent: React.FC<Props> = ({ schedule, major }) => {
 
 const mapStateToProps = (state: AppState) => ({
   schedule: getScheduleFromState(state),
-  major: getMajorFromState(state),
+  major: getDeclaredMajorFromState(state),
 });
 
 export const Sidebar = connect(mapStateToProps)(SidebarComponent);
