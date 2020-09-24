@@ -162,8 +162,8 @@ export const getCourseWarningsFromState = (
   );
 
 /**
- *
- * @param state
+ * Get the current schedule from the Appstate
+ * @param state the AppState
  */
 export const getScheduleDataFromState = (state: AppState): ScheduleSlice => {
   return state.schedule.present;
