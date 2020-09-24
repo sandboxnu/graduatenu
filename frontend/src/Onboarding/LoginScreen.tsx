@@ -75,7 +75,7 @@ interface ReduxStoreLoginScreenProps {
 }
 interface ReduxStoreSignupScreenProps {
   majors: Major[];
-  setId: (id: number) => void;
+  setUserId: (id: number) => void;
   setEmail: (email: string) => void;
 }
 
@@ -156,7 +156,6 @@ class LoginScreenComponent extends React.Component<Props, LoginScreenState> {
           this.props.setGraduationYear(response.user.graduationYear);
           this.props.setToken(response.user.token);
           this.props.setUserId(response.user.id);
-          this.props.setId(response.user.id);
           this.props.setEmail(response.user.email);
           this.props.setUserCoopCycle(response.user.coopCycle);
           this.props.history.push("/home");
@@ -269,7 +268,7 @@ class LoginScreenComponent extends React.Component<Props, LoginScreenState> {
 
         <Subtitle>
           New here? Sign up{" "}
-          <Link style={{ color: "#EB5757" }} to="/signup">
+          <Link style={{ color: "#EB5757" }} to="/onboarding">
             here
           </Link>{" "}
           or{" "}

@@ -179,6 +179,7 @@ class SignupScreenComponent extends React.Component<Props, SignupScreenState> {
           });
         } else {
           const scheduleData: ScheduleSlice = this.props.getCurrentScheduleData();
+          console.log(response);
           createPlanForUser(response.user.id, response.user.token, {
             name: "Plan 1",
             link_sharing_enabled: false,

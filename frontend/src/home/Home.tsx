@@ -25,7 +25,7 @@ import {
 import { Sidebar } from "../components/Sidebar";
 import { withToast } from "./toastHook";
 import { AppearanceTypes } from "react-toast-notifications";
-import { withRouter, RouteComponentProps } from "react-router-dom";
+import { withRouter, RouteComponentProps, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { AppState } from "../state/reducers/state";
 import { Dispatch } from "redux";
@@ -40,10 +40,12 @@ import {
   getPlanIdsFromState,
   getLinkSharingFromState,
   getScheduleDataFromState,
+  isUserLoggedIn,
 } from "../state";
 import {
   updateSemesterAction,
   setDNDScheduleAction,
+  resetScheduleAction,
 } from "../state/actions/scheduleActions";
 import {
   setLinkSharingAction,
@@ -67,6 +69,7 @@ import { Button } from "@material-ui/core";
 import Loader from "react-loader-spinner";
 import { ExcelUpload } from "../components/ExcelUpload";
 import { SwitchPlanPopper } from "./SwitchPlanPopper";
+import { resetUserAction } from "../state/actions/userActions";
 
 const OuterContainer = styled.div`
   display: flex;
@@ -173,6 +176,11 @@ const PlanContainer = styled.div`
   margin: 0px;
 `;
 
+const LoginLogoutLink = styled(Link)`
+  align-self: center;
+  margin-right: 8px !important;
+`;
+
 interface ToastHomeProps {
   addToast: (message: string, options: any) => void;
   removeToast: (id: string) => void;
@@ -195,6 +203,7 @@ interface ReduxStoreHomeProps {
   planName: string | undefined;
   linkSharing: boolean;
   getCurrentScheduleData: () => ScheduleSlice;
+  isLoggedIn: boolean;
 }
 
 interface ReduxDispatchHomeProps {
@@ -210,6 +219,7 @@ interface ReduxDispatchHomeProps {
   setPlanIds: (planIds: number[]) => void;
   addNewSchedule: (name: string, newSchedule: ScheduleSlice) => void;
   updateActiveSchedule: (updatedSchedule: ScheduleSlice) => void;
+  logOut: () => void;
 }
 
 type Props = ToastHomeProps &
@@ -236,6 +246,7 @@ class HomeComponent extends React.Component<Props, HomeState> {
     if (this.props.token && this.props.userId) {
       findAllPlansForUser(this.props.userId, this.props.token).then(
         (plans: IPlanData[]) => {
+          console.log(plans);
           // Once multiple plans are supported, this can be changed to the last used plan
           let plan: IPlanData = plans[0];
 
@@ -492,6 +503,11 @@ class HomeComponent extends React.Component<Props, HomeState> {
     this.props.setDNDSchedule(dndschedule);
   }
 
+  logOut() {
+    this.props.logOut();
+    this.updatePlan();
+  }
+
   render() {
     return (
       <OuterContainer>
@@ -509,6 +525,20 @@ class HomeComponent extends React.Component<Props, HomeState> {
                   </MajorText>
                   <PlanText>{this.props.planStr || "None"}</PlanText>
                   <EditPlanPopper />
+                  <LoginLogoutLink
+                    to={{
+                      pathname: this.props.isLoggedIn ? "/" : "/login",
+                      state: { userData: {} },
+                    }}
+                    style={{ textDecoration: "none" }}
+                    onClick={
+                      this.props.isLoggedIn ? () => this.logOut() : () => {}
+                    }
+                  >
+                    <Button variant="contained" color="secondary">
+                      {this.props.isLoggedIn ? "Logout" : "Login"}
+                    </Button>
+                  </LoginLogoutLink>
                 </HomePlan>
               </HomeTop>
               <HomeAboveSchedule>
@@ -563,6 +593,7 @@ const mapStateToProps = (state: AppState) => ({
   planIds: getPlanIdsFromState(state),
   linkSharing: getLinkSharingFromState(state),
   getCurrentScheduleData: () => getScheduleDataFromState(state),
+  isLoggedIn: isUserLoggedIn(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
@@ -583,6 +614,10 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     dispatch(addNewSchedule(name, newSchedule)),
   updateActiveSchedule: (updatedSchedule: ScheduleSlice) =>
     dispatch(updateActiveSchedule(updatedSchedule)),
+  logOut: () => {
+    dispatch(resetUserAction());
+    dispatch(resetScheduleAction());
+  },
 });
 
 export const Home = connect<

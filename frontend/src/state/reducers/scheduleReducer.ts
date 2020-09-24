@@ -20,6 +20,7 @@ import {
   setCoopCycle,
   setCompletedCourses,
   setNamedSchedule,
+  resetScheduleAction,
 } from "../actions/scheduleActions";
 import { setSchedules } from "../actions/schedulesActions";
 import {
@@ -266,6 +267,10 @@ export const scheduleReducer = (
         draft.present.currentClassCounter = namedSchedule.currentClassCounter;
         draft.present.schedule = namedSchedule.schedule;
         draft.present.warnings = namedSchedule.warnings;
+        return draft;
+      }
+      case getType(resetScheduleAction): {
+        draft = initialState;
         return draft;
       }
     }

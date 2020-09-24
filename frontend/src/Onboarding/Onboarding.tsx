@@ -17,6 +17,9 @@ const Container = styled.div`
 
 const Header = styled.div`
   height: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
 `;
 
 const Body = styled.div`
@@ -92,6 +95,11 @@ const CardTitleText = styled.h2`
   margin-bottom: 2px;
 `;
 
+const LoginLink = styled(Link)`
+  align-self: center;
+  margin-right: 8px !important;
+`;
+
 interface OnboardingProps {
   fullName: string;
   fetchMajorsAndPlans: typeof fMAP; // using type of here to annotate the prop with it's correct type
@@ -123,7 +131,16 @@ class OnboardingComponent extends React.Component<OnboardingProps> {
 
     return (
       <Container>
-        <Header></Header>
+        <Header>
+          <LoginLink
+            to={{ pathname: "/login", state: { userData: {} } }}
+            style={{ textDecoration: "none" }}
+          >
+            <Button variant="contained" color="secondary">
+              Login
+            </Button>
+          </LoginLink>
+        </Header>
         <Body>
           <BodyText>
             <TitleText>Graduate on time.</TitleText>
