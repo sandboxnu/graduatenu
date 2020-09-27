@@ -215,6 +215,9 @@ export const getClosedYearsFromState = (state: AppState): Set<number> => {
  * @param state the AppState
  */
 export const getCurrentClassCounterFromState = (state: AppState): number => {
+  if (!state.schedules.schedules[state.schedules.activeSchedule]) {
+    return 0;
+  }
   return state.schedules.schedules[state.schedules.activeSchedule].schedule
     .present.currentClassCounter;
 };
