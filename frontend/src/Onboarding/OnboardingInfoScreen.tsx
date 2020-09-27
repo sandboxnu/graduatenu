@@ -159,9 +159,9 @@ class OnboardingScreenComponent extends React.Component<
     });
   }
 
-  onChangeCatalogYear(e: any) {
+  onChangeCatalogYear(event: React.SyntheticEvent<{}>, value: any) {
     this.setState({
-      catalogYear: Number(e.target.value),
+      catalogYear: Number(value),
     });
   }
 
@@ -203,7 +203,7 @@ class OnboardingScreenComponent extends React.Component<
       <Autocomplete
         style={{ width: 326, marginBottom: marginSpace }}
         disableListWrap
-        options={this.props.majors.map(maj => maj.name)}
+        options={this.props.majors.map(maj => maj.name)} //need to filter for only current catalog year
         renderInput={params => (
           <TextField
             {...params}
@@ -353,8 +353,8 @@ class OnboardingScreenComponent extends React.Component<
             fullWidth
           />
         )}
-        value={!!this.state.major ? this.state.major.name + " " : ""}
-        onChange={this.onChangeMajor.bind(this)}
+        value={!!this.state.catalogYear ? this.state.catalogYear + " " : ""}
+        onChange={this.onChangeCatalogYear.bind(this)}
       />
     );
   }
@@ -392,10 +392,9 @@ class OnboardingScreenComponent extends React.Component<
           {this.renderNameTextField(textFieldStr, beenEditedName)}
           {this.renderAcademicYearSelect(year, beenEditedYear)}
           {this.renderGradYearSelect(gradYear, beenEditedGrad)}
-          {this.renderMajorDropDown()}
-          {!!this.state.major && this.renderCoopCycleDropDown()}
           {this.renderCatalogYearSelect()}
           {!!this.state.catalogYear && this.renderMajorDropDown()}
+          {!!this.state.major && this.renderCoopCycleDropDown()}
 
           {textFieldStr.length !== 0 && !!year && !!gradYear ? (
             <Link
