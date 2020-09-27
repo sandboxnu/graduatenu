@@ -21,6 +21,7 @@ import { convertToDNDCourses } from "../../utils/schedule-helpers";
 import { fetchCourse } from "../../api";
 import { Droppable } from "react-beautiful-dnd";
 import { SidebarClassBlock } from "./SidebarClassBlock";
+import { FormatListNumberedRounded } from "@material-ui/icons";
 
 const SectionHeaderWrapper = styled.div`
   display: flex;
@@ -119,8 +120,15 @@ export class RequirementSection extends React.Component<
   RequirementSectionProps,
   RequirementSectionState
 > {
+  _isMounted: boolean;
+
   constructor(props: RequirementSectionProps) {
     super(props);
+
+    // TODO note that this is an antipattern introduced to solve
+    // issues with setting state on an unmounted component, remove
+    // and find a better solution.
+    this._isMounted = false;
 
     this.state = {
       expanded: !!props.warning,
@@ -165,7 +173,15 @@ export class RequirementSection extends React.Component<
    * Fetches class data for each requirement upon loading this component.
    */
   async componentDidMount() {
-    await this.fetchClassData();
+    this._isMounted = true;
+    const data = await this.fetchClassData();
+    if (data && this._isMounted) {
+      this.setState(data);
+    }
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 
   /**
@@ -226,10 +242,10 @@ export class RequirementSection extends React.Component<
       indexData[course.subject + course.classId] = i;
     }
 
-    this.setState({
+    return {
       classData,
       indexData,
-    });
+    };
   }
 
   /**
