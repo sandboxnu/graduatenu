@@ -1,10 +1,5 @@
 import { ScheduleCourse } from "../../../../common/types";
-import {
-  DNDSchedule,
-  IWarning,
-  CourseWarning,
-  NamedSchedule,
-} from "../../models/types";
+import { DNDSchedule, IWarning, CourseWarning } from "../../models/types";
 import { mockEmptySchedule } from "../../data/mockData";
 import produce from "immer";
 import { getType } from "typesafe-actions";
@@ -20,6 +15,8 @@ import {
   setCoopCycle,
   setCompletedCourses,
   setNamedSchedule,
+  toggleYearExpanded,
+  setClosedYearsToYearsInThePast,
 } from "../actions/scheduleActions";
 import { setSchedules } from "../actions/schedulesActions";
 import {
@@ -30,6 +27,7 @@ import {
   sumCreditsFromList,
   numToTerm,
   getNextTerm,
+  isYearInPast,
 } from "../../utils";
 
 export interface ScheduleState {
@@ -45,6 +43,7 @@ export interface ScheduleStateSlice {
   warnings: IWarning[];
   courseWarnings: CourseWarning[];
   creditsTaken: number;
+  closedYears: number[]; // list of indexes for which years are not expanded in the UI
 }
 
 const initialState: ScheduleState = {
@@ -56,6 +55,7 @@ const initialState: ScheduleState = {
     warnings: [],
     courseWarnings: [],
     creditsTaken: 0,
+    closedYears: [],
   },
 };
 
@@ -266,6 +266,31 @@ export const scheduleReducer = (
         draft.present.currentClassCounter = namedSchedule.currentClassCounter;
         draft.present.schedule = namedSchedule.schedule;
         draft.present.warnings = namedSchedule.warnings;
+        return draft;
+      }
+      case getType(setClosedYearsToYearsInThePast): {
+        console.log("academicYear", action.payload.academicYear);
+        draft.present.closedYears = [];
+        for (var i = 0; i < draft.present.schedule.years.length; i++) {
+          console.log("in loop year", i, draft.present.schedule.years[i]);
+          if (isYearInPast(i, action.payload.academicYear)) {
+            draft.present.closedYears.push(i);
+            console.log("year is in past");
+          }
+        }
+        return draft;
+      }
+      case getType(toggleYearExpanded): {
+        const idx = action.payload.index;
+        if (draft.present.closedYears.includes(idx)) {
+          draft.present.closedYears.splice(
+            draft.present.closedYears.indexOf(idx),
+            1
+          );
+        } else {
+          draft.present.closedYears.push(idx);
+        }
+        draft.present.closedYears.sort();
         return draft;
       }
     }
