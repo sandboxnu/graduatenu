@@ -3,9 +3,81 @@ import {
   DNDScheduleYear,
   DNDScheduleCourse,
   DNDScheduleTerm,
+  SeasonEnum,
 } from "../models/types";
-import { SeasonEnum } from "../models/types";
-import { Schedule, ScheduleCourse, SeasonWord } from "../../../common/types";
+import {
+  Schedule,
+  ScheduleCourse,
+  SeasonWord,
+  StatusEnum,
+} from "../../../common/types";
+
+export function generateInitialSchedule(
+  academicYear: number,
+  graduationYear: number,
+  name: string
+): DNDSchedule {
+  const currentCalendarYear = new Date().getFullYear();
+  const currentYear =
+    new Date().getMonth() <= 3 ? currentCalendarYear : currentCalendarYear + 1;
+  const numYearsInSchool = graduationYear - currentYear + academicYear;
+  const startingYear = graduationYear - numYearsInSchool;
+
+  const yearsList = [];
+  // should add consecutive years from startingYear to one less than graduationYear
+  for (var y = startingYear; y < graduationYear; y++) {
+    yearsList.push(y);
+  }
+
+  let yearMap: { [key: number]: DNDScheduleYear } = {};
+  let counter = 1;
+
+  for (const y of yearsList) {
+    yearMap[y] = {
+      year: y,
+      isSummerFull: false,
+      fall: {
+        season: SeasonEnum.FL,
+        year: y,
+        termId: Number(String(y) + String(10)),
+        id: counter,
+        status: StatusEnum.CLASSES,
+        classes: [],
+      },
+      spring: {
+        season: SeasonEnum.SP,
+        year: y,
+        termId: Number(String(y) + String(30)),
+        id: counter + 1,
+        status: StatusEnum.CLASSES,
+        classes: [],
+      },
+      summer1: {
+        season: SeasonEnum.S1,
+        year: y,
+        termId: Number(String(y) + String(40)),
+        id: counter + 2,
+        status: StatusEnum.CLASSES,
+        classes: [],
+      },
+      summer2: {
+        season: SeasonEnum.S2,
+        year: y,
+        termId: Number(String(y) + String(60)),
+        id: counter + 3,
+        status: StatusEnum.CLASSES,
+        classes: [],
+      },
+    };
+    counter += 4;
+  }
+
+  return {
+    years: yearsList,
+    yearMap: yearMap,
+    id: name + "01",
+  };
+}
 
 export function convertTermIdToSeason(termId: number): SeasonWord {
   const seasonId = termId % 100;

@@ -29,6 +29,7 @@ import {
   removeTransferClassAction,
   setCurrentClassCounter,
   incrementCurrentClassCounter,
+  setInitialSchedule,
 } from "../actions/scheduleActions";
 import { setSchedules, addNewSchedule } from "../actions/schedulesActions";
 import {
@@ -41,6 +42,7 @@ import {
   getNextTerm,
   isYearInPast,
   clearSchedule,
+  generateInitialSchedule,
 } from "../../utils";
 import { resetUserAction } from "../actions/userActions";
 import _ from "lodash";
@@ -89,6 +91,15 @@ export const scheduleReducer = (
 ) => {
   return produce(state, draft => {
     switch (action.type) {
+      case getType(setInitialSchedule): {
+        const { name, academicYear, graduationYear } = action.payload;
+        draft.present.schedule = generateInitialSchedule(
+          academicYear,
+          graduationYear,
+          name
+        );
+        return draft;
+      }
       case getType(addClassesAction): {
         const { courses, semester } = action.payload;
         const season = convertTermIdToSeason(semester.termId);

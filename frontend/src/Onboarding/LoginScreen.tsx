@@ -75,6 +75,9 @@ interface ReduxStoreLoginScreenProps {
 interface ReduxStoreSignupScreenProps {
   majors: Major[];
   setEmail: (email: string) => void;
+  fullName: string;
+  academicYear: number;
+  graduationYear: number;
 }
 
 type Props = ReduxStoreLoginScreenProps &
@@ -335,6 +338,9 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 
 const mapStateToProps = (state: AppState) => ({
   majors: getMajors(state),
+  fullName: state.user.fullName,
+  academicYear: state.user.academicYear,
+  graduationYear: state.user.graduationYear,
 });
 
 /**

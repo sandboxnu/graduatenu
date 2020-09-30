@@ -18,10 +18,8 @@ import {
   setUserCoopCycleAction,
 } from "../state/actions/userActions";
 import { addNewSchedule } from "../state/actions/schedulesActions";
-
 import { createPlanForUser } from "../services/PlanService";
 import { getScheduleDataFromState } from "../state";
-import { setCoopCycle } from "../state/actions/scheduleActions";
 import Cookies from "js-cookie";
 import { AUTH_TOKEN_COOKIE_KEY } from "../utils/auth-helpers";
 
@@ -372,14 +370,12 @@ const mapStateToProps = (state: AppState) => ({
  * Callback to be passed into connect, responsible for dispatching redux actions to update the appstate.
  * @param dispatch responsible for dispatching actions to the redux store.
  */
-
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   setUserId: (id: number) => dispatch(setUserIdAction(id)),
   addPlanId: (planId: number) => dispatch(addPlanIdAction(planId)),
   setPlanName: (name: string) => dispatch(setPlanNameAction(name)),
   addNewSchedule: (name: string, newSchedule: ScheduleSlice) =>
     dispatch(addNewSchedule(name, newSchedule)),
-
   setLinkSharing: (linkSharing: boolean) =>
     dispatch(setLinkSharingAction(linkSharing)),
   setEmail: (email: string) => dispatch(setEmailAction(email)),
