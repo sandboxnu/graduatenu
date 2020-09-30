@@ -4,13 +4,9 @@ import {
   DNDScheduleCourse,
   DNDScheduleTerm,
   SeasonEnum,
-} from "../models/types";
-import {
-  Schedule,
-  ScheduleCourse,
-  SeasonWord,
   StatusEnum,
-} from "../../../common/types";
+} from "../models/types";
+import { Schedule, ScheduleCourse, SeasonWord } from "../../../common/types";
 
 export function generateInitialSchedule(
   academicYear: number,
