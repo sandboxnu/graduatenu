@@ -316,6 +316,29 @@ export interface IUserData {
   plan?: Schedule;
 }
 
+/**
+ * An AP exam available for transfer credit, with the courses and semester
+ * hours it counts for.
+ * @param name the name of this exam
+ * @param mappableCourses the NEU courses which this AP credit counts for
+ * @param semesterHours the number of semester hours which this AP credit counts for
+ */
+export interface APExam {
+  name: string;
+  mappableCourses: IRequiredCourse[];
+  semesterHours: number;
+}
+
+/**
+ * A subject group of AP exams available for transfer.
+ * @param name the name of this group of AP exams
+ * @param apCredits an array of AP exams which are within this group
+ */
+export interface APCreditGroup {
+  name: string;
+  apCredits: APExam[];
+}
+
 /** ------------------------------------------------------------------------
  *
  *            OLD STUFF FOLLOWS ! This stuff is big outdated and is only
