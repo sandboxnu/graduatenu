@@ -96,3 +96,8 @@ export const setCurrentClassCounter = createAction(
   "schedule/SET_CURRENT_CLASS_COUNTER",
   (currentClassCounter: number) => ({ currentClassCounter })
 )();
+
+export const incrementCurrentClassCounter = createAction(
+  "schedule/INCREMENT_CURRENT_CLASS_COUNTER",
+  () => void 0
+)();

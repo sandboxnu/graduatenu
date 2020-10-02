@@ -25,7 +25,7 @@ import { FormatListNumberedRounded } from "@material-ui/icons";
 import { connect } from "react-redux";
 import { AppState } from "../../state/reducers/state";
 import { getCurrentClassCounterFromState } from "../../state";
-import { setCurrentClassCounter } from "../../state/actions/scheduleActions";
+import { incrementCurrentClassCounter } from "../../state/actions/scheduleActions";
 import { Dispatch } from "redux";
 >>>>>>> fix duplicate draggable id bug
 
@@ -102,7 +102,7 @@ interface ReduxStoreProps {
 }
 
 interface ReduxDispatchProps {
-  setCurrentClassCounter: (currentClassCounter: number) => void;
+  incrementCurrentClassCounter: () => void;
 }
 
 type Props = RequirementSectionProps & ReduxStoreProps & ReduxDispatchProps;
@@ -236,7 +236,6 @@ class RequirementSectionComponent extends React.Component<
           [scheduleCourse!],
           this.props.currentClassCounter
         );
-        this.props.setCurrentClassCounter(counter);
         return newCourses[0];
       }
     );
@@ -391,6 +390,7 @@ class RequirementSectionComponent extends React.Component<
                 andCourse.subject + andCourse.classId
               )
             }
+            currentClassCounter={this.props.currentClassCounter}
             level={level}
           ></SidebarClassBlock>
         );
@@ -407,6 +407,7 @@ class RequirementSectionComponent extends React.Component<
             completed={this.props.completedCourses.includes(
               course.subject + course.classId
             )}
+            currentClassCounter={this.props.currentClassCounter}
             level={level}
           ></SidebarClassBlock>
         );
@@ -532,8 +533,7 @@ const mapStateToProps = (state: AppState) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  setCurrentClassCounter: (currentClassCounter: number) =>
-    dispatch(setCurrentClassCounter(currentClassCounter)),
+  incrementCurrentClassCounter: () => dispatch(incrementCurrentClassCounter()),
 });
 
 export const RequirementSection = connect<
