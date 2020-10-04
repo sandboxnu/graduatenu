@@ -7,7 +7,6 @@ import {
   DNDScheduleYear,
   DNDScheduleTerm,
   IPlanData,
-  NamedSchedule,
   ScheduleSlice,
 } from "../models/types";
 import { Schedule, Major, Status, SeasonWord } from "../../../common/types";
@@ -31,8 +30,6 @@ import { AppState } from "../state/reducers/state";
 import { Dispatch } from "redux";
 import {
   getScheduleFromState,
-  getPlanStrFromState,
-  getDeclaredMajorFromState,
   getWarningsFromState,
   getTokenFromState,
   getUserId,
@@ -185,8 +182,8 @@ interface ToastHomeProps {
 
 interface ReduxStoreHomeProps {
   schedule: DNDSchedule;
-  major: string;
-  planStr: string;
+  major?: string;
+  planStr?: string;
   warnings: IWarning[];
   token?: string;
   userId?: number;
@@ -433,7 +430,7 @@ class HomeComponent extends React.Component<Props, HomeState> {
           name: this.props.planName ? this.props.planName : "",
           link_sharing_enabled: this.props.linkSharing,
           schedule: this.props.schedule,
-          major: this.props.major,
+          major: this.props.major || "",
           planString: this.props.planStr ? this.props.planStr : "None",
           course_counter: scheduleData.currentClassCounter,
           warnings: scheduleData.warnings,
@@ -467,8 +464,8 @@ class HomeComponent extends React.Component<Props, HomeState> {
         name: `Schedule ${this.state.planCount + 1}`,
         link_sharing_enabled: this.props.linkSharing,
         schedule: this.props.schedule,
-        major: this.props.major,
-        planString: this.props.planStr,
+        major: this.props.major || "",
+        planString: this.props.planStr || "",
         course_counter: scheduleData.currentClassCounter,
         warnings: scheduleData.warnings,
         course_warnings: scheduleData.courseWarnings,
