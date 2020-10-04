@@ -1,32 +1,32 @@
-const prereq_loader = require('../prereq_loader');
-const rp = require('request-promise');
-const plan_parser = require('scrapers/src/plan_parser');
+const prereq_loader = require("../prereq_loader");
+const rp = require("request-promise");
+const plan_parser = require("scrapers/src/plan_parser");
 const supported = [
-  'http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-science/bscs/#planofstudytext',
-  'http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/bs/#planofstudytext',
-  'http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-cognitive-psychology-bs/#planofstudytext',
-  'http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/information-science-cognitive-psychology-bs/#planofstudytext',
-  'http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/data-science-health-science-bs/#planofstudytext',
-  'http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-political-science-bs/#planofstudytext',
-  'http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-linguistics-bs/#planofstudytext',
-  'http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-mathematics-bs/#planofstudytext',
+  "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-science/bscs/#planofstudytext",
+  "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/bs/#planofstudytext",
+  "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-cognitive-psychology-bs/#planofstudytext",
+  "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/information-science-cognitive-psychology-bs/#planofstudytext",
+  "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/data-science-health-science-bs/#planofstudytext",
+  "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-political-science-bs/#planofstudytext",
+  "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-linguistics-bs/#planofstudytext",
+  "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-mathematics-bs/#planofstudytext",
 
-  'http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-communication-studies-bs/#planofstudytext',
-  'http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-criminal-justice-bs/#planofstudytext',
-  'http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/information-science-journalism-bs/#planofstudytext',
-  'http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-media-arts-bs/#planofstudytext',
+  "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-communication-studies-bs/#planofstudytext",
+  "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-criminal-justice-bs/#planofstudytext",
+  "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/information-science-journalism-bs/#planofstudytext",
+  "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-media-arts-bs/#planofstudytext",
 
   // This major parses correctly, but has a "Take two courses, at least one of which is at the 4000 or 5000 level, from the following:"
   // which is not handled, and has courses double listed in one location which may not parse correctly (?)
-  'http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-philosophy-bs/#planofstudytext',
+  "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-philosophy-bs/#planofstudytext",
 
   // "Complete four ECON electives with at least two numbered at ECON 3000 or above."
-  'http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/cybersecurity-economics-bs/#planofstudytext',
+  "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/cybersecurity-economics-bs/#planofstudytext",
 
   // "Complete four economics electives with no more than two below 3000:"
-  'http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/economics-bs/#planofstudytext',
-  'http://catalog.northeastern.edu/archive/2018-2019/undergraduate/science/biochemistry/biochemistry-bs/#planofstudytext',
-  'http://catalog.northeastern.edu/archive/2018-2019/undergraduate/science/mathematics/mathematics-bs/#planofstudytext',
+  "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/economics-bs/#planofstudytext",
+  "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/science/biochemistry/biochemistry-bs/#planofstudytext",
+  "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/science/mathematics/mathematics-bs/#planofstudytext",
 ];
 
 runTestsOnLinks(supported);
@@ -40,9 +40,14 @@ function runTestsOnLinks(links) {
 
   // run tests on the results.
   links.map((link, index) => {
-    test('Ensures that scraper correctly add pre-reqs for major no. ' + index + "'s plans of study", async () => {
-      await testScheduleLinkPrereqs(link);
-    });
+    test(
+      "Ensures that scraper correctly add pre-reqs for major no. " +
+        index +
+        "'s plans of study",
+      async () => {
+        await testScheduleLinkPrereqs(link);
+      }
+    );
   });
 }
 
@@ -57,7 +62,9 @@ async function testScheduleLinkPrereqs(link) {
   const page = await rp(link);
   const schedules = plan_parser.planOfStudyToSchedule(page);
 
-  const enhancedSchedules = await prereq_loader.addPrereqsToSchedules(schedules);
+  const enhancedSchedules = await prereq_loader.addPrereqsToSchedules(
+    schedules
+  );
 
   for (schedule of enhancedSchedules) {
     expect(schedule).toMatchSnapshot();
@@ -66,74 +73,77 @@ async function testScheduleLinkPrereqs(link) {
   return undefined;
 }
 
-test('Ensure that prereqs and coreqs for CS 2810 are successfully added to a schedule containing just CS 2810.', async () => {
+test("Ensure that prereqs and coreqs for CS 2810 are successfully added to a schedule containing just CS 2810.", async () => {
   const mockSched = {
     years: [1000],
     yearMap: {
-      '1000': {
+      1000: {
         year: 1000,
         fall: {
-          season: 'FL',
+          season: "FL",
           year: 1000,
           termId: 100010,
           id: 1010,
           classes: [],
-          status: 'INACTIVE',
+          status: "INACTIVE",
         },
         spring: {
-          season: 'SP',
+          season: "SP",
           year: 1000,
           termId: 100030,
           id: 1030,
           classes: [
             {
-              classId: '2810',
-              subject: 'CS',
+              classId: "2810",
+              subject: "CS",
               numCreditsMin: 4,
               numCreditsMax: 4,
               prereqs: {
-                type: 'and',
+                type: "and",
                 values: [
                   {
-                    classId: '1800',
-                    subject: 'CS',
+                    classId: "1800",
+                    subject: "CS",
                   },
                   {
-                    classId: '2500',
-                    subject: 'CS',
+                    classId: "2500",
+                    subject: "CS",
                   },
                 ],
               },
               coreqs: {
-                type: 'and',
+                type: "and",
                 values: [],
               },
             },
           ],
-          status: 'CLASSES',
+          status: "CLASSES",
         },
         summer1: {
-          season: 'S1',
+          season: "S1",
           year: 1000,
           termId: 100040,
           id: 1040,
           classes: [],
-          status: 'INACTIVE',
+          status: "INACTIVE",
         },
         summer2: {
-          season: 'S2',
+          season: "S2",
           year: 1000,
           termId: 100060,
           id: 1060,
           classes: [],
-          status: 'INACTIVE',
+          status: "INACTIVE",
         },
         isSummerFull: false,
       },
     },
   };
 
-  const enhancedSchedules = await prereq_loader.addPrereqsToSchedules([mockSched], 2020);
+  const enhancedSchedules = await prereq_loader.addPrereqsToSchedules(
+    [mockSched],
+    2020
+  );
 
   expect(enhancedSchedules).toBeDefined();
   expect(enhancedSchedules.length).toEqual(1);
@@ -142,10 +152,10 @@ test('Ensure that prereqs and coreqs for CS 2810 are successfully added to a sch
 
   // ensure that the property exists, first of all.
   expect(withPrereqsCoreqs).toBeDefined();
-  expect(withPrereqsCoreqs).toHaveProperty('yearMap');
-  expect(withPrereqsCoreqs.yearMap).toHaveProperty('1000');
-  expect(withPrereqsCoreqs.yearMap[1000]).toHaveProperty('spring');
-  expect(withPrereqsCoreqs.yearMap[1000].spring).toHaveProperty('classes');
+  expect(withPrereqsCoreqs).toHaveProperty("yearMap");
+  expect(withPrereqsCoreqs.yearMap).toHaveProperty("1000");
+  expect(withPrereqsCoreqs.yearMap[1000]).toHaveProperty("spring");
+  expect(withPrereqsCoreqs.yearMap[1000].spring).toHaveProperty("classes");
 
   // check that the array has the one element.
   expect(withPrereqsCoreqs.yearMap[1000].spring.classes).toBeInstanceOf(Array);
@@ -156,8 +166,8 @@ test('Ensure that prereqs and coreqs for CS 2810 are successfully added to a sch
 
   // expect the prereqs to exist.
   expect(cs2810).toBeInstanceOf(Object);
-  expect(cs2810).toHaveProperty('prereqs');
-  expect(cs2810).toHaveProperty('coreqs');
+  expect(cs2810).toHaveProperty("prereqs");
+  expect(cs2810).toHaveProperty("coreqs");
 
   // checks on the prereqs/coreqs.
   const prereqs = cs2810.prereqs;
@@ -165,22 +175,22 @@ test('Ensure that prereqs and coreqs for CS 2810 are successfully added to a sch
 
   // strict check on the prereqs.
   expect(prereqs).toStrictEqual({
-    type: 'and',
+    type: "and",
     values: [
       {
-        classId: '1800',
-        subject: 'CS',
+        classId: "1800",
+        subject: "CS",
       },
       {
-        classId: '2500',
-        subject: 'CS',
+        classId: "2500",
+        subject: "CS",
       },
     ],
   });
 
   // strict check on the coreqs.
   expect(coreqs).toStrictEqual({
-    type: 'and',
+    type: "and",
     values: [],
   });
 });

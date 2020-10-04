@@ -37,5 +37,7 @@
       "pre-commit": "pretty-quick --staged"
     }
   },
-  "dependencies": {}
+  "dependencies": {
+    "prettier": "^2.1.2"
+  }
 }
