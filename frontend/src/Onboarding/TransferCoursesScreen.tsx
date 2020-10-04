@@ -7,8 +7,11 @@ import {
   Major,
   IRequiredCourse,
   Requirement,
-} from "graduate-common";
-import { getMajorFromState, getCompletedRequirementsFromState } from "../state";
+} from "../../../common/types";
+import {
+  getDeclaredMajorFromState,
+  getCompletedRequirementsFromState,
+} from "../state";
 import {
   setCompletedCourses,
   setTransferCourses,
@@ -324,7 +327,7 @@ class TransferCoursesComponent extends Component<Props, State> {
 }
 
 const mapStateToProps = (state: AppState) => ({
-  major: getMajorFromState(state)!,
+  major: getDeclaredMajorFromState(state)!,
   completedRequirements: getCompletedRequirementsFromState(state),
 });
 

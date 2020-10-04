@@ -8,10 +8,7 @@ import {
   IRequiredCourse,
   Requirement,
 } from "../../../common/types";
-import {
-  setCompletedRequirements,
-  setCompletedCourses,
-} from "../state/actions/scheduleActions";
+import { setCompletedRequirements } from "../state/actions/scheduleActions";
 import { getDeclaredMajorFromState } from "../state";
 import styled from "styled-components";
 import { NextButton } from "../components/common/NextButton";
