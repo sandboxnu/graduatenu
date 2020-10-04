@@ -334,9 +334,9 @@ export interface APExam {
  * @param name the name of this group of AP exams
  * @param apCredits an array of AP exams which are within this group
  */
-export interface APCreditGroup {
+export interface APExamGroup {
   name: string;
-  apCredits: APExam[];
+  apExams: APExam[];
 }
 
 /** ------------------------------------------------------------------------
