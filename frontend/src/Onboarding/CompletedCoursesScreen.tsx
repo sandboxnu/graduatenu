@@ -7,9 +7,12 @@ import {
   Major,
   IRequiredCourse,
   Requirement,
-} from "graduate-common";
-import { getMajorFromState } from "../state";
-import { setCompletedRequirements } from "../state/actions/scheduleActions";
+} from "../../../common/types";
+import {
+  setCompletedRequirements,
+  setCompletedCourses,
+} from "../state/actions/scheduleActions";
+import { getDeclaredMajorFromState } from "../state";
 import styled from "styled-components";
 import { NextButton } from "../components/common/NextButton";
 import { Link, withRouter, RouteComponentProps } from "react-router-dom";
@@ -351,7 +354,7 @@ class CompletedCoursesComponent extends Component<Props, State> {
 }
 
 const mapStateToProps = (state: AppState) => ({
-  major: getMajorFromState(state)!,
+  major: getDeclaredMajorFromState(state)!,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({

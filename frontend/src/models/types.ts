@@ -7,8 +7,8 @@ import {
   INEUOrPrereq,
   INEUPrereqCourse,
   ICourseRange,
-  IOrCourse
-} from "graduate-common"
+  IOrCourse,
+} from "../../../common/types";
 
 /**
  * Describes an abbreviation for one of Northeastern's NUPath academic breadth requirements.
@@ -39,6 +39,34 @@ export enum SeasonEnum {
   S1 = "S1",
   S2 = "S2",
   SM = "SM",
+}
+
+/**
+ * Represents a schedule with loading and error information
+ */
+export interface ScheduleSlice {
+  currentClassCounter: number;
+  isScheduleLoading: boolean; // not used right now
+  scheduleError: string; // not used right now
+  schedule: DNDSchedule;
+  warnings: IWarning[];
+  courseWarnings: CourseWarning[];
+}
+
+/**
+ * Represents a schedule, in its present and past state
+ */
+export interface PastPresentSchedule {
+  past?: ScheduleSlice;
+  present: ScheduleSlice;
+}
+
+/**
+ * Represents a schedule with a string name, for better display of plans dropdown
+ */
+export interface NamedSchedule {
+  name: string;
+  schedule: PastPresentSchedule;
 }
 
 /**
@@ -80,7 +108,6 @@ export interface IWarning {
   message: string;
   termId: number;
 }
-
 
 /**
  * A CourseWarning, specific to a single course, in a single term(id).
@@ -125,6 +152,8 @@ export interface IUserData {
   password: string;
   academic_year?: number;
   graduation_year?: number;
+  major?: string;
+  coop_cycle?: string;
 }
 
 /**
@@ -133,6 +162,63 @@ export interface IUserData {
 export interface ILoginData {
   email: string;
   password: string;
+}
+
+/**
+ * A model for data pertaining to a Plan object.
+ */
+export interface IPlanData {
+  id: number;
+  name: string;
+  link_sharing_enabled: boolean;
+  schedule: DNDSchedule;
+  major: string;
+  planString: string;
+  warnings: IWarning[];
+  course_warnings: CourseWarning[];
+  course_counter: number;
+}
+
+/**
+ * A model for data pertaining to a create plan request.
+ */
+export interface ICreatePlanData {
+  name: string;
+  link_sharing_enabled: boolean;
+  schedule: DNDSchedule;
+  major: string;
+  planString: string;
+  warnings: IWarning[];
+  course_warnings: CourseWarning[];
+  course_counter: number;
+}
+/*
+ * Data needed to update a user
+ */
+export interface IUpdateUser {
+  token: string;
+  id: number;
+}
+
+/**
+ * A model for data pertaining to a User object.
+ */
+export interface IUpdateUserData {
+  email?: string;
+  major?: string;
+  username?: string;
+  academic_year?: number;
+  graduation_year?: number;
+  coop_cycle?: string;
+}
+
+/**
+ * A model for data pertaining to a User object.
+ */
+export interface IUpdateUserPassword {
+  old_password: string;
+  new_password: string;
+  confirm_password: string;
 }
 
 /** ------------------------------------------------------------------------

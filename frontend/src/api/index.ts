@@ -1,4 +1,4 @@
-import { ScheduleCourse } from "graduate-common";
+import { ScheduleCourse } from "../../../common/types";
 
 export const fetchCourse = async (
   subject: string,

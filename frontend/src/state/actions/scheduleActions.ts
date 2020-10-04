@@ -3,6 +3,7 @@ import {
   DNDScheduleCourse,
   DNDScheduleTerm,
   DNDSchedule,
+  NamedSchedule,
 } from "../../models/types";
 import {
   ScheduleCourse,
@@ -10,7 +11,7 @@ import {
   SeasonWord,
   Schedule,
   IRequiredCourse,
-} from "graduate-common";
+} from "../../../../common/types";
 
 export const addClassesAction = createAction(
   "schedule/ADD_CLASSES",
@@ -79,4 +80,9 @@ export const setCompletedRequirements = createAction(
 export const setTransferCourses = createAction(
   "schedule/SET_TRANSFER_COURSES",
   (transferCourses: ScheduleCourse[]) => ({ transferCourses })
+)();
+
+export const setNamedSchedule = createAction(
+  "schedule/SET_NAMED_SCHEDULE",
+  (namedSchedule: NamedSchedule) => ({ namedSchedule })
 )();

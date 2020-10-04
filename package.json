@@ -8,16 +8,15 @@
   "workspaces": [
     "frontend",
     "scrapers",
-    "api",
-    "graduate-common"
+    "api"
   ],
   "proxy": "http://localhost:3001",
   "scripts": {
     "start": "cd infrastructure/develop && ./compose-build.sh && ./run-servers.sh dev-build",
     "prod-start": "cd infrastructure/develop && ./compose-build.sh && ./run-servers.sh prod-build",
-    "build": "cd frontend && CI=false react-scripts build",
+    "build": "cd frontend && CI=false react-app-rewired build",
     "test": "jest",
-    "eject": "cd frontend && react-scripts eject",
+    "eject": "cd frontend && react-app-rewired eject",
     "type-check": "tsc --noEmit"
   },
   "devDependencies": {

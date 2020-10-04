@@ -6,7 +6,7 @@ import {
   ICourseRange,
   ISubjectRange,
   ScheduleCourse,
-} from "graduate-common";
+} from "../../../../common/types";
 import {
   IRequirementGroupWarning,
   DNDScheduleCourse,

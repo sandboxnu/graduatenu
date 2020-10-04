@@ -6,11 +6,11 @@ import { NextButton } from "../components/common/NextButton";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import { Dispatch } from "redux";
-import { Major, Schedule } from "graduate-common";
+import { Major, Schedule } from "../../../common/types";
 import { planToString } from "../utils";
 import {
   setFullNameAction,
-  setMajorAction,
+  setDeclaredMajorAction,
   setAcademicYearAction,
   setGraduationYearAction,
 } from "../state/actions/userActions";
@@ -150,7 +150,7 @@ class OnboardingScreenComponent extends React.Component<
   onChangeMajor(event: React.SyntheticEvent<{}>, value: any) {
     const maj = this.props.majors.find((m: any) => m.name === value);
 
-    this.setState({ major: maj });
+    this.setState({ major: maj, planStr: "" });
   }
 
   onChangePlan(event: React.SyntheticEvent<{}>, value: any) {
@@ -353,7 +353,7 @@ class OnboardingScreenComponent extends React.Component<
 
           {textFieldStr.length !== 0 && !!year && !!gradYear ? (
             <Link
-              to={!!this.state.major ? "/completedCourses" : "/home"}
+              to={!!this.state.major ? "/completedCourses" : "/signup"}
               onClick={this.onSubmit.bind(this)}
               style={{ textDecoration: "none" }}
             >
@@ -388,7 +388,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     dispatch(setAcademicYearAction(academicYear)),
   setGraduationYear: (academicYear: number) =>
     dispatch(setGraduationYearAction(academicYear)),
-  setMajor: (major?: Major) => dispatch(setMajorAction(major)),
+  setMajor: (major?: Major) => dispatch(setDeclaredMajorAction(major)),
   setCoopCycle: (plan: Schedule) => dispatch(setCoopCycle(plan)),
 });
 
