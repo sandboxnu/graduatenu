@@ -1,7 +1,11 @@
 import React from "react";
-import { MenuItem, Menu } from "@material-ui/core";
-import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
-import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
+import { MenuItem, Menu, Button } from "@material-ui/core";
+import {
+  KeyboardArrowDown as KeyboardArrowDownIcon,
+  KeyboardArrowUp as KeyboardArrowUpIcon,
+  Create as CreateIcon,
+  Delete as DeleteIcon,
+} from "@material-ui/icons";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import { AppState } from "../state/reducers/state";
@@ -12,11 +16,13 @@ import { setNamedSchedule } from "../state/actions/scheduleActions";
 import { NamedSchedule } from "../models/types";
 import Loader from "react-loader-spinner";
 
-const SwitchPlanContainer = styled.div`
+const SwitchPlanContainer = styled(Button)`
   display: flex;
   flex-direction: row;
   align-items: center;
   cursor: pointer;
+  width: 158px;
+  height: 34px;
 `;
 const SpinnerWrapper = styled.div`
   display: flex;
@@ -102,8 +108,11 @@ export class SwitchPlanPopperComponent extends React.Component<
   render() {
     return this.props.activeSchedule ? (
       <div>
-        <SwitchPlanContainer onClick={event => this.handleClick(event)}>
-          <h2>{`- ${this.props.activeSchedule.name}`}</h2>
+        <SwitchPlanContainer
+          variant="outlined"
+          onClick={event => this.handleClick(event)}
+        >
+          {`${this.props.activeSchedule.name}`}
           {Boolean(this.state.anchorEl) ? (
             <KeyboardArrowUpIcon />
           ) : (
@@ -122,7 +131,10 @@ export class SwitchPlanPopperComponent extends React.Component<
         >
           {this.props.schedules.map(s => (
             <MenuItem onClick={() => this.onChoosePlan(s.name)} key={s.name}>
-              {s.name}
+              <>
+                {" "}
+                {s.name} <CreateIcon /> <DeleteIcon />{" "}
+              </>
             </MenuItem>
           ))}
         </SwitchPlanMenu>

@@ -514,9 +514,6 @@ class HomeComponent extends React.Component<Props, HomeState> {
               <HomeAboveSchedule>
                 <HomePlan>
                   <h2>Plan Of Study</h2>
-                  {this.props.token && this.props.userId && (
-                    <SwitchPlanPopper />
-                  )}
                 </HomePlan>
                 <HomeButtons>
                   <PlanContainer>
@@ -537,6 +534,9 @@ class HomeComponent extends React.Component<Props, HomeState> {
                     </PlanPopperButton>
                   </PlanContainer>
                   <ExcelUpload setSchedule={this.setSchedule.bind(this)} />
+                  {this.props.token && this.props.userId && (
+                    <SwitchPlanPopper />
+                  )}
                 </HomeButtons>
               </HomeAboveSchedule>
               {this.renderYears()}
