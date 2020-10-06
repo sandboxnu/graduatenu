@@ -1,6 +1,13 @@
-import { Schedule, INEUAndPrereq, INEUOrPrereq, ScheduleYear, ScheduleTerm, ScheduleCourse } from './types';
-import DataLoader from 'dataloader';
-import request from 'request-promise';
+import {
+  Schedule,
+  INEUAndPrereq,
+  INEUOrPrereq,
+  ScheduleYear,
+  ScheduleTerm,
+  ScheduleCourse,
+} from "./types";
+import DataLoader from "dataloader";
+import request from "request-promise";
 
 /**
  * Courses should have at least a classId and a subject, in order to query them.
@@ -33,14 +40,17 @@ type PrereqQueryResult = undefined | NonEmptyQueryResult;
  * @param schedule the schedule to add prereqs to
  * @param year the year to grab prereqs from (always uses fall).
  */
-export async function addPrereqsToSchedule(schedule: Schedule): Promise<Schedule> {
+export async function addPrereqsToSchedule(
+  schedule: Schedule
+): Promise<Schedule> {
   // doubly curried loader.
   // here we give it the year.
   // next parameter given is the termId.
   // last parameter is the loader parameter.
-  const loader: DataLoader<SimpleCourse, PrereqQueryResult> = new DataLoader<SimpleCourse, PrereqQueryResult>(
-    queryCoursePrereqData,
-  );
+  const loader: DataLoader<SimpleCourse, PrereqQueryResult> = new DataLoader<
+    SimpleCourse,
+    PrereqQueryResult
+  >(queryCoursePrereqData);
 
   // return the results
   let results = await prereqifySchedule(schedule, loader);
@@ -54,17 +64,22 @@ export async function addPrereqsToSchedule(schedule: Schedule): Promise<Schedule
  * @param schedules the schedule to add prereqs to
  * @param year the year to grab prereqs from (always uses fall).
  */
-export async function addPrereqsToSchedules(schedules: Schedule[]): Promise<Schedule[]> {
+export async function addPrereqsToSchedules(
+  schedules: Schedule[]
+): Promise<Schedule[]> {
   // doubly curried loader.
   // here we give it the year.
   // next parameter given is the termId.
   // last parameter is the loader parameter.
-  const loader: DataLoader<SimpleCourse, PrereqQueryResult> = new DataLoader<SimpleCourse, PrereqQueryResult>(
-    queryCoursePrereqData,
-  );
+  const loader: DataLoader<SimpleCourse, PrereqQueryResult> = new DataLoader<
+    SimpleCourse,
+    PrereqQueryResult
+  >(queryCoursePrereqData);
 
   // return the results
-  let results = await Promise.all(schedules.map((sched: Schedule) => prereqifySchedule(sched, loader)));
+  let results = await Promise.all(
+    schedules.map((sched: Schedule) => prereqifySchedule(sched, loader))
+  );
 
   return results;
 }
@@ -76,14 +91,17 @@ export async function addPrereqsToSchedules(schedules: Schedule[]): Promise<Sche
  */
 async function prereqifySchedule(
   schedule: Schedule,
-  loader: DataLoader<SimpleCourse, PrereqQueryResult>,
+  loader: DataLoader<SimpleCourse, PrereqQueryResult>
 ): Promise<Schedule> {
   // does not do mutation!
   const newYearMap: { [key: number]: ScheduleYear } = {};
 
   // convert each of the years
   for (const year of schedule.years) {
-    newYearMap[year] = await prereqifyScheduleYear(schedule.yearMap[year], loader);
+    newYearMap[year] = await prereqifyScheduleYear(
+      schedule.yearMap[year],
+      loader
+    );
   }
 
   // reconstructs a year
@@ -101,7 +119,7 @@ async function prereqifySchedule(
  */
 async function prereqifyScheduleYear(
   yearObj: ScheduleYear,
-  loader: DataLoader<SimpleCourse, PrereqQueryResult>,
+  loader: DataLoader<SimpleCourse, PrereqQueryResult>
 ): Promise<ScheduleYear> {
   return {
     year: yearObj.year,
@@ -120,11 +138,13 @@ async function prereqifyScheduleYear(
  */
 async function prereqifyScheduleTerm(
   termObj: ScheduleTerm,
-  loader: DataLoader<SimpleCourse, PrereqQueryResult>,
+  loader: DataLoader<SimpleCourse, PrereqQueryResult>
 ): Promise<ScheduleTerm> {
   // the new classes.
   const newClasses: Promise<ScheduleCourse[]> = Promise.all(
-    termObj.classes.map((course: ScheduleCourse) => prereqifyScheduleCourse(course, termObj.termId, loader)),
+    termObj.classes.map((course: ScheduleCourse) =>
+      prereqifyScheduleCourse(course, termObj.termId, loader)
+    )
   );
 
   return {
@@ -145,7 +165,7 @@ async function prereqifyScheduleTerm(
 async function prereqifyScheduleCourse(
   course: ScheduleCourse,
   termId: number,
-  loader: DataLoader<SimpleCourse, PrereqQueryResult>,
+  loader: DataLoader<SimpleCourse, PrereqQueryResult>
 ): Promise<ScheduleCourse> {
   // the base prereqified object
   const prereqified: ScheduleCourse = {
@@ -153,7 +173,7 @@ async function prereqifyScheduleCourse(
     subject: course.subject,
     numCreditsMin: course.numCreditsMin,
     numCreditsMax: course.numCreditsMax,
-    name: '',
+    name: "",
   };
 
   let queryResult: PrereqQueryResult;
@@ -173,8 +193,12 @@ async function prereqifyScheduleCourse(
   if (queryResult) {
     prereqified.coreqs = queryResult.coreqs ? queryResult.coreqs : undefined;
     prereqified.prereqs = queryResult.prereqs ? queryResult.prereqs : undefined;
-    prereqified.numCreditsMax = queryResult.maxCredits ? queryResult.maxCredits : 0;
-    prereqified.numCreditsMin = queryResult.minCredits ? queryResult.minCredits : 0;
+    prereqified.numCreditsMax = queryResult.maxCredits
+      ? queryResult.maxCredits
+      : 0;
+    prereqified.numCreditsMin = queryResult.minCredits
+      ? queryResult.minCredits
+      : 0;
     prereqified.name = queryResult.name;
     return prereqified;
   } else {
@@ -186,7 +210,9 @@ async function prereqifyScheduleCourse(
  * Queries SearchNEU using GraphQL to look up the prereqs for each of the provided courses.
  * @param courses the courses to lookup prereqs for
  */
-async function queryCoursePrereqData(courses: SimpleCourse[]): Promise<PrereqQueryResult[]> {
+async function queryCoursePrereqData(
+  courses: SimpleCourse[]
+): Promise<PrereqQueryResult[]> {
   // for each one of the courses, map to a string.
   // automatically use the latest occurrence.
   const courseSchema: string[] = courses.map((course: SimpleCourse) => {
@@ -204,19 +230,22 @@ async function queryCoursePrereqData(courses: SimpleCourse[]): Promise<PrereqQue
   // build the query schema
   const querySchema: string = `
   query {
-    ${courseSchema.reduce((accumulator: string, currentValue: string, index: number) => {
-      return accumulator + `course${String(index)}: ${currentValue}\n`;
-    }, '')}
+    ${courseSchema.reduce(
+      (accumulator: string, currentValue: string, index: number) => {
+        return accumulator + `course${String(index)}: ${currentValue}\n`;
+      },
+      ""
+    )}
   }
   `;
 
   // make the request.
   let queryResult = await request({
-    uri: 'https://searchneu.com/graphql',
-    method: 'POST',
+    uri: "https://searchneu.com/graphql",
+    method: "POST",
     body: JSON.stringify({ query: querySchema }),
     headers: {
-      'Content-type': 'application/json',
+      "Content-type": "application/json",
     },
   });
 
