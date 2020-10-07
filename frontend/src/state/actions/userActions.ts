@@ -1,5 +1,5 @@
 import { createAction } from "typesafe-actions";
-import { Major } from "../../../../common/types";
+import { APExam, Major } from "../../../../common/types";
 
 export const setFullNameAction = createAction(
   "user/SET_FULL_NAME",
@@ -90,4 +90,9 @@ export const setUserCoopCycleAction = createAction(
   (coopCycle: string) => ({
     coopCycle,
   })
+)();
+
+export const setAPCredits = createAction(
+  "user/SET_AP_CREDITS",
+  (apCredits: APExam[]) => ({ apCredits })
 )();
