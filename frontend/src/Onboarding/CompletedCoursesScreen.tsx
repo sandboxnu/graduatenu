@@ -212,9 +212,7 @@ class CompletedCoursesComponent extends Component<Props, State> {
 
   // Renders all course requirements in the list
   parseCourseRequirements(reqs: IRequiredCourse[][]) {
-    return reqs.map((r: IRequiredCourse[], index: number) => (
-      <div key={index}>{this.renderCourse(r)}</div>
-    ));
+    return reqs.map((r: IRequiredCourse[]) => this.renderCourse(r));
   }
 
   // renders an entire requirement section if it has specific classes specified
@@ -319,8 +317,8 @@ class CompletedCoursesComponent extends Component<Props, State> {
               </Paper>
             </Grid>
             <Grid key={1} item>
-              {this.renderOtherCourseSection()}
               <Paper elevation={0} style={{ minWidth: 350, maxWidth: 400 }}>
+                {this.renderOtherCourseSection()}
                 {this.props.major.requirementGroups
                   .slice(split, reqLen)
                   .map(r => this.renderSection(r))}

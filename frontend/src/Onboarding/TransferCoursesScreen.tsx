@@ -30,6 +30,8 @@ import {
   Paper,
   Checkbox,
 } from "@material-ui/core";
+import { AddClassModal } from "../components/AddClassModal";
+import { AddBlock } from "../components/ClassBlocks/AddBlock";
 
 const MainTitleText = styled.div`
   font-size: 18px;
@@ -116,9 +118,10 @@ interface TransferCoursesScreenProps {
 type Props = TransferCoursesScreenProps & RouteComponentProps;
 
 interface State {
-  selectedCourses: ScheduleCourse[];
   selectedRequirements: IRequiredCourse[];
   completedNonTransfer: IRequiredCourse[];
+  modalVisible: boolean;
+  otherCourses: IRequiredCourse[][];
 }
 
 class TransferCoursesComponent extends Component<Props, State> {
@@ -126,10 +129,34 @@ class TransferCoursesComponent extends Component<Props, State> {
     super(props);
 
     this.state = {
-      selectedCourses: [],
+      modalVisible: false,
       selectedRequirements: [],
+      otherCourses: [],
       completedNonTransfer: props.completedRequirements,
     };
+  }
+
+  hideModal() {
+    this.setState({ modalVisible: false });
+  }
+
+  showModal() {
+    this.setState({ modalVisible: true });
+  }
+
+  // Adds the "other courses" to the state in the form of a IRequiredCourse[][] so that they can be
+  // processed by renderAllCourses
+  addOtherCourses(courses: ScheduleCourse[]) {
+    let reqCourseMap = courses.map((course: ScheduleCourse) => [
+      {
+        type: "COURSE",
+        classId: +course.classId,
+        subject: course.subject,
+      } as IRequiredCourse,
+    ]);
+    this.setState({
+      otherCourses: [...this.state.otherCourses, ...reqCourseMap],
+    });
   }
 
   /**
@@ -153,8 +180,20 @@ class TransferCoursesComponent extends Component<Props, State> {
       }
     }
 
+    let selectedCourses: ScheduleCourse[] = [];
+    for (let course of this.state.selectedRequirements) {
+      const scheduleCourse = await fetchCourse(
+        course.subject,
+        String(course.classId)
+      );
+
+      if (scheduleCourse) {
+        selectedCourses.push(scheduleCourse);
+      }
+    }
+
     this.props.setCompletedCourses(completed);
-    this.props.setTransferCourses(this.state.selectedCourses);
+    this.props.setTransferCourses(selectedCourses);
   }
 
   /**
@@ -167,28 +206,10 @@ class TransferCoursesComponent extends Component<Props, State> {
     const checked = e.target.checked;
 
     if (checked) {
-      const scheduleCourse = await fetchCourse(
-        course.subject,
-        String(course.classId)
-      );
-      if (scheduleCourse) {
-        this.setState({
-          selectedRequirements: [...this.state.selectedRequirements, course],
-        });
-
-        this.setState({
-          selectedCourses: [...this.state.selectedCourses, scheduleCourse],
-        });
-      }
-    } else {
-      let courses = this.state.selectedCourses.filter(
-        c =>
-          c.subject !== course.subject && c.classId !== String(course.classId)
-      );
       this.setState({
-        selectedCourses: courses,
+        selectedRequirements: [...this.state.selectedRequirements, course],
       });
-
+    } else {
       let reqs = this.state.selectedRequirements.filter(r => r !== course);
       this.setState({
         selectedRequirements: reqs,
@@ -196,30 +217,10 @@ class TransferCoursesComponent extends Component<Props, State> {
     }
   }
 
-  // Renders a list of completed IRequiredCourses in the transfer course selection screen
-  renderCourses(courses: IRequiredCourse[]) {
-    return (
-      <div>
-        {courses.map(course => (
-          <CourseWrapper key={course.subject + course.classId}>
-            <Checkbox
-              style={{ width: 2, height: 2 }}
-              icon={<CheckBoxOutlineBlankIcon style={{ fontSize: 20 }} />}
-              checkedIcon={
-                <CheckBoxIcon style={{ fontSize: 20, color: "#EB5757" }} />
-              }
-              onChange={e =>
-                courses.forEach(course => this.onChecked(e, course))
-              }
-            />
-            <CourseText>{course.subject + course.classId}</CourseText>
-          </CourseWrapper>
-        ))}
-      </div>
-    );
-  }
-
-  // Renders one course/courseset (if it contains labs/recitiations, and seperated)
+  /**
+   * Renders one course/courseset (if it contains labs/recitiations, and seperated)
+   * @param courses - Course pairings to be rendered
+   */
   renderCourse(courses: IRequiredCourse[]) {
     let allCourse = courses.map(course => course.subject + course.classId);
     return (
@@ -237,41 +238,62 @@ class TransferCoursesComponent extends Component<Props, State> {
     );
   }
 
-  // Renders all course requirements in the list
+  /**
+   * Renders course requirements in the list that are in the completed requirements list
+   * @param reqs - requirements to be rendered
+   */
   parseCourseRequirements(reqs: IRequiredCourse[][]) {
-    return reqs.map((r: IRequiredCourse[], index: number) => {
-      for (let req of r) {
-        if (
-          !this.props.completedRequirements.some(
-            listReq =>
-              listReq.classId === req.classId && listReq.subject === req.subject
-          )
-        ) {
-          return null;
-        } else {
-          return this.renderCourse(r);
-        }
-      }
-    });
+    return reqs
+      .filter(req =>
+        this.props.completedRequirements.some(
+          listReq =>
+            listReq.classId === req[0].classId &&
+            listReq.subject === req[0].subject
+        )
+      )
+      .map((r: IRequiredCourse[]) => this.renderCourse(r));
   }
 
-  // renders an entire requirement section if it has specific classes specified
-  // with the title of the section
+  /**
+   * renders an entire requirement section if it has  classes specified
+   * with the title of the section
+   * Only classes that have already been selected as a completed course will be rendered
+   * @param requirementGroup - the requirement group to be rendered
+   */
   renderSection(requirementGroup: string) {
     const reqs = this.props.major.requirementGroupMap[requirementGroup];
     if (!reqs || reqs.type === "RANGE") {
       return null;
     }
-    return (
+    const renderedReqs = this.parseCourseRequirements(
+      flatten(reqs.requirements)
+    );
+    const returnDiv = (
       <div key={requirementGroup}>
-        {this.parseCourseRequirements(flatten(reqs.requirements))}
+        <TitleText>{requirementGroup}</TitleText>
+        {renderedReqs}
+      </div>
+    );
+    return renderedReqs.length > 0 ? returnDiv : null;
+  }
+
+  // renders the "Other Course" section with a button to display the add coursese modal and
+  // displays all already added courses under the button.
+  renderOtherCourseSection() {
+    return (
+      <div key="other courses">
+        <TitleText>Other Courses</TitleText>
+        <AddBlock onClick={this.showModal.bind(this)} />
+        {this.state.otherCourses.map(this.renderCourse.bind(this))}
       </div>
     );
   }
 
   render() {
-    let reqLen = this.props.major.requirementGroups.length;
-    let split = Math.floor(reqLen / 2);
+    let renderedMajorReqs = this.props.major.requirementGroups
+      .map(r => this.renderSection(r))
+      .filter(r => r !== null);
+    let split = Math.ceil(renderedMajorReqs.length / 2);
     return (
       <GenericOnboardingTemplate screen={2}>
         <MainTitleText>
@@ -292,20 +314,23 @@ class TransferCoursesComponent extends Component<Props, State> {
           <Grid container justify="space-evenly">
             <Grid key={0} item>
               <Paper elevation={0} style={{ minWidth: 350, maxWidth: 400 }}>
-                {this.props.major.requirementGroups
-                  .slice(0, split)
-                  .map(r => this.renderSection(r))}
+                {renderedMajorReqs.slice(0, split)}
               </Paper>
             </Grid>
             <Grid key={1} item>
               <Paper elevation={0} style={{ minWidth: 350, maxWidth: 400 }}>
-                {this.props.major.requirementGroups
-                  .slice(split, reqLen)
-                  .map(r => this.renderSection(r))}
+                {this.renderOtherCourseSection()}
+                {renderedMajorReqs.slice(split, renderedMajorReqs.length)}
               </Paper>
             </Grid>
           </Grid>
         </Paper>
+        <AddClassModal
+          schedule={undefined}
+          visible={this.state.modalVisible}
+          handleClose={this.hideModal.bind(this)}
+          handleSubmit={courses => this.addOtherCourses(courses)}
+        ></AddClassModal>
         <Link
           to={"/signup"}
           onClick={this.onSubmit.bind(this)}
