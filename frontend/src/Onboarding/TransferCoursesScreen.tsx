@@ -239,13 +239,17 @@ class TransferCoursesComponent extends Component<Props, State> {
 
   // Renders all course requirements in the list
   parseCourseRequirements(reqs: IRequiredCourse[][]) {
-    console.log(reqs);
     return reqs.map((r: IRequiredCourse[], index: number) => {
       for (let req of r) {
-        if (!this.props.completedRequirements.includes(req)) {
+        if (
+          !this.props.completedRequirements.some(
+            listReq =>
+              listReq.classId === req.classId && listReq.subject === req.subject
+          )
+        ) {
           return null;
         } else {
-          return <div key={index}>{this.renderCourse(r)}</div>;
+          return this.renderCourse(r);
         }
       }
     });
@@ -255,31 +259,18 @@ class TransferCoursesComponent extends Component<Props, State> {
   // with the title of the section
   renderSection(requirementGroup: string) {
     const reqs = this.props.major.requirementGroupMap[requirementGroup];
-    if (!reqs) {
-      return <div key={requirementGroup} />;
-    }
-
-    if (reqs.type === "RANGE") {
-      return <div key={requirementGroup} />;
+    if (!reqs || reqs.type === "RANGE") {
+      return null;
     }
     return (
       <div key={requirementGroup}>
-        {this.renderAllCourses(flatten(reqs.requirements), requirementGroup)}
-      </div>
-    );
-  }
-
-  // Renders the courses as either collpasable if it is less than 4 or a standard list of classes
-  renderAllCourses(allCourse: IRequiredCourse[][], requirementGroup: string) {
-    return (
-      <div key={requirementGroup + " Courses"}>
-        {this.parseCourseRequirements(allCourse)}
+        {this.parseCourseRequirements(flatten(reqs.requirements))}
       </div>
     );
   }
 
   render() {
-    let reqLen = this.props.completedRequirements.length;
+    let reqLen = this.props.major.requirementGroups.length;
     let split = Math.floor(reqLen / 2);
     return (
       <GenericOnboardingTemplate screen={2}>
@@ -301,16 +292,17 @@ class TransferCoursesComponent extends Component<Props, State> {
           <Grid container justify="space-evenly">
             <Grid key={0} item>
               <Paper elevation={0} style={{ minWidth: 350, maxWidth: 400 }}>
-                {this.props.major.requirementGroups.map(r =>
-                  this.renderSection(r)
-                )}
+                {this.props.major.requirementGroups
+                  .slice(0, split)
+                  .map(r => this.renderSection(r))}
               </Paper>
             </Grid>
             <Grid key={1} item>
-              <Paper
-                elevation={0}
-                style={{ minWidth: 350, maxWidth: 400 }}
-              ></Paper>
+              <Paper elevation={0} style={{ minWidth: 350, maxWidth: 400 }}>
+                {this.props.major.requirementGroups
+                  .slice(split, reqLen)
+                  .map(r => this.renderSection(r))}
+              </Paper>
             </Grid>
           </Grid>
         </Paper>
