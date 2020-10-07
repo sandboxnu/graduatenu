@@ -80,15 +80,15 @@ const APExamComponent: React.FC<APExamComponentProps> = props => {
   const onChecked = (e: any): void => {
     const checked = e.target.checked;
     if (checked) {
-      const newSelectedAPExams: Array<APExam> = props.selectedAPExams.filter(
-        (apExam: APExam) => apExam.name === props.apExam.name
-      );
-      props.setSelectedAPExams(newSelectedAPExams);
-    } else {
       const newSelectedAPExams: Array<APExam> = [
         ...props.selectedAPExams,
         props.apExam,
       ];
+      props.setSelectedAPExams(newSelectedAPExams);
+    } else {
+      const newSelectedAPExams: Array<APExam> = props.selectedAPExams.filter(
+        (apExam: APExam) => apExam.name !== props.apExam.name
+      );
       props.setSelectedAPExams(newSelectedAPExams);
     }
   };
