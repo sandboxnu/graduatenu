@@ -77,7 +77,7 @@ test("Ensure that prereqs and coreqs for CS 2810 are successfully added to a sch
   const mockSched = {
     years: [1000],
     yearMap: {
-      "1000": {
+      1000: {
         year: 1000,
         fall: {
           season: "FL",

@@ -68,7 +68,8 @@ const SidebarComponent: React.FC<Props> = ({
       {major.requirementGroups.map((req, index) => {
         return (
           <RequirementSection
-            title={req}
+            title={!!req ? req : "Additional Requirements"}
+            // TODO: this is a temporary solution for major scraper bug
             contents={major.requirementGroupMap[req]}
             warning={warnings.find(w => w.requirementGroup === req)}
             key={index + major.name}
