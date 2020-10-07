@@ -56,6 +56,15 @@ export enum SectionType {
 }
 
 /**
+ * Enumeration of valid subsection types.
+ */
+export enum SubSectionType {
+  COURSES,
+  CREDIT,
+  RANGE,
+}
+
+/**
  * Enumeration of valid row types.
  */
 export enum RowType {
