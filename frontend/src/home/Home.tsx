@@ -198,7 +198,7 @@ interface ReduxStoreHomeProps {
   linkSharing: boolean;
   getCurrentScheduleData: () => ScheduleSlice;
   academicYear: number;
-  closedYears: number[]; // list of indexes of closed years
+  closedYears: Set<number>; // list of indexes of closed years
 }
 
 interface ReduxDispatchHomeProps {
@@ -279,7 +279,7 @@ class HomeComponent extends React.Component<Props, HomeState> {
       const yearIdx = this.props.schedule.years.indexOf(
         convertTermIdToYear(w.termId)
       );
-      if (!this.props.closedYears.includes(yearIdx)) {
+      if (!this.props.closedYears.has(yearIdx)) {
         numVisibleWarnings++;
         if (numVisibleWarnings <= 5) {
           // add new toasts

@@ -14,7 +14,7 @@ import { toggleYearExpanded } from "../../state/actions/scheduleActions";
 
 interface ReduxStoreYearProps {
   academicYear: number;
-  closedYears: number[];
+  closedYears: Set<number>;
 }
 
 interface ReduxDispatchYearProps {
@@ -50,7 +50,7 @@ class YearComponent extends React.Component<Props> {
   render() {
     const { index, schedule } = this.props;
     const year = schedule.years[index];
-    const isExpanded = !this.props.closedYears.includes(index);
+    const isExpanded = !this.props.closedYears.has(index);
 
     return (
       <div style={{ width: "100%", marginBottom: 28 }}>
