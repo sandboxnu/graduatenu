@@ -31,6 +31,7 @@ import {
 } from "../state";
 import { AppState } from "../state/reducers/state";
 import Autocomplete from "@material-ui/lab/Autocomplete";
+import { findMajorFromName } from "../utils/plan-helpers";
 
 const SpinnerWrapper = styled.div`
   display: flex;
@@ -148,7 +149,7 @@ class OnboardingScreenComponent extends React.Component<
   }
 
   onChangeMajor(event: React.SyntheticEvent<{}>, value: any) {
-    const maj = this.props.majors.find((m: any) => m.name === value);
+    const maj = findMajorFromName(value, this.props.majors);
 
     this.setState({ major: maj, planStr: "" });
   }
