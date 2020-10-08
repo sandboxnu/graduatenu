@@ -170,6 +170,22 @@ export const getScheduleDataFromState = (state: AppState): ScheduleSlice => {
 };
 
 /**
+ * Get the current schedule's major from the AppState
+ * @param state the AppState
+ */
+export const getScheduleMajorFromState = (state: AppState): string => {
+  return getScheduleDataFromState(state).major;
+};
+
+/**
+ * Get the current schedule's coop cycle from the AppState
+ * @param state the AppState
+ */
+export const getScheduleCoopCycleFromState = (state: AppState): string => {
+  return getScheduleDataFromState(state).coopCycle;
+};
+
+/**
  * Get the list of schedule names from the AppState
  * @param state the AppState
  */

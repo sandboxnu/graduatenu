@@ -37,6 +37,8 @@ import {
   getPlanIdsFromState,
   getLinkSharingFromState,
   getScheduleDataFromState,
+  getScheduleCoopCycleFromState,
+  getScheduleMajorFromState,
 } from "../state";
 import {
   updateSemesterAction,
@@ -550,8 +552,8 @@ class HomeComponent extends React.Component<Props, HomeState> {
 
 const mapStateToProps = (state: AppState) => ({
   schedule: getScheduleFromState(state),
-  planStr: getScheduleDataFromState(state).coopCycle,
-  major: getScheduleDataFromState(state).major,
+  planStr: getScheduleCoopCycleFromState(state),
+  major: getScheduleMajorFromState(state),
   warnings: getWarningsFromState(state),
   token: getTokenFromState(state),
   userId: getUserId(state),

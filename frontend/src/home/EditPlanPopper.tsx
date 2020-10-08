@@ -11,14 +11,15 @@ import { Dispatch } from "redux";
 import {
   getScheduleFromState,
   getPlanStrFromState,
-  getScheduleDataFromState,
+  getScheduleMajorFromState,
+  getScheduleCoopCycleFromState,
 } from "../state";
 import {
   setScheduleAction,
   setCoopCycle,
   setScheduleMajor,
 } from "../state/actions/scheduleActions";
-import { DNDSchedule } from "../models/types";
+import { DNDSchedule, StatusEnum } from "../models/types";
 import { Major, Schedule } from "../../../common/types";
 import {
   getMajors,
@@ -291,8 +292,8 @@ export class EditPlanPopperComponent extends React.Component<
 
 const mapStateToProps = (state: AppState) => ({
   schedule: getScheduleFromState(state),
-  planStr: getScheduleDataFromState(state).coopCycle,
-  major: getScheduleDataFromState(state).major,
+  planStr: getScheduleCoopCycleFromState(state),
+  major: getScheduleMajorFromState(state),
   majors: getMajors(state),
   plans: getPlans(state),
   creditsTaken: getTakenCredits(state),

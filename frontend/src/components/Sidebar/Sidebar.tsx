@@ -8,8 +8,13 @@ import {
   getCompletedCourseStrings,
 } from "../../utils";
 import { AppState } from "../../state/reducers/state";
-import { getScheduleFromState, getScheduleDataFromState } from "../../state";
+import {
+  getScheduleFromState,
+  getScheduleDataFromState,
+  getScheduleMajorFromState,
+} from "../../state";
 import { connect, useSelector } from "react-redux";
+import { findMajorFromName } from "../../utils/plan-helpers";
 
 const Container = styled.div`
   display: flex;
@@ -72,8 +77,7 @@ const MajorSidebarComponent: React.FC<MajorSidebarProps> = ({
 
 const SidebarComponent: React.FC<SidebarProps> = ({ schedule, major }) => {
   const majorObj: Major | undefined = useSelector<AppState, Major | undefined>(
-    state =>
-      state.majorState.majors.find((majorObj: Major) => majorObj.name === major)
+    state => findMajorFromName(major, state.majorState.majors)
   );
 
   return majorObj ? (
@@ -85,7 +89,7 @@ const SidebarComponent: React.FC<SidebarProps> = ({ schedule, major }) => {
 
 const mapStateToProps = (state: AppState) => ({
   schedule: getScheduleFromState(state),
-  major: getScheduleDataFromState(state).major,
+  major: getScheduleMajorFromState(state),
 });
 
 export const Sidebar = connect(mapStateToProps)(SidebarComponent);
