@@ -38,6 +38,22 @@ const SwitchPlanMenu = styled(Menu)`
   margin-left: 20px;
 `;
 
+const ButtonContainer = styled.div`
+  float: right;
+`;
+
+const SelectPlanContainer = styled.div`
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+  display: flex;
+`;
+
+const PlanText = styled.div`
+  display: inline;
+  padding-right: 20px;
+`;
+
 interface ReduxStoreSwitchSchedulesProps {
   activeSchedule: NamedSchedule;
   schedules: NamedSchedule[];
@@ -114,7 +130,7 @@ export class SwitchPlanPopperComponent extends React.Component<
         >
           {`${this.props.activeSchedule.name}`}
           {Boolean(this.state.anchorEl) ? (
-            <KeyboardArrowUpIcon />
+            <KeyboardArrowUpIcon style={{ color: "red" }} />
           ) : (
             <KeyboardArrowDownIcon />
           )}
@@ -131,10 +147,13 @@ export class SwitchPlanPopperComponent extends React.Component<
         >
           {this.props.schedules.map(s => (
             <MenuItem onClick={() => this.onChoosePlan(s.name)} key={s.name}>
-              <>
-                {" "}
-                {s.name} <CreateIcon /> <DeleteIcon />{" "}
-              </>
+              <SelectPlanContainer>
+                <PlanText> {s.name} </PlanText>
+                <ButtonContainer>
+                  {" "}
+                  <CreateIcon /> <DeleteIcon />
+                </ButtonContainer>
+              </SelectPlanContainer>
             </MenuItem>
           ))}
         </SwitchPlanMenu>
