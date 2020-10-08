@@ -75,8 +75,3 @@ export const setNamedSchedule = createAction(
   "schedule/SET_NAMED_SCHEDULE",
   (namedSchedule: NamedSchedule) => ({ namedSchedule })
 )();
-
-export const resetScheduleAction = createAction(
-  "schedule/RESET_SCHEDULE",
-  () => void 0
-)();

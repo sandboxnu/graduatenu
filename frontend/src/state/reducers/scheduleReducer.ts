@@ -8,7 +8,7 @@ import {
 import { mockEmptySchedule } from "../../data/mockData";
 import produce from "immer";
 import { getType } from "typesafe-actions";
-import { ScheduleAction, SchedulesAction } from "../actions";
+import { ScheduleAction, SchedulesAction, UserAction } from "../actions";
 import {
   addClassesAction,
   removeClassAction,
@@ -20,7 +20,6 @@ import {
   setCoopCycle,
   setCompletedCourses,
   setNamedSchedule,
-  resetScheduleAction,
 } from "../actions/scheduleActions";
 import { setSchedules } from "../actions/schedulesActions";
 import {
@@ -32,6 +31,7 @@ import {
   numToTerm,
   getNextTerm,
 } from "../../utils";
+import { resetUserAction } from "../actions/userActions";
 
 export interface ScheduleState {
   past?: ScheduleStateSlice;
@@ -62,7 +62,7 @@ const initialState: ScheduleState = {
 
 export const scheduleReducer = (
   state: ScheduleState = initialState,
-  action: ScheduleAction | SchedulesAction
+  action: ScheduleAction | SchedulesAction | UserAction
 ) => {
   return produce(state, draft => {
     switch (action.type) {
@@ -269,7 +269,7 @@ export const scheduleReducer = (
         draft.present.warnings = namedSchedule.warnings;
         return draft;
       }
-      case getType(resetScheduleAction): {
+      case getType(resetUserAction): {
         draft = initialState;
         return draft;
       }

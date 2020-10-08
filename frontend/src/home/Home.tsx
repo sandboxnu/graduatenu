@@ -45,7 +45,6 @@ import {
 import {
   updateSemesterAction,
   setDNDScheduleAction,
-  resetScheduleAction,
 } from "../state/actions/scheduleActions";
 import {
   setLinkSharingAction,
@@ -65,7 +64,7 @@ import {
   updatePlanForUser,
 } from "../services/PlanService";
 import { findMajorFromName } from "../utils/plan-helpers";
-import { Button } from "@material-ui/core";
+import { Button, Theme, withStyles } from "@material-ui/core";
 import Loader from "react-loader-spinner";
 import { ExcelUpload } from "../components/ExcelUpload";
 import { SwitchPlanPopper } from "./SwitchPlanPopper";
@@ -181,6 +180,16 @@ const LoginLogoutLink = styled(Link)`
   margin-right: 8px !important;
 `;
 
+const ColorButton = withStyles((theme: Theme) => ({
+  root: {
+    color: "#ffffff",
+    backgroundColor: "#EB5757",
+    "&:hover": {
+      backgroundColor: "#DB4747",
+    },
+  },
+}))(Button);
+
 interface ToastHomeProps {
   addToast: (message: string, options: any) => void;
   removeToast: (id: string) => void;
@@ -246,7 +255,6 @@ class HomeComponent extends React.Component<Props, HomeState> {
     if (this.props.token && this.props.userId) {
       findAllPlansForUser(this.props.userId, this.props.token).then(
         (plans: IPlanData[]) => {
-          console.log(plans);
           // Once multiple plans are supported, this can be changed to the last used plan
           let plan: IPlanData = plans[0];
 
@@ -504,8 +512,8 @@ class HomeComponent extends React.Component<Props, HomeState> {
   }
 
   logOut() {
-    this.props.logOut();
     this.updatePlan();
+    this.props.logOut();
   }
 
   render() {
@@ -528,16 +536,16 @@ class HomeComponent extends React.Component<Props, HomeState> {
                   <LoginLogoutLink
                     to={{
                       pathname: this.props.isLoggedIn ? "/" : "/login",
-                      state: { userData: {} },
+                      state: { userData: {}, fromOnBoarding: false },
                     }}
                     style={{ textDecoration: "none" }}
                     onClick={
                       this.props.isLoggedIn ? () => this.logOut() : () => {}
                     }
                   >
-                    <Button variant="contained" color="secondary">
+                    <ColorButton variant="contained">
                       {this.props.isLoggedIn ? "Logout" : "Login"}
-                    </Button>
+                    </ColorButton>
                   </LoginLogoutLink>
                 </HomePlan>
               </HomeTop>
@@ -614,10 +622,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     dispatch(addNewSchedule(name, newSchedule)),
   updateActiveSchedule: (updatedSchedule: ScheduleSlice) =>
     dispatch(updateActiveSchedule(updatedSchedule)),
-  logOut: () => {
-    dispatch(resetUserAction());
-    dispatch(resetScheduleAction());
-  },
+  logOut: () => dispatch(resetUserAction()),
 });
 
 export const Home = connect<
