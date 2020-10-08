@@ -1,6 +1,6 @@
 import React from "react";
 import { withRouter, RouteComponentProps, Link } from "react-router-dom";
-import { TextField } from "@material-ui/core";
+import { TextField, Tooltip } from "@material-ui/core";
 import { GenericOnboardingTemplate } from "./GenericOnboarding";
 import { NextButton } from "../components/common/NextButton";
 import { connect } from "react-redux";
@@ -32,6 +32,7 @@ import {
 } from "../state";
 import { AppState } from "../state/reducers/state";
 import Autocomplete from "@material-ui/lab/Autocomplete";
+import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
 
 const SpinnerWrapper = styled.div`
   display: flex;
@@ -199,11 +200,14 @@ class OnboardingScreenComponent extends React.Component<
    * Renders the major drop down
    */
   renderMajorDropDown() {
+    let majorNames = this.props.majors.filter(
+      major => major.yearVersion === this.state.catalogYear
+    ); //takes in a major object return t if you want to keep it (only when catalog)
     return (
       <Autocomplete
         style={{ width: 326, marginBottom: marginSpace }}
         disableListWrap
-        options={this.props.majors.map(maj => maj.name)} //need to filter for only current catalog year
+        options={majorNames.map(maj => maj.name)} //need to filter for only current catalog year
         renderInput={params => (
           <TextField
             {...params}
@@ -339,23 +343,35 @@ class OnboardingScreenComponent extends React.Component<
    * Renders the catalog drop down
    */
   renderCatalogYearSelect() {
-    //options?
+    //need to make chanegs to options to filter out repeat catalog years
+    let majorSet = [
+      ...Array.from(
+        new Set(this.props.majors.map(maj => maj.yearVersion.toString()))
+      ),
+    ];
     return (
-      <Autocomplete
-        style={{ width: 326, marginBottom: marginSpace }}
-        disableListWrap
-        options={this.props.majors.map(maj => maj.yearVersion.toString())} //map by year then filter for repeats (also do for major dropdown)
-        renderInput={params => (
-          <TextField
-            {...params}
-            variant="outlined"
-            label="Select A Catalog Year"
-            fullWidth
-          />
-        )}
-        value={!!this.state.catalogYear ? this.state.catalogYear + " " : ""}
-        onChange={this.onChangeCatalogYear.bind(this)}
-      />
+      <Tooltip
+        title="Catalog Year refers to the year your major credits are associated to. This is usually the year you declared your Major."
+        placement="top"
+      >
+        <Autocomplete
+          style={{ width: 326, marginBottom: marginSpace }}
+          disableListWrap
+          //map by year then filter for repeats (also do for major dropdown)
+          //do I need to provide menu item options like in graduation year ^^^
+          options={majorSet}
+          renderInput={params => (
+            <TextField
+              {...params}
+              variant="outlined"
+              label="Select a Catalog Year"
+              fullWidth
+            />
+          )}
+          value={!!this.state.catalogYear ? this.state.catalogYear + " " : ""}
+          onChange={this.onChangeCatalogYear.bind(this)}
+        />
+      </Tooltip>
     );
   }
 

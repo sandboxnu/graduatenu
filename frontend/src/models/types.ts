@@ -154,6 +154,7 @@ export interface IUserData {
   graduation_year?: number;
   major?: string;
   coop_cycle?: string;
+  catalog_year?: number;
 }
 
 /**

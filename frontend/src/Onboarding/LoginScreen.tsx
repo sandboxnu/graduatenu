@@ -13,6 +13,7 @@ import {
   setAcademicYearAction,
   setGraduationYearAction,
   setTokenAction,
+  setCatalogYearAction,
 } from "../state/actions/userActions";
 import { setCoopCycle } from "../state/actions/scheduleActions";
 import { loginUser } from "../services/UserService";
@@ -60,6 +61,7 @@ interface ReduxStoreLoginScreenProps {
   setMajor: (major?: Major) => void;
   setCoopCycle: (plan: Schedule) => void;
   setToken: (token: string) => void;
+  setCatalogYear: (catalogYear: number) => void;
 }
 
 type Props = ReduxStoreLoginScreenProps & RouteComponentProps<{}>;
@@ -136,6 +138,7 @@ class LoginScreenComponent extends React.Component<Props, LoginScreenState> {
           this.props.setAcademicYear(response.user.academicYear);
           this.props.setGraduationYear(response.user.graduationYear);
           this.props.setToken(response.user.token);
+          this.props.setCatalogYear(response.user.catalogYear);
           this.props.history.push("/home");
         }
       });
@@ -250,6 +253,8 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   setMajor: (major?: Major) => dispatch(setMajorAction(major)),
   setCoopCycle: (plan: Schedule) => dispatch(setCoopCycle(plan)),
   setToken: (token: string) => dispatch(setTokenAction(token)),
+  setCatalogYear: (catalogYear: number) =>
+    dispatch(setCatalogYearAction(catalogYear)),
 });
 
 /**
