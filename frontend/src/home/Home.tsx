@@ -513,6 +513,7 @@ class HomeComponent extends React.Component<Props, HomeState> {
   async logOut() {
     await this.updatePlan();
     this.props.logOut();
+    this.props.history.push("/");
   }
 
   render() {
@@ -532,20 +533,24 @@ class HomeComponent extends React.Component<Props, HomeState> {
                   </MajorText>
                   <PlanText>{this.props.planStr || "None"}</PlanText>
                   <EditPlanPopper />
-                  <LoginLogoutLink
-                    to={{
-                      pathname: this.props.isLoggedIn ? "/" : "/login",
-                      state: { userData: {}, fromOnBoarding: false },
-                    }}
-                    style={{ textDecoration: "none" }}
-                    onClick={
-                      this.props.isLoggedIn ? () => this.logOut() : () => {}
-                    }
-                  >
-                    <ColorButton variant="contained">
-                      {this.props.isLoggedIn ? "Logout" : "Login"}
+                  {!this.props.isLoggedIn ? (
+                    <LoginLogoutLink
+                      to={{
+                        pathname: "/login",
+                        state: { userData: {}, fromOnBoarding: false },
+                      }}
+                      style={{ textDecoration: "none" }}
+                    >
+                      <ColorButton variant="contained">LogIn</ColorButton>
+                    </LoginLogoutLink>
+                  ) : (
+                    <ColorButton
+                      variant="contained"
+                      onClick={this.logOut.bind(this)}
+                    >
+                      Logout
                     </ColorButton>
-                  </LoginLogoutLink>
+                  )}
                 </HomePlan>
               </HomeTop>
               <HomeAboveSchedule>
