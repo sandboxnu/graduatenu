@@ -76,7 +76,6 @@ interface ReduxStoreLoginScreenProps {
 }
 interface ReduxStoreSignupScreenProps {
   majors: Major[];
-  setUserId: (id: number) => void;
   setEmail: (email: string) => void;
 }
 
@@ -286,7 +285,7 @@ class LoginScreenComponent extends React.Component<Props, LoginScreenState> {
             style={{ color: "#EB5757" }}
             to={{
               pathname: fromOnBoarding ? "/onboarding" : "/home",
-              state: { fromOnBoarding: fromOnBoarding },
+              state: { fromOnBoardingGuest: fromOnBoarding },
             }}
           >
             continue as guest

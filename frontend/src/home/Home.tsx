@@ -536,12 +536,12 @@ class HomeComponent extends React.Component<Props, HomeState> {
                   {!this.props.isLoggedIn ? (
                     <LoginLogoutLink
                       to={{
-                        pathname: "/login",
+                        pathname: "/signup",
                         state: { userData: {}, fromOnBoarding: false },
                       }}
                       style={{ textDecoration: "none" }}
                     >
-                      <ColorButton variant="contained">LogIn</ColorButton>
+                      <ColorButton variant="contained">Signup</ColorButton>
                     </LoginLogoutLink>
                   ) : (
                     <ColorButton

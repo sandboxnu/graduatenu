@@ -318,20 +318,17 @@ class OnboardingScreenComponent extends React.Component<
   }
 
   /**
-   * If the user comes login button on welcome page, they should go to home page when they are done with
+   * If the user comes from login button on welcome page, they should go to home page when they are done with
    * onboarding. Else, if they come from Get Started, go to signup page
    */
-  onBoardLink() {
-    const { fromOnBoarding } = (this.props.location.state as any) || {
-      fromOnBoarding: false,
-    };
-    return fromOnBoarding ? "/home" : "/signup";
+  onBoardLink(fromOnBoardingGuest: boolean) {
+    return fromOnBoardingGuest ? "/home" : "/signup";
   }
 
   render() {
     // indicates if the user came from login button on welcome page
-    const { fromOnBoarding } = (this.props.location.state as any) || {
-      fromOnBoarding: false,
+    const { fromOnBoardingGuest } = (this.props.location.state as any) || {
+      fromOnBoardingGuest: false,
     };
 
     const {
@@ -373,8 +370,8 @@ class OnboardingScreenComponent extends React.Component<
               to={{
                 pathname: !!this.state.major
                   ? "/completedCourses"
-                  : this.onBoardLink(),
-                state: { fromOnBoarding: fromOnBoarding },
+                  : this.onBoardLink(fromOnBoardingGuest),
+                state: { fromOnBoardingGuest: fromOnBoardingGuest },
               }}
               onClick={this.onSubmit.bind(this)}
               style={{ textDecoration: "none" }}

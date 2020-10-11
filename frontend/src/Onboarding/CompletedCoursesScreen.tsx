@@ -302,8 +302,8 @@ class CompletedCoursesComponent extends Component<Props, State> {
 
   render() {
     // indicates if the user came from login button on welcome page
-    const { fromOnBoarding } = (this.props.location.state as any) || {
-      fromOnBoarding: false,
+    const { fromOnBoardingGuest } = (this.props.location.state as any) || {
+      fromOnBoardingGuest: false,
     };
     let reqLen = this.props.major.requirementGroups.length;
     let split = Math.floor(reqLen / 2);
@@ -347,7 +347,9 @@ class CompletedCoursesComponent extends Component<Props, State> {
           handleSubmit={courses => this.addOtherCourses(courses)}
         ></AddClassModal>
         <Link
-          to={fromOnBoarding ? "/home" : "/signup"}
+          to={{
+            pathname: fromOnBoardingGuest ? "/home" : "/signup",
+          }}
           onClick={this.onSubmit.bind(this)}
           style={{ textDecoration: "none" }}
         >

@@ -330,7 +330,6 @@ class SignupScreenComponent extends React.Component<Props, SignupScreenState> {
             style={{ color: "#EB5757" }}
             to={{
               pathname: "/login",
-              state: { fromOnBoarding: false },
             }}
           >
             here
