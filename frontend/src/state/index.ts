@@ -183,3 +183,7 @@ export const getSchedulesFromState = (state: AppState): NamedSchedule[] =>
 export const getActiveScheduleFromState = (state: AppState): NamedSchedule => {
   return state.schedules.schedules[state.schedules.activeSchedule];
 };
+
+export const getClosedYearsFromState = (state: AppState): Set<number> => {
+  return state.schedule.present.closedYears;
+};
