@@ -439,11 +439,11 @@ class HomeComponent extends React.Component<Props, HomeState> {
    * Only supports updating a user's singular plan, can be modified later to
    * update a specific plan.
    */
-  updatePlan() {
+  async updatePlan() {
     // If this is true, then a user is currently logged in and we can update their plan
     if (this.props.token && this.props.userId) {
       const scheduleData: ScheduleSlice = this.props.getCurrentScheduleData();
-      updatePlanForUser(
+      const plan = await updatePlanForUser(
         this.props.userId,
         this.props.token,
         this.props.planIds[0],
@@ -458,15 +458,14 @@ class HomeComponent extends React.Component<Props, HomeState> {
           warnings: scheduleData.warnings,
           course_warnings: scheduleData.courseWarnings,
         }
-      ).then(plan => {
-        this.props.updateActiveSchedule({
-          ...plan.plan,
-          currentClassCounter: plan.plan.courseCounter,
-          isScheduleLoading: false,
-          scheduleError: "",
-        } as ScheduleSlice);
-        alert("Your plan has been updated.");
-      });
+      );
+      this.props.updateActiveSchedule({
+        ...plan.plan,
+        currentClassCounter: plan.plan.courseCounter,
+        isScheduleLoading: false,
+        scheduleError: "",
+      } as ScheduleSlice);
+      alert("Your plan has been updated.");
     } else {
       alert("You must be logged in to save your plan.");
     }
@@ -511,8 +510,8 @@ class HomeComponent extends React.Component<Props, HomeState> {
     this.props.setDNDSchedule(dndschedule);
   }
 
-  logOut() {
-    this.updatePlan();
+  async logOut() {
+    await this.updatePlan();
     this.props.logOut();
   }
 
