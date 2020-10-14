@@ -1,10 +1,10 @@
-const {alias} = require('react-app-rewire-alias')
+const { alias } = require("react-app-rewire-alias");
 
 module.exports = function override(config) {
   alias({
-    common: '../common',
-    '@common': 'common',
-  })(config)
+    common: "../common",
+    "@common": "common",
+  })(config);
 
-  return config
-}
+  return config;
+};

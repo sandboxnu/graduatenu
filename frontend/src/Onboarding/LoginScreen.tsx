@@ -24,6 +24,7 @@ import { setSchedules } from "../state/actions/schedulesActions";
 import { loginUser } from "../services/UserService";
 import { findAllPlansForUser } from "../services/PlanService";
 import { setCoopCycle } from "../state/actions/scheduleActions";
+import { findMajorFromName } from "../utils/plan-helpers";
 
 const Wrapper = styled.div`
   display: flex;
@@ -74,7 +75,6 @@ interface ReduxStoreLoginScreenProps {
 }
 interface ReduxStoreSignupScreenProps {
   majors: Major[];
-  setId: (id: number) => void;
   setEmail: (email: string) => void;
 }
 
@@ -155,7 +155,6 @@ class LoginScreenComponent extends React.Component<Props, LoginScreenState> {
           this.props.setGraduationYear(response.user.graduationYear);
           this.props.setToken(response.user.token);
           this.props.setUserId(response.user.id);
-          this.props.setId(response.user.id);
           this.props.setEmail(response.user.email);
           this.props.setUserCoopCycle(response.user.coopCycle);
           this.props.history.push("/home");
@@ -185,7 +184,7 @@ class LoginScreenComponent extends React.Component<Props, LoginScreenState> {
       }));
       this.props.setSchedules(namedSchedules);
       this.props.setMajorPlan(
-        this.props.majors.find((m: any) => m.name === plans[0].major),
+        findMajorFromName(plans[0].major, this.props.majors),
         plans[0].planString ? plans[0].planString : ""
       );
     });

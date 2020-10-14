@@ -1,10 +1,5 @@
 import { ScheduleCourse } from "../../../../common/types";
-import {
-  DNDSchedule,
-  IWarning,
-  CourseWarning,
-  NamedSchedule,
-} from "../../models/types";
+import { DNDSchedule, IWarning, CourseWarning } from "../../models/types";
 import { mockEmptySchedule } from "../../data/mockData";
 import produce from "immer";
 import { getType } from "typesafe-actions";
@@ -21,6 +16,8 @@ import {
   setCompletedCourses,
   setNamedSchedule,
   setScheduleMajor,
+  toggleYearExpanded,
+  setClosedYearsToYearsInThePast,
 } from "../actions/scheduleActions";
 import { setSchedules } from "../actions/schedulesActions";
 import {
@@ -31,6 +28,7 @@ import {
   sumCreditsFromList,
   numToTerm,
   getNextTerm,
+  isYearInPast,
 } from "../../utils";
 
 export interface ScheduleState {
@@ -48,6 +46,7 @@ export interface ScheduleStateSlice {
   creditsTaken: number;
   major: string;
   coopCycle: string;
+  closedYears: Set<number>; // list of indexes for which years are not expanded in the UI
 }
 
 const initialState: ScheduleState = {
@@ -61,6 +60,7 @@ const initialState: ScheduleState = {
     creditsTaken: 0,
     major: "",
     coopCycle: "",
+    closedYears: new Set(),
   },
 };
 
@@ -284,6 +284,24 @@ export const scheduleReducer = (
         draft.present.currentClassCounter = namedSchedule.currentClassCounter;
         draft.present.schedule = namedSchedule.schedule;
         draft.present.warnings = namedSchedule.warnings;
+        return draft;
+      }
+      case getType(setClosedYearsToYearsInThePast): {
+        draft.present.closedYears = new Set();
+        for (var i = 0; i < draft.present.schedule.years.length; i++) {
+          if (isYearInPast(i, action.payload.academicYear)) {
+            draft.present.closedYears.add(i);
+          }
+        }
+        return draft;
+      }
+      case getType(toggleYearExpanded): {
+        const idx = action.payload.index;
+        if (draft.present.closedYears.has(idx)) {
+          draft.present.closedYears.delete(idx);
+        } else {
+          draft.present.closedYears.add(idx);
+        }
         return draft;
       }
     }

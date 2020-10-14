@@ -39,10 +39,13 @@ import {
   getScheduleDataFromState,
   getScheduleCoopCycleFromState,
   getScheduleMajorFromState,
+  getAcademicYearFromState,
+  getClosedYearsFromState,
 } from "../state";
 import {
   updateSemesterAction,
   setDNDScheduleAction,
+  setClosedYearsToYearsInThePast,
 } from "../state/actions/scheduleActions";
 import {
   setLinkSharingAction,
@@ -54,7 +57,7 @@ import {
   updateActiveSchedule,
   addNewSchedule,
 } from "../state/actions/schedulesActions";
-import { getMajors, getPlans } from "../state";
+import { getMajors } from "../state";
 import { EditPlanPopper } from "./EditPlanPopper";
 import {
   createPlanForUser,
@@ -194,6 +197,8 @@ interface ReduxStoreHomeProps {
   planName: string | undefined;
   linkSharing: boolean;
   getCurrentScheduleData: () => ScheduleSlice;
+  academicYear: number;
+  closedYears: Set<number>; // list of indexes of closed years
 }
 
 interface ReduxDispatchHomeProps {
@@ -209,6 +214,7 @@ interface ReduxDispatchHomeProps {
   setPlanIds: (planIds: number[]) => void;
   addNewSchedule: (name: string, newSchedule: ScheduleSlice) => void;
   updateActiveSchedule: (updatedSchedule: ScheduleSlice) => void;
+  setClosedYearsToYearsInThePast: (academicYear: number) => void;
 }
 
 type Props = ToastHomeProps &
@@ -232,6 +238,7 @@ class HomeComponent extends React.Component<Props, HomeState> {
 
   componentDidMount() {
     // If this is true, then a user is currently logged in and we can fetch their plan
+    this.props.setClosedYearsToYearsInThePast(this.props.academicYear);
     if (this.props.token && this.props.userId) {
       findAllPlansForUser(this.props.userId, this.props.token).then(
         (plans: IPlanData[]) => {
@@ -266,16 +273,21 @@ class HomeComponent extends React.Component<Props, HomeState> {
     // remove existing toasts
     this.props.toastStack.forEach(t => this.props.removeToast(t.id));
 
-    let numWarnings: number = 0;
+    let numVisibleWarnings: number = 0;
     this.props.warnings.forEach(w => {
       //ensuring we only propogate 5 toasts at a time
-      numWarnings++;
-      if (numWarnings <= 5) {
-        // add new toasts
-        this.props.addToast(w.message, {
-          appearance: "warning",
-          autoDismiss: true,
-        });
+      const yearIdx = this.props.schedule.years.indexOf(
+        convertTermIdToYear(w.termId)
+      );
+      if (!this.props.closedYears.has(yearIdx)) {
+        numVisibleWarnings++;
+        if (numVisibleWarnings <= 5) {
+          // add new toasts
+          this.props.addToast(w.message, {
+            appearance: "warning",
+            autoDismiss: true,
+          });
+        }
       }
     });
   }
@@ -562,6 +574,8 @@ const mapStateToProps = (state: AppState) => ({
   planIds: getPlanIdsFromState(state),
   linkSharing: getLinkSharingFromState(state),
   getCurrentScheduleData: () => getScheduleDataFromState(state),
+  academicYear: getAcademicYearFromState(state),
+  closedYears: getClosedYearsFromState(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
@@ -582,6 +596,8 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     dispatch(addNewSchedule(name, newSchedule)),
   updateActiveSchedule: (updatedSchedule: ScheduleSlice) =>
     dispatch(updateActiveSchedule(updatedSchedule)),
+  setClosedYearsToYearsInThePast: (academicYear: number) =>
+    dispatch(setClosedYearsToYearsInThePast(academicYear)),
 });
 
 export const Home = connect<
