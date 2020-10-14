@@ -6,7 +6,7 @@ import { Major } from "../../../common/types";
  * @param majors  the list of majors to filter through
  */
 export function findMajorFromName(
-  name: string,
+  name: string | null,
   majors: Major[]
 ): Major | undefined {
   let major: Major | undefined = majors.find(major => major.name === name);

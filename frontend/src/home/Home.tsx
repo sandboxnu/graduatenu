@@ -65,10 +65,10 @@ import {
   updatePlanForUser,
 } from "../services/PlanService";
 import { findMajorFromName } from "../utils/plan-helpers";
-import { Button } from "@material-ui/core";
 import Loader from "react-loader-spinner";
 import { ExcelUpload } from "../components/ExcelUpload";
 import { SwitchPlanPopper } from "./SwitchPlanPopper";
+import { AddPlan } from "./AddPlanPopper";
 
 const OuterContainer = styled.div`
   display: flex;
@@ -159,20 +159,6 @@ const HomeButtons = styled.div`
   justify-content: space-between;
   max-width: 800px;
   padding: 10px 0;
-`;
-
-const PlanPopperButton = styled(Button)<any>`
-  background: #e0e0e0;
-  font-weight: normal;
-  float: right;
-  margin: 10px;
-`;
-
-const PlanContainer = styled.div`
-  position: relative;
-  align-items: flex-end;
-  padding: 10px;
-  margin: 0px;
 `;
 
 interface ToastHomeProps {
@@ -530,23 +516,7 @@ class HomeComponent extends React.Component<Props, HomeState> {
                   )}
                 </HomePlan>
                 <HomeButtons>
-                  <PlanContainer>
-                    <PlanPopperButton
-                      variant="contained"
-                      onClick={this.savePlan.bind(this)}
-                    >
-                      Save Plan
-                    </PlanPopperButton>
-                  </PlanContainer>
-
-                  <PlanContainer>
-                    <PlanPopperButton
-                      variant="contained"
-                      onClick={this.updatePlan.bind(this)}
-                    >
-                      Update Plan
-                    </PlanPopperButton>
-                  </PlanContainer>
+                  <AddPlan />
                   <ExcelUpload setSchedule={this.setSchedule.bind(this)} />
                 </HomeButtons>
               </HomeAboveSchedule>
