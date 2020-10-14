@@ -29,6 +29,7 @@ import {
 import { planToString, scheduleHasClasses } from "../utils";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import { getStandingFromCompletedCourses } from "../utils";
+import { findMajorFromName } from "../utils/plan-helpers";
 
 const PlanPopper = styled(Popper)<any>`
   margin-top: 4px;
@@ -137,7 +138,7 @@ export class EditPlanPopperComponent extends React.Component<
    * Updates this user's major based on the major selected in the dropdown.
    */
   onChooseMajor(event: React.SyntheticEvent<{}>, value: any) {
-    const maj = this.props.majors.find((m: any) => m.name === value);
+    const maj = findMajorFromName(value, this.props.majors);
     this.props.setMajor(maj);
     this.props.setCoopCycle(undefined);
   }

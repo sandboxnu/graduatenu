@@ -75,3 +75,13 @@ export const setNamedSchedule = createAction(
   "schedule/SET_NAMED_SCHEDULE",
   (namedSchedule: NamedSchedule) => ({ namedSchedule })
 )();
+
+export const toggleYearExpanded = createAction(
+  "schedule/TOGGLE_YEAR_EXPANDED",
+  (index: number) => ({ index })
+)();
+
+export const setClosedYearsToYearsInThePast = createAction(
+  "schedule/SET_CLOSED_YEARS_TO_YEARS_IN_THE_PAST",
+  (academicYear: number) => ({ academicYear })
+)();

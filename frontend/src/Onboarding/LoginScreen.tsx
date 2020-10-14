@@ -24,6 +24,7 @@ import { setSchedules } from "../state/actions/schedulesActions";
 import { loginUser } from "../services/UserService";
 import { findAllPlansForUser } from "../services/PlanService";
 import { setCoopCycle } from "../state/actions/scheduleActions";
+import { findMajorFromName } from "../utils/plan-helpers";
 
 const Wrapper = styled.div`
   display: flex;
@@ -182,7 +183,7 @@ class LoginScreenComponent extends React.Component<Props, LoginScreenState> {
       }));
       this.props.setSchedules(namedSchedules);
       this.props.setMajorPlan(
-        this.props.majors.find((m: any) => m.name === plans[0].major),
+        findMajorFromName(plans[0].major, this.props.majors),
         plans[0].planString ? plans[0].planString : ""
       );
     });

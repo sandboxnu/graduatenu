@@ -52,7 +52,15 @@ export type Requirement =
   | IOrCourse
   | IAndCourse
   | ICourseRange
-  | IRequiredCourse;
+  | IRequiredCourse
+  | ICreditRangeCourse;
+
+export interface ICreditRangeCourse {
+  type: "CREDITS";
+  minCredits: number;
+  maxCredits: number;
+  courses: Requirement[];
+}
 
 // TODO: with interfaces, the additional type parameter may not be necessary
 /**
@@ -61,8 +69,6 @@ export type Requirement =
  */
 export interface IOrCourse {
   type: "OR";
-  //numCreditsMin: number;
-  //numCreditsMax: number;
   courses: Requirement[];
 }
 
@@ -167,16 +173,31 @@ export interface Major {
   isLanguageRequired: boolean;
   totalCreditsRequired: number;
   nupaths: NUPathEnum[];
-  //concentrations: Concentrations;
+  concentrations: Concentrations;
 }
 
 /**
  * A list of concentration options and the min/max number of concentrations they can do
+ * @param minOptions Minimum required concentrations
+ * @param maxOptions Maximum number of concentrations they can take
+ * @param concentrationOptions All of the concentrations that they can choose from
  */
 export interface Concentrations {
   minOptions: number;
   maxOptions: number;
-  requirementGroupMap: IMajorRequirementGroup[];
+  concentrationOptions: Concentration[];
+}
+
+/**
+ * A single Concentration and it's requirements
+ * @param name The name of the concentration
+ * @param requirementGroups a list of the sections of this concentration
+ * @param requirementGroupMap an object containing the sections of this concentration
+ */
+export interface Concentration {
+  name: string;
+  requirementGroups: string[];
+  requirementGroupMap: { [key: string]: IMajorRequirementGroup };
 }
 
 /**

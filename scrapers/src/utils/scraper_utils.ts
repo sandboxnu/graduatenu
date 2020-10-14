@@ -10,7 +10,10 @@ import {
  * Helper function that processes the hours text into a CreditRange
  * @param text the hours text
  */
-export function processHoursText(text: string): CreditsRange {
+export function processHoursText(
+  text: string,
+  defaultCredit: number | undefined = undefined
+): CreditsRange {
   //split by hyphen to get the range.
   let split: string[] = text.split("-");
 
@@ -22,6 +25,10 @@ export function processHoursText(text: string): CreditsRange {
   if (split.length > 1) {
     //max credits is present
     range.numCreditsMax = parseInt(split[1]);
+  }
+  if (defaultCredit && Number.isNaN(range.numCreditsMin)) {
+    range.numCreditsMin = defaultCredit;
+    range.numCreditsMax = defaultCredit;
   }
 
   return range;
@@ -52,7 +59,9 @@ export function isSubjectRange(
  * @param scraperReq the ScraperRequirement
  */
 export function isIOrCourse(req: Requirement): req is IOrCourse {
-  return (req as IOrCourse).courses !== undefined;
+  return (
+    (req as IOrCourse).courses !== undefined && (req as IOrCourse).type == "OR"
+  );
 }
 
 /**
