@@ -317,26 +317,35 @@ export interface IUserData {
 }
 
 /**
- * An AP exam available for transfer credit, with the courses and semester
+ * An enumeration of the different kinds of transferable exams available.
+ */
+export enum TransferableExamType {
+  AP = "AP",
+  IB = "IB",
+}
+
+/**
+ * A transferable exam available for transfer credit, with the courses and semester
  * hours it counts for.
  * @param name the name of this exam
- * @param mappableCourses the NEU courses which this AP credit counts for
- * @param semesterHours the number of semester hours which this AP credit counts for
+ * @param mappableCourses the NEU courses which this credit counts for
+ * @param semesterHours the number of semester hours which this credit counts for
  */
-export interface APExam {
+export interface TransferableExam {
   name: string;
+  type: TransferableExamType;
   mappableCourses: IRequiredCourse[];
   semesterHours: number;
 }
 
 /**
  * A subject group of AP exams available for transfer.
- * @param name the name of this group of AP exams
- * @param apCredits an array of AP exams which are within this group
+ * @param name the name of this group of exams
+ * @param apCredits an array of exams which are within this group
  */
-export interface APExamGroup {
+export interface TransferableExamGroup {
   name: string;
-  apExams: APExam[];
+  transferableExams: TransferableExam[];
 }
 
 /** ------------------------------------------------------------------------

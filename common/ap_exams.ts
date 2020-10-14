@@ -1,11 +1,12 @@
-import { APExamGroup } from "./types";
+import { TransferableExamGroup, TransferableExamType } from "./types";
 
-export const APExamGroups2020To2021: Array<APExamGroup> = [
+export const APExamGroups2020To2021: Array<TransferableExamGroup> = [
   {
     name: "Arts",
-    apExams: [
+    transferableExams: [
       {
         name: "2-D Art and Design",
+        type: TransferableExamType.AP,
         mappableCourses: [
           {
             type: "COURSE",
@@ -17,6 +18,7 @@ export const APExamGroups2020To2021: Array<APExamGroup> = [
       },
       {
         name: "3-D Art and Design",
+        type: TransferableExamType.AP,
         mappableCourses: [
           {
             type: "COURSE",
@@ -28,6 +30,7 @@ export const APExamGroups2020To2021: Array<APExamGroup> = [
       },
       {
         name: "Art Drawing",
+        type: TransferableExamType.AP,
         mappableCourses: [
           {
             type: "COURSE",
@@ -39,6 +42,7 @@ export const APExamGroups2020To2021: Array<APExamGroup> = [
       },
       {
         name: "Art History",
+        type: TransferableExamType.AP,
         mappableCourses: [
           {
             type: "COURSE",
@@ -50,6 +54,7 @@ export const APExamGroups2020To2021: Array<APExamGroup> = [
       },
       {
         name: "Music Theory",
+        type: TransferableExamType.AP,
         mappableCourses: [
           {
             type: "COURSE",
@@ -63,9 +68,10 @@ export const APExamGroups2020To2021: Array<APExamGroup> = [
   },
   {
     name: "Sciences",
-    apExams: [
+    transferableExams: [
       {
         name: "Biology",
+        type: TransferableExamType.AP,
         mappableCourses: [
           {
             type: "COURSE",
@@ -92,6 +98,7 @@ export const APExamGroups2020To2021: Array<APExamGroup> = [
       },
       {
         name: "Chemistry",
+        type: TransferableExamType.AP,
         mappableCourses: [
           {
             type: "COURSE",
@@ -108,6 +115,7 @@ export const APExamGroups2020To2021: Array<APExamGroup> = [
       },
       {
         name: "Environmental Science",
+        type: TransferableExamType.AP,
         mappableCourses: [
           {
             type: "COURSE",
@@ -119,6 +127,7 @@ export const APExamGroups2020To2021: Array<APExamGroup> = [
       },
       {
         name: "Physics 1: Algebra-Based",
+        type: TransferableExamType.AP,
         mappableCourses: [
           {
             type: "COURSE",
@@ -135,6 +144,7 @@ export const APExamGroups2020To2021: Array<APExamGroup> = [
       },
       {
         name: "Physics 2: Algebra-Based",
+        type: TransferableExamType.AP,
         mappableCourses: [
           {
             type: "COURSE",
@@ -151,6 +161,7 @@ export const APExamGroups2020To2021: Array<APExamGroup> = [
       },
       {
         name: "Physics C: Electricity and Magnetism",
+        type: TransferableExamType.AP,
         mappableCourses: [
           {
             type: "COURSE",
@@ -172,6 +183,7 @@ export const APExamGroups2020To2021: Array<APExamGroup> = [
       },
       {
         name: "Physics C: Mechanics",
+        type: TransferableExamType.AP,
         mappableCourses: [
           {
             type: "COURSE",
@@ -190,9 +202,10 @@ export const APExamGroups2020To2021: Array<APExamGroup> = [
   },
   {
     name: "Math and Computer Science",
-    apExams: [
+    transferableExams: [
       {
         name: "Calculus AB (or AB subscore)",
+        type: TransferableExamType.AP,
         mappableCourses: [
           {
             type: "COURSE",
@@ -204,6 +217,7 @@ export const APExamGroups2020To2021: Array<APExamGroup> = [
       },
       {
         name: "Calculus BC",
+        type: TransferableExamType.AP,
         mappableCourses: [
           {
             type: "COURSE",
@@ -220,6 +234,7 @@ export const APExamGroups2020To2021: Array<APExamGroup> = [
       },
       {
         name: "Computer Science A",
+        type: TransferableExamType.AP,
         mappableCourses: [
           {
             type: "COURSE",
@@ -231,6 +246,7 @@ export const APExamGroups2020To2021: Array<APExamGroup> = [
       },
       {
         name: "Computer Science Principles",
+        type: TransferableExamType.AP,
         mappableCourses: [
           {
             type: "COURSE",
@@ -242,6 +258,7 @@ export const APExamGroups2020To2021: Array<APExamGroup> = [
       },
       {
         name: "Statistics",
+        type: TransferableExamType.AP,
         mappableCourses: [
           {
             type: "COURSE",
@@ -255,9 +272,10 @@ export const APExamGroups2020To2021: Array<APExamGroup> = [
   },
   {
     name: "World Languages And Cultures",
-    apExams: [
+    transferableExams: [
       {
         name: "Chinese Language and Culture",
+        type: TransferableExamType.AP,
         mappableCourses: [
           {
             type: "COURSE",
@@ -269,6 +287,7 @@ export const APExamGroups2020To2021: Array<APExamGroup> = [
       },
       {
         name: "French Language and Culture",
+        type: TransferableExamType.AP,
         mappableCourses: [
           {
             type: "COURSE",
@@ -280,6 +299,7 @@ export const APExamGroups2020To2021: Array<APExamGroup> = [
       },
       {
         name: "German Language and Culture",
+        type: TransferableExamType.AP,
         mappableCourses: [
           {
             type: "COURSE",
@@ -291,6 +311,7 @@ export const APExamGroups2020To2021: Array<APExamGroup> = [
       },
       {
         name: "Italian Language and Culture",
+        type: TransferableExamType.AP,
         mappableCourses: [
           {
             type: "COURSE",
@@ -302,6 +323,7 @@ export const APExamGroups2020To2021: Array<APExamGroup> = [
       },
       {
         name: "Japanese Language and Culture",
+        type: TransferableExamType.AP,
         mappableCourses: [
           {
             type: "COURSE",
@@ -313,6 +335,7 @@ export const APExamGroups2020To2021: Array<APExamGroup> = [
       },
       {
         name: "Latin",
+        type: TransferableExamType.AP,
         mappableCourses: [
           {
             type: "COURSE",
@@ -324,6 +347,7 @@ export const APExamGroups2020To2021: Array<APExamGroup> = [
       },
       {
         name: "Spanish Language and Culture",
+        type: TransferableExamType.AP,
         mappableCourses: [
           {
             type: "COURSE",
@@ -335,6 +359,7 @@ export const APExamGroups2020To2021: Array<APExamGroup> = [
       },
       {
         name: "Spanish Language and Culture and Spanish Literature and Culture",
+        type: TransferableExamType.AP,
         mappableCourses: [
           {
             type: "COURSE",
@@ -346,6 +371,7 @@ export const APExamGroups2020To2021: Array<APExamGroup> = [
       },
       {
         name: "Spanish Literature and Culture",
+        type: TransferableExamType.AP,
         mappableCourses: [
           {
             type: "COURSE",
@@ -359,9 +385,10 @@ export const APExamGroups2020To2021: Array<APExamGroup> = [
   },
   {
     name: "History and Social Sciences",
-    apExams: [
+    transferableExams: [
       {
         name: "Comparative Government and Politics",
+        type: TransferableExamType.AP,
         mappableCourses: [
           {
             type: "COURSE",
@@ -373,6 +400,7 @@ export const APExamGroups2020To2021: Array<APExamGroup> = [
       },
       {
         name: "European History",
+        type: TransferableExamType.AP,
         mappableCourses: [
           {
             type: "COURSE",
@@ -384,6 +412,7 @@ export const APExamGroups2020To2021: Array<APExamGroup> = [
       },
       {
         name: "Human Geography",
+        type: TransferableExamType.AP,
         mappableCourses: [
           {
             type: "COURSE",
@@ -395,6 +424,7 @@ export const APExamGroups2020To2021: Array<APExamGroup> = [
       },
       {
         name: "Macroeconomics",
+        type: TransferableExamType.AP,
         mappableCourses: [
           {
             type: "COURSE",
@@ -406,6 +436,7 @@ export const APExamGroups2020To2021: Array<APExamGroup> = [
       },
       {
         name: "Microeconomics",
+        type: TransferableExamType.AP,
         mappableCourses: [
           {
             type: "COURSE",
@@ -417,6 +448,7 @@ export const APExamGroups2020To2021: Array<APExamGroup> = [
       },
       {
         name: "Psychology",
+        type: TransferableExamType.AP,
         mappableCourses: [
           {
             type: "COURSE",
@@ -428,6 +460,7 @@ export const APExamGroups2020To2021: Array<APExamGroup> = [
       },
       {
         name: "United States Government and Politics",
+        type: TransferableExamType.AP,
         mappableCourses: [
           {
             type: "COURSE",
@@ -439,6 +472,7 @@ export const APExamGroups2020To2021: Array<APExamGroup> = [
       },
       {
         name: "United States History",
+        type: TransferableExamType.AP,
         mappableCourses: [
           {
             type: "COURSE",
@@ -450,6 +484,7 @@ export const APExamGroups2020To2021: Array<APExamGroup> = [
       },
       {
         name: "World History: Modern",
+        type: TransferableExamType.AP,
         mappableCourses: [
           {
             type: "COURSE",
@@ -463,9 +498,10 @@ export const APExamGroups2020To2021: Array<APExamGroup> = [
   },
   {
     name: "English",
-    apExams: [
+    transferableExams: [
       {
         name: "English Language and Composition",
+        type: TransferableExamType.AP,
         mappableCourses: [
           {
             type: "COURSE",
@@ -478,6 +514,7 @@ export const APExamGroups2020To2021: Array<APExamGroup> = [
       {
         name:
           "English Language and Composition and English Literature and Composition",
+        type: TransferableExamType.AP,
         mappableCourses: [
           {
             type: "COURSE",
@@ -494,6 +531,7 @@ export const APExamGroups2020To2021: Array<APExamGroup> = [
       },
       {
         name: "English Literature and Composition",
+        type: TransferableExamType.AP,
         mappableCourses: [
           {
             type: "COURSE",
