@@ -60,7 +60,7 @@ interface GraduationYearScreenProps {
 
 interface MajorScreenProps {
   setMajor: (major?: Major) => void;
-  setCoopCycle: (plan: Schedule) => void;
+  setCoopCycle: (coopCycle: string, plan: Schedule) => void;
   setPlanStr: (planStr?: string) => void;
   setPlan: (plan: Schedule) => void;
   majors: Major[];
@@ -173,7 +173,7 @@ class OnboardingScreenComponent extends React.Component<
         (p: Schedule) => planToString(p) === this.state.planStr
       );
 
-      this.props.setCoopCycle(plan!);
+      this.props.setCoopCycle(this.state.planStr, plan!);
     }
   }
 
@@ -390,7 +390,8 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   setGraduationYear: (academicYear: number) =>
     dispatch(setGraduationYearAction(academicYear)),
   setMajor: (major?: Major) => dispatch(setDeclaredMajorAction(major)),
-  setCoopCycle: (plan: Schedule) => dispatch(setCoopCycle(plan)),
+  setCoopCycle: (coopCycle: string, plan: Schedule) =>
+    dispatch(setCoopCycle(coopCycle, plan)),
 });
 
 /**

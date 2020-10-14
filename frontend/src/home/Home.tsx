@@ -30,8 +30,6 @@ import { AppState } from "../state/reducers/state";
 import { Dispatch } from "redux";
 import {
   getScheduleFromState,
-  getPlanStrFromState,
-  getDeclaredMajorFromState,
   getWarningsFromState,
   getTokenFromState,
   getUserId,
@@ -39,6 +37,8 @@ import {
   getPlanIdsFromState,
   getLinkSharingFromState,
   getScheduleDataFromState,
+  getScheduleCoopCycleFromState,
+  getScheduleMajorFromState,
   getAcademicYearFromState,
   getClosedYearsFromState,
 } from "../state";
@@ -187,7 +187,7 @@ interface ToastHomeProps {
 
 interface ReduxStoreHomeProps {
   schedule: DNDSchedule;
-  major?: Major;
+  major?: string;
   planStr?: string;
   warnings: IWarning[];
   token?: string;
@@ -444,7 +444,7 @@ class HomeComponent extends React.Component<Props, HomeState> {
           name: this.props.planName ? this.props.planName : "",
           link_sharing_enabled: this.props.linkSharing,
           schedule: this.props.schedule,
-          major: this.props.major ? this.props.major.name : "",
+          major: this.props.major ? this.props.major : "",
           planString: this.props.planStr ? this.props.planStr : "None",
           course_counter: scheduleData.currentClassCounter,
           warnings: scheduleData.warnings,
@@ -453,6 +453,7 @@ class HomeComponent extends React.Component<Props, HomeState> {
       ).then(plan => {
         this.props.updateActiveSchedule({
           ...plan.plan,
+          coopCycle: plan.plan.planString,
           currentClassCounter: plan.plan.courseCounter,
           isScheduleLoading: false,
           scheduleError: "",
@@ -477,14 +478,15 @@ class HomeComponent extends React.Component<Props, HomeState> {
         name: `Schedule ${this.state.planCount + 1}`,
         link_sharing_enabled: this.props.linkSharing,
         schedule: this.props.schedule,
-        major: this.props.major ? this.props.major.name : "",
-        planString: this.props.planStr ? this.props.planStr : "None",
+        major: this.props.major ? this.props.major : "",
+        planString: this.props.planStr ? this.props.planStr : "",
         course_counter: scheduleData.currentClassCounter,
         warnings: scheduleData.warnings,
         course_warnings: scheduleData.courseWarnings,
       }).then(plan => {
         this.props.addNewSchedule(plan.plan.name, {
           ...plan.plan,
+          coopCycle: plan.plan.planString,
           currentClassCounter: plan.plan.courseCounter,
           isScheduleLoading: false,
           scheduleError: "",
@@ -515,9 +517,7 @@ class HomeComponent extends React.Component<Props, HomeState> {
               <HomeTop>
                 <HomeText href="#">GraduateNU</HomeText>
                 <HomePlan>
-                  <MajorText>
-                    {!!this.props.major ? this.props.major.name + ": " : ""}
-                  </MajorText>
+                  <MajorText>{this.props.major}</MajorText>
                   <PlanText>{this.props.planStr || "None"}</PlanText>
                   <EditPlanPopper />
                 </HomePlan>
@@ -564,8 +564,8 @@ class HomeComponent extends React.Component<Props, HomeState> {
 
 const mapStateToProps = (state: AppState) => ({
   schedule: getScheduleFromState(state),
-  planStr: getPlanStrFromState(state),
-  major: getDeclaredMajorFromState(state),
+  planStr: getScheduleCoopCycleFromState(state),
+  major: getScheduleMajorFromState(state),
   warnings: getWarningsFromState(state),
   token: getTokenFromState(state),
   userId: getUserId(state),

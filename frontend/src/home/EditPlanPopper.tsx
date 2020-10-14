@@ -11,14 +11,15 @@ import { Dispatch } from "redux";
 import {
   getScheduleFromState,
   getPlanStrFromState,
-  getDeclaredMajorFromState,
+  getScheduleMajorFromState,
+  getScheduleCoopCycleFromState,
 } from "../state";
 import {
   setScheduleAction,
   setCoopCycle,
+  setScheduleMajor,
 } from "../state/actions/scheduleActions";
-import { setDeclaredMajorAction } from "../state/actions/userActions";
-import { DNDSchedule } from "../models/types";
+import { DNDSchedule, StatusEnum } from "../models/types";
 import { Major, Schedule } from "../../../common/types";
 import {
   getMajors,
@@ -87,8 +88,8 @@ const SetButton = styled(Button)<any>`
 
 interface ReduxStoreEditPlanProps {
   schedule: DNDSchedule;
-  major?: Major;
-  planStr?: string;
+  major: string;
+  planStr: string;
   majors: Major[];
   plans: Record<string, Schedule[]>;
   creditsTaken: number;
@@ -96,7 +97,7 @@ interface ReduxStoreEditPlanProps {
 }
 
 interface ReduxDispatchEditPlanProps {
-  setCoopCycle: (schedule?: Schedule) => void;
+  setCoopCycle: (coopCycle: string, schedule?: Schedule) => void;
   setSchedule: (schedule: Schedule) => void;
   setMajor: (major?: Major) => void;
 }
@@ -140,24 +141,20 @@ export class EditPlanPopperComponent extends React.Component<
   onChooseMajor(event: React.SyntheticEvent<{}>, value: any) {
     const maj = findMajorFromName(value, this.props.majors);
     this.props.setMajor(maj);
-    this.props.setCoopCycle(undefined);
+    this.props.setCoopCycle("");
   }
 
   /**
    * Updates this user's plan based on the plan selected in the dropdown.
    */
   onChoosePlan(event: React.SyntheticEvent<{}>, value: any) {
-    if (value === "None") {
-      this.props.setCoopCycle(undefined);
-      return;
-    }
-
-    const plan = this.props.plans[this.props.major!.name].find(
+    const plan = this.props.plans[this.props.major].find(
       (p: Schedule) => planToString(p) === value
     );
 
     if (plan) {
-      this.props.setCoopCycle(plan);
+      const chosenCoopCycle = value === "None" ? "" : value;
+      this.props.setCoopCycle(chosenCoopCycle, plan);
     }
   }
 
@@ -176,7 +173,7 @@ export class EditPlanPopperComponent extends React.Component<
             margin="dense"
           />
         )}
-        value={!!this.props.major ? this.props.major.name + " " : ""}
+        value={this.props.major}
         onChange={this.onChooseMajor.bind(this)}
       />
     );
@@ -189,7 +186,7 @@ export class EditPlanPopperComponent extends React.Component<
         disableListWrap
         options={[
           "None",
-          ...this.props.plans[this.props.major!.name].map(p => planToString(p)),
+          ...this.props.plans[this.props.major].map(p => planToString(p)),
         ]}
         renderInput={params => (
           <TextField
@@ -219,7 +216,7 @@ export class EditPlanPopperComponent extends React.Component<
   }
 
   addClassesFromPOS() {
-    const plan = this.props.plans[this.props.major!.name].find(
+    const plan = this.props.plans[this.props.major].find(
       (p: Schedule) => planToString(p) === this.props.planStr!
     );
     this.props.setSchedule(plan!);
@@ -238,10 +235,10 @@ export class EditPlanPopperComponent extends React.Component<
   }
 
   clearSchedule() {
-    const plan = this.props.plans[this.props.major!.name].find(
+    const plan = this.props.plans[this.props.major].find(
       (p: Schedule) => planToString(p) === this.props.planStr!
     );
-    this.props.setCoopCycle(plan!);
+    this.props.setCoopCycle(this.props.planStr || "", plan!);
   }
 
   /**
@@ -296,8 +293,8 @@ export class EditPlanPopperComponent extends React.Component<
 
 const mapStateToProps = (state: AppState) => ({
   schedule: getScheduleFromState(state),
-  planStr: getPlanStrFromState(state),
-  major: getDeclaredMajorFromState(state),
+  planStr: getScheduleCoopCycleFromState(state),
+  major: getScheduleMajorFromState(state),
   majors: getMajors(state),
   plans: getPlans(state),
   creditsTaken: getTakenCredits(state),
@@ -305,9 +302,10 @@ const mapStateToProps = (state: AppState) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  setCoopCycle: (schedule?: Schedule) => dispatch(setCoopCycle(schedule)),
+  setCoopCycle: (coopCycle: string, schedule?: Schedule) =>
+    dispatch(setCoopCycle(coopCycle, schedule)),
   setSchedule: (schedule: Schedule) => dispatch(setScheduleAction(schedule)),
-  setMajor: (major?: Major) => dispatch(setDeclaredMajorAction(major)),
+  setMajor: (major?: Major) => dispatch(setScheduleMajor(major)),
 });
 
 export const EditPlanPopper = connect<
