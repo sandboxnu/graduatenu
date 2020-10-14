@@ -11,7 +11,7 @@ import { Persistor } from "redux-persist";
 import { SignupScreen } from "./Onboarding/SignupScreen";
 import { LoginScreen } from "./Onboarding/LoginScreen";
 import { Profile } from "./profile/Profile";
-import APCreditComponent from "./Onboarding/APCreditScreen";
+import TransferableCreditScreen from "./Onboarding/TransferableCreditScreen";
 
 export const App = ({
   store,
@@ -34,7 +34,7 @@ export const App = ({
               path="/completedCourses"
               component={CompletedCoursesScreen}
             />
-            <Route path="/apCredits" component={APCreditComponent} />
+            <Route path="/apCredits" component={TransferableCreditScreen} />
             <Route path="/" component={Onboarding} />
           </Switch>
         </Router>

@@ -1,4 +1,4 @@
-import { APExam, Major } from "../../../../common/types";
+import { TransferableExam, Major } from "../../../../common/types";
 import produce from "immer";
 import { getType } from "typesafe-actions";
 import { UserAction, ScheduleAction } from "../actions";
@@ -16,7 +16,7 @@ import {
   setPlanIdsAction,
   setUserCoopCycleAction,
   setEmailAction,
-  setAPCredits,
+  setExamCredits,
 } from "../actions/userActions";
 import { setCoopCycle } from "../actions/scheduleActions";
 import { planToString } from "../../utils";
@@ -36,7 +36,7 @@ export interface UserState {
   declaredMajor?: Major;
   email: string;
   coopCycle: string;
-  apCredits: APExam[];
+  examCredits: TransferableExam[];
 }
 
 const initialState: UserState = {
@@ -52,7 +52,7 @@ const initialState: UserState = {
   declaredMajor: undefined,
   email: "",
   coopCycle: "",
-  apCredits: [],
+  examCredits: [],
 };
 
 export const userReducer = (
@@ -119,8 +119,8 @@ export const userReducer = (
         draft.coopCycle = action.payload.coopCycle;
         return draft;
       }
-      case getType(setAPCredits): {
-        draft.apCredits = action.payload.apCredits;
+      case getType(setExamCredits): {
+        draft.examCredits = action.payload.examCredits;
         return draft;
       }
       case getType(setMajorPlanAction): {
