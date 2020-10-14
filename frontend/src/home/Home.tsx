@@ -230,6 +230,8 @@ interface HomeState {
 class HomeComponent extends React.Component<Props, HomeState> {
   constructor(props: Props) {
     super(props);
+    props.setClosedYearsToYearsInThePast(props.academicYear);
+
     this.state = {
       fetchedPlan: false,
       planCount: 1,
@@ -238,7 +240,6 @@ class HomeComponent extends React.Component<Props, HomeState> {
 
   componentDidMount() {
     // If this is true, then a user is currently logged in and we can fetch their plan
-    this.props.setClosedYearsToYearsInThePast(this.props.academicYear);
     if (this.props.token && this.props.userId) {
       findAllPlansForUser(this.props.userId, this.props.token).then(
         (plans: IPlanData[]) => {
