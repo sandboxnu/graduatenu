@@ -57,7 +57,7 @@ const theme = createMuiTheme({
   },
 });
 
-const steps = ["", ""];
+const steps = ["", "", ""];
 
 interface Props {
   screen: number;

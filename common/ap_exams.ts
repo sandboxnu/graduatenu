@@ -1,4 +1,4 @@
-import { TransferableExamGroup, TransferableExamType } from "./types";
+import { TransferableExamGroup } from "./types";
 
 export const APExamGroups2020To2021: Array<TransferableExamGroup> = [
   {

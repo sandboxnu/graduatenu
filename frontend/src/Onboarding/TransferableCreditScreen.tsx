@@ -81,25 +81,42 @@ interface TransferableExamComponentProps {
   ) => void;
 }
 
+interface TransferableExamGroupsComponentProps {
+  readonly transferableExamGroups: TransferableExamGroup[];
+  readonly selectedTransferableExams: Array<TransferableExam>;
+  readonly keyPrefix: string;
+  readonly setSelectedTransferableExams: (
+    transferableExams: TransferableExam[]
+  ) => void;
+}
+
 const TransferableExamComponent: React.FC<
   TransferableExamComponentProps
 > = props => {
+  const addCourseToSelected = () => {
+    const newSelectedTransferableExams: Array<TransferableExam> = [
+      ...props.selectedTransferableExams,
+      props.transferableExam,
+    ];
+    props.setSelectedTransferableExams(newSelectedTransferableExams);
+  };
+
+  const removeCourseFromSelected = () => {
+    const newSelectedTransferableExams: Array<
+      TransferableExam
+    > = props.selectedTransferableExams.filter(
+      (transferableExam: TransferableExam) =>
+        transferableExam.name !== props.transferableExam.name
+    );
+    props.setSelectedTransferableExams(newSelectedTransferableExams);
+  };
+
   const onChecked = (e: any): void => {
     const checked = e.target.checked;
     if (checked) {
-      const newSelectedTransferableExams: Array<TransferableExam> = [
-        ...props.selectedTransferableExams,
-        props.transferableExam,
-      ];
-      props.setSelectedTransferableExams(newSelectedTransferableExams);
+      addCourseToSelected();
     } else {
-      const newSelectedTransferableExams: Array<
-        TransferableExam
-      > = props.selectedTransferableExams.filter(
-        (transferableExam: TransferableExam) =>
-          transferableExam.name !== props.transferableExam.name
-      );
-      props.setSelectedTransferableExams(newSelectedTransferableExams);
+      removeCourseFromSelected();
     }
   };
 
@@ -130,6 +147,7 @@ const TransferableExamGroupComponent: React.FC<
             transferableExam={transferableExam}
             selectedTransferableExams={props.selectedTransferableExams}
             setSelectedTransferableExams={props.setSelectedTransferableExams}
+            key={`${transferableExam.type}-${transferableExam.name}`}
           />
         )
       )}
@@ -137,7 +155,26 @@ const TransferableExamGroupComponent: React.FC<
   );
 };
 
-const TransferableCreditComponent: React.FC = () => {
+const TransferableExamGroupsComponent: React.FC<
+  TransferableExamGroupsComponentProps
+> = props => {
+  return (
+    <div>
+      {props.transferableExamGroups.map(
+        (transferableExamGroup: TransferableExamGroup) => (
+          <TransferableExamGroupComponent
+            transferableExamGroup={transferableExamGroup}
+            selectedTransferableExams={props.selectedTransferableExams}
+            setSelectedTransferableExams={props.setSelectedTransferableExams}
+            key={`${props.keyPrefix}-${transferableExamGroup.name}`}
+          />
+        )
+      )}
+    </div>
+  );
+};
+
+const TransferableCreditScreen: React.FC = () => {
   const dispatch = useDispatch();
   const [selectedTransferableExams, setSelectedTransferableExams] = useState<
     Array<TransferableExam>
@@ -148,8 +185,10 @@ const TransferableCreditComponent: React.FC = () => {
   };
 
   return (
-    <GenericOnboardingTemplate screen={4}>
-      <MainTitleText>Select any courses you took for AP credit:</MainTitleText>
+    <GenericOnboardingTemplate screen={3}>
+      <MainTitleText>
+        Select any exams you took for AP or IB credit:
+      </MainTitleText>
       <Paper
         elevation={0}
         style={{
@@ -165,35 +204,31 @@ const TransferableCreditComponent: React.FC = () => {
         <Grid container justify="space-evenly">
           <Grid key={0} item>
             <Paper elevation={0} style={{ minWidth: 350, maxWidth: 400 }}>
-              {APExamGroups2020To2021.map(
-                (transferableExamGroup: TransferableExamGroup) => (
-                  <TransferableExamGroupComponent
-                    transferableExamGroup={transferableExamGroup}
-                    selectedTransferableExams={selectedTransferableExams}
-                    setSelectedTransferableExams={setSelectedTransferableExams}
-                  />
-                )
-              )}
+              <MainTitleText>AP Exams</MainTitleText>
+              <TransferableExamGroupsComponent
+                transferableExamGroups={APExamGroups2020To2021}
+                selectedTransferableExams={selectedTransferableExams}
+                setSelectedTransferableExams={setSelectedTransferableExams}
+                keyPrefix={"ap"}
+              />
             </Paper>
           </Grid>
           <Grid key={1} item>
             <Paper elevation={0} style={{ minWidth: 350, maxWidth: 400 }}>
-              {IBExamGroups2020To2021.map(
-                (transferableExamGroup: TransferableExamGroup) => (
-                  <TransferableExamGroupComponent
-                    transferableExamGroup={transferableExamGroup}
-                    selectedTransferableExams={selectedTransferableExams}
-                    setSelectedTransferableExams={setSelectedTransferableExams}
-                  />
-                )
-              )}
+              <MainTitleText>IB Exams</MainTitleText>
+              <TransferableExamGroupsComponent
+                transferableExamGroups={IBExamGroups2020To2021}
+                selectedTransferableExams={selectedTransferableExams}
+                setSelectedTransferableExams={setSelectedTransferableExams}
+                keyPrefix={"ib"}
+              />
             </Paper>
           </Grid>
         </Grid>
       </Paper>
       <Link
         to={"/signup"} // TODO create a set flow that can easily be fetched based upon the current page
-        onSubmit={onSubmit}
+        onClick={onSubmit}
         style={{ textDecoration: "none" }}
       >
         <NextButton />
@@ -202,4 +237,4 @@ const TransferableCreditComponent: React.FC = () => {
   );
 };
 
-export default TransferableCreditComponent;
+export default TransferableCreditScreen;

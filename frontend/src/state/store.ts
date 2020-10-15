@@ -21,6 +21,7 @@ export function configureStore(initialState?: AppState) {
     initialState,
     composeWithDevTools(applyMiddleware(...middlewares))
   );
+
   const persistor = persistStore(store);
   return { store, persistor };
 }
