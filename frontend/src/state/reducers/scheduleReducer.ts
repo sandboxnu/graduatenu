@@ -3,7 +3,7 @@ import { DNDSchedule, IWarning, CourseWarning } from "../../models/types";
 import { mockEmptySchedule } from "../../data/mockData";
 import produce from "immer";
 import { getType } from "typesafe-actions";
-import { ScheduleAction, SchedulesAction } from "../actions";
+import { ScheduleAction, SchedulesAction, UserAction } from "../actions";
 import {
   addClassesAction,
   removeClassAction,
@@ -30,6 +30,7 @@ import {
   getNextTerm,
   isYearInPast,
 } from "../../utils";
+import { resetUserAction } from "../actions/userActions";
 
 export interface ScheduleState {
   past?: ScheduleStateSlice;
@@ -66,7 +67,7 @@ const initialState: ScheduleState = {
 
 export const scheduleReducer = (
   state: ScheduleState = initialState,
-  action: ScheduleAction | SchedulesAction
+  action: ScheduleAction | SchedulesAction | UserAction
 ) => {
   return produce(state, draft => {
     switch (action.type) {
@@ -284,6 +285,10 @@ export const scheduleReducer = (
         draft.present.currentClassCounter = namedSchedule.currentClassCounter;
         draft.present.schedule = namedSchedule.schedule;
         draft.present.warnings = namedSchedule.warnings;
+        return draft;
+      }
+      case getType(resetUserAction): {
+        draft = initialState;
         return draft;
       }
       case getType(setClosedYearsToYearsInThePast): {

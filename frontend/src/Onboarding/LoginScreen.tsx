@@ -253,6 +253,10 @@ class LoginScreenComponent extends React.Component<Props, LoginScreenState> {
   }
 
   render() {
+    // indicates if the user came from login button on welcome page
+    const { fromOnBoarding } = (this.props.location.state as any) || {
+      fromOnBoarding: false,
+    };
     return (
       <Wrapper>
         <Title>Log In</Title>
@@ -269,11 +273,22 @@ class LoginScreenComponent extends React.Component<Props, LoginScreenState> {
 
         <Subtitle>
           New here? Sign up{" "}
-          <Link style={{ color: "#EB5757" }} to="/signup">
+          <Link
+            style={{ color: "#EB5757" }}
+            to={{
+              pathname: fromOnBoarding ? "/onboarding" : "/signup",
+            }}
+          >
             here
           </Link>{" "}
           or{" "}
-          <Link style={{ color: "#EB5757" }} to="/home">
+          <Link
+            style={{ color: "#EB5757" }}
+            to={{
+              pathname: fromOnBoarding ? "/onboarding" : "/home",
+              state: { fromOnBoardingGuest: fromOnBoarding },
+            }}
+          >
             continue as guest
           </Link>
         </Subtitle>

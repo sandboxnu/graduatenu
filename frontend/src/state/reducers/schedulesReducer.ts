@@ -2,13 +2,14 @@ import { NamedSchedule } from "../../models/types";
 import { mockData } from "../../data/mockData";
 import produce from "immer";
 import { getType } from "typesafe-actions";
-import { SchedulesAction } from "../actions";
+import { SchedulesAction, UserAction } from "../actions";
 import {
   setActiveScheduleAction,
   updateActiveSchedule,
   addNewSchedule,
   setSchedules,
 } from "../actions/schedulesActions";
+import { resetUserAction } from "../actions/userActions";
 
 export interface SchedulesState {
   activeSchedule: number;
@@ -22,7 +23,7 @@ const initialState: SchedulesState = {
 
 export const schedulesReducer = (
   state: SchedulesState = initialState,
-  action: SchedulesAction
+  action: SchedulesAction | UserAction
 ) => {
   return produce(state, draft => {
     switch (action.type) {
@@ -61,6 +62,10 @@ export const schedulesReducer = (
         draft.schedules = schedules;
         draft.activeSchedule = 0;
 
+        return draft;
+      }
+      case getType(resetUserAction): {
+        draft = initialState;
         return draft;
       }
     }

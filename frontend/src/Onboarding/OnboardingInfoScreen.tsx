@@ -318,6 +318,11 @@ class OnboardingScreenComponent extends React.Component<
   }
 
   render() {
+    // indicates if the user came from login button on welcome page
+    const { fromOnBoardingGuest } = (this.props.location.state as any) || {
+      fromOnBoardingGuest: false,
+    };
+
     const {
       gradYear,
       year,
@@ -354,7 +359,15 @@ class OnboardingScreenComponent extends React.Component<
 
           {textFieldStr.length !== 0 && !!year && !!gradYear ? (
             <Link
-              to={!!this.state.major ? "/completedCourses" : "/signup"}
+              //If guest user comes from login button on welcome page, go to home page, else go to signup page
+              to={{
+                pathname: !!this.state.major
+                  ? "/completedCourses"
+                  : fromOnBoardingGuest
+                  ? "/home"
+                  : "/signup",
+                state: { fromOnBoardingGuest: fromOnBoardingGuest },
+              }}
               onClick={this.onSubmit.bind(this)}
               style={{ textDecoration: "none" }}
             >

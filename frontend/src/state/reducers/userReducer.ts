@@ -16,6 +16,7 @@ import {
   setPlanIdsAction,
   setUserCoopCycleAction,
   setEmailAction,
+  resetUserAction,
 } from "../actions/userActions";
 import { setCoopCycle } from "../actions/scheduleActions";
 import { planToString } from "../../utils";
@@ -114,6 +115,10 @@ export const userReducer = (
       }
       case getType(setUserCoopCycleAction): {
         draft.coopCycle = action.payload.coopCycle;
+        return draft;
+      }
+      case getType(resetUserAction): {
+        draft = initialState;
         return draft;
       }
       case getType(setMajorPlanAction): {
