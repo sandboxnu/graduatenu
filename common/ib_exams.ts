@@ -1,4 +1,4 @@
-import { TransferableExamGroup, TransferableExamType } from "./types";
+import { TransferableExamGroup } from "./types";
 
 export const IBExamGroups2020To2021: Array<TransferableExamGroup> = [
   {
@@ -6,7 +6,7 @@ export const IBExamGroups2020To2021: Array<TransferableExamGroup> = [
     transferableExams: [
       {
         name: "Biology",
-        type: TransferableExamType.IB,
+        type: "IB",
         mappableCourses: [
           {
             type: "COURSE",
@@ -33,7 +33,7 @@ export const IBExamGroups2020To2021: Array<TransferableExamGroup> = [
       },
       {
         name: "Chemistry",
-        type: TransferableExamType.IB,
+        type: "IB",
         mappableCourses: [
           {
             type: "COURSE",
@@ -50,7 +50,7 @@ export const IBExamGroups2020To2021: Array<TransferableExamGroup> = [
       },
       {
         name: "Physics",
-        type: TransferableExamType.IB,
+        type: "IB",
         mappableCourses: [
           {
             type: "COURSE",
@@ -82,7 +82,7 @@ export const IBExamGroups2020To2021: Array<TransferableExamGroup> = [
     transferableExams: [
       {
         name: "Business Management",
-        type: TransferableExamType.IB,
+        type: "IB",
         mappableCourses: [
           {
             type: "COURSE",
@@ -94,7 +94,7 @@ export const IBExamGroups2020To2021: Array<TransferableExamGroup> = [
       },
       {
         name: "Economics",
-        type: TransferableExamType.IB,
+        type: "IB",
         mappableCourses: [
           {
             type: "COURSE",
@@ -111,7 +111,7 @@ export const IBExamGroups2020To2021: Array<TransferableExamGroup> = [
       },
       {
         name: "Global Politics",
-        type: TransferableExamType.IB,
+        type: "IB",
         mappableCourses: [
           {
             type: "COURSE",
@@ -123,7 +123,7 @@ export const IBExamGroups2020To2021: Array<TransferableExamGroup> = [
       },
       {
         name: "History of Africa and the Middle East",
-        type: TransferableExamType.IB,
+        type: "IB",
         mappableCourses: [
           {
             type: "COURSE",
@@ -135,7 +135,7 @@ export const IBExamGroups2020To2021: Array<TransferableExamGroup> = [
       },
       {
         name: "History of Asia and Oceania",
-        type: TransferableExamType.IB,
+        type: "IB",
         mappableCourses: [
           {
             type: "COURSE",
@@ -147,7 +147,7 @@ export const IBExamGroups2020To2021: Array<TransferableExamGroup> = [
       },
       {
         name: "History of Europe",
-        type: TransferableExamType.IB,
+        type: "IB",
         mappableCourses: [
           {
             type: "COURSE",
@@ -159,7 +159,7 @@ export const IBExamGroups2020To2021: Array<TransferableExamGroup> = [
       },
       {
         name: "History of the Americas",
-        type: TransferableExamType.IB,
+        type: "IB",
         mappableCourses: [
           {
             type: "COURSE",
@@ -171,7 +171,7 @@ export const IBExamGroups2020To2021: Array<TransferableExamGroup> = [
       },
       {
         name: "Philosophy",
-        type: TransferableExamType.IB,
+        type: "IB",
         mappableCourses: [
           {
             type: "COURSE",
@@ -183,7 +183,7 @@ export const IBExamGroups2020To2021: Array<TransferableExamGroup> = [
       },
       {
         name: "Psychology",
-        type: TransferableExamType.IB,
+        type: "IB",
         mappableCourses: [
           {
             type: "COURSE",
@@ -195,7 +195,7 @@ export const IBExamGroups2020To2021: Array<TransferableExamGroup> = [
       },
       {
         name: "Social and Cultural Anthropology",
-        type: TransferableExamType.IB,
+        type: "IB",
         mappableCourses: [
           {
             type: "COURSE",
@@ -212,7 +212,7 @@ export const IBExamGroups2020To2021: Array<TransferableExamGroup> = [
     transferableExams: [
       {
         name: "Design Technology",
-        type: TransferableExamType.IB,
+        type: "IB",
         mappableCourses: [
           {
             type: "COURSE",
@@ -224,7 +224,7 @@ export const IBExamGroups2020To2021: Array<TransferableExamGroup> = [
       },
       {
         name: "Film",
-        type: TransferableExamType.IB,
+        type: "IB",
         mappableCourses: [
           {
             type: "COURSE",
@@ -236,7 +236,7 @@ export const IBExamGroups2020To2021: Array<TransferableExamGroup> = [
       },
       {
         name: "Music",
-        type: TransferableExamType.IB,
+        type: "IB",
         mappableCourses: [
           {
             type: "COURSE",
@@ -248,7 +248,7 @@ export const IBExamGroups2020To2021: Array<TransferableExamGroup> = [
       },
       {
         name: "Theatre",
-        type: TransferableExamType.IB,
+        type: "IB",
         mappableCourses: [
           {
             type: "COURSE",
@@ -260,7 +260,7 @@ export const IBExamGroups2020To2021: Array<TransferableExamGroup> = [
       },
       {
         name: "Visual Arts",
-        type: TransferableExamType.IB,
+        type: "IB",
         mappableCourses: [
           {
             type: "COURSE",
@@ -277,7 +277,7 @@ export const IBExamGroups2020To2021: Array<TransferableExamGroup> = [
     transferableExams: [
       {
         name: "English A: Language and Literature",
-        type: TransferableExamType.IB,
+        type: "IB",
         mappableCourses: [
           {
             type: "COURSE",
@@ -289,7 +289,7 @@ export const IBExamGroups2020To2021: Array<TransferableExamGroup> = [
       },
       {
         name: "English A: Literature",
-        type: TransferableExamType.IB,
+        type: "IB",
         mappableCourses: [
           {
             type: "COURSE",
@@ -311,7 +311,7 @@ export const IBExamGroups2020To2021: Array<TransferableExamGroup> = [
     transferableExams: [
       {
         name: "Further Mathematics",
-        type: TransferableExamType.IB,
+        type: "IB",
         mappableCourses: [
           {
             type: "COURSE",
@@ -328,7 +328,7 @@ export const IBExamGroups2020To2021: Array<TransferableExamGroup> = [
       },
       {
         name: "Mathematics",
-        type: TransferableExamType.IB,
+        type: "IB",
         mappableCourses: [
           {
             type: "COURSE",

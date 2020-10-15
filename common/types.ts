@@ -340,10 +340,12 @@ export interface IUserData {
 /**
  * An enumeration of the different kinds of transferable exams available.
  */
-export enum TransferableExamType {
+export enum TransferableExamTypeEnum {
   AP = "AP",
   IB = "IB",
 }
+
+export type TransferableExamType = keyof typeof TransferableExamTypeEnum;
 
 /**
  * A transferable exam available for transfer credit, with the courses and semester
