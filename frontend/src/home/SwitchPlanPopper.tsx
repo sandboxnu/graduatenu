@@ -1,5 +1,5 @@
 import React from "react";
-import { MenuItem, Menu, Button } from "@material-ui/core";
+import { MenuItem, Menu, Button, IconButton } from "@material-ui/core";
 import {
   KeyboardArrowDown as KeyboardArrowDownIcon,
   KeyboardArrowUp as KeyboardArrowUpIcon,
@@ -16,13 +16,14 @@ import { setNamedSchedule } from "../state/actions/scheduleActions";
 import { NamedSchedule } from "../models/types";
 import Loader from "react-loader-spinner";
 
-const SwitchPlanContainer = styled(Button)`
+const SwitchPlanDropdown = styled(Button)`
   display: flex;
   flex-direction: row;
   align-items: center;
   cursor: pointer;
   width: 158px;
   height: 34px;
+  padding: 0px 10px;
 `;
 const SpinnerWrapper = styled.div`
   display: flex;
@@ -39,7 +40,8 @@ const SwitchPlanMenu = styled(Menu)`
 `;
 
 const ButtonContainer = styled.div`
-  float: right;
+  display: flex;
+  align-items: center;
 `;
 
 const SelectPlanContainer = styled.div`
@@ -51,7 +53,15 @@ const SelectPlanContainer = styled.div`
 
 const PlanText = styled.div`
   display: inline;
-  padding-right: 20px;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+`;
+
+const DropDownText = styled.div`
+  display: inline;
+  overflow: hidden;
 `;
 
 interface ReduxStoreSwitchSchedulesProps {
@@ -124,17 +134,21 @@ export class SwitchPlanPopperComponent extends React.Component<
   render() {
     return this.props.activeSchedule ? (
       <div>
-        <SwitchPlanContainer
+        <SwitchPlanDropdown
           variant="outlined"
           onClick={event => this.handleClick(event)}
         >
-          {`${this.props.activeSchedule.name}`}
-          {Boolean(this.state.anchorEl) ? (
-            <KeyboardArrowUpIcon style={{ color: "red" }} />
-          ) : (
-            <KeyboardArrowDownIcon />
-          )}
-        </SwitchPlanContainer>
+          <SelectPlanContainer>
+            <DropDownText>{`${this.props.activeSchedule.name}`}</DropDownText>
+            <ButtonContainer>
+              {Boolean(this.state.anchorEl) ? (
+                <KeyboardArrowUpIcon />
+              ) : (
+                <KeyboardArrowDownIcon />
+              )}
+            </ButtonContainer>
+          </SelectPlanContainer>
+        </SwitchPlanDropdown>
         <SwitchPlanMenu
           id={"simple-popper"}
           open={Boolean(this.state.anchorEl)}
@@ -146,12 +160,20 @@ export class SwitchPlanPopperComponent extends React.Component<
           }}
         >
           {this.props.schedules.map(s => (
-            <MenuItem onClick={() => this.onChoosePlan(s.name)} key={s.name}>
+            <MenuItem key={s.name}>
               <SelectPlanContainer>
-                <PlanText> {s.name} </PlanText>
+                <PlanText onClick={() => this.onChoosePlan(s.name)}>
+                  {" "}
+                  {s.name}{" "}
+                </PlanText>
                 <ButtonContainer>
                   {" "}
-                  <CreateIcon /> <DeleteIcon />
+                  <IconButton style={{ padding: "6px" }}>
+                    <CreateIcon />
+                  </IconButton>
+                  <IconButton style={{ padding: "6px" }}>
+                    <DeleteIcon />
+                  </IconButton>
                 </ButtonContainer>
               </SelectPlanContainer>
             </MenuItem>
