@@ -34,7 +34,10 @@ export const App = ({
               path="/completedCourses"
               component={CompletedCoursesScreen}
             />
-            <Route path="/apCredits" component={TransferableCreditScreen} />
+            <Route
+              path="/transferableCredits"
+              component={TransferableCreditScreen}
+            />
             <Route path="/" component={Onboarding} />
           </Switch>
         </Router>

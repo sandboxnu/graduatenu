@@ -364,7 +364,7 @@ export interface TransferableExam {
 /**
  * A subject group of AP exams available for transfer.
  * @param name the name of this group of exams
- * @param apCredits an array of exams which are within this group
+ * @param transferableExams an array of exams which are within this group
  */
 export interface TransferableExamGroup {
   name: string;

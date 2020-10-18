@@ -1,12 +1,16 @@
 import React from "react";
 import styled from "styled-components";
-import FiberManualRecordIcon from "@material-ui/icons/FiberManualRecord";
-import { red, green, blue, grey } from "@material-ui/core/colors";
+import { red } from "@material-ui/core/colors";
 import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import { makeStyles } from "@material-ui/core/styles";
+import { Checkbox, Paper } from "@material-ui/core";
+import CheckBoxIcon from "@material-ui/icons/CheckBox";
+import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
+import { Link } from "react-router-dom";
+import { NextButton } from "../components/common/NextButton";
 
 const Wrapper = styled.div`
   display: flex;
@@ -43,6 +47,57 @@ const DotWrapper = styled.div`
   margin-bottom: 34px;
 `;
 
+const MainTitleText = styled.div`
+  font-size: 16px;
+  margin-left: 4px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-weight: 500;
+`;
+
+const TitleText = styled.div`
+  font-size: 12px;
+  margin-left: 4px;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  font-weight: 500;
+`;
+
+const CourseWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
+
+const CourseText = styled.p`
+  font-size: 12px;
+  margin: 1px;
+  font-weight: 400;
+`;
+
+const ScrollWrapper = styled.div`
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  &::-webkit-scrollbar-thumb {
+    background-clip: padding-box;
+    background-color: #c1c1c1;
+    border-color: transparent;
+    border-radius: 9px 8px 8px 9px;
+    border-style: solid;
+    border-width: 3px 3px 3px 4px;
+    box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
+  }
+  &::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 16px;
+  }
+  &::-webkit-scrollbar-track:vertical {
+    border-left: 1px solid #e7e7e7;
+    box-shadow: 1px 0 1px 0 #f6f6f6 inset, -1px 0 1px 0 #f6f6f6 inset;
+  }
+`;
+
 const useStyles = makeStyles({
   root: {
     height: 15,
@@ -59,12 +114,43 @@ const theme = createMuiTheme({
 
 const steps = ["", "", ""];
 
-interface Props {
+interface SelectableCourseProps {
+  readonly onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  readonly courseText: string;
+}
+
+interface GenericOnboardingTemplateProps {
   screen: number;
   children: any;
 }
 
-export const GenericOnboardingTemplate: React.FC<Props> = ({
+interface OnboardingSelectionTemplateProps {
+  readonly screen: number;
+  readonly mainTitleText: string;
+  readonly onSubmit: () => void;
+  readonly to: string;
+}
+
+const SelectableCourse: React.FC<SelectableCourseProps> = ({
+  courseText,
+  onChange,
+}) => {
+  return (
+    <CourseWrapper>
+      <Checkbox
+        style={{ width: 2, height: 2 }}
+        icon={<CheckBoxOutlineBlankIcon style={{ fontSize: 20 }} />}
+        checkedIcon={
+          <CheckBoxIcon style={{ fontSize: 20, color: "#EB5757" }} />
+        }
+        onChange={onChange}
+      />
+      <CourseText>{courseText}</CourseText>
+    </CourseWrapper>
+  );
+};
+
+const GenericOnboardingTemplate: React.FC<GenericOnboardingTemplateProps> = ({
   screen,
   children,
 }) => {
@@ -89,4 +175,40 @@ export const GenericOnboardingTemplate: React.FC<Props> = ({
       <Box>{children}</Box>
     </Wrapper>
   );
+};
+
+const OnboardingSelectionTemplate: React.FC<
+  OnboardingSelectionTemplateProps
+> = ({ screen, mainTitleText, onSubmit, to, children }) => {
+  return (
+    <GenericOnboardingTemplate screen={screen}>
+      <MainTitleText>{mainTitleText}</MainTitleText>
+      <Paper
+        elevation={0}
+        style={{
+          minWidth: 800,
+          maxWidth: 800,
+          minHeight: 300,
+          maxHeight: 300,
+          overflow: "-moz-scrollbars-vertical",
+          overflowY: "scroll",
+        }}
+        component={ScrollWrapper}
+      >
+        {children}
+      </Paper>
+      <Link to={to} onClick={onSubmit} style={{ textDecoration: "none" }}>
+        <NextButton />
+      </Link>
+    </GenericOnboardingTemplate>
+  );
+};
+
+export {
+  CourseText,
+  GenericOnboardingTemplate,
+  OnboardingSelectionTemplate,
+  MainTitleText,
+  SelectableCourse,
+  TitleText,
 };
