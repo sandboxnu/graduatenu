@@ -71,7 +71,7 @@ const FieldContainer = styled.div`
   flex-direction: column;
   > * {
     margin-top: 10px;
-}
+  }
 `;
 
 interface Props {
@@ -152,12 +152,12 @@ function renderSelectOptions(
   setSelectOption: (selectState: string) => void
 ) {
   const setSelect = (e: any) => {
-    e.target.value != 'kill me' && setSelectOption(e.target.value);
+    e.target.value != "kill me" && setSelectOption(e.target.value);
   };
   const openExcel = (e: any) => {
     e.preventDefault();
     const doc = document.getElementById("upload");
-    doc?.click()
+    doc && doc.click();
   };
   return (
     <FormControl variant="outlined">
@@ -225,10 +225,7 @@ function AddPlanPopperComponent(props: Props) {
                 setCoopCycle,
                 coopCycle
               )}
-            {renderSelectOptions(
-              planOption,
-              setPlanOption
-            )}
+            {renderSelectOptions(planOption, setPlanOption)}
           </FieldContainer>
         </InnerSection>
       </Modal>
