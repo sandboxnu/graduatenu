@@ -1,7 +1,7 @@
 import { Checkbox, Grid, Paper } from "@material-ui/core";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { TransferableExam, TransferableExamGroup } from "../../../common/types";
 import { NextButton } from "../components/common/NextButton";
@@ -184,6 +184,12 @@ const TransferableCreditScreen: React.FC = () => {
     dispatch(setExamCredits(selectedTransferableExams));
   };
 
+  // indicates if the user came from login button on welcome page
+  const location = useLocation();
+  const { fromOnBoardingGuest } = (location.state as any) || {
+    fromOnBoardingGuest: false,
+  };
+
   return (
     <GenericOnboardingTemplate screen={3}>
       <MainTitleText>
@@ -203,7 +209,13 @@ const TransferableCreditScreen: React.FC = () => {
       >
         <Grid container justify="space-evenly">
           <Grid key={0} item>
-            <Paper elevation={0} style={{ minWidth: 350, maxWidth: 400 }}>
+            <Paper
+              elevation={0}
+              style={{
+                minWidth: 350,
+                maxWidth: 400,
+              }}
+            >
               <MainTitleText>AP Exams</MainTitleText>
               <TransferableExamGroupsComponent
                 transferableExamGroups={APExamGroups2020To2021}
@@ -214,7 +226,13 @@ const TransferableCreditScreen: React.FC = () => {
             </Paper>
           </Grid>
           <Grid key={1} item>
-            <Paper elevation={0} style={{ minWidth: 350, maxWidth: 400 }}>
+            <Paper
+              elevation={0}
+              style={{
+                minWidth: 350,
+                maxWidth: 400,
+              }}
+            >
               <MainTitleText>IB Exams</MainTitleText>
               <TransferableExamGroupsComponent
                 transferableExamGroups={IBExamGroups2020To2021}
@@ -227,9 +245,13 @@ const TransferableCreditScreen: React.FC = () => {
         </Grid>
       </Paper>
       <Link
-        to={"/signup"} // TODO create a set flow that can easily be fetched based upon the current page
+        to={{
+          pathname: fromOnBoardingGuest ? "/home" : "/signup",
+        }}
         onClick={onSubmit}
-        style={{ textDecoration: "none" }}
+        style={{
+          textDecoration: "none",
+        }}
       >
         <NextButton />
       </Link>

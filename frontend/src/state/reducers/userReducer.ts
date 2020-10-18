@@ -17,6 +17,7 @@ import {
   setUserCoopCycleAction,
   setEmailAction,
   setExamCredits,
+  resetUserAction,
 } from "../actions/userActions";
 import { setCoopCycle } from "../actions/scheduleActions";
 import { planToString } from "../../utils";
@@ -110,7 +111,6 @@ export const userReducer = (
         draft.planName = action.payload.name;
         return draft;
       }
-
       case getType(setEmailAction): {
         draft.email = action.payload.email;
         return draft;
@@ -121,6 +121,10 @@ export const userReducer = (
       }
       case getType(setExamCredits): {
         draft.examCredits = action.payload.examCredits;
+        return draft;
+      }
+      case getType(resetUserAction): {
+        draft = initialState;
         return draft;
       }
       case getType(setMajorPlanAction): {

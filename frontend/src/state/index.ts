@@ -56,7 +56,7 @@ export const getFullNameFromState = (state: AppState): string =>
   state.user.fullName;
 
 /**
- * Get a users fullname from the AppState
+ * Get a users coop cycle from the AppState
  * @param state the AppState
  */
 export const getUserCoopCycleFromState = (state: AppState): string =>
@@ -162,11 +162,27 @@ export const getCourseWarningsFromState = (
   );
 
 /**
- *
- * @param state
+ * Get the current schedule from the Appstate
+ * @param state the AppState
  */
 export const getScheduleDataFromState = (state: AppState): ScheduleSlice => {
   return state.schedule.present;
+};
+
+/**
+ * Get the current schedule's major from the AppState
+ * @param state the AppState
+ */
+export const getScheduleMajorFromState = (state: AppState): string => {
+  return getScheduleDataFromState(state).major;
+};
+
+/**
+ * Get the current schedule's coop cycle from the AppState
+ * @param state the AppState
+ */
+export const getScheduleCoopCycleFromState = (state: AppState): string => {
+  return getScheduleDataFromState(state).coopCycle;
 };
 
 /**
@@ -182,6 +198,12 @@ export const getSchedulesFromState = (state: AppState): NamedSchedule[] =>
  */
 export const getActiveScheduleFromState = (state: AppState): NamedSchedule => {
   return state.schedules.schedules[state.schedules.activeSchedule];
+};
+/**
+ * Checks if user is logged in
+ */
+export const isUserLoggedIn = (state: AppState): boolean => {
+  return state.user.userId !== undefined;
 };
 
 export const getClosedYearsFromState = (state: AppState): Set<number> => {

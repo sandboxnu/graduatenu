@@ -96,3 +96,5 @@ export const setExamCredits = createAction(
   "user/SET_EXAM_CREDITS",
   (examCredits: TransferableExam[]) => ({ examCredits })
 )();
+
+export const resetUserAction = createAction("user/RESET_USER", () => void 0)();

@@ -51,6 +51,8 @@ export interface ScheduleSlice {
   schedule: DNDSchedule;
   warnings: IWarning[];
   courseWarnings: CourseWarning[];
+  major: string;
+  coopCycle: string;
 }
 
 /**
