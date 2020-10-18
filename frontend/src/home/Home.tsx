@@ -517,7 +517,6 @@ class HomeComponent extends React.Component<Props, HomeState> {
                 </HomePlan>
                 <HomeButtons>
                   <AddPlan />
-                  <ExcelUpload setSchedule={this.setSchedule.bind(this)} />
                 </HomeButtons>
               </HomeAboveSchedule>
               {this.renderYears()}

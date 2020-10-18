@@ -41,11 +41,6 @@ const SpinnerWrapper = styled.div`
   height: 700px;
 `;
 
-const DropDownWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-`;
-
 interface NameScreenProps {
   setFullName: (fullName: string) => void;
 }
@@ -61,8 +56,6 @@ interface GraduationYearScreenProps {
 interface MajorScreenProps {
   setMajor: (major?: Major) => void;
   setCoopCycle: (plan: Schedule) => void;
-  setPlanStr: (planStr?: string) => void;
-  setPlan: (plan: Schedule) => void;
   majors: Major[];
   plans: Record<string, Schedule[]>;
   isFetchingMajors: boolean;
@@ -143,7 +136,7 @@ class OnboardingScreenComponent extends React.Component<
 
   onChangeGradYear(e: any) {
     this.setState({
-      gradYear: Number(e.target.value),
+      gradYear: e.target.value == 2020 ? Number(e.target.value) : 2020,
       beenEditedGrad: true,
     });
   }
