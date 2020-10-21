@@ -19,15 +19,12 @@ import { convertToDNDCourses } from "../../utils/schedule-helpers";
 import { fetchCourse } from "../../api";
 import { Droppable } from "react-beautiful-dnd";
 import { SidebarClassBlock } from "./SidebarClassBlock";
-<<<<<<< HEAD
 import { FormatListNumberedRounded } from "@material-ui/icons";
-=======
 import { connect } from "react-redux";
 import { AppState } from "../../state/reducers/state";
 import { getCurrentClassCounterFromState } from "../../state";
 import { incrementCurrentClassCounter } from "../../state/actions/scheduleActions";
 import { Dispatch } from "redux";
->>>>>>> fix duplicate draggable id bug
 
 const SectionHeaderWrapper = styled.div`
   display: flex;
@@ -119,13 +116,9 @@ class RequirementSectionComponent extends React.Component<
   Props,
   RequirementSectionState
 > {
-<<<<<<< HEAD
   _isMounted: boolean;
 
-  constructor(props: RequirementSectionProps) {
-=======
   constructor(props: Props) {
->>>>>>> fix duplicate draggable id bug
     super(props);
 
     // TODO note that this is an antipattern introduced to solve
