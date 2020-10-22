@@ -53,6 +53,7 @@ interface ReduxStoreSignupScreenProps {
   graduationYear: number;
   major?: Major;
   planStr?: string;
+  catalogYear?: number;
 }
 
 interface ReduxDispatchSignupScreenProps {
@@ -145,6 +146,7 @@ class SignupScreenComponent extends React.Component<Props, SignupScreenState> {
         username: this.props.fullName,
         academic_year: this.props.academicYear,
         graduation_year: this.props.graduationYear,
+        catalog_year: this.props.catalogYear,
         major: this.props.major ? this.props.major.name : undefined,
         coop_cycle: this.props.planStr ? this.props.planStr : undefined,
       };
@@ -307,6 +309,7 @@ const mapStateToProps = (state: AppState) => ({
   graduationYear: state.user.graduationYear,
   major: state.user.major,
   planStr: state.user.planStr,
+  catalogYear: state.user.catalogYear,
 });
 
 /**
