@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import {
   Button,
@@ -9,24 +9,32 @@ import {
   Select,
   MenuItem,
 } from "@material-ui/core";
+import { DNDSchedule, NamedSchedule } from "../models/types";
 import { Autocomplete } from "@material-ui/lab";
 import { connect } from "react-redux";
 import { AppState } from "../state/reducers/state";
 import { Dispatch } from "redux";
 import { Major, Schedule } from "../../../common/types";
 import { findMajorFromName } from "../utils/plan-helpers";
+import { addPrereqsToSchedule } from "../../../common/prereq_loader";
 import Loader from "react-loader-spinner";
+import { convertToDNDSchedule, planToString } from "../utils";
 import {
   getMajors,
   getPlans,
   getMajorsLoadingFlag,
   getPlansLoadingFlag,
+  getSchedulesFromState,
 } from "../state";
-import { planToString } from "../utils";
+import { setDNDScheduleAction } from "../state/actions/scheduleActions";
 import { ExcelUpload } from "../components/ExcelUpload";
+import { NextButton } from "../components/common/NextButton";
 
 const EXCELTOOLTIP =
   "Auto-populate your schedule with your excel plan of study. Reach out to your advisor if you don't have it!";
+
+const COPY_PLAN_TOOLTIP =
+  "This will copy an existing plan. This will change your seleceted Major and Coop Cycle to match the exising plan";
 
 const SpinnerWrapper = styled.div`
   display: flex;
@@ -52,24 +60,12 @@ const InnerSection = styled.section`
   padding-bottom: 24px;
   min-width: 300px;
 `;
-const PlanPopperButton = styled(Button)<any>`
-  background: #e0e0e0;
-  font-weight: normal;
-  float: right;
-  margin: 10px;
-`;
 
-const PlanContainer = styled.div`
-  position: relative;
-  align-items: flex-end;
-  padding: 10px;
-  margin: 0px;
-`;
 const FieldContainer = styled.div`
   width: 70%;
   display: flex;
   flex-direction: column;
-  > * {
+  > div {
     margin-top: 10px;
   }
 `;
@@ -79,6 +75,8 @@ interface Props {
   allPlans: Record<string, Schedule[]>;
   isFetchingMajors: boolean;
   isFetchingPlans: boolean;
+  userSchedules: NamedSchedule[];
+  setDNDSchedule: (schedule: DNDSchedule) => void;
 }
 
 function prepareToClose(closeModal: (visible: boolean) => void) {
@@ -90,8 +88,10 @@ function openModal(openModal: (visible: boolean) => void) {
 }
 function renderPlanName(
   planName: string,
-  planNameChange: (planName: string) => void
+  planNameChange: (planName: string) => void,
+  scheduleNames: string[]
 ) {
+  const error = scheduleNames.includes(planName);
   return (
     <TextField
       id="outlined-basic"
@@ -100,6 +100,8 @@ function renderPlanName(
       value={planName}
       onChange={event => planNameChange(event.target.value)}
       placeholder="Plan 1"
+      error={error}
+      helperText={error && "Cannot have the same name as an existing plan"}
     />
   );
 }
@@ -152,13 +154,9 @@ function renderSelectOptions(
   setSelectOption: (selectState: string) => void
 ) {
   const setSelect = (e: any) => {
-    e.target.value != "kill me" && setSelectOption(e.target.value);
+    setSelectOption(e.target.value);
   };
-  const openExcel = (e: any) => {
-    e.preventDefault();
-    const doc = document.getElementById("upload");
-    doc && doc.click();
-  };
+
   return (
     <FormControl variant="outlined">
       <InputLabel id="demo-simple-select-outlined-label">
@@ -174,26 +172,71 @@ function renderSelectOptions(
       >
         <MenuItem value={"New Plan"}>New Plan</MenuItem>
         <MenuItem value={"Default Major Plan"}>Default Major Plan</MenuItem>
-        <MenuItem value={"Exisitng Plan"}>Exisitng Plan</MenuItem>
-        <MenuItem value={"kill me"} title={EXCELTOOLTIP} onClick={openExcel}>
+        <MenuItem value={"Exisitng Plan"} title={COPY_PLAN_TOOLTIP}>
+          Exisitng Plan
+        </MenuItem>
+        <MenuItem value={"Upload Plan Of Study"} title={EXCELTOOLTIP}>
           Upload Plan Of Study
         </MenuItem>
-        <ExcelUpload
-          setSchedule={() => {}}
-          setSelectOption={setSelectOption}
-        ></ExcelUpload>
       </Select>
     </FormControl>
   );
 }
 
+function renderSelectPlan(
+  selectedUserPlan: string,
+  setSelectedUserPlan: (userPlan: string) => void,
+  scheduleNames: string[]
+) {
+  return (
+    <Autocomplete
+      disableListWrap
+      options={scheduleNames}
+      renderInput={params => (
+        <TextField
+          {...params}
+          variant="outlined"
+          label="Select A Co-op Cycle"
+          fullWidth
+        />
+      )}
+      value={selectedUserPlan}
+      onChange={(e, value) => setSelectedUserPlan(value ? value : "")}
+    />
+  );
+}
+
 function AddPlanPopperComponent(props: Props) {
-  const { allMajors, allPlans, isFetchingMajors, isFetchingPlans } = props;
+  const {
+    allMajors,
+    allPlans,
+    isFetchingMajors,
+    isFetchingPlans,
+    setDNDSchedule,
+    userSchedules,
+  } = props;
   const [visible, setVisible] = useState(false);
   const [planName, setPlanName] = useState("");
-  const [major, setMajor] = useState<Major | undefined>(undefined);
-  const [coopCycle, setCoopCycle] = useState("");
-  const [planOption, setPlanOption] = useState("");
+  const [selectedMajor, setSelectedMajor] = useState<Major | undefined>(
+    undefined
+  );
+  const [selectedCoopCycle, setSelectedCoopCycle] = useState("");
+  const [selectedPlanOption, setSelectedPlanOption] = useState("");
+  const [selectedUserPlan, setSelectedUserPlan] = useState("");
+
+  const scheduleNames = userSchedules.map(schedule => schedule.name);
+
+  const setSchedule = async (schedule: Schedule) => {
+    let preReqSched = await addPrereqsToSchedule(schedule);
+    const [dndschedule, counter] = convertToDNDSchedule(preReqSched, 0);
+    setDNDSchedule(dndschedule);
+  };
+
+  useEffect(() => {
+    const selectedSchedule = userSchedules.find(
+      schedule => schedule.name === selectedUserPlan
+    );
+  }, [selectedUserPlan]);
 
   return isFetchingMajors || isFetchingPlans ? (
     <SpinnerWrapper>
@@ -217,16 +260,26 @@ function AddPlanPopperComponent(props: Props) {
         <InnerSection>
           <h1 id="simple-modal-title">Create a New Plan</h1>
           <FieldContainer>
-            {renderPlanName(planName, setPlanName)}
-            {renderMajorDropDown(allMajors, setMajor, major)}
-            {major &&
+            {renderPlanName(planName, setPlanName, scheduleNames)}
+            {renderMajorDropDown(allMajors, setSelectedMajor, selectedMajor)}
+            {selectedMajor &&
               renderCoopCycleDropDown(
-                allPlans[major.name],
-                setCoopCycle,
-                coopCycle
+                allPlans[selectedMajor.name],
+                setSelectedCoopCycle,
+                selectedCoopCycle
               )}
-            {renderSelectOptions(planOption, setPlanOption)}
+            {renderSelectOptions(selectedPlanOption, setSelectedPlanOption)}
+            {selectedPlanOption == "Upload Plan Of Study" ? (
+              <ExcelUpload setSchedule={setSchedule} />
+            ) : selectedPlanOption === "Exisitng Plan" ? (
+              renderSelectPlan(
+                selectedUserPlan,
+                setSelectedUserPlan,
+                scheduleNames
+              )
+            ) : null}
           </FieldContainer>
+          <NextButton text="Submit" onClick={() => {}} />
         </InnerSection>
       </Modal>
       <Button onClick={() => openModal(setVisible)}>+ Add Plan</Button>
@@ -239,9 +292,13 @@ const mapStateToProps = (state: AppState) => ({
   allPlans: getPlans(state),
   isFetchingMajors: getMajorsLoadingFlag(state),
   isFetchingPlans: getPlansLoadingFlag(state),
+  userSchedules: getSchedulesFromState(state),
 });
 
-const mapDispatchToProps = (dispatch: Dispatch) => ({});
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  setDNDSchedule: (schedule: DNDSchedule) =>
+    dispatch(setDNDScheduleAction(schedule)),
+});
 
 export const AddPlan = connect(
   mapStateToProps,
