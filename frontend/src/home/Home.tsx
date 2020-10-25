@@ -56,6 +56,7 @@ import {
   updateSemesterAction,
   setDNDScheduleAction,
   setClosedYearsToYearsInThePast,
+  incrementCurrentClassCounter,
 } from "../state/actions/scheduleActions";
 import {
   setLinkSharingAction,
@@ -249,6 +250,7 @@ interface ReduxDispatchHomeProps {
   updateActiveSchedule: (updatedSchedule: ScheduleSlice) => void;
   logOut: () => void;
   setClosedYearsToYearsInThePast: (academicYear: number) => void;
+  incrementCurrentClassCounter: () => void;
 }
 
 type Props = ToastHomeProps &
@@ -343,6 +345,7 @@ class HomeComponent extends React.Component<Props, HomeState> {
         draggableId,
         this.props.currentClassCounter
       );
+      this.props.incrementCurrentClassCounter();
     } else {
       moveCourse(
         this.props.schedule,
@@ -650,6 +653,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   logOut: () => dispatch(resetUserAction()),
   setClosedYearsToYearsInThePast: (academicYear: number) =>
     dispatch(setClosedYearsToYearsInThePast(academicYear)),
+  incrementCurrentClassCounter: () => dispatch(incrementCurrentClassCounter()),
 });
 
 export const Home = connect<
