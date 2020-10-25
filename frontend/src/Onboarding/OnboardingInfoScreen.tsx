@@ -55,7 +55,9 @@ interface GraduationYearScreenProps {
 
 interface MajorScreenProps {
   setMajor: (major?: Major) => void;
-  setCoopCycle: (plan: Schedule) => void;
+  setCoopCycle: (coopCycle: string, plan: Schedule) => void;
+  setPlanStr: (planStr?: string) => void;
+  setPlan: (plan: Schedule) => void;
   majors: Major[];
   plans: Record<string, Schedule[]>;
   isFetchingMajors: boolean;
@@ -166,7 +168,7 @@ class OnboardingScreenComponent extends React.Component<
         (p: Schedule) => planToString(p) === this.state.planStr
       );
 
-      this.props.setCoopCycle(plan!);
+      this.props.setCoopCycle(this.state.planStr, plan!);
     }
   }
 
@@ -311,6 +313,11 @@ class OnboardingScreenComponent extends React.Component<
   }
 
   render() {
+    // indicates if the user came from login button on welcome page
+    const { fromOnBoardingGuest } = (this.props.location.state as any) || {
+      fromOnBoardingGuest: false,
+    };
+
     const {
       gradYear,
       year,
@@ -347,7 +354,15 @@ class OnboardingScreenComponent extends React.Component<
 
           {textFieldStr.length !== 0 && !!year && !!gradYear ? (
             <Link
-              to={!!this.state.major ? "/completedCourses" : "/signup"}
+              //If guest user comes from login button on welcome page, go to home page, else go to signup page
+              to={{
+                pathname: !!this.state.major
+                  ? "/completedCourses"
+                  : fromOnBoardingGuest
+                  ? "/home"
+                  : "/signup",
+                state: { fromOnBoardingGuest: fromOnBoardingGuest },
+              }}
               onClick={this.onSubmit.bind(this)}
               style={{ textDecoration: "none" }}
             >
@@ -383,7 +398,8 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   setGraduationYear: (academicYear: number) =>
     dispatch(setGraduationYearAction(academicYear)),
   setMajor: (major?: Major) => dispatch(setDeclaredMajorAction(major)),
-  setCoopCycle: (plan: Schedule) => dispatch(setCoopCycle(plan)),
+  setCoopCycle: (coopCycle: string, plan: Schedule) =>
+    dispatch(setCoopCycle(coopCycle, plan)),
 });
 
 /**

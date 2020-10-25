@@ -3,7 +3,7 @@ import { DNDSchedule, IWarning, CourseWarning } from "../../models/types";
 import { mockEmptySchedule } from "../../data/mockData";
 import produce from "immer";
 import { getType } from "typesafe-actions";
-import { ScheduleAction, SchedulesAction } from "../actions";
+import { ScheduleAction, SchedulesAction, UserAction } from "../actions";
 import {
   addClassesAction,
   removeClassAction,
@@ -15,8 +15,11 @@ import {
   setCoopCycle,
   setCompletedCourses,
   setNamedSchedule,
+  setScheduleMajor,
   toggleYearExpanded,
   setClosedYearsToYearsInThePast,
+  setCurrentClassCounter,
+  incrementCurrentClassCounter,
 } from "../actions/scheduleActions";
 import { setSchedules } from "../actions/schedulesActions";
 import {
@@ -29,6 +32,7 @@ import {
   getNextTerm,
   isYearInPast,
 } from "../../utils";
+import { resetUserAction } from "../actions/userActions";
 
 export interface ScheduleState {
   past?: ScheduleStateSlice;
@@ -43,6 +47,8 @@ export interface ScheduleStateSlice {
   warnings: IWarning[];
   courseWarnings: CourseWarning[];
   creditsTaken: number;
+  major: string;
+  coopCycle: string;
   closedYears: Set<number>; // list of indexes for which years are not expanded in the UI
 }
 
@@ -55,13 +61,15 @@ const initialState: ScheduleState = {
     warnings: [],
     courseWarnings: [],
     creditsTaken: 0,
+    major: "",
+    coopCycle: "",
     closedYears: new Set(),
   },
 };
 
 export const scheduleReducer = (
   state: ScheduleState = initialState,
-  action: ScheduleAction | SchedulesAction
+  action: ScheduleAction | SchedulesAction | UserAction
 ) => {
   return produce(state, draft => {
     switch (action.type) {
@@ -158,7 +166,7 @@ export const scheduleReducer = (
         return draft;
       }
       case getType(setCoopCycle): {
-        const { schedule } = action.payload;
+        const { coopCycle, schedule } = action.payload;
         if (!schedule) {
           return draft;
         }
@@ -188,6 +196,18 @@ export const scheduleReducer = (
         // clear all warnings
         draft.present.warnings = [];
         draft.present.courseWarnings = [];
+
+        // set the coop cycle
+        draft.present.coopCycle = coopCycle;
+
+        return draft;
+      }
+      case getType(setScheduleMajor): {
+        const { major } = action.payload;
+        if (!major) {
+          return draft;
+        }
+        draft.present.major = major.name;
 
         return draft;
       }
@@ -249,14 +269,14 @@ export const scheduleReducer = (
         draft.present.courseWarnings = container.courseWarnings;
         return draft;
       }
-
       case getType(setNamedSchedule): {
         const namedSchedule = action.payload.namedSchedule.schedule.present;
         draft.present.warnings = namedSchedule.warnings;
         draft.present.courseWarnings = namedSchedule.courseWarnings;
         draft.present.currentClassCounter = namedSchedule.currentClassCounter;
         draft.present.schedule = namedSchedule.schedule;
-        draft.present.warnings = namedSchedule.warnings;
+        draft.present.major = namedSchedule.major;
+        draft.present.coopCycle = namedSchedule.coopCycle;
         return draft;
       }
       case getType(setSchedules): {
@@ -266,6 +286,10 @@ export const scheduleReducer = (
         draft.present.currentClassCounter = namedSchedule.currentClassCounter;
         draft.present.schedule = namedSchedule.schedule;
         draft.present.warnings = namedSchedule.warnings;
+        return draft;
+      }
+      case getType(resetUserAction): {
+        draft = initialState;
         return draft;
       }
       case getType(setClosedYearsToYearsInThePast): {
@@ -284,6 +308,14 @@ export const scheduleReducer = (
         } else {
           draft.present.closedYears.add(idx);
         }
+        return draft;
+      }
+      case getType(setCurrentClassCounter): {
+        draft.present.currentClassCounter = action.payload.currentClassCounter;
+        return draft;
+      }
+      case getType(incrementCurrentClassCounter): {
+        draft.present.currentClassCounter++;
         return draft;
       }
     }

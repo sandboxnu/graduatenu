@@ -67,7 +67,6 @@ interface ReduxStoreLoginScreenProps {
   setAcademicYear: (academicYear: number) => void;
   setGraduationYear: (graduationYear: number) => void;
   setMajorPlan: (major: Major | undefined, planStr: string) => void;
-  setCoopCycle: (plan: Schedule) => void;
   setUserCoopCycle: (coopCycle: string) => void;
   setToken: (token: string) => void;
   setUserId: (id: number) => void;
@@ -178,6 +177,8 @@ class LoginScreenComponent extends React.Component<Props, LoginScreenState> {
             currentClassCounter: plan.courseCounter,
             isScheduleLoading: false,
             scheduleError: "",
+            major: plan.major,
+            coopCycle: plan.coopCycle,
           } as ScheduleSlice,
         },
       }));
@@ -252,6 +253,10 @@ class LoginScreenComponent extends React.Component<Props, LoginScreenState> {
   }
 
   render() {
+    // indicates if the user came from login button on welcome page
+    const { fromOnBoarding } = (this.props.location.state as any) || {
+      fromOnBoarding: false,
+    };
     return (
       <Wrapper>
         <Title>Log In</Title>
@@ -268,11 +273,22 @@ class LoginScreenComponent extends React.Component<Props, LoginScreenState> {
 
         <Subtitle>
           New here? Sign up{" "}
-          <Link style={{ color: "#EB5757" }} to="/signup">
+          <Link
+            style={{ color: "#EB5757" }}
+            to={{
+              pathname: fromOnBoarding ? "/onboarding" : "/signup",
+            }}
+          >
             here
           </Link>{" "}
           or{" "}
-          <Link style={{ color: "#EB5757" }} to="/home">
+          <Link
+            style={{ color: "#EB5757" }}
+            to={{
+              pathname: fromOnBoarding ? "/onboarding" : "/home",
+              state: { fromOnBoardingGuest: fromOnBoarding },
+            }}
+          >
             continue as guest
           </Link>
         </Subtitle>
@@ -301,7 +317,6 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   setSchedules: (schedules: NamedSchedule[]) =>
     dispatch(setSchedules(schedules)),
   setMajor: (major?: Major) => dispatch(setDeclaredMajorAction(major)),
-  setCoopCycle: (plan: Schedule) => dispatch(setCoopCycle(plan)),
   setUserCoopCycle: (coopCycle: string) =>
     dispatch(setUserCoopCycleAction(coopCycle)),
   setEmail: (email: string) => dispatch(setEmailAction(email)),

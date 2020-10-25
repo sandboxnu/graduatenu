@@ -326,7 +326,12 @@ class SignupScreenComponent extends React.Component<Props, SignupScreenState> {
 
         <Subtitle>
           Already a member? Log in{" "}
-          <Link style={{ color: "#EB5757" }} to="/login">
+          <Link
+            style={{ color: "#EB5757" }}
+            to={{
+              pathname: "/login",
+            }}
+          >
             here
           </Link>{" "}
           or{" "}
