@@ -20,3 +20,8 @@ export const updateActiveSchedule = createAction(
   "schedules/UPDATE_ACTIVE_SCHEDULE",
   (updatedSchedule: ScheduleSlice) => ({ updatedSchedule })
 )();
+
+export const deletePlan = createAction(
+  "schedules/DELETE_PLAN",
+  (name: string) => ({ name })
+)();

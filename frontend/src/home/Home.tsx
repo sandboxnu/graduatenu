@@ -501,7 +501,7 @@ class HomeComponent extends React.Component<Props, HomeState> {
     if (this.props.token && this.props.userId) {
       const scheduleData: ScheduleSlice = this.props.getCurrentScheduleData();
       createPlanForUser(this.props.userId, this.props.token, {
-        name: `Schedule ${this.state.planCount + 1}`,
+        name: `Plan ${this.state.planCount + 1}`,
         link_sharing_enabled: this.props.linkSharing,
         schedule: this.props.schedule,
         major: this.props.major ? this.props.major : "",
@@ -596,7 +596,11 @@ class HomeComponent extends React.Component<Props, HomeState> {
                   </PlanContainer>
                   <ExcelUpload setSchedule={this.setSchedule.bind(this)} />
                   {this.props.token && this.props.userId && (
-                    <SwitchPlanPopper />
+                    <SwitchPlanPopper
+                      userId={this.props.userId}
+                      planIds={this.props.planIds}
+                      token={this.props.token}
+                    />
                   )}
                 </HomeButtons>
               </HomeAboveSchedule>

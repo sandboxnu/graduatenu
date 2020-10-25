@@ -10,11 +10,21 @@ import styled from "styled-components";
 import { connect } from "react-redux";
 import { AppState } from "../state/reducers/state";
 import { Dispatch } from "redux";
-import { getSchedulesFromState, getActiveScheduleFromState } from "../state";
-import { setActiveScheduleAction } from "../state/actions/schedulesActions";
+import {
+  getSchedulesFromState,
+  getActiveScheduleFromState,
+  getUserId,
+  getTokenFromState,
+  getPlanIdsFromState,
+} from "../state";
+import {
+  deletePlan,
+  setActiveScheduleAction,
+} from "../state/actions/schedulesActions";
 import { setNamedSchedule } from "../state/actions/scheduleActions";
 import { NamedSchedule } from "../models/types";
 import Loader from "react-loader-spinner";
+import { deletePlanForUser } from "../services/PlanService";
 
 const SwitchPlanDropdown = styled(Button)`
   display: flex;
@@ -64,6 +74,12 @@ const DropDownText = styled.div`
   overflow: hidden;
 `;
 
+interface SwitchSchedulesProps {
+  planIds: number[];
+  userId?: number;
+  token?: string;
+}
+
 interface ReduxStoreSwitchSchedulesProps {
   activeSchedule: NamedSchedule;
   schedules: NamedSchedule[];
@@ -72,9 +88,12 @@ interface ReduxStoreSwitchSchedulesProps {
 interface ReduxDispatchSwitchSchedulesProps {
   setActiveSchedule: (activeSchedule: number) => void;
   setNamedSchedule: (newSchedule: NamedSchedule) => void;
+  deletePlan: (name: string) => void;
 }
 
-type Props = ReduxStoreSwitchSchedulesProps & ReduxDispatchSwitchSchedulesProps;
+type Props = SwitchSchedulesProps &
+  ReduxStoreSwitchSchedulesProps &
+  ReduxDispatchSwitchSchedulesProps;
 
 interface SwitchSchedulePopperState {
   anchorEl: null | HTMLElement;
@@ -131,6 +150,14 @@ export class SwitchPlanPopperComponent extends React.Component<
     });
   }
 
+  handleDelete(planId: number, name: string) {
+    console.log(this.props.userId);
+    if (this.props.userId && this.props.token) {
+      deletePlanForUser(this.props.userId, planId, this.props.token);
+      this.props.deletePlan(name);
+    }
+  }
+
   render() {
     return this.props.activeSchedule ? (
       <div>
@@ -171,7 +198,12 @@ export class SwitchPlanPopperComponent extends React.Component<
                   <IconButton style={{ padding: "6px" }}>
                     <CreateIcon />
                   </IconButton>
-                  <IconButton style={{ padding: "6px" }}>
+                  <IconButton
+                    style={{ padding: "6px" }}
+                    onClick={() =>
+                      this.handleDelete(this.props.planIds[index], s.name)
+                    }
+                  >
                     <DeleteIcon />
                   </IconButton>
                 </ButtonContainer>
@@ -204,6 +236,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     dispatch(setActiveScheduleAction(activeSchedule)),
   setNamedSchedule: (newSchedule: NamedSchedule) =>
     dispatch(setNamedSchedule(newSchedule)),
+  deletePlan: (name: string) => dispatch(deletePlan(name)),
 });
 
 export const SwitchPlanPopper = connect<

@@ -8,6 +8,7 @@ import {
   updateActiveSchedule,
   addNewSchedule,
   setSchedules,
+  deletePlan,
 } from "../actions/schedulesActions";
 import { resetUserAction } from "../actions/userActions";
 
@@ -66,6 +67,13 @@ export const schedulesReducer = (
       }
       case getType(resetUserAction): {
         draft = initialState;
+        return draft;
+      }
+      case getType(deletePlan): {
+        const name = action.payload.name;
+        draft.schedules = draft.schedules.filter(
+          (schedule: NamedSchedule) => schedule.name !== name
+        );
         return draft;
       }
     }
