@@ -10,13 +10,21 @@ import {
   ICourseRange,
   IRequiredCourse,
   ISubjectRange,
+  ICreditRangeCourse,
 } from "../../../common/types";
-import { SectionType, CreditsRange, ScraperRequirement } from "../models/types";
+import {
+  SectionType,
+  CreditsRange,
+  ScraperRequirement,
+  SubSectionType,
+} from "../models/types";
 import {
   ORTagMap,
   RANGETagMap,
   RANGECourseSet,
   SubheaderTagSet,
+  IgnoreTags,
+  ANDSectionHeader,
 } from "./catalog_scraper";
 import {
   processHoursText,
@@ -36,7 +44,8 @@ import { parseRowAsRequirement, parseSubjectRangeRow } from "./row_scraper";
  */
 export function createRequirementGroup(
   $: CheerioStatic,
-  rows: CheerioElement[]
+  rows: CheerioElement[],
+  current_header: string
 ): IMajorRequirementGroup | undefined {
   //default section type set to AND.
   let sectionType: SectionType = SectionType.AND;
@@ -49,6 +58,7 @@ export function createRequirementGroup(
     let row: CheerioElement = rows[i];
     let currentRow: Cheerio = $(row);
     let commentSpan: Cheerio = currentRow.find("span.courselistcomment");
+    let classTD: Cheerio = currentRow.find("td.codecol");
     // a courselistcomment is present in this row
     if (commentSpan.length > 0) {
       // If it is a section where subheaders are parsed as seperate
@@ -56,8 +66,10 @@ export function createRequirementGroup(
       if (SubheaderTagSet.includes(commentSpan.text())) {
         subheader = true;
       }
-
-      if (ORTagMap.hasOwnProperty(commentSpan.text())) {
+      if (ANDSectionHeader.includes(commentSpan.text())) {
+        sectionType = SectionType.AND;
+        break;
+      } else if (ORTagMap.hasOwnProperty(commentSpan.text())) {
         //detected OR Tag; change section type to OR
         sectionType = SectionType.OR;
         if (currentRow.find("td.hourscol").text().length !== 0) {
@@ -72,6 +84,10 @@ export function createRequirementGroup(
           minCredits = cred;
           maxCredits = cred;
         }
+      } else if (
+        sectionType === SectionType.OR &&
+        currentRow.find("span.courselistcomment.commentindent").length > 0
+      ) {
         break;
       } else if (RANGETagMap.hasOwnProperty(commentSpan.text())) {
         //detected Range Tag; change section type to Range
@@ -83,7 +99,7 @@ export function createRequirementGroup(
           minCredits = credsRange.numCreditsMin;
           maxCredits = credsRange.numCreditsMax;
         } else {
-          let cred = ORTagMap[commentSpan.text()];
+          let cred = RANGETagMap[commentSpan.text()];
           minCredits = cred;
           maxCredits = cred;
         }
@@ -96,8 +112,7 @@ export function createRequirementGroup(
             .includes(item)
         )
       ) {
-        //detected a subject that has a boundless Range (no specified min or max course number) within the
-        //comment
+        //detected a subject that has a boundless Range (no specified min or max course number) within the comment
         sectionType = SectionType.RANGE;
         let credsRange: CreditsRange = processHoursText(
           currentRow.find("td.hourscol").text()
@@ -105,21 +120,40 @@ export function createRequirementGroup(
         minCredits = credsRange.numCreditsMin;
         maxCredits = credsRange.numCreditsMax;
         break;
+      } else if (IgnoreTags.includes(commentSpan.text())) {
+        return undefined;
       }
+    } else if (sectionType === SectionType.OR && classTD.length > 0) {
+      // If it's a class and the current row is a class, check if there's an indent (only classes with indents are OR Sections)
+      let div = classTD.find("div");
+      if (div.length == 0) {
+        sectionType = SectionType.AND;
+      }
+      break;
+    } else if (classTD.length > 0) {
+      break;
     }
   }
 
   // convert the sectionType to a number.
+  let returnVal = undefined;
   switch (+sectionType) {
     case SectionType.AND:
-      return processAndSection($, rows, subheader);
+      returnVal = processAndSection($, rows, subheader);
+      break;
     case SectionType.OR:
-      return processOrSection($, rows, minCredits, maxCredits, subheader);
+      returnVal = processOrSection($, rows, minCredits, maxCredits, subheader);
+      break;
     case SectionType.RANGE:
-      return processRangeSection($, rows, minCredits, maxCredits);
+      returnVal = processRangeSection($, rows, minCredits, maxCredits);
+      break;
     default:
-      return undefined;
+      break;
   }
+  if (returnVal && returnVal.name == "") {
+    returnVal.name = current_header;
+  }
+  return returnVal;
 }
 
 /**
@@ -175,24 +209,7 @@ function processAndSection(
       }
     }
   } else {
-    //can parse the rows as indivdual requirements
-    let containsOrRow: boolean = false;
-    let reqList: Requirement[] = [];
-    rows.forEach((row: CheerioElement) => {
-      let requirement: Requirement | undefined = parseRowAsRequirement($, row);
-
-      if (requirement && isRequirement(requirement)) {
-        if (isOrRow($, row)) {
-          let orVal = reqList.pop();
-          if (orVal) {
-            requirement = createIOrCourse(requirement, orVal);
-          }
-        }
-        reqList.push(requirement);
-      }
-    });
-
-    andSection.requirements = reqList;
+    andSection.requirements = createAndReqList($, rows);
   }
 
   if (andSection.requirements.length > 0) {
@@ -200,6 +217,118 @@ function processAndSection(
   } else {
     return undefined;
   }
+}
+
+function createAndReqList(
+  $: CheerioStatic,
+  rows: CheerioElement[]
+): Requirement[] {
+  let seperate_sections: Map<
+    CheerioElement[],
+    [SubSectionType, number]
+  > = splitRows($, rows);
+  let reqList: Requirement[] = [];
+  Array.from(seperate_sections.entries()).forEach(
+    ([sectionRows, [type, credits]]) => {
+      let requirements = [];
+      switch (+type) {
+        case SubSectionType.COURSES:
+          requirements = evaluateRows($, sectionRows);
+          reqList = reqList.concat(requirements);
+          break;
+        case SubSectionType.CREDIT:
+          requirements = evaluateRows($, sectionRows);
+          if (requirements.length !== 0) {
+            reqList.push({
+              type: "CREDITS",
+              minCredits: credits,
+              maxCredits: credits,
+              courses: requirements,
+            });
+          }
+          break;
+        case SubSectionType.RANGE:
+          let range = processCourseRange($, sectionRows, credits);
+          reqList.push(range);
+          break;
+        default:
+          break;
+      }
+    }
+  );
+  return reqList;
+}
+
+function evaluateRows($: CheerioStatic, rows: CheerioElement[]) {
+  let reqList: Requirement[] = [];
+  rows.forEach((row: CheerioElement) => {
+    let requirement: Requirement | undefined = parseRowAsRequirement($, row);
+
+    if (requirement && isRequirement(requirement)) {
+      if (isOrRow($, row)) {
+        let orVal = reqList.pop();
+        if (orVal) {
+          requirement = createIOrCourse(requirement, orVal);
+        }
+      }
+      reqList.push(requirement);
+    }
+  });
+  return reqList;
+}
+
+function splitRows(
+  $: CheerioStatic,
+  rows: CheerioElement[]
+): Map<CheerioElement[], [SubSectionType, number]> {
+  let split = new Map<CheerioElement[], [SubSectionType, number]>();
+  let sectionType = SubSectionType.COURSES;
+  let credits = 0;
+  let rowCollection: CheerioElement[] = [];
+  rows.forEach((row: CheerioElement) => {
+    let comment = $(row)
+      .find("span.courselistcomment")
+      .text();
+    if (comment.length > 0) {
+      if (ORTagMap.hasOwnProperty(comment)) {
+        if (rowCollection.length !== 0) {
+          split.set(rowCollection, [sectionType, credits]);
+          rowCollection = [];
+        }
+        credits = processHoursText(
+          $(row)
+            .find("td.hourscol")
+            .text(),
+          ORTagMap[comment]
+        ).numCreditsMin;
+        sectionType = SubSectionType.CREDIT;
+      } else if (RANGETagMap.hasOwnProperty(comment)) {
+        if (rowCollection.length !== 0) {
+          split.set(rowCollection, [sectionType, credits]);
+          rowCollection = [];
+        }
+        credits = processHoursText(
+          $(row)
+            .find("td.hourscol")
+            .text(),
+          RANGETagMap[comment]
+        ).numCreditsMin;
+        sectionType = SubSectionType.RANGE;
+      } else {
+        rowCollection.push(row);
+      }
+    } else {
+      if (
+        sectionType == SubSectionType.CREDIT &&
+        $(row).find("div.blockindent").length == 0
+      ) {
+        sectionType = SubSectionType.COURSES;
+      }
+      rowCollection.push(row);
+    }
+  });
+  split.set(rowCollection, [sectionType, credits]);
+  return split;
 }
 
 /**
@@ -262,10 +391,7 @@ function processOrSection(
     //can parse the rows as indivdual requirements
     let reqList: Requirement[] = [];
     rows.forEach((row: CheerioElement) => {
-      let requirement: ScraperRequirement | undefined = parseRowAsRequirement(
-        $,
-        row
-      );
+      let requirement: Requirement | undefined = parseRowAsRequirement($, row);
 
       if (requirement && isRequirement(requirement)) {
         if (isOrRow($, row)) {
@@ -298,11 +424,7 @@ function processRangeSection(
   minCredits: number,
   maxCredits: number
 ): RANGESection | undefined {
-  let courseRange: ICourseRange = {
-    type: "RANGE",
-    creditsRequired: minCredits,
-    ranges: [],
-  };
+  let courseRange: ICourseRange = processCourseRange($, rows, minCredits);
 
   let rangeSection: RANGESection = {
     type: "RANGE",
@@ -311,9 +433,23 @@ function processRangeSection(
     numCreditsMax: maxCredits,
     requirements: courseRange,
   };
-  //Note: Assuming that a range section probably does not have any subheaders. If there ends up being one,
-  //      adapt function to handle like parseAndSection.
+  if (courseRange.ranges.length > 0) {
+    return rangeSection;
+  } else {
+    return undefined;
+  }
+}
 
+function processCourseRange(
+  $: CheerioStatic,
+  rows: CheerioElement[],
+  minCredits: number
+) {
+  let courseRange: ICourseRange = {
+    type: "RANGE",
+    creditsRequired: minCredits,
+    ranges: [],
+  };
   //loop through the rows and add them as a requirement to andCourse.courses
   for (let i = 0; i < rows.length; i++) {
     let row: CheerioElement = rows[i];
@@ -321,10 +457,5 @@ function processRangeSection(
     let requirements: Array<ISubjectRange> = parseSubjectRangeRow($, row);
     courseRange.ranges = courseRange.ranges.concat(requirements);
   }
-
-  if (courseRange.ranges.length > 0) {
-    return rangeSection;
-  } else {
-    return undefined;
-  }
+  return courseRange;
 }

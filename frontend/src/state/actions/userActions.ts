@@ -91,3 +91,5 @@ export const setUserCoopCycleAction = createAction(
     coopCycle,
   })
 )();
+
+export const resetUserAction = createAction("user/RESET_USER", () => void 0)();

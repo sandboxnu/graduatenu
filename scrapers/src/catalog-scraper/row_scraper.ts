@@ -5,9 +5,10 @@ import {
   IOrCourse,
   ISubjectRange,
   Requirement,
+  ICourseRange,
 } from "../../../common/types";
 import { createRequiredCourse, isRequirement } from "../utils/scraper_utils";
-import { RANGECourseSet } from "./catalog_scraper";
+import { RANGECourseSet, ValidSubjects } from "./catalog_scraper";
 
 /**
  * A function that given a row, converts it into a Requirement type.
@@ -19,7 +20,12 @@ export function parseRowAsRequirement(
   row: CheerioElement
 ): Requirement | undefined {
   let currentRow: Cheerio = $(row);
-  if (currentRow.find("a").length === 0) {
+  let rangeSpan = currentRow.find("span.courselistcomment.commentindent");
+  if (
+    currentRow.find("a").length === 0 &&
+    currentRow.find("td.codecol").length === 0 &&
+    rangeSpan.length === 0
+  ) {
     // the row doesn't have any course information to be parsed in most cases.
     // expections exist, for eg: some biochemistry courses appear as a comment.
     // todo: handle the expections.
@@ -28,8 +34,6 @@ export function parseRowAsRequirement(
   //default to assume that row is a base case Required Course
   let rowType: RowType = RowType.RequiredCourseRow;
   let codeColSpan = currentRow.find("td.codecol span");
-  let rangeSpan = currentRow.find("span.courselistcomment");
-
   if (codeColSpan.length !== 0) {
     if (codeColSpan.text().includes("and")) {
       rowType = RowType.AndRow;
@@ -49,6 +53,16 @@ export function parseRowAsRequirement(
       return parseOrRow($, row);
     case RowType.RequiredCourseRow:
       return parseRequiredRow($, row);
+    case RowType.SubjectRangeRow:
+      let subjectRanges = parseSubjectRangeRow($, row);
+      if (subjectRanges.length !== 0) {
+        return {
+          type: "RANGE",
+          creditsRequired: 4,
+          ranges: subjectRanges,
+        } as ICourseRange;
+      }
+      return undefined;
     default:
       return undefined;
   }
@@ -121,7 +135,13 @@ function parseOrRow(
   }
 }
 
-function parseAsFullRange(
+/**
+ * Parses a comment section as a full range (0 - 9999) based on the subject(s) mentioned in the
+ * comment
+ * @param $
+ * @param row
+ */
+function parseAsCommentRange(
   $: CheerioStatic,
   row: CheerioElement
 ): Array<ISubjectRange> {
@@ -134,9 +154,15 @@ function parseAsFullRange(
   let possibleKeys: Array<string> = anchors
     .text()
     .split(String.fromCharCode(32));
-  RANGECourseSet.filter(value => possibleKeys.includes(value)).forEach(
+  let splitPossibleKeys: string[] = [];
+  possibleKeys.forEach(element => {
+    splitPossibleKeys = splitPossibleKeys.concat(
+      element.split(String.fromCharCode(44))
+    );
+  });
+  // Assumes all comment ranges have full range tags
+  RANGECourseSet.filter(value => splitPossibleKeys.includes(value)).forEach(
     (subject: string) => {
-      //Potentially add a check to ensure that the subject keywords are followed by "course" or "elective", but unsure
       let courseRange: ISubjectRange = {
         subject: subject,
         idRangeStart: 0,
@@ -145,6 +171,17 @@ function parseAsFullRange(
       ranges.push(courseRange);
     }
   );
+  // Edge cases where a comment has weird formatting for a non-ful range tag
+  if (
+    ranges.length === 1 &&
+    possibleKeys.includes("or") &&
+    possibleKeys.includes("above.")
+  ) {
+    ranges[0].idRangeStart = parseInt(
+      possibleKeys[possibleKeys.lastIndexOf("above.") - 2]
+    );
+  }
+
   return ranges;
 }
 
@@ -158,10 +195,15 @@ export function parseSubjectRangeRow(
   row: CheerioElement
 ): Array<ISubjectRange> {
   let currentRow: Cheerio = $(row);
-  let anchors: Cheerio = currentRow.find(".courselistcomment.commentindent");
-
-  if (anchors.length == 0) {
-    return parseAsFullRange($, row);
+  let anchors: Cheerio = currentRow.find(".courselistcomment");
+  // If the anchor isn't indented as a comment or contains "course" or "elevtive" it could be a full range
+  if (
+    anchors.length === 0 ||
+    ((anchors.text().includes("course") ||
+      anchors.text().includes("elective")) &&
+      !anchors.text().includes("to"))
+  ) {
+    return parseAsCommentRange($, row);
   }
 
   //the length should be === 2.
@@ -176,7 +218,6 @@ export function parseSubjectRangeRow(
       element.split(String.fromCharCode(32))
     );
   });
-
   //first item in the array is the subject
   let subject: string = splitLowerAnchor[0];
 
@@ -185,21 +226,27 @@ export function parseSubjectRangeRow(
 
   //default to 9999, if upper bound does not exist.
   let idRangeEnd: number = 9999;
-  if (
-    !splitLowerAnchor.includes("higher") &&
-    !splitLowerAnchor.includes("or")
-  ) {
-    // upper bound exists, get range end.
-    //let upperAnchor: Cheerio = $(anchorsArray[1]);
-    idRangeEnd = parseInt(splitLowerAnchor[4]);
+
+  // TODO: In the future, possibly loop through each "to" if there are multiple ranges in
+  // a single header
+  if (splitLowerAnchor.includes("to")) {
+    // find the location of "to" if it's included, because that word should be the midpoint of
+    // the course start and end
+    let index = splitLowerAnchor.indexOf("to");
+    subject = splitLowerAnchor[index - 2];
+    idRangeStart = parseInt(splitLowerAnchor[index - 1]);
+    idRangeEnd = parseInt(splitLowerAnchor[index + 2]);
   }
   let courseRange: ISubjectRange = {
     subject: subject,
     idRangeStart: idRangeStart,
     idRangeEnd: idRangeEnd,
   };
-
-  return [courseRange];
+  if (ValidSubjects.includes(courseRange.subject)) {
+    return [courseRange];
+  } else {
+    return [];
+  }
 }
 
 /**
@@ -210,13 +257,20 @@ export function parseSubjectRangeRow(
 function parseRequiredRow(
   $: CheerioStatic,
   row: CheerioElement
-): IRequiredCourse {
+): IRequiredCourse | undefined {
   let currentRow: Cheerio = $(row);
   let anchors: Cheerio = currentRow.find("td.codecol a");
   let anchorsArray: CheerioElement[] = anchors.toArray();
 
   //the length should be === 1.
   let loadedAnchor: Cheerio = $(anchorsArray[0]);
+  if (loadedAnchor.length === 0) {
+    anchorsArray = currentRow.find("td.codecol").toArray();
+    loadedAnchor = $(anchorsArray[0]);
+    if (loadedAnchor.length === 0) {
+      return undefined;
+    }
+  }
 
   // split the text by spaces and also char(160) if it is present
   let splitByChar: string[] = loadedAnchor

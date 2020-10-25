@@ -7,7 +7,6 @@ import {
   DNDScheduleYear,
   DNDScheduleTerm,
   IPlanData,
-  NamedSchedule,
   ScheduleSlice,
 } from "../models/types";
 import { Schedule, Major, Status, SeasonWord } from "../../../common/types";
@@ -25,14 +24,12 @@ import {
 import { Sidebar } from "../components/Sidebar";
 import { withToast } from "./toastHook";
 import { AppearanceTypes } from "react-toast-notifications";
-import { withRouter, RouteComponentProps } from "react-router-dom";
+import { withRouter, RouteComponentProps, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { AppState } from "../state/reducers/state";
 import { Dispatch } from "redux";
 import {
   getScheduleFromState,
-  getPlanStrFromState,
-  getDeclaredMajorFromState,
   getWarningsFromState,
   getTokenFromState,
   getUserId,
@@ -40,10 +37,18 @@ import {
   getPlanIdsFromState,
   getLinkSharingFromState,
   getScheduleDataFromState,
+  isUserLoggedIn,
+  getScheduleCoopCycleFromState,
+  getScheduleMajorFromState,
+  getAcademicYearFromState,
+  getClosedYearsFromState,
+  getCurrentClassCounterFromState,
 } from "../state";
 import {
   updateSemesterAction,
   setDNDScheduleAction,
+  setClosedYearsToYearsInThePast,
+  incrementCurrentClassCounter,
 } from "../state/actions/scheduleActions";
 import {
   setLinkSharingAction,
@@ -55,7 +60,7 @@ import {
   updateActiveSchedule,
   addNewSchedule,
 } from "../state/actions/schedulesActions";
-import { getMajors, getPlans } from "../state";
+import { getMajors } from "../state";
 import { EditPlanPopper } from "./EditPlanPopper";
 import {
   createPlanForUser,
@@ -63,10 +68,11 @@ import {
   updatePlanForUser,
 } from "../services/PlanService";
 import { findMajorFromName } from "../utils/plan-helpers";
-import { Button } from "@material-ui/core";
+import { Button, Theme, withStyles } from "@material-ui/core";
 import Loader from "react-loader-spinner";
 import { ExcelUpload } from "../components/ExcelUpload";
 import { SwitchPlanPopper } from "./SwitchPlanPopper";
+import { resetUserAction } from "../state/actions/userActions";
 
 const OuterContainer = styled.div`
   display: flex;
@@ -173,6 +179,21 @@ const PlanContainer = styled.div`
   margin: 0px;
 `;
 
+const LoginLogoutLink = styled(Link)`
+  align-self: center;
+  margin-right: 8px !important;
+`;
+
+const ColorButton = withStyles((theme: Theme) => ({
+  root: {
+    color: "#ffffff",
+    backgroundColor: "#EB5757",
+    "&:hover": {
+      backgroundColor: "#DB4747",
+    },
+  },
+}))(Button);
+
 interface ToastHomeProps {
   addToast: (message: string, options: any) => void;
   removeToast: (id: string) => void;
@@ -185,7 +206,7 @@ interface ToastHomeProps {
 
 interface ReduxStoreHomeProps {
   schedule: DNDSchedule;
-  major?: Major;
+  major?: string;
   planStr?: string;
   warnings: IWarning[];
   token?: string;
@@ -195,6 +216,10 @@ interface ReduxStoreHomeProps {
   planName: string | undefined;
   linkSharing: boolean;
   getCurrentScheduleData: () => ScheduleSlice;
+  isLoggedIn: boolean;
+  academicYear: number;
+  closedYears: Set<number>; // list of indexes of closed years
+  currentClassCounter: number;
 }
 
 interface ReduxDispatchHomeProps {
@@ -210,6 +235,9 @@ interface ReduxDispatchHomeProps {
   setPlanIds: (planIds: number[]) => void;
   addNewSchedule: (name: string, newSchedule: ScheduleSlice) => void;
   updateActiveSchedule: (updatedSchedule: ScheduleSlice) => void;
+  logOut: () => void;
+  setClosedYearsToYearsInThePast: (academicYear: number) => void;
+  incrementCurrentClassCounter: () => void;
 }
 
 type Props = ToastHomeProps &
@@ -225,6 +253,8 @@ interface HomeState {
 class HomeComponent extends React.Component<Props, HomeState> {
   constructor(props: Props) {
     super(props);
+    props.setClosedYearsToYearsInThePast(props.academicYear);
+
     this.state = {
       fetchedPlan: false,
       planCount: 1,
@@ -267,16 +297,21 @@ class HomeComponent extends React.Component<Props, HomeState> {
     // remove existing toasts
     this.props.toastStack.forEach(t => this.props.removeToast(t.id));
 
-    let numWarnings: number = 0;
+    let numVisibleWarnings: number = 0;
     this.props.warnings.forEach(w => {
       //ensuring we only propogate 5 toasts at a time
-      numWarnings++;
-      if (numWarnings <= 5) {
-        // add new toasts
-        this.props.addToast(w.message, {
-          appearance: "warning",
-          autoDismiss: true,
-        });
+      const yearIdx = this.props.schedule.years.indexOf(
+        convertTermIdToYear(w.termId)
+      );
+      if (!this.props.closedYears.has(yearIdx)) {
+        numVisibleWarnings++;
+        if (numVisibleWarnings <= 5) {
+          // add new toasts
+          this.props.addToast(w.message, {
+            appearance: "warning",
+            autoDismiss: true,
+          });
+        }
       }
     });
   }
@@ -291,8 +326,10 @@ class HomeComponent extends React.Component<Props, HomeState> {
         destination,
         source,
         this.props.setDNDSchedule,
-        draggableId
+        draggableId,
+        this.props.currentClassCounter
       );
+      this.props.incrementCurrentClassCounter();
     } else {
       moveCourse(
         this.props.schedule,
@@ -420,11 +457,11 @@ class HomeComponent extends React.Component<Props, HomeState> {
    * Only supports updating a user's singular plan, can be modified later to
    * update a specific plan.
    */
-  updatePlan() {
+  async updatePlan() {
     // If this is true, then a user is currently logged in and we can update their plan
     if (this.props.token && this.props.userId) {
       const scheduleData: ScheduleSlice = this.props.getCurrentScheduleData();
-      updatePlanForUser(
+      const plan = await updatePlanForUser(
         this.props.userId,
         this.props.token,
         this.props.planIds[0],
@@ -433,7 +470,7 @@ class HomeComponent extends React.Component<Props, HomeState> {
           name: this.props.planName ? this.props.planName : "",
           link_sharing_enabled: this.props.linkSharing,
           schedule: this.props.schedule,
-          major: this.props.major ? this.props.major.name : "",
+          major: this.props.major ? this.props.major : "",
           planString: this.props.planStr ? this.props.planStr : "None",
           course_counter: scheduleData.currentClassCounter,
           warnings: scheduleData.warnings,
@@ -442,6 +479,7 @@ class HomeComponent extends React.Component<Props, HomeState> {
       ).then(plan => {
         this.props.updateActiveSchedule({
           ...plan.plan,
+          coopCycle: plan.plan.planString,
           currentClassCounter: plan.plan.courseCounter,
           isScheduleLoading: false,
           scheduleError: "",
@@ -466,14 +504,15 @@ class HomeComponent extends React.Component<Props, HomeState> {
         name: `Schedule ${this.state.planCount + 1}`,
         link_sharing_enabled: this.props.linkSharing,
         schedule: this.props.schedule,
-        major: this.props.major ? this.props.major.name : "",
-        planString: this.props.planStr ? this.props.planStr : "None",
+        major: this.props.major ? this.props.major : "",
+        planString: this.props.planStr ? this.props.planStr : "",
         course_counter: scheduleData.currentClassCounter,
         warnings: scheduleData.warnings,
         course_warnings: scheduleData.courseWarnings,
       }).then(plan => {
         this.props.addNewSchedule(plan.plan.name, {
           ...plan.plan,
+          coopCycle: plan.plan.planString,
           currentClassCounter: plan.plan.courseCounter,
           isScheduleLoading: false,
           scheduleError: "",
@@ -492,6 +531,12 @@ class HomeComponent extends React.Component<Props, HomeState> {
     this.props.setDNDSchedule(dndschedule);
   }
 
+  async logOut() {
+    await this.updatePlan();
+    this.props.logOut();
+    this.props.history.push("/");
+  }
+
   render() {
     return (
       <OuterContainer>
@@ -504,11 +549,27 @@ class HomeComponent extends React.Component<Props, HomeState> {
               <HomeTop>
                 <HomeText href="#">GraduateNU</HomeText>
                 <HomePlan>
-                  <MajorText>
-                    {!!this.props.major ? this.props.major.name + ": " : ""}
-                  </MajorText>
+                  <MajorText>{this.props.major}</MajorText>
                   <PlanText>{this.props.planStr || "None"}</PlanText>
                   <EditPlanPopper />
+                  {!this.props.isLoggedIn ? (
+                    <LoginLogoutLink
+                      to={{
+                        pathname: "/signup",
+                        state: { userData: {}, fromOnBoarding: false },
+                      }}
+                      style={{ textDecoration: "none" }}
+                    >
+                      <ColorButton variant="contained">Signup</ColorButton>
+                    </LoginLogoutLink>
+                  ) : (
+                    <ColorButton
+                      variant="contained"
+                      onClick={this.logOut.bind(this)}
+                    >
+                      Logout
+                    </ColorButton>
+                  )}
                 </HomePlan>
               </HomeTop>
               <HomeAboveSchedule>
@@ -553,8 +614,8 @@ class HomeComponent extends React.Component<Props, HomeState> {
 
 const mapStateToProps = (state: AppState) => ({
   schedule: getScheduleFromState(state),
-  planStr: getPlanStrFromState(state),
-  major: getDeclaredMajorFromState(state),
+  planStr: getScheduleCoopCycleFromState(state),
+  major: getScheduleMajorFromState(state),
   warnings: getWarningsFromState(state),
   token: getTokenFromState(state),
   userId: getUserId(state),
@@ -563,6 +624,10 @@ const mapStateToProps = (state: AppState) => ({
   planIds: getPlanIdsFromState(state),
   linkSharing: getLinkSharingFromState(state),
   getCurrentScheduleData: () => getScheduleDataFromState(state),
+  isLoggedIn: isUserLoggedIn(state),
+  academicYear: getAcademicYearFromState(state),
+  closedYears: getClosedYearsFromState(state),
+  currentClassCounter: getCurrentClassCounterFromState(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
@@ -583,6 +648,10 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     dispatch(addNewSchedule(name, newSchedule)),
   updateActiveSchedule: (updatedSchedule: ScheduleSlice) =>
     dispatch(updateActiveSchedule(updatedSchedule)),
+  logOut: () => dispatch(resetUserAction()),
+  setClosedYearsToYearsInThePast: (academicYear: number) =>
+    dispatch(setClosedYearsToYearsInThePast(academicYear)),
+  incrementCurrentClassCounter: () => dispatch(incrementCurrentClassCounter()),
 });
 
 export const Home = connect<

@@ -1,6 +1,6 @@
 import React from "react";
 import { DNDSchedule } from "../../models/types";
-import { Major, IRequiredCourse } from "../../../../common/types";
+import { Major } from "../../../../common/types";
 import styled from "styled-components";
 import { RequirementSection } from ".";
 import {
@@ -8,8 +8,13 @@ import {
   getCompletedCourseStrings,
 } from "../../utils";
 import { AppState } from "../../state/reducers/state";
-import { getScheduleFromState, getDeclaredMajorFromState } from "../../state";
-import { connect } from "react-redux";
+import {
+  getScheduleFromState,
+  getScheduleDataFromState,
+  getScheduleMajorFromState,
+} from "../../state";
+import { connect, useSelector } from "react-redux";
+import { findMajorFromName } from "../../utils/plan-helpers";
 
 const Container = styled.div`
   display: flex;
@@ -27,20 +32,28 @@ const MajorTitle = styled.p`
   margin-bottom: 12px;
 `;
 
-interface Props {
+interface SidebarProps {
   schedule: DNDSchedule;
-  major?: Major;
+  major: string;
 }
 
-const SidebarComponent: React.FC<Props> = ({ schedule, major }) => {
-  if (!major) {
-    return (
-      <Container>
-        <MajorTitle>No major selected</MajorTitle>
-      </Container>
-    );
-  }
+interface MajorSidebarProps {
+  schedule: DNDSchedule;
+  major: Major;
+}
 
+const NoMajorSidebarComponent: React.FC = () => {
+  return (
+    <Container>
+      <MajorTitle>No major selected</MajorTitle>
+    </Container>
+  );
+};
+
+const MajorSidebarComponent: React.FC<MajorSidebarProps> = ({
+  schedule,
+  major,
+}) => {
   const warnings = produceRequirementGroupWarning(schedule, major);
   const completedCourses: string[] = getCompletedCourseStrings(schedule);
 
@@ -50,7 +63,8 @@ const SidebarComponent: React.FC<Props> = ({ schedule, major }) => {
       {major.requirementGroups.map((req, index) => {
         return (
           <RequirementSection
-            title={req}
+            title={!!req ? req : "Additional Requirements"}
+            // TODO: this is a temporary solution for major scraper bug
             contents={major.requirementGroupMap[req]}
             warning={warnings.find(w => w.requirementGroup === req)}
             key={index + major.name}
@@ -62,9 +76,21 @@ const SidebarComponent: React.FC<Props> = ({ schedule, major }) => {
   );
 };
 
+const SidebarComponent: React.FC<SidebarProps> = ({ schedule, major }) => {
+  const majorObj: Major | undefined = useSelector<AppState, Major | undefined>(
+    state => findMajorFromName(major, state.majorState.majors)
+  );
+
+  return majorObj ? (
+    <MajorSidebarComponent schedule={schedule} major={majorObj} />
+  ) : (
+    <NoMajorSidebarComponent />
+  );
+};
+
 const mapStateToProps = (state: AppState) => ({
   schedule: getScheduleFromState(state),
-  major: getDeclaredMajorFromState(state),
+  major: getScheduleMajorFromState(state),
 });
 
 export const Sidebar = connect(mapStateToProps)(SidebarComponent);

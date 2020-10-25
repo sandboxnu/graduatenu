@@ -3,10 +3,17 @@ import {
   Major,
   IMajorRequirementGroup,
   Concentrations,
+  Concentration,
 } from "../../../common/types";
 import { createRequirementGroup } from "./reqGroup_scraper";
 
 const rp = require("request-promise");
+
+export const ANDSectionHeader: string[] = [
+  "Intermediate and Advanced Biology Electives",
+  "History Electives",
+  // "Sociology Electives",
+];
 
 export const SubheaderTagSet: Array<string> = [
   "Complete two courses for one of the following science categories:",
@@ -15,7 +22,9 @@ export const SubheaderTagSet: Array<string> = [
 
 // Dictionary for ORSection keywords, maps from keyword/phrase -> number of credits
 export const ORTagMap: { [key: string]: number } = {
+  "Choose one of the following:": 4,
   "Complete one of the following:": 4,
+  "Complete one of the following: ": 4,
   "Then complete one of the following:": 4,
   "Complete one of the following sequences:": 10,
   "Complete two of the following:": 8,
@@ -33,13 +42,27 @@ export const ORTagMap: { [key: string]: number } = {
 
   "Complete one course from one of the following groups:": 4,
   "Take two courses, at least one of which is at the 4000 or 5000 level, from the following:": 8,
+  "Complete one of the following courses not already taken:": 4,
+  "Complete two of the following courses not already taken:": 8,
+  "Complete two courses from the following:": 8,
+  "Complete two biology courses (with corequisite labs if offered). Choose one of these two courses from the following list:": 8,
+  "Complete one introductory course from the following:": 4,
+  "Complete one capstone experience from the following:": 4,
+  "Complete three courses from the following:": 12,
+  "Complete either one computer science capstone or the physics capstone:": 4,
+  "Complete one of the following lecture/lab pairs. PHYS 1145/PHYS 1146 is recommended:": 4,
   // TODO: Data-Science-Related Electives: "Complete six courses from categories A and B, at least three of which must be from B"
 };
+
+export const IgnoreTags: string[] = [
+  "Note: The following courses do not count toward this concentration:",
+];
 
 // Dictionary for RANGESection keywords, maps from keyword/phrase -> number of credits
 export const RANGETagMap: { [key: string]: number } = {
   "Complete 4 credits of CS, IS, or DS classes that are not already required. Choose courses within the following ranges:": 4,
   "Complete 4 credits of CS, IS, or DS courses that are not already required. Choose courses within the following range:": 4,
+  "Complete four credits of CS, IS, or DS classes that are not already required. Choose courses within the following ranges:": 4,
   "Complete 8 credits of CS, IS or DS classes that are not already required. Choose courses within the following ranges:": 8,
   "Complete 8 credits of CS, IS or, DS classes that are not already required. Choose courses within the following ranges:": 8,
   "Complete 8 credits of CS, IS, or DS classes that are not already required. Choose courses within the following ranges:": 8,
@@ -59,6 +82,27 @@ export const RANGETagMap: { [key: string]: number } = {
   "Complete three courses in the following range:": 12,
 
   "Complete four ECON electives with at least two numbered at ECON 3000 or above.": 16,
+
+  "Choose the second elective from the following list:": 4,
+  "Complete three intermediate/advanced-level courses:": 12,
+  "Complete one advanced-level course:": 4,
+  // "Complete one sociology elective in each of the following ranges:": 4,
+
+  "Complete four credits of CS, CY, DS, or IS classes that are not already required. Choose courses within the following ranges:": 4,
+  "Complete 4 credits of CS, CY, DS, or IS classes that are not already required. Choose courses within the following ranges:": 4,
+  "Complete 4 credits of CS, CY, DS, or IS courses that are not already required. Choose courses within the following range:": 4,
+  "Complete 8 credits of CS, CY, DS, or IS classes that are not already required. Choose courses within the following ranges:": 8,
+  "Complete 8 credits of CS, CY, DS or IS classes that are not already required. Choose courses within the following ranges:": 8,
+  "Complete 8 credits of upper-division CS, CY, DS, or IS classes that are not already required. Choose courses within the following ranges:": 8,
+  "Complete eight credits of CS, CY, DS, or IS classes that are not already required. Choose courses within the following ranges:": 8,
+  "Complete twelve credits of CS, CY, DS, or IS classes that are not already required. Choose courses within the following ranges:": 12,
+  "Complete 12 credits of CS, CY, DS, or IS classes that are not already required. Choose courses within the following ranges:": 12,
+  "Complete 12 credits of upper-division CS, CY, DS, or IS courses that are not already required. Choose courses within the following ranges:": 12,
+  "Complete 12 credits of upper-division CS, CY, DS, or IS classes that are not already required. Choose courses within the following ranges:": 12,
+  "Comment: Complete 12 credits of CS, CY, DS, or IS classes that are not already required. Choose courses within the following ranges:": 12,
+  "Complete 16 credits of upper-division CS, CY, DS, or IS courses that are not already required. Choose courses within the following ranges:": 16,
+  "Complete one course from the following": 4,
+  "Complete four credits from the following list, not taken to fulfill previous requirements:": 4,
 };
 
 // Set for RANGESections that only indicate the major in which they are allowed to take electives
@@ -74,6 +118,39 @@ export const RANGECourseSet: Array<string> = [
   "ARTS",
   "JRNL",
   "PHIL",
+  "HIST",
+];
+
+export const ValidSubjects: string[] = [
+  "COMM",
+  "POLS",
+  "ECON",
+  "HSCI",
+  "PHTH",
+  "CS",
+  "IS",
+  "DS",
+  "CY",
+  "MATH",
+  "PHIL",
+  "GAME",
+  "CRIM",
+  "EECE",
+  "ENGL",
+  "ARTD",
+  "ARTE",
+  "ARTF",
+  "ARTG",
+  "ARTH",
+  "ARTS",
+  "JRNL",
+  "PHIL",
+  "SOCL",
+  "BIOL",
+  "CHEM",
+  "EEMB",
+  "ENVR",
+  "PHYS",
 ];
 
 /**
@@ -111,9 +188,11 @@ function scrapeMajorDataFromCatalog($: CheerioStatic): Promise<Major> {
       .text()
       .split(" ")[0];
     let yearVersion: number = parseInt(catalogYear.split("-")[0]);
+    let resultArray = createRequirementGroupMap($);
     let requirementGroupMap: {
       [key: string]: IMajorRequirementGroup;
-    } = createRequirementGroupMap($);
+    } = resultArray[0];
+    let concentrationOptions = resultArray[1];
     let requirementGroups: string[] = Object.keys(requirementGroupMap);
     let major: Major = {
       name: name,
@@ -123,58 +202,120 @@ function scrapeMajorDataFromCatalog($: CheerioStatic): Promise<Major> {
       isLanguageRequired: false,
       nupaths: [],
       totalCreditsRequired: 0,
-      // concentrations: {
-      //   minOptions: 0,
-      //   maxOptions: 0,
-      //   requirementGroupMap: [],
-      // },
+      concentrations: {
+        minOptions: concentrationOptions.length > 0 ? 1 : 0,
+        maxOptions: concentrationOptions.length > 0 ? 1 : 0,
+        concentrationOptions: concentrationOptions,
+      },
     };
     resolve(major);
   });
 }
 
 /**
- * A function that creates the Requirment group map for a Major.
+ * A function that creates the Requirment group map and concentrations for a Major.
  * @param $ the Cheeriostatic selector function used to query the DOM.
  */
 function createRequirementGroupMap(
   $: CheerioStatic
-): { [key: string]: IMajorRequirementGroup } {
+): [{ [key: string]: IMajorRequirementGroup }, Concentration[]] {
   let requirementGroupMap: { [key: string]: IMajorRequirementGroup } = {};
-  $("#programrequirementstextcontainer table.sc_courselist").each(
-    (index: number, table: CheerioElement) => {
-      let rows: CheerioElement[] = [];
-      $(table)
-        .find("tr")
-        .each((index: number, tableRow: CheerioElement) => {
-          let currentRow: Cheerio = $(tableRow);
-          if (
-            currentRow.find("span.areaheader").length !== 0 &&
-            rows.length > 0
-          ) {
-            let requirementGroup:
-              | IMajorRequirementGroup
-              | undefined = createRequirementGroup($, rows);
-            rows = [tableRow];
-            if (requirementGroup) {
-              requirementGroupMap[requirementGroup.name] = requirementGroup;
-            }
-          } else {
-            rows.push(tableRow);
-          }
+  let is_concentration = false;
+  let current_header = "";
+  let current_concentration = "";
+  let concentrations: Concentration[] = [];
+  $("#programrequirementstextcontainer")
+    .children()
+    .each((index: number, table: CheerioElement) => {
+      if (table.name == "h2") {
+        // Determines if the major has concentrations based on if the header name includes Concentrations or Options
+        is_concentration =
+          $(table)
+            .text()
+            .includes("Concentration") ||
+          $(table)
+            .text()
+            .includes("Options");
+        current_header = $(table).text();
+      }
+      if (table.name == "h3") {
+        // Determines the name of the current concentration based on the subheader
+        current_concentration = $(table).text();
+        current_concentration = current_concentration.replace(
+          "Concentration in ",
+          ""
+        );
+        current_concentration = current_concentration.replace(
+          "Concentration: ",
+          ""
+        );
+      }
+      // Parsing as a normal req group
+      if (
+        !is_concentration &&
+        table.name == "table" &&
+        table.attribs["class"] == "sc_courselist"
+      ) {
+        requirementGroupMap = tableToReqGroup(
+          $,
+          table,
+          current_header,
+          requirementGroupMap
+        );
+      }
+      // Parsing as a concentration
+      if (
+        is_concentration &&
+        table.name == "table" &&
+        table.attribs["class"] == "sc_courselist"
+      ) {
+        let groups = tableToReqGroup($, table, current_header);
+        concentrations.push({
+          name:
+            current_concentration.length > 0
+              ? current_concentration
+              : Object.keys(groups)[0],
+          requirementGroups: Object.keys(groups),
+          requirementGroupMap: groups,
         });
-      //process last requirement group for the table
-      if (rows.length > 0) {
+      }
+    });
+  return [requirementGroupMap, concentrations];
+}
+
+function tableToReqGroup(
+  $: CheerioStatic,
+  table: CheerioElement,
+  current_header: string,
+  requirementGroupMap: { [key: string]: IMajorRequirementGroup } = {}
+): { [key: string]: IMajorRequirementGroup } {
+  let rows: CheerioElement[] = [];
+  $(table)
+    .find("tr")
+    .each((index: number, tableRow: CheerioElement) => {
+      let currentRow: Cheerio = $(tableRow);
+      if (currentRow.find("span.areaheader").length !== 0 && rows.length > 0) {
         let requirementGroup:
           | IMajorRequirementGroup
-          | undefined = createRequirementGroup($, rows);
+          | undefined = createRequirementGroup($, rows, current_header);
+        rows = [tableRow];
         if (requirementGroup) {
-          if (requirementGroup.requirements)
-            requirementGroupMap[requirementGroup.name] = requirementGroup;
+          requirementGroupMap[requirementGroup.name] = requirementGroup;
         }
+      } else {
+        rows.push(tableRow);
       }
+    });
+  //process last requirement group for the table
+  if (rows.length > 0) {
+    let requirementGroup:
+      | IMajorRequirementGroup
+      | undefined = createRequirementGroup($, rows, current_header);
+    if (requirementGroup) {
+      if (requirementGroup.requirements)
+        requirementGroupMap[requirementGroup.name] = requirementGroup;
     }
-  );
+  }
   return requirementGroupMap;
 }
 
@@ -184,9 +325,9 @@ module.exports = catalogToMajor;
  * testing. move to test file.
  */
 catalogToMajor(
-  "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/economics-bs/#programrequirementstext"
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/data-science-biology-bs/#programrequirementstext"
 ).then((scrapedMajor: Major) => {
   //uncomment following lines to log output.
-  //console.log("--------------------Parsed major object--------------------");
-  //console.log(JSON.stringify(scrapedMajor));
+  console.log("--------------------Parsed major object--------------------");
+  console.log(JSON.stringify(scrapedMajor));
 });

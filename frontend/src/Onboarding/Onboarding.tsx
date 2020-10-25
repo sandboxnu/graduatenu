@@ -2,7 +2,7 @@ import React from "react";
 import { Link, Redirect } from "react-router-dom";
 import styled from "styled-components";
 import { GraduateGrey } from "../constants";
-import { Button, Card } from "@material-ui/core";
+import { Button, Card, Theme, withStyles } from "@material-ui/core";
 import picture from "../assets/landingils.png";
 import { connect } from "react-redux";
 import { getFullNameFromState } from "../state";
@@ -17,6 +17,9 @@ const Container = styled.div`
 
 const Header = styled.div`
   height: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
 `;
 
 const Body = styled.div`
@@ -92,6 +95,21 @@ const CardTitleText = styled.h2`
   margin-bottom: 2px;
 `;
 
+const LoginLink = styled(Link)`
+  align-self: center;
+  margin-right: 8px !important;
+`;
+
+const ColorButton = withStyles((theme: Theme) => ({
+  root: {
+    color: "#ffffff",
+    backgroundColor: "#EB5757",
+    "&:hover": {
+      backgroundColor: "#DB4747",
+    },
+  },
+}))(Button);
+
 interface OnboardingProps {
   fullName: string;
   fetchMajorsAndPlans: typeof fMAP; // using type of here to annotate the prop with it's correct type
@@ -123,7 +141,16 @@ class OnboardingComponent extends React.Component<OnboardingProps> {
 
     return (
       <Container>
-        <Header></Header>
+        <Header>
+          <LoginLink
+            to={{ pathname: "/login", state: { fromOnBoarding: true } }}
+            style={{ textDecoration: "none" }}
+          >
+            <ColorButton variant="contained" color="primary">
+              Login
+            </ColorButton>
+          </LoginLink>
+        </Header>
         <Body>
           <BodyText>
             <TitleText>Graduate on time.</TitleText>
@@ -132,12 +159,10 @@ class OnboardingComponent extends React.Component<OnboardingProps> {
               personalized plan of study.
             </DescriptionText>
             <Link
-              to={{ pathname: "/onboarding", state: { userData: {} } }}
+              to={{ pathname: "/onboarding" }}
               style={{ textDecoration: "none" }}
             >
-              <Button variant="contained" color="secondary">
-                Get Started
-              </Button>
+              <ColorButton variant="contained">Get Started</ColorButton>
             </Link>
           </BodyText>
           <GraduateLogo src={picture} alt="picture"></GraduateLogo>

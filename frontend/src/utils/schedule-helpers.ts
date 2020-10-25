@@ -164,20 +164,28 @@ export function getCompletedCourseStrings(schedule: DNDSchedule): string[] {
   for (const y of schedule.years) {
     const year: DNDScheduleYear = schedule.yearMap[y];
 
-    for (const course of year.fall.classes) {
-      fulfilled.push(course.subject + course.classId);
+    if (year.fall.status !== "INACTIVE") {
+      for (const course of year.fall.classes) {
+        fulfilled.push(course.subject + course.classId);
+      }
     }
 
-    for (const course of year.spring.classes) {
-      fulfilled.push(course.subject + course.classId);
+    if (year.spring.status !== "INACTIVE") {
+      for (const course of year.spring.classes) {
+        fulfilled.push(course.subject + course.classId);
+      }
     }
 
-    for (const course of year.summer1.classes) {
-      fulfilled.push(course.subject + course.classId);
+    if (year.summer1.status !== "INACTIVE") {
+      for (const course of year.summer1.classes) {
+        fulfilled.push(course.subject + course.classId);
+      }
     }
 
-    for (const course of year.summer2.classes) {
-      fulfilled.push(course.subject + course.classId);
+    if (year.summer2.status !== "INACTIVE") {
+      for (const course of year.summer2.classes) {
+        fulfilled.push(course.subject + course.classId);
+      }
     }
   }
 
