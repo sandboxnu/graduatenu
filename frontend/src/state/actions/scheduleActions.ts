@@ -11,6 +11,7 @@ import {
   SeasonWord,
   Schedule,
   Major,
+  IRequiredCourse,
 } from "../../../../common/types";
 
 export const addClassesAction = createAction(
@@ -75,6 +76,16 @@ export const setDNDScheduleAction = createAction(
 export const setCompletedCourses = createAction(
   "schedule/SET_COMPLETED_COURSES",
   (completedCourses: ScheduleCourse[]) => ({ completedCourses })
+)();
+
+export const setCompletedRequirements = createAction(
+  "schedule/SET_COMPLETED_REQUIREMENTS",
+  (completedRequirements: IRequiredCourse[]) => ({ completedRequirements })
+)();
+
+export const setTransferCourses = createAction(
+  "schedule/SET_TRANSFER_COURSES",
+  (transferCourses: ScheduleCourse[]) => ({ transferCourses })
 )();
 
 export const setNamedSchedule = createAction(

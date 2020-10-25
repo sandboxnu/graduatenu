@@ -7,7 +7,12 @@ import {
   NamedSchedule,
   ScheduleSlice,
 } from "../models/types";
-import { Major, Schedule } from "../../../common/types";
+import {
+  Major,
+  Schedule,
+  IRequiredCourse,
+  ScheduleCourse,
+} from "../../../common/types";
 
 /**
  * Utility functions to help extract data from the AppState
@@ -74,6 +79,22 @@ export const getAcademicYearFromState = (state: AppState): number =>
  */
 export const getScheduleFromState = (state: AppState): DNDSchedule =>
   state.schedule.present.schedule;
+
+/**
+ * Get the list of completed requirements from the AppState
+ * @param state the AppState
+ */
+export const getCompletedRequirementsFromState = (
+  state: AppState
+): IRequiredCourse[] => state.schedule.present.completedRequirements;
+
+/**
+ * Get the list of transfer courses from the AppState
+ * @param state the AppState
+ */
+export const getTransferCoursesFromState = (
+  state: AppState
+): ScheduleCourse[] => state.schedule.present.transferCourses;
 
 /**
  * Get the selected planName from the AppState

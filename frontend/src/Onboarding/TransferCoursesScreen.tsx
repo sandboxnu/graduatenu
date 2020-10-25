@@ -8,16 +8,21 @@ import {
   IRequiredCourse,
   Requirement,
 } from "../../../common/types";
-import { setCompletedRequirements } from "../state/actions/scheduleActions";
-import { getDeclaredMajorFromState } from "../state";
+import {
+  getDeclaredMajorFromState,
+  getCompletedRequirementsFromState,
+} from "../state";
+import {
+  setCompletedCourses,
+  setTransferCourses,
+} from "../state/actions/scheduleActions";
 import styled from "styled-components";
+import { fetchCourse } from "../api";
 import { NextButton } from "../components/common/NextButton";
 import { Link, withRouter, RouteComponentProps } from "react-router-dom";
 import { GenericOnboardingTemplate } from "./GenericOnboarding";
 import CheckBoxIcon from "@material-ui/icons/CheckBox";
 import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
-import { AddClassModal } from "../components/AddClassModal";
-import { AddBlock } from "../components/ClassBlocks/AddBlock";
 import {
   Link as ButtonLink,
   Collapse,
@@ -25,6 +30,8 @@ import {
   Paper,
   Checkbox,
 } from "@material-ui/core";
+import { AddClassModal } from "../components/AddClassModal";
+import { AddBlock } from "../components/ClassBlocks/AddBlock";
 
 const MainTitleText = styled.div`
   font-size: 18px;
@@ -101,34 +108,31 @@ function flattenOne(req: Requirement): IRequiredCourse[][] {
   }
 }
 
-interface CompletedCoursesScreenProps {
+interface TransferCoursesScreenProps {
   major: Major;
-  setCompletedRequirements: (completedRequirements: IRequiredCourse[]) => void;
+  completedRequirements: IRequiredCourse[];
+  setCompletedCourses: (completedCourses: ScheduleCourse[]) => void;
+  setTransferCourses: (transferCourses: ScheduleCourse[]) => void;
 }
 
-type Props = CompletedCoursesScreenProps & RouteComponentProps;
+type Props = TransferCoursesScreenProps & RouteComponentProps;
 
 interface State {
-  expandedSections: Map<String, Boolean>;
+  selectedRequirements: IRequiredCourse[];
+  completedNonTransfer: IRequiredCourse[];
   modalVisible: boolean;
   otherCourses: IRequiredCourse[][];
-  completedRequirements: IRequiredCourse[];
 }
 
-class CompletedCoursesComponent extends Component<Props, State> {
+class TransferCoursesComponent extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
-    let expanded = new Map<String, Boolean>();
-    this.props.major.requirementGroups.forEach(reqGroups =>
-      expanded.set(reqGroups, false)
-    );
-    expanded.set("Other Courses", true);
 
     this.state = {
-      expandedSections: expanded,
       modalVisible: false,
+      selectedRequirements: [],
       otherCourses: [],
-      completedRequirements: [],
+      completedNonTransfer: props.completedRequirements,
     };
   }
 
@@ -138,129 +142,6 @@ class CompletedCoursesComponent extends Component<Props, State> {
 
   showModal() {
     this.setState({ modalVisible: true });
-  }
-
-  onSubmit() {
-    this.props.setCompletedRequirements(this.state.completedRequirements);
-  }
-
-  /**
-   * Handles a class when it has been checked off. If it is being unchecked, it removes it,
-   * and if it is being checked, it adds it to the list of completed requirements
-   * @param e
-   * @param course
-   */
-  async onChecked(e: any, course: IRequiredCourse) {
-    const checked = e.target.checked;
-
-    if (checked) {
-      this.setState(prevState => ({
-        completedRequirements: [...prevState.completedRequirements, course],
-      }));
-    } else {
-      let courses = this.state.completedRequirements.filter(
-        c => c.subject !== course.subject && c.classId !== course.classId
-      );
-      this.setState({
-        completedRequirements: courses,
-      });
-    }
-  }
-
-  // changes the expanding state of the specific section
-  onExpand(requirementGroup: string, change: Boolean) {
-    this.state.expandedSections.set(requirementGroup, change);
-    this.setState({
-      expandedSections: this.state.expandedSections,
-    });
-  }
-
-  // renders the link for show more or show less for the specific requirementGroup, depending on the boolean
-  renderShowLink(requirementGroup: string, more: boolean) {
-    let more_less_string = more ? "more" : "less";
-    return (
-      <ButtonLink
-        component="button"
-        underline="always"
-        onClick={() => {
-          this.onExpand(requirementGroup, more);
-        }}
-        style={{ color: "#EB5757" }}
-      >
-        <CourseText>{"See " + more_less_string + "..."}</CourseText>
-      </ButtonLink>
-    );
-  }
-
-  // Renders one course/courseset (if it contains labs/recitiations, and seperated)
-  renderCourse(courses: IRequiredCourse[]) {
-    let allCourse = courses.map(course => course.subject + course.classId);
-    return (
-      <CourseWrapper key={allCourse[0]}>
-        <Checkbox
-          style={{ width: 2, height: 2 }}
-          icon={<CheckBoxOutlineBlankIcon style={{ fontSize: 20 }} />}
-          checkedIcon={
-            <CheckBoxIcon style={{ fontSize: 20, color: "#EB5757" }} />
-          }
-          onChange={e => courses.forEach(course => this.onChecked(e, course))}
-        />
-        <CourseText>{allCourse.join(" and ")}</CourseText>
-      </CourseWrapper>
-    );
-  }
-
-  // Renders all course requirements in the list
-  parseCourseRequirements(reqs: IRequiredCourse[][]) {
-    return reqs.map((r: IRequiredCourse[]) => this.renderCourse(r));
-  }
-
-  // renders an entire requirement section if it has specific classes specified
-  // with the title of the section
-  renderSection(requirementGroup: string) {
-    const reqs = this.props.major.requirementGroupMap[requirementGroup];
-    if (!reqs) {
-      return <div key={requirementGroup} />;
-    }
-
-    if (reqs.type === "RANGE") {
-      return <div key={requirementGroup} />;
-    }
-    return (
-      <div key={requirementGroup}>
-        <TitleText>{requirementGroup}</TitleText>
-        {this.renderAllCourses(flatten(reqs.requirements), requirementGroup)}
-      </div>
-    );
-  }
-
-  // Renders the courses as either collpasable if it is less than 4 or a standard list of classes
-  renderAllCourses(allCourse: IRequiredCourse[][], requirementGroup: string) {
-    if (allCourse.length <= 4) {
-      return (
-        <div key={requirementGroup + " Courses"}>
-          {this.parseCourseRequirements(allCourse)}
-        </div>
-      );
-    } else {
-      return (
-        <div key={requirementGroup + " Courses"}>
-          {this.parseCourseRequirements(allCourse.slice(0, 4))}
-          <Collapse
-            in={!this.state.expandedSections.get(requirementGroup)}
-            unmountOnExit
-          >
-            {this.renderShowLink(requirementGroup, true)}
-          </Collapse>
-          <Collapse
-            in={!!this.state.expandedSections.get(requirementGroup)}
-            unmountOnExit
-          >
-            {this.parseCourseRequirements(allCourse.slice(4, allCourse.length))}
-          </Collapse>
-        </div>
-      );
-    }
   }
 
   // Adds the "other courses" to the state in the form of a IRequiredCourse[][] so that they can be
@@ -278,6 +159,124 @@ class CompletedCoursesComponent extends Component<Props, State> {
     });
   }
 
+  /**
+   * Separate transfer and non transfer courses, convert non transfer completed courses
+   * into ScheduleCourses, and populate redux store.
+   */
+  async onSubmit() {
+    let completedNonTransfer = this.state.completedNonTransfer.filter(
+      req => !this.state.selectedRequirements.includes(req)
+    );
+    let completed: ScheduleCourse[] = [];
+
+    for (let course of completedNonTransfer) {
+      const scheduleCourse = await fetchCourse(
+        course.subject,
+        String(course.classId)
+      );
+
+      if (scheduleCourse) {
+        completed.push(scheduleCourse);
+      }
+    }
+
+    let selectedCourses: ScheduleCourse[] = [];
+    for (let course of this.state.selectedRequirements) {
+      const scheduleCourse = await fetchCourse(
+        course.subject,
+        String(course.classId)
+      );
+
+      if (scheduleCourse) {
+        selectedCourses.push(scheduleCourse);
+      }
+    }
+
+    this.props.setCompletedCourses(completed);
+    this.props.setTransferCourses(selectedCourses);
+  }
+
+  /**
+   * Handles a class when it has been checked off. If it is being unchecked, it removes it,
+   * and if it is being checked, it converts it to a ScheduleCourse and adds it to selected courses
+   * @param e
+   * @param course
+   */
+  async onChecked(e: any, course: IRequiredCourse) {
+    const checked = e.target.checked;
+
+    if (checked) {
+      this.setState({
+        selectedRequirements: [...this.state.selectedRequirements, course],
+      });
+    } else {
+      let reqs = this.state.selectedRequirements.filter(r => r !== course);
+      this.setState({
+        selectedRequirements: reqs,
+      });
+    }
+  }
+
+  /**
+   * Renders one course/courseset (if it contains labs/recitiations, and seperated)
+   * @param courses - Course pairings to be rendered
+   */
+  renderCourse(courses: IRequiredCourse[]) {
+    let allCourse = courses.map(course => course.subject + course.classId);
+    return (
+      <CourseWrapper key={allCourse[0]}>
+        <Checkbox
+          style={{ width: 2, height: 2 }}
+          icon={<CheckBoxOutlineBlankIcon style={{ fontSize: 20 }} />}
+          checkedIcon={
+            <CheckBoxIcon style={{ fontSize: 20, color: "#EB5757" }} />
+          }
+          onChange={e => courses.forEach(course => this.onChecked(e, course))}
+        />
+        <CourseText>{allCourse.join(" and ")}</CourseText>
+      </CourseWrapper>
+    );
+  }
+
+  /**
+   * Renders course requirements in the list that are in the completed requirements list
+   * @param reqs - requirements to be rendered
+   */
+  parseCourseRequirements(reqs: IRequiredCourse[][]) {
+    return reqs
+      .filter(req =>
+        this.props.completedRequirements.some(
+          listReq =>
+            listReq.classId === req[0].classId &&
+            listReq.subject === req[0].subject
+        )
+      )
+      .map((r: IRequiredCourse[]) => this.renderCourse(r));
+  }
+
+  /**
+   * renders an entire requirement section if it has  classes specified
+   * with the title of the section
+   * Only classes that have already been selected as a completed course will be rendered
+   * @param requirementGroup - the requirement group to be rendered
+   */
+  renderSection(requirementGroup: string) {
+    const reqs = this.props.major.requirementGroupMap[requirementGroup];
+    if (!reqs || reqs.type === "RANGE") {
+      return null;
+    }
+    const renderedReqs = this.parseCourseRequirements(
+      flatten(reqs.requirements)
+    );
+    const returnDiv = (
+      <div key={requirementGroup}>
+        <TitleText>{requirementGroup}</TitleText>
+        {renderedReqs}
+      </div>
+    );
+    return renderedReqs.length > 0 ? returnDiv : null;
+  }
+
   // renders the "Other Course" section with a button to display the add coursese modal and
   // displays all already added courses under the button.
   renderOtherCourseSection() {
@@ -285,21 +284,21 @@ class CompletedCoursesComponent extends Component<Props, State> {
       <div key="other courses">
         <TitleText>Other Courses</TitleText>
         <AddBlock onClick={this.showModal.bind(this)} />
-        {this.renderAllCourses(this.state.otherCourses, "Other Courses")}
+        {this.state.otherCourses.map(this.renderCourse.bind(this))}
       </div>
     );
   }
 
   render() {
-    // indicates if the user came from login button on welcome page
-    const { fromOnBoardingGuest } = (this.props.location.state as any) || {
-      fromOnBoardingGuest: false,
-    };
-    let reqLen = this.props.major.requirementGroups.length;
-    let split = Math.floor(reqLen / 2);
+    let renderedMajorReqs = this.props.major.requirementGroups
+      .map(r => this.renderSection(r))
+      .filter(r => r !== null);
+    let split = Math.ceil(renderedMajorReqs.length / 2);
     return (
-      <GenericOnboardingTemplate screen={1}>
-        <MainTitleText>Select completed courses below:</MainTitleText>
+      <GenericOnboardingTemplate screen={2}>
+        <MainTitleText>
+          Select any courses you took as transfer credit:
+        </MainTitleText>
         <Paper
           elevation={0}
           style={{
@@ -315,17 +314,13 @@ class CompletedCoursesComponent extends Component<Props, State> {
           <Grid container justify="space-evenly">
             <Grid key={0} item>
               <Paper elevation={0} style={{ minWidth: 350, maxWidth: 400 }}>
-                {this.props.major.requirementGroups
-                  .slice(0, split)
-                  .map(r => this.renderSection(r))}
+                {renderedMajorReqs.slice(0, split)}
               </Paper>
             </Grid>
             <Grid key={1} item>
               <Paper elevation={0} style={{ minWidth: 350, maxWidth: 400 }}>
                 {this.renderOtherCourseSection()}
-                {this.props.major.requirementGroups
-                  .slice(split, reqLen)
-                  .map(r => this.renderSection(r))}
+                {renderedMajorReqs.slice(split, renderedMajorReqs.length)}
               </Paper>
             </Grid>
           </Grid>
@@ -337,7 +332,7 @@ class CompletedCoursesComponent extends Component<Props, State> {
           handleSubmit={courses => this.addOtherCourses(courses)}
         ></AddClassModal>
         <Link
-          to="/transferCourses"
+          to={"/signup"}
           onClick={this.onSubmit.bind(this)}
           style={{ textDecoration: "none" }}
         >
@@ -350,16 +345,19 @@ class CompletedCoursesComponent extends Component<Props, State> {
 
 const mapStateToProps = (state: AppState) => ({
   major: getDeclaredMajorFromState(state)!,
+  completedRequirements: getCompletedRequirementsFromState(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  setCompletedRequirements: (completedReqs: IRequiredCourse[]) =>
-    dispatch(setCompletedRequirements(completedReqs)),
+  setCompletedCourses: (completedCourses: ScheduleCourse[]) =>
+    dispatch(setCompletedCourses(completedCourses)),
+  setTransferCourses: (transferCourses: ScheduleCourse[]) =>
+    dispatch(setTransferCourses(transferCourses)),
 });
 
-export const CompletedCoursesScreen = withRouter(
+export const TransferCoursesScreen = withRouter(
   connect(
     mapStateToProps,
     mapDispatchToProps
-  )(CompletedCoursesComponent)
+  )(TransferCoursesComponent)
 );

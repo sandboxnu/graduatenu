@@ -1,6 +1,10 @@
 import React from "react";
 import { DNDSchedule } from "../../models/types";
-import { Major } from "../../../../common/types";
+import {
+  Major,
+  IRequiredCourse,
+  ScheduleCourse,
+} from "../../../../common/types";
 import styled from "styled-components";
 import { RequirementSection } from ".";
 import {
@@ -10,11 +14,10 @@ import {
 import { AppState } from "../../state/reducers/state";
 import {
   getScheduleFromState,
-  getScheduleDataFromState,
-  getScheduleMajorFromState,
+  getDeclaredMajorFromState,
+  getTransferCoursesFromState,
 } from "../../state";
-import { connect, useSelector } from "react-redux";
-import { findMajorFromName } from "../../utils/plan-helpers";
+import { connect } from "react-redux";
 
 const Container = styled.div`
   display: flex;
@@ -32,30 +35,32 @@ const MajorTitle = styled.p`
   margin-bottom: 12px;
 `;
 
-interface SidebarProps {
+interface Props {
   schedule: DNDSchedule;
-  major: string;
+  major?: Major;
+  transferCourses: ScheduleCourse[];
 }
 
-interface MajorSidebarProps {
-  schedule: DNDSchedule;
-  major: Major;
-}
-
-const NoMajorSidebarComponent: React.FC = () => {
-  return (
-    <Container>
-      <MajorTitle>No major selected</MajorTitle>
-    </Container>
-  );
-};
-
-const MajorSidebarComponent: React.FC<MajorSidebarProps> = ({
+const SidebarComponent: React.FC<Props> = ({
   schedule,
   major,
+  transferCourses,
 }) => {
+  if (!major) {
+    return (
+      <Container>
+        <MajorTitle>No major selected</MajorTitle>
+      </Container>
+    );
+  }
+
   const warnings = produceRequirementGroupWarning(schedule, major);
   const completedCourses: string[] = getCompletedCourseStrings(schedule);
+  const completedCourseStrings: string[] = transferCourses
+    ? completedCourses.concat(
+        ...transferCourses.map(course => course.subject + course.classId)
+      )
+    : completedCourses;
 
   return (
     <Container>
@@ -68,7 +73,7 @@ const MajorSidebarComponent: React.FC<MajorSidebarProps> = ({
             contents={major.requirementGroupMap[req]}
             warning={warnings.find(w => w.requirementGroup === req)}
             key={index + major.name}
-            completedCourses={completedCourses}
+            completedCourses={completedCourseStrings}
           ></RequirementSection>
         );
       })}
@@ -76,21 +81,10 @@ const MajorSidebarComponent: React.FC<MajorSidebarProps> = ({
   );
 };
 
-const SidebarComponent: React.FC<SidebarProps> = ({ schedule, major }) => {
-  const majorObj: Major | undefined = useSelector<AppState, Major | undefined>(
-    state => findMajorFromName(major, state.majorState.majors)
-  );
-
-  return majorObj ? (
-    <MajorSidebarComponent schedule={schedule} major={majorObj} />
-  ) : (
-    <NoMajorSidebarComponent />
-  );
-};
-
 const mapStateToProps = (state: AppState) => ({
   schedule: getScheduleFromState(state),
-  major: getScheduleMajorFromState(state),
+  major: getDeclaredMajorFromState(state),
+  transferCourses: getTransferCoursesFromState(state),
 });
 
 export const Sidebar = connect(mapStateToProps)(SidebarComponent);
