@@ -2,7 +2,7 @@ import React from "react";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import Popper from "@material-ui/core/Popper";
 import { Autocomplete } from "@material-ui/lab";
-import { TextField, Button } from "@material-ui/core";
+import { TextField, Button, Tooltip } from "@material-ui/core";
 import { EditPlanButton } from "./EditPlanButton";
 import styled from "styled-components";
 import { connect } from "react-redux";
@@ -12,12 +12,16 @@ import {
   getScheduleFromState,
   getPlanStrFromState,
   getMajorFromState,
+  getCatalogYearFromState,
 } from "../state";
 import {
   setScheduleAction,
   setCoopCycle,
 } from "../state/actions/scheduleActions";
-import { setMajorAction } from "../state/actions/userActions";
+import {
+  setMajorAction,
+  setCatalogYearAction,
+} from "../state/actions/userActions";
 import { DNDSchedule } from "../models/types";
 import { Major, Schedule } from "../../../common/types";
 import {
@@ -74,12 +78,14 @@ interface ReduxStoreEditPlanProps {
   plans: Record<string, Schedule[]>;
   creditsTaken: number;
   name: string;
+  catalogYear?: number;
 }
 
 interface ReduxDispatchEditPlanProps {
   setCoopCycle: (schedule?: Schedule) => void;
   setSchedule: (schedule: Schedule) => void;
   setMajor: (major?: Major) => void;
+  setCatalogYear: (number?: number) => void;
 }
 
 type Props = ReduxStoreEditPlanProps & ReduxDispatchEditPlanProps;
@@ -142,6 +148,17 @@ export class EditPlanPopperComponent extends React.Component<
     }
   }
 
+  onChangeCatalogYear(event: React.SyntheticEvent<{}>, value: any) {
+    if (value === "None") {
+      this.props.setCatalogYear(undefined);
+    }
+
+    if (value) {
+      this.props.setCatalogYear(value);
+    }
+    return;
+  }
+
   renderMajorDropDown() {
     return (
       <Autocomplete
@@ -183,6 +200,50 @@ export class EditPlanPopperComponent extends React.Component<
         )}
         value={this.props.planStr || "None"}
         onChange={this.onChoosePlan.bind(this)}
+      />
+    );
+  }
+
+  renderCatalogYearDropdown() {
+    let majorSet = [
+      ...Array.from(
+        new Set(this.props.majors.map(maj => maj.yearVersion.toString()))
+      ),
+    ];
+    const marginSpace = 12;
+    return (
+      <Autocomplete
+        style={{ marginTop: "10px", marginBottom: "5px" }}
+        disableListWrap
+        options={majorSet}
+        renderInput={params => (
+          <MajorTextField
+            {...params}
+            variant="outlined"
+            fullWidth
+            size="small"
+            margin="dense"
+          />
+        )}
+        value={this.props.catalogYear || ""}
+        onChange={this.onChangeCatalogYear.bind(this)}
+      />
+    );
+    return (
+      <Autocomplete
+        style={{ width: 326, marginBottom: marginSpace }}
+        disableListWrap
+        options={majorSet}
+        renderInput={params => (
+          <TextField
+            {...params}
+            variant="outlined"
+            label="Select a Catalog Year"
+            fullWidth
+          />
+        )}
+        value={this.props.catalogYear || ""}
+        onChange={this.onChangeCatalogYear.bind(this)}
       />
     );
   }
@@ -254,6 +315,7 @@ export class EditPlanPopperComponent extends React.Component<
                 {this.props.creditsTaken + " Credits Completed"}
               </StandingText>
               {this.renderMajorDropDown()}
+              {!!this.props.catalogYear && this.renderCatalogYearDropdown()}
               {!!this.props.major && this.renderPlansDropDown()}
               {!!this.props.major &&
               !!this.props.planStr &&
@@ -278,12 +340,16 @@ const mapStateToProps = (state: AppState) => ({
   plans: getPlans(state),
   creditsTaken: getTakenCredits(state),
   name: getFullNameFromState(state),
+  //adding catalog year to appState? or to user
+  catalogYear: getCatalogYearFromState(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   setCoopCycle: (schedule?: Schedule) => dispatch(setCoopCycle(schedule)),
   setSchedule: (schedule: Schedule) => dispatch(setScheduleAction(schedule)),
   setMajor: (major?: Major) => dispatch(setMajorAction(major)),
+  setCatalogYear: (catalogYear?: number) =>
+    dispatch(setCatalogYearAction(catalogYear)),
 });
 
 export const EditPlanPopper = connect<

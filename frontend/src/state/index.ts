@@ -40,6 +40,8 @@ export const getPlanStrFromState = (state: AppState): string | undefined =>
 export const getMajorFromState = (state: AppState): Major | undefined =>
   state.user.major;
 
+export const getCatalogYearFromState = (state: AppState): number | undefined =>
+  state.user.catalogYear;
 /**
  * Get the warnings generated from the AppState
  * @param state the AppState

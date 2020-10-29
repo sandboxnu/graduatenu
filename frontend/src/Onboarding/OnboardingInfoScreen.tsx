@@ -380,7 +380,6 @@ class OnboardingScreenComponent extends React.Component<
       gradYear,
       year,
       textFieldStr,
-      catalogYear,
       beenEditedName,
       beenEditedGrad,
       beenEditedYear,
