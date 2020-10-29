@@ -17,6 +17,7 @@ import {
   setUserCoopCycleAction,
   setEmailAction,
   resetUserAction,
+  deletePlanId,
 } from "../actions/userActions";
 import { setCoopCycle } from "../actions/scheduleActions";
 import { planToString } from "../../utils";
@@ -124,6 +125,13 @@ export const userReducer = (
       case getType(setMajorPlanAction): {
         draft.declaredMajor = action.payload.major;
         draft.planStr = action.payload.planStr;
+        return draft;
+      }
+      case getType(deletePlanId): {
+        draft.planIds = draft.planIds.filter(
+          (id: number) => id !== action.payload.planId
+        );
+        return draft;
       }
     }
   });

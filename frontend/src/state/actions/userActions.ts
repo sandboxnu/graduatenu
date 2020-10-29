@@ -92,4 +92,11 @@ export const setUserCoopCycleAction = createAction(
   })
 )();
 
+export const deletePlanId = createAction(
+  "user/DELETE_PLAN_ID",
+  (planId: number) => ({
+    planId,
+  })
+)();
+
 export const resetUserAction = createAction("user/RESET_USER", () => void 0)();

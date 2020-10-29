@@ -25,6 +25,7 @@ import { setNamedSchedule } from "../state/actions/scheduleActions";
 import { NamedSchedule } from "../models/types";
 import Loader from "react-loader-spinner";
 import { deletePlanForUser } from "../services/PlanService";
+import { deletePlanId } from "../state/actions/userActions";
 
 const SwitchPlanDropdown = styled(Button)`
   display: flex;
@@ -89,6 +90,7 @@ interface ReduxDispatchSwitchSchedulesProps {
   setActiveSchedule: (activeSchedule: number) => void;
   setNamedSchedule: (newSchedule: NamedSchedule) => void;
   deletePlan: (name: string) => void;
+  deletePlanIdFromUserState: (planId: number) => void;
 }
 
 type Props = SwitchSchedulesProps &
@@ -151,10 +153,10 @@ export class SwitchPlanPopperComponent extends React.Component<
   }
 
   handleDelete(planId: number, name: string) {
-    console.log(this.props.userId);
     if (this.props.userId && this.props.token) {
       deletePlanForUser(this.props.userId, planId, this.props.token);
       this.props.deletePlan(name);
+      this.props.deletePlanIdFromUserState(planId);
     }
   }
 
@@ -200,9 +202,10 @@ export class SwitchPlanPopperComponent extends React.Component<
                   </IconButton>
                   <IconButton
                     style={{ padding: "6px" }}
-                    onClick={() =>
-                      this.handleDelete(this.props.planIds[index], s.name)
-                    }
+                    onClick={() => {
+                      const foo: any = s;
+                      this.handleDelete(foo.schedule.present.id, s.name);
+                    }}
                   >
                     <DeleteIcon />
                   </IconButton>
@@ -237,6 +240,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   setNamedSchedule: (newSchedule: NamedSchedule) =>
     dispatch(setNamedSchedule(newSchedule)),
   deletePlan: (name: string) => dispatch(deletePlan(name)),
+  deletePlanIdFromUserState: (planId: number) => dispatch(deletePlanId(planId)),
 });
 
 export const SwitchPlanPopper = connect<
