@@ -2459,11 +2459,15 @@ Object {
             "numCreditsMax": 4,
             "numCreditsMin": 4,
             "prereqs": Object {
-              "type": "and",
+              "type": "or",
               "values": Array [
                 Object {
                   "classId": "3500",
                   "subject": "CS",
+                },
+                Object {
+                  "classId": "3500",
+                  "subject": "DS",
                 },
               ],
             },
@@ -3556,11 +3560,15 @@ Object {
             "numCreditsMax": 4,
             "numCreditsMin": 4,
             "prereqs": Object {
-              "type": "and",
+              "type": "or",
               "values": Array [
                 Object {
                   "classId": "3500",
                   "subject": "CS",
+                },
+                Object {
+                  "classId": "3500",
+                  "subject": "DS",
                 },
               ],
             },
@@ -4376,11 +4384,15 @@ Object {
             "numCreditsMax": 4,
             "numCreditsMin": 4,
             "prereqs": Object {
-              "type": "and",
+              "type": "or",
               "values": Array [
                 Object {
                   "classId": "3500",
                   "subject": "CS",
+                },
+                Object {
+                  "classId": "3500",
+                  "subject": "DS",
                 },
               ],
             },
@@ -4482,11 +4494,15 @@ Object {
             "numCreditsMax": 4,
             "numCreditsMin": 4,
             "prereqs": Object {
-              "type": "and",
+              "type": "or",
               "values": Array [
                 Object {
                   "classId": "3500",
                   "subject": "CS",
+                },
+                Object {
+                  "classId": "3500",
+                  "subject": "DS",
                 },
               ],
             },
@@ -5223,11 +5239,15 @@ Object {
             "numCreditsMax": 4,
             "numCreditsMin": 4,
             "prereqs": Object {
-              "type": "and",
+              "type": "or",
               "values": Array [
                 Object {
                   "classId": "3500",
                   "subject": "CS",
+                },
+                Object {
+                  "classId": "3500",
+                  "subject": "DS",
                 },
               ],
             },
@@ -5358,11 +5378,15 @@ Object {
             "numCreditsMax": 4,
             "numCreditsMin": 4,
             "prereqs": Object {
-              "type": "and",
+              "type": "or",
               "values": Array [
                 Object {
                   "classId": "3500",
                   "subject": "CS",
+                },
+                Object {
+                  "classId": "3500",
+                  "subject": "DS",
                 },
               ],
             },
@@ -6100,11 +6124,15 @@ Object {
             "numCreditsMax": 4,
             "numCreditsMin": 4,
             "prereqs": Object {
-              "type": "and",
+              "type": "or",
               "values": Array [
                 Object {
                   "classId": "3500",
                   "subject": "CS",
+                },
+                Object {
+                  "classId": "3500",
+                  "subject": "DS",
                 },
               ],
             },
@@ -6220,11 +6248,15 @@ Object {
             "numCreditsMax": 4,
             "numCreditsMin": 4,
             "prereqs": Object {
-              "type": "and",
+              "type": "or",
               "values": Array [
                 Object {
                   "classId": "3500",
                   "subject": "CS",
+                },
+                Object {
+                  "classId": "3500",
+                  "subject": "DS",
                 },
               ],
             },
@@ -6842,11 +6874,15 @@ Object {
             "numCreditsMax": 4,
             "numCreditsMin": 4,
             "prereqs": Object {
-              "type": "and",
+              "type": "or",
               "values": Array [
                 Object {
                   "classId": "3500",
                   "subject": "CS",
+                },
+                Object {
+                  "classId": "3500",
+                  "subject": "DS",
                 },
               ],
             },
@@ -7062,11 +7098,15 @@ Object {
             "numCreditsMax": 4,
             "numCreditsMin": 4,
             "prereqs": Object {
-              "type": "and",
+              "type": "or",
               "values": Array [
                 Object {
                   "classId": "3500",
                   "subject": "CS",
+                },
+                Object {
+                  "classId": "3500",
+                  "subject": "DS",
                 },
               ],
             },
@@ -7539,11 +7579,15 @@ Object {
             "numCreditsMax": 4,
             "numCreditsMin": 4,
             "prereqs": Object {
-              "type": "and",
+              "type": "or",
               "values": Array [
                 Object {
                   "classId": "3500",
                   "subject": "CS",
+                },
+                Object {
+                  "classId": "3500",
+                  "subject": "DS",
                 },
               ],
             },
@@ -7843,11 +7887,15 @@ Object {
             "numCreditsMax": 4,
             "numCreditsMin": 4,
             "prereqs": Object {
-              "type": "and",
+              "type": "or",
               "values": Array [
                 Object {
                   "classId": "3500",
                   "subject": "CS",
+                },
+                Object {
+                  "classId": "3500",
+                  "subject": "DS",
                 },
               ],
             },
@@ -10277,11 +10325,15 @@ Object {
             "numCreditsMax": 4,
             "numCreditsMin": 4,
             "prereqs": Object {
-              "type": "and",
+              "type": "or",
               "values": Array [
                 Object {
                   "classId": "3500",
                   "subject": "CS",
+                },
+                Object {
+                  "classId": "3500",
+                  "subject": "DS",
                 },
               ],
             },
@@ -10339,7 +10391,6 @@ Object {
                 },
                 Object {
                   "classId": "2350",
-                  "missing": true,
                   "subject": "ENGL",
                 },
               ],
@@ -10512,11 +10563,15 @@ Object {
             "numCreditsMax": 4,
             "numCreditsMin": 4,
             "prereqs": Object {
-              "type": "and",
+              "type": "or",
               "values": Array [
                 Object {
                   "classId": "3500",
                   "subject": "CS",
+                },
+                Object {
+                  "classId": "3500",
+                  "subject": "DS",
                 },
               ],
             },
@@ -11166,11 +11221,15 @@ Object {
             "numCreditsMax": 4,
             "numCreditsMin": 4,
             "prereqs": Object {
-              "type": "and",
+              "type": "or",
               "values": Array [
                 Object {
                   "classId": "3500",
                   "subject": "CS",
+                },
+                Object {
+                  "classId": "3500",
+                  "subject": "DS",
                 },
               ],
             },
@@ -11228,7 +11287,6 @@ Object {
                 },
                 Object {
                   "classId": "2350",
-                  "missing": true,
                   "subject": "ENGL",
                 },
               ],
@@ -11346,11 +11404,15 @@ Object {
             "numCreditsMax": 4,
             "numCreditsMin": 4,
             "prereqs": Object {
-              "type": "and",
+              "type": "or",
               "values": Array [
                 Object {
                   "classId": "3500",
                   "subject": "CS",
+                },
+                Object {
+                  "classId": "3500",
+                  "subject": "DS",
                 },
               ],
             },
@@ -19346,11 +19408,15 @@ Object {
             "numCreditsMax": 4,
             "numCreditsMin": 4,
             "prereqs": Object {
-              "type": "and",
+              "type": "or",
               "values": Array [
                 Object {
                   "classId": "3500",
                   "subject": "CS",
+                },
+                Object {
+                  "classId": "3500",
+                  "subject": "DS",
                 },
               ],
             },
@@ -20227,11 +20293,15 @@ Object {
             "numCreditsMax": 4,
             "numCreditsMin": 4,
             "prereqs": Object {
-              "type": "and",
+              "type": "or",
               "values": Array [
                 Object {
                   "classId": "3500",
                   "subject": "CS",
+                },
+                Object {
+                  "classId": "3500",
+                  "subject": "DS",
                 },
               ],
             },
