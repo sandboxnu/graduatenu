@@ -40,7 +40,7 @@ const PlanPopper = styled(Popper)<any>`
 
 const PlanCard = styled.div<any>`
   width: 266px;
-  height: 247px;
+  height: auto;
   background: #ffffff;
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2), 0px 2px 2px rgba(0, 0, 0, 0.12),
     0px 0px 2px rgba(0, 0, 0, 0.14);
@@ -134,7 +134,7 @@ export class EditPlanPopperComponent extends React.Component<
    * Updates this user's plan based on the plan selected in the dropdown.
    */
   onChoosePlan(event: React.SyntheticEvent<{}>, value: any) {
-    if (value === "None") {
+    if (!value) {
       this.props.setCoopCycle(undefined);
       return;
     }
@@ -149,14 +149,9 @@ export class EditPlanPopperComponent extends React.Component<
   }
 
   onChangeCatalogYear(event: React.SyntheticEvent<{}>, value: any) {
-    if (value === "None") {
-      this.props.setCatalogYear(undefined);
-    }
-
-    if (value) {
-      this.props.setCatalogYear(value);
-    }
-    return;
+    this.props.setCatalogYear(value);
+    this.props.setMajor(undefined);
+    this.props.setCoopCycle(undefined);
   }
 
   renderMajorDropDown() {
@@ -169,9 +164,8 @@ export class EditPlanPopperComponent extends React.Component<
           <MajorTextField
             {...params}
             variant="outlined"
+            label="Major"
             fullWidth
-            size="small"
-            margin="dense"
           />
         )}
         value={!!this.props.major ? this.props.major.name + " " : ""}
@@ -185,20 +179,18 @@ export class EditPlanPopperComponent extends React.Component<
       <Autocomplete
         style={{ marginBottom: "15px", fontSize: "10px" }}
         disableListWrap
-        options={[
-          "None",
-          ...this.props.plans[this.props.major!.name].map(p => planToString(p)),
-        ]}
+        options={this.props.plans[this.props.major!.name].map(p =>
+          planToString(p)
+        )}
         renderInput={params => (
           <TextField
             {...params}
             variant="outlined"
+            label="Co-op Cycle"
             fullWidth
-            size="small"
-            margin="dense"
           />
         )}
-        value={this.props.planStr || "None"}
+        value={this.props.planStr}
         onChange={this.onChoosePlan.bind(this)}
       />
     );
@@ -217,28 +209,10 @@ export class EditPlanPopperComponent extends React.Component<
         disableListWrap
         options={majorSet}
         renderInput={params => (
-          <MajorTextField
-            {...params}
-            variant="outlined"
-            fullWidth
-            size="small"
-            margin="dense"
-          />
-        )}
-        value={this.props.catalogYear || ""}
-        onChange={this.onChangeCatalogYear.bind(this)}
-      />
-    );
-    return (
-      <Autocomplete
-        style={{ width: 326, marginBottom: marginSpace }}
-        disableListWrap
-        options={majorSet}
-        renderInput={params => (
           <TextField
             {...params}
             variant="outlined"
-            label="Select a Catalog Year"
+            label="Catalog Year"
             fullWidth
           />
         )}
@@ -314,8 +288,8 @@ export class EditPlanPopperComponent extends React.Component<
               <StandingText>
                 {this.props.creditsTaken + " Credits Completed"}
               </StandingText>
-              {this.renderMajorDropDown()}
-              {!!this.props.catalogYear && this.renderCatalogYearDropdown()}
+              {this.renderCatalogYearDropdown()}
+              {!!this.props.catalogYear && this.renderMajorDropDown()}
               {!!this.props.major && this.renderPlansDropDown()}
               {!!this.props.major &&
               !!this.props.planStr &&
