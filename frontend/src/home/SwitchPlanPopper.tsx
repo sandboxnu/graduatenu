@@ -1,5 +1,11 @@
 import React from "react";
-import { MenuItem, Menu, Button, IconButton } from "@material-ui/core";
+import {
+  MenuItem,
+  Menu,
+  Button,
+  IconButton,
+  Snackbar,
+} from "@material-ui/core";
 import {
   KeyboardArrowDown as KeyboardArrowDownIcon,
   KeyboardArrowUp as KeyboardArrowUpIcon,
@@ -26,6 +32,7 @@ import { NamedSchedule } from "../models/types";
 import Loader from "react-loader-spinner";
 import { deletePlanForUser } from "../services/PlanService";
 import { deletePlanId } from "../state/actions/userActions";
+import { Alert } from "@material-ui/lab";
 
 const SwitchPlanDropdown = styled(Button)`
   display: flex;
@@ -87,7 +94,7 @@ interface ReduxStoreSwitchSchedulesProps {
 }
 
 interface ReduxDispatchSwitchSchedulesProps {
-  setActiveSchedule: (activeSchedule: number) => void;
+  setActiveSchedule: (activeSchedule: string) => void;
   setNamedSchedule: (newSchedule: NamedSchedule) => void;
   deletePlan: (name: string) => void;
   deletePlanIdFromUserState: (planId: number) => void;
@@ -99,6 +106,7 @@ type Props = SwitchSchedulesProps &
 
 interface SwitchSchedulePopperState {
   anchorEl: null | HTMLElement;
+  errorSnackbarOpen: boolean;
 }
 
 export class SwitchPlanPopperComponent extends React.Component<
@@ -109,6 +117,7 @@ export class SwitchPlanPopperComponent extends React.Component<
     super(props);
     this.state = {
       anchorEl: null,
+      errorSnackbarOpen: false,
     };
   }
 
@@ -134,9 +143,8 @@ export class SwitchPlanPopperComponent extends React.Component<
   onChoosePlan(value: string) {
     const newSchedule = this.props.schedules.find(s => s.name === value);
     if (newSchedule) {
-      const newActive = this.props.schedules.indexOf(newSchedule);
+      const newActive = newSchedule.name;
       this.props.setActiveSchedule(newActive);
-      this.props.setNamedSchedule(newSchedule);
       this.setState({
         anchorEl: null,
       });
@@ -153,10 +161,26 @@ export class SwitchPlanPopperComponent extends React.Component<
   }
 
   handleDelete(planId: number, name: string) {
-    if (this.props.userId && this.props.token) {
+    if (this.props.schedules.length < 2) {
+      this.setState({
+        errorSnackbarOpen: true,
+      });
+    } else if (this.props.userId && this.props.token) {
       deletePlanForUser(this.props.userId, planId, this.props.token);
       this.props.deletePlan(name);
       this.props.deletePlanIdFromUserState(planId);
+    }
+  }
+
+  handleCloseErrorSnackbar() {
+    this.setState({
+      errorSnackbarOpen: false,
+    });
+  }
+
+  componentDidUpdate(prevProps: Props) {
+    if (this.props.activeSchedule.name !== prevProps.activeSchedule.name) {
+      this.props.setNamedSchedule(this.props.activeSchedule);
     }
   }
 
@@ -214,6 +238,17 @@ export class SwitchPlanPopperComponent extends React.Component<
             </MenuItem>
           ))}
         </SwitchPlanMenu>
+        <Snackbar
+          open={this.state.errorSnackbarOpen}
+          onClose={this.handleCloseErrorSnackbar.bind(this)}
+        >
+          <Alert
+            onClose={this.handleCloseErrorSnackbar.bind(this)}
+            severity={"error"}
+          >
+            You must have at least one plan.
+          </Alert>
+        </Snackbar>
       </div>
     ) : (
       <SpinnerWrapper>
@@ -235,7 +270,7 @@ const mapStateToProps = (state: AppState) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  setActiveSchedule: (activeSchedule: number) =>
+  setActiveSchedule: (activeSchedule: string) =>
     dispatch(setActiveScheduleAction(activeSchedule)),
   setNamedSchedule: (newSchedule: NamedSchedule) =>
     dispatch(setNamedSchedule(newSchedule)),

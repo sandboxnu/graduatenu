@@ -80,7 +80,7 @@ export const schedulesReducer = (
         const name = action.payload.name;
         if (Object.values(draft.schedules)) delete draft.schedules[name];
         if (draft.activeSchedule === name)
-          draft.activeSchedule = draft.schedules[0].name;
+          draft.activeSchedule = Object.values(draft.schedules)[0].name;
         return draft;
       }
     }
