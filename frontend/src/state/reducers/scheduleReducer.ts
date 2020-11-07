@@ -25,6 +25,8 @@ import {
   setScheduleMajor,
   toggleYearExpanded,
   setClosedYearsToYearsInThePast,
+  addTransferClassAction,
+  removeTransferClassAction,
 } from "../actions/scheduleActions";
 import { setSchedules } from "../actions/schedulesActions";
 import {
@@ -106,6 +108,12 @@ export const scheduleReducer = (
 
         return draft;
       }
+      case getType(addTransferClassAction): {
+        const { courses } = action.payload;
+        draft.present.transferCourses.push(...courses);
+
+        return draft;
+      }
       case getType(removeClassAction): {
         const { course, semester } = action.payload;
         const season = convertTermIdToSeason(semester.termId);
@@ -130,6 +138,17 @@ export const scheduleReducer = (
       }
       case getType(undoRemoveClassAction): {
         draft.present = JSON.parse(JSON.stringify(draft.past));
+        return draft;
+      }
+      case getType(removeTransferClassAction): {
+        const { course } = action.payload;
+        // save prev state with a deep copy
+        draft.past = JSON.parse(JSON.stringify(draft.present));
+
+        draft.present.transferCourses = draft.present.transferCourses.filter(
+          c => c.classId !== course.classId
+        );
+
         return draft;
       }
       case getType(changeSemesterStatusAction): {

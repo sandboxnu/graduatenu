@@ -58,7 +58,6 @@ export const ClassBlockBody: React.FC<ClassBlockBodyProps> = ({
       </TitleWrapper>
       <div
         style={{
-          position: "absolute",
           right: 0,
           visibility: hovering ? "visible" : "hidden",
         }}
