@@ -157,8 +157,7 @@ const TransferableCreditScreen: React.FC = () => {
           <Paper
             elevation={0}
             style={{
-              minWidth: 350,
-              maxWidth: 400,
+              width: 350,
             }}
           >
             <MainTitleText>AP Exams</MainTitleText>
@@ -174,8 +173,7 @@ const TransferableCreditScreen: React.FC = () => {
           <Paper
             elevation={0}
             style={{
-              minWidth: 350,
-              maxWidth: 400,
+              width: 350,
             }}
           >
             <MainTitleText>IB Exams</MainTitleText>

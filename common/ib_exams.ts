@@ -273,6 +273,45 @@ export const IBExamGroups2020To2021: Array<TransferableExamGroup> = [
     ],
   },
   {
+    name: "Mathematics",
+    transferableExams: [
+      {
+        name: "Further Mathematics",
+        type: "IB",
+        mappableCourses: [
+          {
+            type: "COURSE",
+            classId: 2280,
+            subject: "MATH",
+          },
+          {
+            type: "COURSE",
+            classId: 2310,
+            subject: "MATH",
+          },
+        ],
+        semesterHours: 8,
+      },
+      {
+        name: "Mathematics",
+        type: "IB",
+        mappableCourses: [
+          {
+            type: "COURSE",
+            classId: 1341,
+            subject: "MATH",
+          },
+          {
+            type: "COURSE",
+            classId: 1342,
+            subject: "MATH",
+          },
+        ],
+        semesterHours: 8,
+      },
+    ],
+  },
+  {
     name: "Studies in Language and Literature",
     transferableExams: [
       {
@@ -824,45 +863,6 @@ export const IBExamGroups2020To2021: Array<TransferableExamGroup> = [
           },
         ],
         semesterHours: 4,
-      },
-    ],
-  },
-  {
-    name: "Mathematics",
-    transferableExams: [
-      {
-        name: "Further Mathematics",
-        type: "IB",
-        mappableCourses: [
-          {
-            type: "COURSE",
-            classId: 2280,
-            subject: "MATH",
-          },
-          {
-            type: "COURSE",
-            classId: 2310,
-            subject: "MATH",
-          },
-        ],
-        semesterHours: 8,
-      },
-      {
-        name: "Mathematics",
-        type: "IB",
-        mappableCourses: [
-          {
-            type: "COURSE",
-            classId: 1341,
-            subject: "MATH",
-          },
-          {
-            type: "COURSE",
-            classId: 1342,
-            subject: "MATH",
-          },
-        ],
-        semesterHours: 8,
       },
     ],
   },
