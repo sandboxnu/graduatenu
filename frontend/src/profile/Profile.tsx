@@ -31,6 +31,7 @@ import { AppState } from "../state/reducers/state";
 import { planToString } from "../utils";
 import { updateUser } from "../services/UserService";
 import { IUpdateUser, IUpdateUserData } from "../models/types";
+import { findMajorFromName } from "../utils/plan-helpers";
 
 const OuterContainer = styled.div`
   width: 50%;
@@ -173,7 +174,7 @@ const ProfileMajor = (props: ProfileMajorProps) => {
           )}
           value={val}
           onChange={(event: React.SyntheticEvent<{}>, value: any) =>
-            props.setMajor(props.majors.find((m: Major) => m.name == value))
+            props.setMajor(findMajorFromName(value, props.majors))
           }
         />
       )}

@@ -6,13 +6,19 @@ import { DNDSchedule } from "../../models/types";
 import { SEMESTER_MIN_HEIGHT } from "../../constants";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
-import { isYearInPast } from "../../utils";
-import { getAcademicYearFromState } from "../../state";
+import { getAcademicYearFromState, getClosedYearsFromState } from "../../state";
 import { AppState } from "../../state/reducers/state";
 import { connect } from "react-redux";
+import { Dispatch } from "redux";
+import { toggleYearExpanded } from "../../state/actions/scheduleActions";
 
 interface ReduxStoreYearProps {
   academicYear: number;
+  closedYears: Set<number>;
+}
+
+interface ReduxDispatchYearProps {
+  toggleYearExpanded: (yearIndex: number) => void;
 }
 
 interface YearProps {
@@ -20,11 +26,7 @@ interface YearProps {
   schedule: DNDSchedule;
 }
 
-type Props = ReduxStoreYearProps & YearProps;
-
-interface State {
-  expanded: boolean;
-}
+type Props = ReduxStoreYearProps & ReduxDispatchYearProps & YearProps;
 
 const YearTopWrapper = styled.div`
   display: flex;
@@ -40,22 +42,16 @@ const YearBody = styled.div`
   min-height: ${SEMESTER_MIN_HEIGHT}px;
 `;
 
-class YearComponent extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-
-    this.state = {
-      expanded: !isYearInPast(props.index, props.academicYear),
-    };
-  }
-
+class YearComponent extends React.Component<Props> {
   handleExpandedChange() {
-    this.setState({ expanded: !this.state.expanded });
+    this.props.toggleYearExpanded(this.props.index);
   }
 
   render() {
     const { index, schedule } = this.props;
     const year = schedule.years[index];
+    const isExpanded = !this.props.closedYears.has(index);
+
     return (
       <div style={{ width: "100%", marginBottom: 28 }}>
         <YearTopWrapper>
@@ -63,11 +59,7 @@ class YearComponent extends React.Component<Props, State> {
             onClick={this.handleExpandedChange.bind(this)}
             style={{ marginRight: 4 }}
           >
-            {this.state.expanded ? (
-              <KeyboardArrowUpIcon />
-            ) : (
-              <KeyboardArrowDownIcon />
-            )}
+            {isExpanded ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </div>
           <YearTop
             year={year}
@@ -77,7 +69,7 @@ class YearComponent extends React.Component<Props, State> {
             summer2Status={schedule.yearMap[year].summer2.status}
           />
         </YearTopWrapper>
-        {this.state.expanded && (
+        {isExpanded && (
           <YearBody>
             <SemesterBlock semester={schedule.yearMap[year].fall} />
             <SemesterBlock semester={schedule.yearMap[year].spring} />
@@ -92,8 +84,20 @@ class YearComponent extends React.Component<Props, State> {
 
 const mapStateToProps = (state: AppState) => ({
   academicYear: getAcademicYearFromState(state),
+  closedYears: getClosedYearsFromState(state),
 });
 
-export const Year = connect<ReduxStoreYearProps, {}, {}, AppState>(
-  mapStateToProps
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  toggleYearExpanded: (yearIndex: number) =>
+    dispatch(toggleYearExpanded(yearIndex)),
+});
+
+export const Year = connect<
+  ReduxStoreYearProps,
+  ReduxDispatchYearProps,
+  {},
+  AppState
+>(
+  mapStateToProps,
+  mapDispatchToProps
 )(YearComponent);

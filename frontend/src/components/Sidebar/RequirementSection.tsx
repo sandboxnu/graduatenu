@@ -12,8 +12,6 @@ import {
   DNDScheduleCourse,
 } from "../../models/types";
 import styled from "styled-components";
-import CheckIcon from "@material-ui/icons/Check";
-import { styled as materialStyled } from "@material-ui/styles";
 import ExpandMoreOutlinedIcon from "@material-ui/icons/ExpandMoreOutlined";
 import ExpandLessOutlinedIcon from "@material-ui/icons/ExpandLessOutlined";
 import { SidebarAddClassModal } from "./SidebarAddClassModal";
@@ -21,6 +19,12 @@ import { convertToDNDCourses } from "../../utils/schedule-helpers";
 import { fetchCourse } from "../../api";
 import { Droppable } from "react-beautiful-dnd";
 import { SidebarClassBlock } from "./SidebarClassBlock";
+import { FormatListNumberedRounded } from "@material-ui/icons";
+import { connect } from "react-redux";
+import { AppState } from "../../state/reducers/state";
+import { getCurrentClassCounterFromState } from "../../state";
+import { incrementCurrentClassCounter } from "../../state/actions/scheduleActions";
+import { Dispatch } from "redux";
 
 const SectionHeaderWrapper = styled.div`
   display: flex;
@@ -67,22 +71,9 @@ const CompletedTitleText = styled.div`
   color: rgba(21, 116, 62, 0.68);
 `;
 
-const CourseWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-`;
-
 const CourseText = styled.p`
   font-size: 14px;
   margin: 4px;
-`;
-
-const CourseTextNoMargin = styled.p`
-  font-size: 14px;
-  margin: 0px;
-  margin-top: 4px;
-  margin-bottom: 4px;
 `;
 
 const CourseAndLabWrapper = styled.div`
@@ -96,16 +87,22 @@ const ANDORText = styled.p`
   margin: 4px;
 `;
 
-const MyCheckIcon = materialStyled(CheckIcon)({
-  color: "green",
-});
-
 interface RequirementSectionProps {
   title: string;
   contents: IMajorRequirementGroup;
   warning?: IRequirementGroupWarning;
   completedCourses: string[];
 }
+
+interface ReduxStoreProps {
+  currentClassCounter: number;
+}
+
+interface ReduxDispatchProps {
+  incrementCurrentClassCounter: () => void;
+}
+
+type Props = RequirementSectionProps & ReduxStoreProps & ReduxDispatchProps;
 
 interface RequirementSectionState {
   expanded: boolean;
@@ -115,12 +112,19 @@ interface RequirementSectionState {
   indexData: { [id: string]: number };
 }
 
-export class RequirementSection extends React.Component<
-  RequirementSectionProps,
+class RequirementSectionComponent extends React.Component<
+  Props,
   RequirementSectionState
 > {
-  constructor(props: RequirementSectionProps) {
+  _isMounted: boolean;
+
+  constructor(props: Props) {
     super(props);
+
+    // TODO note that this is an antipattern introduced to solve
+    // issues with setting state on an unmounted component, remove
+    // and find a better solution.
+    this._isMounted = false;
 
     this.state = {
       expanded: !!props.warning,
@@ -165,7 +169,15 @@ export class RequirementSection extends React.Component<
    * Fetches class data for each requirement upon loading this component.
    */
   async componentDidMount() {
-    await this.fetchClassData();
+    this._isMounted = true;
+    const data = await this.fetchClassData();
+    if (data && this._isMounted) {
+      this.setState(data);
+    }
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 
   /**
@@ -213,7 +225,11 @@ export class RequirementSection extends React.Component<
 
     let dndCourses: DNDScheduleCourse[] = filteredScheduleCourses.map(
       (scheduleCourse: ScheduleCourse) => {
-        return convertToDNDCourses([scheduleCourse!], 0)[0][0];
+        const [newCourses, counter] = convertToDNDCourses(
+          [scheduleCourse!],
+          this.props.currentClassCounter
+        );
+        return newCourses[0];
       }
     );
 
@@ -226,10 +242,10 @@ export class RequirementSection extends React.Component<
       indexData[course.subject + course.classId] = i;
     }
 
-    this.setState({
+    return {
       classData,
       indexData,
-    });
+    };
   }
 
   /**
@@ -283,7 +299,7 @@ export class RequirementSection extends React.Component<
 
     return (
       <div key={index.toString()}>
-        {this.convertTypeToText(req.type, level, top, index)}
+        {this.convertTypeToText(req, level, top, index)}
         {req.courses
           .filter(c => c.type === "COURSE")
           .map(c => this.renderCourse(level, c as IRequiredCourse))}
@@ -293,7 +309,9 @@ export class RequirementSection extends React.Component<
             this.renderRequirement(c, index, level + 1, req.type !== "AND")
           )}
         {req.courses
-          .filter(c => c.type === "OR")
+          .filter(
+            c => c.type === "OR" || c.type === "CREDITS" || c.type === "RANGE"
+          )
           .map((c: Requirement, index: number) =>
             this.renderRequirement(c, index, level + 1, false)
           )}
@@ -309,7 +327,7 @@ export class RequirementSection extends React.Component<
     return (
       <div>
         <ANDORText style={{ marginBottom: 8 }}>
-          Complete {req.creditsRequired} credits from the following courses that
+          Complete {req.creditsRequired} credits from the following ranges that
           are not already required:
         </ANDORText>
         {req.ranges.map((r: ISubjectRange, index: number) => {
@@ -365,6 +383,7 @@ export class RequirementSection extends React.Component<
                 andCourse.subject + andCourse.classId
               )
             }
+            currentClassCounter={this.props.currentClassCounter}
             level={level}
           ></SidebarClassBlock>
         );
@@ -381,6 +400,7 @@ export class RequirementSection extends React.Component<
             completed={this.props.completedCourses.includes(
               course.subject + course.classId
             )}
+            currentClassCounter={this.props.currentClassCounter}
             level={level}
           ></SidebarClassBlock>
         );
@@ -394,8 +414,13 @@ export class RequirementSection extends React.Component<
    * @param level the current indentation level for this display text
    * @param top determines if this display text is at top level
    */
-  convertTypeToText(type: string, level: number, top: boolean, index: number) {
-    if (type === "OR") {
+  convertTypeToText(
+    req: Requirement,
+    level: number,
+    top: boolean,
+    index: number
+  ) {
+    if (req.type === "OR") {
       return (
         <SubtitleWrapper>
           {top && <Separator />}
@@ -405,14 +430,25 @@ export class RequirementSection extends React.Component<
         </SubtitleWrapper>
       );
     }
-    if (type === "AND") {
+    if (req.type === "CREDITS") {
+      return (
+        <SubtitleWrapper>
+          {top && <Separator />}
+          <SubtitleText level={top ? level + 1 : level}>
+            Complete {req.minCredits} to {req.maxCredits} credits from the
+            following courses:
+          </SubtitleText>
+        </SubtitleWrapper>
+      );
+    }
+    if (req.type === "AND") {
       if (index !== 0 && top) {
         return <Separator />;
       }
       return "";
     }
 
-    return type;
+    return req.type;
   }
 
   /**
@@ -484,3 +520,21 @@ export class RequirementSection extends React.Component<
     );
   }
 }
+
+const mapStateToProps = (state: AppState) => ({
+  currentClassCounter: getCurrentClassCounterFromState(state),
+});
+
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  incrementCurrentClassCounter: () => dispatch(incrementCurrentClassCounter()),
+});
+
+export const RequirementSection = connect<
+  ReduxStoreProps,
+  ReduxDispatchProps,
+  RequirementSectionProps,
+  AppState
+>(
+  mapStateToProps,
+  mapDispatchToProps
+)(RequirementSectionComponent);

@@ -67,6 +67,7 @@ interface SidebarClassBlockProps {
   index: number;
   warning?: CourseWarning;
   completed: boolean;
+  currentClassCounter: number;
   level: number;
 }
 

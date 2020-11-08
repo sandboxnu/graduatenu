@@ -291,6 +291,10 @@ class CompletedCoursesComponent extends Component<Props, State> {
   }
 
   render() {
+    // indicates if the user came from login button on welcome page
+    const { fromOnBoardingGuest } = (this.props.location.state as any) || {
+      fromOnBoardingGuest: false,
+    };
     let reqLen = this.props.major.requirementGroups.length;
     let split = Math.floor(reqLen / 2);
     return (
