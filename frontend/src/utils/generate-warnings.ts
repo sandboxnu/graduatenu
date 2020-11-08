@@ -31,9 +31,9 @@ import {
   StatusEnum,
 } from "../../../common/types";
 /*
-CreditRange interface to track the min and max credits for a particular season. 
-seasonMax = a number representing the max numebr of credits you can take without over-loading. 
-seasonMin = a number representing the min number of credits you can take without under-loading.  
+CreditRange interface to track the min and max credits for a particular season.
+seasonMax = a number representing the max numebr of credits you can take without over-loading.
+seasonMin = a number representing the min number of credits you can take without under-loading.
 */
 interface CreditRange {
   seasonMax: number;
@@ -41,8 +41,8 @@ interface CreditRange {
 }
 
 /*
-seasonCreditTracker is an object of string --> creditRange object. 
-This object is meant to encode max and min credit per season. 
+seasonCreditTracker is an object of string --> creditRange object.
+This object is meant to encode max and min credit per season.
 */
 let seasonCreditTracker: { [key: string]: CreditRange } = {
   SM: { seasonMax: 18, seasonMin: 12 },
@@ -659,6 +659,9 @@ function addCoursesToTracker(
   toAdd: ScheduleTerm,
   tracker: CourseTakenTracker
 ): void {
+  if (toAdd.status === "INACTIVE") {
+    return;
+  }
   for (const course of toAdd.classes) {
     tracker.addCourse(course, toAdd.termId);
   }
@@ -673,6 +676,9 @@ function addCoursesToMap(
   toAdd: ScheduleTerm,
   taken: Map<string, HashableCourse>
 ): void {
+  if (toAdd.status === "INACTIVE") {
+    return;
+  }
   for (const course of toAdd.classes) {
     let hashableCourse: HashableCourse = {
       subject: course.subject,

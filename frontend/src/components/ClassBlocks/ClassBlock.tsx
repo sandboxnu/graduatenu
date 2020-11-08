@@ -27,6 +27,7 @@ interface ClassBlockProps {
   index: number;
   warnings?: CourseWarning[];
   onDelete: (course: DNDScheduleCourse) => void;
+  currentClassCounter: number;
 }
 
 interface ClassBlockState {
