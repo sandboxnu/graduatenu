@@ -138,7 +138,7 @@ class OnboardingScreenComponent extends React.Component<
 
   onChangeGradYear(e: any) {
     this.setState({
-      gradYear: e.target.value == 2020 ? Number(e.target.value) : 2020,
+      gradYear: Number(e.target.value),
       beenEditedGrad: true,
     });
   }

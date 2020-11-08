@@ -313,6 +313,17 @@ function AddPlanPopperComponent(props: Props) {
           onChange={setSelect}
           displayEmpty
           value={selectedPlanOption}
+          MenuProps={{
+            anchorOrigin: {
+              vertical: "bottom",
+              horizontal: "left",
+            },
+            transformOrigin: {
+              vertical: "top",
+              horizontal: "left",
+            },
+            getContentAnchorEl: null,
+          }}
         >
           <MenuItem value={PLAN_OPTIONS.NEW_PLAN}>
             {PLAN_OPTIONS.NEW_PLAN}
