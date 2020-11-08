@@ -12,6 +12,7 @@ import { SignupScreen } from "./Onboarding/SignupScreen";
 import { LoginScreen } from "./Onboarding/LoginScreen";
 import { TransferCoursesScreen } from "./Onboarding/TransferCoursesScreen";
 import { Profile } from "./profile/Profile";
+import TransferableCreditScreen from "./Onboarding/TransferableCreditScreen";
 
 export const App = ({
   store,
@@ -35,6 +36,10 @@ export const App = ({
               component={CompletedCoursesScreen}
             />
             <Route path="/transferCourses" component={TransferCoursesScreen} />
+            <Route
+              path="/transferableCredits"
+              component={TransferableCreditScreen}
+            />
             <Route path="/" component={Onboarding} />
           </Switch>
         </Router>

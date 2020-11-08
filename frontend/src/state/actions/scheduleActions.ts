@@ -116,3 +116,13 @@ export const setClosedYearsToYearsInThePast = createAction(
   "schedule/SET_CLOSED_YEARS_TO_YEARS_IN_THE_PAST",
   (academicYear: number) => ({ academicYear })
 )();
+
+export const setCurrentClassCounter = createAction(
+  "schedule/SET_CURRENT_CLASS_COUNTER",
+  (currentClassCounter: number) => ({ currentClassCounter })
+)();
+
+export const incrementCurrentClassCounter = createAction(
+  "schedule/INCREMENT_CURRENT_CLASS_COUNTER",
+  () => void 0
+)();

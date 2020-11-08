@@ -50,11 +50,13 @@ import {
   getAcademicYearFromState,
   getClosedYearsFromState,
   getTransferCoursesFromState,
+  getCurrentClassCounterFromState,
 } from "../state";
 import {
   updateSemesterAction,
   setDNDScheduleAction,
   setClosedYearsToYearsInThePast,
+  incrementCurrentClassCounter,
 } from "../state/actions/scheduleActions";
 import {
   setLinkSharingAction,
@@ -226,6 +228,7 @@ interface ReduxStoreHomeProps {
   isLoggedIn: boolean;
   academicYear: number;
   closedYears: Set<number>; // list of indexes of closed years
+  currentClassCounter: number;
 }
 
 interface ReduxDispatchHomeProps {
@@ -243,6 +246,7 @@ interface ReduxDispatchHomeProps {
   updateActiveSchedule: (updatedSchedule: ScheduleSlice) => void;
   logOut: () => void;
   setClosedYearsToYearsInThePast: (academicYear: number) => void;
+  incrementCurrentClassCounter: () => void;
 }
 
 type Props = ToastHomeProps &
@@ -331,8 +335,10 @@ class HomeComponent extends React.Component<Props, HomeState> {
         destination,
         source,
         this.props.setDNDSchedule,
-        draggableId
+        draggableId,
+        this.props.currentClassCounter
       );
+      this.props.incrementCurrentClassCounter();
     } else {
       moveCourse(
         this.props.schedule,
@@ -663,6 +669,7 @@ const mapStateToProps = (state: AppState) => ({
   isLoggedIn: isUserLoggedIn(state),
   academicYear: getAcademicYearFromState(state),
   closedYears: getClosedYearsFromState(state),
+  currentClassCounter: getCurrentClassCounterFromState(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
@@ -686,6 +693,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   logOut: () => dispatch(resetUserAction()),
   setClosedYearsToYearsInThePast: (academicYear: number) =>
     dispatch(setClosedYearsToYearsInThePast(academicYear)),
+  incrementCurrentClassCounter: () => dispatch(incrementCurrentClassCounter()),
 });
 
 export const Home = connect<

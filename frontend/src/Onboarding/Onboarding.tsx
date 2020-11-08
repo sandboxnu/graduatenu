@@ -1,98 +1,109 @@
 import React from "react";
 import { Link, Redirect } from "react-router-dom";
 import styled from "styled-components";
-import { GraduateGrey } from "../constants";
-import { Button, Card, Theme, withStyles } from "@material-ui/core";
-import picture from "../assets/landingils.png";
+import { Button, Theme, withStyles } from "@material-ui/core";
+import titlePicture from "../assets/onboarding-title.png";
+import picture1 from "../assets/onboarding-1.png";
+import picture2 from "../assets/onboarding-2.png";
+import picture3 from "../assets/onboarding-3.png";
 import { connect } from "react-redux";
 import { getFullNameFromState } from "../state";
 import { AppState } from "../state/reducers/state";
 import { Dispatch, bindActionCreators } from "redux";
 import { fetchMajorsAndPlans as fMAP } from "../utils/fetchMajorsAndPlans";
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
+import { NORTHEASTERN_RED } from "../constants";
 
 const Header = styled.div`
-  height: 50px;
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
+  padding-left: 5%;
+  padding-right: 5%;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const Banner = styled.div`
+  background-color: ${NORTHEASTERN_RED};
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+`;
+
+const BannerInfo = styled.div`
+  display: flex;
+  width: 50%;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin-left: 16px;
+`;
+
+const BannerInfoTitle = styled.h1`
+  color: white;
+  margin-bottom: -8px;
+`;
+
+const BannerInfoText = styled.h4`
+  color: white;
+`;
+
+const TitlePicture = styled.img`
+  width: 300px;
+  height: 300px;
+  align-self: center;
 `;
 
 const Body = styled.div`
   display: flex;
-  height: 300px;
-  background-color: ${GraduateGrey};
-  flex-direction: row;
-  justify-content: space-around;
+  flex-direction: column;
+  margin-left: 20%;
+  margin-right: 20%;
+  margin-top: 24px;
+  margin-bottom: 32px;
 `;
 
-const BodyText = styled.div`
+const InfoSection = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+`;
+
+const InfoText = styled.div`
+  width: 50%;
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
+`;
+
+const InfoPictureWrapper = styled.div`
+  display: flex;
+  width: 50%;
+  align-items: center;
   justify-content: center;
-  align-items: start;
 `;
 
-const TitleText = styled.h2`
-  margin-bottom: 2px;
-`;
-
-const DescriptionText = styled.p`
-  margin-bottom: 30px;
-`;
-
-const GraduateLogo = styled.img`
-  height: 250px;
-  width: 175px;
+const InfoPicture = styled.img`
+  width: 250px;
+  height: 167px;
   align-self: center;
 `;
 
-const ContentWrapper = styled.div`
+const InfoTextTitle = styled.h3`
+  margin-bottom: -8px;
+`;
+
+const Footer = styled.div`
+  background-color: ${NORTHEASTERN_RED};
   display: flex;
   flex-direction: row;
-  flex: 1;
-`;
-
-const ContentWall = styled.div`
-  display: flex;
-  flex: 1;
-`;
-
-const Content = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  flex: 6;
-  margin-top: 40px;
-`;
-
-const InfoCard = styled(Card)`
-  display: flex;
-  flex-direction: column;
-  height: 250px;
-  width: 270px;
-  border-radius: 0px !important;
-`;
-
-const PurpleHeader = styled.div`
-  height: 10px;
-  background-color: indigo;
-`;
-
-const CardBody = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding-top: 10px;
-  margin-left: 15px;
-  margin-right: 15px;
-`;
-
-const CardTitleText = styled.h2`
-  margin-bottom: 2px;
+  align-items: center;
+  padding: 20px;
+  padding-left: 80px;
+  padding-right: 80px;
+  justify-content: flex-end;
 `;
 
 const LoginLink = styled(Link)`
@@ -100,10 +111,20 @@ const LoginLink = styled(Link)`
   margin-right: 8px !important;
 `;
 
+const WhiteColorButton = withStyles((theme: Theme) => ({
+  root: {
+    color: NORTHEASTERN_RED,
+    backgroundColor: "#ffffff",
+    "&:hover": {
+      backgroundColor: "#DB4747",
+    },
+  },
+}))(Button);
+
 const ColorButton = withStyles((theme: Theme) => ({
   root: {
     color: "#ffffff",
-    backgroundColor: "#EB5757",
+    backgroundColor: NORTHEASTERN_RED,
     "&:hover": {
       backgroundColor: "#DB4747",
     },
@@ -116,15 +137,35 @@ interface OnboardingProps {
 }
 
 class OnboardingComponent extends React.Component<OnboardingProps> {
-  renderInfoCard(title: string, desc: string) {
+  renderInfoSection(
+    title: string,
+    desc: string,
+    picture: string,
+    flipped = false
+  ) {
+    if (flipped) {
+      return (
+        <InfoSection>
+          <InfoText>
+            <InfoTextTitle>{title}</InfoTextTitle>
+            <p>{desc}</p>
+          </InfoText>
+          <InfoPictureWrapper>
+            <InfoPicture src={picture} />
+          </InfoPictureWrapper>
+        </InfoSection>
+      );
+    }
     return (
-      <InfoCard>
-        <PurpleHeader></PurpleHeader>
-        <CardBody>
-          <CardTitleText>{title}</CardTitleText>
+      <InfoSection>
+        <InfoPictureWrapper>
+          <InfoPicture src={picture} />
+        </InfoPictureWrapper>
+        <InfoText>
+          <InfoTextTitle>{title}</InfoTextTitle>
           <p>{desc}</p>
-        </CardBody>
-      </InfoCard>
+        </InfoText>
+      </InfoSection>
     );
   }
 
@@ -140,52 +181,61 @@ class OnboardingComponent extends React.Component<OnboardingProps> {
     }
 
     return (
-      <Container>
+      <>
         <Header>
+          <h1>GraduateNU</h1>
           <LoginLink
             to={{ pathname: "/login", state: { fromOnBoarding: true } }}
             style={{ textDecoration: "none" }}
           >
-            <ColorButton variant="contained" color="primary">
-              Login
-            </ColorButton>
+            <ColorButton variant="contained">Login</ColorButton>
           </LoginLink>
         </Header>
-        <Body>
-          <BodyText>
-            <TitleText>Graduate on time.</TitleText>
-            <DescriptionText>
-              Navigate the Northeastern graduation requirements and build a
+        <Banner>
+          <BannerInfo>
+            <BannerInfoTitle>Graduate on time.</BannerInfoTitle>
+            <BannerInfoText>
+              Navigate the Northeastern graduation requirements and create a
               personalized plan of study.
-            </DescriptionText>
-            <Link
+            </BannerInfoText>
+            <LoginLink
               to={{ pathname: "/onboarding" }}
-              style={{ textDecoration: "none" }}
+              style={{ textDecoration: "none", alignSelf: "flex-start" }}
             >
-              <ColorButton variant="contained">Get Started</ColorButton>
-            </Link>
-          </BodyText>
-          <GraduateLogo src={picture} alt="picture"></GraduateLogo>
+              <WhiteColorButton variant="contained">
+                Get Started
+              </WhiteColorButton>
+            </LoginLink>
+          </BannerInfo>
+          <TitlePicture src={titlePicture} alt="title-picture"></TitlePicture>
+        </Banner>
+        <Body>
+          {this.renderInfoSection(
+            "Start!",
+            "Just answer a couple questions and get started with a multi-year plan for your classes.",
+            picture1
+          )}
+          {this.renderInfoSection(
+            "Personalize",
+            "Pick the classes you want. We’ll take care of NU Path, pre-requisites, and everything in between.",
+            picture2,
+            true
+          )}
+          {this.renderInfoSection(
+            "Graduate",
+            "Build a plan of study that lets you graduate faster, with better classes, and a lot less headaches.",
+            picture3
+          )}
         </Body>
-        <ContentWrapper>
-          <ContentWall></ContentWall>
-          <Content>
-            {this.renderInfoCard(
-              "Start",
-              "Just answer a couple questions and get started with a multi-year plan for your classes."
-            )}
-            {this.renderInfoCard(
-              "Personalize",
-              "Pick the classes you want. We’ll take care of the NUPaths, prereqs, and everything in between."
-            )}
-            {this.renderInfoCard(
-              "Graduate",
-              "Build a plan of study that lets you graduate faster, with better classes, and lot less headaches."
-            )}
-          </Content>
-          <ContentWall></ContentWall>
-        </ContentWrapper>
-      </Container>
+        <Footer>
+          <LoginLink
+            to={{ pathname: "/onboarding" }}
+            style={{ textDecoration: "none", alignSelf: "flex-end" }}
+          >
+            <WhiteColorButton variant="contained">Get Started</WhiteColorButton>
+          </LoginLink>
+        </Footer>
+      </>
     );
   }
 }

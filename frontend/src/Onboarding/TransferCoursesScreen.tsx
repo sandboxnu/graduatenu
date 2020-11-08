@@ -20,9 +20,10 @@ import styled from "styled-components";
 import { fetchCourse } from "../api";
 import { NextButton } from "../components/common/NextButton";
 import { Link, withRouter, RouteComponentProps } from "react-router-dom";
-import { GenericOnboardingTemplate } from "./GenericOnboarding";
-import CheckBoxIcon from "@material-ui/icons/CheckBox";
-import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
+import {
+  SelectableCourse,
+  OnboardingSelectionTemplate,
+} from "./GenericOnboarding";
 import {
   Link as ButtonLink,
   Collapse,
@@ -218,27 +219,6 @@ class TransferCoursesComponent extends Component<Props, State> {
   }
 
   /**
-   * Renders one course/courseset (if it contains labs/recitiations, and seperated)
-   * @param courses - Course pairings to be rendered
-   */
-  renderCourse(courses: IRequiredCourse[]) {
-    let allCourse = courses.map(course => course.subject + course.classId);
-    return (
-      <CourseWrapper key={allCourse[0]}>
-        <Checkbox
-          style={{ width: 2, height: 2 }}
-          icon={<CheckBoxOutlineBlankIcon style={{ fontSize: 20 }} />}
-          checkedIcon={
-            <CheckBoxIcon style={{ fontSize: 20, color: "#EB5757" }} />
-          }
-          onChange={e => courses.forEach(course => this.onChecked(e, course))}
-        />
-        <CourseText>{allCourse.join(" and ")}</CourseText>
-      </CourseWrapper>
-    );
-  }
-
-  /**
    * Renders course requirements in the list that are in the completed requirements list
    * @param reqs - requirements to be rendered
    */
@@ -289,56 +269,52 @@ class TransferCoursesComponent extends Component<Props, State> {
     );
   }
 
+  /**
+   * Renders one course/courseset (if it contains labs/recitiations, and seperated)
+   * @param courses - Course pairings to be rendered
+   */
+  renderCourse(courses: IRequiredCourse[]) {
+    let allCourse = courses.map(course => course.subject + course.classId);
+    return (
+      <SelectableCourse
+        courseText={allCourse.join(" and ")}
+        onChange={e => courses.forEach(course => this.onChecked(e, course))}
+      ></SelectableCourse>
+    );
+  }
+
   render() {
     let renderedMajorReqs = this.props.major.requirementGroups
       .map(r => this.renderSection(r))
       .filter(r => r !== null);
     let split = Math.ceil(renderedMajorReqs.length / 2);
     return (
-      <GenericOnboardingTemplate screen={2}>
-        <MainTitleText>
-          Select any courses you took as transfer credit:
-        </MainTitleText>
-        <Paper
-          elevation={0}
-          style={{
-            minWidth: 800,
-            maxWidth: 800,
-            minHeight: 300,
-            maxHeight: 300,
-            overflow: "-moz-scrollbars-vertical",
-            overflowY: "scroll",
-          }}
-          component={ScrollWrapper}
-        >
-          <Grid container justify="space-evenly">
-            <Grid key={0} item>
-              <Paper elevation={0} style={{ minWidth: 350, maxWidth: 400 }}>
-                {renderedMajorReqs.slice(0, split)}
-              </Paper>
-            </Grid>
-            <Grid key={1} item>
-              <Paper elevation={0} style={{ minWidth: 350, maxWidth: 400 }}>
-                {this.renderOtherCourseSection()}
-                {renderedMajorReqs.slice(split, renderedMajorReqs.length)}
-              </Paper>
-            </Grid>
+      <OnboardingSelectionTemplate
+        screen={3}
+        mainTitleText={"Select any courses you took as transfer credit:"}
+        onSubmit={this.onSubmit.bind(this)}
+        to={"transferableCredits"}
+      >
+        <Grid container justify="space-evenly">
+          <Grid key={0} item>
+            <Paper elevation={0} style={{ minWidth: 350, maxWidth: 400 }}>
+              {renderedMajorReqs.slice(0, split)}
+            </Paper>
           </Grid>
-        </Paper>
+          <Grid key={1} item>
+            <Paper elevation={0} style={{ minWidth: 350, maxWidth: 400 }}>
+              {this.renderOtherCourseSection()}
+              {renderedMajorReqs.slice(split, renderedMajorReqs.length)}
+            </Paper>
+          </Grid>
+        </Grid>
         <AddClassModal
           schedule={undefined}
           visible={this.state.modalVisible}
           handleClose={this.hideModal.bind(this)}
           handleSubmit={courses => this.addOtherCourses(courses)}
         ></AddClassModal>
-        <Link
-          to={"/signup"}
-          onClick={this.onSubmit.bind(this)}
-          style={{ textDecoration: "none" }}
-        >
-          <NextButton />
-        </Link>
-      </GenericOnboardingTemplate>
+      </OnboardingSelectionTemplate>
     );
   }
 }
