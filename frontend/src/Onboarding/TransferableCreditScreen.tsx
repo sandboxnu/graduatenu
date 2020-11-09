@@ -38,6 +38,9 @@ interface TransferableExamGroupsComponentProps {
   ) => void;
 }
 
+/**
+ * Component for displaying a single transferable exam.
+ */
 const TransferableExamComponent: React.FC<
   TransferableExamComponentProps
 > = props => {
@@ -77,6 +80,11 @@ const TransferableExamComponent: React.FC<
   );
 };
 
+/**
+ * Component for displaying a group of transferable exams under a single subject.
+ * For example, 2D and 3D Arts and Design are both exaums under the Arts group, so
+ * this component would be used to display the entire group.
+ */
 const TransferableExamGroupComponent: React.FC<
   TransferableExamGroupComponentProps
 > = props => {
@@ -97,6 +105,11 @@ const TransferableExamGroupComponent: React.FC<
   );
 };
 
+/**
+ * Component for displaying a whole array of exam groups.
+ * For example, AP exams has the groups Arts and Sciences, so
+ * this component would be used to display each group.
+ */
 const TransferableExamGroupsComponent: React.FC<
   TransferableExamGroupsComponentProps
 > = props => {
@@ -134,7 +147,7 @@ const TransferableCreditScreen: React.FC = () => {
 
   return (
     <OnboardingSelectionTemplate
-      screen={4}
+      screen={3}
       mainTitleText={"Select any exams you took for AP or IB credit:"}
       onSubmit={onSubmit}
       to={fromOnBoardingGuest ? "/home" : "/signup"}
@@ -144,8 +157,7 @@ const TransferableCreditScreen: React.FC = () => {
           <Paper
             elevation={0}
             style={{
-              minWidth: 350,
-              maxWidth: 400,
+              width: 350,
             }}
           >
             <MainTitleText>AP Exams</MainTitleText>
@@ -161,8 +173,7 @@ const TransferableCreditScreen: React.FC = () => {
           <Paper
             elevation={0}
             style={{
-              minWidth: 350,
-              maxWidth: 400,
+              width: 350,
             }}
           >
             <MainTitleText>IB Exams</MainTitleText>
