@@ -1,15 +1,7 @@
 import * as React from "react";
 import { excelToSchedule } from "../utils/excelParser";
 import { Schedule } from "../../../common/types";
-import styled from "styled-components";
 import { Tooltip } from "@material-ui/core";
-
-const Container = styled.div`
-  position: relative;
-  justify-content: left;
-  padding: 0px;
-  margin: 0px;
-`;
 
 interface Props {
   setSchedule: (schedule: Schedule) => void;
