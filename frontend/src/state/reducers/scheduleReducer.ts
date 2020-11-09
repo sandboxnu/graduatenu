@@ -1,5 +1,10 @@
-import { ScheduleCourse } from "../../../../common/types";
-import { DNDSchedule, IWarning, CourseWarning } from "../../models/types";
+import { ScheduleCourse, IRequiredCourse } from "../../../../common/types";
+import {
+  DNDSchedule,
+  IWarning,
+  CourseWarning,
+  NamedSchedule,
+} from "../../models/types";
 import { mockEmptySchedule } from "../../data/mockData";
 import produce from "immer";
 import { getType } from "typesafe-actions";
@@ -14,6 +19,8 @@ import {
   undoRemoveClassAction,
   setCoopCycle,
   setCompletedCourses,
+  setCompletedRequirements,
+  setTransferCourses,
   setNamedSchedule,
   setScheduleMajor,
   toggleYearExpanded,
@@ -47,6 +54,8 @@ export interface ScheduleStateSlice {
   warnings: IWarning[];
   courseWarnings: CourseWarning[];
   creditsTaken: number;
+  completedRequirements: IRequiredCourse[];
+  transferCourses: ScheduleCourse[];
   major: string;
   coopCycle: string;
   closedYears: Set<number>; // list of indexes for which years are not expanded in the UI
@@ -61,6 +70,8 @@ const initialState: ScheduleState = {
     warnings: [],
     courseWarnings: [],
     creditsTaken: 0,
+    completedRequirements: [],
+    transferCourses: [],
     major: "",
     coopCycle: "",
     closedYears: new Set(),
@@ -223,6 +234,11 @@ export const scheduleReducer = (
 
         return draft;
       }
+      case getType(setCompletedRequirements): {
+        draft.present.completedRequirements =
+          action.payload.completedRequirements;
+        return draft;
+      }
       case getType(setCompletedCourses): {
         const [dndCourses, newCounter] = convertToDNDCourses(
           // sort the completed courses so that when we add it to the schedule, it'll be more or less in order
@@ -267,6 +283,23 @@ export const scheduleReducer = (
 
         draft.present.warnings = container.normalWarnings;
         draft.present.courseWarnings = container.courseWarnings;
+        return draft;
+      }
+      case getType(setTransferCourses): {
+        draft.present.transferCourses = action.payload.transferCourses;
+
+        const [dndCourses, newCounter] = convertToDNDCourses(
+          action.payload.transferCourses.sort(
+            (course1: ScheduleCourse, course2: ScheduleCourse) =>
+              course1.classId
+                .toString()
+                .localeCompare(course2.classId.toString())
+          ),
+          draft.present.currentClassCounter
+        );
+
+        draft.present.currentClassCounter += newCounter;
+        draft.present.creditsTaken += sumCreditsFromList(dndCourses);
         return draft;
       }
       case getType(setNamedSchedule): {
