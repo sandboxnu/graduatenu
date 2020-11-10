@@ -7,11 +7,12 @@ jobs:
   push_frontend_to_registry:
     name: Push Frontend Docker image to GitHub Packages
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
     steps:
       - name: Check out the repo
         uses: actions/checkout@v2
-      - name: cd into frontend
-        run: cd frontend
       - name: Push to GitHub Packages
         uses: docker/build-push-action@v1
         with:
@@ -23,11 +24,12 @@ jobs:
   push_api_to_registry:
     name: Push Api Docker image to GitHub Packages
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: api
     steps:
       - name: Check out the repo
         uses: actions/checkout@v2
-      - name: cd into api
-        run: cd api
       - name: Push to GitHub Packages
         uses: docker/build-push-action@v1
         with:
