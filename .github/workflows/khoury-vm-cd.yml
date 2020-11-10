@@ -11,7 +11,7 @@ jobs:
       - name: Check out the repo
         uses: actions/checkout@v2
       - name: cd into frontend
-        uses: cd frontend
+        run: cd frontend
       - name: Push to GitHub Packages
         uses: docker/build-push-action@v1
         with:
@@ -27,7 +27,7 @@ jobs:
       - name: Check out the repo
         uses: actions/checkout@v2
       - name: cd into api
-        uses: cd api
+        run: cd api
       - name: Push to GitHub Packages
         uses: docker/build-push-action@v1
         with:
