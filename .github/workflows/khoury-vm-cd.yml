@@ -18,6 +18,7 @@ jobs:
           registry: docker.pkg.github.com
           repository: sandboxnu/graduatenu/graduate-frontend-deployments
           tag_with_ref: true
+          context: ./frontend
           file: ./frontend/Dockerfile
   push_api_to_registry:
     name: Push Api Docker image to GitHub Packages
@@ -33,4 +34,5 @@ jobs:
           registry: docker.pkg.github.com
           repository: sandboxnu/graduatenu/graduate-api-deployments
           tag_with_ref: true
+          context: ./api
           file: ./api/Dockerfile
