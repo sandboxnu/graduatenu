@@ -1,6 +1,10 @@
 import React from "react";
 import { DNDSchedule } from "../../models/types";
-import { Major } from "../../../../common/types";
+import {
+  Major,
+  IRequiredCourse,
+  ScheduleCourse,
+} from "../../../../common/types";
 import styled from "styled-components";
 import { RequirementSection } from ".";
 import {
@@ -10,8 +14,9 @@ import {
 import { AppState } from "../../state/reducers/state";
 import {
   getScheduleFromState,
-  getScheduleDataFromState,
   getScheduleMajorFromState,
+  getDeclaredMajorFromState,
+  getTransferCoursesFromState,
 } from "../../state";
 import { connect, useSelector } from "react-redux";
 import { findMajorFromName } from "../../utils/plan-helpers";
@@ -35,11 +40,13 @@ const MajorTitle = styled.p`
 interface SidebarProps {
   schedule: DNDSchedule;
   major: string;
+  transferCourses: ScheduleCourse[];
 }
 
 interface MajorSidebarProps {
   schedule: DNDSchedule;
   major: Major;
+  transferCourses: ScheduleCourse[];
 }
 
 const NoMajorSidebarComponent: React.FC = () => {
@@ -53,9 +60,15 @@ const NoMajorSidebarComponent: React.FC = () => {
 const MajorSidebarComponent: React.FC<MajorSidebarProps> = ({
   schedule,
   major,
+  transferCourses,
 }) => {
   const warnings = produceRequirementGroupWarning(schedule, major);
   const completedCourses: string[] = getCompletedCourseStrings(schedule);
+  const completedCourseStrings: string[] = transferCourses
+    ? completedCourses.concat(
+        ...transferCourses.map(course => course.subject + course.classId)
+      )
+    : completedCourses;
 
   return (
     <Container>
@@ -68,7 +81,7 @@ const MajorSidebarComponent: React.FC<MajorSidebarProps> = ({
             contents={major.requirementGroupMap[req]}
             warning={warnings.find(w => w.requirementGroup === req)}
             key={index + major.name}
-            completedCourses={completedCourses}
+            completedCourses={completedCourseStrings}
           ></RequirementSection>
         );
       })}
@@ -76,13 +89,21 @@ const MajorSidebarComponent: React.FC<MajorSidebarProps> = ({
   );
 };
 
-const SidebarComponent: React.FC<SidebarProps> = ({ schedule, major }) => {
+const SidebarComponent: React.FC<SidebarProps> = ({
+  schedule,
+  major,
+  transferCourses,
+}) => {
   const majorObj: Major | undefined = useSelector<AppState, Major | undefined>(
     state => findMajorFromName(major, state.majorState.majors)
   );
 
   return majorObj ? (
-    <MajorSidebarComponent schedule={schedule} major={majorObj} />
+    <MajorSidebarComponent
+      schedule={schedule}
+      major={majorObj}
+      transferCourses={transferCourses}
+    />
   ) : (
     <NoMajorSidebarComponent />
   );
@@ -90,6 +111,7 @@ const SidebarComponent: React.FC<SidebarProps> = ({ schedule, major }) => {
 
 const mapStateToProps = (state: AppState) => ({
   schedule: getScheduleFromState(state),
+  transferCourses: getTransferCoursesFromState(state),
   major: getScheduleMajorFromState(state),
 });
 

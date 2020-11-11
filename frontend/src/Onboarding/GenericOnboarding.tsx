@@ -44,7 +44,7 @@ const DotWrapper = styled.div`
   width: 256;
   height: 11px;
   margin-top: 6px;
-  margin-bottom: 34px;
+  margin-bottom: 48px;
 `;
 
 const MainTitleText = styled.div`
@@ -101,6 +101,7 @@ const ScrollWrapper = styled.div`
 const useStyles = makeStyles({
   root: {
     height: 15,
+    paddingLeft: 8,
   },
 });
 
@@ -112,7 +113,7 @@ const theme = createMuiTheme({
   },
 });
 
-const steps = ["", "", ""];
+const steps = ["", "", "", ""];
 
 interface SelectableCourseProps {
   readonly onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -163,7 +164,7 @@ const GenericOnboardingTemplate: React.FC<GenericOnboardingTemplateProps> = ({
         <DotWrapper>
           <Stepper activeStep={screen} style={{ minWidth: 300 }}>
             {steps.map(label => (
-              <Step key={label} style={{ color: red[400] }}>
+              <Step key={label} style={{ color: red[400], padding: 0 }}>
                 <StepLabel StepIconProps={{ classes: { root: classes.root } }}>
                   {label}
                 </StepLabel>

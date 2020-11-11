@@ -9,7 +9,7 @@ import {
   IRequiredCourse,
   ScheduleCourse,
   Status,
-  SeasonWord
+  SeasonWord,
 } from "../../../../common/types";
 import { XButton } from "../common";
 import { Modal } from "@material-ui/core";

@@ -8,6 +8,7 @@ import {
   IRequiredCourse,
   Requirement,
 } from "../../../common/types";
+import { setCompletedRequirements } from "../state/actions/scheduleActions";
 import { getDeclaredMajorFromState } from "../state";
 import { setCompletedCourses } from "../state/actions/scheduleActions";
 import { fetchCourse } from "../api";
@@ -47,16 +48,16 @@ function flattenOne(req: Requirement): IRequiredCourse[][] {
 
 interface CompletedCoursesScreenProps {
   major: Major;
-  setCompletedCourses: (completedCourses: ScheduleCourse[]) => void;
+  setCompletedRequirements: (completedRequirements: IRequiredCourse[]) => void;
 }
 
 type Props = CompletedCoursesScreenProps & RouteComponentProps;
 
 interface State {
-  selectedCourses: ScheduleCourse[];
   expandedSections: Map<String, Boolean>;
   modalVisible: boolean;
   otherCourses: IRequiredCourse[][];
+  completedRequirements: IRequiredCourse[];
 }
 
 class CompletedCoursesComponent extends Component<Props, State> {
@@ -69,10 +70,10 @@ class CompletedCoursesComponent extends Component<Props, State> {
     expanded.set("Other Courses", true);
 
     this.state = {
-      selectedCourses: [],
       expandedSections: expanded,
       modalVisible: false,
       otherCourses: [],
+      completedRequirements: [],
     };
   }
 
@@ -85,12 +86,12 @@ class CompletedCoursesComponent extends Component<Props, State> {
   }
 
   onSubmit() {
-    this.props.setCompletedCourses(this.state.selectedCourses);
+    this.props.setCompletedRequirements(this.state.completedRequirements);
   }
 
   /**
    * Handles a class when it has been checked off. If it is being unchecked, it removes it,
-   * and if it is being checked, it converts it to a ScheduleCourse and adds it to selected courses
+   * and if it is being checked, it adds it to the list of completed requirements
    * @param e
    * @param course
    */
@@ -98,22 +99,15 @@ class CompletedCoursesComponent extends Component<Props, State> {
     const checked = e.target.checked;
 
     if (checked) {
-      const scheduleCourse = await fetchCourse(
-        course.subject,
-        String(course.classId)
-      );
-      if (scheduleCourse) {
-        this.setState({
-          selectedCourses: [...this.state.selectedCourses, scheduleCourse],
-        });
-      }
+      this.setState(prevState => ({
+        completedRequirements: [...prevState.completedRequirements, course],
+      }));
     } else {
-      let courses = this.state.selectedCourses.filter(
-        c =>
-          c.subject !== course.subject && c.classId !== String(course.classId)
+      let courses = this.state.completedRequirements.filter(
+        c => c.subject !== course.subject && c.classId !== course.classId
       );
       this.setState({
-        selectedCourses: courses,
+        completedRequirements: courses,
       });
     }
   }
@@ -160,9 +154,7 @@ class CompletedCoursesComponent extends Component<Props, State> {
 
   // Renders all course requirements in the list
   parseCourseRequirements(reqs: IRequiredCourse[][]) {
-    return reqs.map((r: IRequiredCourse[], index: number) => (
-      <div key={index}>{this.renderCourse(r)}</div>
-    ));
+    return reqs.map((r: IRequiredCourse[]) => this.renderCourse(r));
   }
 
   // renders an entire requirement section if it has specific classes specified
@@ -248,7 +240,7 @@ class CompletedCoursesComponent extends Component<Props, State> {
         screen={1}
         mainTitleText={"Completed courses:"}
         onSubmit={this.onSubmit.bind(this)}
-        to={"/transferableCredits"}
+        to={"/transferCourses"}
       >
         <Grid container justify="space-evenly">
           <Grid key={0} item>
@@ -277,8 +269,8 @@ const mapStateToProps = (state: AppState) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  setCompletedCourses: (completedCourses: ScheduleCourse[]) =>
-    dispatch(setCompletedCourses(completedCourses)),
+  setCompletedRequirements: (completedReqs: IRequiredCourse[]) =>
+    dispatch(setCompletedRequirements(completedReqs)),
 });
 
 export const CompletedCoursesScreen = withRouter(
