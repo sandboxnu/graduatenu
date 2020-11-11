@@ -57,7 +57,7 @@ jobs:
       - name: Build, tag, and push rails image to DockerHub
         env:
           DH_REGISTRY: graduatenu
-          DH_REPOSITORY: graduatenu-rails
+          DH_REPOSITORY: graduatenu-api
           IMAGE_TAG: ${{ github.sha }}
         run: |
           cd api
