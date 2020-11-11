@@ -19,19 +19,18 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
         
-      - name: Login to GitHub Container Registry
+      - name: Login to DockerHub
         uses: docker/login-action@v1 
         with:
-          registry: docker.pkg.github.com
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Push to GitHub Packages
+      - name: Build and Push to Dockerhub
         uses: docker/build-push-action@v2
         with:
           push: true
           file: ./frontend/Dockerfile
-          tags: graduatenu/latest
+          tags: graduatenu/graduatenu-frontend:latest
           
   push_api_to_registry:
     name: Push Api Docker image to GitHub Packages
@@ -46,16 +45,15 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
         
-      - name: Login to GitHub Container Registry
-        uses: docker/login-action@v1 
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
         with:
-          registry: docker.pkg.github.com
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Push to GitHub Packages
+      - name: Build and Push to DockerHub
         uses: docker/build-push-action@v2
         with:
           push: true
           file: ./api/Dockerfile
-          tags: graduatenu/latest
+          tags: graduatenu/graduatenu-rails:latest
