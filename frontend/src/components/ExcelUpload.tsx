@@ -1,16 +1,7 @@
 import * as React from "react";
 import { excelToSchedule } from "../utils/excelParser";
 import { Schedule } from "../../../common/types";
-import styled from "styled-components";
-import Button from "@material-ui/core/Button";
-import Tooltip from "@material-ui/core/Tooltip";
-
-const Container = styled.div`
-  position: relative;
-  justify-content: right;
-  padding: 0px;
-  margin: 0px;
-`;
+import { Tooltip } from "@material-ui/core";
 
 interface Props {
   setSchedule: (schedule: Schedule) => void;
@@ -25,22 +16,19 @@ function onUpload(e: any, setSchedule: (schedule: Schedule) => any) {
 
 export const ExcelUpload: React.FC<Props> = props => {
   return (
-    <Container>
+    <div>
       <Tooltip
         title="Auto-populate your schedule with your excel plan of study. Reach out to your advisor if you don't have it!"
-        placement="left"
+        placement="bottom"
         arrow
       >
-        <Button variant="contained" component="label">
-          Upload Plan Of Study
-          <input
-            type="file"
-            accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-            style={{ display: "none" }}
-            onChange={e => onUpload(e, props.setSchedule)}
-          />
-        </Button>
+        <input
+          id="upload"
+          type="file"
+          accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+          onChange={e => onUpload(e, props.setSchedule)}
+        />
       </Tooltip>
-    </Container>
+    </div>
   );
 };

@@ -28,7 +28,7 @@ import {
   setCurrentClassCounter,
   incrementCurrentClassCounter,
 } from "../actions/scheduleActions";
-import { setSchedules } from "../actions/schedulesActions";
+import { setSchedules, addNewSchedule } from "../actions/schedulesActions";
 import {
   convertTermIdToSeason,
   convertToDNDSchedule,
@@ -38,6 +38,7 @@ import {
   numToTerm,
   getNextTerm,
   isYearInPast,
+  clearSchedule,
 } from "../../utils";
 import { resetUserAction } from "../actions/userActions";
 
@@ -185,24 +186,10 @@ export const scheduleReducer = (
           schedule,
           draft.present.currentClassCounter
         );
-        draft.present.schedule = newSchedule;
-        draft.present.currentClassCounter = newCounter;
 
         // remove all classes
-        const yearMapCopy = JSON.parse(
-          JSON.stringify(draft.present.schedule.yearMap)
-        );
-        for (const y of draft.present.schedule.years) {
-          const year = JSON.parse(
-            JSON.stringify(draft.present.schedule.yearMap[y])
-          );
-          year.fall.classes = [];
-          year.spring.classes = [];
-          year.summer1.classes = [];
-          year.summer2.classes = [];
-          yearMapCopy[y] = year;
-        }
-        draft.present.schedule.yearMap = yearMapCopy;
+        draft.present.schedule = clearSchedule(newSchedule);
+        draft.present.currentClassCounter = 0;
 
         // clear all warnings
         draft.present.warnings = [];
@@ -310,6 +297,16 @@ export const scheduleReducer = (
         draft.present.schedule = namedSchedule.schedule;
         draft.present.major = namedSchedule.major;
         draft.present.coopCycle = namedSchedule.coopCycle;
+        return draft;
+      }
+      case getType(addNewSchedule): {
+        const { name, newSchedule } = action.payload;
+        draft.present.warnings = newSchedule.warnings;
+        draft.present.courseWarnings = newSchedule.courseWarnings;
+        draft.present.currentClassCounter = newSchedule.currentClassCounter;
+        draft.present.schedule = newSchedule.schedule;
+        draft.present.major = newSchedule.major;
+        draft.present.coopCycle = newSchedule.coopCycle;
         return draft;
       }
       case getType(setSchedules): {
