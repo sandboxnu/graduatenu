@@ -33,6 +33,7 @@ jobs:
         run: |
           docker build -t $DH_REGISTRY/$DH_REPOSITORY:$IMAGE_TAG -f frontend/Dockerfile .
           docker push $DH_REGISTRY/$DH_REPOSITORY
+          echo "::set-output name=image::$DH_REGISTRY/$DH_REPOSITORY:$IMAGE_TAG"
           
   push_api_to_registry:
     name: Push Api Docker image to GitHub Packages
@@ -62,3 +63,4 @@ jobs:
           cd api
           docker build -t $DH_REGISTRY/$DH_REPOSITORY:$IMAGE_TAG .
           docker push $DH_REGISTRY/$DH_REPOSITORY
+          echo "::set-output name=image::$DH_REGISTRY/$DH_REPOSITORY:$IMAGE_TAG"
