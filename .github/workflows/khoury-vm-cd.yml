@@ -32,6 +32,7 @@ jobs:
           push: true
           context: ./frontend
           file: ./frontend/Dockerfile
+          tags: graduatenu/latest
           
   push_api_to_registry:
     name: Push Api Docker image to GitHub Packages
@@ -59,3 +60,4 @@ jobs:
           push: true
           context: ./api
           file: ./api/Dockerfile
+          tags: graduatenu/latest
