@@ -76,6 +76,7 @@ import {
   updatePlanForUser,
 } from "../services/PlanService";
 import { findMajorFromName } from "../utils/plan-helpers";
+import { AddPlan } from "./AddPlanPopper";
 import { Button, Theme, withStyles } from "@material-ui/core";
 import Loader from "react-loader-spinner";
 import { ExcelUpload } from "../components/ExcelUpload";
@@ -531,40 +532,6 @@ class HomeComponent extends React.Component<Props, HomeState> {
     }
   }
 
-  /**
-   * If a user is currently logged in, saves the current plan under this user.
-   * Only supports updating a user's singular plan, can be modified later to
-   * update a specific plan.
-   */
-  savePlan() {
-    // If this is true, then a user is currently logged in and we can update their plan
-    if (this.props.token && this.props.userId) {
-      const scheduleData: ScheduleSlice = this.props.getCurrentScheduleData();
-      createPlanForUser(this.props.userId, this.props.token, {
-        name: `Schedule ${this.state.planCount + 1}`,
-        link_sharing_enabled: this.props.linkSharing,
-        schedule: this.props.schedule,
-        major: this.props.major ? this.props.major : "",
-        planString: this.props.planStr ? this.props.planStr : "",
-        course_counter: scheduleData.currentClassCounter,
-        warnings: scheduleData.warnings,
-        course_warnings: scheduleData.courseWarnings,
-      }).then(plan => {
-        this.props.addNewSchedule(plan.plan.name, {
-          ...plan.plan,
-          coopCycle: plan.plan.planString,
-          currentClassCounter: plan.plan.courseCounter,
-          isScheduleLoading: false,
-          scheduleError: "",
-        } as ScheduleSlice);
-        this.setState({ planCount: this.state.planCount + 1 });
-        alert("Your plan has been saved.");
-      });
-    } else {
-      alert("You must be logged in to save your plan.");
-    }
-  }
-
   async setSchedule(schedule: Schedule) {
     let preReqSched = await addPrereqsToSchedule(schedule);
     const [dndschedule, counter] = convertToDNDSchedule(preReqSched, 0);
@@ -623,21 +590,12 @@ class HomeComponent extends React.Component<Props, HomeState> {
                   <PlanContainer>
                     <PlanPopperButton
                       variant="contained"
-                      onClick={this.savePlan.bind(this)}
-                    >
-                      Save Plan
-                    </PlanPopperButton>
-                  </PlanContainer>
-
-                  <PlanContainer>
-                    <PlanPopperButton
-                      variant="contained"
                       onClick={this.updatePlan.bind(this)}
                     >
                       Update Plan
                     </PlanPopperButton>
                   </PlanContainer>
-                  <ExcelUpload setSchedule={this.setSchedule.bind(this)} />
+                  <AddPlan />
                 </HomeButtons>
               </HomeAboveSchedule>
               {this.renderYears()}
