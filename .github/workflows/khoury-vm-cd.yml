@@ -25,12 +25,14 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build and Push to Dockerhub
-        uses: docker/build-push-action@v2
-        with:
-          push: true
-          file: ./frontend/Dockerfile
-          tags: graduatenu/graduatenu-frontend:latest
+      - name: Build, tag, and push frontend image to DockerHub
+        env:
+          DH_REGISTRY: graduatenu
+          DH_REPOSITORY: graduatenu-frontend
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          docker build -t $DH_REGISTRY/$DH_REPOSITORY:$IMAGE_TAG -f frontend/Dockerfile .
+          docker push $DH_REGISTRY/$DH_REPOSITORY
           
   push_api_to_registry:
     name: Push Api Docker image to GitHub Packages
@@ -51,9 +53,12 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build and Push to DockerHub
-        uses: docker/build-push-action@v2
-        with:
-          push: true
-          file: ./api/Dockerfile
-          tags: graduatenu/graduatenu-rails:latest
+      - name: Build, tag, and push rails image to DockerHub
+        env:
+          DH_REGISTRY: graduatenu
+          DH_REPOSITORY: graduatenu-rails
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          cd api
+          docker build -t $DH_REGISTRY/$DH_REPOSITORY:$IMAGE_TAG .
+          docker push $DH_REGISTRY/$DH_REPOSITORY
