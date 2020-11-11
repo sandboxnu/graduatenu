@@ -30,7 +30,6 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          context: ./frontend
           file: ./frontend/Dockerfile
           tags: graduatenu/latest
           
@@ -58,6 +57,5 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          context: ./api
           file: ./api/Dockerfile
           tags: graduatenu/latest
