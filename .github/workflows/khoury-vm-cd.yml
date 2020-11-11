@@ -1,7 +1,9 @@
 name: Publish Docker image to Github Docker Registry to be pulled in the Khoury VM.
 
 on:
-  release
+  push:
+    branches:
+      - 'docker-*'
 
 jobs:
   push_frontend_to_registry:
@@ -11,7 +13,7 @@ jobs:
       - name: Check out the repo
         uses: actions/checkout@v2
       - name: Push to GitHub Packages
-        uses: docker/build-push-action@v1
+        uses: docker/build-push-action@v2
         with:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
@@ -27,7 +29,7 @@ jobs:
       - name: Check out the repo
         uses: actions/checkout@v2
       - name: Push to GitHub Packages
-        uses: docker/build-push-action@v1
+        uses: docker/build-push-action@v2
         with:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
