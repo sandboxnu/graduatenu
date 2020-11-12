@@ -1,5 +1,5 @@
 import { createAction } from "typesafe-actions";
-import { Major } from "../../../../common/types";
+import { TransferableExam, Major } from "../../../../common/types";
 
 export const setFullNameAction = createAction(
   "user/SET_FULL_NAME",
@@ -96,6 +96,11 @@ export const setUserCoopCycleAction = createAction(
   (coopCycle: string) => ({
     coopCycle,
   })
+)();
+
+export const setExamCredits = createAction(
+  "user/SET_EXAM_CREDITS",
+  (examCredits: TransferableExam[]) => ({ examCredits })
 )();
 
 export const resetUserAction = createAction("user/RESET_USER", () => void 0)();

@@ -854,17 +854,9 @@ Object {
           },
           Object {
             "classId": "4501",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "name": "Recitation for CS 4500",
+            "name": "",
             "numCreditsMax": 0,
             "numCreditsMin": 0,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
             "subject": "CS",
           },
           Object {
@@ -1812,17 +1804,9 @@ Object {
           },
           Object {
             "classId": "4501",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "name": "Recitation for CS 4500",
+            "name": "",
             "numCreditsMax": 0,
             "numCreditsMin": 0,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
             "subject": "CS",
           },
           Object {
@@ -4631,17 +4615,9 @@ Object {
           },
           Object {
             "classId": "4501",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "name": "Recitation for CS 4500",
+            "name": "",
             "numCreditsMax": 0,
             "numCreditsMin": 0,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
             "subject": "CS",
           },
           Object {
@@ -5500,17 +5476,9 @@ Object {
           },
           Object {
             "classId": "4501",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "name": "Recitation for CS 4500",
+            "name": "",
             "numCreditsMax": 0,
             "numCreditsMin": 0,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
             "subject": "CS",
           },
           Object {
@@ -6328,17 +6296,9 @@ Object {
           },
           Object {
             "classId": "4501",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "name": "Recitation for CS 4500",
+            "name": "",
             "numCreditsMax": 0,
             "numCreditsMin": 0,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
             "subject": "CS",
           },
           Object {
@@ -12439,17 +12399,9 @@ Object {
           },
           Object {
             "classId": "4501",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "name": "Recitation for CS 4500",
+            "name": "",
             "numCreditsMax": 0,
             "numCreditsMin": 0,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
             "subject": "CS",
           },
           Object {
@@ -13330,17 +13282,9 @@ Object {
           },
           Object {
             "classId": "4501",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "name": "Recitation for CS 4500",
+            "name": "",
             "numCreditsMax": 0,
             "numCreditsMin": 0,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
             "subject": "CS",
           },
           Object {
@@ -14354,17 +14298,9 @@ Object {
           },
           Object {
             "classId": "4501",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "name": "Recitation for CS 4500",
+            "name": "",
             "numCreditsMax": 0,
             "numCreditsMin": 0,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
             "subject": "CS",
           },
           Object {
@@ -15170,17 +15106,9 @@ Object {
           },
           Object {
             "classId": "4501",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "name": "Recitation for CS 4500",
+            "name": "",
             "numCreditsMax": 0,
             "numCreditsMin": 0,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
             "subject": "CS",
           },
           Object {
@@ -15854,17 +15782,9 @@ Object {
           },
           Object {
             "classId": "4501",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "name": "Recitation for CS 4500",
+            "name": "",
             "numCreditsMax": 0,
             "numCreditsMin": 0,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
             "subject": "CS",
           },
           Object {
@@ -19863,17 +19783,9 @@ Object {
           },
           Object {
             "classId": "4501",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "name": "Recitation for CS 4500",
+            "name": "",
             "numCreditsMax": 0,
             "numCreditsMin": 0,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
             "subject": "CS",
           },
           Object {
@@ -20725,17 +20637,9 @@ Object {
           },
           Object {
             "classId": "4501",
-            "coreqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
-            "name": "Recitation for CS 4500",
+            "name": "",
             "numCreditsMax": 0,
             "numCreditsMin": 0,
-            "prereqs": Object {
-              "type": "and",
-              "values": Array [],
-            },
             "subject": "CS",
           },
           Object {

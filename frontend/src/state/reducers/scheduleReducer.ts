@@ -1,5 +1,10 @@
-import { ScheduleCourse } from "../../../../common/types";
-import { DNDSchedule, IWarning, CourseWarning } from "../../models/types";
+import { ScheduleCourse, IRequiredCourse } from "../../../../common/types";
+import {
+  DNDSchedule,
+  IWarning,
+  CourseWarning,
+  NamedSchedule,
+} from "../../models/types";
 import { mockEmptySchedule } from "../../data/mockData";
 import produce from "immer";
 import { getType } from "typesafe-actions";
@@ -14,6 +19,8 @@ import {
   undoRemoveClassAction,
   setCoopCycle,
   setCompletedCourses,
+  setCompletedRequirements,
+  setTransferCourses,
   setNamedSchedule,
   setScheduleMajor,
   toggleYearExpanded,
@@ -21,7 +28,7 @@ import {
   setCurrentClassCounter,
   incrementCurrentClassCounter,
 } from "../actions/scheduleActions";
-import { setSchedules } from "../actions/schedulesActions";
+import { setSchedules, addNewSchedule } from "../actions/schedulesActions";
 import {
   convertTermIdToSeason,
   convertToDNDSchedule,
@@ -31,6 +38,7 @@ import {
   numToTerm,
   getNextTerm,
   isYearInPast,
+  clearSchedule,
 } from "../../utils";
 import { resetUserAction } from "../actions/userActions";
 
@@ -47,6 +55,8 @@ export interface ScheduleStateSlice {
   warnings: IWarning[];
   courseWarnings: CourseWarning[];
   creditsTaken: number;
+  completedRequirements: IRequiredCourse[];
+  transferCourses: ScheduleCourse[];
   major: string;
   coopCycle: string;
   closedYears: Set<number>; // list of indexes for which years are not expanded in the UI
@@ -61,6 +71,8 @@ const initialState: ScheduleState = {
     warnings: [],
     courseWarnings: [],
     creditsTaken: 0,
+    completedRequirements: [],
+    transferCourses: [],
     major: "",
     coopCycle: "",
     closedYears: new Set(),
@@ -174,24 +186,10 @@ export const scheduleReducer = (
           schedule,
           draft.present.currentClassCounter
         );
-        draft.present.schedule = newSchedule;
-        draft.present.currentClassCounter = newCounter;
 
         // remove all classes
-        const yearMapCopy = JSON.parse(
-          JSON.stringify(draft.present.schedule.yearMap)
-        );
-        for (const y of draft.present.schedule.years) {
-          const year = JSON.parse(
-            JSON.stringify(draft.present.schedule.yearMap[y])
-          );
-          year.fall.classes = [];
-          year.spring.classes = [];
-          year.summer1.classes = [];
-          year.summer2.classes = [];
-          yearMapCopy[y] = year;
-        }
-        draft.present.schedule.yearMap = yearMapCopy;
+        draft.present.schedule = clearSchedule(newSchedule);
+        draft.present.currentClassCounter = 0;
 
         // clear all warnings
         draft.present.warnings = [];
@@ -221,6 +219,11 @@ export const scheduleReducer = (
         draft.present.warnings = container.normalWarnings;
         draft.present.courseWarnings = container.courseWarnings;
 
+        return draft;
+      }
+      case getType(setCompletedRequirements): {
+        draft.present.completedRequirements =
+          action.payload.completedRequirements;
         return draft;
       }
       case getType(setCompletedCourses): {
@@ -269,6 +272,23 @@ export const scheduleReducer = (
         draft.present.courseWarnings = container.courseWarnings;
         return draft;
       }
+      case getType(setTransferCourses): {
+        draft.present.transferCourses = action.payload.transferCourses;
+
+        const [dndCourses, newCounter] = convertToDNDCourses(
+          action.payload.transferCourses.sort(
+            (course1: ScheduleCourse, course2: ScheduleCourse) =>
+              course1.classId
+                .toString()
+                .localeCompare(course2.classId.toString())
+          ),
+          draft.present.currentClassCounter
+        );
+
+        draft.present.currentClassCounter += newCounter;
+        draft.present.creditsTaken += sumCreditsFromList(dndCourses);
+        return draft;
+      }
       case getType(setNamedSchedule): {
         const namedSchedule = action.payload.namedSchedule.schedule.present;
         draft.present.warnings = namedSchedule.warnings;
@@ -277,6 +297,16 @@ export const scheduleReducer = (
         draft.present.schedule = namedSchedule.schedule;
         draft.present.major = namedSchedule.major;
         draft.present.coopCycle = namedSchedule.coopCycle;
+        return draft;
+      }
+      case getType(addNewSchedule): {
+        const { name, newSchedule } = action.payload;
+        draft.present.warnings = newSchedule.warnings;
+        draft.present.courseWarnings = newSchedule.courseWarnings;
+        draft.present.currentClassCounter = newSchedule.currentClassCounter;
+        draft.present.schedule = newSchedule.schedule;
+        draft.present.major = newSchedule.major;
+        draft.present.coopCycle = newSchedule.coopCycle;
         return draft;
       }
       case getType(setSchedules): {

@@ -118,6 +118,20 @@ export const convertToDNDSchedule = (
   return [newSchedule, counter];
 };
 
+export const clearSchedule = (schedule: DNDSchedule) => {
+  const yearMapCopy = JSON.parse(JSON.stringify(schedule.yearMap));
+  for (const y of schedule.years) {
+    const year = JSON.parse(JSON.stringify(schedule.yearMap[y]));
+    year.fall.classes = [];
+    year.spring.classes = [];
+    year.summer1.classes = [];
+    year.summer2.classes = [];
+    yearMapCopy[y] = year;
+  }
+  schedule.yearMap = yearMapCopy;
+  return schedule;
+};
+
 export const convertToDNDCourses = (
   courses: ScheduleCourse[],
   counter: number

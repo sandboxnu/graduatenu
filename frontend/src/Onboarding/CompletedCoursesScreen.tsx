@@ -8,75 +8,19 @@ import {
   IRequiredCourse,
   Requirement,
 } from "../../../common/types";
+import { setCompletedRequirements } from "../state/actions/scheduleActions";
 import { getDeclaredMajorFromState } from "../state";
 import { setCompletedCourses } from "../state/actions/scheduleActions";
-import styled from "styled-components";
 import { fetchCourse } from "../api";
-import { NextButton } from "../components/common/NextButton";
-import { Link, withRouter, RouteComponentProps } from "react-router-dom";
-import { GenericOnboardingTemplate } from "./GenericOnboarding";
-import CheckBoxIcon from "@material-ui/icons/CheckBox";
-import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
-import { AddClassModal } from "../components/AddClassModal";
-import { AddBlock } from "../components/ClassBlocks/AddBlock";
+import { withRouter, RouteComponentProps } from "react-router-dom";
 import {
-  Link as ButtonLink,
-  Collapse,
-  Grid,
-  Paper,
-  Checkbox,
-} from "@material-ui/core";
-
-const MainTitleText = styled.div`
-  font-size: 16px;
-  margin-left: 4px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  font-weight: 500;
-`;
-
-const TitleText = styled.div`
-  font-size: 12px;
-  margin-left: 4px;
-  margin-top: 16px;
-  margin-bottom: 8px;
-  font-weight: 500;
-`;
-
-const CourseWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-`;
-
-const CourseText = styled.p`
-  font-size: 12px;
-  margin: 1px;
-  font-weight: 400;
-`;
-
-const ScrollWrapper = styled.div`
-  &::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(0, 0, 0, 0.5);
-  }
-  &::-webkit-scrollbar-thumb {
-    background-clip: padding-box;
-    background-color: #c1c1c1;
-    border-color: transparent;
-    border-radius: 9px 8px 8px 9px;
-    border-style: solid;
-    border-width: 3px 3px 3px 4px;
-    box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
-  }
-  &::-webkit-scrollbar {
-    -webkit-appearance: none;
-    width: 16px;
-  }
-  &::-webkit-scrollbar-track:vertical {
-    border-left: 1px solid #e7e7e7;
-    box-shadow: 1px 0 1px 0 #f6f6f6 inset, -1px 0 1px 0 #f6f6f6 inset;
-  }
-`;
+  CourseText,
+  OnboardingSelectionTemplate,
+  SelectableCourse,
+  TitleText,
+} from "./GenericOnboarding";
+import { AddBlock } from "../components/ClassBlocks/AddBlock";
+import { Link as ButtonLink, Collapse, Grid, Paper } from "@material-ui/core";
 
 /**
  * Flattens the Requirement[] into only a list of Requirements/Requirement sets
@@ -104,16 +48,16 @@ function flattenOne(req: Requirement): IRequiredCourse[][] {
 
 interface CompletedCoursesScreenProps {
   major: Major;
-  setCompletedCourses: (completedCourses: ScheduleCourse[]) => void;
+  setCompletedRequirements: (completedRequirements: IRequiredCourse[]) => void;
 }
 
 type Props = CompletedCoursesScreenProps & RouteComponentProps;
 
 interface State {
-  selectedCourses: ScheduleCourse[];
   expandedSections: Map<String, Boolean>;
   modalVisible: boolean;
   otherCourses: IRequiredCourse[][];
+  completedRequirements: IRequiredCourse[];
 }
 
 class CompletedCoursesComponent extends Component<Props, State> {
@@ -126,10 +70,10 @@ class CompletedCoursesComponent extends Component<Props, State> {
     expanded.set("Other Courses", true);
 
     this.state = {
-      selectedCourses: [],
       expandedSections: expanded,
       modalVisible: false,
       otherCourses: [],
+      completedRequirements: [],
     };
   }
 
@@ -142,12 +86,12 @@ class CompletedCoursesComponent extends Component<Props, State> {
   }
 
   onSubmit() {
-    this.props.setCompletedCourses(this.state.selectedCourses);
+    this.props.setCompletedRequirements(this.state.completedRequirements);
   }
 
   /**
    * Handles a class when it has been checked off. If it is being unchecked, it removes it,
-   * and if it is being checked, it converts it to a ScheduleCourse and adds it to selected courses
+   * and if it is being checked, it adds it to the list of completed requirements
    * @param e
    * @param course
    */
@@ -155,22 +99,15 @@ class CompletedCoursesComponent extends Component<Props, State> {
     const checked = e.target.checked;
 
     if (checked) {
-      const scheduleCourse = await fetchCourse(
-        course.subject,
-        String(course.classId)
-      );
-      if (scheduleCourse) {
-        this.setState({
-          selectedCourses: [...this.state.selectedCourses, scheduleCourse],
-        });
-      }
+      this.setState(prevState => ({
+        completedRequirements: [...prevState.completedRequirements, course],
+      }));
     } else {
-      let courses = this.state.selectedCourses.filter(
-        c =>
-          c.subject !== course.subject && c.classId !== String(course.classId)
+      let courses = this.state.completedRequirements.filter(
+        c => c.subject !== course.subject && c.classId !== course.classId
       );
       this.setState({
-        selectedCourses: courses,
+        completedRequirements: courses,
       });
     }
   }
@@ -203,26 +140,21 @@ class CompletedCoursesComponent extends Component<Props, State> {
   // Renders one course/courseset (if it contains labs/recitiations, and seperated)
   renderCourse(courses: IRequiredCourse[]) {
     let allCourse = courses.map(course => course.subject + course.classId);
+    const onChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+      courses.forEach(course => this.onChecked(e, course));
+
     return (
-      <CourseWrapper key={allCourse[0]}>
-        <Checkbox
-          style={{ width: 2, height: 2 }}
-          icon={<CheckBoxOutlineBlankIcon style={{ fontSize: 20 }} />}
-          checkedIcon={
-            <CheckBoxIcon style={{ fontSize: 20, color: "#EB5757" }} />
-          }
-          onChange={e => courses.forEach(course => this.onChecked(e, course))}
-        />
-        <CourseText>{allCourse.join(" and ")}</CourseText>
-      </CourseWrapper>
+      <SelectableCourse
+        key={allCourse[0]}
+        onChange={onChange}
+        courseText={allCourse.join(" and ")}
+      />
     );
   }
 
   // Renders all course requirements in the list
   parseCourseRequirements(reqs: IRequiredCourse[][]) {
-    return reqs.map((r: IRequiredCourse[], index: number) => (
-      <div key={index}>{this.renderCourse(r)}</div>
-    ));
+    return reqs.map((r: IRequiredCourse[]) => this.renderCourse(r));
   }
 
   // renders an entire requirement section if it has specific classes specified
@@ -301,61 +233,33 @@ class CompletedCoursesComponent extends Component<Props, State> {
   }
 
   render() {
-    // indicates if the user came from login button on welcome page
-    const { fromOnBoardingGuest } = (this.props.location.state as any) || {
-      fromOnBoardingGuest: false,
-    };
     let reqLen = this.props.major.requirementGroups.length;
     let split = Math.floor(reqLen / 2);
     return (
-      <GenericOnboardingTemplate screen={1}>
-        <MainTitleText>Completed courses:</MainTitleText>
-        <Paper
-          elevation={0}
-          style={{
-            minWidth: 800,
-            maxWidth: 800,
-            minHeight: 300,
-            maxHeight: 300,
-            overflow: "-moz-scrollbars-vertical",
-            overflowY: "scroll",
-          }}
-          component={ScrollWrapper}
-        >
-          <Grid container justify="space-evenly">
-            <Grid key={0} item>
-              <Paper elevation={0} style={{ minWidth: 350, maxWidth: 400 }}>
-                {this.props.major.requirementGroups
-                  .slice(0, split)
-                  .map(r => this.renderSection(r))}
-              </Paper>
-            </Grid>
-            <Grid key={1} item>
-              {this.renderOtherCourseSection()}
-              <Paper elevation={0} style={{ minWidth: 350, maxWidth: 400 }}>
-                {this.props.major.requirementGroups
-                  .slice(split, reqLen)
-                  .map(r => this.renderSection(r))}
-              </Paper>
-            </Grid>
+      <OnboardingSelectionTemplate
+        screen={1}
+        mainTitleText={"Completed courses:"}
+        onSubmit={this.onSubmit.bind(this)}
+        to={"/transferCourses"}
+      >
+        <Grid container justify="space-evenly">
+          <Grid key={0} item>
+            <Paper elevation={0} style={{ minWidth: 350, maxWidth: 400 }}>
+              {this.props.major.requirementGroups
+                .slice(0, split)
+                .map(r => this.renderSection(r))}
+            </Paper>
           </Grid>
-        </Paper>
-        <AddClassModal
-          schedule={undefined}
-          visible={this.state.modalVisible}
-          handleClose={this.hideModal.bind(this)}
-          handleSubmit={courses => this.addOtherCourses(courses)}
-        ></AddClassModal>
-        <Link
-          to={{
-            pathname: fromOnBoardingGuest ? "/home" : "/signup",
-          }}
-          onClick={this.onSubmit.bind(this)}
-          style={{ textDecoration: "none" }}
-        >
-          <NextButton />
-        </Link>
-      </GenericOnboardingTemplate>
+          <Grid key={1} item>
+            {this.renderOtherCourseSection()}
+            <Paper elevation={0} style={{ minWidth: 350, maxWidth: 400 }}>
+              {this.props.major.requirementGroups
+                .slice(split, reqLen)
+                .map(r => this.renderSection(r))}
+            </Paper>
+          </Grid>
+        </Grid>
+      </OnboardingSelectionTemplate>
     );
   }
 }
@@ -365,8 +269,8 @@ const mapStateToProps = (state: AppState) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  setCompletedCourses: (completedCourses: ScheduleCourse[]) =>
-    dispatch(setCompletedCourses(completedCourses)),
+  setCompletedRequirements: (completedReqs: IRequiredCourse[]) =>
+    dispatch(setCompletedRequirements(completedReqs)),
 });
 
 export const CompletedCoursesScreen = withRouter(
