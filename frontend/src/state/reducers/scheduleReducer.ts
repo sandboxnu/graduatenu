@@ -43,7 +43,7 @@ import {
   clearSchedule,
 } from "../../utils";
 import { resetUserAction } from "../actions/userActions";
-import { cloneDeep } from "lodash";
+import _ from "lodash";
 
 export interface ScheduleState {
   past?: ScheduleStateSlice;
@@ -147,8 +147,6 @@ export const scheduleReducer = (
       case getType(removeTransferClassAction): {
         const { course } = action.payload;
         // save prev state with a deep copy
-        draft.past = cloneDeep(draft.present);
-
         draft.past = JSON.parse(JSON.stringify(draft.present));
 
         draft.present.transferCourses = draft.present.transferCourses.filter(

@@ -141,12 +141,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     dispatch(removeTransferClassAction(course)),
 });
 
-export const TransferCredits = connect<
-  null,
-  ReduxDispatchTransferCreditsProps,
-  TransferCreditsProps,
-  AppState
->(
+export const TransferCredits = connect(
   null,
   mapDispatchToProps
 )(TransferCreditsComponent);
