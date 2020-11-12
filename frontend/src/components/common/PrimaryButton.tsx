@@ -27,11 +27,17 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export const PrimaryButton: React.FC = props => {
+export function PrimaryButton(props: any) {
   const classes = useStyles();
   return (
-    <ColorButton variant="contained" color="primary" className={classes.margin}>
+    <ColorButton
+      variant="contained"
+      color="primary"
+      className={classes.margin}
+      disabled={props.disabled}
+      onClick={props.onClick}
+    >
       {props.children}
     </ColorButton>
   );
-};
+}

@@ -10,8 +10,8 @@ import {
 const ColorButton = withStyles((theme: Theme) => ({
   root: {
     color: "#ffffff",
-    width: "100px",
-    height: "36px",
+    paddingVertical: "8px",
+    paddingHorizontal: "16px",
     backgroundColor: "#EB5757",
     "&:hover": {
       backgroundColor: "#DB4747",
@@ -27,11 +27,23 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export const NextButton: React.FC = () => {
+interface Props {
+  text?: string;
+  onClick?: () => void;
+  disabled?: boolean;
+}
+
+export const NextButton: React.FC<Props> = props => {
   const classes = useStyles();
   return (
-    <ColorButton variant="contained" color="primary" className={classes.margin}>
-      Next
+    <ColorButton
+      variant="contained"
+      color="primary"
+      className={classes.margin}
+      onClick={props.onClick}
+      disabled={props.disabled}
+    >
+      {props.text || "Next"}
     </ColorButton>
   );
 };

@@ -3,12 +3,21 @@ import produce from "immer";
 import { getType } from "typesafe-actions";
 import { UserAction, ScheduleAction } from "../actions";
 import {
-  setMajorAction,
+  setDeclaredMajorAction,
   setFullNameAction,
   setAcademicYearAction,
   setGraduationYearAction,
   setTokenAction,
   setCatalogYearAction,
+  setUserIdAction,
+  addPlanIdAction,
+  setLinkSharingAction,
+  setPlanNameAction,
+  setMajorPlanAction,
+  setPlanIdsAction,
+  setUserCoopCycleAction,
+  setEmailAction,
+  resetUserAction,
 } from "../actions/userActions";
 import { setCoopCycle } from "../actions/scheduleActions";
 import { planToString } from "../../utils";
@@ -17,20 +26,34 @@ export interface UserState {
   fullName: string;
   academicYear: number;
   graduationYear: number;
-  major?: Major;
+  planIds: number[];
+  token?: string; // if a token and userId are undefined, then no user is logged in
+  userId?: number;
+
+  // TODO: after plan reducer is made, move these fields
+  planName: string;
   planStr?: string;
   catalogYear?: number;
-  token: string;
+  linkSharing: boolean;
+  declaredMajor?: Major;
+  email: string;
+  coopCycle: string;
 }
 
 const initialState: UserState = {
   fullName: "",
   academicYear: 0,
   graduationYear: 0,
-  major: undefined,
+  planIds: [],
+  token: undefined,
+  userId: undefined,
   planStr: "",
   catalogYear: undefined,
-  token: "",
+  planName: "",
+  linkSharing: false,
+  declaredMajor: undefined,
+  email: "",
+  coopCycle: "",
 };
 
 export const userReducer = (
@@ -47,8 +70,8 @@ export const userReducer = (
         }
         return draft;
       }
-      case getType(setMajorAction): {
-        draft.major = action.payload.major;
+      case getType(setDeclaredMajorAction): {
+        draft.declaredMajor = action.payload.major;
         draft.planStr = undefined;
         return draft;
       }
@@ -71,6 +94,43 @@ export const userReducer = (
       case getType(setCatalogYearAction): {
         draft.catalogYear = action.payload.catalogYear;
         return draft;
+      }
+      case getType(setUserIdAction): {
+        draft.userId = action.payload.id;
+        return draft;
+      }
+      case getType(addPlanIdAction): {
+        draft.planIds.push(action.payload.planId);
+        return draft;
+      }
+      case getType(setPlanIdsAction): {
+        draft.planIds = action.payload.planIds;
+        return draft;
+      }
+      case getType(setLinkSharingAction): {
+        draft.linkSharing = action.payload.linkSharing;
+        return draft;
+      }
+      case getType(setPlanNameAction): {
+        draft.planName = action.payload.name;
+        return draft;
+      }
+
+      case getType(setEmailAction): {
+        draft.email = action.payload.email;
+        return draft;
+      }
+      case getType(setUserCoopCycleAction): {
+        draft.coopCycle = action.payload.coopCycle;
+        return draft;
+      }
+      case getType(resetUserAction): {
+        draft = initialState;
+        return draft;
+      }
+      case getType(setMajorPlanAction): {
+        draft.declaredMajor = action.payload.major;
+        draft.planStr = action.payload.planStr;
       }
     }
   });

@@ -13,7 +13,11 @@ import { ScheduleCourse, Status, SeasonWord } from "../../../common/types";
 import styled from "styled-components";
 import { AppState } from "../state/reducers/state";
 import { connect } from "react-redux";
-import { getCourseWarningsFromState, getWarningsFromState } from "../state";
+import {
+  getCourseWarningsFromState,
+  getCurrentClassCounterFromState,
+  getWarningsFromState,
+} from "../state";
 import { Dispatch } from "redux";
 import {
   addClassesAction,
@@ -51,6 +55,7 @@ const ClassListWrapper = styled.div`
 interface ReduxStoreSemesterBlockProps {
   courseWarnings: CourseWarning[];
   warnings: IWarning[];
+  currentClassCounter: number;
 }
 
 interface ReduxDispatchSemesterBlockProps {
@@ -177,6 +182,7 @@ class SemesterBlockComponent extends React.Component<
               index={index}
               warnings={this.findCourseWarnings(courseWarnings, scheduleCourse)}
               onDelete={this.onDeleteClass.bind(this, scheduleCourse, semester)}
+              currentClassCounter={this.props.currentClassCounter}
             />
           );
         }
@@ -300,6 +306,7 @@ const mapStateToProps = (state: AppState, ownProps: SemesterBlockProps) => ({
     w => w.termId === ownProps.semester.termId
   ),
   courseWarnings: getCourseWarningsFromState(state, ownProps.semester),
+  currentClassCounter: getCurrentClassCounterFromState(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({

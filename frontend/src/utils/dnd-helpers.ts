@@ -141,7 +141,8 @@ export async function addCourseFromSidebar(
   destination: any,
   source: any,
   setSchedule: (schedule: DNDSchedule) => void,
-  draggableId: any
+  draggableId: any,
+  currentClassCounter: number
 ) {
   if (!destination) {
     return undefined;
@@ -166,7 +167,7 @@ export async function addCourseFromSidebar(
 
   let movedClass: DNDScheduleCourse = convertToDNDCourses(
     [scheduleCourse!],
-    0
+    currentClassCounter
   )[0][0];
 
   const finishClasses = Array.from(finishSemester.classes);

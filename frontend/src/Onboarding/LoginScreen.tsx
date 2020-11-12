@@ -4,19 +4,28 @@ import { withRouter, RouteComponentProps, Link } from "react-router-dom";
 import styled from "styled-components";
 import { TextField } from "@material-ui/core";
 import { Major, Schedule } from "../../../common/types";
-import { ILoginData } from "../models/types";
+import { ILoginData, ScheduleSlice, NamedSchedule } from "../models/types";
 import { PrimaryButton } from "../components/common/PrimaryButton";
 import { Dispatch } from "redux";
+import { AppState } from "../state/reducers/state";
 import {
   setFullNameAction,
-  setMajorAction,
+  setMajorPlanAction,
   setAcademicYearAction,
   setGraduationYearAction,
   setTokenAction,
   setCatalogYearAction,
+  setUserIdAction,
+  setDeclaredMajorAction,
+  setEmailAction,
+  setUserCoopCycleAction,
 } from "../state/actions/userActions";
-import { setCoopCycle } from "../state/actions/scheduleActions";
+import { getMajors } from "../state";
+import { setSchedules } from "../state/actions/schedulesActions";
 import { loginUser } from "../services/UserService";
+import { findAllPlansForUser } from "../services/PlanService";
+import { setCoopCycle } from "../state/actions/scheduleActions";
+import { findMajorFromName } from "../utils/plan-helpers";
 
 const Wrapper = styled.div`
   display: flex;
@@ -58,13 +67,22 @@ interface ReduxStoreLoginScreenProps {
   setFullName: (fullName: string) => void;
   setAcademicYear: (academicYear: number) => void;
   setGraduationYear: (graduationYear: number) => void;
-  setMajor: (major?: Major) => void;
-  setCoopCycle: (plan: Schedule) => void;
+  setMajorPlan: (major: Major | undefined, planStr: string) => void;
+  setUserCoopCycle: (coopCycle: string) => void;
   setToken: (token: string) => void;
   setCatalogYear: (catalogYear: number) => void;
+  setUserId: (id: number) => void;
+  setSchedules: (schedules: NamedSchedule[]) => void;
+  setPlanStr: (planStr: string) => void;
+}
+interface ReduxStoreSignupScreenProps {
+  majors: Major[];
+  setEmail: (email: string) => void;
 }
 
-type Props = ReduxStoreLoginScreenProps & RouteComponentProps<{}>;
+type Props = ReduxStoreLoginScreenProps &
+  ReduxStoreSignupScreenProps &
+  RouteComponentProps<{}>;
 
 interface LoginScreenState {
   emailStr: string;
@@ -139,10 +157,40 @@ class LoginScreenComponent extends React.Component<Props, LoginScreenState> {
           this.props.setGraduationYear(response.user.graduationYear);
           this.props.setToken(response.user.token);
           this.props.setCatalogYear(response.user.catalogYear);
+          this.props.setUserId(response.user.id);
+          this.props.setEmail(response.user.email);
+          this.props.setUserCoopCycle(response.user.coopCycle);
           this.props.history.push("/home");
+          this.findUserPlans(response);
         }
       });
     }
+  }
+
+  /**
+   * Finds all of the user plans and sets the state based on the plan's information.
+   */
+  findUserPlans(response: any) {
+    findAllPlansForUser(response.user.id, response.user.token).then(plans => {
+      const namedSchedules = plans.map((plan: any) => ({
+        name: plan.name,
+        schedule: {
+          present: {
+            ...plan,
+            currentClassCounter: plan.courseCounter,
+            isScheduleLoading: false,
+            scheduleError: "",
+            major: plan.major,
+            coopCycle: plan.coopCycle,
+          } as ScheduleSlice,
+        },
+      }));
+      this.props.setSchedules(namedSchedules);
+      this.props.setMajorPlan(
+        findMajorFromName(plans[0].major, this.props.majors),
+        plans[0].planString ? plans[0].planString : ""
+      );
+    });
   }
 
   /**
@@ -208,6 +256,10 @@ class LoginScreenComponent extends React.Component<Props, LoginScreenState> {
   }
 
   render() {
+    // indicates if the user came from login button on welcome page
+    const { fromOnBoarding } = (this.props.location.state as any) || {
+      fromOnBoarding: false,
+    };
     return (
       <Wrapper>
         <Title>Log In</Title>
@@ -224,11 +276,22 @@ class LoginScreenComponent extends React.Component<Props, LoginScreenState> {
 
         <Subtitle>
           New here? Sign up{" "}
-          <Link style={{ color: "#EB5757" }} to="/signup">
+          <Link
+            style={{ color: "#EB5757" }}
+            to={{
+              pathname: fromOnBoarding ? "/onboarding" : "/signup",
+            }}
+          >
             here
           </Link>{" "}
           or{" "}
-          <Link style={{ color: "#EB5757" }} to="/home">
+          <Link
+            style={{ color: "#EB5757" }}
+            to={{
+              pathname: fromOnBoarding ? "/onboarding" : "/home",
+              state: { fromOnBoardingGuest: fromOnBoarding },
+            }}
+          >
             continue as guest
           </Link>
         </Subtitle>
@@ -250,11 +313,26 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     dispatch(setAcademicYearAction(academicYear)),
   setGraduationYear: (academicYear: number) =>
     dispatch(setGraduationYearAction(academicYear)),
-  setMajor: (major?: Major) => dispatch(setMajorAction(major)),
-  setCoopCycle: (plan: Schedule) => dispatch(setCoopCycle(plan)),
+  setMajorPlan: (major: Major | undefined, planStr: string) =>
+    dispatch(setMajorPlanAction(major, planStr)),
   setToken: (token: string) => dispatch(setTokenAction(token)),
   setCatalogYear: (catalogYear: number) =>
     dispatch(setCatalogYearAction(catalogYear)),
+  setUserId: (id: number) => dispatch(setUserIdAction(id)),
+  setSchedules: (schedules: NamedSchedule[]) =>
+    dispatch(setSchedules(schedules)),
+  setMajor: (major?: Major) => dispatch(setDeclaredMajorAction(major)),
+  setUserCoopCycle: (coopCycle: string) =>
+    dispatch(setUserCoopCycleAction(coopCycle)),
+  setEmail: (email: string) => dispatch(setEmailAction(email)),
+});
+
+/**
+ * Callback to be passed into connect, responsible for dispatching redux actions to update the appstate.
+ * @param dispatch responsible for dispatching actions to the redux store.
+ */
+const mapStateToProps = (state: AppState) => ({
+  majors: getMajors(state),
 });
 
 /**
@@ -263,6 +341,6 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
  * be passed down as props from the parent component.
  */
 export const LoginScreen = connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(withRouter(LoginScreenComponent));

@@ -10,7 +10,7 @@ import { Major, Schedule } from "../../../common/types";
 import { planToString } from "../utils";
 import {
   setFullNameAction,
-  setMajorAction,
+  setDeclaredMajorAction,
   setAcademicYearAction,
   setGraduationYearAction,
   setCatalogYearAction,
@@ -33,6 +33,7 @@ import {
 import { AppState } from "../state/reducers/state";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
+import { findMajorFromName } from "../utils/plan-helpers";
 
 const SpinnerWrapper = styled.div`
   display: flex;
@@ -61,7 +62,7 @@ interface GraduationYearScreenProps {
 
 interface MajorScreenProps {
   setMajor: (major?: Major) => void;
-  setCoopCycle: (plan: Schedule) => void;
+  setCoopCycle: (coopCycle: string, plan: Schedule) => void;
   setPlanStr: (planStr?: string) => void;
   setPlan: (plan: Schedule) => void;
   majors: Major[];
@@ -167,7 +168,7 @@ class OnboardingScreenComponent extends React.Component<
   }
 
   onChangeMajor(event: React.SyntheticEvent<{}>, value: any) {
-    const maj = this.props.majors.find((m: any) => m.name === value);
+    const maj = findMajorFromName(value, this.props.majors);
 
     this.setState({ major: maj, planStr: "" });
   }
@@ -192,7 +193,7 @@ class OnboardingScreenComponent extends React.Component<
         (p: Schedule) => planToString(p) === this.state.planStr
       );
 
-      this.props.setCoopCycle(plan!);
+      this.props.setCoopCycle(this.state.planStr, plan!);
     }
   }
 
@@ -376,6 +377,11 @@ class OnboardingScreenComponent extends React.Component<
   }
 
   render() {
+    // indicates if the user came from login button on welcome page
+    const { fromOnBoardingGuest } = (this.props.location.state as any) || {
+      fromOnBoardingGuest: false,
+    };
+
     const {
       gradYear,
       year,
@@ -413,7 +419,15 @@ class OnboardingScreenComponent extends React.Component<
 
           {textFieldStr.length !== 0 && !!year && !!gradYear ? (
             <Link
-              to={!!this.state.major ? "/completedCourses" : "/signup"}
+              //If guest user comes from login button on welcome page, go to home page, else go to signup page
+              to={{
+                pathname: !!this.state.major
+                  ? "/completedCourses"
+                  : fromOnBoardingGuest
+                  ? "/home"
+                  : "/signup",
+                state: { fromOnBoardingGuest: fromOnBoardingGuest },
+              }}
               onClick={this.onSubmit.bind(this)}
               style={{ textDecoration: "none" }}
             >
@@ -448,10 +462,11 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     dispatch(setAcademicYearAction(academicYear)),
   setGraduationYear: (academicYear: number) =>
     dispatch(setGraduationYearAction(academicYear)),
-  setMajor: (major?: Major) => dispatch(setMajorAction(major)),
-  setCoopCycle: (plan: Schedule) => dispatch(setCoopCycle(plan)),
   setCatalogYear: (catalogYear?: number) =>
     dispatch(setCatalogYearAction(catalogYear)),
+  setMajor: (major?: Major) => dispatch(setDeclaredMajorAction(major)),
+  setCoopCycle: (coopCycle: string, plan: Schedule) =>
+    dispatch(setCoopCycle(coopCycle, plan)),
 });
 
 /**

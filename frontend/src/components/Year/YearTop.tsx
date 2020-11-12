@@ -12,12 +12,14 @@ import { getPositionOfYearInSchedule } from "../../utils";
 
 const Container = styled.div`
   display: flex;
+  flex: 1;
   flex-direction: row;
   height: 36px;
   background-color: #eb5757;
   border: 1px solid #eb5757;
   box-sizing: border-box;
   margin-top: 0px;
+  padding: 0px;
 `;
 
 const SemesterText = styled.p`
