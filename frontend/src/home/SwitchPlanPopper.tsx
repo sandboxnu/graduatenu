@@ -9,20 +9,13 @@ import {
 import {
   KeyboardArrowDown as KeyboardArrowDownIcon,
   KeyboardArrowUp as KeyboardArrowUpIcon,
-  Create as CreateIcon,
   Delete as DeleteIcon,
 } from "@material-ui/icons";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import { AppState } from "../state/reducers/state";
 import { Dispatch } from "redux";
-import {
-  getSchedulesFromState,
-  getActiveScheduleFromState,
-  getUserId,
-  getTokenFromState,
-  getPlanIdsFromState,
-} from "../state";
+import { getSchedulesFromState, getActiveScheduleFromState } from "../state";
 import {
   deletePlan,
   setActiveScheduleAction,
@@ -75,11 +68,15 @@ const PlanText = styled.div`
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `;
 
 const DropDownText = styled.div`
   display: inline;
   overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `;
 
 interface SwitchSchedulesProps {
@@ -221,9 +218,6 @@ export class SwitchPlanPopperComponent extends React.Component<
                 </PlanText>
                 <ButtonContainer>
                   {" "}
-                  <IconButton style={{ padding: "6px" }}>
-                    <CreateIcon />
-                  </IconButton>
                   <IconButton
                     style={{ padding: "6px" }}
                     onClick={() => {
