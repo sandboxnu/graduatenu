@@ -116,7 +116,7 @@ const WhiteColorButton = withStyles((theme: Theme) => ({
     color: NORTHEASTERN_RED,
     backgroundColor: "#ffffff",
     "&:hover": {
-      backgroundColor: "#DB4747",
+      backgroundColor: "#e9e9e9",
     },
   },
 }))(Button);

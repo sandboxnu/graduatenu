@@ -290,7 +290,7 @@ class TransferCoursesComponent extends Component<Props, State> {
     let split = Math.ceil(renderedMajorReqs.length / 2);
     return (
       <OnboardingSelectionTemplate
-        screen={3}
+        screen={2}
         mainTitleText={"Select any courses you took as transfer credit:"}
         onSubmit={this.onSubmit.bind(this)}
         to={"transferableCredits"}
