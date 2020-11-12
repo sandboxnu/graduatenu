@@ -436,7 +436,7 @@ class HomeComponent extends React.Component<Props, HomeState> {
 
   renderYears() {
     // If a user is currently logged in, wait until plans are fetched to render
-    if (this.props.token && this.props.userId) {
+    if (this.props.isLoggedIn) {
       if (this.state.fetchedPlan) {
         return this.props.schedule.years.map((year: number, index: number) => (
           <Year key={index} index={index} schedule={this.props.schedule} />
@@ -463,7 +463,7 @@ class HomeComponent extends React.Component<Props, HomeState> {
 
   renderTransfer() {
     // If a user is currently logged in, wait until plans are fetched to render
-    if (this.props.token && this.props.userId) {
+    if (this.props.isLoggedIn) {
       if (this.state.fetchedPlan) {
         return (
           <TransferCredits

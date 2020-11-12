@@ -20,16 +20,12 @@ interface TransferCreditsState {
   modalVisible: boolean;
 }
 
-interface ReduxStoreTransferCreditsProps {}
-
 interface ReduxDispatchTransferCreditsProps {
   handleAddClasses: (courses: ScheduleCourse[]) => void;
   onDeleteClass: (course: ScheduleCourse) => void;
 }
 
-type Props = ReduxStoreTransferCreditsProps &
-  TransferCreditsProps &
-  ReduxDispatchTransferCreditsProps;
+type Props = TransferCreditsProps & ReduxDispatchTransferCreditsProps;
 
 const Container = styled.div`
   display: flex;
@@ -138,11 +134,6 @@ class TransferCreditsComponent extends React.Component<
   }
 }
 
-const mapStateToProps = (
-  state: AppState,
-  ownProps: TransferCreditsProps
-) => ({});
-
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   handleAddClasses: (courses: ScheduleCourse[]) =>
     dispatch(addTransferClassAction(courses)),
@@ -151,11 +142,11 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 });
 
 export const TransferCredits = connect<
-  ReduxStoreTransferCreditsProps,
+  null,
   ReduxDispatchTransferCreditsProps,
   TransferCreditsProps,
   AppState
 >(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(TransferCreditsComponent);
