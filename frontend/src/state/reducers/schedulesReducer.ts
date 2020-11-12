@@ -1,5 +1,4 @@
 import { NamedSchedule } from "../../models/types";
-import { mockData } from "../../data/mockData";
 import produce from "immer";
 import { getType } from "typesafe-actions";
 import { SchedulesAction, UserAction } from "../actions";

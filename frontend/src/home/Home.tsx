@@ -68,6 +68,7 @@ import {
   updatePlanForUser,
 } from "../services/PlanService";
 import { findMajorFromName } from "../utils/plan-helpers";
+import { AddPlan } from "./AddPlanPopper";
 import { Button, Theme, withStyles } from "@material-ui/core";
 import Loader from "react-loader-spinner";
 import { ExcelUpload } from "../components/ExcelUpload";
@@ -580,15 +581,6 @@ class HomeComponent extends React.Component<Props, HomeState> {
                   <PlanContainer>
                     <PlanPopperButton
                       variant="contained"
-                      onClick={this.savePlan.bind(this)}
-                    >
-                      Save Plan
-                    </PlanPopperButton>
-                  </PlanContainer>
-
-                  <PlanContainer>
-                    <PlanPopperButton
-                      variant="contained"
                       onClick={this.updatePlan.bind(this)}
                     >
                       Update Plan
@@ -602,6 +594,7 @@ class HomeComponent extends React.Component<Props, HomeState> {
                       token={this.props.token}
                     />
                   )}
+                  <AddPlan />
                 </HomeButtons>
               </HomeAboveSchedule>
               {this.renderYears()}

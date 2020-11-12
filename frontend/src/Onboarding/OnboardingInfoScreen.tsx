@@ -41,11 +41,6 @@ const SpinnerWrapper = styled.div`
   height: 700px;
 `;
 
-const DropDownWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-`;
-
 interface NameScreenProps {
   setFullName: (fullName: string) => void;
 }
