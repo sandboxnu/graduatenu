@@ -49,6 +49,7 @@ import {
   setDNDScheduleAction,
   setClosedYearsToYearsInThePast,
   incrementCurrentClassCounter,
+  setScheduleMajorCoop,
 } from "../state/actions/scheduleActions";
 import {
   setLinkSharingAction,
@@ -231,6 +232,7 @@ interface ReduxDispatchHomeProps {
   ) => void;
   setDNDSchedule: (schedule: DNDSchedule) => void;
   setMajorPlans: (major: Major | undefined, planStr: string) => void;
+  setScheduleMajorCoop: (major: string, coop: string) => void;
   setPlanName: (name: string) => void;
   setLinkSharing: (linkSharing: boolean) => void;
   setPlanIds: (planIds: number[]) => void;
@@ -272,10 +274,7 @@ class HomeComponent extends React.Component<Props, HomeState> {
 
           this.props.setPlanIds(plans.map(plan => plan.id));
           this.props.setDNDSchedule(plan.schedule);
-          this.props.setMajorPlans(
-            findMajorFromName(plan.major, this.props.majors),
-            plan.planString
-          );
+          this.props.setScheduleMajorCoop(plan.major || "", plan.planString);
           this.props.setPlanName(plan.name);
           this.props.setLinkSharing(plan.link_sharing_enabled);
 
@@ -601,6 +600,8 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     dispatch(setLinkSharingAction(linkSharing)),
   setMajorPlans: (major: Major | undefined, planStr: string) =>
     dispatch(setMajorPlanAction(major, planStr)),
+  setScheduleMajorCoop: (major: string, coop: string) =>
+    dispatch(setScheduleMajorCoop(major, coop)),
   setPlanIds: (planIds: number[]) => dispatch(setPlanIdsAction(planIds)),
   addNewSchedule: (name: string, newSchedule: ScheduleSlice) =>
     dispatch(addNewSchedule(name, newSchedule)),

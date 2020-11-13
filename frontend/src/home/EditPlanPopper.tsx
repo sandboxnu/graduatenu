@@ -343,6 +343,9 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   setCoopCycle: (coopCycle: string, schedule?: Schedule) =>
     dispatch(setCoopCycle(coopCycle, schedule)),
   setSchedule: (schedule: Schedule) => dispatch(setScheduleAction(schedule)),
+  //change this to use schedule action instead of user
+  //edit popper clearing bug
+  //adding catalog year to backend schedule model
   setCatalogYear: (catalogYear?: number) =>
     dispatch(setCatalogYearAction(catalogYear)),
   setMajor: (major?: Major) => dispatch(setScheduleMajor(major)),

@@ -27,6 +27,7 @@ import {
   setClosedYearsToYearsInThePast,
   setCurrentClassCounter,
   incrementCurrentClassCounter,
+  setScheduleMajorCoop,
 } from "../actions/scheduleActions";
 import { setSchedules, addNewSchedule } from "../actions/schedulesActions";
 import {
@@ -59,6 +60,7 @@ export interface ScheduleStateSlice {
   transferCourses: ScheduleCourse[];
   major: string;
   coopCycle: string;
+  catalogYear?: number;
   closedYears: Set<number>; // list of indexes for which years are not expanded in the UI
 }
 
@@ -75,6 +77,7 @@ const initialState: ScheduleState = {
     transferCourses: [],
     major: "",
     coopCycle: "",
+    catalogYear: undefined,
     closedYears: new Set(),
   },
 };
@@ -207,6 +210,12 @@ export const scheduleReducer = (
         }
         draft.present.major = major.name;
 
+        return draft;
+      }
+      case getType(setScheduleMajorCoop): {
+        const { major, coop } = action.payload;
+        draft.present.major = major;
+        draft.present.coopCycle = coop;
         return draft;
       }
       case getType(setDNDScheduleAction): {

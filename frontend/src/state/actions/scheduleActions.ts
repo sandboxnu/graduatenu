@@ -63,6 +63,11 @@ export const setScheduleMajor = createAction(
   (major?: Major) => ({ major })
 )();
 
+export const setScheduleMajorCoop = createAction(
+  "schedule.SET_SCHEDULE_MAJOR_COOP",
+  (major: string, coop: string) => ({ major, coop })
+)();
+
 export const setCoopCycle = createAction(
   "schedule/SET_COOP_CYCLE",
   (coopCycle: string, schedule?: Schedule) => ({ coopCycle, schedule })
