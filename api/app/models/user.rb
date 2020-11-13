@@ -9,6 +9,8 @@
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
 #  graduation_year        :integer(4)
+#  image_url              :string
+#  is_advisor             :boolean          default(FALSE), not null
 #  major                  :string
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
@@ -28,6 +30,9 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable,
          :validatable
+
+  has_many :transfer_courses, foreign_key: 'user_id', class_name: "Course"
+  has_many :completed_courses, foreign_key: 'user_id', class_name: "Course"
   
   #validates a non-unique username and allows spaces
   validates :username, presence: true, allow_blank: false, format: { with: /\A[a-zA-Z0-9 ]+\z/ }

@@ -9,6 +9,8 @@
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
 #  graduation_year        :integer(4)
+#  image_url              :string
+#  is_advisor             :boolean          default(FALSE), not null
 #  major                  :string
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
