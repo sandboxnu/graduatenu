@@ -1,0 +1,29 @@
+version: "3"
+
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: graduatenu
+    volumes:
+      - graduatenu_dbdata:/var/lib/postgresql/data
+
+  backend:
+    build: ./api
+    command: bash -c "rm -f tmp/pids/server.pid && RAILS_ENV=production bundle exec rails s -p 3002 -b '0.0.0.0'"
+    ports:
+      - 3002:3002
+    depends_on:
+      - db
+
+  frontend:
+    build:
+      context: .
+      dockerfile: ./frontend/Dockerfile
+    ports:
+      - 80:80
+    depends_on:
+      - backend
+
+volumes:
+  graduatenu_dbdata:

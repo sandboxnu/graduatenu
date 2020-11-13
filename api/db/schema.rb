@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2020_11_18_025153) do
+=======
+ActiveRecord::Schema.define(version: 2020_11_12_024803) do
+>>>>>>> is potentially working
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,7 +40,20 @@ ActiveRecord::Schema.define(version: 2020_11_18_025153) do
     t.json "course_warnings", default: [], array: true
     t.json "warnings", default: [], array: true
     t.integer "course_counter"
+    t.boolean "is_currently_being_edited", default: false, null: false
     t.index ["user_id"], name: "index_plans_on_user_id"
+  end
+
+  create_table "template_plans", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "catalog_year", null: false
+    t.json "schedule"
+    t.string "major", null: false
+    t.string "plan_string", null: false
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_template_plans_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
