@@ -386,13 +386,13 @@ export const ProfileComponent: React.FC = (props: any) => {
                 setMajor={setMajor}
                 setCoop={setCoop}
               />
-              {catalogYear != undefined && (
-                <ProfileMajor
+              {major != undefined && (
+                <ProfileCoop
                   isEdit={isEdit}
-                  major={major == undefined ? "" : major.name}
-                  setMajor={setMajor}
-                  majors={majors}
+                  coop={coop == undefined ? "" : coop}
                   setCoop={setCoop}
+                  plans={plans}
+                  major={major}
                 />
               )}
               {props.token != undefined && props.token.length > 0 && (
@@ -401,13 +401,13 @@ export const ProfileComponent: React.FC = (props: any) => {
             </ProfileColumn>
             <ProfileColumn>
               <ProfileEmail isEdit={isEdit} email={email} setEmail={setEmail} />
-              {major != undefined && (
-                <ProfileCoop
+              {catalogYear != undefined && (
+                <ProfileMajor
                   isEdit={isEdit}
-                  coop={coop == undefined ? "" : coop}
+                  major={major == undefined ? "" : major.name}
+                  setMajor={setMajor}
+                  majors={majors}
                   setCoop={setCoop}
-                  plans={plans}
-                  major={major}
                 />
               )}
             </ProfileColumn>

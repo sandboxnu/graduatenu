@@ -28,6 +28,7 @@ import {
   setCurrentClassCounter,
   incrementCurrentClassCounter,
   setScheduleMajorCoop,
+  setCatalogYearAction,
 } from "../actions/scheduleActions";
 import { setSchedules, addNewSchedule } from "../actions/schedulesActions";
 import {
@@ -183,6 +184,7 @@ export const scheduleReducer = (
       case getType(setCoopCycle): {
         const { coopCycle, schedule } = action.payload;
         if (!schedule) {
+          draft.present.coopCycle = "";
           return draft;
         }
         const [newSchedule, newCounter] = convertToDNDSchedule(
@@ -205,10 +207,7 @@ export const scheduleReducer = (
       }
       case getType(setScheduleMajor): {
         const { major } = action.payload;
-        if (!major) {
-          return draft;
-        }
-        draft.present.major = major.name;
+        draft.present.major = major ? major.name : "";
 
         return draft;
       }
@@ -318,6 +317,12 @@ export const scheduleReducer = (
         draft.present.coopCycle = newSchedule.coopCycle;
         return draft;
       }
+      case getType(setCatalogYearAction): {
+        const { catalogYear } = action.payload;
+        draft.present.catalogYear = catalogYear || undefined;
+        return draft;
+      }
+
       case getType(setSchedules): {
         const namedSchedule = action.payload.schedules[0].schedule.present;
         draft.present.warnings = namedSchedule.warnings;

@@ -18,8 +18,8 @@ import {
   setScheduleAction,
   setCoopCycle,
   setScheduleMajor,
+  setCatalogYearAction,
 } from "../state/actions/scheduleActions";
-import { setCatalogYearAction } from "../state/actions/userActions";
 import { DNDSchedule, StatusEnum } from "../models/types";
 import { Major, Schedule } from "../../../common/types";
 import {
@@ -213,7 +213,7 @@ export class EditPlanPopperComponent extends React.Component<
   }
 
   renderCatalogYearDropdown() {
-    let majorSet = [
+    let catalogYears = [
       ...Array.from(
         new Set(this.props.majors.map(maj => maj.yearVersion.toString()))
       ),
@@ -223,7 +223,7 @@ export class EditPlanPopperComponent extends React.Component<
       <Autocomplete
         style={{ marginTop: "10px", marginBottom: "5px" }}
         disableListWrap
-        options={majorSet}
+        options={catalogYears}
         renderInput={params => (
           <TextField
             {...params}

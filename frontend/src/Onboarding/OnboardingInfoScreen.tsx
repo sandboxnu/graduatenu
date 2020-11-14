@@ -13,7 +13,7 @@ import {
   setDeclaredMajorAction,
   setAcademicYearAction,
   setGraduationYearAction,
-  setCatalogYearAction,
+  setUserCatalogYearAction,
 } from "../state/actions/userActions";
 import { setCoopCycle } from "../state/actions/scheduleActions";
 import Loader from "react-loader-spinner";
@@ -458,7 +458,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   setGraduationYear: (academicYear: number) =>
     dispatch(setGraduationYearAction(academicYear)),
   setCatalogYear: (catalogYear?: number) =>
-    dispatch(setCatalogYearAction(catalogYear)),
+    dispatch(setUserCatalogYearAction(catalogYear)),
   setMajor: (major?: Major) => dispatch(setDeclaredMajorAction(major)),
   setCoopCycle: (coopCycle: string, plan: Schedule) =>
     dispatch(setCoopCycle(coopCycle, plan)),

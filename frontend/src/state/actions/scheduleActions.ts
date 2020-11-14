@@ -68,6 +68,11 @@ export const setScheduleMajorCoop = createAction(
   (major: string, coop: string) => ({ major, coop })
 )();
 
+export const setCatalogYearAction = createAction(
+  "schedule/SET_CATALOG_YEAR",
+  (catalogYear?: number) => ({ catalogYear })
+)();
+
 export const setCoopCycle = createAction(
   "schedule/SET_COOP_CYCLE",
   (coopCycle: string, schedule?: Schedule) => ({ coopCycle, schedule })

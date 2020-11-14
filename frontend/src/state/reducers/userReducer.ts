@@ -8,7 +8,7 @@ import {
   setAcademicYearAction,
   setGraduationYearAction,
   setTokenAction,
-  setCatalogYearAction,
+  setUserCatalogYearAction,
   setUserIdAction,
   addPlanIdAction,
   setLinkSharingAction,
@@ -94,7 +94,7 @@ export const userReducer = (
         draft.token = action.payload.token;
         return draft;
       }
-      case getType(setCatalogYearAction): {
+      case getType(setUserCatalogYearAction): {
         draft.catalogYear = action.payload.catalogYear;
         return draft;
       }

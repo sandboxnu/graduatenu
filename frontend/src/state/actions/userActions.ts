@@ -36,7 +36,7 @@ export const setTokenAction = createAction(
   })
 )();
 
-export const setCatalogYearAction = createAction(
+export const setUserCatalogYearAction = createAction(
   "user/SET_CATALOG",
   (catalogYear?: number) => ({
     catalogYear,

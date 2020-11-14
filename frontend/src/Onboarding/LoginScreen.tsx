@@ -14,7 +14,7 @@ import {
   setAcademicYearAction,
   setGraduationYearAction,
   setTokenAction,
-  setCatalogYearAction,
+  setUserCatalogYearAction,
   setUserIdAction,
   setDeclaredMajorAction,
   setEmailAction,
@@ -317,7 +317,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     dispatch(setMajorPlanAction(major, planStr)),
   setToken: (token: string) => dispatch(setTokenAction(token)),
   setCatalogYear: (catalogYear: number) =>
-    dispatch(setCatalogYearAction(catalogYear)),
+    dispatch(setUserCatalogYearAction(catalogYear)),
   setUserId: (id: number) => dispatch(setUserIdAction(id)),
   setSchedules: (schedules: NamedSchedule[]) =>
     dispatch(setSchedules(schedules)),
