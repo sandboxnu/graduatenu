@@ -158,6 +158,8 @@ class OnboardingScreenComponent extends React.Component<
 
   onChangeCatalogYear(event: React.SyntheticEvent<{}>, value: any) {
     this.setState({
+      major: undefined,
+      planStr: undefined,
       catalogYear: Number(value),
     });
   }
@@ -338,7 +340,7 @@ class OnboardingScreenComponent extends React.Component<
   /**
    * Renders the catalog drop down
    */
-  renderCatalogYearSelect() {
+  renderCatalogYearDropDown() {
     //need to make chanegs to options to filter out repeat catalog years
     let majorSet = [
       ...Array.from(
@@ -408,7 +410,7 @@ class OnboardingScreenComponent extends React.Component<
           {this.renderNameTextField(textFieldStr, beenEditedName)}
           {this.renderAcademicYearSelect(year, beenEditedYear)}
           {this.renderGradYearSelect(gradYear, beenEditedGrad)}
-          {this.renderCatalogYearSelect()}
+          {this.renderCatalogYearDropDown()}
           {!!this.state.catalogYear && this.renderMajorDropDown()}
           {!!this.state.major && this.renderCoopCycleDropDown()}
 

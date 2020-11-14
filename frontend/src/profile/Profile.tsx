@@ -14,6 +14,7 @@ import {
   setFullNameAction,
   setEmailAction,
   setUserCoopCycleAction,
+  setUserCatalogYearAction,
 } from "../state/actions/userActions";
 import {
   getMajors,
@@ -24,7 +25,7 @@ import {
   getTokenFromState,
   getUserId,
   getEmail,
-  getCatalogYearFromState,
+  getUserCatalogYearFromState,
 } from "../state";
 import { Dispatch } from "redux";
 import { Major, Schedule } from "../../../common/types";
@@ -142,8 +143,10 @@ interface SaveProps {
   coop: string;
   token: string;
   id: number;
+  catalogYear: number;
   setDeclaredMajorAction: (major?: Major) => void;
   setUserCoopCycleAction: (plan: string) => void;
+  setUserCatalogYearAction: (catalogYear?: number) => void;
   setFullNameAction: (fullName: string) => void;
   setEmailAction: (email: string) => void;
 }
@@ -300,6 +303,7 @@ const ProfileEmail = (props: ProfileEmailProps) => {
 const save = (props: SaveProps) => {
   props.setEdit(false);
   props.setDeclaredMajorAction(props.major);
+  props.setUserCatalogYearAction(props.catalogYear);
   props.setFullNameAction(props.name);
   props.setEmailAction(props.email);
   props.setUserCoopCycleAction(props.coop);
@@ -421,10 +425,12 @@ export const ProfileComponent: React.FC = (props: any) => {
               coop={coop}
               token={props.token}
               id={props.id}
+              catalogYear={catalogYear}
               setDeclaredMajorAction={props.setDeclaredMajorAction}
               setUserCoopCycleAction={props.setUserCoopCycleAction}
               setFullNameAction={props.setFullNameAction}
               setEmailAction={props.setEmailAction}
+              setUserCatalogYearAction={props.setUserCatalogYearAction}
             />
           )}
         </InnerContainer>
@@ -445,6 +451,8 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   setFullNameAction: (fullName: string) =>
     dispatch(setFullNameAction(fullName)),
   setEmailAction: (email: string) => dispatch(setEmailAction(email)),
+  setUserCatalogYearAction: (catalogYear?: number) =>
+    dispatch(setUserCatalogYearAction(catalogYear)),
 });
 
 /**
@@ -460,7 +468,7 @@ const mapStateToProps = (state: AppState) => ({
   token: getTokenFromState(state),
   id: getUserId(state),
   email: getEmail(state),
-  catalogYear: getCatalogYearFromState(state),
+  catalogYear: getUserCatalogYearFromState(state),
 });
 
 /**

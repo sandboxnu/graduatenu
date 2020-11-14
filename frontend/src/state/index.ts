@@ -110,8 +110,13 @@ export const getPlanStrFromState = (state: AppState): string | undefined =>
 export const getDeclaredMajorFromState = (state: AppState): Major | undefined =>
   state.user.declaredMajor;
 
-export const getCatalogYearFromState = (state: AppState): number | undefined =>
-  state.user.catalogYear;
+export const getUserCatalogYearFromState = (
+  state: AppState
+): number | undefined => state.user.catalogYear;
+
+export const getScheduleCatalogYearFromState = (
+  state: AppState
+): number | undefined => state.schedule.present.catalogYear;
 /**
  * Get the user email from the AppState
  * @param state the AppState
