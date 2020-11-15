@@ -47,7 +47,7 @@ const ERROR_MESSAGE =
 
 const PLAN_OPTIONS = {
   NEW_PLAN: "New Plan",
-  EXISITNG_PLAN: "Exisitng Plan",
+  EXISTING_PLAN: "Existing Plan",
   EXAMPLE_PLAN: "Example Major Plan",
   UPLOAD_PLAN: "Upload Plan Of Study",
 };
@@ -334,10 +334,10 @@ function AddPlanPopperComponent(props: Props) {
             </MenuItem>
           )}
           <MenuItem
-            value={PLAN_OPTIONS.EXISITNG_PLAN}
+            value={PLAN_OPTIONS.EXISTING_PLAN}
             title={COPY_PLAN_TOOLTIP}
           >
-            {PLAN_OPTIONS.EXISITNG_PLAN}
+            {PLAN_OPTIONS.EXISTING_PLAN}
           </MenuItem>
           <MenuItem value={PLAN_OPTIONS.UPLOAD_PLAN} title={EXCEL_TOOLTIP}>
             {PLAN_OPTIONS.UPLOAD_PLAN}
@@ -405,7 +405,7 @@ function AddPlanPopperComponent(props: Props) {
             {renderSelectOptions()}
             {selectedPlanOption == PLAN_OPTIONS.UPLOAD_PLAN ? (
               <ExcelUpload setSchedule={setSchedule} />
-            ) : selectedPlanOption === PLAN_OPTIONS.EXISITNG_PLAN ? (
+            ) : selectedPlanOption === PLAN_OPTIONS.EXISTING_PLAN ? (
               renderSelectPlan()
             ) : null}
             {error && (
