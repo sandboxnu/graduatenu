@@ -356,7 +356,7 @@ function AddPlanPopperComponent(props: Props) {
           <TextField
             {...params}
             variant="outlined"
-            label="Select A Co-op Cycle"
+            label="Select One of Your Plans"
             fullWidth
           />
         )}
