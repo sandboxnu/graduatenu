@@ -309,7 +309,7 @@ function AddPlanPopperComponent(props: Props) {
         <Select
           labelId="demo-simple-select-outlined-label"
           id="demo-simple-select-outlined"
-          labelWidth={115}
+          labelWidth={160}
           onChange={setSelect}
           displayEmpty
           value={selectedPlanOption}
