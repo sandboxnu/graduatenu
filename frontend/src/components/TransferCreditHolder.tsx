@@ -7,10 +7,11 @@ import { ScheduleCourse } from "../../../common/types";
 import {
   addTransferClassAction,
   removeTransferClassAction,
+  undoRemoveClassAction,
 } from "../state/actions/scheduleActions";
-import { AppState } from "../state/reducers/state";
 import { AddBlock } from "./ClassBlocks/AddBlock";
 import { NonDraggableClassBlock } from "./ClassBlocks/NonDraggableClassBlock";
+import { UndoDelete } from "./UndoDelete";
 
 interface TransferCreditsProps {
   transferCredits: ScheduleCourse[];
@@ -18,11 +19,14 @@ interface TransferCreditsProps {
 
 interface TransferCreditsState {
   modalVisible: boolean;
+  snackbarOpen: boolean;
+  deletedClass?: ScheduleCourse;
 }
 
 interface ReduxDispatchTransferCreditsProps {
   handleAddClasses: (courses: ScheduleCourse[]) => void;
   onDeleteClass: (course: ScheduleCourse) => void;
+  onUndoDeleteClass: () => void;
 }
 
 type Props = TransferCreditsProps & ReduxDispatchTransferCreditsProps;
@@ -72,6 +76,8 @@ class TransferCreditsComponent extends React.Component<
     super(props);
     this.state = {
       modalVisible: false,
+      snackbarOpen: false,
+      deletedClass: undefined,
     };
   }
 
@@ -83,8 +89,42 @@ class TransferCreditsComponent extends React.Component<
     this.setState({ modalVisible: true });
   }
 
+  handleSnackbarClose = (
+    event: React.SyntheticEvent<any, Event>,
+    reason: string
+  ) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    this.setState({
+      snackbarOpen: false,
+    });
+  };
+
   onDeleteClass = (course: ScheduleCourse) => {
-    this.props.onDeleteClass(course);
+    this.setState(
+      {
+        snackbarOpen: true,
+        deletedClass: course,
+      },
+      () => this.props.onDeleteClass(course)
+    );
+  };
+
+  undoButtonPressed = () => {
+    this.setState(
+      {
+        snackbarOpen: false,
+      },
+      this.props.onUndoDeleteClass
+    );
+  };
+
+  closeSnackBar = () => {
+    this.setState({
+      snackbarOpen: false,
+    });
   };
 
   // individual courses
@@ -108,7 +148,7 @@ class TransferCreditsComponent extends React.Component<
   }
 
   render() {
-    const { modalVisible } = this.state;
+    const { modalVisible, deletedClass, snackbarOpen } = this.state;
 
     return (
       <div style={{ width: "100%", marginBottom: 28 }}>
@@ -118,6 +158,13 @@ class TransferCreditsComponent extends React.Component<
           </div>
         </Container>
         <HolderBody>
+          <UndoDelete
+            deletedClass={deletedClass}
+            snackbarOpen={snackbarOpen}
+            handleSnackbarClose={this.handleSnackbarClose.bind(this)}
+            undoButtonPressed={this.undoButtonPressed.bind(this)}
+            closeSnackBar={this.closeSnackBar.bind(this)}
+          />
           {this.renderContainer()}
           <AddBlock onClick={this.showModal.bind(this)} />
           <AddClass
@@ -139,6 +186,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     dispatch(addTransferClassAction(courses)),
   onDeleteClass: (course: ScheduleCourse) =>
     dispatch(removeTransferClassAction(course)),
+  onUndoDeleteClass: () => dispatch(undoRemoveClassAction()),
 });
 
 export const TransferCredits = connect(
