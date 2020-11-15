@@ -33,16 +33,13 @@ const SwitchPlanDropdown = styled(Button)`
   align-items: center;
   cursor: pointer;
   width: 158px;
-  height: 34px;
-  padding: 0px 10px;
+  height: auto;
 `;
 const SpinnerWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 60vh;
 `;
 
 const SwitchPlanMenu = styled(Menu)`
@@ -176,7 +173,11 @@ export class SwitchPlanPopperComponent extends React.Component<
   }
 
   componentDidUpdate(prevProps: Props) {
-    if (this.props.activeSchedule.name !== prevProps.activeSchedule.name) {
+    if (
+      this.props.activeSchedule &&
+      prevProps.activeSchedule &&
+      this.props.activeSchedule.name !== prevProps.activeSchedule.name
+    ) {
       this.props.setNamedSchedule(this.props.activeSchedule);
     }
   }
@@ -213,16 +214,13 @@ export class SwitchPlanPopperComponent extends React.Component<
             <MenuItem key={s.name}>
               <SelectPlanContainer>
                 <PlanText onClick={() => this.onChoosePlan(s.name)}>
-                  {" "}
-                  {s.name}{" "}
+                  {s.name}
                 </PlanText>
                 <ButtonContainer>
-                  {" "}
                   <IconButton
                     style={{ padding: "6px" }}
                     onClick={() => {
-                      const foo: any = s;
-                      this.handleDelete(foo.schedule.present.id, s.name);
+                      this.handleDelete(s.schedule.present.id!, s.name);
                     }}
                   >
                     <DeleteIcon />

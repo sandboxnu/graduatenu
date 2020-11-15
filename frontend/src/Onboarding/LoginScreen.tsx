@@ -272,7 +272,7 @@ class LoginScreenComponent extends React.Component<Props, LoginScreenState> {
         </Box>
 
         <Subtitle>
-          New here? Sign up{" "}
+          New here? Sign up
           <Link
             style={{ color: "#EB5757" }}
             to={{
@@ -280,8 +280,8 @@ class LoginScreenComponent extends React.Component<Props, LoginScreenState> {
             }}
           >
             here
-          </Link>{" "}
-          or{" "}
+          </Link>
+          or
           <Link
             style={{ color: "#EB5757" }}
             to={{

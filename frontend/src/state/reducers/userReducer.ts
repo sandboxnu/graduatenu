@@ -20,7 +20,7 @@ import {
   resetUserAction,
   deletePlanId,
 } from "../actions/userActions";
-import { setCoopCycle } from "../actions/scheduleActions";
+import { setCoopCycle, setNamedSchedule } from "../actions/scheduleActions";
 import { planToString } from "../../utils";
 
 export interface UserState {
@@ -137,6 +137,10 @@ export const userReducer = (
         draft.planIds = draft.planIds.filter(
           (id: number) => id !== action.payload.planId
         );
+        return draft;
+      }
+      case getType(setNamedSchedule): {
+        draft.planName = action.payload.namedSchedule.name;
         return draft;
       }
     }

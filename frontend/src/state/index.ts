@@ -224,7 +224,7 @@ export const getActiveScheduleFromState = (state: AppState): NamedSchedule => {
  * Checks if user is logged in
  */
 export const isUserLoggedIn = (state: AppState): boolean => {
-  return state.user.userId !== undefined;
+  return state.user.userId !== undefined && state.user.token !== undefined;
 };
 
 export const getClosedYearsFromState = (state: AppState): Set<number> => {
