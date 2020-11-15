@@ -214,7 +214,7 @@ function AddPlanPopperComponent(props: Props) {
         name: planName,
         link_sharing_enabled: false,
         schedule: selectedDNDSchedule.current!,
-        major: selectedMajor!.name || "",
+        major: selectedMajor ? selectedMajor.name : "",
         planString: selectedCoopCycle,
         course_counter: counter.current,
         warnings: [],
