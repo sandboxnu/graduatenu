@@ -475,6 +475,7 @@ class HomeComponent extends React.Component<Props, HomeState> {
           course_counter: scheduleData.currentClassCounter,
           warnings: scheduleData.warnings,
           course_warnings: scheduleData.courseWarnings,
+          catalog_year: scheduleData.catalogYear,
         }
       ).then(plan => {
         this.props.updateActiveSchedule({

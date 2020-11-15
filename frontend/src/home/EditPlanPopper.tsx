@@ -220,6 +220,8 @@ export class EditPlanPopperComponent extends React.Component<
         new Set(this.props.majors.map(maj => maj.yearVersion.toString()))
       ),
     ];
+    catalogYears.push("2020");
+    catalogYears.push("2021");
     const marginSpace = 12;
     return (
       <Autocomplete

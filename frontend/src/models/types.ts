@@ -53,6 +53,7 @@ export interface ScheduleSlice {
   courseWarnings: CourseWarning[];
   major: string;
   coopCycle: string;
+  catalogYear?: number;
 }
 
 /**
@@ -180,6 +181,7 @@ export interface IPlanData {
   warnings: IWarning[];
   course_warnings: CourseWarning[];
   course_counter: number;
+  catalog_year?: number;
 }
 
 /**
@@ -194,6 +196,7 @@ export interface ICreatePlanData {
   warnings: IWarning[];
   course_warnings: CourseWarning[];
   course_counter: number;
+  catalog_year?: number;
 }
 /*
  * Data needed to update a user

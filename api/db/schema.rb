@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_02_185055) do
+ActiveRecord::Schema.define(version: 2020_11_15_193346) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 2020_08_02_185055) do
     t.json "course_warnings", default: [], array: true
     t.json "warnings", default: [], array: true
     t.integer "course_counter"
+    t.integer "catalog_year", default: 2018
     t.index ["user_id"], name: "index_plans_on_user_id"
   end
 

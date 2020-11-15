@@ -219,6 +219,7 @@ function AddPlanPopperComponent(props: Props) {
         course_counter: counter.current,
         warnings: [],
         course_warnings: [],
+        catalog_year: 2018,
       }).then(plan => {
         addNewSchedule(plan.plan.name, {
           ...plan.plan,
