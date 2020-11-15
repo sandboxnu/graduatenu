@@ -469,26 +469,18 @@ class HomeComponent extends React.Component<Props, HomeState> {
 
   renderTransfer() {
     // If a user is currently logged in, wait until plans are fetched to render
-    if (this.props.isLoggedIn) {
-      if (this.state.fetchedPlan) {
-        return (
-          <TransferCredits
-            transferCredits={this.props.transferCredits}
-          ></TransferCredits>
-        );
-      } else {
-        return (
-          <SpinnerWrapper>
-            <Loader
-              type="Puff"
-              color="#f50057"
-              height={100}
-              width={100}
-              timeout={5000} //5 secs
-            />
-          </SpinnerWrapper>
-        );
-      }
+    if (this.props.isLoggedIn && !this.state.fetchedPlan) {
+      return (
+        <SpinnerWrapper>
+          <Loader
+            type="Puff"
+            color="#f50057"
+            height={100}
+            width={100}
+            timeout={5000} //5 secs
+          />
+        </SpinnerWrapper>
+      );
     } else {
       return (
         <TransferCredits
