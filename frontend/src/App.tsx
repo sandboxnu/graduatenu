@@ -41,6 +41,9 @@ export const App = ({
               component={TransferableCreditScreen}
             />
             <Route path="/" component={Onboarding} />
+            <Route path="/advisor/notifications" component={} />
+            <Route path="/advisor/manageStudents" component={} />
+            <Route path="/advisor/templates" component={} />
           </Switch>
         </Router>
       </PersistGate>
