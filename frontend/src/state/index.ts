@@ -228,7 +228,7 @@ export const isUserLoggedIn = (state: AppState): boolean => {
 };
 
 export const getClosedYearsFromState = (state: AppState): Set<number> => {
-  return state.schedule.present.closedYears;
+  return new Set(state.schedule.present.closedYears);
 };
 
 /**
