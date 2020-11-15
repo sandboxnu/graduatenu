@@ -211,24 +211,24 @@ export const getScheduleCoopCycleFromState = (state: AppState): string => {
  * @param state the AppState
  */
 export const getSchedulesFromState = (state: AppState): NamedSchedule[] =>
-  state.schedules.schedules;
+  Object.values(state.schedules.schedules);
 
 /**
  * Get the active schedule from the AppState
  * @param state the AppState
  */
 export const getActiveScheduleFromState = (state: AppState): NamedSchedule => {
-  return state.schedules.schedules[state.schedules.activeSchedule];
+  return state.schedules.schedules[state.schedules.activeSchedule!];
 };
 /**
  * Checks if user is logged in
  */
 export const isUserLoggedIn = (state: AppState): boolean => {
-  return state.user.userId !== undefined;
+  return state.user.userId !== undefined && state.user.token !== undefined;
 };
 
 export const getClosedYearsFromState = (state: AppState): Set<number> => {
-  return state.schedule.present.closedYears;
+  return new Set(state.schedule.present.closedYears);
 };
 
 /**

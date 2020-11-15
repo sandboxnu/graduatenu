@@ -51,6 +51,7 @@ export interface ScheduleState {
 }
 
 export interface ScheduleStateSlice {
+  id?: number;
   currentClassCounter: number;
   isScheduleLoading: boolean; // not used right now
   scheduleError: string; // not used right now
@@ -60,9 +61,9 @@ export interface ScheduleStateSlice {
   creditsTaken: number;
   major: string;
   coopCycle: string;
-  closedYears: Set<number>; // list of indexes for which years are not expanded in the UI
   completedRequirements: IRequiredCourse[];
   transferCourses: ScheduleCourse[];
+  closedYears: number[]; // list of indexes for which years are not expanded in the UI
 }
 
 const initialState: ScheduleState = {
@@ -76,9 +77,9 @@ const initialState: ScheduleState = {
     creditsTaken: 0,
     major: "",
     coopCycle: "",
-    closedYears: new Set(),
     completedRequirements: [],
     transferCourses: [],
+    closedYears: [],
   },
 };
 
@@ -343,20 +344,20 @@ export const scheduleReducer = (
         return draft;
       }
       case getType(setClosedYearsToYearsInThePast): {
-        draft.present.closedYears = new Set();
+        draft.present.closedYears = [];
         for (var i = 0; i < draft.present.schedule.years.length; i++) {
           if (isYearInPast(i, action.payload.academicYear)) {
-            draft.present.closedYears.add(i);
+            draft.present.closedYears.push(i);
           }
         }
         return draft;
       }
       case getType(toggleYearExpanded): {
         const idx = action.payload.index;
-        if (draft.present.closedYears.has(idx)) {
-          draft.present.closedYears.delete(idx);
+        if (draft.present.closedYears.includes(idx)) {
+          draft.present.closedYears.filter(year => year !== idx);
         } else {
-          draft.present.closedYears.add(idx);
+          draft.present.closedYears.push(idx);
         }
         return draft;
       }
