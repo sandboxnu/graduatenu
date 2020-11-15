@@ -8,6 +8,7 @@ import {
   DNDScheduleTerm,
   IPlanData,
   ScheduleSlice,
+  NamedSchedule,
 } from "../models/types";
 import { Schedule, Major, Status, SeasonWord } from "../../../common/types";
 import { addPrereqsToSchedule } from "../../../common/prereq_loader";
@@ -43,6 +44,7 @@ import {
   getAcademicYearFromState,
   getClosedYearsFromState,
   getCurrentClassCounterFromState,
+  getActiveScheduleFromState,
 } from "../state";
 import {
   updateSemesterAction,
@@ -164,6 +166,7 @@ const HomeButtons = styled.div`
   justify-content: space-between;
   max-width: 800px;
   padding: 10px 0;
+  space-between: 5;
 `;
 
 const PlanPopperButton = styled(Button)<any>`
@@ -176,8 +179,7 @@ const PlanPopperButton = styled(Button)<any>`
 const PlanContainer = styled.div`
   position: relative;
   align-items: flex-end;
-  padding: 10px;
-  margin: 0px;
+  margin-right: 10px;
 `;
 
 const LoginLogoutLink = styled(Link)`
@@ -221,6 +223,7 @@ interface ReduxStoreHomeProps {
   academicYear: number;
   closedYears: Set<number>; // list of indexes of closed years
   currentClassCounter: number;
+  activeSchedule: NamedSchedule;
 }
 
 interface ReduxDispatchHomeProps {
@@ -264,8 +267,8 @@ class HomeComponent extends React.Component<Props, HomeState> {
 
   componentDidMount() {
     // If this is true, then a user is currently logged in and we can fetch their plan
-    if (this.props.token && this.props.userId) {
-      findAllPlansForUser(this.props.userId, this.props.token).then(
+    if (this.props.isLoggedIn && !this.props.activeSchedule) {
+      findAllPlansForUser(this.props.userId!, this.props.token!).then(
         (plans: IPlanData[]) => {
           // Once multiple plans are supported, this can be changed to the last used plan
           let plan: IPlanData = plans[0];
@@ -285,6 +288,8 @@ class HomeComponent extends React.Component<Props, HomeState> {
           });
         }
       );
+    } else if (this.props.activeSchedule) {
+      this.setState({ fetchedPlan: true });
     }
   }
 
@@ -428,7 +433,7 @@ class HomeComponent extends React.Component<Props, HomeState> {
 
   renderYears() {
     // If a user is currently logged in, wait until plans are fetched to render
-    if (this.props.token && this.props.userId) {
+    if (this.props.isLoggedIn) {
       if (this.state.fetchedPlan) {
         return this.props.schedule.years.map((year: number, index: number) => (
           <Year key={index} index={index} schedule={this.props.schedule} />
@@ -460,11 +465,11 @@ class HomeComponent extends React.Component<Props, HomeState> {
    */
   async updatePlan() {
     // If this is true, then a user is currently logged in and we can update their plan
-    if (this.props.token && this.props.userId) {
+    if (this.props.isLoggedIn) {
       const scheduleData: ScheduleSlice = this.props.getCurrentScheduleData();
       const plan = await updatePlanForUser(
-        this.props.userId,
-        this.props.token,
+        this.props.userId!,
+        this.props.token!,
         this.props.planIds[0],
         {
           id: this.props.planIds[0],
@@ -486,6 +491,40 @@ class HomeComponent extends React.Component<Props, HomeState> {
           scheduleError: "",
         } as ScheduleSlice);
         alert("Your plan has been updated.");
+      });
+    } else {
+      alert("You must be logged in to save your plan.");
+    }
+  }
+
+  /**
+   * If a user is currently logged in, saves the current plan under this user.
+   * Only supports updating a user's singular plan, can be modified later to
+   * update a specific plan.
+   */
+  savePlan() {
+    // If this is true, then a user is currently logged in and we can update their plan
+    if (this.props.isLoggedIn) {
+      const scheduleData: ScheduleSlice = this.props.getCurrentScheduleData();
+      createPlanForUser(this.props.userId!, this.props.token!, {
+        name: `Plan ${this.state.planCount + 1}`,
+        link_sharing_enabled: this.props.linkSharing,
+        schedule: this.props.schedule,
+        major: this.props.major ? this.props.major : "",
+        planString: this.props.planStr ? this.props.planStr : "",
+        course_counter: scheduleData.currentClassCounter,
+        warnings: scheduleData.warnings,
+        course_warnings: scheduleData.courseWarnings,
+      }).then(plan => {
+        this.props.addNewSchedule(plan.plan.name, {
+          ...plan.plan,
+          coopCycle: plan.plan.planString,
+          currentClassCounter: plan.plan.courseCounter,
+          isScheduleLoading: false,
+          scheduleError: "",
+        } as ScheduleSlice);
+        this.setState({ planCount: this.state.planCount + 1 });
+        alert("Your plan has been saved.");
       });
     } else {
       alert("You must be logged in to save your plan.");
@@ -542,21 +581,27 @@ class HomeComponent extends React.Component<Props, HomeState> {
               <HomeAboveSchedule>
                 <HomePlan>
                   <h2>Plan Of Study</h2>
-                  {this.props.token && this.props.userId && (
-                    <SwitchPlanPopper />
-                  )}
                 </HomePlan>
-                <HomeButtons>
-                  <PlanContainer>
-                    <PlanPopperButton
-                      variant="contained"
-                      onClick={this.updatePlan.bind(this)}
-                    >
-                      Update Plan
-                    </PlanPopperButton>
-                  </PlanContainer>
-                  <AddPlan />
-                </HomeButtons>
+                {this.props.isLoggedIn && (
+                  <HomeButtons>
+                    <PlanContainer>
+                      <PlanPopperButton
+                        variant="contained"
+                        onClick={this.updatePlan.bind(this)}
+                      >
+                        Update Plan
+                      </PlanPopperButton>
+                    </PlanContainer>
+                    <PlanContainer>
+                      <AddPlan />
+                    </PlanContainer>
+                    <SwitchPlanPopper
+                      userId={this.props.userId}
+                      planIds={this.props.planIds}
+                      token={this.props.token}
+                    />
+                  </HomeButtons>
+                )}
               </HomeAboveSchedule>
               {this.renderYears()}
             </Container>
@@ -586,6 +631,7 @@ const mapStateToProps = (state: AppState) => ({
   academicYear: getAcademicYearFromState(state),
   closedYears: getClosedYearsFromState(state),
   currentClassCounter: getCurrentClassCounterFromState(state),
+  activeSchedule: getActiveScheduleFromState(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({

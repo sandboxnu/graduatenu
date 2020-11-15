@@ -48,6 +48,7 @@ export interface ScheduleState {
 }
 
 export interface ScheduleStateSlice {
+  id?: number;
   currentClassCounter: number;
   isScheduleLoading: boolean; // not used right now
   scheduleError: string; // not used right now

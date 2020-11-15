@@ -1,7 +1,6 @@
 name: Publish Docker image to Github Docker Registry to be pulled in the Khoury VM.
 
-on:
-  release
+on: release
 
 jobs:
   push_frontend_to_registry:
