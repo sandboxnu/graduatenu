@@ -25,11 +25,10 @@ import {
   undoRemoveClassAction,
   changeSemesterStatusAction,
 } from "../state/actions/scheduleActions";
-import { Snackbar, Button, IconButton } from "@material-ui/core";
-import CloseIcon from "@material-ui/icons/Close";
 import { Tooltip } from "@material-ui/core";
 import { SEMESTER_MIN_HEIGHT } from "../constants";
 import { convertTermIdToSeason } from "../utils/schedule-helpers";
+import { UndoDelete } from "./UndoDelete";
 
 const OutsideContainer = styled.div`
   width: 25%;
@@ -145,6 +144,12 @@ class SemesterBlockComponent extends React.Component<
     );
   };
 
+  closeSnackBar = () => {
+    this.setState({
+      snackbarOpen: false,
+    });
+  };
+
   /**
    * Filters through the given list of course warnings to find all warnings for the given course
    * @param courseWarnings the list of course warnings to search through
@@ -226,47 +231,12 @@ class SemesterBlockComponent extends React.Component<
     const { snackbarOpen, deletedClass, modalVisible } = this.state;
     return (
       <OutsideContainer>
-        <Snackbar
-          anchorOrigin={{
-            vertical: "bottom",
-            horizontal: "left",
-          }}
-          open={snackbarOpen}
-          onClose={this.handleSnackbarClose.bind(this)}
-          autoHideDuration={5000}
-          message={
-            <span>
-              {!!deletedClass
-                ? "Removed " +
-                  deletedClass.subject +
-                  deletedClass.classId +
-                  ": " +
-                  deletedClass.name
-                : "Removed Class"}
-            </span>
-          }
-          action={[
-            <Button
-              key="undo"
-              color="secondary"
-              size="small"
-              onClick={this.undoButtonPressed.bind(this)}
-            >
-              UNDO
-            </Button>,
-            <IconButton
-              key="close"
-              aria-label="close"
-              color="inherit"
-              onClick={() =>
-                this.setState({
-                  snackbarOpen: false,
-                })
-              }
-            >
-              <CloseIcon />
-            </IconButton>,
-          ]}
+        <UndoDelete
+          deletedClass={deletedClass}
+          snackbarOpen={snackbarOpen}
+          handleSnackbarClose={this.handleSnackbarClose.bind(this)}
+          undoButtonPressed={this.undoButtonPressed.bind(this)}
+          closeSnackBar={this.closeSnackBar.bind(this)}
         />
 
         <AddClass

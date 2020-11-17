@@ -21,6 +21,7 @@ import {
 } from "./GenericOnboarding";
 import { AddBlock } from "../components/ClassBlocks/AddBlock";
 import { Link as ButtonLink, Collapse, Grid, Paper } from "@material-ui/core";
+import { AddClassModal } from "../components";
 
 /**
  * Flattens the Requirement[] into only a list of Requirements/Requirement sets
@@ -259,6 +260,12 @@ class CompletedCoursesComponent extends Component<Props, State> {
             </Paper>
           </Grid>
         </Grid>
+        <AddClassModal
+          schedule={undefined}
+          visible={this.state.modalVisible}
+          handleClose={this.hideModal.bind(this)}
+          handleSubmit={courses => this.addOtherCourses(courses)}
+        ></AddClassModal>
       </OnboardingSelectionTemplate>
     );
   }

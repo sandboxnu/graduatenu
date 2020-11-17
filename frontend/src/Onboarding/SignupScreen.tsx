@@ -325,7 +325,7 @@ class SignupScreenComponent extends React.Component<Props, SignupScreenState> {
         </Box>
 
         <Subtitle>
-          Already a member? Log in
+          Already a member? Log in{" "}
           <Link
             style={{ color: "#EB5757" }}
             to={{
@@ -334,7 +334,7 @@ class SignupScreenComponent extends React.Component<Props, SignupScreenState> {
           >
             here
           </Link>
-          or
+          {" or "}
           <Link style={{ color: "#EB5757" }} to="/home">
             continue as guest
           </Link>

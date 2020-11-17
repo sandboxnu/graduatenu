@@ -9,9 +9,9 @@ jobs:
     steps:
       - name: Check out the repo
         uses: actions/checkout@v2
-        
+
       - name: Login to DockerHub
-        uses: docker/login-action@v1 
+        uses: docker/login-action@v1
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
@@ -25,14 +25,14 @@ jobs:
           docker build -t $DH_REGISTRY/$DH_REPOSITORY:$IMAGE_TAG -f frontend/Dockerfile .
           docker push $DH_REGISTRY/$DH_REPOSITORY
           echo "::set-output name=image::$DH_REGISTRY/$DH_REPOSITORY:$IMAGE_TAG"
-          
+
   push_api_to_registry:
     name: Push Api Docker image to GitHub Packages
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repo
         uses: actions/checkout@v2
-        
+
       - name: Login to DockerHub
         uses: docker/login-action@v1
         with:

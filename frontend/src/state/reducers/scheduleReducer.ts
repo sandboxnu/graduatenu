@@ -25,6 +25,8 @@ import {
   setScheduleMajor,
   toggleYearExpanded,
   setClosedYearsToYearsInThePast,
+  addTransferClassAction,
+  removeTransferClassAction,
   setCurrentClassCounter,
   incrementCurrentClassCounter,
 } from "../actions/scheduleActions";
@@ -41,6 +43,7 @@ import {
   clearSchedule,
 } from "../../utils";
 import { resetUserAction } from "../actions/userActions";
+import _ from "lodash";
 
 export interface ScheduleState {
   past?: ScheduleStateSlice;
@@ -56,10 +59,10 @@ export interface ScheduleStateSlice {
   warnings: IWarning[];
   courseWarnings: CourseWarning[];
   creditsTaken: number;
-  completedRequirements: IRequiredCourse[];
-  transferCourses: ScheduleCourse[];
   major: string;
   coopCycle: string;
+  completedRequirements: IRequiredCourse[];
+  transferCourses: ScheduleCourse[];
   closedYears: number[]; // list of indexes for which years are not expanded in the UI
 }
 
@@ -72,10 +75,10 @@ const initialState: ScheduleState = {
     warnings: [],
     courseWarnings: [],
     creditsTaken: 0,
-    completedRequirements: [],
-    transferCourses: [],
     major: "",
     coopCycle: "",
+    completedRequirements: [],
+    transferCourses: [],
     closedYears: [],
   },
 };
@@ -110,6 +113,12 @@ export const scheduleReducer = (
 
         return draft;
       }
+      case getType(addTransferClassAction): {
+        const { courses } = action.payload;
+        draft.present.transferCourses.push(...courses);
+
+        return draft;
+      }
       case getType(removeClassAction): {
         const { course, semester } = action.payload;
         const season = convertTermIdToSeason(semester.termId);
@@ -134,6 +143,17 @@ export const scheduleReducer = (
       }
       case getType(undoRemoveClassAction): {
         draft.present = JSON.parse(JSON.stringify(draft.past));
+        return draft;
+      }
+      case getType(removeTransferClassAction): {
+        const { course } = action.payload;
+        // save prev state with a deep copy
+        draft.past = JSON.parse(JSON.stringify(draft.present));
+
+        draft.present.transferCourses = draft.present.transferCourses.filter(
+          c => c.classId !== course.classId
+        );
+
         return draft;
       }
       case getType(changeSemesterStatusAction): {

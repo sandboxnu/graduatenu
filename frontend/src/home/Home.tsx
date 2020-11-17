@@ -10,10 +10,17 @@ import {
   ScheduleSlice,
   NamedSchedule,
 } from "../models/types";
-import { Schedule, Major, Status, SeasonWord } from "../../../common/types";
+import {
+  Schedule,
+  Major,
+  Status,
+  SeasonWord,
+  ScheduleCourse,
+} from "../../../common/types";
 import { addPrereqsToSchedule } from "../../../common/prereq_loader";
 import styled from "styled-components";
 import { Year } from "../components/Year";
+import { TransferCredits } from "../components/TransferCreditHolder";
 import {
   convertTermIdToYear,
   convertTermIdToSeason,
@@ -43,6 +50,7 @@ import {
   getScheduleMajorFromState,
   getAcademicYearFromState,
   getClosedYearsFromState,
+  getTransferCoursesFromState,
   getCurrentClassCounterFromState,
   getActiveScheduleFromState,
 } from "../state";
@@ -209,6 +217,7 @@ interface ToastHomeProps {
 
 interface ReduxStoreHomeProps {
   schedule: DNDSchedule;
+  transferCredits: ScheduleCourse[];
   major?: string;
   planStr?: string;
   warnings: IWarning[];
@@ -458,6 +467,29 @@ class HomeComponent extends React.Component<Props, HomeState> {
     }
   }
 
+  renderTransfer() {
+    // If a user is currently logged in, wait until plans are fetched to render
+    if (this.props.isLoggedIn && !this.state.fetchedPlan) {
+      return (
+        <SpinnerWrapper>
+          <Loader
+            type="Puff"
+            color="#f50057"
+            height={100}
+            width={100}
+            timeout={5000} //5 secs
+          />
+        </SpinnerWrapper>
+      );
+    } else {
+      return (
+        <TransferCredits
+          transferCredits={this.props.transferCredits}
+        ></TransferCredits>
+      );
+    }
+  }
+
   /**
    * If a user is currently logged in, updates the current plan under this user.
    * Only supports updating a user's singular plan, can be modified later to
@@ -604,6 +636,7 @@ class HomeComponent extends React.Component<Props, HomeState> {
                 )}
               </HomeAboveSchedule>
               {this.renderYears()}
+              {this.renderTransfer()}
             </Container>
           </LeftScroll>
           <SidebarContainer>
@@ -617,6 +650,7 @@ class HomeComponent extends React.Component<Props, HomeState> {
 
 const mapStateToProps = (state: AppState) => ({
   schedule: getScheduleFromState(state),
+  transferCredits: getTransferCoursesFromState(state),
   planStr: getScheduleCoopCycleFromState(state),
   major: getScheduleMajorFromState(state),
   warnings: getWarningsFromState(state),
