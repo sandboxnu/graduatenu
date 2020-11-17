@@ -299,7 +299,7 @@ const ChangePassword = (props: ChangePasswordProps) => {
   );
 };
 
-export const ProfileComponent: React.FC = (props: any) => {
+const ProfileComponent: React.FC = (props: any) => {
   const [isEdit, setEdit] = useState(false);
   const [name, setName] = useState(props.name);
   const [major, setMajor] = useState(props.major);
@@ -308,7 +308,6 @@ export const ProfileComponent: React.FC = (props: any) => {
   const [coop, setCoop] = useState(props.coop);
   const { majors, plans } = props;
 
-  console.log(props);
   return (
     <Container>
       <HeaderRow>

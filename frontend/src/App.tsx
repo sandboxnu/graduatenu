@@ -12,6 +12,9 @@ import { SignupScreen } from "./Onboarding/SignupScreen";
 import { LoginScreen } from "./Onboarding/LoginScreen";
 import { TransferCoursesScreen } from "./Onboarding/TransferCoursesScreen";
 import { Profile } from "./profile/Profile";
+import { ManageStudents } from "./advising/ManageStudents";
+import { NotificationsPage } from "./advising/Notifications";
+import { TemplatesPage } from "./advising/Templates";
 import TransferableCreditScreen from "./Onboarding/TransferableCreditScreen";
 
 export const App = ({
@@ -41,9 +44,12 @@ export const App = ({
               component={TransferableCreditScreen}
             />
             <Route path="/" component={Onboarding} />
-            <Route path="/advisor/notifications" component={} />
-            <Route path="/advisor/manageStudents" component={} />
-            <Route path="/advisor/templates" component={} />
+            <Route
+              path="/advisor/notifications"
+              component={NotificationsPage}
+            />
+            <Route path="/advisor/manageStudents" component={ManageStudents} />
+            <Route path="/advisor/templates" component={TemplatesPage} />
           </Switch>
         </Router>
       </PersistGate>

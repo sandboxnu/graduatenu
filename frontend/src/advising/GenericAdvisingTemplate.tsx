@@ -10,28 +10,30 @@ const HomeText = styled.a`
   color: black;
 `;
 
-interface GenericAdvisingTemplateProps {}
+interface GenericAdvisingTemplateProps {
+  baseTab: number;
+}
 
 export const GenericAdvisingTemplate: React.FC<
   GenericAdvisingTemplateProps
-> = ({ children }) => {
-  const [currentTab, setCurrentTab] = useState("Notifications");
-  const handleChange = (event: React.ChangeEvent<{}>, newValue: string) => {
+> = ({ baseTab, children }) => {
+  const [currentTab, setCurrentTab] = useState(baseTab);
+  const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setCurrentTab(newValue);
   };
   return (
     <>
       <HomeText href="#">GraduateNU</HomeText>
-      <Tabs value={currentTab} onChange={handleChange} centered>
-        <Link to="/advisor/notifications">
-          <Tab label="Notifications" />
-        </Link>
-        <Link to="/advisor/manageStudents">
-          <Tab label="Students" />
-        </Link>
-        <Link to="/advisor/templates">
-          <Tab label="Templates" />
-        </Link>
+      <Tabs
+        indicatorColor="primary"
+        textColor="primary"
+        value={currentTab}
+        onChange={handleChange}
+        centered
+      >
+        <Tab href="/advisor/notifications" label="Notifications" />
+        <Tab href="/advisor/manageStudents" label="Students" />
+        <Tab href="/advisor/templates" label="Templates" />
       </Tabs>
       {children}
     </>
