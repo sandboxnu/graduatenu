@@ -3,27 +3,45 @@ version: "3"
 services:
   db:
     image: postgres
+    restart: always
     environment:
       POSTGRES_PASSWORD: graduatenu
     volumes:
       - graduatenu_dbdata:/var/lib/postgresql/data
-
-  backend:
-    build: ./api
-    command: bash -c "rm -f tmp/pids/server.pid && RAILS_ENV=production bundle exec rails s -p 3002 -b '0.0.0.0'"
-    ports:
-      - 3002:3002
-    depends_on:
-      - db
-
+    networks:
+      - my-network
   frontend:
     build:
       context: .
       dockerfile: ./frontend/Dockerfile
-    ports:
-      - 80:80
+    networks:
+      - my-network
+    image: graduatenu/graduatenu-frontend
+  backend:
     depends_on:
+      - db
+    build:
+      context: ./api
+    command: bash -c "rm -f tmp/pids/server.pid && RAILS_ENV=production bundle exec rails s -p 3002 -b '0.0.0.0'"
+    networks:
+      - my-network
+    image: graduatenu/graduatenu-backend
+  nginx-proxy:
+    depends_on:
+      - frontend
       - backend
+    restart: always
+    build:
+      context: .
+      dockerfile: ./common/Dockerfile
+    networks:
+      - my-network
+    ports:
+      - 3000:80
+    image: graduatenu/graduatenu-nginx
+
+networks:
+  my-network:
 
 volumes:
   graduatenu_dbdata:

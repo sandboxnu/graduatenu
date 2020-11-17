@@ -14,6 +14,3 @@ RUN chmod +x /usr/bin/entrypoint.sh
 ENTRYPOINT ["entrypoint.sh"]
 
 EXPOSE 3002
-
-# Start the main process.
-CMD ["rails", "server", "-b", "0.0.0.0", "-p", "3002"]

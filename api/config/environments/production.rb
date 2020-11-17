@@ -1,4 +1,5 @@
 Rails.application.configure do
+  config.hosts << 'backend-name'
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
