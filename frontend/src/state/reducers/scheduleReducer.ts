@@ -355,7 +355,9 @@ export const scheduleReducer = (
       case getType(toggleYearExpanded): {
         const idx = action.payload.index;
         if (draft.present.closedYears.includes(idx)) {
-          draft.present.closedYears.filter(year => year !== idx);
+          draft.present.closedYears = draft.present.closedYears.filter(
+            year => year !== idx
+          );
         } else {
           draft.present.closedYears.push(idx);
         }
