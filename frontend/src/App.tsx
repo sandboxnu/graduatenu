@@ -43,13 +43,13 @@ export const App = ({
               path="/transferableCredits"
               component={TransferableCreditScreen}
             />
-            <Route path="/" component={Onboarding} />
             <Route
               path="/advisor/notifications"
               component={NotificationsPage}
             />
             <Route path="/advisor/manageStudents" component={ManageStudents} />
             <Route path="/advisor/templates" component={TemplatesPage} />
+            <Route path="/" component={Onboarding} />
           </Switch>
         </Router>
       </PersistGate>

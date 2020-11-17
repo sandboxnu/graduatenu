@@ -9,6 +9,9 @@ const HomeText = styled.a`
   text-decoration: none;
   color: black;
 `;
+const StyledTab = styled(Tab)`
+  color: white !important;
+`;
 
 interface GenericAdvisingTemplateProps {
   baseTab: number;
@@ -23,17 +26,25 @@ export const GenericAdvisingTemplate: React.FC<
   };
   return (
     <>
-      <HomeText href="#">GraduateNU</HomeText>
+      <HomeText>GraduateNU</HomeText>
       <Tabs
-        indicatorColor="primary"
-        textColor="primary"
         value={currentTab}
         onChange={handleChange}
+        style={{ backgroundColor: "#EB5757" }}
+        TabIndicatorProps={{
+          style: {
+            backgroundColor: "transparent",
+            bottom: "10px",
+            borderRadius: "15px",
+            border: "2px solid white",
+            height: "25px",
+          },
+        }}
         centered
       >
-        <Tab href="/advisor/notifications" label="Notifications" />
-        <Tab href="/advisor/manageStudents" label="Students" />
-        <Tab href="/advisor/templates" label="Templates" />
+        <StyledTab onChange={handleChange} label="Notifications" />
+        <StyledTab onChange={handleChange} label="Students" />
+        <StyledTab onChange={handleChange} label="Templates" />
       </Tabs>
       {children}
     </>
