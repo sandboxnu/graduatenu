@@ -283,8 +283,8 @@ class LoginScreenComponent extends React.Component<Props, LoginScreenState> {
             }}
           >
             here
-          </Link>{" "}
-          or{" "}
+          </Link>
+          {" or "}
           <Link
             style={{ color: "#EB5757" }}
             to={{

@@ -10,8 +10,8 @@ import {
   Status,
   SeasonWord,
   Schedule,
-  IRequiredCourse,
   Major,
+  IRequiredCourse,
 } from "../../../../common/types";
 
 export const addClassesAction = createAction(
@@ -19,6 +19,13 @@ export const addClassesAction = createAction(
   (courses: ScheduleCourse[], semester: DNDScheduleTerm) => ({
     courses,
     semester,
+  })
+)();
+
+export const addTransferClassAction = createAction(
+  "schedule/ADD_TRANSFER",
+  (courses: ScheduleCourse[]) => ({
+    courses,
   })
 )();
 
@@ -33,6 +40,13 @@ export const removeClassAction = createAction(
 export const undoRemoveClassAction = createAction(
   "schedule/UNDO_REMOVE_CLASS",
   () => void 0
+)();
+
+export const removeTransferClassAction = createAction(
+  "schedule/REMOVE_TRANSFER_CLASS",
+  (course: ScheduleCourse) => ({
+    course,
+  })
 )();
 
 export const changeSemesterStatusAction = createAction(

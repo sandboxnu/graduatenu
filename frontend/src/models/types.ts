@@ -45,6 +45,7 @@ export enum SeasonEnum {
  * Represents a schedule with loading and error information
  */
 export interface ScheduleSlice {
+  id?: number;
   currentClassCounter: number;
   isScheduleLoading: boolean; // not used right now
   scheduleError: string; // not used right now

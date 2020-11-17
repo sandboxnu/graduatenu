@@ -98,6 +98,13 @@ export const setUserCoopCycleAction = createAction(
   })
 )();
 
+export const deletePlanId = createAction(
+  "user/DELETE_PLAN_ID",
+  (planId: number) => ({
+    planId,
+  })
+)();
+
 export const setExamCredits = createAction(
   "user/SET_EXAM_CREDITS",
   (examCredits: TransferableExam[]) => ({ examCredits })

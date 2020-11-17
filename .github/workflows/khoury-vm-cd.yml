@@ -1,7 +1,6 @@
 name: Publish Docker image to Github Docker Registry to be pulled in the Khoury VM.
 
-on:
-  release
+on: release
 
 jobs:
   push_frontend_to_registry:
@@ -10,29 +9,43 @@ jobs:
     steps:
       - name: Check out the repo
         uses: actions/checkout@v2
-      - name: Push to GitHub Packages
-        uses: docker/build-push-action@v1
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
         with:
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-          registry: docker.pkg.github.com
-          repository: sandboxnu/graduatenu/graduate-frontend-deployments
-          tag_with_ref: true
-          context: ./frontend
-          file: ./frontend/Dockerfile
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build, tag, and push frontend image to DockerHub
+        env:
+          DH_REGISTRY: graduatenu
+          DH_REPOSITORY: graduatenu-frontend
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          docker build -t $DH_REGISTRY/$DH_REPOSITORY:$IMAGE_TAG -f frontend/Dockerfile .
+          docker push $DH_REGISTRY/$DH_REPOSITORY
+          echo "::set-output name=image::$DH_REGISTRY/$DH_REPOSITORY:$IMAGE_TAG"
+
   push_api_to_registry:
     name: Push Api Docker image to GitHub Packages
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repo
         uses: actions/checkout@v2
-      - name: Push to GitHub Packages
-        uses: docker/build-push-action@v1
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
         with:
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-          registry: docker.pkg.github.com
-          repository: sandboxnu/graduatenu/graduate-api-deployments
-          tag_with_ref: true
-          context: ./api
-          file: ./api/Dockerfile
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build, tag, and push rails image to DockerHub
+        env:
+          DH_REGISTRY: graduatenu
+          DH_REPOSITORY: graduatenu-api
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          cd api
+          docker build -t $DH_REGISTRY/$DH_REPOSITORY:$IMAGE_TAG .
+          docker push $DH_REGISTRY/$DH_REPOSITORY
+          echo "::set-output name=image::$DH_REGISTRY/$DH_REPOSITORY:$IMAGE_TAG"
