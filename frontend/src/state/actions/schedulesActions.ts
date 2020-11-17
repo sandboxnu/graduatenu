@@ -3,7 +3,7 @@ import { ScheduleSlice, NamedSchedule } from "../../models/types";
 
 export const setActiveScheduleAction = createAction(
   "schedules/SET_ACTIVE_SCHEDULE",
-  (activeSchedule: number) => ({ activeSchedule })
+  (activeSchedule: string) => ({ activeSchedule })
 )();
 
 export const addNewSchedule = createAction(
@@ -19,4 +19,9 @@ export const setSchedules = createAction(
 export const updateActiveSchedule = createAction(
   "schedules/UPDATE_ACTIVE_SCHEDULE",
   (updatedSchedule: ScheduleSlice) => ({ updatedSchedule })
+)();
+
+export const deletePlan = createAction(
+  "schedules/DELETE_PLAN",
+  (name: string) => ({ name })
 )();
