@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 2020_11_18_025153) do
     t.integer "catalog_year", null: false
     t.json "schedule"
     t.string "major", null: false
-    t.string "plan_string", null: false
+    t.string "coop_cycle", null: false
     t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

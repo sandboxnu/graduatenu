@@ -5,7 +5,7 @@ class CreateTemplatePlans < ActiveRecord::Migration[6.0]
       t.integer :catalog_year, null: false
       t.json :schedule
       t.string :major, null: false
-      t.string :plan_string, null: false
+      t.string :coop_cycle, null: false
       t.belongs_to :user
       t.timestamps
     end
