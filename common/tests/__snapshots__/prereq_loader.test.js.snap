@@ -24300,6 +24300,7 @@ Object {
               "values": Array [
                 Object {
                   "classId": "1108",
+                  "missing": true,
                   "subject": "BIOL",
                 },
               ],
@@ -25511,6 +25512,7 @@ Object {
               "values": Array [
                 Object {
                   "classId": "1108",
+                  "missing": true,
                   "subject": "BIOL",
                 },
               ],
@@ -26722,6 +26724,7 @@ Object {
               "values": Array [
                 Object {
                   "classId": "1108",
+                  "missing": true,
                   "subject": "BIOL",
                 },
               ],
@@ -27969,6 +27972,7 @@ Object {
               "values": Array [
                 Object {
                   "classId": "1108",
+                  "missing": true,
                   "subject": "BIOL",
                 },
               ],
@@ -29253,10 +29257,12 @@ Object {
               "values": Array [
                 Object {
                   "classId": "1162",
+                  "missing": true,
                   "subject": "PHYS",
                 },
                 Object {
                   "classId": "1163",
+                  "missing": true,
                   "subject": "PHYS",
                 },
               ],
@@ -30021,10 +30027,12 @@ Object {
               "values": Array [
                 Object {
                   "classId": "1162",
+                  "missing": true,
                   "subject": "PHYS",
                 },
                 Object {
                   "classId": "1163",
+                  "missing": true,
                   "subject": "PHYS",
                 },
               ],
