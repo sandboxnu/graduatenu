@@ -184,7 +184,7 @@ class SignupScreenComponent extends React.Component<Props, SignupScreenState> {
             link_sharing_enabled: false,
             schedule: scheduleData.schedule,
             major: this.props.major ? this.props.major.name : "",
-            planString: this.props.planStr ? this.props.planStr : "None",
+            coop_cycle: this.props.planStr ? this.props.planStr : "None",
             course_counter: scheduleData.currentClassCounter,
             warnings: scheduleData.warnings,
             course_warnings: scheduleData.courseWarnings,
