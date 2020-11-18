@@ -32,6 +32,7 @@ class User < ApplicationRecord
 
   has_many :transfer_courses, foreign_key: 'user_id', class_name: "Course"
   has_many :completed_courses, foreign_key: 'user_id', class_name: "Course"
+  has_many :plans, foreign_key: 'user_id'
   
   #validates a non-unique username and allows spaces
   validates :username, presence: true, allow_blank: false, format: { with: /\A[a-zA-Z0-9 ]+\z/ }
