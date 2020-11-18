@@ -185,7 +185,7 @@ class LoginScreenComponent extends React.Component<Props, LoginScreenState> {
       this.props.setSchedules(namedSchedules);
       this.props.setMajorPlan(
         findMajorFromName(plans[0].major, this.props.majors),
-        plans[0].planString ? plans[0].planString : ""
+        plans[0].coop_cycle ? plans[0].coop_cycle : ""
       );
     });
   }
