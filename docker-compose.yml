@@ -2,46 +2,44 @@ version: "3"
 
 services:
   db:
-    image: postgres
-    restart: always
+    image: postgres:12.5
     environment:
       POSTGRES_PASSWORD: graduatenu
     volumes:
-      - graduatenu_dbdata:/var/lib/postgresql/data
+      - graduatenu_data:/var/lib/postgresql/data
     networks:
-      - my-network
+      - sub-etha
   frontend:
     build:
       context: .
       dockerfile: ./frontend/Dockerfile
     networks:
-      - my-network
-    image: graduatenu/graduatenu-frontend
+      - sub-etha
+    image: "reactapp:1.0.0"
   backend:
     depends_on:
       - db
     build:
       context: ./api
-    command: bash -c "rm -f tmp/pids/server.pid && RAILS_ENV=production bundle exec rails s -p 3002 -b '0.0.0.0'"
+    command: bash -c "rm -f tmp/pids/server.pid && RAILS_ENV=production bundle exec rails s -p 80 -b '0.0.0.0'"
     networks:
-      - my-network
-    image: graduatenu/graduatenu-backend
-  nginx-proxy:
+      - sub-etha
+    image: "railsapp:1.0.0"
+  revproxy:
     depends_on:
       - frontend
       - backend
-    restart: always
     build:
       context: .
       dockerfile: ./common/Dockerfile
     networks:
-      - my-network
+      - sub-etha
     ports:
-      - 3000:80
-    image: graduatenu/graduatenu-nginx
+      - 80:80
+    image: "reverseproxy:1.0.0"
 
 networks:
-  my-network:
+  sub-etha:
 
 volumes:
-  graduatenu_dbdata:
+  graduatenu_data:
