@@ -3,4 +3,5 @@ export interface AdvisorState {
   readonly token: string;
   readonly userId: number;
   readonly email: string;
+  readonly image: string;
 }
