@@ -3,9 +3,13 @@ FROM ruby:2.7.0
 RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
 RUN mkdir /app
 WORKDIR /app
+
+ENV RAILS_ENV production
+ENV RAILS_LOG_TO_STDOUT true
+
 COPY Gemfile /app/Gemfile
 COPY Gemfile.lock /app/Gemfile.lock
-RUN bundle install
+RUN bundle install --without development test
 COPY . /app
 
 # Add a script to be executed every time the container starts.

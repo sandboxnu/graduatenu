@@ -17,11 +17,15 @@ services:
       - sub-etha
     image: "reactapp:1.0.0"
   backend:
+    environment:
+      RAILS_ENV: production
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: graduatenu
+      POSTGRES_HOST: db
     depends_on:
       - db
     build:
       context: ./api
-    command: bash -c "rm -f tmp/pids/server.pid && RAILS_ENV=production bundle exec rails s -p 80 -b '0.0.0.0'"
     networks:
       - sub-etha
     image: "railsapp:1.0.0"
