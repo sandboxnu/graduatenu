@@ -64,11 +64,9 @@ export interface ScheduleStateSlice {
   major: string;
   coopCycle: string;
   catalogYear?: number;
-  closedYears: Set<number>; // list of indexes for which years are not expanded in the UI
   completedRequirements: IRequiredCourse[];
   transferCourses: ScheduleCourse[];
   closedYears: number[]; // list of indexes for which years are not expanded in the UI
-
 }
 
 const initialState: ScheduleState = {
@@ -83,7 +81,6 @@ const initialState: ScheduleState = {
     major: "",
     coopCycle: "",
     catalogYear: undefined,
-    closedYears: new Set(),
     completedRequirements: [],
     transferCourses: [],
     closedYears: [],
