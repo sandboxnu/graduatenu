@@ -215,7 +215,7 @@ function AddPlanPopperComponent(props: Props) {
         link_sharing_enabled: false,
         schedule: selectedDNDSchedule.current!,
         major: selectedMajor ? selectedMajor.name : "",
-        planString: selectedCoopCycle,
+        coop_cycle: selectedCoopCycle,
         course_counter: counter.current,
         warnings: [],
         course_warnings: [],
@@ -223,7 +223,7 @@ function AddPlanPopperComponent(props: Props) {
       }).then(plan => {
         addNewSchedule(plan.plan.name, {
           ...plan.plan,
-          coopCycle: plan.plan.planString,
+          coop_cycle: plan.plan.coop_cycle,
           currentClassCounter: plan.plan.courseCounter,
           isScheduleLoading: false,
           scheduleError: "",

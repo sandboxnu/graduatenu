@@ -283,10 +283,14 @@ class HomeComponent extends React.Component<Props, HomeState> {
         (plans: IPlanData[]) => {
           // Once multiple plans are supported, this can be changed to the last used plan
           let plan: IPlanData = plans[0];
-
+          console.log(plan);
+          console.log(plans);
           this.props.setPlanIds(plans.map(plan => plan.id));
           this.props.setDNDSchedule(plan.schedule);
-          this.props.setScheduleMajorCoop(plan.major || "", plan.planString);
+          this.props.setMajorPlans(
+            findMajorFromName(plan.major, this.props.majors),
+            plan.coop_cycle
+          );
           this.props.setPlanName(plan.name);
           this.props.setLinkSharing(plan.link_sharing_enabled);
 
@@ -508,7 +512,7 @@ class HomeComponent extends React.Component<Props, HomeState> {
           link_sharing_enabled: this.props.linkSharing,
           schedule: this.props.schedule,
           major: this.props.major ? this.props.major : "",
-          planString: this.props.planStr ? this.props.planStr : "None",
+          coop_cycle: this.props.planStr ? this.props.planStr : "None",
           course_counter: scheduleData.currentClassCounter,
           warnings: scheduleData.warnings,
           course_warnings: scheduleData.courseWarnings,
@@ -517,7 +521,7 @@ class HomeComponent extends React.Component<Props, HomeState> {
       ).then(plan => {
         this.props.updateActiveSchedule({
           ...plan.plan,
-          coopCycle: plan.plan.planString,
+          coopCycle: plan.plan.coop_cycle,
           currentClassCounter: plan.plan.courseCounter,
           isScheduleLoading: false,
           scheduleError: "",
@@ -543,14 +547,14 @@ class HomeComponent extends React.Component<Props, HomeState> {
         link_sharing_enabled: this.props.linkSharing,
         schedule: this.props.schedule,
         major: this.props.major ? this.props.major : "",
-        planString: this.props.planStr ? this.props.planStr : "",
+        coop_cycle: this.props.planStr ? this.props.planStr : "",
         course_counter: scheduleData.currentClassCounter,
         warnings: scheduleData.warnings,
         course_warnings: scheduleData.courseWarnings,
       }).then(plan => {
         this.props.addNewSchedule(plan.plan.name, {
           ...plan.plan,
-          coopCycle: plan.plan.planString,
+          coopCycle: plan.plan.coop_cycle,
           currentClassCounter: plan.plan.courseCounter,
           isScheduleLoading: false,
           scheduleError: "",
