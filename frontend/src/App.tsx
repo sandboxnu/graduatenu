@@ -15,6 +15,7 @@ import { Profile } from "./profile/Profile";
 import { ManageStudents } from "./advising/ManageStudents";
 import { NotificationsPage } from "./advising/Notifications";
 import { TemplatesPage } from "./advising/Templates";
+import { GenericAdvisingTemplateComponent } from "./advising/GenericAdvisingTemplate";
 import TransferableCreditScreen from "./Onboarding/TransferableCreditScreen";
 
 export const App = ({
@@ -43,16 +44,25 @@ export const App = ({
               path="/transferableCredits"
               component={TransferableCreditScreen}
             />
-            <Route
-              path="/advisor/notifications"
-              component={NotificationsPage}
-            />
-            <Route path="/advisor/manageStudents" component={ManageStudents} />
-            <Route path="/advisor/templates" component={TemplatesPage} />
+            <Route path="/advisor" component={AdvisorRouter} />
             <Route path="/" component={Onboarding} />
           </Switch>
         </Router>
       </PersistGate>
     </Provider>
+  );
+};
+
+const AdvisorRouter = (props: any) => {
+  const { path } = props.match;
+
+  return (
+    <GenericAdvisingTemplateComponent>
+      <Switch>
+        <Route path={`${path}/notifications`} component={NotificationsPage} />
+        <Route path={`${path}/manageStudents`} component={ManageStudents} />
+        <Route path={`${path}/templates`} component={TemplatesPage} />
+      </Switch>
+    </GenericAdvisingTemplateComponent>
   );
 };

@@ -16,8 +16,12 @@ ActiveRecord::Schema.define(version: 2020_11_12_021302) do
   enable_extension "plpgsql"
 
   create_table "courses", force: :cascade do |t|
-    t.integer "class_id"
-    t.string "subject"
+    t.integer "class_id", null: false
+    t.string "subject", null: false
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_courses_on_user_id"
   end
 
   create_table "plans", force: :cascade do |t|

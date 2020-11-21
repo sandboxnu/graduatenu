@@ -1,12 +1,12 @@
 import React from "react";
-import { GenericAdvisingTemplate } from "./GenericAdvisingTemplate";
+import { GenericAdvisingTemplateComponent } from "./GenericAdvisingTemplate";
 import { Dispatch } from "redux";
 import { AppState } from "../state/reducers/state";
 import { withRouter, Link } from "react-router-dom";
 import { connect } from "react-redux";
 
 const TemplatesComponent: React.FC = (props: any) => {
-  return <GenericAdvisingTemplate baseTab={2}></GenericAdvisingTemplate>;
+  return <div></div>;
 };
 
 /**
