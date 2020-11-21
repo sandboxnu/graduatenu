@@ -15,7 +15,7 @@ services:
       dockerfile: ./frontend/Dockerfile
     networks:
       - sub-etha
-    image: "reactapp:1.0.0"
+    image: "frontend"
   backend:
     environment:
       RAILS_ENV: production
@@ -26,9 +26,10 @@ services:
       - db
     build:
       context: ./api
+      dockerfile: ./Dockerfile.prod
     networks:
       - sub-etha
-    image: "railsapp:1.0.0"
+    image: "backend"
   revproxy:
     depends_on:
       - frontend
@@ -40,7 +41,7 @@ services:
       - sub-etha
     ports:
       - 80:80
-    image: "reverseproxy:1.0.0"
+    image: "revproxy"
 
 networks:
   sub-etha:

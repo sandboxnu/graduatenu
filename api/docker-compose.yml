@@ -7,7 +7,9 @@ services:
     volumes:
       - graduatenu_dbdata:/var/lib/postgresql/data
   server:
-    build: .
+    build:
+      context: .
+      dockerfile: ./Dockerfile.dev
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     volumes:
       - .:/api
