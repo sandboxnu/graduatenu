@@ -5,6 +5,9 @@ Rails.application.routes.draw do
     devise_for :users, controllers: { sessions: :sessions, passwords: :passwords }, path_names: { sign_in: :login }
 
     resources :users, only: [:show, :update] do
+      collection do
+        get 'all_students'
+      end
       resources :plans
     end
   end
