@@ -4,7 +4,6 @@
 #
 #  id                     :bigint(8)        not null, primary key
 #  academic_year          :integer(4)
-#  catalog_year           :integer(4)
 #  coop_cycle             :string
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null

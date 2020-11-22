@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_12_021302) do
+ActiveRecord::Schema.define(version: 2020_11_18_025153) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 2020_11_12_021302) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "major"
-    t.string "planString"
+    t.string "coop_cycle"
     t.json "course_warnings", default: [], array: true
     t.json "warnings", default: [], array: true
     t.integer "course_counter"
@@ -52,7 +52,6 @@ ActiveRecord::Schema.define(version: 2020_11_12_021302) do
     t.integer "graduation_year"
     t.string "major"
     t.string "coop_cycle"
-    t.integer "catalog_year"
     t.string "image_url"
     t.boolean "is_advisor", default: false, null: false
     t.index ["email"], name: "index_users_on_email", unique: true

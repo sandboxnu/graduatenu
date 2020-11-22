@@ -176,7 +176,7 @@ export interface IPlanData {
   link_sharing_enabled: boolean;
   schedule: DNDSchedule;
   major: string;
-  planString: string;
+  coop_cycle: string;
   warnings: IWarning[];
   course_warnings: CourseWarning[];
   course_counter: number;
@@ -190,7 +190,7 @@ export interface ICreatePlanData {
   link_sharing_enabled: boolean;
   schedule: DNDSchedule;
   major: string;
-  planString: string;
+  coop_cycle: string;
   warnings: IWarning[];
   course_warnings: CourseWarning[];
   course_counter: number;
