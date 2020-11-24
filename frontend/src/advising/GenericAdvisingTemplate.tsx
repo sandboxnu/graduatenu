@@ -21,9 +21,11 @@ const TabsWrapper = styled.div`
   margin: 20px -30px;
 `;
 
-const PATH_0 = `/advisor/notifications`;
-const PATH_1 = `/advisor/manageStudents`;
-const PATH_2 = `/advisor/templates`;
+const PATHS = [
+  `/advisor/notifications`,
+  `/advisor/manageStudents`,
+  `/advisor/templates`,
+];
 
 interface GenericAdvisingTemplateProps {}
 
@@ -31,16 +33,10 @@ type Props = GenericAdvisingTemplateProps & RouteComponentProps<{}>;
 
 const GenericAdvisingTemplate: React.FC<Props> = ({ children, history }) => {
   const curPath = history.location.pathname;
-  const startTab = curPath === PATH_0 ? 0 : curPath === PATH_1 ? 1 : 2;
+  const startTab = PATHS.findIndex(path => path === curPath);
   const [currentTab, setCurrentTab] = useState(startTab);
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
-    const ending =
-      newValue === 0
-        ? "notifications"
-        : newValue === 1
-        ? "manageStudents"
-        : "templates";
-    history.push(`/advisor/${ending}`);
+    history.push(PATHS[newValue]);
     setCurrentTab(newValue);
   };
   return (
