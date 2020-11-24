@@ -229,7 +229,7 @@ class OnboardingComponent extends React.Component<OnboardingProps> {
         </Body>
         <Footer>
           <LoginLink
-            to={{ pathname: "/onboarding" }}
+            to={{ pathname: "/advisor/templates" }}
             style={{ textDecoration: "none", alignSelf: "flex-end" }}
           >
             <WhiteColorButton variant="contained">Get Started</WhiteColorButton>
