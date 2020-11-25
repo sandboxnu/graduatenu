@@ -19,6 +19,7 @@ const StudentListScrollContainer = styled.div`
   overflow-y: scroll;
   height: 50vh;
 `;
+
 const StudentListContainer = styled.div`
   margin-top: 30px;
   border: 1px solid red;

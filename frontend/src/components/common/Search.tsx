@@ -41,6 +41,7 @@ interface SearchProps {
   onChange: (value: string) => void;
   placeholder: string;
 }
+
 export const Search = (props: SearchProps) => {
   return (
     <SearchContainer>
