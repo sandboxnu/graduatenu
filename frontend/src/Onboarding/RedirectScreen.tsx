@@ -69,8 +69,10 @@ class RedirectScreenComponent extends React.Component<Props, State> {
       !this.props.isFetchingMajors &&
       this.props.majors.length > 0
     ) {
-      if (cookies.get("auth_token")) {
-        fetchUser(cookies.get("auth_token")).then(response => {
+      const cookie = cookies.get("auth_token");
+      cookies.set("auth_token", cookie); // set persisting cookie
+      if (cookie) {
+        fetchUser(cookie).then(response => {
           this.props.setFullName(response.user.username);
           const maj = findMajorFromName(response.user.major, this.props.majors);
           if (maj) {

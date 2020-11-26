@@ -1,4 +1,5 @@
 import React from "react";
+import Cookies from "universal-cookie";
 import { Redirect } from "react-router-dom";
 import styled from "styled-components";
 import { Button, Theme, withStyles } from "@material-ui/core";
@@ -139,6 +140,8 @@ interface State {
   redirectUrl?: string;
 }
 
+const cookies = new Cookies();
+
 class OnboardingComponent extends React.Component<Props, State> {
   dev: boolean;
 
@@ -198,8 +201,8 @@ class OnboardingComponent extends React.Component<Props, State> {
     }
 
     // fullName will be an empty string if this is the user's first time visiting the site
-    if (!!this.props.fullName) {
-      return <Redirect to="/home" />;
+    if (cookies.get("auth_token")) {
+      return <Redirect to="/redirect" />;
     }
 
     return (
