@@ -16,7 +16,12 @@ import {
 } from "../state/actions/userActions";
 import { AppState } from "../state/reducers/state";
 import { findMajorFromName } from "../utils/plan-helpers";
-import { getMajors, getMajorsLoadingFlag } from "../state";
+import {
+  getAcademicYearFromState,
+  getGraduationYearFromState,
+  getMajors,
+  getMajorsLoadingFlag,
+} from "../state";
 import { fetchMajorsAndPlans } from "../utils/fetchMajorsAndPlans";
 
 interface State {
@@ -26,6 +31,8 @@ interface State {
 interface ReduxStateRedirectProps {
   majors: Major[];
   isFetchingMajors: boolean;
+  academicYear?: number;
+  graduationYear?: number;
 }
 
 interface ReduxDispatchRedirectProps {
@@ -69,7 +76,7 @@ class RedirectScreenComponent extends React.Component<Props, State> {
           if (maj) {
             this.props.setUserMajor(maj);
           }
-          this.props.setToken(response.user.token);
+          this.props.setToken(response.user.token); // set auth token
           this.props.setUserId(response.user.id);
           this.props.setEmail(response.user.email);
           this.props.setUserCoopCycle(response.user.coopCycle);
@@ -83,6 +90,10 @@ class RedirectScreenComponent extends React.Component<Props, State> {
     }
   }
 
+  needsToGoToOnboarding() {
+    return !this.props.graduationYear || !this.props.academicYear;
+  }
+
   render() {
     if (!cookies.get("auth_token")) {
       return <div>No auth token cookie</div>;
@@ -93,7 +104,11 @@ class RedirectScreenComponent extends React.Component<Props, State> {
     }
 
     if (this.state.isAdvisor === false) {
-      return <Redirect to="/onboarding" />;
+      if (this.needsToGoToOnboarding()) {
+        return <Redirect to="/onboarding" />;
+      } else {
+        return <Redirect to="/home" />;
+      }
     }
 
     if (this.state.isAdvisor === true) {
@@ -105,6 +120,8 @@ class RedirectScreenComponent extends React.Component<Props, State> {
 const mapStateToProps = (state: AppState) => ({
   majors: getMajors(state),
   isFetchingMajors: getMajorsLoadingFlag(state),
+  academicYear: getAcademicYearFromState(state),
+  graduationYear: getGraduationYearFromState(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({

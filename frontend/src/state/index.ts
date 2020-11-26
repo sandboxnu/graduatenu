@@ -73,6 +73,12 @@ export const getUserCoopCycleFromState = (state: AppState): string =>
 export const getAcademicYearFromState = (state: AppState): number =>
   state.user.academicYear;
 
+/* Get a users academic year from the AppState
+ * @param state the AppState
+ */
+export const getGraduationYearFromState = (state: AppState): number =>
+  state.user.graduationYear;
+
 /**
  * Get the schedule object from the AppState
  * @param state the AppState

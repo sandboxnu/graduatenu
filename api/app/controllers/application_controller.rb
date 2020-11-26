@@ -37,7 +37,7 @@ class ApplicationController < ActionController::API
 
     #get the User object for the currently authenicated user.
     def current_user
-        @current_user ||= super || User.find(@current_user_id)
+        @current_user ||= User.find(@current_user_id)
     end
 
     def signed_in?
