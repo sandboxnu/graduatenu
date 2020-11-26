@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
-import { Search } from "../components/common/Search";
 import styled from "styled-components";
+import { useStore } from "react-redux";
+import { getStudents } from "../services/AdvisorService";
+import { Search } from "../components/common/Search";
+import { getTokenFromState } from "../state";
 
 const Container = styled.div`
   margin-left: 30px;
@@ -57,10 +60,13 @@ interface StudentProps {
 
 const ManageStudentsComponent: React.FC = (props: any) => {
   const [searchQuery, setSearchQuery] = useState("");
+  const store = useStore();
+  let token = getTokenFromState(store.getState());
+  token = token ? token : "";
 
   return (
     <Container>
-      <Search placeholder="Search by name or nuid" onChange={setSearchQuery} />
+      <Search placeholder="Search by name or nuid" onEnter={setSearchQuery} />
       <StudentsList searchQuery={searchQuery} />
     </Container>
   );

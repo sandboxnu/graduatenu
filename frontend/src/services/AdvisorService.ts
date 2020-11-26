@@ -2,7 +2,7 @@
  * @param searchQuery  the search query
  * @param userToken the JWT token of the user
  */
-export const findAllPlansForUser = (userId: number, userToken: string) =>
+export const getStudents = (searchQuery: string, userToken: string) =>
   fetch(`/api/users/all_students`, {
     method: "GET",
     headers: {
