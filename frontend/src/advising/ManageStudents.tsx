@@ -1,8 +1,5 @@
 import React, { useState } from "react";
-import { Dispatch } from "redux";
-import { AppState } from "../state/reducers/state";
-import { withRouter, Link } from "react-router-dom";
-import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import { Search } from "../components/common/Search";
 import styled from "styled-components";
 
