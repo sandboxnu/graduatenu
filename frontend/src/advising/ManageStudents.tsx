@@ -1,11 +1,91 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { withRouter } from "react-router-dom";
+import React, { useState } from "react";
+import { Dispatch } from "redux";
+import { AppState } from "../state/reducers/state";
+import { withRouter, Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { Search } from "../components/common/Search";
+import styled from "styled-components";
+
+const Container = styled.div`
+  margin-left: 30px;
+  margin-right: 30px;
+  margin-top: 50px;
+`;
+
+const StudentListScrollContainer = styled.div`
+  width: auto;
+  height: 360px;
+  padding: 20px;
+  overflow-y: scroll;
+  height: 50vh;
+`;
+
+const StudentListContainer = styled.div`
+  margin-top: 30px;
+  border: 1px solid red;
+  border-radius: 10px;
+  width: auto;
+  padding: 20px;
+`;
+
+const StudentContainer = styled.div`
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 21px;
+  padding: 20px;
+`;
+
+const LIST_OF_STUDENTS = [
+  { name: "Mario Speedwagon", nuid: "12345" },
+  { name: "Petey Cruiser", nuid: "54321" },
+  { name: "Anna Sthesia", nuid: "67890" },
+  { name: "Paul Molive", nuid: "09876" },
+  { name: "Anna Mull", nuid: "510912" },
+  { name: "Gail Forcewind", nuid: "481972" },
+  { name: "Paige Turner", nuid: "512384" },
+  { name: "Bob Frapples", nuid: "123498" },
+  { name: "Walter Melon", nuid: "4123987" },
+];
+
+interface StudentsListProps {
+  searchQuery: string;
+}
+
+interface StudentProps {
+  name: string;
+  nuid: string;
+}
 
 const ManageStudentsComponent: React.FC = (props: any) => {
-  const dispatch = useDispatch();
+  const [searchQuery, setSearchQuery] = useState("");
+  return (
+    <Container>
+      <Search placeholder="Search by name or nuid" onChange={setSearchQuery} />
+      <StudentsList searchQuery={searchQuery} />
+    </Container>
+  );
+};
 
-  return <div></div>;
+const StudentsList = (props: StudentsListProps) => {
+  return (
+    <StudentListContainer>
+      <StudentListScrollContainer>
+        {LIST_OF_STUDENTS.filter(
+          student =>
+            student.name.includes(props.searchQuery) ||
+            student.nuid.includes(props.searchQuery)
+        ).map(student => (
+          <Student name={student.name} nuid={student.nuid} />
+        ))}
+      </StudentListScrollContainer>
+    </StudentListContainer>
+  );
+};
+
+const Student = (props: StudentProps) => {
+  return <StudentContainer>{props.name}</StudentContainer>;
 };
 
 export const ManageStudents = withRouter(ManageStudentsComponent);
