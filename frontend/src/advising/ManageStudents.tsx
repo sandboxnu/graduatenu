@@ -57,6 +57,7 @@ interface StudentProps {
 
 const ManageStudentsComponent: React.FC = (props: any) => {
   const [searchQuery, setSearchQuery] = useState("");
+
   return (
     <Container>
       <Search placeholder="Search by name or nuid" onChange={setSearchQuery} />
