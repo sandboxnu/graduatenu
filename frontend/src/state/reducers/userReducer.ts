@@ -1,3 +1,4 @@
+import { setIsAdvisor } from "./../actions/userActions";
 import { TransferableExam, Major } from "../../../../common/types";
 import produce from "immer";
 import { getType } from "typesafe-actions";
@@ -39,6 +40,7 @@ export interface UserState {
   email: string;
   coopCycle: string;
   examCredits: TransferableExam[];
+  isAdvisor: boolean;
 }
 
 const initialState: UserState = {
@@ -55,6 +57,7 @@ const initialState: UserState = {
   email: "",
   coopCycle: "",
   examCredits: [],
+  isAdvisor: false,
 };
 
 export const userReducer = (
@@ -141,6 +144,10 @@ export const userReducer = (
       }
       case getType(setNamedSchedule): {
         draft.planName = action.payload.namedSchedule.name;
+        return draft;
+      }
+      case getType(setIsAdvisor): {
+        draft.isAdvisor = action.payload.isAdvisor;
         return draft;
       }
     }

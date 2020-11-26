@@ -1,10 +1,23 @@
 import {
-  IUserData,
   ILoginData,
   IUpdateUser,
   IUpdateUserData,
   IUpdateUserPassword,
+  IUserData,
 } from "../models/types";
+
+/**
+ * Service function object to get the user data
+ * @param userData
+ */
+export const fetchUser = (token: string) =>
+  fetch(`/api/users/current`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Token " + token,
+    },
+  }).then(response => response.json());
 
 /**
  * Service function object to register a given User.

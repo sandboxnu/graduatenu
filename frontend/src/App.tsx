@@ -17,6 +17,7 @@ import { NotificationsPage } from "./advising/Notifications";
 import { TemplatesPage } from "./advising/Templates";
 import { GenericAdvisingTemplateComponent } from "./advising/GenericAdvisingTemplate";
 import TransferableCreditScreen from "./Onboarding/TransferableCreditScreen";
+import { RedirectScreen } from "./Onboarding/RedirectScreen";
 
 export const App = ({
   store,
@@ -31,6 +32,7 @@ export const App = ({
         <Router>
           <Switch>
             <Route path="/home" component={HomeWrapper} />
+            <Route path="/redirect" component={RedirectScreen} />
             <Route path="/onboarding" component={OnboardingInfoScreen} />
             <Route path="/signup" component={SignupScreen} />
             <Route path="/login" component={LoginScreen} />

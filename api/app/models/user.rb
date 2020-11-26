@@ -32,12 +32,16 @@ class User < ApplicationRecord
 
   has_many :transfer_courses, foreign_key: 'user_id', class_name: "Course"
   has_many :completed_courses, foreign_key: 'user_id', class_name: "Course"
-  has_many :plans, foreign_key: 'user_id'
+  has_many :plans, dependent: :destroy
   
   #validates a non-unique username and allows spaces
   validates :username, presence: true, allow_blank: false, format: { with: /\A[a-zA-Z0-9 ]+\z/ }
   
   def generate_jwt
     JWT.encode({ id: id, exp: 60.days.from_now.to_i }, Rails.application.credentials.secret_key_base)
+  end
+
+  def courses
+    completed_courses + transfer_courses
   end
 end
