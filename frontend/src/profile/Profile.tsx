@@ -344,7 +344,7 @@ const ChangePassword = (props: ChangePasswordProps) => {
   );
 };
 
-export const ProfileComponent: React.FC = (props: any) => {
+const ProfileComponent: React.FC = (props: any) => {
   const [isEdit, setEdit] = useState(false);
   const [name, setName] = useState(props.name);
   const [major, setMajor] = useState(props.major);

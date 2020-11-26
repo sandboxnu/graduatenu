@@ -40,8 +40,8 @@
     "xlsx": "^0.15.6"
   },
   "devDependencies": {
-    "@types/lodash": "^4.14.165",
     "@types/jest": "^24.0.18",
+    "@types/lodash": "^4.14.165",
     "@types/node": "^12.7.2",
     "@types/react-beautiful-dnd": "^11.0.3",
     "@types/react-loader-spinner": "^3.1.0",

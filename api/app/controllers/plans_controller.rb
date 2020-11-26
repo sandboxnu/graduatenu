@@ -5,7 +5,8 @@ class PlansController < ApplicationController
 
   #returns all the plans
   def index
-    if authorized
+    requester = User.find_by_id(@current_user_id)
+    if authorized || requester.is_advisor
       @plans = Plan.where(user_id: params[:user_id])
     else
       render json: {error: "Unauthorized."}, status: :unprocessable_entity

@@ -22,6 +22,18 @@ class UsersController < ApplicationController
         end
     end
 
+    def all_students
+        # make sure requester is an advisor
+        requester = User.find_by_id(@current_user_id)
+
+        unless requester.is_advisor
+            render json: { error: "Requester is not an advisor" }, status: :bad_request
+            return
+        end
+
+        @students = User.where(is_advisor: false)
+    end
+
     private
 
     def user_params
