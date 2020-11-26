@@ -239,7 +239,6 @@ const ProfileCatalogYear = (props: ProfileCatalogYearProps) => {
           renderInput={params => (
             <TextField {...params} variant="outlined" fullWidth />
           )}
-          //ask about this tomorrow...
           value={val}
           onChange={(event: React.SyntheticEvent<{}>, value: any) => {
             props.setCatalogYear(value);
@@ -352,11 +351,9 @@ export const ProfileComponent: React.FC = (props: any) => {
   const [advisor, setAdvisor] = useState("");
   const [email, setEmail] = useState(props.email);
   const [coop, setCoop] = useState(props.coop);
-  //ask about hooks
   const [catalogYear, setCatalogYear] = useState(props.catalogYear);
   const { majors, plans } = props;
 
-  console.log(props);
   return (
     <Container>
       <HeaderRow>

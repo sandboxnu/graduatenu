@@ -21,7 +21,10 @@ import {
 import { addNewSchedule } from "../state/actions/schedulesActions";
 
 import { createPlanForUser } from "../services/PlanService";
-import { getScheduleDataFromState } from "../state";
+import {
+  getScheduleDataFromState,
+  getUserCatalogYearFromState,
+} from "../state";
 import { setCoopCycle } from "../state/actions/scheduleActions";
 
 const Wrapper = styled.div`
@@ -359,7 +362,7 @@ const mapStateToProps = (state: AppState) => ({
   graduationYear: state.user.graduationYear,
   major: state.user.declaredMajor,
   planStr: state.user.planStr,
-  catalogYear: state.user.catalogYear,
+  catalogYear: getUserCatalogYearFromState(state),
   getCurrentScheduleData: () => getScheduleDataFromState(state),
 });
 

@@ -283,8 +283,6 @@ class HomeComponent extends React.Component<Props, HomeState> {
         (plans: IPlanData[]) => {
           // Once multiple plans are supported, this can be changed to the last used plan
           let plan: IPlanData = plans[0];
-          console.log(plan);
-          console.log(plans);
           this.props.setPlanIds(plans.map(plan => plan.id));
           this.props.setDNDSchedule(plan.schedule);
           this.props.setMajorPlans(

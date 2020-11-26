@@ -355,8 +355,6 @@ class OnboardingScreenComponent extends React.Component<
         <Autocomplete
           style={{ width: 326, marginBottom: marginSpace }}
           disableListWrap
-          //map by year then filter for repeats (also do for major dropdown)
-          //do I need to provide menu item options like in graduation year ^^^
           options={majorSet}
           renderInput={params => (
             <TextField

@@ -220,9 +220,6 @@ export class EditPlanPopperComponent extends React.Component<
         new Set(this.props.majors.map(maj => maj.yearVersion.toString()))
       ),
     ];
-    catalogYears.push("2020");
-    catalogYears.push("2021");
-    const marginSpace = 12;
     return (
       <Autocomplete
         style={{ marginTop: "10px", marginBottom: "5px" }}
@@ -350,9 +347,6 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   setCoopCycle: (coopCycle: string, schedule?: Schedule) =>
     dispatch(setCoopCycle(coopCycle, schedule)),
   setSchedule: (schedule: Schedule) => dispatch(setScheduleAction(schedule)),
-  //change this to use schedule action instead of user
-  //edit popper clearing bug
-  //adding catalog year to backend schedule model
   setCatalogYear: (catalogYear?: number) =>
     dispatch(setCatalogYearAction(catalogYear)),
   setMajor: (major?: Major) => dispatch(setScheduleMajor(major)),
