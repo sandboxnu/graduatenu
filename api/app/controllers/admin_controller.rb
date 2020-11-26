@@ -49,7 +49,7 @@ class AdminController < ApplicationController
     @user = User.find_by(email: user_params[:email])
 
     unless @user.update(
-      email: user_params[:email],
+      nu_id: user_params[:nu_id],
       is_advisor: user_params[:is_advisor],
       major: user_params[:major],
       username: user_params[:first_name] + ' ' + user_params[:last_name],
@@ -62,10 +62,9 @@ class AdminController < ApplicationController
   end
 
   def create_new_user
-    # add nuid
     @user = User.new(
       email: user_params[:email],
-      password: 'test123', # remove after transition
+      nu_id: user_params[:nu_id],
       is_advisor: user_params[:is_advisor],
       major: user_params[:major],
       username: user_params[:first_name] + ' ' + user_params[:last_name],

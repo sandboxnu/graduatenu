@@ -19,8 +19,6 @@ gem 'jbuilder', '~> 2.7'
 # Use Json Web Token (JWT) for token based authentication
 gem 'jwt'
 
-gem 'devise'
-
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
