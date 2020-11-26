@@ -84,6 +84,7 @@ import Loader from "react-loader-spinner";
 import { ExcelUpload } from "../components/ExcelUpload";
 import { SwitchPlanPopper } from "./SwitchPlanPopper";
 import { resetUserAction } from "../state/actions/userActions";
+import Cookies from "universal-cookie";
 
 const OuterContainer = styled.div`
   display: flex;
@@ -522,7 +523,9 @@ class HomeComponent extends React.Component<Props, HomeState> {
           isScheduleLoading: false,
           scheduleError: "",
         } as ScheduleSlice);
-        alert("Your plan has been updated.");
+        alert(
+          "Your plan has been updated and you have been logged out. You will be redirected to the welcome screen."
+        );
       });
     } else {
       alert("You must be logged in to save your plan.");
@@ -572,6 +575,8 @@ class HomeComponent extends React.Component<Props, HomeState> {
   async logOut() {
     await this.updatePlan();
     this.props.logOut();
+    const cookies = new Cookies();
+    cookies.remove("auth_token");
     this.props.history.push("/");
   }
 

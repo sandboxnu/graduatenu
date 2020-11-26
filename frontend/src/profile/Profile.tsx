@@ -2,11 +2,9 @@ import React, { useState } from "react";
 import { withRouter, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import styled from "styled-components";
-import { OutlinedButton } from "../components/common/OutlinedButton";
 import { PrimaryButton } from "../components/common/PrimaryButton";
 import { TextField } from "@material-ui/core";
 import Autocomplete from "@material-ui/lab/Autocomplete";
-import { ChangePasswordModal } from "./ChangePasswordModal";
 import { IconButton } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
 import {
@@ -135,11 +133,6 @@ interface SaveProps {
   setUserCoopCycleAction: (plan: string) => void;
   setFullNameAction: (fullName: string) => void;
   setEmailAction: (email: string) => void;
-}
-
-interface ChangePasswordProps {
-  token: string;
-  id: number;
 }
 
 const ProfileName = (props: ProfileNameProps) => {
@@ -283,22 +276,6 @@ const SaveButton = (props: SaveProps) => {
   return <PrimaryButton onClick={() => save(props)}>Save</PrimaryButton>;
 };
 
-const ChangePassword = (props: ChangePasswordProps) => {
-  const [open, setOpen] = React.useState(false);
-
-  return (
-    <div>
-      <ProfileEntryContainer>
-        <ItemTitle> Password </ItemTitle>
-        <div onClick={() => setOpen(true)}>
-          <OutlinedButton>Change Password</OutlinedButton>
-        </div>
-      </ProfileEntryContainer>
-      <ChangePasswordModal open={open} setOpen={setOpen} token={props.token} />
-    </div>
-  );
-};
-
 const ProfileComponent: React.FC = (props: any) => {
   const [isEdit, setEdit] = useState(false);
   const [name, setName] = useState(props.name);
@@ -339,9 +316,6 @@ const ProfileComponent: React.FC = (props: any) => {
                 setMajor={setMajor}
                 majors={majors}
               />
-              {props.token != undefined && props.token.length > 0 && (
-                <ChangePassword token={props.token} id={props.id} />
-              )}
             </ProfileColumn>
             <ProfileColumn>
               <ProfileEmail isEdit={isEdit} email={email} setEmail={setEmail} />

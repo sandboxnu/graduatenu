@@ -7,9 +7,6 @@ import { Major } from "../../../common/types";
 import { fetchUser } from "../services/UserService";
 import {
   setFullNameAction,
-  setAcademicYearAction,
-  setGraduationYearAction,
-  setMajorPlanAction,
   setTokenAction,
   setUserIdAction,
   setDeclaredMajorAction,
@@ -18,52 +15,71 @@ import {
   setIsAdvisor,
 } from "../state/actions/userActions";
 import { AppState } from "../state/reducers/state";
+import { findMajorFromName } from "../utils/plan-helpers";
+import { getMajors, getMajorsLoadingFlag } from "../state";
+import { fetchMajorsAndPlans } from "../utils/fetchMajorsAndPlans";
 
 interface State {
   isAdvisor: boolean | null;
 }
 
+interface ReduxStateRedirectProps {
+  majors: Major[];
+  isFetchingMajors: boolean;
+}
+
 interface ReduxDispatchRedirectProps {
   setFullName: (fullName: string) => void;
-  setAcademicYear: (academicYear: number) => void;
-  setGraduationYear: (graduationYear: number) => void;
-  setMajorPlan: (major: Major | undefined, planStr: string) => void;
+  setUserMajor: (major: Major) => void;
   setUserCoopCycle: (coopCycle: string) => void;
   setToken: (token: string) => void;
   setUserId: (id: number) => void;
   setEmail: (email: string) => void;
   setIsAdvisor: (isAdvisor: boolean) => void;
+  fetchMajorsAndPlans: () => void;
 }
 
-type Props = ReduxDispatchRedirectProps;
+type Props = ReduxStateRedirectProps & ReduxDispatchRedirectProps;
 
 const cookies = new Cookies();
 
 class RedirectScreenComponent extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
-    console.log(cookies.getAll());
     this.state = {
       isAdvisor: null,
     };
   }
 
   componentDidMount() {
-    if (cookies.get("auth_token")) {
-      fetchUser(cookies.get("auth_token")).then(response => {
-        this.props.setFullName(response.user.username);
-        this.props.setAcademicYear(response.user.academicYear);
-        this.props.setGraduationYear(response.user.graduationYear);
-        this.props.setToken(response.user.token);
-        this.props.setUserId(response.user.id);
-        this.props.setEmail(response.user.email);
-        this.props.setUserCoopCycle(response.user.coopCycle);
-        this.props.setIsAdvisor(response.user.isAdvisor);
+    this.props.fetchMajorsAndPlans();
+  }
 
-        this.setState({
-          isAdvisor: response.user.isAdvisor,
+  componentDidUpdate(prevProps: Props) {
+    // if finished loading majors
+    if (
+      !!prevProps.isFetchingMajors &&
+      !this.props.isFetchingMajors &&
+      this.props.majors.length > 0
+    ) {
+      if (cookies.get("auth_token")) {
+        fetchUser(cookies.get("auth_token")).then(response => {
+          this.props.setFullName(response.user.username);
+          const maj = findMajorFromName(response.user.major, this.props.majors);
+          if (maj) {
+            this.props.setUserMajor(maj);
+          }
+          this.props.setToken(response.user.token);
+          this.props.setUserId(response.user.id);
+          this.props.setEmail(response.user.email);
+          this.props.setUserCoopCycle(response.user.coopCycle);
+          this.props.setIsAdvisor(response.user.isAdvisor);
+
+          this.setState({
+            isAdvisor: response.user.isAdvisor,
+          });
         });
-      });
+      }
     }
   }
 
@@ -77,7 +93,7 @@ class RedirectScreenComponent extends React.Component<Props, State> {
     }
 
     if (this.state.isAdvisor === false) {
-      return <Redirect to="/home" />;
+      return <Redirect to="/onboarding" />;
     }
 
     if (this.state.isAdvisor === true) {
@@ -86,14 +102,14 @@ class RedirectScreenComponent extends React.Component<Props, State> {
   }
 }
 
+const mapStateToProps = (state: AppState) => ({
+  majors: getMajors(state),
+  isFetchingMajors: getMajorsLoadingFlag(state),
+});
+
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   setFullName: (fullName: string) => dispatch(setFullNameAction(fullName)),
-  setAcademicYear: (academicYear: number) =>
-    dispatch(setAcademicYearAction(academicYear)),
-  setGraduationYear: (academicYear: number) =>
-    dispatch(setGraduationYearAction(academicYear)),
-  setMajorPlan: (major: Major | undefined, planStr: string) =>
-    dispatch(setMajorPlanAction(major, planStr)),
+  setUserMajor: (major: Major) => dispatch(setDeclaredMajorAction(major)),
   setToken: (token: string) => dispatch(setTokenAction(token)),
   setUserId: (id: number) => dispatch(setUserIdAction(id)),
   setMajor: (major?: Major) => dispatch(setDeclaredMajorAction(major)),
@@ -101,14 +117,15 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     dispatch(setUserCoopCycleAction(coopCycle)),
   setEmail: (email: string) => dispatch(setEmailAction(email)),
   setIsAdvisor: (isAdvisor: boolean) => dispatch(setIsAdvisor(isAdvisor)),
+  fetchMajorsAndPlans: () => fetchMajorsAndPlans()(dispatch),
 });
 
 export const RedirectScreen = connect<
-  {},
+  ReduxStateRedirectProps,
   ReduxDispatchRedirectProps,
   {},
   AppState
 >(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(RedirectScreenComponent);

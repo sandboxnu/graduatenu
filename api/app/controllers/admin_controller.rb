@@ -95,22 +95,6 @@ class AdminController < ApplicationController
       course.reload
       @user.completed_courses << course
     end
-
-    # make initial plan
-    plan = Plan.create!(
-      name: 'Plan 1',
-      link_sharing_enabled: false,
-      schedule: {},
-      major: @user.major,
-      coop_cycle: nil,
-      course_counter: @user.courses.count + 1,
-      warnings: [],
-      course_warnings: [],
-      user_id: @user.id,
-    )
-    binding.pry
-    @user.plans << plan
-    @user.save
   end
 
   def generate_login_token
