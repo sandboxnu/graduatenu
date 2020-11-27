@@ -76,24 +76,6 @@ class AdminController < ApplicationController
       render json: { errors: @user.errors }, status: :unprocessable_entity
       return true
     end
-
-    # set completed courses
-    courses = []
-    (user_params[:courses] || []).each do |c|
-      split = c[:course].split(" ")
-      subject = split[0]
-      class_id = split[1]
-      course = Course.new(subject: subject, class_id: class_id)
-
-      unless course.save
-        render json: { errors: course.errors }, status: :unprocessable_entity
-        return true
-      end
-
-      @user.reload
-      course.reload
-      @user.completed_courses << course
-    end
   end
 
   def generate_login_token

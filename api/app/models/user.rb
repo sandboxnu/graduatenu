@@ -30,8 +30,4 @@ class User < ApplicationRecord
   def generate_jwt
     JWT.encode({ id: id, exp: 60.days.from_now.to_i }, Rails.application.credentials.secret_key_base)
   end
-
-  def courses
-    completed_courses + transfer_courses
-  end
 end
