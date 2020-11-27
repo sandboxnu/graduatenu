@@ -1,16 +1,16 @@
 class UsersController < ApplicationController
     before_action :authenticate_user!
 
-    #simply render user information for authenicated user, no additional processing required.
-    def current
-        if @current_user_id.present?
-            @current_user = User.find(@current_user_id)
+    # simply render user information for authenicated user, no additional processing required.
+    def show
+        if @current_user_id == Integer(params[:id])
             render :show
         else
             render json: { error: "Unauthorized" }, status: :unprocessable_entity
         end
     end
 
+    # update a user
     def update
         if @current_user_id == Integer(params[:id])
             if current_user.update_attributes(user_params)
@@ -37,7 +37,7 @@ class UsersController < ApplicationController
         if search_params[:search].present?
             search = search_params[:search].downcase
         end
-        
+
         if search_params[:page].present?
             page = Integer(search_params[:page])
         end
