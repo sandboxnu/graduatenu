@@ -61,7 +61,6 @@ export const RedirectScreen: React.FC = () => {
           dispatch(setUserIdAction(response.user.id));
           dispatch(setEmailAction(response.user.email));
           dispatch(setUserCoopCycleAction(response.user.coopCycle));
-          console.log("set advisor", response.user.isAdvisor);
           dispatch(setIsAdvisorAction(response.user.isAdvisor));
         });
       }
