@@ -190,7 +190,7 @@ const PlanContainer = styled.div`
   margin-right: 10px;
 `;
 
-const LoginLogoutLink = styled(Link)`
+const LoginLogoutLink = styled.div`
   align-self: center;
   margin-right: 8px !important;
 `;
@@ -576,14 +576,8 @@ class HomeComponent extends React.Component<Props, HomeState> {
                   <MajorText>{this.props.major}</MajorText>
                   <PlanText>{this.props.planStr || "None"}</PlanText>
                   <EditPlanPopper />
-                  <LoginLogoutLink
-                    to={{
-                      pathname: "/signup",
-                      state: { userData: {}, fromOnBoarding: false },
-                    }}
-                    style={{ textDecoration: "none" }}
-                  >
-                    <ColorButton variant="contained">Signup</ColorButton>
+                  <LoginLogoutLink onClick={_ => this.logOut()}>
+                    <ColorButton variant="contained">Logout</ColorButton>
                   </LoginLogoutLink>
                 </HomePlan>
               </HomeTop>
