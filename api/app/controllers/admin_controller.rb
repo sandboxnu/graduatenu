@@ -1,5 +1,5 @@
 class AdminController < ApplicationController
-  LOGIN_TOKEN_EXPIRATION = 7.days # TODO: set to 5 minutes
+  LOGIN_TOKEN_EXPIRATION = 5.minutes
   skip_before_action :authenticate_user
 
   # log in through khoury
