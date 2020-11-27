@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 import styled from "styled-components";
-import { useStore } from "react-redux";
+import { useSelector } from "react-redux";
 import { getStudents } from "../services/AdvisorService";
 import { Search } from "../components/common/Search";
+import { AppState } from "../state/reducers/state";
 import { getTokenFromState } from "../state";
 
 const Container = styled.div`
@@ -60,9 +61,9 @@ interface StudentProps {
 
 const ManageStudentsComponent: React.FC = (props: any) => {
   const [searchQuery, setSearchQuery] = useState("");
-  const store = useStore();
-  let token = getTokenFromState(store.getState());
+  let token = useSelector((state: AppState) => getTokenFromState(state));
   token = token ? token : "";
+  // getStudents(searchQuery, token).then((data: any) => console.log(data)).catch(err => console.log(err));
 
   return (
     <Container>
