@@ -136,13 +136,9 @@ interface Props {
   fullName: string;
 }
 
-interface State {
-  redirectUrl?: string;
-}
-
 const cookies = new Cookies();
 
-class OnboardingComponent extends React.Component<Props, State> {
+class OnboardingComponent extends React.Component<Props> {
   dev: boolean;
 
   constructor(props: Props) {
@@ -156,9 +152,7 @@ class OnboardingComponent extends React.Component<Props, State> {
 
   onDevClick() {
     simulateKhouryLogin().then(response => {
-      this.setState({
-        redirectUrl: response.redirect,
-      });
+      window.location.href = response.redirect;
     });
   }
 
@@ -195,11 +189,6 @@ class OnboardingComponent extends React.Component<Props, State> {
   }
 
   render() {
-    if (this.state.redirectUrl) {
-      window.location.href = this.state.redirectUrl;
-      return null;
-    }
-
     // fullName will be an empty string if this is the user's first time visiting the site
     if (cookies.get("auth_token")) {
       return <Redirect to="/redirect" />;

@@ -244,3 +244,11 @@ export const getClosedYearsFromState = (state: AppState): Set<number> => {
 export const getCurrentClassCounterFromState = (state: AppState): number => {
   return state.schedule.present.currentClassCounter;
 };
+
+/**
+ * Get whether the current user is an advisor or not
+ * @param state the AppState
+ */
+export const getIsAdvisorFromState = (state: AppState): boolean | undefined => {
+  return state.user.isAdvisor;
+};

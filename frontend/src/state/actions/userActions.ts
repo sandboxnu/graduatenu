@@ -104,7 +104,7 @@ export const setExamCredits = createAction(
   (examCredits: TransferableExam[]) => ({ examCredits })
 )();
 
-export const setIsAdvisor = createAction(
+export const setIsAdvisorAction = createAction(
   "user/SET_IS_ADVISOR",
   (isAdvisor: boolean) => ({ isAdvisor })
 )();
