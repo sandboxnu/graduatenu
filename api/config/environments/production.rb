@@ -1,4 +1,9 @@
 Rails.application.configure do
+  config.hosts.clear
+
+  logger           = ActiveSupport::Logger.new(STDOUT)
+  logger.formatter = config.log_formatter
+  config.logger    = ActiveSupport::TaggedLogging.new(logger)
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.

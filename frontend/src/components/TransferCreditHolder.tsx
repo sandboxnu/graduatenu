@@ -129,6 +129,9 @@ class TransferCreditsComponent extends React.Component<
 
   // individual courses
   renderTransferCourses() {
+    if (this.props.transferCredits == null) {
+      return null;
+    }
     return this.props.transferCredits.map((scheduleCourse, index) => {
       if (!!scheduleCourse) {
         return (
