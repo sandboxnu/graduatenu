@@ -95,6 +95,7 @@ const StudentsList = (props: StudentsListProps) => {
             name={student.name}
             nuid={student.nuid}
             email={student.email}
+            key={student.nuid}
           />
         ))}
       </StudentListScrollContainer>

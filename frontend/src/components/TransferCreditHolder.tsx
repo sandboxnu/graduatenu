@@ -140,6 +140,7 @@ class TransferCreditsComponent extends React.Component<
           </ClassWrapper>
         );
       }
+      return null;
     });
   }
 
