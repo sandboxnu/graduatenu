@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_26_215242) do
+ActiveRecord::Schema.define(version: 2020_11_28_223350) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,6 +66,7 @@ ActiveRecord::Schema.define(version: 2020_11_26_215242) do
     t.boolean "is_advisor", default: false, null: false
     t.string "nu_id"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["username"], name: "index_users_on_username"
   end
 
   add_foreign_key "plans", "users"

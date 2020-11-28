@@ -55,10 +55,21 @@ const EmptyState = styled.div`
   padding: 10px;
 `;
 
+const LoadMoreStudents = styled.div`
+  font-size: 10px;
+  line-height: 21px;
+  padding: 10px;
+`;
+
 const EMPTY_STUDENT_LIST: StudentProps[] = [];
 
 interface StudentsListProps {
   searchQuery: string;
+}
+
+interface StudentsAPI {
+  students: StudentProps[];
+  nextPage: number;
 }
 
 interface StudentProps {
@@ -85,15 +96,17 @@ const StudentsList = (props: StudentsListProps) => {
   const [students, setStudents] = useState(EMPTY_STUDENT_LIST);
   const [isLoading, setIsLoading] = useState(true);
   let token = useSelector((state: AppState) => getTokenFromState(state));
+  let pageNumber = 0;
 
   useEffect(() => {
     token = token ? token : "";
     setStudents(EMPTY_STUDENT_LIST);
     setIsLoading(true);
-    getStudents(props.searchQuery, token)
-      .then((students: StudentProps[]) => {
+    getStudents(props.searchQuery, pageNumber, token)
+      .then((students: StudentsAPI) => {
         console.log(students);
-        setStudents(students);
+        setStudents(students.students);
+        pageNumber = students.nextPage;
         setIsLoading(false);
       })
       .catch(err => console.log(err));
@@ -114,7 +127,11 @@ const StudentsList = (props: StudentsListProps) => {
             />
           ))
         )}
-        {isLoading ? <Loading>Loading Students ...</Loading> : null}
+        {isLoading ? (
+          <Loading>Loading Students ...</Loading>
+        ) : (
+          <LoadMoreStudents> Load more students </LoadMoreStudents>
+        )}
       </StudentListScrollContainer>
     </StudentListContainer>
   );

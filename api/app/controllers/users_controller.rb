@@ -24,21 +24,33 @@ class UsersController < ApplicationController
 
     def students
         # make sure requester is an advisor
-        requester = User.find_by_id(@current_user_id)
+        # requester = User.find_by_id(@current_user_id)
 
-        unless requester.is_advisor
-            render json: { error: "Requester is not an advisor" }, status: :bad_request
-            return
+        # unless requester.is_advisor
+        #     render json: { error: "Requester is not an advisor" }, status: :bad_request
+        #     return
+        # end
+
+        search = nil
+        page = 0
+        if search_params[:search].present?
+            search = search_params[:search].downcase
         end
+        
+        if search_params[:page].present?
+            page = search_params[:page]
+        end
+        @next_page = page + 1
 
-        search = search_params[:search].downcase
-        @students = User.where(is_advisor: false).where('lower(username) LIKE :search OR lower(email) LIKE :search', search: "%#{search}%")
+        offset = page * 50
+        # TODO: Add NUID to search
+        @students = User.where(is_advisor: false).limit(50).offset(offset).where('lower(username) LIKE :search OR lower(email) LIKE :search', search: "%#{search}%")
     end
 
     private
 
     def search_params
-        params.permit(:search)
+        params.permit(:search, :page)
     end
 
     def user_params

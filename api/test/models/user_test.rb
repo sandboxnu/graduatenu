@@ -18,7 +18,8 @@
 #
 # Indexes
 #
-#  index_users_on_email  (email) UNIQUE
+#  index_users_on_email     (email) UNIQUE
+#  index_users_on_username  (username)
 #
 require 'test_helper'
 
