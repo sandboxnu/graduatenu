@@ -46,17 +46,23 @@ const StudentEmailNUIDContainer = styled.div`
   color: gray;
 `;
 
-const LIST_OF_STUDENTS = [
-  { name: "Mario Speedwagon", nuid: "12345", email: "mario@neu.edu" },
-  { name: "Petey Cruiser", nuid: "54321", email: "petey@neu.edu" },
-  { name: "Anna Sthesia", nuid: "67890", email: "anna@neu.edu" },
-  { name: "Paul Molive", nuid: "09876", email: "paul@neu.edu" },
-  { name: "Anna Mull", nuid: "510912", email: "anna@neu.edu" },
-  { name: "Gail Forcewind", nuid: "481972", email: "gail@neu.edu" },
-  { name: "Paige Turner", nuid: "512384", email: "paige@neu.edu" },
-  { name: "Bob Frapples", nuid: "123498", email: "bob@neu.edu" },
-  { name: "Walter Melon", nuid: "4123987", email: "walter@neu.edu" },
-];
+const Loading = styled.div`
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 21px;
+  padding: 10px;
+`;
+
+const EmptyState = styled.div`
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 21px;
+  padding: 10px;
+`;
 
 const EMPTY_STUDENT_LIST: StudentProps[] = [];
 
@@ -75,7 +81,10 @@ const ManageStudentsComponent: React.FC = (props: any) => {
 
   return (
     <Container>
-      <Search placeholder="Search by name or nuid" onEnter={setSearchQuery} />
+      <Search
+        placeholder="Search by name, email, or NUID"
+        onEnter={setSearchQuery}
+      />
       <StudentsList searchQuery={searchQuery} />
     </Container>
   );
@@ -102,15 +111,19 @@ const StudentsList = (props: StudentsListProps) => {
   return (
     <StudentListContainer>
       <StudentListScrollContainer>
-        {students.map(student => (
-          <Student
-            username={student.username}
-            // nuid={student.nuid}
-            email={student.email}
-            key={student.username}
-          />
-        ))}
-        {isLoading ? <p>Loading...</p> : null}
+        {students === null || students.length == 0 ? (
+          <EmptyState> No students found </EmptyState>
+        ) : (
+          students.map(student => (
+            <Student
+              username={student.username}
+              // nuid={student.nuid}
+              email={student.email}
+              key={student.username}
+            />
+          ))
+        )}
+        {isLoading ? <Loading>Loading Students ...</Loading> : null}
       </StudentListScrollContainer>
     </StudentListContainer>
   );
