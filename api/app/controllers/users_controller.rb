@@ -22,19 +22,26 @@ class UsersController < ApplicationController
         end
     end
 
-    def all_students
+    def students
         # make sure requester is an advisor
-        requester = User.find_by_id(@current_user_id)
+        # requester = User.find_by_id(@current_user_id)
 
-        unless requester.is_advisor
-            render json: { error: "Requester is not an advisor" }, status: :bad_request
-            return
-        end
+        # unless requester.is_advisor
+        #     render json: { error: "Requester is not an advisor" }, status: :bad_request
+        #     return
+        # end
 
-        @students = User.where(is_advisor: false)
+        search = search_params[:search].downcase
+        # p '==================================================='
+        # p search
+        @students = User.where(is_advisor: false).where('lower(username) LIKE :search OR lower(email) LIKE :search', search: "%#{search}%")
     end
 
     private
+
+    def search_params
+        params.permit(:search)
+    end
 
     def user_params
         params.require(:user).permit(:username, :email, :password, :academic_year, :graduation_year, :major, :coop_cycle)

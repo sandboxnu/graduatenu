@@ -3,10 +3,9 @@
  * @param userToken the JWT token of the user
  */
 export const getStudents = (searchQuery: string, userToken: string) =>
-  fetch(`/api/users/all_students`, {
+  fetch(`/api/users/students?search=${searchQuery}`, {
     method: "GET",
     headers: {
-      body: JSON.stringify({ search: "alex" }),
       Authorization: "Token " + userToken,
     },
   }).then(response => response.json());

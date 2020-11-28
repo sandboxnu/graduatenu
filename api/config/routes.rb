@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
     resources :users, only: [:show, :update] do
       collection do
-        get 'all_students'
+        get 'students'
       end
       resources :plans
     end
