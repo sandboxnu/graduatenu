@@ -11,6 +11,9 @@ const Container = styled.div`
   margin-left: 30px;
   margin-right: 30px;
   margin-top: 50px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
 `;
 
 const StudentListScrollContainer = styled.div`
@@ -30,35 +33,23 @@ const StudentListContainer = styled.div`
 `;
 
 const StudentContainer = styled.div`
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: normal;
   font-size: 18px;
   line-height: 21px;
   padding: 10px;
 `;
 
 const StudentEmailNUIDContainer = styled.div`
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: normal;
   font-size: 10px;
   color: gray;
 `;
 
 const Loading = styled.div`
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: normal;
   font-size: 15px;
   line-height: 21px;
   padding: 10px;
 `;
 
 const EmptyState = styled.div`
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: normal;
   font-size: 18px;
   line-height: 21px;
   padding: 10px;
