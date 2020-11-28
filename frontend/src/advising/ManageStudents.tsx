@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
@@ -58,21 +58,20 @@ const LIST_OF_STUDENTS = [
   { name: "Walter Melon", nuid: "4123987", email: "walter@neu.edu" },
 ];
 
+const EMPTY_STUDENT_LIST: StudentProps[] = [];
+
 interface StudentsListProps {
   searchQuery: string;
 }
 
 interface StudentProps {
-  name: string;
-  nuid: string;
+  username: string;
+  // nuid: string;
   email: string;
 }
 
 const ManageStudentsComponent: React.FC = (props: any) => {
   const [searchQuery, setSearchQuery] = useState("");
-  let token = useSelector((state: AppState) => getTokenFromState(state));
-  token = token ? token : "";
-  // getStudents(searchQuery, token).then((data: any) => console.log(data)).catch(err => console.log(err));
 
   return (
     <Container>
@@ -83,21 +82,35 @@ const ManageStudentsComponent: React.FC = (props: any) => {
 };
 
 const StudentsList = (props: StudentsListProps) => {
+  const [students, setStudents] = useState(EMPTY_STUDENT_LIST);
+  const [isLoading, setIsLoading] = useState(true);
+  let token = useSelector((state: AppState) => getTokenFromState(state));
+
+  useEffect(() => {
+    token = token ? token : "";
+    setStudents(EMPTY_STUDENT_LIST);
+    setIsLoading(true);
+    getStudents(props.searchQuery, token)
+      .then((students: StudentProps[]) => {
+        console.log(students);
+        setStudents(students);
+        setIsLoading(false);
+      })
+      .catch(err => console.log(err));
+  }, [props.searchQuery, token]);
+
   return (
     <StudentListContainer>
       <StudentListScrollContainer>
-        {LIST_OF_STUDENTS.filter(
-          student =>
-            student.name.includes(props.searchQuery) ||
-            student.nuid.includes(props.searchQuery)
-        ).map(student => (
+        {students.map(student => (
           <Student
-            name={student.name}
-            nuid={student.nuid}
+            username={student.username}
+            // nuid={student.nuid}
             email={student.email}
-            key={student.nuid}
+            key={student.username}
           />
         ))}
+        {isLoading ? <p>Loading...</p> : null}
       </StudentListScrollContainer>
     </StudentListContainer>
   );
@@ -106,9 +119,9 @@ const StudentsList = (props: StudentsListProps) => {
 const Student = (props: StudentProps) => {
   return (
     <StudentContainer>
-      {props.name}
+      {props.username}
       <StudentEmailNUIDContainer>
-        {props.email + " | " + props.nuid}
+        {props.email + " | " + "NUID GOES HERE"}
       </StudentEmailNUIDContainer>
     </StudentContainer>
   );
