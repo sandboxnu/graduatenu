@@ -35,19 +35,27 @@ const StudentContainer = styled.div`
   font-weight: normal;
   font-size: 18px;
   line-height: 21px;
-  padding: 20px;
+  padding: 10px;
+`;
+
+const StudentEmailNUIDContainer = styled.div`
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 10px;
+  color: gray;
 `;
 
 const LIST_OF_STUDENTS = [
-  { name: "Mario Speedwagon", nuid: "12345" },
-  { name: "Petey Cruiser", nuid: "54321" },
-  { name: "Anna Sthesia", nuid: "67890" },
-  { name: "Paul Molive", nuid: "09876" },
-  { name: "Anna Mull", nuid: "510912" },
-  { name: "Gail Forcewind", nuid: "481972" },
-  { name: "Paige Turner", nuid: "512384" },
-  { name: "Bob Frapples", nuid: "123498" },
-  { name: "Walter Melon", nuid: "4123987" },
+  { name: "Mario Speedwagon", nuid: "12345", email: "mario@neu.edu" },
+  { name: "Petey Cruiser", nuid: "54321", email: "petey@neu.edu" },
+  { name: "Anna Sthesia", nuid: "67890", email: "anna@neu.edu" },
+  { name: "Paul Molive", nuid: "09876", email: "paul@neu.edu" },
+  { name: "Anna Mull", nuid: "510912", email: "anna@neu.edu" },
+  { name: "Gail Forcewind", nuid: "481972", email: "gail@neu.edu" },
+  { name: "Paige Turner", nuid: "512384", email: "paige@neu.edu" },
+  { name: "Bob Frapples", nuid: "123498", email: "bob@neu.edu" },
+  { name: "Walter Melon", nuid: "4123987", email: "walter@neu.edu" },
 ];
 
 interface StudentsListProps {
@@ -57,6 +65,7 @@ interface StudentsListProps {
 interface StudentProps {
   name: string;
   nuid: string;
+  email: string;
 }
 
 const ManageStudentsComponent: React.FC = (props: any) => {
@@ -82,7 +91,11 @@ const StudentsList = (props: StudentsListProps) => {
             student.name.includes(props.searchQuery) ||
             student.nuid.includes(props.searchQuery)
         ).map(student => (
-          <Student name={student.name} nuid={student.nuid} />
+          <Student
+            name={student.name}
+            nuid={student.nuid}
+            email={student.email}
+          />
         ))}
       </StudentListScrollContainer>
     </StudentListContainer>
@@ -90,7 +103,14 @@ const StudentsList = (props: StudentsListProps) => {
 };
 
 const Student = (props: StudentProps) => {
-  return <StudentContainer>{props.name}</StudentContainer>;
+  return (
+    <StudentContainer>
+      {props.name}
+      <StudentEmailNUIDContainer>
+        {props.email + " | " + props.nuid}
+      </StudentEmailNUIDContainer>
+    </StudentContainer>
+  );
 };
 
 export const ManageStudents = withRouter(ManageStudentsComponent);
