@@ -49,9 +49,9 @@ const Loading = styled.div`
   font-size: 15px;
   line-height: 21px;
   margin-top: 20px;
-  margin-bottom: 20px;
-  margin-left: 10px;
-  margin-rigth: 10px;
+  margin-bottom: 5px;
+  margin-left: 30px;
+  margin-right: 30px;
 `;
 
 const EmptyState = styled.div`
@@ -71,6 +71,13 @@ const LoadMoreStudents = styled.div`
   cursor: pointer;
 `;
 
+const NoMoreStudents = styled.div`
+  font-size: 10px;
+  line-height: 21px;
+  margin: 10px;
+  color: red;
+`;
+
 const EMPTY_STUDENT_LIST: StudentProps[] = [];
 
 interface StudentsListProps {
@@ -80,6 +87,7 @@ interface StudentsListProps {
 interface StudentsAPI {
   students: StudentProps[];
   nextPage: number;
+  lastPage: boolean;
 }
 
 interface StudentProps {
@@ -106,6 +114,7 @@ const StudentsList = (props: StudentsListProps) => {
   const [students, setStudents] = useState(EMPTY_STUDENT_LIST);
   const [isLoading, setIsLoading] = useState(true);
   const [pageNumber, setPageNumber] = useState(0);
+  const [isLastPage, setIsLastPage] = useState(false);
   let token = useSelector((state: AppState) => getTokenFromState(state));
 
   const fetchStudents = (currentStudents: StudentProps[], page: number) => {
@@ -115,6 +124,7 @@ const StudentsList = (props: StudentsListProps) => {
       .then((studentsAPI: StudentsAPI) => {
         setStudents(currentStudents.concat(studentsAPI.students));
         setPageNumber(studentsAPI.nextPage);
+        setIsLastPage(studentsAPI.lastPage);
         setIsLoading(false);
       })
       .catch(err => console.log(err));
@@ -127,6 +137,11 @@ const StudentsList = (props: StudentsListProps) => {
 
   return (
     <StudentListContainer>
+      {isLoading ? (
+        <Loading>
+          <LinearProgress color="secondary" />
+        </Loading>
+      ) : null}
       <StudentListScrollContainer>
         {(students === null || students.length == 0) && !isLoading ? (
           <EmptyState> No students found </EmptyState>
@@ -140,15 +155,17 @@ const StudentsList = (props: StudentsListProps) => {
             />
           ))
         )}
-        {isLoading ? (
-          <Loading>
-            <LinearProgress color="secondary" />
-          </Loading>
-        ) : (
-          <LoadMoreStudents onClick={_ => fetchStudents(students, pageNumber)}>
-            Load more students
-          </LoadMoreStudents>
-        )}
+        {!isLoading ? (
+          isLastPage ? (
+            <NoMoreStudents>No more students</NoMoreStudents>
+          ) : (
+            <LoadMoreStudents
+              onClick={_ => fetchStudents(students, pageNumber)}
+            >
+              Load more students
+            </LoadMoreStudents>
+          )
+        ) : null}
       </StudentListScrollContainer>
     </StudentListContainer>
   );

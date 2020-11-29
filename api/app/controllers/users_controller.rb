@@ -41,10 +41,14 @@ class UsersController < ApplicationController
             page = Integer(search_params[:page])
         end
         @next_page = page + 1
+        @last_page = false;
 
         offset = page * 50
         # TODO: Add NUID to search
         @students = User.where(is_advisor: false).limit(50).offset(offset).where('lower(username) LIKE :search OR lower(email) LIKE :search', search: "%#{search}%")
+        if @students.empty?
+            @last_page = true
+        end
     end
 
     private
