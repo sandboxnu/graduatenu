@@ -95,27 +95,30 @@ const ManageStudentsComponent: React.FC = (props: any) => {
 const StudentsList = (props: StudentsListProps) => {
   const [students, setStudents] = useState(EMPTY_STUDENT_LIST);
   const [isLoading, setIsLoading] = useState(true);
+  const [pageNumber, setPageNumber] = useState(0);
   let token = useSelector((state: AppState) => getTokenFromState(state));
-  let pageNumber = 0;
 
-  useEffect(() => {
+  const fetchStudents = (currentStudents: StudentProps[], page: number) => {
     token = token ? token : "";
-    setStudents(EMPTY_STUDENT_LIST);
     setIsLoading(true);
-    getStudents(props.searchQuery, pageNumber, token)
-      .then((students: StudentsAPI) => {
-        console.log(students);
-        setStudents(students.students);
-        pageNumber = students.nextPage;
+    getStudents(props.searchQuery, page, token)
+      .then((studentsAPI: StudentsAPI) => {
+        setStudents(currentStudents.concat(studentsAPI.students));
+        setPageNumber(studentsAPI.nextPage);
         setIsLoading(false);
       })
       .catch(err => console.log(err));
+  };
+
+  useEffect(() => {
+    setStudents(EMPTY_STUDENT_LIST);
+    fetchStudents(EMPTY_STUDENT_LIST, 0);
   }, [props.searchQuery, token]);
 
   return (
     <StudentListContainer>
       <StudentListScrollContainer>
-        {students === null || students.length == 0 ? (
+        {(students === null || students.length == 0) && !isLoading ? (
           <EmptyState> No students found </EmptyState>
         ) : (
           students.map(student => (
@@ -123,14 +126,17 @@ const StudentsList = (props: StudentsListProps) => {
               username={student.username}
               // nuid={student.nuid}
               email={student.email}
-              key={student.username}
+              key={student.username + Math.random()}
             />
           ))
         )}
         {isLoading ? (
           <Loading>Loading Students ...</Loading>
         ) : (
-          <LoadMoreStudents> Load more students </LoadMoreStudents>
+          <LoadMoreStudents onClick={_ => fetchStudents(students, pageNumber)}>
+            {" "}
+            Load more students{" "}
+          </LoadMoreStudents>
         )}
       </StudentListScrollContainer>
     </StudentListContainer>
