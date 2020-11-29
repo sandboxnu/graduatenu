@@ -7,7 +7,7 @@ export const getStudents = (
   pageNumber: number,
   userToken: string
 ) =>
-  fetch(`/api/users/students?search=${searchQuery}`, {
+  fetch(`/api/users/students?search=${searchQuery}&page=${pageNumber}`, {
     method: "GET",
     headers: {
       Authorization: "Token " + userToken,

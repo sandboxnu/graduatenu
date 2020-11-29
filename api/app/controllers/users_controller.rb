@@ -38,7 +38,7 @@ class UsersController < ApplicationController
         end
         
         if search_params[:page].present?
-            page = search_params[:page]
+            page = Integer(search_params[:page])
         end
         @next_page = page + 1
 
