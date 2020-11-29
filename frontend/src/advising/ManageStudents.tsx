@@ -6,6 +6,8 @@ import { getStudents } from "../services/AdvisorService";
 import { Search } from "../components/common/Search";
 import { AppState } from "../state/reducers/state";
 import { getTokenFromState } from "../state";
+import LinearProgress from "@material-ui/core/LinearProgress";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const Container = styled.div`
   margin-left: 30px;
@@ -46,7 +48,10 @@ const StudentEmailNUIDContainer = styled.div`
 const Loading = styled.div`
   font-size: 15px;
   line-height: 21px;
-  padding: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 10px;
+  margin-rigth: 10px;
 `;
 
 const EmptyState = styled.div`
@@ -58,7 +63,12 @@ const EmptyState = styled.div`
 const LoadMoreStudents = styled.div`
   font-size: 10px;
   line-height: 21px;
-  padding: 10px;
+  margin: 10px;
+  color: red;
+  &:hover {
+    text-decoration: underline;
+  }
+  cursor: pointer;
 `;
 
 const EMPTY_STUDENT_LIST: StudentProps[] = [];
@@ -131,7 +141,9 @@ const StudentsList = (props: StudentsListProps) => {
           ))
         )}
         {isLoading ? (
-          <Loading>Loading Students ...</Loading>
+          <Loading>
+            <LinearProgress color="secondary" />
+          </Loading>
         ) : (
           <LoadMoreStudents onClick={_ => fetchStudents(students, pageNumber)}>
             Load more students
