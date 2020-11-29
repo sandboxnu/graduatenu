@@ -134,8 +134,7 @@ const StudentsList = (props: StudentsListProps) => {
           <Loading>Loading Students ...</Loading>
         ) : (
           <LoadMoreStudents onClick={_ => fetchStudents(students, pageNumber)}>
-            {" "}
-            Load more students{" "}
+            Load more students
           </LoadMoreStudents>
         )}
       </StudentListScrollContainer>
