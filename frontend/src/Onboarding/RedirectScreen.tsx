@@ -44,13 +44,11 @@ export const RedirectScreen: React.FC = () => {
       cookies.set("auth_token", cookie, {
         path: "/",
         domain: window.location.hostname,
-      }); // set persisting cookie
+      }); // set persisting cookie for all paths
       if (cookie) {
         fetchUser(cookie).then(response => {
           dispatch(setFullNameAction(response.user.username));
           const maj = findMajorFromName(response.user.major, majors);
-          console.log(response.user.major);
-          console.log(maj);
           if (maj) {
             dispatch(setDeclaredMajorAction(maj));
           }
