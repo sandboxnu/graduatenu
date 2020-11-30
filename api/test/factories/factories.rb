@@ -9,6 +9,7 @@ FactoryBot.define do
     is_advisor { false }
     major { "Computer Science, BSCS" }
     username { "Testy Tester" }
+    nu_id { "123456789" }
 
     factory :advisor do
       is_advisor { true }
