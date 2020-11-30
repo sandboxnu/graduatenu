@@ -127,7 +127,3 @@ yarn-error.log*
 
 .idea/
 graduatenu.code-workspace
-
-# custom start scripts
-no_docker_frontend_start.sh
-no_docker_backend_start.sh

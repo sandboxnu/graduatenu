@@ -14,8 +14,6 @@
     "start": "cd infrastructure/develop && ./compose-build.sh && ./run-servers.sh dev-build",
     "prod-start": "docker-compose up --build",
     "prod-start-aws": "cd infrastructure/develop && ./compose-build.sh && ./run-servers.sh prod-build",
-    "no-docker-start:frontend": "./no_docker_frontend_start.sh",
-    "no-docker-start:backend": "./no_docker_backend_start.sh",
     "build": "cd frontend && CI=false react-app-rewired build",
     "test": "jest",
     "eject": "cd frontend && react-app-rewired eject",
