@@ -19,6 +19,7 @@ import {
   setExamCredits,
   resetUserAction,
   deletePlanId,
+  setIsAdvisorAction,
 } from "../actions/userActions";
 import { setCoopCycle, setNamedSchedule } from "../actions/scheduleActions";
 import { planToString } from "../../utils";
@@ -39,6 +40,7 @@ export interface UserState {
   email: string;
   coopCycle: string;
   examCredits: TransferableExam[];
+  isAdvisor?: boolean;
 }
 
 const initialState: UserState = {
@@ -55,6 +57,7 @@ const initialState: UserState = {
   email: "",
   coopCycle: "",
   examCredits: [],
+  isAdvisor: undefined,
 };
 
 export const userReducer = (
@@ -141,6 +144,10 @@ export const userReducer = (
       }
       case getType(setNamedSchedule): {
         draft.planName = action.payload.namedSchedule.name;
+        return draft;
+      }
+      case getType(setIsAdvisorAction): {
+        draft.isAdvisor = action.payload.isAdvisor;
         return draft;
       }
     }

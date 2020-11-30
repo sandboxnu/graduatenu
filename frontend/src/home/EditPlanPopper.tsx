@@ -264,9 +264,9 @@ export class EditPlanPopperComponent extends React.Component<
             <PlanCard>
               <TopRow>
                 <NameText>{this.props.name}</NameText>
-                <EditProfileButton to="/profile">
+                {/* <EditProfileButton to="/profile">
                   Edit Profile
-                </EditProfileButton>
+                </EditProfileButton> */}
               </TopRow>
               <StandingText>
                 {getStandingFromCompletedCourses(this.props.creditsTaken)}

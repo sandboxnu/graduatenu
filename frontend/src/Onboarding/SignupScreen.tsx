@@ -146,6 +146,7 @@ class SignupScreenComponent extends React.Component<Props, SignupScreenState> {
    * Validates user input, then sends a sign up request to the backend using the input data.
    * Checks response for error messages, then redirects user to /home if the sign up succeeds.
    */
+
   submit() {
     // Regex to determine if email string is a valid address
     const validEmail: boolean = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(
@@ -210,6 +211,7 @@ class SignupScreenComponent extends React.Component<Props, SignupScreenState> {
   /**
    * Renders the email text field
    */
+
   renderEmailTextField(textFieldStr: string, beenEdited: boolean) {
     return (
       <TextField
@@ -245,6 +247,7 @@ class SignupScreenComponent extends React.Component<Props, SignupScreenState> {
   /**
    * Renders the password text field
    */
+
   renderPasswordTextField(textFieldStr: string, beenEdited: boolean) {
     return (
       <TextField
@@ -279,6 +282,7 @@ class SignupScreenComponent extends React.Component<Props, SignupScreenState> {
   /**
    * Renders the confirm password text field
    */
+
   renderConfirmPasswordTextField(textFieldStr: string, beenEdited: boolean) {
     return (
       <TextField
@@ -351,6 +355,7 @@ class SignupScreenComponent extends React.Component<Props, SignupScreenState> {
  * Callback to be passed into connect, to make properties of the AppState available as this components props.
  * @param state the AppState
  */
+
 const mapStateToProps = (state: AppState) => ({
   fullName: state.user.fullName,
   academicYear: state.user.academicYear,
@@ -364,6 +369,7 @@ const mapStateToProps = (state: AppState) => ({
  * Callback to be passed into connect, responsible for dispatching redux actions to update the appstate.
  * @param dispatch responsible for dispatching actions to the redux store.
  */
+
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   setToken: (token: string) => dispatch(setTokenAction(token)),
   setUserId: (id: number) => dispatch(setUserIdAction(id)),
@@ -384,6 +390,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
  * When rendering the connecting component, the props assigned in mapStateToProps, do not need to
  * be passed down as props from the parent component.
  */
+
 export const SignupScreen = connect(
   mapStateToProps,
   mapDispatchToProps

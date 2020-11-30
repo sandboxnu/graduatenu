@@ -3,7 +3,7 @@ FactoryBot.define do
     academic_year { 3 }
     coop_cycle { "4 Years, 2 Co-ops, Spring Cycle" }
     email { "test@test.com" }
-    password { "password123" }
+    encrypted_password { "password123" }
     graduation_year { 2022 }
     image_url { "testimage.com/testimage.png" }
     is_advisor { false }

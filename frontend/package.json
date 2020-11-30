@@ -37,6 +37,7 @@
     "request-promise": "^4.2.6",
     "styled-components": "^4.4.0",
     "typesafe-actions": "^5.1.0",
+    "universal-cookie": "^4.0.4",
     "xlsx": "^0.15.6"
   },
   "devDependencies": {

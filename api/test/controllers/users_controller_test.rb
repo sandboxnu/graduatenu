@@ -7,7 +7,7 @@ class UsersControllerTest < ActionController::TestCase
 
     @controller.instance_variable_set(:@current_user_id, user.id)
 
-    get :show, params: { id: user.id }, format: "json"
+    get :current, format: "json"
 
     assert_response :ok
 
@@ -22,7 +22,7 @@ class UsersControllerTest < ActionController::TestCase
 
     @controller.instance_variable_set(:@current_user_id, '')
 
-    get :show, params: { id: user.id }, format: "json"
+    get :current, format: "json"
 
     assert_response :unauthorized
   end
