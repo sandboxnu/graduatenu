@@ -32,6 +32,8 @@ export const App = ({
             <Route path="/home" component={HomeWrapper} />
             <Route path="/redirect" component={RedirectScreen} />
             <Route path="/onboarding" component={OnboardingInfoScreen} />
+            {/* <Route path="/signup" component={SignupScreen} />		
+             <Route path="/login" component={LoginScreen} /> */}
             <Route path="/profile" component={Profile} />
             <Route
               path="/completedCourses"

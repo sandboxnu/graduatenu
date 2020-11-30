@@ -1,4 +1,44 @@
-import { IUpdateUser, IUpdateUserData } from "../models/types";
+import {
+  ILoginData,
+  IUpdateUser,
+  IUpdateUserData,
+  IUpdateUserPassword,
+  IUserData,
+} from "../models/types";
+
+// unused right now as Khoury auth is being used
+export const registerUser = (user: IUserData) =>
+  fetch(`/api/users`, {
+    method: "POST",
+    body: JSON.stringify({ user: user }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  }).then(response => response.json());
+
+// unused right now as Khoury auth is being used
+export const loginUser = (user: ILoginData) =>
+  fetch("/api/users/login", {
+    method: "POST",
+    body: JSON.stringify({ user: user }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  }).then(response => response.json());
+
+// unused right now as Khoury auth is being used
+export const updatePassword = (
+  token: string,
+  userPassword: IUpdateUserPassword
+) =>
+  fetch(`/api/users/password`, {
+    method: "PUT",
+    body: JSON.stringify({ user: userPassword }),
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Token " + token,
+    },
+  }).then(response => response.json());
 
 /**
  * Service function object to get the user data

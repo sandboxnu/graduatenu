@@ -205,6 +205,8 @@ const ColorButton = withStyles((theme: Theme) => ({
   },
 }))(Button);
 
+const cookies = new Cookies();
+
 interface ToastHomeProps {
   addToast: (message: string, options: any) => void;
   removeToast: (id: string) => void;
@@ -553,13 +555,15 @@ class HomeComponent extends React.Component<Props, HomeState> {
     this.props.setDNDSchedule(dndschedule);
   }
 
-  async logOut() {
+  logOut = async () => {
     await this.updatePlan();
     this.props.logOut();
-    const cookies = new Cookies();
-    cookies.remove("auth_token");
+    cookies.remove("auth_token", {
+      path: "/",
+      domain: "." + window.location.hostname,
+    });
     this.props.history.push("/");
-  }
+  };
 
   render() {
     return (

@@ -5,6 +5,7 @@ class ApplicationController < ActionController::API
     
     include ActionController::HttpAuthentication::Token::ControllerMethods
 
+    before_action :configure_permitted_parameters, if: :devise_controller?
     before_action :authenticate_user
 
     def underscore_params!
@@ -13,8 +14,13 @@ class ApplicationController < ActionController::API
 
     private
 
-    #authenticate  user by checking if incoming request has a valid JWT token
+    def configure_permitted_parameters		
 
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:username, :email, :password, :academic_year, :graduation_year, :major, :coop_cycle])		
+     devise_parameter_sanitizer.permit(:account_update, keys: [:email, :password, :password_confirmation, :current_password])		
+    end
+
+    #authenticate  user by checking if incoming request has a valid JWT token
     def authenticate_user
         if request.headers['Authorization'].present?
           authenticate_or_request_with_http_token do |token|

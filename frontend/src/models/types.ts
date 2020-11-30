@@ -161,6 +161,15 @@ export interface IUserData {
 }
 
 /**
+ * A model for data pertaining to a user login object.
+ */
+
+export interface ILoginData {
+  email: string;
+  password: string;
+}
+
+/**
  * A model for data pertaining to a Plan object.
  */
 export interface IPlanData {

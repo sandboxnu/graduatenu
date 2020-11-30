@@ -18,8 +18,6 @@ import {
   getAcademicYearFromState,
   getGraduationYearFromState,
   getIsAdvisorFromState,
-  getMajors,
-  getMajorsLoadingFlag,
 } from "../state";
 import { fetchMajorsAndPlans } from "../utils/fetchMajorsAndPlans";
 
@@ -27,33 +25,32 @@ const cookies = new Cookies();
 
 export const RedirectScreen: React.FC = () => {
   const dispatch = useDispatch();
-  const {
-    majors,
-    isFetchingMajors,
-    academicYear,
-    graduationYear,
-    isAdvisor,
-  } = useSelector((state: AppState) => ({
-    majors: getMajors(state),
-    isFetchingMajors: getMajorsLoadingFlag(state),
-    academicYear: getAcademicYearFromState(state),
-    graduationYear: getGraduationYearFromState(state),
-    isAdvisor: getIsAdvisorFromState(state),
-  }));
+  const { academicYear, graduationYear, isAdvisor } = useSelector(
+    (state: AppState) => ({
+      academicYear: getAcademicYearFromState(state),
+      graduationYear: getGraduationYearFromState(state),
+      isAdvisor: getIsAdvisorFromState(state),
+    })
+  );
 
   // component did mount
   useEffect(() => {
-    fetchMajorsAndPlans()(dispatch);
-  }, []);
-
-  useEffect(() => {
-    if (!!isFetchingMajors && majors.length > 0) {
+    fetchMajorsAndPlans()(dispatch).then(majors => {
       const cookie = cookies.get("auth_token");
-      cookies.set("auth_token", cookie); // set persisting cookie
+      cookies.remove("auth_token", {
+        path: "/redirect",
+        domain: window.location.hostname,
+      });
+      cookies.set("auth_token", cookie, {
+        path: "/",
+        domain: window.location.hostname,
+      }); // set persisting cookie
       if (cookie) {
         fetchUser(cookie).then(response => {
           dispatch(setFullNameAction(response.user.username));
           const maj = findMajorFromName(response.user.major, majors);
+          console.log(response.user.major);
+          console.log(maj);
           if (maj) {
             dispatch(setDeclaredMajorAction(maj));
           }
@@ -64,8 +61,8 @@ export const RedirectScreen: React.FC = () => {
           dispatch(setIsAdvisorAction(response.user.isAdvisor));
         });
       }
-    }
-  }, [isFetchingMajors]);
+    });
+  }, []);
 
   const needsToGoToOnboarding = () => {
     return !graduationYear || !academicYear;

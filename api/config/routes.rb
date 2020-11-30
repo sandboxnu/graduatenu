@@ -2,6 +2,7 @@
 Rails.application.routes.draw do
   scope :api, defaults: { format: :json } do
     Healthcheck.routes(self)
+    # devise_for :users, controllers: { sessions: :sessions, passwords: :passwords }, path_names: { sign_in: :login }
 
     resources :users, only: [:update] do
       collection do
