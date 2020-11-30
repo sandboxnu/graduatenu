@@ -88,6 +88,6 @@ export const RedirectScreen: React.FC = () => {
     }
   } else {
     // advisor
-    return <Redirect to="/advisor" />;
+    return <Redirect to="/advisor/notifications" />;
   }
 };

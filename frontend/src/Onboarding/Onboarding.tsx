@@ -189,7 +189,6 @@ class OnboardingComponent extends React.Component<Props> {
   }
 
   render() {
-    // fullName will be an empty string if this is the user's first time visiting the site
     if (cookies.get("auth_token")) {
       return <Redirect to="/redirect" />;
     }
