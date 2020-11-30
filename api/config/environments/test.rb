@@ -5,6 +5,8 @@
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
+  ENV['ROOT_URL'] = "http://test.com"
+  ENV['FRONTEND_URL'] = "http://test-frontend.com"
 
   config.cache_classes = false
 

@@ -6,7 +6,6 @@ import { OutlinedButton } from "../components/common/OutlinedButton";
 import { PrimaryButton } from "../components/common/PrimaryButton";
 import { TextField } from "@material-ui/core";
 import Autocomplete from "@material-ui/lab/Autocomplete";
-import { ChangePasswordModal } from "./ChangePasswordModal";
 import { IconButton } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
 import {
@@ -32,6 +31,7 @@ import { planToString } from "../utils";
 import { updateUser } from "../services/UserService";
 import { IUpdateUser, IUpdateUserData } from "../models/types";
 import { findMajorFromName } from "../utils/plan-helpers";
+import { ChangePasswordModal } from "./ChangePasswordModal";
 
 const OuterContainer = styled.div`
   width: 50%;
@@ -339,9 +339,9 @@ const ProfileComponent: React.FC = (props: any) => {
                 setMajor={setMajor}
                 majors={majors}
               />
-              {props.token != undefined && props.token.length > 0 && (
+              {/* {props.token != undefined && props.token.length > 0 && (
                 <ChangePassword token={props.token} id={props.id} />
-              )}
+              )} */}
             </ProfileColumn>
             <ProfileColumn>
               <ProfileEmail isEdit={isEdit} email={email} setEmail={setEmail} />

@@ -8,8 +8,6 @@ import { Provider } from "react-redux";
 import { Store } from "redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { Persistor } from "redux-persist";
-import { SignupScreen } from "./Onboarding/SignupScreen";
-import { LoginScreen } from "./Onboarding/LoginScreen";
 import { TransferCoursesScreen } from "./Onboarding/TransferCoursesScreen";
 import { Profile } from "./profile/Profile";
 import { ManageStudents } from "./advising/ManageStudents";
@@ -17,6 +15,7 @@ import { NotificationsPage } from "./advising/Notifications";
 import { TemplatesPage } from "./advising/Templates";
 import { GenericAdvisingTemplateComponent } from "./advising/GenericAdvisingTemplate";
 import TransferableCreditScreen from "./Onboarding/TransferableCreditScreen";
+import { RedirectScreen } from "./Onboarding/RedirectScreen";
 
 export const App = ({
   store,
@@ -31,9 +30,10 @@ export const App = ({
         <Router>
           <Switch>
             <Route path="/home" component={HomeWrapper} />
+            <Route path="/redirect" component={RedirectScreen} />
             <Route path="/onboarding" component={OnboardingInfoScreen} />
-            <Route path="/signup" component={SignupScreen} />
-            <Route path="/login" component={LoginScreen} />
+            {/* <Route path="/signup" component={SignupScreen} />		
+             <Route path="/login" component={LoginScreen} /> */}
             <Route path="/profile" component={Profile} />
             <Route
               path="/completedCourses"

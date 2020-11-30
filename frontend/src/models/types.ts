@@ -157,11 +157,13 @@ export interface IUserData {
   graduation_year?: number;
   major?: string;
   coop_cycle?: string;
+  nu_id?: string;
 }
 
 /**
  * A model for data pertaining to a user login object.
  */
+
 export interface ILoginData {
   email: string;
   password: string;
@@ -213,6 +215,7 @@ export interface IUpdateUserData {
   academic_year?: number;
   graduation_year?: number;
   coop_cycle?: string;
+  nu_id?: string;
 }
 
 /**

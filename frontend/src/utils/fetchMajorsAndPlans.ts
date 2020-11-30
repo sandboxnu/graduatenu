@@ -61,27 +61,29 @@ const parsePlans = (res: any): Record<string, Schedule[]> => {
 //use fetch utility to make a post request to the searchNEU graphql api endpoint.
 export function fetchMajorsAndPlans() {
   return (dispatch: Dispatch) => {
-    dispatch(fetchMajorsPendingAction());
-    dispatch(fetchPlansPendingAction());
-    fetch("https://searchneu.com/graphql", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ query: querySchema }),
-    })
-      .then(res => res.json())
-      .then(res => {
-        if (res.error) {
-          throw res.error;
-        }
-        const majors: Major[] = parseMajors(res.data);
-        const record: Record<string, Schedule[]> = parsePlans(res.data);
-        dispatch(fetchMajorsSuccessAction(majors));
-        dispatch(fetchPlansSuccessAction(record));
-        return majors;
+    return new Promise<Major[]>((resolve, reject) => {
+      dispatch(fetchMajorsPendingAction());
+      dispatch(fetchPlansPendingAction());
+      fetch("https://searchneu.com/graphql", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ query: querySchema }),
       })
-      .catch(error => {
-        dispatch(fetchMajorsErrorAction(error));
-        dispatch(fetchPlansErrorAction(error));
-      });
+        .then(res => res.json())
+        .then(res => {
+          if (res.error) {
+            throw res.error;
+          }
+          const majors: Major[] = parseMajors(res.data);
+          const record: Record<string, Schedule[]> = parsePlans(res.data);
+          dispatch(fetchMajorsSuccessAction(majors));
+          dispatch(fetchPlansSuccessAction(record));
+          resolve(majors);
+        })
+        .catch(error => {
+          dispatch(fetchMajorsErrorAction(error));
+          dispatch(fetchPlansErrorAction(error));
+        });
+    });
   };
 }

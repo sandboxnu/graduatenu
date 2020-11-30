@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { withRouter, RouteComponentProps, Link } from "react-router-dom";
 import styled from "styled-components";
 import { TextField } from "@material-ui/core";
-import { Major, Schedule } from "../../../common/types";
+import { Major } from "../../../common/types";
 import { ILoginData, ScheduleSlice, NamedSchedule } from "../models/types";
 import { PrimaryButton } from "../components/common/PrimaryButton";
 import { Dispatch } from "redux";
@@ -23,7 +23,6 @@ import { getMajors } from "../state";
 import { setSchedules } from "../state/actions/schedulesActions";
 import { loginUser } from "../services/UserService";
 import { findAllPlansForUser } from "../services/PlanService";
-import { setCoopCycle } from "../state/actions/scheduleActions";
 import { findMajorFromName } from "../utils/plan-helpers";
 
 const Wrapper = styled.div`
@@ -128,6 +127,7 @@ class LoginScreenComponent extends React.Component<Props, LoginScreenState> {
    * Checks response for error messages. If the log in succeeds, dispatch actions to set
    * user attributes obtained from the response object, then redirects user to /home.
    */
+
   submit() {
     // Regex to determine if email string is a valid address
     const validEmail: boolean = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(
@@ -167,6 +167,7 @@ class LoginScreenComponent extends React.Component<Props, LoginScreenState> {
   /**
    * Finds all of the user plans and sets the state based on the plan's information.
    */
+
   findUserPlans(response: any) {
     findAllPlansForUser(response.user.id, response.user.token).then(plans => {
       const namedSchedules = plans.map((plan: any) => ({
@@ -193,6 +194,7 @@ class LoginScreenComponent extends React.Component<Props, LoginScreenState> {
   /**
    * Renders the email text field
    */
+
   renderEmailTextField(textFieldStr: string, beenEdited: boolean) {
     return (
       <TextField
@@ -228,6 +230,7 @@ class LoginScreenComponent extends React.Component<Props, LoginScreenState> {
   /**
    * Renders the password text field
    */
+
   renderPasswordTextField(textFieldStr: string, beenEdited: boolean) {
     return (
       <TextField
@@ -304,6 +307,7 @@ class LoginScreenComponent extends React.Component<Props, LoginScreenState> {
  * Callback to be passed into connect, responsible for dispatching redux actions to update the appstate.
  * @param dispatch responsible for dispatching actions to the redux store.
  */
+
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   setFullName: (fullName: string) => dispatch(setFullNameAction(fullName)),
   setAcademicYear: (academicYear: number) =>
@@ -326,6 +330,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
  * Callback to be passed into connect, responsible for dispatching redux actions to update the appstate.
  * @param dispatch responsible for dispatching actions to the redux store.
  */
+
 const mapStateToProps = (state: AppState) => ({
   majors: getMajors(state),
 });
@@ -335,6 +340,7 @@ const mapStateToProps = (state: AppState) => ({
  * When rendering the connecting component, the props assigned in mapStateToProps, do not need to
  * be passed down as props from the parent component.
  */
+
 export const LoginScreen = connect(
   mapStateToProps,
   mapDispatchToProps
