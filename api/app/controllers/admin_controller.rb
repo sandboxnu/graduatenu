@@ -56,7 +56,6 @@ class AdminController < ApplicationController
       image_url: user_params[:photo_url],
       courses_transfer: user_params[:courses].select { |a| a['completion'] == 'TRANSFER' },
       courses_completed: user_params[:courses].select { |a| a['completion'] == 'PASSED' },
-      # TODO: do we need to update courses here?
     )
       render json: { errors: @user.errors }, status: :unprocessable_entity
       return true
