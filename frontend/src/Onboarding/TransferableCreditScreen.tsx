@@ -24,12 +24,12 @@ import {
   getGraduationYearFromState,
   getPlanStrFromState,
   getScheduleDataFromState,
-  getTokenFromState,
   getUserId,
 } from "../state";
 import { AppState } from "../state/reducers/state";
 import { addNewSchedule } from "../state/actions/schedulesActions";
 import { updateUser } from "../services/UserService";
+import { getAuthToken } from "../utils/auth-helpers";
 
 interface TransferableExamGroupComponentProps {
   readonly transferableExamGroup: TransferableExamGroup;
@@ -153,7 +153,6 @@ const TransferableCreditScreen: React.FC = () => {
     planStr,
     getCurrentScheduleData,
     userId,
-    userToken,
     academicYear,
     graduationYear,
   } = useSelector(
@@ -162,7 +161,6 @@ const TransferableCreditScreen: React.FC = () => {
       planStr: getPlanStrFromState(state),
       getCurrentScheduleData: () => getScheduleDataFromState(state),
       userId: getUserId(state),
-      userToken: getTokenFromState(state),
       academicYear: getAcademicYearFromState(state),
       graduationYear: getGraduationYearFromState(state),
     }),
@@ -176,11 +174,12 @@ const TransferableCreditScreen: React.FC = () => {
 
   const onSubmit = (): void => {
     dispatch(setExamCredits(selectedTransferableExams));
+    const token = getAuthToken();
 
     updateUser(
       {
         id: userId!,
-        token: userToken!,
+        token: token,
       },
       {
         major: major?.name,
@@ -192,7 +191,7 @@ const TransferableCreditScreen: React.FC = () => {
     );
 
     const scheduleData: ScheduleSlice = getCurrentScheduleData();
-    createPlanForUser(userId!, userToken!, {
+    createPlanForUser(userId!, token, {
       name: "Plan 1",
       link_sharing_enabled: false,
       schedule: scheduleData.schedule,

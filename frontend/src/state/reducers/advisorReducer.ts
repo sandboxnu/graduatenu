@@ -6,7 +6,6 @@ import {
   setImage,
   setName,
   setStudents,
-  setToken,
   setUserId,
 } from "../actions/advisorActions";
 
@@ -18,7 +17,6 @@ export interface Student {
 export interface AdvisorState {
   readonly email: string;
   readonly name: string;
-  readonly token?: string;
   readonly userId?: number;
   readonly image: string;
   readonly students: Array<Student>;
@@ -27,7 +25,6 @@ export interface AdvisorState {
 const initialState: AdvisorState = {
   email: "",
   name: "",
-  token: undefined,
   userId: undefined,
   image: "",
   students: [],
@@ -46,11 +43,6 @@ export const advisorReducer = (
 
       case getType(setName): {
         draft.name = action.payload.name;
-        return draft;
-      }
-
-      case getType(setToken): {
-        draft.token = action.payload.token;
         return draft;
       }
 

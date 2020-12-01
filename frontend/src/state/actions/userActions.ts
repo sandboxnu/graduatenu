@@ -29,13 +29,6 @@ export const setDeclaredMajorAction = createAction(
   })
 )();
 
-export const setTokenAction = createAction(
-  "user/SET_TOKEN",
-  (token: string) => ({
-    token,
-  })
-)();
-
 export const setUserIdAction = createAction(
   "user/SET_USER_ID",
   (id: number) => ({

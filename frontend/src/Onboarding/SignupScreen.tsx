@@ -11,7 +11,6 @@ import { registerUser } from "../services/UserService";
 import { Dispatch } from "redux";
 import {
   addPlanIdAction,
-  setTokenAction,
   setUserIdAction,
   setPlanNameAction,
   setLinkSharingAction,
@@ -23,6 +22,8 @@ import { addNewSchedule } from "../state/actions/schedulesActions";
 import { createPlanForUser } from "../services/PlanService";
 import { getScheduleDataFromState } from "../state";
 import { setCoopCycle } from "../state/actions/scheduleActions";
+import Cookies from "js-cookie";
+import { AUTH_TOKEN_COOKIE_KEY } from "../utils/auth-helpers";
 
 const Wrapper = styled.div`
   display: flex;
@@ -71,7 +72,6 @@ interface ReduxStoreSignupScreenProps {
 }
 
 interface ReduxDispatchSignupScreenProps {
-  setToken: (token: string) => void;
   setUserId: (id: number) => void;
   addPlanId: (planId: number) => void;
   setPlanName: (name: string) => void;
@@ -199,9 +199,12 @@ class SignupScreenComponent extends React.Component<Props, SignupScreenState> {
             this.props.setLinkSharing(plan.plan.link_sharing_enabled);
           });
           this.props.setUserId(response.user.id);
-          this.props.setToken(response.user.token);
           this.props.setEmail(response.user.email);
           this.props.setUserCoopCycle(response.user.coopCycle);
+          Cookies.set(AUTH_TOKEN_COOKIE_KEY, response.user.token, {
+            path: "/",
+            domain: window.location.hostname,
+          });
           this.props.history.push("/home");
         }
       });
@@ -371,7 +374,6 @@ const mapStateToProps = (state: AppState) => ({
  */
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  setToken: (token: string) => dispatch(setTokenAction(token)),
   setUserId: (id: number) => dispatch(setUserIdAction(id)),
   addPlanId: (planId: number) => dispatch(addPlanIdAction(planId)),
   setPlanName: (name: string) => dispatch(setPlanNameAction(name)),

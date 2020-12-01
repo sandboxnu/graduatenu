@@ -9,10 +9,6 @@ export const setName = createAction("advisor/SET_NAME", (name: string) => ({
   name,
 }))();
 
-export const setToken = createAction("advisor/SET_TOKEN", (token: string) => ({
-  token,
-}))();
-
 export const setUserId = createAction(
   "advisor/SET_USER_ID",
   (userId: number) => ({

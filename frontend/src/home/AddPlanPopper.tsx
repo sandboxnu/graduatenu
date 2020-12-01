@@ -28,13 +28,13 @@ import {
   getMajorsLoadingFlag,
   getPlansLoadingFlag,
   getSchedulesFromState,
-  getTokenFromState,
   getUserId,
 } from "../state";
 import { addNewSchedule } from "../state/actions/schedulesActions";
 import { ExcelUpload } from "../components/ExcelUpload";
 import { NextButton } from "../components/common/NextButton";
 import { ColoredButton } from "../components/common/ColoredButton";
+import { getAuthToken } from "../utils/auth-helpers";
 
 const EXCEL_TOOLTIP =
   "Auto-populate your schedule with your excel plan of study. Reach out to your advisor if you don't have it!";
@@ -105,7 +105,6 @@ interface Props {
   isFetchingMajors: boolean;
   isFetchingPlans: boolean;
   userSchedules: NamedSchedule[];
-  token?: string;
   userId?: number;
   addNewSchedule: (name: string, newSchedule: ScheduleSlice) => void;
 }
@@ -122,7 +121,6 @@ function AddPlanPopperComponent(props: Props) {
     isFetchingMajors,
     isFetchingPlans,
     userSchedules,
-    token,
     userId,
     addNewSchedule,
   } = props;
@@ -209,7 +207,8 @@ function AddPlanPopperComponent(props: Props) {
 
   const savePlan = () => {
     // If this is true, then a user is currently logged in and we can update their plan
-    if (token && userId) {
+    if (userId) {
+      const token = getAuthToken();
       createPlanForUser(userId, token, {
         name: planName,
         link_sharing_enabled: false,
@@ -428,7 +427,6 @@ const mapStateToProps = (state: AppState) => ({
   isFetchingMajors: getMajorsLoadingFlag(state),
   isFetchingPlans: getPlansLoadingFlag(state),
   userSchedules: getSchedulesFromState(state),
-  token: getTokenFromState(state),
   userId: getUserId(state),
 });
 

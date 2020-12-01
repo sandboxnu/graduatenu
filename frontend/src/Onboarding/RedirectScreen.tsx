@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchUser } from "../services/UserService";
 import {
   setFullNameAction,
-  setTokenAction,
   setUserIdAction,
   setDeclaredMajorAction,
   setUserCoopCycleAction,
@@ -22,6 +21,7 @@ import {
   getIsAdvisorFromState,
 } from "../state";
 import { fetchMajorsAndPlans } from "../utils/fetchMajorsAndPlans";
+import { AUTH_TOKEN_COOKIE_KEY } from "../utils/auth-helpers";
 
 export const RedirectScreen: React.FC = () => {
   const dispatch = useDispatch();
@@ -38,18 +38,18 @@ export const RedirectScreen: React.FC = () => {
   useEffect(() => {
     setIsLoading(true);
     fetchMajorsAndPlans()(dispatch).then(majors => {
-      const cookie = Cookies.get("auth_token");
+      const cookie = Cookies.get(AUTH_TOKEN_COOKIE_KEY);
       if (cookie) {
-        Cookies.remove("auth_token", {
+        Cookies.remove(AUTH_TOKEN_COOKIE_KEY, {
           path: "/redirect",
           domain: window.location.hostname,
         });
         // remove cookie if it already exists
-        Cookies.remove("auth_token", {
+        Cookies.remove(AUTH_TOKEN_COOKIE_KEY, {
           path: "/",
           domain: window.location.hostname,
         });
-        Cookies.set("auth_token", cookie, {
+        Cookies.set(AUTH_TOKEN_COOKIE_KEY, cookie, {
           path: "/",
           domain: window.location.hostname,
         }); // set persisting cookie for all paths
@@ -62,7 +62,6 @@ export const RedirectScreen: React.FC = () => {
           if (maj) {
             dispatch(setDeclaredMajorAction(maj));
           }
-          dispatch(setTokenAction(response.user.token)); // set auth token
           dispatch(setUserIdAction(response.user.id));
           dispatch(setEmailAction(response.user.email));
           dispatch(setUserCoopCycleAction(response.user.coopCycle));
@@ -77,7 +76,7 @@ export const RedirectScreen: React.FC = () => {
     return !graduationYear || !academicYear;
   };
 
-  if (!Cookies.get("auth_token")) {
+  if (!Cookies.get(AUTH_TOKEN_COOKIE_KEY)) {
     return <div>No auth token cookie</div>;
   }
 
@@ -87,6 +86,7 @@ export const RedirectScreen: React.FC = () => {
 
   if (isAdvisor === false) {
     // student
+    console.log("is student");
     if (needsToGoToOnboarding()) {
       return <Redirect to="/onboarding" />;
     } else {

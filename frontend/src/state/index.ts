@@ -19,13 +19,6 @@ import {
  */
 
 /**
- * Get a users JWT token from the AppState
- * @param state the AppState
- */
-export const getTokenFromState = (state: AppState): string | undefined =>
-  state.user.token;
-
-/**
  * Get a users id number from the AppState
  * @param state the AppState
  */
@@ -225,13 +218,6 @@ export const getSchedulesFromState = (state: AppState): NamedSchedule[] =>
  */
 export const getActiveScheduleFromState = (state: AppState): NamedSchedule => {
   return state.schedules.schedules[state.schedules.activeSchedule!];
-};
-
-/**
- * Checks if user is logged in
- */
-export const isUserLoggedIn = (state: AppState): boolean => {
-  return state.user.userId !== undefined && state.user.token !== undefined;
 };
 
 export const getClosedYearsFromState = (state: AppState): Set<number> => {
