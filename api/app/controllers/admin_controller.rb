@@ -89,6 +89,6 @@ class AdminController < ApplicationController
 
   # user data from khoury
   def user_params
-    params.permit(:email, :is_advisor, :major, :first_name, :last_name, :photo_url, :nuid, :courses)
+    params.permit(:email, :is_advisor, :major, :first_name, :last_name, :photo_url, :nu_id)
   end
 end
