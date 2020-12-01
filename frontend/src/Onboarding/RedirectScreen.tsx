@@ -23,7 +23,11 @@ import {
 import { fetchMajorsAndPlans } from "../utils/fetchMajorsAndPlans";
 import { AUTH_TOKEN_COOKIE_KEY } from "../utils/auth-helpers";
 
-export const RedirectScreen: React.FC = () => {
+interface Props {
+  redirectUrl?: string;
+}
+
+export const RedirectScreen: React.FC<Props> = ({ redirectUrl }) => {
   const dispatch = useDispatch();
   const { academicYear, graduationYear, isAdvisor } = useSelector(
     (state: AppState) => ({
@@ -84,9 +88,12 @@ export const RedirectScreen: React.FC = () => {
     return <div>Loading...</div>;
   }
 
+  if (redirectUrl && redirectUrl !== "/redirect") {
+    return <Redirect to={redirectUrl} />;
+  }
+
   if (isAdvisor === false) {
     // student
-    console.log("is student");
     if (needsToGoToOnboarding()) {
       return <Redirect to="/onboarding" />;
     } else {

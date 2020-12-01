@@ -206,28 +206,25 @@ function AddPlanPopperComponent(props: Props) {
   };
 
   const savePlan = () => {
-    // If this is true, then a user is currently logged in and we can update their plan
-    if (userId) {
-      const token = getAuthToken();
-      createPlanForUser(userId, token, {
-        name: planName,
-        link_sharing_enabled: false,
-        schedule: selectedDNDSchedule.current!,
-        major: selectedMajor ? selectedMajor.name : "",
-        coop_cycle: selectedCoopCycle,
-        course_counter: counter.current,
-        warnings: [],
-        course_warnings: [],
-      }).then(plan => {
-        addNewSchedule(plan.plan.name, {
-          ...plan.plan,
-          coop_cycle: plan.plan.coop_cycle,
-          currentClassCounter: plan.plan.courseCounter,
-          isScheduleLoading: false,
-          scheduleError: "",
-        } as ScheduleSlice);
-      });
-    }
+    const token = getAuthToken();
+    createPlanForUser(userId!, token, {
+      name: planName,
+      link_sharing_enabled: false,
+      schedule: selectedDNDSchedule.current!,
+      major: selectedMajor ? selectedMajor.name : "",
+      coop_cycle: selectedCoopCycle,
+      course_counter: counter.current,
+      warnings: [],
+      course_warnings: [],
+    }).then(plan => {
+      addNewSchedule(plan.plan.name, {
+        ...plan.plan,
+        coop_cycle: plan.plan.coop_cycle,
+        currentClassCounter: plan.plan.courseCounter,
+        isScheduleLoading: false,
+        scheduleError: "",
+      } as ScheduleSlice);
+    });
   };
 
   const openModal = (): void => setVisible(true);
