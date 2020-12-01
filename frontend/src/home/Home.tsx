@@ -32,14 +32,13 @@ import {
 import { Sidebar } from "../components/Sidebar";
 import { withToast } from "./toastHook";
 import { AppearanceTypes } from "react-toast-notifications";
-import { withRouter, RouteComponentProps, Link } from "react-router-dom";
+import { withRouter, RouteComponentProps } from "react-router-dom";
 import { connect } from "react-redux";
 import { AppState } from "../state/reducers/state";
 import { Dispatch } from "redux";
 import {
   getScheduleFromState,
   getWarningsFromState,
-  getTokenFromState,
   getUserId,
   getPlanNameFromState,
   getPlanIdsFromState,
@@ -83,7 +82,11 @@ import Loader from "react-loader-spinner";
 import { ExcelUpload } from "../components/ExcelUpload";
 import { SwitchPlanPopper } from "./SwitchPlanPopper";
 import { resetUserAction } from "../state/actions/userActions";
-import Cookies from "universal-cookie";
+import Cookies from "js-cookie";
+import {
+  getAuthToken,
+  removeAuthTokenFromCookies,
+} from "../utils/auth-helpers";
 
 const OuterContainer = styled.div`
   display: flex;
@@ -205,8 +208,6 @@ const ColorButton = withStyles((theme: Theme) => ({
   },
 }))(Button);
 
-const cookies = new Cookies();
-
 interface ToastHomeProps {
   addToast: (message: string, options: any) => void;
   removeToast: (id: string) => void;
@@ -223,7 +224,6 @@ interface ReduxStoreHomeProps {
   major?: string;
   planStr?: string;
   warnings: IWarning[];
-  token?: string;
   userId?: number;
   majors: Major[];
   planIds: number[];
@@ -278,7 +278,8 @@ class HomeComponent extends React.Component<Props, HomeState> {
   componentDidMount() {
     // If this is true, then a user is currently logged in and we can fetch their plan
     if (!this.props.activeSchedule) {
-      findAllPlansForUser(this.props.userId!, this.props.token!).then(
+      const token = getAuthToken();
+      findAllPlansForUser(this.props.userId!, token).then(
         (plans: IPlanData[]) => {
           // Once multiple plans are supported, this can be changed to the last used plan
           let plan: IPlanData = plans[0];
@@ -491,22 +492,18 @@ class HomeComponent extends React.Component<Props, HomeState> {
    */
   async updatePlan() {
     const scheduleData: ScheduleSlice = this.props.getCurrentScheduleData();
-    await updatePlanForUser(
-      this.props.userId!,
-      this.props.token!,
-      this.props.planIds[0],
-      {
-        id: this.props.planIds[0],
-        name: this.props.planName ? this.props.planName : "",
-        link_sharing_enabled: this.props.linkSharing,
-        schedule: this.props.schedule,
-        major: this.props.major ? this.props.major : "",
-        coop_cycle: this.props.planStr ? this.props.planStr : "None",
-        course_counter: scheduleData.currentClassCounter,
-        warnings: scheduleData.warnings,
-        course_warnings: scheduleData.courseWarnings,
-      }
-    ).then(plan => {
+    const token = getAuthToken();
+    await updatePlanForUser(this.props.userId!, token, this.props.planIds[0], {
+      id: this.props.planIds[0],
+      name: this.props.planName ? this.props.planName : "",
+      link_sharing_enabled: this.props.linkSharing,
+      schedule: this.props.schedule,
+      major: this.props.major ? this.props.major : "",
+      coop_cycle: this.props.planStr ? this.props.planStr : "None",
+      course_counter: scheduleData.currentClassCounter,
+      warnings: scheduleData.warnings,
+      course_warnings: scheduleData.courseWarnings,
+    }).then(plan => {
       this.props.updateActiveSchedule({
         ...plan.plan,
         coopCycle: plan.plan.coop_cycle,
@@ -527,7 +524,8 @@ class HomeComponent extends React.Component<Props, HomeState> {
    */
   savePlan() {
     const scheduleData: ScheduleSlice = this.props.getCurrentScheduleData();
-    createPlanForUser(this.props.userId!, this.props.token!, {
+    const token = getAuthToken();
+    createPlanForUser(this.props.userId!, token, {
       name: `Plan ${this.state.planCount + 1}`,
       link_sharing_enabled: this.props.linkSharing,
       schedule: this.props.schedule,
@@ -558,10 +556,7 @@ class HomeComponent extends React.Component<Props, HomeState> {
   logOut = async () => {
     await this.updatePlan();
     this.props.logOut();
-    cookies.remove("auth_token", {
-      path: "/",
-      domain: "." + window.location.hostname,
-    });
+    removeAuthTokenFromCookies();
     this.props.history.push("/");
   };
 
@@ -604,7 +599,6 @@ class HomeComponent extends React.Component<Props, HomeState> {
                   <SwitchPlanPopper
                     userId={this.props.userId}
                     planIds={this.props.planIds}
-                    token={this.props.token}
                   />
                 </HomeButtons>
               </HomeAboveSchedule>
@@ -627,7 +621,6 @@ const mapStateToProps = (state: AppState) => ({
   planStr: getScheduleCoopCycleFromState(state),
   major: getScheduleMajorFromState(state),
   warnings: getWarningsFromState(state),
-  token: getTokenFromState(state),
   userId: getUserId(state),
   majors: getMajors(state),
   planName: getPlanNameFromState(state),

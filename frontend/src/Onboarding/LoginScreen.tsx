@@ -13,7 +13,6 @@ import {
   setMajorPlanAction,
   setAcademicYearAction,
   setGraduationYearAction,
-  setTokenAction,
   setUserIdAction,
   setDeclaredMajorAction,
   setEmailAction,
@@ -24,6 +23,8 @@ import { setSchedules } from "../state/actions/schedulesActions";
 import { loginUser } from "../services/UserService";
 import { findAllPlansForUser } from "../services/PlanService";
 import { findMajorFromName } from "../utils/plan-helpers";
+import { AUTH_TOKEN_COOKIE_KEY } from "../utils/auth-helpers";
+import Cookies from "js-cookie";
 
 const Wrapper = styled.div`
   display: flex;
@@ -67,7 +68,6 @@ interface ReduxStoreLoginScreenProps {
   setGraduationYear: (graduationYear: number) => void;
   setMajorPlan: (major: Major | undefined, planStr: string) => void;
   setUserCoopCycle: (coopCycle: string) => void;
-  setToken: (token: string) => void;
   setUserId: (id: number) => void;
   setSchedules: (schedules: NamedSchedule[]) => void;
   setPlanStr: (planStr: string) => void;
@@ -153,10 +153,13 @@ class LoginScreenComponent extends React.Component<Props, LoginScreenState> {
           this.props.setFullName(response.user.username);
           this.props.setAcademicYear(response.user.academicYear);
           this.props.setGraduationYear(response.user.graduationYear);
-          this.props.setToken(response.user.token);
           this.props.setUserId(response.user.id);
           this.props.setEmail(response.user.email);
           this.props.setUserCoopCycle(response.user.coopCycle);
+          Cookies.set(AUTH_TOKEN_COOKIE_KEY, response.user.token, {
+            path: "/",
+            domain: window.location.hostname,
+          });
           this.props.history.push("/home");
           this.findUserPlans(response);
         }
@@ -316,7 +319,6 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     dispatch(setGraduationYearAction(academicYear)),
   setMajorPlan: (major: Major | undefined, planStr: string) =>
     dispatch(setMajorPlanAction(major, planStr)),
-  setToken: (token: string) => dispatch(setTokenAction(token)),
   setUserId: (id: number) => dispatch(setUserIdAction(id)),
   setSchedules: (schedules: NamedSchedule[]) =>
     dispatch(setSchedules(schedules)),

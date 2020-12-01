@@ -19,14 +19,17 @@ import { IBExamGroups2020To2021 } from "../../../common/ib_exams";
 import { ScheduleSlice } from "../models/types";
 import { createPlanForUser } from "../services/PlanService";
 import {
+  getAcademicYearFromState,
   getDeclaredMajorFromState,
+  getGraduationYearFromState,
   getPlanStrFromState,
   getScheduleDataFromState,
-  getTokenFromState,
   getUserId,
 } from "../state";
 import { AppState } from "../state/reducers/state";
 import { addNewSchedule } from "../state/actions/schedulesActions";
+import { updateUser } from "../services/UserService";
+import { getAuthToken } from "../utils/auth-helpers";
 
 interface TransferableExamGroupComponentProps {
   readonly transferableExamGroup: TransferableExamGroup;
@@ -150,14 +153,16 @@ const TransferableCreditScreen: React.FC = () => {
     planStr,
     getCurrentScheduleData,
     userId,
-    userToken,
+    academicYear,
+    graduationYear,
   } = useSelector(
     (state: AppState) => ({
       major: getDeclaredMajorFromState(state),
       planStr: getPlanStrFromState(state),
       getCurrentScheduleData: () => getScheduleDataFromState(state),
       userId: getUserId(state),
-      userToken: getTokenFromState(state),
+      academicYear: getAcademicYearFromState(state),
+      graduationYear: getGraduationYearFromState(state),
     }),
     shallowEqual
   );
@@ -169,9 +174,24 @@ const TransferableCreditScreen: React.FC = () => {
 
   const onSubmit = (): void => {
     dispatch(setExamCredits(selectedTransferableExams));
+    const token = getAuthToken();
+
+    updateUser(
+      {
+        id: userId!,
+        token: token,
+      },
+      {
+        major: major?.name,
+        academic_year: academicYear,
+        graduation_year: graduationYear,
+        coop_cycle: planStr,
+        // TODO: add completed and transfer courses
+      }
+    );
 
     const scheduleData: ScheduleSlice = getCurrentScheduleData();
-    createPlanForUser(userId!, userToken!, {
+    createPlanForUser(userId!, token, {
       name: "Plan 1",
       link_sharing_enabled: false,
       schedule: scheduleData.schedule,

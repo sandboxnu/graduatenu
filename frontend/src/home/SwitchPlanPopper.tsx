@@ -26,6 +26,7 @@ import Loader from "react-loader-spinner";
 import { deletePlanForUser } from "../services/PlanService";
 import { deletePlanId } from "../state/actions/userActions";
 import { Alert } from "@material-ui/lab";
+import { getAuthToken } from "../utils/auth-helpers";
 
 const SwitchPlanDropdown = styled(Button)`
   display: flex;
@@ -79,7 +80,6 @@ const DropDownText = styled.div`
 interface SwitchSchedulesProps {
   planIds: number[];
   userId?: number;
-  token?: string;
 }
 
 interface ReduxStoreSwitchSchedulesProps {
@@ -159,8 +159,9 @@ export class SwitchPlanPopperComponent extends React.Component<
       this.setState({
         errorSnackbarOpen: true,
       });
-    } else if (this.props.userId && this.props.token) {
-      deletePlanForUser(this.props.userId, planId, this.props.token);
+    } else if (this.props.userId) {
+      const token = getAuthToken();
+      deletePlanForUser(this.props.userId, planId, token);
       this.props.deletePlan(name);
       this.props.deletePlanIdFromUserState(planId);
     }

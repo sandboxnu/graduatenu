@@ -7,7 +7,6 @@ import {
   setFullNameAction,
   setAcademicYearAction,
   setGraduationYearAction,
-  setTokenAction,
   setUserIdAction,
   addPlanIdAction,
   setLinkSharingAction,
@@ -29,7 +28,6 @@ export interface UserState {
   academicYear: number;
   graduationYear: number;
   planIds: number[];
-  token?: string; // if a token and userId are undefined, then no user is logged in
   userId?: number;
 
   // TODO: after plan reducer is made, move these fields
@@ -48,7 +46,6 @@ const initialState: UserState = {
   academicYear: 0,
   graduationYear: 0,
   planIds: [],
-  token: undefined,
   userId: undefined,
   planStr: "",
   planName: "",
@@ -89,10 +86,6 @@ export const userReducer = (
       }
       case getType(setGraduationYearAction): {
         draft.graduationYear = action.payload.graduationYear;
-        return draft;
-      }
-      case getType(setTokenAction): {
-        draft.token = action.payload.token;
         return draft;
       }
       case getType(setUserIdAction): {

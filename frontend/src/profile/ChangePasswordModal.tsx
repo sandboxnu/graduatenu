@@ -4,6 +4,7 @@ import { Modal, TextField } from "@material-ui/core";
 import { PrimaryButton } from "../components/common/PrimaryButton";
 import { IUpdateUserPassword } from "../models/types";
 import { updatePassword } from "../services/UserService";
+import { getAuthToken } from "../utils/auth-helpers";
 
 const OuterContainer = styled.div`
   width: 30%;
@@ -33,7 +34,6 @@ const ButtonContainer = styled.div`
 `;
 
 const changePassword = (
-  token: string,
   oldPassword: string,
   newPassword: string,
   confirmPassword: string,
@@ -45,6 +45,7 @@ const changePassword = (
     new_password: newPassword,
     confirm_password: confirmPassword,
   };
+  const token = getAuthToken();
   updatePassword(token, changePasswordBody).then(response => {
     setError(response.error);
     if (response.error === undefined) {
@@ -118,7 +119,6 @@ export function ChangePasswordModal(props: any) {
             <PrimaryButton
               onClick={() =>
                 changePassword(
-                  props.token,
                   oldPassword,
                   newPassword,
                   confirmPassword,

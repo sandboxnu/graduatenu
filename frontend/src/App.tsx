@@ -6,8 +6,6 @@ import { OnboardingInfoScreen } from "./Onboarding/OnboardingInfoScreen";
 import { CompletedCoursesScreen } from "./Onboarding/CompletedCoursesScreen";
 import { Provider } from "react-redux";
 import { Store } from "redux";
-import { PersistGate } from "redux-persist/integration/react";
-import { Persistor } from "redux-persist";
 import { TransferCoursesScreen } from "./Onboarding/TransferCoursesScreen";
 import { Profile } from "./profile/Profile";
 import { ManageStudents } from "./advising/ManageStudents";
@@ -16,39 +14,39 @@ import { TemplatesPage } from "./advising/Templates";
 import { GenericAdvisingTemplateComponent } from "./advising/GenericAdvisingTemplate";
 import TransferableCreditScreen from "./Onboarding/TransferableCreditScreen";
 import { RedirectScreen } from "./Onboarding/RedirectScreen";
+import { ProtectedRoute } from "./components/Routes/ProtectedRoute";
+import { UnprotectedRoute } from "./components/Routes/UnprotectedRoute";
 
-export const App = ({
-  store,
-  persistor,
-}: {
-  store: Store;
-  persistor: Persistor;
-}) => {
+export const App = ({ store }: { store: Store }) => {
   return (
     <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <Router>
-          <Switch>
-            <Route path="/home" component={HomeWrapper} />
-            <Route path="/redirect" component={RedirectScreen} />
-            <Route path="/onboarding" component={OnboardingInfoScreen} />
-            {/* <Route path="/signup" component={SignupScreen} />		
+      <Router>
+        <Switch>
+          {/* requires login */}
+          <ProtectedRoute path="/home" component={HomeWrapper} />
+          <ProtectedRoute path="/redirect" component={RedirectScreen} />
+          <ProtectedRoute path="/onboarding" component={OnboardingInfoScreen} />
+          <ProtectedRoute path="/profile" component={Profile} />
+          <ProtectedRoute
+            path="/completedCourses"
+            component={CompletedCoursesScreen}
+          />
+          <ProtectedRoute
+            path="/transferCourses"
+            component={TransferCoursesScreen}
+          />
+          <ProtectedRoute
+            path="/transferableCredits"
+            component={TransferableCreditScreen}
+          />
+          <ProtectedRoute path="/advisor" component={AdvisorRouter} />
+
+          {/* requires not logged in */}
+          <UnprotectedRoute path="/" component={Onboarding} />
+          {/* <Route path="/signup" component={SignupScreen} />
              <Route path="/login" component={LoginScreen} /> */}
-            <Route path="/profile" component={Profile} />
-            <Route
-              path="/completedCourses"
-              component={CompletedCoursesScreen}
-            />
-            <Route path="/transferCourses" component={TransferCoursesScreen} />
-            <Route
-              path="/transferableCredits"
-              component={TransferableCreditScreen}
-            />
-            <Route path="/advisor" component={AdvisorRouter} />
-            <Route path="/" component={Onboarding} />
-          </Switch>
-        </Router>
-      </PersistGate>
+        </Switch>
+      </Router>
     </Provider>
   );
 };
