@@ -1,6 +1,5 @@
 import React from "react";
-import { Route, RouteComponentProps } from "react-router-dom";
-import { RedirectScreen } from "../../Onboarding/RedirectScreen";
+import { Redirect, Route, RouteComponentProps } from "react-router-dom";
 import { isLoggedIn } from "../../utils/auth-helpers";
 
 export function ProtectedRoute({
@@ -15,7 +14,6 @@ export function ProtectedRoute({
   if (isLoggedIn()) {
     return <Route path={path} component={component} />;
   } else {
-    return <Route path={path} component={RedirectScreen} />;
-    // TODO: change to <Redirect to="admin site url" /> once khoury implements login
+    return <Redirect to="/" />;
   }
 }
