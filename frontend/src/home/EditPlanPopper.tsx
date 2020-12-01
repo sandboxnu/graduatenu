@@ -10,7 +10,6 @@ import { AppState } from "../state/reducers/state";
 import { Dispatch } from "redux";
 import {
   getScheduleFromState,
-  getPlanStrFromState,
   getScheduleMajorFromState,
   getScheduleCoopCycleFromState,
 } from "../state";
@@ -19,7 +18,7 @@ import {
   setCoopCycle,
   setScheduleMajor,
 } from "../state/actions/scheduleActions";
-import { DNDSchedule, StatusEnum } from "../models/types";
+import { DNDSchedule } from "../models/types";
 import { Major, Schedule } from "../../../common/types";
 import {
   getMajors,

@@ -23,7 +23,7 @@ class UsersController < ApplicationController
         end
     end
 
-    def all_students
+    def students
         # make sure requester is an advisor
         requester = User.find_by_id(@current_user_id)
 
@@ -32,10 +32,30 @@ class UsersController < ApplicationController
             return
         end
 
-        @students = User.where(is_advisor: false)
+        search = nil
+        page = 0
+        if search_params[:search].present?
+            search = search_params[:search].downcase
+        end
+        
+        if search_params[:page].present?
+            page = Integer(search_params[:page])
+        end
+        @next_page = page + 1
+        @last_page = false;
+
+        offset = page * 50
+        @students = User.where(is_advisor: false).limit(50).offset(offset).where('lower(username) LIKE :search OR lower(email) LIKE :search OR nu_id LIKE :search', search: "%#{search}%")
+        if @students.empty?
+            @last_page = true
+        end
     end
 
     private
+
+    def search_params
+        params.permit(:search, :page)
+    end
 
     def user_params
         params.require(:user).permit(:username, :email, :password, :academic_year, :graduation_year, :major, :coop_cycle, :nu_id, :completed_courses, :transfer_courses)

@@ -160,7 +160,7 @@ function AddPlanPopperComponent(props: Props) {
       selectedDNDSchedule.current = namedSchedule!.schedule.present.schedule;
       counter.current = namedSchedule!.schedule.present.currentClassCounter;
     }
-  }, [selectedUserPlan]);
+  }, [selectedUserPlan, userSchedules, allMajors]);
 
   useEffect(() => {
     if (error) {

@@ -10,8 +10,6 @@ import {
 } from "../../../common/types";
 import { setCompletedRequirements } from "../state/actions/scheduleActions";
 import { getDeclaredMajorFromState } from "../state";
-import { setCompletedCourses } from "../state/actions/scheduleActions";
-import { fetchCourse } from "../api";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import {
   CourseText,
