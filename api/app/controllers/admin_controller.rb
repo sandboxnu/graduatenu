@@ -4,8 +4,6 @@ class AdminController < ApplicationController
 
   # log in through khoury
   def admin_hook
-    p '====================================='
-    p user_params[:courses]
     error = false
     # see if user is already in our db
     if User.exists?(email: user_params[:email])
@@ -53,7 +51,7 @@ class AdminController < ApplicationController
     unless @user.update(
       nu_id: user_params[:nu_id],
       is_advisor: user_params[:is_advisor],
-      major: "test123",
+      major: user_params[:major],
       username: user_params[:first_name] + ' ' + user_params[:last_name],
       image_url: user_params[:photo_url],
       courses_transfer: user_params[:courses].select { |a| a['completion'] == 'TRANSFER' },
