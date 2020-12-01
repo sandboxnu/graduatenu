@@ -19,7 +19,9 @@ import { IBExamGroups2020To2021 } from "../../../common/ib_exams";
 import { ScheduleSlice } from "../models/types";
 import { createPlanForUser } from "../services/PlanService";
 import {
+  getAcademicYearFromState,
   getDeclaredMajorFromState,
+  getGraduationYearFromState,
   getPlanStrFromState,
   getScheduleDataFromState,
   getTokenFromState,
@@ -27,6 +29,7 @@ import {
 } from "../state";
 import { AppState } from "../state/reducers/state";
 import { addNewSchedule } from "../state/actions/schedulesActions";
+import { updateUser } from "../services/UserService";
 
 interface TransferableExamGroupComponentProps {
   readonly transferableExamGroup: TransferableExamGroup;
@@ -151,6 +154,8 @@ const TransferableCreditScreen: React.FC = () => {
     getCurrentScheduleData,
     userId,
     userToken,
+    academicYear,
+    graduationYear,
   } = useSelector(
     (state: AppState) => ({
       major: getDeclaredMajorFromState(state),
@@ -158,6 +163,8 @@ const TransferableCreditScreen: React.FC = () => {
       getCurrentScheduleData: () => getScheduleDataFromState(state),
       userId: getUserId(state),
       userToken: getTokenFromState(state),
+      academicYear: getAcademicYearFromState(state),
+      graduationYear: getGraduationYearFromState(state),
     }),
     shallowEqual
   );
@@ -169,6 +176,20 @@ const TransferableCreditScreen: React.FC = () => {
 
   const onSubmit = (): void => {
     dispatch(setExamCredits(selectedTransferableExams));
+
+    updateUser(
+      {
+        id: userId!,
+        token: userToken!,
+      },
+      {
+        major: major?.name,
+        academic_year: academicYear,
+        graduation_year: graduationYear,
+        coop_cycle: planStr,
+        // TODO: add completed and transfer courses
+      }
+    );
 
     const scheduleData: ScheduleSlice = getCurrentScheduleData();
     createPlanForUser(userId!, userToken!, {

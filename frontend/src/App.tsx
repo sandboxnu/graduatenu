@@ -6,8 +6,6 @@ import { OnboardingInfoScreen } from "./Onboarding/OnboardingInfoScreen";
 import { CompletedCoursesScreen } from "./Onboarding/CompletedCoursesScreen";
 import { Provider } from "react-redux";
 import { Store } from "redux";
-import { PersistGate } from "redux-persist/integration/react";
-import { Persistor } from "redux-persist";
 import { TransferCoursesScreen } from "./Onboarding/TransferCoursesScreen";
 import { Profile } from "./profile/Profile";
 import { ManageStudents } from "./advising/ManageStudents";
@@ -17,38 +15,27 @@ import { GenericAdvisingTemplateComponent } from "./advising/GenericAdvisingTemp
 import TransferableCreditScreen from "./Onboarding/TransferableCreditScreen";
 import { RedirectScreen } from "./Onboarding/RedirectScreen";
 
-export const App = ({
-  store,
-  persistor,
-}: {
-  store: Store;
-  persistor: Persistor;
-}) => {
+export const App = ({ store }: { store: Store }) => {
   return (
     <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <Router>
-          <Switch>
-            <Route path="/home" component={HomeWrapper} />
-            <Route path="/redirect" component={RedirectScreen} />
-            <Route path="/onboarding" component={OnboardingInfoScreen} />
-            {/* <Route path="/signup" component={SignupScreen} />		
+      <Router>
+        <Switch>
+          <Route path="/home" component={HomeWrapper} />
+          <Route path="/redirect" component={RedirectScreen} />
+          <Route path="/onboarding" component={OnboardingInfoScreen} />
+          {/* <Route path="/signup" component={SignupScreen} />
              <Route path="/login" component={LoginScreen} /> */}
-            <Route path="/profile" component={Profile} />
-            <Route
-              path="/completedCourses"
-              component={CompletedCoursesScreen}
-            />
-            <Route path="/transferCourses" component={TransferCoursesScreen} />
-            <Route
-              path="/transferableCredits"
-              component={TransferableCreditScreen}
-            />
-            <Route path="/advisor" component={AdvisorRouter} />
-            <Route path="/" component={Onboarding} />
-          </Switch>
-        </Router>
-      </PersistGate>
+          <Route path="/profile" component={Profile} />
+          <Route path="/completedCourses" component={CompletedCoursesScreen} />
+          <Route path="/transferCourses" component={TransferCoursesScreen} />
+          <Route
+            path="/transferableCredits"
+            component={TransferableCreditScreen}
+          />
+          <Route path="/advisor" component={AdvisorRouter} />
+          <Route path="/" component={Onboarding} />
+        </Switch>
+      </Router>
     </Provider>
   );
 };
