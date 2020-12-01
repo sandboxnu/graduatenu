@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { Redirect } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,6 +11,8 @@ import {
   setUserCoopCycleAction,
   setEmailAction,
   setIsAdvisorAction,
+  setGraduationYearAction,
+  setAcademicYearAction,
 } from "../state/actions/userActions";
 import { AppState } from "../state/reducers/state";
 import { findMajorFromName } from "../utils/plan-helpers";
@@ -30,14 +32,21 @@ export const RedirectScreen: React.FC = () => {
       isAdvisor: getIsAdvisorFromState(state),
     })
   );
+  const [isLoading, setIsLoading] = useState(true);
 
   // component did mount
   useEffect(() => {
+    setIsLoading(true);
     fetchMajorsAndPlans()(dispatch).then(majors => {
       const cookie = Cookies.get("auth_token");
       if (cookie) {
         Cookies.remove("auth_token", {
           path: "/redirect",
+          domain: window.location.hostname,
+        });
+        // remove cookie if it already exists
+        Cookies.remove("auth_token", {
+          path: "/",
           domain: window.location.hostname,
         });
         Cookies.set("auth_token", cookie, {
@@ -47,6 +56,8 @@ export const RedirectScreen: React.FC = () => {
 
         fetchUser(cookie).then(response => {
           dispatch(setFullNameAction(response.user.username));
+          dispatch(setGraduationYearAction(response.user.graduationYear));
+          dispatch(setAcademicYearAction(response.user.academicYear));
           const maj = findMajorFromName(response.user.major, majors);
           if (maj) {
             dispatch(setDeclaredMajorAction(maj));
@@ -56,6 +67,7 @@ export const RedirectScreen: React.FC = () => {
           dispatch(setEmailAction(response.user.email));
           dispatch(setUserCoopCycleAction(response.user.coopCycle));
           dispatch(setIsAdvisorAction(response.user.isAdvisor));
+          setIsLoading(false);
         });
       }
     });
@@ -69,7 +81,7 @@ export const RedirectScreen: React.FC = () => {
     return <div>No auth token cookie</div>;
   }
 
-  if (isAdvisor == null || isAdvisor == undefined) {
+  if (isLoading) {
     return <div>Loading...</div>;
   }
 

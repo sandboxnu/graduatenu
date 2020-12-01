@@ -14,26 +14,37 @@ import { TemplatesPage } from "./advising/Templates";
 import { GenericAdvisingTemplateComponent } from "./advising/GenericAdvisingTemplate";
 import TransferableCreditScreen from "./Onboarding/TransferableCreditScreen";
 import { RedirectScreen } from "./Onboarding/RedirectScreen";
+import { ProtectedRoute } from "./components/Routes/ProtectedRoute";
+import { UnprotectedRoute } from "./components/Routes/UnprotectedRoute";
 
 export const App = ({ store }: { store: Store }) => {
   return (
     <Provider store={store}>
       <Router>
         <Switch>
-          <Route path="/home" component={HomeWrapper} />
-          <Route path="/redirect" component={RedirectScreen} />
-          <Route path="/onboarding" component={OnboardingInfoScreen} />
-          {/* <Route path="/signup" component={SignupScreen} />
-             <Route path="/login" component={LoginScreen} /> */}
-          <Route path="/profile" component={Profile} />
-          <Route path="/completedCourses" component={CompletedCoursesScreen} />
-          <Route path="/transferCourses" component={TransferCoursesScreen} />
-          <Route
+          {/* requires login */}
+          <ProtectedRoute path="/home" component={HomeWrapper} />
+          <ProtectedRoute path="/redirect" component={RedirectScreen} />
+          <ProtectedRoute path="/onboarding" component={OnboardingInfoScreen} />
+          <ProtectedRoute path="/profile" component={Profile} />
+          <ProtectedRoute
+            path="/completedCourses"
+            component={CompletedCoursesScreen}
+          />
+          <ProtectedRoute
+            path="/transferCourses"
+            component={TransferCoursesScreen}
+          />
+          <ProtectedRoute
             path="/transferableCredits"
             component={TransferableCreditScreen}
           />
-          <Route path="/advisor" component={AdvisorRouter} />
-          <Route path="/" component={Onboarding} />
+          <ProtectedRoute path="/advisor" component={AdvisorRouter} />
+
+          {/* requires not logged in */}
+          <UnprotectedRoute path="/" component={Onboarding} />
+          {/* <Route path="/signup" component={SignupScreen} />
+             <Route path="/login" component={LoginScreen} /> */}
         </Switch>
       </Router>
     </Provider>

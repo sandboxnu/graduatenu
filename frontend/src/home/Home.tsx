@@ -565,7 +565,6 @@ class HomeComponent extends React.Component<Props, HomeState> {
       path: "/",
       domain: window.location.hostname,
     });
-    console.log(Cookies.get());
     this.props.history.push("/");
   };
 
