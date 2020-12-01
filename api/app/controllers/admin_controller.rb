@@ -4,6 +4,8 @@ class AdminController < ApplicationController
 
   # log in through khoury
   def admin_hook
+    p '====================================='
+    p user_params[:courses]
     error = false
     # see if user is already in our db
     if User.exists?(email: user_params[:email])
@@ -51,9 +53,11 @@ class AdminController < ApplicationController
     unless @user.update(
       nu_id: user_params[:nu_id],
       is_advisor: user_params[:is_advisor],
-      major: user_params[:major],
+      major: "test123",
       username: user_params[:first_name] + ' ' + user_params[:last_name],
       image_url: user_params[:photo_url],
+      courses_transfer: user_params[:courses].select { |a| a['completion'] == 'TRANSFER' },
+      courses_completed: user_params[:courses].select { |a| a['completion'] == 'PASSED' },
       # TODO: do we need to update courses here?
     )
       render json: { errors: @user.errors }, status: :unprocessable_entity
@@ -69,7 +73,8 @@ class AdminController < ApplicationController
       major: user_params[:major],
       username: user_params[:first_name] + ' ' + user_params[:last_name],
       image_url: user_params[:photo_url],
-      completed_courses: [],
+      courses_transfer: user_params[:courses].select { |a| a['completion'] == 'TRANSFER' },
+      courses_completed: user_params[:courses].select { |a| a['completion'] == 'PASSED' },
     )
 
     unless @user.save
@@ -89,6 +94,6 @@ class AdminController < ApplicationController
 
   # user data from khoury
   def user_params
-    params.require(:admin).permit(:email, :is_advisor, :major, :first_name, :last_name, :photo_url, :nu_id)
+    params.require(:admin).permit(:email, :is_advisor, :major, :first_name, :last_name, :photo_url, :nu_id, courses: [:subject, :course_id, :semester, :completion])
   end
 end
