@@ -30,6 +30,7 @@ import { AppState } from "../state/reducers/state";
 import { addNewSchedule } from "../state/actions/schedulesActions";
 import { updateUser } from "../services/UserService";
 import { getAuthToken } from "../utils/auth-helpers";
+import { generateInitialSchedule } from "../utils";
 
 interface TransferableExamGroupComponentProps {
   readonly transferableExamGroup: TransferableExamGroup;
@@ -176,6 +177,7 @@ const TransferableCreditScreen: React.FC = () => {
     dispatch(setExamCredits(selectedTransferableExams));
     const token = getAuthToken();
     const scheduleData: ScheduleSlice = getCurrentScheduleData();
+    const newSchedule = generateInitialSchedule(academicYear, graduationYear)
 
     return new Promise((resolve, reject) => {
       const updateUserPromise = () => updateUser(
@@ -195,7 +197,7 @@ const TransferableCreditScreen: React.FC = () => {
       const createPlanPromise = () => createPlanForUser(userId!, token, {
         name: "Plan 1",
         link_sharing_enabled: false,
-        schedule: scheduleData.schedule,
+        schedule: newSchedule,
         major: major ? major.name : "",
         coop_cycle: planStr ? planStr : "None",
         course_counter: scheduleData.currentClassCounter,

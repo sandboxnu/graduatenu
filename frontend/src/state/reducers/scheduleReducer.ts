@@ -1,10 +1,5 @@
 import { ScheduleCourse, IRequiredCourse } from "../../../../common/types";
-import {
-  DNDSchedule,
-  IWarning,
-  CourseWarning,
-  NamedSchedule,
-} from "../../models/types";
+import { DNDSchedule, IWarning, CourseWarning } from "../../models/types";
 import { mockEmptySchedule } from "../../data/mockData";
 import produce from "immer";
 import { getType } from "typesafe-actions";
@@ -29,7 +24,6 @@ import {
   removeTransferClassAction,
   setCurrentClassCounter,
   incrementCurrentClassCounter,
-  setInitialSchedule,
 } from "../actions/scheduleActions";
 import { setSchedules, addNewSchedule } from "../actions/schedulesActions";
 import {
@@ -42,7 +36,6 @@ import {
   getNextTerm,
   isYearInPast,
   clearSchedule,
-  generateInitialSchedule,
 } from "../../utils";
 import { resetUserAction } from "../actions/userActions";
 import _ from "lodash";
@@ -91,15 +84,6 @@ export const scheduleReducer = (
 ) => {
   return produce(state, draft => {
     switch (action.type) {
-      case getType(setInitialSchedule): {
-        const { name, academicYear, graduationYear } = action.payload;
-        draft.present.schedule = generateInitialSchedule(
-          academicYear,
-          graduationYear,
-          name
-        );
-        return draft;
-      }
       case getType(addClassesAction): {
         const { courses, semester } = action.payload;
         const season = convertTermIdToSeason(semester.termId);

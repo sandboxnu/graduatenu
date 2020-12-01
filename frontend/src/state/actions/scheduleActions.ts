@@ -14,15 +14,6 @@ import {
   IRequiredCourse,
 } from "../../../../common/types";
 
-export const setInitialSchedule = createAction(
-  "schedule/SET_INITIAL_SCHEDULE",
-  (academicYear: number, graduationYear: number, name: string) => ({
-    academicYear,
-    graduationYear,
-    name,
-  })
-)();
-
 export const addClassesAction = createAction(
   "schedule/ADD_CLASSES",
   (courses: ScheduleCourse[], semester: DNDScheduleTerm) => ({

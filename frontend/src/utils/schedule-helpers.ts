@@ -10,8 +10,7 @@ import { Schedule, ScheduleCourse, SeasonWord } from "../../../common/types";
 
 export function generateInitialSchedule(
   academicYear: number,
-  graduationYear: number,
-  name: string
+  graduationYear: number
 ): DNDSchedule {
   const currentCalendarYear = new Date().getFullYear();
   const currentYear =
@@ -71,7 +70,7 @@ export function generateInitialSchedule(
   return {
     years: yearsList,
     yearMap: yearMap,
-    id: name + "01",
+    id: "Plan 1",
   };
 }
 
