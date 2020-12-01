@@ -2,8 +2,9 @@ class UsersController < ApplicationController
     before_action :authenticate_user!
 
     # simply render user information for authenicated user, no additional processing required.
-    def show
-        if @current_user_id == Integer(params[:id])
+    def current
+        if @current_user_id.present?
+            @current_user = User.find(@current_user_id)
             render :show
         else
             render json: { error: "Unauthorized" }, status: :unprocessable_entity
