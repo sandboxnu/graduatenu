@@ -272,7 +272,7 @@ const save = (props: SaveProps) => {
     email: props.email,
     major: props.major != undefined ? props.major.name : "",
     coop_cycle:
-      props.coop != undefined && props.coop != "None Selected"
+      props.coop != undefined && props.coop !== "None Selected"
         ? props.coop
         : "",
   };

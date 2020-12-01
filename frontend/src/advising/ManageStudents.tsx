@@ -1,15 +1,21 @@
-import React, { useState } from "react";
-import { Dispatch } from "redux";
-import { AppState } from "../state/reducers/state";
-import { withRouter, Link } from "react-router-dom";
-import { connect } from "react-redux";
-import { Search } from "../components/common/Search";
+import React, { useState, useEffect } from "react";
+import { withRouter } from "react-router-dom";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
+import { getStudents } from "../services/AdvisorService";
+import { Search } from "../components/common/Search";
+import { AppState } from "../state/reducers/state";
+import { getTokenFromState } from "../state";
+import LinearProgress from "@material-ui/core/LinearProgress";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const Container = styled.div`
   margin-left: 30px;
   margin-right: 30px;
   margin-top: 50px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
 `;
 
 const StudentListScrollContainer = styled.div`
@@ -29,63 +35,151 @@ const StudentListContainer = styled.div`
 `;
 
 const StudentContainer = styled.div`
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: normal;
   font-size: 18px;
   line-height: 21px;
-  padding: 20px;
+  padding: 10px;
 `;
 
-const LIST_OF_STUDENTS = [
-  { name: "Mario Speedwagon", nuid: "12345" },
-  { name: "Petey Cruiser", nuid: "54321" },
-  { name: "Anna Sthesia", nuid: "67890" },
-  { name: "Paul Molive", nuid: "09876" },
-  { name: "Anna Mull", nuid: "510912" },
-  { name: "Gail Forcewind", nuid: "481972" },
-  { name: "Paige Turner", nuid: "512384" },
-  { name: "Bob Frapples", nuid: "123498" },
-  { name: "Walter Melon", nuid: "4123987" },
-];
+const StudentEmailNUIDContainer = styled.div`
+  font-size: 10px;
+  color: gray;
+`;
+
+const Loading = styled.div`
+  font-size: 15px;
+  line-height: 21px;
+  margin-top: 20px;
+  margin-bottom: 5px;
+  margin-left: 30px;
+  margin-right: 30px;
+`;
+
+const EmptyState = styled.div`
+  font-size: 18px;
+  line-height: 21px;
+  padding: 10px;
+`;
+
+const LoadMoreStudents = styled.div`
+  font-size: 10px;
+  line-height: 21px;
+  margin: 10px;
+  color: red;
+  &:hover {
+    text-decoration: underline;
+  }
+  cursor: pointer;
+`;
+
+const NoMoreStudents = styled.div`
+  font-size: 10px;
+  line-height: 21px;
+  margin: 10px;
+  color: red;
+`;
+
+const EMPTY_STUDENT_LIST: StudentProps[] = [];
 
 interface StudentsListProps {
   searchQuery: string;
 }
 
+interface StudentsAPI {
+  students: StudentProps[];
+  nextPage: number;
+  lastPage: boolean;
+}
+
 interface StudentProps {
-  name: string;
-  nuid: string;
+  username: string;
+  nuId: string;
+  email: string;
 }
 
 const ManageStudentsComponent: React.FC = (props: any) => {
   const [searchQuery, setSearchQuery] = useState("");
+
   return (
     <Container>
-      <Search placeholder="Search by name or nuid" onChange={setSearchQuery} />
+      <Search
+        placeholder="Search by name, email, or NUID"
+        onEnter={setSearchQuery}
+      />
       <StudentsList searchQuery={searchQuery} />
     </Container>
   );
 };
 
 const StudentsList = (props: StudentsListProps) => {
+  const [students, setStudents] = useState(EMPTY_STUDENT_LIST);
+  const [isLoading, setIsLoading] = useState(true);
+  const [pageNumber, setPageNumber] = useState(0);
+  const [isLastPage, setIsLastPage] = useState(false);
+  let token = useSelector((state: AppState) => getTokenFromState(state));
+
+  const fetchStudents = (currentStudents: StudentProps[], page: number) => {
+    token = token ? token : "";
+    setIsLoading(true);
+    getStudents(props.searchQuery, page, token)
+      .then((studentsAPI: StudentsAPI) => {
+        setStudents(currentStudents.concat(studentsAPI.students));
+        setPageNumber(studentsAPI.nextPage);
+        setIsLastPage(studentsAPI.lastPage);
+        setIsLoading(false);
+      })
+      .catch(err => console.log(err));
+  };
+
+  useEffect(() => {
+    setStudents(EMPTY_STUDENT_LIST);
+    fetchStudents(EMPTY_STUDENT_LIST, 0);
+  }, [props.searchQuery, token]);
+
   return (
     <StudentListContainer>
+      {isLoading ? (
+        <Loading>
+          <LinearProgress color="secondary" />
+        </Loading>
+      ) : null}
       <StudentListScrollContainer>
-        {LIST_OF_STUDENTS.filter(
-          student =>
-            student.name.includes(props.searchQuery) ||
-            student.nuid.includes(props.searchQuery)
-        ).map(student => (
-          <Student name={student.name} nuid={student.nuid} />
-        ))}
+        {(students === null || students.length == 0) && !isLoading ? (
+          <EmptyState> No students found </EmptyState>
+        ) : (
+          students.map(student => (
+            <Student
+              username={student.username}
+              nuId={student.nuId}
+              email={student.email}
+              key={student.nuId}
+            />
+          ))
+        )}
+        {!isLoading ? (
+          isLastPage ? (
+            <NoMoreStudents>No more students</NoMoreStudents>
+          ) : (
+            <LoadMoreStudents
+              onClick={_ => fetchStudents(students, pageNumber)}
+            >
+              Load more students
+            </LoadMoreStudents>
+          )
+        ) : null}
       </StudentListScrollContainer>
     </StudentListContainer>
   );
 };
 
 const Student = (props: StudentProps) => {
-  return <StudentContainer>{props.name}</StudentContainer>;
+  return (
+    <StudentContainer>
+      {props.username}
+      <StudentEmailNUIDContainer>
+        {props.email + " | " + props.nuId}
+      </StudentEmailNUIDContainer>
+    </StudentContainer>
+  );
 };
 
 export const ManageStudents = withRouter(ManageStudentsComponent);

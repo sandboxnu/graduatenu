@@ -6,7 +6,7 @@ task :seed_users => :environment do
       username: "Alex Grob #{i}",
       academic_year: 3,
       graduation_year: 2022,
-      nu_id: "001234567",
+      nu_id: "001234567#{i}",
       is_advisor: false,
       major: "Computer Science, BSCS",
     )
