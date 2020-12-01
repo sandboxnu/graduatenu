@@ -83,7 +83,7 @@ import Loader from "react-loader-spinner";
 import { ExcelUpload } from "../components/ExcelUpload";
 import { SwitchPlanPopper } from "./SwitchPlanPopper";
 import { resetUserAction } from "../state/actions/userActions";
-import Cookies from "universal-cookie";
+import Cookies from "js-cookie";
 
 const OuterContainer = styled.div`
   display: flex;
@@ -204,8 +204,6 @@ const ColorButton = withStyles((theme: Theme) => ({
     },
   },
 }))(Button);
-
-const cookies = new Cookies();
 
 interface ToastHomeProps {
   addToast: (message: string, options: any) => void;
@@ -558,10 +556,16 @@ class HomeComponent extends React.Component<Props, HomeState> {
   logOut = async () => {
     await this.updatePlan();
     this.props.logOut();
-    cookies.remove("auth_token", {
+    // handle all possible ways browsers save cookies
+    Cookies.remove("auth_token", {
       path: "/",
       domain: "." + window.location.hostname,
     });
+    Cookies.remove("auth_token", {
+      path: "/",
+      domain: window.location.hostname,
+    });
+    console.log(Cookies.get());
     this.props.history.push("/");
   };
 
