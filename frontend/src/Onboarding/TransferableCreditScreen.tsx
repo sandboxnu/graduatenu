@@ -180,8 +180,6 @@ const TransferableCreditScreen: React.FC = () => {
     shallowEqual
   );
 
-  console.log(transferCourses);
-  console.log(completedCourses);
   const dispatch = useDispatch();
   const [selectedTransferableExams, setSelectedTransferableExams] = useState<
     Array<TransferableExam>
@@ -204,7 +202,7 @@ const TransferableCreditScreen: React.FC = () => {
             academic_year: academicYear,
             graduation_year: graduationYear,
             coop_cycle: planStr,
-            // TODO: If Khoury user, we shouldn't update transfer/completed
+            // TODO: Once khoury gives us this info, we shouldn't update transfer/completed if khoury user
             courses_transfer: transferCourses,
             courses_completed: completedCourses,
           }

@@ -62,7 +62,6 @@ export const RedirectScreen: React.FC<Props> = ({ redirectUrl }) => {
           path: "/",
           domain: window.location.hostname,
         }); // set persisting cookie for all paths
-        console.log(cookie);
         fetchUser(cookie)
           .then(response => {
             dispatch(setFullNameAction(response.user.username));
