@@ -82,7 +82,6 @@ import Loader from "react-loader-spinner";
 import { ExcelUpload } from "../components/ExcelUpload";
 import { SwitchPlanPopper } from "./SwitchPlanPopper";
 import { resetUserAction } from "../state/actions/userActions";
-import Cookies from "js-cookie";
 import {
   getAuthToken,
   removeAuthTokenFromCookies,

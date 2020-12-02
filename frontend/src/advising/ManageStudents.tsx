@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
 import { getStudents } from "../services/AdvisorService";
 import { Search } from "../components/common/Search";
-import { AppState } from "../state/reducers/state";
-import { getTokenFromState } from "../state";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import { getAuthToken } from "../utils/auth-helpers";
 
 const Container = styled.div`
   margin-left: 30px;
@@ -115,10 +113,9 @@ const StudentsList = (props: StudentsListProps) => {
   const [isLoading, setIsLoading] = useState(true);
   const [pageNumber, setPageNumber] = useState(0);
   const [isLastPage, setIsLastPage] = useState(false);
-  let token = useSelector((state: AppState) => getTokenFromState(state));
+  const token = getAuthToken();
 
   const fetchStudents = (currentStudents: StudentProps[], page: number) => {
-    token = token ? token : "";
     setIsLoading(true);
     getStudents(props.searchQuery, page, token)
       .then((studentsAPI: StudentsAPI) => {

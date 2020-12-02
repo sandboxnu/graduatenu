@@ -84,7 +84,8 @@ class CompletedCoursesComponent extends Component<Props, State> {
     this.setState({ modalVisible: true });
   }
 
-  onSubmit() {
+  // not actually async, but we need this method to return a Promise
+  async onSubmit() {
     this.props.setCompletedRequirements(this.state.completedRequirements);
   }
 
