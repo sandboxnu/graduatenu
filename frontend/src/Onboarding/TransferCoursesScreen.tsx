@@ -18,29 +18,14 @@ import {
 } from "../state/actions/scheduleActions";
 import styled from "styled-components";
 import { fetchCourse } from "../api";
-import { NextButton } from "../components/common/NextButton";
-import { Link, withRouter, RouteComponentProps } from "react-router-dom";
+import { withRouter, RouteComponentProps } from "react-router-dom";
 import {
   SelectableCourse,
   OnboardingSelectionTemplate,
 } from "./GenericOnboarding";
-import {
-  Link as ButtonLink,
-  Collapse,
-  Grid,
-  Paper,
-  Checkbox,
-} from "@material-ui/core";
+import { Grid, Paper } from "@material-ui/core";
 import { AddClassModal } from "../components/AddClassModal";
 import { AddBlock } from "../components/ClassBlocks/AddBlock";
-
-const MainTitleText = styled.div`
-  font-size: 18px;
-  margin-left: 4px;
-  margin-top: 10px;
-  margin-bottom: 12px;
-  font-weight: 500;
-`;
 
 const TitleText = styled.div`
   font-size: 12px;
@@ -48,41 +33,6 @@ const TitleText = styled.div`
   margin-top: 16px;
   margin-bottom: 8px;
   font-weight: 500;
-`;
-
-const CourseWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-`;
-
-const CourseText = styled.p`
-  font-size: 12px;
-  margin: 1px;
-  font-weight: 400;
-`;
-
-const ScrollWrapper = styled.div`
-  &::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(0, 0, 0, 0.5);
-  }
-  &::-webkit-scrollbar-thumb {
-    background-clip: padding-box;
-    background-color: #c1c1c1;
-    border-color: transparent;
-    border-radius: 9px 8px 8px 9px;
-    border-style: solid;
-    border-width: 3px 3px 3px 4px;
-    box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
-  }
-  &::-webkit-scrollbar {
-    -webkit-appearance: none;
-    width: 16px;
-  }
-  &::-webkit-scrollbar-track:vertical {
-    border-left: 1px solid #e7e7e7;
-    box-shadow: 1px 0 1px 0 #f6f6f6 inset, -1px 0 1px 0 #f6f6f6 inset;
-  }
 `;
 
 /**

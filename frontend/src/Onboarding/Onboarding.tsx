@@ -1,5 +1,4 @@
 import React from "react";
-import Cookies from "universal-cookie";
 import { Redirect } from "react-router-dom";
 import styled from "styled-components";
 import { Button, Theme, withStyles } from "@material-ui/core";
@@ -136,8 +135,6 @@ interface Props {
   fullName: string;
 }
 
-const cookies = new Cookies();
-
 class OnboardingComponent extends React.Component<Props> {
   dev: boolean;
 
@@ -189,10 +186,6 @@ class OnboardingComponent extends React.Component<Props> {
   }
 
   render() {
-    if (cookies.get("auth_token")) {
-      return <Redirect to="/redirect" />;
-    }
-
     return (
       <>
         <Header>
