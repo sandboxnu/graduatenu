@@ -243,8 +243,8 @@ export interface ISimplifiedCourseData {
 export interface ISimplifiedCourseDataAPI {
   subject: string;
   course_id: string;
-  semester: string;
-  completion: string;
+  semester?: string;
+  completion?: string;
 }
 
 /** ------------------------------------------------------------------------
