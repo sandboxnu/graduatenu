@@ -24,7 +24,7 @@ class UsersController < ApplicationController
     end
 
     def students
-        make sure requester is an advisor
+        # make sure requester is an advisor
         requester = User.find_by_id(@current_user_id)
 
         unless requester.is_advisor
@@ -53,7 +53,7 @@ class UsersController < ApplicationController
     
     private
 
-    def search_params
+    def search_paramss
         params.permit(:search, :page)
     end
 

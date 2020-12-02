@@ -13,6 +13,10 @@ import {
   setGraduationYearAction,
   setAcademicYearAction,
 } from "../state/actions/userActions";
+import {
+  setCompletedCourses,
+  setTransferCourses,
+} from "../state/actions/scheduleActions";
 import { AppState } from "../state/reducers/state";
 import { findMajorFromName } from "../utils/plan-helpers";
 import {
@@ -22,6 +26,7 @@ import {
 } from "../state";
 import { fetchMajorsAndPlans } from "../utils/fetchMajorsAndPlans";
 import { AUTH_TOKEN_COOKIE_KEY } from "../utils/auth-helpers";
+import { getScheduleCoursesFromSimplifiedCourseDataAPI } from "../utils/course-helpers";
 
 interface Props {
   redirectUrl?: string;
@@ -57,21 +62,33 @@ export const RedirectScreen: React.FC<Props> = ({ redirectUrl }) => {
           path: "/",
           domain: window.location.hostname,
         }); // set persisting cookie for all paths
-
-        fetchUser(cookie).then(response => {
-          dispatch(setFullNameAction(response.user.username));
-          dispatch(setGraduationYearAction(response.user.graduationYear));
-          dispatch(setAcademicYearAction(response.user.academicYear));
-          const maj = findMajorFromName(response.user.major, majors);
-          if (maj) {
-            dispatch(setDeclaredMajorAction(maj));
-          }
-          dispatch(setUserIdAction(response.user.id));
-          dispatch(setEmailAction(response.user.email));
-          dispatch(setUserCoopCycleAction(response.user.coopCycle));
-          dispatch(setIsAdvisorAction(response.user.isAdvisor));
-          setIsLoading(false);
-        });
+        console.log(cookie);
+        fetchUser(cookie)
+          .then(response => {
+            dispatch(setFullNameAction(response.user.username));
+            dispatch(setGraduationYearAction(response.user.graduationYear));
+            dispatch(setAcademicYearAction(response.user.academicYear));
+            const maj = findMajorFromName(response.user.major, majors);
+            if (maj) {
+              dispatch(setDeclaredMajorAction(maj));
+            }
+            dispatch(setUserIdAction(response.user.id));
+            dispatch(setEmailAction(response.user.email));
+            dispatch(setUserCoopCycleAction(response.user.coopCycle));
+            dispatch(setIsAdvisorAction(response.user.isAdvisor));
+            getScheduleCoursesFromSimplifiedCourseDataAPI(
+              response.user.coursesCompleted
+            ).then(courses => {
+              dispatch(setCompletedCourses(courses));
+            });
+            getScheduleCoursesFromSimplifiedCourseDataAPI(
+              response.user.coursesTransfer
+            ).then(courses => {
+              dispatch(setCompletedCourses(courses));
+            });
+            setIsLoading(false);
+          })
+          .catch(e => console.log(e));
       }
     });
   }, []);

@@ -204,6 +204,7 @@ const TransferableCreditScreen: React.FC = () => {
             academic_year: academicYear,
             graduation_year: graduationYear,
             coop_cycle: planStr,
+            // TODO: If Khoury user, we shouldn't update transfer/completed
             courses_transfer: transferCourses,
             courses_completed: completedCourses,
           }

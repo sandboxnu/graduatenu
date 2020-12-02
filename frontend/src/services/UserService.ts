@@ -71,7 +71,7 @@ export const simulateKhouryLogin = () =>
   fetch(`/api/v1/admin_hook`, {
     method: "POST",
     body: JSON.stringify({
-      email: "arun@northeastern.edu",
+      email: "a.grob@northeastern.edu",
       nu_id: "001234567",
       is_advisor: false,
       major: "Computer Science, BSCS",
@@ -79,8 +79,8 @@ export const simulateKhouryLogin = () =>
       last_name: "Grob",
       courses: [
         {
-          subject: "CY",
-          course_id: "5210",
+          subject: "CS",
+          course_id: "1200",
           semester: "202010",
           completion: "TRANSFER",
         },
