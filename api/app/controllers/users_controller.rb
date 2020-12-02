@@ -50,7 +50,7 @@ class UsersController < ApplicationController
             @last_page = true
         end
     end
-
+    
     private
 
     def search_params
@@ -58,6 +58,9 @@ class UsersController < ApplicationController
     end
 
     def user_params
-        params.require(:user).permit(:username, :email, :password, :academic_year, :graduation_year, :major, :coop_cycle, :nu_id, :completed_courses, :transfer_courses)
+        params.require(:user).permit(:username, :email, :password, 
+        :academic_year, :graduation_year, :major, :coop_cycle, :nu_id, 
+        completed_courses: [:subject, :course_id, :semester, :completion], 
+        transfer_courses: [:subject, :course_id, :semester, :completion])
     end
 end
