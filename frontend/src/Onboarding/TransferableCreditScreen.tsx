@@ -25,11 +25,14 @@ import {
   getPlanStrFromState,
   getScheduleDataFromState,
   getUserId,
+  getCompletedRequirementsFromState,
+  getTransferCoursesFromState,
 } from "../state";
 import { AppState } from "../state/reducers/state";
 import { addNewSchedule } from "../state/actions/schedulesActions";
 import { updateUser } from "../services/UserService";
 import { getAuthToken } from "../utils/auth-helpers";
+import { getSimplifiedCourseData } from "../utils/completed-courses-helpers";
 
 interface TransferableExamGroupComponentProps {
   readonly transferableExamGroup: TransferableExamGroup;
@@ -155,6 +158,8 @@ const TransferableCreditScreen: React.FC = () => {
     userId,
     academicYear,
     graduationYear,
+    transferCourses,
+    completedCourses,
   } = useSelector(
     (state: AppState) => ({
       major: getDeclaredMajorFromState(state),
@@ -163,10 +168,20 @@ const TransferableCreditScreen: React.FC = () => {
       userId: getUserId(state),
       academicYear: getAcademicYearFromState(state),
       graduationYear: getGraduationYearFromState(state),
+      transferCourses: getSimplifiedCourseData(
+        getTransferCoursesFromState(state),
+        "TRANSFER"
+      ),
+      completedCourses: getSimplifiedCourseData(
+        getCompletedRequirementsFromState(state),
+        "PASSED"
+      ),
     }),
     shallowEqual
   );
 
+  console.log(transferCourses);
+  console.log(completedCourses);
   const dispatch = useDispatch();
   const [selectedTransferableExams, setSelectedTransferableExams] = useState<
     Array<TransferableExam>
@@ -178,38 +193,43 @@ const TransferableCreditScreen: React.FC = () => {
     const scheduleData: ScheduleSlice = getCurrentScheduleData();
 
     return new Promise((resolve, reject) => {
-      const updateUserPromise = () => updateUser(
-        {
-          id: userId!,
-          token: token,
-        },
-        {
-          major: major?.name,
-          academic_year: academicYear,
-          graduation_year: graduationYear,
-          coop_cycle: planStr,
-          // TODO: add completed and transfer courses
-        }
+      const updateUserPromise = () =>
+        updateUser(
+          {
+            id: userId!,
+            token: token,
+          },
+          {
+            major: major ? major.name : "",
+            academic_year: academicYear,
+            graduation_year: graduationYear,
+            coop_cycle: planStr,
+            courses_transfer: transferCourses,
+            courses_completed: completedCourses,
+          }
+        );
+
+      const createPlanPromise = () =>
+        createPlanForUser(userId!, token, {
+          name: "Plan 1",
+          link_sharing_enabled: false,
+          schedule: scheduleData.schedule,
+          major: major ? major.name : "",
+          coop_cycle: planStr ? planStr : "None",
+          course_counter: scheduleData.currentClassCounter,
+          warnings: scheduleData.warnings,
+          course_warnings: scheduleData.courseWarnings,
+        }).then(plan => {
+          dispatch(addNewSchedule(plan.plan.name, plan.plan as ScheduleSlice));
+          dispatch(addPlanIdAction(plan.plan.id));
+          dispatch(setPlanNameAction(plan.plan.name));
+          dispatch(setLinkSharingAction(plan.plan.link_sharing_enabled));
+        });
+
+      Promise.all([updateUserPromise(), createPlanPromise()]).then(() =>
+        resolve()
       );
-
-      const createPlanPromise = () => createPlanForUser(userId!, token, {
-        name: "Plan 1",
-        link_sharing_enabled: false,
-        schedule: scheduleData.schedule,
-        major: major ? major.name : "",
-        coop_cycle: planStr ? planStr : "None",
-        course_counter: scheduleData.currentClassCounter,
-        warnings: scheduleData.warnings,
-        course_warnings: scheduleData.courseWarnings,
-      }).then(plan => {
-        dispatch(addNewSchedule(plan.plan.name, plan.plan as ScheduleSlice));
-        dispatch(addPlanIdAction(plan.plan.id));
-        dispatch(setPlanNameAction(plan.plan.name));
-        dispatch(setLinkSharingAction(plan.plan.link_sharing_enabled));
-      });
-
-      Promise.all([updateUserPromise(), createPlanPromise()]).then(() => resolve())
-    })
+    });
   };
 
   return (
