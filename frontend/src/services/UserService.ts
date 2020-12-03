@@ -3,11 +3,10 @@ import {
   IUpdateUser,
   IUpdateUserData,
   IUpdateUserPassword,
-  IUserData,
 } from "../models/types";
 
 // unused right now as Khoury auth is being used
-export const registerUser = (user: IUserData) =>
+export const registerUser = (user: IUpdateUserData) =>
   fetch(`/api/users`, {
     method: "POST",
     body: JSON.stringify({ user: user }),

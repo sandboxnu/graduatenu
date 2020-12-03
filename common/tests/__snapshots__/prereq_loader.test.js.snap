@@ -2,7 +2,6 @@
 
 exports[`Ensures that scraper correctly add pre-reqs for major no. 0's plans of study 1`] = `
 Object {
-  "id": "0",
   "yearMap": Object {
     "1000": Object {
       "fall": Object {
@@ -917,7 +916,6 @@ Object {
 
 exports[`Ensures that scraper correctly add pre-reqs for major no. 0's plans of study 2`] = `
 Object {
-  "id": "1",
   "yearMap": Object {
     "1000": Object {
       "fall": Object {
@@ -1868,7 +1866,6 @@ Object {
 
 exports[`Ensures that scraper correctly add pre-reqs for major no. 1's plans of study 1`] = `
 Object {
-  "id": "0",
   "yearMap": Object {
     "1000": Object {
       "fall": Object {
@@ -2893,7 +2890,6 @@ Object {
 
 exports[`Ensures that scraper correctly add pre-reqs for major no. 1's plans of study 2`] = `
 Object {
-  "id": "1",
   "yearMap": Object {
     "1000": Object {
       "fall": Object {
@@ -3949,7 +3945,6 @@ Object {
 
 exports[`Ensures that scraper correctly add pre-reqs for major no. 2's plans of study 1`] = `
 Object {
-  "id": "0",
   "yearMap": Object {
     "1000": Object {
       "fall": Object {
@@ -4720,7 +4715,6 @@ Object {
 
 exports[`Ensures that scraper correctly add pre-reqs for major no. 2's plans of study 2`] = `
 Object {
-  "id": "1",
   "yearMap": Object {
     "1000": Object {
       "fall": Object {
@@ -5540,7 +5534,6 @@ Object {
 
 exports[`Ensures that scraper correctly add pre-reqs for major no. 2's plans of study 3`] = `
 Object {
-  "id": "2",
   "yearMap": Object {
     "1000": Object {
       "fall": Object {
@@ -6360,7 +6353,6 @@ Object {
 
 exports[`Ensures that scraper correctly add pre-reqs for major no. 3's plans of study 1`] = `
 Object {
-  "id": "0",
   "yearMap": Object {
     "1000": Object {
       "fall": Object {
@@ -7193,7 +7185,6 @@ Object {
 
 exports[`Ensures that scraper correctly add pre-reqs for major no. 3's plans of study 2`] = `
 Object {
-  "id": "1",
   "yearMap": Object {
     "1000": Object {
       "fall": Object {
@@ -8062,7 +8053,6 @@ Object {
 
 exports[`Ensures that scraper correctly add pre-reqs for major no. 5's plans of study 1`] = `
 Object {
-  "id": "0",
   "yearMap": Object {
     "1000": Object {
       "fall": Object {
@@ -8855,7 +8845,6 @@ Object {
 
 exports[`Ensures that scraper correctly add pre-reqs for major no. 5's plans of study 2`] = `
 Object {
-  "id": "1",
   "yearMap": Object {
     "1000": Object {
       "fall": Object {
@@ -9684,7 +9673,6 @@ Object {
 
 exports[`Ensures that scraper correctly add pre-reqs for major no. 6's plans of study 1`] = `
 Object {
-  "id": "0",
   "yearMap": Object {
     "1000": Object {
       "fall": Object {
@@ -10595,7 +10583,6 @@ Object {
 
 exports[`Ensures that scraper correctly add pre-reqs for major no. 6's plans of study 2`] = `
 Object {
-  "id": "1",
   "yearMap": Object {
     "1000": Object {
       "fall": Object {
@@ -11543,7 +11530,6 @@ Object {
 
 exports[`Ensures that scraper correctly add pre-reqs for major no. 7's plans of study 1`] = `
 Object {
-  "id": "0",
   "yearMap": Object {
     "1000": Object {
       "fall": Object {
@@ -12477,7 +12463,6 @@ Object {
 
 exports[`Ensures that scraper correctly add pre-reqs for major no. 7's plans of study 2`] = `
 Object {
-  "id": "1",
   "yearMap": Object {
     "1000": Object {
       "fall": Object {
@@ -13447,7 +13432,6 @@ Object {
 
 exports[`Ensures that scraper correctly add pre-reqs for major no. 7's plans of study 3`] = `
 Object {
-  "id": "2",
   "yearMap": Object {
     "1000": Object {
       "fall": Object {
@@ -14417,7 +14401,6 @@ Object {
 
 exports[`Ensures that scraper correctly add pre-reqs for major no. 8's plans of study 1`] = `
 Object {
-  "id": "0",
   "yearMap": Object {
     "1000": Object {
       "fall": Object {
@@ -15163,7 +15146,6 @@ Object {
 
 exports[`Ensures that scraper correctly add pre-reqs for major no. 8's plans of study 2`] = `
 Object {
-  "id": "1",
   "yearMap": Object {
     "1000": Object {
       "fall": Object {
@@ -15873,7 +15855,6 @@ Object {
 
 exports[`Ensures that scraper correctly add pre-reqs for major no. 9's plans of study 1`] = `
 Object {
-  "id": "0",
   "yearMap": Object {
     "1000": Object {
       "fall": Object {
@@ -16573,7 +16554,6 @@ Object {
 
 exports[`Ensures that scraper correctly add pre-reqs for major no. 9's plans of study 2`] = `
 Object {
-  "id": "1",
   "yearMap": Object {
     "1000": Object {
       "fall": Object {
@@ -17309,7 +17289,6 @@ Object {
 
 exports[`Ensures that scraper correctly add pre-reqs for major no. 10's plans of study 1`] = `
 Object {
-  "id": "0",
   "yearMap": Object {
     "1000": Object {
       "fall": Object {
@@ -18142,7 +18121,6 @@ Object {
 
 exports[`Ensures that scraper correctly add pre-reqs for major no. 10's plans of study 2`] = `
 Object {
-  "id": "1",
   "yearMap": Object {
     "1000": Object {
       "fall": Object {
@@ -19001,7 +18979,6 @@ Object {
 
 exports[`Ensures that scraper correctly add pre-reqs for major no. 11's plans of study 1`] = `
 Object {
-  "id": "0",
   "yearMap": Object {
     "1000": Object {
       "fall": Object {
@@ -19878,7 +19855,6 @@ Object {
 
 exports[`Ensures that scraper correctly add pre-reqs for major no. 11's plans of study 2`] = `
 Object {
-  "id": "1",
   "yearMap": Object {
     "1000": Object {
       "fall": Object {
@@ -20759,7 +20735,6 @@ Object {
 
 exports[`Ensures that scraper correctly add pre-reqs for major no. 12's plans of study 1`] = `
 Object {
-  "id": "0",
   "yearMap": Object {
     "1000": Object {
       "fall": Object {
@@ -21524,7 +21499,6 @@ Object {
 
 exports[`Ensures that scraper correctly add pre-reqs for major no. 12's plans of study 2`] = `
 Object {
-  "id": "1",
   "yearMap": Object {
     "1000": Object {
       "fall": Object {
@@ -22312,7 +22286,6 @@ Object {
 
 exports[`Ensures that scraper correctly add pre-reqs for major no. 14's plans of study 1`] = `
 Object {
-  "id": "0",
   "yearMap": Object {
     "1000": Object {
       "fall": Object {
@@ -23282,7 +23255,6 @@ Object {
 
 exports[`Ensures that scraper correctly add pre-reqs for major no. 14's plans of study 2`] = `
 Object {
-  "id": "1",
   "yearMap": Object {
     "1000": Object {
       "fall": Object {
@@ -24288,7 +24260,6 @@ Object {
 
 exports[`Ensures that scraper correctly add pre-reqs for major no. 15's plans of study 1`] = `
 Object {
-  "id": "0",
   "yearMap": Object {
     "1000": Object {
       "fall": Object {
@@ -25500,7 +25471,6 @@ Object {
 
 exports[`Ensures that scraper correctly add pre-reqs for major no. 15's plans of study 2`] = `
 Object {
-  "id": "1",
   "yearMap": Object {
     "1000": Object {
       "fall": Object {
@@ -26712,7 +26682,6 @@ Object {
 
 exports[`Ensures that scraper correctly add pre-reqs for major no. 15's plans of study 3`] = `
 Object {
-  "id": "2",
   "yearMap": Object {
     "1000": Object {
       "fall": Object {
@@ -27960,7 +27929,6 @@ Object {
 
 exports[`Ensures that scraper correctly add pre-reqs for major no. 15's plans of study 4`] = `
 Object {
-  "id": "3",
   "yearMap": Object {
     "1000": Object {
       "fall": Object {
@@ -29208,7 +29176,6 @@ Object {
 
 exports[`Ensures that scraper correctly add pre-reqs for major no. 16's plans of study 1`] = `
 Object {
-  "id": "0",
   "yearMap": Object {
     "1000": Object {
       "fall": Object {
@@ -30015,7 +29982,6 @@ Object {
 
 exports[`Ensures that scraper correctly add pre-reqs for major no. 16's plans of study 2`] = `
 Object {
-  "id": "1",
   "yearMap": Object {
     "1000": Object {
       "fall": Object {

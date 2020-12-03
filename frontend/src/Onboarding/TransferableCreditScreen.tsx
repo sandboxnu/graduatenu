@@ -3,10 +3,7 @@ import React, { useState } from "react";
 import { useDispatch, shallowEqual, useSelector } from "react-redux";
 import { TransferableExam, TransferableExamGroup } from "../../../common/types";
 import {
-  addPlanIdAction,
-  setExamCredits,
-  setLinkSharingAction,
-  setPlanNameAction,
+  setExamCreditsAction,
 } from "../state/actions/userActions";
 import {
   MainTitleText,
@@ -20,16 +17,17 @@ import { ScheduleSlice } from "../models/types";
 import { createPlanForUser } from "../services/PlanService";
 import {
   getAcademicYearFromState,
-  getDeclaredMajorFromState,
+  getUserMajorFromState,
   getGraduationYearFromState,
-  getPlanStrFromState,
-  getScheduleDataFromState,
-  getUserId,
+  getUserIdFromState,
+  getUserCoopCycleFromState,
+  getCompletedCoursesFromState,
 } from "../state";
 import { AppState } from "../state/reducers/state";
-import { addNewSchedule } from "../state/actions/schedulesActions";
+import { addNewPlanAction } from "../state/actions/userPlansActions";
 import { updateUser } from "../services/UserService";
 import { getAuthToken } from "../utils/auth-helpers";
+import { generateInitialSchedule } from "../utils";
 
 interface TransferableExamGroupComponentProps {
   readonly transferableExamGroup: TransferableExamGroup;
@@ -149,20 +147,20 @@ const TransferableExamGroupsComponent: React.FC<
 
 const TransferableCreditScreen: React.FC = () => {
   const {
-    major,
-    planStr,
-    getCurrentScheduleData,
     userId,
+    major,
     academicYear,
     graduationYear,
+    coopCycle,
+    completedCourses,
   } = useSelector(
     (state: AppState) => ({
-      major: getDeclaredMajorFromState(state),
-      planStr: getPlanStrFromState(state),
-      getCurrentScheduleData: () => getScheduleDataFromState(state),
-      userId: getUserId(state),
-      academicYear: getAcademicYearFromState(state),
-      graduationYear: getGraduationYearFromState(state),
+      userId: getUserIdFromState(state),
+      major: getUserMajorFromState(state),
+      academicYear: getAcademicYearFromState(state)!,
+      graduationYear: getGraduationYearFromState(state)!,
+      coopCycle: getUserCoopCycleFromState(state),
+      completedCourses: getCompletedCoursesFromState(state),
     }),
     shallowEqual
   );
@@ -173,9 +171,8 @@ const TransferableCreditScreen: React.FC = () => {
   >([]);
 
   const onSubmit = (): Promise<void> => {
-    dispatch(setExamCredits(selectedTransferableExams));
+    dispatch(setExamCreditsAction(selectedTransferableExams));
     const token = getAuthToken();
-    const scheduleData: ScheduleSlice = getCurrentScheduleData();
 
     return new Promise((resolve, reject) => {
       const updateUserPromise = () => updateUser(
@@ -187,26 +184,24 @@ const TransferableCreditScreen: React.FC = () => {
           major: major?.name,
           academic_year: academicYear,
           graduation_year: graduationYear,
-          coop_cycle: planStr,
+          coop_cycle: coopCycle,
           // TODO: add completed and transfer courses
         }
       );
 
-      const createPlanPromise = () => createPlanForUser(userId!, token, {
+      const createPlanPromise = () => {
+        const [schedule, courseCounter] = generateInitialSchedule(academicYear, graduationYear, completedCourses);
+        createPlanForUser(userId!, token, {
         name: "Plan 1",
         link_sharing_enabled: false,
-        schedule: scheduleData.schedule,
+        schedule: schedule,
         major: major ? major.name : "",
-        coop_cycle: planStr ? planStr : "None",
-        course_counter: scheduleData.currentClassCounter,
-        warnings: scheduleData.warnings,
-        course_warnings: scheduleData.courseWarnings,
-      }).then(plan => {
-        dispatch(addNewSchedule(plan.plan.name, plan.plan as ScheduleSlice));
-        dispatch(addPlanIdAction(plan.plan.id));
-        dispatch(setPlanNameAction(plan.plan.name));
-        dispatch(setLinkSharingAction(plan.plan.link_sharing_enabled));
+        coop_cycle: coopCycle ? coopCycle : "None",
+        course_counter: courseCounter,
+      }).then(response => {
+        dispatch(addNewPlanAction(response.plan, academicYear));
       });
+    }
 
       Promise.all([updateUserPromise(), createPlanPromise()]).then(() => resolve())
     })

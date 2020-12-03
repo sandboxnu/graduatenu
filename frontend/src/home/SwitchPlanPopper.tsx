@@ -15,16 +15,18 @@ import styled from "styled-components";
 import { connect } from "react-redux";
 import { AppState } from "../state/reducers/state";
 import { Dispatch } from "redux";
-import { getSchedulesFromState, getActiveScheduleFromState } from "../state";
+import {
+  getAcademicYearFromState,
+  getActivePlanFromState,
+  getUserPlansFromState,
+} from "../state";
 import {
   deletePlan,
-  setActiveScheduleAction,
-} from "../state/actions/schedulesActions";
-import { setNamedSchedule } from "../state/actions/scheduleActions";
-import { NamedSchedule } from "../models/types";
+  setActivePlanAction,
+} from "../state/actions/userPlansActions";
+import { IPlanData, NamedSchedule } from "../models/types";
 import Loader from "react-loader-spinner";
 import { deletePlanForUser } from "../services/PlanService";
-import { deletePlanId } from "../state/actions/userActions";
 import { Alert } from "@material-ui/lab";
 import { getAuthToken } from "../utils/auth-helpers";
 
@@ -78,20 +80,18 @@ const DropDownText = styled.div`
 `;
 
 interface SwitchSchedulesProps {
-  planIds: number[];
   userId?: number;
 }
 
 interface ReduxStoreSwitchSchedulesProps {
-  activeSchedule: NamedSchedule;
-  schedules: NamedSchedule[];
+  activePlan: IPlanData;
+  plans: IPlanData[];
+  academicYear: number;
 }
 
 interface ReduxDispatchSwitchSchedulesProps {
-  setActiveSchedule: (activeSchedule: string) => void;
-  setNamedSchedule: (newSchedule: NamedSchedule) => void;
+  setActivePlan: (activePlan: string, academicYear: number) => void;
   deletePlan: (name: string) => void;
-  deletePlanIdFromUserState: (planId: number) => void;
 }
 
 type Props = SwitchSchedulesProps &
@@ -135,10 +135,10 @@ export class SwitchPlanPopperComponent extends React.Component<
    * Updates this user's active schedule based on the schedule selected in the dropdown.
    */
   onChoosePlan(value: string) {
-    const newSchedule = this.props.schedules.find(s => s.name === value);
+    const newSchedule = this.props.plans.find(s => s.name === value);
     if (newSchedule) {
       const newActive = newSchedule.name;
-      this.props.setActiveSchedule(newActive);
+      this.props.setActivePlan(newActive, this.props.academicYear);
       this.setState({
         anchorEl: null,
       });
@@ -155,7 +155,7 @@ export class SwitchPlanPopperComponent extends React.Component<
   }
 
   handleDelete(planId: number, name: string) {
-    if (this.props.schedules.length < 2) {
+    if (this.props.plans.length < 2) {
       this.setState({
         errorSnackbarOpen: true,
       });
@@ -163,7 +163,6 @@ export class SwitchPlanPopperComponent extends React.Component<
       const token = getAuthToken();
       deletePlanForUser(this.props.userId, planId, token);
       this.props.deletePlan(name);
-      this.props.deletePlanIdFromUserState(planId);
     }
   }
 
@@ -173,25 +172,15 @@ export class SwitchPlanPopperComponent extends React.Component<
     });
   }
 
-  componentDidUpdate(prevProps: Props) {
-    if (
-      this.props.activeSchedule &&
-      prevProps.activeSchedule &&
-      this.props.activeSchedule.name !== prevProps.activeSchedule.name
-    ) {
-      this.props.setNamedSchedule(this.props.activeSchedule);
-    }
-  }
-
   render() {
-    return this.props.activeSchedule ? (
+    return this.props.activePlan ? (
       <div>
         <SwitchPlanDropdown
           variant="outlined"
           onClick={event => this.handleClick(event)}
         >
           <SelectPlanContainer>
-            <DropDownText>{`${this.props.activeSchedule.name}`}</DropDownText>
+            <DropDownText>{`${this.props.activePlan.name}`}</DropDownText>
             <ButtonContainer>
               {Boolean(this.state.anchorEl) ? (
                 <KeyboardArrowUpIcon />
@@ -211,17 +200,17 @@ export class SwitchPlanPopperComponent extends React.Component<
             horizontal: "left",
           }}
         >
-          {this.props.schedules.map(s => (
-            <MenuItem key={s.name}>
+          {this.props.plans.map(plan => (
+            <MenuItem key={plan.name}>
               <SelectPlanContainer>
-                <PlanText onClick={() => this.onChoosePlan(s.name)}>
-                  {s.name}
+                <PlanText onClick={() => this.onChoosePlan(plan.name)}>
+                  {plan.name}
                 </PlanText>
                 <ButtonContainer>
                   <IconButton
                     style={{ padding: "6px" }}
                     onClick={() => {
-                      this.handleDelete(s.schedule.present.id!, s.name);
+                      this.handleDelete(plan.id, plan.name);
                     }}
                   >
                     <DeleteIcon />
@@ -258,17 +247,15 @@ export class SwitchPlanPopperComponent extends React.Component<
 }
 
 const mapStateToProps = (state: AppState) => ({
-  schedules: getSchedulesFromState(state),
-  activeSchedule: getActiveScheduleFromState(state),
+  plans: getUserPlansFromState(state),
+  activePlan: getActivePlanFromState(state)!, // SwitchPlanPopper is only visible if there is an active plan
+  academicYear: getAcademicYearFromState(state)!,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  setActiveSchedule: (activeSchedule: string) =>
-    dispatch(setActiveScheduleAction(activeSchedule)),
-  setNamedSchedule: (newSchedule: NamedSchedule) =>
-    dispatch(setNamedSchedule(newSchedule)),
+  setActivePlan: (activePlan: string, academicYear: number) =>
+    dispatch(setActivePlanAction(activePlan, academicYear)),
   deletePlan: (name: string) => dispatch(deletePlan(name)),
-  deletePlanIdFromUserState: (planId: number) => dispatch(deletePlanId(planId)),
 });
 
 export const SwitchPlanPopper = connect<
