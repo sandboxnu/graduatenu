@@ -489,7 +489,7 @@ class HomeComponent extends React.Component<Props, HomeState> {
    * Only supports updating a user's singular plan, can be modified later to
    * update a specific plan.
    */
-  async updatePlan() {
+  async updatePlan(showAlert = true) {
     const scheduleData: ScheduleSlice = this.props.getCurrentScheduleData();
     const token = getAuthToken();
     await updatePlanForUser(this.props.userId!, token, this.props.planIds[0], {
@@ -510,9 +510,9 @@ class HomeComponent extends React.Component<Props, HomeState> {
         isScheduleLoading: false,
         scheduleError: "",
       } as ScheduleSlice);
-      alert(
-        "Your plan has been updated and you have been logged out. You will be redirected to the welcome screen."
-      );
+      if (showAlert) {
+        alert("Your plan has been updated successfully.");
+      }
     });
   }
 
@@ -553,9 +553,13 @@ class HomeComponent extends React.Component<Props, HomeState> {
   }
 
   logOut = async () => {
-    await this.updatePlan();
+    await this.updatePlan(false);
     this.props.logOut();
     removeAuthTokenFromCookies();
+
+    alert(
+      "Your plan has been updated and you have been logged out. You will be redirected to the welcome screen."
+    );
     this.props.history.push("/");
   };
 
