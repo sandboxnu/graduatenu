@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-import { mockEmptySchedule } from "../data/mockData";
 import CloseIcon from "@material-ui/icons/Close";
 import styled from "styled-components";
 import {
@@ -10,27 +9,35 @@ import {
   Select,
   MenuItem,
 } from "@material-ui/core";
-import { DNDSchedule, NamedSchedule, ScheduleSlice } from "../models/types";
+import { DNDSchedule, IPlanData } from "../models/types";
 import { Autocomplete } from "@material-ui/lab";
 import { IconButton } from "@material-ui/core";
 import { connect } from "react-redux";
 import { AppState } from "../state/reducers/state";
 import { Dispatch } from "redux";
-import { Major, Schedule } from "../../../common/types";
+import { Major, Schedule, ScheduleCourse } from "../../../common/types";
 import { findMajorFromName } from "../utils/plan-helpers";
 import { addPrereqsToSchedule } from "../../../common/prereq_loader";
 import Loader from "react-loader-spinner";
 import { createPlanForUser } from "../services/PlanService";
-import { convertToDNDSchedule, planToString, clearSchedule } from "../utils";
 import {
-  getMajors,
-  getPlans,
-  getMajorsLoadingFlag,
-  getPlansLoadingFlag,
-  getSchedulesFromState,
-  getUserId,
+  convertToDNDSchedule,
+  planToString,
+  clearSchedule,
+  generateInitialSchedule,
+} from "../utils";
+import {
+  getMajorsFromState,
+  getPlansFromState,
+  getMajorsLoadingFlagFromState,
+  getPlansLoadingFlagFromState,
+  getUserIdFromState,
+  getUserPlansFromState,
+  getAcademicYearFromState,
+  getGraduationYearFromState,
+  getCompletedCoursesFromState,
 } from "../state";
-import { addNewSchedule } from "../state/actions/schedulesActions";
+import { addNewPlanAction } from "../state/actions/userPlansActions";
 import { ExcelUpload } from "../components/ExcelUpload";
 import { NextButton } from "../components/common/NextButton";
 import { ColoredButton } from "../components/common/ColoredButton";
@@ -104,9 +111,12 @@ interface Props {
   allPlans: Record<string, Schedule[]>;
   isFetchingMajors: boolean;
   isFetchingPlans: boolean;
-  userSchedules: NamedSchedule[];
+  userPlans: IPlanData[];
   userId?: number;
-  addNewSchedule: (name: string, newSchedule: ScheduleSlice) => void;
+  addNewPlan: (plan: IPlanData, academicYear: number) => void;
+  academicYear: number;
+  graduationYear: number;
+  completedCourses: ScheduleCourse[];
 }
 
 /**
@@ -120,9 +130,9 @@ function AddPlanPopperComponent(props: Props) {
     allPlans,
     isFetchingMajors,
     isFetchingPlans,
-    userSchedules,
+    userPlans,
     userId,
-    addNewSchedule,
+    addNewPlan,
   } = props;
   const [visible, setVisible] = useState(false);
   const [planName, setPlanName] = useState("");
@@ -136,7 +146,7 @@ function AddPlanPopperComponent(props: Props) {
   let selectedDNDSchedule = useRef<DNDSchedule | undefined>(undefined);
   let counter = useRef(0);
 
-  const scheduleNames = userSchedules.map(schedule => schedule.name);
+  const scheduleNames = userPlans.map(plan => plan.name);
 
   const setSchedule = async (schedule: Schedule) => {
     let preReqSched = await addPrereqsToSchedule(schedule);
@@ -148,17 +158,15 @@ function AddPlanPopperComponent(props: Props) {
 
   useEffect(() => {
     if (selectedUserPlan) {
-      const namedSchedule = userSchedules.find(
+      const plan = userPlans.find(
         schedule => schedule.name === selectedUserPlan
-      );
-      setSelectedMajor(
-        findMajorFromName(namedSchedule!.schedule.present.major, allMajors)
-      );
-      setSelectedCoopCycle(namedSchedule!.schedule.present.coopCycle || "");
-      selectedDNDSchedule.current = namedSchedule!.schedule.present.schedule;
-      counter.current = namedSchedule!.schedule.present.currentClassCounter;
+      )!;
+      setSelectedMajor(findMajorFromName(plan.major, allMajors));
+      setSelectedCoopCycle(plan.coopCycle || "");
+      selectedDNDSchedule.current = plan.schedule;
+      counter.current = plan.courseCounter;
     }
-  }, [selectedUserPlan, userSchedules, allMajors]);
+  }, [selectedUserPlan, userPlans, allMajors]);
 
   useEffect(() => {
     if (error) {
@@ -172,24 +180,31 @@ function AddPlanPopperComponent(props: Props) {
     selectedUserPlan,
   ]);
 
-  const onSubmit = () => {
-    let counter = 0;
-    let schedule = undefined;
+  const onSubmit = async () => {
     if (selectedCoopCycle && selectedPlanOption === PLAN_OPTIONS.NEW_PLAN) {
       const currentPlan = allPlans[selectedMajor!.name].find(
         (p: Schedule) => planToString(p) === selectedCoopCycle
       );
-      selectedDNDSchedule.current = clearSchedule(
-        convertToDNDSchedule(currentPlan!, 0)[0]
+      const [generatedSchedule, courseCounter] = convertToDNDSchedule(
+        currentPlan!,
+        0
       );
+      selectedDNDSchedule.current = clearSchedule(generatedSchedule);
+      counter.current = courseCounter;
     } else if (selectedPlanOption === PLAN_OPTIONS.NEW_PLAN) {
-      selectedDNDSchedule.current = mockEmptySchedule;
+      [selectedDNDSchedule.current, counter.current] = generateInitialSchedule(
+        props.academicYear,
+        props.graduationYear,
+        props.completedCourses
+      );
     } else if (selectedPlanOption === PLAN_OPTIONS.EXAMPLE_PLAN) {
       const currentPlan = allPlans[selectedMajor!.name].find(
         (p: Schedule) => planToString(p) === selectedCoopCycle
       );
-      [schedule, counter] = convertToDNDSchedule(currentPlan!, 0);
-      selectedDNDSchedule.current = schedule;
+      [selectedDNDSchedule.current, counter.current] = convertToDNDSchedule(
+        currentPlan!,
+        0
+      );
     }
 
     if (
@@ -200,34 +215,26 @@ function AddPlanPopperComponent(props: Props) {
       setError(true);
       return;
     } else {
-      savePlan();
+      await savePlan();
       prepareToClose();
     }
   };
 
-  const savePlan = () => {
+  const savePlan = async () => {
     const token = getAuthToken();
-    createPlanForUser(userId!, token, {
+    const plan = await createPlanForUser(userId!, token, {
       name: planName,
       link_sharing_enabled: false,
       schedule: selectedDNDSchedule.current!,
       major: selectedMajor ? selectedMajor.name : "",
       coop_cycle: selectedCoopCycle,
       course_counter: counter.current,
-      warnings: [],
-      course_warnings: [],
-    }).then(plan => {
-      addNewSchedule(plan.plan.name, {
-        ...plan.plan,
-        coop_cycle: plan.plan.coop_cycle,
-        currentClassCounter: plan.plan.courseCounter,
-        isScheduleLoading: false,
-        scheduleError: "",
-      } as ScheduleSlice);
     });
+    addNewPlan(plan.plan, props.academicYear);
   };
 
   const openModal = (): void => setVisible(true);
+
   const prepareToClose = () => {
     setPlanName("");
     setSelectedMajor(undefined);
@@ -419,17 +426,20 @@ function AddPlanPopperComponent(props: Props) {
 }
 
 const mapStateToProps = (state: AppState) => ({
-  allMajors: getMajors(state),
-  allPlans: getPlans(state),
-  isFetchingMajors: getMajorsLoadingFlag(state),
-  isFetchingPlans: getPlansLoadingFlag(state),
-  userSchedules: getSchedulesFromState(state),
-  userId: getUserId(state),
+  allMajors: getMajorsFromState(state),
+  allPlans: getPlansFromState(state),
+  isFetchingMajors: getMajorsLoadingFlagFromState(state),
+  isFetchingPlans: getPlansLoadingFlagFromState(state),
+  userPlans: getUserPlansFromState(state),
+  userId: getUserIdFromState(state),
+  academicYear: getAcademicYearFromState(state)!,
+  graduationYear: getGraduationYearFromState(state)!,
+  completedCourses: getCompletedCoursesFromState(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  addNewSchedule: (name: string, newSchedule: ScheduleSlice) =>
-    dispatch(addNewSchedule(name, newSchedule)),
+  addNewPlan: (plan: IPlanData, academicYear: number) =>
+    dispatch(addNewPlanAction(plan, academicYear)),
 });
 
 export const AddPlan = connect(

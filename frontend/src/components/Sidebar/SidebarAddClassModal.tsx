@@ -16,10 +16,10 @@ import { Modal } from "@material-ui/core";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
 import {
-  addClassesAction,
-  changeSemesterStatusAction,
-} from "../../state/actions/scheduleActions";
-import { getScheduleFromState } from "../../state";
+  addCoursesToActivePlanAction,
+  changeSemesterStatusForActivePlanAction,
+} from "../../state/actions/userPlansActions";
+import { getActivePlanScheduleFromState } from "../../state";
 import { AppState } from "../../state/reducers/state";
 import { fetchCourse } from "../../api";
 import { convertTermIdToSeason } from "../../utils/schedule-helpers";
@@ -279,7 +279,7 @@ export class SidebarAddClassModalComponent extends React.Component<
  * @param state the AppState
  */
 const mapStateToProps = (state: AppState) => ({
-  schedule: getScheduleFromState(state),
+  schedule: getActivePlanScheduleFromState(state),
 });
 
 /**
@@ -288,12 +288,15 @@ const mapStateToProps = (state: AppState) => ({
  */
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   handleAddClasses: (courses: ScheduleCourse[], semester: DNDScheduleTerm) =>
-    dispatch(addClassesAction(courses, semester)),
+    dispatch(addCoursesToActivePlanAction(courses, semester)),
   handleStatusChange: (
     newStatus: Status,
     year: number,
     tappedSemester: SeasonWord
-  ) => dispatch(changeSemesterStatusAction(newStatus, year, tappedSemester)),
+  ) =>
+    dispatch(
+      changeSemesterStatusForActivePlanAction(newStatus, year, tappedSemester)
+    ),
 });
 
 /**

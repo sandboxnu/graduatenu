@@ -1158,7 +1158,6 @@ export const bioChemPlans: Schedule[] = [
         isSummerFull: false,
       },
     },
-    id: "0",
   },
   {
     years: [1000, 1001, 1002, 1003],
@@ -2317,7 +2316,6 @@ export const bioChemPlans: Schedule[] = [
         isSummerFull: false,
       },
     },
-    id: "1",
   },
   {
     years: [1000, 1001, 1002, 1003, 1004],
@@ -3511,7 +3509,6 @@ export const bioChemPlans: Schedule[] = [
         isSummerFull: false,
       },
     },
-    id: "2",
   },
   {
     years: [1000, 1001, 1002, 1003, 1004],
@@ -4705,6 +4702,5 @@ export const bioChemPlans: Schedule[] = [
         isSummerFull: false,
       },
     },
-    id: "3",
   },
 ];

@@ -101,7 +101,6 @@ export function oldToNew(
   const born: Schedule = {
     years: [],
     yearMap: {},
-    id: "example-schedule",
   };
 
   // get all the years

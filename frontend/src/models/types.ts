@@ -8,6 +8,8 @@ import {
   INEUPrereqCourse,
   ICourseRange,
   IOrCourse,
+  TransferableExam,
+  IRequiredCourse,
 } from "../../../common/types";
 
 /**
@@ -150,14 +152,18 @@ export interface CourseTakenTracker {
  * A model for data pertaining to a User object.
  */
 export interface IUserData {
+  id?: number;
   email: string;
-  username: string;
-  password: string;
-  academic_year?: number;
-  graduation_year?: number;
+  fullName: string;
+  academicYear?: number;
+  graduationYear?: number;
   major?: string;
-  coop_cycle?: string;
-  nu_id?: string;
+  coopCycle?: string;
+  nuId: string;
+  isAdvisor: boolean;
+  examCredits: TransferableExam[];
+  transferCourses: ScheduleCourse[];
+  completedCourses: ScheduleCourse[];
 }
 
 /**
@@ -175,13 +181,13 @@ export interface ILoginData {
 export interface IPlanData {
   id: number;
   name: string;
-  link_sharing_enabled: boolean;
+  linkSharingEnabled: boolean;
   schedule: DNDSchedule;
   major: string;
-  coop_cycle: string;
+  coopCycle: string;
   warnings: IWarning[];
-  course_warnings: CourseWarning[];
-  course_counter: number;
+  courseWarnings: CourseWarning[];
+  courseCounter: number;
 }
 
 /**
@@ -193,8 +199,6 @@ export interface ICreatePlanData {
   schedule: DNDSchedule;
   major: string;
   coop_cycle: string;
-  warnings: IWarning[];
-  course_warnings: CourseWarning[];
   course_counter: number;
 }
 /*

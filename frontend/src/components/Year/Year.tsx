@@ -10,7 +10,7 @@ import { getAcademicYearFromState, getClosedYearsFromState } from "../../state";
 import { AppState } from "../../state/reducers/state";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
-import { toggleYearExpanded } from "../../state/actions/scheduleActions";
+import { toggleYearExpandedForActivePlanAction } from "../../state/actions/userPlansActions";
 
 interface ReduxStoreYearProps {
   academicYear: number;
@@ -83,13 +83,13 @@ class YearComponent extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: AppState) => ({
-  academicYear: getAcademicYearFromState(state),
+  academicYear: getAcademicYearFromState(state)!,
   closedYears: getClosedYearsFromState(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   toggleYearExpanded: (yearIndex: number) =>
-    dispatch(toggleYearExpanded(yearIndex)),
+    dispatch(toggleYearExpandedForActivePlanAction(yearIndex)),
 });
 
 export const Year = connect<

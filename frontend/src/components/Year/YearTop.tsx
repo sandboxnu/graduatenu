@@ -3,10 +3,10 @@ import styled from "styled-components";
 import { SeasonWord, Status } from "../../../../common/types";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
-import { changeSemesterStatusAction } from "../../state/actions/scheduleActions";
+import { changeSemesterStatusForActivePlanAction } from "../../state/actions/userPlansActions";
 import { AppState } from "../../state/reducers/state";
 import { SemesterType } from "./SemesterType";
-import { getScheduleFromState } from "../../state";
+import { getActivePlanScheduleFromState } from "../../state";
 import { DNDSchedule } from "../../models/types";
 import { getPositionOfYearInSchedule } from "../../utils";
 
@@ -186,7 +186,7 @@ const textContainerStyle: React.CSSProperties = {
 };
 
 const mapStateToProps = (state: AppState) => ({
-  schedule: getScheduleFromState(state),
+  schedule: getActivePlanScheduleFromState(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
@@ -194,7 +194,10 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     newStatus: Status,
     year: number,
     tappedSemester: SeasonWord
-  ) => dispatch(changeSemesterStatusAction(newStatus, year, tappedSemester)),
+  ) =>
+    dispatch(
+      changeSemesterStatusForActivePlanAction(newStatus, year, tappedSemester)
+    ),
 });
 
 export const YearTop = connect<

@@ -8,8 +8,6 @@ import {
   IRequiredCourse,
   Requirement,
 } from "../../../common/types";
-import { setCompletedRequirements } from "../state/actions/scheduleActions";
-import { getDeclaredMajorFromState } from "../state";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import {
   CourseText,
@@ -20,6 +18,8 @@ import {
 import { AddBlock } from "../components/ClassBlocks/AddBlock";
 import { Link as ButtonLink, Collapse, Grid, Paper } from "@material-ui/core";
 import { AddClassModal } from "../components";
+import { setCompletedRequirementsAction } from "../state/actions/userActions";
+import { getUserMajorFromState } from "../state";
 
 /**
  * Flattens the Requirement[] into only a list of Requirements/Requirement sets
@@ -271,12 +271,12 @@ class CompletedCoursesComponent extends Component<Props, State> {
 }
 
 const mapStateToProps = (state: AppState) => ({
-  major: getDeclaredMajorFromState(state)!,
+  major: getUserMajorFromState(state)!,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   setCompletedRequirements: (completedReqs: IRequiredCourse[]) =>
-    dispatch(setCompletedRequirements(completedReqs)),
+    dispatch(setCompletedRequirementsAction(completedReqs)),
 });
 
 export const CompletedCoursesScreen = withRouter(

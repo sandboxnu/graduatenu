@@ -9,19 +9,15 @@ import Autocomplete from "@material-ui/lab/Autocomplete";
 import { IconButton } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
 import {
-  setDeclaredMajorAction,
-  setFullNameAction,
-  setEmailAction,
   setUserCoopCycleAction,
+  setUserMajorAction,
 } from "../state/actions/userActions";
 import {
-  getMajors,
-  getPlans,
-  getDeclaredMajorFromState,
   getUserCoopCycleFromState,
-  getFullNameFromState,
-  getUserId,
-  getEmail,
+  getUserMajorFromState,
+  getMajorsFromState,
+  getUserIdFromState,
+  getUserPlansFromState,
 } from "../state";
 import { Dispatch } from "redux";
 import { Major, Schedule } from "../../../common/types";
@@ -140,23 +136,23 @@ interface ChangePasswordProps {
   id: number;
 }
 
-const ProfileName = (props: ProfileNameProps) => {
-  return (
-    <ProfileEntryContainer>
-      <ItemTitle> Name </ItemTitle>
-      {props.isEdit && (
-        <TextField
-          id="outlined-basic"
-          variant="outlined"
-          value={props.name}
-          onChange={e => props.setName(e.target.value)}
-          placeholder="John Smith"
-        />
-      )}
-      {!props.isEdit && <ItemEntry> {props.name} </ItemEntry>}
-    </ProfileEntryContainer>
-  );
-};
+// const ProfileName = (props: ProfileNameProps) => {
+//   return (
+//     <ProfileEntryContainer>
+//       <ItemTitle> Name </ItemTitle>
+//       {props.isEdit && (
+//         <TextField
+//           id="outlined-basic"
+//           variant="outlined"
+//           value={props.name}
+//           onChange={e => props.setName(e.target.value)}
+//           placeholder="John Smith"
+//         />
+//       )}
+//       {!props.isEdit && <ItemEntry> {props.name} </ItemEntry>}
+//     </ProfileEntryContainer>
+//   );
+// };
 
 const ProfileMajor = (props: ProfileMajorProps) => {
   const val = props.major != "" ? props.major : "None Selected";
@@ -235,23 +231,23 @@ const ProfileAdvisor = (props: any) => {
 }
 */
 
-const ProfileEmail = (props: ProfileEmailProps) => {
-  return (
-    <ProfileEntryContainer>
-      <ItemTitle> Email </ItemTitle>
-      {props.isEdit && (
-        <TextField
-          id="outlined-basic"
-          variant="outlined"
-          value={props.email}
-          onChange={e => props.setEmail(e.target.value)}
-          placeholder="johnsmith@email.com"
-        />
-      )}
-      {!props.isEdit && <ItemEntry> {props.email} </ItemEntry>}
-    </ProfileEntryContainer>
-  );
-};
+// const ProfileEmail = (props: ProfileEmailProps) => {
+//   return (
+//     <ProfileEntryContainer>
+//       <ItemTitle> Email </ItemTitle>
+//       {props.isEdit && (
+//         <TextField
+//           id="outlined-basic"
+//           variant="outlined"
+//           value={props.email}
+//           onChange={e => props.setEmail(e.target.value)}
+//           placeholder="johnsmith@email.com"
+//         />
+//       )}
+//       {!props.isEdit && <ItemEntry> {props.email} </ItemEntry>}
+//     </ProfileEntryContainer>
+//   );
+// };
 
 const save = (props: SaveProps) => {
   props.setEdit(false);
@@ -333,7 +329,7 @@ const ProfileComponent: React.FC = (props: any) => {
           </ProfileTitleContainer>
           <DataContainer>
             <ProfileColumn>
-              <ProfileName isEdit={isEdit} name={name} setName={setName} />
+              {/* <ProfileName isEdit={isEdit} name={name} setName={setName} /> */}
               <ProfileMajor
                 isEdit={isEdit}
                 major={major == undefined ? "" : major.name}
@@ -345,7 +341,7 @@ const ProfileComponent: React.FC = (props: any) => {
               )} */}
             </ProfileColumn>
             <ProfileColumn>
-              <ProfileEmail isEdit={isEdit} email={email} setEmail={setEmail} />
+              {/* <ProfileEmail isEdit={isEdit} email={email} setEmail={setEmail} /> */}
               {major != undefined && (
                 <ProfileCoop
                   isEdit={isEdit}
@@ -378,31 +374,25 @@ const ProfileComponent: React.FC = (props: any) => {
 };
 
 /**
- * Callback to be passed into connect, to make properties of the AppState available as this components props.
- * @param state the AppState
- */
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-  setDeclaredMajorAction: (major?: Major) =>
-    dispatch(setDeclaredMajorAction(major)),
-  setUserCoopCycleAction: (plan: string) =>
-    dispatch(setUserCoopCycleAction(plan)),
-  setFullNameAction: (fullName: string) =>
-    dispatch(setFullNameAction(fullName)),
-  setEmailAction: (email: string) => dispatch(setEmailAction(email)),
-});
-
-/**
  * Callback to be passed into connect, responsible for dispatching redux actions to update the appstate.
  * @param dispatch responsible for dispatching actions to the redux store.
  */
 const mapStateToProps = (state: AppState) => ({
-  name: getFullNameFromState(state),
-  major: getDeclaredMajorFromState(state),
+  major: getUserMajorFromState(state),
   coop: getUserCoopCycleFromState(state),
-  majors: getMajors(state),
-  plans: getPlans(state),
-  id: getUserId(state),
-  email: getEmail(state),
+  majors: getMajorsFromState(state),
+  plans: getUserPlansFromState(state),
+  id: getUserIdFromState(state),
+});
+
+/**
+ * Callback to be passed into connect, to make properties of the AppState available as this components props.
+ * @param state the AppState
+ */
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  setMajor: (major: string) => dispatch(setUserMajorAction(major)),
+  setCoopCycle: (coopCycle: string) =>
+    dispatch(setUserCoopCycleAction(coopCycle)),
 });
 
 /**
