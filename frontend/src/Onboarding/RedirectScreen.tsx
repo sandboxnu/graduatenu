@@ -115,7 +115,7 @@ export const RedirectScreen: React.FC<Props> = ({ redirectUrl }) => {
               getScheduleCoursesFromSimplifiedCourseDataAPI(
                 response.user.coursesTransfer
               ).then(courses => {
-                dispatch(setCompletedCourses(courses));
+                dispatch(setTransferCourses(courses));
               }),
             ]).then(_ => setIsLoading(false));
           })
