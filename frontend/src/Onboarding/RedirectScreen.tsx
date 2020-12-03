@@ -75,17 +75,18 @@ export const RedirectScreen: React.FC<Props> = ({ redirectUrl }) => {
             dispatch(setEmailAction(response.user.email));
             dispatch(setUserCoopCycleAction(response.user.coopCycle));
             dispatch(setIsAdvisorAction(response.user.isAdvisor));
-            getScheduleCoursesFromSimplifiedCourseDataAPI(
-              response.user.coursesCompleted
-            ).then(courses => {
-              dispatch(setCompletedCourses(courses));
-            });
-            getScheduleCoursesFromSimplifiedCourseDataAPI(
-              response.user.coursesTransfer
-            ).then(courses => {
-              dispatch(setCompletedCourses(courses));
-            });
-            setIsLoading(false);
+            Promise.all([
+              getScheduleCoursesFromSimplifiedCourseDataAPI(
+                response.user.coursesCompleted
+              ).then(courses => {
+                dispatch(setCompletedCourses(courses));
+              }),
+              getScheduleCoursesFromSimplifiedCourseDataAPI(
+                response.user.coursesTransfer
+              ).then(courses => {
+                dispatch(setCompletedCourses(courses));
+              }),
+            ]).then(_ => setIsLoading(false));
           })
           .catch(e => console.log(e));
       }

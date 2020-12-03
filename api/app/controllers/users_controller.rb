@@ -53,7 +53,7 @@ class UsersController < ApplicationController
     
     private
 
-    def search_paramss
+    def search_params
         params.permit(:search, :page)
     end
 
