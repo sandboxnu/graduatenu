@@ -20,8 +20,8 @@ class AdminController < ApplicationController
   end
 
   def entry
-    token = params[:user_id]
-    user_id = decode_login_token(token)
+    login_token = params[:user_id]
+    user_id = decode_login_token(login_token)
     @user = User.find_by_id(user_id)
 
     if @user.nil?
@@ -31,10 +31,12 @@ class AdminController < ApplicationController
 
     redirect_url = ENV['FRONTEND_URL'] + '/redirect'
 
+    auth_token = @user.generate_jwt
+
     response.set_cookie(
       :auth_token,
       {
-        value: token,
+        value: auth_token,
         secure: ENV['FRONTEND_URL'].start_with?("https"),
         httponly: false,
         path: '/redirect', # the frontend path that will receive this cookie
