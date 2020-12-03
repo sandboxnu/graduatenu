@@ -20,6 +20,7 @@ import {
   setExamCredits,
   resetUserAction,
   deletePlanId,
+  setIsAdvisorAction,
 } from "../actions/userActions";
 import { setCoopCycle, setNamedSchedule } from "../actions/scheduleActions";
 import { planToString } from "../../utils";
@@ -29,7 +30,6 @@ export interface UserState {
   academicYear: number;
   graduationYear: number;
   planIds: number[];
-  token?: string; // if a token and userId are undefined, then no user is logged in
   userId?: number;
 
   // TODO: after plan reducer is made, move these fields
@@ -41,6 +41,8 @@ export interface UserState {
   email: string;
   coopCycle: string;
   examCredits: TransferableExam[];
+  isAdvisor?: boolean;
+  token: string;
 }
 
 const initialState: UserState = {
@@ -48,7 +50,6 @@ const initialState: UserState = {
   academicYear: 0,
   graduationYear: 0,
   planIds: [],
-  token: undefined,
   userId: undefined,
   planStr: "",
   catalogYear: undefined,
@@ -58,6 +59,8 @@ const initialState: UserState = {
   email: "",
   coopCycle: "",
   examCredits: [],
+  isAdvisor: undefined,
+  token: "",
 };
 
 export const userReducer = (
@@ -148,6 +151,10 @@ export const userReducer = (
       }
       case getType(setNamedSchedule): {
         draft.planName = action.payload.namedSchedule.name;
+        return draft;
+      }
+      case getType(setIsAdvisorAction): {
+        draft.isAdvisor = action.payload.isAdvisor;
         return draft;
       }
     }

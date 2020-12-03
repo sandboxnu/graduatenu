@@ -9,7 +9,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Checkbox, Paper } from "@material-ui/core";
 import CheckBoxIcon from "@material-ui/icons/CheckBox";
 import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
-import { Link } from "react-router-dom";
+import { Link, RouteComponentProps, withRouter } from "react-router-dom";
 import { NextButton } from "../components/common/NextButton";
 
 const Wrapper = styled.div`
@@ -128,7 +128,7 @@ interface GenericOnboardingTemplateProps {
 interface OnboardingSelectionTemplateProps {
   readonly screen: number;
   readonly mainTitleText: string;
-  readonly onSubmit: () => void;
+  readonly onSubmit: () => Promise<void>;
   readonly to: string;
 }
 
@@ -178,9 +178,9 @@ const GenericOnboardingTemplate: React.FC<GenericOnboardingTemplateProps> = ({
   );
 };
 
-const OnboardingSelectionTemplate: React.FC<
-  OnboardingSelectionTemplateProps
-> = ({ screen, mainTitleText, onSubmit, to, children }) => {
+const OnboardingSelectionTemplateComponent: React.FC<
+  OnboardingSelectionTemplateProps & RouteComponentProps<{}>
+> = ({ screen, mainTitleText, onSubmit, to, history, children }) => {
   return (
     <GenericOnboardingTemplate screen={screen}>
       <MainTitleText>{mainTitleText}</MainTitleText>
@@ -198,12 +198,23 @@ const OnboardingSelectionTemplate: React.FC<
       >
         {children}
       </Paper>
-      <Link to={to} onClick={onSubmit} style={{ textDecoration: "none" }}>
+      <div
+        onClick={() => {
+          onSubmit().then(() => {
+            history.push(to);
+          });
+        }}
+        style={{ textDecoration: "none" }}
+      >
         <NextButton />
-      </Link>
+      </div>
     </GenericOnboardingTemplate>
   );
 };
+
+const OnboardingSelectionTemplate = withRouter(
+  OnboardingSelectionTemplateComponent
+);
 
 export {
   CourseText,

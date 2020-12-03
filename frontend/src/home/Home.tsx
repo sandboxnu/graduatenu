@@ -32,20 +32,18 @@ import {
 import { Sidebar } from "../components/Sidebar";
 import { withToast } from "./toastHook";
 import { AppearanceTypes } from "react-toast-notifications";
-import { withRouter, RouteComponentProps, Link } from "react-router-dom";
+import { withRouter, RouteComponentProps } from "react-router-dom";
 import { connect } from "react-redux";
 import { AppState } from "../state/reducers/state";
 import { Dispatch } from "redux";
 import {
   getScheduleFromState,
   getWarningsFromState,
-  getTokenFromState,
   getUserId,
   getPlanNameFromState,
   getPlanIdsFromState,
   getLinkSharingFromState,
   getScheduleDataFromState,
-  isUserLoggedIn,
   getScheduleCoopCycleFromState,
   getScheduleMajorFromState,
   getAcademicYearFromState,
@@ -85,6 +83,10 @@ import Loader from "react-loader-spinner";
 import { ExcelUpload } from "../components/ExcelUpload";
 import { SwitchPlanPopper } from "./SwitchPlanPopper";
 import { resetUserAction } from "../state/actions/userActions";
+import {
+  getAuthToken,
+  removeAuthTokenFromCookies,
+} from "../utils/auth-helpers";
 
 const OuterContainer = styled.div`
   display: flex;
@@ -191,7 +193,7 @@ const PlanContainer = styled.div`
   margin-right: 10px;
 `;
 
-const LoginLogoutLink = styled(Link)`
+const LoginLogoutLink = styled.div`
   align-self: center;
   margin-right: 8px !important;
 `;
@@ -222,14 +224,12 @@ interface ReduxStoreHomeProps {
   major?: string;
   planStr?: string;
   warnings: IWarning[];
-  token?: string;
   userId?: number;
   majors: Major[];
   planIds: number[];
   planName: string | undefined;
   linkSharing: boolean;
   getCurrentScheduleData: () => ScheduleSlice;
-  isLoggedIn: boolean;
   academicYear: number;
   closedYears: Set<number>; // list of indexes of closed years
   currentClassCounter: number;
@@ -278,8 +278,9 @@ class HomeComponent extends React.Component<Props, HomeState> {
 
   componentDidMount() {
     // If this is true, then a user is currently logged in and we can fetch their plan
-    if (this.props.isLoggedIn && !this.props.activeSchedule) {
-      findAllPlansForUser(this.props.userId!, this.props.token!).then(
+    if (!this.props.activeSchedule) {
+      const token = getAuthToken();
+      findAllPlansForUser(this.props.userId!, token).then(
         (plans: IPlanData[]) => {
           // Once multiple plans are supported, this can be changed to the last used plan
           let plan: IPlanData = plans[0];
@@ -442,35 +443,28 @@ class HomeComponent extends React.Component<Props, HomeState> {
   }
 
   renderYears() {
-    // If a user is currently logged in, wait until plans are fetched to render
-    if (this.props.isLoggedIn) {
-      if (this.state.fetchedPlan) {
-        return this.props.schedule.years.map((year: number, index: number) => (
-          <Year key={index} index={index} schedule={this.props.schedule} />
-        ));
-      } else {
-        return (
-          <SpinnerWrapper>
-            <Loader
-              type="Puff"
-              color="#f50057"
-              height={100}
-              width={100}
-              timeout={5000} //5 secs
-            />
-          </SpinnerWrapper>
-        );
-      }
-    } else {
+    if (this.state.fetchedPlan) {
       return this.props.schedule.years.map((year: number, index: number) => (
         <Year key={index} index={index} schedule={this.props.schedule} />
       ));
+    } else {
+      return (
+        <SpinnerWrapper>
+          <Loader
+            type="Puff"
+            color="#f50057"
+            height={100}
+            width={100}
+            timeout={5000} //5 secs
+          />
+        </SpinnerWrapper>
+      );
     }
   }
 
   renderTransfer() {
     // If a user is currently logged in, wait until plans are fetched to render
-    if (this.props.isLoggedIn && !this.state.fetchedPlan) {
+    if (!this.state.fetchedPlan) {
       return (
         <SpinnerWrapper>
           <Loader
@@ -497,38 +491,31 @@ class HomeComponent extends React.Component<Props, HomeState> {
    * update a specific plan.
    */
   async updatePlan() {
-    // If this is true, then a user is currently logged in and we can update their plan
-    if (this.props.isLoggedIn) {
-      const scheduleData: ScheduleSlice = this.props.getCurrentScheduleData();
-      const plan = await updatePlanForUser(
-        this.props.userId!,
-        this.props.token!,
-        this.props.planIds[0],
-        {
-          id: this.props.planIds[0],
-          name: this.props.planName ? this.props.planName : "",
-          link_sharing_enabled: this.props.linkSharing,
-          schedule: this.props.schedule,
-          major: this.props.major ? this.props.major : "",
-          coop_cycle: this.props.planStr ? this.props.planStr : "None",
-          course_counter: scheduleData.currentClassCounter,
-          warnings: scheduleData.warnings,
-          course_warnings: scheduleData.courseWarnings,
-          catalog_year: scheduleData.catalogYear,
-        }
-      ).then(plan => {
-        this.props.updateActiveSchedule({
-          ...plan.plan,
-          coopCycle: plan.plan.coop_cycle,
-          currentClassCounter: plan.plan.courseCounter,
-          isScheduleLoading: false,
-          scheduleError: "",
-        } as ScheduleSlice);
-        alert("Your plan has been updated.");
-      });
-    } else {
-      alert("You must be logged in to save your plan.");
-    }
+    const scheduleData: ScheduleSlice = this.props.getCurrentScheduleData();
+    const token = getAuthToken();
+    await updatePlanForUser(this.props.userId!, token, this.props.planIds[0], {
+      id: this.props.planIds[0],
+      name: this.props.planName ? this.props.planName : "",
+      link_sharing_enabled: this.props.linkSharing,
+      schedule: this.props.schedule,
+      major: this.props.major ? this.props.major : "",
+      coop_cycle: this.props.planStr ? this.props.planStr : "None",
+      course_counter: scheduleData.currentClassCounter,
+      warnings: scheduleData.warnings,
+      catalog_year: scheduleData.catalogYear,
+      course_warnings: scheduleData.courseWarnings,
+    }).then(plan => {
+      this.props.updateActiveSchedule({
+        ...plan.plan,
+        coopCycle: plan.plan.coop_cycle,
+        currentClassCounter: plan.plan.courseCounter,
+        isScheduleLoading: false,
+        scheduleError: "",
+      } as ScheduleSlice);
+      alert(
+        "Your plan has been updated and you have been logged out. You will be redirected to the welcome screen."
+      );
+    });
   }
 
   /**
@@ -537,32 +524,28 @@ class HomeComponent extends React.Component<Props, HomeState> {
    * update a specific plan.
    */
   savePlan() {
-    // If this is true, then a user is currently logged in and we can update their plan
-    if (this.props.isLoggedIn) {
-      const scheduleData: ScheduleSlice = this.props.getCurrentScheduleData();
-      createPlanForUser(this.props.userId!, this.props.token!, {
-        name: `Plan ${this.state.planCount + 1}`,
-        link_sharing_enabled: this.props.linkSharing,
-        schedule: this.props.schedule,
-        major: this.props.major ? this.props.major : "",
-        coop_cycle: this.props.planStr ? this.props.planStr : "",
-        course_counter: scheduleData.currentClassCounter,
-        warnings: scheduleData.warnings,
-        course_warnings: scheduleData.courseWarnings,
-      }).then(plan => {
-        this.props.addNewSchedule(plan.plan.name, {
-          ...plan.plan,
-          coopCycle: plan.plan.coop_cycle,
-          currentClassCounter: plan.plan.courseCounter,
-          isScheduleLoading: false,
-          scheduleError: "",
-        } as ScheduleSlice);
-        this.setState({ planCount: this.state.planCount + 1 });
-        alert("Your plan has been saved.");
-      });
-    } else {
-      alert("You must be logged in to save your plan.");
-    }
+    const scheduleData: ScheduleSlice = this.props.getCurrentScheduleData();
+    const token = getAuthToken();
+    createPlanForUser(this.props.userId!, token, {
+      name: `Plan ${this.state.planCount + 1}`,
+      link_sharing_enabled: this.props.linkSharing,
+      schedule: this.props.schedule,
+      major: this.props.major ? this.props.major : "",
+      coop_cycle: this.props.planStr ? this.props.planStr : "",
+      course_counter: scheduleData.currentClassCounter,
+      warnings: scheduleData.warnings,
+      course_warnings: scheduleData.courseWarnings,
+    }).then(plan => {
+      this.props.addNewSchedule(plan.plan.name, {
+        ...plan.plan,
+        coopCycle: plan.plan.coop_cycle,
+        currentClassCounter: plan.plan.courseCounter,
+        isScheduleLoading: false,
+        scheduleError: "",
+      } as ScheduleSlice);
+      this.setState({ planCount: this.state.planCount + 1 });
+      alert("Your plan has been saved.");
+    });
   }
 
   async setSchedule(schedule: Schedule) {
@@ -571,11 +554,12 @@ class HomeComponent extends React.Component<Props, HomeState> {
     this.props.setDNDSchedule(dndschedule);
   }
 
-  async logOut() {
+  logOut = async () => {
     await this.updatePlan();
     this.props.logOut();
+    removeAuthTokenFromCookies();
     this.props.history.push("/");
-  }
+  };
 
   render() {
     return (
@@ -592,50 +576,32 @@ class HomeComponent extends React.Component<Props, HomeState> {
                   <MajorText>{this.props.major}</MajorText>
                   <PlanText>{this.props.planStr || "None"}</PlanText>
                   <EditPlanPopper />
-                  {!this.props.isLoggedIn ? (
-                    <LoginLogoutLink
-                      to={{
-                        pathname: "/signup",
-                        state: { userData: {}, fromOnBoarding: false },
-                      }}
-                      style={{ textDecoration: "none" }}
-                    >
-                      <ColorButton variant="contained">Signup</ColorButton>
-                    </LoginLogoutLink>
-                  ) : (
-                    <ColorButton
-                      variant="contained"
-                      onClick={this.logOut.bind(this)}
-                    >
-                      Logout
-                    </ColorButton>
-                  )}
+                  <LoginLogoutLink onClick={_ => this.logOut()}>
+                    <ColorButton variant="contained">Logout</ColorButton>
+                  </LoginLogoutLink>
                 </HomePlan>
               </HomeTop>
               <HomeAboveSchedule>
                 <HomePlan>
                   <h2>Plan Of Study</h2>
                 </HomePlan>
-                {this.props.isLoggedIn && (
-                  <HomeButtons>
-                    <PlanContainer>
-                      <PlanPopperButton
-                        variant="contained"
-                        onClick={this.updatePlan.bind(this)}
-                      >
-                        Update Plan
-                      </PlanPopperButton>
-                    </PlanContainer>
-                    <PlanContainer>
-                      <AddPlan />
-                    </PlanContainer>
-                    <SwitchPlanPopper
-                      userId={this.props.userId}
-                      planIds={this.props.planIds}
-                      token={this.props.token}
-                    />
-                  </HomeButtons>
-                )}
+                <HomeButtons>
+                  <PlanContainer>
+                    <PlanPopperButton
+                      variant="contained"
+                      onClick={this.updatePlan.bind(this)}
+                    >
+                      Update Plan
+                    </PlanPopperButton>
+                  </PlanContainer>
+                  <PlanContainer>
+                    <AddPlan />
+                  </PlanContainer>
+                  <SwitchPlanPopper
+                    userId={this.props.userId}
+                    planIds={this.props.planIds}
+                  />
+                </HomeButtons>
               </HomeAboveSchedule>
               {this.renderYears()}
               {this.renderTransfer()}
@@ -656,14 +622,12 @@ const mapStateToProps = (state: AppState) => ({
   planStr: getScheduleCoopCycleFromState(state),
   major: getScheduleMajorFromState(state),
   warnings: getWarningsFromState(state),
-  token: getTokenFromState(state),
   userId: getUserId(state),
   majors: getMajors(state),
   planName: getPlanNameFromState(state),
   planIds: getPlanIdsFromState(state),
   linkSharing: getLinkSharingFromState(state),
   getCurrentScheduleData: () => getScheduleDataFromState(state),
-  isLoggedIn: isUserLoggedIn(state),
   academicYear: getAcademicYearFromState(state),
   closedYears: getClosedYearsFromState(state),
   currentClassCounter: getCurrentClassCounterFromState(state),

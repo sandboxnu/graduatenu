@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import searchIcon from "../../assets/search-icon.png";
 
@@ -38,20 +38,42 @@ const Input = styled.input`
 `;
 
 interface SearchProps {
-  onChange: (value: string) => void;
+  onChange?: (value: string) => void;
+  onEnter?: (value: string) => void;
   placeholder: string;
 }
 
 export const Search = (props: SearchProps) => {
+  const [text, setText] = useState("");
+  const handleKeyDown = (event: any) => {
+    if (event.key === "Enter") {
+      if (props.onEnter) {
+        props.onEnter(text);
+      }
+    }
+  };
+
   return (
     <SearchContainer>
       <Input
         type="text"
         name="name"
         placeholder={props.placeholder}
-        onChange={e => props.onChange(e.target.value)}
+        onChange={e => {
+          setText(e.target.value);
+          if (props.onChange) {
+            props.onChange(e.target.value);
+          }
+        }}
+        onKeyDown={handleKeyDown}
       />
-      <IconContainer>
+      <IconContainer
+        onClick={_ => {
+          if (props.onEnter) {
+            props.onEnter(text);
+          }
+        }}
+      >
         <SearchIcon src={searchIcon} />
       </IconContainer>
     </SearchContainer>

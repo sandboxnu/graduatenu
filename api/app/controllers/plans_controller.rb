@@ -5,15 +5,14 @@ class PlansController < ApplicationController
 
   #returns all the plans
   def index
-    requester = User.find_by_id(@current_user_id)
-    if authorized || requester.is_advisor
-      @plans = Plan.where(user_id: params[:user_id])
+    if authorized || @user.is_advisor
+      @plans = @user.plans
     else
       render json: {error: "Unauthorized."}, status: :unprocessable_entity
     end
   end
 
-  # shows a
+  # shows a plan
   # handled by before action
   def show
     if authorized
@@ -88,7 +87,10 @@ class PlansController < ApplicationController
   #sets the current user
   def set_user
     if signed_in?
-      @user = User.find(@current_user_id) #add error handling, when @current_user_id does not exist
+      @user = User.find_by_id(@current_user_id)
+      if @user == nil
+        render json: {error: "User not found."}, status: 404
+      end
     else
       render json: {error: "Unauthorized."}, status: :unprocessable_entity
     end

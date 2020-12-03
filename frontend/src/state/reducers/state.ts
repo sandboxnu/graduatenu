@@ -8,6 +8,7 @@ import {
   majorsReducer,
   plansReducer,
 } from "./apiReducer";
+import { advisorReducer, AdvisorState } from "./advisorReducer";
 
 export interface AppState {
   schedule: ScheduleState;
@@ -15,6 +16,7 @@ export interface AppState {
   majorState: MajorApiState;
   plansState: PlansApiState;
   schedules: SchedulesState;
+  advisorState: AdvisorState;
 }
 
 export const rootReducer = combineReducers({
@@ -23,4 +25,5 @@ export const rootReducer = combineReducers({
   majorState: majorsReducer,
   plansState: plansReducer,
   schedules: schedulesReducer,
+  advisorState: advisorReducer,
 });

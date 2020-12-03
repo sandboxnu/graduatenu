@@ -1,5 +1,8 @@
 Rails.application.configure do
+  config.hosts.clear
   # Settings specified here will take precedence over those in config/application.rb.
+  ENV['ROOT_URL'] = "http://localhost:3001"
+  ENV['FRONTEND_URL'] = "http://localhost:3000"
 
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development

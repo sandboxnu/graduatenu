@@ -3,7 +3,7 @@ name: CI
 on: [push]
 
 jobs:
-  run-tests:
+  run-frontend-tests:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -28,13 +28,13 @@ jobs:
       - name: Build Docker image for frontend
         run: |
           docker build -t frontend -f frontend/Dockerfile .
-  build-api-image:
+  build-api-image-and-run-tests:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Build Docker image for api
+      - name: Build Docker image and run tests for api
         run: |
           cd api
-          docker build -t api .
+          docker-compose run server rails test

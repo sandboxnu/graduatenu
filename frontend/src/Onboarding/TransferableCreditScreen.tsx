@@ -1,9 +1,13 @@
 import { Grid, Paper } from "@material-ui/core";
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { useDispatch, shallowEqual, useSelector } from "react-redux";
 import { TransferableExam, TransferableExamGroup } from "../../../common/types";
-import { setExamCredits } from "../state/actions/userActions";
+import {
+  addPlanIdAction,
+  setExamCredits,
+  setLinkSharingAction,
+  setPlanNameAction,
+} from "../state/actions/userActions";
 import {
   MainTitleText,
   OnboardingSelectionTemplate,
@@ -12,6 +16,20 @@ import {
 } from "./GenericOnboarding";
 import { APExamGroups2020To2021 } from "../../../common/ap_exams";
 import { IBExamGroups2020To2021 } from "../../../common/ib_exams";
+import { ScheduleSlice } from "../models/types";
+import { createPlanForUser } from "../services/PlanService";
+import {
+  getAcademicYearFromState,
+  getDeclaredMajorFromState,
+  getGraduationYearFromState,
+  getPlanStrFromState,
+  getScheduleDataFromState,
+  getUserId,
+} from "../state";
+import { AppState } from "../state/reducers/state";
+import { addNewSchedule } from "../state/actions/schedulesActions";
+import { updateUser } from "../services/UserService";
+import { getAuthToken } from "../utils/auth-helpers";
 
 interface TransferableExamGroupComponentProps {
   readonly transferableExamGroup: TransferableExamGroup;
@@ -130,19 +148,72 @@ const TransferableExamGroupsComponent: React.FC<
 };
 
 const TransferableCreditScreen: React.FC = () => {
+  const {
+    major,
+    planStr,
+    getCurrentScheduleData,
+    userId,
+    academicYear,
+    graduationYear,
+  } = useSelector(
+    (state: AppState) => ({
+      major: getDeclaredMajorFromState(state),
+      planStr: getPlanStrFromState(state),
+      getCurrentScheduleData: () => getScheduleDataFromState(state),
+      userId: getUserId(state),
+      academicYear: getAcademicYearFromState(state),
+      graduationYear: getGraduationYearFromState(state),
+    }),
+    shallowEqual
+  );
+
   const dispatch = useDispatch();
   const [selectedTransferableExams, setSelectedTransferableExams] = useState<
     Array<TransferableExam>
   >([]);
 
-  const onSubmit = (): void => {
+  const onSubmit = (): Promise<void> => {
     dispatch(setExamCredits(selectedTransferableExams));
-  };
+    const token = getAuthToken();
+    const scheduleData: ScheduleSlice = getCurrentScheduleData();
 
-  // indicates if the user came from login button on welcome page
-  const location = useLocation();
-  const { fromOnBoardingGuest } = (location.state as any) || {
-    fromOnBoardingGuest: false,
+    return new Promise((resolve, reject) => {
+      const updateUserPromise = () =>
+        updateUser(
+          {
+            id: userId!,
+            token: token,
+          },
+          {
+            major: major.name,
+            academic_year: academicYear,
+            graduation_year: graduationYear,
+            coop_cycle: planStr,
+            // TODO: add completed and transfer courses
+          }
+        );
+
+      const createPlanPromise = () =>
+        createPlanForUser(userId!, token, {
+          name: "Plan 1",
+          link_sharing_enabled: false,
+          schedule: scheduleData.schedule,
+          major: major ? major.name : "",
+          coop_cycle: planStr ? planStr : "None",
+          course_counter: scheduleData.currentClassCounter,
+          warnings: scheduleData.warnings,
+          course_warnings: scheduleData.courseWarnings,
+        }).then(plan => {
+          dispatch(addNewSchedule(plan.plan.name, plan.plan as ScheduleSlice));
+          dispatch(addPlanIdAction(plan.plan.id));
+          dispatch(setPlanNameAction(plan.plan.name));
+          dispatch(setLinkSharingAction(plan.plan.link_sharing_enabled));
+        });
+
+      Promise.all([updateUserPromise(), createPlanPromise()]).then(() =>
+        resolve()
+      );
+    });
   };
 
   return (
@@ -150,7 +221,7 @@ const TransferableCreditScreen: React.FC = () => {
       screen={3}
       mainTitleText={"Select any exams you took for AP or IB credit:"}
       onSubmit={onSubmit}
-      to={fromOnBoardingGuest ? "/home" : "/signup"}
+      to={"/home"}
     >
       <Grid container justify="space-evenly">
         <Grid key={0} item>

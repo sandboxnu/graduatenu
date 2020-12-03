@@ -6,7 +6,6 @@ import { OutlinedButton } from "../components/common/OutlinedButton";
 import { PrimaryButton } from "../components/common/PrimaryButton";
 import { TextField } from "@material-ui/core";
 import Autocomplete from "@material-ui/lab/Autocomplete";
-import { ChangePasswordModal } from "./ChangePasswordModal";
 import { IconButton } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
 import {
@@ -22,7 +21,6 @@ import {
   getDeclaredMajorFromState,
   getUserCoopCycleFromState,
   getFullNameFromState,
-  getTokenFromState,
   getUserId,
   getEmail,
   getUserCatalogYearFromState,
@@ -34,6 +32,8 @@ import { planToString } from "../utils";
 import { updateUser } from "../services/UserService";
 import { IUpdateUser, IUpdateUserData } from "../models/types";
 import { findMajorFromName } from "../utils/plan-helpers";
+import { ChangePasswordModal } from "./ChangePasswordModal";
+import { getAuthToken } from "../utils/auth-helpers";
 
 const OuterContainer = styled.div`
   width: 50%;
@@ -141,7 +141,6 @@ interface SaveProps {
   email: string;
   major: Major;
   coop: string;
-  token: string;
   id: number;
   catalogYear: number;
   setDeclaredMajorAction: (major?: Major) => void;
@@ -152,7 +151,6 @@ interface SaveProps {
 }
 
 interface ChangePasswordProps {
-  token: string;
   id: number;
 }
 
@@ -258,7 +256,7 @@ const ProfileAdvisor = (props: any) => {
     return (
         <ProfileEntryContainer>
             <ItemTitle> Advisor </ItemTitle>
-            {props.isEdit && 
+            {props.isEdit &&
                 <Autocomplete
                     disableListWrap
                     options={["advisor", "advisor 2", "advisor 3"]}
@@ -273,7 +271,7 @@ const ProfileAdvisor = (props: any) => {
                     onChange={(event: React.SyntheticEvent<{}>, value: any) => props.setAdvisor(value)}
                 />
             }
-            {!props.isEdit && 
+            {!props.isEdit &&
                 <ItemEntry> {props.advisor} </ItemEntry>
             }
         </ProfileEntryContainer>
@@ -307,8 +305,10 @@ const save = (props: SaveProps) => {
   props.setEmailAction(props.email);
   props.setUserCoopCycleAction(props.coop);
 
+  const token = getAuthToken();
+
   const user: IUpdateUser = {
-    token: props.token,
+    token: token,
     id: props.id,
   };
 
@@ -317,7 +317,7 @@ const save = (props: SaveProps) => {
     email: props.email,
     major: props.major != undefined ? props.major.name : "",
     coop_cycle:
-      props.coop != undefined && props.coop != "None Selected"
+      props.coop != undefined && props.coop !== "None Selected"
         ? props.coop
         : "",
   };
@@ -330,6 +330,7 @@ const SaveButton = (props: SaveProps) => {
 
 const ChangePassword = (props: ChangePasswordProps) => {
   const [open, setOpen] = React.useState(false);
+  const token = getAuthToken();
 
   return (
     <div>
@@ -339,7 +340,7 @@ const ChangePassword = (props: ChangePasswordProps) => {
           <OutlinedButton>Change Password</OutlinedButton>
         </div>
       </ProfileEntryContainer>
-      <ChangePasswordModal open={open} setOpen={setOpen} token={props.token} />
+      <ChangePasswordModal open={open} setOpen={setOpen} token={token} />
     </div>
   );
 };
@@ -396,9 +397,9 @@ const ProfileComponent: React.FC = (props: any) => {
                   major={major}
                 />
               )}
-              {props.token != undefined && props.token.length > 0 && (
+              {/* {props.token != undefined && props.token.length > 0 && (
                 <ChangePassword token={props.token} id={props.id} />
-              )}
+              )} */}
             </ProfileColumn>
             <ProfileColumn>
               <ProfileEmail isEdit={isEdit} email={email} setEmail={setEmail} />
@@ -420,7 +421,6 @@ const ProfileComponent: React.FC = (props: any) => {
               email={email}
               major={major}
               coop={coop}
-              token={props.token}
               id={props.id}
               catalogYear={catalogYear}
               setDeclaredMajorAction={props.setDeclaredMajorAction}
@@ -462,7 +462,6 @@ const mapStateToProps = (state: AppState) => ({
   coop: getUserCoopCycleFromState(state),
   majors: getMajors(state),
   plans: getPlans(state),
-  token: getTokenFromState(state),
   id: getUserId(state),
   email: getEmail(state),
   catalogYear: getUserCatalogYearFromState(state),

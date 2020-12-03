@@ -10,8 +10,6 @@ import {
 } from "../../../common/types";
 import { setCompletedRequirements } from "../state/actions/scheduleActions";
 import { getDeclaredMajorFromState } from "../state";
-import { setCompletedCourses } from "../state/actions/scheduleActions";
-import { fetchCourse } from "../api";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import {
   CourseText,
@@ -86,7 +84,8 @@ class CompletedCoursesComponent extends Component<Props, State> {
     this.setState({ modalVisible: true });
   }
 
-  onSubmit() {
+  // not actually async, but we need this method to return a Promise
+  async onSubmit() {
     this.props.setCompletedRequirements(this.state.completedRequirements);
   }
 

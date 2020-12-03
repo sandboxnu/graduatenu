@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import styled from "styled-components";
 import { Button, Theme, withStyles } from "@material-ui/core";
 import titlePicture from "../assets/onboarding-title.png";
@@ -9,9 +9,8 @@ import picture3 from "../assets/onboarding-3.png";
 import { connect } from "react-redux";
 import { getFullNameFromState } from "../state";
 import { AppState } from "../state/reducers/state";
-import { Dispatch, bindActionCreators } from "redux";
-import { fetchMajorsAndPlans as fMAP } from "../utils/fetchMajorsAndPlans";
 import { NORTHEASTERN_RED } from "../constants";
+import { simulateKhouryLogin } from "../services/UserService";
 
 const Header = styled.div`
   display: flex;
@@ -19,6 +18,12 @@ const Header = styled.div`
   padding-left: 5%;
   padding-right: 5%;
   justify-content: space-between;
+  align-items: center;
+`;
+
+const LoginButtonContainer = styled.div`
+  display: flex;
+  flex-direction: row;
   align-items: center;
 `;
 
@@ -106,11 +111,6 @@ const Footer = styled.div`
   justify-content: flex-end;
 `;
 
-const LoginLink = styled(Link)`
-  align-self: center;
-  margin-right: 8px !important;
-`;
-
 const WhiteColorButton = withStyles((theme: Theme) => ({
   root: {
     color: NORTHEASTERN_RED,
@@ -131,12 +131,28 @@ const ColorButton = withStyles((theme: Theme) => ({
   },
 }))(Button);
 
-interface OnboardingProps {
+interface Props {
   fullName: string;
-  fetchMajorsAndPlans: typeof fMAP; // using type of here to annotate the prop with it's correct type
 }
 
-class OnboardingComponent extends React.Component<OnboardingProps> {
+class OnboardingComponent extends React.Component<Props> {
+  dev: boolean;
+
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      redirectUrl: undefined,
+    };
+
+    this.dev = process.env.NODE_ENV === "development";
+  }
+
+  onDevClick() {
+    simulateKhouryLogin().then(response => {
+      window.location.href = response.redirect;
+    });
+  }
+
   renderInfoSection(
     title: string,
     desc: string,
@@ -169,27 +185,27 @@ class OnboardingComponent extends React.Component<OnboardingProps> {
     );
   }
 
-  componentWillMount() {
-    // make an API request to searchNEU to get the supported majors and their corresponding plans.
-    this.props.fetchMajorsAndPlans();
-  }
-
   render() {
-    // fullName will be an empty string if this is the user's first time visiting the site
-    if (!!this.props.fullName) {
-      return <Redirect to="/home" />;
-    }
-
     return (
       <>
         <Header>
           <h1>GraduateNU</h1>
-          <LoginLink
-            to={{ pathname: "/login", state: { fromOnBoarding: true } }}
-            style={{ textDecoration: "none" }}
-          >
-            <ColorButton variant="contained">Login</ColorButton>
-          </LoginLink>
+          <LoginButtonContainer>
+            <a
+              href="https://admin.khoury.northeastern.edu"
+              style={{ textDecoration: "none" }}
+            >
+              <ColorButton variant="contained">Get Started</ColorButton>
+            </a>
+            {this.dev && (
+              <ColorButton
+                variant="contained"
+                onClick={this.onDevClick.bind(this)}
+              >
+                Dev Bypass
+              </ColorButton>
+            )}
+          </LoginButtonContainer>
         </Header>
         <Banner>
           <BannerInfo>
@@ -198,14 +214,14 @@ class OnboardingComponent extends React.Component<OnboardingProps> {
               Navigate the Northeastern graduation requirements and create a
               personalized plan of study.
             </BannerInfoText>
-            <LoginLink
-              to={{ pathname: "/onboarding" }}
-              style={{ textDecoration: "none", alignSelf: "flex-start" }}
+            <a
+              href="https://admin.khoury.northeastern.edu"
+              style={{ textDecoration: "none" }}
             >
               <WhiteColorButton variant="contained">
                 Get Started
               </WhiteColorButton>
-            </LoginLink>
+            </a>
           </BannerInfo>
           <TitlePicture src={titlePicture} alt="title-picture"></TitlePicture>
         </Banner>
@@ -228,12 +244,12 @@ class OnboardingComponent extends React.Component<OnboardingProps> {
           )}
         </Body>
         <Footer>
-          <LoginLink
-            to={{ pathname: "/advisor/templates" }}
-            style={{ textDecoration: "none", alignSelf: "flex-end" }}
+          <a
+            href="https://admin.khoury.northeastern.edu"
+            style={{ textDecoration: "none" }}
           >
             <WhiteColorButton variant="contained">Get Started</WhiteColorButton>
-          </LoginLink>
+          </a>
         </Footer>
       </>
     );
@@ -245,23 +261,8 @@ const mapStateToProps = (state: AppState) => ({
 });
 
 /**
- * Callback to be passed into connect, responsible for dispatching redux actions to update the appstate.
- * @param dispatch responsible for dispatching actions to the redux store.
- */
-const mapDispatchToProps = (dispatch: Dispatch) =>
-  bindActionCreators(
-    {
-      fetchMajorsAndPlans: fMAP,
-    },
-    dispatch
-  );
-
-/**
  * Convert this React component to a component that's connected to the redux store.
  * When rendering the connecting component, the props assigned in mapStateToProps, do not need to
  * be passed down as props from the parent component.
  */
-export const Onboarding = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(OnboardingComponent);
+export const Onboarding = connect(mapStateToProps)(OnboardingComponent);

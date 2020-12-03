@@ -13,7 +13,6 @@ import {
   getScheduleCatalogYearFromState,
   getScheduleMajorFromState,
   getScheduleCoopCycleFromState,
-  isUserLoggedIn,
 } from "../state";
 import {
   setScheduleAction,
@@ -21,7 +20,7 @@ import {
   setScheduleMajor,
   setCatalogYearAction,
 } from "../state/actions/scheduleActions";
-import { DNDSchedule, StatusEnum } from "../models/types";
+import { DNDSchedule } from "../models/types";
 import { Major, Schedule } from "../../../common/types";
 import {
   getMajors,
@@ -97,7 +96,6 @@ interface ReduxStoreEditPlanProps {
   creditsTaken: number;
   name: string;
   catalogYear?: number;
-  isLoggedIn: boolean;
 }
 
 interface ReduxDispatchEditPlanProps {
@@ -300,11 +298,9 @@ export class EditPlanPopperComponent extends React.Component<
             <PlanCard>
               <TopRow>
                 <NameText>{this.props.name}</NameText>
-                {this.props.isLoggedIn && (
-                  <EditProfileButton to="/profile">
-                    Edit Profile
-                  </EditProfileButton>
-                )}
+                {/* <EditProfileButton to="/profile">
+                  Edit Profile
+                </EditProfileButton> */}
               </TopRow>
               <StandingText>
                 {getStandingFromCompletedCourses(this.props.creditsTaken)}
@@ -340,7 +336,6 @@ const mapStateToProps = (state: AppState) => ({
   name: getFullNameFromState(state),
   //adding catalog year to appState? or to user
   catalogYear: getScheduleCatalogYearFromState(state),
-  isLoggedIn: isUserLoggedIn(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({

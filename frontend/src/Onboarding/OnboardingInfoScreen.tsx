@@ -9,7 +9,6 @@ import { Dispatch } from "redux";
 import { Major, Schedule } from "../../../common/types";
 import { planToString } from "../utils";
 import {
-  setFullNameAction,
   setDeclaredMajorAction,
   setAcademicYearAction,
   setGraduationYearAction,
@@ -29,6 +28,7 @@ import {
   getPlans,
   getMajorsLoadingFlag,
   getPlansLoadingFlag,
+  getDeclaredMajorFromState,
 } from "../state";
 import { AppState } from "../state/reducers/state";
 import Autocomplete from "@material-ui/lab/Autocomplete";
@@ -43,10 +43,6 @@ const SpinnerWrapper = styled.div`
   height: 700px;
 `;
 
-interface NameScreenProps {
-  setFullName: (fullName: string) => void;
-}
-
 interface AcademicYearScreenProps {
   setAcademicYear: (academicYear: number) => void;
 }
@@ -60,6 +56,7 @@ interface MajorScreenProps {
   setCoopCycle: (coopCycle: string, plan: Schedule) => void;
   setPlanStr: (planStr?: string) => void;
   setPlan: (plan: Schedule) => void;
+  major?: Major;
   majors: Major[];
   plans: Record<string, Schedule[]>;
   isFetchingMajors: boolean;
@@ -70,16 +67,10 @@ interface CatalogYearScreenProps {
   setCatalogYear: (catalogYear: number) => void;
 }
 
-type OnboardingScreenProps = NameScreenProps &
-  AcademicYearScreenProps &
+type OnboardingScreenProps = AcademicYearScreenProps &
   GraduationYearScreenProps &
   MajorScreenProps &
   CatalogYearScreenProps;
-
-interface NameScreenState {
-  textFieldStr: string;
-  beenEditedName: boolean;
-}
 
 interface AcademicYearScreenState {
   year?: number;
@@ -102,8 +93,7 @@ interface CatalogYearScreenState {
 
 const marginSpace = 12;
 
-type OnboardingScreenState = NameScreenState &
-  AcademicYearScreenState &
+type OnboardingScreenState = AcademicYearScreenState &
   GraduationYearScreenState &
   MajorScreenState &
   CatalogYearScreenState;
@@ -118,14 +108,12 @@ class OnboardingScreenComponent extends React.Component<
     super(props);
 
     this.state = {
-      textFieldStr: "",
       year: undefined,
       gradYear: undefined,
       catalogYear: undefined,
-      beenEditedName: false,
       beenEditedYear: false,
       beenEditedGrad: false,
-      major: undefined,
+      major: props.major,
       planStr: undefined,
     };
   }
@@ -134,14 +122,6 @@ class OnboardingScreenComponent extends React.Component<
    * All of the different functions that modify the properies of the screen as they are
    * changed
    */
-
-  onChangeName(e: React.ChangeEvent<HTMLInputElement>) {
-    this.setState({
-      textFieldStr: e.target.value,
-      beenEditedName: true,
-    });
-  }
-
   onChangeYear(e: any) {
     this.setState({
       year: Number(e.target.value),
@@ -180,7 +160,6 @@ class OnboardingScreenComponent extends React.Component<
    */
   onSubmit() {
     this.props.setMajor(this.state.major);
-    this.props.setFullName(this.state.textFieldStr);
     this.props.setAcademicYear(this.state.year!);
     this.props.setGraduationYear(this.state.gradYear!);
     this.props.setCatalogYear(this.state.catalogYear!);
@@ -214,32 +193,14 @@ class OnboardingScreenComponent extends React.Component<
             fullWidth
           />
         )}
-        value={!!this.state.major ? this.state.major.name + " " : ""}
-        onChange={this.onChangeMajor.bind(this)}
-      />
-    );
-  }
-
-  /**
-   * Renders the name text field
-   */
-  renderNameTextField(textFieldStr: string, beenEditedName: boolean) {
-    return (
-      <TextField
-        id="outlined-basic"
-        label="Full Name"
-        variant="outlined"
-        value={textFieldStr}
-        onChange={this.onChangeName.bind(this)}
-        placeholder="John Smith"
-        error={textFieldStr.length === 0 && beenEditedName}
-        style={{ marginTop: 36, marginBottom: marginSpace, minWidth: 326 }}
-        helperText={
-          (" H " && (!beenEditedName || textFieldStr.length !== 0)) ||
-          (textFieldStr.length === 0 &&
-            beenEditedName &&
-            "Please enter a valid name")
+        value={
+          !!this.state.major
+            ? this.state.major.name + " "
+            : !!this.props.major
+            ? this.props.major.name
+            : ""
         }
+        onChange={this.onChangeMajor.bind(this)}
       />
     );
   }
@@ -372,19 +333,7 @@ class OnboardingScreenComponent extends React.Component<
   }
 
   render() {
-    // indicates if the user came from login button on welcome page
-    const { fromOnBoardingGuest } = (this.props.location.state as any) || {
-      fromOnBoardingGuest: false,
-    };
-
-    const {
-      gradYear,
-      year,
-      textFieldStr,
-      beenEditedName,
-      beenEditedGrad,
-      beenEditedYear,
-    } = this.state;
+    const { gradYear, year, beenEditedGrad, beenEditedYear } = this.state;
     const { isFetchingMajors, isFetchingPlans } = this.props;
 
     if (isFetchingMajors || isFetchingPlans) {
@@ -405,23 +354,16 @@ class OnboardingScreenComponent extends React.Component<
       // required fields are filled out before allowing it to move to the next screen
       return (
         <GenericOnboardingTemplate screen={0}>
-          {this.renderNameTextField(textFieldStr, beenEditedName)}
           {this.renderAcademicYearSelect(year, beenEditedYear)}
           {this.renderGradYearSelect(gradYear, beenEditedGrad)}
           {this.renderCatalogYearDropDown()}
           {!!this.state.catalogYear && this.renderMajorDropDown()}
           {!!this.state.major && this.renderCoopCycleDropDown()}
 
-          {textFieldStr.length !== 0 && !!year && !!gradYear ? (
+          {!!year && !!gradYear ? (
             <Link
-              //If guest user comes from login button on welcome page, go to home page, else go to signup page
               to={{
-                pathname: !!this.state.major
-                  ? "/completedCourses"
-                  : fromOnBoardingGuest
-                  ? "/home"
-                  : "/signup",
-                state: { fromOnBoardingGuest: fromOnBoardingGuest },
+                pathname: "/completedCourses",
               }}
               onClick={this.onSubmit.bind(this)}
               style={{ textDecoration: "none" }}
@@ -432,7 +374,6 @@ class OnboardingScreenComponent extends React.Component<
             <div
               onClick={() =>
                 this.setState({
-                  beenEditedName: true,
                   beenEditedYear: true,
                   beenEditedGrad: true,
                 })
@@ -452,7 +393,6 @@ class OnboardingScreenComponent extends React.Component<
  * @param state the AppState
  */
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  setFullName: (fullName: string) => dispatch(setFullNameAction(fullName)),
   setAcademicYear: (academicYear: number) =>
     dispatch(setAcademicYearAction(academicYear)),
   setGraduationYear: (academicYear: number) =>
@@ -469,6 +409,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
  * @param dispatch responsible for dispatching actions to the redux store.
  */
 const mapStateToProps = (state: AppState) => ({
+  major: getDeclaredMajorFromState(state),
   majors: getMajors(state),
   plans: getPlans(state),
   isFetchingMajors: getMajorsLoadingFlag(state),
