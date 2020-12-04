@@ -215,7 +215,6 @@ interface ReduxDispatchHomeProps {
     newSemester: DNDScheduleTerm
   ) => void;
   setUserPlans: (plans: IPlanData[], academicYear: number) => void;
-  setActivePlan: (activePlan: string, academicYear: number) => void;
   updateActivePlan: (updatedPlan: Partial<IPlanData>) => void;
   setActivePlanDNDSchedule: (schedule: DNDSchedule) => void;
   logOut: () => void;
@@ -517,7 +516,7 @@ class HomeComponent extends React.Component<Props, HomeState> {
                   <PlanContainer>
                     <AddPlan />
                   </PlanContainer>
-                  <SwitchPlanPopper userId={this.props.userId} />
+                  <SwitchPlanPopper />
                 </HomeButtons>
               </HomeAboveSchedule>
               {this.renderYears()}
@@ -553,8 +552,6 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   ) => dispatch(updateSemesterForActivePlanAction(year, season, newSemester)),
   setUserPlans: (plans: IPlanData[], academicYear: number) =>
     dispatch(setUserPlansAction(plans, academicYear)),
-  setActivePlan: (activePlan: string, academicYear: number) =>
-    dispatch(setActivePlanAction(activePlan, academicYear)),
   updateActivePlan: (updatedPlan: Partial<IPlanData>) =>
     dispatch(updateActivePlanAction(updatedPlan)),
   setActivePlanDNDSchedule: (schedule: DNDSchedule) =>

@@ -18,13 +18,14 @@ import { Dispatch } from "redux";
 import {
   getAcademicYearFromState,
   getActivePlanFromState,
+  getUserIdFromState,
   getUserPlansFromState,
 } from "../state";
 import {
   deletePlan,
   setActivePlanAction,
 } from "../state/actions/userPlansActions";
-import { IPlanData, NamedSchedule } from "../models/types";
+import { IPlanData } from "../models/types";
 import Loader from "react-loader-spinner";
 import { deletePlanForUser } from "../services/PlanService";
 import { Alert } from "@material-ui/lab";
@@ -79,33 +80,32 @@ const DropDownText = styled.div`
   text-overflow: ellipsis;
 `;
 
-interface SwitchSchedulesProps {
-  userId?: number;
-}
-
-interface ReduxStoreSwitchSchedulesProps {
+interface ReduxStoreSwitchPlanProps {
   activePlan: IPlanData;
   plans: IPlanData[];
   academicYear: number;
+  userId: number;
 }
 
-interface ReduxDispatchSwitchSchedulesProps {
-  setActivePlan: (activePlan: string, academicYear: number) => void;
+interface ReduxDispatchSwitchPlanProps {
+  setActivePlan: (
+    activePlan: string,
+    userId: number,
+    academicYear: number
+  ) => void;
   deletePlan: (name: string) => void;
 }
 
-type Props = SwitchSchedulesProps &
-  ReduxStoreSwitchSchedulesProps &
-  ReduxDispatchSwitchSchedulesProps;
+type Props = ReduxStoreSwitchPlanProps & ReduxDispatchSwitchPlanProps;
 
-interface SwitchSchedulePopperState {
+interface SwitchPlanPopperState {
   anchorEl: null | HTMLElement;
   errorSnackbarOpen: boolean;
 }
 
 export class SwitchPlanPopperComponent extends React.Component<
   Props,
-  SwitchSchedulePopperState
+  SwitchPlanPopperState
 > {
   constructor(props: Props) {
     super(props);
@@ -135,10 +135,14 @@ export class SwitchPlanPopperComponent extends React.Component<
    * Updates this user's active schedule based on the schedule selected in the dropdown.
    */
   onChoosePlan(value: string) {
-    const newSchedule = this.props.plans.find(s => s.name === value);
-    if (newSchedule) {
-      const newActive = newSchedule.name;
-      this.props.setActivePlan(newActive, this.props.academicYear);
+    const newPlan = this.props.plans.find(s => s.name === value);
+    if (newPlan) {
+      const newActive = newPlan.name;
+      this.props.setActivePlan(
+        newActive,
+        this.props.userId,
+        this.props.academicYear
+      );
       this.setState({
         anchorEl: null,
       });
@@ -250,17 +254,18 @@ const mapStateToProps = (state: AppState) => ({
   plans: getUserPlansFromState(state),
   activePlan: getActivePlanFromState(state)!, // SwitchPlanPopper is only visible if there is an active plan
   academicYear: getAcademicYearFromState(state)!,
+  userId: getUserIdFromState(state)!,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  setActivePlan: (activePlan: string, academicYear: number) =>
-    dispatch(setActivePlanAction(activePlan, academicYear)),
+  setActivePlan: (activePlan: string, userId: number, academicYear: number) =>
+    dispatch(setActivePlanAction(activePlan, userId, academicYear)),
   deletePlan: (name: string) => dispatch(deletePlan(name)),
 });
 
 export const SwitchPlanPopper = connect<
-  ReduxStoreSwitchSchedulesProps,
-  ReduxDispatchSwitchSchedulesProps,
+  ReduxStoreSwitchPlanProps,
+  ReduxDispatchSwitchPlanProps,
   {},
   AppState
 >(

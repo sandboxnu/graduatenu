@@ -188,6 +188,7 @@ export interface IPlanData {
   warnings: IWarning[];
   courseWarnings: CourseWarning[];
   courseCounter: number;
+  lastViewed: Date;
 }
 
 /**
@@ -200,6 +201,7 @@ export interface ICreatePlanData {
   major: string;
   coop_cycle: string;
   course_counter: number;
+  last_viewed?: Date;
 }
 /*
  * Data needed to update a user
