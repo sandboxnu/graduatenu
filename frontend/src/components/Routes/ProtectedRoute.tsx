@@ -1,5 +1,5 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { shallowEqual, useSelector } from "react-redux";
 import { Redirect, Route, RouteComponentProps } from "react-router-dom";
 import { RedirectScreen } from "../../Onboarding/RedirectScreen";
 import { getUserIdFromState } from "../../state";
@@ -15,9 +15,12 @@ export function ProtectedRoute({
     | React.ComponentType<any>;
   path: string;
 }) {
-  const { userId } = useSelector((state: AppState) => ({
-    userId: getUserIdFromState(state),
-  }));
+  const { userId } = useSelector(
+    (state: AppState) => ({
+      userId: getUserIdFromState(state),
+    }),
+    shallowEqual
+  );
 
   if (isLoggedIn()) {
     // if user exists in redux

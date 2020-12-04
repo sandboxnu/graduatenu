@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { Redirect } from "react-router";
-import { useDispatch, useSelector } from "react-redux";
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { fetchUser } from "../services/UserService";
 import {
   setUserAction,
@@ -60,7 +60,8 @@ export const RedirectScreen: React.FC<Props> = ({ redirectUrl }) => {
       academicYear: getAcademicYearFromState(state),
       graduationYear: getGraduationYearFromState(state),
       isAdvisor: getIsAdvisorFromState(state),
-    })
+    }),
+    shallowEqual
   );
   const [isLoading, setIsLoading] = useState(true);
 
