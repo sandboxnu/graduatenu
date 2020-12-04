@@ -18,13 +18,6 @@ import {
 } from "../actions/userActions";
 import { IUserData } from "../../models/types";
 import { ScheduleCourse } from "../../../../common/types";
-import {
-  convertToDNDCourses,
-  sumCreditsFromList,
-  numToTerm,
-  getNextTerm,
-  produceWarnings,
-} from "../../utils";
 
 export interface UserState {
   user: IUserData;

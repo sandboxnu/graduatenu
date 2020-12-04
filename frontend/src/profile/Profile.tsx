@@ -3,11 +3,12 @@ import { withRouter, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { PrimaryButton } from "../components/common/PrimaryButton";
-import { TextField } from "@material-ui/core";
+import { FormControl, MenuItem, Select, TextField } from "@material-ui/core";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import { IconButton } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
 import {
+  setGraduationYearAction,
   setUserCoopCycleAction,
   setUserMajorAction,
 } from "../state/actions/userActions";
@@ -88,6 +89,11 @@ const StyledLink = styled(Link)`
   color: #eb5757;
 `;
 
+const WhiteSpace = styled.div`
+  width: 100%;
+  height: 38px;
+`;
+
 const ProfileComponent: React.FC = () => {
   const dispatch = useDispatch();
   const { user, majors, plans } = useSelector((state: AppState) => ({
@@ -97,15 +103,32 @@ const ProfileComponent: React.FC = () => {
   }));
 
   const [isEdit, setEdit] = useState(false);
-  const [major, setMajor] = useState(user.major!);
-  const [advisor, setAdvisor] = useState("");
+  const [major, setMajor] = useState(user.major);
   const [coopCycle, setCoopCycle] = useState(user.coopCycle);
+  const [gradYear, setGradYear] = useState(user.graduationYear!);
+  const [advisor, setAdvisor] = useState("");
 
-  const ProfileName = () => {
+  const ProfileGradYear = () => {
     return (
       <ProfileEntryContainer>
-        <ItemTitle> Name </ItemTitle>
-        <ItemEntry> {user.fullName} </ItemEntry>
+        <ItemTitle> Graduation Year </ItemTitle>
+        {isEdit && (
+          <FormControl variant="outlined">
+            <Select
+              value={gradYear}
+              onChange={(event: any) => setGradYear(event.target.value)}
+            >
+              <MenuItem value={2019}>2019</MenuItem>
+              <MenuItem value={2020}>2020</MenuItem>
+              <MenuItem value={2021}>2021</MenuItem>
+              <MenuItem value={2022}>2022</MenuItem>
+              <MenuItem value={2023}>2023</MenuItem>
+              <MenuItem value={2024}>2024</MenuItem>
+              <MenuItem value={2025}>2025</MenuItem>
+            </Select>
+          </FormControl>
+        )}
+        {!isEdit && <ItemEntry> {user.graduationYear} </ItemEntry>}
       </ProfileEntryContainer>
     );
   };
@@ -141,7 +164,7 @@ const ProfileComponent: React.FC = () => {
         {isEdit && (
           <Autocomplete
             disableListWrap
-            options={plans[major].map((p: Schedule) => planToString(p))}
+            options={plans[major!].map((p: Schedule) => planToString(p))}
             renderInput={params => (
               <TextField {...params} variant="outlined" fullWidth />
             )}
@@ -196,10 +219,14 @@ const ProfileComponent: React.FC = () => {
 
   const save = () => {
     setEdit(false);
-    dispatch(setUserMajorAction(major));
-    if (coopCycle != undefined && coopCycle !== "None Selected") {
-      dispatch(setUserCoopCycleAction(coopCycle));
+    dispatch(setUserMajorAction(major || ""));
+    if (coopCycle !== "None Selected") {
+      dispatch(setUserCoopCycleAction(""));
+    } else {
+      dispatch(setUserCoopCycleAction(coopCycle || ""));
     }
+
+    dispatch(setGraduationYearAction(gradYear));
 
     const token = getAuthToken();
 
@@ -209,6 +236,7 @@ const ProfileComponent: React.FC = () => {
     };
 
     const updateUserData: IUpdateUserData = {
+      graduation_year: gradYear,
       major: major,
       coop_cycle:
         coopCycle != undefined && coopCycle !== "None Selected"
@@ -248,7 +276,7 @@ const ProfileComponent: React.FC = () => {
       <OuterContainer>
         <InnerContainer>
           <ProfileTitleContainer>
-            <ProfileTitle> Profile </ProfileTitle>
+            <ProfileTitle> {user.fullName} </ProfileTitle>
             {!isEdit && (
               <IconButton
                 onClick={() => setEdit(true)}
@@ -263,14 +291,15 @@ const ProfileComponent: React.FC = () => {
           </ProfileTitleContainer>
           <DataContainer>
             <ProfileColumn>
-              <ProfileName />
+              <ProfileEmail />
+              {isEdit && <WhiteSpace />}
               <ProfileMajor />
               {/* {props.token != undefined && props.token.length > 0 && (
                 <ChangePassword token={props.token} id={props.id} />
               )} */}
             </ProfileColumn>
             <ProfileColumn>
-              <ProfileEmail />
+              <ProfileGradYear />
               {!!major && <ProfileCoop />}
             </ProfileColumn>
           </DataContainer>
