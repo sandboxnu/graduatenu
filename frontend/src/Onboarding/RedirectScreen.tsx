@@ -49,27 +49,29 @@ export const RedirectScreen: React.FC<Props> = ({ redirectUrl }) => {
         fetchUser(cookie)
           .then(response => {
             dispatch(setUserAction(response.user));
-            Promise.all([
-              getScheduleCoursesFromSimplifiedCourseDataAPI(
-                response.user.coursesCompleted
-              ).then(courses => {
-                dispatch(setCompletedCoursesAction(courses));
-              }),
-              getScheduleCoursesFromSimplifiedCourseDataAPI(
-                response.user.coursesTransfer
-              ).then(courses => {
-                dispatch(setTransferCoursesAction(courses));
-              }),
-            ]).then(_ => {
-              setIsAdvisor(response.user.isAdvisor);
-              if (!response.user.isAdvisor) {
-                // student
+            setIsAdvisor(response.user.isAdvisor);
+            if (!response.user.isAdvisor) {
+              // student
+              Promise.all([
+                getScheduleCoursesFromSimplifiedCourseDataAPI(
+                  response.user.coursesCompleted
+                ).then(courses => {
+                  dispatch(setCompletedCoursesAction(courses));
+                }),
+                getScheduleCoursesFromSimplifiedCourseDataAPI(
+                  response.user.coursesTransfer
+                ).then(courses => {
+                  dispatch(setTransferCoursesAction(courses));
+                }),
+              ]).then(() => {
                 setNeedsToGoToOnboarding(
                   !response.user.graduationYear || !response.user.academicYear
                 );
-              }
-              setIsLoading(false); // this update must come last, to make sure other state variables are correctly set before we redirect
-            });
+                setIsLoading(false); // this update must come last, to make sure other state variables are correctly set before we redirect
+              });
+            } else {
+              setIsLoading(false);
+            }
           })
           .catch(e => {
             // TODO: Log error to some service like rollbar
