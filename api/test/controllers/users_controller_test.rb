@@ -2,7 +2,6 @@ require 'test_helper'
 
 class UsersControllerTest < ActionController::TestCase
   def test_show__authorized
-    Rails.application.credentials.expects(:secret_key_base).returns('123') # to mock master key in ci tests
     user = create(:user)
 
     @controller.instance_variable_set(:@current_user_id, user.id)
@@ -28,7 +27,6 @@ class UsersControllerTest < ActionController::TestCase
   end
 
   def test_update__authorized
-    Rails.application.credentials.expects(:secret_key_base).returns('123') # to mock master key in ci tests
     user = create(:user)
 
     @controller.instance_variable_set(:@current_user_id, user.id)
