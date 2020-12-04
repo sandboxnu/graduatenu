@@ -9,7 +9,6 @@ import {
   ICourseRange,
   IOrCourse,
   TransferableExam,
-  IRequiredCourse,
 } from "../../../common/types";
 
 /**
