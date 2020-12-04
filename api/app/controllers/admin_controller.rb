@@ -56,7 +56,8 @@ class AdminController < ApplicationController
       major: user_params[:major],
       username: user_params[:first_name] + ' ' + user_params[:last_name],
       image_url: user_params[:photo_url],
-      # TODO: do we need to update courses here?
+      courses_transfer: user_params[:courses].select { |a| a['completion'] == 'TRANSFER' },
+      courses_completed: user_params[:courses].select { |a| a['completion'] == 'PASSED' },
     )
       render json: { errors: @user.errors }, status: :unprocessable_entity
       return true
@@ -71,7 +72,8 @@ class AdminController < ApplicationController
       major: user_params[:major],
       username: user_params[:first_name] + ' ' + user_params[:last_name],
       image_url: user_params[:photo_url],
-      completed_courses: [],
+      courses_transfer: user_params[:courses].select { |a| a['completion'] == 'TRANSFER' },
+      courses_completed: user_params[:courses].select { |a| a['completion'] == 'PASSED' },
     )
 
     unless @user.save
@@ -91,6 +93,6 @@ class AdminController < ApplicationController
 
   # user data from khoury
   def user_params
-    params.permit(:email, :is_advisor, :major, :first_name, :last_name, :photo_url, :nuid, :courses)
+    params.require(:admin).permit(:email, :is_advisor, :major, :first_name, :last_name, :photo_url, :nu_id, courses: [:subject, :course_id, :semester, :completion])
   end
 end

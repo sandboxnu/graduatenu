@@ -17,16 +17,18 @@ import { ScheduleSlice } from "../models/types";
 import { createPlanForUser } from "../services/PlanService";
 import {
   getAcademicYearFromState,
-  getUserMajorFromState,
   getGraduationYearFromState,
+  getUserMajorFromState,
   getUserIdFromState,
   getUserCoopCycleFromState,
   getCompletedCoursesFromState,
+  getTransferCoursesFromState
 } from "../state";
 import { AppState } from "../state/reducers/state";
 import { addNewPlanAction } from "../state/actions/userPlansActions";
 import { updateUser } from "../services/UserService";
 import { getAuthToken } from "../utils/auth-helpers";
+import { getSimplifiedCourseData } from "../utils/completed-courses-helpers";
 import { generateInitialSchedule } from "../utils";
 
 interface TransferableExamGroupComponentProps {
@@ -153,6 +155,7 @@ const TransferableCreditScreen: React.FC = () => {
     graduationYear,
     coopCycle,
     completedCourses,
+    transferCourses
   } = useSelector(
     (state: AppState) => ({
       userId: getUserIdFromState(state),
@@ -160,6 +163,7 @@ const TransferableCreditScreen: React.FC = () => {
       academicYear: getAcademicYearFromState(state)!,
       graduationYear: getGraduationYearFromState(state)!,
       coopCycle: getUserCoopCycleFromState(state),
+      transferCourses: getTransferCoursesFromState(state),
       completedCourses: getCompletedCoursesFromState(state),
     }),
     shallowEqual
@@ -185,7 +189,15 @@ const TransferableCreditScreen: React.FC = () => {
           academic_year: academicYear,
           graduation_year: graduationYear,
           coop_cycle: coopCycle,
-          // TODO: add completed and transfer courses
+          // TODO: Once khoury gives us this info, we shouldn't update transfer/completed if khoury user
+          courses_transfer: getSimplifiedCourseData(
+            transferCourses,
+            "TRANSFER"
+          ),
+          courses_completed: getSimplifiedCourseData(
+            completedCourses,
+            "PASSED"
+          ),
         }
       );
 
@@ -203,8 +215,10 @@ const TransferableCreditScreen: React.FC = () => {
       });
     }
 
-      Promise.all([updateUserPromise(), createPlanPromise()]).then(() => resolve())
-    })
+      Promise.all([updateUserPromise(), createPlanPromise()]).then(() =>
+        resolve()
+      );
+    });
   };
 
   return (

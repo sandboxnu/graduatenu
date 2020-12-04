@@ -25,9 +25,6 @@
 #
 class User < ApplicationRecord
   JWT_EXPIRATION = 60.days
-
-  has_many :transfer_courses, foreign_key: 'user_id', class_name: "Course"
-  has_many :completed_courses, foreign_key: 'user_id', class_name: "Course"
   has_many :plans, dependent: :destroy
 
   #validates a non-unique username and allows spaces

@@ -220,6 +220,8 @@ export interface IUpdateUserData {
   graduation_year?: number;
   coop_cycle?: string;
   nu_id?: string;
+  courses_transfer?: ISimplifiedCourseDataAPI[];
+  courses_completed?: ISimplifiedCourseDataAPI[];
 }
 
 /**
@@ -229,6 +231,24 @@ export interface IUpdateUserPassword {
   old_password: string;
   new_password: string;
   confirm_password: string;
+}
+
+/**
+ * A model for simplified course data
+ */
+export interface ISimplifiedCourseData {
+  subject: string;
+  classId: string | number;
+}
+
+/**
+ * A model for simplified course data for API
+ */
+export interface ISimplifiedCourseDataAPI {
+  subject: string;
+  course_id: string;
+  semester?: string;
+  completion?: string;
 }
 
 /** ------------------------------------------------------------------------
