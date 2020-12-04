@@ -10339,6 +10339,7 @@ Object {
                 },
                 Object {
                   "classId": "2350",
+                  "missing": true,
                   "subject": "ENGL",
                 },
               ],
@@ -11234,6 +11235,7 @@ Object {
                 },
                 Object {
                   "classId": "2350",
+                  "missing": true,
                   "subject": "ENGL",
                 },
               ],
@@ -24639,6 +24641,7 @@ Object {
                     },
                     Object {
                       "classId": "1217",
+                      "missing": true,
                       "subject": "CHEM",
                     },
                     Object {
@@ -24764,6 +24767,7 @@ Object {
                 },
                 Object {
                   "classId": "1220",
+                  "missing": true,
                   "subject": "CHEM",
                 },
                 Object {
@@ -25201,6 +25205,7 @@ Object {
                     },
                     Object {
                       "classId": "1220",
+                      "missing": true,
                       "subject": "CHEM",
                     },
                     Object {
@@ -25850,6 +25855,7 @@ Object {
                     },
                     Object {
                       "classId": "1217",
+                      "missing": true,
                       "subject": "CHEM",
                     },
                     Object {
@@ -25975,6 +25981,7 @@ Object {
                 },
                 Object {
                   "classId": "1220",
+                  "missing": true,
                   "subject": "CHEM",
                 },
                 Object {
@@ -26499,6 +26506,7 @@ Object {
                     },
                     Object {
                       "classId": "1220",
+                      "missing": true,
                       "subject": "CHEM",
                     },
                     Object {
@@ -27061,6 +27069,7 @@ Object {
                     },
                     Object {
                       "classId": "1217",
+                      "missing": true,
                       "subject": "CHEM",
                     },
                     Object {
@@ -27171,6 +27180,7 @@ Object {
                 },
                 Object {
                   "classId": "1220",
+                  "missing": true,
                   "subject": "CHEM",
                 },
                 Object {
@@ -27633,6 +27643,7 @@ Object {
                     },
                     Object {
                       "classId": "1220",
+                      "missing": true,
                       "subject": "CHEM",
                     },
                     Object {
@@ -28308,6 +28319,7 @@ Object {
                     },
                     Object {
                       "classId": "1217",
+                      "missing": true,
                       "subject": "CHEM",
                     },
                     Object {
@@ -28418,6 +28430,7 @@ Object {
                 },
                 Object {
                   "classId": "1220",
+                  "missing": true,
                   "subject": "CHEM",
                 },
                 Object {
@@ -28934,6 +28947,7 @@ Object {
                     },
                     Object {
                       "classId": "1220",
+                      "missing": true,
                       "subject": "CHEM",
                     },
                     Object {
