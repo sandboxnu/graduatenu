@@ -37,7 +37,6 @@ FactoryBot.define do
       }
     ].to_json
     schedule_json = {
-      "id": "0",
       "years": [
           1000,
           1001,

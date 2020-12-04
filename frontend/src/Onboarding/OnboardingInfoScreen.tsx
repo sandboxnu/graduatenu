@@ -9,11 +9,11 @@ import { Dispatch } from "redux";
 import { Major, Schedule } from "../../../common/types";
 import { planToString } from "../utils";
 import {
-  setDeclaredMajorAction,
   setAcademicYearAction,
   setGraduationYearAction,
+  setUserCoopCycleAction,
+  setUserMajorAction,
 } from "../state/actions/userActions";
-import { setCoopCycle } from "../state/actions/scheduleActions";
 import Loader from "react-loader-spinner";
 import {
   FormControl,
@@ -23,11 +23,11 @@ import {
   FormHelperText,
 } from "@material-ui/core";
 import {
-  getMajors,
-  getPlans,
-  getMajorsLoadingFlag,
-  getPlansLoadingFlag,
-  getDeclaredMajorFromState,
+  getMajorsFromState,
+  getPlansFromState,
+  getMajorsLoadingFlagFromState,
+  getPlansLoadingFlagFromState,
+  getUserMajorFromState,
 } from "../state";
 import { AppState } from "../state/reducers/state";
 import Autocomplete from "@material-ui/lab/Autocomplete";
@@ -51,9 +51,7 @@ interface GraduationYearScreenProps {
 
 interface MajorScreenProps {
   setMajor: (major?: Major) => void;
-  setCoopCycle: (coopCycle: string, plan: Schedule) => void;
-  setPlanStr: (planStr?: string) => void;
-  setPlan: (plan: Schedule) => void;
+  setCoopCycle: (coopCycle: string) => void;
   major?: Major;
   majors: Major[];
   plans: Record<string, Schedule[]>;
@@ -141,13 +139,8 @@ class OnboardingScreenComponent extends React.Component<
     this.props.setMajor(this.state.major);
     this.props.setAcademicYear(this.state.year!);
     this.props.setGraduationYear(this.state.gradYear!);
-
     if (this.state.planStr) {
-      const plan = this.props.plans[this.state.major!.name].find(
-        (p: Schedule) => planToString(p) === this.state.planStr
-      );
-
-      this.props.setCoopCycle(this.state.planStr, plan!);
+      this.props.setCoopCycle(this.state.planStr);
     }
   }
 
@@ -337,9 +330,9 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     dispatch(setAcademicYearAction(academicYear)),
   setGraduationYear: (academicYear: number) =>
     dispatch(setGraduationYearAction(academicYear)),
-  setMajor: (major?: Major) => dispatch(setDeclaredMajorAction(major)),
-  setCoopCycle: (coopCycle: string, plan: Schedule) =>
-    dispatch(setCoopCycle(coopCycle, plan)),
+  setMajor: (major?: Major) => dispatch(setUserMajorAction(major?.name || '')),
+  setCoopCycle: (coopCycle: string) =>
+    dispatch(setUserCoopCycleAction(coopCycle)),
 });
 
 /**
@@ -347,11 +340,11 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
  * @param dispatch responsible for dispatching actions to the redux store.
  */
 const mapStateToProps = (state: AppState) => ({
-  major: getDeclaredMajorFromState(state),
-  majors: getMajors(state),
-  plans: getPlans(state),
-  isFetchingMajors: getMajorsLoadingFlag(state),
-  isFetchingPlans: getPlansLoadingFlag(state),
+  major: getUserMajorFromState(state),
+  majors: getMajorsFromState(state),
+  plans: getPlansFromState(state),
+  isFetchingMajors: getMajorsLoadingFlagFromState(state),
+  isFetchingPlans: getPlansLoadingFlagFromState(state),
 });
 
 /**

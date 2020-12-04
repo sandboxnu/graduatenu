@@ -260,7 +260,6 @@ export interface Schedule {
   yearMap: {
     [key: number]: ScheduleYear;
   };
-  id: string;
 }
 
 /**

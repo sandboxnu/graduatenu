@@ -4,21 +4,11 @@ import { Redirect } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUser } from "../services/UserService";
 import {
-  setFullNameAction,
-  setUserIdAction,
-  setDeclaredMajorAction,
-  setUserCoopCycleAction,
-  setEmailAction,
-  setIsAdvisorAction,
-  setGraduationYearAction,
-  setAcademicYearAction,
+  setUserAction,
+  setCompletedCoursesAction,
+  setTransferCoursesAction,
 } from "../state/actions/userActions";
-import {
-  setCompletedCourses,
-  setTransferCourses,
-} from "../state/actions/scheduleActions";
 import { AppState } from "../state/reducers/state";
-import { findMajorFromName } from "../utils/plan-helpers";
 import {
   getAcademicYearFromState,
   getGraduationYearFromState,
@@ -95,27 +85,17 @@ export const RedirectScreen: React.FC<Props> = ({ redirectUrl }) => {
         }); // set persisting cookie for all paths
         fetchUser(cookie)
           .then(response => {
-            dispatch(setFullNameAction(response.user.username));
-            dispatch(setGraduationYearAction(response.user.graduationYear));
-            dispatch(setAcademicYearAction(response.user.academicYear));
-            const maj = findMajorFromName(response.user.major, majors);
-            if (maj) {
-              dispatch(setDeclaredMajorAction(maj));
-            }
-            dispatch(setUserIdAction(response.user.id));
-            dispatch(setEmailAction(response.user.email));
-            dispatch(setUserCoopCycleAction(response.user.coopCycle));
-            dispatch(setIsAdvisorAction(response.user.isAdvisor));
+            dispatch(setUserAction(response.user));
             Promise.all([
               getScheduleCoursesFromSimplifiedCourseDataAPI(
                 response.user.coursesCompleted
               ).then(courses => {
-                dispatch(setCompletedCourses(courses));
+                dispatch(setCompletedCoursesAction(courses));
               }),
               getScheduleCoursesFromSimplifiedCourseDataAPI(
                 response.user.coursesTransfer
               ).then(courses => {
-                dispatch(setTransferCourses(courses));
+                dispatch(setTransferCoursesAction(courses));
               }),
             ]).then(_ => setIsLoading(false));
           })

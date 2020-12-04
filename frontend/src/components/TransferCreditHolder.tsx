@@ -7,8 +7,7 @@ import { ScheduleCourse } from "../../../common/types";
 import {
   addTransferClassAction,
   removeTransferClassAction,
-  undoRemoveClassAction,
-} from "../state/actions/scheduleActions";
+} from "../state/actions/userActions";
 import { AddBlock } from "./ClassBlocks/AddBlock";
 import { NonDraggableClassBlock } from "./ClassBlocks/NonDraggableClassBlock";
 import { UndoDelete } from "./UndoDelete";
@@ -26,7 +25,6 @@ interface TransferCreditsState {
 interface ReduxDispatchTransferCreditsProps {
   handleAddClasses: (courses: ScheduleCourse[]) => void;
   onDeleteClass: (course: ScheduleCourse) => void;
-  onUndoDeleteClass: () => void;
 }
 
 type Props = TransferCreditsProps & ReduxDispatchTransferCreditsProps;
@@ -113,12 +111,9 @@ class TransferCreditsComponent extends React.Component<
   };
 
   undoButtonPressed = () => {
-    this.setState(
-      {
-        snackbarOpen: false,
-      },
-      this.props.onUndoDeleteClass
-    );
+    this.setState({
+      snackbarOpen: false,
+    });
   };
 
   closeSnackBar = () => {
@@ -190,7 +185,6 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     dispatch(addTransferClassAction(courses)),
   onDeleteClass: (course: ScheduleCourse) =>
     dispatch(removeTransferClassAction(course)),
-  onUndoDeleteClass: () => dispatch(undoRemoveClassAction()),
 });
 
 export const TransferCredits = connect(
