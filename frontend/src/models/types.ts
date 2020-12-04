@@ -215,8 +215,8 @@ export interface IUpdateUser {
  */
 export interface IUpdateUserData {
   email?: string;
-  major?: string;
-  username?: string;
+  major?: string | null;
+  full_name?: string;
   academic_year?: number;
   graduation_year?: number;
   coop_cycle?: string | null;

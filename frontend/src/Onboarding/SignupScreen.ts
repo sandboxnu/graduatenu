@@ -167,7 +167,7 @@ export {};
 //       const user: IUpdateUserData = {
 //         email: this.state.emailStr,
 //         // password: this.state.passwordStr,
-//         username: this.props.fullName,
+//         full_name: this.props.fullName,
 //         academic_year: this.props.academicYear,
 //         graduation_year: this.props.graduationYear,
 //         major: this.props.major ? this.props.major.name : undefined,

@@ -1,1 +1,1 @@
-json.(user, :id, :email, :username, :academic_year, :graduation_year, :major, :coop_cycle, :is_advisor, :nu_id, :courses_completed, :courses_transfer)
+json.(user, :id, :email, :full_name, :academic_year, :graduation_year, :major, :coop_cycle, :is_advisor, :nu_id, :courses_completed, :courses_transfer)
