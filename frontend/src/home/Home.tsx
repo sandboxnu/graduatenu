@@ -157,7 +157,7 @@ const PlanContainer = styled.div`
   margin-right: 10px;
 `;
 
-const LoginLogoutLink = styled.div`
+const LogoutButton = styled.div`
   align-self: center;
   margin-right: 8px !important;
 `;
@@ -412,9 +412,9 @@ class HomeComponent extends React.Component<Props> {
                   <MajorText>{this.props.major}</MajorText>
                   <PlanText>{this.props.coopCycle || "None"}</PlanText>
                   <EditPlanPopper />
-                  <LoginLogoutLink onClick={_ => this.logOut()}>
+                  <LogoutButton onClick={_ => this.logOut()}>
                     <ColorButton variant="contained">Logout</ColorButton>
-                  </LoginLogoutLink>
+                  </LogoutButton>
                 </HomePlan>
               </HomeTop>
               <HomeAboveSchedule>
