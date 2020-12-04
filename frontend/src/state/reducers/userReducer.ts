@@ -18,34 +18,14 @@ import {
 } from "../actions/userActions";
 import { IUserData } from "../../models/types";
 import { ScheduleCourse } from "../../../../common/types";
-import {
-  convertToDNDCourses,
-  sumCreditsFromList,
-  numToTerm,
-  getNextTerm,
-  produceWarnings,
-} from "../../utils";
 
 export interface UserState {
-  user: IUserData;
+  user?: IUserData;
   completedRequirements: IRequiredCourse[]; // only used in onboarding flow
 }
 
 const initialState: UserState = {
-  user: {
-    id: undefined,
-    fullName: "",
-    academicYear: 0,
-    graduationYear: 0,
-    major: undefined,
-    email: "",
-    coopCycle: "",
-    isAdvisor: false,
-    nuId: "",
-    examCredits: [],
-    transferCourses: [],
-    completedCourses: [],
-  },
+  user: undefined,
   completedRequirements: [],
 };
 
@@ -67,24 +47,24 @@ export const userReducer = (
         return draft;
       }
       case getType(setUserMajorAction): {
-        draft.user.major = action.payload.major;
-        draft.user.coopCycle = undefined;
+        draft.user!.major = action.payload.major;
+        draft.user!.coopCycle = null;
         return draft;
       }
       case getType(setAcademicYearAction): {
-        draft.user.academicYear = action.payload.academicYear;
+        draft.user!.academicYear = action.payload.academicYear;
         return draft;
       }
       case getType(setGraduationYearAction): {
-        draft.user.graduationYear = action.payload.graduationYear;
+        draft.user!.graduationYear = action.payload.graduationYear;
         return draft;
       }
       case getType(setUserCoopCycleAction): {
-        draft.user.coopCycle = action.payload.coopCycle;
+        draft.user!.coopCycle = action.payload.coopCycle;
         return draft;
       }
       case getType(setExamCreditsAction): {
-        draft.user.examCredits = action.payload.examCredits;
+        draft.user!.examCredits = action.payload.examCredits;
         return draft;
       }
       case getType(resetUserAction): {
@@ -92,14 +72,14 @@ export const userReducer = (
       }
       case getType(addTransferClassAction): {
         const { courses } = action.payload;
-        draft.user.transferCourses.push(...courses);
+        draft.user!.transferCourses.push(...courses);
 
         return draft;
       }
       case getType(removeTransferClassAction): {
         const { course } = action.payload;
 
-        draft.user.transferCourses = draft.user.transferCourses.filter(
+        draft.user!.transferCourses = draft.user!.transferCourses.filter(
           c => c.classId !== course.classId
         );
 
@@ -116,11 +96,11 @@ export const userReducer = (
           (course1: ScheduleCourse, course2: ScheduleCourse) =>
             course1.classId.toString().localeCompare(course2.classId.toString())
         );
-        draft.user.completedCourses = completedCourses;
+        draft.user!.completedCourses = completedCourses;
         return draft;
       }
       case getType(setTransferCoursesAction): {
-        draft.user.transferCourses = action.payload.transferCourses;
+        draft.user!.transferCourses = action.payload.transferCourses;
         return draft;
       }
     }
