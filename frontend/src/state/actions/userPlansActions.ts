@@ -14,7 +14,11 @@ import {
 
 export const setActivePlanAction = createAction(
   "userPlans/SET_ACTIVE_PLAN",
-  (activePlan: string, academicYear: number) => ({ activePlan, academicYear })
+  (activePlan: string, userId: number, academicYear: number) => ({
+    activePlan,
+    userId,
+    academicYear,
+  })
 )();
 
 export const addNewPlanAction = createAction(

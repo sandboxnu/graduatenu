@@ -5,13 +5,23 @@ import { ICreatePlanData, IPlanData } from "../models/types";
  * @param userId  the user id of the user to be searched
  * @param userToken the JWT token of the user to be searched
  */
-export const findAllPlansForUser = (userId: number, userToken: string) =>
+export const findAllPlansForUser = (
+  userId: number,
+  userToken: string
+): Promise<IPlanData[]> =>
   fetch(`/api/users/${userId}/plans`, {
     method: "GET",
     headers: {
       Authorization: "Token " + userToken,
     },
-  }).then(response => response.json());
+  }).then(response =>
+    response.json().then((plans: IPlanData[]) => {
+      return plans.map((plan: IPlanData) => ({
+        ...plan,
+        lastViewed: new Date(plan.lastViewed), // convert string timestamp to a Date object
+      }));
+    })
+  );
 
 /**
  * Service function object to create a given plan for a given user.
@@ -63,7 +73,7 @@ export const updatePlanForUser = (
   userId: number,
   userToken: string,
   planId: number,
-  plan: IPlanData
+  plan: Partial<ICreatePlanData>
 ) =>
   fetch(`/api/users/${userId}/plans/${planId}`, {
     method: "PUT",

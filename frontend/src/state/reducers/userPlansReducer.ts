@@ -40,6 +40,8 @@ import {
   sumCreditsFromList,
 } from "../../utils";
 import { Schedule, ScheduleCourse } from "../../../../common/types";
+import { updatePlanForUser } from "../../services/PlanService";
+import { getAuthToken } from "../../utils/auth-helpers";
 
 export interface UserPlansState {
   activePlan?: string;
@@ -62,8 +64,22 @@ export const userPlansReducer = (
   return produce(state, draft => {
     switch (action.type) {
       case getType(setActivePlanAction): {
-        const { activePlan, academicYear } = action.payload;
+        const { activePlan, userId, academicYear } = action.payload;
         draft.activePlan = activePlan;
+
+        const timeNow = new Date();
+        draft.plans[draft.activePlan!].lastViewed = timeNow;
+
+        // will happen asynchronously
+        updatePlanForUser(
+          userId,
+          getAuthToken(),
+          draft.plans[draft.activePlan!].id,
+          {
+            last_viewed: timeNow,
+          }
+        );
+
         return closePastYears(draft, academicYear);
       }
       case getType(updateActivePlanAction): {
@@ -93,8 +109,9 @@ export const userPlansReducer = (
         });
 
         draft.plans = planMap;
-        // TODO: set to last visited plan
-        draft.activePlan = plans[0].name;
+
+        const index = indexOfLastViewedPlan(plans);
+        draft.activePlan = plans[index].name;
         return closePastYears(draft, academicYear);
       }
       case getType(resetUserAction): {
@@ -306,4 +323,16 @@ function closePastYears(draft: UserPlansState, academicYear: number) {
     }
   }
   return draft;
+}
+
+function indexOfLastViewedPlan(plans: IPlanData[]): number {
+  let index = 0;
+  let maxDate: Date | null = null;
+  plans.forEach((plan: IPlanData, i: number) => {
+    if (maxDate === null || plan.lastViewed > maxDate) {
+      maxDate = plan.lastViewed;
+      index = i;
+    }
+  });
+  return index;
 }
