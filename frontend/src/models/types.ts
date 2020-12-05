@@ -214,13 +214,13 @@ export interface IUpdateUser {
  * A model for data pertaining to a User object.
  */
 export interface IUpdateUserData {
-  email?: string;
-  major?: string;
-  username?: string;
-  academic_year?: number;
-  graduation_year?: number;
+  email?: string | null;
+  major?: string | null;
+  username?: string | null;
+  academic_year?: number | null;
+  graduation_year?: number | null;
   coop_cycle?: string | null;
-  nu_id?: string;
+  nu_id?: string | null;
   courses_transfer?: ISimplifiedCourseDataAPI[];
   courses_completed?: ISimplifiedCourseDataAPI[];
 }

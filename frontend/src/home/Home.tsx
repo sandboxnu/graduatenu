@@ -457,13 +457,13 @@ class HomeComponent extends React.Component<Props, HomeState> {
 
   logOut = async () => {
     await this.updatePlan(false);
-    this.props.logOut();
     removeAuthTokenFromCookies();
-
     alert(
       "Your plan has been updated and you have been logged out. You will be redirected to the welcome screen."
     );
+
     this.props.history.push("/");
+    this.props.logOut();
   };
 
   render() {
