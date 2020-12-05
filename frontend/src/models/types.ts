@@ -151,13 +151,13 @@ export interface CourseTakenTracker {
  * A model for data pertaining to a User object.
  */
 export interface IUserData {
-  id?: number;
+  id: number;
   email: string;
   fullName: string;
-  academicYear?: number;
-  graduationYear?: number;
-  major?: string;
-  coopCycle?: string;
+  academicYear: number | null;
+  graduationYear: number | null;
+  major: string | null;
+  coopCycle: string | null;
   nuId: string;
   isAdvisor: boolean;
   examCredits: TransferableExam[];
@@ -219,7 +219,7 @@ export interface IUpdateUserData {
   username?: string;
   academic_year?: number;
   graduation_year?: number;
-  coop_cycle?: string;
+  coop_cycle?: string | null;
   nu_id?: string;
   courses_transfer?: ISimplifiedCourseDataAPI[];
   courses_completed?: ISimplifiedCourseDataAPI[];

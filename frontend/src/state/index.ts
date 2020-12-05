@@ -4,8 +4,6 @@ import { CourseWarning, IWarning, DNDScheduleTerm } from "../models/types";
 import {
   Major,
   Schedule,
-  IRequiredCourse,
-  ScheduleCourse,
 } from "../../../common/types";
 import { findMajorFromName } from "../utils/plan-helpers";
 import { getCreditsTakenInSchedule } from "../utils";
@@ -19,7 +17,10 @@ import { getCreditsTakenInSchedule } from "../utils";
  * Get the current user from state
  * @param state the AppState
  */
-export const getUserFromState = (state: AppState) => state.userState.user;
+// Caution! Will error if there is not a user
+export const getUserFromState = (state: AppState) => state.userState.user!;
+
+export const getDoesUserExistInState = (state: AppState) => !!state.userState.user;
 
 export const getUserIdFromState = (state: AppState) =>
   getUserFromState(state).id;

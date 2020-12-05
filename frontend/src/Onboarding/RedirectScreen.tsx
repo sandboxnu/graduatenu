@@ -1,19 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { Redirect } from "react-router";
-import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { fetchUser } from "../services/UserService";
 import {
   setUserAction,
   setCompletedCoursesAction,
   setTransferCoursesAction,
 } from "../state/actions/userActions";
-import { AppState } from "../state/reducers/state";
-import {
-  getAcademicYearFromState,
-  getGraduationYearFromState,
-  getIsAdvisorFromState,
-} from "../state";
 import { fetchMajorsAndPlans } from "../utils/fetchMajorsAndPlans";
 import { AUTH_TOKEN_COOKIE_KEY } from "../utils/auth-helpers";
 import { getScheduleCoursesFromSimplifiedCourseDataAPI } from "../utils/course-helpers";
@@ -55,15 +49,11 @@ interface Props {
 
 export const RedirectScreen: React.FC<Props> = ({ redirectUrl }) => {
   const dispatch = useDispatch();
-  const { academicYear, graduationYear, isAdvisor } = useSelector(
-    (state: AppState) => ({
-      academicYear: getAcademicYearFromState(state),
-      graduationYear: getGraduationYearFromState(state),
-      isAdvisor: getIsAdvisorFromState(state),
-    }),
-    shallowEqual
-  );
   const [isLoading, setIsLoading] = useState(true);
+  const [isAdvisor, setIsAdvisor] = useState<boolean | undefined>();
+  const [needsToGoToOnboarding, setNeedsToGoToOnboarding] = useState<
+    boolean | undefined
+  >();
 
   // component did mount
   useEffect(() => {
@@ -98,16 +88,21 @@ export const RedirectScreen: React.FC<Props> = ({ redirectUrl }) => {
               ).then(courses => {
                 dispatch(setTransferCoursesAction(courses));
               }),
-            ]).then(_ => setIsLoading(false));
+            ]).then(_ => {
+              setIsAdvisor(response.user.isAdvisor);
+              if (!response.user.isAdvisor) {
+                // student
+                setNeedsToGoToOnboarding(
+                  !response.user.graduationYear || !response.user.academicYear
+                );
+              }
+              setIsLoading(false); // this update must come last, to make sure other state variables are correctly set before we redirect
+            });
           })
           .catch(e => console.log(e));
       }
     });
   }, []);
-
-  const needsToGoToOnboarding = () => {
-    return !graduationYear || !academicYear;
-  };
 
   if (!Cookies.get(AUTH_TOKEN_COOKIE_KEY)) {
     return (
@@ -138,7 +133,7 @@ export const RedirectScreen: React.FC<Props> = ({ redirectUrl }) => {
 
   if (isAdvisor === false) {
     // student
-    if (needsToGoToOnboarding()) {
+    if (needsToGoToOnboarding) {
       return <Redirect to="/onboarding" />;
     } else {
       return <Redirect to="/home" />;

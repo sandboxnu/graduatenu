@@ -13,7 +13,6 @@ import {
 } from "./GenericOnboarding";
 import { APExamGroups2020To2021 } from "../../../common/ap_exams";
 import { IBExamGroups2020To2021 } from "../../../common/ib_exams";
-import { ScheduleSlice } from "../models/types";
 import { createPlanForUser } from "../services/PlanService";
 import {
   getAcademicYearFromState,
