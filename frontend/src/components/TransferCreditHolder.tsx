@@ -127,10 +127,10 @@ class TransferCreditsComponent extends React.Component<
     if (this.props.transferCredits == null) {
       return null;
     }
-    return this.props.transferCredits.map((scheduleCourse, index) => {
+    return this.props.transferCredits.map((scheduleCourse, _) => {
       if (!!scheduleCourse) {
         return (
-          <ClassWrapper>
+          <ClassWrapper key={scheduleCourse.subject + scheduleCourse.classId}>
             <NonDraggableClassBlock
               course={scheduleCourse}
               onDelete={this.onDeleteClass.bind(this, scheduleCourse)}

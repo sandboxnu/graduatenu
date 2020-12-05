@@ -48,7 +48,6 @@ import {
   updateSemesterForActivePlanAction,
   updateActivePlanAction,
   setUserPlansAction,
-  setActivePlanAction,
   setActivePlanDNDScheduleAction,
 } from "../state/actions/userPlansActions";
 import { EditPlanPopper } from "./EditPlanPopper";
@@ -226,33 +225,9 @@ type Props = ToastHomeProps &
   ReduxDispatchHomeProps &
   RouteComponentProps;
 
-interface HomeState {
-  fetchedPlan: boolean;
-  planCount: number;
-}
-
-class HomeComponent extends React.Component<Props, HomeState> {
+class HomeComponent extends React.Component<Props> {
   constructor(props: Props) {
     super(props);
-
-    this.state = {
-      fetchedPlan: false,
-      planCount: 1,
-    };
-  }
-
-  componentDidMount() {
-    const token = getAuthToken();
-    findAllPlansForUser(this.props.userId!, token).then(
-      (plans: IPlanData[]) => {
-        this.props.setUserPlans(plans, this.props.academicYear);
-
-        this.setState({
-          fetchedPlan: true,
-          planCount: plans.length,
-        });
-      }
-    );
   }
 
   componentDidUpdate(nextProps: Props) {
@@ -396,7 +371,7 @@ class HomeComponent extends React.Component<Props, HomeState> {
   }
 
   renderYears() {
-    if (this.state.fetchedPlan) {
+    if (this.props.activePlan) {
       return this.props.activePlan!.schedule.years.map(
         (year: number, index: number) => (
           <Year
@@ -423,7 +398,7 @@ class HomeComponent extends React.Component<Props, HomeState> {
 
   renderTransfer() {
     // If a user is currently logged in, wait until plans are fetched to render
-    if (!this.state.fetchedPlan) {
+    if (!this.props.activePlan) {
       return (
         <SpinnerWrapper>
           <Loader
@@ -457,17 +432,17 @@ class HomeComponent extends React.Component<Props, HomeState> {
 
   logOut = async () => {
     await this.updatePlan(false);
-    this.props.logOut();
     removeAuthTokenFromCookies();
 
     alert(
       "Your plan has been updated and you have been logged out. You will be redirected to the welcome screen."
     );
     this.props.history.push("/");
+    this.props.logOut();
   };
 
   render() {
-    if (!this.state.fetchedPlan) {
+    if (!this.props.activePlan) {
       return (
         <SpinnerWrapper>
           <Loader

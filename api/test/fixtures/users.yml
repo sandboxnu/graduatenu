@@ -5,6 +5,8 @@
 #  id                     :bigint(8)        not null, primary key
 #  academic_year          :integer(4)
 #  coop_cycle             :string
+#  courses_completed      :json             default([]), is an Array
+#  courses_transfer       :json             default([]), is an Array
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
 #  graduation_year        :integer(4)
