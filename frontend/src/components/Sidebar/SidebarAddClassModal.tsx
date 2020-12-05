@@ -13,7 +13,7 @@ import {
 } from "../../../../common/types";
 import { XButton } from "../common";
 import { Modal } from "@material-ui/core";
-import { connect } from "react-redux";
+import { batch, connect } from "react-redux";
 import { Dispatch } from "redux";
 import {
   addCoursesToActivePlanAction,
@@ -135,15 +135,17 @@ export class SidebarAddClassModalComponent extends React.Component<
   async handleSubmit() {
     await this.mapRequirementToSchedule();
 
-    this.props.handleAddClasses(
-      this.state.queuedCourses,
-      this.state.formSemester
-    );
-    this.props.handleStatusChange(
-      "CLASSES",
-      this.state.formSemester.year,
-      convertTermIdToSeason(this.state.formSemester.termId)
-    );
+    batch(() => {
+      this.props.handleAddClasses(
+        this.state.queuedCourses,
+        this.state.formSemester
+      );
+      this.props.handleStatusChange(
+        "CLASSES",
+        this.state.formSemester.year,
+        convertTermIdToSeason(this.state.formSemester.termId)
+      );
+    });
     this.prepareToClose();
   }
 

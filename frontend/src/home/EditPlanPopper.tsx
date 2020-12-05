@@ -5,7 +5,7 @@ import { Autocomplete } from "@material-ui/lab";
 import { TextField, Button } from "@material-ui/core";
 import { EditPlanButton } from "./EditPlanButton";
 import styled from "styled-components";
-import { connect } from "react-redux";
+import { batch, connect } from "react-redux";
 import { AppState } from "../state/reducers/state";
 import { Dispatch } from "redux";
 import { getActivePlanFromState } from "../state";
@@ -134,8 +134,10 @@ export class EditPlanPopperComponent extends React.Component<
    * Updates this user's major based on the major selected in the dropdown.
    */
   onChooseMajor(event: React.SyntheticEvent<{}>, value: any) {
-    this.props.setActivePlanMajor(value);
-    this.props.setActivePlanCoopCycle("");
+    batch(() => {
+      this.props.setActivePlanMajor(value);
+      this.props.setActivePlanCoopCycle("");
+    });
   }
 
   /**
