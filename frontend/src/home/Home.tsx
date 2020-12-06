@@ -1,6 +1,5 @@
 import React from "react";
 import "./Scrollbar.css";
-import { DragDropContext } from "react-beautiful-dnd";
 import {
   DNDSchedule,
   IWarning,
@@ -29,7 +28,6 @@ import {
   addCourseFromSidebar,
   convertToDNDSchedule,
 } from "../utils";
-import { Sidebar } from "../components/Sidebar";
 import { withToast } from "./toastHook";
 import { AppearanceTypes } from "react-toast-notifications";
 import { withRouter, RouteComponentProps } from "react-router-dom";
@@ -86,37 +84,7 @@ import {
   getAuthToken,
   removeAuthTokenFromCookies,
 } from "../utils/auth-helpers";
-
-const OuterContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  overflow: hidden;
-`;
-
-const SidebarContainer = styled.div`
-  height: 100vh;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  flex: 4;
-  position: relative;
-  box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.25);
-`;
-
-const LeftScroll = styled.div`
-  height: 100vh;
-  overflow-x: hidden;
-  overflow-y: scroll;
-  flex: 19;
-`;
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  align-items: start;
-  margin: 30px;
-  background-color: "#ff76ff";
-`;
+import { EditableSchedule } from "../components/Schedule/EditableSchedule";
 
 const SpinnerWrapper = styled.div`
   display: flex;
@@ -565,55 +533,41 @@ class HomeComponent extends React.Component<Props, HomeState> {
 
   render() {
     return (
-      <OuterContainer>
-        <DragDropContext
-          onDragEnd={this.onDragEnd}
-          onDragUpdate={this.onDragUpdate}
-        >
-          <LeftScroll className="hide-scrollbar">
-            <Container>
-              <HomeTop>
-                <HomeText href="#">GraduateNU</HomeText>
-                <HomePlan>
-                  <MajorText>{this.props.major}</MajorText>
-                  <PlanText>{this.props.planStr || "None"}</PlanText>
-                  <EditPlanPopper />
-                  <LoginLogoutLink onClick={_ => this.logOut()}>
-                    <ColorButton variant="contained">Logout</ColorButton>
-                  </LoginLogoutLink>
-                </HomePlan>
-              </HomeTop>
-              <HomeAboveSchedule>
-                <HomePlan>
-                  <h2>Plan Of Study</h2>
-                </HomePlan>
-                <HomeButtons>
-                  <PlanContainer>
-                    <PlanPopperButton
-                      variant="contained"
-                      onClick={this.updatePlan.bind(this)}
-                    >
-                      Update Plan
-                    </PlanPopperButton>
-                  </PlanContainer>
-                  <PlanContainer>
-                    <AddPlan />
-                  </PlanContainer>
-                  <SwitchPlanPopper
-                    userId={this.props.userId}
-                    planIds={this.props.planIds}
-                  />
-                </HomeButtons>
-              </HomeAboveSchedule>
-              {this.renderYears()}
-              {this.renderTransfer()}
-            </Container>
-          </LeftScroll>
-          <SidebarContainer>
-            <Sidebar />
-          </SidebarContainer>
-        </DragDropContext>
-      </OuterContainer>
+      <EditableSchedule sidebarPresent={false} transferCreditPresent={false}>
+        <HomeTop>
+          <HomeText href="#">GraduateNU</HomeText>
+          <HomePlan>
+            <MajorText>{this.props.major}</MajorText>
+            <PlanText>{this.props.planStr || "None"}</PlanText>
+            <EditPlanPopper />
+            <LoginLogoutLink onClick={_ => this.logOut()}>
+              <ColorButton variant="contained">Logout</ColorButton>
+            </LoginLogoutLink>
+          </HomePlan>
+        </HomeTop>
+        <HomeAboveSchedule>
+          <HomePlan>
+            <h2>Plan Of Study</h2>
+          </HomePlan>
+          <HomeButtons>
+            <PlanContainer>
+              <PlanPopperButton
+                variant="contained"
+                onClick={this.updatePlan.bind(this)}
+              >
+                Update Plan
+              </PlanPopperButton>
+            </PlanContainer>
+            <PlanContainer>
+              <AddPlan />
+            </PlanContainer>
+            <SwitchPlanPopper
+              userId={this.props.userId}
+              planIds={this.props.planIds}
+            />
+          </HomeButtons>
+        </HomeAboveSchedule>
+      </EditableSchedule>
     );
   }
 }
