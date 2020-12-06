@@ -8,7 +8,6 @@ import {
 } from "../models/types";
 import { Major, SeasonWord, ScheduleCourse } from "../../../common/types";
 import styled from "styled-components";
-import { TransferCredits } from "../components/TransferCreditHolder";
 import { convertTermIdToYear } from "../utils";
 import { withToast } from "./toastHook";
 import { AppearanceTypes } from "react-toast-notifications";
@@ -200,10 +199,6 @@ class HomeComponent extends React.Component<Props> {
     });
   }
 
-  renderTransfer() {
-    return <TransferCredits transferCredits={this.props.transferCredits} />;
-  }
-
   async updatePlan(showAlert = true) {
     const token = getAuthToken();
     await updatePlanForUser(
@@ -229,53 +224,6 @@ class HomeComponent extends React.Component<Props> {
     this.props.history.push("/");
     this.props.logOut();
   };
-
-  //   <OuterContainer>
-  //   <DragDropContext
-  //     onDragEnd={this.onDragEnd}
-  //     onDragUpdate={this.onDragUpdate}
-  //   >
-  //     <LeftScroll className="hide-scrollbar">
-  //       <Container>
-  //         <HomeTop>
-  //           <HomeText href="#">GraduateNU</HomeText>
-  //           <HomePlan>
-  //             <MajorText>{this.props.major}</MajorText>
-  //             <PlanText>{this.props.coopCycle || "None"}</PlanText>
-  //             <EditPlanPopper />
-  //             <LoginLogoutLink onClick={_ => this.logOut()}>
-  //               <ColorButton variant="contained">Logout</ColorButton>
-  //             </LoginLogoutLink>
-  //           </HomePlan>
-  //         </HomeTop>
-  //         <HomeAboveSchedule>
-  //           <HomePlan>
-  //             <h2>Plan Of Study</h2>
-  //           </HomePlan>
-  //           <HomeButtons>
-  //             <PlanContainer>
-  //               <PlanPopperButton
-  //                 variant="contained"
-  //                 onClick={this.updatePlan.bind(this)}
-  //               >
-  //                 Update Plan
-  //               </PlanPopperButton>
-  //             </PlanContainer>
-  //             <PlanContainer>
-  //               <AddPlan />
-  //             </PlanContainer>
-  //             <SwitchPlanPopper />
-  //           </HomeButtons>
-  //         </HomeAboveSchedule>
-  //         {this.renderYears()}
-  //         {this.renderTransfer()}
-  //       </Container>
-  //     </LeftScroll>
-  //     <SidebarContainer>
-  //       <Sidebar />
-  //     </SidebarContainer>
-  //   </DragDropContext>
-  // </OuterContainer>
 
   render() {
     return (
