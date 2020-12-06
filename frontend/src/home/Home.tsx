@@ -14,7 +14,6 @@ import {
   SeasonWord,
   ScheduleCourse,
 } from "../../../common/types";
-import { addPrereqsToSchedule } from "../../../common/prereq_loader";
 import styled from "styled-components";
 import { Year } from "../components/Year";
 import { TransferCredits } from "../components/TransferCreditHolder";
@@ -48,14 +47,10 @@ import {
   updateSemesterForActivePlanAction,
   updateActivePlanAction,
   setUserPlansAction,
-  setActivePlanAction,
   setActivePlanDNDScheduleAction,
 } from "../state/actions/userPlansActions";
 import { EditPlanPopper } from "./EditPlanPopper";
-import {
-  findAllPlansForUser,
-  updatePlanForUser,
-} from "../services/PlanService";
+import { updatePlanForUser } from "../services/PlanService";
 import { AddPlan } from "./AddPlanPopper";
 import { Button, Theme, withStyles } from "@material-ui/core";
 import Loader from "react-loader-spinner";
@@ -95,15 +90,6 @@ const Container = styled.div`
   align-items: start;
   margin: 30px;
   background-color: "#ff76ff";
-`;
-
-const SpinnerWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 60vh;
 `;
 
 const HomeTop = styled.div`
@@ -226,33 +212,9 @@ type Props = ToastHomeProps &
   ReduxDispatchHomeProps &
   RouteComponentProps;
 
-interface HomeState {
-  fetchedPlan: boolean;
-  planCount: number;
-}
-
-class HomeComponent extends React.Component<Props, HomeState> {
+class HomeComponent extends React.Component<Props> {
   constructor(props: Props) {
     super(props);
-
-    this.state = {
-      fetchedPlan: false,
-      planCount: 1,
-    };
-  }
-
-  componentDidMount() {
-    const token = getAuthToken();
-    findAllPlansForUser(this.props.userId!, token).then(
-      (plans: IPlanData[]) => {
-        this.props.setUserPlans(plans, this.props.academicYear);
-
-        this.setState({
-          fetchedPlan: true,
-          planCount: plans.length,
-        });
-      }
-    );
   }
 
   componentDidUpdate(nextProps: Props) {
@@ -265,25 +227,23 @@ class HomeComponent extends React.Component<Props, HomeState> {
     // remove existing toasts
     this.props.toastStack.forEach(t => this.props.removeToast(t.id));
 
-    if (this.props.activePlan) {
-      let numVisibleWarnings: number = 0;
-      this.props.warnings.forEach(w => {
-        //ensuring we only propogate 5 toasts at a time
-        const yearIdx = this.props.activePlan!.schedule.years.indexOf(
-          convertTermIdToYear(w.termId)
-        );
-        if (!this.props.closedYears.has(yearIdx)) {
-          numVisibleWarnings++;
-          if (numVisibleWarnings <= 5) {
-            // add new toasts
-            this.props.addToast(w.message, {
-              appearance: "warning",
-              autoDismiss: true,
-            });
-          }
+    let numVisibleWarnings: number = 0;
+    this.props.warnings.forEach(w => {
+      //ensuring we only propogate 5 toasts at a time
+      const yearIdx = this.props.activePlan!.schedule.years.indexOf(
+        convertTermIdToYear(w.termId)
+      );
+      if (!this.props.closedYears.has(yearIdx)) {
+        numVisibleWarnings++;
+        if (numVisibleWarnings <= 5) {
+          // add new toasts
+          this.props.addToast(w.message, {
+            appearance: "warning",
+            autoDismiss: true,
+          });
         }
-      });
-    }
+      }
+    });
   }
 
   onDragEnd = async (result: any) => {
@@ -396,48 +356,19 @@ class HomeComponent extends React.Component<Props, HomeState> {
   }
 
   renderYears() {
-    if (this.state.fetchedPlan) {
-      return this.props.activePlan!.schedule.years.map(
-        (year: number, index: number) => (
-          <Year
-            key={index}
-            index={index}
-            schedule={this.props.activePlan!.schedule}
-          />
-        )
-      );
-    } else {
-      return (
-        <SpinnerWrapper>
-          <Loader
-            type="Puff"
-            color="#f50057"
-            height={100}
-            width={100}
-            timeout={5000} //5 secs
-          />
-        </SpinnerWrapper>
-      );
-    }
+    return this.props.activePlan!.schedule.years.map(
+      (year: number, index: number) => (
+        <Year
+          key={index}
+          index={index}
+          schedule={this.props.activePlan!.schedule}
+        />
+      )
+    );
   }
 
   renderTransfer() {
-    // If a user is currently logged in, wait until plans are fetched to render
-    if (!this.state.fetchedPlan) {
-      return (
-        <SpinnerWrapper>
-          <Loader
-            type="Puff"
-            color="#f50057"
-            height={100}
-            width={100}
-            timeout={5000} //5 secs
-          />
-        </SpinnerWrapper>
-      );
-    } else {
-      return <TransferCredits transferCredits={this.props.transferCredits} />;
-    }
+    return <TransferCredits transferCredits={this.props.transferCredits} />;
   }
 
   async updatePlan(showAlert = true) {
@@ -457,30 +388,16 @@ class HomeComponent extends React.Component<Props, HomeState> {
 
   logOut = async () => {
     await this.updatePlan(false);
-    this.props.logOut();
     removeAuthTokenFromCookies();
 
     alert(
       "Your plan has been updated and you have been logged out. You will be redirected to the welcome screen."
     );
     this.props.history.push("/");
+    this.props.logOut();
   };
 
   render() {
-    if (!this.state.fetchedPlan) {
-      return (
-        <SpinnerWrapper>
-          <Loader
-            type="Puff"
-            color="#f50057"
-            height={100}
-            width={100}
-            timeout={5000} //5 secs
-          />
-        </SpinnerWrapper>
-      );
-    }
-
     return (
       <OuterContainer>
         <DragDropContext
