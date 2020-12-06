@@ -173,11 +173,9 @@ const TransferableCreditScreen: React.FC = () => {
     Array<TransferableExam>
   >([]);
 
-  const onSubmit = (): Promise<void> => {
+  const onSubmit = (): Promise<any> => {
     dispatch(setExamCreditsAction(selectedTransferableExams));
     const token = getAuthToken();
-
-    return new Promise((resolve, reject) => {
       const updateUserPromise = () => updateUser(
         {
           id: userId!,
@@ -214,10 +212,7 @@ const TransferableCreditScreen: React.FC = () => {
       });
     }
 
-      Promise.all([updateUserPromise(), createPlanPromise()]).then(() =>
-        resolve()
-      );
-    });
+    return Promise.all([updateUserPromise(), createPlanPromise()]);
   };
 
   return (
