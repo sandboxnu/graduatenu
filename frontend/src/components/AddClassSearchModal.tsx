@@ -8,6 +8,7 @@ import { searchCourses } from "../api";
 import AddIcon from "@material-ui/icons/Add";
 import { isCourseInSchedule } from "../utils/schedule-helpers";
 import { NextButton } from "./common/NextButton";
+import { NonDraggableClassBlock } from "./ClassBlocks/NonDraggableClassBlock";
 
 interface AddClassSearchModalProps {
   visible: boolean;
@@ -153,10 +154,19 @@ export const AddClassSearchModal: React.FC<
         <AddedClassesContainer>
           {selectedCourses.length === 0
             ? "Select classes to add"
-            : selectedCourses.map(
-                selectedCourse =>
-                  selectedCourse.subject + selectedCourse.classId + " "
-              )}
+            : selectedCourses.map(selectedCourse => (
+                <NonDraggableClassBlock
+                  course={selectedCourse}
+                  onDelete={() => {
+                    let copy = [...selectedCourses];
+                    var index = copy.indexOf(selectedCourse);
+                    if (index !== -1) {
+                      copy.splice(index, 1);
+                      setSelectedCourses(copy);
+                    }
+                  }}
+                />
+              ))}
         </AddedClassesContainer>
         <NextButton
           text="Add Classes"
