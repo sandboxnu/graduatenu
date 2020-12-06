@@ -43,7 +43,7 @@ class AdminControllerTest < ActionController::TestCase
 
     json_response = JSON.parse(response.body)
     assert_equal "http://test.com/api/v1/entry?user_id=#{user_jwt}", json_response['redirect']
-    assert_equal "Test Tester", User.last.username
+    assert_equal "Test Tester", User.last.full_name
   end
 
   def test_admin_hook__existing_user
@@ -91,7 +91,7 @@ class AdminControllerTest < ActionController::TestCase
 
     user.reload
     assert_equal "test@test.com", user.email
-    assert_equal "Test Tester", user.username
+    assert_equal "Test Tester", user.full_name
     assert_equal false, user.is_advisor
     assert_equal photo_url, user.image_url
   end

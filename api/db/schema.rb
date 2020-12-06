@@ -10,19 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_04_001015) do
+ActiveRecord::Schema.define(version: 2020_12_04_052855) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "courses", force: :cascade do |t|
-    t.integer "class_id", null: false
-    t.string "subject", null: false
-    t.bigint "user_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_courses_on_user_id"
-  end
 
   create_table "plans", force: :cascade do |t|
     t.string "name"
@@ -61,7 +52,7 @@ ActiveRecord::Schema.define(version: 2020_12_04_001015) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "username"
+    t.string "full_name"
     t.integer "academic_year"
     t.integer "graduation_year"
     t.string "major"
@@ -69,9 +60,11 @@ ActiveRecord::Schema.define(version: 2020_12_04_001015) do
     t.string "image_url"
     t.boolean "is_advisor", default: false, null: false
     t.string "nu_id"
+    t.json "courses_completed", default: [], array: true
+    t.json "courses_transfer", default: [], array: true
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["full_name"], name: "index_users_on_full_name"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-    t.index ["username"], name: "index_users_on_username"
   end
 
   add_foreign_key "plans", "users"

@@ -237,7 +237,7 @@ const ProfileComponent: React.FC = () => {
 
     const updateUserData: IUpdateUserData = {
       graduation_year: gradYear,
-      major: major,
+      major: major || null,
       coop_cycle:
         coopCycle != undefined && coopCycle !== "None Selected"
           ? coopCycle

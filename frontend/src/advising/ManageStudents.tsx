@@ -89,7 +89,7 @@ interface StudentsAPI {
 }
 
 interface StudentProps {
-  username: string;
+  fullName: string;
   nuId: string;
   email: string;
 }
@@ -145,7 +145,7 @@ const StudentsList = (props: StudentsListProps) => {
         ) : (
           students.map(student => (
             <Student
-              username={student.username}
+              fullName={student.fullName}
               nuId={student.nuId}
               email={student.email}
               key={student.nuId}
@@ -171,7 +171,7 @@ const StudentsList = (props: StudentsListProps) => {
 const Student = (props: StudentProps) => {
   return (
     <StudentContainer>
-      {props.username}
+      {props.fullName}
       <StudentEmailNUIDContainer>
         {props.email + " | " + props.nuId}
       </StudentEmailNUIDContainer>

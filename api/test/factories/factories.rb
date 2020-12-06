@@ -7,7 +7,7 @@ FactoryBot.define do
     image_url { "testimage.com/testimage.png" }
     is_advisor { false }
     major { "Computer Science, BSCS" }
-    username { "Testy Tester" }
+    full_name { "Testy Tester" }
     nu_id { "123456789" }
 
     factory :advisor do

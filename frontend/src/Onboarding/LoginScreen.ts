@@ -151,7 +151,7 @@ export {};
 //             error: "invalid",
 //           });
 //         } else {
-//           this.props.setFullName(response.user.username);
+//           this.props.setFullName(response.user.fullName);
 //           this.props.setAcademicYear(response.user.academicYear);
 //           this.props.setGraduationYear(response.user.graduationYear);
 //           this.props.setUserId(response.user.id);
