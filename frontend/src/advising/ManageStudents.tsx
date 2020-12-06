@@ -102,6 +102,7 @@ const ManageStudentsComponent: React.FC = (props: any) => {
       <Search
         placeholder="Search by name, email, or NUID"
         onEnter={setSearchQuery}
+        isSmall={false}
       />
       <StudentsList searchQuery={searchQuery} />
     </Container>

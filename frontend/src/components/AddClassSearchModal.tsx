@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { ScheduleCourse } from "../../../common/types";
-import { Modal, CircularProgress, TextField } from "@material-ui/core";
+import { Modal, TextField } from "@material-ui/core";
 import styled from "styled-components";
 import { XButton } from "./common";
 import { Search } from "./common/Search";
 import { searchCourses } from "../api";
 import AddIcon from "@material-ui/icons/Add";
+import LinearProgress from "@material-ui/core/LinearProgress";
 import { isCourseInSchedule } from "../utils/schedule-helpers";
 import { NextButton } from "./common/NextButton";
 import { NonDraggableClassBlock } from "./ClassBlocks/NonDraggableClassBlock";
@@ -22,7 +23,7 @@ const CloseButtonWrapper = styled.div`
   right: 18px;
 `;
 
-const InnerSection = styled.section`
+const OuterSection = styled.div`
   position: fixed;
   background: white;
   width: 35%;
@@ -30,18 +31,32 @@ const InnerSection = styled.section`
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
-  padding: 8px;
   display: flex;
   flex-direction: column;
   align-items: center;
   outline: none;
-  padding-bottom: 24px;
+  padding-left: 35px;
+  padding-bottom: 25px;
+  padding-right: 35px;
+`;
+
+const InnerContainer = styled.div`
+  width: 100%;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const SearchContainer = styled.div`
+  width: 100%;
 `;
 
 const SearchResultsScrollContainer = styled.div`
   height: 200px;
-  width: 80%;
-  margin: 30px;
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 20px;
   border: 1px solid red;
   border-radius: 10px;
   overflow-y: scroll;
@@ -49,13 +64,32 @@ const SearchResultsScrollContainer = styled.div`
   font-style: normal;
   font-weight: normal;
 `;
+
 const SearchResultContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   padding: 10px;
-  margin-left: 20px;
+  margin-left: 15px;
   margin-right: 30px;
+`;
+
+const NoResultContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px;
+  margin-left: 15px;
+  margin-right: 30px;
+`;
+
+const Loading = styled.div`
+  font-size: 10px;
+  line-height: 10px;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  margin-left: 10px;
+  margin-right: 10px;
 `;
 
 const AddedClassesContainer = styled.div``;
@@ -142,37 +176,53 @@ export const AddClassSearchModal: React.FC<
       aria-labelledby="simple-modal-title"
       aria-describedby="simple-modal-description"
     >
-      <InnerSection>
-        <CloseButtonWrapper>
-          <XButton onClick={props.handleClose}></XButton>
-        </CloseButtonWrapper>
-        <h1 id="simple-modal-title">Add classes</h1>
-        <Search placeholder="Search for classes" onEnter={setSearchQuery} />
-        <SearchResultsScrollContainer>
-          {searchedCourseResults}
-        </SearchResultsScrollContainer>
-        <AddedClassesContainer>
-          {selectedCourses.length === 0
-            ? "Select classes to add"
-            : selectedCourses.map(selectedCourse => (
-                <NonDraggableClassBlock
-                  course={selectedCourse}
-                  onDelete={() => {
-                    let copy = [...selectedCourses];
-                    var index = copy.indexOf(selectedCourse);
-                    if (index !== -1) {
-                      copy.splice(index, 1);
-                      setSelectedCourses(copy);
-                    }
-                  }}
-                />
-              ))}
-        </AddedClassesContainer>
-        <NextButton
-          text="Add Classes"
-          onClick={() => props.handleSubmit(selectedCourses)}
-        />
-      </InnerSection>
+      <OuterSection>
+        <InnerContainer>
+          <CloseButtonWrapper>
+            <XButton onClick={props.handleClose}></XButton>
+          </CloseButtonWrapper>
+          <h1 id="simple-modal-title">Add classes</h1>
+          <SearchContainer>
+            <Search
+              placeholder="Search for classes"
+              onEnter={setSearchQuery}
+              isSmall={true}
+            />
+          </SearchContainer>
+          <SearchResultsScrollContainer>
+            {isLoading ? (
+              <Loading>
+                <LinearProgress color="secondary" />
+              </Loading>
+            ) : searchedCourseResults.length === 0 ? (
+              <NoResultContainer> No results </NoResultContainer>
+            ) : (
+              searchedCourseResults
+            )}
+          </SearchResultsScrollContainer>
+          <AddedClassesContainer>
+            {selectedCourses.length === 0
+              ? "Select classes to add"
+              : selectedCourses.map(selectedCourse => (
+                  <NonDraggableClassBlock
+                    course={selectedCourse}
+                    onDelete={() => {
+                      let copy = [...selectedCourses];
+                      var index = copy.indexOf(selectedCourse);
+                      if (index !== -1) {
+                        copy.splice(index, 1);
+                        setSelectedCourses(copy);
+                      }
+                    }}
+                  />
+                ))}
+          </AddedClassesContainer>
+          <NextButton
+            text="Add Classes"
+            onClick={() => props.handleSubmit(selectedCourses)}
+          />
+        </InnerContainer>
+      </OuterSection>
     </Modal>
   );
 };
