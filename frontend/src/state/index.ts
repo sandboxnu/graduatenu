@@ -1,83 +1,32 @@
+import { IPlanData } from "./../models/types";
 import { AppState } from "./reducers/state";
-import {
-  DNDSchedule,
-  CourseWarning,
-  IWarning,
-  DNDScheduleTerm,
-  NamedSchedule,
-  ScheduleSlice,
-} from "../models/types";
+import { CourseWarning, IWarning, DNDScheduleTerm } from "../models/types";
 import {
   Major,
   Schedule,
-  IRequiredCourse,
-  ScheduleCourse,
 } from "../../../common/types";
+import { findMajorFromName } from "../utils/plan-helpers";
+import { getCreditsTakenInSchedule } from "../utils";
 
 /**
  * Utility functions to help extract data from the AppState
+ * All functions in this file should end with "FromState" for explicitness
  */
 
 /**
- * Get a users id number from the AppState
+ * Get the current user from state
  * @param state the AppState
  */
-export const getUserId = (state: AppState): number | undefined =>
-  state.user.userId;
+// Caution! Will error if there is not a user
+export const getUserFromState = (state: AppState) => state.userState.user!;
 
-/**
- * Get a users plan name from the AppState
- * @param state the AppState
- */
-export const getPlanNameFromState = (state: AppState): string | undefined =>
-  state.user.planName;
+export const getDoesUserExistInState = (state: AppState) => !!state.userState.user;
 
-/**
- * Get a users list of plan ids from the AppState
- * @param state the AppState
- */
-export const getPlanIdsFromState = (state: AppState): number[] =>
-  state.user.planIds;
+export const getUserIdFromState = (state: AppState) =>
+  getUserFromState(state).id;
 
-/**
- * Get a users plan link sharing status from the AppState
- * @param state the AppState
- */
-export const getLinkSharingFromState = (state: AppState): boolean =>
-  state.user.linkSharing;
-
-/**
- * Get a users fullname from the AppState
- * @param state the AppState
- */
-export const getFullNameFromState = (state: AppState): string =>
-  state.user.fullName;
-
-/**
- * Get a users coop cycle from the AppState
- * @param state the AppState
- */
-export const getUserCoopCycleFromState = (state: AppState): string =>
-  state.user.coopCycle;
-
-/* Get a users academic year from the AppState
- * @param state the AppState
- */
-export const getAcademicYearFromState = (state: AppState): number =>
-  state.user.academicYear;
-
-/* Get a users academic year from the AppState
- * @param state the AppState
- */
-export const getGraduationYearFromState = (state: AppState): number =>
-  state.user.graduationYear;
-
-/**
- * Get the schedule object from the AppState
- * @param state the AppState
- */
-export const getScheduleFromState = (state: AppState): DNDSchedule =>
-  state.schedule.present.schedule;
+export const getUserFullNameFromState = (state: AppState) =>
+  getUserFromState(state).fullName;
 
 /**
  * Get the list of completed requirements from the AppState
@@ -85,7 +34,15 @@ export const getScheduleFromState = (state: AppState): DNDSchedule =>
  */
 export const getCompletedRequirementsFromState = (
   state: AppState
-): IRequiredCourse[] => state.schedule.present.completedRequirements;
+) => state.userState.completedRequirements;
+
+/**
+ * Get the list of completed courses from the AppState
+ * @param state the AppState
+ */
+export const getCompletedCoursesFromState = (
+  state: AppState
+) => getUserFromState(state).completedCourses;
 
 /**
  * Get the list of transfer courses from the AppState
@@ -93,81 +50,86 @@ export const getCompletedRequirementsFromState = (
  */
 export const getTransferCoursesFromState = (
   state: AppState
-): ScheduleCourse[] => state.schedule.present.transferCourses;
-
-/**
- * Get the selected planName from the AppState
- * @param state the AppState
- */
-export const getPlanStrFromState = (state: AppState): string | undefined =>
-  state.user.planStr;
+) => getUserFromState(state).transferCourses;
 
 /**
  * Get the selected major object from the AppState
  * @param state the AppState
  */
-export const getDeclaredMajorFromState = (state: AppState): Major | undefined =>
-  state.user.declaredMajor;
+export const getUserMajorFromState = (state: AppState): Major | undefined =>
+  findMajorFromName(getUserFromState(state).major, getMajorsFromState(state));
 
 /**
- * Get the user email from the AppState
+ * Get the selected major name from the AppState
  * @param state the AppState
  */
-export const getEmail = (state: AppState): string => state.user.email;
+export const getUserMajorNameFromState = (state: AppState) =>
+  getUserFromState(state).major;
+
+export const getUserCoopCycleFromState = (state: AppState) =>
+  getUserFromState(state).coopCycle;
+
+export const getAcademicYearFromState = (state: AppState) =>
+  getUserFromState(state).academicYear;
+
+export const getGraduationYearFromState = (state: AppState) =>
+  getUserFromState(state).graduationYear;
+
 /**
  * Get the warnings generated from the AppState
  * @param state the AppState
  */
 export const getWarningsFromState = (state: AppState): IWarning[] =>
-  state.schedule.present.warnings;
+  getActivePlanFromState(state).warnings;
 
 /**
  * Get the list of majors from the AppState
  * @param state the AppState
  */
-export const getMajors = (state: AppState): Major[] => state.majorState.majors;
+export const getMajorsFromState = (state: AppState): Major[] =>
+  state.majorState.majors;
 
 /**
  * Get the majors loading flag from the AppState
  * @param state the AppState
  */
-export const getMajorsLoadingFlag = (state: AppState): boolean =>
+export const getMajorsLoadingFlagFromState = (state: AppState): boolean =>
   state.majorState.isFetchingMajors;
 
 /**
  * Get the majors loading error message from the AppState
  * @param state the AppState
  */
-export const getMajorsError = (state: AppState): string =>
+export const getMajorsErrorFromState = (state: AppState): string =>
   state.majorState.majorsError;
 
 /**
  * Get the list of plans from the AppState
  * @param state the AppState
  */
-export const getPlans = (state: AppState): Record<string, Schedule[]> =>
-  state.plansState.plans;
+export const getPlansFromState = (
+  state: AppState
+): Record<string, Schedule[]> => state.plansState.plans;
 
 /**
  * Get the plans loading flag from the AppState
  * @param state the AppState
  */
-export const getPlansLoadingFlag = (state: AppState): boolean =>
+export const getPlansLoadingFlagFromState = (state: AppState): boolean =>
   state.plansState.isFetchingPlans;
 
 /**
  * Get the plans loading error message from the AppState
  * @param state the AppState
  */
-export const getPlansError = (state: AppState): string =>
+export const getPlansErrorFromState = (state: AppState): string =>
   state.plansState.plansError;
 
 /**
  * Get the plans loading error message from the AppState
  * @param state the AppState
  */
-export const getTakenCredits = (state: AppState): number =>
-  state.schedule.present.creditsTaken;
+export const getTakenCreditsFromState = (state: AppState): number => getCreditsTakenInSchedule(getActivePlanScheduleFromState(state)!);
 
 /**
  * Get the course specific warnings from the AppState
@@ -176,66 +138,87 @@ export const getTakenCredits = (state: AppState): number =>
 export const getCourseWarningsFromState = (
   state: AppState,
   semester: DNDScheduleTerm
-): CourseWarning[] =>
-  state.schedule.present.courseWarnings.filter(
+): CourseWarning[] => {
+  if (!getActivePlanFromState(state)) {
+    return [];
+  }
+  return getActivePlanFromState(state)!.courseWarnings.filter(
     w => w.termId === semester.termId
   );
-
-/**
- * Get the current schedule from the Appstate
- * @param state the AppState
- */
-export const getScheduleDataFromState = (state: AppState): ScheduleSlice => {
-  return state.schedule.present;
 };
 
 /**
  * Get the current schedule's major from the AppState
  * @param state the AppState
  */
-export const getScheduleMajorFromState = (state: AppState): string => {
-  return getScheduleDataFromState(state).major;
+export const getActivePlanMajorFromState = (state: AppState) => {
+  return getActivePlanFromState(state).major;
 };
 
 /**
  * Get the current schedule's coop cycle from the AppState
  * @param state the AppState
  */
-export const getScheduleCoopCycleFromState = (state: AppState): string => {
-  return getScheduleDataFromState(state).coopCycle;
+export const getActivePlanCoopCycleFromState = (state: AppState) => {
+  return getActivePlanFromState(state).coopCycle;
 };
 
 /**
  * Get the list of schedule names from the AppState
  * @param state the AppState
  */
-export const getSchedulesFromState = (state: AppState): NamedSchedule[] =>
-  Object.values(state.schedules.schedules);
+export const getUserPlansFromState = (state: AppState): IPlanData[] =>
+  Object.values(state.userPlansState.plans);
 
 /**
  * Get the active schedule from the AppState
  * @param state the AppState
  */
-export const getActiveScheduleFromState = (state: AppState): NamedSchedule => {
-  return state.schedules.schedules[state.schedules.activeSchedule!];
+export const getActivePlanFromState = (state: AppState): IPlanData => {
+  return state.userPlansState.plans[state.userPlansState.activePlan!];
 };
 
-export const getClosedYearsFromState = (state: AppState): Set<number> => {
-  return new Set(state.schedule.present.closedYears);
+export const getActivePlanScheduleFromState = (state: AppState) => {
+  return getActivePlanFromState(state).schedule;
+};
+
+export const getClosedYearsFromState = (state: AppState) => {
+  return new Set(
+    state.userPlansState.closedYears[state.userPlansState.activePlan!]
+  );
 };
 
 /**
  * Get the active current class counter from the AppState
  * @param state the AppState
  */
-export const getCurrentClassCounterFromState = (state: AppState): number => {
-  return state.schedule.present.currentClassCounter;
+export const getCurrentClassCounterFromState = (state: AppState) => {
+  return getActivePlanFromState(state).courseCounter;
 };
 
 /**
  * Get whether the current user is an advisor or not
  * @param state the AppState
  */
-export const getIsAdvisorFromState = (state: AppState): boolean | undefined => {
-  return state.user.isAdvisor;
+export const getIsAdvisorFromState = (state: AppState) => {
+  return getUserFromState(state).isAdvisor;
 };
+
+/*
+ * SAFE GET FUNCTIONS
+ * Should only need to use these where there is not guaranteed to have an active plan (like the home screen)
+ * TODO: look into if a separate component (prior to getting to the HomeComponent) to load plan data would be worth it
+ */
+
+export const safelyGetActivePlanFromState = (state: AppState) => {
+  if (!state.userPlansState.activePlan) {
+    return undefined;
+  }
+  return state.userPlansState.plans[state.userPlansState.activePlan];
+};
+
+export const safelyGetActivePlanMajorFromState = (state: AppState) => safelyGetActivePlanFromState(state)?.major;
+
+export const safelyGetActivePlanCoopCycleFromState = (state: AppState) => safelyGetActivePlanFromState(state)?.coopCycle;
+
+export const safelyGetWarningsFromState = (state: AppState) => safelyGetActivePlanFromState(state)?.warnings || [];

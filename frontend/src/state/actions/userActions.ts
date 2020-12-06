@@ -1,10 +1,15 @@
 import { createAction } from "typesafe-actions";
-import { TransferableExam, Major } from "../../../../common/types";
+import {
+  TransferableExam,
+  IRequiredCourse,
+  ScheduleCourse,
+} from "../../../../common/types";
+import { IUserData } from "../../models/types";
 
-export const setFullNameAction = createAction(
-  "user/SET_FULL_NAME",
-  (fullName: string) => ({
-    fullName,
+export const setUserAction = createAction(
+  "user/SET_USER",
+  (user: IUserData) => ({
+    user,
   })
 )();
 
@@ -22,59 +27,10 @@ export const setGraduationYearAction = createAction(
   })
 )();
 
-export const setDeclaredMajorAction = createAction(
-  "user/SET_MAJOR",
-  (major?: Major) => ({
+export const setUserMajorAction = createAction(
+  "user/SET_USER_MAJOR",
+  (major: string) => ({
     major,
-  })
-)();
-
-export const setUserIdAction = createAction(
-  "user/SET_USER_ID",
-  (id: number) => ({
-    id,
-  })
-)();
-
-export const addPlanIdAction = createAction(
-  "user/ADD_PLAN_ID",
-  (planId: number) => ({
-    planId,
-  })
-)();
-
-export const setPlanNameAction = createAction(
-  "user/SET_PLAN_NAME",
-  (name: string) => ({
-    name,
-  })
-)();
-
-export const setLinkSharingAction = createAction(
-  "user/SET_LINK_SHARING",
-  (linkSharing: boolean) => ({
-    linkSharing,
-  })
-)();
-
-export const setMajorPlanAction = createAction(
-  "user/SET_MAJOR_PLAN",
-  (major: Major | undefined, planStr: string) => ({
-    major,
-    planStr,
-  })
-)();
-
-export const setPlanIdsAction = createAction(
-  "user/SET_PLAN_IDS",
-  (planIds: number[]) => ({
-    planIds,
-  })
-)();
-export const setEmailAction = createAction(
-  "user/SET_EMAIL",
-  (email: string) => ({
-    email,
   })
 )();
 
@@ -85,21 +41,38 @@ export const setUserCoopCycleAction = createAction(
   })
 )();
 
-export const deletePlanId = createAction(
-  "user/DELETE_PLAN_ID",
-  (planId: number) => ({
-    planId,
-  })
-)();
-
-export const setExamCredits = createAction(
+export const setExamCreditsAction = createAction(
   "user/SET_EXAM_CREDITS",
   (examCredits: TransferableExam[]) => ({ examCredits })
 )();
 
-export const setIsAdvisorAction = createAction(
-  "user/SET_IS_ADVISOR",
-  (isAdvisor: boolean) => ({ isAdvisor })
+export const resetUserAction = createAction("user/RESET_USER", () => void 0)();
+
+export const addTransferClassAction = createAction(
+  "user/ADD_TRANSFER",
+  (courses: ScheduleCourse[]) => ({
+    courses,
+  })
 )();
 
-export const resetUserAction = createAction("user/RESET_USER", () => void 0)();
+export const removeTransferClassAction = createAction(
+  "user/REMOVE_TRANSFER_CLASS",
+  (course: ScheduleCourse) => ({
+    course,
+  })
+)();
+
+export const setCompletedCoursesAction = createAction(
+  "user/SET_COMPLETED_COURSES",
+  (completedCourses: ScheduleCourse[]) => ({ completedCourses })
+)();
+
+export const setCompletedRequirementsAction = createAction(
+  "user/SET_COMPLETED_REQUIREMENTS",
+  (completedRequirements: IRequiredCourse[]) => ({ completedRequirements })
+)();
+
+export const setTransferCoursesAction = createAction(
+  "user/SET_TRANSFER_COURSES",
+  (transferCourses: ScheduleCourse[]) => ({ transferCourses })
+)();

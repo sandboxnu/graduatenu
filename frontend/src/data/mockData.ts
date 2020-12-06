@@ -162,8 +162,6 @@ export const mockEmptySchedule: DNDSchedule = {
       },
     },
   },
-
-  id: "example-schedule-2",
 };
 
 export const mockData: DNDSchedule = {
@@ -242,5 +240,4 @@ export const mockData: DNDSchedule = {
       },
     },
   },
-  id: "example-schedule",
 };

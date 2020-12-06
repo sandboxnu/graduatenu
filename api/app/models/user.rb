@@ -2,36 +2,37 @@
 #
 # Table name: users
 #
-#  id                :bigint(8)        not null, primary key
-#  academic_year     :integer(4)
-#  catalog_year      :integer(4)
-#  coop_cycle        :string
-#  courses_completed :json             default([]), is an Array
-#  courses_transfer  :json             default([]), is an Array
-#  email             :string           default(""), not null
-#  graduation_year   :integer(4)
-#  image_url         :string
-#  is_advisor        :boolean          default(FALSE), not null
-#  major             :string
-#  username          :string
-#  created_at        :datetime         not null
-#  updated_at        :datetime         not null
-#  nu_id             :string
+#  id                     :bigint(8)        not null, primary key
+#  academic_year          :integer(4)
+#  coop_cycle             :string
+#  courses_completed      :json             default([]), is an Array
+#  courses_transfer       :json             default([]), is an Array
+#  email                  :string           default(""), not null
+#  encrypted_password     :string           default(""), not null
+#  full_name              :string
+#  graduation_year        :integer(4)
+#  image_url              :string
+#  is_advisor             :boolean          default(FALSE), not null
+#  major                  :string
+#  remember_created_at    :datetime
+#  reset_password_sent_at :datetime
+#  reset_password_token   :string
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#  nu_id                  :string
 #
 # Indexes
 #
-#  index_users_on_email     (email) UNIQUE
-#  index_users_on_username  (username)
+#  index_users_on_email                 (email) UNIQUE
+#  index_users_on_full_name             (full_name)
+#  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
 class User < ApplicationRecord
   JWT_EXPIRATION = 60.days
-
-  has_many :transfer_courses, foreign_key: 'user_id', class_name: "Course"
-  has_many :completed_courses, foreign_key: 'user_id', class_name: "Course"
   has_many :plans, dependent: :destroy
 
-  #validates a non-unique username and allows spaces
-  validates :username, presence: true, allow_blank: false, format: { with: /\A[a-zA-Z0-9 ]+\z/ }
+  #validates a non-unique full_name and allows spaces
+  validates :full_name, presence: true, allow_blank: false, format: { with: /\A[a-zA-Z0-9 ]+\z/ }
 
   def generate_jwt
     JWT.encode({ id: id, exp: JWT_EXPIRATION.from_now.to_i }, Rails.application.credentials.secret_key_base)

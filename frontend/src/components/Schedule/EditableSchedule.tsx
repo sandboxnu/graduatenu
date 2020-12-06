@@ -10,35 +10,26 @@ import {
   isCoopOrVacation,
   moveCourse,
   addCourseFromSidebar,
-  convertToDNDSchedule,
 } from "../../utils";
-import {
-  Schedule,
-  Major,
-  Status,
-  SeasonWord,
-  ScheduleCourse,
-} from "../../../../common/types";
+import { Status, SeasonWord } from "../../../../common/types";
 import {
   DNDSchedule,
-  IWarning,
   DNDScheduleYear,
   DNDScheduleTerm,
-  IPlanData,
-  ScheduleSlice,
-  NamedSchedule,
 } from "../../models/types";
 import {
-  updateSemesterAction,
-  setDNDScheduleAction,
-  setClosedYearsToYearsInThePast,
-  incrementCurrentClassCounter,
-} from "../../state/actions/scheduleActions";
+  updateSemesterForActivePlanAction,
+  setActivePlanDNDScheduleAction,
+  incrementCurrentClassCounterForActivePlanAction,
+} from "../../state/actions/userPlansActions";
 import {
-  getScheduleFromState,
+  safelyGetActivePlanFromState,
   getCurrentClassCounterFromState,
+  getTransferCoursesFromState,
 } from "../../state";
-import ScheduleComponent from "./Schedule";
+import { Year } from "../Year";
+import Loader from "react-loader-spinner";
+import { TransferCredits } from "../TransferCreditHolder";
 
 const OuterContainer = styled.div`
   display: flex;
@@ -76,11 +67,52 @@ interface Props {
   transferCreditPresent: boolean;
 }
 
+const SpinnerWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 60vh;
+`;
+
+interface ScheduleProps {
+  readonly schedule?: DNDSchedule;
+}
+
+const LoadingSpinner: React.FC = () => {
+  return (
+    <SpinnerWrapper>
+      <Loader
+        type="Puff"
+        color="#f50057"
+        height={100}
+        width={100}
+        timeout={5000} //5 secs
+      />
+    </SpinnerWrapper>
+  );
+};
+
+const ScheduleComponent: React.FC<ScheduleProps> = ({ schedule }) => {
+  return schedule ? (
+    <>
+      {schedule.years.map((year: number, index: number) => (
+        <Year key={index} index={index} schedule={schedule} />
+      ))}
+    </>
+  ) : (
+    <LoadingSpinner />
+  );
+};
+
 export const EditableSchedule: React.FC<Props> = props => {
-  const { schedule, currentClassCounter } = useSelector(
+  const { children, sidebarPresent, transferCreditPresent } = props;
+  const { activePlan, currentClassCounter, transferCredits } = useSelector(
     (state: AppState) => ({
-      schedule: getScheduleFromState(state),
+      activePlan: safelyGetActivePlanFromState(state)!.schedule,
       currentClassCounter: getCurrentClassCounterFromState(state),
+      transferCredits: getTransferCoursesFromState(state),
     }),
     shallowEqual
   );
@@ -91,16 +123,16 @@ export const EditableSchedule: React.FC<Props> = props => {
     year: number,
     season: SeasonWord,
     newSemester: DNDScheduleTerm
-  ) => dispatch(updateSemesterAction(year, season, newSemester));
+  ) => dispatch(updateSemesterForActivePlanAction(year, season, newSemester));
   const setDNDSchedule = (schedule: DNDSchedule): any =>
-    dispatch(setDNDScheduleAction(schedule));
+    dispatch(setActivePlanDNDScheduleAction(schedule));
 
   const incrementCurrentClassCounter = (): any =>
-    dispatch(incrementCurrentClassCounter());
+    dispatch(incrementCurrentClassCounterForActivePlanAction());
 
   const removeHovers = (currSemester: DNDScheduleTerm) => {
-    for (const yearnum of schedule.years) {
-      const year = JSON.parse(JSON.stringify(schedule.yearMap[yearnum])); // deep copy
+    for (const yearnum of activePlan.years) {
+      const year = JSON.parse(JSON.stringify(activePlan.yearMap[yearnum])); // deep copy
       if (isCoopOrVacation(year.fall) && year.fall !== currSemester) {
         year.fall.status = year.fall.status.replace("HOVER", "") as Status;
         updateSemester(yearnum, "fall", year.fall);
@@ -137,7 +169,7 @@ export const EditableSchedule: React.FC<Props> = props => {
 
     const destSemesterSeason = convertTermIdToSeason(destination.droppableId);
     const destSemesterYear = convertTermIdToYear(destination.droppableId);
-    const destYear: DNDScheduleYear = schedule.yearMap[destSemesterYear];
+    const destYear: DNDScheduleYear = activePlan.yearMap[destSemesterYear];
     const destSemester: DNDScheduleTerm = JSON.parse(
       JSON.stringify((destYear as any)[destSemesterSeason])
     ); // deep copy
@@ -170,7 +202,7 @@ export const EditableSchedule: React.FC<Props> = props => {
     // if drag is coming from the sidebar
     if (isNaN(Number(source.droppableId))) {
       addCourseFromSidebar(
-        schedule,
+        activePlan,
         destination,
         source,
         setDNDSchedule,
@@ -179,7 +211,7 @@ export const EditableSchedule: React.FC<Props> = props => {
       );
       incrementCurrentClassCounter();
     } else {
-      moveCourse(schedule, destination, source, setDNDSchedule);
+      moveCourse(activePlan, destination, source, setDNDSchedule);
     }
   };
 
@@ -188,14 +220,18 @@ export const EditableSchedule: React.FC<Props> = props => {
       <DragDropContext onDragEnd={onDragEnd} onDragUpdate={onDragUpdate}>
         <LeftScroll className="hide-scrollbar">
           <Container>
-            {props.children}
-            <ScheduleComponent schedule={schedule} />
-            {/* {this.renderTransfer()} */}
+            {children}
+            <ScheduleComponent schedule={activePlan} />
+            {transferCreditPresent && (
+              <TransferCredits transferCredits={transferCredits} />
+            )}
           </Container>
         </LeftScroll>
-        <SidebarContainer>
-          <Sidebar />
-        </SidebarContainer>
+        {sidebarPresent && (
+          <SidebarContainer>
+            <Sidebar />
+          </SidebarContainer>
+        )}
       </DragDropContext>
     </OuterContainer>
   );

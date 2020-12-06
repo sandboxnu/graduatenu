@@ -9,13 +9,13 @@ import {
   Requirement,
 } from "../../../common/types";
 import {
-  getDeclaredMajorFromState,
+  getUserMajorFromState,
   getCompletedRequirementsFromState,
 } from "../state";
 import {
-  setCompletedCourses,
-  setTransferCourses,
-} from "../state/actions/scheduleActions";
+  setCompletedCoursesAction,
+  setTransferCoursesAction,
+} from "../state/actions/userActions";
 import styled from "styled-components";
 import { fetchCourse } from "../api";
 import { withRouter, RouteComponentProps } from "react-router-dom";
@@ -270,15 +270,15 @@ class TransferCoursesComponent extends Component<Props, State> {
 }
 
 const mapStateToProps = (state: AppState) => ({
-  major: getDeclaredMajorFromState(state)!,
+  major: getUserMajorFromState(state)!,
   completedRequirements: getCompletedRequirementsFromState(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   setCompletedCourses: (completedCourses: ScheduleCourse[]) =>
-    dispatch(setCompletedCourses(completedCourses)),
+    dispatch(setCompletedCoursesAction(completedCourses)),
   setTransferCourses: (transferCourses: ScheduleCourse[]) =>
-    dispatch(setTransferCourses(transferCourses)),
+    dispatch(setTransferCoursesAction(transferCourses)),
 });
 
 export const TransferCoursesScreen = withRouter(

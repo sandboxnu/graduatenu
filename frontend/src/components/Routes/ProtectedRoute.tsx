@@ -1,10 +1,10 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { shallowEqual, useSelector } from "react-redux";
 import { Redirect, Route, RouteComponentProps } from "react-router-dom";
 import { RedirectScreen } from "../../Onboarding/RedirectScreen";
-import { getUserId } from "../../state";
+import { getDoesUserExistInState } from "../../state";
 import { AppState } from "../../state/reducers/state";
-import { isLoggedIn } from "../../utils/auth-helpers";
+import { authCookieExists } from "../../utils/auth-helpers";
 
 export function ProtectedRoute({
   component,
@@ -15,13 +15,16 @@ export function ProtectedRoute({
     | React.ComponentType<any>;
   path: string;
 }) {
-  const { userId } = useSelector((state: AppState) => ({
-    userId: getUserId(state),
-  }));
+  const { userExists } = useSelector(
+    (state: AppState) => ({
+      userExists: getDoesUserExistInState(state),
+    }),
+    shallowEqual
+  );
 
-  if (isLoggedIn()) {
+  if (authCookieExists()) {
     // if user exists in redux
-    if (userId) {
+    if (userExists) {
       return <Route path={path} component={component} />;
     } else {
       return <RedirectScreen redirectUrl={path} />;

@@ -3,7 +3,7 @@ class PlansController < ApplicationController
   before_action :set_user
   before_action :set_user_plan, only: [:show, :update, :destroy]
 
-  #returns all the plans
+  # returns all the plans
   def index
     if authorized || @user.is_advisor
       @plans = @user.plans
@@ -12,8 +12,7 @@ class PlansController < ApplicationController
     end
   end
 
-  # shows a plan
-  # handled by before action
+  # shows a single plan
   def show
     if authorized
       if @plan
@@ -30,7 +29,7 @@ class PlansController < ApplicationController
     end
   end
 
-  #creates a plan
+  # creates a plan
   def create
     if authorized
       params_copy = plan_params.clone()
@@ -46,7 +45,7 @@ class PlansController < ApplicationController
     end
   end
 
-  #update a plan
+  # updates a plan
   def update
     if authorized
       if @plan
@@ -60,8 +59,7 @@ class PlansController < ApplicationController
     end
   end
 
-  #finds a plan by id then destroys it
-  # #just needs the id in the body
+  # finds a plan by id then destroys it, just needs the id in the body
   def destroy
     if authorized
       if @plan
@@ -80,7 +78,7 @@ class PlansController < ApplicationController
   #parameters
   def plan_params
      # (schedule: {}) allows you to store an arbitrary hash with unspecified schema
-    params.require(:plan).permit(:name, :link_sharing_enabled, :major, :coop_cycle, :course_counter, 
+    params.require(:plan).permit(:name, :link_sharing_enabled, :major, :coop_cycle, :course_counter, :last_viewed,
     warnings: [:message, :termId], course_warnings: [:message, :termId, :subject, :classId], schedule: {})
   end
 

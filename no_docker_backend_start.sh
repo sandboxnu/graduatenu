@@ -1,0 +1,1 @@
+cd api && DATABASE_URL=postgres://nilsbacke@localhost:5432/api_development rails s -p 3001

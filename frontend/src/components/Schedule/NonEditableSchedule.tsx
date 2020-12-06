@@ -2,7 +2,7 @@ import { DNDSchedule } from "../../models/types";
 import React from "react";
 import Loader from "react-loader-spinner";
 import styled from "styled-components";
-import { Year } from "../../components/Year";
+import { Year } from "../Year";
 
 const SpinnerWrapper = styled.div`
   display: flex;
