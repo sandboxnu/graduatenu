@@ -127,7 +127,7 @@ class TransferCreditsComponent extends React.Component<
     if (this.props.transferCredits == null) {
       return null;
     }
-    return this.props.transferCredits.map((scheduleCourse, _) => {
+    return this.props.transferCredits.map(scheduleCourse => {
       if (!!scheduleCourse) {
         return (
           <ClassWrapper key={scheduleCourse.subject + scheduleCourse.classId}>

@@ -29,6 +29,7 @@ export const RedirectScreen: React.FC<Props> = ({ redirectUrl }) => {
   // component did mount
   useEffect(() => {
     setIsLoading(true);
+    setIsError(false);
     fetchMajorsAndPlans()(dispatch).then(majors => {
       const cookie = Cookies.get(AUTH_TOKEN_COOKIE_KEY);
       if (cookie) {
