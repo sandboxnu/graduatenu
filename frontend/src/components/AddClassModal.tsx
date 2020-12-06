@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { DNDSchedule, DNDScheduleTerm } from "../models/types";
 import { ScheduleCourse } from "../../../common/types";
 import { XButton } from "./common";
-import { fetchCourse } from "../api";
+import { fetchCourse, searchCourses } from "../api";
 import { Modal, CircularProgress, TextField } from "@material-ui/core";
 import { AppState } from "../state/reducers/state";
 import { getActivePlanScheduleFromState } from "../state";
