@@ -4,6 +4,8 @@ import { Redirect, Route, RouteComponentProps } from "react-router-dom";
 import { RedirectScreen } from "../../Onboarding/RedirectScreen";
 import {
   getDoesUserExistInState,
+  safelyGetAcademicYearFromState,
+  safelyGetGraduationYearFromState,
   safelyGetIsAdvisorFromState,
 } from "../../state";
 import { AppState } from "../../state/reducers/state";
@@ -18,10 +20,13 @@ export function ProtectedRoute({
     | React.ComponentType<any>;
   path: string;
 }) {
-  const { userExists, isAdvisor } = useSelector(
+  const { userExists, isAdvisor, finishedOnboarding } = useSelector(
     (state: AppState) => ({
       userExists: getDoesUserExistInState(state),
       isAdvisor: safelyGetIsAdvisorFromState(state),
+      finishedOnboarding:
+        !!safelyGetGraduationYearFromState(state) &&
+        !!safelyGetAcademicYearFromState(state),
     }),
     shallowEqual
   );
@@ -37,6 +42,12 @@ export function ProtectedRoute({
         // or student is trying to go to advisor routes
         return <Redirect to="/" />;
       }
+
+      if (finishedOnboarding && path.includes("onboarding")) {
+        // leave out completed/transfer courses screens for now
+        return <Redirect to="/home" />;
+      }
+
       return <Route path={path} component={component} />;
     } else {
       return <RedirectScreen redirectUrl={path} />;
