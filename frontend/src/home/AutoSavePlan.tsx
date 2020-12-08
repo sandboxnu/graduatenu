@@ -8,7 +8,7 @@ import {
   setActivePlanStatusAction,
   updateActivePlanAction,
 } from "../state/actions/userPlansActions";
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { convertPlanToCreatePlanData } from "../utils/plan-helpers";
 import {
   getActivePlanFromState,
@@ -46,7 +46,13 @@ export const AutoSavePlan: React.FC = () => {
     []
   );
 
+  const firstRender = useRef(true);
+
   useEffect(() => {
+    if (firstRender.current) {
+      firstRender.current = false;
+      return;
+    }
     dispatch(setActivePlanStatusAction("Waiting to Update"));
     debouncedUpdate(activePlan);
   }, [
