@@ -185,6 +185,7 @@ class HomeComponent extends React.Component<Props> {
     ) {
       this.updateWarnings();
     }
+
     if (this.shouldBlockNavigation()) {
       window.onbeforeunload = () => true;
     } else {

@@ -27,7 +27,7 @@ const Container = styled.div`
   align-items: center;
 `;
 
-const DEBOUNCE_SAVE_DELAY_MS = 1000;
+const DEBOUNCE_SAVE_DELAY_MS = 750;
 
 export const AutoSavePlan: React.FC = () => {
   const dispatch = useDispatch();
