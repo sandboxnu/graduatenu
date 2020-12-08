@@ -11,7 +11,7 @@ import styled from "styled-components";
 import { convertTermIdToYear } from "../utils";
 import { withToast } from "./toastHook";
 import { AppearanceTypes } from "react-toast-notifications";
-import { withRouter, RouteComponentProps } from "react-router-dom";
+import { withRouter, RouteComponentProps, Prompt } from "react-router-dom";
 import { connect } from "react-redux";
 import { AppState } from "../state/reducers/state";
 import { Dispatch } from "redux";
@@ -25,6 +25,7 @@ import {
   getActivePlanFromState,
   getActivePlanMajorFromState,
   getWarningsFromState,
+  getActivePlanStatusFromState,
 } from "../state";
 import {
   incrementCurrentClassCounterForActivePlanAction,
@@ -44,6 +45,9 @@ import {
   removeAuthTokenFromCookies,
 } from "../utils/auth-helpers";
 import { EditableSchedule } from "../components/Schedule/ScheduleComponents";
+import { convertPlanToCreatePlanData } from "../utils/plan-helpers";
+import { ActivePlanAutoSaveStatus } from "../state/reducers/userPlansReducer";
+import { AutoSavePlan } from "./AutoSavePlan";
 
 const HomeTop = styled.div`
   width: 100%;
@@ -148,7 +152,8 @@ interface ReduxStoreHomeProps {
   majors: Major[];
   academicYear: number;
   closedYears: Set<number>; // list of indexes of closed years
-  activePlan?: IPlanData;
+  activePlan: IPlanData;
+  activePlanStatus: ActivePlanAutoSaveStatus;
 }
 
 interface ReduxDispatchHomeProps {
@@ -175,9 +180,25 @@ class HomeComponent extends React.Component<Props> {
   }
 
   componentDidUpdate(nextProps: Props) {
-    if (nextProps.warnings !== this.props.warnings) {
+    if (
+      JSON.stringify(nextProps.warnings) !== JSON.stringify(this.props.warnings)
+    ) {
       this.updateWarnings();
     }
+    if (this.shouldBlockNavigation()) {
+      window.onbeforeunload = () => true;
+    } else {
+      //@ts-ignore
+      window.onbeforeunload = undefined;
+    }
+  }
+
+  componentWillUnmount() {
+    window.onbeforeunload = null;
+  }
+
+  shouldBlockNavigation() {
+    return this.props.activePlanStatus !== "Up To Date";
   }
 
   updateWarnings() {
@@ -209,17 +230,14 @@ class HomeComponent extends React.Component<Props> {
       this.props.userId!,
       token,
       this.props.activePlan!.id,
-      this.props.activePlan!
-    ).then((plan: IPlanData) => {
-      this.props.updateActivePlan(plan);
-      if (showAlert) {
-        alert("Your plan has been updated successfully.");
-      }
+      convertPlanToCreatePlanData(this.props.activePlan!)
+    ).then(response => {
+      this.props.updateActivePlan(response.plan);
     });
   }
 
   logOut = async () => {
-    await this.updatePlan(false);
+    await this.updatePlan();
     window.location.reload();
     removeAuthTokenFromCookies();
 
@@ -238,12 +256,7 @@ class HomeComponent extends React.Component<Props> {
         </HomePlan>
         <HomeButtons>
           <PlanContainer>
-            <PlanPopperButton
-              variant="contained"
-              onClick={this.updatePlan.bind(this)}
-            >
-              Update Plan
-            </PlanPopperButton>
+            <AutoSavePlan />
           </PlanContainer>
           <PlanContainer>
             <AddPlan />
@@ -257,6 +270,10 @@ class HomeComponent extends React.Component<Props> {
   render() {
     return (
       <>
+        <Prompt
+          when={this.shouldBlockNavigation()}
+          message="You have unsaved changes, are you sure you want to leave?"
+        />
         <HomeTop>
           <HomeTopInnerContainer>
             <HomeText href="#">GraduateNU</HomeText>
@@ -283,11 +300,12 @@ const mapStateToProps = (state: AppState) => ({
   major: getActivePlanMajorFromState(state),
   coopCycle: getActivePlanCoopCycleFromState(state),
   warnings: getWarningsFromState(state),
-  userId: getUserIdFromState(state)!,
+  userId: getUserIdFromState(state),
   majors: getMajorsFromState(state),
   academicYear: getAcademicYearFromState(state)!,
   closedYears: getClosedYearsFromState(state),
   activePlan: getActivePlanFromState(state),
+  activePlanStatus: getActivePlanStatusFromState(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({

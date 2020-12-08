@@ -1,3 +1,4 @@
+import { ICreatePlanData, IPlanData } from "./../models/types";
 import { Major } from "../../../common/types";
 
 /**
@@ -14,4 +15,14 @@ export function findMajorFromName(
     return undefined;
   }
   return major;
+}
+
+export function convertPlanToCreatePlanData(plan: IPlanData): ICreatePlanData {
+  return {
+    ...plan,
+    link_sharing_enabled: plan.linkSharingEnabled,
+    coop_cycle: plan.coopCycle,
+    course_counter: plan.courseCounter,
+    last_viewed: plan.lastViewed,
+  };
 }

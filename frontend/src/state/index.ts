@@ -211,6 +211,10 @@ export const getIsAdvisorFromState = (state: AppState) => {
   return getUserFromState(state).isAdvisor;
 };
 
+export const getActivePlanStatusFromState = (state: AppState) => {
+  return state.userPlansState.activePlanStatus;
+};
+
 /*
  * SAFE GET FUNCTIONS
  * Should only need to use these where there is not guaranteed to have a user
