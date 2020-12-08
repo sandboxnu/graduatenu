@@ -7,11 +7,6 @@ const IconContainer = styled.div<any>`
   margin-top: ${props => (props.isSmall ? "4px" : "8px")};
 `;
 
-// const SearchIcon = styled.img<any>`
-//   width: ${props => props.isSmall ? "14px" : "28px"};;
-//   height: ${props => props.isSmall ? "12px" : "24px"};
-// `;
-
 const SearchContainer = styled.div`
   border: 0px solid red;
   display: flex;

@@ -2,8 +2,8 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
 import styled from "styled-components";
-import { AddClass } from ".";
 import { ScheduleCourse } from "../../../common/types";
+import { AddClassSearchModal } from "./AddClassSearchModal";
 import {
   addTransferClassAction,
   removeTransferClassAction,
@@ -166,14 +166,14 @@ class TransferCreditsComponent extends React.Component<
           />
           {this.renderContainer()}
           <AddBlock onClick={this.showModal.bind(this)} />
-          <AddClass
+          <AddClassSearchModal
             visible={modalVisible}
             handleClose={this.hideModal.bind(this)}
             handleSubmit={(courses: ScheduleCourse[]) => {
               // Add the given courses through redux
               this.props.handleAddClasses(courses);
             }}
-          ></AddClass>
+          />
         </HolderBody>
       </div>
     );

@@ -2,7 +2,7 @@ import React from "react";
 import { Droppable } from "react-beautiful-dnd";
 import { ClassBlock } from "./ClassBlocks";
 import { AddBlock } from "./ClassBlocks/AddBlock";
-import { AddClass, ClassList, EmptyBlock } from ".";
+import { ClassList, EmptyBlock } from ".";
 import { AddClassSearchModal } from "./AddClassSearchModal";
 import {
   DNDScheduleTerm,
@@ -258,7 +258,7 @@ class SemesterBlockComponent extends React.Component<
             // Add the given courses to this semester through redux
             this.props.handleAddClasses(courses, this.props.semester);
           }}
-        ></AddClassSearchModal>
+        />
         {this.props.warnings.length > 0 ? (
           <Tooltip title={this.renderTooltip()} placement="top" arrow>
             {this.renderContainer()}
