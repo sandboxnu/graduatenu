@@ -191,6 +191,7 @@ export interface IPlanData {
   courseWarnings: CourseWarning[];
   courseCounter: number;
   lastViewed: Date;
+  updatedAt: Date;
 }
 
 /**

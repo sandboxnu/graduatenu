@@ -19,6 +19,7 @@ import { AppState } from "../state/reducers/state";
 import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
 import LoopIcon from "@material-ui/icons/Loop";
 import styled from "styled-components";
+import * as timeago from "timeago.js";
 
 const Container = styled.div`
   display: flex;
@@ -85,7 +86,7 @@ export const AutoSavePlan: React.FC = () => {
   if (activePlanStatus === "Up To Date") {
     return (
       <Container>
-        All Changes Saved{" "}
+        Last edit was {timeago.format(activePlan.updatedAt)}
         <CheckCircleOutlineIcon style={{ fill: "green", paddingLeft: 6 }} />
       </Container>
     );
