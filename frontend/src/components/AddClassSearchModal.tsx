@@ -8,8 +8,9 @@ import { searchCourses } from "../api";
 import AddIcon from "@material-ui/icons/Add";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import { isCourseInSchedule } from "../utils/schedule-helpers";
-import { NextButton } from "./common/NextButton";
+import { PrimaryButton } from "./common/PrimaryButton";
 import { NonDraggableClassBlock } from "./ClassBlocks/NonDraggableClassBlock";
+import { getScheduleCourseCoreqs } from "../utils/course-helpers";
 
 interface AddClassSearchModalProps {
   visible: boolean;
@@ -56,7 +57,7 @@ const SearchResultsScrollContainer = styled.div`
   height: 200px;
   width: 100%;
   margin-top: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   border: 1px solid red;
   border-radius: 10px;
   overflow-y: scroll;
@@ -134,9 +135,14 @@ export const AddClassSearchModal: React.FC<
           </SubjectId>
         </ResultInfoContainer>
         <AddClassButton
-          onClick={() => {
+          onClick={async () => {
             if (selectedCourses.indexOf(props.course) < 0) {
-              setSelectedCourses([...selectedCourses, props.course]);
+              const courseCoreqs = await getScheduleCourseCoreqs(props.course);
+              const newSelectedCourses = [
+                ...selectedCourses,
+                props.course,
+              ].concat(courseCoreqs);
+              setSelectedCourses(newSelectedCourses);
             }
           }}
         >
@@ -146,13 +152,57 @@ export const AddClassSearchModal: React.FC<
     );
   };
 
+  const SearchResults = () => {
+    return (
+      <SearchResultsScrollContainer>
+        {isLoading ? (
+          <Loading>
+            <LinearProgress color="secondary" />
+          </Loading>
+        ) : searchedCourseResults.length === 0 ? (
+          <NoResultContainer> No results </NoResultContainer>
+        ) : (
+          searchedCourseResults
+        )}
+      </SearchResultsScrollContainer>
+    );
+  };
+
+  const AddedClasses = () => {
+    return (
+      <AddedClassesContainer>
+        {selectedCourses.map(selectedCourse => (
+          <NonDraggableClassBlock
+            key={selectedCourse.classId + selectedCourse.subject}
+            course={selectedCourse}
+            onDelete={() => {
+              let copy = [...selectedCourses];
+              var index = copy.indexOf(selectedCourse);
+              if (index !== -1) {
+                copy.splice(index, 1);
+                setSelectedCourses(copy);
+              }
+            }}
+          />
+        ))}
+      </AddedClassesContainer>
+    );
+  };
+
+  const onClose = () => {
+    props.handleClose();
+    setSearchQuery("");
+    setSearchedCourses(EMPTY_COURSE_LIST);
+    setSelectedCourses(EMPTY_COURSE_LIST);
+    setIsLoading(false);
+  };
+
   const fetchCourses = () => {
     if (searchQuery != "") {
       setIsLoading(true);
       searchCourses(searchQuery)
         .then(searchedCourses => {
           setSearchedCourses(searchedCourses);
-          console.log(searchedCourses);
           setIsLoading(false);
         })
         .catch(err => console.log(err));
@@ -179,7 +229,7 @@ export const AddClassSearchModal: React.FC<
       <OuterSection>
         <InnerContainer>
           <CloseButtonWrapper>
-            <XButton onClick={props.handleClose}></XButton>
+            <XButton onClick={onClose}></XButton>
           </CloseButtonWrapper>
           <h1 id="simple-modal-title">Add classes</h1>
           <SearchContainer>
@@ -189,38 +239,17 @@ export const AddClassSearchModal: React.FC<
               isSmall={true}
             />
           </SearchContainer>
-          <SearchResultsScrollContainer>
-            {isLoading ? (
-              <Loading>
-                <LinearProgress color="secondary" />
-              </Loading>
-            ) : searchedCourseResults.length === 0 ? (
-              <NoResultContainer> No results </NoResultContainer>
-            ) : (
-              searchedCourseResults
-            )}
-          </SearchResultsScrollContainer>
-          <AddedClassesContainer>
-            {selectedCourses.length === 0
-              ? "Select classes to add"
-              : selectedCourses.map(selectedCourse => (
-                  <NonDraggableClassBlock
-                    course={selectedCourse}
-                    onDelete={() => {
-                      let copy = [...selectedCourses];
-                      var index = copy.indexOf(selectedCourse);
-                      if (index !== -1) {
-                        copy.splice(index, 1);
-                        setSelectedCourses(copy);
-                      }
-                    }}
-                  />
-                ))}
-          </AddedClassesContainer>
-          <NextButton
-            text="Add Classes"
-            onClick={() => props.handleSubmit(selectedCourses)}
-          />
+          <SearchResults />
+          <AddedClasses />
+          <PrimaryButton
+            onClick={() => {
+              props.handleSubmit(selectedCourses);
+              onClose();
+            }}
+            disabled={selectedCourses.length === 0}
+          >
+            Add Classes
+          </PrimaryButton>
         </InnerContainer>
       </OuterSection>
     </Modal>

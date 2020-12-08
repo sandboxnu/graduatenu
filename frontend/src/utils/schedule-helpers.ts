@@ -318,16 +318,7 @@ export function isYearInPast(yearIndex: number, academicYear: number): boolean {
  * @returns whether or not this course is in the term
  */
 function isCourseInTerm(courseToAdd: ScheduleCourse, term: DNDScheduleTerm) {
-  for (let course of term.classes) {
-    // courseToAdd's classId is an int, so we're casting in order to compare accurately
-    if (
-      String(courseToAdd.classId) === String(course.classId) &&
-      courseToAdd.subject === course.subject
-    ) {
-      return true;
-    }
-  }
-  return false;
+  return term.classes.some((course) => String(courseToAdd.classId) === String(course.classId) && courseToAdd.subject === course.subject);
 }
 
 /**
@@ -340,15 +331,9 @@ export function isCourseInSchedule(
   courseToAdd: ScheduleCourse,
   schedule: DNDSchedule
 ) {
-  for (let year of schedule.years) {
-    if (
-      isCourseInTerm(courseToAdd, schedule.yearMap[year].spring) ||
-      isCourseInTerm(courseToAdd, schedule.yearMap[year].fall) ||
-      isCourseInTerm(courseToAdd, schedule.yearMap[year].summer1) ||
-      isCourseInTerm(courseToAdd, schedule.yearMap[year].summer2)
-    ) {
-      return true;
-    }
-  }
-  return false;
+  return schedule.years.some((year) => 
+    isCourseInTerm(courseToAdd, schedule.yearMap[year].spring) ||
+    isCourseInTerm(courseToAdd, schedule.yearMap[year].fall) ||
+    isCourseInTerm(courseToAdd, schedule.yearMap[year].summer1) ||
+    isCourseInTerm(courseToAdd, schedule.yearMap[year].summer2));
 }
