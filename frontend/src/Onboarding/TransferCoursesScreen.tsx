@@ -24,7 +24,7 @@ import {
   OnboardingSelectionTemplate,
 } from "./GenericOnboarding";
 import { Grid, Paper } from "@material-ui/core";
-import { AddClassModal } from "../components/AddClassModal";
+import { AddClassSearchModal } from "../components/AddClassSearchModal";
 import { AddBlock } from "../components/ClassBlocks/AddBlock";
 
 const TitleText = styled.div`
@@ -258,12 +258,13 @@ class TransferCoursesComponent extends Component<Props, State> {
             </Paper>
           </Grid>
         </Grid>
-        <AddClassModal
-          schedule={undefined}
+        <AddClassSearchModal
           visible={this.state.modalVisible}
           handleClose={this.hideModal.bind(this)}
-          handleSubmit={courses => this.addOtherCourses(courses)}
-        ></AddClassModal>
+          handleSubmit={(courses: ScheduleCourse[]) =>
+            this.addOtherCourses(courses)
+          }
+        />
       </OnboardingSelectionTemplate>
     );
   }

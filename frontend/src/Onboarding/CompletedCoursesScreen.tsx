@@ -265,7 +265,7 @@ class CompletedCoursesComponent extends Component<Props, State> {
           handleSubmit={(courses: ScheduleCourse[]) =>
             this.addOtherCourses(courses)
           }
-        ></AddClassSearchModal>
+        />
       </OnboardingSelectionTemplate>
     );
   }
