@@ -209,3 +209,7 @@ export const getIsAdvisorFromState = (state: AppState) => {
  * Should only need to use these where there is not guaranteed to have a user
  */
 export const safelyGetIsAdvisorFromState = (state: AppState) => state.userState.user?.isAdvisor;
+
+export const safelyGetAcademicYearFromState = (state: AppState) => state.userState.user?.academicYear;
+
+export const safelyGetGraduationYearFromState = (state: AppState) => state.userState.user?.graduationYear;
