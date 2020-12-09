@@ -222,3 +222,5 @@ export const safelyGetActivePlanMajorFromState = (state: AppState) => safelyGetA
 export const safelyGetActivePlanCoopCycleFromState = (state: AppState) => safelyGetActivePlanFromState(state)?.coopCycle;
 
 export const safelyGetWarningsFromState = (state: AppState) => safelyGetActivePlanFromState(state)?.warnings || [];
+
+export const safelyGetActivePlanScheduleFromState = (state: AppState) => safelyGetActivePlanFromState(state)?.schedule;

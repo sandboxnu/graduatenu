@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ScheduleCourse } from "../../../common/types";
-import { Modal, TextField } from "@material-ui/core";
+import { useSelector } from "react-redux";
+import { Modal } from "@material-ui/core";
 import styled from "styled-components";
 import { XButton } from "./common";
 import { Search } from "./common/Search";
@@ -11,6 +12,13 @@ import { isCourseInSchedule } from "../utils/schedule-helpers";
 import { PrimaryButton } from "./common/PrimaryButton";
 import { NonDraggableClassBlock } from "./ClassBlocks/NonDraggableClassBlock";
 import { getScheduleCourseCoreqs } from "../utils/course-helpers";
+import { AppState } from "../state/reducers/state";
+import { safelyGetActivePlanScheduleFromState } from "../state";
+import Tooltip from "@material-ui/core/Tooltip";
+import IconButton from "@material-ui/core/IconButton";
+import Fab from "@material-ui/core/Fab";
+import ErrorIcon from "@material-ui/icons/Error";
+import { LensTwoTone } from "@material-ui/icons";
 
 interface AddClassSearchModalProps {
   visible: boolean;
@@ -97,7 +105,33 @@ const AddedClassesContainer = styled.div``;
 
 const ResultInfoContainer = styled.div``;
 
-const AddClassButton = styled.div``;
+const AddClassButton = styled.div`
+  padding: 5px;
+  background: pink;
+  width: 18px;
+  height: 18px;
+  -moz-border-radius: 50px;
+  -webkit-border-radius: 50px;
+  border-radius: 50px;
+  align-items: center;
+  &:hover {
+    background: red;
+  }
+`;
+
+const AddClassError = styled.div`
+  background: pink;
+  color: white;
+  width: 18px;
+  height: 18px;
+  padding: 5px;
+  font-size: 16px;
+  font-weight: 800;
+  -moz-border-radius: 50px;
+  -webkit-border-radius: 50px;
+  border-radius: 50px;
+  text-align: center;
+`;
 
 const SubjectId = styled.div`
   font-size: 10px;
@@ -122,8 +156,15 @@ export const AddClassSearchModal: React.FC<
   const [isLoading, setIsLoading] = useState(false);
   const [searchedCourses, setSearchedCourses] = useState(EMPTY_COURSE_LIST);
   const [selectedCourses, setSelectedCourses] = useState(EMPTY_COURSE_LIST);
+  const { schedule } = useSelector((state: AppState) => ({
+    schedule: safelyGetActivePlanScheduleFromState(state),
+  }));
 
   const SearchResult = (props: SearchResultProps) => {
+    let showCourseInSchedyleError = false;
+    if (schedule != null) {
+      showCourseInSchedyleError = isCourseInSchedule(props.course, schedule);
+    }
     return (
       <SearchResultContainer
         key={props.course.subject + " " + props.course.classId}
@@ -134,20 +175,30 @@ export const AddClassSearchModal: React.FC<
             {props.course.subject + " " + props.course.classId}
           </SubjectId>
         </ResultInfoContainer>
-        <AddClassButton
-          onClick={async () => {
-            if (selectedCourses.indexOf(props.course) < 0) {
-              const courseCoreqs = await getScheduleCourseCoreqs(props.course);
-              const newSelectedCourses = [
-                ...selectedCourses,
-                props.course,
-              ].concat(courseCoreqs);
-              setSelectedCourses(newSelectedCourses);
-            }
-          }}
-        >
-          <AddIcon color="secondary" style={{ fontSize: 24 }} />
-        </AddClassButton>
+        {showCourseInSchedyleError ? (
+          <Tooltip title="Course already in schedule" aria-label="add">
+            <AddClassError>!</AddClassError>
+          </Tooltip>
+        ) : (
+          <AddClassButton
+            onClick={async () => {
+              if (selectedCourses.indexOf(props.course) < 0) {
+                const courseCoreqs = await getScheduleCourseCoreqs(
+                  props.course
+                );
+                const newSelectedCourses = [
+                  ...selectedCourses,
+                  props.course,
+                ].concat(courseCoreqs);
+                setSelectedCourses(newSelectedCourses);
+              }
+            }}
+          >
+            <Tooltip title="Add" aria-label="add">
+              <AddIcon style={{ fontSize: "18px", color: "white" }} />
+            </Tooltip>
+          </AddClassButton>
+        )}
       </SearchResultContainer>
     );
   };
