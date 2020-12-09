@@ -3,9 +3,80 @@ import {
   DNDScheduleYear,
   DNDScheduleCourse,
   DNDScheduleTerm,
+  SeasonEnum,
+  StatusEnum,
 } from "../models/types";
-import { SeasonEnum } from "../models/types";
 import { Schedule, ScheduleCourse, SeasonWord } from "../../../common/types";
+
+export function generateInitialSchedule(
+  academicYear: number,
+  graduationYear: number,
+  completedCourses: ScheduleCourse[]
+): [DNDSchedule, number] {
+  const currentCalendarYear = new Date().getFullYear();
+  const currentYear =
+    new Date().getMonth() <= 3 ? currentCalendarYear : currentCalendarYear + 1;
+  const numYearsInSchool = graduationYear - currentYear + academicYear;
+  const startingYear = graduationYear - numYearsInSchool;
+
+  const yearsList = [];
+  // should add consecutive years from startingYear to one less than graduationYear
+  for (var y = startingYear; y < graduationYear; y++) {
+    yearsList.push(y);
+  }
+
+  let yearMap: { [key: number]: DNDScheduleYear } = {};
+  let counter = 1;
+
+  const [dndCourses, courseCounter] = convertToDNDCourses(completedCourses, 0);
+
+  for (const y of yearsList) {
+    yearMap[y] = {
+      year: y,
+      isSummerFull: false,
+      fall: {
+        season: SeasonEnum.FL,
+        year: y,
+        termId: Number(String(y) + String(10)),
+        id: counter,
+        status: StatusEnum.CLASSES,
+        classes: dndCourses.splice(0, 4), // the first 4 courses in the list, and remove them from the list
+      },
+      spring: {
+        season: SeasonEnum.SP,
+        year: y,
+        termId: Number(String(y) + String(30)),
+        id: counter + 1,
+        status: StatusEnum.CLASSES,
+        classes: dndCourses.splice(0, 4), // the first 4 courses in the list, and remove them from the list
+      },
+      summer1: {
+        season: SeasonEnum.S1,
+        year: y,
+        termId: Number(String(y) + String(40)),
+        id: counter + 2,
+        status: StatusEnum.CLASSES,
+        classes: dndCourses.splice(0, 4), // the first 4 courses in the list, and remove them from the list
+      },
+      summer2: {
+        season: SeasonEnum.S2,
+        year: y,
+        termId: Number(String(y) + String(60)),
+        id: counter + 3,
+        status: StatusEnum.CLASSES,
+        classes: dndCourses.splice(0, 4), // the first 4 courses in the list, and remove them from the list
+      },
+    };
+    counter += 4;
+  }
+
+  const schedule = {
+    years: yearsList,
+    yearMap: yearMap,
+  };
+
+  return [schedule, courseCounter];
+}
 
 export function convertTermIdToSeason(termId: number): SeasonWord {
   const seasonId = termId % 100;
@@ -35,6 +106,18 @@ export function convertSeasonToTermId(season: SeasonEnum): number {
 
 export function convertTermIdToYear(termId: number): number {
   return Math.trunc(termId / 100);
+}
+
+export function getCreditsTakenInSchedule(schedule: DNDSchedule): number {
+  return schedule.years.reduce((acc: number, year: number) => {
+    return (
+      acc +
+      sumCreditsInSemester(schedule, year, "fall") +
+      sumCreditsInSemester(schedule, year, "spring") +
+      sumCreditsInSemester(schedule, year, "summer1") +
+      sumCreditsInSemester(schedule, year, "summer2")
+    );
+  }, 0);
 }
 
 export function sumCreditsInSemester(

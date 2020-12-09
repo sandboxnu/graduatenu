@@ -6,7 +6,7 @@ import { XButton } from "./common";
 import { fetchCourse } from "../api";
 import { Modal, CircularProgress, TextField } from "@material-ui/core";
 import { AppState } from "../state/reducers/state";
-import { getScheduleFromState } from "../state";
+import { getActivePlanScheduleFromState } from "../state";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { withToast } from "../home/toastHook";
@@ -287,7 +287,7 @@ export class AddClassModal extends React.Component<
 }
 
 const mapStateToProps = (state: AppState) => ({
-  schedule: getScheduleFromState(state),
+  schedule: getActivePlanScheduleFromState(state),
 });
 
 export const AddClass = connect(mapStateToProps)(

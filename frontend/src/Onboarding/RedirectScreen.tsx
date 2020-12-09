@@ -1,27 +1,17 @@
 import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { Redirect } from "react-router";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { fetchUser } from "../services/UserService";
 import {
-  setFullNameAction,
-  setUserIdAction,
-  setDeclaredMajorAction,
-  setUserCoopCycleAction,
-  setEmailAction,
-  setIsAdvisorAction,
-  setGraduationYearAction,
-  setAcademicYearAction,
+  setUserAction,
+  setCompletedCoursesAction,
+  setTransferCoursesAction,
 } from "../state/actions/userActions";
-import { AppState } from "../state/reducers/state";
-import { findMajorFromName } from "../utils/plan-helpers";
-import {
-  getAcademicYearFromState,
-  getGraduationYearFromState,
-  getIsAdvisorFromState,
-} from "../state";
 import { fetchMajorsAndPlans } from "../utils/fetchMajorsAndPlans";
 import { AUTH_TOKEN_COOKIE_KEY } from "../utils/auth-helpers";
+import { getScheduleCoursesFromSimplifiedCourseDataAPI } from "../utils/course-helpers";
+import { LoadingScreen } from "../components/common/FullPageLoading";
 
 interface Props {
   redirectUrl?: string;
@@ -29,18 +19,17 @@ interface Props {
 
 export const RedirectScreen: React.FC<Props> = ({ redirectUrl }) => {
   const dispatch = useDispatch();
-  const { academicYear, graduationYear, isAdvisor } = useSelector(
-    (state: AppState) => ({
-      academicYear: getAcademicYearFromState(state),
-      graduationYear: getGraduationYearFromState(state),
-      isAdvisor: getIsAdvisorFromState(state),
-    })
-  );
   const [isLoading, setIsLoading] = useState(true);
+  const [isAdvisor, setIsAdvisor] = useState<boolean | undefined>();
+  const [isError, setIsError] = useState(false);
+  const [needsToGoToOnboarding, setNeedsToGoToOnboarding] = useState<
+    boolean | undefined
+  >();
 
   // component did mount
   useEffect(() => {
     setIsLoading(true);
+    setIsError(false);
     fetchMajorsAndPlans()(dispatch).then(majors => {
       const cookie = Cookies.get(AUTH_TOKEN_COOKIE_KEY);
       if (cookie) {
@@ -57,35 +46,51 @@ export const RedirectScreen: React.FC<Props> = ({ redirectUrl }) => {
           path: "/",
           domain: window.location.hostname,
         }); // set persisting cookie for all paths
-
-        fetchUser(cookie).then(response => {
-          dispatch(setFullNameAction(response.user.username));
-          dispatch(setGraduationYearAction(response.user.graduationYear));
-          dispatch(setAcademicYearAction(response.user.academicYear));
-          const maj = findMajorFromName(response.user.major, majors);
-          if (maj) {
-            dispatch(setDeclaredMajorAction(maj));
-          }
-          dispatch(setUserIdAction(response.user.id));
-          dispatch(setEmailAction(response.user.email));
-          dispatch(setUserCoopCycleAction(response.user.coopCycle));
-          dispatch(setIsAdvisorAction(response.user.isAdvisor));
-          setIsLoading(false);
-        });
+        fetchUser(cookie)
+          .then(response => {
+            dispatch(setUserAction(response.user));
+            Promise.all([
+              getScheduleCoursesFromSimplifiedCourseDataAPI(
+                response.user.coursesCompleted
+              ).then(courses => {
+                dispatch(setCompletedCoursesAction(courses));
+              }),
+              getScheduleCoursesFromSimplifiedCourseDataAPI(
+                response.user.coursesTransfer
+              ).then(courses => {
+                dispatch(setTransferCoursesAction(courses));
+              }),
+            ]).then(_ => {
+              setIsAdvisor(response.user.isAdvisor);
+              if (!response.user.isAdvisor) {
+                // student
+                setNeedsToGoToOnboarding(
+                  !response.user.graduationYear || !response.user.academicYear
+                );
+              }
+              setIsLoading(false); // this update must come last, to make sure other state variables are correctly set before we redirect
+            });
+          })
+          .catch(e => {
+            // TODO: Log error to some service like rollbar
+            console.log(e);
+            setIsError(true);
+          });
       }
     });
   }, []);
 
-  const needsToGoToOnboarding = () => {
-    return !graduationYear || !academicYear;
-  };
-
-  if (!Cookies.get(AUTH_TOKEN_COOKIE_KEY)) {
-    return <div>No auth token cookie</div>;
+  if (!Cookies.get(AUTH_TOKEN_COOKIE_KEY) || isError) {
+    return <LoadingScreen errorMsg="Oh oh, we couldn't authenticate you!" />;
   }
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <LoadingScreen
+        text="Authenticating you"
+        subText="Don't worry, it'll take just a second"
+      />
+    );
   }
 
   if (redirectUrl && redirectUrl !== "/redirect") {
@@ -94,7 +99,7 @@ export const RedirectScreen: React.FC<Props> = ({ redirectUrl }) => {
 
   if (isAdvisor === false) {
     // student
-    if (needsToGoToOnboarding()) {
+    if (needsToGoToOnboarding) {
       return <Redirect to="/onboarding" />;
     } else {
       return <Redirect to="/home" />;

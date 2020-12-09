@@ -20,11 +20,11 @@ import {
 } from "../state";
 import { Dispatch } from "redux";
 import {
-  addClassesAction,
-  removeClassAction,
-  undoRemoveClassAction,
-  changeSemesterStatusAction,
-} from "../state/actions/scheduleActions";
+  addCoursesToActivePlanAction,
+  removeClassFromActivePlanAction,
+  undoRemoveClassFromActivePlanAction,
+  changeSemesterStatusForActivePlanAction,
+} from "../state/actions/userPlansActions";
 import { Tooltip } from "@material-ui/core";
 import { SEMESTER_MIN_HEIGHT } from "../constants";
 import { convertTermIdToSeason } from "../utils/schedule-helpers";
@@ -276,20 +276,23 @@ const mapStateToProps = (state: AppState, ownProps: SemesterBlockProps) => ({
     w => w.termId === ownProps.semester.termId
   ),
   courseWarnings: getCourseWarningsFromState(state, ownProps.semester),
-  currentClassCounter: getCurrentClassCounterFromState(state),
+  currentClassCounter: getCurrentClassCounterFromState(state)!,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   handleAddClasses: (courses: ScheduleCourse[], semester: DNDScheduleTerm) =>
-    dispatch(addClassesAction(courses, semester)),
+    dispatch(addCoursesToActivePlanAction(courses, semester)),
   onDeleteClass: (course: DNDScheduleCourse, semester: DNDScheduleTerm) =>
-    dispatch(removeClassAction(course, semester)),
-  onUndoDeleteClass: () => dispatch(undoRemoveClassAction()),
+    dispatch(removeClassFromActivePlanAction(course, semester)),
+  onUndoDeleteClass: () => dispatch(undoRemoveClassFromActivePlanAction()),
   handleStatusChange: (
     newStatus: Status,
     year: number,
     tappedSemester: SeasonWord
-  ) => dispatch(changeSemesterStatusAction(newStatus, year, tappedSemester)),
+  ) =>
+    dispatch(
+      changeSemesterStatusForActivePlanAction(newStatus, year, tappedSemester)
+    ),
 });
 
 export const SemesterBlock = connect<

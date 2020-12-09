@@ -8,6 +8,7 @@
 #  course_counter            :integer(4)
 #  course_warnings           :json             default([]), is an Array
 #  is_currently_being_edited :boolean          default(FALSE), not null
+#  last_viewed               :datetime
 #  link_sharing_enabled      :boolean
 #  major                     :string
 #  name                      :string

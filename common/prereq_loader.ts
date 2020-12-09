@@ -108,7 +108,6 @@ async function prereqifySchedule(
   return {
     years: schedule.years,
     yearMap: newYearMap,
-    id: schedule.id,
   };
 }
 
@@ -216,9 +215,9 @@ async function queryCoursePrereqData(
   // for each one of the courses, map to a string.
   // automatically use the latest occurrence.
   const courseSchema: string[] = courses.map((course: SimpleCourse) => {
-    return `class(classId: ${course.classId}, subject: "${course.subject}") { 
+    return `class(classId: ${course.classId}, subject: "${course.subject}") {
       latestOccurrence {
-        prereqs 
+        prereqs
         coreqs
         name
         minCredits

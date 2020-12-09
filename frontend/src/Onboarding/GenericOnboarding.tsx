@@ -9,7 +9,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Checkbox, Paper } from "@material-ui/core";
 import CheckBoxIcon from "@material-ui/icons/CheckBox";
 import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
-import { Link, RouteComponentProps, withRouter } from "react-router-dom";
+import { RouteComponentProps, withRouter } from "react-router-dom";
 import { NextButton } from "../components/common/NextButton";
 
 const Wrapper = styled.div`

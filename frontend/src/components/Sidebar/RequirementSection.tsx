@@ -19,11 +19,10 @@ import { convertToDNDCourses } from "../../utils/schedule-helpers";
 import { fetchCourse } from "../../api";
 import { Droppable } from "react-beautiful-dnd";
 import { SidebarClassBlock } from "./SidebarClassBlock";
-import { FormatListNumberedRounded } from "@material-ui/icons";
 import { connect } from "react-redux";
 import { AppState } from "../../state/reducers/state";
 import { getCurrentClassCounterFromState } from "../../state";
-import { incrementCurrentClassCounter } from "../../state/actions/scheduleActions";
+import { incrementCurrentClassCounterForActivePlanAction } from "../../state/actions/userPlansActions";
 import { Dispatch } from "redux";
 
 const SectionHeaderWrapper = styled.div`
@@ -526,7 +525,8 @@ const mapStateToProps = (state: AppState) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  incrementCurrentClassCounter: () => dispatch(incrementCurrentClassCounter()),
+  incrementCurrentClassCounter: () =>
+    dispatch(incrementCurrentClassCounterForActivePlanAction()),
 });
 
 export const RequirementSection = connect<

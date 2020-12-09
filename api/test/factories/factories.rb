@@ -3,12 +3,11 @@ FactoryBot.define do
     academic_year { 3 }
     coop_cycle { "4 Years, 2 Co-ops, Spring Cycle" }
     email { "test@test.com" }
-    encrypted_password { "password123" }
     graduation_year { 2022 }
     image_url { "testimage.com/testimage.png" }
     is_advisor { false }
     major { "Computer Science, BSCS" }
-    username { "Testy Tester" }
+    full_name { "Testy Tester" }
     nu_id { "123456789" }
 
     factory :advisor do
@@ -38,7 +37,6 @@ FactoryBot.define do
       }
     ].to_json
     schedule_json = {
-      "id": "0",
       "years": [
           1000,
           1001,

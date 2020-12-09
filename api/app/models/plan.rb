@@ -8,6 +8,7 @@
 #  course_counter            :integer(4)
 #  course_warnings           :json             default([]), is an Array
 #  is_currently_being_edited :boolean          default(FALSE), not null
+#  last_viewed               :datetime
 #  link_sharing_enabled      :boolean
 #  major                     :string
 #  name                      :string
@@ -26,5 +27,14 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Plan < ApplicationRecord
+  before_create :set_last_viewed
+
   belongs_to :user
+
+  private
+
+  # set last_viewed to created_at time if not provided
+  def set_last_viewed
+    self.last_viewed ||= self.created_at
+  end
 end

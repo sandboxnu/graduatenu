@@ -1,4 +1,9 @@
-import { DNDScheduleCourse, DNDSchedule } from "../models/types";
+import {
+  DNDScheduleCourse,
+  DNDSchedule,
+  ISimplifiedCourseData,
+  ISimplifiedCourseDataAPI,
+} from "../models/types";
 
 /**
  * Returns the sum of all credits in the courses
@@ -71,4 +76,19 @@ export function getNextTerm(is_summer: boolean, classes: DNDScheduleCourse[]) {
     }
   }
   return classes.splice(0, counter);
+}
+
+export function getSimplifiedCourseData(
+  courses: ISimplifiedCourseData[],
+  completion: string,
+  semester: string = ""
+): ISimplifiedCourseDataAPI[] {
+  return courses.map(course => {
+    return {
+      subject: course.subject,
+      course_id: course.classId.toString(),
+      semester: semester,
+      completion: completion,
+    };
+  });
 }

@@ -25,7 +25,6 @@ export function planOfStudyToSchedule(planofstudy: string): Schedule[] {
   // for each of the plans, produce a schedule.
   $(".sc_plangrid tbody").each((planIndex, table) => {
     const schedule = buildSchedule($, table);
-    schedule.id = String(planIndex);
     schedules.push(schedule);
   });
 
@@ -89,7 +88,6 @@ function buildScheduleFromYears(
   const schedule: Schedule = {
     years: [],
     yearMap: {},
-    id: "example-schedule",
   };
 
   // all of the years of each year should be zero.
