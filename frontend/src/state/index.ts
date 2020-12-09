@@ -206,8 +206,7 @@ export const getIsAdvisorFromState = (state: AppState) => {
 
 /*
  * SAFE GET FUNCTIONS
- * Should only need to use these where there is not guaranteed to have an active plan (like the home screen)
- * TODO: look into if a separate component (prior to getting to the HomeComponent) to load plan data would be worth it
+ * Should only need to use these where there is not guaranteed to have a user
  */
 
 export const safelyGetActivePlanFromState = (state: AppState) => {
@@ -224,3 +223,5 @@ export const safelyGetActivePlanCoopCycleFromState = (state: AppState) => safely
 export const safelyGetWarningsFromState = (state: AppState) => safelyGetActivePlanFromState(state)?.warnings || [];
 
 export const safelyGetActivePlanScheduleFromState = (state: AppState) => safelyGetActivePlanFromState(state)?.schedule;
+
+export const safelyGetIsAdvisorFromState = (state: AppState) => state.userState.user?.isAdvisor;
