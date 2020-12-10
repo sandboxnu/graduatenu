@@ -221,6 +221,19 @@ export interface IUpdatePlanData {
   course_warnings: CourseWarning[];
 }
 
+export interface IUpdatePlanData {
+  name: string;
+  link_sharing_enabled: boolean;
+  schedule: DNDSchedule;
+  catalog_year: number | null;
+  major: string | null;
+  coop_cycle: string | null;
+  course_counter: number;
+  last_viewed?: Date;
+  warnings: IWarning[];
+  course_warnings: CourseWarning[];
+}
+
 /*
  * Data needed to update a user
  */

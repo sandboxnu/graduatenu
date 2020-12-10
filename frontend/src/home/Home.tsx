@@ -45,7 +45,7 @@ import {
   removeAuthTokenFromCookies,
 } from "../utils/auth-helpers";
 import { EditableSchedule } from "../components/Schedule/ScheduleComponents";
-import { convertPlanToCreatePlanData } from "../utils/plan-helpers";
+import { convertPlanToUpdatePlanData } from "../utils/plan-helpers";
 import { ActivePlanAutoSaveStatus } from "../state/reducers/userPlansReducer";
 import { AutoSavePlan } from "./AutoSavePlan";
 
@@ -231,7 +231,7 @@ class HomeComponent extends React.Component<Props> {
       this.props.userId!,
       token,
       this.props.activePlan!.id,
-      convertPlanToCreatePlanData(this.props.activePlan!)
+      convertPlanToUpdatePlanData(this.props.activePlan!)
     ).then(response => {
       this.props.updateActivePlan(response.plan);
     });

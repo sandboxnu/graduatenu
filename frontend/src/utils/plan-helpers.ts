@@ -1,4 +1,4 @@
-import { ICreatePlanData, IPlanData } from "./../models/types";
+import { IUpdatePlanData, IPlanData } from "./../models/types";
 import { Major } from "../../../common/types";
 
 /**
@@ -17,12 +17,17 @@ export function findMajorFromName(
   return major;
 }
 
-export function convertPlanToCreatePlanData(plan: IPlanData): ICreatePlanData {
+export function convertPlanToUpdatePlanData(plan: IPlanData): IUpdatePlanData {
   return {
-    ...plan,
+    name: plan.name,
     link_sharing_enabled: plan.linkSharingEnabled,
+    major: plan.major,
     coop_cycle: plan.coopCycle,
     course_counter: plan.courseCounter,
     last_viewed: plan.lastViewed,
+    warnings: plan.warnings,
+    course_warnings: plan.courseWarnings,
+    catalog_year: plan.catalogYear || 2018, // TODO: make catalog year non-optional
+    schedule: plan.schedule,
   };
 }

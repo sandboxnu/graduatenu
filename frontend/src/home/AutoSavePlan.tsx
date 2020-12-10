@@ -9,7 +9,7 @@ import {
   updateActivePlanAction,
 } from "../state/actions/userPlansActions";
 import { useCallback, useEffect, useRef } from "react";
-import { convertPlanToCreatePlanData } from "../utils/plan-helpers";
+import { convertPlanToUpdatePlanData } from "../utils/plan-helpers";
 import {
   getActivePlanFromState,
   getActivePlanStatusFromState,
@@ -60,6 +60,7 @@ export const AutoSavePlan: React.FC = () => {
     activePlan.coopCycle,
     activePlan.major,
     activePlan.name,
+    activePlan.catalogYear,
     debouncedUpdate,
   ]);
 
@@ -70,7 +71,7 @@ export const AutoSavePlan: React.FC = () => {
       userId,
       token,
       activePlan.id,
-      convertPlanToCreatePlanData(activePlan)
+      convertPlanToUpdatePlanData(activePlan)
     ).then(response => {
       batch(() => {
         dispatch(updateActivePlanAction(response.plan));
@@ -89,13 +90,11 @@ export const AutoSavePlan: React.FC = () => {
       </Container>
     );
   }
-  if (activePlanStatus === "Up To Date") {
-    return (
-      <Container>
-        Last edit was {timeago.format(activePlan.updatedAt)}
-        <CheckCircleOutlineIcon style={{ fill: "green", paddingLeft: 6 }} />
-      </Container>
-    );
-  }
-  return null;
+
+  return (
+    <Container>
+      Last edit was {timeago.format(activePlan.updatedAt)}
+      <CheckCircleOutlineIcon style={{ fill: "green", paddingLeft: 6 }} />
+    </Container>
+  );
 };
