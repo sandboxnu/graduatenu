@@ -208,6 +208,22 @@ export const getIsAdvisorFromState = (state: AppState) => {
  * SAFE GET FUNCTIONS
  * Should only need to use these where there is not guaranteed to have a user
  */
+
+export const safelyGetActivePlanFromState = (state: AppState) => {
+  if (!state.userPlansState.activePlan) {
+    return undefined;
+  }
+  return state.userPlansState.plans[state.userPlansState.activePlan];
+};
+
+export const safelyGetActivePlanMajorFromState = (state: AppState) => safelyGetActivePlanFromState(state)?.major;
+
+export const safelyGetActivePlanCoopCycleFromState = (state: AppState) => safelyGetActivePlanFromState(state)?.coopCycle;
+
+export const safelyGetWarningsFromState = (state: AppState) => safelyGetActivePlanFromState(state)?.warnings || [];
+
+export const safelyGetActivePlanScheduleFromState = (state: AppState) => safelyGetActivePlanFromState(state)?.schedule;
+
 export const safelyGetIsAdvisorFromState = (state: AppState) => state.userState.user?.isAdvisor;
 
 export const safelyGetAcademicYearFromState = (state: AppState) => state.userState.user?.academicYear;

@@ -1,4 +1,23 @@
-import { ScheduleCourse } from "../../../common/types";
+import {
+  ScheduleCourse,
+  INEUAndPrereq,
+  INEUOrPrereq,
+} from "../../../common/types";
+
+interface SearchResult {
+  type: string;
+  class?: SearchClass;
+}
+
+interface SearchClass {
+  name: string;
+  classId: string;
+  subject: string;
+  prereqs?: INEUAndPrereq | INEUOrPrereq;
+  coreqs?: INEUAndPrereq | INEUOrPrereq;
+  maxCredits: number;
+  minCredits: number;
+}
 
 export const fetchCourse = async (
   subject: string,
@@ -44,4 +63,38 @@ export const fetchCourse = async (
   } else {
     return null;
   }
+};
+
+export const searchCourses = async (
+  searchQuery: string,
+  minIndex: number = 0,
+  maxIndex: number = 10
+): Promise<ScheduleCourse[]> => {
+  const courses: ScheduleCourse[] = [];
+  const proxyurl = "https://cors-anywhere.herokuapp.com/";
+  const response = await fetch(
+    proxyurl +
+      `https://searchneu.com/search?query=${searchQuery}&termId=202130&minIndex=${minIndex}&maxIndex=${maxIndex}`,
+    {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    }
+  );
+  const results = await response.json();
+  results.forEach((result: SearchResult) => {
+    if (result.type && result.type === "class" && result.class) {
+      const course: ScheduleCourse = {
+        name: result.class.name,
+        classId: result.class.classId,
+        subject: result.class.subject,
+        prereqs: result.class.prereqs,
+        coreqs: result.class.coreqs,
+        numCreditsMin: result.class.minCredits,
+        numCreditsMax: result.class.maxCredits,
+      };
+      courses.push(course);
+    }
+  });
+
+  return courses;
 };

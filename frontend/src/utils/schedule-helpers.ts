@@ -310,3 +310,30 @@ export function getPositionOfYearInSchedule(
 export function isYearInPast(yearIndex: number, academicYear: number): boolean {
   return academicYear > yearIndex + 1;
 }
+
+/**
+ *  Determines if this course is in the given term
+ * @param courseToAdd the course that is being checked
+ * @param term the term being checked
+ * @returns whether or not this course is in the term
+ */
+function isCourseInTerm(courseToAdd: ScheduleCourse, term: DNDScheduleTerm) {
+  return term.classes.some((course) => String(courseToAdd.classId) === String(course.classId) && courseToAdd.subject === course.subject);
+}
+
+/**
+ *  Determines if this course is in the given schedule
+ * @param courseToAdd the course that is being checked
+ * @param schedule the schedule being checked
+ * @returns whether or not this course is in the schedule
+ */
+export function isCourseInSchedule(
+  courseToAdd: ScheduleCourse,
+  schedule: DNDSchedule
+) {
+  return schedule.years.some((year) => 
+    isCourseInTerm(courseToAdd, schedule.yearMap[year].spring) ||
+    isCourseInTerm(courseToAdd, schedule.yearMap[year].fall) ||
+    isCourseInTerm(courseToAdd, schedule.yearMap[year].summer1) ||
+    isCourseInTerm(courseToAdd, schedule.yearMap[year].summer2));
+}

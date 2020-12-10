@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { getStudents } from "../services/AdvisorService";
 import { Search } from "../components/common/Search";
 import LinearProgress from "@material-ui/core/LinearProgress";
-import CircularProgress from "@material-ui/core/CircularProgress";
 import { getAuthToken } from "../utils/auth-helpers";
 
 const Container = styled.div`
@@ -102,6 +101,7 @@ const ManageStudentsComponent: React.FC = (props: any) => {
       <Search
         placeholder="Search by name, email, or NUID"
         onEnter={setSearchQuery}
+        isSmall={false}
       />
       <StudentsList searchQuery={searchQuery} />
     </Container>
