@@ -66,7 +66,8 @@ export const userReducer = (
       }
       case getType(setUserCatalogYearAction): {
         draft.user!.catalogYear = action.payload.catalogYear;
-        console.log("SET USER CATALOGYEAR");
+        draft.user!.major = null;
+        draft.user!.coopCycle = null;
         return draft;
       }
       case getType(setExamCreditsAction): {

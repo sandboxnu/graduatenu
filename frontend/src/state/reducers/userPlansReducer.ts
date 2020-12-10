@@ -202,6 +202,7 @@ export const userPlansReducer = (
         const { catalogYear } = action.payload;
         draft.plans[draft.activePlan!].catalogYear = catalogYear;
         draft.plans[draft.activePlan!].major = "";
+        draft.plans[draft.activePlan!].coopCycle = "";
         return draft;
       }
       case getType(addCoursesToActivePlanAction): {
