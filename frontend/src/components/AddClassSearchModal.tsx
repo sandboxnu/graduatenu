@@ -161,7 +161,7 @@ export const AddClassSearchModal: React.FC<
   }));
 
   const addClass = async (courseToAdd: ScheduleCourse) => {
-    if (selectedCourses.includes(courseToAdd)) {
+    if (!selectedCourses.includes(courseToAdd)) {
       const courseCoreqs = await getScheduleCourseCoreqs(courseToAdd);
       const newSelectedCourses = [...selectedCourses, courseToAdd].concat(
         courseCoreqs
