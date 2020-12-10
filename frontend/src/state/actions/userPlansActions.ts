@@ -61,7 +61,7 @@ export const setActivePlanCoopCycleAction = createAction(
 )();
 
 export const setActivePlanCatalogYearAction = createAction(
-  "schedule/SET_ACTIVE_PLAN_CATALOG_YEAr",
+  "schedule/SET_ACTIVE_PLAN_CATALOG_YEAR",
   (catalogYear: number, allPlans?: Record<string, Schedule[]>) => ({
     catalogYear,
     allPlans,

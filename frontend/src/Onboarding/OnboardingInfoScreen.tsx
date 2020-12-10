@@ -144,7 +144,6 @@ class OnboardingScreenComponent extends React.Component<
 
   onChangeMajor(event: React.SyntheticEvent<{}>, value: any) {
     const maj = findMajorFromName(value, this.props.majors);
-    console.log(maj);
     this.setState({ major: maj, planStr: "" });
   }
 
@@ -342,7 +341,6 @@ class OnboardingScreenComponent extends React.Component<
         </SpinnerWrapper>
       );
     } else {
-      console.log(this.state.catalogYear);
       // renders all of the different drop downs and for the next button, ensures that all
       // required fields are filled out before allowing it to move to the next screen
       return (

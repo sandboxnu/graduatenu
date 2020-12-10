@@ -209,12 +209,11 @@ export class EditPlanPopperComponent extends React.Component<
   }
 
   renderCatalogYearDropdown() {
-    // let catalogYears = [
-    //   ...Array.from(
-    //     new Set(this.props.majors.map(maj => maj.yearVersion.toString()))
-    //   ),
-    // ];
-    let catalogYears = ["2018", "2019"];
+    let catalogYears = [
+      ...Array.from(
+        new Set(this.props.majors.map(maj => maj.yearVersion.toString()))
+      ),
+    ];
     return (
       <Autocomplete
         style={{ marginTop: "10px", marginBottom: "5px" }}
