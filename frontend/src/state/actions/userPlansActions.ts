@@ -54,8 +54,15 @@ export const setActivePlanMajorAction = createAction(
 
 export const setActivePlanCoopCycleAction = createAction(
   "schedule/SET_ACTIVE_PLAN_COOP_CYCLE",
-  (coopCycle: string, allPlans?: Record<string, Schedule[]>) => ({
+  (
+    coopCycle: string,
+    academicYear: number,
+    graduationYear: number,
+    allPlans?: Record<string, Schedule[]>
+  ) => ({
     coopCycle,
+    academicYear,
+    graduationYear,
     allPlans,
   })
 )();

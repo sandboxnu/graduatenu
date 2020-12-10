@@ -23,8 +23,9 @@ import { createPlanForUser } from "../services/PlanService";
 import {
   convertToDNDSchedule,
   planToString,
-  clearSchedule,
   generateInitialSchedule,
+  generateInitialScheduleNoCoopCycle,
+  generateInitialScheduleFromExistingPlan,
 } from "../utils";
 import {
   getMajorsFromState,
@@ -182,28 +183,33 @@ function AddPlanPopperComponent(props: Props) {
 
   const onSubmit = async () => {
     if (selectedCoopCycle && selectedPlanOption === PLAN_OPTIONS.NEW_PLAN) {
-      const currentPlan = allPlans[selectedMajor!.name].find(
-        (p: Schedule) => planToString(p) === selectedCoopCycle
-      );
-      const [generatedSchedule, courseCounter] = convertToDNDSchedule(
-        currentPlan!,
-        0
-      );
-      selectedDNDSchedule.current = clearSchedule(generatedSchedule);
-      counter.current = courseCounter;
-    } else if (selectedPlanOption === PLAN_OPTIONS.NEW_PLAN) {
       [selectedDNDSchedule.current, counter.current] = generateInitialSchedule(
+        props.academicYear,
+        props.graduationYear,
+        props.completedCourses,
+        selectedMajor!.name,
+        selectedCoopCycle,
+        allPlans
+      );
+    } else if (selectedPlanOption === PLAN_OPTIONS.NEW_PLAN) {
+      [
+        selectedDNDSchedule.current,
+        counter.current,
+      ] = generateInitialScheduleNoCoopCycle(
         props.academicYear,
         props.graduationYear,
         props.completedCourses
       );
     } else if (selectedPlanOption === PLAN_OPTIONS.EXAMPLE_PLAN) {
-      const currentPlan = allPlans[selectedMajor!.name].find(
-        (p: Schedule) => planToString(p) === selectedCoopCycle
-      );
-      [selectedDNDSchedule.current, counter.current] = convertToDNDSchedule(
-        currentPlan!,
-        0
+      [
+        selectedDNDSchedule.current,
+        counter.current,
+      ] = generateInitialScheduleFromExistingPlan(
+        props.academicYear,
+        props.graduationYear,
+        selectedMajor!.name,
+        selectedCoopCycle,
+        allPlans
       );
     }
 
