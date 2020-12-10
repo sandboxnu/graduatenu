@@ -6,6 +6,7 @@ WORKDIR /app
 
 ENV RAILS_ENV production
 ENV RAILS_LOG_TO_STDOUT true
+ENV DISABLE_DATABASE_ENVIRONMENT_CHECK 1
 
 COPY Gemfile /app/Gemfile
 COPY Gemfile.lock /app/Gemfile.lock

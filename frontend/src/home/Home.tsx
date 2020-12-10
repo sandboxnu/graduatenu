@@ -21,10 +21,10 @@ import {
   getClosedYearsFromState,
   getTransferCoursesFromState,
   getMajorsFromState,
-  safelyGetActivePlanFromState,
-  safelyGetActivePlanMajorFromState,
-  safelyGetActivePlanCoopCycleFromState,
-  safelyGetWarningsFromState,
+  getActivePlanCoopCycleFromState,
+  getActivePlanFromState,
+  getActivePlanMajorFromState,
+  getWarningsFromState,
 } from "../state";
 import {
   incrementCurrentClassCounterForActivePlanAction,
@@ -265,14 +265,14 @@ class HomeComponent extends React.Component<Props> {
 
 const mapStateToProps = (state: AppState) => ({
   transferCredits: getTransferCoursesFromState(state),
-  major: safelyGetActivePlanMajorFromState(state),
-  coopCycle: safelyGetActivePlanCoopCycleFromState(state),
-  warnings: safelyGetWarningsFromState(state),
+  major: getActivePlanMajorFromState(state),
+  coopCycle: getActivePlanCoopCycleFromState(state),
+  warnings: getWarningsFromState(state),
   userId: getUserIdFromState(state)!,
   majors: getMajorsFromState(state),
   academicYear: getAcademicYearFromState(state)!,
   closedYears: getClosedYearsFromState(state),
-  activePlan: safelyGetActivePlanFromState(state),
+  activePlan: getActivePlanFromState(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({

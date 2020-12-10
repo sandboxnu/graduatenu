@@ -236,13 +236,13 @@ function AddPlanPopperComponent(props: Props) {
   const openModal = (): void => setVisible(true);
 
   const prepareToClose = () => {
+    setVisible(false);
     setPlanName("");
     setSelectedMajor(undefined);
     setSelectedCoopCycle("");
     setSelectedPlanOption("");
     setSelectedUserPlan("");
     setError(false);
-    setVisible(false);
   };
 
   const renderPlanName = () => {
