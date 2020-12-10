@@ -225,3 +225,7 @@ export const safelyGetWarningsFromState = (state: AppState) => safelyGetActivePl
 export const safelyGetActivePlanScheduleFromState = (state: AppState) => safelyGetActivePlanFromState(state)?.schedule;
 
 export const safelyGetIsAdvisorFromState = (state: AppState) => state.userState.user?.isAdvisor;
+
+export const safelyGetAcademicYearFromState = (state: AppState) => state.userState.user?.academicYear;
+
+export const safelyGetGraduationYearFromState = (state: AppState) => state.userState.user?.graduationYear;

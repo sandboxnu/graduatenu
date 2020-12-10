@@ -160,10 +160,20 @@ export const AddClassSearchModal: React.FC<
     schedule: safelyGetActivePlanScheduleFromState(state),
   }));
 
+  const addClass = async (courseToAdd: ScheduleCourse) => {
+    if (selectedCourses.includes(courseToAdd)) {
+      const courseCoreqs = await getScheduleCourseCoreqs(courseToAdd);
+      const newSelectedCourses = [...selectedCourses, courseToAdd].concat(
+        courseCoreqs
+      );
+      setSelectedCourses(newSelectedCourses);
+    }
+  };
+
   const SearchResult = (props: SearchResultProps) => {
-    let showCourseInSchedyleError = false;
+    let showCourseInScheduleError = false;
     if (schedule != null) {
-      showCourseInSchedyleError = isCourseInSchedule(props.course, schedule);
+      showCourseInScheduleError = isCourseInSchedule(props.course, schedule);
     }
     return (
       <SearchResultContainer
@@ -175,25 +185,12 @@ export const AddClassSearchModal: React.FC<
             {props.course.subject + " " + props.course.classId}
           </SubjectId>
         </ResultInfoContainer>
-        {showCourseInSchedyleError ? (
+        {showCourseInScheduleError ? (
           <Tooltip title="Course already in schedule" aria-label="add">
             <AddClassError>!</AddClassError>
           </Tooltip>
         ) : (
-          <AddClassButton
-            onClick={async () => {
-              if (selectedCourses.indexOf(props.course) < 0) {
-                const courseCoreqs = await getScheduleCourseCoreqs(
-                  props.course
-                );
-                const newSelectedCourses = [
-                  ...selectedCourses,
-                  props.course,
-                ].concat(courseCoreqs);
-                setSelectedCourses(newSelectedCourses);
-              }
-            }}
-          >
+          <AddClassButton onClick={async () => addClass(props.course)}>
             <Tooltip title="Add" aria-label="add">
               <AddIcon style={{ fontSize: "18px", color: "white" }} />
             </Tooltip>

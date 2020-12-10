@@ -56,8 +56,8 @@ class AdminController < ApplicationController
       major: user_params[:major],
       full_name: user_params[:first_name] + ' ' + user_params[:last_name],
       image_url: user_params[:photo_url],
-      courses_transfer: user_params[:courses].select { |a| a['completion'] == 'TRANSFER' },
-      courses_completed: user_params[:courses].select { |a| a['completion'] == 'PASSED' },
+      courses_transfer: user_params[:courses]&.select { |a| a['completion'] == 'TRANSFER' } || [],
+      courses_completed: user_params[:courses]&.select { |a| a['completion'] == 'PASSED' } || [],
     )
       render json: { errors: @user.errors }, status: :unprocessable_entity
       return true
@@ -72,8 +72,8 @@ class AdminController < ApplicationController
       major: user_params[:major],
       full_name: user_params[:first_name] + ' ' + user_params[:last_name],
       image_url: user_params[:photo_url],
-      courses_transfer: user_params[:courses].select { |a| a['completion'] == 'TRANSFER' },
-      courses_completed: user_params[:courses].select { |a| a['completion'] == 'PASSED' },
+      courses_transfer: user_params[:courses]&.select { |a| a['completion'] == 'TRANSFER' } || [],
+      courses_completed: user_params[:courses]&.select { |a| a['completion'] == 'PASSED' } || [],
     )
 
     unless @user.save
