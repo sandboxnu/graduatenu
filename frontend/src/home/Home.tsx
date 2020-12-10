@@ -60,6 +60,7 @@ import {
   getAuthToken,
   removeAuthTokenFromCookies,
 } from "../utils/auth-helpers";
+import { RequestApprovalPopper } from "./RequestApprovalPopper";
 
 const OuterContainer = styled.div`
   display: flex;
@@ -422,6 +423,9 @@ class HomeComponent extends React.Component<Props> {
                   <h2>Plan Of Study</h2>
                 </HomePlan>
                 <HomeButtons>
+                  <PlanContainer>
+                    <RequestApprovalPopper />
+                  </PlanContainer>
                   <PlanContainer>
                     <PlanPopperButton
                       variant="contained"
