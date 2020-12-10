@@ -98,7 +98,6 @@ export const RequestApprovalPopper: React.FC = () => {
         title="Request Approval"
       >
         <SubTitle>
-          {" "}
           We'll send over an email to you and your advisor to let them know your
           plan is awaiting review. If a plan has been approved, you'll get an
           email letting you know it's been approved.
