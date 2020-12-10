@@ -55,6 +55,7 @@ const GenericAdvisingTemplate: React.FC<Props> = ({ children, history }) => {
 
   const logOut = () => {
     dispatch(resetUserAction());
+    window.location.reload();
     removeAuthTokenFromCookies();
     history.push("/");
   };
