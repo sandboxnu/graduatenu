@@ -2,6 +2,7 @@ import {
   setCurrentClassCounterForActivePlanAction,
   incrementCurrentClassCounterForActivePlanAction,
   toggleYearExpandedForActivePlanAction,
+  setActivePlanCatalogYearAction,
 } from "./../actions/userPlansActions";
 import { DNDSchedule, IPlanData } from "../../models/types";
 import produce from "immer";
@@ -195,6 +196,13 @@ export const userPlansReducer = (
         // set the coop cycle
         draft.plans[draft.activePlan!].coopCycle = coopCycle;
 
+        return draft;
+      }
+      case getType(setActivePlanCatalogYearAction): {
+        const { catalogYear } = action.payload;
+        draft.plans[draft.activePlan!].catalogYear = catalogYear;
+        draft.plans[draft.activePlan!].major = "";
+        draft.plans[draft.activePlan!].coopCycle = "";
         return draft;
       }
       case getType(addCoursesToActivePlanAction): {

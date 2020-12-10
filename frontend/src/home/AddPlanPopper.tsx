@@ -229,6 +229,7 @@ function AddPlanPopperComponent(props: Props) {
       major: selectedMajor ? selectedMajor.name : "",
       coop_cycle: selectedCoopCycle,
       course_counter: counter.current,
+      catalog_year: 2018,
     });
     addNewPlan(plan.plan, props.academicYear);
   };

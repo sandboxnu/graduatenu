@@ -11,11 +11,13 @@ import {
   setGraduationYearAction,
   setUserCoopCycleAction,
   setUserMajorAction,
+  setUserCatalogYearAction,
 } from "../state/actions/userActions";
 import {
   getMajorsFromState,
   getUserFromState,
   getPlansFromState,
+  getUserCatalogYearFromState,
 } from "../state";
 import { Schedule } from "../../../common/types";
 import { AppState } from "../state/reducers/state";
@@ -94,12 +96,19 @@ const WhiteSpace = styled.div`
   height: 38px;
 `;
 
+const ProfileEmail = styled.div`
+  margin-top: -20px;
+  color: gray;
+  margin-bottom: 10px;
+`
+
 const ProfileComponent: React.FC = () => {
   const dispatch = useDispatch();
-  const { user, majors, plans } = useSelector((state: AppState) => ({
+  const { user, majors, plans, catalogYear } = useSelector((state: AppState) => ({
     user: getUserFromState(state), // best to update this screen when any part of the user changes
     majors: getMajorsFromState(state),
     plans: getPlansFromState(state),
+    catalogYear: getUserCatalogYearFromState(state)
   }));
 
   const [isEdit, setEdit] = useState(false);
@@ -156,6 +165,32 @@ const ProfileComponent: React.FC = () => {
     );
   };
 
+  const ProfileCatalogYear = () => {
+    const val = catalogYear != undefined ? String(catalogYear) : "";
+    let majorSet = [
+      ...Array.from(new Set(majors.map(maj => maj.yearVersion.toString()))),
+    ];
+    return (
+      <ProfileEntryContainer>
+        <ItemTitle> Catalog Year </ItemTitle>
+        {isEdit && (
+          <Autocomplete
+            disableListWrap
+            options={majorSet}
+            renderInput={params => (
+              <TextField {...params} variant="outlined" fullWidth />
+            )}
+            value={val}
+            onChange={(event: React.SyntheticEvent<{}>, value: any) => {
+              dispatch(setUserCatalogYearAction(value));
+            }}
+          />
+        )}
+        {!isEdit && <ItemEntry> {val} </ItemEntry>}
+      </ProfileEntryContainer>
+    );
+  };
+
   const ProfileCoop = () => {
     const val = !!coopCycle ? coopCycle : "None Selected";
     return (
@@ -179,43 +214,30 @@ const ProfileComponent: React.FC = () => {
     );
   };
 
-  /*
-  TODO: // Add Advsisors to profile page once we support them
-  const ProfileAdvisor = (props: any) => {
-      return (
-          <ProfileEntryContainer>
-              <ItemTitle> Advisor </ItemTitle>
-              {props.isEdit &&
-                  <Autocomplete
-                      disableListWrap
-                      options={["advisor", "advisor 2", "advisor 3"]}
-                      renderInput={params => (
-                      <TextField
-                          {...params}
-                          variant="outlined"
-                          fullWidth
-                      />
-                      )}
-                      value={props.advisor}
-                      onChange={(event: React.SyntheticEvent<{}>, value: any) => props.setAdvisor(value)}
-                  />
-              }
-              {!props.isEdit &&
-                  <ItemEntry> {props.advisor} </ItemEntry>
-              }
-          </ProfileEntryContainer>
-      );
-  }
-  */
-
-  const ProfileEmail = () => {
+/* 
+TODO: // Add Advsisors to profile page once we support them
+const ProfileAdvisor = (props: any) => {
     return (
       <ProfileEntryContainer>
-        <ItemTitle> Email </ItemTitle>
-        <ItemEntry> {user.email} </ItemEntry>
+        <ItemTitle> Major </ItemTitle>
+        {isEdit && (
+          <Autocomplete
+            disableListWrap
+            options={majors.map((maj: { name: any }) => maj.name)}
+            renderInput={params => (
+              <TextField {...params} variant="outlined" fullWidth />
+            )}
+            value={val}
+            onChange={(event: React.SyntheticEvent<{}>, value: any) =>
+              setMajor(value)
+            }
+          />
+        )}
+        {!isEdit && <ItemEntry> {val} </ItemEntry>}
       </ProfileEntryContainer>
     );
   };
+  */
 
   const save = () => {
     setEdit(false);
@@ -289,17 +311,16 @@ const ProfileComponent: React.FC = () => {
               </IconButton>
             )}
           </ProfileTitleContainer>
+          <ProfileEmail>{user.email}</ProfileEmail>
           <DataContainer>
             <ProfileColumn>
-              <ProfileEmail />
+              <ProfileCatalogYear />
               {isEdit && <WhiteSpace />}
-              <ProfileMajor />
-              {/* {props.token != undefined && props.token.length > 0 && (
-                <ChangePassword token={props.token} id={props.id} />
-              )} */}
+              {!!catalogYear && <ProfileMajor />}
             </ProfileColumn>
             <ProfileColumn>
               <ProfileGradYear />
+              {isEdit && <WhiteSpace />}
               {!!major && <ProfileCoop />}
             </ProfileColumn>
           </DataContainer>

@@ -21,7 +21,8 @@ import {
   getUserIdFromState,
   getUserCoopCycleFromState,
   getCompletedCoursesFromState,
-  getTransferCoursesFromState
+  getTransferCoursesFromState,
+  getUserCatalogYearFromState
 } from "../state";
 import { AppState } from "../state/reducers/state";
 import { addNewPlanAction } from "../state/actions/userPlansActions";
@@ -153,6 +154,7 @@ const TransferableCreditScreen: React.FC = () => {
     academicYear,
     graduationYear,
     coopCycle,
+    catalogYear,
     completedCourses,
     transferCourses
   } = useSelector(
@@ -164,6 +166,7 @@ const TransferableCreditScreen: React.FC = () => {
       coopCycle: getUserCoopCycleFromState(state),
       transferCourses: getTransferCoursesFromState(state),
       completedCourses: getCompletedCoursesFromState(state),
+      catalogYear: getUserCatalogYearFromState(state)
     }),
     shallowEqual
   );
@@ -186,6 +189,7 @@ const TransferableCreditScreen: React.FC = () => {
           academic_year: academicYear,
           graduation_year: graduationYear,
           coop_cycle: coopCycle,
+          catalog_year: catalogYear,
           // TODO: Once khoury gives us this info, we shouldn't update transfer/completed if khoury user
           courses_transfer: getSimplifiedCourseData(
             transferCourses,
@@ -207,6 +211,7 @@ const TransferableCreditScreen: React.FC = () => {
         major: major ? major.name : "",
         coop_cycle: coopCycle ? coopCycle : "None",
         course_counter: courseCounter,
+        catalog_year: catalogYear
       }).then(response => {
         dispatch(addNewPlanAction(response.plan, academicYear));
       });

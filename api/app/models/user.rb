@@ -4,6 +4,7 @@
 #
 #  id                     :bigint(8)        not null, primary key
 #  academic_year          :integer(4)
+#  catalog_year           :integer(4)
 #  coop_cycle             :string
 #  courses_completed      :json             default([]), is an Array
 #  courses_transfer       :json             default([]), is an Array

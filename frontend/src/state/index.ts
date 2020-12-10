@@ -59,6 +59,10 @@ export const getTransferCoursesFromState = (
 export const getUserMajorFromState = (state: AppState): Major | undefined =>
   findMajorFromName(getUserFromState(state).major, getMajorsFromState(state));
 
+export const getUserCatalogYearFromState = (
+  state: AppState
+): number | undefined => getUserFromState(state).catalogYear;
+
 /**
  * Get the selected major name from the AppState
  * @param state the AppState
@@ -154,6 +158,15 @@ export const getCourseWarningsFromState = (
 export const getActivePlanMajorFromState = (state: AppState) => {
   return getActivePlanFromState(state).major;
 };
+
+/**
+ * Get the current schedule's catalog yearr from the AppState
+ * @param state the AppState
+ */
+export const getActivePlanCatalogYearFromState = (state: AppState) => {
+  return getActivePlanFromState(state).catalogYear;
+};
+
 
 /**
  * Get the current schedule's coop cycle from the AppState

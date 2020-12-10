@@ -2,13 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Popper from "@material-ui/core/Popper";
 import { Autocomplete } from "@material-ui/lab";
-import { TextField, Button } from "@material-ui/core";
+import { TextField, Button, Tooltip } from "@material-ui/core";
 import { EditPlanButton } from "./EditPlanButton";
 import styled from "styled-components";
 import { batch, connect } from "react-redux";
 import { AppState } from "../state/reducers/state";
 import { Dispatch } from "redux";
-import { getActivePlanFromState } from "../state";
+import { DNDSchedule } from "../models/types";
+import { getActivePlanFromState, getUserCatalogYearFromState } from "../state";
 import { IPlanData } from "../models/types";
 import { Major, Schedule } from "../../../common/types";
 import {
@@ -16,6 +17,7 @@ import {
   getPlansFromState,
   getTakenCreditsFromState,
   getUserFullNameFromState,
+  getActivePlanCatalogYearFromState
 } from "../state";
 import { planToString, scheduleHasClasses } from "../utils";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
@@ -24,6 +26,7 @@ import {
   setActivePlanCoopCycleAction,
   setActivePlanMajorAction,
   setActivePlanScheduleAction,
+  setActivePlanCatalogYearAction
 } from "../state/actions/userPlansActions";
 
 const PlanPopper = styled(Popper)<any>`
@@ -50,7 +53,7 @@ const EditProfileButton = styled(Link)`
 
 const PlanCard = styled.div<any>`
   width: 266px;
-  height: 247px;
+  height: auto;
   background: #ffffff;
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2), 0px 2px 2px rgba(0, 0, 0, 0.12),
     0px 0px 2px rgba(0, 0, 0, 0.14);
@@ -75,9 +78,15 @@ const MajorTextField = styled(TextField)<any>`
   font-size: 10px;
 `;
 
+const ButtonContainer = styled.div`
+  margin-top: 20px;
+  height: 40px;
+`
+
 const SetButton = styled(Button)<any>`
   background: #e0e0e0;
   font-weight: normal;
+  float: right;
 `;
 
 interface ReduxStoreEditPlanProps {
@@ -86,6 +95,7 @@ interface ReduxStoreEditPlanProps {
   allPlans: Record<string, Schedule[]>;
   creditsTaken: number;
   name: string;
+  catalogYear?: number;
 }
 
 interface ReduxDispatchEditPlanProps {
@@ -95,6 +105,7 @@ interface ReduxDispatchEditPlanProps {
   ) => void;
   setActivePlanSchedule: (schedule: Schedule) => void;
   setActivePlanMajor: (major: string) => void;
+  setActivePlanCatalogYear: (number: number) => void;
 }
 
 type Props = ReduxStoreEditPlanProps & ReduxDispatchEditPlanProps;
@@ -148,6 +159,10 @@ export class EditPlanPopperComponent extends React.Component<
     this.props.setActivePlanCoopCycle(chosenCoopCycle, this.props.allPlans);
   }
 
+  onChangeCatalogYear(event: React.SyntheticEvent<{}>, value: any) {
+    this.props.setActivePlanCatalogYear(value);
+  }
+
   renderMajorDropDown() {
     return (
       <Autocomplete
@@ -158,9 +173,8 @@ export class EditPlanPopperComponent extends React.Component<
           <MajorTextField
             {...params}
             variant="outlined"
+            label="Major"
             fullWidth
-            size="small"
-            margin="dense"
           />
         )}
         value={this.props.plan.major}
@@ -184,9 +198,8 @@ export class EditPlanPopperComponent extends React.Component<
           <TextField
             {...params}
             variant="outlined"
+            label="Co-op Cycle"
             fullWidth
-            size="small"
-            margin="dense"
           />
         )}
         value={this.props.plan.coopCycle || "None"}
@@ -195,15 +208,41 @@ export class EditPlanPopperComponent extends React.Component<
     );
   }
 
+  renderCatalogYearDropdown() {
+    let catalogYears = [
+      ...Array.from(
+        new Set(this.props.majors.map(maj => maj.yearVersion.toString()))
+      ),
+    ];
+    return (
+      <Autocomplete
+        style={{ marginTop: "10px", marginBottom: "5px" }}
+        disableListWrap
+        options={catalogYears}
+        renderInput={params => (
+          <TextField
+            {...params}
+            variant="outlined"
+            label="Catalog Year"
+            fullWidth
+          />
+        )}
+        value={this.props.catalogYear ? this.props.catalogYear + "" : ""}
+        onChange={this.onChangeCatalogYear.bind(this)}
+      />
+    );
+  }
+
   renderSetClassesButton() {
     return (
-      <SetButton
-        variant="contained"
-        style={{ float: "right" }}
-        onClick={() => this.addClassesFromPOS()}
-      >
-        Set Example Schedule
-      </SetButton>
+      <ButtonContainer>
+        <SetButton
+          variant="contained"
+          onClick={() => this.addClassesFromPOS()}
+        >
+          Set Example Schedule
+        </SetButton>
+      </ButtonContainer>
     );
   }
 
@@ -216,13 +255,15 @@ export class EditPlanPopperComponent extends React.Component<
 
   renderClearScheduleButton() {
     return (
-      <SetButton
-        variant="contained"
-        style={{ float: "right" }}
-        onClick={() => this.clearSchedule()}
-      >
-        Clear Schedule
-      </SetButton>
+      <ButtonContainer>
+        <SetButton
+          variant="contained"
+          style={{ float: "right" }}
+          onClick={() => this.clearSchedule()}
+        >
+          Clear Schedule
+        </SetButton>
+      </ButtonContainer>
     );
   }
 
@@ -266,15 +307,15 @@ export class EditPlanPopperComponent extends React.Component<
               <StandingText>
                 {this.props.creditsTaken + " Credits Completed"}
               </StandingText>
-              {this.renderMajorDropDown()}
-              {!!this.props.plan.major && this.renderPlansDropDown()}
+              {this.renderCatalogYearDropdown()}
+              {!!this.props.plan.catalogYear && this.renderMajorDropDown()}
               {!!this.props.plan.major &&
-              !!this.props.plan.coopCycle &&
-              !scheduleHasClasses(this.props.plan.schedule)
-                ? this.renderSetClassesButton()
-                : !!this.props.plan.major &&
-                  !!this.props.plan.coopCycle &&
-                  this.renderClearScheduleButton()}
+                !!this.props.plan.coopCycle &&
+                  !scheduleHasClasses(this.props.plan.schedule)
+                    ? this.renderSetClassesButton()
+                    : !!this.props.plan.major &&
+                      !!this.props.plan.coopCycle &&
+                      this.renderClearScheduleButton()}
             </PlanCard>
           </ClickAwayListener>
         </PlanPopper>
@@ -289,6 +330,7 @@ const mapStateToProps = (state: AppState) => ({
   allPlans: getPlansFromState(state),
   creditsTaken: getTakenCreditsFromState(state),
   name: getUserFullNameFromState(state),
+  catalogYear: getActivePlanCatalogYearFromState(state)
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
@@ -300,6 +342,8 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     dispatch(setActivePlanScheduleAction(schedule)),
   setActivePlanMajor: (major: string) =>
     dispatch(setActivePlanMajorAction(major)),
+  setActivePlanCatalogYear: (year: number) =>
+    dispatch(setActivePlanCatalogYearAction(year))
 });
 
 export const EditPlanPopper = connect<

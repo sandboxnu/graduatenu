@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 2020_12_04_052855) do
     t.json "warnings", default: [], array: true
     t.integer "course_counter"
     t.boolean "is_currently_being_edited", default: false, null: false
+    t.integer "catalog_year", default: 2018
     t.datetime "last_viewed"
     t.index ["user_id"], name: "index_plans_on_user_id"
   end
@@ -57,6 +58,7 @@ ActiveRecord::Schema.define(version: 2020_12_04_052855) do
     t.integer "graduation_year"
     t.string "major"
     t.string "coop_cycle"
+    t.integer "catalog_year"
     t.string "image_url"
     t.boolean "is_advisor", default: false, null: false
     t.string "nu_id"

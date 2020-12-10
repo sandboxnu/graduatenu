@@ -1,6 +1,6 @@
 import React from "react";
 import { withRouter, RouteComponentProps, Link } from "react-router-dom";
-import { TextField } from "@material-ui/core";
+import { TextField, Tooltip } from "@material-ui/core";
 import { GenericOnboardingTemplate } from "./GenericOnboarding";
 import { NextButton } from "../components/common/NextButton";
 import { connect } from "react-redux";
@@ -13,6 +13,7 @@ import {
   setGraduationYearAction,
   setUserCoopCycleAction,
   setUserMajorAction,
+  setUserCatalogYearAction
 } from "../state/actions/userActions";
 import Loader from "react-loader-spinner";
 import {
@@ -31,6 +32,7 @@ import {
 } from "../state";
 import { AppState } from "../state/reducers/state";
 import Autocomplete from "@material-ui/lab/Autocomplete";
+import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
 import { findMajorFromName } from "../utils/plan-helpers";
 
 const SpinnerWrapper = styled.div`
@@ -59,9 +61,14 @@ interface MajorScreenProps {
   isFetchingPlans: boolean;
 }
 
+interface CatalogYearScreenProps {
+  setCatalogYear: (catalogYear: number) => void;
+}
+
 type OnboardingScreenProps = AcademicYearScreenProps &
   GraduationYearScreenProps &
-  MajorScreenProps;
+  MajorScreenProps &
+  CatalogYearScreenProps;
 
 interface AcademicYearScreenState {
   year?: number;
@@ -78,11 +85,16 @@ interface MajorScreenState {
   planStr?: string;
 }
 
+interface CatalogYearScreenState {
+  catalogYear?: number;
+}
+
 const marginSpace = 12;
 
 type OnboardingScreenState = AcademicYearScreenState &
   GraduationYearScreenState &
-  MajorScreenState;
+  MajorScreenState &
+  CatalogYearScreenState;
 
 type Props = OnboardingScreenProps & RouteComponentProps;
 
@@ -96,6 +108,7 @@ class OnboardingScreenComponent extends React.Component<
     this.state = {
       year: undefined,
       gradYear: undefined,
+      catalogYear: undefined,
       beenEditedYear: false,
       beenEditedGrad: false,
       major: props.major,
@@ -121,9 +134,16 @@ class OnboardingScreenComponent extends React.Component<
     });
   }
 
+  onChangeCatalogYear(event: React.SyntheticEvent<{}>, value: any) {
+    this.setState({
+      major: undefined,
+      planStr: undefined,
+      catalogYear: Number(value),
+    });
+  }
+
   onChangeMajor(event: React.SyntheticEvent<{}>, value: any) {
     const maj = findMajorFromName(value, this.props.majors);
-
     this.setState({ major: maj, planStr: "" });
   }
 
@@ -136,9 +156,11 @@ class OnboardingScreenComponent extends React.Component<
    * assuming all of the required fields have been filled out
    */
   onSubmit() {
+    this.props.setCatalogYear(this.state.catalogYear!);
     this.props.setMajor(this.state.major);
     this.props.setAcademicYear(this.state.year!);
     this.props.setGraduationYear(this.state.gradYear!);
+
     if (this.state.planStr) {
       this.props.setCoopCycle(this.state.planStr);
     }
@@ -148,11 +170,14 @@ class OnboardingScreenComponent extends React.Component<
    * Renders the major drop down
    */
   renderMajorDropDown() {
+    let majorNames = this.props.majors.filter(
+      major => major.yearVersion === this.state.catalogYear
+    ); //takes in a major object return t if you want to keep it (only when catalog)
     return (
       <Autocomplete
         style={{ width: 326, marginBottom: marginSpace }}
         disableListWrap
-        options={this.props.majors.map(maj => maj.name)}
+        options={majorNames.map(maj => maj.name)} //need to filter for only current catalog year
         renderInput={params => (
           <TextField
             {...params}
@@ -164,8 +189,6 @@ class OnboardingScreenComponent extends React.Component<
         value={
           !!this.state.major
             ? this.state.major.name + " "
-            : !!this.props.major
-            ? this.props.major.name
             : ""
         }
         onChange={this.onChangeMajor.bind(this)}
@@ -266,6 +289,40 @@ class OnboardingScreenComponent extends React.Component<
     );
   }
 
+  /**
+   * Renders the catalog drop down
+   */
+  renderCatalogYearDropDown() {
+    //need to make chanegs to options to filter out repeat catalog years
+    let majorSet = [
+      ...Array.from(
+        new Set(this.props.majors.map(maj => maj.yearVersion.toString()))
+      ),
+    ];
+    return (
+      <Tooltip
+        title="Catalog Year refers to the year your major credits are associated to. This is usually the year you declared your Major."
+        placement="top"
+      >
+        <Autocomplete
+          style={{ width: 326, marginBottom: marginSpace }}
+          disableListWrap
+          options={majorSet}
+          renderInput={params => (
+            <TextField
+              {...params}
+              variant="outlined"
+              label="Select a Catalog Year"
+              fullWidth
+            />
+          )}
+          value={!!this.state.catalogYear ? this.state.catalogYear + " " : ""}
+          onChange={this.onChangeCatalogYear.bind(this)}
+        />
+      </Tooltip>
+    );
+  }
+
   render() {
     const { gradYear, year, beenEditedGrad, beenEditedYear } = this.state;
     const { isFetchingMajors, isFetchingPlans } = this.props;
@@ -290,8 +347,9 @@ class OnboardingScreenComponent extends React.Component<
         <GenericOnboardingTemplate screen={0}>
           {this.renderAcademicYearSelect(year, beenEditedYear)}
           {this.renderGradYearSelect(gradYear, beenEditedGrad)}
-          {this.renderMajorDropDown()}
-          {!!this.state.major && this.renderCoopCycleDropDown()}
+          {this.renderCatalogYearDropDown()}
+          {!!this.state.catalogYear && this.renderMajorDropDown()}
+          {!!this.state.catalogYear && !!this.state.major && this.renderCoopCycleDropDown()}
 
           {!!year && !!gradYear ? (
             <Link
@@ -333,6 +391,8 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   setMajor: (major?: Major) => dispatch(setUserMajorAction(major?.name || '')),
   setCoopCycle: (coopCycle: string) =>
     dispatch(setUserCoopCycleAction(coopCycle)),
+  setCatalogYear: (catalogYear?: number) =>
+    dispatch(setUserCatalogYearAction(catalogYear)),
 });
 
 /**
