@@ -77,7 +77,7 @@ export const RequestApprovalPopper: React.FC = () => {
   const RequestApprovalButton = () => {
     return (
       <PrimaryButton
-        disabled={selectedAdvisor !== ""}
+        disabled={selectedAdvisor === ""}
         onClick={() => {
           // Todo: Trigger backend API call
           setIsOpen(false);
