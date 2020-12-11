@@ -2,9 +2,7 @@ import { Grid, Paper } from "@material-ui/core";
 import React, { useState } from "react";
 import { useDispatch, shallowEqual, useSelector } from "react-redux";
 import { TransferableExam, TransferableExamGroup } from "../../../common/types";
-import {
-  setExamCreditsAction,
-} from "../state/actions/userActions";
+import { setExamCreditsAction } from "../state/actions/userActions";
 import {
   MainTitleText,
   OnboardingSelectionTemplate,
@@ -17,20 +15,23 @@ import { createPlanForUser } from "../services/PlanService";
 import {
   getAcademicYearFromState,
   getGraduationYearFromState,
-  getUserMajorFromState,
+  getUserMajorNameFromState,
   getUserIdFromState,
   getUserCoopCycleFromState,
   getCompletedCoursesFromState,
   getTransferCoursesFromState,
   getUserCatalogYearFromState,
-  getPlansFromState
+  getPlansFromState,
 } from "../state";
 import { AppState } from "../state/reducers/state";
 import { addNewPlanAction } from "../state/actions/userPlansActions";
 import { updateUser } from "../services/UserService";
 import { getAuthToken } from "../utils/auth-helpers";
 import { getSimplifiedCourseData } from "../utils/completed-courses-helpers";
-import { generateInitialSchedule, generateInitialScheduleNoCoopCycle } from "../utils";
+import {
+  generateInitialSchedule,
+  generateInitialScheduleNoCoopCycle,
+} from "../utils";
 
 interface TransferableExamGroupComponentProps {
   readonly transferableExamGroup: TransferableExamGroup;
@@ -158,11 +159,11 @@ const TransferableCreditScreen: React.FC = () => {
     catalogYear,
     completedCourses,
     transferCourses,
-    allPlans
+    allPlans,
   } = useSelector(
     (state: AppState) => ({
       userId: getUserIdFromState(state),
-      major: getUserMajorFromState(state),
+      major: getUserMajorNameFromState(state),
       academicYear: getAcademicYearFromState(state)!,
       graduationYear: getGraduationYearFromState(state)!,
       coopCycle: getUserCoopCycleFromState(state),
@@ -182,13 +183,14 @@ const TransferableCreditScreen: React.FC = () => {
   const onSubmit = (): Promise<any> => {
     dispatch(setExamCreditsAction(selectedTransferableExams));
     const token = getAuthToken();
-      const updateUserPromise = () => updateUser(
+    const updateUserPromise = () =>
+      updateUser(
         {
           id: userId!,
           token: token,
         },
         {
-          major: major?.name,
+          major: major,
           academic_year: academicYear,
           graduation_year: graduationYear,
           coop_cycle: coopCycle,
@@ -205,26 +207,37 @@ const TransferableCreditScreen: React.FC = () => {
         }
       );
 
-      const createPlanPromise = () => {
-        let schedule, courseCounter;
-        if (!!coopCycle) {
-          [schedule, courseCounter] = generateInitialSchedule(academicYear, graduationYear, completedCourses, major!.name, coopCycle!, allPlans);
-        } else {
-          [schedule, courseCounter] = generateInitialScheduleNoCoopCycle(academicYear, graduationYear, completedCourses);
-        }
+    const createPlanPromise = () => {
+      let schedule, courseCounter;
+      if (!!coopCycle) {
+        [schedule, courseCounter] = generateInitialSchedule(
+          academicYear,
+          graduationYear,
+          completedCourses,
+          major!,
+          coopCycle!,
+          allPlans
+        );
+      } else {
+        [schedule, courseCounter] = generateInitialScheduleNoCoopCycle(
+          academicYear,
+          graduationYear,
+          completedCourses
+        );
+      }
 
-        createPlanForUser(userId!, token, {
+      createPlanForUser(userId!, token, {
         name: "Plan 1",
         link_sharing_enabled: false,
         schedule: schedule,
-        major: major ? major.name : "",
-        coop_cycle: coopCycle ? coopCycle : "None",
+        major: major,
+        coop_cycle: coopCycle,
         course_counter: courseCounter,
-        catalog_year: catalogYear
+        catalog_year: catalogYear,
       }).then(response => {
         dispatch(addNewPlanAction(response.plan, academicYear));
       });
-    }
+    };
 
     return Promise.all([updateUserPromise(), createPlanPromise()]);
   };

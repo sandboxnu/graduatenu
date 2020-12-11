@@ -49,13 +49,13 @@ export const setActivePlanDNDScheduleAction = createAction(
 
 export const setActivePlanMajorAction = createAction(
   "schedule/SET_ACTIVE_PLAN_MAJOR",
-  (major: string) => ({ major })
+  (major: string | null) => ({ major })
 )();
 
 export const setActivePlanCoopCycleAction = createAction(
   "schedule/SET_ACTIVE_PLAN_COOP_CYCLE",
   (
-    coopCycle: string,
+    coopCycle: string | null,
     academicYear: number,
     graduationYear: number,
     allPlans?: Record<string, Schedule[]>
@@ -69,7 +69,7 @@ export const setActivePlanCoopCycleAction = createAction(
 
 export const setActivePlanCatalogYearAction = createAction(
   "schedule/SET_ACTIVE_PLAN_CATALOG_YEAR",
-  (catalogYear: number, allPlans?: Record<string, Schedule[]>) => ({
+  (catalogYear: number | null, allPlans?: Record<string, Schedule[]>) => ({
     catalogYear,
     allPlans,
   })
