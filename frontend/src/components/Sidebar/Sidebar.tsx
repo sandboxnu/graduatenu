@@ -20,7 +20,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   background: #f2f2f2;
-  padding: 21px 12px 12px 10px;
+  padding: 0px 12px 12px 10px;
 `;
 
 const MajorTitle = styled.p`
