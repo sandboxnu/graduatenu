@@ -5,6 +5,7 @@ import {
   DNDScheduleTerm,
   SeasonEnum,
   StatusEnum,
+  CourseWarning,
 } from "../models/types";
 import { Schedule, ScheduleCourse, SeasonWord } from "../../../common/types";
 
@@ -309,4 +310,25 @@ export function getPositionOfYearInSchedule(
 
 export function isYearInPast(yearIndex: number, academicYear: number): boolean {
   return academicYear > yearIndex + 1;
+}
+
+/**
+ * Filters through the given list of course warnings to find all warnings for the given course
+ * @param courseWarnings the list of course warnings to search through
+ * @param course the search course
+ */
+export function findCourseWarnings(
+  courseWarnings: CourseWarning[],
+  course: DNDScheduleCourse
+) {
+  const result: CourseWarning[] = courseWarnings.filter(
+    (w: CourseWarning) =>
+      w.subject + w.classId === course.subject + course.classId
+  );
+
+  if (result.length === 0) {
+    return undefined;
+  } else {
+    return result;
+  }
 }

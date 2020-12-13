@@ -6,7 +6,6 @@ import { Dispatch } from "redux";
 import { changeSemesterStatusForActivePlanAction } from "../../state/actions/userPlansActions";
 import { AppState } from "../../state/reducers/state";
 import { SemesterType } from "./SemesterType";
-import { getActivePlanScheduleFromState } from "../../state";
 import { DNDSchedule } from "../../models/types";
 import { getPositionOfYearInSchedule } from "../../utils";
 
@@ -20,6 +19,7 @@ const Container = styled.div`
   box-sizing: border-box;
   margin-top: 0px;
   padding: 0px;
+  width: 90%;
 `;
 
 const SemesterText = styled.p`
@@ -27,6 +27,9 @@ const SemesterText = styled.p`
   font-weight: 600;
   font-size: 16px;
   color: white;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 interface YearTopProps {
@@ -35,10 +38,8 @@ interface YearTopProps {
   springStatus: Status;
   summer1Status: Status;
   summer2Status: Status;
-}
-
-interface ReduxStoreYearTopProps {
   schedule: DNDSchedule;
+  isEditable: boolean;
 }
 
 interface ReduxDispatchYearTopProps {
@@ -49,7 +50,7 @@ interface ReduxDispatchYearTopProps {
   ) => void;
 }
 
-type Props = YearTopProps & ReduxStoreYearTopProps & ReduxDispatchYearTopProps;
+type Props = YearTopProps & ReduxDispatchYearTopProps;
 
 interface YearTopState {
   tappedSemester: SeasonWord | null;
@@ -132,45 +133,32 @@ class YearTopComponent extends React.Component<Props, YearTopState> {
   };
 
   render() {
-    const { year, schedule } = this.props;
+    const { year, schedule, isEditable } = this.props;
     const yearPosition = getPositionOfYearInSchedule(schedule, year);
+    const semesters: SeasonWord[] = ["fall", "spring", "summer1", "summer2"];
+    const semesterMapping = {
+      fall: "Fall",
+      spring: "Spring",
+      summer1: "Summer I",
+      summer2: "Summer II",
+    };
     return (
       <Container>
-        <div style={textContainerStyle}>
-          <SemesterText>
-            Fall {year}
-            <span style={{ fontWeight: "normal" }}> - </span>
-          </SemesterText>
-          <SemesterType
-            year={yearPosition}
-            status={this.state.fallStatus}
-            onChange={(event: any) => this.handleChange(event, "fall")}
-          />
-        </div>
-        <div style={textContainerStyle}>
-          <SemesterText>Spring {year + 1} - </SemesterText>
-          <SemesterType
-            year={yearPosition}
-            status={this.state.springStatus}
-            onChange={(event: any) => this.handleChange(event, "spring")}
-          />
-        </div>
-        <div style={textContainerStyle}>
-          <SemesterText>Summer I {year + 1} - </SemesterText>
-          <SemesterType
-            year={yearPosition}
-            status={this.state.summer1Status}
-            onChange={(event: any) => this.handleChange(event, "summer1")}
-          />
-        </div>
-        <div style={textContainerStyle}>
-          <SemesterText>Summer II {year + 1} - </SemesterText>
-          <SemesterType
-            year={yearPosition}
-            status={this.state.summer2Status}
-            onChange={(event: any) => this.handleChange(event, "summer2")}
-          />
-        </div>
+        {semesters.map(semester => (
+          <div style={textContainerStyle}>
+            <SemesterText>
+              {semesterMapping[semester]} {year}
+              {isEditable && <span style={{ fontWeight: "normal" }}> - </span>}
+            </SemesterText>
+            {isEditable && (
+              <SemesterType
+                year={yearPosition}
+                status={this.state.fallStatus}
+                onChange={(event: any) => this.handleChange(event, semester)}
+              />
+            )}
+          </div>
+        ))}
       </Container>
     );
   }
@@ -183,11 +171,11 @@ const textContainerStyle: React.CSSProperties = {
   flexDirection: "row",
   alignItems: "center",
   flex: 1,
+  whiteSpace: "nowrap",
+  overflow: "hidden",
 };
 
-const mapStateToProps = (state: AppState) => ({
-  schedule: getActivePlanScheduleFromState(state),
-});
+const mapStateToProps = (state: AppState) => ({});
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   handleStatusChange: (
@@ -201,7 +189,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 });
 
 export const YearTop = connect<
-  ReduxStoreYearTopProps,
+  {},
   ReduxDispatchYearTopProps,
   YearTopProps,
   AppState

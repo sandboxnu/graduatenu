@@ -26,7 +26,8 @@ export const App = ({ store }: { store: Store }) => {
           <ProtectedRoute path="/home" component={HomeWrapper} />
           <ProtectedRoute path="/redirect" component={RedirectScreen} />
           <ProtectedRoute path="/onboarding" component={OnboardingInfoScreen} />
-          <ProtectedRoute path="/profile" component={Profile} />
+          {/* ****FOR TESTING! DELETE BEFORE MERGING **** */}
+          <ProtectedRoute path="/profile" component={NotificationsPage} />
           <ProtectedRoute
             path="/completedCourses"
             component={CompletedCoursesScreen}

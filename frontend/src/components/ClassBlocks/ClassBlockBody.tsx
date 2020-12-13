@@ -40,6 +40,7 @@ interface ClassBlockBodyProps {
   course: ScheduleCourse;
   hovering: boolean;
   onDelete: () => void;
+  hideDelete?: boolean;
 }
 
 /**
@@ -49,6 +50,7 @@ export const ClassBlockBody: React.FC<ClassBlockBodyProps> = ({
   course,
   hovering,
   onDelete,
+  hideDelete,
 }) => {
   return (
     <Wrapper>
@@ -62,15 +64,17 @@ export const ClassBlockBody: React.FC<ClassBlockBodyProps> = ({
           visibility: hovering ? "visible" : "hidden",
         }}
       >
-        <IconButton
-          onClick={onDelete}
-          style={{ color: "rgba(102, 102, 102, 0.3)" }}
-          disableRipple
-          disableFocusRipple
-          disableTouchRipple
-        >
-          <DeleteIcon fontSize="inherit" />
-        </IconButton>
+        {!hideDelete && (
+          <IconButton
+            onClick={onDelete}
+            style={{ color: "rgba(102, 102, 102, 0.3)" }}
+            disableRipple
+            disableFocusRipple
+            disableTouchRipple
+          >
+            <DeleteIcon fontSize="inherit" />
+          </IconButton>
+        )}
       </div>
     </Wrapper>
   );

@@ -43,7 +43,7 @@ import {
   getAuthToken,
   removeAuthTokenFromCookies,
 } from "../utils/auth-helpers";
-import { EditableSchedule } from "../components/Schedule/EditableSchedule";
+import { EditableSchedule } from "../components/Schedule/ScheduleComponents";
 
 const HomeTop = styled.div`
   display: flex;

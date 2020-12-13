@@ -23,9 +23,9 @@ import {
   incrementCurrentClassCounterForActivePlanAction,
 } from "../../state/actions/userPlansActions";
 import {
-  safelyGetActivePlanFromState,
   getCurrentClassCounterFromState,
   getTransferCoursesFromState,
+  getActivePlanFromState,
 } from "../../state";
 import { Year } from "../Year";
 import Loader from "react-loader-spinner";
@@ -78,6 +78,11 @@ const SpinnerWrapper = styled.div`
 
 interface ScheduleProps {
   readonly schedule?: DNDSchedule;
+  readonly isEditable: boolean;
+}
+
+interface NonEditableProps {
+  schedule?: DNDSchedule;
 }
 
 const LoadingSpinner: React.FC = () => {
@@ -94,11 +99,19 @@ const LoadingSpinner: React.FC = () => {
   );
 };
 
-const ScheduleComponent: React.FC<ScheduleProps> = ({ schedule }) => {
-  return schedule ? (
+const ScheduleComponent: React.FC<ScheduleProps> = ({
+  schedule,
+  isEditable,
+}) => {
+  return schedule !== undefined ? (
     <>
       {schedule.years.map((year: number, index: number) => (
-        <Year key={index} index={index} schedule={schedule} />
+        <Year
+          key={index}
+          index={index}
+          schedule={schedule}
+          isEditable={isEditable}
+        />
       ))}
     </>
   ) : (
@@ -106,11 +119,29 @@ const ScheduleComponent: React.FC<ScheduleProps> = ({ schedule }) => {
   );
 };
 
+export const NonEditableSchedule: React.FC<NonEditableProps> = ({
+  schedule,
+}) => {
+  const { activePlan, transferCredits } = useSelector(
+    (state: AppState) => ({
+      activePlan: getActivePlanFromState(state)?.schedule,
+      transferCredits: getTransferCoursesFromState(state),
+    }),
+    shallowEqual
+  );
+  return (
+    <>
+      <ScheduleComponent schedule={schedule} isEditable={false} />
+      <TransferCredits transferCredits={transferCredits} isEditable={false}/>
+    </>
+  );
+};
+
 export const EditableSchedule: React.FC<Props> = props => {
   const { children, sidebarPresent, transferCreditPresent } = props;
   const { activePlan, currentClassCounter, transferCredits } = useSelector(
     (state: AppState) => ({
-      activePlan: safelyGetActivePlanFromState(state)!.schedule,
+      activePlan: getActivePlanFromState(state)!.schedule,
       currentClassCounter: getCurrentClassCounterFromState(state),
       transferCredits: getTransferCoursesFromState(state),
     }),
@@ -221,9 +252,9 @@ export const EditableSchedule: React.FC<Props> = props => {
         <LeftScroll className="hide-scrollbar">
           <Container>
             {children}
-            <ScheduleComponent schedule={activePlan} />
+            <ScheduleComponent schedule={activePlan} isEditable={true} />
             {transferCreditPresent && (
-              <TransferCredits transferCredits={transferCredits} />
+              <TransferCredits transferCredits={transferCredits} isEditable={true} />
             )}
           </Container>
         </LeftScroll>

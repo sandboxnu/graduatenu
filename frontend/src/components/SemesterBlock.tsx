@@ -1,6 +1,6 @@
 import React from "react";
 import { Droppable } from "react-beautiful-dnd";
-import { ClassBlock } from "./ClassBlocks";
+import { ClassBlock, NonDraggableClassBlock } from "./ClassBlocks";
 import { AddBlock } from "./ClassBlocks/AddBlock";
 import { AddClass, ClassList, EmptyBlock } from ".";
 import {
@@ -27,7 +27,10 @@ import {
 } from "../state/actions/userPlansActions";
 import { Tooltip } from "@material-ui/core";
 import { SEMESTER_MIN_HEIGHT } from "../constants";
-import { convertTermIdToSeason } from "../utils/schedule-helpers";
+import {
+  convertTermIdToSeason,
+  findCourseWarnings,
+} from "../utils/schedule-helpers";
 import { UndoDelete } from "./UndoDelete";
 
 const OutsideContainer = styled.div`
@@ -73,11 +76,14 @@ interface ReduxDispatchSemesterBlockProps {
 
 interface SemesterBlockProps {
   semester: DNDScheduleTerm;
+  isEditable: boolean;
 }
 
 type Props = SemesterBlockProps &
   ReduxStoreSemesterBlockProps &
   ReduxDispatchSemesterBlockProps;
+
+type NonEditProps = SemesterBlockProps & ReduxStoreSemesterBlockProps;
 
 interface SemesterBlockState {
   modalVisible: boolean;
@@ -85,7 +91,56 @@ interface SemesterBlockState {
   deletedClass?: DNDScheduleCourse;
 }
 
-class SemesterBlockComponent extends React.Component<
+function renderTooltip(warnings: IWarning[]) {
+  return (
+    <div style={{ display: "flex", flexDirection: "column" }}>
+      {warnings.map((w, index) => {
+        return <span key={index}>{w.message}</span>;
+      })}
+    </div>
+  );
+}
+
+const NonEditableSemesterBlockComponent = (props: NonEditProps) => {
+  const renderBody = (props: NonEditProps) => {
+    const { semester, courseWarnings } = props;
+    const status = semester.status;
+    return semester.classes.map((scheduleCourse, index) => {
+      if (!!scheduleCourse) {
+        return (
+          <NonDraggableClassBlock
+            key={index}
+            course={scheduleCourse}
+            warnings={findCourseWarnings(courseWarnings, scheduleCourse)}
+            onDelete={() => {}}
+            hideDelete={true}
+          />
+        );
+      } else return <EmptyBlock key={index} />;
+    });
+  };
+  return (
+    <OutsideContainer>
+      <Container warning={false}>
+        <ClassListWrapper>
+          {props.warnings.length > 0 ? (
+            <Tooltip
+              title={renderTooltip(props.warnings)}
+              placement="top"
+              arrow
+            >
+              <>{renderBody(props)}</>
+            </Tooltip>
+          ) : (
+            renderBody(props)
+          )}
+        </ClassListWrapper>
+      </Container>
+    </OutsideContainer>
+  );
+};
+
+class EditableSemesterBlockComponent extends React.Component<
   Props,
   SemesterBlockState
 > {
@@ -150,26 +205,6 @@ class SemesterBlockComponent extends React.Component<
     });
   };
 
-  /**
-   * Filters through the given list of course warnings to find all warnings for the given course
-   * @param courseWarnings the list of course warnings to search through
-   * @param course the search course
-   */
-  findCourseWarnings(
-    courseWarnings: CourseWarning[],
-    course: DNDScheduleCourse
-  ) {
-    const result: CourseWarning[] = courseWarnings.filter(
-      w => w.subject + w.classId === course.subject + course.classId
-    );
-
-    if (result.length === 0) {
-      return undefined;
-    } else {
-      return result;
-    }
-  }
-
   renderBody() {
     const { semester, courseWarnings } = this.props;
     const status = semester.status;
@@ -185,7 +220,7 @@ class SemesterBlockComponent extends React.Component<
               key={index}
               class={scheduleCourse}
               index={index}
-              warnings={this.findCourseWarnings(courseWarnings, scheduleCourse)}
+              warnings={findCourseWarnings(courseWarnings, scheduleCourse)}
               onDelete={this.onDeleteClass.bind(this, scheduleCourse, semester)}
               currentClassCounter={this.props.currentClassCounter}
             />
@@ -194,16 +229,6 @@ class SemesterBlockComponent extends React.Component<
         return <EmptyBlock key={index} />;
       });
     }
-  }
-
-  renderTooltip() {
-    return (
-      <div style={{ display: "flex", flexDirection: "column" }}>
-        {this.props.warnings.map((w, index) => {
-          return <span key={index}>{w.message}</span>;
-        })}
-      </div>
-    );
   }
 
   renderContainer() {
@@ -218,7 +243,9 @@ class SemesterBlockComponent extends React.Component<
               >
                 {this.renderBody()}
                 {provided.placeholder}
-                <AddBlock onClick={this.showModal.bind(this)} />
+                {this.props.isEditable && (
+                  <AddBlock onClick={this.showModal.bind(this)} />
+                )}
               </ClassList>
             )}
           </Droppable>
@@ -258,9 +285,13 @@ class SemesterBlockComponent extends React.Component<
             // Add the given courses to this semester through redux
             this.props.handleAddClasses(courses, this.props.semester);
           }}
-        ></AddClass>
+        />
         {this.props.warnings.length > 0 ? (
-          <Tooltip title={this.renderTooltip()} placement="top" arrow>
+          <Tooltip
+            title={renderTooltip(this.props.warnings)}
+            placement="top"
+            arrow
+          >
             {this.renderContainer()}
           </Tooltip>
         ) : (
@@ -295,7 +326,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     ),
 });
 
-export const SemesterBlock = connect<
+const EditableSemesterBlock = connect<
   ReduxStoreSemesterBlockProps,
   ReduxDispatchSemesterBlockProps,
   SemesterBlockProps,
@@ -303,4 +334,19 @@ export const SemesterBlock = connect<
 >(
   mapStateToProps,
   mapDispatchToProps
-)(SemesterBlockComponent);
+)(EditableSemesterBlockComponent);
+
+const NonEditableSemesterBlock = connect(mapStateToProps)(
+  NonEditableSemesterBlockComponent
+);
+
+export class SemesterBlock extends React.Component<SemesterBlockProps> {
+  render() {
+    const { semester, isEditable } = this.props;
+    return isEditable ? (
+      <EditableSemesterBlock {...this.props}></EditableSemesterBlock>
+    ) : (
+      <NonEditableSemesterBlock {...this.props}></NonEditableSemesterBlock>
+    );
+  }
+}
