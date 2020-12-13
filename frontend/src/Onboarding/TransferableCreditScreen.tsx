@@ -2,9 +2,7 @@ import { Grid, Paper } from "@material-ui/core";
 import React, { useState } from "react";
 import { useDispatch, shallowEqual, useSelector } from "react-redux";
 import { TransferableExam, TransferableExamGroup } from "../../../common/types";
-import {
-  setExamCreditsAction,
-} from "../state/actions/userActions";
+import { setExamCreditsAction } from "../state/actions/userActions";
 import {
   MainTitleText,
   OnboardingSelectionTemplate,
@@ -21,7 +19,8 @@ import {
   getUserIdFromState,
   getUserCoopCycleFromState,
   getCompletedCoursesFromState,
-  getTransferCoursesFromState
+  getTransferCoursesFromState,
+  getUserCatalogYearFromState,
 } from "../state";
 import { AppState } from "../state/reducers/state";
 import { addNewPlanAction } from "../state/actions/userPlansActions";
@@ -58,9 +57,7 @@ interface TransferableExamGroupsComponentProps {
 /**
  * Component for displaying a single transferable exam.
  */
-const TransferableExamComponent: React.FC<
-  TransferableExamComponentProps
-> = props => {
+const TransferableExamComponent: React.FC<TransferableExamComponentProps> = props => {
   const addCourseToSelected = () => {
     const newSelectedTransferableExams: Array<TransferableExam> = [
       ...props.selectedTransferableExams,
@@ -70,9 +67,7 @@ const TransferableExamComponent: React.FC<
   };
 
   const removeCourseFromSelected = () => {
-    const newSelectedTransferableExams: Array<
-      TransferableExam
-    > = props.selectedTransferableExams.filter(
+    const newSelectedTransferableExams: Array<TransferableExam> = props.selectedTransferableExams.filter(
       (transferableExam: TransferableExam) =>
         transferableExam.name !== props.transferableExam.name
     );
@@ -102,9 +97,7 @@ const TransferableExamComponent: React.FC<
  * For example, 2D and 3D Arts and Design are both exaums under the Arts group, so
  * this component would be used to display the entire group.
  */
-const TransferableExamGroupComponent: React.FC<
-  TransferableExamGroupComponentProps
-> = props => {
+const TransferableExamGroupComponent: React.FC<TransferableExamGroupComponentProps> = props => {
   return (
     <div>
       <TitleText>{props.transferableExamGroup.name}</TitleText>
@@ -127,9 +120,7 @@ const TransferableExamGroupComponent: React.FC<
  * For example, AP exams has the groups Arts and Sciences, so
  * this component would be used to display each group.
  */
-const TransferableExamGroupsComponent: React.FC<
-  TransferableExamGroupsComponentProps
-> = props => {
+const TransferableExamGroupsComponent: React.FC<TransferableExamGroupsComponentProps> = props => {
   return (
     <div>
       {props.transferableExamGroups.map(
@@ -153,8 +144,9 @@ const TransferableCreditScreen: React.FC = () => {
     academicYear,
     graduationYear,
     coopCycle,
+    catalogYear,
     completedCourses,
-    transferCourses
+    transferCourses,
   } = useSelector(
     (state: AppState) => ({
       userId: getUserIdFromState(state),
@@ -164,6 +156,7 @@ const TransferableCreditScreen: React.FC = () => {
       coopCycle: getUserCoopCycleFromState(state),
       transferCourses: getTransferCoursesFromState(state),
       completedCourses: getCompletedCoursesFromState(state),
+      catalogYear: getUserCatalogYearFromState(state),
     }),
     shallowEqual
   );
@@ -176,16 +169,18 @@ const TransferableCreditScreen: React.FC = () => {
   const onSubmit = (): Promise<any> => {
     dispatch(setExamCreditsAction(selectedTransferableExams));
     const token = getAuthToken();
-      const updateUserPromise = () => updateUser(
+    const updateUserPromise = () =>
+      updateUser(
         {
           id: userId!,
           token: token,
         },
         {
-          major: major?.name,
+          major: major ? major.name : undefined,
           academic_year: academicYear,
           graduation_year: graduationYear,
           coop_cycle: coopCycle,
+          catalog_year: catalogYear,
           // TODO: Once khoury gives us this info, we shouldn't update transfer/completed if khoury user
           courses_transfer: getSimplifiedCourseData(
             transferCourses,
@@ -198,19 +193,24 @@ const TransferableCreditScreen: React.FC = () => {
         }
       );
 
-      const createPlanPromise = () => {
-        const [schedule, courseCounter] = generateInitialSchedule(academicYear, graduationYear, completedCourses);
-        createPlanForUser(userId!, token, {
+    const createPlanPromise = () => {
+      const [schedule, courseCounter] = generateInitialSchedule(
+        academicYear,
+        graduationYear,
+        completedCourses
+      );
+      createPlanForUser(userId!, token, {
         name: "Plan 1",
         link_sharing_enabled: false,
         schedule: schedule,
         major: major ? major.name : "",
         coop_cycle: coopCycle ? coopCycle : "None",
         course_counter: courseCounter,
+        catalog_year: catalogYear,
       }).then(response => {
         dispatch(addNewPlanAction(response.plan, academicYear));
       });
-    }
+    };
 
     return Promise.all([updateUserPromise(), createPlanPromise()]);
   };

@@ -58,13 +58,15 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: start;
   align-items: start;
-  margin: 30px;
+  margin-left: 30px;
+  margin-right: 30px;
+  margin-bottom: 30px;
   background-color: "#ff76ff";
 `;
 
 interface Props {
-  sidebarPresent: boolean;
-  transferCreditPresent: boolean;
+  sidebarPresent?: boolean;
+  transferCreditPresent?: boolean;
 }
 
 const SpinnerWrapper = styled.div`
@@ -124,7 +126,9 @@ export const NonEditableSchedule: React.FC<NonEditableProps> = ({
 }) => {
   const { activePlan, transferCredits } = useSelector(
     (state: AppState) => ({
-      activePlan: getActivePlanFromState(state)?.schedule,
+      activePlan: getActivePlanFromState(state)
+        ? getActivePlanFromState(state).schedule
+        : undefined,
       transferCredits: getTransferCoursesFromState(state),
     }),
     shallowEqual
@@ -132,7 +136,7 @@ export const NonEditableSchedule: React.FC<NonEditableProps> = ({
   return (
     <>
       <ScheduleComponent schedule={schedule} isEditable={false} />
-      <TransferCredits transferCredits={transferCredits} isEditable={false}/>
+      <TransferCredits transferCredits={transferCredits} isEditable={false} />
     </>
   );
 };
@@ -249,20 +253,23 @@ export const EditableSchedule: React.FC<Props> = props => {
   return (
     <OuterContainer>
       <DragDropContext onDragEnd={onDragEnd} onDragUpdate={onDragUpdate}>
-        <LeftScroll className="hide-scrollbar">
-          <Container>
-            {children}
-            <ScheduleComponent schedule={activePlan} isEditable={true} />
-            {transferCreditPresent && (
-              <TransferCredits transferCredits={transferCredits} isEditable={true} />
-            )}
-          </Container>
-        </LeftScroll>
         {sidebarPresent && (
           <SidebarContainer>
             <Sidebar />
           </SidebarContainer>
         )}
+        <LeftScroll className="hide-scrollbar">
+          <Container>
+            {children}
+            <ScheduleComponent schedule={activePlan} isEditable={true} />
+            {transferCreditPresent && (
+              <TransferCredits
+                transferCredits={transferCredits}
+                isEditable={true}
+              />
+            )}
+          </Container>
+        </LeftScroll>
       </DragDropContext>
     </OuterContainer>
   );

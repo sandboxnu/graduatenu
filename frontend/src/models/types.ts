@@ -55,6 +55,7 @@ export interface ScheduleSlice {
   courseWarnings: CourseWarning[];
   major: string;
   coopCycle: string;
+  catalogYear?: number;
 }
 
 /**
@@ -163,6 +164,7 @@ export interface IUserData {
   examCredits: TransferableExam[];
   transferCourses: ScheduleCourse[];
   completedCourses: ScheduleCourse[];
+  catalogYear?: number;
 }
 
 /**
@@ -188,6 +190,7 @@ export interface IPlanData {
   courseWarnings: CourseWarning[];
   courseCounter: number;
   lastViewed: Date;
+  catalogYear?: number;
 }
 
 /**
@@ -200,6 +203,7 @@ export interface ICreatePlanData {
   major: string;
   coop_cycle: string;
   course_counter: number;
+  catalog_year?: number;
   last_viewed?: Date;
 }
 /*
@@ -221,6 +225,7 @@ export interface IUpdateUserData {
   graduation_year?: number;
   coop_cycle?: string | null;
   nu_id?: string;
+  catalog_year?: number;
   courses_transfer?: ISimplifiedCourseDataAPI[];
   courses_completed?: ISimplifiedCourseDataAPI[];
 }

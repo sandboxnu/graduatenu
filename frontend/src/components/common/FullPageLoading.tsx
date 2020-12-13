@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import ErrorIcon from "@material-ui/icons/Error";
-import { removeAuthTokenFromCookies } from "../../utils/auth-helpers";
 
 const Centered = styled.div`
   position: absolute;
@@ -39,33 +38,11 @@ interface LoadingProps {
 }
 
 export const LoadingScreen = (props: LoadingProps) => {
-  const refresh = () => {
-    window.location.reload();
-  };
-
-  const clearCookies = () => {
-    removeAuthTokenFromCookies();
-    window.location.reload();
-  };
-
-  const errorSubText = (
-    <>
-      <p>
-        Try{" "}
-        <a href="/" onClick={refresh}>
-          refreshing the page
-        </a>{" "}
-        or{" "}
-        <a href="/" onClick={clearCookies}>
-          clearing your cookies
-        </a>
-        .
-      </p>
-      <p>
-        If that doesn't work, try reaching out to your advisor or to us{" "}
-        <a href="mailto: graduate@sandboxnu.com">here</a>
-      </p>
-    </>
+  const defaultSubText = (
+    <p>
+      Reach out to your advisor or to us{" "}
+      <a href="mailto: graduate@sandboxnu.com">here</a>
+    </p>
   );
   return (
     <Centered>
@@ -82,7 +59,7 @@ export const LoadingScreen = (props: LoadingProps) => {
           ? props.errorMsg
           : "Loading"}{" "}
       </Text>
-      <SubText> {props.subText ? props.subText : errorSubText} </SubText>
+      <SubText> {props.subText ? props.subText : defaultSubText} </SubText>
     </Centered>
   );
 };

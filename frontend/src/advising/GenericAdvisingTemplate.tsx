@@ -2,6 +2,16 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { Tabs, Tab } from "@material-ui/core";
 import { withRouter, RouteComponentProps } from "react-router-dom";
+import { ColoredButton } from "../components/common/ColoredButton";
+import { removeAuthTokenFromCookies } from "../utils/auth-helpers";
+import { useDispatch } from "react-redux";
+import { resetUserAction } from "../state/actions/userActions";
+
+const Header = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;
 
 const HomeText = styled.a`
   font-weight: bold;
@@ -9,6 +19,7 @@ const HomeText = styled.a`
   text-decoration: none;
   color: black;
 `;
+
 const StyledTab = styled(Tab)`
   color: white !important;
 `;
@@ -32,16 +43,29 @@ interface GenericAdvisingTemplateProps {}
 type Props = GenericAdvisingTemplateProps & RouteComponentProps<{}>;
 
 const GenericAdvisingTemplate: React.FC<Props> = ({ children, history }) => {
+  const dispatch = useDispatch();
   const curPath = history.location.pathname;
   const startTab = PATHS.findIndex(path => path === curPath);
   const [currentTab, setCurrentTab] = useState(startTab);
+
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     history.push(PATHS[newValue]);
     setCurrentTab(newValue);
   };
+
+  const logOut = () => {
+    dispatch(resetUserAction());
+    window.location.reload();
+    removeAuthTokenFromCookies();
+    history.push("/");
+  };
+
   return (
     <Container>
-      <HomeText>GraduateNU</HomeText>
+      <Header>
+        <HomeText>GraduateNU</HomeText>
+        <ColoredButton onClick={() => logOut()}>Logout</ColoredButton>
+      </Header>
       <TabsWrapper>
         <Tabs
           value={currentTab}

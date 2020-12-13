@@ -2,7 +2,8 @@ import React from "react";
 import { Droppable } from "react-beautiful-dnd";
 import { ClassBlock, NonDraggableClassBlock } from "./ClassBlocks";
 import { AddBlock } from "./ClassBlocks/AddBlock";
-import { AddClass, ClassList, EmptyBlock } from ".";
+import { ClassList, EmptyBlock } from ".";
+import { AddClassSearchModal } from "./AddClassSearchModal";
 import {
   DNDScheduleTerm,
   CourseWarning,
@@ -265,8 +266,7 @@ class EditableSemesterBlockComponent extends React.Component<
           undoButtonPressed={this.undoButtonPressed.bind(this)}
           closeSnackBar={this.closeSnackBar.bind(this)}
         />
-
-        <AddClass
+        <AddClassSearchModal
           visible={modalVisible}
           handleClose={this.hideModal.bind(this)}
           handleSubmit={(courses: ScheduleCourse[]) => {

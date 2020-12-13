@@ -41,6 +41,13 @@ export const setUserCoopCycleAction = createAction(
   })
 )();
 
+export const setUserCatalogYearAction = createAction(
+  "user/SET_CATALOG",
+  (catalogYear?: number) => ({
+    catalogYear,
+  })
+)();
+
 export const setExamCreditsAction = createAction(
   "user/SET_EXAM_CREDITS",
   (examCredits: TransferableExam[]) => ({ examCredits })

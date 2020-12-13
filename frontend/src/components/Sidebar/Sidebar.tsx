@@ -15,12 +15,13 @@ import {
 } from "../../state";
 import { connect, useSelector } from "react-redux";
 import { findMajorFromName } from "../../utils/plan-helpers";
+import { ScrollWrapper } from "../../Onboarding/GenericOnboarding";
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   background: #f2f2f2;
-  padding: 21px 12px 12px 10px;
+  padding: 0px 12px 12px 10px;
 `;
 
 const MajorTitle = styled.p`
@@ -67,19 +68,21 @@ const MajorSidebarComponent: React.FC<MajorSidebarProps> = ({
 
   return (
     <Container>
-      <MajorTitle>{major.name}</MajorTitle>
-      {major.requirementGroups.map((req, index) => {
-        return (
-          <RequirementSection
-            title={!!req ? req : "Additional Requirements"}
-            // TODO: this is a temporary solution for major scraper bug
-            contents={major.requirementGroupMap[req]}
-            warning={warnings.find(w => w.requirementGroup === req)}
-            key={index + major.name}
-            completedCourses={completedCourseStrings}
-          ></RequirementSection>
-        );
-      })}
+      <ScrollWrapper>
+        <MajorTitle>{major.name}</MajorTitle>
+        {major.requirementGroups.map((req, index) => {
+          return (
+            <RequirementSection
+              title={!!req ? req : "Additional Requirements"}
+              // TODO: this is a temporary solution for major scraper bug
+              contents={major.requirementGroupMap[req]}
+              warning={warnings.find(w => w.requirementGroup === req)}
+              key={index + major.name}
+              completedCourses={completedCourseStrings}
+            />
+          );
+        })}
+      </ScrollWrapper>
     </Container>
   );
 };
@@ -93,14 +96,18 @@ const SidebarComponent: React.FC<SidebarProps> = ({
     state => findMajorFromName(major, state.majorState.majors)
   );
 
-  return majorObj ? (
-    <MajorSidebarComponent
-      schedule={schedule}
-      major={majorObj}
-      transferCourses={transferCourses}
-    />
-  ) : (
-    <NoMajorSidebarComponent />
+  return (
+    <ScrollWrapper>
+      {majorObj ? (
+        <MajorSidebarComponent
+          schedule={schedule}
+          major={majorObj}
+          transferCourses={transferCourses}
+        />
+      ) : (
+        <NoMajorSidebarComponent />
+      )}
+    </ScrollWrapper>
   );
 };
 

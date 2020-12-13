@@ -46,12 +46,16 @@ import {
 import { EditableSchedule } from "../components/Schedule/ScheduleComponents";
 
 const HomeTop = styled.div`
+  width: 100%;
+  border-bottom: 1px solid red;
+`;
+
+const HomeTopInnerContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  width: 100%;
   justify-content: space-between;
-  margin-bottom: 6px;
+  margin: 20px;
 `;
 
 const HomeText = styled.a`
@@ -110,7 +114,7 @@ const PlanContainer = styled.div`
   margin-right: 10px;
 `;
 
-const LoginLogoutLink = styled.div`
+const LogoutButton = styled.div`
   align-self: center;
   margin-right: 8px !important;
 `;
@@ -216,6 +220,7 @@ class HomeComponent extends React.Component<Props> {
 
   logOut = async () => {
     await this.updatePlan(false);
+    window.location.reload();
     removeAuthTokenFromCookies();
 
     alert(
@@ -225,40 +230,100 @@ class HomeComponent extends React.Component<Props> {
     this.props.logOut();
   };
 
+  renderPlanHeader() {
+    return (
+      <HomeAboveSchedule>
+        <HomePlan>
+          <h2>Plan Of Study</h2>
+        </HomePlan>
+        <HomeButtons>
+          <PlanContainer>
+            <PlanPopperButton
+              variant="contained"
+              onClick={this.updatePlan.bind(this)}
+            >
+              Update Plan
+            </PlanPopperButton>
+          </PlanContainer>
+          <PlanContainer>
+            <AddPlan />
+          </PlanContainer>
+          <SwitchPlanPopper />
+        </HomeButtons>
+      </HomeAboveSchedule>
+    );
+  }
+
   render() {
     return (
-      <EditableSchedule sidebarPresent={true} transferCreditPresent={true}>
+      <>
         <HomeTop>
-          <HomeText href="#">GraduateNU</HomeText>
-          <HomePlan>
-            <MajorText>{this.props.major}</MajorText>
-            <PlanText>{this.props.coopCycle || "None"}</PlanText>
-            <EditPlanPopper />
-            <LoginLogoutLink onClick={_ => this.logOut()}>
-              <ColorButton variant="contained">Logout</ColorButton>
-            </LoginLogoutLink>
-          </HomePlan>
+          <HomeTopInnerContainer>
+            <HomeText href="#">GraduateNU</HomeText>
+            <HomePlan>
+              <MajorText>{this.props.major}</MajorText>
+              <PlanText>{this.props.coopCycle || "None"}</PlanText>
+              <EditPlanPopper />
+              <LogoutButton onClick={_ => this.logOut()}>
+                <ColorButton variant="contained">Logout</ColorButton>
+              </LogoutButton>
+            </HomePlan>
+          </HomeTopInnerContainer>
         </HomeTop>
-        <HomeAboveSchedule>
-          <HomePlan>
-            <h2>Plan Of Study</h2>
-          </HomePlan>
-          <HomeButtons>
-            <PlanContainer>
-              <PlanPopperButton
-                variant="contained"
-                onClick={this.updatePlan.bind(this)}
-              >
-                Update Plan
-              </PlanPopperButton>
-            </PlanContainer>
-            <PlanContainer>
-              <AddPlan />
-            </PlanContainer>
-            <SwitchPlanPopper />
-          </HomeButtons>
-        </HomeAboveSchedule>
-      </EditableSchedule>
+        <EditableSchedule sidebarPresent={true} transferCreditPresent={true}>
+          {this.renderPlanHeader()}
+        </EditableSchedule>
+      </>
+      // <>
+      //   <HomeTop>
+      //     <HomeTopInnerContainer>
+      //       <HomeText href="#">GraduateNU</HomeText>
+      //       <HomePlan>
+      //         <MajorText>{this.props.major}</MajorText>
+      //         <PlanText>{this.props.coopCycle || "None"}</PlanText>
+      //         <EditPlanPopper />
+      //         <LogoutButton onClick={_ => this.logOut()}>
+      //           <ColorButton variant="contained">Logout</ColorButton>
+      //         </LogoutButton>
+      //       </HomePlan>
+      //     </HomeTopInnerContainer>
+      //   </HomeTop>
+      //   <OuterContainer>
+      //     <DragDropContext
+      //       onDragEnd={this.onDragEnd}
+      //       onDragUpdate={this.onDragUpdate}
+      //     >
+      //       <SidebarContainer>
+      //         <Sidebar />
+      //       </SidebarContainer>
+      //       <LeftScroll className="hide-scrollbar">
+      //         <Container>
+      //           <HomeAboveSchedule>
+      //             <HomePlan>
+      //               <h2>Plan Of Study</h2>
+      //             </HomePlan>
+      //             <HomeButtons>
+      //               <PlanContainer>
+      //                 <PlanPopperButton
+      //                   variant="contained"
+      //                   onClick={this.updatePlan.bind(this)}
+      //                 >
+      //                   Update Plan
+      //                 </PlanPopperButton>
+      //               </PlanContainer>
+      //               <PlanContainer>
+      //                 <AddPlan />
+      //               </PlanContainer>
+      //               <SwitchPlanPopper />
+      //             </HomeButtons>
+      //           </HomeAboveSchedule>
+      //           {this.renderYears()}
+      //           {this.renderTransfer()}
+      //         </Container>
+      //       </LeftScroll>
+      //     </DragDropContext>
+      //   </OuterContainer>
+      // </>
     );
   }
 }
