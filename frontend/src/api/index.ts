@@ -71,10 +71,8 @@ export const searchCourses = async (
   maxIndex: number = 10
 ): Promise<ScheduleCourse[]> => {
   const courses: ScheduleCourse[] = [];
-  const proxyurl = "https://cors-anywhere.herokuapp.com/";
   const response = await fetch(
-    proxyurl +
-      `https://searchneu.com/search?query=${searchQuery}&termId=202130&minIndex=${minIndex}&maxIndex=${maxIndex}`,
+    `https://searchneu.com/search?query=${searchQuery}&termId=202130&minIndex=${minIndex}&maxIndex=${maxIndex}`,
     {
       method: "GET",
       headers: { "Content-Type": "application/json" },

@@ -52,6 +52,10 @@ class UsersController < ApplicationController
         end
     end
 
+    def advisors
+        @advisors = User.select("full_name", "email").where(is_advisor: true)
+    end
+
     private
 
     def search_params

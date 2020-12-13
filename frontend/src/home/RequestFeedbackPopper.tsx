@@ -6,6 +6,9 @@ import { DefaultModal } from "../components/common/DefaultModal";
 import styled from "styled-components";
 import { Autocomplete } from "@material-ui/lab";
 import { PrimaryButton } from "../components/common/PrimaryButton";
+import { getAdvisors } from "../services/AdvisorService";
+import { getAuthToken } from "../utils/auth-helpers";
+
 const SubTitle = styled.div`
   font-size: 14px;
   color: gray;
@@ -17,7 +20,7 @@ const AdvisorDropdownContainer = styled.div`
   width: 300px;
 `;
 
-export const RequestApprovalPopper: React.FC = () => {
+export const RequestFeedbackPopper: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   // TODO: isApproved should be set based on if this is an approved plan, and if it is, if there has been any changes to this plan.
   // isApproved might not even have to be a state val.
@@ -26,10 +29,10 @@ export const RequestApprovalPopper: React.FC = () => {
 
   const ApprovalStatusButton = () => {
     const icon = isApproved ? <CheckCircleIcon /> : <CheckCircleOutlineIcon />;
-    const text = isApproved ? "Approved" : "Request Approval";
+    const text = isApproved ? "Approved" : "Request Feedback";
     const tooltipText = isApproved
-      ? "Plan approved by advisor. If you make any changes, you will have to get this plan re-approved."
-      : "Send a request for an advisor to approve your plan.";
+      ? "An advisor thinks your plan looks great! If you make any changes, you can request additional feedback."
+      : "Send a request for an advisor to provide feedback for your plan.";
 
     return (
       <Tooltip title={tooltipText} aria-label="request-button">
@@ -50,6 +53,8 @@ export const RequestApprovalPopper: React.FC = () => {
   };
 
   const AdvisorDropdown = () => {
+    getAdvisors(getAuthToken()).then(response => console.log(response));
+
     return (
       <AdvisorDropdownContainer>
         <Autocomplete
@@ -95,14 +100,12 @@ export const RequestApprovalPopper: React.FC = () => {
         onClose={() => {
           setIsOpen(false);
         }}
-        title="Request Approval"
+        title="Request Feedback"
       >
         <SubTitle>
           We'll send over an email to you and your advisor to let them know your
-          plan is awaiting review. If a plan has been approved, you'll get an
-          email letting you know it's been approved. when your plan get's
-          approved, we will reset all previously approved plans as you can only
-          have one approved plan at a time.
+          plan is awaiting feedback. You'll get an email when you have feedback
+          from your advisor. WIP COPY
         </SubTitle>
         <AdvisorDropdown />
         <RequestApprovalButton />

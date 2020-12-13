@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       collection do
         get 'students'
         get 'current'
+        get 'advisors'
       end
       resources :plans
     end

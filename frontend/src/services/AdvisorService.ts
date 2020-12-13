@@ -14,3 +14,11 @@ export const getStudents = (
       Authorization: "Token " + userToken,
     },
   }).then(response => response.json());
+
+export const getAdvisors = (userToken: string) =>
+  fetch(`/api/users/advisors`, {
+    method: "GET",
+    headers: {
+      Authorization: "Token " + userToken,
+    },
+  }).then(response => response.json());

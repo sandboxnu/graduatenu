@@ -60,7 +60,7 @@ import {
   getAuthToken,
   removeAuthTokenFromCookies,
 } from "../utils/auth-helpers";
-import { RequestApprovalPopper } from "./RequestApprovalPopper";
+import { RequestFeedbackPopper } from "./RequestFeedbackPopper";
 
 const OuterContainer = styled.div`
   display: flex;
@@ -89,17 +89,23 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: start;
   align-items: start;
-  margin: 30px;
+  margin-left: 30px;
+  margin-right: 30px;
+  margin-bottom: 30px;
   background-color: "#ff76ff";
 `;
 
 const HomeTop = styled.div`
+  width: 100%;
+  border-bottom: 1px solid red;
+`;
+
+const HomeTopInnerContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  width: 100%;
   justify-content: space-between;
-  margin-bottom: 6px;
+  margin: 20px;
 `;
 
 const HomeText = styled.a`
@@ -389,6 +395,7 @@ class HomeComponent extends React.Component<Props> {
 
   logOut = async () => {
     await this.updatePlan(false);
+    window.location.reload();
     removeAuthTokenFromCookies();
 
     alert(
@@ -400,55 +407,59 @@ class HomeComponent extends React.Component<Props> {
 
   render() {
     return (
-      <OuterContainer>
-        <DragDropContext
-          onDragEnd={this.onDragEnd}
-          onDragUpdate={this.onDragUpdate}
-        >
-          <LeftScroll className="hide-scrollbar">
-            <Container>
-              <HomeTop>
-                <HomeText href="#">GraduateNU</HomeText>
-                <HomePlan>
-                  <MajorText>{this.props.major}</MajorText>
-                  <PlanText>{this.props.coopCycle || "None"}</PlanText>
-                  <EditPlanPopper />
-                  <LogoutButton onClick={_ => this.logOut()}>
-                    <ColorButton variant="contained">Logout</ColorButton>
-                  </LogoutButton>
-                </HomePlan>
-              </HomeTop>
-              <HomeAboveSchedule>
-                <HomePlan>
-                  <h2>Plan Of Study</h2>
-                </HomePlan>
-                <HomeButtons>
-                  <PlanContainer>
-                    <RequestApprovalPopper />
-                  </PlanContainer>
-                  <PlanContainer>
-                    <PlanPopperButton
-                      variant="contained"
-                      onClick={this.updatePlan.bind(this)}
-                    >
-                      Update Plan
-                    </PlanPopperButton>
-                  </PlanContainer>
-                  <PlanContainer>
-                    <AddPlan />
-                  </PlanContainer>
-                  <SwitchPlanPopper />
-                </HomeButtons>
-              </HomeAboveSchedule>
-              {this.renderYears()}
-              {this.renderTransfer()}
-            </Container>
-          </LeftScroll>
-          <SidebarContainer>
-            <Sidebar />
-          </SidebarContainer>
-        </DragDropContext>
-      </OuterContainer>
+      <>
+        <HomeTop>
+          <HomeTopInnerContainer>
+            <HomeText href="#">GraduateNU</HomeText>
+            <HomePlan>
+              <MajorText>{this.props.major}</MajorText>
+              <PlanText>{this.props.coopCycle || "None"}</PlanText>
+              <EditPlanPopper />
+              <LogoutButton onClick={_ => this.logOut()}>
+                <ColorButton variant="contained">Logout</ColorButton>
+              </LogoutButton>
+            </HomePlan>
+          </HomeTopInnerContainer>
+        </HomeTop>
+        <OuterContainer>
+          <DragDropContext
+            onDragEnd={this.onDragEnd}
+            onDragUpdate={this.onDragUpdate}
+          >
+            <SidebarContainer>
+              <Sidebar />
+            </SidebarContainer>
+            <LeftScroll className="hide-scrollbar">
+              <Container>
+                <HomeAboveSchedule>
+                  <HomePlan>
+                    <h2>Plan Of Study</h2>
+                  </HomePlan>
+                  <HomeButtons>
+                    <PlanContainer>
+                      <RequestFeedbackPopper />
+                    </PlanContainer>
+                    <PlanContainer>
+                      <PlanPopperButton
+                        variant="contained"
+                        onClick={this.updatePlan.bind(this)}
+                      >
+                        Update Plan
+                      </PlanPopperButton>
+                    </PlanContainer>
+                    <PlanContainer>
+                      <AddPlan />
+                    </PlanContainer>
+                    <SwitchPlanPopper />
+                  </HomeButtons>
+                </HomeAboveSchedule>
+                {this.renderYears()}
+                {this.renderTransfer()}
+              </Container>
+            </LeftScroll>
+          </DragDropContext>
+        </OuterContainer>
+      </>
     );
   }
 }
