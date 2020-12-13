@@ -168,6 +168,14 @@ export interface IUserData {
 }
 
 /**
+ * A model for data pertaining to an abbreviated user object.
+ */
+export interface IUserDataAbr {
+  email: string;
+  fullName: string;
+}
+
+/**
  * A model for data pertaining to a user login object.
  */
 
@@ -191,6 +199,7 @@ export interface IPlanData {
   courseCounter: number;
   lastViewed: Date;
   catalogYear?: number;
+  approvedPlan: DNDSchedule;
 }
 
 /**

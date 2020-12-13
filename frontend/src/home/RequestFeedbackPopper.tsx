@@ -7,7 +7,7 @@ import styled from "styled-components";
 import { Autocomplete } from "@material-ui/lab";
 import { PrimaryButton } from "../components/common/PrimaryButton";
 import { getAdvisors } from "../services/AdvisorService";
-import { getAuthToken } from "../utils/auth-helpers";
+import { IUserDataAbr } from "../models/types";
 
 const SubTitle = styled.div`
   font-size: 14px;
@@ -20,12 +20,21 @@ const AdvisorDropdownContainer = styled.div`
   width: 300px;
 `;
 
+const EMPTY_ADVISOR_LIST: IUserDataAbr[] = [];
+
 export const RequestFeedbackPopper: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   // TODO: isApproved should be set based on if this is an approved plan, and if it is, if there has been any changes to this plan.
   // isApproved might not even have to be a state val.
   const [isApproved, setIsApproved] = useState(false);
   const [selectedAdvisor, setSelectedAdvisor] = useState("");
+  const [advisors, setAdvisors] = useState(EMPTY_ADVISOR_LIST);
+
+  useEffect(() => {
+    getAdvisors()
+      .then(response => setAdvisors(response.advisors))
+      .catch(err => console.log(err));
+  }, []);
 
   const ApprovalStatusButton = () => {
     const icon = isApproved ? <CheckCircleIcon /> : <CheckCircleOutlineIcon />;
@@ -53,15 +62,12 @@ export const RequestFeedbackPopper: React.FC = () => {
   };
 
   const AdvisorDropdown = () => {
-    getAdvisors(getAuthToken()).then(response => console.log(response));
-
     return (
       <AdvisorDropdownContainer>
         <Autocomplete
           style={{ marginTop: "10px", marginBottom: "5px" }}
           disableListWrap
-          // TODO: Get list of advisors from backend
-          options={["Bob", "Emily", "Charles", "Chuck"]}
+          options={advisors.map((advisor: IUserDataAbr) => advisor.fullName)}
           renderInput={params => (
             <TextField
               {...params}

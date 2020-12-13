@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { getStudents } from "../services/AdvisorService";
 import { Search } from "../components/common/Search";
 import LinearProgress from "@material-ui/core/LinearProgress";
-import { getAuthToken } from "../utils/auth-helpers";
 
 const Container = styled.div`
   margin-left: 30px;
@@ -113,11 +112,10 @@ const StudentsList = (props: StudentsListProps) => {
   const [isLoading, setIsLoading] = useState(true);
   const [pageNumber, setPageNumber] = useState(0);
   const [isLastPage, setIsLastPage] = useState(false);
-  const token = getAuthToken();
 
   const fetchStudents = (currentStudents: StudentProps[], page: number) => {
     setIsLoading(true);
-    getStudents(props.searchQuery, page, token)
+    getStudents(props.searchQuery, page)
       .then((studentsAPI: StudentsAPI) => {
         setStudents(currentStudents.concat(studentsAPI.students));
         setPageNumber(studentsAPI.nextPage);
@@ -130,7 +128,7 @@ const StudentsList = (props: StudentsListProps) => {
   useEffect(() => {
     setStudents(EMPTY_STUDENT_LIST);
     fetchStudents(EMPTY_STUDENT_LIST, 0);
-  }, [props.searchQuery, token]);
+  }, [props.searchQuery]);
 
   return (
     <StudentListContainer>

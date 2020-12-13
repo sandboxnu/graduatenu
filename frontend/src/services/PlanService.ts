@@ -1,4 +1,5 @@
-import { ICreatePlanData, IPlanData } from "../models/types";
+import { ICreatePlanData, IPlanData, DNDSchedule } from "../models/types";
+import { getAuthToken } from "../utils/auth-helpers";
 
 /**
  * Service function object to find all plans for a given User.
@@ -81,5 +82,18 @@ export const updatePlanForUser = (
     headers: {
       "Content-Type": "application/json",
       Authorization: "Token " + userToken,
+    },
+  }).then(response => response.json());
+
+export const approvePlan = (
+  userId: number,
+  planId: number,
+  approvedPlan: any
+) =>
+  fetch(`/api/users/${userId}/plans/${planId}/approve`, {
+    method: "PUT",
+    body: JSON.stringify({ approved_plan: approvedPlan }),
+    headers: {
+      Authorization: "Token " + getAuthToken(),
     },
   }).then(response => response.json());
