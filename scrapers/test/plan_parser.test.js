@@ -172,12 +172,10 @@ expect.extend({
       // ensure that it has all the proper properties (hava) of a {@interface Schedule}.
       expect(schedule).toHaveProperty("years");
       expect(schedule).toHaveProperty("yearMap");
-      expect(schedule).toHaveProperty("id");
 
       // make sure they are of proper tyes
       expect(schedule.years).toBeInstanceOf(Array);
       expect(schedule.yearMap).toBeInstanceOf(Object);
-      expect(Number(schedule.id)).toEqual(scheduleIndex);
 
       // all of the years should be properties of yearMap.
       const yearMap = schedule.yearMap;

@@ -2,7 +2,8 @@ import React from "react";
 import { Droppable } from "react-beautiful-dnd";
 import { ClassBlock } from "./ClassBlocks";
 import { AddBlock } from "./ClassBlocks/AddBlock";
-import { AddClass, ClassList, EmptyBlock } from ".";
+import { ClassList, EmptyBlock } from ".";
+import { AddClassSearchModal } from "./AddClassSearchModal";
 import {
   DNDScheduleTerm,
   CourseWarning,
@@ -20,11 +21,11 @@ import {
 } from "../state";
 import { Dispatch } from "redux";
 import {
-  addClassesAction,
-  removeClassAction,
-  undoRemoveClassAction,
-  changeSemesterStatusAction,
-} from "../state/actions/scheduleActions";
+  addCoursesToActivePlanAction,
+  removeClassFromActivePlanAction,
+  undoRemoveClassFromActivePlanAction,
+  changeSemesterStatusForActivePlanAction,
+} from "../state/actions/userPlansActions";
 import { Tooltip } from "@material-ui/core";
 import { SEMESTER_MIN_HEIGHT } from "../constants";
 import { convertTermIdToSeason } from "../utils/schedule-helpers";
@@ -238,8 +239,7 @@ class SemesterBlockComponent extends React.Component<
           undoButtonPressed={this.undoButtonPressed.bind(this)}
           closeSnackBar={this.closeSnackBar.bind(this)}
         />
-
-        <AddClass
+        <AddClassSearchModal
           visible={modalVisible}
           handleClose={this.hideModal.bind(this)}
           handleSubmit={(courses: ScheduleCourse[]) => {
@@ -258,7 +258,7 @@ class SemesterBlockComponent extends React.Component<
             // Add the given courses to this semester through redux
             this.props.handleAddClasses(courses, this.props.semester);
           }}
-        ></AddClass>
+        />
         {this.props.warnings.length > 0 ? (
           <Tooltip title={this.renderTooltip()} placement="top" arrow>
             {this.renderContainer()}
@@ -276,20 +276,23 @@ const mapStateToProps = (state: AppState, ownProps: SemesterBlockProps) => ({
     w => w.termId === ownProps.semester.termId
   ),
   courseWarnings: getCourseWarningsFromState(state, ownProps.semester),
-  currentClassCounter: getCurrentClassCounterFromState(state),
+  currentClassCounter: getCurrentClassCounterFromState(state)!,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   handleAddClasses: (courses: ScheduleCourse[], semester: DNDScheduleTerm) =>
-    dispatch(addClassesAction(courses, semester)),
+    dispatch(addCoursesToActivePlanAction(courses, semester)),
   onDeleteClass: (course: DNDScheduleCourse, semester: DNDScheduleTerm) =>
-    dispatch(removeClassAction(course, semester)),
-  onUndoDeleteClass: () => dispatch(undoRemoveClassAction()),
+    dispatch(removeClassFromActivePlanAction(course, semester)),
+  onUndoDeleteClass: () => dispatch(undoRemoveClassFromActivePlanAction()),
   handleStatusChange: (
     newStatus: Status,
     year: number,
     tappedSemester: SeasonWord
-  ) => dispatch(changeSemesterStatusAction(newStatus, year, tappedSemester)),
+  ) =>
+    dispatch(
+      changeSemesterStatusForActivePlanAction(newStatus, year, tappedSemester)
+    ),
 });
 
 export const SemesterBlock = connect<

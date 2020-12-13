@@ -7,14 +7,30 @@ class AdminControllerTest < ActionController::TestCase
 
   def test_admin_hook__new_user
     params = {
-      email: "test@test.com",
-      nu_id: "001234567",
-      is_advisor: false,
-      major: "Computer Science, BSCS",
-      first_name: "Test",
-      last_name: "Tester",
-      photo_url:
-        "https://prod-web.neu.edu/wasapp/EnterprisePhotoService/PhotoServlet?vid=CCS&er=d1d26b1327817a8d34ce75336e0334cb78f33e63cf907ea82da6d6abcfc15d66244bb291baec1799cf77970e4a519a1cf7d48edaddb97c01",
+      admin: {
+        email: "test@test.com",
+        nu_id: "001234567",
+        is_advisor: false,
+        major: "Computer Science, BSCS",
+        first_name: "Test",
+        last_name: "Tester",
+        courses: [
+          {
+            subject: "CS",
+            course_id: "1200",
+            semester: "202010",
+            completion: "TRANSFER",
+          },
+          {
+            subject: "CS",
+            course_id: "2500",
+            semester: "202010",
+            completion: "PASSED",
+          },
+        ],
+        photo_url:
+          "https://prod-web.neu.edu/wasapp/EnterprisePhotoService/PhotoServlet?vid=CCS&er=d1d26b1327817a8d34ce75336e0334cb78f33e63cf907ea82da6d6abcfc15d66244bb291baec1799cf77970e4a519a1cf7d48edaddb97c01",
+      }
     }
 
     assert_difference "User.count", 1 do
@@ -27,7 +43,7 @@ class AdminControllerTest < ActionController::TestCase
 
     json_response = JSON.parse(response.body)
     assert_equal "http://test.com/api/v1/entry?user_id=#{user_jwt}", json_response['redirect']
-    assert_equal "Test Tester", User.last.username
+    assert_equal "Test Tester", User.last.full_name
   end
 
   def test_admin_hook__existing_user
@@ -37,13 +53,29 @@ class AdminControllerTest < ActionController::TestCase
     photo_url = "https://prod-web.neu.edu/wasapp/EnterprisePhotoService/PhotoServlet?vid=CCS&er=d1d26b1327817a8d34ce75336e0334cb78f33e63cf907ea82da6d6abcfc15d66244bb291baec1799cf77970e4a519a1cf7d48edaddb97c01"
 
     params = {
-      email: "test@test.com",
-      nu_id: "001234567",
-      is_advisor: false,
-      major: "Computer Science, BSCS",
-      first_name: "Test",
-      last_name: "Tester",
-      photo_url: photo_url,
+      admin: {
+        email: "test@test.com",
+        nu_id: "001234567",
+        is_advisor: false,
+        major: "Computer Science, BSCS",
+        first_name: "Test",
+        last_name: "Tester",
+        courses: [
+          {
+            subject: "CS",
+            course_id: "1200",
+            semester: "202010",
+            completion: "TRANSFER",
+          },
+          {
+            subject: "CS",
+            course_id: "2500",
+            semester: "202010",
+            completion: "PASSED",
+          },
+        ],
+        photo_url: photo_url,
+      }
     }
 
     assert_no_difference "User.count" do
@@ -59,7 +91,7 @@ class AdminControllerTest < ActionController::TestCase
 
     user.reload
     assert_equal "test@test.com", user.email
-    assert_equal "Test Tester", user.username
+    assert_equal "Test Tester", user.full_name
     assert_equal false, user.is_advisor
     assert_equal photo_url, user.image_url
   end

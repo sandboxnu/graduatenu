@@ -2,7 +2,6 @@ require 'test_helper'
 
 class UsersControllerTest < ActionController::TestCase
   def test_show__authorized
-    Rails.application.credentials.expects(:secret_key_base).returns('123') # to mock master key in ci tests
     user = create(:user)
 
     @controller.instance_variable_set(:@current_user_id, user.id)
@@ -28,14 +27,13 @@ class UsersControllerTest < ActionController::TestCase
   end
 
   def test_update__authorized
-    Rails.application.credentials.expects(:secret_key_base).returns('123') # to mock master key in ci tests
     user = create(:user)
 
     @controller.instance_variable_set(:@current_user_id, user.id)
 
     params = {
       user: {
-        username: 'new username',
+        full_name: 'new name',
         email: 'new_email@new_email.com',
         major: 'new major',
         coop_cycle: 'new coop_cycle',
@@ -47,9 +45,9 @@ class UsersControllerTest < ActionController::TestCase
     assert_response :ok
 
     json_response = JSON.parse(response.body)
-    assert_equal params[:user][:username], json_response['user']['username']
+    assert_equal params[:user][:full_name], json_response['user']['fullName']
     assert_equal params[:user][:email], json_response['user']['email']
-    assert_equal params[:user][:username], User.last.username
+    assert_equal params[:user][:full_name], User.last.full_name
     assert_equal params[:user][:email], User.last.email
     # can test more keys
   end
@@ -61,7 +59,7 @@ class UsersControllerTest < ActionController::TestCase
 
     params = {
       user: {
-        username: 'new username',
+        full_name: 'new name',
         email: 'new email',
         major: 'new major',
         coop_cycle: 'new coop_cycle',

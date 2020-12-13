@@ -10,8 +10,8 @@ import {
 const ColorButton = withStyles((theme: Theme) => ({
   root: {
     color: "#ffffff",
-    width: "100px",
-    height: "36px",
+    paddingVertical: "8px",
+    paddingHorizontal: "16px",
     backgroundColor: "#EB5757",
     "&:hover": {
       backgroundColor: "#DB4747",
@@ -34,8 +34,8 @@ export function PrimaryButton(props: any) {
       variant="contained"
       color="primary"
       className={classes.margin}
-      disabled={props.disabled}
       onClick={props.onClick}
+      disabled={props.disabled}
     >
       {props.children}
     </ColorButton>

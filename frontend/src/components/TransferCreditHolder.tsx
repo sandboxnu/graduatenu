@@ -2,13 +2,12 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
 import styled from "styled-components";
-import { AddClass } from ".";
 import { ScheduleCourse } from "../../../common/types";
+import { AddClassSearchModal } from "./AddClassSearchModal";
 import {
   addTransferClassAction,
   removeTransferClassAction,
-  undoRemoveClassAction,
-} from "../state/actions/scheduleActions";
+} from "../state/actions/userActions";
 import { AddBlock } from "./ClassBlocks/AddBlock";
 import { NonDraggableClassBlock } from "./ClassBlocks/NonDraggableClassBlock";
 import { UndoDelete } from "./UndoDelete";
@@ -26,7 +25,6 @@ interface TransferCreditsState {
 interface ReduxDispatchTransferCreditsProps {
   handleAddClasses: (courses: ScheduleCourse[]) => void;
   onDeleteClass: (course: ScheduleCourse) => void;
-  onUndoDeleteClass: () => void;
 }
 
 type Props = TransferCreditsProps & ReduxDispatchTransferCreditsProps;
@@ -113,12 +111,9 @@ class TransferCreditsComponent extends React.Component<
   };
 
   undoButtonPressed = () => {
-    this.setState(
-      {
-        snackbarOpen: false,
-      },
-      this.props.onUndoDeleteClass
-    );
+    this.setState({
+      snackbarOpen: false,
+    });
   };
 
   closeSnackBar = () => {
@@ -132,10 +127,10 @@ class TransferCreditsComponent extends React.Component<
     if (this.props.transferCredits == null) {
       return null;
     }
-    return this.props.transferCredits.map((scheduleCourse, index) => {
+    return this.props.transferCredits.map(scheduleCourse => {
       if (!!scheduleCourse) {
         return (
-          <ClassWrapper>
+          <ClassWrapper key={scheduleCourse.subject + scheduleCourse.classId}>
             <NonDraggableClassBlock
               course={scheduleCourse}
               onDelete={this.onDeleteClass.bind(this, scheduleCourse)}
@@ -171,14 +166,14 @@ class TransferCreditsComponent extends React.Component<
           />
           {this.renderContainer()}
           <AddBlock onClick={this.showModal.bind(this)} />
-          <AddClass
+          <AddClassSearchModal
             visible={modalVisible}
             handleClose={this.hideModal.bind(this)}
             handleSubmit={(courses: ScheduleCourse[]) => {
               // Add the given courses through redux
               this.props.handleAddClasses(courses);
             }}
-          ></AddClass>
+          />
         </HolderBody>
       </div>
     );
@@ -190,7 +185,6 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     dispatch(addTransferClassAction(courses)),
   onDeleteClass: (course: ScheduleCourse) =>
     dispatch(removeTransferClassAction(course)),
-  onUndoDeleteClass: () => dispatch(undoRemoveClassAction()),
 });
 
 export const TransferCredits = connect(

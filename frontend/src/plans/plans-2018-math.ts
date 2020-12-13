@@ -741,7 +741,6 @@ export const mathPlans: Schedule[] = [
         isSummerFull: false,
       },
     },
-    id: "0",
   },
   {
     years: [1000, 1001, 1002, 1003, 1004],
@@ -1483,6 +1482,5 @@ export const mathPlans: Schedule[] = [
         isSummerFull: false,
       },
     },
-    id: "1",
   },
 ];

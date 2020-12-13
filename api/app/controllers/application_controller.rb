@@ -2,7 +2,7 @@ class ApplicationController < ActionController::API
     # Prevent CSRF attacks by raising an exception.
     # For APIs, you may want to use :null_session instead.
     #protect_from_forgery with: :null_session
-    
+
     include ActionController::HttpAuthentication::Token::ControllerMethods
 
     before_action :configure_permitted_parameters, if: :devise_controller?
@@ -15,9 +15,8 @@ class ApplicationController < ActionController::API
     private
 
     def configure_permitted_parameters		
-
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:username, :email, :password, :academic_year, :graduation_year, :major, :coop_cycle])		
-     devise_parameter_sanitizer.permit(:account_update, keys: [:email, :password, :password_confirmation, :current_password])		
+        devise_parameter_sanitizer.permit(:sign_up, keys: [:full_name, :email, :password, :academic_year, :graduation_year, :major, :coop_cycle, :catalog_year])
+        devise_parameter_sanitizer.permit(:account_update, keys: [:email, :password, :password_confirmation, :current_password])
     end
 
     #authenticate  user by checking if incoming request has a valid JWT token

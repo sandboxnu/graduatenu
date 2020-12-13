@@ -1,10 +1,6 @@
 import React from "react";
 import { DNDSchedule } from "../../models/types";
-import {
-  Major,
-  IRequiredCourse,
-  ScheduleCourse,
-} from "../../../../common/types";
+import { Major, ScheduleCourse } from "../../../../common/types";
 import styled from "styled-components";
 import { RequirementSection } from ".";
 import {
@@ -13,9 +9,8 @@ import {
 } from "../../utils";
 import { AppState } from "../../state/reducers/state";
 import {
-  getScheduleFromState,
-  getScheduleMajorFromState,
-  getDeclaredMajorFromState,
+  getActivePlanMajorFromState,
+  getActivePlanScheduleFromState,
   getTransferCoursesFromState,
 } from "../../state";
 import { connect, useSelector } from "react-redux";
@@ -25,7 +20,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   background: #f2f2f2;
-  padding: 21px 12px 12px 10px;
+  padding: 0px 12px 12px 10px;
 `;
 
 const MajorTitle = styled.p`
@@ -110,9 +105,9 @@ const SidebarComponent: React.FC<SidebarProps> = ({
 };
 
 const mapStateToProps = (state: AppState) => ({
-  schedule: getScheduleFromState(state),
+  schedule: getActivePlanScheduleFromState(state),
   transferCourses: getTransferCoursesFromState(state),
-  major: getScheduleMajorFromState(state),
+  major: getActivePlanMajorFromState(state),
 });
 
 export const Sidebar = connect(mapStateToProps)(SidebarComponent);

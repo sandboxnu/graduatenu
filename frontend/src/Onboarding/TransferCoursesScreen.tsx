@@ -9,13 +9,13 @@ import {
   Requirement,
 } from "../../../common/types";
 import {
-  getDeclaredMajorFromState,
+  getUserMajorFromState,
   getCompletedRequirementsFromState,
 } from "../state";
 import {
-  setCompletedCourses,
-  setTransferCourses,
-} from "../state/actions/scheduleActions";
+  setCompletedCoursesAction,
+  setTransferCoursesAction,
+} from "../state/actions/userActions";
 import styled from "styled-components";
 import { fetchCourse } from "../api";
 import { withRouter, RouteComponentProps } from "react-router-dom";
@@ -24,7 +24,7 @@ import {
   OnboardingSelectionTemplate,
 } from "./GenericOnboarding";
 import { Grid, Paper } from "@material-ui/core";
-import { AddClassModal } from "../components/AddClassModal";
+import { AddClassSearchModal } from "../components/AddClassSearchModal";
 import { AddBlock } from "../components/ClassBlocks/AddBlock";
 
 const TitleText = styled.div`
@@ -258,27 +258,28 @@ class TransferCoursesComponent extends Component<Props, State> {
             </Paper>
           </Grid>
         </Grid>
-        <AddClassModal
-          schedule={undefined}
+        <AddClassSearchModal
           visible={this.state.modalVisible}
           handleClose={this.hideModal.bind(this)}
-          handleSubmit={courses => this.addOtherCourses(courses)}
-        ></AddClassModal>
+          handleSubmit={(courses: ScheduleCourse[]) =>
+            this.addOtherCourses(courses)
+          }
+        />
       </OnboardingSelectionTemplate>
     );
   }
 }
 
 const mapStateToProps = (state: AppState) => ({
-  major: getDeclaredMajorFromState(state)!,
+  major: getUserMajorFromState(state)!,
   completedRequirements: getCompletedRequirementsFromState(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   setCompletedCourses: (completedCourses: ScheduleCourse[]) =>
-    dispatch(setCompletedCourses(completedCourses)),
+    dispatch(setCompletedCoursesAction(completedCourses)),
   setTransferCourses: (transferCourses: ScheduleCourse[]) =>
-    dispatch(setTransferCourses(transferCourses)),
+    dispatch(setTransferCoursesAction(transferCourses)),
 });
 
 export const TransferCoursesScreen = withRouter(

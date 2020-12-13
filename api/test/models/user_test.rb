@@ -4,9 +4,13 @@
 #
 #  id                     :bigint(8)        not null, primary key
 #  academic_year          :integer(4)
+#  catalog_year           :integer(4)
 #  coop_cycle             :string
+#  courses_completed      :json             default([]), is an Array
+#  courses_transfer       :json             default([]), is an Array
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
+#  full_name              :string
 #  graduation_year        :integer(4)
 #  image_url              :string
 #  is_advisor             :boolean          default(FALSE), not null
@@ -22,8 +26,8 @@
 # Indexes
 #
 #  index_users_on_email                 (email) UNIQUE
+#  index_users_on_full_name             (full_name)
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
-#  index_users_on_username              (username)
 #
 require 'test_helper'
 

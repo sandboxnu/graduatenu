@@ -3,7 +3,6 @@
 exports[`ensure that supported majors are still correct, unchanged. 1`] = `
 Array [
   Object {
-    "id": "0",
     "yearMap": Object {
       "1000": Object {
         "fall": Object {
@@ -448,7 +447,6 @@ Array [
     ],
   },
   Object {
-    "id": "1",
     "yearMap": Object {
       "1000": Object {
         "fall": Object {
@@ -934,7 +932,6 @@ Array [
 exports[`ensure that supported majors are still correct, unchanged. 2`] = `
 Array [
   Object {
-    "id": "0",
     "yearMap": Object {
       "1000": Object {
         "fall": Object {
@@ -1365,7 +1362,6 @@ Array [
     ],
   },
   Object {
-    "id": "1",
     "yearMap": Object {
       "1000": Object {
         "fall": Object {
@@ -1837,7 +1833,6 @@ Array [
 exports[`ensure that supported majors are still correct, unchanged. 3`] = `
 Array [
   Object {
-    "id": "0",
     "yearMap": Object {
       "1000": Object {
         "fall": Object {
@@ -2275,7 +2270,6 @@ Array [
     ],
   },
   Object {
-    "id": "1",
     "yearMap": Object {
       "1000": Object {
         "fall": Object {
@@ -2749,7 +2743,6 @@ Array [
     ],
   },
   Object {
-    "id": "2",
     "yearMap": Object {
       "1000": Object {
         "fall": Object {
@@ -3228,7 +3221,6 @@ Array [
 exports[`ensure that supported majors are still correct, unchanged. 4`] = `
 Array [
   Object {
-    "id": "0",
     "yearMap": Object {
       "1000": Object {
         "fall": Object {
@@ -3652,7 +3644,6 @@ Array [
     ],
   },
   Object {
-    "id": "1",
     "yearMap": Object {
       "1000": Object {
         "fall": Object {
@@ -4119,7 +4110,6 @@ exports[`ensure that supported majors are still correct, unchanged. 5`] = `Array
 exports[`ensure that supported majors are still correct, unchanged. 6`] = `
 Array [
   Object {
-    "id": "0",
     "yearMap": Object {
       "1000": Object {
         "fall": Object {
@@ -4571,7 +4561,6 @@ Array [
     ],
   },
   Object {
-    "id": "1",
     "yearMap": Object {
       "1000": Object {
         "fall": Object {
@@ -5064,7 +5053,6 @@ Array [
 exports[`ensure that supported majors are still correct, unchanged. 7`] = `
 Array [
   Object {
-    "id": "0",
     "yearMap": Object {
       "1000": Object {
         "fall": Object {
@@ -5494,7 +5482,6 @@ Array [
     ],
   },
   Object {
-    "id": "1",
     "yearMap": Object {
       "1000": Object {
         "fall": Object {
@@ -5966,7 +5953,6 @@ Array [
 exports[`ensure that supported majors are still correct, unchanged. 8`] = `
 Array [
   Object {
-    "id": "0",
     "yearMap": Object {
       "1000": Object {
         "fall": Object {
@@ -6411,7 +6397,6 @@ Array [
     ],
   },
   Object {
-    "id": "1",
     "yearMap": Object {
       "1000": Object {
         "fall": Object {
@@ -6892,7 +6877,6 @@ Array [
     ],
   },
   Object {
-    "id": "2",
     "yearMap": Object {
       "1000": Object {
         "fall": Object {
@@ -7378,7 +7362,6 @@ Array [
 exports[`ensure that supported majors are still correct, unchanged. 9`] = `
 Array [
   Object {
-    "id": "0",
     "yearMap": Object {
       "1000": Object {
         "fall": Object {
@@ -7852,7 +7835,6 @@ Array [
     ],
   },
   Object {
-    "id": "1",
     "yearMap": Object {
       "1000": Object {
         "fall": Object {
@@ -8295,7 +8277,6 @@ Array [
 exports[`ensure that supported majors are still correct, unchanged. 10`] = `
 Array [
   Object {
-    "id": "0",
     "yearMap": Object {
       "1000": Object {
         "fall": Object {
@@ -8726,7 +8707,6 @@ Array [
     ],
   },
   Object {
-    "id": "1",
     "yearMap": Object {
       "1000": Object {
         "fall": Object {
@@ -9198,7 +9178,6 @@ Array [
 exports[`ensure that supported majors are still correct, unchanged. 11`] = `
 Array [
   Object {
-    "id": "0",
     "yearMap": Object {
       "1000": Object {
         "fall": Object {
@@ -9665,7 +9644,6 @@ Array [
     ],
   },
   Object {
-    "id": "1",
     "yearMap": Object {
       "1000": Object {
         "fall": Object {
@@ -10101,7 +10079,6 @@ Array [
 exports[`ensure that supported majors are still correct, unchanged. 12`] = `
 Array [
   Object {
-    "id": "0",
     "yearMap": Object {
       "1000": Object {
         "fall": Object {
@@ -10583,7 +10560,6 @@ Array [
     ],
   },
   Object {
-    "id": "1",
     "yearMap": Object {
       "1000": Object {
         "fall": Object {
@@ -11034,7 +11010,6 @@ Array [
 exports[`ensure that supported majors are still correct, unchanged. 13`] = `
 Array [
   Object {
-    "id": "0",
     "yearMap": Object {
       "1000": Object {
         "fall": Object {
@@ -11472,7 +11447,6 @@ Array [
     ],
   },
   Object {
-    "id": "1",
     "yearMap": Object {
       "1000": Object {
         "fall": Object {
@@ -11953,7 +11927,6 @@ exports[`ensure that supported majors are still correct, unchanged. 14`] = `Arra
 exports[`ensure that supported majors are still correct, unchanged. 15`] = `
 Array [
   Object {
-    "id": "0",
     "yearMap": Object {
       "1000": Object {
         "fall": Object {
@@ -12391,7 +12364,6 @@ Array [
     ],
   },
   Object {
-    "id": "1",
     "yearMap": Object {
       "1000": Object {
         "fall": Object {
@@ -12870,7 +12842,6 @@ Array [
 exports[`ensure that supported majors are still correct, unchanged. 16`] = `
 Array [
   Object {
-    "id": "0",
     "yearMap": Object {
       "1000": Object {
         "fall": Object {
@@ -13371,7 +13342,6 @@ Array [
     ],
   },
   Object {
-    "id": "1",
     "yearMap": Object {
       "1000": Object {
         "fall": Object {
@@ -13872,7 +13842,6 @@ Array [
     ],
   },
   Object {
-    "id": "2",
     "yearMap": Object {
       "1000": Object {
         "fall": Object {
@@ -14409,7 +14378,6 @@ Array [
     ],
   },
   Object {
-    "id": "3",
     "yearMap": Object {
       "1000": Object {
         "fall": Object {
@@ -14951,7 +14919,6 @@ Array [
 exports[`ensure that supported majors are still correct, unchanged. 17`] = `
 Array [
   Object {
-    "id": "0",
     "yearMap": Object {
       "1000": Object {
         "fall": Object {
@@ -15418,7 +15385,6 @@ Array [
     ],
   },
   Object {
-    "id": "1",
     "yearMap": Object {
       "1000": Object {
         "fall": Object {

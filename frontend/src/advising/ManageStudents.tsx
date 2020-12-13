@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { getStudents } from "../services/AdvisorService";
 import { Search } from "../components/common/Search";
 import LinearProgress from "@material-ui/core/LinearProgress";
-import CircularProgress from "@material-ui/core/CircularProgress";
 import { getAuthToken } from "../utils/auth-helpers";
 
 const Container = styled.div`
@@ -89,7 +88,7 @@ interface StudentsAPI {
 }
 
 interface StudentProps {
-  username: string;
+  fullName: string;
   nuId: string;
   email: string;
 }
@@ -102,6 +101,7 @@ const ManageStudentsComponent: React.FC = (props: any) => {
       <Search
         placeholder="Search by name, email, or NUID"
         onEnter={setSearchQuery}
+        isSmall={false}
       />
       <StudentsList searchQuery={searchQuery} />
     </Container>
@@ -145,7 +145,7 @@ const StudentsList = (props: StudentsListProps) => {
         ) : (
           students.map(student => (
             <Student
-              username={student.username}
+              fullName={student.fullName}
               nuId={student.nuId}
               email={student.email}
               key={student.nuId}
@@ -171,7 +171,7 @@ const StudentsList = (props: StudentsListProps) => {
 const Student = (props: StudentProps) => {
   return (
     <StudentContainer>
-      {props.username}
+      {props.fullName}
       <StudentEmailNUIDContainer>
         {props.email + " | " + props.nuId}
       </StudentEmailNUIDContainer>

@@ -109,7 +109,6 @@ function createSchedule(
   const schedule: Schedule = {
     years: [],
     yearMap: {},
-    id: "excel-schedule",
   };
 
   const years = createYears(fall, spring, summerOne, summerTwo);

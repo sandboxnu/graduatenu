@@ -1,16 +1,15 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
 import styled from "styled-components";
 import { Button, Theme, withStyles } from "@material-ui/core";
 import titlePicture from "../assets/onboarding-title.png";
 import picture1 from "../assets/onboarding-1.png";
 import picture2 from "../assets/onboarding-2.png";
 import picture3 from "../assets/onboarding-3.png";
-import { connect } from "react-redux";
-import { getFullNameFromState } from "../state";
-import { AppState } from "../state/reducers/state";
 import { NORTHEASTERN_RED } from "../constants";
-import { simulateKhouryLogin } from "../services/UserService";
+import {
+  simulateKhouryAdvisorLogin,
+  simulateKhouryStudentLogin,
+} from "../services/UserService";
 
 const Header = styled.div`
   display: flex;
@@ -135,7 +134,7 @@ interface Props {
   fullName: string;
 }
 
-class OnboardingComponent extends React.Component<Props> {
+export class Onboarding extends React.Component<Props> {
   dev: boolean;
 
   constructor(props: Props) {
@@ -147,8 +146,14 @@ class OnboardingComponent extends React.Component<Props> {
     this.dev = process.env.NODE_ENV === "development";
   }
 
-  onDevClick() {
-    simulateKhouryLogin().then(response => {
+  onDevStudentClick() {
+    simulateKhouryStudentLogin().then(response => {
+      window.location.href = response.redirect;
+    });
+  }
+
+  onDevAdvisorClick() {
+    simulateKhouryAdvisorLogin().then(response => {
       window.location.href = response.redirect;
     });
   }
@@ -198,12 +203,20 @@ class OnboardingComponent extends React.Component<Props> {
               <ColorButton variant="contained">Get Started</ColorButton>
             </a>
             {this.dev && (
-              <ColorButton
-                variant="contained"
-                onClick={this.onDevClick.bind(this)}
-              >
-                Dev Bypass
-              </ColorButton>
+              <>
+                <ColorButton
+                  variant="contained"
+                  onClick={this.onDevStudentClick.bind(this)}
+                >
+                  Dev Bypass (Student)
+                </ColorButton>
+                <ColorButton
+                  variant="contained"
+                  onClick={this.onDevAdvisorClick.bind(this)}
+                >
+                  Dev Bypass (Advisor)
+                </ColorButton>
+              </>
             )}
           </LoginButtonContainer>
         </Header>
@@ -255,14 +268,3 @@ class OnboardingComponent extends React.Component<Props> {
     );
   }
 }
-
-const mapStateToProps = (state: AppState) => ({
-  fullName: getFullNameFromState(state),
-});
-
-/**
- * Convert this React component to a component that's connected to the redux store.
- * When rendering the connecting component, the props assigned in mapStateToProps, do not need to
- * be passed down as props from the parent component.
- */
-export const Onboarding = connect(mapStateToProps)(OnboardingComponent);

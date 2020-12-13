@@ -8,6 +8,7 @@ import {
   INEUPrereqCourse,
   ICourseRange,
   IOrCourse,
+  TransferableExam,
 } from "../../../common/types";
 
 /**
@@ -54,6 +55,7 @@ export interface ScheduleSlice {
   courseWarnings: CourseWarning[];
   major: string;
   coopCycle: string;
+  catalogYear?: number;
 }
 
 /**
@@ -150,14 +152,19 @@ export interface CourseTakenTracker {
  * A model for data pertaining to a User object.
  */
 export interface IUserData {
+  id: number;
   email: string;
-  username: string;
-  password: string;
-  academic_year?: number;
-  graduation_year?: number;
-  major?: string;
-  coop_cycle?: string;
-  nu_id?: string;
+  fullName: string;
+  academicYear: number | null;
+  graduationYear: number | null;
+  major: string | null;
+  coopCycle: string | null;
+  nuId: string;
+  isAdvisor: boolean;
+  examCredits: TransferableExam[];
+  transferCourses: ScheduleCourse[];
+  completedCourses: ScheduleCourse[];
+  catalogYear?: number;
 }
 
 /**
@@ -175,13 +182,15 @@ export interface ILoginData {
 export interface IPlanData {
   id: number;
   name: string;
-  link_sharing_enabled: boolean;
+  linkSharingEnabled: boolean;
   schedule: DNDSchedule;
   major: string;
-  coop_cycle: string;
+  coopCycle: string;
   warnings: IWarning[];
-  course_warnings: CourseWarning[];
-  course_counter: number;
+  courseWarnings: CourseWarning[];
+  courseCounter: number;
+  lastViewed: Date;
+  catalogYear?: number;
 }
 
 /**
@@ -193,9 +202,9 @@ export interface ICreatePlanData {
   schedule: DNDSchedule;
   major: string;
   coop_cycle: string;
-  warnings: IWarning[];
-  course_warnings: CourseWarning[];
   course_counter: number;
+  catalog_year?: number;
+  last_viewed?: Date;
 }
 /*
  * Data needed to update a user
@@ -210,12 +219,15 @@ export interface IUpdateUser {
  */
 export interface IUpdateUserData {
   email?: string;
-  major?: string;
-  username?: string;
+  major?: string | null;
+  full_name?: string;
   academic_year?: number;
   graduation_year?: number;
-  coop_cycle?: string;
+  coop_cycle?: string | null;
   nu_id?: string;
+  catalog_year?: number;
+  courses_transfer?: ISimplifiedCourseDataAPI[];
+  courses_completed?: ISimplifiedCourseDataAPI[];
 }
 
 /**
@@ -225,6 +237,24 @@ export interface IUpdateUserPassword {
   old_password: string;
   new_password: string;
   confirm_password: string;
+}
+
+/**
+ * A model for simplified course data
+ */
+export interface ISimplifiedCourseData {
+  subject: string;
+  classId: string | number;
+}
+
+/**
+ * A model for simplified course data for API
+ */
+export interface ISimplifiedCourseDataAPI {
+  subject: string;
+  course_id: string;
+  semester?: string;
+  completion?: string;
 }
 
 /** ------------------------------------------------------------------------
