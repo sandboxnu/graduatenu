@@ -121,21 +121,18 @@ const ScheduleComponent: React.FC<ScheduleProps> = ({
   );
 };
 
-export const NonEditableSchedule: React.FC<NonEditableProps> = ({
-  schedule,
-}) => {
+export const NonEditableSchedule: React.FC = () => {
   const { activePlan, transferCredits } = useSelector(
     (state: AppState) => ({
-      activePlan: getActivePlanFromState(state)
-        ? getActivePlanFromState(state).schedule
-        : undefined,
+      activePlan: getActivePlanFromState(state)?.schedule,
+
       transferCredits: getTransferCoursesFromState(state),
     }),
     shallowEqual
   );
   return (
     <>
-      <ScheduleComponent schedule={schedule} isEditable={false} />
+      <ScheduleComponent schedule={activePlan} isEditable={false} />
       <TransferCredits transferCredits={transferCredits} isEditable={false} />
     </>
   );

@@ -176,7 +176,7 @@ const TransferableCreditScreen: React.FC = () => {
           token: token,
         },
         {
-          major: major ? major.name : undefined,
+          major: major?.name,
           academic_year: academicYear,
           graduation_year: graduationYear,
           coop_cycle: coopCycle,
@@ -203,7 +203,7 @@ const TransferableCreditScreen: React.FC = () => {
         name: "Plan 1",
         link_sharing_enabled: false,
         schedule: schedule,
-        major: major ? major.name : "",
+        major: major?.name || "",
         coop_cycle: coopCycle ? coopCycle : "None",
         course_counter: courseCounter,
         catalog_year: catalogYear,
