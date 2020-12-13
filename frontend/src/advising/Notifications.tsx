@@ -8,7 +8,7 @@ const NotificationsComponent: React.FC = (props: any) => {
   const dispatch = useDispatch();
   return (
     <div style={{ margin: 30 }}>
-      <NonEditableSchedule schedule={mockData}></NonEditableSchedule>
+      <NonEditableSchedule></NonEditableSchedule>
     </div>
   );
 };
