@@ -199,7 +199,7 @@ export interface IPlanData {
   courseCounter: number;
   lastViewed: Date;
   catalogYear?: number;
-  approvedPlan: DNDSchedule;
+  approvedSchedule: DNDSchedule;
 }
 
 /**
@@ -214,6 +214,7 @@ export interface ICreatePlanData {
   course_counter: number;
   catalog_year?: number;
   last_viewed?: Date;
+  approved_schedule?: any;
 }
 /*
  * Data needed to update a user

@@ -72,7 +72,6 @@ export const deletePlanForUser = (
  */
 export const updatePlanForUser = (
   userId: number,
-  userToken: string,
   planId: number,
   plan: Partial<ICreatePlanData>
 ) =>
@@ -81,19 +80,6 @@ export const updatePlanForUser = (
     body: JSON.stringify({ plan: plan }),
     headers: {
       "Content-Type": "application/json",
-      Authorization: "Token " + userToken,
-    },
-  }).then(response => response.json());
-
-export const approvePlan = (
-  userId: number,
-  planId: number,
-  approvedPlan: any
-) =>
-  fetch(`/api/users/${userId}/plans/${planId}/approve`, {
-    method: "PUT",
-    body: JSON.stringify({ approved_plan: approvedPlan }),
-    headers: {
       Authorization: "Token " + getAuthToken(),
     },
   }).then(response => response.json());

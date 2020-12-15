@@ -1,11 +1,10 @@
 class PlansController < ApplicationController
-
   before_action :set_user
   before_action :set_user_plan, only: [:show, :update, :destroy]
 
   # returns all the plans
   def index
-    if authorized || @user.is_advisor
+    if authorized
       @plans = @user.plans
     else
       render json: {error: "Unauthorized."}, status: :unprocessable_entity
@@ -50,6 +49,9 @@ class PlansController < ApplicationController
     if authorized
       if @plan
         @plan.update(plan_params) #same body + updated fields in request body
+        if @user.is_advisor
+          @plan.update(approve_plan_params)
+        end
         render :show
       else
         render json: {error: "No such plan."}, status: :unprocessable_entity
@@ -72,7 +74,7 @@ class PlansController < ApplicationController
       render json: {error: "Unauthorized."}, status: :unprocessable_entity
     end
   end
-
+  
   private
 
   #parameters
@@ -80,6 +82,10 @@ class PlansController < ApplicationController
      # (schedule: {}) allows you to store an arbitrary hash with unspecified schema
     params.require(:plan).permit(:name, :link_sharing_enabled, :major, :coop_cycle, :course_counter, :catalog_year, :last_viewed,
     warnings: [:message, :termId], course_warnings: [:message, :termId, :subject, :classId], schedule: {})
+  end
+
+  def approve_plan_params
+    params.require(:plan).permit(approved_schedule: {})
   end
 
   #sets the current user
@@ -100,6 +106,6 @@ class PlansController < ApplicationController
   end
 
   def authorized
-    @current_user_id == Integer(params[:user_id])
+    @current_user_id == Integer(params[:user_id]) || @user.is_advisor
   end
 end

@@ -380,9 +380,9 @@ class HomeComponent extends React.Component<Props> {
 
   async updatePlan(showAlert = true) {
     const token = getAuthToken();
+    console.log(JSON.stringify(this.props.activePlan));
     await updatePlanForUser(
       this.props.userId!,
-      token,
       this.props.activePlan!.id,
       this.props.activePlan!
     ).then((plan: IPlanData) => {
