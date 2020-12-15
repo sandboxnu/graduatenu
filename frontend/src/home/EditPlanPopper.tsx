@@ -2,14 +2,18 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Popper from "@material-ui/core/Popper";
 import { Autocomplete } from "@material-ui/lab";
-import { TextField, Button, Tooltip } from "@material-ui/core";
+import { TextField, Button } from "@material-ui/core";
 import { EditPlanButton } from "./EditPlanButton";
 import styled from "styled-components";
 import { batch, connect } from "react-redux";
 import { AppState } from "../state/reducers/state";
 import { Dispatch } from "redux";
 import { DNDSchedule } from "../models/types";
-import { getActivePlanFromState, getUserCatalogYearFromState } from "../state";
+import {
+  getAcademicYearFromState,
+  getActivePlanFromState,
+  getGraduationYearFromState,
+} from "../state";
 import { IPlanData } from "../models/types";
 import { Major, Schedule } from "../../../common/types";
 import {
@@ -17,16 +21,22 @@ import {
   getPlansFromState,
   getTakenCreditsFromState,
   getUserFullNameFromState,
-  getActivePlanCatalogYearFromState
+  getActivePlanCatalogYearFromState,
 } from "../state";
-import { planToString, scheduleHasClasses } from "../utils";
+import {
+  clearSchedule,
+  generateInitialScheduleFromExistingPlan,
+  getStandingFromCompletedCourses,
+  planToString,
+  scheduleHasClasses,
+} from "../utils";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
-import { getStandingFromCompletedCourses } from "../utils";
 import {
   setActivePlanCoopCycleAction,
   setActivePlanMajorAction,
-  setActivePlanScheduleAction,
-  setActivePlanCatalogYearAction
+  setActivePlanDNDScheduleAction,
+  setActivePlanCatalogYearAction,
+  setCurrentClassCounterForActivePlanAction,
 } from "../state/actions/userPlansActions";
 
 const PlanPopper = styled(Popper)<any>`
@@ -81,7 +91,7 @@ const MajorTextField = styled(TextField)<any>`
 const ButtonContainer = styled.div`
   margin-top: 20px;
   height: 40px;
-`
+`;
 
 const SetButton = styled(Button)<any>`
   background: #e0e0e0;
@@ -96,16 +106,21 @@ interface ReduxStoreEditPlanProps {
   creditsTaken: number;
   name: string;
   catalogYear?: number;
+  academicYear: number;
+  graduationYear: number;
 }
 
 interface ReduxDispatchEditPlanProps {
   setActivePlanCoopCycle: (
     coopCycle: string,
+    academicYear: number,
+    graduationYear: number,
     allPlans?: Record<string, Schedule[]>
   ) => void;
-  setActivePlanSchedule: (schedule: Schedule) => void;
+  setActivePlanDNDSchedule: (schedule: DNDSchedule) => void;
   setActivePlanMajor: (major: string) => void;
   setActivePlanCatalogYear: (number: number) => void;
+  setCurrentClassCounter: (counter: number) => void;
 }
 
 type Props = ReduxStoreEditPlanProps & ReduxDispatchEditPlanProps;
@@ -147,7 +162,11 @@ export class EditPlanPopperComponent extends React.Component<
   onChooseMajor(event: React.SyntheticEvent<{}>, value: any) {
     batch(() => {
       this.props.setActivePlanMajor(value);
-      this.props.setActivePlanCoopCycle("");
+      this.props.setActivePlanCoopCycle(
+        "",
+        this.props.academicYear,
+        this.props.graduationYear
+      );
     });
   }
 
@@ -156,7 +175,12 @@ export class EditPlanPopperComponent extends React.Component<
    */
   onChoosePlan(event: React.SyntheticEvent<{}>, value: any) {
     const chosenCoopCycle = value === "None" ? "" : value;
-    this.props.setActivePlanCoopCycle(chosenCoopCycle, this.props.allPlans);
+    this.props.setActivePlanCoopCycle(
+      chosenCoopCycle,
+      this.props.academicYear,
+      this.props.graduationYear,
+      this.props.allPlans
+    );
   }
 
   onChangeCatalogYear(event: React.SyntheticEvent<{}>, value: any) {
@@ -236,10 +260,7 @@ export class EditPlanPopperComponent extends React.Component<
   renderSetClassesButton() {
     return (
       <ButtonContainer>
-        <SetButton
-          variant="contained"
-          onClick={() => this.addClassesFromPOS()}
-        >
+        <SetButton variant="contained" onClick={() => this.addClassesFromPOS()}>
           Set Example Schedule
         </SetButton>
       </ButtonContainer>
@@ -247,10 +268,17 @@ export class EditPlanPopperComponent extends React.Component<
   }
 
   addClassesFromPOS() {
-    const schedule = this.props.allPlans[this.props.plan.major].find(
-      (p: Schedule) => planToString(p) === this.props.plan.coopCycle!
+    const [schedule, counter] = generateInitialScheduleFromExistingPlan(
+      this.props.academicYear,
+      this.props.graduationYear,
+      this.props.plan.major,
+      this.props.plan.coopCycle!,
+      this.props.allPlans
     );
-    this.props.setActivePlanSchedule(schedule!);
+    batch(() => {
+      this.props.setActivePlanDNDSchedule(schedule!);
+      this.props.setCurrentClassCounter(counter);
+    });
   }
 
   renderClearScheduleButton() {
@@ -259,7 +287,7 @@ export class EditPlanPopperComponent extends React.Component<
         <SetButton
           variant="contained"
           style={{ float: "right" }}
-          onClick={() => this.clearSchedule()}
+          onClick={() => this.onClearSchedule()}
         >
           Clear Schedule
         </SetButton>
@@ -267,10 +295,13 @@ export class EditPlanPopperComponent extends React.Component<
     );
   }
 
-  clearSchedule() {
-    this.props.setActivePlanCoopCycle(
-      this.props.plan.coopCycle || "",
-      this.props.allPlans
+  onClearSchedule() {
+    this.props.setActivePlanDNDSchedule(
+      clearSchedule(
+        this.props.plan.schedule,
+        this.props.academicYear,
+        this.props.graduationYear
+      )
     );
   }
 
@@ -310,12 +341,12 @@ export class EditPlanPopperComponent extends React.Component<
               {this.renderCatalogYearDropdown()}
               {!!this.props.plan.catalogYear && this.renderMajorDropDown()}
               {!!this.props.plan.major &&
-                !!this.props.plan.coopCycle &&
-                  !scheduleHasClasses(this.props.plan.schedule)
-                    ? this.renderSetClassesButton()
-                    : !!this.props.plan.major &&
-                      !!this.props.plan.coopCycle &&
-                      this.renderClearScheduleButton()}
+              !!this.props.plan.coopCycle &&
+              !scheduleHasClasses(this.props.plan.schedule)
+                ? this.renderSetClassesButton()
+                : !!this.props.plan.major &&
+                  !!this.props.plan.coopCycle &&
+                  this.renderClearScheduleButton()}
             </PlanCard>
           </ClickAwayListener>
         </PlanPopper>
@@ -330,20 +361,34 @@ const mapStateToProps = (state: AppState) => ({
   allPlans: getPlansFromState(state),
   creditsTaken: getTakenCreditsFromState(state),
   name: getUserFullNameFromState(state),
-  catalogYear: getActivePlanCatalogYearFromState(state)
+  catalogYear: getActivePlanCatalogYearFromState(state),
+  academicYear: getAcademicYearFromState(state)!,
+  graduationYear: getGraduationYearFromState(state)!,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   setActivePlanCoopCycle: (
     coopCycle: string,
+    academicYear: number,
+    graduationYear: number,
     allPlans?: Record<string, Schedule[]>
-  ) => dispatch(setActivePlanCoopCycleAction(coopCycle, allPlans)),
-  setActivePlanSchedule: (schedule: Schedule) =>
-    dispatch(setActivePlanScheduleAction(schedule)),
+  ) =>
+    dispatch(
+      setActivePlanCoopCycleAction(
+        coopCycle,
+        academicYear,
+        graduationYear,
+        allPlans
+      )
+    ),
+  setActivePlanDNDSchedule: (schedule: DNDSchedule) =>
+    dispatch(setActivePlanDNDScheduleAction(schedule)),
   setActivePlanMajor: (major: string) =>
     dispatch(setActivePlanMajorAction(major)),
   setActivePlanCatalogYear: (year: number) =>
-    dispatch(setActivePlanCatalogYearAction(year))
+    dispatch(setActivePlanCatalogYearAction(year)),
+  setCurrentClassCounter: (counter: number) =>
+    dispatch(setCurrentClassCounterForActivePlanAction(counter)),
 });
 
 export const EditPlanPopper = connect<

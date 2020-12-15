@@ -164,7 +164,12 @@ export const userPlansReducer = (
         return draft;
       }
       case getType(setActivePlanCoopCycleAction): {
-        const { coopCycle, allPlans } = action.payload;
+        const {
+          coopCycle,
+          allPlans,
+          academicYear,
+          graduationYear,
+        } = action.payload;
 
         if (!allPlans) {
           return draft;
@@ -186,7 +191,11 @@ export const userPlansReducer = (
         );
 
         // remove all classes
-        draft.plans[draft.activePlan!].schedule = clearSchedule(newSchedule);
+        draft.plans[draft.activePlan!].schedule = clearSchedule(
+          newSchedule,
+          academicYear,
+          graduationYear
+        );
         draft.plans[draft.activePlan!].courseCounter = 0;
 
         // clear all warnings
