@@ -7,6 +7,7 @@ import { getAuthToken } from "../utils/auth-helpers";
 import {
   setActivePlanStatusAction,
   updateActivePlanAction,
+  updateActivePlanTimestampAction,
 } from "../state/actions/userPlansActions";
 import { useCallback, useEffect, useRef } from "react";
 import { convertPlanToUpdatePlanData } from "../utils/plan-helpers";
@@ -74,7 +75,7 @@ export const AutoSavePlan: React.FC = () => {
       convertPlanToUpdatePlanData(activePlan)
     ).then(response => {
       batch(() => {
-        dispatch(updateActivePlanAction(response.plan));
+        dispatch(updateActivePlanTimestampAction(response.plan.updatedAt));
         dispatch(setActivePlanStatusAction("Up To Date"));
       });
     });

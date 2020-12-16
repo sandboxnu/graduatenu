@@ -225,7 +225,7 @@ class HomeComponent extends React.Component<Props> {
     });
   }
 
-  async updatePlan(showAlert = true) {
+  async updatePlan() {
     const token = getAuthToken();
     await updatePlanForUser(
       this.props.userId!,

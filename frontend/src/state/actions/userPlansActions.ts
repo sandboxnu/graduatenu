@@ -1,3 +1,4 @@
+import { create } from "lodash";
 import { createAction } from "typesafe-actions";
 import {
   Schedule,
@@ -35,6 +36,11 @@ export const setUserPlansAction = createAction(
 export const updateActivePlanAction = createAction(
   "userPlans/UPDATE_ACTIVE_PLAN",
   (plan: Partial<IPlanData>) => ({ plan })
+)();
+
+export const updateActivePlanTimestampAction = createAction(
+  "userPlans/UPDATE_ACTIVE_PLAN_TIMESTAMP",
+  (timestamp: Date) => ({ timestamp })
 )();
 
 export const deletePlan = createAction(

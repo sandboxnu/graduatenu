@@ -4,6 +4,7 @@ import {
   toggleYearExpandedForActivePlanAction,
   setActivePlanCatalogYearAction,
   setActivePlanStatusAction,
+  updateActivePlanTimestampAction,
 } from "./../actions/userPlansActions";
 import { DNDSchedule, IPlanData } from "../../models/types";
 import produce from "immer";
@@ -94,6 +95,10 @@ export const userPlansReducer = (
           ...plan,
         };
 
+        return draft;
+      }
+      case getType(updateActivePlanTimestampAction): {
+        draft.plans[draft.activePlan!].updatedAt = action.payload.timestamp;
         return draft;
       }
       case getType(addNewPlanAction): {
