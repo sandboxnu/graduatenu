@@ -19,4 +19,6 @@ export const getAdvisors = () =>
     headers: {
       Authorization: "Token " + getAuthToken(),
     },
-  }).then(response => response.json());
+  })
+    .then(response => response.json())
+    .catch(error => console.log(error));

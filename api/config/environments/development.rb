@@ -4,6 +4,16 @@ Rails.application.configure do
   ENV['ROOT_URL'] = "http://localhost:3001"
   ENV['FRONTEND_URL'] = "http://localhost:3000"
 
+  ActionMailer::Base.smtp_settings = {
+  :user_name => 'apikey',
+  :password => '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',
+  :domain => 'itsmearun98@gmail.com',
+  :address => 'smtp.sendgrid.net',
+  :port => 587,
+  :authentication => :plain,
+  :enable_starttls_auto => true
+}
+
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.

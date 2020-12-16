@@ -102,10 +102,10 @@ export const simulateKhouryAdvisorLogin = () =>
   fetch(`/api/v1/admin_hook`, {
     method: "POST",
     body: JSON.stringify({
-      email: "a.ressing@northeastern.edu",
+      email: "jeevanantham.a@northeastern.edu",
       is_advisor: true,
-      first_name: "Ali",
-      last_name: "Ressing",
+      first_name: "Arun",
+      last_name: "test",
       photo_url:
         "https://prod-web.neu.edu/wasapp/EnterprisePhotoService/PhotoServlet?vid=CCS&er=d1d26b1327817a8d34ce75336e0334cb78f33e63cf907ea82da6d6abcfc15d66244bb291baec1799cf77970e4a519a1cf7d48edaddb97c01",
     }),

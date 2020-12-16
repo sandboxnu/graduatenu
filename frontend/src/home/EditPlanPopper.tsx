@@ -17,7 +17,7 @@ import {
   getPlansFromState,
   getTakenCreditsFromState,
   getUserFullNameFromState,
-  getActivePlanCatalogYearFromState
+  getActivePlanCatalogYearFromState,
 } from "../state";
 import { planToString, scheduleHasClasses } from "../utils";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
@@ -26,7 +26,7 @@ import {
   setActivePlanCoopCycleAction,
   setActivePlanMajorAction,
   setActivePlanScheduleAction,
-  setActivePlanCatalogYearAction
+  setActivePlanCatalogYearAction,
 } from "../state/actions/userPlansActions";
 
 const PlanPopper = styled(Popper)<any>`
@@ -81,7 +81,7 @@ const MajorTextField = styled(TextField)<any>`
 const ButtonContainer = styled.div`
   margin-top: 20px;
   height: 40px;
-`
+`;
 
 const SetButton = styled(Button)<any>`
   background: #e0e0e0;
@@ -236,10 +236,7 @@ export class EditPlanPopperComponent extends React.Component<
   renderSetClassesButton() {
     return (
       <ButtonContainer>
-        <SetButton
-          variant="contained"
-          onClick={() => this.addClassesFromPOS()}
-        >
+        <SetButton variant="contained" onClick={() => this.addClassesFromPOS()}>
           Set Example Schedule
         </SetButton>
       </ButtonContainer>
@@ -262,6 +259,22 @@ export class EditPlanPopperComponent extends React.Component<
           onClick={() => this.clearSchedule()}
         >
           Clear Schedule
+        </SetButton>
+      </ButtonContainer>
+    );
+  }
+
+  renderResetToApprovedButton() {
+    return (
+      <ButtonContainer>
+        <SetButton
+          variant="contained"
+          style={{ float: "right" }}
+          onClick={() =>
+            this.props.setActivePlanSchedule(this.props.plan.approvedSchedule)
+          }
+        >
+          Reset to approved
         </SetButton>
       </ButtonContainer>
     );
@@ -310,12 +323,16 @@ export class EditPlanPopperComponent extends React.Component<
               {this.renderCatalogYearDropdown()}
               {!!this.props.plan.catalogYear && this.renderMajorDropDown()}
               {!!this.props.plan.major &&
+              !!this.props.plan.coopCycle &&
+              !scheduleHasClasses(this.props.plan.schedule)
+                ? this.renderSetClassesButton()
+                : !!this.props.plan.major &&
+                  !!this.props.plan.coopCycle &&
+                  this.renderClearScheduleButton()}
+              {!!this.props.plan.major &&
                 !!this.props.plan.coopCycle &&
-                  !scheduleHasClasses(this.props.plan.schedule)
-                    ? this.renderSetClassesButton()
-                    : !!this.props.plan.major &&
-                      !!this.props.plan.coopCycle &&
-                      this.renderClearScheduleButton()}
+                this.props.plan.approvedSchedule &&
+                this.renderResetToApprovedButton()}
             </PlanCard>
           </ClickAwayListener>
         </PlanPopper>
@@ -330,7 +347,7 @@ const mapStateToProps = (state: AppState) => ({
   allPlans: getPlansFromState(state),
   creditsTaken: getTakenCreditsFromState(state),
   name: getUserFullNameFromState(state),
-  catalogYear: getActivePlanCatalogYearFromState(state)
+  catalogYear: getActivePlanCatalogYearFromState(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
@@ -343,7 +360,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   setActivePlanMajor: (major: string) =>
     dispatch(setActivePlanMajorAction(major)),
   setActivePlanCatalogYear: (year: number) =>
-    dispatch(setActivePlanCatalogYearAction(year))
+    dispatch(setActivePlanCatalogYearAction(year)),
 });
 
 export const EditPlanPopper = connect<

@@ -126,4 +126,4 @@ yarn-error.log*
 !index.html
 
 .idea/
-graduatenu.code-workspace
+graduatenu.code-workspacesendgrid.env

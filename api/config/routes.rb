@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       resources :plans
     end
 
+    post 'mail/request_approval', to: 'mail#send_request_approval_email'
     post 'v1/admin_hook', to: 'admin#admin_hook'
     get 'v1/entry', to: 'admin#entry'
   end

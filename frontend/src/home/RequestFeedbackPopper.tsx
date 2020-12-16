@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
 import { Button, TextField, Tooltip } from "@material-ui/core";
@@ -8,6 +9,10 @@ import { Autocomplete } from "@material-ui/lab";
 import { PrimaryButton } from "../components/common/PrimaryButton";
 import { getAdvisors } from "../services/AdvisorService";
 import { IUserDataAbr } from "../models/types";
+import { getActivePlanFromState, getUserFromState } from "../state";
+import { AppState } from "../state/reducers/state";
+import { useDebouncedEffect } from "../utils/useDebouncedEffect";
+import { sendEmail } from "../services/EmailService";
 
 const SubTitle = styled.div`
   font-size: 14px;
@@ -23,18 +28,47 @@ const AdvisorDropdownContainer = styled.div`
 const EMPTY_ADVISOR_LIST: IUserDataAbr[] = [];
 
 export const RequestFeedbackPopper: React.FC = () => {
+  const { currentSchedule, approvedSchedule, planId, email } = useSelector(
+    (state: AppState) => ({
+      currentSchedule: getActivePlanFromState(state).schedule,
+      approvedSchedule: getActivePlanFromState(state).approvedSchedule,
+      planId: getActivePlanFromState(state).id,
+      email: getUserFromState(state).email,
+    })
+  );
+
   const [isOpen, setIsOpen] = useState(false);
-  // TODO: isApproved should be set based on if this is an approved plan, and if it is, if there has been any changes to this plan.
-  // isApproved might not even have to be a state val.
-  const [isApproved, setIsApproved] = useState(false);
   const [selectedAdvisor, setSelectedAdvisor] = useState("");
+  const [isApproved, setIsApproved] = useState(
+    JSON.stringify(currentSchedule) == JSON.stringify(approvedSchedule)
+  );
   const [advisors, setAdvisors] = useState(EMPTY_ADVISOR_LIST);
+
+  useDebouncedEffect(
+    () =>
+      setIsApproved(
+        JSON.stringify(currentSchedule) == JSON.stringify(approvedSchedule)
+      ),
+    1000,
+    [currentSchedule, approvedSchedule]
+  );
 
   useEffect(() => {
     getAdvisors()
       .then(response => setAdvisors(response.advisors))
       .catch(err => console.log(err));
   }, []);
+
+  const findAdvisorEmail = (name: string): string => {
+    let advisorEmail = "";
+    advisors.forEach((advisor: IUserDataAbr) => {
+      if (advisor.fullName === name) {
+        advisorEmail = advisor.email;
+        return;
+      }
+    });
+    return advisorEmail;
+  };
 
   const ApprovalStatusButton = () => {
     const icon = isApproved ? <CheckCircleIcon /> : <CheckCircleOutlineIcon />;
@@ -89,8 +123,9 @@ export const RequestFeedbackPopper: React.FC = () => {
     return (
       <PrimaryButton
         disabled={selectedAdvisor === ""}
-        onClick={() => {
+        onClick={async () => {
           // Todo: Trigger backend API call
+          await sendEmail(email, findAdvisorEmail(selectedAdvisor), planId);
           setIsOpen(false);
         }}
       >
