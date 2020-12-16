@@ -79,6 +79,8 @@ class PlansController < ApplicationController
     end
     if @plan
       @plan.update(approve_plan_params)
+      student = User.find_by(id: params[:user_id])
+      NotificationMailer.approved_email(@user, student, @plan).deliver
       render :show
     else
       render json: {error: "No such plan."}, status: :unprocessable_entity
