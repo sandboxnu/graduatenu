@@ -190,8 +190,8 @@ interface ToastHomeProps {
 
 interface ReduxStoreHomeProps {
   transferCredits: ScheduleCourse[];
-  major?: string;
-  coopCycle?: string;
+  major: string | null;
+  coopCycle: string | null;
   warnings: IWarning[];
   userId: number;
   majors: Major[];
