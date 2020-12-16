@@ -21,13 +21,17 @@ import {
   getCompletedCoursesFromState,
   getTransferCoursesFromState,
   getUserCatalogYearFromState,
+  getPlansFromState,
 } from "../state";
 import { AppState } from "../state/reducers/state";
 import { addNewPlanAction } from "../state/actions/userPlansActions";
 import { updateUser } from "../services/UserService";
 import { getAuthToken } from "../utils/auth-helpers";
 import { getSimplifiedCourseData } from "../utils/completed-courses-helpers";
-import { generateInitialSchedule } from "../utils";
+import {
+  generateInitialSchedule,
+  generateInitialScheduleNoCoopCycle,
+} from "../utils";
 
 interface TransferableExamGroupComponentProps {
   readonly transferableExamGroup: TransferableExamGroup;
@@ -147,6 +151,7 @@ const TransferableCreditScreen: React.FC = () => {
     catalogYear,
     completedCourses,
     transferCourses,
+    allPlans,
   } = useSelector(
     (state: AppState) => ({
       userId: getUserIdFromState(state),
@@ -157,6 +162,7 @@ const TransferableCreditScreen: React.FC = () => {
       transferCourses: getTransferCoursesFromState(state),
       completedCourses: getCompletedCoursesFromState(state),
       catalogYear: getUserCatalogYearFromState(state),
+      allPlans: getPlansFromState(state),
     }),
     shallowEqual
   );
@@ -194,11 +200,24 @@ const TransferableCreditScreen: React.FC = () => {
       );
 
     const createPlanPromise = () => {
-      const [schedule, courseCounter] = generateInitialSchedule(
-        academicYear,
-        graduationYear,
-        completedCourses
-      );
+      let schedule, courseCounter;
+      if (!!coopCycle) {
+        [schedule, courseCounter] = generateInitialSchedule(
+          academicYear,
+          graduationYear,
+          completedCourses,
+          major!.name,
+          coopCycle!,
+          allPlans
+        );
+      } else {
+        [schedule, courseCounter] = generateInitialScheduleNoCoopCycle(
+          academicYear,
+          graduationYear,
+          completedCourses
+        );
+      }
+
       createPlanForUser(userId!, token, {
         name: "Plan 1",
         link_sharing_enabled: false,
