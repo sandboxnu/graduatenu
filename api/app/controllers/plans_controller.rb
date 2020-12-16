@@ -1,6 +1,6 @@
 class PlansController < ApplicationController
   before_action :set_user
-  before_action :set_user_plan, only: [:show, :update, :destroy]
+  before_action :set_user_plan, only: [:show, :update, :destroy, :approve]
 
   # returns all the plans
   def index
@@ -49,9 +49,6 @@ class PlansController < ApplicationController
     if authorized
       if @plan
         @plan.update(plan_params) #same body + updated fields in request body
-        if @user.is_advisor
-          @plan.update(approve_plan_params)
-        end
         render :show
       else
         render json: {error: "No such plan."}, status: :unprocessable_entity
@@ -75,6 +72,18 @@ class PlansController < ApplicationController
     end
   end
   
+  def approve
+    unless @user.is_advisor
+      render json: { error: "Requester is not an advisor" }, status: :bad_request
+      return
+    end
+    if @plan
+      @plan.update(approve_plan_params)
+      render :show
+    else
+      render json: {error: "No such plan."}, status: :unprocessable_entity
+    end
+  end
   private
 
   #parameters

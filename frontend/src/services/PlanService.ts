@@ -83,3 +83,17 @@ export const updatePlanForUser = (
       Authorization: "Token " + getAuthToken(),
     },
   }).then(response => response.json());
+
+export const approvePlanForUser = (
+  userId: number,
+  planId: number,
+  schedule: any
+) =>
+  fetch(`/api/users/${userId}/plans/${planId}/approve`, {
+    method: "PUT",
+    body: JSON.stringify({ plan: { approved_schedule: schedule } }),
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Token " + getAuthToken(),
+    },
+  }).then(response => response.json());

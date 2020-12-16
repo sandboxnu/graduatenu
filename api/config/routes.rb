@@ -10,7 +10,9 @@ Rails.application.routes.draw do
         get 'current'
         get 'advisors'
       end
-      resources :plans
+      resources :plans do
+        put :approve, on: :member
+      end
     end
 
     post 'mail/request_approval', to: 'mail#send_request_approval_email'
