@@ -24,23 +24,17 @@ import {
   changeSemesterStatusForActivePlanAction,
   updateSemesterForActivePlanAction,
 } from "../actions/userPlansActions";
-import {
-  resetUserAction,
-  setCompletedCoursesAction,
-} from "../actions/userActions";
+import { resetUserAction } from "../actions/userActions";
 import {
   clearSchedule,
   convertTermIdToSeason,
   convertToDNDCourses,
   convertToDNDSchedule,
-  getNextTerm,
   isYearInPast,
-  numToTerm,
   planToString,
   produceWarnings,
-  sumCreditsFromList,
 } from "../../utils";
-import { Schedule, ScheduleCourse } from "../../../../common/types";
+import { Schedule } from "../../../../common/types";
 import { updatePlanForUser } from "../../services/PlanService";
 import { getAuthToken } from "../../utils/auth-helpers";
 
@@ -159,7 +153,12 @@ export const userPlansReducer = (
         return draft;
       }
       case getType(setActivePlanCoopCycleAction): {
-        const { coopCycle, allPlans } = action.payload;
+        const {
+          coopCycle,
+          allPlans,
+          academicYear,
+          graduationYear,
+        } = action.payload;
 
         if (!allPlans) {
           return draft;
@@ -167,7 +166,7 @@ export const userPlansReducer = (
 
         const activePlan = draft.plans[draft.activePlan!];
 
-        const plan = allPlans[activePlan.major].find(
+        const plan = allPlans[activePlan.major!].find(
           (p: Schedule) => planToString(p) === coopCycle
         );
 
@@ -181,7 +180,11 @@ export const userPlansReducer = (
         );
 
         // remove all classes
-        draft.plans[draft.activePlan!].schedule = clearSchedule(newSchedule);
+        draft.plans[draft.activePlan!].schedule = clearSchedule(
+          newSchedule,
+          academicYear,
+          graduationYear
+        );
         draft.plans[draft.activePlan!].courseCounter = 0;
 
         // clear all warnings
