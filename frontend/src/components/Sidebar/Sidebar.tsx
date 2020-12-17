@@ -33,12 +33,6 @@ const MajorTitle = styled.p`
   margin-bottom: 12px;
 `;
 
-interface SidebarProps {
-  schedule: DNDSchedule;
-  major: string;
-  transferCourses: ScheduleCourse[];
-}
-
 interface MajorSidebarProps {
   schedule: DNDSchedule;
   major: Major;
@@ -87,14 +81,17 @@ const MajorSidebarComponent: React.FC<MajorSidebarProps> = ({
   );
 };
 
-const SidebarComponent: React.FC<SidebarProps> = ({
-  schedule,
-  major,
-  transferCourses,
-}) => {
-  const majorObj: Major | undefined = useSelector<AppState, Major | undefined>(
-    state => findMajorFromName(major, state.majorState.majors)
+export const Sidebar: React.FC = () => {
+  const { schedule, major, transferCourses } = useSelector(
+    (state: AppState) => ({
+      major: getActivePlanMajorFromState(state),
+      schedule: getActivePlanScheduleFromState(state),
+      transferCourses: getTransferCoursesFromState(state),
+    })
   );
+  const { majorObj } = useSelector((state: AppState) => ({
+    majorObj: findMajorFromName(major, state.majorState.majors),
+  }));
 
   return (
     <ScrollWrapper>
@@ -110,11 +107,3 @@ const SidebarComponent: React.FC<SidebarProps> = ({
     </ScrollWrapper>
   );
 };
-
-const mapStateToProps = (state: AppState) => ({
-  schedule: getActivePlanScheduleFromState(state),
-  transferCourses: getTransferCoursesFromState(state),
-  major: getActivePlanMajorFromState(state),
-});
-
-export const Sidebar = connect(mapStateToProps)(SidebarComponent);

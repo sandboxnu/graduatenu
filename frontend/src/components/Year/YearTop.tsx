@@ -175,8 +175,6 @@ const textContainerStyle: React.CSSProperties = {
   overflow: "hidden",
 };
 
-const mapStateToProps = (state: AppState) => ({});
-
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   handleStatusChange: (
     newStatus: Status,
@@ -194,6 +192,6 @@ export const YearTop = connect<
   YearTopProps,
   AppState
 >(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(YearTopComponent);

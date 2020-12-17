@@ -77,7 +77,7 @@ class YearComponent extends React.Component<Props> {
             isEditable={isEditable}
           />
         </YearTopWrapper>
-        {(!isEditable || isExpanded) && (
+        {isExpanded && (
           <YearBody>
             <SemesterBlock
               isEditable={isEditable}

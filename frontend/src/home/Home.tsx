@@ -141,8 +141,8 @@ interface ToastHomeProps {
 
 interface ReduxStoreHomeProps {
   transferCredits: ScheduleCourse[];
-  major?: string;
-  coopCycle?: string;
+  major: string | null;
+  coopCycle: string | null;
   warnings: IWarning[];
   userId: number;
   majors: Major[];
@@ -274,56 +274,6 @@ class HomeComponent extends React.Component<Props> {
           {this.renderPlanHeader()}
         </EditableSchedule>
       </>
-      // <>
-      //   <HomeTop>
-      //     <HomeTopInnerContainer>
-      //       <HomeText href="#">GraduateNU</HomeText>
-      //       <HomePlan>
-      //         <MajorText>{this.props.major}</MajorText>
-      //         <PlanText>{this.props.coopCycle || "None"}</PlanText>
-      //         <EditPlanPopper />
-      //         <LogoutButton onClick={_ => this.logOut()}>
-      //           <ColorButton variant="contained">Logout</ColorButton>
-      //         </LogoutButton>
-      //       </HomePlan>
-      //     </HomeTopInnerContainer>
-      //   </HomeTop>
-      //   <OuterContainer>
-      //     <DragDropContext
-      //       onDragEnd={this.onDragEnd}
-      //       onDragUpdate={this.onDragUpdate}
-      //     >
-      //       <SidebarContainer>
-      //         <Sidebar />
-      //       </SidebarContainer>
-      //       <LeftScroll className="hide-scrollbar">
-      //         <Container>
-      //           <HomeAboveSchedule>
-      //             <HomePlan>
-      //               <h2>Plan Of Study</h2>
-      //             </HomePlan>
-      //             <HomeButtons>
-      //               <PlanContainer>
-      //                 <PlanPopperButton
-      //                   variant="contained"
-      //                   onClick={this.updatePlan.bind(this)}
-      //                 >
-      //                   Update Plan
-      //                 </PlanPopperButton>
-      //               </PlanContainer>
-      //               <PlanContainer>
-      //                 <AddPlan />
-      //               </PlanContainer>
-      //               <SwitchPlanPopper />
-      //             </HomeButtons>
-      //           </HomeAboveSchedule>
-      //           {this.renderYears()}
-      //           {this.renderTransfer()}
-      //         </Container>
-      //       </LeftScroll>
-      //     </DragDropContext>
-      //   </OuterContainer>
-      // </>
     );
   }
 }

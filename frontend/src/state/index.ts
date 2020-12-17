@@ -54,18 +54,17 @@ export const getTransferCoursesFromState = (state: AppState) =>
 export const getUserMajorFromState = (state: AppState): Major | undefined =>
   findMajorFromName(getUserFromState(state).major, getMajorsFromState(state));
 
-export const getUserCatalogYearFromState = (
-  state: AppState
-): number | undefined => getUserFromState(state).catalogYear;
+export const getUserCatalogYearFromState = (state: AppState): number | null =>
+  getUserFromState(state).catalogYear;
 
 /**
  * Get the selected major name from the AppState
  * @param state the AppState
  */
-export const getUserMajorNameFromState = (state: AppState) =>
+export const getUserMajorNameFromState = (state: AppState): string | null =>
   getUserFromState(state).major;
 
-export const getUserCoopCycleFromState = (state: AppState) =>
+export const getUserCoopCycleFromState = (state: AppState): string | null =>
   getUserFromState(state).coopCycle;
 
 export const getAcademicYearFromState = (state: AppState) =>

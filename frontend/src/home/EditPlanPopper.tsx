@@ -35,8 +35,8 @@ import {
   setActivePlanCoopCycleAction,
   setActivePlanMajorAction,
   setActivePlanDNDScheduleAction,
-  setActivePlanCatalogYearAction,
   setCurrentClassCounterForActivePlanAction,
+  setActivePlanCatalogYearAction,
 } from "../state/actions/userPlansActions";
 
 const PlanPopper = styled(Popper)<any>`
@@ -105,21 +105,21 @@ interface ReduxStoreEditPlanProps {
   allPlans: Record<string, Schedule[]>;
   creditsTaken: number;
   name: string;
-  catalogYear?: number;
+  catalogYear: number | null;
   academicYear: number;
   graduationYear: number;
 }
 
 interface ReduxDispatchEditPlanProps {
   setActivePlanCoopCycle: (
-    coopCycle: string,
+    coopCycle: string | null,
     academicYear: number,
     graduationYear: number,
     allPlans?: Record<string, Schedule[]>
   ) => void;
   setActivePlanDNDSchedule: (schedule: DNDSchedule) => void;
-  setActivePlanMajor: (major: string) => void;
-  setActivePlanCatalogYear: (number: number) => void;
+  setActivePlanMajor: (major: string | null) => void;
+  setActivePlanCatalogYear: (number: number | null) => void;
   setCurrentClassCounter: (counter: number) => void;
 }
 
@@ -184,7 +184,11 @@ export class EditPlanPopperComponent extends React.Component<
   }
 
   onChangeCatalogYear(event: React.SyntheticEvent<{}>, value: any) {
-    this.props.setActivePlanCatalogYear(value);
+    if (value === "") {
+      this.props.setActivePlanCatalogYear(null);
+    } else {
+      this.props.setActivePlanCatalogYear(value);
+    }
   }
 
   renderMajorDropDown() {
@@ -214,7 +218,7 @@ export class EditPlanPopperComponent extends React.Component<
         disableListWrap
         options={[
           "None",
-          ...this.props.allPlans[this.props.plan.major].map(p =>
+          ...this.props.allPlans[this.props.plan.major!].map(p =>
             planToString(p)
           ),
         ]}
@@ -251,7 +255,9 @@ export class EditPlanPopperComponent extends React.Component<
             fullWidth
           />
         )}
-        value={this.props.catalogYear ? this.props.catalogYear + "" : ""}
+        value={
+          this.props.plan.catalogYear ? this.props.plan.catalogYear + "" : ""
+        }
         onChange={this.onChangeCatalogYear.bind(this)}
       />
     );
@@ -271,7 +277,7 @@ export class EditPlanPopperComponent extends React.Component<
     const [schedule, counter] = generateInitialScheduleFromExistingPlan(
       this.props.academicYear,
       this.props.graduationYear,
-      this.props.plan.major,
+      this.props.plan.major!,
       this.props.plan.coopCycle!,
       this.props.allPlans
     );
@@ -340,6 +346,7 @@ export class EditPlanPopperComponent extends React.Component<
               </StandingText>
               {this.renderCatalogYearDropdown()}
               {!!this.props.plan.catalogYear && this.renderMajorDropDown()}
+              {!!this.props.plan.major && this.renderPlansDropDown()}
               {!!this.props.plan.major &&
               !!this.props.plan.coopCycle &&
               !scheduleHasClasses(this.props.plan.schedule)
@@ -368,7 +375,7 @@ const mapStateToProps = (state: AppState) => ({
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   setActivePlanCoopCycle: (
-    coopCycle: string,
+    coopCycle: string | null,
     academicYear: number,
     graduationYear: number,
     allPlans?: Record<string, Schedule[]>
@@ -383,9 +390,9 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     ),
   setActivePlanDNDSchedule: (schedule: DNDSchedule) =>
     dispatch(setActivePlanDNDScheduleAction(schedule)),
-  setActivePlanMajor: (major: string) =>
+  setActivePlanMajor: (major: string | null) =>
     dispatch(setActivePlanMajorAction(major)),
-  setActivePlanCatalogYear: (year: number) =>
+  setActivePlanCatalogYear: (year: number | null) =>
     dispatch(setActivePlanCatalogYearAction(year)),
   setCurrentClassCounter: (counter: number) =>
     dispatch(setCurrentClassCounterForActivePlanAction(counter)),

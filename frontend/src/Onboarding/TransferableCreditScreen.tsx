@@ -15,7 +15,7 @@ import { createPlanForUser } from "../services/PlanService";
 import {
   getAcademicYearFromState,
   getGraduationYearFromState,
-  getUserMajorFromState,
+  getUserMajorNameFromState,
   getUserIdFromState,
   getUserCoopCycleFromState,
   getCompletedCoursesFromState,
@@ -155,7 +155,7 @@ const TransferableCreditScreen: React.FC = () => {
   } = useSelector(
     (state: AppState) => ({
       userId: getUserIdFromState(state),
-      major: getUserMajorFromState(state),
+      major: getUserMajorNameFromState(state),
       academicYear: getAcademicYearFromState(state)!,
       graduationYear: getGraduationYearFromState(state)!,
       coopCycle: getUserCoopCycleFromState(state),
@@ -182,7 +182,7 @@ const TransferableCreditScreen: React.FC = () => {
           token: token,
         },
         {
-          major: major?.name,
+          major: major,
           academic_year: academicYear,
           graduation_year: graduationYear,
           coop_cycle: coopCycle,
@@ -206,7 +206,7 @@ const TransferableCreditScreen: React.FC = () => {
           academicYear,
           graduationYear,
           completedCourses,
-          major!.name,
+          major!,
           coopCycle!,
           allPlans
         );
@@ -222,8 +222,8 @@ const TransferableCreditScreen: React.FC = () => {
         name: "Plan 1",
         link_sharing_enabled: false,
         schedule: schedule,
-        major: major?.name || "",
-        coop_cycle: coopCycle ? coopCycle : "None",
+        major: major,
+        coop_cycle: coopCycle,
         course_counter: courseCounter,
         catalog_year: catalogYear,
       }).then(response => {
