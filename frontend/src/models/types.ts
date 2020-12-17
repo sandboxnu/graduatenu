@@ -191,6 +191,7 @@ export interface IPlanData {
   courseWarnings: CourseWarning[];
   courseCounter: number;
   lastViewed: Date;
+  updatedAt: Date;
 }
 
 /**
@@ -205,6 +206,19 @@ export interface ICreatePlanData {
   coop_cycle: string | null;
   course_counter: number;
   last_viewed?: Date;
+}
+
+export interface IUpdatePlanData {
+  name: string;
+  link_sharing_enabled: boolean;
+  schedule: DNDSchedule;
+  catalog_year: number | null;
+  major: string | null;
+  coop_cycle: string | null;
+  course_counter: number;
+  last_viewed?: Date;
+  warnings: IWarning[];
+  course_warnings: CourseWarning[];
 }
 
 export interface IUpdatePlanData {

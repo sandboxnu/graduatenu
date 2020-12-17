@@ -3,6 +3,8 @@ import {
   incrementCurrentClassCounterForActivePlanAction,
   toggleYearExpandedForActivePlanAction,
   setActivePlanCatalogYearAction,
+  setActivePlanStatusAction,
+  updateActivePlanTimestampAction,
 } from "./../actions/userPlansActions";
 import { DNDSchedule, IPlanData } from "../../models/types";
 import produce from "immer";
@@ -38,11 +40,17 @@ import { Schedule } from "../../../../common/types";
 import { updatePlanForUser } from "../../services/PlanService";
 import { getAuthToken } from "../../utils/auth-helpers";
 
+export type ActivePlanAutoSaveStatus =
+  | "Up To Date"
+  | "Waiting to Update"
+  | "Updating";
+
 export interface UserPlansState {
   activePlan?: string;
   plans: { [key: string]: IPlanData };
   closedYears: { [key: string]: number[] }; // map plan name to closedYearsList
   pastSchedule?: DNDSchedule; // used for undo
+  activePlanStatus: ActivePlanAutoSaveStatus;
 }
 
 const initialState: UserPlansState = {
@@ -50,6 +58,7 @@ const initialState: UserPlansState = {
   plans: {},
   closedYears: {},
   pastSchedule: undefined,
+  activePlanStatus: "Up To Date",
 };
 
 export const userPlansReducer = (
@@ -86,6 +95,10 @@ export const userPlansReducer = (
           ...plan,
         };
 
+        return draft;
+      }
+      case getType(updateActivePlanTimestampAction): {
+        draft.plans[draft.activePlan!].updatedAt = action.payload.timestamp;
         return draft;
       }
       case getType(addNewPlanAction): {
@@ -319,6 +332,10 @@ export const userPlansReducer = (
       }
       case getType(resetUserAction): {
         return initialState;
+      }
+      case getType(setActivePlanStatusAction): {
+        draft.activePlanStatus = action.payload.status;
+        return draft;
       }
     }
   });

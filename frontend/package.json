@@ -36,6 +36,7 @@
     "redux-thunk": "^2.3.0",
     "request-promise": "^4.2.6",
     "styled-components": "^4.4.0",
+    "timeago.js": "^4.0.2",
     "typesafe-actions": "^5.1.0",
     "xlsx": "^0.15.6"
   },

@@ -19,6 +19,7 @@ export const findAllPlansForUser = (
       return plans.map((plan: IPlanData) => ({
         ...plan,
         lastViewed: new Date(plan.lastViewed), // convert string timestamp to a Date object
+        updatedAt: new Date(plan.updatedAt), // convert string timestamp to a Date object
       }));
     })
   );
