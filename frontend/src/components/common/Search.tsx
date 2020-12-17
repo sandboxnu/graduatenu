@@ -42,7 +42,7 @@ interface SearchProps {
 
 export const Search = (props: SearchProps) => {
   const [text, setText] = useState("");
-
+  console.log(text);
   const handleKeyDown = (event: any) => {
     if (event.key === "Enter") {
       if (props.onEnter) {
@@ -59,9 +59,9 @@ export const Search = (props: SearchProps) => {
         name="name"
         placeholder={props.placeholder}
         onChange={(e: any) => {
-          setText(e.target.value);
+          setText(e.target.value.trim());
           if (props.onChange) {
-            props.onChange(e.target.value);
+            props.onChange(e.target.value.trim());
           }
         }}
         onKeyDown={handleKeyDown}
