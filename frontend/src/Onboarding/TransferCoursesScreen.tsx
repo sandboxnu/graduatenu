@@ -283,8 +283,5 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 });
 
 export const TransferCoursesScreen = withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(TransferCoursesComponent)
+  connect(mapStateToProps, mapDispatchToProps)(TransferCoursesComponent)
 );

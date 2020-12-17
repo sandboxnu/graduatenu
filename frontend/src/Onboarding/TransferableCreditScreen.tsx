@@ -61,9 +61,7 @@ interface TransferableExamGroupsComponentProps {
 /**
  * Component for displaying a single transferable exam.
  */
-const TransferableExamComponent: React.FC<
-  TransferableExamComponentProps
-> = props => {
+const TransferableExamComponent: React.FC<TransferableExamComponentProps> = props => {
   const addCourseToSelected = () => {
     const newSelectedTransferableExams: Array<TransferableExam> = [
       ...props.selectedTransferableExams,
@@ -73,9 +71,7 @@ const TransferableExamComponent: React.FC<
   };
 
   const removeCourseFromSelected = () => {
-    const newSelectedTransferableExams: Array<
-      TransferableExam
-    > = props.selectedTransferableExams.filter(
+    const newSelectedTransferableExams: Array<TransferableExam> = props.selectedTransferableExams.filter(
       (transferableExam: TransferableExam) =>
         transferableExam.name !== props.transferableExam.name
     );
@@ -105,9 +101,7 @@ const TransferableExamComponent: React.FC<
  * For example, 2D and 3D Arts and Design are both exaums under the Arts group, so
  * this component would be used to display the entire group.
  */
-const TransferableExamGroupComponent: React.FC<
-  TransferableExamGroupComponentProps
-> = props => {
+const TransferableExamGroupComponent: React.FC<TransferableExamGroupComponentProps> = props => {
   return (
     <div>
       <TitleText>{props.transferableExamGroup.name}</TitleText>
@@ -130,9 +124,7 @@ const TransferableExamGroupComponent: React.FC<
  * For example, AP exams has the groups Arts and Sciences, so
  * this component would be used to display each group.
  */
-const TransferableExamGroupsComponent: React.FC<
-  TransferableExamGroupsComponentProps
-> = props => {
+const TransferableExamGroupsComponent: React.FC<TransferableExamGroupsComponentProps> = props => {
   return (
     <div>
       {props.transferableExamGroups.map(

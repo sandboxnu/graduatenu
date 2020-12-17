@@ -32,26 +32,34 @@ const SubText = styled.div`
 `;
 
 interface LoadingProps {
-    errorMsg?: string,
-    text?: string,
-    subText?: string
+  errorMsg?: string;
+  text?: string;
+  subText?: string;
 }
 
 export const LoadingScreen = (props: LoadingProps) => {
-    const defaultSubText = (
-        <p>
-            Reach out to your advisor or to us{" "}
-            <a href="mailto: graduate@sandboxnu.com">here</a> 
-        </p>
-    );
-    return (
-        <Centered>
-            {props.errorMsg ? 
-            <ErrorIcon color="secondary" style={{ fontSize: 80 }} /> 
-            : <CircularProgress color="secondary" /> }
-            <Text> {props.text ?  props.text : 
-                props.errorMsg ? props.errorMsg : "Loading"} </Text>
-            <SubText> {props.subText ? props.subText : defaultSubText} </SubText>
-        </Centered>
-    );
-}
+  const defaultSubText = (
+    <p>
+      Reach out to your advisor or to us{" "}
+      <a href="mailto: graduate@sandboxnu.com">here</a>
+    </p>
+  );
+  return (
+    <Centered>
+      {props.errorMsg ? (
+        <ErrorIcon color="secondary" style={{ fontSize: 80 }} />
+      ) : (
+        <CircularProgress color="secondary" />
+      )}
+      <Text>
+        {" "}
+        {props.text
+          ? props.text
+          : props.errorMsg
+          ? props.errorMsg
+          : "Loading"}{" "}
+      </Text>
+      <SubText> {props.subText ? props.subText : defaultSubText} </SubText>
+    </Centered>
+  );
+};
