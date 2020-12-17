@@ -144,9 +144,9 @@ export const RequestFeedbackPopper: React.FC = () => {
         title="Request Feedback"
       >
         <SubTitle>
-          We'll send over an email to you and your advisor to let them know your
-          plan is awaiting feedback. You'll get an email when you have feedback
-          from your advisor. WIP COPY
+          We'll send over an email to your advisor on your behalf to let them
+          know your plan is awaiting feedback. You'll get an email when you have
+          feedback from your advisor. WIP COPY
         </SubTitle>
         <AdvisorDropdown />
         <RequestApprovalButton />
