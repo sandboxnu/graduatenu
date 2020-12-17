@@ -127,3 +127,4 @@ yarn-error.log*
 
 .idea/
 graduatenu.code-workspacesendgrid.env
+api/config/local_env.yml

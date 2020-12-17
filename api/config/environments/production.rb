@@ -8,6 +8,16 @@ Rails.application.configure do
   ENV['ROOT_URL'] = "http://graduatenu.khoury.northeastern.edu"
   ENV['FRONTEND_URL'] = "http://graduatenu.khoury.northeastern.edu"
 
+  ActionMailer::Base.smtp_settings = {
+    :user_name => 'apikey',
+    :password => ENV["SENDGRID_API_KEY"],
+    :domain => 'sandbox.com',
+    :address => 'smtp.sendgrid.net',
+    :port => 587,
+    :authentication => :plain,
+    :enable_starttls_auto => true
+  }
+
   # Code is not reloaded between requests.
   config.cache_classes = true
 
