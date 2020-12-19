@@ -223,7 +223,6 @@ expect.extend({
           expect(term).toHaveProperty("season");
           expect(term).toHaveProperty("year");
           expect(term).toHaveProperty("termId");
-          expect(term).toHaveProperty("id");
           expect(term).toHaveProperty("status");
           expect(term).toHaveProperty("classes");
 
@@ -233,7 +232,6 @@ expect.extend({
           expect(Number(term.termId)).toEqual(
             yearNumber * 100 + seasonIds[seasonsIndex]
           );
-          expect(Number(term.id)).toEqual(yearNumber + seasonIds[seasonsIndex]);
           expect(term.status).toMatch(/COOP|CLASSES|INACTIVE/);
 
           // classes should be defined.

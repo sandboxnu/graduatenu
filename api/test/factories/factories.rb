@@ -46,7 +46,6 @@ FactoryBot.define do
       "yearMap": {
           "1000": {
               "fall": {
-                  "id": 1010,
                   "year": 1000,
                   "season": "FL",
                   "status": "CLASSES",
@@ -93,7 +92,6 @@ FactoryBot.define do
               },
               "year": 1000,
               "spring": {
-                  "id": 1030,
                   "year": 1000,
                   "season": "SP",
                   "status": "CLASSES",
@@ -101,7 +99,6 @@ FactoryBot.define do
                   "classes": []
               },
               "summer1": {
-                  "id": 1040,
                   "year": 1000,
                   "season": "S1",
                   "status": "CLASSES",
@@ -109,7 +106,6 @@ FactoryBot.define do
                   "classes": []
               },
               "summer2": {
-                  "id": 1060,
                   "year": 1000,
                   "season": "S2",
                   "status": "CLASSES",
@@ -120,7 +116,6 @@ FactoryBot.define do
           },
           "1001": {
               "fall": {
-                  "id": 1011,
                   "year": 1001,
                   "season": "FL",
                   "status": "CLASSES",
@@ -129,7 +124,6 @@ FactoryBot.define do
               },
               "year": 1001,
               "spring": {
-                  "id": 1031,
                   "year": 1001,
                   "season": "SP",
                   "status": "COOP",
@@ -137,7 +131,6 @@ FactoryBot.define do
                   "classes": []
               },
               "summer1": {
-                  "id": 1041,
                   "year": 1001,
                   "season": "S1",
                   "status": "COOP",
@@ -145,7 +138,6 @@ FactoryBot.define do
                   "classes": []
               },
               "summer2": {
-                  "id": 1061,
                   "year": 1001,
                   "season": "S2",
                   "status": "CLASSES",
@@ -156,7 +148,6 @@ FactoryBot.define do
           },
           "1002": {
               "fall": {
-                  "id": 1012,
                   "year": 1002,
                   "season": "FL",
                   "status": "CLASSES",
@@ -165,7 +156,6 @@ FactoryBot.define do
               },
               "year": 1002,
               "spring": {
-                  "id": 1032,
                   "year": 1002,
                   "season": "SP",
                   "status": "COOP",
@@ -173,7 +163,6 @@ FactoryBot.define do
                   "classes": []
               },
               "summer1": {
-                  "id": 1042,
                   "year": 1002,
                   "season": "S1",
                   "status": "COOP",
@@ -181,7 +170,6 @@ FactoryBot.define do
                   "classes": []
               },
               "summer2": {
-                  "id": 1062,
                   "year": 1002,
                   "season": "S2",
                   "status": "CLASSES",
@@ -192,7 +180,6 @@ FactoryBot.define do
           },
           "1003": {
               "fall": {
-                  "id": 1013,
                   "year": 1003,
                   "season": "FL",
                   "status": "CLASSES",
@@ -201,7 +188,6 @@ FactoryBot.define do
               },
               "year": 1003,
               "spring": {
-                  "id": 1033,
                   "year": 1003,
                   "season": "SP",
                   "status": "CLASSES",
@@ -209,7 +195,6 @@ FactoryBot.define do
                   "classes": []
               },
               "summer1": {
-                  "id": 1043,
                   "year": 1003,
                   "season": "S1",
                   "status": "INACTIVE",
@@ -217,7 +202,6 @@ FactoryBot.define do
                   "classes": []
               },
               "summer2": {
-                  "id": 1063,
                   "year": 1003,
                   "season": "S2",
                   "status": "INACTIVE",

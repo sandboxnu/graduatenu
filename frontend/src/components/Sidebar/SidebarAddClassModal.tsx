@@ -105,7 +105,6 @@ export class SidebarAddClassModalComponent extends React.Component<
         season: "FL",
         year: 0,
         termId: 0,
-        id: 0,
         status: "INACTIVE",
         classes: [],
       },
@@ -258,7 +257,7 @@ export class SidebarAddClassModalComponent extends React.Component<
 
                     return (
                       <option
-                        key={sem.id}
+                        key={`${curSeason} ${curYear}`}
                         value={index}
                       >{`${curSeason} ${curYear}`}</option>
                     );
