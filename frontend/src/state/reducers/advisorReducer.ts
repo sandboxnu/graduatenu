@@ -7,6 +7,7 @@ import {
   setName,
   setStudents,
   setUserId,
+  toggleTemplateFolderExpandedAction,
 } from "../actions/advisorActions";
 
 export interface Student {
@@ -20,6 +21,7 @@ export interface AdvisorState {
   readonly userId?: number;
   readonly image: string;
   readonly students: Array<Student>;
+  readonly closedFolders: Array<number>;
 }
 
 const initialState: AdvisorState = {
@@ -28,6 +30,7 @@ const initialState: AdvisorState = {
   userId: undefined,
   image: "",
   students: [],
+  closedFolders: [],
 };
 
 export const advisorReducer = (
@@ -58,6 +61,18 @@ export const advisorReducer = (
 
       case getType(setStudents): {
         draft.students = action.payload.students;
+        return draft;
+      }
+
+      case getType(toggleTemplateFolderExpandedAction): {
+        const idx = action.payload.index;
+        if (draft.closedFolders.includes(idx)) {
+          draft.closedFolders = draft.closedFolders.filter(
+            folderNum => folderNum !== idx
+          );
+        } else {
+          draft.closedFolders.push(idx);
+        }
         return draft;
       }
     }

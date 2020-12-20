@@ -7,8 +7,11 @@ import styled from "styled-components";
 import { Search } from "../components/common/Search";
 import { NORTHEASTERN_RED } from "../constants";
 import { getAuthToken } from "../utils/auth-helpers";
-import { connect } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
 import { Dispatch } from "redux";
+import { AppState } from "../state/reducers/state";
+import { getFolderExpandedFromState } from "../state";
+import { toggleTemplateFolderExpandedAction } from "../state/actions/advisorActions";
 
 const Container = styled.div`
   margin-left: 30px;
@@ -119,6 +122,14 @@ const ColorButton = withStyles((theme: Theme) => ({
 
 const FolderContainer = styled.div``;
 
+const FolderNameWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-left: -28px;
+`;
+
 interface TemplatesListProps {
   searchQuery: string;
 }
@@ -133,8 +144,9 @@ interface TemplateProps {
   name: string;
 }
 
-interface ReduxDispatchTemplateFolderProps {
-  toggleTemplateFolderExpanded: (folderIndex: number) => void;
+interface FolderProps {
+  index: number;
+  name: string;
 }
 
 const Template = (props: TemplateProps) => {
@@ -197,10 +209,11 @@ const TemplatesList = (props: TemplatesListProps) => {
   );
 };
 
-type Props = ReduxDispatchTemplateFolderProps;
+type Props = FolderProps;
 
-const TemplatesComponent: React.FC<Props> = (props: any) => {
+const TemplatesComponent: React.FC = (props: any) => {
   const [searchQuery, setSearchQuery] = useState("");
+  const names = ["non-shared", "catalog year 2017-2018", "folderrrrr"];
 
   return (
     <Container>
@@ -218,7 +231,9 @@ const TemplatesComponent: React.FC<Props> = (props: any) => {
             <ColorButton> Create New </ColorButton>
           </ButtonWrapper>
           <TemplateListScrollContainer>
-            <p style={{ fontWeight: "bold" }}>Non-shared folder</p>
+            {names.map((name: string, idx: number) => (
+              <FolderComponent index={idx} name={name} />
+            ))}
           </TemplateListScrollContainer>
         </TemplateListContainer>
       </TemplatesContainer>
@@ -226,13 +241,26 @@ const TemplatesComponent: React.FC<Props> = (props: any) => {
   );
 };
 
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-  toggleTemplateFolderExpanded: (folderIndex: number) => {
-    return;
-  },
-});
+const FolderComponent: React.FC<FolderProps> = (props: FolderProps) => {
+  const { index, name } = props;
+  const isExpanded = useSelector((state: AppState) =>
+    getFolderExpandedFromState(state, index)
+  );
+  const dispatch = useDispatch();
 
-export const TemplatesPage = connect<{}, ReduxDispatchTemplateFolderProps>(
-  null,
-  mapDispatchToProps
-)(TemplatesComponent);
+  return (
+    <FolderNameWrapper>
+      <p style={{ fontWeight: "bold" }}> {{ name }} </p>
+      <div
+        onClick={() => {
+          dispatch(toggleTemplateFolderExpandedAction(index));
+        }}
+        style={{ marginRight: 4 }}
+      >
+        {isExpanded ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+      </div>
+    </FolderNameWrapper>
+  );
+};
+
+export const TemplatesPage = TemplatesComponent;

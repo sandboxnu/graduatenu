@@ -26,3 +26,8 @@ export const setStudents = createAction(
     students,
   })
 )();
+
+export const toggleTemplateFolderExpandedAction = createAction(
+  "advisor/TOGGLE_TEMPLATE_FOLDER_EXPANDED",
+  (index: number) => ({ index })
+)();
