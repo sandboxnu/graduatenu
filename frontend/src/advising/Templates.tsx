@@ -123,6 +123,23 @@ const FolderNameWrapper = styled.div`
   align-items: center;
 `;
 
+const FolderTemplateListContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-left: 28px;
+`;
+
+const FolderName = styled.div`
+  font-weight: bold;
+  margin-bottom: 10px;
+  margin-top: 10px;
+`;
+
+const TemplateName = styled.div`
+  margin-bottom: 5px;
+  margin-top: 5px;
+`;
+
 interface TemplatesListProps {
   searchQuery: string;
 }
@@ -139,12 +156,13 @@ interface TemplateProps {
 
 interface FolderProps {
   index: number;
-  name: string;
+  folder: Folder;
 }
 
-const Template = (props: TemplateProps) => {
-  return <TemplateContainer>{props.name}</TemplateContainer>;
-};
+interface Folder {
+  name: string;
+  templates: Array<string>;
+}
 
 const EMPTY_TEMPLATES_LIST: TemplateProps[] = [];
 
@@ -206,15 +224,13 @@ type Props = FolderProps;
 
 const TemplatesComponent: React.FC = (props: any) => {
   const [searchQuery, setSearchQuery] = useState("");
-  const names = [
-    "non-shared",
-    "catalog year 2017-2018",
-    "folderrrrr",
-    "YAA",
-    "MORE FOLDERS",
-    "Naniii",
-    "yet another pls work",
-    "scroll here",
+  const folders = [
+    { name: "non-shared", templates: ["file 1", "file 2"] },
+    { name: "catalog year 2017-2018", templates: ["more file", "yaas"] },
+    {
+      name: "folderrrrr",
+      templates: ["computer science 1", "biology and cs "],
+    },
   ];
 
   return (
@@ -231,8 +247,8 @@ const TemplatesComponent: React.FC = (props: any) => {
             <ColorButton> Create New </ColorButton>
           </ButtonWrapper>
           <TemplateListScrollContainer>
-            {names.map((name: string, idx: number) => (
-              <FolderComponent index={idx} name={name} />
+            {folders.map((folder: Folder, index: number) => (
+              <FolderComponent index={index} folder={folder} />
             ))}
           </TemplateListScrollContainer>
         </TemplateListContainer>
@@ -242,25 +258,38 @@ const TemplatesComponent: React.FC = (props: any) => {
 };
 
 const FolderComponent: React.FC<FolderProps> = (props: FolderProps) => {
-  const { index, name } = props;
+  const { index, folder } = props;
   const isExpanded = useSelector((state: AppState) =>
     getFolderExpandedFromState(state, index)
   );
   const dispatch = useDispatch();
 
   return (
-    <FolderNameWrapper>
-      <div
-        onClick={() => {
-          dispatch(toggleTemplateFolderExpandedAction(index));
-        }}
-        style={{ marginRight: 4 }}
-      >
-        {isExpanded ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-      </div>
-      <p style={{ fontWeight: "bold" }}> {name} </p>
-    </FolderNameWrapper>
+    <div>
+      <FolderNameWrapper>
+        <div
+          onClick={() => {
+            dispatch(toggleTemplateFolderExpandedAction(index));
+          }}
+          style={{ marginRight: 4 }}
+        >
+          {isExpanded ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+        </div>
+        <FolderName> {folder.name} </FolderName>
+      </FolderNameWrapper>
+      <FolderTemplateListContainer>
+        {isExpanded &&
+          folder.templates.map((template: string) => (
+            <Template name={template} />
+          ))}
+      </FolderTemplateListContainer>
+    </div>
   );
+};
+
+const Template: React.FC<TemplateProps> = (props: TemplateProps) => {
+  const { name } = props;
+  return <TemplateName> {name} </TemplateName>;
 };
 
 export const TemplatesPage = TemplatesComponent;
