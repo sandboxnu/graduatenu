@@ -1,10 +1,14 @@
-import { LinearProgress } from "@material-ui/core";
+import { Button, LinearProgress, Theme, withStyles } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
+import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import { withRouter } from "react-router-dom";
 import styled from "styled-components";
 import { Search } from "../components/common/Search";
+import { NORTHEASTERN_RED } from "../constants";
 import { getAuthToken } from "../utils/auth-helpers";
+import { connect } from "react-redux";
+import { Dispatch } from "redux";
 
 const Container = styled.div`
   margin-left: 30px;
@@ -15,7 +19,7 @@ const Container = styled.div`
   font-weight: normal;
 `;
 
-const TemplatesListContainer = styled.div`
+const TemplatesContainer = styled.div`
   margin-top: 15px;
   border: 1px solid red;
   border-radius: 10px;
@@ -23,9 +27,16 @@ const TemplatesListContainer = styled.div`
   padding: 20px;
 `;
 
+const TemplateListContainer = styled.div`
+  width: auto;
+  height: 360px;
+  height: 50vh;
+`;
+
 const TemplateListScrollContainer = styled.div`
   width: auto;
   height: 360px;
+  margin: 70px;
   overflow-y: scroll;
   height: 50vh;
 `;
@@ -75,6 +86,39 @@ const TemplateContainer = styled.div`
   padding: 10px;
 `;
 
+const ButtonWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  padding-top: 20px;
+  justify-content: space-between;
+  position: relative;
+  float: right;
+`;
+
+const WhiteColorButton = withStyles((theme: Theme) => ({
+  root: {
+    marginRight: "20px",
+    border: "1px solid red",
+    color: NORTHEASTERN_RED,
+    backgroundColor: "#ffffff",
+    "&:hover": {
+      backgroundColor: "#e9e9e9",
+    },
+  },
+}))(Button);
+
+const ColorButton = withStyles((theme: Theme) => ({
+  root: {
+    color: "#ffffff",
+    backgroundColor: NORTHEASTERN_RED,
+    "&:hover": {
+      backgroundColor: "#DB4747",
+    },
+  },
+}))(Button);
+
+const FolderContainer = styled.div``;
+
 interface TemplatesListProps {
   searchQuery: string;
 }
@@ -87,6 +131,10 @@ interface TemplatesAPI {
 
 interface TemplateProps {
   name: string;
+}
+
+interface ReduxDispatchTemplateFolderProps {
+  toggleTemplateFolderExpanded: (folderIndex: number) => void;
 }
 
 const Template = (props: TemplateProps) => {
@@ -104,6 +152,7 @@ const TemplatesList = (props: TemplatesListProps) => {
 
   const fetchTemplates = (currentTemplates: TemplateProps[], page: number) => {
     setIsLoading(true);
+    // get some mock data
     // getTemplates(props.searchQuery, page, token)
     //   .then((TemplatesAPI: TemplatesAPI) => {
     //     setTemplates(currentTemplates.concat(TemplatesAPI.templates));
@@ -120,13 +169,13 @@ const TemplatesList = (props: TemplatesListProps) => {
   }, [props.searchQuery, token]);
 
   return (
-    <TemplatesListContainer>
+    <TemplatesContainer>
       {isLoading ? (
         <Loading>
           <LinearProgress color="secondary" />
         </Loading>
       ) : null}
-      <TemplateListScrollContainer>
+      <TemplateListContainer>
         {(templates === null || templates.length == 0) && !isLoading ? (
           <EmptyState> No Templates found </EmptyState>
         ) : (
@@ -143,25 +192,47 @@ const TemplatesList = (props: TemplatesListProps) => {
             </LoadMoreTemplates>
           )
         ) : null}
-      </TemplateListScrollContainer>
-    </TemplatesListContainer>
+      </TemplateListContainer>
+    </TemplatesContainer>
   );
 };
 
-const TemplatesComponent: React.FC = (props: any) => {
+type Props = ReduxDispatchTemplateFolderProps;
+
+const TemplatesComponent: React.FC<Props> = (props: any) => {
   const [searchQuery, setSearchQuery] = useState("");
 
   return (
     <Container>
-      <TemplatesListContainer>
-        <Center> Template </Center>
+      <TemplatesContainer>
+        <Center> Templates </Center>
 
-        <TemplateListScrollContainer>
-          <Search placeholder="Search by major name" onEnter={setSearchQuery} />
-        </TemplateListScrollContainer>
-      </TemplatesListContainer>
+        <TemplateListContainer>
+          <Search
+            placeholder="Search by major name"
+            onEnter={setSearchQuery}
+            isSmall={true}
+          />
+          <ButtonWrapper>
+            <WhiteColorButton> Upload Plan </WhiteColorButton>
+            <ColorButton> Create New </ColorButton>
+          </ButtonWrapper>
+          <TemplateListScrollContainer>
+            <p style={{ fontWeight: "bold" }}>Non-shared folder</p>
+          </TemplateListScrollContainer>
+        </TemplateListContainer>
+      </TemplatesContainer>
     </Container>
   );
 };
 
-export const TemplatesPage = withRouter(TemplatesComponent);
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  toggleTemplateFolderExpanded: (folderIndex: number) => {
+    return;
+  },
+});
+
+export const TemplatesPage = connect<{}, ReduxDispatchTemplateFolderProps>(
+  null,
+  mapDispatchToProps
+)(TemplatesComponent);
