@@ -20,28 +20,26 @@ const Container = styled.div`
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
+  overflow: hidden;
 `;
 
 const TemplatesContainer = styled.div`
-  margin-top: 15px;
+  margin-top: 30px;
   border: 1px solid red;
   border-radius: 10px;
   width: auto;
-  padding: 20px;
+  padding: 40px;
+  height: 50vh;
 `;
 
 const TemplateListContainer = styled.div`
   width: auto;
-  height: 360px;
-  height: 50vh;
+  height: 400px;
 `;
 
 const TemplateListScrollContainer = styled.div`
-  width: auto;
-  height: 360px;
-  margin: 70px;
   overflow-y: scroll;
-  height: 50vh;
+  height: 90%;
 `;
 
 const Center = styled.div`
@@ -92,10 +90,8 @@ const TemplateContainer = styled.div`
 const ButtonWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  padding-top: 20px;
-  justify-content: space-between;
-  position: relative;
-  float: right;
+  justify-content: flex-end;
+  padding-bottom: 20px;
 `;
 
 const WhiteColorButton = withStyles((theme: Theme) => ({
@@ -120,14 +116,11 @@ const ColorButton = withStyles((theme: Theme) => ({
   },
 }))(Button);
 
-const FolderContainer = styled.div``;
-
 const FolderNameWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  margin-left: -28px;
 `;
 
 interface TemplatesListProps {
@@ -213,19 +206,26 @@ type Props = FolderProps;
 
 const TemplatesComponent: React.FC = (props: any) => {
   const [searchQuery, setSearchQuery] = useState("");
-  const names = ["non-shared", "catalog year 2017-2018", "folderrrrr"];
+  const names = [
+    "non-shared",
+    "catalog year 2017-2018",
+    "folderrrrr",
+    "YAA",
+    "MORE FOLDERS",
+    "Naniii",
+    "yet another pls work",
+    "scroll here",
+  ];
 
   return (
     <Container>
+      <Search
+        placeholder="Search by major name"
+        onEnter={setSearchQuery}
+        isSmall={false}
+      />
       <TemplatesContainer>
-        <Center> Templates </Center>
-
         <TemplateListContainer>
-          <Search
-            placeholder="Search by major name"
-            onEnter={setSearchQuery}
-            isSmall={true}
-          />
           <ButtonWrapper>
             <WhiteColorButton> Upload Plan </WhiteColorButton>
             <ColorButton> Create New </ColorButton>
@@ -250,7 +250,6 @@ const FolderComponent: React.FC<FolderProps> = (props: FolderProps) => {
 
   return (
     <FolderNameWrapper>
-      <p style={{ fontWeight: "bold" }}> {{ name }} </p>
       <div
         onClick={() => {
           dispatch(toggleTemplateFolderExpandedAction(index));
@@ -259,6 +258,7 @@ const FolderComponent: React.FC<FolderProps> = (props: FolderProps) => {
       >
         {isExpanded ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
       </div>
+      <p style={{ fontWeight: "bold" }}> {name} </p>
     </FolderNameWrapper>
   );
 };
