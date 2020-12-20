@@ -223,4 +223,5 @@ export {
   MainTitleText,
   SelectableCourse,
   TitleText,
+  ScrollWrapper,
 };

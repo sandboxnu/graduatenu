@@ -1,3 +1,4 @@
+import { create } from "lodash";
 import { createAction } from "typesafe-actions";
 import {
   Schedule,
@@ -11,6 +12,7 @@ import {
   DNDScheduleTerm,
   IPlanData,
 } from "../../models/types";
+import { ActivePlanAutoSaveStatus } from "../reducers/userPlansReducer";
 
 export const setActivePlanAction = createAction(
   "userPlans/SET_ACTIVE_PLAN",
@@ -36,6 +38,11 @@ export const updateActivePlanAction = createAction(
   (plan: Partial<IPlanData>) => ({ plan })
 )();
 
+export const updateActivePlanTimestampAction = createAction(
+  "userPlans/UPDATE_ACTIVE_PLAN_TIMESTAMP",
+  (timestamp: Date) => ({ timestamp })
+)();
+
 export const deletePlan = createAction(
   "userPlans/DELETE_PLAN",
   (name: string) => ({ name })
@@ -49,20 +56,27 @@ export const setActivePlanDNDScheduleAction = createAction(
 
 export const setActivePlanMajorAction = createAction(
   "schedule/SET_ACTIVE_PLAN_MAJOR",
-  (major: string) => ({ major })
+  (major: string | null) => ({ major })
 )();
 
 export const setActivePlanCoopCycleAction = createAction(
   "schedule/SET_ACTIVE_PLAN_COOP_CYCLE",
-  (coopCycle: string, allPlans?: Record<string, Schedule[]>) => ({
+  (
+    coopCycle: string | null,
+    academicYear: number,
+    graduationYear: number,
+    allPlans?: Record<string, Schedule[]>
+  ) => ({
     coopCycle,
+    academicYear,
+    graduationYear,
     allPlans,
   })
 )();
 
 export const setActivePlanCatalogYearAction = createAction(
   "schedule/SET_ACTIVE_PLAN_CATALOG_YEAR",
-  (catalogYear: number, allPlans?: Record<string, Schedule[]>) => ({
+  (catalogYear: number | null, allPlans?: Record<string, Schedule[]>) => ({
     catalogYear,
     allPlans,
   })
@@ -125,4 +139,9 @@ export const incrementCurrentClassCounterForActivePlanAction = createAction(
 export const toggleYearExpandedForActivePlanAction = createAction(
   "userPlans/TOGGLE_YEAR_EXPANDED_FOR_ACTIVE_PLAN",
   (index: number) => ({ index })
+)();
+
+export const setActivePlanStatusAction = createAction(
+  "userPlans/SET_ACTIVE_PLAN_STATUS",
+  (status: ActivePlanAutoSaveStatus) => ({ status })
 )();

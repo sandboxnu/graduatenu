@@ -28,8 +28,8 @@ ActiveRecord::Schema.define(version: 2020_12_04_052855) do
     t.json "warnings", default: [], array: true
     t.integer "course_counter"
     t.boolean "is_currently_being_edited", default: false, null: false
-    t.integer "catalog_year", default: 2018
     t.datetime "last_viewed"
+    t.integer "catalog_year", default: 2018
     t.index ["user_id"], name: "index_plans_on_user_id"
   end
 
@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(version: 2020_12_04_052855) do
     t.string "nu_id"
     t.json "courses_completed", default: [], array: true
     t.json "courses_transfer", default: [], array: true
+    t.integer "catalog_year"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["full_name"], name: "index_users_on_full_name"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

@@ -5,32 +5,60 @@ import {
   DNDScheduleTerm,
   SeasonEnum,
   StatusEnum,
+  CourseWarning,
 } from "../models/types";
 import { Schedule, ScheduleCourse, SeasonWord } from "../../../common/types";
 
 export function generateInitialSchedule(
   academicYear: number,
   graduationYear: number,
-  completedCourses: ScheduleCourse[]
+  completedCourses: ScheduleCourse[],
+  major: string,
+  coopCycle: string,
+  allPlans: Record<string, Schedule[]>
 ): [DNDSchedule, number] {
-  const currentCalendarYear = new Date().getFullYear();
-  const currentYear =
-    new Date().getMonth() <= 3 ? currentCalendarYear : currentCalendarYear + 1;
-  const numYearsInSchool = graduationYear - currentYear + academicYear;
-  const startingYear = graduationYear - numYearsInSchool;
+  const currentPlan = allPlans[major].find(
+    (p: Schedule) => planToString(p) === coopCycle
+  )!;
 
-  const yearsList = [];
-  // should add consecutive years from startingYear to one less than graduationYear
-  for (var y = startingYear; y < graduationYear; y++) {
-    yearsList.push(y);
+  const [dndCourses, counter] = convertToDNDCourses(completedCourses, 0);
+  let [schedule, courseCounter] = convertToDNDSchedule(currentPlan!, counter);
+  schedule = clearSchedule(schedule, academicYear, graduationYear); // clear all courses from example plan
+
+  // add in completed courses
+  let year = schedule.years[0];
+  while (
+    dndCourses.length > 0 &&
+    year <= schedule.years[schedule.years.length - 1]
+  ) {
+    schedule.yearMap[year].fall.classes = dndCourses.splice(0, 4); // the first 4 courses in the list, and remove them from the list
+    schedule.yearMap[year].spring.classes = dndCourses.splice(0, 4);
+    schedule.yearMap[year].summer1.classes = dndCourses.splice(0, 4);
+    schedule.yearMap[year].summer2.classes = dndCourses.splice(0, 4);
   }
 
+  return [
+    alterScheduleToHaveCorrectYears(schedule, academicYear, graduationYear),
+    courseCounter,
+  ];
+}
+
+export function generateInitialScheduleNoCoopCycle(
+  academicYear: number,
+  graduationYear: number,
+  completedCourses: ScheduleCourse[]
+): [DNDSchedule, number] {
   let yearMap: { [key: number]: DNDScheduleYear } = {};
   let counter = 1;
+  const numYears = 4; // default is 4 years
 
   const [dndCourses, courseCounter] = convertToDNDCourses(completedCourses, 0);
 
-  for (const y of yearsList) {
+  const yearsList = [];
+
+  for (let i = 0; i < numYears; i++) {
+    const y = 1000 + i;
+    yearsList.push(y);
     yearMap[y] = {
       year: y,
       isSummerFull: false,
@@ -75,7 +103,63 @@ export function generateInitialSchedule(
     yearMap: yearMap,
   };
 
+  return [
+    alterScheduleToHaveCorrectYears(schedule, academicYear, graduationYear),
+    courseCounter,
+  ];
+}
+
+export function generateInitialScheduleFromExistingPlan(
+  academicYear: number,
+  graduationYear: number,
+  major: string,
+  coopCycle: string,
+  allPlans: Record<string, Schedule[]>
+): [DNDSchedule, number] {
+  const currentPlan = allPlans[major].find(
+    (p: Schedule) => planToString(p) === coopCycle
+  );
+  let [schedule, courseCounter] = convertToDNDSchedule(currentPlan!, 0);
+  // set correct year numbers
+  schedule = alterScheduleToHaveCorrectYears(
+    schedule,
+    academicYear,
+    graduationYear
+  );
+
   return [schedule, courseCounter];
+}
+
+export function alterScheduleToHaveCorrectYears(
+  schedule: DNDSchedule,
+  academicYear: number,
+  graduationYear: number
+): DNDSchedule {
+  const currentCalendarYear = new Date().getFullYear();
+  const currentYear =
+    new Date().getMonth() <= 3 ? currentCalendarYear : currentCalendarYear + 1;
+  const numYearsInSchool = graduationYear - currentYear + academicYear;
+  const startingYear = graduationYear - numYearsInSchool;
+
+  const newYearMap: { [key: number]: DNDScheduleYear } = {};
+  const newYears: number[] = [];
+
+  for (let i = 0; i < schedule.years.length; i++) {
+    const newYear = startingYear + i;
+    newYears.push(newYear);
+
+    const oldYear = schedule.years[i];
+    newYearMap[newYear] = schedule.yearMap[oldYear];
+    newYearMap[newYear].fall.termId = Number(String(newYear) + String(10));
+    newYearMap[newYear].spring.termId = Number(String(newYear) + String(30));
+    newYearMap[newYear].summer1.termId = Number(String(newYear) + String(40));
+    newYearMap[newYear].summer2.termId = Number(String(newYear) + String(60));
+  }
+
+  return {
+    years: newYears,
+    yearMap: newYearMap,
+  };
 }
 
 export function convertTermIdToSeason(termId: number): SeasonWord {
@@ -137,7 +221,6 @@ export function getNumCoops(schedule: Schedule): number {
     const yearSch = schedule.yearMap[year];
     if (yearSch.fall.status === "COOP" || yearSch.spring.status === "COOP") {
       num++;
-      continue;
     }
   }
   return num;
@@ -201,7 +284,11 @@ export const convertToDNDSchedule = (
   return [newSchedule, counter];
 };
 
-export const clearSchedule = (schedule: DNDSchedule) => {
+export const clearSchedule = (
+  schedule: DNDSchedule,
+  academicYear: number,
+  graduationYear: number
+) => {
   const yearMapCopy = JSON.parse(JSON.stringify(schedule.yearMap));
   for (const y of schedule.years) {
     const year = JSON.parse(JSON.stringify(schedule.yearMap[y]));
@@ -211,8 +298,16 @@ export const clearSchedule = (schedule: DNDSchedule) => {
     year.summer2.classes = [];
     yearMapCopy[y] = year;
   }
-  schedule.yearMap = yearMapCopy;
-  return schedule;
+
+  const newSchedule: DNDSchedule = {
+    yearMap: yearMapCopy,
+    years: schedule.years,
+  };
+  return alterScheduleToHaveCorrectYears(
+    newSchedule,
+    academicYear,
+    graduationYear
+  );
 };
 
 export const convertToDNDCourses = (
@@ -312,13 +407,37 @@ export function isYearInPast(yearIndex: number, academicYear: number): boolean {
 }
 
 /**
+ * Filters through the given list of course warnings to find all warnings for the given course
+ * @param courseWarnings the list of course warnings to search through
+ * @param course the search course
+ */
+export function findCourseWarnings(
+  courseWarnings: CourseWarning[],
+  course: DNDScheduleCourse
+) {
+  const result: CourseWarning[] = courseWarnings.filter(
+    (w: CourseWarning) =>
+      w.subject + w.classId === course.subject + course.classId
+  );
+
+  if (result.length === 0) {
+    return undefined;
+  } else {
+    return result;
+  }
+}
+/*
  *  Determines if this course is in the given term
  * @param courseToAdd the course that is being checked
  * @param term the term being checked
  * @returns whether or not this course is in the term
  */
 function isCourseInTerm(courseToAdd: ScheduleCourse, term: DNDScheduleTerm) {
-  return term.classes.some((course) => String(courseToAdd.classId) === String(course.classId) && courseToAdd.subject === course.subject);
+  return term.classes.some(
+    course =>
+      String(courseToAdd.classId) === String(course.classId) &&
+      courseToAdd.subject === course.subject
+  );
 }
 
 /**
@@ -331,9 +450,11 @@ export function isCourseInSchedule(
   courseToAdd: ScheduleCourse,
   schedule: DNDSchedule
 ) {
-  return schedule.years.some((year) => 
-    isCourseInTerm(courseToAdd, schedule.yearMap[year].spring) ||
-    isCourseInTerm(courseToAdd, schedule.yearMap[year].fall) ||
-    isCourseInTerm(courseToAdd, schedule.yearMap[year].summer1) ||
-    isCourseInTerm(courseToAdd, schedule.yearMap[year].summer2));
+  return schedule.years.some(
+    year =>
+      isCourseInTerm(courseToAdd, schedule.yearMap[year].spring) ||
+      isCourseInTerm(courseToAdd, schedule.yearMap[year].fall) ||
+      isCourseInTerm(courseToAdd, schedule.yearMap[year].summer1) ||
+      isCourseInTerm(courseToAdd, schedule.yearMap[year].summer2)
+  );
 }

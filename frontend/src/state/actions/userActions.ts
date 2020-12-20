@@ -29,21 +29,21 @@ export const setGraduationYearAction = createAction(
 
 export const setUserMajorAction = createAction(
   "user/SET_USER_MAJOR",
-  (major: string) => ({
+  (major: string | null) => ({
     major,
   })
 )();
 
 export const setUserCoopCycleAction = createAction(
   "user/SET_COOP_CYCLE",
-  (coopCycle: string) => ({
+  (coopCycle: string | null) => ({
     coopCycle,
   })
 )();
 
 export const setUserCatalogYearAction = createAction(
   "user/SET_CATALOG",
-  (catalogYear?: number) => ({
+  (catalogYear: number | null) => ({
     catalogYear,
   })
 )();

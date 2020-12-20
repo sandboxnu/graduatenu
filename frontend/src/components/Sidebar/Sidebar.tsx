@@ -15,6 +15,7 @@ import {
 } from "../../state";
 import { connect, useSelector } from "react-redux";
 import { findMajorFromName } from "../../utils/plan-helpers";
+import { ScrollWrapper } from "../../Onboarding/GenericOnboarding";
 
 const Container = styled.div`
   display: flex;
@@ -31,12 +32,6 @@ const MajorTitle = styled.p`
   margin-left: 4px;
   margin-bottom: 12px;
 `;
-
-interface SidebarProps {
-  schedule: DNDSchedule;
-  major: string;
-  transferCourses: ScheduleCourse[];
-}
 
 interface MajorSidebarProps {
   schedule: DNDSchedule;
@@ -67,47 +62,48 @@ const MajorSidebarComponent: React.FC<MajorSidebarProps> = ({
 
   return (
     <Container>
-      <MajorTitle>{major.name}</MajorTitle>
-      {major.requirementGroups.map((req, index) => {
-        return (
-          <RequirementSection
-            title={!!req ? req : "Additional Requirements"}
-            // TODO: this is a temporary solution for major scraper bug
-            contents={major.requirementGroupMap[req]}
-            warning={warnings.find(w => w.requirementGroup === req)}
-            key={index + major.name}
-            completedCourses={completedCourseStrings}
-          ></RequirementSection>
-        );
-      })}
+      <ScrollWrapper>
+        <MajorTitle>{major.name}</MajorTitle>
+        {major.requirementGroups.map((req, index) => {
+          return (
+            <RequirementSection
+              title={!!req ? req : "Additional Requirements"}
+              // TODO: this is a temporary solution for major scraper bug
+              contents={major.requirementGroupMap[req]}
+              warning={warnings.find(w => w.requirementGroup === req)}
+              key={index + major.name}
+              completedCourses={completedCourseStrings}
+            />
+          );
+        })}
+      </ScrollWrapper>
     </Container>
   );
 };
 
-const SidebarComponent: React.FC<SidebarProps> = ({
-  schedule,
-  major,
-  transferCourses,
-}) => {
-  const majorObj: Major | undefined = useSelector<AppState, Major | undefined>(
-    state => findMajorFromName(major, state.majorState.majors)
+export const Sidebar: React.FC = () => {
+  const { schedule, major, transferCourses } = useSelector(
+    (state: AppState) => ({
+      major: getActivePlanMajorFromState(state),
+      schedule: getActivePlanScheduleFromState(state),
+      transferCourses: getTransferCoursesFromState(state),
+    })
   );
+  const { majorObj } = useSelector((state: AppState) => ({
+    majorObj: findMajorFromName(major, state.majorState.majors),
+  }));
 
-  return majorObj ? (
-    <MajorSidebarComponent
-      schedule={schedule}
-      major={majorObj}
-      transferCourses={transferCourses}
-    />
-  ) : (
-    <NoMajorSidebarComponent />
+  return (
+    <ScrollWrapper>
+      {majorObj ? (
+        <MajorSidebarComponent
+          schedule={schedule}
+          major={majorObj}
+          transferCourses={transferCourses}
+        />
+      ) : (
+        <NoMajorSidebarComponent />
+      )}
+    </ScrollWrapper>
   );
 };
-
-const mapStateToProps = (state: AppState) => ({
-  schedule: getActivePlanScheduleFromState(state),
-  transferCourses: getTransferCoursesFromState(state),
-  major: getActivePlanMajorFromState(state),
-});
-
-export const Sidebar = connect(mapStateToProps)(SidebarComponent);

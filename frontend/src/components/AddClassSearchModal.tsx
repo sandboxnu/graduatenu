@@ -149,9 +149,7 @@ interface SearchResultProps {
   course: ScheduleCourse;
 }
 
-export const AddClassSearchModal: React.FC<
-  AddClassSearchModalProps
-> = props => {
+export const AddClassSearchModal: React.FC<AddClassSearchModalProps> = props => {
   const [searchQuery, setSearchQuery] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [searchedCourses, setSearchedCourses] = useState(EMPTY_COURSE_LIST);
