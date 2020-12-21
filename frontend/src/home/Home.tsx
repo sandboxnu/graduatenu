@@ -309,8 +309,8 @@ class HomeComponent extends React.Component<Props> {
           <AlertWrapper>
             <Alert severity="warning">
               This plan is currently being edited by your advisor, so we've put
-              it in read-only mode. You will be able to edit it again once
-              you're advisor finishes their changes.
+              it in read-only mode. You will be able to edit it again once your
+              advisor finishes their changes.
             </Alert>
           </AlertWrapper>
         )}
