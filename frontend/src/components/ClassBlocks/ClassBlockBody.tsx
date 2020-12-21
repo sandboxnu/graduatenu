@@ -12,11 +12,12 @@ const Wrapper = styled.div`
   height: 100%;
 `;
 
-const TitleWrapper = styled.div`
+const TitleWrapper = styled.div<any>`
   display: flex;
   flex-direction: row;
   align-items: center;
-  width: 100%;
+  width: ${props =>
+    props.hideDelete ? `calc(100% - 8px)` : `calc(100% - 32px)`};
 `;
 
 const Title = styled.div`
@@ -52,7 +53,7 @@ export const ClassBlockBody: React.FC<ClassBlockBodyProps> = ({
 }) => {
   return (
     <Wrapper>
-      <TitleWrapper>
+      <TitleWrapper hideDelete={hideDelete}>
         <Title>{course.subject + course.classId}</Title>
         <Subtitle>{course.name}</Subtitle>
       </TitleWrapper>
@@ -65,7 +66,7 @@ export const ClassBlockBody: React.FC<ClassBlockBodyProps> = ({
         {!hideDelete && (
           <IconButton
             onClick={onDelete}
-            style={{ color: "rgba(102, 102, 102, 0.3)" }}
+            style={{ padding: "3px", color: "rgba(102, 102, 102, 0.3)" }}
             disableRipple
             disableFocusRipple
             disableTouchRipple

@@ -1,10 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import styled from "styled-components";
-import { getStudents } from "../services/AdvisorService";
+import { fetchUser, getStudents } from "../services/AdvisorService";
 import { Search } from "../components/common/Search";
-import LinearProgress from "@material-ui/core/LinearProgress";
+import { LinearProgress, IconButton } from "@material-ui/core";
 import { getAuthToken } from "../utils/auth-helpers";
+import { NonEditableSchedule } from "../components/Schedule/ScheduleComponents";
+import { findAllPlansForUser } from "../services/PlanService";
+import { IPlanData } from "../models/types";
+import { setUserPlansAction } from "../state/actions/userPlansActions";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getActivePlanNameFromState,
+  safelyGetActivePlanScheduleFromState,
+} from "../state";
+import { AppState } from "../state/reducers/state";
+import { Edit, Fullscreen } from "@material-ui/icons";
 
 const Container = styled.div`
   margin-left: 30px;
@@ -35,6 +46,12 @@ const StudentContainer = styled.div`
   font-size: 18px;
   line-height: 21px;
   padding: 10px;
+  margin-top: 5px;
+  &:hover {
+    background-color: #efefef;
+    border-radius: 20px;
+    cursor: pointer;
+  }
 `;
 
 const StudentEmailNUIDContainer = styled.div`
@@ -75,10 +92,50 @@ const NoMoreStudents = styled.div`
   color: red;
 `;
 
+const StudentPreviewContainer = styled.div`
+  margin-top: 30px;
+  display: flex;
+  > * {
+    border: 1px solid red;
+    border-radius: 10px;
+    height: 70vh;
+    padding: 30px;
+  }
+`;
+const ScheduleWrapper = styled.div`
+  overflow-x: scroll;
+  height: 95%;
+`;
+
+const SchedulePreviewContainer = styled.div`
+  overflow: hidden;
+  flex: 5;
+`;
+const PlanTitle = styled.div`
+  display: flex;
+  justify-content: center;
+  font-size: 24px;
+  height: 24px;
+`;
+const ButtonHeader = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  height: 36px;
+  margin-right: 10px;
+  margin-bottom: 5px;
+  > button {
+    padding: 3px;
+  }
+  svg {
+    font-size: 30px;
+  }
+`;
+
 const EMPTY_STUDENT_LIST: StudentProps[] = [];
 
 interface StudentsListProps {
   searchQuery: string;
+  setSelectedStudent: (studentId: StudentProps | null) => void;
 }
 
 interface StudentsAPI {
@@ -91,24 +148,90 @@ interface StudentProps {
   fullName: string;
   nuId: string;
   email: string;
+  id: number;
+}
+
+interface StudentComponentProps {
+  fullName: string;
+  nuId: string;
+  email: string;
+  id: number;
+  setSelectedStudent: (studentId: StudentProps | null) => void;
 }
 
 const ManageStudentsComponent: React.FC = (props: any) => {
   const [searchQuery, setSearchQuery] = useState("");
+  const [selectedStudent, setSelectedStudent] = useState<StudentProps | null>(
+    null
+  );
 
   return (
     <Container>
       <Search
         placeholder="Search by name, email, or NUID"
-        onEnter={setSearchQuery}
+        onEnter={query => {
+          setSearchQuery(query);
+          setSelectedStudent(null);
+        }}
         isSmall={false}
       />
-      <StudentsList searchQuery={searchQuery} />
+      {selectedStudent === null ? (
+        <StudentsList
+          searchQuery={searchQuery}
+          setSelectedStudent={setSelectedStudent}
+        />
+      ) : (
+        <StudentPreview {...selectedStudent} />
+      )}
     </Container>
   );
 };
 
-const StudentsList = (props: StudentsListProps) => {
+const StudentPreview = (props: StudentProps) => {
+  const [noPlans, setNoPlans] = useState(false);
+
+  const dispatch = useDispatch();
+  const token = getAuthToken();
+  const { planName } = useSelector((state: AppState) => ({
+    planName: getActivePlanNameFromState(state),
+  }));
+
+  useEffect(() => {
+    fetchUser(props.id, token).then(response => {});
+    findAllPlansForUser(props.id, token).then((plans: IPlanData[]) => {
+      dispatch(setUserPlansAction(plans, 2020));
+      if (!plans) setNoPlans(true);
+    });
+  }, []);
+  return (
+    <StudentPreviewContainer>
+      <div style={{ flex: 1, marginRight: "20px" }}></div>
+      {noPlans ? (
+        <div>User Has No Plans</div>
+      ) : (
+        <SchedulePreviewContainer>
+          <PlanTitle>{planName}</PlanTitle>
+          <ButtonHeader>
+            <IconButton>
+              <Edit />
+            </IconButton>
+            <IconButton>
+              <Fullscreen />
+            </IconButton>
+          </ButtonHeader>
+          <ScheduleWrapper>
+            <NonEditableSchedule />
+          </ScheduleWrapper>
+        </SchedulePreviewContainer>
+      )}
+    </StudentPreviewContainer>
+  );
+};
+
+const StudentsList = ({
+  searchQuery,
+  setSelectedStudent,
+}: StudentsListProps) => {
   const [students, setStudents] = useState(EMPTY_STUDENT_LIST);
   const [isLoading, setIsLoading] = useState(true);
   const [pageNumber, setPageNumber] = useState(0);
@@ -117,7 +240,7 @@ const StudentsList = (props: StudentsListProps) => {
 
   const fetchStudents = (currentStudents: StudentProps[], page: number) => {
     setIsLoading(true);
-    getStudents(props.searchQuery, page, token)
+    getStudents(searchQuery, page, token)
       .then((studentsAPI: StudentsAPI) => {
         setStudents(currentStudents.concat(studentsAPI.students));
         setPageNumber(studentsAPI.nextPage);
@@ -130,7 +253,7 @@ const StudentsList = (props: StudentsListProps) => {
   useEffect(() => {
     setStudents(EMPTY_STUDENT_LIST);
     fetchStudents(EMPTY_STUDENT_LIST, 0);
-  }, [props.searchQuery, token]);
+  }, [searchQuery, token]);
 
   return (
     <StudentListContainer>
@@ -145,10 +268,9 @@ const StudentsList = (props: StudentsListProps) => {
         ) : (
           students.map(student => (
             <Student
-              fullName={student.fullName}
-              nuId={student.nuId}
-              email={student.email}
               key={student.nuId}
+              setSelectedStudent={setSelectedStudent}
+              {...student}
             />
           ))
         )}
@@ -168,12 +290,13 @@ const StudentsList = (props: StudentsListProps) => {
   );
 };
 
-const Student = (props: StudentProps) => {
+const Student = (props: StudentComponentProps) => {
+  const { email, fullName, nuId, setSelectedStudent } = props;
   return (
-    <StudentContainer>
-      {props.fullName}
+    <StudentContainer onClick={() => setSelectedStudent(props as StudentProps)}>
+      {fullName}
       <StudentEmailNUIDContainer>
-        {props.email + " | " + props.nuId}
+        {email + " | " + nuId}
       </StudentEmailNUIDContainer>
     </StudentContainer>
   );

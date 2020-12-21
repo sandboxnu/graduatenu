@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { Redirect } from "react-router";
 import { useDispatch } from "react-redux";
-import { fetchUser } from "../services/UserService";
+import { fetchActiveUser } from "../services/UserService";
 import {
   setUserAction,
   setCompletedCoursesAction,
@@ -46,7 +46,7 @@ export const RedirectScreen: React.FC<Props> = ({ redirectUrl }) => {
           path: "/",
           domain: window.location.hostname,
         }); // set persisting cookie for all paths
-        fetchUser(cookie)
+        fetchActiveUser(cookie)
           .then(response => {
             dispatch(setUserAction(response.user));
             setIsAdvisor(response.user.isAdvisor);

@@ -40,10 +40,10 @@ export const updatePassword = (
   }).then(response => response.json());
 
 /**
- * Service function object to get the user data
+ * Service function object to get the user data of the logged in user
  * @param token
  */
-export const fetchUser = (token: string) =>
+export const fetchActiveUser = (token: string) =>
   fetch(`/api/users/current`, {
     method: "GET",
     headers: {
