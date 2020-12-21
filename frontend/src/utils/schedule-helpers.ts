@@ -151,9 +151,13 @@ export function alterScheduleToHaveCorrectYears(
     const oldYear = schedule.years[i];
     newYearMap[newYear] = schedule.yearMap[oldYear];
     newYearMap[newYear].fall.termId = Number(String(newYear) + String(10));
+    newYearMap[newYear].fall.year = newYear;
     newYearMap[newYear].spring.termId = Number(String(newYear) + String(30));
+    newYearMap[newYear].spring.year = newYear;
     newYearMap[newYear].summer1.termId = Number(String(newYear) + String(40));
+    newYearMap[newYear].summer1.year = newYear;
     newYearMap[newYear].summer2.termId = Number(String(newYear) + String(60));
+    newYearMap[newYear].summer2.year = newYear;
   }
 
   return {
