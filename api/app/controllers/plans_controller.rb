@@ -2,7 +2,7 @@ class PlansController < ApplicationController
 
   before_action :set_user
   before_action :set_searched_user, only: [:index]
-  before_action :set_user_plan, only: [:show, :update, :destroy]
+  before_action :set_user_plan, only: [:show, :update, :last_viewed, :destroy]
 
   # returns all the plans
   def index
@@ -60,11 +60,24 @@ class PlansController < ApplicationController
     end
   end
 
+  def last_viewed
+    if authorized
+      if @plan
+        @plan.update(last_viewed: Time.zone.now, last_viewer: last_viewed_params[:last_viewer])
+        render :show
+      else
+        render json: {error: "No such plan."}, status: :unprocessable_entity
+      end
+    else
+      render json: {error: "Unauthorized."}, status: :unprocessable_entity
+    end
+  end
+
   # finds a plan by id then destroys it, just needs the id in the body
   def destroy
     if authorized
       if @plan
-        @plan.destroy()
+        @plan.destroy
         render :show
       else
         render json: {error: "No such plan."}, status: :unprocessable_entity
@@ -81,6 +94,10 @@ class PlansController < ApplicationController
      # (schedule: {}) allows you to store an arbitrary hash with unspecified schema
     params.require(:plan).permit(:name, :link_sharing_enabled, :major, :coop_cycle, :course_counter, :catalog_year, :last_viewed,
     warnings: [:message, :termId], course_warnings: [:message, :termId, :subject, :classId], schedule: {})
+  end
+
+  def last_viewed_params
+    params.require(:plan).permit(:last_viewer) # a user id
   end
 
   #sets the current user

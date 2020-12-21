@@ -91,6 +91,7 @@ interface RequirementSectionProps {
   contents: IMajorRequirementGroup;
   warning?: IRequirementGroupWarning;
   completedCourses: string[];
+  isEditable: boolean;
 }
 
 interface ReduxStoreProps {
@@ -384,7 +385,8 @@ class RequirementSectionComponent extends React.Component<
             }
             currentClassCounter={this.props.currentClassCounter}
             level={level}
-          ></SidebarClassBlock>
+            isEditable={this.props.isEditable}
+          />
         );
       }
     } else {
@@ -401,7 +403,8 @@ class RequirementSectionComponent extends React.Component<
             )}
             currentClassCounter={this.props.currentClassCounter}
             level={level}
-          ></SidebarClassBlock>
+            isEditable={this.props.isEditable}
+          />
         );
       }
     }
@@ -493,7 +496,7 @@ class RequirementSectionComponent extends React.Component<
             </SubtitleText>
           </SubtitleWrapper>
         )}
-        {this.state.expanded && (
+        {this.state.expanded && this.props.isEditable && (
           <Droppable isDropDisabled={true} droppableId={this.props.title}>
             {provided => (
               <div ref={provided.innerRef as any} {...provided.droppableProps}>
@@ -507,6 +510,16 @@ class RequirementSectionComponent extends React.Component<
               </div>
             )}
           </Droppable>
+        )}
+        {this.state.expanded && !this.props.isEditable && (
+          <div>
+            {!!contents &&
+              contents.type !== "RANGE" &&
+              this.parseRequirements(contents.requirements)}
+            {!!contents &&
+              contents.type === "RANGE" &&
+              this.handleRange(contents.requirements)}
+          </div>
         )}
 
         <SidebarAddClassModal

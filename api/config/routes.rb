@@ -9,7 +9,11 @@ Rails.application.routes.draw do
         get 'students'
         get 'current'
       end
-      resources :plans
+      resources :plans, only: [:index, :show, :create, :update, :destroy] do
+        member do
+          put :last_viewed
+        end
+      end
     end
 
     post 'v1/admin_hook', to: 'admin#admin_hook'
