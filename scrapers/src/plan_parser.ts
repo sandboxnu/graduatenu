@@ -94,9 +94,7 @@ function buildScheduleFromYears(
   // all the termIds (of the seasons) should be 10, 30, 40, 60
   years = years.map(function(year: ScheduleYear, index: number): ScheduleYear {
     for (const term of [year.fall, year.spring, year.summer1, year.summer2]) {
-      // set this one first, uses termId (two digits).
-      term.id = BASE_YEAR + term.termId + index;
-      // set this one second, is year shifted two digits left, plus existing termId (one of 10, 30, 40, 60).
+      // set this one first, is year shifted two digits left, plus existing termId (one of 10, 30, 40, 60).
       term.termId = (BASE_YEAR + index) * 100 + term.termId;
       // the year is base year plus the index of the year.
       term.year = BASE_YEAR + index;
@@ -329,7 +327,6 @@ function buildYear(
         season: seasonEnums[i],
         termId: seasonTermIds[i],
         year: 0,
-        id: i,
         status: status,
         classes: classes,
       });
@@ -339,7 +336,6 @@ function buildYear(
         season: seasonEnums[i],
         termId: seasonTermIds[i],
         year: 0,
-        id: i,
         status: StatusEnum.INACTIVE,
         classes: [],
       });

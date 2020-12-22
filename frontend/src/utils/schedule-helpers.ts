@@ -49,7 +49,6 @@ export function generateInitialScheduleNoCoopCycle(
   completedCourses: ScheduleCourse[]
 ): [DNDSchedule, number] {
   let yearMap: { [key: number]: DNDScheduleYear } = {};
-  let counter = 1;
   const numYears = 4; // default is 4 years
 
   const [dndCourses, courseCounter] = convertToDNDCourses(completedCourses, 0);
@@ -66,7 +65,6 @@ export function generateInitialScheduleNoCoopCycle(
         season: SeasonEnum.FL,
         year: y,
         termId: Number(String(y) + String(10)),
-        id: counter,
         status: StatusEnum.CLASSES,
         classes: dndCourses.splice(0, 4), // the first 4 courses in the list, and remove them from the list
       },
@@ -74,7 +72,6 @@ export function generateInitialScheduleNoCoopCycle(
         season: SeasonEnum.SP,
         year: y,
         termId: Number(String(y) + String(30)),
-        id: counter + 1,
         status: StatusEnum.CLASSES,
         classes: dndCourses.splice(0, 4), // the first 4 courses in the list, and remove them from the list
       },
@@ -82,7 +79,6 @@ export function generateInitialScheduleNoCoopCycle(
         season: SeasonEnum.S1,
         year: y,
         termId: Number(String(y) + String(40)),
-        id: counter + 2,
         status: StatusEnum.CLASSES,
         classes: dndCourses.splice(0, 4), // the first 4 courses in the list, and remove them from the list
       },
@@ -90,12 +86,10 @@ export function generateInitialScheduleNoCoopCycle(
         season: SeasonEnum.S2,
         year: y,
         termId: Number(String(y) + String(60)),
-        id: counter + 3,
         status: StatusEnum.CLASSES,
         classes: dndCourses.splice(0, 4), // the first 4 courses in the list, and remove them from the list
       },
     };
-    counter += 4;
   }
 
   const schedule = {

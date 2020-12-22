@@ -328,6 +328,6 @@ catalogToMajor(
   "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/data-science-biology-bs/#programrequirementstext"
 ).then((scrapedMajor: Major) => {
   //uncomment following lines to log output.
-  console.log("--------------------Parsed major object--------------------");
-  console.log(JSON.stringify(scrapedMajor));
+  // console.log("--------------------Parsed major object--------------------");
+  // console.log(JSON.stringify(scrapedMajor));
 });
