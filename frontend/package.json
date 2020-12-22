@@ -36,6 +36,7 @@
     "redux-thunk": "^2.3.0",
     "request-promise": "^4.2.6",
     "styled-components": "^4.4.0",
+    "timeago.js": "^4.0.2",
     "typesafe-actions": "^5.1.0",
     "xlsx": "^0.15.6"
   },
@@ -54,7 +55,7 @@
     "@types/styled-components": "^4.1.19",
     "husky": "^3.0.5",
     "jest": "^24.9.0",
-    "prettier": "1.18.2",
+    "prettier": "^1.19.0",
     "pretty-quick": "^1.11.1",
     "react-app-rewire-alias": "^0.1.6",
     "react-app-rewired": "^2.1.6",

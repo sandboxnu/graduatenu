@@ -6,7 +6,10 @@ import picture1 from "../assets/onboarding-1.png";
 import picture2 from "../assets/onboarding-2.png";
 import picture3 from "../assets/onboarding-3.png";
 import { NORTHEASTERN_RED } from "../constants";
-import { simulateKhouryLogin } from "../services/UserService";
+import {
+  simulateKhouryAdvisorLogin,
+  simulateKhouryStudentLogin,
+} from "../services/UserService";
 
 const Header = styled.div`
   display: flex;
@@ -143,8 +146,14 @@ export class Onboarding extends React.Component<Props> {
     this.dev = process.env.NODE_ENV === "development";
   }
 
-  onDevClick() {
-    simulateKhouryLogin().then(response => {
+  onDevStudentClick() {
+    simulateKhouryStudentLogin().then(response => {
+      window.location.href = response.redirect;
+    });
+  }
+
+  onDevAdvisorClick() {
+    simulateKhouryAdvisorLogin().then(response => {
       window.location.href = response.redirect;
     });
   }
@@ -188,18 +197,27 @@ export class Onboarding extends React.Component<Props> {
           <h1>GraduateNU</h1>
           <LoginButtonContainer>
             <a
+              data-cy="get-started"
               href="https://admin.khoury.northeastern.edu"
               style={{ textDecoration: "none" }}
             >
               <ColorButton variant="contained">Get Started</ColorButton>
             </a>
             {this.dev && (
-              <ColorButton
-                variant="contained"
-                onClick={this.onDevClick.bind(this)}
-              >
-                Dev Bypass
-              </ColorButton>
+              <>
+                <ColorButton
+                  variant="contained"
+                  onClick={this.onDevStudentClick.bind(this)}
+                >
+                  Dev Bypass (Student)
+                </ColorButton>
+                <ColorButton
+                  variant="contained"
+                  onClick={this.onDevAdvisorClick.bind(this)}
+                >
+                  Dev Bypass (Advisor)
+                </ColorButton>
+              </>
             )}
           </LoginButtonContainer>
         </Header>

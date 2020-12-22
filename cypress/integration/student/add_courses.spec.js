@@ -1,49 +1,29 @@
-// to launch test runner: yarn run cypress open
-
-describe("Onboarding", () => {
-  it("should login and logout", () => {
-    cy.visit("/");
-    cy.get("button")
-      .contains("Dev Bypass")
-      .click();
-    cy.url().should("include", "/redirect");
-    cy.wait(10000);
-    // check logged in
-    cy.url({ timeout: 30000 }).should("include", "/home");
-    cy.get("button")
-      .contains("Logout")
-      .click();
-    // check logged out
-    cy.url().should("eq", "http://localhost:3000/"); // => true
-  });
-  it("should add a class to year 1 summer 2", () => {
-    cy.visit("/");
-    cy.get("button")
-      .contains("Dev Bypass")
-      .click();
-    cy.url({
-      timeout: 30000,
-    }).should("include", "/home"); // wait up to 30 seconds to load the home screen
-    // click add class
-    cy.get(
-      ":nth-child(3) > .sc-kjoXOD > :nth-child(4) > .sc-fAjcbJ > .sc-caSCKo > .sc-hSdWYo > .MuiPaper-root > .sc-hzDkRC > .sc-jhAzac"
-    ).click();
-    // type in "CS" and "2500"
-    cy.get(
-      '[style="margin-top: 36px; min-width: 326px;"] > .MuiInputBase-root > #outlined-basic'
-    ).type("CS");
-    cy.get(
-      '[style="margin-top: 12px; margin-bottom: 12px; min-width: 326px;"] > .MuiInputBase-root > #outlined-basic'
-    ).type("2500");
-    // search
-    cy.get('.sc-kpOJdX > [tabindex="0"]').click();
-    cy.get(".sc-jKJlTe > .MuiPaper-root > .sc-kGXeez > .sc-jzJRlG", {
-      timeout: 30000, // wait up to 30 seconds for class to show up
-    }).should("be.visible");
-    // click Add Class button
-    cy.get(".sc-kpOJdX > :nth-child(6)").click();
+describe("add course in home page", () => {
+  beforeEach(() => {
+    cy.studentLogin();
   });
 
+  it("should be able to add a class to first semester", () => {
+    cy.get('[data-cy="add-class-div"]')
+      .first()
+      .click();
+
+    cy.get('[data-cy="search-input"]').type("CS 2500 {enter}");
+    cy.get('[data-cy="results-add-class-button"]', {
+      timeout: 30000, // wait up to 30 seconds for class to load
+    })
+      .should("be.visible")
+      .first()
+      .click();
+
+    cy.get("button")
+      .contains("Add Classes")
+      .should("not.be.disabled")
+      .click();
+
+    cy.get('[data-cy="class-list-wrapper"]');
+  });
+  /*
   it("should get warning when adding duplicates", () => {
     cy.visit("/");
     cy.get("button")
@@ -180,5 +160,5 @@ describe("Onboarding", () => {
     cy.get(":nth-child(2) > .MuiPaper-root > .sc-kGXeez > .sc-jzJRlG").should(
       "exist"
     );
-  });
+  });*/
 });

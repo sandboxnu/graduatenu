@@ -3,6 +3,7 @@
 # Table name: plans
 #
 #  id                        :bigint(8)        not null, primary key
+#  catalog_year              :integer(4)       default(2018)
 #  coop_cycle                :string
 #  course_counter            :integer(4)
 #  course_warnings           :json             default([]), is an Array

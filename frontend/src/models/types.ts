@@ -55,6 +55,7 @@ export interface ScheduleSlice {
   courseWarnings: CourseWarning[];
   major: string;
   coopCycle: string;
+  catalogYear?: number;
 }
 
 /**
@@ -156,6 +157,7 @@ export interface IUserData {
   fullName: string;
   academicYear: number | null;
   graduationYear: number | null;
+  catalogYear: number | null;
   major: string | null;
   coopCycle: string | null;
   nuId: string;
@@ -182,12 +184,14 @@ export interface IPlanData {
   name: string;
   linkSharingEnabled: boolean;
   schedule: DNDSchedule;
-  major: string;
-  coopCycle: string;
+  catalogYear: number | null;
+  major: string | null;
+  coopCycle: string | null;
   warnings: IWarning[];
   courseWarnings: CourseWarning[];
   courseCounter: number;
   lastViewed: Date;
+  updatedAt: Date;
 }
 
 /**
@@ -197,11 +201,39 @@ export interface ICreatePlanData {
   name: string;
   link_sharing_enabled: boolean;
   schedule: DNDSchedule;
-  major: string;
-  coop_cycle: string;
+  catalog_year: number | null;
+  major: string | null;
+  coop_cycle: string | null;
   course_counter: number;
   last_viewed?: Date;
 }
+
+export interface IUpdatePlanData {
+  name: string;
+  link_sharing_enabled: boolean;
+  schedule: DNDSchedule;
+  catalog_year: number | null;
+  major: string | null;
+  coop_cycle: string | null;
+  course_counter: number;
+  last_viewed?: Date;
+  warnings: IWarning[];
+  course_warnings: CourseWarning[];
+}
+
+export interface IUpdatePlanData {
+  name: string;
+  link_sharing_enabled: boolean;
+  schedule: DNDSchedule;
+  catalog_year: number | null;
+  major: string | null;
+  coop_cycle: string | null;
+  course_counter: number;
+  last_viewed?: Date;
+  warnings: IWarning[];
+  course_warnings: CourseWarning[];
+}
+
 /*
  * Data needed to update a user
  */
@@ -220,6 +252,7 @@ export interface IUpdateUserData {
   academic_year?: number;
   graduation_year?: number;
   coop_cycle?: string | null;
+  catalog_year?: number | null;
   nu_id?: string;
   courses_transfer?: ISimplifiedCourseDataAPI[];
   courses_completed?: ISimplifiedCourseDataAPI[];

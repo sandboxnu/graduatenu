@@ -1,1 +1,1 @@
-json.(plan, :id, :name, :link_sharing_enabled, :schedule, :major, :coop_cycle, :course_warnings, :warnings, :course_counter, :last_viewed)
+json.(plan, :id, :name, :link_sharing_enabled, :schedule, :major, :coop_cycle, :course_warnings, :warnings, :course_counter, :catalog_year, :last_viewed, :updated_at)

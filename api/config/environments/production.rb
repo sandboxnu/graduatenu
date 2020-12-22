@@ -5,8 +5,8 @@ Rails.application.configure do
   logger.formatter = config.log_formatter
   config.logger    = ActiveSupport::TaggedLogging.new(logger)
   # Settings specified here will take precedence over those in config/application.rb.
-  ENV['ROOT_URL'] = "http://www.graduatenu.com"
-  ENV['FRONTEND_URL'] = "http://www.graduatenu.com"
+  ENV['ROOT_URL'] = "http://graduatenu.khoury.northeastern.edu"
+  ENV['FRONTEND_URL'] = "http://graduatenu.khoury.northeastern.edu"
 
   # Code is not reloaded between requests.
   config.cache_classes = true

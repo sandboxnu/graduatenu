@@ -71,6 +71,7 @@ export class AddBlock extends React.Component<AddBlockProps> {
   render() {
     return (
       <Block
+        data-cy="add-class-div"
         onMouseEnter={this.handleMouseEnter.bind(this)}
         onMouseLeave={this.handleMouseLeave.bind(this)}
         onClick={this.props.onClick}

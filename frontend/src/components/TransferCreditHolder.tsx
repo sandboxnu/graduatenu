@@ -2,8 +2,8 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
 import styled from "styled-components";
-import { AddClass } from ".";
 import { ScheduleCourse } from "../../../common/types";
+import { AddClassSearchModal } from "./AddClassSearchModal";
 import {
   addTransferClassAction,
   removeTransferClassAction,
@@ -14,6 +14,7 @@ import { UndoDelete } from "./UndoDelete";
 
 interface TransferCreditsProps {
   transferCredits: ScheduleCourse[];
+  isEditable: boolean;
 }
 
 interface TransferCreditsState {
@@ -134,6 +135,7 @@ class TransferCreditsComponent extends React.Component<
             <NonDraggableClassBlock
               course={scheduleCourse}
               onDelete={this.onDeleteClass.bind(this, scheduleCourse)}
+              hideDelete={!this.props.isEditable}
             />
           </ClassWrapper>
         );
@@ -157,23 +159,29 @@ class TransferCreditsComponent extends React.Component<
           </div>
         </Container>
         <HolderBody>
-          <UndoDelete
-            deletedClass={deletedClass}
-            snackbarOpen={snackbarOpen}
-            handleSnackbarClose={this.handleSnackbarClose.bind(this)}
-            undoButtonPressed={this.undoButtonPressed.bind(this)}
-            closeSnackBar={this.closeSnackBar.bind(this)}
-          />
+          {this.props.isEditable && (
+            <UndoDelete
+              deletedClass={deletedClass}
+              snackbarOpen={snackbarOpen}
+              handleSnackbarClose={this.handleSnackbarClose.bind(this)}
+              undoButtonPressed={this.undoButtonPressed.bind(this)}
+              closeSnackBar={this.closeSnackBar.bind(this)}
+            />
+          )}
           {this.renderContainer()}
-          <AddBlock onClick={this.showModal.bind(this)} />
-          <AddClass
-            visible={modalVisible}
-            handleClose={this.hideModal.bind(this)}
-            handleSubmit={(courses: ScheduleCourse[]) => {
-              // Add the given courses through redux
-              this.props.handleAddClasses(courses);
-            }}
-          ></AddClass>
+          {this.props.isEditable && (
+            <>
+              <AddBlock onClick={this.showModal.bind(this)} />
+              <AddClassSearchModal
+                visible={modalVisible}
+                handleClose={this.hideModal.bind(this)}
+                handleSubmit={(courses: ScheduleCourse[]) => {
+                  // Add the given courses through redux
+                  this.props.handleAddClasses(courses);
+                }}
+              />
+            </>
+          )}
         </HolderBody>
       </div>
     );

@@ -10,14 +10,13 @@ const Wrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   height: 100%;
-  min-width: 0;
 `;
 
 const TitleWrapper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  min-width: 0;
+  width: 100%;
 `;
 
 const Title = styled.div`
@@ -27,19 +26,19 @@ const Title = styled.div`
 `;
 
 const Subtitle = styled.div`
-  margin-right: 36px;
+  margin-right: 8px;
   font-size: 11px;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
   flex: 1;
-  min-width: 0;
 `;
 
 interface ClassBlockBodyProps {
   course: ScheduleCourse;
   hovering: boolean;
   onDelete: () => void;
+  hideDelete?: boolean;
 }
 
 /**
@@ -49,6 +48,7 @@ export const ClassBlockBody: React.FC<ClassBlockBodyProps> = ({
   course,
   hovering,
   onDelete,
+  hideDelete,
 }) => {
   return (
     <Wrapper>
@@ -62,15 +62,17 @@ export const ClassBlockBody: React.FC<ClassBlockBodyProps> = ({
           visibility: hovering ? "visible" : "hidden",
         }}
       >
-        <IconButton
-          onClick={onDelete}
-          style={{ color: "rgba(102, 102, 102, 0.3)" }}
-          disableRipple
-          disableFocusRipple
-          disableTouchRipple
-        >
-          <DeleteIcon fontSize="inherit" />
-        </IconButton>
+        {!hideDelete && (
+          <IconButton
+            onClick={onDelete}
+            style={{ color: "rgba(102, 102, 102, 0.3)" }}
+            disableRipple
+            disableFocusRipple
+            disableTouchRipple
+          >
+            <DeleteIcon fontSize="inherit" />
+          </IconButton>
+        )}
       </div>
     </Wrapper>
   );

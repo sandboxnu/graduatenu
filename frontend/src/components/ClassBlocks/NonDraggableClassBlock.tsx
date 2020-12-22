@@ -4,18 +4,19 @@ import { Card } from "@material-ui/core";
 import { ClassBlockBody } from "./ClassBlockBody";
 import { ScheduleCourse } from "../../../../common/types";
 import { GraduateGrey } from "../../constants";
+import { CourseWarning } from "../../models/types";
 
 const Block = styled(Card)`
   height: 30px;
   border-radius: 4px;
-  margin: 10px 8px 0px 8px;
+  margin: 5px 8px 5px 8px;
   display: flex;
   flex-direction: row;
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.15);
 `;
 
-const ClassBlockBodyContainer = styled.div`
-  background-color: ${GraduateGrey};
+const ClassBlockBodyContainer = styled.div<any>`
+  background-color: ${props => (props.warning ? "#F8CECE" : GraduateGrey)};
   padding-left: 8px;
   flex: 1;
   min-width: 0;
@@ -24,6 +25,8 @@ const ClassBlockBodyContainer = styled.div`
 interface Props {
   course: ScheduleCourse;
   onDelete: (course: ScheduleCourse) => void;
+  hideDelete?: boolean;
+  warnings?: CourseWarning[];
 }
 
 interface State {
@@ -42,11 +45,12 @@ export class NonDraggableClassBlock extends React.Component<Props, State> {
   render() {
     return (
       <Block>
-        <ClassBlockBodyContainer>
+        <ClassBlockBodyContainer warning={this.props.warnings}>
           <ClassBlockBody
             course={this.props.course}
             hovering
             onDelete={() => this.props.onDelete(this.props.course)}
+            hideDelete={this.props.hideDelete}
           />
         </ClassBlockBodyContainer>
       </Block>
