@@ -275,7 +275,6 @@ function generateNewScheduleTerm(
     season: season,
     year: year,
     termId: year * 100 + termId,
-    id: id,
     classes: [],
     status: StatusEnum.INACTIVE,
   };

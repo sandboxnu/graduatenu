@@ -293,7 +293,6 @@ export interface ScheduleTerm {
   season: Season | SeasonEnum;
   year: number;
   termId: number;
-  id: number;
   status: Status | StatusEnum;
   classes: ScheduleCourse[];
 }

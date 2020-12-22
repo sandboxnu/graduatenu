@@ -7,7 +7,6 @@
         "season": "FL",
         "year": 2018,
         "termId": 201810,
-        "id": 10,
         "status": "INACTIVE",
         "classes": []
       },
@@ -15,7 +14,6 @@
         "season": "SP",
         "year": 2018,
         "termId": 201830,
-        "id": 30,
         "status": "INACTIVE",
         "classes": []
       },
@@ -23,7 +21,6 @@
         "season": "S1",
         "year": 2018,
         "termId": 201840,
-        "id": 40,
         "status": "INACTIVE",
         "classes": []
       },
@@ -31,7 +28,6 @@
         "season": "S2",
         "year": 2018,
         "termId": 201860,
-        "id": 60,
         "status": "CLASSES",
         "classes": [
           {
@@ -269,7 +265,6 @@
         "season": "FL",
         "year": 2019,
         "termId": 201910,
-        "id": 10,
         "status": "CLASSES",
         "classes": [
           {
@@ -383,7 +378,6 @@
         "season": "SP",
         "year": 2019,
         "termId": 201930,
-        "id": 30,
         "status": "CLASSES",
         "classes": [
           {
@@ -530,7 +524,6 @@
         "season": "S1",
         "year": 2019,
         "termId": 201940,
-        "id": 40,
         "status": "CLASSES",
         "classes": [
           {
@@ -586,7 +579,6 @@
         "season": "S2",
         "year": 2019,
         "termId": 201960,
-        "id": 60,
         "status": "INACTIVE",
         "classes": []
       },
@@ -598,7 +590,6 @@
         "season": "FL",
         "year": 2020,
         "termId": 202010,
-        "id": 10,
         "status": "CLASSES",
         "classes": [
           {
@@ -718,7 +709,6 @@
         "season": "SP",
         "year": 2020,
         "termId": 202030,
-        "id": 30,
         "status": "INACTIVE",
         "classes": []
       },
@@ -726,7 +716,6 @@
         "season": "S1",
         "year": 2020,
         "termId": 202040,
-        "id": 40,
         "status": "INACTIVE",
         "classes": []
       },
@@ -734,7 +723,6 @@
         "season": "S2",
         "year": 2020,
         "termId": 202060,
-        "id": 60,
         "status": "INACTIVE",
         "classes": []
       },

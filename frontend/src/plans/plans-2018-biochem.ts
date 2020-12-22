@@ -10,7 +10,6 @@ export const bioChemPlans: Schedule[] = [
           season: "FL",
           year: 1000,
           termId: 100010,
-          id: 1010,
           classes: [
             {
               classId: "1107",
@@ -134,7 +133,6 @@ export const bioChemPlans: Schedule[] = [
           season: "SP",
           year: 1000,
           termId: 100030,
-          id: 1030,
           classes: [
             {
               classId: "2299",
@@ -285,7 +283,6 @@ export const bioChemPlans: Schedule[] = [
           season: "S1",
           year: 1000,
           termId: 100040,
-          id: 1040,
           classes: [
             {
               classId: "2301",
@@ -404,7 +401,6 @@ export const bioChemPlans: Schedule[] = [
           season: "S2",
           year: 1000,
           termId: 100060,
-          id: 1060,
           classes: [
             {
               classId: "9999",
@@ -431,7 +427,6 @@ export const bioChemPlans: Schedule[] = [
           season: "FL",
           year: 1001,
           termId: 100110,
-          id: 1011,
           classes: [
             {
               classId: "2309",
@@ -595,7 +590,6 @@ export const bioChemPlans: Schedule[] = [
           season: "SP",
           year: 1001,
           termId: 100130,
-          id: 1031,
           classes: [
             {
               classId: "2313",
@@ -773,7 +767,6 @@ export const bioChemPlans: Schedule[] = [
           season: "S1",
           year: 1001,
           termId: 100140,
-          id: 1041,
           classes: [
             {
               classId: "3611",
@@ -870,7 +863,6 @@ export const bioChemPlans: Schedule[] = [
           season: "S2",
           year: 1001,
           termId: 100160,
-          id: 1061,
           classes: [],
           status: "COOP",
         },
@@ -882,7 +874,6 @@ export const bioChemPlans: Schedule[] = [
           season: "FL",
           year: 1002,
           termId: 100210,
-          id: 1012,
           classes: [],
           status: "COOP",
         },
@@ -890,7 +881,6 @@ export const bioChemPlans: Schedule[] = [
           season: "SP",
           year: 1002,
           termId: 100230,
-          id: 1032,
           classes: [
             {
               classId: "3431",
@@ -1045,7 +1035,6 @@ export const bioChemPlans: Schedule[] = [
           season: "S1",
           year: 1002,
           termId: 100240,
-          id: 1042,
           classes: [
             {
               classId: "4707",
@@ -1086,7 +1075,6 @@ export const bioChemPlans: Schedule[] = [
           season: "S2",
           year: 1002,
           termId: 100260,
-          id: 1062,
           classes: [],
           status: "COOP",
         },
@@ -1098,7 +1086,6 @@ export const bioChemPlans: Schedule[] = [
           season: "FL",
           year: 1003,
           termId: 100310,
-          id: 1013,
           classes: [
             {
               classId: "9999",
@@ -1135,7 +1122,6 @@ export const bioChemPlans: Schedule[] = [
           season: "SP",
           year: 1003,
           termId: 100330,
-          id: 1033,
           classes: [],
           status: "INACTIVE",
         },
@@ -1143,7 +1129,6 @@ export const bioChemPlans: Schedule[] = [
           season: "S1",
           year: 1003,
           termId: 100340,
-          id: 1043,
           classes: [],
           status: "INACTIVE",
         },
@@ -1151,7 +1136,6 @@ export const bioChemPlans: Schedule[] = [
           season: "S2",
           year: 1003,
           termId: 100360,
-          id: 1063,
           classes: [],
           status: "INACTIVE",
         },
@@ -1168,7 +1152,6 @@ export const bioChemPlans: Schedule[] = [
           season: "FL",
           year: 1000,
           termId: 100010,
-          id: 1010,
           classes: [
             {
               classId: "1107",
@@ -1292,7 +1275,6 @@ export const bioChemPlans: Schedule[] = [
           season: "SP",
           year: 1000,
           termId: 100030,
-          id: 1030,
           classes: [
             {
               classId: "2299",
@@ -1443,7 +1425,6 @@ export const bioChemPlans: Schedule[] = [
           season: "S1",
           year: 1000,
           termId: 100040,
-          id: 1040,
           classes: [
             {
               classId: "2301",
@@ -1562,7 +1543,6 @@ export const bioChemPlans: Schedule[] = [
           season: "S2",
           year: 1000,
           termId: 100060,
-          id: 1060,
           classes: [
             {
               classId: "9999",
@@ -1589,7 +1569,6 @@ export const bioChemPlans: Schedule[] = [
           season: "FL",
           year: 1001,
           termId: 100110,
-          id: 1011,
           classes: [
             {
               classId: "2309",
@@ -1768,7 +1747,6 @@ export const bioChemPlans: Schedule[] = [
           season: "SP",
           year: 1001,
           termId: 100130,
-          id: 1031,
           classes: [],
           status: "COOP",
         },
@@ -1776,7 +1754,6 @@ export const bioChemPlans: Schedule[] = [
           season: "S1",
           year: 1001,
           termId: 100140,
-          id: 1041,
           classes: [],
           status: "COOP",
         },
@@ -1784,7 +1761,6 @@ export const bioChemPlans: Schedule[] = [
           season: "S2",
           year: 1001,
           termId: 100160,
-          id: 1061,
           classes: [
             {
               classId: "2313",
@@ -1853,7 +1829,6 @@ export const bioChemPlans: Schedule[] = [
           season: "FL",
           year: 1002,
           termId: 100210,
-          id: 1012,
           classes: [
             {
               classId: "3611",
@@ -2075,7 +2050,6 @@ export const bioChemPlans: Schedule[] = [
           season: "SP",
           year: 1002,
           termId: 100230,
-          id: 1032,
           classes: [],
           status: "COOP",
         },
@@ -2083,7 +2057,6 @@ export const bioChemPlans: Schedule[] = [
           season: "S1",
           year: 1002,
           termId: 100240,
-          id: 1042,
           classes: [],
           status: "COOP",
         },
@@ -2091,7 +2064,6 @@ export const bioChemPlans: Schedule[] = [
           season: "S2",
           year: 1002,
           termId: 100260,
-          id: 1062,
           classes: [
             {
               classId: "4707",
@@ -2136,7 +2108,6 @@ export const bioChemPlans: Schedule[] = [
           season: "FL",
           year: 1003,
           termId: 100310,
-          id: 1013,
           classes: [
             {
               classId: "3431",
@@ -2264,7 +2235,6 @@ export const bioChemPlans: Schedule[] = [
           season: "SP",
           year: 1003,
           termId: 100330,
-          id: 1033,
           classes: [
             {
               classId: "9999",
@@ -2301,7 +2271,6 @@ export const bioChemPlans: Schedule[] = [
           season: "S1",
           year: 1003,
           termId: 100340,
-          id: 1043,
           classes: [],
           status: "INACTIVE",
         },
@@ -2309,7 +2278,6 @@ export const bioChemPlans: Schedule[] = [
           season: "S2",
           year: 1003,
           termId: 100360,
-          id: 1063,
           classes: [],
           status: "INACTIVE",
         },
@@ -2326,7 +2294,6 @@ export const bioChemPlans: Schedule[] = [
           season: "FL",
           year: 1000,
           termId: 100010,
-          id: 1010,
           classes: [
             {
               classId: "1107",
@@ -2450,7 +2417,6 @@ export const bioChemPlans: Schedule[] = [
           season: "SP",
           year: 1000,
           termId: 100030,
-          id: 1030,
           classes: [
             {
               classId: "2299",
@@ -2601,7 +2567,6 @@ export const bioChemPlans: Schedule[] = [
           season: "S1",
           year: 1000,
           termId: 100040,
-          id: 1040,
           classes: [
             {
               classId: "2301",
@@ -2720,7 +2685,6 @@ export const bioChemPlans: Schedule[] = [
           season: "S2",
           year: 1000,
           termId: 100060,
-          id: 1060,
           classes: [],
           status: "INACTIVE",
         },
@@ -2732,7 +2696,6 @@ export const bioChemPlans: Schedule[] = [
           season: "FL",
           year: 1001,
           termId: 100110,
-          id: 1011,
           classes: [
             {
               classId: "2309",
@@ -2896,7 +2859,6 @@ export const bioChemPlans: Schedule[] = [
           season: "SP",
           year: 1001,
           termId: 100130,
-          id: 1031,
           classes: [
             {
               classId: "2313",
@@ -3074,7 +3036,6 @@ export const bioChemPlans: Schedule[] = [
           season: "S1",
           year: 1001,
           termId: 100140,
-          id: 1041,
           classes: [
             {
               classId: "3611",
@@ -3171,7 +3132,6 @@ export const bioChemPlans: Schedule[] = [
           season: "S2",
           year: 1001,
           termId: 100160,
-          id: 1061,
           classes: [],
           status: "COOP",
         },
@@ -3183,7 +3143,6 @@ export const bioChemPlans: Schedule[] = [
           season: "FL",
           year: 1002,
           termId: 100210,
-          id: 1012,
           classes: [],
           status: "COOP",
         },
@@ -3191,7 +3150,6 @@ export const bioChemPlans: Schedule[] = [
           season: "SP",
           year: 1002,
           termId: 100230,
-          id: 1032,
           classes: [
             {
               classId: "4707",
@@ -3364,7 +3322,6 @@ export const bioChemPlans: Schedule[] = [
           season: "S1",
           year: 1002,
           termId: 100240,
-          id: 1042,
           classes: [],
           status: "INACTIVE",
         },
@@ -3372,7 +3329,6 @@ export const bioChemPlans: Schedule[] = [
           season: "S2",
           year: 1002,
           termId: 100260,
-          id: 1062,
           classes: [],
           status: "COOP",
         },
@@ -3384,7 +3340,6 @@ export const bioChemPlans: Schedule[] = [
           season: "FL",
           year: 1003,
           termId: 100310,
-          id: 1013,
           classes: [],
           status: "COOP",
         },
@@ -3392,7 +3347,6 @@ export const bioChemPlans: Schedule[] = [
           season: "SP",
           year: 1003,
           termId: 100330,
-          id: 1033,
           classes: [
             {
               classId: "4620",
@@ -3429,7 +3383,6 @@ export const bioChemPlans: Schedule[] = [
           season: "S1",
           year: 1003,
           termId: 100340,
-          id: 1043,
           classes: [],
           status: "INACTIVE",
         },
@@ -3437,7 +3390,6 @@ export const bioChemPlans: Schedule[] = [
           season: "S2",
           year: 1003,
           termId: 100360,
-          id: 1063,
           classes: [],
           status: "COOP",
         },
@@ -3449,7 +3401,6 @@ export const bioChemPlans: Schedule[] = [
           season: "FL",
           year: 1004,
           termId: 100410,
-          id: 1014,
           classes: [],
           status: "COOP",
         },
@@ -3457,7 +3408,6 @@ export const bioChemPlans: Schedule[] = [
           season: "SP",
           year: 1004,
           termId: 100430,
-          id: 1034,
           classes: [
             {
               classId: "9999",
@@ -3494,7 +3444,6 @@ export const bioChemPlans: Schedule[] = [
           season: "S1",
           year: 1004,
           termId: 100440,
-          id: 1044,
           classes: [],
           status: "INACTIVE",
         },
@@ -3502,7 +3451,6 @@ export const bioChemPlans: Schedule[] = [
           season: "S2",
           year: 1004,
           termId: 100460,
-          id: 1064,
           classes: [],
           status: "INACTIVE",
         },
@@ -3519,7 +3467,6 @@ export const bioChemPlans: Schedule[] = [
           season: "FL",
           year: 1000,
           termId: 100010,
-          id: 1010,
           classes: [
             {
               classId: "1107",
@@ -3643,7 +3590,6 @@ export const bioChemPlans: Schedule[] = [
           season: "SP",
           year: 1000,
           termId: 100030,
-          id: 1030,
           classes: [
             {
               classId: "2299",
@@ -3794,7 +3740,6 @@ export const bioChemPlans: Schedule[] = [
           season: "S1",
           year: 1000,
           termId: 100040,
-          id: 1040,
           classes: [
             {
               classId: "2301",
@@ -3913,7 +3858,6 @@ export const bioChemPlans: Schedule[] = [
           season: "S2",
           year: 1000,
           termId: 100060,
-          id: 1060,
           classes: [],
           status: "INACTIVE",
         },
@@ -3925,7 +3869,6 @@ export const bioChemPlans: Schedule[] = [
           season: "FL",
           year: 1001,
           termId: 100110,
-          id: 1011,
           classes: [
             {
               classId: "2309",
@@ -4104,7 +4047,6 @@ export const bioChemPlans: Schedule[] = [
           season: "SP",
           year: 1001,
           termId: 100130,
-          id: 1031,
           classes: [],
           status: "COOP",
         },
@@ -4112,7 +4054,6 @@ export const bioChemPlans: Schedule[] = [
           season: "S1",
           year: 1001,
           termId: 100140,
-          id: 1041,
           classes: [],
           status: "COOP",
         },
@@ -4120,7 +4061,6 @@ export const bioChemPlans: Schedule[] = [
           season: "S2",
           year: 1001,
           termId: 100160,
-          id: 1061,
           classes: [
             {
               classId: "2313",
@@ -4189,7 +4129,6 @@ export const bioChemPlans: Schedule[] = [
           season: "FL",
           year: 1002,
           termId: 100210,
-          id: 1012,
           classes: [
             {
               classId: "3611",
@@ -4411,7 +4350,6 @@ export const bioChemPlans: Schedule[] = [
           season: "SP",
           year: 1002,
           termId: 100230,
-          id: 1032,
           classes: [],
           status: "COOP",
         },
@@ -4419,7 +4357,6 @@ export const bioChemPlans: Schedule[] = [
           season: "S1",
           year: 1002,
           termId: 100240,
-          id: 1042,
           classes: [],
           status: "COOP",
         },
@@ -4427,7 +4364,6 @@ export const bioChemPlans: Schedule[] = [
           season: "S2",
           year: 1002,
           termId: 100260,
-          id: 1062,
           classes: [],
           status: "INACTIVE",
         },
@@ -4439,7 +4375,6 @@ export const bioChemPlans: Schedule[] = [
           season: "FL",
           year: 1003,
           termId: 100310,
-          id: 1013,
           classes: [
             {
               classId: "4707",
@@ -4585,7 +4520,6 @@ export const bioChemPlans: Schedule[] = [
           season: "SP",
           year: 1003,
           termId: 100330,
-          id: 1033,
           classes: [],
           status: "COOP",
         },
@@ -4593,7 +4527,6 @@ export const bioChemPlans: Schedule[] = [
           season: "S1",
           year: 1003,
           termId: 100340,
-          id: 1043,
           classes: [],
           status: "COOP",
         },
@@ -4601,7 +4534,6 @@ export const bioChemPlans: Schedule[] = [
           season: "S2",
           year: 1003,
           termId: 100360,
-          id: 1063,
           classes: [],
           status: "INACTIVE",
         },
@@ -4613,7 +4545,6 @@ export const bioChemPlans: Schedule[] = [
           season: "FL",
           year: 1004,
           termId: 100410,
-          id: 1014,
           classes: [
             {
               classId: "9999",
@@ -4650,7 +4581,6 @@ export const bioChemPlans: Schedule[] = [
           season: "SP",
           year: 1004,
           termId: 100430,
-          id: 1034,
           classes: [
             {
               classId: "9999",
@@ -4687,7 +4617,6 @@ export const bioChemPlans: Schedule[] = [
           season: "S1",
           year: 1004,
           termId: 100440,
-          id: 1044,
           classes: [],
           status: "INACTIVE",
         },
@@ -4695,7 +4624,6 @@ export const bioChemPlans: Schedule[] = [
           season: "S2",
           year: 1004,
           termId: 100460,
-          id: 1064,
           classes: [],
           status: "INACTIVE",
         },
