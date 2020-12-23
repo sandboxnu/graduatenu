@@ -12,7 +12,7 @@ const Wrapper = styled.div`
   height: 100%;
 `;
 
-const TitleWrapper = styled.div<any>`
+const TitleWrapper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -53,7 +53,7 @@ export const ClassBlockBody: React.FC<ClassBlockBodyProps> = ({
 }) => {
   return (
     <Wrapper>
-      <TitleWrapper hideDelete={hideDelete}>
+      <TitleWrapper>
         <Title>{course.subject + course.classId}</Title>
         <Subtitle>{course.name}</Subtitle>
       </TitleWrapper>

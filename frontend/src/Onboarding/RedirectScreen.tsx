@@ -49,14 +49,11 @@ export const RedirectScreen: React.FC<Props> = ({ redirectUrl }) => {
         }); // set persisting cookie for all paths
         fetchActiveUser(cookie)
           .then(response => {
-            if (response.user.isAdvisor) {
-              dispatch(setAdvisorAction(response.user));
-            } else {
-              dispatch(setUserAction(response.user));
-            }
             setIsAdvisor(response.user.isAdvisor);
             if (!response.user.isAdvisor) {
               // student
+
+              dispatch(setUserAction(response.user));
               Promise.all([
                 getScheduleCoursesFromSimplifiedCourseDataAPI(
                   response.user.coursesCompleted
@@ -75,6 +72,7 @@ export const RedirectScreen: React.FC<Props> = ({ redirectUrl }) => {
                 setIsLoading(false); // this update must come last, to make sure other state variables are correctly set before we redirect
               });
             } else {
+              dispatch(setAdvisorAction(response.user));
               setIsLoading(false);
             }
           })
