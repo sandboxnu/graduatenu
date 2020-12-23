@@ -167,6 +167,12 @@ export interface IUserData {
   completedCourses: ScheduleCourse[];
 }
 
+export interface IAdvisorData {
+  id: number;
+  email: string;
+  fullName: string;
+}
+
 /**
  * A model for data pertaining to a user login object.
  */

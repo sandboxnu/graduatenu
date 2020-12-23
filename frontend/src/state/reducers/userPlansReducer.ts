@@ -119,12 +119,8 @@ export const userPlansReducer = (
         draft.plans = planMap;
 
         const index = indexOfLastViewedPlan(plans);
-        draft.activePlan = plans[index].name;
+        draft.activePlan = plans[index]?.name;
         return closePastYears(draft, academicYear);
-      }
-      case getType(resetUserAction): {
-        draft = initialState;
-        return draft;
       }
       case getType(deletePlan): {
         const name = action.payload.name;
@@ -344,7 +340,7 @@ export const userPlansReducer = (
 function closePastYears(draft: UserPlansState, academicYear: number) {
   draft.closedYears[draft.activePlan!] = [];
 
-  const numYears = draft.plans[draft.activePlan!].schedule.years.length;
+  const numYears = draft.plans[draft.activePlan!]?.schedule.years.length;
   for (var i = 0; i < numYears; i++) {
     if (isYearInPast(i, academicYear)) {
       draft.closedYears[draft.activePlan!].push(i);

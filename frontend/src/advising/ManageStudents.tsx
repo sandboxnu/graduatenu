@@ -3,19 +3,20 @@ import { withRouter } from "react-router-dom";
 import styled from "styled-components";
 import { fetchUser, getStudents } from "../services/AdvisorService";
 import { Search } from "../components/common/Search";
-import { LinearProgress, IconButton } from "@material-ui/core";
+import { LinearProgress, IconButton, Avatar } from "@material-ui/core";
 import { getAuthToken } from "../utils/auth-helpers";
 import { NonEditableSchedule } from "../components/Schedule/ScheduleComponents";
 import { findAllPlansForUser } from "../services/PlanService";
-import { IPlanData } from "../models/types";
+import { IPlanData, IUserData } from "../models/types";
 import { setUserPlansAction } from "../state/actions/userPlansActions";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getActivePlanNameFromState,
-  safelyGetActivePlanScheduleFromState,
-} from "../state";
+import { getActivePlanNameFromState } from "../state";
 import { AppState } from "../state/reducers/state";
 import { Edit, Fullscreen } from "@material-ui/icons";
+import { resetUserAction, setUserAction } from "../state/actions/userActions";
+import { LoadingSpinner } from "../components/common/LoadingSpinner";
+import { SwitchPlanList } from "../components/SwitchPlan/SwitchPlanList";
+import { ColoredButton } from "../components/common/ColoredButton";
 
 const Container = styled.div`
   margin-left: 30px;
@@ -101,6 +102,10 @@ const StudentPreviewContainer = styled.div`
     height: 70vh;
     padding: 30px;
   }
+  * {
+    font-family: Roboto;
+    font-style: normal;
+  }
 `;
 const ScheduleWrapper = styled.div`
   overflow-x: scroll;
@@ -114,7 +119,6 @@ const SchedulePreviewContainer = styled.div`
 const PlanTitle = styled.div`
   display: flex;
   justify-content: center;
-  font-size: 24px;
   height: 24px;
 `;
 const ButtonHeader = styled.div`
@@ -131,11 +135,79 @@ const ButtonHeader = styled.div`
   }
 `;
 
+const StudentInfoContainer = styled.div`
+  flex: 1;
+  margin-right: 20px;
+`;
+
+const NoPlanContainer = styled.div`
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+`;
+
+const StudentInfoDisplay = styled.div`
+  height: 100%;
+`;
+
+const AvatarWrapper = styled.div`
+  height: 25%;
+  > * {
+    background-color: #d3898d !important;
+    color: #fff !important;
+    font-size: 5vw !important;
+    margin: 0% 10% !important;
+    width: 80% !important;
+    height: 100% !important;
+  }
+`;
+
+const StudentInfoTextWrapper = styled.div`
+  height: 25%;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  > * {
+  }
+`;
+const Text = styled.div`
+  font-size: 12px;
+  font-weight: normal;
+  line-height: 20px;
+`;
+const NameText = styled.div`
+  line-height: 28px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+`;
+const TitleText = styled.div`
+  font-size: 24px;
+  line-height: 20px;
+  font-weight: 500;
+`;
+const PlanText = styled.div`
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 28px;
+`;
+const PlanListContainer = styled.div`
+  width: 100%;
+  height: 35%;
+  overflow-y: scroll;
+`;
+const ButtonContainer = styled.div`
+  margin: 5% 0%;
+  justify-content: center;
+  display: flex;
+`;
+
 const EMPTY_STUDENT_LIST: StudentProps[] = [];
 
 interface StudentsListProps {
   searchQuery: string;
-  setSelectedStudent: (studentId: StudentProps | null) => void;
+  setSelectedStudent: (studentId: number | null) => void;
 }
 
 interface StudentsAPI {
@@ -151,19 +223,17 @@ interface StudentProps {
   id: number;
 }
 
-interface StudentComponentProps {
-  fullName: string;
-  nuId: string;
-  email: string;
+interface StudentComponentProps extends StudentProps {
+  setSelectedStudent: (studentId: number | null) => void;
+}
+
+interface StudentPreviewProps {
   id: number;
-  setSelectedStudent: (studentId: StudentProps | null) => void;
 }
 
 const ManageStudentsComponent: React.FC = (props: any) => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedStudent, setSelectedStudent] = useState<StudentProps | null>(
-    null
-  );
+  const [selectedStudent, setSelectedStudent] = useState<number | null>(null);
 
   return (
     <Container>
@@ -181,13 +251,15 @@ const ManageStudentsComponent: React.FC = (props: any) => {
           setSelectedStudent={setSelectedStudent}
         />
       ) : (
-        <StudentPreview {...selectedStudent} />
+        <StudentPreview id={selectedStudent} />
       )}
     </Container>
   );
 };
 
-const StudentPreview = (props: StudentProps) => {
+const StudentPreview = ({ id }: StudentPreviewProps) => {
+  const [fetchingStudent, setFetchingStudent] = useState(true);
+  const [student, setStudent] = useState<IUserData | null>(null);
   const [noPlans, setNoPlans] = useState(false);
 
   const dispatch = useDispatch();
@@ -197,33 +269,74 @@ const StudentPreview = (props: StudentProps) => {
   }));
 
   useEffect(() => {
-    fetchUser(props.id, token).then(response => {});
-    findAllPlansForUser(props.id, token).then((plans: IPlanData[]) => {
-      dispatch(setUserPlansAction(plans, 2020));
-      if (!plans) setNoPlans(true);
+    fetchUser(id, token).then(response => {
+      dispatch(setUserAction(response));
+      setStudent(response.user);
+      setFetchingStudent(false);
     });
+    findAllPlansForUser(id, token).then((plans: IPlanData[]) => {
+      dispatch(setUserPlansAction(plans, 2020));
+      if (!plans || !plans.length || !plans[0].schedule) setNoPlans(true);
+    });
+    return () => {
+      dispatch(resetUserAction());
+    };
   }, []);
   return (
     <StudentPreviewContainer>
-      <div style={{ flex: 1, marginRight: "20px" }}></div>
-      {noPlans ? (
-        <div>User Has No Plans</div>
-      ) : (
-        <SchedulePreviewContainer>
-          <PlanTitle>{planName}</PlanTitle>
-          <ButtonHeader>
-            <IconButton>
-              <Edit />
-            </IconButton>
-            <IconButton>
-              <Fullscreen />
-            </IconButton>
-          </ButtonHeader>
-          <ScheduleWrapper>
-            <NonEditableSchedule />
-          </ScheduleWrapper>
-        </SchedulePreviewContainer>
-      )}
+      <StudentInfoContainer>
+        {!student && !fetchingStudent ? (
+          <NoPlanContainer>
+            <Text>User Has No Plans</Text>
+          </NoPlanContainer>
+        ) : fetchingStudent ? (
+          <LoadingSpinner />
+        ) : (
+          <StudentInfoDisplay>
+            <AvatarWrapper>
+              <Avatar>{student!.fullName[0]}</Avatar>
+            </AvatarWrapper>
+            <StudentInfoTextWrapper>
+              <NameText>{student!.fullName}</NameText>
+              <Text>{student!.email}</Text>
+              <Text>{student!.major}</Text>
+              <Text>{student!.coopCycle}</Text>
+            </StudentInfoTextWrapper>
+
+            <PlanText>Plans:</PlanText>
+            <PlanListContainer>
+              <SwitchPlanList />
+            </PlanListContainer>
+            <ButtonContainer>
+              <ColoredButton onClick={() => {}}>Assign Template</ColoredButton>
+            </ButtonContainer>
+          </StudentInfoDisplay>
+        )}
+      </StudentInfoContainer>
+      <SchedulePreviewContainer>
+        {noPlans ? (
+          <NoPlanContainer>
+            <Text>User Has No Plans</Text>
+          </NoPlanContainer>
+        ) : (
+          <>
+            <PlanTitle>
+              <TitleText>{planName}</TitleText>
+            </PlanTitle>
+            <ButtonHeader>
+              <IconButton>
+                <Edit />
+              </IconButton>
+              <IconButton>
+                <Fullscreen />
+              </IconButton>
+            </ButtonHeader>
+            <ScheduleWrapper>
+              <NonEditableSchedule />
+            </ScheduleWrapper>
+          </>
+        )}
+      </SchedulePreviewContainer>
     </StudentPreviewContainer>
   );
 };
@@ -279,7 +392,7 @@ const StudentsList = ({
             <NoMoreStudents>No more students</NoMoreStudents>
           ) : (
             <LoadMoreStudents
-              onClick={_ => fetchStudents(students, pageNumber)}
+              onClick={() => fetchStudents(students, pageNumber)}
             >
               Load more students
             </LoadMoreStudents>
@@ -291,9 +404,9 @@ const StudentsList = ({
 };
 
 const Student = (props: StudentComponentProps) => {
-  const { email, fullName, nuId, setSelectedStudent } = props;
+  const { email, fullName, nuId, id, setSelectedStudent } = props;
   return (
-    <StudentContainer onClick={() => setSelectedStudent(props as StudentProps)}>
+    <StudentContainer onClick={() => setSelectedStudent(id)}>
       {fullName}
       <StudentEmailNUIDContainer>
         {email + " | " + nuId}

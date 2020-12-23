@@ -12,6 +12,7 @@ import { fetchMajorsAndPlans } from "../utils/fetchMajorsAndPlans";
 import { AUTH_TOKEN_COOKIE_KEY } from "../utils/auth-helpers";
 import { getScheduleCoursesFromSimplifiedCourseDataAPI } from "../utils/course-helpers";
 import { LoadingScreen } from "../components/common/FullPageLoading";
+import { setAdvisorAction } from "../state/actions/advisorActions";
 
 interface Props {
   redirectUrl?: string;
@@ -48,7 +49,11 @@ export const RedirectScreen: React.FC<Props> = ({ redirectUrl }) => {
         }); // set persisting cookie for all paths
         fetchActiveUser(cookie)
           .then(response => {
-            dispatch(setUserAction(response.user));
+            if (response.user.isAdvisor) {
+              dispatch(setAdvisorAction(response.user));
+            } else {
+              dispatch(setUserAction(response.user));
+            }
             setIsAdvisor(response.user.isAdvisor);
             if (!response.user.isAdvisor) {
               // student

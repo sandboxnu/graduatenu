@@ -19,7 +19,7 @@ import {
   getUserIdFromState,
   getUserCoopCycleFromState,
   getCompletedCoursesFromState,
-  getTransferCoursesFromState,
+  safelyGetTransferCoursesFromState,
   getUserCatalogYearFromState,
   getPlansFromState,
 } from "../state";
@@ -159,7 +159,7 @@ const TransferableCreditScreen: React.FC = () => {
       academicYear: getAcademicYearFromState(state)!,
       graduationYear: getGraduationYearFromState(state)!,
       coopCycle: getUserCoopCycleFromState(state),
-      transferCourses: getTransferCoursesFromState(state),
+      transferCourses: safelyGetTransferCoursesFromState(state),
       completedCourses: getCompletedCoursesFromState(state),
       catalogYear: getUserCatalogYearFromState(state),
       allPlans: getPlansFromState(state),
