@@ -3,10 +3,11 @@ import { shallowEqual, useSelector } from "react-redux";
 import { Redirect, Route, RouteComponentProps } from "react-router-dom";
 import { RedirectScreen } from "../../Onboarding/RedirectScreen";
 import {
-  getDoesUserExistInState,
   safelyGetAcademicYearFromState,
   safelyGetGraduationYearFromState,
-  safelyGetIsAdvisorFromState,
+  isUserAdvisor,
+  getDoesAdvisorExistInState,
+  getDoesUserExistInState,
 } from "../../state";
 import { AppState } from "../../state/reducers/state";
 import { authCookieExists } from "../../utils/auth-helpers";
@@ -22,8 +23,9 @@ export function ProtectedRoute({
 }) {
   const { userExists, isAdvisor, finishedOnboarding } = useSelector(
     (state: AppState) => ({
-      userExists: getDoesUserExistInState(state),
-      isAdvisor: safelyGetIsAdvisorFromState(state),
+      userExists:
+        getDoesAdvisorExistInState(state) || getDoesUserExistInState(state),
+      isAdvisor: isUserAdvisor(state),
       finishedOnboarding:
         !!safelyGetGraduationYearFromState(state) &&
         !!safelyGetAcademicYearFromState(state),

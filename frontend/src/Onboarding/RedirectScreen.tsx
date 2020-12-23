@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { Redirect } from "react-router";
 import { useDispatch } from "react-redux";
-import { fetchUser } from "../services/UserService";
+import { fetchActiveUser } from "../services/UserService";
 import {
   setUserAction,
   setCompletedCoursesAction,
@@ -12,6 +12,7 @@ import { fetchMajorsAndPlans } from "../utils/fetchMajorsAndPlans";
 import { AUTH_TOKEN_COOKIE_KEY } from "../utils/auth-helpers";
 import { getScheduleCoursesFromSimplifiedCourseDataAPI } from "../utils/course-helpers";
 import { LoadingScreen } from "../components/common/FullPageLoading";
+import { setAdvisorAction } from "../state/actions/advisorActions";
 
 interface Props {
   redirectUrl?: string;
@@ -46,12 +47,13 @@ export const RedirectScreen: React.FC<Props> = ({ redirectUrl }) => {
           path: "/",
           domain: window.location.hostname,
         }); // set persisting cookie for all paths
-        fetchUser(cookie)
+        fetchActiveUser(cookie)
           .then(response => {
-            dispatch(setUserAction(response.user));
             setIsAdvisor(response.user.isAdvisor);
             if (!response.user.isAdvisor) {
               // student
+
+              dispatch(setUserAction(response.user));
               Promise.all([
                 getScheduleCoursesFromSimplifiedCourseDataAPI(
                   response.user.coursesCompleted
@@ -70,6 +72,7 @@ export const RedirectScreen: React.FC<Props> = ({ redirectUrl }) => {
                 setIsLoading(false); // this update must come last, to make sure other state variables are correctly set before we redirect
               });
             } else {
+              dispatch(setAdvisorAction(response.user));
               setIsLoading(false);
             }
           })

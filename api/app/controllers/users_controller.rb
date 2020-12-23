@@ -5,6 +5,7 @@ class UsersController < ApplicationController
     def current
         if @current_user_id.present?
             @current_user = User.find(@current_user_id)
+            @user = @current_user
             render :show
         else
             render json: { error: "Unauthorized" }, status: :unprocessable_entity
@@ -15,6 +16,7 @@ class UsersController < ApplicationController
     def update
         if @current_user_id == Integer(params[:id])
             if current_user.update_attributes(user_params)
+                @user = @current_user
                 render :show
             else
                 render json: { errors: current_user.errors }, status: :unprocessable_entity
@@ -22,6 +24,23 @@ class UsersController < ApplicationController
         else
             render json: { error: "Unauthorized" }, status: :unprocessable_entity
         end
+    end
+    
+    # returns all information for one student
+    def show
+        # make sure requester is an advisor
+        requester = User.find_by_id(@current_user_id)
+        unless requester.is_advisor
+            render json: { error: "Requester is not an advisor" }, status: :bad_request
+            return
+        end
+
+        @user = User.find_by_id(Integer(params[:id]))
+        if @user == nil
+            render json: {error: "User not found."}, status: 404
+        end
+
+        render :show
     end
 
     def students
@@ -46,7 +65,7 @@ class UsersController < ApplicationController
         @last_page = false;
 
         offset = page * 50
-        @students = User.select("full_name", "email", "nu_id").where(is_advisor: false).limit(50).offset(offset).where('lower(full_name) LIKE :search OR lower(email) LIKE :search OR nu_id LIKE :search', search: "%#{search}%")
+        @students = User.select("full_name", "email", "nu_id", "id").where(is_advisor: false).limit(50).offset(offset).where('lower(full_name) LIKE :search OR lower(email) LIKE :search OR nu_id LIKE :search', search: "%#{search}%")
         if @students.empty?
             @last_page = true
         end

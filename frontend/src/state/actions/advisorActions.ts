@@ -1,4 +1,5 @@
 import { createAction } from "typesafe-actions";
+import { IAdvisorData } from "../../models/types";
 import { Student } from "../reducers/advisorReducer";
 
 export const setEmail = createAction("advisor/SET_EMAIL", (email: string) => ({
@@ -25,4 +26,9 @@ export const setStudents = createAction(
   (students: Array<Student>) => ({
     students,
   })
+)();
+
+export const setAdvisorAction = createAction(
+  "advisor/SET_ADVISOR",
+  (advisor: IAdvisorData) => ({ advisor })
 )();

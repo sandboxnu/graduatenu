@@ -1,12 +1,13 @@
 class PlansController < ApplicationController
 
   before_action :set_user
+  before_action :set_searched_user, only: [:index]
   before_action :set_user_plan, only: [:show, :update, :destroy]
 
   # returns all the plans
   def index
     if authorized || @user.is_advisor
-      @plans = @user.plans
+      @plans = @searched_user.plans
     else
       render json: {error: "Unauthorized."}, status: :unprocessable_entity
     end
@@ -87,6 +88,18 @@ class PlansController < ApplicationController
     if signed_in?
       @user = User.find_by_id(@current_user_id)
       if @user == nil
+        render json: {error: "User not found."}, status: 404
+      end
+    else
+      render json: {error: "Unauthorized."}, status: :unprocessable_entity
+    end
+  end
+
+  #sets the user whose plans are being searched for
+  def set_searched_user
+    if signed_in?
+      @searched_user = User.find_by_id(params[:user_id])
+      if @searched_user == nil
         render json: {error: "User not found."}, status: 404
       end
     else

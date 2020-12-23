@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     Healthcheck.routes(self)
     # devise_for :users, controllers: { sessions: :sessions, passwords: :passwords }, path_names: { sign_in: :login }
 
-    resources :users, only: [:update] do
+    resources :users, only: [:update, :show] do
       collection do
         get 'students'
         get 'current'

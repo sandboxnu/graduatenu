@@ -19,7 +19,7 @@ import {
   getUserIdFromState,
   getAcademicYearFromState,
   getClosedYearsFromState,
-  getTransferCoursesFromState,
+  safelyGetTransferCoursesFromState,
   getMajorsFromState,
   getActivePlanCoopCycleFromState,
   getActivePlanFromState,
@@ -297,7 +297,7 @@ class HomeComponent extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: AppState) => ({
-  transferCredits: getTransferCoursesFromState(state),
+  transferCredits: safelyGetTransferCoursesFromState(state),
   major: getActivePlanMajorFromState(state),
   coopCycle: getActivePlanCoopCycleFromState(state),
   warnings: getWarningsFromState(state),

@@ -11,7 +11,7 @@ import { AppState } from "../../state/reducers/state";
 import {
   getActivePlanMajorFromState,
   getActivePlanScheduleFromState,
-  getTransferCoursesFromState,
+  safelyGetTransferCoursesFromState,
 } from "../../state";
 import { connect, useSelector } from "react-redux";
 import { findMajorFromName } from "../../utils/plan-helpers";
@@ -86,7 +86,7 @@ export const Sidebar: React.FC = () => {
     (state: AppState) => ({
       major: getActivePlanMajorFromState(state),
       schedule: getActivePlanScheduleFromState(state),
-      transferCourses: getTransferCoursesFromState(state),
+      transferCourses: safelyGetTransferCoursesFromState(state),
     })
   );
   const { majorObj } = useSelector((state: AppState) => ({
