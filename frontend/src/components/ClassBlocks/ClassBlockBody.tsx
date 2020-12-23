@@ -16,8 +16,9 @@ const TitleWrapper = styled.div<any>`
   display: flex;
   flex-direction: row;
   align-items: center;
-  width: ${props =>
-    props.hideDelete ? `calc(100% - 8px)` : `calc(100% - 32px)`};
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 `;
 
 const Title = styled.div`
@@ -32,7 +33,6 @@ const Subtitle = styled.div`
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  flex: 1;
 `;
 
 interface ClassBlockBodyProps {
@@ -57,24 +57,17 @@ export const ClassBlockBody: React.FC<ClassBlockBodyProps> = ({
         <Title>{course.subject + course.classId}</Title>
         <Subtitle>{course.name}</Subtitle>
       </TitleWrapper>
-      <div
-        style={{
-          right: 0,
-          visibility: hovering ? "visible" : "hidden",
-        }}
-      >
-        {!hideDelete && (
-          <IconButton
-            onClick={onDelete}
-            style={{ padding: "3px", color: "rgba(102, 102, 102, 0.3)" }}
-            disableRipple
-            disableFocusRipple
-            disableTouchRipple
-          >
-            <DeleteIcon fontSize="inherit" />
-          </IconButton>
-        )}
-      </div>
+      {hovering && !hideDelete && (
+        <IconButton
+          onClick={onDelete}
+          style={{ color: "rgba(102, 102, 102, 0.3)" }}
+          disableRipple
+          disableFocusRipple
+          disableTouchRipple
+        >
+          <DeleteIcon fontSize="inherit" />
+        </IconButton>
+      )}
     </Wrapper>
   );
 };
