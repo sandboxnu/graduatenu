@@ -114,6 +114,39 @@ export const NonEditableSchedule: React.FC = () => {
   );
 };
 
+export const NonEditableScheduleStudentView: React.FC<Props> = props => {
+  const { children, sidebarPresent, transferCreditPresent } = props;
+  const { activePlan, transferCredits } = useSelector(
+    (state: AppState) => ({
+      activePlan: getActivePlanFromState(state)!.schedule,
+      transferCredits: safelyGetTransferCoursesFromState(state),
+    }),
+    shallowEqual
+  );
+
+  return (
+    <OuterContainer>
+      {sidebarPresent && (
+        <SidebarContainer>
+          <Sidebar isEditable={false} />
+        </SidebarContainer>
+      )}
+      <LeftScroll className="hide-scrollbar">
+        <Container>
+          {children}
+          <ScheduleComponent schedule={activePlan} isEditable={false} />
+          {transferCreditPresent && (
+            <TransferCredits
+              transferCredits={transferCredits}
+              isEditable={false}
+            />
+          )}
+        </Container>
+      </LeftScroll>
+    </OuterContainer>
+  );
+}
+
 export const EditableSchedule: React.FC<Props> = props => {
   const { children, sidebarPresent, transferCreditPresent } = props;
   const { activePlan, currentClassCounter, transferCredits } = useSelector(
@@ -228,7 +261,7 @@ export const EditableSchedule: React.FC<Props> = props => {
       <DragDropContext onDragEnd={onDragEnd} onDragUpdate={onDragUpdate}>
         {sidebarPresent && (
           <SidebarContainer>
-            <Sidebar />
+            <Sidebar isEditable={true} />
           </SidebarContainer>
         )}
         <LeftScroll className="hide-scrollbar">

@@ -35,7 +35,10 @@ import {
   setActivePlanDNDScheduleAction,
 } from "../state/actions/userPlansActions";
 import { EditPlanPopper } from "./EditPlanPopper";
-import { updatePlanForUser } from "../services/PlanService";
+import {
+  updatePlanForUser,
+  updatePlanLastViewed,
+} from "../services/PlanService";
 import { AddPlan } from "./AddPlanPopper";
 import { Button, Theme, withStyles } from "@material-ui/core";
 import { SwitchPlanPopper } from "./SwitchPlanPopper";
@@ -44,10 +47,14 @@ import {
   getAuthToken,
   removeAuthTokenFromCookies,
 } from "../utils/auth-helpers";
-import { EditableSchedule } from "../components/Schedule/ScheduleComponents";
+import {
+  EditableSchedule,
+  NonEditableScheduleStudentView,
+} from "../components/Schedule/ScheduleComponents";
 import { convertPlanToUpdatePlanData } from "../utils/plan-helpers";
 import { ActivePlanAutoSaveStatus } from "../state/reducers/userPlansReducer";
 import { AutoSavePlan } from "./AutoSavePlan";
+import { Alert } from "@material-ui/lab";
 
 const HomeTop = styled.div`
   width: 100%;
@@ -77,10 +84,20 @@ const HomePlan = styled.div`
 
 const HomeAboveSchedule = styled.div`
   display: flex;
+  flex-direction: column;
+  width: 100%;
+`;
+
+const HomeHeaderWrapper = styled.div`
+  display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   width: 100%;
+`;
+
+const AlertWrapper = styled.div`
+  margin: 12px 0px 12px 0px;
 `;
 
 const MajorText = styled.div`
@@ -103,13 +120,6 @@ const HomeButtons = styled.div`
   max-width: 800px;
   padding: 10px 0;
   space-between: 5;
-`;
-
-const PlanPopperButton = styled(Button)<any>`
-  background: #e0e0e0;
-  font-weight: normal;
-  float: right;
-  margin: 10px;
 `;
 
 const PlanContainer = styled.div`
@@ -174,9 +184,16 @@ type Props = ToastHomeProps &
   ReduxDispatchHomeProps &
   RouteComponentProps;
 
+const VIEWING_BUFFER = 30000; // 30 seconds
+
 class HomeComponent extends React.Component<Props> {
+  interval: number | null = null;
   constructor(props: Props) {
     super(props);
+  }
+
+  componentDidMount() {
+    this.callUpdatePlanLastViewedOnInterval();
   }
 
   componentDidUpdate(nextProps: Props) {
@@ -192,10 +209,32 @@ class HomeComponent extends React.Component<Props> {
       //@ts-ignore
       window.onbeforeunload = undefined;
     }
+
+    if (this.props.activePlan.id !== nextProps.activePlan.id) {
+      this.callUpdatePlanLastViewedOnInterval();
+    }
   }
 
   componentWillUnmount() {
     window.onbeforeunload = null;
+  }
+
+  callUpdatePlanLastViewedOnInterval() {
+    // switched plan
+    if (this.interval) {
+      clearInterval(this.interval);
+    }
+    this.interval = setInterval(() => {
+      if (this.props.activePlan && this.props.userId) {
+        const token = getAuthToken();
+        updatePlanLastViewed(
+          this.props.userId,
+          token,
+          this.props.activePlan.id,
+          this.props.userId
+        );
+      }
+    }, VIEWING_BUFFER);
   }
 
   shouldBlockNavigation() {
@@ -228,10 +267,10 @@ class HomeComponent extends React.Component<Props> {
   async updatePlan() {
     const token = getAuthToken();
     await updatePlanForUser(
-      this.props.userId!,
+      this.props.userId,
       token,
-      this.props.activePlan!.id,
-      convertPlanToUpdatePlanData(this.props.activePlan!)
+      this.props.activePlan.id,
+      convertPlanToUpdatePlanData(this.props.activePlan, this.props.userId)
     ).then(response => {
       this.props.updateActivePlan(response.plan);
     });
@@ -252,18 +291,29 @@ class HomeComponent extends React.Component<Props> {
   renderPlanHeader() {
     return (
       <HomeAboveSchedule>
-        <HomePlan>
-          <h2>Plan Of Study</h2>
-        </HomePlan>
-        <HomeButtons>
-          <PlanContainer>
-            <AutoSavePlan />
-          </PlanContainer>
-          <PlanContainer>
-            <AddPlan />
-          </PlanContainer>
-          <SwitchPlanPopper />
-        </HomeButtons>
+        <HomeHeaderWrapper>
+          <HomePlan>
+            <h2>Plan Of Study</h2>
+          </HomePlan>
+          <HomeButtons>
+            <PlanContainer>
+              <AutoSavePlan />
+            </PlanContainer>
+            <PlanContainer>
+              <AddPlan />
+            </PlanContainer>
+            <SwitchPlanPopper />
+          </HomeButtons>
+        </HomeHeaderWrapper>
+        {this.props.activePlan.isCurrentlyBeingEditedByAdvisor && (
+          <AlertWrapper>
+            <Alert severity="warning">
+              This plan is currently being edited by your advisor, so we've put
+              it in read-only mode. You will be able to edit it again once your
+              advisor finishes their changes.
+            </Alert>
+          </AlertWrapper>
+        )}
       </HomeAboveSchedule>
     );
   }
@@ -288,9 +338,18 @@ class HomeComponent extends React.Component<Props> {
             </HomePlan>
           </HomeTopInnerContainer>
         </HomeTop>
-        <EditableSchedule sidebarPresent={true} transferCreditPresent={true}>
-          {this.renderPlanHeader()}
-        </EditableSchedule>
+        {this.props.activePlan.isCurrentlyBeingEditedByAdvisor ? (
+          <NonEditableScheduleStudentView
+            sidebarPresent={true}
+            transferCreditPresent={true}
+          >
+            {this.renderPlanHeader()}
+          </NonEditableScheduleStudentView>
+        ) : (
+          <EditableSchedule sidebarPresent={true} transferCreditPresent={true}>
+            {this.renderPlanHeader()}
+          </EditableSchedule>
+        )}
       </>
     );
   }

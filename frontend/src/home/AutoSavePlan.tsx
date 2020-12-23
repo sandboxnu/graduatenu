@@ -72,7 +72,7 @@ export const AutoSavePlan: React.FC = () => {
       userId,
       token,
       activePlan.id,
-      convertPlanToUpdatePlanData(activePlan)
+      convertPlanToUpdatePlanData(activePlan, userId)
     ).then(response => {
       batch(() => {
         dispatch(updateActivePlanTimestampAction(response.plan.updatedAt));

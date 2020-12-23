@@ -17,7 +17,10 @@ export function findMajorFromName(
   return major;
 }
 
-export function convertPlanToUpdatePlanData(plan: IPlanData): IUpdatePlanData {
+export function convertPlanToUpdatePlanData(
+  plan: IPlanData,
+  userId: number
+): IUpdatePlanData {
   return {
     name: plan.name,
     link_sharing_enabled: plan.linkSharingEnabled,
@@ -27,7 +30,8 @@ export function convertPlanToUpdatePlanData(plan: IPlanData): IUpdatePlanData {
     last_viewed: plan.lastViewed,
     warnings: plan.warnings,
     course_warnings: plan.courseWarnings,
-    catalog_year: plan.catalogYear || 2018, // TODO: make catalog year non-optional
+    catalog_year: plan.catalogYear,
     schedule: plan.schedule,
+    last_viewer: userId,
   };
 }

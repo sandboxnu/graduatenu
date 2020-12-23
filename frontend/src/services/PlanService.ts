@@ -1,4 +1,4 @@
-import { ICreatePlanData, IPlanData } from "../models/types";
+import { ICreatePlanData, IPlanData, IUpdatePlanData } from "../models/types";
 
 /**
  * Service function object to find all plans for a given User.
@@ -74,11 +74,26 @@ export const updatePlanForUser = (
   userId: number,
   userToken: string,
   planId: number,
-  plan: Partial<ICreatePlanData>
+  plan: Partial<IUpdatePlanData>
 ) =>
   fetch(`/api/users/${userId}/plans/${planId}`, {
     method: "PUT",
     body: JSON.stringify({ plan: plan }),
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Token " + userToken,
+    },
+  }).then(response => response.json());
+
+export const updatePlanLastViewed = (
+  userId: number,
+  userToken: string,
+  planId: number,
+  currentUserId: number
+) =>
+  fetch(`/api/users/${userId}/plans/${planId}/last_viewed`, {
+    method: "PUT",
+    body: JSON.stringify({ plan: { last_viewer: currentUserId } }), // sets last_viewed in the backend
     headers: {
       "Content-Type": "application/json",
       Authorization: "Token " + userToken,
