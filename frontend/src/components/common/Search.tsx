@@ -14,7 +14,6 @@ const SearchContainer = styled.div`
   overflow: hidden;
   border: 1px solid red;
   border-radius: 10px;
-  width: 100%;
 `;
 
 const SearchInput = styled.input<any>`

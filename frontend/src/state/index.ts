@@ -256,3 +256,6 @@ export const safelyGetAcademicYearFromState = (state: AppState) =>
 
 export const safelyGetGraduationYearFromState = (state: AppState) =>
   state.userState.user?.graduationYear;
+
+export const getFolderExpandedFromState = (state: AppState, index: number) =>
+  !state.advisorState.closedFolders.includes(index);

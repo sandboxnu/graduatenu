@@ -145,7 +145,7 @@ export const NonEditableScheduleStudentView: React.FC<Props> = props => {
       </LeftScroll>
     </OuterContainer>
   );
-}
+};
 
 export const EditableSchedule: React.FC<Props> = props => {
   const { children, sidebarPresent, transferCreditPresent } = props;

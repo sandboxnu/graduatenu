@@ -281,5 +281,8 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 });
 
 export const CompletedCoursesScreen = withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(CompletedCoursesComponent)
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(CompletedCoursesComponent)
 );

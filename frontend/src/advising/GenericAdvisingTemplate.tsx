@@ -10,7 +10,17 @@ import { resetUserAction } from "../state/actions/userActions";
 const Header = styled.div`
   display: flex;
   flex-direction: row;
+  align-items: center;
   justify-content: space-between;
+  margin: 20px;
+`;
+
+const HomeTopInnerContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin: 20px;
 `;
 
 const HomeText = styled.a`
@@ -25,7 +35,6 @@ const StyledTab = styled(Tab)`
 `;
 
 const Container = styled.div`
-  margin: 30px;
   background-color: "#ff76ff";
 `;
 const TabsWrapper = styled.div`

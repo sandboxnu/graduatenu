@@ -178,15 +178,9 @@ const GenericOnboardingTemplate: React.FC<GenericOnboardingTemplateProps> = ({
   );
 };
 
-const OnboardingSelectionTemplateComponent: React.FC<OnboardingSelectionTemplateProps &
-  RouteComponentProps<{}>> = ({
-  screen,
-  mainTitleText,
-  onSubmit,
-  to,
-  history,
-  children,
-}) => {
+const OnboardingSelectionTemplateComponent: React.FC<
+  OnboardingSelectionTemplateProps & RouteComponentProps<{}>
+> = ({ screen, mainTitleText, onSubmit, to, history, children }) => {
   return (
     <GenericOnboardingTemplate screen={screen}>
       <MainTitleText>{mainTitleText}</MainTitleText>
