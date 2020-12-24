@@ -173,31 +173,13 @@ const TemplatesList = (props: TemplatesListProps) => {
   const [isLastPage, setIsLastPage] = useState(false);
   const token = getAuthToken();
 
-  const fetchTemplates = (currentTemplates: TemplateProps[], page: number) => {
-    setIsLoading(true);
-    // get some mock data
-    // getTemplates(props.searchQuery, page, token)
-    //   .then((TemplatesAPI: TemplatesAPI) => {
-    //     setTemplates(currentTemplates.concat(TemplatesAPI.templates));
-    //     setPageNumber(TemplatesAPI.nextPage);
-    //     setIsLastPage(TemplatesAPI.lastPage);
-    //     setIsLoading(false);
-    //   })
-    //   .catch(err => console.log(err));
-  };
-
-  useEffect(() => {
-    setTemplates(EMPTY_TEMPLATES_LIST);
-    fetchTemplates(EMPTY_TEMPLATES_LIST, 0);
-  }, [props.searchQuery, token]);
-
   return (
     <TemplatesContainer>
-      {isLoading ? (
+      {isLoading && (
         <Loading>
           <LinearProgress color="secondary" />
         </Loading>
-      ) : null}
+      )}
       <TemplateListContainer>
         {(templates === null || templates.length == 0) && !isLoading ? (
           <EmptyState> No Templates found </EmptyState>
@@ -208,9 +190,7 @@ const TemplatesList = (props: TemplatesListProps) => {
           isLastPage ? (
             <NoMoreTemplates>No more Templates</NoMoreTemplates>
           ) : (
-            <LoadMoreTemplates
-              onClick={_ => fetchTemplates(templates, pageNumber)}
-            >
+            <LoadMoreTemplates onClick={() => {}}>
               Load more Templates
             </LoadMoreTemplates>
           )
