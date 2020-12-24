@@ -17,11 +17,17 @@ import { getCreditsTakenInSchedule } from "../utils";
 // Caution! Will error if there is not a user
 export const getUserFromState = (state: AppState) => state.userState.user!;
 
+export const getDoesAdvisorExistInState = (state: AppState) =>
+  !!state.advisorState.userId;
+
 export const getDoesUserExistInState = (state: AppState) =>
   !!state.userState.user;
 
 export const getUserIdFromState = (state: AppState) =>
   getUserFromState(state).id;
+
+export const safelyGetUserIdFromState = (state: AppState) =>
+  getUserFromState(state)?.id;
 
 export const getUserFullNameFromState = (state: AppState) =>
   getUserFromState(state).fullName;
@@ -44,8 +50,8 @@ export const getCompletedCoursesFromState = (state: AppState) =>
  * Get the list of transfer courses from the AppState
  * @param state the AppState
  */
-export const getTransferCoursesFromState = (state: AppState) =>
-  getUserFromState(state).transferCourses;
+export const safelyGetTransferCoursesFromState = (state: AppState) =>
+  getUserFromState(state)?.transferCourses || [];
 
 /**
  * Get the selected major object from the AppState
@@ -227,6 +233,10 @@ export const safelyGetActivePlanFromState = (state: AppState) => {
   return state.userPlansState.plans[state.userPlansState.activePlan];
 };
 
+export const getActivePlanNameFromState = (state: AppState) => {
+  return state.userPlansState.activePlan;
+};
+
 export const safelyGetActivePlanMajorFromState = (state: AppState) =>
   safelyGetActivePlanFromState(state)?.major;
 
@@ -239,12 +249,13 @@ export const safelyGetWarningsFromState = (state: AppState) =>
 export const safelyGetActivePlanScheduleFromState = (state: AppState) =>
   safelyGetActivePlanFromState(state)?.schedule;
 
-export const safelyGetIsAdvisorFromState = (state: AppState) =>
-  state.userState.user?.isAdvisor;
+export const isUserAdvisor = (state: AppState) => !!state.advisorState.userId;
 
 export const safelyGetAcademicYearFromState = (state: AppState) =>
   state.userState.user?.academicYear;
 
-export const safelyGetGraduationYearFromState = (state: AppState) => state.userState.user?.graduationYear;
+export const safelyGetGraduationYearFromState = (state: AppState) =>
+  state.userState.user?.graduationYear;
 
-export const getFolderExpandedFromState = (state: AppState, index: number) => !state.advisorState.closedFolders.includes(index);
+export const getFolderExpandedFromState = (state: AppState, index: number) =>
+  !state.advisorState.closedFolders.includes(index);

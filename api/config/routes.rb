@@ -4,12 +4,16 @@ Rails.application.routes.draw do
     Healthcheck.routes(self)
     # devise_for :users, controllers: { sessions: :sessions, passwords: :passwords }, path_names: { sign_in: :login }
 
-    resources :users, only: [:update] do
+    resources :users, only: [:update, :show] do
       collection do
         get 'students'
         get 'current'
       end
-      resources :plans
+      resources :plans, only: [:index, :show, :create, :update, :destroy] do
+        member do
+          put :last_viewed
+        end
+      end
     end
 
     post 'v1/admin_hook', to: 'admin#admin_hook'

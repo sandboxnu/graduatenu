@@ -150,7 +150,6 @@ async function prereqifyScheduleTerm(
     season: termObj.season,
     year: termObj.year,
     termId: termObj.termId,
-    id: termObj.id,
     classes: await newClasses,
     status: termObj.status,
   };

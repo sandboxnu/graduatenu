@@ -6,7 +6,10 @@ import { DNDSchedule } from "../../models/types";
 import { SEMESTER_MIN_HEIGHT } from "../../constants";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
-import { getAcademicYearFromState, getClosedYearsFromState } from "../../state";
+import {
+  safelyGetAcademicYearFromState,
+  getClosedYearsFromState,
+} from "../../state";
 import { AppState } from "../../state/reducers/state";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
@@ -103,7 +106,7 @@ class YearComponent extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: AppState) => ({
-  academicYear: getAcademicYearFromState(state)!,
+  academicYear: safelyGetAcademicYearFromState(state)!,
   closedYears: getClosedYearsFromState(state),
 });
 

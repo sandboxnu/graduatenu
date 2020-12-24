@@ -2,6 +2,7 @@ import produce from "immer";
 import { getType } from "typesafe-actions";
 import { AdvisorAction } from "../actions";
 import {
+  setAdvisorAction,
   setEmail,
   setImage,
   setName,
@@ -39,6 +40,14 @@ export const advisorReducer = (
 ) => {
   return produce(state, draft => {
     switch (action.type) {
+      case getType(setAdvisorAction): {
+        const { fullName, email, id } = action.payload.advisor;
+        draft.name = fullName;
+        draft.email = email;
+        draft.userId = id;
+        return draft;
+      }
+
       case getType(setEmail): {
         draft.email = action.payload.email;
         return draft;

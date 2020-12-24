@@ -11,7 +11,7 @@ import { AppState } from "../../state/reducers/state";
 import {
   getActivePlanMajorFromState,
   getActivePlanScheduleFromState,
-  getTransferCoursesFromState,
+  safelyGetTransferCoursesFromState,
 } from "../../state";
 import { connect, useSelector } from "react-redux";
 import { findMajorFromName } from "../../utils/plan-helpers";
@@ -33,10 +33,15 @@ const MajorTitle = styled.p`
   margin-bottom: 12px;
 `;
 
+interface SidebarProps {
+  isEditable: boolean;
+}
+
 interface MajorSidebarProps {
   schedule: DNDSchedule;
   major: Major;
   transferCourses: ScheduleCourse[];
+  isEditable: boolean;
 }
 
 const NoMajorSidebarComponent: React.FC = () => {
@@ -51,6 +56,7 @@ const MajorSidebarComponent: React.FC<MajorSidebarProps> = ({
   schedule,
   major,
   transferCourses,
+  isEditable,
 }) => {
   const warnings = produceRequirementGroupWarning(schedule, major);
   const completedCourses: string[] = getCompletedCourseStrings(schedule);
@@ -73,6 +79,7 @@ const MajorSidebarComponent: React.FC<MajorSidebarProps> = ({
               warning={warnings.find(w => w.requirementGroup === req)}
               key={index + major.name}
               completedCourses={completedCourseStrings}
+              isEditable={isEditable}
             />
           );
         })}
@@ -81,12 +88,12 @@ const MajorSidebarComponent: React.FC<MajorSidebarProps> = ({
   );
 };
 
-export const Sidebar: React.FC = () => {
+export const Sidebar: React.FC<SidebarProps> = props => {
   const { schedule, major, transferCourses } = useSelector(
     (state: AppState) => ({
       major: getActivePlanMajorFromState(state),
       schedule: getActivePlanScheduleFromState(state),
-      transferCourses: getTransferCoursesFromState(state),
+      transferCourses: safelyGetTransferCoursesFromState(state),
     })
   );
   const { majorObj } = useSelector((state: AppState) => ({
@@ -100,6 +107,7 @@ export const Sidebar: React.FC = () => {
           schedule={schedule}
           major={majorObj}
           transferCourses={transferCourses}
+          isEditable={props.isEditable}
         />
       ) : (
         <NoMajorSidebarComponent />
