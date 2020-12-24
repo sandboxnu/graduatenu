@@ -5,7 +5,6 @@ import { RedirectScreen } from "../../Onboarding/RedirectScreen";
 import {
   safelyGetAcademicYearFromState,
   safelyGetGraduationYearFromState,
-  isUserAdvisor,
   getDoesAdvisorExistInState,
   getDoesUserExistInState,
 } from "../../state";
@@ -25,7 +24,7 @@ export function ProtectedRoute({
     (state: AppState) => ({
       userExists:
         getDoesAdvisorExistInState(state) || getDoesUserExistInState(state),
-      isAdvisor: isUserAdvisor(state),
+      isAdvisor: getDoesAdvisorExistInState(state),
       finishedOnboarding:
         !!safelyGetGraduationYearFromState(state) &&
         !!safelyGetAcademicYearFromState(state),

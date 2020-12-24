@@ -171,6 +171,7 @@ export interface IAdvisorData {
   id: number;
   email: string;
   fullName: string;
+  photoUrl: string;
 }
 
 /**
