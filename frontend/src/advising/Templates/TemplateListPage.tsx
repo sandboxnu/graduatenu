@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
@@ -10,6 +10,23 @@ import { toggleTemplateFolderExpandedAction } from "../../state/actions/advisorA
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import { WhiteColorButton, ColorButton } from "../GenericAdvisingTemplate";
+import { withRouter } from "react-router-dom";
+import styled from "styled-components";
+import { Search } from "../components/common/Search";
+import { NORTHEASTERN_RED } from "../constants";
+import { getAuthToken } from "../utils/auth-helpers";
+import { connect, useDispatch, useSelector } from "react-redux";
+import { Dispatch } from "redux";
+import { AppState } from "../state/reducers/state";
+import {
+  getAdvisorUserIdFromState,
+  getFolderExpandedFromState,
+  getUserIdFromState,
+} from "../state";
+import { toggleTemplateFolderExpandedAction } from "../state/actions/advisorActions";
+import { getTemplates } from "../services/TemplateService";
+import { IFolderData, ITemplatePlan } from "../models/types";
+import { LinearProgress } from "@material-ui/core";
 
 const Container = styled.div`
   margin-left: 30px;
@@ -77,26 +94,24 @@ interface TemplatesPageProps {
 
 interface FolderProps {
   index: number;
-  folder: Folder;
+  folder: IFolderData;
 }
 
-interface Folder {
-  name: string;
-  templates: Array<string>;
-}
+const EMPTY_TEMPLATES_LIST: TemplateProps[] = [];
 
-export const TemplatesListPage: React.FC<TemplatesPageProps> = ({
-  setPageState,
-}) => {
+const TemplatesComponent: React.FC = (props: any) => {
   const [searchQuery, setSearchQuery] = useState("");
-  const folders = [
-    { name: "non-shared", templates: ["file 1", "file 2"] },
-    { name: "catalog year 2017-2018", templates: ["more file", "yaas"] },
-    {
-      name: "folderrrrr",
-      templates: ["computer science 1", "biology and cs "],
-    },
-  ];
+  const [folders, setFolders] = useState<IFolderData[]>([]);
+  const { userId } = useSelector((state: AppState) => ({
+    userId: getAdvisorUserIdFromState(state),
+  }));
+
+  useEffect(() => {
+    const token = getAuthToken();
+    getTemplates(String(userId), token).then(response => {
+      setFolders(response);
+    });
+  }, []);
 
   return (
     <Container>
@@ -114,13 +129,46 @@ export const TemplatesListPage: React.FC<TemplatesPageProps> = ({
             </ColorButton>
           </ButtonWrapper>
           <TemplateListScrollContainer>
-            {folders.map((folder: Folder, index: number) => (
+            {folders.map((folder: IFolderData, index: number) => (
               <FolderComponent index={index} folder={folder} />
             ))}
           </TemplateListScrollContainer>
         </TemplateListContainer>
       </TemplatesContainer>
     </Container>
+  );
+};
+
+const TemplatesList = (props: TemplatesListProps) => {
+  const [templates, setTemplates] = useState(EMPTY_TEMPLATES_LIST);
+  const [isLoading, setIsLoading] = useState(true);
+  const [pageNumber, setPageNumber] = useState(0);
+  const [isLastPage, setIsLastPage] = useState(false);
+
+  return (
+    <TemplatesContainer>
+      {isLoading && (
+        <Loading>
+          <LinearProgress color="secondary" />
+        </Loading>
+      )}
+      <TemplateListContainer>
+        {(templates === null || templates.length == 0) && !isLoading ? (
+          <EmptyState> No Templates found </EmptyState>
+        ) : (
+          templates.map(template => <Template name={template.name} />)
+        )}
+        {!isLoading ? (
+          isLastPage ? (
+            <NoMoreTemplates>No more Templates</NoMoreTemplates>
+          ) : (
+            <LoadMoreTemplates onClick={() => {}}>
+              Load more Templates
+            </LoadMoreTemplates>
+          )
+        ) : null}
+      </TemplateListContainer>
+    </TemplatesContainer>
   );
 };
 
@@ -146,8 +194,8 @@ const FolderComponent: React.FC<FolderProps> = (props: FolderProps) => {
       </FolderNameWrapper>
       <FolderTemplateListContainer>
         {isExpanded &&
-          folder.templates.map((template: string) => (
-            <Template name={template} />
+          folder.templatePlans.map((template: ITemplatePlan) => (
+            <Template name={template.name} />
           ))}
       </FolderTemplateListContainer>
     </div>

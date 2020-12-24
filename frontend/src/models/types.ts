@@ -294,6 +294,22 @@ export interface ISimplifiedCourseDataAPI {
   completion?: string;
 }
 
+export interface IFolderData {
+  id: number;
+  name: string;
+  templatePlans: ITemplatePlan[];
+}
+
+export interface ITemplatePlan {
+  id: number;
+  name: string;
+  schedule: DNDSchedule;
+  catalogYear: number | null;
+  major: string | null;
+  coopCycle: string | null;
+  updatedAt: Date;
+}
+
 /** ------------------------------------------------------------------------
  *
  *            OLD STUFF FOLLOWS ! This stuff is big outdated and is only
