@@ -5,6 +5,7 @@ import {
   setActivePlanCatalogYearAction,
   setActivePlanStatusAction,
   updateActivePlanTimestampAction,
+  expandAllYearsForActivePlanAction,
 } from "./../actions/userPlansActions";
 import { DNDSchedule, IPlanData } from "../../models/types";
 import produce from "immer";
@@ -324,6 +325,10 @@ export const userPlansReducer = (
         } else {
           draft.closedYears[draft.activePlan!].push(idx);
         }
+        return draft;
+      }
+      case getType(expandAllYearsForActivePlanAction): {
+        draft.closedYears[draft.activePlan!] = [];
         return draft;
       }
       case getType(resetUserAction): {

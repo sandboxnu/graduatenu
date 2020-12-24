@@ -1,23 +1,36 @@
 import React, { useState, useEffect } from "react";
-import { withRouter } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import styled from "styled-components";
 import { fetchUser, getStudents } from "../services/AdvisorService";
 import { Search } from "../components/common/Search";
-import { LinearProgress, IconButton, Avatar } from "@material-ui/core";
+import { LinearProgress, IconButton, Avatar, Tooltip } from "@material-ui/core";
 import { getAuthToken } from "../utils/auth-helpers";
-import { NonEditableSchedule } from "../components/Schedule/ScheduleComponents";
+import {
+  EditableSchedule,
+  NonEditableSchedule,
+  NonEditableScheduleStudentView,
+} from "../components/Schedule/ScheduleComponents";
 import { findAllPlansForUser } from "../services/PlanService";
 import { IPlanData, IUserData } from "../models/types";
-import { setUserPlansAction } from "../state/actions/userPlansActions";
+import {
+  expandAllYearsForActivePlanAction,
+  setUserPlansAction,
+} from "../state/actions/userPlansActions";
 import { useDispatch, useSelector } from "react-redux";
-import { getActivePlanNameFromState } from "../state";
+import {
+  getActivePlanCoopCycleFromState,
+  getActivePlanMajorFromState,
+  getActivePlanNameFromState,
+  getUserFullNameFromState,
+} from "../state";
 import { AppState } from "../state/reducers/state";
-import { Edit, Fullscreen } from "@material-ui/icons";
+import { Check, Edit, Fullscreen, FullscreenExit } from "@material-ui/icons";
 import { resetUserAction, setUserAction } from "../state/actions/userActions";
 import { LoadingSpinner } from "../components/common/LoadingSpinner";
 import { SwitchPlanList } from "../components/SwitchPlan/SwitchPlanList";
 import { ColoredButton } from "../components/common/ColoredButton";
 import { getInitialsFromName } from "../utils/student-helpers";
+import { AutoSavePlan } from "../home/AutoSavePlan";
 
 const Container = styled.div`
   margin-left: 30px;
@@ -94,9 +107,10 @@ const NoMoreStudents = styled.div`
   color: red;
 `;
 
-const StudentPreviewContainer = styled.div`
+const StudentViewContainer = styled.div`
   margin-top: 30px;
   display: flex;
+  justify-content: center;
   > * {
     border: 1px solid red;
     border-radius: 10px;
@@ -108,6 +122,20 @@ const StudentPreviewContainer = styled.div`
     font-style: normal;
   }
 `;
+
+const FullScheduleViewContainer = styled.div`
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  * {
+    font-family: Roboto;
+    font-style: normal;
+  }
+`;
+
+const ExpandedScheduleStudentInfo = styled.div``;
+
 const ScheduleWrapper = styled.div`
   overflow-x: scroll;
   height: 95%;
@@ -121,6 +149,9 @@ const PlanTitle = styled.div`
   display: flex;
   justify-content: center;
   height: 24px;
+  font-family: Roboto;
+  font-weight: bold;
+  font-size: 24px;
 `;
 const ButtonHeader = styled.div`
   display: flex;
@@ -207,7 +238,23 @@ const ButtonContainer = styled.div`
   display: flex;
 `;
 
+const ExpandedStudentContainer = styled.div`
+  margin-top: 12px;
+  border: 1px solid red;
+  border-radius: 10px;
+  padding: 30px;
+`;
+
+const BackToStudentLink = styled.div`
+  color: red;
+  font-size: 16px;
+  text-decoration: underline;
+  cursor: pointer;
+`;
+
 const EMPTY_STUDENT_LIST: StudentProps[] = [];
+
+type StudentViewMode = "overview" | "viewSchedule" | "editSchedule";
 
 interface StudentsListProps {
   searchQuery: string;
@@ -231,8 +278,15 @@ interface StudentComponentProps extends StudentProps {
   setSelectedStudent: (studentId: number | null) => void;
 }
 
-interface StudentPreviewProps {
+interface StudentViewProps {
   id: number;
+}
+
+interface ExpandedStudentPlanProps {
+  editMode: boolean;
+  onEditPress: () => void;
+  onStopEditPress: () => void;
+  onFullScreenPress: () => void;
 }
 
 const ManageStudentsComponent: React.FC = (props: any) => {
@@ -255,16 +309,17 @@ const ManageStudentsComponent: React.FC = (props: any) => {
           setSelectedStudent={setSelectedStudent}
         />
       ) : (
-        <StudentPreview id={selectedStudent} />
+        <StudentView id={selectedStudent} />
       )}
     </Container>
   );
 };
 
-const StudentPreview = ({ id }: StudentPreviewProps) => {
+const StudentView = ({ id }: StudentViewProps) => {
   const [fetchingStudent, setFetchingStudent] = useState(true);
   const [student, setStudent] = useState<IUserData | null>(null);
   const [noPlans, setNoPlans] = useState(false);
+  const [viewMode, setViewMode] = useState<StudentViewMode>("overview");
 
   const dispatch = useDispatch();
   const token = getAuthToken();
@@ -274,7 +329,7 @@ const StudentPreview = ({ id }: StudentPreviewProps) => {
 
   useEffect(() => {
     fetchUser(id, token).then(response => {
-      dispatch(setUserAction(response));
+      dispatch(setUserAction(response.user));
       setStudent(response.user);
       setFetchingStudent(false);
     });
@@ -286,63 +341,139 @@ const StudentPreview = ({ id }: StudentPreviewProps) => {
       dispatch(resetUserAction());
     };
   }, []);
-  return (
-    <StudentPreviewContainer>
-      <StudentInfoContainer>
-        {!student && !fetchingStudent ? (
-          <NoPlanContainer>
-            <Text>User Has No Plans</Text>
-          </NoPlanContainer>
-        ) : fetchingStudent ? (
-          <LoadingSpinner />
-        ) : (
-          <StudentInfoDisplay>
-            <AvatarWrapper>
-              <Avatar>{getInitialsFromName(student!.fullName)}</Avatar>
-            </AvatarWrapper>
-            <StudentInfoTextWrapper>
-              <NameText>{student!.fullName}</NameText>
-              <Text>{student!.nuId}</Text>
-              <Text>{student!.email}</Text>
-              <Text>{student!.major}</Text>
-              <Text>{student!.coopCycle}</Text>
-            </StudentInfoTextWrapper>
 
-            <PlanText>Plans:</PlanText>
-            <PlanListContainer>
-              <SwitchPlanList />
-            </PlanListContainer>
-            <ButtonContainer>
-              <ColoredButton onClick={() => {}}>Assign Template</ColoredButton>
-            </ButtonContainer>
-          </StudentInfoDisplay>
-        )}
-      </StudentInfoContainer>
-      <SchedulePreviewContainer>
-        {noPlans ? (
-          <NoPlanContainer>
-            <Text>User Has No Plans</Text>
-          </NoPlanContainer>
-        ) : (
-          <>
-            <PlanTitle>
-              <TitleText>{planName}</TitleText>
-            </PlanTitle>
-            <ButtonHeader>
-              <IconButton>
+  if (viewMode === "overview") {
+    return (
+      <StudentViewContainer>
+        <StudentInfoContainer>
+          {!student && !fetchingStudent ? (
+            <NoPlanContainer>
+              <Text>User Has No Plans</Text>
+            </NoPlanContainer>
+          ) : fetchingStudent ? (
+            <LoadingSpinner />
+          ) : (
+            <StudentInfoDisplay>
+              <AvatarWrapper>
+                <Avatar>{student!.fullName[0]}</Avatar>
+              </AvatarWrapper>
+              <StudentInfoTextWrapper>
+                <NameText>{student!.fullName}</NameText>
+                <Text>{student!.email}</Text>
+                <Text>{student!.major}</Text>
+                <Text>{student!.coopCycle}</Text>
+              </StudentInfoTextWrapper>
+
+              <PlanText>Plans:</PlanText>
+              <PlanListContainer>
+                <SwitchPlanList />
+              </PlanListContainer>
+              <ButtonContainer>
+                <ColoredButton onClick={() => {}}>
+                  Assign Template
+                </ColoredButton>
+              </ButtonContainer>
+            </StudentInfoDisplay>
+          )}
+        </StudentInfoContainer>
+        <SchedulePreviewContainer>
+          {noPlans ? (
+            <NoPlanContainer>
+              <Text>User Has No Plans</Text>
+            </NoPlanContainer>
+          ) : (
+            <>
+              <PlanTitle>
+                <TitleText>{planName}</TitleText>
+              </PlanTitle>
+              <ButtonHeader>
+                <Tooltip title="Edit this student's plan">
+                  <IconButton onClick={() => setViewMode("editSchedule")}>
+                    <Edit />
+                  </IconButton>
+                </Tooltip>
+                <IconButton onClick={() => setViewMode("viewSchedule")}>
+                  <Fullscreen />
+                </IconButton>
+              </ButtonHeader>
+              <ScheduleWrapper>
+                <NonEditableSchedule />
+              </ScheduleWrapper>
+            </>
+          )}
+        </SchedulePreviewContainer>
+      </StudentViewContainer>
+    );
+  } else {
+    // full schedule view
+    return (
+      <ExpandedStudentPlan
+        editMode={viewMode === "editSchedule"}
+        onEditPress={() => setViewMode("editSchedule")}
+        onStopEditPress={() => setViewMode("viewSchedule")}
+        onFullScreenPress={() => setViewMode("overview")}
+      />
+    );
+  }
+};
+
+const ExpandedStudentPlan: React.FC<ExpandedStudentPlanProps> = props => {
+  const { planName, planMajor, planCoopCycle, fullName } = useSelector(
+    (state: AppState) => ({
+      planName: getActivePlanNameFromState(state),
+      planMajor: getActivePlanMajorFromState(state),
+      planCoopCycle: getActivePlanCoopCycleFromState(state),
+      fullName: getUserFullNameFromState(state),
+    })
+  );
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(expandAllYearsForActivePlanAction());
+  }, []);
+
+  return (
+    <FullScheduleViewContainer>
+      <BackToStudentLink onClick={props.onFullScreenPress}>
+        Back to {fullName}
+      </BackToStudentLink>
+      <ExpandedScheduleStudentInfo>
+        <b style={{ marginRight: 12 }}>{fullName}</b>
+        {planMajor || ""} {planCoopCycle || ""}
+      </ExpandedScheduleStudentInfo>
+      <ExpandedStudentContainer>
+        <PlanTitle>{planName}</PlanTitle>
+        <ButtonHeader>
+          {props.editMode && <AutoSavePlan />}
+          {props.editMode ? (
+            <Tooltip title="Finished Editing">
+              <IconButton onClick={props.onStopEditPress}>
+                <Check />
+              </IconButton>
+            </Tooltip>
+          ) : (
+            <Tooltip title="Edit this student's plan">
+              <IconButton onClick={props.onEditPress}>
                 <Edit />
               </IconButton>
-              <IconButton>
-                <Fullscreen />
-              </IconButton>
-            </ButtonHeader>
-            <ScheduleWrapper>
-              <NonEditableSchedule />
-            </ScheduleWrapper>
-          </>
-        )}
-      </SchedulePreviewContainer>
-    </StudentPreviewContainer>
+            </Tooltip>
+          )}
+          <IconButton onClick={props.onFullScreenPress}>
+            <FullscreenExit />
+          </IconButton>
+        </ButtonHeader>
+        <ScheduleWrapper>
+          {props.editMode ? (
+            <EditableSchedule transferCreditPresent collapsibleYears={false} />
+          ) : (
+            <NonEditableScheduleStudentView
+              transferCreditPresent
+              collapsibleYears={false}
+            />
+          )}
+        </ScheduleWrapper>
+      </ExpandedStudentContainer>
+    </FullScheduleViewContainer>
   );
 };
 

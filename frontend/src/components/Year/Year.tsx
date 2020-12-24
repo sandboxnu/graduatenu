@@ -28,6 +28,7 @@ interface YearProps {
   index: number;
   schedule: DNDSchedule;
   isEditable: boolean;
+  collapsibleYears: boolean;
 }
 
 type Props = ReduxStoreYearProps & ReduxDispatchYearProps & YearProps;
@@ -37,7 +38,7 @@ const YearTopWrapper = styled.div<any>`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin-left: ${props => (props.isEditable ? "-28px" : "-4px")};
+  margin-left: ${props => (props.collapsibleYears ? "-28px" : "-4px")};
 `;
 
 const YearBody = styled.div`
@@ -52,18 +53,18 @@ class YearComponent extends React.Component<Props> {
   }
 
   render() {
-    const { index, schedule, isEditable } = this.props;
+    const { index, schedule, isEditable, collapsibleYears } = this.props;
     const year = schedule.years[index];
     const isExpanded = !this.props.closedYears.has(index) || !isEditable;
 
     return (
       <div style={{ width: "100%", marginBottom: 28 }}>
-        <YearTopWrapper isEditable={isEditable}>
+        <YearTopWrapper collapsibleYears={collapsibleYears}>
           <div
             onClick={this.handleExpandedChange.bind(this)}
             style={{ marginRight: 4 }}
           >
-            {isEditable &&
+            {collapsibleYears &&
               (isExpanded ? (
                 <KeyboardArrowUpIcon />
               ) : (

@@ -340,13 +340,18 @@ class HomeComponent extends React.Component<Props> {
         </HomeTop>
         {this.props.activePlan.isCurrentlyBeingEditedByAdvisor ? (
           <NonEditableScheduleStudentView
-            sidebarPresent={true}
-            transferCreditPresent={true}
+            sidebarPresent
+            transferCreditPresent
+            collapsibleYears
           >
             {this.renderPlanHeader()}
           </NonEditableScheduleStudentView>
         ) : (
-          <EditableSchedule sidebarPresent={true} transferCreditPresent={true}>
+          <EditableSchedule
+            sidebarPresent
+            transferCreditPresent
+            collapsibleYears
+          >
             {this.renderPlanHeader()}
           </EditableSchedule>
         )}
