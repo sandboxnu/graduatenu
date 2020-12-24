@@ -1,4 +1,10 @@
-import { Button, LinearProgress, Theme, withStyles } from "@material-ui/core";
+import {
+  Button,
+  LinearProgress,
+  TextField,
+  Theme,
+  withStyles,
+} from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
@@ -10,8 +16,15 @@ import { getAuthToken } from "../utils/auth-helpers";
 import { connect, useDispatch, useSelector } from "react-redux";
 import { Dispatch } from "redux";
 import { AppState } from "../state/reducers/state";
-import { getFolderExpandedFromState } from "../state";
+import {
+  getFolderExpandedFromState,
+  getMajorsFromState,
+  getPlansFromState,
+  getUserCatalogYearFromState,
+} from "../state";
 import { toggleTemplateFolderExpandedAction } from "../state/actions/advisorActions";
+import Autocomplete from "@material-ui/lab/Autocomplete";
+import { planToString } from "../utils";
 
 const Container = styled.div`
   margin-left: 30px;
@@ -164,8 +177,18 @@ interface Folder {
   templates: Array<string>;
 }
 
+interface TemplatesPageProps {
+  readonly setPageState: (pageState: TemplatePageState) => void;
+}
+
+enum TemplatePageState {
+  LIST = "LIST",
+  NEW = "NEW",
+}
+
 const EMPTY_TEMPLATES_LIST: TemplateProps[] = [];
 
+// TODO This is not currently in use since the templates API is not set up.
 const TemplatesList = (props: TemplatesListProps) => {
   const [templates, setTemplates] = useState(EMPTY_TEMPLATES_LIST);
   const [isLoading, setIsLoading] = useState(true);
@@ -202,7 +225,7 @@ const TemplatesList = (props: TemplatesListProps) => {
 
 type Props = FolderProps;
 
-const TemplatesComponent: React.FC = (props: any) => {
+const TemplatesListPage: React.FC<TemplatesPageProps> = ({ setPageState }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const folders = [
     { name: "non-shared", templates: ["file 1", "file 2"] },
@@ -224,7 +247,9 @@ const TemplatesComponent: React.FC = (props: any) => {
         <TemplateListContainer>
           <ButtonWrapper>
             <WhiteColorButton> Upload Plan </WhiteColorButton>
-            <ColorButton> Create New </ColorButton>
+            <ColorButton onClick={() => setPageState(TemplatePageState.NEW)}>
+              Create New
+            </ColorButton>
           </ButtonWrapper>
           <TemplateListScrollContainer>
             {folders.map((folder: Folder, index: number) => (
@@ -270,6 +295,106 @@ const FolderComponent: React.FC<FolderProps> = (props: FolderProps) => {
 const Template: React.FC<TemplateProps> = (props: TemplateProps) => {
   const { name } = props;
   return <TemplateName> {name} </TemplateName>;
+};
+
+interface DropdownProps {
+  readonly label: string;
+  readonly options: Array<string>;
+  readonly value?: string;
+  readonly setValue: (value?: string) => void;
+}
+
+interface NameFieldProps {
+  readonly name: string;
+  readonly setTemplateName: (name: string) => void;
+}
+
+const NameField: React.FC<NameFieldProps> = ({ name, setTemplateName }) => {
+  return (
+    <TextField
+      id="outlined-basic"
+      label="Template Name"
+      variant="outlined"
+      value={name}
+      onChange={event => setTemplateName(event.target.value)}
+      placeholder=""
+    />
+  );
+};
+
+const Dropdown: React.FC<DropdownProps> = ({
+  label,
+  options,
+  value,
+  setValue,
+}) => {
+  return (
+    <Autocomplete
+      style={{ width: 326 }}
+      disableListWrap
+      options={options}
+      renderInput={params => (
+        <TextField {...params} variant="outlined" label={label} fullWidth />
+      )}
+      value={value}
+      onChange={(event, newValue: any) => setValue(newValue)}
+    />
+  );
+};
+
+const NewTemplatesPage: React.FC<TemplatesPageProps> = ({ setPageState }) => {
+  const [name, setName] = useState("");
+  const [major, setMajor] = useState<string | undefined>(undefined);
+  const [catalogYear, setCatalogYear] = useState<string | undefined>(undefined);
+  const [coopCycle, setCoopCycle] = useState<string | undefined>(undefined);
+
+  const majors = useSelector((state: AppState) => getMajorsFromState(state));
+  const catalogYears = [
+    ...Array.from(new Set(majors.map(maj => maj.yearVersion.toString()))),
+  ];
+  const coopCycles = useSelector((state: AppState) =>
+    getPlansFromState(state)[major!].map(p => planToString(p))
+  );
+
+  return (
+    <>
+      <Container>Let's create a template!</Container>
+      <NameField name={name} setTemplateName={setName} />
+      <Dropdown
+        label="Major"
+        options={majors.map(maj => maj.name)}
+        value={major}
+        setValue={setMajor}
+      />
+      <Dropdown
+        label="Catalog year"
+        options={catalogYears}
+        value={catalogYear}
+        setValue={setCatalogYear}
+      />
+      <Dropdown
+        label="Co-op cycle"
+        options={coopCycles}
+        value={coopCycle}
+        setValue={setCoopCycle}
+      />
+      <WhiteColorButton onClick={() => setPageState(TemplatePageState.LIST)}>
+        Previous
+      </WhiteColorButton>
+      <ColorButton>Next</ColorButton>
+    </>
+  );
+};
+
+const TemplatesComponent: React.FC<TemplateProps> = (props: TemplateProps) => {
+  const { name } = props;
+  const [pageState, setPageState] = useState(TemplatePageState.LIST);
+
+  return pageState === TemplatePageState.LIST ? (
+    <TemplatesListPage />
+  ) : (
+    <NewTemplatesPage setPageState={setPageState} />
+  );
 };
 
 export const TemplatesPage = TemplatesComponent;
