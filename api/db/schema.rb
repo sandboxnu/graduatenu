@@ -58,10 +58,10 @@ ActiveRecord::Schema.define(version: 2020_12_21_015048) do
     t.integer "graduation_year"
     t.string "major"
     t.string "coop_cycle"
-    t.integer "catalog_year"
     t.string "image_url"
     t.boolean "is_advisor", default: false, null: false
     t.string "nu_id"
+    t.integer "catalog_year"
     t.json "courses_completed", default: [], array: true
     t.json "courses_transfer", default: [], array: true
     t.index ["email"], name: "index_users_on_email", unique: true
