@@ -15,6 +15,13 @@ ActiveRecord::Schema.define(version: 2020_12_26_223431) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "folders", force: :cascade do |t|
+    t.string "name"
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "plans", force: :cascade do |t|
     t.string "name"
     t.boolean "link_sharing_enabled"
@@ -41,10 +48,10 @@ ActiveRecord::Schema.define(version: 2020_12_26_223431) do
     t.json "schedule"
     t.string "major", null: false
     t.string "coop_cycle", null: false
-    t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_template_plans_on_user_id"
+    t.bigint "folder_id"
+    t.index ["folder_id"], name: "index_template_plans_on_folder_id"
   end
 
   create_table "users", force: :cascade do |t|
