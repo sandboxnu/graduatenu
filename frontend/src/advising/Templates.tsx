@@ -352,9 +352,7 @@ const NewTemplatesPage: React.FC<TemplatesPageProps> = ({ setPageState }) => {
   const catalogYears = [
     ...Array.from(new Set(majors.map(maj => maj.yearVersion.toString()))),
   ];
-  const coopCycles = useSelector((state: AppState) =>
-    getPlansFromState(state)[major!].map(p => planToString(p))
-  );
+  const coopCycles = useSelector((state: AppState) => getPlansFromState(state));
 
   return (
     <>
@@ -372,12 +370,14 @@ const NewTemplatesPage: React.FC<TemplatesPageProps> = ({ setPageState }) => {
         value={catalogYear}
         setValue={setCatalogYear}
       />
-      <Dropdown
-        label="Co-op cycle"
-        options={coopCycles}
-        value={coopCycle}
-        setValue={setCoopCycle}
-      />
+      {major && (
+        <Dropdown
+          label="Co-op cycle"
+          options={coopCycles[major!].map(p => planToString(p))}
+          value={coopCycle}
+          setValue={setCoopCycle}
+        />
+      )}
       <WhiteColorButton onClick={() => setPageState(TemplatePageState.LIST)}>
         Previous
       </WhiteColorButton>
@@ -391,7 +391,7 @@ const TemplatesComponent: React.FC<TemplateProps> = (props: TemplateProps) => {
   const [pageState, setPageState] = useState(TemplatePageState.LIST);
 
   return pageState === TemplatePageState.LIST ? (
-    <TemplatesListPage />
+    <TemplatesListPage setPageState={setPageState} />
   ) : (
     <NewTemplatesPage setPageState={setPageState} />
   );
