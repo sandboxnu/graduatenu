@@ -13,7 +13,12 @@ interface EditPlanButtonProps {
 
 export const EditPlanButton: React.SFC<EditPlanButtonProps> = props => {
   return (
-    <IconButton color="inherit" size="small" onClick={props.onClick}>
+    <IconButton
+      color="inherit"
+      size="small"
+      onClick={props.onClick}
+      style={{ marginRight: 6 }}
+    >
       <EditPlanIcon fontSize="small" />
     </IconButton>
   );
