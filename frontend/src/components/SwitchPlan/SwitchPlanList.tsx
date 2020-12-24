@@ -40,6 +40,7 @@ const PlanText = styled.div`
   white-space: nowrap;
   text-overflow: ellipsis;
   margin: 10px 0px;
+  padding: 0px 6px 0px 6px;
 `;
 
 interface ReduxStoreSwitchPlanProps {
