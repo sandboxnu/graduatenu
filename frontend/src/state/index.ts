@@ -18,7 +18,7 @@ import { getCreditsTakenInSchedule } from "../utils";
 export const getUserFromState = (state: AppState) => state.userState.user!;
 
 export const getDoesAdvisorExistInState = (state: AppState) =>
-  !!state.advisorState.userId;
+  !!state.advisorState.advisor;
 
 export const getDoesUserExistInState = (state: AppState) =>
   !!state.userState.user;
@@ -248,8 +248,6 @@ export const safelyGetWarningsFromState = (state: AppState) =>
 
 export const safelyGetActivePlanScheduleFromState = (state: AppState) =>
   safelyGetActivePlanFromState(state)?.schedule;
-
-export const isUserAdvisor = (state: AppState) => !!state.advisorState.userId;
 
 export const safelyGetAcademicYearFromState = (state: AppState) =>
   state.userState.user?.academicYear;
