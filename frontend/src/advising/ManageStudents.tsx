@@ -24,7 +24,13 @@ import {
   getUserFullNameFromState,
 } from "../state";
 import { AppState } from "../state/reducers/state";
-import { Check, Edit, Fullscreen, FullscreenExit } from "@material-ui/icons";
+import {
+  ArrowBack,
+  Check,
+  Edit,
+  Fullscreen,
+  FullscreenExit,
+} from "@material-ui/icons";
 import { resetUserAction, setUserAction } from "../state/actions/userActions";
 import { LoadingSpinner } from "../components/common/LoadingSpinner";
 import { SwitchPlanList } from "../components/SwitchPlan/SwitchPlanList";
@@ -134,7 +140,11 @@ const FullScheduleViewContainer = styled.div`
   }
 `;
 
-const ExpandedScheduleStudentInfo = styled.div``;
+const ExpandedScheduleStudentInfo = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
 
 const ScheduleWrapper = styled.div`
   overflow-x: scroll;
@@ -434,10 +444,10 @@ const ExpandedStudentPlan: React.FC<ExpandedStudentPlanProps> = props => {
 
   return (
     <FullScheduleViewContainer>
-      <BackToStudentLink onClick={props.onFullScreenPress}>
-        Back to {fullName}
-      </BackToStudentLink>
       <ExpandedScheduleStudentInfo>
+        <IconButton onClick={props.onFullScreenPress}>
+          <ArrowBack />
+        </IconButton>
         <b style={{ marginRight: 12 }}>{fullName}</b>
         {planMajor || ""} {planCoopCycle || ""}
       </ExpandedScheduleStudentInfo>
