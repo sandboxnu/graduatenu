@@ -3,14 +3,34 @@ class TemplatesController < ApplicationController
   before_action :set_searched_advisor, only: [:index]
 
   def index
-    if authorized
-      @folders = @searched_advisor.folders
-    else
-      render json: {error: "Unauthorized."}, status: :unprocessable_entity
+    unless authorized
+        render json: { error: "Requester is not an advisor" }, status: :bad_request
+        return
     end
+
+    search = nil
+    page = 0
+    if search_params[:search].present?
+        search = search_params[:search].downcase
+    end
+
+    if search_params[:page].present?
+        page = Integer(search_params[:page])
+    end
+    @next_page = page + 1
+    @last_page = false;
+
+    offset = page * 50
+    @folders = Folder.joins(:template_plans).where('folders.user_id = ?', @searched_advisor.id).limit(50).offset(offset).where('lower(folders.name) LIKE :search OR lower(template_plans.name) LIKE :search OR lower(template_plans.major) LIKE :search OR lower(template_plans.coop_cycle) LIKE :search', search: "%#{search}%").distinct
+
+    @last_page = true if @folders.empty?
   end
 
   private
+
+  def search_params
+    params.permit(:search, :page)
+  end
 
   #sets the current user
   def set_user

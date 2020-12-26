@@ -1,32 +1,21 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import styled from "styled-components";
 import { Search } from "../../components/common/Search";
-import { AppState } from "../../state/reducers/state";
-import { TemplatePageState, TemplateProps } from "./Templates";
-import { getFolderExpandedFromState } from "../../state";
-import { toggleTemplateFolderExpandedAction } from "../../state/actions/advisorActions";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import { WhiteColorButton, ColorButton } from "../GenericAdvisingTemplate";
-import { withRouter } from "react-router-dom";
 import styled from "styled-components";
-import { Search } from "../components/common/Search";
-import { NORTHEASTERN_RED } from "../constants";
-import { getAuthToken } from "../utils/auth-helpers";
-import { connect, useDispatch, useSelector } from "react-redux";
-import { Dispatch } from "redux";
-import { AppState } from "../state/reducers/state";
+import { LinearProgress } from "@material-ui/core";
+import { IFolderData, ITemplatePlan } from "../../models/types";
+import { getTemplates, TemplatesAPI } from "../../services/TemplateService";
 import {
   getAdvisorUserIdFromState,
   getFolderExpandedFromState,
-  getUserIdFromState,
-} from "../state";
-import { toggleTemplateFolderExpandedAction } from "../state/actions/advisorActions";
-import { getTemplates } from "../services/TemplateService";
-import { IFolderData, ITemplatePlan } from "../models/types";
-import { LinearProgress } from "@material-ui/core";
+} from "../../state";
+import { toggleTemplateFolderExpandedAction } from "../../state/actions/advisorActions";
+import { AppState } from "../../state/reducers/state";
+import { getAuthToken } from "../../utils/auth-helpers";
+import { TemplatePageState } from "./Templates";
 
 const Container = styled.div`
   margin-left: 30px;
@@ -55,6 +44,51 @@ const TemplateListContainer = styled.div`
 const TemplateListScrollContainer = styled.div`
   overflow-y: scroll;
   height: 90%;
+`;
+
+const Center = styled.div`
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 15px;
+`;
+
+const Loading = styled.div`
+  font-size: 15px;
+  line-height: 21px;
+  margin-top: 20px;
+  margin-bottom: 5px;
+  margin-left: 30px;
+  margin-right: 30px;
+`;
+
+const EmptyState = styled.div`
+  font-size: 18px;
+  line-height: 21px;
+  padding: 10px;
+`;
+
+const LoadMoreTemplates = styled.div`
+  font-size: 10px;
+  line-height: 21px;
+  margin: 10px;
+  color: red;
+  &:hover {
+    text-decoration: underline;
+  }
+  cursor: pointer;
+`;
+
+const NoMoreTemplates = styled.div`
+  font-size: 10px;
+  line-height: 21px;
+  margin: 10px;
+  color: red;
+`;
+
+const TemplateContainer = styled.div`
+  font-size: 18px;
+  line-height: 21px;
+  padding: 10px;
 `;
 
 const ButtonWrapper = styled.div`
@@ -88,8 +122,16 @@ const TemplateName = styled.div`
   margin-top: 5px;
 `;
 
-interface TemplatesPageProps {
-  readonly setPageState: (pageState: TemplatePageState) => void;
+interface TemplatesListPageProps {
+  setPageState: (state: TemplatePageState) => void;
+}
+
+interface TemplatesListProps {
+  searchQuery: string;
+}
+
+interface TemplateProps {
+  name: string;
 }
 
 interface FolderProps {
@@ -97,21 +139,12 @@ interface FolderProps {
   folder: IFolderData;
 }
 
-const EMPTY_TEMPLATES_LIST: TemplateProps[] = [];
+const EMPTY_TEMPLATES_LIST: IFolderData[] = [];
 
-const TemplatesComponent: React.FC = (props: any) => {
+export const TemplatesListPage: React.FC<TemplatesListPageProps> = ({
+  setPageState,
+}: TemplatesListPageProps) => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [folders, setFolders] = useState<IFolderData[]>([]);
-  const { userId } = useSelector((state: AppState) => ({
-    userId: getAdvisorUserIdFromState(state),
-  }));
-
-  useEffect(() => {
-    const token = getAuthToken();
-    getTemplates(String(userId), token).then(response => {
-      setFolders(response);
-    });
-  }, []);
 
   return (
     <Container>
@@ -129,9 +162,7 @@ const TemplatesComponent: React.FC = (props: any) => {
             </ColorButton>
           </ButtonWrapper>
           <TemplateListScrollContainer>
-            {folders.map((folder: IFolderData, index: number) => (
-              <FolderComponent index={index} folder={folder} />
-            ))}
+            <TemplatesList searchQuery={searchQuery} />
           </TemplateListScrollContainer>
         </TemplateListContainer>
       </TemplatesContainer>
@@ -139,11 +170,32 @@ const TemplatesComponent: React.FC = (props: any) => {
   );
 };
 
-const TemplatesList = (props: TemplatesListProps) => {
+const TemplatesList = ({ searchQuery }: TemplatesListProps) => {
   const [templates, setTemplates] = useState(EMPTY_TEMPLATES_LIST);
   const [isLoading, setIsLoading] = useState(true);
   const [pageNumber, setPageNumber] = useState(0);
   const [isLastPage, setIsLastPage] = useState(false);
+  const token = getAuthToken();
+  const { userId } = useSelector((state: AppState) => ({
+    userId: getAdvisorUserIdFromState(state),
+  }));
+
+  const fetchTemplates = (currentFolders: IFolderData[], page: number) => {
+    setIsLoading(true);
+    getTemplates(searchQuery, page, userId, token)
+      .then((response: TemplatesAPI) => {
+        setTemplates(currentFolders.concat(response.templates));
+        setPageNumber(response.nextPage);
+        setIsLastPage(response.lastPage);
+        setIsLoading(false);
+      })
+      .catch((err: any) => console.log(err));
+  };
+
+  useEffect(() => {
+    setTemplates(EMPTY_TEMPLATES_LIST);
+    fetchTemplates(EMPTY_TEMPLATES_LIST, 0);
+  }, [searchQuery, token]);
 
   return (
     <TemplatesContainer>
@@ -156,13 +208,17 @@ const TemplatesList = (props: TemplatesListProps) => {
         {(templates === null || templates.length == 0) && !isLoading ? (
           <EmptyState> No Templates found </EmptyState>
         ) : (
-          templates.map(template => <Template name={template.name} />)
+          templates.map((folder, i) => (
+            <FolderComponent index={i} folder={folder} />
+          ))
         )}
         {!isLoading ? (
           isLastPage ? (
             <NoMoreTemplates>No more Templates</NoMoreTemplates>
           ) : (
-            <LoadMoreTemplates onClick={() => {}}>
+            <LoadMoreTemplates
+              onClick={() => fetchTemplates(templates, pageNumber)}
+            >
               Load more Templates
             </LoadMoreTemplates>
           )

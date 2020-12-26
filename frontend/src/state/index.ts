@@ -259,4 +259,4 @@ export const getFolderExpandedFromState = (state: AppState, index: number) =>
   !state.advisorState.closedFolders.includes(index);
 
 export const getAdvisorUserIdFromState = (state: AppState) =>
-  state.advisorState.userId;
+  state.advisorState.advisor!.id;

@@ -423,6 +423,9 @@ FactoryBot.define do
     name { 'My Folder' }
     user factory: :advisor
 
-    after(:create) { |folder| folder.template_plans = build_list(:template_plan, 3, folder: folder) }
+    after(:create) do |folder|
+        create_list(:template_plan, 3, folder: folder)
+        folder.reload
+    end
   end
 end
