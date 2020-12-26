@@ -10,7 +10,7 @@ import { TransferCoursesScreen } from "./Onboarding/TransferCoursesScreen";
 import { Profile } from "./profile/Profile";
 import { ManageStudents } from "./advising/ManageStudents";
 import { NotificationsPage } from "./advising/Notifications";
-import { TemplatesPage } from "./advising/Templates";
+import { TemplatesPage } from "./advising/Templates/Templates";
 import { GenericAdvisingTemplateComponent } from "./advising/GenericAdvisingTemplate";
 import TransferableCreditScreen from "./Onboarding/TransferableCreditScreen";
 import { RedirectScreen } from "./Onboarding/RedirectScreen";
