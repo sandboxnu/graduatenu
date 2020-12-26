@@ -130,6 +130,6 @@ class PlansController < ApplicationController
   end
 
   def authorized
-    @current_user_id == Integer(params[:user_id])
+    @current_user_id == Integer(params[:user_id]) || @user.is_advisor
   end
 end
