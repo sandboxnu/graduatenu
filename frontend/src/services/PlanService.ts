@@ -106,3 +106,17 @@ export const updatePlanLastViewed = (
       Authorization: "Token " + userToken,
     },
   }).then(response => response.json());
+
+export const requestApproval = (
+  userId: number,
+  advisorEmail: string,
+  planId: number
+) =>
+  fetch(`/api/users/${userId}/plans/${planId}/request_approval`, {
+    method: "PUT",
+    body: JSON.stringify({ plan: { advisor_email: advisorEmail } }),
+    headers: {
+      Authorization: "Token " + getAuthToken(),
+      "Content-Type": "application/json",
+    },
+  }).then(response => response.json());

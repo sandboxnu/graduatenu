@@ -1,7 +1,7 @@
 class PlansController < ApplicationController
   before_action :set_user
   before_action :set_searched_user, only: [:index]
-  before_action :set_user_plan, only: [:show, :update, :last_viewed, :destroy, :approve]
+  before_action :set_user_plan, only: [:show, :update, :last_viewed, :destroy, :approve, :request_approval]
 
   # returns all the plans
   def index
@@ -100,6 +100,21 @@ class PlansController < ApplicationController
       render json: {error: "No such plan."}, status: :unprocessable_entity
     end
   end
+
+  def request_approval
+    if authorized
+      if @plan
+        advisor = User.find_by(email: request_approval_params[:advisor_email])
+        NotificationMailer.request_approval_email(advisor, @user, @plan).deliver
+        render status: 200, json: @controller.to_json
+      else
+        render json: {error: "No such plan."}, status: :unprocessable_entity
+      end
+    else
+      render json: {error: "Unauthorized."}, status: :unprocessable_entity
+    end
+  end
+
   private
 
   #parameters
@@ -111,6 +126,10 @@ class PlansController < ApplicationController
 
   def approve_plan_params
     params.require(:plan).permit(approved_schedule: {})
+  end
+
+  def request_approval_params
+    params.require(:plan).permit(:advisor_email)
   end
 
   def last_viewed_params

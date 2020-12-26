@@ -11,8 +11,8 @@ import { getAdvisors } from "../services/AdvisorService";
 import { IUserDataAbr } from "../models/types";
 import { getActivePlanFromState, getUserFromState } from "../state";
 import { AppState } from "../state/reducers/state";
-import { useDebouncedEffect } from "../utils/useDebouncedEffect";
-import { sendEmail } from "../services/EmailService";
+import { useDebouncedEffect } from "../hooks/useDebouncedEffect";
+import { requestApproval } from "../services/PlanService";
 
 const SubTitle = styled.div`
   font-size: 14px;
@@ -28,12 +28,12 @@ const AdvisorDropdownContainer = styled.div`
 const EMPTY_ADVISOR_LIST: IUserDataAbr[] = [];
 
 export const RequestFeedbackPopper: React.FC = () => {
-  const { currentSchedule, approvedSchedule, planId, email } = useSelector(
+  const { currentSchedule, approvedSchedule, planId, userId } = useSelector(
     (state: AppState) => ({
       currentSchedule: getActivePlanFromState(state).schedule,
       approvedSchedule: getActivePlanFromState(state).approvedSchedule,
       planId: getActivePlanFromState(state).id,
-      email: getUserFromState(state).email,
+      userId: getUserFromState(state).id,
     })
   );
 
@@ -124,8 +124,11 @@ export const RequestFeedbackPopper: React.FC = () => {
       <PrimaryButton
         disabled={selectedAdvisor === ""}
         onClick={async () => {
-          // Todo: Trigger backend API call
-          await sendEmail(email, findAdvisorEmail(selectedAdvisor), planId);
+          await requestApproval(
+            userId,
+            findAdvisorEmail(selectedAdvisor),
+            planId
+          );
           setIsOpen(false);
         }}
       >

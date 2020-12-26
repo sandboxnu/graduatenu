@@ -14,11 +14,11 @@ Rails.application.routes.draw do
         member do
           put :last_viewed
           put :approve
+          put :request_approval
         end
       end
     end
 
-    post 'mail/request_approval', to: 'mail#send_request_approval_email'
     post 'v1/admin_hook', to: 'admin#admin_hook'
     get 'v1/entry', to: 'admin#entry'
   end
