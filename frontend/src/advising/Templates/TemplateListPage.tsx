@@ -46,12 +46,6 @@ const TemplateListScrollContainer = styled.div`
   height: 90%;
 `;
 
-const Center = styled.div`
-  text-align: center;
-  font-size: 24px;
-  margin-bottom: 15px;
-`;
-
 const Loading = styled.div`
   font-size: 15px;
   line-height: 21px;
@@ -83,12 +77,6 @@ const NoMoreTemplates = styled.div`
   line-height: 21px;
   margin: 10px;
   color: red;
-`;
-
-const TemplateContainer = styled.div`
-  font-size: 18px;
-  line-height: 21px;
-  padding: 10px;
 `;
 
 const ButtonWrapper = styled.div`
