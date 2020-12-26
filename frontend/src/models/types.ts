@@ -211,6 +211,7 @@ export interface IPlanData {
   isCurrentlyBeingEditedByStudent: boolean;
   isCurrentlyBeingEditedByAdvisor: boolean;
   lastViewer: number; // a user id
+  lastRequestedApproval: Date | null;
 }
 
 /**

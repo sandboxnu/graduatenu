@@ -92,7 +92,7 @@ class PlansController < ApplicationController
       return
     end
     if @plan
-      @plan.update(approve_plan_params)
+      @plan.update(approve_plan_params[:approved_schedule], last_requested_approval: nil)
       student = User.find_by(id: params[:user_id])
       NotificationMailer.approved_email(@user, student, @plan).deliver
       render :show
@@ -104,6 +104,7 @@ class PlansController < ApplicationController
   def request_approval
     if authorized
       if @plan
+        @plan.update(last_requested_approval: Time.zone.now)
         advisor = User.find_by(email: request_approval_params[:advisor_email])
         NotificationMailer.request_approval_email(advisor, @user, @plan).deliver
         render status: 200, json: @controller.to_json
