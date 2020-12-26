@@ -296,11 +296,9 @@ function AddPlanPopperComponent(props: Props) {
             fullWidth
           />
         )}
-        value={selectedCatalogYear ? String(selectedCatalogYear) : ""}
+        value={String(selectedCatalogYear)}
         onChange={(e, value) => {
-          value === ""
-            ? setSelectedCatalogYear(null)
-            : setSelectedCatalogYear(Number(value));
+          setSelectedCatalogYear(value === "" ? null : Number(value));
           setSelectedMajor(null);
           setSelectedCoopCycle(null);
         }}
@@ -312,7 +310,9 @@ function AddPlanPopperComponent(props: Props) {
     return (
       <Autocomplete
         disableListWrap
-        options={allMajors.map(maj => maj.name)}
+        options={allMajors
+          .filter(maj => maj.yearVersion === selectedCatalogYear)
+          .map(maj => maj.name)}
         renderInput={params => (
           <TextField {...params} variant="outlined" label="Major" fullWidth />
         )}
