@@ -17,6 +17,7 @@ import { resetUserAction, setUserAction } from "../state/actions/userActions";
 import { LoadingSpinner } from "../components/common/LoadingSpinner";
 import { SwitchPlanList } from "../components/SwitchPlan/SwitchPlanList";
 import { ColoredButton } from "../components/common/ColoredButton";
+import { getInitialsFromName } from "../utils/student-helpers";
 
 const Container = styled.div`
   margin-left: 30px;
@@ -195,7 +196,10 @@ const PlanText = styled.div`
 const PlanListContainer = styled.div`
   width: 100%;
   height: 35%;
-  overflow-y: scroll;
+  overflow: hidden;
+  &:hover {
+    overflow-y: auto;
+  }
 `;
 const ButtonContainer = styled.div`
   margin: 5% 0%;
@@ -294,10 +298,11 @@ const StudentPreview = ({ id }: StudentPreviewProps) => {
         ) : (
           <StudentInfoDisplay>
             <AvatarWrapper>
-              <Avatar>{student!.fullName[0]}</Avatar>
+              <Avatar>{getInitialsFromName(student!.fullName)}</Avatar>
             </AvatarWrapper>
             <StudentInfoTextWrapper>
               <NameText>{student!.fullName}</NameText>
+              <Text>{student!.nuId}</Text>
               <Text>{student!.email}</Text>
               <Text>{student!.major}</Text>
               <Text>{student!.coopCycle}</Text>
