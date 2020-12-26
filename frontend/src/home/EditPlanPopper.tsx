@@ -208,6 +208,7 @@ export class EditPlanPopperComponent extends React.Component<
         )}
         value={this.props.plan.major}
         onChange={this.onChooseMajor.bind(this)}
+        disabled={this.props.plan.isCurrentlyBeingEditedByAdvisor}
       />
     );
   }
@@ -233,6 +234,7 @@ export class EditPlanPopperComponent extends React.Component<
         )}
         value={this.props.plan.coopCycle || "None"}
         onChange={this.onChoosePlan.bind(this)}
+        disabled={this.props.plan.isCurrentlyBeingEditedByAdvisor}
       />
     );
   }
@@ -260,6 +262,7 @@ export class EditPlanPopperComponent extends React.Component<
           this.props.plan.catalogYear ? this.props.plan.catalogYear + "" : ""
         }
         onChange={this.onChangeCatalogYear.bind(this)}
+        disabled={this.props.plan.isCurrentlyBeingEditedByAdvisor}
       />
     );
   }
@@ -267,7 +270,11 @@ export class EditPlanPopperComponent extends React.Component<
   renderSetClassesButton() {
     return (
       <ButtonContainer>
-        <SetButton variant="contained" onClick={() => this.addClassesFromPOS()}>
+        <SetButton
+          variant="contained"
+          onClick={() => this.addClassesFromPOS()}
+          disabled={this.props.plan.isCurrentlyBeingEditedByAdvisor}
+        >
           Set Example Schedule
         </SetButton>
       </ButtonContainer>
@@ -295,6 +302,7 @@ export class EditPlanPopperComponent extends React.Component<
           variant="contained"
           style={{ float: "right" }}
           onClick={() => this.onClearSchedule()}
+          disabled={this.props.plan.isCurrentlyBeingEditedByAdvisor}
         >
           Clear Schedule
         </SetButton>
@@ -309,7 +317,9 @@ export class EditPlanPopperComponent extends React.Component<
           variant="contained"
           style={{ float: "right" }}
           onClick={() =>
-            this.props.setActivePlanDNDSchedule(this.props.plan.approvedSchedule)
+            this.props.setActivePlanDNDSchedule(
+              this.props.plan.approvedSchedule
+            )
           }
         >
           Reset to approved

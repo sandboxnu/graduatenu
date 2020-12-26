@@ -6,7 +6,10 @@ import { DNDSchedule } from "../../models/types";
 import { SEMESTER_MIN_HEIGHT } from "../../constants";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
-import { getAcademicYearFromState, getClosedYearsFromState } from "../../state";
+import {
+  safelyGetAcademicYearFromState,
+  getClosedYearsFromState,
+} from "../../state";
 import { AppState } from "../../state/reducers/state";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
@@ -24,16 +27,17 @@ interface ReduxDispatchYearProps {
 interface YearProps {
   index: number;
   schedule: DNDSchedule;
+  isEditable: boolean;
 }
 
 type Props = ReduxStoreYearProps & ReduxDispatchYearProps & YearProps;
 
-const YearTopWrapper = styled.div`
+const YearTopWrapper = styled.div<any>`
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin-left: -28px;
+  margin-left: ${props => (props.isEditable ? "-28px" : "-4px")};
 `;
 
 const YearBody = styled.div`
@@ -48,18 +52,23 @@ class YearComponent extends React.Component<Props> {
   }
 
   render() {
-    const { index, schedule } = this.props;
+    const { index, schedule, isEditable } = this.props;
     const year = schedule.years[index];
-    const isExpanded = !this.props.closedYears.has(index);
+    const isExpanded = !this.props.closedYears.has(index) || !isEditable;
 
     return (
       <div style={{ width: "100%", marginBottom: 28 }}>
-        <YearTopWrapper>
+        <YearTopWrapper isEditable={isEditable}>
           <div
             onClick={this.handleExpandedChange.bind(this)}
             style={{ marginRight: 4 }}
           >
-            {isExpanded ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+            {isEditable &&
+              (isExpanded ? (
+                <KeyboardArrowUpIcon />
+              ) : (
+                <KeyboardArrowDownIcon />
+              ))}
           </div>
           <YearTop
             year={year}
@@ -67,14 +76,28 @@ class YearComponent extends React.Component<Props> {
             springStatus={schedule.yearMap[year].spring.status}
             summer1Status={schedule.yearMap[year].summer1.status}
             summer2Status={schedule.yearMap[year].summer2.status}
+            schedule={schedule}
+            isEditable={isEditable}
           />
         </YearTopWrapper>
         {isExpanded && (
           <YearBody>
-            <SemesterBlock semester={schedule.yearMap[year].fall} />
-            <SemesterBlock semester={schedule.yearMap[year].spring} />
-            <SemesterBlock semester={schedule.yearMap[year].summer1} />
-            <SemesterBlock semester={schedule.yearMap[year].summer2} />
+            <SemesterBlock
+              isEditable={isEditable}
+              semester={schedule.yearMap[year].fall}
+            />
+            <SemesterBlock
+              isEditable={isEditable}
+              semester={schedule.yearMap[year].spring}
+            />
+            <SemesterBlock
+              isEditable={isEditable}
+              semester={schedule.yearMap[year].summer1}
+            />
+            <SemesterBlock
+              isEditable={isEditable}
+              semester={schedule.yearMap[year].summer2}
+            />
           </YearBody>
         )}
       </div>
@@ -83,7 +106,7 @@ class YearComponent extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: AppState) => ({
-  academicYear: getAcademicYearFromState(state)!,
+  academicYear: safelyGetAcademicYearFromState(state)!,
   closedYears: getClosedYearsFromState(state),
 });
 

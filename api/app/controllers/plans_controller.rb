@@ -1,11 +1,12 @@
 class PlansController < ApplicationController
   before_action :set_user
-  before_action :set_user_plan, only: [:show, :update, :destroy, :approve]
+  before_action :set_searched_user, only: [:index]
+  before_action :set_user_plan, only: [:show, :update, :last_viewed, :destroy, :approve]
 
   # returns all the plans
   def index
     if authorized
-      @plans = @user.plans
+      @plans = @searched_user.plans
     else
       render json: {error: "Unauthorized."}, status: :unprocessable_entity
     end
@@ -58,11 +59,24 @@ class PlansController < ApplicationController
     end
   end
 
+  def last_viewed
+    if authorized
+      if @plan
+        @plan.update(last_viewed: Time.zone.now, last_viewer: last_viewed_params[:last_viewer])
+        render :show
+      else
+        render json: {error: "No such plan."}, status: :unprocessable_entity
+      end
+    else
+      render json: {error: "Unauthorized."}, status: :unprocessable_entity
+    end
+  end
+
   # finds a plan by id then destroys it, just needs the id in the body
   def destroy
     if authorized
       if @plan
-        @plan.destroy()
+        @plan.destroy
         render :show
       else
         render json: {error: "No such plan."}, status: :unprocessable_entity
@@ -99,11 +113,27 @@ class PlansController < ApplicationController
     params.require(:plan).permit(approved_schedule: {})
   end
 
+  def last_viewed_params
+    params.require(:plan).permit(:last_viewer) # a user id
+  end
+
   #sets the current user
   def set_user
     if signed_in?
       @user = User.find_by_id(@current_user_id)
       if @user == nil
+        render json: {error: "User not found."}, status: 404
+      end
+    else
+      render json: {error: "Unauthorized."}, status: :unprocessable_entity
+    end
+  end
+
+  #sets the user whose plans are being searched for
+  def set_searched_user
+    if signed_in?
+      @searched_user = User.find_by_id(params[:user_id])
+      if @searched_user == nil
         render json: {error: "User not found."}, status: 404
       end
     else

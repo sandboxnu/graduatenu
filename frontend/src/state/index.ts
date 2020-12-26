@@ -1,10 +1,7 @@
 import { IPlanData } from "./../models/types";
 import { AppState } from "./reducers/state";
 import { CourseWarning, IWarning, DNDScheduleTerm } from "../models/types";
-import {
-  Major,
-  Schedule,
-} from "../../../common/types";
+import { Major, Schedule } from "../../../common/types";
 import { findMajorFromName } from "../utils/plan-helpers";
 import { getCreditsTakenInSchedule } from "../utils";
 
@@ -20,10 +17,17 @@ import { getCreditsTakenInSchedule } from "../utils";
 // Caution! Will error if there is not a user
 export const getUserFromState = (state: AppState) => state.userState.user!;
 
-export const getDoesUserExistInState = (state: AppState) => !!state.userState.user;
+export const getDoesAdvisorExistInState = (state: AppState) =>
+  !!state.advisorState.advisor;
+
+export const getDoesUserExistInState = (state: AppState) =>
+  !!state.userState.user;
 
 export const getUserIdFromState = (state: AppState) =>
   getUserFromState(state).id;
+
+export const safelyGetUserIdFromState = (state: AppState) =>
+  getUserFromState(state)?.id;
 
 export const getUserFullNameFromState = (state: AppState) =>
   getUserFromState(state).fullName;
@@ -32,25 +36,22 @@ export const getUserFullNameFromState = (state: AppState) =>
  * Get the list of completed requirements from the AppState
  * @param state the AppState
  */
-export const getCompletedRequirementsFromState = (
-  state: AppState
-) => state.userState.completedRequirements;
+export const getCompletedRequirementsFromState = (state: AppState) =>
+  state.userState.completedRequirements;
 
 /**
  * Get the list of completed courses from the AppState
  * @param state the AppState
  */
-export const getCompletedCoursesFromState = (
-  state: AppState
-) => getUserFromState(state).completedCourses;
+export const getCompletedCoursesFromState = (state: AppState) =>
+  getUserFromState(state).completedCourses;
 
 /**
  * Get the list of transfer courses from the AppState
  * @param state the AppState
  */
-export const getTransferCoursesFromState = (
-  state: AppState
-) => getUserFromState(state).transferCourses;
+export const safelyGetTransferCoursesFromState = (state: AppState) =>
+  getUserFromState(state)?.transferCourses || [];
 
 /**
  * Get the selected major object from the AppState
@@ -59,9 +60,8 @@ export const getTransferCoursesFromState = (
 export const getUserMajorFromState = (state: AppState): Major | undefined =>
   findMajorFromName(getUserFromState(state).major, getMajorsFromState(state));
 
-export const getUserCatalogYearFromState = (
-  state: AppState
-): number | null => getUserFromState(state).catalogYear;
+export const getUserCatalogYearFromState = (state: AppState): number | null =>
+  getUserFromState(state).catalogYear;
 
 /**
  * Get the selected major name from the AppState
@@ -133,7 +133,8 @@ export const getPlansErrorFromState = (state: AppState): string =>
  * Get the plans loading error message from the AppState
  * @param state the AppState
  */
-export const getTakenCreditsFromState = (state: AppState): number => getCreditsTakenInSchedule(getActivePlanScheduleFromState(state)!);
+export const getTakenCreditsFromState = (state: AppState): number =>
+  getCreditsTakenInSchedule(getActivePlanScheduleFromState(state)!);
 
 /**
  * Get the course specific warnings from the AppState
@@ -166,7 +167,6 @@ export const getActivePlanMajorFromState = (state: AppState) => {
 export const getActivePlanCatalogYearFromState = (state: AppState) => {
   return getActivePlanFromState(state).catalogYear;
 };
-
 
 /**
  * Get the current schedule's coop cycle from the AppState
@@ -217,6 +217,10 @@ export const getIsAdvisorFromState = (state: AppState) => {
   return getUserFromState(state).isAdvisor;
 };
 
+export const getActivePlanStatusFromState = (state: AppState) => {
+  return state.userPlansState.activePlanStatus;
+};
+
 /*
  * SAFE GET FUNCTIONS
  * Should only need to use these where there is not guaranteed to have a user
@@ -229,16 +233,27 @@ export const safelyGetActivePlanFromState = (state: AppState) => {
   return state.userPlansState.plans[state.userPlansState.activePlan];
 };
 
-export const safelyGetActivePlanMajorFromState = (state: AppState) => safelyGetActivePlanFromState(state)?.major;
+export const getActivePlanNameFromState = (state: AppState) => {
+  return state.userPlansState.activePlan;
+};
 
-export const safelyGetActivePlanCoopCycleFromState = (state: AppState) => safelyGetActivePlanFromState(state)?.coopCycle;
+export const safelyGetActivePlanMajorFromState = (state: AppState) =>
+  safelyGetActivePlanFromState(state)?.major;
 
-export const safelyGetWarningsFromState = (state: AppState) => safelyGetActivePlanFromState(state)?.warnings || [];
+export const safelyGetActivePlanCoopCycleFromState = (state: AppState) =>
+  safelyGetActivePlanFromState(state)?.coopCycle;
 
-export const safelyGetActivePlanScheduleFromState = (state: AppState) => safelyGetActivePlanFromState(state)?.schedule;
+export const safelyGetWarningsFromState = (state: AppState) =>
+  safelyGetActivePlanFromState(state)?.warnings || [];
 
-export const safelyGetIsAdvisorFromState = (state: AppState) => state.userState.user?.isAdvisor;
+export const safelyGetActivePlanScheduleFromState = (state: AppState) =>
+  safelyGetActivePlanFromState(state)?.schedule;
 
-export const safelyGetAcademicYearFromState = (state: AppState) => state.userState.user?.academicYear;
+export const safelyGetAcademicYearFromState = (state: AppState) =>
+  state.userState.user?.academicYear;
 
-export const safelyGetGraduationYearFromState = (state: AppState) => state.userState.user?.graduationYear;
+export const safelyGetGraduationYearFromState = (state: AppState) =>
+  state.userState.user?.graduationYear;
+
+export const getFolderExpandedFromState = (state: AppState, index: number) =>
+  !state.advisorState.closedFolders.includes(index);

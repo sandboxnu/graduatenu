@@ -11,10 +11,11 @@ import { AppState } from "../../state/reducers/state";
 import {
   getActivePlanMajorFromState,
   getActivePlanScheduleFromState,
-  getTransferCoursesFromState,
+  safelyGetTransferCoursesFromState,
 } from "../../state";
 import { connect, useSelector } from "react-redux";
 import { findMajorFromName } from "../../utils/plan-helpers";
+import { ScrollWrapper } from "../../Onboarding/GenericOnboarding";
 
 const Container = styled.div`
   display: flex;
@@ -32,10 +33,15 @@ const MajorTitle = styled.p`
   margin-bottom: 12px;
 `;
 
+interface SidebarProps {
+  isEditable: boolean;
+}
+
 interface MajorSidebarProps {
   schedule: DNDSchedule;
   major: Major;
   transferCourses: ScheduleCourse[];
+  isEditable: boolean;
 }
 
 const NoMajorSidebarComponent: React.FC = () => {
@@ -50,6 +56,7 @@ const MajorSidebarComponent: React.FC<MajorSidebarProps> = ({
   schedule,
   major,
   transferCourses,
+  isEditable,
 }) => {
   const warnings = produceRequirementGroupWarning(schedule, major);
   const completedCourses: string[] = getCompletedCourseStrings(schedule);
@@ -61,42 +68,50 @@ const MajorSidebarComponent: React.FC<MajorSidebarProps> = ({
 
   return (
     <Container>
-      <MajorTitle>{major.name}</MajorTitle>
-      {major.requirementGroups.map((req, index) => {
-        return (
-          <RequirementSection
-            title={!!req ? req : "Additional Requirements"}
-            // TODO: this is a temporary solution for major scraper bug
-            contents={major.requirementGroupMap[req]}
-            warning={warnings.find(w => w.requirementGroup === req)}
-            key={index + major.name}
-            completedCourses={completedCourseStrings}
-          ></RequirementSection>
-        );
-      })}
+      <ScrollWrapper>
+        <MajorTitle>{major.name}</MajorTitle>
+        {major.requirementGroups.map((req, index) => {
+          return (
+            <RequirementSection
+              title={!!req ? req : "Additional Requirements"}
+              // TODO: this is a temporary solution for major scraper bug
+              contents={major.requirementGroupMap[req]}
+              warning={warnings.find(w => w.requirementGroup === req)}
+              key={index + major.name}
+              completedCourses={completedCourseStrings}
+              isEditable={isEditable}
+            />
+          );
+        })}
+      </ScrollWrapper>
     </Container>
   );
 };
 
-export const Sidebar: React.FC = () => {
+export const Sidebar: React.FC<SidebarProps> = props => {
   const { schedule, major, transferCourses } = useSelector(
     (state: AppState) => ({
       major: getActivePlanMajorFromState(state),
       schedule: getActivePlanScheduleFromState(state),
-      transferCourses: getTransferCoursesFromState(state),
+      transferCourses: safelyGetTransferCoursesFromState(state),
     })
   );
   const { majorObj } = useSelector((state: AppState) => ({
     majorObj: findMajorFromName(major, state.majorState.majors),
   }));
 
-  return majorObj ? (
-    <MajorSidebarComponent
-      schedule={schedule}
-      major={majorObj}
-      transferCourses={transferCourses}
-    />
-  ) : (
-    <NoMajorSidebarComponent />
+  return (
+    <ScrollWrapper>
+      {majorObj ? (
+        <MajorSidebarComponent
+          schedule={schedule}
+          major={majorObj}
+          transferCourses={transferCourses}
+          isEditable={props.isEditable}
+        />
+      ) : (
+        <NoMajorSidebarComponent />
+      )}
+    </ScrollWrapper>
   );
 };

@@ -1,4 +1,4 @@
-import { ICreatePlanData, IPlanData, DNDSchedule } from "../models/types";
+import { ICreatePlanData, IPlanData, IUpdatePlanData } from "../models/types";
 import { getAuthToken } from "../utils/auth-helpers";
 
 /**
@@ -6,20 +6,18 @@ import { getAuthToken } from "../utils/auth-helpers";
  * @param userId  the user id of the user to be searched
  * @param userToken the JWT token of the user to be searched
  */
-export const findAllPlansForUser = (
-  userId: number,
-  userToken: string
-): Promise<IPlanData[]> =>
+export const findAllPlansForUser = (userId: number): Promise<IPlanData[]> =>
   fetch(`/api/users/${userId}/plans`, {
     method: "GET",
     headers: {
-      Authorization: "Token " + userToken,
+      Authorization: "Token " + getAuthToken(),
     },
   }).then(response =>
     response.json().then((plans: IPlanData[]) => {
       return plans.map((plan: IPlanData) => ({
         ...plan,
         lastViewed: new Date(plan.lastViewed), // convert string timestamp to a Date object
+        updatedAt: new Date(plan.updatedAt), // convert string timestamp to a Date object
       }));
     })
   );
@@ -40,7 +38,7 @@ export const createPlanForUser = (
     body: JSON.stringify({ plan: plan }),
     headers: {
       "Content-Type": "application/json",
-      Authorization: "Token " + userToken,
+      Authorization: "Token " + getAuthToken(),
     },
   }).then(response => response.json());
 
@@ -50,16 +48,12 @@ export const createPlanForUser = (
  * @param planId the id of the plan to be deleted
  * @param userToken the JWT token of the user to be modified
  */
-export const deletePlanForUser = (
-  userId: number,
-  planId: number,
-  userToken: string
-) =>
+export const deletePlanForUser = (userId: number, planId: number) =>
   fetch(`/api/users/${userId}/plans/${planId}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
-      Authorization: "Token " + userToken,
+      Authorization: "Token " + getAuthToken(),
     },
   }).then(response => response.json());
 
@@ -73,7 +67,7 @@ export const deletePlanForUser = (
 export const updatePlanForUser = (
   userId: number,
   planId: number,
-  plan: Partial<ICreatePlanData>
+  plan: Partial<IUpdatePlanData>
 ) =>
   fetch(`/api/users/${userId}/plans/${planId}`, {
     method: "PUT",
@@ -95,5 +89,20 @@ export const approvePlanForUser = (
     headers: {
       "Content-Type": "application/json",
       Authorization: "Token " + getAuthToken(),
+    },
+  }).then(response => response.json());
+
+export const updatePlanLastViewed = (
+  userId: number,
+  userToken: string,
+  planId: number,
+  currentUserId: number
+) =>
+  fetch(`/api/users/${userId}/plans/${planId}/last_viewed`, {
+    method: "PUT",
+    body: JSON.stringify({ plan: { last_viewer: currentUserId } }), // sets last_viewed in the backend
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Token " + userToken,
     },
   }).then(response => response.json());

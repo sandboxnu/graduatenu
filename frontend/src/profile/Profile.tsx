@@ -100,16 +100,18 @@ const ProfileEmail = styled.div`
   margin-top: -20px;
   color: gray;
   margin-bottom: 10px;
-`
+`;
 
 const ProfileComponent: React.FC = () => {
   const dispatch = useDispatch();
-  const { user, majors, plans, catalogYear } = useSelector((state: AppState) => ({
-    user: getUserFromState(state), // best to update this screen when any part of the user changes
-    majors: getMajorsFromState(state),
-    plans: getPlansFromState(state),
-    catalogYear: getUserCatalogYearFromState(state)
-  }));
+  const { user, majors, plans, catalogYear } = useSelector(
+    (state: AppState) => ({
+      user: getUserFromState(state), // best to update this screen when any part of the user changes
+      majors: getMajorsFromState(state),
+      plans: getPlansFromState(state),
+      catalogYear: getUserCatalogYearFromState(state),
+    })
+  );
 
   const [isEdit, setEdit] = useState(false);
   const [major, setMajor] = useState(user.major);
@@ -214,7 +216,7 @@ const ProfileComponent: React.FC = () => {
     );
   };
 
-/* 
+  /* 
 TODO: // Add Advsisors to profile page once we support them
 const ProfileAdvisor = (props: any) => {
     return (

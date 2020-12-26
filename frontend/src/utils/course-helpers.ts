@@ -3,7 +3,11 @@ import {
   ISimplifiedCourseData,
   ISimplifiedCourseDataAPI,
 } from "../models/types";
-import { ScheduleCourse, INEUPrereq, INEUPrereqCourse } from "../../../common/types";
+import {
+  ScheduleCourse,
+  INEUPrereq,
+  INEUPrereqCourse,
+} from "../../../common/types";
 
 export async function getScheduleCoursesFromSimplifiedCourseDataAPI(
   courses: ISimplifiedCourseDataAPI[]
@@ -38,12 +42,16 @@ export async function getScheduleCourseCoreqs(
     await Promise.all(
       coreqCourses.map(async (coreqCourse: INEUPrereq) => {
         if (isINEUPrereqCourse(coreqCourse)) {
-          const course = await fetchCourse(coreqCourse.subject, coreqCourse.classId);
+          const course = await fetchCourse(
+            coreqCourse.subject,
+            coreqCourse.classId
+          );
           if (course != null) {
             coursesCoreqs.push(course);
           }
         }
-    }));
+      })
+    );
   }
   return coursesCoreqs;
 }

@@ -3,6 +3,8 @@ import {
   incrementCurrentClassCounterForActivePlanAction,
   toggleYearExpandedForActivePlanAction,
   setActivePlanCatalogYearAction,
+  setActivePlanStatusAction,
+  updateActivePlanTimestampAction,
 } from "./../actions/userPlansActions";
 import { DNDSchedule, IPlanData } from "../../models/types";
 import produce from "immer";
@@ -38,11 +40,17 @@ import { Schedule } from "../../../../common/types";
 import { updatePlanForUser } from "../../services/PlanService";
 import { getAuthToken } from "../../utils/auth-helpers";
 
+export type ActivePlanAutoSaveStatus =
+  | "Up To Date"
+  | "Waiting to Update"
+  | "Updating";
+
 export interface UserPlansState {
   activePlan?: string;
   plans: { [key: string]: IPlanData };
   closedYears: { [key: string]: number[] }; // map plan name to closedYearsList
   pastSchedule?: DNDSchedule; // used for undo
+  activePlanStatus: ActivePlanAutoSaveStatus;
 }
 
 const initialState: UserPlansState = {
@@ -50,6 +58,7 @@ const initialState: UserPlansState = {
   plans: {},
   closedYears: {},
   pastSchedule: undefined,
+  activePlanStatus: "Up To Date",
 };
 
 export const userPlansReducer = (
@@ -83,6 +92,10 @@ export const userPlansReducer = (
 
         return draft;
       }
+      case getType(updateActivePlanTimestampAction): {
+        draft.plans[draft.activePlan!].updatedAt = action.payload.timestamp;
+        return draft;
+      }
       case getType(addNewPlanAction): {
         const { plan, academicYear } = action.payload;
 
@@ -101,12 +114,8 @@ export const userPlansReducer = (
         draft.plans = planMap;
 
         const index = indexOfLastViewedPlan(plans);
-        draft.activePlan = plans[index].name;
+        draft.activePlan = plans[index]?.name;
         return closePastYears(draft, academicYear);
-      }
-      case getType(resetUserAction): {
-        draft = initialState;
-        return draft;
       }
       case getType(deletePlan): {
         const name = action.payload.name;
@@ -315,6 +324,10 @@ export const userPlansReducer = (
       case getType(resetUserAction): {
         return initialState;
       }
+      case getType(setActivePlanStatusAction): {
+        draft.activePlanStatus = action.payload.status;
+        return draft;
+      }
     }
   });
 };
@@ -322,7 +335,7 @@ export const userPlansReducer = (
 function closePastYears(draft: UserPlansState, academicYear: number) {
   draft.closedYears[draft.activePlan!] = [];
 
-  const numYears = draft.plans[draft.activePlan!].schedule.years.length;
+  const numYears = draft.plans[draft.activePlan!]?.schedule.years.length;
   for (var i = 0; i < numYears; i++) {
     if (isYearInPast(i, academicYear)) {
       draft.closedYears[draft.activePlan!].push(i);

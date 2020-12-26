@@ -164,8 +164,7 @@ export class SwitchPlanPopperComponent extends React.Component<
         errorSnackbarOpen: true,
       });
     } else if (this.props.userId) {
-      const token = getAuthToken();
-      deletePlanForUser(this.props.userId, planId, token);
+      deletePlanForUser(this.props.userId, planId);
       this.props.deletePlan(name);
     }
   }

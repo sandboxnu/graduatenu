@@ -15,7 +15,7 @@ import {
   setCompletedCoursesAction,
   setCompletedRequirementsAction,
   setTransferCoursesAction,
-  setUserCatalogYearAction
+  setUserCatalogYearAction,
 } from "../actions/userActions";
 import { IUserData } from "../../models/types";
 import { ScheduleCourse } from "../../../../common/types";

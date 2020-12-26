@@ -167,6 +167,13 @@ export interface IUserData {
   completedCourses: ScheduleCourse[];
 }
 
+export interface IAdvisorData {
+  id: number;
+  email: string;
+  fullName: string;
+  photoUrl: string;
+}
+
 /**
  * A model for data pertaining to an abbreviated user object.
  */
@@ -200,6 +207,10 @@ export interface IPlanData {
   courseCounter: number;
   lastViewed: Date;
   approvedSchedule: DNDSchedule;
+  updatedAt: Date;
+  isCurrentlyBeingEditedByStudent: boolean;
+  isCurrentlyBeingEditedByAdvisor: boolean;
+  lastViewer: number; // a user id
 }
 
 /**
@@ -214,6 +225,7 @@ export interface ICreatePlanData {
   coop_cycle: string | null;
   course_counter: number;
   last_viewed?: Date;
+  last_viewer?: number;
 }
 
 export interface IUpdatePlanData {
@@ -227,6 +239,7 @@ export interface IUpdatePlanData {
   last_viewed?: Date;
   warnings: IWarning[];
   course_warnings: CourseWarning[];
+  last_viewer: number; // a user id
 }
 
 /*

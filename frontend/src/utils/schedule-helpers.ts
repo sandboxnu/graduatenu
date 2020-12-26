@@ -5,6 +5,7 @@ import {
   DNDScheduleTerm,
   SeasonEnum,
   StatusEnum,
+  CourseWarning,
 } from "../models/types";
 import { Schedule, ScheduleCourse, SeasonWord } from "../../../common/types";
 
@@ -48,7 +49,6 @@ export function generateInitialScheduleNoCoopCycle(
   completedCourses: ScheduleCourse[]
 ): [DNDSchedule, number] {
   let yearMap: { [key: number]: DNDScheduleYear } = {};
-  let counter = 1;
   const numYears = 4; // default is 4 years
 
   const [dndCourses, courseCounter] = convertToDNDCourses(completedCourses, 0);
@@ -65,7 +65,6 @@ export function generateInitialScheduleNoCoopCycle(
         season: SeasonEnum.FL,
         year: y,
         termId: Number(String(y) + String(10)),
-        id: counter,
         status: StatusEnum.CLASSES,
         classes: dndCourses.splice(0, 4), // the first 4 courses in the list, and remove them from the list
       },
@@ -73,7 +72,6 @@ export function generateInitialScheduleNoCoopCycle(
         season: SeasonEnum.SP,
         year: y,
         termId: Number(String(y) + String(30)),
-        id: counter + 1,
         status: StatusEnum.CLASSES,
         classes: dndCourses.splice(0, 4), // the first 4 courses in the list, and remove them from the list
       },
@@ -81,7 +79,6 @@ export function generateInitialScheduleNoCoopCycle(
         season: SeasonEnum.S1,
         year: y,
         termId: Number(String(y) + String(40)),
-        id: counter + 2,
         status: StatusEnum.CLASSES,
         classes: dndCourses.splice(0, 4), // the first 4 courses in the list, and remove them from the list
       },
@@ -89,12 +86,10 @@ export function generateInitialScheduleNoCoopCycle(
         season: SeasonEnum.S2,
         year: y,
         termId: Number(String(y) + String(60)),
-        id: counter + 3,
         status: StatusEnum.CLASSES,
         classes: dndCourses.splice(0, 4), // the first 4 courses in the list, and remove them from the list
       },
     };
-    counter += 4;
   }
 
   const schedule = {
@@ -150,9 +145,13 @@ export function alterScheduleToHaveCorrectYears(
     const oldYear = schedule.years[i];
     newYearMap[newYear] = schedule.yearMap[oldYear];
     newYearMap[newYear].fall.termId = Number(String(newYear) + String(10));
+    newYearMap[newYear].fall.year = newYear;
     newYearMap[newYear].spring.termId = Number(String(newYear) + String(30));
+    newYearMap[newYear].spring.year = newYear;
     newYearMap[newYear].summer1.termId = Number(String(newYear) + String(40));
+    newYearMap[newYear].summer1.year = newYear;
     newYearMap[newYear].summer2.termId = Number(String(newYear) + String(60));
+    newYearMap[newYear].summer2.year = newYear;
   }
 
   return {
@@ -406,6 +405,26 @@ export function isYearInPast(yearIndex: number, academicYear: number): boolean {
 }
 
 /**
+ * Filters through the given list of course warnings to find all warnings for the given course
+ * @param courseWarnings the list of course warnings to search through
+ * @param course the search course
+ */
+export function findCourseWarnings(
+  courseWarnings: CourseWarning[],
+  course: DNDScheduleCourse
+) {
+  const result: CourseWarning[] = courseWarnings.filter(
+    (w: CourseWarning) =>
+      w.subject + w.classId === course.subject + course.classId
+  );
+
+  if (result.length === 0) {
+    return undefined;
+  } else {
+    return result;
+  }
+}
+/*
  *  Determines if this course is in the given term
  * @param courseToAdd the course that is being checked
  * @param term the term being checked

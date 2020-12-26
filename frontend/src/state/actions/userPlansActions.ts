@@ -1,3 +1,4 @@
+import { create } from "lodash";
 import { createAction } from "typesafe-actions";
 import {
   Schedule,
@@ -11,6 +12,7 @@ import {
   DNDScheduleTerm,
   IPlanData,
 } from "../../models/types";
+import { ActivePlanAutoSaveStatus } from "../reducers/userPlansReducer";
 
 export const setActivePlanAction = createAction(
   "userPlans/SET_ACTIVE_PLAN",
@@ -34,6 +36,11 @@ export const setUserPlansAction = createAction(
 export const updateActivePlanAction = createAction(
   "userPlans/UPDATE_ACTIVE_PLAN",
   (plan: Partial<IPlanData>) => ({ plan })
+)();
+
+export const updateActivePlanTimestampAction = createAction(
+  "userPlans/UPDATE_ACTIVE_PLAN_TIMESTAMP",
+  (timestamp: Date) => ({ timestamp })
 )();
 
 export const deletePlan = createAction(
@@ -132,4 +139,9 @@ export const incrementCurrentClassCounterForActivePlanAction = createAction(
 export const toggleYearExpandedForActivePlanAction = createAction(
   "userPlans/TOGGLE_YEAR_EXPANDED_FOR_ACTIVE_PLAN",
   (index: number) => ({ index })
+)();
+
+export const setActivePlanStatusAction = createAction(
+  "userPlans/SET_ACTIVE_PLAN_STATUS",
+  (status: ActivePlanAutoSaveStatus) => ({ status })
 )();
