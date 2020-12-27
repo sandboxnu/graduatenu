@@ -96,4 +96,73 @@ class TemplatesControllerTest < ActionController::TestCase
       assert_equal tp.schedule, json_response['templates'][0]['templatePlans'][j]['schedule']
     end
   end
+
+  def test_create__new_folder
+    user = create(:advisor)
+    @controller.instance_variable_set(:@current_user_id, user.id)
+
+    template_plan = build(:template_plan) # same as Model.new
+
+    params = {
+      template_plan: {
+        name: template_plan.name,
+        major: template_plan.major,
+        coop_cycle: template_plan.coop_cycle,
+        catalog_year: template_plan.catalog_year,
+        schedule: template_plan.schedule,
+        folder_id: nil,
+        folder_name: 'My New Folder',
+      }
+    }
+
+    assert_difference "Folder.count", 1 do
+      assert_difference "TemplatePlan.count", 1 do
+        post :create, params: params.merge(user_id: user.id), format: "json"
+      end
+    end
+
+    assert_response :ok
+
+    json_response = JSON.parse(response.body)
+
+    tp = TemplatePlan.last
+    assert_equal tp.id, json_response['templatePlan']['id']
+    assert_equal tp.name, json_response['templatePlan']['name']
+    assert_equal tp.schedule, json_response['templatePlan']['schedule']
+  end
+
+  def test_create__existing_folder
+    user = create(:advisor)
+    folder = create(:folder, user: user)
+    @controller.instance_variable_set(:@current_user_id, user.id)
+
+    template_plan = build(:template_plan) # same as Model.new
+
+    params = {
+      template_plan: {
+        name: template_plan.name,
+        major: template_plan.major,
+        coop_cycle: template_plan.coop_cycle,
+        catalog_year: template_plan.catalog_year,
+        schedule: template_plan.schedule,
+        folder_id: folder.id,
+        folder_name: nil,
+      }
+    }
+
+    assert_no_difference "Folder.count" do
+      assert_difference "TemplatePlan.count", 1 do
+        post :create, params: params.merge(user_id: user.id), format: "json"
+      end
+    end
+
+    assert_response :ok
+
+    json_response = JSON.parse(response.body)
+
+    tp = TemplatePlan.last
+    assert_equal tp.id, json_response['templatePlan']['id']
+    assert_equal tp.name, json_response['templatePlan']['name']
+    assert_equal tp.schedule, json_response['templatePlan']['schedule']
+  end
 end

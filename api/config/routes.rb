@@ -17,7 +17,7 @@ Rails.application.routes.draw do
           put :request_approval
         end
       end
-      resources :templates, only: [:index]
+      resources :templates, only: [:index, :create]
     end
 
     post 'v1/admin_hook', to: 'admin#admin_hook'

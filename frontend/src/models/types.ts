@@ -310,6 +310,16 @@ export interface ITemplatePlan {
   updatedAt: Date;
 }
 
+export interface ICreateTemplatePlan {
+  name: string;
+  schedule: DNDSchedule;
+  catalog_year: number | null;
+  major: string | null;
+  coop_cycle: string | null;
+  folder_id: number | null; // if null, create new folder
+  folder_name: string | null; // only not null if folder exists
+}
+
 /** ------------------------------------------------------------------------
  *
  *            OLD STUFF FOLLOWS ! This stuff is big outdated and is only

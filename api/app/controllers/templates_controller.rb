@@ -26,11 +26,39 @@ class TemplatesController < ApplicationController
     @last_page = true if @folders.empty?
   end
 
+  def create
+    if authorized
+      params_copy = template_plan_params.clone()
+      folder_id = params_copy[:folder_id]
+      folder = Folder.find_by_id(folder_id)
+
+      if folder.blank?
+        folder = Folder.create!({
+          user_id: params[:user_id], # root params
+          name: params_copy[:folder_name]
+        })
+      end
+
+      params_copy[:folder_id] = folder.id
+      if @template_plan = TemplatePlan.create!(params_copy.except(:folder_name))
+        render :show
+      else
+        render json: {error: "Unable to store Template Plan."}, status: :unprocessable_entity
+      end
+    else
+      render json: {error: "Unauthorized."}, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def search_params
     params.permit(:search, :page)
   end
+
+  def template_plan_params
+   params.require(:template_plan).permit(:name, :major, :coop_cycle, :catalog_year, :folder_id, :folder_name, :schedule)
+ end
 
   #sets the current user
   def set_user

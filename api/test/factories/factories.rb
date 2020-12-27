@@ -410,7 +410,7 @@ FactoryBot.define do
         catalog_year { 2018 }
         coop_cycle { "4 Years, 2 Co-ops, Spring Cycle" }
         sequence :name do |n|
-        "Plan #{n}"
+        "Template Plan #{n}"
         end
         schedule { schedule_json }
         major { "Computer Science, BSCS" }
