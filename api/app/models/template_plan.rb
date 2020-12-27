@@ -10,14 +10,12 @@
 #  schedule     :json
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
-#  user_id      :bigint(8)
+#  folder_id    :bigint(8)
 #
 # Indexes
 #
-#  index_template_plans_on_user_id  (user_id)
+#  index_template_plans_on_folder_id  (folder_id)
 #
 class TemplatePlan < ApplicationRecord
-  belongs_to :user, optional: true
-
-  alias advisor user
+  belongs_to :folder
 end

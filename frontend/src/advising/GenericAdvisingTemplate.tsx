@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Tabs, Tab, Button, Theme, withStyles } from "@material-ui/core";
-import { withRouter, RouteComponentProps } from "react-router-dom";
+import { withRouter, RouteComponentProps, useHistory } from "react-router-dom";
 import { ColoredButton } from "../components/common/ColoredButton";
 import { removeAuthTokenFromCookies } from "../utils/auth-helpers";
 import { useDispatch } from "react-redux";
@@ -38,14 +38,6 @@ const Header = styled.div`
   margin: 20px;
 `;
 
-const HomeTopInnerContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  margin: 20px;
-`;
-
 const HomeText = styled.a`
   font-weight: bold;
   font-size: 36px;
@@ -70,14 +62,11 @@ const PATHS = [
   `/advisor/templates`,
 ];
 
-interface GenericAdvisingTemplateProps {}
-
-type Props = GenericAdvisingTemplateProps & RouteComponentProps<{}>;
-
-const GenericAdvisingTemplate: React.FC<Props> = ({ children, history }) => {
+const GenericAdvisingTemplate: React.FC = ({ children }) => {
+  const history = useHistory();
   const dispatch = useDispatch();
   const curPath = history.location.pathname;
-  const startTab = PATHS.findIndex(path => path === curPath);
+  const startTab = PATHS.findIndex(path => curPath.startsWith(path));
   const [currentTab, setCurrentTab] = useState(startTab);
 
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
@@ -124,6 +113,4 @@ const GenericAdvisingTemplate: React.FC<Props> = ({ children, history }) => {
   );
 };
 
-export const GenericAdvisingTemplateComponent = withRouter(
-  GenericAdvisingTemplate
-);
+export const GenericAdvisingTemplateComponent = GenericAdvisingTemplate;

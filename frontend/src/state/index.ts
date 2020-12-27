@@ -233,6 +233,10 @@ export const safelyGetActivePlanFromState = (state: AppState) => {
   return state.userPlansState.plans[state.userPlansState.activePlan];
 };
 
+export const safelyGetActivePlanIdFromState = (state: AppState) => {
+  return safelyGetActivePlanFromState(state)?.id;
+};
+
 export const getActivePlanNameFromState = (state: AppState) => {
   return state.userPlansState.activePlan;
 };
@@ -257,3 +261,6 @@ export const safelyGetGraduationYearFromState = (state: AppState) =>
 
 export const getFolderExpandedFromState = (state: AppState, index: number) =>
   !state.advisorState.closedFolders.includes(index);
+
+export const getAdvisorUserIdFromState = (state: AppState) =>
+  state.advisorState.advisor!.id;

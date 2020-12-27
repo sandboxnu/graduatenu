@@ -23,6 +23,28 @@ export const findAllPlansForUser = (userId: number): Promise<IPlanData[]> =>
   );
 
 /**
+ * Service function object to find all plans for a given User.
+ * @param userId  the user id of the user to be searched
+ * @param userToken the JWT token of the user to be searched
+ */
+export const fetchPlan = (userId: number, planId: number): Promise<IPlanData> =>
+  fetch(`/api/users/${userId}/plans/${planId}`, {
+    method: "GET",
+    headers: {
+      Authorization: "Token " + getAuthToken(),
+    },
+  }).then(response =>
+    response.json().then((result: any) => {
+      const plan = result.plan;
+      return {
+        ...plan,
+        lastViewed: new Date(plan.lastViewed), // convert string timestamp to a Date object
+        updatedAt: new Date(plan.updatedAt), // convert string timestamp to a Date object
+      };
+    })
+  );
+
+/**
  * Service function object to create a given plan for a given user.
  * @param userId  the id of the user to be modified
  * @param userToken the JWT token of the user to be modified

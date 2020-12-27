@@ -177,7 +177,7 @@ export interface IAdvisorData {
 /**
  * A model for data pertaining to an abbreviated user object.
  */
-export interface IUserDataAbr {
+export interface IAbrAdvisor {
   email: string;
   fullName: string;
 }
@@ -292,6 +292,32 @@ export interface ISimplifiedCourseDataAPI {
   course_id: string;
   semester?: string;
   completion?: string;
+}
+
+export interface IFolderData {
+  id: number;
+  name: string;
+  templatePlans: ITemplatePlan[];
+}
+
+export interface ITemplatePlan {
+  id: number;
+  name: string;
+  schedule: DNDSchedule;
+  catalogYear: number | null;
+  major: string | null;
+  coopCycle: string | null;
+  updatedAt: Date;
+}
+
+export interface ICreateTemplatePlan {
+  name: string;
+  schedule: DNDSchedule;
+  catalog_year: number | null;
+  major: string | null;
+  coop_cycle: string | null;
+  folder_id: number | null; // if null, create new folder
+  folder_name: string | null; // only not null if folder exists
 }
 
 /** ------------------------------------------------------------------------

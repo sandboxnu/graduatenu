@@ -8,7 +8,6 @@ import { Provider } from "react-redux";
 import { Store } from "redux";
 import { TransferCoursesScreen } from "./Onboarding/TransferCoursesScreen";
 import { Profile } from "./profile/Profile";
-import { ManageStudents } from "./advising/ManageStudents";
 import { NotificationsPage } from "./advising/Notifications";
 import { TemplatesPage } from "./advising/Templates/Templates";
 import { GenericAdvisingTemplateComponent } from "./advising/GenericAdvisingTemplate";
@@ -16,6 +15,9 @@ import TransferableCreditScreen from "./Onboarding/TransferableCreditScreen";
 import { RedirectScreen } from "./Onboarding/RedirectScreen";
 import { ProtectedRoute } from "./components/Routes/ProtectedRoute";
 import { UnprotectedRoute } from "./components/Routes/UnprotectedRoute";
+import { StudentsList } from "./advising/ManageStudents/StudentsList";
+import { StudentView } from "./advising/ManageStudents/StudentView";
+import { ExpandedStudentView } from "./advising/ManageStudents/ExpandedStudentView";
 
 export const App = ({ store }: { store: Store }) => {
   return (
@@ -58,7 +60,17 @@ const AdvisorRouter = (props: any) => {
     <GenericAdvisingTemplateComponent>
       <Switch>
         <Route path={`${path}/notifications`} component={NotificationsPage} />
-        <Route path={`${path}/manageStudents`} component={ManageStudents} />
+        <Route exact path={`${path}/manageStudents`} component={StudentsList} />
+        <Route
+          exact
+          path={`${path}/manageStudents/:id`}
+          component={StudentView}
+        />
+        <Route
+          exact
+          path={`${path}/manageStudents/:id/expanded/:planId`}
+          component={ExpandedStudentView}
+        />
         <Route path={`${path}/templates`} component={TemplatesPage} />
       </Switch>
     </GenericAdvisingTemplateComponent>

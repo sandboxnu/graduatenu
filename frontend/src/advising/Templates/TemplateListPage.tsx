@@ -1,15 +1,21 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import styled from "styled-components";
 import { Search } from "../../components/common/Search";
-import { AppState } from "../../state/reducers/state";
-import { TemplatePageState, TemplateProps } from "./Templates";
-import { getFolderExpandedFromState } from "../../state";
-import { toggleTemplateFolderExpandedAction } from "../../state/actions/advisorActions";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import { WhiteColorButton, ColorButton } from "../GenericAdvisingTemplate";
+import styled from "styled-components";
+import { LinearProgress } from "@material-ui/core";
+import { IFolderData, ITemplatePlan } from "../../models/types";
+import { getTemplates, TemplatesAPI } from "../../services/TemplateService";
+import {
+  getAdvisorUserIdFromState,
+  getFolderExpandedFromState,
+} from "../../state";
+import { toggleTemplateFolderExpandedAction } from "../../state/actions/advisorActions";
+import { AppState } from "../../state/reducers/state";
+import { getAuthToken } from "../../utils/auth-helpers";
+import { TemplatePageState } from "./Templates";
 
 const Container = styled.div`
   margin-left: 30px;
@@ -38,6 +44,39 @@ const TemplateListContainer = styled.div`
 const TemplateListScrollContainer = styled.div`
   overflow-y: scroll;
   height: 90%;
+`;
+
+const Loading = styled.div`
+  font-size: 15px;
+  line-height: 21px;
+  margin-top: 20px;
+  margin-bottom: 5px;
+  margin-left: 30px;
+  margin-right: 30px;
+`;
+
+const EmptyState = styled.div`
+  font-size: 18px;
+  line-height: 21px;
+  padding: 10px;
+`;
+
+const LoadMoreTemplates = styled.div`
+  font-size: 10px;
+  line-height: 21px;
+  margin: 10px;
+  color: red;
+  &:hover {
+    text-decoration: underline;
+  }
+  cursor: pointer;
+`;
+
+const NoMoreTemplates = styled.div`
+  font-size: 10px;
+  line-height: 21px;
+  margin: 10px;
+  color: red;
 `;
 
 const ButtonWrapper = styled.div`
@@ -71,32 +110,29 @@ const TemplateName = styled.div`
   margin-top: 5px;
 `;
 
-interface TemplatesPageProps {
-  readonly setPageState: (pageState: TemplatePageState) => void;
+interface TemplatesListPageProps {
+  setPageState: (state: TemplatePageState) => void;
+}
+
+interface TemplatesListProps {
+  searchQuery: string;
+}
+
+interface TemplateProps {
+  name: string;
 }
 
 interface FolderProps {
   index: number;
-  folder: Folder;
+  folder: IFolderData;
 }
 
-interface Folder {
-  name: string;
-  templates: Array<string>;
-}
+const EMPTY_TEMPLATES_LIST: IFolderData[] = [];
 
-export const TemplatesListPage: React.FC<TemplatesPageProps> = ({
+export const TemplatesListPage: React.FC<TemplatesListPageProps> = ({
   setPageState,
-}) => {
+}: TemplatesListPageProps) => {
   const [searchQuery, setSearchQuery] = useState("");
-  const folders = [
-    { name: "non-shared", templates: ["file 1", "file 2"] },
-    { name: "catalog year 2017-2018", templates: ["more file", "yaas"] },
-    {
-      name: "folderrrrr",
-      templates: ["computer science 1", "biology and cs "],
-    },
-  ];
 
   return (
     <Container>
@@ -114,13 +150,68 @@ export const TemplatesListPage: React.FC<TemplatesPageProps> = ({
             </ColorButton>
           </ButtonWrapper>
           <TemplateListScrollContainer>
-            {folders.map((folder: Folder, index: number) => (
-              <FolderComponent index={index} folder={folder} />
-            ))}
+            <TemplatesList searchQuery={searchQuery} />
           </TemplateListScrollContainer>
         </TemplateListContainer>
       </TemplatesContainer>
     </Container>
+  );
+};
+
+const TemplatesList = ({ searchQuery }: TemplatesListProps) => {
+  const [templates, setTemplates] = useState(EMPTY_TEMPLATES_LIST);
+  const [isLoading, setIsLoading] = useState(true);
+  const [pageNumber, setPageNumber] = useState(0);
+  const [isLastPage, setIsLastPage] = useState(false);
+  const { userId } = useSelector((state: AppState) => ({
+    userId: getAdvisorUserIdFromState(state),
+  }));
+
+  const fetchTemplates = (currentFolders: IFolderData[], page: number) => {
+    setIsLoading(true);
+    getTemplates(searchQuery, page, userId)
+      .then((response: TemplatesAPI) => {
+        setTemplates(currentFolders.concat(response.templates));
+        setPageNumber(response.nextPage);
+        setIsLastPage(response.lastPage);
+        setIsLoading(false);
+      })
+      .catch((err: any) => console.log(err));
+  };
+
+  useEffect(() => {
+    setTemplates(EMPTY_TEMPLATES_LIST);
+    fetchTemplates(EMPTY_TEMPLATES_LIST, 0);
+  }, [searchQuery]);
+
+  return (
+    <TemplatesContainer>
+      {isLoading && (
+        <Loading>
+          <LinearProgress color="secondary" />
+        </Loading>
+      )}
+      <TemplateListContainer>
+        {(templates === null || templates.length == 0) && !isLoading ? (
+          <EmptyState> No Templates found </EmptyState>
+        ) : (
+          templates.map((folder, i) => (
+            <FolderComponent index={i} folder={folder} />
+          ))
+        )}
+        {!isLoading ? (
+          isLastPage ? (
+            <NoMoreTemplates>No more Templates</NoMoreTemplates>
+          ) : (
+            <LoadMoreTemplates
+              onClick={() => fetchTemplates(templates, pageNumber)}
+            >
+              Load more Templates
+            </LoadMoreTemplates>
+          )
+        ) : null}
+      </TemplateListContainer>
+    </TemplatesContainer>
   );
 };
 
@@ -146,8 +237,8 @@ const FolderComponent: React.FC<FolderProps> = (props: FolderProps) => {
       </FolderNameWrapper>
       <FolderTemplateListContainer>
         {isExpanded &&
-          folder.templates.map((template: string) => (
-            <Template name={template} />
+          folder.templatePlans.map((template: ITemplatePlan) => (
+            <Template name={template.name} />
           ))}
       </FolderTemplateListContainer>
     </div>

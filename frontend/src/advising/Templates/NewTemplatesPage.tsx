@@ -30,6 +30,8 @@ const NewTemplatesPageContainer = styled.div`
 const ButtonContainer = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
+  padding: 12px;
 `;
 
 const InputContainer = styled.div`
@@ -43,8 +45,8 @@ interface TemplatesPageProps {
 interface DropdownProps {
   readonly label: string;
   readonly options: Array<string>;
-  readonly value?: string;
-  readonly setValue: (value?: string) => void;
+  readonly value: string | null;
+  readonly setValue: (value: string | null) => void;
 }
 
 interface NameFieldProps {
@@ -56,9 +58,9 @@ export const NewTemplatesPage: React.FC<TemplatesPageProps> = ({
   setPageState,
 }) => {
   const [name, setName] = useState("");
-  const [major, setMajor] = useState<string | undefined>(undefined);
-  const [catalogYear, setCatalogYear] = useState<string | undefined>(undefined);
-  const [coopCycle, setCoopCycle] = useState<string | undefined>(undefined);
+  const [major, setMajor] = useState<string | null>(null);
+  const [catalogYear, setCatalogYear] = useState<string | null>(null);
+  const [coopCycle, setCoopCycle] = useState<string | null>(null);
 
   const majors = useSelector((state: AppState) => getMajorsFromState(state));
   const catalogYears = [
@@ -77,24 +79,33 @@ export const NewTemplatesPage: React.FC<TemplatesPageProps> = ({
         <NameField name={name} setTemplateName={setName} />
       </InputContainer>
       <Dropdown
-        label="Major"
-        options={majors.map(maj => maj.name)}
-        value={major}
-        setValue={setMajor}
-      />
-      <Dropdown
         label="Catalog year"
         options={catalogYears}
         value={catalogYear}
-        setValue={setCatalogYear}
+        setValue={value => {
+          setCatalogYear(value);
+          setMajor(null);
+          setCoopCycle(null);
+        }}
       />
+      {catalogYear && (
+        <Dropdown
+          label="Major"
+          options={majors.map(maj => maj.name)}
+          value={major}
+          setValue={value => {
+            setMajor(value);
+            setCoopCycle(null);
+          }}
+        />
+      )}
       {major && (
         <Dropdown
           label="Co-op cycle"
           options={coopCycles[major!].map(p => planToString(p))}
           value={coopCycle}
           setValue={setCoopCycle}
-        ></Dropdown>
+        />
       )}
       <ButtonContainer>
         <WhiteColorButton
@@ -141,7 +152,7 @@ const Dropdown: React.FC<DropdownProps> = ({
           <TextField {...params} variant="outlined" label={label} fullWidth />
         )}
         value={value}
-        onChange={(event, newValue: any) => setValue(newValue)}
+        onChange={(event, newValue: any) => setValue(newValue || null)}
       />
     </FormControl>
   );
