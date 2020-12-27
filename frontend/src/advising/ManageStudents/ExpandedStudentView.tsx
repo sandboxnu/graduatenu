@@ -20,10 +20,12 @@ import { PlanTitle, ButtonHeader, ScheduleWrapper, Container } from "./Shared";
 import { useHistory, useLocation, useParams } from "react-router";
 import { IUserData } from "../../models/types";
 import { fetchUser } from "../../services/AdvisorService";
-import { fetchPlan } from "../../services/PlanService";
-import { getAuthToken } from "../../utils/auth-helpers";
+import { approvePlanForUser, fetchPlan } from "../../services/PlanService";
 import { LoadingSpinner } from "../../components/common/LoadingSpinner";
 import { setUserAction } from "../../state/actions/userActions";
+import { PrimaryButton } from "../../components/common/PrimaryButton";
+import MuiAlert from "@material-ui/lab/Alert";
+import Snackbar from "@material-ui/core/Snackbar";
 
 const FullScheduleViewContainer = styled.div`
   margin-top: 30px;
@@ -49,9 +51,24 @@ const ExpandedStudentContainer = styled.div`
   padding: 30px;
 `;
 
+const PlanActionButtonContainer = styled.div`
+  float: right;
+  padding-right: 30px;
+`;
+
 interface ParamProps {
   id: string; // id of the student
   planId: string; // id of the student's plan
+}
+
+enum ALERT_STATUS {
+  None,
+  Success,
+  Error,
+}
+
+function Alert(props: any) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
 function useQuery() {
@@ -68,6 +85,9 @@ export const ExpandedStudentView: React.FC = () => {
   const [editMode, setEditMode] = useState(queryParams.get("edit") === "true");
   const [loading, setLoading] = useState(true);
   const [student, setStudent] = useState<IUserData | null>(null);
+  const [alertStatus, setAlertStatus] = useState<ALERT_STATUS>(
+    ALERT_STATUS.None
+  );
 
   const { plan } = useSelector((state: AppState) => ({
     plan: safelyGetActivePlanFromState(state),
@@ -99,6 +119,20 @@ export const ExpandedStudentView: React.FC = () => {
   }, []);
 
   const onEditPress = () => setEditMode(!editMode);
+
+  const handleClose = (event: any, reason: any) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setAlertStatus(ALERT_STATUS.None);
+  };
+
+  const approvePlan = () => {
+    approvePlanForUser(id, planId, plan?.schedule)
+      .then(() => setAlertStatus(ALERT_STATUS.Success))
+      .catch(() => setAlertStatus(ALERT_STATUS.Error));
+  };
 
   return (
     <Container>
@@ -152,10 +186,30 @@ export const ExpandedStudentView: React.FC = () => {
                   />
                 )}
               </ScheduleWrapper>
+              <PlanActionButtonContainer>
+                <PrimaryButton onClick={() => approvePlan()}>
+                  {" "}
+                  Approve{" "}
+                </PrimaryButton>
+              </PlanActionButtonContainer>
             </ExpandedStudentContainer>
           </>
         )}
       </FullScheduleViewContainer>
+      <Snackbar
+        open={alertStatus !== ALERT_STATUS.None}
+        autoHideDuration={6000}
+        onClose={handleClose}
+      >
+        <Alert
+          onClose={handleClose}
+          severity={alertStatus === ALERT_STATUS.Error ? "error" : "success"}
+        >
+          {alertStatus === ALERT_STATUS.Error
+            ? "Uh oh, something went wrong, try again!"
+            : "Approved"}
+        </Alert>
+      </Snackbar>
     </Container>
   );
 };

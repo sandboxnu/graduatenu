@@ -4,6 +4,7 @@ export const Container = styled.div`
   margin-left: 30px;
   margin-right: 30px;
   margin-top: 50px;
+  margin-bottom: 50px;
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
