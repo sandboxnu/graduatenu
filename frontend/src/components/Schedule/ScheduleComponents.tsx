@@ -112,14 +112,23 @@ export const NonEditableSchedule: React.FC = () => {
   );
   return (
     <>
-      <ScheduleComponent schedule={activePlan} isEditable={false} collapsibleYears={false} />
+      <ScheduleComponent
+        schedule={activePlan}
+        isEditable={false}
+        collapsibleYears={false}
+      />
       <TransferCredits transferCredits={transferCredits} isEditable={false} />
     </>
   );
 };
 
 export const NonEditableScheduleStudentView: React.FC<Props> = props => {
-  const { children, sidebarPresent, transferCreditPresent, collapsibleYears } = props;
+  const {
+    children,
+    sidebarPresent,
+    transferCreditPresent,
+    collapsibleYears,
+  } = props;
   const { activePlan, transferCredits } = useSelector(
     (state: AppState) => ({
       activePlan: getActivePlanFromState(state)!.schedule,
@@ -138,7 +147,11 @@ export const NonEditableScheduleStudentView: React.FC<Props> = props => {
       <LeftScroll className="hide-scrollbar" sidebarPresent={sidebarPresent}>
         <Container>
           {children}
-          <ScheduleComponent schedule={activePlan} isEditable={false} collapsibleYears={collapsibleYears} />
+          <ScheduleComponent
+            schedule={activePlan}
+            isEditable={false}
+            collapsibleYears={collapsibleYears}
+          />
           {transferCreditPresent && (
             <TransferCredits
               transferCredits={transferCredits}
@@ -152,7 +165,12 @@ export const NonEditableScheduleStudentView: React.FC<Props> = props => {
 };
 
 export const EditableSchedule: React.FC<Props> = props => {
-  const { children, sidebarPresent, transferCreditPresent, collapsibleYears } = props;
+  const {
+    children,
+    sidebarPresent,
+    transferCreditPresent,
+    collapsibleYears,
+  } = props;
   const { activePlan, currentClassCounter, transferCredits } = useSelector(
     (state: AppState) => ({
       activePlan: getActivePlanFromState(state)!.schedule,
@@ -271,7 +289,11 @@ export const EditableSchedule: React.FC<Props> = props => {
         <LeftScroll className="hide-scrollbar" sidebarPresent={sidebarPresent}>
           <Container>
             {children}
-            <ScheduleComponent schedule={activePlan} isEditable={true} collapsibleYears={collapsibleYears} />
+            <ScheduleComponent
+              schedule={activePlan}
+              isEditable={true}
+              collapsibleYears={collapsibleYears}
+            />
             {transferCreditPresent && (
               <TransferCredits
                 transferCredits={transferCredits}

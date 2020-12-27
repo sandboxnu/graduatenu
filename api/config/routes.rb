@@ -8,10 +8,13 @@ Rails.application.routes.draw do
       collection do
         get 'students'
         get 'current'
+        get 'advisors'
       end
       resources :plans, only: [:index, :show, :create, :update, :destroy] do
         member do
           put :last_viewed
+          put :approve
+          put :request_approval
         end
       end
     end

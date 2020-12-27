@@ -10,13 +10,11 @@ import {
 } from "../state";
 import { AppState } from "../state/reducers/state";
 import { setUserPlansAction } from "../state/actions/userPlansActions";
-import { getAuthToken } from "../utils/auth-helpers";
 import { findAllPlansForUser } from "../services/PlanService";
 import { IPlanData } from "../models/types";
 
 export const HomeWrapper: React.FC = () => {
   const dispatch = useDispatch();
-  const token = getAuthToken();
 
   const { userId, academicYear, userPlans } = useSelector(
     (state: AppState) => ({
@@ -28,7 +26,7 @@ export const HomeWrapper: React.FC = () => {
   );
 
   useEffect(() => {
-    findAllPlansForUser(userId, token).then((plans: IPlanData[]) => {
+    findAllPlansForUser(userId).then((plans: IPlanData[]) => {
       dispatch(setUserPlansAction(plans, academicYear));
     });
   }, []);

@@ -1,18 +1,16 @@
 import { ICreatePlanData, IPlanData, IUpdatePlanData } from "../models/types";
+import { getAuthToken } from "../utils/auth-helpers";
 
 /**
  * Service function object to find all plans for a given User.
  * @param userId  the user id of the user to be searched
  * @param userToken the JWT token of the user to be searched
  */
-export const findAllPlansForUser = (
-  userId: number,
-  userToken: string
-): Promise<IPlanData[]> =>
+export const findAllPlansForUser = (userId: number): Promise<IPlanData[]> =>
   fetch(`/api/users/${userId}/plans`, {
     method: "GET",
     headers: {
-      Authorization: "Token " + userToken,
+      Authorization: "Token " + getAuthToken(),
     },
   }).then(response =>
     response.json().then((plans: IPlanData[]) => {
@@ -40,7 +38,7 @@ export const createPlanForUser = (
     body: JSON.stringify({ plan: plan }),
     headers: {
       "Content-Type": "application/json",
-      Authorization: "Token " + userToken,
+      Authorization: "Token " + getAuthToken(),
     },
   }).then(response => response.json());
 
@@ -50,16 +48,12 @@ export const createPlanForUser = (
  * @param planId the id of the plan to be deleted
  * @param userToken the JWT token of the user to be modified
  */
-export const deletePlanForUser = (
-  userId: number,
-  planId: number,
-  userToken: string
-) =>
+export const deletePlanForUser = (userId: number, planId: number) =>
   fetch(`/api/users/${userId}/plans/${planId}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
-      Authorization: "Token " + userToken,
+      Authorization: "Token " + getAuthToken(),
     },
   }).then(response => response.json());
 
@@ -72,7 +66,6 @@ export const deletePlanForUser = (
  */
 export const updatePlanForUser = (
   userId: number,
-  userToken: string,
   planId: number,
   plan: Partial<IUpdatePlanData>
 ) =>
@@ -81,7 +74,21 @@ export const updatePlanForUser = (
     body: JSON.stringify({ plan: plan }),
     headers: {
       "Content-Type": "application/json",
-      Authorization: "Token " + userToken,
+      Authorization: "Token " + getAuthToken(),
+    },
+  }).then(response => response.json());
+
+export const approvePlanForUser = (
+  userId: number,
+  planId: number,
+  schedule: any
+) =>
+  fetch(`/api/users/${userId}/plans/${planId}/approve`, {
+    method: "PUT",
+    body: JSON.stringify({ plan: { approved_schedule: schedule } }),
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Token " + getAuthToken(),
     },
   }).then(response => response.json());
 
@@ -97,5 +104,19 @@ export const updatePlanLastViewed = (
     headers: {
       "Content-Type": "application/json",
       Authorization: "Token " + userToken,
+    },
+  }).then(response => response.json());
+
+export const requestApproval = (
+  userId: number,
+  advisorEmail: string,
+  planId: number
+) =>
+  fetch(`/api/users/${userId}/plans/${planId}/request_approval`, {
+    method: "PUT",
+    body: JSON.stringify({ plan: { advisor_email: advisorEmail } }),
+    headers: {
+      Authorization: "Token " + getAuthToken(),
+      "Content-Type": "application/json",
     },
   }).then(response => response.json());

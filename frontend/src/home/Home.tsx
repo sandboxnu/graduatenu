@@ -47,6 +47,7 @@ import {
   getAuthToken,
   removeAuthTokenFromCookies,
 } from "../utils/auth-helpers";
+import { RequestFeedbackPopper } from "./RequestFeedbackPopper";
 import {
   EditableSchedule,
   NonEditableScheduleStudentView,
@@ -56,6 +57,39 @@ import { ActivePlanAutoSaveStatus } from "../state/reducers/userPlansReducer";
 import { AutoSavePlan } from "./AutoSavePlan";
 import { Alert } from "@material-ui/lab";
 import IdleTimer from "react-idle-timer";
+
+const OuterContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+`;
+
+const SidebarContainer = styled.div`
+  height: 100vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  flex: 4;
+  position: relative;
+  box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.25);
+`;
+
+const LeftScroll = styled.div`
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  flex: 19;
+`;
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  margin-left: 30px;
+  margin-right: 30px;
+  margin-bottom: 30px;
+  background-color: "#ff76ff";
+`;
 
 const HomeTop = styled.div`
   width: 100%;
@@ -268,10 +302,8 @@ class HomeComponent extends React.Component<Props> {
   }
 
   async updatePlan() {
-    const token = getAuthToken();
     await updatePlanForUser(
       this.props.userId,
-      token,
       this.props.activePlan.id,
       convertPlanToUpdatePlanData(this.props.activePlan, this.props.userId)
     ).then(response => {
@@ -309,6 +341,9 @@ class HomeComponent extends React.Component<Props> {
           <HomeButtons>
             <PlanContainer>
               <AutoSavePlan />
+            </PlanContainer>
+            <PlanContainer>
+              <RequestFeedbackPopper />
             </PlanContainer>
             <PlanContainer>
               <AddPlan />

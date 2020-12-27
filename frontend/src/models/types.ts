@@ -175,6 +175,14 @@ export interface IAdvisorData {
 }
 
 /**
+ * A model for data pertaining to an abbreviated user object.
+ */
+export interface IUserDataAbr {
+  email: string;
+  fullName: string;
+}
+
+/**
  * A model for data pertaining to a user login object.
  */
 
@@ -198,10 +206,12 @@ export interface IPlanData {
   courseWarnings: CourseWarning[];
   courseCounter: number;
   lastViewed: Date;
+  approvedSchedule: DNDSchedule;
   updatedAt: Date;
   isCurrentlyBeingEditedByStudent: boolean;
   isCurrentlyBeingEditedByAdvisor: boolean;
   lastViewer: number; // a user id
+  lastRequestedApproval: Date | null;
 }
 
 /**

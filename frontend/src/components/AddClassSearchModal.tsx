@@ -14,48 +14,14 @@ import { NonDraggableClassBlock } from "./ClassBlocks/NonDraggableClassBlock";
 import { getScheduleCourseCoreqs } from "../utils/course-helpers";
 import { AppState } from "../state/reducers/state";
 import { safelyGetActivePlanScheduleFromState } from "../state";
+import { DefaultModal } from "../components/common/DefaultModal";
 import Tooltip from "@material-ui/core/Tooltip";
-import IconButton from "@material-ui/core/IconButton";
-import Fab from "@material-ui/core/Fab";
-import ErrorIcon from "@material-ui/icons/Error";
-import { LensTwoTone } from "@material-ui/icons";
 
 interface AddClassSearchModalProps {
   visible: boolean;
   handleClose: () => void;
   handleSubmit: (courses: ScheduleCourse[]) => void;
 }
-
-const CloseButtonWrapper = styled.div`
-  position: absolute;
-  top: 12px;
-  right: 18px;
-`;
-
-const OuterSection = styled.div`
-  position: fixed;
-  background: white;
-  width: 35%;
-  height: auto;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  outline: none;
-  padding-left: 35px;
-  padding-bottom: 25px;
-  padding-right: 35px;
-`;
-
-const InnerContainer = styled.div`
-  width: 100%;
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
 
 const SearchContainer = styled.div`
   width: 100%;
@@ -265,39 +231,25 @@ export const AddClassSearchModal: React.FC<AddClassSearchModalProps> = props => 
   });
 
   return (
-    <Modal
-      style={{ outline: "none" }}
-      open={props.visible}
-      onClose={() => null}
-      aria-labelledby="simple-modal-title"
-      aria-describedby="simple-modal-description"
-    >
-      <OuterSection>
-        <InnerContainer>
-          <CloseButtonWrapper>
-            <XButton onClick={onClose}></XButton>
-          </CloseButtonWrapper>
-          <h1 id="simple-modal-title">Add classes</h1>
-          <SearchContainer>
-            <Search
-              placeholder="Search for classes"
-              onEnter={setSearchQuery}
-              isSmall={true}
-            />
-          </SearchContainer>
-          <SearchResults />
-          <AddedClasses />
-          <PrimaryButton
-            onClick={() => {
-              props.handleSubmit(selectedCourses);
-              onClose();
-            }}
-            disabled={selectedCourses.length === 0}
-          >
-            Add Classes
-          </PrimaryButton>
-        </InnerContainer>
-      </OuterSection>
-    </Modal>
+    <DefaultModal isOpen={props.visible} onClose={onClose} title="Add classes">
+      <SearchContainer>
+        <Search
+          placeholder="Search for classes"
+          onEnter={setSearchQuery}
+          isSmall={true}
+        />
+      </SearchContainer>
+      <SearchResults />
+      <AddedClasses />
+      <PrimaryButton
+        onClick={() => {
+          props.handleSubmit(selectedCourses);
+          onClose();
+        }}
+        disabled={selectedCourses.length === 0}
+      >
+        Add Classes
+      </PrimaryButton>
+    </DefaultModal>
   );
 };

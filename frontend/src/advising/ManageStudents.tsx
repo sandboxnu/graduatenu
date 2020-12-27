@@ -332,18 +332,17 @@ const StudentView = ({ id }: StudentViewProps) => {
   const [viewMode, setViewMode] = useState<StudentViewMode>("overview");
 
   const dispatch = useDispatch();
-  const token = getAuthToken();
   const { planName } = useSelector((state: AppState) => ({
     planName: getActivePlanNameFromState(state),
   }));
 
   useEffect(() => {
-    fetchUser(id, token).then(response => {
+    fetchUser(id).then(response => {
       dispatch(setUserAction(response.user));
       setStudent(response.user);
       setFetchingStudent(false);
     });
-    findAllPlansForUser(id, token).then((plans: IPlanData[]) => {
+    findAllPlansForUser(id).then((plans: IPlanData[]) => {
       dispatch(setUserPlansAction(plans, 2020));
       if (!plans || !plans.length || !plans[0].schedule) setNoPlans(true);
     });
@@ -495,11 +494,10 @@ const StudentsList = ({
   const [isLoading, setIsLoading] = useState(true);
   const [pageNumber, setPageNumber] = useState(0);
   const [isLastPage, setIsLastPage] = useState(false);
-  const token = getAuthToken();
 
   const fetchStudents = (currentStudents: StudentProps[], page: number) => {
     setIsLoading(true);
-    getStudents(searchQuery, page, token)
+    getStudents(searchQuery, page)
       .then((studentsAPI: StudentsAPI) => {
         setStudents(currentStudents.concat(studentsAPI.students));
         setPageNumber(studentsAPI.nextPage);
@@ -512,7 +510,7 @@ const StudentsList = ({
   useEffect(() => {
     setStudents(EMPTY_STUDENT_LIST);
     fetchStudents(EMPTY_STUDENT_LIST, 0);
-  }, [searchQuery, token]);
+  }, [searchQuery]);
 
   return (
     <StudentListContainer>

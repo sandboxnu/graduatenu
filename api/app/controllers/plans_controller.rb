@@ -1,12 +1,11 @@
 class PlansController < ApplicationController
-
   before_action :set_user
   before_action :set_searched_user, only: [:index]
-  before_action :set_user_plan, only: [:show, :update, :last_viewed, :destroy]
+  before_action :set_user_plan, only: [:show, :update, :last_viewed, :destroy, :approve, :request_approval]
 
   # returns all the plans
   def index
-    if authorized || @user.is_advisor
+    if authorized
       @plans = @searched_user.plans
     else
       render json: {error: "Unauthorized."}, status: :unprocessable_entity
@@ -86,6 +85,36 @@ class PlansController < ApplicationController
       render json: {error: "Unauthorized."}, status: :unprocessable_entity
     end
   end
+  
+  def approve
+    unless @user.is_advisor
+      render json: { error: "Requester is not an advisor" }, status: :bad_request
+      return
+    end
+    if @plan
+      @plan.update(approve_plan_params[:approved_schedule], last_requested_approval: nil)
+      student = User.find_by(id: params[:user_id])
+      NotificationMailer.approved_email(@user, student, @plan).deliver
+      render :show
+    else
+      render json: {error: "No such plan."}, status: :unprocessable_entity
+    end
+  end
+
+  def request_approval
+    if authorized
+      if @plan
+        @plan.update(last_requested_approval: Time.zone.now)
+        advisor = User.find_by(email: request_approval_params[:advisor_email])
+        NotificationMailer.request_approval_email(advisor, @user, @plan).deliver
+        render status: 200, json: @controller.to_json
+      else
+        render json: {error: "No such plan."}, status: :unprocessable_entity
+      end
+    else
+      render json: {error: "Unauthorized."}, status: :unprocessable_entity
+    end
+  end
 
   private
 
@@ -94,6 +123,14 @@ class PlansController < ApplicationController
      # (schedule: {}) allows you to store an arbitrary hash with unspecified schema
     params.require(:plan).permit(:name, :link_sharing_enabled, :major, :coop_cycle, :course_counter, :catalog_year, :last_viewed,
     warnings: [:message, :termId], course_warnings: [:message, :termId, :subject, :classId], schedule: {})
+  end
+
+  def approve_plan_params
+    params.require(:plan).permit(approved_schedule: {})
+  end
+
+  def request_approval_params
+    params.require(:plan).permit(:advisor_email)
   end
 
   def last_viewed_params

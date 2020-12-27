@@ -34,6 +34,7 @@ import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import {
   setActivePlanCoopCycleAction,
   setActivePlanMajorAction,
+  setActivePlanScheduleAction,
   setActivePlanDNDScheduleAction,
   setCurrentClassCounterForActivePlanAction,
   setActivePlanCatalogYearAction,
@@ -309,6 +310,24 @@ export class EditPlanPopperComponent extends React.Component<
     );
   }
 
+  renderResetToApprovedButton() {
+    return (
+      <ButtonContainer>
+        <SetButton
+          variant="contained"
+          style={{ float: "right" }}
+          onClick={() =>
+            this.props.setActivePlanDNDSchedule(
+              this.props.plan.approvedSchedule
+            )
+          }
+        >
+          Reset to approved
+        </SetButton>
+      </ButtonContainer>
+    );
+  }
+
   onClearSchedule() {
     this.props.setActivePlanDNDSchedule(
       clearSchedule(
@@ -362,6 +381,10 @@ export class EditPlanPopperComponent extends React.Component<
                 : !!this.props.plan.major &&
                   !!this.props.plan.coopCycle &&
                   this.renderClearScheduleButton()}
+              {!!this.props.plan.major &&
+                !!this.props.plan.coopCycle &&
+                this.props.plan.approvedSchedule &&
+                this.renderResetToApprovedButton()}
             </PlanCard>
           </ClickAwayListener>
         </PlanPopper>

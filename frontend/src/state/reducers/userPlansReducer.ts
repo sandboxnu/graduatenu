@@ -76,14 +76,9 @@ export const userPlansReducer = (
         draft.plans[draft.activePlan!].lastViewed = timeNow;
 
         // will happen asynchronously
-        updatePlanForUser(
-          userId,
-          getAuthToken(),
-          draft.plans[draft.activePlan!].id,
-          {
-            last_viewed: timeNow,
-          }
-        );
+        updatePlanForUser(userId, draft.plans[draft.activePlan!].id, {
+          last_viewed: timeNow,
+        });
 
         return closePastYears(draft, academicYear);
       }

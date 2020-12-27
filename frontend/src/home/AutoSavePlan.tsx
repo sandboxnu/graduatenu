@@ -3,7 +3,6 @@ import { debounce } from "lodash";
 import { batch, useDispatch, useSelector } from "react-redux";
 import { IPlanData } from "../models/types";
 import { updatePlanForUser } from "../services/PlanService";
-import { getAuthToken } from "../utils/auth-helpers";
 import {
   setActivePlanStatusAction,
   updateActivePlanAction,
@@ -66,11 +65,9 @@ export const AutoSavePlan: React.FC = () => {
   ]);
 
   const updatePlan = async (activePlan: IPlanData) => {
-    const token = getAuthToken();
     dispatch(setActivePlanStatusAction("Updating"));
     await updatePlanForUser(
       userId,
-      token,
       activePlan.id,
       convertPlanToUpdatePlanData(activePlan, userId)
     ).then(response => {

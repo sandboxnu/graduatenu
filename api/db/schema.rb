@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_21_015048) do
+ActiveRecord::Schema.define(version: 2020_12_26_223431) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,7 +29,9 @@ ActiveRecord::Schema.define(version: 2020_12_21_015048) do
     t.integer "course_counter"
     t.integer "catalog_year", default: 2018
     t.datetime "last_viewed"
+    t.json "approved_schedule"
     t.bigint "last_viewer"
+    t.datetime "last_requested_approval"
     t.index ["user_id"], name: "index_plans_on_user_id"
   end
 
@@ -58,10 +60,10 @@ ActiveRecord::Schema.define(version: 2020_12_21_015048) do
     t.integer "graduation_year"
     t.string "major"
     t.string "coop_cycle"
+    t.integer "catalog_year"
     t.string "image_url"
     t.boolean "is_advisor", default: false, null: false
     t.string "nu_id"
-    t.integer "catalog_year"
     t.json "courses_completed", default: [], array: true
     t.json "courses_transfer", default: [], array: true
     t.index ["email"], name: "index_users_on_email", unique: true
