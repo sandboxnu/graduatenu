@@ -78,19 +78,24 @@ export const ExpandedStudentView: React.FC = () => {
   useEffect(() => {
     dispatch(expandAllYearsForActivePlanAction());
 
-    fetchUser(id).then(response => {
-      const user = response.user;
-
-      fetchPlan(id, planId).then(response => {
-        batch(() => {
-          dispatch(setUserAction(user));
-          dispatch(setUserPlansAction([response], user.academicYear));
-          dispatch(setActivePlanAction(response.name, id, user.academicYear));
-        });
-        setStudent(user);
-        setLoading(false);
-      });
-    });
+    fetchUser(id)
+      .then(response => {
+        const user = response.user;
+        fetchPlan(id, planId)
+          .then(response => {
+            batch(() => {
+              dispatch(setUserAction(user));
+              dispatch(setUserPlansAction([response], user.academicYear));
+              dispatch(
+                setActivePlanAction(response.name, id, user.academicYear)
+              );
+            });
+            setStudent(user);
+            setLoading(false);
+          })
+          .catch(e => console.log(e));
+      })
+      .catch(e => console.log(e));
   }, []);
 
   const onEditPress = () => setEditMode(!editMode);

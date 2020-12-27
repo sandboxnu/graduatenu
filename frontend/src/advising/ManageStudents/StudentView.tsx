@@ -141,85 +141,93 @@ export const StudentView: React.FC = () => {
     });
   }, []);
 
+  const renderStudentInfo = () => {
+    return (
+      <StudentInfoContainer>
+        {!student && !fetchingStudent ? (
+          <NoPlanContainer>
+            <Text>User Has No Plans</Text>
+          </NoPlanContainer>
+        ) : fetchingStudent ? (
+          <LoadingSpinner />
+        ) : (
+          <StudentInfoDisplay>
+            <AvatarWrapper>
+              <Avatar>{student!.fullName[0]}</Avatar>
+            </AvatarWrapper>
+            <StudentInfoTextWrapper>
+              <NameText>{student!.fullName}</NameText>
+              <Text>{student!.email}</Text>
+              <Text>{student!.major}</Text>
+              <Text>{student!.coopCycle}</Text>
+            </StudentInfoTextWrapper>
+
+            <PlanText>Plans:</PlanText>
+            <PlanListContainer>
+              <SwitchPlanList />
+            </PlanListContainer>
+            <ButtonContainer>
+              <ColoredButton onClick={() => {}}>Assign Template</ColoredButton>
+            </ButtonContainer>
+          </StudentInfoDisplay>
+        )}
+      </StudentInfoContainer>
+    );
+  };
+
+  const renderSchedule = () => {
+    return (
+      <SchedulePreviewContainer>
+        {noPlans ? (
+          <NoPlanContainer>
+            <Text>User Has No Plans</Text>
+          </NoPlanContainer>
+        ) : (
+          <>
+            <PlanTitle>
+              <TitleText>{planName}</TitleText>
+            </PlanTitle>
+            <ButtonHeader>
+              <Tooltip title="Edit this student's plan">
+                <IconButton
+                  onClick={() =>
+                    history.push(
+                      `/advisor/manageStudents/${
+                        student!.id
+                      }/expanded/${planId!}?edit=true`
+                    )
+                  }
+                >
+                  <Edit />
+                </IconButton>
+              </Tooltip>
+              <IconButton
+                onClick={() =>
+                  history.push(
+                    `/advisor/manageStudents/${student!.id}/expanded/${planId!}`
+                  )
+                }
+              >
+                <Fullscreen />
+              </IconButton>
+            </ButtonHeader>
+            <ScheduleWrapper>
+              <NonEditableSchedule />
+            </ScheduleWrapper>
+          </>
+        )}
+      </SchedulePreviewContainer>
+    );
+  };
+
   return (
     <Container>
       <IconButton onClick={() => history.push(`/advisor/manageStudents`)}>
         <ArrowBack />
       </IconButton>
       <StudentViewContainer>
-        <StudentInfoContainer>
-          {!student && !fetchingStudent ? (
-            <NoPlanContainer>
-              <Text>User Has No Plans</Text>
-            </NoPlanContainer>
-          ) : fetchingStudent ? (
-            <LoadingSpinner />
-          ) : (
-            <StudentInfoDisplay>
-              <AvatarWrapper>
-                <Avatar>{student!.fullName[0]}</Avatar>
-              </AvatarWrapper>
-              <StudentInfoTextWrapper>
-                <NameText>{student!.fullName}</NameText>
-                <Text>{student!.email}</Text>
-                <Text>{student!.major}</Text>
-                <Text>{student!.coopCycle}</Text>
-              </StudentInfoTextWrapper>
-
-              <PlanText>Plans:</PlanText>
-              <PlanListContainer>
-                <SwitchPlanList />
-              </PlanListContainer>
-              <ButtonContainer>
-                <ColoredButton onClick={() => {}}>
-                  Assign Template
-                </ColoredButton>
-              </ButtonContainer>
-            </StudentInfoDisplay>
-          )}
-        </StudentInfoContainer>
-        <SchedulePreviewContainer>
-          {noPlans ? (
-            <NoPlanContainer>
-              <Text>User Has No Plans</Text>
-            </NoPlanContainer>
-          ) : (
-            <>
-              <PlanTitle>
-                <TitleText>{planName}</TitleText>
-              </PlanTitle>
-              <ButtonHeader>
-                <Tooltip title="Edit this student's plan">
-                  <IconButton
-                    onClick={() =>
-                      history.push(
-                        `/advisor/manageStudents/${
-                          student!.id
-                        }/expanded/${planId!}?edit=true`
-                      )
-                    }
-                  >
-                    <Edit />
-                  </IconButton>
-                </Tooltip>
-                <IconButton
-                  onClick={() =>
-                    history.push(
-                      `/advisor/manageStudents/${
-                        student!.id
-                      }/expanded/${planId!}`
-                    )
-                  }
-                >
-                  <Fullscreen />
-                </IconButton>
-              </ButtonHeader>
-              <ScheduleWrapper>
-                <NonEditableSchedule />
-              </ScheduleWrapper>
-            </>
-          )}
-        </SchedulePreviewContainer>
+        {renderStudentInfo()}
+        {renderSchedule()}
       </StudentViewContainer>
     </Container>
   );
