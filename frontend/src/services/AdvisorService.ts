@@ -1,5 +1,18 @@
 import { getAuthToken } from "../utils/auth-helpers";
 
+export interface IAbrStudent {
+  fullName: string;
+  nuId: string;
+  email: string;
+  id: number;
+}
+
+export interface StudentsAPI {
+  students: IAbrStudent[];
+  nextPage: number;
+  lastPage: boolean;
+}
+
 /** Service function object to find all students given a search query
  * @param searchQuery  the search query
  * @param pageNumber  page number for the query
