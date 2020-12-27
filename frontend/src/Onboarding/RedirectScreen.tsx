@@ -87,7 +87,11 @@ export const RedirectScreen: React.FC<Props> = ({ redirectUrl }) => {
 
   if ((authCookieExists() && isError) || !authCookieExists()) {
     // jwt token expired or does not exist
-    console.log("redirected");
+    // remove cookie if it already exists
+    Cookies.remove(AUTH_TOKEN_COOKIE_KEY, {
+      path: "/",
+      domain: window.location.hostname,
+    });
     return <Redirect to="/" />;
   }
 
