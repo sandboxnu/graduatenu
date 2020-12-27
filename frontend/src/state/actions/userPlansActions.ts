@@ -141,6 +141,11 @@ export const toggleYearExpandedForActivePlanAction = createAction(
   (index: number) => ({ index })
 )();
 
+export const expandAllYearsForActivePlanAction = createAction(
+  "userPlans/EXPAND_ALL_YEARS_FOR_ACTIVE_PLAN",
+  () => void 0
+)();
+
 export const setActivePlanStatusAction = createAction(
   "userPlans/SET_ACTIVE_PLAN_STATUS",
   (status: ActivePlanAutoSaveStatus) => ({ status })

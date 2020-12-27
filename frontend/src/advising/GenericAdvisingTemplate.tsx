@@ -1,11 +1,34 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Tabs, Tab } from "@material-ui/core";
+import { Tabs, Tab, Button, Theme, withStyles } from "@material-ui/core";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import { ColoredButton } from "../components/common/ColoredButton";
 import { removeAuthTokenFromCookies } from "../utils/auth-helpers";
 import { useDispatch } from "react-redux";
 import { resetUserAction } from "../state/actions/userActions";
+import { NORTHEASTERN_RED } from "../constants";
+
+export const WhiteColorButton = withStyles((theme: Theme) => ({
+  root: {
+    marginRight: "20px",
+    border: "1px solid red",
+    color: NORTHEASTERN_RED,
+    backgroundColor: "#ffffff",
+    "&:hover": {
+      backgroundColor: "#e9e9e9",
+    },
+  },
+}))(Button);
+
+export const ColorButton = withStyles((theme: Theme) => ({
+  root: {
+    color: "#ffffff",
+    backgroundColor: NORTHEASTERN_RED,
+    "&:hover": {
+      backgroundColor: "#DB4747",
+    },
+  },
+}))(Button);
 
 const Header = styled.div`
   display: flex;

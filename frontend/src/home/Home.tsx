@@ -56,6 +56,7 @@ import { convertPlanToUpdatePlanData } from "../utils/plan-helpers";
 import { ActivePlanAutoSaveStatus } from "../state/reducers/userPlansReducer";
 import { AutoSavePlan } from "./AutoSavePlan";
 import { Alert } from "@material-ui/lab";
+import IdleTimer from "react-idle-timer";
 
 const OuterContainer = styled.div`
   display: flex;
@@ -219,9 +220,11 @@ type Props = ToastHomeProps &
   RouteComponentProps;
 
 const VIEWING_BUFFER = 30000; // 30 seconds
+const TIMEOUT = 900000; // 15 minutes
 
 class HomeComponent extends React.Component<Props> {
   interval: number | null = null;
+
   constructor(props: Props) {
     super(props);
   }
@@ -245,6 +248,7 @@ class HomeComponent extends React.Component<Props> {
     }
 
     if (this.props.activePlan.id !== nextProps.activePlan.id) {
+      // switched plan
       this.callUpdatePlanLastViewedOnInterval();
     }
   }
@@ -254,7 +258,6 @@ class HomeComponent extends React.Component<Props> {
   }
 
   callUpdatePlanLastViewedOnInterval() {
-    // switched plan
     if (this.interval) {
       clearInterval(this.interval);
     }
@@ -308,6 +311,14 @@ class HomeComponent extends React.Component<Props> {
     });
   }
 
+  onIdle = () => {
+    if (this.interval) {
+      clearInterval(this.interval);
+    }
+    alert("You are now idle. The page will now refresh.");
+    window.location.reload();
+  };
+
   logOut = async () => {
     await this.updatePlan();
     window.location.reload();
@@ -356,6 +367,12 @@ class HomeComponent extends React.Component<Props> {
   render() {
     return (
       <>
+        <IdleTimer
+          element={document}
+          onIdle={this.onIdle}
+          debounce={250}
+          timeout={TIMEOUT}
+        />
         <Prompt
           when={this.shouldBlockNavigation()}
           message="You have unsaved changes, are you sure you want to leave?"
@@ -375,13 +392,18 @@ class HomeComponent extends React.Component<Props> {
         </HomeTop>
         {this.props.activePlan.isCurrentlyBeingEditedByAdvisor ? (
           <NonEditableScheduleStudentView
-            sidebarPresent={true}
-            transferCreditPresent={true}
+            sidebarPresent
+            transferCreditPresent
+            collapsibleYears
           >
             {this.renderPlanHeader()}
           </NonEditableScheduleStudentView>
         ) : (
-          <EditableSchedule sidebarPresent={true} transferCreditPresent={true}>
+          <EditableSchedule
+            sidebarPresent
+            transferCreditPresent
+            collapsibleYears
+          >
             {this.renderPlanHeader()}
           </EditableSchedule>
         )}

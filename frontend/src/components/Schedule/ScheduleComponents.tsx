@@ -46,8 +46,8 @@ const SidebarContainer = styled.div`
   box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.25);
 `;
 
-const LeftScroll = styled.div`
-  height: 100vh;
+const LeftScroll = styled.div<any>`
+  height: ${props => (props.sidebarPresent ? "100vh" : "auto")};
   overflow-x: hidden;
   overflow-y: scroll;
   flex: 19;
@@ -67,11 +67,13 @@ const Container = styled.div`
 interface Props {
   sidebarPresent?: boolean;
   transferCreditPresent?: boolean;
+  collapsibleYears: boolean;
 }
 
 interface ScheduleProps {
   readonly schedule?: DNDSchedule;
   readonly isEditable: boolean;
+  readonly collapsibleYears: boolean;
 }
 
 interface NonEditableProps {
@@ -81,6 +83,7 @@ interface NonEditableProps {
 const ScheduleComponent: React.FC<ScheduleProps> = ({
   schedule,
   isEditable,
+  collapsibleYears,
 }) => {
   return schedule !== undefined ? (
     <>
@@ -90,6 +93,7 @@ const ScheduleComponent: React.FC<ScheduleProps> = ({
           index={index}
           schedule={schedule}
           isEditable={isEditable}
+          collapsibleYears={collapsibleYears}
         />
       ))}
     </>
@@ -108,14 +112,23 @@ export const NonEditableSchedule: React.FC = () => {
   );
   return (
     <>
-      <ScheduleComponent schedule={activePlan} isEditable={false} />
+      <ScheduleComponent
+        schedule={activePlan}
+        isEditable={false}
+        collapsibleYears={false}
+      />
       <TransferCredits transferCredits={transferCredits} isEditable={false} />
     </>
   );
 };
 
 export const NonEditableScheduleStudentView: React.FC<Props> = props => {
-  const { children, sidebarPresent, transferCreditPresent } = props;
+  const {
+    children,
+    sidebarPresent,
+    transferCreditPresent,
+    collapsibleYears,
+  } = props;
   const { activePlan, transferCredits } = useSelector(
     (state: AppState) => ({
       activePlan: getActivePlanFromState(state)!.schedule,
@@ -131,10 +144,14 @@ export const NonEditableScheduleStudentView: React.FC<Props> = props => {
           <Sidebar isEditable={false} />
         </SidebarContainer>
       )}
-      <LeftScroll className="hide-scrollbar">
+      <LeftScroll className="hide-scrollbar" sidebarPresent={sidebarPresent}>
         <Container>
           {children}
-          <ScheduleComponent schedule={activePlan} isEditable={false} />
+          <ScheduleComponent
+            schedule={activePlan}
+            isEditable={false}
+            collapsibleYears={collapsibleYears}
+          />
           {transferCreditPresent && (
             <TransferCredits
               transferCredits={transferCredits}
@@ -148,7 +165,12 @@ export const NonEditableScheduleStudentView: React.FC<Props> = props => {
 };
 
 export const EditableSchedule: React.FC<Props> = props => {
-  const { children, sidebarPresent, transferCreditPresent } = props;
+  const {
+    children,
+    sidebarPresent,
+    transferCreditPresent,
+    collapsibleYears,
+  } = props;
   const { activePlan, currentClassCounter, transferCredits } = useSelector(
     (state: AppState) => ({
       activePlan: getActivePlanFromState(state)!.schedule,
@@ -264,10 +286,14 @@ export const EditableSchedule: React.FC<Props> = props => {
             <Sidebar isEditable={true} />
           </SidebarContainer>
         )}
-        <LeftScroll className="hide-scrollbar">
+        <LeftScroll className="hide-scrollbar" sidebarPresent={sidebarPresent}>
           <Container>
             {children}
-            <ScheduleComponent schedule={activePlan} isEditable={true} />
+            <ScheduleComponent
+              schedule={activePlan}
+              isEditable={true}
+              collapsibleYears={collapsibleYears}
+            />
             {transferCreditPresent && (
               <TransferCredits
                 transferCredits={transferCredits}
