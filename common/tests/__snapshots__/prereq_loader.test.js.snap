@@ -10122,16 +10122,11 @@ Object {
             "numCreditsMax": 4,
             "numCreditsMin": 4,
             "prereqs": Object {
-              "type": "or",
+              "type": "and",
               "values": Array [
                 Object {
                   "classId": "2350",
                   "subject": "LING",
-                },
-                Object {
-                  "classId": "2350",
-                  "missing": true,
-                  "subject": "ENGL",
                 },
               ],
             },
@@ -11002,16 +10997,11 @@ Object {
             "numCreditsMax": 4,
             "numCreditsMin": 4,
             "prereqs": Object {
-              "type": "or",
+              "type": "and",
               "values": Array [
                 Object {
                   "classId": "2350",
                   "subject": "LING",
-                },
-                Object {
-                  "classId": "2350",
-                  "missing": true,
-                  "subject": "ENGL",
                 },
               ],
             },
