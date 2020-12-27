@@ -4,7 +4,7 @@ class PlanCommentsController < ApplicationController
 
     def index
         if @plan
-            @plan_comments = @plan.plan_comments
+            @plan_comments = @plan.plan_comments.order(:created_at)
         else 
             render json: {error: "No such plan."}, status: :unprocessable_entity
         end

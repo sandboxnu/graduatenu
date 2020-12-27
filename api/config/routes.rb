@@ -16,7 +16,7 @@ Rails.application.routes.draw do
           put :approve
           put :request_approval
         end
-        resources :plan_comment, only: [:index, :show, :create]
+        resources :plan_comments, only: [:index, :show, :create]
       end
       resources :templates, only: [:index, :create]
     end

@@ -1,3 +1,4 @@
+import { IComment } from "../models/types";
 import { getAuthToken } from "../utils/auth-helpers";
 
 export interface IAbrStudent {
@@ -49,3 +50,20 @@ export const fetchUser = (userId: number) =>
       Authorization: "Token " + getAuthToken(),
     },
   }).then(response => response.json());
+
+export const fetchComments = (planId: number, userId: number) =>
+  fetch(`/api/users/${userId}/plans/${planId}/plan_comments`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Token " + getAuthToken(),
+    },
+  }).then(response =>
+    response.json().then((comments: IComment[]) => {
+      return comments.map((comment: IComment) => ({
+        ...comment,
+        createdAt: new Date(comment.createdAt), // convert string timestamp to a Date object
+        updatedAt: new Date(comment.updatedAt), // convert string timestamp to a Date object
+      }));
+    })
+  );

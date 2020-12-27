@@ -18,8 +18,8 @@ import Edit from "@material-ui/icons/Edit";
 import styled from "styled-components";
 import { PlanTitle, ButtonHeader, ScheduleWrapper, Container } from "./Shared";
 import { useHistory, useLocation, useParams } from "react-router";
-import { IUserData } from "../../models/types";
-import { fetchUser } from "../../services/AdvisorService";
+import { IComment, IUserData } from "../../models/types";
+import { fetchComments, fetchUser } from "../../services/AdvisorService";
 import { fetchPlan } from "../../services/PlanService";
 import { getAuthToken } from "../../utils/auth-helpers";
 import { LoadingSpinner } from "../../components/common/LoadingSpinner";
@@ -49,9 +49,37 @@ const ExpandedStudentContainer = styled.div`
   padding: 30px;
 `;
 
+const CommentContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 36px;
+  background-color: #15743e;
+  width: 100%;
+  padding: 0px;
+`;
+
+const CommentHeaderText = styled.p`
+  font-weight: 600;
+  font-size: 16px;
+  color: white;
+`;
+
+const CommentHolderBody = styled.div<any>`
+  border: 1px solid rgba(8, 45, 24, 0.5);
+  box-sizing: border-box;
+  position: relative;
+  height: 100%;
+  background-color: "rgb(255, 255, 255, 0)";
+`;
+
 interface ParamProps {
   id: string; // id of the student
   planId: string; // id of the student's plan
+}
+
+interface CommmentsProps {
+  comments: IComment[];
 }
 
 function useQuery() {
@@ -68,7 +96,21 @@ export const ExpandedStudentView: React.FC = () => {
   const [editMode, setEditMode] = useState(queryParams.get("edit") === "true");
   const [loading, setLoading] = useState(true);
   const [student, setStudent] = useState<IUserData | null>(null);
-
+  const [comments, setComments] = useState<IComment[]>([]);
+  const mockComments = [
+    {
+      author: "person1",
+      comment: "heres your plan",
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
+    {
+      author: "person2",
+      comment: "thanks!",
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
+  ];
   const { plan } = useSelector((state: AppState) => ({
     plan: safelyGetActivePlanFromState(state),
   }));
@@ -92,6 +134,9 @@ export const ExpandedStudentView: React.FC = () => {
             });
             setStudent(user);
             setLoading(false);
+            // fetchComments(planId, id).then(response => {
+            //   setComments(response);
+            // });
           })
           .catch(e => console.log(e));
       })
@@ -153,9 +198,39 @@ export const ExpandedStudentView: React.FC = () => {
                 )}
               </ScheduleWrapper>
             </ExpandedStudentContainer>
+            <Comments comments={mockComments} />
           </>
         )}
       </FullScheduleViewContainer>
     </Container>
+  );
+};
+
+const Comments: React.FC<CommmentsProps> = ({ comments }) => {
+  return (
+    <div>
+      <CommentContainer>
+        <div>
+          <CommentHeaderText> Comments </CommentHeaderText>
+        </div>
+        {comments.map((comment: IComment) => (
+          <Comment
+            author={comment.author}
+            comment={comment.comment}
+            createdAt={comment.createdAt}
+            updatedAt={comment.updatedAt}
+          ></Comment>
+        ))}
+      </CommentContainer>
+    </div>
+  );
+};
+
+const Comment: React.FC<IComment> = (props: IComment) => {
+  const { author, comment, createdAt, updatedAt } = props;
+  return (
+    <CommentHolderBody>
+      {author} : {comment}
+    </CommentHolderBody>
   );
 };
