@@ -43,10 +43,7 @@ import { AddPlan } from "./AddPlanPopper";
 import { Button, Theme, withStyles } from "@material-ui/core";
 import { SwitchPlanPopper } from "./SwitchPlanPopper";
 import { resetUserAction } from "../state/actions/userActions";
-import {
-  getAuthToken,
-  removeAuthTokenFromCookies,
-} from "../utils/auth-helpers";
+import { removeAuthTokenFromCookies } from "../utils/auth-helpers";
 import { RequestFeedbackPopper } from "./RequestFeedbackPopper";
 import {
   EditableSchedule,
@@ -230,10 +227,8 @@ class HomeComponent extends React.Component<Props> {
     }
     this.interval = setInterval(() => {
       if (this.props.activePlan && this.props.userId) {
-        const token = getAuthToken();
         updatePlanLastViewed(
           this.props.userId,
-          token,
           this.props.activePlan.id,
           this.props.userId
         );

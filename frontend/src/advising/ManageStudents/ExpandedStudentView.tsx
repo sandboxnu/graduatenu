@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch, batch } from "react-redux";
+import { useSelector, useDispatch, batch, shallowEqual } from "react-redux";
 import {
   EditableSchedule,
   NonEditableScheduleStudentView,
 } from "../../components/Schedule/ScheduleComponents";
 import { AutoSavePlan } from "../../home/AutoSavePlan";
-import { safelyGetActivePlanFromState } from "../../state";
+import {
+  getActivePlanStatusFromState,
+  getAdvisorUserIdFromState,
+  safelyGetActivePlanFromState,
+} from "../../state";
 import {
   expandAllYearsForActivePlanAction,
   setActivePlanAction,
@@ -17,13 +21,14 @@ import { ArrowBack, Check, FullscreenExit } from "@material-ui/icons";
 import Edit from "@material-ui/icons/Edit";
 import styled from "styled-components";
 import { PlanTitle, ButtonHeader, ScheduleWrapper, Container } from "./Shared";
-import { useHistory, useLocation, useParams } from "react-router";
+import { Prompt, useHistory, useLocation, useParams } from "react-router";
 import { IUserData } from "../../models/types";
 import { fetchUser } from "../../services/AdvisorService";
-import { fetchPlan } from "../../services/PlanService";
+import { fetchPlan, updatePlanLastViewed } from "../../services/PlanService";
 import IdleTimer from "react-idle-timer";
 import { LoadingSpinner } from "../../components/common/LoadingSpinner";
 import { setUserAction } from "../../state/actions/userActions";
+import { Alert } from "@material-ui/lab";
 
 const FullScheduleViewContainer = styled.div`
   margin-top: 30px;
@@ -49,6 +54,10 @@ const ExpandedStudentContainer = styled.div`
   padding: 30px;
 `;
 
+const AlertWrapper = styled.div`
+  margin: 12px 0px 12px 0px;
+`;
+
 interface ParamProps {
   id: string; // id of the student
   planId: string; // id of the student's plan
@@ -58,9 +67,12 @@ function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
 
+const VIEWING_BUFFER = 30000; // 30 seconds
 const TIMEOUT = 900000; // 15 minutes
 
 export const ExpandedStudentView: React.FC = () => {
+  let interval: number | null = null;
+
   const history = useHistory();
   const params = useParams<ParamProps>();
   const queryParams = useQuery();
@@ -71,9 +83,14 @@ export const ExpandedStudentView: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [student, setStudent] = useState<IUserData | null>(null);
 
-  const { plan } = useSelector((state: AppState) => ({
-    plan: safelyGetActivePlanFromState(state),
-  }));
+  const { plan, activePlanStatus, advisorId } = useSelector(
+    (state: AppState) => ({
+      plan: safelyGetActivePlanFromState(state),
+      activePlanStatus: getActivePlanStatusFromState(state),
+      advisorId: getAdvisorUserIdFromState(state),
+    }),
+    shallowEqual
+  );
 
   const dispatch = useDispatch();
 
@@ -85,6 +102,7 @@ export const ExpandedStudentView: React.FC = () => {
         const user = response.user;
         fetchPlan(id, planId)
           .then(response => {
+            callUpdatePlanLastViewedOnInterval();
             batch(() => {
               dispatch(setUserAction(user));
               dispatch(setUserPlansAction([response], user.academicYear));
@@ -99,6 +117,21 @@ export const ExpandedStudentView: React.FC = () => {
       })
       .catch(e => console.log(e));
   }, []);
+
+  const callUpdatePlanLastViewedOnInterval = () => {
+    if (interval) {
+      clearInterval(interval);
+    }
+    interval = setInterval(() => {
+      if (plan && student) {
+        updatePlanLastViewed(student.id, plan.id, advisorId);
+      }
+    }, VIEWING_BUFFER);
+  };
+
+  const shouldBlockNavigation = () => {
+    return activePlanStatus !== "Up To Date";
+  };
 
   const onEditPress = () => setEditMode(!editMode);
 
@@ -115,6 +148,10 @@ export const ExpandedStudentView: React.FC = () => {
         debounce={250}
         timeout={TIMEOUT}
       />
+      <Prompt
+        when={shouldBlockNavigation()}
+        message="You have unsaved changes, are you sure you want to leave?"
+      />
       <Container>
         <FullScheduleViewContainer>
           {loading ? (
@@ -130,10 +167,21 @@ export const ExpandedStudentView: React.FC = () => {
                 <b style={{ marginRight: 12 }}>{student!.fullName}</b>
                 {plan!.major || ""} {plan!.coopCycle || ""}
               </ExpandedScheduleStudentInfo>
+              {plan!.isCurrentlyBeingEditedByStudent && (
+                <AlertWrapper>
+                  <Alert severity="warning">
+                    This plan is currently being edited by {student!.fullName},
+                    so we've put it in read-only mode. You will be able to edit
+                    it again once {student!.fullName} finishes making changes.
+                  </Alert>
+                </AlertWrapper>
+              )}
               <ExpandedStudentContainer>
                 <PlanTitle>{plan!.name}</PlanTitle>
                 <ButtonHeader>
-                  {editMode && <AutoSavePlan />}
+                  {editMode && !plan!.isCurrentlyBeingEditedByStudent && (
+                    <AutoSavePlan />
+                  )}
                   {editMode ? (
                     <Tooltip title="Finished Editing">
                       <IconButton onClick={onEditPress}>
@@ -156,7 +204,7 @@ export const ExpandedStudentView: React.FC = () => {
                   </IconButton>
                 </ButtonHeader>
                 <ScheduleWrapper>
-                  {editMode ? (
+                  {editMode && !plan!.isCurrentlyBeingEditedByStudent ? (
                     <EditableSchedule
                       transferCreditPresent
                       collapsibleYears={false}
