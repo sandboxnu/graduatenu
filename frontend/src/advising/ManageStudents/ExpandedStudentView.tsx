@@ -151,7 +151,11 @@ export const ExpandedStudentView: React.FC = () => {
               {plan!.major || ""} {plan!.coopCycle || ""}
             </ExpandedScheduleStudentInfo>
             <ExpandedStudentContainer>
-              <PlanTitle>{plan!.name}</PlanTitle>
+              <PlanTitle>
+                {plan!.lastRequestedApproval !== null
+                  ? plan!.name + ": Awaiting Approval"
+                  : plan!.name}{" "}
+              </PlanTitle>
               <ButtonHeader>
                 {editMode && <AutoSavePlan />}
                 {editMode ? (
