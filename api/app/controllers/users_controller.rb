@@ -15,7 +15,7 @@ class UsersController < ApplicationController
     # update a user
     def update
         if @current_user_id == Integer(params[:id])
-            if current_user.update_attributes(user_params)
+            if current_user.update(user_params)
                 @user = @current_user
                 render :show
             else
@@ -25,7 +25,7 @@ class UsersController < ApplicationController
             render json: { error: "Unauthorized" }, status: :unprocessable_entity
         end
     end
-    
+
     # returns all information for one student
     def show
         # make sure requester is an advisor
