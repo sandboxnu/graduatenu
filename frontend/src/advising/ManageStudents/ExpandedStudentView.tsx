@@ -21,7 +21,7 @@ import { useHistory, useLocation, useParams } from "react-router";
 import { IUserData } from "../../models/types";
 import { fetchUser } from "../../services/AdvisorService";
 import { fetchPlan } from "../../services/PlanService";
-import { getAuthToken } from "../../utils/auth-helpers";
+import IdleTimer from "react-idle-timer";
 import { LoadingSpinner } from "../../components/common/LoadingSpinner";
 import { setUserAction } from "../../state/actions/userActions";
 
@@ -57,6 +57,8 @@ interface ParamProps {
 function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
+
+const TIMEOUT = 900000; // 15 minutes
 
 export const ExpandedStudentView: React.FC = () => {
   const history = useHistory();
@@ -100,62 +102,77 @@ export const ExpandedStudentView: React.FC = () => {
 
   const onEditPress = () => setEditMode(!editMode);
 
+  const onIdle = () => {
+    alert("You are now idle. The page will now refresh.");
+    window.location.reload();
+  };
+
   return (
-    <Container>
-      <FullScheduleViewContainer>
-        {loading ? (
-          <LoadingSpinner />
-        ) : (
-          <>
-            <ExpandedScheduleStudentInfo>
-              <IconButton
-                onClick={() => history.push(`/advisor/manageStudents/${id}`)}
-              >
-                <ArrowBack />
-              </IconButton>
-              <b style={{ marginRight: 12 }}>{student!.fullName}</b>
-              {plan!.major || ""} {plan!.coopCycle || ""}
-            </ExpandedScheduleStudentInfo>
-            <ExpandedStudentContainer>
-              <PlanTitle>{plan!.name}</PlanTitle>
-              <ButtonHeader>
-                {editMode && <AutoSavePlan />}
-                {editMode ? (
-                  <Tooltip title="Finished Editing">
-                    <IconButton onClick={onEditPress}>
-                      <Check />
-                    </IconButton>
-                  </Tooltip>
-                ) : (
-                  <Tooltip title="Edit this student's plan">
-                    <IconButton onClick={onEditPress}>
-                      <Edit />
-                    </IconButton>
-                  </Tooltip>
-                )}
+    <>
+      <IdleTimer
+        element={document}
+        onIdle={onIdle}
+        debounce={250}
+        timeout={TIMEOUT}
+      />
+      <Container>
+        <FullScheduleViewContainer>
+          {loading ? (
+            <LoadingSpinner />
+          ) : (
+            <>
+              <ExpandedScheduleStudentInfo>
                 <IconButton
                   onClick={() => history.push(`/advisor/manageStudents/${id}`)}
                 >
-                  <FullscreenExit />
+                  <ArrowBack />
                 </IconButton>
-              </ButtonHeader>
-              <ScheduleWrapper>
-                {editMode ? (
-                  <EditableSchedule
-                    transferCreditPresent
-                    collapsibleYears={false}
-                  />
-                ) : (
-                  <NonEditableScheduleStudentView
-                    transferCreditPresent
-                    collapsibleYears={false}
-                  />
-                )}
-              </ScheduleWrapper>
-            </ExpandedStudentContainer>
-          </>
-        )}
-      </FullScheduleViewContainer>
-    </Container>
+                <b style={{ marginRight: 12 }}>{student!.fullName}</b>
+                {plan!.major || ""} {plan!.coopCycle || ""}
+              </ExpandedScheduleStudentInfo>
+              <ExpandedStudentContainer>
+                <PlanTitle>{plan!.name}</PlanTitle>
+                <ButtonHeader>
+                  {editMode && <AutoSavePlan />}
+                  {editMode ? (
+                    <Tooltip title="Finished Editing">
+                      <IconButton onClick={onEditPress}>
+                        <Check />
+                      </IconButton>
+                    </Tooltip>
+                  ) : (
+                    <Tooltip title="Edit this student's plan">
+                      <IconButton onClick={onEditPress}>
+                        <Edit />
+                      </IconButton>
+                    </Tooltip>
+                  )}
+                  <IconButton
+                    onClick={() =>
+                      history.push(`/advisor/manageStudents/${id}`)
+                    }
+                  >
+                    <FullscreenExit />
+                  </IconButton>
+                </ButtonHeader>
+                <ScheduleWrapper>
+                  {editMode ? (
+                    <EditableSchedule
+                      transferCreditPresent
+                      collapsibleYears={false}
+                    />
+                  ) : (
+                    <NonEditableScheduleStudentView
+                      transferCreditPresent
+                      collapsibleYears={false}
+                    />
+                  )}
+                </ScheduleWrapper>
+              </ExpandedStudentContainer>
+            </>
+          )}
+        </FullScheduleViewContainer>
+      </Container>
+    </>
   );
 };

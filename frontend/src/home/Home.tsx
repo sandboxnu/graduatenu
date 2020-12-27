@@ -58,39 +58,6 @@ import { AutoSavePlan } from "./AutoSavePlan";
 import { Alert } from "@material-ui/lab";
 import IdleTimer from "react-idle-timer";
 
-const OuterContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  overflow: hidden;
-`;
-
-const SidebarContainer = styled.div`
-  height: 100vh;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  flex: 4;
-  position: relative;
-  box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.25);
-`;
-
-const LeftScroll = styled.div`
-  height: 100vh;
-  overflow-x: hidden;
-  overflow-y: scroll;
-  flex: 19;
-`;
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  align-items: start;
-  margin-left: 30px;
-  margin-right: 30px;
-  margin-bottom: 30px;
-  background-color: "#ff76ff";
-`;
-
 const HomeTop = styled.div`
   width: 100%;
   border-bottom: 1px solid red;
