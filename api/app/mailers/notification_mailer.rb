@@ -6,7 +6,6 @@ class NotificationMailer < ApplicationMailer
     @student = student
     @plan = plan
     to_email = "graduatenu@outlook.com"
-    p ENV["SENDGRID_API_KEY"]
     if Rails.env.production? 
       to_email = @advisor.email
     end
