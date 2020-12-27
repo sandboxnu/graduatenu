@@ -29,7 +29,8 @@
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
 class User < ApplicationRecord
-  JWT_EXPIRATION = 60.days
+  # JWT_EXPIRATION = 60.days
+  JWT_EXPIRATION = 30.seconds
   has_many :plans, dependent: :destroy
 
   #validates a non-unique full_name and allows spaces

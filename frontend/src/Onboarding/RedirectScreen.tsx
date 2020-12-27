@@ -9,7 +9,7 @@ import {
   setTransferCoursesAction,
 } from "../state/actions/userActions";
 import { fetchMajorsAndPlans } from "../utils/fetchMajorsAndPlans";
-import { AUTH_TOKEN_COOKIE_KEY } from "../utils/auth-helpers";
+import { authCookieExists, AUTH_TOKEN_COOKIE_KEY } from "../utils/auth-helpers";
 import { getScheduleCoursesFromSimplifiedCourseDataAPI } from "../utils/course-helpers";
 import { LoadingScreen } from "../components/common/FullPageLoading";
 import { setAdvisorAction } from "../state/actions/advisorActions";
@@ -85,7 +85,13 @@ export const RedirectScreen: React.FC<Props> = ({ redirectUrl }) => {
     });
   }, []);
 
-  if (!Cookies.get(AUTH_TOKEN_COOKIE_KEY) || isError) {
+  if ((authCookieExists() && isError) || !authCookieExists()) {
+    // jwt token expired or does not exist
+    console.log("redirected");
+    return <Redirect to="/" />;
+  }
+
+  if (isError) {
     return <LoadingScreen errorMsg="Oh oh, we couldn't authenticate you!" />;
   }
 
