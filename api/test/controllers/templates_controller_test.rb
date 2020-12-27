@@ -13,7 +13,7 @@ class TemplatesControllerTest < ActionController::TestCase
     json_response = JSON.parse(response.body)
 
     assert_equal 1, json_response['nextPage']
-    assert_equal false, json_response['lastPage']
+    assert json_response['lastPage']
     assert_equal user.folders.count, json_response['templates'].count
     user.folders.each_with_index do |folder, i|
       assert_equal folder.id, json_response['templates'][i]['id']
@@ -40,7 +40,7 @@ class TemplatesControllerTest < ActionController::TestCase
     json_response = JSON.parse(response.body)
 
     assert_equal 1, json_response['nextPage']
-    assert_equal false, json_response['lastPage']
+    assert json_response['lastPage']
     assert_equal user.folders.count, json_response['templates'].count
     user.folders.each_with_index do |folder, i|
       assert_equal folder.id, json_response['templates'][i]['id']
@@ -83,7 +83,7 @@ class TemplatesControllerTest < ActionController::TestCase
     json_response = JSON.parse(response.body)
 
     assert_equal 1, json_response['nextPage']
-    assert_equal false, json_response['lastPage']
+    assert json_response['lastPage']
     assert_equal 1, json_response['templates'].count
 
     assert_equal folder.id, json_response['templates'][0]['id']

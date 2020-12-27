@@ -163,14 +163,13 @@ const TemplatesList = ({ searchQuery }: TemplatesListProps) => {
   const [isLoading, setIsLoading] = useState(true);
   const [pageNumber, setPageNumber] = useState(0);
   const [isLastPage, setIsLastPage] = useState(false);
-  const token = getAuthToken();
   const { userId } = useSelector((state: AppState) => ({
     userId: getAdvisorUserIdFromState(state),
   }));
 
   const fetchTemplates = (currentFolders: IFolderData[], page: number) => {
     setIsLoading(true);
-    getTemplates(searchQuery, page, userId, token)
+    getTemplates(searchQuery, page, userId)
       .then((response: TemplatesAPI) => {
         setTemplates(currentFolders.concat(response.templates));
         setPageNumber(response.nextPage);
@@ -183,7 +182,7 @@ const TemplatesList = ({ searchQuery }: TemplatesListProps) => {
   useEffect(() => {
     setTemplates(EMPTY_TEMPLATES_LIST);
     fetchTemplates(EMPTY_TEMPLATES_LIST, 0);
-  }, [searchQuery, token]);
+  }, [searchQuery]);
 
   return (
     <TemplatesContainer>

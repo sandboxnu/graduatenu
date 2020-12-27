@@ -23,7 +23,7 @@ class TemplatesController < ApplicationController
     offset = page * 50
     @folders = Folder.joins(:template_plans).where('folders.user_id = ?', @searched_advisor.id).limit(50).offset(offset).where('lower(folders.name) LIKE :search OR lower(template_plans.name) LIKE :search OR lower(template_plans.major) LIKE :search OR lower(template_plans.coop_cycle) LIKE :search', search: "%#{search}%").distinct
 
-    @last_page = true if @folders.empty?
+    @last_page = true if @folders.count < 50
   end
 
   def create

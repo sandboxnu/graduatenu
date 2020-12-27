@@ -1,4 +1,5 @@
 import { ICreateTemplatePlan, IFolderData } from "../models/types";
+import { getAuthToken } from "../utils/auth-helpers";
 
 export interface TemplatesAPI {
   templates: IFolderData[];
@@ -15,15 +16,14 @@ export interface TemplatesAPI {
 export const getTemplates = (
   searchQuery: string,
   pageNumber: number,
-  userId: number,
-  userToken: string
+  userId: number
 ): Promise<TemplatesAPI> =>
   fetch(
     `/api/users/${userId}/templates?search=${searchQuery}&page=${pageNumber}`,
     {
       method: "GET",
       headers: {
-        Authorization: "Token " + userToken,
+        Authorization: "Token " + getAuthToken(),
       },
     }
   ).then(response =>
@@ -45,13 +45,12 @@ export const getTemplates = (
  */
 export const createTemplate = (
   userId: number,
-  userToken: string,
   template: ICreateTemplatePlan
 ): Promise<IFolderData> =>
   fetch(`/api/users/${userId}/templates`, {
     method: "POST",
     body: JSON.stringify({ templatePlan: template }),
     headers: {
-      Authorization: "Token " + userToken,
+      Authorization: "Token " + getAuthToken(),
     },
   }).then(response => response.json());
