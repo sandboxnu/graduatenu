@@ -233,6 +233,10 @@ export const safelyGetActivePlanFromState = (state: AppState) => {
   return state.userPlansState.plans[state.userPlansState.activePlan];
 };
 
+export const safelyGetActivePlanIdFromState = (state: AppState) => {
+  return safelyGetActivePlanFromState(state)?.id;
+};
+
 export const getActivePlanNameFromState = (state: AppState) => {
   return state.userPlansState.activePlan;
 };

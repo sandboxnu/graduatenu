@@ -177,7 +177,7 @@ export interface IAdvisorData {
 /**
  * A model for data pertaining to an abbreviated user object.
  */
-export interface IUserDataAbr {
+export interface IAbrAdvisor {
   email: string;
   fullName: string;
 }

@@ -8,7 +8,7 @@ import styled from "styled-components";
 import { Autocomplete } from "@material-ui/lab";
 import { PrimaryButton } from "../components/common/PrimaryButton";
 import { getAdvisors } from "../services/AdvisorService";
-import { IUserDataAbr } from "../models/types";
+import { IAbrAdvisor } from "../models/types";
 import { getActivePlanFromState, getUserFromState } from "../state";
 import { AppState } from "../state/reducers/state";
 import { useDebouncedEffect } from "../hooks/useDebouncedEffect";
@@ -25,7 +25,7 @@ const AdvisorDropdownContainer = styled.div`
   width: 300px;
 `;
 
-const EMPTY_ADVISOR_LIST: IUserDataAbr[] = [];
+const EMPTY_ADVISOR_LIST: IAbrAdvisor[] = [];
 
 export const RequestFeedbackPopper: React.FC = () => {
   const { currentSchedule, approvedSchedule, planId, userId } = useSelector(
@@ -61,7 +61,7 @@ export const RequestFeedbackPopper: React.FC = () => {
 
   const findAdvisorEmail = (name: string): string => {
     let advisorEmail = "";
-    advisors.forEach((advisor: IUserDataAbr) => {
+    advisors.forEach((advisor: IAbrAdvisor) => {
       if (advisor.fullName === name) {
         advisorEmail = advisor.email;
         return;
@@ -101,7 +101,7 @@ export const RequestFeedbackPopper: React.FC = () => {
         <Autocomplete
           style={{ marginTop: "10px", marginBottom: "5px" }}
           disableListWrap
-          options={advisors.map((advisor: IUserDataAbr) => advisor.fullName)}
+          options={advisors.map((advisor: IAbrAdvisor) => advisor.fullName)}
           renderInput={params => (
             <TextField
               {...params}
