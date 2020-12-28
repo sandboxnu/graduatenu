@@ -21,6 +21,8 @@
     "type-check": "tsc --noEmit"
   },
   "devDependencies": {
+    "@4tw/cypress-drag-drop": "^1.4.0",
+    "cypress": "^6.0.1",
     "husky": "^4.2.5"
   },
   "jest": {

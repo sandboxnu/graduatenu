@@ -154,7 +154,10 @@ export const AddClassSearchModal: React.FC<AddClassSearchModalProps> = props => 
             <AddClassError>!</AddClassError>
           </Tooltip>
         ) : (
-          <AddClassButton onClick={async () => addClass(props.course)}>
+          <AddClassButton
+            data-cy="results-add-class-button"
+            onClick={async () => addClass(props.course)}
+          >
             <Tooltip title="Add" aria-label="add">
               <AddIcon style={{ fontSize: "18px", color: "white" }} />
             </Tooltip>

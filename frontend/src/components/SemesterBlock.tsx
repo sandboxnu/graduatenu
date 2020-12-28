@@ -235,7 +235,7 @@ class EditableSemesterBlockComponent extends React.Component<
   renderContainer() {
     return (
       <Container warning={this.props.warnings.length > 0}>
-        <ClassListWrapper>
+        <ClassListWrapper data-cy="class-list-wrapper">
           <Droppable droppableId={this.props.semester.termId.toString()}>
             {provided => (
               <ClassList

@@ -197,6 +197,7 @@ export class Onboarding extends React.Component<Props> {
           <h1>GraduateNU</h1>
           <LoginButtonContainer>
             <a
+              data-cy="get-started"
               href="https://admin.khoury.northeastern.edu"
               style={{ textDecoration: "none" }}
             >

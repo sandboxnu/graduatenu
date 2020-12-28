@@ -53,6 +53,7 @@ export const Search = (props: SearchProps) => {
   return (
     <SearchContainer>
       <SearchInput
+        data-cy="search-input"
         isSmall={props.isSmall}
         type="text"
         name="name"
