@@ -87,6 +87,9 @@ typings/
 # include Zeit now
 !now.json
 
+# include pull dog config
+!pull-dog.json
+
 # task definitions should be included
 !*-task-definition.json
 
