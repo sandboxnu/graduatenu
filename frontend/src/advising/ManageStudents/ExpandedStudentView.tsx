@@ -112,8 +112,6 @@ const CommentAuthor = styled.div`
   font-weight: 600;
 `;
 
-const CommentContent = styled.div``;
-
 const CommentTimestamp = styled.div`
   color: dimgrey;
 `;
@@ -290,13 +288,14 @@ const Comment: React.FC<IComment> = (props: IComment) => {
         <CommentAuthor>{author}</CommentAuthor>
         <CommentTimestamp>{timeago.format(createdAt)}</CommentTimestamp>
       </CommentHeader>
-      <CommentContent>{comment}</CommentContent>
+      {comment}
     </CommentHolderBody>
   );
 };
 
 const CommentInput: React.FC = () => {
   const [comment, setComment] = useState("");
+  const buttonDisabled = !comment;
 
   const CommentButton = GenericColorButton(
     "rgba(21, 116, 62, 0.68)",
@@ -334,7 +333,10 @@ const CommentInput: React.FC = () => {
         fullWidth
       />
       <SubmitCommentButton>
-        <CommentButton onClick={handleCommentButtonClick}>
+        <CommentButton
+          onClick={handleCommentButtonClick}
+          disabled={buttonDisabled}
+        >
           Comment
         </CommentButton>
       </SubmitCommentButton>
