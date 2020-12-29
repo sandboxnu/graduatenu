@@ -19,7 +19,7 @@ class PlanCommentsController < ApplicationController
     end
 
     def create
-        if @plan_comment = PlanComment.create(plan_comment_params.merge({plan_id: params[plan_id]}))
+        if @plan_comment = PlanComment.create(plan_comment_params.merge({plan_id: params[:plan_id]}))
             render :show
         else
             render json: {error: "Unable to store plan comment."}, status: :unprocessable_entity

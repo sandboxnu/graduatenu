@@ -35,7 +35,7 @@ class Plan < ApplicationRecord
 
   belongs_to :user
 
-  has_many :plan_comment
+  has_many :plan_comments
 
   def last_viewed_by
     User.find_by_id(self.last_viewer)

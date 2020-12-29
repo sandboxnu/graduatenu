@@ -1,9 +1,11 @@
 import produce from "immer";
 import { getType } from "typesafe-actions";
-import { IAdvisorData } from "../../models/types";
+import { IAdvisorData, IComment } from "../../models/types";
 import { AdvisorAction } from "../actions";
 import {
+  addCommentAction,
   setAdvisorAction,
+  setCommentsAction,
   setImage,
   toggleTemplateFolderExpandedAction,
 } from "../actions/advisorActions";
@@ -11,11 +13,13 @@ import {
 export interface AdvisorState {
   advisor?: IAdvisorData;
   closedFolders: number[];
+  comments: IComment[];
 }
 
 const initialState: AdvisorState = {
   advisor: undefined,
   closedFolders: [],
+  comments: [],
 };
 
 export const advisorReducer = (
@@ -41,6 +45,14 @@ export const advisorReducer = (
         } else {
           draft.closedFolders.push(idx);
         }
+        return draft;
+      }
+      case getType(setCommentsAction): {
+        draft.comments = action.payload.comments;
+        return draft;
+      }
+      case getType(addCommentAction): {
+        draft.comments.push(action.payload.comment);
         return draft;
       }
     }

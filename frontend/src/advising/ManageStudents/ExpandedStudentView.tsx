@@ -5,7 +5,13 @@ import {
   NonEditableScheduleStudentView,
 } from "../../components/Schedule/ScheduleComponents";
 import { AutoSavePlan } from "../../home/AutoSavePlan";
-import { safelyGetActivePlanFromState } from "../../state";
+import {
+  getAdvisorCommentsFromState,
+  getUserFullNameFromState,
+  safelyGetActivePlanFromState,
+  safelyGetActivePlanIdFromState,
+  safelyGetUserIdFromState,
+} from "../../state";
 import {
   expandAllYearsForActivePlanAction,
   setActivePlanAction,
@@ -13,19 +19,33 @@ import {
 } from "../../state/actions/userPlansActions";
 import { AppState } from "../../state/reducers/state";
 import { IconButton, TextField, Tooltip } from "@material-ui/core";
-import { ArrowBack, Check, FullscreenExit } from "@material-ui/icons";
+import {
+  ArrowBack,
+  Check,
+  FullscreenExit,
+  KeyboardArrowDown,
+} from "@material-ui/icons";
 import Edit from "@material-ui/icons/Edit";
 import styled from "styled-components";
 import { PlanTitle, ButtonHeader, ScheduleWrapper, Container } from "./Shared";
 import { useHistory, useLocation, useParams } from "react-router";
 import { IComment, IUserData } from "../../models/types";
-import { fetchComments, fetchUser } from "../../services/AdvisorService";
+import {
+  fetchComments,
+  fetchUser,
+  sendComment,
+} from "../../services/AdvisorService";
 import { fetchPlan } from "../../services/PlanService";
-import { getAuthToken } from "../../utils/auth-helpers";
 import { LoadingSpinner } from "../../components/common/LoadingSpinner";
 import { setUserAction } from "../../state/actions/userActions";
 import * as timeago from "timeago.js";
 import { GenericColorButton } from "../GenericAdvisingTemplate";
+import {
+  addCommentAction,
+  setCommentsAction,
+} from "../../state/actions/advisorActions";
+import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
+import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 
 const FullScheduleViewContainer = styled.div`
   margin-top: 30px;
@@ -58,10 +78,11 @@ const CommentsHeader = styled.div`
   height: 36px;
   background-color: rgba(21, 116, 62, 0.68);
   padding: 0px;
+  width: 100%;
 `;
 
 const CommentsContainer = styled.div`
-  margin: 0 30px;
+  margin: 0 30px 0 0;
 `;
 
 const CommentHeaderText = styled.p`
@@ -77,6 +98,7 @@ const CommentHolderBody = styled.div<any>`
   position: relative;
   height: 100%;
   padding: 30px;
+  margin-left: 30px;
 `;
 
 const CommentHeader = styled.div`
@@ -102,13 +124,15 @@ const SubmitCommentButton = styled.div`
   margin-top: 30px;
 `;
 
+const CommentHeaderWithDropDown = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
+
 interface ParamProps {
   id: string; // id of the student
   planId: string; // id of the student's plan
-}
-
-interface CommmentsProps {
-  comments: IComment[];
 }
 
 function useQuery() {
@@ -125,21 +149,6 @@ export const ExpandedStudentView: React.FC = () => {
   const [editMode, setEditMode] = useState(queryParams.get("edit") === "true");
   const [loading, setLoading] = useState(true);
   const [student, setStudent] = useState<IUserData | null>(null);
-  const [comments, setComments] = useState<IComment[]>([]);
-  const mockComments = [
-    {
-      author: "person1",
-      comment: "heres your plan",
-      createdAt: new Date("14 Dec 2020 00:00:00 PDT"),
-      updatedAt: new Date(),
-    },
-    {
-      author: "person2",
-      comment: "thanks!",
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    },
-  ];
   const { plan } = useSelector((state: AppState) => ({
     plan: safelyGetActivePlanFromState(state),
   }));
@@ -163,9 +172,9 @@ export const ExpandedStudentView: React.FC = () => {
             });
             setStudent(user);
             setLoading(false);
-            // fetchComments(planId, id).then(response => {
-            //   setComments(response);
-            // });
+            fetchComments(planId, id).then(response => {
+              dispatch(setCommentsAction(response));
+            });
           })
           .catch(e => console.log(e));
       })
@@ -225,7 +234,7 @@ export const ExpandedStudentView: React.FC = () => {
                     collapsibleYears={false}
                   />
                 )}
-                <Comments comments={mockComments} />
+                <Comments />
               </ScheduleWrapper>
             </ExpandedStudentContainer>
           </>
@@ -235,21 +244,40 @@ export const ExpandedStudentView: React.FC = () => {
   );
 };
 
-const Comments: React.FC<CommmentsProps> = ({ comments }) => {
+const Comments: React.FC = () => {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const comments = useSelector((state: AppState) =>
+    getAdvisorCommentsFromState(state)
+  );
+
   return (
     <CommentsContainer>
-      <CommentsHeader>
-        <CommentHeaderText> Comments </CommentHeaderText>
-      </CommentsHeader>
-      {comments.map((comment: IComment) => (
-        <Comment
-          author={comment.author}
-          comment={comment.comment}
-          createdAt={comment.createdAt}
-          updatedAt={comment.updatedAt}
-        ></Comment>
-      ))}
-      <CommentInput />
+      <CommentHeaderWithDropDown>
+        <div
+          onClick={() => {
+            setIsExpanded(!isExpanded);
+          }}
+          style={{ marginRight: 4, marginLeft: 2 }}
+        >
+          {isExpanded ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+        </div>
+        <CommentsHeader>
+          <CommentHeaderText> Comments </CommentHeaderText>
+        </CommentsHeader>
+      </CommentHeaderWithDropDown>
+      {isExpanded && (
+        <div>
+          {comments.map((comment: IComment) => (
+            <Comment
+              author={comment.author}
+              comment={comment.comment}
+              createdAt={comment.createdAt}
+              updatedAt={comment.updatedAt}
+            ></Comment>
+          ))}
+          <CommentInput />
+        </div>
+      )}
     </CommentsContainer>
   );
 };
@@ -275,9 +303,28 @@ const CommentInput: React.FC = () => {
     "rgba(21, 116, 62, 0.74)"
   );
 
+  const { planId, userId, userName } = useSelector((state: AppState) => ({
+    planId: safelyGetActivePlanIdFromState(state),
+    userId: safelyGetUserIdFromState(state),
+    userName: getUserFullNameFromState(state),
+  }));
+
+  const dispatch = useDispatch();
+
+  const handleCommentButtonClick = () => {
+    if (planId && userId) {
+      sendComment(
+        planId,
+        userId,
+        userName,
+        comment
+      ).then((response: IComment) => dispatch(addCommentAction(response)));
+      setComment("");
+    }
+  };
+
   return (
     <CommentHolderBody>
-      {" "}
       <TextField
         multiline
         value={comment}
@@ -287,7 +334,9 @@ const CommentInput: React.FC = () => {
         fullWidth
       />
       <SubmitCommentButton>
-        <CommentButton>Comment</CommentButton>
+        <CommentButton onClick={handleCommentButtonClick}>
+          Comment
+        </CommentButton>
       </SubmitCommentButton>
     </CommentHolderBody>
   );
