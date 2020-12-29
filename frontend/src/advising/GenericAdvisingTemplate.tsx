@@ -20,15 +20,21 @@ export const WhiteColorButton = withStyles((theme: Theme) => ({
   },
 }))(Button);
 
-export const ColorButton = withStyles((theme: Theme) => ({
-  root: {
-    color: "#ffffff",
-    backgroundColor: NORTHEASTERN_RED,
-    "&:hover": {
-      backgroundColor: "#DB4747",
+export const GenericColorButton = (
+  backgroundColor: string,
+  hoverBackgroundColor: string
+) =>
+  withStyles((theme: Theme) => ({
+    root: {
+      color: "#ffffff",
+      backgroundColor: backgroundColor,
+      "&:hover": {
+        backgroundColor: hoverBackgroundColor,
+      },
     },
-  },
-}))(Button);
+  }))(Button);
+
+export const ColorButton = GenericColorButton(NORTHEASTERN_RED, "#DB4747");
 
 const Header = styled.div`
   display: flex;

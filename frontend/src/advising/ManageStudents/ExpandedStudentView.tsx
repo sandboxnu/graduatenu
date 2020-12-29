@@ -12,7 +12,7 @@ import {
   setUserPlansAction,
 } from "../../state/actions/userPlansActions";
 import { AppState } from "../../state/reducers/state";
-import { IconButton, Tooltip } from "@material-ui/core";
+import { IconButton, TextField, Tooltip } from "@material-ui/core";
 import { ArrowBack, Check, FullscreenExit } from "@material-ui/icons";
 import Edit from "@material-ui/icons/Edit";
 import styled from "styled-components";
@@ -24,6 +24,8 @@ import { fetchPlan } from "../../services/PlanService";
 import { getAuthToken } from "../../utils/auth-helpers";
 import { LoadingSpinner } from "../../components/common/LoadingSpinner";
 import { setUserAction } from "../../state/actions/userActions";
+import * as timeago from "timeago.js";
+import { GenericColorButton } from "../GenericAdvisingTemplate";
 
 const FullScheduleViewContainer = styled.div`
   margin-top: 30px;
@@ -49,14 +51,17 @@ const ExpandedStudentContainer = styled.div`
   padding: 30px;
 `;
 
-const CommentContainer = styled.div`
+const CommentsHeader = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   height: 36px;
-  background-color: #15743e;
-  width: 100%;
+  background-color: rgba(21, 116, 62, 0.68);
   padding: 0px;
+`;
+
+const CommentsContainer = styled.div`
+  margin: 0 30px;
 `;
 
 const CommentHeaderText = styled.p`
@@ -66,11 +71,35 @@ const CommentHeaderText = styled.p`
 `;
 
 const CommentHolderBody = styled.div<any>`
-  border: 1px solid rgba(8, 45, 24, 0.5);
+  border: 1px solid rgba(21, 116, 62, 0.68);
+  border-top: none;
   box-sizing: border-box;
   position: relative;
   height: 100%;
-  background-color: "rgb(255, 255, 255, 0)";
+  padding: 30px;
+`;
+
+const CommentHeader = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  margin-bottom: 14px;
+`;
+
+const CommentAuthor = styled.div`
+  font-weight: 600;
+`;
+
+const CommentContent = styled.div``;
+
+const CommentTimestamp = styled.div`
+  color: dimgrey;
+`;
+
+const SubmitCommentButton = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 30px;
 `;
 
 interface ParamProps {
@@ -101,7 +130,7 @@ export const ExpandedStudentView: React.FC = () => {
     {
       author: "person1",
       comment: "heres your plan",
-      createdAt: new Date(),
+      createdAt: new Date("14 Dec 2020 00:00:00 PDT"),
       updatedAt: new Date(),
     },
     {
@@ -196,9 +225,9 @@ export const ExpandedStudentView: React.FC = () => {
                     collapsibleYears={false}
                   />
                 )}
+                <Comments comments={mockComments} />
               </ScheduleWrapper>
             </ExpandedStudentContainer>
-            <Comments comments={mockComments} />
           </>
         )}
       </FullScheduleViewContainer>
@@ -208,21 +237,20 @@ export const ExpandedStudentView: React.FC = () => {
 
 const Comments: React.FC<CommmentsProps> = ({ comments }) => {
   return (
-    <div>
-      <CommentContainer>
-        <div>
-          <CommentHeaderText> Comments </CommentHeaderText>
-        </div>
-        {comments.map((comment: IComment) => (
-          <Comment
-            author={comment.author}
-            comment={comment.comment}
-            createdAt={comment.createdAt}
-            updatedAt={comment.updatedAt}
-          ></Comment>
-        ))}
-      </CommentContainer>
-    </div>
+    <CommentsContainer>
+      <CommentsHeader>
+        <CommentHeaderText> Comments </CommentHeaderText>
+      </CommentsHeader>
+      {comments.map((comment: IComment) => (
+        <Comment
+          author={comment.author}
+          comment={comment.comment}
+          createdAt={comment.createdAt}
+          updatedAt={comment.updatedAt}
+        ></Comment>
+      ))}
+      <CommentInput />
+    </CommentsContainer>
   );
 };
 
@@ -230,7 +258,37 @@ const Comment: React.FC<IComment> = (props: IComment) => {
   const { author, comment, createdAt, updatedAt } = props;
   return (
     <CommentHolderBody>
-      {author} : {comment}
+      <CommentHeader>
+        <CommentAuthor>{author}</CommentAuthor>
+        <CommentTimestamp>{timeago.format(createdAt)}</CommentTimestamp>
+      </CommentHeader>
+      <CommentContent>{comment}</CommentContent>
+    </CommentHolderBody>
+  );
+};
+
+const CommentInput: React.FC = () => {
+  const [comment, setComment] = useState("");
+
+  const CommentButton = GenericColorButton(
+    "rgba(21, 116, 62, 0.68)",
+    "rgba(21, 116, 62, 0.74)"
+  );
+
+  return (
+    <CommentHolderBody>
+      {" "}
+      <TextField
+        multiline
+        value={comment}
+        onChange={event => setComment(event.target.value)}
+        label={"Enter comment here"}
+        variant="outlined"
+        fullWidth
+      />
+      <SubmitCommentButton>
+        <CommentButton>Comment</CommentButton>
+      </SubmitCommentButton>
     </CommentHolderBody>
   );
 };
