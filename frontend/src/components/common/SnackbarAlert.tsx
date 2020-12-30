@@ -19,14 +19,22 @@ function Alert(props: any) {
 }
 
 export const SnackbarAlert = (props: Props) => {
+  const handleClose = (event: any, reason: any) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    props.handleClose();
+  };
+
   return (
     <Snackbar
       open={props.alertStatus !== ALERT_STATUS.None}
       autoHideDuration={6000}
-      onClose={props.handleClose}
+      onClose={handleClose}
     >
       <Alert
-        onClose={props.handleClose}
+        onClose={handleClose}
         severity={
           props.alertStatus === ALERT_STATUS.Error ? "error" : "success"
         }

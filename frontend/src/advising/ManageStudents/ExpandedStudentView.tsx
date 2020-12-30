@@ -112,14 +112,6 @@ export const ExpandedStudentView: React.FC = () => {
 
   const onEditPress = () => setEditMode(!editMode);
 
-  const handleClose = (event: any, reason: any) => {
-    if (reason === "clickaway") {
-      return;
-    }
-
-    setAlertStatus(ALERT_STATUS.None);
-  };
-
   const approvePlan = () => {
     approvePlanForUser(id, planId, plan?.schedule)
       .then(() => setAlertStatus(ALERT_STATUS.Success))
