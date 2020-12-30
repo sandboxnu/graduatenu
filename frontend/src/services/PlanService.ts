@@ -116,7 +116,6 @@ export const approvePlanForUser = (
 
 export const updatePlanLastViewed = (
   userId: number,
-  userToken: string,
   planId: number,
   currentUserId: number
 ) =>
@@ -125,7 +124,7 @@ export const updatePlanLastViewed = (
     body: JSON.stringify({ plan: { last_viewer: currentUserId } }), // sets last_viewed in the backend
     headers: {
       "Content-Type": "application/json",
-      Authorization: "Token " + userToken,
+      Authorization: "Token " + getAuthToken(),
     },
   }).then(response => response.json());
 
