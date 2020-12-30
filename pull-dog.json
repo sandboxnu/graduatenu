@@ -1,0 +1,5 @@
+{
+  "conversationMode": "singleComment",
+  "label": "pull-dog-environment-ready",
+  "dockerComposeYmlFilePaths": ["docker-compose.yml"]
+}
