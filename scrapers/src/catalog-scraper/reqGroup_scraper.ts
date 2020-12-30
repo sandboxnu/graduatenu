@@ -88,6 +88,18 @@ export function createRequirementGroup(
         sectionType === SectionType.OR &&
         currentRow.find("span.courselistcomment.commentindent").length > 0
       ) {
+        if (
+          currentRow
+            .find("span.courselistcomment.commentindent")
+            .text()
+            .includes("to") ||
+          currentRow
+            .find("span.courselistcomment.commentindent")
+            .text()
+            .includes("or higher")
+        ) {
+          sectionType = SectionType.RANGE;
+        }
         break;
       } else if (RANGETagMap.hasOwnProperty(commentSpan.text())) {
         //detected Range Tag; change section type to Range
