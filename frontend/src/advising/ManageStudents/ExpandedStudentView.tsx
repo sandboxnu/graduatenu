@@ -24,8 +24,10 @@ import { approvePlanForUser, fetchPlan } from "../../services/PlanService";
 import { LoadingSpinner } from "../../components/common/LoadingSpinner";
 import { setUserAction } from "../../state/actions/userActions";
 import { PrimaryButton } from "../../components/common/PrimaryButton";
-import MuiAlert from "@material-ui/lab/Alert";
-import Snackbar from "@material-ui/core/Snackbar";
+import {
+  ALERT_STATUS,
+  SnackbarAlert,
+} from "../../components/common/SnackbarAlert";
 
 const FullScheduleViewContainer = styled.div`
   margin-top: 30px;
@@ -59,16 +61,6 @@ const PlanActionButtonContainer = styled.div`
 interface ParamProps {
   id: string; // id of the student
   planId: string; // id of the student's plan
-}
-
-enum ALERT_STATUS {
-  None,
-  Success,
-  Error,
-}
-
-function Alert(props: any) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
 function useQuery() {
@@ -197,23 +189,14 @@ export const ExpandedStudentView: React.FC = () => {
                 </PrimaryButton>
               </PlanActionButtonContainer>
             </ExpandedStudentContainer>
+            <SnackbarAlert
+              alertStatus={alertStatus}
+              handleClose={() => setAlertStatus(ALERT_STATUS.None)}
+              successMsg={"Approved"}
+            />
           </>
         )}
       </FullScheduleViewContainer>
-      <Snackbar
-        open={alertStatus !== ALERT_STATUS.None}
-        autoHideDuration={6000}
-        onClose={handleClose}
-      >
-        <Alert
-          onClose={handleClose}
-          severity={alertStatus === ALERT_STATUS.Error ? "error" : "success"}
-        >
-          {alertStatus === ALERT_STATUS.Error
-            ? "Uh oh, something went wrong, try again!"
-            : "Approved"}
-        </Alert>
-      </Snackbar>
     </Container>
   );
 };
