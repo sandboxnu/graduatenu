@@ -154,7 +154,7 @@ export const ExpandedStudentView: React.FC = () => {
               <PlanTitle>
                 {plan!.lastRequestedApproval !== null
                   ? plan!.name + ": Awaiting Approval"
-                  : plan!.name}{" "}
+                  : plan!.name}
               </PlanTitle>
               <ButtonHeader>
                 {editMode && <AutoSavePlan />}
