@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - master
+      - no-branch
 
 name: Deploy containers to Amazon ECS
 
