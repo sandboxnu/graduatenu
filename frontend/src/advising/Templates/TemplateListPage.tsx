@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { Search } from "../../components/common/Search";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
-import { WhiteColorButton, ColorButton } from "../GenericAdvisingTemplate";
 import styled from "styled-components";
 import { LinearProgress } from "@material-ui/core";
 import { IFolderData, ITemplatePlan } from "../../models/types";
@@ -16,6 +15,10 @@ import { toggleTemplateFolderExpandedAction } from "../../state/actions/advisorA
 import { AppState } from "../../state/reducers/state";
 import { getAuthToken } from "../../utils/auth-helpers";
 import { TemplatePageState } from "./Templates";
+import {
+  RedColorButton,
+  WhiteColorButton,
+} from "../../components/common/ColoredButton";
 
 const Container = styled.div`
   margin-left: 30px;
@@ -145,9 +148,9 @@ export const TemplatesListPage: React.FC<TemplatesListPageProps> = ({
         <TemplateListContainer>
           <ButtonWrapper>
             <WhiteColorButton> Upload Plan </WhiteColorButton>
-            <ColorButton onClick={() => setPageState(TemplatePageState.NEW)}>
+            <RedColorButton onClick={() => setPageState(TemplatePageState.NEW)}>
               Create New
-            </ColorButton>
+            </RedColorButton>
           </ButtonWrapper>
           <TemplateListScrollContainer>
             <TemplatesList searchQuery={searchQuery} />

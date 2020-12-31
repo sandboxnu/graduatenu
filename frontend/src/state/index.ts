@@ -267,3 +267,6 @@ export const getAdvisorUserIdFromState = (state: AppState) =>
 
 export const getAdvisorCommentsFromState = (state: AppState) =>
   state.advisorState.comments;
+
+export const getAdvisorFullNameFromState = (state: AppState) =>
+  state.advisorState.advisor!.fullName;

@@ -15,4 +15,8 @@
 #
 class PlanComment < ApplicationRecord
     belongs_to :plan
+
+    # TODO specify that a PlanComment belongs to a user
+    # (the user that made that comment) and persist that user's 
+    # ID rather than their name.
 end

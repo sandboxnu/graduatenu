@@ -18,34 +18,19 @@ import {
   setUserPlansAction,
 } from "../../state/actions/userPlansActions";
 import { AppState } from "../../state/reducers/state";
-import { IconButton, TextField, Tooltip } from "@material-ui/core";
-import {
-  ArrowBack,
-  Check,
-  FullscreenExit,
-  KeyboardArrowDown,
-} from "@material-ui/icons";
+import { IconButton, Tooltip } from "@material-ui/core";
+import { ArrowBack, Check, FullscreenExit } from "@material-ui/icons";
 import Edit from "@material-ui/icons/Edit";
 import styled from "styled-components";
 import { PlanTitle, ButtonHeader, ScheduleWrapper, Container } from "./Shared";
 import { useHistory, useLocation, useParams } from "react-router";
-import { IComment, IUserData } from "../../models/types";
-import {
-  fetchComments,
-  fetchUser,
-  sendComment,
-} from "../../services/AdvisorService";
+import { IUserData } from "../../models/types";
+import { fetchComments, fetchUser } from "../../services/AdvisorService";
 import { fetchPlan } from "../../services/PlanService";
 import { LoadingSpinner } from "../../components/common/LoadingSpinner";
 import { setUserAction } from "../../state/actions/userActions";
-import * as timeago from "timeago.js";
-import { GenericColorButton } from "../GenericAdvisingTemplate";
-import {
-  addCommentAction,
-  setCommentsAction,
-} from "../../state/actions/advisorActions";
-import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
-import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
+import { setCommentsAction } from "../../state/actions/advisorActions";
+import { Comments } from "../../components/Schedule/Comments";
 
 const FullScheduleViewContainer = styled.div`
   margin-top: 30px;
@@ -69,63 +54,6 @@ const ExpandedStudentContainer = styled.div`
   border: 1px solid red;
   border-radius: 10px;
   padding: 30px;
-`;
-
-const CommentsHeader = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 36px;
-  background-color: rgba(21, 116, 62, 0.68);
-  padding: 0px;
-  width: 100%;
-`;
-
-const CommentsContainer = styled.div`
-  margin: 0 30px 0 0;
-`;
-
-const CommentHeaderText = styled.p`
-  font-weight: 600;
-  font-size: 16px;
-  color: white;
-`;
-
-const CommentHolderBody = styled.div<any>`
-  border: 1px solid rgba(21, 116, 62, 0.68);
-  border-top: none;
-  box-sizing: border-box;
-  position: relative;
-  height: 100%;
-  padding: 30px;
-  margin-left: 30px;
-`;
-
-const CommentHeader = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 8px;
-  margin-bottom: 14px;
-`;
-
-const CommentAuthor = styled.div`
-  font-weight: 600;
-`;
-
-const CommentTimestamp = styled.div`
-  color: dimgrey;
-`;
-
-const SubmitCommentButton = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 30px;
-`;
-
-const CommentHeaderWithDropDown = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
 `;
 
 interface ParamProps {
@@ -239,107 +167,5 @@ export const ExpandedStudentView: React.FC = () => {
         )}
       </FullScheduleViewContainer>
     </Container>
-  );
-};
-
-const Comments: React.FC = () => {
-  const [isExpanded, setIsExpanded] = useState(false);
-  const comments = useSelector((state: AppState) =>
-    getAdvisorCommentsFromState(state)
-  );
-
-  return (
-    <CommentsContainer>
-      <CommentHeaderWithDropDown>
-        <div
-          onClick={() => {
-            setIsExpanded(!isExpanded);
-          }}
-          style={{ marginRight: 4, marginLeft: 2 }}
-        >
-          {isExpanded ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-        </div>
-        <CommentsHeader>
-          <CommentHeaderText> Comments </CommentHeaderText>
-        </CommentsHeader>
-      </CommentHeaderWithDropDown>
-      {isExpanded && (
-        <div>
-          {comments.map((comment: IComment) => (
-            <Comment
-              author={comment.author}
-              comment={comment.comment}
-              createdAt={comment.createdAt}
-              updatedAt={comment.updatedAt}
-            ></Comment>
-          ))}
-          <CommentInput />
-        </div>
-      )}
-    </CommentsContainer>
-  );
-};
-
-const Comment: React.FC<IComment> = (props: IComment) => {
-  const { author, comment, createdAt, updatedAt } = props;
-  return (
-    <CommentHolderBody>
-      <CommentHeader>
-        <CommentAuthor>{author}</CommentAuthor>
-        <CommentTimestamp>{timeago.format(createdAt)}</CommentTimestamp>
-      </CommentHeader>
-      {comment}
-    </CommentHolderBody>
-  );
-};
-
-const CommentInput: React.FC = () => {
-  const [comment, setComment] = useState("");
-  const buttonDisabled = !comment;
-
-  const CommentButton = GenericColorButton(
-    "rgba(21, 116, 62, 0.68)",
-    "rgba(21, 116, 62, 0.74)"
-  );
-
-  const { planId, userId, userName } = useSelector((state: AppState) => ({
-    planId: safelyGetActivePlanIdFromState(state),
-    userId: safelyGetUserIdFromState(state),
-    userName: getUserFullNameFromState(state),
-  }));
-
-  const dispatch = useDispatch();
-
-  const handleCommentButtonClick = () => {
-    if (planId && userId) {
-      sendComment(
-        planId,
-        userId,
-        userName,
-        comment
-      ).then((response: IComment) => dispatch(addCommentAction(response)));
-      setComment("");
-    }
-  };
-
-  return (
-    <CommentHolderBody>
-      <TextField
-        multiline
-        value={comment}
-        onChange={event => setComment(event.target.value)}
-        label={"Enter comment here"}
-        variant="outlined"
-        fullWidth
-      />
-      <SubmitCommentButton>
-        <CommentButton
-          onClick={handleCommentButtonClick}
-          disabled={buttonDisabled}
-        >
-          Comment
-        </CommentButton>
-      </SubmitCommentButton>
-    </CommentHolderBody>
   );
 };
