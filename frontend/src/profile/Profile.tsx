@@ -102,6 +102,12 @@ const ProfileEmail = styled.div`
   margin-bottom: 10px;
 `;
 
+const ButtonContainer = styled.div`
+  width: 100%;
+  text-align: center;
+  margin-top: 20px;
+`;
+
 const ProfileComponent: React.FC = () => {
   const dispatch = useDispatch();
   const { user, majors, plans, catalogYear } = useSelector(
@@ -271,7 +277,11 @@ const ProfileAdvisor = (props: any) => {
   };
 
   const SaveButton = () => {
-    return <PrimaryButton onClick={() => save()}>Save</PrimaryButton>;
+    return (
+      <ButtonContainer>
+        <PrimaryButton onClick={() => save()}>Save</PrimaryButton>
+      </ButtonContainer>
+    );
   };
 
   // const ChangePassword = (props: ChangePasswordProps) => {
