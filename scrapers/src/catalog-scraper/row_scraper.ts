@@ -1,4 +1,4 @@
-import { ScraperRequirement, RowType } from "../models/types";
+import { RowType } from "../models/types";
 import {
   IAndCourse,
   IRequiredCourse,
@@ -7,8 +7,8 @@ import {
   Requirement,
   ICourseRange,
 } from "../../../common/types";
-import { createRequiredCourse, isRequirement } from "../utils/scraper_utils";
-import { RANGECourseSet, ValidSubjects } from "./catalog_scraper";
+import { createRequiredCourse } from "../utils/scraper_utils";
+import { RANGECourseSet, ValidSubjects } from "./scraper_constants";
 
 /**
  * A function that given a row, converts it into a Requirement type.
