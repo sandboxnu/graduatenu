@@ -15,6 +15,7 @@ Rails.application.routes.draw do
           put :last_viewed
           put :approve
           put :request_approval
+          put :set_primary
         end
       end
       resources :templates, only: [:index, :create]

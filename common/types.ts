@@ -326,15 +326,6 @@ export interface CourseTakenTracker {
   getTermIds: (course: string) => number[];
 }
 
-export interface IUserData {
-  fullName?: string;
-  academicYear?: number;
-  graduationYear?: number;
-  major?: Major;
-  minors?: string[];
-  plan?: Schedule;
-}
-
 /**
  * An enumeration of the different kinds of transferable exams available.
  */

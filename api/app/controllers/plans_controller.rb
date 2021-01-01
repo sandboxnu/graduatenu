@@ -116,6 +116,20 @@ class PlansController < ApplicationController
     end
   end
 
+  def set_primary
+    if authorized
+        user = User.find_by(id: params[:user_id])
+        if user
+          user.update(primary_plan_id: params[:id])
+          render status: 200, json: @controller.to_json
+        else
+          render json: {error: "No such user."}, status: :unprocessable_entity
+        end
+    else
+        render json: {error: "Unauthorized."}, status: :unprocessable_entity
+    end
+end
+
   private
 
   #parameters

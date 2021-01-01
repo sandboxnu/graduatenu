@@ -21,6 +21,7 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  nu_id                  :string
+#  primary_plan_id        :bigint(8)
 #
 # Indexes
 #

@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Popper from "@material-ui/core/Popper";
 import { Autocomplete } from "@material-ui/lab";
-import { TextField, Button } from "@material-ui/core";
+import { TextField, Button, Tooltip } from "@material-ui/core";
 import { EditPlanButton } from "./EditPlanButton";
 import styled from "styled-components";
 import { batch, connect } from "react-redux";
@@ -13,6 +13,8 @@ import {
   getAcademicYearFromState,
   getActivePlanFromState,
   getGraduationYearFromState,
+  getUserIdFromState,
+  getUserPrimaryPlanIdFromState,
 } from "../state";
 import { IPlanData } from "../models/types";
 import { Major, Schedule } from "../../../common/types";
@@ -34,11 +36,15 @@ import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import {
   setActivePlanCoopCycleAction,
   setActivePlanMajorAction,
-  setActivePlanScheduleAction,
   setActivePlanDNDScheduleAction,
   setCurrentClassCounterForActivePlanAction,
   setActivePlanCatalogYearAction,
 } from "../state/actions/userPlansActions";
+import { setPrimaryPlan } from "../services/PlanService";
+import {
+  SnackbarAlert,
+  ALERT_STATUS,
+} from "../components/common/SnackbarAlert";
 
 const PlanPopper = styled(Popper)<any>`
   margin-top: 4px;
@@ -106,6 +112,8 @@ interface ReduxStoreEditPlanProps {
   allPlans: Record<string, Schedule[]>;
   creditsTaken: number;
   name: string;
+  userId: number;
+  primaryPlanId?: number;
   catalogYear: number | null;
   academicYear: number;
   graduationYear: number;
@@ -128,6 +136,7 @@ type Props = ReduxStoreEditPlanProps & ReduxDispatchEditPlanProps;
 
 interface EditPlanPopperState {
   anchorEl: null | HTMLElement;
+  alertStatus: ALERT_STATUS;
 }
 
 export class EditPlanPopperComponent extends React.Component<
@@ -138,6 +147,7 @@ export class EditPlanPopperComponent extends React.Component<
     super(props);
     this.state = {
       anchorEl: null,
+      alertStatus: ALERT_STATUS.None,
     };
   }
 
@@ -310,21 +320,41 @@ export class EditPlanPopperComponent extends React.Component<
     );
   }
 
-  renderResetToApprovedButton() {
+  renderSetPrimaryPlan() {
+    const isDisabled =
+      this.props.primaryPlanId &&
+      this.props.primaryPlanId === this.props.plan.id;
     return (
-      <ButtonContainer>
-        <SetButton
-          variant="contained"
-          style={{ float: "right" }}
-          onClick={() =>
-            this.props.setActivePlanDNDSchedule(
-              this.props.plan.approvedSchedule
-            )
-          }
-        >
-          Reset to approved
-        </SetButton>
-      </ButtonContainer>
+      <Tooltip
+        title={
+          isDisabled
+            ? "This is already your primary plan"
+            : "Indicate your primary plan of study for your advisor"
+        }
+      >
+        <ButtonContainer>
+          <SetButton
+            variant="contained"
+            style={{ float: "right" }}
+            disabled={isDisabled}
+            onClick={() =>
+              setPrimaryPlan(this.props.userId, this.props.plan.id)
+                .then(_ => {
+                  this.setState({
+                    alertStatus: ALERT_STATUS.Success,
+                  });
+                })
+                .catch(_ => {
+                  this.setState({
+                    alertStatus: ALERT_STATUS.Error,
+                  });
+                })
+            }
+          >
+            Set As Primary Plan
+          </SetButton>
+        </ButtonContainer>
+      </Tooltip>
     );
   }
 
@@ -384,10 +414,15 @@ export class EditPlanPopperComponent extends React.Component<
               {!!this.props.plan.major &&
                 !!this.props.plan.coopCycle &&
                 this.props.plan.approvedSchedule &&
-                this.renderResetToApprovedButton()}
+                this.renderSetPrimaryPlan()}
             </PlanCard>
           </ClickAwayListener>
         </PlanPopper>
+        <SnackbarAlert
+          alertStatus={this.state.alertStatus}
+          handleClose={() => this.setState({ alertStatus: ALERT_STATUS.None })}
+          successMsg="Set Primary Plan"
+        />
       </div>
     );
   }
@@ -399,6 +434,8 @@ const mapStateToProps = (state: AppState) => ({
   allPlans: getPlansFromState(state),
   creditsTaken: getTakenCreditsFromState(state),
   name: getUserFullNameFromState(state),
+  userId: getUserIdFromState(state),
+  primaryPlanId: getUserPrimaryPlanIdFromState(state),
   catalogYear: getActivePlanCatalogYearFromState(state),
   academicYear: getAcademicYearFromState(state)!,
   graduationYear: getGraduationYearFromState(state)!,

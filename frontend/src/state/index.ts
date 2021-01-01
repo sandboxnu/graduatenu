@@ -32,6 +32,9 @@ export const safelyGetUserIdFromState = (state: AppState) =>
 export const getUserFullNameFromState = (state: AppState) =>
   getUserFromState(state).fullName;
 
+export const getUserPrimaryPlanIdFromState = (state: AppState) =>
+  getUserFromState(state).primaryPlanId;
+
 /**
  * Get the list of completed requirements from the AppState
  * @param state the AppState
