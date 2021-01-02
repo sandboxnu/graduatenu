@@ -13,6 +13,7 @@ import {
   fetchPlansErrorAction,
 } from "../actions/plansActions";
 import produce from "immer";
+import { majorWithConcentrationData } from "../../data/mockData";
 
 /**
  * State to capture the major api fetch process.
@@ -62,6 +63,8 @@ export const majorsReducer = (
         const majors: Major[] = action.payload.majors;
         draft.isFetchingMajors = false;
         draft.majors = majors;
+        // TODO: remove this mock major :
+        draft.majors.push(majorWithConcentrationData);
         return draft;
       case getType(fetchMajorsErrorAction):
         const errorMsg: string = action.payload.majorsError;

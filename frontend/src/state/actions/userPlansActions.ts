@@ -55,12 +55,17 @@ export const setActivePlanDNDScheduleAction = createAction(
 )();
 
 export const setActivePlanMajorAction = createAction(
-  "schedule/SET_ACTIVE_PLAN_MAJOR",
+  "userPlans/SET_ACTIVE_PLAN_MAJOR",
   (major: string | null) => ({ major })
 )();
 
+export const setActivePlanConcentrationAction = createAction(
+  "userPlans/SET_ACTIVE_PLAN_CONCENTRATION",
+  (concentration: string | null) => ({ concentration })
+)();
+
 export const setActivePlanCoopCycleAction = createAction(
-  "schedule/SET_ACTIVE_PLAN_COOP_CYCLE",
+  "userPlans/SET_ACTIVE_PLAN_COOP_CYCLE",
   (
     coopCycle: string | null,
     academicYear: number,

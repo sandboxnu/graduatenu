@@ -212,6 +212,7 @@ export interface IPlanData {
   isCurrentlyBeingEditedByAdvisor: boolean;
   lastViewer: number; // a user id
   lastRequestedApproval: Date | null;
+  concentration?: string;
 }
 
 /**
