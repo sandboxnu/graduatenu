@@ -159,6 +159,7 @@ export interface IUserData {
   graduationYear: number | null;
   catalogYear: number | null;
   major: string | null;
+  concentration?: string | null;
   coopCycle: string | null;
   nuId: string;
   isAdvisor: boolean;
@@ -212,7 +213,7 @@ export interface IPlanData {
   isCurrentlyBeingEditedByAdvisor: boolean;
   lastViewer: number; // a user id
   lastRequestedApproval: Date | null;
-  concentration?: string;
+  concentration?: string | null;
 }
 
 /**

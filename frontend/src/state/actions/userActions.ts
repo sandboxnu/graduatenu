@@ -34,6 +34,11 @@ export const setUserMajorAction = createAction(
   })
 )();
 
+export const setUserConcentrationAction = createAction(
+  "userPlans/SET_USER_CONCENTRATION",
+  (concentration: string | null) => ({ concentration })
+)();
+
 export const setUserCoopCycleAction = createAction(
   "user/SET_COOP_CYCLE",
   (coopCycle: string | null) => ({

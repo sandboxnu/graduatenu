@@ -16,6 +16,7 @@ import {
   setCompletedRequirementsAction,
   setTransferCoursesAction,
   setUserCatalogYearAction,
+  setUserConcentrationAction,
 } from "../actions/userActions";
 import { IUserData } from "../../models/types";
 import { ScheduleCourse } from "../../../../common/types";
@@ -50,6 +51,11 @@ export const userReducer = (
       case getType(setUserMajorAction): {
         draft.user!.major = action.payload.major;
         draft.user!.coopCycle = null;
+        draft.user!.concentration = null;
+        return draft;
+      }
+      case getType(setUserConcentrationAction): {
+        draft.user!.concentration = action.payload.concentration;
         return draft;
       }
       case getType(setAcademicYearAction): {
