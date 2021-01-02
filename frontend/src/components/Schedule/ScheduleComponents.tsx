@@ -31,6 +31,7 @@ import { Year } from "../Year";
 import { TransferCredits } from "../TransferCreditHolder";
 import { LoadingSpinner } from "../common/LoadingSpinner";
 import ScheduleChangeTracker from "../../utils/ScheduleChangeTracker";
+import { truncate } from "lodash";
 
 const OuterContainer = styled.div`
   display: flex;
@@ -274,7 +275,11 @@ export const EditableSchedule: React.FC<Props> = props => {
         draggableId,
         currentClassCounter
       );
-      console.log(destination, source, draggableId);
+      ChangeTracker.addMoveClassChange(
+        draggableId,
+        true,
+        destination.droppableId
+      );
       incrementCurrentClassCounter();
     } else {
       ChangeTracker.addMoveClassChange(
@@ -282,13 +287,6 @@ export const EditableSchedule: React.FC<Props> = props => {
         false,
         destination.droppableId,
         source.drooppableId
-      );
-      console.log(
-        JSON.stringify(destination) +
-          " | " +
-          JSON.stringify(source) +
-          " | " +
-          JSON.stringify(draggableId)
       );
       moveCourse(activePlan, destination, source, setDNDSchedule);
     }
