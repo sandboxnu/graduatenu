@@ -277,7 +277,7 @@ export const EditableSchedule: React.FC<Props> = props => {
       console.log(destination, source, draggableId);
       incrementCurrentClassCounter();
     } else {
-      ChangeTracker.addChange(
+      ChangeTracker.addMoveClassChange(
         draggableId,
         false,
         destination.droppableId,

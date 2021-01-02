@@ -27,7 +27,7 @@ class ScheduleChangeTracker {
     return ScheduleChangeTracker.instance;
   }
 
-  public addChange(
+  public addMoveClassChange(
     course: string,
     isFromSidebar: boolean,
     destinationSemester: number,
@@ -49,6 +49,14 @@ class ScheduleChangeTracker {
     const sourceSemesterYear = convertTermIdToYear(sourceSemester!);
     const source = sourceSemesterSeason + " " + sourceSemesterYear;
     console.log("Moved " + course + " from " + source + " to " + destination);
+  }
+
+  public addRemoveClassChange(course: string, semester: number): void {
+    const semesterSeason = convertTermIdToSeasonString(semester);
+    const semesterYear = convertTermIdToYear(semester);
+    const sem = semesterSeason + " " + semesterYear;
+
+    console.log("Deleted " + course + " from " + sem);
   }
 
   public getChanges() {
