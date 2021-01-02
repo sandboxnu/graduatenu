@@ -116,7 +116,6 @@ export const approvePlanForUser = (
 
 export const updatePlanLastViewed = (
   userId: number,
-  userToken: string,
   planId: number,
   currentUserId: number
 ) =>
@@ -125,7 +124,7 @@ export const updatePlanLastViewed = (
     body: JSON.stringify({ plan: { last_viewer: currentUserId } }), // sets last_viewed in the backend
     headers: {
       "Content-Type": "application/json",
-      Authorization: "Token " + userToken,
+      Authorization: "Token " + getAuthToken(),
     },
   }).then(response => response.json());
 
@@ -137,6 +136,15 @@ export const requestApproval = (
   fetch(`/api/users/${userId}/plans/${planId}/request_approval`, {
     method: "PUT",
     body: JSON.stringify({ plan: { advisor_email: advisorEmail } }),
+    headers: {
+      Authorization: "Token " + getAuthToken(),
+      "Content-Type": "application/json",
+    },
+  }).then(response => response.json());
+
+export const setPrimaryPlan = (userId: number, planId: number) =>
+  fetch(`/api/users/${userId}/plans/${planId}/set_primary`, {
+    method: "PUT",
     headers: {
       Authorization: "Token " + getAuthToken(),
       "Content-Type": "application/json",

@@ -11,7 +11,7 @@ import {
 } from "./GenericOnboarding";
 import { APExamGroups2020To2021 } from "../../../common/ap_exams";
 import { IBExamGroups2020To2021 } from "../../../common/ib_exams";
-import { createPlanForUser } from "../services/PlanService";
+import { createPlanForUser, setPrimaryPlan } from "../services/PlanService";
 import {
   getAcademicYearFromState,
   getGraduationYearFromState,
@@ -228,6 +228,7 @@ const TransferableCreditScreen: React.FC = () => {
         catalog_year: catalogYear,
       }).then(response => {
         dispatch(addNewPlanAction(response.plan, academicYear));
+        setPrimaryPlan(userId, response.plan.id);
       });
     };
 

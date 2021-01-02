@@ -19,21 +19,11 @@ const ColorButton = withStyles((theme: Theme) => ({
   },
 }))(Button);
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    margin: {
-      marginTop: "24px",
-    },
-  })
-);
-
 export function PrimaryButton(props: any) {
-  const classes = useStyles();
   return (
     <ColorButton
       variant="contained"
       color="primary"
-      className={classes.margin}
       onClick={props.onClick}
       disabled={props.disabled}
     >

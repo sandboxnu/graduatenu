@@ -162,6 +162,7 @@ export interface IUserData {
   coopCycle: string | null;
   nuId: string;
   isAdvisor: boolean;
+  primaryPlanId?: number;
   examCredits: TransferableExam[];
   transferCourses: ScheduleCourse[];
   completedCourses: ScheduleCourse[];
