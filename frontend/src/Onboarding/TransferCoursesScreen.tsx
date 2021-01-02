@@ -15,7 +15,7 @@ import {
 import {
   setCompletedCoursesAction,
   setTransferCoursesAction,
-} from "../state/actions/userActions";
+} from "../state/actions/studentActions";
 import styled from "styled-components";
 import { fetchCourse } from "../api";
 import { withRouter, RouteComponentProps } from "react-router-dom";

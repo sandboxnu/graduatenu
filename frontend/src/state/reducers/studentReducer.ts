@@ -1,7 +1,7 @@
-import { IRequiredCourse } from "./../../../../common/types";
+import { IRequiredCourse } from "../../../../common/types";
 import produce from "immer";
 import { getType } from "typesafe-actions";
-import { UserAction, UserPlansAction } from "../actions";
+import { StudentAction, UserPlansAction } from "../actions";
 import {
   setAcademicYearAction,
   setGraduationYearAction,
@@ -9,69 +9,69 @@ import {
   setExamCreditsAction,
   resetUserAction,
   setUserMajorAction,
-  setUserAction,
+  setStudentAction,
   addTransferClassAction,
   removeTransferClassAction,
   setCompletedCoursesAction,
   setCompletedRequirementsAction,
   setTransferCoursesAction,
   setUserCatalogYearAction,
-} from "../actions/userActions";
+} from "../actions/studentActions";
 import { IUserData } from "../../models/types";
 import { ScheduleCourse } from "../../../../common/types";
 
-export interface UserState {
-  user?: IUserData;
+export interface StudentState {
+  student?: IUserData;
   completedRequirements: IRequiredCourse[]; // only used in onboarding flow
 }
 
-const initialState: UserState = {
-  user: undefined,
+const initialState: StudentState = {
+  student: undefined,
   completedRequirements: [],
 };
 
-export const userReducer = (
-  state: UserState = initialState,
-  action: UserAction | UserPlansAction
+export const studentReducer = (
+  state: StudentState = initialState,
+  action: StudentAction | UserPlansAction
 ) => {
   return produce(state, draft => {
     switch (action.type) {
-      case getType(setUserAction): {
-        draft.user = action.payload.user;
+      case getType(setStudentAction): {
+        draft.student = action.payload.student;
         // TODO: remove these once backend is hooked up for completed/transfer courses
-        if (draft.user.completedCourses === undefined) {
-          draft.user.completedCourses = [];
+        if (draft.student.completedCourses === undefined) {
+          draft.student.completedCourses = [];
         }
-        if (draft.user.transferCourses === undefined) {
-          draft.user.transferCourses = [];
+        if (draft.student.transferCourses === undefined) {
+          draft.student.transferCourses = [];
         }
         return draft;
       }
       case getType(setUserMajorAction): {
-        draft.user!.major = action.payload.major;
-        draft.user!.coopCycle = null;
+        draft.student!.major = action.payload.major;
+        draft.student!.coopCycle = null;
         return draft;
       }
       case getType(setAcademicYearAction): {
-        draft.user!.academicYear = action.payload.academicYear;
+        draft.student!.academicYear = action.payload.academicYear;
         return draft;
       }
       case getType(setGraduationYearAction): {
-        draft.user!.graduationYear = action.payload.graduationYear;
+        draft.student!.graduationYear = action.payload.graduationYear;
         return draft;
       }
       case getType(setUserCoopCycleAction): {
-        draft.user!.coopCycle = action.payload.coopCycle;
+        draft.student!.coopCycle = action.payload.coopCycle;
         return draft;
       }
       case getType(setUserCatalogYearAction): {
-        draft.user!.catalogYear = action.payload.catalogYear;
-        draft.user!.major = null;
-        draft.user!.coopCycle = null;
+        draft.student!.catalogYear = action.payload.catalogYear;
+        draft.student!.major = null;
+        draft.student!.coopCycle = null;
         return draft;
       }
       case getType(setExamCreditsAction): {
-        draft.user!.examCredits = action.payload.examCredits;
+        draft.student!.examCredits = action.payload.examCredits;
         return draft;
       }
       case getType(resetUserAction): {
@@ -79,14 +79,14 @@ export const userReducer = (
       }
       case getType(addTransferClassAction): {
         const { courses } = action.payload;
-        draft.user!.transferCourses.push(...courses);
+        draft.student!.transferCourses.push(...courses);
 
         return draft;
       }
       case getType(removeTransferClassAction): {
         const { course } = action.payload;
 
-        draft.user!.transferCourses = draft.user!.transferCourses.filter(
+        draft.student!.transferCourses = draft.student!.transferCourses.filter(
           c => c.classId !== course.classId
         );
 
@@ -103,11 +103,11 @@ export const userReducer = (
           (course1: ScheduleCourse, course2: ScheduleCourse) =>
             course1.classId.toString().localeCompare(course2.classId.toString())
         );
-        draft.user!.completedCourses = completedCourses;
+        draft.student!.completedCourses = completedCourses;
         return draft;
       }
       case getType(setTransferCoursesAction): {
-        draft.user!.transferCourses = action.payload.transferCourses;
+        draft.student!.transferCourses = action.payload.transferCourses;
         return draft;
       }
     }

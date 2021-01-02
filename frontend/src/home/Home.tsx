@@ -42,7 +42,7 @@ import {
 import { AddPlan } from "./AddPlanPopper";
 
 import { SwitchPlanPopper } from "./SwitchPlanPopper";
-import { resetUserAction } from "../state/actions/userActions";
+import { resetUserAction } from "../state/actions/studentActions";
 import { removeAuthTokenFromCookies } from "../utils/auth-helpers";
 import { RequestFeedbackPopper } from "./RequestFeedbackPopper";
 import {

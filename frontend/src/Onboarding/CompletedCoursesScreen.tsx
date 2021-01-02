@@ -17,7 +17,7 @@ import {
 } from "./GenericOnboarding";
 import { AddBlock } from "../components/ClassBlocks/AddBlock";
 import { Link as ButtonLink, Collapse, Grid, Paper } from "@material-ui/core";
-import { setCompletedRequirementsAction } from "../state/actions/userActions";
+import { setCompletedRequirementsAction } from "../state/actions/studentActions";
 import { getUserMajorFromState } from "../state";
 import { AddClassSearchModal } from "../components/AddClassSearchModal";
 
@@ -281,8 +281,5 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 });
 
 export const CompletedCoursesScreen = withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(CompletedCoursesComponent)
+  connect(mapStateToProps, mapDispatchToProps)(CompletedCoursesComponent)
 );

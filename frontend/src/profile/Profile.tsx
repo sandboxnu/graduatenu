@@ -12,10 +12,10 @@ import {
   setUserCoopCycleAction,
   setUserMajorAction,
   setUserCatalogYearAction,
-} from "../state/actions/userActions";
+} from "../state/actions/studentActions";
 import {
   getMajorsFromState,
-  getUserFromState,
+  getStudentFromState,
   getPlansFromState,
   getUserCatalogYearFromState,
 } from "../state";
@@ -112,7 +112,7 @@ const ProfileComponent: React.FC = () => {
   const dispatch = useDispatch();
   const { user, majors, plans, catalogYear } = useSelector(
     (state: AppState) => ({
-      user: getUserFromState(state), // best to update this screen when any part of the user changes
+      user: getStudentFromState(state), // best to update this screen when any part of the user changes
       majors: getMajorsFromState(state),
       plans: getPlansFromState(state),
       catalogYear: getUserCatalogYearFromState(state),
@@ -222,7 +222,7 @@ const ProfileComponent: React.FC = () => {
     );
   };
 
-  /* 
+  /*
 TODO: // Add Advsisors to profile page once we support them
 const ProfileAdvisor = (props: any) => {
     return (

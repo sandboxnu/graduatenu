@@ -2,7 +2,7 @@ import { Grid, Paper } from "@material-ui/core";
 import React, { useState } from "react";
 import { useDispatch, shallowEqual, useSelector } from "react-redux";
 import { TransferableExam, TransferableExamGroup } from "../../../common/types";
-import { setExamCreditsAction } from "../state/actions/userActions";
+import { setExamCreditsAction } from "../state/actions/studentActions";
 import {
   MainTitleText,
   OnboardingSelectionTemplate,

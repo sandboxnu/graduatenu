@@ -14,7 +14,7 @@ import {
   setUserCoopCycleAction,
   setUserMajorAction,
   setUserCatalogYearAction,
-} from "../state/actions/userActions";
+} from "../state/actions/studentActions";
 import Loader from "react-loader-spinner";
 import {
   FormControl,

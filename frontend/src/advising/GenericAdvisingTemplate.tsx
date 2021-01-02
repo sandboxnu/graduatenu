@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import { RedColorButton } from "../components/common/ColoredButtons";
 import { removeAuthTokenFromCookies } from "../utils/auth-helpers";
 import { useDispatch } from "react-redux";
-import { resetUserAction } from "../state/actions/userActions";
+import { resetUserAction } from "../state/actions/studentActions";
 
 const Header = styled.div`
   display: flex;
