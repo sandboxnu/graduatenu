@@ -27,43 +27,34 @@ class ScheduleChangeTracker {
     return ScheduleChangeTracker.instance;
   }
 
+  getSemesterSeasonYear(semester: number) {
+    const semesterSeason = convertTermIdToSeasonString(semester);
+    const semesterYear = convertTermIdToYear(semester);
+    return semesterSeason + " " + semesterYear;
+  }
+
   public addMoveClassChange(
     course: string,
     isFromSidebar: boolean,
     destinationSemester: number,
     sourceSemester?: number
   ): void {
-    const destinationSemesterSeason = convertTermIdToSeasonString(
-      destinationSemester
-    );
-    const destinationSemesterYear = convertTermIdToYear(destinationSemester);
-    const destination =
-      destinationSemesterSeason + " " + destinationSemesterYear;
-
+    const destination = this.getSemesterSeasonYear(destinationSemester);
     if (isFromSidebar) {
       console.log("Moved " + course + " from sidebar to " + destination);
       return;
     }
-
-    const sourceSemesterSeason = convertTermIdToSeasonString(sourceSemester!);
-    const sourceSemesterYear = convertTermIdToYear(sourceSemester!);
-    const source = sourceSemesterSeason + " " + sourceSemesterYear;
+    const source = this.getSemesterSeasonYear(sourceSemester!);
     console.log("Moved " + course + " from " + source + " to " + destination);
   }
 
   public addRemoveClassChange(course: string, semester: number): void {
-    const semesterSeason = convertTermIdToSeasonString(semester);
-    const semesterYear = convertTermIdToYear(semester);
-    const sem = semesterSeason + " " + semesterYear;
-
+    const sem = this.getSemesterSeasonYear(semester);
     console.log("Deleted " + course + " from " + sem);
   }
 
   public addAddClassChange(course: string, semester: number): void {
-    const semesterSeason = convertTermIdToSeasonString(semester);
-    const semesterYear = convertTermIdToYear(semester);
-    const sem = semesterSeason + " " + semesterYear;
-
+    const sem = this.getSemesterSeasonYear(semester);
     console.log("Added " + course + " to " + sem);
   }
 
