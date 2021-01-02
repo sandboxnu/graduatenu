@@ -39,6 +39,7 @@ import {
   setCurrentClassCounterForActivePlanAction,
   setActivePlanCatalogYearAction,
 } from "../state/actions/userPlansActions";
+import { SaveOnChangeConcentrationDropdown } from "../components/ConcentrationDropdown";
 
 const PlanPopper = styled(Popper)<any>`
   margin-top: 4px;
@@ -373,6 +374,7 @@ export class EditPlanPopperComponent extends React.Component<
               </StandingText>
               {this.renderCatalogYearDropdown()}
               {!!this.props.plan.catalogYear && this.renderMajorDropDown()}
+              <SaveOnChangeConcentrationDropdown isUserLevel={false} />
               {!!this.props.plan.major && this.renderPlansDropDown()}
               {!!this.props.plan.major &&
               !!this.props.plan.coopCycle &&

@@ -43,24 +43,24 @@ const SaveInParentConcentrationDropdown: React.FC<SaveInParentConcentrationDropd
 
   return (
     <>
-      major && (
-      <Autocomplete
-        disableListWrap
-        options={concentrationNames}
-        renderInput={params => (
-          <TextField
-            {...params}
-            variant="outlined"
-            label="Concentration"
-            fullWidth
-          />
-        )}
-        value={concentration}
-        onChange={(e, value) => {
-          setConcentration(value);
-        }}
-      />
-      )
+      {major && (
+        <Autocomplete
+          disableListWrap
+          options={concentrationNames}
+          renderInput={params => (
+            <TextField
+              {...params}
+              variant="outlined"
+              label="Concentration"
+              fullWidth
+            />
+          )}
+          value={concentration}
+          onChange={(e, value) => {
+            setConcentration(value);
+          }}
+        />
+      )}
     </>
   );
 };
@@ -92,3 +92,5 @@ const SaveOnChangeConcentrationDropdown: React.FC<SaveOnChangeConcentrationDropd
     />
   );
 };
+
+export { SaveInParentConcentrationDropdown, SaveOnChangeConcentrationDropdown };

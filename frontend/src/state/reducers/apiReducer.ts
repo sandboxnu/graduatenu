@@ -1,4 +1,4 @@
-import { Major, Schedule } from "../../../../common/types";
+import { Concentrations, Major, Schedule } from "../../../../common/types";
 import { MajorsApiAction } from "../actions";
 import { PlansApiAction } from "../actions";
 import { getType } from "typesafe-actions";
@@ -61,6 +61,15 @@ export const majorsReducer = (
         return draft;
       case getType(fetchMajorsSuccessAction):
         const majors: Major[] = action.payload.majors;
+        // TODO remove once concentrations are in the backend
+        const DEFAULT_CONCENTRATIONS: Concentrations = {
+          minOptions: 0,
+          maxOptions: 1,
+          concentrationOptions: [],
+        };
+        majors.forEach(
+          (major: any) => (major.concentrations = DEFAULT_CONCENTRATIONS)
+        );
         draft.isFetchingMajors = false;
         draft.majors = majors;
         // TODO: remove this mock major :
