@@ -59,6 +59,14 @@ class ScheduleChangeTracker {
     console.log("Deleted " + course + " from " + sem);
   }
 
+  public addAddClassChange(course: string, semester: number): void {
+    const semesterSeason = convertTermIdToSeasonString(semester);
+    const semesterYear = convertTermIdToYear(semester);
+    const sem = semesterSeason + " " + semesterYear;
+
+    console.log("Added " + course + " to " + sem);
+  }
+
   public getChanges() {
     // ...
   }
