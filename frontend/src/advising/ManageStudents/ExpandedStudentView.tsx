@@ -234,11 +234,13 @@ export const ExpandedStudentView: React.FC = () => {
                 <ScheduleWrapper>
                   {editMode && !plan!.isCurrentlyBeingEditedByStudent ? (
                     <EditableSchedule
+                      sidebarPresent
                       transferCreditPresent
                       collapsibleYears={false}
                     />
                   ) : (
                     <NonEditableScheduleStudentView
+                      sidebarPresent
                       transferCreditPresent
                       collapsibleYears={false}
                     />
