@@ -8,28 +8,6 @@ import { useDispatch } from "react-redux";
 import { resetUserAction } from "../state/actions/userActions";
 import { NORTHEASTERN_RED } from "../constants";
 
-export const WhiteColorButton = withStyles((theme: Theme) => ({
-  root: {
-    marginRight: "20px",
-    border: "1px solid red",
-    color: NORTHEASTERN_RED,
-    backgroundColor: "#ffffff",
-    "&:hover": {
-      backgroundColor: "#e9e9e9",
-    },
-  },
-}))(Button);
-
-export const ColorButton = withStyles((theme: Theme) => ({
-  root: {
-    color: "#ffffff",
-    backgroundColor: NORTHEASTERN_RED,
-    "&:hover": {
-      backgroundColor: "#DB4747",
-    },
-  },
-}))(Button);
-
 const Header = styled.div`
   display: flex;
   flex-direction: row;

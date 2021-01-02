@@ -23,7 +23,9 @@ import styled from "styled-components";
 import { PlanTitle, ButtonHeader, ScheduleWrapper, Container } from "./Shared";
 import { Prompt, useHistory, useLocation, useParams } from "react-router";
 import { IUserData } from "../../models/types";
-import { fetchUser } from "../../services/AdvisorService";
+import { fetchComments, fetchUser } from "../../services/AdvisorService";
+import { setCommentsAction } from "../../state/actions/advisorActions";
+import { Comments } from "../../components/Schedule/Comments";
 import {
   approvePlanForUser,
   fetchPlan,
@@ -129,6 +131,9 @@ export const ExpandedStudentView: React.FC = () => {
             });
             setStudent(user);
             setLoading(false);
+            fetchComments(planId, id).then(response => {
+              dispatch(setCommentsAction(response));
+            });
           })
           .catch(e => console.log(e));
       })
@@ -238,6 +243,7 @@ export const ExpandedStudentView: React.FC = () => {
                       collapsibleYears={false}
                     />
                   )}
+                  <Comments />
                 </ScheduleWrapper>
                 <PlanActionButtonContainer>
                   <PrimaryButton onClick={() => approvePlan()}>

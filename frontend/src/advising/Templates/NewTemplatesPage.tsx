@@ -4,10 +4,13 @@ import React from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
+import {
+  WhiteColorButton,
+  RedColorButton,
+} from "../../components/common/ColoredButton";
 import { getMajorsFromState, getPlansFromState } from "../../state";
 import { AppState } from "../../state/reducers/state";
 import { planToString } from "../../utils";
-import { WhiteColorButton, ColorButton } from "../GenericAdvisingTemplate";
 import { TemplatePageState } from "./Templates";
 
 const Container = styled.div`
@@ -114,9 +117,9 @@ export const NewTemplatesPage: React.FC<TemplatesPageProps> = ({
         >
           Previous
         </WhiteColorButton>
-        <ColorButton style={{ width: buttonSize }} disabled={disabled}>
+        <RedColorButton style={{ width: buttonSize }} disabled={disabled}>
           Next
-        </ColorButton>
+        </RedColorButton>
       </ButtonContainer>
     </NewTemplatesPageContainer>
   );

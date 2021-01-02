@@ -321,6 +321,13 @@ export interface ICreateTemplatePlan {
   folder_name: string | null; // only not null if folder exists
 }
 
+export interface IComment {
+  author: string;
+  comment: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 /** ------------------------------------------------------------------------
  *
  *            OLD STUFF FOLLOWS ! This stuff is big outdated and is only

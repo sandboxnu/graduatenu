@@ -1,3 +1,4 @@
+import { IComment } from "../models/types";
 import { getAuthToken } from "../utils/auth-helpers";
 
 export interface IAbrStudent {
@@ -49,3 +50,48 @@ export const fetchUser = (userId: number) =>
       Authorization: "Token " + getAuthToken(),
     },
   }).then(response => response.json());
+
+export const fetchComments = (planId: number, userId: number) =>
+  fetch(`/api/users/${userId}/plans/${planId}/plan_comments`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Token " + getAuthToken(),
+    },
+  }).then(response =>
+    response.json().then((comments: IComment[]) => {
+      return comments.map((comment: IComment) => ({
+        ...comment,
+        createdAt: new Date(comment.createdAt), // convert string timestamp to a Date object
+        updatedAt: new Date(comment.updatedAt), // convert string timestamp to a Date object
+      }));
+    })
+  );
+
+/**
+ * Sends a comment for a plan
+ */
+export const sendComment = (
+  planId: number,
+  userId: number,
+  author: string,
+  comment: string
+): Promise<IComment> =>
+  fetch(`/api/users/${userId}/plans/${planId}/plan_comments/`, {
+    method: "POST",
+    body: JSON.stringify({ author: author, comment: comment }),
+
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Token " + getAuthToken(),
+    },
+  }).then(response =>
+    response.json().then(comment => {
+      const { planComment } = comment;
+      return {
+        ...planComment,
+        createdAt: new Date(planComment.createdAt), // convert string timestamp to a Date object
+        updatedAt: new Date(planComment.updatedAt), // convert string timestamp to a Date object
+      };
+    })
+  );
