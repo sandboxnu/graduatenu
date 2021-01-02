@@ -7,8 +7,11 @@ import {
 import { AutoSavePlan } from "../../home/AutoSavePlan";
 import {
   getActivePlanStatusFromState,
+  getAdvisorFullNameFromState,
   getAdvisorUserIdFromState,
+  getUserIdFromState,
   safelyGetActivePlanFromState,
+  safelyGetUserIdFromState,
 } from "../../state";
 import {
   expandAllYearsForActivePlanAction,
@@ -23,7 +26,11 @@ import styled from "styled-components";
 import { PlanTitle, ButtonHeader, ScheduleWrapper, Container } from "./Shared";
 import { Prompt, useHistory, useLocation, useParams } from "react-router";
 import { IUserData } from "../../models/types";
-import { fetchComments, fetchUser } from "../../services/AdvisorService";
+import {
+  fetchComments,
+  fetchUser,
+  sendComment,
+} from "../../services/AdvisorService";
 import { setCommentsAction } from "../../state/actions/advisorActions";
 import { Comments } from "../../components/Schedule/Comments";
 import {
@@ -40,6 +47,7 @@ import {
   ALERT_STATUS,
   SnackbarAlert,
 } from "../../components/common/SnackbarAlert";
+import ScheduleChangeTracker from "../../utils/ScheduleChangeTracker";
 
 const FullScheduleViewContainer = styled.div`
   margin-top: 30px;
@@ -102,11 +110,19 @@ export const ExpandedStudentView: React.FC = () => {
     ALERT_STATUS.None
   );
 
-  const { plan, activePlanStatus, advisorId } = useSelector(
+  const {
+    plan,
+    activePlanStatus,
+    advisorId,
+    advisorName,
+    studentId,
+  } = useSelector(
     (state: AppState) => ({
       plan: safelyGetActivePlanFromState(state),
       activePlanStatus: getActivePlanStatusFromState(state),
       advisorId: getAdvisorUserIdFromState(state),
+      advisorName: getAdvisorFullNameFromState(state),
+      studentId: safelyGetUserIdFromState(state),
     }),
     shallowEqual
   );
@@ -138,6 +154,22 @@ export const ExpandedStudentView: React.FC = () => {
           .catch(e => console.log(e));
       })
       .catch(e => console.log(e));
+
+    const sendPlanUpdates = () => {
+      const changes = ScheduleChangeTracker.getInstance().getChanges();
+      console.log(changes);
+      if (changes !== "" && plan !== undefined) {
+        sendComment(plan.id, studentId, advisorName, changes);
+        ScheduleChangeTracker.getInstance().clearChanges();
+      }
+    };
+
+    window.addEventListener("beforeunload", sendPlanUpdates);
+
+    return function cleanup() {
+      window.removeEventListener("beforeunload", sendPlanUpdates);
+      sendPlanUpdates();
+    };
   }, []);
 
   const callUpdatePlanLastViewedOnInterval = () => {
