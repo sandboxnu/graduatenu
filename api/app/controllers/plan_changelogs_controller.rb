@@ -12,7 +12,7 @@ class PlanChangelogsController < ApplicationController
     end
 
     def show
-        if @plan_changelogs
+        if @plan_changelog
             render :show
         else
             render json: {error: "No such plan changelog."}, status: :unprocessable_entity
@@ -20,7 +20,7 @@ class PlanChangelogsController < ApplicationController
     end
 
     def create
-        if @plan_comment = PlanChangelog.create(plan_changelog_params.merge({plan_id: params[:plan_id]}))
+        if @plan_changelog = PlanChangelog.create(plan_changelog_params.merge({plan_id: params[:plan_id]}))
             render :show
         else
             render json: {error: "Unable to store plan changelog."}, status: :unprocessable_entity
@@ -40,7 +40,7 @@ class PlanChangelogsController < ApplicationController
     end
 
     def plan_changelog_params
-        params.require(:plan_comment).permit(:author_id, :author_name, :log)
+        params.require(:plan_comment).permit(:log)
     end
 end
 
