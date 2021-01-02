@@ -31,8 +31,8 @@ class PlanChangelogsController < ApplicationController
         @plan = Plan.find_by_id(params[:plan_id])
     end
 
-    def set_plan
-        @user = Plan.find_by_id(params[:user_id])
+    def set_user
+        @user = User.find_by_id(params[:user_id])
     end
 
     def set_plan_changelog
