@@ -30,7 +30,7 @@ class ScheduleChangeTracker {
   getSemesterSeasonYear(semester: number) {
     const semesterSeason = convertTermIdToSeasonString(semester);
     const semesterYear = convertTermIdToYear(semester);
-    return semesterSeason + ", " + semesterYear;
+    return semesterSeason + " " + semesterYear;
   }
 
   public addMoveClassChange(
@@ -41,30 +41,30 @@ class ScheduleChangeTracker {
   ): void {
     const destination = this.getSemesterSeasonYear(destinationSemester);
     if (isFromSidebar) {
-      console.log("Moved " + course + " from sidebar to " + destination);
+      this.changes.push("Moved " + course + " from sidebar to " + destination);
       return;
     }
     // TODO: Source id seems to be broken
     // const source = this.getSemesterSeasonYear(sourceSemester!);
-    console.log("Moved " + course + " to " + destination);
+    this.changes.push("Moved " + course + " to " + destination);
   }
 
   public addRemoveClassChange(course: string, semester: number): void {
     const sem = this.getSemesterSeasonYear(semester);
-    console.log("Deleted " + course + " from " + sem);
+    this.changes.push("Deleted " + course + " from " + sem);
   }
 
   public addAddClassChange(course: string, semester: number): void {
     const sem = this.getSemesterSeasonYear(semester);
-    console.log("Added " + course + " to " + sem);
+    this.changes.push("Added " + course + " to " + sem);
   }
 
   public getChanges() {
-    // ...
+    return this.changes.join("\n");
   }
 
   public clearChanges(): void {
-    // ...
+    this.changes = [];
   }
 }
 

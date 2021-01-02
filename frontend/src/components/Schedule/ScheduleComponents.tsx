@@ -276,14 +276,20 @@ export const EditableSchedule: React.FC<Props> = props => {
         currentClassCounter
       );
       ChangeTracker.addMoveClassChange(
-        draggableId,
+        draggableId
+          .split(" ")
+          .slice(0, 2)
+          .join(""),
         true,
         destination.droppableId
       );
       incrementCurrentClassCounter();
     } else {
       ChangeTracker.addMoveClassChange(
-        draggableId,
+        draggableId
+          .split(" ")
+          .slice(0, 2)
+          .join(""),
         false,
         destination.droppableId,
         source.drooppableId
