@@ -30,6 +30,7 @@ import {
 import { Year } from "../Year";
 import { TransferCredits } from "../TransferCreditHolder";
 import { LoadingSpinner } from "../common/LoadingSpinner";
+import ScheduleChangeTracker from "../../utils/ScheduleChangeTracker";
 
 const OuterContainer = styled.div`
   display: flex;
@@ -193,6 +194,8 @@ export const EditableSchedule: React.FC<Props> = props => {
   const incrementCurrentClassCounter = (): any =>
     dispatch(incrementCurrentClassCounterForActivePlanAction());
 
+  const ChangeTracker = ScheduleChangeTracker.getInstance();
+
   const removeHovers = (currSemester: DNDScheduleTerm) => {
     for (const yearnum of activePlan.years) {
       const year = JSON.parse(JSON.stringify(activePlan.yearMap[yearnum])); // deep copy
@@ -261,7 +264,6 @@ export const EditableSchedule: React.FC<Props> = props => {
 
   const onDragEnd = async (result: any) => {
     const { destination, source, draggableId } = result;
-
     // if drag is coming from the sidebar
     if (isNaN(Number(source.droppableId))) {
       addCourseFromSidebar(
@@ -272,8 +274,22 @@ export const EditableSchedule: React.FC<Props> = props => {
         draggableId,
         currentClassCounter
       );
+      console.log(destination, source, draggableId);
       incrementCurrentClassCounter();
     } else {
+      ChangeTracker.addChange(
+        draggableId,
+        false,
+        destination.droppableId,
+        source.drooppableId
+      );
+      console.log(
+        JSON.stringify(destination) +
+          " | " +
+          JSON.stringify(source) +
+          " | " +
+          JSON.stringify(draggableId)
+      );
       moveCourse(activePlan, destination, source, setDNDSchedule);
     }
   };
