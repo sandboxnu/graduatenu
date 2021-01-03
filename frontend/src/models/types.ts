@@ -162,6 +162,7 @@ export interface IUserData {
   coopCycle: string | null;
   nuId: string;
   isAdvisor: boolean;
+  primaryPlanId?: number;
   examCredits: TransferableExam[];
   transferCourses: ScheduleCourse[];
   completedCourses: ScheduleCourse[];
@@ -318,6 +319,13 @@ export interface ICreateTemplatePlan {
   coop_cycle: string | null;
   folder_id: number | null; // if null, create new folder
   folder_name: string | null; // only not null if folder exists
+}
+
+export interface IComment {
+  author: string;
+  comment: string;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 /** ------------------------------------------------------------------------

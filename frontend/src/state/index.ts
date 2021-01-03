@@ -32,6 +32,9 @@ export const safelyGetUserIdFromState = (state: AppState) =>
 export const getUserFullNameFromState = (state: AppState) =>
   getUserFromState(state).fullName;
 
+export const getUserPrimaryPlanIdFromState = (state: AppState) =>
+  getUserFromState(state).primaryPlanId;
+
 /**
  * Get the list of completed requirements from the AppState
  * @param state the AppState
@@ -264,3 +267,9 @@ export const getFolderExpandedFromState = (state: AppState, index: number) =>
 
 export const getAdvisorUserIdFromState = (state: AppState) =>
   state.advisorState.advisor!.id;
+
+export const getAdvisorCommentsFromState = (state: AppState) =>
+  state.advisorState.comments;
+
+export const getAdvisorFullNameFromState = (state: AppState) =>
+  state.advisorState.advisor!.fullName;

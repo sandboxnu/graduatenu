@@ -6,7 +6,7 @@ import {
   ISubjectRange,
 } from "../../../common/types";
 import { SubHeaderReqType, ScraperRequirement } from "../models/types";
-import { ORTagMap, RANGETagMap } from "./catalog_scraper";
+import { ORTagMap, RANGETagMap } from "./scraper_constants";
 import { processHoursText, isRequirement } from "../utils/scraper_utils";
 import { parseRowAsRequirement, parseSubjectRangeRow } from "./row_scraper";
 

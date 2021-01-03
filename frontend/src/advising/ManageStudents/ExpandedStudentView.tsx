@@ -23,12 +23,23 @@ import styled from "styled-components";
 import { PlanTitle, ButtonHeader, ScheduleWrapper, Container } from "./Shared";
 import { Prompt, useHistory, useLocation, useParams } from "react-router";
 import { IUserData } from "../../models/types";
-import { fetchUser } from "../../services/AdvisorService";
-import { fetchPlan, updatePlanLastViewed } from "../../services/PlanService";
+import { fetchComments, fetchUser } from "../../services/AdvisorService";
+import { setCommentsAction } from "../../state/actions/advisorActions";
+import { Comments } from "../../components/Schedule/Comments";
+import {
+  approvePlanForUser,
+  fetchPlan,
+  updatePlanLastViewed,
+} from "../../services/PlanService";
 import IdleTimer from "react-idle-timer";
 import { LoadingSpinner } from "../../components/common/LoadingSpinner";
 import { setUserAction } from "../../state/actions/userActions";
 import { Alert } from "@material-ui/lab";
+import { PrimaryButton } from "../../components/common/PrimaryButton";
+import {
+  ALERT_STATUS,
+  SnackbarAlert,
+} from "../../components/common/SnackbarAlert";
 
 const FullScheduleViewContainer = styled.div`
   margin-top: 30px;
@@ -52,6 +63,11 @@ const ExpandedStudentContainer = styled.div`
   border: 1px solid red;
   border-radius: 10px;
   padding: 30px;
+`;
+
+const PlanActionButtonContainer = styled.div`
+  float: right;
+  padding-right: 30px;
 `;
 
 const AlertWrapper = styled.div`
@@ -82,6 +98,9 @@ export const ExpandedStudentView: React.FC = () => {
   const [editMode, setEditMode] = useState(queryParams.get("edit") === "true");
   const [loading, setLoading] = useState(true);
   const [student, setStudent] = useState<IUserData | null>(null);
+  const [alertStatus, setAlertStatus] = useState<ALERT_STATUS>(
+    ALERT_STATUS.None
+  );
 
   const { plan, activePlanStatus, advisorId } = useSelector(
     (state: AppState) => ({
@@ -112,6 +131,9 @@ export const ExpandedStudentView: React.FC = () => {
             });
             setStudent(user);
             setLoading(false);
+            fetchComments(planId, id).then(response => {
+              dispatch(setCommentsAction(response));
+            });
           })
           .catch(e => console.log(e));
       })
@@ -138,6 +160,12 @@ export const ExpandedStudentView: React.FC = () => {
   const onIdle = () => {
     alert("You are now idle. The page will now refresh.");
     window.location.reload();
+  };
+
+  const approvePlan = () => {
+    approvePlanForUser(id, planId, plan?.schedule)
+      .then(() => setAlertStatus(ALERT_STATUS.Success))
+      .catch(() => setAlertStatus(ALERT_STATUS.Error));
   };
 
   return (
@@ -206,17 +234,31 @@ export const ExpandedStudentView: React.FC = () => {
                 <ScheduleWrapper>
                   {editMode && !plan!.isCurrentlyBeingEditedByStudent ? (
                     <EditableSchedule
+                      sidebarPresent
                       transferCreditPresent
                       collapsibleYears={false}
                     />
                   ) : (
                     <NonEditableScheduleStudentView
+                      sidebarPresent
                       transferCreditPresent
                       collapsibleYears={false}
                     />
                   )}
+                  <Comments />
                 </ScheduleWrapper>
+                <PlanActionButtonContainer>
+                  <PrimaryButton onClick={() => approvePlan()}>
+                    {" "}
+                    Approve{" "}
+                  </PrimaryButton>
+                </PlanActionButtonContainer>
               </ExpandedStudentContainer>
+              <SnackbarAlert
+                alertStatus={alertStatus}
+                handleClose={() => setAlertStatus(ALERT_STATUS.None)}
+                successMsg={"Approved"}
+              />
             </>
           )}
         </FullScheduleViewContainer>

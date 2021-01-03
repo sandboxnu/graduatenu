@@ -15,7 +15,9 @@ Rails.application.routes.draw do
           put :last_viewed
           put :approve
           put :request_approval
+          put :set_primary
         end
+        resources :plan_comments, only: [:index, :show, :create]
       end
       resources :templates, only: [:index, :create]
     end

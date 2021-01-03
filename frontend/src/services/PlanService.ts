@@ -141,3 +141,12 @@ export const requestApproval = (
       "Content-Type": "application/json",
     },
   }).then(response => response.json());
+
+export const setPrimaryPlan = (userId: number, planId: number) =>
+  fetch(`/api/users/${userId}/plans/${planId}/set_primary`, {
+    method: "PUT",
+    headers: {
+      Authorization: "Token " + getAuthToken(),
+      "Content-Type": "application/json",
+    },
+  }).then(response => response.json());

@@ -1,23 +1,6 @@
-import React from "react";
 import { Button } from "@material-ui/core";
 import { withStyles, Theme } from "@material-ui/core/styles";
 import { NORTHEASTERN_RED } from "../../constants";
-
-export const RedColorButton = withStyles((theme: Theme) => ({
-  root: {
-    color: "#ffffff",
-    backgroundColor: NORTHEASTERN_RED,
-    "&:hover": {
-      backgroundColor: "#DB4747",
-    },
-
-    "&$disabled": {
-      backgroundColor: "#c5c5c5",
-      color: "white",
-    },
-  },
-  disabled: {},
-}))(Button);
 
 export const WhiteColorButton = withStyles((theme: Theme) => ({
   root: {
@@ -29,3 +12,25 @@ export const WhiteColorButton = withStyles((theme: Theme) => ({
     },
   },
 }))(Button);
+
+export const GenericColorButton = (
+  backgroundColor: string,
+  hoverBackgroundColor: string
+) =>
+  withStyles((theme: Theme) => ({
+    root: {
+      color: "#ffffff",
+      backgroundColor: backgroundColor,
+      "&:hover": {
+        backgroundColor: hoverBackgroundColor,
+      },
+      "&$disabled": {
+        backgroundColor: "#c5c5c5",
+        color: "white",
+      },
+    },
+
+    disabled: {},
+  }))(Button);
+
+export const RedColorButton = GenericColorButton(NORTHEASTERN_RED, "#DB4747");

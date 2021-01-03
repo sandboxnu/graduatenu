@@ -5,13 +5,13 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { getMajorsFromState, getPlansFromState } from "../../state";
-import { AppState } from "../../state/reducers/state";
-import { planToString } from "../../utils";
 import {
   WhiteColorButton,
   RedColorButton,
 } from "../../components/common/ColoredButtons";
+import { getMajorsFromState, getPlansFromState } from "../../state";
+import { AppState } from "../../state/reducers/state";
+import { planToString } from "../../utils";
 
 const Container = styled.div`
   margin-left: 30px;

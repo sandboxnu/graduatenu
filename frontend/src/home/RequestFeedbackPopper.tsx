@@ -26,6 +26,10 @@ const AdvisorDropdownContainer = styled.div`
   width: 300px;
 `;
 
+const ButtonContainer = styled.div`
+  margin-top: 20px;
+`;
+
 const EMPTY_ADVISOR_LIST: IAbrAdvisor[] = [];
 
 export const RequestFeedbackPopper: React.FC = () => {
@@ -122,19 +126,21 @@ export const RequestFeedbackPopper: React.FC = () => {
 
   const RequestApprovalButton = () => {
     return (
-      <PrimaryButton
-        disabled={selectedAdvisor === ""}
-        onClick={async () => {
-          await requestApproval(
-            userId,
-            findAdvisorEmail(selectedAdvisor),
-            planId
-          );
-          setIsOpen(false);
-        }}
-      >
-        Request Approval
-      </PrimaryButton>
+      <ButtonContainer>
+        <PrimaryButton
+          disabled={selectedAdvisor === ""}
+          onClick={async () => {
+            await requestApproval(
+              userId,
+              findAdvisorEmail(selectedAdvisor),
+              planId
+            );
+            setIsOpen(false);
+          }}
+        >
+          Request Approval
+        </PrimaryButton>
+      </ButtonContainer>
     );
   };
 

@@ -3,10 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { Search } from "../../components/common/Search";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
-import {
-  WhiteColorButton,
-  RedColorButton,
-} from "../../components/common/ColoredButtons";
 import styled from "styled-components";
 import { LinearProgress } from "@material-ui/core";
 import { IFolderData, ITemplatePlan } from "../../models/types";
@@ -18,6 +14,10 @@ import {
 import { toggleTemplateFolderExpandedAction } from "../../state/actions/advisorActions";
 import { AppState } from "../../state/reducers/state";
 import { Link } from "react-router-dom";
+import {
+  RedColorButton,
+  WhiteColorButton,
+} from "../../components/common/ColoredButtons";
 
 const Container = styled.div`
   margin-left: 30px;
