@@ -9,7 +9,8 @@ import { Store } from "redux";
 import { TransferCoursesScreen } from "./Onboarding/TransferCoursesScreen";
 import { Profile } from "./profile/Profile";
 import { NotificationsPage } from "./advising/Notifications";
-import { TemplatesPage } from "./advising/Templates/Templates";
+import { TemplatesListPage } from "./advising/Templates/TemplateListPage";
+import { NewTemplatesPage } from "./advising/Templates/NewTemplatesPage";
 import { GenericAdvisingTemplateComponent } from "./advising/GenericAdvisingTemplate";
 import TransferableCreditScreen from "./Onboarding/TransferableCreditScreen";
 import { RedirectScreen } from "./Onboarding/RedirectScreen";
@@ -71,7 +72,13 @@ const AdvisorRouter = (props: any) => {
           path={`${path}/manageStudents/:id/expanded/:planId`}
           component={ExpandedStudentView}
         />
-        <Route path={`${path}/templates`} component={TemplatesPage} />
+        <Route exact path={`${path}/templates`} component={TemplatesListPage} />
+
+        <Route
+          exact
+          path={`${path}/templates/createTemplate`}
+          component={NewTemplatesPage}
+        />
       </Switch>
     </GenericAdvisingTemplateComponent>
   );
