@@ -48,6 +48,7 @@ import {
   SnackbarAlert,
 } from "../../components/common/SnackbarAlert";
 import ScheduleChangeTracker from "../../utils/ScheduleChangeTracker";
+import { sendChangeLog } from "../../services/ChangelogService";
 
 const FullScheduleViewContainer = styled.div`
   margin-top: 30px;
@@ -110,19 +111,11 @@ export const ExpandedStudentView: React.FC = () => {
     ALERT_STATUS.None
   );
 
-  const {
-    plan,
-    activePlanStatus,
-    advisorId,
-    advisorName,
-    studentId,
-  } = useSelector(
+  const { plan, activePlanStatus, advisorId } = useSelector(
     (state: AppState) => ({
       plan: safelyGetActivePlanFromState(state),
       activePlanStatus: getActivePlanStatusFromState(state),
       advisorId: getAdvisorUserIdFromState(state),
-      advisorName: getAdvisorFullNameFromState(state),
-      studentId: safelyGetUserIdFromState(state),
     }),
     shallowEqual
   );
@@ -157,9 +150,10 @@ export const ExpandedStudentView: React.FC = () => {
 
     const sendPlanUpdates = () => {
       const changes = ScheduleChangeTracker.getInstance().getChanges();
+      // TODO: Remove console log
       console.log(changes);
       if (changes !== "" && plan !== undefined) {
-        sendComment(plan.id, studentId, advisorName, changes);
+        sendChangeLog(plan.id, id, changes);
         ScheduleChangeTracker.getInstance().clearChanges();
       }
     };
@@ -167,8 +161,8 @@ export const ExpandedStudentView: React.FC = () => {
     window.addEventListener("beforeunload", sendPlanUpdates);
 
     return function cleanup() {
-      window.removeEventListener("beforeunload", sendPlanUpdates);
       sendPlanUpdates();
+      window.removeEventListener("beforeunload", sendPlanUpdates);
     };
   }, []);
 

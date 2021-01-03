@@ -1,1 +1,1 @@
-json.(plan_changelog, :user_id, :author, :log, :created_at, :updated_at)
+json.(plan_changelog, :user_id, :log, :created_at, :updated_at)

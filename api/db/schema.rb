@@ -10,20 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_02_220828) do
+ActiveRecord::Schema.define(version: 2021_01_02_222850) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "change_logs", force: :cascade do |t|
-    t.bigint "plan_id"
-    t.bigint "user_id"
-    t.string "log", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["plan_id"], name: "index_change_logs_on_plan_id"
-    t.index ["user_id"], name: "index_change_logs_on_user_id"
-  end
 
   create_table "folders", force: :cascade do |t|
     t.string "name"
@@ -33,9 +23,9 @@ ActiveRecord::Schema.define(version: 2021_01_02_220828) do
   end
 
   create_table "plan_changelogs", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "plan_id"
     t.string "log", null: false
+    t.bigint "plan_id"
+    t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["plan_id"], name: "index_plan_changelogs_on_plan_id"

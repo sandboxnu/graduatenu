@@ -36,11 +36,11 @@ class PlanChangelogsController < ApplicationController
     end
 
     def set_plan_changelog
-        @plan_comment = PlanChangelog.find_by_id(params[:id])
+        @plan_changelog = PlanChangelog.find_by_id(params[:id])
     end
 
     def plan_changelog_params
-        params.require(:plan_comment).permit(:log)
+        params.require(:plan_changelog).permit(:log)
     end
 end
 
