@@ -40,7 +40,7 @@ import {
   updatePlanLastViewed,
 } from "../services/PlanService";
 import { AddPlan } from "./AddPlanPopper";
-import { Button, Theme, withStyles } from "@material-ui/core";
+
 import { SwitchPlanPopper } from "./SwitchPlanPopper";
 import { resetUserAction } from "../state/actions/userActions";
 import { removeAuthTokenFromCookies } from "../utils/auth-helpers";
@@ -54,6 +54,7 @@ import { ActivePlanAutoSaveStatus } from "../state/reducers/userPlansReducer";
 import { AutoSavePlan } from "./AutoSavePlan";
 import { Alert } from "@material-ui/lab";
 import IdleTimer from "react-idle-timer";
+import { RedColorButton } from "../components/common/ColoredButtons";
 
 const HomeTop = styled.div`
   width: 100%;
@@ -131,16 +132,6 @@ const LogoutButton = styled.div`
   align-self: center;
   margin-right: 8px !important;
 `;
-
-const ColorButton = withStyles((theme: Theme) => ({
-  root: {
-    color: "#ffffff",
-    backgroundColor: "#EB5757",
-    "&:hover": {
-      backgroundColor: "#DB4747",
-    },
-  },
-}))(Button);
 
 interface ToastHomeProps {
   addToast: (message: string, options: any) => void;
@@ -347,7 +338,7 @@ class HomeComponent extends React.Component<Props> {
               <PlanText>{this.props.coopCycle || "None"}</PlanText>
               <EditPlanPopper />
               <LogoutButton onClick={_ => this.logOut()}>
-                <ColorButton variant="contained">Logout</ColorButton>
+                <RedColorButton variant="contained">Logout</RedColorButton>
               </LogoutButton>
             </HomePlan>
           </HomeTopInnerContainer>

@@ -62,7 +62,9 @@ const GenericAdvisingTemplate: React.FC = ({ children }) => {
     <Container>
       <Header>
         <HomeText>GraduateNU</HomeText>
-        <RedColorButton onClick={() => logOut()}>Logout</RedColorButton>
+        <RedColorButton variant="contained" onClick={() => logOut()}>
+          Logout
+        </RedColorButton>
       </Header>
       <TabsWrapper>
         <Tabs
