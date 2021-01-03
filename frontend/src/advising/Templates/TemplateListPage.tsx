@@ -3,7 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { Search } from "../../components/common/Search";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
-import { WhiteColorButton, ColorButton } from "../GenericAdvisingTemplate";
+import {
+  WhiteColorButton,
+  RedColorButton,
+} from "../../components/common/ColoredButtons";
 import styled from "styled-components";
 import { LinearProgress } from "@material-ui/core";
 import { IFolderData, ITemplatePlan } from "../../models/types";
@@ -14,8 +17,6 @@ import {
 } from "../../state";
 import { toggleTemplateFolderExpandedAction } from "../../state/actions/advisorActions";
 import { AppState } from "../../state/reducers/state";
-import { getAuthToken } from "../../utils/auth-helpers";
-import { TemplatePageState } from "./Templates";
 import { Link } from "react-router-dom";
 
 const Container = styled.div`
@@ -111,10 +112,6 @@ const TemplateName = styled.div`
   margin-top: 5px;
 `;
 
-interface TemplatesListPageProps {
-  setPageState: (state: TemplatePageState) => void;
-}
-
 interface TemplatesListProps {
   searchQuery: string;
 }
@@ -130,9 +127,7 @@ interface FolderProps {
 
 const EMPTY_TEMPLATES_LIST: IFolderData[] = [];
 
-export const TemplatesListPage: React.FC<TemplatesListPageProps> = ({
-  setPageState,
-}: TemplatesListPageProps) => {
+export const TemplatesListPage: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState("");
 
   return (
@@ -145,12 +140,15 @@ export const TemplatesListPage: React.FC<TemplatesListPageProps> = ({
       <TemplatesContainer>
         <TemplateListContainer>
           <ButtonWrapper>
-            <WhiteColorButton> Upload Plan </WhiteColorButton>
+            <WhiteColorButton style={{ marginRight: "20px" }}>
+              {" "}
+              Upload Plan{" "}
+            </WhiteColorButton>
             <Link
               to={{ pathname: "/advisor/templates/createTemplate" }}
               style={{ textDecoration: "none" }}
             >
-              <ColorButton>Create New</ColorButton>
+              <RedColorButton>Create New</RedColorButton>
             </Link>
           </ButtonWrapper>
           <TemplateListScrollContainer>

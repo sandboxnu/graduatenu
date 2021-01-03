@@ -13,6 +13,7 @@ import { getActivePlanFromState, getUserFromState } from "../state";
 import { AppState } from "../state/reducers/state";
 import { useDebouncedEffect } from "../hooks/useDebouncedEffect";
 import { requestApproval } from "../services/PlanService";
+import { WhiteColorButton } from "../components/common/ColoredButtons";
 
 const SubTitle = styled.div`
   font-size: 14px;
@@ -80,7 +81,7 @@ export const RequestFeedbackPopper: React.FC = () => {
     return (
       <Tooltip title={tooltipText} aria-label="request-button">
         <div>
-          <Button
+          <WhiteColorButton
             variant="contained"
             startIcon={icon}
             disabled={isApproved}
@@ -89,7 +90,7 @@ export const RequestFeedbackPopper: React.FC = () => {
             }}
           >
             {text}
-          </Button>
+          </WhiteColorButton>
         </div>
       </Tooltip>
     );
