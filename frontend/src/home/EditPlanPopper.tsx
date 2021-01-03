@@ -379,6 +379,7 @@ export class EditPlanPopperComponent extends React.Component<
               <SaveOnChangeConcentrationDropdown
                 isUserLevel={false}
                 style={{ marginBottom: "5px", marginTop: "10px" }}
+                useLabel={true}
               />
               {!!this.props.plan.major && this.renderPlansDropDown()}
               {!!this.props.plan.major &&

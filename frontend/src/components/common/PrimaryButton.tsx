@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "@material-ui/core";
+import { Button, Tooltip } from "@material-ui/core";
 import {
   createStyles,
   withStyles,
@@ -15,6 +15,9 @@ const ColorButton = withStyles((theme: Theme) => ({
     backgroundColor: "#EB5757",
     "&:hover": {
       backgroundColor: "#DB4747",
+    },
+    "&.Mui-disabled": {
+      pointerEvents: "auto",
     },
   },
 }))(Button);
@@ -41,3 +44,29 @@ export function PrimaryButton(props: any) {
     </ColorButton>
   );
 }
+
+interface PrimaryButtonWithTooltipProps {
+  tooltipText: string;
+  disabled: boolean;
+  onClick: () => void;
+}
+
+export const PrimaryButtonWithTooltip: React.FC<PrimaryButtonWithTooltipProps> = ({
+  tooltipText,
+  disabled,
+  onClick,
+  children,
+}) => {
+  const adjustedButtonProps = {
+    disabled: disabled,
+    component: disabled ? "div" : undefined,
+    onClick: disabled ? undefined : onClick,
+  };
+  return (
+    <Tooltip title={tooltipText}>
+      <ColorButton {...adjustedButtonProps} variant="contained" color="primary">
+        {children}
+      </ColorButton>
+    </Tooltip>
+  );
+};

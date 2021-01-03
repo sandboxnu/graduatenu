@@ -1,7 +1,7 @@
 import { TextField } from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
 import { CSSProperties } from "@material-ui/styles";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { Concentration, Major } from "../../../common/types";
@@ -21,11 +21,13 @@ interface SaveInParentConcentrationDropdownProps {
   readonly setConcentration: (concentration: string | null) => void;
   readonly setError?: (error: boolean) => void; // To tell the parent that there is an error with the input (no major selected when there should be)
   readonly style?: CSSProperties;
+  readonly useLabel?: boolean;
 }
 
 interface SaveOnChangeConcentrationDropdownProps {
   readonly isUserLevel: boolean;
   readonly style?: CSSProperties;
+  readonly useLabel?: boolean;
 }
 
 // Concentration dropdown which sets the concentration in the parent using the given setter whenever it is changed.
@@ -35,6 +37,7 @@ const SaveInParentConcentrationDropdown: React.FC<SaveInParentConcentrationDropd
   setConcentration,
   setError,
   style,
+  useLabel,
 }) => {
   const concentrationNames: Array<string> = major
     ? major.concentrations.concentrationOptions.map(
@@ -46,9 +49,14 @@ const SaveInParentConcentrationDropdown: React.FC<SaveInParentConcentrationDropd
     (major && major.concentrations.concentrationOptions.length > 0) || false;
 
   // An error occurs if there is no concentration selected when at least 1 is required.
-  const isError: boolean =
-    (concentration === null && major && major.concentrations.minOptions > 0) ||
-    false;
+  const hasError: boolean =
+    (!concentration && major && major.concentrations.minOptions > 0) || false;
+
+  useEffect(() => {
+    if (setError) {
+      setError(hasError);
+    }
+  }, [concentration]);
 
   return (
     <>
@@ -61,16 +69,16 @@ const SaveInParentConcentrationDropdown: React.FC<SaveInParentConcentrationDropd
             <TextField
               {...params}
               variant="outlined"
-              label="Concentration"
+              label={useLabel ? "Concentration" : ""}
               fullWidth
-              error={isError}
+              error={hasError}
             />
           )}
           value={concentration}
           onChange={(e, value) => {
             setConcentration(value);
             if (setError) {
-              setError(isError);
+              setError(hasError);
             }
           }}
         />
@@ -83,6 +91,7 @@ const SaveInParentConcentrationDropdown: React.FC<SaveInParentConcentrationDropd
 const SaveOnChangeConcentrationDropdown: React.FC<SaveOnChangeConcentrationDropdownProps> = ({
   isUserLevel,
   style,
+  useLabel,
 }) => {
   const dispatch = useDispatch();
   const concentration = useSelector((state: AppState) =>
@@ -111,6 +120,7 @@ const SaveOnChangeConcentrationDropdown: React.FC<SaveOnChangeConcentrationDropd
       concentration={concentration}
       setConcentration={dispatchConcentration}
       style={style}
+      useLabel={useLabel}
     />
   );
 };

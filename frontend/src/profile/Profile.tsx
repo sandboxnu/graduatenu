@@ -2,7 +2,10 @@ import React, { useState } from "react";
 import { withRouter, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { PrimaryButton } from "../components/common/PrimaryButton";
+import {
+  PrimaryButton,
+  PrimaryButtonWithTooltip,
+} from "../components/common/PrimaryButton";
 import {
   FormControl,
   MenuItem,
@@ -18,6 +21,7 @@ import {
   setUserCoopCycleAction,
   setUserMajorAction,
   setUserCatalogYearAction,
+  setUserConcentrationAction,
 } from "../state/actions/userActions";
 import {
   getMajorsFromState,
@@ -112,6 +116,11 @@ const ProfileEmail = styled.div`
   margin-bottom: 10px;
 `;
 
+const ButtonContainer = styled.div`
+  box-sizing: border-box;
+  width: 100%;
+`;
+
 const ProfileComponent: React.FC = () => {
   const dispatch = useDispatch();
   const { user, majors, plans } = useSelector((state: AppState) => ({
@@ -122,7 +131,9 @@ const ProfileComponent: React.FC = () => {
 
   const [isEdit, setEdit] = useState(false);
   const [major, setMajor] = useState(user.major);
-  const [concentration, setConcentration] = useState(user.concentration);
+  const [concentration, setConcentration] = useState<string | null>(
+    user.concentration || null
+  );
   const [coopCycle, setCoopCycle] = useState(user.coopCycle);
   const [catalogYear, setCatalogYear] = useState(user.catalogYear);
   const [gradYear, setGradYear] = useState(user.graduationYear!);
@@ -212,18 +223,20 @@ const ProfileComponent: React.FC = () => {
   };
 
   const ProfileConcentration = () => {
-    const hasConcentrations: boolean = useSelector(
-      (state: AppState) =>
-        (
-          getUserMajorFromState(state)?.concentrations?.concentrationOptions ||
-          []
-        ).length > 0
-    );
+    const selectedMajorObj = findMajorFromName(major, majors, catalogYear);
+    const hasConcentrations: boolean =
+      (selectedMajorObj &&
+        selectedMajorObj.concentrations.concentrationOptions.length > 0) ||
+      false;
+
+    const shouldDisplay: boolean =
+      (isEdit && hasConcentrations) || (!isEdit && !!concentration);
+
     return (
       <>
-        {hasConcentrations && (
+        {shouldDisplay && (
           <ProfileEntryContainer>
-            (<ItemTitle> Concentration </ItemTitle>
+            <ItemTitle> Concentration </ItemTitle>
             {isEdit && (
               <SaveInParentConcentrationDropdown
                 major={findMajorFromName(major, majors, catalogYear)}
@@ -291,6 +304,7 @@ const ProfileAdvisor = (props: any) => {
     setEdit(false);
     dispatch(setUserMajorAction(major || ""));
     dispatch(setUserCatalogYearAction(catalogYear));
+    dispatch(setUserConcentrationAction(concentration));
     if (coopCycle !== "None Selected") {
       dispatch(setUserCoopCycleAction(""));
     } else {
@@ -321,15 +335,23 @@ const ProfileAdvisor = (props: any) => {
 
   const SaveButton = () => {
     const errorMessage = hasError
-      ? "Your major requires a concentration to be selected"
+      ? "Your major requires you to select a concentration"
       : "";
+
+    // See https://material-ui.com/guides/composition/#caveat-with-refs
+    const ButtonWithForwardRef = React.forwardRef((props, ref) => (
+      <PrimaryButtonWithTooltip
+        tooltipText={errorMessage}
+        disabled={hasError}
+        onClick={() => save()}
+      >
+        Save
+      </PrimaryButtonWithTooltip>
+    ));
+
     return (
       <Tooltip title={errorMessage}>
-        <span>
-          <PrimaryButton disabled={hasError} onClick={() => save()}>
-            Save
-          </PrimaryButton>
-        </span>
+        <ButtonWithForwardRef />
       </Tooltip>
     );
   };
@@ -379,7 +401,9 @@ const ProfileAdvisor = (props: any) => {
               <ProfileCatalogYear />
               {isEdit && <WhiteSpace />}
               {!!catalogYear && <ProfileMajor />}
+              {isEdit && <WhiteSpace />}
               {!!catalogYear && !!major && <ProfileConcentration />}
+              {isEdit && <WhiteSpace />}
             </ProfileColumn>
             <ProfileColumn>
               <ProfileGradYear />
