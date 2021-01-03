@@ -1,4 +1,4 @@
-import { IPlanData } from "./../models/types";
+import { IPlanData, StatusEnum } from "./../models/types";
 import { AppState } from "./reducers/state";
 import { CourseWarning, IWarning, DNDScheduleTerm } from "../models/types";
 import { Concentration, Major, Schedule } from "../../../common/types";
@@ -58,7 +58,11 @@ export const safelyGetTransferCoursesFromState = (state: AppState) =>
  * @param state the AppState
  */
 export const getUserMajorFromState = (state: AppState): Major | undefined =>
-  findMajorFromName(getUserFromState(state).major, getMajorsFromState(state));
+  findMajorFromName(
+    getUserFromState(state).major,
+    getMajorsFromState(state),
+    getUserCatalogYearFromState(state)
+  );
 
 /**
  * Get the selected concentration from the AppState
@@ -171,8 +175,8 @@ export const getActivePlanMajorFromState = (state: AppState) => {
  * Get the current schedule's catalog yearr from the AppState
  * @param state the AppState
  */
-export const getActivePlanCatalogYearFromState = (state: AppState) => {
-  return getActivePlanFromState(state).catalogYear;
+export const safelyGetActivePlanCatalogYearFromState = (state: AppState) => {
+  return getActivePlanFromState(state)?.catalogYear;
 };
 
 /**
@@ -254,7 +258,8 @@ export const safelyGetActivePlanMajorFromState = (state: AppState) =>
 export const safelyGetActivePlanMajorObjectFromState = (state: AppState) =>
   findMajorFromName(
     safelyGetActivePlanMajorFromState(state),
-    getMajorsFromState(state)
+    getMajorsFromState(state),
+    safelyGetActivePlanCatalogYearFromState(state)
   );
 
 export const safelyGetActivePlanConcentrationFromState = (state: AppState) =>

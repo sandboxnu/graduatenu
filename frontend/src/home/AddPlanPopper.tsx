@@ -167,7 +167,9 @@ function AddPlanPopperComponent(props: Props) {
       const plan = userPlans.find(
         schedule => schedule.name === selectedUserPlan
       )!;
-      setSelectedMajor(findMajorFromName(plan.major, allMajors) || null);
+      setSelectedMajor(
+        findMajorFromName(plan.major, allMajors, plan.catalogYear) || null
+      );
       setSelectedCoopCycle(plan.coopCycle || "");
       selectedDNDSchedule.current = plan.schedule;
       counter.current = plan.courseCounter;
@@ -322,7 +324,9 @@ function AddPlanPopperComponent(props: Props) {
         )}
         value={!!selectedMajor ? selectedMajor.name + " " : ""}
         onChange={(e, value) => {
-          setSelectedMajor(findMajorFromName(value, allMajors) || null);
+          setSelectedMajor(
+            findMajorFromName(value, allMajors, selectedCatalogYear) || null
+          );
           setSelectedCoopCycle(null);
         }}
       />

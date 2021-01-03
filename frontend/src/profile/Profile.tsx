@@ -3,7 +3,13 @@ import { withRouter, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { PrimaryButton } from "../components/common/PrimaryButton";
-import { FormControl, MenuItem, Select, TextField } from "@material-ui/core";
+import {
+  FormControl,
+  MenuItem,
+  Select,
+  TextField,
+  Tooltip,
+} from "@material-ui/core";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import { IconButton } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
@@ -18,13 +24,17 @@ import {
   getUserFromState,
   getPlansFromState,
   getUserCatalogYearFromState,
+  getUserConcentrationFromState,
+  getUserMajorFromState,
 } from "../state";
-import { Schedule } from "../../../common/types";
+import { Major, Schedule } from "../../../common/types";
 import { AppState } from "../state/reducers/state";
 import { planToString } from "../utils";
 import { updateUser } from "../services/UserService";
 import { IUpdateUser, IUpdateUserData } from "../models/types";
 import { getAuthToken } from "../utils/auth-helpers";
+import { SaveInParentConcentrationDropdown } from "../components/ConcentrationDropdown";
+import { findMajorFromName } from "../utils/plan-helpers";
 
 const OuterContainer = styled.div`
   width: 70%;
@@ -104,20 +114,20 @@ const ProfileEmail = styled.div`
 
 const ProfileComponent: React.FC = () => {
   const dispatch = useDispatch();
-  const { user, majors, plans, catalogYear } = useSelector(
-    (state: AppState) => ({
-      user: getUserFromState(state), // best to update this screen when any part of the user changes
-      majors: getMajorsFromState(state),
-      plans: getPlansFromState(state),
-      catalogYear: getUserCatalogYearFromState(state),
-    })
-  );
+  const { user, majors, plans } = useSelector((state: AppState) => ({
+    user: getUserFromState(state), // best to update this screen when any part of the user changes
+    majors: getMajorsFromState(state),
+    plans: getPlansFromState(state),
+  }));
 
   const [isEdit, setEdit] = useState(false);
   const [major, setMajor] = useState(user.major);
+  const [concentration, setConcentration] = useState(user.concentration);
   const [coopCycle, setCoopCycle] = useState(user.coopCycle);
+  const [catalogYear, setCatalogYear] = useState(user.catalogYear);
   const [gradYear, setGradYear] = useState(user.graduationYear!);
   const [advisor, setAdvisor] = useState("");
+  const [hasError, setHasError] = useState(false);
 
   const ProfileGradYear = () => {
     return (
@@ -146,13 +156,18 @@ const ProfileComponent: React.FC = () => {
 
   const ProfileMajor = () => {
     const val = !!major ? major : "None Selected";
+    const majorsFromCatalogYear = majors.filter(
+      (maj: Major) => maj.yearVersion === catalogYear
+    );
     return (
       <ProfileEntryContainer>
         <ItemTitle> Major </ItemTitle>
         {isEdit && (
           <Autocomplete
             disableListWrap
-            options={majors.map((maj: { name: any }) => maj.name)}
+            options={majorsFromCatalogYear.map(
+              (maj: { name: any }) => maj.name
+            )}
             renderInput={params => (
               <TextField {...params} variant="outlined" fullWidth />
             )}
@@ -184,12 +199,43 @@ const ProfileComponent: React.FC = () => {
             )}
             value={val}
             onChange={(event: React.SyntheticEvent<{}>, value: any) => {
-              dispatch(setUserCatalogYearAction(value));
+              setMajor("");
+              setCoopCycle("");
+              setConcentration("");
+              setCatalogYear(Number(value));
             }}
           />
         )}
         {!isEdit && <ItemEntry> {val} </ItemEntry>}
       </ProfileEntryContainer>
+    );
+  };
+
+  const ProfileConcentration = () => {
+    const hasConcentrations: boolean = useSelector(
+      (state: AppState) =>
+        (
+          getUserMajorFromState(state)?.concentrations?.concentrationOptions ||
+          []
+        ).length > 0
+    );
+    return (
+      <>
+        {hasConcentrations && (
+          <ProfileEntryContainer>
+            (<ItemTitle> Concentration </ItemTitle>
+            {isEdit && (
+              <SaveInParentConcentrationDropdown
+                major={findMajorFromName(major, majors, catalogYear)}
+                concentration={concentration || null}
+                setConcentration={setConcentration}
+                setError={setHasError}
+              />
+            )}
+            {!isEdit && <ItemEntry> {concentration} </ItemEntry>}
+          </ProfileEntryContainer>
+        )}
+      </>
     );
   };
 
@@ -244,6 +290,7 @@ const ProfileAdvisor = (props: any) => {
   const save = () => {
     setEdit(false);
     dispatch(setUserMajorAction(major || ""));
+    dispatch(setUserCatalogYearAction(catalogYear));
     if (coopCycle !== "None Selected") {
       dispatch(setUserCoopCycleAction(""));
     } else {
@@ -259,6 +306,7 @@ const ProfileAdvisor = (props: any) => {
       id: user.id!,
     };
 
+    //TODO add concentration
     const updateUserData: IUpdateUserData = {
       graduation_year: gradYear,
       major: major || null,
@@ -266,12 +314,24 @@ const ProfileAdvisor = (props: any) => {
         coopCycle != undefined && coopCycle !== "None Selected"
           ? coopCycle
           : "",
+      catalog_year: catalogYear,
     };
     updateUser(updateUserObj, updateUserData);
   };
 
   const SaveButton = () => {
-    return <PrimaryButton onClick={() => save()}>Save</PrimaryButton>;
+    const errorMessage = hasError
+      ? "Your major requires a concentration to be selected"
+      : "";
+    return (
+      <Tooltip title={errorMessage}>
+        <span>
+          <PrimaryButton disabled={hasError} onClick={() => save()}>
+            Save
+          </PrimaryButton>
+        </span>
+      </Tooltip>
+    );
   };
 
   // const ChangePassword = (props: ChangePasswordProps) => {
@@ -319,6 +379,7 @@ const ProfileAdvisor = (props: any) => {
               <ProfileCatalogYear />
               {isEdit && <WhiteSpace />}
               {!!catalogYear && <ProfileMajor />}
+              {!!catalogYear && !!major && <ProfileConcentration />}
             </ProfileColumn>
             <ProfileColumn>
               <ProfileGradYear />

@@ -119,8 +119,7 @@ class OnboardingScreenComponent extends React.Component<
     // if this.state.major exists, and the major exists with the selected catalog year, don't erase the major from the form
     const newMajor =
       this.state.major &&
-      findMajorFromName(this.state.major, this.props.majors)?.yearVersion ===
-        newCatalogYear
+      !!findMajorFromName(this.state.major, this.props.majors, newCatalogYear)
         ? this.state.major
         : undefined;
 

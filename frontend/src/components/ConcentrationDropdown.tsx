@@ -1,7 +1,9 @@
 import { TextField } from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
+import { CSSProperties } from "@material-ui/styles";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import styled from "styled-components";
 import { Concentration, Major } from "../../../common/types";
 import {
   safelyGetActivePlanMajorObjectFromState,
@@ -18,10 +20,12 @@ interface SaveInParentConcentrationDropdownProps {
   readonly concentration: string | null;
   readonly setConcentration: (concentration: string | null) => void;
   readonly setError?: (error: boolean) => void; // To tell the parent that there is an error with the input (no major selected when there should be)
+  readonly style?: CSSProperties;
 }
 
 interface SaveOnChangeConcentrationDropdownProps {
-  readonly isUserLevel: boolean; // If not at the user level, it is at the plan level.
+  readonly isUserLevel: boolean;
+  readonly style?: CSSProperties;
 }
 
 // Concentration dropdown which sets the concentration in the parent using the given setter whenever it is changed.
@@ -30,6 +34,7 @@ const SaveInParentConcentrationDropdown: React.FC<SaveInParentConcentrationDropd
   concentration,
   setConcentration,
   setError,
+  style,
 }) => {
   const concentrationNames: Array<string> = major
     ? major.concentrations.concentrationOptions.map(
@@ -49,6 +54,7 @@ const SaveInParentConcentrationDropdown: React.FC<SaveInParentConcentrationDropd
     <>
       {shouldDisplayDropdown && (
         <Autocomplete
+          style={style}
           disableListWrap
           options={concentrationNames}
           renderInput={params => (
@@ -76,6 +82,7 @@ const SaveInParentConcentrationDropdown: React.FC<SaveInParentConcentrationDropd
 // Concentration dropdown which sets the concentration in Redux whenever it is changed.
 const SaveOnChangeConcentrationDropdown: React.FC<SaveOnChangeConcentrationDropdownProps> = ({
   isUserLevel,
+  style,
 }) => {
   const dispatch = useDispatch();
   const concentration = useSelector((state: AppState) =>
@@ -103,6 +110,7 @@ const SaveOnChangeConcentrationDropdown: React.FC<SaveOnChangeConcentrationDropd
       major={major}
       concentration={concentration}
       setConcentration={dispatchConcentration}
+      style={style}
     />
   );
 };
