@@ -1,5 +1,9 @@
 var catalogToMajor = require("../src/catalog-scraper/catalog_scraper.ts");
 
+var fs = require("fs");
+const rp = require("request-promise");
+const plan_parser = require("../src/plan_parser.ts");
+
 // majors to run tests on
 
 // majors on which the scraper has been verified to run correctly:
@@ -69,6 +73,35 @@ const supported2019_2020 = [
   "http://catalog.northeastern.edu/archive/2019-2020/undergraduate/computer-information-science/computer-information-science-combined-majors/data-science-biochemistry-bs/#programrequirementstext",
 ];
 
+const supported2020_2021 = [
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-science/bscs/#programrequirementstext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/cybersecurity/cybersecurity-bs/#programrequirementstext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/data-science/data-science-bs/#programrequirementstext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-communication-studies-bs/#programrequirementstext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-criminal-justice-bs/#programrequirementstext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-cognitive-psychology-bs/#programrequirementstext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/economics-bs/#programrequirementstext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-environmental-science-bs/#programrequirementstext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-journalism-bs/#programrequirementstext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-mathematics-bs/#programrequirementstext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-media-arts-bs/#programrequirementstext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-concentration-music-composition-technology-bs/#programrequirementstext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-philosophy-bs/#programrequirementstext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-physics-bs/#programrequirementstext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-political-science-bs/#programrequirementstext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-sociology-bs/#programrequirementstext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-science/cybersecurity-criminal-justice-bs/#programrequirementstext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/cybersecurity-economics-bs/#programrequirementstext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/data-science-biochemistry-bs/#programrequirementstext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/data-science-economics-bs/#programrequirementstext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/data-science-environmental-science-bs/#programrequirementstext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/data-science-health-science-bs/#programrequirementstext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/data-science-journalism-bs/#programrequirementstext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/data-science-mathematics-bs/#programrequirementstext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/data-science-psychology-bs/#programrequirementstext",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/data-science-physics-bs/#programrequirementstext",
+];
+
 //run tests
 test("ensure that catalog_scraper produces the expected output for supported majors.", async () => {
   jest.setTimeout(200000);
@@ -81,4 +114,17 @@ test("ensure that catalog_scraper produces the expected output for supported maj
     major = await catalogToMajor(link);
     expect(major).toMatchSnapshot();
   }
+  for (link of supported2020_2021) {
+    major = await catalogToMajor(link);
+    expect(major).toMatchSnapshot();
+  }
 });
+
+async function createObject(acc, link, major) {
+  const plansOfStudy = plan_parser.planOfStudyToSchedule(await rp(link));
+  const { yearVersion } = major;
+  const id = link
+    .replace("/#programrequirementstext", "")
+    .split("undergraduate/")[1];
+  acc.push({ plansOfStudy, yearVersion, id, major });
+}

@@ -1,157 +1,14 @@
 var cheerio = require("cheerio");
+var fs = require("fs");
 import {
   Major,
   IMajorRequirementGroup,
-  Concentrations,
   Concentration,
 } from "../../../common/types";
 import { createRequirementGroup } from "./reqGroup_scraper";
 
 const rp = require("request-promise");
-
-export const ANDSectionHeader: string[] = [
-  "Intermediate and Advanced Biology Electives",
-  "History Electives",
-  // "Sociology Electives",
-];
-
-export const SubheaderTagSet: Array<string> = [
-  "Complete two courses for one of the following science categories:",
-  "Students are required to complete one of the following foci (two courses total):",
-];
-
-// Dictionary for ORSection keywords, maps from keyword/phrase -> number of credits
-export const ORTagMap: { [key: string]: number } = {
-  "Choose one of the following:": 4,
-  "Complete one of the following:": 4,
-  "Complete one of the following: ": 4,
-  "Then complete one of the following:": 4,
-  "Complete one of the following sequences:": 10,
-  "Complete two of the following:": 8,
-  "Complete three of the following:": 12,
-  "Complete two courses for one of the following science categories:": 10,
-  "Complete five courses from the following:": 20,
-  "Complete one course from the following:": 4,
-  "Complete two courses from the following lists:": 8,
-  "Students are required to complete one of the following foci (two courses total):": 8,
-  "Complete one of the following courses. This course may also be used to fulfill an additional English requirement below:": 4,
-  "Complete at least two of the following:": 8,
-  "Complete four of the following:": 16,
-  "Complete six of the following:": 24,
-  "Complete four economics electives with no more than two below 3000:": 16,
-
-  "Complete one course from one of the following groups:": 4,
-  "Take two courses, at least one of which is at the 4000 or 5000 level, from the following:": 8,
-  "Complete one of the following courses not already taken:": 4,
-  "Complete two of the following courses not already taken:": 8,
-  "Complete two courses from the following:": 8,
-  "Complete two biology courses (with corequisite labs if offered). Choose one of these two courses from the following list:": 8,
-  "Complete one introductory course from the following:": 4,
-  "Complete one capstone experience from the following:": 4,
-  "Complete three courses from the following:": 12,
-  "Complete either one computer science capstone or the physics capstone:": 4,
-  "Complete one of the following lecture/lab pairs. PHYS 1145/PHYS 1146 is recommended:": 4,
-  // TODO: Data-Science-Related Electives: "Complete six courses from categories A and B, at least three of which must be from B"
-};
-
-export const IgnoreTags: string[] = [
-  "Note: The following courses do not count toward this concentration:",
-];
-
-// Dictionary for RANGESection keywords, maps from keyword/phrase -> number of credits
-export const RANGETagMap: { [key: string]: number } = {
-  "Complete 4 credits of CS, IS, or DS classes that are not already required. Choose courses within the following ranges:": 4,
-  "Complete 4 credits of CS, IS, or DS courses that are not already required. Choose courses within the following range:": 4,
-  "Complete four credits of CS, IS, or DS classes that are not already required. Choose courses within the following ranges:": 4,
-  "Complete 8 credits of CS, IS or DS classes that are not already required. Choose courses within the following ranges:": 8,
-  "Complete 8 credits of CS, IS or, DS classes that are not already required. Choose courses within the following ranges:": 8,
-  "Complete 8 credits of CS, IS, or DS classes that are not already required. Choose courses within the following ranges:": 8,
-  "Complete 8 credits of upper-division CS, IS, or DS classes that are not already required. Choose courses within the following ranges:": 8,
-  "Complete eight credits of CS, IS or, DS classes that are not already required. Choose courses within the following ranges:": 8,
-  "Complete eight credits of CS, IS or DS classes that are not already required. Choose courses within the following ranges:": 8,
-  "Complete 12 credits of CS, IS or, DS classes that are not already required. Choose courses within the following ranges:": 12,
-  "Complete 12 credits of CS, IS, or DS classes that are not already required. Choose courses within the following ranges:": 12,
-  "Complete 12 credits of upper-division CS, IS, and DS courses that are not already required. Choose courses within the following ranges:": 12,
-  "Complete twelve credits of CS, IS or DS classes that are not already required. Choose courses within the following ranges:": 12,
-  "Complete 16 credits of CS, IS, or DS classes that are not already required. Choose courses within the following ranges:": 16,
-  "Complete 16 credits of upper-division CS, IS, or DS courses that are not already required. Choose courses within the following ranges:": 16,
-
-  "Complete one of the following, not taken to fulfill previous requirements:": 4,
-  "Complete one from the following:": 4,
-  "Complete four courses in the following range:": 16,
-  "Complete three courses in the following range:": 12,
-
-  "Complete four ECON electives with at least two numbered at ECON 3000 or above.": 16,
-
-  "Choose the second elective from the following list:": 4,
-  "Complete three intermediate/advanced-level courses:": 12,
-  "Complete one advanced-level course:": 4,
-  // "Complete one sociology elective in each of the following ranges:": 4,
-
-  "Complete four credits of CS, CY, DS, or IS classes that are not already required. Choose courses within the following ranges:": 4,
-  "Complete 4 credits of CS, CY, DS, or IS classes that are not already required. Choose courses within the following ranges:": 4,
-  "Complete 4 credits of CS, CY, DS, or IS courses that are not already required. Choose courses within the following range:": 4,
-  "Complete 8 credits of CS, CY, DS, or IS classes that are not already required. Choose courses within the following ranges:": 8,
-  "Complete 8 credits of CS, CY, DS or IS classes that are not already required. Choose courses within the following ranges:": 8,
-  "Complete 8 credits of upper-division CS, CY, DS, or IS classes that are not already required. Choose courses within the following ranges:": 8,
-  "Complete eight credits of CS, CY, DS, or IS classes that are not already required. Choose courses within the following ranges:": 8,
-  "Complete twelve credits of CS, CY, DS, or IS classes that are not already required. Choose courses within the following ranges:": 12,
-  "Complete 12 credits of CS, CY, DS, or IS classes that are not already required. Choose courses within the following ranges:": 12,
-  "Complete 12 credits of upper-division CS, CY, DS, or IS courses that are not already required. Choose courses within the following ranges:": 12,
-  "Complete 12 credits of upper-division CS, CY, DS, or IS classes that are not already required. Choose courses within the following ranges:": 12,
-  "Comment: Complete 12 credits of CS, CY, DS, or IS classes that are not already required. Choose courses within the following ranges:": 12,
-  "Complete 16 credits of upper-division CS, CY, DS, or IS courses that are not already required. Choose courses within the following ranges:": 16,
-  "Complete one course from the following": 4,
-  "Complete four credits from the following list, not taken to fulfill previous requirements:": 4,
-};
-
-// Set for RANGESections that only indicate the major in which they are allowed to take electives
-export const RANGECourseSet: Array<string> = [
-  "GAME",
-  "CRIM",
-  "ENGL",
-  "ARTD",
-  "ARTE",
-  "ARTF",
-  "ARTG",
-  "ARTH",
-  "ARTS",
-  "JRNL",
-  "PHIL",
-  "HIST",
-];
-
-export const ValidSubjects: string[] = [
-  "COMM",
-  "POLS",
-  "ECON",
-  "HSCI",
-  "PHTH",
-  "CS",
-  "IS",
-  "DS",
-  "CY",
-  "MATH",
-  "PHIL",
-  "GAME",
-  "CRIM",
-  "EECE",
-  "ENGL",
-  "ARTD",
-  "ARTE",
-  "ARTF",
-  "ARTG",
-  "ARTH",
-  "ARTS",
-  "JRNL",
-  "PHIL",
-  "SOCL",
-  "BIOL",
-  "CHEM",
-  "EEMB",
-  "ENVR",
-  "PHYS",
-];
+import { OPTIONAL_CONCENTRATION } from "./scraper_constants";
 
 /**
  * Scrapes the major data from the given course catalog URL.
@@ -189,23 +46,28 @@ function scrapeMajorDataFromCatalog($: CheerioStatic): Promise<Major> {
       .split(" ")[0];
     let yearVersion: number = parseInt(catalogYear.split("-")[0]);
     let resultArray = createRequirementGroupMap($);
-    let requirementGroupMap: {
-      [key: string]: IMajorRequirementGroup;
-    } = resultArray[0];
-    let concentrationOptions = resultArray[1];
+    const [
+      requirementGroupMap,
+      concentrationOptions,
+      totalCreditsRequired,
+    ] = resultArray;
     let requirementGroups: string[] = Object.keys(requirementGroupMap);
     let major: Major = {
-      name: name,
-      requirementGroups: requirementGroups,
-      requirementGroupMap: requirementGroupMap,
-      yearVersion: yearVersion,
+      name,
+      requirementGroups,
+      requirementGroupMap,
+      yearVersion,
       isLanguageRequired: false,
       nupaths: [],
-      totalCreditsRequired: 0,
+      totalCreditsRequired,
       concentrations: {
-        minOptions: concentrationOptions.length > 0 ? 1 : 0,
+        minOptions:
+          concentrationOptions.length > 0 &&
+          !OPTIONAL_CONCENTRATION.includes(name)
+            ? 1
+            : 0,
         maxOptions: concentrationOptions.length > 0 ? 1 : 0,
-        concentrationOptions: concentrationOptions,
+        concentrationOptions,
       },
     };
     resolve(major);
@@ -218,29 +80,35 @@ function scrapeMajorDataFromCatalog($: CheerioStatic): Promise<Major> {
  */
 function createRequirementGroupMap(
   $: CheerioStatic
-): [{ [key: string]: IMajorRequirementGroup }, Concentration[]] {
+): [{ [key: string]: IMajorRequirementGroup }, Concentration[], number] {
   let requirementGroupMap: { [key: string]: IMajorRequirementGroup } = {};
   let is_concentration = false;
+  let is_credits = false;
+  let ignore_tables = false;
+  let credits: number = 0;
   let current_header = "";
   let current_concentration = "";
   let concentrations: Concentration[] = [];
   $("#programrequirementstextcontainer")
     .children()
-    .each((index: number, table: CheerioElement) => {
-      if (table.name == "h2") {
+    .each((index: number, element: CheerioElement) => {
+      if (element.name == "h2") {
+        const elementText = $(element).text();
         // Determines if the major has concentrations based on if the header name includes Concentrations or Options
         is_concentration =
-          $(table)
-            .text()
-            .includes("Concentration") ||
-          $(table)
-            .text()
-            .includes("Options");
-        current_header = $(table).text();
+          elementText.includes("Concentration") ||
+          elementText.includes("Options");
+        is_credits =
+          elementText.includes("Program") &&
+          elementText.includes("Requirement");
+        ignore_tables = elementText.includes("GPA Requirement");
+        current_header = $(element).text();
       }
-      if (table.name == "h3") {
+      if (element.name == "h3") {
         // Determines the name of the current concentration based on the subheader
-        current_concentration = $(table).text();
+        const elementText = $(element).text();
+        if (elementText.includes("Concentration")) is_concentration = true;
+        current_concentration = elementText;
         current_concentration = current_concentration.replace(
           "Concentration in ",
           ""
@@ -250,37 +118,44 @@ function createRequirementGroupMap(
           ""
         );
       }
+      if (element.name === "p" && is_credits) {
+        // parse the credits value from the bottom of the page or 0 if it's not there
+        credits =
+          Number(
+            $(element)
+              .text()
+              .split(/[\s\xa0]+/)[0]
+          ) || 0;
+        is_credits = false;
+      }
       // Parsing as a normal req group
       if (
-        !is_concentration &&
-        table.name == "table" &&
-        table.attribs["class"] == "sc_courselist"
+        !ignore_tables &&
+        element.name == "table" &&
+        element.attribs["class"] == "sc_courselist"
       ) {
-        requirementGroupMap = tableToReqGroup(
-          $,
-          table,
-          current_header,
-          requirementGroupMap
-        );
-      }
-      // Parsing as a concentration
-      if (
-        is_concentration &&
-        table.name == "table" &&
-        table.attribs["class"] == "sc_courselist"
-      ) {
-        let groups = tableToReqGroup($, table, current_header);
-        concentrations.push({
-          name:
-            current_concentration.length > 0
-              ? current_concentration
-              : Object.keys(groups)[0],
-          requirementGroups: Object.keys(groups),
-          requirementGroupMap: groups,
-        });
+        if (!is_concentration) {
+          requirementGroupMap = tableToReqGroup(
+            $,
+            element,
+            current_header,
+            requirementGroupMap
+          );
+        } else {
+          // Parsing as a concentration
+          let groups = tableToReqGroup($, element, current_header);
+          concentrations.push({
+            name:
+              current_concentration.length > 0
+                ? current_concentration
+                : Object.keys(groups)[0],
+            requirementGroups: Object.keys(groups),
+            requirementGroupMap: groups,
+          });
+        }
       }
     });
-  return [requirementGroupMap, concentrations];
+  return [requirementGroupMap, concentrations, credits];
 }
 
 function tableToReqGroup(
@@ -324,10 +199,8 @@ module.exports = catalogToMajor;
 /**
  * testing. move to test file.
  */
-catalogToMajor(
-  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/data-science-biology-bs/#programrequirementstext"
-).then((scrapedMajor: Major) => {
-  //uncomment following lines to log output.
-  // console.log("--------------------Parsed major object--------------------");
-  // console.log(JSON.stringify(scrapedMajor));
-});
+// catalogToMajor("").then((scrapedMajor: Major) => {
+//   //uncomment following lines to log output.
+//   // console.log("--------------------Parsed major object--------------------");
+//   // console.log(JSON.stringify(scrapedMajor));
+// });

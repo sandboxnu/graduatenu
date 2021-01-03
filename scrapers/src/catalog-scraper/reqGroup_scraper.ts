@@ -1,23 +1,13 @@
 import {
-  Major,
   IMajorRequirementGroup,
   ANDSection,
   RANGESection,
   ORSection,
   Requirement,
-  IOrCourse,
-  IAndCourse,
   ICourseRange,
-  IRequiredCourse,
   ISubjectRange,
-  ICreditRangeCourse,
 } from "../../../common/types";
-import {
-  SectionType,
-  CreditsRange,
-  ScraperRequirement,
-  SubSectionType,
-} from "../models/types";
+import { SectionType, CreditsRange, SubSectionType } from "../models/types";
 import {
   ORTagMap,
   RANGETagMap,
@@ -25,7 +15,7 @@ import {
   SubheaderTagSet,
   IgnoreTags,
   ANDSectionHeader,
-} from "./catalog_scraper";
+} from "./scraper_constants";
 import {
   processHoursText,
   findReqGroupName,
@@ -88,6 +78,18 @@ export function createRequirementGroup(
         sectionType === SectionType.OR &&
         currentRow.find("span.courselistcomment.commentindent").length > 0
       ) {
+        if (
+          currentRow
+            .find("span.courselistcomment.commentindent")
+            .text()
+            .includes("to") ||
+          currentRow
+            .find("span.courselistcomment.commentindent")
+            .text()
+            .includes("or higher")
+        ) {
+          sectionType = SectionType.RANGE;
+        }
         break;
       } else if (RANGETagMap.hasOwnProperty(commentSpan.text())) {
         //detected Range Tag; change section type to Range
