@@ -283,6 +283,10 @@ function AddPlanPopperComponent(props: Props) {
     let catalogYears = [
       ...Array.from(new Set(allMajors.map(maj => maj.yearVersion.toString()))),
     ];
+
+    // To avoid displaying "null"
+    const value = selectedCatalogYear ? String(selectedCatalogYear) : undefined;
+
     return (
       <Autocomplete
         style={{ marginTop: "10px", marginBottom: "5px" }}
@@ -296,7 +300,7 @@ function AddPlanPopperComponent(props: Props) {
             fullWidth
           />
         )}
-        value={String(selectedCatalogYear)}
+        value={value}
         onChange={(e, value) => {
           setSelectedCatalogYear(value === "" ? null : Number(value));
           setSelectedMajor(null);

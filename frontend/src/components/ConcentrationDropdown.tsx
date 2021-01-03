@@ -17,7 +17,7 @@ interface SaveInParentConcentrationDropdownProps {
   readonly isUserLevel: boolean; // If not at the user level, it is at the plan level.
   readonly concentration: string | null;
   readonly setConcentration: (concentration: string | null) => void;
-  readonly setError: (error: boolean) => void; // To tell the parent that there is an error with the input (no major selected when there should be)
+  readonly setError?: (error: boolean) => void; // To tell the parent that there is an error with the input (no major selected when there should be)
 }
 
 interface SaveOnChangeConcentrationDropdownProps {
@@ -69,7 +69,9 @@ const SaveInParentConcentrationDropdown: React.FC<SaveInParentConcentrationDropd
           value={concentration}
           onChange={(e, value) => {
             setConcentration(value);
-            setError(isError);
+            if (setError) {
+              setError(isError);
+            }
           }}
         />
       )}
@@ -87,7 +89,6 @@ const SaveOnChangeConcentrationDropdown: React.FC<SaveOnChangeConcentrationDropd
       ? getUserConcentrationFromState(state)
       : safelyGetActivePlanConcentrationFromState(state)
   );
-  const [error, setError] = useState(false);
 
   const dispatchConcentration = (newConcentration: string | null) => {
     if (isUserLevel) {
@@ -102,7 +103,6 @@ const SaveOnChangeConcentrationDropdown: React.FC<SaveOnChangeConcentrationDropd
       isUserLevel={isUserLevel}
       concentration={concentration}
       setConcentration={dispatchConcentration}
-      setError={setError}
     />
   );
 };
