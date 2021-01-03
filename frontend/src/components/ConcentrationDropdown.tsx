@@ -14,29 +14,23 @@ import { setActivePlanConcentrationAction } from "../state/actions/userPlansActi
 import { AppState } from "../state/reducers/state";
 
 interface SaveInParentConcentrationDropdownProps {
-  readonly isUserLevel: boolean; // If not at the user level, it is at the plan level.
+  readonly major: Major | undefined;
   readonly concentration: string | null;
   readonly setConcentration: (concentration: string | null) => void;
   readonly setError?: (error: boolean) => void; // To tell the parent that there is an error with the input (no major selected when there should be)
 }
 
 interface SaveOnChangeConcentrationDropdownProps {
-  readonly isUserLevel: boolean;
+  readonly isUserLevel: boolean; // If not at the user level, it is at the plan level.
 }
 
 // Concentration dropdown which sets the concentration in the parent using the given setter whenever it is changed.
 const SaveInParentConcentrationDropdown: React.FC<SaveInParentConcentrationDropdownProps> = ({
-  isUserLevel,
+  major,
   concentration,
   setConcentration,
   setError,
 }) => {
-  const major: Major | undefined = useSelector((state: AppState) =>
-    isUserLevel
-      ? getUserMajorFromState(state)
-      : safelyGetActivePlanMajorObjectFromState(state)
-  );
-
   const concentrationNames: Array<string> = major
     ? major.concentrations.concentrationOptions.map(
         (concentration: Concentration) => concentration.name
@@ -90,6 +84,12 @@ const SaveOnChangeConcentrationDropdown: React.FC<SaveOnChangeConcentrationDropd
       : safelyGetActivePlanConcentrationFromState(state)
   );
 
+  const major: Major | undefined = useSelector((state: AppState) =>
+    isUserLevel
+      ? getUserMajorFromState(state)
+      : safelyGetActivePlanMajorObjectFromState(state)
+  );
+
   const dispatchConcentration = (newConcentration: string | null) => {
     if (isUserLevel) {
       dispatch(setUserConcentrationAction(newConcentration));
@@ -100,7 +100,7 @@ const SaveOnChangeConcentrationDropdown: React.FC<SaveOnChangeConcentrationDropd
 
   return (
     <SaveInParentConcentrationDropdown
-      isUserLevel={isUserLevel}
+      major={major}
       concentration={concentration}
       setConcentration={dispatchConcentration}
     />
