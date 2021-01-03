@@ -60,7 +60,7 @@ export const majorsReducer = (
         draft.isFetchingMajors = true;
         return draft;
       case getType(fetchMajorsSuccessAction):
-        const majors: Major[] = action.payload.majors;
+        const majors: Major[] = action.payload.majors.slice(1);
         // TODO remove once concentrations are in the backend
         const DEFAULT_CONCENTRATIONS: Concentrations = {
           minOptions: 0,

@@ -1,6 +1,6 @@
 import { TextField } from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Concentration, Major } from "../../../common/types";
 import {
@@ -17,6 +17,7 @@ interface SaveInParentConcentrationDropdownProps {
   readonly isUserLevel: boolean; // If not at the user level, it is at the plan level.
   readonly concentration: string | null;
   readonly setConcentration: (concentration: string | null) => void;
+  readonly setError: (error: boolean) => void; // To tell the parent that there is an error with the input (no major selected when there should be)
 }
 
 interface SaveOnChangeConcentrationDropdownProps {
@@ -28,6 +29,7 @@ const SaveInParentConcentrationDropdown: React.FC<SaveInParentConcentrationDropd
   isUserLevel,
   concentration,
   setConcentration,
+  setError,
 }) => {
   const major: Major | undefined = useSelector((state: AppState) =>
     isUserLevel
@@ -41,9 +43,17 @@ const SaveInParentConcentrationDropdown: React.FC<SaveInParentConcentrationDropd
       )
     : [];
 
+  const shouldDisplayDropdown: boolean =
+    (major && major.concentrations.concentrationOptions.length > 0) || false;
+
+  // An error occurs if there is no concentration selected when at least 1 is required.
+  const isError: boolean =
+    (concentration === null && major && major.concentrations.minOptions > 0) ||
+    false;
+
   return (
     <>
-      {major && (
+      {shouldDisplayDropdown && (
         <Autocomplete
           disableListWrap
           options={concentrationNames}
@@ -53,11 +63,13 @@ const SaveInParentConcentrationDropdown: React.FC<SaveInParentConcentrationDropd
               variant="outlined"
               label="Concentration"
               fullWidth
+              error={isError}
             />
           )}
           value={concentration}
           onChange={(e, value) => {
             setConcentration(value);
+            setError(isError);
           }}
         />
       )}
@@ -75,6 +87,7 @@ const SaveOnChangeConcentrationDropdown: React.FC<SaveOnChangeConcentrationDropd
       ? getUserConcentrationFromState(state)
       : safelyGetActivePlanConcentrationFromState(state)
   );
+  const [error, setError] = useState(false);
 
   const dispatchConcentration = (newConcentration: string | null) => {
     if (isUserLevel) {
@@ -89,6 +102,7 @@ const SaveOnChangeConcentrationDropdown: React.FC<SaveOnChangeConcentrationDropd
       isUserLevel={isUserLevel}
       concentration={concentration}
       setConcentration={dispatchConcentration}
+      setError={setError}
     />
   );
 };
