@@ -6,12 +6,13 @@ import { getAuthToken } from "../utils/auth-helpers";
  */
 export const sendChangeLog = (
   planId: number,
-  userId: number,
+  studentId: number,
+  authorId: number,
   log: string
 ): Promise<IChangeLog> =>
-  fetch(`/api/users/${userId}/plans/${planId}/plan_changelogs/`, {
+  fetch(`/api/users/${studentId}/plans/${planId}/plan_changelogs/`, {
     method: "POST",
-    body: JSON.stringify({ log: log }),
+    body: JSON.stringify({ log: log, author_id: authorId }),
     headers: {
       "Content-Type": "application/json",
       Authorization: "Token " + getAuthToken(),

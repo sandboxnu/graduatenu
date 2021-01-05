@@ -33,7 +33,6 @@ class User < ApplicationRecord
   JWT_EXPIRATION = 60.days
   has_many :plans, dependent: :destroy
   has_many :folders, dependent: :destroy # only relevant for advisors
-  has_many :plan_changelogs, dependent: :destroy
 
   #validates a non-unique full_name and allows spaces
   validates :full_name, presence: true, allow_blank: false, format: { with: /\A[a-zA-Z0-9 ]+\z/ }
