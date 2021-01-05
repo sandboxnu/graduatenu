@@ -13,50 +13,47 @@ export const setStudentAction = createAction(
   })
 )();
 
-export const setAcademicYearAction = createAction(
+export const setStudentAcademicYearAction = createAction(
   "student/SET_ACADEMIC_YEAR",
   (academicYear: number) => ({
     academicYear,
   })
 )();
 
-export const setGraduationYearAction = createAction(
+export const setStudentGraduationYearAction = createAction(
   "student/SET_GRADUATION_YEAR",
   (graduationYear: number) => ({
     graduationYear,
   })
 )();
 
-export const setUserMajorAction = createAction(
+export const setStudentMajorAction = createAction(
   "student/SET_USER_MAJOR",
   (major: string | null) => ({
     major,
   })
 )();
 
-export const setUserCoopCycleAction = createAction(
+export const setStudentCoopCycleAction = createAction(
   "student/SET_COOP_CYCLE",
   (coopCycle: string | null) => ({
     coopCycle,
   })
 )();
 
-export const setUserCatalogYearAction = createAction(
+export const setStudentCatalogYearAction = createAction(
   "student/SET_CATALOG",
   (catalogYear: number | null) => ({
     catalogYear,
   })
 )();
 
-export const setExamCreditsAction = createAction(
+export const setStudentExamCreditsAction = createAction(
   "student/SET_EXAM_CREDITS",
   (examCredits: TransferableExam[]) => ({ examCredits })
 )();
 
-export const resetUserAction = createAction(
-  "student/RESET_USER",
-  () => void 0
-)();
+export const resetStudentAction = createAction("student/RESET", () => void 0)();
 
 export const addTransferClassAction = createAction(
   "student/ADD_TRANSFER",

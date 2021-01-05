@@ -42,7 +42,7 @@ import {
 import { AddPlan } from "./AddPlanPopper";
 
 import { SwitchPlanPopper } from "./SwitchPlanPopper";
-import { resetUserAction } from "../state/actions/studentActions";
+import { resetStudentAction } from "../state/actions/studentActions";
 import { removeAuthTokenFromCookies } from "../utils/auth-helpers";
 import { RequestFeedbackPopper } from "./RequestFeedbackPopper";
 import {
@@ -390,7 +390,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     dispatch(updateActivePlanAction(updatedPlan)),
   setActivePlanDNDSchedule: (schedule: DNDSchedule) =>
     dispatch(setActivePlanDNDScheduleAction(schedule)),
-  logOut: () => dispatch(resetUserAction()),
+  logOut: () => dispatch(resetStudentAction()),
   incrementCurrentClassCounter: () =>
     dispatch(incrementCurrentClassCounterForActivePlanAction()),
 });

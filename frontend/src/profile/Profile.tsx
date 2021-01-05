@@ -8,10 +8,10 @@ import Autocomplete from "@material-ui/lab/Autocomplete";
 import { IconButton } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
 import {
-  setGraduationYearAction,
-  setUserCoopCycleAction,
-  setUserMajorAction,
-  setUserCatalogYearAction,
+  setStudentGraduationYearAction,
+  setStudentCoopCycleAction,
+  setStudentMajorAction,
+  setStudentCatalogYearAction,
 } from "../state/actions/studentActions";
 import {
   getMajorsFromState,
@@ -190,7 +190,7 @@ const ProfileComponent: React.FC = () => {
             )}
             value={val}
             onChange={(event: React.SyntheticEvent<{}>, value: any) => {
-              dispatch(setUserCatalogYearAction(value));
+              dispatch(setStudentCatalogYearAction(value));
             }}
           />
         )}
@@ -249,14 +249,14 @@ const ProfileAdvisor = (props: any) => {
 
   const save = () => {
     setEdit(false);
-    dispatch(setUserMajorAction(major || ""));
+    dispatch(setStudentMajorAction(major || ""));
     if (coopCycle !== "None Selected") {
-      dispatch(setUserCoopCycleAction(""));
+      dispatch(setStudentCoopCycleAction(""));
     } else {
-      dispatch(setUserCoopCycleAction(coopCycle || ""));
+      dispatch(setStudentCoopCycleAction(coopCycle || ""));
     }
 
-    dispatch(setGraduationYearAction(gradYear));
+    dispatch(setStudentGraduationYearAction(gradYear));
 
     const token = getAuthToken();
 

@@ -12,12 +12,12 @@ export {};
 // import {
 //   setFullNameAction,
 //   setMajorPlanAction,
-//   setAcademicYearAction,
-//   setGraduationYearAction,
+//   setStudentAcademicYearAction,
+//   setStudentGraduationYearAction,
 //   setUserIdAction,
 //   setDeclaredMajorAction,
 //   setEmailAction,
-//   setUserCoopCycleAction,
+//   setStudentCoopCycleAction,
 // } from "../state/actions/userActions";
 // import { getMajors } from "../state";
 // import { setSchedules } from "../state/actions/userPlansActions";
@@ -315,9 +315,9 @@ export {};
 // const mapDispatchToProps = (dispatch: Dispatch) => ({
 //   setFullName: (fullName: string) => dispatch(setFullNameAction(fullName)),
 //   setAcademicYear: (academicYear: number) =>
-//     dispatch(setAcademicYearAction(academicYear)),
+//     dispatch(setStudentAcademicYearAction(academicYear)),
 //   setGraduationYear: (academicYear: number) =>
-//     dispatch(setGraduationYearAction(academicYear)),
+//     dispatch(setStudentGraduationYearAction(academicYear)),
 //   setMajorPlan: (major: Major | undefined, planStr: string) =>
 //     dispatch(setMajorPlanAction(major, planStr)),
 //   setUserId: (id: number) => dispatch(setUserIdAction(id)),
@@ -325,7 +325,7 @@ export {};
 //     dispatch(setSchedules(schedules)),
 //   setMajor: (major?: Major) => dispatch(setDeclaredMajorAction(major)),
 //   setUserCoopCycle: (coopCycle: string) =>
-//     dispatch(setUserCoopCycleAction(coopCycle)),
+//     dispatch(setStudentCoopCycleAction(coopCycle)),
 //   setEmail: (email: string) => dispatch(setEmailAction(email)),
 // });
 

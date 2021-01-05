@@ -3,19 +3,19 @@ import produce from "immer";
 import { getType } from "typesafe-actions";
 import { StudentAction, UserPlansAction } from "../actions";
 import {
-  setAcademicYearAction,
-  setGraduationYearAction,
-  setUserCoopCycleAction,
-  setExamCreditsAction,
-  resetUserAction,
-  setUserMajorAction,
+  setStudentAcademicYearAction,
+  setStudentGraduationYearAction,
+  setStudentCoopCycleAction,
+  setStudentExamCreditsAction,
+  resetStudentAction,
+  setStudentMajorAction,
   setStudentAction,
   addTransferClassAction,
   removeTransferClassAction,
   setCompletedCoursesAction,
   setCompletedRequirementsAction,
   setTransferCoursesAction,
-  setUserCatalogYearAction,
+  setStudentCatalogYearAction,
 } from "../actions/studentActions";
 import { IUserData } from "../../models/types";
 import { ScheduleCourse } from "../../../../common/types";
@@ -47,34 +47,34 @@ export const studentReducer = (
         }
         return draft;
       }
-      case getType(setUserMajorAction): {
+      case getType(setStudentMajorAction): {
         draft.student!.major = action.payload.major;
         draft.student!.coopCycle = null;
         return draft;
       }
-      case getType(setAcademicYearAction): {
+      case getType(setStudentAcademicYearAction): {
         draft.student!.academicYear = action.payload.academicYear;
         return draft;
       }
-      case getType(setGraduationYearAction): {
+      case getType(setStudentGraduationYearAction): {
         draft.student!.graduationYear = action.payload.graduationYear;
         return draft;
       }
-      case getType(setUserCoopCycleAction): {
+      case getType(setStudentCoopCycleAction): {
         draft.student!.coopCycle = action.payload.coopCycle;
         return draft;
       }
-      case getType(setUserCatalogYearAction): {
+      case getType(setStudentCatalogYearAction): {
         draft.student!.catalogYear = action.payload.catalogYear;
         draft.student!.major = null;
         draft.student!.coopCycle = null;
         return draft;
       }
-      case getType(setExamCreditsAction): {
+      case getType(setStudentExamCreditsAction): {
         draft.student!.examCredits = action.payload.examCredits;
         return draft;
       }
-      case getType(resetUserAction): {
+      case getType(resetStudentAction): {
         return initialState;
       }
       case getType(addTransferClassAction): {

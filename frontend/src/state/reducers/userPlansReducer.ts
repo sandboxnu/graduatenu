@@ -27,7 +27,7 @@ import {
   changeSemesterStatusForActivePlanAction,
   updateSemesterForActivePlanAction,
 } from "../actions/userPlansActions";
-import { resetUserAction } from "../actions/studentActions";
+import { resetStudentAction } from "../actions/studentActions";
 import {
   clearSchedule,
   convertTermIdToSeason,
@@ -326,7 +326,7 @@ export const userPlansReducer = (
         draft.closedYears[draft.activePlan!] = [];
         return draft;
       }
-      case getType(resetUserAction): {
+      case getType(resetStudentAction): {
         return initialState;
       }
       case getType(setActivePlanStatusAction): {

@@ -9,11 +9,11 @@ import { Dispatch } from "redux";
 import { Major, Schedule } from "../../../common/types";
 import { planToString } from "../utils";
 import {
-  setAcademicYearAction,
-  setGraduationYearAction,
-  setUserCoopCycleAction,
-  setUserMajorAction,
-  setUserCatalogYearAction,
+  setStudentAcademicYearAction,
+  setStudentGraduationYearAction,
+  setStudentCoopCycleAction,
+  setStudentMajorAction,
+  setStudentCatalogYearAction,
 } from "../state/actions/studentActions";
 import Loader from "react-loader-spinner";
 import {
@@ -395,14 +395,14 @@ class OnboardingScreenComponent extends React.Component<
  */
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   setAcademicYear: (academicYear: number) =>
-    dispatch(setAcademicYearAction(academicYear)),
+    dispatch(setStudentAcademicYearAction(academicYear)),
   setGraduationYear: (academicYear: number) =>
-    dispatch(setGraduationYearAction(academicYear)),
-  setMajor: (major: string | null) => dispatch(setUserMajorAction(major)),
+    dispatch(setStudentGraduationYearAction(academicYear)),
+  setMajor: (major: string | null) => dispatch(setStudentMajorAction(major)),
   setCoopCycle: (coopCycle: string | null) =>
-    dispatch(setUserCoopCycleAction(coopCycle)),
+    dispatch(setStudentCoopCycleAction(coopCycle)),
   setCatalogYear: (catalogYear: number | null) =>
-    dispatch(setUserCatalogYearAction(catalogYear)),
+    dispatch(setStudentCatalogYearAction(catalogYear)),
 });
 
 /**

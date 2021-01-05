@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import { RedColorButton } from "../components/common/ColoredButtons";
 import { removeAuthTokenFromCookies } from "../utils/auth-helpers";
 import { useDispatch } from "react-redux";
-import { resetUserAction } from "../state/actions/studentActions";
+import { resetStudentAction } from "../state/actions/studentActions";
 
 const Header = styled.div`
   display: flex;
@@ -52,7 +52,7 @@ const GenericAdvisingTemplate: React.FC = ({ children }) => {
   };
 
   const logOut = () => {
-    dispatch(resetUserAction());
+    dispatch(resetStudentAction());
     window.location.reload();
     removeAuthTokenFromCookies();
     history.push("/");
