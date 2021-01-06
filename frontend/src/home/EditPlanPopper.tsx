@@ -408,7 +408,11 @@ export class EditPlanPopperComponent extends React.Component<
               {!!this.props.plan.catalogYear && this.renderMajorDropDown()}
               <SaveOnChangeConcentrationDropdown
                 isUserLevel={false}
-                style={{ marginBottom: "5px", marginTop: "10px" }}
+                style={{
+                  width: "100%",
+                  marginBottom: "5px",
+                  marginTop: "10px",
+                }}
                 useLabel={true}
               />
               {!!this.props.plan.major && this.renderPlansDropDown()}

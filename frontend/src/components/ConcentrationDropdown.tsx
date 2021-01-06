@@ -1,4 +1,4 @@
-import { TextField } from "@material-ui/core";
+import { FormControl, FormHelperText, TextField } from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
 import { CSSProperties } from "@material-ui/styles";
 import React, { useEffect, useState } from "react";
@@ -22,6 +22,7 @@ interface SaveInParentConcentrationDropdownProps {
   readonly setError?: (error: boolean) => void; // To tell the parent that there is an error with the input (no major selected when there should be)
   readonly style?: CSSProperties;
   readonly useLabel?: boolean;
+  readonly hideError?: boolean;
 }
 
 interface SaveOnChangeConcentrationDropdownProps {
@@ -38,6 +39,7 @@ const SaveInParentConcentrationDropdown: React.FC<SaveInParentConcentrationDropd
   setError,
   style,
   useLabel,
+  hideError,
 }) => {
   const concentrationNames: Array<string> = major
     ? major.concentrations.concentrationOptions.map(
@@ -50,10 +52,18 @@ const SaveInParentConcentrationDropdown: React.FC<SaveInParentConcentrationDropd
 
   // An error occurs if there is no concentration selected when at least 1 is required.
   const hasError: boolean =
-    (!concentration && major && major.concentrations.minOptions > 0) || false;
+    !concentration && !!major && major.concentrations.minOptions > 0;
+
+  const onChange = (e: React.SyntheticEvent<{}>, value: any) => {
+    setConcentration(value);
+    if (setError) {
+      setError(hasError);
+    }
+  };
 
   useEffect(() => {
     if (setError) {
+      // Inform the parent about any changes to the error state.
       setError(hasError);
     }
   }, [concentration]);
@@ -61,27 +71,28 @@ const SaveInParentConcentrationDropdown: React.FC<SaveInParentConcentrationDropd
   return (
     <>
       {shouldDisplayDropdown && (
-        <Autocomplete
-          style={style}
-          disableListWrap
-          options={concentrationNames}
-          renderInput={params => (
-            <TextField
-              {...params}
-              variant="outlined"
-              label={useLabel ? "Concentration" : ""}
-              fullWidth
-              error={hasError}
-            />
-          )}
-          value={concentration}
-          onChange={(e, value) => {
-            setConcentration(value);
-            if (setError) {
-              setError(hasError);
-            }
-          }}
-        />
+        <FormControl variant="outlined" error={hasError} style={style}>
+          <Autocomplete
+            disableListWrap
+            options={concentrationNames}
+            renderInput={params => (
+              <TextField
+                {...params}
+                variant="outlined"
+                label={useLabel ? "Concentration" : ""}
+                fullWidth
+                error={!hideError && hasError}
+              />
+            )}
+            value={concentration}
+            onChange={onChange}
+          />
+          <FormHelperText>
+            {!hideError &&
+              hasError &&
+              "A concentration is required for your selected major"}
+          </FormHelperText>
+        </FormControl>
       )}
     </>
   );

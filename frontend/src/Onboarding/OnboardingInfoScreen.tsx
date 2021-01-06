@@ -14,6 +14,7 @@ import {
   setUserCoopCycleAction,
   setUserMajorAction,
   setUserCatalogYearAction,
+  setUserConcentrationAction,
 } from "../state/actions/userActions";
 import Loader from "react-loader-spinner";
 import {
@@ -33,6 +34,8 @@ import {
 import { AppState } from "../state/reducers/state";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import { findMajorFromName } from "../utils/plan-helpers";
+import { SaveInParentConcentrationDropdown } from "../components/ConcentrationDropdown";
+import { majorWithConcentrationData } from "../data/mockData";
 
 const SpinnerWrapper = styled.div`
   display: flex;
@@ -55,6 +58,7 @@ interface OnboardingReduxDispatchProps {
   setGraduationYear: (graduationYear: number) => void;
   setCatalogYear: (catalogYear: number | null) => void;
   setMajor: (major: string | null) => void;
+  setConcentration: (concentration: string | null) => void;
   setCoopCycle: (coopCycle: string | null) => void;
 }
 
@@ -67,9 +71,12 @@ interface OnboardingScreenState {
   gradYear?: number;
   beenEditedGrad: boolean;
   major?: string;
+  concentration?: string;
   coopCycle?: string;
   catalogYear?: number;
   showNeedsCatalogYearIfMajorError: boolean;
+  hasNoConcentrationSelectedError: boolean;
+  showNoConcentrationSelectedError: boolean;
 }
 
 const marginSpace = 12;
@@ -90,7 +97,10 @@ class OnboardingScreenComponent extends React.Component<
       beenEditedYear: false,
       beenEditedGrad: false,
       showNeedsCatalogYearIfMajorError: false,
+      hasNoConcentrationSelectedError: false,
+      showNoConcentrationSelectedError: false,
       major: props.major || undefined,
+      concentration: undefined,
       coopCycle: undefined,
     };
   }
@@ -125,6 +135,7 @@ class OnboardingScreenComponent extends React.Component<
 
     this.setState({
       major: newMajor,
+      concentration: undefined,
       coopCycle: undefined,
       catalogYear: newCatalogYear,
       showNeedsCatalogYearIfMajorError: true,
@@ -132,7 +143,17 @@ class OnboardingScreenComponent extends React.Component<
   }
 
   onChangeMajor(event: React.SyntheticEvent<{}>, value: any) {
-    this.setState({ major: value || undefined, coopCycle: undefined });
+    this.setState({
+      major: value || undefined,
+      coopCycle: undefined,
+      concentration: undefined,
+    });
+  }
+
+  onChangeConcentration(value: any) {
+    this.setState({
+      concentration: value,
+    });
   }
 
   onChangePlan(event: React.SyntheticEvent<{}>, value: any) {
@@ -148,6 +169,7 @@ class OnboardingScreenComponent extends React.Component<
     this.props.setGraduationYear(this.state.gradYear!);
     this.props.setCatalogYear(this.state.catalogYear || null);
     this.props.setMajor(this.state.major || null);
+    this.props.setConcentration(this.state.concentration || null);
     this.props.setCoopCycle(this.state.coopCycle || null);
   }
 
@@ -263,7 +285,7 @@ class OnboardingScreenComponent extends React.Component<
       <Autocomplete
         style={{ width: 326, marginBottom: marginSpace }}
         disableListWrap
-        options={this.props.plans[this.state.major!].map(p => planToString(p))}
+        options={[]} //this.props.plans[this.state.major!].map(p => planToString(p))}
         renderInput={params => (
           <TextField
             {...params}
@@ -328,6 +350,30 @@ class OnboardingScreenComponent extends React.Component<
     );
   }
 
+  renderConcentrationDropdown() {
+    const major: Major | undefined = findMajorFromName(
+      this.state.major,
+      this.props.majors,
+      this.state.catalogYear
+    );
+
+    const setError = (error: boolean) => {
+      this.setState({ hasNoConcentrationSelectedError: error });
+    };
+
+    return (
+      <SaveInParentConcentrationDropdown
+        major={major}
+        concentration={this.state.concentration || null}
+        setConcentration={this.onChangeConcentration.bind(this)}
+        style={{ width: 326, marginBottom: marginSpace }}
+        useLabel={true}
+        hideError={!this.state.showNoConcentrationSelectedError}
+        setError={setError}
+      />
+    );
+  }
+
   render() {
     const { gradYear, year, major, catalogYear } = this.state;
     const { isFetchingMajors, isFetchingPlans } = this.props;
@@ -355,9 +401,20 @@ class OnboardingScreenComponent extends React.Component<
           {this.renderCatalogYearDropDown()}
           {/* if there is a major given from khoury we want to show the major dropdown */}
           {(!!catalogYear || !!major) && this.renderMajorDropDown()}
+          {!!catalogYear && !!major && this.renderConcentrationDropdown()}
           {!!catalogYear && !!major && this.renderCoopCycleDropDown()}
           {/* requires year, gradYear, and if there is a major, then there must be a catalog year */}
-          {!!year && !!gradYear && (!major || !!catalogYear) ? (
+          {this.state.hasNoConcentrationSelectedError ? (
+            <div
+              onClick={() =>
+                this.setState({
+                  showNoConcentrationSelectedError: true,
+                })
+              }
+            >
+              <NextButton />
+            </div>
+          ) : !!year && !!gradYear && (!major || !!catalogYear) ? (
             <Link
               to={{
                 pathname: !!major
@@ -398,6 +455,8 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   setGraduationYear: (academicYear: number) =>
     dispatch(setGraduationYearAction(academicYear)),
   setMajor: (major: string | null) => dispatch(setUserMajorAction(major)),
+  setConcentration: (concentration: string | null) =>
+    dispatch(setUserConcentrationAction(concentration)),
   setCoopCycle: (coopCycle: string | null) =>
     dispatch(setUserCoopCycleAction(coopCycle)),
   setCatalogYear: (catalogYear: number | null) =>
