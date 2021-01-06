@@ -31,8 +31,15 @@ const CommentsHeader = styled.div`
   width: 100%;
 `;
 
-const CommentsContainer = styled.div`
+const CommentsDropdownContainer = styled.div`
   margin-right: 30px;
+`;
+
+const CommentsContainer = styled.div`
+  margin-left: 30px;
+  border: 1px solid rgba(21, 116, 62, 0.68);
+  max-height: 300px;
+  overflow-y: scroll;
 `;
 
 const CommentHeaderText = styled.p`
@@ -46,8 +53,16 @@ const LoadingContainer = styled.div`
 `;
 
 const CommentContainer = styled.div<any>`
+  border-bottom: 1px solid rgba(21, 116, 62, 0.68);
+  box-sizing: border-box;
+  position: relative;
+  height: 100%;
+  padding: 30px;
+  white-space: pre-wrap;
+`;
+
+const InputContainer = styled.div<any>`
   border: 1px solid rgba(21, 116, 62, 0.68);
-  border-top: none;
   box-sizing: border-box;
   position: relative;
   height: 100%;
@@ -153,7 +168,7 @@ export const Comments: React.FC<Props> = (props: Props) => {
     };
 
     return (
-      <CommentContainer>
+      <InputContainer>
         <TextField
           multiline
           value={comment}
@@ -170,12 +185,12 @@ export const Comments: React.FC<Props> = (props: Props) => {
             Comment
           </CommentButton>
         </SubmitCommentButton>
-      </CommentContainer>
+      </InputContainer>
     );
   };
 
   return (
-    <CommentsContainer>
+    <CommentsDropdownContainer>
       <CommentHeaderWithDropDown>
         <div
           onClick={() => {
@@ -189,24 +204,26 @@ export const Comments: React.FC<Props> = (props: Props) => {
           <CommentHeaderText> Comments </CommentHeaderText>
         </CommentsHeader>
       </CommentHeaderWithDropDown>
-      {isExpanded && (
-        <div>
-          {loading ? (
-            <LinearLoading />
-          ) : (
-            comments.map((comment: IComment) => (
-              <Comment
-                author={comment.author}
-                comment={comment.comment}
-                createdAt={comment.createdAt}
-                updatedAt={comment.updatedAt}
-              ></Comment>
-            ))
-          )}
-          <CommentInput />
-        </div>
-      )}
-    </CommentsContainer>
+      <CommentsContainer>
+        {isExpanded && (
+          <div>
+            {loading ? (
+              <LinearLoading />
+            ) : (
+              comments.map((comment: IComment) => (
+                <Comment
+                  author={comment.author}
+                  comment={comment.comment}
+                  createdAt={comment.createdAt}
+                  updatedAt={comment.updatedAt}
+                ></Comment>
+              ))
+            )}
+          </div>
+        )}
+      </CommentsContainer>
+      <CommentInput />
+    </CommentsDropdownContainer>
   );
 };
 
