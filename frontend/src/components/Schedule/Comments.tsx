@@ -4,13 +4,10 @@ import styled from "styled-components";
 import { IComment } from "../../models/types";
 import { fetchComments, sendComment } from "../../services/AdvisorService";
 import {
-  getAdvisorCommentsFromState,
   safelyGetActivePlanIdFromState,
   safelyGetUserIdFromState,
-  getUserFullNameFromState,
   getAdvisorFullNameFromState,
 } from "../../state";
-import { addCommentAction } from "../../state/actions/advisorActions";
 import { AppState } from "../../state/reducers/state";
 import { GenericColorButton } from "../common/ColoredButton";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";

@@ -268,8 +268,5 @@ export const getFolderExpandedFromState = (state: AppState, index: number) =>
 export const getAdvisorUserIdFromState = (state: AppState) =>
   state.advisorState.advisor!.id;
 
-export const getAdvisorCommentsFromState = (state: AppState) =>
-  state.advisorState.comments;
-
 export const getAdvisorFullNameFromState = (state: AppState) =>
   state.advisorState.advisor!.fullName;
