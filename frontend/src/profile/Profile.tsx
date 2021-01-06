@@ -119,6 +119,8 @@ const ProfileEmail = styled.div`
 const ButtonContainer = styled.div`
   box-sizing: border-box;
   width: 100%;
+  text-align: center;
+  margin-top: 20px;
 `;
 
 const ProfileComponent: React.FC = () => {

@@ -109,6 +109,10 @@ const CourseName = styled.div`
   line-height: 21px;
 `;
 
+const ButtonContainer = styled.div`
+  margin-top: 20px;
+`;
+
 const EMPTY_COURSE_LIST: ScheduleCourse[] = [];
 
 interface SearchResultProps {
@@ -241,15 +245,17 @@ export const AddClassSearchModal: React.FC<AddClassSearchModalProps> = props => 
       </SearchContainer>
       <SearchResults />
       <AddedClasses />
-      <PrimaryButton
-        onClick={() => {
-          props.handleSubmit(selectedCourses);
-          onClose();
-        }}
-        disabled={selectedCourses.length === 0}
-      >
-        Add Classes
-      </PrimaryButton>
+      <ButtonContainer>
+        <PrimaryButton
+          onClick={() => {
+            props.handleSubmit(selectedCourses);
+            onClose();
+          }}
+          disabled={selectedCourses.length === 0}
+        >
+          Add Classes
+        </PrimaryButton>
+      </ButtonContainer>
     </DefaultModal>
   );
 };

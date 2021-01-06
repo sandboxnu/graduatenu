@@ -51,6 +51,7 @@ const HolderBody = styled.div<any>`
   box-sizing: border-box;
   position: relative;
   height: 100%;
+  min-height: 30px;
   background-color: "rgb(255, 255, 255, 0)";
 `;
 
