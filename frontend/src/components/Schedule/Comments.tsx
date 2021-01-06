@@ -14,7 +14,8 @@ import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import * as timeago from "timeago.js";
 import { TextField } from "@material-ui/core";
-import { LoadingSpinner } from "../common/LoadingSpinner";
+import LinearProgress from "@material-ui/core/LinearProgress";
+import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 
 const CommentsHeader = styled.div`
   display: flex;
@@ -34,6 +35,10 @@ const CommentHeaderText = styled.p`
   font-weight: 600;
   font-size: 16px;
   color: white;
+`;
+
+const LoadingContainer = styled.div`
+  margin-left: 30px;
 `;
 
 const CommentContainer = styled.div<any>`
@@ -74,6 +79,24 @@ const CommentHeaderWithDropDown = styled.div`
   align-items: center;
 `;
 
+const CommentTheme = createMuiTheme({
+  palette: {
+    secondary: {
+      main: "#15743e",
+    },
+  },
+});
+
+const LinearLoading = () => {
+  return (
+    <MuiThemeProvider theme={CommentTheme}>
+      <LoadingContainer>
+        <LinearProgress color="secondary" />
+      </LoadingContainer>
+    </MuiThemeProvider>
+  );
+};
+
 interface Props {
   planId: number;
   studentId: number;
@@ -83,6 +106,7 @@ export const Comments: React.FC<Props> = (props: Props) => {
   const [isExpanded, setIsExpanded] = useState(true);
   const [comments, setComments] = useState<IComment[]>([]);
   const [comment, setComment] = useState("");
+  const [loading, setLoading] = useState(true);
 
   const { planId, userId, userName } = useSelector((state: AppState) => ({
     planId: safelyGetActivePlanIdFromState(state),
@@ -94,6 +118,7 @@ export const Comments: React.FC<Props> = (props: Props) => {
     fetchComments(props.planId, props.studentId)
       .then(response => {
         setComments(response);
+        setLoading(false);
       })
       .catch(e => console.log(e));
   }, []);
@@ -159,14 +184,18 @@ export const Comments: React.FC<Props> = (props: Props) => {
       </CommentHeaderWithDropDown>
       {isExpanded && (
         <div>
-          {comments.map((comment: IComment) => (
-            <Comment
-              author={comment.author}
-              comment={comment.comment}
-              createdAt={comment.createdAt}
-              updatedAt={comment.updatedAt}
-            ></Comment>
-          ))}
+          {loading ? (
+            <LinearLoading />
+          ) : (
+            comments.map((comment: IComment) => (
+              <Comment
+                author={comment.author}
+                comment={comment.comment}
+                createdAt={comment.createdAt}
+                updatedAt={comment.updatedAt}
+              ></Comment>
+            ))
+          )}
           <CommentInput />
         </div>
       )}
@@ -175,7 +204,7 @@ export const Comments: React.FC<Props> = (props: Props) => {
 };
 
 const Comment: React.FC<IComment> = (props: IComment) => {
-  const { author, comment, createdAt, updatedAt } = props;
+  const { author, comment, createdAt } = props;
   return (
     <CommentContainer>
       <CommentHeader>
