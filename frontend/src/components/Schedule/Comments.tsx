@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { IComment } from "../../models/types";
-import { sendComment } from "../../services/AdvisorService";
+import { fetchComments, sendComment } from "../../services/AdvisorService";
 import {
   getAdvisorCommentsFromState,
   safelyGetActivePlanIdFromState,
@@ -17,6 +17,7 @@ import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import * as timeago from "timeago.js";
 import { TextField } from "@material-ui/core";
+import { LoadingSpinner } from "../common/LoadingSpinner";
 
 const CommentsHeader = styled.div`
   display: flex;
@@ -76,11 +77,73 @@ const CommentHeaderWithDropDown = styled.div`
   align-items: center;
 `;
 
-export const Comments: React.FC = () => {
+interface Props {
+  planId: number;
+  studentId: number;
+}
+
+export const Comments: React.FC<Props> = (props: Props) => {
   const [isExpanded, setIsExpanded] = useState(true);
-  const comments = useSelector((state: AppState) =>
-    getAdvisorCommentsFromState(state)
-  );
+  const [comments, setComments] = useState<IComment[]>([]);
+  const [comment, setComment] = useState("");
+
+  const { planId, userId, userName } = useSelector((state: AppState) => ({
+    planId: safelyGetActivePlanIdFromState(state),
+    userId: safelyGetUserIdFromState(state),
+    userName: getAdvisorFullNameFromState(state),
+  }));
+
+  useEffect(() => {
+    fetchComments(props.planId, props.studentId)
+      .then(response => {
+        setComments(response);
+      })
+      .catch(e => console.log(e));
+  }, []);
+
+  const CommentInput = () => {
+    const buttonDisabled = !comment;
+
+    const CommentButton = GenericColorButton(
+      "rgba(21, 116, 62, 0.68)",
+      "rgba(21, 116, 62, 0.74)"
+    );
+
+    const dispatch = useDispatch();
+
+    const handleCommentButtonClick = () => {
+      if (planId && userId) {
+        sendComment(
+          planId,
+          userId,
+          userName,
+          comment
+        ).then((response: IComment) => setComments([...comments, response]));
+        setComment("");
+      }
+    };
+
+    return (
+      <CommentContainer>
+        <TextField
+          multiline
+          value={comment}
+          onChange={event => setComment(event.target.value)}
+          label={"Enter comment here"}
+          variant="outlined"
+          fullWidth
+        />
+        <SubmitCommentButton>
+          <CommentButton
+            onClick={handleCommentButtonClick}
+            disabled={buttonDisabled}
+          >
+            Comment
+          </CommentButton>
+        </SubmitCommentButton>
+      </CommentContainer>
+    );
+  };
 
   return (
     <CommentsContainer>
@@ -123,57 +186,6 @@ const Comment: React.FC<IComment> = (props: IComment) => {
         <CommentTimestamp>{timeago.format(createdAt)}</CommentTimestamp>
       </CommentHeader>
       {comment}
-    </CommentContainer>
-  );
-};
-
-const CommentInput: React.FC = () => {
-  const [comment, setComment] = useState("");
-  const buttonDisabled = !comment;
-
-  const CommentButton = GenericColorButton(
-    "rgba(21, 116, 62, 0.68)",
-    "rgba(21, 116, 62, 0.74)"
-  );
-
-  const { planId, userId, userName } = useSelector((state: AppState) => ({
-    planId: safelyGetActivePlanIdFromState(state),
-    userId: safelyGetUserIdFromState(state),
-    userName: getAdvisorFullNameFromState(state),
-  }));
-
-  const dispatch = useDispatch();
-
-  const handleCommentButtonClick = () => {
-    if (planId && userId) {
-      sendComment(
-        planId,
-        userId,
-        userName,
-        comment
-      ).then((response: IComment) => dispatch(addCommentAction(response)));
-      setComment("");
-    }
-  };
-
-  return (
-    <CommentContainer>
-      <TextField
-        multiline
-        value={comment}
-        onChange={event => setComment(event.target.value)}
-        label={"Enter comment here"}
-        variant="outlined"
-        fullWidth
-      />
-      <SubmitCommentButton>
-        <CommentButton
-          onClick={handleCommentButtonClick}
-          disabled={buttonDisabled}
-        >
-          Comment
-        </CommentButton>
-      </SubmitCommentButton>
     </CommentContainer>
   );
 };

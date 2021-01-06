@@ -7,11 +7,8 @@ import {
 import { AutoSavePlan } from "../../home/AutoSavePlan";
 import {
   getActivePlanStatusFromState,
-  getAdvisorFullNameFromState,
   getAdvisorUserIdFromState,
-  getUserIdFromState,
   safelyGetActivePlanFromState,
-  safelyGetUserIdFromState,
 } from "../../state";
 import {
   expandAllYearsForActivePlanAction,
@@ -26,12 +23,7 @@ import styled from "styled-components";
 import { PlanTitle, ButtonHeader, ScheduleWrapper, Container } from "./Shared";
 import { Prompt, useHistory, useLocation, useParams } from "react-router";
 import { IUserData } from "../../models/types";
-import {
-  fetchComments,
-  fetchUser,
-  sendComment,
-} from "../../services/AdvisorService";
-import { setCommentsAction } from "../../state/actions/advisorActions";
+import { fetchUser } from "../../services/AdvisorService";
 import { Comments } from "../../components/Schedule/Comments";
 import {
   approvePlanForUser,
@@ -101,7 +93,7 @@ export const ExpandedStudentView: React.FC = () => {
   const history = useHistory();
   const params = useParams<ParamProps>();
   const queryParams = useQuery();
-  const id = Number(params.id);
+  const studentId = Number(params.id);
   const planId = Number(params.planId);
 
   const [editMode, setEditMode] = useState(queryParams.get("edit") === "true");
@@ -125,24 +117,21 @@ export const ExpandedStudentView: React.FC = () => {
   useEffect(() => {
     dispatch(expandAllYearsForActivePlanAction());
 
-    fetchUser(id)
+    fetchUser(studentId)
       .then(response => {
         const user = response.user;
-        fetchPlan(id, planId)
+        fetchPlan(studentId, planId)
           .then(response => {
             callUpdatePlanLastViewedOnInterval();
             batch(() => {
               dispatch(setUserAction(user));
               dispatch(setUserPlansAction([response], user.academicYear));
               dispatch(
-                setActivePlanAction(response.name, id, user.academicYear)
+                setActivePlanAction(response.name, studentId, user.academicYear)
               );
             });
             setStudent(user);
             setLoading(false);
-            fetchComments(planId, id).then(response => {
-              dispatch(setCommentsAction(response));
-            });
           })
           .catch(e => console.log(e));
       })
@@ -153,7 +142,7 @@ export const ExpandedStudentView: React.FC = () => {
       // TODO: Remove console log
       console.log(changes);
       if (changes !== "") {
-        sendChangeLog(planId, id, advisorId, changes);
+        sendChangeLog(planId, studentId, advisorId, changes);
         ScheduleChangeTracker.getInstance().clearChanges();
       }
     };
@@ -189,7 +178,7 @@ export const ExpandedStudentView: React.FC = () => {
   };
 
   const approvePlan = () => {
-    approvePlanForUser(id, planId, plan?.schedule)
+    approvePlanForUser(studentId, planId, plan?.schedule)
       .then(() => setAlertStatus(ALERT_STATUS.Success))
       .catch(() => setAlertStatus(ALERT_STATUS.Error));
   };
@@ -214,7 +203,9 @@ export const ExpandedStudentView: React.FC = () => {
             <>
               <ExpandedScheduleStudentInfo>
                 <IconButton
-                  onClick={() => history.push(`/advisor/manageStudents/${id}`)}
+                  onClick={() =>
+                    history.push(`/advisor/manageStudents/${studentId}`)
+                  }
                 >
                   <ArrowBack />
                 </IconButton>
@@ -251,7 +242,7 @@ export const ExpandedStudentView: React.FC = () => {
                   )}
                   <IconButton
                     onClick={() =>
-                      history.push(`/advisor/manageStudents/${id}`)
+                      history.push(`/advisor/manageStudents/${studentId}`)
                     }
                   >
                     <FullscreenExit />
@@ -269,7 +260,7 @@ export const ExpandedStudentView: React.FC = () => {
                       collapsibleYears={false}
                     />
                   )}
-                  <Comments />
+                  <Comments planId={planId} studentId={studentId} />
                 </ScheduleWrapper>
                 <PlanActionButtonContainer>
                   <PrimaryButton onClick={() => approvePlan()}>
