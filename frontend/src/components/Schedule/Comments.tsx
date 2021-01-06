@@ -194,6 +194,11 @@ export const Comments: React.FC<Props> = (props: Props) => {
           multiline
           value={comment}
           onChange={event => setComment(event.target.value)}
+          onKeyDown={e => {
+            if (e.key === "Enter") {
+              handleCommentButtonClick();
+            }
+          }}
           label={"Enter comment here"}
           variant="outlined"
           fullWidth
