@@ -218,7 +218,7 @@ const TransferableCreditScreen: React.FC = () => {
         );
       }
 
-      createPlanForUser(userId!, token, {
+      createPlanForUser(userId!, {
         name: "Plan 1",
         link_sharing_enabled: false,
         schedule: schedule,

@@ -42,7 +42,6 @@ import { addNewPlanAction } from "../state/actions/userPlansActions";
 import { ExcelUpload } from "../components/ExcelUpload";
 import { NextButton } from "../components/common/NextButton";
 import { ColoredButton } from "../components/common/ColoredButton";
-import { getAuthToken } from "../utils/auth-helpers";
 
 const EXCEL_TOOLTIP =
   "Auto-populate your schedule with your excel plan of study. Reach out to your advisor if you don't have it!";
@@ -233,8 +232,7 @@ function AddPlanPopperComponent(props: Props) {
   };
 
   const savePlan = async () => {
-    const token = getAuthToken();
-    const plan = await createPlanForUser(userId!, token, {
+    const plan = await createPlanForUser(userId!, {
       name: planName!,
       link_sharing_enabled: false,
       schedule: selectedDNDSchedule.current!,

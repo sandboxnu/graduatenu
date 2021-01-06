@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
-import { IComment } from "../../models/types";
-import { fetchComments, sendComment } from "../../services/AdvisorService";
+import { IChangeLog, IComment } from "../../models/types";
+import {
+  fetchChangelogs,
+  fetchComments,
+  sendComment,
+} from "../../services/PlanService";
 import {
   safelyGetActivePlanIdFromState,
   safelyGetUserIdFromState,
@@ -105,7 +109,7 @@ interface Props {
 export const Comments: React.FC<Props> = (props: Props) => {
   const [isExpanded, setIsExpanded] = useState(true);
   const [comments, setComments] = useState<IComment[]>([]);
-  const [comment, setComment] = useState("");
+  const [changeLogs, setChangeLogs] = useState<IChangeLog[]>([]);
   const [loading, setLoading] = useState(true);
 
   const { planId, userId, userName } = useSelector((state: AppState) => ({
@@ -115,23 +119,26 @@ export const Comments: React.FC<Props> = (props: Props) => {
   }));
 
   useEffect(() => {
-    fetchComments(props.planId, props.studentId)
-      .then(response => {
-        setComments(response);
+    Promise.all([
+      fetchComments(props.planId, props.studentId),
+      fetchChangelogs(props.planId, props.studentId),
+    ])
+      .then(values => {
+        setComments(values[0]);
+        setChangeLogs(values[1]);
         setLoading(false);
       })
       .catch(e => console.log(e));
   }, []);
 
   const CommentInput = () => {
+    const [comment, setComment] = useState("");
     const buttonDisabled = !comment;
 
     const CommentButton = GenericColorButton(
       "rgba(21, 116, 62, 0.68)",
       "rgba(21, 116, 62, 0.74)"
     );
-
-    const dispatch = useDispatch();
 
     const handleCommentButtonClick = () => {
       if (planId && userId) {

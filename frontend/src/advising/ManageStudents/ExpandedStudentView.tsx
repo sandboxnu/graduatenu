@@ -40,7 +40,7 @@ import {
   SnackbarAlert,
 } from "../../components/common/SnackbarAlert";
 import ScheduleChangeTracker from "../../utils/ScheduleChangeTracker";
-import { sendChangeLog } from "../../services/ChangelogService";
+import { sendChangeLog } from "../../services/PlanService";
 
 const FullScheduleViewContainer = styled.div`
   margin-top: 30px;

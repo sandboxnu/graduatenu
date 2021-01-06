@@ -1,11 +1,11 @@
 class PlanChangelogsController < ApplicationController
     before_action :set_plan
-    before_action :set_author
+    before_action :set_author, only: [:create]
     before_action :set_plan_changelog, only: [:show]
 
     def index
         if @plan
-            @plan_comments = @plan.plan_changelogs.order(:created_at)
+            @plan_changelogs = @plan.plan_changelogs.order(:created_at)
         else 
             render json: {error: "No such plan."}, status: :unprocessable_entity
         end
