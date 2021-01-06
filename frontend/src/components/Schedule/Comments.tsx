@@ -302,6 +302,7 @@ export const Comments: React.FC<Props> = (props: Props) => {
         )}
       </ContentContainer>
       <CommentInput />
+      {/* Show alert only if comments are not visible */}
       {(!isExpanded || tab !== 0) && (
         <SnackbarAlert
           alertStatus={alertStatus}
