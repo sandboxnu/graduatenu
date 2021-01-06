@@ -20,10 +20,12 @@ import * as timeago from "timeago.js";
 import { TextField } from "@material-ui/core";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
-import CommentIcon from "@material-ui/icons/Comment";
-import ChangeHistoryIcon from "@material-ui/icons/ChangeHistory";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
+import {
+  ALERT_STATUS,
+  SnackbarAlert,
+} from "../../components/common/SnackbarAlert";
 
 const CommentsHeader = styled.div`
   display: flex;
@@ -142,6 +144,9 @@ export const Comments: React.FC<Props> = (props: Props) => {
   const [changeLogs, setChangeLogs] = useState<IChangeLog[]>([]);
   const [loading, setLoading] = useState(true);
   const [tab, setTab] = useState(0);
+  const [alertStatus, setAlertStatus] = useState<ALERT_STATUS>(
+    ALERT_STATUS.None
+  );
 
   const { planId, userId, userName } = useSelector((state: AppState) => ({
     planId: safelyGetActivePlanIdFromState(state),
@@ -173,12 +178,12 @@ export const Comments: React.FC<Props> = (props: Props) => {
 
     const handleCommentButtonClick = () => {
       if (planId && userId) {
-        sendComment(
-          planId,
-          userId,
-          userName,
-          comment
-        ).then((response: IComment) => setComments([...comments, response]));
+        sendComment(planId, userId, userName, comment)
+          .then((response: IComment) => {
+            setComments([...comments, response]);
+            setAlertStatus(ALERT_STATUS.Success);
+          })
+          .catch(e => setAlertStatus(ALERT_STATUS.Error));
         setComment("");
       }
     };
@@ -263,21 +268,23 @@ export const Comments: React.FC<Props> = (props: Props) => {
           <CommentsHeader>
             <CommentHeaderText> Comments </CommentHeaderText>
           </CommentsHeader>
-          <TabContainer>
-            <MuiThemeProvider theme={CommentTheme}>
-              <Tabs
-                value={tab}
-                onChange={handleTabChange}
-                variant="fullWidth"
-                indicatorColor="secondary"
-                textColor="secondary"
-                aria-label="icon label tabs example"
-              >
-                <Tab label="COMMENTS" />
-                <Tab label="CHANGE HISTORY" />
-              </Tabs>
-            </MuiThemeProvider>
-          </TabContainer>
+          {isExpanded && (
+            <TabContainer>
+              <MuiThemeProvider theme={CommentTheme}>
+                <Tabs
+                  value={tab}
+                  onChange={handleTabChange}
+                  variant="fullWidth"
+                  indicatorColor="secondary"
+                  textColor="secondary"
+                  aria-label="icon label tabs example"
+                >
+                  <Tab label="COMMENTS" />
+                  <Tab label="CHANGE HISTORY" />
+                </Tabs>
+              </MuiThemeProvider>
+            </TabContainer>
+          )}
         </CommentsHeaderWithTabs>
       </CommentHeaderWithDropDown>
       <ContentContainer>
@@ -295,6 +302,13 @@ export const Comments: React.FC<Props> = (props: Props) => {
         )}
       </ContentContainer>
       <CommentInput />
+      {(!isExpanded || tab !== 0) && (
+        <SnackbarAlert
+          alertStatus={alertStatus}
+          handleClose={() => setAlertStatus(ALERT_STATUS.None)}
+          successMsg={"Comment Sent"}
+        />
+      )}
     </CommentsDropdownContainer>
   );
 };

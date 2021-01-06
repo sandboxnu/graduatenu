@@ -139,8 +139,6 @@ export const ExpandedStudentView: React.FC = () => {
 
     const sendPlanUpdates = () => {
       const changes = ScheduleChangeTracker.getInstance().getChanges();
-      // TODO: Remove console log
-      console.log(changes);
       if (changes !== "") {
         sendChangeLog(planId, studentId, advisorId, changes);
         ScheduleChangeTracker.getInstance().clearChanges();
