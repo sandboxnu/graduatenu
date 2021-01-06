@@ -20,6 +20,10 @@ import * as timeago from "timeago.js";
 import { TextField } from "@material-ui/core";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
+import CommentIcon from "@material-ui/icons/Comment";
+import ChangeHistoryIcon from "@material-ui/icons/ChangeHistory";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
 
 const CommentsHeader = styled.div`
   display: flex;
@@ -35,10 +39,10 @@ const CommentsDropdownContainer = styled.div`
   margin-right: 30px;
 `;
 
-const CommentsContainer = styled.div`
+const ContentContainer = styled.div`
   margin-left: 30px;
   border: 1px solid rgba(21, 116, 62, 0.68);
-  max-height: 300px;
+  max-height: 400px;
   overflow-y: scroll;
 `;
 
@@ -46,6 +50,16 @@ const CommentHeaderText = styled.p`
   font-weight: 600;
   font-size: 16px;
   color: white;
+`;
+
+const CommentsHeaderWithTabs = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+`;
+
+const TabContainer = styled.div`
+  border: 1px solid rgba(21, 116, 62, 0.68);
 `;
 
 const LoadingContainer = styled.div`
@@ -63,6 +77,7 @@ const CommentContainer = styled.div<any>`
 
 const InputContainer = styled.div<any>`
   border: 1px solid rgba(21, 116, 62, 0.68);
+  border-top: 0px;
   box-sizing: border-box;
   position: relative;
   height: 100%;
@@ -126,6 +141,7 @@ export const Comments: React.FC<Props> = (props: Props) => {
   const [comments, setComments] = useState<IComment[]>([]);
   const [changeLogs, setChangeLogs] = useState<IChangeLog[]>([]);
   const [loading, setLoading] = useState(true);
+  const [tab, setTab] = useState(0);
 
   const { planId, userId, userName } = useSelector((state: AppState) => ({
     planId: safelyGetActivePlanIdFromState(state),
@@ -189,6 +205,49 @@ export const Comments: React.FC<Props> = (props: Props) => {
     );
   };
 
+  const CommentContainer = () => {
+    if (tab !== 0) {
+      return null;
+    }
+
+    return (
+      <>
+        {comments.map((comment: IComment) => (
+          <Comment
+            author={comment.author}
+            comment={comment.comment}
+            createdAt={comment.createdAt}
+            updatedAt={comment.updatedAt}
+          ></Comment>
+        ))}
+      </>
+    );
+  };
+
+  const ChangeLogsContainer = () => {
+    if (tab !== 1) {
+      return null;
+    }
+
+    return (
+      <>
+        {changeLogs.map((changeLog: IChangeLog) => (
+          <ChangeLog
+            userId={changeLog.userId}
+            author={changeLog.author}
+            log={changeLog.log}
+            createdAt={changeLog.createdAt}
+            updatedAt={changeLog.updatedAt}
+          />
+        ))}
+      </>
+    );
+  };
+
+  const handleTabChange = (event: any, newValue: any) => {
+    setTab(newValue);
+  };
+
   return (
     <CommentsDropdownContainer>
       <CommentHeaderWithDropDown>
@@ -200,28 +259,41 @@ export const Comments: React.FC<Props> = (props: Props) => {
         >
           {isExpanded ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
         </div>
-        <CommentsHeader>
-          <CommentHeaderText> Comments </CommentHeaderText>
-        </CommentsHeader>
+        <CommentsHeaderWithTabs>
+          <CommentsHeader>
+            <CommentHeaderText> Comments </CommentHeaderText>
+          </CommentsHeader>
+          <TabContainer>
+            <MuiThemeProvider theme={CommentTheme}>
+              <Tabs
+                value={tab}
+                onChange={handleTabChange}
+                variant="fullWidth"
+                indicatorColor="secondary"
+                textColor="secondary"
+                aria-label="icon label tabs example"
+              >
+                <Tab label="COMMENTS" />
+                <Tab label="CHANGE HISTORY" />
+              </Tabs>
+            </MuiThemeProvider>
+          </TabContainer>
+        </CommentsHeaderWithTabs>
       </CommentHeaderWithDropDown>
-      <CommentsContainer>
+      <ContentContainer>
         {isExpanded && (
           <div>
             {loading ? (
               <LinearLoading />
             ) : (
-              comments.map((comment: IComment) => (
-                <Comment
-                  author={comment.author}
-                  comment={comment.comment}
-                  createdAt={comment.createdAt}
-                  updatedAt={comment.updatedAt}
-                ></Comment>
-              ))
+              <>
+                <CommentContainer />
+                <ChangeLogsContainer />
+              </>
             )}
           </div>
         )}
-      </CommentsContainer>
+      </ContentContainer>
       <CommentInput />
     </CommentsDropdownContainer>
   );
@@ -236,6 +308,19 @@ const Comment: React.FC<IComment> = (props: IComment) => {
         <CommentTimestamp>{timeago.format(createdAt)}</CommentTimestamp>
       </CommentHeader>
       {comment}
+    </CommentContainer>
+  );
+};
+
+const ChangeLog: React.FC<IChangeLog> = (props: IChangeLog) => {
+  const { author, log, createdAt } = props;
+  return (
+    <CommentContainer>
+      <CommentHeader>
+        <CommentAuthor>{author}</CommentAuthor>
+        <CommentTimestamp>{timeago.format(createdAt)}</CommentTimestamp>
+      </CommentHeader>
+      {log}
     </CommentContainer>
   );
 };
