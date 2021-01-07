@@ -137,8 +137,8 @@ const ProfileComponent: React.FC = () => {
   const [catalogYear, setCatalogYear] = useState(user.catalogYear);
   const [gradYear, setGradYear] = useState(user.graduationYear!);
   const [advisor, setAdvisor] = useState("");
-  const [hasError, setHasError] = useState(false);
-  const [showError, setShowError] = useState(false);
+  const [hasConcentrationError, setHasConcentrationError] = useState(false);
+  const [showConcentrationError, setShowConcentrationError] = useState(false);
 
   const ProfileGradYear = () => {
     return (
@@ -242,8 +242,8 @@ const ProfileComponent: React.FC = () => {
                 major={selectedMajorObj}
                 concentration={concentration || null}
                 setConcentration={setConcentration}
-                setError={setHasError}
-                hideError={!showError}
+                setError={setHasConcentrationError}
+                hideError={!showConcentrationError}
               />
             )}
             {!isEdit && <ItemEntry> {concentration} </ItemEntry>}
@@ -335,9 +335,9 @@ const ProfileAdvisor = (props: any) => {
   };
 
   const SaveButton = () => {
-    const onClick = hasError
+    const onClick = hasConcentrationError
       ? () => {
-          setShowError(true);
+          setShowConcentrationError(true);
         }
       : () => save();
 
