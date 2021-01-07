@@ -363,6 +363,7 @@ function AddPlanPopperComponent(props: Props) {
         setConcentration={setConcentration}
         setError={setHasConcentrationError}
         showError={showConcentrationError}
+        useLabel={true}
       />
     );
   };
