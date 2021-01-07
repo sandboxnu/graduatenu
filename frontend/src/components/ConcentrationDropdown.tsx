@@ -22,7 +22,7 @@ interface SaveInParentConcentrationDropdownProps {
   readonly setError?: (error: boolean) => void; // To tell the parent that there is an error with the input (no major selected when there should be)
   readonly style?: CSSProperties;
   readonly useLabel?: boolean;
-  readonly hideError?: boolean;
+  readonly showError?: boolean;
 }
 
 interface SaveOnChangeConcentrationDropdownProps {
@@ -39,7 +39,7 @@ const SaveInParentConcentrationDropdown: React.FC<SaveInParentConcentrationDropd
   setError,
   style,
   useLabel,
-  hideError,
+  showError,
 }) => {
   const concentrationNames: Array<string> = major
     ? major.concentrations.concentrationOptions.map(
@@ -81,14 +81,14 @@ const SaveInParentConcentrationDropdown: React.FC<SaveInParentConcentrationDropd
                 variant="outlined"
                 label={useLabel ? "Concentration" : ""}
                 fullWidth
-                error={!hideError && hasError}
+                error={showError && hasError}
               />
             )}
             value={concentration}
             onChange={onChange}
           />
           <FormHelperText>
-            {!hideError &&
+            {showError &&
               hasError &&
               "A concentration is required for your selected major"}
           </FormHelperText>

@@ -367,7 +367,7 @@ class OnboardingScreenComponent extends React.Component<
         setConcentration={this.onChangeConcentration.bind(this)}
         style={{ width: 326, marginBottom: marginSpace }}
         useLabel={true}
-        hideError={!this.state.showNoConcentrationSelectedError}
+        showError={this.state.showNoConcentrationSelectedError}
         setError={setError}
       />
     );

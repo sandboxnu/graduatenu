@@ -243,7 +243,7 @@ const ProfileComponent: React.FC = () => {
                 concentration={concentration || null}
                 setConcentration={setConcentration}
                 setError={setHasError}
-                hideError={!showError}
+                showError={showError}
               />
             )}
             {!isEdit && <ItemEntry> {concentration} </ItemEntry>}
@@ -335,12 +335,13 @@ const ProfileAdvisor = (props: any) => {
   };
 
   const SaveButton = () => {
-    const onClick = hasError
-      ? () => {
-          setShowError(true);
-        }
-      : () => save();
-
+    const onClick = () => {
+      if (hasError) {
+        setShowError(true);
+      } else {
+        save();
+      }
+    };
     return <PrimaryButton onClick={onClick}>Save</PrimaryButton>;
   };
 

@@ -43,6 +43,10 @@ import { ExcelUpload } from "../components/ExcelUpload";
 import { NextButton } from "../components/common/NextButton";
 import { ColoredButton } from "../components/common/ColoredButton";
 import { getAuthToken } from "../utils/auth-helpers";
+import {
+  SaveInParentConcentrationDropdown,
+  SaveOnChangeConcentrationDropdown,
+} from "../components/ConcentrationDropdown";
 
 const EXCEL_TOOLTIP =
   "Auto-populate your schedule with your excel plan of study. Reach out to your advisor if you don't have it!";
@@ -141,6 +145,11 @@ function AddPlanPopperComponent(props: Props) {
     null
   );
   const [selectedMajor, setSelectedMajor] = useState<Major | null>(null);
+  const [concentration, setConcentration] = useState<string | null>("");
+  const [hasConcentrationError, setHasConcentrationError] = useState(false);
+  const [showConcentrationError, setConcentrationShowError] = useState<boolean>(
+    false
+  );
   const [selectedCoopCycle, setSelectedCoopCycle] = useState<string | null>(
     null
   );
@@ -188,6 +197,15 @@ function AddPlanPopperComponent(props: Props) {
     selectedPlanOption,
     selectedUserPlan,
   ]);
+
+  const onClickNext = () => {
+    if (hasConcentrationError) {
+      setConcentrationShowError(true);
+      console.log(showConcentrationError);
+    } else {
+      onSubmit();
+    }
+  };
 
   const onSubmit = async () => {
     if (selectedCoopCycle && selectedPlanOption === PLAN_OPTIONS.NEW_PLAN) {
@@ -247,6 +265,10 @@ function AddPlanPopperComponent(props: Props) {
     });
     addNewPlan(plan.plan, props.academicYear);
   };
+
+  useEffect(() => {
+    setConcentrationShowError(false);
+  }, [visible]);
 
   const openModal = (): void => setVisible(true);
 
@@ -329,6 +351,18 @@ function AddPlanPopperComponent(props: Props) {
           );
           setSelectedCoopCycle(null);
         }}
+      />
+    );
+  };
+
+  const renderConcentrationDropDown = () => {
+    return (
+      <SaveInParentConcentrationDropdown
+        major={selectedMajor || undefined}
+        concentration={concentration}
+        setConcentration={setConcentration}
+        setError={setHasConcentrationError}
+        showError={showConcentrationError}
       />
     );
   };
@@ -461,6 +495,7 @@ function AddPlanPopperComponent(props: Props) {
             {renderPlanName()}
             {renderCatalogYearDropdown()}
             {!!selectedCatalogYear && renderMajorDropDown()}
+            {!!selectedMajor && renderConcentrationDropDown()}
             {!!selectedMajor && renderCoopCycleDropDown()}
             {renderSelectOptions()}
             {selectedPlanOption == PLAN_OPTIONS.UPLOAD_PLAN ? (
@@ -474,7 +509,7 @@ function AddPlanPopperComponent(props: Props) {
               </ErrorTextWrapper>
             )}
           </FieldContainer>
-          <NextButton text="Submit" onClick={onSubmit} />
+          <NextButton text="Submit" onClick={onClickNext} />
         </InnerSection>
       </Modal>
       <ColoredButton onClick={() => openModal()}>+ Add Plan</ColoredButton>
