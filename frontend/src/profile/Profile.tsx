@@ -2,10 +2,7 @@ import React, { useState } from "react";
 import { withRouter, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import {
-  PrimaryButton,
-  PrimaryButtonWithTooltip,
-} from "../components/common/PrimaryButton";
+import { PrimaryButton } from "../components/common/PrimaryButton";
 import {
   FormControl,
   MenuItem,
@@ -141,6 +138,7 @@ const ProfileComponent: React.FC = () => {
   const [gradYear, setGradYear] = useState(user.graduationYear!);
   const [advisor, setAdvisor] = useState("");
   const [hasError, setHasError] = useState(false);
+  const [showError, setShowError] = useState(false);
 
   const ProfileGradYear = () => {
     return (
@@ -241,10 +239,11 @@ const ProfileComponent: React.FC = () => {
             <ItemTitle> Concentration </ItemTitle>
             {isEdit && (
               <SaveInParentConcentrationDropdown
-                major={findMajorFromName(major, majors, catalogYear)}
+                major={selectedMajorObj}
                 concentration={concentration || null}
                 setConcentration={setConcentration}
                 setError={setHasError}
+                hideError={!showError}
               />
             )}
             {!isEdit && <ItemEntry> {concentration} </ItemEntry>}
@@ -336,26 +335,13 @@ const ProfileAdvisor = (props: any) => {
   };
 
   const SaveButton = () => {
-    const errorMessage = hasError
-      ? "Your major requires you to select a concentration"
-      : "";
+    const onClick = hasError
+      ? () => {
+          setShowError(true);
+        }
+      : () => save();
 
-    // See https://material-ui.com/guides/composition/#caveat-with-refs
-    const ButtonWithForwardRef = React.forwardRef((props, ref) => (
-      <PrimaryButtonWithTooltip
-        tooltipText={errorMessage}
-        disabled={hasError}
-        onClick={() => save()}
-      >
-        Save
-      </PrimaryButtonWithTooltip>
-    ));
-
-    return (
-      <Tooltip title={errorMessage}>
-        <ButtonWithForwardRef />
-      </Tooltip>
-    );
+    return <PrimaryButton onClick={onClick}>Save</PrimaryButton>;
   };
 
   // const ChangePassword = (props: ChangePasswordProps) => {

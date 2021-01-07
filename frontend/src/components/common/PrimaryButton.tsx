@@ -34,29 +34,3 @@ export function PrimaryButton(props: any) {
     </ColorButton>
   );
 }
-
-interface PrimaryButtonWithTooltipProps {
-  tooltipText: string;
-  disabled: boolean;
-  onClick: () => void;
-}
-
-export const PrimaryButtonWithTooltip: React.FC<PrimaryButtonWithTooltipProps> = ({
-  tooltipText,
-  disabled,
-  onClick,
-  children,
-}) => {
-  const adjustedButtonProps = {
-    disabled: disabled,
-    component: disabled ? "div" : undefined,
-    onClick: disabled ? undefined : onClick,
-  };
-  return (
-    <Tooltip title={tooltipText}>
-      <ColorButton {...adjustedButtonProps} variant="contained" color="primary">
-        {children}
-      </ColorButton>
-    </Tooltip>
-  );
-};

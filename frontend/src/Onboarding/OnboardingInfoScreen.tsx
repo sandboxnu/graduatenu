@@ -35,7 +35,6 @@ import { AppState } from "../state/reducers/state";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import { findMajorFromName } from "../utils/plan-helpers";
 import { SaveInParentConcentrationDropdown } from "../components/ConcentrationDropdown";
-import { majorWithConcentrationData } from "../data/mockData";
 
 const SpinnerWrapper = styled.div`
   display: flex;
