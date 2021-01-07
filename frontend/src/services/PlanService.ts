@@ -167,7 +167,6 @@ export const fetchChangelogs = (planId: number, studentId: number) =>
     },
   }).then(response =>
     response.json().then((changeLogs: IChangeLog[]) => {
-      console.log(changeLogs);
       return changeLogs.map((changeLog: IChangeLog) => ({
         ...changeLog,
         createdAt: new Date(changeLog.createdAt), // convert string timestamp to a Date object

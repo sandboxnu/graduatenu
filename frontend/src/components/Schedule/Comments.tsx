@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useState, useEffect, useRef } from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { IChangeLog, IComment } from "../../models/types";
 import {
@@ -26,6 +26,7 @@ import {
   ALERT_STATUS,
   SnackbarAlert,
 } from "../../components/common/SnackbarAlert";
+import useOnScreen from "../../hooks/useOnScreen";
 
 const CommentsHeader = styled.div`
   display: flex;
@@ -115,6 +116,11 @@ const CommentHeaderWithDropDown = styled.div`
   align-items: center;
 `;
 
+const ContentEnd = styled.div`
+  height: 1px;
+  background: rgba(21, 116, 62, 0.68);
+`;
+
 const CommentTheme = createMuiTheme({
   palette: {
     secondary: {
@@ -148,6 +154,17 @@ export const Comments: React.FC<Props> = (props: Props) => {
     ALERT_STATUS.None
   );
 
+  const contentEndRef = useRef<HTMLDivElement>(null);
+  const endPageRef = useRef<HTMLDivElement>(null);
+
+  const isEndPageOnScreen = useOnScreen(endPageRef, "-125px");
+
+  const scrollToBottom = () => {
+    if (contentEndRef !== null && contentEndRef.current !== null) {
+      contentEndRef.current.scrollIntoView();
+    }
+  };
+
   const { planId, userId, userName } = useSelector((state: AppState) => ({
     planId: safelyGetActivePlanIdFromState(state),
     userId: safelyGetUserIdFromState(state),
@@ -167,6 +184,12 @@ export const Comments: React.FC<Props> = (props: Props) => {
       .catch(e => console.log(e));
   }, []);
 
+  // If end of comments is on screen, let's scroll to the bottom.
+  // This was the best solution I could find, feel free to refactor if there's a better on.
+  useEffect(() => {
+    if (isEndPageOnScreen) scrollToBottom();
+  }, [isEndPageOnScreen]);
+
   const CommentInput = () => {
     const [comment, setComment] = useState("");
     const buttonDisabled = !comment;
@@ -185,6 +208,7 @@ export const Comments: React.FC<Props> = (props: Props) => {
           })
           .catch(e => setAlertStatus(ALERT_STATUS.Error));
         setComment("");
+        if (tab === 0) scrollToBottom();
       }
     };
 
@@ -259,63 +283,67 @@ export const Comments: React.FC<Props> = (props: Props) => {
   };
 
   return (
-    <CommentsDropdownContainer>
-      <CommentHeaderWithDropDown>
-        <div
-          onClick={() => {
-            setIsExpanded(!isExpanded);
-          }}
-          style={{ marginRight: 4, marginLeft: 2 }}
-        >
-          {isExpanded ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-        </div>
-        <CommentsHeaderWithTabs>
-          <CommentsHeader>
-            <CommentHeaderText> Comments </CommentHeaderText>
-          </CommentsHeader>
-          {isExpanded && (
-            <TabContainer>
-              <MuiThemeProvider theme={CommentTheme}>
-                <Tabs
-                  value={tab}
-                  onChange={handleTabChange}
-                  variant="fullWidth"
-                  indicatorColor="secondary"
-                  textColor="secondary"
-                  aria-label="icon label tabs example"
-                >
-                  <Tab label="COMMENTS" />
-                  <Tab label="CHANGE HISTORY" />
-                </Tabs>
-              </MuiThemeProvider>
-            </TabContainer>
-          )}
-        </CommentsHeaderWithTabs>
-      </CommentHeaderWithDropDown>
-      <ContentContainer>
-        {isExpanded && (
-          <div>
-            {loading ? (
-              <LinearLoading />
-            ) : (
-              <>
-                <CommentContainer />
-                <ChangeLogsContainer />
-              </>
-            )}
+    <>
+      <CommentsDropdownContainer>
+        <CommentHeaderWithDropDown>
+          <div
+            onClick={() => {
+              setIsExpanded(!isExpanded);
+            }}
+            style={{ marginRight: 4, marginLeft: 2 }}
+          >
+            {isExpanded ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </div>
+          <CommentsHeaderWithTabs>
+            <CommentsHeader>
+              <CommentHeaderText> Comments </CommentHeaderText>
+            </CommentsHeader>
+            {isExpanded && (
+              <TabContainer>
+                <MuiThemeProvider theme={CommentTheme}>
+                  <Tabs
+                    value={tab}
+                    onChange={handleTabChange}
+                    variant="fullWidth"
+                    indicatorColor="secondary"
+                    textColor="secondary"
+                    aria-label="icon label tabs example"
+                  >
+                    <Tab label="COMMENTS" />
+                    <Tab label="CHANGE HISTORY" />
+                  </Tabs>
+                </MuiThemeProvider>
+              </TabContainer>
+            )}
+          </CommentsHeaderWithTabs>
+        </CommentHeaderWithDropDown>
+        <ContentContainer>
+          {isExpanded && (
+            <div>
+              {loading ? (
+                <LinearLoading />
+              ) : (
+                <>
+                  <CommentContainer />
+                  <ChangeLogsContainer />
+                  <ContentEnd ref={contentEndRef}></ContentEnd>
+                </>
+              )}
+            </div>
+          )}
+        </ContentContainer>
+        <CommentInput />
+        {/* Show alert only if comments are not visible */}
+        {(!isExpanded || tab !== 0) && (
+          <SnackbarAlert
+            alertStatus={alertStatus}
+            handleClose={() => setAlertStatus(ALERT_STATUS.None)}
+            successMsg={"Comment Sent"}
+          />
         )}
-      </ContentContainer>
-      <CommentInput />
-      {/* Show alert only if comments are not visible */}
-      {(!isExpanded || tab !== 0) && (
-        <SnackbarAlert
-          alertStatus={alertStatus}
-          handleClose={() => setAlertStatus(ALERT_STATUS.None)}
-          successMsg={"Comment Sent"}
-        />
-      )}
-    </CommentsDropdownContainer>
+      </CommentsDropdownContainer>
+      <div ref={endPageRef}></div>
+    </>
   );
 };
 
