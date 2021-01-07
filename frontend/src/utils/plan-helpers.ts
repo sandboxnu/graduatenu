@@ -14,7 +14,6 @@ export function findMajorFromName(
   if (!major) {
     return undefined;
   }
-  console.log(major.yearVersion);
   return major;
 }
 
