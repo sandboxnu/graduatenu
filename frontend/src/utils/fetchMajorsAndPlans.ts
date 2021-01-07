@@ -38,7 +38,6 @@ ${majorSchema.reduce(
 const parseMajors = (res: any): Major[] => {
   const majors: Major[] = [];
   Object.values(res).forEach((value: any) => {
-    console.log(value);
     if (value) {
       majors.push(value.occurrence.spec);
     }
@@ -73,12 +72,8 @@ export function fetchMajorsAndPlans() {
           if (res.error) {
             throw res.error;
           }
-          console.log("reached done");
           const majors: Major[] = parseMajors(res.data);
-
-          console.log("reached major");
           const record: Record<string, Schedule[]> = parsePlans(res.data);
-          console.log("reached parsed");
           dispatch(fetchMajorsSuccessAction(majors));
           dispatch(fetchPlansSuccessAction(record));
           resolve(majors);
