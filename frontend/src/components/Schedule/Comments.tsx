@@ -12,7 +12,7 @@ import {
 } from "../../state";
 import { addCommentAction } from "../../state/actions/advisorActions";
 import { AppState } from "../../state/reducers/state";
-import { GenericColorButton } from "../common/ColoredButton";
+import { GenericColorButton } from "../common/ColoredButtons";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import * as timeago from "timeago.js";

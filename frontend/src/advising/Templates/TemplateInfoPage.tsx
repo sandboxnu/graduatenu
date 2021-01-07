@@ -3,15 +3,15 @@ import { Autocomplete } from "@material-ui/lab";
 import React from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import {
   WhiteColorButton,
   RedColorButton,
-} from "../../components/common/ColoredButton";
+} from "../../components/common/ColoredButtons";
 import { getMajorsFromState, getPlansFromState } from "../../state";
 import { AppState } from "../../state/reducers/state";
 import { planToString } from "../../utils";
-import { TemplatePageState } from "./Templates";
 
 const Container = styled.div`
   margin-left: 30px;
@@ -41,10 +41,6 @@ const InputContainer = styled.div`
   width: 326px;
 `;
 
-interface TemplatesPageProps {
-  readonly setPageState: (pageState: TemplatePageState) => void;
-}
-
 interface DropdownProps {
   readonly label: string;
   readonly options: Array<string>;
@@ -57,9 +53,7 @@ interface NameFieldProps {
   readonly setTemplateName: (name: string) => void;
 }
 
-export const NewTemplatesPage: React.FC<TemplatesPageProps> = ({
-  setPageState,
-}) => {
+export const NewTemplatesPage: React.FC = () => {
   const [name, setName] = useState("");
   const [major, setMajor] = useState<string | null>(null);
   const [catalogYear, setCatalogYear] = useState<string | null>(null);
@@ -111,12 +105,14 @@ export const NewTemplatesPage: React.FC<TemplatesPageProps> = ({
         />
       )}
       <ButtonContainer>
-        <WhiteColorButton
-          onClick={() => setPageState(TemplatePageState.LIST)}
-          style={{ width: buttonSize }}
+        <Link
+          to={{ pathname: "/advisor/templates/" }}
+          style={{ textDecoration: "none" }}
         >
-          Previous
-        </WhiteColorButton>
+          <WhiteColorButton style={{ width: buttonSize, marginRight: "20px" }}>
+            Previous
+          </WhiteColorButton>
+        </Link>
         <RedColorButton style={{ width: buttonSize }} disabled={disabled}>
           Next
         </RedColorButton>
