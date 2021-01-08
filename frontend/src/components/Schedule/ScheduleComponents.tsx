@@ -135,10 +135,12 @@ export const NonEditableScheduleStudentView: React.FC<Props> = props => {
     transferCreditPresent,
     collapsibleYears,
   } = props;
-  const { activePlan, transferCredits } = useSelector(
+  const { activePlan, transferCredits, planId, userId } = useSelector(
     (state: AppState) => ({
       activePlan: getActivePlanFromState(state)!.schedule,
       transferCredits: safelyGetTransferCoursesFromState(state),
+      planId: getActivePlanFromState(state)!.id,
+      userId: getUserIdFromState(state),
     }),
     shallowEqual
   );
@@ -165,6 +167,9 @@ export const NonEditableScheduleStudentView: React.FC<Props> = props => {
             />
           )}
         </Container>
+        {props.commentsPresent && (
+          <Comments planId={planId} studentId={userId} />
+        )}
       </LeftScroll>
     </OuterContainer>
   );

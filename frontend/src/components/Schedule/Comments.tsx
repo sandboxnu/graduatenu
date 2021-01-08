@@ -10,7 +10,7 @@ import {
 import {
   safelyGetActivePlanIdFromState,
   safelyGetUserIdFromState,
-  safelyGetUserFullNameFromState,
+  safelyGetStudentFullNameFromState,
   getIsAdvisorFromState,
   safelyGetAdvisorFullNameFromState,
 } from "../../state";
@@ -173,7 +173,7 @@ export const Comments: React.FC<Props> = (props: Props) => {
       planId: safelyGetActivePlanIdFromState(state),
       userId: safelyGetUserIdFromState(state),
       isAdvisor: getIsAdvisorFromState(state),
-      studentName: safelyGetUserFullNameFromState(state),
+      studentName: safelyGetStudentFullNameFromState(state),
       advisorName: safelyGetAdvisorFullNameFromState(state),
     })
   );

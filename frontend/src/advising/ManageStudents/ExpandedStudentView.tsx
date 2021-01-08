@@ -252,15 +252,16 @@ export const ExpandedStudentView: React.FC = () => {
                       sidebarPresent
                       transferCreditPresent
                       collapsibleYears={false}
+                      commentsPresent
                     />
                   ) : (
                     <NonEditableScheduleStudentView
                       sidebarPresent
                       transferCreditPresent
                       collapsibleYears={false}
+                      commentsPresent
                     />
                   )}
-                  <Comments planId={planId} studentId={studentId} />
                 </ScheduleWrapper>
                 <PlanActionButtonContainer>
                   <PrimaryButton onClick={() => approvePlan()}>
