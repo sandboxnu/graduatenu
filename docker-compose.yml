@@ -40,7 +40,7 @@ services:
     networks:
       - sub-etha
     ports:
-      - 80:80
+      - 443:80
     image: "revproxy"
 
 networks:
