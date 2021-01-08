@@ -212,6 +212,7 @@ export const Comments: React.FC<Props> = (props: Props) => {
       if (planId && userId) {
         sendComment(planId, userId, userName, comment)
           .then((response: IComment) => {
+            setTab(0);
             setComments([...comments, response]);
             setAlertStatus(ALERT_STATUS.Success);
           })
@@ -342,14 +343,11 @@ export const Comments: React.FC<Props> = (props: Props) => {
           )}
         </ContentContainer>
         <CommentInput />
-        {/* Show alert only if comments are not visible */}
-        {(!isExpanded || tab !== 0) && (
-          <SnackbarAlert
-            alertStatus={alertStatus}
-            handleClose={() => setAlertStatus(ALERT_STATUS.None)}
-            successMsg={"Comment Sent"}
-          />
-        )}
+        <SnackbarAlert
+          alertStatus={alertStatus}
+          handleClose={() => setAlertStatus(ALERT_STATUS.None)}
+          successMsg={"Comment Sent"}
+        />
       </CommentsDropdownContainer>
       <div ref={endPageRef}></div>
     </>
