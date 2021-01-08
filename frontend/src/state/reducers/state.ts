@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import { userReducer, UserState } from "./userReducer";
+import { studentReducer, StudentState } from "./studentReducer";
 import { UserPlansState, userPlansReducer } from "./userPlansReducer";
 import {
   MajorApiState,
@@ -10,7 +10,7 @@ import {
 import { advisorReducer, AdvisorState } from "./advisorReducer";
 
 export interface AppState {
-  userState: UserState;
+  studentState: StudentState;
   majorState: MajorApiState;
   plansState: PlansApiState;
   userPlansState: UserPlansState;
@@ -18,7 +18,7 @@ export interface AppState {
 }
 
 export const rootReducer = combineReducers({
-  userState: userReducer,
+  studentState: studentReducer,
   majorState: majorsReducer,
   plansState: plansReducer,
   userPlansState: userPlansReducer,

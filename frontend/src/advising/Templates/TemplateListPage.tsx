@@ -13,12 +13,11 @@ import {
 } from "../../state";
 import { toggleTemplateFolderExpandedAction } from "../../state/actions/advisorActions";
 import { AppState } from "../../state/reducers/state";
-import { getAuthToken } from "../../utils/auth-helpers";
-import { TemplatePageState } from "./Templates";
+import { Link } from "react-router-dom";
 import {
   RedColorButton,
   WhiteColorButton,
-} from "../../components/common/ColoredButton";
+} from "../../components/common/ColoredButtons";
 
 const Container = styled.div`
   margin-left: 30px;
@@ -41,7 +40,7 @@ const TemplatesContainer = styled.div`
 
 const TemplateListContainer = styled.div`
   width: auto;
-  height: 400px;
+  height: 100%;
 `;
 
 const TemplateListScrollContainer = styled.div`
@@ -113,10 +112,6 @@ const TemplateName = styled.div`
   margin-top: 5px;
 `;
 
-interface TemplatesListPageProps {
-  setPageState: (state: TemplatePageState) => void;
-}
-
 interface TemplatesListProps {
   searchQuery: string;
 }
@@ -132,9 +127,7 @@ interface FolderProps {
 
 const EMPTY_TEMPLATES_LIST: IFolderData[] = [];
 
-export const TemplatesListPage: React.FC<TemplatesListPageProps> = ({
-  setPageState,
-}: TemplatesListPageProps) => {
+export const TemplatesListPage: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState("");
 
   return (
@@ -147,10 +140,16 @@ export const TemplatesListPage: React.FC<TemplatesListPageProps> = ({
       <TemplatesContainer>
         <TemplateListContainer>
           <ButtonWrapper>
-            <WhiteColorButton> Upload Plan </WhiteColorButton>
-            <RedColorButton onClick={() => setPageState(TemplatePageState.NEW)}>
-              Create New
-            </RedColorButton>
+            <WhiteColorButton style={{ marginRight: "20px" }}>
+              {" "}
+              Upload Plan{" "}
+            </WhiteColorButton>
+            <Link
+              to={{ pathname: "/advisor/templates/createTemplate" }}
+              style={{ textDecoration: "none" }}
+            >
+              <RedColorButton>Create New</RedColorButton>
+            </Link>
           </ButtonWrapper>
           <TemplateListScrollContainer>
             <TemplatesList searchQuery={searchQuery} />
@@ -188,7 +187,7 @@ const TemplatesList = ({ searchQuery }: TemplatesListProps) => {
   }, [searchQuery]);
 
   return (
-    <TemplatesContainer>
+    <>
       {isLoading && (
         <Loading>
           <LinearProgress color="secondary" />
@@ -214,7 +213,7 @@ const TemplatesList = ({ searchQuery }: TemplatesListProps) => {
           )
         ) : null}
       </TemplateListContainer>
-    </TemplatesContainer>
+    </>
   );
 };
 

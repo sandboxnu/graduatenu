@@ -12,6 +12,7 @@
   ],
   "scripts": {
     "start": "cd infrastructure/develop && ./compose-build.sh && ./run-servers.sh dev-build",
+    "generate-initial-certs": "chmod +x init-letsencrypt.sh && sudo ./init-letsencrypt.sh",
     "prod-start": "docker-compose up --build",
     "prod-start-aws": "cd infrastructure/develop && ./compose-build.sh && ./run-servers.sh prod-build",
     "generate-documentation": "cd api && rdoc && cd .. && mv api/doc docs",

@@ -10,13 +10,13 @@ import {
 } from "../state/actions/majorsActions";
 import { Dispatch } from "redux";
 import { Major, Schedule } from "../../../common/types";
-import { majorIds, majorMap } from "../majors";
+import { majorIds } from "../majors";
 
 //graphql schema for searchNEU's majors endpoint.
-const majorSchema: string[] = majorIds.map((majorId: string) => {
+const majorSchema: string[] = majorIds.map(({ majorId, year }) => {
   return `major(majorId: "${majorId}") {
-        latestOccurrence {
-            requirements
+        occurrence(year: ${year}) {
+            spec
             plansOfStudy
         }
     }`;
@@ -37,22 +37,20 @@ ${majorSchema.reduce(
 //parse out major objects from the response.
 const parseMajors = (res: any): Major[] => {
   const majors: Major[] = [];
-  for (const key of Object.keys(res)) {
-    if (res.hasOwnProperty(key)) {
-      majors.push(res[key].latestOccurrence.requirements);
+  Object.values(res).forEach((value: any) => {
+    if (value) {
+      majors.push(value.occurrence.spec);
     }
-  }
+  });
   return majors;
 };
 
 //parse out plan objects from the response.
 const parsePlans = (res: any): Record<string, Schedule[]> => {
   const record: Record<string, Schedule[]> = {};
-  Object.keys(res).forEach((key, index) => {
-    if (res.hasOwnProperty(key)) {
-      record[majorMap[majorIds[index]]] =
-        res[key].latestOccurrence.plansOfStudy;
-      index++;
+  Object.values(res).forEach((value: any) => {
+    if (value) {
+      record[value.occurrence.spec.name] = value.occurrence.plansOfStudy;
     }
   });
   return record;
@@ -64,7 +62,7 @@ export function fetchMajorsAndPlans() {
     return new Promise<Major[]>((resolve, reject) => {
       dispatch(fetchMajorsPendingAction());
       dispatch(fetchPlansPendingAction());
-      fetch("https://searchneu.com/graphql", {
+      fetch("https://staging.searchneu.com/graphql", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ query: querySchema }),

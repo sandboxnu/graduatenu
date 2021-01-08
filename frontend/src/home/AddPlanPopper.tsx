@@ -41,7 +41,7 @@ import {
 import { addNewPlanAction } from "../state/actions/userPlansActions";
 import { ExcelUpload } from "../components/ExcelUpload";
 import { NextButton } from "../components/common/NextButton";
-import { ColoredButton } from "../components/common/ColoredButton";
+import { RedColorButton } from "../components/common/ColoredButtons";
 import { getAuthToken } from "../utils/auth-helpers";
 import {
   SaveInParentConcentrationDropdown,
@@ -513,7 +513,7 @@ function AddPlanPopperComponent(props: Props) {
           <NextButton text="Submit" onClick={onClickNext} />
         </InnerSection>
       </Modal>
-      <ColoredButton onClick={() => openModal()}>+ Add Plan</ColoredButton>
+      <RedColorButton onClick={() => openModal()}>+ Add Plan</RedColorButton>
     </>
   );
 }

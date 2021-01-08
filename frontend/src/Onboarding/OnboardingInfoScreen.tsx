@@ -9,13 +9,13 @@ import { Dispatch } from "redux";
 import { Major, Schedule } from "../../../common/types";
 import { planToString } from "../utils";
 import {
-  setAcademicYearAction,
-  setGraduationYearAction,
-  setUserCoopCycleAction,
-  setUserMajorAction,
-  setUserCatalogYearAction,
-  setUserConcentrationAction,
-} from "../state/actions/userActions";
+  setStudentAcademicYearAction,
+  setStudentGraduationYearAction,
+  setStudentCoopCycleAction,
+  setStudentMajorAction,
+  setStudentCatalogYearAction,
+  setStudentConcentrationAction,
+} from "../state/actions/studentActions";
 import Loader from "react-loader-spinner";
 import {
   FormControl,
@@ -450,16 +450,16 @@ class OnboardingScreenComponent extends React.Component<
  */
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   setAcademicYear: (academicYear: number) =>
-    dispatch(setAcademicYearAction(academicYear)),
+    dispatch(setStudentAcademicYearAction(academicYear)),
   setGraduationYear: (academicYear: number) =>
-    dispatch(setGraduationYearAction(academicYear)),
-  setMajor: (major: string | null) => dispatch(setUserMajorAction(major)),
+    dispatch(setStudentGraduationYearAction(academicYear)),
+  setMajor: (major: string | null) => dispatch(setStudentMajorAction(major)),
   setConcentration: (concentration: string | null) =>
-    dispatch(setUserConcentrationAction(concentration)),
+    dispatch(setStudentConcentrationAction(concentration)),
   setCoopCycle: (coopCycle: string | null) =>
-    dispatch(setUserCoopCycleAction(coopCycle)),
+    dispatch(setStudentCoopCycleAction(coopCycle)),
   setCatalogYear: (catalogYear: number | null) =>
-    dispatch(setUserCatalogYearAction(catalogYear)),
+    dispatch(setStudentCatalogYearAction(catalogYear)),
 });
 
 /**

@@ -6,7 +6,7 @@ import {
   safelyGetAcademicYearFromState,
   safelyGetGraduationYearFromState,
   getDoesAdvisorExistInState,
-  getDoesUserExistInState,
+  getDoesStudentExistInState,
 } from "../../state";
 import { AppState } from "../../state/reducers/state";
 import { authCookieExists } from "../../utils/auth-helpers";
@@ -23,7 +23,7 @@ export function ProtectedRoute({
   const { userExists, isAdvisor, finishedOnboarding } = useSelector(
     (state: AppState) => ({
       userExists:
-        getDoesAdvisorExistInState(state) || getDoesUserExistInState(state),
+        getDoesAdvisorExistInState(state) || getDoesStudentExistInState(state),
       isAdvisor: getDoesAdvisorExistInState(state),
       finishedOnboarding:
         !!safelyGetGraduationYearFromState(state) &&

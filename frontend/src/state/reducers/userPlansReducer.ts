@@ -11,7 +11,7 @@ import {
 import { DNDSchedule, IPlanData } from "../../models/types";
 import produce from "immer";
 import { getType } from "typesafe-actions";
-import { UserPlansAction, UserAction } from "../actions";
+import { UserPlansAction, StudentAction } from "../actions";
 import {
   setActivePlanAction,
   addNewPlanAction,
@@ -28,7 +28,7 @@ import {
   changeSemesterStatusForActivePlanAction,
   updateSemesterForActivePlanAction,
 } from "../actions/userPlansActions";
-import { resetUserAction } from "../actions/userActions";
+import { resetStudentAction } from "../actions/studentActions";
 import {
   clearSchedule,
   convertTermIdToSeason,
@@ -65,7 +65,7 @@ const initialState: UserPlansState = {
 
 export const userPlansReducer = (
   state: UserPlansState = initialState,
-  action: UserPlansAction | UserAction
+  action: UserPlansAction | StudentAction
 ) => {
   return produce(state, draft => {
     switch (action.type) {
@@ -335,7 +335,7 @@ export const userPlansReducer = (
         draft.closedYears[draft.activePlan!] = [];
         return draft;
       }
-      case getType(resetUserAction): {
+      case getType(resetStudentAction): {
         return initialState;
       }
       case getType(setActivePlanStatusAction): {

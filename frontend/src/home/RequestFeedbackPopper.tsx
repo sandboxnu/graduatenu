@@ -9,10 +9,11 @@ import { Autocomplete } from "@material-ui/lab";
 import { PrimaryButton } from "../components/common/PrimaryButton";
 import { getAdvisors } from "../services/AdvisorService";
 import { IAbrAdvisor } from "../models/types";
-import { getActivePlanFromState, getUserFromState } from "../state";
+import { getActivePlanFromState, getStudentFromState } from "../state";
 import { AppState } from "../state/reducers/state";
 import { useDebouncedEffect } from "../hooks/useDebouncedEffect";
 import { requestApproval } from "../services/PlanService";
+import { WhiteColorButton } from "../components/common/ColoredButtons";
 
 const SubTitle = styled.div`
   font-size: 14px;
@@ -37,7 +38,7 @@ export const RequestFeedbackPopper: React.FC = () => {
       currentSchedule: getActivePlanFromState(state).schedule,
       approvedSchedule: getActivePlanFromState(state).approvedSchedule,
       planId: getActivePlanFromState(state).id,
-      userId: getUserFromState(state).id,
+      userId: getStudentFromState(state).id,
     })
   );
 
@@ -84,7 +85,7 @@ export const RequestFeedbackPopper: React.FC = () => {
     return (
       <Tooltip title={tooltipText} aria-label="request-button">
         <div>
-          <Button
+          <WhiteColorButton
             variant="contained"
             startIcon={icon}
             disabled={isApproved}
@@ -93,7 +94,7 @@ export const RequestFeedbackPopper: React.FC = () => {
             }}
           >
             {text}
-          </Button>
+          </WhiteColorButton>
         </div>
       </Tooltip>
     );

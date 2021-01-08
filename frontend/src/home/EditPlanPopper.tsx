@@ -407,7 +407,7 @@ export class EditPlanPopperComponent extends React.Component<
               {this.renderCatalogYearDropdown()}
               {!!this.props.plan.catalogYear && this.renderMajorDropDown()}
               <SaveOnChangeConcentrationDropdown
-                isUserLevel={false}
+                isStudentLevel={false}
                 style={{
                   width: "100%",
                   marginBottom: "5px",

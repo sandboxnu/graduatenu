@@ -1,9 +1,8 @@
 import { FormControl, FormHelperText, TextField } from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
 import { CSSProperties } from "@material-ui/styles";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import styled from "styled-components";
 import { Concentration, Major } from "../../../common/types";
 import {
   safelyGetActivePlanMajorObjectFromState,
@@ -11,7 +10,7 @@ import {
   getUserConcentrationFromState,
   safelyGetActivePlanConcentrationFromState,
 } from "../state";
-import { setUserConcentrationAction } from "../state/actions/userActions";
+import { setStudentConcentrationAction } from "../state/actions/studentActions";
 import { setActivePlanConcentrationAction } from "../state/actions/userPlansActions";
 import { AppState } from "../state/reducers/state";
 
@@ -26,7 +25,7 @@ interface SaveInParentConcentrationDropdownProps {
 }
 
 interface SaveOnChangeConcentrationDropdownProps {
-  readonly isUserLevel: boolean;
+  readonly isStudentLevel: boolean;
   readonly style?: CSSProperties;
   readonly useLabel?: boolean;
 }
@@ -100,26 +99,26 @@ const SaveInParentConcentrationDropdown: React.FC<SaveInParentConcentrationDropd
 
 // Concentration dropdown which sets the concentration in Redux whenever it is changed.
 const SaveOnChangeConcentrationDropdown: React.FC<SaveOnChangeConcentrationDropdownProps> = ({
-  isUserLevel,
+  isStudentLevel,
   style,
   useLabel,
 }) => {
   const dispatch = useDispatch();
   const concentration = useSelector((state: AppState) =>
-    isUserLevel
+    isStudentLevel
       ? getUserConcentrationFromState(state)
       : safelyGetActivePlanConcentrationFromState(state)
   );
 
   const major: Major | undefined = useSelector((state: AppState) =>
-    isUserLevel
+    isStudentLevel
       ? getUserMajorFromState(state)
       : safelyGetActivePlanMajorObjectFromState(state)
   );
 
   const dispatchConcentration = (newConcentration: string | null) => {
-    if (isUserLevel) {
-      dispatch(setUserConcentrationAction(newConcentration));
+    if (isStudentLevel) {
+      dispatch(setStudentConcentrationAction(newConcentration));
     } else {
       dispatch(setActivePlanConcentrationAction(newConcentration));
     }
@@ -132,6 +131,7 @@ const SaveOnChangeConcentrationDropdown: React.FC<SaveOnChangeConcentrationDropd
       setConcentration={dispatchConcentration}
       style={style}
       useLabel={useLabel}
+      showError={true}
     />
   );
 };

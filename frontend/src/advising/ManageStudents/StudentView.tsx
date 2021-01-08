@@ -14,7 +14,7 @@ import styled from "styled-components";
 import { Avatar, Tooltip, IconButton } from "@material-ui/core";
 import { ArrowBack, Fullscreen } from "@material-ui/icons";
 import Edit from "@material-ui/icons/Edit";
-import { ColoredButton } from "../../components/common/ColoredButton";
+import { RedColorButton } from "../../components/common/ColoredButtons";
 import { LoadingSpinner } from "../../components/common/LoadingSpinner";
 import { NonEditableSchedule } from "../../components/Schedule/ScheduleComponents";
 import { SwitchPlanList } from "../../components/SwitchPlan/SwitchPlanList";
@@ -167,7 +167,9 @@ export const StudentView: React.FC = () => {
               <SwitchPlanList />
             </PlanListContainer>
             <ButtonContainer>
-              <ColoredButton onClick={() => {}}>Assign Template</ColoredButton>
+              <RedColorButton onClick={() => {}}>
+                Assign Template
+              </RedColorButton>
             </ButtonContainer>
           </StudentInfoDisplay>
         )}
