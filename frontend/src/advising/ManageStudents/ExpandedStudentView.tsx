@@ -32,7 +32,7 @@ import {
 } from "../../services/PlanService";
 import IdleTimer from "react-idle-timer";
 import { LoadingSpinner } from "../../components/common/LoadingSpinner";
-import { setUserAction } from "../../state/actions/userActions";
+import { setStudentAction } from "../../state/actions/studentActions";
 import { Alert } from "@material-ui/lab";
 import { PrimaryButton } from "../../components/common/PrimaryButton";
 import {
@@ -124,7 +124,7 @@ export const ExpandedStudentView: React.FC = () => {
           .then(response => {
             callUpdatePlanLastViewedOnInterval();
             batch(() => {
-              dispatch(setUserAction(user));
+              dispatch(setStudentAction(user));
               dispatch(setUserPlansAction([response], user.academicYear));
               dispatch(
                 setActivePlanAction(response.name, studentId, user.academicYear)
@@ -249,11 +249,13 @@ export const ExpandedStudentView: React.FC = () => {
                 <ScheduleWrapper>
                   {editMode && !plan!.isCurrentlyBeingEditedByStudent ? (
                     <EditableSchedule
+                      sidebarPresent
                       transferCreditPresent
                       collapsibleYears={false}
                     />
                   ) : (
                     <NonEditableScheduleStudentView
+                      sidebarPresent
                       transferCreditPresent
                       collapsibleYears={false}
                     />

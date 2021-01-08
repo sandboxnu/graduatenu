@@ -1,4 +1,4 @@
-import { ScraperRequirement, RowType } from "../models/types";
+import { RowType } from "../models/types";
 import {
   IAndCourse,
   IRequiredCourse,
@@ -7,8 +7,8 @@ import {
   Requirement,
   ICourseRange,
 } from "../../../common/types";
-import { createRequiredCourse, isRequirement } from "../utils/scraper_utils";
-import { RANGECourseSet, ValidSubjects } from "./catalog_scraper";
+import { createRequiredCourse } from "../utils/scraper_utils";
+import { RANGECourseSet, ValidSubjects } from "./scraper_constants";
 
 /**
  * A function that given a row, converts it into a Requirement type.
@@ -229,10 +229,11 @@ export function parseSubjectRangeRow(
 
   // TODO: In the future, possibly loop through each "to" if there are multiple ranges in
   // a single header
-  if (splitLowerAnchor.includes("to")) {
+  if (splitLowerAnchor.includes("to") || splitLowerAnchor.includes("-")) {
     // find the location of "to" if it's included, because that word should be the midpoint of
     // the course start and end
     let index = splitLowerAnchor.indexOf("to");
+    if (index === -1) index = splitLowerAnchor.indexOf("-");
     subject = splitLowerAnchor[index - 2];
     idRangeStart = parseInt(splitLowerAnchor[index - 1]);
     idRangeEnd = parseInt(splitLowerAnchor[index + 2]);

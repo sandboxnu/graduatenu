@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Tabs, Tab, Button, Theme, withStyles } from "@material-ui/core";
-import { withRouter, RouteComponentProps, useHistory } from "react-router-dom";
-import { ColoredButton } from "../components/common/ColoredButton";
+import { Tabs, Tab } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
+import { RedColorButton } from "../components/common/ColoredButtons";
 import { removeAuthTokenFromCookies } from "../utils/auth-helpers";
 import { useDispatch } from "react-redux";
-import { resetUserAction } from "../state/actions/userActions";
-import { NORTHEASTERN_RED } from "../constants";
+import { resetStudentAction } from "../state/actions/studentActions";
 
 const Header = styled.div`
   display: flex;
@@ -53,7 +52,7 @@ const GenericAdvisingTemplate: React.FC = ({ children }) => {
   };
 
   const logOut = () => {
-    dispatch(resetUserAction());
+    dispatch(resetStudentAction());
     window.location.reload();
     removeAuthTokenFromCookies();
     history.push("/");
@@ -63,7 +62,9 @@ const GenericAdvisingTemplate: React.FC = ({ children }) => {
     <Container>
       <Header>
         <HomeText>GraduateNU</HomeText>
-        <ColoredButton onClick={() => logOut()}>Logout</ColoredButton>
+        <RedColorButton variant="contained" onClick={() => logOut()}>
+          Logout
+        </RedColorButton>
       </Header>
       <TabsWrapper>
         <Tabs

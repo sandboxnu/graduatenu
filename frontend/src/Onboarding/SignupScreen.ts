@@ -16,7 +16,7 @@ export {};
 //   setPlanNameAction,
 //   setLinkSharingAction,
 //   setEmailAction,
-//   setUserCoopCycleAction,
+//   setStudentCoopCycleAction,
 // } from "../state/actions/userActions";
 // import { addNewSchedule } from "../state/actions/userPlansActions";
 
@@ -385,7 +385,7 @@ export {};
 //     dispatch(setLinkSharingAction(linkSharing)),
 //   setEmail: (email: string) => dispatch(setEmailAction(email)),
 //   setUserCoopCycle: (coopCycle: string) =>
-//     dispatch(setUserCoopCycleAction(coopCycle)),
+//     dispatch(setStudentCoopCycleAction(coopCycle)),
 // });
 
 // /**

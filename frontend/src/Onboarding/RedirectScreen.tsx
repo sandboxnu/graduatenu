@@ -4,10 +4,10 @@ import { Redirect } from "react-router";
 import { useDispatch } from "react-redux";
 import { fetchActiveUser } from "../services/UserService";
 import {
-  setUserAction,
+  setStudentAction,
   setCompletedCoursesAction,
   setTransferCoursesAction,
-} from "../state/actions/userActions";
+} from "../state/actions/studentActions";
 import { fetchMajorsAndPlans } from "../utils/fetchMajorsAndPlans";
 import { authCookieExists, AUTH_TOKEN_COOKIE_KEY } from "../utils/auth-helpers";
 import { getScheduleCoursesFromSimplifiedCourseDataAPI } from "../utils/course-helpers";
@@ -53,7 +53,7 @@ export const RedirectScreen: React.FC<Props> = ({ redirectUrl }) => {
             if (!response.user.isAdvisor) {
               // student
 
-              dispatch(setUserAction(response.user));
+              dispatch(setStudentAction(response.user));
               Promise.all([
                 getScheduleCoursesFromSimplifiedCourseDataAPI(
                   response.user.coursesCompleted

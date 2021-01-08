@@ -15,75 +15,79 @@ import { getCreditsTakenInSchedule } from "../utils";
  * @param state the AppState
  */
 // Caution! Will error if there is not a user
-export const getUserFromState = (state: AppState) => state.userState.user!;
+export const getStudentFromState = (state: AppState) =>
+  state.studentState.student!;
 
 export const getDoesAdvisorExistInState = (state: AppState) =>
   !!state.advisorState.advisor;
 
-export const getDoesUserExistInState = (state: AppState) =>
-  !!state.userState.user;
+export const getDoesStudentExistInState = (state: AppState) =>
+  !!state.studentState.student;
 
 export const getUserIdFromState = (state: AppState) =>
-  getUserFromState(state).id;
+  getStudentFromState(state).id;
 
 export const safelyGetUserIdFromState = (state: AppState) =>
-  getUserFromState(state)?.id;
+  getStudentFromState(state)?.id;
 
 export const safelyGetUserFullNameFromState = (state: AppState) =>
   getUserFromState(state)?.fullName;
 
 export const getUserFullNameFromState = (state: AppState) =>
-  getUserFromState(state).fullName;
+  getStudentFromState(state).fullName;
 
 export const getUserPrimaryPlanIdFromState = (state: AppState) =>
-  getUserFromState(state).primaryPlanId;
+  getStudentFromState(state).primaryPlanId;
 
 /**
  * Get the list of completed requirements from the AppState
  * @param state the AppState
  */
 export const getCompletedRequirementsFromState = (state: AppState) =>
-  state.userState.completedRequirements;
+  state.studentState.completedRequirements;
 
 /**
  * Get the list of completed courses from the AppState
  * @param state the AppState
  */
 export const getCompletedCoursesFromState = (state: AppState) =>
-  getUserFromState(state).completedCourses;
+  getStudentFromState(state).completedCourses;
 
 /**
  * Get the list of transfer courses from the AppState
  * @param state the AppState
  */
 export const safelyGetTransferCoursesFromState = (state: AppState) =>
-  getUserFromState(state)?.transferCourses || [];
+  getStudentFromState(state)?.transferCourses || [];
 
 /**
  * Get the selected major object from the AppState
  * @param state the AppState
  */
 export const getUserMajorFromState = (state: AppState): Major | undefined =>
-  findMajorFromName(getUserFromState(state).major, getMajorsFromState(state));
+  findMajorFromName(
+    getStudentFromState(state).major,
+    getMajorsFromState(state)
+  );
 
 export const getUserCatalogYearFromState = (state: AppState): number | null =>
-  getUserFromState(state).catalogYear;
+  getStudentFromState(state).catalogYear;
 
 /**
  * Get the selected major name from the AppState
  * @param state the AppState
  */
 export const getUserMajorNameFromState = (state: AppState): string | null =>
-  getUserFromState(state).major;
+  getStudentFromState(state).major;
 
 export const getUserCoopCycleFromState = (state: AppState): string | null =>
-  getUserFromState(state).coopCycle;
+  getStudentFromState(state).coopCycle;
 
 export const getAcademicYearFromState = (state: AppState) =>
-  getUserFromState(state).academicYear;
+  getStudentFromState(state).academicYear;
 
 export const getGraduationYearFromState = (state: AppState) =>
-  getUserFromState(state).graduationYear;
+  getStudentFromState(state).graduationYear;
 
 /**
  * Get the warnings generated from the AppState
@@ -220,7 +224,7 @@ export const getCurrentClassCounterFromState = (state: AppState) => {
  * @param state the AppState
  */
 export const getIsAdvisorFromState = (state: AppState) => {
-  return getUserFromState(state).isAdvisor;
+  return getStudentFromState(state).isAdvisor;
 };
 
 export const getActivePlanStatusFromState = (state: AppState) => {
@@ -260,10 +264,10 @@ export const safelyGetActivePlanScheduleFromState = (state: AppState) =>
   safelyGetActivePlanFromState(state)?.schedule;
 
 export const safelyGetAcademicYearFromState = (state: AppState) =>
-  state.userState.user?.academicYear;
+  state.studentState.student?.academicYear;
 
 export const safelyGetGraduationYearFromState = (state: AppState) =>
-  state.userState.user?.graduationYear;
+  state.studentState.student?.graduationYear;
 
 export const getFolderExpandedFromState = (state: AppState, index: number) =>
   !state.advisorState.closedFolders.includes(index);
