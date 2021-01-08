@@ -1,6 +1,5 @@
 class PlanChangelogsController < ApplicationController
     before_action :set_plan
-    before_action :set_author, only: [:create]
     before_action :set_plan_changelog, only: [:show]
 
     def index
@@ -20,7 +19,7 @@ class PlanChangelogsController < ApplicationController
     end
 
     def create
-        if @plan_changelog = PlanChangelog.create(plan_id: params[:plan_id], author: @author.full_name, author_id: plan_changelog_params[:author_id], log: plan_changelog_params[:log])
+        if @plan_changelog = PlanChangelog.create(plan_id: params[:plan_id], author_id: plan_changelog_params[:author_id], log: plan_changelog_params[:log])
             render :show
         else
             render json: {error: "Unable to store plan changelog."}, status: :unprocessable_entity
@@ -29,10 +28,6 @@ class PlanChangelogsController < ApplicationController
 
     def set_plan
         @plan = Plan.find_by_id(params[:plan_id])
-    end
-
-    def set_author
-        @author = User.find_by_id(plan_changelog_params[:author_id])
     end
 
     def set_plan_changelog

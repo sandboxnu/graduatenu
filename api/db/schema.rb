@@ -25,7 +25,6 @@ ActiveRecord::Schema.define(version: 2021_01_02_222850) do
   create_table "plan_changelogs", force: :cascade do |t|
     t.string "log", null: false
     t.bigint "author_id", null: false
-    t.string "author", null: false
     t.bigint "plan_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
