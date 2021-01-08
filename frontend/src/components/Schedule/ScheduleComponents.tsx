@@ -42,7 +42,7 @@ const OuterContainer = styled.div`
 `;
 
 const SidebarContainer = styled.div`
-  height: 100vh;
+  height: calc(100vh - 85px);
   overflow-y: scroll;
   overflow-x: hidden;
   flex: 4;
@@ -51,7 +51,7 @@ const SidebarContainer = styled.div`
 `;
 
 const LeftScroll = styled.div<any>`
-  height: ${props => (props.sidebarPresent ? "100vh" : "auto")};
+  height: ${props => (props.sidebarPresent ? "calc(100vh - 85px)" : "auto")};
   overflow-x: hidden;
   overflow-y: scroll;
   flex: 19;
