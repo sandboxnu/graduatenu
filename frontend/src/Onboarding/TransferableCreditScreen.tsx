@@ -2,7 +2,7 @@ import { Grid, Paper } from "@material-ui/core";
 import React, { useState } from "react";
 import { useDispatch, shallowEqual, useSelector } from "react-redux";
 import { TransferableExam, TransferableExamGroup } from "../../../common/types";
-import { setExamCreditsAction } from "../state/actions/userActions";
+import { setStudentExamCreditsAction } from "../state/actions/studentActions";
 import {
   MainTitleText,
   OnboardingSelectionTemplate,
@@ -173,7 +173,7 @@ const TransferableCreditScreen: React.FC = () => {
   >([]);
 
   const onSubmit = (): Promise<any> => {
-    dispatch(setExamCreditsAction(selectedTransferableExams));
+    dispatch(setStudentExamCreditsAction(selectedTransferableExams));
     const token = getAuthToken();
     const updateUserPromise = () =>
       updateUser(

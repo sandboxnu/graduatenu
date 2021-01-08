@@ -7,7 +7,7 @@ import { AddClassSearchModal } from "./AddClassSearchModal";
 import {
   addTransferClassAction,
   removeTransferClassAction,
-} from "../state/actions/userActions";
+} from "../state/actions/studentActions";
 import { AddBlock } from "./ClassBlocks/AddBlock";
 import { NonDraggableClassBlock } from "./ClassBlocks/NonDraggableClassBlock";
 import { UndoDelete } from "./UndoDelete";

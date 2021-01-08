@@ -8,14 +8,14 @@ import Autocomplete from "@material-ui/lab/Autocomplete";
 import { IconButton } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
 import {
-  setGraduationYearAction,
-  setUserCoopCycleAction,
-  setUserMajorAction,
-  setUserCatalogYearAction,
-} from "../state/actions/userActions";
+  setStudentGraduationYearAction,
+  setStudentCoopCycleAction,
+  setStudentMajorAction,
+  setStudentCatalogYearAction,
+} from "../state/actions/studentActions";
 import {
   getMajorsFromState,
-  getUserFromState,
+  getStudentFromState,
   getPlansFromState,
   getUserCatalogYearFromState,
 } from "../state";
@@ -112,7 +112,7 @@ const ProfileComponent: React.FC = () => {
   const dispatch = useDispatch();
   const { user, majors, plans, catalogYear } = useSelector(
     (state: AppState) => ({
-      user: getUserFromState(state), // best to update this screen when any part of the user changes
+      user: getStudentFromState(state), // best to update this screen when any part of the user changes
       majors: getMajorsFromState(state),
       plans: getPlansFromState(state),
       catalogYear: getUserCatalogYearFromState(state),
@@ -190,7 +190,7 @@ const ProfileComponent: React.FC = () => {
             )}
             value={val}
             onChange={(event: React.SyntheticEvent<{}>, value: any) => {
-              dispatch(setUserCatalogYearAction(value));
+              dispatch(setStudentCatalogYearAction(value));
             }}
           />
         )}
@@ -222,7 +222,7 @@ const ProfileComponent: React.FC = () => {
     );
   };
 
-  /* 
+  /*
 TODO: // Add Advsisors to profile page once we support them
 const ProfileAdvisor = (props: any) => {
     return (
@@ -249,14 +249,14 @@ const ProfileAdvisor = (props: any) => {
 
   const save = () => {
     setEdit(false);
-    dispatch(setUserMajorAction(major || ""));
+    dispatch(setStudentMajorAction(major || ""));
     if (coopCycle !== "None Selected") {
-      dispatch(setUserCoopCycleAction(""));
+      dispatch(setStudentCoopCycleAction(""));
     } else {
-      dispatch(setUserCoopCycleAction(coopCycle || ""));
+      dispatch(setStudentCoopCycleAction(coopCycle || ""));
     }
 
-    dispatch(setGraduationYearAction(gradYear));
+    dispatch(setStudentGraduationYearAction(gradYear));
 
     const token = getAuthToken();
 
