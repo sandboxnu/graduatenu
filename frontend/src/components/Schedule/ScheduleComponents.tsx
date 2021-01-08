@@ -26,12 +26,14 @@ import {
   getCurrentClassCounterFromState,
   getActivePlanFromState,
   safelyGetTransferCoursesFromState,
+  getUserIdFromState,
 } from "../../state";
 import { Year } from "../Year";
 import { TransferCredits } from "../TransferCreditHolder";
 import { LoadingSpinner } from "../common/LoadingSpinner";
 import ScheduleChangeTracker from "../../utils/ScheduleChangeTracker";
 import { truncate } from "lodash";
+import { Comments } from "./Comments";
 
 const OuterContainer = styled.div`
   display: flex;
@@ -53,6 +55,7 @@ const LeftScroll = styled.div<any>`
   overflow-x: hidden;
   overflow-y: scroll;
   flex: 19;
+  margin-bottoom: 30px;
 `;
 
 const Container = styled.div`
@@ -70,6 +73,7 @@ interface Props {
   sidebarPresent?: boolean;
   transferCreditPresent?: boolean;
   collapsibleYears: boolean;
+  commentsPresent?: boolean;
 }
 
 interface ScheduleProps {
@@ -173,11 +177,19 @@ export const EditableSchedule: React.FC<Props> = props => {
     transferCreditPresent,
     collapsibleYears,
   } = props;
-  const { activePlan, currentClassCounter, transferCredits } = useSelector(
+  const {
+    activePlan,
+    currentClassCounter,
+    transferCredits,
+    planId,
+    userId,
+  } = useSelector(
     (state: AppState) => ({
       activePlan: getActivePlanFromState(state)!.schedule,
+      planId: getActivePlanFromState(state)!.id,
       currentClassCounter: getCurrentClassCounterFromState(state),
       transferCredits: safelyGetTransferCoursesFromState(state),
+      userId: getUserIdFromState(state),
     }),
     shallowEqual
   );
@@ -321,6 +333,9 @@ export const EditableSchedule: React.FC<Props> = props => {
               />
             )}
           </Container>
+          {props.commentsPresent && (
+            <Comments planId={planId} studentId={userId} />
+          )}
         </LeftScroll>
       </DragDropContext>
     </OuterContainer>

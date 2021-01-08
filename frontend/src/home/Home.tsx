@@ -375,6 +375,7 @@ class HomeComponent extends React.Component<Props> {
             sidebarPresent
             transferCreditPresent
             collapsibleYears
+            commentsPresent
           >
             {this.renderPlanHeader()}
           </NonEditableScheduleStudentView>
@@ -383,6 +384,7 @@ class HomeComponent extends React.Component<Props> {
             sidebarPresent
             transferCreditPresent
             collapsibleYears
+            commentsPresent
           >
             {this.renderPlanHeader()}
           </EditableSchedule>

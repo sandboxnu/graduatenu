@@ -29,6 +29,9 @@ export const getUserIdFromState = (state: AppState) =>
 export const safelyGetUserIdFromState = (state: AppState) =>
   getUserFromState(state)?.id;
 
+export const safelyGetUserFullNameFromState = (state: AppState) =>
+  getUserFromState(state)?.fullName;
+
 export const getUserFullNameFromState = (state: AppState) =>
   getUserFromState(state).fullName;
 
@@ -270,3 +273,6 @@ export const getAdvisorUserIdFromState = (state: AppState) =>
 
 export const getAdvisorFullNameFromState = (state: AppState) =>
   state.advisorState.advisor!.fullName;
+
+export const safelyGetAdvisorFullNameFromState = (state: AppState) =>
+  state.advisorState.advisor?.fullName;

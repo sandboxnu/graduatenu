@@ -10,7 +10,9 @@ import {
 import {
   safelyGetActivePlanIdFromState,
   safelyGetUserIdFromState,
-  getAdvisorFullNameFromState,
+  safelyGetUserFullNameFromState,
+  getIsAdvisorFromState,
+  safelyGetAdvisorFullNameFromState,
 } from "../../state";
 import { AppState } from "../../state/reducers/state";
 import { GenericColorButton } from "../common/ColoredButton";
@@ -40,6 +42,7 @@ const CommentsHeader = styled.div`
 
 const CommentsDropdownContainer = styled.div`
   margin-right: 30px;
+  margin-bottom: 30px;
 `;
 
 const ContentContainer = styled.div`
@@ -165,11 +168,17 @@ export const Comments: React.FC<Props> = (props: Props) => {
     }
   };
 
-  const { planId, userId, userName } = useSelector((state: AppState) => ({
-    planId: safelyGetActivePlanIdFromState(state),
-    userId: safelyGetUserIdFromState(state),
-    userName: getAdvisorFullNameFromState(state),
-  }));
+  const { planId, userId, isAdvisor, studentName, advisorName } = useSelector(
+    (state: AppState) => ({
+      planId: safelyGetActivePlanIdFromState(state),
+      userId: safelyGetUserIdFromState(state),
+      isAdvisor: getIsAdvisorFromState(state),
+      studentName: safelyGetUserFullNameFromState(state),
+      advisorName: safelyGetAdvisorFullNameFromState(state),
+    })
+  );
+
+  const userName = isAdvisor && advisorName ? advisorName : studentName;
 
   useEffect(() => {
     Promise.all([
@@ -185,7 +194,7 @@ export const Comments: React.FC<Props> = (props: Props) => {
   }, []);
 
   // If end of comments is on screen, let's scroll to the bottom.
-  // This was the best solution I could find, feel free to refactor if there's a better on.
+  // This was the best solution I could find, feel free to refactor if there's a better one.
   useEffect(() => {
     if (isEndPageOnScreen) scrollToBottom();
   }, [isEndPageOnScreen]);
