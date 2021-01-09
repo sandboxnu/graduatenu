@@ -83,7 +83,7 @@ class UsersController < ApplicationController
 
     def user_params
         params.require(:user).permit(:full_name, :email, :password,
-        :academic_year, :graduation_year, :major, :coop_cycle, :nu_id, :catalog_year,
+        :academic_year, :graduation_year, :major, :coop_cycle, :concentration, :nu_id, :catalog_year,
         courses_completed: [:subject, :course_id, :semester, :completion],
         courses_transfer: [:subject, :course_id, :semester, :completion])
     end

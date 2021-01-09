@@ -2,15 +2,16 @@
 #
 # Table name: template_plans
 #
-#  id           :bigint(8)        not null, primary key
-#  catalog_year :integer(4)       not null
-#  coop_cycle   :string           not null
-#  major        :string           not null
-#  name         :string           not null
-#  schedule     :json
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
-#  folder_id    :bigint(8)
+#  id            :bigint(8)        not null, primary key
+#  catalog_year  :integer(4)       not null
+#  concentration :string
+#  coop_cycle    :string           not null
+#  major         :string           not null
+#  name          :string           not null
+#  schedule      :json
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  folder_id     :bigint(8)
 #
 # Indexes
 #

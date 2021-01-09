@@ -57,7 +57,7 @@ class TemplatesController < ApplicationController
   end
 
   def template_plan_params
-   params.require(:template_plan).permit(:name, :major, :coop_cycle, :catalog_year, :folder_id, :folder_name, :schedule)
+   params.require(:template_plan).permit(:name, :major, :coop_cycle, :concentration, :catalog_year, :folder_id, :folder_name, :schedule)
  end
 
   #sets the current user

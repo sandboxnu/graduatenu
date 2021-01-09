@@ -29,6 +29,7 @@ export function convertPlanToUpdatePlanData(
     link_sharing_enabled: plan.linkSharingEnabled,
     major: plan.major,
     coop_cycle: plan.coopCycle,
+    concentration: plan.concentration,
     course_counter: plan.courseCounter,
     last_viewed: plan.lastViewed,
     warnings: plan.warnings,

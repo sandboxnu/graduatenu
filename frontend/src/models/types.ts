@@ -159,7 +159,7 @@ export interface IUserData {
   graduationYear: number | null;
   catalogYear: number | null;
   major: string | null;
-  concentration?: string | null;
+  concentration: string | null;
   coopCycle: string | null;
   nuId: string;
   isAdvisor: boolean;
@@ -204,6 +204,7 @@ export interface IPlanData {
   catalogYear: number | null;
   major: string | null;
   coopCycle: string | null;
+  concentration: string | null;
   warnings: IWarning[];
   courseWarnings: CourseWarning[];
   courseCounter: number;
@@ -214,7 +215,6 @@ export interface IPlanData {
   isCurrentlyBeingEditedByAdvisor: boolean;
   lastViewer: number; // a user id
   lastRequestedApproval: Date | null;
-  concentration?: string | null;
 }
 
 /**
@@ -227,6 +227,7 @@ export interface ICreatePlanData {
   catalog_year: number | null;
   major: string | null;
   coop_cycle: string | null;
+  concentration: string | null;
   course_counter: number;
   last_viewed?: Date;
   last_viewer?: number;
@@ -239,6 +240,7 @@ export interface IUpdatePlanData {
   catalog_year: number | null;
   major: string | null;
   coop_cycle: string | null;
+  concentration: string | null;
   course_counter: number;
   last_viewed?: Date;
   warnings: IWarning[];
@@ -264,6 +266,7 @@ export interface IUpdateUserData {
   academic_year?: number;
   graduation_year?: number;
   coop_cycle?: string | null;
+  concentration: string | null;
   catalog_year?: number | null;
   nu_id?: string;
   courses_transfer?: ISimplifiedCourseDataAPI[];
@@ -310,6 +313,7 @@ export interface ITemplatePlan {
   catalogYear: number | null;
   major: string | null;
   coopCycle: string | null;
+  concentration: string | null;
   updatedAt: Date;
 }
 
@@ -319,6 +323,7 @@ export interface ICreateTemplatePlan {
   catalog_year: number | null;
   major: string | null;
   coop_cycle: string | null;
+  concentration: string | null;
   folder_id: number | null; // if null, create new folder
   folder_name: string | null; // only not null if folder exists
 }

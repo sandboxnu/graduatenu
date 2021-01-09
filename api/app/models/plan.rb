@@ -5,6 +5,7 @@
 #  id                      :bigint(8)        not null, primary key
 #  approved_schedule       :json
 #  catalog_year            :integer(4)       default(2018)
+#  concentration           :string
 #  coop_cycle              :string
 #  course_counter          :integer(4)
 #  course_warnings         :json             default([]), is an Array

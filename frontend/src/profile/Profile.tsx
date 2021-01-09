@@ -24,9 +24,6 @@ import {
   getMajorsFromState,
   getStudentFromState,
   getPlansFromState,
-  getUserCatalogYearFromState,
-  getUserConcentrationFromState,
-  getUserMajorFromState,
 } from "../state";
 import { Major, Schedule } from "../../../common/types";
 import { AppState } from "../state/reducers/state";
@@ -183,9 +180,11 @@ const ProfileComponent: React.FC = () => {
               <TextField {...params} variant="outlined" fullWidth />
             )}
             value={val}
-            onChange={(event: React.SyntheticEvent<{}>, value: any) =>
-              setMajor(value)
-            }
+            onChange={(event: React.SyntheticEvent<{}>, value: any) => {
+              setMajor(value);
+              setCoopCycle("");
+              setConcentration("");
+            }}
           />
         )}
         {!isEdit && <ItemEntry> {val} </ItemEntry>}
@@ -323,7 +322,6 @@ const ProfileAdvisor = (props: any) => {
       id: user.id!,
     };
 
-    //TODO add concentration
     const updateUserData: IUpdateUserData = {
       graduation_year: gradYear,
       major: major || null,
@@ -331,6 +329,7 @@ const ProfileAdvisor = (props: any) => {
         coopCycle != undefined && coopCycle !== "None Selected"
           ? coopCycle
           : "",
+      concentration: concentration,
       catalog_year: catalogYear,
     };
     updateUser(updateUserObj, updateUserData);
