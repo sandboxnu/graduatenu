@@ -279,6 +279,7 @@ function AddPlanPopperComponent(props: Props) {
     setPlanName(null);
     setSelectedCatalogYear(null);
     setSelectedMajor(null);
+    setSelectedConcentration(null);
     setSelectedCoopCycle(null);
     setSelectedPlanOption(null);
     setSelectedUserPlan(null);
