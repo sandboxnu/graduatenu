@@ -161,6 +161,7 @@ export const userPlansReducer = (
         const activePlan = draft.plans[draft.activePlan!];
 
         activePlan.major = major;
+        activePlan.coopCycle = null;
         activePlan.concentration = null;
 
         return draft;

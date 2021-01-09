@@ -284,7 +284,7 @@ class OnboardingScreenComponent extends React.Component<
       <Autocomplete
         style={{ width: 326, marginBottom: marginSpace }}
         disableListWrap
-        options={[]} //this.props.plans[this.state.major!].map(p => planToString(p))}
+        options={this.props.plans[this.state.major!].map(p => planToString(p))}
         renderInput={params => (
           <TextField
             {...params}

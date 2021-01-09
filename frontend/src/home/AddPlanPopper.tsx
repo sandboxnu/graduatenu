@@ -43,10 +43,7 @@ import { ExcelUpload } from "../components/ExcelUpload";
 import { NextButton } from "../components/common/NextButton";
 import { RedColorButton } from "../components/common/ColoredButtons";
 import { getAuthToken } from "../utils/auth-helpers";
-import {
-  SaveInParentConcentrationDropdown,
-  SaveOnChangeConcentrationDropdown,
-} from "../components/ConcentrationDropdown";
+import { SaveInParentConcentrationDropdown } from "../components/ConcentrationDropdown";
 
 const EXCEL_TOOLTIP =
   "Auto-populate your schedule with your excel plan of study. Reach out to your advisor if you don't have it!";
@@ -201,7 +198,6 @@ function AddPlanPopperComponent(props: Props) {
   const onClickNext = () => {
     if (hasConcentrationError) {
       setConcentrationShowError(true);
-      console.log(showConcentrationError);
     } else {
       onSubmit();
     }

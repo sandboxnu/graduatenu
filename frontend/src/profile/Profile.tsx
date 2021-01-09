@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { withRouter, Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { batch, useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { PrimaryButton } from "../components/common/PrimaryButton";
 import {
@@ -303,16 +303,18 @@ const ProfileAdvisor = (props: any) => {
 
   const save = () => {
     setEdit(false);
-    dispatch(setStudentMajorAction(major || ""));
-    dispatch(setStudentCatalogYearAction(catalogYear));
-    dispatch(setStudentConcentrationAction(concentration));
-    if (coopCycle !== "None Selected") {
-      dispatch(setStudentCoopCycleAction(""));
-    } else {
-      dispatch(setStudentCoopCycleAction(coopCycle || ""));
-    }
+    batch(() => {
+      dispatch(setStudentMajorAction(major || ""));
+      dispatch(setStudentCatalogYearAction(catalogYear));
+      dispatch(setStudentConcentrationAction(concentration));
+      if (coopCycle !== "None Selected") {
+        dispatch(setStudentCoopCycleAction(""));
+      } else {
+        dispatch(setStudentCoopCycleAction(coopCycle || ""));
+      }
 
-    dispatch(setStudentGraduationYearAction(gradYear));
+      dispatch(setStudentGraduationYearAction(gradYear));
+    });
 
     const token = getAuthToken();
 
