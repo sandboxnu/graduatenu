@@ -52,9 +52,6 @@ const EXCEL_TOOLTIP =
 const COPY_PLAN_TOOLTIP =
   "This will copy an existing plan. This will change your seleceted Major and Coop Cycle to match the exising plan";
 
-const ERROR_MESSAGE =
-  "Please fill in the plan name and what the plan should be based on";
-
 const REQUIRED_FIELD_MESSAGE = "Required field";
 
 const PLAN_OPTIONS = {
@@ -147,7 +144,7 @@ function AddPlanPopperComponent(props: Props) {
   const [selectedMajor, setSelectedMajor] = useState<Major | null>(null);
   const [selectedConcentration, setSelectedConcentration] = useState<
     string | null
-  >("");
+  >(null);
   const [selectedCoopCycle, setSelectedCoopCycle] = useState<string | null>(
     null
   );
@@ -372,6 +369,7 @@ function AddPlanPopperComponent(props: Props) {
         concentration={selectedConcentration}
         setConcentration={setSelectedConcentration}
         setError={setNoConcentrationError}
+        showError={showErrors}
         useLabel={true}
       />
     );
