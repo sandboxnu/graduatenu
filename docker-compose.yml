@@ -41,8 +41,8 @@ services:
     networks:
       - sub-etha
     ports:
-      - 443:80
-      - 80:80
+      - "443:443"
+      - "80:80"
     image: "revproxy"
     volumes:
       - ./certbot/conf:/etc/nginx/ssl
