@@ -3,6 +3,7 @@ import styled from "styled-components";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import ErrorIcon from "@material-ui/icons/Error";
 import { removeAuthTokenFromCookies } from "../../utils/auth-helpers";
+import { NORTHEASTERN_RED } from "../../constants";
 
 const Centered = styled.div`
   position: absolute;
@@ -70,9 +71,9 @@ export const LoadingScreen = (props: LoadingProps) => {
   return (
     <Centered>
       {props.errorMsg ? (
-        <ErrorIcon color="secondary" style={{ fontSize: 80 }} />
+        <ErrorIcon style={{ color: NORTHEASTERN_RED, fontSize: 80 }} />
       ) : (
-        <CircularProgress color="secondary" />
+        <CircularProgress style={{ color: NORTHEASTERN_RED }} />
       )}
       <Text>
         {" "}

@@ -98,7 +98,7 @@ const ScheduleComponent: React.FC<ScheduleProps> = ({
       ))}
     </>
   ) : (
-    <LoadingSpinner />
+    <LoadingSpinner isTall />
   );
 };
 

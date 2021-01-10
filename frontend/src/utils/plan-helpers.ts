@@ -1,5 +1,6 @@
 import { IUpdatePlanData, IPlanData } from "./../models/types";
-import { Major } from "../../../common/types";
+import { Major, Schedule } from "../../../common/types";
+import { planToString } from "./schedule-helpers";
 
 /**
  * Finds a major from the given list of majors with the given name.
@@ -15,6 +16,23 @@ export function findMajorFromName(
     return undefined;
   }
   return major;
+}
+
+/**
+ *
+ * @param allPlans
+ * @param major
+ * @param coopCycle
+ */
+export function findExamplePlanFromCoopCycle(
+  allPlans: Record<string, Schedule[]>,
+  major: string,
+  coopCycle: string
+): Schedule | undefined {
+  const currentPlan = allPlans[major].find(
+    (p: Schedule) => planToString(p) === coopCycle
+  )!;
+  return currentPlan;
 }
 
 export function convertPlanToUpdatePlanData(

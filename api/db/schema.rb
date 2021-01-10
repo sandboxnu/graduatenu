@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_01_193734) do
+ActiveRecord::Schema.define(version: 2021_01_10_091515) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,16 @@ ActiveRecord::Schema.define(version: 2021_01_01_193734) do
     t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "plan_changelogs", force: :cascade do |t|
+    t.string "log", null: false
+    t.bigint "author_id", null: false
+    t.string "author", null: false
+    t.bigint "plan_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["plan_id"], name: "index_plan_changelogs_on_plan_id"
   end
 
   create_table "plan_comments", force: :cascade do |t|
@@ -43,10 +53,10 @@ ActiveRecord::Schema.define(version: 2021_01_01_193734) do
     t.json "course_warnings", default: [], array: true
     t.json "warnings", default: [], array: true
     t.integer "course_counter"
-    t.integer "catalog_year", default: 2018
     t.datetime "last_viewed"
-    t.json "approved_schedule"
+    t.integer "catalog_year", default: 2018
     t.bigint "last_viewer"
+    t.json "approved_schedule"
     t.datetime "last_requested_approval"
     t.index ["user_id"], name: "index_plans_on_user_id"
   end
@@ -60,6 +70,7 @@ ActiveRecord::Schema.define(version: 2021_01_01_193734) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "folder_id"
+    t.integer "course_counter"
     t.index ["folder_id"], name: "index_template_plans_on_folder_id"
   end
 

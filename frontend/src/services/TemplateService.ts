@@ -1,4 +1,8 @@
-import { ICreateTemplatePlan, IFolderData } from "../models/types";
+import {
+  ICreateTemplatePlan,
+  IFolderData,
+  ITemplatePlan,
+} from "../models/types";
 import { getAuthToken } from "../utils/auth-helpers";
 
 export interface TemplatesAPI {
@@ -41,16 +45,31 @@ export const getTemplates = (
 
 /** Service function object to create a template in the backend
  * @param userId the user id to get the templates from (usually the current user id)
- * @param userToken the JWT token of the user
+ * @param template the template information
  */
 export const createTemplate = (
   userId: number,
   template: ICreateTemplatePlan
-): Promise<IFolderData> =>
+): Promise<{ templatePlan: ITemplatePlan }> =>
   fetch(`/api/users/${userId}/templates`, {
     method: "POST",
-    body: JSON.stringify({ templatePlan: template }),
+    body: JSON.stringify({ template_plan: template }),
     headers: {
+      "Content-Type": "application/json",
+      Authorization: "Token " + getAuthToken(),
+    },
+  }).then(response => response.json());
+
+/**
+ *
+ * @param userId
+ * @param templateId
+ */
+export const fetchTemplate = (userId: number, templateId: number) =>
+  fetch(`/api/users/${userId}/templates/${templateId}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
       Authorization: "Token " + getAuthToken(),
     },
   }).then(response => response.json());

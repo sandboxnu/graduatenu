@@ -24,7 +24,7 @@ import {
   getActivePlanCoopCycleFromState,
   getActivePlanFromState,
   getActivePlanMajorFromState,
-  getWarningsFromState,
+  safelyGetWarningsFromState,
   getActivePlanStatusFromState,
 } from "../state";
 import {
@@ -369,7 +369,7 @@ const mapStateToProps = (state: AppState) => ({
   transferCredits: safelyGetTransferCoursesFromState(state),
   major: getActivePlanMajorFromState(state),
   coopCycle: getActivePlanCoopCycleFromState(state),
-  warnings: getWarningsFromState(state),
+  warnings: safelyGetWarningsFromState(state),
   userId: getUserIdFromState(state),
   majors: getMajorsFromState(state),
   academicYear: getAcademicYearFromState(state)!,
