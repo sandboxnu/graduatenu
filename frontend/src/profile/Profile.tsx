@@ -140,6 +140,7 @@ const ProfileComponent: React.FC = () => {
       selectedMajorObj.concentrations.concentrationOptions.length > 0) ||
     false;
 
+  // does major have concentrations
   const shouldDisplayConcentration: boolean =
     (isEdit && hasConcentrations) || (!isEdit && !!concentration);
 
@@ -333,6 +334,9 @@ const ProfileAdvisor = (props: any) => {
 
   const SaveButton = () => {
     const onClick = () => {
+      // hasConcentrationError doesn't update when shouldDisplayConcentration is false
+      // (because of the &&) so need to check shouldDisplayConcentration
+      // majors without concentrations should able to be saved
       if (hasConcentrationError && shouldDisplayConcentration) {
         setShowConcentrationError(true);
       } else {
