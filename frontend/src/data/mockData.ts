@@ -1,10 +1,4 @@
 import {
-  Concentration,
-  Concentrations,
-  IMajorRequirementGroup,
-  Major,
-} from "../../../common/types";
-import {
   DNDSchedule,
   DNDScheduleCourse,
   SeasonEnum,

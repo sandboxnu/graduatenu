@@ -319,7 +319,6 @@ const ProfileAdvisor = (props: any) => {
       id: user.id!,
     };
 
-    //TODO add concentration
     const updateUserData: IUpdateUserData = {
       graduation_year: gradYear,
       major: major || null,
