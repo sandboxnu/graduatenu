@@ -3,13 +3,7 @@ import { withRouter, Link } from "react-router-dom";
 import { batch, useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { PrimaryButton } from "../components/common/PrimaryButton";
-import {
-  FormControl,
-  MenuItem,
-  Select,
-  TextField,
-  Tooltip,
-} from "@material-ui/core";
+import { FormControl, MenuItem, Select, TextField } from "@material-ui/core";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import { IconButton } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
@@ -140,6 +134,15 @@ const ProfileComponent: React.FC = () => {
   const [hasConcentrationError, setHasConcentrationError] = useState(false);
   const [showConcentrationError, setShowConcentrationError] = useState(false);
 
+  const selectedMajorObj = findMajorFromName(major, majors, catalogYear);
+  const hasConcentrations: boolean =
+    (selectedMajorObj &&
+      selectedMajorObj.concentrations.concentrationOptions.length > 0) ||
+    false;
+
+  const shouldDisplayConcentration: boolean =
+    (isEdit && hasConcentrations) || (!isEdit && !!concentration);
+
   const ProfileGradYear = () => {
     return (
       <ProfileEntryContainer>
@@ -183,9 +186,11 @@ const ProfileComponent: React.FC = () => {
               <TextField {...params} variant="outlined" fullWidth />
             )}
             value={val}
-            onChange={(event: React.SyntheticEvent<{}>, value: any) =>
-              setMajor(value)
-            }
+            onChange={(event: React.SyntheticEvent<{}>, value: any) => {
+              setMajor(value);
+              setConcentration(null);
+              setShowConcentrationError(false);
+            }}
           />
         )}
         {!isEdit && <ItemEntry> {val} </ItemEntry>}
@@ -223,18 +228,9 @@ const ProfileComponent: React.FC = () => {
   };
 
   const ProfileConcentration = () => {
-    const selectedMajorObj = findMajorFromName(major, majors, catalogYear);
-    const hasConcentrations: boolean =
-      (selectedMajorObj &&
-        selectedMajorObj.concentrations.concentrationOptions.length > 0) ||
-      false;
-
-    const shouldDisplay: boolean =
-      (isEdit && hasConcentrations) || (!isEdit && !!concentration);
-
     return (
       <>
-        {shouldDisplay && (
+        {shouldDisplayConcentration && (
           <ProfileEntryContainer>
             <ItemTitle> Concentration </ItemTitle>
             {isEdit && (
@@ -338,7 +334,7 @@ const ProfileAdvisor = (props: any) => {
 
   const SaveButton = () => {
     const onClick = () => {
-      if (hasConcentrationError) {
+      if (hasConcentrationError && shouldDisplayConcentration) {
         setShowConcentrationError(true);
       } else {
         save();

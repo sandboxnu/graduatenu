@@ -345,6 +345,8 @@ function AddPlanPopperComponent(props: Props) {
           setSelectedMajor(
             findMajorFromName(value, allMajors, selectedCatalogYear) || null
           );
+          setConcentration(null);
+          setConcentrationShowError(false);
           setSelectedCoopCycle(null);
         }}
       />

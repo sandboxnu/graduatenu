@@ -9,9 +9,11 @@ import {
   WhiteColorButton,
   RedColorButton,
 } from "../../components/common/ColoredButtons";
+import { SaveInParentConcentrationDropdown } from "../../components/ConcentrationDropdown";
 import { getMajorsFromState, getPlansFromState } from "../../state";
 import { AppState } from "../../state/reducers/state";
 import { planToString } from "../../utils";
+import { findMajorFromName } from "../../utils/plan-helpers";
 
 const Container = styled.div`
   margin-left: 30px;
@@ -56,6 +58,9 @@ interface NameFieldProps {
 export const NewTemplatesPage: React.FC = () => {
   const [name, setName] = useState("");
   const [major, setMajor] = useState<string | null>(null);
+  const [concentration, setConcentration] = useState<string | null>(null);
+  const [hasConcentrationError, setHasConcentrationError] = useState(false);
+  const [showConcentrationError, setShowConcentrationError] = useState(false);
   const [catalogYear, setCatalogYear] = useState<string | null>(null);
   const [coopCycle, setCoopCycle] = useState<string | null>(null);
 
@@ -65,7 +70,16 @@ export const NewTemplatesPage: React.FC = () => {
   ];
   const coopCycles = useSelector((state: AppState) => getPlansFromState(state));
   const buttonSize = 90;
-  const disabled = !(name && major && catalogYear && coopCycle);
+
+  const majorObj = findMajorFromName(major, majors, Number(catalogYear));
+
+  const onClickNext = () => {
+    if (hasConcentrationError) {
+      setShowConcentrationError(true);
+    } else {
+      console.log("saved!( not really)");
+    }
+  };
 
   return (
     <NewTemplatesPageContainer>
@@ -92,8 +106,21 @@ export const NewTemplatesPage: React.FC = () => {
           value={major}
           setValue={value => {
             setMajor(value);
+            setConcentration(null);
+            setShowConcentrationError(false);
             setCoopCycle(null);
           }}
+        />
+      )}
+      {major && (
+        <SaveInParentConcentrationDropdown
+          major={majorObj}
+          concentration={concentration}
+          setConcentration={setConcentration}
+          setError={setHasConcentrationError}
+          style={{ width: "326px" }}
+          useLabel={true}
+          showError={showConcentrationError}
         />
       )}
       {major && (
@@ -113,7 +140,7 @@ export const NewTemplatesPage: React.FC = () => {
             Previous
           </WhiteColorButton>
         </Link>
-        <RedColorButton style={{ width: buttonSize }} disabled={disabled}>
+        <RedColorButton style={{ width: buttonSize }} onClick={onClickNext}>
           Next
         </RedColorButton>
       </ButtonContainer>

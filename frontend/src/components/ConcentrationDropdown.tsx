@@ -68,7 +68,7 @@ const SaveInParentConcentrationDropdown: React.FC<SaveInParentConcentrationDropd
   }, [concentration]);
 
   useEffect(() => {
-    if (setError) {
+    if (setError && !major) {
       setError(false);
     }
   }, [major]);
