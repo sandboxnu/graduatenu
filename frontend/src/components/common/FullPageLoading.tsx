@@ -48,7 +48,7 @@ export const LoadingScreen = (props: LoadingProps) => {
     removeAuthTokenFromCookies();
     window.location.reload();
   };
-
+  const defaultSubtest = "Don't worry, it'll take just a second";
   const errorSubText = (
     <>
       <p>
@@ -75,15 +75,10 @@ export const LoadingScreen = (props: LoadingProps) => {
       ) : (
         <CircularProgress style={{ color: NORTHEASTERN_RED }} />
       )}
-      <Text>
-        {" "}
-        {props.text
-          ? props.text
-          : props.errorMsg
-          ? props.errorMsg
-          : "Loading"}{" "}
-      </Text>
-      <SubText> {props.subText ? props.subText : errorSubText} </SubText>
+      <Text> {props.errorMsg || props.text || "Loading"} </Text>
+      <SubText>
+        {props.errorMsg ? errorSubText : props.subText || defaultSubtest}
+      </SubText>
     </Centered>
   );
 };

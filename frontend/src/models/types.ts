@@ -312,6 +312,16 @@ export interface ITemplatePlan {
   courseCounter: number;
 }
 
+export interface IUpdateTemplatePlan {
+  name?: string;
+  schedule?: DNDSchedule;
+  catalogYear?: number | null;
+  major?: string | null;
+  coopCycle?: string | null;
+  updatedAt?: Date;
+  courseCounter?: number;
+}
+
 export interface ICreateTemplatePlan {
   name: string;
   schedule: DNDSchedule;

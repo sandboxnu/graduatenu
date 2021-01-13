@@ -64,6 +64,21 @@ class TemplatesController < ApplicationController
     end
   end
 
+  # updates a plan
+  def update
+    if authorized
+      @template_plan = TemplatePlan.find_by(id: params[:id])
+      if @template_plan
+        @template_plan.update(template_plan_params) #same body + updated fields in request body
+        render :show
+      else
+        render json: {error: "No such plan."}, status: :unprocessable_entity
+      end
+    else
+      render json: {error: "Unauthorized."}, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def search_params
@@ -71,8 +86,8 @@ class TemplatesController < ApplicationController
   end
 
   def template_plan_params
-   params.require(:template_plan).permit(:name, :major, :coop_cycle, :catalog_year, :course_counter, :folder_id, :folder_name, schedule: {})
- end
+    params.require(:template_plan).permit(:name, :major, :coop_cycle, :catalog_year, :course_counter, :folder_id, :folder_name, schedule: {})
+  end
 
   #sets the current user
   def set_user

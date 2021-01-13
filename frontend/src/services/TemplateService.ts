@@ -2,6 +2,7 @@ import {
   ICreateTemplatePlan,
   IFolderData,
   ITemplatePlan,
+  IUpdateTemplatePlan,
 } from "../models/types";
 import { getAuthToken } from "../utils/auth-helpers";
 
@@ -18,12 +19,16 @@ export interface TemplatesAPI {
  * @param userToken the JWT token of the user
  */
 export const getTemplates = (
-  searchQuery: string,
-  pageNumber: number,
-  userId: number
+  userId: number,
+  searchQuery?: string,
+  pageNumber?: number
 ): Promise<TemplatesAPI> =>
   fetch(
-    `/api/users/${userId}/templates?search=${searchQuery}&page=${pageNumber}`,
+    `/api/users/${userId}/templates${
+      pageNumber !== undefined
+        ? `?search=${searchQuery}&page=${pageNumber}`
+        : ""
+    }`,
     {
       method: "GET",
       headers: {
@@ -68,6 +73,26 @@ export const createTemplate = (
 export const fetchTemplate = (userId: number, templateId: number) =>
   fetch(`/api/users/${userId}/templates/${templateId}`, {
     method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Token " + getAuthToken(),
+    },
+  }).then(response => response.json());
+
+/**
+ * Updates a given template plan for the given advisor.
+ * @param userId the id of the user who's plan is being modified
+ * @param planId  the id of the plan being updated
+ * @param templatePlan  the plan object to be used as the current plan
+ */
+export const updateTemplatePlanForUser = (
+  userId: number,
+  planId: number,
+  templatePlan: IUpdateTemplatePlan
+) =>
+  fetch(`/api/users/${userId}/templates/${planId}`, {
+    method: "PUT",
+    body: JSON.stringify({ template_plan: templatePlan }),
     headers: {
       "Content-Type": "application/json",
       Authorization: "Token " + getAuthToken(),

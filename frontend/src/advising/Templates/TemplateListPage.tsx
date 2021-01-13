@@ -176,7 +176,7 @@ const TemplatesList = ({ searchQuery }: TemplatesListProps) => {
 
   const fetchTemplates = (currentFolders: IFolderData[], page: number) => {
     setIsLoading(true);
-    getTemplates(searchQuery, page, userId)
+    getTemplates(userId, searchQuery, page)
       .then((response: TemplatesAPI) => {
         setTemplates(currentFolders.concat(response.templates));
         setPageNumber(response.nextPage);

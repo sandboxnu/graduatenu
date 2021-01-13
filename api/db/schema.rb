@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_10_091515) do
+ActiveRecord::Schema.define(version: 2021_01_13_051733) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,7 +66,7 @@ ActiveRecord::Schema.define(version: 2021_01_10_091515) do
     t.integer "catalog_year", null: false
     t.json "schedule"
     t.string "major", null: false
-    t.string "coop_cycle", null: false
+    t.string "coop_cycle"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "folder_id"
