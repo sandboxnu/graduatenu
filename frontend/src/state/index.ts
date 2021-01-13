@@ -30,6 +30,9 @@ export const getUserIdFromState = (state: AppState) =>
 export const safelyGetUserIdFromState = (state: AppState) =>
   getStudentFromState(state)?.id;
 
+export const safelyGetStudentFullNameFromState = (state: AppState) =>
+  getStudentFromState(state)?.fullName;
+
 export const getUserFullNameFromState = (state: AppState) =>
   getStudentFromState(state).fullName;
 
@@ -221,7 +224,7 @@ export const getCurrentClassCounterFromState = (state: AppState) => {
  * @param state the AppState
  */
 export const getIsAdvisorFromState = (state: AppState) => {
-  return getStudentFromState(state).isAdvisor;
+  return state.advisorState.advisor?.id;
 };
 
 export const getActivePlanStatusFromState = (state: AppState) => {
@@ -272,8 +275,8 @@ export const getFolderExpandedFromState = (state: AppState, index: number) =>
 export const getAdvisorUserIdFromState = (state: AppState) =>
   state.advisorState.advisor!.id;
 
-export const getAdvisorCommentsFromState = (state: AppState) =>
-  state.advisorState.comments;
-
 export const getAdvisorFullNameFromState = (state: AppState) =>
   state.advisorState.advisor!.fullName;
+
+export const safelyGetAdvisorFullNameFromState = (state: AppState) =>
+  state.advisorState.advisor?.fullName;
