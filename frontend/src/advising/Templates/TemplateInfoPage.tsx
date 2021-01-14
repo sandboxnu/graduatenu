@@ -72,12 +72,11 @@ export const NewTemplatesPage: React.FC = () => {
   const buttonSize = 90;
 
   const majorObj = findMajorFromName(major, majors, Number(catalogYear));
+  const disabled = !name || hasConcentrationError;
 
   const onClickNext = () => {
     if (hasConcentrationError) {
       setShowConcentrationError(true);
-    } else {
-      console.log("saved!( not really)");
     }
   };
 
@@ -140,7 +139,11 @@ export const NewTemplatesPage: React.FC = () => {
             Previous
           </WhiteColorButton>
         </Link>
-        <RedColorButton style={{ width: buttonSize }} onClick={onClickNext}>
+        <RedColorButton
+          style={{ width: buttonSize }}
+          onClick={onClickNext}
+          disabled={disabled}
+        >
           Next
         </RedColorButton>
       </ButtonContainer>
