@@ -42,7 +42,6 @@ import { addNewPlanAction } from "../state/actions/userPlansActions";
 import { ExcelUpload } from "../components/ExcelUpload";
 import { NextButton } from "../components/common/NextButton";
 import { RedColorButton } from "../components/common/ColoredButtons";
-import { getAuthToken } from "../utils/auth-helpers";
 import { SaveInParentConcentrationDropdown } from "../components/ConcentrationDropdown";
 
 const EXCEL_TOOLTIP =
@@ -249,8 +248,7 @@ function AddPlanPopperComponent(props: Props) {
   };
 
   const savePlan = async () => {
-    const token = getAuthToken();
-    const plan = await createPlanForUser(userId!, token, {
+    const plan = await createPlanForUser(userId!, {
       name: planName!,
       link_sharing_enabled: false,
       schedule: selectedDNDSchedule.current!,
@@ -346,6 +344,8 @@ function AddPlanPopperComponent(props: Props) {
           setSelectedMajor(
             findMajorFromName(value, allMajors, selectedCatalogYear) || null
           );
+          setConcentration(null);
+          setConcentrationShowError(false);
           setSelectedCoopCycle(null);
         }}
       />

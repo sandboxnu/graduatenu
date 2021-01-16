@@ -23,8 +23,7 @@ import styled from "styled-components";
 import { PlanTitle, ButtonHeader, ScheduleWrapper, Container } from "./Shared";
 import { Prompt, useHistory, useLocation, useParams } from "react-router";
 import { IUserData } from "../../models/types";
-import { fetchComments, fetchUser } from "../../services/AdvisorService";
-import { setCommentsAction } from "../../state/actions/advisorActions";
+import { fetchUser } from "../../services/AdvisorService";
 import { Comments } from "../../components/Schedule/Comments";
 import {
   approvePlanForUser,
@@ -40,6 +39,8 @@ import {
   ALERT_STATUS,
   SnackbarAlert,
 } from "../../components/common/SnackbarAlert";
+import ScheduleChangeTracker from "../../utils/ScheduleChangeTracker";
+import { sendChangeLog } from "../../services/PlanService";
 
 const FullScheduleViewContainer = styled.div`
   margin-top: 30px;
@@ -92,7 +93,7 @@ export const ExpandedStudentView: React.FC = () => {
   const history = useHistory();
   const params = useParams<ParamProps>();
   const queryParams = useQuery();
-  const id = Number(params.id);
+  const studentId = Number(params.id);
   const planId = Number(params.planId);
 
   const [editMode, setEditMode] = useState(queryParams.get("edit") === "true");
@@ -116,28 +117,40 @@ export const ExpandedStudentView: React.FC = () => {
   useEffect(() => {
     dispatch(expandAllYearsForActivePlanAction());
 
-    fetchUser(id)
+    fetchUser(studentId)
       .then(response => {
         const user = response.user;
-        fetchPlan(id, planId)
+        fetchPlan(studentId, planId)
           .then(response => {
             callUpdatePlanLastViewedOnInterval();
             batch(() => {
               dispatch(setStudentAction(user));
               dispatch(setUserPlansAction([response], user.academicYear));
               dispatch(
-                setActivePlanAction(response.name, id, user.academicYear)
+                setActivePlanAction(response.name, studentId, user.academicYear)
               );
             });
             setStudent(user);
             setLoading(false);
-            fetchComments(planId, id).then(response => {
-              dispatch(setCommentsAction(response));
-            });
           })
           .catch(e => console.log(e));
       })
       .catch(e => console.log(e));
+
+    const sendPlanUpdates = () => {
+      const changes = ScheduleChangeTracker.getInstance().getChanges();
+      if (changes !== "") {
+        sendChangeLog(planId, studentId, advisorId, changes);
+        ScheduleChangeTracker.getInstance().clearChanges();
+      }
+    };
+
+    window.addEventListener("beforeunload", sendPlanUpdates);
+
+    return function cleanup() {
+      sendPlanUpdates();
+      window.removeEventListener("beforeunload", sendPlanUpdates);
+    };
   }, []);
 
   const callUpdatePlanLastViewedOnInterval = () => {
@@ -163,7 +176,7 @@ export const ExpandedStudentView: React.FC = () => {
   };
 
   const approvePlan = () => {
-    approvePlanForUser(id, planId, plan?.schedule)
+    approvePlanForUser(studentId, planId, plan?.schedule)
       .then(() => setAlertStatus(ALERT_STATUS.Success))
       .catch(() => setAlertStatus(ALERT_STATUS.Error));
   };
@@ -183,12 +196,14 @@ export const ExpandedStudentView: React.FC = () => {
       <Container>
         <FullScheduleViewContainer>
           {loading ? (
-            <LoadingSpinner />
+            <LoadingSpinner isTall />
           ) : (
             <>
               <ExpandedScheduleStudentInfo>
                 <IconButton
-                  onClick={() => history.push(`/advisor/manageStudents/${id}`)}
+                  onClick={() =>
+                    history.push(`/advisor/manageStudents/${studentId}`)
+                  }
                 >
                   <ArrowBack />
                 </IconButton>
@@ -225,7 +240,7 @@ export const ExpandedStudentView: React.FC = () => {
                   )}
                   <IconButton
                     onClick={() =>
-                      history.push(`/advisor/manageStudents/${id}`)
+                      history.push(`/advisor/manageStudents/${studentId}`)
                     }
                   >
                     <FullscreenExit />
@@ -237,15 +252,16 @@ export const ExpandedStudentView: React.FC = () => {
                       sidebarPresent
                       transferCreditPresent
                       collapsibleYears={false}
+                      commentsPresent
                     />
                   ) : (
                     <NonEditableScheduleStudentView
                       sidebarPresent
                       transferCreditPresent
                       collapsibleYears={false}
+                      commentsPresent
                     />
                   )}
-                  <Comments />
                 </ScheduleWrapper>
                 <PlanActionButtonContainer>
                   <PrimaryButton onClick={() => approvePlan()}>

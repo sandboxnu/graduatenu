@@ -19,7 +19,7 @@ class UsersController < ApplicationController
                 @user = @current_user
                 render :show
             else
-                render json: { errors: current_user.errors }, status: :unprocessable_entity
+                render json: { error: current_user.errors }, status: :unprocessable_entity
             end
         else
             render json: { error: "Unauthorized" }, status: :unprocessable_entity

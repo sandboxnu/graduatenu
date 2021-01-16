@@ -100,12 +100,7 @@ export const RedirectScreen: React.FC<Props> = ({ redirectUrl }) => {
   }
 
   if (isLoading) {
-    return (
-      <LoadingScreen
-        text="Authenticating you"
-        subText="Don't worry, it'll take just a second"
-      />
-    );
+    return <LoadingScreen text="Authenticating you" />;
   }
 
   if (redirectUrl && redirectUrl !== "/redirect") {

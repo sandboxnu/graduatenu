@@ -36,7 +36,9 @@ class Plan < ApplicationRecord
 
   belongs_to :user
 
-  has_many :plan_comments
+  has_many :plan_comments, dependent: :destroy
+
+  has_many :plan_changelogs, dependent: :destroy
 
   def last_viewed_by
     User.find_by_id(self.last_viewer)

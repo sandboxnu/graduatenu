@@ -9,7 +9,6 @@ import {
 } from "../../state";
 import { setUserPlansAction } from "../../state/actions/userPlansActions";
 import { AppState } from "../../state/reducers/state";
-import { getAuthToken } from "../../utils/auth-helpers";
 import styled from "styled-components";
 import { Avatar, Tooltip, IconButton } from "@material-ui/core";
 import { ArrowBack, Fullscreen } from "@material-ui/icons";
@@ -149,7 +148,7 @@ export const StudentView: React.FC = () => {
             <Text>User Has No Plans</Text>
           </NoPlanContainer>
         ) : fetchingStudent ? (
-          <LoadingSpinner />
+          <LoadingSpinner isTall />
         ) : (
           <StudentInfoDisplay>
             <AvatarWrapper>

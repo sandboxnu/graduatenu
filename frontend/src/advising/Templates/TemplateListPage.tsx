@@ -13,7 +13,7 @@ import {
 } from "../../state";
 import { toggleTemplateFolderExpandedAction } from "../../state/actions/advisorActions";
 import { AppState } from "../../state/reducers/state";
-import { Link } from "react-router-dom";
+import { Link, RouteComponentProps, useHistory } from "react-router-dom";
 import {
   RedColorButton,
   WhiteColorButton,
@@ -98,7 +98,7 @@ const FolderNameWrapper = styled.div`
 const FolderTemplateListContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin-left: 28px;
+  margin-left: 23px;
 `;
 
 const FolderName = styled.div`
@@ -108,8 +108,12 @@ const FolderName = styled.div`
 `;
 
 const TemplateName = styled.div`
-  margin-bottom: 5px;
-  margin-top: 5px;
+  padding: 5px;
+  &:hover {
+    background-color: #efefef;
+    border-radius: 10px;
+    cursor: pointer;
+  }
 `;
 
 interface TemplatesListProps {
@@ -118,6 +122,7 @@ interface TemplatesListProps {
 
 interface TemplateProps {
   name: string;
+  id: number;
 }
 
 interface FolderProps {
@@ -171,7 +176,7 @@ const TemplatesList = ({ searchQuery }: TemplatesListProps) => {
 
   const fetchTemplates = (currentFolders: IFolderData[], page: number) => {
     setIsLoading(true);
-    getTemplates(searchQuery, page, userId)
+    getTemplates(userId, searchQuery, page)
       .then((response: TemplatesAPI) => {
         setTemplates(currentFolders.concat(response.templates));
         setPageNumber(response.nextPage);
@@ -240,14 +245,22 @@ const FolderComponent: React.FC<FolderProps> = (props: FolderProps) => {
       <FolderTemplateListContainer>
         {isExpanded &&
           folder.templatePlans.map((template: ITemplatePlan) => (
-            <Template name={template.name} />
+            <Template name={template.name} id={template.id} />
           ))}
       </FolderTemplateListContainer>
     </div>
   );
 };
 
-const Template: React.FC<TemplateProps> = (props: TemplateProps) => {
-  const { name } = props;
-  return <TemplateName> {name} </TemplateName>;
+const Template: React.FC<TemplateProps> = ({ name, id }) => {
+  const history = useHistory();
+  return (
+    <TemplateName
+      onClick={() => {
+        history.push(`/advisor/templates/templateBuilder/${id}`);
+      }}
+    >
+      {name}
+    </TemplateName>
+  );
 };

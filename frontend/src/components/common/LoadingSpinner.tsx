@@ -1,21 +1,26 @@
 import React from "react";
 import Loader from "react-loader-spinner";
 import styled from "styled-components";
-const SpinnerWrapper = styled.div`
+import { NORTHEASTERN_RED } from "../../constants";
+const SpinnerWrapper = styled.div<any>`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 60vh;
+  height: ${props => (props.isTall ? "60vh" : "auto")};
 `;
 
-export const LoadingSpinner: React.FC = () => {
+interface SpinnerProps {
+  isTall?: boolean;
+}
+
+export const LoadingSpinner: React.FC<SpinnerProps> = ({ isTall }) => {
   return (
-    <SpinnerWrapper>
+    <SpinnerWrapper isTall={isTall}>
       <Loader
         type="Puff"
-        color="#f50057"
+        color={NORTHEASTERN_RED}
         height={100}
         width={100}
         timeout={5000} //5 secs
