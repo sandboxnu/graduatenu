@@ -191,6 +191,21 @@ export function convertTermIdToSeason(termId: number): SeasonWord {
   return "summer2";
 }
 
+export function convertTermIdToSeasonString(termId: number): string {
+  const seasonId = termId % 100;
+
+  if (seasonId === 10) {
+    return "Fall";
+  }
+  if (seasonId === 30) {
+    return "Spring";
+  }
+  if (seasonId === 40) {
+    return "Summer 1";
+  }
+  return "Summer 2";
+}
+
 export function convertSeasonToTermId(season: SeasonEnum): number {
   if (season === SeasonEnum.FL) {
     return 10;

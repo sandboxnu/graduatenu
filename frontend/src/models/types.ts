@@ -340,6 +340,13 @@ export interface IComment {
   updatedAt: Date;
 }
 
+export interface IChangeLog {
+  author: string;
+  log: string;
+  userId: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
 /** ------------------------------------------------------------------------
  *
  *            OLD STUFF FOLLOWS ! This stuff is big outdated and is only

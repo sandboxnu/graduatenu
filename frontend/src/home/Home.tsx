@@ -36,6 +36,7 @@ import {
 } from "../state/actions/userPlansActions";
 import { EditPlanPopper } from "./EditPlanPopper";
 import {
+  sendChangeLog,
   updatePlanForUser,
   updatePlanLastViewed,
 } from "../services/PlanService";
@@ -54,6 +55,7 @@ import { ActivePlanAutoSaveStatus } from "../state/reducers/userPlansReducer";
 import { AutoSavePlan } from "./AutoSavePlan";
 import { Alert } from "@material-ui/lab";
 import IdleTimer from "react-idle-timer";
+import ScheduleChangeTracker from "../utils/ScheduleChangeTracker";
 import { RedColorButton } from "../components/common/ColoredButtons";
 
 const HomeTop = styled.div`
@@ -206,9 +208,12 @@ class HomeComponent extends React.Component<Props> {
       // switched plan
       this.callUpdatePlanLastViewedOnInterval();
     }
+    window.addEventListener("beforeunload", this.sendPlanUpdates);
   }
 
   componentWillUnmount() {
+    this.sendPlanUpdates();
+    window.removeEventListener("beforeunload", this.sendPlanUpdates);
     window.onbeforeunload = null;
   }
 
@@ -226,6 +231,19 @@ class HomeComponent extends React.Component<Props> {
       }
     }, VIEWING_BUFFER);
   }
+
+  sendPlanUpdates = () => {
+    const changes = ScheduleChangeTracker.getInstance().getChanges();
+    if (changes !== "") {
+      sendChangeLog(
+        this.props.activePlan.id,
+        this.props.userId,
+        this.props.userId,
+        changes
+      );
+      ScheduleChangeTracker.getInstance().clearChanges();
+    }
+  };
 
   shouldBlockNavigation() {
     return this.props.activePlanStatus !== "Up To Date";
@@ -348,6 +366,7 @@ class HomeComponent extends React.Component<Props> {
             sidebarPresent
             transferCreditPresent
             collapsibleYears
+            commentsPresent
           >
             {this.renderPlanHeader()}
           </NonEditableScheduleStudentView>
@@ -356,6 +375,7 @@ class HomeComponent extends React.Component<Props> {
             sidebarPresent
             transferCreditPresent
             collapsibleYears
+            commentsPresent
           >
             {this.renderPlanHeader()}
           </EditableSchedule>
