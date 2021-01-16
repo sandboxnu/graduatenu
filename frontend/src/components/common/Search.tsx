@@ -41,7 +41,6 @@ interface SearchProps {
 
 export const Search = (props: SearchProps) => {
   const [text, setText] = useState("");
-  console.log(text);
   const handleKeyDown = (event: any) => {
     if (event.key === "Enter") {
       if (props.onEnter) {

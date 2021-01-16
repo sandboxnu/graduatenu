@@ -50,11 +50,7 @@ export const fetchPlan = (userId: number, planId: number): Promise<IPlanData> =>
  * @param userToken the JWT token of the user to be modified
  * @param plan  the plan object to be created for this user
  */
-export const createPlanForUser = (
-  userId: number,
-  userToken: string,
-  plan: ICreatePlanData
-) =>
+export const createPlanForUser = (userId: number, plan: ICreatePlanData) =>
   fetch(`/api/users/${userId}/plans`, {
     method: "POST",
     body: JSON.stringify({ plan: plan }),

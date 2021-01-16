@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { EditableSchedule } from "../../components/Schedule/ScheduleComponents";
 import { useHistory, useParams } from "react-router";
-import { fetchTemplate } from "../../services/TemplateService";
+import {
+  deleteTemplatePlan,
+  fetchTemplate,
+} from "../../services/TemplateService";
 import { useSelector, shallowEqual, useDispatch } from "react-redux";
 import { getAdvisorUserIdFromState } from "../../state";
 import { AppState } from "../../state/reducers/state";
@@ -12,6 +15,9 @@ import { AutoSavePlan } from "../../home/AutoSavePlan";
 import { WhiteColorButton } from "../../components/common/ColoredButtons";
 import { Close as CloseIcon } from "@material-ui/icons";
 import { IconButton } from "@material-ui/core";
+import { AssignTemplateModal } from "./AssignTemplateModal";
+import { ITemplatePlan } from "../../models/types";
+import { createPlanForUser } from "../../services/PlanService";
 
 const TitleText = styled.div`
   font-family: Roboto;
@@ -38,9 +44,11 @@ export const TemplateBuilderPage = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const routeParams = useParams<ParamProps>();
+  const [openModal, setOpenModal] = useState(false);
   const [loading, setLoading] = useState(true);
   const [loadingError, setLoadingError] = useState<string | null>(null);
   const [templateName, setTemplateName] = useState<string | null>(null);
+  const [templateData, setTemplateData] = useState<ITemplatePlan | null>(null);
   const id = Number(routeParams.templateId);
   const { userId } = useSelector(
     (state: AppState) => ({
@@ -49,12 +57,43 @@ export const TemplateBuilderPage = () => {
     shallowEqual
   );
 
+  const assignTemplate = (userId: number, shouldDelete: boolean) => {
+    createPlanForUser(userId, {
+      name: templateData!.name,
+      link_sharing_enabled: false,
+      schedule: templateData!.schedule,
+      catalog_year: templateData!.catalogYear,
+      major: templateData!.major,
+      coop_cycle: templateData!.coopCycle,
+      course_counter: templateData!.courseCounter,
+    })
+      .then(response => {
+        if (response.error) {
+          console.log(":(");
+        } else if (shouldDelete) {
+          deleteTemplatePlan(userId, templateData!.id)
+            .then(response => {
+              if (response.error) {
+                console.log(":(");
+              } else {
+                history.push("/advisor/templates");
+              }
+            })
+            .catch(e => console.log(":("));
+        } else {
+          history.push("/advisor/templates");
+        }
+      })
+      .catch(e => console.log(":("));
+  };
+
   useEffect(() => {
     fetchTemplate(userId, id)
       .then(response => {
         if (response.error) {
           setLoadingError(response.error);
         } else if (response.templatePlan.schedule) {
+          setTemplateData(response.templatePlan);
           dispatch(addNewPlanAction(response.templatePlan));
           setTemplateName(response.templatePlan.name);
         } else {
@@ -82,7 +121,10 @@ export const TemplateBuilderPage = () => {
       <TitleText>{templateName}</TitleText>
       <ButtonContainer>
         <AutoSavePlan isTemplate />
-        <WhiteColorButton style={{ margin: 10 }}>
+        <WhiteColorButton
+          style={{ margin: 10 }}
+          onClick={() => setOpenModal(true)}
+        >
           Assign Template
         </WhiteColorButton>
         <IconButton
@@ -92,6 +134,11 @@ export const TemplateBuilderPage = () => {
           <CloseIcon />
         </IconButton>
       </ButtonContainer>
+      <AssignTemplateModal
+        isOpen={openModal}
+        closeModal={() => setOpenModal(false)}
+        onClose={assignTemplate}
+      />
       <EditableSchedule collapsibleYears sidebarPresent></EditableSchedule>
     </>
   );

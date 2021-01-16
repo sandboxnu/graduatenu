@@ -20,15 +20,11 @@ export interface TemplatesAPI {
  */
 export const getTemplates = (
   userId: number,
-  searchQuery?: string,
-  pageNumber?: number
+  searchQuery: string,
+  pageNumber: number
 ): Promise<TemplatesAPI> =>
   fetch(
-    `/api/users/${userId}/templates${
-      pageNumber !== undefined
-        ? `?search=${searchQuery}&page=${pageNumber}`
-        : ""
-    }`,
+    `/api/users/${userId}/templates?search=${searchQuery}&page=${pageNumber}`,
     {
       method: "GET",
       headers: {
@@ -93,6 +89,20 @@ export const updateTemplatePlanForUser = (
   fetch(`/api/users/${userId}/templates/${planId}`, {
     method: "PUT",
     body: JSON.stringify({ template_plan: templatePlan }),
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Token " + getAuthToken(),
+    },
+  }).then(response => response.json());
+
+/**
+ * Service function object to delete a specified template plan for a given user.
+ * @param userId  the id of the user to be modified
+ * @param templateId the id of the plan to be deleted
+ */
+export const deleteTemplatePlan = (userId: number, templateId: number) =>
+  fetch(`/api/users/${userId}/templates/${templateId}`, {
+    method: "DELETE",
     headers: {
       "Content-Type": "application/json",
       Authorization: "Token " + getAuthToken(),

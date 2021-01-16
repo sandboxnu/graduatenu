@@ -80,7 +80,7 @@ export const NewTemplatesPage: React.FC<RouteComponentProps<{}>> = ({
   const [selectedFolderId, setSelectedFolderId] = useState<number | null>(null);
 
   const fetchTemplates = () => {
-    getTemplates(userId)
+    getTemplates(userId, "", 0)
       .then((response: TemplatesAPI) => {
         setFolders(response.templates);
       })

@@ -33,7 +33,6 @@ class PlansController < ApplicationController
   def create
     if authorized
       params_copy = plan_params.clone()
-      params_copy[:user_id] = @current_user_id
 
       if @plan = Plan.create!(params_copy)
         render :show
