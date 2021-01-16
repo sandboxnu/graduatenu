@@ -30,6 +30,7 @@ import {
 } from "../actions/userPlansActions";
 import { resetStudentAction } from "../actions/studentActions";
 import {
+  alterScheduleToHaveCorrectYears,
   clearSchedule,
   convertTermIdToSeason,
   convertToDNDCourses,
@@ -40,7 +41,6 @@ import {
 } from "../../utils";
 import { Schedule } from "../../../../common/types";
 import { updatePlanForUser } from "../../services/PlanService";
-import { getAuthToken } from "../../utils/auth-helpers";
 
 export type ActivePlanAutoSaveStatus =
   | "Up To Date"
@@ -101,9 +101,12 @@ export const userPlansReducer = (
       case getType(addNewPlanAction): {
         const { plan, academicYear } = action.payload;
 
-        draft.plans[plan.name] = plan;
+        draft.plans[plan.name] = plan as IPlanData;
         draft.activePlan = plan.name;
-        return closePastYears(draft, academicYear);
+
+        return academicYear
+          ? closePastYears(draft, academicYear)
+          : openAllYears(draft);
       }
       case getType(setUserPlansAction): {
         const { plans, academicYear } = action.payload;
@@ -200,8 +203,10 @@ export const userPlansReducer = (
         );
 
         // remove all classes
-        draft.plans[draft.activePlan!].schedule = clearSchedule(
-          newSchedule,
+        draft.plans[
+          draft.activePlan!
+        ].schedule = alterScheduleToHaveCorrectYears(
+          clearSchedule(newSchedule),
           academicYear,
           graduationYear
         );
@@ -346,6 +351,11 @@ export const userPlansReducer = (
     }
   });
 };
+
+function openAllYears(draft: UserPlansState) {
+  draft.closedYears[draft.activePlan!] = [];
+  return draft;
+}
 
 function closePastYears(draft: UserPlansState, academicYear: number) {
   draft.closedYears[draft.activePlan!] = [];

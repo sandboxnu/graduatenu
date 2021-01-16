@@ -19,6 +19,7 @@ import { UnprotectedRoute } from "./components/Routes/UnprotectedRoute";
 import { StudentsList } from "./advising/ManageStudents/StudentsList";
 import { StudentView } from "./advising/ManageStudents/StudentView";
 import { ExpandedStudentView } from "./advising/ManageStudents/ExpandedStudentView";
+import { TemplateBuilderPage } from "./advising/Templates/TemplateBuilderPage";
 
 export const App = ({ store }: { store: Store }) => {
   return (
@@ -73,7 +74,11 @@ const AdvisorRouter = (props: any) => {
           component={ExpandedStudentView}
         />
         <Route exact path={`${path}/templates`} component={TemplatesListPage} />
-
+        <Route
+          exact
+          path={`${path}/templates/templateBuilder/:templateId`}
+          component={TemplateBuilderPage}
+        />
         <Route
           exact
           path={`${path}/templates/createTemplate`}
