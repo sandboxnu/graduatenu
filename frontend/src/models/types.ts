@@ -311,6 +311,17 @@ export interface ITemplatePlan {
   major: string | null;
   coopCycle: string | null;
   updatedAt: Date;
+  courseCounter: number;
+}
+
+export interface IUpdateTemplatePlan {
+  name?: string;
+  schedule?: DNDSchedule;
+  catalogYear?: number | null;
+  major?: string | null;
+  coopCycle?: string | null;
+  updatedAt?: Date;
+  courseCounter?: number;
 }
 
 export interface ICreateTemplatePlan {
@@ -321,6 +332,7 @@ export interface ICreateTemplatePlan {
   coop_cycle: string | null;
   folder_id: number | null; // if null, create new folder
   folder_name: string | null; // only not null if folder exists
+  course_counter: number;
 }
 
 export interface IComment {
@@ -330,6 +342,13 @@ export interface IComment {
   updatedAt: Date;
 }
 
+export interface IChangeLog {
+  author: string;
+  log: string;
+  userId: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
 /** ------------------------------------------------------------------------
  *
  *            OLD STUFF FOLLOWS ! This stuff is big outdated and is only

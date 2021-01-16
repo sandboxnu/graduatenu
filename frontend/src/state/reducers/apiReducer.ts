@@ -13,7 +13,6 @@ import {
   fetchPlansErrorAction,
 } from "../actions/plansActions";
 import produce from "immer";
-import { majorWithConcentrationData } from "../../data/mockData";
 
 /**
  * State to capture the major api fetch process.
@@ -60,20 +59,8 @@ export const majorsReducer = (
         draft.isFetchingMajors = true;
         return draft;
       case getType(fetchMajorsSuccessAction):
-        const majors: Major[] = action.payload.majors.slice(1);
-        // TODO remove once concentrations are in the backend
-        const DEFAULT_CONCENTRATIONS: Concentrations = {
-          minOptions: 0,
-          maxOptions: 1,
-          concentrationOptions: [],
-        };
-        majors.forEach(
-          (major: any) => (major.concentrations = DEFAULT_CONCENTRATIONS)
-        );
         draft.isFetchingMajors = false;
-        draft.majors = majors;
-        // TODO: remove this mock major :
-        draft.majors.push(majorWithConcentrationData);
+        draft.majors = action.payload.majors;
         return draft;
       case getType(fetchMajorsErrorAction):
         const errorMsg: string = action.payload.majorsError;

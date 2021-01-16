@@ -1,7 +1,7 @@
 import * as React from "react";
 import { debounce } from "lodash";
 import { batch, useDispatch, useSelector } from "react-redux";
-import { IPlanData } from "../models/types";
+import { IPlanData, ITemplatePlan, IUpdateTemplatePlan } from "../models/types";
 import { updatePlanForUser } from "../services/PlanService";
 import {
   setActivePlanStatusAction,
@@ -13,6 +13,7 @@ import { convertPlanToUpdatePlanData } from "../utils/plan-helpers";
 import {
   getActivePlanFromState,
   getActivePlanStatusFromState,
+  getAdvisorUserIdFromState,
   getUserIdFromState,
 } from "../state";
 import { AppState } from "../state/reducers/state";
@@ -20,6 +21,7 @@ import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
 import LoopIcon from "@material-ui/icons/Loop";
 import styled from "styled-components";
 import * as timeago from "timeago.js";
+import { updateTemplatePlanForUser } from "../services/TemplateService";
 
 const Container = styled.div`
   display: flex;
@@ -29,19 +31,25 @@ const Container = styled.div`
 
 const DEBOUNCE_SAVE_DELAY_MS = 750;
 
-export const AutoSavePlan: React.FC = () => {
+export const AutoSavePlan: React.FC<{
+  isTemplate?: boolean;
+}> = ({ isTemplate }) => {
   const dispatch = useDispatch();
   const { activePlanStatus, activePlan, userId } = useSelector(
     (state: AppState) => ({
       activePlanStatus: getActivePlanStatusFromState(state),
       activePlan: getActivePlanFromState(state),
-      userId: getUserIdFromState(state),
+      userId: isTemplate
+        ? getAdvisorUserIdFromState(state)
+        : getUserIdFromState(state),
     })
   );
 
   const debouncedUpdate = useCallback(
     debounce(async activePlan => {
-      await updatePlan(activePlan);
+      isTemplate
+        ? await updateTemplatePlan(activePlan as ITemplatePlan)
+        : await updatePlan(activePlan);
     }, DEBOUNCE_SAVE_DELAY_MS),
     []
   );
@@ -73,6 +81,22 @@ export const AutoSavePlan: React.FC = () => {
     ).then(response => {
       batch(() => {
         dispatch(updateActivePlanTimestampAction(response.plan.updatedAt));
+        dispatch(setActivePlanStatusAction("Up To Date"));
+      });
+    });
+  };
+
+  const updateTemplatePlan = async (activePlan: ITemplatePlan) => {
+    dispatch(setActivePlanStatusAction("Updating"));
+    await updateTemplatePlanForUser(
+      userId,
+      activePlan.id,
+      activePlan as IUpdateTemplatePlan
+    ).then(response => {
+      batch(() => {
+        dispatch(
+          updateActivePlanTimestampAction(response.templatePlan.updatedAt)
+        );
         dispatch(setActivePlanStatusAction("Up To Date"));
       });
     });

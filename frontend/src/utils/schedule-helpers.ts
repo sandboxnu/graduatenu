@@ -8,6 +8,17 @@ import {
   CourseWarning,
 } from "../models/types";
 import { Schedule, ScheduleCourse, SeasonWord } from "../../../common/types";
+import { findExamplePlanFromCoopCycle } from "./plan-helpers";
+
+export function generateBlankCoopPlan(
+  major: string,
+  coopCycle: string,
+  allPlans: Record<string, Schedule[]>
+): [DNDSchedule, number] {
+  const currentPlan = findExamplePlanFromCoopCycle(allPlans, major, coopCycle);
+  let [schedule, counter] = convertToDNDSchedule(currentPlan!, 0);
+  return [clearSchedule(schedule), counter]; // clear all courses from example plan
+}
 
 export function generateInitialSchedule(
   academicYear: number,
@@ -17,13 +28,11 @@ export function generateInitialSchedule(
   coopCycle: string,
   allPlans: Record<string, Schedule[]>
 ): [DNDSchedule, number] {
-  const currentPlan = allPlans[major].find(
-    (p: Schedule) => planToString(p) === coopCycle
-  )!;
-
-  const [dndCourses, counter] = convertToDNDCourses(completedCourses, 0);
-  let [schedule, courseCounter] = convertToDNDSchedule(currentPlan!, counter);
-  schedule = clearSchedule(schedule, academicYear, graduationYear); // clear all courses from example plan
+  const [schedule, counter] = generateBlankCoopPlan(major, coopCycle, allPlans);
+  const [dndCourses, courseCounter] = convertToDNDCourses(
+    completedCourses,
+    counter
+  );
 
   // add in completed courses
   let year = schedule.years[0];
@@ -43,16 +52,11 @@ export function generateInitialSchedule(
   ];
 }
 
-export function generateInitialScheduleNoCoopCycle(
-  academicYear: number,
-  graduationYear: number,
-  completedCourses: ScheduleCourse[]
-): [DNDSchedule, number] {
+export function generateYearlessSchedule(
+  dndCourses: DNDScheduleCourse[],
+  numYears: number
+) {
   let yearMap: { [key: number]: DNDScheduleYear } = {};
-  const numYears = 4; // default is 4 years
-
-  const [dndCourses, courseCounter] = convertToDNDCourses(completedCourses, 0);
-
   const yearsList = [];
 
   for (let i = 0; i < numYears; i++) {
@@ -92,10 +96,22 @@ export function generateInitialScheduleNoCoopCycle(
     };
   }
 
-  const schedule = {
+  return {
     years: yearsList,
-    yearMap: yearMap,
+    yearMap,
   };
+}
+
+export function generateInitialScheduleNoCoopCycle(
+  academicYear: number,
+  graduationYear: number,
+  completedCourses: ScheduleCourse[]
+): [DNDSchedule, number] {
+  const numYears = 4; // default is 4 years
+
+  const [dndCourses, courseCounter] = convertToDNDCourses(completedCourses, 0);
+
+  const schedule = generateYearlessSchedule(dndCourses, numYears);
 
   return [
     alterScheduleToHaveCorrectYears(schedule, academicYear, graduationYear),
@@ -173,6 +189,21 @@ export function convertTermIdToSeason(termId: number): SeasonWord {
     return "summer1";
   }
   return "summer2";
+}
+
+export function convertTermIdToSeasonString(termId: number): string {
+  const seasonId = termId % 100;
+
+  if (seasonId === 10) {
+    return "Fall";
+  }
+  if (seasonId === 30) {
+    return "Spring";
+  }
+  if (seasonId === 40) {
+    return "Summer 1";
+  }
+  return "Summer 2";
 }
 
 export function convertSeasonToTermId(season: SeasonEnum): number {
@@ -282,11 +313,7 @@ export const convertToDNDSchedule = (
   return [newSchedule, counter];
 };
 
-export const clearSchedule = (
-  schedule: DNDSchedule,
-  academicYear: number,
-  graduationYear: number
-) => {
+export const clearSchedule = (schedule: DNDSchedule) => {
   const yearMapCopy = JSON.parse(JSON.stringify(schedule.yearMap));
   for (const y of schedule.years) {
     const year = JSON.parse(JSON.stringify(schedule.yearMap[y]));
@@ -301,11 +328,7 @@ export const clearSchedule = (
     yearMap: yearMapCopy,
     years: schedule.years,
   };
-  return alterScheduleToHaveCorrectYears(
-    newSchedule,
-    academicYear,
-    graduationYear
-  );
+  return newSchedule;
 };
 
 export const convertToDNDCourses = (

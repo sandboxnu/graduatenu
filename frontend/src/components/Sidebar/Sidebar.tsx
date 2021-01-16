@@ -97,11 +97,8 @@ export const Sidebar: React.FC<SidebarProps> = props => {
       transferCourses: safelyGetTransferCoursesFromState(state),
     })
   );
-  console.log(major);
 
   const { majorObj } = useSelector((state: AppState) => {
-    console.log(state.majorState.majors);
-    console.log(safelyGetActivePlanCatalogYearFromState(state));
     return {
       majorObj: findMajorFromName(
         major,
@@ -110,7 +107,7 @@ export const Sidebar: React.FC<SidebarProps> = props => {
       ),
     };
   });
-  console.log(majorObj);
+
   return (
     <ScrollWrapper>
       {majorObj ? (

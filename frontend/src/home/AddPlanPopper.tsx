@@ -255,8 +255,7 @@ function AddPlanPopperComponent(props: Props) {
   };
 
   const savePlan = async () => {
-    const token = getAuthToken();
-    const plan = await createPlanForUser(userId!, token, {
+    const plan = await createPlanForUser(userId!, {
       name: planName!,
       link_sharing_enabled: false,
       schedule: selectedDNDSchedule.current!,
@@ -357,6 +356,7 @@ function AddPlanPopperComponent(props: Props) {
           setSelectedMajor(
             findMajorFromName(value, allMajors, selectedCatalogYear) || null
           );
+          setSelectedConcentration(null);
           setSelectedCoopCycle(null);
         }}
       />

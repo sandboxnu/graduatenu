@@ -1,4 +1,10 @@
-import { ICreatePlanData, IPlanData, IUpdatePlanData } from "../models/types";
+import {
+  ICreatePlanData,
+  IPlanData,
+  IUpdatePlanData,
+  IComment,
+  IChangeLog,
+} from "../models/types";
 import { getAuthToken } from "../utils/auth-helpers";
 
 /**
@@ -50,11 +56,7 @@ export const fetchPlan = (userId: number, planId: number): Promise<IPlanData> =>
  * @param userToken the JWT token of the user to be modified
  * @param plan  the plan object to be created for this user
  */
-export const createPlanForUser = (
-  userId: number,
-  userToken: string,
-  plan: ICreatePlanData
-) =>
+export const createPlanForUser = (userId: number, plan: ICreatePlanData) =>
   fetch(`/api/users/${userId}/plans`, {
     method: "POST",
     body: JSON.stringify({ plan: plan }),
@@ -150,3 +152,93 @@ export const setPrimaryPlan = (userId: number, planId: number) =>
       "Content-Type": "application/json",
     },
   }).then(response => response.json());
+
+/**
+ * Gets changelogs for a plan
+ * @param planId The id of the plan
+ * @param studentId The id of the student
+ */
+export const fetchChangelogs = (planId: number, studentId: number) =>
+  fetch(`/api/users/${studentId}/plans/${planId}/plan_changelogs`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Token " + getAuthToken(),
+    },
+  }).then(response =>
+    response.json().then((changeLogs: IChangeLog[]) => {
+      return changeLogs.map((changeLog: IChangeLog) => ({
+        ...changeLog,
+        createdAt: new Date(changeLog.createdAt), // convert string timestamp to a Date object
+        updatedAt: new Date(changeLog.updatedAt), // convert string timestamp to a Date object
+      }));
+    })
+  );
+
+/**
+ * Sends a comment for a plan
+ */
+export const sendChangeLog = (
+  planId: number,
+  studentId: number,
+  authorId: number,
+  log: string
+): Promise<IChangeLog> =>
+  fetch(`/api/users/${studentId}/plans/${planId}/plan_changelogs/`, {
+    method: "POST",
+    body: JSON.stringify({ log: log, author_id: authorId }),
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Token " + getAuthToken(),
+    },
+  }).then(response => response.json());
+
+/**
+ * Gets comments for a plan
+ * @param planId The id of the plan
+ * @param studentId The id of the student
+ */
+export const fetchComments = (planId: number, studentId: number) =>
+  fetch(`/api/users/${studentId}/plans/${planId}/plan_comments`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Token " + getAuthToken(),
+    },
+  }).then(response =>
+    response.json().then((comments: IComment[]) => {
+      return comments.map((comment: IComment) => ({
+        ...comment,
+        createdAt: new Date(comment.createdAt), // convert string timestamp to a Date object
+        updatedAt: new Date(comment.updatedAt), // convert string timestamp to a Date object
+      }));
+    })
+  );
+
+/**
+ * Sends a comment for a plan
+ */
+export const sendComment = (
+  planId: number,
+  studentId: number,
+  author: string,
+  comment: string
+): Promise<IComment> =>
+  fetch(`/api/users/${studentId}/plans/${planId}/plan_comments/`, {
+    method: "POST",
+    body: JSON.stringify({ author: author, comment: comment }),
+
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Token " + getAuthToken(),
+    },
+  }).then(response =>
+    response.json().then(comment => {
+      const { planComment } = comment;
+      return {
+        ...planComment,
+        createdAt: new Date(planComment.createdAt), // convert string timestamp to a Date object
+        updatedAt: new Date(planComment.updatedAt), // convert string timestamp to a Date object
+      };
+    })
+  );

@@ -25,7 +25,7 @@ interface SaveInParentConcentrationDropdownProps {
 }
 
 interface SaveOnChangeConcentrationDropdownProps {
-  readonly isStudentLevel: boolean;
+  readonly isStudentLevel: boolean; // If this is true, saves the concentration on user level. Otherwise, it saves the concentration to the active plan
   readonly style?: CSSProperties;
   readonly useLabel?: boolean;
 }
@@ -67,8 +67,15 @@ const SaveInParentConcentrationDropdown: React.FC<SaveInParentConcentrationDropd
     }
   }, [concentration]);
 
+  useEffect(() => {
+    if (setError && !major) {
+      setError(false);
+    }
+  }, [major]);
+
   return (
     <>
+      {/* This component will only show if concentrations exist for this major */}
       {shouldDisplayDropdown && (
         <FormControl variant="outlined" error={hasError} style={style}>
           <Autocomplete
