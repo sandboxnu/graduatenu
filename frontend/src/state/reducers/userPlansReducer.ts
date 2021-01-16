@@ -277,7 +277,6 @@ export const userPlansReducer = (
       }
       case getType(changeSemesterStatusForActivePlanAction): {
         const { newStatus, year, season } = action.payload;
-        // @ts-ignore
         draft.plans[draft.activePlan!].schedule.yearMap[year][
           season
         ].status = newStatus;
@@ -294,7 +293,6 @@ export const userPlansReducer = (
       }
       case getType(updateSemesterForActivePlanAction): {
         const { year, season, newSemester } = action.payload;
-        // @ts-ignore
         draft.plans[draft.activePlan!].schedule.yearMap[year][
           season
         ] = newSemester;

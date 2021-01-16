@@ -23,7 +23,7 @@ export const LoadingSpinner: React.FC<SpinnerProps> = ({ isTall }) => {
         color={NORTHEASTERN_RED}
         height={100}
         width={100}
-        timeout={5000000} //5 secs
+        timeout={5000} //5 secs
       />
     </SpinnerWrapper>
   );

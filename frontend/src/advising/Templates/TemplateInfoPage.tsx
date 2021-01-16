@@ -131,7 +131,6 @@ export const NewTemplatesPage: React.FC<RouteComponentProps<{}>> = ({
     dispatch(addNewPlanAction(response.templatePlan));
     return response.templatePlan.id;
   };
-  console.log(selectedFolderId);
   return (
     <NewTemplatesPageContainer>
       <Container style={{ fontSize: "24px" }}>
