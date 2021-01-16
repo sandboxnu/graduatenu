@@ -9,9 +9,12 @@ import { planToString } from "./schedule-helpers";
  */
 export function findMajorFromName(
   name: string | null | undefined,
-  majors: Major[]
+  majors: Major[],
+  catalogYear: number | null | undefined
 ): Major | undefined {
-  let major: Major | undefined = majors.find(major => major.name === name);
+  let major: Major | undefined = majors.find(
+    major => major.name === name && major.yearVersion === catalogYear
+  );
   if (!major) {
     return undefined;
   }

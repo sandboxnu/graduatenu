@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { withRouter, Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { batch, useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { PrimaryButton } from "../components/common/PrimaryButton";
 import { FormControl, MenuItem, Select, TextField } from "@material-ui/core";
@@ -12,19 +12,24 @@ import {
   setStudentCoopCycleAction,
   setStudentMajorAction,
   setStudentCatalogYearAction,
+  setStudentConcentrationAction,
 } from "../state/actions/studentActions";
 import {
   getMajorsFromState,
   getStudentFromState,
   getPlansFromState,
   getUserCatalogYearFromState,
+  getUserConcentrationFromState,
+  getUserMajorFromState,
 } from "../state";
-import { Schedule } from "../../../common/types";
+import { Major, Schedule } from "../../../common/types";
 import { AppState } from "../state/reducers/state";
 import { planToString } from "../utils";
 import { updateUser } from "../services/UserService";
 import { IUpdateUser, IUpdateUserData } from "../models/types";
 import { getAuthToken } from "../utils/auth-helpers";
+import { SaveInParentConcentrationDropdown } from "../components/ConcentrationDropdown";
+import { findMajorFromName } from "../utils/plan-helpers";
 
 const OuterContainer = styled.div`
   width: 70%;
@@ -103,6 +108,7 @@ const ProfileEmail = styled.div`
 `;
 
 const ButtonContainer = styled.div`
+  box-sizing: border-box;
   width: 100%;
   text-align: center;
   margin-top: 20px;
@@ -110,20 +116,33 @@ const ButtonContainer = styled.div`
 
 const ProfileComponent: React.FC = () => {
   const dispatch = useDispatch();
-  const { user, majors, plans, catalogYear } = useSelector(
-    (state: AppState) => ({
-      user: getStudentFromState(state), // best to update this screen when any part of the user changes
-      majors: getMajorsFromState(state),
-      plans: getPlansFromState(state),
-      catalogYear: getUserCatalogYearFromState(state),
-    })
-  );
+  const { user, majors, plans } = useSelector((state: AppState) => ({
+    user: getStudentFromState(state), // best to update this screen when any part of the user changes
+    majors: getMajorsFromState(state),
+    plans: getPlansFromState(state),
+  }));
 
   const [isEdit, setEdit] = useState(false);
   const [major, setMajor] = useState(user.major);
+  const [concentration, setConcentration] = useState<string | null>(
+    user.concentration || null
+  );
   const [coopCycle, setCoopCycle] = useState(user.coopCycle);
+  const [catalogYear, setCatalogYear] = useState(user.catalogYear);
   const [gradYear, setGradYear] = useState(user.graduationYear!);
   const [advisor, setAdvisor] = useState("");
+  const [hasConcentrationError, setHasConcentrationError] = useState(false);
+  const [showConcentrationError, setShowConcentrationError] = useState(false);
+
+  const selectedMajorObj = findMajorFromName(major, majors, catalogYear);
+  const hasConcentrations: boolean =
+    (selectedMajorObj &&
+      selectedMajorObj.concentrations.concentrationOptions.length > 0) ||
+    false;
+
+  // does major have concentrations
+  const shouldDisplayConcentration: boolean =
+    (isEdit && hasConcentrations) || (!isEdit && !!concentration);
 
   const ProfileGradYear = () => {
     return (
@@ -152,20 +171,27 @@ const ProfileComponent: React.FC = () => {
 
   const ProfileMajor = () => {
     const val = !!major ? major : "None Selected";
+    const majorsFromCatalogYear = majors.filter(
+      (maj: Major) => maj.yearVersion === catalogYear
+    );
     return (
       <ProfileEntryContainer>
         <ItemTitle> Major </ItemTitle>
         {isEdit && (
           <Autocomplete
             disableListWrap
-            options={majors.map((maj: { name: any }) => maj.name)}
+            options={majorsFromCatalogYear.map(
+              (maj: { name: any }) => maj.name
+            )}
             renderInput={params => (
               <TextField {...params} variant="outlined" fullWidth />
             )}
             value={val}
-            onChange={(event: React.SyntheticEvent<{}>, value: any) =>
-              setMajor(value)
-            }
+            onChange={(event: React.SyntheticEvent<{}>, value: any) => {
+              setMajor(value);
+              setConcentration(null);
+              setShowConcentrationError(false);
+            }}
           />
         )}
         {!isEdit && <ItemEntry> {val} </ItemEntry>}
@@ -190,12 +216,37 @@ const ProfileComponent: React.FC = () => {
             )}
             value={val}
             onChange={(event: React.SyntheticEvent<{}>, value: any) => {
-              dispatch(setStudentCatalogYearAction(value));
+              setMajor("");
+              setCoopCycle("");
+              setConcentration("");
+              setCatalogYear(Number(value));
             }}
           />
         )}
         {!isEdit && <ItemEntry> {val} </ItemEntry>}
       </ProfileEntryContainer>
+    );
+  };
+
+  const ProfileConcentration = () => {
+    return (
+      <>
+        {shouldDisplayConcentration && (
+          <ProfileEntryContainer>
+            <ItemTitle> Concentration </ItemTitle>
+            {isEdit && (
+              <SaveInParentConcentrationDropdown
+                major={selectedMajorObj}
+                concentration={concentration || null}
+                setConcentration={setConcentration}
+                setError={setHasConcentrationError}
+                showError={showConcentrationError}
+              />
+            )}
+            {!isEdit && <ItemEntry> {concentration} </ItemEntry>}
+          </ProfileEntryContainer>
+        )}
+      </>
     );
   };
 
@@ -249,14 +300,18 @@ const ProfileAdvisor = (props: any) => {
 
   const save = () => {
     setEdit(false);
-    dispatch(setStudentMajorAction(major || ""));
-    if (coopCycle !== "None Selected") {
-      dispatch(setStudentCoopCycleAction(""));
-    } else {
-      dispatch(setStudentCoopCycleAction(coopCycle || ""));
-    }
+    batch(() => {
+      dispatch(setStudentMajorAction(major || ""));
+      dispatch(setStudentCatalogYearAction(catalogYear));
+      dispatch(setStudentConcentrationAction(concentration));
+      if (coopCycle !== "None Selected") {
+        dispatch(setStudentCoopCycleAction(""));
+      } else {
+        dispatch(setStudentCoopCycleAction(coopCycle || ""));
+      }
 
-    dispatch(setStudentGraduationYearAction(gradYear));
+      dispatch(setStudentGraduationYearAction(gradYear));
+    });
 
     const token = getAuthToken();
 
@@ -272,16 +327,23 @@ const ProfileAdvisor = (props: any) => {
         coopCycle != undefined && coopCycle !== "None Selected"
           ? coopCycle
           : "",
+      catalog_year: catalogYear,
     };
     updateUser(updateUserObj, updateUserData);
   };
 
   const SaveButton = () => {
-    return (
-      <ButtonContainer>
-        <PrimaryButton onClick={() => save()}>Save</PrimaryButton>
-      </ButtonContainer>
-    );
+    const onClick = () => {
+      // hasConcentrationError doesn't update when shouldDisplayConcentration is false
+      // (because of the &&) so need to check shouldDisplayConcentration
+      // majors without concentrations should able to be saved
+      if (hasConcentrationError && shouldDisplayConcentration) {
+        setShowConcentrationError(true);
+      } else {
+        save();
+      }
+    };
+    return <PrimaryButton onClick={onClick}>Save</PrimaryButton>;
   };
 
   // const ChangePassword = (props: ChangePasswordProps) => {
@@ -329,6 +391,9 @@ const ProfileAdvisor = (props: any) => {
               <ProfileCatalogYear />
               {isEdit && <WhiteSpace />}
               {!!catalogYear && <ProfileMajor />}
+              {isEdit && <WhiteSpace />}
+              {!!catalogYear && !!major && <ProfileConcentration />}
+              {isEdit && <WhiteSpace />}
             </ProfileColumn>
             <ProfileColumn>
               <ProfileGradYear />

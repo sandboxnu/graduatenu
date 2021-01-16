@@ -9,6 +9,7 @@ import {
 } from "../../utils";
 import { AppState } from "../../state/reducers/state";
 import {
+  safelyGetActivePlanCatalogYearFromState,
   getActivePlanMajorFromState,
   getActivePlanScheduleFromState,
   safelyGetTransferCoursesFromState,
@@ -96,9 +97,16 @@ export const Sidebar: React.FC<SidebarProps> = props => {
       transferCourses: safelyGetTransferCoursesFromState(state),
     })
   );
-  const { majorObj } = useSelector((state: AppState) => ({
-    majorObj: findMajorFromName(major, state.majorState.majors),
-  }));
+
+  const { majorObj } = useSelector((state: AppState) => {
+    return {
+      majorObj: findMajorFromName(
+        major,
+        state.majorState.majors,
+        safelyGetActivePlanCatalogYearFromState(state)
+      ),
+    };
+  });
 
   return (
     <ScrollWrapper>

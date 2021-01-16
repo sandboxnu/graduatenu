@@ -6,6 +6,7 @@ import {
   setActivePlanStatusAction,
   updateActivePlanTimestampAction,
   expandAllYearsForActivePlanAction,
+  setActivePlanConcentrationAction,
 } from "./../actions/userPlansActions";
 import { DNDSchedule, IPlanData } from "../../models/types";
 import produce from "immer";
@@ -160,8 +161,17 @@ export const userPlansReducer = (
       }
       case getType(setActivePlanMajorAction): {
         const { major } = action.payload;
+        const activePlan = draft.plans[draft.activePlan!];
 
-        draft.plans[draft.activePlan!].major = major;
+        activePlan.major = major;
+        activePlan.coopCycle = null;
+        activePlan.concentration = null;
+
+        return draft;
+      }
+      case getType(setActivePlanConcentrationAction): {
+        const { concentration } = action.payload;
+        draft.plans[draft.activePlan!].concentration = concentration;
 
         return draft;
       }

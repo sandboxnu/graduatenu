@@ -1,7 +1,7 @@
-import { IPlanData } from "./../models/types";
+import { IPlanData, StatusEnum } from "./../models/types";
 import { AppState } from "./reducers/state";
 import { CourseWarning, IWarning, DNDScheduleTerm } from "../models/types";
-import { Major, Schedule } from "../../../common/types";
+import { Concentration, Major, Schedule } from "../../../common/types";
 import { findMajorFromName } from "../utils/plan-helpers";
 import { getCreditsTakenInSchedule } from "../utils";
 
@@ -67,8 +67,16 @@ export const safelyGetTransferCoursesFromState = (state: AppState) =>
 export const getUserMajorFromState = (state: AppState): Major | undefined =>
   findMajorFromName(
     getStudentFromState(state).major,
-    getMajorsFromState(state)
+    getMajorsFromState(state),
+    getUserCatalogYearFromState(state)
   );
+
+/**
+ * Get the selected concentration from the AppState
+ * @param state the AppState
+ */
+export const getUserConcentrationFromState = (state: AppState): string | null =>
+  getStudentFromState(state).concentration || null;
 
 export const getUserCatalogYearFromState = (state: AppState): number | null =>
   getStudentFromState(state).catalogYear;
@@ -177,8 +185,8 @@ export const getActivePlanMajorFromState = (state: AppState) => {
  * Get the current schedule's catalog yearr from the AppState
  * @param state the AppState
  */
-export const getActivePlanCatalogYearFromState = (state: AppState) => {
-  return getActivePlanFromState(state).catalogYear;
+export const safelyGetActivePlanCatalogYearFromState = (state: AppState) => {
+  return getActivePlanFromState(state)?.catalogYear;
 };
 
 /**
@@ -256,6 +264,16 @@ export const getActivePlanNameFromState = (state: AppState) => {
 
 export const safelyGetActivePlanMajorFromState = (state: AppState) =>
   safelyGetActivePlanFromState(state)?.major;
+
+export const safelyGetActivePlanMajorObjectFromState = (state: AppState) =>
+  findMajorFromName(
+    safelyGetActivePlanMajorFromState(state),
+    getMajorsFromState(state),
+    safelyGetActivePlanCatalogYearFromState(state)
+  );
+
+export const safelyGetActivePlanConcentrationFromState = (state: AppState) =>
+  safelyGetActivePlanFromState(state)?.concentration || null;
 
 export const safelyGetActivePlanCoopCycleFromState = (state: AppState) =>
   safelyGetActivePlanFromState(state)?.coopCycle;
