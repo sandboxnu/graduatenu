@@ -266,7 +266,7 @@ export interface IUpdateUserData {
   academic_year?: number;
   graduation_year?: number;
   coop_cycle?: string | null;
-  concentration: string | null;
+  concentration?: string | null;
   catalog_year?: number | null;
   nu_id?: string;
   courses_transfer?: ISimplifiedCourseDataAPI[];
