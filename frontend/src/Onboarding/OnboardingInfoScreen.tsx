@@ -212,7 +212,11 @@ class OnboardingScreenComponent extends React.Component<
       this.state.showErrors && !this.state.year && this.state.beenEditedYear;
 
     return (
-      <FormControl variant="outlined" error={error}>
+      <FormControl
+        variant="outlined"
+        error={error}
+        style={{ marginBottom: marginSpace, minWidth: 326 }}
+      >
         <InputLabel
           id="demo-simple-select-outlined-label"
           style={{ marginBottom: marginSpace }}
@@ -224,7 +228,6 @@ class OnboardingScreenComponent extends React.Component<
           id="demo-simple-select-outlined"
           value={this.state.year}
           onChange={this.onChangeYear.bind(this)}
-          style={{ marginBottom: marginSpace, minWidth: 326 }}
           labelWidth={110}
         >
           <MenuItem value={1}>1st Year</MenuItem>
@@ -250,7 +253,11 @@ class OnboardingScreenComponent extends React.Component<
       this.state.beenEditedGrad;
 
     return (
-      <FormControl variant="outlined" error={error}>
+      <FormControl
+        variant="outlined"
+        error={error}
+        style={{ marginBottom: marginSpace, minWidth: 326 }}
+      >
         <InputLabel
           id="demo-simple-select-outlined-label"
           style={{ marginBottom: marginSpace }}
@@ -262,7 +269,6 @@ class OnboardingScreenComponent extends React.Component<
           id="demo-simple-select-outlined"
           value={this.state.gradYear}
           onChange={this.onChangeGradYear.bind(this)}
-          style={{ marginBottom: marginSpace, minWidth: 326 }}
           labelWidth={115}
         >
           <MenuItem value={2019}>2019</MenuItem>
@@ -317,13 +323,16 @@ class OnboardingScreenComponent extends React.Component<
 
     // show error if there is a major (given from khoury) and no catalog year is selected
     return (
-      <FormControl variant="outlined" error={error}>
+      <FormControl
+        variant="outlined"
+        error={error}
+        style={{ marginBottom: marginSpace, minWidth: 326 }}
+      >
         <Tooltip
           title="Catalog Year refers to the year your major credits are associated to. This is usually the year you declared your Major."
           placement="top"
         >
           <Autocomplete
-            style={{ width: 326, marginBottom: marginSpace }}
             disableListWrap
             options={majorSet}
             renderInput={params => (
