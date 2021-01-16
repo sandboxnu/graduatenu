@@ -108,15 +108,11 @@ export const NewTemplatesPage: React.FC<RouteComponentProps<{}>> = ({
     ...Array.from(new Set(majors.map(maj => maj.yearVersion.toString()))),
   ];
   const buttonSize = 90;
-
   const majorObj = findMajorFromName(major, majors, Number(catalogYear));
+  const disabled =
+    !(name && major && catalogYear && selectedFolderId !== null) ||
+    hasConcentrationError;
 
-  const onClickNext = () => {
-    if (hasConcentrationError) {
-      setShowConcentrationError(true);
-    }
-  };
-  const disabled = !(name && major && catalogYear && selectedFolderId !== null);
   const onSubmit = async () => {
     let schedule, courseCounter;
 
