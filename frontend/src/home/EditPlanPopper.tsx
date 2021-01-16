@@ -26,6 +26,7 @@ import {
   getActivePlanCatalogYearFromState,
 } from "../state";
 import {
+  alterScheduleToHaveCorrectYears,
   clearSchedule,
   generateInitialScheduleFromExistingPlan,
   getStandingFromCompletedCourses,
@@ -360,8 +361,8 @@ export class EditPlanPopperComponent extends React.Component<
 
   onClearSchedule() {
     this.props.setActivePlanDNDSchedule(
-      clearSchedule(
-        this.props.plan.schedule,
+      alterScheduleToHaveCorrectYears(
+        clearSchedule(this.props.plan.schedule),
         this.props.academicYear,
         this.props.graduationYear
       )

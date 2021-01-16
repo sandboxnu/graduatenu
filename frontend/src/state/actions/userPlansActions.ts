@@ -11,6 +11,7 @@ import {
   DNDScheduleCourse,
   DNDScheduleTerm,
   IPlanData,
+  ITemplatePlan,
 } from "../../models/types";
 import { ActivePlanAutoSaveStatus } from "../reducers/userPlansReducer";
 
@@ -25,7 +26,10 @@ export const setActivePlanAction = createAction(
 
 export const addNewPlanAction = createAction(
   "userPlans/ADD_NEW_PLAN",
-  (plan: IPlanData, academicYear: number) => ({ plan, academicYear })
+  (plan: IPlanData | ITemplatePlan, academicYear?: number) => ({
+    plan,
+    academicYear,
+  })
 )();
 
 export const setUserPlansAction = createAction(

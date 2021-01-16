@@ -17,7 +17,7 @@ import { connect } from "react-redux";
 import {
   getCourseWarningsFromState,
   getCurrentClassCounterFromState,
-  getWarningsFromState,
+  safelyGetWarningsFromState,
 } from "../state";
 import { Dispatch } from "redux";
 import {
@@ -314,7 +314,7 @@ class EditableSemesterBlockComponent extends React.Component<
 }
 
 const mapStateToProps = (state: AppState, ownProps: SemesterBlockProps) => ({
-  warnings: getWarningsFromState(state).filter(
+  warnings: safelyGetWarningsFromState(state).filter(
     w => w.termId === ownProps.semester.termId
   ),
   courseWarnings: getCourseWarningsFromState(state, ownProps.semester),

@@ -32,12 +32,7 @@ export const HomeWrapper: React.FC = () => {
   }, []);
 
   if (userPlans.length === 0) {
-    return (
-      <LoadingScreen
-        text="Getting GraduateNU ready"
-        subText="Don't worry, it'll take just a second"
-      />
-    );
+    return <LoadingScreen text="Getting GraduateNU ready" />;
   } else {
     return (
       <ToastProvider placement="bottom-right" autoDismissTimeout={10000}>

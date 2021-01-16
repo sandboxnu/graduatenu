@@ -12,6 +12,7 @@ import {
 import { setActivePlanAction } from "../../state/actions/userPlansActions";
 import { IPlanData } from "../../models/types";
 import Loader from "react-loader-spinner";
+import { LoadingSpinner } from "../common/LoadingSpinner";
 
 const SpinnerWrapper = styled.div`
   display: flex;
@@ -89,15 +90,7 @@ export class SwitchPlanListComponent extends React.Component<Props> {
         ))}
       </>
     ) : (
-      <SpinnerWrapper>
-        <Loader
-          type="Puff"
-          color="#f50057"
-          height={100}
-          width={100}
-          timeout={5000} //5 secs
-        />
-      </SpinnerWrapper>
+      <LoadingSpinner />
     );
   }
 }

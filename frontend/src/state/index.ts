@@ -154,7 +154,10 @@ export const getCourseWarningsFromState = (
   state: AppState,
   semester: DNDScheduleTerm
 ): CourseWarning[] => {
-  if (!getActivePlanFromState(state)) {
+  if (
+    !getActivePlanFromState(state) ||
+    !getActivePlanFromState(state).courseWarnings
+  ) {
     return [];
   }
   return getActivePlanFromState(state)!.courseWarnings.filter(
