@@ -4,6 +4,13 @@ Rails.application.configure do
   ENV['ROOT_URL'] = "http://localhost:3001"
   ENV['FRONTEND_URL'] = "http://localhost:3000"
 
+  config.before_configuration do
+    env_file = File.join(Rails.root, 'config', 'local_env.yml')
+    YAML.load(File.open(env_file)).each do |key, value|
+      ENV[key.to_s] = value
+    end if File.exists?(env_file)
+  end
+
   ActionMailer::Base.smtp_settings = {
     :user_name => 'apikey',
     :password => ENV["SENDGRID_API_KEY"],
@@ -13,13 +20,6 @@ Rails.application.configure do
     :authentication => :plain,
     :enable_starttls_auto => true
   }
-
-  config.before_configuration do
-    env_file = File.join(Rails.root, 'config', 'local_env.yml')
-    YAML.load(File.open(env_file)).each do |key, value|
-      ENV[key.to_s] = value
-    end if File.exists?(env_file)
-  end
 
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
