@@ -4,6 +4,8 @@ class AdminController < ApplicationController
 
   # log in through khoury
   def admin_hook
+    p 'Requester IP: ' + request.remote_ip.to_str
+
     error = false
     # see if user is already in our db
     if User.exists?(email: user_params[:email])
