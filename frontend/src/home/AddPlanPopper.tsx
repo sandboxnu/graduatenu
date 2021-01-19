@@ -8,6 +8,7 @@ import {
   InputLabel,
   Select,
   MenuItem,
+  FormHelperText,
 } from "@material-ui/core";
 import { DNDSchedule, IPlanData } from "../models/types";
 import { Autocomplete } from "@material-ui/lab";
@@ -42,6 +43,7 @@ import { addNewPlanAction } from "../state/actions/userPlansActions";
 import { ExcelUpload } from "../components/ExcelUpload";
 import { NextButton } from "../components/common/NextButton";
 import { RedColorButton } from "../components/common/ColoredButtons";
+import { getAuthToken } from "../utils/auth-helpers";
 import { SaveInParentConcentrationDropdown } from "../components/ConcentrationDropdown";
 
 const EXCEL_TOOLTIP =
@@ -50,8 +52,7 @@ const EXCEL_TOOLTIP =
 const COPY_PLAN_TOOLTIP =
   "This will copy an existing plan. This will change your seleceted Major and Coop Cycle to match the exising plan";
 
-const ERROR_MESSAGE =
-  "Please fill in the plan name and what the plan should be based on";
+const REQUIRED_FIELD_MESSAGE = "Required field";
 
 const PLAN_OPTIONS = {
   NEW_PLAN: "New Plan",
@@ -141,11 +142,9 @@ function AddPlanPopperComponent(props: Props) {
     null
   );
   const [selectedMajor, setSelectedMajor] = useState<Major | null>(null);
-  const [concentration, setConcentration] = useState<string | null>("");
-  const [hasConcentrationError, setHasConcentrationError] = useState(false);
-  const [showConcentrationError, setConcentrationShowError] = useState<boolean>(
-    false
-  );
+  const [selectedConcentration, setSelectedConcentration] = useState<
+    string | null
+  >(null);
   const [selectedCoopCycle, setSelectedCoopCycle] = useState<string | null>(
     null
   );
@@ -153,11 +152,21 @@ function AddPlanPopperComponent(props: Props) {
     null
   );
   const [selectedUserPlan, setSelectedUserPlan] = useState<string | null>(null);
-  const [error, setError] = useState(false);
+
   let selectedDNDSchedule = useRef<DNDSchedule | undefined>(undefined);
   let counter = useRef(0);
 
   const scheduleNames = userPlans.map(plan => plan.name);
+
+  const [noConcentrationError, setNoConcentrationError] = useState(false);
+  const noPlanNameError = !planName;
+  const duplicatePlanNameError =
+    !!planName && scheduleNames.includes(planName!);
+  const noPlanBasedOnError = !selectedPlanOption;
+  const noBasePlanError =
+    selectedPlanOption === PLAN_OPTIONS.EXISTING_PLAN &&
+    (!selectedUserPlan || !selectedDNDSchedule.current);
+  const [showErrors, setShowErrors] = useState<boolean>(false);
 
   const setSchedule = async (schedule: Schedule) => {
     let preReqSched = await addPrereqsToSchedule(schedule);
@@ -172,9 +181,11 @@ function AddPlanPopperComponent(props: Props) {
       const plan = userPlans.find(
         schedule => schedule.name === selectedUserPlan
       )!;
+      setSelectedCatalogYear(plan.catalogYear);
       setSelectedMajor(
         findMajorFromName(plan.major, allMajors, plan.catalogYear) || null
       );
+      setSelectedConcentration(plan.concentration || null);
       setSelectedCoopCycle(plan.coopCycle || "");
       selectedDNDSchedule.current = plan.schedule;
       counter.current = plan.courseCounter;
@@ -182,25 +193,18 @@ function AddPlanPopperComponent(props: Props) {
   }, [selectedUserPlan, userPlans, allMajors]);
 
   useEffect(() => {
-    if (error) {
-      setError(false);
+    if (showErrors) {
+      setShowErrors(false);
     }
   }, [
     planName,
     selectedCatalogYear,
     selectedMajor,
+    selectedConcentration,
     selectedCoopCycle,
     selectedPlanOption,
     selectedUserPlan,
   ]);
-
-  const onClickNext = () => {
-    if (hasConcentrationError) {
-      setConcentrationShowError(true);
-    } else {
-      onSubmit();
-    }
-  };
 
   const onSubmit = async () => {
     if (selectedCoopCycle && selectedPlanOption === PLAN_OPTIONS.NEW_PLAN) {
@@ -234,12 +238,15 @@ function AddPlanPopperComponent(props: Props) {
       );
     }
 
-    if (
-      !planName ||
-      !selectedDNDSchedule.current ||
-      scheduleNames.includes(planName!)
-    ) {
-      setError(true);
+    const errorHasOccurred =
+      noConcentrationError ||
+      noPlanNameError ||
+      duplicatePlanNameError ||
+      noPlanBasedOnError ||
+      noBasePlanError;
+
+    if (errorHasOccurred) {
+      setShowErrors(true);
       return;
     } else {
       await savePlan();
@@ -261,7 +268,7 @@ function AddPlanPopperComponent(props: Props) {
   };
 
   useEffect(() => {
-    setConcentrationShowError(false);
+    setShowErrors(false);
   }, [visible]);
 
   const openModal = (): void => setVisible(true);
@@ -271,17 +278,23 @@ function AddPlanPopperComponent(props: Props) {
     setPlanName(null);
     setSelectedCatalogYear(null);
     setSelectedMajor(null);
+    setSelectedConcentration(null);
     setSelectedCoopCycle(null);
     setSelectedPlanOption(null);
     setSelectedUserPlan(null);
-    setError(false);
+    setShowErrors(false);
   };
 
   const renderPlanName = () => {
-    let error = false;
-    if (planName) {
-      error = scheduleNames.includes(planName);
-    }
+    const DUP_NAME_ERROR_MESSAGE =
+      "Cannot have the same name as an existing plan";
+
+    const error = (showErrors && noPlanNameError) || duplicatePlanNameError;
+    const helperText: string | null = noPlanNameError
+      ? (showErrors && REQUIRED_FIELD_MESSAGE) || null
+      : duplicatePlanNameError
+      ? DUP_NAME_ERROR_MESSAGE
+      : null;
 
     return (
       <TextField
@@ -292,7 +305,7 @@ function AddPlanPopperComponent(props: Props) {
         onChange={event => setPlanName(event.target.value)}
         placeholder="Plan 1"
         error={error}
-        helperText={error && "Cannot have the same name as an existing plan"}
+        helperText={helperText}
       />
     );
   };
@@ -303,7 +316,7 @@ function AddPlanPopperComponent(props: Props) {
     ];
 
     // To avoid displaying "null"
-    const value = selectedCatalogYear ? String(selectedCatalogYear) : undefined;
+    const value = selectedCatalogYear ? String(selectedCatalogYear) : "";
 
     return (
       <Autocomplete
@@ -343,8 +356,7 @@ function AddPlanPopperComponent(props: Props) {
           setSelectedMajor(
             findMajorFromName(value, allMajors, selectedCatalogYear) || null
           );
-          setConcentration(null);
-          setConcentrationShowError(false);
+          setSelectedConcentration(null);
           setSelectedCoopCycle(null);
         }}
       />
@@ -355,10 +367,10 @@ function AddPlanPopperComponent(props: Props) {
     return (
       <SaveInParentConcentrationDropdown
         major={selectedMajor || undefined}
-        concentration={concentration}
-        setConcentration={setConcentration}
-        setError={setHasConcentrationError}
-        showError={showConcentrationError}
+        concentration={selectedConcentration}
+        setConcentration={setSelectedConcentration}
+        setError={setNoConcentrationError}
+        showError={showErrors}
         useLabel={true}
       />
     );
@@ -391,9 +403,12 @@ function AddPlanPopperComponent(props: Props) {
     const setSelect = (e: any) => {
       setSelectedPlanOption(e.target.value);
     };
+
+    const error = showErrors && noPlanBasedOnError;
+
     return (
       <FormControl variant="outlined">
-        <InputLabel id="demo-simple-select-outlined-label">
+        <InputLabel id="demo-simple-select-outlined-label" error={error}>
           Create Plan Based On
         </InputLabel>
         <Select
@@ -414,6 +429,7 @@ function AddPlanPopperComponent(props: Props) {
             },
             getContentAnchorEl: null,
           }}
+          error={error}
         >
           <MenuItem value={PLAN_OPTIONS.NEW_PLAN}>
             {PLAN_OPTIONS.NEW_PLAN}
@@ -433,26 +449,35 @@ function AddPlanPopperComponent(props: Props) {
             {PLAN_OPTIONS.UPLOAD_PLAN}
           </MenuItem>
         </Select>
+        <FormHelperText error={error}>
+          {error && REQUIRED_FIELD_MESSAGE}
+        </FormHelperText>
       </FormControl>
     );
   };
 
   const renderSelectPlan = () => {
+    const error = showErrors && noBasePlanError;
+
     return (
-      <Autocomplete
-        disableListWrap
-        options={scheduleNames}
-        renderInput={params => (
-          <TextField
-            {...params}
-            variant="outlined"
-            label="Select One of Your Plans"
-            fullWidth
-          />
-        )}
-        value={selectedUserPlan}
-        onChange={(e, value) => setSelectedUserPlan(value)}
-      />
+      <FormControl>
+        <Autocomplete
+          disableListWrap
+          options={scheduleNames}
+          renderInput={params => (
+            <TextField
+              {...params}
+              variant="outlined"
+              label="Select One of Your Plans"
+              fullWidth
+              error={error}
+              helperText={error && REQUIRED_FIELD_MESSAGE}
+            />
+          )}
+          value={selectedUserPlan}
+          onChange={(e, value) => setSelectedUserPlan(value)}
+        />
+      </FormControl>
     );
   };
 
@@ -500,13 +525,8 @@ function AddPlanPopperComponent(props: Props) {
             ) : selectedPlanOption === PLAN_OPTIONS.EXISTING_PLAN ? (
               renderSelectPlan()
             ) : null}
-            {error && (
-              <ErrorTextWrapper>
-                <ErrorText>{ERROR_MESSAGE}</ErrorText>
-              </ErrorTextWrapper>
-            )}
           </FieldContainer>
-          <NextButton text="Submit" onClick={onClickNext} />
+          <NextButton text="Submit" onClick={onSubmit} />
         </InnerSection>
       </Modal>
       <RedColorButton onClick={() => openModal()}>+ Add Plan</RedColorButton>
