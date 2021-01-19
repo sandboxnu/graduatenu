@@ -186,7 +186,7 @@ const ProfileComponent: React.FC = () => {
             value={val}
             onChange={(event: React.SyntheticEvent<{}>, value: any) => {
               setMajor(value);
-              setCoopCycle("");
+              setCoopCycle(null);
               setConcentration(null);
               setShowConcentrationError(false);
             }}
