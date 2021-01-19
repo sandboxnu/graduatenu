@@ -5,7 +5,7 @@ class AdminController < ApplicationController
   # log in through khoury
   def admin_hook
     # not live yet
-    if request.headers['origin'] === "https://admin.khoury.northeastern.edu"
+    if request.headers['referer'] === "https://admin.khoury.northeastern.edu"
       head 404
       return
     end
@@ -27,7 +27,7 @@ class AdminController < ApplicationController
 
   def entry
     # not live yet
-    if request.headers['origin'] === "https://admin.khoury.northeastern.edu"
+    if request.headers['referer'] === "https://admin.khoury.northeastern.edu"
       head 404
       return
     end
