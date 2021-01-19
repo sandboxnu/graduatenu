@@ -5,6 +5,7 @@ class AdminController < ApplicationController
   # log in through khoury
   def admin_hook
     # not live yet
+    head 404
     return if request.headers['origin'] === "https://admin.khoury.northeastern.edu"
 
     error = false
@@ -23,6 +24,10 @@ class AdminController < ApplicationController
   end
 
   def entry
+    # not live yet
+    head 404
+    return if request.headers['origin'] === "https://admin.khoury.northeastern.edu"
+
     login_token = params[:user_id]
     user_id = decode_login_token(login_token)
     @user = User.find_by_id(user_id)
