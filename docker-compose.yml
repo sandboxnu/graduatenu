@@ -34,15 +34,26 @@ services:
     depends_on:
       - frontend
       - backend
+    restart: always
     build:
       context: .
       dockerfile: ./common/Dockerfile
     networks:
       - sub-etha
     ports:
-      - 443:80
-      - 80:80
+      - "443:443"
+      - "80:80"
     image: "revproxy"
+    volumes:
+      - ./certbot/conf:/etc/nginx/ssl
+      - ./certbot/data:/var/www/certbot
+  certbot:
+    image: certbot/certbot:latest
+    command: certonly --webroot --webroot-path=/var/www/certbot --email graduatenu@outlook.com --agree-tos --no-eff-email -d graduatenu.khoury.northeastern.edu
+    volumes:
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/logs:/var/log/letsencrypt
+      - ./certbot/data:/var/www/certbot
 
 networks:
   sub-etha:

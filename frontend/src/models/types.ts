@@ -159,6 +159,7 @@ export interface IUserData {
   graduationYear: number | null;
   catalogYear: number | null;
   major: string | null;
+  concentration?: string | null;
   coopCycle: string | null;
   nuId: string;
   isAdvisor: boolean;
@@ -213,6 +214,7 @@ export interface IPlanData {
   isCurrentlyBeingEditedByAdvisor: boolean;
   lastViewer: number; // a user id
   lastRequestedApproval: Date | null;
+  concentration?: string | null;
 }
 
 /**
@@ -340,6 +342,13 @@ export interface IComment {
   updatedAt: Date;
 }
 
+export interface IChangeLog {
+  author: string;
+  log: string;
+  userId: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
 /** ------------------------------------------------------------------------
  *
  *            OLD STUFF FOLLOWS ! This stuff is big outdated and is only

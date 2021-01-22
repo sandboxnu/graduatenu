@@ -14,6 +14,7 @@ import {
   setStudentCoopCycleAction,
   setStudentMajorAction,
   setStudentCatalogYearAction,
+  setStudentConcentrationAction,
 } from "../state/actions/studentActions";
 import Loader from "react-loader-spinner";
 import {
@@ -33,6 +34,7 @@ import {
 import { AppState } from "../state/reducers/state";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import { findMajorFromName } from "../utils/plan-helpers";
+import { SaveInParentConcentrationDropdown } from "../components/ConcentrationDropdown";
 
 const SpinnerWrapper = styled.div`
   display: flex;
@@ -55,6 +57,7 @@ interface OnboardingReduxDispatchProps {
   setGraduationYear: (graduationYear: number) => void;
   setCatalogYear: (catalogYear: number | null) => void;
   setMajor: (major: string | null) => void;
+  setConcentration: (concentration: string | null) => void;
   setCoopCycle: (coopCycle: string | null) => void;
 }
 
@@ -67,9 +70,11 @@ interface OnboardingScreenState {
   gradYear?: number;
   beenEditedGrad: boolean;
   major?: string;
+  concentration?: string;
   coopCycle?: string;
   catalogYear?: number;
-  showNeedsCatalogYearIfMajorError: boolean;
+  hasNoConcentrationSelectedError: boolean;
+  showErrors: boolean;
 }
 
 const marginSpace = 12;
@@ -89,10 +94,16 @@ class OnboardingScreenComponent extends React.Component<
       catalogYear: undefined,
       beenEditedYear: false,
       beenEditedGrad: false,
-      showNeedsCatalogYearIfMajorError: false,
+      hasNoConcentrationSelectedError: false,
+      showErrors: false,
       major: props.major || undefined,
+      concentration: undefined,
       coopCycle: undefined,
     };
+  }
+
+  hasMajorAndNoCatalogYearError() {
+    return !this.state.catalogYear && !!this.state.major;
   }
 
   /**
@@ -103,6 +114,7 @@ class OnboardingScreenComponent extends React.Component<
     this.setState({
       year: Number(e.target.value),
       beenEditedYear: true,
+      showErrors: false,
     });
   }
 
@@ -110,6 +122,7 @@ class OnboardingScreenComponent extends React.Component<
     this.setState({
       gradYear: Number(e.target.value),
       beenEditedGrad: true,
+      showErrors: false,
     });
   }
 
@@ -119,25 +132,37 @@ class OnboardingScreenComponent extends React.Component<
     // if this.state.major exists, and the major exists with the selected catalog year, don't erase the major from the form
     const newMajor =
       this.state.major &&
-      findMajorFromName(this.state.major, this.props.majors)?.yearVersion ===
-        newCatalogYear
+      !!findMajorFromName(this.state.major, this.props.majors, newCatalogYear)
         ? this.state.major
         : undefined;
 
     this.setState({
       major: newMajor,
+      concentration: undefined,
       coopCycle: undefined,
       catalogYear: newCatalogYear,
-      showNeedsCatalogYearIfMajorError: true,
+      showErrors: false,
     });
   }
 
   onChangeMajor(event: React.SyntheticEvent<{}>, value: any) {
-    this.setState({ major: value || undefined, coopCycle: undefined });
+    this.setState({
+      major: value || undefined,
+      coopCycle: undefined,
+      concentration: undefined,
+      showErrors: false,
+    });
+  }
+
+  onChangeConcentration(value: any) {
+    this.setState({
+      concentration: value,
+      showErrors: false,
+    });
   }
 
   onChangePlan(event: React.SyntheticEvent<{}>, value: any) {
-    this.setState({ coopCycle: value || undefined });
+    this.setState({ coopCycle: value || undefined, showErrors: false });
   }
 
   /**
@@ -149,6 +174,7 @@ class OnboardingScreenComponent extends React.Component<
     this.props.setGraduationYear(this.state.gradYear!);
     this.props.setCatalogYear(this.state.catalogYear || null);
     this.props.setMajor(this.state.major || null);
+    this.props.setConcentration(this.state.concentration || null);
     this.props.setCoopCycle(this.state.coopCycle || null);
   }
 
@@ -182,10 +208,14 @@ class OnboardingScreenComponent extends React.Component<
    * Renders the academic year select component
    */
   renderAcademicYearSelect() {
+    const error =
+      this.state.showErrors && !this.state.year && this.state.beenEditedYear;
+
     return (
       <FormControl
         variant="outlined"
-        error={!this.state.year && this.state.beenEditedYear}
+        error={error}
+        style={{ marginBottom: marginSpace, minWidth: 326 }}
       >
         <InputLabel
           id="demo-simple-select-outlined-label"
@@ -198,7 +228,6 @@ class OnboardingScreenComponent extends React.Component<
           id="demo-simple-select-outlined"
           value={this.state.year}
           onChange={this.onChangeYear.bind(this)}
-          style={{ marginBottom: marginSpace, minWidth: 326 }}
           labelWidth={110}
         >
           <MenuItem value={1}>1st Year</MenuItem>
@@ -208,9 +237,7 @@ class OnboardingScreenComponent extends React.Component<
           <MenuItem value={5}>5th Year</MenuItem>
         </Select>
         <FormHelperText>
-          {!this.state.year &&
-            this.state.beenEditedYear &&
-            "Please select a valid year\n"}
+          {error && "Please select a valid year\n"}
         </FormHelperText>
       </FormControl>
     );
@@ -220,10 +247,16 @@ class OnboardingScreenComponent extends React.Component<
    * Renders the grad year select component
    */
   renderGradYearSelect() {
+    const error =
+      this.state.showErrors &&
+      !this.state.gradYear &&
+      this.state.beenEditedGrad;
+
     return (
       <FormControl
         variant="outlined"
-        error={!this.state.gradYear && this.state.beenEditedGrad}
+        error={error}
+        style={{ marginBottom: marginSpace, minWidth: 326 }}
       >
         <InputLabel
           id="demo-simple-select-outlined-label"
@@ -236,7 +269,6 @@ class OnboardingScreenComponent extends React.Component<
           id="demo-simple-select-outlined"
           value={this.state.gradYear}
           onChange={this.onChangeGradYear.bind(this)}
-          style={{ marginBottom: marginSpace, minWidth: 326 }}
           labelWidth={115}
         >
           <MenuItem value={2019}>2019</MenuItem>
@@ -247,11 +279,7 @@ class OnboardingScreenComponent extends React.Component<
           <MenuItem value={2024}>2024</MenuItem>
           <MenuItem value={2025}>2025</MenuItem>
         </Select>
-        <FormHelperText>
-          {!this.state.gradYear &&
-            this.state.beenEditedGrad &&
-            "Please select a valid year"}
-        </FormHelperText>
+        <FormHelperText>{error && "Please select a valid year"}</FormHelperText>
       </FormControl>
     );
   }
@@ -289,22 +317,22 @@ class OnboardingScreenComponent extends React.Component<
         new Set(this.props.majors.map(maj => maj.yearVersion.toString()))
       ),
     ];
+
+    const error: boolean =
+      this.state.showErrors && this.hasMajorAndNoCatalogYearError();
+
     // show error if there is a major (given from khoury) and no catalog year is selected
     return (
       <FormControl
         variant="outlined"
-        error={
-          !this.state.catalogYear &&
-          !!this.state.major &&
-          this.state.showNeedsCatalogYearIfMajorError
-        }
+        error={error}
+        style={{ marginBottom: marginSpace, minWidth: 326 }}
       >
         <Tooltip
           title="Catalog Year refers to the year your major credits are associated to. This is usually the year you declared your Major."
           placement="top"
         >
           <Autocomplete
-            style={{ width: 326, marginBottom: marginSpace }}
             disableListWrap
             options={majorSet}
             renderInput={params => (
@@ -313,6 +341,7 @@ class OnboardingScreenComponent extends React.Component<
                 variant="outlined"
                 label="Select a Catalog Year"
                 fullWidth
+                error={error}
               />
             )}
             value={!!this.state.catalogYear ? this.state.catalogYear + " " : ""}
@@ -320,12 +349,33 @@ class OnboardingScreenComponent extends React.Component<
           />
         </Tooltip>
         <FormHelperText>
-          {!this.state.catalogYear &&
-            !!this.state.major &&
-            this.state.showNeedsCatalogYearIfMajorError &&
-            "Because you have a major, a catalog year is required"}
+          {error && "Because you have a major, a catalog year is required"}
         </FormHelperText>
       </FormControl>
+    );
+  }
+
+  renderConcentrationDropdown() {
+    const major: Major | undefined = findMajorFromName(
+      this.state.major,
+      this.props.majors,
+      this.state.catalogYear
+    );
+
+    const setError = (error: boolean) => {
+      this.setState({ hasNoConcentrationSelectedError: error });
+    };
+
+    return (
+      <SaveInParentConcentrationDropdown
+        major={major}
+        concentration={this.state.concentration || null}
+        setConcentration={this.onChangeConcentration.bind(this)}
+        style={{ width: 326, marginBottom: marginSpace }}
+        useLabel={true}
+        showError={this.state.showErrors}
+        setError={setError}
+      />
     );
   }
 
@@ -347,6 +397,33 @@ class OnboardingScreenComponent extends React.Component<
         </SpinnerWrapper>
       );
     } else {
+      const allRequirementsFilled: boolean =
+        !!year && !!gradYear && (!major || !!catalogYear);
+
+      const majorSelectedAndNoConcentration =
+        !!this.state.major && this.state.hasNoConcentrationSelectedError;
+
+      const allFilledAndNoErrors =
+        allRequirementsFilled &&
+        !this.hasMajorAndNoCatalogYearError() &&
+        !majorSelectedAndNoConcentration;
+
+      const onClick = () => {
+        if (this.hasMajorAndNoCatalogYearError()) {
+          this.setState({
+            beenEditedYear: true,
+            beenEditedGrad: true,
+            showErrors: true,
+          });
+        } else if (allRequirementsFilled) {
+          this.onSubmit();
+        } else {
+          this.setState({
+            showErrors: true,
+          });
+        }
+      };
+
       // renders all of the different drop downs and for the next button, ensures that all
       // required fields are filled out before allowing it to move to the next screen
       return (
@@ -356,30 +433,23 @@ class OnboardingScreenComponent extends React.Component<
           {this.renderCatalogYearDropDown()}
           {/* if there is a major given from khoury we want to show the major dropdown */}
           {(!!catalogYear || !!major) && this.renderMajorDropDown()}
+          {!!catalogYear && !!major && this.renderConcentrationDropdown()}
           {!!catalogYear && !!major && this.renderCoopCycleDropDown()}
           {/* requires year, gradYear, and if there is a major, then there must be a catalog year */}
-          {!!year && !!gradYear && (!major || !!catalogYear) ? (
+          {allFilledAndNoErrors ? (
             <Link
               to={{
                 pathname: !!major
                   ? "/completedCourses"
                   : "/transferableCredits",
               }}
-              onClick={this.onSubmit.bind(this)}
+              onClick={onClick}
               style={{ textDecoration: "none" }}
             >
               <NextButton />
             </Link>
           ) : (
-            <div
-              onClick={() =>
-                this.setState({
-                  beenEditedYear: true,
-                  beenEditedGrad: true,
-                  showNeedsCatalogYearIfMajorError: true,
-                })
-              }
-            >
+            <div onClick={onClick}>
               <NextButton />
             </div>
           )}
@@ -399,6 +469,8 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   setGraduationYear: (academicYear: number) =>
     dispatch(setStudentGraduationYearAction(academicYear)),
   setMajor: (major: string | null) => dispatch(setStudentMajorAction(major)),
+  setConcentration: (concentration: string | null) =>
+    dispatch(setStudentConcentrationAction(concentration)),
   setCoopCycle: (coopCycle: string | null) =>
     dispatch(setStudentCoopCycleAction(coopCycle)),
   setCatalogYear: (catalogYear: number | null) =>

@@ -33,6 +33,7 @@ import {
   findCourseWarnings,
 } from "../utils/schedule-helpers";
 import { UndoDelete } from "./UndoDelete";
+import ScheduleChangeTracker from "../utils/ScheduleChangeTracker";
 
 const OutsideContainer = styled.div`
   width: 25%;
@@ -182,6 +183,10 @@ class EditableSemesterBlockComponent extends React.Component<
   };
 
   onDeleteClass = (course: DNDScheduleCourse, semester: DNDScheduleTerm) => {
+    ScheduleChangeTracker.getInstance().addRemoveClassChange(
+      course.subject + course.classId,
+      semester.termId
+    );
     this.setState(
       {
         snackbarOpen: true,
@@ -284,6 +289,12 @@ class EditableSemesterBlockComponent extends React.Component<
 
             // Add the given courses to this semester through redux
             this.props.handleAddClasses(courses, this.props.semester);
+            courses.forEach(course => {
+              ScheduleChangeTracker.getInstance().addAddClassChange(
+                course.subject + course.classId,
+                this.props.semester.termId
+              );
+            });
           }}
         />
         {this.props.warnings.length > 0 ? (

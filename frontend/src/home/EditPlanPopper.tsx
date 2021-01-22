@@ -23,7 +23,7 @@ import {
   getPlansFromState,
   getTakenCreditsFromState,
   getUserFullNameFromState,
-  getActivePlanCatalogYearFromState,
+  safelyGetActivePlanCatalogYearFromState,
 } from "../state";
 import {
   alterScheduleToHaveCorrectYears,
@@ -41,6 +41,7 @@ import {
   setCurrentClassCounterForActivePlanAction,
   setActivePlanCatalogYearAction,
 } from "../state/actions/userPlansActions";
+import { SaveOnChangeConcentrationDropdown } from "../components/ConcentrationDropdown";
 import { setPrimaryPlan } from "../services/PlanService";
 import {
   SnackbarAlert,
@@ -199,7 +200,7 @@ export class EditPlanPopperComponent extends React.Component<
     if (value === "") {
       this.props.setActivePlanCatalogYear(null);
     } else {
-      this.props.setActivePlanCatalogYear(value);
+      this.props.setActivePlanCatalogYear(Number(value));
     }
   }
 
@@ -208,7 +209,9 @@ export class EditPlanPopperComponent extends React.Component<
       <Autocomplete
         style={{ marginTop: "10px", marginBottom: "5px" }}
         disableListWrap
-        options={this.props.majors.map(maj => maj.name)}
+        options={this.props.majors
+          .filter((maj: Major) => maj.yearVersion == this.props.catalogYear)
+          .map(maj => maj.name)}
         renderInput={params => (
           <MajorTextField
             {...params}
@@ -227,7 +230,7 @@ export class EditPlanPopperComponent extends React.Component<
   renderPlansDropDown() {
     return (
       <Autocomplete
-        style={{ marginBottom: "15px", fontSize: "10px" }}
+        style={{ marginTop: "10px", marginBottom: "15px", fontSize: "10px" }}
         disableListWrap
         options={[
           "None",
@@ -404,6 +407,15 @@ export class EditPlanPopperComponent extends React.Component<
               </StandingText>
               {this.renderCatalogYearDropdown()}
               {!!this.props.plan.catalogYear && this.renderMajorDropDown()}
+              <SaveOnChangeConcentrationDropdown
+                isStudentLevel={false}
+                style={{
+                  width: "100%",
+                  marginBottom: "5px",
+                  marginTop: "10px",
+                }}
+                useLabel={true}
+              />
               {!!this.props.plan.major && this.renderPlansDropDown()}
               {!!this.props.plan.major &&
               !!this.props.plan.coopCycle &&
@@ -435,9 +447,9 @@ const mapStateToProps = (state: AppState) => ({
   allPlans: getPlansFromState(state),
   creditsTaken: getTakenCreditsFromState(state),
   name: getUserFullNameFromState(state),
+  catalogYear: safelyGetActivePlanCatalogYearFromState(state),
   userId: getUserIdFromState(state),
   primaryPlanId: getUserPrimaryPlanIdFromState(state),
-  catalogYear: getActivePlanCatalogYearFromState(state),
   academicYear: getAcademicYearFromState(state)!,
   graduationYear: getGraduationYearFromState(state)!,
 });

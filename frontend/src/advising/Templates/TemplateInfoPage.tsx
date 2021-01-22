@@ -9,6 +9,8 @@ import {
   WhiteColorButton,
   RedColorButton,
 } from "../../components/common/ColoredButtons";
+import { SaveInParentConcentrationDropdown } from "../../components/ConcentrationDropdown";
+import { findMajorFromName } from "../../utils/plan-helpers";
 import { IFolderData } from "../../models/types";
 import {
   createTemplate,
@@ -74,6 +76,9 @@ export const NewTemplatesPage: React.FC<RouteComponentProps<{}>> = ({
   const dispatch = useDispatch();
   const [name, setName] = useState("");
   const [major, setMajor] = useState<string | null>(null);
+  const [concentration, setConcentration] = useState<string | null>(null);
+  const [hasConcentrationError, setHasConcentrationError] = useState(false);
+  const [showConcentrationError, setShowConcentrationError] = useState(false);
   const [catalogYear, setCatalogYear] = useState<string | null>(null);
   const [coopCycle, setCoopCycle] = useState<string | null>(null);
   const [folders, setFolders] = useState<IFolderData[]>([]);
@@ -103,10 +108,18 @@ export const NewTemplatesPage: React.FC<RouteComponentProps<{}>> = ({
     ...Array.from(new Set(majors.map(maj => maj.yearVersion.toString()))),
   ];
   const buttonSize = 90;
-  const disabled = !(name && major && catalogYear && selectedFolderId !== null);
+  const majorObj = findMajorFromName(major, majors, Number(catalogYear));
+  const disabled =
+    !(name && major && catalogYear && selectedFolderId !== null) ||
+    hasConcentrationError;
+
   const onSubmit = async () => {
     let schedule, courseCounter;
-    if (!!coopCycle) {
+
+    if (hasConcentrationError) {
+      setShowConcentrationError(true);
+      return;
+    } else if (!!coopCycle) {
       [schedule, courseCounter] = generateBlankCoopPlan(
         major!,
         coopCycle!,
@@ -131,7 +144,6 @@ export const NewTemplatesPage: React.FC<RouteComponentProps<{}>> = ({
     dispatch(addNewPlanAction(response.templatePlan));
     return response.templatePlan.id;
   };
-  console.log(selectedFolderId);
   return (
     <NewTemplatesPageContainer>
       <Container style={{ fontSize: "24px" }}>
@@ -176,8 +188,21 @@ export const NewTemplatesPage: React.FC<RouteComponentProps<{}>> = ({
           value={major}
           setValue={value => {
             setMajor(value);
+            setConcentration(null);
+            setShowConcentrationError(false);
             setCoopCycle(null);
           }}
+        />
+      )}
+      {major && (
+        <SaveInParentConcentrationDropdown
+          major={majorObj}
+          concentration={concentration}
+          setConcentration={setConcentration}
+          setError={setHasConcentrationError}
+          style={{ width: "326px" }}
+          useLabel={true}
+          showError={showConcentrationError}
         />
       )}
       {major && (
