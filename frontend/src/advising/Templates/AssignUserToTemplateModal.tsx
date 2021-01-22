@@ -79,7 +79,7 @@ interface AssignTemplateModalProps {
   onClose: (studentId: number, shouldDelete: boolean) => void;
 }
 
-export const AssignTemplateModal: FunctionComponent<AssignTemplateModalProps> = ({
+export const AssignUserToTemplateModal: FunctionComponent<AssignTemplateModalProps> = ({
   isOpen,
   closeModal,
   onClose,
@@ -124,7 +124,7 @@ export const AssignTemplateModal: FunctionComponent<AssignTemplateModalProps> = 
       </div>
     );
   };
-  const SearchResults = () => {
+  const renderStudentList = () => {
     return (
       <SearchResultsScrollContainer>
         {isLoading ? (
@@ -153,12 +153,12 @@ export const AssignTemplateModal: FunctionComponent<AssignTemplateModalProps> = 
     <DefaultModal isOpen={isOpen} onClose={closeModal} title={"Assign to"}>
       <SearchContainer>
         <Search
-          placeholder="Search for classes"
+          placeholder="Search for students"
           onEnter={setSearchQuery}
           isSmall={true}
         />
       </SearchContainer>
-      <SearchResults />
+      {renderStudentList()}
       <DeletePlanContainer>
         <Checkbox
           onChange={e => setShouldDelete(e.target.checked)}

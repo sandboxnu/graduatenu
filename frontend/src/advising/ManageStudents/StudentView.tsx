@@ -69,7 +69,7 @@ const AvatarWrapper = styled.div`
 `;
 
 const StudentInfoTextWrapper = styled.div`
-  height: 25%;
+  height: 30%;
   justify-content: center;
   display: flex;
   flex-direction: column;
@@ -99,7 +99,7 @@ const PlanText = styled.div`
 `;
 const PlanListContainer = styled.div`
   width: 100%;
-  height: 35%;
+  height: 30%;
   overflow: hidden;
   &:hover {
     overflow-y: auto;

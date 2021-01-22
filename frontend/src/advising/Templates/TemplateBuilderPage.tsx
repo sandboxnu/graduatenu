@@ -6,7 +6,7 @@ import {
   fetchTemplate,
 } from "../../services/TemplateService";
 import { useSelector, shallowEqual, useDispatch } from "react-redux";
-import { getAdvisorUserIdFromState } from "../../state";
+import { getActivePlanFromState, getAdvisorUserIdFromState } from "../../state";
 import { AppState } from "../../state/reducers/state";
 import { addNewPlanAction } from "../../state/actions/userPlansActions";
 import { LoadingScreen } from "../../components/common/FullPageLoading";
@@ -15,7 +15,7 @@ import { AutoSavePlan } from "../../home/AutoSavePlan";
 import { WhiteColorButton } from "../../components/common/ColoredButtons";
 import { Close as CloseIcon } from "@material-ui/icons";
 import { IconButton } from "@material-ui/core";
-import { AssignTemplateModal } from "./AssignTemplateModal";
+import { AssignUserToTemplateModal } from "./AssignUserToTemplateModal";
 import { ITemplatePlan } from "../../models/types";
 import { createPlanForUser } from "../../services/PlanService";
 
@@ -50,9 +50,10 @@ export const TemplateBuilderPage = () => {
   const [templateName, setTemplateName] = useState<string | null>(null);
   const [templateData, setTemplateData] = useState<ITemplatePlan | null>(null);
   const id = Number(routeParams.templateId);
-  const { userId } = useSelector(
+  const { userId, activePlan } = useSelector(
     (state: AppState) => ({
       userId: getAdvisorUserIdFromState(state),
+      activePlan: getActivePlanFromState(state),
     }),
     shallowEqual
   );
@@ -61,7 +62,7 @@ export const TemplateBuilderPage = () => {
     createPlanForUser(userId, {
       name: templateData!.name,
       link_sharing_enabled: false,
-      schedule: templateData!.schedule,
+      schedule: activePlan.schedule,
       catalog_year: templateData!.catalogYear,
       major: templateData!.major,
       coop_cycle: templateData!.coopCycle,
@@ -134,7 +135,7 @@ export const TemplateBuilderPage = () => {
           <CloseIcon />
         </IconButton>
       </ButtonContainer>
-      <AssignTemplateModal
+      <AssignUserToTemplateModal
         isOpen={openModal}
         closeModal={() => setOpenModal(false)}
         onClose={assignTemplate}
