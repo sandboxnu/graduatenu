@@ -32,7 +32,6 @@ import { Year } from "../Year";
 import { TransferCredits } from "../TransferCreditHolder";
 import { LoadingSpinner } from "../common/LoadingSpinner";
 import ScheduleChangeTracker from "../../utils/ScheduleChangeTracker";
-import { truncate } from "lodash";
 import { Comments } from "./Comments";
 
 const OuterContainer = styled.div`
@@ -104,7 +103,7 @@ const ScheduleComponent: React.FC<ScheduleProps> = ({
       ))}
     </>
   ) : (
-    <LoadingSpinner />
+    <LoadingSpinner isTall />
   );
 };
 
@@ -134,13 +133,14 @@ export const NonEditableScheduleStudentView: React.FC<Props> = props => {
     sidebarPresent,
     transferCreditPresent,
     collapsibleYears,
+    commentsPresent,
   } = props;
   const { activePlan, transferCredits, planId, userId } = useSelector(
     (state: AppState) => ({
       activePlan: getActivePlanFromState(state)!.schedule,
       transferCredits: safelyGetTransferCoursesFromState(state),
       planId: getActivePlanFromState(state)!.id,
-      userId: getUserIdFromState(state),
+      userId: commentsPresent ? getUserIdFromState(state) : null,
     }),
     shallowEqual
   );
@@ -167,9 +167,7 @@ export const NonEditableScheduleStudentView: React.FC<Props> = props => {
             />
           )}
         </Container>
-        {props.commentsPresent && (
-          <Comments planId={planId} studentId={userId} />
-        )}
+        {commentsPresent && <Comments planId={planId} studentId={userId!} />}
       </LeftScroll>
     </OuterContainer>
   );
@@ -181,6 +179,7 @@ export const EditableSchedule: React.FC<Props> = props => {
     sidebarPresent,
     transferCreditPresent,
     collapsibleYears,
+    commentsPresent,
   } = props;
   const {
     activePlan,
@@ -194,7 +193,7 @@ export const EditableSchedule: React.FC<Props> = props => {
       planId: getActivePlanFromState(state)!.id,
       currentClassCounter: getCurrentClassCounterFromState(state),
       transferCredits: safelyGetTransferCoursesFromState(state),
-      userId: getUserIdFromState(state),
+      userId: commentsPresent ? getUserIdFromState(state) : null,
     }),
     shallowEqual
   );
@@ -283,6 +282,8 @@ export const EditableSchedule: React.FC<Props> = props => {
   const onDragEnd = async (result: any) => {
     const { destination, source, draggableId } = result;
     // if drag is coming from the sidebar
+    if (!destination) return;
+
     if (isNaN(Number(source.droppableId))) {
       addCourseFromSidebar(
         activePlan,
@@ -338,9 +339,7 @@ export const EditableSchedule: React.FC<Props> = props => {
               />
             )}
           </Container>
-          {props.commentsPresent && (
-            <Comments planId={planId} studentId={userId} />
-          )}
+          {commentsPresent && <Comments planId={planId} studentId={userId!} />}
         </LeftScroll>
       </DragDropContext>
     </OuterContainer>

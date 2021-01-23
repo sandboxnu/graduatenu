@@ -30,7 +30,7 @@ const Container = styled.div`
   background-color: "#ff76ff";
 `;
 const TabsWrapper = styled.div`
-  margin: 20px -30px;
+  margin: 20px 0px;
 `;
 
 const PATHS = [

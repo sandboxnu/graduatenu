@@ -3,6 +3,7 @@ import styled from "styled-components";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import ErrorIcon from "@material-ui/icons/Error";
 import { removeAuthTokenFromCookies } from "../../utils/auth-helpers";
+import { NORTHEASTERN_RED } from "../../constants";
 
 const Centered = styled.div`
   position: absolute;
@@ -47,7 +48,7 @@ export const LoadingScreen = (props: LoadingProps) => {
     removeAuthTokenFromCookies();
     window.location.reload();
   };
-
+  const defaultSubtest = "Don't worry, it'll take just a second";
   const errorSubText = (
     <>
       <p>
@@ -70,19 +71,14 @@ export const LoadingScreen = (props: LoadingProps) => {
   return (
     <Centered>
       {props.errorMsg ? (
-        <ErrorIcon color="secondary" style={{ fontSize: 80 }} />
+        <ErrorIcon style={{ color: NORTHEASTERN_RED, fontSize: 80 }} />
       ) : (
-        <CircularProgress color="secondary" />
+        <CircularProgress style={{ color: NORTHEASTERN_RED }} />
       )}
-      <Text>
-        {" "}
-        {props.text
-          ? props.text
-          : props.errorMsg
-          ? props.errorMsg
-          : "Loading"}{" "}
-      </Text>
-      <SubText> {props.subText ? props.subText : errorSubText} </SubText>
+      <Text> {props.errorMsg || props.text || "Loading"} </Text>
+      <SubText>
+        {props.errorMsg ? errorSubText : props.subText || defaultSubtest}
+      </SubText>
     </Centered>
   );
 };

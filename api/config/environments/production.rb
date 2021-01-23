@@ -5,8 +5,8 @@ Rails.application.configure do
   logger.formatter = config.log_formatter
   config.logger    = ActiveSupport::TaggedLogging.new(logger)
   # Settings specified here will take precedence over those in config/application.rb.
-  ENV['ROOT_URL'] = "http://graduatenu.khoury.northeastern.edu"
-  ENV['FRONTEND_URL'] = "http://graduatenu.khoury.northeastern.edu"
+  ENV['ROOT_URL'] = "https://graduatenu.khoury.northeastern.edu"
+  ENV['FRONTEND_URL'] = "https://graduatenu.khoury.northeastern.edu"
 
   config.before_configuration do
     env_file = File.join(Rails.root, 'config', 'local_env.yml')

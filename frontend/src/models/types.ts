@@ -159,6 +159,7 @@ export interface IUserData {
   graduationYear: number | null;
   catalogYear: number | null;
   major: string | null;
+  concentration?: string | null;
   coopCycle: string | null;
   nuId: string;
   isAdvisor: boolean;
@@ -213,6 +214,7 @@ export interface IPlanData {
   isCurrentlyBeingEditedByAdvisor: boolean;
   lastViewer: number; // a user id
   lastRequestedApproval: Date | null;
+  concentration?: string | null;
 }
 
 /**
@@ -309,6 +311,17 @@ export interface ITemplatePlan {
   major: string | null;
   coopCycle: string | null;
   updatedAt: Date;
+  courseCounter: number;
+}
+
+export interface IUpdateTemplatePlan {
+  name?: string;
+  schedule?: DNDSchedule;
+  catalogYear?: number | null;
+  major?: string | null;
+  coopCycle?: string | null;
+  updatedAt?: Date;
+  courseCounter?: number;
 }
 
 export interface ICreateTemplatePlan {
@@ -319,6 +332,7 @@ export interface ICreateTemplatePlan {
   coop_cycle: string | null;
   folder_id: number | null; // if null, create new folder
   folder_name: string | null; // only not null if folder exists
+  course_counter: number;
 }
 
 export interface IComment {

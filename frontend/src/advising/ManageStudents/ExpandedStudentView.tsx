@@ -196,7 +196,7 @@ export const ExpandedStudentView: React.FC = () => {
       <Container>
         <FullScheduleViewContainer>
           {loading ? (
-            <LoadingSpinner />
+            <LoadingSpinner isTall />
           ) : (
             <>
               <ExpandedScheduleStudentInfo>

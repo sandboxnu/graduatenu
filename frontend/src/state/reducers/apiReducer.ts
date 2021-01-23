@@ -1,4 +1,4 @@
-import { Major, Schedule } from "../../../../common/types";
+import { Concentrations, Major, Schedule } from "../../../../common/types";
 import { MajorsApiAction } from "../actions";
 import { PlansApiAction } from "../actions";
 import { getType } from "typesafe-actions";
@@ -59,9 +59,8 @@ export const majorsReducer = (
         draft.isFetchingMajors = true;
         return draft;
       case getType(fetchMajorsSuccessAction):
-        const majors: Major[] = action.payload.majors;
         draft.isFetchingMajors = false;
-        draft.majors = majors;
+        draft.majors = action.payload.majors;
         return draft;
       case getType(fetchMajorsErrorAction):
         const errorMsg: string = action.payload.majorsError;

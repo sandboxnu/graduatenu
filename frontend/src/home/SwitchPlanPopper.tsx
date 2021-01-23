@@ -29,7 +29,6 @@ import { IPlanData } from "../models/types";
 import Loader from "react-loader-spinner";
 import { deletePlanForUser } from "../services/PlanService";
 import { Alert } from "@material-ui/lab";
-import { getAuthToken } from "../utils/auth-helpers";
 
 const SwitchPlanDropdown = styled(Button)`
   display: flex;

@@ -34,6 +34,13 @@ export const setStudentMajorAction = createAction(
   })
 )();
 
+export const setStudentConcentrationAction = createAction(
+  "student/SET_CONCENTRATION",
+  (concentration: string | null) => ({
+    concentration,
+  })
+)();
+
 export const setStudentCoopCycleAction = createAction(
   "student/SET_COOP_CYCLE",
   (coopCycle: string | null) => ({

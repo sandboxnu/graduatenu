@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "@material-ui/core";
+import { Button, Tooltip } from "@material-ui/core";
 import {
   createStyles,
   withStyles,
@@ -15,6 +15,9 @@ const ColorButton = withStyles((theme: Theme) => ({
     backgroundColor: "#EB5757",
     "&:hover": {
       backgroundColor: "#DB4747",
+    },
+    "&.Mui-disabled": {
+      pointerEvents: "auto",
     },
   },
 }))(Button);
