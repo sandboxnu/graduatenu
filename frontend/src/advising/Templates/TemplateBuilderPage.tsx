@@ -18,6 +18,7 @@ import { IconButton } from "@material-ui/core";
 import { AssignUserToTemplateModal } from "./AssignUserToTemplateModal";
 import { ITemplatePlan } from "../../models/types";
 import { createPlanForUser } from "../../services/PlanService";
+import { IAbrStudent } from "../../services/AdvisorService";
 
 const TitleText = styled.div`
   font-family: Roboto;
@@ -58,7 +59,8 @@ export const TemplateBuilderPage = () => {
     shallowEqual
   );
 
-  const assignTemplate = (userId: number, shouldDelete: boolean) => {
+  const assignTemplate = (student: IAbrStudent, shouldDelete: boolean) => {
+    const userId = student.id;
     createPlanForUser(userId, {
       name: templateData!.name,
       link_sharing_enabled: false,

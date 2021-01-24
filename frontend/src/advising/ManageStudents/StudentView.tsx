@@ -1,13 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { IPlanData, IUserData } from "../../models/types";
+import { IPlanData, ITemplatePlan, IUserData } from "../../models/types";
 import { fetchUser } from "../../services/AdvisorService";
-import { findAllPlansForUser } from "../../services/PlanService";
+import {
+  createPlanForUser,
+  findAllPlansForUser,
+} from "../../services/PlanService";
 import {
   safelyGetActivePlanIdFromState,
   getActivePlanNameFromState,
 } from "../../state";
-import { setUserPlansAction } from "../../state/actions/userPlansActions";
+import {
+  addNewPlanAction,
+  setUserPlansAction,
+} from "../../state/actions/userPlansActions";
 import { AppState } from "../../state/reducers/state";
 import styled from "styled-components";
 import { Avatar, Tooltip, IconButton } from "@material-ui/core";
@@ -19,6 +25,8 @@ import { NonEditableSchedule } from "../../components/Schedule/ScheduleComponent
 import { SwitchPlanList } from "../../components/SwitchPlan/SwitchPlanList";
 import { PlanTitle, ButtonHeader, ScheduleWrapper, Container } from "./Shared";
 import { useHistory, useParams } from "react-router";
+import { AssignTemplateToUserModal } from "./AssignTemplateToUserModal";
+import { alterScheduleToHaveCorrectYears } from "../../utils/schedule-helpers";
 
 const StudentViewContainer = styled.div`
   display: flex;
@@ -122,6 +130,32 @@ export const StudentView: React.FC = () => {
   const [fetchingStudent, setFetchingStudent] = useState(true);
   const [student, setStudent] = useState<IUserData | null>(null);
   const [noPlans, setNoPlans] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
+
+  const assignTemplate = (templateData: ITemplatePlan) => {
+    const userId = id;
+    createPlanForUser(userId, {
+      name: templateData!.name,
+      link_sharing_enabled: false,
+      schedule: alterScheduleToHaveCorrectYears(
+        templateData.schedule,
+        student!.academicYear!,
+        student!.graduationYear!
+      ),
+      catalog_year: templateData!.catalogYear,
+      major: templateData!.major,
+      coop_cycle: templateData!.coopCycle,
+      course_counter: templateData!.courseCounter,
+    })
+      .then(response => {
+        if (response.error) {
+          console.log(":(");
+        } else {
+          dispatch(addNewPlanAction(response.plan));
+        }
+      })
+      .catch(e => console.log(":("));
+  };
 
   const dispatch = useDispatch();
   const { planName, planId } = useSelector((state: AppState) => ({
@@ -166,7 +200,7 @@ export const StudentView: React.FC = () => {
               <SwitchPlanList />
             </PlanListContainer>
             <ButtonContainer>
-              <RedColorButton onClick={() => {}}>
+              <RedColorButton onClick={() => setOpenModal(true)}>
                 Assign Template
               </RedColorButton>
             </ButtonContainer>
@@ -230,6 +264,11 @@ export const StudentView: React.FC = () => {
         {renderStudentInfo()}
         {renderSchedule()}
       </StudentViewContainer>
+      <AssignTemplateToUserModal
+        isOpen={openModal}
+        closeModal={() => setOpenModal(false)}
+        onClose={assignTemplate}
+      />
     </Container>
   );
 };
