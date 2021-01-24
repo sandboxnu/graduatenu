@@ -18,7 +18,8 @@ import { IconButton } from "@material-ui/core";
 import { AssignUserToTemplateModal } from "./AssignUserToTemplateModal";
 import { ITemplatePlan } from "../../models/types";
 import { createPlanForUser } from "../../services/PlanService";
-import { IAbrStudent } from "../../services/AdvisorService";
+import { fetchUser, IAbrStudent } from "../../services/AdvisorService";
+import { alterScheduleToHaveCorrectYears } from "../../utils";
 
 const TitleText = styled.div`
   font-family: Roboto;
@@ -59,35 +60,49 @@ export const TemplateBuilderPage = () => {
     shallowEqual
   );
 
-  const assignTemplate = (student: IAbrStudent, shouldDelete: boolean) => {
-    const userId = student.id;
-    createPlanForUser(userId, {
-      name: templateData!.name,
-      link_sharing_enabled: false,
-      schedule: activePlan.schedule,
-      catalog_year: templateData!.catalogYear,
-      major: templateData!.major,
-      coop_cycle: templateData!.coopCycle,
-      course_counter: templateData!.courseCounter,
-    })
-      .then(response => {
-        if (response.error) {
-          console.log(":(");
-        } else if (shouldDelete) {
-          deleteTemplatePlan(userId, templateData!.id)
-            .then(response => {
-              if (response.error) {
-                console.log(":(");
-              } else {
-                history.push("/advisor/templates");
-              }
-            })
-            .catch(e => console.log(":("));
-        } else {
-          history.push("/advisor/templates");
+  const assignTemplate = async (
+    student: IAbrStudent,
+    shouldDelete: boolean
+  ) => {
+    try {
+      const userId = student.id;
+      const userInfo = await fetchUser(userId);
+      if (userInfo.error) return;
+      const schedule =
+        userInfo.user.graduationYear && userInfo.user.academicYear
+          ? alterScheduleToHaveCorrectYears(
+              JSON.parse(JSON.stringify(activePlan.schedule)),
+              userInfo.user.academicYear,
+              userInfo.user.graduationYear
+            )
+          : activePlan.schedule;
+
+      const planResponse = await createPlanForUser(userId, {
+        name: templateData!.name,
+        link_sharing_enabled: false,
+        schedule: schedule,
+        catalog_year: templateData!.catalogYear,
+        major: templateData!.major,
+        coop_cycle: templateData!.coopCycle,
+        course_counter: templateData!.courseCounter,
+      });
+      if (planResponse.error) {
+        setLoadingError("Something went wrong with assigning this plan");
+        return;
+      } else if (shouldDelete) {
+        const deleteResponse = await deleteTemplatePlan(
+          userId,
+          templateData!.id
+        );
+        if (!deleteResponse.error) {
+          setLoadingError("Something went wrong with deleting the template");
+          return;
         }
-      })
-      .catch(e => console.log(":("));
+      }
+      history.push("/advisor/templates");
+    } catch (error) {
+      setLoadingError("Something went wrong");
+    }
   };
 
   useEffect(() => {

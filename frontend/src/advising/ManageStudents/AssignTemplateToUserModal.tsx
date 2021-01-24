@@ -73,7 +73,7 @@ export const AssignTemplateToUserModal: FunctionComponent<AssignTemplateModalPro
     <GenericSearchAssignModal<IFolderData, ITemplatePlan>
       fetchList={fetchTemplates}
       RenderItem={FolderOption}
-      showDeleteOption={false}
+      showDeleteOption={true}
       itemText={"templates"}
       {...props}
     ></GenericSearchAssignModal>

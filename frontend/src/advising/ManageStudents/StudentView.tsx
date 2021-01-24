@@ -27,6 +27,7 @@ import { PlanTitle, ButtonHeader, ScheduleWrapper, Container } from "./Shared";
 import { useHistory, useParams } from "react-router";
 import { AssignTemplateToUserModal } from "./AssignTemplateToUserModal";
 import { alterScheduleToHaveCorrectYears } from "../../utils/schedule-helpers";
+import { deleteTemplatePlan } from "../../services/TemplateService";
 
 const StudentViewContainer = styled.div`
   display: flex;
@@ -132,9 +133,12 @@ export const StudentView: React.FC = () => {
   const [noPlans, setNoPlans] = useState(false);
   const [openModal, setOpenModal] = useState(false);
 
-  const assignTemplate = (templateData: ITemplatePlan) => {
+  const assignTemplate = async (
+    templateData: ITemplatePlan,
+    shouldDelete: boolean
+  ) => {
     const userId = id;
-    createPlanForUser(userId, {
+    const response = await createPlanForUser(userId, {
       name: templateData!.name,
       link_sharing_enabled: false,
       schedule: alterScheduleToHaveCorrectYears(
@@ -146,15 +150,13 @@ export const StudentView: React.FC = () => {
       major: templateData!.major,
       coop_cycle: templateData!.coopCycle,
       course_counter: templateData!.courseCounter,
-    })
-      .then(response => {
-        if (response.error) {
-          console.log(":(");
-        } else {
-          dispatch(addNewPlanAction(response.plan));
-        }
-      })
-      .catch(e => console.log(":("));
+    });
+    if (response.error) return;
+    if (shouldDelete) {
+      const deleteResponse = await deleteTemplatePlan(userId, templateData!.id);
+      // error handling for this page (?)
+    }
+    dispatch(addNewPlanAction(response.plan));
   };
 
   const dispatch = useDispatch();
