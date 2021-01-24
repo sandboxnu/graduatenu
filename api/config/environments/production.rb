@@ -8,6 +8,13 @@ Rails.application.configure do
   ENV['ROOT_URL'] = "https://graduatenu.khoury.northeastern.edu"
   ENV['FRONTEND_URL'] = "https://graduatenu.khoury.northeastern.edu"
 
+  config.before_configuration do
+    env_file = File.join(Rails.root, 'config', 'local_env.yml')
+    YAML.load(File.open(env_file)).each do |key, value|
+      ENV[key.to_s] = value
+    end if File.exists?(env_file)
+  end
+
   ActionMailer::Base.smtp_settings = {
     :user_name => 'apikey',
     :password => ENV["SENDGRID_API_KEY"],
@@ -17,7 +24,7 @@ Rails.application.configure do
     :authentication => :plain,
     :enable_starttls_auto => true
   }
-
+  
   # Code is not reloaded between requests.
   config.cache_classes = true
 
