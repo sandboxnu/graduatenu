@@ -85,6 +85,7 @@ export const TemplateBuilderPage = () => {
         major: templateData!.major,
         coop_cycle: templateData!.coopCycle,
         course_counter: templateData!.courseCounter,
+        concentration: templateData!.concentration,
       });
       if (planResponse.error) {
         setLoadingError("Something went wrong with assigning this plan");

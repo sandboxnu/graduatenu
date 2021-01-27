@@ -4,6 +4,7 @@
 #
 #  id             :bigint(8)        not null, primary key
 #  catalog_year   :integer(4)       not null
+#  concentration  :string
 #  coop_cycle     :string
 #  course_counter :integer(4)
 #  major          :string           not null

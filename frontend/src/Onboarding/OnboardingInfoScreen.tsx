@@ -415,7 +415,7 @@ class OnboardingScreenComponent extends React.Component<
             beenEditedGrad: true,
             showErrors: true,
           });
-        } else if (allRequirementsFilled) {
+        } else if (allFilledAndNoErrors) {
           this.onSubmit();
         } else {
           this.setState({

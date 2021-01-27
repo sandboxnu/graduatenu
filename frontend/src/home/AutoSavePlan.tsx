@@ -67,6 +67,7 @@ export const AutoSavePlan: React.FC<{
     JSON.stringify(activePlan.schedule),
     activePlan.coopCycle,
     activePlan.major,
+    activePlan.concentration,
     activePlan.name,
     activePlan.catalogYear,
     debouncedUpdate,
