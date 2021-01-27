@@ -138,7 +138,7 @@ export const TemplatesListPage: React.FC = () => {
   return (
     <Container>
       <Search
-        placeholder="Search by major name"
+        placeholder="Search by template or folder name"
         onEnter={setSearchQuery}
         isSmall={false}
       />

@@ -20,7 +20,7 @@ Rails.application.routes.draw do
         resources :plan_comments, only: [:index, :show, :create]
         resources :plan_changelogs, only: [:index, :show, :create]
       end
-      resources :templates, only: [:index, :create, :show, :update]
+      resources :templates, only: [:index, :create, :show, :update, :destroy]
     end
 
     post 'v1/admin_hook', to: 'admin#admin_hook'
