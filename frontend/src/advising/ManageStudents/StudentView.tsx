@@ -150,6 +150,7 @@ export const StudentView: React.FC = () => {
       major: templateData!.major,
       coop_cycle: templateData!.coopCycle,
       course_counter: templateData!.courseCounter,
+      concentration: templateData!.concentration,
     });
     if (response.error) return;
     if (shouldDelete) {

@@ -262,7 +262,7 @@ function AddPlanPopperComponent(props: Props) {
       catalog_year: selectedCatalogYear,
       major: selectedMajor ? selectedMajor.name : null,
       coop_cycle: selectedCoopCycle,
-      concentration: concentration,
+      concentration: selectedConcentration,
       course_counter: counter.current,
     });
     addNewPlan(plan.plan, props.academicYear);
