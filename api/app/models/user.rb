@@ -10,18 +10,20 @@
 #  courses_completed      :json             default([]), is an Array
 #  courses_transfer       :json             default([]), is an Array
 #  email                  :string           default(""), not null
+#  email_ciphertext       :text
 #  encrypted_password     :string           default(""), not null
 #  full_name              :string
 #  graduation_year        :integer(4)
 #  image_url              :string
 #  is_advisor             :boolean          default(FALSE), not null
 #  major                  :string
+#  nu_id                  :string
+#  nu_id_ciphertext       :text
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
-#  nu_id                  :string
 #  primary_plan_id        :bigint(8)
 #
 # Indexes
@@ -32,6 +34,8 @@
 #
 class User < ApplicationRecord
   JWT_EXPIRATION = 60.days
+
+  encrypts :email, :nu_id
   has_many :plans, dependent: :destroy
   has_many :folders, dependent: :destroy # only relevant for advisors
 

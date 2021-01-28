@@ -10,12 +10,14 @@
 #  courses_completed      :json             default([]), is an Array
 #  courses_transfer       :json             default([]), is an Array
 #  email                  :string           default(""), not null
+#  email_ciphertext       :text
 #  encrypted_password     :string           default(""), not null
 #  full_name              :string
 #  graduation_year        :integer(4)
 #  image_url              :string
 #  is_advisor             :boolean          default(FALSE), not null
 #  major                  :string
+#  nu_id_ciphertext       :text
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
