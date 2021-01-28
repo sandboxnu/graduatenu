@@ -59,7 +59,11 @@ GEM
     annotate (3.1.1)
       activerecord (>= 3.2, < 7.0)
       rake (>= 10.4, < 14.0)
+    argon2-kdf (0.1.5)
     bcrypt (3.1.16)
+    blind_index (2.2.0)
+      activesupport (>= 5)
+      argon2-kdf (>= 0.1.1)
     bootsnap (1.5.1)
       msgpack (~> 1.0)
     builder (3.2.4)
@@ -193,6 +197,7 @@ PLATFORMS
 
 DEPENDENCIES
   annotate
+  blind_index
   bootsnap (>= 1.4.2)
   byebug
   database_cleaner

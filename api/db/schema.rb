@@ -77,7 +77,6 @@ ActiveRecord::Schema.define(version: 2021_01_28_003742) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -92,15 +91,17 @@ ActiveRecord::Schema.define(version: 2021_01_28_003742) do
     t.integer "catalog_year"
     t.string "image_url"
     t.boolean "is_advisor", default: false, null: false
-    t.string "nu_id"
     t.json "courses_completed", default: [], array: true
     t.json "courses_transfer", default: [], array: true
     t.bigint "primary_plan_id"
     t.string "concentration"
     t.text "email_ciphertext"
     t.text "nu_id_ciphertext"
-    t.index ["email"], name: "index_users_on_email", unique: true
+    t.string "email_bidx"
+    t.string "nu_id_bidx"
+    t.index ["email_bidx"], name: "index_users_on_email_bidx", unique: true
     t.index ["full_name"], name: "index_users_on_full_name"
+    t.index ["nu_id_bidx"], name: "index_users_on_nu_id_bidx", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
