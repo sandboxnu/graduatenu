@@ -103,7 +103,6 @@ class TemplatesControllerTest < ActionController::TestCase
 
     template_plan = build(:template_plan) # same as Model.new
 
-    binding.pry
     params = {
       template_plan: {
         name: template_plan.name,
@@ -127,7 +126,6 @@ class TemplatesControllerTest < ActionController::TestCase
     json_response = JSON.parse(response.body)
 
     tp = TemplatePlan.last
-    binding.pry
     assert_equal tp.id, json_response['templatePlan']['id']
     assert_equal tp.name, json_response['templatePlan']['name']
     assert_equal tp.schedule, json_response['templatePlan']['schedule']
