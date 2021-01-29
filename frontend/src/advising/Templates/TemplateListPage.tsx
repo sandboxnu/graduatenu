@@ -128,6 +128,7 @@ interface TemplateProps {
 interface FolderProps {
   index: number;
   folder: IFolderData;
+  searchQuery: string;
 }
 
 const EMPTY_TEMPLATES_LIST: IFolderData[] = [];
@@ -203,7 +204,11 @@ const TemplatesList = ({ searchQuery }: TemplatesListProps) => {
           <EmptyState> No Templates found </EmptyState>
         ) : (
           templates.map((folder, i) => (
-            <FolderComponent index={i} folder={folder} />
+            <FolderComponent
+              index={i}
+              folder={folder}
+              searchQuery={searchQuery}
+            />
           ))
         )}
         {!isLoading ? (
@@ -229,6 +234,13 @@ const FolderComponent: React.FC<FolderProps> = (props: FolderProps) => {
   );
   const dispatch = useDispatch();
 
+  const isSearchedTemplate = (template: ITemplatePlan) => {
+    return (
+      template.name.includes(props.searchQuery) ||
+      folder.name.includes(props.searchQuery)
+    );
+  };
+
   return (
     <div>
       <FolderNameWrapper>
@@ -244,9 +256,11 @@ const FolderComponent: React.FC<FolderProps> = (props: FolderProps) => {
       </FolderNameWrapper>
       <FolderTemplateListContainer>
         {isExpanded &&
-          folder.templatePlans.map((template: ITemplatePlan) => (
-            <Template name={template.name} id={template.id} />
-          ))}
+          folder.templatePlans.map((template: ITemplatePlan) =>
+            isSearchedTemplate(template) ? (
+              <Template name={template.name} id={template.id} />
+            ) : null
+          )}
       </FolderTemplateListContainer>
     </div>
   );
