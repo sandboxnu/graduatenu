@@ -6,6 +6,7 @@ import { RequirementSection } from ".";
 import {
   produceRequirementGroupWarning,
   getCompletedCourseStrings,
+  getCreditsTakenInSchedule,
 } from "../../utils";
 import { AppState } from "../../state/reducers/state";
 import {
@@ -13,6 +14,7 @@ import {
   getActivePlanMajorFromState,
   getActivePlanScheduleFromState,
   safelyGetTransferCoursesFromState,
+  getTakenCreditsFromState,
 } from "../../state";
 import { connect, useSelector } from "react-redux";
 import { findMajorFromName } from "../../utils/plan-helpers";
@@ -31,7 +33,16 @@ const MajorTitle = styled.p`
   line-height: 24px;
   margin-right: 12px;
   margin-left: 4px;
-  margin-bottom: 12px;
+`;
+
+const CreditTitle = styled.p<any>`
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 16px;
+  margin-right: 12px;
+  margin-left: 4px;
+  margin-bottom: 6px;
+  color: ${props => (props.isGreen ? "green " : "red")};
 `;
 
 interface SidebarProps {
@@ -71,6 +82,15 @@ const MajorSidebarComponent: React.FC<MajorSidebarProps> = ({
     <Container>
       <ScrollWrapper>
         <MajorTitle>{major.name}</MajorTitle>
+        <CreditTitle
+          isGreen={
+            getCreditsTakenInSchedule(schedule) >= major.totalCreditsRequired
+          }
+        >
+          {`${getCreditsTakenInSchedule(schedule)} / ${
+            major.totalCreditsRequired
+          }` + " credits"}
+        </CreditTitle>
         {major.requirementGroups.map((req, index) => {
           return (
             <RequirementSection
