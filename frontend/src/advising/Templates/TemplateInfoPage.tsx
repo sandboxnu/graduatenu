@@ -1,4 +1,4 @@
-import { TextField, FormControl, ButtonGroup, Button } from "@material-ui/core";
+import { TextField, FormControl, Tabs, Tab } from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
 import React, { createContext, useContext, useEffect, useMemo } from "react";
 import { useState } from "react";
@@ -62,7 +62,7 @@ const FolderSelectionContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 25px;
+  gap: 5px;
   width: 326px;
 `;
 
@@ -151,11 +151,17 @@ const DisplayedInputField: React.FC<{ creatingNewFolder: boolean }> = ({
 };
 
 const FolderSelection: React.FC<{}> = () => {
-  // TODO: add validation for duplicate folders
-  const [creatingNewFolder, setCreatingNewFolder] = useState(false);
+  // TODO: add validation for duplicate folders, fix validation as a whole lol
+  const [tabValue, setTabValue] = useState(0);
   const { folders, newFolderName, setNewFolderName } = useContext(
     folderContext
   ) as FolderContext;
+
+  const creatingNewFolder = !!tabValue;
+
+  const handleTabChange = (event: React.ChangeEvent<{}>, newValue: number) => {
+    setTabValue(newValue);
+  };
 
   if (folders.length < 1) {
     return (
@@ -169,24 +175,10 @@ const FolderSelection: React.FC<{}> = () => {
 
   return (
     <FolderSelectionContainer>
-      <ButtonGroup color="primary" aria-label="outlined primary button group">
-        <Button
-          disabled={!creatingNewFolder}
-          onClick={() => {
-            setCreatingNewFolder(false);
-          }}
-        >
-          Create in existing folder
-        </Button>
-        <Button
-          disabled={creatingNewFolder}
-          onClick={() => {
-            setCreatingNewFolder(true);
-          }}
-        >
-          Create in new folder
-        </Button>
-      </ButtonGroup>
+      <Tabs value={tabValue} onChange={handleTabChange}>
+        <Tab label="Existing Folder" />
+        <Tab label="New Folder" />
+      </Tabs>
       <DisplayedInputField creatingNewFolder={creatingNewFolder} />
     </FolderSelectionContainer>
   );
