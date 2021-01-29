@@ -30,8 +30,6 @@ import {
   planToString,
 } from "../../utils";
 
-const FOLDER_NAME_FIELD_LABEL = "New folder name";
-
 const Container = styled.div`
   margin-left: 30px;
   margin-right: 30px;
@@ -57,6 +55,14 @@ const ButtonContainer = styled.div`
 `;
 
 const InputContainer = styled.div`
+  width: 326px;
+`;
+
+const FolderSelectionContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
   width: 326px;
 `;
 
@@ -116,7 +122,7 @@ const DisplayedInputField: React.FC<{ creatingNewFolder: boolean }> = ({
       <NameField
         name={newFolderName}
         setName={setNewFolderName}
-        label={FOLDER_NAME_FIELD_LABEL}
+        label={"New folder name"}
       />
     );
   }
@@ -132,7 +138,7 @@ const DisplayedInputField: React.FC<{ creatingNewFolder: boolean }> = ({
           <TextField
             {...params}
             variant="outlined"
-            label={"Save Plan in Folder"}
+            label={"Existing folder"}
             fullWidth
           />
         )}
@@ -156,33 +162,33 @@ const FolderSelection: React.FC<{}> = () => {
       <NameField
         name={newFolderName}
         setName={setNewFolderName}
-        label={FOLDER_NAME_FIELD_LABEL}
+        label={"New folder name"}
       />
     );
   }
 
   return (
-    <div>
+    <FolderSelectionContainer>
       <ButtonGroup color="primary" aria-label="outlined primary button group">
-        <Button
-          disabled={creatingNewFolder}
-          onClick={() => {
-            setCreatingNewFolder(true);
-          }}
-        >
-          Create in existing folder
-        </Button>
         <Button
           disabled={!creatingNewFolder}
           onClick={() => {
             setCreatingNewFolder(false);
           }}
         >
+          Create in existing folder
+        </Button>
+        <Button
+          disabled={creatingNewFolder}
+          onClick={() => {
+            setCreatingNewFolder(true);
+          }}
+        >
           Create in new folder
         </Button>
       </ButtonGroup>
       <DisplayedInputField creatingNewFolder={creatingNewFolder} />
-    </div>
+    </FolderSelectionContainer>
   );
 };
 
