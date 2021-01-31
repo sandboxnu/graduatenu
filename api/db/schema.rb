@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(version: 2021_01_13_051733) do
     t.json "approved_schedule"
     t.bigint "last_viewer"
     t.datetime "last_requested_approval"
+    t.string "concentration"
     t.index ["user_id"], name: "index_plans_on_user_id"
   end
 
@@ -70,6 +71,7 @@ ActiveRecord::Schema.define(version: 2021_01_13_051733) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "folder_id"
     t.integer "course_counter"
+    t.string "concentration"
     t.index ["folder_id"], name: "index_template_plans_on_folder_id"
   end
 
@@ -93,6 +95,7 @@ ActiveRecord::Schema.define(version: 2021_01_13_051733) do
     t.json "courses_completed", default: [], array: true
     t.json "courses_transfer", default: [], array: true
     t.bigint "primary_plan_id"
+    t.string "concentration"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["full_name"], name: "index_users_on_full_name"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
