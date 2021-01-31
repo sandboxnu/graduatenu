@@ -1,6 +1,10 @@
 import React from "react";
 import { DNDSchedule } from "../../models/types";
-import { Major, ScheduleCourse } from "../../../../common/types";
+import {
+  IMajorRequirementGroup,
+  Major,
+  ScheduleCourse,
+} from "../../../../common/types";
 import styled from "styled-components";
 import { RequirementSection } from ".";
 import {
@@ -67,17 +71,59 @@ const MajorSidebarComponent: React.FC<MajorSidebarProps> = ({
       )
     : completedCourses;
 
+  const reqGroupSortOrder = ["AND", "OR", "RANGE"];
+
+  const sortOnValues = (
+    groupMap: Record<string, IMajorRequirementGroup>
+  ): Record<string, IMajorRequirementGroup> => {
+    // Create items array of arrays
+    var items = Object.keys(groupMap).map((key): [
+      string,
+      IMajorRequirementGroup
+    ] => {
+      return [key, groupMap[key]];
+    });
+
+    // Sort the array based on the second element (value in the item pair)
+    items = items.sort(
+      (
+        first: [string, IMajorRequirementGroup],
+        second: [string, IMajorRequirementGroup]
+      ): number => {
+        const diff =
+          reqGroupSortOrder.indexOf(first[1].type) -
+          reqGroupSortOrder.indexOf(second[1].type);
+        if (diff < 0) {
+          return -1;
+        }
+        if (diff > 0) {
+          return 1;
+        } else {
+          return 0;
+        }
+      }
+    );
+    // turn into dictionary
+    const dictionary: Record<string, IMajorRequirementGroup> = {};
+    items.map((pair: [string, IMajorRequirementGroup]) => {
+      dictionary[pair[0]] = pair[1];
+    });
+    return dictionary;
+  };
+
+  const sortedGroups = sortOnValues(major.requirementGroupMap);
+  console.log("Sorted", sortedGroups);
   return (
     <Container>
       <ScrollWrapper>
         <MajorTitle>{major.name}</MajorTitle>
-        {major.requirementGroups.map((req, index) => {
+        {Object.keys(sortedGroups).map((req, index) => {
           return (
             <RequirementSection
               title={!!req ? req : "Additional Requirements"}
               // TODO: this is a temporary solution for major scraper bug
-              contents={major.requirementGroupMap[req]}
-              warning={warnings.find(w => w.requirementGroup === req)}
+              contents={sortedGroups[req]}
+              warning={warnings.find(w => w.requirementGroup === req)} // validation here :D
               key={index + major.name}
               completedCourses={completedCourseStrings}
               isEditable={isEditable}
