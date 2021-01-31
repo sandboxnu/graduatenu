@@ -29,8 +29,11 @@ import {
   RANGESection,
   Season,
   StatusEnum,
+  ICreditRangeCourse,
 } from "../../../common/types";
 import { sortOnValues } from "./requirementGroupUtils";
+import { flattenRequirements } from "./flattenRequirements";
+
 /*
 CreditRange interface to track the min and max credits for a particular season.
 seasonMax = a number representing the max numebr of credits you can take without over-loading.
@@ -474,6 +477,14 @@ function processRequirement(
         creditHoursNeeded
       );
     }
+    case "CREDITS": {
+      return processICreditRangeCourse(
+        requirement,
+        taken,
+        satisfied,
+        coursesUsed
+      );
+    }
   }
 }
 
@@ -583,6 +594,52 @@ function processICourseRange(
       requirement.ranges
     )})`;
   }
+}
+
+/**
+ * Processes an ICourseRange requirement.
+ * @param requirement the requirement to check
+ * @param taken the Map of courses a student has on their schedule right now
+ * @param satisfied a tracker of the hours satisfied for the top-level requirement.
+ * @param coursesUsed a set of courses which already satisfy some requirement for the major.
+ */
+function processICreditRangeCourse(
+  requirement: ICreditRangeCourse,
+  taken: Map<string, HashableCourse>,
+  satisfied: CreditHourTracker,
+  coursesUsed: Set<string>
+): string | undefined {
+  // requirement is unsatisfied if the number of credits fulfilled within its requirements is within the credit range.
+  let requirementCreditsCompleted: number = 0;
+  const allRequirementCourses = flattenRequirements(requirement.courses);
+
+  //loop through the taken courses and check if it is in one of the subject ranges for this ICourseRange.
+  for (const courseKey of Array.from(taken.keys())) {
+    //check the global map to see if it has not already been used.
+    if (!coursesUsed.has(courseKey)) {
+      let hashableCourse: HashableCourse | undefined = taken.get(courseKey);
+      if (hashableCourse) {
+        if (courseInCourseSet(hashableCourse, allRequirementCourses)) {
+          // use the course
+          satisfied.hoursCompleted += hashableCourse.credits;
+          coursesUsed.add(courseKey);
+          requirementCreditsCompleted += hashableCourse.credits;
+        }
+      }
+    }
+  }
+
+  if (requirementCreditsCompleted < requirement.minCredits) {
+    return `(complete ${requirement.minCredits -
+      requirementCreditsCompleted} credits from ${Array.from(
+      allRequirementCourses
+    ).join(" or ")})`;
+  } else if (requirementCreditsCompleted > requirement.maxCredits) {
+    return `(${requirementCreditsCompleted -
+      requirement.maxCredits} too many credits completed)`;
+  }
+
+  return undefined;
 }
 
 /**
@@ -715,6 +772,24 @@ function courseInSubjectRanges(
   }
 
   return false;
+}
+
+/**
+ * Check if a given HashableCourse is in the given set of IRequiredCourses
+ * @param course the HashableCourse to search for
+ * @param courseSet the set of IRequiredCourses to search within
+ */
+function courseInCourseSet(
+  course: HashableCourse,
+  courseSet: Set<IRequiredCourse>
+): boolean {
+  const searchCourse: IRequiredCourse = {
+    type: "COURSE",
+    classId: parseInt(course.classId),
+    subject: course.subject,
+  };
+
+  return courseSet.has(searchCourse);
 }
 
 /**
