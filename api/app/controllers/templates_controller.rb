@@ -79,6 +79,21 @@ class TemplatesController < ApplicationController
     end
   end
 
+  # finds a plan by id then destroys it, just needs the id in the body
+  def destroy
+    if authorized
+      @template_plan = TemplatePlan.find_by(id: params[:id])
+      if @template_plan
+        @template_plan.destroy
+        render :show
+      else
+        render json: {error: "No such plan."}, status: :unprocessable_entity
+      end
+    else
+      render json: {error: "Unauthorized."}, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def search_params
@@ -86,7 +101,7 @@ class TemplatesController < ApplicationController
   end
 
   def template_plan_params
-    params.require(:template_plan).permit(:name, :major, :coop_cycle, :catalog_year, :course_counter, :folder_id, :folder_name, schedule: {})
+    params.require(:template_plan).permit(:name, :major, :coop_cycle, :concentration, :catalog_year, :course_counter, :folder_id, :folder_name, schedule: {})
   end
 
   #sets the current user

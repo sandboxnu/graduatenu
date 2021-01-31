@@ -85,7 +85,7 @@ export const NewTemplatesPage: React.FC<RouteComponentProps<{}>> = ({
   const [selectedFolderId, setSelectedFolderId] = useState<number | null>(null);
 
   const fetchTemplates = () => {
-    getTemplates(userId)
+    getTemplates(userId, "", 0)
       .then((response: TemplatesAPI) => {
         setFolders(response.templates);
       })
@@ -134,6 +134,7 @@ export const NewTemplatesPage: React.FC<RouteComponentProps<{}>> = ({
       name: name,
       schedule: schedule,
       major: major,
+      concentration: concentration,
       coop_cycle: coopCycle,
       course_counter: courseCounter,
       catalog_year: catalogYear ? Number(catalogYear) : null,

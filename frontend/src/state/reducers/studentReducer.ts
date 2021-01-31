@@ -16,6 +16,7 @@ import {
   setCompletedRequirementsAction,
   setTransferCoursesAction,
   setStudentCatalogYearAction,
+  setStudentConcentrationAction,
 } from "../actions/studentActions";
 import { IUserData } from "../../models/types";
 import { ScheduleCourse } from "../../../../common/types";
@@ -108,6 +109,10 @@ export const studentReducer = (
       }
       case getType(setTransferCoursesAction): {
         draft.student!.transferCourses = action.payload.transferCourses;
+        return draft;
+      }
+      case getType(setStudentConcentrationAction): {
+        draft.student!.concentration = action.payload.concentration;
         return draft;
       }
     }

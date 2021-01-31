@@ -1,13 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { IPlanData, IUserData } from "../../models/types";
+import { IPlanData, ITemplatePlan, IUserData } from "../../models/types";
 import { fetchUser } from "../../services/AdvisorService";
-import { findAllPlansForUser } from "../../services/PlanService";
+import {
+  createPlanForUser,
+  findAllPlansForUser,
+} from "../../services/PlanService";
 import {
   safelyGetActivePlanIdFromState,
   getActivePlanNameFromState,
 } from "../../state";
-import { setUserPlansAction } from "../../state/actions/userPlansActions";
+import {
+  addNewPlanAction,
+  setUserPlansAction,
+} from "../../state/actions/userPlansActions";
 import { AppState } from "../../state/reducers/state";
 import styled from "styled-components";
 import { Avatar, Tooltip, IconButton } from "@material-ui/core";
@@ -19,6 +25,9 @@ import { NonEditableSchedule } from "../../components/Schedule/ScheduleComponent
 import { SwitchPlanList } from "../../components/SwitchPlan/SwitchPlanList";
 import { PlanTitle, ButtonHeader, ScheduleWrapper, Container } from "./Shared";
 import { useHistory, useParams } from "react-router";
+import { AssignTemplateToUserModal } from "./AssignTemplateToUserModal";
+import { alterScheduleToHaveCorrectYears } from "../../utils/schedule-helpers";
+import { deleteTemplatePlan } from "../../services/TemplateService";
 
 const StudentViewContainer = styled.div`
   display: flex;
@@ -69,7 +78,7 @@ const AvatarWrapper = styled.div`
 `;
 
 const StudentInfoTextWrapper = styled.div`
-  height: 25%;
+  height: 30%;
   justify-content: center;
   display: flex;
   flex-direction: column;
@@ -99,7 +108,7 @@ const PlanText = styled.div`
 `;
 const PlanListContainer = styled.div`
   width: 100%;
-  height: 35%;
+  height: 30%;
   overflow: hidden;
   &:hover {
     overflow-y: auto;
@@ -122,6 +131,34 @@ export const StudentView: React.FC = () => {
   const [fetchingStudent, setFetchingStudent] = useState(true);
   const [student, setStudent] = useState<IUserData | null>(null);
   const [noPlans, setNoPlans] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
+
+  const assignTemplate = async (
+    templateData: ITemplatePlan,
+    shouldDelete: boolean
+  ) => {
+    const userId = id;
+    const response = await createPlanForUser(userId, {
+      name: templateData!.name,
+      link_sharing_enabled: false,
+      schedule: alterScheduleToHaveCorrectYears(
+        templateData.schedule,
+        student!.academicYear!,
+        student!.graduationYear!
+      ),
+      catalog_year: templateData!.catalogYear,
+      major: templateData!.major,
+      coop_cycle: templateData!.coopCycle,
+      course_counter: templateData!.courseCounter,
+      concentration: templateData!.concentration,
+    });
+    if (response.error) return;
+    if (shouldDelete) {
+      const deleteResponse = await deleteTemplatePlan(userId, templateData!.id);
+      // error handling for this page (?)
+    }
+    dispatch(addNewPlanAction(response.plan));
+  };
 
   const dispatch = useDispatch();
   const { planName, planId } = useSelector((state: AppState) => ({
@@ -166,7 +203,7 @@ export const StudentView: React.FC = () => {
               <SwitchPlanList />
             </PlanListContainer>
             <ButtonContainer>
-              <RedColorButton onClick={() => {}}>
+              <RedColorButton onClick={() => setOpenModal(true)}>
                 Assign Template
               </RedColorButton>
             </ButtonContainer>
@@ -230,6 +267,11 @@ export const StudentView: React.FC = () => {
         {renderStudentInfo()}
         {renderSchedule()}
       </StudentViewContainer>
+      <AssignTemplateToUserModal
+        isOpen={openModal}
+        closeModal={() => setOpenModal(false)}
+        onClose={assignTemplate}
+      />
     </Container>
   );
 };

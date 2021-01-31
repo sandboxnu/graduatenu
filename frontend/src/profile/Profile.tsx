@@ -18,9 +18,6 @@ import {
   getMajorsFromState,
   getStudentFromState,
   getPlansFromState,
-  getUserCatalogYearFromState,
-  getUserConcentrationFromState,
-  getUserMajorFromState,
 } from "../state";
 import { Major, Schedule } from "../../../common/types";
 import { AppState } from "../state/reducers/state";
@@ -189,6 +186,7 @@ const ProfileComponent: React.FC = () => {
             value={val}
             onChange={(event: React.SyntheticEvent<{}>, value: any) => {
               setMajor(value);
+              setCoopCycle(null);
               setConcentration(null);
               setShowConcentrationError(false);
             }}
@@ -200,7 +198,7 @@ const ProfileComponent: React.FC = () => {
   };
 
   const ProfileCatalogYear = () => {
-    const val = catalogYear != undefined ? String(catalogYear) : "";
+    const val = String(catalogYear || "None selected");
     let majorSet = [
       ...Array.from(new Set(majors.map(maj => maj.yearVersion.toString()))),
     ];
@@ -216,9 +214,9 @@ const ProfileComponent: React.FC = () => {
             )}
             value={val}
             onChange={(event: React.SyntheticEvent<{}>, value: any) => {
-              setMajor("");
-              setCoopCycle("");
-              setConcentration("");
+              setMajor(null);
+              setCoopCycle(null);
+              setConcentration(null);
               setCatalogYear(Number(value));
             }}
           />
@@ -251,7 +249,7 @@ const ProfileComponent: React.FC = () => {
   };
 
   const ProfileCoop = () => {
-    const val = !!coopCycle ? coopCycle : "None Selected";
+    const val = coopCycle || "None Selected";
     return (
       <ProfileEntryContainer>
         <ItemTitle> Co-op Cycle </ItemTitle>
@@ -301,15 +299,10 @@ const ProfileAdvisor = (props: any) => {
   const save = () => {
     setEdit(false);
     batch(() => {
-      dispatch(setStudentMajorAction(major || ""));
+      dispatch(setStudentMajorAction(major));
       dispatch(setStudentCatalogYearAction(catalogYear));
       dispatch(setStudentConcentrationAction(concentration));
-      if (coopCycle !== "None Selected") {
-        dispatch(setStudentCoopCycleAction(""));
-      } else {
-        dispatch(setStudentCoopCycleAction(coopCycle || ""));
-      }
-
+      dispatch(setStudentCoopCycleAction(coopCycle));
       dispatch(setStudentGraduationYearAction(gradYear));
     });
 
@@ -322,11 +315,9 @@ const ProfileAdvisor = (props: any) => {
 
     const updateUserData: IUpdateUserData = {
       graduation_year: gradYear,
-      major: major || null,
-      coop_cycle:
-        coopCycle != undefined && coopCycle !== "None Selected"
-          ? coopCycle
-          : "",
+      major: major,
+      coop_cycle: coopCycle,
+      concentration: concentration,
       catalog_year: catalogYear,
     };
     updateUser(updateUserObj, updateUserData);

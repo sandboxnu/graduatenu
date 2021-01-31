@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { EditableSchedule } from "../../components/Schedule/ScheduleComponents";
 import { useHistory, useParams } from "react-router";
-import { fetchTemplate } from "../../services/TemplateService";
+import {
+  deleteTemplatePlan,
+  fetchTemplate,
+} from "../../services/TemplateService";
 import { useSelector, shallowEqual, useDispatch } from "react-redux";
-import { getAdvisorUserIdFromState } from "../../state";
+import { getActivePlanFromState, getAdvisorUserIdFromState } from "../../state";
 import { AppState } from "../../state/reducers/state";
 import { addNewPlanAction } from "../../state/actions/userPlansActions";
 import { LoadingScreen } from "../../components/common/FullPageLoading";
@@ -12,6 +15,11 @@ import { AutoSavePlan } from "../../home/AutoSavePlan";
 import { WhiteColorButton } from "../../components/common/ColoredButtons";
 import { Close as CloseIcon } from "@material-ui/icons";
 import { IconButton } from "@material-ui/core";
+import { AssignUserToTemplateModal } from "./AssignUserToTemplateModal";
+import { ITemplatePlan } from "../../models/types";
+import { createPlanForUser } from "../../services/PlanService";
+import { fetchUser, IAbrStudent } from "../../services/AdvisorService";
+import { alterScheduleToHaveCorrectYears } from "../../utils";
 
 const TitleText = styled.div`
   font-family: Roboto;
@@ -38,16 +46,65 @@ export const TemplateBuilderPage = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const routeParams = useParams<ParamProps>();
+  const [openModal, setOpenModal] = useState(false);
   const [loading, setLoading] = useState(true);
   const [loadingError, setLoadingError] = useState<string | null>(null);
   const [templateName, setTemplateName] = useState<string | null>(null);
+  const [templateData, setTemplateData] = useState<ITemplatePlan | null>(null);
   const id = Number(routeParams.templateId);
-  const { userId } = useSelector(
+  const { userId, activePlan } = useSelector(
     (state: AppState) => ({
       userId: getAdvisorUserIdFromState(state),
+      activePlan: getActivePlanFromState(state),
     }),
     shallowEqual
   );
+
+  const assignTemplate = async (
+    student: IAbrStudent,
+    shouldDelete: boolean
+  ) => {
+    try {
+      const userId = student.id;
+      const userInfo = await fetchUser(userId);
+      if (userInfo.error) return;
+      const schedule =
+        userInfo.user.graduationYear && userInfo.user.academicYear
+          ? alterScheduleToHaveCorrectYears(
+              JSON.parse(JSON.stringify(activePlan.schedule)),
+              userInfo.user.academicYear,
+              userInfo.user.graduationYear
+            )
+          : activePlan.schedule;
+
+      const planResponse = await createPlanForUser(userId, {
+        name: templateData!.name,
+        link_sharing_enabled: false,
+        schedule: schedule,
+        catalog_year: templateData!.catalogYear,
+        major: templateData!.major,
+        coop_cycle: templateData!.coopCycle,
+        course_counter: templateData!.courseCounter,
+        concentration: templateData!.concentration,
+      });
+      if (planResponse.error) {
+        setLoadingError("Something went wrong with assigning this plan");
+        return;
+      } else if (shouldDelete) {
+        const deleteResponse = await deleteTemplatePlan(
+          userId,
+          templateData!.id
+        );
+        if (!deleteResponse.error) {
+          setLoadingError("Something went wrong with deleting the template");
+          return;
+        }
+      }
+      history.push("/advisor/templates");
+    } catch (error) {
+      setLoadingError("Something went wrong");
+    }
+  };
 
   useEffect(() => {
     fetchTemplate(userId, id)
@@ -55,6 +112,7 @@ export const TemplateBuilderPage = () => {
         if (response.error) {
           setLoadingError(response.error);
         } else if (response.templatePlan.schedule) {
+          setTemplateData(response.templatePlan);
           dispatch(addNewPlanAction(response.templatePlan));
           setTemplateName(response.templatePlan.name);
         } else {
@@ -82,7 +140,10 @@ export const TemplateBuilderPage = () => {
       <TitleText>{templateName}</TitleText>
       <ButtonContainer>
         <AutoSavePlan isTemplate />
-        <WhiteColorButton style={{ margin: 10 }}>
+        <WhiteColorButton
+          style={{ margin: 10 }}
+          onClick={() => setOpenModal(true)}
+        >
           Assign Template
         </WhiteColorButton>
         <IconButton
@@ -92,6 +153,11 @@ export const TemplateBuilderPage = () => {
           <CloseIcon />
         </IconButton>
       </ButtonContainer>
+      <AssignUserToTemplateModal
+        isOpen={openModal}
+        closeModal={() => setOpenModal(false)}
+        onClose={assignTemplate}
+      />
       <EditableSchedule collapsibleYears sidebarPresent></EditableSchedule>
     </>
   );

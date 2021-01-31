@@ -67,6 +67,7 @@ const SaveInParentConcentrationDropdown: React.FC<SaveInParentConcentrationDropd
     }
   }, [concentration]);
 
+  // clear the error case if major cleared
   useEffect(() => {
     if (setError && !major) {
       setError(false);
