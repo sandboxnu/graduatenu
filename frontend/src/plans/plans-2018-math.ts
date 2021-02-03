@@ -16,6 +16,7 @@ export const mathPlans: Schedule[] = [
               subject: "MATH",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Calculus 1 for Science and Engineering",
               coreqs: {
                 type: "and",
@@ -31,6 +32,7 @@ export const mathPlans: Schedule[] = [
               subject: "MATH",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Introduction to Mathematical Reasoning",
               coreqs: {
                 type: "and",
@@ -46,6 +48,7 @@ export const mathPlans: Schedule[] = [
               subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Elective",
             },
             {
@@ -53,6 +56,7 @@ export const mathPlans: Schedule[] = [
               subject: "PHYS",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "",
             },
             {
@@ -60,6 +64,7 @@ export const mathPlans: Schedule[] = [
               subject: "PHYS",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              semester: null,
               name: "",
             },
             {
@@ -67,6 +72,7 @@ export const mathPlans: Schedule[] = [
               subject: "MATH",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              semester: null,
               name: "Mathematics at Northeastern",
               coreqs: {
                 type: "and",
@@ -90,6 +96,7 @@ export const mathPlans: Schedule[] = [
               subject: "MATH",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Calculus 2 for Science and Engineering",
               coreqs: {
                 type: "and",
@@ -105,6 +112,7 @@ export const mathPlans: Schedule[] = [
               subject: "PHYS",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Physics 2",
               coreqs: {
                 type: "and",
@@ -161,6 +169,7 @@ export const mathPlans: Schedule[] = [
               subject: "PHYS",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              semester: null,
               name: "Lab for PHYS 1165 (HON)",
               coreqs: {
                 type: "and",
@@ -185,6 +194,7 @@ export const mathPlans: Schedule[] = [
               subject: "ENGW",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "First-Year Writing",
               coreqs: {
                 type: "and",
@@ -200,6 +210,7 @@ export const mathPlans: Schedule[] = [
               subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Elective",
             },
           ],
@@ -233,6 +244,7 @@ export const mathPlans: Schedule[] = [
               subject: "MATH",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Calculus 3 for Science and Engineering",
               coreqs: {
                 type: "and",
@@ -248,6 +260,7 @@ export const mathPlans: Schedule[] = [
               subject: "MATH",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Linear Algebra",
               coreqs: {
                 type: "and",
@@ -280,6 +293,7 @@ export const mathPlans: Schedule[] = [
               subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Elective",
             },
             {
@@ -287,6 +301,7 @@ export const mathPlans: Schedule[] = [
               subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Elective",
             },
           ],
@@ -302,6 +317,7 @@ export const mathPlans: Schedule[] = [
               subject: "MATH",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Differential Equations and Linear Algebra for Engineering",
               coreqs: {
                 type: "and",
@@ -317,6 +333,7 @@ export const mathPlans: Schedule[] = [
               subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Elective",
             },
             {
@@ -324,6 +341,7 @@ export const mathPlans: Schedule[] = [
               subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Elective",
             },
             {
@@ -331,6 +349,7 @@ export const mathPlans: Schedule[] = [
               subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Elective",
             },
             {
@@ -338,6 +357,7 @@ export const mathPlans: Schedule[] = [
               subject: "EESC",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              semester: null,
               name: "Professional Development for Co-op",
               coreqs: {
                 type: "and",
@@ -386,6 +406,7 @@ export const mathPlans: Schedule[] = [
               subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "MATH elective",
             },
             {
@@ -393,6 +414,7 @@ export const mathPlans: Schedule[] = [
               subject: "ENGW",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Interdiscip Adv Writing - SOL",
               coreqs: {
                 type: "and",
@@ -427,6 +449,7 @@ export const mathPlans: Schedule[] = [
               subject: "MATH",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Probability and Statistics",
               coreqs: {
                 type: "and",
@@ -455,6 +478,7 @@ export const mathPlans: Schedule[] = [
               subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Upper-division elective",
             },
             {
@@ -462,6 +486,7 @@ export const mathPlans: Schedule[] = [
               subject: "MATH",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              semester: null,
               name: "Co-op and Experiential Learning Reflection Seminar 1",
               coreqs: {
                 type: "and",
@@ -485,6 +510,7 @@ export const mathPlans: Schedule[] = [
               subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "MATH elective",
             },
             {
@@ -492,6 +518,7 @@ export const mathPlans: Schedule[] = [
               subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Elective",
             },
           ],
@@ -525,6 +552,7 @@ export const mathPlans: Schedule[] = [
               subject: "MATH",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Real Analysis",
               coreqs: {
                 type: "and",
@@ -572,6 +600,7 @@ export const mathPlans: Schedule[] = [
               subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "MATH elective",
             },
             {
@@ -579,6 +608,7 @@ export const mathPlans: Schedule[] = [
               subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Elective",
             },
             {
@@ -586,6 +616,7 @@ export const mathPlans: Schedule[] = [
               subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Upper-division elective",
             },
             {
@@ -593,6 +624,7 @@ export const mathPlans: Schedule[] = [
               subject: "MATH",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              semester: null,
               name: "",
             },
           ],
@@ -608,6 +640,7 @@ export const mathPlans: Schedule[] = [
               subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "MATH elective",
             },
             {
@@ -615,6 +648,7 @@ export const mathPlans: Schedule[] = [
               subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Elective",
             },
           ],
@@ -648,6 +682,7 @@ export const mathPlans: Schedule[] = [
               subject: "MATH",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Group Theory",
               coreqs: {
                 type: "and",
@@ -672,6 +707,7 @@ export const mathPlans: Schedule[] = [
               subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "MATH elective",
             },
             {
@@ -679,6 +715,7 @@ export const mathPlans: Schedule[] = [
               subject: "MATH",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Applied Mathematics Capstone",
               coreqs: {
                 type: "and",
@@ -699,6 +736,7 @@ export const mathPlans: Schedule[] = [
               subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Upper-division elective",
             },
           ],
@@ -737,6 +775,7 @@ export const mathPlans: Schedule[] = [
               subject: "PHYS",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "",
             },
             {
@@ -744,6 +783,7 @@ export const mathPlans: Schedule[] = [
               subject: "PHYS",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              semester: null,
               name: "",
             },
             {
@@ -751,6 +791,7 @@ export const mathPlans: Schedule[] = [
               subject: "MATH",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Introduction to Mathematical Reasoning",
               coreqs: {
                 type: "and",
@@ -766,6 +807,7 @@ export const mathPlans: Schedule[] = [
               subject: "MATH",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Calculus 1 for Science and Engineering",
               coreqs: {
                 type: "and",
@@ -781,6 +823,7 @@ export const mathPlans: Schedule[] = [
               subject: "MATH",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              semester: null,
               name: "Mathematics at Northeastern",
               coreqs: {
                 type: "and",
@@ -796,6 +839,7 @@ export const mathPlans: Schedule[] = [
               subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Elective",
             },
           ],
@@ -811,6 +855,7 @@ export const mathPlans: Schedule[] = [
               subject: "MATH",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Calculus 2 for Science and Engineering",
               coreqs: {
                 type: "and",
@@ -826,6 +871,7 @@ export const mathPlans: Schedule[] = [
               subject: "PHYS",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Physics 2",
               coreqs: {
                 type: "and",
@@ -882,6 +928,7 @@ export const mathPlans: Schedule[] = [
               subject: "PHYS",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              semester: null,
               name: "Lab for PHYS 1165 (HON)",
               coreqs: {
                 type: "and",
@@ -906,6 +953,7 @@ export const mathPlans: Schedule[] = [
               subject: "ENGW",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "First-Year Writing",
               coreqs: {
                 type: "and",
@@ -921,6 +969,7 @@ export const mathPlans: Schedule[] = [
               subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Elective",
             },
           ],
@@ -954,6 +1003,7 @@ export const mathPlans: Schedule[] = [
               subject: "MATH",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Calculus 3 for Science and Engineering",
               coreqs: {
                 type: "and",
@@ -969,6 +1019,7 @@ export const mathPlans: Schedule[] = [
               subject: "MATH",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Linear Algebra",
               coreqs: {
                 type: "and",
@@ -1001,6 +1052,7 @@ export const mathPlans: Schedule[] = [
               subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Elective",
             },
             {
@@ -1008,6 +1060,7 @@ export const mathPlans: Schedule[] = [
               subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Elective",
             },
             {
@@ -1015,6 +1068,7 @@ export const mathPlans: Schedule[] = [
               subject: "EESC",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              semester: null,
               name: "Professional Development for Co-op",
               coreqs: {
                 type: "and",
@@ -1063,6 +1117,7 @@ export const mathPlans: Schedule[] = [
               subject: "MATH",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Differential Equations and Linear Algebra for Engineering",
               coreqs: {
                 type: "and",
@@ -1078,6 +1133,7 @@ export const mathPlans: Schedule[] = [
               subject: "MATH",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Group Theory",
               coreqs: {
                 type: "and",
@@ -1102,6 +1158,7 @@ export const mathPlans: Schedule[] = [
               subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Elective",
             },
             {
@@ -1109,6 +1166,7 @@ export const mathPlans: Schedule[] = [
               subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Elective",
             },
             {
@@ -1116,6 +1174,7 @@ export const mathPlans: Schedule[] = [
               subject: "MATH",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              semester: null,
               name: "Co-op and Experiential Learning Reflection Seminar 1",
               coreqs: {
                 type: "and",
@@ -1153,6 +1212,7 @@ export const mathPlans: Schedule[] = [
               subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "MATH elective",
             },
             {
@@ -1160,6 +1220,7 @@ export const mathPlans: Schedule[] = [
               subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Elective",
             },
           ],
@@ -1179,6 +1240,7 @@ export const mathPlans: Schedule[] = [
               subject: "ENGW",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Interdiscip Adv Writing - SOL",
               coreqs: {
                 type: "and",
@@ -1213,6 +1275,7 @@ export const mathPlans: Schedule[] = [
               subject: "MATH",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Probability and Statistics",
               coreqs: {
                 type: "and",
@@ -1241,6 +1304,7 @@ export const mathPlans: Schedule[] = [
               subject: "MATH",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              semester: null,
               name: "",
             },
             {
@@ -1248,6 +1312,7 @@ export const mathPlans: Schedule[] = [
               subject: "MATH",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Real Analysis",
               coreqs: {
                 type: "and",
@@ -1295,6 +1360,7 @@ export const mathPlans: Schedule[] = [
               subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Upper-division elective",
             },
           ],
@@ -1324,6 +1390,7 @@ export const mathPlans: Schedule[] = [
               subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "MATH elective",
             },
             {
@@ -1331,6 +1398,7 @@ export const mathPlans: Schedule[] = [
               subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Elective",
             },
           ],
@@ -1350,6 +1418,7 @@ export const mathPlans: Schedule[] = [
               subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "MATH elective",
             },
             {
@@ -1357,6 +1426,7 @@ export const mathPlans: Schedule[] = [
               subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "MATH elective",
             },
             {
@@ -1364,6 +1434,7 @@ export const mathPlans: Schedule[] = [
               subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Upper-division elective",
             },
             {
@@ -1371,6 +1442,7 @@ export const mathPlans: Schedule[] = [
               subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Elective",
             },
           ],
@@ -1386,6 +1458,7 @@ export const mathPlans: Schedule[] = [
               subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Elective",
             },
             {
@@ -1393,6 +1466,7 @@ export const mathPlans: Schedule[] = [
               subject: "MATH",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Applied Mathematics Capstone",
               coreqs: {
                 type: "and",
@@ -1413,6 +1487,7 @@ export const mathPlans: Schedule[] = [
               subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Upper-division elective",
             },
             {
@@ -1420,6 +1495,7 @@ export const mathPlans: Schedule[] = [
               subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "MATH elective",
             },
           ],

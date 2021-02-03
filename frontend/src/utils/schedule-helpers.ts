@@ -1,11 +1,11 @@
 import {
+  CourseWarning,
   DNDSchedule,
-  DNDScheduleYear,
   DNDScheduleCourse,
   DNDScheduleTerm,
+  DNDScheduleYear,
   SeasonEnum,
   StatusEnum,
-  CourseWarning,
 } from "../models/types";
 import { Schedule, ScheduleCourse, SeasonWord } from "../../../common/types";
 import { findExamplePlanFromCoopCycle } from "./plan-helpers";
@@ -50,6 +50,28 @@ export function generateInitialSchedule(
     alterScheduleToHaveCorrectYears(schedule, academicYear, graduationYear),
     courseCounter,
   ];
+}
+
+export function generateBlankCompletedCourseSchedule(
+  academicYear: number,
+  graduationYear: number,
+  completedCourseSchedule: DNDSchedule,
+  major: string,
+  coopCycle: string,
+  allPlans: Record<string, Schedule[]>
+) {
+  const [schedule, counter] = generateBlankCoopPlan(major, coopCycle, allPlans);
+  const yearCorrectedSchedule = alterScheduleToHaveCorrectYears(
+    schedule,
+    academicYear,
+    graduationYear
+  );
+
+  completedCourseSchedule.years.forEach(year => {
+    yearCorrectedSchedule.yearMap[year] = completedCourseSchedule.yearMap[year];
+  });
+
+  return completedCourseSchedule;
 }
 
 export function generateYearlessSchedule(
@@ -117,6 +139,61 @@ export function generateInitialScheduleNoCoopCycle(
     alterScheduleToHaveCorrectYears(schedule, academicYear, graduationYear),
     courseCounter,
   ];
+}
+
+export function generateBlankCompletedCourseScheduleNoCoopCycle(
+  academicYear: number,
+  graduationYear: number,
+  completedCourseSchedule: DNDSchedule
+) {
+  const currentCalendarYear = new Date().getFullYear();
+  const currentYear =
+    new Date().getMonth() <= 3 ? currentCalendarYear : currentCalendarYear + 1;
+  const numYearsInSchool = graduationYear - currentYear + academicYear;
+  const yearsTaken = completedCourseSchedule.years.length;
+  const yearsLeft = numYearsInSchool - yearsTaken;
+
+  const mostRecentYear = completedCourseSchedule.years[yearsTaken - 1];
+  const completedCourseScheduleCopy = JSON.parse(
+    JSON.stringify(completedCourseSchedule)
+  ) as Schedule;
+  for (let i = 1; i <= yearsLeft; i++) {
+    const currentYear = mostRecentYear + i;
+    completedCourseScheduleCopy.yearMap[currentYear] = {
+      year: mostRecentYear + i,
+      fall: {
+        season: "FL",
+        year: currentYear,
+        termId: Number(String(currentYear) + "10"),
+        status: "CLASSES",
+        classes: [],
+      },
+      spring: {
+        season: "SP",
+        year: currentYear,
+        termId: Number(String(currentYear) + "30"),
+        status: "CLASSES",
+        classes: [],
+      },
+      summer1: {
+        season: "S1",
+        year: currentYear,
+        termId: Number(String(currentYear) + "40"),
+        status: "CLASSES",
+        classes: [],
+      },
+      summer2: {
+        season: "S2",
+        year: currentYear,
+        termId: Number(String(currentYear) + "60"),
+        status: "CLASSES",
+        classes: [],
+      },
+      isSummerFull: false,
+    };
+  }
+
+  return convertToDNDSchedule(completedCourseScheduleCopy, 0)[0];
 }
 
 export function generateInitialScheduleFromExistingPlan(
@@ -447,6 +524,7 @@ export function findCourseWarnings(
     return result;
   }
 }
+
 /*
  *  Determines if this course is in the given term
  * @param courseToAdd the course that is being checked

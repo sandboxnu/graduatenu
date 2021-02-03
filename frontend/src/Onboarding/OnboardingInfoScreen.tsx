@@ -440,7 +440,7 @@ class OnboardingScreenComponent extends React.Component<
             <Link
               to={{
                 pathname: !!major
-                  ? "/completedCourses"
+                  ? "/transferableCredits"
                   : "/transferableCredits",
               }}
               onClick={onClick}
