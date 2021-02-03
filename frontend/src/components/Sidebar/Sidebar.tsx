@@ -19,6 +19,7 @@ import {
 import { connect, useSelector } from "react-redux";
 import { findMajorFromName } from "../../utils/plan-helpers";
 import { ScrollWrapper } from "../../Onboarding/GenericOnboarding";
+import { NORTHEASTERN_RED } from "../../constants";
 
 const Container = styled.div`
   display: flex;
@@ -42,7 +43,8 @@ const CreditTitle = styled.p<any>`
   margin-right: 12px;
   margin-left: 4px;
   margin-bottom: 6px;
-  color: ${props => (props.isGreen ? "green " : "red")};
+  color: ${props =>
+    props.isGreen ? "rgba(21,116,62,0.68)" : NORTHEASTERN_RED};
 `;
 
 interface SidebarProps {
