@@ -18,7 +18,11 @@ import {
 import { SaveInParentConcentrationDropdown } from "../../components/ConcentrationDropdown";
 import { findMajorFromName } from "../../utils/plan-helpers";
 import { IFolderData } from "../../models/types";
-import { createTemplate, getTemplates } from "../../services/TemplateService";
+import {
+  createTemplate,
+  getTemplates,
+  TemplatesAPI,
+} from "../../services/TemplateService";
 import {
   getAdvisorUserIdFromState,
   getMajorsFromState,
@@ -242,13 +246,12 @@ export const NewTemplatesPage: React.FC<RouteComponentProps<{}>> = ({
   const [selectedFolderId, setSelectedFolderId] = useState<number | null>(null);
   const [newFolderName, setNewFolderName] = useState<string>("");
 
-  const fetchTemplates = async () => {
-    try {
-      const { templates } = await getTemplates(userId, "", 0);
-      setFolders(templates);
-    } catch (e) {
-      console.log(e);
-    }
+  const fetchTemplates = () => {
+    getTemplates(userId, "", 0)
+      .then((response: TemplatesAPI) => {
+        setFolders(response.templates);
+      })
+      .catch((err: any) => console.log(err));
   };
 
   useEffect(() => {
