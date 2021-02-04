@@ -47,6 +47,7 @@ import {
   SnackbarAlert,
   ALERT_STATUS,
 } from "../components/common/SnackbarAlert";
+import { NORTHEASTERN_RED } from "../constants";
 
 const PlanPopper = styled(Popper)<any>`
   margin-top: 4px;
@@ -106,6 +107,15 @@ const SetButton = styled(Button)<any>`
   background: #e0e0e0;
   font-weight: normal;
   float: right;
+`;
+
+const Divider = styled.hr`
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 1em 0;
+  padding: 0;
 `;
 
 interface ReduxStoreEditPlanProps {
@@ -405,6 +415,7 @@ export class EditPlanPopperComponent extends React.Component<
               <StandingText>
                 {this.props.creditsTaken + " Credits Completed"}
               </StandingText>
+              <Divider />
               {this.renderCatalogYearDropdown()}
               {!!this.props.plan.catalogYear && this.renderMajorDropDown()}
               <SaveOnChangeConcentrationDropdown
