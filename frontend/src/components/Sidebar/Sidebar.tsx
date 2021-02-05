@@ -1,6 +1,6 @@
 import React from "react";
 import { DNDSchedule } from "../../models/types";
-import { Major, ScheduleCourse } from "../../../../common/types";
+import { Concentration, Major, ScheduleCourse } from "../../../../common/types";
 import styled from "styled-components";
 import { RequirementSection } from ".";
 import {
@@ -15,6 +15,7 @@ import {
   getActivePlanScheduleFromState,
   safelyGetTransferCoursesFromState,
   getTakenCreditsFromState,
+  safelyGetActivePlanConcentrationFromState,
 } from "../../state";
 import { connect, useSelector } from "react-redux";
 import { findMajorFromName } from "../../utils/plan-helpers";
@@ -47,6 +48,10 @@ const CreditTitle = styled.p<any>`
     props.isGreen ? "rgba(21,116,62,0.68)" : NORTHEASTERN_RED};
 `;
 
+const ConcentrationTitle = styled.p`
+  margin-left: 4px;
+`;
+
 interface SidebarProps {
   isEditable: boolean;
 }
@@ -58,11 +63,44 @@ interface MajorSidebarProps {
   isEditable: boolean;
 }
 
+interface ConcentrationProps {
+  readonly major: Major;
+}
+
 const NoMajorSidebarComponent: React.FC = () => {
   return (
     <Container>
       <MajorTitle>No major selected</MajorTitle>
     </Container>
+  );
+};
+q;
+const ConcentrationComponent: React.FC<ConcentrationProps> = ({ major }) => {
+  const userConcentration = useSelector((state: AppState) =>
+    safelyGetActivePlanConcentrationFromState(state)
+  );
+
+  // TODO: create a selector for this within index, i.e getConcentrationObjFromName
+  const concentrationObj = major.concentrations.concentrationOptions.find(
+    (concentration: Concentration) => concentration.name === userConcentration
+  );
+
+  return (
+    <div>
+      <ConcentrationTitle>{userConcentration}</ConcentrationTitle>
+      {concentrationObj?.requirementGroups?.map((req, index) => {
+        return (
+          <RequirementSection
+            title={!!req ? req : "Additional Requirements"}
+            // TODO: this is a temporary solution for major scraper bug
+            contents={major.requirementGroupMap[req]}
+            key={index + major.name}
+            completedCourses={[]}
+            isEditable={false}
+          />
+        );
+      })}
+    </div>
   );
 };
 
@@ -84,6 +122,7 @@ const MajorSidebarComponent: React.FC<MajorSidebarProps> = ({
     <Container>
       <ScrollWrapper>
         <MajorTitle>{major.name}</MajorTitle>
+        <ConcentrationComponent major={major}></ConcentrationComponent>
         <CreditTitle
           isGreen={
             getCreditsTakenInSchedule(schedule) >= major.totalCreditsRequired
