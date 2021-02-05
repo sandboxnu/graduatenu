@@ -15,6 +15,7 @@ import {
   getActivePlanScheduleFromState,
   safelyGetTransferCoursesFromState,
   getTakenCreditsFromState,
+  getActivePlanCoopCycleFromState,
 } from "../../state";
 import { connect, useSelector } from "react-redux";
 import { findMajorFromName } from "../../utils/plan-helpers";
@@ -34,6 +35,16 @@ const MajorTitle = styled.p`
   line-height: 24px;
   margin-right: 12px;
   margin-left: 4px;
+  margin-bottom: -13px;
+`;
+
+const CoopCycleTitle = styled.p`
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 24px;
+  margin-right: 12px;
+  margin-left: 4px;
+  margin-bottom: -10px;
 `;
 
 const CreditTitle = styled.p<any>`
@@ -53,6 +64,7 @@ interface SidebarProps {
 
 interface MajorSidebarProps {
   schedule: DNDSchedule;
+  coopCycle: string | null;
   major: Major;
   transferCourses: ScheduleCourse[];
   isEditable: boolean;
@@ -68,6 +80,7 @@ const NoMajorSidebarComponent: React.FC = () => {
 
 const MajorSidebarComponent: React.FC<MajorSidebarProps> = ({
   schedule,
+  coopCycle,
   major,
   transferCourses,
   isEditable,
@@ -84,6 +97,7 @@ const MajorSidebarComponent: React.FC<MajorSidebarProps> = ({
     <Container>
       <ScrollWrapper>
         <MajorTitle>{major.name}</MajorTitle>
+        {coopCycle ? <CoopCycleTitle>{coopCycle}</CoopCycleTitle> : null}
         <CreditTitle
           isGreen={
             getCreditsTakenInSchedule(schedule) >= major.totalCreditsRequired
@@ -112,10 +126,11 @@ const MajorSidebarComponent: React.FC<MajorSidebarProps> = ({
 };
 
 export const Sidebar: React.FC<SidebarProps> = props => {
-  const { schedule, major, transferCourses } = useSelector(
+  const { schedule, major, transferCourses, coopCycle } = useSelector(
     (state: AppState) => ({
       major: getActivePlanMajorFromState(state),
       schedule: getActivePlanScheduleFromState(state),
+      coopCycle: getActivePlanCoopCycleFromState(state),
       transferCourses: safelyGetTransferCoursesFromState(state),
     })
   );
@@ -136,6 +151,7 @@ export const Sidebar: React.FC<SidebarProps> = props => {
         <MajorSidebarComponent
           schedule={schedule}
           major={majorObj}
+          coopCycle={coopCycle}
           transferCourses={transferCourses}
           isEditable={props.isEditable}
         />

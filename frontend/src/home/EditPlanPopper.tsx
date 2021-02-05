@@ -47,7 +47,9 @@ import {
   SnackbarAlert,
   ALERT_STATUS,
 } from "../components/common/SnackbarAlert";
-import { NORTHEASTERN_RED } from "../constants";
+import IconButton from "@material-ui/core/IconButton";
+import DeleteIcon from "@material-ui/icons/Delete";
+import EditIcon from "@material-ui/icons/Edit";
 
 const PlanPopper = styled(Popper)<any>`
   margin-top: 4px;
@@ -149,6 +151,7 @@ type Props = ReduxStoreEditPlanProps & ReduxDispatchEditPlanProps;
 interface EditPlanPopperState {
   anchorEl: null | HTMLElement;
   alertStatus: ALERT_STATUS;
+  name: string;
 }
 
 export class EditPlanPopperComponent extends React.Component<
@@ -160,6 +163,7 @@ export class EditPlanPopperComponent extends React.Component<
     this.state = {
       anchorEl: null,
       alertStatus: ALERT_STATUS.None,
+      name: props.name,
     };
   }
 
@@ -177,6 +181,26 @@ export class EditPlanPopperComponent extends React.Component<
         anchorEl: null,
       });
     }
+  }
+
+  renderName() {
+    return (
+      <TextField
+        style={{ marginTop: "10px", marginBottom: "5px" }}
+        id="outlined-basic"
+        label="Plan Name"
+        variant="outlined"
+        onChange={this.onChangeName.bind(this)}
+        defaultValue={this.props.plan.name}
+        fullWidth
+      />
+    );
+  }
+
+  onChangeName(e: any) {
+    this.setState({
+      name: e.target.value,
+    });
   }
 
   /**
@@ -286,7 +310,7 @@ export class EditPlanPopperComponent extends React.Component<
           this.props.plan.catalogYear ? this.props.plan.catalogYear + "" : ""
         }
         onChange={this.onChangeCatalogYear.bind(this)}
-        disabled={this.props.plan.isCurrentlyBeingEditedByAdvisor}
+        disabled={true}
       />
     );
   }
@@ -328,7 +352,7 @@ export class EditPlanPopperComponent extends React.Component<
           onClick={() => this.onClearSchedule()}
           disabled={this.props.plan.isCurrentlyBeingEditedByAdvisor}
         >
-          Clear Schedule
+          Clear All Classes
         </SetButton>
       </ButtonContainer>
     );
@@ -416,6 +440,7 @@ export class EditPlanPopperComponent extends React.Component<
                 {this.props.creditsTaken + " Credits Completed"}
               </StandingText>
               <Divider />
+              {this.renderName()}
               {this.renderCatalogYearDropdown()}
               {!!this.props.plan.catalogYear && this.renderMajorDropDown()}
               <SaveOnChangeConcentrationDropdown
