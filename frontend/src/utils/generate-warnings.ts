@@ -594,6 +594,7 @@ function processICourseRange(
 
 /**
  * Processes an ICourseRange requirement.
+ *
  * @param requirement the requirement to check
  * @param taken the Map of courses a student has on their schedule right now
  * @param satisfied a tracker of the hours satisfied for the top-level requirement.
@@ -605,18 +606,18 @@ function processICreditRangeCourse(
   satisfied: CreditHourTracker,
   coursesUsed: Set<string>
 ): string | undefined {
-  // requirement is unsatisfied if the number of credits fulfilled within its requirements is within the credit range.
+  // Requirement is unsatisfied if the number of credits fulfilled within its requirements is within the credit range.
   let requirementCreditsCompleted: number = 0;
   const allRequirementCourses = flattenRequirements(requirement.courses);
 
-  //loop through the taken courses and check if it is in one of the subject ranges for this ICourseRange.
+  // Loop through the taken courses and check if it is one of this ICreditRangeCourse's nested courses.
   for (const courseKey of Array.from(taken.keys())) {
-    //check the global map to see if it has not already been used.
+    // Check the global map to see if it has not already been used.
     if (!coursesUsed.has(courseKey)) {
       let hashableCourse: HashableCourse | undefined = taken.get(courseKey);
       if (hashableCourse) {
         if (courseInCourseSet(hashableCourse, allRequirementCourses)) {
-          // use the course
+          // Use the course
           satisfied.hoursCompleted += hashableCourse.credits;
           coursesUsed.add(courseKey);
           requirementCreditsCompleted += hashableCourse.credits;
@@ -626,13 +627,19 @@ function processICreditRangeCourse(
   }
 
   if (requirementCreditsCompleted < requirement.minCredits) {
+    const untakenClasses = Array.from(allRequirementCourses).filter(
+      (course: IRequiredCourse) =>
+        !Array.from(taken.keys()).includes(courseCode(course))
+    );
+    const formattedUntakenClasses = untakenClasses.map(courseCode).join(", ");
+
     return `(complete ${requirement.minCredits -
-      requirementCreditsCompleted} credits from ${Array.from(
-      allRequirementCourses
-    ).join(" or ")})`;
+      requirementCreditsCompleted} credits from ${formattedUntakenClasses}`;
   } else if (requirementCreditsCompleted > requirement.maxCredits) {
     return `(${requirementCreditsCompleted -
-      requirement.maxCredits} too many credits completed)`;
+      requirement.maxCredits} credits taken over limit of ${
+      requirement.maxCredits
+    })`;
   }
 
   return undefined;
