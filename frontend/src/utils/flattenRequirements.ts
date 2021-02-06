@@ -1,10 +1,12 @@
 import { IRequiredCourse, Requirement } from "../../../common/types";
 
 /**
- * Given a Requirement, accumulate an array of all of its unique courses.
- * @param req the Requirement to flatten
+ * Accumulate a Set of all unique courses within a given Requirement.
+ * NOTE: This currently does not work for ICourseRanges.
+ *
+ * @param req the Requirement to retrieve the courses of
  */
-const flattenRequirementCourses = (req: Requirement): Set<IRequiredCourse> => {
+const getCoursesInRequirement = (req: Requirement): Set<IRequiredCourse> => {
   switch (req.type) {
     case "CREDITS":
     case "OR":
@@ -12,7 +14,7 @@ const flattenRequirementCourses = (req: Requirement): Set<IRequiredCourse> => {
       return flattenRequirements(req.courses);
     }
     case "RANGE": {
-      // COMBAK: Refactor this flattener to also return a list of "ranges"
+      // TODO: Implement a solution for accumulating range courses as well.
       return new Set();
     }
     case "COURSE": {
@@ -22,18 +24,15 @@ const flattenRequirementCourses = (req: Requirement): Set<IRequiredCourse> => {
 };
 
 /**
- * Given an array of Requirements, accumulate an array of all of their unique courses.
+ * Flatten a given array of Requirements into a Set of all their contained courses.
+ *
  * @param requirements the requirements to flatten
  */
 export const flattenRequirements = (
   requirements: Requirement[]
 ): Set<IRequiredCourse> =>
   requirements.reduce((acc: Set<IRequiredCourse>, req: Requirement) => {
-    flattenRequirementCourses(req).forEach(
-      (requiredCourse: IRequiredCourse) => {
-        acc.add(requiredCourse);
-      }
-    );
+    getCoursesInRequirement(req).forEach(acc.add, acc);
 
     return acc;
   }, new Set<IRequiredCourse>());
