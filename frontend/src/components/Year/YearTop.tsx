@@ -147,7 +147,8 @@ class YearTopComponent extends React.Component<Props, YearTopState> {
         {semesters.map(semester => (
           <div style={textContainerStyle}>
             <SemesterText>
-              {semesterMapping[semester]} {year}
+              {semesterMapping[semester]}{" "}
+              {semester === "fall" ? year - 1 : year}
               {isEditable && <span style={{ fontWeight: "normal" }}> - </span>}
             </SemesterText>
             {isEditable && (

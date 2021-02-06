@@ -3,12 +3,14 @@ FactoryBot.define do
     academic_year { 3 }
     coop_cycle { "4 Years, 2 Co-ops, Spring Cycle" }
     email { "test@test.com" }
+    email_ciphertext { User.generate_email_ciphertext("secret") }
     graduation_year { 2022 }
     image_url { "testimage.com/testimage.png" }
     is_advisor { false }
     major { "Computer Science, BSCS" }
     full_name { "Testy Tester" }
     nu_id { "123456789" }
+    nu_id_ciphertext { User.generate_nu_id_ciphertext("secret") }
 
     factory :advisor do
       is_advisor { true }

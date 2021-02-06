@@ -8,6 +8,8 @@ Rails.application.configure do
   ENV['ROOT_URL'] = "http://test.com"
   ENV['FRONTEND_URL'] = "http://test-frontend.com"
 
+  Lockbox.master_key = Lockbox.generate_key
+
   config.cache_classes = false
 
   # Do not eager load code on boot. This avoids loading your whole application
