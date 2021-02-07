@@ -74,7 +74,7 @@ const NoMajorSidebarComponent: React.FC = () => {
     </Container>
   );
 };
-q;
+
 const ConcentrationComponent: React.FC<ConcentrationProps> = ({ major }) => {
   const userConcentration = useSelector((state: AppState) =>
     safelyGetActivePlanConcentrationFromState(state)
@@ -85,23 +85,27 @@ const ConcentrationComponent: React.FC<ConcentrationProps> = ({ major }) => {
     (concentration: Concentration) => concentration.name === userConcentration
   );
 
-  return (
-    <div>
-      <ConcentrationTitle>{userConcentration}</ConcentrationTitle>
-      {concentrationObj?.requirementGroups?.map((req, index) => {
-        return (
-          <RequirementSection
-            title={!!req ? req : "Additional Requirements"}
-            // TODO: this is a temporary solution for major scraper bug
-            contents={major.requirementGroupMap[req]}
-            key={index + major.name}
-            completedCourses={[]}
-            isEditable={false}
-          />
-        );
-      })}
-    </div>
-  );
+  if (userConcentration) {
+    return (
+      <div>
+        {concentrationObj?.requirementGroups?.map((req, index) => {
+          console.log(req);
+          return (
+            <RequirementSection
+              title={`${userConcentration} Concentration`}
+              // TODO: this is a temporary solution for major scraper bug
+              contents={concentrationObj.requirementGroupMap[req]}
+              key={index + major.name}
+              completedCourses={[]}
+              isEditable={false}
+            />
+          );
+        })}
+      </div>
+    );
+  }
+
+  return <div>No Concentration</div>;
 };
 
 const MajorSidebarComponent: React.FC<MajorSidebarProps> = ({
