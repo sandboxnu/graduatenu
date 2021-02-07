@@ -146,6 +146,7 @@ const EditPlanPopperComponent: React.FC = () => {
   const [catalogYear, setCatalogYear] = useState<number | null>(
     plan.catalogYear
   );
+  const [major, setMajor] = useState(plan.major);
 
   const handleIconButtonClick = (event: React.MouseEvent<HTMLElement>) => {
     if (anchorEl === null) {
@@ -217,6 +218,28 @@ const EditPlanPopperComponent: React.FC = () => {
     );
   };
 
+  const EditMajor = () => {
+    return (
+      <Autocomplete
+        style={{ marginTop: "10px", marginBottom: "5px" }}
+        disableListWrap
+        options={majors
+          .filter((maj: Major) => maj.yearVersion == catalogYear)
+          .map(maj => maj.name)}
+        renderInput={params => (
+          <MajorTextField
+            {...params}
+            variant="outlined"
+            label="Major"
+            fullWidth
+          />
+        )}
+        value={major}
+        onChange={(_, value) => setMajor(value)}
+      />
+    );
+  };
+
   return (
     <div>
       <EditPlanIconButtonProps onClick={handleIconButtonClick} />
@@ -232,6 +255,7 @@ const EditPlanPopperComponent: React.FC = () => {
             <Divider />
             <EditName />
             <EditCatalogYear />
+            <EditMajor />
           </PlanCard>
         </ClickAwayListener>
       </PlanPopper>
