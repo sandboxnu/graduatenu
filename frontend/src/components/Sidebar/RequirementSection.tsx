@@ -195,6 +195,7 @@ class RequirementSectionComponent extends React.Component<
     let requirements: Requirement[] = majorRequirementGroup.requirements.filter(
       requirement => requirement.type !== "RANGE"
     );
+
     let promises: Promise<ScheduleCourse | null>[] = [];
 
     function addPromiseForRequirements(reqs: Requirement[]) {
@@ -204,7 +205,7 @@ class RequirementSectionComponent extends React.Component<
             fetchCourse(r.subject.toUpperCase(), r.classId.toString())
           );
         }
-        if (r.type === "AND" || r.type === "OR") {
+        if (r.type === "AND" || r.type === "OR" || r.type === "CREDITS") {
           addPromiseForRequirements(r.courses);
         }
       }
