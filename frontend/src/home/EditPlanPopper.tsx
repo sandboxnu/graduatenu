@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Popper from "@material-ui/core/Popper";
 import { Autocomplete } from "@material-ui/lab";
 import { TextField, Button, Tooltip } from "@material-ui/core";
-import { EditPlanButton } from "./EditPlanButton";
+import { EditPlanIconButtonProps } from "./EditPlanIconButton";
 import styled from "styled-components";
 import { batch, connect } from "react-redux";
 import { AppState } from "../state/reducers/state";
@@ -60,7 +60,7 @@ const TopRow = styled.div`
   justify-content: space-between;
 `;
 
-const EditProfileButton = styled(Link)`
+const EditProfileLink = styled(Link)`
   font-size: 0.8em;
   color: #eb5757;
   &:focus,
@@ -152,6 +152,7 @@ interface EditPlanPopperState {
   anchorEl: null | HTMLElement;
   alertStatus: ALERT_STATUS;
   name: string;
+  isPlanFieldsEditable: Boolean;
 }
 
 export class EditPlanPopperComponent extends React.Component<
@@ -164,6 +165,7 @@ export class EditPlanPopperComponent extends React.Component<
       anchorEl: null,
       alertStatus: ALERT_STATUS.None,
       name: props.name,
+      isPlanFieldsEditable: false,
     };
   }
 
@@ -418,7 +420,7 @@ export class EditPlanPopperComponent extends React.Component<
   render() {
     return (
       <div>
-        <EditPlanButton onClick={this.handleClick.bind(this)} />
+        <EditPlanIconButtonProps onClick={this.handleClick.bind(this)} />
         <PlanPopper
           id={"simple-popper"}
           open={Boolean(this.state.anchorEl)}
@@ -429,9 +431,7 @@ export class EditPlanPopperComponent extends React.Component<
             <PlanCard>
               <TopRow>
                 <NameText>{this.props.name}</NameText>
-                <EditProfileButton to="/profile">
-                  Edit Profile
-                </EditProfileButton>
+                <EditProfileLink to="/profile">Edit Profile</EditProfileLink>
               </TopRow>
               <StandingText>
                 {getStandingFromCompletedCourses(this.props.creditsTaken)}

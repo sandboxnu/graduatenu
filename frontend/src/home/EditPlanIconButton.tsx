@@ -7,11 +7,11 @@ const EditPlanIcon = styled(EditIcon)<any>`
   color: #bdbdbd;
 `;
 
-interface EditPlanButtonProps {
+interface EditPlanIconButtonProps {
   onClick?: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
 }
 
-export const EditPlanButton: React.SFC<EditPlanButtonProps> = props => {
+export const EditPlanIconButtonProps: React.SFC<EditPlanIconButtonProps> = props => {
   return (
     <IconButton
       color="inherit"

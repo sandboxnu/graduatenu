@@ -34,7 +34,7 @@ import {
   setUserPlansAction,
   setActivePlanDNDScheduleAction,
 } from "../state/actions/userPlansActions";
-import { EditPlanPopper } from "./EditPlanPopper";
+import { EditPlanPopper } from "./EditPlanPopperFunctional";
 import {
   sendChangeLog,
   updatePlanForUser,
