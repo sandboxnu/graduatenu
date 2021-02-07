@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useDebugValue, useState } from "react";
 import { withRouter, Link } from "react-router-dom";
 import { batch, useDispatch, useSelector } from "react-redux";
 import Popper from "@material-ui/core/Popper";
@@ -124,8 +124,7 @@ const EditPlanPopperComponent: React.FC = () => {
     majors,
     allPlans,
     creditsTaken,
-    name,
-    catalogYear,
+    userFullName,
     userId,
     primaryPlanId,
     academicYear,
@@ -135,8 +134,7 @@ const EditPlanPopperComponent: React.FC = () => {
     majors: getMajorsFromState(state),
     allPlans: getPlansFromState(state),
     creditsTaken: getTakenCreditsFromState(state),
-    name: getUserFullNameFromState(state),
-    catalogYear: safelyGetActivePlanCatalogYearFromState(state),
+    userFullName: getUserFullNameFromState(state),
     userId: getUserIdFromState(state),
     primaryPlanId: getUserPrimaryPlanIdFromState(state),
     academicYear: getAcademicYearFromState(state)!,
@@ -144,6 +142,10 @@ const EditPlanPopperComponent: React.FC = () => {
   }));
 
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
+  const [name, setName] = useState<string>(userFullName);
+  const [catalogYear, setCatalogYear] = useState<number | null>(
+    plan.catalogYear
+  );
 
   const handleIconButtonClick = (event: React.MouseEvent<HTMLElement>) => {
     if (anchorEl === null) {
@@ -172,6 +174,49 @@ const EditPlanPopperComponent: React.FC = () => {
     );
   };
 
+  const EditName = () => {
+    return (
+      <TextField
+        style={{ marginTop: "10px", marginBottom: "5px" }}
+        id="outlined-basic"
+        label="Plan Name"
+        variant="outlined"
+        onChange={e => setName(e.target.value)}
+        defaultValue={userFullName}
+        fullWidth
+      />
+    );
+  };
+
+  const EditCatalogYear = () => {
+    let catalogYears = [
+      ...Array.from(new Set(majors.map(maj => maj.yearVersion.toString()))),
+    ];
+    return (
+      <Autocomplete
+        style={{ marginTop: "10px", marginBottom: "5px" }}
+        disableListWrap
+        options={catalogYears}
+        renderInput={params => (
+          <TextField
+            {...params}
+            variant="outlined"
+            label="Catalog Year"
+            fullWidth
+          />
+        )}
+        value={catalogYear ? catalogYear + "" : ""}
+        onChange={(_, value) => {
+          if (value === "") {
+            setCatalogYear(null);
+          } else {
+            setCatalogYear(Number(value));
+          }
+        }}
+      />
+    );
+  };
+
   return (
     <div>
       <EditPlanIconButtonProps onClick={handleIconButtonClick} />
@@ -185,6 +230,8 @@ const EditPlanPopperComponent: React.FC = () => {
           <PlanCard>
             <ProfileInfo />
             <Divider />
+            <EditName />
+            <EditCatalogYear />
           </PlanCard>
         </ClickAwayListener>
       </PlanPopper>
