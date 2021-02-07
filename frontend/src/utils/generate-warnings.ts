@@ -30,6 +30,7 @@ import {
   Season,
   StatusEnum,
   ICreditRangeCourse,
+  Concentration,
 } from "../../../common/types";
 import { flattenRequirements } from "./flattenRequirements";
 /*
@@ -213,10 +214,12 @@ export function produceSatisfiedReqGroups(
  * Identify unsatisfied requirements given a major and a schedule.
  * @param schedule the schedule to check requirements for.
  * @param major the major to check requirements against.
+ * @param concentration the concentration to also check requirements against.
  */
 export function produceRequirementGroupWarning(
   schedule: Schedule,
-  major: Major
+  major: Major,
+  concentration?: Concentration
 ): IRequirementGroupWarning[] {
   // holds courses that are currently on the schedule.
   const taken: Map<string, HashableCourse> = new Map<string, HashableCourse>();
@@ -243,11 +246,18 @@ export function produceRequirementGroupWarning(
     }
   }
 
-  let requirementGroups: string[] = major.requirementGroups;
+  const concentrationRequirementGroups: string[] =
+    concentration?.requirementGroups || [];
+  let requirementGroups: string[] = [
+    ...major.requirementGroups,
+    ...concentrationRequirementGroups,
+  ];
   let res: IRequirementGroupWarning[] = [];
   for (const name of requirementGroups) {
     let requirementGroup: IMajorRequirementGroup =
-      major.requirementGroupMap[name];
+      major.requirementGroupMap[name] ||
+      concentration?.requirementGroupMap[name];
+
     // todo: if req group is RangeSection or contains a ICourseRange process after all other requirement groups.
     // this is because these reqs can be satisfied by a wide range of courses, and you don't want it using up
     // a course that is need to satisfy a more constrained requirement.
@@ -567,7 +577,7 @@ function processICourseRange(
 
   //loop through the taken courses and check if it is in one of the subject ranges for this ICourseRange.
   for (const courseKey of Array.from(taken.keys())) {
-    //check the global map to see if it has not already been used.
+    //check the global map to see if it has not been used.
     if (!coursesUsed.has(courseKey)) {
       let hashableCourse: HashableCourse | undefined = taken.get(courseKey);
       if (hashableCourse) {
@@ -625,6 +635,8 @@ function processICreditRangeCourse(
       }
     }
   }
+
+  console.log("credits completed", requirementCreditsCompleted);
 
   if (requirementCreditsCompleted < requirement.minCredits) {
     const untakenClasses = Array.from(allRequirementCourses).filter(
@@ -786,6 +798,8 @@ function courseInCourseSet(
   course: HashableCourse,
   courseSet: Set<IRequiredCourse>
 ): boolean {
+  console.log("hashableCourse", course);
+  console.log("allRequirementCourses", courseSet);
   const searchCourse: IRequiredCourse = {
     type: "COURSE",
     classId: parseInt(course.classId),
