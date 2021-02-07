@@ -1,5 +1,5 @@
 import React from "react";
-import { DNDSchedule } from "../../models/types";
+import { DNDSchedule, IRequirementGroupWarning } from "../../models/types";
 import { Concentration, Major, ScheduleCourse } from "../../../../common/types";
 import styled from "styled-components";
 import { RequirementSection } from ".";
@@ -59,12 +59,16 @@ interface SidebarProps {
 interface MajorSidebarProps {
   schedule: DNDSchedule;
   major: Major;
+  concentration?: Concentration;
   transferCourses: ScheduleCourse[];
   isEditable: boolean;
 }
 
 interface ConcentrationProps {
   readonly major: Major;
+  readonly completedCourseStrings: string[];
+  readonly warnings: IRequirementGroupWarning[];
+  readonly isEditable: boolean;
 }
 
 const NoMajorSidebarComponent: React.FC = () => {
@@ -75,7 +79,12 @@ const NoMajorSidebarComponent: React.FC = () => {
   );
 };
 
-const ConcentrationComponent: React.FC<ConcentrationProps> = ({ major }) => {
+const ConcentrationComponent: React.FC<ConcentrationProps> = ({
+  major,
+  completedCourseStrings,
+  warnings,
+  isEditable,
+}) => {
   const userConcentration = useSelector((state: AppState) =>
     safelyGetActivePlanConcentrationFromState(state)
   );
@@ -89,15 +98,15 @@ const ConcentrationComponent: React.FC<ConcentrationProps> = ({ major }) => {
     return (
       <div>
         {concentrationObj?.requirementGroups?.map((req, index) => {
-          console.log(req);
           return (
             <RequirementSection
               title={`${userConcentration} Concentration`}
               // TODO: this is a temporary solution for major scraper bug
               contents={concentrationObj.requirementGroupMap[req]}
-              key={index + major.name}
-              completedCourses={[]}
-              isEditable={false}
+              warning={warnings.find(w => w.requirementGroup === req)}
+              key={index + userConcentration}
+              completedCourses={completedCourseStrings}
+              isEditable={isEditable}
             />
           );
         })}
@@ -111,10 +120,15 @@ const ConcentrationComponent: React.FC<ConcentrationProps> = ({ major }) => {
 const MajorSidebarComponent: React.FC<MajorSidebarProps> = ({
   schedule,
   major,
+  concentration,
   transferCourses,
   isEditable,
 }) => {
-  const warnings = produceRequirementGroupWarning(schedule, major);
+  const warnings = produceRequirementGroupWarning(
+    schedule,
+    major,
+    concentration
+  );
   const completedCourses: string[] = getCompletedCourseStrings(schedule);
   const completedCourseStrings: string[] = transferCourses
     ? completedCourses.concat(
@@ -126,7 +140,6 @@ const MajorSidebarComponent: React.FC<MajorSidebarProps> = ({
     <Container>
       <ScrollWrapper>
         <MajorTitle>{major.name}</MajorTitle>
-        <ConcentrationComponent major={major}></ConcentrationComponent>
         <CreditTitle
           isGreen={
             getCreditsTakenInSchedule(schedule) >= major.totalCreditsRequired
@@ -136,6 +149,12 @@ const MajorSidebarComponent: React.FC<MajorSidebarProps> = ({
             major.totalCreditsRequired
           }` + " credits"}
         </CreditTitle>
+        <ConcentrationComponent
+          major={major}
+          completedCourseStrings={completedCourseStrings}
+          warnings={warnings}
+          isEditable={isEditable}
+        ></ConcentrationComponent>
         {major.requirementGroups.map((req, index) => {
           return (
             <RequirementSection
@@ -155,9 +174,10 @@ const MajorSidebarComponent: React.FC<MajorSidebarProps> = ({
 };
 
 export const Sidebar: React.FC<SidebarProps> = props => {
-  const { schedule, major, transferCourses } = useSelector(
+  const { schedule, major, planConcentration, transferCourses } = useSelector(
     (state: AppState) => ({
       major: getActivePlanMajorFromState(state),
+      planConcentration: safelyGetActivePlanConcentrationFromState(state),
       schedule: getActivePlanScheduleFromState(state),
       transferCourses: safelyGetTransferCoursesFromState(state),
     })
@@ -173,12 +193,18 @@ export const Sidebar: React.FC<SidebarProps> = props => {
     };
   });
 
+  // TODO: use abstracted selector
+  const concentrationObj = majorObj?.concentrations.concentrationOptions.find(
+    (concentration: Concentration) => concentration.name === planConcentration
+  );
+
   return (
     <ScrollWrapper>
       {majorObj ? (
         <MajorSidebarComponent
           schedule={schedule}
           major={majorObj}
+          concentration={concentrationObj}
           transferCourses={transferCourses}
           isEditable={props.isEditable}
         />
