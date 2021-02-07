@@ -636,8 +636,6 @@ function processICreditRangeCourse(
     }
   }
 
-  console.log("credits completed", requirementCreditsCompleted);
-
   if (requirementCreditsCompleted < requirement.minCredits) {
     const untakenClasses = Array.from(allRequirementCourses).filter(
       (course: IRequiredCourse) =>
