@@ -32,7 +32,9 @@ import {
   ICreditRangeCourse,
   Concentration,
 } from "../../../common/types";
+import { sortOnValues } from "./requirementGroupUtils";
 import { flattenRequirements } from "./flattenRequirements";
+
 /*
 CreditRange interface to track the min and max credits for a particular season.
 seasonMax = a number representing the max numebr of credits you can take without over-loading.
@@ -246,18 +248,14 @@ export function produceRequirementGroupWarning(
     }
   }
 
-  const concentrationRequirementGroups: string[] =
-    concentration?.requirementGroups || [];
-  let requirementGroups: string[] = [
-    ...major.requirementGroups,
-    ...concentrationRequirementGroups,
+  const requirementGroups: IMajorRequirementGroup[] = [
+    ...Object.values(major.requirementGroupMap),
+    ...Object.values(concentration?.requirementGroupMap || []),
   ];
-  let res: IRequirementGroupWarning[] = [];
-  for (const name of requirementGroups) {
-    let requirementGroup: IMajorRequirementGroup =
-      major.requirementGroupMap[name] ||
-      concentration?.requirementGroupMap[name];
+  const res: IRequirementGroupWarning[] = [];
+  const sortedRequirements = sortOnValues(Object.values(requirementGroups));
 
+  for (const requirementGroup of sortedRequirements) {
     // todo: if req group is RangeSection or contains a ICourseRange process after all other requirement groups.
     // this is because these reqs can be satisfied by a wide range of courses, and you don't want it using up
     // a course that is need to satisfy a more constrained requirement.
@@ -636,6 +634,8 @@ function processICreditRangeCourse(
     }
   }
 
+  console.log("credits", requirementCreditsCompleted);
+
   if (requirementCreditsCompleted < requirement.minCredits) {
     const untakenClasses = Array.from(allRequirementCourses).filter(
       (course: IRequiredCourse) =>
@@ -796,8 +796,6 @@ function courseInCourseSet(
   course: HashableCourse,
   courseSet: Set<IRequiredCourse>
 ): boolean {
-  console.log("hashableCourse", course);
-  console.log("allRequirementCourses", courseSet);
   const searchCourse: IRequiredCourse = {
     type: "COURSE",
     classId: parseInt(course.classId),
