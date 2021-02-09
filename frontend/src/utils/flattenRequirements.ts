@@ -6,7 +6,7 @@ import { IRequiredCourse, Requirement } from "../../../common/types";
  *
  * @param req the Requirement to retrieve the courses of
  */
-const getCoursesInRequirement = (req: Requirement): Set<IRequiredCourse> => {
+const getCoursesInRequirement = (req: Requirement): IRequiredCourse[] => {
   switch (req.type) {
     case "CREDITS":
     case "OR":
@@ -15,24 +15,26 @@ const getCoursesInRequirement = (req: Requirement): Set<IRequiredCourse> => {
     }
     case "RANGE": {
       // TODO: Implement a solution for accumulating range courses as well.
-      return new Set();
+      return [];
     }
     case "COURSE": {
-      return new Set([req]);
+      return [req];
     }
   }
 };
 
 /**
- * Flatten a given array of Requirements into a Set of all their contained courses.
+ * Flatten a given array of Requirements into an array of all their unique contained courses.
  *
  * @param requirements the requirements to flatten
  */
 export const flattenRequirements = (
   requirements: Requirement[]
-): Set<IRequiredCourse> =>
-  requirements.reduce((acc: Set<IRequiredCourse>, req: Requirement) => {
-    getCoursesInRequirement(req).forEach(acc.add, acc);
+): IRequiredCourse[] =>
+  Array.from(
+    requirements.reduce((acc: Set<IRequiredCourse>, req: Requirement) => {
+      getCoursesInRequirement(req).forEach(acc.add, acc);
 
-    return acc;
-  }, new Set<IRequiredCourse>());
+      return acc;
+    }, new Set<IRequiredCourse>())
+  );

@@ -601,6 +601,22 @@ function processICourseRange(
 }
 
 /**
+ * Check if a given HashableCourse is in the given array of IRequiredCourses
+ * @param hashableCourse the HashableCourse to search for
+ * @param requiredCourses the array of IRequiredCourses to search within
+ */
+function hashableCourseIsRequired(
+  hashableCourse: HashableCourse,
+  requiredCourses: IRequiredCourse[]
+): boolean {
+  return requiredCourses.some(
+    (requiredCourse: IRequiredCourse) =>
+      requiredCourse.classId === Number(hashableCourse.classId) &&
+      requiredCourse.subject === hashableCourse.subject
+  );
+}
+
+/**
  * Processes an ICourseRange requirement.
  *
  * @param requirement the requirement to check
@@ -624,7 +640,7 @@ function processICreditRangeCourse(
     if (!coursesUsed.has(courseKey)) {
       let hashableCourse: HashableCourse | undefined = taken.get(courseKey);
       if (hashableCourse) {
-        if (courseInCourseSet(hashableCourse, allRequirementCourses)) {
+        if (hashableCourseIsRequired(hashableCourse, allRequirementCourses)) {
           // Use the course
           satisfied.hoursCompleted += hashableCourse.credits;
           coursesUsed.add(courseKey);
@@ -633,8 +649,6 @@ function processICreditRangeCourse(
       }
     }
   }
-
-  console.log("credits", requirementCreditsCompleted);
 
   if (requirementCreditsCompleted < requirement.minCredits) {
     const untakenClasses = Array.from(allRequirementCourses).filter(
@@ -785,24 +799,6 @@ function courseInSubjectRanges(
   }
 
   return false;
-}
-
-/**
- * Check if a given HashableCourse is in the given set of IRequiredCourses
- * @param course the HashableCourse to search for
- * @param courseSet the set of IRequiredCourses to search within
- */
-function courseInCourseSet(
-  course: HashableCourse,
-  courseSet: Set<IRequiredCourse>
-): boolean {
-  const searchCourse: IRequiredCourse = {
-    type: "COURSE",
-    classId: parseInt(course.classId),
-    subject: course.subject,
-  };
-
-  return courseSet.has(searchCourse);
 }
 
 /**
