@@ -64,15 +64,16 @@ class UsersController < ApplicationController
         @next_page = page + 1
         @last_page = false;
 
-        offset = page * 50
-        @students = User.select("full_name", "email", "nu_id", "id").where(is_advisor: false).limit(50).offset(offset).where('lower(full_name) LIKE :search OR lower(email) LIKE :search OR nu_id LIKE :search', search: "%#{search}%")
-        if @students.empty?
+        offset = page * 2
+        students = User.where(is_advisor: false).where('lower(full_name) LIKE :search', search: "%#{search}%").or(User.where(is_advisor: false, email: search)).or(User.where(is_advisor: false, nu_id: search))
+        @students = students.slice(offset, 2)
+        if @students.length < 2
             @last_page = true
         end
     end
 
     def advisors
-        @advisors = User.select("full_name", "email").where(is_advisor: true)
+        @advisors = User.where(is_advisor: true)
     end
 
     private
