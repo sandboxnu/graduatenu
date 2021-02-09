@@ -14,7 +14,6 @@ import {
   getActivePlanMajorFromState,
   getActivePlanScheduleFromState,
   safelyGetTransferCoursesFromState,
-  getTakenCreditsFromState,
   safelyGetActivePlanConcentrationFromState,
 } from "../../state";
 import { connect, useSelector } from "react-redux";
@@ -48,8 +47,11 @@ const CreditTitle = styled.p<any>`
     props.isGreen ? "rgba(21,116,62,0.68)" : NORTHEASTERN_RED};
 `;
 
-const ConcentrationTitle = styled.p`
+const NoConcentrationTitle = styled.p`
   margin-left: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  color: ${NORTHEASTERN_RED};
 `;
 
 interface SidebarProps {
@@ -65,7 +67,7 @@ interface MajorSidebarProps {
 }
 
 interface ConcentrationProps {
-  readonly major: Major;
+  readonly concentration?: Concentration;
   readonly completedCourseStrings: string[];
   readonly warnings: IRequirementGroupWarning[];
   readonly isEditable: boolean;
@@ -80,7 +82,7 @@ const NoMajorSidebarComponent: React.FC = () => {
 };
 
 const ConcentrationComponent: React.FC<ConcentrationProps> = ({
-  major,
+  concentration,
   completedCourseStrings,
   warnings,
   isEditable,
@@ -89,32 +91,28 @@ const ConcentrationComponent: React.FC<ConcentrationProps> = ({
     safelyGetActivePlanConcentrationFromState(state)
   );
 
-  // TODO: create a selector for this within index, i.e getConcentrationObjFromName
-  const concentrationObj = major.concentrations.concentrationOptions.find(
-    (concentration: Concentration) => concentration.name === userConcentration
-  );
-
-  if (userConcentration) {
+  if (!userConcentration) {
     return (
-      <div>
-        {concentrationObj?.requirementGroups?.map((req, index) => {
-          return (
-            <RequirementSection
-              title={`${userConcentration} Concentration`}
-              // TODO: this is a temporary solution for major scraper bug
-              contents={concentrationObj.requirementGroupMap[req]}
-              warning={warnings.find(w => w.requirementGroup === req)}
-              key={index + userConcentration}
-              completedCourses={completedCourseStrings}
-              isEditable={isEditable}
-            />
-          );
-        })}
-      </div>
+      <NoConcentrationTitle>No Concentration Selected</NoConcentrationTitle>
     );
   }
 
-  return <div>No Concentration</div>;
+  return (
+    <div>
+      {concentration?.requirementGroups?.map((req, index) => {
+        return (
+          <RequirementSection
+            title={`${userConcentration} Concentration`}
+            contents={concentration.requirementGroupMap[req]}
+            warning={warnings.find(w => w.requirementGroup === req)}
+            key={index + userConcentration}
+            completedCourses={completedCourseStrings}
+            isEditable={isEditable}
+          />
+        );
+      })}
+    </div>
+  );
 };
 
 const MajorSidebarComponent: React.FC<MajorSidebarProps> = ({
@@ -150,7 +148,7 @@ const MajorSidebarComponent: React.FC<MajorSidebarProps> = ({
           }` + " credits"}
         </CreditTitle>
         <ConcentrationComponent
-          major={major}
+          concentration={concentration}
           completedCourseStrings={completedCourseStrings}
           warnings={warnings}
           isEditable={isEditable}
@@ -183,17 +181,14 @@ export const Sidebar: React.FC<SidebarProps> = props => {
     })
   );
 
-  const { majorObj } = useSelector((state: AppState) => {
-    return {
-      majorObj: findMajorFromName(
-        major,
-        state.majorState.majors,
-        safelyGetActivePlanCatalogYearFromState(state)
-      ),
-    };
-  });
+  const majorObj = useSelector((state: AppState) =>
+    findMajorFromName(
+      major,
+      state.majorState.majors,
+      safelyGetActivePlanCatalogYearFromState(state)
+    )
+  );
 
-  // TODO: use abstracted selector
   const concentrationObj = majorObj?.concentrations.concentrationOptions.find(
     (concentration: Concentration) => concentration.name === planConcentration
   );
