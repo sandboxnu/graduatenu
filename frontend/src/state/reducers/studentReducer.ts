@@ -51,11 +51,6 @@ export const studentReducer = (
         if (draft.student.transferCourses === undefined) {
           draft.student.transferCourses = [];
         }
-        const [schedule, counter] = parseCompletedCourses(
-          draft.student.completedCourses
-        );
-        draft.completedCourseSchedule = schedule;
-        draft.completedCourseCounter = counter;
         return draft;
       }
       case getType(setStudentMajorAction): {
@@ -115,6 +110,9 @@ export const studentReducer = (
             course1.classId.toString().localeCompare(course2.classId.toString())
         );
         draft.student!.completedCourses = completedCourses;
+        const [schedule, counter] = parseCompletedCourses(completedCourses);
+        draft.completedCourseSchedule = schedule;
+        draft.completedCourseCounter = counter;
         return draft;
       }
       case getType(setTransferCoursesAction): {

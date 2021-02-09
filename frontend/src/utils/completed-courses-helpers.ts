@@ -4,7 +4,11 @@ import {
   ISimplifiedCourseData,
   ISimplifiedCourseDataAPI,
 } from "../models/types";
-import { ScheduleCourse, ScheduleYear } from "../../../common/types";
+import {
+  ScheduleCourse,
+  ScheduleYear,
+  SeasonWord,
+} from "../../../common/types";
 import { convertToDNDSchedule } from "./schedule-helpers";
 
 /**
@@ -94,71 +98,14 @@ export function getSimplifiedCourseData(
     };
   });
 }
-
-/**
- * def parse_completed_courses
- completed_courses = user_params[:courses]&.select {|a| a['completion'] == 'PASSED'} || []
- years = []
- year_map = {}
- term_map = {
-        "10" => "fall",
-        "30" => "spring",
-        "40" => "summer1",
-        "60" => "summer2"
-    }
- completed_courses.each do |course|
- current_year = course.semester[0..3].to_i
- current_semester = course.semester[4..5]
- if !years.include? current_year
- years.push(current_year)
- year_map[current_year] = {
-            year: current_year,
-            fall: {
-                season: "FL",
-                year: current_year - 1,
-                termId: current_year.to_s + "10",
-                status: "CLASSES",
-                classes: []
-            },
-            spring: {
-                season: "SP",
-                year: current_year,
-                termId: current_year.to_s + "30",
-                status: "CLASSES",
-                classes: []
-            },
-            summer1: {
-                season: "S1",
-                year: current_year,
-                termId: current_year.to_s + "40",
-                status: "VACATION",
-                classes: []
-            },
-            summer2: {
-                season: "S2",
-                year: current_year,
-                termId: current_year.to_s + "60",
-                status: "VACATION",
-                classes: []
-            },
-            isSummerFull: false}
- end
- year_map[current_year][term_map[current_semester]][classes].push(course)
- if course.subject == "COOP"
- year_map[current_year][term_map[current_semester]][status] = "COOP"
- else
- year_map[current_year][term_map[current_semester]][status] = "CLASSES"
- end
- end
- return {years: years, yearMap: year_map}
- end
+/*
+Parses a student's completed courses into a schedule with courses placed in
+whichever semester they were taken. Ignores COOP3945.
  */
-export function parseCompletedCourses(
-  completedCourses: ScheduleCourse[] //TODO: Make new type for schedulecourse
-) {
+export function parseCompletedCourses(completedCourses: ScheduleCourse[]) {
   const years: number[] = [];
   const yearMap: { [key: number]: ScheduleYear } = {};
-  const termMap: { [key: string]: string } = {
+  const termMap: { [key: string]: SeasonWord } = {
     "10": "fall",
     "30": "spring",
     "40": "summer1",
@@ -204,15 +151,16 @@ export function parseCompletedCourses(
           isSummerFull: false,
         };
       }
-      //@ts-ignore
-      yearMap[currentYear][termMap[currentSemester]][classes].push(course);
+      const activeSemester = yearMap[currentYear][termMap[currentSemester]];
       if (course.subject == "COOP") {
-        //@ts-ignore
-        yearMap[currentYear][termMap[currentSemester]]["status"] = "COOP";
+        activeSemester["status"] = "COOP";
+      } else if (activeSemester["status"] == "INACTIVE") {
+        activeSemester["status"] = "CLASSES";
+        activeSemester["classes"].push(course);
       } else {
-        //@ts-ignore
-        yearMap[currentYear][termMap[currentSemester]]["status"] = "CLASSES";
+        activeSemester["classes"].push(course);
       }
     });
+  years.sort();
   return convertToDNDSchedule({ years, yearMap }, 0);
 }
