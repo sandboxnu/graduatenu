@@ -18,7 +18,6 @@ import {
   getUserMajorNameFromState,
   getUserIdFromState,
   getUserCoopCycleFromState,
-  getCompletedCoursesFromState,
   safelyGetTransferCoursesFromState,
   getUserCatalogYearFromState,
   getPlansFromState,
@@ -30,12 +29,9 @@ import { AppState } from "../state/reducers/state";
 import { addNewPlanAction } from "../state/actions/userPlansActions";
 import { updateUser } from "../services/UserService";
 import { getAuthToken } from "../utils/auth-helpers";
-import { getSimplifiedCourseData } from "../utils/completed-courses-helpers";
 import {
   generateBlankCompletedCourseSchedule,
   generateBlankCompletedCourseScheduleNoCoopCycle,
-  generateInitialSchedule,
-  generateInitialScheduleNoCoopCycle,
 } from "../utils";
 
 interface TransferableExamGroupComponentProps {
@@ -197,15 +193,6 @@ const TransferableCreditScreen: React.FC = () => {
           coop_cycle: coopCycle,
           concentration: concentration,
           catalog_year: catalogYear,
-          // TODO: Once khoury gives us this info, we shouldn't update transfer/completed if khoury user
-          // courses_transfer: getSimplifiedCourseData(
-          //   transferCourses,
-          //   "TRANSFER"
-          // ),
-          // courses_completed: getSimplifiedCourseData(
-          //   completedCourses,
-          //   "PASSED"
-          // ),
         }
       );
 

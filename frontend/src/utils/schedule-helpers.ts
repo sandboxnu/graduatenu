@@ -166,7 +166,10 @@ export function generateBlankCompletedCourseScheduleNoCoopCycle(
   const yearsTaken = completedCourseSchedule.years.length;
   const yearsLeft = numYearsInSchool - yearsTaken;
 
-  const mostRecentYear = completedCourseSchedule.years[yearsTaken - 1];
+  const mostRecentYear =
+    yearsTaken !== 0
+      ? completedCourseSchedule.years[yearsTaken - 1]
+      : graduationYear - yearsLeft + 1;
   const completedCourseScheduleCopy = JSON.parse(
     JSON.stringify(completedCourseSchedule)
   ) as Schedule;
