@@ -11850,6 +11850,10 @@ Object {
                       "classId": "2341",
                       "subject": "MATH",
                     },
+                    Object {
+                      "classId": "2810",
+                      "subject": "CS",
+                    },
                   ],
                 },
               ],
@@ -12715,6 +12719,10 @@ Object {
                     Object {
                       "classId": "2341",
                       "subject": "MATH",
+                    },
+                    Object {
+                      "classId": "2810",
+                      "subject": "CS",
                     },
                   ],
                 },
@@ -13718,6 +13726,10 @@ Object {
                     Object {
                       "classId": "2341",
                       "subject": "MATH",
+                    },
+                    Object {
+                      "classId": "2810",
+                      "subject": "CS",
                     },
                   ],
                 },
@@ -19054,6 +19066,10 @@ Object {
                       "classId": "2341",
                       "subject": "MATH",
                     },
+                    Object {
+                      "classId": "2810",
+                      "subject": "CS",
+                    },
                   ],
                 },
               ],
@@ -19848,6 +19864,10 @@ Object {
                     Object {
                       "classId": "2341",
                       "subject": "MATH",
+                    },
+                    Object {
+                      "classId": "2810",
+                      "subject": "CS",
                     },
                   ],
                 },
