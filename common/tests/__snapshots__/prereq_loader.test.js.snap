@@ -2407,7 +2407,6 @@ Object {
                 },
                 Object {
                   "classId": "3500",
-                  "missing": true,
                   "subject": "DS",
                 },
               ],
@@ -3467,7 +3466,6 @@ Object {
                 },
                 Object {
                   "classId": "3500",
-                  "missing": true,
                   "subject": "DS",
                 },
               ],
@@ -4254,7 +4252,6 @@ Object {
                 },
                 Object {
                   "classId": "3500",
-                  "missing": true,
                   "subject": "DS",
                 },
               ],
@@ -4361,7 +4358,6 @@ Object {
                 },
                 Object {
                   "classId": "3500",
-                  "missing": true,
                   "subject": "DS",
                 },
               ],
@@ -5082,7 +5078,6 @@ Object {
                 },
                 Object {
                   "classId": "3500",
-                  "missing": true,
                   "subject": "DS",
                 },
               ],
@@ -5218,7 +5213,6 @@ Object {
                 },
                 Object {
                   "classId": "3500",
-                  "missing": true,
                   "subject": "DS",
                 },
               ],
@@ -5937,7 +5931,6 @@ Object {
                 },
                 Object {
                   "classId": "3500",
-                  "missing": true,
                   "subject": "DS",
                 },
               ],
@@ -6058,7 +6051,6 @@ Object {
                 },
                 Object {
                   "classId": "3500",
-                  "missing": true,
                   "subject": "DS",
                 },
               ],
@@ -6667,7 +6659,6 @@ Object {
                 },
                 Object {
                   "classId": "3500",
-                  "missing": true,
                   "subject": "DS",
                 },
               ],
@@ -6884,7 +6875,6 @@ Object {
                 },
                 Object {
                   "classId": "3500",
-                  "missing": true,
                   "subject": "DS",
                 },
               ],
@@ -7336,7 +7326,6 @@ Object {
                 },
                 Object {
                   "classId": "3500",
-                  "missing": true,
                   "subject": "DS",
                 },
               ],
@@ -7637,7 +7626,6 @@ Object {
                 },
                 Object {
                   "classId": "3500",
-                  "missing": true,
                   "subject": "DS",
                 },
               ],
@@ -7955,9 +7943,17 @@ Object {
           },
           Object {
             "classId": "1156",
-            "name": "",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "Recitation for POLS 1155",
             "numCreditsMax": 0,
             "numCreditsMin": 0,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
             "subject": "POLS",
           },
         ],
@@ -8707,9 +8703,17 @@ Object {
           },
           Object {
             "classId": "1156",
-            "name": "",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "Recitation for POLS 1155",
             "numCreditsMax": 0,
             "numCreditsMin": 0,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
             "subject": "POLS",
           },
         ],
@@ -9654,9 +9658,55 @@ Object {
           },
           Object {
             "classId": "3412",
-            "name": "",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "Language and Culture",
             "numCreditsMax": 4,
             "numCreditsMin": 4,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "type": "or",
+                  "values": Array [
+                    Object {
+                      "classId": "1150",
+                      "subject": "LING",
+                    },
+                    Object {
+                      "classId": "1150",
+                      "missing": true,
+                      "subject": "ENGL",
+                    },
+                  ],
+                },
+                Object {
+                  "type": "or",
+                  "values": Array [
+                    Object {
+                      "classId": "1111",
+                      "missing": true,
+                      "subject": "ENGL",
+                    },
+                    Object {
+                      "classId": "1102",
+                      "missing": true,
+                      "subject": "ENGL",
+                    },
+                    Object {
+                      "classId": "1111",
+                      "subject": "ENGW",
+                    },
+                    Object {
+                      "classId": "1102",
+                      "subject": "ENGW",
+                    },
+                  ],
+                },
+              ],
+            },
             "subject": "LING",
           },
           Object {
@@ -9906,7 +9956,6 @@ Object {
                 },
                 Object {
                   "classId": "3500",
-                  "missing": true,
                   "subject": "DS",
                 },
               ],
@@ -10137,7 +10186,6 @@ Object {
                 },
                 Object {
                   "classId": "3500",
-                  "missing": true,
                   "subject": "DS",
                 },
               ],
@@ -10500,9 +10548,55 @@ Object {
           },
           Object {
             "classId": "3412",
-            "name": "",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "Language and Culture",
             "numCreditsMax": 4,
             "numCreditsMin": 4,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "type": "or",
+                  "values": Array [
+                    Object {
+                      "classId": "1150",
+                      "subject": "LING",
+                    },
+                    Object {
+                      "classId": "1150",
+                      "missing": true,
+                      "subject": "ENGL",
+                    },
+                  ],
+                },
+                Object {
+                  "type": "or",
+                  "values": Array [
+                    Object {
+                      "classId": "1111",
+                      "missing": true,
+                      "subject": "ENGL",
+                    },
+                    Object {
+                      "classId": "1102",
+                      "missing": true,
+                      "subject": "ENGL",
+                    },
+                    Object {
+                      "classId": "1111",
+                      "subject": "ENGW",
+                    },
+                    Object {
+                      "classId": "1102",
+                      "subject": "ENGW",
+                    },
+                  ],
+                },
+              ],
+            },
             "subject": "LING",
           },
           Object {
@@ -10737,7 +10831,6 @@ Object {
                 },
                 Object {
                   "classId": "3500",
-                  "missing": true,
                   "subject": "DS",
                 },
               ],
@@ -10913,7 +11006,6 @@ Object {
                 },
                 Object {
                   "classId": "3500",
-                  "missing": true,
                   "subject": "DS",
                 },
               ],
@@ -11757,6 +11849,10 @@ Object {
                     Object {
                       "classId": "2341",
                       "subject": "MATH",
+                    },
+                    Object {
+                      "classId": "2810",
+                      "subject": "CS",
                     },
                   ],
                 },
@@ -12623,6 +12719,10 @@ Object {
                     Object {
                       "classId": "2341",
                       "subject": "MATH",
+                    },
+                    Object {
+                      "classId": "2810",
+                      "subject": "CS",
                     },
                   ],
                 },
@@ -13626,6 +13726,10 @@ Object {
                     Object {
                       "classId": "2341",
                       "subject": "MATH",
+                    },
+                    Object {
+                      "classId": "2810",
+                      "subject": "CS",
                     },
                   ],
                 },
@@ -18664,7 +18768,6 @@ Object {
                 },
                 Object {
                   "classId": "3500",
-                  "missing": true,
                   "subject": "DS",
                 },
               ],
@@ -18962,6 +19065,10 @@ Object {
                     Object {
                       "classId": "2341",
                       "subject": "MATH",
+                    },
+                    Object {
+                      "classId": "2810",
+                      "subject": "CS",
                     },
                   ],
                 },
@@ -19521,7 +19628,6 @@ Object {
                 },
                 Object {
                   "classId": "3500",
-                  "missing": true,
                   "subject": "DS",
                 },
               ],
@@ -19759,6 +19865,10 @@ Object {
                       "classId": "2341",
                       "subject": "MATH",
                     },
+                    Object {
+                      "classId": "2810",
+                      "subject": "CS",
+                    },
                   ],
                 },
               ],
@@ -19871,9 +19981,36 @@ Object {
         "classes": Array [
           Object {
             "classId": "4530",
-            "name": "",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "Media Arts Degree Project 1",
             "numCreditsMax": 4,
             "numCreditsMin": 4,
+            "prereqs": Object {
+              "type": "or",
+              "values": Array [
+                Object {
+                  "classId": "1111",
+                  "missing": true,
+                  "subject": "ENGL",
+                },
+                Object {
+                  "classId": "1102",
+                  "missing": true,
+                  "subject": "ENGL",
+                },
+                Object {
+                  "classId": "1111",
+                  "subject": "ENGW",
+                },
+                Object {
+                  "classId": "1102",
+                  "subject": "ENGW",
+                },
+              ],
+            },
             "subject": "ARTD",
           },
           Object {
@@ -19953,7 +20090,6 @@ Object {
               "values": Array [
                 Object {
                   "classId": "4530",
-                  "missing": true,
                   "subject": "ARTD",
                 },
               ],
@@ -23455,16 +23591,43 @@ Object {
         "classes": Array [
           Object {
             "classId": "1107",
-            "name": "",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "1108",
+                  "missing": true,
+                  "subject": "BIOL",
+                },
+              ],
+            },
+            "name": "Foundations of Biology",
             "numCreditsMax": 4,
             "numCreditsMin": 4,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
             "subject": "BIOL",
           },
           Object {
             "classId": "1108",
-            "name": "",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "1107",
+                  "subject": "BIOL",
+                },
+              ],
+            },
+            "name": "Lab for BIOL 1107",
             "numCreditsMax": 1,
             "numCreditsMin": 1,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
             "subject": "BIOL",
           },
           Object {
@@ -23563,9 +23726,17 @@ Object {
           },
           Object {
             "classId": "1000",
-            "name": "",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "Biochemistry at Northeastern",
             "numCreditsMax": 1,
             "numCreditsMin": 1,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
             "subject": "BIOC",
           },
         ],
@@ -23596,7 +23767,6 @@ Object {
                 },
                 Object {
                   "classId": "1107",
-                  "missing": true,
                   "subject": "BIOL",
                 },
                 Object {
@@ -24108,7 +24278,6 @@ Object {
                     },
                     Object {
                       "classId": "1161",
-                      "missing": true,
                       "subject": "PHYS",
                     },
                     Object {
@@ -24240,7 +24409,6 @@ Object {
                     },
                     Object {
                       "classId": "2317",
-                      "missing": true,
                       "subject": "CHEM",
                     },
                   ],
@@ -24394,7 +24562,6 @@ Object {
                     },
                     Object {
                       "classId": "1175",
-                      "missing": true,
                       "subject": "PHYS",
                     },
                   ],
@@ -24605,16 +24772,43 @@ Object {
         "classes": Array [
           Object {
             "classId": "1107",
-            "name": "",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "1108",
+                  "missing": true,
+                  "subject": "BIOL",
+                },
+              ],
+            },
+            "name": "Foundations of Biology",
             "numCreditsMax": 4,
             "numCreditsMin": 4,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
             "subject": "BIOL",
           },
           Object {
             "classId": "1108",
-            "name": "",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "1107",
+                  "subject": "BIOL",
+                },
+              ],
+            },
+            "name": "Lab for BIOL 1107",
             "numCreditsMax": 1,
             "numCreditsMin": 1,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
             "subject": "BIOL",
           },
           Object {
@@ -24713,9 +24907,17 @@ Object {
           },
           Object {
             "classId": "1000",
-            "name": "",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "Biochemistry at Northeastern",
             "numCreditsMax": 1,
             "numCreditsMin": 1,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
             "subject": "BIOC",
           },
         ],
@@ -24746,7 +24948,6 @@ Object {
                 },
                 Object {
                   "classId": "1107",
-                  "missing": true,
                   "subject": "BIOL",
                 },
                 Object {
@@ -25309,7 +25510,6 @@ Object {
                     },
                     Object {
                       "classId": "2317",
-                      "missing": true,
                       "subject": "CHEM",
                     },
                   ],
@@ -25387,7 +25587,6 @@ Object {
                     },
                     Object {
                       "classId": "1161",
-                      "missing": true,
                       "subject": "PHYS",
                     },
                     Object {
@@ -25628,7 +25827,6 @@ Object {
                     },
                     Object {
                       "classId": "1175",
-                      "missing": true,
                       "subject": "PHYS",
                     },
                   ],
@@ -25755,16 +25953,43 @@ Object {
         "classes": Array [
           Object {
             "classId": "1107",
-            "name": "",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "1108",
+                  "missing": true,
+                  "subject": "BIOL",
+                },
+              ],
+            },
+            "name": "Foundations of Biology",
             "numCreditsMax": 4,
             "numCreditsMin": 4,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
             "subject": "BIOL",
           },
           Object {
             "classId": "1108",
-            "name": "",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "1107",
+                  "subject": "BIOL",
+                },
+              ],
+            },
+            "name": "Lab for BIOL 1107",
             "numCreditsMax": 1,
             "numCreditsMin": 1,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
             "subject": "BIOL",
           },
           Object {
@@ -25863,9 +26088,17 @@ Object {
           },
           Object {
             "classId": "1000",
-            "name": "",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "Biochemistry at Northeastern",
             "numCreditsMax": 1,
             "numCreditsMin": 1,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
             "subject": "BIOC",
           },
         ],
@@ -25896,7 +26129,6 @@ Object {
                 },
                 Object {
                   "classId": "1107",
-                  "missing": true,
                   "subject": "BIOL",
                 },
                 Object {
@@ -26393,7 +26625,6 @@ Object {
                     },
                     Object {
                       "classId": "1161",
-                      "missing": true,
                       "subject": "PHYS",
                     },
                     Object {
@@ -26525,7 +26756,6 @@ Object {
                     },
                     Object {
                       "classId": "2317",
-                      "missing": true,
                       "subject": "CHEM",
                     },
                   ],
@@ -26704,7 +26934,6 @@ Object {
                     },
                     Object {
                       "classId": "1175",
-                      "missing": true,
                       "subject": "PHYS",
                     },
                   ],
@@ -26937,16 +27166,43 @@ Object {
         "classes": Array [
           Object {
             "classId": "1107",
-            "name": "",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "1108",
+                  "missing": true,
+                  "subject": "BIOL",
+                },
+              ],
+            },
+            "name": "Foundations of Biology",
             "numCreditsMax": 4,
             "numCreditsMin": 4,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
             "subject": "BIOL",
           },
           Object {
             "classId": "1108",
-            "name": "",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "1107",
+                  "subject": "BIOL",
+                },
+              ],
+            },
+            "name": "Lab for BIOL 1107",
             "numCreditsMax": 1,
             "numCreditsMin": 1,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
             "subject": "BIOL",
           },
           Object {
@@ -27045,9 +27301,17 @@ Object {
           },
           Object {
             "classId": "1000",
-            "name": "",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "Biochemistry at Northeastern",
             "numCreditsMax": 1,
             "numCreditsMin": 1,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
             "subject": "BIOC",
           },
         ],
@@ -27078,7 +27342,6 @@ Object {
                 },
                 Object {
                   "classId": "1107",
-                  "missing": true,
                   "subject": "BIOL",
                 },
                 Object {
@@ -27626,7 +27889,6 @@ Object {
                     },
                     Object {
                       "classId": "2317",
-                      "missing": true,
                       "subject": "CHEM",
                     },
                   ],
@@ -27704,7 +27966,6 @@ Object {
                     },
                     Object {
                       "classId": "1161",
-                      "missing": true,
                       "subject": "PHYS",
                     },
                     Object {
@@ -27937,7 +28198,6 @@ Object {
                     },
                     Object {
                       "classId": "1175",
-                      "missing": true,
                       "subject": "PHYS",
                     },
                   ],
@@ -28156,23 +28416,88 @@ Object {
           },
           Object {
             "classId": "1161",
-            "name": "",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "1162",
+                  "missing": true,
+                  "subject": "PHYS",
+                },
+                Object {
+                  "classId": "1163",
+                  "missing": true,
+                  "subject": "PHYS",
+                },
+              ],
+            },
+            "name": "Physics 1",
             "numCreditsMax": 4,
             "numCreditsMin": 4,
+            "prereqs": Object {
+              "type": "or",
+              "values": Array [
+                Object {
+                  "classId": "1241",
+                  "subject": "MATH",
+                },
+                Object {
+                  "classId": "1251",
+                  "subject": "MATH",
+                },
+                Object {
+                  "classId": "1341",
+                  "subject": "MATH",
+                },
+                Object {
+                  "classId": "1342",
+                  "subject": "MATH",
+                },
+                Object {
+                  "classId": "2321",
+                  "subject": "MATH",
+                },
+              ],
+            },
             "subject": "PHYS",
           },
           Object {
             "classId": "1162",
-            "name": "",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "1161",
+                  "subject": "PHYS",
+                },
+                Object {
+                  "classId": "1163",
+                  "subject": "PHYS",
+                },
+              ],
+            },
+            "name": "Lab for PHYS 1161",
             "numCreditsMax": 1,
             "numCreditsMin": 1,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
             "subject": "PHYS",
           },
           Object {
             "classId": "1000",
-            "name": "",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "Mathematics at Northeastern",
             "numCreditsMax": 1,
             "numCreditsMin": 1,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
             "subject": "MATH",
           },
         ],
@@ -28229,7 +28554,6 @@ Object {
                     },
                     Object {
                       "classId": "1161",
-                      "missing": true,
                       "subject": "PHYS",
                     },
                     Object {
@@ -28841,16 +29165,73 @@ Object {
         "classes": Array [
           Object {
             "classId": "1161",
-            "name": "",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "1162",
+                  "missing": true,
+                  "subject": "PHYS",
+                },
+                Object {
+                  "classId": "1163",
+                  "missing": true,
+                  "subject": "PHYS",
+                },
+              ],
+            },
+            "name": "Physics 1",
             "numCreditsMax": 4,
             "numCreditsMin": 4,
+            "prereqs": Object {
+              "type": "or",
+              "values": Array [
+                Object {
+                  "classId": "1241",
+                  "subject": "MATH",
+                },
+                Object {
+                  "classId": "1251",
+                  "subject": "MATH",
+                },
+                Object {
+                  "classId": "1341",
+                  "subject": "MATH",
+                },
+                Object {
+                  "classId": "1342",
+                  "subject": "MATH",
+                },
+                Object {
+                  "classId": "2321",
+                  "subject": "MATH",
+                },
+              ],
+            },
             "subject": "PHYS",
           },
           Object {
             "classId": "1162",
-            "name": "",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "1161",
+                  "subject": "PHYS",
+                },
+                Object {
+                  "classId": "1163",
+                  "subject": "PHYS",
+                },
+              ],
+            },
+            "name": "Lab for PHYS 1161",
             "numCreditsMax": 1,
             "numCreditsMin": 1,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
             "subject": "PHYS",
           },
           Object {
@@ -28885,9 +29266,17 @@ Object {
           },
           Object {
             "classId": "1000",
-            "name": "",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "Mathematics at Northeastern",
             "numCreditsMax": 1,
             "numCreditsMin": 1,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
             "subject": "MATH",
           },
           Object {
@@ -28951,7 +29340,6 @@ Object {
                     },
                     Object {
                       "classId": "1161",
-                      "missing": true,
                       "subject": "PHYS",
                     },
                     Object {
