@@ -30,7 +30,7 @@ import {
   Season,
   StatusEnum,
 } from "../../../common/types";
-import { sortOnValues } from "./requirementGroupUtils";
+import { sortRequirementGroupsByConstraint } from "./requirementGroupUtils";
 /*
 CreditRange interface to track the min and max credits for a particular season.
 seasonMax = a number representing the max numebr of credits you can take without over-loading.
@@ -244,7 +244,7 @@ export function produceRequirementGroupWarning(
 
   let res: IRequirementGroupWarning[] = [];
 
-  const sortedRequirements = sortOnValues(
+  const sortedRequirements = sortRequirementGroupsByConstraint(
     Object.values(major.requirementGroupMap)
   );
 
