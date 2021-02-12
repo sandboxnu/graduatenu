@@ -1,7 +1,7 @@
 import { IRequiredCourse, Requirement } from "../../../common/types";
 
 /**
- * Accumulate a Set of all unique courses within a given Requirement.
+ * Accumulate an array of all unique courses within a given Requirement.
  * NOTE: This currently does not work for ICourseRanges.
  *
  * @param req the Requirement to retrieve the courses of
