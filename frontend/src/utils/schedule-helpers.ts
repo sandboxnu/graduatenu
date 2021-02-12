@@ -343,6 +343,13 @@ export function sumCreditsInSemester(
   );
 }
 
+export function sumCreditsFromCourses(courses: ScheduleCourse[]): number {
+  return courses.reduce(
+    (acc: number, curr: ScheduleCourse) => acc + curr.numCreditsMax,
+    0
+  );
+}
+
 export function getNumCoops(schedule: Schedule): number {
   var num = 0;
   for (const year of schedule.years) {

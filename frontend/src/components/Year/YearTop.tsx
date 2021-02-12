@@ -1,6 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
-import { SeasonWord, Status } from "../../../../common/types";
+import { ScheduleCourse, SeasonWord, Status } from "../../../../common/types";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
 import { changeSemesterStatusForActivePlanAction } from "../../state/actions/userPlansActions";
@@ -40,13 +40,15 @@ interface YearTopProps {
   summer2Status: Status;
   schedule: DNDSchedule;
   isEditable: boolean;
+  transferCourses: ScheduleCourse[];
 }
 
 interface ReduxDispatchYearTopProps {
   handleStatusChange: (
     newStatus: Status,
     year: number,
-    tappedSemester: SeasonWord
+    tappedSemester: SeasonWord,
+    transferCourses: ScheduleCourse[]
   ) => void;
 }
 
@@ -129,7 +131,12 @@ class YearTopComponent extends React.Component<Props, YearTopState> {
         summer2Status: curStatus,
       });
     }
-    this.props.handleStatusChange(curStatus, this.props.year, tappedSemester!);
+    this.props.handleStatusChange(
+      curStatus,
+      this.props.year,
+      tappedSemester!,
+      this.props.transferCourses
+    );
   };
 
   render() {
@@ -186,10 +193,16 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   handleStatusChange: (
     newStatus: Status,
     year: number,
-    tappedSemester: SeasonWord
+    tappedSemester: SeasonWord,
+    transferCourses: ScheduleCourse[]
   ) =>
     dispatch(
-      changeSemesterStatusForActivePlanAction(newStatus, year, tappedSemester)
+      changeSemesterStatusForActivePlanAction(
+        newStatus,
+        year,
+        tappedSemester,
+        transferCourses
+      )
     ),
 });
 

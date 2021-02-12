@@ -139,7 +139,8 @@ export const userPlansReducer = (
         draft.plans[draft.activePlan!].schedule = action.payload.schedule;
 
         const container = produceWarnings(
-          JSON.parse(JSON.stringify(action.payload.schedule)) // deep copy of schedule, because schedule is modified
+          JSON.parse(JSON.stringify(action.payload.schedule)), // deep copy of schedule, because schedule is modified
+          action.payload.transferCourses
         );
 
         draft.plans[draft.activePlan!].warnings = container.normalWarnings;
@@ -157,7 +158,10 @@ export const userPlansReducer = (
         draft.plans[draft.activePlan!].schedule = newSchedule;
         draft.plans[draft.activePlan!].courseCounter = newCounter;
 
-        const container = produceWarnings(schedule);
+        const container = produceWarnings(
+          schedule,
+          action.payload.transferCourses
+        );
 
         draft.plans[draft.activePlan!].warnings = container.normalWarnings;
         draft.plans[draft.activePlan!].courseWarnings =
@@ -250,7 +254,8 @@ export const userPlansReducer = (
         ].classes.push(...dndCourses);
 
         const container = produceWarnings(
-          JSON.parse(JSON.stringify(draft.plans[draft.activePlan!].schedule)) // deep copy of schedule, because schedule is modified
+          JSON.parse(JSON.stringify(draft.plans[draft.activePlan!].schedule)), // deep copy of schedule, because schedule is modified
+          action.payload.transferCourses
         );
 
         draft.plans[draft.activePlan!].warnings = container.normalWarnings;
@@ -275,7 +280,8 @@ export const userPlansReducer = (
         ][season].classes.filter(c => c.dndId !== course.dndId);
 
         const container = produceWarnings(
-          JSON.parse(JSON.stringify(draft.plans[draft.activePlan!].schedule)) // deep copy of schedule, because schedule is modified
+          JSON.parse(JSON.stringify(draft.plans[draft.activePlan!].schedule)), // deep copy of schedule, because schedule is modified
+          action.payload.transferCourses
         );
 
         draft.plans[draft.activePlan!].warnings = container.normalWarnings;
@@ -298,7 +304,8 @@ export const userPlansReducer = (
         ].status = newStatus;
 
         const container = produceWarnings(
-          JSON.parse(JSON.stringify(draft.plans[draft.activePlan!].schedule)) // deep copy of schedule, because schedule is modified
+          JSON.parse(JSON.stringify(draft.plans[draft.activePlan!].schedule)), // deep copy of schedule, because schedule is modified
+          action.payload.transferCourses
         );
 
         draft.plans[draft.activePlan!].warnings = container.normalWarnings;
@@ -314,7 +321,8 @@ export const userPlansReducer = (
         ] = newSemester;
 
         const container = produceWarnings(
-          JSON.parse(JSON.stringify(draft.plans[draft.activePlan!].schedule)) // deep copy of schedule, because schedule is modified
+          JSON.parse(JSON.stringify(draft.plans[draft.activePlan!].schedule)), // deep copy of schedule, because schedule is modified
+          action.payload.transferCourses
         );
 
         draft.plans[draft.activePlan!].warnings = container.normalWarnings;
