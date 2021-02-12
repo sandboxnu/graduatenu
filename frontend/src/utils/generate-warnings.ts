@@ -249,9 +249,6 @@ export function produceRequirementGroupWarning(
   );
 
   for (const requirementGroup of sortedRequirements) {
-    // todo: if req group is RangeSection or contains a ICourseRange process after all other requirement groups.
-    // this is because these reqs can be satisfied by a wide range of courses, and you don't want it using up
-    // a course that is need to satisfy a more constrained requirement.
     let unsatisfiedRequirement:
       | IRequirementGroupWarning
       | undefined = produceUnsatifiedRequirement(
