@@ -651,7 +651,7 @@ function processICreditRangeCourse(
     const formattedUntakenClasses = untakenClasses.map(courseCode).join(", ");
 
     return `(complete ${requirement.minCredits -
-      requirementCreditsCompleted} credits from ${formattedUntakenClasses}`;
+      requirementCreditsCompleted} credits from ${formattedUntakenClasses})`;
   } else if (requirementCreditsCompleted > requirement.maxCredits) {
     return `(${requirementCreditsCompleted -
       requirement.maxCredits} credits taken over limit of ${
