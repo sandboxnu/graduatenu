@@ -30,6 +30,7 @@ import {
   Season,
   StatusEnum,
 } from "../../../common/types";
+import { sortOnValues } from "./requirementGroupUtils";
 /*
 CreditRange interface to track the min and max credits for a particular season.
 seasonMax = a number representing the max numebr of credits you can take without over-loading.
@@ -241,14 +242,13 @@ export function produceRequirementGroupWarning(
     }
   }
 
-  let requirementGroups: string[] = major.requirementGroups;
   let res: IRequirementGroupWarning[] = [];
-  for (const name of requirementGroups) {
-    let requirementGroup: IMajorRequirementGroup =
-      major.requirementGroupMap[name];
-    // todo: if req group is RangeSection or contains a ICourseRange process after all other requirement groups.
-    // this is because these reqs can be satisfied by a wide range of courses, and you don't want it using up
-    // a course that is need to satisfy a more constrained requirement.
+
+  const sortedRequirements = sortOnValues(
+    Object.values(major.requirementGroupMap)
+  );
+
+  for (const requirementGroup of sortedRequirements) {
     let unsatisfiedRequirement:
       | IRequirementGroupWarning
       | undefined = produceUnsatifiedRequirement(
