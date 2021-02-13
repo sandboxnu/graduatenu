@@ -15,6 +15,7 @@ import {
   getGraduationYearFromState,
   getUserIdFromState,
   getUserPrimaryPlanIdFromState,
+  getActivePlanCoopCycleFromState,
 } from "../state";
 import { IPlanData } from "../models/types";
 import { Major, Schedule } from "../../../common/types";
@@ -23,7 +24,6 @@ import {
   getPlansFromState,
   getTakenCreditsFromState,
   getUserFullNameFromState,
-  safelyGetActivePlanCatalogYearFromState,
 } from "../state";
 import {
   alterScheduleToHaveCorrectYears,
@@ -147,6 +147,7 @@ const EditPlanPopperComponent: React.FC = () => {
     plan.catalogYear
   );
   const [major, setMajor] = useState(plan.major);
+  const [coopCycle, setCoopCycle] = useState(plan.coopCycle);
 
   const handleIconButtonClick = (event: React.MouseEvent<HTMLElement>) => {
     if (anchorEl === null) {
@@ -240,6 +241,40 @@ const EditPlanPopperComponent: React.FC = () => {
     );
   };
 
+  const EditConcentration = () => {
+    return (
+      <SaveOnChangeConcentrationDropdown
+        isStudentLevel={false}
+        style={{
+          width: "100%",
+          marginBottom: "5px",
+          marginTop: "10px",
+        }}
+        useLabel={true}
+      />
+    );
+  };
+
+  const EditCoopCycle = () => {
+    return (
+      <Autocomplete
+        style={{ marginTop: "10px", marginBottom: "15px", fontSize: "10px" }}
+        disableListWrap
+        options={["None", ...allPlans[plan.major!].map(p => planToString(p))]}
+        renderInput={params => (
+          <TextField
+            {...params}
+            variant="outlined"
+            label="Co-op Cycle"
+            fullWidth
+          />
+        )}
+        value={coopCycle}
+        onChange={(_, value) => setCoopCycle(value)}
+      />
+    );
+  };
+
   return (
     <div>
       <EditPlanIconButtonProps onClick={handleIconButtonClick} />
@@ -256,6 +291,8 @@ const EditPlanPopperComponent: React.FC = () => {
             <EditName />
             <EditCatalogYear />
             <EditMajor />
+            <EditConcentration />
+            <EditCoopCycle />
           </PlanCard>
         </ClickAwayListener>
       </PlanPopper>
