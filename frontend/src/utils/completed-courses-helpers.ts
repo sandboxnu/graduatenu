@@ -112,7 +112,7 @@ export function parseCompletedCourses(completedCourses: ScheduleCourse[]) {
     "60": "summer2",
   };
   completedCourses
-    .filter(course => course.semester !== null)
+    .filter(course => !!course.semester)
     .forEach(course => {
       const currentYear = Number(course.semester!.slice(0, 4));
       const currentSemester: string = course.semester!.slice(4, 6);
