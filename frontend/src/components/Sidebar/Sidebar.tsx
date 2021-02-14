@@ -47,11 +47,21 @@ const CreditTitle = styled.p<any>`
     props.isGreen ? "rgba(21,116,62,0.68)" : NORTHEASTERN_RED};
 `;
 
+const ConcentrationTitle = styled.p`
+  margin-left: 4px;
+  font-size: 16px;
+  font-weight: 600;
+`;
+
 const NoConcentrationTitle = styled.p`
   margin-left: 4px;
   font-size: 14px;
   font-weight: 600;
   color: ${NORTHEASTERN_RED};
+`;
+
+const ConcentrationRequirementGroup = styled.div`
+  padding-left: 8px;
 `;
 
 interface SidebarProps {
@@ -71,6 +81,7 @@ interface ConcentrationProps {
   readonly completedCourseStrings: string[];
   readonly warnings: IRequirementGroupWarning[];
   readonly isEditable: boolean;
+  readonly concentrationIsRequired: boolean;
 }
 
 const NoMajorSidebarComponent: React.FC = () => {
@@ -86,29 +97,37 @@ const ConcentrationComponent: React.FC<ConcentrationProps> = ({
   completedCourseStrings,
   warnings,
   isEditable,
+  concentrationIsRequired,
 }) => {
   const userConcentration = useSelector((state: AppState) =>
     safelyGetActivePlanConcentrationFromState(state)
   );
 
-  if (!userConcentration) {
+  if (concentrationIsRequired && !userConcentration) {
     return (
       <NoConcentrationTitle>No Concentration Selected</NoConcentrationTitle>
     );
   }
 
+  if (!userConcentration) {
+    return <></>;
+  }
+
   return (
     <div>
+      <ConcentrationTitle>{userConcentration} Concentration</ConcentrationTitle>
       {concentration?.requirementGroups?.map((req, index) => {
         return (
-          <RequirementSection
-            title={`${userConcentration} Concentration`}
-            contents={concentration.requirementGroupMap[req]}
-            warning={warnings.find(w => w.requirementGroup === req)}
-            key={index + userConcentration}
-            completedCourses={completedCourseStrings}
-            isEditable={isEditable}
-          />
+          <ConcentrationRequirementGroup>
+            <RequirementSection
+              title={req}
+              contents={concentration.requirementGroupMap[req]}
+              warning={warnings.find(w => w.requirementGroup === req)}
+              key={`${index}-${userConcentration}-${req}`}
+              completedCourses={completedCourseStrings}
+              isEditable={isEditable}
+            />
+          </ConcentrationRequirementGroup>
         );
       })}
     </div>
@@ -133,6 +152,7 @@ const MajorSidebarComponent: React.FC<MajorSidebarProps> = ({
         ...transferCourses.map(course => course.subject + course.classId)
       )
     : completedCourses;
+  const concentrationIsRequired = major.concentrations.minOptions > 0;
 
   return (
     <Container>
@@ -152,6 +172,7 @@ const MajorSidebarComponent: React.FC<MajorSidebarProps> = ({
           completedCourseStrings={completedCourseStrings}
           warnings={warnings}
           isEditable={isEditable}
+          concentrationIsRequired={concentrationIsRequired}
         ></ConcentrationComponent>
         {major.requirementGroups.map((req, index) => {
           return (
