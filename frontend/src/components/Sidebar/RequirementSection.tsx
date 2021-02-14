@@ -195,6 +195,7 @@ class RequirementSectionComponent extends React.Component<
     let requirements: Requirement[] = majorRequirementGroup.requirements.filter(
       requirement => requirement.type !== "RANGE"
     );
+
     let promises: Promise<ScheduleCourse | null>[] = [];
 
     function addPromiseForRequirements(reqs: Requirement[]) {
@@ -204,7 +205,7 @@ class RequirementSectionComponent extends React.Component<
             fetchCourse(r.subject.toUpperCase(), r.classId.toString())
           );
         }
-        if (r.type === "AND" || r.type === "OR") {
+        if (r.type === "AND" || r.type === "OR" || r.type === "CREDITS") {
           addPromiseForRequirements(r.courses);
         }
       }
@@ -274,7 +275,7 @@ class RequirementSectionComponent extends React.Component<
     top: boolean
   ) {
     if (req.type === "COURSE") {
-      return this.renderCourse(level, req as IRequiredCourse);
+      return this.renderCourse(level, index, req as IRequiredCourse);
     }
 
     if (req.type === "RANGE") {
@@ -290,6 +291,7 @@ class RequirementSectionComponent extends React.Component<
         <CourseAndLabWrapper key={index}>
           {this.renderCourse(
             level,
+            index,
             req.courses[0] as IRequiredCourse,
             req.courses[1] as IRequiredCourse
           )}
@@ -302,7 +304,9 @@ class RequirementSectionComponent extends React.Component<
         {this.convertTypeToText(req, level, top, index)}
         {req.courses
           .filter(c => c.type === "COURSE")
-          .map(c => this.renderCourse(level, c as IRequiredCourse))}
+          .map((c, index) =>
+            this.renderCourse(level, index, c as IRequiredCourse)
+          )}
         {req.courses
           .filter(c => c.type === "AND")
           .map((c: Requirement, index: number) =>
@@ -344,11 +348,13 @@ class RequirementSectionComponent extends React.Component<
   /**
    * Renders the given course as a draggable SidebarClassBlock.
    * @param level the current indentation level for this course block
+   * @param index the index of this course within its Requirement, used for its key
    * @param course the given IRequiredCourse
    * @param andCourse? only received by this function if the given course is an and course
    */
   renderCourse(
     level: number,
+    index: number,
     course: IRequiredCourse,
     andCourse?: IRequiredCourse
   ) {
@@ -370,7 +376,8 @@ class RequirementSectionComponent extends React.Component<
               course.subject +
               course.classId +
               andCourse.subject +
-              andCourse.classId
+              andCourse.classId +
+              index
             }
             class={convertedCourse}
             lab={convertedLab}

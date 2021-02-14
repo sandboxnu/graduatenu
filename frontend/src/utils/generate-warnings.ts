@@ -30,6 +30,7 @@ import {
   Season,
   StatusEnum,
   ICreditRangeCourse,
+  Concentration,
 } from "../../../common/types";
 import { flattenRequirements } from "./flattenRequirements";
 import { sortRequirementGroupsByConstraint } from "./requirementGroupUtils";
@@ -215,10 +216,12 @@ export function produceSatisfiedReqGroups(
  * Identify unsatisfied requirements given a major and a schedule.
  * @param schedule the schedule to check requirements for.
  * @param major the major to check requirements against.
+ * @param concentration the concentration to also check requirements against.
  */
 export function produceRequirementGroupWarning(
   schedule: Schedule,
-  major: Major
+  major: Major,
+  concentration?: Concentration
 ): IRequirementGroupWarning[] {
   // holds courses that are currently on the schedule.
   const taken: Map<string, HashableCourse> = new Map<string, HashableCourse>();
@@ -245,10 +248,13 @@ export function produceRequirementGroupWarning(
     }
   }
 
-  let res: IRequirementGroupWarning[] = [];
-
+  const requirementGroups: IMajorRequirementGroup[] = [
+    ...Object.values(major.requirementGroupMap),
+    ...Object.values(concentration?.requirementGroupMap || []),
+  ];
+  const res: IRequirementGroupWarning[] = [];
   const sortedRequirements = sortRequirementGroupsByConstraint(
-    Object.values(major.requirementGroupMap)
+    Object.values(requirementGroups)
   );
 
   for (const requirementGroup of sortedRequirements) {
@@ -568,7 +574,7 @@ function processICourseRange(
 
   //loop through the taken courses and check if it is in one of the subject ranges for this ICourseRange.
   for (const courseKey of Array.from(taken.keys())) {
-    //check the global map to see if it has not already been used.
+    //check the global map to see if it has not been used.
     if (!coursesUsed.has(courseKey)) {
       let hashableCourse: HashableCourse | undefined = taken.get(courseKey);
       if (hashableCourse) {
