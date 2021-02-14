@@ -6,8 +6,12 @@ import { NextButton } from "../components/common/NextButton";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import { Dispatch } from "redux";
-import { Major, Schedule } from "../../../common/types";
-import { planToString } from "../utils";
+import { Major, Schedule, ScheduleCourse } from "../../../common/types";
+import {
+  generateInitialSchedule,
+  generateInitialScheduleNoCoopCycle,
+  planToString,
+} from "../utils";
 import {
   setStudentAcademicYearAction,
   setStudentGraduationYearAction,
@@ -30,11 +34,18 @@ import {
   getMajorsLoadingFlagFromState,
   getPlansLoadingFlagFromState,
   getUserMajorNameFromState,
+  getUserIdFromState,
+  getCompletedCoursesFromState,
 } from "../state";
 import { AppState } from "../state/reducers/state";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import { findMajorFromName } from "../utils/plan-helpers";
 import { SaveInParentConcentrationDropdown } from "../components/ConcentrationDropdown";
+import { getAuthToken } from "../utils/auth-helpers";
+import { updateUser } from "../services/UserService";
+import { createPlanForUser, setPrimaryPlan } from "../services/PlanService";
+import { addNewPlanAction } from "../state/actions/userPlansActions";
+import { IPlanData, ITemplatePlan } from "../models/types";
 
 const SpinnerWrapper = styled.div`
   display: flex;
@@ -50,6 +61,8 @@ interface OnboardingReduxStoreProps {
   plans: Record<string, Schedule[]>;
   isFetchingMajors: boolean;
   isFetchingPlans: boolean;
+  userId: number;
+  completedCourses: ScheduleCourse[];
 }
 
 interface OnboardingReduxDispatchProps {
@@ -59,6 +72,10 @@ interface OnboardingReduxDispatchProps {
   setMajor: (major: string | null) => void;
   setConcentration: (concentration: string | null) => void;
   setCoopCycle: (coopCycle: string | null) => void;
+  addNewPlanAction: (
+    plan: IPlanData | ITemplatePlan,
+    academicYear?: number
+  ) => void;
 }
 
 type OnboardingScreenProps = OnboardingReduxStoreProps &
@@ -176,6 +193,63 @@ class OnboardingScreenComponent extends React.Component<
     this.props.setMajor(this.state.major || null);
     this.props.setConcentration(this.state.concentration || null);
     this.props.setCoopCycle(this.state.coopCycle || null);
+
+    this.updateUserAndCreatePlan();
+  }
+
+  updateUserAndCreatePlan() {
+    const token = getAuthToken();
+    const updateUserPromise = () =>
+      updateUser(
+        {
+          id: this.props.userId!,
+          token: token,
+        },
+        {
+          major: this.state.major || null,
+          academic_year: this.state.year!,
+          graduation_year: this.state.gradYear!,
+          coop_cycle: this.state.coopCycle || null,
+          concentration: this.state.concentration || null,
+          catalog_year: this.state.catalogYear || null,
+        }
+      );
+
+    const createPlanPromise = () => {
+      let schedule, courseCounter;
+      if (!!this.state.coopCycle) {
+        [schedule, courseCounter] = generateInitialSchedule(
+          this.state.year!,
+          this.state.gradYear!,
+          this.props.completedCourses,
+          this.state.major!,
+          this.state.coopCycle!,
+          this.props.plans
+        );
+      } else {
+        [schedule, courseCounter] = generateInitialScheduleNoCoopCycle(
+          this.state.year!,
+          this.state.gradYear!,
+          this.props.completedCourses
+        );
+      }
+
+      createPlanForUser(this.props.userId!, {
+        name: "Plan 1",
+        link_sharing_enabled: false,
+        schedule: schedule,
+        major: this.state.major || null,
+        coop_cycle: this.state.coopCycle || null,
+        concentration: this.state.concentration || null,
+        course_counter: courseCounter,
+        catalog_year: this.state.catalogYear || null,
+      }).then(response => {
+        this.props.addNewPlanAction(response.plan, this.state.year!);
+        setPrimaryPlan(this.props.userId, response.plan.id);
+      });
+    };
+
+    return Promise.all([updateUserPromise(), createPlanPromise()]);
   }
 
   /**
@@ -440,9 +514,10 @@ class OnboardingScreenComponent extends React.Component<
             // Bypass completed courses screen to prevent overriding actual completed courses
             <Link
               to={{
-                pathname: !!major
-                  ? "/transferableCredits"
-                  : "/transferableCredits",
+                // pathname: !!major
+                //   ? "/completedCourses"
+                //   : "/transferableCredits",
+                pathname: "/home",
               }}
               onClick={onClick}
               style={{ textDecoration: "none" }}
@@ -476,6 +551,8 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     dispatch(setStudentCoopCycleAction(coopCycle)),
   setCatalogYear: (catalogYear: number | null) =>
     dispatch(setStudentCatalogYearAction(catalogYear)),
+  addNewPlanAction: (plan: IPlanData | ITemplatePlan, academicYear?: number) =>
+    dispatch(addNewPlanAction(plan, academicYear)),
 });
 
 /**
@@ -488,6 +565,8 @@ const mapStateToProps = (state: AppState) => ({
   plans: getPlansFromState(state),
   isFetchingMajors: getMajorsLoadingFlagFromState(state),
   isFetchingPlans: getPlansLoadingFlagFromState(state),
+  userId: getUserIdFromState(state),
+  completedCourses: getCompletedCoursesFromState(state),
 });
 
 /**
