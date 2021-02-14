@@ -31,8 +31,8 @@ import {
   StatusEnum,
   ICreditRangeCourse,
 } from "../../../common/types";
-import { sortOnValues } from "./requirementGroupUtils";
 import { flattenRequirements } from "./flattenRequirements";
+import { sortRequirementGroupsByConstraint } from "./requirementGroupUtils";
 
 /*
 CreditRange interface to track the min and max credits for a particular season.
@@ -247,7 +247,7 @@ export function produceRequirementGroupWarning(
 
   let res: IRequirementGroupWarning[] = [];
 
-  const sortedRequirements = sortOnValues(
+  const sortedRequirements = sortRequirementGroupsByConstraint(
     Object.values(major.requirementGroupMap)
   );
 

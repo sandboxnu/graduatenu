@@ -68,6 +68,7 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2501",
+                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -139,6 +140,7 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2511",
+                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -966,6 +968,7 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2501",
+                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -1037,6 +1040,7 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2511",
+                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -1896,6 +1900,7 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2501",
+                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -1975,6 +1980,7 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2511",
+                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -2883,6 +2889,7 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2501",
+                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -2962,6 +2969,7 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2511",
+                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -3897,6 +3905,7 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2501",
+                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -3976,6 +3985,7 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2511",
+                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -4651,6 +4661,7 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2501",
+                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -4730,6 +4741,7 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2511",
+                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -5435,6 +5447,7 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2501",
+                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -5529,6 +5542,7 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2511",
+                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -6249,6 +6263,7 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2501",
+                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -6328,6 +6343,7 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2511",
+                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -7044,6 +7060,7 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2501",
+                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -7123,6 +7140,7 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2511",
+                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -7856,6 +7874,7 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2501",
+                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -7972,6 +7991,7 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2511",
+                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -8616,6 +8636,7 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2501",
+                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -8732,6 +8753,7 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2511",
+                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -9423,6 +9445,7 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2501",
+                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -9502,6 +9525,7 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2511",
+                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -10273,6 +10297,7 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2501",
+                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -10392,6 +10417,7 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2511",
+                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -11236,6 +11262,7 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2501",
+                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -11315,6 +11342,7 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2511",
+                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -12142,6 +12170,7 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2501",
+                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -12236,6 +12265,7 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2511",
+                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -13095,6 +13125,7 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2501",
+                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -13189,6 +13220,7 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2511",
+                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -14063,6 +14095,7 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2501",
+                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -14142,6 +14175,7 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2511",
+                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -14780,6 +14814,7 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2501",
+                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -14859,6 +14894,7 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2511",
+                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -15473,6 +15509,7 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2501",
+                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -15552,6 +15589,7 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2511",
+                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -16156,6 +16194,7 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2501",
+                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -16235,6 +16274,7 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2511",
+                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -16871,6 +16911,7 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2501",
+                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -16950,6 +16991,7 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2511",
+                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -17683,6 +17725,7 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2501",
+                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -17762,6 +17805,7 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2511",
+                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -18504,6 +18548,7 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2501",
+                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -18575,6 +18620,7 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2511",
+                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -19364,6 +19410,7 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2501",
+                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -19435,6 +19482,7 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2511",
+                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -20232,6 +20280,7 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2501",
+                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -20311,6 +20360,7 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2511",
+                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -20954,6 +21004,7 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2501",
+                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -21025,6 +21076,7 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2511",
+                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -21713,6 +21765,7 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2501",
+                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -21792,6 +21845,7 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2511",
+                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -22103,6 +22157,10 @@ Object {
                       "subject": "MATH",
                     },
                     Object {
+                      "classId": "1245",
+                      "subject": "MATH",
+                    },
+                    Object {
                       "classId": "1251",
                       "subject": "MATH",
                     },
@@ -22204,6 +22262,10 @@ Object {
                     },
                     Object {
                       "classId": "1242",
+                      "subject": "MATH",
+                    },
+                    Object {
+                      "classId": "1245",
                       "subject": "MATH",
                     },
                     Object {
@@ -22347,17 +22409,16 @@ Object {
                       "subject": "MATH",
                     },
                     Object {
+                      "classId": "2301",
+                      "subject": "MGSC",
+                    },
+                    Object {
                       "classId": "2400",
                       "subject": "POLS",
                     },
                     Object {
-                      "classId": "1201",
-                      "missing": true,
-                      "subject": "MGSC",
-                    },
-                    Object {
-                      "classId": "2301",
-                      "subject": "MGSC",
+                      "classId": "2320",
+                      "subject": "PSYC",
                     },
                   ],
                 },
@@ -22519,17 +22580,16 @@ Object {
                       "subject": "MATH",
                     },
                     Object {
+                      "classId": "2301",
+                      "subject": "MGSC",
+                    },
+                    Object {
                       "classId": "2400",
                       "subject": "POLS",
                     },
                     Object {
-                      "classId": "1201",
-                      "missing": true,
-                      "subject": "MGSC",
-                    },
-                    Object {
-                      "classId": "2301",
-                      "subject": "MGSC",
+                      "classId": "2320",
+                      "subject": "PSYC",
                     },
                   ],
                 },
@@ -22666,6 +22726,7 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2501",
+                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -22745,6 +22806,7 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2511",
+                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -22959,6 +23021,10 @@ Object {
                       "subject": "MATH",
                     },
                     Object {
+                      "classId": "1245",
+                      "subject": "MATH",
+                    },
+                    Object {
                       "classId": "1251",
                       "subject": "MATH",
                     },
@@ -23152,6 +23218,10 @@ Object {
                       "subject": "MATH",
                     },
                     Object {
+                      "classId": "1245",
+                      "subject": "MATH",
+                    },
+                    Object {
                       "classId": "1251",
                       "subject": "MATH",
                     },
@@ -23270,17 +23340,16 @@ Object {
                       "subject": "MATH",
                     },
                     Object {
+                      "classId": "2301",
+                      "subject": "MGSC",
+                    },
+                    Object {
                       "classId": "2400",
                       "subject": "POLS",
                     },
                     Object {
-                      "classId": "1201",
-                      "missing": true,
-                      "subject": "MGSC",
-                    },
-                    Object {
-                      "classId": "2301",
-                      "subject": "MGSC",
+                      "classId": "2320",
+                      "subject": "PSYC",
                     },
                   ],
                 },
@@ -23518,17 +23587,16 @@ Object {
                       "subject": "MATH",
                     },
                     Object {
+                      "classId": "2301",
+                      "subject": "MGSC",
+                    },
+                    Object {
                       "classId": "2400",
                       "subject": "POLS",
                     },
                     Object {
-                      "classId": "1201",
-                      "missing": true,
-                      "subject": "MGSC",
-                    },
-                    Object {
-                      "classId": "2301",
-                      "subject": "MGSC",
+                      "classId": "2320",
+                      "subject": "PSYC",
                     },
                   ],
                 },
@@ -23637,10 +23705,12 @@ Object {
               "values": Array [
                 Object {
                   "classId": "1212",
+                  "missing": true,
                   "subject": "CHEM",
                 },
                 Object {
                   "classId": "1213",
+                  "missing": true,
                   "subject": "CHEM",
                 },
               ],
@@ -23767,10 +23837,12 @@ Object {
                 },
                 Object {
                   "classId": "1107",
+                  "missing": true,
                   "subject": "BIOL",
                 },
                 Object {
                   "classId": "1111",
+                  "missing": true,
                   "subject": "BIOL",
                 },
               ],
@@ -23784,10 +23856,12 @@ Object {
               "values": Array [
                 Object {
                   "classId": "1215",
+                  "missing": true,
                   "subject": "CHEM",
                 },
                 Object {
                   "classId": "1216",
+                  "missing": true,
                   "subject": "CHEM",
                 },
               ],
@@ -24066,6 +24140,7 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2312",
+                  "missing": true,
                   "subject": "CHEM",
                 },
               ],
@@ -24082,6 +24157,7 @@ Object {
                 },
                 Object {
                   "classId": "1214",
+                  "missing": true,
                   "subject": "CHEM",
                 },
                 Object {
@@ -24259,6 +24335,7 @@ Object {
               "values": Array [
                 Object {
                   "classId": "1157",
+                  "missing": true,
                   "subject": "PHYS",
                 },
               ],
@@ -24818,10 +24895,12 @@ Object {
               "values": Array [
                 Object {
                   "classId": "1212",
+                  "missing": true,
                   "subject": "CHEM",
                 },
                 Object {
                   "classId": "1213",
+                  "missing": true,
                   "subject": "CHEM",
                 },
               ],
@@ -24948,10 +25027,12 @@ Object {
                 },
                 Object {
                   "classId": "1107",
+                  "missing": true,
                   "subject": "BIOL",
                 },
                 Object {
                   "classId": "1111",
+                  "missing": true,
                   "subject": "BIOL",
                 },
               ],
@@ -24965,10 +25046,12 @@ Object {
               "values": Array [
                 Object {
                   "classId": "1215",
+                  "missing": true,
                   "subject": "CHEM",
                 },
                 Object {
                   "classId": "1216",
+                  "missing": true,
                   "subject": "CHEM",
                 },
               ],
@@ -25247,6 +25330,7 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2312",
+                  "missing": true,
                   "subject": "CHEM",
                 },
               ],
@@ -25263,6 +25347,7 @@ Object {
                 },
                 Object {
                   "classId": "1214",
+                  "missing": true,
                   "subject": "CHEM",
                 },
                 Object {
@@ -25568,6 +25653,7 @@ Object {
               "values": Array [
                 Object {
                   "classId": "1157",
+                  "missing": true,
                   "subject": "PHYS",
                 },
               ],
@@ -25999,10 +26085,12 @@ Object {
               "values": Array [
                 Object {
                   "classId": "1212",
+                  "missing": true,
                   "subject": "CHEM",
                 },
                 Object {
                   "classId": "1213",
+                  "missing": true,
                   "subject": "CHEM",
                 },
               ],
@@ -26129,10 +26217,12 @@ Object {
                 },
                 Object {
                   "classId": "1107",
+                  "missing": true,
                   "subject": "BIOL",
                 },
                 Object {
                   "classId": "1111",
+                  "missing": true,
                   "subject": "BIOL",
                 },
               ],
@@ -26146,10 +26236,12 @@ Object {
               "values": Array [
                 Object {
                   "classId": "1215",
+                  "missing": true,
                   "subject": "CHEM",
                 },
                 Object {
                   "classId": "1216",
+                  "missing": true,
                   "subject": "CHEM",
                 },
               ],
@@ -26413,6 +26505,7 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2312",
+                  "missing": true,
                   "subject": "CHEM",
                 },
               ],
@@ -26429,6 +26522,7 @@ Object {
                 },
                 Object {
                   "classId": "1214",
+                  "missing": true,
                   "subject": "CHEM",
                 },
                 Object {
@@ -26606,6 +26700,7 @@ Object {
               "values": Array [
                 Object {
                   "classId": "1157",
+                  "missing": true,
                   "subject": "PHYS",
                 },
               ],
@@ -27212,10 +27307,12 @@ Object {
               "values": Array [
                 Object {
                   "classId": "1212",
+                  "missing": true,
                   "subject": "CHEM",
                 },
                 Object {
                   "classId": "1213",
+                  "missing": true,
                   "subject": "CHEM",
                 },
               ],
@@ -27342,10 +27439,12 @@ Object {
                 },
                 Object {
                   "classId": "1107",
+                  "missing": true,
                   "subject": "BIOL",
                 },
                 Object {
                   "classId": "1111",
+                  "missing": true,
                   "subject": "BIOL",
                 },
               ],
@@ -27359,10 +27458,12 @@ Object {
               "values": Array [
                 Object {
                   "classId": "1215",
+                  "missing": true,
                   "subject": "CHEM",
                 },
                 Object {
                   "classId": "1216",
+                  "missing": true,
                   "subject": "CHEM",
                 },
               ],
@@ -27626,6 +27727,7 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2312",
+                  "missing": true,
                   "subject": "CHEM",
                 },
               ],
@@ -27642,6 +27744,7 @@ Object {
                 },
                 Object {
                   "classId": "1214",
+                  "missing": true,
                   "subject": "CHEM",
                 },
                 Object {
@@ -27947,6 +28050,7 @@ Object {
               "values": Array [
                 Object {
                   "classId": "1157",
+                  "missing": true,
                   "subject": "PHYS",
                 },
               ],
@@ -28531,10 +28635,12 @@ Object {
               "values": Array [
                 Object {
                   "classId": "1166",
+                  "missing": true,
                   "subject": "PHYS",
                 },
                 Object {
                   "classId": "1167",
+                  "missing": true,
                   "subject": "PHYS",
                 },
               ],
@@ -29317,10 +29423,12 @@ Object {
               "values": Array [
                 Object {
                   "classId": "1166",
+                  "missing": true,
                   "subject": "PHYS",
                 },
                 Object {
                   "classId": "1167",
+                  "missing": true,
                   "subject": "PHYS",
                 },
               ],
