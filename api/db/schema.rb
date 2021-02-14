@@ -72,7 +72,6 @@ ActiveRecord::Schema.define(version: 2021_01_28_003742) do
     t.bigint "folder_id"
     t.string "concentration"
     t.integer "course_counter"
-    t.string "concentration"
     t.index ["folder_id"], name: "index_template_plans_on_folder_id"
   end
 

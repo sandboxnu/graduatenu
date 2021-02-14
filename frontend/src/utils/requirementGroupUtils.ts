@@ -3,10 +3,10 @@ import { IMajorRequirementGroup } from "../../../common/types";
 const reqGroupSortOrder = ["AND", "OR", "RANGE"];
 
 /**
- *
+ * sorts the IMajorRequirementGroups by the group constrain from most to least constrained
  * @param groupMap Mapping of section name to IMajorRequirementGroup validation group
  */
-export const sortOnValues = (
+export const sortRequirementGroupsByConstraint = (
   reqGroupArray: IMajorRequirementGroup[]
 ): IMajorRequirementGroup[] =>
   // Sort the array based on the IMajorRequirementGroup type
@@ -15,6 +15,7 @@ export const sortOnValues = (
       const diff =
         reqGroupSortOrder.indexOf(first.type) -
         reqGroupSortOrder.indexOf(second.type);
-      return Math.min(-1, Math.max());
+      // returns 0 if diff 0, -1 if diff negative, and 1 if diff positive
+      return Math.min(1, Math.max(-1, diff));
     }
   );

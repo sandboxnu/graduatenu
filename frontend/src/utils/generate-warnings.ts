@@ -32,8 +32,8 @@ import {
   ICreditRangeCourse,
   Concentration,
 } from "../../../common/types";
-import { sortOnValues } from "./requirementGroupUtils";
 import { flattenRequirements } from "./flattenRequirements";
+import { sortRequirementGroupsByConstraint } from "./requirementGroupUtils";
 
 /*
 CreditRange interface to track the min and max credits for a particular season.
@@ -253,12 +253,11 @@ export function produceRequirementGroupWarning(
     ...Object.values(concentration?.requirementGroupMap || []),
   ];
   const res: IRequirementGroupWarning[] = [];
-  const sortedRequirements = sortOnValues(Object.values(requirementGroups));
+  const sortedRequirements = sortRequirementGroupsByConstraint(
+    Object.values(requirementGroups)
+  );
 
   for (const requirementGroup of sortedRequirements) {
-    // todo: if req group is RangeSection or contains a ICourseRange process after all other requirement groups.
-    // this is because these reqs can be satisfied by a wide range of courses, and you don't want it using up
-    // a course that is need to satisfy a more constrained requirement.
     let unsatisfiedRequirement:
       | IRequirementGroupWarning
       | undefined = produceUnsatifiedRequirement(
@@ -658,7 +657,7 @@ function processICreditRangeCourse(
     const formattedUntakenClasses = untakenClasses.map(courseCode).join(", ");
 
     return `(complete ${requirement.minCredits -
-      requirementCreditsCompleted} credits from ${formattedUntakenClasses}`;
+      requirementCreditsCompleted} credits from ${formattedUntakenClasses})`;
   } else if (requirementCreditsCompleted > requirement.maxCredits) {
     return `(${requirementCreditsCompleted -
       requirement.maxCredits} credits taken over limit of ${

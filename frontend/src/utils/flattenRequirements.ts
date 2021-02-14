@@ -1,7 +1,7 @@
 import { IRequiredCourse, Requirement } from "../../../common/types";
 
 /**
- * Accumulate a Set of all unique courses within a given Requirement.
+ * Accumulate an array of all unique courses within a given Requirement.
  * NOTE: This currently does not work for ICourseRanges.
  *
  * @param req the Requirement to retrieve the courses of
@@ -31,10 +31,10 @@ const getCoursesInRequirement = (req: Requirement): IRequiredCourse[] => {
 export const flattenRequirements = (
   requirements: Requirement[]
 ): IRequiredCourse[] =>
-  Array.from(
-    requirements.reduce((acc: Set<IRequiredCourse>, req: Requirement) => {
-      getCoursesInRequirement(req).forEach(acc.add, acc);
-
-      return acc;
-    }, new Set<IRequiredCourse>())
+  requirements.reduce(
+    (acc: IRequiredCourse[], req: Requirement) => [
+      ...acc,
+      ...getCoursesInRequirement(req),
+    ],
+    []
   );
