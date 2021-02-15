@@ -18,6 +18,7 @@ import {
   RedColorButton,
   WhiteColorButton,
 } from "../../components/common/ColoredButtons";
+import { isSearchedTemplate } from "./TemplateUtils";
 
 const Container = styled.div`
   margin-left: 30px;
@@ -234,14 +235,12 @@ const FolderComponent: React.FC<FolderProps> = (props: FolderProps) => {
   );
   const dispatch = useDispatch();
 
-  const isSearchedTemplate = (template: ITemplatePlan) => {
-    return (
-      template.name.includes(props.searchQuery) ||
-      folder.name.includes(props.searchQuery)
-    );
-  };
+  const filteredTemplatePlans = folder.templatePlans.filter(
+    (template: ITemplatePlan) =>
+      isSearchedTemplate(template, folder, props.searchQuery)
+  );
 
-  return (
+  return filteredTemplatePlans.length > 0 ? (
     <div>
       <FolderNameWrapper>
         <div
@@ -256,14 +255,12 @@ const FolderComponent: React.FC<FolderProps> = (props: FolderProps) => {
       </FolderNameWrapper>
       <FolderTemplateListContainer>
         {isExpanded &&
-          folder.templatePlans.map((template: ITemplatePlan) =>
-            isSearchedTemplate(template) ? (
-              <Template name={template.name} id={template.id} />
-            ) : null
-          )}
+          filteredTemplatePlans.map((template: ITemplatePlan) => (
+            <Template name={template.name} id={template.id} />
+          ))}
       </FolderTemplateListContainer>
     </div>
-  );
+  ) : null;
 };
 
 const Template: React.FC<TemplateProps> = ({ name, id }) => {
