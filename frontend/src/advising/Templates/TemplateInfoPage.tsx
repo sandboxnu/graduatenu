@@ -1,6 +1,12 @@
-import { TextField, FormControl } from "@material-ui/core";
+import {
+  TextField,
+  FormControl,
+  Tabs,
+  Tab,
+  FormHelperText,
+} from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
-import React, { useEffect } from "react";
+import React, { createContext, useContext, useEffect, useMemo } from "react";
 import { useState } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { Link, RouteComponentProps } from "react-router-dom";
@@ -30,6 +36,8 @@ import {
   planToString,
 } from "../../utils";
 
+const INPUT_WIDTH = 326;
+
 const Container = styled.div`
   margin-left: 30px;
   margin-right: 30px;
@@ -55,7 +63,19 @@ const ButtonContainer = styled.div`
 `;
 
 const InputContainer = styled.div`
-  width: 326px;
+  width: ${INPUT_WIDTH}px;
+`;
+
+const FolderSelectionContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  width: ${INPUT_WIDTH}px;
+`;
+
+const FolderSelectionTabContainer = styled.div`
+  margin-bottom: 18px;
 `;
 
 interface DropdownProps {
@@ -67,8 +87,149 @@ interface DropdownProps {
 
 interface NameFieldProps {
   readonly name: string;
-  readonly setTemplateName: (name: string) => void;
+  readonly setName: (name: string) => void;
+  readonly label: string;
+  readonly error: boolean;
 }
+
+interface FolderContext {
+  readonly folders: IFolderData[];
+  readonly setSelectedFolderId: (selectedFolderId: number | null) => void;
+  readonly newFolderName: string;
+  readonly setNewFolderName: (newFolderName: string) => void;
+  readonly hasDuplicateFolderName: boolean;
+}
+
+const folderContext = createContext<Partial<FolderContext>>({});
+
+const NameField: React.FC<NameFieldProps> = ({
+  name,
+  setName,
+  label,
+  error,
+}) => {
+  return (
+    <TextField
+      id="outlined-basic"
+      label={label}
+      variant="outlined"
+      value={name}
+      onChange={event => setName(event.target.value)}
+      placeholder=""
+      style={{ width: "326px" }}
+      error={error}
+    />
+  );
+};
+
+const DisplayedFolderInputField: React.FC<{ creatingNewFolder: boolean }> = ({
+  creatingNewFolder,
+}) => {
+  const {
+    folders,
+    setSelectedFolderId,
+    newFolderName,
+    setNewFolderName,
+    hasDuplicateFolderName,
+  } = useContext(folderContext) as FolderContext;
+
+  useEffect(() => {
+    setSelectedFolderId(null);
+    setNewFolderName("");
+  }, [creatingNewFolder]);
+
+  // TODO: FIx new folder input being a greater height than existing folder input
+  if (creatingNewFolder) {
+    return (
+      <FormControl
+        variant="outlined"
+        error={hasDuplicateFolderName}
+        style={{ width: INPUT_WIDTH }}
+      >
+        <NameField
+          name={newFolderName}
+          setName={setNewFolderName}
+          label={"New folder name"}
+          error={hasDuplicateFolderName}
+        />
+        <FormHelperText>
+          {hasDuplicateFolderName && "Folder name has already been taken"}
+        </FormHelperText>
+      </FormControl>
+    );
+  }
+
+  return (
+    <FormControl variant="outlined">
+      <Autocomplete
+        style={{ width: INPUT_WIDTH }}
+        disableListWrap
+        getOptionLabel={option => option.name}
+        options={folders}
+        renderInput={params => (
+          <TextField
+            {...params}
+            variant="outlined"
+            label={"Existing folder"}
+            fullWidth
+          />
+        )}
+        onChange={(event, newValue: any) =>
+          setSelectedFolderId(newValue.id || null)
+        }
+      />
+    </FormControl>
+  );
+};
+
+const FolderSelection: React.FC<{}> = () => {
+  const EXISTING_FOLDER_TAB_INDEX = 0;
+  const NEW_FOLDER_TAB_INDEX = 1;
+
+  const [tabValue, setTabValue] = useState(EXISTING_FOLDER_TAB_INDEX);
+  const {
+    folders,
+    newFolderName,
+    setNewFolderName,
+    hasDuplicateFolderName,
+  } = useContext(folderContext) as FolderContext;
+  const creatingNewFolder = tabValue === NEW_FOLDER_TAB_INDEX;
+
+  const handleTabChange = (event: React.ChangeEvent<{}>, newValue: number) => {
+    setTabValue(newValue);
+  };
+
+  if (folders.length < 1) {
+    return (
+      <NameField
+        name={newFolderName}
+        setName={setNewFolderName}
+        label={"New folder name"}
+        error={hasDuplicateFolderName}
+      />
+    );
+  }
+
+  return (
+    <FolderSelectionContainer>
+      <FolderSelectionTabContainer>
+        <Tabs
+          value={tabValue}
+          onChange={handleTabChange}
+          TabIndicatorProps={{
+            style: {
+              bottom: "4px",
+            },
+          }}
+        >
+          <Tab label="Existing Folder" />
+          <Tab label="New Folder" />
+        </Tabs>
+      </FolderSelectionTabContainer>
+      <DisplayedFolderInputField creatingNewFolder={creatingNewFolder} />
+    </FolderSelectionContainer>
+  );
+};
 
 export const NewTemplatesPage: React.FC<RouteComponentProps<{}>> = ({
   history,
@@ -83,6 +244,7 @@ export const NewTemplatesPage: React.FC<RouteComponentProps<{}>> = ({
   const [coopCycle, setCoopCycle] = useState<string | null>(null);
   const [folders, setFolders] = useState<IFolderData[]>([]);
   const [selectedFolderId, setSelectedFolderId] = useState<number | null>(null);
+  const [newFolderName, setNewFolderName] = useState<string>("");
 
   const fetchTemplates = () => {
     getTemplates(userId, "", 0)
@@ -109,9 +271,21 @@ export const NewTemplatesPage: React.FC<RouteComponentProps<{}>> = ({
   ];
   const buttonSize = 90;
   const majorObj = findMajorFromName(major, majors, Number(catalogYear));
+  const hasDuplicateFolderName = folders.some(
+    folder => folder.name === newFolderName
+  );
+
+  // TODO: Redo error handling to show errors for individual fields when
+  // pressing "Next" rather than keeping the button disabled
   const disabled =
-    !(name && major && catalogYear && selectedFolderId !== null) ||
-    hasConcentrationError;
+    !(
+      name &&
+      major &&
+      catalogYear &&
+      (selectedFolderId !== null || newFolderName)
+    ) ||
+    hasConcentrationError ||
+    hasDuplicateFolderName;
 
   const onSubmit = async () => {
     let schedule, courseCounter;
@@ -140,115 +314,103 @@ export const NewTemplatesPage: React.FC<RouteComponentProps<{}>> = ({
       catalog_year: catalogYear ? Number(catalogYear) : null,
       folder_id: selectedFolderId,
       folder_name:
-        folders.find(folder => selectedFolderId === folder.id)?.name || null,
+        folders.find(folder => selectedFolderId === folder.id)?.name ||
+        newFolderName ||
+        null,
     });
     dispatch(addNewPlanAction(response.templatePlan));
     return response.templatePlan.id;
   };
+
   return (
-    <NewTemplatesPageContainer>
-      <Container style={{ fontSize: "24px" }}>
-        Let's create a template!
-      </Container>
-      <InputContainer>
-        <NameField name={name} setTemplateName={setName} />
-      </InputContainer>
-      <FormControl variant="outlined">
-        <Autocomplete
-          style={{ width: 326 }}
-          disableListWrap
-          getOptionLabel={option => option.name}
-          options={folders}
-          renderInput={params => (
-            <TextField
-              {...params}
-              variant="outlined"
-              label={"Save Plan in Folder"}
-              fullWidth
-            />
-          )}
-          onChange={(event, newValue: any) =>
-            setSelectedFolderId(newValue.id || null)
-          }
-        />
-      </FormControl>
-      <Dropdown
-        label="Catalog year"
-        options={catalogYears}
-        value={catalogYear}
-        setValue={value => {
-          setCatalogYear(value);
-          setMajor(null);
-          setCoopCycle(null);
-        }}
-      />
-      {catalogYear && (
+    <folderContext.Provider
+      value={{
+        folders,
+        setSelectedFolderId,
+        newFolderName,
+        setNewFolderName,
+        hasDuplicateFolderName,
+      }}
+    >
+      <NewTemplatesPageContainer>
+        <Container style={{ fontSize: "24px" }}>
+          Let's create a template!
+        </Container>
+        <InputContainer>
+          <NameField
+            name={name}
+            setName={setName}
+            label={"Template name"}
+            error={false}
+          />
+        </InputContainer>
+        <FolderSelection />
         <Dropdown
-          label="Major"
-          options={majors.map(maj => maj.name)}
-          value={major}
+          label="Catalog year"
+          options={catalogYears}
+          value={catalogYear}
           setValue={value => {
-            setMajor(value);
-            setConcentration(null);
-            setShowConcentrationError(false);
+            setCatalogYear(value);
+            setMajor(null);
             setCoopCycle(null);
           }}
         />
-      )}
-      {major && (
-        <SaveInParentConcentrationDropdown
-          major={majorObj}
-          concentration={concentration}
-          setConcentration={setConcentration}
-          setError={setHasConcentrationError}
-          style={{ width: "326px" }}
-          useLabel={true}
-          showError={showConcentrationError}
-        />
-      )}
-      {major && (
-        <Dropdown
-          label="Co-op cycle"
-          options={allCoopCycles[major!].map(p => planToString(p))}
-          value={coopCycle}
-          setValue={setCoopCycle}
-        />
-      )}
-      <ButtonContainer>
-        <Link
-          to={{ pathname: "/advisor/templates/" }}
-          style={{ textDecoration: "none" }}
-        >
-          <WhiteColorButton style={{ width: buttonSize, marginRight: "20px" }}>
-            Previous
-          </WhiteColorButton>
-        </Link>
-        <RedColorButton
-          onClick={async () => {
-            const planId = await onSubmit();
-            history.push(`/advisor/templates/templateBuilder/${planId}`);
-          }}
-          style={{ width: buttonSize }}
-          disabled={disabled}
-        >
-          Next
-        </RedColorButton>
-      </ButtonContainer>
-    </NewTemplatesPageContainer>
-  );
-};
-
-const NameField: React.FC<NameFieldProps> = ({ name, setTemplateName }) => {
-  return (
-    <TextField
-      id="outlined-basic"
-      label="Template name"
-      variant="outlined"
-      value={name}
-      onChange={event => setTemplateName(event.target.value)}
-      placeholder=""
-      style={{ width: "100%" }}
-    />
+        {catalogYear && (
+          <Dropdown
+            label="Major"
+            options={majors.map(maj => maj.name)}
+            value={major}
+            setValue={value => {
+              setMajor(value);
+              setConcentration(null);
+              setShowConcentrationError(false);
+              setCoopCycle(null);
+            }}
+          />
+        )}
+        {major && (
+          <SaveInParentConcentrationDropdown
+            major={majorObj}
+            concentration={concentration}
+            setConcentration={setConcentration}
+            setError={setHasConcentrationError}
+            style={{ width: INPUT_WIDTH }}
+            useLabel={true}
+            showError={showConcentrationError}
+          />
+        )}
+        {major && (
+          <Dropdown
+            label="Co-op cycle"
+            options={allCoopCycles[major!].map(p => planToString(p))}
+            value={coopCycle}
+            setValue={setCoopCycle}
+          />
+        )}
+        <ButtonContainer>
+          <Link
+            to={{ pathname: "/advisor/templates/" }}
+            style={{ textDecoration: "none" }}
+          >
+            <WhiteColorButton
+              style={{ width: buttonSize, marginRight: "20px" }}
+            >
+              Previous
+            </WhiteColorButton>
+          </Link>
+          <RedColorButton
+            onClick={async () => {
+              const planId = await onSubmit();
+              history.push(`/advisor/templates/templateBuilder/${planId}`);
+            }}
+            style={{ width: buttonSize }}
+            disabled={disabled}
+          >
+            Next
+          </RedColorButton>
+        </ButtonContainer>
+      </NewTemplatesPageContainer>
+    </folderContext.Provider>
   );
 };
 
@@ -261,7 +423,7 @@ const Dropdown: React.FC<DropdownProps> = ({
   return (
     <FormControl variant="outlined">
       <Autocomplete
-        style={{ width: 326 }}
+        style={{ width: INPUT_WIDTH }}
         disableListWrap
         options={options}
         renderInput={params => (

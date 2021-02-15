@@ -149,7 +149,7 @@ export function alterScheduleToHaveCorrectYears(
   const currentYear =
     new Date().getMonth() <= 3 ? currentCalendarYear : currentCalendarYear + 1;
   const numYearsInSchool = graduationYear - currentYear + academicYear;
-  const startingYear = graduationYear - numYearsInSchool;
+  const startingYear = graduationYear - numYearsInSchool + 1;
 
   const newYearMap: { [key: number]: DNDScheduleYear } = {};
   const newYears: number[] = [];

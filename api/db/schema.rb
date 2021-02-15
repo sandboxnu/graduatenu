@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_13_051733) do
+ActiveRecord::Schema.define(version: 2021_01_28_003742) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(version: 2021_01_13_051733) do
     t.json "approved_schedule"
     t.bigint "last_viewer"
     t.datetime "last_requested_approval"
+    t.string "concentration"
     t.index ["user_id"], name: "index_plans_on_user_id"
   end
 
@@ -69,12 +70,12 @@ ActiveRecord::Schema.define(version: 2021_01_13_051733) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "folder_id"
+    t.string "concentration"
     t.integer "course_counter"
     t.index ["folder_id"], name: "index_template_plans_on_folder_id"
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -89,12 +90,17 @@ ActiveRecord::Schema.define(version: 2021_01_13_051733) do
     t.integer "catalog_year"
     t.string "image_url"
     t.boolean "is_advisor", default: false, null: false
-    t.string "nu_id"
     t.json "courses_completed", default: [], array: true
     t.json "courses_transfer", default: [], array: true
     t.bigint "primary_plan_id"
-    t.index ["email"], name: "index_users_on_email", unique: true
+    t.string "concentration"
+    t.text "email_ciphertext"
+    t.text "nu_id_ciphertext"
+    t.string "email_bidx"
+    t.string "nu_id_bidx"
+    t.index ["email_bidx"], name: "index_users_on_email_bidx", unique: true
     t.index ["full_name"], name: "index_users_on_full_name"
+    t.index ["nu_id_bidx"], name: "index_users_on_nu_id_bidx", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
