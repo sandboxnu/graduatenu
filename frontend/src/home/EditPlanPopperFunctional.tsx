@@ -1,4 +1,4 @@
-import React, { useDebugValue, useState, useEffect } from "react";
+import React, { useState } from "react";
 import { withRouter, Link } from "react-router-dom";
 import { batch, useDispatch, useSelector } from "react-redux";
 import Popper from "@material-ui/core/Popper";
@@ -7,18 +7,14 @@ import { TextField, Button, Tooltip } from "@material-ui/core";
 import { EditPlanIconButtonProps } from "./EditPlanIconButton";
 import styled from "styled-components";
 import { AppState } from "../state/reducers/state";
-import { Dispatch } from "redux";
-import { DNDSchedule } from "../models/types";
 import {
   getAcademicYearFromState,
   getActivePlanFromState,
   getGraduationYearFromState,
   getUserIdFromState,
   getUserPrimaryPlanIdFromState,
-  getActivePlanCoopCycleFromState,
   safelyGetActivePlanCatalogYearFromState,
 } from "../state";
-import { IPlanData } from "../models/types";
 import { Major, Schedule } from "../../../common/types";
 import {
   getMajorsFromState,
@@ -26,20 +22,11 @@ import {
   getTakenCreditsFromState,
   getUserFullNameFromState,
 } from "../state";
-import {
-  alterScheduleToHaveCorrectYears,
-  clearSchedule,
-  generateInitialScheduleFromExistingPlan,
-  getStandingFromCompletedCourses,
-  planToString,
-  scheduleHasClasses,
-} from "../utils";
+import { getStandingFromCompletedCourses, planToString } from "../utils";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import {
   setActivePlanCoopCycleAction,
   setActivePlanMajorAction,
-  setActivePlanDNDScheduleAction,
-  setCurrentClassCounterForActivePlanAction,
   setActivePlanCatalogYearAction,
   setActivePlanNameAction,
 } from "../state/actions/userPlansActions";
@@ -50,7 +37,6 @@ import {
   ALERT_STATUS,
 } from "../components/common/SnackbarAlert";
 import { PrimaryButton } from "../components/common/PrimaryButton";
-import { Save } from "@material-ui/icons";
 import { useDebouncedEffect } from "../hooks/useDebouncedEffect";
 
 const PlanPopper = styled(Popper)<any>`
@@ -108,12 +94,6 @@ const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
-`;
-
-const SetButton = styled(Button)<any>`
-  background: #e0e0e0;
-  font-weight: normal;
-  float: right;
 `;
 
 const Divider = styled.hr`
