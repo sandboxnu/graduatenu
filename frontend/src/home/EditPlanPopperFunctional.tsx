@@ -194,6 +194,9 @@ const EditPlanPopperComponent: React.FC = () => {
 
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const [name, setName] = useState<string>(plan.name);
+  const [alertStatus, setAlertStatus] = useState<ALERT_STATUS>(
+    ALERT_STATUS.None
+  );
   const major = plan.major;
   const coopCycle = plan.coopCycle;
 
@@ -338,14 +341,10 @@ const EditPlanPopperComponent: React.FC = () => {
             onClick={() =>
               setPrimaryPlan(userId, plan.id)
                 .then(_ => {
-                  // this.setState({
-                  //   alertStatus: ALERT_STATUS.Success,
-                  // });
+                  setAlertStatus(ALERT_STATUS.Success);
                 })
                 .catch(_ => {
-                  // this.setState({
-                  //   alertStatus: ALERT_STATUS.Error,
-                  // });
+                  setAlertStatus(ALERT_STATUS.Error);
                 })
             }
           >
@@ -378,6 +377,11 @@ const EditPlanPopperComponent: React.FC = () => {
           </PlanCard>
         </ClickAwayListener>
       </PlanPopper>
+      <SnackbarAlert
+        alertStatus={alertStatus}
+        handleClose={() => setAlertStatus(ALERT_STATUS.None)}
+        successMsg="Set Primary Plan"
+      />
     </div>
   );
 };
