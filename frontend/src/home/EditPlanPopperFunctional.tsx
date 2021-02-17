@@ -1,4 +1,4 @@
-import React, { useDebugValue, useState } from "react";
+import React, { useDebugValue, useState, useEffect } from "react";
 import { withRouter, Link } from "react-router-dom";
 import { batch, useDispatch, useSelector } from "react-redux";
 import Popper from "@material-ui/core/Popper";
@@ -41,6 +41,7 @@ import {
   setActivePlanDNDScheduleAction,
   setCurrentClassCounterForActivePlanAction,
   setActivePlanCatalogYearAction,
+  setActivePlanNameAction,
 } from "../state/actions/userPlansActions";
 import { SaveOnChangeConcentrationDropdown } from "../components/ConcentrationDropdown";
 import { setPrimaryPlan } from "../services/PlanService";
@@ -50,6 +51,7 @@ import {
 } from "../components/common/SnackbarAlert";
 import { PrimaryButton } from "../components/common/PrimaryButton";
 import { Save } from "@material-ui/icons";
+import { useDebouncedEffect } from "../hooks/useDebouncedEffect";
 
 const PlanPopper = styled(Popper)<any>`
   margin-top: 4px;
@@ -123,6 +125,47 @@ const Divider = styled.hr`
   padding: 0;
 `;
 
+interface EditNameProps {
+  name: string;
+  anchorEl: HTMLElement | null;
+}
+
+const EditName: React.FC<EditNameProps> = (props: EditNameProps) => {
+  const dispatch = useDispatch();
+  const [name, setName] = useState(props.name);
+
+  const handleKeyDown = (event: any) => {
+    if (event.key === "Enter") {
+      dispatch(setActivePlanNameAction(name));
+    }
+  };
+
+  useDebouncedEffect(
+    () => {
+      console.log("Use Debounced Effect");
+      dispatch(setActivePlanNameAction(name));
+    },
+    2000,
+    [name]
+  );
+
+  return (
+    <TextField
+      style={{ marginTop: "10px", marginBottom: "5px" }}
+      id="outlined-basic"
+      label="Plan Name"
+      variant="outlined"
+      key="plannameTextField"
+      onChange={e => {
+        setName(e.target.value);
+      }}
+      onKeyDown={handleKeyDown}
+      defaultValue={props.name}
+      fullWidth
+    />
+  );
+};
+
 const EditPlanPopperComponent: React.FC = () => {
   const dispatch = useDispatch();
   const {
@@ -150,7 +193,7 @@ const EditPlanPopperComponent: React.FC = () => {
   }));
 
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
-  const [name, setName] = useState<string>(userFullName);
+  const [name, setName] = useState<string>(plan.name);
   const major = plan.major;
   const coopCycle = plan.coopCycle;
 
@@ -170,7 +213,7 @@ const EditPlanPopperComponent: React.FC = () => {
     return (
       <>
         <TopRow>
-          <NameText>{name}</NameText>
+          <NameText>{userFullName}</NameText>
           <EditProfileLink to="/profile">Edit Profile</EditProfileLink>
         </TopRow>
         <StandingText>
@@ -178,20 +221,6 @@ const EditPlanPopperComponent: React.FC = () => {
         </StandingText>
         <StandingText>{creditsTaken + " Credits Completed"}</StandingText>
       </>
-    );
-  };
-
-  const EditName = () => {
-    return (
-      <TextField
-        style={{ marginTop: "10px", marginBottom: "5px" }}
-        id="outlined-basic"
-        label="Plan Name"
-        variant="outlined"
-        onChange={e => setName(e.target.value)}
-        defaultValue={userFullName}
-        fullWidth
-      />
     );
   };
 
@@ -340,7 +369,7 @@ const EditPlanPopperComponent: React.FC = () => {
           <PlanCard>
             <ProfileInfo />
             <Divider />
-            <EditName />
+            <EditName name={plan.name} anchorEl={anchorEl} />
             <EditCatalogYear />
             {!!catalogYear && <EditMajor />}
             {!!catalogYear && !!major && <EditConcentration />}

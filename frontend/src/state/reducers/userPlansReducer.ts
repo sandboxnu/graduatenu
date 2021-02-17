@@ -27,6 +27,7 @@ import {
   undoRemoveClassFromActivePlanAction,
   changeSemesterStatusForActivePlanAction,
   updateSemesterForActivePlanAction,
+  setActivePlanNameAction,
 } from "../actions/userPlansActions";
 import { resetStudentAction } from "../actions/studentActions";
 import {
@@ -157,6 +158,12 @@ export const userPlansReducer = (
         draft.plans[draft.activePlan!].courseWarnings =
           container.courseWarnings;
 
+        return draft;
+      }
+      case getType(setActivePlanNameAction): {
+        const { name } = action.payload;
+        const activePlan = draft.plans[draft.activePlan!];
+        activePlan.name = name;
         return draft;
       }
       case getType(setActivePlanMajorAction): {

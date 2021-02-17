@@ -57,7 +57,10 @@ export const setActivePlanDNDScheduleAction = createAction(
   "userPlans/SET_ACTIVE_PLAN_DND_SCHEDULE",
   (schedule: DNDSchedule) => ({ schedule })
 )();
-
+export const setActivePlanNameAction = createAction(
+  "userPlans/SET_ACTIVE_PLAN_NAME",
+  (name: string) => ({ name })
+)();
 export const setActivePlanMajorAction = createAction(
   "userPlans/SET_ACTIVE_PLAN_MAJOR",
   (major: string | null) => ({ major })
