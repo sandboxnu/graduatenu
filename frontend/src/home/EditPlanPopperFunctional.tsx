@@ -16,6 +16,7 @@ import {
   getUserIdFromState,
   getUserPrimaryPlanIdFromState,
   getActivePlanCoopCycleFromState,
+  safelyGetActivePlanCatalogYearFromState,
 } from "../state";
 import { IPlanData } from "../models/types";
 import { Major, Schedule } from "../../../common/types";
@@ -47,6 +48,8 @@ import {
   SnackbarAlert,
   ALERT_STATUS,
 } from "../components/common/SnackbarAlert";
+import { PrimaryButton } from "../components/common/PrimaryButton";
+import { Save } from "@material-ui/icons";
 
 const PlanPopper = styled(Popper)<any>`
   margin-top: 4px;
@@ -98,8 +101,11 @@ const MajorTextField = styled(TextField)<any>`
 `;
 
 const ButtonContainer = styled.div`
-  margin-top: 20px;
+  margin-top: 10px;
   height: 40px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
 `;
 
 const SetButton = styled(Button)<any>`
@@ -125,12 +131,14 @@ const EditPlanPopperComponent: React.FC = () => {
     allPlans,
     creditsTaken,
     userFullName,
+    catalogYear,
     userId,
     primaryPlanId,
     academicYear,
     graduationYear,
   } = useSelector((state: AppState) => ({
     plan: getActivePlanFromState(state)!, // EditPlanPopper is only visible if there is an active plan
+    catalogYear: safelyGetActivePlanCatalogYearFromState(state),
     majors: getMajorsFromState(state),
     allPlans: getPlansFromState(state),
     creditsTaken: getTakenCreditsFromState(state),
@@ -143,11 +151,8 @@ const EditPlanPopperComponent: React.FC = () => {
 
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const [name, setName] = useState<string>(userFullName);
-  const [catalogYear, setCatalogYear] = useState<number | null>(
-    plan.catalogYear
-  );
-  const [major, setMajor] = useState(plan.major);
-  const [coopCycle, setCoopCycle] = useState(plan.coopCycle);
+  const major = plan.major;
+  const coopCycle = plan.coopCycle;
 
   const handleIconButtonClick = (event: React.MouseEvent<HTMLElement>) => {
     if (anchorEl === null) {
@@ -210,9 +215,9 @@ const EditPlanPopperComponent: React.FC = () => {
         value={catalogYear ? catalogYear + "" : ""}
         onChange={(_, value) => {
           if (value === "") {
-            setCatalogYear(null);
+            dispatch(setActivePlanCatalogYearAction(null));
           } else {
-            setCatalogYear(Number(value));
+            dispatch(setActivePlanCatalogYearAction(Number(value)));
           }
         }}
       />
@@ -236,7 +241,9 @@ const EditPlanPopperComponent: React.FC = () => {
           />
         )}
         value={major}
-        onChange={(_, value) => setMajor(value)}
+        onChange={(_, value) => {
+          dispatch(setActivePlanMajorAction(value));
+        }}
       />
     );
   };
@@ -270,8 +277,52 @@ const EditPlanPopperComponent: React.FC = () => {
           />
         )}
         value={coopCycle}
-        onChange={(_, value) => setCoopCycle(value)}
+        onChange={(_, value) => {
+          const chosenCoopCycle = value === "None" ? "" : value;
+          dispatch(
+            setActivePlanCoopCycleAction(
+              chosenCoopCycle,
+              academicYear,
+              graduationYear,
+              allPlans
+            )
+          );
+        }}
       />
+    );
+  };
+
+  const SetPrimaryPlanButton = () => {
+    const isDisabled = primaryPlanId && primaryPlanId === plan.id;
+
+    return (
+      <Tooltip
+        title={
+          isDisabled
+            ? "This is already your primary plan"
+            : "Indicate your primary plan of study for your advisor"
+        }
+      >
+        <ButtonContainer>
+          <PrimaryButton
+            onClick={() =>
+              setPrimaryPlan(userId, plan.id)
+                .then(_ => {
+                  // this.setState({
+                  //   alertStatus: ALERT_STATUS.Success,
+                  // });
+                })
+                .catch(_ => {
+                  // this.setState({
+                  //   alertStatus: ALERT_STATUS.Error,
+                  // });
+                })
+            }
+          >
+            Set as Primary Plan
+          </PrimaryButton>
+        </ButtonContainer>
+      </Tooltip>
     );
   };
 
@@ -290,9 +341,10 @@ const EditPlanPopperComponent: React.FC = () => {
             <Divider />
             <EditName />
             <EditCatalogYear />
-            <EditMajor />
-            <EditConcentration />
-            <EditCoopCycle />
+            {!!catalogYear && <EditMajor />}
+            {!!catalogYear && !!major && <EditConcentration />}
+            {!!catalogYear && !!major && <EditCoopCycle />}
+            <SetPrimaryPlanButton />
           </PlanCard>
         </ClickAwayListener>
       </PlanPopper>
