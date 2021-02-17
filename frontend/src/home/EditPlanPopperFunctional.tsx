@@ -127,7 +127,6 @@ const Divider = styled.hr`
 
 interface EditNameProps {
   name: string;
-  anchorEl: HTMLElement | null;
 }
 
 const EditName: React.FC<EditNameProps> = (props: EditNameProps) => {
@@ -155,13 +154,129 @@ const EditName: React.FC<EditNameProps> = (props: EditNameProps) => {
       id="outlined-basic"
       label="Plan Name"
       variant="outlined"
-      key="plannameTextField"
+      key="planNameTextField"
       onChange={e => {
         setName(e.target.value);
       }}
       onKeyDown={handleKeyDown}
       defaultValue={props.name}
       fullWidth
+    />
+  );
+};
+
+interface EditCatalogYearProps {
+  majors: Major[];
+  catalogYear: Number | null;
+}
+
+const EditCatalogYear: React.FC<EditCatalogYearProps> = (
+  props: EditCatalogYearProps
+) => {
+  const dispatch = useDispatch();
+
+  let catalogYears = [
+    ...Array.from(new Set(props.majors.map(maj => maj.yearVersion.toString()))),
+  ];
+  return (
+    <Autocomplete
+      style={{ marginTop: "10px", marginBottom: "5px" }}
+      disableListWrap
+      options={catalogYears}
+      key="planEditCatalogYear"
+      renderInput={params => (
+        <TextField
+          {...params}
+          variant="outlined"
+          label="Catalog Year"
+          fullWidth
+        />
+      )}
+      value={props.catalogYear ? props.catalogYear + "" : ""}
+      onChange={(_, value) => {
+        if (value === "") {
+          dispatch(setActivePlanCatalogYearAction(null));
+        } else {
+          dispatch(setActivePlanCatalogYearAction(Number(value)));
+        }
+      }}
+    />
+  );
+};
+
+interface EditMajorProps {
+  major: string | null;
+  majors: Major[];
+  catalogYear: Number | null;
+}
+
+const EditMajor: React.FC<EditMajorProps> = (props: EditMajorProps) => {
+  const dispatch = useDispatch();
+
+  return (
+    <Autocomplete
+      style={{ marginTop: "10px", marginBottom: "5px" }}
+      disableListWrap
+      options={props.majors
+        .filter((maj: Major) => maj.yearVersion == props.catalogYear)
+        .map(maj => maj.name)}
+      renderInput={params => (
+        <MajorTextField
+          {...params}
+          variant="outlined"
+          label="Major"
+          fullWidth
+        />
+      )}
+      value={props.major}
+      onChange={(_, value) => {
+        dispatch(setActivePlanMajorAction(value));
+      }}
+    />
+  );
+};
+
+interface EditCoopCycleProps {
+  major: string | null;
+  allPlans: Record<string, Schedule[]>;
+  coopCycle: string | null;
+  academicYear: number;
+  graduationYear: number;
+}
+
+const EditCoopCycle: React.FC<EditCoopCycleProps> = (
+  props: EditCoopCycleProps
+) => {
+  const dispatch = useDispatch();
+
+  return (
+    <Autocomplete
+      style={{ marginTop: "10px", marginBottom: "15px", fontSize: "10px" }}
+      disableListWrap
+      options={[
+        "None",
+        ...props.allPlans[props.major!].map(p => planToString(p)),
+      ]}
+      renderInput={params => (
+        <TextField
+          {...params}
+          variant="outlined"
+          label="Co-op Cycle"
+          fullWidth
+        />
+      )}
+      value={props.coopCycle}
+      onChange={(_, value) => {
+        const chosenCoopCycle = value === "None" ? "" : value;
+        dispatch(
+          setActivePlanCoopCycleAction(
+            chosenCoopCycle,
+            props.academicYear,
+            props.graduationYear,
+            props.allPlans
+          )
+        );
+      }}
     />
   );
 };
@@ -227,103 +342,6 @@ const EditPlanPopperComponent: React.FC = () => {
     );
   };
 
-  const EditCatalogYear = () => {
-    let catalogYears = [
-      ...Array.from(new Set(majors.map(maj => maj.yearVersion.toString()))),
-    ];
-    return (
-      <Autocomplete
-        style={{ marginTop: "10px", marginBottom: "5px" }}
-        disableListWrap
-        options={catalogYears}
-        renderInput={params => (
-          <TextField
-            {...params}
-            variant="outlined"
-            label="Catalog Year"
-            fullWidth
-          />
-        )}
-        value={catalogYear ? catalogYear + "" : ""}
-        onChange={(_, value) => {
-          if (value === "") {
-            dispatch(setActivePlanCatalogYearAction(null));
-          } else {
-            dispatch(setActivePlanCatalogYearAction(Number(value)));
-          }
-        }}
-      />
-    );
-  };
-
-  const EditMajor = () => {
-    return (
-      <Autocomplete
-        style={{ marginTop: "10px", marginBottom: "5px" }}
-        disableListWrap
-        options={majors
-          .filter((maj: Major) => maj.yearVersion == catalogYear)
-          .map(maj => maj.name)}
-        renderInput={params => (
-          <MajorTextField
-            {...params}
-            variant="outlined"
-            label="Major"
-            fullWidth
-          />
-        )}
-        value={major}
-        onChange={(_, value) => {
-          dispatch(setActivePlanMajorAction(value));
-        }}
-      />
-    );
-  };
-
-  const EditConcentration = () => {
-    return (
-      <SaveOnChangeConcentrationDropdown
-        isStudentLevel={false}
-        style={{
-          width: "100%",
-          marginBottom: "5px",
-          marginTop: "10px",
-        }}
-        useLabel={true}
-      />
-    );
-  };
-
-  const EditCoopCycle = () => {
-    return (
-      <Autocomplete
-        style={{ marginTop: "10px", marginBottom: "15px", fontSize: "10px" }}
-        disableListWrap
-        options={["None", ...allPlans[plan.major!].map(p => planToString(p))]}
-        renderInput={params => (
-          <TextField
-            {...params}
-            variant="outlined"
-            label="Co-op Cycle"
-            fullWidth
-          />
-        )}
-        value={coopCycle}
-        onChange={(_, value) => {
-          const chosenCoopCycle = value === "None" ? "" : value;
-          dispatch(
-            setActivePlanCoopCycleAction(
-              chosenCoopCycle,
-              academicYear,
-              graduationYear,
-              allPlans
-            )
-          );
-        }}
-      />
-    );
-  };
-
   const SetPrimaryPlanButton = () => {
     const isDisabled = primaryPlanId && primaryPlanId === plan.id;
 
@@ -368,11 +386,35 @@ const EditPlanPopperComponent: React.FC = () => {
           <PlanCard>
             <ProfileInfo />
             <Divider />
-            <EditName name={plan.name} anchorEl={anchorEl} />
-            <EditCatalogYear />
-            {!!catalogYear && <EditMajor />}
-            {!!catalogYear && !!major && <EditConcentration />}
-            {!!catalogYear && !!major && <EditCoopCycle />}
+            <EditName name={plan.name} />
+            <EditCatalogYear majors={majors} catalogYear={catalogYear} />
+            {!!catalogYear && (
+              <EditMajor
+                major={major}
+                majors={majors}
+                catalogYear={catalogYear}
+              />
+            )}
+            {!!catalogYear && !!major && (
+              <SaveOnChangeConcentrationDropdown
+                isStudentLevel={false}
+                style={{
+                  width: "100%",
+                  marginBottom: "5px",
+                  marginTop: "10px",
+                }}
+                useLabel={true}
+              />
+            )}
+            {!!catalogYear && !!major && (
+              <EditCoopCycle
+                major={major}
+                allPlans={allPlans}
+                coopCycle={coopCycle}
+                academicYear={academicYear}
+                graduationYear={graduationYear}
+              />
+            )}
             <SetPrimaryPlanButton />
           </PlanCard>
         </ClickAwayListener>
