@@ -305,6 +305,7 @@ const EditPlanPopperComponent: React.FC = () => {
       >
         <ButtonContainer>
           <PrimaryButton
+            disabled={isDisabled}
             onClick={() =>
               setPrimaryPlan(userId, plan.id)
                 .then(_ => {
