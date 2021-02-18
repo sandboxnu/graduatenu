@@ -16,6 +16,7 @@ export const csPlans: Schedule[] = [
               subject: "CS",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              semester: null,
               name: "Leadership Skill Development",
               coreqs: {
                 type: "and",
@@ -31,6 +32,7 @@ export const csPlans: Schedule[] = [
               subject: "CS",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Discrete Structures",
               coreqs: {
                 type: "and",
@@ -51,6 +53,7 @@ export const csPlans: Schedule[] = [
               subject: "CS",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              semester: null,
               name: "Seminar for CS 1800",
               coreqs: {
                 type: "and",
@@ -71,6 +74,7 @@ export const csPlans: Schedule[] = [
               subject: "CS",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Fundamentals of Computer Science 1",
               coreqs: {
                 type: "and",
@@ -91,6 +95,7 @@ export const csPlans: Schedule[] = [
               subject: "CS",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              semester: null,
               name: "Lab for CS 2500",
               coreqs: {
                 type: "and",
@@ -111,6 +116,7 @@ export const csPlans: Schedule[] = [
               subject: "ENGW",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "First-Year Writing",
               coreqs: {
                 type: "and",
@@ -126,6 +132,7 @@ export const csPlans: Schedule[] = [
               subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Elective",
             },
           ],
@@ -141,6 +148,7 @@ export const csPlans: Schedule[] = [
               subject: "CS",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Fundamentals of Computer Science 2",
               coreqs: {
                 type: "and",
@@ -166,6 +174,7 @@ export const csPlans: Schedule[] = [
               subject: "CS",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              semester: null,
               name: "Lab for CS 2510",
               coreqs: {
                 type: "and",
@@ -186,6 +195,7 @@ export const csPlans: Schedule[] = [
               subject: "CS",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Logic and Computation",
               coreqs: {
                 type: "and",
@@ -229,6 +239,7 @@ export const csPlans: Schedule[] = [
               subject: "CS",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              semester: null,
               name: "Lab for CS 2800",
               coreqs: {
                 type: "and",
@@ -249,6 +260,7 @@ export const csPlans: Schedule[] = [
               subject: "MATH",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Calculus 1 for Science and Engineering",
               coreqs: {
                 type: "and",
@@ -264,6 +276,7 @@ export const csPlans: Schedule[] = [
               subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Elective",
             },
           ],
@@ -279,6 +292,7 @@ export const csPlans: Schedule[] = [
               subject: "CS",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Object-Oriented Design",
               coreqs: {
                 type: "and",
@@ -308,6 +322,7 @@ export const csPlans: Schedule[] = [
               subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Elective",
             },
           ],
@@ -323,6 +338,7 @@ export const csPlans: Schedule[] = [
               subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Elective",
             },
             {
@@ -330,6 +346,7 @@ export const csPlans: Schedule[] = [
               subject: "MATH",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Calculus 2 for Science and Engineering",
               coreqs: {
                 type: "and",
@@ -357,6 +374,7 @@ export const csPlans: Schedule[] = [
               subject: "CS",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Computer Systems",
               coreqs: {
                 type: "and",
@@ -386,6 +404,7 @@ export const csPlans: Schedule[] = [
               subject: "CS",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Algorithms and Data",
               coreqs: {
                 type: "and",
@@ -434,6 +453,7 @@ export const csPlans: Schedule[] = [
               subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Elective",
             },
             {
@@ -441,6 +461,7 @@ export const csPlans: Schedule[] = [
               subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Elective",
             },
             {
@@ -448,6 +469,7 @@ export const csPlans: Schedule[] = [
               subject: "CS",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              semester: null,
               name: "Professional Development for Khoury Co-op",
               coreqs: {
                 type: "and",
@@ -490,6 +512,7 @@ export const csPlans: Schedule[] = [
               subject: "MATH",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Probability and Statistics",
               coreqs: {
                 type: "and",
@@ -518,6 +541,7 @@ export const csPlans: Schedule[] = [
               subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Elective",
             },
           ],
@@ -537,6 +561,7 @@ export const csPlans: Schedule[] = [
               subject: "CS",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Networks and Distributed Systems",
               coreqs: {
                 type: "and",
@@ -557,6 +582,7 @@ export const csPlans: Schedule[] = [
               subject: "CS",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Theory of Computation",
               coreqs: {
                 type: "and",
@@ -596,6 +622,7 @@ export const csPlans: Schedule[] = [
               subject: "XXXX",
               numCreditsMin: 5,
               numCreditsMax: 5,
+              semester: null,
               name: "Science elective with lab",
             },
             {
@@ -603,6 +630,7 @@ export const csPlans: Schedule[] = [
               subject: "THTR",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              semester: null,
               name: "The Eloquent Presenter",
               coreqs: {
                 type: "and",
@@ -618,6 +646,7 @@ export const csPlans: Schedule[] = [
               subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Computing and social issues",
             },
           ],
@@ -647,6 +676,7 @@ export const csPlans: Schedule[] = [
               subject: "MATH",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Linear Algebra",
               coreqs: {
                 type: "and",
@@ -679,6 +709,7 @@ export const csPlans: Schedule[] = [
               subject: "ENGW",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Advanced Writing in the Technical Professions",
               coreqs: {
                 type: "and",
@@ -725,6 +756,7 @@ export const csPlans: Schedule[] = [
               subject: "CS",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Programming Languages",
               coreqs: {
                 type: "and",
@@ -759,6 +791,7 @@ export const csPlans: Schedule[] = [
               subject: "EECE",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Embedded Design: Enabling Robotics",
               coreqs: {
                 type: "and",
@@ -787,6 +820,7 @@ export const csPlans: Schedule[] = [
               subject: "XXXX",
               numCreditsMin: 5,
               numCreditsMax: 5,
+              semester: null,
               name: "Science elective with lab",
             },
             {
@@ -794,6 +828,7 @@ export const csPlans: Schedule[] = [
               subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Computer science elective",
             },
           ],
@@ -809,6 +844,7 @@ export const csPlans: Schedule[] = [
               subject: "CS",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Software Development",
               coreqs: {
                 type: "and",
@@ -842,6 +878,7 @@ export const csPlans: Schedule[] = [
               subject: "CS",
               numCreditsMin: 0,
               numCreditsMax: 0,
+              semester: null,
               name: "",
             },
             {
@@ -849,6 +886,7 @@ export const csPlans: Schedule[] = [
               subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Computer science capstone",
             },
             {
@@ -856,6 +894,7 @@ export const csPlans: Schedule[] = [
               subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Elective",
             },
             {
@@ -863,6 +902,7 @@ export const csPlans: Schedule[] = [
               subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Computer science elective",
             },
           ],
@@ -901,6 +941,7 @@ export const csPlans: Schedule[] = [
               subject: "CS",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              semester: null,
               name: "Leadership Skill Development",
               coreqs: {
                 type: "and",
@@ -916,6 +957,7 @@ export const csPlans: Schedule[] = [
               subject: "CS",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Discrete Structures",
               coreqs: {
                 type: "and",
@@ -936,6 +978,7 @@ export const csPlans: Schedule[] = [
               subject: "CS",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              semester: null,
               name: "Seminar for CS 1800",
               coreqs: {
                 type: "and",
@@ -956,6 +999,7 @@ export const csPlans: Schedule[] = [
               subject: "CS",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Fundamentals of Computer Science 1",
               coreqs: {
                 type: "and",
@@ -976,6 +1020,7 @@ export const csPlans: Schedule[] = [
               subject: "CS",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              semester: null,
               name: "Lab for CS 2500",
               coreqs: {
                 type: "and",
@@ -996,6 +1041,7 @@ export const csPlans: Schedule[] = [
               subject: "ENGW",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "First-Year Writing",
               coreqs: {
                 type: "and",
@@ -1011,6 +1057,7 @@ export const csPlans: Schedule[] = [
               subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Elective",
             },
           ],
@@ -1026,6 +1073,7 @@ export const csPlans: Schedule[] = [
               subject: "CS",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Fundamentals of Computer Science 2",
               coreqs: {
                 type: "and",
@@ -1051,6 +1099,7 @@ export const csPlans: Schedule[] = [
               subject: "CS",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              semester: null,
               name: "Lab for CS 2510",
               coreqs: {
                 type: "and",
@@ -1071,6 +1120,7 @@ export const csPlans: Schedule[] = [
               subject: "CS",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Logic and Computation",
               coreqs: {
                 type: "and",
@@ -1114,6 +1164,7 @@ export const csPlans: Schedule[] = [
               subject: "CS",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              semester: null,
               name: "Lab for CS 2800",
               coreqs: {
                 type: "and",
@@ -1134,6 +1185,7 @@ export const csPlans: Schedule[] = [
               subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Elective",
             },
             {
@@ -1141,6 +1193,7 @@ export const csPlans: Schedule[] = [
               subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Elective",
             },
           ],
@@ -1174,6 +1227,7 @@ export const csPlans: Schedule[] = [
               subject: "CS",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Object-Oriented Design",
               coreqs: {
                 type: "and",
@@ -1203,6 +1257,7 @@ export const csPlans: Schedule[] = [
               subject: "MATH",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Calculus 1 for Science and Engineering",
               coreqs: {
                 type: "and",
@@ -1218,6 +1273,7 @@ export const csPlans: Schedule[] = [
               subject: "CS",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Algorithms and Data",
               coreqs: {
                 type: "and",
@@ -1266,6 +1322,7 @@ export const csPlans: Schedule[] = [
               subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Elective",
             },
             {
@@ -1273,6 +1330,7 @@ export const csPlans: Schedule[] = [
               subject: "CS",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              semester: null,
               name: "Professional Development for Khoury Co-op",
               coreqs: {
                 type: "and",
@@ -1326,6 +1384,7 @@ export const csPlans: Schedule[] = [
               subject: "CS",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Theory of Computation",
               coreqs: {
                 type: "and",
@@ -1365,6 +1424,7 @@ export const csPlans: Schedule[] = [
               subject: "CS",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Computer Systems",
               coreqs: {
                 type: "and",
@@ -1394,6 +1454,7 @@ export const csPlans: Schedule[] = [
               subject: "MATH",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Calculus 2 for Science and Engineering",
               coreqs: {
                 type: "and",
@@ -1409,6 +1470,7 @@ export const csPlans: Schedule[] = [
               subject: "XXXX",
               numCreditsMin: 5,
               numCreditsMax: 5,
+              semester: null,
               name: "Science elective with lab",
             },
             {
@@ -1416,6 +1478,7 @@ export const csPlans: Schedule[] = [
               subject: "THTR",
               numCreditsMin: 1,
               numCreditsMax: 1,
+              semester: null,
               name: "The Eloquent Presenter",
               coreqs: {
                 type: "and",
@@ -1453,6 +1516,7 @@ export const csPlans: Schedule[] = [
               subject: "MATH",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Linear Algebra",
               coreqs: {
                 type: "and",
@@ -1485,6 +1549,7 @@ export const csPlans: Schedule[] = [
               subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Elective",
             },
           ],
@@ -1504,6 +1569,7 @@ export const csPlans: Schedule[] = [
               subject: "CS",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Networks and Distributed Systems",
               coreqs: {
                 type: "and",
@@ -1524,6 +1590,7 @@ export const csPlans: Schedule[] = [
               subject: "MATH",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Probability and Statistics",
               coreqs: {
                 type: "and",
@@ -1552,6 +1619,7 @@ export const csPlans: Schedule[] = [
               subject: "ENGW",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Advanced Writing in the Technical Professions",
               coreqs: {
                 type: "and",
@@ -1586,6 +1654,7 @@ export const csPlans: Schedule[] = [
               subject: "XXXX",
               numCreditsMin: 5,
               numCreditsMax: 5,
+              semester: null,
               name: "Science elective with lab",
             },
           ],
@@ -1615,6 +1684,7 @@ export const csPlans: Schedule[] = [
               subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Elective",
             },
             {
@@ -1622,6 +1692,7 @@ export const csPlans: Schedule[] = [
               subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Elective",
             },
           ],
@@ -1641,6 +1712,7 @@ export const csPlans: Schedule[] = [
               subject: "CS",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Programming Languages",
               coreqs: {
                 type: "and",
@@ -1675,6 +1747,7 @@ export const csPlans: Schedule[] = [
               subject: "EECE",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Embedded Design: Enabling Robotics",
               coreqs: {
                 type: "and",
@@ -1703,6 +1776,7 @@ export const csPlans: Schedule[] = [
               subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "CS undergraduate elective",
             },
             {
@@ -1710,6 +1784,7 @@ export const csPlans: Schedule[] = [
               subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "CS undergraduate elective",
             },
           ],
@@ -1725,6 +1800,7 @@ export const csPlans: Schedule[] = [
               subject: "CS",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Software Development",
               coreqs: {
                 type: "and",
@@ -1758,6 +1834,7 @@ export const csPlans: Schedule[] = [
               subject: "CS",
               numCreditsMin: 0,
               numCreditsMax: 0,
+              semester: null,
               name: "",
             },
             {
@@ -1765,6 +1842,7 @@ export const csPlans: Schedule[] = [
               subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Computing and social issues",
             },
             {
@@ -1772,6 +1850,7 @@ export const csPlans: Schedule[] = [
               subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Capstone",
             },
             {
@@ -1779,6 +1858,7 @@ export const csPlans: Schedule[] = [
               subject: "XXXX",
               numCreditsMin: 4,
               numCreditsMax: 4,
+              semester: null,
               name: "Elective",
             },
           ],

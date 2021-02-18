@@ -4,6 +4,12 @@ import {
   ISimplifiedCourseData,
   ISimplifiedCourseDataAPI,
 } from "../models/types";
+import {
+  ScheduleCourse,
+  ScheduleYear,
+  SeasonWord,
+} from "../../../common/types";
+import { convertToDNDSchedule } from "./schedule-helpers";
 
 /**
  * Returns the sum of all credits in the courses
@@ -91,4 +97,70 @@ export function getSimplifiedCourseData(
       completion: completion,
     };
   });
+}
+/*
+Parses a student's completed courses into a schedule with courses placed in
+whichever semester they were taken. Ignores COOP3945.
+ */
+export function parseCompletedCourses(completedCourses: ScheduleCourse[]) {
+  const years: number[] = [];
+  const yearMap: { [key: number]: ScheduleYear } = {};
+  const termMap: { [key: string]: SeasonWord } = {
+    "10": "fall",
+    "30": "spring",
+    "40": "summer1",
+    "60": "summer2",
+  };
+  completedCourses
+    .filter(course => !!course.semester)
+    .forEach(course => {
+      const currentYear = Number(course.semester!.slice(0, 4));
+      const currentSemester: string = course.semester!.slice(4, 6);
+      if (!years.includes(currentYear)) {
+        years.push(currentYear);
+        yearMap[currentYear] = {
+          year: currentYear,
+          fall: {
+            season: "FL",
+            year: currentYear - 1,
+            termId: Number(String(currentYear) + "10"),
+            status: "CLASSES",
+            classes: [],
+          },
+          spring: {
+            season: "SP",
+            year: currentYear,
+            termId: Number(String(currentYear) + "30"),
+            status: "CLASSES",
+            classes: [],
+          },
+          summer1: {
+            season: "S1",
+            year: currentYear,
+            termId: Number(String(currentYear) + "40"),
+            status: "INACTIVE",
+            classes: [],
+          },
+          summer2: {
+            season: "S2",
+            year: currentYear,
+            termId: Number(String(currentYear) + "60"),
+            status: "INACTIVE",
+            classes: [],
+          },
+          isSummerFull: false,
+        };
+      }
+      const activeSemester = yearMap[currentYear][termMap[currentSemester]];
+      if (course.subject == "COOP") {
+        activeSemester["status"] = "COOP";
+      } else if (activeSemester["status"] == "INACTIVE") {
+        activeSemester["status"] = "CLASSES";
+        activeSemester["classes"].push(course);
+      } else {
+        activeSemester["classes"].push(course);
+      }
+    });
+  years.sort();
+  return convertToDNDSchedule({ years, yearMap }, 0);
 }

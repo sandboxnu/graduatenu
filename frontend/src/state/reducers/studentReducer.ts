@@ -18,17 +18,22 @@ import {
   setStudentCatalogYearAction,
   setStudentConcentrationAction,
 } from "../actions/studentActions";
-import { IUserData } from "../../models/types";
+import { DNDSchedule, IUserData } from "../../models/types";
 import { ScheduleCourse } from "../../../../common/types";
+import { parseCompletedCourses } from "../../utils";
 
 export interface StudentState {
   student?: IUserData;
   completedRequirements: IRequiredCourse[]; // only used in onboarding flow
+  completedCourseSchedule?: DNDSchedule;
+  completedCourseCounter: number;
 }
 
 const initialState: StudentState = {
   student: undefined,
   completedRequirements: [],
+  completedCourseSchedule: undefined,
+  completedCourseCounter: 0,
 };
 
 export const studentReducer = (
@@ -105,6 +110,9 @@ export const studentReducer = (
             course1.classId.toString().localeCompare(course2.classId.toString())
         );
         draft.student!.completedCourses = completedCourses;
+        const [schedule, counter] = parseCompletedCourses(completedCourses);
+        draft.completedCourseSchedule = schedule;
+        draft.completedCourseCounter = counter;
         return draft;
       }
       case getType(setTransferCoursesAction): {
