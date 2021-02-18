@@ -1,11 +1,11 @@
 import {
+  CourseWarning,
   DNDSchedule,
-  DNDScheduleYear,
   DNDScheduleCourse,
   DNDScheduleTerm,
+  DNDScheduleYear,
   SeasonEnum,
   StatusEnum,
-  CourseWarning,
 } from "../models/types";
 import { Schedule, ScheduleCourse, SeasonWord } from "../../../common/types";
 import { findExamplePlanFromCoopCycle } from "./plan-helpers";
@@ -50,6 +50,35 @@ export function generateInitialSchedule(
     alterScheduleToHaveCorrectYears(schedule, academicYear, graduationYear),
     courseCounter,
   ];
+}
+
+/**
+ * Generates a course schedule with completed courses in their appropriate semesters
+ * with a co-op cycle and the remaining years blank.
+ * @param completedCourseSchedule is the schedule generated using only the student's
+ * completed courses
+ * @param coopCycle is the pattern of co-ops
+ */
+export function generateBlankCompletedCourseSchedule(
+  academicYear: number,
+  graduationYear: number,
+  completedCourseSchedule: DNDSchedule,
+  major: string,
+  coopCycle: string,
+  allPlans: Record<string, Schedule[]>
+) {
+  const [schedule, counter] = generateBlankCoopPlan(major, coopCycle, allPlans);
+  const yearCorrectedSchedule = alterScheduleToHaveCorrectYears(
+    schedule,
+    academicYear,
+    graduationYear
+  );
+
+  completedCourseSchedule.years.forEach(year => {
+    yearCorrectedSchedule.yearMap[year] = completedCourseSchedule.yearMap[year];
+  });
+
+  return yearCorrectedSchedule;
 }
 
 export function generateYearlessSchedule(
@@ -119,6 +148,71 @@ export function generateInitialScheduleNoCoopCycle(
   ];
 }
 
+/**
+ * Generates a course schedule with completed courses in their appropriate semesters,
+ * with remaining years blank and no co-op cycle.
+ * @param completedCourseSchedule is the schedule generated using only the student's
+ * completed courses
+ */
+export function generateBlankCompletedCourseScheduleNoCoopCycle(
+  academicYear: number,
+  graduationYear: number,
+  completedCourseSchedule: DNDSchedule
+) {
+  const currentCalendarYear = new Date().getFullYear();
+  const currentYear =
+    new Date().getMonth() <= 8 ? currentCalendarYear : currentCalendarYear + 1;
+  const numYearsInSchool = graduationYear - currentYear + academicYear;
+  const yearsTaken = completedCourseSchedule.years.length;
+  const yearsLeft = numYearsInSchool - yearsTaken;
+
+  const mostRecentYear =
+    yearsTaken !== 0
+      ? completedCourseSchedule.years[yearsTaken - 1]
+      : graduationYear - yearsLeft + 1;
+  const completedCourseScheduleCopy = JSON.parse(
+    JSON.stringify(completedCourseSchedule)
+  ) as Schedule;
+  for (let i = 1; i <= yearsLeft; i++) {
+    const currentYear = mostRecentYear + i;
+    completedCourseScheduleCopy.years.push(currentYear);
+    completedCourseScheduleCopy.yearMap[currentYear] = {
+      year: mostRecentYear + i,
+      fall: {
+        season: "FL",
+        year: currentYear,
+        termId: Number(String(currentYear) + "10"),
+        status: "CLASSES",
+        classes: [],
+      },
+      spring: {
+        season: "SP",
+        year: currentYear,
+        termId: Number(String(currentYear) + "30"),
+        status: "CLASSES",
+        classes: [],
+      },
+      summer1: {
+        season: "S1",
+        year: currentYear,
+        termId: Number(String(currentYear) + "40"),
+        status: "INACTIVE",
+        classes: [],
+      },
+      summer2: {
+        season: "S2",
+        year: currentYear,
+        termId: Number(String(currentYear) + "60"),
+        status: "INACTIVE",
+        classes: [],
+      },
+      isSummerFull: false,
+    };
+  }
+
+  return convertToDNDSchedule(completedCourseScheduleCopy, 0)[0];
+}
+
 export function generateInitialScheduleFromExistingPlan(
   academicYear: number,
   graduationYear: number,
@@ -139,17 +233,22 @@ export function generateInitialScheduleFromExistingPlan(
 
   return [schedule, courseCounter];
 }
-
+/*
+Modifies schedule years to be correct based on academic and graduation year.
+School years in the schedule are based on the ending year. For example, the 2019
+- 2020 school year is all represented by 2020. 
+ */
 export function alterScheduleToHaveCorrectYears(
   schedule: DNDSchedule,
   academicYear: number,
   graduationYear: number
 ): DNDSchedule {
   const currentCalendarYear = new Date().getFullYear();
+  // Starting in September, students move up in academic year
   const currentYear =
-    new Date().getMonth() <= 3 ? currentCalendarYear : currentCalendarYear + 1;
+    new Date().getMonth() <= 8 ? currentCalendarYear : currentCalendarYear + 1;
   const numYearsInSchool = graduationYear - currentYear + academicYear;
-  const startingYear = graduationYear - numYearsInSchool;
+  const startingYear = graduationYear - numYearsInSchool + 1;
 
   const newYearMap: { [key: number]: DNDScheduleYear } = {};
   const newYears: number[] = [];
@@ -161,7 +260,7 @@ export function alterScheduleToHaveCorrectYears(
     const oldYear = schedule.years[i];
     newYearMap[newYear] = schedule.yearMap[oldYear];
     newYearMap[newYear].fall.termId = Number(String(newYear) + String(10));
-    newYearMap[newYear].fall.year = newYear - 1;
+    newYearMap[newYear].fall.year = newYear;
     newYearMap[newYear].spring.termId = Number(String(newYear) + String(30));
     newYearMap[newYear].spring.year = newYear;
     newYearMap[newYear].summer1.termId = Number(String(newYear) + String(40));
@@ -447,6 +546,7 @@ export function findCourseWarnings(
     return result;
   }
 }
+
 /*
  *  Determines if this course is in the given term
  * @param courseToAdd the course that is being checked

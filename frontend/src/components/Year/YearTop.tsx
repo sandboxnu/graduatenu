@@ -142,6 +142,12 @@ class YearTopComponent extends React.Component<Props, YearTopState> {
       summer1: "Summer I",
       summer2: "Summer II",
     };
+    const semesterStatusMapping = {
+      fall: this.state.fallStatus,
+      spring: this.state.springStatus,
+      summer1: this.state.summer1Status,
+      summer2: this.state.summer2Status,
+    };
     return (
       <Container>
         {semesters.map(semester => (
@@ -154,7 +160,7 @@ class YearTopComponent extends React.Component<Props, YearTopState> {
             {isEditable && (
               <SemesterType
                 year={yearPosition}
-                status={this.state.fallStatus}
+                status={semesterStatusMapping[semester]}
                 onChange={(event: any) => this.handleChange(event, semester)}
               />
             )}

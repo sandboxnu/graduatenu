@@ -18,20 +18,20 @@ import {
   getUserMajorNameFromState,
   getUserIdFromState,
   getUserCoopCycleFromState,
-  getCompletedCoursesFromState,
   safelyGetTransferCoursesFromState,
   getUserCatalogYearFromState,
   getPlansFromState,
   getUserConcentrationFromState,
+  getCompletedCourseScheduleFromState,
+  getCompletedCourseCounterFromState,
 } from "../state";
 import { AppState } from "../state/reducers/state";
 import { addNewPlanAction } from "../state/actions/userPlansActions";
 import { updateUser } from "../services/UserService";
 import { getAuthToken } from "../utils/auth-helpers";
-import { getSimplifiedCourseData } from "../utils/completed-courses-helpers";
 import {
-  generateInitialSchedule,
-  generateInitialScheduleNoCoopCycle,
+  generateBlankCompletedCourseSchedule,
+  generateBlankCompletedCourseScheduleNoCoopCycle,
 } from "../utils";
 
 interface TransferableExamGroupComponentProps {
@@ -151,9 +151,10 @@ const TransferableCreditScreen: React.FC = () => {
     graduationYear,
     coopCycle,
     catalogYear,
-    completedCourses,
+    completedCourseSchedule,
     transferCourses,
     allPlans,
+    completedCourseCounter,
   } = useSelector(
     (state: AppState) => ({
       userId: getUserIdFromState(state),
@@ -163,7 +164,8 @@ const TransferableCreditScreen: React.FC = () => {
       graduationYear: getGraduationYearFromState(state)!,
       coopCycle: getUserCoopCycleFromState(state),
       transferCourses: safelyGetTransferCoursesFromState(state),
-      completedCourses: getCompletedCoursesFromState(state),
+      completedCourseSchedule: getCompletedCourseScheduleFromState(state),
+      completedCourseCounter: getCompletedCourseCounterFromState(state),
       catalogYear: getUserCatalogYearFromState(state),
       allPlans: getPlansFromState(state),
     }),
@@ -191,34 +193,25 @@ const TransferableCreditScreen: React.FC = () => {
           coop_cycle: coopCycle,
           concentration: concentration,
           catalog_year: catalogYear,
-          // TODO: Once khoury gives us this info, we shouldn't update transfer/completed if khoury user
-          courses_transfer: getSimplifiedCourseData(
-            transferCourses,
-            "TRANSFER"
-          ),
-          courses_completed: getSimplifiedCourseData(
-            completedCourses,
-            "PASSED"
-          ),
         }
       );
 
     const createPlanPromise = () => {
       let schedule, courseCounter;
       if (!!coopCycle) {
-        [schedule, courseCounter] = generateInitialSchedule(
+        schedule = generateBlankCompletedCourseSchedule(
           academicYear,
           graduationYear,
-          completedCourses,
+          completedCourseSchedule!,
           major!,
           coopCycle!,
           allPlans
         );
       } else {
-        [schedule, courseCounter] = generateInitialScheduleNoCoopCycle(
+        schedule = generateBlankCompletedCourseScheduleNoCoopCycle(
           academicYear,
           graduationYear,
-          completedCourses
+          completedCourseSchedule!
         );
       }
 
@@ -229,7 +222,7 @@ const TransferableCreditScreen: React.FC = () => {
         major: major,
         coop_cycle: coopCycle,
         concentration: concentration,
-        course_counter: courseCounter,
+        course_counter: completedCourseCounter || 0,
         catalog_year: catalogYear,
       }).then(response => {
         dispatch(addNewPlanAction(response.plan, academicYear));

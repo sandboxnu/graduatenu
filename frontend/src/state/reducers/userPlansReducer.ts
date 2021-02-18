@@ -120,6 +120,12 @@ export const userPlansReducer = (
 
         const index = indexOfLastViewedPlan(plans);
         draft.activePlan = plans[index]?.name;
+
+        const container = produceWarnings(plans[index]?.schedule);
+
+        draft.plans[draft.activePlan!].warnings = container.normalWarnings;
+        draft.plans[draft.activePlan!].courseWarnings =
+          container.courseWarnings;
         return closePastYears(draft, academicYear);
       }
       case getType(deletePlan): {

@@ -89,6 +89,7 @@ export const searchCourses = async (
         coreqs: result.class.coreqs,
         numCreditsMin: result.class.minCredits,
         numCreditsMax: result.class.maxCredits,
+        semester: null,
       };
       courses.push(course);
     }

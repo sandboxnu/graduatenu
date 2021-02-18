@@ -516,6 +516,7 @@ class OnboardingScreenComponent extends React.Component<
           {!!catalogYear && !!major && this.renderCoopCycleDropDown()}
           {/* requires year, gradYear, and if there is a major, then there must be a catalog year */}
           {allFilledAndNoErrors ? (
+            // Bypass completed courses screen to prevent overriding actual completed courses
             <Link
               to={{
                 // pathname: !!major
