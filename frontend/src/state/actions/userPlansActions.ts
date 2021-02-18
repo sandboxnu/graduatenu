@@ -34,7 +34,11 @@ export const addNewPlanAction = createAction(
 
 export const setUserPlansAction = createAction(
   "userPlans/SET_USER_PLANS",
-  (plans: IPlanData[], academicYear: number) => ({ plans, academicYear })
+  (
+    plans: IPlanData[],
+    academicYear: number,
+    transferCourses: ScheduleCourse[]
+  ) => ({ plans, academicYear, transferCourses })
 )();
 
 export const updateActivePlanAction = createAction(

@@ -121,7 +121,10 @@ export const userPlansReducer = (
         const index = indexOfLastViewedPlan(plans);
         draft.activePlan = plans[index]?.name;
 
-        const container = produceWarnings(plans[index]?.schedule);
+        const container = produceWarnings(
+          plans[index]?.schedule,
+          action.payload.transferCourses
+        );
 
         draft.plans[draft.activePlan!].warnings = container.normalWarnings;
         draft.plans[draft.activePlan!].courseWarnings =

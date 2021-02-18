@@ -157,7 +157,11 @@ interface ReduxStoreHomeProps {
 }
 
 interface ReduxDispatchHomeProps {
-  setUserPlans: (plans: IPlanData[], academicYear: number) => void;
+  setUserPlans: (
+    plans: IPlanData[],
+    academicYear: number,
+    transferCourses: ScheduleCourse[]
+  ) => void;
   updateActivePlan: (updatedPlan: Partial<IPlanData>) => void;
   logOut: () => void;
   incrementCurrentClassCounter: () => void;
@@ -391,8 +395,11 @@ const mapStateToProps = (state: AppState) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  setUserPlans: (plans: IPlanData[], academicYear: number) =>
-    dispatch(setUserPlansAction(plans, academicYear)),
+  setUserPlans: (
+    plans: IPlanData[],
+    academicYear: number,
+    transferCourses: ScheduleCourse[]
+  ) => dispatch(setUserPlansAction(plans, academicYear, transferCourses)),
   updateActivePlan: (updatedPlan: Partial<IPlanData>) =>
     dispatch(updateActivePlanAction(updatedPlan)),
   logOut: () => dispatch(resetStudentAction()),
