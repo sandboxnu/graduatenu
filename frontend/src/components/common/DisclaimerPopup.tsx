@@ -15,6 +15,7 @@ const OuterSection = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  outline: none;
   padding: 35px 25px;
 `;
 
