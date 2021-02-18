@@ -1,6 +1,6 @@
 import React from "react";
 import { withRouter, RouteComponentProps, Link } from "react-router-dom";
-import { TextField, Tooltip } from "@material-ui/core";
+import { Backdrop, TextField, Tooltip } from "@material-ui/core";
 import { GenericOnboardingTemplate } from "./GenericOnboarding";
 import { NextButton } from "../components/common/NextButton";
 import { connect } from "react-redux";
@@ -46,6 +46,8 @@ import { updateUser } from "../services/UserService";
 import { createPlanForUser, setPrimaryPlan } from "../services/PlanService";
 import { addNewPlanAction } from "../state/actions/userPlansActions";
 import { IPlanData, ITemplatePlan } from "../models/types";
+import { DefaultModal } from "../components/common/DefaultModal";
+import { RedColorButton } from "../components/common/ColoredButtons";
 
 const SpinnerWrapper = styled.div`
   display: flex;
@@ -92,6 +94,7 @@ interface OnboardingScreenState {
   catalogYear?: number;
   hasNoConcentrationSelectedError: boolean;
   showErrors: boolean;
+  open: boolean;
 }
 
 const marginSpace = 12;
@@ -116,6 +119,7 @@ class OnboardingScreenComponent extends React.Component<
       major: props.major || undefined,
       concentration: undefined,
       coopCycle: undefined,
+      open: true,
     };
   }
 
@@ -452,7 +456,9 @@ class OnboardingScreenComponent extends React.Component<
       />
     );
   }
-
+  handleClose() {
+    this.setState({ open: false });
+  }
   render() {
     const { gradYear, year, major, catalogYear } = this.state;
     const { isFetchingMajors, isFetchingPlans } = this.props;
@@ -528,6 +534,20 @@ class OnboardingScreenComponent extends React.Component<
               <NextButton />
             </div>
           )}
+          <div>
+            <Backdrop open={this.state.open} onClick={this.handleClose}>
+              <DefaultModal
+                isOpen={this.state.open}
+                onClose={this.handleClose}
+                title={"Important"}
+              >
+                GraduateNU is not responsible for your specific graduation
+                requirements. Please use the degree audit to determine your
+                specific graduation requirements.
+                <RedColorButton>I understand</RedColorButton>
+              </DefaultModal>
+            </Backdrop>
+          </div>
         </GenericOnboardingTemplate>
       );
     }
