@@ -314,7 +314,7 @@ export interface ScheduleCourse {
   coreqs?: INEUAndPrereq | INEUOrPrereq;
   numCreditsMin: number;
   numCreditsMax: number;
-  semester: string | null | undefined;
+  semester?: string | null;
 }
 
 /**
