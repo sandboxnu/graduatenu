@@ -33,7 +33,6 @@ const TitleLocation = styled.div`
 `;
 
 const Box = styled.div`
-  border: 1px solid white;
   width: 500px;
   align-items: center;
   display: flex;

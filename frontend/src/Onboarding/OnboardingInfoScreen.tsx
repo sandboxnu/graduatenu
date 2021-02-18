@@ -46,8 +46,7 @@ import { updateUser } from "../services/UserService";
 import { createPlanForUser, setPrimaryPlan } from "../services/PlanService";
 import { addNewPlanAction } from "../state/actions/userPlansActions";
 import { IPlanData, ITemplatePlan } from "../models/types";
-import { DefaultModal } from "../components/common/DefaultModal";
-import { RedColorButton } from "../components/common/ColoredButtons";
+import { DisclaimerPopup } from "../components/common/DisclaimerPopup";
 
 const SpinnerWrapper = styled.div`
   display: flex;
@@ -534,20 +533,10 @@ class OnboardingScreenComponent extends React.Component<
               <NextButton />
             </div>
           )}
-          <div>
-            <Backdrop open={this.state.open} onClick={this.handleClose}>
-              <DefaultModal
-                isOpen={this.state.open}
-                onClose={this.handleClose}
-                title={"Important"}
-              >
-                GraduateNU is not responsible for your specific graduation
-                requirements. Please use the degree audit to determine your
-                specific graduation requirements.
-                <RedColorButton>I understand</RedColorButton>
-              </DefaultModal>
-            </Backdrop>
-          </div>
+          <DisclaimerPopup
+            open={this.state.open}
+            handleClose={this.handleClose.bind(this)}
+          />
         </GenericOnboardingTemplate>
       );
     }
