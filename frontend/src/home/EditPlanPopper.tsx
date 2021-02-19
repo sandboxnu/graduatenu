@@ -1,45 +1,34 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { withRouter, Link } from "react-router-dom";
+import { batch, useDispatch, useSelector } from "react-redux";
 import Popper from "@material-ui/core/Popper";
 import { Autocomplete } from "@material-ui/lab";
 import { TextField, Button, Tooltip } from "@material-ui/core";
 import { EditPlanIconButtonProps } from "./EditPlanIconButton";
 import styled from "styled-components";
-import { batch, connect } from "react-redux";
 import { AppState } from "../state/reducers/state";
-import { Dispatch } from "redux";
-import { DNDSchedule } from "../models/types";
 import {
   getAcademicYearFromState,
   getActivePlanFromState,
   getGraduationYearFromState,
   getUserIdFromState,
   getUserPrimaryPlanIdFromState,
+  safelyGetActivePlanCatalogYearFromState,
 } from "../state";
-import { IPlanData } from "../models/types";
 import { Major, Schedule } from "../../../common/types";
 import {
   getMajorsFromState,
   getPlansFromState,
   getTakenCreditsFromState,
   getUserFullNameFromState,
-  safelyGetActivePlanCatalogYearFromState,
 } from "../state";
-import {
-  alterScheduleToHaveCorrectYears,
-  clearSchedule,
-  generateInitialScheduleFromExistingPlan,
-  getStandingFromCompletedCourses,
-  planToString,
-  scheduleHasClasses,
-} from "../utils";
+import { getStandingFromCompletedCourses, planToString } from "../utils";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import {
   setActivePlanCoopCycleAction,
   setActivePlanMajorAction,
-  setActivePlanDNDScheduleAction,
-  setCurrentClassCounterForActivePlanAction,
   setActivePlanCatalogYearAction,
+  setActivePlanNameAction,
 } from "../state/actions/userPlansActions";
 import { SaveOnChangeConcentrationDropdown } from "../components/ConcentrationDropdown";
 import { setPrimaryPlan } from "../services/PlanService";
@@ -47,9 +36,8 @@ import {
   SnackbarAlert,
   ALERT_STATUS,
 } from "../components/common/SnackbarAlert";
-import IconButton from "@material-ui/core/IconButton";
-import DeleteIcon from "@material-ui/icons/Delete";
-import EditIcon from "@material-ui/icons/Edit";
+import { PrimaryButton } from "../components/common/PrimaryButton";
+import { useDebouncedEffect } from "../hooks/useDebouncedEffect";
 
 const PlanPopper = styled(Popper)<any>`
   margin-top: 4px;
@@ -101,14 +89,11 @@ const MajorTextField = styled(TextField)<any>`
 `;
 
 const ButtonContainer = styled.div`
-  margin-top: 20px;
+  margin-top: 10px;
   height: 40px;
-`;
-
-const SetButton = styled(Button)<any>`
-  background: #e0e0e0;
-  font-weight: normal;
-  float: right;
+  display: flex;
+  justify-content: center;
+  width: 100%;
 `;
 
 const Divider = styled.hr`
@@ -120,250 +105,226 @@ const Divider = styled.hr`
   padding: 0;
 `;
 
-interface ReduxStoreEditPlanProps {
-  plan: IPlanData;
-  majors: Major[];
-  allPlans: Record<string, Schedule[]>;
-  creditsTaken: number;
+interface EditNameProps {
   name: string;
-  userId: number;
-  primaryPlanId?: number;
-  catalogYear: number | null;
+}
+
+const EditName: React.FC<EditNameProps> = (props: EditNameProps) => {
+  const dispatch = useDispatch();
+  const [name, setName] = useState(props.name);
+
+  const handleKeyDown = (event: any) => {
+    if (event.key === "Enter") {
+      dispatch(setActivePlanNameAction(name));
+    }
+  };
+
+  useDebouncedEffect(
+    () => {
+      console.log("Use Debounced Effect");
+      dispatch(setActivePlanNameAction(name));
+    },
+    2000,
+    [name]
+  );
+
+  return (
+    <TextField
+      style={{ marginTop: "10px", marginBottom: "5px" }}
+      id="outlined-basic"
+      label="Plan Name"
+      variant="outlined"
+      key="planNameTextField"
+      onChange={e => {
+        setName(e.target.value);
+      }}
+      onKeyDown={handleKeyDown}
+      defaultValue={props.name}
+      fullWidth
+    />
+  );
+};
+
+interface EditCatalogYearProps {
+  majors: Major[];
+  catalogYear: Number | null;
+}
+
+const EditCatalogYear: React.FC<EditCatalogYearProps> = (
+  props: EditCatalogYearProps
+) => {
+  const dispatch = useDispatch();
+
+  let catalogYears = [
+    ...Array.from(new Set(props.majors.map(maj => maj.yearVersion.toString()))),
+  ];
+  return (
+    <Autocomplete
+      style={{ marginTop: "10px", marginBottom: "5px" }}
+      disableListWrap
+      options={catalogYears}
+      key="planEditCatalogYear"
+      renderInput={params => (
+        <TextField
+          {...params}
+          variant="outlined"
+          label="Catalog Year"
+          fullWidth
+        />
+      )}
+      value={props.catalogYear ? props.catalogYear + "" : ""}
+      onChange={(_, value) => {
+        if (value === "") {
+          dispatch(setActivePlanCatalogYearAction(null));
+        } else {
+          dispatch(setActivePlanCatalogYearAction(Number(value)));
+        }
+      }}
+    />
+  );
+};
+
+interface EditMajorProps {
+  major: string | null;
+  majors: Major[];
+  catalogYear: Number | null;
+}
+
+const EditMajor: React.FC<EditMajorProps> = (props: EditMajorProps) => {
+  const dispatch = useDispatch();
+
+  return (
+    <Autocomplete
+      style={{ marginTop: "10px", marginBottom: "5px" }}
+      disableListWrap
+      options={props.majors
+        .filter((maj: Major) => maj.yearVersion == props.catalogYear)
+        .map(maj => maj.name)}
+      renderInput={params => (
+        <MajorTextField
+          {...params}
+          variant="outlined"
+          label="Major"
+          fullWidth
+        />
+      )}
+      value={props.major}
+      onChange={(_, value) => {
+        dispatch(setActivePlanMajorAction(value));
+      }}
+    />
+  );
+};
+
+interface EditCoopCycleProps {
+  major: string | null;
+  allPlans: Record<string, Schedule[]>;
+  coopCycle: string | null;
   academicYear: number;
   graduationYear: number;
 }
 
-interface ReduxDispatchEditPlanProps {
-  setActivePlanCoopCycle: (
-    coopCycle: string | null,
-    academicYear: number,
-    graduationYear: number,
-    allPlans?: Record<string, Schedule[]>
-  ) => void;
-  setActivePlanDNDSchedule: (schedule: DNDSchedule) => void;
-  setActivePlanMajor: (major: string | null) => void;
-  setActivePlanCatalogYear: (number: number | null) => void;
-  setCurrentClassCounter: (counter: number) => void;
-}
+const EditCoopCycle: React.FC<EditCoopCycleProps> = (
+  props: EditCoopCycleProps
+) => {
+  const dispatch = useDispatch();
 
-type Props = ReduxStoreEditPlanProps & ReduxDispatchEditPlanProps;
+  return (
+    <Autocomplete
+      style={{ marginTop: "10px", marginBottom: "15px", fontSize: "10px" }}
+      disableListWrap
+      options={[
+        "None",
+        ...props.allPlans[props.major!].map(p => planToString(p)),
+      ]}
+      renderInput={params => (
+        <TextField
+          {...params}
+          variant="outlined"
+          label="Co-op Cycle"
+          fullWidth
+        />
+      )}
+      value={props.coopCycle}
+      onChange={(_, value) => {
+        const chosenCoopCycle = value === "None" ? "" : value;
+        dispatch(
+          setActivePlanCoopCycleAction(
+            chosenCoopCycle,
+            props.academicYear,
+            props.graduationYear,
+            props.allPlans
+          )
+        );
+      }}
+    />
+  );
+};
 
-interface EditPlanPopperState {
-  anchorEl: null | HTMLElement;
-  alertStatus: ALERT_STATUS;
-  name: string;
-  isPlanFieldsEditable: Boolean;
-}
+const EditPlanPopperComponent: React.FC = () => {
+  const dispatch = useDispatch();
+  const {
+    plan,
+    majors,
+    allPlans,
+    creditsTaken,
+    userFullName,
+    catalogYear,
+    userId,
+    primaryPlanId,
+    academicYear,
+    graduationYear,
+  } = useSelector((state: AppState) => ({
+    plan: getActivePlanFromState(state)!, // EditPlanPopper is only visible if there is an active plan
+    catalogYear: safelyGetActivePlanCatalogYearFromState(state),
+    majors: getMajorsFromState(state),
+    allPlans: getPlansFromState(state),
+    creditsTaken: getTakenCreditsFromState(state),
+    userFullName: getUserFullNameFromState(state),
+    userId: getUserIdFromState(state),
+    primaryPlanId: getUserPrimaryPlanIdFromState(state),
+    academicYear: getAcademicYearFromState(state)!,
+    graduationYear: getGraduationYearFromState(state)!,
+  }));
 
-export class EditPlanPopperComponent extends React.Component<
-  Props,
-  EditPlanPopperState
-> {
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      anchorEl: null,
-      alertStatus: ALERT_STATUS.None,
-      name: props.name,
-      isPlanFieldsEditable: false,
-    };
-  }
+  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
+  const [name, setName] = useState<string>(plan.name);
+  const [alertStatus, setAlertStatus] = useState<ALERT_STATUS>(
+    ALERT_STATUS.None
+  );
+  const major = plan.major;
+  const coopCycle = plan.coopCycle;
 
-  /**
-   * Toggles opening the EditPlanPopper when the edit button is clicked on.
-   * @param event mouse event trigger
-   */
-  handleClick(event: React.MouseEvent<HTMLElement>) {
-    if (this.state.anchorEl === null) {
-      this.setState({
-        anchorEl: event.currentTarget,
-      });
+  const handleIconButtonClick = (event: React.MouseEvent<HTMLElement>) => {
+    if (anchorEl === null) {
+      setAnchorEl(event.currentTarget);
     } else {
-      this.setState({
-        anchorEl: null,
-      });
+      setAnchorEl(null);
     }
-  }
+  };
 
-  renderName() {
+  const handleOnClickAway = () => {
+    setAnchorEl(null);
+  };
+
+  const ProfileInfo = () => {
     return (
-      <TextField
-        style={{ marginTop: "10px", marginBottom: "5px" }}
-        id="outlined-basic"
-        label="Plan Name"
-        variant="outlined"
-        onChange={this.onChangeName.bind(this)}
-        defaultValue={this.props.plan.name}
-        fullWidth
-      />
+      <>
+        <TopRow>
+          <NameText>{userFullName}</NameText>
+          <EditProfileLink to="/profile">Edit Profile</EditProfileLink>
+        </TopRow>
+        <StandingText>
+          {getStandingFromCompletedCourses(creditsTaken)}
+        </StandingText>
+        <StandingText>{creditsTaken + " Credits Completed"}</StandingText>
+      </>
     );
-  }
+  };
 
-  onChangeName(e: any) {
-    this.setState({
-      name: e.target.value,
-    });
-  }
+  const SetPrimaryPlanButton = () => {
+    const isDisabled = primaryPlanId && primaryPlanId === plan.id;
 
-  /**
-   * Updates this user's major based on the major selected in the dropdown.
-   */
-  onChooseMajor(event: React.SyntheticEvent<{}>, value: any) {
-    batch(() => {
-      this.props.setActivePlanMajor(value);
-      this.props.setActivePlanCoopCycle(
-        "",
-        this.props.academicYear,
-        this.props.graduationYear
-      );
-    });
-  }
-
-  /**
-   * Updates this user's plan based on the plan selected in the dropdown.
-   */
-  onChoosePlan(event: React.SyntheticEvent<{}>, value: any) {
-    const chosenCoopCycle = value === "None" ? "" : value;
-    this.props.setActivePlanCoopCycle(
-      chosenCoopCycle,
-      this.props.academicYear,
-      this.props.graduationYear,
-      this.props.allPlans
-    );
-  }
-
-  onChangeCatalogYear(event: React.SyntheticEvent<{}>, value: any) {
-    if (value === "") {
-      this.props.setActivePlanCatalogYear(null);
-    } else {
-      this.props.setActivePlanCatalogYear(Number(value));
-    }
-  }
-
-  renderMajorDropDown() {
-    return (
-      <Autocomplete
-        style={{ marginTop: "10px", marginBottom: "5px" }}
-        disableListWrap
-        options={this.props.majors
-          .filter((maj: Major) => maj.yearVersion == this.props.catalogYear)
-          .map(maj => maj.name)}
-        renderInput={params => (
-          <MajorTextField
-            {...params}
-            variant="outlined"
-            label="Major"
-            fullWidth
-          />
-        )}
-        value={this.props.plan.major}
-        onChange={this.onChooseMajor.bind(this)}
-        disabled={this.props.plan.isCurrentlyBeingEditedByAdvisor}
-      />
-    );
-  }
-
-  renderPlansDropDown() {
-    return (
-      <Autocomplete
-        style={{ marginTop: "10px", marginBottom: "15px", fontSize: "10px" }}
-        disableListWrap
-        options={[
-          "None",
-          ...this.props.allPlans[this.props.plan.major!].map(p =>
-            planToString(p)
-          ),
-        ]}
-        renderInput={params => (
-          <TextField
-            {...params}
-            variant="outlined"
-            label="Co-op Cycle"
-            fullWidth
-          />
-        )}
-        value={this.props.plan.coopCycle || "None"}
-        onChange={this.onChoosePlan.bind(this)}
-        disabled={this.props.plan.isCurrentlyBeingEditedByAdvisor}
-      />
-    );
-  }
-
-  renderCatalogYearDropdown() {
-    let catalogYears = [
-      ...Array.from(
-        new Set(this.props.majors.map(maj => maj.yearVersion.toString()))
-      ),
-    ];
-    return (
-      <Autocomplete
-        style={{ marginTop: "10px", marginBottom: "5px" }}
-        disableListWrap
-        options={catalogYears}
-        renderInput={params => (
-          <TextField
-            {...params}
-            variant="outlined"
-            label="Catalog Year"
-            fullWidth
-          />
-        )}
-        value={
-          this.props.plan.catalogYear ? this.props.plan.catalogYear + "" : ""
-        }
-        onChange={this.onChangeCatalogYear.bind(this)}
-        disabled={true}
-      />
-    );
-  }
-
-  renderSetClassesButton() {
-    return (
-      <ButtonContainer>
-        <SetButton
-          variant="contained"
-          onClick={() => this.addClassesFromPOS()}
-          disabled={this.props.plan.isCurrentlyBeingEditedByAdvisor}
-        >
-          Set Example Schedule
-        </SetButton>
-      </ButtonContainer>
-    );
-  }
-
-  addClassesFromPOS() {
-    const [schedule, counter] = generateInitialScheduleFromExistingPlan(
-      this.props.academicYear,
-      this.props.graduationYear,
-      this.props.plan.major!,
-      this.props.plan.coopCycle!,
-      this.props.allPlans
-    );
-    batch(() => {
-      this.props.setActivePlanDNDSchedule(schedule!);
-      this.props.setCurrentClassCounter(counter);
-    });
-  }
-
-  renderClearScheduleButton() {
-    return (
-      <ButtonContainer>
-        <SetButton
-          variant="contained"
-          style={{ float: "right" }}
-          onClick={() => this.onClearSchedule()}
-          disabled={this.props.plan.isCurrentlyBeingEditedByAdvisor}
-        >
-          Clear All Classes
-        </SetButton>
-      </ButtonContainer>
-    );
-  }
-
-  renderSetPrimaryPlan() {
-    const isDisabled =
-      this.props.primaryPlanId &&
-      this.props.primaryPlanId === this.props.plan.id;
     return (
       <Tooltip
         title={
@@ -373,76 +334,48 @@ export class EditPlanPopperComponent extends React.Component<
         }
       >
         <ButtonContainer>
-          <SetButton
-            variant="contained"
-            style={{ float: "right" }}
+          <PrimaryButton
             disabled={isDisabled}
             onClick={() =>
-              setPrimaryPlan(this.props.userId, this.props.plan.id)
+              setPrimaryPlan(userId, plan.id)
                 .then(_ => {
-                  this.setState({
-                    alertStatus: ALERT_STATUS.Success,
-                  });
+                  setAlertStatus(ALERT_STATUS.Success);
                 })
                 .catch(_ => {
-                  this.setState({
-                    alertStatus: ALERT_STATUS.Error,
-                  });
+                  setAlertStatus(ALERT_STATUS.Error);
                 })
             }
           >
-            Set As Primary Plan
-          </SetButton>
+            Set as Primary Plan
+          </PrimaryButton>
         </ButtonContainer>
       </Tooltip>
     );
-  }
+  };
 
-  onClearSchedule() {
-    this.props.setActivePlanDNDSchedule(
-      alterScheduleToHaveCorrectYears(
-        clearSchedule(this.props.plan.schedule),
-        this.props.academicYear,
-        this.props.graduationYear
-      )
-    );
-  }
-
-  /**
-   * Enables hiding the popper by clicking anywhere else on the screen.
-   */
-  handleClickAway() {
-    this.setState({
-      anchorEl: null,
-    });
-  }
-
-  render() {
-    return (
-      <div>
-        <EditPlanIconButtonProps onClick={this.handleClick.bind(this)} />
-        <PlanPopper
-          id={"simple-popper"}
-          open={Boolean(this.state.anchorEl)}
-          anchorEl={this.state.anchorEl}
-          placement="bottom-end"
-        >
-          <ClickAwayListener onClickAway={this.handleClickAway.bind(this)}>
-            <PlanCard>
-              <TopRow>
-                <NameText>{this.props.name}</NameText>
-                <EditProfileLink to="/profile">Edit Profile</EditProfileLink>
-              </TopRow>
-              <StandingText>
-                {getStandingFromCompletedCourses(this.props.creditsTaken)}
-              </StandingText>
-              <StandingText>
-                {this.props.creditsTaken + " Credits Completed"}
-              </StandingText>
-              <Divider />
-              {this.renderName()}
-              {this.renderCatalogYearDropdown()}
-              {!!this.props.plan.catalogYear && this.renderMajorDropDown()}
+  return (
+    <div>
+      <EditPlanIconButtonProps onClick={handleIconButtonClick} />
+      <PlanPopper
+        id={"simple-popper"}
+        open={Boolean(anchorEl)}
+        anchorEl={anchorEl}
+        placement="bottom-end"
+      >
+        <ClickAwayListener onClickAway={handleOnClickAway}>
+          <PlanCard>
+            <ProfileInfo />
+            <Divider />
+            <EditName name={plan.name} />
+            <EditCatalogYear majors={majors} catalogYear={catalogYear} />
+            {!!catalogYear && (
+              <EditMajor
+                major={major}
+                majors={majors}
+                catalogYear={catalogYear}
+              />
+            )}
+            {!!catalogYear && !!major && (
               <SaveOnChangeConcentrationDropdown
                 isStudentLevel={false}
                 style={{
@@ -452,75 +385,27 @@ export class EditPlanPopperComponent extends React.Component<
                 }}
                 useLabel={true}
               />
-              {!!this.props.plan.major && this.renderPlansDropDown()}
-              {!!this.props.plan.major &&
-              !!this.props.plan.coopCycle &&
-              !scheduleHasClasses(this.props.plan.schedule)
-                ? this.renderSetClassesButton()
-                : !!this.props.plan.major &&
-                  !!this.props.plan.coopCycle &&
-                  this.renderClearScheduleButton()}
-              {!!this.props.plan.major &&
-                !!this.props.plan.coopCycle &&
-                this.props.plan.approvedSchedule &&
-                this.renderSetPrimaryPlan()}
-            </PlanCard>
-          </ClickAwayListener>
-        </PlanPopper>
-        <SnackbarAlert
-          alertStatus={this.state.alertStatus}
-          handleClose={() => this.setState({ alertStatus: ALERT_STATUS.None })}
-          successMsg="Set Primary Plan"
-        />
-      </div>
-    );
-  }
-}
+            )}
+            {!!catalogYear && !!major && (
+              <EditCoopCycle
+                major={major}
+                allPlans={allPlans}
+                coopCycle={coopCycle}
+                academicYear={academicYear}
+                graduationYear={graduationYear}
+              />
+            )}
+            <SetPrimaryPlanButton />
+          </PlanCard>
+        </ClickAwayListener>
+      </PlanPopper>
+      <SnackbarAlert
+        alertStatus={alertStatus}
+        handleClose={() => setAlertStatus(ALERT_STATUS.None)}
+        successMsg="Set Primary Plan"
+      />
+    </div>
+  );
+};
 
-const mapStateToProps = (state: AppState) => ({
-  plan: getActivePlanFromState(state)!, // EditPlanPopper is only visible if there is an active plan
-  majors: getMajorsFromState(state),
-  allPlans: getPlansFromState(state),
-  creditsTaken: getTakenCreditsFromState(state),
-  name: getUserFullNameFromState(state),
-  catalogYear: safelyGetActivePlanCatalogYearFromState(state),
-  userId: getUserIdFromState(state),
-  primaryPlanId: getUserPrimaryPlanIdFromState(state),
-  academicYear: getAcademicYearFromState(state)!,
-  graduationYear: getGraduationYearFromState(state)!,
-});
-
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-  setActivePlanCoopCycle: (
-    coopCycle: string | null,
-    academicYear: number,
-    graduationYear: number,
-    allPlans?: Record<string, Schedule[]>
-  ) =>
-    dispatch(
-      setActivePlanCoopCycleAction(
-        coopCycle,
-        academicYear,
-        graduationYear,
-        allPlans
-      )
-    ),
-  setActivePlanDNDSchedule: (schedule: DNDSchedule) =>
-    dispatch(setActivePlanDNDScheduleAction(schedule)),
-  setActivePlanMajor: (major: string | null) =>
-    dispatch(setActivePlanMajorAction(major)),
-  setActivePlanCatalogYear: (year: number | null) =>
-    dispatch(setActivePlanCatalogYearAction(year)),
-  setCurrentClassCounter: (counter: number) =>
-    dispatch(setCurrentClassCounterForActivePlanAction(counter)),
-});
-
-export const EditPlanPopper = connect<
-  ReduxStoreEditPlanProps,
-  ReduxDispatchEditPlanProps,
-  {},
-  AppState
->(
-  mapStateToProps,
-  mapDispatchToProps
-)(EditPlanPopperComponent);
+export const EditPlanPopper = withRouter(EditPlanPopperComponent);
