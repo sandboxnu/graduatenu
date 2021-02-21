@@ -12,6 +12,7 @@ import {
   GenericSearchAssignModal,
   OptionsProps,
 } from "../../components/common/GenericSearchModal";
+import { isSearchedTemplate } from "../Templates/TemplateUtils";
 
 const FolderName = styled.div`
   font-weight: bold;
@@ -50,12 +51,17 @@ export const AssignTemplateToUserModal: FunctionComponent<AssignTemplateModalPro
   const FolderOption: FunctionComponent<OptionsProps<
     IFolderData,
     ITemplatePlan
-  >> = ({ item: folder, selected, setSelected }) => {
-    return (
+  >> = ({ item: folder, selected, setSelected, searchQuery = "" }) => {
+    const filteredTemplatePlans = folder.templatePlans.filter(
+      (template: ITemplatePlan) =>
+        isSearchedTemplate(template, folder, searchQuery)
+    );
+
+    return filteredTemplatePlans.length > 0 ? (
       <div>
         <FolderName> {folder.name} </FolderName>
         <FolderTemplateListContainer>
-          {folder.templatePlans.map((template: ITemplatePlan) => (
+          {filteredTemplatePlans.map((template: ITemplatePlan) => (
             <div>
               <Checkbox
                 checked={!!selected && template.id === selected.id}
@@ -67,7 +73,7 @@ export const AssignTemplateToUserModal: FunctionComponent<AssignTemplateModalPro
           ))}
         </FolderTemplateListContainer>
       </div>
-    );
+    ) : null;
   };
   return (
     <GenericSearchAssignModal<IFolderData, ITemplatePlan>
