@@ -7,6 +7,7 @@ import {
   updateActivePlanTimestampAction,
   expandAllYearsForActivePlanAction,
   setActivePlanConcentrationAction,
+  setActivePlanNameAction,
 } from "./../actions/userPlansActions";
 import { DNDSchedule, IPlanData } from "../../models/types";
 import produce from "immer";
@@ -146,6 +147,11 @@ export const userPlansReducer = (
         draft.plans[draft.activePlan!].courseWarnings =
           container.courseWarnings;
 
+        return draft;
+      }
+      case getType(setActivePlanNameAction): {
+        const { name } = action.payload;
+        draft.plans[draft.activePlan!].name = name;
         return draft;
       }
       case getType(setActivePlanScheduleAction): {

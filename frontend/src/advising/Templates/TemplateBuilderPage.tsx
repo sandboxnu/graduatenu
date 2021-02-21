@@ -5,21 +5,30 @@ import {
   deleteTemplatePlan,
   fetchTemplate,
 } from "../../services/TemplateService";
-import { useSelector, shallowEqual, useDispatch } from "react-redux";
-import { getActivePlanFromState, getAdvisorUserIdFromState } from "../../state";
+import { useSelector, shallowEqual, useDispatch, batch } from "react-redux";
+import {
+  getActivePlanFromState,
+  getActivePlanNameFromState,
+  getAdvisorUserIdFromState,
+} from "../../state";
 import { AppState } from "../../state/reducers/state";
-import { addNewPlanAction } from "../../state/actions/userPlansActions";
+import {
+  addNewPlanAction,
+  setActivePlanNameAction,
+} from "../../state/actions/userPlansActions";
 import { LoadingScreen } from "../../components/common/FullPageLoading";
 import styled from "styled-components";
 import { AutoSavePlan } from "../../home/AutoSavePlan";
 import { WhiteColorButton } from "../../components/common/ColoredButtons";
 import { Close as CloseIcon } from "@material-ui/icons";
-import { IconButton } from "@material-ui/core";
+import { IconButton, TextField } from "@material-ui/core";
 import { AssignUserToTemplateModal } from "./AssignUserToTemplateModal";
 import { ITemplatePlan } from "../../models/types";
 import { createPlanForUser } from "../../services/PlanService";
 import { fetchUser, IAbrStudent } from "../../services/AdvisorService";
 import { alterScheduleToHaveCorrectYears } from "../../utils";
+import { EditPlanButton } from "../../home/EditPlanButton";
+import CheckIcon from "@material-ui/icons/Check";
 
 const TitleText = styled.div`
   font-family: Roboto;
@@ -29,7 +38,6 @@ const TitleText = styled.div`
   line-height: 28px;
   display: flex;
   justify-content: center;
-  margin-top: 30px;
 `;
 const ButtonContainer = styled.div`
   display: flex;
@@ -38,6 +46,17 @@ const ButtonContainer = styled.div`
   margin-right: 30px;
 `;
 
+const PlanHeader = styled.div`
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 50px;
+  max-height: 50px;
+`;
+
+const ICONBUTTON_HEIGHT = 30;
+
 interface ParamProps {
   templateId: string;
 }
@@ -45,12 +64,17 @@ interface ParamProps {
 export const TemplateBuilderPage = () => {
   const dispatch = useDispatch();
   const history = useHistory();
+  const planName = useSelector((state: AppState) =>
+    getActivePlanNameFromState(state)
+  );
+
   const routeParams = useParams<ParamProps>();
   const [openModal, setOpenModal] = useState(false);
   const [loading, setLoading] = useState(true);
   const [loadingError, setLoadingError] = useState<string | null>(null);
-  const [templateName, setTemplateName] = useState<string | null>(null);
+  const [templateName, setTemplateName] = useState(planName);
   const [templateData, setTemplateData] = useState<ITemplatePlan | null>(null);
+  const [isEditPlanName, setIsEditPlanName] = useState(false);
   const id = Number(routeParams.templateId);
   const { userId, activePlan } = useSelector(
     (state: AppState) => ({
@@ -59,6 +83,10 @@ export const TemplateBuilderPage = () => {
     }),
     shallowEqual
   );
+
+  useEffect(() => {
+    setTemplateName(planName);
+  }, [planName]);
 
   const assignTemplate = async (
     student: IAbrStudent,
@@ -78,7 +106,7 @@ export const TemplateBuilderPage = () => {
           : activePlan.schedule;
 
       const planResponse = await createPlanForUser(userId, {
-        name: templateData!.name,
+        name: templateName,
         link_sharing_enabled: false,
         schedule: schedule,
         catalog_year: templateData!.catalogYear,
@@ -130,6 +158,13 @@ export const TemplateBuilderPage = () => {
       });
   }, []);
 
+  const confirmEditPlanName = (name: string | undefined) => {
+    if (name) {
+      dispatch(setActivePlanNameAction(name));
+      setIsEditPlanName(false);
+    }
+  };
+
   return loading || loadingError ? (
     <LoadingScreen
       text="Loading your plan"
@@ -137,7 +172,43 @@ export const TemplateBuilderPage = () => {
     />
   ) : (
     <>
-      <TitleText>{templateName}</TitleText>
+      {isEditPlanName ? (
+        // show input field if in edit plan name mode
+        <PlanHeader>
+          <TextField
+            id="outlined-basic"
+            label={"Plan Name"}
+            variant="outlined"
+            value={templateName}
+            onChange={event => setTemplateName(event.target.value)}
+            placeholder=""
+            style={{ width: "326px" }}
+            InputProps={{ style: { fontSize: 20 } }}
+          />
+          {/* confirm button */}
+          <IconButton
+            style={{ padding: 3, height: ICONBUTTON_HEIGHT }}
+            onClick={() => confirmEditPlanName(templateName)}
+          >
+            <CheckIcon />
+          </IconButton>
+          {/* cancel button */}
+          <IconButton
+            style={{ padding: 3, height: ICONBUTTON_HEIGHT }}
+            onClick={() => setIsEditPlanName(false)}
+          >
+            <CloseIcon />
+          </IconButton>
+        </PlanHeader>
+      ) : (
+        // just show plan name with edit icon if not editting
+        <PlanHeader>
+          <TitleText>{planName}</TitleText>
+          <EditPlanButton
+            onClick={() => setIsEditPlanName(true)}
+          ></EditPlanButton>
+        </PlanHeader>
+      )}
       <ButtonContainer>
         <AutoSavePlan isTemplate />
         <WhiteColorButton
@@ -147,7 +218,7 @@ export const TemplateBuilderPage = () => {
           Assign Template
         </WhiteColorButton>
         <IconButton
-          style={{ padding: 3, height: 30 }}
+          style={{ padding: 3, height: ICONBUTTON_HEIGHT }}
           onClick={() => history.push("/advisor/templates")}
         >
           <CloseIcon />

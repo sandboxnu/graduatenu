@@ -273,7 +273,7 @@ export const safelyGetActivePlanIdFromState = (state: AppState) => {
 };
 
 export const getActivePlanNameFromState = (state: AppState) => {
-  return state.userPlansState.activePlan;
+  return getActivePlanFromState(state)?.name;
 };
 
 export const safelyGetActivePlanMajorFromState = (state: AppState) =>
