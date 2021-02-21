@@ -106,7 +106,7 @@ export const TemplateBuilderPage = () => {
           : activePlan.schedule;
 
       const planResponse = await createPlanForUser(userId, {
-        name: templateName,
+        name: templateName ? templateName : "",
         link_sharing_enabled: false,
         schedule: schedule,
         catalog_year: templateData!.catalogYear,
