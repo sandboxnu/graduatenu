@@ -8,6 +8,7 @@ interface SearchResult {
   type: string;
   class?: SearchClass;
 }
+const fetch = require("node-fetch");
 
 interface SearchClass {
   name: string;

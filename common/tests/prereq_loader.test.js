@@ -60,7 +60,7 @@ async function testScheduleLinkPrereqs(link) {
   jest.setTimeout(10000);
 
   const page = await rp(link);
-  const schedules = plan_parser.planOfStudyToSchedule(page);
+  const schedules = await plan_parser.planOfStudyToSchedule(page);
 
   const enhancedSchedules = await prereq_loader.addPrereqsToSchedules(
     schedules

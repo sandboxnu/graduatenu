@@ -113,7 +113,7 @@ test("ensure that supported majors are still correct, unchanged.", async () => {
   const plans = supported.map(link => rp(link));
 
   for (plan of plans) {
-    const schedules = plan_parser.planOfStudyToSchedule(await plan);
+    const schedules = await plan_parser.planOfStudyToSchedule(await plan);
     expect(schedules).toMatchSnapshot();
   }
 });
@@ -132,7 +132,7 @@ function runTestsOnLinks(links) {
     test(
       "Ensures that scraper correctly converts plan of study no. " + index,
       async () => {
-        const schedules = plan_parser.planOfStudyToSchedule(await plan);
+        const schedules = await plan_parser.planOfStudyToSchedule(await plan);
         expect(schedules).toBeValidModernScheduleList();
       }
     );
