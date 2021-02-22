@@ -9,6 +9,7 @@ import {
 } from "../../common/types";
 import { fetchCourse } from "../../frontend/src/api";
 import { SeasonEnum, StatusEnum } from "../../frontend/src/models/types";
+import { SSL_OP_EPHEMERAL_RSA } from "constants";
 
 const rp = require("request-promise");
 
@@ -25,15 +26,14 @@ export async function planOfStudyToSchedule(
   const $ = load(planofstudy);
 
   // the list of found schedules.
-  const schedules: Schedule[] = [];
+  const schedules: Promise<Schedule>[] = [];
 
   // for each of the plans, produce a schedule.
-  $(".sc_plangrid tbody").each(async (planIndex, table) => {
-    const schedule = await buildSchedule($, table);
+  $(".sc_plangrid tbody").each((planIndex, table) => {
+    const schedule = buildSchedule($, table);
     schedules.push(schedule);
   });
-
-  return schedules;
+  return await Promise.all(schedules);
 }
 
 //every time we set a plan: look up all the courses and set in schedule
@@ -50,40 +50,38 @@ async function buildSchedule(
   table: CheerioElement
 ): Promise<Schedule> {
   // what year we're on
-  const years: ScheduleYear[] = [];
+  const yearPromises: Promise<ScheduleYear>[] = [];
 
   // information for the current year we're parsing
-  let rows: Array<Array<string | ScheduleCourse>> = [];
+  let rows: Promise<(string | ScheduleCourse)[]>[] = [];
   let totalCredits = "";
 
   // table elements
   const tableRows: CheerioElement[] = [];
-  $(table)
+
+  await $(table)
     .find("tr")
-    .each(async (index, tableRow) => {
+    .each((index, tableRow) => {
       // track the table number.
       const rowClassName = $(tableRow).attr("class");
-      //console.log(rowClassName)
       if (!!rowClassName) {
         if (/^odd/.test(rowClassName) || /^even/.test(rowClassName)) {
           // is not always length 4, depends on how many semesters we have.
-          const courses = await addCourses($, tableRow);
-          //console.log('rows.push')
-          //console.log(courses)
+          const courses = addCourses($, tableRow);
           rows.push(courses);
-          //console.log(rows)
         } else if (/^plangridsum/.test(rowClassName)) {
           // make a new year with the existing data
-          try {
-            //not sure if this makes sense but stopping it from
-            console.log("HERE");
-            console.log(rows);
-            const flipped = rows[0].map((col, i) => rows.map(row => row[i])); //need to figure out why this flip is important
-            years.push(buildYear($, flipped));
-            rows = [];
-          } catch (e) {
-            console.log(e);
-          }
+
+          const processRows = async (rows: any) => {
+            const courseRowsParsed: Array<any> = await Promise.all(rows);
+            const flipped = courseRowsParsed[0].map((col: any, i: any) =>
+              courseRowsParsed.map(row => row[i])
+            );
+            return buildYear($, flipped);
+          };
+          yearPromises.push(processRows(rows));
+
+          rows = [];
         } else if (/^plangridtotal/.test(rowClassName)) {
           totalCredits = $(tableRow)
             .find("td")
@@ -96,10 +94,8 @@ async function buildSchedule(
     });
 
   // build the schedule, and return.
+  const years = await Promise.all(yearPromises);
   const y = buildScheduleFromYears(years, totalCredits);
-  console.log("RETURNING");
-  console.log(y);
-  //console.log(totalCredits)
   return y;
 }
 
