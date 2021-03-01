@@ -6,6 +6,9 @@ import {
   ICourseRange,
   ISubjectRange,
   ScheduleCourse,
+  ANDSection,
+  ORSection,
+  ICreditRangeCourse,
 } from "../../../../common/types";
 import {
   IRequirementGroupWarning,
@@ -253,10 +256,19 @@ class RequirementSectionComponent extends React.Component<
    * Maps the given list of requirements to the render function.
    * @param reqs the list of requirements to be rendered
    */
-  parseRequirements(reqs: Requirement[]) {
+  parseRequirements(
+    reqs: Requirement[],
+    rootRequirementSection: ANDSection | ORSection
+  ) {
     return reqs.map((r: Requirement, index: number) => (
       <div key={index}>
-        {this.renderRequirement(r, index, 0, reqs.length !== 1)}
+        {this.renderRequirement(
+          r,
+          index,
+          0,
+          reqs.length !== 1,
+          rootRequirementSection
+        )}
       </div>
     ));
   }
@@ -272,7 +284,8 @@ class RequirementSectionComponent extends React.Component<
     req: Requirement,
     index: number,
     level: number,
-    top: boolean
+    top: boolean,
+    rootRequirementSection: ANDSection | ORSection
   ) {
     if (req.type === "COURSE") {
       return this.renderCourse(level, index, req as IRequiredCourse);
@@ -301,7 +314,7 @@ class RequirementSectionComponent extends React.Component<
 
     return (
       <div key={index.toString()}>
-        {this.convertTypeToText(req, level, top, index)}
+        {this.convertTypeToText(req, level, top, index, rootRequirementSection)}
         {req.courses
           .filter(c => c.type === "COURSE")
           .map((c, index) =>
@@ -310,15 +323,27 @@ class RequirementSectionComponent extends React.Component<
         {req.courses
           .filter(c => c.type === "AND")
           .map((c: Requirement, index: number) =>
-            this.renderRequirement(c, index, level + 1, req.type !== "AND")
+            this.renderRequirement(
+              c,
+              index,
+              level + 1,
+              req.type !== "AND",
+              rootRequirementSection
+            )
           )}
         {req.courses
           .filter(
             c => c.type === "OR" || c.type === "CREDITS" || c.type === "RANGE"
           )
-          .map((c: Requirement, index: number) =>
-            this.renderRequirement(c, index, level + 1, false)
-          )}
+          .map((c: Requirement, index: number) => {
+            this.renderRequirement(
+              c,
+              index,
+              level + 1,
+              false,
+              rootRequirementSection
+            );
+          })}
       </div>
     );
   }
@@ -427,8 +452,19 @@ class RequirementSectionComponent extends React.Component<
     req: Requirement,
     level: number,
     top: boolean,
-    index: number
+    index: number,
+    rootRequirementSection: ANDSection | ORSection
   ) {
+    // nested ORs, we shouldn't re-render "Complete one of the following:"
+    if (req.type === "OR" && rootRequirementSection.type === "OR") {
+      return null;
+    }
+
+    // OR with only one course, we shouldn't re-render "Complete one of the following:"
+    if (req.type === "OR" && req.courses.length === 1) {
+      return null;
+    }
+
     if (req.type === "OR") {
       return (
         <SubtitleWrapper>
@@ -509,7 +545,7 @@ class RequirementSectionComponent extends React.Component<
               <div ref={provided.innerRef as any} {...provided.droppableProps}>
                 {!!contents &&
                   contents.type !== "RANGE" &&
-                  this.parseRequirements(contents.requirements)}
+                  this.parseRequirements(contents.requirements, contents)}
                 {!!contents &&
                   contents.type === "RANGE" &&
                   this.handleRange(contents.requirements)}
@@ -522,7 +558,7 @@ class RequirementSectionComponent extends React.Component<
           <div>
             {!!contents &&
               contents.type !== "RANGE" &&
-              this.parseRequirements(contents.requirements)}
+              this.parseRequirements(contents.requirements, contents)}
             {!!contents &&
               contents.type === "RANGE" &&
               this.handleRange(contents.requirements)}
