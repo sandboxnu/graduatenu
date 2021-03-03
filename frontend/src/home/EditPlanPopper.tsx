@@ -47,6 +47,7 @@ import {
   SnackbarAlert,
   ALERT_STATUS,
 } from "../components/common/SnackbarAlert";
+import { BASE_FORMATTED_COOP_CYCLES } from "../plans/coopCycles";
 
 const PlanPopper = styled(Popper)<any>`
   margin-top: 4px;
@@ -232,12 +233,7 @@ export class EditPlanPopperComponent extends React.Component<
       <Autocomplete
         style={{ marginTop: "10px", marginBottom: "15px", fontSize: "10px" }}
         disableListWrap
-        options={[
-          "None",
-          ...this.props.allPlans[this.props.plan.major!].map(p =>
-            planToString(p)
-          ),
-        ]}
+        options={["None", ...BASE_FORMATTED_COOP_CYCLES]}
         renderInput={params => (
           <TextField
             {...params}
@@ -282,6 +278,14 @@ export class EditPlanPopperComponent extends React.Component<
   }
 
   renderSetClassesButton() {
+    const examplePlanExists = this.props.allPlans[
+      this.props.plan.major || ""
+    ].some((p: Schedule) => planToString(p) === this.props.plan.coopCycle);
+
+    if (!examplePlanExists) {
+      return;
+    }
+
     return (
       <ButtonContainer>
         <SetButton
