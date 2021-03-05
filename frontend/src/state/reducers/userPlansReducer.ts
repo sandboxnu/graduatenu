@@ -189,6 +189,10 @@ export const userPlansReducer = (
           graduationYear,
         } = action.payload;
 
+        if (!coopCycle) {
+          return;
+        }
+
         if (!allPlans) {
           return draft;
         }
