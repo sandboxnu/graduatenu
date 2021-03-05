@@ -22,8 +22,10 @@ const SEASON_ENUM_TO_TITLE: Record<SeasonEnum, string> = {
 export const BASE_FORMATTED_COOP_CYCLES: string[] = NUM_YEARS_AND_COOPS_OPTIONS.map(
   option =>
     Object.values(SeasonEnum).map((season: SeasonEnum) => {
-      return `${option.numYears} Years, 
-      ${option.numCoops} Co-ops, 
-      ${SEASON_ENUM_TO_TITLE[season]} Cycle`;
+      return (
+        `${option.numYears} Years, ` +
+        `${option.numCoops} Co-ops, ` +
+        `${SEASON_ENUM_TO_TITLE[season]} Cycle`
+      );
     })
 ).reduce((acc, coopCyclesPerOption) => [...acc, ...coopCyclesPerOption], []);
