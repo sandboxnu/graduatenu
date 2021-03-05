@@ -27,6 +27,7 @@ import { IUpdateUser, IUpdateUserData } from "../models/types";
 import { getAuthToken } from "../utils/auth-helpers";
 import { SaveInParentConcentrationDropdown } from "../components/ConcentrationDropdown";
 import { findMajorFromName } from "../utils/plan-helpers";
+import { BASE_FORMATTED_COOP_CYCLES } from "../plans/coopCycles";
 
 const OuterContainer = styled.div`
   width: 70%;
@@ -256,7 +257,7 @@ const ProfileComponent: React.FC = () => {
         {isEdit && (
           <Autocomplete
             disableListWrap
-            options={plans[major!].map((p: Schedule) => planToString(p))}
+            options={BASE_FORMATTED_COOP_CYCLES}
             renderInput={params => (
               <TextField {...params} variant="outlined" fullWidth />
             )}
