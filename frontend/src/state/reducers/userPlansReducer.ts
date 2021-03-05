@@ -205,15 +205,19 @@ export const userPlansReducer = (
             activePlan.courseCounter
           );
 
-          // remove all classes
           draft.plans[
             draft.activePlan!
           ].schedule = alterScheduleToHaveCorrectYears(
-            clearSchedule(newSchedule),
+            newSchedule,
             academicYear,
             graduationYear
           );
         }
+
+        // remove all classes
+        draft.plans[draft.activePlan!].schedule = clearSchedule(
+          draft.plans[draft.activePlan!].schedule
+        );
 
         draft.plans[draft.activePlan!].courseCounter = 0;
 
