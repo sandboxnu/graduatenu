@@ -54,6 +54,9 @@ export const RedirectScreen: React.FC<Props> = ({ redirectUrl }) => {
               // student
 
               dispatch(setStudentAction(response.user));
+              dispatch(
+                setCompletedCoursesAction(response.user.coursesCompleted)
+              );
               Promise.all([
                 getScheduleCoursesFromSimplifiedCourseDataAPI(
                   response.user.coursesCompleted
