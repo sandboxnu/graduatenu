@@ -26,7 +26,7 @@ import {
   getCurrentClassCounterFromState,
   getActivePlanFromState,
   safelyGetTransferCoursesFromState,
-  getUserIdFromState,
+  safelyGetUserIdFromState,
 } from "../../state";
 import { Year } from "../Year";
 import { TransferCredits } from "../TransferCreditHolder";
@@ -140,7 +140,7 @@ export const NonEditableScheduleStudentView: React.FC<Props> = props => {
       activePlan: getActivePlanFromState(state)!.schedule,
       transferCredits: safelyGetTransferCoursesFromState(state),
       planId: getActivePlanFromState(state)!.id,
-      userId: commentsPresent ? getUserIdFromState(state) : null,
+      userId: commentsPresent ? safelyGetUserIdFromState(state) : null,
     }),
     shallowEqual
   );
@@ -193,7 +193,7 @@ export const EditableSchedule: React.FC<Props> = props => {
       planId: getActivePlanFromState(state)!.id,
       currentClassCounter: getCurrentClassCounterFromState(state),
       transferCredits: safelyGetTransferCoursesFromState(state),
-      userId: commentsPresent ? getUserIdFromState(state) : null,
+      userId: commentsPresent ? safelyGetUserIdFromState(state) : null,
     }),
     shallowEqual
   );
