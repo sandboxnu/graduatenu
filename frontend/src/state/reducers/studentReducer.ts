@@ -45,12 +45,18 @@ export const studentReducer = (
       case getType(setStudentAction): {
         draft.student = action.payload.student;
         // TODO: remove these once backend is hooked up for completed/transfer courses
+
+        if (!draft.student) {
+          return draft;
+        }
+
         if (draft.student.completedCourses === undefined) {
           draft.student.completedCourses = [];
         }
         if (draft.student.transferCourses === undefined) {
           draft.student.transferCourses = [];
         }
+
         return draft;
       }
       case getType(setStudentMajorAction): {
