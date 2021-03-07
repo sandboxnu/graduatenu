@@ -189,40 +189,6 @@ export const userPlansReducer = (
           academicYear,
           graduationYear,
         } = action.payload;
-
-        // if (!allPlans) {
-        //   return draft;
-        // }
-
-        // const activePlan = draft.plans[draft.activePlan!];
-
-        // const plan = allPlans[activePlan.major!].find(
-        //   (p: Schedule) => planToString(p) === coopCycle
-        // );
-
-        // if (!plan) {
-        //   return draft;
-        // }
-
-        // const [newSchedule, newCounter] = convertToDNDSchedule(
-        //   plan,
-        //   activePlan.courseCounter
-        // );
-
-        // // remove all classes
-        // draft.plans[
-        //   draft.activePlan!
-        // ].schedule = alterScheduleToHaveCorrectYears(
-        //   newSchedule,
-        //   academicYear,
-        //   graduationYear
-        // );
-        // draft.plans[draft.activePlan!].courseCounter = 0;
-
-        // // clear all warnings
-        // draft.plans[draft.activePlan!].warnings = [];
-        // draft.plans[draft.activePlan!].courseWarnings = [];
-
         // set the coop cycle
         draft.plans[draft.activePlan!].coopCycle = coopCycle;
 
