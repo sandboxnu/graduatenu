@@ -85,6 +85,7 @@ const StudentInfoTextWrapper = styled.div`
   > * {
   }
 `;
+
 const Text = styled.div`
   font-size: 12px;
   font-weight: normal;
