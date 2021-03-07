@@ -182,7 +182,7 @@ export class SwitchPlanPopperComponent extends React.Component<
           onClick={event => this.handleClick(event)}
         >
           <SelectPlanContainer>
-            <DropDownText>{`${this.props.activePlan.name}`}</DropDownText>
+            <DropDownText>{"Switch Plan"}</DropDownText>
             <ButtonContainer>
               {Boolean(this.state.anchorEl) ? (
                 <KeyboardArrowUpIcon />

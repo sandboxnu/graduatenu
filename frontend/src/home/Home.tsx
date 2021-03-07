@@ -102,8 +102,14 @@ const AlertWrapper = styled.div`
   margin: 12px 0px 12px 0px;
 `;
 
+const PlanNameText = styled.div`
+  font-weight: 700;
+  font-size: 16px;
+  margin-right: 4px;
+`;
+
 const MajorText = styled.div`
-  font-weight: 500;
+  font-weight: 400;
   font-size: 16px;
   margin-right: 4px;
 `;
@@ -307,7 +313,7 @@ class HomeComponent extends React.Component<Props> {
       <HomeAboveSchedule>
         <HomeHeaderWrapper>
           <HomePlan>
-            <h2>Plan Of Study</h2>
+            <h2>{"Schedule"}</h2>
           </HomePlan>
           <HomeButtons>
             <PlanContainer>
@@ -352,8 +358,8 @@ class HomeComponent extends React.Component<Props> {
           <HomeTopInnerContainer>
             <HomeText href="#">GraduateNU</HomeText>
             <HomePlan>
+              <PlanNameText>{this.props.activePlan.name + ": "}</PlanNameText>
               <MajorText>{this.props.major}</MajorText>
-              <PlanText>{this.props.coopCycle || "None"}</PlanText>
               <EditPlanPopper />
               <LogoutButton onClick={_ => this.logOut()}>
                 <RedColorButton variant="contained">Logout</RedColorButton>

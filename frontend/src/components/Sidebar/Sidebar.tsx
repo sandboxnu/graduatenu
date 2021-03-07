@@ -14,6 +14,8 @@ import {
   getActivePlanMajorFromState,
   getActivePlanScheduleFromState,
   safelyGetTransferCoursesFromState,
+  getTakenCreditsFromState,
+  getActivePlanCoopCycleFromState,
   safelyGetActivePlanConcentrationFromState,
 } from "../../state";
 import { connect, useSelector } from "react-redux";
@@ -34,6 +36,16 @@ const MajorTitle = styled.p`
   line-height: 24px;
   margin-right: 12px;
   margin-left: 4px;
+  margin-bottom: -13px;
+`;
+
+const CoopCycleTitle = styled.p`
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 24px;
+  margin-right: 12px;
+  margin-left: 4px;
+  margin-bottom: -10px;
 `;
 
 const CreditTitle = styled.p<any>`
@@ -70,6 +82,7 @@ interface SidebarProps {
 
 interface MajorSidebarProps {
   schedule: DNDSchedule;
+  coopCycle: string | null;
   major: Major;
   concentration?: Concentration;
   transferCourses: ScheduleCourse[];
@@ -136,6 +149,7 @@ const ConcentrationComponent: React.FC<ConcentrationProps> = ({
 
 const MajorSidebarComponent: React.FC<MajorSidebarProps> = ({
   schedule,
+  coopCycle,
   major,
   concentration,
   transferCourses,
@@ -158,6 +172,7 @@ const MajorSidebarComponent: React.FC<MajorSidebarProps> = ({
     <Container>
       <ScrollWrapper>
         <MajorTitle>{major.name}</MajorTitle>
+        {coopCycle ? <CoopCycleTitle>{coopCycle}</CoopCycleTitle> : null}
         <CreditTitle
           isGreen={
             getCreditsTakenInSchedule(schedule) >= major.totalCreditsRequired
@@ -193,14 +208,19 @@ const MajorSidebarComponent: React.FC<MajorSidebarProps> = ({
 };
 
 export const Sidebar: React.FC<SidebarProps> = props => {
-  const { schedule, major, planConcentration, transferCourses } = useSelector(
-    (state: AppState) => ({
-      major: getActivePlanMajorFromState(state),
-      planConcentration: safelyGetActivePlanConcentrationFromState(state),
-      schedule: getActivePlanScheduleFromState(state),
-      transferCourses: safelyGetTransferCoursesFromState(state),
-    })
-  );
+  const {
+    schedule,
+    major,
+    planConcentration,
+    transferCourses,
+    coopCycle,
+  } = useSelector((state: AppState) => ({
+    major: getActivePlanMajorFromState(state),
+    planConcentration: safelyGetActivePlanConcentrationFromState(state),
+    schedule: getActivePlanScheduleFromState(state),
+    coopCycle: getActivePlanCoopCycleFromState(state),
+    transferCourses: safelyGetTransferCoursesFromState(state),
+  }));
 
   const majorObj = useSelector((state: AppState) =>
     findMajorFromName(
@@ -220,6 +240,7 @@ export const Sidebar: React.FC<SidebarProps> = props => {
         <MajorSidebarComponent
           schedule={schedule}
           major={majorObj}
+          coopCycle={coopCycle}
           concentration={concentrationObj}
           transferCourses={transferCourses}
           isEditable={props.isEditable}
