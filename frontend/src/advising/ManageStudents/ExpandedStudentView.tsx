@@ -24,7 +24,6 @@ import { PlanTitle, ButtonHeader, ScheduleWrapper, Container } from "./Shared";
 import { Prompt, useHistory, useLocation, useParams } from "react-router";
 import { IUserData } from "../../models/types";
 import { fetchUser } from "../../services/AdvisorService";
-import { Comments } from "../../components/Schedule/Comments";
 import {
   approvePlanForUser,
   fetchPlan,
@@ -32,7 +31,10 @@ import {
 } from "../../services/PlanService";
 import IdleTimer from "react-idle-timer";
 import { LoadingSpinner } from "../../components/common/LoadingSpinner";
-import { setStudentAction } from "../../state/actions/studentActions";
+import {
+  setStudentAction,
+  setTransferCoursesAction,
+} from "../../state/actions/studentActions";
 import { Alert } from "@material-ui/lab";
 import { PrimaryButton } from "../../components/common/PrimaryButton";
 import {
@@ -41,6 +43,7 @@ import {
 } from "../../components/common/SnackbarAlert";
 import ScheduleChangeTracker from "../../utils/ScheduleChangeTracker";
 import { sendChangeLog } from "../../services/PlanService";
+import { getScheduleCoursesFromSimplifiedCourseDataAPI } from "../../utils/course-helpers";
 
 const FullScheduleViewContainer = styled.div`
   margin-top: 30px;
@@ -123,13 +126,23 @@ export const ExpandedStudentView: React.FC = () => {
         fetchPlan(studentId, planId)
           .then(response => {
             callUpdatePlanLastViewedOnInterval();
-            batch(() => {
-              dispatch(setStudentAction(user));
-              dispatch(setUserPlansAction([response], user.academicYear));
-              dispatch(
-                setActivePlanAction(response.name, studentId, user.academicYear)
-              );
+            getScheduleCoursesFromSimplifiedCourseDataAPI(
+              user.coursesTransfer
+            ).then(courses => {
+              batch(() => {
+                dispatch(setStudentAction(user));
+                dispatch(setUserPlansAction([response], user.academicYear));
+                dispatch(
+                  setActivePlanAction(
+                    response.name,
+                    studentId,
+                    user.academicYear
+                  )
+                );
+                dispatch(setTransferCoursesAction(courses));
+              });
             });
+
             setStudent(user);
             setLoading(false);
           })

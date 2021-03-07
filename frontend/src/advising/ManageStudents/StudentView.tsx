@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { IPlanData, ITemplatePlan, IUserData } from "../../models/types";
+import { batch, useDispatch, useSelector } from "react-redux";
+import { IPlanData, ITemplatePlan } from "../../models/types";
 import { fetchUser } from "../../services/AdvisorService";
 import {
   createPlanForUser,
@@ -29,6 +29,11 @@ import { useHistory, useParams } from "react-router";
 import { AssignTemplateToUserModal } from "./AssignTemplateToUserModal";
 import { alterScheduleToHaveCorrectYears } from "../../utils/schedule-helpers";
 import { deleteTemplatePlan } from "../../services/TemplateService";
+import {
+  setStudentAction,
+  setTransferCoursesAction,
+} from "../../state/actions/studentActions";
+import { getScheduleCoursesFromSimplifiedCourseDataAPI } from "../../utils/course-helpers";
 
 const StudentViewContainer = styled.div`
   display: flex;
@@ -131,7 +136,6 @@ export const StudentView: React.FC = () => {
   const routeParams = useParams<ParamProps>();
   const id = Number(routeParams.id);
   const [fetchingStudent, setFetchingStudent] = useState(true);
-  const [student, setStudent] = useState<IUserData | null>(null);
   const [noPlans, setNoPlans] = useState(false);
   const [openModal, setOpenModal] = useState(false);
 
@@ -163,7 +167,7 @@ export const StudentView: React.FC = () => {
   };
 
   const dispatch = useDispatch();
-  const { planName, planId } = useSelector((state: AppState) => ({
+  const { planName, planId, student } = useSelector((state: AppState) => ({
     planName: getActivePlanNameFromState(state),
     planId: safelyGetActivePlanIdFromState(state),
     student: getStudentFromState(state),
@@ -171,13 +175,27 @@ export const StudentView: React.FC = () => {
 
   useEffect(() => {
     fetchUser(id).then(response => {
-      setStudent(response.user);
+      getScheduleCoursesFromSimplifiedCourseDataAPI(
+        // TODO: change this to transferCourses once the users schema is fixed
+        response.user.coursesTransfer
+      ).then(courses => {
+        batch(() => {
+          dispatch(setStudentAction(response.user));
+          dispatch(setTransferCoursesAction(courses));
+        });
+      });
+
       setFetchingStudent(false);
     });
     findAllPlansForUser(id).then((plans: IPlanData[]) => {
-      dispatch(setUserPlansAction(plans, 2020));
+      dispatch(setUserPlansAction(plans, 2020)); // TODO clear this?
       if (!plans || !plans.length || !plans[0].schedule) setNoPlans(true);
     });
+
+    return () => {
+      // Clear the student.
+      dispatch(setStudentAction());
+    };
   }, []);
 
   const renderStudentInfo = () => {
