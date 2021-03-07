@@ -52,6 +52,11 @@ export const deletePlan = createAction(
   (name: string) => ({ name })
 )();
 
+export const setActivePlanNameAction = createAction(
+  "userPlans/SET_ACTIVE_PLAN_NAME",
+  (name: string) => ({ name })
+)();
+
 // TODO: remove this and do the DND conversion in setActivePlanScheduleAction (if possible)
 export const setActivePlanDNDScheduleAction = createAction(
   "userPlans/SET_ACTIVE_PLAN_DND_SCHEDULE",

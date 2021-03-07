@@ -7,6 +7,7 @@ import {
   updateActivePlanTimestampAction,
   expandAllYearsForActivePlanAction,
   setActivePlanConcentrationAction,
+  setActivePlanNameAction,
 } from "./../actions/userPlansActions";
 import { DNDSchedule, IPlanData } from "../../models/types";
 import produce from "immer";
@@ -145,6 +146,24 @@ export const userPlansReducer = (
         draft.plans[draft.activePlan!].warnings = container.normalWarnings;
         draft.plans[draft.activePlan!].courseWarnings =
           container.courseWarnings;
+
+        return draft;
+      }
+      case getType(setActivePlanNameAction): {
+        const { name } = action.payload;
+        // current active plan object
+        const plan = draft.plans[draft.activePlan!];
+        // current closed Years array
+        const closedYears = draft.closedYears[draft.activePlan!];
+        plan.name = name;
+        // delete old entry from plans map and closedYears map
+        if (Object.values(draft.plans)) delete draft.plans[draft.activePlan!];
+        if (Object.values(draft.closedYears))
+          delete draft.closedYears[draft.activePlan!];
+        // update activePlan and add back the plans and closedYears into maps
+        draft.activePlan = name;
+        draft.plans[draft.activePlan] = plan;
+        draft.closedYears[draft.activePlan] = closedYears;
 
         return draft;
       }
