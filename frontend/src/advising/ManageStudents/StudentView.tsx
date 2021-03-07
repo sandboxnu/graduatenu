@@ -9,6 +9,7 @@ import {
 import {
   safelyGetActivePlanIdFromState,
   getActivePlanNameFromState,
+  getStudentFromState,
 } from "../../state";
 import {
   addNewPlanAction,
@@ -165,6 +166,7 @@ export const StudentView: React.FC = () => {
   const { planName, planId } = useSelector((state: AppState) => ({
     planName: getActivePlanNameFromState(state),
     planId: safelyGetActivePlanIdFromState(state),
+    student: getStudentFromState(state),
   }));
 
   useEffect(() => {
