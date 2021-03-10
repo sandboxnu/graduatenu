@@ -208,6 +208,10 @@ export const userPlansReducer = (
           graduationYear,
         } = action.payload;
 
+        if (!coopCycle) {
+          return;
+        }
+
         if (!allPlans) {
           return draft;
         }
@@ -218,23 +222,26 @@ export const userPlansReducer = (
           (p: Schedule) => planToString(p) === coopCycle
         );
 
-        if (!plan) {
-          return draft;
+        if (plan) {
+          const [newSchedule, newCounter] = convertToDNDSchedule(
+            plan,
+            activePlan.courseCounter
+          );
+
+          draft.plans[
+            draft.activePlan!
+          ].schedule = alterScheduleToHaveCorrectYears(
+            newSchedule,
+            academicYear,
+            graduationYear
+          );
         }
 
-        const [newSchedule, newCounter] = convertToDNDSchedule(
-          plan,
-          activePlan.courseCounter
+        // remove all classes
+        draft.plans[draft.activePlan!].schedule = clearSchedule(
+          draft.plans[draft.activePlan!].schedule
         );
 
-        // remove all classes
-        draft.plans[
-          draft.activePlan!
-        ].schedule = alterScheduleToHaveCorrectYears(
-          clearSchedule(newSchedule),
-          academicYear,
-          graduationYear
-        );
         draft.plans[draft.activePlan!].courseCounter = 0;
 
         // clear all warnings
