@@ -15,9 +15,10 @@ import {
   getGraduationYearFromState,
   getUserIdFromState,
   getUserPrimaryPlanIdFromState,
+  safelyGetTransferCoursesFromState,
 } from "../state";
 import { IPlanData } from "../models/types";
-import { Major, Schedule } from "../../../common/types";
+import { Major, Schedule, ScheduleCourse } from "../../../common/types";
 import {
   getMajorsFromState,
   getPlansFromState,
@@ -120,6 +121,7 @@ interface ReduxStoreEditPlanProps {
   catalogYear: number | null;
   academicYear: number;
   graduationYear: number;
+  transferCourses: ScheduleCourse[];
 }
 
 interface ReduxDispatchEditPlanProps {
@@ -129,7 +131,10 @@ interface ReduxDispatchEditPlanProps {
     graduationYear: number,
     allPlans?: Record<string, Schedule[]>
   ) => void;
-  setActivePlanDNDSchedule: (schedule: DNDSchedule) => void;
+  setActivePlanDNDSchedule: (
+    schedule: DNDSchedule,
+    transferCourses: ScheduleCourse[]
+  ) => void;
   setActivePlanMajor: (major: string | null) => void;
   setActivePlanCatalogYear: (number: number | null) => void;
   setCurrentClassCounter: (counter: number) => void;
@@ -308,7 +313,10 @@ export class EditPlanPopperComponent extends React.Component<
       this.props.allPlans
     );
     batch(() => {
-      this.props.setActivePlanDNDSchedule(schedule!);
+      this.props.setActivePlanDNDSchedule(
+        schedule!,
+        this.props.transferCourses
+      );
       this.props.setCurrentClassCounter(counter);
     });
   }
@@ -372,7 +380,8 @@ export class EditPlanPopperComponent extends React.Component<
         clearSchedule(this.props.plan.schedule),
         this.props.academicYear,
         this.props.graduationYear
-      )
+      ),
+      this.props.transferCourses
     );
   }
 
@@ -456,6 +465,7 @@ const mapStateToProps = (state: AppState) => ({
   primaryPlanId: getUserPrimaryPlanIdFromState(state),
   academicYear: getAcademicYearFromState(state)!,
   graduationYear: getGraduationYearFromState(state)!,
+  transferCourses: safelyGetTransferCoursesFromState(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
@@ -473,8 +483,10 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
         allPlans
       )
     ),
-  setActivePlanDNDSchedule: (schedule: DNDSchedule) =>
-    dispatch(setActivePlanDNDScheduleAction(schedule)),
+  setActivePlanDNDSchedule: (
+    schedule: DNDSchedule,
+    transferCourses: ScheduleCourse[]
+  ) => dispatch(setActivePlanDNDScheduleAction(schedule, transferCourses)),
   setActivePlanMajor: (major: string | null) =>
     dispatch(setActivePlanMajorAction(major)),
   setActivePlanCatalogYear: (year: number | null) =>
