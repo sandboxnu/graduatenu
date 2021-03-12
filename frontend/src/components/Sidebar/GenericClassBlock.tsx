@@ -1,8 +1,7 @@
 import { Card } from "@material-ui/core";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Draggable, Droppable } from "react-beautiful-dnd";
 import styled from "styled-components";
-import { ScheduleCourse } from "../../../../common/types";
 import {
   GENERIC_COURSE_DROPPABLE_ID,
   GENERIC_COURSE_ID,
@@ -67,7 +66,6 @@ export const GenericClassBlock: React.FC = () => {
         <HeaderWrapper>
           <SectionHeaderText>Generic Course Block</SectionHeaderText>
         </HeaderWrapper>
-        {/* TODO: draggable id has to be unique, append a counter or smth*/}
         <Draggable isDragDisabled={false} draggableId={courseCode} index={0}>
           {provided => {
             return (
