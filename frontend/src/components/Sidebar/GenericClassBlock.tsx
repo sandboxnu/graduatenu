@@ -1,10 +1,9 @@
-import { Card, Tooltip } from "@material-ui/core";
+import { Card } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { Draggable, Droppable } from "react-beautiful-dnd";
 import styled from "styled-components";
 import { ScheduleCourse } from "../../../../common/types";
-import { ClassBlockBody } from "../ClassBlocks/ClassBlockBody";
-import { SidebarClassBlock } from "./SidebarClassBlock";
+import { GENERIC_COURSE_ID, GENERIC_COURSE_SUBJECT } from "../../constants";
 
 const Container = styled.div`
   flex: 1;
@@ -50,58 +49,28 @@ const Title = styled.div`
 `;
 
 export const GenericClassBlock: React.FC = () => {
-  const [name, setName] = useState("XXXX 9999");
-  const [hovering, setHovering] = useState(false);
-  let scheduleCourse: ScheduleCourse = {
-    name: "Default",
-    subject: "XXXX",
-    classId: "9999",
-    numCreditsMin: 0,
-    numCreditsMax: 0,
-  };
-
-  const setScheduleCourse = () => {
-    var courseData = name.split(" ");
-    scheduleCourse = {
-      name: "Default",
-      subject: courseData[0],
-      classId: courseData[1],
-      numCreditsMin: 0,
-      numCreditsMax: 0,
-    };
-    return scheduleCourse;
-  };
-
-  useEffect(() => {
-    scheduleCourse = setScheduleCourse();
-  }, [name]);
+  const courseCode = GENERIC_COURSE_SUBJECT + " " + GENERIC_COURSE_ID;
 
   const draggableCourseBlock = () => {
     return (
       <Container>
         {/* TODO: draggable id has to be unique, append a counter or smth*/}
-        <Draggable isDragDisabled={false} draggableId={name} index={0}>
+        <Draggable isDragDisabled={false} draggableId={courseCode} index={0}>
           {provided => {
             return (
-              <div
-                onMouseEnter={() => {
-                  setHovering(true);
-                }}
-                onMouseLeave={() => {
-                  setHovering(false);
-                }}
-              >
+              <div>
                 <Block
                   {...provided.draggableProps}
                   {...provided.dragHandleProps}
                   ref={provided.innerRef}
                 >
+                  {/* omg when dragged into semester, turns from SidebarClassBlock into ClassBlock */}
                   <SidebarClassBlockBodyContainer>
-                    <ClassBlockBody
-                      course={scheduleCourse}
-                      hovering={hovering}
-                      onDelete={() => this.props.onDelete(this.props.class)}
-                    />
+                    <Wrapper>
+                      <TitleWrapper>
+                        <Title> {courseCode} </Title>
+                      </TitleWrapper>
+                    </Wrapper>
                   </SidebarClassBlockBodyContainer>
                 </Block>
               </div>

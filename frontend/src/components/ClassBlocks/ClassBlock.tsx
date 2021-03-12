@@ -28,6 +28,7 @@ interface ClassBlockProps {
   warnings?: CourseWarning[];
   onDelete: (course: DNDScheduleCourse) => void;
   currentClassCounter: number;
+  canEditBlockName: boolean;
 }
 
 interface ClassBlockState {
@@ -74,6 +75,7 @@ export class ClassBlock extends React.Component<
               course={this.props.class}
               hovering={this.state.hovering}
               onDelete={() => this.props.onDelete(this.props.class)}
+              canEditBlockName={this.props.canEditBlockName}
             />
           </ClassBlockBodyContainer>
         </Block>

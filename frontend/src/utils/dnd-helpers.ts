@@ -157,10 +157,7 @@ export async function addCourseFromSidebar(
   ];
 
   let courseData: string[] = draggableId.split(" ");
-  let scheduleCourse: ScheduleCourse | null = await fetchCourse(
-    courseData[0],
-    courseData[1]
-  );
+  let scheduleCourse: ScheduleCourse | null = null;
 
   if (source.droppableId === GENERIC_COURSE_DROPPABLE_ID) {
     scheduleCourse = {
@@ -170,7 +167,10 @@ export async function addCourseFromSidebar(
       numCreditsMin: 0,
       numCreditsMax: 0,
     };
+  } else {
+    scheduleCourse = await fetchCourse(courseData[0], courseData[1]);
   }
+
   if (scheduleCourse === null) {
     return;
   }

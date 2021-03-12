@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { ScheduleCourse } from "../../../../common/types";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { IconButton } from "@material-ui/core";
+import EditIcon from "@material-ui/icons/Edit";
 
 const Wrapper = styled.div`
   display: flex;
@@ -35,11 +36,16 @@ const Subtitle = styled.div`
   overflow: hidden;
 `;
 
+const IconsWrapper = styled.div`
+  display: flex;
+`;
+
 interface ClassBlockBodyProps {
   course: ScheduleCourse;
   hovering: boolean;
   onDelete: () => void;
   hideDelete?: boolean;
+  canEditBlockName?: boolean;
 }
 
 /**
@@ -50,24 +56,40 @@ export const ClassBlockBody: React.FC<ClassBlockBodyProps> = ({
   hovering,
   onDelete,
   hideDelete,
+  canEditBlockName,
 }) => {
+  const [blockName, setBlockName] = useState(course.name);
+  const [isEditBlockName, setIsEditBlockName] = useState(false);
+
   return (
     <Wrapper>
       <TitleWrapper>
         <Title>{course.subject + course.classId}</Title>
-        <Subtitle>{course.name}</Subtitle>
+        <Subtitle>{blockName}</Subtitle>
       </TitleWrapper>
-      {hovering && !hideDelete && (
-        <IconButton
-          onClick={onDelete}
-          style={{ color: "rgba(102, 102, 102, 0.3)" }}
-          disableRipple
-          disableFocusRipple
-          disableTouchRipple
-        >
-          <DeleteIcon fontSize="inherit" />
-        </IconButton>
-      )}
+      <IconsWrapper>
+        {hovering && canEditBlockName && (
+          <IconButton
+            onClick={() => {
+              setIsEditBlockName(true);
+            }}
+            style={{ color: "rgba(102, 102, 102, 0.3)", padding: 5 }}
+          >
+            <EditIcon fontSize="inherit" />
+          </IconButton>
+        )}
+        {hovering && !hideDelete && (
+          <IconButton
+            onClick={onDelete}
+            style={{ color: "rgba(102, 102, 102, 0.3)", padding: 5 }}
+            disableRipple
+            disableFocusRipple
+            disableTouchRipple
+          >
+            <DeleteIcon fontSize="inherit" />
+          </IconButton>
+        )}
+      </IconsWrapper>
     </Wrapper>
   );
 };
