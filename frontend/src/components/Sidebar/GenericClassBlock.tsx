@@ -3,7 +3,11 @@ import React, { useEffect, useState } from "react";
 import { Draggable, Droppable } from "react-beautiful-dnd";
 import styled from "styled-components";
 import { ScheduleCourse } from "../../../../common/types";
-import { GENERIC_COURSE_ID, GENERIC_COURSE_SUBJECT } from "../../constants";
+import {
+  GENERIC_COURSE_DROPPABLE_ID,
+  GENERIC_COURSE_ID,
+  GENERIC_COURSE_SUBJECT,
+} from "../../constants";
 
 const Container = styled.div`
   flex: 1;
@@ -35,17 +39,23 @@ const Wrapper = styled.div`
   min-width: 0;
 `;
 
-const TitleWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  min-width: 0;
-`;
-
 const Title = styled.div`
   font-weight: normal;
   font-size: 14px;
   margin-right: 4px;
+`;
+
+const SectionHeaderText = styled.div`
+  margin-left: 4px;
+  font-weight: 600;
+  font-size: 14px;
+`;
+
+const HeaderWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 5px;
 `;
 
 export const GenericClassBlock: React.FC = () => {
@@ -54,26 +64,24 @@ export const GenericClassBlock: React.FC = () => {
   const draggableCourseBlock = () => {
     return (
       <Container>
+        <HeaderWrapper>
+          <SectionHeaderText>Generic Course Block</SectionHeaderText>
+        </HeaderWrapper>
         {/* TODO: draggable id has to be unique, append a counter or smth*/}
         <Draggable isDragDisabled={false} draggableId={courseCode} index={0}>
           {provided => {
             return (
-              <div>
-                <Block
-                  {...provided.draggableProps}
-                  {...provided.dragHandleProps}
-                  ref={provided.innerRef}
-                >
-                  {/* omg when dragged into semester, turns from SidebarClassBlock into ClassBlock */}
-                  <SidebarClassBlockBodyContainer>
-                    <Wrapper>
-                      <TitleWrapper>
-                        <Title> {courseCode} </Title>
-                      </TitleWrapper>
-                    </Wrapper>
-                  </SidebarClassBlockBodyContainer>
-                </Block>
-              </div>
+              <Block
+                {...provided.draggableProps}
+                {...provided.dragHandleProps}
+                ref={provided.innerRef}
+              >
+                <SidebarClassBlockBodyContainer>
+                  <Wrapper>
+                    <Title> {courseCode} </Title>
+                  </Wrapper>
+                </SidebarClassBlockBodyContainer>
+              </Block>
             );
           }}
         </Draggable>
@@ -82,7 +90,7 @@ export const GenericClassBlock: React.FC = () => {
   };
 
   return (
-    <Droppable isDropDisabled={true} droppableId={"Generic Course Block"}>
+    <Droppable isDropDisabled={true} droppableId={GENERIC_COURSE_DROPPABLE_ID}>
       {provided => (
         <div ref={provided.innerRef as any} {...provided.droppableProps}>
           {draggableCourseBlock()}
