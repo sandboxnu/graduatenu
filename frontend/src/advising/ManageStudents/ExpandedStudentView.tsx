@@ -23,7 +23,6 @@ import styled from "styled-components";
 import { PlanTitle, ButtonHeader, ScheduleWrapper, Container } from "./Shared";
 import { Prompt, useHistory, useLocation, useParams } from "react-router";
 import { IUserData } from "../../models/types";
-import { fetchUser } from "../../services/AdvisorService";
 import {
   approvePlanForUser,
   fetchPlan,
@@ -31,10 +30,6 @@ import {
 } from "../../services/PlanService";
 import IdleTimer from "react-idle-timer";
 import { LoadingSpinner } from "../../components/common/LoadingSpinner";
-import {
-  setStudentAction,
-  setTransferCoursesAction,
-} from "../../state/actions/studentActions";
 import { Alert } from "@material-ui/lab";
 import { PrimaryButton } from "../../components/common/PrimaryButton";
 import {
@@ -43,7 +38,6 @@ import {
 } from "../../components/common/SnackbarAlert";
 import ScheduleChangeTracker from "../../utils/ScheduleChangeTracker";
 import { sendChangeLog } from "../../services/PlanService";
-import { getScheduleCoursesFromSimplifiedCourseDataAPI } from "../../utils/course-helpers";
 
 const FullScheduleViewContainer = styled.div`
   margin-top: 30px;
@@ -83,6 +77,10 @@ interface ParamProps {
   planId: string; // id of the student's plan
 }
 
+interface ExpandedStudentViewProps {
+  user: any;
+}
+
 function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
@@ -90,7 +88,9 @@ function useQuery() {
 const VIEWING_BUFFER = 30000; // 30 seconds
 const TIMEOUT = 900000; // 15 minutes
 
-export const ExpandedStudentView: React.FC = () => {
+export const ExpandedStudentView: React.FC<ExpandedStudentViewProps> = ({
+  user,
+}) => {
   let interval: number | null = null;
 
   const history = useHistory();
@@ -120,33 +120,19 @@ export const ExpandedStudentView: React.FC = () => {
   useEffect(() => {
     dispatch(expandAllYearsForActivePlanAction());
 
-    fetchUser(studentId)
+    fetchPlan(studentId, planId)
       .then(response => {
-        const user = response.user;
-        fetchPlan(studentId, planId)
-          .then(response => {
-            callUpdatePlanLastViewedOnInterval();
-            getScheduleCoursesFromSimplifiedCourseDataAPI(
-              user.coursesTransfer
-            ).then(courses => {
-              batch(() => {
-                dispatch(setStudentAction(user));
-                dispatch(setUserPlansAction([response], user.academicYear));
-                dispatch(
-                  setActivePlanAction(
-                    response.name,
-                    studentId,
-                    user.academicYear
-                  )
-                );
-                dispatch(setTransferCoursesAction(courses));
-              });
-            });
+        callUpdatePlanLastViewedOnInterval();
 
-            setStudent(user);
-            setLoading(false);
-          })
-          .catch(e => console.log(e));
+        batch(() => {
+          dispatch(setUserPlansAction([response], user.academicYear));
+          dispatch(
+            setActivePlanAction(response.name, studentId, user.academicYear)
+          );
+        });
+
+        setStudent(user);
+        setLoading(false);
       })
       .catch(e => console.log(e));
 

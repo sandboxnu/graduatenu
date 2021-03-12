@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { batch, useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { IPlanData, ITemplatePlan } from "../../models/types";
-import { fetchUser } from "../../services/AdvisorService";
 import {
   createPlanForUser,
   findAllPlansForUser,
@@ -29,11 +28,6 @@ import { useHistory, useParams } from "react-router";
 import { AssignTemplateToUserModal } from "./AssignTemplateToUserModal";
 import { alterScheduleToHaveCorrectYears } from "../../utils/schedule-helpers";
 import { deleteTemplatePlan } from "../../services/TemplateService";
-import {
-  setStudentAction,
-  setTransferCoursesAction,
-} from "../../state/actions/studentActions";
-import { getScheduleCoursesFromSimplifiedCourseDataAPI } from "../../utils/course-helpers";
 
 const StudentViewContainer = styled.div`
   display: flex;
@@ -131,11 +125,18 @@ interface ParamProps {
   id: string;
 }
 
-export const StudentView: React.FC = () => {
+interface StudentViewProps {
+  user: any;
+  fetchingStudent: boolean;
+}
+
+export const StudentView: React.FC<StudentViewProps> = ({
+  user,
+  fetchingStudent,
+}) => {
   const history = useHistory();
   const routeParams = useParams<ParamProps>();
   const id = Number(routeParams.id);
-  const [fetchingStudent, setFetchingStudent] = useState(true);
   const [noPlans, setNoPlans] = useState(false);
   const [openModal, setOpenModal] = useState(false);
 
@@ -160,7 +161,7 @@ export const StudentView: React.FC = () => {
     });
     if (response.error) return;
     if (shouldDelete) {
-      const deleteResponse = await deleteTemplatePlan(userId, templateData!.id);
+      await deleteTemplatePlan(userId, templateData!.id);
       // error handling for this page (?)
     }
     dispatch(addNewPlanAction(response.plan));
@@ -174,28 +175,10 @@ export const StudentView: React.FC = () => {
   }));
 
   useEffect(() => {
-    fetchUser(id).then(response => {
-      getScheduleCoursesFromSimplifiedCourseDataAPI(
-        // TODO: change this to transferCourses once the users schema is fixed
-        response.user.coursesTransfer
-      ).then(courses => {
-        batch(() => {
-          dispatch(setStudentAction(response.user));
-          dispatch(setTransferCoursesAction(courses));
-        });
-      });
-
-      setFetchingStudent(false);
-    });
     findAllPlansForUser(id).then((plans: IPlanData[]) => {
       dispatch(setUserPlansAction(plans, 2020)); // TODO clear this?
       if (!plans || !plans.length || !plans[0].schedule) setNoPlans(true);
     });
-
-    return () => {
-      // Clear the student.
-      dispatch(setStudentAction());
-    };
   }, []);
 
   const renderStudentInfo = () => {
