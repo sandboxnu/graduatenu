@@ -26,6 +26,24 @@ export function excelToSchedule(
   reader.readAsArrayBuffer(file);
 }
 
+export function excelToScheduleMultipleSheets(
+  file: File,
+  setNamedSchedules: (namedSchedules: [string, Schedule][]) => void
+) {
+  const reader = new FileReader();
+  reader.onload = function(e: any) {
+    const data = new Uint8Array(e.target.result);
+    const workbook = XLSX.read(data, { type: "array" });
+    setNamedSchedules(
+      Object.entries(workbook).map(([name, worksheet]) => [
+        name,
+        parseExcelAndCreateSchedule(worksheet),
+      ])
+    );
+  };
+  reader.readAsArrayBuffer(file);
+}
+
 function parseExcelAndCreateSchedule(worksheet: XLSX.WorkSheet): Schedule {
   // Find beginning of table
   let startCellIdx = getStartCellIndex(worksheet);
