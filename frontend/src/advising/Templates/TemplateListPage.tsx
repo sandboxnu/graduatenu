@@ -1,24 +1,36 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Search } from "../../components/common/Search";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import styled from "styled-components";
-import { LinearProgress } from "@material-ui/core";
-import { IFolderData, ITemplatePlan } from "../../models/types";
-import { getTemplates, TemplatesAPI } from "../../services/TemplateService";
+import { LinearProgress, Modal, TextField } from "@material-ui/core";
+import {
+  ICreateTemplatePlan,
+  IFolderData,
+  ITemplatePlan,
+} from "../../models/types";
+import {
+  createTemplate,
+  getTemplates,
+  TemplatesAPI,
+} from "../../services/TemplateService";
 import {
   getAdvisorUserIdFromState,
   getFolderExpandedFromState,
 } from "../../state";
 import { toggleTemplateFolderExpandedAction } from "../../state/actions/advisorActions";
 import { AppState } from "../../state/reducers/state";
-import { Link, RouteComponentProps, useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import {
   RedColorButton,
   WhiteColorButton,
 } from "../../components/common/ColoredButtons";
 import { isSearchedTemplate } from "./TemplateUtils";
+import { ExcelWorkbookUpload } from "../../components/ExcelUpload";
+import { Schedule } from "../../../../common/types";
+import { Autocomplete } from "@material-ui/lab";
+import { convertToDNDSchedule } from "../../utils";
 
 const Container = styled.div`
   margin-left: 30px;
@@ -117,6 +129,35 @@ const TemplateName = styled.div`
   }
 `;
 
+const InnerSection = styled.section`
+  position: fixed;
+  background: white;
+  width: 30%;
+  height: auto;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  outline: none;
+  padding-bottom: 24px;
+  min-width: 300px;
+`;
+
+interface PlanUploadPopperProps {
+  userId: number;
+  visible: boolean;
+  folders: IFolderData[];
+  setTemplates: (templates: IFolderData[]) => void;
+  fetchTemplates: (currentFolders: IFolderData[], page: number) => void;
+}
+
+interface PlanUploadPopperErrorState {
+  noFolderSelectedError: string;
+}
+
 interface TemplatesListProps {
   searchQuery: string;
 }
@@ -133,6 +174,104 @@ interface FolderProps {
 }
 
 const EMPTY_TEMPLATES_LIST: IFolderData[] = [];
+
+const PlanUploadPopper: React.FC<PlanUploadPopperProps> = ({
+  userId,
+  visible,
+  folders,
+  setTemplates,
+  fetchTemplates,
+}) => {
+  const [selectedFolderId, setSelectedFolderId] = useState<number | null>(null);
+  const [namedSchedules, setNamedSchedules] = useState<
+    [string, Schedule][] | null
+  >(null);
+  // const [errorState, setErrorState] = useState<PlanUploadPopperErrorState>({
+  //   noFolderSelectedError: "",
+  // });
+
+  // Errors:
+  // - no folder selected
+  // - invalid folder selected
+  // - failed to convert schedules
+
+  const namedScheduleToCreateTemplatePlan = useCallback(
+    ([name, schedule]: [string, Schedule]): ICreateTemplatePlan => {
+      const [dndSchedule, courseCounter] = convertToDNDSchedule(schedule, 0);
+
+      return {
+        name,
+        schedule: dndSchedule,
+        catalog_year: null, // TODO do we need optional inputs for these?
+        major: null,
+        coop_cycle: null,
+        concentration: null,
+        folder_id: selectedFolderId,
+        folder_name:
+          folders.find(value => value.id === selectedFolderId)?.name || null,
+        course_counter: courseCounter,
+      };
+    },
+    [folders, selectedFolderId]
+  );
+
+  const createTemplatesFromNamedSchedules = useCallback(async () => {
+    if (!namedSchedules) {
+      return;
+      // TODO error handling
+    }
+
+    await Promise.all(
+      namedSchedules.map(namedSchedule =>
+        createTemplate(userId, namedScheduleToCreateTemplatePlan(namedSchedule))
+      )
+    );
+
+    setTemplates(EMPTY_TEMPLATES_LIST);
+    fetchTemplates(EMPTY_TEMPLATES_LIST, 0);
+  }, [
+    fetchTemplates,
+    namedScheduleToCreateTemplatePlan,
+    namedSchedules,
+    setTemplates,
+    userId,
+  ]);
+
+  const onImportClick = async () => {
+    await createTemplatesFromNamedSchedules();
+  };
+
+  return (
+    <Modal
+      style={{ outline: "none" }}
+      open={visible}
+      onClose={() => {}}
+      aria-labelledby="simple-modal-title"
+      aria-describedby="simple-modal-description"
+    >
+      <InnerSection>
+        <Autocomplete
+          disableListWrap
+          options={folders}
+          getOptionLabel={folder => folder.name}
+          renderInput={params => (
+            <TextField
+              {...params}
+              variant="outlined"
+              label="Select a destination folder"
+              fullWidth
+              // error={""}
+              // helperText={error && REQUIRED_FIELD_MESSAGE}
+            />
+          )}
+          onChange={(e, value) => setSelectedFolderId(value ? value.id : value)}
+        ></Autocomplete>
+        <ExcelWorkbookUpload setNamedSchedules={setNamedSchedules} />
+        <RedColorButton onClick={onImportClick}>Import</RedColorButton>
+      </InnerSection>
+    </Modal>
+  );
+};
 
 export const TemplatesListPage: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState("");
