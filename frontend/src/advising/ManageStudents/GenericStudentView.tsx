@@ -15,6 +15,12 @@ interface ParamProps {
   planId: string; // id of the student's plan
 }
 
+/**
+ * This component represents a standard or expanded student view within the advisor workflow.
+ * The reason for this abstraction is in order to share data across both of these views and
+ * properly clean up set state when navigating away from either.
+ * @returns
+ */
 export const GenericStudentView: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState<any>();
