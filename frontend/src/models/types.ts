@@ -354,6 +354,13 @@ export interface IChangeLog {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export interface INotification {
+  author: string;
+  text: string;
+  planId: number;
+  userId: number;
+}
 /** ------------------------------------------------------------------------
  *
  *            OLD STUFF FOLLOWS ! This stuff is big outdated and is only
