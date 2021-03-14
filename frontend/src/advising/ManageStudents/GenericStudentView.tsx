@@ -32,6 +32,17 @@ export const GenericStudentView: React.FC = () => {
     "/advisor/manageStudents/:id/expanded/:planId"
   );
 
+  /**
+   * CURRENT ISSUE:
+   * When refreshing on the expanded student view, the user is not properly being re-fetched,
+   * causing any usages to show up undefined.
+   *
+   * We are expecting that on refresh, the following useEffect will re-fetch the user, set it
+   * within local state, and pass that result to the ExpandedStudentView, but it doesn't seem
+   * like this is the case. We have confirmed from the network request to fetch the student is
+   * still being made. However, as soon as we try to reference it, it is undefined.
+   */
+
   useEffect(() => {
     fetchUser(userId).then(response => {
       const user = response.user;
