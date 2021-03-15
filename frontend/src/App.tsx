@@ -8,7 +8,7 @@ import { Provider } from "react-redux";
 import { Store } from "redux";
 import { TransferCoursesScreen } from "./Onboarding/TransferCoursesScreen";
 import { Profile } from "./profile/Profile";
-import { NotificationsPage } from "./advising/Notifications";
+import { AppointmentsPage } from "./advising/Appointments";
 import { TemplatesListPage } from "./advising/Templates/TemplateListPage";
 import { NewTemplatesPage } from "./advising/Templates/TemplateInfoPage";
 import { GenericAdvisingTemplateComponent } from "./advising/GenericAdvisingTemplate";
@@ -61,7 +61,7 @@ const AdvisorRouter = (props: any) => {
   return (
     <GenericAdvisingTemplateComponent>
       <Switch>
-        <Route path={`${path}/notifications`} component={NotificationsPage} />
+        <Route path={`${path}/appointments`} component={AppointmentsPage} />
         <Route exact path={`${path}/manageStudents`} component={StudentsList} />
         <Route
           exact

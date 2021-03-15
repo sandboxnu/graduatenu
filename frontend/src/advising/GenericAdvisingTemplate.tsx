@@ -34,7 +34,7 @@ const TabsWrapper = styled.div`
 `;
 
 const PATHS = [
-  `/advisor/notifications`,
+  `/advisor/appointments`,
   `/advisor/manageStudents`,
   `/advisor/templates`,
 ];
@@ -82,7 +82,7 @@ const GenericAdvisingTemplate: React.FC = ({ children }) => {
           }}
           centered
         >
-          <StyledTab onChange={handleChange} label="Notifications" />
+          <StyledTab onChange={handleChange} label="Appointments" />
           <StyledTab onChange={handleChange} label="Students" />
           <StyledTab onChange={handleChange} label="Templates" />
         </Tabs>

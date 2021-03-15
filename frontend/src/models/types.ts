@@ -355,11 +355,17 @@ export interface IChangeLog {
   updatedAt: Date;
 }
 
-export interface INotification {
-  author: string;
-  text: string;
-  planId: number;
+export interface IAppointments {
+  id: number;
   userId: number;
+  fullname: string;
+  email: string;
+  nuid: string;
+  major: string;
+  planId: number;
+  planName: string;
+  planMajor: string;
+  appointmentTime: string;
 }
 /** ------------------------------------------------------------------------
  *
