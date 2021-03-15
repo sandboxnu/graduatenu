@@ -40,6 +40,7 @@ import {
 } from "../utils/schedule-helpers";
 import { UndoDelete } from "./UndoDelete";
 import ScheduleChangeTracker from "../utils/ScheduleChangeTracker";
+import { type } from "os";
 
 const OutsideContainer = styled.div`
   width: 25%;
@@ -248,6 +249,7 @@ class EditableSemesterBlockComponent extends React.Component<
             <ClassBlock
               key={index}
               class={scheduleCourse}
+              semester={semester}
               index={index}
               warnings={findCourseWarnings(courseWarnings, scheduleCourse)}
               onDelete={this.onDeleteClass.bind(this, scheduleCourse, semester)}

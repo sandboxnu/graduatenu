@@ -1,9 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { ScheduleCourse } from "../../../../common/types";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { IconButton } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
+import CheckIcon from "@material-ui/icons/Check";
+import { Close as CloseIcon } from "@material-ui/icons";
+import { AppState } from "../../state/reducers/state";
+import { useDispatch, useSelector } from "react-redux";
+import { getCourseNameFromState, getIsAdvisorFromState } from "../../state";
+import { DNDScheduleCourse, DNDScheduleTerm } from "../../models/types";
+import { constant } from "lodash";
+import { renameCourseInActivePlanAction } from "../../state/actions/userPlansActions";
 
 const Wrapper = styled.div`
   display: flex;
@@ -41,7 +49,9 @@ const IconsWrapper = styled.div`
 `;
 
 interface ClassBlockBodyProps {
-  course: ScheduleCourse;
+  course: ScheduleCourse; // can't pass DNDScheduleCourse instead because NonDraggableClassBlock
+  dndId?: string;
+  semester?: DNDScheduleTerm;
   hovering: boolean;
   onDelete: () => void;
   hideDelete?: boolean;
@@ -53,43 +63,104 @@ interface ClassBlockBodyProps {
  */
 export const ClassBlockBody: React.FC<ClassBlockBodyProps> = ({
   course,
+  dndId,
+  semester,
   hovering,
   onDelete,
   hideDelete,
   canEditBlockName,
 }) => {
-  const [blockName, setBlockName] = useState(course.name);
+  const { courseName: courseName } =
+    useSelector((state: AppState) => ({
+      courseName: getCourseNameFromState(state, dndId, semester),
+    })) || course.name;
+
+  const [blockName, setBlockName] = useState(courseName);
   const [isEditBlockName, setIsEditBlockName] = useState(false);
+  const { isAdvisor } = useSelector((state: AppState) => ({
+    isAdvisor: getIsAdvisorFromState(state),
+  }));
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    setBlockName(courseName);
+  }, [courseName]);
+
+  const ICONBUTTON_HEIGHT = 25;
+
+  const editBlockNameIcons = () => {
+    return (
+      <IconsWrapper>
+        <input
+          type="text"
+          style={{
+            width: "100%",
+          }}
+          onChange={event => {
+            setBlockName(event.target.value);
+          }}
+        />
+        {/* confirm button */}
+        <IconButton
+          style={{ padding: 3, height: ICONBUTTON_HEIGHT }}
+          onClick={() => {
+            dispatch(
+              renameCourseInActivePlanAction(dndId!, semester!, blockName!)
+            );
+            setIsEditBlockName(false);
+          }}
+        >
+          <CheckIcon style={{ fontSize: "20px" }} />
+        </IconButton>
+        {/* cancel button */}
+        <IconButton
+          style={{ padding: 3, height: ICONBUTTON_HEIGHT }}
+          onClick={() => {
+            setIsEditBlockName(false);
+          }}
+        >
+          <CloseIcon style={{ fontSize: "20px" }} />
+        </IconButton>
+      </IconsWrapper>
+    );
+  };
 
   return (
     <Wrapper>
       <TitleWrapper>
         <Title>{course.subject + course.classId}</Title>
-        <Subtitle>{blockName}</Subtitle>
+        {isEditBlockName ? (
+          editBlockNameIcons()
+        ) : (
+          <Subtitle>{blockName}</Subtitle>
+        )}
       </TitleWrapper>
-      <IconsWrapper>
-        {hovering && canEditBlockName && (
-          <IconButton
-            onClick={() => {
-              setIsEditBlockName(true);
-            }}
-            style={{ color: "rgba(102, 102, 102, 0.3)", padding: 5 }}
-          >
-            <EditIcon fontSize="inherit" />
-          </IconButton>
-        )}
-        {hovering && !hideDelete && (
-          <IconButton
-            onClick={onDelete}
-            style={{ color: "rgba(102, 102, 102, 0.3)", padding: 5 }}
-            disableRipple
-            disableFocusRipple
-            disableTouchRipple
-          >
-            <DeleteIcon fontSize="inherit" />
-          </IconButton>
-        )}
-      </IconsWrapper>
+      {!isEditBlockName && (
+        <IconsWrapper>
+          {hovering && !hideDelete && (
+            <IconButton
+              onClick={onDelete}
+              style={{ color: "rgba(102, 102, 102, 0.3)", padding: 5 }}
+              disableRipple
+              disableFocusRipple
+              disableTouchRipple
+            >
+              <DeleteIcon fontSize="inherit" />
+            </IconButton>
+          )}
+          {canEditBlockName && isAdvisor && (
+            <IconButton
+              onClick={() => {
+                setIsEditBlockName(true);
+              }}
+              style={{ color: "rgba(102, 102, 102, 0.3)", padding: 5 }}
+            >
+              <EditIcon fontSize="inherit" />
+            </IconButton>
+          )}
+        </IconsWrapper>
+      )}
     </Wrapper>
   );
 };

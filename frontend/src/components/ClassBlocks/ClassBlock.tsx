@@ -1,6 +1,10 @@
 import React from "react";
 import { Draggable, DraggableProvided } from "react-beautiful-dnd";
-import { DNDScheduleCourse, CourseWarning } from "../../models/types";
+import {
+  DNDScheduleCourse,
+  CourseWarning,
+  DNDScheduleTerm,
+} from "../../models/types";
 import styled from "styled-components";
 import { Card, Tooltip } from "@material-ui/core";
 import { ClassBlockBody } from "./ClassBlockBody";
@@ -23,6 +27,7 @@ const ClassBlockBodyContainer = styled.div<any>`
 
 interface ClassBlockProps {
   class: DNDScheduleCourse;
+  semester?: DNDScheduleTerm;
   lab?: DNDScheduleCourse;
   index: number;
   warnings?: CourseWarning[];
@@ -73,6 +78,8 @@ export class ClassBlock extends React.Component<
           <ClassBlockBodyContainer warning={this.props.warnings}>
             <ClassBlockBody
               course={this.props.class}
+              semester={this.props.semester}
+              dndId={this.props.class.dndId}
               hovering={this.state.hovering}
               onDelete={() => this.props.onDelete(this.props.class)}
               canEditBlockName={this.props.canEditBlockName}
