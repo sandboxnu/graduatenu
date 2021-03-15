@@ -49,7 +49,8 @@ const IconsWrapper = styled.div`
 `;
 
 interface ClassBlockBodyProps {
-  course: ScheduleCourse; // can't pass DNDScheduleCourse instead because NonDraggableClassBlock
+  course: ScheduleCourse; // can't pass DNDScheduleCourse instead because
+  // NonDraggableClassBlock course does not have DndId
   dndId?: string;
   semester?: DNDScheduleTerm;
   hovering: boolean;
@@ -97,6 +98,7 @@ export const ClassBlockBody: React.FC<ClassBlockBodyProps> = ({
           style={{
             width: "100%",
           }}
+          value={blockName}
           onChange={event => {
             setBlockName(event.target.value);
           }}
@@ -117,6 +119,8 @@ export const ClassBlockBody: React.FC<ClassBlockBodyProps> = ({
         <IconButton
           style={{ padding: 3, height: ICONBUTTON_HEIGHT }}
           onClick={() => {
+            // reset it back to original name
+            setBlockName(courseName);
             setIsEditBlockName(false);
           }}
         >
@@ -133,7 +137,7 @@ export const ClassBlockBody: React.FC<ClassBlockBodyProps> = ({
         {isEditBlockName ? (
           editBlockNameIcons()
         ) : (
-          <Subtitle>{blockName}</Subtitle>
+          <Subtitle>{courseName}</Subtitle>
         )}
       </TitleWrapper>
       {!isEditBlockName && (
