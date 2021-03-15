@@ -66,14 +66,15 @@ const Divider = styled.div`
 `
 
 const UserInfo = styled.div`
+  width: 150px;
 `
 
 const PlanInfo = styled.div`
   margin-top: 1.25em;
 `
 
-const UserInfoName = styled.p`
-  font-size: 1em
+const InfoName = styled.p`
+  font-size: 0.9em
   padding-top: 0px;
   padding-bottom: 0px;
   font-weight: 600;
@@ -81,7 +82,7 @@ const UserInfoName = styled.p`
   margin-bottom: 0px;
 `
 
-const UserInfoSubText = styled.p`
+const InfoSubText = styled.p`
   font-size: 0.5em
   padding-top: 0px;
   padding-bottom: 0px;
@@ -141,15 +142,15 @@ const Appointment: React.FC<IAppointments> = (props: IAppointments) => {
       <InfoButtonsContainer>
       <UserPlanInfo>
         <UserInfo>
-          <UserInfoName>{props.fullname}</UserInfoName>
-          <UserInfoSubText>{props.email}</UserInfoSubText>
-          <UserInfoSubText>{props.nuid}</UserInfoSubText>
-          <UserInfoSubText>{props.major}</UserInfoSubText>
+          <InfoName>{props.fullname}</InfoName>
+          <InfoSubText>{props.email}</InfoSubText>
+          <InfoSubText>{props.nuid}</InfoSubText>
+          <InfoSubText>{props.major}</InfoSubText>
         </UserInfo>
         <Divider/>
         <PlanInfo>
-          <UserInfoName>{props.planName}</UserInfoName>
-          <UserInfoSubText>{props.planMajor}</UserInfoSubText>
+          <InfoName>{props.planName}</InfoName>
+          <InfoSubText>{props.planMajor}</InfoSubText>
         </PlanInfo>
       </UserPlanInfo>
       <ButtonsContainer>
