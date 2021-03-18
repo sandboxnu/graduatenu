@@ -66,7 +66,6 @@ export const GenericClassBlock: React.FC = () => {
         <HeaderWrapper>
           <SectionHeaderText>Generic Course Block</SectionHeaderText>
         </HeaderWrapper>
-        {/* draggableId needs to unique */}
         <Draggable isDragDisabled={false} draggableId={courseCode} index={0}>
           {provided => {
             return (
