@@ -29,10 +29,8 @@ import {
 } from "../state";
 import {
   incrementCurrentClassCounterForActivePlanAction,
-  updateSemesterForActivePlanAction,
   updateActivePlanAction,
   setUserPlansAction,
-  setActivePlanDNDScheduleAction,
 } from "../state/actions/userPlansActions";
 import { EditPlanPopper } from "./EditPlanPopper";
 import {
@@ -159,14 +157,12 @@ interface ReduxStoreHomeProps {
 }
 
 interface ReduxDispatchHomeProps {
-  updateSemester: (
-    year: number,
-    season: SeasonWord,
-    newSemester: DNDScheduleTerm
+  setUserPlans: (
+    plans: IPlanData[],
+    academicYear: number,
+    transferCourses: ScheduleCourse[]
   ) => void;
-  setUserPlans: (plans: IPlanData[], academicYear: number) => void;
   updateActivePlan: (updatedPlan: Partial<IPlanData>) => void;
-  setActivePlanDNDSchedule: (schedule: DNDSchedule) => void;
   logOut: () => void;
   incrementCurrentClassCounter: () => void;
 }
@@ -399,17 +395,13 @@ const mapStateToProps = (state: AppState) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  updateSemester: (
-    year: number,
-    season: SeasonWord,
-    newSemester: DNDScheduleTerm
-  ) => dispatch(updateSemesterForActivePlanAction(year, season, newSemester)),
-  setUserPlans: (plans: IPlanData[], academicYear: number) =>
-    dispatch(setUserPlansAction(plans, academicYear)),
+  setUserPlans: (
+    plans: IPlanData[],
+    academicYear: number,
+    transferCourses: ScheduleCourse[]
+  ) => dispatch(setUserPlansAction(plans, academicYear, transferCourses)),
   updateActivePlan: (updatedPlan: Partial<IPlanData>) =>
     dispatch(updateActivePlanAction(updatedPlan)),
-  setActivePlanDNDSchedule: (schedule: DNDSchedule) =>
-    dispatch(setActivePlanDNDScheduleAction(schedule)),
   logOut: () => dispatch(resetStudentAction()),
   incrementCurrentClassCounter: () =>
     dispatch(incrementCurrentClassCounterForActivePlanAction()),

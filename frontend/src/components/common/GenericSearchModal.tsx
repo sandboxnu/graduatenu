@@ -69,6 +69,7 @@ export interface OptionsProps<T, S> {
   item: T;
   selected: S | null;
   setSelected: (selected: S | null) => void;
+  searchQuery?: string;
 }
 
 export interface AssignTemplateModalProps<S> {
@@ -133,6 +134,7 @@ export function GenericSearchAssignModal<T, S>({
               item={item}
               selected={selected}
               setSelected={setSelected}
+              searchQuery={searchQuery}
             />
           ))
         )}

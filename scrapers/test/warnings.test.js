@@ -90,7 +90,7 @@ test("Tests warnings produce properly for cs_sched_1.json", () => {
   let cs_sched_obj = JSON.parse(cs_sched);
 
   // warning container.
-  let container = warning_generator.produceWarnings(cs_sched_obj);
+  let container = warning_generator.produceWarnings(cs_sched_obj, []);
 
   // check container is well formed.
   expect(container).toBeValidWarningContainer();
@@ -149,7 +149,7 @@ test("Tests warnings produce properly for cs_sched_2.json", () => {
     "utf-8"
   );
   let cs_sched_obj = JSON.parse(cs_sched);
-  let container = warning_generator.produceWarnings(cs_sched_obj);
+  let container = warning_generator.produceWarnings(cs_sched_obj, []);
   expect(container).toBeValidWarningContainer();
   const normal = container.normalWarnings;
   const specific = container.courseWarnings;

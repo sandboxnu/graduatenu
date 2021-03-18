@@ -47,6 +47,7 @@ import { createPlanForUser, setPrimaryPlan } from "../services/PlanService";
 import { addNewPlanAction } from "../state/actions/userPlansActions";
 import { IPlanData, ITemplatePlan } from "../models/types";
 import { DisclaimerPopup } from "../components/common/DisclaimerPopup";
+import { BASE_FORMATTED_COOP_CYCLES } from "../plans/coopCycles";
 
 const SpinnerWrapper = styled.div`
   display: flex;
@@ -369,7 +370,7 @@ class OnboardingScreenComponent extends React.Component<
       <Autocomplete
         style={{ width: 326, marginBottom: marginSpace }}
         disableListWrap
-        options={this.props.plans[this.state.major!].map(p => planToString(p))}
+        options={BASE_FORMATTED_COOP_CYCLES}
         renderInput={params => (
           <TextField
             {...params}

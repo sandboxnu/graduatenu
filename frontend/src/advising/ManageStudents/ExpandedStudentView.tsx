@@ -9,6 +9,7 @@ import {
   getActivePlanStatusFromState,
   getAdvisorUserIdFromState,
   safelyGetActivePlanFromState,
+  safelyGetTransferCoursesFromState,
 } from "../../state";
 import {
   expandAllYearsForActivePlanAction,
@@ -106,11 +107,12 @@ export const ExpandedStudentView: React.FC<ExpandedStudentViewProps> = ({
     ALERT_STATUS.None
   );
 
-  const { plan, activePlanStatus, advisorId } = useSelector(
+  const { plan, activePlanStatus, advisorId, transferCourses } = useSelector(
     (state: AppState) => ({
       plan: safelyGetActivePlanFromState(state),
       activePlanStatus: getActivePlanStatusFromState(state),
       advisorId: getAdvisorUserIdFromState(state),
+      transferCourses: safelyGetTransferCoursesFromState(state),
     }),
     shallowEqual
   );
@@ -125,7 +127,9 @@ export const ExpandedStudentView: React.FC<ExpandedStudentViewProps> = ({
         callUpdatePlanLastViewedOnInterval();
 
         batch(() => {
-          dispatch(setUserPlansAction([response], user.academicYear));
+          dispatch(
+            setUserPlansAction([response], user.academicYear, transferCourses)
+          );
           dispatch(
             setActivePlanAction(response.name, studentId, user.academicYear)
           );

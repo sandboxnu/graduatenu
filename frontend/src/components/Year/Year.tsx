@@ -9,15 +9,18 @@ import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import {
   safelyGetAcademicYearFromState,
   getClosedYearsFromState,
+  safelyGetTransferCoursesFromState,
 } from "../../state";
 import { AppState } from "../../state/reducers/state";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
 import { toggleYearExpandedForActivePlanAction } from "../../state/actions/userPlansActions";
+import { ScheduleCourse } from "../../../../common/types";
 
 interface ReduxStoreYearProps {
   academicYear: number;
   closedYears: Set<number>;
+  transferCourses: ScheduleCourse[];
 }
 
 interface ReduxDispatchYearProps {
@@ -79,6 +82,7 @@ class YearComponent extends React.Component<Props> {
             summer2Status={schedule.yearMap[year].summer2.status}
             schedule={schedule}
             isEditable={isEditable}
+            transferCourses={this.props.transferCourses}
           />
         </YearTopWrapper>
         {isExpanded && (
@@ -109,6 +113,7 @@ class YearComponent extends React.Component<Props> {
 const mapStateToProps = (state: AppState) => ({
   academicYear: safelyGetAcademicYearFromState(state)!,
   closedYears: getClosedYearsFromState(state),
+  transferCourses: safelyGetTransferCoursesFromState(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({

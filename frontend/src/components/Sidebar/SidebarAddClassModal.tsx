@@ -19,7 +19,10 @@ import {
   addCoursesToActivePlanAction,
   changeSemesterStatusForActivePlanAction,
 } from "../../state/actions/userPlansActions";
-import { getActivePlanScheduleFromState } from "../../state";
+import {
+  getActivePlanScheduleFromState,
+  safelyGetTransferCoursesFromState,
+} from "../../state";
 import { AppState } from "../../state/reducers/state";
 import { fetchCourse } from "../../api";
 import { convertTermIdToSeason } from "../../utils/schedule-helpers";
@@ -61,17 +64,20 @@ const SubmitButton = styled.button`
 
 interface ReduxStoreSidebarAddClassModalProps {
   schedule: DNDSchedule;
+  transferCourses: ScheduleCourse[];
 }
 
 interface ReduxDispatchSidebarAddClassModalProps {
   handleAddClasses: (
     courses: ScheduleCourse[],
-    semester: DNDScheduleTerm
+    semester: DNDScheduleTerm,
+    transferCourses: ScheduleCourse[]
   ) => void;
   handleStatusChange: (
     newStatus: Status,
     year: number,
-    tappedSemester: SeasonWord
+    tappedSemester: SeasonWord,
+    transferCourses: ScheduleCourse[]
   ) => void;
 }
 
@@ -137,12 +143,14 @@ export class SidebarAddClassModalComponent extends React.Component<
     batch(() => {
       this.props.handleAddClasses(
         this.state.queuedCourses,
-        this.state.formSemester
+        this.state.formSemester,
+        this.props.transferCourses
       );
       this.props.handleStatusChange(
         "CLASSES",
         this.state.formSemester.year,
-        convertTermIdToSeason(this.state.formSemester.termId)
+        convertTermIdToSeason(this.state.formSemester.termId),
+        this.props.transferCourses
       );
     });
     this.prepareToClose();
@@ -281,6 +289,7 @@ export class SidebarAddClassModalComponent extends React.Component<
  */
 const mapStateToProps = (state: AppState) => ({
   schedule: getActivePlanScheduleFromState(state),
+  transferCourses: safelyGetTransferCoursesFromState(state),
 });
 
 /**
@@ -288,15 +297,25 @@ const mapStateToProps = (state: AppState) => ({
  * @param dispatch responsible for dispatching actions to the redux store
  */
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  handleAddClasses: (courses: ScheduleCourse[], semester: DNDScheduleTerm) =>
-    dispatch(addCoursesToActivePlanAction(courses, semester)),
+  handleAddClasses: (
+    courses: ScheduleCourse[],
+    semester: DNDScheduleTerm,
+    transferCourses: ScheduleCourse[]
+  ) =>
+    dispatch(addCoursesToActivePlanAction(courses, semester, transferCourses)),
   handleStatusChange: (
     newStatus: Status,
     year: number,
-    tappedSemester: SeasonWord
+    tappedSemester: SeasonWord,
+    transferCourses: ScheduleCourse[]
   ) =>
     dispatch(
-      changeSemesterStatusForActivePlanAction(newStatus, year, tappedSemester)
+      changeSemesterStatusForActivePlanAction(
+        newStatus,
+        year,
+        tappedSemester,
+        transferCourses
+      )
     ),
 });
 

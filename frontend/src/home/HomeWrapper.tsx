@@ -7,6 +7,7 @@ import {
   getAcademicYearFromState,
   getUserIdFromState,
   getUserPlansFromState,
+  safelyGetTransferCoursesFromState,
 } from "../state";
 import { AppState } from "../state/reducers/state";
 import { setUserPlansAction } from "../state/actions/userPlansActions";
@@ -16,18 +17,19 @@ import { IPlanData } from "../models/types";
 export const HomeWrapper: React.FC = () => {
   const dispatch = useDispatch();
 
-  const { userId, academicYear, userPlans } = useSelector(
+  const { userId, academicYear, userPlans, transferCourses } = useSelector(
     (state: AppState) => ({
       userId: getUserIdFromState(state),
       academicYear: getAcademicYearFromState(state)!,
       userPlans: getUserPlansFromState(state),
+      transferCourses: safelyGetTransferCoursesFromState(state),
     }),
     shallowEqual
   );
 
   useEffect(() => {
     findAllPlansForUser(userId).then((plans: IPlanData[]) => {
-      dispatch(setUserPlansAction(plans, academicYear));
+      dispatch(setUserPlansAction(plans, academicYear, transferCourses));
     });
   }, []);
 
