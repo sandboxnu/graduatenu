@@ -150,7 +150,7 @@ export const ExpandedStudentView: React.FC<ExpandedStudentViewProps> = ({
       sendPlanUpdates();
       window.removeEventListener("beforeunload", sendPlanUpdates);
     };
-  }, []);
+  }, [user]);
 
   const callUpdatePlanLastViewedOnInterval = () => {
     if (interval) {
