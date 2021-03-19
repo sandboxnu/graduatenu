@@ -10,6 +10,7 @@ import {
 import { fetchCourse } from "../../frontend/src/api";
 import { SeasonEnum, StatusEnum } from "../../frontend/src/models/types";
 import { SSL_OP_EPHEMERAL_RSA } from "constants";
+import { resolve } from "dns";
 
 const rp = require("request-promise");
 
@@ -77,7 +78,7 @@ async function buildSchedule(
             const flipped = courseRowsParsed[0].map((col: any, i: any) =>
               courseRowsParsed.map(row => row[i])
             );
-            return buildYear($, flipped);
+            return await buildYear($, flipped);
           };
           yearPromises.push(processRows(rows));
 
@@ -279,10 +280,10 @@ async function addCourses(
  * @param summer1 the summer1 data
  * @param summer2 the summer2 data
  */
-function buildYear(
+async function buildYear(
   $: CheerioStatic,
   seasons: Array<Array<ScheduleCourse | string>>
-): ScheduleYear {
+): Promise<ScheduleYear> {
   // seasons array is not always 4! could be 3 (no summer 2), or 5 (including summer full, as 5th).
 
   const seasonEnums: Season[] = [
@@ -313,33 +314,37 @@ function buildYear(
         status = StatusEnum.INACTIVE;
       }
 
-      let classes: ScheduleCourse[] = seasons[i].reduce(function(
-        accumulator: ScheduleCourse[],
+      let classes: Promise<ScheduleCourse>[] = seasons[i].reduce(function(
+        accumulator: Promise<ScheduleCourse>[],
         item: ScheduleCourse | string,
         index: number
-      ): ScheduleCourse[] {
+      ): Promise<ScheduleCourse>[] {
         if (typeof item !== "string") {
           const parsedMultiCourseMatch: RegExp = new RegExp(
             /[A-Z]{2,},\d{4},[A-Z]{2,},\d{4}/
           );
+
           if (parsedMultiCourseMatch.test(item.subject)) {
             const split = item.subject.split(",");
-            accumulator.push({
-              classId: split[1],
-              subject: split[0],
-              numCreditsMin: item.numCreditsMin,
-              numCreditsMax: item.numCreditsMax,
-              name: "",
-            });
-            accumulator.push({
-              classId: split[3],
-              subject: split[2],
-              numCreditsMin: 0,
-              numCreditsMax: 0,
-              name: "",
-            });
+
+            const createCourse = async (
+              index: number
+            ): Promise<ScheduleCourse> => {
+              return {
+                classId: split[index + 1],
+                subject: split[index],
+                numCreditsMin: item.numCreditsMin,
+                numCreditsMax: item.numCreditsMax,
+                name:
+                  (await fetchCourse(split[index], split[index + 1]))?.name ||
+                  "",
+              };
+            };
+
+            accumulator.push(createCourse(0));
+            accumulator.push(createCourse(2));
           } else {
-            accumulator.push(item);
+            accumulator.push(new Promise((resolve, reject) => resolve(item)));
           }
         }
         return accumulator;
@@ -352,7 +357,7 @@ function buildYear(
         termId: seasonTermIds[i],
         year: 0,
         status: status,
-        classes: classes,
+        classes: await Promise.all(classes),
       });
     } else {
       // the season did not exist. we don't have a season!
