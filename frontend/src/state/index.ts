@@ -54,6 +54,20 @@ export const getCompletedCoursesFromState = (state: AppState) =>
   getStudentFromState(state).completedCourses;
 
 /**
+ * Get the initial completed course schedule
+ * @param state the AppState
+ */
+export const getCompletedCourseScheduleFromState = (state: AppState) =>
+  state.studentState.completedCourseSchedule;
+
+/**
+ * Get the initial completed course counter
+ * @param state the AppState
+ */
+export const getCompletedCourseCounterFromState = (state: AppState) =>
+  state.studentState.completedCourseCounter;
+
+/**
  * Get the list of transfer courses from the AppState
  * @param state the AppState
  */

@@ -6,6 +6,7 @@ import {
 } from "../models/types";
 
 const mockClass = (num: number): DNDScheduleCourse => ({
+  semester: null,
   classId: "3500",
   subject: "CS",
   numCreditsMin: 4,

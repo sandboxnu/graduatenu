@@ -116,7 +116,7 @@ const NameField: React.FC<NameFieldProps> = ({
       value={name}
       onChange={event => setName(event.target.value)}
       placeholder=""
-      style={{ width: "100%" }}
+      style={{ width: "326px" }}
       error={error}
     />
   );

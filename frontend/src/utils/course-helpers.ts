@@ -17,7 +17,7 @@ export async function getScheduleCoursesFromSimplifiedCourseDataAPI(
     courses.map(async c => {
       const course = await fetchCourse(c.subject, c.course_id.toString());
       if (course != null) {
-        converetedCourses.push(course);
+        converetedCourses.push({ ...course, semester: c.semester || null });
       }
     })
   );

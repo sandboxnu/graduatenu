@@ -84,8 +84,20 @@ export const simulateKhouryStudentLogin = () =>
           completion: "TRANSFER",
         },
         {
+          subject: "MATH",
+          course_id: "1342",
+          semester: "202010",
+          completion: "TRANSFER",
+        },
+        {
           subject: "CS",
           course_id: "2500",
+          semester: "202010",
+          completion: "PASSED",
+        },
+        {
+          subject: "CS",
+          course_id: "2501",
           semester: "202010",
           completion: "PASSED",
         },

@@ -29,7 +29,12 @@ import {
   RANGESection,
   Season,
   StatusEnum,
+  ICreditRangeCourse,
+  Concentration,
 } from "../../../common/types";
+import { flattenRequirements } from "./flattenRequirements";
+import { sortRequirementGroupsByConstraint } from "./requirementGroupUtils";
+
 /*
 CreditRange interface to track the min and max credits for a particular season.
 seasonMax = a number representing the max numebr of credits you can take without over-loading.
@@ -84,7 +89,10 @@ const all_fillers = ["XXXX9999"];
  * @param schedule the schedule
  * @returns a container holding the produced warnings.
  */
-export function produceWarnings(schedule: Schedule): WarningContainer {
+export function produceWarnings(
+  schedule: Schedule,
+  transferCourses: ScheduleCourse[]
+): WarningContainer {
   // holds courses that are taken.
   const taken: Map<string, CourseInfo> = new Map<string, CourseInfo>();
   // custom tracker
@@ -130,6 +138,16 @@ export function produceWarnings(schedule: Schedule): WarningContainer {
     },
   };
 
+  // sort the years first to last
+  const sorted = schedule.years.slice();
+  sorted.sort((n1, n2) => n1 - n2);
+
+  // handle transfer courses (treat all transfer courses if they were taken in the student's first semester)
+  const firstYear = sorted[0];
+  for (const course of transferCourses) {
+    tracker.addCourse(course, schedule.yearMap[firstYear].fall.termId);
+  }
+
   // store the two types of warnings.
   let normal: IWarning[] = [];
   let courseSpecific: CourseWarning[] = [];
@@ -146,8 +164,6 @@ export function produceWarnings(schedule: Schedule): WarningContainer {
 
   // for each of the years in schedule, retrieve the corresponding map.
   // smallest to biggest.
-  const sorted = schedule.years.slice();
-  sorted.sort((n1, n2) => n1 - n2);
   for (const yearNum of sorted) {
     const year = schedule.yearMap[yearNum];
 
@@ -211,10 +227,12 @@ export function produceSatisfiedReqGroups(
  * Identify unsatisfied requirements given a major and a schedule.
  * @param schedule the schedule to check requirements for.
  * @param major the major to check requirements against.
+ * @param concentration the concentration to also check requirements against.
  */
 export function produceRequirementGroupWarning(
   schedule: Schedule,
-  major: Major
+  major: Major,
+  concentration?: Concentration
 ): IRequirementGroupWarning[] {
   // holds courses that are currently on the schedule.
   const taken: Map<string, HashableCourse> = new Map<string, HashableCourse>();
@@ -241,14 +259,16 @@ export function produceRequirementGroupWarning(
     }
   }
 
-  let requirementGroups: string[] = major.requirementGroups;
-  let res: IRequirementGroupWarning[] = [];
-  for (const name of requirementGroups) {
-    let requirementGroup: IMajorRequirementGroup =
-      major.requirementGroupMap[name];
-    // todo: if req group is RangeSection or contains a ICourseRange process after all other requirement groups.
-    // this is because these reqs can be satisfied by a wide range of courses, and you don't want it using up
-    // a course that is need to satisfy a more constrained requirement.
+  const requirementGroups: IMajorRequirementGroup[] = [
+    ...Object.values(major.requirementGroupMap),
+    ...Object.values(concentration?.requirementGroupMap || []),
+  ];
+  const res: IRequirementGroupWarning[] = [];
+  const sortedRequirements = sortRequirementGroupsByConstraint(
+    Object.values(requirementGroups)
+  );
+
+  for (const requirementGroup of sortedRequirements) {
     let unsatisfiedRequirement:
       | IRequirementGroupWarning
       | undefined = produceUnsatifiedRequirement(
@@ -471,6 +491,14 @@ function processRequirement(
         creditHoursNeeded
       );
     }
+    case "CREDITS": {
+      return processICreditRangeCourse(
+        requirement,
+        taken,
+        satisfied,
+        coursesUsed
+      );
+    }
   }
 }
 
@@ -557,7 +585,7 @@ function processICourseRange(
 
   //loop through the taken courses and check if it is in one of the subject ranges for this ICourseRange.
   for (const courseKey of Array.from(taken.keys())) {
-    //check the global map to see if it has not already been used.
+    //check the global map to see if it has not been used.
     if (!coursesUsed.has(courseKey)) {
       let hashableCourse: HashableCourse | undefined = taken.get(courseKey);
       if (hashableCourse) {
@@ -580,6 +608,75 @@ function processICourseRange(
       requirement.ranges
     )})`;
   }
+}
+
+/**
+ * Check if a given HashableCourse is in the given array of IRequiredCourses
+ * @param hashableCourse the HashableCourse to search for
+ * @param requiredCourses the array of IRequiredCourses to search within
+ */
+function hashableCourseIsRequired(
+  hashableCourse: HashableCourse,
+  requiredCourses: IRequiredCourse[]
+): boolean {
+  return requiredCourses.some(
+    (requiredCourse: IRequiredCourse) =>
+      requiredCourse.classId === Number(hashableCourse.classId) &&
+      requiredCourse.subject === hashableCourse.subject
+  );
+}
+
+/**
+ * Processes an ICourseRange requirement.
+ *
+ * @param requirement the requirement to check
+ * @param taken the Map of courses a student has on their schedule right now
+ * @param satisfied a tracker of the hours satisfied for the top-level requirement.
+ * @param coursesUsed a set of courses which already satisfy some requirement for the major.
+ */
+function processICreditRangeCourse(
+  requirement: ICreditRangeCourse,
+  taken: Map<string, HashableCourse>,
+  satisfied: CreditHourTracker,
+  coursesUsed: Set<string>
+): string | undefined {
+  // Requirement is unsatisfied if the number of credits fulfilled within its requirements is within the credit range.
+  let requirementCreditsCompleted: number = 0;
+  const allRequirementCourses = flattenRequirements(requirement.courses);
+
+  // Loop through the taken courses and check if it is one of this ICreditRangeCourse's nested courses.
+  for (const courseKey of Array.from(taken.keys())) {
+    // Check the global map to see if it has not already been used.
+    if (!coursesUsed.has(courseKey)) {
+      let hashableCourse: HashableCourse | undefined = taken.get(courseKey);
+      if (hashableCourse) {
+        if (hashableCourseIsRequired(hashableCourse, allRequirementCourses)) {
+          // Use the course
+          satisfied.hoursCompleted += hashableCourse.credits;
+          coursesUsed.add(courseKey);
+          requirementCreditsCompleted += hashableCourse.credits;
+        }
+      }
+    }
+  }
+
+  if (requirementCreditsCompleted < requirement.minCredits) {
+    const untakenClasses = Array.from(allRequirementCourses).filter(
+      (course: IRequiredCourse) =>
+        !Array.from(taken.keys()).includes(courseCode(course))
+    );
+    const formattedUntakenClasses = untakenClasses.map(courseCode).join(", ");
+
+    return `(complete ${requirement.minCredits -
+      requirementCreditsCompleted} credits from ${formattedUntakenClasses})`;
+  } else if (requirementCreditsCompleted > requirement.maxCredits) {
+    return `(${requirementCreditsCompleted -
+      requirement.maxCredits} credits taken over limit of ${
+      requirement.maxCredits
+    })`;
+  }
+
+  return undefined;
 }
 
 /**

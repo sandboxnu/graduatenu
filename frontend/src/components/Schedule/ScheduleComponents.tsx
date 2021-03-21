@@ -11,7 +11,7 @@ import {
   moveCourse,
   addCourseFromSidebar,
 } from "../../utils";
-import { Status, SeasonWord } from "../../../../common/types";
+import { Status, SeasonWord, ScheduleCourse } from "../../../../common/types";
 import {
   DNDSchedule,
   DNDScheduleYear,
@@ -204,9 +204,17 @@ export const EditableSchedule: React.FC<Props> = props => {
     year: number,
     season: SeasonWord,
     newSemester: DNDScheduleTerm
-  ) => dispatch(updateSemesterForActivePlanAction(year, season, newSemester));
+  ) =>
+    dispatch(
+      updateSemesterForActivePlanAction(
+        year,
+        season,
+        newSemester,
+        transferCredits
+      )
+    );
   const setDNDSchedule = (schedule: DNDSchedule): any =>
-    dispatch(setActivePlanDNDScheduleAction(schedule));
+    dispatch(setActivePlanDNDScheduleAction(schedule, transferCredits));
 
   const incrementCurrentClassCounter = (): any =>
     dispatch(incrementCurrentClassCounterForActivePlanAction());

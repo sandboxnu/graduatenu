@@ -304,6 +304,7 @@ function getScheduleCourse(
     subject: subject,
     numCreditsMin: parseInt(credits),
     numCreditsMax: parseInt(credits),
+    semester: null,
   };
 
   return parsedClass;

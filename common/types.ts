@@ -90,7 +90,7 @@ export interface IAndCourse {
 export interface ICourseRange {
   type: "RANGE";
   creditsRequired: number;
-  // Potentially add a min/mas to ICourseRange
+  // Potentially add a min/max to ICourseRange
   ranges: ISubjectRange[];
 }
 
@@ -314,6 +314,7 @@ export interface ScheduleCourse {
   coreqs?: INEUAndPrereq | INEUOrPrereq;
   numCreditsMin: number;
   numCreditsMax: number;
+  semester?: string | null;
 }
 
 /**
