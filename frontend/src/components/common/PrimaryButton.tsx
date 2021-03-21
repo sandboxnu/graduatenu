@@ -22,6 +22,24 @@ const ColorButton = withStyles((theme: Theme) => ({
   },
 }))(Button);
 
+
+const SecondaryColorButton = withStyles((theme: Theme) => ({
+  root: {
+    color: "#EB5757",
+    borderColor: "#EB5757",
+    paddingVertical: "8px",
+    paddingHorizontal: "16px",
+    backgroundColor: "#ffffff",
+    "&:hover": {
+      backgroundColor: "#DB4747",
+      color: "#ffffff"
+    },
+    "&.Mui-disabled": {
+      pointerEvents: "auto",
+    },
+  },
+}))(Button);
+
 export function PrimaryButton(props: any) {
   return (
     <ColorButton
@@ -32,5 +50,18 @@ export function PrimaryButton(props: any) {
     >
       {props.children}
     </ColorButton>
+  );
+}
+
+export function SecondaryButton(props: any) {
+  return (
+    <SecondaryColorButton
+      variant="contained"
+      color="primary"
+      onClick={props.onClick}
+      disabled={props.disabled}
+    >
+      {props.children}
+    </SecondaryColorButton>
   );
 }
