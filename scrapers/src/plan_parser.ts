@@ -37,10 +37,6 @@ export async function planOfStudyToSchedule(
   return await Promise.all(schedules);
 }
 
-//every time we set a plan: look up all the courses and set in schedule
-//in the parser, make the API call.
-//while parsing, after the course is don eit should get the name of teh course
-
 /**
  * Builds a schedule from the table information.
  * @param $ the page
@@ -244,7 +240,6 @@ async function addCourses(
             i += 1;
           } else {
             // we have a random elective.
-
             produced.push({
               classId: "9999",
               subject: "XXXX",
@@ -285,7 +280,6 @@ async function buildYear(
   seasons: Array<Array<ScheduleCourse | string>>
 ): Promise<ScheduleYear> {
   // seasons array is not always 4! could be 3 (no summer 2), or 5 (including summer full, as 5th).
-
   const seasonEnums: Season[] = [
     SeasonEnum.FL,
     SeasonEnum.SP,
