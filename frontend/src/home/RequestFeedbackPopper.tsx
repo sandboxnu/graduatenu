@@ -15,8 +15,6 @@ import { useDebouncedEffect } from "../hooks/useDebouncedEffect";
 import { requestApproval } from "../services/PlanService";
 import { WhiteColorButton } from "../components/common/ColoredButtons";
 import { NORTHEASTERN_RED } from "../constants";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
 
 const SCHEDULE_APPOINTMENT_LINK =
   "https://northeastern.campus.eab.com/student/appointments/new";
@@ -30,7 +28,7 @@ const SubTitle = styled.div`
 
 const AdvisorDropdownContainer = styled.div`
   margin-top: 0px;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
   width: 300px;
 `;
 
@@ -42,6 +40,10 @@ const StepContainer = styled.div`
   display: flex;
   flex-direction: row;
 `;
+
+const CalendarContainer = styled.div`
+  margin-bottom: 10px
+`
 
 const StepNumber = styled.div`
   color: ${NORTHEASTERN_RED}
@@ -84,9 +86,9 @@ export const RequestFeedbackPopper: React.FC = () => {
   );
   const [advisors, setAdvisors] = useState(EMPTY_ADVISOR_LIST);
   const [
-    isScheduledAppointmentChecked,
-    setIsScheduleAppointmentChecked,
-  ] = useState(false);
+    appointment,
+    setAppointment,
+  ] = useState(null);
 
   useDebouncedEffect(
     () =>
@@ -161,7 +163,7 @@ export const RequestFeedbackPopper: React.FC = () => {
     return (
       <ButtonContainer>
         <PrimaryButton
-          disabled={selectedAdvisor === "" || !isScheduledAppointmentChecked}
+          disabled={selectedAdvisor === "" || !appointment}
           onClick={async () => {
             await requestApproval(
               userId,
@@ -178,7 +180,7 @@ export const RequestFeedbackPopper: React.FC = () => {
   };
 
   const handleChange = (event: any) => {
-    setIsScheduleAppointmentChecked(event.target.checked);
+    setAppointment(event.target.value);
   };
 
   return (
@@ -212,16 +214,26 @@ export const RequestFeedbackPopper: React.FC = () => {
           </StepText>
         </StepContainer>
         <AdvisorDropdown />
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={isScheduledAppointmentChecked}
+        <StepContainer>
+          <StepNumber> 3. </StepNumber>
+          <StepText>
+            {" "}
+            When is your appointment with your advisor?{" "}
+          </StepText>
+        </StepContainer>
+        <CalendarContainer>
+          <form>
+            <TextField
+              id="date"
+              label="Appointment date"
+              type="date"
+              InputLabelProps={{
+                shrink: true,
+              }}
               onChange={handleChange}
-              name="checkedA"
             />
-          }
-          label="I scheduled an appointment with my advisor"
-        />
+          </form>
+        </CalendarContainer>
         <RequestApprovalButton />
       </DefaultModal>
       <ApprovalStatusButton />
