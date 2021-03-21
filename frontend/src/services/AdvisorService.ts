@@ -22,7 +22,7 @@ export const getStudents = (searchQuery: string, pageNumber: number) =>
   fetch(`/api/users/students?search=${searchQuery}&page=${pageNumber}`, {
     method: "GET",
     headers: {
-      Authorization: "Token " + getAuthToken(),
+      Authorization: "Token ",
     },
   }).then(response => response.json());
 

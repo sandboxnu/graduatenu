@@ -10,6 +10,7 @@ import { LinearProgress } from "@material-ui/core";
 import { Search } from "../../components/common/Search";
 import { useHistory } from "react-router";
 import { Container } from "./Shared";
+import advisingErrorPic from "../../assets/advising-error.png";
 
 const StudentListScrollContainer = styled.div`
   width: auto;
@@ -77,6 +78,42 @@ const StudentEmailNUIDContainer = styled.div`
   color: gray;
 `;
 
+const ErrorContainer = styled.div`
+  margin-top: 30px;
+  border: 1px solid red;
+  border-radius: 10px;
+  width: auto;
+  padding: 20px;
+  background-color: #ececec 
+  height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const ErrorTextContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+`;
+
+const ErrorTitle = styled.div`
+  width: 20%
+  font-weight: 900;
+  font-size: 36px;
+  color: #EB5757;
+  text-align: left;
+`;
+
+const ErrorMessage = styled.div`
+  width: 20%
+  font-weight: 900;
+  font-size: 14px;
+  color: #808080;
+  text-align: left;
+`;
+
 const EMPTY_STUDENT_LIST: IAbrStudent[] = [];
 
 const Student = (props: IAbrStudent) => {
@@ -101,6 +138,7 @@ export const StudentsList = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [pageNumber, setPageNumber] = useState(0);
   const [isLastPage, setIsLastPage] = useState(false);
+  const [isError, setIsError] = useState(true);
 
   const fetchStudents = (currentStudents: IAbrStudent[], page: number) => {
     setIsLoading(true);
@@ -111,7 +149,11 @@ export const StudentsList = () => {
         setIsLastPage(studentsAPI.lastPage);
         setIsLoading(false);
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err);
+        setIsError(true);
+        console.log(isError);
+      });
   };
 
   useEffect(() => {
@@ -128,31 +170,46 @@ export const StudentsList = () => {
         }}
         isSmall={false}
       />
-      <StudentListContainer>
-        {isLoading ? (
-          <Loading>
-            <LinearProgress color="secondary" />
-          </Loading>
-        ) : null}
-        <StudentListScrollContainer>
-          {(students === null || students.length == 0) && !isLoading ? (
-            <EmptyState> No students found </EmptyState>
-          ) : (
-            students.map(student => <Student key={student.nuId} {...student} />)
-          )}
-          {!isLoading ? (
-            isLastPage ? (
-              <NoMoreStudents>No more students</NoMoreStudents>
-            ) : (
-              <LoadMoreStudents
-                onClick={() => fetchStudents(students, pageNumber)}
-              >
-                Load more students
-              </LoadMoreStudents>
-            )
+      {isError ? (
+        <ErrorContainer>
+          <img src={advisingErrorPic} alt="Error Doggo" />
+          <ErrorTextContainer>
+            <ErrorTitle>Oh no!</ErrorTitle>
+            <ErrorMessage>
+              We are unable to retrieve the information you need. Please refresh
+              your browser. If the problem persists, contact us here.
+            </ErrorMessage>
+          </ErrorTextContainer>
+        </ErrorContainer>
+      ) : (
+        <StudentListContainer>
+          {isLoading ? (
+            <Loading>
+              <LinearProgress color="secondary" />
+            </Loading>
           ) : null}
-        </StudentListScrollContainer>
-      </StudentListContainer>
+          <StudentListScrollContainer>
+            {(students === null || students.length == 0) && !isLoading ? (
+              <EmptyState> No students found </EmptyState>
+            ) : (
+              students.map(student => (
+                <Student key={student.nuId} {...student} />
+              ))
+            )}
+            {!isLoading ? (
+              isLastPage ? (
+                <NoMoreStudents>No more students</NoMoreStudents>
+              ) : (
+                <LoadMoreStudents
+                  onClick={() => fetchStudents(students, pageNumber)}
+                >
+                  Load more students
+                </LoadMoreStudents>
+              )
+            ) : null}
+          </StudentListScrollContainer>
+        </StudentListContainer>
+      )}
     </Container>
   );
 };
