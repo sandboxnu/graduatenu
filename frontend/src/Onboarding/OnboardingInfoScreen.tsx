@@ -10,7 +10,6 @@ import { Major, Schedule, ScheduleCourse } from "../../../common/types";
 import {
   generateInitialSchedule,
   generateInitialScheduleNoCoopCycle,
-  planToString,
 } from "../utils";
 import {
   setStudentAcademicYearAction,
@@ -48,6 +47,7 @@ import { addNewPlanAction } from "../state/actions/userPlansActions";
 import { IPlanData, ITemplatePlan } from "../models/types";
 import { DisclaimerPopup } from "../components/common/DisclaimerPopup";
 import { BASE_FORMATTED_COOP_CYCLES } from "../plans/coopCycles";
+import { mockKhouryClassesData } from "../data/mockData";
 
 const SpinnerWrapper = styled.div`
   display: flex;
@@ -127,16 +127,32 @@ class OnboardingScreenComponent extends React.Component<
     return !this.state.catalogYear && !!this.state.major;
   }
 
-  /**
-   * All of the different functions that modify the properies of the screen as they are
-   * changed
-   */
-  onChangeYear(e: any) {
-    this.setState({
-      year: Number(e.target.value),
-      beenEditedYear: true,
-      showErrors: false,
+  // this logic should occur when we call Khoury endpoint and dispatched to redux
+  getAcademicYear() {
+    const scheduleCourses = mockKhouryClassesData.filter(
+      course => course.semester != null
+    );
+
+    // sort the courses from the earliest to lastest semester
+    const sortedCourses = scheduleCourses.sort((first, second) => {
+      if (Number(first.semester!) < Number(second.semester!)) {
+        return -1;
+      } else if (Number(second.semester!) < Number(first.semester!)) {
+        return 1;
+      } else {
+        return 0;
+      }
     });
+
+    const earliestSemesterYear = sortedCourses[0].semester?.substring(0, 4);
+    const latestSemesterYear = sortedCourses[
+      sortedCourses.length - 1
+    ].semester?.substring(0, 4);
+    const academicYear =
+      Number(latestSemesterYear) - Number(earliestSemesterYear) + 1;
+
+    this.props.setAcademicYear(academicYear);
+    return academicYear;
   }
 
   onChangeGradYear(e: any) {
@@ -191,7 +207,6 @@ class OnboardingScreenComponent extends React.Component<
    * assuming all of the required fields have been filled out
    */
   onSubmit() {
-    this.props.setAcademicYear(this.state.year!);
     this.props.setGraduationYear(this.state.gradYear!);
     this.props.setCatalogYear(this.state.catalogYear || null);
     this.props.setMajor(this.state.major || null);
@@ -279,45 +294,6 @@ class OnboardingScreenComponent extends React.Component<
         value={!!this.state.major ? this.state.major + " " : ""}
         onChange={this.onChangeMajor.bind(this)}
       />
-    );
-  }
-
-  /**
-   * Renders the academic year select component
-   */
-  renderAcademicYearSelect() {
-    const error =
-      this.state.showErrors && !this.state.year && this.state.beenEditedYear;
-
-    return (
-      <FormControl
-        variant="outlined"
-        error={error}
-        style={{ marginBottom: marginSpace, minWidth: 326 }}
-      >
-        <InputLabel
-          id="demo-simple-select-outlined-label"
-          style={{ marginBottom: marginSpace }}
-        >
-          Academic Year
-        </InputLabel>
-        <Select
-          labelId="demo-simple-select-outlined-label"
-          id="demo-simple-select-outlined"
-          value={this.state.year}
-          onChange={this.onChangeYear.bind(this)}
-          labelWidth={110}
-        >
-          <MenuItem value={1}>1st Year</MenuItem>
-          <MenuItem value={2}>2nd Year</MenuItem>
-          <MenuItem value={3}>3rd Year</MenuItem>
-          <MenuItem value={4}>4th Year</MenuItem>
-          <MenuItem value={5}>5th Year</MenuItem>
-        </Select>
-        <FormHelperText>
-          {error && "Please select a valid year\n"}
-        </FormHelperText>
-      </FormControl>
     );
   }
 
@@ -489,6 +465,7 @@ class OnboardingScreenComponent extends React.Component<
         !majorSelectedAndNoConcentration;
 
       const onClick = () => {
+        console.log("clicked");
         if (this.hasMajorAndNoCatalogYearError()) {
           this.setState({
             beenEditedYear: true,
@@ -508,7 +485,6 @@ class OnboardingScreenComponent extends React.Component<
       // required fields are filled out before allowing it to move to the next screen
       return (
         <GenericOnboardingTemplate screen={0}>
-          {this.renderAcademicYearSelect()}
           {this.renderGradYearSelect()}
           {this.renderCatalogYearDropDown()}
           {/* if there is a major given from khoury we want to show the major dropdown */}
