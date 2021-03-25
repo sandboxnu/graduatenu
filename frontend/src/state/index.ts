@@ -51,7 +51,7 @@ export const getCompletedRequirementsFromState = (state: AppState) =>
  * @param state the AppState
  */
 export const getCompletedCoursesFromState = (state: AppState) =>
-  getStudentFromState(state).completedCourses;
+  getStudentFromState(state)?.completedCourses;
 
 /**
  * Get the initial completed course schedule

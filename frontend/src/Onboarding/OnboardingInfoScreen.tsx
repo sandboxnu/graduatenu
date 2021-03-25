@@ -47,7 +47,6 @@ import { addNewPlanAction } from "../state/actions/userPlansActions";
 import { IPlanData, ITemplatePlan } from "../models/types";
 import { DisclaimerPopup } from "../components/common/DisclaimerPopup";
 import { BASE_FORMATTED_COOP_CYCLES } from "../plans/coopCycles";
-import { mockKhouryClassesData } from "../data/mockData";
 
 const SpinnerWrapper = styled.div`
   display: flex;
@@ -109,7 +108,7 @@ class OnboardingScreenComponent extends React.Component<
     super(props);
 
     this.state = {
-      year: this.getAcademicYear(),
+      year: undefined,
       gradYear: undefined,
       catalogYear: undefined,
       beenEditedYear: false,
@@ -125,34 +124,6 @@ class OnboardingScreenComponent extends React.Component<
 
   hasMajorAndNoCatalogYearError() {
     return !this.state.catalogYear && !!this.state.major;
-  }
-
-  // this logic should occur when we call Khoury endpoint and dispatched to redux
-  getAcademicYear() {
-    const scheduleCourses = mockKhouryClassesData.filter(
-      course => course.semester != null
-    );
-
-    // sort the courses from the earliest to lastest semester
-    const sortedCourses = scheduleCourses.sort((first, second) => {
-      if (Number(first.semester!) < Number(second.semester!)) {
-        return -1;
-      } else if (Number(second.semester!) < Number(first.semester!)) {
-        return 1;
-      } else {
-        return 0;
-      }
-    });
-
-    const earliestSemesterYear = sortedCourses[0].semester?.substring(0, 4);
-    const latestSemesterYear = sortedCourses[
-      sortedCourses.length - 1
-    ].semester?.substring(0, 4);
-    const academicYear =
-      Number(latestSemesterYear) - Number(earliestSemesterYear) + 1;
-
-    this.props.setAcademicYear(academicYear);
-    return academicYear;
   }
 
   onChangeGradYear(e: any) {

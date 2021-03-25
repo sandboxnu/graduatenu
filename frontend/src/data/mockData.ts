@@ -1,6 +1,8 @@
+import { ScheduleCourse } from "../../../common/types";
 import {
   DNDSchedule,
   DNDScheduleCourse,
+  ISimplifiedCourseDataAPI,
   SeasonEnum,
   StatusEnum,
 } from "../models/types";

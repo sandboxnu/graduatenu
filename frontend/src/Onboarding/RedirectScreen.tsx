@@ -1,18 +1,22 @@
 import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { Redirect } from "react-router";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchActiveUser } from "../services/UserService";
 import {
   setStudentAction,
   setCompletedCoursesAction,
   setTransferCoursesAction,
+  setStudentAcademicYearAction,
 } from "../state/actions/studentActions";
 import { fetchMajorsAndPlans } from "../utils/fetchMajorsAndPlans";
 import { authCookieExists, AUTH_TOKEN_COOKIE_KEY } from "../utils/auth-helpers";
 import { getScheduleCoursesFromSimplifiedCourseDataAPI } from "../utils/course-helpers";
 import { LoadingScreen } from "../components/common/FullPageLoading";
 import { setAdvisorAction } from "../state/actions/advisorActions";
+import { getCompletedCoursesFromState } from "../state";
+import { AppState } from "../state/reducers/state";
+import { ScheduleCourse } from "../../../common/types";
 
 interface Props {
   redirectUrl?: string;
@@ -26,6 +30,38 @@ export const RedirectScreen: React.FC<Props> = ({ redirectUrl }) => {
   const [needsToGoToOnboarding, setNeedsToGoToOnboarding] = useState<
     boolean | undefined
   >();
+  const completedCourses: ScheduleCourse[] = useSelector((state: AppState) =>
+    getCompletedCoursesFromState(state)
+  );
+  const calculateAndSetAcademicYear = () => {
+    // sort the courses from the earliest to lastest semester
+    if (completedCourses && completedCourses.length != 0) {
+      const sortedCourses = completedCourses.sort((first, second) => {
+        if (Number(first.semester!) < Number(second.semester!)) {
+          return -1;
+        } else if (Number(second.semester!) < Number(first.semester!)) {
+          return 1;
+        } else {
+          return 0;
+        }
+      });
+
+      const earliestSemesterYear = sortedCourses[0].semester?.substring(0, 4);
+      const latestSemesterYear = sortedCourses[
+        sortedCourses.length - 1
+      ].semester?.substring(0, 4);
+      const academicYear =
+        Number(latestSemesterYear) - Number(earliestSemesterYear) + 1;
+      console.log("YOOOO");
+      console.log("aca year", academicYear);
+      dispatch(setStudentAcademicYearAction(academicYear));
+    }
+  };
+
+  useEffect(() => {
+    console.log("refreshed");
+    calculateAndSetAcademicYear();
+  }, [completedCourses]);
 
   // component did mount
   useEffect(() => {
@@ -59,6 +95,7 @@ export const RedirectScreen: React.FC<Props> = ({ redirectUrl }) => {
                   response.user.coursesCompleted
                 ).then(courses => {
                   dispatch(setCompletedCoursesAction(courses));
+                  calculateAndSetAcademicYear();
                 }),
                 getScheduleCoursesFromSimplifiedCourseDataAPI(
                   response.user.coursesTransfer
