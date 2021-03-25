@@ -109,7 +109,7 @@ class OnboardingScreenComponent extends React.Component<
     super(props);
 
     this.state = {
-      year: undefined,
+      year: this.getAcademicYear(),
       gradYear: undefined,
       catalogYear: undefined,
       beenEditedYear: false,
@@ -207,6 +207,7 @@ class OnboardingScreenComponent extends React.Component<
    * assuming all of the required fields have been filled out
    */
   onSubmit() {
+    this.props.setAcademicYear(this.state.year!);
     this.props.setGraduationYear(this.state.gradYear!);
     this.props.setCatalogYear(this.state.catalogYear || null);
     this.props.setMajor(this.state.major || null);
@@ -455,6 +456,10 @@ class OnboardingScreenComponent extends React.Component<
     } else {
       const allRequirementsFilled: boolean =
         !!year && !!gradYear && (!major || !!catalogYear);
+      console.log("year", year);
+      console.log("grad year", gradYear);
+      console.log("major", major);
+      console.log("catalogYear", catalogYear);
 
       const majorSelectedAndNoConcentration =
         !!this.state.major && this.state.hasNoConcentrationSelectedError;
@@ -463,7 +468,15 @@ class OnboardingScreenComponent extends React.Component<
         allRequirementsFilled &&
         !this.hasMajorAndNoCatalogYearError() &&
         !majorSelectedAndNoConcentration;
-
+      console.log("allRequirementsFilled", allRequirementsFilled);
+      console.log(
+        "has major no catalog year",
+        this.hasMajorAndNoCatalogYearError()
+      );
+      console.log(
+        "majorSelectedAndNoConcentration",
+        majorSelectedAndNoConcentration
+      );
       const onClick = () => {
         console.log("clicked");
         if (this.hasMajorAndNoCatalogYearError()) {
@@ -492,6 +505,7 @@ class OnboardingScreenComponent extends React.Component<
           {!!catalogYear && !!major && this.renderConcentrationDropdown()}
           {!!catalogYear && !!major && this.renderCoopCycleDropDown()}
           {/* requires year, gradYear, and if there is a major, then there must be a catalog year */}
+          {console.log(allFilledAndNoErrors)}
           {allFilledAndNoErrors ? (
             // Bypass completed courses screen to prevent overriding actual completed courses
             <Link
