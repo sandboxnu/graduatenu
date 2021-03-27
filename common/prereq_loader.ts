@@ -239,7 +239,7 @@ async function queryCoursePrereqData(
 
   // make the request.
   let queryResult = await request({
-    uri: "https://searchneu.com/graphql",
+    uri: "https://old.searchneu.com/graphql",
     method: "POST",
     body: JSON.stringify({ query: querySchema }),
     headers: {
