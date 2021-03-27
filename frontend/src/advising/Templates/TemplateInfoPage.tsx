@@ -74,33 +74,6 @@ interface DropdownProps {
   readonly setValue: (value: string | null) => void;
 }
 
-interface NameFieldProps {
-  readonly name: string;
-  readonly setName: (name: string) => void;
-  readonly label: string;
-  readonly error: boolean;
-}
-
-const NameField: React.FC<NameFieldProps> = ({
-  name,
-  setName,
-  label,
-  error,
-}) => {
-  return (
-    <TextField
-      id="outlined-basic"
-      label={label}
-      variant="outlined"
-      value={name}
-      onChange={event => setName(event.target.value)}
-      placeholder=""
-      style={{ width: `${INPUT_WIDTH}px` }}
-      error={error}
-    />
-  );
-};
-
 export const NewTemplatesPage: React.FC<RouteComponentProps<{}>> = ({
   history,
 }) => {
