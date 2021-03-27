@@ -35,7 +35,7 @@ export function excelToScheduleMultipleSheets(
     const data = new Uint8Array(e.target.result);
     const workbook = XLSX.read(data, { type: "array" });
     setNamedSchedules(
-      Object.entries(workbook).map(([name, worksheet]) => [
+      Object.entries(workbook.Sheets).map(([name, worksheet]) => [
         name,
         parseExcelAndCreateSchedule(worksheet),
       ])
