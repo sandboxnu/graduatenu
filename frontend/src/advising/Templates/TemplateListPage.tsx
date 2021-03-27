@@ -244,6 +244,7 @@ const TemplatesList = ({ searchQuery }: TemplatesListProps) => {
         ) : (
           templates.map((folder, i) => (
             <FolderComponent
+              key={folder.id}
               index={i}
               folder={folder}
               searchQuery={searchQuery}
@@ -294,7 +295,7 @@ const FolderComponent: React.FC<FolderProps> = (props: FolderProps) => {
       <FolderTemplateListContainer>
         {isExpanded &&
           filteredTemplatePlans.map((template: ITemplatePlan) => (
-            <Template name={template.name} id={template.id} />
+            <Template name={template.name} key={template.id} id={template.id} />
           ))}
       </FolderTemplateListContainer>
     </div>

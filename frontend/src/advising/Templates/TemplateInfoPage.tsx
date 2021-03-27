@@ -35,6 +35,7 @@ import {
   generateYearlessSchedule,
   planToString,
 } from "../../utils";
+import { FolderContext, FolderSelection } from "./FolderSelection";
 
 const INPUT_WIDTH = 326;
 
@@ -66,18 +67,6 @@ const InputContainer = styled.div`
   width: ${INPUT_WIDTH}px;
 `;
 
-const FolderSelectionContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 5px;
-  width: ${INPUT_WIDTH}px;
-`;
-
-const FolderSelectionTabContainer = styled.div`
-  margin-bottom: 18px;
-`;
-
 interface DropdownProps {
   readonly label: string;
   readonly options: Array<string>;
@@ -91,16 +80,6 @@ interface NameFieldProps {
   readonly label: string;
   readonly error: boolean;
 }
-
-interface FolderContext {
-  readonly folders: IFolderData[];
-  readonly setSelectedFolderId: (selectedFolderId: number | null) => void;
-  readonly newFolderName: string;
-  readonly setNewFolderName: (newFolderName: string) => void;
-  readonly hasDuplicateFolderName: boolean;
-}
-
-const folderContext = createContext<Partial<FolderContext>>({});
 
 const NameField: React.FC<NameFieldProps> = ({
   name,
@@ -116,118 +95,9 @@ const NameField: React.FC<NameFieldProps> = ({
       value={name}
       onChange={event => setName(event.target.value)}
       placeholder=""
-      style={{ width: "326px" }}
+      style={{ width: `${INPUT_WIDTH}px` }}
       error={error}
     />
-  );
-};
-
-const DisplayedFolderInputField: React.FC<{ creatingNewFolder: boolean }> = ({
-  creatingNewFolder,
-}) => {
-  const {
-    folders,
-    setSelectedFolderId,
-    newFolderName,
-    setNewFolderName,
-    hasDuplicateFolderName,
-  } = useContext(folderContext) as FolderContext;
-
-  useEffect(() => {
-    setSelectedFolderId(null);
-    setNewFolderName("");
-  }, [creatingNewFolder]);
-
-  // TODO: FIx new folder input being a greater height than existing folder input
-  if (creatingNewFolder) {
-    return (
-      <FormControl
-        variant="outlined"
-        error={hasDuplicateFolderName}
-        style={{ width: INPUT_WIDTH }}
-      >
-        <NameField
-          name={newFolderName}
-          setName={setNewFolderName}
-          label={"New folder name"}
-          error={hasDuplicateFolderName}
-        />
-        <FormHelperText>
-          {hasDuplicateFolderName && "Folder name has already been taken"}
-        </FormHelperText>
-      </FormControl>
-    );
-  }
-
-  return (
-    <FormControl variant="outlined">
-      <Autocomplete
-        style={{ width: INPUT_WIDTH }}
-        disableListWrap
-        getOptionLabel={option => option.name}
-        options={folders}
-        renderInput={params => (
-          <TextField
-            {...params}
-            variant="outlined"
-            label={"Existing folder"}
-            fullWidth
-          />
-        )}
-        onChange={(event, newValue: any) =>
-          setSelectedFolderId(newValue.id || null)
-        }
-      />
-    </FormControl>
-  );
-};
-
-const FolderSelection: React.FC<{}> = () => {
-  const EXISTING_FOLDER_TAB_INDEX = 0;
-  const NEW_FOLDER_TAB_INDEX = 1;
-
-  const [tabValue, setTabValue] = useState(EXISTING_FOLDER_TAB_INDEX);
-  const {
-    folders,
-    newFolderName,
-    setNewFolderName,
-    hasDuplicateFolderName,
-  } = useContext(folderContext) as FolderContext;
-  const creatingNewFolder = tabValue === NEW_FOLDER_TAB_INDEX;
-
-  const handleTabChange = (event: React.ChangeEvent<{}>, newValue: number) => {
-    setTabValue(newValue);
-  };
-
-  if (folders.length < 1) {
-    return (
-      <NameField
-        name={newFolderName}
-        setName={setNewFolderName}
-        label={"New folder name"}
-        error={hasDuplicateFolderName}
-      />
-    );
-  }
-
-  return (
-    <FolderSelectionContainer>
-      <FolderSelectionTabContainer>
-        <Tabs
-          value={tabValue}
-          onChange={handleTabChange}
-          TabIndicatorProps={{
-            style: {
-              bottom: "4px",
-            },
-          }}
-        >
-          <Tab label="Existing Folder" />
-          <Tab label="New Folder" />
-        </Tabs>
-      </FolderSelectionTabContainer>
-      <DisplayedFolderInputField creatingNewFolder={creatingNewFolder} />
-    </FolderSelectionContainer>
   );
 };
 
@@ -239,6 +109,7 @@ export const NewTemplatesPage: React.FC<RouteComponentProps<{}>> = ({
   const [major, setMajor] = useState<string | null>(null);
   const [concentration, setConcentration] = useState<string | null>(null);
   const [hasConcentrationError, setHasConcentrationError] = useState(false);
+  const [hasDuplicateFolderName, setHasDuplicateFolderName] = useState(false);
   const [showConcentrationError, setShowConcentrationError] = useState(false);
   const [catalogYear, setCatalogYear] = useState<string | null>(null);
   const [coopCycle, setCoopCycle] = useState<string | null>(null);
@@ -271,9 +142,6 @@ export const NewTemplatesPage: React.FC<RouteComponentProps<{}>> = ({
   ];
   const buttonSize = 90;
   const majorObj = findMajorFromName(major, majors, Number(catalogYear));
-  const hasDuplicateFolderName = folders.some(
-    folder => folder.name === newFolderName
-  );
 
   // TODO: Redo error handling to show errors for individual fields when
   // pressing "Next" rather than keeping the button disabled
@@ -323,13 +191,12 @@ export const NewTemplatesPage: React.FC<RouteComponentProps<{}>> = ({
   };
 
   return (
-    <folderContext.Provider
+    <FolderContext.Provider
       value={{
         folders,
         setSelectedFolderId,
         newFolderName,
         setNewFolderName,
-        hasDuplicateFolderName,
       }}
     >
       <NewTemplatesPageContainer>
@@ -337,14 +204,19 @@ export const NewTemplatesPage: React.FC<RouteComponentProps<{}>> = ({
           Let's create a template!
         </Container>
         <InputContainer>
-          <NameField
-            name={name}
-            setName={setName}
+          <TextField
+            id="outlined-basic"
             label={"Template name"}
+            variant="outlined"
+            onChange={event => setName(event.target.value)}
+            placeholder=""
+            style={{ width: `${INPUT_WIDTH}px` }}
             error={false}
           />
         </InputContainer>
-        <FolderSelection />
+        <FolderSelection
+          setHasDuplicateFolderName={setHasDuplicateFolderName}
+        />
         <Dropdown
           label="Catalog year"
           options={catalogYears}
@@ -410,7 +282,7 @@ export const NewTemplatesPage: React.FC<RouteComponentProps<{}>> = ({
           </RedColorButton>
         </ButtonContainer>
       </NewTemplatesPageContainer>
-    </folderContext.Provider>
+    </FolderContext.Provider>
   );
 };
 
