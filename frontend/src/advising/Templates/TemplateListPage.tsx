@@ -1,20 +1,12 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, createContext, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Search } from "../../components/common/Search";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import styled from "styled-components";
-import { LinearProgress, Modal, TextField } from "@material-ui/core";
-import {
-  ICreateTemplatePlan,
-  IFolderData,
-  ITemplatePlan,
-} from "../../models/types";
-import {
-  createTemplate,
-  getTemplates,
-  TemplatesAPI,
-} from "../../services/TemplateService";
+import { LinearProgress } from "@material-ui/core";
+import { IFolderData, ITemplatePlan } from "../../models/types";
+import { getTemplates, TemplatesAPI } from "../../services/TemplateService";
 import {
   getAdvisorUserIdFromState,
   getFolderExpandedFromState,
@@ -27,10 +19,7 @@ import {
   WhiteColorButton,
 } from "../../components/common/ColoredButtons";
 import { isSearchedTemplate } from "./TemplateUtils";
-import { ExcelWorkbookUpload } from "../../components/ExcelUpload";
-import { Schedule } from "../../../../common/types";
-import { Autocomplete } from "@material-ui/lab";
-import { convertToDNDSchedule } from "../../utils";
+import { PlanUploadPopper } from "./PlanUploadPopper";
 
 const Container = styled.div`
   margin-left: 30px;
@@ -129,185 +118,33 @@ const TemplateName = styled.div`
   }
 `;
 
-const InnerSection = styled.section`
-  position: fixed;
-  background: white;
-  width: 30%;
-  height: auto;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  padding: 8px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  outline: none;
-  padding-bottom: 24px;
-  min-width: 300px;
-`;
-
-interface PlanUploadPopperProps {
-  userId: number;
-  visible: boolean;
-  folders: IFolderData[];
-  setTemplates: (templates: IFolderData[]) => void;
-  fetchTemplates: (currentFolders: IFolderData[], page: number) => void;
-}
-
-interface PlanUploadPopperErrorState {
-  noFolderSelectedError: string;
-}
-
 interface TemplatesListProps {
-  searchQuery: string;
+  readonly searchQuery: string;
 }
 
 interface TemplateProps {
-  name: string;
-  id: number;
+  readonly name: string;
+  readonly id: number;
 }
 
 interface FolderProps {
-  index: number;
-  folder: IFolderData;
-  searchQuery: string;
+  readonly index: number;
+  readonly folder: IFolderData;
+  readonly searchQuery: string;
 }
 
-const EMPTY_TEMPLATES_LIST: IFolderData[] = [];
+export interface ITemplateContext {
+  readonly templates: IFolderData[];
+  readonly isLoading: boolean;
+  readonly pageNumber: number;
+  readonly isLastPage: boolean;
+  readonly fetchTemplates: (currentFolder: IFolderData[], page: number) => void;
+}
 
-const PlanUploadPopper: React.FC<PlanUploadPopperProps> = ({
-  userId,
-  visible,
-  folders,
-  setTemplates,
-  fetchTemplates,
-}) => {
-  const [selectedFolderId, setSelectedFolderId] = useState<number | null>(null);
-  const [namedSchedules, setNamedSchedules] = useState<
-    [string, Schedule][] | null
-  >(null);
-  // const [errorState, setErrorState] = useState<PlanUploadPopperErrorState>({
-  //   noFolderSelectedError: "",
-  // });
+export const TemplateContext = createContext<Partial<ITemplateContext>>({});
 
-  // Errors:
-  // - no folder selected
-  // - invalid folder selected
-  // - failed to convert schedules
-
-  const namedScheduleToCreateTemplatePlan = useCallback(
-    ([name, schedule]: [string, Schedule]): ICreateTemplatePlan => {
-      const [dndSchedule, courseCounter] = convertToDNDSchedule(schedule, 0);
-
-      return {
-        name,
-        schedule: dndSchedule,
-        catalog_year: null, // TODO do we need optional inputs for these?
-        major: null,
-        coop_cycle: null,
-        concentration: null,
-        folder_id: selectedFolderId,
-        folder_name:
-          folders.find(value => value.id === selectedFolderId)?.name || null,
-        course_counter: courseCounter,
-      };
-    },
-    [folders, selectedFolderId]
-  );
-
-  const createTemplatesFromNamedSchedules = useCallback(async () => {
-    if (!namedSchedules) {
-      return;
-      // TODO error handling
-    }
-
-    await Promise.all(
-      namedSchedules.map(namedSchedule =>
-        createTemplate(userId, namedScheduleToCreateTemplatePlan(namedSchedule))
-      )
-    );
-
-    setTemplates(EMPTY_TEMPLATES_LIST);
-    fetchTemplates(EMPTY_TEMPLATES_LIST, 0);
-  }, [
-    fetchTemplates,
-    namedScheduleToCreateTemplatePlan,
-    namedSchedules,
-    setTemplates,
-    userId,
-  ]);
-
-  const onImportClick = async () => {
-    await createTemplatesFromNamedSchedules();
-  };
-
-  return (
-    <Modal
-      style={{ outline: "none" }}
-      open={visible}
-      onClose={() => {}}
-      aria-labelledby="simple-modal-title"
-      aria-describedby="simple-modal-description"
-    >
-      <InnerSection>
-        <Autocomplete
-          disableListWrap
-          options={folders}
-          getOptionLabel={folder => folder.name}
-          renderInput={params => (
-            <TextField
-              {...params}
-              variant="outlined"
-              label="Select a destination folder"
-              fullWidth
-              // error={""}
-              // helperText={error && REQUIRED_FIELD_MESSAGE}
-            />
-          )}
-          onChange={(e, value) => setSelectedFolderId(value ? value.id : value)}
-        ></Autocomplete>
-        <ExcelWorkbookUpload setNamedSchedules={setNamedSchedules} />
-        <RedColorButton onClick={onImportClick}>Import</RedColorButton>
-      </InnerSection>
-    </Modal>
-  );
-};
-
-export const TemplatesListPage: React.FC = () => {
-  const [searchQuery, setSearchQuery] = useState("");
-
-  return (
-    <Container>
-      <Search
-        placeholder="Search by template or folder name"
-        onEnter={setSearchQuery}
-        isSmall={false}
-      />
-      <TemplatesContainer>
-        <TemplateListContainer>
-          <ButtonWrapper>
-            <WhiteColorButton style={{ marginRight: "20px" }}>
-              {" "}
-              Upload Plan{" "}
-            </WhiteColorButton>
-            <Link
-              to={{ pathname: "/advisor/templates/createTemplate" }}
-              style={{ textDecoration: "none" }}
-            >
-              <RedColorButton>Create New</RedColorButton>
-            </Link>
-          </ButtonWrapper>
-          <TemplateListScrollContainer>
-            <TemplatesList searchQuery={searchQuery} />
-          </TemplateListScrollContainer>
-        </TemplateListContainer>
-      </TemplatesContainer>
-    </Container>
-  );
-};
-
-const TemplatesList = ({ searchQuery }: TemplatesListProps) => {
-  const [templates, setTemplates] = useState(EMPTY_TEMPLATES_LIST);
+const useTemplatesApi = (searchQuery: string): ITemplateContext => {
+  const [templates, setTemplates] = useState<IFolderData[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [pageNumber, setPageNumber] = useState(0);
   const [isLastPage, setIsLastPage] = useState(false);
@@ -328,9 +165,71 @@ const TemplatesList = ({ searchQuery }: TemplatesListProps) => {
   };
 
   useEffect(() => {
-    setTemplates(EMPTY_TEMPLATES_LIST);
-    fetchTemplates(EMPTY_TEMPLATES_LIST, 0);
+    setTemplates([]);
+    fetchTemplates([], 0);
   }, [searchQuery]);
+
+  return {
+    templates,
+    isLoading,
+    pageNumber,
+    isLastPage,
+    fetchTemplates,
+  };
+};
+
+export const TemplatesListPage: React.FC = () => {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [planUploadModalVisible, setPlanUploadModalVisible] = useState(false);
+
+  const templateContext = useTemplatesApi(searchQuery);
+
+  return (
+    <TemplateContext.Provider value={templateContext}>
+      <Container>
+        <Search
+          placeholder="Search by template or folder name"
+          onEnter={setSearchQuery}
+          isSmall={false}
+        />
+        <TemplatesContainer>
+          <TemplateListContainer>
+            <ButtonWrapper>
+              <WhiteColorButton
+                style={{ marginRight: "20px" }}
+                onClick={() => setPlanUploadModalVisible(true)}
+              >
+                Upload Plans
+              </WhiteColorButton>
+              <Link
+                to={{ pathname: "/advisor/templates/createTemplate" }}
+                style={{ textDecoration: "none" }}
+              >
+                <RedColorButton>Create New</RedColorButton>
+              </Link>
+            </ButtonWrapper>
+            <TemplateListScrollContainer>
+              <TemplatesList searchQuery={searchQuery} />
+            </TemplateListScrollContainer>
+          </TemplateListContainer>
+        </TemplatesContainer>
+        <PlanUploadPopper
+          visible={planUploadModalVisible}
+          setVisible={setPlanUploadModalVisible}
+        />
+      </Container>
+    </TemplateContext.Provider>
+  );
+};
+
+const TemplatesList = ({ searchQuery }: TemplatesListProps) => {
+  const {
+    templates,
+    isLoading,
+    pageNumber,
+    isLastPage,
+    fetchTemplates,
+  } = useContext(TemplateContext) as ITemplateContext;
 
   return (
     <>
@@ -340,7 +239,7 @@ const TemplatesList = ({ searchQuery }: TemplatesListProps) => {
         </Loading>
       )}
       <TemplateListContainer>
-        {(templates === null || templates.length == 0) && !isLoading ? (
+        {(templates === null || templates.length === 0) && !isLoading ? (
           <EmptyState> No Templates found </EmptyState>
         ) : (
           templates.map((folder, i) => (
