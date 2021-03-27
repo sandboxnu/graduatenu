@@ -5,7 +5,6 @@ import {
 } from "../utils/excelParser";
 import { Schedule } from "../../../common/types";
 import { Tooltip } from "@material-ui/core";
-import { useState } from "react";
 
 interface Props {
   setSchedule: (schedule: Schedule) => void;
@@ -44,8 +43,6 @@ export const ExcelUpload: React.FC<Props> = props => {
 export const ExcelWorkbookUpload: React.FC<MultiExcelUploadProps> = ({
   setNamedSchedules,
 }) => {
-  const [uploadedFile, setUploadedFile] = useState();
-
   const onUpload = (e: any) => {
     if (e != null && e.target != null) {
       const file = e.target.files[0];
