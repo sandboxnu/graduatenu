@@ -27,12 +27,12 @@ export const fetchCourse = async (
     return null;
   }
 
-  const response = await fetch("https://searchneu.com/graphql", {
+  const response = await fetch("https://api.searchneu.com/graphql", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       query: `{ 
-        class(subject: "${subject}", classId: ${classId}) {
+        class(subject: "${subject}", classId: "${classId}") {
           latestOccurrence {
             name
             subject
@@ -72,12 +72,32 @@ export const searchCourses = async (
 ): Promise<ScheduleCourse[]> => {
   const courses: ScheduleCourse[] = [];
   const response = await fetch(
-    `https://searchneu.com/search?query=${searchQuery}&termId=202130&minIndex=${minIndex}&maxIndex=${maxIndex}`,
+    `https://api.searchneu.com/search?query=${searchQuery}&termId=202130&minIndex=${minIndex}&maxIndex=${maxIndex}`,
     {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     }
   );
+  // const response = await fetch("https://api.searchneu.com/graphql", {
+  //   method: "POST",
+  //   headers: { "Content-Type": "application/json" },
+  //   body: JSON.stringify({
+  //     query: `{
+  //       search(termId: "${subject}", classId: "${classId}") {
+  //         latestOccurrence {
+  //           name
+  //           subject
+  //           classId
+  //           maxCredits
+  //           minCredits
+  //           prereqs
+  //           coreqs
+  //         }
+  //       }
+  //     }`,
+  //   }),
+  // });
+
   const results = await response.json();
   results.forEach((result: SearchResult) => {
     if (result.type && result.type === "class" && result.class) {
