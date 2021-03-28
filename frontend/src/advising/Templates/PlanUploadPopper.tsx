@@ -54,7 +54,6 @@ export const PlanUploadPopper: React.FC<PlanUploadPopperProps> = ({
   visible,
   setVisible,
 }) => {
-  // TODO: Add the FolderSelection to the popper
   const [selectedFolderId, setSelectedFolderId] = useState<number | null>(null);
   const [newFolderName, setNewFolderName] = useState<string>("");
   const [hasDuplicateFolderName, setHasDuplicateFolderName] = useState(false);
@@ -70,17 +69,21 @@ export const PlanUploadPopper: React.FC<PlanUploadPopperProps> = ({
   }));
 
   // This must be used instead of fetching from the context in order to avoid
-  // any search query being applied to the available folders.
+  // any search query being applied to the shown available folders.
   const { templates: folders } = useTemplatesApi("");
 
+  // The parent templates fetcher is used to update the templates shown in the
+  // TemplateListPage while maintaining any search query used.
   const { fetchTemplates: fetchParentTemplates } = useContext(
     TemplateContext
   ) as ITemplateContext;
 
   // Errors:
   // - no folder selected
-  // - invalid folder selected
-  // - failed to convert schedules
+  // - duplicate major name
+  // - no catalog year selected
+  // - no major selected
+  // - failed to convert schedules (parsing error)
 
   const catalogYearDropdown = useMemo(() => {
     const catalogYears = [
@@ -141,7 +144,7 @@ export const PlanUploadPopper: React.FC<PlanUploadPopperProps> = ({
         name,
         schedule: dndSchedule,
         catalog_year: catalogYear,
-        major: major ? major.name : major,
+        major: major ? major.name : null,
         coop_cycle: null,
         concentration: null,
         folder_id: folderId,
