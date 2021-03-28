@@ -19,7 +19,7 @@ import { useTemplatesApi } from "./useTemplates";
 const InnerSection = styled.section`
   position: fixed;
   background: white;
-  width: 30%;
+  width: 50%;
   height: auto;
   top: 50%;
   left: 50%;
@@ -28,9 +28,17 @@ const InnerSection = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 20px;
   outline: none;
   padding-bottom: 24px;
-  min-width: 300px;
+  min-width: 400px;
+`;
+
+const FieldContainer = styled.div`
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 `;
 
 interface PlanUploadPopperProps {
@@ -187,29 +195,15 @@ export const PlanUploadPopper: React.FC<PlanUploadPopperProps> = ({
           >
             <CloseIcon />
           </IconButton>
-          <h1 id="simple-modal-title">Create a New Plan</h1>
-          {/* <Autocomplete
-          disableListWrap
-          options={templates}
-          getOptionLabel={folder => folder.name}
-          renderInput={params => (
-            <TextField
-              {...params}
-              variant="outlined"
-              label="Select a destination folder"
-              fullWidth
-              // error={""}
-              // helperText={error && REQUIRED_FIELD_MESSAGE}
+          <h1 id="simple-modal-title">Upload Plans</h1>
+          <FieldContainer>
+            <FolderSelection
+              setHasDuplicateFolderName={setHasDuplicateFolderName}
             />
-          )}
-          onChange={(e, value) => setSelectedFolderId(value ? value.id : value)}
-        ></Autocomplete> */}
-          <FolderSelection
-            setHasDuplicateFolderName={setHasDuplicateFolderName}
-          />
-          {renderCatalogYearDropdown}
-          {renderMajorDropDown}
-          <ExcelWorkbookUpload setNamedSchedules={setNamedSchedules} />
+            {renderCatalogYearDropdown}
+            {renderMajorDropDown}
+            <ExcelWorkbookUpload setNamedSchedules={setNamedSchedules} />
+          </FieldContainer>
           <RedColorButton onClick={createTemplatesFromNamedSchedules}>
             Import
           </RedColorButton>

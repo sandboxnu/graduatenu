@@ -62,6 +62,7 @@ export const ExcelWorkbookUpload: React.FC<MultiExcelUploadProps> = ({
           type="file"
           accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
           onChange={e => onUpload(e)}
+          style={{ width: "100%" }}
         />
       </Tooltip>
     </div>

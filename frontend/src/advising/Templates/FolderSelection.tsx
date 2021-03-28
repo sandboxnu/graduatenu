@@ -24,7 +24,8 @@ const FolderSelectionContainer = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 5px;
-  width: 326px;
+  box-sizing: border-box;
+  width: 100%;
 `;
 
 const FolderSelectionTabContainer = styled.div`
@@ -67,19 +68,15 @@ const DisplayedFolderInputField: React.FC<DisplayedFolderInputFieldProps> = ({
   // TODO: FIx new folder input being a greater height than existing folder input
   if (creatingNewFolder) {
     return (
-      <FormControl
-        variant="outlined"
-        error={hasDuplicateFolderName}
-        style={{ width: INPUT_WIDTH }}
-      >
+      <FormControl variant="outlined" error={hasDuplicateFolderName} fullWidth>
         <TextField
           id="outlined-basic"
           label={"New folder name"}
           variant="outlined"
           onChange={event => setNewFolderName(event.target.value)}
           placeholder=""
-          style={{ width: `${INPUT_WIDTH}px` }}
           error={hasDuplicateFolderName}
+          fullWidth
         />
         <FormHelperText>
           {hasDuplicateFolderName && "Folder name has already been taken"}
@@ -89,10 +86,10 @@ const DisplayedFolderInputField: React.FC<DisplayedFolderInputFieldProps> = ({
   }
 
   return (
-    <FormControl variant="outlined">
+    <FormControl variant="outlined" fullWidth>
       <Autocomplete
-        style={{ width: INPUT_WIDTH }}
         disableListWrap
+        fullWidth
         getOptionLabel={option => option.name}
         options={folders}
         renderInput={params => (
@@ -153,6 +150,7 @@ export const FolderSelection: React.FC<FolderSelectionProps> = ({
         placeholder=""
         style={{ width: `${INPUT_WIDTH}px` }}
         error={hasDuplicateFolderName}
+        fullWidth
       />
     );
   }

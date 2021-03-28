@@ -31,9 +31,7 @@ import {
 } from "../../utils";
 import { FolderSelectionContext, FolderSelection } from "./FolderSelection";
 
-const INPUT_WIDTH = 326;
-
-const Container = styled.div`
+const Header = styled.div`
   margin-left: 30px;
   margin-right: 30px;
   margin-top: 50px;
@@ -50,15 +48,19 @@ const NewTemplatesPageContainer = styled.div`
   gap: 25px;
 `;
 
+const FieldContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+  width: 326px;
+`;
+
 const ButtonContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   padding: 12px;
-`;
-
-const InputContainer = styled.div`
-  width: ${INPUT_WIDTH}px;
 `;
 
 interface DropdownProps {
@@ -167,65 +169,62 @@ export const NewTemplatesPage: React.FC<RouteComponentProps<{}>> = ({
       }}
     >
       <NewTemplatesPageContainer>
-        <Container style={{ fontSize: "24px" }}>
-          Let's create a template!
-        </Container>
-        <InputContainer>
+        <Header style={{ fontSize: "24px" }}>Let's create a template!</Header>
+        <FieldContainer>
           <TextField
             id="outlined-basic"
             label={"Template name"}
             variant="outlined"
             onChange={event => setName(event.target.value)}
             placeholder=""
-            style={{ width: `${INPUT_WIDTH}px` }}
             error={false}
+            fullWidth
           />
-        </InputContainer>
-        <FolderSelection
-          setHasDuplicateFolderName={setHasDuplicateFolderName}
-        />
-        <Dropdown
-          label="Catalog year"
-          options={catalogYears}
-          value={catalogYear}
-          setValue={value => {
-            setCatalogYear(value);
-            setMajor(null);
-            setCoopCycle(null);
-          }}
-        />
-        {catalogYear && (
+          <FolderSelection
+            setHasDuplicateFolderName={setHasDuplicateFolderName}
+          />
           <Dropdown
-            label="Major"
-            options={majors.map(maj => maj.name)}
-            value={major}
+            label="Catalog year"
+            options={catalogYears}
+            value={catalogYear}
             setValue={value => {
-              setMajor(value);
-              setConcentration(null);
-              setShowConcentrationError(false);
+              setCatalogYear(value);
+              setMajor(null);
               setCoopCycle(null);
             }}
           />
-        )}
-        {major && (
-          <SaveInParentConcentrationDropdown
-            major={majorObj}
-            concentration={concentration}
-            setConcentration={setConcentration}
-            setError={setHasConcentrationError}
-            style={{ width: INPUT_WIDTH }}
-            useLabel={true}
-            showError={showConcentrationError}
-          />
-        )}
-        {major && (
-          <Dropdown
-            label="Co-op cycle"
-            options={allCoopCycles[major!].map(p => planToString(p))}
-            value={coopCycle}
-            setValue={setCoopCycle}
-          />
-        )}
+          {catalogYear && (
+            <Dropdown
+              label="Major"
+              options={majors.map(maj => maj.name)}
+              value={major}
+              setValue={value => {
+                setMajor(value);
+                setConcentration(null);
+                setShowConcentrationError(false);
+                setCoopCycle(null);
+              }}
+            />
+          )}
+          {major && (
+            <SaveInParentConcentrationDropdown
+              major={majorObj}
+              concentration={concentration}
+              setConcentration={setConcentration}
+              setError={setHasConcentrationError}
+              useLabel={true}
+              showError={showConcentrationError}
+            />
+          )}
+          {major && (
+            <Dropdown
+              label="Co-op cycle"
+              options={allCoopCycles[major!].map(p => planToString(p))}
+              value={coopCycle}
+              setValue={setCoopCycle}
+            />
+          )}
+        </FieldContainer>
         <ButtonContainer>
           <Link
             to={{ pathname: "/advisor/templates/" }}
@@ -260,9 +259,8 @@ const Dropdown: React.FC<DropdownProps> = ({
   setValue,
 }) => {
   return (
-    <FormControl variant="outlined">
+    <FormControl variant="outlined" fullWidth>
       <Autocomplete
-        style={{ width: INPUT_WIDTH }}
         disableListWrap
         options={options}
         renderInput={params => (
