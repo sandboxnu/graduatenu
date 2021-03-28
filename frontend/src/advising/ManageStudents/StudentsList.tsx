@@ -89,29 +89,37 @@ const ErrorContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  min-height: 100px;
 `;
 
 const ErrorTextContainer = styled.div`
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   flex-direction: column;
+  max-height: 20%;
+  min-height: 100px;
+  max-width: 270px;
+  padding: 15px;
 `;
 
 const ErrorTitle = styled.div`
-  width: 20%
   font-weight: 900;
-  font-size: 36px;
-  color: #EB5757;
+  font-size: 2em;
+  color: #eb5757;
   text-align: left;
 `;
 
 const ErrorMessage = styled.div`
-  width: 20%
   font-weight: 900;
-  font-size: 14px;
+  font-size: 0.85em;
   color: #808080;
   text-align: left;
+`;
+
+const ErrorImage = styled.img`
+  max-height: 20%;
+  min-height: 100px;
 `;
 
 const EMPTY_STUDENT_LIST: IAbrStudent[] = [];
@@ -172,7 +180,7 @@ export const StudentsList = () => {
       />
       {isError ? (
         <ErrorContainer>
-          <img src={advisingErrorPic} alt="Error Doggo" />
+          <ErrorImage src={advisingErrorPic} alt="Error Doggo" />
           <ErrorTextContainer>
             <ErrorTitle>Oh no!</ErrorTitle>
             <ErrorMessage>
