@@ -150,6 +150,6 @@ export const RedirectScreen: React.FC<Props> = ({ redirectUrl }) => {
     }
   } else {
     // advisor
-    return <Redirect to="/advisor/notifications" />;
+    return <Redirect to="/advisor/appointments" />;
   }
 };
