@@ -432,7 +432,6 @@ class OnboardingScreenComponent extends React.Component<
         !this.hasMajorAndNoCatalogYearError() &&
         !majorSelectedAndNoConcentration;
       const onClick = () => {
-        console.log("clicked");
         if (this.hasMajorAndNoCatalogYearError()) {
           this.setState({
             beenEditedYear: true,
