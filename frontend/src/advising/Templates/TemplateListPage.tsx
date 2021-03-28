@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createContext, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Search } from "../../components/common/Search";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
@@ -6,11 +6,7 @@ import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import styled from "styled-components";
 import { LinearProgress } from "@material-ui/core";
 import { IFolderData, ITemplatePlan } from "../../models/types";
-import { getTemplates, TemplatesAPI } from "../../services/TemplateService";
-import {
-  getAdvisorUserIdFromState,
-  getFolderExpandedFromState,
-} from "../../state";
+import { getFolderExpandedFromState } from "../../state";
 import { toggleTemplateFolderExpandedAction } from "../../state/actions/advisorActions";
 import { AppState } from "../../state/reducers/state";
 import { Link, useHistory } from "react-router-dom";
@@ -20,6 +16,11 @@ import {
 } from "../../components/common/ColoredButtons";
 import { isSearchedTemplate } from "./TemplateUtils";
 import { PlanUploadPopper } from "./PlanUploadPopper";
+import {
+  TemplateContext,
+  ITemplateContext,
+  useTemplatesApi,
+} from "./useTemplates";
 
 const Container = styled.div`
   margin-left: 30px;
@@ -132,51 +133,6 @@ interface FolderProps {
   readonly folder: IFolderData;
   readonly searchQuery: string;
 }
-
-export interface ITemplateContext {
-  readonly templates: IFolderData[];
-  readonly isLoading: boolean;
-  readonly pageNumber: number;
-  readonly isLastPage: boolean;
-  readonly fetchTemplates: (currentFolder: IFolderData[], page: number) => void;
-}
-
-export const TemplateContext = createContext<Partial<ITemplateContext>>({});
-
-const useTemplatesApi = (searchQuery: string): ITemplateContext => {
-  const [templates, setTemplates] = useState<IFolderData[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [pageNumber, setPageNumber] = useState(0);
-  const [isLastPage, setIsLastPage] = useState(false);
-  const { userId } = useSelector((state: AppState) => ({
-    userId: getAdvisorUserIdFromState(state),
-  }));
-
-  const fetchTemplates = (currentFolders: IFolderData[], page: number) => {
-    setIsLoading(true);
-    getTemplates(userId, searchQuery, page)
-      .then((response: TemplatesAPI) => {
-        setTemplates(currentFolders.concat(response.templates));
-        setPageNumber(response.nextPage);
-        setIsLastPage(response.lastPage);
-        setIsLoading(false);
-      })
-      .catch((err: any) => console.log(err));
-  };
-
-  useEffect(() => {
-    setTemplates([]);
-    fetchTemplates([], 0);
-  }, [searchQuery]);
-
-  return {
-    templates,
-    isLoading,
-    pageNumber,
-    isLastPage,
-    fetchTemplates,
-  };
-};
 
 export const TemplatesListPage: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState("");
