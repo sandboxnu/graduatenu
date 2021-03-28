@@ -108,3 +108,21 @@ export const deleteTemplatePlan = (userId: number, templateId: number) =>
       Authorization: "Token " + getAuthToken(),
     },
   }).then(response => response.json());
+
+/**
+ * Create a new folder for the given user with the given name.
+ * @param userId the id of the user to be modified
+ * @param name the name of the folder to be created
+ */
+export const createFolder = (
+  userId: number,
+  name: string
+): Promise<{ folder: { id: number; name: string } }> =>
+  fetch(`/api/users/${userId}/folders`, {
+    method: "POST",
+    body: JSON.stringify({ folder: { name } }),
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Token " + getAuthToken(),
+    },
+  }).then(response => response.json());
