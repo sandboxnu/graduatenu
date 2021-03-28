@@ -9,6 +9,7 @@ import {
 import {
   safelyGetActivePlanIdFromState,
   getActivePlanNameFromState,
+  safelyGetTransferCoursesFromState,
 } from "../../state";
 import {
   addNewPlanAction,
@@ -161,10 +162,13 @@ export const StudentView: React.FC = () => {
   };
 
   const dispatch = useDispatch();
-  const { planName, planId } = useSelector((state: AppState) => ({
-    planName: getActivePlanNameFromState(state),
-    planId: safelyGetActivePlanIdFromState(state),
-  }));
+  const { planName, planId, transferCourses } = useSelector(
+    (state: AppState) => ({
+      planName: getActivePlanNameFromState(state),
+      planId: safelyGetActivePlanIdFromState(state),
+      transferCourses: safelyGetTransferCoursesFromState(state),
+    })
+  );
 
   useEffect(() => {
     fetchUser(id).then(response => {
@@ -172,7 +176,7 @@ export const StudentView: React.FC = () => {
       setFetchingStudent(false);
     });
     findAllPlansForUser(id).then((plans: IPlanData[]) => {
-      dispatch(setUserPlansAction(plans, 2020));
+      dispatch(setUserPlansAction(plans, 2020, transferCourses));
       if (!plans || !plans.length || !plans[0].schedule) setNoPlans(true);
     });
   }, []);

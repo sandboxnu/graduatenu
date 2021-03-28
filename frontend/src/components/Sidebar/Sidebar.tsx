@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { DNDSchedule, IRequirementGroupWarning } from "../../models/types";
 import { Concentration, Major, ScheduleCourse } from "../../../../common/types";
 import styled from "styled-components";
@@ -7,6 +7,7 @@ import {
   produceRequirementGroupWarning,
   getCompletedCourseStrings,
   getCreditsTakenInSchedule,
+  sumCreditsFromCourses,
 } from "../../utils";
 import { AppState } from "../../state/reducers/state";
 import {
@@ -154,18 +155,19 @@ const MajorSidebarComponent: React.FC<MajorSidebarProps> = ({
     : completedCourses;
   const concentrationIsRequired = major.concentrations.minOptions > 0;
 
+  const totalCredits = useMemo(() => {
+    return (
+      sumCreditsFromCourses(transferCourses) +
+      getCreditsTakenInSchedule(schedule)
+    );
+  }, [transferCourses, schedule]);
+
   return (
     <Container>
       <ScrollWrapper>
         <MajorTitle>{major.name}</MajorTitle>
-        <CreditTitle
-          isGreen={
-            getCreditsTakenInSchedule(schedule) >= major.totalCreditsRequired
-          }
-        >
-          {`${getCreditsTakenInSchedule(schedule)} / ${
-            major.totalCreditsRequired
-          }` + " credits"}
+        <CreditTitle isGreen={totalCredits >= major.totalCreditsRequired}>
+          {`${totalCredits} / ${major.totalCreditsRequired}` + " credits"}
         </CreditTitle>
         <ConcentrationComponent
           concentration={concentration}

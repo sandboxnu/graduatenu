@@ -17,6 +17,7 @@ import { connect } from "react-redux";
 import {
   getCourseWarningsFromState,
   getCurrentClassCounterFromState,
+  safelyGetTransferCoursesFromState,
   safelyGetWarningsFromState,
 } from "../state";
 import { Dispatch } from "redux";
@@ -60,19 +61,26 @@ interface ReduxStoreSemesterBlockProps {
   courseWarnings: CourseWarning[];
   warnings: IWarning[];
   currentClassCounter: number;
+  transferCourses: ScheduleCourse[];
 }
 
 interface ReduxDispatchSemesterBlockProps {
   handleAddClasses: (
     courses: ScheduleCourse[],
-    semester: DNDScheduleTerm
+    semester: DNDScheduleTerm,
+    transferCourses: ScheduleCourse[]
   ) => void;
-  onDeleteClass: (course: DNDScheduleCourse, semester: DNDScheduleTerm) => void;
+  onDeleteClass: (
+    course: DNDScheduleCourse,
+    semester: DNDScheduleTerm,
+    transferCourses: ScheduleCourse[]
+  ) => void;
   onUndoDeleteClass: () => void;
   handleStatusChange: (
     newStatus: Status,
     year: number,
-    tappedSemester: SeasonWord
+    tappedSemester: SeasonWord,
+    transferCourses: ScheduleCourse[]
   ) => void;
 }
 
@@ -192,7 +200,8 @@ class EditableSemesterBlockComponent extends React.Component<
         snackbarOpen: true,
         deletedClass: course,
       },
-      () => this.props.onDeleteClass(course, semester)
+      () =>
+        this.props.onDeleteClass(course, semester, this.props.transferCourses)
     );
   };
 
@@ -283,12 +292,17 @@ class EditableSemesterBlockComponent extends React.Component<
               this.props.handleStatusChange(
                 "CLASSES",
                 this.props.semester.year,
-                convertTermIdToSeason(this.props.semester.termId)!
+                convertTermIdToSeason(this.props.semester.termId)!,
+                this.props.transferCourses
               );
             }
 
             // Add the given courses to this semester through redux
-            this.props.handleAddClasses(courses, this.props.semester);
+            this.props.handleAddClasses(
+              courses,
+              this.props.semester,
+              this.props.transferCourses
+            );
             courses.forEach(course => {
               ScheduleChangeTracker.getInstance().addAddClassChange(
                 course.subject + course.classId,
@@ -319,21 +333,38 @@ const mapStateToProps = (state: AppState, ownProps: SemesterBlockProps) => ({
   ),
   courseWarnings: getCourseWarningsFromState(state, ownProps.semester),
   currentClassCounter: getCurrentClassCounterFromState(state)!,
+  transferCourses: safelyGetTransferCoursesFromState(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  handleAddClasses: (courses: ScheduleCourse[], semester: DNDScheduleTerm) =>
-    dispatch(addCoursesToActivePlanAction(courses, semester)),
-  onDeleteClass: (course: DNDScheduleCourse, semester: DNDScheduleTerm) =>
-    dispatch(removeClassFromActivePlanAction(course, semester)),
+  handleAddClasses: (
+    courses: ScheduleCourse[],
+    semester: DNDScheduleTerm,
+    transferCourses: ScheduleCourse[]
+  ) =>
+    dispatch(addCoursesToActivePlanAction(courses, semester, transferCourses)),
+  onDeleteClass: (
+    course: DNDScheduleCourse,
+    semester: DNDScheduleTerm,
+    transferCourses: ScheduleCourse[]
+  ) =>
+    dispatch(
+      removeClassFromActivePlanAction(course, semester, transferCourses)
+    ),
   onUndoDeleteClass: () => dispatch(undoRemoveClassFromActivePlanAction()),
   handleStatusChange: (
     newStatus: Status,
     year: number,
-    tappedSemester: SeasonWord
+    tappedSemester: SeasonWord,
+    transferCourses: ScheduleCourse[]
   ) =>
     dispatch(
-      changeSemesterStatusForActivePlanAction(newStatus, year, tappedSemester)
+      changeSemesterStatusForActivePlanAction(
+        newStatus,
+        year,
+        tappedSemester,
+        transferCourses
+      )
     ),
 });
 
