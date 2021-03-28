@@ -32,15 +32,17 @@ export const RedirectScreen: React.FC<Props> = ({ redirectUrl }) => {
   const calculateAndSetAcademicYear = (completedCourses: ScheduleCourse[]) => {
     // sort the courses from the earliest to lastest semester
     if (completedCourses && completedCourses.length != 0) {
-      const sortedCourses = completedCourses.sort((first, second) => {
-        if (Number(first.semester!) < Number(second.semester!)) {
-          return -1;
-        } else if (Number(second.semester!) < Number(first.semester!)) {
-          return 1;
-        } else {
-          return 0;
+      const sortedCourses = JSON.parse(JSON.stringify(completedCourses)).sort(
+        (first: ScheduleCourse, second: ScheduleCourse) => {
+          if (Number(first.semester!) < Number(second.semester!)) {
+            return -1;
+          } else if (Number(second.semester!) < Number(first.semester!)) {
+            return 1;
+          } else {
+            return 0;
+          }
         }
-      });
+      );
 
       const earliestSemesterYear = sortedCourses[0].semester?.substring(0, 4);
       const latestSemesterYear = sortedCourses[
@@ -87,12 +89,14 @@ export const RedirectScreen: React.FC<Props> = ({ redirectUrl }) => {
                 getScheduleCoursesFromSimplifiedCourseDataAPI(
                   response.user.coursesCompleted
                 ).then(courses => {
-                  dispatch(setCompletedCoursesAction(courses));
-                  dispatch(
-                    setStudentAcademicYearAction(
-                      calculateAndSetAcademicYear(courses)
-                    )
-                  );
+                  batch(() => {
+                    dispatch(setCompletedCoursesAction(courses));
+                    dispatch(
+                      setStudentAcademicYearAction(
+                        calculateAndSetAcademicYear(courses)
+                      )
+                    );
+                  });
                 }),
                 getScheduleCoursesFromSimplifiedCourseDataAPI(
                   response.user.coursesTransfer

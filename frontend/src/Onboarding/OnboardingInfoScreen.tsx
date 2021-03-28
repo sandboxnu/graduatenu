@@ -1,6 +1,6 @@
 import React from "react";
 import { withRouter, RouteComponentProps, Link } from "react-router-dom";
-import { Backdrop, TextField, Tooltip } from "@material-ui/core";
+import { TextField, Tooltip } from "@material-ui/core";
 import { GenericOnboardingTemplate } from "./GenericOnboarding";
 import { NextButton } from "../components/common/NextButton";
 import { connect } from "react-redux";
@@ -12,7 +12,6 @@ import {
   generateInitialScheduleNoCoopCycle,
 } from "../utils";
 import {
-  setStudentAcademicYearAction,
   setStudentGraduationYearAction,
   setStudentCoopCycleAction,
   setStudentMajorAction,
@@ -35,6 +34,7 @@ import {
   getUserMajorNameFromState,
   getUserIdFromState,
   getCompletedCoursesFromState,
+  getAcademicYearFromState,
 } from "../state";
 import { AppState } from "../state/reducers/state";
 import Autocomplete from "@material-ui/lab/Autocomplete";
@@ -57,6 +57,7 @@ const SpinnerWrapper = styled.div`
 `;
 
 interface OnboardingReduxStoreProps {
+  academicYear: number | null;
   major: string | null;
   majors: Major[];
   plans: Record<string, Schedule[]>;
@@ -67,7 +68,6 @@ interface OnboardingReduxStoreProps {
 }
 
 interface OnboardingReduxDispatchProps {
-  setAcademicYear: (academicYear: number) => void;
   setGraduationYear: (graduationYear: number) => void;
   setCatalogYear: (catalogYear: number | null) => void;
   setMajor: (major: string | null) => void;
@@ -83,7 +83,6 @@ type OnboardingScreenProps = OnboardingReduxStoreProps &
   OnboardingReduxDispatchProps;
 
 interface OnboardingScreenState {
-  year?: number;
   beenEditedYear: boolean;
   gradYear?: number;
   beenEditedGrad: boolean;
@@ -108,7 +107,6 @@ class OnboardingScreenComponent extends React.Component<
     super(props);
 
     this.state = {
-      year: undefined,
       gradYear: undefined,
       catalogYear: undefined,
       beenEditedYear: false,
@@ -178,7 +176,6 @@ class OnboardingScreenComponent extends React.Component<
    * assuming all of the required fields have been filled out
    */
   onSubmit() {
-    this.props.setAcademicYear(this.state.year!);
     this.props.setGraduationYear(this.state.gradYear!);
     this.props.setCatalogYear(this.state.catalogYear || null);
     this.props.setMajor(this.state.major || null);
@@ -198,7 +195,6 @@ class OnboardingScreenComponent extends React.Component<
         },
         {
           major: this.state.major || null,
-          academic_year: this.state.year!,
           graduation_year: this.state.gradYear!,
           coop_cycle: this.state.coopCycle || null,
           concentration: this.state.concentration || null,
@@ -210,7 +206,7 @@ class OnboardingScreenComponent extends React.Component<
       let schedule, courseCounter;
       if (!!this.state.coopCycle) {
         [schedule, courseCounter] = generateInitialSchedule(
-          this.state.year!,
+          this.props.academicYear!,
           this.state.gradYear!,
           this.props.completedCourses,
           this.state.major!,
@@ -219,7 +215,7 @@ class OnboardingScreenComponent extends React.Component<
         );
       } else {
         [schedule, courseCounter] = generateInitialScheduleNoCoopCycle(
-          this.state.year!,
+          this.props.academicYear!,
           this.state.gradYear!,
           this.props.completedCourses
         );
@@ -235,7 +231,7 @@ class OnboardingScreenComponent extends React.Component<
         course_counter: courseCounter,
         catalog_year: this.state.catalogYear || null,
       }).then(response => {
-        this.props.addNewPlanAction(response.plan, this.state.year!);
+        this.props.addNewPlanAction(response.plan, this.props.academicYear!);
         setPrimaryPlan(this.props.userId, response.plan.id);
       });
     };
@@ -408,7 +404,7 @@ class OnboardingScreenComponent extends React.Component<
     this.setState({ open: false });
   }
   render() {
-    const { gradYear, year, major, catalogYear } = this.state;
+    const { gradYear, major, catalogYear } = this.state;
     const { isFetchingMajors, isFetchingPlans } = this.props;
 
     if (isFetchingMajors || isFetchingPlans) {
@@ -426,11 +422,7 @@ class OnboardingScreenComponent extends React.Component<
       );
     } else {
       const allRequirementsFilled: boolean =
-        !!year && !!gradYear && (!major || !!catalogYear);
-      console.log("year", year);
-      console.log("grad year", gradYear);
-      console.log("major", major);
-      console.log("catalogYear", catalogYear);
+        !!gradYear && (!major || !!catalogYear);
 
       const majorSelectedAndNoConcentration =
         !!this.state.major && this.state.hasNoConcentrationSelectedError;
@@ -511,10 +503,8 @@ class OnboardingScreenComponent extends React.Component<
  * @param state the AppState
  */
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  setAcademicYear: (academicYear: number) =>
-    dispatch(setStudentAcademicYearAction(academicYear)),
-  setGraduationYear: (academicYear: number) =>
-    dispatch(setStudentGraduationYearAction(academicYear)),
+  setGraduationYear: (gradYear: number) =>
+    dispatch(setStudentGraduationYearAction(gradYear)),
   setMajor: (major: string | null) => dispatch(setStudentMajorAction(major)),
   setConcentration: (concentration: string | null) =>
     dispatch(setStudentConcentrationAction(concentration)),
@@ -531,6 +521,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
  * @param dispatch responsible for dispatching actions to the redux store.
  */
 const mapStateToProps = (state: AppState) => ({
+  academicYear: getAcademicYearFromState(state),
   major: getUserMajorNameFromState(state),
   majors: getMajorsFromState(state),
   plans: getPlansFromState(state),
