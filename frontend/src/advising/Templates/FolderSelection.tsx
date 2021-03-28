@@ -17,8 +17,6 @@ import React, {
 import styled from "styled-components";
 import { IFolderData } from "../../models/types";
 
-const INPUT_WIDTH = 326;
-
 const FolderSelectionContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -63,7 +61,7 @@ const DisplayedFolderInputField: React.FC<DisplayedFolderInputFieldProps> = ({
   useEffect(() => {
     setSelectedFolderId(null);
     setNewFolderName("");
-  }, [creatingNewFolder]);
+  }, [creatingNewFolder, setNewFolderName, setSelectedFolderId]);
 
   // TODO: FIx new folder input being a greater height than existing folder input
   if (creatingNewFolder) {
@@ -100,9 +98,14 @@ const DisplayedFolderInputField: React.FC<DisplayedFolderInputFieldProps> = ({
             fullWidth
           />
         )}
-        onChange={(event, newValue: any) =>
-          setSelectedFolderId(newValue.id || null)
-        }
+        onChange={(event, newValue: IFolderData | null) => {
+          if (newValue) {
+            setSelectedFolderId(newValue.id);
+            return;
+          }
+
+          setSelectedFolderId(null);
+        }}
       />
     </FormControl>
   );
@@ -148,7 +151,6 @@ export const FolderSelection: React.FC<FolderSelectionProps> = ({
         variant="outlined"
         onChange={event => setNewFolderName(event.target.value)}
         placeholder=""
-        style={{ width: `${INPUT_WIDTH}px` }}
         error={hasDuplicateFolderName}
         fullWidth
       />
