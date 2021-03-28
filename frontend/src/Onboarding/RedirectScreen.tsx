@@ -50,8 +50,6 @@ export const RedirectScreen: React.FC<Props> = ({ redirectUrl }) => {
       ].semester?.substring(0, 4);
       const academicYear =
         Number(latestSemesterYear) - Number(earliestSemesterYear) + 1;
-      console.log("YOOOO");
-      console.log("aca year", academicYear);
       return academicYear;
     } else {
       return 1;
