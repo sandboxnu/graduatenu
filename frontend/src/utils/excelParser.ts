@@ -28,19 +28,27 @@ export function excelToSchedule(
 
 export function excelToScheduleMultipleSheets(
   file: File,
-  setNamedSchedules: (namedSchedules: [string, Schedule][]) => void
+  setNamedSchedules: (namedSchedules: [string, Schedule][]) => void,
+  setError: (error: string) => void
 ) {
   const reader = new FileReader();
   reader.onload = function(e: any) {
     const data = new Uint8Array(e.target.result);
     const workbook = XLSX.read(data, { type: "array" });
-    setNamedSchedules(
-      Object.entries(workbook.Sheets).map(([name, worksheet]) => [
-        name,
-        parseExcelAndCreateSchedule(worksheet),
-      ])
-    );
+
+    try {
+      setNamedSchedules(
+        Object.entries(workbook.Sheets).map(([name, worksheet]) => [
+          name,
+          parseExcelAndCreateSchedule(worksheet),
+        ])
+      );
+    } catch (error) {
+      setNamedSchedules([]);
+      setError(error);
+    }
   };
+
   reader.readAsArrayBuffer(file);
 }
 

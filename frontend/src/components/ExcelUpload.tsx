@@ -5,6 +5,22 @@ import {
 } from "../utils/excelParser";
 import { Schedule } from "../../../common/types";
 import { Tooltip } from "@material-ui/core";
+import { useState } from "react";
+import styled from "styled-components";
+
+const ErrorTextWrapper = styled.div`
+  display: flex;
+  flex: 1;
+  margin: 8px;
+  flex-direction: column;
+  justify-content: center;
+  height: 2em;
+`;
+
+const ErrorText = styled.p`
+  color: red;
+  text-align: center;
+`;
 
 interface Props {
   setSchedule: (schedule: Schedule) => void;
@@ -43,10 +59,13 @@ export const ExcelUpload: React.FC<Props> = props => {
 export const ExcelWorkbookUpload: React.FC<MultiExcelUploadProps> = ({
   setNamedSchedules,
 }) => {
+  const [uploadError, setUploadError] = useState<string>();
+
   const onUpload = (e: any) => {
     if (e != null && e.target != null) {
       const file = e.target.files[0];
-      excelToScheduleMultipleSheets(file, setNamedSchedules);
+      setUploadError("");
+      excelToScheduleMultipleSheets(file, setNamedSchedules, setUploadError);
     }
   };
 
@@ -65,6 +84,11 @@ export const ExcelWorkbookUpload: React.FC<MultiExcelUploadProps> = ({
           style={{ width: "100%" }}
         />
       </Tooltip>
+      {uploadError && (
+        <ErrorTextWrapper>
+          <ErrorText>There was an error parsing your schedules.</ErrorText>
+        </ErrorTextWrapper>
+      )}
     </div>
   );
 };
