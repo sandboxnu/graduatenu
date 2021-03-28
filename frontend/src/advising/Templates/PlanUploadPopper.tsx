@@ -1,6 +1,6 @@
 import { IconButton, Modal, TextField } from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
-import React, { useState, useCallback, useMemo } from "react";
+import React, { useState, useCallback, useMemo, useContext } from "react";
 import CloseIcon from "@material-ui/icons/Close";
 import { Major, Schedule } from "../../../../common/types";
 import { RedColorButton } from "../../components/common/ColoredButtons";
@@ -14,7 +14,11 @@ import { useSelector } from "react-redux";
 import { AppState } from "../../state/reducers/state";
 import { findMajorFromName } from "../../utils/plan-helpers";
 import { FolderSelection, FolderSelectionContext } from "./FolderSelection";
-import { useTemplatesApi } from "./useTemplates";
+import {
+  ITemplateContext,
+  TemplateContext,
+  useTemplatesApi,
+} from "./useTemplates";
 
 const InnerSection = styled.section`
   position: fixed;
@@ -67,7 +71,11 @@ export const PlanUploadPopper: React.FC<PlanUploadPopperProps> = ({
 
   // This must be used instead of fetching from the context in order to avoid
   // any search query being applied to the available folders.
-  const { templates: folders, fetchTemplates } = useTemplatesApi("");
+  const { templates: folders } = useTemplatesApi("");
+
+  const { fetchTemplates: fetchParentTemplates } = useContext(
+    TemplateContext
+  ) as ITemplateContext;
 
   // Errors:
   // - no folder selected
@@ -176,12 +184,14 @@ export const PlanUploadPopper: React.FC<PlanUploadPopperProps> = ({
       )
     );
 
-    fetchTemplates([], 0);
+    fetchParentTemplates([], 0);
+    setVisible(false);
   }, [
-    fetchTemplates,
+    fetchParentTemplates,
     getFolderIdForNewTemplates,
     namedScheduleToCreateTemplatePlan,
     namedSchedules,
+    setVisible,
     userId,
   ]);
 
