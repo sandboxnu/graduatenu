@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { Redirect } from "react-router";
-import { useDispatch, useSelector } from "react-redux";
+import { batch, useDispatch } from "react-redux";
 import { fetchActiveUser } from "../services/UserService";
 import {
   setStudentAction,
@@ -14,8 +14,6 @@ import { authCookieExists, AUTH_TOKEN_COOKIE_KEY } from "../utils/auth-helpers";
 import { getScheduleCoursesFromSimplifiedCourseDataAPI } from "../utils/course-helpers";
 import { LoadingScreen } from "../components/common/FullPageLoading";
 import { setAdvisorAction } from "../state/actions/advisorActions";
-import { getCompletedCoursesFromState } from "../state";
-import { AppState } from "../state/reducers/state";
 import { ScheduleCourse } from "../../../common/types";
 
 interface Props {
@@ -30,10 +28,8 @@ export const RedirectScreen: React.FC<Props> = ({ redirectUrl }) => {
   const [needsToGoToOnboarding, setNeedsToGoToOnboarding] = useState<
     boolean | undefined
   >();
-  const completedCourses: ScheduleCourse[] = useSelector((state: AppState) =>
-    getCompletedCoursesFromState(state)
-  );
-  const calculateAndSetAcademicYear = () => {
+
+  const calculateAndSetAcademicYear = (completedCourses: ScheduleCourse[]) => {
     // sort the courses from the earliest to lastest semester
     if (completedCourses && completedCourses.length != 0) {
       const sortedCourses = completedCourses.sort((first, second) => {
@@ -54,14 +50,11 @@ export const RedirectScreen: React.FC<Props> = ({ redirectUrl }) => {
         Number(latestSemesterYear) - Number(earliestSemesterYear) + 1;
       console.log("YOOOO");
       console.log("aca year", academicYear);
-      dispatch(setStudentAcademicYearAction(academicYear));
+      return academicYear;
+    } else {
+      return 1;
     }
   };
-
-  useEffect(() => {
-    console.log("refreshed");
-    calculateAndSetAcademicYear();
-  }, [completedCourses]);
 
   // component did mount
   useEffect(() => {
@@ -95,7 +88,11 @@ export const RedirectScreen: React.FC<Props> = ({ redirectUrl }) => {
                   response.user.coursesCompleted
                 ).then(courses => {
                   dispatch(setCompletedCoursesAction(courses));
-                  calculateAndSetAcademicYear();
+                  dispatch(
+                    setStudentAcademicYearAction(
+                      calculateAndSetAcademicYear(courses)
+                    )
+                  );
                 }),
                 getScheduleCoursesFromSimplifiedCourseDataAPI(
                   response.user.coursesTransfer
