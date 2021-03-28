@@ -21,6 +21,7 @@ Rails.application.routes.draw do
         resources :plan_changelogs, only: [:index, :show, :create]
       end
       resources :templates, only: [:index, :create, :show, :update, :destroy]
+      resources :folders, only: [:create]
     end
 
     post 'v1/admin_hook', to: 'admin#admin_hook'
