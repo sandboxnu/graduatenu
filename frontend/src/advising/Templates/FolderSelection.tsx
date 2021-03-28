@@ -31,6 +31,17 @@ const FolderSelectionTabContainer = styled.div`
   margin-bottom: 18px;
 `;
 
+export interface IFolderSelectionContext {
+  readonly folders: IFolderData[];
+  readonly setSelectedFolderId: (selectedFolderId: number | null) => void;
+  readonly newFolderName: string;
+  readonly setNewFolderName: (newFolderName: string) => void;
+}
+
+export const FolderSelectionContext = createContext<
+  Partial<IFolderSelectionContext>
+>({});
+
 interface DisplayedFolderInputFieldProps {
   readonly creatingNewFolder: boolean;
   readonly hasDuplicateFolderName: boolean;
@@ -40,22 +51,13 @@ interface FolderSelectionProps {
   readonly setHasDuplicateFolderName: (hasDuplicateFolderName: boolean) => void;
 }
 
-export interface IFolderContext {
-  readonly folders: IFolderData[];
-  readonly setSelectedFolderId: (selectedFolderId: number | null) => void;
-  readonly newFolderName: string;
-  readonly setNewFolderName: (newFolderName: string) => void;
-}
-
-export const FolderContext = createContext<Partial<IFolderContext>>({});
-
 const DisplayedFolderInputField: React.FC<DisplayedFolderInputFieldProps> = ({
   creatingNewFolder,
   hasDuplicateFolderName,
 }) => {
   const { folders, setSelectedFolderId, setNewFolderName } = useContext(
-    FolderContext
-  ) as IFolderContext;
+    FolderSelectionContext
+  ) as IFolderSelectionContext;
 
   useEffect(() => {
     setSelectedFolderId(null);
@@ -117,8 +119,8 @@ export const FolderSelection: React.FC<FolderSelectionProps> = ({
 
   const [tabValue, setTabValue] = useState(EXISTING_FOLDER_TAB_INDEX);
   const { folders, newFolderName, setNewFolderName } = useContext(
-    FolderContext
-  ) as IFolderContext;
+    FolderSelectionContext
+  ) as IFolderSelectionContext;
 
   const creatingNewFolder = useMemo(() => tabValue === NEW_FOLDER_TAB_INDEX, [
     tabValue,
