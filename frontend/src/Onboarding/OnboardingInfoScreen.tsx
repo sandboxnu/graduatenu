@@ -431,15 +431,6 @@ class OnboardingScreenComponent extends React.Component<
         allRequirementsFilled &&
         !this.hasMajorAndNoCatalogYearError() &&
         !majorSelectedAndNoConcentration;
-      console.log("allRequirementsFilled", allRequirementsFilled);
-      console.log(
-        "has major no catalog year",
-        this.hasMajorAndNoCatalogYearError()
-      );
-      console.log(
-        "majorSelectedAndNoConcentration",
-        majorSelectedAndNoConcentration
-      );
       const onClick = () => {
         console.log("clicked");
         if (this.hasMajorAndNoCatalogYearError()) {
