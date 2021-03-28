@@ -29,7 +29,7 @@ export const RedirectScreen: React.FC<Props> = ({ redirectUrl }) => {
     boolean | undefined
   >();
 
-  const calculateAndSetAcademicYear = (completedCourses: ScheduleCourse[]) => {
+  const calculateAcademicYear = (completedCourses: ScheduleCourse[]) => {
     // sort the courses from the earliest to lastest semester
     if (completedCourses && completedCourses.length != 0) {
       const sortedCourses = JSON.parse(JSON.stringify(completedCourses)).sort(
@@ -91,7 +91,7 @@ export const RedirectScreen: React.FC<Props> = ({ redirectUrl }) => {
                     dispatch(setCompletedCoursesAction(courses));
                     dispatch(
                       setStudentAcademicYearAction(
-                        calculateAndSetAcademicYear(courses)
+                        calculateAcademicYear(courses)
                       )
                     );
                   });
