@@ -6,7 +6,7 @@ import { Major, Schedule } from "../../../../common/types";
 import { RedColorButton } from "../../components/common/ColoredButtons";
 import { ExcelWorkbookUpload } from "../../components/ExcelUpload";
 import { ICreateTemplatePlan } from "../../models/types";
-import { createTemplate } from "../../services/TemplateService";
+import { createFolder, createTemplate } from "../../services/TemplateService";
 import { convertToDNDSchedule } from "../../utils";
 import styled from "styled-components";
 import { getAdvisorUserIdFromState, getMajorsFromState } from "../../state";
@@ -46,10 +46,6 @@ interface PlanUploadPopperProps {
   setVisible: (visible: boolean) => void;
 }
 
-interface PlanUploadPopperErrorState {
-  noFolderSelectedError: string;
-}
-
 export const PlanUploadPopper: React.FC<PlanUploadPopperProps> = ({
   visible,
   setVisible,
@@ -63,9 +59,6 @@ export const PlanUploadPopper: React.FC<PlanUploadPopperProps> = ({
   const [namedSchedules, setNamedSchedules] = useState<[string, Schedule][]>(
     []
   );
-  const [errorState, setErrorState] = useState<PlanUploadPopperErrorState>({
-    noFolderSelectedError: "",
-  });
 
   const { userId, majors } = useSelector((state: AppState) => ({
     userId: getAdvisorUserIdFromState(state),
@@ -81,7 +74,7 @@ export const PlanUploadPopper: React.FC<PlanUploadPopperProps> = ({
   // - invalid folder selected
   // - failed to convert schedules
 
-  const renderCatalogYearDropdown = useMemo(() => {
+  const catalogYearDropdown = useMemo(() => {
     const catalogYears = [
       ...Array.from(
         new Set(majors.map((maj: Major) => maj.yearVersion.toString()))
@@ -108,27 +101,32 @@ export const PlanUploadPopper: React.FC<PlanUploadPopperProps> = ({
     );
   }, [majors]);
 
-  const renderMajorDropDown = useMemo(() => {
+  const majorDropdown = useMemo(() => {
     const options = majors
       .filter(maj => maj.yearVersion === catalogYear)
       .map(maj => maj.name);
 
     return (
-      <Autocomplete
-        disableListWrap
-        options={options}
-        renderInput={params => (
-          <TextField {...params} variant="outlined" label="Major" fullWidth />
-        )}
-        onChange={(e, value) => {
-          setMajor(findMajorFromName(value, majors, catalogYear) || null);
-        }}
-      />
+      catalogYear && (
+        <Autocomplete
+          disableListWrap
+          options={options}
+          renderInput={params => (
+            <TextField {...params} variant="outlined" label="Major" fullWidth />
+          )}
+          onChange={(e, value) => {
+            setMajor(findMajorFromName(value, majors, catalogYear) || null);
+          }}
+        />
+      )
     );
   }, [catalogYear, majors]);
 
   const namedScheduleToCreateTemplatePlan = useCallback(
-    ([name, schedule]: [string, Schedule]): ICreateTemplatePlan => {
+    (
+      [name, schedule]: [string, Schedule],
+      folderId: number
+    ): ICreateTemplatePlan => {
       const [dndSchedule, courseCounter] = convertToDNDSchedule(schedule, 0);
 
       return {
@@ -138,30 +136,50 @@ export const PlanUploadPopper: React.FC<PlanUploadPopperProps> = ({
         major: major ? major.name : major,
         coop_cycle: null,
         concentration: null,
-        folder_id: selectedFolderId,
-        folder_name:
-          folders.find(folder => folder.id === selectedFolderId)?.name || null,
+        folder_id: folderId,
+        folder_name: null,
         course_counter: courseCounter,
       };
     },
-    [catalogYear, folders, major, selectedFolderId]
+    [catalogYear, major]
   );
 
+  const getFolderIdForNewTemplates = useCallback(async () => {
+    // Create the new standalone folder and get its ID.
+    if (newFolderName) {
+      const { folder } = await createFolder(userId, newFolderName);
+      return folder.id;
+    }
+
+    // Use the selected folder ID.
+    return selectedFolderId;
+  }, [newFolderName, selectedFolderId, userId]);
+
   const createTemplatesFromNamedSchedules = useCallback(async () => {
-    if (!namedSchedules) {
+    if (namedSchedules.length < 1) {
       return;
       // TODO error handling
     }
 
+    const folderId = await getFolderIdForNewTemplates();
+
+    if (!folderId) {
+      return;
+    }
+
     await Promise.all(
       namedSchedules.map(namedSchedule =>
-        createTemplate(userId, namedScheduleToCreateTemplatePlan(namedSchedule))
+        createTemplate(
+          userId,
+          namedScheduleToCreateTemplatePlan(namedSchedule, folderId)
+        )
       )
     );
 
     fetchTemplates([], 0);
   }, [
     fetchTemplates,
+    getFolderIdForNewTemplates,
     namedScheduleToCreateTemplatePlan,
     namedSchedules,
     userId,
@@ -200,8 +218,8 @@ export const PlanUploadPopper: React.FC<PlanUploadPopperProps> = ({
             <FolderSelection
               setHasDuplicateFolderName={setHasDuplicateFolderName}
             />
-            {renderCatalogYearDropdown}
-            {renderMajorDropDown}
+            {catalogYearDropdown}
+            {majorDropdown}
             <ExcelWorkbookUpload setNamedSchedules={setNamedSchedules} />
           </FieldContainer>
           <RedColorButton onClick={createTemplatesFromNamedSchedules}>
