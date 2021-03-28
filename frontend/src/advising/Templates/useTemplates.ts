@@ -1,4 +1,4 @@
-import { useState, useEffect, createContext } from "react";
+import { useState, useEffect, createContext, useCallback } from "react";
 import { useSelector } from "react-redux";
 import { IFolderData } from "../../models/types";
 import { getTemplates, TemplatesAPI } from "../../services/TemplateService";
@@ -24,22 +24,25 @@ export const useTemplatesApi = (searchQuery: string): ITemplateContext => {
     userId: getAdvisorUserIdFromState(state),
   }));
 
-  const fetchTemplates = (currentFolders: IFolderData[], page: number) => {
-    setIsLoading(true);
-    getTemplates(userId, searchQuery, page)
-      .then((response: TemplatesAPI) => {
-        setTemplates(currentFolders.concat(response.templates));
-        setPageNumber(response.nextPage);
-        setIsLastPage(response.lastPage);
-        setIsLoading(false);
-      })
-      .catch((err: any) => console.log(err));
-  };
+  const fetchTemplates = useCallback(
+    (currentFolders: IFolderData[], page: number) => {
+      setIsLoading(true);
+      getTemplates(userId, searchQuery, page)
+        .then((response: TemplatesAPI) => {
+          setTemplates(currentFolders.concat(response.templates));
+          setPageNumber(response.nextPage);
+          setIsLastPage(response.lastPage);
+          setIsLoading(false);
+        })
+        .catch((err: any) => console.log(err));
+    },
+    [searchQuery, userId]
+  );
 
   useEffect(() => {
     setTemplates([]);
     fetchTemplates([], 0);
-  }, [searchQuery]);
+  }, [fetchTemplates, searchQuery]);
 
   return {
     templates,
