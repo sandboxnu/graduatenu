@@ -1,6 +1,6 @@
 import { IconButton, Modal, TextField } from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
-import React, { useState, useCallback, useMemo, useContext } from "react";
+import React, { useState, useCallback, useMemo } from "react";
 import CloseIcon from "@material-ui/icons/Close";
 import { Major, Schedule } from "../../../../common/types";
 import { RedColorButton } from "../../components/common/ColoredButtons";
@@ -13,7 +13,8 @@ import { getAdvisorUserIdFromState, getMajorsFromState } from "../../state";
 import { useSelector } from "react-redux";
 import { AppState } from "../../state/reducers/state";
 import { findMajorFromName } from "../../utils/plan-helpers";
-import { ITemplateContext, TemplateContext } from "./TemplateListPage";
+import { FolderSelection, FolderSelectionContext } from "./FolderSelection";
+import { useTemplatesApi } from "./useTemplates";
 
 const InnerSection = styled.section`
   position: fixed;
@@ -45,7 +46,10 @@ export const PlanUploadPopper: React.FC<PlanUploadPopperProps> = ({
   visible,
   setVisible,
 }) => {
+  // TODO: Add the FolderSelection to the popper
   const [selectedFolderId, setSelectedFolderId] = useState<number | null>(null);
+  const [newFolderName, setNewFolderName] = useState<string>("");
+  const [hasDuplicateFolderName, setHasDuplicateFolderName] = useState(false);
   const [catalogYear, setCatalogYear] = useState<number | null>(null);
   const [major, setMajor] = useState<Major | null>(null);
   const [namedSchedules, setNamedSchedules] = useState<[string, Schedule][]>(
@@ -60,9 +64,9 @@ export const PlanUploadPopper: React.FC<PlanUploadPopperProps> = ({
     majors: getMajorsFromState(state),
   }));
 
-  const { templates, fetchTemplates } = useContext(
-    TemplateContext
-  ) as ITemplateContext;
+  // This must be used instead of fetching from the context in order to avoid
+  // any search query being applied to the available folders.
+  const { templates: folders, fetchTemplates } = useTemplatesApi("");
 
   // Errors:
   // - no folder selected
@@ -128,11 +132,11 @@ export const PlanUploadPopper: React.FC<PlanUploadPopperProps> = ({
         concentration: null,
         folder_id: selectedFolderId,
         folder_name:
-          templates.find(value => value.id === selectedFolderId)?.name || null,
+          folders.find(folder => folder.id === selectedFolderId)?.name || null,
         course_counter: courseCounter,
       };
     },
-    [catalogYear, major, selectedFolderId, templates]
+    [catalogYear, folders, major, selectedFolderId]
   );
 
   const createTemplatesFromNamedSchedules = useCallback(async () => {
@@ -156,27 +160,35 @@ export const PlanUploadPopper: React.FC<PlanUploadPopperProps> = ({
   ]);
 
   return (
-    <Modal
-      style={{ outline: "none" }}
-      open={visible}
-      onClose={() => {}}
-      aria-labelledby="simple-modal-title"
-      aria-describedby="simple-modal-description"
+    <FolderSelectionContext.Provider
+      value={{
+        folders,
+        setSelectedFolderId,
+        newFolderName,
+        setNewFolderName,
+      }}
     >
-      <InnerSection>
-        <IconButton
-          style={{
-            padding: "3px",
-            position: "absolute",
-            top: "12px",
-            right: "18px",
-          }}
-          onClick={() => setVisible(false)}
-        >
-          <CloseIcon />
-        </IconButton>
-        <h1 id="simple-modal-title">Create a New Plan</h1>
-        <Autocomplete
+      <Modal
+        style={{ outline: "none" }}
+        open={visible}
+        onClose={() => {}}
+        aria-labelledby="simple-modal-title"
+        aria-describedby="simple-modal-description"
+      >
+        <InnerSection>
+          <IconButton
+            style={{
+              padding: "3px",
+              position: "absolute",
+              top: "12px",
+              right: "18px",
+            }}
+            onClick={() => setVisible(false)}
+          >
+            <CloseIcon />
+          </IconButton>
+          <h1 id="simple-modal-title">Create a New Plan</h1>
+          {/* <Autocomplete
           disableListWrap
           options={templates}
           getOptionLabel={folder => folder.name}
@@ -191,14 +203,18 @@ export const PlanUploadPopper: React.FC<PlanUploadPopperProps> = ({
             />
           )}
           onChange={(e, value) => setSelectedFolderId(value ? value.id : value)}
-        ></Autocomplete>
-        {renderCatalogYearDropdown}
-        {renderMajorDropDown}
-        <ExcelWorkbookUpload setNamedSchedules={setNamedSchedules} />
-        <RedColorButton onClick={createTemplatesFromNamedSchedules}>
-          Import
-        </RedColorButton>
-      </InnerSection>
-    </Modal>
+        ></Autocomplete> */}
+          <FolderSelection
+            setHasDuplicateFolderName={setHasDuplicateFolderName}
+          />
+          {renderCatalogYearDropdown}
+          {renderMajorDropDown}
+          <ExcelWorkbookUpload setNamedSchedules={setNamedSchedules} />
+          <RedColorButton onClick={createTemplatesFromNamedSchedules}>
+            Import
+          </RedColorButton>
+        </InnerSection>
+      </Modal>
+    </FolderSelectionContext.Provider>
   );
 };
