@@ -1,12 +1,6 @@
-import {
-  TextField,
-  FormControl,
-  Tabs,
-  Tab,
-  FormHelperText,
-} from "@material-ui/core";
+import { TextField, FormControl } from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
-import React, { createContext, useContext, useEffect, useMemo } from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { Link, RouteComponentProps } from "react-router-dom";
@@ -35,7 +29,7 @@ import {
   generateYearlessSchedule,
   planToString,
 } from "../../utils";
-import { FolderContext, FolderSelection } from "./FolderSelection";
+import { FolderSelectionContext, FolderSelection } from "./FolderSelection";
 
 const INPUT_WIDTH = 326;
 
@@ -164,7 +158,7 @@ export const NewTemplatesPage: React.FC<RouteComponentProps<{}>> = ({
   };
 
   return (
-    <FolderContext.Provider
+    <FolderSelectionContext.Provider
       value={{
         folders,
         setSelectedFolderId,
@@ -255,7 +249,7 @@ export const NewTemplatesPage: React.FC<RouteComponentProps<{}>> = ({
           </RedColorButton>
         </ButtonContainer>
       </NewTemplatesPageContainer>
-    </FolderContext.Provider>
+    </FolderSelectionContext.Provider>
   );
 };
 
