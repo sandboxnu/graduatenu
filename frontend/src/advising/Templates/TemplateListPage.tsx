@@ -20,7 +20,7 @@ import {
   TemplateContext,
   ITemplateContext,
   useTemplatesApi,
-} from "./useTemplates";
+} from "./useTemplatesApi";
 
 const Container = styled.div`
   margin-left: 30px;

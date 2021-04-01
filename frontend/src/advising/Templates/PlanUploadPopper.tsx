@@ -30,7 +30,7 @@ import {
   ITemplateContext,
   TemplateContext,
   useTemplatesApi,
-} from "./useTemplates";
+} from "./useTemplatesApi";
 import { SaveInParentConcentrationDropdown } from "../../components/ConcentrationDropdown";
 import { BASE_FORMATTED_COOP_CYCLES } from "../../plans/coopCycles";
 
