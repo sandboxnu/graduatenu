@@ -19,7 +19,7 @@ const ErrorContainer = styled.div`
 const ErrorTextContainer = styled.div`
   display: flex;
   align-items: flex-start;
-  justify-content: center;
+  justify-content: space-between;
   flex-direction: column;
   max-height: 20%;
   min-height: 100px;
@@ -36,7 +36,7 @@ const ErrorTitle = styled.div`
 
 const ErrorMessage = styled.div`
   font-weight: 900;
-  font-size: 0.85em;
+  font-size: 0.9em;
   color: #808080;
   text-align: left;
 `;
