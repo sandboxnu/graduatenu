@@ -6,6 +6,7 @@ import { RedColorButton } from "../components/common/ColoredButtons";
 import { removeAuthTokenFromCookies } from "../utils/auth-helpers";
 import { useDispatch } from "react-redux";
 import { resetStudentAction } from "../state/actions/studentActions";
+import { GraduateHeader } from "../components/common/GraduateHeader";
 
 const Header = styled.div`
   display: flex;
@@ -60,12 +61,7 @@ const GenericAdvisingTemplate: React.FC = ({ children }) => {
 
   return (
     <Container>
-      <Header>
-        <HomeText>GraduateNU</HomeText>
-        <RedColorButton variant="contained" onClick={() => logOut()}>
-          Logout
-        </RedColorButton>
-      </Header>
+      <GraduateHeader logOut={logOut} />
       <TabsWrapper>
         <Tabs
           value={currentTab}
