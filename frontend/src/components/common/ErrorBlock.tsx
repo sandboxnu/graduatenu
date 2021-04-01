@@ -46,9 +46,7 @@ const ErrorImage = styled.img`
   min-height: 100px;
 `;
 
-interface ErrorBlockProps {}
-
-export class ErrorBlock extends React.Component<ErrorBlockProps> {
+export class ErrorBlock extends React.Component {
   render() {
     return (
       <ErrorContainer>

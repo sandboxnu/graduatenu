@@ -4,14 +4,12 @@ import {
   IAbrStudent,
   StudentsAPI,
 } from "../../services/AdvisorService";
-import { getAuthToken } from "../../utils/auth-helpers";
 import styled from "styled-components";
 import { LinearProgress } from "@material-ui/core";
 import { Search } from "../../components/common/Search";
 import { useHistory } from "react-router";
 import { Container } from "./Shared";
 import { ErrorBlock } from "../../components/common/ErrorBlock";
-import advisingErrorPic from "../../assets/advising-error.png";
 
 const StudentListScrollContainer = styled.div`
   width: auto;
@@ -79,50 +77,6 @@ const StudentEmailNUIDContainer = styled.div`
   color: gray;
 `;
 
-const ErrorContainer = styled.div`
-  margin-top: 30px;
-  border: 1px solid red;
-  border-radius: 10px;
-  width: auto;
-  padding: 20px;
-  background-color: #ececec 
-  height: 50vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100px;
-`;
-
-const ErrorTextContainer = styled.div`
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  flex-direction: column;
-  max-height: 20%;
-  min-height: 100px;
-  max-width: 270px;
-  padding: 15px;
-`;
-
-const ErrorTitle = styled.div`
-  font-weight: 900;
-  font-size: 2em;
-  color: #eb5757;
-  text-align: left;
-`;
-
-const ErrorMessage = styled.div`
-  font-weight: 900;
-  font-size: 0.85em;
-  color: #808080;
-  text-align: left;
-`;
-
-const ErrorImage = styled.img`
-  max-height: 20%;
-  min-height: 100px;
-`;
-
 const EMPTY_STUDENT_LIST: IAbrStudent[] = [];
 
 const Student = (props: IAbrStudent) => {
@@ -161,7 +115,6 @@ export const StudentsList = () => {
       .catch(err => {
         console.log(err);
         setIsError(true);
-        console.log(isError);
       });
   };
 
