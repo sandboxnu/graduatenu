@@ -32,6 +32,7 @@ import {
   useTemplatesApi,
 } from "./useTemplates";
 import { SaveInParentConcentrationDropdown } from "../../components/ConcentrationDropdown";
+import { BASE_FORMATTED_COOP_CYCLES } from "../../plans/coopCycles";
 
 const InnerSection = styled.section`
   position: fixed;
@@ -134,6 +135,7 @@ export const PlanUploadPopper: React.FC<PlanUploadPopperProps> = ({
   const [catalogYear, setCatalogYear] = useState<number | null>(null);
   const [major, setMajor] = useState<Major | null>(null);
   const [concentration, setConcentration] = useState<string | null>(null);
+  const [coopCycle, setCoopCycle] = useState<string | null>(null);
   const [namedSchedules, setNamedSchedules] = useState<[string, Schedule][]>(
     []
   );
@@ -243,6 +245,34 @@ export const PlanUploadPopper: React.FC<PlanUploadPopperProps> = ({
     );
   }, [catalogYear, errors, majors, showErrors]);
 
+  const CoopCycleDropdown = useMemo(() => {
+    if (!major) {
+      return;
+    }
+
+    const options = ["None", ...BASE_FORMATTED_COOP_CYCLES];
+
+    const onChange = (e: React.ChangeEvent<{}>, value: string | null) => {
+      setCoopCycle(value || null);
+    };
+
+    return (
+      <Autocomplete
+        disableListWrap
+        options={options}
+        renderInput={params => (
+          <TextField
+            {...params}
+            variant="outlined"
+            label="Co-op Cycle"
+            fullWidth
+          />
+        )}
+        onChange={onChange}
+      />
+    );
+  }, [major]);
+
   const namedScheduleToCreateTemplatePlan = useCallback(
     (
       [name, schedule]: [string, Schedule],
@@ -255,14 +285,14 @@ export const PlanUploadPopper: React.FC<PlanUploadPopperProps> = ({
         schedule: dndSchedule,
         catalog_year: catalogYear,
         major: major ? major.name : null,
-        coop_cycle: null,
-        concentration: concentration ?? null,
+        coop_cycle: coopCycle || null,
+        concentration: concentration || null,
         folder_id: folderId,
         folder_name: null,
         course_counter: courseCounter,
       };
     },
-    [catalogYear, concentration, major]
+    [catalogYear, concentration, coopCycle, major]
   );
 
   const getFolderIdForNewTemplates = useCallback(async () => {
@@ -363,6 +393,7 @@ export const PlanUploadPopper: React.FC<PlanUploadPopperProps> = ({
               showError={showErrors}
               useLabel
             />
+            {CoopCycleDropdown}
             <ExcelWorkbookUpload setNamedSchedules={setNamedSchedules} />
           </FieldContainer>
           <RedColorButton onClick={onSubmit}>Import</RedColorButton>
