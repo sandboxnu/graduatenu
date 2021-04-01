@@ -32,9 +32,16 @@ const FolderSelectionTabContainer = styled.div`
 
 export interface IFolderSelectionContext {
   readonly folders: IFolderData[];
+  readonly selectedFolderId: number | null;
   readonly setSelectedFolderId: (selectedFolderId: number | null) => void;
   readonly newFolderName: string;
   readonly setNewFolderName: (newFolderName: string) => void;
+  readonly setError: (error: string) => void;
+  // This param being optional is a temporary fix before form error handling is overhauled to
+  // ensure that this component can still be used on the TemplateInfoPage which doesn't track
+  // errors for its fields. If showErrors is not supplied, then the "Required field" message is
+  // not shown.
+  readonly showErrors?: boolean;
 }
 
 export const FolderSelectionContext = createContext<
@@ -43,20 +50,19 @@ export const FolderSelectionContext = createContext<
 
 interface DisplayedFolderInputFieldProps {
   readonly creatingNewFolder: boolean;
-  readonly hasDuplicateFolderName: boolean;
-}
-
-interface FolderSelectionProps {
-  readonly setHasDuplicateFolderName: (hasDuplicateFolderName: boolean) => void;
+  readonly error: string;
 }
 
 const DisplayedFolderInputField: React.FC<DisplayedFolderInputFieldProps> = ({
   creatingNewFolder,
-  hasDuplicateFolderName,
+  error,
 }) => {
-  const { folders, setSelectedFolderId, setNewFolderName } = useContext(
-    FolderSelectionContext
-  ) as IFolderSelectionContext;
+  const {
+    folders,
+    setSelectedFolderId,
+    setNewFolderName,
+    showErrors,
+  } = useContext(FolderSelectionContext) as IFolderSelectionContext;
 
   useEffect(() => {
     setSelectedFolderId(null);
@@ -66,25 +72,23 @@ const DisplayedFolderInputField: React.FC<DisplayedFolderInputFieldProps> = ({
   // TODO: FIx new folder input being a greater height than existing folder input
   if (creatingNewFolder) {
     return (
-      <FormControl variant="outlined" error={hasDuplicateFolderName} fullWidth>
+      <FormControl variant="outlined" error={showErrors && !!error} fullWidth>
         <TextField
           id="outlined-basic"
           label={"New folder name"}
           variant="outlined"
           onChange={event => setNewFolderName(event.target.value)}
           placeholder=""
-          error={hasDuplicateFolderName}
+          error={showErrors && !!error}
           fullWidth
         />
-        <FormHelperText>
-          {hasDuplicateFolderName && "Folder name has already been taken"}
-        </FormHelperText>
+        <FormHelperText>{showErrors && error}</FormHelperText>
       </FormControl>
     );
   }
 
   return (
-    <FormControl variant="outlined" fullWidth>
+    <FormControl variant="outlined" fullWidth error={showErrors && !!error}>
       <Autocomplete
         disableListWrap
         fullWidth
@@ -96,6 +100,7 @@ const DisplayedFolderInputField: React.FC<DisplayedFolderInputFieldProps> = ({
             variant="outlined"
             label={"Existing folder"}
             fullWidth
+            error={showErrors && !!error}
           />
         )}
         onChange={(event, newValue: IFolderData | null) => {
@@ -107,29 +112,38 @@ const DisplayedFolderInputField: React.FC<DisplayedFolderInputFieldProps> = ({
           setSelectedFolderId(null);
         }}
       />
+      <FormHelperText>{showErrors && error}</FormHelperText>
     </FormControl>
   );
 };
 
-export const FolderSelection: React.FC<FolderSelectionProps> = ({
-  setHasDuplicateFolderName,
-}) => {
+export const FolderSelection: React.FC = () => {
   const EXISTING_FOLDER_TAB_INDEX = 0;
   const NEW_FOLDER_TAB_INDEX = 1;
 
   const [tabValue, setTabValue] = useState(EXISTING_FOLDER_TAB_INDEX);
-  const { folders, newFolderName, setNewFolderName } = useContext(
-    FolderSelectionContext
-  ) as IFolderSelectionContext;
+  const {
+    folders,
+    selectedFolderId,
+    newFolderName,
+    setNewFolderName,
+    setError,
+    showErrors,
+  } = useContext(FolderSelectionContext) as IFolderSelectionContext;
 
   const creatingNewFolder = useMemo(() => tabValue === NEW_FOLDER_TAB_INDEX, [
     tabValue,
   ]);
 
-  const hasDuplicateFolderName = useMemo(
-    () => folders.some(folder => folder.name === newFolderName),
-    [folders, newFolderName]
-  );
+  const error = useMemo(() => {
+    if (showErrors !== undefined && !selectedFolderId && !newFolderName) {
+      return "Required field";
+    } else if (folders.some(folder => folder.name === newFolderName)) {
+      return "Folder name has already been taken";
+    }
+
+    return "";
+  }, [folders, newFolderName, selectedFolderId, showErrors]);
 
   const handleTabChange = useCallback(
     (event: React.ChangeEvent<{}>, newValue: number) => {
@@ -140,20 +154,23 @@ export const FolderSelection: React.FC<FolderSelectionProps> = ({
 
   // This allows this form to set errors within the parent form.
   useEffect(() => {
-    setHasDuplicateFolderName(hasDuplicateFolderName);
-  }, [hasDuplicateFolderName, setHasDuplicateFolderName]);
+    setError(error);
+  }, [error, setError]);
 
   if (folders.length < 1) {
     return (
-      <TextField
-        id="outlined-basic"
-        label={"New folder name"}
-        variant="outlined"
-        onChange={event => setNewFolderName(event.target.value)}
-        placeholder=""
-        error={hasDuplicateFolderName}
-        fullWidth
-      />
+      <FormControl variant="outlined" error={showErrors && !!error} fullWidth>
+        <TextField
+          id="outlined-basic"
+          label={"New folder name"}
+          variant="outlined"
+          onChange={event => setNewFolderName(event.target.value)}
+          placeholder=""
+          error={showErrors && !!error}
+          fullWidth
+        />
+        <FormHelperText>{showErrors && error}</FormHelperText>
+      </FormControl>
     );
   }
 
@@ -175,7 +192,7 @@ export const FolderSelection: React.FC<FolderSelectionProps> = ({
       </FolderSelectionTabContainer>
       <DisplayedFolderInputField
         creatingNewFolder={creatingNewFolder}
-        hasDuplicateFolderName={hasDuplicateFolderName}
+        error={error}
       />
     </FolderSelectionContainer>
   );

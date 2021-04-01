@@ -163,9 +163,11 @@ export const NewTemplatesPage: React.FC<RouteComponentProps<{}>> = ({
     <FolderSelectionContext.Provider
       value={{
         folders,
+        selectedFolderId,
         setSelectedFolderId,
         newFolderName,
         setNewFolderName,
+        setError: () => {},
       }}
     >
       <NewTemplatesPageContainer>
@@ -180,9 +182,7 @@ export const NewTemplatesPage: React.FC<RouteComponentProps<{}>> = ({
             error={false}
             fullWidth
           />
-          <FolderSelection
-            setHasDuplicateFolderName={setHasDuplicateFolderName}
-          />
+          <FolderSelection />
           <Dropdown
             label="Catalog year"
             options={catalogYears}

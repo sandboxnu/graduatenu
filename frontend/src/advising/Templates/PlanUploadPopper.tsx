@@ -1,6 +1,18 @@
-import { IconButton, Modal, TextField } from "@material-ui/core";
+import {
+  FormControl,
+  FormHelperText,
+  IconButton,
+  Modal,
+  TextField,
+} from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
-import React, { useState, useCallback, useMemo, useContext } from "react";
+import React, {
+  useState,
+  useCallback,
+  useMemo,
+  useContext,
+  useEffect,
+} from "react";
 import CloseIcon from "@material-ui/icons/Close";
 import { Major, Schedule } from "../../../../common/types";
 import { RedColorButton } from "../../components/common/ColoredButtons";
@@ -46,9 +58,61 @@ const FieldContainer = styled.div`
 `;
 
 interface PlanUploadPopperProps {
-  visible: boolean;
-  setVisible: (visible: boolean) => void;
+  readonly visible: boolean;
+  readonly setVisible: (visible: boolean) => void;
 }
+
+interface PlanUploadPopperFields {
+  readonly selectedFolderId: number | null;
+  readonly newFolderName: string;
+  readonly catalogYear: number | null;
+  readonly major: Major | null;
+  readonly namedSchedules: [string, Schedule][];
+}
+
+const REQUIRED_FIELD_ERROR = "Required field";
+
+// TODO:
+// Display errors, finish up handling, look into graphQL stuff
+const usePlanUploadPopperErrors = (fields: PlanUploadPopperFields) => {
+  const [folderSelectionError, setFolderSelectionError] = useState<string>("");
+
+  const catalogYearError = useMemo(() => {
+    if (!fields.catalogYear) {
+      return REQUIRED_FIELD_ERROR;
+    }
+
+    return "";
+  }, [fields.catalogYear]);
+
+  const majorError = useMemo(() => {
+    if (!fields.major) {
+      return REQUIRED_FIELD_ERROR;
+    } else if (fields.major && !fields.catalogYear) {
+      return "Cannot have major without catalog year";
+    }
+
+    return "";
+  }, [fields.catalogYear, fields.major]);
+
+  const namedSchedulesError = useMemo(() => {
+    if (fields.namedSchedules.length < 1) {
+      return "No templates uploaded";
+    }
+
+    return "";
+  }, [fields.namedSchedules.length]);
+
+  return {
+    errors: {
+      folderSelectionError,
+      catalogYearError,
+      majorError,
+      namedSchedulesError,
+    },
+    setFolderSelectionError,
+  };
+};
 
 export const PlanUploadPopper: React.FC<PlanUploadPopperProps> = ({
   visible,
@@ -56,12 +120,19 @@ export const PlanUploadPopper: React.FC<PlanUploadPopperProps> = ({
 }) => {
   const [selectedFolderId, setSelectedFolderId] = useState<number | null>(null);
   const [newFolderName, setNewFolderName] = useState<string>("");
-  const [hasDuplicateFolderName, setHasDuplicateFolderName] = useState(false);
   const [catalogYear, setCatalogYear] = useState<number | null>(null);
   const [major, setMajor] = useState<Major | null>(null);
   const [namedSchedules, setNamedSchedules] = useState<[string, Schedule][]>(
     []
   );
+  const [showErrors, setShowErrors] = useState<boolean>(false);
+  const { errors, setFolderSelectionError } = usePlanUploadPopperErrors({
+    selectedFolderId,
+    newFolderName,
+    catalogYear,
+    major,
+    namedSchedules,
+  });
 
   const { userId, majors } = useSelector((state: AppState) => ({
     userId: getAdvisorUserIdFromState(state),
@@ -73,65 +144,87 @@ export const PlanUploadPopper: React.FC<PlanUploadPopperProps> = ({
   const { templates: folders } = useTemplatesApi("");
 
   // The parent templates fetcher is used to update the templates shown in the
-  // TemplateListPage while maintaining any search query used.
+  // TemplateListPage while maintaining any search query used after adding templates.
   const { fetchTemplates: fetchParentTemplates } = useContext(
     TemplateContext
   ) as ITemplateContext;
 
-  // Errors:
-  // - no folder selected
-  // - duplicate major name
-  // - no catalog year selected
-  // - no major selected
-  // - failed to convert schedules (parsing error)
+  useEffect(() => {
+    if (!visible) {
+      setShowErrors(false);
+    }
+  }, [visible]);
 
-  const catalogYearDropdown = useMemo(() => {
+  const CatalogYearDropdown = useMemo(() => {
     const catalogYears = [
       ...Array.from(
         new Set(majors.map((maj: Major) => maj.yearVersion.toString()))
       ),
     ];
 
-    return (
-      <Autocomplete
-        disableListWrap
-        options={catalogYears}
-        renderInput={params => (
-          <TextField
-            {...params}
-            variant="outlined"
-            label="Catalog Year"
-            fullWidth
-          />
-        )}
-        onChange={(e, value) => {
-          setCatalogYear(value === "" ? null : Number(value));
-          setMajor(null);
-        }}
-      />
-    );
-  }, [majors]);
+    const onChange = (e: React.ChangeEvent<{}>, value: string | null) => {
+      setCatalogYear(value === "" ? null : Number(value));
+      setMajor(null);
+    };
 
-  const majorDropdown = useMemo(() => {
+    const error = showErrors && errors.catalogYearError;
+
+    return (
+      <FormControl variant="outlined" error={!!error} fullWidth>
+        <Autocomplete
+          disableListWrap
+          options={catalogYears}
+          renderInput={params => (
+            <TextField
+              {...params}
+              variant="outlined"
+              label="Catalog Year"
+              fullWidth
+              error={!!error}
+            />
+          )}
+          onChange={onChange}
+        />
+        <FormHelperText>{error}</FormHelperText>
+      </FormControl>
+    );
+  }, [errors.catalogYearError, majors, showErrors]);
+
+  const MajorDropdown = useMemo(() => {
+    if (!catalogYear) {
+      return;
+    }
+
     const options = majors
       .filter(maj => maj.yearVersion === catalogYear)
       .map(maj => maj.name);
 
+    const onChange = (e: React.ChangeEvent<{}>, value: string | null) => {
+      setMajor(findMajorFromName(value, majors, catalogYear) || null);
+    };
+
+    const error = showErrors && errors.majorError;
+
     return (
-      catalogYear && (
+      <FormControl variant="outlined" error={!!error} fullWidth>
         <Autocomplete
           disableListWrap
           options={options}
           renderInput={params => (
-            <TextField {...params} variant="outlined" label="Major" fullWidth />
+            <TextField
+              {...params}
+              variant="outlined"
+              label="Major"
+              error={!!error}
+              fullWidth
+            />
           )}
-          onChange={(e, value) => {
-            setMajor(findMajorFromName(value, majors, catalogYear) || null);
-          }}
+          onChange={onChange}
         />
-      )
+        <FormHelperText>{error}</FormHelperText>
+      </FormControl>
     );
-  }, [catalogYear, majors]);
+  }, [catalogYear, errors, majors, showErrors]);
 
   const namedScheduleToCreateTemplatePlan = useCallback(
     (
@@ -167,11 +260,6 @@ export const PlanUploadPopper: React.FC<PlanUploadPopperProps> = ({
   }, [newFolderName, selectedFolderId, userId]);
 
   const createTemplatesFromNamedSchedules = useCallback(async () => {
-    if (namedSchedules.length < 1) {
-      return;
-      // TODO error handling
-    }
-
     const folderId = await getFolderIdForNewTemplates();
 
     if (!folderId) {
@@ -198,13 +286,42 @@ export const PlanUploadPopper: React.FC<PlanUploadPopperProps> = ({
     userId,
   ]);
 
+  const onSubmit = useCallback(() => {
+    if (Object.values(errors).some(Boolean)) {
+      setShowErrors(true);
+      return;
+    }
+
+    createTemplatesFromNamedSchedules();
+  }, [createTemplatesFromNamedSchedules, errors]);
+
+  const CloseButton = useMemo(
+    () => (
+      <IconButton
+        style={{
+          padding: "3px",
+          position: "absolute",
+          top: "12px",
+          right: "18px",
+        }}
+        onClick={() => setVisible(false)}
+      >
+        <CloseIcon />
+      </IconButton>
+    ),
+    [setVisible]
+  );
+
   return (
     <FolderSelectionContext.Provider
       value={{
         folders,
+        selectedFolderId,
         setSelectedFolderId,
         newFolderName,
         setNewFolderName,
+        setError: setFolderSelectionError,
+        showErrors,
       }}
     >
       <Modal
@@ -215,29 +332,15 @@ export const PlanUploadPopper: React.FC<PlanUploadPopperProps> = ({
         aria-describedby="simple-modal-description"
       >
         <InnerSection>
-          <IconButton
-            style={{
-              padding: "3px",
-              position: "absolute",
-              top: "12px",
-              right: "18px",
-            }}
-            onClick={() => setVisible(false)}
-          >
-            <CloseIcon />
-          </IconButton>
+          {CloseButton}
           <h1 id="simple-modal-title">Upload Plans</h1>
           <FieldContainer>
-            <FolderSelection
-              setHasDuplicateFolderName={setHasDuplicateFolderName}
-            />
-            {catalogYearDropdown}
-            {majorDropdown}
+            <FolderSelection />
+            {CatalogYearDropdown}
+            {MajorDropdown}
             <ExcelWorkbookUpload setNamedSchedules={setNamedSchedules} />
           </FieldContainer>
-          <RedColorButton onClick={createTemplatesFromNamedSchedules}>
-            Import
-          </RedColorButton>
+          <RedColorButton onClick={onSubmit}>Import</RedColorButton>
         </InnerSection>
       </Modal>
     </FolderSelectionContext.Provider>

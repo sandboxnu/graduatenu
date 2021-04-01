@@ -5,7 +5,7 @@ import {
 } from "../utils/excelParser";
 import { Schedule } from "../../../common/types";
 import { Tooltip } from "@material-ui/core";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import styled from "styled-components";
 
 const ErrorTextWrapper = styled.div`
@@ -69,6 +69,16 @@ export const ExcelWorkbookUpload: React.FC<MultiExcelUploadProps> = ({
     }
   };
 
+  const ResultText = useMemo(() => {
+    if (uploadError) {
+      return (
+        <ErrorTextWrapper>
+          <ErrorText>There was an error parsing your schedules.</ErrorText>
+        </ErrorTextWrapper>
+      );
+    }
+  }, [uploadError]);
+
   return (
     <div>
       <Tooltip
@@ -84,11 +94,7 @@ export const ExcelWorkbookUpload: React.FC<MultiExcelUploadProps> = ({
           style={{ width: "100%" }}
         />
       </Tooltip>
-      {uploadError && (
-        <ErrorTextWrapper>
-          <ErrorText>There was an error parsing your schedules.</ErrorText>
-        </ErrorTextWrapper>
-      )}
+      {ResultText}
     </div>
   );
 };
