@@ -10,6 +10,7 @@ import { LinearProgress } from "@material-ui/core";
 import { Search } from "../../components/common/Search";
 import { useHistory } from "react-router";
 import { Container } from "./Shared";
+import { ErrorBlock } from "../../components/common/ErrorBlock";
 import advisingErrorPic from "../../assets/advising-error.png";
 
 const StudentListScrollContainer = styled.div`
@@ -146,7 +147,7 @@ export const StudentsList = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [pageNumber, setPageNumber] = useState(0);
   const [isLastPage, setIsLastPage] = useState(false);
-  const [isError, setIsError] = useState(true);
+  const [isError, setIsError] = useState(false);
 
   const fetchStudents = (currentStudents: IAbrStudent[], page: number) => {
     setIsLoading(true);
@@ -167,7 +168,7 @@ export const StudentsList = () => {
   useEffect(() => {
     setStudents(EMPTY_STUDENT_LIST);
     fetchStudents(EMPTY_STUDENT_LIST, 0);
-  }, [searchQuery]);
+  }, [searchQuery, isError]);
 
   return (
     <Container>
@@ -179,16 +180,7 @@ export const StudentsList = () => {
         isSmall={false}
       />
       {isError ? (
-        <ErrorContainer>
-          <ErrorImage src={advisingErrorPic} alt="Error Doggo" />
-          <ErrorTextContainer>
-            <ErrorTitle>Oh no!</ErrorTitle>
-            <ErrorMessage>
-              We are unable to retrieve the information you need. Please refresh
-              your browser. If the problem persists, contact us here.
-            </ErrorMessage>
-          </ErrorTextContainer>
-        </ErrorContainer>
+        <ErrorBlock />
       ) : (
         <StudentListContainer>
           {isLoading ? (
