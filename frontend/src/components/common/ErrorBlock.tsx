@@ -46,6 +46,9 @@ const ErrorImage = styled.img`
   min-height: 100px;
 `;
 
+/**
+ * A general use error component with Oh No text, a message, and an error doggo
+ */
 export class ErrorBlock extends React.Component {
   render() {
     return (
