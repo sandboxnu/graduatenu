@@ -31,6 +31,7 @@ import {
   TemplateContext,
   useTemplatesApi,
 } from "./useTemplates";
+import { SaveInParentConcentrationDropdown } from "../../components/ConcentrationDropdown";
 
 const InnerSection = styled.section`
   position: fixed;
@@ -67,15 +68,15 @@ interface PlanUploadPopperFields {
   readonly newFolderName: string;
   readonly catalogYear: number | null;
   readonly major: Major | null;
+  readonly concentration: string | null;
   readonly namedSchedules: [string, Schedule][];
 }
 
 const REQUIRED_FIELD_ERROR = "Required field";
 
-// TODO:
-// Display errors, finish up handling, look into graphQL stuff
 const usePlanUploadPopperErrors = (fields: PlanUploadPopperFields) => {
   const [folderSelectionError, setFolderSelectionError] = useState<string>("");
+  const [hasConcentrationError, setHasConcentrationError] = useState<boolean>();
 
   const catalogYearError = useMemo(() => {
     if (!fields.catalogYear) {
@@ -95,6 +96,14 @@ const usePlanUploadPopperErrors = (fields: PlanUploadPopperFields) => {
     return "";
   }, [fields.catalogYear, fields.major]);
 
+  const concentrationError = useMemo(() => {
+    if (hasConcentrationError) {
+      return "A concentration is required for your selected major";
+    }
+
+    return "";
+  }, [hasConcentrationError]);
+
   const namedSchedulesError = useMemo(() => {
     if (fields.namedSchedules.length < 1) {
       return "No templates uploaded";
@@ -108,9 +117,11 @@ const usePlanUploadPopperErrors = (fields: PlanUploadPopperFields) => {
       folderSelectionError,
       catalogYearError,
       majorError,
+      concentrationError,
       namedSchedulesError,
     },
     setFolderSelectionError,
+    setHasConcentrationError,
   };
 };
 
@@ -122,15 +133,21 @@ export const PlanUploadPopper: React.FC<PlanUploadPopperProps> = ({
   const [newFolderName, setNewFolderName] = useState<string>("");
   const [catalogYear, setCatalogYear] = useState<number | null>(null);
   const [major, setMajor] = useState<Major | null>(null);
+  const [concentration, setConcentration] = useState<string | null>(null);
   const [namedSchedules, setNamedSchedules] = useState<[string, Schedule][]>(
     []
   );
   const [showErrors, setShowErrors] = useState<boolean>(false);
-  const { errors, setFolderSelectionError } = usePlanUploadPopperErrors({
+  const {
+    errors,
+    setFolderSelectionError,
+    setHasConcentrationError,
+  } = usePlanUploadPopperErrors({
     selectedFolderId,
     newFolderName,
     catalogYear,
     major,
+    concentration,
     namedSchedules,
   });
 
@@ -239,13 +256,13 @@ export const PlanUploadPopper: React.FC<PlanUploadPopperProps> = ({
         catalog_year: catalogYear,
         major: major ? major.name : null,
         coop_cycle: null,
-        concentration: null,
+        concentration: concentration ?? null,
         folder_id: folderId,
         folder_name: null,
         course_counter: courseCounter,
       };
     },
-    [catalogYear, major]
+    [catalogYear, concentration, major]
   );
 
   const getFolderIdForNewTemplates = useCallback(async () => {
@@ -338,6 +355,14 @@ export const PlanUploadPopper: React.FC<PlanUploadPopperProps> = ({
             <FolderSelection />
             {CatalogYearDropdown}
             {MajorDropdown}
+            <SaveInParentConcentrationDropdown
+              major={major ?? undefined}
+              concentration={concentration}
+              setConcentration={setConcentration}
+              setError={setHasConcentrationError}
+              showError={showErrors}
+              useLabel
+            />
             <ExcelWorkbookUpload setNamedSchedules={setNamedSchedules} />
           </FieldContainer>
           <RedColorButton onClick={onSubmit}>Import</RedColorButton>
