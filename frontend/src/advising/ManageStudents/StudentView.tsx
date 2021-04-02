@@ -29,6 +29,7 @@ import { useHistory, useParams } from "react-router";
 import { AssignTemplateToUserModal } from "./AssignTemplateToUserModal";
 import { alterScheduleToHaveCorrectYears } from "../../utils/schedule-helpers";
 import { deleteTemplatePlan } from "../../services/TemplateService";
+import { ErrorBlock } from "../../components/common/ErrorBlock";
 
 const StudentViewContainer = styled.div`
   display: flex;
@@ -133,6 +134,7 @@ export const StudentView: React.FC = () => {
   const [student, setStudent] = useState<IUserData | null>(null);
   const [noPlans, setNoPlans] = useState(false);
   const [openModal, setOpenModal] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   const assignTemplate = async (
     templateData: ITemplatePlan,
@@ -171,15 +173,25 @@ export const StudentView: React.FC = () => {
   );
 
   useEffect(() => {
-    fetchUser(id).then(response => {
-      setStudent(response.user);
-      setFetchingStudent(false);
-    });
-    findAllPlansForUser(id).then((plans: IPlanData[]) => {
-      dispatch(setUserPlansAction(plans, 2020, transferCourses));
-      if (!plans || !plans.length || !plans[0].schedule) setNoPlans(true);
-    });
-  }, []);
+    fetchUser(id)
+      .then(response => {
+        setStudent(response.user);
+        setFetchingStudent(false);
+      })
+      .catch(err => {
+        console.log(err);
+        setIsError(true);
+      });
+    findAllPlansForUser(id)
+      .then((plans: IPlanData[]) => {
+        dispatch(setUserPlansAction(plans, 2020, transferCourses));
+        if (!plans || !plans.length || !plans[0].schedule) setNoPlans(true);
+      })
+      .catch(err => {
+        console.log(err);
+        setIsError(true);
+      });
+  }, [isError]);
 
   const renderStudentInfo = () => {
     return (
@@ -268,8 +280,14 @@ export const StudentView: React.FC = () => {
         <ArrowBack />
       </IconButton>
       <StudentViewContainer>
-        {renderStudentInfo()}
-        {renderSchedule()}
+        {isError ? (
+          <ErrorBlock />
+        ) : (
+          <>
+            {renderStudentInfo()}
+            {renderSchedule()}
+          </>
+        )}
       </StudentViewContainer>
       <AssignTemplateToUserModal
         isOpen={openModal}

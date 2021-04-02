@@ -23,7 +23,7 @@ export const getStudents = (searchQuery: string, pageNumber: number) =>
     method: "GET",
     headers: {
       // TODO: Tal & Arkin fix auth again pls
-      Authorization: "Token ",
+      Authorization: "Token " + getAuthToken(),
     },
   }).then(response => response.json());
 
@@ -47,6 +47,7 @@ export const fetchUser = (userId: number) =>
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Authorization: "Token " + getAuthToken(),
+      // TODO: Tal & Arkin fix auth again pls
+      Authorization: "Token ",
     },
   }).then(response => response.json());
