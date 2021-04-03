@@ -3,9 +3,9 @@ class CreateAppointments < ActiveRecord::Migration[6.0]
     create_table :appointments do |t|
       t.bigint :student_id, null: false
       t.bigint :plan_id, null: false
-      t.bigint :advisor_id, null: false
       t.datetime :appointment_time, null: false
-      t.string :seen, default: false
+      t.boolean :seen, default: false
+      t.references :user, null: false, foreign_key: true
     end
   end
 end

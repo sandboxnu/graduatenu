@@ -18,9 +18,10 @@ ActiveRecord::Schema.define(version: 2021_04_03_190910) do
   create_table "appointments", force: :cascade do |t|
     t.bigint "student_id", null: false
     t.bigint "plan_id", null: false
-    t.bigint "advisor_id", null: false
     t.datetime "appointment_time", null: false
-    t.string "seen", default: "f"
+    t.boolean "seen", default: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_appointments_on_user_id"
   end
 
   create_table "folders", force: :cascade do |t|
@@ -112,5 +113,6 @@ ActiveRecord::Schema.define(version: 2021_04_03_190910) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "appointments", "users"
   add_foreign_key "plans", "users"
 end
