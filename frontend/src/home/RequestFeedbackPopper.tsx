@@ -88,7 +88,7 @@ export const RequestFeedbackPopper: React.FC = () => {
   const [
     appointment,
     setAppointment,
-  ] = useState(null);
+  ] = useState<number>(Date.now());
 
   useDebouncedEffect(
     () =>
@@ -168,7 +168,8 @@ export const RequestFeedbackPopper: React.FC = () => {
             await requestApproval(
               userId,
               findAdvisorEmail(selectedAdvisor),
-              planId
+              planId,
+              appointment
             );
             setIsOpen(false);
           }}

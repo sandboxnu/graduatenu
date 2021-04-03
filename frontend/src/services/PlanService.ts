@@ -133,11 +133,12 @@ export const updatePlanLastViewed = (
 export const requestApproval = (
   userId: number,
   advisorEmail: string,
-  planId: number
+  planId: number,
+  appointmentTime: number,
 ) =>
   fetch(`/api/users/${userId}/plans/${planId}/request_approval`, {
     method: "PUT",
-    body: JSON.stringify({ plan: { advisor_email: advisorEmail } }),
+    body: JSON.stringify({ plan: { advisor_email: advisorEmail, appointmentTime: appointmentTime} }),
     headers: {
       Authorization: "Token " + getAuthToken(),
       "Content-Type": "application/json",
