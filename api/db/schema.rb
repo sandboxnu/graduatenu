@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_28_003742) do
+ActiveRecord::Schema.define(version: 2021_04_03_190910) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "appointments", force: :cascade do |t|
+    t.bigint "student_id", null: false
+    t.bigint "plan_id", null: false
+    t.bigint "advisor_id", null: false
+    t.datetime "appointment_time", null: false
+    t.string "seen", default: "f"
+  end
 
   create_table "folders", force: :cascade do |t|
     t.string "name"
