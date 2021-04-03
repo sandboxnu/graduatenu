@@ -105,7 +105,7 @@ class PlansController < ApplicationController
       if @plan
         @plan.update(last_requested_approval: Time.zone.now)
         advisor = User.find_by(email: request_approval_params[:advisor_email])
-        NotificationMailer.request_approval_email(advisor, @user, @plan).deliver
+        Appointment.create!(user_id: advisor.id, student_id: @current_user_id, plan_id: @plan.id, appointment_time: request_approval_params[:appointment_time])
         render status: 200, json: @controller.to_json
       else
         render json: {error: "No such plan."}, status: :unprocessable_entity
@@ -143,7 +143,7 @@ end
   end
 
   def request_approval_params
-    params.require(:plan).permit(:advisor_email)
+    params.require(:plan).permit(:advisor_email, :appointment_time)
   end
 
   def last_viewed_params
@@ -176,6 +176,7 @@ end
 
   #sets the plan for the current user
   def set_user_plan
+    
     @plan = Plan.find_by(id: params[:id], user_id: params[:user_id]) # add error handling, when @current_user_id does not exist
   end
 
