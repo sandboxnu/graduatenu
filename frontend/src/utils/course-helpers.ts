@@ -12,16 +12,16 @@ import {
 export async function getScheduleCoursesFromSimplifiedCourseDataAPI(
   courses: ISimplifiedCourseDataAPI[]
 ): Promise<ScheduleCourse[]> {
-  let converetedCourses: ScheduleCourse[] = [];
+  let convertedCourses: ScheduleCourse[] = [];
   await Promise.all(
     courses.map(async c => {
       const course = await fetchCourse(c.subject, c.course_id.toString());
       if (course != null) {
-        converetedCourses.push({ ...course, semester: c.semester || null });
+        convertedCourses.push({ ...course, semester: c.semester || null });
       }
     })
   );
-  return converetedCourses;
+  return convertedCourses;
 }
 
 function isINEUPrereqCourse(val: INEUPrereq): val is INEUPrereqCourse {
