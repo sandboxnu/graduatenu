@@ -8,6 +8,7 @@ import {
   expandAllYearsForActivePlanAction,
   setActivePlanConcentrationAction,
   setActivePlanNameAction,
+  renameCourseInActivePlanAction,
 } from "./../actions/userPlansActions";
 import { DNDSchedule, IPlanData } from "../../models/types";
 import produce from "immer";
@@ -324,6 +325,24 @@ export const userPlansReducer = (
           JSON.stringify(draft.pastSchedule)
         );
         draft.pastSchedule = undefined;
+        return draft;
+      }
+      case getType(renameCourseInActivePlanAction): {
+        const { dndId, semester, newName } = action.payload;
+        const season = convertTermIdToSeason(semester.termId);
+
+        // save prev state with a deep copy
+        draft.pastSchedule = JSON.parse(
+          JSON.stringify(draft.plans[draft.activePlan!])
+        );
+
+        const coursesToRename = draft.plans[draft.activePlan!].schedule.yearMap[
+          semester.year
+        ][season].classes.filter(c => c.dndId == dndId);
+
+        if (coursesToRename) {
+          coursesToRename[0].name = newName;
+        }
         return draft;
       }
       case getType(changeSemesterStatusForActivePlanAction): {
