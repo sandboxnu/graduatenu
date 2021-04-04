@@ -110,7 +110,7 @@ export const userPlansReducer = (
           : openAllYears(draft);
       }
       case getType(setUserPlansAction): {
-        const { plans, academicYear } = action.payload;
+        const { plans, academicYear, transferCourses } = action.payload;
 
         const planMap: { [key: string]: IPlanData } = {};
         plans.forEach((plan: IPlanData) => {
@@ -124,7 +124,7 @@ export const userPlansReducer = (
 
         const container = produceWarnings(
           plans[index]?.schedule,
-          action.payload.transferCourses
+          transferCourses
         );
 
         draft.plans[draft.activePlan!].warnings = container.normalWarnings;
