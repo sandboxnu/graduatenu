@@ -5,6 +5,7 @@ import {
   ISimplifiedCourseDataAPI,
   SeasonEnum,
   StatusEnum,
+  ICourseManagmentBlock,
 } from "../models/types";
 
 const mockClass = (num: number): DNDScheduleCourse => ({
@@ -491,5 +492,25 @@ export const mockKhouryClassesData = [
     course_id: "1130",
     semester: null,
     completion: "TRANSFER",
+  },
+];
+
+export const mockCourseManagmentBlock: ICourseManagmentBlock[] = [
+  {
+    courseId: "CS2500",
+    courseName: "Fundementals of Computer Science 1",
+    numStudents: 500,
+    numConflicts: 200,
+    topThreeConflicts: ["CS1800", "CS1200", "CS4500"],
+    distribution: { 2021: 500 },
+  },
+
+  {
+    courseId: "CS2500",
+    courseName: "Fundementals of Computer Science 1",
+    numStudents: 500,
+    numConflicts: 200,
+    topThreeConflicts: ["CS1800", "CS1200", "CS4500"],
+    distribution: { 2021: 500 },
   },
 ];

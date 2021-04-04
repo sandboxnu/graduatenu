@@ -372,9 +372,11 @@ export interface ICourseManagmentBlock {
   courseId: string;
   courseName: string;
   numStudents: number;
-  conflicts: number;
-  topConflicts: string[];
-  distribution: Map<number, number>;
+  numConflicts: number;
+  topThreeConflicts: string[];
+  distribution: {
+    [key: number]: number;
+  };
 }
 /** ------------------------------------------------------------------------
  *

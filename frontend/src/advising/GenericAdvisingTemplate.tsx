@@ -52,16 +52,9 @@ const GenericAdvisingTemplate: React.FC = ({ children }) => {
     setCurrentTab(newValue);
   };
 
-  const logOut = () => {
-    dispatch(resetStudentAction());
-    window.location.reload();
-    removeAuthTokenFromCookies();
-    history.push("/");
-  };
-
   return (
     <Container>
-      <GraduateHeader logOut={logOut} />
+      <GraduateHeader />
       <TabsWrapper>
         <Tabs
           value={currentTab}

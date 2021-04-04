@@ -20,6 +20,7 @@ import { StudentsList } from "./advising/ManageStudents/StudentsList";
 import { StudentView } from "./advising/ManageStudents/StudentView";
 import { ExpandedStudentView } from "./advising/ManageStudents/ExpandedStudentView";
 import { TemplateBuilderPage } from "./advising/Templates/TemplateBuilderPage";
+import { CourseManagmentPage } from "./advising/CourseManagment";
 
 export const App = ({ store }: { store: Store }) => {
   return (
@@ -45,7 +46,7 @@ export const App = ({ store }: { store: Store }) => {
           />
           <ProtectedRoute path="/advisor" component={AdvisorRouter} />
           {/* requires not logged in */}
-          <UnprotectedRoute path="/managment" component={CourseManagment} />
+          <ProtectedRoute path="/managment" component={CourseManagmentPage} />
           <UnprotectedRoute path="/" component={Onboarding} />
           {/* <Route path="/signup" component={SignupScreen} />
              <Route path="/login" component={LoginScreen} /> */}

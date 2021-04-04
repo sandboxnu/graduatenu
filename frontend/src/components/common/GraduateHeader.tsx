@@ -1,6 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import { RedColorButton } from "./ColoredButtons";
+import { resetStudentAction } from "../../state/actions/studentActions";
+import { removeAuthTokenFromCookies } from "../../utils/auth-helpers";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router";
 
 const Header = styled.div`
   display: flex;
@@ -17,17 +21,19 @@ const HomeText = styled.a`
   color: black;
 `;
 
-interface GraduateHeaderProps {
-  logOut: () => void;
-}
-
-export const GraduateHeader: React.FC<GraduateHeaderProps> = (
-  props: GraduateHeaderProps
-) => {
+export const GraduateHeader: React.FC = () => {
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const logOut = () => {
+    dispatch(resetStudentAction());
+    window.location.reload();
+    removeAuthTokenFromCookies();
+    history.push("/");
+  };
   return (
     <Header>
       <HomeText>GraduateNU</HomeText>
-      <RedColorButton variant="contained" onClick={props.logOut}>
+      <RedColorButton variant="contained" onClick={logOut}>
         Logout
       </RedColorButton>
     </Header>
