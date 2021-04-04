@@ -7,7 +7,12 @@ import {
   Season,
   Status,
 } from "../../common/types";
+import { fetchCourse } from "../../frontend/src/api";
 import { SeasonEnum, StatusEnum } from "../../frontend/src/models/types";
+import { SSL_OP_EPHEMERAL_RSA } from "constants";
+import { resolve } from "dns";
+
+const rp = require("request-promise");
 
 // the year to use as the first year of the schedule.
 const BASE_YEAR: number = 1000;
@@ -16,19 +21,20 @@ const BASE_YEAR: number = 1000;
  * Produces the {@interface Schedule}s for a given plan of study for a major.
  * @param link the link to the plan of study to download.
  */
-export function planOfStudyToSchedule(planofstudy: string): Schedule[] {
+export async function planOfStudyToSchedule(
+  planofstudy: string
+): Promise<Schedule[]> {
   const $ = load(planofstudy);
 
   // the list of found schedules.
-  const schedules: Schedule[] = [];
+  const schedules: Promise<Schedule>[] = [];
 
   // for each of the plans, produce a schedule.
   $(".sc_plangrid tbody").each((planIndex, table) => {
     const schedule = buildSchedule($, table);
     schedules.push(schedule);
   });
-
-  return schedules;
+  return await Promise.all(schedules);
 }
 
 /**
@@ -36,17 +42,21 @@ export function planOfStudyToSchedule(planofstudy: string): Schedule[] {
  * @param $ the page
  * @param table the table of stuff to build the schedule from
  */
-function buildSchedule($: CheerioStatic, table: CheerioElement): Schedule {
+async function buildSchedule(
+  $: CheerioStatic,
+  table: CheerioElement
+): Promise<Schedule> {
   // what year we're on
-  const years: ScheduleYear[] = [];
+  const yearPromises: Promise<ScheduleYear>[] = [];
 
   // information for the current year we're parsing
-  let rows: Array<Array<string | ScheduleCourse>> = [];
+  let rows: Promise<(string | ScheduleCourse)[]>[] = [];
   let totalCredits = "";
 
   // table elements
   const tableRows: CheerioElement[] = [];
-  $(table)
+
+  await $(table)
     .find("tr")
     .each((index, tableRow) => {
       // track the table number.
@@ -58,8 +68,16 @@ function buildSchedule($: CheerioStatic, table: CheerioElement): Schedule {
           rows.push(courses);
         } else if (/^plangridsum/.test(rowClassName)) {
           // make a new year with the existing data
-          const flipped = rows[0].map((col, i) => rows.map(row => row[i]));
-          years.push(buildYear($, flipped));
+
+          const processRows = async (rows: any) => {
+            const courseRowsParsed: Array<any> = await Promise.all(rows);
+            const flipped = courseRowsParsed[0].map((col: any, i: any) =>
+              courseRowsParsed.map(row => row[i])
+            );
+            return await buildYear($, flipped);
+          };
+          yearPromises.push(processRows(rows));
+
           rows = [];
         } else if (/^plangridtotal/.test(rowClassName)) {
           totalCredits = $(tableRow)
@@ -73,7 +91,9 @@ function buildSchedule($: CheerioStatic, table: CheerioElement): Schedule {
     });
 
   // build the schedule, and return.
-  return buildScheduleFromYears(years, totalCredits);
+  const years = await Promise.all(yearPromises);
+  const y = buildScheduleFromYears(years, totalCredits);
+  return y;
 }
 
 /**
@@ -116,10 +136,10 @@ function buildScheduleFromYears(
  *
  * @param nodes
  */
-function addCourses(
+async function addCourses(
   $: CheerioStatic,
   tableRow: CheerioElement
-): Array<ScheduleCourse | string> {
+): Promise<Array<ScheduleCourse | string>> {
   // invariant: each codecol is always followed by an hourscol. also can have colspan, if no class is present.
   let produced: Array<ScheduleCourse | string> = [];
 
@@ -180,8 +200,9 @@ function addCourses(
             subject: "XXXX",
             numCreditsMin: !isNaN(credits) ? credits : 9999,
             numCreditsMax: !isNaN(credits) ? credits : 9999,
-            name: cell.text,
+            name: "",
           });
+
           i += 1;
           break;
         } else if ("" === cell.text) {
@@ -214,12 +235,11 @@ function addCourses(
               subject: split[0],
               numCreditsMin: !isNaN(credits) ? credits : 9999,
               numCreditsMax: !isNaN(credits) ? credits : 9999,
-              name: "",
+              name: (await fetchCourse(split[0], split[1]))?.name || "",
             });
             i += 1;
           } else {
             // we have a random elective.
-
             produced.push({
               classId: "9999",
               subject: "XXXX",
@@ -255,12 +275,11 @@ function addCourses(
  * @param summer1 the summer1 data
  * @param summer2 the summer2 data
  */
-function buildYear(
+async function buildYear(
   $: CheerioStatic,
   seasons: Array<Array<ScheduleCourse | string>>
-): ScheduleYear {
+): Promise<ScheduleYear> {
   // seasons array is not always 4! could be 3 (no summer 2), or 5 (including summer full, as 5th).
-
   const seasonEnums: Season[] = [
     SeasonEnum.FL,
     SeasonEnum.SP,
@@ -289,33 +308,37 @@ function buildYear(
         status = StatusEnum.INACTIVE;
       }
 
-      let classes: ScheduleCourse[] = seasons[i].reduce(function(
-        accumulator: ScheduleCourse[],
+      let classes: Promise<ScheduleCourse>[] = seasons[i].reduce(function(
+        accumulator: Promise<ScheduleCourse>[],
         item: ScheduleCourse | string,
         index: number
-      ): ScheduleCourse[] {
+      ): Promise<ScheduleCourse>[] {
         if (typeof item !== "string") {
           const parsedMultiCourseMatch: RegExp = new RegExp(
             /[A-Z]{2,},\d{4},[A-Z]{2,},\d{4}/
           );
+
           if (parsedMultiCourseMatch.test(item.subject)) {
             const split = item.subject.split(",");
-            accumulator.push({
-              classId: split[1],
-              subject: split[0],
-              numCreditsMin: item.numCreditsMin,
-              numCreditsMax: item.numCreditsMax,
-              name: "",
-            });
-            accumulator.push({
-              classId: split[3],
-              subject: split[2],
-              numCreditsMin: 0,
-              numCreditsMax: 0,
-              name: "",
-            });
+
+            const createCourse = async (
+              index: number
+            ): Promise<ScheduleCourse> => {
+              return {
+                classId: split[index + 1],
+                subject: split[index],
+                numCreditsMin: item.numCreditsMin,
+                numCreditsMax: item.numCreditsMax,
+                name:
+                  (await fetchCourse(split[index], split[index + 1]))?.name ||
+                  "",
+              };
+            };
+
+            accumulator.push(createCourse(0));
+            accumulator.push(createCourse(2));
           } else {
-            accumulator.push(item);
+            accumulator.push(new Promise((resolve, reject) => resolve(item)));
           }
         }
         return accumulator;
@@ -328,7 +351,7 @@ function buildYear(
         termId: seasonTermIds[i],
         year: 0,
         status: status,
-        classes: classes,
+        classes: await Promise.all(classes),
       });
     } else {
       // the season did not exist. we don't have a season!
@@ -381,3 +404,20 @@ function convertSeasonEnumToText(season: Season): string {
   }
   return "";
 }
+
+async function runParser() {
+  /**
+   * testing. move to test file.
+   */
+  let x = await planOfStudyToSchedule(
+    await rp(
+      "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-science/bscs/#planofstudytext"
+    )
+  );
+
+  console.log("--------------------Parsed schedule object--------------------");
+
+  console.log(JSON.stringify(x));
+}
+
+runParser();

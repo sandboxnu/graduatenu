@@ -2,7 +2,8 @@ var catalogToMajor = require("../src/catalog-scraper/catalog_scraper.ts");
 
 var fs = require("fs");
 const rp = require("request-promise");
-const plan_parser = require("../src/plan_parser.ts");
+const plan_parser = require();
+("../src/plan_parser.ts");
 const majors = require("../../common/constants");
 const { supported2018_2019, supported2019_2020, supported2020_2021 } = majors;
 
@@ -25,7 +26,7 @@ test("ensure that catalog_scraper produces the expected output for supported maj
 });
 
 async function createObject(acc, link, major) {
-  const plansOfStudy = plan_parser.planOfStudyToSchedule(await rp(link));
+  const plansOfStudy = await plan_parser.planOfStudyToSchedule(await rp(link));
   const { yearVersion } = major;
   const id = link
     .replace("/#programrequirementstext", "")

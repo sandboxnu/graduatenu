@@ -5,7 +5,8 @@
   "dependencies": {
     "@types/request-promise": "^4.1.44",
     "cross-env": "5.0.5",
-    "dataloader": "^1.4.0"
+    "dataloader": "^1.4.0",
+    "ts-node": "^9.1.1"
   },
   "devDependencies": {
     "@types/cheerio": "^0.22.13",
