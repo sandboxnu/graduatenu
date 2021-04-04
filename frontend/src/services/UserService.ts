@@ -75,8 +75,8 @@ export const simulateKhouryStudentLogin = () =>
       nu_id: "001234567",
       is_advisor: false,
       major: "Computer Science, BSCS",
-      first_name: "Justine",
-      last_name: "Luxo",
+      first_name: "Alex",
+      last_name: "Grob",
       courses: mockKhouryClassesData,
       photo_url:
         "https://prod-web.neu.edu/wasapp/EnterprisePhotoService/PhotoServlet?vid=CCS&er=d1d26b1327817a8d34ce75336e0334cb78f33e63cf907ea82da6d6abcfc15d66244bb291baec1799cf77970e4a519a1cf7d48edaddb97c01",
