@@ -4,11 +4,6 @@ import {
   INEUOrPrereq,
 } from "../../../common/types";
 
-interface SearchResult {
-  type: string;
-  class?: SearchClass;
-}
-
 interface SearchClass {
   name: string;
   classId: string;
@@ -68,51 +63,39 @@ export const fetchCourse = async (
 export const searchCourses = async (
   searchQuery: string,
   minIndex: number = 0,
-  maxIndex: number = 10
+  maxIndex: number = 9999
 ): Promise<ScheduleCourse[]> => {
   const courses: ScheduleCourse[] = [];
-  const response = await fetch(
-    `https://api.searchneu.com/search?query=${searchQuery}&termId=202130&minIndex=${minIndex}&maxIndex=${maxIndex}`,
-    {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    }
-  );
-  // const response = await fetch("https://api.searchneu.com/graphql", {
-  //   method: "POST",
-  //   headers: { "Content-Type": "application/json" },
-  //   body: JSON.stringify({
-  //     query: `{
-  //       search(termId: "${subject}", classId: "${classId}") {
-  //         latestOccurrence {
-  //           name
-  //           subject
-  //           classId
-  //           maxCredits
-  //           minCredits
-  //           prereqs
-  //           coreqs
-  //         }
-  //       }
-  //     }`,
-  //   }),
-  // });
+  const response = await fetch("https://api.searchneu.com/graphql", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      query: `
+      {
+        search(termId:202130, query: "${searchQuery}", classIdRange: {min: ${minIndex}, max: ${maxIndex}}) {
+           totalCount 
+           pageInfo { hasNextPage } 
+           nodes { ... on ClassOccurrence { name subject maxCredits minCredits prereqs coreqs classId
+          } 
+        } 
+      } 
+    }`,
+    }),
+  });
 
   const results = await response.json();
-  results.forEach((result: SearchResult) => {
-    if (result.type && result.type === "class" && result.class) {
-      const course: ScheduleCourse = {
-        name: result.class.name,
-        classId: result.class.classId,
-        subject: result.class.subject,
-        prereqs: result.class.prereqs,
-        coreqs: result.class.coreqs,
-        numCreditsMin: result.class.minCredits,
-        numCreditsMax: result.class.maxCredits,
-        semester: null,
-      };
-      courses.push(course);
-    }
+  results.data.search.nodes.forEach((result: SearchClass) => {
+    const course: ScheduleCourse = {
+      name: result.name,
+      classId: result.classId,
+      subject: result.subject,
+      prereqs: result.prereqs,
+      coreqs: result.coreqs,
+      numCreditsMin: result.minCredits,
+      numCreditsMax: result.maxCredits,
+      semester: null,
+    };
+    courses.push(course);
   });
 
   return courses;
