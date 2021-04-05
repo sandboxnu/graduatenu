@@ -19,4 +19,28 @@
 #
 class Appointment < ActiveRecord::Base
     belongs_to :user
+
+    def major
+        User.find_by_id(self.student_id).major
+    end
+
+    def fullname
+        User.find_by_id(self.student_id).full_name
+    end
+
+    def email
+        User.find_by_id(self.student_id).email
+    end
+
+    def nuid
+        User.find_by_id(self.student_id).nu_id
+    end
+
+    def plan_name
+        Plan.find_by_id(self.plan_id).name
+    end
+
+    def plan_major
+        Plan.find_by_id(self.plan_id).major
+    end
 end
