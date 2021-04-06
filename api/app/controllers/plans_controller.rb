@@ -96,7 +96,7 @@ class PlansController < ApplicationController
       NotificationMailer.approved_email(@user, student, @plan).deliver
       render :show
     else
-      render json: {error: "No such plan."}, status: :unprocessable_entity
+      render json: {error: "No such plan."}, status: :unprocessable_entityApp
     end
   end
 

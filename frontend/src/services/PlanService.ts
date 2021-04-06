@@ -138,7 +138,7 @@ export const requestApproval = (
 ) =>
   fetch(`/api/users/${userId}/plans/${planId}/request_approval`, {
     method: "PUT",
-    body: JSON.stringify({ plan: { advisor_email: advisorEmail, appointmentTime: appointmentTime} }),
+    body: JSON.stringify({ plan: { advisor_email: advisorEmail, appointment_time: appointmentTime} }),
     headers: {
       Authorization: "Token " + getAuthToken(),
       "Content-Type": "application/json",

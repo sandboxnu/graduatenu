@@ -7,7 +7,7 @@ class AppointmentsController < ApplicationController
             return
         end
 
-        @appointments = Appointment.where(user_id: @advisor.id, seen: FALSE).where('appointment_time >= ? ', Date.today)
+        @appointments = Appointment.where(user_id: @advisor.id, seen: FALSE).where('appointment_time >= ? ', Date.today).order('appointment_time ASC').limit(10)
     end
 
     def show

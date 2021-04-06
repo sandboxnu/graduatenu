@@ -5,6 +5,12 @@ import { IAppointments } from "../models/types";
 import { fetchAppointments } from "../services/AppointmentService";
 import styled from "styled-components";
 import { PrimaryButton, SecondaryButton } from "../components/common/PrimaryButton";
+import { useHistory } from "react-router";
+import {
+  getAdvisorUserIdFromState,
+} from "../state";
+import { AppState } from "../state/reducers/state";
+
 
 const Container = styled.div`
   margin: auto;
@@ -100,8 +106,14 @@ const AppointmentsContainer: React.FC = (props: any) => {
   const dispatch = useDispatch();
   const [appointments, setAppointments] = useState<IAppointments[]>([]);
 
+  const { userId } = useSelector(
+    (state: AppState) => ({
+      userId: getAdvisorUserIdFromState(state),
+    })
+  );
+
   useEffect(() => {
-    fetchAppointments(2).then(response => {
+    fetchAppointments(userId).then(response => {
       setAppointments(response);
     })
   }, []);
@@ -140,7 +152,10 @@ const AppointmentsContainer: React.FC = (props: any) => {
 const Appointment: React.FC<IAppointments> = (props: IAppointments) => {
   const date = new Date(props.appointmentTime)
   const dateFormatter = new Intl.DateTimeFormat('en');
-  return ( 
+  const history = useHistory();
+  const [isDismissed, setIsDismissed] = useState(false);
+  
+  return isDismissed ? null : ( 
     <AppointmentContainer>
       <AppointmentTime> Appointment scheduled for {dateFormatter.format(date)} </AppointmentTime>
       <InfoButtonsContainer>
@@ -158,11 +173,11 @@ const Appointment: React.FC<IAppointments> = (props: IAppointments) => {
         </PlanInfo>
       </UserPlanInfo>
       <ButtonsContainer>
-        <SecondaryButton onClick={() => console.log("test")}>
+        <SecondaryButton onClick={() => setIsDismissed(true)}>
           Dismiss
         </SecondaryButton>
         <SpaceContainer/>
-        <PrimaryButton onClick={() => console.log("test")}>
+        <PrimaryButton onClick={() => history.push(`/advisor/manageStudents/${props.studentId}/expanded/${props.planId}`)}>
           Review
         </PrimaryButton>
       </ButtonsContainer>
