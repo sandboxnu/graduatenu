@@ -101,13 +101,15 @@ const AppointmentsContainer: React.FC = (props: any) => {
   const [appointments, setAppointments] = useState<IAppointments[]>([]);
 
   useEffect(() => {
-    setAppointments(fetchAppointments());
+    fetchAppointments(2).then(response => {
+      setAppointments(response);
+    })
   }, []);
 
   const appointmentComponents = appointments.map((appt: IAppointments) => (
     <Appointment
       id={appt.id}
-      userId={appt.userId}
+      studentId={appt.studentId}
       fullname={appt.fullname}
       email={appt.email}
       nuid={appt.nuid}
@@ -136,9 +138,11 @@ const AppointmentsContainer: React.FC = (props: any) => {
 };
 
 const Appointment: React.FC<IAppointments> = (props: IAppointments) => {
-  return (
+  const date = new Date(props.appointmentTime)
+  const dateFormatter = new Intl.DateTimeFormat('en');
+  return ( 
     <AppointmentContainer>
-      <AppointmentTime> Appointment scheduled for {props.appointmentTime} </AppointmentTime>
+      <AppointmentTime> Appointment scheduled for {dateFormatter.format(date)} </AppointmentTime>
       <InfoButtonsContainer>
       <UserPlanInfo>
         <UserInfo>

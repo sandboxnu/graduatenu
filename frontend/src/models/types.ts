@@ -357,7 +357,7 @@ export interface IChangeLog {
 
 export interface IAppointments {
   id: number;
-  userId: number;
+  studentId: number;
   fullname: string;
   email: string;
   nuid: string;
