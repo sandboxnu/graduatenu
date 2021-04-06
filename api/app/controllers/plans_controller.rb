@@ -105,7 +105,8 @@ class PlansController < ApplicationController
       if @plan
         @plan.update(last_requested_approval: Time.zone.now)
         advisor = User.find_by(email: request_approval_params[:advisor_email])
-        Appointment.create!(user_id: advisor.id, student_id: @current_user_id, plan_id: @plan.id, appointment_time: request_approval_params[:appointment_time])
+        p request_approval_params[:appointment_time]
+        Appointment.create!(user_id: advisor.id, student_id: @current_user_id, plan_id: @plan.id, appointment_time: Time.at(request_approval_params[:appointment_time]/1000))
         render status: 200, json: @controller.to_json
       else
         render json: {error: "No such plan."}, status: :unprocessable_entity
