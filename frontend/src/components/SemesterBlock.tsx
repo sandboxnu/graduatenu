@@ -9,6 +9,7 @@ import {
   CourseWarning,
   DNDScheduleCourse,
   IWarning,
+  DNDSchedule,
 } from "../models/types";
 import { ScheduleCourse, Status, SeasonWord } from "../../../common/types";
 import styled from "styled-components";
@@ -28,13 +29,18 @@ import {
   changeSemesterStatusForActivePlanAction,
 } from "../state/actions/userPlansActions";
 import { Tooltip } from "@material-ui/core";
-import { SEMESTER_MIN_HEIGHT } from "../constants";
+import {
+  GENERIC_COURSE_ID,
+  GENERIC_COURSE_SUBJECT,
+  SEMESTER_MIN_HEIGHT,
+} from "../constants";
 import {
   convertTermIdToSeason,
   findCourseWarnings,
 } from "../utils/schedule-helpers";
 import { UndoDelete } from "./UndoDelete";
 import ScheduleChangeTracker from "../utils/ScheduleChangeTracker";
+import { type } from "os";
 
 const OutsideContainer = styled.div`
   width: 25%;
@@ -220,6 +226,15 @@ class EditableSemesterBlockComponent extends React.Component<
     });
   };
 
+  // another day of doing it is making another interface and have a flag isGenericCourse
+  // but would have to change A LOT of code / renaming from DNDScheduleCourse to the new thing
+  isGenericCourse(scheduleCourse: DNDScheduleCourse) {
+    return (
+      scheduleCourse.classId === GENERIC_COURSE_ID &&
+      scheduleCourse.subject === GENERIC_COURSE_SUBJECT
+    );
+  }
+
   renderBody() {
     const { semester, courseWarnings } = this.props;
     const status = semester.status;
@@ -234,10 +249,12 @@ class EditableSemesterBlockComponent extends React.Component<
             <ClassBlock
               key={index}
               class={scheduleCourse}
+              semester={semester}
               index={index}
               warnings={findCourseWarnings(courseWarnings, scheduleCourse)}
               onDelete={this.onDeleteClass.bind(this, scheduleCourse, semester)}
               currentClassCounter={this.props.currentClassCounter}
+              canEditBlockName={this.isGenericCourse(scheduleCourse)}
             />
           );
         }
