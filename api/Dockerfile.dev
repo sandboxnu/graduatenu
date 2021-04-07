@@ -5,7 +5,6 @@ RUN mkdir /api
 WORKDIR /api
 COPY Gemfile /api/Gemfile
 COPY Gemfile.lock /api/Gemfile.lock
-RUN bundle update
 RUN bundle install
 COPY . /api
 
