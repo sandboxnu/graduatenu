@@ -8,5 +8,9 @@ import { useHistory } from "react-router";
 export const CourseManagmentPage: React.FC = () => {
   const dispatch = useDispatch();
 
-  return <GraduateHeader />;
+  return (
+    <div>
+      <GraduateHeader />
+    </div>
+  );
 };

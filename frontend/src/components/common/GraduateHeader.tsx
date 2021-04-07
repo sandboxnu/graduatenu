@@ -12,6 +12,7 @@ const Header = styled.div`
   align-items: center;
   justify-content: space-between;
   margin: 20px;
+  // border-bottom: 1px solid red;
 `;
 
 const HomeText = styled.a`
