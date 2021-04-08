@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { GraduateHeader } from "../components/common/GraduateHeader";
-import { resetStudentAction } from "../state/actions/studentActions";
-import { removeAuthTokenFromCookies } from "../utils/auth-helpers";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router";
 import styled from "styled-components";
+import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
+import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import { ICourseManagmentBlock } from "../models/types";
 import { mockCourseManagmentBlock } from "../data/mockData";
+import { Search } from "../components/common/Search";
+import { RedColorButton } from "../components/common/ColoredButtons";
 
 const PageContentWrapper = styled.div`
   display: flex;
@@ -29,26 +30,45 @@ const CourseManagementSideBarWrapper = styled.div`
   margin-left: 10px;
 `;
 
-// left half
+// left half header
 const CourseListHeader = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
   margin: 20px;
 `;
 
-const HeaderText = styled.div`
+const YearAndArrow = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-right: 10px;
+  gap: 10px;
+  width: 170px;
+`;
+
+const HeaderPair = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-right: 10px;
+  justify-content: space-between;
+  gap: 10px;
+  width: 75%;
+`;
+
+const SearchAndFilter = styled.div`
   font-weight: bold;
-  font-size: 36px;
+  font-size: 28px;
   text-decoration: none;
   color: black;
 `;
 
 const CourseListWrapper = styled.div`
+  border-top: 1px solid #dfdeda;
   display: flex;
   flex-direction: column;
-  margin: 0px 10px 0px 10px;
+  margin: 0px 15px 0px 15px;
 `;
 
 // each course in the list
@@ -73,6 +93,8 @@ interface CourseBlockProps {
 }
 
 export const CourseManagmentPage: React.FC = () => {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [isExpanded, setIsExpanded] = useState(false);
   const dispatch = useDispatch();
 
   return (
@@ -82,7 +104,40 @@ export const CourseManagmentPage: React.FC = () => {
         {/* left half */}
         <CourseListViewWrapper>
           <CourseListHeader>
-            <HeaderText>Fall 2020</HeaderText>
+            {/* TODO: get current semester */}
+            <YearAndArrow>
+              <SearchAndFilter>Fall 2020</SearchAndFilter>
+              <div
+                onClick={() => {
+                  setIsExpanded(!isExpanded);
+                  console.log("clicked arrow");
+                }}
+                style={{ marginRight: 4 }}
+              >
+                {isExpanded ? (
+                  <KeyboardArrowUpIcon />
+                ) : (
+                  <KeyboardArrowDownIcon />
+                )}
+              </div>
+            </YearAndArrow>
+            <HeaderPair>
+              <Search
+                placeholder="Search by course name or course id"
+                onEnter={query => {
+                  setSearchQuery(query);
+                }}
+                isSmall={true}
+              />
+              <RedColorButton
+                variant="contained"
+                onClick={() => {
+                  console.log("filter");
+                }}
+              >
+                Filter
+              </RedColorButton>
+            </HeaderPair>
           </CourseListHeader>
           <CourseListView courses={mockCourseManagmentBlock}> </CourseListView>
         </CourseListViewWrapper>
@@ -119,7 +174,7 @@ const CourseBlock: React.FC<CourseBlockProps> = (props: CourseBlockProps) => {
 const CourseManagementSideBar: React.FC = () => {
   return (
     <CourseManagementSideBarWrapper>
-      <HeaderText>Summary</HeaderText>
+      <SearchAndFilter>Summary</SearchAndFilter>
     </CourseManagementSideBarWrapper>
   );
 };
