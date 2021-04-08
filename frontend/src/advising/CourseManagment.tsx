@@ -26,13 +26,32 @@ const CourseListViewWrapper = styled.div`
 const CourseManagementSideBarWrapper = styled.div`
   margin-top: 10px;
   width: 30%;
+  margin-left: 10px;
+`;
+
+// left half
+const CourseListHeader = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin: 20px;
+`;
+
+const HeaderText = styled.div`
+  font-weight: bold;
+  font-size: 36px;
+  text-decoration: none;
+  color: black;
 `;
 
 const CourseListWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  margin: 0px 10px 0px 10px;
 `;
 
+// each course in the list
 const CourseBlockWrapper = styled.div`
   display: flex;
   flex-direction: row;
@@ -60,9 +79,14 @@ export const CourseManagmentPage: React.FC = () => {
     <>
       <GraduateHeader />
       <PageContentWrapper>
+        {/* left half */}
         <CourseListViewWrapper>
+          <CourseListHeader>
+            <HeaderText>Fall 2020</HeaderText>
+          </CourseListHeader>
           <CourseListView courses={mockCourseManagmentBlock}> </CourseListView>
         </CourseListViewWrapper>
+        {/* right half */}
         <CourseManagementSideBar></CourseManagementSideBar>
       </PageContentWrapper>
     </>
@@ -94,6 +118,8 @@ const CourseBlock: React.FC<CourseBlockProps> = (props: CourseBlockProps) => {
 
 const CourseManagementSideBar: React.FC = () => {
   return (
-    <CourseManagementSideBarWrapper> SIDEBAR</CourseManagementSideBarWrapper>
+    <CourseManagementSideBarWrapper>
+      <HeaderText>Summary</HeaderText>
+    </CourseManagementSideBarWrapper>
   );
 };
