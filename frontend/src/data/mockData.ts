@@ -506,8 +506,8 @@ export const mockCourseManagmentBlock: ICourseManagmentBlock[] = [
   },
 
   {
-    courseId: "CS2500",
-    courseName: "Fundementals of Computer Science 1",
+    courseId: "CS2510",
+    courseName: "Fundementals of Computer Science 2",
     numStudents: 500,
     numConflicts: 200,
     topThreeConflicts: ["CS1800", "CS1200", "CS4500"],

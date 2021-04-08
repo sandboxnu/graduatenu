@@ -12,7 +12,6 @@ const Header = styled.div`
   align-items: center;
   justify-content: space-between;
   margin: 20px;
-  // border-bottom: 1px solid red;
 `;
 
 const HomeText = styled.a`
@@ -22,7 +21,10 @@ const HomeText = styled.a`
   color: black;
 `;
 
-export const GraduateHeader: React.FC = () => {
+interface HeaderProps {
+  hasBorder?: boolean;
+}
+export const GraduateHeader: React.FC<HeaderProps> = (props: HeaderProps) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const logOut = () => {
