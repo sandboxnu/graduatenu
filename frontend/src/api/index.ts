@@ -27,7 +27,7 @@ export const fetchCourse = async (
     return null;
   }
 
-  const response = await fetch("https://searchneu.com/graphql", {
+  const response = await fetch("https://old.searchneu.com/graphql", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -72,7 +72,7 @@ export const searchCourses = async (
 ): Promise<ScheduleCourse[]> => {
   const courses: ScheduleCourse[] = [];
   const response = await fetch(
-    `https://searchneu.com/search?query=${searchQuery}&termId=202130&minIndex=${minIndex}&maxIndex=${maxIndex}`,
+    `https://old.searchneu.com/search?query=${searchQuery}&termId=202130&minIndex=${minIndex}&maxIndex=${maxIndex}`,
     {
       method: "GET",
       headers: { "Content-Type": "application/json" },

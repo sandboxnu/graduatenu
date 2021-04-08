@@ -89,7 +89,10 @@ const all_fillers = ["XXXX9999"];
  * @param schedule the schedule
  * @returns a container holding the produced warnings.
  */
-export function produceWarnings(schedule: Schedule): WarningContainer {
+export function produceWarnings(
+  schedule: Schedule,
+  transferCourses: ScheduleCourse[]
+): WarningContainer {
   // holds courses that are taken.
   const taken: Map<string, CourseInfo> = new Map<string, CourseInfo>();
   // custom tracker
@@ -135,6 +138,16 @@ export function produceWarnings(schedule: Schedule): WarningContainer {
     },
   };
 
+  // sort the years first to last
+  const sorted = schedule.years.slice();
+  sorted.sort((n1, n2) => n1 - n2);
+
+  // handle transfer courses (treat all transfer courses if they were taken in the student's first semester)
+  const firstYear = sorted[0];
+  for (const course of transferCourses) {
+    tracker.addCourse(course, schedule.yearMap[firstYear].fall.termId);
+  }
+
   // store the two types of warnings.
   let normal: IWarning[] = [];
   let courseSpecific: CourseWarning[] = [];
@@ -151,8 +164,6 @@ export function produceWarnings(schedule: Schedule): WarningContainer {
 
   // for each of the years in schedule, retrieve the corresponding map.
   // smallest to biggest.
-  const sorted = schedule.years.slice();
-  sorted.sort((n1, n2) => n1 - n2);
   for (const yearNum of sorted) {
     const year = schedule.yearMap[yearNum];
 

@@ -3,6 +3,7 @@ import { createAction } from "typesafe-actions";
 import {
   Schedule,
   ScheduleCourse,
+  ScheduleTerm,
   SeasonWord,
   Status,
 } from "../../../../common/types";
@@ -34,7 +35,11 @@ export const addNewPlanAction = createAction(
 
 export const setUserPlansAction = createAction(
   "userPlans/SET_USER_PLANS",
-  (plans: IPlanData[], academicYear: number) => ({ plans, academicYear })
+  (
+    plans: IPlanData[],
+    academicYear: number,
+    transferCourses: ScheduleCourse[]
+  ) => ({ plans, academicYear, transferCourses })
 )();
 
 export const updateActivePlanAction = createAction(
@@ -52,10 +57,18 @@ export const deletePlan = createAction(
   (name: string) => ({ name })
 )();
 
+export const setActivePlanNameAction = createAction(
+  "userPlans/SET_ACTIVE_PLAN_NAME",
+  (name: string) => ({ name })
+)();
+
 // TODO: remove this and do the DND conversion in setActivePlanScheduleAction (if possible)
 export const setActivePlanDNDScheduleAction = createAction(
   "userPlans/SET_ACTIVE_PLAN_DND_SCHEDULE",
-  (schedule: DNDSchedule) => ({ schedule })
+  (schedule: DNDSchedule, transferCourses: ScheduleCourse[]) => ({
+    schedule,
+    transferCourses,
+  })
 )();
 
 export const setActivePlanMajorAction = createAction(
@@ -93,22 +106,35 @@ export const setActivePlanCatalogYearAction = createAction(
 
 export const setActivePlanScheduleAction = createAction(
   "userPlans/SET_ACTIVE_PLAN_SCHEDULE",
-  (schedule: Schedule) => ({ schedule })
+  (schedule: Schedule, transferCourses: ScheduleCourse[]) => ({
+    schedule,
+    transferCourses,
+  })
 )();
 
 export const addCoursesToActivePlanAction = createAction(
   "userPlans/ADD_COURSES_TO_ACTIVE_PLAN",
-  (courses: ScheduleCourse[], semester: DNDScheduleTerm) => ({
+  (
+    courses: ScheduleCourse[],
+    semester: DNDScheduleTerm,
+    transferCourses: ScheduleCourse[]
+  ) => ({
     courses,
     semester,
+    transferCourses,
   })
 )();
 
 export const removeClassFromActivePlanAction = createAction(
   "userPlans/REMOVE_CLASS_FROM_ACTIVE_PLAN",
-  (course: DNDScheduleCourse, semester: DNDScheduleTerm) => ({
+  (
+    course: DNDScheduleCourse,
+    semester: DNDScheduleTerm,
+    transferCourses: ScheduleCourse[]
+  ) => ({
     course,
     semester,
+    transferCourses,
   })
 )();
 
@@ -117,21 +143,42 @@ export const undoRemoveClassFromActivePlanAction = createAction(
   () => void 0
 )();
 
+export const renameCourseInActivePlanAction = createAction(
+  "userPlans/RENAME_COURSE_IN_ACTIVE_PLAN",
+  (dndId: string, semester: ScheduleTerm, newName: string) => ({
+    dndId,
+    semester,
+    newName,
+  })
+)();
+
 export const changeSemesterStatusForActivePlanAction = createAction(
   "userPlans/CHANGE_SEMESTER_STATUS_FOR_ACTIVE_PLAN",
-  (newStatus: Status, year: number, season: SeasonWord) => ({
+  (
+    newStatus: Status,
+    year: number,
+    season: SeasonWord,
+    transferCourses: ScheduleCourse[]
+  ) => ({
     newStatus,
     year,
     season,
+    transferCourses,
   })
 )();
 
 export const updateSemesterForActivePlanAction = createAction(
   "userPlans/UPDATE_SEMESTER_FOR_ACTIVE_PLAN",
-  (year: number, season: SeasonWord, newSemester: DNDScheduleTerm) => ({
+  (
+    year: number,
+    season: SeasonWord,
+    newSemester: DNDScheduleTerm,
+    transferCourses: ScheduleCourse[]
+  ) => ({
     year,
     season,
     newSemester,
+    transferCourses,
   })
 )();
 

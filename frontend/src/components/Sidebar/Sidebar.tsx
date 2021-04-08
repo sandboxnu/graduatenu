@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { DNDSchedule, IRequirementGroupWarning } from "../../models/types";
 import { Concentration, Major, ScheduleCourse } from "../../../../common/types";
 import styled from "styled-components";
@@ -7,6 +7,7 @@ import {
   produceRequirementGroupWarning,
   getCompletedCourseStrings,
   getCreditsTakenInSchedule,
+  sumCreditsFromCourses,
 } from "../../utils";
 import { AppState } from "../../state/reducers/state";
 import {
@@ -16,10 +17,11 @@ import {
   safelyGetTransferCoursesFromState,
   safelyGetActivePlanConcentrationFromState,
 } from "../../state";
-import { connect, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { findMajorFromName } from "../../utils/plan-helpers";
 import { ScrollWrapper } from "../../Onboarding/GenericOnboarding";
 import { NORTHEASTERN_RED } from "../../constants";
+import { GenericClassBlock } from "./GenericClassBlock";
 
 const Container = styled.div`
   display: flex;
@@ -66,6 +68,7 @@ const ConcentrationRequirementGroup = styled.div`
 
 interface SidebarProps {
   isEditable: boolean;
+  hasGenericCourse?: boolean;
 }
 
 interface MajorSidebarProps {
@@ -74,6 +77,7 @@ interface MajorSidebarProps {
   concentration?: Concentration;
   transferCourses: ScheduleCourse[];
   isEditable: boolean;
+  hasGenericCourse?: boolean;
 }
 
 interface ConcentrationProps {
@@ -140,6 +144,7 @@ const MajorSidebarComponent: React.FC<MajorSidebarProps> = ({
   concentration,
   transferCourses,
   isEditable,
+  hasGenericCourse,
 }) => {
   const warnings = produceRequirementGroupWarning(
     schedule,
@@ -154,19 +159,21 @@ const MajorSidebarComponent: React.FC<MajorSidebarProps> = ({
     : completedCourses;
   const concentrationIsRequired = major.concentrations.minOptions > 0;
 
+  const totalCredits = useMemo(() => {
+    return (
+      sumCreditsFromCourses(transferCourses) +
+      getCreditsTakenInSchedule(schedule)
+    );
+  }, [transferCourses, schedule]);
+
   return (
     <Container>
       <ScrollWrapper>
         <MajorTitle>{major.name}</MajorTitle>
-        <CreditTitle
-          isGreen={
-            getCreditsTakenInSchedule(schedule) >= major.totalCreditsRequired
-          }
-        >
-          {`${getCreditsTakenInSchedule(schedule)} / ${
-            major.totalCreditsRequired
-          }` + " credits"}
+        <CreditTitle isGreen={totalCredits >= major.totalCreditsRequired}>
+          {`${totalCredits} / ${major.totalCreditsRequired}` + " credits"}
         </CreditTitle>
+        {hasGenericCourse && <GenericClassBlock />}
         <ConcentrationComponent
           concentration={concentration}
           completedCourseStrings={completedCourseStrings}
@@ -223,6 +230,7 @@ export const Sidebar: React.FC<SidebarProps> = props => {
           concentration={concentrationObj}
           transferCourses={transferCourses}
           isEditable={props.isEditable}
+          hasGenericCourse={props.hasGenericCourse}
         />
       ) : (
         <NoMajorSidebarComponent />

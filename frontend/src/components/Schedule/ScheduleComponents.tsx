@@ -11,7 +11,7 @@ import {
   moveCourse,
   addCourseFromSidebar,
 } from "../../utils";
-import { Status, SeasonWord } from "../../../../common/types";
+import { Status, SeasonWord, ScheduleCourse } from "../../../../common/types";
 import {
   DNDSchedule,
   DNDScheduleYear,
@@ -73,6 +73,7 @@ interface Props {
   transferCreditPresent?: boolean;
   collapsibleYears: boolean;
   commentsPresent?: boolean;
+  hasGenericCourse?: boolean;
 }
 
 interface ScheduleProps {
@@ -180,6 +181,7 @@ export const EditableSchedule: React.FC<Props> = props => {
     transferCreditPresent,
     collapsibleYears,
     commentsPresent,
+    hasGenericCourse,
   } = props;
   const {
     activePlan,
@@ -204,9 +206,17 @@ export const EditableSchedule: React.FC<Props> = props => {
     year: number,
     season: SeasonWord,
     newSemester: DNDScheduleTerm
-  ) => dispatch(updateSemesterForActivePlanAction(year, season, newSemester));
+  ) =>
+    dispatch(
+      updateSemesterForActivePlanAction(
+        year,
+        season,
+        newSemester,
+        transferCredits
+      )
+    );
   const setDNDSchedule = (schedule: DNDSchedule): any =>
-    dispatch(setActivePlanDNDScheduleAction(schedule));
+    dispatch(setActivePlanDNDScheduleAction(schedule, transferCredits));
 
   const incrementCurrentClassCounter = (): any =>
     dispatch(incrementCurrentClassCounterForActivePlanAction());
@@ -241,10 +251,16 @@ export const EditableSchedule: React.FC<Props> = props => {
     }
   };
 
+  // if the course being dragged is coming from the sidebar
+  const isDraggedFromSidebar = (source: any) => {
+    return isNaN(Number(source.droppableId));
+  };
+
   const onDragUpdate = (update: any) => {
     const { destination, source } = update;
 
-    if (isNaN(Number(source.droppableId))) {
+    // skip if dragging from sidebar
+    if (isDraggedFromSidebar(source)) {
       return;
     }
 
@@ -284,7 +300,7 @@ export const EditableSchedule: React.FC<Props> = props => {
     // if drag is coming from the sidebar
     if (!destination) return;
 
-    if (isNaN(Number(source.droppableId))) {
+    if (isDraggedFromSidebar(source)) {
       addCourseFromSidebar(
         activePlan,
         destination,
@@ -303,6 +319,7 @@ export const EditableSchedule: React.FC<Props> = props => {
       );
       incrementCurrentClassCounter();
     } else {
+      // dragging between semesters
       ChangeTracker.addMoveClassChange(
         draggableId
           .split(" ")
@@ -321,7 +338,7 @@ export const EditableSchedule: React.FC<Props> = props => {
       <DragDropContext onDragEnd={onDragEnd} onDragUpdate={onDragUpdate}>
         {sidebarPresent && (
           <SidebarContainer>
-            <Sidebar isEditable={true} />
+            <Sidebar isEditable={true} hasGenericCourse={hasGenericCourse} />
           </SidebarContainer>
         )}
         <LeftScroll className="hide-scrollbar" sidebarPresent={sidebarPresent}>

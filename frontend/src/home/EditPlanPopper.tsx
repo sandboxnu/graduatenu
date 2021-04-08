@@ -15,9 +15,10 @@ import {
   getGraduationYearFromState,
   getUserIdFromState,
   getUserPrimaryPlanIdFromState,
+  safelyGetTransferCoursesFromState,
 } from "../state";
 import { IPlanData } from "../models/types";
-import { Major, Schedule } from "../../../common/types";
+import { Major, Schedule, ScheduleCourse } from "../../../common/types";
 import {
   getMajorsFromState,
   getPlansFromState,
@@ -47,6 +48,7 @@ import {
   SnackbarAlert,
   ALERT_STATUS,
 } from "../components/common/SnackbarAlert";
+import { BASE_FORMATTED_COOP_CYCLES } from "../plans/coopCycles";
 
 const PlanPopper = styled(Popper)<any>`
   margin-top: 4px;
@@ -119,6 +121,7 @@ interface ReduxStoreEditPlanProps {
   catalogYear: number | null;
   academicYear: number;
   graduationYear: number;
+  transferCourses: ScheduleCourse[];
 }
 
 interface ReduxDispatchEditPlanProps {
@@ -128,7 +131,10 @@ interface ReduxDispatchEditPlanProps {
     graduationYear: number,
     allPlans?: Record<string, Schedule[]>
   ) => void;
-  setActivePlanDNDSchedule: (schedule: DNDSchedule) => void;
+  setActivePlanDNDSchedule: (
+    schedule: DNDSchedule,
+    transferCourses: ScheduleCourse[]
+  ) => void;
   setActivePlanMajor: (major: string | null) => void;
   setActivePlanCatalogYear: (number: number | null) => void;
   setCurrentClassCounter: (counter: number) => void;
@@ -232,12 +238,7 @@ export class EditPlanPopperComponent extends React.Component<
       <Autocomplete
         style={{ marginTop: "10px", marginBottom: "15px", fontSize: "10px" }}
         disableListWrap
-        options={[
-          "None",
-          ...this.props.allPlans[this.props.plan.major!].map(p =>
-            planToString(p)
-          ),
-        ]}
+        options={["None", ...BASE_FORMATTED_COOP_CYCLES]}
         renderInput={params => (
           <TextField
             {...params}
@@ -282,6 +283,14 @@ export class EditPlanPopperComponent extends React.Component<
   }
 
   renderSetClassesButton() {
+    const examplePlanExists = this.props.allPlans[
+      this.props.plan.major || ""
+    ].some((p: Schedule) => planToString(p) === this.props.plan.coopCycle);
+
+    if (!examplePlanExists) {
+      return;
+    }
+
     return (
       <ButtonContainer>
         <SetButton
@@ -304,7 +313,10 @@ export class EditPlanPopperComponent extends React.Component<
       this.props.allPlans
     );
     batch(() => {
-      this.props.setActivePlanDNDSchedule(schedule!);
+      this.props.setActivePlanDNDSchedule(
+        schedule!,
+        this.props.transferCourses
+      );
       this.props.setCurrentClassCounter(counter);
     });
   }
@@ -368,7 +380,8 @@ export class EditPlanPopperComponent extends React.Component<
         clearSchedule(this.props.plan.schedule),
         this.props.academicYear,
         this.props.graduationYear
-      )
+      ),
+      this.props.transferCourses
     );
   }
 
@@ -452,6 +465,7 @@ const mapStateToProps = (state: AppState) => ({
   primaryPlanId: getUserPrimaryPlanIdFromState(state),
   academicYear: getAcademicYearFromState(state)!,
   graduationYear: getGraduationYearFromState(state)!,
+  transferCourses: safelyGetTransferCoursesFromState(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
@@ -469,8 +483,10 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
         allPlans
       )
     ),
-  setActivePlanDNDSchedule: (schedule: DNDSchedule) =>
-    dispatch(setActivePlanDNDScheduleAction(schedule)),
+  setActivePlanDNDSchedule: (
+    schedule: DNDSchedule,
+    transferCourses: ScheduleCourse[]
+  ) => dispatch(setActivePlanDNDScheduleAction(schedule, transferCourses)),
   setActivePlanMajor: (major: string | null) =>
     dispatch(setActivePlanMajorAction(major)),
   setActivePlanCatalogYear: (year: number | null) =>
