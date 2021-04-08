@@ -21,10 +21,7 @@ const HomeText = styled.a`
   color: black;
 `;
 
-interface HeaderProps {
-  hasBorder?: boolean;
-}
-export const GraduateHeader: React.FC<HeaderProps> = (props: HeaderProps) => {
+export const GraduateHeader: React.FC = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const logOut = () => {

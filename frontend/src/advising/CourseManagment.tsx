@@ -8,9 +8,7 @@ import styled from "styled-components";
 import { ICourseManagmentBlock } from "../models/types";
 import { mockCourseManagmentBlock } from "../data/mockData";
 
-const PageContainer = styled.div``;
-
-const ContentWrapper = styled.div`
+const PageContentWrapper = styled.div`
   display: flex;
   flex-direction: row;
   border-top: 1px solid red;
@@ -19,12 +17,14 @@ const ContentWrapper = styled.div`
 
 // left half
 const CourseListViewWrapper = styled.div`
+  margin-top: 10px;
   width: 70%;
   border-right: 1px solid #dfdeda;
 `;
 
 // right half
 const CourseManagementSideBarWrapper = styled.div`
+  margin-top: 10px;
   width: 30%;
 `;
 
@@ -59,12 +59,12 @@ export const CourseManagmentPage: React.FC = () => {
   return (
     <>
       <GraduateHeader />
-      <ContentWrapper>
+      <PageContentWrapper>
         <CourseListViewWrapper>
           <CourseListView courses={mockCourseManagmentBlock}> </CourseListView>
         </CourseListViewWrapper>
         <CourseManagementSideBar></CourseManagementSideBar>
-      </ContentWrapper>
+      </PageContentWrapper>
     </>
   );
 };
