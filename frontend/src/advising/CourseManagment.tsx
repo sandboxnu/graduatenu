@@ -47,7 +47,7 @@ const YearAndArrow = styled.div`
   width: 170px;
 `;
 
-const HeaderPair = styled.div`
+const SearchAndFilter = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -57,7 +57,7 @@ const HeaderPair = styled.div`
   width: 75%;
 `;
 
-const SearchAndFilter = styled.div`
+const HeaderText = styled.div`
   font-weight: bold;
   font-size: 28px;
   text-decoration: none;
@@ -106,7 +106,7 @@ export const CourseManagmentPage: React.FC = () => {
           <CourseListHeader>
             {/* TODO: get current semester */}
             <YearAndArrow>
-              <SearchAndFilter>Fall 2020</SearchAndFilter>
+              <HeaderText>Fall 2020</HeaderText>
               <div
                 onClick={() => {
                   setIsExpanded(!isExpanded);
@@ -121,7 +121,7 @@ export const CourseManagmentPage: React.FC = () => {
                 )}
               </div>
             </YearAndArrow>
-            <HeaderPair>
+            <SearchAndFilter>
               <Search
                 placeholder="Search by course name or course id"
                 onEnter={query => {
@@ -137,7 +137,7 @@ export const CourseManagmentPage: React.FC = () => {
               >
                 Filter
               </RedColorButton>
-            </HeaderPair>
+            </SearchAndFilter>
           </CourseListHeader>
           <CourseListView courses={mockCourseManagmentBlock}> </CourseListView>
         </CourseListViewWrapper>
@@ -174,7 +174,7 @@ const CourseBlock: React.FC<CourseBlockProps> = (props: CourseBlockProps) => {
 const CourseManagementSideBar: React.FC = () => {
   return (
     <CourseManagementSideBarWrapper>
-      <SearchAndFilter>Summary</SearchAndFilter>
+      <HeaderText>Summary</HeaderText>
     </CourseManagementSideBarWrapper>
   );
 };
