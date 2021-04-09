@@ -48,6 +48,6 @@ export const fetchUser = (userId: number) =>
     headers: {
       "Content-Type": "application/json",
       // TODO: Tal & Arkin fix auth again pls
-      Authorization: "Token ",
+      Authorization: "Token " + getAuthToken(),
     },
   }).then(response => response.json());

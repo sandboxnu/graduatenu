@@ -155,7 +155,12 @@ export const StudentView: React.FC = () => {
       course_counter: templateData!.courseCounter,
       concentration: templateData!.concentration,
     });
-    if (response.error) return;
+    console.log(response.error);
+    if (response.error) {
+      setIsError(true);
+      console.log(isError);
+      return;
+    }
     if (shouldDelete) {
       const deleteResponse = await deleteTemplatePlan(userId, templateData!.id);
       // error handling for this page (?)
@@ -279,16 +284,16 @@ export const StudentView: React.FC = () => {
       <IconButton onClick={() => history.push(`/advisor/manageStudents`)}>
         <ArrowBack />
       </IconButton>
-      <StudentViewContainer>
-        {isError ? (
-          <ErrorBlock />
-        ) : (
+      {isError ? (
+        <ErrorBlock />
+      ) : (
+        <StudentViewContainer>
           <>
             {renderStudentInfo()}
             {renderSchedule()}
           </>
-        )}
-      </StudentViewContainer>
+        </StudentViewContainer>
+      )}
       <AssignTemplateToUserModal
         isOpen={openModal}
         closeModal={() => setOpenModal(false)}
