@@ -29,6 +29,7 @@ import { useHistory, useParams } from "react-router";
 import { AssignTemplateToUserModal } from "./AssignTemplateToUserModal";
 import { alterScheduleToHaveCorrectYears } from "../../utils/schedule-helpers";
 import { deleteTemplatePlan } from "../../services/TemplateService";
+import { ErrorBlock } from "../../components/common/ErrorBlock";
 
 const StudentViewContainer = styled.div`
   display: flex;
@@ -133,6 +134,7 @@ export const StudentView: React.FC = () => {
   const [student, setStudent] = useState<IUserData | null>(null);
   const [noPlans, setNoPlans] = useState(false);
   const [openModal, setOpenModal] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   const assignTemplate = async (
     templateData: ITemplatePlan,
@@ -153,7 +155,12 @@ export const StudentView: React.FC = () => {
       course_counter: templateData!.courseCounter,
       concentration: templateData!.concentration,
     });
-    if (response.error) return;
+    console.log(response.error);
+    if (response.error) {
+      setIsError(true);
+      console.log(isError);
+      return;
+    }
     if (shouldDelete) {
       const deleteResponse = await deleteTemplatePlan(userId, templateData!.id);
       // error handling for this page (?)
@@ -171,15 +178,25 @@ export const StudentView: React.FC = () => {
   );
 
   useEffect(() => {
-    fetchUser(id).then(response => {
-      setStudent(response.user);
-      setFetchingStudent(false);
-    });
-    findAllPlansForUser(id).then((plans: IPlanData[]) => {
-      dispatch(setUserPlansAction(plans, 2020, transferCourses));
-      if (!plans || !plans.length || !plans[0].schedule) setNoPlans(true);
-    });
-  }, []);
+    fetchUser(id)
+      .then(response => {
+        setStudent(response.user);
+        setFetchingStudent(false);
+      })
+      .catch(err => {
+        console.log(err);
+        setIsError(true);
+      });
+    findAllPlansForUser(id)
+      .then((plans: IPlanData[]) => {
+        dispatch(setUserPlansAction(plans, 2020, transferCourses));
+        if (!plans || !plans.length || !plans[0].schedule) setNoPlans(true);
+      })
+      .catch(err => {
+        console.log(err);
+        setIsError(true);
+      });
+  }, [isError]);
 
   const renderStudentInfo = () => {
     return (
@@ -267,10 +284,16 @@ export const StudentView: React.FC = () => {
       <IconButton onClick={() => history.push(`/advisor/manageStudents`)}>
         <ArrowBack />
       </IconButton>
-      <StudentViewContainer>
-        {renderStudentInfo()}
-        {renderSchedule()}
-      </StudentViewContainer>
+      {isError ? (
+        <ErrorBlock />
+      ) : (
+        <StudentViewContainer>
+          <>
+            {renderStudentInfo()}
+            {renderSchedule()}
+          </>
+        </StudentViewContainer>
+      )}
       <AssignTemplateToUserModal
         isOpen={openModal}
         closeModal={() => setOpenModal(false)}

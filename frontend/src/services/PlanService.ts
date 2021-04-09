@@ -62,7 +62,8 @@ export const createPlanForUser = (userId: number, plan: ICreatePlanData) =>
     body: JSON.stringify({ plan: plan }),
     headers: {
       "Content-Type": "application/json",
-      Authorization: "Token " + getAuthToken(),
+      // TODO: Arkin and Tal to add auth token back
+      Authorization: "Token ",
     },
   }).then(response => response.json());
 

@@ -4,12 +4,12 @@ import {
   IAbrStudent,
   StudentsAPI,
 } from "../../services/AdvisorService";
-import { getAuthToken } from "../../utils/auth-helpers";
 import styled from "styled-components";
 import { LinearProgress } from "@material-ui/core";
 import { Search } from "../../components/common/Search";
 import { useHistory } from "react-router";
 import { Container } from "./Shared";
+import { ErrorBlock } from "../../components/common/ErrorBlock";
 
 const StudentListScrollContainer = styled.div`
   width: auto;
@@ -101,6 +101,7 @@ export const StudentsList = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [pageNumber, setPageNumber] = useState(0);
   const [isLastPage, setIsLastPage] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   const fetchStudents = (currentStudents: IAbrStudent[], page: number) => {
     setIsLoading(true);
@@ -111,13 +112,16 @@ export const StudentsList = () => {
         setIsLastPage(studentsAPI.lastPage);
         setIsLoading(false);
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err);
+        setIsError(true);
+      });
   };
 
   useEffect(() => {
     setStudents(EMPTY_STUDENT_LIST);
     fetchStudents(EMPTY_STUDENT_LIST, 0);
-  }, [searchQuery]);
+  }, [searchQuery, isError]);
 
   return (
     <Container>
@@ -128,31 +132,37 @@ export const StudentsList = () => {
         }}
         isSmall={false}
       />
-      <StudentListContainer>
-        {isLoading ? (
-          <Loading>
-            <LinearProgress color="secondary" />
-          </Loading>
-        ) : null}
-        <StudentListScrollContainer>
-          {(students === null || students.length == 0) && !isLoading ? (
-            <EmptyState> No students found </EmptyState>
-          ) : (
-            students.map(student => <Student key={student.nuId} {...student} />)
-          )}
-          {!isLoading ? (
-            isLastPage ? (
-              <NoMoreStudents>No more students</NoMoreStudents>
-            ) : (
-              <LoadMoreStudents
-                onClick={() => fetchStudents(students, pageNumber)}
-              >
-                Load more students
-              </LoadMoreStudents>
-            )
+      {isError ? (
+        <ErrorBlock />
+      ) : (
+        <StudentListContainer>
+          {isLoading ? (
+            <Loading>
+              <LinearProgress color="secondary" />
+            </Loading>
           ) : null}
-        </StudentListScrollContainer>
-      </StudentListContainer>
+          <StudentListScrollContainer>
+            {(students === null || students.length == 0) && !isLoading ? (
+              <EmptyState> No students found </EmptyState>
+            ) : (
+              students.map(student => (
+                <Student key={student.nuId} {...student} />
+              ))
+            )}
+            {!isLoading ? (
+              isLastPage ? (
+                <NoMoreStudents>No more students</NoMoreStudents>
+              ) : (
+                <LoadMoreStudents
+                  onClick={() => fetchStudents(students, pageNumber)}
+                >
+                  Load more students
+                </LoadMoreStudents>
+              )
+            ) : null}
+          </StudentListScrollContainer>
+        </StudentListContainer>
+      )}
     </Container>
   );
 };
