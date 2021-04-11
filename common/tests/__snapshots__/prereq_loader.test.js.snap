@@ -68,7 +68,6 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2501",
-                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -140,7 +139,6 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2511",
-                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -276,7 +274,12 @@ Object {
             "classId": "3500",
             "coreqs": Object {
               "type": "and",
-              "values": Array [],
+              "values": Array [
+                Object {
+                  "classId": "3501",
+                  "subject": "CS",
+                },
+              ],
             },
             "name": "Object-Oriented Design",
             "numCreditsMax": 4,
@@ -382,12 +385,7 @@ Object {
             "classId": "3000",
             "coreqs": Object {
               "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "3001",
-                  "subject": "CS",
-                },
-              ],
+              "values": Array [],
             },
             "name": "Algorithms and Data",
             "numCreditsMax": 4,
@@ -396,16 +394,20 @@ Object {
               "type": "or",
               "values": Array [
                 Object {
-                  "classId": "1500",
-                  "missing": true,
-                  "subject": "CS",
-                },
-                Object {
                   "type": "and",
                   "values": Array [
                     Object {
-                      "classId": "2510",
-                      "subject": "CS",
+                      "type": "or",
+                      "values": Array [
+                        Object {
+                          "classId": "2510",
+                          "subject": "CS",
+                        },
+                        Object {
+                          "classId": "2500",
+                          "subject": "DS",
+                        },
+                      ],
                     },
                     Object {
                       "classId": "1800",
@@ -415,16 +417,6 @@ Object {
                 },
                 Object {
                   "classId": "2160",
-                  "subject": "EECE",
-                },
-                Object {
-                  "classId": "2162",
-                  "missing": true,
-                  "subject": "EECE",
-                },
-                Object {
-                  "classId": "2164",
-                  "missing": true,
                   "subject": "EECE",
                 },
               ],
@@ -766,19 +758,28 @@ Object {
             "numCreditsMax": 4,
             "numCreditsMin": 4,
             "prereqs": Object {
-              "type": "or",
+              "type": "and",
               "values": Array [
                 Object {
-                  "classId": "1111",
-                  "subject": "GE",
+                  "type": "or",
+                  "values": Array [
+                    Object {
+                      "classId": "1111",
+                      "subject": "GE",
+                    },
+                    Object {
+                      "classId": "1502",
+                      "subject": "GE",
+                    },
+                    Object {
+                      "classId": "3500",
+                      "subject": "CS",
+                    },
+                  ],
                 },
                 Object {
-                  "classId": "1502",
-                  "subject": "GE",
-                },
-                Object {
-                  "classId": "3500",
-                  "subject": "CS",
+                  "classId": "2140",
+                  "subject": "EECE",
                 },
               ],
             },
@@ -968,7 +969,6 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2501",
-                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -1040,7 +1040,6 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2511",
-                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -1185,7 +1184,12 @@ Object {
             "classId": "3500",
             "coreqs": Object {
               "type": "and",
-              "values": Array [],
+              "values": Array [
+                Object {
+                  "classId": "3501",
+                  "subject": "CS",
+                },
+              ],
             },
             "name": "Object-Oriented Design",
             "numCreditsMax": 4,
@@ -1229,12 +1233,7 @@ Object {
             "classId": "3000",
             "coreqs": Object {
               "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "3001",
-                  "subject": "CS",
-                },
-              ],
+              "values": Array [],
             },
             "name": "Algorithms and Data",
             "numCreditsMax": 4,
@@ -1243,16 +1242,20 @@ Object {
               "type": "or",
               "values": Array [
                 Object {
-                  "classId": "1500",
-                  "missing": true,
-                  "subject": "CS",
-                },
-                Object {
                   "type": "and",
                   "values": Array [
                     Object {
-                      "classId": "2510",
-                      "subject": "CS",
+                      "type": "or",
+                      "values": Array [
+                        Object {
+                          "classId": "2510",
+                          "subject": "CS",
+                        },
+                        Object {
+                          "classId": "2500",
+                          "subject": "DS",
+                        },
+                      ],
                     },
                     Object {
                       "classId": "1800",
@@ -1262,16 +1265,6 @@ Object {
                 },
                 Object {
                   "classId": "2160",
-                  "subject": "EECE",
-                },
-                Object {
-                  "classId": "2162",
-                  "missing": true,
-                  "subject": "EECE",
-                },
-                Object {
-                  "classId": "2164",
-                  "missing": true,
                   "subject": "EECE",
                 },
               ],
@@ -1697,19 +1690,28 @@ Object {
             "numCreditsMax": 4,
             "numCreditsMin": 4,
             "prereqs": Object {
-              "type": "or",
+              "type": "and",
               "values": Array [
                 Object {
-                  "classId": "1111",
-                  "subject": "GE",
+                  "type": "or",
+                  "values": Array [
+                    Object {
+                      "classId": "1111",
+                      "subject": "GE",
+                    },
+                    Object {
+                      "classId": "1502",
+                      "subject": "GE",
+                    },
+                    Object {
+                      "classId": "3500",
+                      "subject": "CS",
+                    },
+                  ],
                 },
                 Object {
-                  "classId": "1502",
-                  "subject": "GE",
-                },
-                Object {
-                  "classId": "3500",
-                  "subject": "CS",
+                  "classId": "2140",
+                  "subject": "EECE",
                 },
               ],
             },
@@ -1900,7 +1902,6 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2501",
-                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -1980,7 +1981,6 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2511",
-                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -2149,7 +2149,12 @@ Object {
             "classId": "3500",
             "coreqs": Object {
               "type": "and",
-              "values": Array [],
+              "values": Array [
+                Object {
+                  "classId": "3501",
+                  "subject": "CS",
+                },
+              ],
             },
             "name": "Object-Oriented Design",
             "numCreditsMax": 4,
@@ -2254,12 +2259,7 @@ Object {
             "classId": "3000",
             "coreqs": Object {
               "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "3001",
-                  "subject": "CS",
-                },
-              ],
+              "values": Array [],
             },
             "name": "Algorithms and Data",
             "numCreditsMax": 4,
@@ -2268,16 +2268,20 @@ Object {
               "type": "or",
               "values": Array [
                 Object {
-                  "classId": "1500",
-                  "missing": true,
-                  "subject": "CS",
-                },
-                Object {
                   "type": "and",
                   "values": Array [
                     Object {
-                      "classId": "2510",
-                      "subject": "CS",
+                      "type": "or",
+                      "values": Array [
+                        Object {
+                          "classId": "2510",
+                          "subject": "CS",
+                        },
+                        Object {
+                          "classId": "2500",
+                          "subject": "DS",
+                        },
+                      ],
                     },
                     Object {
                       "classId": "1800",
@@ -2287,16 +2291,6 @@ Object {
                 },
                 Object {
                   "classId": "2160",
-                  "subject": "EECE",
-                },
-                Object {
-                  "classId": "2162",
-                  "missing": true,
-                  "subject": "EECE",
-                },
-                Object {
-                  "classId": "2164",
-                  "missing": true,
                   "subject": "EECE",
                 },
               ],
@@ -2777,9 +2771,30 @@ Object {
           },
           Object {
             "classId": "4900",
-            "name": "",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "Information Science Senior Project",
             "numCreditsMax": 5,
             "numCreditsMin": 5,
+            "prereqs": Object {
+              "type": "or",
+              "values": Array [
+                Object {
+                  "classId": "4800",
+                  "subject": "IS",
+                },
+                Object {
+                  "classId": "6350",
+                  "subject": "CS",
+                },
+                Object {
+                  "classId": "6350",
+                  "subject": "CS",
+                },
+              ],
+            },
             "subject": "IS",
           },
           Object {
@@ -2889,7 +2904,6 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2501",
-                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -2969,7 +2983,6 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2511",
-                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -3137,7 +3150,12 @@ Object {
             "classId": "3500",
             "coreqs": Object {
               "type": "and",
-              "values": Array [],
+              "values": Array [
+                Object {
+                  "classId": "3501",
+                  "subject": "CS",
+                },
+              ],
             },
             "name": "Object-Oriented Design",
             "numCreditsMax": 4,
@@ -3314,12 +3332,7 @@ Object {
             "classId": "3000",
             "coreqs": Object {
               "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "3001",
-                  "subject": "CS",
-                },
-              ],
+              "values": Array [],
             },
             "name": "Algorithms and Data",
             "numCreditsMax": 4,
@@ -3328,16 +3341,20 @@ Object {
               "type": "or",
               "values": Array [
                 Object {
-                  "classId": "1500",
-                  "missing": true,
-                  "subject": "CS",
-                },
-                Object {
                   "type": "and",
                   "values": Array [
                     Object {
-                      "classId": "2510",
-                      "subject": "CS",
+                      "type": "or",
+                      "values": Array [
+                        Object {
+                          "classId": "2510",
+                          "subject": "CS",
+                        },
+                        Object {
+                          "classId": "2500",
+                          "subject": "DS",
+                        },
+                      ],
                     },
                     Object {
                       "classId": "1800",
@@ -3347,16 +3364,6 @@ Object {
                 },
                 Object {
                   "classId": "2160",
-                  "subject": "EECE",
-                },
-                Object {
-                  "classId": "2162",
-                  "missing": true,
-                  "subject": "EECE",
-                },
-                Object {
-                  "classId": "2164",
-                  "missing": true,
                   "subject": "EECE",
                 },
               ],
@@ -3752,9 +3759,30 @@ Object {
         "classes": Array [
           Object {
             "classId": "4900",
-            "name": "",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "Information Science Senior Project",
             "numCreditsMax": 5,
             "numCreditsMin": 5,
+            "prereqs": Object {
+              "type": "or",
+              "values": Array [
+                Object {
+                  "classId": "4800",
+                  "subject": "IS",
+                },
+                Object {
+                  "classId": "6350",
+                  "subject": "CS",
+                },
+                Object {
+                  "classId": "6350",
+                  "subject": "CS",
+                },
+              ],
+            },
             "subject": "IS",
           },
           Object {
@@ -3905,7 +3933,6 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2501",
-                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -3985,7 +4012,6 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2511",
-                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -4078,7 +4104,12 @@ Object {
             "classId": "3500",
             "coreqs": Object {
               "type": "and",
-              "values": Array [],
+              "values": Array [
+                Object {
+                  "classId": "3501",
+                  "subject": "CS",
+                },
+              ],
             },
             "name": "Object-Oriented Design",
             "numCreditsMax": 4,
@@ -4152,12 +4183,7 @@ Object {
             "classId": "3000",
             "coreqs": Object {
               "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "3001",
-                  "subject": "CS",
-                },
-              ],
+              "values": Array [],
             },
             "name": "Algorithms and Data",
             "numCreditsMax": 4,
@@ -4166,16 +4192,20 @@ Object {
               "type": "or",
               "values": Array [
                 Object {
-                  "classId": "1500",
-                  "missing": true,
-                  "subject": "CS",
-                },
-                Object {
                   "type": "and",
                   "values": Array [
                     Object {
-                      "classId": "2510",
-                      "subject": "CS",
+                      "type": "or",
+                      "values": Array [
+                        Object {
+                          "classId": "2510",
+                          "subject": "CS",
+                        },
+                        Object {
+                          "classId": "2500",
+                          "subject": "DS",
+                        },
+                      ],
                     },
                     Object {
                       "classId": "1800",
@@ -4185,16 +4215,6 @@ Object {
                 },
                 Object {
                   "classId": "2160",
-                  "subject": "EECE",
-                },
-                Object {
-                  "classId": "2162",
-                  "missing": true,
-                  "subject": "EECE",
-                },
-                Object {
-                  "classId": "2164",
-                  "missing": true,
                   "subject": "EECE",
                 },
               ],
@@ -4661,7 +4681,6 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2501",
-                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -4741,7 +4760,6 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2511",
-                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -4843,7 +4861,12 @@ Object {
             "classId": "3500",
             "coreqs": Object {
               "type": "and",
-              "values": Array [],
+              "values": Array [
+                Object {
+                  "classId": "3501",
+                  "subject": "CS",
+                },
+              ],
             },
             "name": "Object-Oriented Design",
             "numCreditsMax": 4,
@@ -4943,12 +4966,7 @@ Object {
             "classId": "3000",
             "coreqs": Object {
               "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "3001",
-                  "subject": "CS",
-                },
-              ],
+              "values": Array [],
             },
             "name": "Algorithms and Data",
             "numCreditsMax": 4,
@@ -4957,16 +4975,20 @@ Object {
               "type": "or",
               "values": Array [
                 Object {
-                  "classId": "1500",
-                  "missing": true,
-                  "subject": "CS",
-                },
-                Object {
                   "type": "and",
                   "values": Array [
                     Object {
-                      "classId": "2510",
-                      "subject": "CS",
+                      "type": "or",
+                      "values": Array [
+                        Object {
+                          "classId": "2510",
+                          "subject": "CS",
+                        },
+                        Object {
+                          "classId": "2500",
+                          "subject": "DS",
+                        },
+                      ],
                     },
                     Object {
                       "classId": "1800",
@@ -4976,16 +4998,6 @@ Object {
                 },
                 Object {
                   "classId": "2160",
-                  "subject": "EECE",
-                },
-                Object {
-                  "classId": "2162",
-                  "missing": true,
-                  "subject": "EECE",
-                },
-                Object {
-                  "classId": "2164",
-                  "missing": true,
                   "subject": "EECE",
                 },
               ],
@@ -5447,7 +5459,6 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2501",
-                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -5542,7 +5553,6 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2511",
-                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -5644,7 +5654,12 @@ Object {
             "classId": "3500",
             "coreqs": Object {
               "type": "and",
-              "values": Array [],
+              "values": Array [
+                Object {
+                  "classId": "3501",
+                  "subject": "CS",
+                },
+              ],
             },
             "name": "Object-Oriented Design",
             "numCreditsMax": 4,
@@ -5788,12 +5803,7 @@ Object {
             "classId": "3000",
             "coreqs": Object {
               "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "3001",
-                  "subject": "CS",
-                },
-              ],
+              "values": Array [],
             },
             "name": "Algorithms and Data",
             "numCreditsMax": 4,
@@ -5802,16 +5812,20 @@ Object {
               "type": "or",
               "values": Array [
                 Object {
-                  "classId": "1500",
-                  "missing": true,
-                  "subject": "CS",
-                },
-                Object {
                   "type": "and",
                   "values": Array [
                     Object {
-                      "classId": "2510",
-                      "subject": "CS",
+                      "type": "or",
+                      "values": Array [
+                        Object {
+                          "classId": "2510",
+                          "subject": "CS",
+                        },
+                        Object {
+                          "classId": "2500",
+                          "subject": "DS",
+                        },
+                      ],
                     },
                     Object {
                       "classId": "1800",
@@ -5821,16 +5835,6 @@ Object {
                 },
                 Object {
                   "classId": "2160",
-                  "subject": "EECE",
-                },
-                Object {
-                  "classId": "2162",
-                  "missing": true,
-                  "subject": "EECE",
-                },
-                Object {
-                  "classId": "2164",
-                  "missing": true,
                   "subject": "EECE",
                 },
               ],
@@ -6263,7 +6267,6 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2501",
-                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -6343,7 +6346,6 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2511",
-                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -6483,7 +6485,12 @@ Object {
             "classId": "3500",
             "coreqs": Object {
               "type": "and",
-              "values": Array [],
+              "values": Array [
+                Object {
+                  "classId": "3501",
+                  "subject": "CS",
+                },
+              ],
             },
             "name": "Object-Oriented Design",
             "numCreditsMax": 4,
@@ -6608,12 +6615,7 @@ Object {
             "classId": "3000",
             "coreqs": Object {
               "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "3001",
-                  "subject": "CS",
-                },
-              ],
+              "values": Array [],
             },
             "name": "Algorithms and Data",
             "numCreditsMax": 4,
@@ -6622,16 +6624,20 @@ Object {
               "type": "or",
               "values": Array [
                 Object {
-                  "classId": "1500",
-                  "missing": true,
-                  "subject": "CS",
-                },
-                Object {
                   "type": "and",
                   "values": Array [
                     Object {
-                      "classId": "2510",
-                      "subject": "CS",
+                      "type": "or",
+                      "values": Array [
+                        Object {
+                          "classId": "2510",
+                          "subject": "CS",
+                        },
+                        Object {
+                          "classId": "2500",
+                          "subject": "DS",
+                        },
+                      ],
                     },
                     Object {
                       "classId": "1800",
@@ -6641,16 +6647,6 @@ Object {
                 },
                 Object {
                   "classId": "2160",
-                  "subject": "EECE",
-                },
-                Object {
-                  "classId": "2162",
-                  "missing": true,
-                  "subject": "EECE",
-                },
-                Object {
-                  "classId": "2164",
-                  "missing": true,
                   "subject": "EECE",
                 },
               ],
@@ -6899,9 +6895,30 @@ Object {
           },
           Object {
             "classId": "4900",
-            "name": "",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "Information Science Senior Project",
             "numCreditsMax": 5,
             "numCreditsMin": 5,
+            "prereqs": Object {
+              "type": "or",
+              "values": Array [
+                Object {
+                  "classId": "4800",
+                  "subject": "IS",
+                },
+                Object {
+                  "classId": "6350",
+                  "subject": "CS",
+                },
+                Object {
+                  "classId": "6350",
+                  "subject": "CS",
+                },
+              ],
+            },
             "subject": "IS",
           },
           Object {
@@ -7060,7 +7077,6 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2501",
-                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -7140,7 +7156,6 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2511",
-                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -7257,7 +7272,12 @@ Object {
             "classId": "3500",
             "coreqs": Object {
               "type": "and",
-              "values": Array [],
+              "values": Array [
+                Object {
+                  "classId": "3501",
+                  "subject": "CS",
+                },
+              ],
             },
             "name": "Object-Oriented Design",
             "numCreditsMax": 4,
@@ -7374,12 +7394,7 @@ Object {
             "classId": "3000",
             "coreqs": Object {
               "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "3001",
-                  "subject": "CS",
-                },
-              ],
+              "values": Array [],
             },
             "name": "Algorithms and Data",
             "numCreditsMax": 4,
@@ -7388,16 +7403,20 @@ Object {
               "type": "or",
               "values": Array [
                 Object {
-                  "classId": "1500",
-                  "missing": true,
-                  "subject": "CS",
-                },
-                Object {
                   "type": "and",
                   "values": Array [
                     Object {
-                      "classId": "2510",
-                      "subject": "CS",
+                      "type": "or",
+                      "values": Array [
+                        Object {
+                          "classId": "2510",
+                          "subject": "CS",
+                        },
+                        Object {
+                          "classId": "2500",
+                          "subject": "DS",
+                        },
+                      ],
                     },
                     Object {
                       "classId": "1800",
@@ -7407,16 +7426,6 @@ Object {
                 },
                 Object {
                   "classId": "2160",
-                  "subject": "EECE",
-                },
-                Object {
-                  "classId": "2162",
-                  "missing": true,
-                  "subject": "EECE",
-                },
-                Object {
-                  "classId": "2164",
-                  "missing": true,
                   "subject": "EECE",
                 },
               ],
@@ -7762,9 +7771,30 @@ Object {
         "classes": Array [
           Object {
             "classId": "4900",
-            "name": "",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "Information Science Senior Project",
             "numCreditsMax": 5,
             "numCreditsMin": 5,
+            "prereqs": Object {
+              "type": "or",
+              "values": Array [
+                Object {
+                  "classId": "4800",
+                  "subject": "IS",
+                },
+                Object {
+                  "classId": "6350",
+                  "subject": "CS",
+                },
+                Object {
+                  "classId": "6350",
+                  "subject": "CS",
+                },
+              ],
+            },
             "subject": "IS",
           },
           Object {
@@ -7874,7 +7904,6 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2501",
-                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -7940,9 +7969,17 @@ Object {
           },
           Object {
             "classId": "1151",
-            "name": "",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "Recitation for POLS 1150",
             "numCreditsMax": 0,
             "numCreditsMin": 0,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
             "subject": "POLS",
           },
           Object {
@@ -7991,7 +8028,6 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2511",
-                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -8077,9 +8113,17 @@ Object {
           },
           Object {
             "classId": "1161",
-            "name": "",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "Recitation for POLS 1160",
             "numCreditsMax": 0,
             "numCreditsMin": 0,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
             "subject": "POLS",
           },
         ],
@@ -8127,7 +8171,12 @@ Object {
             "classId": "3500",
             "coreqs": Object {
               "type": "and",
-              "values": Array [],
+              "values": Array [
+                Object {
+                  "classId": "3501",
+                  "subject": "CS",
+                },
+              ],
             },
             "name": "Object-Oriented Design",
             "numCreditsMax": 4,
@@ -8174,12 +8223,7 @@ Object {
             "classId": "3000",
             "coreqs": Object {
               "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "3001",
-                  "subject": "CS",
-                },
-              ],
+              "values": Array [],
             },
             "name": "Algorithms and Data",
             "numCreditsMax": 4,
@@ -8188,16 +8232,20 @@ Object {
               "type": "or",
               "values": Array [
                 Object {
-                  "classId": "1500",
-                  "missing": true,
-                  "subject": "CS",
-                },
-                Object {
                   "type": "and",
                   "values": Array [
                     Object {
-                      "classId": "2510",
-                      "subject": "CS",
+                      "type": "or",
+                      "values": Array [
+                        Object {
+                          "classId": "2510",
+                          "subject": "CS",
+                        },
+                        Object {
+                          "classId": "2500",
+                          "subject": "DS",
+                        },
+                      ],
                     },
                     Object {
                       "classId": "1800",
@@ -8207,16 +8255,6 @@ Object {
                 },
                 Object {
                   "classId": "2160",
-                  "subject": "EECE",
-                },
-                Object {
-                  "classId": "2162",
-                  "missing": true,
-                  "subject": "EECE",
-                },
-                Object {
-                  "classId": "2164",
-                  "missing": true,
                   "subject": "EECE",
                 },
               ],
@@ -8636,7 +8674,6 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2501",
-                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -8702,9 +8739,17 @@ Object {
           },
           Object {
             "classId": "1151",
-            "name": "",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "Recitation for POLS 1150",
             "numCreditsMax": 0,
             "numCreditsMin": 0,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
             "subject": "POLS",
           },
           Object {
@@ -8753,7 +8798,6 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2511",
-                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -8839,9 +8883,17 @@ Object {
           },
           Object {
             "classId": "1161",
-            "name": "",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "Recitation for POLS 1160",
             "numCreditsMax": 0,
             "numCreditsMin": 0,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
             "subject": "POLS",
           },
         ],
@@ -8873,12 +8925,7 @@ Object {
             "classId": "3000",
             "coreqs": Object {
               "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "3001",
-                  "subject": "CS",
-                },
-              ],
+              "values": Array [],
             },
             "name": "Algorithms and Data",
             "numCreditsMax": 4,
@@ -8887,16 +8934,20 @@ Object {
               "type": "or",
               "values": Array [
                 Object {
-                  "classId": "1500",
-                  "missing": true,
-                  "subject": "CS",
-                },
-                Object {
                   "type": "and",
                   "values": Array [
                     Object {
-                      "classId": "2510",
-                      "subject": "CS",
+                      "type": "or",
+                      "values": Array [
+                        Object {
+                          "classId": "2510",
+                          "subject": "CS",
+                        },
+                        Object {
+                          "classId": "2500",
+                          "subject": "DS",
+                        },
+                      ],
                     },
                     Object {
                       "classId": "1800",
@@ -8908,16 +8959,6 @@ Object {
                   "classId": "2160",
                   "subject": "EECE",
                 },
-                Object {
-                  "classId": "2162",
-                  "missing": true,
-                  "subject": "EECE",
-                },
-                Object {
-                  "classId": "2164",
-                  "missing": true,
-                  "subject": "EECE",
-                },
               ],
             },
             "subject": "CS",
@@ -8926,7 +8967,12 @@ Object {
             "classId": "3500",
             "coreqs": Object {
               "type": "and",
-              "values": Array [],
+              "values": Array [
+                Object {
+                  "classId": "3501",
+                  "subject": "CS",
+                },
+              ],
             },
             "name": "Object-Oriented Design",
             "numCreditsMax": 4,
@@ -9445,7 +9491,6 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2501",
-                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -9525,7 +9570,6 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2511",
-                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -9574,16 +9618,11 @@ Object {
             "numCreditsMax": 4,
             "numCreditsMin": 4,
             "prereqs": Object {
-              "type": "or",
+              "type": "and",
               "values": Array [
                 Object {
                   "classId": "1150",
                   "subject": "LING",
-                },
-                Object {
-                  "classId": "1150",
-                  "missing": true,
-                  "subject": "ENGL",
                 },
               ],
             },
@@ -9640,7 +9679,12 @@ Object {
             "classId": "3500",
             "coreqs": Object {
               "type": "and",
-              "values": Array [],
+              "values": Array [
+                Object {
+                  "classId": "3501",
+                  "subject": "CS",
+                },
+              ],
             },
             "name": "Object-Oriented Design",
             "numCreditsMax": 4,
@@ -9786,12 +9830,7 @@ Object {
             "classId": "3000",
             "coreqs": Object {
               "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "3001",
-                  "subject": "CS",
-                },
-              ],
+              "values": Array [],
             },
             "name": "Algorithms and Data",
             "numCreditsMax": 4,
@@ -9800,16 +9839,20 @@ Object {
               "type": "or",
               "values": Array [
                 Object {
-                  "classId": "1500",
-                  "missing": true,
-                  "subject": "CS",
-                },
-                Object {
                   "type": "and",
                   "values": Array [
                     Object {
-                      "classId": "2510",
-                      "subject": "CS",
+                      "type": "or",
+                      "values": Array [
+                        Object {
+                          "classId": "2510",
+                          "subject": "CS",
+                        },
+                        Object {
+                          "classId": "2500",
+                          "subject": "DS",
+                        },
+                      ],
                     },
                     Object {
                       "classId": "1800",
@@ -9819,16 +9862,6 @@ Object {
                 },
                 Object {
                   "classId": "2160",
-                  "subject": "EECE",
-                },
-                Object {
-                  "classId": "2162",
-                  "missing": true,
-                  "subject": "EECE",
-                },
-                Object {
-                  "classId": "2164",
-                  "missing": true,
                   "subject": "EECE",
                 },
               ],
@@ -10297,7 +10330,6 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2501",
-                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -10417,7 +10449,6 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2511",
-                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -10466,16 +10497,11 @@ Object {
             "numCreditsMax": 4,
             "numCreditsMin": 4,
             "prereqs": Object {
-              "type": "or",
+              "type": "and",
               "values": Array [
                 Object {
                   "classId": "1150",
                   "subject": "LING",
-                },
-                Object {
-                  "classId": "1150",
-                  "missing": true,
-                  "subject": "ENGL",
                 },
               ],
             },
@@ -10532,7 +10558,12 @@ Object {
             "classId": "3500",
             "coreqs": Object {
               "type": "and",
-              "values": Array [],
+              "values": Array [
+                Object {
+                  "classId": "3501",
+                  "subject": "CS",
+                },
+              ],
             },
             "name": "Object-Oriented Design",
             "numCreditsMax": 4,
@@ -10678,12 +10709,7 @@ Object {
             "classId": "3000",
             "coreqs": Object {
               "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "3001",
-                  "subject": "CS",
-                },
-              ],
+              "values": Array [],
             },
             "name": "Algorithms and Data",
             "numCreditsMax": 4,
@@ -10692,16 +10718,20 @@ Object {
               "type": "or",
               "values": Array [
                 Object {
-                  "classId": "1500",
-                  "missing": true,
-                  "subject": "CS",
-                },
-                Object {
                   "type": "and",
                   "values": Array [
                     Object {
-                      "classId": "2510",
-                      "subject": "CS",
+                      "type": "or",
+                      "values": Array [
+                        Object {
+                          "classId": "2510",
+                          "subject": "CS",
+                        },
+                        Object {
+                          "classId": "2500",
+                          "subject": "DS",
+                        },
+                      ],
                     },
                     Object {
                       "classId": "1800",
@@ -10711,16 +10741,6 @@ Object {
                 },
                 Object {
                   "classId": "2160",
-                  "subject": "EECE",
-                },
-                Object {
-                  "classId": "2162",
-                  "missing": true,
-                  "subject": "EECE",
-                },
-                Object {
-                  "classId": "2164",
-                  "missing": true,
                   "subject": "EECE",
                 },
               ],
@@ -11262,7 +11282,6 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2501",
-                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -11342,7 +11361,6 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2511",
-                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -11518,7 +11536,12 @@ Object {
             "classId": "3500",
             "coreqs": Object {
               "type": "and",
-              "values": Array [],
+              "values": Array [
+                Object {
+                  "classId": "3501",
+                  "subject": "CS",
+                },
+              ],
             },
             "name": "Object-Oriented Design",
             "numCreditsMax": 4,
@@ -11662,12 +11685,7 @@ Object {
             "classId": "3000",
             "coreqs": Object {
               "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "3001",
-                  "subject": "CS",
-                },
-              ],
+              "values": Array [],
             },
             "name": "Algorithms and Data",
             "numCreditsMax": 4,
@@ -11676,16 +11694,20 @@ Object {
               "type": "or",
               "values": Array [
                 Object {
-                  "classId": "1500",
-                  "missing": true,
-                  "subject": "CS",
-                },
-                Object {
                   "type": "and",
                   "values": Array [
                     Object {
-                      "classId": "2510",
-                      "subject": "CS",
+                      "type": "or",
+                      "values": Array [
+                        Object {
+                          "classId": "2510",
+                          "subject": "CS",
+                        },
+                        Object {
+                          "classId": "2500",
+                          "subject": "DS",
+                        },
+                      ],
                     },
                     Object {
                       "classId": "1800",
@@ -11695,16 +11717,6 @@ Object {
                 },
                 Object {
                   "classId": "2160",
-                  "subject": "EECE",
-                },
-                Object {
-                  "classId": "2162",
-                  "missing": true,
-                  "subject": "EECE",
-                },
-                Object {
-                  "classId": "2164",
-                  "missing": true,
                   "subject": "EECE",
                 },
               ],
@@ -12170,7 +12182,6 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2501",
-                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -12265,7 +12276,6 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2511",
-                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -12418,7 +12428,12 @@ Object {
             "classId": "3500",
             "coreqs": Object {
               "type": "and",
-              "values": Array [],
+              "values": Array [
+                Object {
+                  "classId": "3501",
+                  "subject": "CS",
+                },
+              ],
             },
             "name": "Object-Oriented Design",
             "numCreditsMax": 4,
@@ -12493,12 +12508,7 @@ Object {
             "classId": "3000",
             "coreqs": Object {
               "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "3001",
-                  "subject": "CS",
-                },
-              ],
+              "values": Array [],
             },
             "name": "Algorithms and Data",
             "numCreditsMax": 4,
@@ -12507,16 +12517,20 @@ Object {
               "type": "or",
               "values": Array [
                 Object {
-                  "classId": "1500",
-                  "missing": true,
-                  "subject": "CS",
-                },
-                Object {
                   "type": "and",
                   "values": Array [
                     Object {
-                      "classId": "2510",
-                      "subject": "CS",
+                      "type": "or",
+                      "values": Array [
+                        Object {
+                          "classId": "2510",
+                          "subject": "CS",
+                        },
+                        Object {
+                          "classId": "2500",
+                          "subject": "DS",
+                        },
+                      ],
                     },
                     Object {
                       "classId": "1800",
@@ -12526,16 +12540,6 @@ Object {
                 },
                 Object {
                   "classId": "2160",
-                  "subject": "EECE",
-                },
-                Object {
-                  "classId": "2162",
-                  "missing": true,
-                  "subject": "EECE",
-                },
-                Object {
-                  "classId": "2164",
-                  "missing": true,
                   "subject": "EECE",
                 },
               ],
@@ -13125,7 +13129,6 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2501",
-                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -13220,7 +13223,6 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2511",
-                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -13373,7 +13375,12 @@ Object {
             "classId": "3500",
             "coreqs": Object {
               "type": "and",
-              "values": Array [],
+              "values": Array [
+                Object {
+                  "classId": "3501",
+                  "subject": "CS",
+                },
+              ],
             },
             "name": "Object-Oriented Design",
             "numCreditsMax": 4,
@@ -13492,12 +13499,7 @@ Object {
             "classId": "3000",
             "coreqs": Object {
               "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "3001",
-                  "subject": "CS",
-                },
-              ],
+              "values": Array [],
             },
             "name": "Algorithms and Data",
             "numCreditsMax": 4,
@@ -13506,16 +13508,20 @@ Object {
               "type": "or",
               "values": Array [
                 Object {
-                  "classId": "1500",
-                  "missing": true,
-                  "subject": "CS",
-                },
-                Object {
                   "type": "and",
                   "values": Array [
                     Object {
-                      "classId": "2510",
-                      "subject": "CS",
+                      "type": "or",
+                      "values": Array [
+                        Object {
+                          "classId": "2510",
+                          "subject": "CS",
+                        },
+                        Object {
+                          "classId": "2500",
+                          "subject": "DS",
+                        },
+                      ],
                     },
                     Object {
                       "classId": "1800",
@@ -13525,16 +13531,6 @@ Object {
                 },
                 Object {
                   "classId": "2160",
-                  "subject": "EECE",
-                },
-                Object {
-                  "classId": "2162",
-                  "missing": true,
-                  "subject": "EECE",
-                },
-                Object {
-                  "classId": "2164",
-                  "missing": true,
                   "subject": "EECE",
                 },
               ],
@@ -14095,7 +14091,6 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2501",
-                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -14175,7 +14170,6 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2511",
-                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -14310,7 +14304,12 @@ Object {
             "classId": "3500",
             "coreqs": Object {
               "type": "and",
-              "values": Array [],
+              "values": Array [
+                Object {
+                  "classId": "3501",
+                  "subject": "CS",
+                },
+              ],
             },
             "name": "Object-Oriented Design",
             "numCreditsMax": 4,
@@ -14401,12 +14400,7 @@ Object {
             "classId": "3000",
             "coreqs": Object {
               "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "3001",
-                  "subject": "CS",
-                },
-              ],
+              "values": Array [],
             },
             "name": "Algorithms and Data",
             "numCreditsMax": 4,
@@ -14415,16 +14409,20 @@ Object {
               "type": "or",
               "values": Array [
                 Object {
-                  "classId": "1500",
-                  "missing": true,
-                  "subject": "CS",
-                },
-                Object {
                   "type": "and",
                   "values": Array [
                     Object {
-                      "classId": "2510",
-                      "subject": "CS",
+                      "type": "or",
+                      "values": Array [
+                        Object {
+                          "classId": "2510",
+                          "subject": "CS",
+                        },
+                        Object {
+                          "classId": "2500",
+                          "subject": "DS",
+                        },
+                      ],
                     },
                     Object {
                       "classId": "1800",
@@ -14434,16 +14432,6 @@ Object {
                 },
                 Object {
                   "classId": "2160",
-                  "subject": "EECE",
-                },
-                Object {
-                  "classId": "2162",
-                  "missing": true,
-                  "subject": "EECE",
-                },
-                Object {
-                  "classId": "2164",
-                  "missing": true,
                   "subject": "EECE",
                 },
               ],
@@ -14814,7 +14802,6 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2501",
-                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -14894,7 +14881,6 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2511",
-                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -14992,7 +14978,12 @@ Object {
             "classId": "3500",
             "coreqs": Object {
               "type": "and",
-              "values": Array [],
+              "values": Array [
+                Object {
+                  "classId": "3501",
+                  "subject": "CS",
+                },
+              ],
             },
             "name": "Object-Oriented Design",
             "numCreditsMax": 4,
@@ -15088,12 +15079,7 @@ Object {
             "classId": "3000",
             "coreqs": Object {
               "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "3001",
-                  "subject": "CS",
-                },
-              ],
+              "values": Array [],
             },
             "name": "Algorithms and Data",
             "numCreditsMax": 4,
@@ -15102,16 +15088,20 @@ Object {
               "type": "or",
               "values": Array [
                 Object {
-                  "classId": "1500",
-                  "missing": true,
-                  "subject": "CS",
-                },
-                Object {
                   "type": "and",
                   "values": Array [
                     Object {
-                      "classId": "2510",
-                      "subject": "CS",
+                      "type": "or",
+                      "values": Array [
+                        Object {
+                          "classId": "2510",
+                          "subject": "CS",
+                        },
+                        Object {
+                          "classId": "2500",
+                          "subject": "DS",
+                        },
+                      ],
                     },
                     Object {
                       "classId": "1800",
@@ -15121,16 +15111,6 @@ Object {
                 },
                 Object {
                   "classId": "2160",
-                  "subject": "EECE",
-                },
-                Object {
-                  "classId": "2162",
-                  "missing": true,
-                  "subject": "EECE",
-                },
-                Object {
-                  "classId": "2164",
-                  "missing": true,
                   "subject": "EECE",
                 },
               ],
@@ -15509,7 +15489,6 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2501",
-                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -15589,7 +15568,6 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2511",
-                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -15718,7 +15696,12 @@ Object {
             "classId": "3500",
             "coreqs": Object {
               "type": "and",
-              "values": Array [],
+              "values": Array [
+                Object {
+                  "classId": "3501",
+                  "subject": "CS",
+                },
+              ],
             },
             "name": "Object-Oriented Design",
             "numCreditsMax": 4,
@@ -15772,12 +15755,7 @@ Object {
             "classId": "3000",
             "coreqs": Object {
               "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "3001",
-                  "subject": "CS",
-                },
-              ],
+              "values": Array [],
             },
             "name": "Algorithms and Data",
             "numCreditsMax": 4,
@@ -15786,16 +15764,20 @@ Object {
               "type": "or",
               "values": Array [
                 Object {
-                  "classId": "1500",
-                  "missing": true,
-                  "subject": "CS",
-                },
-                Object {
                   "type": "and",
                   "values": Array [
                     Object {
-                      "classId": "2510",
-                      "subject": "CS",
+                      "type": "or",
+                      "values": Array [
+                        Object {
+                          "classId": "2510",
+                          "subject": "CS",
+                        },
+                        Object {
+                          "classId": "2500",
+                          "subject": "DS",
+                        },
+                      ],
                     },
                     Object {
                       "classId": "1800",
@@ -15805,16 +15787,6 @@ Object {
                 },
                 Object {
                   "classId": "2160",
-                  "subject": "EECE",
-                },
-                Object {
-                  "classId": "2162",
-                  "missing": true,
-                  "subject": "EECE",
-                },
-                Object {
-                  "classId": "2164",
-                  "missing": true,
                   "subject": "EECE",
                 },
               ],
@@ -15838,8 +15810,18 @@ Object {
                   "subject": "CRIM",
                 },
                 Object {
-                  "classId": "2200",
-                  "subject": "CRIM",
+                  "type": "or",
+                  "values": Array [
+                    Object {
+                      "classId": "1120",
+                      "subject": "CRIM",
+                    },
+                    Object {
+                      "classId": "2200",
+                      "missing": true,
+                      "subject": "CRIM",
+                    },
+                  ],
                 },
               ],
             },
@@ -16194,7 +16176,6 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2501",
-                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -16274,7 +16255,6 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2511",
-                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -16394,12 +16374,7 @@ Object {
             "classId": "3000",
             "coreqs": Object {
               "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "3001",
-                  "subject": "CS",
-                },
-              ],
+              "values": Array [],
             },
             "name": "Algorithms and Data",
             "numCreditsMax": 4,
@@ -16408,16 +16383,20 @@ Object {
               "type": "or",
               "values": Array [
                 Object {
-                  "classId": "1500",
-                  "missing": true,
-                  "subject": "CS",
-                },
-                Object {
                   "type": "and",
                   "values": Array [
                     Object {
-                      "classId": "2510",
-                      "subject": "CS",
+                      "type": "or",
+                      "values": Array [
+                        Object {
+                          "classId": "2510",
+                          "subject": "CS",
+                        },
+                        Object {
+                          "classId": "2500",
+                          "subject": "DS",
+                        },
+                      ],
                     },
                     Object {
                       "classId": "1800",
@@ -16427,16 +16406,6 @@ Object {
                 },
                 Object {
                   "classId": "2160",
-                  "subject": "EECE",
-                },
-                Object {
-                  "classId": "2162",
-                  "missing": true,
-                  "subject": "EECE",
-                },
-                Object {
-                  "classId": "2164",
-                  "missing": true,
                   "subject": "EECE",
                 },
               ],
@@ -16480,7 +16449,12 @@ Object {
             "classId": "3500",
             "coreqs": Object {
               "type": "and",
-              "values": Array [],
+              "values": Array [
+                Object {
+                  "classId": "3501",
+                  "subject": "CS",
+                },
+              ],
             },
             "name": "Object-Oriented Design",
             "numCreditsMax": 4,
@@ -16522,8 +16496,18 @@ Object {
                   "subject": "CRIM",
                 },
                 Object {
-                  "classId": "2200",
-                  "subject": "CRIM",
+                  "type": "or",
+                  "values": Array [
+                    Object {
+                      "classId": "1120",
+                      "subject": "CRIM",
+                    },
+                    Object {
+                      "classId": "2200",
+                      "missing": true,
+                      "subject": "CRIM",
+                    },
+                  ],
                 },
               ],
             },
@@ -16911,7 +16895,6 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2501",
-                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -16991,7 +16974,6 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2511",
-                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -17147,7 +17129,12 @@ Object {
             "classId": "3500",
             "coreqs": Object {
               "type": "and",
-              "values": Array [],
+              "values": Array [
+                Object {
+                  "classId": "3501",
+                  "subject": "CS",
+                },
+              ],
             },
             "name": "Object-Oriented Design",
             "numCreditsMax": 4,
@@ -17295,12 +17282,7 @@ Object {
             "classId": "3000",
             "coreqs": Object {
               "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "3001",
-                  "subject": "CS",
-                },
-              ],
+              "values": Array [],
             },
             "name": "Algorithms and Data",
             "numCreditsMax": 4,
@@ -17309,16 +17291,20 @@ Object {
               "type": "or",
               "values": Array [
                 Object {
-                  "classId": "1500",
-                  "missing": true,
-                  "subject": "CS",
-                },
-                Object {
                   "type": "and",
                   "values": Array [
                     Object {
-                      "classId": "2510",
-                      "subject": "CS",
+                      "type": "or",
+                      "values": Array [
+                        Object {
+                          "classId": "2510",
+                          "subject": "CS",
+                        },
+                        Object {
+                          "classId": "2500",
+                          "subject": "DS",
+                        },
+                      ],
                     },
                     Object {
                       "classId": "1800",
@@ -17328,16 +17314,6 @@ Object {
                 },
                 Object {
                   "classId": "2160",
-                  "subject": "EECE",
-                },
-                Object {
-                  "classId": "2162",
-                  "missing": true,
-                  "subject": "EECE",
-                },
-                Object {
-                  "classId": "2164",
-                  "missing": true,
                   "subject": "EECE",
                 },
               ],
@@ -17725,7 +17701,6 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2501",
-                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -17805,7 +17780,6 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2511",
-                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -17944,7 +17918,12 @@ Object {
             "classId": "3500",
             "coreqs": Object {
               "type": "and",
-              "values": Array [],
+              "values": Array [
+                Object {
+                  "classId": "3501",
+                  "subject": "CS",
+                },
+              ],
             },
             "name": "Object-Oriented Design",
             "numCreditsMax": 4,
@@ -18091,12 +18070,7 @@ Object {
             "classId": "3000",
             "coreqs": Object {
               "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "3001",
-                  "subject": "CS",
-                },
-              ],
+              "values": Array [],
             },
             "name": "Algorithms and Data",
             "numCreditsMax": 4,
@@ -18105,16 +18079,20 @@ Object {
               "type": "or",
               "values": Array [
                 Object {
-                  "classId": "1500",
-                  "missing": true,
-                  "subject": "CS",
-                },
-                Object {
                   "type": "and",
                   "values": Array [
                     Object {
-                      "classId": "2510",
-                      "subject": "CS",
+                      "type": "or",
+                      "values": Array [
+                        Object {
+                          "classId": "2510",
+                          "subject": "CS",
+                        },
+                        Object {
+                          "classId": "2500",
+                          "subject": "DS",
+                        },
+                      ],
                     },
                     Object {
                       "classId": "1800",
@@ -18124,16 +18102,6 @@ Object {
                 },
                 Object {
                   "classId": "2160",
-                  "subject": "EECE",
-                },
-                Object {
-                  "classId": "2162",
-                  "missing": true,
-                  "subject": "EECE",
-                },
-                Object {
-                  "classId": "2164",
-                  "missing": true,
                   "subject": "EECE",
                 },
               ],
@@ -18391,9 +18359,30 @@ Object {
         "classes": Array [
           Object {
             "classId": "4900",
-            "name": "",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "Information Science Senior Project",
             "numCreditsMax": 5,
             "numCreditsMin": 5,
+            "prereqs": Object {
+              "type": "or",
+              "values": Array [
+                Object {
+                  "classId": "4800",
+                  "subject": "IS",
+                },
+                Object {
+                  "classId": "6350",
+                  "subject": "CS",
+                },
+                Object {
+                  "classId": "6350",
+                  "subject": "CS",
+                },
+              ],
+            },
             "subject": "IS",
           },
           Object {
@@ -18548,7 +18537,6 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2501",
-                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -18620,7 +18608,6 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2511",
-                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -18726,7 +18713,12 @@ Object {
             "classId": "3500",
             "coreqs": Object {
               "type": "and",
-              "values": Array [],
+              "values": Array [
+                Object {
+                  "classId": "3501",
+                  "subject": "CS",
+                },
+              ],
             },
             "name": "Object-Oriented Design",
             "numCreditsMax": 4,
@@ -18824,12 +18816,7 @@ Object {
             "classId": "3000",
             "coreqs": Object {
               "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "3001",
-                  "subject": "CS",
-                },
-              ],
+              "values": Array [],
             },
             "name": "Algorithms and Data",
             "numCreditsMax": 4,
@@ -18838,16 +18825,20 @@ Object {
               "type": "or",
               "values": Array [
                 Object {
-                  "classId": "1500",
-                  "missing": true,
-                  "subject": "CS",
-                },
-                Object {
                   "type": "and",
                   "values": Array [
                     Object {
-                      "classId": "2510",
-                      "subject": "CS",
+                      "type": "or",
+                      "values": Array [
+                        Object {
+                          "classId": "2510",
+                          "subject": "CS",
+                        },
+                        Object {
+                          "classId": "2500",
+                          "subject": "DS",
+                        },
+                      ],
                     },
                     Object {
                       "classId": "1800",
@@ -18857,16 +18848,6 @@ Object {
                 },
                 Object {
                   "classId": "2160",
-                  "subject": "EECE",
-                },
-                Object {
-                  "classId": "2162",
-                  "missing": true,
-                  "subject": "EECE",
-                },
-                Object {
-                  "classId": "2164",
-                  "missing": true,
                   "subject": "EECE",
                 },
               ],
@@ -19410,7 +19391,6 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2501",
-                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -19482,7 +19462,6 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2511",
-                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -19588,7 +19567,12 @@ Object {
             "classId": "3500",
             "coreqs": Object {
               "type": "and",
-              "values": Array [],
+              "values": Array [
+                Object {
+                  "classId": "3501",
+                  "subject": "CS",
+                },
+              ],
             },
             "name": "Object-Oriented Design",
             "numCreditsMax": 4,
@@ -19686,12 +19670,7 @@ Object {
             "classId": "3000",
             "coreqs": Object {
               "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "3001",
-                  "subject": "CS",
-                },
-              ],
+              "values": Array [],
             },
             "name": "Algorithms and Data",
             "numCreditsMax": 4,
@@ -19700,16 +19679,20 @@ Object {
               "type": "or",
               "values": Array [
                 Object {
-                  "classId": "1500",
-                  "missing": true,
-                  "subject": "CS",
-                },
-                Object {
                   "type": "and",
                   "values": Array [
                     Object {
-                      "classId": "2510",
-                      "subject": "CS",
+                      "type": "or",
+                      "values": Array [
+                        Object {
+                          "classId": "2510",
+                          "subject": "CS",
+                        },
+                        Object {
+                          "classId": "2500",
+                          "subject": "DS",
+                        },
+                      ],
                     },
                     Object {
                       "classId": "1800",
@@ -19719,16 +19702,6 @@ Object {
                 },
                 Object {
                   "classId": "2160",
-                  "subject": "EECE",
-                },
-                Object {
-                  "classId": "2162",
-                  "missing": true,
-                  "subject": "EECE",
-                },
-                Object {
-                  "classId": "2164",
-                  "missing": true,
                   "subject": "EECE",
                 },
               ],
@@ -20280,7 +20253,6 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2501",
-                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -20360,7 +20332,6 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2511",
-                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -20488,7 +20459,12 @@ Object {
             "classId": "3500",
             "coreqs": Object {
               "type": "and",
-              "values": Array [],
+              "values": Array [
+                Object {
+                  "classId": "3501",
+                  "subject": "CS",
+                },
+              ],
             },
             "name": "Object-Oriented Design",
             "numCreditsMax": 4,
@@ -20542,12 +20518,7 @@ Object {
             "classId": "3000",
             "coreqs": Object {
               "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "3001",
-                  "subject": "CS",
-                },
-              ],
+              "values": Array [],
             },
             "name": "Algorithms and Data",
             "numCreditsMax": 4,
@@ -20556,16 +20527,20 @@ Object {
               "type": "or",
               "values": Array [
                 Object {
-                  "classId": "1500",
-                  "missing": true,
-                  "subject": "CS",
-                },
-                Object {
                   "type": "and",
                   "values": Array [
                     Object {
-                      "classId": "2510",
-                      "subject": "CS",
+                      "type": "or",
+                      "values": Array [
+                        Object {
+                          "classId": "2510",
+                          "subject": "CS",
+                        },
+                        Object {
+                          "classId": "2500",
+                          "subject": "DS",
+                        },
+                      ],
                     },
                     Object {
                       "classId": "1800",
@@ -20575,16 +20550,6 @@ Object {
                 },
                 Object {
                   "classId": "2160",
-                  "subject": "EECE",
-                },
-                Object {
-                  "classId": "2162",
-                  "missing": true,
-                  "subject": "EECE",
-                },
-                Object {
-                  "classId": "2164",
-                  "missing": true,
                   "subject": "EECE",
                 },
               ],
@@ -20773,9 +20738,22 @@ Object {
           },
           Object {
             "classId": "4515",
-            "name": "",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "Advanced Logic",
             "numCreditsMax": 4,
             "numCreditsMin": 4,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "1115",
+                  "subject": "PHIL",
+                },
+              ],
+            },
             "subject": "PHIL",
           },
           Object {
@@ -21004,7 +20982,6 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2501",
-                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -21076,7 +21053,6 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2511",
-                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -21221,12 +21197,7 @@ Object {
             "classId": "3000",
             "coreqs": Object {
               "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "3001",
-                  "subject": "CS",
-                },
-              ],
+              "values": Array [],
             },
             "name": "Algorithms and Data",
             "numCreditsMax": 4,
@@ -21235,16 +21206,20 @@ Object {
               "type": "or",
               "values": Array [
                 Object {
-                  "classId": "1500",
-                  "missing": true,
-                  "subject": "CS",
-                },
-                Object {
                   "type": "and",
                   "values": Array [
                     Object {
-                      "classId": "2510",
-                      "subject": "CS",
+                      "type": "or",
+                      "values": Array [
+                        Object {
+                          "classId": "2510",
+                          "subject": "CS",
+                        },
+                        Object {
+                          "classId": "2500",
+                          "subject": "DS",
+                        },
+                      ],
                     },
                     Object {
                       "classId": "1800",
@@ -21256,16 +21231,6 @@ Object {
                   "classId": "2160",
                   "subject": "EECE",
                 },
-                Object {
-                  "classId": "2162",
-                  "missing": true,
-                  "subject": "EECE",
-                },
-                Object {
-                  "classId": "2164",
-                  "missing": true,
-                  "subject": "EECE",
-                },
               ],
             },
             "subject": "CS",
@@ -21274,7 +21239,12 @@ Object {
             "classId": "3500",
             "coreqs": Object {
               "type": "and",
-              "values": Array [],
+              "values": Array [
+                Object {
+                  "classId": "3501",
+                  "subject": "CS",
+                },
+              ],
             },
             "name": "Object-Oriented Design",
             "numCreditsMax": 4,
@@ -21452,9 +21422,22 @@ Object {
           },
           Object {
             "classId": "4515",
-            "name": "",
+            "coreqs": Object {
+              "type": "and",
+              "values": Array [],
+            },
+            "name": "Advanced Logic",
             "numCreditsMax": 4,
             "numCreditsMin": 4,
+            "prereqs": Object {
+              "type": "and",
+              "values": Array [
+                Object {
+                  "classId": "1115",
+                  "subject": "PHIL",
+                },
+              ],
+            },
             "subject": "PHIL",
           },
           Object {
@@ -21765,7 +21748,6 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2501",
-                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -21845,7 +21827,6 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2511",
-                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -21966,7 +21947,12 @@ Object {
             "classId": "3500",
             "coreqs": Object {
               "type": "and",
-              "values": Array [],
+              "values": Array [
+                Object {
+                  "classId": "3501",
+                  "subject": "CS",
+                },
+              ],
             },
             "name": "Object-Oriented Design",
             "numCreditsMax": 4,
@@ -22076,12 +22062,7 @@ Object {
             "classId": "3000",
             "coreqs": Object {
               "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "3001",
-                  "subject": "CS",
-                },
-              ],
+              "values": Array [],
             },
             "name": "Algorithms and Data",
             "numCreditsMax": 4,
@@ -22090,16 +22071,20 @@ Object {
               "type": "or",
               "values": Array [
                 Object {
-                  "classId": "1500",
-                  "missing": true,
-                  "subject": "CS",
-                },
-                Object {
                   "type": "and",
                   "values": Array [
                     Object {
-                      "classId": "2510",
-                      "subject": "CS",
+                      "type": "or",
+                      "values": Array [
+                        Object {
+                          "classId": "2510",
+                          "subject": "CS",
+                        },
+                        Object {
+                          "classId": "2500",
+                          "subject": "DS",
+                        },
+                      ],
                     },
                     Object {
                       "classId": "1800",
@@ -22109,16 +22094,6 @@ Object {
                 },
                 Object {
                   "classId": "2160",
-                  "subject": "EECE",
-                },
-                Object {
-                  "classId": "2162",
-                  "missing": true,
-                  "subject": "EECE",
-                },
-                Object {
-                  "classId": "2164",
-                  "missing": true,
                   "subject": "EECE",
                 },
               ],
@@ -22457,6 +22432,10 @@ Object {
                       "subject": "MATH",
                     },
                     Object {
+                      "classId": "1245",
+                      "subject": "MATH",
+                    },
+                    Object {
                       "classId": "1251",
                       "subject": "MATH",
                     },
@@ -22726,7 +22705,6 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2501",
-                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -22806,7 +22784,6 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2511",
-                  "missing": true,
                   "subject": "CS",
                 },
               ],
@@ -22911,12 +22888,7 @@ Object {
             "classId": "3000",
             "coreqs": Object {
               "type": "and",
-              "values": Array [
-                Object {
-                  "classId": "3001",
-                  "subject": "CS",
-                },
-              ],
+              "values": Array [],
             },
             "name": "Algorithms and Data",
             "numCreditsMax": 4,
@@ -22925,16 +22897,20 @@ Object {
               "type": "or",
               "values": Array [
                 Object {
-                  "classId": "1500",
-                  "missing": true,
-                  "subject": "CS",
-                },
-                Object {
                   "type": "and",
                   "values": Array [
                     Object {
-                      "classId": "2510",
-                      "subject": "CS",
+                      "type": "or",
+                      "values": Array [
+                        Object {
+                          "classId": "2510",
+                          "subject": "CS",
+                        },
+                        Object {
+                          "classId": "2500",
+                          "subject": "DS",
+                        },
+                      ],
                     },
                     Object {
                       "classId": "1800",
@@ -22946,16 +22922,6 @@ Object {
                   "classId": "2160",
                   "subject": "EECE",
                 },
-                Object {
-                  "classId": "2162",
-                  "missing": true,
-                  "subject": "EECE",
-                },
-                Object {
-                  "classId": "2164",
-                  "missing": true,
-                  "subject": "EECE",
-                },
               ],
             },
             "subject": "CS",
@@ -22964,7 +22930,12 @@ Object {
             "classId": "3500",
             "coreqs": Object {
               "type": "and",
-              "values": Array [],
+              "values": Array [
+                Object {
+                  "classId": "3501",
+                  "subject": "CS",
+                },
+              ],
             },
             "name": "Object-Oriented Design",
             "numCreditsMax": 4,
@@ -23388,6 +23359,10 @@ Object {
                       "subject": "MATH",
                     },
                     Object {
+                      "classId": "1245",
+                      "subject": "MATH",
+                    },
+                    Object {
                       "classId": "1251",
                       "subject": "MATH",
                     },
@@ -23664,7 +23639,6 @@ Object {
               "values": Array [
                 Object {
                   "classId": "1108",
-                  "missing": true,
                   "subject": "BIOL",
                 },
               ],
@@ -23705,12 +23679,10 @@ Object {
               "values": Array [
                 Object {
                   "classId": "1212",
-                  "missing": true,
                   "subject": "CHEM",
                 },
                 Object {
                   "classId": "1213",
-                  "missing": true,
                   "subject": "CHEM",
                 },
               ],
@@ -23837,12 +23809,10 @@ Object {
                 },
                 Object {
                   "classId": "1107",
-                  "missing": true,
                   "subject": "BIOL",
                 },
                 Object {
                   "classId": "1111",
-                  "missing": true,
                   "subject": "BIOL",
                 },
               ],
@@ -23856,12 +23826,10 @@ Object {
               "values": Array [
                 Object {
                   "classId": "1215",
-                  "missing": true,
                   "subject": "CHEM",
                 },
                 Object {
                   "classId": "1216",
-                  "missing": true,
                   "subject": "CHEM",
                 },
               ],
@@ -24140,7 +24108,6 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2312",
-                  "missing": true,
                   "subject": "CHEM",
                 },
               ],
@@ -24157,7 +24124,6 @@ Object {
                 },
                 Object {
                   "classId": "1214",
-                  "missing": true,
                   "subject": "CHEM",
                 },
                 Object {
@@ -24335,7 +24301,6 @@ Object {
               "values": Array [
                 Object {
                   "classId": "1157",
-                  "missing": true,
                   "subject": "PHYS",
                 },
               ],
@@ -24854,7 +24819,6 @@ Object {
               "values": Array [
                 Object {
                   "classId": "1108",
-                  "missing": true,
                   "subject": "BIOL",
                 },
               ],
@@ -24895,12 +24859,10 @@ Object {
               "values": Array [
                 Object {
                   "classId": "1212",
-                  "missing": true,
                   "subject": "CHEM",
                 },
                 Object {
                   "classId": "1213",
-                  "missing": true,
                   "subject": "CHEM",
                 },
               ],
@@ -25027,12 +24989,10 @@ Object {
                 },
                 Object {
                   "classId": "1107",
-                  "missing": true,
                   "subject": "BIOL",
                 },
                 Object {
                   "classId": "1111",
-                  "missing": true,
                   "subject": "BIOL",
                 },
               ],
@@ -25046,12 +25006,10 @@ Object {
               "values": Array [
                 Object {
                   "classId": "1215",
-                  "missing": true,
                   "subject": "CHEM",
                 },
                 Object {
                   "classId": "1216",
-                  "missing": true,
                   "subject": "CHEM",
                 },
               ],
@@ -25330,7 +25288,6 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2312",
-                  "missing": true,
                   "subject": "CHEM",
                 },
               ],
@@ -25347,7 +25304,6 @@ Object {
                 },
                 Object {
                   "classId": "1214",
-                  "missing": true,
                   "subject": "CHEM",
                 },
                 Object {
@@ -25653,7 +25609,6 @@ Object {
               "values": Array [
                 Object {
                   "classId": "1157",
-                  "missing": true,
                   "subject": "PHYS",
                 },
               ],
@@ -26044,7 +25999,6 @@ Object {
               "values": Array [
                 Object {
                   "classId": "1108",
-                  "missing": true,
                   "subject": "BIOL",
                 },
               ],
@@ -26085,12 +26039,10 @@ Object {
               "values": Array [
                 Object {
                   "classId": "1212",
-                  "missing": true,
                   "subject": "CHEM",
                 },
                 Object {
                   "classId": "1213",
-                  "missing": true,
                   "subject": "CHEM",
                 },
               ],
@@ -26217,12 +26169,10 @@ Object {
                 },
                 Object {
                   "classId": "1107",
-                  "missing": true,
                   "subject": "BIOL",
                 },
                 Object {
                   "classId": "1111",
-                  "missing": true,
                   "subject": "BIOL",
                 },
               ],
@@ -26236,12 +26186,10 @@ Object {
               "values": Array [
                 Object {
                   "classId": "1215",
-                  "missing": true,
                   "subject": "CHEM",
                 },
                 Object {
                   "classId": "1216",
-                  "missing": true,
                   "subject": "CHEM",
                 },
               ],
@@ -26505,7 +26453,6 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2312",
-                  "missing": true,
                   "subject": "CHEM",
                 },
               ],
@@ -26522,7 +26469,6 @@ Object {
                 },
                 Object {
                   "classId": "1214",
-                  "missing": true,
                   "subject": "CHEM",
                 },
                 Object {
@@ -26700,7 +26646,6 @@ Object {
               "values": Array [
                 Object {
                   "classId": "1157",
-                  "missing": true,
                   "subject": "PHYS",
                 },
               ],
@@ -27266,7 +27211,6 @@ Object {
               "values": Array [
                 Object {
                   "classId": "1108",
-                  "missing": true,
                   "subject": "BIOL",
                 },
               ],
@@ -27307,12 +27251,10 @@ Object {
               "values": Array [
                 Object {
                   "classId": "1212",
-                  "missing": true,
                   "subject": "CHEM",
                 },
                 Object {
                   "classId": "1213",
-                  "missing": true,
                   "subject": "CHEM",
                 },
               ],
@@ -27439,12 +27381,10 @@ Object {
                 },
                 Object {
                   "classId": "1107",
-                  "missing": true,
                   "subject": "BIOL",
                 },
                 Object {
                   "classId": "1111",
-                  "missing": true,
                   "subject": "BIOL",
                 },
               ],
@@ -27458,12 +27398,10 @@ Object {
               "values": Array [
                 Object {
                   "classId": "1215",
-                  "missing": true,
                   "subject": "CHEM",
                 },
                 Object {
                   "classId": "1216",
-                  "missing": true,
                   "subject": "CHEM",
                 },
               ],
@@ -27727,7 +27665,6 @@ Object {
               "values": Array [
                 Object {
                   "classId": "2312",
-                  "missing": true,
                   "subject": "CHEM",
                 },
               ],
@@ -27744,7 +27681,6 @@ Object {
                 },
                 Object {
                   "classId": "1214",
-                  "missing": true,
                   "subject": "CHEM",
                 },
                 Object {
@@ -28050,7 +27986,6 @@ Object {
               "values": Array [
                 Object {
                   "classId": "1157",
-                  "missing": true,
                   "subject": "PHYS",
                 },
               ],
@@ -28525,12 +28460,10 @@ Object {
               "values": Array [
                 Object {
                   "classId": "1162",
-                  "missing": true,
                   "subject": "PHYS",
                 },
                 Object {
                   "classId": "1163",
-                  "missing": true,
                   "subject": "PHYS",
                 },
               ],
@@ -29062,7 +28995,7 @@ Object {
               "type": "and",
               "values": Array [
                 Object {
-                  "classId": "2321",
+                  "classId": "1365",
                   "subject": "MATH",
                 },
                 Object {
@@ -29276,12 +29209,10 @@ Object {
               "values": Array [
                 Object {
                   "classId": "1162",
-                  "missing": true,
                   "subject": "PHYS",
                 },
                 Object {
                   "classId": "1163",
-                  "missing": true,
                   "subject": "PHYS",
                 },
               ],
@@ -29851,7 +29782,7 @@ Object {
               "type": "and",
               "values": Array [
                 Object {
-                  "classId": "2321",
+                  "classId": "1365",
                   "subject": "MATH",
                 },
                 Object {
