@@ -91,7 +91,6 @@ const CourseListLabels = styled.div`
 const CourseBlockWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   border-top: 1px solid #dfdeda;
   border-left: 1px solid #dfdeda;
   border-right: 1px solid #dfdeda;
@@ -103,8 +102,16 @@ const CourseText = styled.div`
   height: 24px;
   font-family: Roboto;
   font-size: 15px;
+  min-width: 15%;
+  max-width: 15%;
   margin-left: 10px;
-  margin-right: 10px;
+`;
+
+const CourseArrowWrapper = styled.div`
+  height: 24px;
+  min-width: 5%;
+  max-width: 5%;
+  text-align: right;
 `;
 
 // course name text gets more space than other course metadata
@@ -112,8 +119,11 @@ const CourseNameText = styled.div`
   height: 24px;
   font-family: Roboto;
   font-size: 15px;
-  margin-left: 10px;
-  margin-right: 10px;
+  min-width: 45%;
+  max-width: 45%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 interface CourseListViewProps {
@@ -206,7 +216,9 @@ const CourseBlock: React.FC<CourseBlockProps> = (props: CourseBlockProps) => {
       <CourseNameText>{props.course.courseName}</CourseNameText>
       <CourseText>{props.course.numStudents}</CourseText>
       <CourseText>{props.course.numConflicts}</CourseText>
-      <KeyboardArrowDownIcon />
+      <CourseArrowWrapper>
+        <KeyboardArrowDownIcon />
+      </CourseArrowWrapper>
     </CourseBlockWrapper>
   );
 };
