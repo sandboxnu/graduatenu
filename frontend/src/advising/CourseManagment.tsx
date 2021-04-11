@@ -40,14 +40,6 @@ const CourseListHeader = styled.div`
   margin: 20px;
 `;
 
-const HeaderTextAndArrows = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  width: 100%
-  gap: 10px;
-`;
-
 const UpAndDownArrow = styled.div`
   display: flex;
   flex-direction: column;
@@ -147,8 +139,8 @@ const CourseNameText = styled.div`
 const CourseNameLabelText = styled.div`
   font-family: Roboto;
   font-size: 13px;
-  min-width: 40%;
-  max-width: 40%;
+  min-width: 38%;
+  max-width: 38%;
   margin-left: 10px;
   display: flex;
   flex-direction: row;
