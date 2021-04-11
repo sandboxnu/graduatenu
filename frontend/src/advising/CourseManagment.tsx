@@ -123,7 +123,7 @@ const CourseText = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 5px;
+  gap: 10px;
 `;
 
 const CourseArrowWrapper = styled.div`
@@ -136,11 +136,24 @@ const CourseArrowWrapper = styled.div`
 const CourseNameText = styled.div`
   font-family: Roboto;
   font-size: 13px;
-  min-width: 40%;
-  max-width: 40%;
+  min-width: 38%;
+  max-width: 38%;
+  margin-left: 10px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+`;
+
+const CourseNameLabelText = styled.div`
+  font-family: Roboto;
+  font-size: 13px;
+  min-width: 40%;
+  max-width: 40%;
+  margin-left: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
 `;
 
 interface CourseListViewProps {
@@ -216,28 +229,17 @@ const CourseList: React.FC<CourseListViewProps> = (
           <CourseListLabels>
             <CourseText>
               Course Number
-              <UpAndDownArrow>
-                <IconButton
-                  style={{ padding: 0 }}
-                  onClick={() => {
-                    console.log("sort");
-                  }}
-                >
-                  <KeyboardArrowUpIcon style={{ fontSize: "14px" }} />
-                </IconButton>
-                <IconButton
-                  style={{ padding: 0 }}
-                  onClick={() => {
-                    console.log("sort");
-                  }}
-                >
-                  <KeyboardArrowDownIcon style={{ fontSize: "14px" }} />
-                </IconButton>
-              </UpAndDownArrow>
+              <SortArrows />
             </CourseText>
-            <CourseNameText>Course Name</CourseNameText>
-            <CourseText>Students</CourseText>
-            <CourseText>Conflicts</CourseText>
+            <CourseNameLabelText>
+              Course Name <SortArrows />
+            </CourseNameLabelText>
+            <CourseText>
+              Students <SortArrows />
+            </CourseText>
+            <CourseText>
+              Conflicts <SortArrows />
+            </CourseText>
           </CourseListLabels>
           {props.courses.map((course: ICourseManagmentBlock) => (
             <CourseBlock course={course}></CourseBlock>
@@ -245,6 +247,29 @@ const CourseList: React.FC<CourseListViewProps> = (
         </CourseListWrapper>
       </CourseListViewBodyWrapper>
     </>
+  );
+};
+
+const SortArrows: React.FC = () => {
+  return (
+    <UpAndDownArrow>
+      <IconButton
+        style={{ padding: 0 }}
+        onClick={() => {
+          console.log("sort");
+        }}
+      >
+        <KeyboardArrowUpIcon style={{ fontSize: "14px" }} />
+      </IconButton>
+      <IconButton
+        style={{ padding: 0 }}
+        onClick={() => {
+          console.log("sort");
+        }}
+      >
+        <KeyboardArrowDownIcon style={{ fontSize: "14px" }} />
+      </IconButton>
+    </UpAndDownArrow>
   );
 };
 
