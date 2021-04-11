@@ -8,6 +8,7 @@ import { ICourseManagmentBlock } from "../models/types";
 import { mockCourseManagmentBlock } from "../data/mockData";
 import { Search } from "../components/common/Search";
 import { RedColorButton } from "../components/common/ColoredButtons";
+import { IconButton } from "@material-ui/core";
 
 const PageContentWrapper = styled.div`
   display: flex;
@@ -37,6 +38,20 @@ const CourseListHeader = styled.div`
   flex-direction: row;
   align-items: center;
   margin: 20px;
+`;
+
+const HeaderTextAndArrows = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%
+  gap: 10px;
+`;
+
+const UpAndDownArrow = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const YearAndArrow = styled.div`
@@ -76,7 +91,7 @@ const CourseListWrapper = styled.div`
   background-color: white;
   display: flex;
   flex-direction: column;
-  margin: 40px 40px 0px 40px;
+  margin: 30px 10px 0px 10px;
 `;
 
 const CourseListLabels = styled.div`
@@ -101,10 +116,14 @@ const CourseBlockWrapper = styled.div`
 
 const CourseText = styled.div`
   font-family: Roboto;
-  font-size: 15px;
-  min-width: 15%;
-  max-width: 15%;
+  font-size: 13px;
+  min-width: 17%;
+  max-width: 17%;
   margin-left: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
 `;
 
 const CourseArrowWrapper = styled.div`
@@ -116,9 +135,9 @@ const CourseArrowWrapper = styled.div`
 // course name text gets more space than other course metadata
 const CourseNameText = styled.div`
   font-family: Roboto;
-  font-size: 15px;
-  min-width: 45%;
-  max-width: 45%;
+  font-size: 13px;
+  min-width: 40%;
+  max-width: 40%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -178,9 +197,7 @@ export const CourseManagmentPage: React.FC = () => {
               </RedColorButton>
             </SearchAndFilter>
           </CourseListHeader>
-          <CourseListViewBodyWrapper>
-            <CourseListView courses={mockCourseManagmentBlock}></CourseListView>
-          </CourseListViewBodyWrapper>
+          <CourseList courses={mockCourseManagmentBlock}></CourseList>
         </CourseListViewWrapper>
         {/* right half */}
         <CourseManagementSideBar></CourseManagementSideBar>
@@ -189,21 +206,45 @@ export const CourseManagmentPage: React.FC = () => {
   );
 };
 
-const CourseListView: React.FC<CourseListViewProps> = (
+const CourseList: React.FC<CourseListViewProps> = (
   props: CourseListViewProps
 ) => {
   return (
-    <CourseListWrapper>
-      <CourseListLabels>
-        <CourseText>Course Number</CourseText>
-        <CourseNameText>Course Name</CourseNameText>
-        <CourseText>Students</CourseText>
-        <CourseText>Conflicts</CourseText>
-      </CourseListLabels>
-      {props.courses.map((course: ICourseManagmentBlock) => (
-        <CourseBlock course={course}></CourseBlock>
-      ))}
-    </CourseListWrapper>
+    <>
+      <CourseListViewBodyWrapper>
+        <CourseListWrapper>
+          <CourseListLabels>
+            <CourseText>
+              Course Number
+              <UpAndDownArrow>
+                <IconButton
+                  style={{ padding: 0 }}
+                  onClick={() => {
+                    console.log("sort");
+                  }}
+                >
+                  <KeyboardArrowUpIcon style={{ fontSize: "14px" }} />
+                </IconButton>
+                <IconButton
+                  style={{ padding: 0 }}
+                  onClick={() => {
+                    console.log("sort");
+                  }}
+                >
+                  <KeyboardArrowDownIcon style={{ fontSize: "14px" }} />
+                </IconButton>
+              </UpAndDownArrow>
+            </CourseText>
+            <CourseNameText>Course Name</CourseNameText>
+            <CourseText>Students</CourseText>
+            <CourseText>Conflicts</CourseText>
+          </CourseListLabels>
+          {props.courses.map((course: ICourseManagmentBlock) => (
+            <CourseBlock course={course}></CourseBlock>
+          ))}
+        </CourseListWrapper>
+      </CourseListViewBodyWrapper>
+    </>
   );
 };
 
