@@ -13,7 +13,8 @@ const PageContentWrapper = styled.div`
   display: flex;
   flex-direction: row;
   border-top: 1px solid red;
-  height: 700px; // how to make this 100%? without hard coding
+  height: calc(100vh - 85px);
+  background-color: #f8f7f4;
 `;
 
 // left half
@@ -64,11 +65,26 @@ const HeaderText = styled.div`
   color: black;
 `;
 
+// contains course list label and each course
 const CourseListWrapper = styled.div`
   border-top: 1px solid #dfdeda;
+  background-color: white;
   display: flex;
   flex-direction: column;
-  margin: 0px 15px 0px 15px;
+  margin: 40px 40px 0px 40px;
+`;
+
+const CourseListViewBodyWrapper = styled.div`
+  border-top: 1px solid #dfdeda;
+  margin: 0px 20px 0px 20px;
+  height: calc(100vh - 200px);
+`;
+
+const CourseListLabels = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: #f9f9f9;
 `;
 
 // each course in the list
@@ -76,12 +92,28 @@ const CourseBlockWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  border-top: 1px solid #dfdeda;
+  border-left: 1px solid #dfdeda;
+  border-right: 1px solid #dfdeda;
+  height: 35px;
+  align-items: center;
 `;
 
 const CourseText = styled.div`
   height: 24px;
   font-family: Roboto;
   font-size: 15px;
+  margin-left: 10px;
+  margin-right: 10px;
+`;
+
+// course name text gets more space than other course metadata
+const CourseNameText = styled.div`
+  height: 24px;
+  font-family: Roboto;
+  font-size: 15px;
+  margin-left: 10px;
+  margin-right: 10px;
 `;
 
 interface CourseListViewProps {
@@ -104,9 +136,8 @@ export const CourseManagmentPage: React.FC = () => {
         {/* left half */}
         <CourseListViewWrapper>
           <CourseListHeader>
-            {/* TODO: get current semester */}
             <YearAndArrow>
-              <HeaderText>Fall 2020</HeaderText>
+              <HeaderText>Fall 2021</HeaderText>
               <div
                 onClick={() => {
                   setIsExpanded(!isExpanded);
@@ -139,7 +170,9 @@ export const CourseManagmentPage: React.FC = () => {
               </RedColorButton>
             </SearchAndFilter>
           </CourseListHeader>
-          <CourseListView courses={mockCourseManagmentBlock}> </CourseListView>
+          <CourseListViewBodyWrapper>
+            <CourseListView courses={mockCourseManagmentBlock}></CourseListView>
+          </CourseListViewBodyWrapper>
         </CourseListViewWrapper>
         {/* right half */}
         <CourseManagementSideBar></CourseManagementSideBar>
@@ -153,6 +186,12 @@ const CourseListView: React.FC<CourseListViewProps> = (
 ) => {
   return (
     <CourseListWrapper>
+      <CourseListLabels>
+        <CourseText>Course Number</CourseText>
+        <CourseNameText>Course Name</CourseNameText>
+        <CourseText>Students</CourseText>
+        <CourseText>Conflicts</CourseText>
+      </CourseListLabels>
       {props.courses.map((course: ICourseManagmentBlock) => (
         <CourseBlock course={course}></CourseBlock>
       ))}
@@ -164,9 +203,10 @@ const CourseBlock: React.FC<CourseBlockProps> = (props: CourseBlockProps) => {
   return (
     <CourseBlockWrapper>
       <CourseText>{props.course.courseId}</CourseText>
-      <CourseText>{props.course.courseName}</CourseText>
+      <CourseNameText>{props.course.courseName}</CourseNameText>
       <CourseText>{props.course.numStudents}</CourseText>
       <CourseText>{props.course.numConflicts}</CourseText>
+      <KeyboardArrowDownIcon />
     </CourseBlockWrapper>
   );
 };
