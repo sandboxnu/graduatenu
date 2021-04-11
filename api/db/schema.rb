@@ -70,8 +70,8 @@ ActiveRecord::Schema.define(version: 2021_01_28_003742) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "folder_id"
-    t.integer "course_counter"
     t.string "concentration"
+    t.integer "course_counter"
     t.index ["folder_id"], name: "index_template_plans_on_folder_id"
   end
 
