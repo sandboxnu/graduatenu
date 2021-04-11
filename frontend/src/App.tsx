@@ -17,9 +17,8 @@ import { RedirectScreen } from "./Onboarding/RedirectScreen";
 import { ProtectedRoute } from "./components/Routes/ProtectedRoute";
 import { UnprotectedRoute } from "./components/Routes/UnprotectedRoute";
 import { StudentsList } from "./advising/ManageStudents/StudentsList";
-import { StudentView } from "./advising/ManageStudents/StudentView";
-import { ExpandedStudentView } from "./advising/ManageStudents/ExpandedStudentView";
 import { TemplateBuilderPage } from "./advising/Templates/TemplateBuilderPage";
+import { GenericStudentView } from "./advising/ManageStudents/GenericStudentView";
 
 export const App = ({ store }: { store: Store }) => {
   return (
@@ -65,13 +64,11 @@ const AdvisorRouter = (props: any) => {
         <Route exact path={`${path}/manageStudents`} component={StudentsList} />
         <Route
           exact
-          path={`${path}/manageStudents/:id`}
-          component={StudentView}
-        />
-        <Route
-          exact
-          path={`${path}/manageStudents/:id/expanded/:planId`}
-          component={ExpandedStudentView}
+          path={[
+            `${path}/manageStudents/:id`,
+            `${path}/manageStudents/:id/expanded/:planId`,
+          ]}
+          component={GenericStudentView}
         />
         <Route exact path={`${path}/templates`} component={TemplatesListPage} />
         <Route

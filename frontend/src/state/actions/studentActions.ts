@@ -8,7 +8,7 @@ import { IUserData } from "../../models/types";
 
 export const setStudentAction = createAction(
   "student/SET_USER",
-  (student: IUserData) => ({
+  (student?: IUserData) => ({
     student,
   })
 )();
