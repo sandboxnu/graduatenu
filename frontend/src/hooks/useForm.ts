@@ -1,10 +1,10 @@
 import { useState, useCallback, useMemo, useEffect } from "react";
 
-interface FormErrors {
-  readonly [field: string]: string;
+export interface FormErrors {
+  readonly [field: string]: string | undefined;
 }
 
-type Validator<V, E> = (values: V) => E;
+type Validator<V> = (values: V) => FormErrors;
 
 /**
  * Compose all the given validators into a single validation function.
@@ -14,12 +14,15 @@ type Validator<V, E> = (values: V) => E;
  * @param validators the validators to compose
  * @param errors the current set of errors
  */
-const composeValidators = <V, E>(
-  validators: Validator<V, E>[],
-  errors: E
-): Validator<V, E> => (values: V) =>
+const composeValidators = <V>(
+  validators: Validator<V>[],
+  errors: FormErrors
+): Validator<V> => (values: V) =>
   validators.reduce(
-    (acc: E, validator: Validator<V, E>) => ({ ...validator(values), ...acc }),
+    (acc: FormErrors, validator: Validator<V>) => ({
+      ...validator(values),
+      ...acc,
+    }),
     errors
   );
 
@@ -27,17 +30,15 @@ const composeValidators = <V, E>(
  * Custom hook for setting up a form with validation.
  *
  * @param initValues the initial values for each field
- * @param initErrors the initial errors for each field
  * @param validators a single or array of validator functions for the form
  * @returns
  */
-export const useForm = <V, E extends FormErrors>(
+export const useForm = <V>(
   initValues: V,
-  initErrors: E,
-  validators: Validator<V, E>[] | Validator<V, E>
+  validators: Validator<V>[] | Validator<V>
 ) => {
   const [values, setValues] = useState<V>(initValues);
-  const [errors, setErrors] = useState<E>(initErrors);
+  const [errors, setErrors] = useState<FormErrors>({});
   const [errorsVisible, setErrorsVisible] = useState(false);
 
   const setPartialValues = useCallback(
@@ -61,7 +62,7 @@ export const useForm = <V, E extends FormErrors>(
 
   const checkHasError = useCallback(() => {
     const newErrors = validator(values);
-    const hasError = Object.values(newErrors).some(error => error !== "");
+    const hasError = Object.values(newErrors).some(Boolean);
 
     setErrors(newErrors);
     setErrorsVisible(true);
@@ -71,9 +72,9 @@ export const useForm = <V, E extends FormErrors>(
 
   const resetForm = useCallback(() => {
     setValues(initValues);
-    setErrors(initErrors);
+    setErrors({});
     setErrorsVisible(false);
-  }, [initErrors, initValues]);
+  }, [initValues]);
 
   return {
     values,

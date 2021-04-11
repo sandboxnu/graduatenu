@@ -44,7 +44,7 @@ import { ExcelUpload } from "../components/ExcelUpload";
 import { NextButton } from "../components/common/NextButton";
 import { RedColorButton } from "../components/common/ColoredButtons";
 import { SaveInParentConcentrationDropdown } from "../components/ConcentrationDropdown";
-import { useForm } from "../hooks/useForm";
+import { FormErrors, useForm } from "../hooks/useForm";
 
 const EXCEL_TOOLTIP =
   "Auto-populate your schedule with your excel plan of study. Reach out to your advisor if you don't have it!";
@@ -128,21 +128,11 @@ const INIT_FIELDS: AddPlanPopperFields = {
   basePlan: null,
 };
 
-const INIT_ERRORS = {
-  planName: "",
-  catalogYear: "",
-  major: "",
-  concentration: "",
-  coopCycle: "",
-  planOption: "",
-  basePlan: "",
-};
-
 const validateValues = (
   scheduleNames: string[],
   selectedDNDSchedule: React.MutableRefObject<DNDSchedule | undefined>,
   noConcentrationError: boolean
-) => (values: AddPlanPopperFields): typeof INIT_ERRORS => {
+) => (values: AddPlanPopperFields): FormErrors => {
   const validatePlanName = (values: AddPlanPopperFields) => {
     // Missing plan name
     if (!values.planName) {
@@ -153,8 +143,6 @@ const validateValues = (
     if (!!values.planName && scheduleNames.includes(values.planName!)) {
       return "Cannot have the same name as an existing plan";
     }
-
-    return "";
   };
 
   const validatePlanOption = (values: AddPlanPopperFields) => {
@@ -162,8 +150,6 @@ const validateValues = (
     if (!values.planOption) {
       return REQUIRED_FIELD_MESSAGE;
     }
-
-    return "";
   };
 
   const validateBasePlan = (values: AddPlanPopperFields) => {
@@ -174,8 +160,6 @@ const validateValues = (
     ) {
       return REQUIRED_FIELD_MESSAGE;
     }
-
-    return "";
   };
 
   const validateConcentration = (values: AddPlanPopperFields) => {
@@ -183,12 +167,9 @@ const validateValues = (
     if (noConcentrationError) {
       return REQUIRED_FIELD_MESSAGE;
     }
-
-    return "";
   };
 
   return {
-    ...INIT_ERRORS,
     planName: validatePlanName(values),
     planOption: validatePlanOption(values),
     basePlan: validateBasePlan(values),
@@ -228,9 +209,8 @@ const AddPlanPopperComponent: React.FC<Props> = ({
     checkHasError,
     errorsVisible,
     resetForm,
-  } = useForm<AddPlanPopperFields, typeof INIT_ERRORS>(
+  } = useForm<AddPlanPopperFields>(
     INIT_FIELDS,
-    INIT_ERRORS,
     validateValues(scheduleNames, selectedDNDSchedule, noConcentrationError)
   );
 
