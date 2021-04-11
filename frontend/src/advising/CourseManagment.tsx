@@ -65,26 +65,26 @@ const HeaderText = styled.div`
   color: black;
 `;
 
-// contains course list label and each course
-const CourseListWrapper = styled.div`
-  border-top: 1px solid #dfdeda;
-  background-color: white;
-  display: flex;
-  flex-direction: column;
-  margin: 40px 40px 0px 40px;
-`;
-
 const CourseListViewBodyWrapper = styled.div`
   border-top: 1px solid #dfdeda;
   margin: 0px 20px 0px 20px;
   height: calc(100vh - 200px);
 `;
 
+// contains course list label and each course
+const CourseListWrapper = styled.div`
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  margin: 40px 40px 0px 40px;
+`;
+
 const CourseListLabels = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   background-color: #f9f9f9;
+  height: 35px;
+  align-items: center;
 `;
 
 // each course in the list
@@ -94,6 +94,7 @@ const CourseBlockWrapper = styled.div`
   border-top: 1px solid #dfdeda;
   border-left: 1px solid #dfdeda;
   border-right: 1px solid #dfdeda;
+  border-bottom: 1px solid #dfdeda;
   height: 35px;
   align-items: center;
 `;
