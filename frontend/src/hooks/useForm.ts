@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo, useEffect } from "react";
+import { useState, useCallback, useEffect } from "react";
 
 export interface FormErrors {
   readonly [field: string]: string | undefined;
@@ -7,36 +7,12 @@ export interface FormErrors {
 type Validator<V> = (values: V) => FormErrors;
 
 /**
- * Compose all the given validators into a single validation function.
- * current errors take precedence over newly-found ones in the final
- * set of errors.
- *
- * @param validators the validators to compose
- * @param errors the current set of errors
- */
-const composeValidators = <V>(
-  validators: Validator<V>[],
-  errors: FormErrors
-): Validator<V> => (values: V) =>
-  validators.reduce(
-    (acc: FormErrors, validator: Validator<V>) => ({
-      ...validator(values),
-      ...acc,
-    }),
-    errors
-  );
-
-/**
  * Custom hook for setting up a form with validation.
  *
  * @param initValues the initial values for each field
- * @param validators a single or array of validator functions for the form
- * @returns
+ * @param validators the validator for the form
  */
-export const useForm = <V>(
-  initValues: V,
-  validators: Validator<V>[] | Validator<V>
-) => {
+export const useForm = <V>(initValues: V, validator: Validator<V>) => {
   const [values, setValues] = useState<V>(initValues);
   const [errors, setErrors] = useState<FormErrors>({});
   const [errorsVisible, setErrorsVisible] = useState(false);
@@ -45,14 +21,6 @@ export const useForm = <V>(
     (partialValues: Partial<V>) => setValues({ ...values, ...partialValues }),
     [values]
   );
-
-  const validator = useMemo(() => {
-    if (Array.isArray(validators)) {
-      return composeValidators(validators, errors);
-    }
-
-    return validators;
-  }, [errors, validators]);
 
   useEffect(() => {
     if (errorsVisible) {
