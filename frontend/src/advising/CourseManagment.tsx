@@ -40,12 +40,6 @@ const CourseListHeader = styled.div`
   margin: 20px;
 `;
 
-const UpAndDownArrow = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
 const YearAndArrow = styled.div`
   display: flex;
   flex-direction: row;
@@ -68,7 +62,6 @@ const SearchAndFilter = styled.div`
 const HeaderText = styled.div`
   font-weight: bold;
   font-size: 28px;
-  text-decoration: none;
   color: black;
 `;
 
@@ -94,6 +87,12 @@ const CourseListLabels = styled.div`
   align-items: center;
 `;
 
+const UpAndDownArrow = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
 // each course in the list
 const CourseBlockWrapper = styled.div`
   display: flex;
@@ -109,19 +108,13 @@ const CourseBlockWrapper = styled.div`
 const CourseText = styled.div`
   font-family: Roboto;
   font-size: 13px;
-  min-width: 17%;
-  max-width: 17%;
+  min-width: 18%;
+  max-width: 18%;
   margin-left: 10px;
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 10px;
-`;
-
-const CourseArrowWrapper = styled.div`
-  min-width: 5%;
-  max-width: 5%;
-  text-align: right;
 `;
 
 // course name text gets more space than other course metadata
@@ -272,9 +265,7 @@ const CourseBlock: React.FC<CourseBlockProps> = (props: CourseBlockProps) => {
       <CourseNameText>{props.course.courseName}</CourseNameText>
       <CourseText>{props.course.numStudents}</CourseText>
       <CourseText>{props.course.numConflicts}</CourseText>
-      <CourseArrowWrapper>
-        <KeyboardArrowDownIcon />
-      </CourseArrowWrapper>
+      <KeyboardArrowDownIcon />
     </CourseBlockWrapper>
   );
 };
