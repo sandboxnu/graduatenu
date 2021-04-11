@@ -198,22 +198,22 @@ const TransferableCreditScreen: React.FC = () => {
 
     const createPlanPromise = () => {
       let schedule, courseCounter;
-      if (!!coopCycle) {
-        schedule = generateBlankCompletedCourseSchedule(
-          academicYear,
-          graduationYear,
-          completedCourseSchedule!,
-          major!,
-          coopCycle!,
-          allPlans
-        );
-      } else {
-        schedule = generateBlankCompletedCourseScheduleNoCoopCycle(
-          academicYear,
-          graduationYear,
-          completedCourseSchedule!
-        );
-      }
+      // if (!!coopCycle) {
+      //   schedule = generateBlankCompletedCourseSchedule(
+      //     academicYear,
+      //     graduationYear,
+      //     completedCourseSchedule!,
+      //     major!,
+      //     coopCycle!,
+      //     allPlans
+      //   );
+      // } else {
+      schedule = generateBlankCompletedCourseScheduleNoCoopCycle(
+        academicYear,
+        graduationYear,
+        completedCourseSchedule!
+      );
+      // }
 
       createPlanForUser(userId!, {
         name: "Plan 1",

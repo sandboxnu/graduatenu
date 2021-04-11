@@ -122,7 +122,7 @@ export function parseCompletedCourses(completedCourses: ScheduleCourse[]) {
           year: currentYear,
           fall: {
             season: "FL",
-            year: currentYear - 1,
+            year: currentYear,
             termId: Number(String(currentYear) + "10"),
             status: "CLASSES",
             classes: [],
