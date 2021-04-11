@@ -100,7 +100,6 @@ const CourseBlockWrapper = styled.div`
 `;
 
 const CourseText = styled.div`
-  height: 24px;
   font-family: Roboto;
   font-size: 15px;
   min-width: 15%;
@@ -109,7 +108,6 @@ const CourseText = styled.div`
 `;
 
 const CourseArrowWrapper = styled.div`
-  height: 24px;
   min-width: 5%;
   max-width: 5%;
   text-align: right;
@@ -117,7 +115,6 @@ const CourseArrowWrapper = styled.div`
 
 // course name text gets more space than other course metadata
 const CourseNameText = styled.div`
-  height: 24px;
   font-family: Roboto;
   font-size: 15px;
   min-width: 45%;

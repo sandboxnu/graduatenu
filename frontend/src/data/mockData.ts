@@ -514,4 +514,13 @@ export const mockCourseManagmentBlock: ICourseManagmentBlock[] = [
     topThreeConflicts: ["CS1800", "CS1200", "CS4500"],
     distribution: { 2021: 500 },
   },
+
+  {
+    courseId: "CS1210",
+    courseName: "be a leader i guess ?",
+    numStudents: 0,
+    numConflicts: 23450,
+    topThreeConflicts: [],
+    distribution: { 2021: 500 },
+  },
 ];
