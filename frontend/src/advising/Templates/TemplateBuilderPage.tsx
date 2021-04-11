@@ -29,6 +29,7 @@ import { fetchUser, IAbrStudent } from "../../services/AdvisorService";
 import { alterScheduleToHaveCorrectYears } from "../../utils";
 import { EditPlanButton } from "../../home/EditPlanButton";
 import CheckIcon from "@material-ui/icons/Check";
+import { ErrorBlock } from "../../components/common/ErrorBlock";
 
 const TitleText = styled.div`
   font-family: Roboto;
@@ -71,10 +72,10 @@ export const TemplateBuilderPage = () => {
   const routeParams = useParams<ParamProps>();
   const [openModal, setOpenModal] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [loadingError, setLoadingError] = useState<string | null>(null);
   const [templateName, setTemplateName] = useState(planName);
   const [templateData, setTemplateData] = useState<ITemplatePlan | null>(null);
   const [isEditPlanName, setIsEditPlanName] = useState(false);
+  const [isError, setIsError] = useState(false);
   const id = Number(routeParams.templateId);
   const { userId, activePlan } = useSelector(
     (state: AppState) => ({
@@ -116,7 +117,7 @@ export const TemplateBuilderPage = () => {
         concentration: templateData!.concentration,
       });
       if (planResponse.error) {
-        setLoadingError("Something went wrong with assigning this plan");
+        setIsError(true);
         return;
       } else if (shouldDelete) {
         const deleteResponse = await deleteTemplatePlan(
@@ -124,13 +125,13 @@ export const TemplateBuilderPage = () => {
           templateData!.id
         );
         if (!deleteResponse.error) {
-          setLoadingError("Something went wrong with deleting the template");
+          //TODO: Why are we setting an error when there isn't one? If needed, add same logic to StudentView
           return;
         }
       }
       history.push("/advisor/templates");
     } catch (error) {
-      setLoadingError("Something went wrong");
+      setIsError(true);
     }
   };
 
@@ -138,22 +139,18 @@ export const TemplateBuilderPage = () => {
     fetchTemplate(userId, id)
       .then(response => {
         if (response.error) {
-          setLoadingError(response.error);
+          setIsError(true);
         } else if (response.templatePlan.schedule) {
           setTemplateData(response.templatePlan);
           dispatch(addNewPlanAction(response.templatePlan));
           setTemplateName(response.templatePlan.name);
         } else {
-          setLoadingError(
-            "There does not seem to be a schedule linked to this plan. Please try creating a new plan."
-          );
+          setIsError(true);
         }
         setLoading(false);
       })
       .catch(error => {
-        setLoadingError(
-          "There was an error fetching your plan. Try and refresh!"
-        );
+        setIsError(true);
         setLoading(false);
       });
   }, []);
@@ -165,75 +162,78 @@ export const TemplateBuilderPage = () => {
     }
   };
 
-  return loading || loadingError ? (
-    <LoadingScreen
-      text="Loading your plan"
-      errorMsg={loadingError || undefined}
-    />
+  return loading ? (
+    <LoadingScreen text="Loading your plan" />
   ) : (
     <>
-      {isEditPlanName ? (
-        // show input field if in edit plan name mode
-        <PlanHeader>
-          <TextField
-            id="outlined-basic"
-            label={"Plan Name"}
-            variant="outlined"
-            value={templateName}
-            onChange={event => setTemplateName(event.target.value)}
-            placeholder=""
-            style={{ width: "326px" }}
-            InputProps={{ style: { fontSize: 20 } }}
-          />
-          {/* confirm button */}
-          <IconButton
-            style={{ padding: 3, height: ICONBUTTON_HEIGHT }}
-            onClick={() => confirmEditPlanName(templateName)}
-          >
-            <CheckIcon />
-          </IconButton>
-          {/* cancel button */}
-          <IconButton
-            style={{ padding: 3, height: ICONBUTTON_HEIGHT }}
-            onClick={() => setIsEditPlanName(false)}
-          >
-            <CloseIcon />
-          </IconButton>
-        </PlanHeader>
+      {isError ? (
+        <ErrorBlock />
       ) : (
-        // just show plan name with edit icon if not editting
-        <PlanHeader>
-          <TitleText>{planName}</TitleText>
-          <EditPlanButton
-            onClick={() => setIsEditPlanName(true)}
-          ></EditPlanButton>
-        </PlanHeader>
+        <>
+          {isEditPlanName ? (
+            // show input field if in edit plan name mode
+            <PlanHeader>
+              <TextField
+                id="outlined-basic"
+                label={"Plan Name"}
+                variant="outlined"
+                value={templateName}
+                onChange={event => setTemplateName(event.target.value)}
+                placeholder=""
+                style={{ width: "326px" }}
+                InputProps={{ style: { fontSize: 20 } }}
+              />
+              {/* confirm button */}
+              <IconButton
+                style={{ padding: 3, height: ICONBUTTON_HEIGHT }}
+                onClick={() => confirmEditPlanName(templateName)}
+              >
+                <CheckIcon />
+              </IconButton>
+              {/* cancel button */}
+              <IconButton
+                style={{ padding: 3, height: ICONBUTTON_HEIGHT }}
+                onClick={() => setIsEditPlanName(false)}
+              >
+                <CloseIcon />
+              </IconButton>
+            </PlanHeader>
+          ) : (
+            // just show plan name with edit icon if not editting
+            <PlanHeader>
+              <TitleText>{planName}</TitleText>
+              <EditPlanButton
+                onClick={() => setIsEditPlanName(true)}
+              ></EditPlanButton>
+            </PlanHeader>
+          )}
+          <ButtonContainer>
+            <AutoSavePlan isTemplate />
+            <WhiteColorButton
+              style={{ margin: 10 }}
+              onClick={() => setOpenModal(true)}
+            >
+              Assign Template
+            </WhiteColorButton>
+            <IconButton
+              style={{ padding: 3, height: ICONBUTTON_HEIGHT }}
+              onClick={() => history.push("/advisor/templates")}
+            >
+              <CloseIcon />
+            </IconButton>
+          </ButtonContainer>
+          <AssignUserToTemplateModal
+            isOpen={openModal}
+            closeModal={() => setOpenModal(false)}
+            onClose={assignTemplate}
+          />
+          <EditableSchedule
+            collapsibleYears
+            sidebarPresent
+            hasGenericCourse={true}
+          ></EditableSchedule>
+        </>
       )}
-      <ButtonContainer>
-        <AutoSavePlan isTemplate />
-        <WhiteColorButton
-          style={{ margin: 10 }}
-          onClick={() => setOpenModal(true)}
-        >
-          Assign Template
-        </WhiteColorButton>
-        <IconButton
-          style={{ padding: 3, height: ICONBUTTON_HEIGHT }}
-          onClick={() => history.push("/advisor/templates")}
-        >
-          <CloseIcon />
-        </IconButton>
-      </ButtonContainer>
-      <AssignUserToTemplateModal
-        isOpen={openModal}
-        closeModal={() => setOpenModal(false)}
-        onClose={assignTemplate}
-      />
-      <EditableSchedule
-        collapsibleYears
-        sidebarPresent
-        hasGenericCourse={true}
-      ></EditableSchedule>
     </>
   );
 };

@@ -140,32 +140,38 @@ export const StudentView: React.FC = () => {
     templateData: ITemplatePlan,
     shouldDelete: boolean
   ) => {
-    const userId = id;
-    const response = await createPlanForUser(userId, {
-      name: templateData!.name,
-      link_sharing_enabled: false,
-      schedule: alterScheduleToHaveCorrectYears(
-        templateData.schedule,
-        student!.academicYear!,
-        student!.graduationYear!
-      ),
-      catalog_year: templateData!.catalogYear,
-      major: templateData!.major,
-      coop_cycle: templateData!.coopCycle,
-      course_counter: templateData!.courseCounter,
-      concentration: templateData!.concentration,
-    });
-    console.log(response.error);
-    if (response.error) {
+    try {
+      const userId = id;
+      const response = await createPlanForUser(userId, {
+        name: templateData!.name,
+        link_sharing_enabled: false,
+        schedule: alterScheduleToHaveCorrectYears(
+          templateData.schedule,
+          student!.academicYear!,
+          student!.graduationYear!
+        ),
+        catalog_year: templateData!.catalogYear,
+        major: templateData!.major,
+        coop_cycle: templateData!.coopCycle,
+        course_counter: templateData!.courseCounter,
+        concentration: templateData!.concentration,
+      });
+      console.log(response.error);
+      if (response.error) {
+        setIsError(true);
+        return;
+      }
+      if (shouldDelete) {
+        const deleteResponse = await deleteTemplatePlan(
+          userId,
+          templateData!.id
+        );
+        // error handling for this page (?)
+      }
+      dispatch(addNewPlanAction(response.plan));
+    } catch (error) {
       setIsError(true);
-      console.log(isError);
-      return;
     }
-    if (shouldDelete) {
-      const deleteResponse = await deleteTemplatePlan(userId, templateData!.id);
-      // error handling for this page (?)
-    }
-    dispatch(addNewPlanAction(response.plan));
   };
 
   const dispatch = useDispatch();
