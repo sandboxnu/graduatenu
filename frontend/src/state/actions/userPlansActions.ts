@@ -3,6 +3,7 @@ import { createAction } from "typesafe-actions";
 import {
   Schedule,
   ScheduleCourse,
+  ScheduleTerm,
   SeasonWord,
   Status,
 } from "../../../../common/types";
@@ -140,6 +141,15 @@ export const removeClassFromActivePlanAction = createAction(
 export const undoRemoveClassFromActivePlanAction = createAction(
   "userPlans/UNDO_REMOVE_CLASS_FROM_ACTIVE_PLAN",
   () => void 0
+)();
+
+export const renameCourseInActivePlanAction = createAction(
+  "userPlans/RENAME_COURSE_IN_ACTIVE_PLAN",
+  (dndId: string, semester: ScheduleTerm, newName: string) => ({
+    dndId,
+    semester,
+    newName,
+  })
 )();
 
 export const changeSemesterStatusForActivePlanAction = createAction(
