@@ -77,7 +77,6 @@ const REQUIRED_FIELD_ERROR = "Required field";
 
 const usePlanUploadPopperErrors = (fields: PlanUploadPopperFields) => {
   const [folderSelectionError, setFolderSelectionError] = useState<string>("");
-  const [hasConcentrationError, setHasConcentrationError] = useState<boolean>();
 
   const catalogYearError = useMemo(() => {
     if (!fields.catalogYear) {
@@ -97,14 +96,6 @@ const usePlanUploadPopperErrors = (fields: PlanUploadPopperFields) => {
     return "";
   }, [fields.catalogYear, fields.major]);
 
-  const concentrationError = useMemo(() => {
-    if (hasConcentrationError) {
-      return "A concentration is required for your selected major";
-    }
-
-    return "";
-  }, [hasConcentrationError]);
-
   const namedSchedulesError = useMemo(() => {
     if (fields.namedSchedules.length < 1) {
       return "No templates uploaded";
@@ -118,11 +109,9 @@ const usePlanUploadPopperErrors = (fields: PlanUploadPopperFields) => {
       folderSelectionError,
       catalogYearError,
       majorError,
-      concentrationError,
       namedSchedulesError,
     },
     setFolderSelectionError,
-    setHasConcentrationError,
   };
 };
 
@@ -140,11 +129,7 @@ export const PlanUploadPopper: React.FC<PlanUploadPopperProps> = ({
     []
   );
   const [showErrors, setShowErrors] = useState<boolean>(false);
-  const {
-    errors,
-    setFolderSelectionError,
-    setHasConcentrationError,
-  } = usePlanUploadPopperErrors({
+  const { errors, setFolderSelectionError } = usePlanUploadPopperErrors({
     selectedFolderId,
     newFolderName,
     catalogYear,
@@ -389,8 +374,8 @@ export const PlanUploadPopper: React.FC<PlanUploadPopperProps> = ({
               major={major ?? undefined}
               concentration={concentration}
               setConcentration={setConcentration}
-              setError={setHasConcentrationError}
-              showError={showErrors}
+              setError={() => {}}
+              showError={false}
               useLabel
             />
             {CoopCycleDropdown}
