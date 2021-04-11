@@ -354,6 +354,19 @@ export interface IChangeLog {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export interface IAppointments {
+  id: number;
+  userId: number;
+  fullname: string;
+  email: string;
+  nuid: string;
+  major: string;
+  planId: number;
+  planName: string;
+  planMajor: string;
+  appointmentTime: string;
+}
 /** ------------------------------------------------------------------------
  *
  *            OLD STUFF FOLLOWS ! This stuff is big outdated and is only

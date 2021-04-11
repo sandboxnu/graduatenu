@@ -62,7 +62,7 @@ export function fetchMajorsAndPlans() {
     return new Promise<Major[]>((resolve, reject) => {
       dispatch(fetchMajorsPendingAction());
       dispatch(fetchPlansPendingAction());
-      fetch("https://staging.searchneu.com/graphql", {
+      fetch("https://api.searchneu.com/graphql", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ query: querySchema }),

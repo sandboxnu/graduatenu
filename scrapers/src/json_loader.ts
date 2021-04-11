@@ -21,7 +21,7 @@ const SEASONS: number[] = [10, 30, 40, 50, 60];
 // files are hosted by SearchNEU at the following link, where ${TERMID} is replaced by a termId:
 // https://searchneu.com/data/v2/getTermDump/neu.edu/${TERMID}.json
 const getClassMapLinkForTermId = (termId: number) => {
-  return `https://searchneu.com/data/v2/getTermDump/neu.edu/${termId}.json`;
+  return `https://api.searchneu.com/data/v2/getTermDump/neu.edu/${termId}.json`;
 };
 
 // files are downloaded and stored locally at the following path:

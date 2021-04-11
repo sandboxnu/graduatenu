@@ -235,7 +235,7 @@ const queryObj = {
 // make the request.
 // request result is a string.
 let queryResult = await rp({
-  uri: "https://searchneu.com/graphql",
+  uri: "https://old.searchneu.com/graphql",
   method: 'POST',
   body: JSON.stringify(queryObj),
   headers: {
