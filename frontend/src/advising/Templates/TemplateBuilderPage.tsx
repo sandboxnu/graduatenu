@@ -229,7 +229,11 @@ export const TemplateBuilderPage = () => {
         closeModal={() => setOpenModal(false)}
         onClose={assignTemplate}
       />
-      <EditableSchedule collapsibleYears sidebarPresent></EditableSchedule>
+      <EditableSchedule
+        collapsibleYears
+        sidebarPresent
+        hasGenericCourse={true}
+      ></EditableSchedule>
     </>
   );
 };

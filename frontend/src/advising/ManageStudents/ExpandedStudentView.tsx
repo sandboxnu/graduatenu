@@ -24,8 +24,6 @@ import styled from "styled-components";
 import { PlanTitle, ButtonHeader, ScheduleWrapper, Container } from "./Shared";
 import { Prompt, useHistory, useLocation, useParams } from "react-router";
 import { IUserData } from "../../models/types";
-import { fetchUser } from "../../services/AdvisorService";
-import { Comments } from "../../components/Schedule/Comments";
 import {
   approvePlanForUser,
   fetchPlan,
@@ -33,7 +31,6 @@ import {
 } from "../../services/PlanService";
 import IdleTimer from "react-idle-timer";
 import { LoadingSpinner } from "../../components/common/LoadingSpinner";
-import { setStudentAction } from "../../state/actions/studentActions";
 import { Alert } from "@material-ui/lab";
 import { PrimaryButton } from "../../components/common/PrimaryButton";
 import {
@@ -81,6 +78,10 @@ interface ParamProps {
   planId: string; // id of the student's plan
 }
 
+interface ExpandedStudentViewProps {
+  user: any;
+}
+
 function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
@@ -88,7 +89,9 @@ function useQuery() {
 const VIEWING_BUFFER = 30000; // 30 seconds
 const TIMEOUT = 900000; // 15 minutes
 
-export const ExpandedStudentView: React.FC = () => {
+export const ExpandedStudentView: React.FC<ExpandedStudentViewProps> = ({
+  user,
+}) => {
   let interval: number | null = null;
 
   const history = useHistory();
@@ -119,29 +122,21 @@ export const ExpandedStudentView: React.FC = () => {
   useEffect(() => {
     dispatch(expandAllYearsForActivePlanAction());
 
-    fetchUser(studentId)
+    fetchPlan(studentId, planId)
       .then(response => {
-        const user = response.user;
-        fetchPlan(studentId, planId)
-          .then(response => {
-            callUpdatePlanLastViewedOnInterval();
-            batch(() => {
-              dispatch(setStudentAction(user));
-              dispatch(
-                setUserPlansAction(
-                  [response],
-                  user.academicYear,
-                  transferCourses
-                )
-              );
-              dispatch(
-                setActivePlanAction(response.name, studentId, user.academicYear)
-              );
-            });
-            setStudent(user);
-            setLoading(false);
-          })
-          .catch(e => console.log(e));
+        callUpdatePlanLastViewedOnInterval();
+
+        batch(() => {
+          dispatch(
+            setUserPlansAction([response], user.academicYear, transferCourses)
+          );
+          dispatch(
+            setActivePlanAction(response.name, studentId, user.academicYear)
+          );
+        });
+
+        setStudent(user);
+        setLoading(false);
       })
       .catch(e => console.log(e));
 
@@ -159,7 +154,7 @@ export const ExpandedStudentView: React.FC = () => {
       sendPlanUpdates();
       window.removeEventListener("beforeunload", sendPlanUpdates);
     };
-  }, []);
+  }, [user]);
 
   const callUpdatePlanLastViewedOnInterval = () => {
     if (interval) {

@@ -8,6 +8,7 @@ import {
 import { ScheduleCourse } from "../../../common/types";
 import { fetchCourse } from "../api";
 import { convertToDNDCourses } from ".";
+import { GENERIC_COURSE_DROPPABLE_ID } from "../constants";
 
 /**
  * Utility function to move a DNDCourse between semesters upon a drag movement.
@@ -156,10 +157,19 @@ export async function addCourseFromSidebar(
   ];
 
   let courseData: string[] = draggableId.split(" ");
-  let scheduleCourse: ScheduleCourse | null = await fetchCourse(
-    courseData[0],
-    courseData[1]
-  );
+  let scheduleCourse: ScheduleCourse | null = null;
+
+  if (source.droppableId === GENERIC_COURSE_DROPPABLE_ID) {
+    scheduleCourse = {
+      name: "Default",
+      subject: courseData[0],
+      classId: courseData[1],
+      numCreditsMin: 0,
+      numCreditsMax: 0,
+    };
+  } else {
+    scheduleCourse = await fetchCourse(courseData[0], courseData[1]);
+  }
 
   if (scheduleCourse === null) {
     return;
