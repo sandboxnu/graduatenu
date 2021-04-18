@@ -12,6 +12,7 @@ import {
   safelyGetUserIdFromState,
   safelyGetStudentFullNameFromState,
   getIsAdvisorFromState,
+  safelyGetAdvisorUserIdFromState,
   safelyGetAdvisorFullNameFromState,
 } from "../../state";
 import { AppState } from "../../state/reducers/state";
@@ -168,17 +169,24 @@ export const Comments: React.FC<Props> = (props: Props) => {
     }
   };
 
-  const { planId, userId, isAdvisor, studentName, advisorName } = useSelector(
-    (state: AppState) => ({
-      planId: safelyGetActivePlanIdFromState(state),
-      userId: safelyGetUserIdFromState(state),
-      isAdvisor: getIsAdvisorFromState(state),
-      studentName: safelyGetStudentFullNameFromState(state),
-      advisorName: safelyGetAdvisorFullNameFromState(state),
-    })
-  );
+  const {
+    planId,
+    studentId,
+    advisorId,
+    isAdvisor,
+    studentName,
+    advisorName,
+  } = useSelector((state: AppState) => ({
+    planId: safelyGetActivePlanIdFromState(state),
+    studentId: safelyGetUserIdFromState(state),
+    advisorId: safelyGetAdvisorUserIdFromState(state),
+    isAdvisor: getIsAdvisorFromState(state),
+    studentName: safelyGetStudentFullNameFromState(state),
+    advisorName: safelyGetAdvisorFullNameFromState(state),
+  }));
 
   const userName = isAdvisor && advisorName ? advisorName : studentName;
+  const userId = isAdvisor && advisorId ? advisorId : studentId;
 
   useEffect(() => {
     Promise.all([
