@@ -88,7 +88,7 @@ export const RequestFeedbackPopper: React.FC = () => {
   const [
     appointment,
     setAppointment,
-  ] = useState(null);
+  ] = useState<number>(0);
 
   useDebouncedEffect(
     () =>
@@ -163,12 +163,13 @@ export const RequestFeedbackPopper: React.FC = () => {
     return (
       <ButtonContainer>
         <PrimaryButton
-          disabled={selectedAdvisor === "" || !appointment}
+          disabled={selectedAdvisor === "" || appointment == 0}
           onClick={async () => {
             await requestApproval(
               userId,
               findAdvisorEmail(selectedAdvisor),
-              planId
+              planId,
+              appointment
             );
             setIsOpen(false);
           }}
@@ -180,7 +181,9 @@ export const RequestFeedbackPopper: React.FC = () => {
   };
 
   const handleChange = (event: any) => {
-    setAppointment(event.target.value);
+    const date = new Date(event.target.value)
+    date.setHours(date.getHours() + 12) // Set Time to 12:00PM UTC time for now
+    setAppointment(date.getTime());
   };
 
   return (

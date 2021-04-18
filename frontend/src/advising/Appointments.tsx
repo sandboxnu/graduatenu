@@ -5,6 +5,12 @@ import { IAppointments } from "../models/types";
 import { fetchAppointments } from "../services/AppointmentService";
 import styled from "styled-components";
 import { PrimaryButton, SecondaryButton } from "../components/common/PrimaryButton";
+import { useHistory } from "react-router";
+import {
+  getAdvisorUserIdFromState,
+} from "../state";
+import { AppState } from "../state/reducers/state";
+
 
 const Container = styled.div`
   margin: auto;
@@ -100,14 +106,22 @@ const AppointmentsContainer: React.FC = (props: any) => {
   const dispatch = useDispatch();
   const [appointments, setAppointments] = useState<IAppointments[]>([]);
 
+  const { userId } = useSelector(
+    (state: AppState) => ({
+      userId: getAdvisorUserIdFromState(state),
+    })
+  );
+
   useEffect(() => {
-    setAppointments(fetchAppointments());
+    fetchAppointments(userId).then(response => {
+      setAppointments(response);
+    })
   }, []);
 
   const appointmentComponents = appointments.map((appt: IAppointments) => (
     <Appointment
       id={appt.id}
-      userId={appt.userId}
+      studentId={appt.studentId}
       fullname={appt.fullname}
       email={appt.email}
       nuid={appt.nuid}
@@ -136,9 +150,14 @@ const AppointmentsContainer: React.FC = (props: any) => {
 };
 
 const Appointment: React.FC<IAppointments> = (props: IAppointments) => {
-  return (
+  const date = new Date(props.appointmentTime)
+  const dateFormatter = new Intl.DateTimeFormat('en');
+  const history = useHistory();
+  const [isDismissed, setIsDismissed] = useState(false);
+  
+  return isDismissed ? null : ( 
     <AppointmentContainer>
-      <AppointmentTime> Appointment scheduled for {props.appointmentTime} </AppointmentTime>
+      <AppointmentTime> Appointment scheduled for {dateFormatter.format(date)} </AppointmentTime>
       <InfoButtonsContainer>
       <UserPlanInfo>
         <UserInfo>
@@ -154,11 +173,11 @@ const Appointment: React.FC<IAppointments> = (props: IAppointments) => {
         </PlanInfo>
       </UserPlanInfo>
       <ButtonsContainer>
-        <SecondaryButton onClick={() => console.log("test")}>
+        <SecondaryButton onClick={() => setIsDismissed(true)}>
           Dismiss
         </SecondaryButton>
         <SpaceContainer/>
-        <PrimaryButton onClick={() => console.log("test")}>
+        <PrimaryButton onClick={() => history.push(`/advisor/manageStudents/${props.studentId}/expanded/${props.planId}`)}>
           Review
         </PrimaryButton>
       </ButtonsContainer>
