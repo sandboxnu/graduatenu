@@ -8,6 +8,7 @@ import { ICourseManagmentBlock, ICourseWithCount } from "../models/types";
 import {
   mockCourseManagmentBlock,
   mockTop5ClassesWithEnrollees,
+  mockTop5ClassPairs,
 } from "../data/mockData";
 import { Search } from "../components/common/Search";
 import { RedColorButton } from "../components/common/ColoredButtons";
@@ -226,7 +227,8 @@ const ClassesMostEnrolleesWrapper = styled.div`
 
 const ClassesMostEnrolleesHeader = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: center;
   background-color: #15743e;
   height: 30px;
   opacity: 80%;
@@ -234,22 +236,73 @@ const ClassesMostEnrolleesHeader = styled.div`
 
 const SidebarSubheaderText = styled.div`
   font-family: Roboto;
-  margin: 8px 0px 0px 8px;
+  margin-left: 10px
   font-size: 14px;
   color: white;
   font-weight: bold;
 `;
 
 // each course in the list
-const ClassesMostEnrolleesCourse = styled.div`
+const ClassMostEnrolleesCourseBlock = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   border-bottom: 1px solid #5e9e78;
   border-left: 1px solid #5e9e78;
   border-right: 1px solid #5e9e78;
   background-color: #deefe5;
   height: 50px;
   align-items: center;
+`;
+
+const ClassIDandNameWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+`;
+
+const ClassIDText = styled.div`
+  font-weight: 500;
+  color: #5e9e78;
+  font-size: 14px;
+  font-family: Roboto;
+`;
+
+const ClassIDTextRed = styled.div`
+  font-weight: 500;
+  color: #cc414d;
+  font-size: 14px;
+  font-family: Roboto;
+`;
+
+const ClassNameText = styled.div`
+  font-weight: 400;
+  color: #5e9e78;
+  font-size: 14px;
+  font-family: Roboto;
+`;
+
+const ClassNameTextRed = styled.div`
+  font-weight: 400;
+  color: #cc414d;
+  font-size: 14px;
+  font-family: Roboto;
+`;
+
+const ClassCountText = styled.div`
+  font-weight: bold;
+  color: #5e9e78;
+  font-size: 14px;
+  font-family: Roboto;
+  margin-right: 10px;
+`;
+
+const ClassCountTextRed = styled.div`
+  font-weight: bold;
+  color: #cc414d;
+  font-size: 14px;
+  font-family: Roboto;
+  margin-right: 10px;
 `;
 
 const ClassPairsWrapper = styled.div`
@@ -260,16 +313,18 @@ const ClassPairsWrapper = styled.div`
 
 const ClassPairsHeader = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: center;
   background-color: #cc414d;
   height: 30px;
   opacity: 80%;
 `;
 
 // each course in the Class Pair list
-const ClassPairsCourse = styled.div`
+const ClassPairsCourseBlock = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   border-bottom: 1px solid #cc414d;
   border-left: 1px solid #cc414d;
   border-right: 1px solid #cc414d;
@@ -466,15 +521,27 @@ const CourseManagementSideBar: React.FC = () => {
           </SidebarSubheaderText>
         </ClassesMostEnrolleesHeader>
         {mockTop5ClassesWithEnrollees.map((course: ICourseWithCount) => (
-          <ClassesMostEnrolleesCourse></ClassesMostEnrolleesCourse>
+          <ClassMostEnrolleesCourseBlock>
+            <ClassIDandNameWrapper>
+              <ClassIDText>{course.courseId}</ClassIDText>
+              <ClassNameText>{course.courseName}</ClassNameText>
+            </ClassIDandNameWrapper>
+            <ClassCountText> {course.count}</ClassCountText>
+          </ClassMostEnrolleesCourseBlock>
         ))}
       </ClassesMostEnrolleesWrapper>
       <ClassPairsWrapper>
         <ClassPairsHeader>
           <SidebarSubheaderText>Class Pairs</SidebarSubheaderText>
         </ClassPairsHeader>
-        {mockTop5ClassesWithEnrollees.map((course: ICourseWithCount) => (
-          <ClassPairsCourse></ClassPairsCourse>
+        {mockTop5ClassPairs.map((course: ICourseWithCount) => (
+          <ClassPairsCourseBlock>
+            <ClassIDandNameWrapper>
+              <ClassIDTextRed>{course.courseId}</ClassIDTextRed>
+              <ClassNameTextRed>{course.courseName}</ClassNameTextRed>
+            </ClassIDandNameWrapper>
+            <ClassCountTextRed> {course.count}</ClassCountTextRed>
+          </ClassPairsCourseBlock>
         ))}
       </ClassPairsWrapper>
     </CourseManagementSideBarWrapper>

@@ -713,14 +713,14 @@ export const mockTop5ClassesWithEnrollees: ICourseWithCount[] = [
     count: 260,
   },
   {
-    courseId: "CS 2500",
-    courseName: "Fundamentals of Computer Science 1",
+    courseId: "CS 6666",
+    courseName: "hello i am class",
     count: 260,
   },
   {
-    courseId: "CS 2500",
-    courseName: "Fundamentals of Computer Science 1",
-    count: 260,
+    courseId: "CS 2504",
+    courseName: "Fundamentals of Computer Science 4",
+    count: 160,
   },
   {
     courseId: "CS 2500",
@@ -743,7 +743,7 @@ export const mockTop5ClassPairs: ICourseWithCount[] = [
   {
     courseId: "CS 2500",
     courseName: "Fundamentals of Computer Science 1",
-    count: 180,
+    count: 10,
   },
   {
     courseId: "CS 2500",
@@ -753,7 +753,7 @@ export const mockTop5ClassPairs: ICourseWithCount[] = [
   {
     courseId: "CS 2500",
     courseName: "Fundamentals of Computer Science 1",
-    count: 180,
+    count: 1800,
   },
   {
     courseId: "CS 2500",
