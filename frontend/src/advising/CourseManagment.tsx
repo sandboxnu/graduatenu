@@ -75,7 +75,6 @@ const CourseListWrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin: 0px 10px 0px 10px;
-  min-height: 35px;
   max-height: calc(100vh - 240px);
   overflow: scroll;
 `;
