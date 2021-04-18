@@ -17,13 +17,15 @@ import { connect } from "react-redux";
 import { AppState } from "../state/reducers/state";
 import { Dispatch } from "redux";
 import { Major, Schedule, ScheduleCourse } from "../../../common/types";
-import { findMajorFromName } from "../utils/plan-helpers";
+import {
+  findExamplePlanFromCoopCycle,
+  findMajorFromName,
+} from "../utils/plan-helpers";
 import { addPrereqsToSchedule } from "../../../common/prereq_loader";
 import Loader from "react-loader-spinner";
 import { createPlanForUser } from "../services/PlanService";
 import {
   convertToDNDSchedule,
-  planToString,
   generateInitialSchedule,
   generateInitialScheduleNoCoopCycle,
   generateInitialScheduleFromExistingPlan,
@@ -45,6 +47,7 @@ import { NextButton } from "../components/common/NextButton";
 import { RedColorButton } from "../components/common/ColoredButtons";
 import { getAuthToken } from "../utils/auth-helpers";
 import { SaveInParentConcentrationDropdown } from "../components/ConcentrationDropdown";
+import { BASE_FORMATTED_COOP_CYCLES } from "../plans/coopCycles";
 
 const EXCEL_TOOLTIP =
   "Auto-populate your schedule with your excel plan of study. Reach out to your advisor if you don't have it!";
@@ -381,7 +384,7 @@ function AddPlanPopperComponent(props: Props) {
     return (
       <Autocomplete
         disableListWrap
-        options={allPlans[selectedMajor!.name].map(p => planToString(p))}
+        options={BASE_FORMATTED_COOP_CYCLES}
         renderInput={params => (
           <TextField
             {...params}
@@ -404,6 +407,15 @@ function AddPlanPopperComponent(props: Props) {
     const setSelect = (e: any) => {
       setSelectedPlanOption(e.target.value);
     };
+
+    const examplePlanExists =
+      selectedMajor &&
+      selectedCoopCycle &&
+      findExamplePlanFromCoopCycle(
+        allPlans,
+        selectedMajor.name,
+        selectedCoopCycle
+      );
 
     const error = showErrors && noPlanBasedOnError;
 
@@ -435,7 +447,7 @@ function AddPlanPopperComponent(props: Props) {
           <MenuItem value={PLAN_OPTIONS.NEW_PLAN}>
             {PLAN_OPTIONS.NEW_PLAN}
           </MenuItem>
-          {selectedCoopCycle && (
+          {examplePlanExists && (
             <MenuItem value={PLAN_OPTIONS.EXAMPLE_PLAN}>
               {PLAN_OPTIONS.EXAMPLE_PLAN}
             </MenuItem>
