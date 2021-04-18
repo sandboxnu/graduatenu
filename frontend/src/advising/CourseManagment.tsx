@@ -4,8 +4,11 @@ import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
-import { ICourseManagmentBlock } from "../models/types";
-import { mockCourseManagmentBlock } from "../data/mockData";
+import { ICourseManagmentBlock, ICourseWithCount } from "../models/types";
+import {
+  mockCourseManagmentBlock,
+  mockTop5ClassesWithEnrollees,
+} from "../data/mockData";
 import { Search } from "../components/common/Search";
 import { RedColorButton } from "../components/common/ColoredButtons";
 import { IconButton } from "@material-ui/core";
@@ -25,29 +28,12 @@ const CourseListViewWrapper = styled.div`
   border-right: 1px solid #dfdeda;
 `;
 
-// right half
-const CourseManagementSideBarWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  margin-top: 10px;
-  width: 30%;
-  margin-left: 10px;
-`;
-
 // left half header
 const CourseListHeader = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
   margin: 20px;
-`;
-
-// right half header
-const SummaryHeader = styled.div`
-  margin: 20px;
-  font-weight: bold;
-  font-size: 28px;
-  color: black;
 `;
 
 const YearAndArrow = styled.div`
@@ -115,7 +101,7 @@ const UpAndDownArrow = styled.div`
 const CourseBlockWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  border-bottom: 1px solid #dfdeda;
+  border-top: 1px solid #dfdeda;
   border-left: 1px solid #dfdeda;
   border-right: 1px solid #dfdeda;
   height: 35px;
@@ -216,11 +202,80 @@ const DistributionYearRow = styled.div`
   gap: 10px;
 `;
 
+// right half
+const CourseManagementSideBarWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+  width: 30%;
+  gap: 20px;
+`;
+
+// right half header
+const SummaryHeader = styled.div`
+  font-weight: bold;
+  font-size: 28px;
+  color: black;
+`;
+
 const ClassesMostEnrolleesWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  height: 280px;
+`;
+
+const ClassesMostEnrolleesHeader = styled.div`
+  display: flex;
+  flex-direction: column;
+  background-color: #15743e;
+  height: 30px;
+  opacity: 80%;
+`;
+
+const SidebarSubheaderText = styled.div`
+  font-family: Roboto;
+  margin: 8px 0px 0px 8px;
+  font-size: 14px;
+  color: white;
+  font-weight: bold;
+`;
+
+// each course in the list
+const ClassesMostEnrolleesCourse = styled.div`
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid #5e9e78;
+  border-left: 1px solid #5e9e78;
+  border-right: 1px solid #5e9e78;
   background-color: #deefe5;
-  height: 40%;
+  height: 50px;
+  align-items: center;
+`;
+
+const ClassPairsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 280px;
+`;
+
+const ClassPairsHeader = styled.div`
+  display: flex;
+  flex-direction: column;
+  background-color: #cc414d;
+  height: 30px;
+  opacity: 80%;
+`;
+
+// each course in the Class Pair list
+const ClassPairsCourse = styled.div`
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid #cc414d;
+  border-left: 1px solid #cc414d;
+  border-right: 1px solid #cc414d;
+  background-color: #fcd0d4;
+  height: 50px;
+  align-items: center;
 `;
 
 interface CourseListViewProps {
@@ -404,7 +459,24 @@ const CourseManagementSideBar: React.FC = () => {
   return (
     <CourseManagementSideBarWrapper>
       <SummaryHeader>Summary</SummaryHeader>
-      <ClassesMostEnrolleesWrapper></ClassesMostEnrolleesWrapper>
+      <ClassesMostEnrolleesWrapper>
+        <ClassesMostEnrolleesHeader>
+          <SidebarSubheaderText>
+            Classes with most enrollees
+          </SidebarSubheaderText>
+        </ClassesMostEnrolleesHeader>
+        {mockTop5ClassesWithEnrollees.map((course: ICourseWithCount) => (
+          <ClassesMostEnrolleesCourse></ClassesMostEnrolleesCourse>
+        ))}
+      </ClassesMostEnrolleesWrapper>
+      <ClassPairsWrapper>
+        <ClassPairsHeader>
+          <SidebarSubheaderText>Class Pairs</SidebarSubheaderText>
+        </ClassPairsHeader>
+        {mockTop5ClassesWithEnrollees.map((course: ICourseWithCount) => (
+          <ClassPairsCourse></ClassPairsCourse>
+        ))}
+      </ClassPairsWrapper>
     </CourseManagementSideBarWrapper>
   );
 };
