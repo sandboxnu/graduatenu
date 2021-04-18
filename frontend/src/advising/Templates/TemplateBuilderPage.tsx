@@ -124,8 +124,8 @@ export const TemplateBuilderPage = () => {
           userId,
           templateData!.id
         );
-        if (!deleteResponse.error) {
-          //TODO: Why are we setting an error when there isn't one? If needed, add same logic to StudentView
+        if (deleteResponse.error) {
+          setIsError(true);
           return;
         }
       }

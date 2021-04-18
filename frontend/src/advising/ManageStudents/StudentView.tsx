@@ -166,7 +166,10 @@ export const StudentView: React.FC = () => {
           userId,
           templateData!.id
         );
-        // error handling for this page (?)
+        if (deleteResponse.error) {
+          setIsError(true);
+          return;
+        }
       }
       dispatch(addNewPlanAction(response.plan));
     } catch (error) {
