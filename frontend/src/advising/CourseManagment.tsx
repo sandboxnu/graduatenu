@@ -64,7 +64,6 @@ const HeaderText = styled.div`
 
 const CourseListViewBodyWrapper = styled.div`
   border-top: 1px solid #dfdeda;
-  border-bottom: 1px solid #dfdeda;
   margin: 0px 30px 0px 30px;
   height: calc(100vh - 200px);
 `;
@@ -72,11 +71,13 @@ const CourseListViewBodyWrapper = styled.div`
 // contains list of courses
 const CourseListWrapper = styled.div`
   background-color: white;
+  border-bottom: 1px solid #dfdeda;
   display: flex;
   flex-direction: column;
   margin: 0px 10px 0px 10px;
-  height: calc(100vh - 240px);
-  overflow: auto;
+  min-height: 35px;
+  max-height: calc(100vh - 240px);
+  overflow: scroll;
 `;
 
 const CourseListLabels = styled.div`
@@ -90,6 +91,7 @@ const CourseListLabels = styled.div`
   border-right: 1px solid #dfdeda;
   height: 35px;
   align-items: center;
+  padding-right: 15px;
 `;
 
 const UpAndDownArrow = styled.div`
