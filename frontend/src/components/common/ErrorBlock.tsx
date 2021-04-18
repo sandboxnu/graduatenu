@@ -32,6 +32,7 @@ const ErrorTitle = styled.div`
   font-size: 2em;
   color: #eb5757;
   text-align: left;
+  font-family: Roboto;
 `;
 
 const ErrorMessage = styled.div`
@@ -39,6 +40,7 @@ const ErrorMessage = styled.div`
   font-size: 0.9em;
   color: #808080;
   text-align: left;
+  font-family: Roboto;
 `;
 
 const ErrorImage = styled.img`
@@ -49,6 +51,7 @@ const ErrorImage = styled.img`
 /**
  * A general use error component with Oh No text, a message, and an error doggo
  */
+// TODO: TAL AND ARKIN ADD HYPERLINKS
 export class ErrorBlock extends React.Component {
   render() {
     return (
@@ -57,8 +60,15 @@ export class ErrorBlock extends React.Component {
         <ErrorTextContainer>
           <ErrorTitle>Oh no!</ErrorTitle>
           <ErrorMessage>
-            We are unable to retrieve the information you need. Please refresh
-            your browser. If the problem persists, contact us here.
+            We are unable to retrieve the information you need. Please
+            <a
+              href="javascript:location.reload();"
+              style={{ textDecoration: "none", color: "#eb5757" }}
+            >
+              {" "}
+              refresh your browser
+            </a>
+            . If the problem persists, contact us here.
           </ErrorMessage>
         </ErrorTextContainer>
       </ErrorContainer>

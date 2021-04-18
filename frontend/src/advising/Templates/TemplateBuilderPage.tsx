@@ -165,7 +165,7 @@ export const TemplateBuilderPage = () => {
   return loading ? (
     <LoadingScreen text="Loading your plan" />
   ) : (
-    <>
+    <div style={{ margin: "30px" }}>
       {isError ? (
         <ErrorBlock />
       ) : (
@@ -234,6 +234,6 @@ export const TemplateBuilderPage = () => {
           ></EditableSchedule>
         </>
       )}
-    </>
+    </div>
   );
 };
