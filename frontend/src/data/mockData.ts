@@ -6,6 +6,7 @@ import {
   SeasonEnum,
   StatusEnum,
   ICourseManagmentBlock,
+  ICourseWithCount,
 } from "../models/types";
 
 const mockClass = (num: number): DNDScheduleCourse => ({
@@ -501,8 +502,12 @@ export const mockCourseManagmentBlock: ICourseManagmentBlock[] = [
     courseName: "Fundementals of Computer Science 1",
     numStudents: 50,
     numConflicts: 200,
-    topThreeConflicts: ["CS1800", "CS1200", "CS4500"],
-    distribution: { 2021: 500 },
+    topThreeConflicts: [
+      "CS 1800 Discrete Math",
+      "CS 1200 leadership and such",
+      "CS 4500 Software Dev (?)",
+    ],
+    distribution: { 2021: 500, 2022: 30, 2023: 30, 2024: 0 },
   },
 
   {
@@ -511,8 +516,12 @@ export const mockCourseManagmentBlock: ICourseManagmentBlock[] = [
       "Fundementals of Computer Science 2 VERY VERY LONG WOW LOOK AT THIS BOI",
     numStudents: 5000000,
     numConflicts: 20,
-    topThreeConflicts: ["CS1800", "CS1200", "CS4500"],
-    distribution: { 2021: 500 },
+    topThreeConflicts: [
+      "CS 1800 Discrete Math",
+      "CS 1200 leadership and such",
+      "CS 4500 Software Dev (?)",
+    ],
+    distribution: { 2021: 500, 2022: 30, 2023: 3000, 2024: 0 },
   },
 
   {
@@ -520,7 +529,235 @@ export const mockCourseManagmentBlock: ICourseManagmentBlock[] = [
     courseName: "be a leader i guess ?",
     numStudents: 0,
     numConflicts: 23450,
-    topThreeConflicts: [],
-    distribution: { 2021: 500 },
+    topThreeConflicts: [
+      "CS 35000 Alorithms and data",
+      "CS 4200 lol",
+      "CS 4500 Software Dev (?)",
+    ],
+    distribution: { 2021: 500, 2022: 30, 2023: 30, 2024: 0 },
+  },
+  {
+    courseId: "CS1210",
+    courseName: "be a leader i guess ?",
+    numStudents: 0,
+    numConflicts: 23450,
+    topThreeConflicts: [
+      "CS 35000 Alorithms and data",
+      "CS 4200 lol",
+      "CS 4500 Software Dev (?)",
+    ],
+    distribution: { 2021: 500, 2022: 30, 2023: 30, 2024: 0 },
+  },
+  {
+    courseId: "HIST1210",
+    courseName: "learn the history young one",
+    numStudents: 0,
+    numConflicts: 23450,
+    topThreeConflicts: [
+      "ENGW 3302 learn to write bro",
+      "ART 4200 lol",
+      "CS 4500 Software Dev (?)",
+    ],
+    distribution: { 2021: 500, 2022: 30, 2023: 30, 2024: 0 },
+  },
+  {
+    courseId: "ART1234",
+    courseName: "i am picasso",
+    numStudents: 0,
+    numConflicts: 23450,
+    topThreeConflicts: [
+      "ENGW 3302 learn to write bro",
+      "ART 4200 lol",
+      "CS 4500 Software Dev (?)",
+    ],
+    distribution: { 2021: 500, 2022: 30, 2023: 30, 2024: 0 },
+  },
+  {
+    courseId: "PHIL6969",
+    courseName: "i think therefore i am",
+    numStudents: 0,
+    numConflicts: 23450,
+    topThreeConflicts: [
+      "ENGW 3302 learn to write bro",
+      "ART 4200 lol",
+      "CS 4500 Software Dev (?)",
+    ],
+    distribution: { 2021: 500, 2022: 30, 2023: 30, 2024: 0 },
+  },
+  {
+    courseId: "PHIL6969",
+    courseName: "i think therefore i am",
+    numStudents: 0,
+    numConflicts: 23450,
+    topThreeConflicts: [
+      "ENGW 3302 learn to write bro",
+      "ART 4200 lol",
+      "CS 4500 Software Dev (?)",
+    ],
+    distribution: { 2021: 500, 2022: 30, 2023: 30, 2024: 0 },
+  },
+  {
+    courseId: "PHIL6969",
+    courseName: "i think therefore i am",
+    numStudents: 0,
+    numConflicts: 23450,
+    topThreeConflicts: [
+      "ENGW 3302 learn to write bro",
+      "ART 4200 lol",
+      "CS 4500 Software Dev (?)",
+    ],
+    distribution: { 2021: 500, 2022: 30, 2023: 30, 2024: 0 },
+  },
+  {
+    courseId: "PHIL6969",
+    courseName: "i think therefore i am",
+    numStudents: 0,
+    numConflicts: 23450,
+    topThreeConflicts: [
+      "ENGW 3302 learn to write bro",
+      "ART 4200 lol",
+      "CS 4500 Software Dev (?)",
+    ],
+    distribution: { 2021: 500, 2022: 30, 2023: 30, 2024: 0 },
+  },
+  {
+    courseId: "PHIL6969",
+    courseName: "i think therefore i am",
+    numStudents: 0,
+    numConflicts: 23450,
+    topThreeConflicts: [
+      "ENGW 3302 learn to write bro",
+      "ART 4200 lol",
+      "CS 4500 Software Dev (?)",
+    ],
+    distribution: { 2021: 500, 2022: 30, 2023: 30, 2024: 0 },
+  },
+  {
+    courseId: "PHIL6969",
+    courseName: "i think therefore i am",
+    numStudents: 0,
+    numConflicts: 23450,
+    topThreeConflicts: [
+      "ENGW 3302 learn to write bro",
+      "ART 4200 lol",
+      "CS 4500 Software Dev (?)",
+    ],
+    distribution: { 2021: 500, 2022: 30, 2023: 30, 2024: 0 },
+  },
+  {
+    courseId: "PHIL6969",
+    courseName: "i think therefore i am",
+    numStudents: 0,
+    numConflicts: 23450,
+    topThreeConflicts: [
+      "ENGW 3302 learn to write bro",
+      "ART 4200 lol",
+      "CS 4500 Software Dev (?)",
+    ],
+    distribution: { 2021: 500, 2022: 30, 2023: 30, 2024: 0 },
+  },
+  {
+    courseId: "PHIL6969",
+    courseName: "i think therefore i am",
+    numStudents: 0,
+    numConflicts: 23450,
+    topThreeConflicts: [
+      "ENGW 3302 learn to write bro",
+      "ART 4200 lol",
+      "CS 4500 Software Dev (?)",
+    ],
+    distribution: { 2021: 500, 2022: 30, 2023: 30, 2024: 0 },
+  },
+  {
+    courseId: "PHIL6969",
+    courseName: "i think therefore i am",
+    numStudents: 0,
+    numConflicts: 23450,
+    topThreeConflicts: [
+      "ENGW 3302 learn to write bro",
+      "ART 4200 lol",
+      "CS 4500 Software Dev (?)",
+    ],
+    distribution: { 2021: 500, 2022: 30, 2023: 30, 2024: 0 },
+  },
+  {
+    courseId: "PHIL6969",
+    courseName: "i think therefore i am",
+    numStudents: 0,
+    numConflicts: 23450,
+    topThreeConflicts: [
+      "ENGW 3302 learn to write bro",
+      "ART 4200 lol",
+      "CS 4500 Software Dev (?)",
+    ],
+    distribution: { 2021: 500, 2022: 30, 2023: 30, 2024: 0 },
+  },
+  {
+    courseId: "PHIL6969",
+    courseName: "i think therefore i am",
+    numStudents: 0,
+    numConflicts: 23450,
+    topThreeConflicts: [
+      "ENGW 3302 learn to write bro",
+      "ART 4200 lol",
+      "CS 4500 Software Dev (?)",
+    ],
+    distribution: { 2021: 500, 2022: 30, 2023: 30, 2024: 0 },
+  },
+];
+
+export const mockTop5ClassesWithEnrollees: ICourseWithCount[] = [
+  {
+    courseId: "CS 2500",
+    courseName: "Fundamentals of Computer Science 1",
+    count: 260,
+  },
+  {
+    courseId: "CS 2500",
+    courseName: "Fundamentals of Computer Science 1",
+    count: 260,
+  },
+  {
+    courseId: "CS 2500",
+    courseName: "Fundamentals of Computer Science 1",
+    count: 260,
+  },
+  {
+    courseId: "CS 2500",
+    courseName: "Fundamentals of Computer Science 1",
+    count: 260,
+  },
+  {
+    courseId: "CS 2500",
+    courseName: "Fundamentals of Computer Science 1",
+    count: 260,
+  },
+];
+
+export const mockTop5ClassPairs: ICourseWithCount[] = [
+  {
+    courseId: "CS 2500",
+    courseName: "Fundamentals of Computer Science 1",
+    count: 180,
+  },
+  {
+    courseId: "CS 2500",
+    courseName: "Fundamentals of Computer Science 1",
+    count: 180,
+  },
+  {
+    courseId: "CS 2500",
+    courseName: "Fundamentals of Computer Science 1",
+    count: 180,
+  },
+  {
+    courseId: "CS 2500",
+    courseName: "Fundamentals of Computer Science 1",
+    count: 180,
+  },
+  {
+    courseId: "CS 2500",
+    courseName: "Fundamentals of Computer Science 1",
+    count: 180,
   },
 ];

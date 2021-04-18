@@ -27,6 +27,8 @@ const CourseListViewWrapper = styled.div`
 
 // right half
 const CourseManagementSideBarWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
   margin-top: 10px;
   width: 30%;
   margin-left: 10px;
@@ -38,6 +40,14 @@ const CourseListHeader = styled.div`
   flex-direction: row;
   align-items: center;
   margin: 20px;
+`;
+
+// right half header
+const SummaryHeader = styled.div`
+  margin: 20px;
+  font-weight: bold;
+  font-size: 28px;
+  color: black;
 `;
 
 const YearAndArrow = styled.div`
@@ -67,22 +77,30 @@ const HeaderText = styled.div`
 
 const CourseListViewBodyWrapper = styled.div`
   border-top: 1px solid #dfdeda;
-  margin: 0px 20px 0px 20px;
+  border-bottom: 1px solid #dfdeda;
+  margin: 0px 30px 0px 30px;
   height: calc(100vh - 200px);
 `;
 
-// contains course list label and each course
+// contains list of courses
 const CourseListWrapper = styled.div`
   background-color: white;
   display: flex;
   flex-direction: column;
-  margin: 30px 10px 0px 10px;
+  margin: 0px 10px 0px 10px;
+  height: calc(100vh - 240px);
+  overflow: auto;
 `;
 
 const CourseListLabels = styled.div`
   display: flex;
   flex-direction: row;
   background-color: #f9f9f9;
+  margin: 30px 10px 0px 10px;
+  border-top: 1px solid #dfdeda;
+  border-bottom: 1px solid #dfdeda;
+  border-left: 1px solid #dfdeda;
+  border-right: 1px solid #dfdeda;
   height: 35px;
   align-items: center;
 `;
@@ -97,10 +115,9 @@ const UpAndDownArrow = styled.div`
 const CourseBlockWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  border-top: 1px solid #dfdeda;
+  border-bottom: 1px solid #dfdeda;
   border-left: 1px solid #dfdeda;
   border-right: 1px solid #dfdeda;
-  border-bottom: 1px solid #dfdeda;
   height: 35px;
   align-items: center;
 `;
@@ -139,6 +156,71 @@ const CourseNameLabelText = styled.div`
   flex-direction: row;
   align-items: center;
   gap: 10px;
+`;
+
+// contains course info for a single course (such as Top Conflicts)
+const CourseInfoWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  border-left: 1px solid #dfdeda;
+  border-right: 1px solid #dfdeda;
+  height: 140px;
+`;
+
+// contains course info for a single course (such as Top Conflicts)
+const TopConflictsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  background-color: #f8f8f8;
+  height: 90px;
+  margin-left: 20%;
+  min-width: 295px;
+  max-width: 295px;
+  padding: 10px;
+  gap: 10px;
+`;
+
+// contains course info for a single course (such as Top Conflicts)
+const DistributionContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  background-color: #f8f8f8;
+  height: 110px;
+  min-width: 150px;
+  max-width: 150px;
+  margin-left: 4%;
+  padding: 10px;
+  gap: 10px;
+`;
+
+const CourseInfoTextBold = styled.div`
+  font-family: Roboto;
+  font-size: 11px;
+  font-weight: bold;
+`;
+
+const CourseInfoText = styled.div`
+  font-family: Roboto;
+  font-size: 11px;
+`;
+
+const DistributionInfoWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 80px;
+`;
+
+const DistributionYearRow = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
+
+const ClassesMostEnrolleesWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  background-color: #deefe5;
+  height: 40%;
 `;
 
 interface CourseListViewProps {
@@ -210,22 +292,22 @@ const CourseList: React.FC<CourseListViewProps> = (
   return (
     <>
       <CourseListViewBodyWrapper>
+        <CourseListLabels>
+          <CourseText>
+            Course Number
+            <SortArrows />
+          </CourseText>
+          <CourseNameLabelText>
+            Course Name <SortArrows />
+          </CourseNameLabelText>
+          <CourseText>
+            Students <SortArrows />
+          </CourseText>
+          <CourseText>
+            Conflicts <SortArrows />
+          </CourseText>
+        </CourseListLabels>
         <CourseListWrapper>
-          <CourseListLabels>
-            <CourseText>
-              Course Number
-              <SortArrows />
-            </CourseText>
-            <CourseNameLabelText>
-              Course Name <SortArrows />
-            </CourseNameLabelText>
-            <CourseText>
-              Students <SortArrows />
-            </CourseText>
-            <CourseText>
-              Conflicts <SortArrows />
-            </CourseText>
-          </CourseListLabels>
           {props.courses.map((course: ICourseManagmentBlock) => (
             <CourseBlock course={course}></CourseBlock>
           ))}
@@ -258,22 +340,71 @@ const SortArrows: React.FC = () => {
   );
 };
 
-const CourseBlock: React.FC<CourseBlockProps> = (props: CourseBlockProps) => {
+const CourseBlock: React.FC<CourseBlockProps> = ({
+  course,
+}: CourseBlockProps) => {
+  const [isExpanded, setIsExpanded] = useState(false);
   return (
-    <CourseBlockWrapper>
-      <CourseText>{props.course.courseId}</CourseText>
-      <CourseNameText>{props.course.courseName}</CourseNameText>
-      <CourseText>{props.course.numStudents}</CourseText>
-      <CourseText>{props.course.numConflicts}</CourseText>
-      <KeyboardArrowDownIcon />
-    </CourseBlockWrapper>
+    <div>
+      <CourseBlockWrapper>
+        <CourseText>{course.courseId}</CourseText>
+        <CourseNameText>{course.courseName}</CourseNameText>
+        <CourseText>{course.numStudents}</CourseText>
+        <CourseText>{course.numConflicts}</CourseText>
+        {isExpanded ? (
+          <IconButton
+            style={{ padding: 0 }}
+            onClick={() => {
+              setIsExpanded(false);
+            }}
+          >
+            <KeyboardArrowUpIcon style={{ fontSize: "14px" }} />
+          </IconButton>
+        ) : (
+          <IconButton
+            style={{ padding: 0 }}
+            onClick={() => {
+              setIsExpanded(true);
+            }}
+          >
+            <KeyboardArrowDownIcon style={{ fontSize: "14px" }} />
+          </IconButton>
+        )}
+      </CourseBlockWrapper>
+      {isExpanded && (
+        <CourseInfoWrapper>
+          <TopConflictsContainer>
+            <CourseInfoTextBold> Top conflicts</CourseInfoTextBold>
+            {course.topThreeConflicts.map((courseName: string) => (
+              <CourseInfoText>{courseName}</CourseInfoText>
+            ))}
+          </TopConflictsContainer>
+          <DistributionContainer>
+            <CourseInfoTextBold> Distribution</CourseInfoTextBold>
+            <DistributionInfoWrapper>
+              <DistributionYearRow>
+                {Object.keys(course.distribution).map(year => (
+                  <CourseInfoText>{year}</CourseInfoText>
+                ))}
+              </DistributionYearRow>
+              <DistributionYearRow>
+                {Object.values(course.distribution).map(students => (
+                  <CourseInfoTextBold>{students}</CourseInfoTextBold>
+                ))}
+              </DistributionYearRow>
+            </DistributionInfoWrapper>
+          </DistributionContainer>
+        </CourseInfoWrapper>
+      )}
+    </div>
   );
 };
 
 const CourseManagementSideBar: React.FC = () => {
   return (
     <CourseManagementSideBarWrapper>
-      <HeaderText>Summary</HeaderText>
+      <SummaryHeader>Summary</SummaryHeader>
+      <ClassesMostEnrolleesWrapper></ClassesMostEnrolleesWrapper>
     </CourseManagementSideBarWrapper>
   );
 };

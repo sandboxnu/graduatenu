@@ -378,6 +378,12 @@ export interface ICourseManagmentBlock {
     [key: number]: number;
   };
 }
+
+export interface ICourseWithCount {
+  courseId: string;
+  courseName: string;
+  count: number;
+}
 /** ------------------------------------------------------------------------
  *
  *            OLD STUFF FOLLOWS ! This stuff is big outdated and is only
