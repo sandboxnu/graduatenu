@@ -214,7 +214,7 @@ async function queryCoursePrereqData(
   // for each one of the courses, map to a string.
   // automatically use the latest occurrence.
   const courseSchema: string[] = courses.map((course: SimpleCourse) => {
-    return `class(classId: ${course.classId}, subject: "${course.subject}") {
+    return `class(classId: "${course.classId}", subject: "${course.subject}") {
       latestOccurrence {
         prereqs
         coreqs
@@ -239,7 +239,7 @@ async function queryCoursePrereqData(
 
   // make the request.
   let queryResult = await request({
-    uri: "https://old.searchneu.com/graphql",
+    uri: "https://api.searchneu.com/graphql",
     method: "POST",
     body: JSON.stringify({ query: querySchema }),
     headers: {
