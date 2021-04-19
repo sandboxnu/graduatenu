@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { GraduateHeader } from "../components/common/GraduateHeader";
-import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
@@ -345,7 +344,6 @@ interface CourseBlockProps {
 export const CourseManagmentPage: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [isExpanded, setIsExpanded] = useState(false);
-  const dispatch = useDispatch();
 
   return (
     <>
@@ -359,7 +357,6 @@ export const CourseManagmentPage: React.FC = () => {
               <div
                 onClick={() => {
                   setIsExpanded(!isExpanded);
-                  console.log("clicked arrow");
                 }}
                 style={{ marginRight: 4 }}
               >
