@@ -367,6 +367,23 @@ export interface IAppointments {
   planMajor: string;
   appointmentTime: string;
 }
+
+export interface ICourseManagmentBlock {
+  courseId: string;
+  courseName: string;
+  numStudents: number;
+  numConflicts: number;
+  topThreeConflicts: string[];
+  distribution: {
+    [key: number]: number;
+  };
+}
+
+export interface ICourseWithCount {
+  courseId: string;
+  courseName: string;
+  count: number;
+}
 /** ------------------------------------------------------------------------
  *
  *            OLD STUFF FOLLOWS ! This stuff is big outdated and is only

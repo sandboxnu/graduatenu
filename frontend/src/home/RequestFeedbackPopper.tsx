@@ -42,8 +42,8 @@ const StepContainer = styled.div`
 `;
 
 const CalendarContainer = styled.div`
-  margin-bottom: 10px
-`
+  margin-bottom: 10px;
+`;
 
 const StepNumber = styled.div`
   color: ${NORTHEASTERN_RED}
@@ -85,10 +85,7 @@ export const RequestFeedbackPopper: React.FC = () => {
     JSON.stringify(currentSchedule) == JSON.stringify(approvedSchedule)
   );
   const [advisors, setAdvisors] = useState(EMPTY_ADVISOR_LIST);
-  const [
-    appointment,
-    setAppointment,
-  ] = useState<number>(0);
+  const [appointment, setAppointment] = useState<number>(0);
 
   useDebouncedEffect(
     () =>
@@ -181,8 +178,8 @@ export const RequestFeedbackPopper: React.FC = () => {
   };
 
   const handleChange = (event: any) => {
-    const date = new Date(event.target.value)
-    date.setHours(date.getHours() + 12) // Set Time to 12:00PM UTC time for now
+    const date = new Date(event.target.value);
+    date.setHours(date.getHours() + 12); // Set Time to 12:00PM UTC time for now
     setAppointment(date.getTime());
   };
 
@@ -219,10 +216,7 @@ export const RequestFeedbackPopper: React.FC = () => {
         <AdvisorDropdown />
         <StepContainer>
           <StepNumber> 3. </StepNumber>
-          <StepText>
-            {" "}
-            When is your appointment with your advisor?{" "}
-          </StepText>
+          <StepText> When is your appointment with your advisor? </StepText>
         </StepContainer>
         <CalendarContainer>
           <form>

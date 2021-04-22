@@ -5,6 +5,8 @@ import {
   ISimplifiedCourseDataAPI,
   SeasonEnum,
   StatusEnum,
+  ICourseManagmentBlock,
+  ICourseWithCount,
 } from "../models/types";
 
 const mockClass = (num: number): DNDScheduleCourse => ({
@@ -494,78 +496,343 @@ export const mockKhouryClassesData = [
   },
 ];
 
-const mockAppointments = 
-[
-    {
-      "id": 0,
-      "userId": 1,
-      "fullname": "Alexander Grob",
-      "email": "grob.a@northeastern.edu",
-      "nuid": "001211929",
-      "major": "Computer Science and Math",
-      "planId": 1,
-      "planName": "5 Year CS Plan",
-      "planMajor": "Computer Science",
-      "appointmentTime": "Mar 14, 2021"
-    },
-    {
-      "id": 0,
-      "userId": 1,
-      "fullname": "Iman Moreira",
-      "email": "moreira.i@northeastern.edu",
-      "nuid": "001211929",
-      "major": "Computer Science and Bio",
-      "planId": 1,
-      "planName": "Memes for days",
-      "planMajor": "Computer Science and Math",
-      "appointmentTime": "Mar 14, 2021"
-    },
-    {
-      "id": 0,
-      "userId": 1,
-      "fullname": "Nils Backe",
-      "email": "backe.n@northeastern.edu",
-      "nuid": "001211929",
-      "major": "Computer Science",
-      "planId": 1,
-      "planName": "Three and out",
-      "planMajor": "Computer Science and Design",
-      "appointmentTime": "Mar 14, 2021"
-    },
-    {
-      "id": 0,
-      "userId": 1,
-      "fullname": "Andrew Leung",
-      "email": "leung.a@northeastern.edu",
-      "nuid": "001211929",
-      "major": "Computer Science",
-      "planId": 1,
-      "planName": "Lets drop some beats",
-      "planMajor": "Computer Science",
-      "appointmentTime": "Mar 14, 2021"
-    },
-    {
-      "id": 0,
-      "userId": 1,
-      "fullname": "Arkin Mukherjee",
-      "email": "mukherjee.a@northeastern.edu",
-      "nuid": "001211929",
-      "major": "Computer Science",
-      "planId": 1,
-      "planName": "gme to the moon",
-      "planMajor": "Computer Science",
-      "appointmentTime": "Mar 14, 2021"
-    },
-    {
-      "id": 0,
-      "userId": 1,
-      "fullname": "Arun Jeevanantham",
-      "email": "jeevanantham.a@northeastern.edu",
-      "nuid": "001211929",
-      "major": "Computer Science",
-      "planId": 1,
-      "planName": "A really really really long name",
-      "planMajor": "Computer Science",
-      "appointmentTime": "Mar 14, 2021"
-    },
-  ];
+export const mockCourseManagmentBlock: ICourseManagmentBlock[] = [
+  {
+    courseId: "CS2500",
+    courseName: "Fundementals of Computer Science 1",
+    numStudents: 50,
+    numConflicts: 200,
+    topThreeConflicts: [
+      "CS 1800 Discrete Math",
+      "CS 1200 leadership and such",
+      "CS 4500 Software Dev (?)",
+    ],
+    distribution: { 2021: 500, 2022: 30, 2023: 30, 2024: 0 },
+  },
+
+  {
+    courseId: "CS2510",
+    courseName:
+      "Fundementals of Computer Science 2 VERY VERY LONG WOW LOOK AT THIS BOI",
+    numStudents: 5000000,
+    numConflicts: 20,
+    topThreeConflicts: [
+      "CS 1800 Discrete Math",
+      "CS 1200 leadership and such",
+      "CS 4500 Software Dev (?)",
+    ],
+    distribution: { 2021: 500, 2022: 30, 2023: 3000, 2024: 0 },
+  },
+
+  {
+    courseId: "CS1210",
+    courseName: "be a leader i guess ?",
+    numStudents: 0,
+    numConflicts: 23450,
+    topThreeConflicts: [
+      "CS 35000 Alorithms and data",
+      "CS 4200 lol",
+      "CS 4500 Software Dev (?)",
+    ],
+    distribution: { 2021: 500, 2022: 30, 2023: 30, 2024: 0 },
+  },
+  {
+    courseId: "CS1210",
+    courseName: "be a leader i guess ?",
+    numStudents: 0,
+    numConflicts: 23450,
+    topThreeConflicts: [
+      "CS 35000 Alorithms and data",
+      "CS 4200 lol",
+      "CS 4500 Software Dev (?)",
+    ],
+    distribution: { 2021: 500, 2022: 30, 2023: 30, 2024: 0 },
+  },
+  {
+    courseId: "HIST1210",
+    courseName: "learn the history young one",
+    numStudents: 0,
+    numConflicts: 23450,
+    topThreeConflicts: [
+      "ENGW 3302 learn to write bro",
+      "ART 4200 lol",
+      "CS 4500 Software Dev (?)",
+    ],
+    distribution: { 2021: 500, 2022: 30, 2023: 30, 2024: 0 },
+  },
+  {
+    courseId: "ART1234",
+    courseName: "i am picasso",
+    numStudents: 0,
+    numConflicts: 23450,
+    topThreeConflicts: [
+      "ENGW 3302 learn to write bro",
+      "ART 4200 lol",
+      "CS 4500 Software Dev (?)",
+    ],
+    distribution: { 2021: 500, 2022: 30, 2023: 30, 2024: 0 },
+  },
+  {
+    courseId: "PHIL6969",
+    courseName: "i think therefore i am",
+    numStudents: 0,
+    numConflicts: 23450,
+    topThreeConflicts: [
+      "ENGW 3302 learn to write bro",
+      "ART 4200 lol",
+      "CS 4500 Software Dev (?)",
+    ],
+    distribution: { 2021: 500, 2022: 30, 2023: 30, 2024: 0 },
+  },
+  {
+    courseId: "PHIL6969",
+    courseName: "i think therefore i am",
+    numStudents: 0,
+    numConflicts: 23450,
+    topThreeConflicts: [
+      "ENGW 3302 learn to write bro",
+      "ART 4200 lol",
+      "CS 4500 Software Dev (?)",
+    ],
+    distribution: { 2021: 500, 2022: 30, 2023: 30, 2024: 0 },
+  },
+  {
+    courseId: "PHIL6969",
+    courseName: "i think therefore i am",
+    numStudents: 0,
+    numConflicts: 23450,
+    topThreeConflicts: [
+      "ENGW 3302 learn to write bro",
+      "ART 4200 lol",
+      "CS 4500 Software Dev (?)",
+    ],
+    distribution: { 2021: 500, 2022: 30, 2023: 30, 2024: 0 },
+  },
+  {
+    courseId: "PHIL6969",
+    courseName: "i think therefore i am",
+    numStudents: 0,
+    numConflicts: 23450,
+    topThreeConflicts: [
+      "ENGW 3302 learn to write bro",
+      "ART 4200 lol",
+      "CS 4500 Software Dev (?)",
+    ],
+    distribution: { 2021: 500, 2022: 30, 2023: 30, 2024: 0 },
+  },
+  {
+    courseId: "PHIL6969",
+    courseName: "i think therefore i am",
+    numStudents: 0,
+    numConflicts: 23450,
+    topThreeConflicts: [
+      "ENGW 3302 learn to write bro",
+      "ART 4200 lol",
+      "CS 4500 Software Dev (?)",
+    ],
+    distribution: { 2021: 500, 2022: 30, 2023: 30, 2024: 0 },
+  },
+  {
+    courseId: "PHIL6969",
+    courseName: "i think therefore i am",
+    numStudents: 0,
+    numConflicts: 23450,
+    topThreeConflicts: [
+      "ENGW 3302 learn to write bro",
+      "ART 4200 lol",
+      "CS 4500 Software Dev (?)",
+    ],
+    distribution: { 2021: 500, 2022: 30, 2023: 30, 2024: 0 },
+  },
+  {
+    courseId: "PHIL6969",
+    courseName: "i think therefore i am",
+    numStudents: 0,
+    numConflicts: 23450,
+    topThreeConflicts: [
+      "ENGW 3302 learn to write bro",
+      "ART 4200 lol",
+      "CS 4500 Software Dev (?)",
+    ],
+    distribution: { 2021: 500, 2022: 30, 2023: 30, 2024: 0 },
+  },
+  {
+    courseId: "PHIL6969",
+    courseName: "i think therefore i am",
+    numStudents: 0,
+    numConflicts: 23450,
+    topThreeConflicts: [
+      "ENGW 3302 learn to write bro",
+      "ART 4200 lol",
+      "CS 4500 Software Dev (?)",
+    ],
+    distribution: { 2021: 500, 2022: 30, 2023: 30, 2024: 0 },
+  },
+  {
+    courseId: "PHIL6969",
+    courseName: "i think therefore i am",
+    numStudents: 0,
+    numConflicts: 23450,
+    topThreeConflicts: [
+      "ENGW 3302 learn to write bro",
+      "ART 4200 lol",
+      "CS 4500 Software Dev (?)",
+    ],
+    distribution: { 2021: 500, 2022: 30, 2023: 30, 2024: 0 },
+  },
+  {
+    courseId: "PHIL6969",
+    courseName: "i think therefore i am",
+    numStudents: 0,
+    numConflicts: 23450,
+    topThreeConflicts: [
+      "ENGW 3302 learn to write bro",
+      "ART 4200 lol",
+      "CS 4500 Software Dev (?)",
+    ],
+    distribution: { 2021: 500, 2022: 30, 2023: 30, 2024: 0 },
+  },
+  {
+    courseId: "PHIL6969",
+    courseName: "i think therefore i am",
+    numStudents: 0,
+    numConflicts: 23450,
+    topThreeConflicts: [
+      "ENGW 3302 learn to write bro",
+      "ART 4200 lol",
+      "CS 4500 Software Dev (?)",
+    ],
+    distribution: { 2021: 500, 2022: 30, 2023: 30, 2024: 0 },
+  },
+];
+
+export const mockTop5ClassesWithEnrollees: ICourseWithCount[] = [
+  {
+    courseId: "CS 2500",
+    courseName: "Fundamentals of Computer Science 1",
+    count: 260,
+  },
+  {
+    courseId: "CS 6666",
+    courseName: "hello i am class",
+    count: 260,
+  },
+  {
+    courseId: "CS 2504",
+    courseName: "Fundamentals of Computer Science 4",
+    count: 160,
+  },
+  {
+    courseId: "CS 2500",
+    courseName: "Fundamentals of Computer Science 1",
+    count: 260,
+  },
+  {
+    courseId: "CS 2500",
+    courseName: "Fundamentals of Computer Science 1",
+    count: 260,
+  },
+];
+
+export const mockTop5ClassPairs: ICourseWithCount[] = [
+  {
+    courseId: "CS 2500",
+    courseName: "Fundamentals of Computer Science 1",
+    count: 180,
+  },
+  {
+    courseId: "CS 2500",
+    courseName: "Fundamentals of Computer Science 1",
+    count: 10,
+  },
+  {
+    courseId: "CS 2500",
+    courseName: "Fundamentals of Computer Science 1",
+    count: 180,
+  },
+  {
+    courseId: "CS 2500",
+    courseName: "Fundamentals of Computer Science 1",
+    count: 1800,
+  },
+  {
+    courseId: "CS 2500",
+    courseName: "Fundamentals of Computer Science 1",
+    count: 180,
+  },
+];
+
+const mockAppointments = [
+  {
+    id: 0,
+    userId: 1,
+    fullname: "Alexander Grob",
+    email: "grob.a@northeastern.edu",
+    nuid: "001211929",
+    major: "Computer Science and Math",
+    planId: 1,
+    planName: "5 Year CS Plan",
+    planMajor: "Computer Science",
+    appointmentTime: "Mar 14, 2021",
+  },
+  {
+    id: 0,
+    userId: 1,
+    fullname: "Iman Moreira",
+    email: "moreira.i@northeastern.edu",
+    nuid: "001211929",
+    major: "Computer Science and Bio",
+    planId: 1,
+    planName: "Memes for days",
+    planMajor: "Computer Science and Math",
+    appointmentTime: "Mar 14, 2021",
+  },
+  {
+    id: 0,
+    userId: 1,
+    fullname: "Nils Backe",
+    email: "backe.n@northeastern.edu",
+    nuid: "001211929",
+    major: "Computer Science",
+    planId: 1,
+    planName: "Three and out",
+    planMajor: "Computer Science and Design",
+    appointmentTime: "Mar 14, 2021",
+  },
+  {
+    id: 0,
+    userId: 1,
+    fullname: "Andrew Leung",
+    email: "leung.a@northeastern.edu",
+    nuid: "001211929",
+    major: "Computer Science",
+    planId: 1,
+    planName: "Lets drop some beats",
+    planMajor: "Computer Science",
+    appointmentTime: "Mar 14, 2021",
+  },
+  {
+    id: 0,
+    userId: 1,
+    fullname: "Arkin Mukherjee",
+    email: "mukherjee.a@northeastern.edu",
+    nuid: "001211929",
+    major: "Computer Science",
+    planId: 1,
+    planName: "gme to the moon",
+    planMajor: "Computer Science",
+    appointmentTime: "Mar 14, 2021",
+  },
+  {
+    id: 0,
+    userId: 1,
+    fullname: "Arun Jeevanantham",
+    email: "jeevanantham.a@northeastern.edu",
+    nuid: "001211929",
+    major: "Computer Science",
+    planId: 1,
+    planName: "A really really really long name",
+    planMajor: "Computer Science",
+    appointmentTime: "Mar 14, 2021",
+  },
+];

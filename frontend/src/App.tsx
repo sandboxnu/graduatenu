@@ -18,6 +18,7 @@ import { ProtectedRoute } from "./components/Routes/ProtectedRoute";
 import { UnprotectedRoute } from "./components/Routes/UnprotectedRoute";
 import { StudentsList } from "./advising/ManageStudents/StudentsList";
 import { TemplateBuilderPage } from "./advising/Templates/TemplateBuilderPage";
+import { CourseManagmentPage } from "./advising/CourseManagment";
 import { GenericStudentView } from "./advising/ManageStudents/GenericStudentView";
 
 export const App = ({ store }: { store: Store }) => {
@@ -30,6 +31,7 @@ export const App = ({ store }: { store: Store }) => {
           <ProtectedRoute path="/redirect" component={RedirectScreen} />
           <ProtectedRoute path="/onboarding" component={OnboardingInfoScreen} />
           <ProtectedRoute path="/profile" component={Profile} />
+          <ProtectedRoute path="/management" component={CourseManagmentPage} />
           <ProtectedRoute
             path="/completedCourses"
             component={CompletedCoursesScreen}
@@ -43,7 +45,6 @@ export const App = ({ store }: { store: Store }) => {
             component={TransferableCreditScreen}
           />
           <ProtectedRoute path="/advisor" component={AdvisorRouter} />
-
           {/* requires not logged in */}
           <UnprotectedRoute path="/" component={Onboarding} />
           {/* <Route path="/signup" component={SignupScreen} />
