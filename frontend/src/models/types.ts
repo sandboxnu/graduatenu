@@ -357,7 +357,7 @@ export interface IChangeLog {
 
 export interface IAppointments {
   id: number;
-  userId: number;
+  studentId: number;
   fullname: string;
   email: string;
   nuid: string;
@@ -366,6 +366,23 @@ export interface IAppointments {
   planName: string;
   planMajor: string;
   appointmentTime: string;
+}
+
+export interface ICourseManagmentBlock {
+  courseId: string;
+  courseName: string;
+  numStudents: number;
+  numConflicts: number;
+  topThreeConflicts: string[];
+  distribution: {
+    [key: number]: number;
+  };
+}
+
+export interface ICourseWithCount {
+  courseId: string;
+  courseName: string;
+  count: number;
 }
 /** ------------------------------------------------------------------------
  *

@@ -22,6 +22,7 @@ Rails.application.routes.draw do
       end
       resources :templates, only: [:index, :create, :show, :update, :destroy]
       resources :folders, only: [:create]
+      resources :appointments, only: [:index, :show]
     end
 
     post 'v1/admin_hook', to: 'admin#admin_hook'

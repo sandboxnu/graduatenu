@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { IPlanData, ITemplatePlan, IUserData } from "../../models/types";
-import { fetchUser } from "../../services/AdvisorService";
+import { IPlanData, ITemplatePlan } from "../../models/types";
 import {
   createPlanForUser,
   findAllPlansForUser,
@@ -9,6 +8,7 @@ import {
 import {
   safelyGetActivePlanIdFromState,
   getActivePlanNameFromState,
+  getStudentFromState,
   safelyGetTransferCoursesFromState,
 } from "../../state";
 import {
@@ -86,6 +86,7 @@ const StudentInfoTextWrapper = styled.div`
   > * {
   }
 `;
+
 const Text = styled.div`
   font-size: 12px;
   font-weight: normal;
@@ -125,12 +126,18 @@ interface ParamProps {
   id: string;
 }
 
-export const StudentView: React.FC = () => {
+interface StudentViewProps {
+  user: any;
+  fetchingStudent: boolean;
+}
+
+export const StudentView: React.FC<StudentViewProps> = ({
+  user,
+  fetchingStudent,
+}) => {
   const history = useHistory();
   const routeParams = useParams<ParamProps>();
   const id = Number(routeParams.id);
-  const [fetchingStudent, setFetchingStudent] = useState(true);
-  const [student, setStudent] = useState<IUserData | null>(null);
   const [noPlans, setNoPlans] = useState(false);
   const [openModal, setOpenModal] = useState(false);
 
@@ -155,26 +162,23 @@ export const StudentView: React.FC = () => {
     });
     if (response.error) return;
     if (shouldDelete) {
-      const deleteResponse = await deleteTemplatePlan(userId, templateData!.id);
+      await deleteTemplatePlan(userId, templateData!.id);
       // error handling for this page (?)
     }
     dispatch(addNewPlanAction(response.plan));
   };
 
   const dispatch = useDispatch();
-  const { planName, planId, transferCourses } = useSelector(
+  const { planName, planId, student, transferCourses } = useSelector(
     (state: AppState) => ({
       planName: getActivePlanNameFromState(state),
       planId: safelyGetActivePlanIdFromState(state),
+      student: getStudentFromState(state),
       transferCourses: safelyGetTransferCoursesFromState(state),
     })
   );
 
   useEffect(() => {
-    fetchUser(id).then(response => {
-      setStudent(response.user);
-      setFetchingStudent(false);
-    });
     findAllPlansForUser(id).then((plans: IPlanData[]) => {
       dispatch(setUserPlansAction(plans, 2020, transferCourses));
       if (!plans || !plans.length || !plans[0].schedule) setNoPlans(true);

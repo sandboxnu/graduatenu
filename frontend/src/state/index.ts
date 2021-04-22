@@ -340,6 +340,9 @@ export const getFolderExpandedFromState = (state: AppState, index: number) =>
 export const getAdvisorUserIdFromState = (state: AppState) =>
   state.advisorState.advisor!.id;
 
+export const safelyGetAdvisorUserIdFromState = (state: AppState) =>
+  state.advisorState.advisor?.id;
+
 export const getAdvisorFullNameFromState = (state: AppState) =>
   state.advisorState.advisor!.fullName;
 
