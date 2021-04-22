@@ -43,8 +43,8 @@ import { addNewPlanAction } from "../state/actions/userPlansActions";
 import { ExcelUpload } from "../components/ExcelUpload";
 import { NextButton } from "../components/common/NextButton";
 import { RedColorButton } from "../components/common/ColoredButtons";
-import { getAuthToken } from "../utils/auth-helpers";
 import { SaveInParentConcentrationDropdown } from "../components/ConcentrationDropdown";
+import { FormErrors, useForm } from "../hooks/useForm";
 
 const EXCEL_TOOLTIP =
   "Auto-populate your schedule with your excel plan of study. Reach out to your advisor if you don't have it!";
@@ -95,19 +95,6 @@ const FieldContainer = styled.div`
   }
 `;
 
-const ErrorTextWrapper = styled.div`
-  display: flex;
-  flex: 1;
-  margin: 8px;
-  flex-direction: row;
-  justify-content: center;
-`;
-
-const ErrorText = styled.p`
-  color: red;
-  text-align: center;
-`;
-
 interface Props {
   allMajors: Major[];
   allPlans: Record<string, Schedule[]>;
@@ -121,52 +108,121 @@ interface Props {
   completedCourses: ScheduleCourse[];
 }
 
+interface AddPlanPopperFields {
+  readonly planName: string | null;
+  readonly catalogYear: number | null;
+  readonly major: Major | null;
+  readonly concentration: string | null;
+  readonly coopCycle: string | null;
+  readonly planOption: string | null;
+  readonly basePlan: string | null;
+}
+
+const INIT_FIELDS: AddPlanPopperFields = {
+  planName: null,
+  catalogYear: null,
+  major: null,
+  concentration: null,
+  coopCycle: null,
+  planOption: PLAN_OPTIONS.NEW_PLAN,
+  basePlan: null,
+};
+
+const validateValues = (
+  scheduleNames: string[],
+  selectedDNDSchedule: React.MutableRefObject<DNDSchedule | undefined>,
+  noConcentrationError: boolean
+) => (values: AddPlanPopperFields): FormErrors => {
+  const validatePlanName = (values: AddPlanPopperFields) => {
+    // Missing plan name
+    if (!values.planName) {
+      return REQUIRED_FIELD_MESSAGE;
+    }
+
+    // Duplicate plan name
+    if (!!values.planName && scheduleNames.includes(values.planName!)) {
+      return "Cannot have the same name as an existing plan";
+    }
+  };
+
+  const validatePlanOption = (values: AddPlanPopperFields) => {
+    // Missing plan option
+    if (!values.planOption) {
+      return REQUIRED_FIELD_MESSAGE;
+    }
+  };
+
+  const validateBasePlan = (values: AddPlanPopperFields) => {
+    // Missing base plan
+    if (
+      values.planOption === PLAN_OPTIONS.EXISTING_PLAN &&
+      (!values.basePlan || !selectedDNDSchedule.current)
+    ) {
+      return REQUIRED_FIELD_MESSAGE;
+    }
+  };
+
+  const validateConcentration = (values: AddPlanPopperFields) => {
+    // Missing concentration
+    if (noConcentrationError) {
+      return REQUIRED_FIELD_MESSAGE;
+    }
+  };
+
+  return {
+    planName: validatePlanName(values),
+    planOption: validatePlanOption(values),
+    basePlan: validateBasePlan(values),
+    concentration: validateConcentration(values),
+  };
+};
+
 /**
  * If a user is currently logged in, saves the current plan under this user.
  * Only supports updating a user's singular plan, can be modified later to
  * update a specific plan.
  */
-function AddPlanPopperComponent(props: Props) {
-  const {
-    allMajors,
-    allPlans,
-    isFetchingMajors,
-    isFetchingPlans,
-    userPlans,
-    userId,
-    addNewPlan,
-  } = props;
-  const [visible, setVisible] = useState(false);
-  const [planName, setPlanName] = useState<string | null>(null);
-  const [selectedCatalogYear, setSelectedCatalogYear] = useState<number | null>(
-    null
-  );
-  const [selectedMajor, setSelectedMajor] = useState<Major | null>(null);
-  const [selectedConcentration, setSelectedConcentration] = useState<
-    string | null
-  >(null);
-  const [selectedCoopCycle, setSelectedCoopCycle] = useState<string | null>(
-    null
-  );
-  const [selectedPlanOption, setSelectedPlanOption] = useState<string | null>(
-    null
-  );
-  const [selectedUserPlan, setSelectedUserPlan] = useState<string | null>(null);
-
+const AddPlanPopperComponent: React.FC<Props> = ({
+  allMajors,
+  allPlans,
+  isFetchingMajors,
+  isFetchingPlans,
+  userPlans,
+  userId,
+  addNewPlan,
+  academicYear,
+  graduationYear,
+  completedCourses,
+}) => {
   let selectedDNDSchedule = useRef<DNDSchedule | undefined>(undefined);
   let counter = useRef(0);
 
+  const [visible, setVisible] = useState(false);
+  const [noConcentrationError, setNoConcentrationError] = useState(false);
+
   const scheduleNames = userPlans.map(plan => plan.name);
 
-  const [noConcentrationError, setNoConcentrationError] = useState(false);
-  const noPlanNameError = !planName;
-  const duplicatePlanNameError =
-    !!planName && scheduleNames.includes(planName!);
-  const noPlanBasedOnError = !selectedPlanOption;
-  const noBasePlanError =
-    selectedPlanOption === PLAN_OPTIONS.EXISTING_PLAN &&
-    (!selectedUserPlan || !selectedDNDSchedule.current);
-  const [showErrors, setShowErrors] = useState<boolean>(false);
+  const {
+    values,
+    setValues,
+    errors,
+    checkHasError,
+    errorsVisible,
+    resetForm,
+  } = useForm<AddPlanPopperFields>(
+    INIT_FIELDS,
+    validateValues(scheduleNames, selectedDNDSchedule, noConcentrationError)
+  );
+
+  const {
+    planName,
+    catalogYear,
+    major,
+    concentration,
+    coopCycle,
+    planOption,
+    basePlan,
+  } = values;
 
   const setSchedule = async (schedule: Schedule) => {
     let preReqSched = await addPrereqsToSchedule(schedule);
@@ -176,82 +232,44 @@ function AddPlanPopperComponent(props: Props) {
     );
   };
 
-  useEffect(() => {
-    if (selectedUserPlan) {
-      const plan = userPlans.find(
-        schedule => schedule.name === selectedUserPlan
-      )!;
-      setSelectedCatalogYear(plan.catalogYear);
-      setSelectedMajor(
-        findMajorFromName(plan.major, allMajors, plan.catalogYear) || null
-      );
-      setSelectedConcentration(plan.concentration || null);
-      setSelectedCoopCycle(plan.coopCycle || "");
-      selectedDNDSchedule.current = plan.schedule;
-      counter.current = plan.courseCounter;
-    }
-  }, [selectedUserPlan, userPlans, allMajors]);
-
-  useEffect(() => {
-    if (showErrors) {
-      setShowErrors(false);
-    }
-  }, [
-    planName,
-    selectedCatalogYear,
-    selectedMajor,
-    selectedConcentration,
-    selectedCoopCycle,
-    selectedPlanOption,
-    selectedUserPlan,
-  ]);
-
   const onSubmit = async () => {
-    if (selectedCoopCycle && selectedPlanOption === PLAN_OPTIONS.NEW_PLAN) {
+    if (checkHasError()) {
+      return;
+    }
+
+    if (coopCycle && planOption === PLAN_OPTIONS.NEW_PLAN) {
       [selectedDNDSchedule.current, counter.current] = generateInitialSchedule(
-        props.academicYear,
-        props.graduationYear,
-        props.completedCourses,
-        selectedMajor!.name,
-        selectedCoopCycle,
+        academicYear,
+        graduationYear,
+        completedCourses,
+        major!.name,
+        coopCycle,
         allPlans
       );
-    } else if (selectedPlanOption === PLAN_OPTIONS.NEW_PLAN) {
+    } else if (planOption === PLAN_OPTIONS.NEW_PLAN) {
       [
         selectedDNDSchedule.current,
         counter.current,
       ] = generateInitialScheduleNoCoopCycle(
-        props.academicYear,
-        props.graduationYear,
-        props.completedCourses
+        academicYear,
+        graduationYear,
+        completedCourses
       );
-    } else if (selectedPlanOption === PLAN_OPTIONS.EXAMPLE_PLAN) {
+    } else if (planOption === PLAN_OPTIONS.EXAMPLE_PLAN) {
       [
         selectedDNDSchedule.current,
         counter.current,
       ] = generateInitialScheduleFromExistingPlan(
-        props.academicYear,
-        props.graduationYear,
-        selectedMajor!.name,
-        selectedCoopCycle!,
+        academicYear,
+        graduationYear,
+        major!.name,
+        coopCycle!,
         allPlans
       );
     }
 
-    const errorHasOccurred =
-      noConcentrationError ||
-      noPlanNameError ||
-      duplicatePlanNameError ||
-      noPlanBasedOnError ||
-      noBasePlanError;
-
-    if (errorHasOccurred) {
-      setShowErrors(true);
-      return;
-    } else {
-      await savePlan();
-      prepareToClose();
-    }
+    await savePlan();
+    prepareToClose();
   };
 
   const savePlan = async () => {
@@ -259,71 +277,51 @@ function AddPlanPopperComponent(props: Props) {
       name: planName!,
       link_sharing_enabled: false,
       schedule: selectedDNDSchedule.current!,
-      catalog_year: selectedCatalogYear,
-      major: selectedMajor ? selectedMajor.name : null,
-      coop_cycle: selectedCoopCycle,
-      concentration: selectedConcentration,
+      catalog_year: catalogYear,
+      major: major ? major.name : null,
+      coop_cycle: coopCycle,
+      concentration: concentration,
       course_counter: counter.current,
     });
-    addNewPlan(plan.plan, props.academicYear);
+    addNewPlan(plan.plan, academicYear);
   };
-
-  useEffect(() => {
-    setShowErrors(false);
-  }, [visible]);
 
   const openModal = (): void => setVisible(true);
 
   const prepareToClose = () => {
     setVisible(false);
-    setPlanName(null);
-    setSelectedCatalogYear(null);
-    setSelectedMajor(null);
-    setSelectedConcentration(null);
-    setSelectedCoopCycle(null);
-    setSelectedPlanOption(null);
-    setSelectedUserPlan(null);
-    setShowErrors(false);
+    resetForm();
   };
 
   const renderPlanName = () => {
-    const DUP_NAME_ERROR_MESSAGE =
-      "Cannot have the same name as an existing plan";
-
-    const error = (showErrors && noPlanNameError) || duplicatePlanNameError;
-    const helperText: string | null = noPlanNameError
-      ? (showErrors && REQUIRED_FIELD_MESSAGE) || null
-      : duplicatePlanNameError
-      ? DUP_NAME_ERROR_MESSAGE
-      : null;
+    const error = errorsVisible && errors.planName;
 
     return (
       <TextField
         id="outlined-basic"
         label="Plan Name"
         variant="outlined"
-        value={planName}
-        onChange={event => setPlanName(event.target.value)}
+        value={planName || ""}
+        onChange={event => setValues({ planName: event.target.value })}
         placeholder="Plan 1"
-        error={error}
-        helperText={helperText}
+        error={!!error}
+        helperText={error}
       />
     );
   };
 
   const renderCatalogYearDropdown = () => {
-    let catalogYears = [
-      ...Array.from(new Set(allMajors.map(maj => maj.yearVersion.toString()))),
+    const catalogYears: number[] = [
+      ...Array.from(new Set(allMajors.map(maj => maj.yearVersion))),
     ];
-
-    // To avoid displaying "null"
-    const value = selectedCatalogYear ? String(selectedCatalogYear) : "";
 
     return (
       <Autocomplete
         style={{ marginTop: "10px", marginBottom: "5px" }}
         disableListWrap
         options={catalogYears}
+        getOptionLabel={catalogYear => catalogYear.toString()}
+        value={catalogYear}
         renderInput={params => (
           <TextField
             {...params}
@@ -332,11 +330,12 @@ function AddPlanPopperComponent(props: Props) {
             fullWidth
           />
         )}
-        value={value}
         onChange={(e, value) => {
-          setSelectedCatalogYear(value === "" ? null : Number(value));
-          setSelectedMajor(null);
-          setSelectedCoopCycle(null);
+          setValues({
+            catalogYear: value,
+            major: null,
+            coopCycle: null,
+          });
         }}
       />
     );
@@ -346,19 +345,18 @@ function AddPlanPopperComponent(props: Props) {
     return (
       <Autocomplete
         disableListWrap
-        options={allMajors
-          .filter(maj => maj.yearVersion === selectedCatalogYear)
-          .map(maj => maj.name)}
+        options={allMajors.filter(maj => maj.yearVersion === catalogYear)}
+        getOptionLabel={maj => maj.name}
+        value={major}
         renderInput={params => (
           <TextField {...params} variant="outlined" label="Major" fullWidth />
         )}
-        value={!!selectedMajor ? selectedMajor.name + " " : ""}
         onChange={(e, value) => {
-          setSelectedMajor(
-            findMajorFromName(value, allMajors, selectedCatalogYear) || null
-          );
-          setSelectedConcentration(null);
-          setSelectedCoopCycle(null);
+          setValues({
+            major: value,
+            concentration: null,
+            coopCycle: null,
+          });
         }}
       />
     );
@@ -367,11 +365,13 @@ function AddPlanPopperComponent(props: Props) {
   const renderConcentrationDropDown = () => {
     return (
       <SaveInParentConcentrationDropdown
-        major={selectedMajor || undefined}
-        concentration={selectedConcentration}
-        setConcentration={setSelectedConcentration}
+        major={major || undefined}
+        concentration={concentration}
+        setConcentration={(value: string | null) =>
+          setValues({ concentration: value })
+        }
         setError={setNoConcentrationError}
-        showError={showErrors}
+        showError={errorsVisible}
         useLabel={true}
       />
     );
@@ -381,7 +381,8 @@ function AddPlanPopperComponent(props: Props) {
     return (
       <Autocomplete
         disableListWrap
-        options={allPlans[selectedMajor!.name].map(p => planToString(p))}
+        options={allPlans[major!.name].map(p => planToString(p))}
+        value={coopCycle}
         renderInput={params => (
           <TextField
             {...params}
@@ -390,11 +391,10 @@ function AddPlanPopperComponent(props: Props) {
             fullWidth
           />
         )}
-        value={selectedCoopCycle}
         onChange={(e, value) => {
-          setSelectedCoopCycle(value || null);
-          if (!value && selectedPlanOption === PLAN_OPTIONS.EXAMPLE_PLAN)
-            setSelectedPlanOption(null);
+          setValues({ coopCycle: value });
+          if (!value && planOption === PLAN_OPTIONS.EXAMPLE_PLAN)
+            setValues({ planOption: null });
         }}
       />
     );
@@ -402,14 +402,14 @@ function AddPlanPopperComponent(props: Props) {
 
   const renderSelectOptions = () => {
     const setSelect = (e: any) => {
-      setSelectedPlanOption(e.target.value);
+      setValues({ planOption: e.target.value });
     };
 
-    const error = showErrors && noPlanBasedOnError;
+    const error = errorsVisible && errors.planOption;
 
     return (
       <FormControl variant="outlined">
-        <InputLabel id="demo-simple-select-outlined-label" error={error}>
+        <InputLabel id="demo-simple-select-outlined-label" error={!!error}>
           Create Plan Based On
         </InputLabel>
         <Select
@@ -418,7 +418,7 @@ function AddPlanPopperComponent(props: Props) {
           labelWidth={160}
           onChange={setSelect}
           displayEmpty
-          value={selectedPlanOption}
+          value={planOption}
           MenuProps={{
             anchorOrigin: {
               vertical: "bottom",
@@ -430,12 +430,12 @@ function AddPlanPopperComponent(props: Props) {
             },
             getContentAnchorEl: null,
           }}
-          error={error}
+          error={!!error}
         >
           <MenuItem value={PLAN_OPTIONS.NEW_PLAN}>
             {PLAN_OPTIONS.NEW_PLAN}
           </MenuItem>
-          {selectedCoopCycle && (
+          {coopCycle && (
             <MenuItem value={PLAN_OPTIONS.EXAMPLE_PLAN}>
               {PLAN_OPTIONS.EXAMPLE_PLAN}
             </MenuItem>
@@ -450,33 +450,48 @@ function AddPlanPopperComponent(props: Props) {
             {PLAN_OPTIONS.UPLOAD_PLAN}
           </MenuItem>
         </Select>
-        <FormHelperText error={error}>
-          {error && REQUIRED_FIELD_MESSAGE}
-        </FormHelperText>
+        <FormHelperText error={!!error}>{error}</FormHelperText>
       </FormControl>
     );
   };
 
-  const renderSelectPlan = () => {
-    const error = showErrors && noBasePlanError;
+  useEffect(() => {
+    if (planOption === PLAN_OPTIONS.EXISTING_PLAN && basePlan) {
+      const plan = userPlans.find(schedule => schedule.name === basePlan)!;
+      setValues({
+        catalogYear: plan.catalogYear,
+        major:
+          findMajorFromName(plan.major, allMajors, plan.catalogYear) || null,
+        concentration: plan.concentration || null,
+        coopCycle: plan.coopCycle || "",
+      });
+      selectedDNDSchedule.current = plan.schedule;
+      counter.current = plan.courseCounter;
+    }
+  }, [basePlan]);
+
+  const renderBasePlan = () => {
+    const error = errorsVisible && errors.basePlan;
 
     return (
       <FormControl>
         <Autocomplete
           disableListWrap
           options={scheduleNames}
+          value={basePlan}
           renderInput={params => (
             <TextField
               {...params}
               variant="outlined"
               label="Select One of Your Plans"
               fullWidth
-              error={error}
-              helperText={error && REQUIRED_FIELD_MESSAGE}
+              error={!!error}
+              helperText={error}
             />
           )}
-          value={selectedUserPlan}
-          onChange={(e, value) => setSelectedUserPlan(value)}
+          onChange={(e, value) => {
+            setValues({ basePlan: value });
+          }}
         />
       </FormControl>
     );
@@ -517,14 +532,14 @@ function AddPlanPopperComponent(props: Props) {
           <FieldContainer>
             {renderPlanName()}
             {renderCatalogYearDropdown()}
-            {!!selectedCatalogYear && renderMajorDropDown()}
-            {!!selectedMajor && renderConcentrationDropDown()}
-            {!!selectedMajor && renderCoopCycleDropDown()}
+            {!!catalogYear && renderMajorDropDown()}
+            {!!major && renderConcentrationDropDown()}
+            {!!major && renderCoopCycleDropDown()}
             {renderSelectOptions()}
-            {selectedPlanOption == PLAN_OPTIONS.UPLOAD_PLAN ? (
+            {planOption === PLAN_OPTIONS.UPLOAD_PLAN ? (
               <ExcelUpload setSchedule={setSchedule} />
-            ) : selectedPlanOption === PLAN_OPTIONS.EXISTING_PLAN ? (
-              renderSelectPlan()
+            ) : planOption === PLAN_OPTIONS.EXISTING_PLAN ? (
+              renderBasePlan()
             ) : null}
           </FieldContainer>
           <NextButton text="Submit" onClick={onSubmit} />
@@ -533,7 +548,7 @@ function AddPlanPopperComponent(props: Props) {
       <RedColorButton onClick={() => openModal()}>+ Add Plan</RedColorButton>
     </>
   );
-}
+};
 
 const mapStateToProps = (state: AppState) => ({
   allMajors: getMajorsFromState(state),
