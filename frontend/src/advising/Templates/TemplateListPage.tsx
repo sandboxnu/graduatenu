@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Search } from "../../components/common/Search";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
@@ -6,19 +6,21 @@ import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import styled from "styled-components";
 import { LinearProgress } from "@material-ui/core";
 import { IFolderData, ITemplatePlan } from "../../models/types";
-import { getTemplates, TemplatesAPI } from "../../services/TemplateService";
-import {
-  getAdvisorUserIdFromState,
-  getFolderExpandedFromState,
-} from "../../state";
+import { getFolderExpandedFromState } from "../../state";
 import { toggleTemplateFolderExpandedAction } from "../../state/actions/advisorActions";
 import { AppState } from "../../state/reducers/state";
-import { Link, RouteComponentProps, useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import {
   RedColorButton,
   WhiteColorButton,
 } from "../../components/common/ColoredButtons";
 import { isSearchedTemplate } from "./TemplateUtils";
+import { PlanUploadPopper } from "./PlanUploadPopper";
+import {
+  TemplateContext,
+  ITemplateContext,
+  useTemplatesApi,
+} from "./useTemplatesApi";
 
 const Container = styled.div`
   margin-left: 30px;
@@ -118,80 +120,72 @@ const TemplateName = styled.div`
 `;
 
 interface TemplatesListProps {
-  searchQuery: string;
+  readonly searchQuery: string;
 }
 
 interface TemplateProps {
-  name: string;
-  id: number;
+  readonly name: string;
+  readonly id: number;
 }
 
 interface FolderProps {
-  index: number;
-  folder: IFolderData;
-  searchQuery: string;
+  readonly index: number;
+  readonly folder: IFolderData;
+  readonly searchQuery: string;
 }
-
-const EMPTY_TEMPLATES_LIST: IFolderData[] = [];
 
 export const TemplatesListPage: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  const [planUploadModalVisible, setPlanUploadModalVisible] = useState(false);
+
+  const templateContext = useTemplatesApi(searchQuery);
 
   return (
-    <Container>
-      <Search
-        placeholder="Search by template or folder name"
-        onEnter={setSearchQuery}
-        isSmall={false}
-      />
-      <TemplatesContainer>
-        <TemplateListContainer>
-          <ButtonWrapper>
-            <WhiteColorButton style={{ marginRight: "20px" }}>
-              {" "}
-              Upload Plan{" "}
-            </WhiteColorButton>
-            <Link
-              to={{ pathname: "/advisor/templates/createTemplate" }}
-              style={{ textDecoration: "none" }}
-            >
-              <RedColorButton>Create New</RedColorButton>
-            </Link>
-          </ButtonWrapper>
-          <TemplateListScrollContainer>
-            <TemplatesList searchQuery={searchQuery} />
-          </TemplateListScrollContainer>
-        </TemplateListContainer>
-      </TemplatesContainer>
-    </Container>
+    <TemplateContext.Provider value={templateContext}>
+      <Container>
+        <Search
+          placeholder="Search by template or folder name"
+          onEnter={setSearchQuery}
+          isSmall={false}
+        />
+        <TemplatesContainer>
+          <TemplateListContainer>
+            <ButtonWrapper>
+              <WhiteColorButton
+                style={{ marginRight: "20px" }}
+                onClick={() => setPlanUploadModalVisible(true)}
+              >
+                Upload Plans
+              </WhiteColorButton>
+              <Link
+                to={{ pathname: "/advisor/templates/createTemplate" }}
+                style={{ textDecoration: "none" }}
+              >
+                <RedColorButton>Create New</RedColorButton>
+              </Link>
+            </ButtonWrapper>
+            <TemplateListScrollContainer>
+              <TemplatesList searchQuery={searchQuery} />
+            </TemplateListScrollContainer>
+          </TemplateListContainer>
+        </TemplatesContainer>
+        <PlanUploadPopper
+          visible={planUploadModalVisible}
+          setVisible={setPlanUploadModalVisible}
+        />
+      </Container>
+    </TemplateContext.Provider>
   );
 };
 
 const TemplatesList = ({ searchQuery }: TemplatesListProps) => {
-  const [templates, setTemplates] = useState(EMPTY_TEMPLATES_LIST);
-  const [isLoading, setIsLoading] = useState(true);
-  const [pageNumber, setPageNumber] = useState(0);
-  const [isLastPage, setIsLastPage] = useState(false);
-  const { userId } = useSelector((state: AppState) => ({
-    userId: getAdvisorUserIdFromState(state),
-  }));
-
-  const fetchTemplates = (currentFolders: IFolderData[], page: number) => {
-    setIsLoading(true);
-    getTemplates(userId, searchQuery, page)
-      .then((response: TemplatesAPI) => {
-        setTemplates(currentFolders.concat(response.templates));
-        setPageNumber(response.nextPage);
-        setIsLastPage(response.lastPage);
-        setIsLoading(false);
-      })
-      .catch((err: any) => console.log(err));
-  };
-
-  useEffect(() => {
-    setTemplates(EMPTY_TEMPLATES_LIST);
-    fetchTemplates(EMPTY_TEMPLATES_LIST, 0);
-  }, [searchQuery]);
+  const {
+    templates,
+    isLoading,
+    pageNumber,
+    isLastPage,
+    fetchTemplates,
+  } = useContext(TemplateContext) as ITemplateContext;
 
   return (
     <>
@@ -201,11 +195,12 @@ const TemplatesList = ({ searchQuery }: TemplatesListProps) => {
         </Loading>
       )}
       <TemplateListContainer>
-        {(templates === null || templates.length == 0) && !isLoading ? (
+        {(templates === null || templates.length === 0) && !isLoading ? (
           <EmptyState> No Templates found </EmptyState>
         ) : (
           templates.map((folder, i) => (
             <FolderComponent
+              key={folder.id}
               index={i}
               folder={folder}
               searchQuery={searchQuery}
@@ -256,7 +251,7 @@ const FolderComponent: React.FC<FolderProps> = (props: FolderProps) => {
       <FolderTemplateListContainer>
         {isExpanded &&
           filteredTemplatePlans.map((template: ITemplatePlan) => (
-            <Template name={template.name} id={template.id} />
+            <Template name={template.name} key={template.id} id={template.id} />
           ))}
       </FolderTemplateListContainer>
     </div>

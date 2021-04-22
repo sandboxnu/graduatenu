@@ -78,9 +78,15 @@ const SaveInParentConcentrationDropdown: React.FC<SaveInParentConcentrationDropd
     <>
       {/* This component will only show if concentrations exist for this major */}
       {shouldDisplayDropdown && (
-        <FormControl variant="outlined" error={hasError} style={style}>
+        <FormControl
+          variant="outlined"
+          error={hasError}
+          style={style}
+          fullWidth
+        >
           <Autocomplete
             disableListWrap
+            fullWidth
             options={concentrationNames}
             renderInput={params => (
               <TextField
