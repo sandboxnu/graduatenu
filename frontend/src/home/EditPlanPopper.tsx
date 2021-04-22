@@ -49,6 +49,7 @@ import {
   ALERT_STATUS,
 } from "../components/common/SnackbarAlert";
 import { BASE_FORMATTED_COOP_CYCLES } from "../plans/coopCycles";
+import { findExamplePlanFromCoopCycle } from "../utils/plan-helpers";
 
 const PlanPopper = styled(Popper)<any>`
   margin-top: 4px;
@@ -283,9 +284,14 @@ export class EditPlanPopperComponent extends React.Component<
   }
 
   renderSetClassesButton() {
-    const examplePlanExists = this.props.allPlans[
-      this.props.plan.major || ""
-    ].some((p: Schedule) => planToString(p) === this.props.plan.coopCycle);
+    const examplePlanExists =
+      this.props.plan.major &&
+      this.props.plan.coopCycle &&
+      findExamplePlanFromCoopCycle(
+        this.props.allPlans,
+        this.props.plan.major,
+        this.props.plan.coopCycle
+      );
 
     if (!examplePlanExists) {
       return;
