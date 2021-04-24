@@ -8,6 +8,8 @@ import styled from "styled-components";
 import { Dispatch } from "redux";
 import { Major, Schedule, ScheduleCourse } from "../../../common/types";
 import {
+  generateBlankCompletedCourseSchedule,
+  generateBlankCompletedCourseScheduleNoCoopCycle,
   generateInitialSchedule,
   generateInitialScheduleNoCoopCycle,
 } from "../utils";
@@ -35,6 +37,8 @@ import {
   getUserIdFromState,
   getCompletedCoursesFromState,
   getAcademicYearFromState,
+  getCompletedCourseCounterFromState,
+  getCompletedCourseScheduleFromState,
 } from "../state";
 import { AppState } from "../state/reducers/state";
 import Autocomplete from "@material-ui/lab/Autocomplete";
@@ -44,7 +48,7 @@ import { getAuthToken } from "../utils/auth-helpers";
 import { updateUser } from "../services/UserService";
 import { createPlanForUser, setPrimaryPlan } from "../services/PlanService";
 import { addNewPlanAction } from "../state/actions/userPlansActions";
-import { IPlanData, ITemplatePlan } from "../models/types";
+import { DNDSchedule, IPlanData, ITemplatePlan } from "../models/types";
 import { DisclaimerPopup } from "../components/common/DisclaimerPopup";
 import { BASE_FORMATTED_COOP_CYCLES } from "../plans/coopCycles";
 
@@ -65,6 +69,8 @@ interface OnboardingReduxStoreProps {
   isFetchingPlans: boolean;
   userId: number;
   completedCourses: ScheduleCourse[];
+  completedCourseSchedule?: DNDSchedule;
+  completedCourseCounter: number;
 }
 
 interface OnboardingReduxDispatchProps {
@@ -205,19 +211,19 @@ class OnboardingScreenComponent extends React.Component<
     const createPlanPromise = () => {
       let schedule, courseCounter;
       if (!!this.state.coopCycle) {
-        [schedule, courseCounter] = generateInitialSchedule(
+        schedule = generateBlankCompletedCourseSchedule(
           this.props.academicYear!,
           this.state.gradYear!,
-          this.props.completedCourses,
+          this.props.completedCourseSchedule!,
           this.state.major!,
           this.state.coopCycle!,
           this.props.plans
         );
       } else {
-        [schedule, courseCounter] = generateInitialScheduleNoCoopCycle(
+        schedule = generateBlankCompletedCourseScheduleNoCoopCycle(
           this.props.academicYear!,
           this.state.gradYear!,
-          this.props.completedCourses
+          this.props.completedCourseSchedule!
         );
       }
 
@@ -228,7 +234,7 @@ class OnboardingScreenComponent extends React.Component<
         major: this.state.major || null,
         coop_cycle: this.state.coopCycle || null,
         concentration: this.state.concentration || null,
-        course_counter: courseCounter,
+        course_counter: this.props.completedCourseCounter || 0,
         catalog_year: this.state.catalogYear || null,
       }).then(response => {
         this.props.addNewPlanAction(response.plan, this.props.academicYear!);
@@ -403,6 +409,7 @@ class OnboardingScreenComponent extends React.Component<
   handleClose() {
     this.setState({ open: false });
   }
+
   render() {
     const { gradYear, major, catalogYear } = this.state;
     const { isFetchingMajors, isFetchingPlans } = this.props;
@@ -431,6 +438,7 @@ class OnboardingScreenComponent extends React.Component<
         allRequirementsFilled &&
         !this.hasMajorAndNoCatalogYearError() &&
         !majorSelectedAndNoConcentration;
+
       const onClick = () => {
         if (this.hasMajorAndNoCatalogYearError()) {
           this.setState({
@@ -518,6 +526,8 @@ const mapStateToProps = (state: AppState) => ({
   isFetchingPlans: getPlansLoadingFlagFromState(state),
   userId: getUserIdFromState(state),
   completedCourses: getCompletedCoursesFromState(state),
+  completedCourseSchedule: getCompletedCourseScheduleFromState(state),
+  completedCourseCounter: getCompletedCourseCounterFromState(state),
 });
 
 /**
