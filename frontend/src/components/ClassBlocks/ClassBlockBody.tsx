@@ -71,10 +71,9 @@ export const ClassBlockBody: React.FC<ClassBlockBodyProps> = ({
   hideDelete,
   canEditBlockName,
 }) => {
-  const { courseName: courseName } =
-    useSelector((state: AppState) => ({
-      courseName: getCourseNameFromState(state, dndId, semester),
-    })) || course.name;
+  const { courseName: courseName } = useSelector((state: AppState) => ({
+    courseName: getCourseNameFromState(state, dndId, semester) || course.name,
+  }));
 
   const [blockName, setBlockName] = useState(courseName);
   const [isEditBlockName, setIsEditBlockName] = useState(false);
