@@ -10,6 +10,7 @@ import {
   DNDScheduleCourse,
   IWarning,
   DNDSchedule,
+  StatusEnum,
 } from "../models/types";
 import { ScheduleCourse, Status, SeasonWord } from "../../../common/types";
 import styled from "styled-components";
@@ -41,6 +42,7 @@ import {
 import { UndoDelete } from "./UndoDelete";
 import ScheduleChangeTracker from "../utils/ScheduleChangeTracker";
 import { type } from "os";
+import { StatusCodeError } from "request-promise/errors";
 
 const OutsideContainer = styled.div`
   width: 25%;
@@ -264,10 +266,12 @@ class EditableSemesterBlockComponent extends React.Component<
   }
 
   renderContainer() {
+    const { semester, warnings, isEditable } = this.props;
+    const status = semester.status;
     return (
-      <Container warning={this.props.warnings.length > 0}>
+      <Container warning={warnings.length > 0}>
         <ClassListWrapper>
-          <Droppable droppableId={this.props.semester.termId.toString()}>
+          <Droppable droppableId={semester.termId.toString()}>
             {provided => (
               <ClassList
                 innerRef={provided.innerRef as any}
@@ -275,9 +279,11 @@ class EditableSemesterBlockComponent extends React.Component<
               >
                 {this.renderBody()}
                 {provided.placeholder}
-                {this.props.isEditable && (
-                  <AddBlock onClick={this.showModal.bind(this)} />
-                )}
+                {isEditable &&
+                  !(
+                    status === StatusEnum.INACTIVE ||
+                    status === StatusEnum.HOVERINACTIVE
+                  ) && <AddBlock onClick={this.showModal.bind(this)} />}
               </ClassList>
             )}
           </Droppable>
