@@ -2,7 +2,12 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
 import styled from "styled-components";
-import { ScheduleCourse } from "../../../common/types";
+import {
+  ScheduleCourse,
+  TransferableExam,
+  TransferableExamGroup,
+  IRequiredCourse,
+} from "../../../common/types";
 import { AddClassSearchModal } from "./AddClassSearchModal";
 import {
   addTransferClassAction,
@@ -10,7 +15,10 @@ import {
 } from "../state/actions/studentActions";
 import { AddBlock } from "./ClassBlocks/AddBlock";
 import { NonDraggableClassBlock } from "./ClassBlocks/NonDraggableClassBlock";
+import { Tooltip } from "@material-ui/core";
 import { UndoDelete } from "./UndoDelete";
+import { APExamGroups2020To2021 } from "../../../common/ap_exams";
+import { IBExamGroups2020To2021 } from "../../../common/ib_exams";
 
 interface TransferCreditsProps {
   transferCredits: ScheduleCourse[];
@@ -67,6 +75,32 @@ const Wrapper = styled.div`
   width: 100%;
   height: 100%;
 `;
+
+function getTooltipText(course: ScheduleCourse) {
+  APExamGroups2020To2021.forEach(examGroup => {
+    examGroup.transferableExams.forEach(
+      (transferableExam: TransferableExam) => {
+        // If the NEU course matches the AP/IB course, return tooltip text.
+        transferableExam.mappableCourses.forEach(
+          (mappableCourse: IRequiredCourse) => {
+            if (
+              mappableCourse.subject === course.subject &&
+              String(mappableCourse.classId) === course.classId
+            ) {
+              return transferableExam.type + transferableExam.name;
+            }
+          }
+        );
+      }
+    );
+  });
+}
+
+function renderTooltip(course: ScheduleCourse) {
+  const tooltipText = getTooltipText(course);
+
+  return <div>{tooltipText}</div>;
+}
 
 class TransferCreditsComponent extends React.Component<
   Props,
@@ -132,13 +166,15 @@ class TransferCreditsComponent extends React.Component<
     return this.props.transferCredits.map(scheduleCourse => {
       if (!!scheduleCourse) {
         return (
-          <ClassWrapper key={scheduleCourse.subject + scheduleCourse.classId}>
-            <NonDraggableClassBlock
-              course={scheduleCourse}
-              onDelete={this.onDeleteClass.bind(this, scheduleCourse)}
-              hideDelete={!this.props.isEditable}
-            />
-          </ClassWrapper>
+          <Tooltip title={renderTooltip(scheduleCourse)} placement="top">
+            <ClassWrapper key={scheduleCourse.subject + scheduleCourse.classId}>
+              <NonDraggableClassBlock
+                course={scheduleCourse}
+                onDelete={this.onDeleteClass.bind(this, scheduleCourse)}
+                hideDelete={!this.props.isEditable}
+              />
+            </ClassWrapper>
+          </Tooltip>
         );
       }
       return null;
@@ -151,7 +187,7 @@ class TransferCreditsComponent extends React.Component<
 
   render() {
     const { modalVisible, deletedClass, snackbarOpen } = this.state;
-
+    console.log(this.props.transferCredits);
     return (
       <div style={{ width: "100%", marginBottom: 28 }}>
         <Container>
