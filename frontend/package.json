@@ -16,7 +16,7 @@
     "cross-env": "5.0.5",
     "dataloader": "^2.0.0",
     "graphql-tag": "^2.10.1",
-    "immer": "^8.0.1",
+    "immer": "^9.0.6",
     "js-cookie": "^2.2.1",
     "js-levenshtein": "^1.1.6",
     "lodash": "^4.17.21",
