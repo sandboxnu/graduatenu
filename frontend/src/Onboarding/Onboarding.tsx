@@ -24,6 +24,7 @@ const LoginButtonContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
 `;
 
 const Banner = styled.div`
@@ -198,26 +199,16 @@ export class Onboarding extends React.Component<Props> {
           <LoginButtonContainer>
             <a
               href="https://admin.khoury.northeastern.edu"
-              style={{ textDecoration: "none" }}
+              style={{ textDecoration: "none", marginRight: "1em" }}
             >
               <ColorButton variant="contained">Get Started</ColorButton>
             </a>
-            {this.dev && (
-              <>
-                <ColorButton
-                  variant="contained"
-                  onClick={this.onDevStudentClick.bind(this)}
-                >
-                  Dev Bypass (Student)
-                </ColorButton>
-                <ColorButton
-                  variant="contained"
-                  onClick={this.onDevAdvisorClick.bind(this)}
-                >
-                  Dev Bypass (Advisor)
-                </ColorButton>
-              </>
-            )}
+            <a href="/login" style={{ marginRight: "1em" }}>
+              <ColorButton variant="contained">Login</ColorButton>
+            </a>
+            <a href="/signup">
+              <ColorButton variant="contained">Sign Up</ColorButton>
+            </a>
           </LoginButtonContainer>
         </Header>
         <Banner>
