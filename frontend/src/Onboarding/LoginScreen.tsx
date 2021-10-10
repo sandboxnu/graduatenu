@@ -5,7 +5,10 @@ import styled from "styled-components";
 import { TextField } from "@material-ui/core";
 import { Major } from "../../../common/types";
 import { ILoginData, IUserData, NamedSchedule } from "../models/types";
-import { PrimaryButton } from "../components/common/PrimaryButton";
+import {
+  PrimaryButton,
+  SecondaryButton,
+} from "../components/common/PrimaryButton";
 import { Dispatch } from "redux";
 import { setStudentAction } from "../state/actions/studentActions";
 import { loginUser } from "../services/UserService";
@@ -32,13 +35,14 @@ const Title = styled.div`
 
 const Subtitle = styled.div`
   margin-top: 8px;
-  margin-bottom: 2px;
+  margin-bottom: 4px;
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
   line-height: 16px;
   width: 326px;
+  text-align: center;
 `;
 
 const Box = styled.div`
@@ -47,6 +51,13 @@ const Box = styled.div`
   align-items: center;
   display: flex;
   flex-direction: column;
+`;
+
+const ButtonContainer = styled.div`
+  margin-top: 1em;
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 0em 1em;
 `;
 
 interface ReduxStoreLoginScreenProps {
@@ -135,6 +146,7 @@ class LoginScreenComponent extends React.Component<Props, LoginScreenState> {
       };
 
       loginUser(user).then((response: LoginResponse) => {
+        console.log(response);
         if (response.errors) {
           this.setState({
             error: "invalid",
@@ -282,9 +294,12 @@ class LoginScreenComponent extends React.Component<Props, LoginScreenState> {
             continue as guest
           </Link>
         </Subtitle>
-        <div onClick={this.submit.bind(this)}>
-          <PrimaryButton>Log In</PrimaryButton>
-        </div>
+        <ButtonContainer>
+          <PrimaryButton onClick={this.submit.bind(this)}>Log In</PrimaryButton>
+          <Link to="/" style={{ textDecoration: "none" }}>
+            <SecondaryButton>Back</SecondaryButton>
+          </Link>
+        </ButtonContainer>
       </Wrapper>
     );
   }
