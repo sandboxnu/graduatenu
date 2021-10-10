@@ -106,7 +106,6 @@ class LoginScreenComponent extends React.Component<Props, LoginScreenState> {
   /**
    * All of the different functions that modify the stored TextField values as they are changed.
    */
-
   onChangeEmail(e: React.ChangeEvent<HTMLInputElement>) {
     this.setState({
       emailStr: e.target.value,
@@ -126,7 +125,6 @@ class LoginScreenComponent extends React.Component<Props, LoginScreenState> {
    * Checks response for error messages. If the log in succeeds, dispatch actions to set
    * user attributes obtained from the response object, then redirects user to /home.
    */
-
   submit() {
     // Regex to determine if email string is a valid address
     const validEmail: boolean = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(
@@ -144,7 +142,6 @@ class LoginScreenComponent extends React.Component<Props, LoginScreenState> {
       };
 
       loginUser(user).then((response: LoginResponse) => {
-        console.log(response);
         if (response.errors) {
           this.setState({
             error: "invalid",
@@ -156,43 +153,14 @@ class LoginScreenComponent extends React.Component<Props, LoginScreenState> {
             domain: window.location.hostname,
           });
           this.props.history.push("/home");
-          // this.findUserPlans(response);
         }
       });
     }
   }
 
   /**
-   * Finds all of the user plans and sets the state based on the plan's information.
-   */
-  // findUserPlans(response: any) {
-  //   findAllPlansForUser(response.user.id).then(plans => {
-  //     const planNameToPlan: Record<string, IPlanData> = {};
-  //     plans.forEach(plan => {
-  //       planNameToPlan[plan.name] = plan;
-  //     });
-
-  //     const planToClosedYears: Record<string, number[]> = {};
-  //     plans.forEach(plan => {
-  //       planToClosedYears[plan.name] = [];
-  //     });
-
-  //     const activePlanId = response.user.primaryPlanId;
-  //     const activePlanName = plans.find(plan => plan.id === activePlanId)?.name;
-
-  //     const userPlansData: UserPlansState = {
-  //       activePlan: activePlanName,
-  //       plans: planNameToPlan,
-  //       activePlanStatus: "Up To Date",
-  //       closedYears: planToClosedYears,
-  //     };
-  //   });
-  // }
-
-  /**
    * Renders the email text field
    */
-
   renderEmailTextField(textFieldStr: string, beenEdited: boolean) {
     return (
       <TextField
