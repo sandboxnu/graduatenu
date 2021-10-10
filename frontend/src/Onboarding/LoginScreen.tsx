@@ -5,16 +5,14 @@ import styled from "styled-components";
 import { TextField } from "@material-ui/core";
 import { Major } from "../../../common/types";
 import { ILoginData, IUserData, NamedSchedule } from "../models/types";
-import {
-  PrimaryButton,
-  SecondaryButton,
-} from "../components/common/PrimaryButton";
+import { PrimaryButton } from "../components/common/PrimaryButton";
 import { Dispatch } from "redux";
 import { setStudentAction } from "../state/actions/studentActions";
 import { loginUser } from "../services/UserService";
 import { AUTH_TOKEN_COOKIE_KEY } from "../utils/auth-helpers";
 import Cookies from "js-cookie";
 import { AppState } from "../state/reducers/state";
+import { SecondaryLinkButton } from "../components/common/LinkButtons";
 
 const Wrapper = styled.div`
   display: flex;
@@ -296,9 +294,7 @@ class LoginScreenComponent extends React.Component<Props, LoginScreenState> {
         </Subtitle>
         <ButtonContainer>
           <PrimaryButton onClick={this.submit.bind(this)}>Log In</PrimaryButton>
-          <Link to="/" style={{ textDecoration: "none" }}>
-            <SecondaryButton>Back</SecondaryButton>
-          </Link>
+          <SecondaryLinkButton to="/">Back</SecondaryLinkButton>
         </ButtonContainer>
       </Wrapper>
     );
