@@ -10,6 +10,7 @@ import {
   simulateKhouryAdvisorLogin,
   simulateKhouryStudentLogin,
 } from "../services/UserService";
+import { Link } from "react-router-dom";
 
 const Header = styled.div`
   display: flex;
@@ -203,12 +204,15 @@ export class Onboarding extends React.Component<Props> {
             >
               <ColorButton variant="contained">Get Started</ColorButton>
             </a>
-            <a href="/login" style={{ marginRight: "1em" }}>
+            <Link
+              to="/login"
+              style={{ textDecoration: "none", marginRight: "1em" }}
+            >
               <ColorButton variant="contained">Login</ColorButton>
-            </a>
-            <a href="/signup">
+            </Link>
+            <Link to="/signup" style={{ textDecoration: "none" }}>
               <ColorButton variant="contained">Sign Up</ColorButton>
-            </a>
+            </Link>
           </LoginButtonContainer>
         </Header>
         <Banner>
