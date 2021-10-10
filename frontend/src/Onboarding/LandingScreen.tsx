@@ -122,21 +122,11 @@ const WhiteColorButton = withStyles((theme: Theme) => ({
   },
 }))(Button);
 
-const ColorButton = withStyles((theme: Theme) => ({
-  root: {
-    color: "#ffffff",
-    backgroundColor: NORTHEASTERN_RED,
-    "&:hover": {
-      backgroundColor: "#DB4747",
-    },
-  },
-}))(Button);
-
 interface Props {
   fullName: string;
 }
 
-export class Onboarding extends React.Component<Props> {
+export class LandingScreen extends React.Component<Props> {
   dev: boolean;
 
   constructor(props: Props) {
