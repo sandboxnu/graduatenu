@@ -1,16 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import { Button, Theme, withStyles } from "@material-ui/core";
 import titlePicture from "../assets/onboarding-title.png";
 import picture1 from "../assets/onboarding-1.png";
 import picture2 from "../assets/onboarding-2.png";
 import picture3 from "../assets/onboarding-3.png";
 import { NORTHEASTERN_RED } from "../constants";
-import {
-  simulateKhouryAdvisorLogin,
-  simulateKhouryStudentLogin,
-} from "../services/UserService";
 import { PrimaryLinkButton } from "../components/common/LinkButtons";
+import { WhiteColorButton } from "../components/common/ColoredButtons";
 
 const Header = styled.div`
   display: flex;
@@ -112,16 +108,6 @@ const Footer = styled.div`
   justify-content: flex-end;
 `;
 
-const WhiteColorButton = withStyles((theme: Theme) => ({
-  root: {
-    color: NORTHEASTERN_RED,
-    backgroundColor: "#ffffff",
-    "&:hover": {
-      backgroundColor: "#e9e9e9",
-    },
-  },
-}))(Button);
-
 interface Props {
   fullName: string;
 }
@@ -136,18 +122,6 @@ export class LandingScreen extends React.Component<Props> {
     };
 
     this.dev = process.env.NODE_ENV === "development";
-  }
-
-  onDevStudentClick() {
-    simulateKhouryStudentLogin().then(response => {
-      window.location.href = response.redirect;
-    });
-  }
-
-  onDevAdvisorClick() {
-    simulateKhouryAdvisorLogin().then(response => {
-      window.location.href = response.redirect;
-    });
   }
 
   renderInfoSection(
