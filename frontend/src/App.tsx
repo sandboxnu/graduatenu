@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { Onboarding } from "./Onboarding/Onboarding";
+import { LandingScreen } from "./Onboarding/LandingScreen";
 import { HomeWrapper } from "./home/HomeWrapper";
 import { OnboardingInfoScreen } from "./Onboarding/OnboardingInfoScreen";
 import { CompletedCoursesScreen } from "./Onboarding/CompletedCoursesScreen";
@@ -49,7 +49,7 @@ export const App = ({ store }: { store: Store }) => {
           {/* requires not logged in */}
           {/* <UnprotectedRoute path="/signup" component={SignupScreen} /> */}
           <UnprotectedRoute path="/login" component={LoginScreen} />
-          <UnprotectedRoute path="/" component={Onboarding} />
+          <UnprotectedRoute path="/" component={LandingScreen} />
         </Switch>
       </Router>
     </Provider>
