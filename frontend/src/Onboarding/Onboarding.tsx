@@ -198,16 +198,10 @@ export class Onboarding extends React.Component<Props> {
         <Header>
           <h1>GraduateNU</h1>
           <LoginButtonContainer>
-            <a
-              href="https://admin.khoury.northeastern.edu"
-              style={{ textDecoration: "none", marginRight: "1em" }}
-            >
-              <ColorButton variant="contained">Get Started</ColorButton>
-            </a>
             <PrimaryLinkButton to="/login" style={{ marginRight: "1em" }}>
               Login
             </PrimaryLinkButton>
-            <PrimaryLinkButton to="/signup">Sign Up</PrimaryLinkButton>
+            <PrimaryLinkButton to="/onboarding">Sign Up</PrimaryLinkButton>
           </LoginButtonContainer>
         </Header>
         <Banner>
@@ -217,14 +211,7 @@ export class Onboarding extends React.Component<Props> {
               Navigate the Northeastern graduation requirements and create a
               personalized plan of study.
             </BannerInfoText>
-            <a
-              href="https://admin.khoury.northeastern.edu"
-              style={{ textDecoration: "none" }}
-            >
-              <WhiteColorButton variant="contained">
-                Get Started
-              </WhiteColorButton>
-            </a>
+            <PrimaryLinkButton to="/onboarding">Sign Up</PrimaryLinkButton>
           </BannerInfo>
           <TitlePicture src={titlePicture} alt="title-picture"></TitlePicture>
         </Banner>
