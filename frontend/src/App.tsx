@@ -47,7 +47,7 @@ export const App = ({ store }: { store: Store }) => {
           />
           <ProtectedRoute path="/advisor" component={AdvisorRouter} />
           {/* requires not logged in */}
-          <UnprotectedRoute path="/signup" component={Onboarding} />
+          {/* <UnprotectedRoute path="/signup" component={SignupScreen} /> */}
           <UnprotectedRoute path="/login" component={LoginScreen} />
           <UnprotectedRoute path="/" component={Onboarding} />
         </Switch>
