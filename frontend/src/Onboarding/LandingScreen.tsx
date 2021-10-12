@@ -5,8 +5,10 @@ import picture1 from "../assets/onboarding-1.png";
 import picture2 from "../assets/onboarding-2.png";
 import picture3 from "../assets/onboarding-3.png";
 import { NORTHEASTERN_RED } from "../constants";
-import { PrimaryLinkButton } from "../components/common/LinkButtons";
-import { WhiteColorButton } from "../components/common/ColoredButtons";
+import {
+  PrimaryLinkButton,
+  WhiteLinkButton,
+} from "../components/common/LinkButtons";
 
 const Header = styled.div`
   display: flex;
@@ -175,7 +177,7 @@ export class LandingScreen extends React.Component<Props> {
               Navigate the Northeastern graduation requirements and create a
               personalized plan of study.
             </BannerInfoText>
-            <PrimaryLinkButton to="/onboarding">Sign Up</PrimaryLinkButton>
+            <WhiteLinkButton to="/onboarding">Get Started</WhiteLinkButton>
           </BannerInfo>
           <TitlePicture src={titlePicture} alt="title-picture"></TitlePicture>
         </Banner>
@@ -202,7 +204,7 @@ export class LandingScreen extends React.Component<Props> {
             href="https://admin.khoury.northeastern.edu"
             style={{ textDecoration: "none" }}
           >
-            <WhiteColorButton variant="contained">Get Started</WhiteColorButton>
+            <WhiteLinkButton to="/onboarding">Get Started</WhiteLinkButton>
           </a>
         </Footer>
       </>
