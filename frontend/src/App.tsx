@@ -30,7 +30,6 @@ export const App = ({ store }: { store: Store }) => {
           {/* requires login */}
           <ProtectedRoute path="/home" component={HomeWrapper} />
           <ProtectedRoute path="/redirect" component={RedirectScreen} />
-          <ProtectedRoute path="/onboarding" component={OnboardingInfoScreen} />
           <ProtectedRoute path="/profile" component={Profile} />
           <ProtectedRoute path="/management" component={CourseManagmentPage} />
           <ProtectedRoute
@@ -48,6 +47,10 @@ export const App = ({ store }: { store: Store }) => {
           <ProtectedRoute path="/advisor" component={AdvisorRouter} />
           {/* requires not logged in */}
           {/* <UnprotectedRoute path="/signup" component={SignupScreen} /> */}
+          <UnprotectedRoute
+            path="/onboarding"
+            component={OnboardingInfoScreen}
+          />
           <UnprotectedRoute path="/login" component={LoginScreen} />
           <UnprotectedRoute path="/" component={LandingScreen} />
         </Switch>
