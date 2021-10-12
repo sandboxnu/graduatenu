@@ -3,6 +3,7 @@ import {
   IUpdateUser,
   IUpdateUserData,
   IUpdateUserPassword,
+  IUserData,
 } from "../models/types";
 
 export const registerUser = (user: IUpdateUserData) =>
@@ -14,14 +15,26 @@ export const registerUser = (user: IUpdateUserData) =>
     },
   }).then(response => response.json());
 
-export const loginUser = (user: ILoginData) =>
+interface LoginUserData {
+  errors?: any;
+  user?: any;
+}
+
+interface LoginUserResponse {
+  status: number;
+  data: LoginUserData;
+}
+
+export const loginUser = (user: ILoginData): Promise<LoginUserResponse> =>
   fetch("/api/users/login", {
     method: "POST",
     body: JSON.stringify({ user: user }),
     headers: {
       "Content-Type": "application/json",
     },
-  }).then(response => response.json());
+  }).then(response => {
+    return { status: response.status, data: response.json() as LoginUserData };
+  });
 
 export const updatePassword = (
   token: string,
