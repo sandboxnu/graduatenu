@@ -125,7 +125,7 @@ class LoginScreenComponent extends React.Component<Props, LoginScreenState> {
    * Checks response for error messages. If the log in succeeds, dispatch actions to set
    * user attributes obtained from the response object, then redirects user to /home.
    */
-  submit() {
+  async submit() {
     // Regex to determine if email string is a valid address
     const validEmail: boolean = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(
       this.state.emailStr
@@ -141,32 +141,35 @@ class LoginScreenComponent extends React.Component<Props, LoginScreenState> {
         password: this.state.passwordStr,
       };
 
-      loginUser(user)
-        .then(response => {
-          if (response.data.errors || !response.data.user) {
-            const isUnauthorized = response.status === 401;
+      try {
+        const response = await loginUser(user);
 
-            this.setState({
-              error: isUnauthorized
-                ? ErrorType.INVALID_CREDENTIALS
-                : ErrorType.OTHER,
-            });
-          } else {
-            this.props.setStudent(response.data.user);
-            Cookies.set(AUTH_TOKEN_COOKIE_KEY, response.data.user.token, {
-              path: "/",
-              domain: window.location.hostname,
-            });
-            this.props.history.push("/home");
-          }
-        })
-        .catch(err => {
+        if (response.data.errors || !response.data.user) {
+          // handle response errros
+          const isUnauthorized = response.status === 401;
+
           this.setState({
-            error: ErrorType.OTHER,
+            error: isUnauthorized
+              ? ErrorType.INVALID_CREDENTIALS
+              : ErrorType.OTHER,
           });
-
-          console.log("Something went wrong when logging in: ", err);
+        } else {
+          // update redux store with logged in user and set cookies
+          this.props.setStudent(response.data.user);
+          Cookies.set(AUTH_TOKEN_COOKIE_KEY, response.data.user.token, {
+            path: "/",
+            domain: window.location.hostname,
+          });
+          this.props.history.push("/home");
+        }
+      } catch (err) {
+        // something went wrong making the request
+        this.setState({
+          error: ErrorType.OTHER,
         });
+
+        console.log("Something went wrong when logging in: ", err);
+      }
     }
   }
 
