@@ -141,20 +141,22 @@ class LoginScreenComponent extends React.Component<Props, LoginScreenState> {
         password: this.state.passwordStr,
       };
 
-      loginUser(user).then((response: LoginResponse) => {
-        if (response.errors) {
-          this.setState({
-            error: "invalid",
-          });
-        } else {
-          this.props.setStudent(response.user);
-          Cookies.set(AUTH_TOKEN_COOKIE_KEY, response.user.token, {
-            path: "/",
-            domain: window.location.hostname,
-          });
-          this.props.history.push("/home");
-        }
-      });
+      loginUser(user)
+        .then((response: LoginResponse) => {
+          if (response.errors) {
+            this.setState({
+              error: "invalid",
+            });
+          } else {
+            this.props.setStudent(response.user);
+            Cookies.set(AUTH_TOKEN_COOKIE_KEY, response.user.token, {
+              path: "/",
+              domain: window.location.hostname,
+            });
+            this.props.history.push("/home");
+          }
+        })
+        .catch(err => console.log("Something went wrong when logging in."));
     }
   }
 
