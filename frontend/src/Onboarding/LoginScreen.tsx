@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { withRouter, RouteComponentProps, Link } from "react-router-dom";
 import styled from "styled-components";
-import { TextField } from "@material-ui/core";
+import { responsiveFontSizes, TextField } from "@material-ui/core";
 import { Major } from "../../../common/types";
 import { ILoginData, IUserData, NamedSchedule } from "../models/types";
 import { PrimaryButton } from "../components/common/PrimaryButton";
@@ -75,18 +75,18 @@ type Props = ReduxStoreLoginScreenProps &
   ReduxStoreSignupScreenProps &
   RouteComponentProps<{}>;
 
+enum ErrorType {
+  INVALID_CREDENTIALS,
+  OTHER,
+}
+
 interface LoginScreenState {
   emailStr: string;
   passwordStr: string;
   beenEditedEmail: boolean;
   beenEditedPassword: boolean;
   validEmail: boolean;
-  error?: string;
-}
-
-interface LoginResponse {
-  user: IUserData & { token: string };
-  errors: any;
+  error?: ErrorType;
 }
 
 class LoginScreenComponent extends React.Component<Props, LoginScreenState> {
@@ -142,21 +142,31 @@ class LoginScreenComponent extends React.Component<Props, LoginScreenState> {
       };
 
       loginUser(user)
-        .then((response: LoginResponse) => {
-          if (response.errors) {
+        .then(response => {
+          if (response.data.errors || !response.data.user) {
+            const isUnauthorized = response.status === 401;
+
             this.setState({
-              error: "invalid",
+              error: isUnauthorized
+                ? ErrorType.INVALID_CREDENTIALS
+                : ErrorType.OTHER,
             });
           } else {
-            this.props.setStudent(response.user);
-            Cookies.set(AUTH_TOKEN_COOKIE_KEY, response.user.token, {
+            this.props.setStudent(response.data.user);
+            Cookies.set(AUTH_TOKEN_COOKIE_KEY, response.data.user.token, {
               path: "/",
               domain: window.location.hostname,
             });
             this.props.history.push("/home");
           }
         })
-        .catch(err => console.log("Something went wrong when logging in."));
+        .catch(err => {
+          this.setState({
+            error: ErrorType.OTHER,
+          });
+
+          console.log("Something went wrong when logging in: ", err);
+        });
     }
   }
 
@@ -164,6 +174,9 @@ class LoginScreenComponent extends React.Component<Props, LoginScreenState> {
    * Renders the email text field
    */
   renderEmailTextField(textFieldStr: string, beenEdited: boolean) {
+    const showInvalidCredsError =
+      this.state.error === ErrorType.INVALID_CREDENTIALS;
+
     return (
       <TextField
         id="outlined-basic"
@@ -183,7 +196,7 @@ class LoginScreenComponent extends React.Component<Props, LoginScreenState> {
           minWidth: 326,
         }}
         helperText={
-          (this.state.error && "Email or password is invalid") ||
+          (showInvalidCredsError && "Email or password is invalid") ||
           (!this.state.validEmail && "Please enter a valid email") ||
           ("" && (!beenEdited || textFieldStr.length !== 0)) ||
           (textFieldStr.length === 0 &&
@@ -199,6 +212,11 @@ class LoginScreenComponent extends React.Component<Props, LoginScreenState> {
    * Renders the password text field
    */
   renderPasswordTextField(textFieldStr: string, beenEdited: boolean) {
+    const showInvalidCredsError =
+      this.state.error === ErrorType.INVALID_CREDENTIALS;
+
+    const showOtherError = this.state.error === ErrorType.OTHER;
+
     return (
       <TextField
         id="outlined-basic"
@@ -211,7 +229,9 @@ class LoginScreenComponent extends React.Component<Props, LoginScreenState> {
           minWidth: 326,
         }}
         helperText={
-          (this.state.error && "Email or password is invalid") ||
+          (showInvalidCredsError && "Email or password is invalid") ||
+          (showOtherError &&
+            "Oops, something went wrong. Please try again later.") ||
           ("" && (!beenEdited || textFieldStr.length !== 0)) ||
           (textFieldStr.length === 0 &&
             beenEdited &&
