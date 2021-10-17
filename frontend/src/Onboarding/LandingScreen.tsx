@@ -167,7 +167,7 @@ export class LandingScreen extends React.Component<Props> {
             <PrimaryLinkButton to="/login" style={{ marginRight: "1em" }}>
               Login
             </PrimaryLinkButton>
-            <PrimaryLinkButton to="/onboarding">Sign Up</PrimaryLinkButton>
+            <PrimaryLinkButton to="/onboarding">Get Started</PrimaryLinkButton>
           </LoginButtonContainer>
         </Header>
         <Banner>
