@@ -112,7 +112,7 @@ function getTooltipText(course: ScheduleCourse) {
   const ibExamText = findExamText(IBExamGroups2020To2021, course);
 
   if (apExamText === "" && ibExamText === "") {
-    return "No AP or IB equivalent exists for this course";
+    return "Transferred as " + course.subject + course.classId;
   } else if (apExamText === "") {
     return "Fulfilled by " + ibExamText;
   } else if (ibExamText === "") {
