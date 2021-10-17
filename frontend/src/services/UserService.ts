@@ -15,9 +15,13 @@ export const registerUser = (user: IUpdateUserData) =>
     },
   }).then(response => response.json());
 
+interface UserDataWithToken extends IUserData {
+  token: string;
+}
+
 interface LoginUserData {
   errors?: any;
-  user?: any;
+  user?: UserDataWithToken;
 }
 
 interface LoginUserResponse {
