@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { withRouter, RouteComponentProps, Link } from "react-router-dom";
 import styled from "styled-components";
-import { responsiveFontSizes, TextField } from "@material-ui/core";
+import { TextField } from "@material-ui/core";
 import { Major } from "../../../common/types";
 import { ILoginData, IUserData, NamedSchedule } from "../models/types";
 import { PrimaryButton } from "../components/common/PrimaryButton";
