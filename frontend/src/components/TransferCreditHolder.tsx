@@ -76,24 +76,50 @@ const Wrapper = styled.div`
   height: 100%;
 `;
 
-function getTooltipText(course: ScheduleCourse) {
-  APExamGroups2020To2021.forEach(examGroup => {
-    examGroup.transferableExams.forEach(
-      (transferableExam: TransferableExam) => {
-        // If the NEU course matches the AP/IB course, return tooltip text.
-        transferableExam.mappableCourses.forEach(
-          (mappableCourse: IRequiredCourse) => {
-            if (
-              mappableCourse.subject === course.subject &&
-              String(mappableCourse.classId) === course.classId
-            ) {
-              return transferableExam.type + transferableExam.name;
-            }
-          }
-        );
+/**
+ * Determines the corresponding transferable exam type and name for the given NEU course.
+ * @param examGroups The transferable exam groupings (either AP or IB).
+ * @param course The NEU course to query against.
+ * @returns The exam type and name as a string.
+ */
+function findExamText(
+  examGroups: TransferableExamGroup[],
+  course: ScheduleCourse
+) {
+  for (const examGroup of examGroups) {
+    for (const transferableExam of examGroup.transferableExams) {
+      for (const mappableCourse of transferableExam.mappableCourses) {
+        if (
+          mappableCourse.subject === course.subject &&
+          String(mappableCourse.classId) === course.classId
+        ) {
+          return transferableExam.type + " " + transferableExam.name;
+        }
       }
-    );
-  });
+    }
+  }
+  // If not found, return an empty string.
+  return "";
+}
+
+/**
+ * Gets the tooltip hover text for the transfer credits container.
+ * @param course The NEU course to query against.
+ * @returns The tooltip hover text as a string.
+ */
+function getTooltipText(course: ScheduleCourse) {
+  const apExamText = findExamText(APExamGroups2020To2021, course);
+  const ibExamText = findExamText(IBExamGroups2020To2021, course);
+
+  if (apExamText === "" && ibExamText === "") {
+    return "No AP or IB equivalent exists for this course";
+  } else if (apExamText === "") {
+    return "Fulfilled by " + ibExamText;
+  } else if (ibExamText === "") {
+    return "Fulfilled by " + apExamText;
+  }
+
+  return "Fulfilled by " + apExamText + " or " + ibExamText;
 }
 
 function renderTooltip(course: ScheduleCourse) {
