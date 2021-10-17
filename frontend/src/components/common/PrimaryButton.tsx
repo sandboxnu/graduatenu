@@ -8,6 +8,7 @@ const ColorButton = withStyles((_theme: Theme) => ({
     paddingVertical: "8px",
     paddingHorizontal: "16px",
     backgroundColor: "#EB5757",
+    width: "100%",
     "&:hover": {
       backgroundColor: "#DB4747",
     },
