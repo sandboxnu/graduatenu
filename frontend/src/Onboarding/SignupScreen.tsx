@@ -36,10 +36,7 @@ const Subtitle = styled.div`
   width: 326px;
 `;
 
-const StyledField = styled(Field)`
-  border: 1px solid white;
-  width: 500px;
-  align-items: center;
+const StyleForm = styled(Form)`
   display: flex;
   flex-direction: column;
 `;
@@ -68,11 +65,11 @@ const SignupForm = () => {
       validationSchema={SignupValidation}
       onSubmit={values => {
         // same shape as initial values
-        console.log(values);
+        // console.log(values);
       }}
     >
-      {({ errors, touched, values, handleChange }) => (
-        <Form>
+      {({ errors, touched, values, handleChange, handleBlur }) => (
+        <StyleForm>
           <TextField
             id="email"
             name="email"
@@ -80,23 +77,41 @@ const SignupForm = () => {
             variant="outlined"
             value={values.email}
             onChange={handleChange}
+            onBlur={handleBlur}
             error={touched.email && Boolean(errors.email)}
-            helperText={"Je;llo"}
+            helperText={errors.email && touched.email && errors.email}
           />
-          {console.log(touched)}
-          {/* <Field type="text" name="email"/> */}
 
-          {/* {errors.email && touched.email && <div>{errors.email}</div>} */}
+          <TextField
+            id="password"
+            name="password"
+            label="Password"
+            variant="outlined"
+            value={values.password}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={touched.password && Boolean(errors.password)}
+            helperText={errors.password && touched.password && errors.password}
+          />
 
-          <Field name="password" />
-          {errors.password && touched.password && <div>{errors.password}</div>}
+          <TextField
+            id="confirmPassword"
+            name="confirmPassword"
+            label="Confirm Password"
+            variant="outlined"
+            value={values.confirmPassword}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={touched.confirmPassword && Boolean(errors.confirmPassword)}
+            helperText={
+              errors.confirmPassword &&
+              touched.confirmPassword &&
+              errors.confirmPassword
+            }
+          />
 
-          <Field name="confirmPassword" />
-          {errors.confirmPassword && touched.confirmPassword && (
-            <div>{errors.confirmPassword}</div>
-          )}
           <button type="submit">Submit</button>
-        </Form>
+        </StyleForm>
       )}
     </Formik>
   );
