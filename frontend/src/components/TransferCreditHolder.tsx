@@ -213,7 +213,6 @@ class TransferCreditsComponent extends React.Component<
 
   render() {
     const { modalVisible, deletedClass, snackbarOpen } = this.state;
-    console.log(this.props.transferCredits);
     return (
       <div style={{ width: "100%", marginBottom: 28 }}>
         <Container>
