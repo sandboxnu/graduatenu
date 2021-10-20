@@ -15,6 +15,7 @@
     "apollo-boost": "^0.4.4",
     "cross-env": "5.0.5",
     "dataloader": "^2.0.0",
+    "formik": "^2.2.9",
     "graphql-tag": "^2.10.1",
     "immer": "^9.0.6",
     "js-cookie": "^2.2.1",
@@ -39,7 +40,8 @@
     "styled-components": "^4.4.0",
     "timeago.js": "^4.0.2",
     "typesafe-actions": "^5.1.0",
-    "xlsx": "^0.15.6"
+    "xlsx": "^0.15.6",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@types/jest": "^24.0.18",

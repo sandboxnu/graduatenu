@@ -1,4 +1,3 @@
-export {};
 // import React from "react";
 // import { connect } from "react-redux";
 // import { withRouter, RouteComponentProps, Link } from "react-router-dom";
@@ -394,7 +393,7 @@ export {};
 //  * be passed down as props from the parent component.
 //  */
 
-// export const SignupScreen = connect(
+// export const SignupScreenV2 = connect(
 //   mapStateToProps,
 //   mapDispatchToProps
 // )(withRouter(SignupScreenComponent));

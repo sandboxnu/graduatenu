@@ -21,6 +21,7 @@ import { TemplateBuilderPage } from "./advising/Templates/TemplateBuilderPage";
 import { CourseManagmentPage } from "./advising/CourseManagment";
 import { GenericStudentView } from "./advising/ManageStudents/GenericStudentView";
 import { LoginScreen } from "./Onboarding/LoginScreen";
+import SignupScreen from "./Onboarding/SignupScreen";
 
 export const App = ({ store }: { store: Store }) => {
   return (
@@ -47,10 +48,7 @@ export const App = ({ store }: { store: Store }) => {
           <ProtectedRoute path="/advisor" component={AdvisorRouter} />
           {/* requires not logged in */}
           {/* <UnprotectedRoute path="/signup" component={SignupScreen} /> */}
-          <UnprotectedRoute
-            path="/onboarding"
-            component={OnboardingInfoScreen}
-          />
+          <UnprotectedRoute path="/onboarding" component={SignupScreen} />
           <UnprotectedRoute path="/login" component={LoginScreen} />
           <UnprotectedRoute path="/" component={LandingScreen} />
         </Switch>
