@@ -85,7 +85,7 @@ const Wrapper = styled.div`
 function findExamText(
   examGroups: TransferableExamGroup[],
   course: ScheduleCourse
-) {
+): string {
   for (const examGroup of examGroups) {
     for (const transferableExam of examGroup.transferableExams) {
       for (const mappableCourse of transferableExam.mappableCourses) {
@@ -93,7 +93,7 @@ function findExamText(
           mappableCourse.subject === course.subject &&
           String(mappableCourse.classId) === course.classId
         ) {
-          return transferableExam.type + " " + transferableExam.name;
+          return `${transferableExam.type} ${transferableExam.name}`;
         }
       }
     }
@@ -112,14 +112,14 @@ function getTooltipText(course: ScheduleCourse) {
   const ibExamText = findExamText(IBExamGroups2020To2021, course);
 
   if (apExamText === "" && ibExamText === "") {
-    return "Transferred as " + course.subject + course.classId;
+    return `Transferred as ${course.subject} ${course.classId}`;
   } else if (apExamText === "") {
-    return "Fulfilled by " + ibExamText;
+    return `Fulfilled by ${ibExamText}`;
   } else if (ibExamText === "") {
-    return "Fulfilled by " + apExamText;
+    return `Fulfilled by ${apExamText}`;
   }
 
-  return "Fulfilled by " + apExamText + " or " + ibExamText;
+  return `Fulfilled by ${apExamText} or ${ibExamText}`;
 }
 
 function renderTooltip(course: ScheduleCourse) {
