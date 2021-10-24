@@ -37,6 +37,7 @@ import {
   convertTermIdToSeason,
   convertToDNDCourses,
   convertToDNDSchedule,
+  copySchedule,
   isYearInPast,
   planToString,
   produceWarnings,
@@ -225,28 +226,35 @@ export const userPlansReducer = (
         }
 
         const activePlan = draft.plans[draft.activePlan!];
+        const previousSchedule = draft.plans[draft.activePlan!].schedule;
 
+        // find plan with the active plan's major and provided coopCycle
         const plan = allPlans[activePlan.major!].find(
           (p: Schedule) => planToString(p) === coopCycle
         );
 
         if (plan) {
-          const [newSchedule, newCounter] = convertToDNDSchedule(
+          const [newSchedule] = convertToDNDSchedule(
             plan,
             activePlan.courseCounter
           );
-
-          draft.plans[
-            draft.activePlan!
-          ].schedule = alterScheduleToHaveCorrectYears(
+          const newScheduleWithCorrectYears = alterScheduleToHaveCorrectYears(
             newSchedule,
             academicYear,
             graduationYear
           );
+
+          draft.plans[draft.activePlan!].schedule = newScheduleWithCorrectYears;
         }
 
         // remove all classes
         draft.plans[draft.activePlan!].schedule = clearSchedule(
+          draft.plans[draft.activePlan!].schedule
+        );
+
+        // copy over classes from previous plan
+        draft.plans[draft.activePlan!].schedule = copySchedule(
+          previousSchedule,
           draft.plans[draft.activePlan!].schedule
         );
 

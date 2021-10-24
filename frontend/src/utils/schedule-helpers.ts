@@ -437,6 +437,28 @@ export const clearSchedule = (schedule: DNDSchedule) => {
   return newSchedule;
 };
 
+export const copySchedule = (
+  previousSchedule: DNDSchedule,
+  currentSchedule: DNDSchedule
+): DNDSchedule => {
+  // copy over the first 4 years from previous schedule into current schedule
+  const yearMapCopy = JSON.parse(JSON.stringify(currentSchedule.yearMap));
+  for (let yearNumIdx = 0; yearNumIdx < 4; yearNumIdx++) {
+    const yearNum = previousSchedule.years[yearNumIdx];
+    const yearCopy = JSON.parse(
+      JSON.stringify(previousSchedule.yearMap[yearNum])
+    );
+    yearMapCopy[yearNum] = yearCopy;
+  }
+
+  const newSchedule: DNDSchedule = {
+    yearMap: yearMapCopy,
+    years: currentSchedule.years,
+  };
+
+  return newSchedule;
+};
+
 export const convertToDNDCourses = (
   courses: ScheduleCourse[],
   counter: number
