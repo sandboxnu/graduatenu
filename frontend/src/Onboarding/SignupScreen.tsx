@@ -5,7 +5,7 @@ import { withRouter, RouteComponentProps, Link } from "react-router-dom";
 import styled from "styled-components";
 import { PrimaryButton } from "../components/common/PrimaryButton";
 import * as Yup from "yup";
-import { TextField } from "@material-ui/core";
+import { TextField, Button } from "@material-ui/core";
 import { ErrorOutlineSharp } from "@material-ui/icons";
 
 const Wrapper = styled.div`
@@ -17,7 +17,8 @@ const Wrapper = styled.div`
 `;
 
 const Title = styled.div`
-  margin-top: 96px;
+  margin-top: 48px;
+  margin-bottom: 48px;
   font-style: normal;
   font-weight: bold;
   font-size: 24px;
@@ -39,6 +40,11 @@ const Subtitle = styled.div`
 const StyleForm = styled(Form)`
   display: flex;
   flex-direction: column;
+`;
+
+const StyleTextField = styled(TextField)`
+  margin-top: 8px !important;
+  margin-bottom: 8px !important;
 `;
 
 const SignupValidation = Yup.object().shape({
@@ -65,12 +71,12 @@ const SignupForm = () => {
       validationSchema={SignupValidation}
       onSubmit={values => {
         // same shape as initial values
-        // console.log(values);
+        console.log(values);
       }}
     >
       {({ errors, touched, values, handleChange, handleBlur }) => (
         <StyleForm>
-          <TextField
+          <StyleTextField
             id="email"
             name="email"
             label="Email"
@@ -82,7 +88,7 @@ const SignupForm = () => {
             helperText={errors.email && touched.email && errors.email}
           />
 
-          <TextField
+          <StyleTextField
             id="password"
             name="password"
             label="Password"
@@ -94,7 +100,7 @@ const SignupForm = () => {
             helperText={errors.password && touched.password && errors.password}
           />
 
-          <TextField
+          <StyleTextField
             id="confirmPassword"
             name="confirmPassword"
             label="Confirm Password"
@@ -110,7 +116,25 @@ const SignupForm = () => {
             }
           />
 
-          <button type="submit">Submit</button>
+          <Subtitle>
+            Already a member? Log in{" "}
+            <Link
+              style={{ color: "#EB5757" }}
+              to={{
+                pathname: "/login",
+              }}
+            >
+              here
+            </Link>
+            {" or "}
+            <Link style={{ color: "#EB5757" }} to="/home">
+              continue as guest
+            </Link>
+          </Subtitle>
+
+          <Wrapper>
+            <PrimaryButton type="submit">Submit</PrimaryButton>
+          </Wrapper>
         </StyleForm>
       )}
     </Formik>
@@ -121,27 +145,7 @@ const SignupScreen = () => {
   return (
     <Wrapper>
       <Title>Sign Up</Title>
-
       {SignupForm()}
-
-      <Subtitle>
-        Already a member? Log in{" "}
-        <Link
-          style={{ color: "#EB5757" }}
-          to={{
-            pathname: "/login",
-          }}
-        >
-          here
-        </Link>
-        {" or "}
-        <Link style={{ color: "#EB5757" }} to="/home">
-          continue as guest
-        </Link>
-      </Subtitle>
-      <div onClick={() => console.log("Hello")}>
-        <PrimaryButton>Sign Up</PrimaryButton>
-      </div>
     </Wrapper>
   );
 };
