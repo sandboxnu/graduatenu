@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { withRouter, RouteComponentProps, Link } from "react-router-dom";
 import styled from "styled-components";
@@ -89,56 +89,55 @@ interface LoginScreenState {
   error?: ErrorType;
 }
 
-class LoginScreenComponent extends React.Component<Props, LoginScreenState> {
-  constructor(props: Props) {
-    super(props);
-
-    this.state = {
-      emailStr: "",
-      passwordStr: "",
-      beenEditedEmail: false,
-      beenEditedPassword: false,
-      validEmail: true,
-      error: undefined,
-    };
-  }
+const LoginScreenComponent: React.FC<Props> = props => {
+  const [state, setState] = useState<LoginScreenState>({
+    emailStr: "",
+    passwordStr: "",
+    beenEditedEmail: false,
+    beenEditedPassword: false,
+    validEmail: true,
+    error: undefined,
+  });
 
   /**
    * All of the different functions that modify the stored TextField values as they are changed.
    */
-  onChangeEmail(e: React.ChangeEvent<HTMLInputElement>) {
-    this.setState({
+  const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setState({
+      ...state,
       emailStr: e.target.value,
       beenEditedEmail: true,
     });
-  }
+  };
 
-  onChangePassword(e: React.ChangeEvent<HTMLInputElement>) {
-    this.setState({
+  const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setState({
+      ...state,
       passwordStr: e.target.value,
       beenEditedPassword: true,
     });
-  }
+  };
 
   /**
    * Validates user input, then sends a log in request to the backend using the input data.
    * Checks response for error messages. If the log in succeeds, dispatch actions to set
    * user attributes obtained from the response object, then redirects user to /home.
    */
-  async submit() {
+  const submit = async () => {
     // Regex to determine if email string is a valid address
     const validEmail: boolean = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(
-      this.state.emailStr
+      state.emailStr
     );
 
-    this.setState({
+    setState({
+      ...state,
       validEmail,
     });
 
     if (validEmail) {
       const user: ILoginData = {
-        email: this.state.emailStr,
-        password: this.state.passwordStr,
+        email: state.emailStr,
+        password: state.passwordStr,
       };
 
       try {
@@ -148,37 +147,38 @@ class LoginScreenComponent extends React.Component<Props, LoginScreenState> {
           // handle response errros
           const isUnauthorized = response.status === 401;
 
-          this.setState({
+          setState({
+            ...state,
             error: isUnauthorized
               ? ErrorType.INVALID_CREDENTIALS
               : ErrorType.OTHER,
           });
         } else {
           // update redux store with logged in user and set cookies
-          this.props.setStudent(response.data.user);
+          props.setStudent(response.data.user);
           Cookies.set(AUTH_TOKEN_COOKIE_KEY, response.data.user.token, {
             path: "/",
             domain: window.location.hostname,
           });
-          this.props.history.push("/home");
+          props.history.push("/home");
         }
       } catch (err) {
         // something went wrong making the request
-        this.setState({
+        setState({
+          ...state,
           error: ErrorType.OTHER,
         });
 
         console.log("Something went wrong when logging in: ", err);
       }
     }
-  }
+  };
 
   /**
    * Renders the email text field
    */
-  renderEmailTextField(textFieldStr: string, beenEdited: boolean) {
-    const showInvalidCredsError =
-      this.state.error === ErrorType.INVALID_CREDENTIALS;
+  const renderEmailTextField = (textFieldStr: string, beenEdited: boolean) => {
+    const showInvalidCredsError = state.error === ErrorType.INVALID_CREDENTIALS;
 
     return (
       <TextField
@@ -186,12 +186,12 @@ class LoginScreenComponent extends React.Component<Props, LoginScreenState> {
         label="Email"
         variant="outlined"
         value={textFieldStr}
-        onChange={this.onChangeEmail.bind(this)}
+        onChange={onChangeEmail}
         placeholder="presidentaoun@northeastern.edu"
         error={
           (textFieldStr.length === 0 && beenEdited) ||
-          !this.state.validEmail ||
-          !!this.state.error
+          !state.validEmail ||
+          !!state.error
         }
         style={{
           marginTop: 48,
@@ -200,7 +200,7 @@ class LoginScreenComponent extends React.Component<Props, LoginScreenState> {
         }}
         helperText={
           (showInvalidCredsError && "Email or password is invalid") ||
-          (!this.state.validEmail && "Please enter a valid email") ||
+          (!state.validEmail && "Please enter a valid email") ||
           ("" && (!beenEdited || textFieldStr.length !== 0)) ||
           (textFieldStr.length === 0 &&
             beenEdited &&
@@ -209,16 +209,18 @@ class LoginScreenComponent extends React.Component<Props, LoginScreenState> {
         type="email"
       />
     );
-  }
+  };
 
   /**
    * Renders the password text field
    */
-  renderPasswordTextField(textFieldStr: string, beenEdited: boolean) {
-    const showInvalidCredsError =
-      this.state.error === ErrorType.INVALID_CREDENTIALS;
+  const renderPasswordTextField = (
+    textFieldStr: string,
+    beenEdited: boolean
+  ) => {
+    const showInvalidCredsError = state.error === ErrorType.INVALID_CREDENTIALS;
 
-    const showOtherError = this.state.error === ErrorType.OTHER;
+    const showOtherError = state.error === ErrorType.OTHER;
 
     return (
       <TextField
@@ -226,8 +228,8 @@ class LoginScreenComponent extends React.Component<Props, LoginScreenState> {
         label="Password"
         variant="outlined"
         value={textFieldStr}
-        onChange={this.onChangePassword.bind(this)}
-        error={(textFieldStr.length === 0 && beenEdited) || !!this.state.error}
+        onChange={onChangePassword}
+        error={(textFieldStr.length === 0 && beenEdited) || !!state.error}
         style={{
           minWidth: 326,
         }}
@@ -243,56 +245,49 @@ class LoginScreenComponent extends React.Component<Props, LoginScreenState> {
         type="password"
       />
     );
-  }
+  };
 
-  render() {
-    // indicates if the user came from login button on welcome page
-    const { fromOnBoarding } = (this.props.location.state as any) || {
-      fromOnBoarding: false,
-    };
-    return (
-      <Wrapper>
-        <Title>Log In</Title>
-        <Box>
-          {this.renderEmailTextField(
-            this.state.emailStr,
-            this.state.beenEditedEmail
-          )}
-          {this.renderPasswordTextField(
-            this.state.passwordStr,
-            this.state.beenEditedPassword
-          )}
-        </Box>
+  // indicates if the user came from login button on welcome page
+  const { fromOnBoarding } = (props.location.state as any) || {
+    fromOnBoarding: false,
+  };
 
-        <Subtitle>
-          New here? Sign up{" "}
-          <Link
-            style={{ color: "#EB5757" }}
-            to={{
-              pathname: fromOnBoarding ? "/onboarding" : "/signup",
-            }}
-          >
-            here
-          </Link>
-          {" or "}
-          <Link
-            style={{ color: "#EB5757" }}
-            to={{
-              pathname: fromOnBoarding ? "/onboarding" : "/home",
-              state: { fromOnBoardingGuest: fromOnBoarding },
-            }}
-          >
-            continue as guest
-          </Link>
-        </Subtitle>
-        <ButtonContainer>
-          <PrimaryButton onClick={this.submit.bind(this)}>Log In</PrimaryButton>
-          <SecondaryLinkButton to="/">Back</SecondaryLinkButton>
-        </ButtonContainer>
-      </Wrapper>
-    );
-  }
-}
+  return (
+    <Wrapper>
+      <Title>Log In</Title>
+      <Box>
+        {renderEmailTextField(state.emailStr, state.beenEditedEmail)}
+        {renderPasswordTextField(state.passwordStr, state.beenEditedPassword)}
+      </Box>
+
+      <Subtitle>
+        New here? Sign up{" "}
+        <Link
+          style={{ color: "#EB5757" }}
+          to={{
+            pathname: fromOnBoarding ? "/onboarding" : "/signup",
+          }}
+        >
+          here
+        </Link>
+        {" or "}
+        <Link
+          style={{ color: "#EB5757" }}
+          to={{
+            pathname: fromOnBoarding ? "/onboarding" : "/home",
+            state: { fromOnBoardingGuest: fromOnBoarding },
+          }}
+        >
+          continue as guest
+        </Link>
+      </Subtitle>
+      <ButtonContainer>
+        <PrimaryButton onClick={submit}>Log In</PrimaryButton>
+        <SecondaryLinkButton to="/">Back</SecondaryLinkButton>
+      </ButtonContainer>
+    </Wrapper>
+  );
+};
 
 /**
  * Callback to be passed into connect, responsible for dispatching redux actions to update the appstate.
