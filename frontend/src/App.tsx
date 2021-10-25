@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { Onboarding } from "./Onboarding/Onboarding";
+import { LandingScreen } from "./Onboarding/LandingScreen";
 import { HomeWrapper } from "./home/HomeWrapper";
 import { OnboardingInfoScreen } from "./Onboarding/OnboardingInfoScreen";
 import { CompletedCoursesScreen } from "./Onboarding/CompletedCoursesScreen";
@@ -20,6 +20,7 @@ import { StudentsList } from "./advising/ManageStudents/StudentsList";
 import { TemplateBuilderPage } from "./advising/Templates/TemplateBuilderPage";
 import { CourseManagmentPage } from "./advising/CourseManagment";
 import { GenericStudentView } from "./advising/ManageStudents/GenericStudentView";
+import { LoginScreen } from "./Onboarding/LoginScreen";
 
 export const App = ({ store }: { store: Store }) => {
   return (
@@ -29,7 +30,6 @@ export const App = ({ store }: { store: Store }) => {
           {/* requires login */}
           <ProtectedRoute path="/home" component={HomeWrapper} />
           <ProtectedRoute path="/redirect" component={RedirectScreen} />
-          <ProtectedRoute path="/onboarding" component={OnboardingInfoScreen} />
           <ProtectedRoute path="/profile" component={Profile} />
           <ProtectedRoute path="/management" component={CourseManagmentPage} />
           <ProtectedRoute
@@ -46,9 +46,13 @@ export const App = ({ store }: { store: Store }) => {
           />
           <ProtectedRoute path="/advisor" component={AdvisorRouter} />
           {/* requires not logged in */}
-          <UnprotectedRoute path="/" component={Onboarding} />
-          {/* <Route path="/signup" component={SignupScreen} />
-             <Route path="/login" component={LoginScreen} /> */}
+          {/* <UnprotectedRoute path="/signup" component={SignupScreen} /> */}
+          <UnprotectedRoute
+            path="/onboarding"
+            component={OnboardingInfoScreen}
+          />
+          <UnprotectedRoute path="/login" component={LoginScreen} />
+          <UnprotectedRoute path="/" component={LandingScreen} />
         </Switch>
       </Router>
     </Provider>
