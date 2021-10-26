@@ -61,6 +61,7 @@ export const RedirectScreen: React.FC<Props> = ({ redirectUrl }) => {
     setIsLoading(true);
     setIsError(false);
     fetchMajorsAndPlans()(dispatch).then(majors => {
+      console.log(majors);
       const cookie = Cookies.get(AUTH_TOKEN_COOKIE_KEY);
       if (cookie) {
         Cookies.remove(AUTH_TOKEN_COOKIE_KEY, {

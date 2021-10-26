@@ -9,6 +9,7 @@ import {
   PrimaryLinkButton,
   WhiteLinkButton,
 } from "../components/common/LinkButtons";
+import { fetchMajorsAndPlans } from "../utils/fetchMajorsAndPlans";
 
 const Header = styled.div`
   display: flex;
@@ -164,13 +165,11 @@ export class LandingScreen extends React.Component<Props> {
         <Header>
           <h1>GraduateNU</h1>
           <LoginButtonContainer>
-            <PrimaryLinkButton
-              to="/login"
-              style={{ marginRight: "1em", minWidth: "128px" }}
-            >
+            {/* <PrimaryLinkButton to="/login" style={{ marginRight: "1em" }}>
               Login
-            </PrimaryLinkButton>
-            <PrimaryLinkButton to="/onboarding">Get Started</PrimaryLinkButton>
+            </PrimaryLinkButton> */}
+            <button onClick={fetchMajorsAndPlans}></button>
+            <PrimaryLinkButton to="/onboarding">Sign Up</PrimaryLinkButton>
           </LoginButtonContainer>
         </Header>
         <Banner>

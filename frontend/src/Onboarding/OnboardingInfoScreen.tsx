@@ -249,6 +249,7 @@ class OnboardingScreenComponent extends React.Component<
    * Renders the major drop down
    */
   renderMajorDropDown() {
+    console.log(this.props);
     let majorNames = this.props.majors.filter(
       major => major.yearVersion === this.state.catalogYear
     ); //takes in a major object return t if you want to keep it (only when catalog)
@@ -462,9 +463,9 @@ class OnboardingScreenComponent extends React.Component<
           {this.renderGradYearSelect()}
           {this.renderCatalogYearDropDown()}
           {/* if there is a major given from khoury we want to show the major dropdown */}
-          {(!!catalogYear || !!major) && this.renderMajorDropDown()}
-          {!!catalogYear && !!major && this.renderConcentrationDropdown()}
-          {!!catalogYear && !!major && this.renderCoopCycleDropDown()}
+          {this.renderMajorDropDown()}
+          {this.renderConcentrationDropdown()}
+          {this.renderCoopCycleDropDown()}
           {/* requires year, gradYear, and if there is a major, then there must be a catalog year */}
           {allFilledAndNoErrors ? (
             // Bypass completed courses screen to prevent overriding actual completed courses
