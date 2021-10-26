@@ -10,7 +10,7 @@ import {
   setActivePlanNameAction,
   renameCourseInActivePlanAction,
 } from "./../actions/userPlansActions";
-import { DNDSchedule, IPlanData } from "../../models/types";
+import { DNDSchedule, DNDScheduleYear, IPlanData } from "../../models/types";
 import produce from "immer";
 import { getType } from "typesafe-actions";
 import { UserPlansAction, StudentAction } from "../actions";
@@ -37,7 +37,7 @@ import {
   convertTermIdToSeason,
   convertToDNDCourses,
   convertToDNDSchedule,
-  copySchedule,
+  fillInSchedule,
   isYearInPast,
   planToString,
   produceWarnings,
@@ -52,7 +52,16 @@ export type ActivePlanAutoSaveStatus =
 
 export interface UserPlansState {
   activePlan?: string;
-  plans: { [key: string]: IPlanData };
+  plans: {
+    [key: string]: IPlanData;
+  };
+  fifthYearCache: {
+    /*
+     * A plan name to 5th year schedule map. Used to save 5th year schedule when switching
+     * schedule from 5 years to 4 years.
+     */
+    [key: string]: DNDScheduleYear;
+  };
   closedYears: { [key: string]: number[] }; // map plan name to closedYearsList
   pastSchedule?: DNDSchedule; // used for undo
   activePlanStatus: ActivePlanAutoSaveStatus;
@@ -61,6 +70,7 @@ export interface UserPlansState {
 const initialState: UserPlansState = {
   activePlan: undefined,
   plans: {},
+  fifthYearCache: {},
   closedYears: {},
   pastSchedule: undefined,
   activePlanStatus: "Up To Date",
@@ -252,11 +262,19 @@ export const userPlansReducer = (
           draft.plans[draft.activePlan!].schedule
         );
 
-        // copy over classes from previous plan
-        draft.plans[draft.activePlan!].schedule = copySchedule(
+        // fill in the empty schedule using the previous schedule and the cache for the fifth year
+        const { filledInSchedule, updatedFifthYearCache } = fillInSchedule(
           previousSchedule,
-          draft.plans[draft.activePlan!].schedule
+          draft.plans[draft.activePlan!].schedule,
+          draft.fifthYearCache[draft.activePlan!]
         );
+
+        draft.plans[draft.activePlan!].schedule = filledInSchedule;
+
+        // if the 5th year was removed, store it in the cache
+        if (updatedFifthYearCache) {
+          draft.fifthYearCache[draft.activePlan!] = updatedFifthYearCache;
+        }
 
         draft.plans[draft.activePlan!].courseCounter = 0;
 
