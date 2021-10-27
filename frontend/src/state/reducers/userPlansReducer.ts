@@ -235,8 +235,11 @@ export const userPlansReducer = (
           return draft;
         }
 
-        const activePlan = draft.plans[draft.activePlan!];
-        const previousSchedule = draft.plans[draft.activePlan!].schedule;
+        // active plan name should always be definied
+        const activePlanName = draft.activePlan || "";
+
+        const activePlan = draft.plans[activePlanName];
+        const previousSchedule = draft.plans[activePlanName].schedule;
 
         // find plan with the active plan's major and provided coopCycle
         const plan = allPlans[activePlan.major!].find(
@@ -254,36 +257,36 @@ export const userPlansReducer = (
             graduationYear
           );
 
-          draft.plans[draft.activePlan!].schedule = newScheduleWithCorrectYears;
+          draft.plans[activePlanName].schedule = newScheduleWithCorrectYears;
         }
 
         // remove all classes
-        draft.plans[draft.activePlan!].schedule = clearSchedule(
-          draft.plans[draft.activePlan!].schedule
+        draft.plans[activePlanName].schedule = clearSchedule(
+          draft.plans[activePlanName!].schedule
         );
 
         // fill in the empty schedule using the previous schedule and the cache for the fifth year
         const { filledInSchedule, updatedFifthYearCache } = fillInSchedule(
           previousSchedule,
-          draft.plans[draft.activePlan!].schedule,
-          draft.fifthYearCache[draft.activePlan!]
+          draft.plans[activePlanName].schedule,
+          draft.fifthYearCache[activePlanName]
         );
 
-        draft.plans[draft.activePlan!].schedule = filledInSchedule;
+        draft.plans[activePlanName].schedule = filledInSchedule;
 
         // if the 5th year was removed, store it in the cache
         if (updatedFifthYearCache) {
-          draft.fifthYearCache[draft.activePlan!] = updatedFifthYearCache;
+          draft.fifthYearCache[activePlanName] = updatedFifthYearCache;
         }
 
-        draft.plans[draft.activePlan!].courseCounter = 0;
+        draft.plans[activePlanName].courseCounter = 0;
 
         // clear all warnings
-        draft.plans[draft.activePlan!].warnings = [];
-        draft.plans[draft.activePlan!].courseWarnings = [];
+        draft.plans[activePlanName].warnings = [];
+        draft.plans[activePlanName].courseWarnings = [];
 
         // set the coop cycle
-        draft.plans[draft.activePlan!].coopCycle = coopCycle;
+        draft.plans[activePlanName].coopCycle = coopCycle;
 
         return draft;
       }
