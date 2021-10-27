@@ -460,9 +460,10 @@ export const fillInSchedule = (
   const filledInYearMap = JSON.parse(JSON.stringify(currentSchedule.yearMap));
   for (let i = 0; i < 4; i++) {
     const yearNum = previousSchedule.years[i];
-    const yearCopy = JSON.parse(
-      JSON.stringify(previousSchedule.yearMap[yearNum])
-    );
+    const yearCopy = {
+      ...previousSchedule.yearMap[yearNum],
+    };
+
     filledInYearMap[yearNum] = yearCopy;
   }
 
@@ -473,24 +474,26 @@ export const fillInSchedule = (
 
   // if there is a 5th year in the previous schedule and in the current schedule, copy it over
   if (previousScheduleYears === 5 && currentScheduleYears === 5) {
-    const fifthYearSceduleCopy = JSON.parse(
-      JSON.stringify(previousSchedule.yearMap[fifthYear])
-    );
+    const fifthYearSceduleCopy = {
+      ...previousSchedule.yearMap[fifthYear],
+    };
     filledInYearMap[fifthYear] = fifthYearSceduleCopy;
   }
 
   // if there is a 5th year in the previous schedule but not in the current schedule, copy into cache
   let updatedFifthYearCache: DNDScheduleYear | undefined = undefined;
   if (previousScheduleYears === 5 && currentScheduleYears === 4) {
-    updatedFifthYearCache = JSON.parse(
-      JSON.stringify(previousSchedule.yearMap[fifthYear])
-    );
+    updatedFifthYearCache = {
+      ...previousSchedule.yearMap[fifthYear],
+    };
   }
 
   // if the previous schedule is 4 years but current schedule is 5 years, then copy 5th year from cache
   if (previousScheduleYears === 4 && currentScheduleYears === 5) {
     if (fifthYearCache) {
-      const fifthYearCacheCopy = JSON.parse(JSON.stringify(fifthYearCache));
+      const fifthYearCacheCopy = {
+        ...fifthYearCache,
+      };
       filledInYearMap[fifthYear] = fifthYearCacheCopy;
     }
   }
