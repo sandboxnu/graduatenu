@@ -9,6 +9,7 @@ import {
 } from "../models/types";
 import { Schedule, ScheduleCourse, SeasonWord } from "../../../common/types";
 import { findExamplePlanFromCoopCycle } from "./plan-helpers";
+import { deepCopy } from "./deepCopy";
 
 export function generateBlankCoopPlan(
   major: string,
@@ -170,8 +171,8 @@ export function generateBlankCompletedCourseScheduleNoCoopCycle(
     yearsTaken !== 0
       ? completedCourseSchedule.years[yearsTaken - 1]
       : graduationYear - yearsLeft + 1;
-  const completedCourseScheduleCopy = JSON.parse(
-    JSON.stringify(completedCourseSchedule)
+  const completedCourseScheduleCopy = deepCopy(
+    completedCourseSchedule
   ) as Schedule;
   for (let i = 1; i <= yearsLeft; i++) {
     const currentYear = mostRecentYear + i;
@@ -386,7 +387,7 @@ export const convertToDNDSchedule = (
   schedule: Schedule,
   counter: number
 ): [DNDSchedule, number] => {
-  const newSchedule = JSON.parse(JSON.stringify(schedule)) as DNDSchedule;
+  const newSchedule = deepCopy(schedule) as DNDSchedule;
   for (const year of Object.keys(schedule.yearMap)) {
     var result = convertToDNDCourses(
       newSchedule.yearMap[year as any].fall.classes as ScheduleCourse[],
@@ -420,9 +421,9 @@ export const convertToDNDSchedule = (
 };
 
 export const clearSchedule = (schedule: DNDSchedule) => {
-  const yearMapCopy = JSON.parse(JSON.stringify(schedule.yearMap));
+  const yearMapCopy = deepCopy(schedule.yearMap);
   for (const y of schedule.years) {
-    const year = JSON.parse(JSON.stringify(schedule.yearMap[y]));
+    const year = deepCopy(schedule.yearMap[y]);
     year.fall.classes = [];
     year.spring.classes = [];
     year.summer1.classes = [];
@@ -457,13 +458,10 @@ export const fillInSchedule = (
   updatedFifthYearCache?: DNDScheduleYear;
 } => {
   // copy over the first 4 years from previous schedule into current schedule
-  const filledInYearMap = JSON.parse(JSON.stringify(currentSchedule.yearMap));
+  const filledInYearMap = deepCopy(currentSchedule.yearMap);
   for (let i = 0; i < 4; i++) {
     const yearNum = previousSchedule.years[i];
-    const yearCopy = {
-      ...previousSchedule.yearMap[yearNum],
-    };
-
+    const yearCopy = deepCopy(previousSchedule.yearMap[yearNum]);
     filledInYearMap[yearNum] = yearCopy;
   }
 
@@ -474,26 +472,20 @@ export const fillInSchedule = (
 
   // if there is a 5th year in the previous schedule and in the current schedule, copy it over
   if (previousScheduleYears === 5 && currentScheduleYears === 5) {
-    const fifthYearSceduleCopy = {
-      ...previousSchedule.yearMap[fifthYear],
-    };
+    const fifthYearSceduleCopy = deepCopy(previousSchedule.yearMap[fifthYear]);
     filledInYearMap[fifthYear] = fifthYearSceduleCopy;
   }
 
   // if there is a 5th year in the previous schedule but not in the current schedule, copy into cache
   let updatedFifthYearCache: DNDScheduleYear | undefined = undefined;
   if (previousScheduleYears === 5 && currentScheduleYears === 4) {
-    updatedFifthYearCache = {
-      ...previousSchedule.yearMap[fifthYear],
-    };
+    updatedFifthYearCache = deepCopy(previousSchedule.yearMap[fifthYear]);
   }
 
   // if the previous schedule is 4 years but current schedule is 5 years, then copy 5th year from cache
   if (previousScheduleYears === 4 && currentScheduleYears === 5) {
     if (fifthYearCache) {
-      const fifthYearCacheCopy = {
-        ...fifthYearCache,
-      };
+      const fifthYearCacheCopy = deepCopy(fifthYearCache);
       filledInYearMap[fifthYear] = fifthYearCacheCopy;
     }
   }
