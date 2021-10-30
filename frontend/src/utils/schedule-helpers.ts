@@ -468,10 +468,10 @@ export const fillInSchedule = (
   // use and update the fifth year cache if needed
   const previousScheduleYears = previousSchedule.years.length;
   const currentScheduleYears = currentSchedule.years.length;
-  const fifthYear = previousSchedule.years[4];
 
   // if there is a 5th year in the previous schedule and in the current schedule, copy it over
   if (previousScheduleYears === 5 && currentScheduleYears === 5) {
+    const fifthYear = previousSchedule.years[4];
     const fifthYearSceduleCopy = deepCopy(previousSchedule.yearMap[fifthYear]);
     filledInYearMap[fifthYear] = fifthYearSceduleCopy;
   }
@@ -479,12 +479,14 @@ export const fillInSchedule = (
   // if there is a 5th year in the previous schedule but not in the current schedule, copy into cache
   let updatedFifthYearCache: DNDScheduleYear | undefined = undefined;
   if (previousScheduleYears === 5 && currentScheduleYears === 4) {
+    const fifthYear = previousSchedule.years[4];
     updatedFifthYearCache = deepCopy(previousSchedule.yearMap[fifthYear]);
   }
 
   // if the previous schedule is 4 years but current schedule is 5 years, then copy 5th year from cache
   if (previousScheduleYears === 4 && currentScheduleYears === 5) {
     if (fifthYearCache) {
+      const fifthYear = currentSchedule.years[4];
       const fifthYearCacheCopy = deepCopy(fifthYearCache);
       filledInYearMap[fifthYear] = fifthYearCacheCopy;
     }
