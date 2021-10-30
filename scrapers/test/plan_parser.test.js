@@ -3,6 +3,7 @@ const fs = require("fs");
 const rp = require("request-promise");
 
 // plans of study to run tests on.
+// 6, 11, 30
 
 // majors on which the scraper has been verified to run correctly:
 const supported = [
@@ -53,7 +54,7 @@ const camd_architecture = [
   "http://catalog.northeastern.edu/undergraduate/arts-media-design/architecture/architecture-graphic-information-design-bs/",
   "http://catalog.northeastern.edu/undergraduate/engineering/civil-environmental/civil-engineering-architectural-studies-bsce/",
   "http://catalog.northeastern.edu/undergraduate/engineering/civil-environmental/environmental-engineering-landscape-architecture-bsenve/",
-  "http://catalog.northeastern.edu/undergraduate/science/marine-environmental/environmental-science-landscape-architecture-bs/",
+  "http://catalog.northeastern.edu/undergraduate/science/marine-environmental/environmental-sustainability-sciences-landscape-architecture-bs/",
   // no plan of study available for minors
   // "http://catalog.northeastern.edu/undergraduate/arts-media-design/architecture/architectural-history-minor/",
   // "http://catalog.northeastern.edu/undergraduate/arts-media-design/architecture/architectural-science-systems-minor/",
@@ -73,7 +74,7 @@ const khoury = [
   "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/data-science-mathematics-bs/",
   "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/data-science-journalism-bs/",
   "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/data-science-health-science-bs/",
-  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/data-science-environmental-science-bs/",
+  "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-environmental-sustainability-sciences-bs/",
   "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/data-science-ecology-evolutionary-biology-bs/",
   "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/data-science-business-administration-bs/",
   "http://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/data-science-behavioral-neuroscience-bs/",
@@ -132,8 +133,12 @@ function runTestsOnLinks(links) {
     test(
       "Ensures that scraper correctly converts plan of study no. " + index,
       async () => {
-        const schedules = plan_parser.planOfStudyToSchedule(await plan);
-        expect(schedules).toBeValidModernScheduleList();
+        try {
+          const schedules = plan_parser.planOfStudyToSchedule(await plan);
+          expect(schedules).toBeValidModernScheduleList();
+        } catch (e) {
+          console.log("LINK: ", links[index]);
+        }
       }
     );
   });
