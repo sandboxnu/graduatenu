@@ -8,7 +8,7 @@ fi
 AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
 AWS_DEFAULT_REGION="us-east-1"
 REPOS=( "graduatenu-rails" "graduatenu-node" )
-LATEST_HASH=$(git ls-remote https://github.com/sandboxnu/graduatenu.git  master | awk '{ print $1 }')
+LATEST_HASH=$(git ls-remote https://github.com/sandboxnu/graduatenu.git  main | awk '{ print $1 }')
 ECS_CLUSTER="$1-graduatenu"
 TASK_FAMILIES=( "${ECS_CLUSTER}-api" "${ECS_CLUSTER}-web" )
 SERVICES=( "${ECS_CLUSTER}-api" "${ECS_CLUSTER}-web" )
@@ -20,7 +20,7 @@ echo "Redeploying services for cluster: ${ECS_CLUSTER} with last pushed image"
 
 
 for i in "${!REPOS[@]}"; do
-    # Last pushed image should always be tagged with the latest commit hash on master 
+    # Last pushed image should always be tagged with the latest commit hash on main 
     ECR_IMAGE="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${REPOS[$i]}:${LATEST_HASH}"
     TASK_FAMILY="${TASK_FAMILIES[$i]}"
     SERVICE="${SERVICES[$i]}"
