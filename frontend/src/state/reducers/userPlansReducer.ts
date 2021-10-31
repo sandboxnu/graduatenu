@@ -235,8 +235,12 @@ export const userPlansReducer = (
           return draft;
         }
 
-        // active plan name should always be definied
-        const activePlanName = draft.activePlan || "";
+        // active plan name should always be defined
+        const activePlanName = draft.activePlan;
+
+        if (!activePlanName) {
+          return draft;
+        }
 
         const activePlan = draft.plans[activePlanName];
         const previousSchedule = draft.plans[activePlanName].schedule;
