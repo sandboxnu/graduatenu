@@ -19,6 +19,7 @@ import {
   setStudentMajorAction,
   setStudentCatalogYearAction,
   setStudentConcentrationAction,
+  setStudentFullName,
 } from "../state/actions/studentActions";
 import Loader from "react-loader-spinner";
 import {

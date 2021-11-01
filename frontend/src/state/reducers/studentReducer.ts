@@ -17,6 +17,11 @@ import {
   setTransferCoursesAction,
   setStudentCatalogYearAction,
   setStudentConcentrationAction,
+  setStudentIdAction,
+  setStudentFullNameAction,
+  addPlanIdAction,
+  setPlanNameAction,
+  setLinkSharingAction,
 } from "../actions/studentActions";
 import { DNDSchedule, IUserData } from "../../models/types";
 import { ScheduleCourse } from "../../../../common/types";
@@ -59,9 +64,17 @@ export const studentReducer = (
 
         return draft;
       }
+      case getType(setStudentIdAction): {
+        draft.student!.id = action.payload.id;
+        return draft;
+      }
       case getType(setStudentMajorAction): {
         draft.student!.major = action.payload.major;
         draft.student!.coopCycle = null;
+        return draft;
+      }
+      case getType(setStudentFullNameAction): {
+        draft.student!.fullName = action.payload.fullName;
         return draft;
       }
       case getType(setStudentAcademicYearAction): {
@@ -82,8 +95,15 @@ export const studentReducer = (
         draft.student!.coopCycle = null;
         return draft;
       }
+      case getType(addPlanIdAction): {
+        // is planId relevant...?
+      }
+      case getType(setPlanNameAction): {
+      }
+      case getType(setLinkSharingAction): {
+      }
       case getType(setStudentExamCreditsAction): {
-        draft.student!.examCredits = action.payload.examCredits;
+        //   draft.student!.examCredits = action.payload.examCredits;
         return draft;
       }
       case getType(resetStudentAction): {

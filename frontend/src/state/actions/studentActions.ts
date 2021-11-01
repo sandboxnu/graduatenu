@@ -13,6 +13,41 @@ export const setStudentAction = createAction(
   })
 )();
 
+export const setStudentIdAction = createAction(
+  "student/SET_ID",
+  (id: number) => ({
+    id,
+  })
+)();
+
+export const addPlanIdAction = createAction(
+  "student/ADD_PLAN_ID",
+  (planId: number) => ({
+    planId,
+  })
+)();
+
+export const setPlanNameAction = createAction(
+  "student/SET_PLAN_NAME",
+  (planName: string) => ({
+    planName,
+  })
+)();
+
+export const setLinkSharingAction = createAction(
+  "student/SET_LINK_SHARING",
+  (linkSharing: boolean) => ({
+    linkSharing,
+  })
+)();
+
+export const setStudentFullNameAction = createAction(
+  "student/SET_FULL_NAME",
+  (fullName: string) => ({
+    fullName,
+  })
+)();
+
 export const setStudentAcademicYearAction = createAction(
   "student/SET_ACADEMIC_YEAR",
   (academicYear: number) => ({
