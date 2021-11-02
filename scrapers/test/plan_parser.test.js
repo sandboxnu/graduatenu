@@ -3,7 +3,6 @@ const fs = require("fs");
 const rp = require("request-promise");
 
 // plans of study to run tests on.
-// 6, 11, 30
 
 // majors on which the scraper has been verified to run correctly:
 const supported = [
@@ -133,12 +132,8 @@ function runTestsOnLinks(links) {
     test(
       "Ensures that scraper correctly converts plan of study no. " + index,
       async () => {
-        try {
-          const schedules = plan_parser.planOfStudyToSchedule(await plan);
-          expect(schedules).toBeValidModernScheduleList();
-        } catch (e) {
-          console.log("LINK: ", links[index]);
-        }
+        const schedules = plan_parser.planOfStudyToSchedule(await plan);
+        expect(schedules).toBeValidModernScheduleList();
       }
     );
   });
