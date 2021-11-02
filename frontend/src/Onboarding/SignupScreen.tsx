@@ -88,22 +88,22 @@ interface SignupReduxStoreProps {
   completedCourses: ScheduleCourse;
 }
 
-type Props = SignupReduxStoreProps & RouteComponentProps;
+type Props = SignupReduxStoreProps & RouteComponentProps<{}>;
 
-const SignupScreenComponent = (props: Props) => {
-  const SignupForm = ({
-    fullName,
-    academicYear,
-    graduationYear,
-    catalogYear,
-    coopCycle,
-    concentration,
-    major,
-    plans,
-    userId,
-    coursesTransferred,
-    completedCourses,
-  }: SignupReduxStoreProps) => {
+const SignupScreenComponent: React.FC<Props> = ({
+  fullName,
+  academicYear,
+  graduationYear,
+  catalogYear,
+  coopCycle,
+  concentration,
+  major,
+  plans,
+  userId,
+  coursesTransferred,
+  completedCourses,
+}) => {
+  const SignupForm: React.FC = () => {
     const history = useHistory();
 
     const handleSubmit = ({
@@ -228,7 +228,7 @@ const SignupScreenComponent = (props: Props) => {
     <Wrapper>
       <Title>Sign Up</Title>
 
-      {SignupForm(props)}
+      {<SignupForm />}
 
       <Subtitle>
         Already a member? Log in{" "}
@@ -266,11 +266,9 @@ const mapStateToProps = (state: AppState) => ({
   completedCourses: getCompletedCoursesFromState(state),
 });
 
-const mapDispatchToProps = (dispatch: Dispatch) => ({});
-
 export const SignupScreen = connect(
   mapStateToProps,
-  mapDispatchToProps
+  null
 )(withRouter(SignupScreenComponent));
 
 /**
