@@ -22,6 +22,7 @@ import {
   addPlanIdAction,
   setPlanNameAction,
   setLinkSharingAction,
+  setStudentEmailAction,
 } from "../actions/studentActions";
 import { DNDSchedule, IUserData } from "../../models/types";
 import { ScheduleCourse } from "../../../../common/types";
@@ -75,6 +76,10 @@ export const studentReducer = (
       }
       case getType(setStudentFullNameAction): {
         draft.student!.fullName = action.payload.fullName;
+        return draft;
+      }
+      case getType(setStudentEmailAction): {
+        draft.student!.email = action.payload.email;
         return draft;
       }
       case getType(setStudentAcademicYearAction): {

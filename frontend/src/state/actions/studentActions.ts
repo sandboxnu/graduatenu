@@ -48,6 +48,13 @@ export const setStudentFullNameAction = createAction(
   })
 )();
 
+export const setStudentEmailAction = createAction(
+  "student/SET_EMAIL",
+  (email: string) => ({
+    email,
+  })
+)();
+
 export const setStudentAcademicYearAction = createAction(
   "student/SET_ACADEMIC_YEAR",
   (academicYear: number) => ({

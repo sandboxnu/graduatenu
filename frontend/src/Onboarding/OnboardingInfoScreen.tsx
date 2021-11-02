@@ -19,7 +19,7 @@ import {
   setStudentMajorAction,
   setStudentCatalogYearAction,
   setStudentConcentrationAction,
-  setStudentFullName,
+  setStudentFullNameAction,
 } from "../state/actions/studentActions";
 import Loader from "react-loader-spinner";
 import {
@@ -75,6 +75,7 @@ interface OnboardingReduxStoreProps {
 }
 
 interface OnboardingReduxDispatchProps {
+  setFullName: (fullName: string) => void;
   setGraduationYear: (graduationYear: number) => void;
   setCatalogYear: (catalogYear: number | null) => void;
   setMajor: (major: string | null) => void;
@@ -502,6 +503,8 @@ class OnboardingScreenComponent extends React.Component<
  * @param state the AppState
  */
 const mapDispatchToProps = (dispatch: Dispatch) => ({
+  setFullName: (fullName: string) =>
+    dispatch(setStudentFullNameAction(fullName)),
   setGraduationYear: (gradYear: number) =>
     dispatch(setStudentGraduationYearAction(gradYear)),
   setMajor: (major: string | null) => dispatch(setStudentMajorAction(major)),

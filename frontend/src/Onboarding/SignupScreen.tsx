@@ -1,43 +1,32 @@
-import { Field, Form, Formik } from "formik";
-import React, { Dispatch, Props, useState } from "react";
+import { Form, Formik } from "formik";
+import React from "react";
+import { Dispatch } from "redux";
 import { connect } from "react-redux";
 import { withRouter, RouteComponentProps, Link } from "react-router-dom";
 import styled from "styled-components";
 import { PrimaryButton } from "../components/common/PrimaryButton";
 import * as Yup from "yup";
 import { TextField } from "@material-ui/core";
-import { ErrorOutlineSharp } from "@material-ui/icons";
-import {
-  IUpdateUserData,
-  IUpdateUserPassword,
-  ScheduleSlice,
-} from "../models/types";
+import { IUpdateUserData, IUpdateUserPassword } from "../models/types";
 import { AUTH_TOKEN_COOKIE_KEY, getAuthToken } from "../utils/auth-helpers";
 import { registerUser, updatePassword } from "../services/UserService";
 import { useHistory } from "react-router";
-import { createPlanForUser } from "../services/PlanService";
 import { AppState } from "../state/reducers/state";
 import Cookies from "js-cookie";
 import {
   getAcademicYearFromState,
-  getActivePlanScheduleFromState,
-  getCompletedCourseCounterFromState,
-  getCompletedCourseScheduleFromState,
   getCompletedCoursesFromState,
   getGraduationYearFromState,
-  getMajorsFromState,
-  getMajorsLoadingFlagFromState,
   getPlansFromState,
-  getPlansLoadingFlagFromState,
   getUserCatalogYearFromState,
+  getUserConcentrationFromState,
+  getUserCoopCycleFromState,
   getUserFullNameFromState,
   getUserIdFromState,
   getUserMajorNameFromState,
+  safelyGetTransferCoursesFromState,
 } from "../state";
-import {
-  setStudentId,
-  setStudentIdAction,
-} from "../state/actions/studentActions";
+import { Schedule, ScheduleCourse } from "../../../common/types";
 
 const Wrapper = styled.div`
   display: flex;
@@ -85,20 +74,36 @@ const SignupValidation = Yup.object().shape({
   ),
 });
 
-interface DispatchProps {}
+interface SignupReduxStoreProps {
+  fullName: string;
+  academicYear: number;
+  graduationYear: number;
+  catalogYear: number | null;
+  coopCycle: string | null;
+  concentration: string | null;
+  major: string | null;
+  plans: Record<string, Schedule[]>;
+  userId: number;
+  coursesTransferred: ScheduleCourse[] | [];
+  completedCourses: ScheduleCourse;
+}
 
-type Props = IUpdateUserData & DispatchProps;
+type Props = SignupReduxStoreProps & RouteComponentProps;
 
-const SignupScreenComponent = (props: any) => {
+const SignupScreenComponent = (props: Props) => {
   const SignupForm = ({
-    major,
-    full_name,
-    academic_year,
-    graduation_year,
-    coop_cycle,
+    fullName,
+    academicYear,
+    graduationYear,
+    catalogYear,
+    coopCycle,
     concentration,
-    catalog_year,
-  }: IUpdateUserData) => {
+    major,
+    plans,
+    userId,
+    coursesTransferred,
+    completedCourses,
+  }: SignupReduxStoreProps) => {
     const history = useHistory();
 
     const handleSubmit = ({
@@ -113,41 +118,37 @@ const SignupScreenComponent = (props: any) => {
       const user: IUpdateUserData = {
         email,
         major,
-        full_name,
-        academic_year,
-        graduation_year,
-        coop_cycle,
+        full_name: fullName,
+        academic_year: academicYear,
+        graduation_year: graduationYear,
+        coop_cycle: coopCycle,
         concentration,
-        catalog_year,
-        // courses_transfer and courses_completed?
+        catalog_year: catalogYear,
+        //    courses_transfer: coursesTransferred,
+        //    courses_completed: completedCourses,
       };
 
-      registerUser(user).then(response => {
-        if (response.errors) {
+      registerUser(user).then(userResponse => {
+        if (userResponse.errors) {
           // TODO: Change error handling
           alert("errors");
+          console.log("Could not register user!");
         } else {
-          const scheduleData: ScheduleSlice = props.getCurrentScheduleData();
-          createPlanForUser(response.user.id, {
-            name: "Plan 1",
-            link_sharing_enabled: false,
-            schedule: scheduleData.schedule,
-            catalog_year: catalog_year,
-            major: major ?? "",
-            coop_cycle: props.planStr ? props.planStr : "None",
-            course_counter: scheduleData.currentClassCounter,
-            // warnings: scheduleData.warnings, ICREATEPLAN ???
-            // courseWarnings: scheduleData.courseWarnings,
-          }).then(plan => {
-            props.addNewSchedule(plan.plan.name, plan.plan as ScheduleSlice);
-            props.addPlanId(plan.plan.id);
-            props.setPlanName(plan.plan.name);
-            props.setLinkSharing(plan.plan.link_sharing_enabled);
-          });
-          props.setUserId(response.user.id);
-          props.setEmail(response.user.email);
-          props.setUserCoopCycle(response.user.coopCycle);
-          Cookies.set(AUTH_TOKEN_COOKIE_KEY, response.user.token, {
+          const updatedPassword: IUpdateUserPassword = {
+            old_password: "",
+            new_password: password,
+            confirm_password: confirmPassword,
+          };
+
+          updatePassword(userResponse.user.token, updatedPassword).then(
+            passwordResponse => {
+              if (passwordResponse.errors) {
+                console.log("Could not update password!");
+              }
+            }
+          );
+
+          Cookies.set(AUTH_TOKEN_COOKIE_KEY, userResponse.user.token, {
             path: "/",
             domain: window.location.hostname,
           });
@@ -155,77 +156,73 @@ const SignupScreenComponent = (props: any) => {
         }
       });
     };
+
+    return (
+      <Formik
+        initialValues={{
+          email: "",
+          password: "",
+          confirmPassword: "",
+        }}
+        validationSchema={SignupValidation}
+        onSubmit={values => {
+          handleSubmit({
+            email: values.email,
+            password: values.password,
+            confirmPassword: values.confirmPassword,
+          });
+        }}
+      >
+        {({ errors, touched, values, handleChange, handleBlur }) => (
+          <StyleForm>
+            <TextField
+              id="email"
+              name="email"
+              label="Email"
+              variant="outlined"
+              value={values.email}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={touched.email && Boolean(errors.email)}
+              helperText={errors.email && touched.email && errors.email}
+            />
+
+            <TextField
+              id="password"
+              name="password"
+              label="Password"
+              variant="outlined"
+              value={values.password}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={touched.password && Boolean(errors.password)}
+              helperText={
+                errors.password && touched.password && errors.password
+              }
+            />
+
+            <TextField
+              id="confirmPassword"
+              name="confirmPassword"
+              label="Confirm Password"
+              variant="outlined"
+              value={values.confirmPassword}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={touched.confirmPassword && Boolean(errors.confirmPassword)}
+              helperText={
+                errors.confirmPassword &&
+                touched.confirmPassword &&
+                errors.confirmPassword
+              }
+            />
+
+            <button type="submit">Submit</button>
+          </StyleForm>
+        )}
+      </Formik>
+    );
   };
-
-  return (
-    <Formik
-      initialValues={{
-        email: "",
-        password: "",
-        confirmPassword: "",
-      }}
-      validationSchema={SignupValidation}
-      onSubmit={values => {
-        // const password: IUpdateUserPassword = {
-        //   old_password: "",
-        //   new_password: values.password,
-        //   confirm_password: valu
-        // const token = getAuthToken();
-        // updatePassword(token, password).then(response => {
-        // });
-        // es.confirmPassword,
-        // };
-        // cookies?
-        // Go to main plan
-      }}
-    >
-      {({ errors, touched, values, handleChange, handleBlur }) => (
-        <StyleForm>
-          <TextField
-            id="email"
-            name="email"
-            label="Email"
-            variant="outlined"
-            value={values.email}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            error={touched.email && Boolean(errors.email)}
-            helperText={errors.email && touched.email && errors.email}
-          />
-
-          <TextField
-            id="password"
-            name="password"
-            label="Password"
-            variant="outlined"
-            value={values.password}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            error={touched.password && Boolean(errors.password)}
-            helperText={errors.password && touched.password && errors.password}
-          />
-
-          <TextField
-            id="confirmPassword"
-            name="confirmPassword"
-            label="Confirm Password"
-            variant="outlined"
-            value={values.confirmPassword}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            error={touched.confirmPassword && Boolean(errors.confirmPassword)}
-            helperText={
-              errors.confirmPassword &&
-              touched.confirmPassword &&
-              errors.confirmPassword
-            }
-          />
-
-          <button type="submit">Submit</button>
-        </StyleForm>
-      )}
-    </Formik>
-  );
 
   return (
     <Wrapper>
@@ -256,35 +253,20 @@ const SignupScreenComponent = (props: any) => {
 };
 
 const mapStateToProps = (state: AppState) => ({
-  getCurrentScheduleData: () => getActivePlanScheduleFromState(state),
   fullName: getUserFullNameFromState(state),
   academicYear: getAcademicYearFromState(state),
   graduationYear: getGraduationYearFromState(state),
   catalogYear: getUserCatalogYearFromState(state),
+  coopCycle: getUserCoopCycleFromState(state),
+  concentration: getUserConcentrationFromState(state),
   major: getUserMajorNameFromState(state),
-  majors: getMajorsFromState(state),
   plans: getPlansFromState(state),
-  isFetchingMajors: getMajorsLoadingFlagFromState(state),
-  isFetchingPlans: getPlansLoadingFlagFromState(state),
   userId: getUserIdFromState(state),
+  coursesTransferred: safelyGetTransferCoursesFromState(state),
   completedCourses: getCompletedCoursesFromState(state),
-  completedCourseSchedule: getCompletedCourseScheduleFromState(state),
-  completedCourseCounter: getCompletedCourseCounterFromState(state),
 });
 
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-  setUserId: (id: number) => dispatch(setStudentIdAction(id)),
-  addPlanId: (planId: number) => dispatch(addPlanIdAction(planId)),
-  setPlanName: (name: string) => dispatch(setPlanNameAction(name)),
-  addNewSchedule: (name: string, newSchedule: ScheduleSlice) =>
-    dispatch(addNewSchedule(name, newSchedule)),
-
-  setLinkSharing: (linkSharing: boolean) =>
-    dispatch(setLinkSharingAction(linkSharing)),
-  setEmail: (email: string) => dispatch(setEmailAction(email)),
-  setUserCoopCycle: (coopCycle: string) =>
-    dispatch(setStudentCoopCycleAction(coopCycle)),
-});
+const mapDispatchToProps = (dispatch: Dispatch) => ({});
 
 export const SignupScreen = connect(
   mapStateToProps,
