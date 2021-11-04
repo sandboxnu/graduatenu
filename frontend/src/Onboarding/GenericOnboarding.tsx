@@ -161,7 +161,7 @@ const GenericOnboardingTemplate: React.FC<GenericOnboardingTemplateProps> = ({
     <Wrapper>
       <TitleLocation>Let's get to know you!</TitleLocation>
 
-      {/* <ThemeProvider theme={theme}>
+      <ThemeProvider theme={theme}>
         <DotWrapper>
           <Stepper activeStep={screen} style={{ minWidth: 300 }}>
             {steps.map(label => (
@@ -173,7 +173,7 @@ const GenericOnboardingTemplate: React.FC<GenericOnboardingTemplateProps> = ({
             ))}
           </Stepper>
         </DotWrapper>
-      </ThemeProvider> */}
+      </ThemeProvider>
       <Box>{children}</Box>
     </Wrapper>
   );

@@ -58,12 +58,10 @@ const parsePlans = (res: any): Record<string, Schedule[]> => {
 
 //use fetch utility to make a post request to the searchNEU graphql api endpoint.
 export function fetchMajorsAndPlans() {
-  console.log("fetch majors and plans called");
   return (dispatch: Dispatch) => {
     return new Promise<Major[]>((resolve, reject) => {
       dispatch(fetchMajorsPendingAction());
       dispatch(fetchPlansPendingAction());
-      console.log("line 65 called");
       fetch("https://api.searchneu.com/graphql", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -71,7 +69,6 @@ export function fetchMajorsAndPlans() {
       })
         .then(res => res.json())
         .then(res => {
-          console.log(res);
           if (res.error) {
             throw res.error;
           }

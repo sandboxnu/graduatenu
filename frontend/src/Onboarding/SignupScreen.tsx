@@ -98,10 +98,6 @@ const SignupScreenComponent: React.FC<Props> = ({
   coopCycle,
   concentration,
   major,
-  plans,
-  userId,
-  coursesTransferred,
-  completedCourses,
 }) => {
   const SignupForm: React.FC = () => {
     const history = useHistory();

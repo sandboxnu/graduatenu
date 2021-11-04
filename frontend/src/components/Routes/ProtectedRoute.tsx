@@ -31,29 +31,5 @@ export function ProtectedRoute({
     }),
     shallowEqual
   );
-
-  if (authCookieExists()) {
-    // if user exists in redux
-    if (userExists) {
-      if (
-        (isAdvisor && !path.includes("advisor")) ||
-        (!isAdvisor && path.includes("advisor"))
-      ) {
-        // advisor is trying to go to student routes
-        // or student is trying to go to advisor routes
-        return <Redirect to="/" />;
-      }
-
-      if (finishedOnboarding && path.includes("onboarding")) {
-        // leave out completed/transfer courses screens for now
-        return <Redirect to="/home" />;
-      }
-
-      return <Route path={path} component={component} />;
-    } else {
-      return <RedirectScreen redirectUrl={path} />;
-    }
-  } else {
-    return <Redirect to="/" />;
-  }
+  return <Route path={path} component={component} />;
 }
