@@ -1,3 +1,5 @@
+import { IUserData } from "../models/types";
+
 export function getInitialsFromName(fullName: string) {
   const names = fullName.split(" ");
   if (names.length >= 2) {
@@ -7,4 +9,37 @@ export function getInitialsFromName(fullName: string) {
   } else {
     return "";
   }
+}
+
+export function createInitialStudent({
+  fullName,
+  graduationYear,
+  catalogYear,
+  major,
+  concentration,
+  coopCycle,
+}: {
+  fullName: string;
+  graduationYear: number | null;
+  catalogYear: number | null;
+  major: string | null;
+  concentration: string | null;
+  coopCycle: string | null;
+}): IUserData {
+  const student: IUserData = {
+    id: 0,
+    email: "",
+    fullName,
+    academicYear: null,
+    graduationYear,
+    catalogYear,
+    major,
+    concentration,
+    coopCycle,
+    examCredits: [],
+    transferCourses: [],
+    completedCourses: [],
+  };
+
+  return student;
 }

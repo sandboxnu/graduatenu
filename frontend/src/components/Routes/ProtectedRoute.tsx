@@ -2,14 +2,9 @@ import React from "react";
 import { shallowEqual, useSelector } from "react-redux";
 import { Redirect, Route, RouteComponentProps } from "react-router-dom";
 import { RedirectScreen } from "../../Onboarding/RedirectScreen";
-import {
-  safelyGetAcademicYearFromState,
-  safelyGetGraduationYearFromState,
-  getDoesAdvisorExistInState,
-  getDoesStudentExistInState,
-} from "../../state";
+import { getUserIdFromState } from "../../state";
 import { AppState } from "../../state/reducers/state";
-import { authCookieExists } from "../../utils/auth-helpers";
+import { getAuthToken } from "../../utils/auth-helpers";
 
 export function ProtectedRoute({
   component,
@@ -20,16 +15,21 @@ export function ProtectedRoute({
     | React.ComponentType<any>;
   path: string;
 }) {
-  const { userExists, isAdvisor, finishedOnboarding } = useSelector(
+  const { userId } = useSelector(
     (state: AppState) => ({
-      userExists:
-        getDoesAdvisorExistInState(state) || getDoesStudentExistInState(state),
-      isAdvisor: getDoesAdvisorExistInState(state),
-      finishedOnboarding:
-        !!safelyGetGraduationYearFromState(state) &&
-        !!safelyGetAcademicYearFromState(state),
+      userId: getUserIdFromState(state),
     }),
     shallowEqual
   );
-  return <Route path={path} component={component} />;
+
+  if (getAuthToken()) {
+    // if user exists in redux
+    if (userId) {
+      return <Route path={path} component={component} />;
+    } else {
+      return <RedirectScreen redirectUrl={path} />;
+    }
+  } else {
+    return <Redirect to="/" />;
+  }
 }

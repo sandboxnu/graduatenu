@@ -113,8 +113,7 @@ const theme = createMuiTheme({
   },
 });
 
-// const steps = ["", "", "", ""];
-const steps = [""];
+const steps = ["", "", "", ""];
 
 interface SelectableCourseProps {
   readonly onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;

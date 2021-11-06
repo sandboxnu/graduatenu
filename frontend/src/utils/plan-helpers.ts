@@ -62,6 +62,6 @@ export const nullOrString = (value: string) => {
   return value == "" ? null : value;
 };
 
-export const NaNOrNumber = (value: number): number | null => {
+export const nullOrNumber = (value: number): number | null => {
   return Boolean(value) ? value : null;
 };

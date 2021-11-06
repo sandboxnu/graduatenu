@@ -18,13 +18,21 @@ import {
 } from "../state/actions/studentActions";
 import { addNewPlanAction } from "../state/actions/userPlansActions";
 import { GenericOnboardingTemplate } from "./GenericOnboarding";
-import { getMajorsFromState, getUserMajorFromState } from "../state";
+import {
+  getMajorsFromState,
+  getMajorsLoadingFlagFromState,
+  getStudentFromState,
+  getUserMajorFromState,
+} from "../state";
 import { Major } from "../../../common/types";
 import { AppState } from "../state/reducers/state";
 import { Autocomplete } from "@material-ui/lab";
 import { SaveInParentConcentrationDropdown } from "../components/ConcentrationDropdown";
 import { BASE_FORMATTED_COOP_CYCLES } from "../plans/coopCycles";
-import { NaNOrNumber, nullOrString } from "../utils/plan-helpers";
+import { nullOrNumber, nullOrString } from "../utils/plan-helpers";
+import { LoadingSpinner } from "../components/common/LoadingSpinner";
+import { NextButton } from "../components/common/NextButton";
+import { createInitialStudent } from "../utils/student-helpers";
 
 const Wrapper = styled.div`
   display: flex;
@@ -53,7 +61,7 @@ const marginBottomSpace = 12;
 interface OnboardingReduxDispatchProps {
   setStudentAction: (student: IUserData) => void;
   setFullName: (fullName: string) => void;
-  setGraduationYear: (graduationYear: number) => void;
+  setGraduationYear: (graduationYear: number | null) => void;
   setCatalogYear: (catalogYear: number | null) => void;
   setMajor: (major: string | null) => void;
   setConcentration: (concentration: string | null) => void;
@@ -61,8 +69,10 @@ interface OnboardingReduxDispatchProps {
 }
 
 interface OnboardingReduxStateProps {
+  student: IUserData | undefined;
   majors: Major[];
   major: Major;
+  isFetchingMajors: boolean;
 }
 
 type Props = OnboardingReduxDispatchProps &
@@ -70,17 +80,20 @@ type Props = OnboardingReduxDispatchProps &
   RouteComponentProps<{}>;
 
 const OnboardingScreenComponent: React.FC<Props> = ({
+  student,
   majors,
+  isFetchingMajors,
   setStudentAction,
 }) => {
   const history = useHistory();
 
-  useEffect(() => {
-    // if (majors.length === 0) {
-    //   history.push('/redirect');
-    // }
-  });
-
+  if (majors.length === 0) {
+    if (isFetchingMajors) {
+      return <LoadingSpinner />;
+    } else {
+      history.push("/");
+    }
+  }
   const catalogYearSet = [
     ...Array.from(new Set(majors.map(major => major.yearVersion.toString()))),
   ].sort();
@@ -111,18 +124,22 @@ const OnboardingScreenComponent: React.FC<Props> = ({
       .required("Required"),
     catalogYear: Yup.string()
       .max(255)
-      .nullable(),
+      .nullable()
+      .required("Required"),
     major: Yup.string().when("catalogYear", {
       is: (value: string | any[]) => value == null,
       then: Yup.string().required("Please first select a catalog year."),
-      otherwise: Yup.string().nullable(),
+      otherwise: Yup.string()
+        .nullable()
+        .required("Required"),
     }),
     concentration: Yup.string()
       .max(255)
       .nullable(),
     coopCycle: Yup.string()
       .max(255)
-      .nullable(),
+      .nullable()
+      .required("Required"),
   });
 
   const handleSubmit = (values: {
@@ -133,21 +150,25 @@ const OnboardingScreenComponent: React.FC<Props> = ({
     concentration: string;
     coopCycle: string;
   }): void => {
-    const user: IUserData = {
-      id: 1123123,
-      email: "",
-      major: values.major,
-      fullName: values.fullName,
-      academicYear: null,
-      graduationYear: NaNOrNumber(parseInt(values.gradYear)),
-      catalogYear: NaNOrNumber(parseInt(values.catalogYear)),
-      concentration: nullOrString(values.concentration),
-      coopCycle: nullOrString(values.coopCycle),
-      examCredits: [],
-      transferCourses: [],
-      completedCourses: [],
-    };
-    setStudentAction(user);
+    if (student == null) {
+      const user = createInitialStudent({
+        fullName: values.fullName,
+        graduationYear: nullOrNumber(parseInt(values.gradYear)),
+        catalogYear: nullOrNumber(parseInt(values.catalogYear)),
+        major: values.major,
+        concentration: nullOrString(values.concentration),
+        coopCycle: nullOrString(values.coopCycle),
+      });
+      setStudentAction(user);
+    } else {
+      setStudentFullNameAction(values.fullName);
+      setStudentGraduationYearAction(nullOrNumber(parseInt(values.gradYear)));
+      setStudentCatalogYearAction(nullOrNumber(parseInt(values.catalogYear)));
+      setStudentMajorAction(values.major);
+      setStudentConcentrationAction(nullOrString(values.concentration));
+      setStudentCoopCycleAction(nullOrString(values.coopCycle));
+    }
+
     history.push("/completedCourses");
   };
 
@@ -226,7 +247,7 @@ const OnboardingScreenComponent: React.FC<Props> = ({
                 options={catalogYearSet}
                 onChange={(_, value) => setFieldValue("catalogYear", value)}
                 onBlur={() => setTouched({ ["catalogYear"]: true })}
-                value={values.catalogYear}
+                value={values.catalogYear || null}
                 renderInput={params => (
                   <TextField
                     {...params}
@@ -251,7 +272,7 @@ const OnboardingScreenComponent: React.FC<Props> = ({
               options={majorNames(values.catalogYear).map(maj => maj.name)}
               onChange={(_, value) => setFieldValue("major", value)}
               onBlur={() => setTouched({ ["major"]: true })}
-              value={values.major}
+              value={values.major || null}
               renderInput={params => (
                 <TextField
                   {...params}
@@ -268,9 +289,10 @@ const OnboardingScreenComponent: React.FC<Props> = ({
             <SaveInParentConcentrationDropdown
               style={{ marginBottom: marginBottomSpace }}
               major={getMajor(values.major, values.catalogYear)}
-              concentration={values.concentration}
+              concentration={values.concentration || null}
               setConcentration={value => setFieldValue("concentration", value)}
               useLabel={true}
+              showError={Boolean(errors.coopCycle)}
             />
             <Autocomplete
               style={{ marginBottom: marginBottomSpace }}
@@ -283,14 +305,19 @@ const OnboardingScreenComponent: React.FC<Props> = ({
                   name="coopCycle"
                   variant="outlined"
                   label="Select A Co-op Cycle"
-                  fullWidth
+                  value={values.coopCycle}
+                  error={touched.coopCycle && Boolean(errors.coopCycle)}
+                  helperText={
+                    errors.coopCycle && touched.coopCycle && errors.coopCycle
+                  }
                 />
               )}
-              value={values.coopCycle || ""}
+              value={values.coopCycle || null}
               onChange={(_, value) => setFieldValue("coopCycle", value)}
               onBlur={() => setTouched({ ["coopCycle"]: true })}
             />
-            <button type="submit">Submit</button>
+            <NextButton type="submit" />
+            {console.log(errors)}
           </StyleForm>
         )}
       </Formik>
@@ -303,7 +330,9 @@ const OnboardingScreenComponent: React.FC<Props> = ({
  * @param dispatch responsible for dispatching actions to the redux store.
  */
 const mapStateToProps = (state: AppState) => ({
+  student: getStudentFromState(state),
   majors: getMajorsFromState(state),
+  isFetchingMajors: getMajorsLoadingFlagFromState(state),
 });
 
 /**
@@ -317,7 +346,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   setMajor: (major: string | null) => dispatch(setStudentMajorAction(major)),
   setConcentration: (concentration: string | null) =>
     dispatch(setStudentConcentrationAction(concentration)),
-  setGraduationYear: (gradYear: number) =>
+  setGraduationYear: (gradYear: number | null) =>
     dispatch(setStudentGraduationYearAction(gradYear)),
   setCatalogYear: (catalogYear: number | null) =>
     dispatch(setStudentCatalogYearAction(catalogYear)),

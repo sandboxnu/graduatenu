@@ -64,7 +64,7 @@ export const setStudentAcademicYearAction = createAction(
 
 export const setStudentGraduationYearAction = createAction(
   "student/SET_GRADUATION_YEAR",
-  (graduationYear: number) => ({
+  (graduationYear: number | null) => ({
     graduationYear,
   })
 )();
