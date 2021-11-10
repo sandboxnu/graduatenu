@@ -7,6 +7,9 @@ import picture2 from "../assets/onboarding-2.png";
 import picture3 from "../assets/onboarding-3.png";
 import { NORTHEASTERN_RED } from "../constants";
 import {
+  loginUser,
+  logoutUser,
+  registerUser,
   simulateKhouryAdvisorLogin,
   simulateKhouryStudentLogin,
 } from "../services/UserService";
@@ -206,15 +209,36 @@ export class Onboarding extends React.Component<Props> {
               <>
                 <ColorButton
                   variant="contained"
-                  onClick={this.onDevStudentClick.bind(this)}
+                  onClick={async () => {
+                    const res = await registerUser({
+                      email: "hello15@gmail.com",
+                      password: "hello1234",
+                    });
+                    console.log(res);
+                  }}
                 >
-                  Dev Bypass (Student)
+                  Signup
                 </ColorButton>
                 <ColorButton
                   variant="contained"
-                  onClick={this.onDevAdvisorClick.bind(this)}
+                  onClick={async () => {
+                    const res = await loginUser({
+                      email: "hello15@gmail.com",
+                      password: "hello1234",
+                    });
+                    console.log("RES: ", res);
+                  }}
                 >
-                  Dev Bypass (Advisor)
+                  Login
+                </ColorButton>
+                <ColorButton
+                  variant="contained"
+                  onClick={async () => {
+                    const res = await logoutUser();
+                    console.log("RES: ", res);
+                  }}
+                >
+                  Logout
                 </ColorButton>
               </>
             )}
