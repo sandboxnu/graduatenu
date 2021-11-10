@@ -7,7 +7,7 @@ import {
 } from "../models/types";
 
 // unused right now as Khoury auth is being used
-export const registerUser = (user: IUpdateUserData) =>
+export const registerUser = (user: { email: string; password: string }) =>
   fetch(`/api/users`, {
     method: "POST",
     body: JSON.stringify({ user: user }),
@@ -16,9 +16,17 @@ export const registerUser = (user: IUpdateUserData) =>
     },
   }).then(response => response.json());
 
+export const logoutUser = () => {
+  fetch("/api/users/sign_out", {
+    method: "DELETE",
+  }).then(response => {
+    return response.status;
+  });
+};
+
 // unused right now as Khoury auth is being used
 export const loginUser = (user: ILoginData) =>
-  fetch("/api/users/login", {
+  fetch("/api/users/sign_in", {
     method: "POST",
     body: JSON.stringify({ user: user }),
     headers: {
