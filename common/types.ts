@@ -178,7 +178,7 @@ export interface Major2 {
  *        that are accepted for the section to be fulfilled.
  */
 export interface Section {
-  title?: string;
+  title: string;
   requirements: Requirement2[];
   minRequirementCount: number;
 }
