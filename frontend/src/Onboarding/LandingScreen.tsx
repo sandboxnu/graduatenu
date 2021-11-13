@@ -1,18 +1,14 @@
 import React from "react";
 import styled from "styled-components";
-import { Button, Theme, withStyles } from "@material-ui/core";
 import titlePicture from "../assets/onboarding-title.png";
 import picture1 from "../assets/onboarding-1.png";
 import picture2 from "../assets/onboarding-2.png";
 import picture3 from "../assets/onboarding-3.png";
 import { NORTHEASTERN_RED } from "../constants";
 import {
-  loginUser,
-  logoutUser,
-  registerUser,
-  simulateKhouryAdvisorLogin,
-  simulateKhouryStudentLogin,
-} from "../services/UserService";
+  PrimaryLinkButton,
+  WhiteLinkButton,
+} from "../components/common/LinkButtons";
 
 const Header = styled.div`
   display: flex;
@@ -27,6 +23,7 @@ const LoginButtonContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
 `;
 
 const Banner = styled.div`
@@ -113,31 +110,11 @@ const Footer = styled.div`
   justify-content: flex-end;
 `;
 
-const WhiteColorButton = withStyles((theme: Theme) => ({
-  root: {
-    color: NORTHEASTERN_RED,
-    backgroundColor: "#ffffff",
-    "&:hover": {
-      backgroundColor: "#e9e9e9",
-    },
-  },
-}))(Button);
-
-const ColorButton = withStyles((theme: Theme) => ({
-  root: {
-    color: "#ffffff",
-    backgroundColor: NORTHEASTERN_RED,
-    "&:hover": {
-      backgroundColor: "#DB4747",
-    },
-  },
-}))(Button);
-
 interface Props {
   fullName: string;
 }
 
-export class Onboarding extends React.Component<Props> {
+export class LandingScreen extends React.Component<Props> {
   dev: boolean;
 
   constructor(props: Props) {
@@ -147,18 +124,6 @@ export class Onboarding extends React.Component<Props> {
     };
 
     this.dev = process.env.NODE_ENV === "development";
-  }
-
-  onDevStudentClick() {
-    simulateKhouryStudentLogin().then(response => {
-      window.location.href = response.redirect;
-    });
-  }
-
-  onDevAdvisorClick() {
-    simulateKhouryAdvisorLogin().then(response => {
-      window.location.href = response.redirect;
-    });
   }
 
   renderInfoSection(
@@ -199,49 +164,13 @@ export class Onboarding extends React.Component<Props> {
         <Header>
           <h1>GraduateNU</h1>
           <LoginButtonContainer>
-            <a
-              href="https://admin.khoury.northeastern.edu"
-              style={{ textDecoration: "none" }}
+            <PrimaryLinkButton
+              to="/login"
+              style={{ marginRight: "1em", minWidth: "128px" }}
             >
-              <ColorButton variant="contained">Get Started</ColorButton>
-            </a>
-            {this.dev && (
-              <>
-                <ColorButton
-                  variant="contained"
-                  onClick={async () => {
-                    const res = await registerUser({
-                      email: "hello15@gmail.com",
-                      password: "hello1234",
-                    });
-                    console.log(res);
-                  }}
-                >
-                  Signup
-                </ColorButton>
-                <ColorButton
-                  variant="contained"
-                  onClick={async () => {
-                    const res = await loginUser({
-                      email: "hello15@gmail.com",
-                      password: "hello1234",
-                    });
-                    console.log("RES: ", res);
-                  }}
-                >
-                  Login
-                </ColorButton>
-                <ColorButton
-                  variant="contained"
-                  onClick={async () => {
-                    const res = await logoutUser();
-                    console.log("RES: ", res);
-                  }}
-                >
-                  Logout
-                </ColorButton>
-              </>
-            )}
+              Login
+            </PrimaryLinkButton>
+            <PrimaryLinkButton to="/onboarding">Get Started</PrimaryLinkButton>
           </LoginButtonContainer>
         </Header>
         <Banner>
@@ -251,14 +180,7 @@ export class Onboarding extends React.Component<Props> {
               Navigate the Northeastern graduation requirements and create a
               personalized plan of study.
             </BannerInfoText>
-            <a
-              href="https://admin.khoury.northeastern.edu"
-              style={{ textDecoration: "none" }}
-            >
-              <WhiteColorButton variant="contained">
-                Get Started
-              </WhiteColorButton>
-            </a>
+            <WhiteLinkButton to="/onboarding">Get Started</WhiteLinkButton>
           </BannerInfo>
           <TitlePicture src={titlePicture} alt="title-picture"></TitlePicture>
         </Banner>
@@ -285,7 +207,7 @@ export class Onboarding extends React.Component<Props> {
             href="https://admin.khoury.northeastern.edu"
             style={{ textDecoration: "none" }}
           >
-            <WhiteColorButton variant="contained">Get Started</WhiteColorButton>
+            <WhiteLinkButton to="/onboarding">Get Started</WhiteLinkButton>
           </a>
         </Footer>
       </>
