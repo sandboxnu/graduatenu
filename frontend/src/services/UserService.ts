@@ -6,7 +6,7 @@ import {
   IUserData,
 } from "../models/types";
 
-export const registerUser = (user: IUpdateUserData) =>
+export const registerUser = (user: ILoginData) =>
   fetch(`/api/users`, {
     method: "POST",
     body: JSON.stringify({ user: user }),
@@ -19,14 +19,14 @@ interface UserDataWithToken extends IUserData {
   token: string;
 }
 
-interface LoginUserData {
-  errors?: any;
+interface LoginUserPayload {
+  error?: any;
   user?: UserDataWithToken;
 }
 
 interface LoginUserResponse {
   status: number;
-  data: LoginUserData;
+  data: LoginUserPayload;
 }
 
 export const loginUser = (user: ILoginData): Promise<LoginUserResponse> =>
@@ -36,8 +36,18 @@ export const loginUser = (user: ILoginData): Promise<LoginUserResponse> =>
     headers: {
       "Content-Type": "application/json",
     },
-  }).then(response => {
-    return { status: response.status, data: response.json() as LoginUserData };
+  }).then(async response => {
+    const data: LoginUserPayload = await response.json();
+    const isInvalidCreds =
+      data.error && data.error["email or password"] !== undefined;
+    const status = isInvalidCreds ? 401 : response.status;
+
+    console.log("USER: ", data);
+
+    return {
+      status,
+      data,
+    };
   });
 
 export const logoutUser = () => {
