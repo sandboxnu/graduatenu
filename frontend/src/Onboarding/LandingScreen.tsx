@@ -182,11 +182,10 @@ export class LandingScreen extends React.Component<Props> {
               <PrimaryButton
                 variant="contained"
                 onClick={async () => {
-                  const res = await registerUser({
-                    email: "hello@gmail.com",
+                  await registerUser({
+                    email: "myuser@gmail.com",
                     password: "hello1234",
                   });
-                  console.log(res);
                 }}
               >
                 Dev Signup
