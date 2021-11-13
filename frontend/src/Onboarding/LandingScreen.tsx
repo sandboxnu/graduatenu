@@ -9,6 +9,8 @@ import {
   PrimaryLinkButton,
   WhiteLinkButton,
 } from "../components/common/LinkButtons";
+import { PrimaryButton } from "../components/common/PrimaryButton";
+import { logoutUser, registerUser } from "../services/UserService";
 
 const Header = styled.div`
   display: flex;
@@ -24,6 +26,7 @@ const LoginButtonContainer = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  margin: 5px 0px;
 `;
 
 const Banner = styled.div`
@@ -163,15 +166,33 @@ export class LandingScreen extends React.Component<Props> {
       <>
         <Header>
           <h1>GraduateNU</h1>
-          <LoginButtonContainer>
-            <PrimaryLinkButton
-              to="/login"
-              style={{ marginRight: "1em", minWidth: "128px" }}
-            >
-              Login
-            </PrimaryLinkButton>
-            <PrimaryLinkButton to="/onboarding">Get Started</PrimaryLinkButton>
-          </LoginButtonContainer>
+          <div>
+            <LoginButtonContainer>
+              <PrimaryLinkButton
+                to="/login"
+                style={{ marginRight: "1em", minWidth: "128px" }}
+              >
+                Login
+              </PrimaryLinkButton>
+              <PrimaryLinkButton to="/onboarding">
+                Get Started
+              </PrimaryLinkButton>
+            </LoginButtonContainer>
+            <LoginButtonContainer>
+              <PrimaryButton
+                variant="contained"
+                onClick={async () => {
+                  const res = await registerUser({
+                    email: "hello@gmail.com",
+                    password: "hello1234",
+                  });
+                  console.log(res);
+                }}
+              >
+                Dev Signup
+              </PrimaryButton>
+            </LoginButtonContainer>
+          </div>
         </Header>
         <Banner>
           <BannerInfo>
