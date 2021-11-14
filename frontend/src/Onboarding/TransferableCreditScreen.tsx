@@ -179,58 +179,61 @@ const TransferableCreditScreen: React.FC = () => {
 
   const onSubmit = (): Promise<any> => {
     dispatch(setStudentExamCreditsAction(selectedTransferableExams));
-    const token = getAuthToken();
-    const updateUserPromise = () =>
-      updateUser(
-        {
-          id: userId!,
-          token: token,
-        },
-        {
-          major: major,
-          academic_year: academicYear,
-          graduation_year: graduationYear,
-          coop_cycle: coopCycle,
-          concentration: concentration,
-          catalog_year: catalogYear,
-        }
-      );
+    {
+      /* // TODO: should create plan when user is created */
+    }
+    // const token = getAuthToken();
+    // const updateUserPromise = () =>
+    //   updateUser(
+    //     {
+    //       id: userId!,
+    //       token: token,
+    //     },
+    //     {
+    //       major: major,
+    //       academic_year: academicYear,
+    //       graduation_year: graduationYear,
+    //       coop_cycle: coopCycle,
+    //       concentration: concentration,
+    //       catalog_year: catalogYear,
+    //     }
+    //   );
 
-    const createPlanPromise = () => {
-      let schedule, courseCounter;
-      // if (!!coopCycle) {
-      //   schedule = generateBlankCompletedCourseSchedule(
-      //     academicYear,
-      //     graduationYear,
-      //     completedCourseSchedule!,
-      //     major!,
-      //     coopCycle!,
-      //     allPlans
-      //   );
-      // } else {
-      schedule = generateBlankCompletedCourseScheduleNoCoopCycle(
-        academicYear,
-        graduationYear,
-        completedCourseSchedule!
-      );
-      // }
+    // const createPlanPromise = () => {
+    //   let schedule, courseCounter;
+    //   // if (!!coopCycle) {
+    //   //   schedule = generateBlankCompletedCourseSchedule(
+    //   //     academicYear,
+    //   //     graduationYear,
+    //   //     completedCourseSchedule!,
+    //   //     major!,
+    //   //     coopCycle!,
+    //   //     allPlans
+    //   //   );
+    //   // } else {
+    //   schedule = generateBlankCompletedCourseScheduleNoCoopCycle(
+    //     academicYear,
+    //     graduationYear,
+    //     completedCourseSchedule!
+    //   );
+    //   // }
 
-      createPlanForUser(userId!, {
-        name: "Plan 1",
-        link_sharing_enabled: false,
-        schedule: schedule,
-        major: major,
-        coop_cycle: coopCycle,
-        concentration: concentration,
-        course_counter: completedCourseCounter || 0,
-        catalog_year: catalogYear,
-      }).then(response => {
-        dispatch(addNewPlanAction(response.plan, academicYear));
-        setPrimaryPlan(userId, response.plan.id);
-      });
-    };
+    //   createPlanForUser(userId!, {
+    //     name: "Plan 1",
+    //     link_sharing_enabled: false,
+    //     schedule: schedule,
+    //     major: major,
+    //     coop_cycle: coopCycle,
+    //     concentration: concentration,
+    //     course_counter: completedCourseCounter || 0,
+    //     catalog_year: catalogYear,
+    //   }).then(response => {
+    //     dispatch(addNewPlanAction(response.plan, academicYear));
+    //     setPrimaryPlan(userId, response.plan.id);
+    //   });
+    // };
 
-    return Promise.all([updateUserPromise(), createPlanPromise()]);
+    return Promise.all([]);
   };
 
   return (

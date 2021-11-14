@@ -20,27 +20,6 @@ export const setStudentIdAction = createAction(
   })
 )();
 
-export const addPlanIdAction = createAction(
-  "student/ADD_PLAN_ID",
-  (planId: number) => ({
-    planId,
-  })
-)();
-
-export const setPlanNameAction = createAction(
-  "student/SET_PLAN_NAME",
-  (planName: string) => ({
-    planName,
-  })
-)();
-
-export const setLinkSharingAction = createAction(
-  "student/SET_LINK_SHARING",
-  (linkSharing: boolean) => ({
-    linkSharing,
-  })
-)();
-
 export const setStudentFullNameAction = createAction(
   "student/SET_FULL_NAME",
   (fullName: string) => ({

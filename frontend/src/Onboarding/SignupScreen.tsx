@@ -7,26 +7,10 @@ import styled from "styled-components";
 import { PrimaryButton } from "../components/common/PrimaryButton";
 import * as Yup from "yup";
 import { TextField } from "@material-ui/core";
-import { IUpdateUserData, IUpdateUserPassword } from "../models/types";
-import { AUTH_TOKEN_COOKIE_KEY, getAuthToken } from "../utils/auth-helpers";
-import { registerUser, updatePassword } from "../services/UserService";
+import { IUserData } from "../models/types";
 import { useHistory } from "react-router";
-import { AppState } from "../state/reducers/state";
-import Cookies from "js-cookie";
-import {
-  getAcademicYearFromState,
-  getCompletedCoursesFromState,
-  getGraduationYearFromState,
-  getPlansFromState,
-  getUserCatalogYearFromState,
-  getUserConcentrationFromState,
-  getUserCoopCycleFromState,
-  getUserFullNameFromState,
-  getUserIdFromState,
-  getUserMajorNameFromState,
-  safelyGetTransferCoursesFromState,
-} from "../state";
-import { Schedule, ScheduleCourse } from "../../../common/types";
+import { setStudentAction } from "../state/actions/studentActions";
+import { createInitialStudent } from "../utils/student-helpers";
 
 const Wrapper = styled.div`
   display: flex;
@@ -37,7 +21,7 @@ const Wrapper = styled.div`
 `;
 
 const Title = styled.div`
-  margin-top: 96px;
+  margin: 96px 0 48px 0;
   font-style: normal;
   font-weight: bold;
   font-size: 24px;
@@ -75,30 +59,12 @@ const SignupValidation = Yup.object().shape({
 });
 
 interface SignupReduxStoreProps {
-  fullName: string;
-  academicYear: number;
-  graduationYear: number;
-  catalogYear: number | null;
-  coopCycle: string | null;
-  concentration: string | null;
-  major: string | null;
-  plans: Record<string, Schedule[]>;
-  userId: number;
-  coursesTransferred: ScheduleCourse[] | [];
-  completedCourses: ScheduleCourse;
+  setStudentAction: (student: IUserData) => void;
 }
 
 type Props = SignupReduxStoreProps & RouteComponentProps<{}>;
 
-const SignupScreenComponent: React.FC<Props> = ({
-  fullName,
-  academicYear,
-  graduationYear,
-  catalogYear,
-  coopCycle,
-  concentration,
-  major,
-}) => {
+const SignupScreenComponent: React.FC<Props> = ({ setStudentAction }) => {
   const SignupForm: React.FC = () => {
     const history = useHistory();
 
@@ -111,46 +77,13 @@ const SignupScreenComponent: React.FC<Props> = ({
       password: string;
       confirmPassword: string;
     }): void => {
-      const user: IUpdateUserData = {
-        email,
-        major,
-        full_name: fullName,
-        academic_year: academicYear,
-        graduation_year: graduationYear,
-        coop_cycle: coopCycle,
-        concentration,
-        catalog_year: catalogYear,
-        //    courses_transfer: coursesTransferred,
-        //    courses_completed: completedCourses,
-      };
-
-      registerUser(user).then(userResponse => {
-        if (userResponse.errors) {
-          // TODO: Change error handling
-          alert("errors");
-          console.log("Could not register user!");
-        } else {
-          const updatedPassword: IUpdateUserPassword = {
-            old_password: "",
-            new_password: password,
-            confirm_password: confirmPassword,
-          };
-
-          updatePassword(userResponse.user.token, updatedPassword).then(
-            passwordResponse => {
-              if (passwordResponse.errors) {
-                console.log("Could not update password!");
-              }
-            }
-          );
-
-          Cookies.set(AUTH_TOKEN_COOKIE_KEY, userResponse.user.token, {
-            path: "/",
-            domain: window.location.hostname,
-          });
-          history.push("/home");
-        }
-      });
+      // TODO: finish this part after aryan's stuff gets merged to create a student
+      // const user: IUserData = createInitialStudent({
+      //   id: 0,
+      //   email: email,
+      // })
+      // setStudentAction(user);
+      // history.push('/onboarding');
     };
 
     return (
@@ -248,37 +181,11 @@ const SignupScreenComponent: React.FC<Props> = ({
   );
 };
 
-const mapStateToProps = (state: AppState) => ({
-  fullName: getUserFullNameFromState(state),
-  academicYear: getAcademicYearFromState(state),
-  graduationYear: getGraduationYearFromState(state),
-  catalogYear: getUserCatalogYearFromState(state),
-  coopCycle: getUserCoopCycleFromState(state),
-  concentration: getUserConcentrationFromState(state),
-  major: getUserMajorNameFromState(state),
-  plans: getPlansFromState(state),
-  userId: getUserIdFromState(state),
-  coursesTransferred: safelyGetTransferCoursesFromState(state),
-  completedCourses: getCompletedCoursesFromState(state),
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  setStudentAction: (student: IUserData) => dispatch(setStudentAction(student)),
 });
 
 export const SignupScreen = connect(
-  mapStateToProps,
-  null
+  null,
+  mapDispatchToProps
 )(withRouter(SignupScreenComponent));
-
-/**
- * 1. write a function for getCurrentScheduleData -> userplanstate????.plan(state)
- * -> (redux store getter function)
- * 2. fix the type
- * 3. finish up the createPlanForUser
- * 4. Update password -> api call (updatePassword)
- * 5. put possible getters in mapStateToProps: major, fullName, coopcycle, graduation year (basically everything in IUpdate)
- * 6. after finishing createPlanForUser -> response IS A PLAN -> put this shit in redux store
- *   => addNewSchedule (mapDispatch)
- *
- *
- * frontend -> backend call -> get response -> store in reducer ->
- * get from reducer for some purposes -> frontend -> repeat
- *
- */

@@ -11,6 +11,7 @@ export function getInitialsFromName(fullName: string) {
   }
 }
 
+// TODO: get rid of id, email, and full name after aryan's PR gets merged
 export function createInitialStudent({
   fullName,
   graduationYear,

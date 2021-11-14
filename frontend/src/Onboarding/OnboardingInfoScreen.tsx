@@ -128,7 +128,9 @@ const OnboardingScreenComponent: React.FC<Props> = ({
       .required("Required"),
     major: Yup.string().when("catalogYear", {
       is: (value: string | any[]) => value == null,
-      then: Yup.string().required("Please first select a catalog year."),
+      then: Yup.string()
+        .nullable()
+        .required("Please first select a catalog year."),
       otherwise: Yup.string()
         .nullable()
         .required("Required"),
@@ -150,6 +152,7 @@ const OnboardingScreenComponent: React.FC<Props> = ({
     concentration: string;
     coopCycle: string;
   }): void => {
+    // TODO: creates initial student in Sign up page
     if (student == null) {
       const user = createInitialStudent({
         fullName: values.fullName,
@@ -317,7 +320,6 @@ const OnboardingScreenComponent: React.FC<Props> = ({
               onBlur={() => setTouched({ ["coopCycle"]: true })}
             />
             <NextButton type="submit" />
-            {console.log(errors)}
           </StyleForm>
         )}
       </Formik>
