@@ -41,8 +41,6 @@ import {
 } from "../utils/schedule-helpers";
 import { UndoDelete } from "./UndoDelete";
 import ScheduleChangeTracker from "../utils/ScheduleChangeTracker";
-import { type } from "os";
-import { StatusCodeError } from "request-promise/errors";
 
 const OutsideContainer = styled.div`
   width: 25%;

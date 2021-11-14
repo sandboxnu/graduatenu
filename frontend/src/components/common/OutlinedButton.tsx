@@ -1,13 +1,8 @@
 import React from "react";
 import { Button } from "@material-ui/core";
-import {
-  createStyles,
-  withStyles,
-  makeStyles,
-  Theme,
-} from "@material-ui/core/styles";
+import { withStyles, Theme } from "@material-ui/core/styles";
 
-const ColorButton = withStyles((theme: Theme) => ({
+export const ColorButton = withStyles((_theme: Theme) => ({
   root: {
     color: "#EB5757",
     width: "200px;",

@@ -35,14 +35,16 @@
 #
 class User < ApplicationRecord
   JWT_EXPIRATION = 60.days
+   devise :database_authenticatable, :registerable, :recoverable, :rememberable,
+         :validatable
 
   encrypts :email, :nu_id
   blind_index :email, :nu_id
   has_many :plans, dependent: :destroy
   has_many :folders, dependent: :destroy # only relevant for advisors
 
-  #validates a non-unique full_name and allows spaces
-  validates :full_name, presence: true, allow_blank: false, format: { with: /\A[a-zA-Z0-9 ]+\z/ }
+  # validates a non-unique full_name and allows spaces
+  validates :full_name, presence: false, allow_blank: true, format: { with: /\A[a-zA-Z0-9 ]+\z/ }
 
   def generate_jwt
     JWT.encode({ id: id, exp: JWT_EXPIRATION.from_now.to_i }, Rails.application.credentials.secret_key_base)

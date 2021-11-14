@@ -9,7 +9,10 @@ import { PrimaryButton } from "../components/common/PrimaryButton";
 import { Dispatch } from "redux";
 import { setStudentAction } from "../state/actions/studentActions";
 import { loginUser } from "../services/UserService";
-import { AUTH_TOKEN_COOKIE_KEY } from "../utils/auth-helpers";
+import {
+  AUTH_TOKEN_COOKIE_KEY,
+  setAuthTokenAsCookie,
+} from "../utils/auth-helpers";
 import Cookies from "js-cookie";
 import { AppState } from "../state/reducers/state";
 import { SecondaryLinkButton } from "../components/common/LinkButtons";
@@ -141,11 +144,11 @@ const LoginScreenComponent: React.FC<Props> = props => {
       };
 
       try {
-        const response = await loginUser(user);
+        const { status, data } = await loginUser(user);
 
-        if (response.data.errors || !response.data.user) {
+        if (data.error || !data.user) {
           // handle response errros
-          const isUnauthorized = response.status === 401;
+          const isUnauthorized = status === 401;
 
           setState({
             ...state,
@@ -155,12 +158,17 @@ const LoginScreenComponent: React.FC<Props> = props => {
           });
         } else {
           // update redux store with logged in user and set cookies
-          props.setStudent(response.data.user);
-          Cookies.set(AUTH_TOKEN_COOKIE_KEY, response.data.user.token, {
-            path: "/",
-            domain: window.location.hostname,
-          });
-          props.history.push("/home");
+          props.setStudent(data.user);
+          setAuthTokenAsCookie(data.user.token);
+
+          const isOnboarded = data.user.catalogYear !== null;
+          if (isOnboarded) {
+            // redirect to home if the user had finished onboarding
+            props.history.push("/home");
+          } else {
+            // redirect to onboarding if the user hadn't finished onboarding
+            // props.history.push("/onboarding");
+          }
         }
       } catch (err) {
         // something went wrong making the request
@@ -191,7 +199,7 @@ const LoginScreenComponent: React.FC<Props> = props => {
         error={
           (textFieldStr.length === 0 && beenEdited) ||
           !state.validEmail ||
-          !!state.error
+          state.error !== undefined
         }
         style={{
           marginTop: 48,
@@ -219,7 +227,6 @@ const LoginScreenComponent: React.FC<Props> = props => {
     beenEdited: boolean
   ) => {
     const showInvalidCredsError = state.error === ErrorType.INVALID_CREDENTIALS;
-
     const showOtherError = state.error === ErrorType.OTHER;
 
     return (
@@ -229,7 +236,9 @@ const LoginScreenComponent: React.FC<Props> = props => {
         variant="outlined"
         value={textFieldStr}
         onChange={onChangePassword}
-        error={(textFieldStr.length === 0 && beenEdited) || !!state.error}
+        error={
+          (textFieldStr.length === 0 && beenEdited) || state.error !== undefined
+        }
         style={{
           minWidth: 326,
         }}
