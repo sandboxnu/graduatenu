@@ -13,6 +13,8 @@ import { connect } from "react-redux";
 import { Dispatch } from "redux";
 import { fetchMajorsAndPlans } from "../utils/fetchMajorsAndPlans";
 import { Major } from "../../../common/types";
+import { PrimaryButton } from "../components/common/PrimaryButton";
+import { logoutUser, registerUser } from "../services/UserService";
 
 const Header = styled.div`
   display: flex;
@@ -28,6 +30,7 @@ const LoginButtonContainer = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  margin: 5px 0px;
 `;
 
 const Banner = styled.div`
@@ -181,6 +184,19 @@ export class LandingScreenComponent extends React.Component<Props> {
               Sign Up
             </PrimaryLinkButton>
             <PrimaryLinkButton to="/onboarding">Get Started</PrimaryLinkButton>
+            <LoginButtonContainer>
+              <PrimaryButton
+                variant="contained"
+                onClick={async () => {
+                  await registerUser({
+                    email: "myuser@gmail.com",
+                    password: "hello1234",
+                  });
+                }}
+              >
+                Dev Signup
+              </PrimaryButton>
+            </LoginButtonContainer>
           </LoginButtonContainer>
         </Header>
         <Banner>

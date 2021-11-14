@@ -1,4 +1,6 @@
 class SessionsController < Devise::SessionsController
+  include ActionController::MimeResponds
+
   def create
     user = User.find_by_email(sign_in_params[:email])
 
