@@ -33,7 +33,7 @@ export const fetchCourse = async (
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       query: `{ 
-        class(subject: "${subject}", classId: ${classId}) {
+        class(subject: "${subject}", classId: "${classId}") {
           latestOccurrence {
             name
             subject
