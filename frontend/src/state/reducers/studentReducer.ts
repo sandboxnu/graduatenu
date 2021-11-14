@@ -53,16 +53,6 @@ export const studentReducer = (
           return draft;
         }
 
-        if (draft.student.examCredits == null) {
-          draft.student.examCredits = [];
-        }
-        if (draft.student.completedCourses == null) {
-          draft.student.completedCourses = [];
-        }
-        if (draft.student.transferCourses == null) {
-          draft.student.transferCourses = [];
-        }
-
         return draft;
       }
       case getType(setStudentIdAction): {

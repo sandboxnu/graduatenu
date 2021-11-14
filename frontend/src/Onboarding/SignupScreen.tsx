@@ -31,7 +31,7 @@ const Title = styled.div`
 
 const Subtitle = styled.div`
   margin-top: 8px;
-  margin-bottom: 2px;
+  margin-bottom: 8px;
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
@@ -58,6 +58,8 @@ const SignupValidation = Yup.object().shape({
   ),
 });
 
+const marginBottomSpace = 12;
+
 interface SignupReduxStoreProps {
   setStudentAction: (student: IUserData) => void;
 }
@@ -77,6 +79,7 @@ const SignupScreenComponent: React.FC<Props> = ({ setStudentAction }) => {
       password: string;
       confirmPassword: string;
     }): void => {
+      console.log("hi");
       // TODO: finish this part after aryan's stuff gets merged to create a student
       // const user: IUserData = createInitialStudent({
       //   id: 0,
@@ -105,6 +108,7 @@ const SignupScreenComponent: React.FC<Props> = ({ setStudentAction }) => {
         {({ errors, touched, values, handleChange, handleBlur }) => (
           <StyleForm>
             <TextField
+              style={{ marginBottom: marginBottomSpace }}
               id="email"
               name="email"
               label="Email"
@@ -117,6 +121,7 @@ const SignupScreenComponent: React.FC<Props> = ({ setStudentAction }) => {
             />
 
             <TextField
+              style={{ marginBottom: marginBottomSpace }}
               id="password"
               name="password"
               label="Password"
@@ -131,6 +136,7 @@ const SignupScreenComponent: React.FC<Props> = ({ setStudentAction }) => {
             />
 
             <TextField
+              style={{ marginBottom: marginBottomSpace }}
               id="confirmPassword"
               name="confirmPassword"
               label="Confirm Password"
@@ -145,8 +151,24 @@ const SignupScreenComponent: React.FC<Props> = ({ setStudentAction }) => {
                 errors.confirmPassword
               }
             />
-
-            <button type="submit">Submit</button>
+            <Subtitle>
+              Already a member? Log in{" "}
+              <Link
+                style={{ color: "#EB5757" }}
+                to={{
+                  pathname: "/login",
+                }}
+              >
+                here
+              </Link>
+              {" or "}
+              <Link style={{ color: "#EB5757" }} to="/home">
+                continue as guest
+              </Link>
+            </Subtitle>
+            <div>
+              <PrimaryButton type={"submit"}>Sign Up</PrimaryButton>
+            </div>
           </StyleForm>
         )}
       </Formik>
@@ -156,27 +178,7 @@ const SignupScreenComponent: React.FC<Props> = ({ setStudentAction }) => {
   return (
     <Wrapper>
       <Title>Sign Up</Title>
-
       {<SignupForm />}
-
-      <Subtitle>
-        Already a member? Log in{" "}
-        <Link
-          style={{ color: "#EB5757" }}
-          to={{
-            pathname: "/login",
-          }}
-        >
-          here
-        </Link>
-        {" or "}
-        <Link style={{ color: "#EB5757" }} to="/home">
-          continue as guest
-        </Link>
-      </Subtitle>
-      <div onClick={() => console.log("Hello")}>
-        <PrimaryButton>Sign Up</PrimaryButton>
-      </div>
     </Wrapper>
   );
 };

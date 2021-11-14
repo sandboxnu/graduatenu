@@ -118,8 +118,7 @@ interface Props {
   fullName: string;
   fetchMajorsAndPlans: () => Promise<Major[]>;
 }
-
-class LandingScreenComponent extends React.Component<Props> {
+export class LandingScreenComponent extends React.Component<Props> {
   dev: boolean;
 
   constructor(props: Props) {
@@ -178,7 +177,10 @@ class LandingScreenComponent extends React.Component<Props> {
               Login
             </PrimaryLinkButton>
             {/* // TODO: should go to /signup */}
-            <PrimaryLinkButton to="/onboarding">Sign Up</PrimaryLinkButton>
+            <PrimaryLinkButton to="/onboarding" style={{ marginRight: "1em" }}>
+              Sign Up
+            </PrimaryLinkButton>
+            <PrimaryLinkButton to="/onboarding">Get Started</PrimaryLinkButton>
           </LoginButtonContainer>
         </Header>
         <Banner>
