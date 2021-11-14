@@ -1,12 +1,7 @@
 import React from "react";
 import "./Scrollbar.css";
-import {
-  DNDSchedule,
-  IWarning,
-  DNDScheduleTerm,
-  IPlanData,
-} from "../models/types";
-import { Major, SeasonWord, ScheduleCourse } from "../../../common/types";
+import { IWarning, IPlanData } from "../models/types";
+import { Major, ScheduleCourse } from "../../../common/types";
 import styled from "styled-components";
 import { convertTermIdToYear } from "../utils";
 import { withToast } from "./toastHook";

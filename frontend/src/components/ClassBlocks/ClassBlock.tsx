@@ -108,8 +108,8 @@ export class ClassBlock extends React.Component<
     if (this.props.warnings) {
       return (
         <div>
-          {this.props.warnings.map(warning => (
-            <div>{warning.message}</div>
+          {this.props.warnings.map((warning, idx) => (
+            <div key={idx}>{warning.message}</div>
           ))}
         </div>
       );

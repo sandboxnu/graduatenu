@@ -10,7 +10,7 @@ import {
   setActivePlanNameAction,
   renameCourseInActivePlanAction,
 } from "./../actions/userPlansActions";
-import { DNDSchedule, IPlanData } from "../../models/types";
+import { DNDSchedule, DNDScheduleYear, IPlanData } from "../../models/types";
 import produce from "immer";
 import { getType } from "typesafe-actions";
 import { UserPlansAction, StudentAction } from "../actions";
@@ -37,6 +37,7 @@ import {
   convertTermIdToSeason,
   convertToDNDCourses,
   convertToDNDSchedule,
+  fillInSchedule,
   isYearInPast,
   planToString,
   produceWarnings,
@@ -51,7 +52,16 @@ export type ActivePlanAutoSaveStatus =
 
 export interface UserPlansState {
   activePlan?: string;
-  plans: { [key: string]: IPlanData };
+  plans: {
+    [key: string]: IPlanData;
+  };
+  fifthYearCache: {
+    /*
+     * A plan name to 5th year schedule map. Used to save 5th year schedule when switching
+     * schedule from 5 years to 4 years.
+     */
+    [key: string]: DNDScheduleYear;
+  };
   closedYears: { [key: string]: number[] }; // map plan name to closedYearsList
   pastSchedule?: DNDSchedule; // used for undo
   activePlanStatus: ActivePlanAutoSaveStatus;
@@ -60,6 +70,7 @@ export interface UserPlansState {
 const initialState: UserPlansState = {
   activePlan: undefined,
   plans: {},
+  fifthYearCache: {},
   closedYears: {},
   pastSchedule: undefined,
   activePlanStatus: "Up To Date",
@@ -224,40 +235,62 @@ export const userPlansReducer = (
           return draft;
         }
 
-        const activePlan = draft.plans[draft.activePlan!];
+        // active plan name should always be defined
+        const activePlanName = draft.activePlan;
 
+        if (!activePlanName) {
+          return draft;
+        }
+
+        const activePlan = draft.plans[activePlanName];
+        const previousSchedule = draft.plans[activePlanName].schedule;
+
+        // find plan with the active plan's major and provided coopCycle
         const plan = allPlans[activePlan.major!].find(
           (p: Schedule) => planToString(p) === coopCycle
         );
 
         if (plan) {
-          const [newSchedule, newCounter] = convertToDNDSchedule(
+          const [newSchedule] = convertToDNDSchedule(
             plan,
             activePlan.courseCounter
           );
-
-          draft.plans[
-            draft.activePlan!
-          ].schedule = alterScheduleToHaveCorrectYears(
+          const newScheduleWithCorrectYears = alterScheduleToHaveCorrectYears(
             newSchedule,
             academicYear,
             graduationYear
           );
+
+          draft.plans[activePlanName].schedule = newScheduleWithCorrectYears;
         }
 
         // remove all classes
-        draft.plans[draft.activePlan!].schedule = clearSchedule(
-          draft.plans[draft.activePlan!].schedule
+        draft.plans[activePlanName].schedule = clearSchedule(
+          draft.plans[activePlanName!].schedule
         );
 
-        draft.plans[draft.activePlan!].courseCounter = 0;
+        // fill in the empty schedule using the previous schedule and the cache for the fifth year
+        const { filledInSchedule, updatedFifthYearCache } = fillInSchedule(
+          previousSchedule,
+          draft.plans[activePlanName].schedule,
+          draft.fifthYearCache[activePlanName]
+        );
+
+        draft.plans[activePlanName].schedule = filledInSchedule;
+
+        // if the 5th year was removed, store it in the cache
+        if (updatedFifthYearCache) {
+          draft.fifthYearCache[activePlanName] = updatedFifthYearCache;
+        }
+
+        draft.plans[activePlanName].courseCounter = 0;
 
         // clear all warnings
-        draft.plans[draft.activePlan!].warnings = [];
-        draft.plans[draft.activePlan!].courseWarnings = [];
+        draft.plans[activePlanName].warnings = [];
+        draft.plans[activePlanName].courseWarnings = [];
 
         // set the coop cycle
-        draft.plans[draft.activePlan!].coopCycle = coopCycle;
+        draft.plans[activePlanName].coopCycle = coopCycle;
 
         return draft;
       }
