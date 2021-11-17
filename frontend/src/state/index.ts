@@ -111,7 +111,7 @@ export const getUserCoopCycleFromState = (state: AppState): string | null =>
   getStudentFromState(state).coopCycle;
 
 export const getAcademicYearFromState = (state: AppState) =>
-  getStudentFromState(state)?.academicYear;
+  getStudentFromState(state).academicYear;
 
 export const getGraduationYearFromState = (state: AppState) =>
   getStudentFromState(state).graduationYear;

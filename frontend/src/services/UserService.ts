@@ -42,8 +42,6 @@ export const loginUser = (user: ILoginData): Promise<LoginUserResponse> =>
       data.error && data.error["email or password"] !== undefined;
     const status = isInvalidCreds ? 401 : response.status;
 
-    console.log("USER: ", data);
-
     return {
       status,
       data,

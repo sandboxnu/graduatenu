@@ -79,7 +79,6 @@ const SignupScreenComponent: React.FC<Props> = ({ setStudentAction }) => {
       password: string;
       confirmPassword: string;
     }): void => {
-      console.log("hi");
       // TODO: finish this part after aryan's stuff gets merged to create a student
       // const user: IUserData = createInitialStudent({
       //   id: 0,

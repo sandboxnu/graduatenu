@@ -84,7 +84,7 @@ const OnboardingScreenComponent: React.FC<Props> = ({
   majors,
   isFetchingMajors,
   setStudentAction,
-}) => {
+}: Props) => {
   const history = useHistory();
 
   if (majors.length === 0) {

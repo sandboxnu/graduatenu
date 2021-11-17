@@ -9,7 +9,10 @@ import { PrimaryButton } from "../components/common/PrimaryButton";
 import { Dispatch } from "redux";
 import { setStudentAction } from "../state/actions/studentActions";
 import { loginUser } from "../services/UserService";
-import { AUTH_TOKEN_COOKIE_KEY } from "../utils/auth-helpers";
+import {
+  AUTH_TOKEN_COOKIE_KEY,
+  setAuthTokenAsCookie,
+} from "../utils/auth-helpers";
 import Cookies from "js-cookie";
 import { AppState } from "../state/reducers/state";
 import { SecondaryLinkButton } from "../components/common/LinkButtons";
@@ -156,10 +159,7 @@ const LoginScreenComponent: React.FC<Props> = props => {
         } else {
           // update redux store with logged in user and set cookies
           props.setStudent(data.user);
-          Cookies.set(AUTH_TOKEN_COOKIE_KEY, data.user.token, {
-            path: "/",
-            domain: window.location.hostname,
-          });
+          setAuthTokenAsCookie(data.user.token);
 
           const isOnboarded = data.user.catalogYear !== null;
           if (isOnboarded) {
