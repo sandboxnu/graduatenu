@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - no-branch
+      - test-staging-deployment
 
 name: Deploy containers to Amazon ECS
 
