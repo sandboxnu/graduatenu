@@ -9,7 +9,6 @@ import {
   CourseWarning,
   DNDScheduleCourse,
   IWarning,
-  DNDSchedule,
   StatusEnum,
 } from "../models/types";
 import { ScheduleCourse, Status, SeasonWord } from "../../../common/types";

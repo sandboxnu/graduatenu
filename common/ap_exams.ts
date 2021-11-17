@@ -195,6 +195,11 @@ export const APExamGroups2020To2021: Array<TransferableExamGroup> = [
             classId: 1152,
             subject: "PHYS",
           },
+          {
+            type: "COURSE",
+            classId: 1153,
+            subject: "PHYS",
+          },
         ],
         semesterHours: 5,
       },

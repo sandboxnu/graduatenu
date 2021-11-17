@@ -122,12 +122,13 @@ const ConcentrationComponent: React.FC<ConcentrationProps> = ({
       <ConcentrationTitle>{userConcentration} Concentration</ConcentrationTitle>
       {concentration?.requirementGroups?.map((req, index) => {
         return (
-          <ConcentrationRequirementGroup>
+          <ConcentrationRequirementGroup
+            key={`${index}-${userConcentration}-${req}`}
+          >
             <RequirementSection
               title={req}
               contents={concentration.requirementGroupMap[req]}
               warning={warnings.find(w => w.requirementGroup === req)}
-              key={`${index}-${userConcentration}-${req}`}
               completedCourses={completedCourseStrings}
               isEditable={isEditable}
             />

@@ -2,7 +2,12 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
 import styled from "styled-components";
-import { ScheduleCourse } from "../../../common/types";
+import {
+  ScheduleCourse,
+  TransferableExam,
+  TransferableExamGroup,
+  IRequiredCourse,
+} from "../../../common/types";
 import { AddClassSearchModal } from "./AddClassSearchModal";
 import {
   addTransferClassAction,
@@ -10,7 +15,10 @@ import {
 } from "../state/actions/studentActions";
 import { AddBlock } from "./ClassBlocks/AddBlock";
 import { NonDraggableClassBlock } from "./ClassBlocks/NonDraggableClassBlock";
+import { Tooltip } from "@material-ui/core";
 import { UndoDelete } from "./UndoDelete";
+import { APExamGroups2020To2021 } from "../../../common/ap_exams";
+import { IBExamGroups2020To2021 } from "../../../common/ib_exams";
 
 interface TransferCreditsProps {
   transferCredits: ScheduleCourse[];
@@ -67,6 +75,58 @@ const Wrapper = styled.div`
   width: 100%;
   height: 100%;
 `;
+
+/**
+ * Determines the corresponding transferable exam type and name for the given NEU course.
+ * @param examGroups The transferable exam groupings (either AP or IB).
+ * @param course The NEU course to query against.
+ * @returns The exam type and name as a string.
+ */
+function findExamText(
+  examGroups: TransferableExamGroup[],
+  course: ScheduleCourse
+): string {
+  for (const examGroup of examGroups) {
+    for (const transferableExam of examGroup.transferableExams) {
+      for (const mappableCourse of transferableExam.mappableCourses) {
+        if (
+          mappableCourse.subject === course.subject &&
+          String(mappableCourse.classId) === course.classId
+        ) {
+          return `${transferableExam.type} ${transferableExam.name}`;
+        }
+      }
+    }
+  }
+  // If not found, return an empty string.
+  return "";
+}
+
+/**
+ * Gets the tooltip hover text for the transfer credits container.
+ * @param course The NEU course to query against.
+ * @returns The tooltip hover text as a string.
+ */
+function getTooltipText(course: ScheduleCourse) {
+  const apExamText = findExamText(APExamGroups2020To2021, course);
+  const ibExamText = findExamText(IBExamGroups2020To2021, course);
+
+  if (apExamText === "" && ibExamText === "") {
+    return `Transferred as ${course.subject} ${course.classId}`;
+  } else if (apExamText === "") {
+    return `Fulfilled by ${ibExamText}`;
+  } else if (ibExamText === "") {
+    return `Fulfilled by ${apExamText}`;
+  }
+
+  return `Fulfilled by ${apExamText} or ${ibExamText}`;
+}
+
+function renderTooltip(course: ScheduleCourse) {
+  const tooltipText = getTooltipText(course);
+
+  return <div>{tooltipText}</div>;
+}
 
 class TransferCreditsComponent extends React.Component<
   Props,
@@ -132,13 +192,15 @@ class TransferCreditsComponent extends React.Component<
     return this.props.transferCredits.map(scheduleCourse => {
       if (!!scheduleCourse) {
         return (
-          <ClassWrapper key={scheduleCourse.subject + scheduleCourse.classId}>
-            <NonDraggableClassBlock
-              course={scheduleCourse}
-              onDelete={this.onDeleteClass.bind(this, scheduleCourse)}
-              hideDelete={!this.props.isEditable}
-            />
-          </ClassWrapper>
+          <Tooltip title={renderTooltip(scheduleCourse)} placement="top">
+            <ClassWrapper key={scheduleCourse.subject + scheduleCourse.classId}>
+              <NonDraggableClassBlock
+                course={scheduleCourse}
+                onDelete={this.onDeleteClass.bind(this, scheduleCourse)}
+                hideDelete={!this.props.isEditable}
+              />
+            </ClassWrapper>
+          </Tooltip>
         );
       }
       return null;
@@ -151,7 +213,6 @@ class TransferCreditsComponent extends React.Component<
 
   render() {
     const { modalVisible, deletedClass, snackbarOpen } = this.state;
-
     return (
       <div style={{ width: "100%", marginBottom: 28 }}>
         <Container>
