@@ -194,7 +194,7 @@ export class Onboarding extends React.Component<Props> {
     return (
       <>
         <Header>
-          <h1>GraduateNU</h1>
+          <h1>GraduateNU Staging</h1>
           <LoginButtonContainer>
             <a
               href="https://admin.khoury.northeastern.edu"
