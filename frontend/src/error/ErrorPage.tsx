@@ -100,13 +100,13 @@ export const ErrorPage = ({ statusCode }: { statusCode: number }) => {
             </Message>
             <Message>
               If the problem persists, please contact us&nbsp;
-              <CustomLink href="mailto:lou.jus@northeastern.edu">
+              <CustomLink href="mailto:luo.jus@northeastern.edu">
                 here.
               </CustomLink>
             </Message>
 
             <ButtonWrapper>
-              <WhiteColorButton onClick={() => history.go(-1)}>
+              <WhiteColorButton onClick={() => history.goBack()}>
                 Take me Back
               </WhiteColorButton>
             </ButtonWrapper>
