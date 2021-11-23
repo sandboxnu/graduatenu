@@ -68,7 +68,12 @@ export function fetchMajorsAndPlans(history: History<unknown>) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ query: querySchema }),
       })
-        .then(res => res.json())
+        .then(res => {
+          return {
+            data: res.json(),
+            statusCode: res.status,
+          };
+        })
         .then(res => {
           if (res.statusCode >= 400) {
             history.replace(history.location.pathname, {
