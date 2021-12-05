@@ -11,6 +11,7 @@ import {
 import { Dispatch } from "redux";
 import { Major, Schedule } from "../../../common/types";
 import { majorIds } from "../majors";
+import { History } from "history";
 
 //graphql schema for searchNEU's majors endpoint.
 const majorSchema: string[] = majorIds.map(({ majorId, year }) => {
@@ -57,7 +58,7 @@ const parsePlans = (res: any): Record<string, Schedule[]> => {
 };
 
 //use fetch utility to make a post request to the searchNEU graphql api endpoint.
-export function fetchMajorsAndPlans() {
+export function fetchMajorsAndPlans(history: History<unknown>) {
   return (dispatch: Dispatch) => {
     return new Promise<Major[]>((resolve, reject) => {
       dispatch(fetchMajorsPendingAction());
@@ -67,10 +68,17 @@ export function fetchMajorsAndPlans() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ query: querySchema }),
       })
-        .then(res => res.json())
         .then(res => {
-          if (res.error) {
-            throw res.error;
+          return {
+            data: res.json(),
+            statusCode: res.status,
+          };
+        })
+        .then(res => {
+          if (res.statusCode >= 400) {
+            history.replace(history.location.pathname, {
+              errorStatusCode: res.statusCode,
+            });
           }
           const majors: Major[] = parseMajors(res.data);
           const record: Record<string, Schedule[]> = parsePlans(res.data);
