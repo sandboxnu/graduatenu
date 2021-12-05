@@ -9,6 +9,10 @@ import {
   PrimaryLinkButton,
   WhiteLinkButton,
 } from "../components/common/LinkButtons";
+import { connect } from "react-redux";
+import { Dispatch } from "redux";
+import { fetchMajorsAndPlans } from "../utils/fetchMajorsAndPlans";
+import { Major } from "../../../common/types";
 import { PrimaryButton } from "../components/common/PrimaryButton";
 import { logoutUser, registerUser } from "../services/UserService";
 
@@ -115,9 +119,9 @@ const Footer = styled.div`
 
 interface Props {
   fullName: string;
+  fetchMajorsAndPlans: () => Promise<Major[]>;
 }
-
-export class LandingScreen extends React.Component<Props> {
+export class LandingScreenComponent extends React.Component<Props> {
   dev: boolean;
 
   constructor(props: Props) {
@@ -127,6 +131,11 @@ export class LandingScreen extends React.Component<Props> {
     };
 
     this.dev = process.env.NODE_ENV === "development";
+  }
+
+  componentWillMount() {
+    // make an API request to searchNEU to get the supported majors and their corresponding plans.
+    this.props.fetchMajorsAndPlans();
   }
 
   renderInfoSection(
@@ -166,18 +175,15 @@ export class LandingScreen extends React.Component<Props> {
       <>
         <Header>
           <h1>GraduateNU</h1>
-          <div>
-            <LoginButtonContainer>
-              <PrimaryLinkButton
-                to="/login"
-                style={{ marginRight: "1em", minWidth: "128px" }}
-              >
-                Login
-              </PrimaryLinkButton>
-              <PrimaryLinkButton to="/onboarding">
-                Get Started
-              </PrimaryLinkButton>
-            </LoginButtonContainer>
+          <LoginButtonContainer>
+            <PrimaryLinkButton to="/login" style={{ marginRight: "1em" }}>
+              Login
+            </PrimaryLinkButton>
+            {/* // TODO: should go to /signup */}
+            <PrimaryLinkButton to="/onboarding" style={{ marginRight: "1em" }}>
+              Sign Up
+            </PrimaryLinkButton>
+            <PrimaryLinkButton to="/onboarding">Get Started</PrimaryLinkButton>
             <LoginButtonContainer>
               <PrimaryButton
                 variant="contained"
@@ -191,7 +197,7 @@ export class LandingScreen extends React.Component<Props> {
                 Dev Signup
               </PrimaryButton>
             </LoginButtonContainer>
-          </div>
+          </LoginButtonContainer>
         </Header>
         <Banner>
           <BannerInfo>
@@ -234,3 +240,12 @@ export class LandingScreen extends React.Component<Props> {
     );
   }
 }
+
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  fetchMajorsAndPlans: () => fetchMajorsAndPlans()(dispatch),
+});
+
+export const LandingScreen = connect(
+  null,
+  mapDispatchToProps
+)(LandingScreenComponent);

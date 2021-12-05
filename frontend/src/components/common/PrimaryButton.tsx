@@ -42,6 +42,7 @@ export function PrimaryButton(props: any) {
       color="primary"
       onClick={props.onClick}
       disabled={props.disabled}
+      type={props.type}
     >
       {props.children}
     </ColorButton>
