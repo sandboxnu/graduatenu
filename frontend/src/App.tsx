@@ -21,6 +21,7 @@ import { TemplateBuilderPage } from "./advising/Templates/TemplateBuilderPage";
 import { CourseManagmentPage } from "./advising/CourseManagment";
 import { GenericStudentView } from "./advising/ManageStudents/GenericStudentView";
 
+// change
 export const App = ({ store }: { store: Store }) => {
   return (
     <Provider store={store}>
