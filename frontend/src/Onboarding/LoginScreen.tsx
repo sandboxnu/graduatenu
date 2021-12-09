@@ -167,7 +167,7 @@ const LoginScreenComponent: React.FC<Props> = props => {
             props.history.push("/home");
           } else {
             // redirect to onboarding if the user hadn't finished onboarding
-            // props.history.push("/onboarding");
+            props.history.push("/onboarding");
           }
         }
       } catch (err) {

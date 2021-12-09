@@ -12,31 +12,18 @@ export function getInitialsFromName(fullName: string) {
 }
 
 // TODO: get rid of id, email, and full name after aryan's PR gets merged
-export function createInitialStudent({
-  fullName,
-  graduationYear,
-  catalogYear,
-  major,
-  concentration,
-  coopCycle,
-}: {
-  fullName: string;
-  graduationYear: number | null;
-  catalogYear: number | null;
-  major: string | null;
-  concentration: string | null;
-  coopCycle: string | null;
-}): IUserData {
+export function createInitialStudent(id: number, email: string): IUserData {
   const student: IUserData = {
-    id: 0,
-    email: "",
-    fullName,
+    id,
+    email,
+    fullName: "",
     academicYear: null,
-    graduationYear,
-    catalogYear,
-    major,
-    concentration,
-    coopCycle,
+    graduationYear: null,
+    catalogYear: null,
+    isAdvisor: false,
+    major: null,
+    concentration: null,
+    coopCycle: null,
     examCredits: [],
     transferCourses: [],
     completedCourses: [],

@@ -10,6 +10,13 @@ import { TextField } from "@material-ui/core";
 import { IUserData } from "../models/types";
 import { useHistory } from "react-router";
 import { setStudentAction } from "../state/actions/studentActions";
+import { loginUser, registerUser } from "../services/UserService";
+import { setAuthTokenAsCookie } from "../utils/auth-helpers";
+import { AppState } from "../state/reducers/state";
+import { getMajorsFromState, getMajorsLoadingFlagFromState } from "../state";
+import { Major } from "../../../common/types";
+import { LoadingSpinner } from "../components/common/LoadingSpinner";
+import { SecondaryLinkButton } from "../components/common/LinkButtons";
 import { createInitialStudent } from "../utils/student-helpers";
 
 const Wrapper = styled.div`
@@ -45,11 +52,20 @@ const StyleForm = styled(Form)`
   flex-direction: column;
 `;
 
+const ButtonContainer = styled.div`
+  align-self: center;
+  margin-top: 1em;
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 0em 1em;
+`;
+
 const SignupValidation = Yup.object().shape({
   email: Yup.string()
     .email("Invalid email")
     .required("Required"),
   password: Yup.string()
+    .min(6, "Must be at least 6 characters")
     .max(255)
     .required("Password is required"),
   confirmPassword: Yup.string().oneOf(
@@ -62,30 +78,60 @@ const marginBottomSpace = 12;
 
 interface SignupReduxStoreProps {
   setStudentAction: (student: IUserData) => void;
+  isFetchingMajors: boolean;
+  majors: Major[];
 }
 
 type Props = SignupReduxStoreProps & RouteComponentProps<{}>;
 
-const SignupScreenComponent: React.FC<Props> = ({ setStudentAction }) => {
-  const SignupForm: React.FC = () => {
-    const history = useHistory();
+const SignupScreenComponent: React.FC<Props> = ({
+  setStudentAction,
+  majors,
+  isFetchingMajors,
+}) => {
+  const history = useHistory();
 
-    const handleSubmit = ({
+  if (majors.length === 0) {
+    if (isFetchingMajors) {
+      return <LoadingSpinner />;
+    } else {
+      history.push("/");
+    }
+  }
+
+  const SignupForm: React.FC = () => {
+    const handleSubmit = async ({
       email,
       password,
-      confirmPassword,
     }: {
       email: string;
       password: string;
-      confirmPassword: string;
-    }): void => {
+    }) => {
       // TODO: finish this part after aryan's stuff gets merged to create a student
-      // const user: IUserData = createInitialStudent({
-      //   id: 0,
-      //   email: email,
-      // })
-      // setStudentAction(user);
-      // history.push('/onboarding');
+      const res = await registerUser({
+        email,
+        password,
+      });
+      if (res.errors == null) {
+        console.log("student registered");
+        const { status, data } = await loginUser({
+          email,
+          password,
+        });
+        console.log(status);
+        console.log(data.user);
+
+        if (status === 200 && data.user != null) {
+          const { token, ...otherInfo } = data.user;
+          setAuthTokenAsCookie(token);
+          // const initialStudent = createInitialStudent(otherInfo.id, otherInfo.email);
+          setStudentAction({
+            ...otherInfo,
+            examCredits: [],
+          });
+          history.push("/onboarding");
+        }
+      }
     };
 
     return (
@@ -100,7 +146,6 @@ const SignupScreenComponent: React.FC<Props> = ({ setStudentAction }) => {
           handleSubmit({
             email: values.email,
             password: values.password,
-            confirmPassword: values.confirmPassword,
           });
         }}
       >
@@ -165,9 +210,10 @@ const SignupScreenComponent: React.FC<Props> = ({ setStudentAction }) => {
                 continue as guest
               </Link>
             </Subtitle>
-            <div>
-              <PrimaryButton type={"submit"}>Sign Up</PrimaryButton>
-            </div>
+            <ButtonContainer>
+              <PrimaryButton type="submit">Sign up</PrimaryButton>
+              <SecondaryLinkButton to="/">Back</SecondaryLinkButton>
+            </ButtonContainer>
           </StyleForm>
         )}
       </Formik>
@@ -182,11 +228,16 @@ const SignupScreenComponent: React.FC<Props> = ({ setStudentAction }) => {
   );
 };
 
+const mapStateToProps = (state: AppState) => ({
+  majors: getMajorsFromState(state),
+  isFetchingMajors: getMajorsLoadingFlagFromState(state),
+});
+
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   setStudentAction: (student: IUserData) => dispatch(setStudentAction(student)),
 });
 
 export const SignupScreen = connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(withRouter(SignupScreenComponent));

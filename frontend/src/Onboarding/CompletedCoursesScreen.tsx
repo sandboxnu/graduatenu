@@ -63,6 +63,7 @@ class CompletedCoursesComponent extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
     let expanded = new Map<String, Boolean>();
+    console.log(this.props);
     this.props.major.requirementGroups.forEach(reqGroups =>
       expanded.set(reqGroups, false)
     );
