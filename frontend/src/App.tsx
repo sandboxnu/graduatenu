@@ -22,40 +22,45 @@ import { CourseManagmentPage } from "./advising/CourseManagment";
 import { GenericStudentView } from "./advising/ManageStudents/GenericStudentView";
 import { LoginScreen } from "./Onboarding/LoginScreen";
 import { SignupScreen } from "./Onboarding/SignupScreen";
+import ErrorHandler from "./error/ErrorHandler";
 
 export const App = ({ store }: { store: Store }) => {
   return (
     <Provider store={store}>
       <Router>
-        <Switch>
-          {/* requires login */}
-          <ProtectedRoute path="/home" component={HomeWrapper} />
-          <ProtectedRoute path="/redirect" component={RedirectScreen} />
-          <ProtectedRoute path="/profile" component={Profile} />
-          <ProtectedRoute path="/management" component={CourseManagmentPage} />
-          <ProtectedRoute
-            path="/completedCourses"
-            component={CompletedCoursesScreen}
-          />
-          <ProtectedRoute
-            path="/transferCourses"
-            component={TransferCoursesScreen}
-          />
-          <ProtectedRoute
-            path="/transferableCredits"
-            component={TransferableCreditScreen}
-          />
-          <ProtectedRoute path="/advisor" component={AdvisorRouter} />
-          {/* requires not logged in */}
-          {/* <UnprotectedRoute path="/signup" component={SignupScreen} /> */}
-          <UnprotectedRoute
-            path="/onboarding"
-            component={OnboardingInfoScreen}
-          />
-          <UnprotectedRoute path="/login" component={LoginScreen} />
-          <UnprotectedRoute path="/signup" component={SignupScreen} />
-          <UnprotectedRoute path="/" component={LandingScreen} />
-        </Switch>
+        <ErrorHandler>
+          <Switch>
+            {/* requires login */}
+            <ProtectedRoute path="/home" component={HomeWrapper} />
+            <ProtectedRoute path="/redirect" component={RedirectScreen} />
+            <ProtectedRoute
+              path="/onboarding"
+              component={OnboardingInfoScreen}
+            />
+            <ProtectedRoute path="/profile" component={Profile} />
+            <ProtectedRoute
+              path="/management"
+              component={CourseManagmentPage}
+            />
+            <ProtectedRoute
+              path="/completedCourses"
+              component={CompletedCoursesScreen}
+            />
+            <ProtectedRoute
+              path="/transferCourses"
+              component={TransferCoursesScreen}
+            />
+            <ProtectedRoute
+              path="/transferableCredits"
+              component={TransferableCreditScreen}
+            />
+            <ProtectedRoute path="/advisor" component={AdvisorRouter} />
+            {/* requires not logged in */}
+            <UnprotectedRoute path="/" component={LandingScreen} />
+            <Route path="/signup" component={SignupScreen} />
+            <Route path="/login" component={LoginScreen} />
+          </Switch>
+        </ErrorHandler>
       </Router>
     </Provider>
   );
