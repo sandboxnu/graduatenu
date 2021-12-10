@@ -15,6 +15,8 @@ import { fetchMajorsAndPlans } from "../utils/fetchMajorsAndPlans";
 import { Major } from "../../../common/types";
 import { PrimaryButton } from "../components/common/PrimaryButton";
 import { logoutUser, registerUser } from "../services/UserService";
+import { History } from "history";
+import { RouteComponentProps, withRouter } from "react-router";
 
 const Header = styled.div`
   display: flex;
@@ -117,10 +119,12 @@ const Footer = styled.div`
   justify-content: flex-end;
 `;
 
-interface Props {
+interface LandingScreenProps {
   fullName: string;
-  fetchMajorsAndPlans: () => Promise<Major[]>;
+  fetchMajorsAndPlans: (history: History<unknown>) => Promise<Major[]>;
 }
+
+type Props = LandingScreenProps & RouteComponentProps<{}>;
 export class LandingScreenComponent extends React.Component<Props> {
   dev: boolean;
 
@@ -135,7 +139,7 @@ export class LandingScreenComponent extends React.Component<Props> {
 
   componentWillMount() {
     // make an API request to searchNEU to get the supported majors and their corresponding plans.
-    this.props.fetchMajorsAndPlans();
+    this.props.fetchMajorsAndPlans(this.props.history);
   }
 
   renderInfoSection(
@@ -240,10 +244,11 @@ export class LandingScreenComponent extends React.Component<Props> {
 }
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  fetchMajorsAndPlans: () => fetchMajorsAndPlans()(dispatch),
+  fetchMajorsAndPlans: (history: History<unknown>) =>
+    fetchMajorsAndPlans(history)(dispatch),
 });
 
 export const LandingScreen = connect(
   null,
   mapDispatchToProps
-)(LandingScreenComponent);
+)(withRouter(LandingScreenComponent));

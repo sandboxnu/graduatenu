@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
-import { Redirect } from "react-router";
+import { Redirect, useHistory } from "react-router";
 import { batch, useDispatch } from "react-redux";
 import { fetchActiveUser } from "../services/UserService";
 import {
@@ -32,6 +32,7 @@ export const RedirectScreen: React.FC<Props> = ({ redirectUrl }) => {
   const [needsToGoToOnboarding, setNeedsToGoToOnboarding] = useState<
     boolean | undefined
   >();
+  const history = useHistory();
 
   const calculateAcademicYear = (completedCourses: ScheduleCourse[]) => {
     // sort the courses from the earliest to lastest semester
@@ -64,7 +65,7 @@ export const RedirectScreen: React.FC<Props> = ({ redirectUrl }) => {
   useEffect(() => {
     setIsLoading(true);
     setIsError(false);
-    fetchMajorsAndPlans()(dispatch).then(majors => {
+    fetchMajorsAndPlans(history)(dispatch).then(majors => {
       const cookie = Cookies.get(AUTH_TOKEN_COOKIE_KEY);
       if (cookie) {
         Cookies.remove(AUTH_TOKEN_COOKIE_KEY, {

@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - no-branch
+      - main
 
 name: Deploy containers to Amazon ECS
 
@@ -36,8 +36,8 @@ jobs:
           # push it to ECR so that it can
           # be deployed to ECS.
           cd api
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f Dockerfile.prod .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
 
       - name: Build, tag, and push node image to Amazon ECR
@@ -51,7 +51,7 @@ jobs:
           # push it to ECR so that it can
           # be deployed to ECS.
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f frontend/Dockerfile .
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
 
       - name: Update & Deploy ECS task definitions

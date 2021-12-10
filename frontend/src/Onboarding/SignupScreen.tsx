@@ -113,22 +113,19 @@ const SignupScreenComponent: React.FC<Props> = ({
         password,
       });
       if (res.errors == null) {
-        console.log("student registered");
         const { status, data } = await loginUser({
           email,
           password,
         });
-        console.log(status);
-        console.log(data.user);
 
         if (status === 200 && data.user != null) {
           const { token, ...otherInfo } = data.user;
           setAuthTokenAsCookie(token);
-          // const initialStudent = createInitialStudent(otherInfo.id, otherInfo.email);
-          setStudentAction({
-            ...otherInfo,
-            examCredits: [],
-          });
+          const initialStudent = createInitialStudent(
+            otherInfo.id,
+            otherInfo.email
+          );
+          setStudentAction(initialStudent);
           history.push("/onboarding");
         }
       }
@@ -169,6 +166,7 @@ const SignupScreenComponent: React.FC<Props> = ({
               id="password"
               name="password"
               label="Password"
+              type="password"
               variant="outlined"
               value={values.password}
               onChange={handleChange}
@@ -184,6 +182,7 @@ const SignupScreenComponent: React.FC<Props> = ({
               id="confirmPassword"
               name="confirmPassword"
               label="Confirm Password"
+              type="password"
               variant="outlined"
               value={values.confirmPassword}
               onChange={handleChange}
