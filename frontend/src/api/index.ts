@@ -72,7 +72,7 @@ export const searchCourses = async (
     body: JSON.stringify({
       query: `
       {
-        search(termId:202130, query: "${searchQuery}", classIdRange: {min: ${minIndex}, max: ${maxIndex}}) {
+        search(termId:"202130", query: "${searchQuery}", classIdRange: {min: ${minIndex}, max: ${maxIndex}}) {
            totalCount 
            pageInfo { hasNextPage } 
            nodes { ... on ClassOccurrence { name subject maxCredits minCredits prereqs coreqs classId
