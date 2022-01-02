@@ -80,6 +80,9 @@ export function fetchMajorsAndPlans(history: History<unknown>) {
               errorStatusCode: res.statusCode,
             });
           }
+          return res.data;
+        })
+        .then(res => {
           const majors: Major[] = parseMajors(res.data);
           const record: Record<string, Schedule[]> = parsePlans(res.data);
           dispatch(fetchMajorsSuccessAction(majors));

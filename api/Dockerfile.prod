@@ -17,3 +17,8 @@ COPY . /app
 COPY entrypoint-prod.sh /usr/bin/
 RUN chmod +x /usr/bin/entrypoint-prod.sh
 ENTRYPOINT ["entrypoint-prod.sh"]
+
+EXPOSE 3000
+
+# Start the server on port 3000
+CMD ["rails", "s", "-p", "3000", "-b", "0.0.0.0"]

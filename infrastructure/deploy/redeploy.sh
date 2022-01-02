@@ -8,7 +8,7 @@ fi
 AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
 AWS_DEFAULT_REGION="us-east-1"
 REPOS=( "graduatenu-rails" "graduatenu-node" )
-LATEST_HASH=$(git ls-remote https://github.com/sandboxnu/graduatenu.git  main | awk '{ print $1 }')
+LATEST_HASH=$(git ls-remote https://github.com/sandboxnu/graduatenu.git main | awk '{ print $1 }')
 ECS_CLUSTER="$1-graduatenu"
 TASK_FAMILIES=( "${ECS_CLUSTER}-api" "${ECS_CLUSTER}-web" )
 SERVICES=( "${ECS_CLUSTER}-api" "${ECS_CLUSTER}-web" )
@@ -27,7 +27,7 @@ for i in "${!REPOS[@]}"; do
     # fetch template for task definition 
     TASK_DEFINITION=$(aws ecs describe-task-definition --task-definition "$TASK_FAMILY" --region "$AWS_DEFAULT_REGION")
     # update the template's image to use the latest ECR_IMAGE
-    NEW_TASK_DEFINTIION=$(echo $TASK_DEFINITION | jq --arg IMAGE "$ECR_IMAGE" '.taskDefinition | .containerDefinitions[0].image = $IMAGE | del(.taskDefinitionArn) | del(.revision) | del(.status) | del(.requiresAttributes) | del(.compatibilities)')
+    NEW_TASK_DEFINTIION=$(echo $TASK_DEFINITION | jq --arg IMAGE "$ECR_IMAGE" '.taskDefinition | .containerDefinitions[0].image = $IMAGE | del(.taskDefinitionArn) | del(.revision) | del(.status) | del(.requiresAttributes) | del(.compatibilities) | del(.registeredAt) | del(.registeredBy)')
     # register the new revision for the task definition 
     NEW_TASK_INFO=$(aws ecs register-task-definition --region "$AWS_DEFAULT_REGION" --cli-input-json "$NEW_TASK_DEFINTIION")
     NEW_REVISION=$(echo $NEW_TASK_INFO | jq '.taskDefinition.revision')
