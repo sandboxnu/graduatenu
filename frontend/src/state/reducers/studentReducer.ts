@@ -23,7 +23,10 @@ import {
 } from "../actions/studentActions";
 import { DNDSchedule, IUserData } from "../../models/types";
 import { ScheduleCourse } from "../../../../common/types";
-import { parseCompletedCourses } from "../../utils";
+import {
+  alterScheduleToHaveCorrectYears,
+  parseCompletedCourses,
+} from "../../utils";
 
 export interface StudentState {
   student?: IUserData;
@@ -125,8 +128,12 @@ export const studentReducer = (
             course1.classId.toString().localeCompare(course2.classId.toString())
         );
         draft.student!.completedCourses = completedCourses;
-        const [schedule, counter] = parseCompletedCourses(completedCourses);
-        draft.completedCourseSchedule = schedule;
+        const { schedule, counter } = parseCompletedCourses(completedCourses);
+        draft.completedCourseSchedule = alterScheduleToHaveCorrectYears(
+          schedule,
+          draft.student!.academicYear!,
+          draft.student!.graduationYear!
+        );
         draft.completedCourseCounter = counter;
         return draft;
       }
