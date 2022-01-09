@@ -1,13 +1,15 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
-import { get } from "lodash";
 import { BackendErrorPage } from "./ErrorPages";
 
-const ErrorHandler = ({ children }: any) => {
-  const location = useLocation();
-  const status: number = get(location.state, "errorStatusCode");
-  if (status >= 400) {
-    return <BackendErrorPage statusCode={status} />;
+type LocationState = {
+  errorStatusCode: number;
+};
+
+const ErrorHandler: React.FC = ({ children }: any): JSX.Element => {
+  const errorStatusCode = useLocation<LocationState>().state?.errorStatusCode;
+  if (errorStatusCode >= 400) {
+    return <BackendErrorPage statusCode={errorStatusCode} />;
   } else {
     return children;
   }

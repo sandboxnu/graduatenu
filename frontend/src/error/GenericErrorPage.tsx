@@ -75,7 +75,13 @@ const ButtonWrapper = styled.div`
   width: 100%;
 `;
 
-export const GenericErrorPage = ({ message }: { message: string }) => {
+interface GenericErrorPageProps {
+  message: string;
+}
+
+export const GenericErrorPage: React.FC<GenericErrorPageProps> = ({
+  message,
+}: GenericErrorPageProps): JSX.Element => {
   const history = useHistory();
   return (
     <>
