@@ -15,7 +15,7 @@ import { convertToDNDSchedule } from "./schedule-helpers";
  * Returns the sum of all credits in the courses
  * @param courses
  */
-export function sumCreditsFromList(courses: DNDScheduleCourse[]): number {
+export function sumCreditsFromList(courses: ScheduleCourse[]): number {
   if (!courses) {
     return 0;
   }
@@ -105,62 +105,34 @@ whichever semester they were taken. Ignores COOP3945.
 export function parseCompletedCourses(completedCourses: ScheduleCourse[]) {
   const years: number[] = [];
   const yearMap: { [key: number]: ScheduleYear } = {};
-  const termMap: { [key: string]: SeasonWord } = {
-    "10": "fall",
-    "30": "spring",
-    "40": "summer1",
-    "60": "summer2",
-  };
-  completedCourses
-    .filter(course => !!course.semester)
-    .forEach(course => {
-      const currentYear = Number(course.semester!.slice(0, 4));
-      const currentSemester: string = course.semester!.slice(4, 6);
-      if (!years.includes(currentYear)) {
-        years.push(currentYear);
-        yearMap[currentYear] = {
-          year: currentYear,
-          fall: {
-            season: "FL",
-            year: currentYear,
-            termId: Number(String(currentYear) + "10"),
-            status: "CLASSES",
-            classes: [],
-          },
-          spring: {
-            season: "SP",
-            year: currentYear,
-            termId: Number(String(currentYear) + "30"),
-            status: "CLASSES",
-            classes: [],
-          },
-          summer1: {
-            season: "S1",
-            year: currentYear,
-            termId: Number(String(currentYear) + "40"),
-            status: "INACTIVE",
-            classes: [],
-          },
-          summer2: {
-            season: "S2",
-            year: currentYear,
-            termId: Number(String(currentYear) + "60"),
-            status: "INACTIVE",
-            classes: [],
-          },
-          isSummerFull: false,
-        };
-      }
-      const activeSemester = yearMap[currentYear][termMap[currentSemester]];
-      if (course.subject == "COOP") {
-        activeSemester["status"] = "COOP";
-      } else if (activeSemester["status"] == "INACTIVE") {
-        activeSemester["status"] = "CLASSES";
-        activeSemester["classes"].push(course);
-      } else {
-        activeSemester["classes"].push(course);
-      }
-    });
-  years.sort();
+
+  const sortedCourses = completedCourses.sort(
+    (course1: ScheduleCourse, course2: ScheduleCourse) =>
+      course1.classId.toString().localeCompare(course2.classId.toString())
+  );
+
+  const creditsTaken = sumCreditsFromList(sortedCourses);
+  let curSchedule = draft.present.schedule;
+  let classTerm = 0;
+  // while there are still completed classes left to take and we have not passed the number of terms
+  // in the schedule
+  while (dndCourses.length != 0 || classTerm >= curSchedule.years.length * 4) {
+    let curTerm = numToTerm(classTerm, curSchedule);
+    // while the current term is not a class term, continue searching for the next class term.
+    while (
+      classTerm + 1 <= curSchedule.years.length * 4 &&
+      curTerm.status != "CLASSES"
+    ) {
+      classTerm += 1;
+      curTerm = numToTerm(classTerm, curSchedule);
+    }
+    let newCourses = getNextTerm(
+      classTerm % 4 == 2 || classTerm % 4 == 3,
+      dndCourses
+    );
+    curTerm.classes = newCourses;
+    classTerm += 1;
+  }
+
   return convertToDNDSchedule({ years, yearMap }, 0);
 }
