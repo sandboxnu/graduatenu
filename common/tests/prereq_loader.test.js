@@ -25,7 +25,9 @@ const supported = [
 
   // "Complete four economics electives with no more than two below 3000:"
   "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/economics-bs/#planofstudytext",
-  "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/science/biochemistry/biochemistry-bs/#planofstudytext",
+  // gives timeout error - not currently worth dev time.
+  // TODO: fix this when we support biochem
+  // "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/science/biochemistry/biochemistry-bs/#planofstudytext",
   "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/science/mathematics/mathematics-bs/#planofstudytext",
 ];
 
