@@ -1,14 +1,15 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { config } from 'dotenv';
 import { Student } from 'src/student/entities/student.entity';
+
+config({ path: `.env.${process.env.NODE_ENV}` });
 
 const ormconfig: TypeOrmModuleOptions = {
   type: 'postgres',
-  url:
-    process.env.DB_URL ||
-    'postgres://postgres@localhost:5432/graduatenu_api_dev',
-  synchronize: process.env.NODE_ENV !== 'production',
-  username: process.env.DB_USERNAME || 'postgres',
+  url: process.env.DB_URL,
+  username: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD || '',
+  synchronize: process.env.NODE_ENV !== 'production',
   entities: [Student],
 };
 
