@@ -1,5 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn, BeforeInsert } from 'typeorm';
 import * as bcrypt from 'bcrypt';
+import { Exclude } from 'class-transformer';
 
 @Entity()
 export class Student {
@@ -13,6 +14,7 @@ export class Student {
   email: string;
 
   @Column()
+  @Exclude() // excludes this whenever an instance of Student is returned by a controller
   password: string;
 
   @Column({ type: 'smallint', nullable: true })
