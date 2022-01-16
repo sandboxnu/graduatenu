@@ -11,6 +11,10 @@ const ormconfig: TypeOrmModuleOptions = {
   password: process.env.DB_PASSWORD || '',
   synchronize: process.env.NODE_ENV !== 'production',
   entities: [Student],
+  migrations: ['src/migrations/*.ts'],
+  cli: {
+    migrationsDir: 'src/migrations',
+  },
 };
 
 export default ormconfig;
