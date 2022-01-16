@@ -1,18 +1,18 @@
 import { Entity, Column, PrimaryGeneratedColumn, BeforeInsert } from 'typeorm';
-import bcrypt from 'bcrypt';
+import * as bcrypt from 'bcrypt';
 
 @Entity()
 export class Student {
   @PrimaryGeneratedColumn('uuid')
   uuid: number;
 
-  @Column({ type: 'varchar' })
+  @Column()
   fullName: string;
 
-  @Column({ type: 'varchar', unique: true })
+  @Column({ unique: true })
   email: string;
 
-  @Column({ type: 'varchar' })
+  @Column()
   password: string;
 
   @Column({ type: 'smallint', nullable: true })
@@ -24,7 +24,7 @@ export class Student {
   @Column({ type: 'smallint', nullable: true })
   catalogYear: number;
 
-  @Column({ type: 'varchar', nullable: true })
+  @Column({ nullable: true })
   major: string;
 
   @BeforeInsert()
