@@ -13,10 +13,10 @@ export class StudentService {
     private studentRepository: Repository<Student>,
   ) {}
 
-  create(createStudentDto: CreateStudentDto): Promise<Student> {
+  async create(createStudentDto: CreateStudentDto): Promise<Student> {
     // make sure the user doesn't already exists
     const { email } = createStudentDto;
-    const userInDb = this.studentRepository.findOne({ where: { email } });
+    const userInDb = await this.studentRepository.findOne({ where: { email } });
     if (userInDb) {
       throw new Error('A user with the email is already registered');
     }
