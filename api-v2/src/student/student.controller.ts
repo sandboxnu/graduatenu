@@ -37,12 +37,16 @@ export class StudentController {
 
   @UseGuards(JwtAuthGuard)
   @Patch('/me')
-  updateMe(
+  async updateMe(
     @Req() req: AuthenticatedRequest,
     @Body() updateStudentDto: UpdateStudentDto,
   ): Promise<UpdateResult> {
     const uuid = req.user.uuid;
-    return this.studentService.update(uuid, updateStudentDto);
+    try {
+      return await this.studentService.update(uuid, updateStudentDto);
+    } catch (error) {
+      throw new BadRequestException(error.message);
+    }
   }
 
   @UseGuards(JwtAuthGuard)
@@ -85,16 +89,20 @@ export class StudentController {
     }
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(DevRoutesGuard)
   @Patch(':uuid')
-  update(
+  async update(
     @Param('uuid', new ParseUUIDPipe()) uuid: string,
     @Body() updateStudentDto: UpdateStudentDto,
   ): Promise<UpdateResult> {
-    return this.studentService.update(uuid, updateStudentDto);
+    try {
+      return await this.studentService.update(uuid, updateStudentDto);
+    } catch (error) {
+      throw new BadRequestException(error.message);
+    }
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(DevRoutesGuard)
   @Delete(':uuid')
   async remove(
     @Param('uuid', new ParseUUIDPipe()) uuid: string,

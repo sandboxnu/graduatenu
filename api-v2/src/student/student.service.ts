@@ -49,11 +49,19 @@ export class StudentService {
     return student;
   }
 
-  update(
+  async update(
     uuid: string,
     updateStudentDto: UpdateStudentDto,
   ): Promise<UpdateResult> {
-    return this.studentRepository.update(uuid, updateStudentDto);
+    const updateResult = await this.studentRepository.update(
+      uuid,
+      updateStudentDto,
+    );
+    if (updateResult.affected === 0) {
+      throw new Error('Student with given id is not found');
+    }
+
+    return updateResult;
   }
 
   async remove(uuid: string): Promise<DeleteResult> {
