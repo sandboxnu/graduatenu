@@ -18,10 +18,7 @@ export class StudentService {
     const { email } = createStudentDto;
     const userInDb = this.studentRepository.findOne({ where: { email } });
     if (userInDb) {
-      throw new HttpException(
-        'A user with the email is already registered',
-        HttpStatus.BAD_REQUEST,
-      );
+      throw new Error('A user with the email is already registered');
     }
 
     const newStudent = this.studentRepository.create(createStudentDto);
@@ -32,18 +29,21 @@ export class StudentService {
     return this.studentRepository.find();
   }
 
-  findOne(uuid: string): Promise<Student> {
-    return this.studentRepository.findOne(uuid);
+  async findOne(uuid: string): Promise<Student> {
+    const student = await this.studentRepository.findOne(uuid);
+    if (!student) {
+      throw new Error('Student with given id is not found');
+    }
+
+    return student;
   }
 
-  async findByLoginCreds({ email }: LoginStudentDto): Promise<Student> {
-    const student = await this.studentRepository.findOne({ where: { email } });
-
+  async findByEmail(email: string): Promise<Student> {
+    const student = await this.studentRepository.findOne({
+      where: { email },
+    });
     if (!student) {
-      throw new HttpException(
-        'Student with the given email id not found',
-        HttpStatus.NOT_FOUND,
-      );
+      throw new Error('Student with given id is not found');
     }
 
     return student;
@@ -56,7 +56,12 @@ export class StudentService {
     return this.studentRepository.update(uuid, updateStudentDto);
   }
 
-  remove(uuid: string): Promise<DeleteResult> {
-    return this.studentRepository.delete(uuid);
+  async remove(uuid: string): Promise<DeleteResult> {
+    const deleteResult = await this.studentRepository.delete(uuid);
+    if (deleteResult.affected === 0) {
+      throw new Error('Student with given id is not found');
+    }
+
+    return deleteResult;
   }
 }

@@ -7,6 +7,8 @@ import {
   Param,
   Delete,
   ParseUUIDPipe,
+  BadRequestException,
+  NotFoundException,
 } from '@nestjs/common';
 import { StudentService } from './student.service';
 import { CreateStudentDto } from './dto/create-student.dto';
@@ -19,8 +21,12 @@ export class StudentController {
   constructor(private readonly studentService: StudentService) {}
 
   @Post()
-  create(@Body() createStudentDto: CreateStudentDto): Promise<Student> {
-    return this.studentService.create(createStudentDto);
+  async create(@Body() createStudentDto: CreateStudentDto): Promise<Student> {
+    try {
+      return await this.studentService.create(createStudentDto);
+    } catch (error) {
+      throw new BadRequestException(error.message);
+    }
   }
 
   @Get()
@@ -29,8 +35,14 @@ export class StudentController {
   }
 
   @Get(':uuid')
-  findOne(@Param('uuid', new ParseUUIDPipe()) uuid: string): Promise<Student> {
-    return this.studentService.findOne(uuid);
+  async findOne(
+    @Param('uuid', new ParseUUIDPipe()) uuid: string,
+  ): Promise<Student> {
+    try {
+      return await this.studentService.findOne(uuid);
+    } catch (error) {
+      throw new BadRequestException(error.message);
+    }
   }
 
   @Patch(':uuid')
@@ -42,9 +54,13 @@ export class StudentController {
   }
 
   @Delete(':uuid')
-  remove(
+  async remove(
     @Param('uuid', new ParseUUIDPipe()) uuid: string,
   ): Promise<DeleteResult> {
-    return this.studentService.remove(uuid);
+    try {
+      return await this.studentService.remove(uuid);
+    } catch (error) {
+      throw new BadRequestException(error.message);
+    }
   }
 }

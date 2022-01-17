@@ -35,16 +35,21 @@ export class AuthService {
    * Else, throws an error.
    */
   async login(loginStudentDto: LoginStudentDto): Promise<Student> {
+    const { email, password } = loginStudentDto;
+
     // find student in db
-    const student = await this.studentService.findByLoginCreds(loginStudentDto);
+    const student = await this.studentService.findByEmail(email);
+
+    if (!student) {
+      throw new Error('Student with given email not found');
+    }
 
     // validate creds
-    const { password: hashedPassword } = student;
-    const { password: loginPassword } = loginStudentDto;
-    const isValidPassword = await bcrypt.compare(loginPassword, hashedPassword);
+    const { password: trueHashedPassword } = student;
+    const isValidPassword = await bcrypt.compare(password, trueHashedPassword);
 
     if (!isValidPassword) {
-      throw new HttpException('Invalid password', HttpStatus.UNAUTHORIZED);
+      throw new Error('Invalid password');
     }
 
     // generate and sign token
@@ -70,7 +75,7 @@ export class AuthService {
     const student = await this.studentService.findOne(uuid);
 
     if (!student) {
-      throw new HttpException('Invalid token', HttpStatus.UNAUTHORIZED);
+      throw new Error('Invalid token');
     }
 
     return student;

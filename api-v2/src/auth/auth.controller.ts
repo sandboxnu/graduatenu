@@ -1,4 +1,10 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import {
+  BadRequestException,
+  Body,
+  Controller,
+  Post,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { CreateStudentDto } from 'src/student/dto/create-student.dto';
 import { Student } from 'src/student/entities/student.entity';
 import { AuthService } from './auth.service';
@@ -12,11 +18,19 @@ export class AuthController {
   public async register(
     @Body() createStudentDto: CreateStudentDto,
   ): Promise<Student> {
-    return this.authService.register(createStudentDto);
+    try {
+      return await this.authService.register(createStudentDto);
+    } catch (error) {
+      throw new BadRequestException(error.message);
+    }
   }
 
   @Post('login')
   public async login(@Body() loginUserDto: LoginStudentDto): Promise<Student> {
-    return await this.authService.login(loginUserDto);
+    try {
+      return await this.authService.login(loginUserDto);
+    } catch (error) {
+      throw new UnauthorizedException(error.message);
+    }
   }
 }
