@@ -5,7 +5,7 @@ import { Exclude } from 'class-transformer';
 @Entity()
 export class Student {
   @PrimaryGeneratedColumn('uuid')
-  uuid: number;
+  uuid: string;
 
   @Column()
   fullName: string;
@@ -28,6 +28,9 @@ export class Student {
 
   @Column({ nullable: true })
   major: string;
+
+  // attached to the student object when the student is logs in
+  accessToken: string;
 
   @BeforeInsert()
   async hashPassword() {

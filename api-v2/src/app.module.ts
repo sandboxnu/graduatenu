@@ -10,7 +10,10 @@ import { AuthModule } from './auth/auth.module';
 @Module({
   imports: [
     TypeOrmModule.forRoot(ormconfig),
-    ConfigModule.forRoot({ envFilePath: ['.env.development'], isGlobal: true }),
+    ConfigModule.forRoot({
+      envFilePath: [`.env.${process.env.NODE_ENV}`],
+      isGlobal: true,
+    }),
     StudentModule,
     AuthModule,
   ],
