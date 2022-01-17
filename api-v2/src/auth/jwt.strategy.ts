@@ -1,4 +1,9 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import {
+  HttpException,
+  HttpStatus,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
@@ -28,13 +33,11 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
    * - Else stores the return value(student) in the request object
    * @param jwtPayload decoded payload stored in the JWT
    */
-  validate(jwtPayload: JwtPayload): Promise<Student> {
-    const student = this.authService.validateJwtPayload(jwtPayload);
-
-    if (!student) {
-      throw new Error('Invalid token');
+  async validate(jwtPayload: JwtPayload): Promise<Student> {
+    try {
+      return await this.authService.validateJwtPayload(jwtPayload);
+    } catch (_error) {
+      throw new UnauthorizedException('Invalid JWT');
     }
-
-    return student;
   }
 }

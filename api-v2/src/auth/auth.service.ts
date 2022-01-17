@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { CreateStudentDto } from 'src/student/dto/create-student.dto';
 import { Student } from 'src/student/entities/student.entity';
@@ -72,12 +72,6 @@ export class AuthService {
    * is valid and belongs to a student in the db.
    */
   async validateJwtPayload({ uuid }: JwtPayload): Promise<Student> {
-    const student = await this.studentService.findOne(uuid);
-
-    if (!student) {
-      return null;
-    }
-
-    return student;
+    return await this.studentService.findOne(uuid);
   }
 }
