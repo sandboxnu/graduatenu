@@ -73,7 +73,7 @@
   "scripts": {
     "start": "react-app-rewired start start",
     "build": "CI=false react-app-rewired build",
-    "test": "jest",
+    "test": "jest --updateSnapshot",
     "eject": "react-app-rewired eject",
     "type-check": "tsc --noEmit"
   },
