@@ -25,11 +25,16 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   /**
    * Called once the JWT in the request is validated by the passport middlware.
    * - Throws an error when the payload is invalid(uuid of the student doesn't exist)
-   * - Else stores the return value(student) in the reqeust object
-   * @param jwtPayload Decoded payload stored in the JWT
+   * - Else stores the return value(student) in the request object
+   * @param jwtPayload decoded payload stored in the JWT
    */
   validate(jwtPayload: JwtPayload): Promise<Student> {
-    // Use the auth service to validate the JWT Payload(throws an error if invalid)
-    return this.authService.validateJwtPayload(jwtPayload);
+    const student = this.authService.validateJwtPayload(jwtPayload);
+
+    if (!student) {
+      throw new Error('Invalid token');
+    }
+
+    return student;
   }
 }

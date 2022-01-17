@@ -75,7 +75,7 @@ export class AuthService {
     const student = await this.studentService.findOne(uuid);
 
     if (!student) {
-      throw new Error('Invalid token');
+      return null;
     }
 
     return student;
