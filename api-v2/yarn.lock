@@ -371,6 +371,11 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
+"@golevelup/ts-jest@^0.3.2":
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/@golevelup/ts-jest/-/ts-jest-0.3.2.tgz#ea199827fb77cd52a0d013796460ce884f0fe7ec"
+  integrity sha512-hv+j/vau2oj5CuhY1CrTs48Qu+ZVXpm/56OzKcL2KVN8+yc0ZIMbvTIld1wbrT1RrvAuwfDmUM2s3aSy7veuwg==
+
 "@humanwhocodes/config-array@^0.9.2":
   version "0.9.2"
   resolved "https://registry.yarnpkg.com/@humanwhocodes/config-array/-/config-array-0.9.2.tgz#68be55c737023009dfc5fe245d51181bb6476914"
