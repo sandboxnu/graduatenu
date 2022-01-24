@@ -1,9 +1,4 @@
-import {
-  HttpException,
-  HttpStatus,
-  Injectable,
-  UnauthorizedException,
-} from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
@@ -16,7 +11,7 @@ import { JwtPayload } from './interfaces/jwt-payload';
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(
     private readonly authService: AuthService,
-    private configService: ConfigService<EnvironmentVariables, true>,
+    configService: ConfigService<EnvironmentVariables, true>,
   ) {
     super({
       // Extract JWT from the Auth header in the request as a bearer token

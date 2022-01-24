@@ -1,5 +1,4 @@
 import { IsArray, IsInt, IsObject, IsString, Max, Min } from 'class-validator';
-import { Student } from 'src/student/entities/student.entity';
 import { Schedule } from '../../../../common/types';
 import { CourseWarning, IWarning } from '../../../../frontend/src/models/types';
 

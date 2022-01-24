@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { errorMonitor } from 'events';
 import { Student } from 'src/student/entities/student.entity';
 import { StudentService } from 'src/student/student.service';
 import { Repository } from 'typeorm';
