@@ -21,6 +21,10 @@ export class Plan {
   @ManyToOne(
     () => Student,
     student => student.plans,
+    {
+      cascade: true,
+      onDelete: 'CASCADE',
+    },
   )
   student: Student;
 

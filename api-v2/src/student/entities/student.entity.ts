@@ -57,7 +57,6 @@ export class Student {
   @OneToMany(
     () => Plan,
     plan => plan.student,
-    { cascade: true },
   )
   plans: Plan[];
 
