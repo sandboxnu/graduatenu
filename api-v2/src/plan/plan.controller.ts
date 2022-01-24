@@ -39,8 +39,7 @@ export class PlanController {
     }
   }
 
-  @UseGuards(JwtAuthGuard)
-  @UseGuards(OwnPlanGuard)
+  @UseGuards(JwtAuthGuard, OwnPlanGuard)
   @Get(':id')
   async findOne(@Param('id', ParseIntPipe) id: number): Promise<Plan> {
     try {
@@ -50,8 +49,7 @@ export class PlanController {
     }
   }
 
-  @UseGuards(JwtAuthGuard)
-  @UseGuards(OwnPlanGuard)
+  @UseGuards(JwtAuthGuard, OwnPlanGuard)
   @Patch(':id')
   async update(
     @Param('id', ParseIntPipe) id: number,
@@ -65,7 +63,7 @@ export class PlanController {
   }
 
   @Delete(':id')
-  @UseGuards(OwnPlanGuard)
+  @UseGuards(JwtAuthGuard, OwnPlanGuard)
   remove(@Param('id', ParseIntPipe) id: number) {
     try {
       return this.planService.remove(id);
