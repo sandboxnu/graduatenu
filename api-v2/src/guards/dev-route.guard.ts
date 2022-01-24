@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
  * Guards dev routes so that they are not accessible in production.
  */
 @Injectable()
-export class DevRoutesGuard implements CanActivate {
+export class DevRouteGuard implements CanActivate {
   canActivate(
     _context: ExecutionContext,
   ): boolean | Promise<boolean> | Observable<boolean> {
