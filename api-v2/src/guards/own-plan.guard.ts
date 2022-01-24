@@ -14,9 +14,7 @@ import { Student } from 'src/student/entities/student.entity';
  */
 @Injectable()
 export class OwnPlanGuard implements CanActivate {
-  constructor(
-    @Inject('PlanService') private readonly planService: PlanService,
-  ) {}
+  constructor(@Inject(PlanService) private readonly planService: PlanService) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
     // allow any controller methods that aren't a part of the Plan controller
