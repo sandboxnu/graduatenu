@@ -7,6 +7,7 @@ import { Repository } from 'typeorm';
 import { CreatePlanDto } from './dto/create-plan.dto';
 import { UpdatePlanDto } from './dto/update-plan.dto';
 import { Plan } from './entities/plan.entity';
+import { PlanNotFound } from './plan-not-found.error';
 
 @Injectable()
 export class PlanService {
@@ -32,7 +33,7 @@ export class PlanService {
     });
 
     if (!plan) {
-      throw new Error('Plan not found');
+      throw new PlanNotFound(id);
     }
 
     return plan;
@@ -59,7 +60,7 @@ export class PlanService {
 
     if (updateResult.affected === 0) {
       // no plan was updated, which implies a plan with the given id wasn't found
-      throw new Error('Plan with given id is not found');
+      throw new PlanNotFound(id);
     }
 
     return updateResult;
@@ -69,7 +70,7 @@ export class PlanService {
     const deleteResult = await this.planRepository.delete(id);
 
     if (deleteResult.affected === 0) {
-      throw new Error('Plan with given id is not found');
+      throw new PlanNotFound(id);
     }
 
     return deleteResult;

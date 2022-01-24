@@ -1,16 +1,15 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { LoginStudentDto } from 'src/auth/dto/login-student.dto';
 import {
   DeleteResult,
   FindOneOptions,
-  FindOptionsUtils,
   Repository,
   UpdateResult,
 } from 'typeorm';
 import { CreateStudentDto } from './dto/create-student.dto';
 import { UpdateStudentDto } from './dto/update-student.dto';
 import { Student } from './entities/student.entity';
+import { StudentNotFound } from './student-not-found.error';
 
 @Injectable()
 export class StudentService {
@@ -71,7 +70,7 @@ export class StudentService {
     const student = await this.studentRepository.findOne(findOptions);
 
     if (!student) {
-      throw new Error('Student not found');
+      throw new StudentNotFound();
     }
 
     return student;
@@ -87,7 +86,7 @@ export class StudentService {
     );
 
     if (updateResult.affected === 0) {
-      throw new Error('Student with given id is not found');
+      throw new StudentNotFound();
     }
 
     return updateResult;
@@ -97,7 +96,7 @@ export class StudentService {
     const deleteResult = await this.studentRepository.delete(uuid);
 
     if (deleteResult.affected === 0) {
-      throw new Error('Student with given id is not found');
+      throw new StudentNotFound();
     }
 
     return deleteResult;
