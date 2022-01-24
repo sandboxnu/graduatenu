@@ -1,14 +1,16 @@
 import {
   Column,
   CreateDateColumn,
+  Entity,
   ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { CourseWarning, IWarning } from '../../../../frontend/src/models/types';
 import { Schedule } from '../../../../common/types';
-import { Student } from 'src/student/entities/student.entity';
+import { Student } from '../../student/entities/student.entity';
 
+@Entity()
 export class Plan {
   @PrimaryGeneratedColumn()
   id: number;
