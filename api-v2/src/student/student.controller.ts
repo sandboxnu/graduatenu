@@ -20,7 +20,7 @@ import { UpdateStudentDto } from './dto/update-student.dto';
 import { DeleteResult, UpdateResult } from 'typeorm';
 import { Student } from './entities/student.entity';
 import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
-import { DevRouteGuard } from 'src/guards/dev-routes.guard';
+import { DevRouteGuard } from 'src/guards/dev-route.guard';
 import { AuthenticatedRequest } from 'src/auth/interfaces/authenticated-request';
 
 @Controller('students')
@@ -72,7 +72,6 @@ export class StudentController {
   @Post()
   async create(@Body() createStudentDto: CreateStudentDto): Promise<Student> {
     try {
-      console.log('In handler');
       return await this.studentService.create(createStudentDto);
     } catch (error) {
       throw new BadRequestException(error.message);

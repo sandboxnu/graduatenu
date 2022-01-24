@@ -31,7 +31,6 @@ export class StudentService {
     try {
       return this.studentRepository.save(newStudent);
     } catch (error) {
-      console.log('ERROR: ', error);
       throw new Error(error.message);
     }
   }
