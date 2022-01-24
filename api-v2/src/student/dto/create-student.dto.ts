@@ -6,12 +6,17 @@ import {
   Max,
   Min,
   IsOptional,
+  IsObject,
 } from 'class-validator';
+import { ScheduleCourse } from '../../../../common/types';
 
 export class CreateStudentDto {
   @IsNotEmpty()
   @IsString()
   fullName: string;
+
+  @IsString()
+  nuid: string;
 
   @IsNotEmpty()
   @IsEmail()
@@ -42,4 +47,24 @@ export class CreateStudentDto {
   @IsOptional()
   @IsString()
   major?: string;
+
+  @IsOptional()
+  @IsString()
+  coopCycle?: string;
+
+  @IsOptional()
+  @IsObject()
+  coursesCompleted?: ScheduleCourse[];
+
+  @IsOptional()
+  @IsObject()
+  coursesTransfered?: ScheduleCourse[];
+
+  @IsOptional()
+  @IsInt()
+  primaryPlanId?: number;
+
+  @IsOptional()
+  @IsString()
+  concentration?: string;
 }

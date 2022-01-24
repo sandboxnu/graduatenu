@@ -1,0 +1,35 @@
+import { IsArray, IsInt, IsObject, IsString, Max, Min } from 'class-validator';
+import { Student } from 'src/student/entities/student.entity';
+import { Schedule } from '../../../../common/types';
+import { CourseWarning, IWarning } from '../../../../frontend/src/models/types';
+
+export class CreatePlanDto {
+  @IsString()
+  name: string;
+
+  @IsObject()
+  student: Student;
+
+  @IsObject()
+  schedule: Schedule;
+
+  @IsString()
+  major: string;
+
+  @IsString()
+  coopCycle: string;
+
+  @IsString()
+  concentration: string;
+
+  @IsInt()
+  @Min(1898)
+  @Max(3000)
+  catalogYear: number;
+
+  @IsArray()
+  courseWarnings: CourseWarning[];
+
+  @IsArray()
+  warnings: IWarning[];
+}
