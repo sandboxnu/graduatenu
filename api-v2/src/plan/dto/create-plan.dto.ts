@@ -8,9 +8,6 @@ export class CreatePlanDto {
   name: string;
 
   @IsObject()
-  student: Student;
-
-  @IsObject()
   schedule: Schedule;
 
   @IsString()
