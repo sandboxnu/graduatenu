@@ -1,7 +1,13 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { LoginStudentDto } from 'src/auth/dto/login-student.dto';
-import { DeleteResult, Repository, UpdateResult } from 'typeorm';
+import {
+  DeleteResult,
+  FindOneOptions,
+  FindOptionsUtils,
+  Repository,
+  UpdateResult,
+} from 'typeorm';
 import { CreateStudentDto } from './dto/create-student.dto';
 import { UpdateStudentDto } from './dto/update-student.dto';
 import { Student } from './entities/student.entity';
@@ -22,28 +28,51 @@ export class StudentService {
     }
 
     const newStudent = this.studentRepository.create(createStudentDto);
-    return this.studentRepository.save(newStudent);
+    try {
+      return this.studentRepository.save(newStudent);
+    } catch (error) {
+      console.log('ERROR: ', error);
+      throw new Error(error.message);
+    }
   }
 
   findAll(): Promise<Student[]> {
     return this.studentRepository.find();
   }
 
-  async findOne(uuid: string): Promise<Student> {
-    const student = await this.studentRepository.findOne(uuid);
-    if (!student) {
-      throw new Error('Student with given id is not found');
+  async findByUuid(
+    uuid: string,
+    isWithPlans: boolean = false,
+  ): Promise<Student> {
+    const findOptions: FindOneOptions<Student> = { where: { uuid } };
+
+    if (isWithPlans) {
+      findOptions.relations = ['plans'];
     }
 
-    return student;
+    return this.findOne(findOptions);
   }
 
-  async findByEmail(email: string): Promise<Student> {
-    const student = await this.studentRepository.findOne({
-      where: { email },
-    });
+  async findByEmail(
+    email: string,
+    isWithPlans: boolean = false,
+  ): Promise<Student> {
+    const findOptions: FindOneOptions<Student> = { where: { email } };
+
+    if (isWithPlans) {
+      findOptions.relations = ['plans'];
+    }
+
+    return this.findOne(findOptions);
+  }
+
+  private async findOne(
+    findOptions: FindOneOptions<Student>,
+  ): Promise<Student> {
+    const student = await this.studentRepository.findOne(findOptions);
+
     if (!student) {
-      throw new Error('Student with given id is not found');
+      throw new Error('Student not found');
     }
 
     return student;
@@ -57,6 +86,7 @@ export class StudentService {
       uuid,
       updateStudentDto,
     );
+
     if (updateResult.affected === 0) {
       throw new Error('Student with given id is not found');
     }
@@ -66,10 +96,15 @@ export class StudentService {
 
   async remove(uuid: string): Promise<DeleteResult> {
     const deleteResult = await this.studentRepository.delete(uuid);
+
     if (deleteResult.affected === 0) {
       throw new Error('Student with given id is not found');
     }
 
     return deleteResult;
+  }
+
+  static compareStudents(student1: Student, student2: Student): boolean {
+    return student1.uuid === student2.uuid;
   }
 }

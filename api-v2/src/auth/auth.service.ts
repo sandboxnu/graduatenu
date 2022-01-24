@@ -72,6 +72,6 @@ export class AuthService {
    * is valid and belongs to a student in the db.
    */
   async validateJwtPayload({ uuid }: JwtPayload): Promise<Student> {
-    return await this.studentService.findOne(uuid);
+    return await this.studentService.findByUuid(uuid);
   }
 }

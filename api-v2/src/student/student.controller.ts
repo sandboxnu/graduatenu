@@ -10,6 +10,9 @@ import {
   BadRequestException,
   UseGuards,
   Req,
+  Query,
+  ParseBoolPipe,
+  DefaultValuePipe,
 } from '@nestjs/common';
 import { StudentService } from './student.service';
 import { CreateStudentDto } from './dto/create-student.dto';
@@ -17,19 +20,23 @@ import { UpdateStudentDto } from './dto/update-student.dto';
 import { DeleteResult, UpdateResult } from 'typeorm';
 import { Student } from './entities/student.entity';
 import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
-import { DevRoutesGuard } from 'src/guards/dev-routes.guard';
+import { DevRouteGuard } from 'src/guards/dev-routes.guard';
 import { AuthenticatedRequest } from 'src/auth/interfaces/authenticated-request';
 
-@Controller('student')
+@Controller('students')
 export class StudentController {
   constructor(private readonly studentService: StudentService) {}
 
   @UseGuards(JwtAuthGuard)
   @Get('/me')
-  async getMe(@Req() req: AuthenticatedRequest): Promise<Student> {
+  async getMe(
+    @Req() req: AuthenticatedRequest,
+    @Query('isWithPlans', new DefaultValuePipe(false), ParseBoolPipe)
+    isWithPlans: boolean,
+  ): Promise<Student> {
     try {
       const uuid = req.user.uuid;
-      return await this.studentService.findOne(uuid);
+      return await this.studentService.findByUuid(uuid, isWithPlans);
     } catch (error) {
       throw new BadRequestException(error.message);
     }
@@ -61,35 +68,36 @@ export class StudentController {
   }
 
   // The following routes are only available in development
-  @UseGuards(DevRoutesGuard)
+  @UseGuards(DevRouteGuard)
   @Post()
   async create(@Body() createStudentDto: CreateStudentDto): Promise<Student> {
     try {
+      console.log('In handler');
       return await this.studentService.create(createStudentDto);
     } catch (error) {
       throw new BadRequestException(error.message);
     }
   }
 
-  @UseGuards(DevRoutesGuard)
+  @UseGuards(DevRouteGuard)
   @Get()
   findAll(): Promise<Student[]> {
     return this.studentService.findAll();
   }
 
-  @UseGuards(DevRoutesGuard)
+  @UseGuards(DevRouteGuard)
   @Get(':uuid')
   async findOne(
     @Param('uuid', new ParseUUIDPipe()) uuid: string,
   ): Promise<Student> {
     try {
-      return await this.studentService.findOne(uuid);
+      return await this.studentService.findByUuid(uuid);
     } catch (error) {
       throw new BadRequestException(error.message);
     }
   }
 
-  @UseGuards(DevRoutesGuard)
+  @UseGuards(DevRouteGuard)
   @Patch(':uuid')
   async update(
     @Param('uuid', new ParseUUIDPipe()) uuid: string,
@@ -102,7 +110,7 @@ export class StudentController {
     }
   }
 
-  @UseGuards(DevRoutesGuard)
+  @UseGuards(DevRouteGuard)
   @Delete(':uuid')
   async remove(
     @Param('uuid', new ParseUUIDPipe()) uuid: string,
