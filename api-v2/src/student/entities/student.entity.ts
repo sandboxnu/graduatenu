@@ -10,7 +10,7 @@ import {
 import * as bcrypt from 'bcrypt';
 import { Exclude } from 'class-transformer';
 import { ScheduleCourse } from '../../../../common/types';
-import { Plan } from 'src/plan/entities/plan.entity';
+import { Plan } from '../../plan/entities/plan.entity';
 
 @Entity()
 export class Student {
