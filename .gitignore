@@ -131,3 +131,8 @@ yarn-error.log*
 .idea/
 graduatenu.code-workspace
 api/config/local_env.yml
+
+# api-v2
+!api-v2/**/*.json
+api-v2/dist
+
