@@ -9,7 +9,7 @@ import {
 import { CreateStudentDto } from './dto/create-student.dto';
 import { UpdateStudentDto } from './dto/update-student.dto';
 import { Student } from './entities/student.entity';
-import { StudentNotFound } from './student-not-found.error';
+import { StudentNotFoundError } from './student-not-found.error';
 
 @Injectable()
 export class StudentService {
@@ -70,7 +70,7 @@ export class StudentService {
     const student = await this.studentRepository.findOne(findOptions);
 
     if (!student) {
-      throw new StudentNotFound();
+      throw new StudentNotFoundError();
     }
 
     return student;
@@ -86,7 +86,7 @@ export class StudentService {
     );
 
     if (updateResult.affected === 0) {
-      throw new StudentNotFound();
+      throw new StudentNotFoundError();
     }
 
     return updateResult;
@@ -96,7 +96,7 @@ export class StudentService {
     const deleteResult = await this.studentRepository.delete(uuid);
 
     if (deleteResult.affected === 0) {
-      throw new StudentNotFound();
+      throw new StudentNotFoundError();
     }
 
     return deleteResult;
