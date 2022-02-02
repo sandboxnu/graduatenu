@@ -2,7 +2,7 @@ import * as React from "react";
 import styled from "styled-components";
 import { YearTop } from ".";
 import { SemesterBlock } from "../";
-import { DNDSchedule } from "../../models/types";
+import { DNDSchedule, DNDScheduleTerm } from "../../models/types";
 import { SEMESTER_MIN_HEIGHT } from "../../constants";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
@@ -15,7 +15,7 @@ import { AppState } from "../../state/reducers/state";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
 import { toggleYearExpandedForActivePlanAction } from "../../state/actions/userPlansActions";
-import { ScheduleCourse } from "../../../../common/types";
+import { ScheduleCourse, StatusEnum } from "../../../../common/types";
 
 interface ReduxStoreYearProps {
   academicYear: number;
