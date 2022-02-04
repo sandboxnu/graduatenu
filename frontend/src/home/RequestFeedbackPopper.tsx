@@ -46,7 +46,7 @@ const CalendarContainer = styled.div`
 `;
 
 const StepNumber = styled.div`
-  color: ${NORTHEASTERN_RED}
+  color: ${NORTHEASTERN_RED};
   font-size: 20px;
   font-weight: 800;
   margin: 10px;
@@ -233,7 +233,9 @@ export const RequestFeedbackPopper: React.FC = () => {
         </CalendarContainer>
         <RequestApprovalButton />
       </DefaultModal>
-      <ApprovalStatusButton />
+      {process.env.REACT_APP_FEEDBACK_BUTTON == "true" && (
+        <ApprovalStatusButton />
+      )}
     </>
   );
 };
