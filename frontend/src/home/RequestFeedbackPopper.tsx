@@ -15,6 +15,7 @@ import { useDebouncedEffect } from "../hooks/useDebouncedEffect";
 import { requestApproval } from "../services/PlanService";
 import { WhiteColorButton } from "../components/common/ColoredButtons";
 import { NORTHEASTERN_RED } from "../constants";
+import { FEEDBACK_BUTTON_FLAG } from "../constants/FeatureFlag";
 
 const SCHEDULE_APPOINTMENT_LINK =
   "https://northeastern.campus.eab.com/student/appointments/new";
@@ -233,9 +234,7 @@ export const RequestFeedbackPopper: React.FC = () => {
         </CalendarContainer>
         <RequestApprovalButton />
       </DefaultModal>
-      {process.env.REACT_APP_FEEDBACK_BUTTON == "true" && (
-        <ApprovalStatusButton />
-      )}
+      {FEEDBACK_BUTTON_FLAG && <ApprovalStatusButton />}
     </>
   );
 };
