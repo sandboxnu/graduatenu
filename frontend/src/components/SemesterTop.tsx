@@ -19,7 +19,7 @@ const Container = styled.div`
   box-sizing: border-box;
   margin-top: 0px;
   padding: 0px;
-  width: 90%;
+  width: 100%;
 `;
 
 const SemesterText = styled.p`
@@ -54,12 +54,12 @@ type Props = SemesterTopProps &
   SemesterTopState;
 
 interface SemesterTopState {
-  tappedSemester: SeasonWord | null;
+  tappedSemester?: SeasonWord;
   status: Status;
   semester: String;
 }
 
-const SemesterTopComponent = (props: Props) => {
+export const SemesterTopComponent = (props: Props) => {
   const [tappedSemester, setTappedSemester] = React.useState(null);
   const [status, setStatus] = React.useState(props.status);
 

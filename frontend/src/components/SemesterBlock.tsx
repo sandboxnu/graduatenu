@@ -42,7 +42,8 @@ import { UndoDelete } from "./UndoDelete";
 import ScheduleChangeTracker from "../utils/ScheduleChangeTracker";
 
 const OutsideContainer = styled.div`
-  width: 25%;
+  width: 100%;
+  height: 90%;
 `;
 
 const Container = styled.div<any>`

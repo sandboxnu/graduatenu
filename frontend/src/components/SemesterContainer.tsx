@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 import { ScheduleCourse, SeasonWord, StatusEnum } from "../../../common/types";
 import { DNDSchedule, DNDScheduleTerm } from "../models/types";
 import { SemesterBlock } from "./SemesterBlock";
@@ -12,11 +13,16 @@ interface SemesterContainerProps {
   schedule: DNDSchedule;
   transferCourses: ScheduleCourse[];
   semesterWord: SeasonWord;
+  isExpanded: boolean;
 }
 
-const SemesterContainer = (props: SemesterContainerProps) => {
+const SemesterContainerWrapper = styled.div<any>`
+  width: 24%;
+`;
+
+export const SemesterContainer = (props: SemesterContainerProps) => {
   return (
-    <div>
+    <SemesterContainerWrapper>
       <SemesterTop
         year={props.year}
         status={props.semesterStatus}
@@ -25,8 +31,13 @@ const SemesterContainer = (props: SemesterContainerProps) => {
         transferCourses={props.transferCourses}
         semester={props.semesterWord}
       />
-      <SemesterBlock isEditable={props.isEditable} semester={props.semester} />
-    </div>
+      {props.isExpanded && (
+        <SemesterBlock
+          isEditable={props.isEditable}
+          semester={props.semester}
+        />
+      )}
+    </SemesterContainerWrapper>
   );
 };
 

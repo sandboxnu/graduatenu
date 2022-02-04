@@ -15,7 +15,12 @@ import { AppState } from "../../state/reducers/state";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
 import { toggleYearExpandedForActivePlanAction } from "../../state/actions/userPlansActions";
-import { ScheduleCourse, StatusEnum } from "../../../../common/types";
+import {
+  ScheduleCourse,
+  SeasonWord,
+  StatusEnum,
+} from "../../../../common/types";
+import SemesterContainer from "../SemesterContainer";
 
 interface ReduxStoreYearProps {
   academicYear: number;
@@ -40,7 +45,7 @@ const YearTopWrapper = styled.div<any>`
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   margin-left: ${props => (props.collapsibleYears ? "-28px" : "-4px")};
 `;
 
@@ -48,6 +53,14 @@ const YearBody = styled.div`
   display: flex;
   flex-direction: row;
   min-height: ${SEMESTER_MIN_HEIGHT}px;
+`;
+
+const SemestersWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: space-between;
+  width: 100%;
 `;
 
 class YearComponent extends React.Component<Props> {
@@ -65,7 +78,7 @@ class YearComponent extends React.Component<Props> {
         <YearTopWrapper collapsibleYears={collapsibleYears}>
           <div
             onClick={this.handleExpandedChange.bind(this)}
-            style={{ marginRight: 4 }}
+            style={{ marginRight: 4, marginTop: 5 }}
           >
             {collapsibleYears &&
               (isExpanded ? (
@@ -74,37 +87,55 @@ class YearComponent extends React.Component<Props> {
                 <KeyboardArrowDownIcon />
               ))}
           </div>
-          <YearTop
-            year={year}
-            fallStatus={schedule.yearMap[year].fall.status}
-            springStatus={schedule.yearMap[year].spring.status}
-            summer1Status={schedule.yearMap[year].summer1.status}
-            summer2Status={schedule.yearMap[year].summer2.status}
-            schedule={schedule}
-            isEditable={isEditable}
-            transferCourses={this.props.transferCourses}
-          />
-        </YearTopWrapper>
-        {isExpanded && (
-          <YearBody>
-            <SemesterBlock
+          <SemestersWrapper>
+            <SemesterContainer
               isEditable={isEditable}
               semester={schedule.yearMap[year].fall}
+              year={year}
+              semesterStatus={schedule.yearMap[year].fall.status as StatusEnum}
+              schedule={schedule}
+              transferCourses={this.props.transferCourses}
+              semesterWord={"fall"}
+              isExpanded={isExpanded}
             />
-            <SemesterBlock
+            <SemesterContainer
               isEditable={isEditable}
               semester={schedule.yearMap[year].spring}
+              year={year}
+              semesterStatus={
+                schedule.yearMap[year].spring.status as StatusEnum
+              }
+              schedule={schedule}
+              transferCourses={this.props.transferCourses}
+              semesterWord={"spring"}
+              isExpanded={isExpanded}
             />
-            <SemesterBlock
+            <SemesterContainer
               isEditable={isEditable}
               semester={schedule.yearMap[year].summer1}
+              year={year}
+              semesterStatus={
+                schedule.yearMap[year].summer1.status as StatusEnum
+              }
+              schedule={schedule}
+              transferCourses={this.props.transferCourses}
+              semesterWord={"summer1"}
+              isExpanded={isExpanded}
             />
-            <SemesterBlock
+            <SemesterContainer
               isEditable={isEditable}
               semester={schedule.yearMap[year].summer2}
+              year={year}
+              semesterStatus={
+                schedule.yearMap[year].summer2.status as StatusEnum
+              }
+              schedule={schedule}
+              transferCourses={this.props.transferCourses}
+              semesterWord={"summer2"}
+              isExpanded={isExpanded}
             />
-          </YearBody>
-        )}
+          </SemestersWrapper>
+        </YearTopWrapper>
       </div>
     );
   }
