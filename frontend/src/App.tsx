@@ -23,44 +23,48 @@ import { GenericStudentView } from "./advising/ManageStudents/GenericStudentView
 import { LoginScreen } from "./Onboarding/LoginScreen";
 import { SignupScreen } from "./Onboarding/SignupScreen";
 import ErrorHandler from "./error/ErrorHandler";
+import { ErrorBoundary } from "react-error-boundary";
+import { FrontendErrorPage } from "./error/ErrorPages";
 
 export const App = ({ store }: { store: Store }) => {
   return (
     <Provider store={store}>
       <Router>
-        <ErrorHandler>
-          <Switch>
-            {/* requires login */}
-            <ProtectedRoute path="/home" component={HomeWrapper} />
-            <ProtectedRoute path="/redirect" component={RedirectScreen} />
-            <ProtectedRoute
-              path="/onboarding"
-              component={OnboardingInfoScreen}
-            />
-            <ProtectedRoute path="/profile" component={Profile} />
-            <ProtectedRoute
-              path="/management"
-              component={CourseManagmentPage}
-            />
-            <ProtectedRoute
-              path="/completedCourses"
-              component={CompletedCoursesScreen}
-            />
-            <ProtectedRoute
-              path="/transferCourses"
-              component={TransferCoursesScreen}
-            />
-            <ProtectedRoute
-              path="/transferableCredits"
-              component={TransferableCreditScreen}
-            />
-            <ProtectedRoute path="/advisor" component={AdvisorRouter} />
-            {/* requires not logged in */}
-            <UnprotectedRoute path="/" component={LandingScreen} />
-            <Route path="/signup" component={SignupScreen} />
-            <Route path="/login" component={LoginScreen} />
-          </Switch>
-        </ErrorHandler>
+        <ErrorBoundary FallbackComponent={FrontendErrorPage}>
+          <ErrorHandler>
+            <Switch>
+              {/* requires login */}
+              <ProtectedRoute path="/home" component={HomeWrapper} />
+              <ProtectedRoute path="/redirect" component={RedirectScreen} />
+              <ProtectedRoute
+                path="/onboarding"
+                component={OnboardingInfoScreen}
+              />
+              <ProtectedRoute path="/profile" component={Profile} />
+              <ProtectedRoute
+                path="/management"
+                component={CourseManagmentPage}
+              />
+              <ProtectedRoute
+                path="/completedCourses"
+                component={CompletedCoursesScreen}
+              />
+              <ProtectedRoute
+                path="/transferCourses"
+                component={TransferCoursesScreen}
+              />
+              <ProtectedRoute
+                path="/transferableCredits"
+                component={TransferableCreditScreen}
+              />
+              <ProtectedRoute path="/advisor" component={AdvisorRouter} />
+              {/* requires not logged in */}
+              <UnprotectedRoute path="/" component={LandingScreen} />
+              <Route path="/signup" component={SignupScreen} />
+              <Route path="/login" component={LoginScreen} />
+            </Switch>
+          </ErrorHandler>
+        </ErrorBoundary>
       </Router>
     </Provider>
   );
