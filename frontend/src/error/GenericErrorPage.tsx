@@ -75,7 +75,13 @@ const ButtonWrapper = styled.div`
   width: 100%;
 `;
 
-export const ErrorPage = ({ statusCode }: { statusCode: number }) => {
+interface GenericErrorPageProps {
+  message: string;
+}
+
+export const GenericErrorPage: React.FC<GenericErrorPageProps> = ({
+  message,
+}: GenericErrorPageProps): JSX.Element => {
   const history = useHistory();
   return (
     <>
@@ -87,10 +93,7 @@ export const ErrorPage = ({ statusCode }: { statusCode: number }) => {
           <SadFace src={sadface} alt="Sad Face" />
           <MessageWrapper>
             <OhNo>Oh no!</OhNo>
-            <Message>
-              There was an error (code {statusCode}). We are unable to retrieve
-              the information you need.
-            </Message>
+            <Message>{message}</Message>
             <Message>
               Please&nbsp;
               <CustomLink onClick={() => history.go(0)}>
