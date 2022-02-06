@@ -24,6 +24,7 @@ import {
   getUserConcentrationFromState,
   getCompletedCourseScheduleFromState,
   getCompletedCourseCounterFromState,
+  getCompletedCoursesFromState,
 } from "../state";
 import { AppState } from "../state/reducers/state";
 import { addNewPlanAction } from "../state/actions/userPlansActions";
@@ -153,6 +154,7 @@ const TransferableCreditScreen: React.FC = () => {
     catalogYear,
     completedCourseSchedule,
     transferCourses,
+    coursesCompleted,
     allPlans,
     completedCourseCounter,
   } = useSelector(
@@ -164,6 +166,7 @@ const TransferableCreditScreen: React.FC = () => {
       graduationYear: getGraduationYearFromState(state)!,
       coopCycle: getUserCoopCycleFromState(state),
       transferCourses: safelyGetTransferCoursesFromState(state),
+      coursesCompleted: getCompletedCoursesFromState(state),
       completedCourseSchedule: getCompletedCourseScheduleFromState(state),
       completedCourseCounter: getCompletedCourseCounterFromState(state),
       catalogYear: getUserCatalogYearFromState(state),
@@ -179,61 +182,72 @@ const TransferableCreditScreen: React.FC = () => {
 
   const onSubmit = (): Promise<any> => {
     dispatch(setStudentExamCreditsAction(selectedTransferableExams));
-    {
-      /* // TODO: should create plan when user is created */
-    }
-    // const token = getAuthToken();
-    // const updateUserPromise = () =>
-    //   updateUser(
-    //     {
-    //       id: userId!,
-    //       token: token,
-    //     },
-    //     {
-    //       major: major,
-    //       academic_year: academicYear,
-    //       graduation_year: graduationYear,
-    //       coop_cycle: coopCycle,
-    //       concentration: concentration,
-    //       catalog_year: catalogYear,
-    //     }
-    //   );
+    const token = getAuthToken();
+    const updateUserPromise = () =>
+      updateUser(
+        {
+          id: userId!,
+          token: token,
+        },
+        {
+          major: major,
+          academic_year: academicYear,
+          graduation_year: graduationYear,
+          coop_cycle: coopCycle,
+          concentration: concentration,
+          catalog_year: catalogYear,
+          courses_transfer: transferCourses.map(course => {
+            return {
+              subject: course.subject,
+              course_id: course.classId,
+              completion: "TRANSFER",
+            };
+          }),
+          courses_completed: coursesCompleted.map(course => {
+            return {
+              subject: course.subject,
+              course_id: course.classId,
+              completion: "PASSED",
+            };
+          }),
+        }
+      );
 
-    // const createPlanPromise = () => {
-    //   let schedule, courseCounter;
-    //   // if (!!coopCycle) {
-    //   //   schedule = generateBlankCompletedCourseSchedule(
-    //   //     academicYear,
-    //   //     graduationYear,
-    //   //     completedCourseSchedule!,
-    //   //     major!,
-    //   //     coopCycle!,
-    //   //     allPlans
-    //   //   );
-    //   // } else {
-    //   schedule = generateBlankCompletedCourseScheduleNoCoopCycle(
-    //     academicYear,
-    //     graduationYear,
-    //     completedCourseSchedule!
-    //   );
-    //   // }
+    const createPlanPromise = () => {
+      let schedule, courseCounter;
+      // if (!!coopCycle) {
+      //   schedule = generateBlankCompletedCourseSchedule(
+      //     academicYear,
+      //     graduationYear,
+      //     completedCourseSchedule!,
+      //     major!,
+      //     coopCycle!,
+      //     allPlans
+      //   );
+      // } else {
+      schedule = generateBlankCompletedCourseScheduleNoCoopCycle(
+        academicYear,
+        graduationYear,
+        completedCourseSchedule!
+      );
+      // }
 
-    //   createPlanForUser(userId!, {
-    //     name: "Plan 1",
-    //     link_sharing_enabled: false,
-    //     schedule: schedule,
-    //     major: major,
-    //     coop_cycle: coopCycle,
-    //     concentration: concentration,
-    //     course_counter: completedCourseCounter || 0,
-    //     catalog_year: catalogYear,
-    //   }).then(response => {
-    //     dispatch(addNewPlanAction(response.plan, academicYear));
-    //     setPrimaryPlan(userId, response.plan.id);
-    //   });
-    // };
+      createPlanForUser(userId!, {
+        name: "Plan 1",
+        link_sharing_enabled: false,
+        schedule: schedule,
+        major: major,
+        coop_cycle: coopCycle,
+        concentration: concentration,
+        course_counter: completedCourseCounter || 0,
+        catalog_year: catalogYear,
+      }).then(response => {
+        dispatch(addNewPlanAction(response.plan, academicYear));
+        setPrimaryPlan(userId, response.plan.id);
+      });
+    };
 
-    return Promise.all([]);
+    return Promise.all([updateUserPromise(), createPlanPromise()]);
   };
 
   return (

@@ -78,34 +78,26 @@ const SaveInParentConcentrationDropdown: React.FC<SaveInParentConcentrationDropd
     <>
       {/* This component will only show if concentrations exist for this major */}
       {shouldDisplayDropdown && (
-        <FormControl
-          variant="outlined"
-          error={hasError}
-          style={style}
+        <Autocomplete
+          disableListWrap
           fullWidth
-        >
-          <Autocomplete
-            disableListWrap
-            fullWidth
-            options={concentrationNames}
-            renderInput={params => (
-              <TextField
-                {...params}
-                variant="outlined"
-                label={useLabel ? "Concentration" : ""}
-                fullWidth
-                error={showError && hasError}
-              />
-            )}
-            value={concentration}
-            onChange={onChange}
-          />
-          <FormHelperText>
-            {showError &&
-              hasError &&
-              "A concentration is required for your selected major"}
-          </FormHelperText>
-        </FormControl>
+          style={style}
+          options={concentrationNames}
+          renderInput={params => (
+            <TextField
+              {...params}
+              variant="outlined"
+              label={useLabel ? "Concentration" : ""}
+              fullWidth
+              error={showError && hasError}
+              helperText={
+                showError && hasError && "A concentration is required."
+              }
+            />
+          )}
+          value={concentration}
+          onChange={onChange}
+        />
       )}
     </>
   );

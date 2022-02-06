@@ -1,6 +1,6 @@
 import { Form, Formik } from "formik";
 import { MenuItem, TextField, Tooltip } from "@material-ui/core";
-import React, { useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { RouteComponentProps, useHistory, withRouter } from "react-router";
 import { Dispatch } from "redux";
@@ -18,38 +18,15 @@ import {
 } from "../state/actions/studentActions";
 import { addNewPlanAction } from "../state/actions/userPlansActions";
 import { GenericOnboardingTemplate } from "./GenericOnboarding";
-import {
-  getMajorsFromState,
-  getMajorsLoadingFlagFromState,
-  getStudentFromState,
-  getUserMajorFromState,
-} from "../state";
+import { getMajorsFromState, getStudentFromState } from "../state";
 import { Major } from "../../../common/types";
 import { AppState } from "../state/reducers/state";
 import { Autocomplete } from "@material-ui/lab";
 import { SaveInParentConcentrationDropdown } from "../components/ConcentrationDropdown";
 import { BASE_FORMATTED_COOP_CYCLES } from "../plans/coopCycles";
 import { nullOrNumber, nullOrString } from "../utils/plan-helpers";
-import { LoadingSpinner } from "../components/common/LoadingSpinner";
 import { NextButton } from "../components/common/NextButton";
 import { createInitialStudent } from "../utils/student-helpers";
-
-const Wrapper = styled.div`
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  align-items: center;
-  height: 100vh;
-`;
-
-const Title = styled.div`
-  margin-top: 96px;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 24px;
-  line-height: 28px;
-  color: #000000;
-`;
 
 const StyleForm = styled(Form)`
   display: flex;
@@ -71,8 +48,6 @@ interface OnboardingReduxDispatchProps {
 interface OnboardingReduxStateProps {
   student: IUserData | undefined;
   majors: Major[];
-  major: Major;
-  isFetchingMajors: boolean;
 }
 
 type Props = OnboardingReduxDispatchProps &
@@ -80,20 +55,16 @@ type Props = OnboardingReduxDispatchProps &
   RouteComponentProps<{}>;
 
 const OnboardingScreenComponent: React.FC<Props> = ({
-  student,
   majors,
-  isFetchingMajors,
-  setStudentAction,
+  setFullName,
+  setGraduationYear,
+  setCatalogYear,
+  setMajor,
+  setConcentration,
+  setCoopCycle,
 }: Props) => {
   const history = useHistory();
 
-  if (majors.length === 0) {
-    if (isFetchingMajors) {
-      return <LoadingSpinner />;
-    } else {
-      history.push("/");
-    }
-  }
   const catalogYearSet = [
     ...Array.from(new Set(majors.map(major => major.yearVersion.toString()))),
   ].sort();
@@ -152,25 +123,12 @@ const OnboardingScreenComponent: React.FC<Props> = ({
     concentration: string;
     coopCycle: string;
   }): void => {
-    // TODO: creates initial student in Sign up page
-    if (student == null) {
-      const user = createInitialStudent({
-        fullName: values.fullName,
-        graduationYear: nullOrNumber(parseInt(values.gradYear)),
-        catalogYear: nullOrNumber(parseInt(values.catalogYear)),
-        major: values.major,
-        concentration: nullOrString(values.concentration),
-        coopCycle: nullOrString(values.coopCycle),
-      });
-      setStudentAction(user);
-    } else {
-      setStudentFullNameAction(values.fullName);
-      setStudentGraduationYearAction(nullOrNumber(parseInt(values.gradYear)));
-      setStudentCatalogYearAction(nullOrNumber(parseInt(values.catalogYear)));
-      setStudentMajorAction(values.major);
-      setStudentConcentrationAction(nullOrString(values.concentration));
-      setStudentCoopCycleAction(nullOrString(values.coopCycle));
-    }
+    setFullName(values.fullName);
+    setGraduationYear(nullOrNumber(parseInt(values.gradYear)));
+    setCatalogYear(nullOrNumber(parseInt(values.catalogYear)));
+    setMajor(values.major);
+    setConcentration(nullOrString(values.concentration));
+    setCoopCycle(nullOrString(values.coopCycle));
 
     history.push("/completedCourses");
   };
@@ -334,7 +292,6 @@ const OnboardingScreenComponent: React.FC<Props> = ({
 const mapStateToProps = (state: AppState) => ({
   student: getStudentFromState(state),
   majors: getMajorsFromState(state),
-  isFetchingMajors: getMajorsLoadingFlagFromState(state),
 });
 
 /**
