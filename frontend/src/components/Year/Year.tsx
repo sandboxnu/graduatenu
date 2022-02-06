@@ -1,7 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
-import { DNDSchedule, DNDScheduleTerm } from "../../models/types";
-import { SEMESTER_MIN_HEIGHT } from "../../constants";
+import { DNDSchedule } from "../../models/types";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import {
@@ -47,12 +46,6 @@ const YearTopWrapper = styled.div<any>`
   margin-left: ${props => (props.collapsibleYears ? "-28px" : "-4px")};
 `;
 
-const YearBody = styled.div`
-  display: flex;
-  flex-direction: row;
-  min-height: ${SEMESTER_MIN_HEIGHT}px;
-`;
-
 const SemestersWrapper = styled.div`
   display: flex;
   flex-direction: row;
@@ -70,6 +63,7 @@ class YearComponent extends React.Component<Props> {
     const { index, schedule, isEditable, collapsibleYears } = this.props;
     const year = schedule.years[index];
     const isExpanded = !this.props.closedYears.has(index) || !isEditable;
+    const semesters: SeasonWord[] = ["fall", "spring", "summer1", "summer2"];
 
     return (
       <div style={{ width: "100%", marginBottom: 28 }}>
@@ -86,52 +80,22 @@ class YearComponent extends React.Component<Props> {
               ))}
           </div>
           <SemestersWrapper>
-            <SemesterContainer
-              isEditable={isEditable}
-              semester={schedule.yearMap[year].fall}
-              year={year}
-              semesterStatus={schedule.yearMap[year].fall.status as StatusEnum}
-              schedule={schedule}
-              transferCourses={this.props.transferCourses}
-              semesterWord={"fall"}
-              isExpanded={isExpanded}
-            />
-            <SemesterContainer
-              isEditable={isEditable}
-              semester={schedule.yearMap[year].spring}
-              year={year}
-              semesterStatus={
-                schedule.yearMap[year].spring.status as StatusEnum
-              }
-              schedule={schedule}
-              transferCourses={this.props.transferCourses}
-              semesterWord={"spring"}
-              isExpanded={isExpanded}
-            />
-            <SemesterContainer
-              isEditable={isEditable}
-              semester={schedule.yearMap[year].summer1}
-              year={year}
-              semesterStatus={
-                schedule.yearMap[year].summer1.status as StatusEnum
-              }
-              schedule={schedule}
-              transferCourses={this.props.transferCourses}
-              semesterWord={"summer1"}
-              isExpanded={isExpanded}
-            />
-            <SemesterContainer
-              isEditable={isEditable}
-              semester={schedule.yearMap[year].summer2}
-              year={year}
-              semesterStatus={
-                schedule.yearMap[year].summer2.status as StatusEnum
-              }
-              schedule={schedule}
-              transferCourses={this.props.transferCourses}
-              semesterWord={"summer2"}
-              isExpanded={isExpanded}
-            />
+            {semesters.map((semester, i) => {
+              const scheduleTerm = schedule.yearMap[year][semester];
+              return (
+                <SemesterContainer
+                  isEditable={isEditable}
+                  semester={scheduleTerm}
+                  year={year}
+                  semesterStatus={scheduleTerm.status as StatusEnum}
+                  schedule={schedule}
+                  transferCourses={this.props.transferCourses}
+                  semesterWord={semester}
+                  isExpanded={isExpanded}
+                  key={i}
+                />
+              );
+            })}
           </SemestersWrapper>
         </YearTopWrapper>
       </div>
