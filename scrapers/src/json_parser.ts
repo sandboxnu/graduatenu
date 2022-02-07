@@ -1028,7 +1028,6 @@ const addRequired = (
 
   // perform topological sort/coffman algorithm to produce an ordering with width 4.
   const coffmanGraham = topo.toCoffmanGraham(4);
-  // console.log(coffmanGraham);
 
   // adds the produced ordering to the schedule under the property "scheduled".
   schedule.scheduled = coffmanGraham;

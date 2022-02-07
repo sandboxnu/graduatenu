@@ -3,7 +3,7 @@ name: CI
 on: [push]
 
 jobs:
-  run-frontend-tests:
+  run-scrapers-tests:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -17,6 +17,24 @@ jobs:
           node-version: ${{ matrix.node }}
       - name: Run Jest Tests
         run: |
+          cd scrapers 
+          yarn install
+          yarn test
+  run-api-v2-tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: ["12", "13"]
+    name: Node ${{ matrix.node }} compatibility
+    steps:
+      - uses: actions/checkout@v1
+      - name: Setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Run Jest Tests
+        run: |
+          cd api-v2
           yarn install
           yarn test
   build-frontend-image:
