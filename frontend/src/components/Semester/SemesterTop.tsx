@@ -60,7 +60,6 @@ interface SemesterTopState {
 }
 
 export const SemesterTopComponent = (props: Props) => {
-  const [tappedSemester, setTappedSemester] = React.useState(null);
   const [status, setStatus] = React.useState(props.status);
 
   /**
@@ -96,7 +95,6 @@ export const SemesterTopComponent = (props: Props) => {
 
   const { year, schedule, isEditable } = props;
   const yearPosition = getPositionOfYearInSchedule(schedule, year);
-  const semesters: SeasonWord[] = ["fall", "spring", "summer1", "summer2"];
   const semesterMapping = {
     fall: "Fall",
     spring: "Spring",
@@ -115,7 +113,7 @@ export const SemesterTopComponent = (props: Props) => {
         {isEditable && (
           <SemesterType
             year={yearPosition}
-            status={props.status}
+            status={status}
             onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
               handleChange(event, props.semester as SeasonWord)
             }
