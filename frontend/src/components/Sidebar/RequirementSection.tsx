@@ -14,7 +14,7 @@ import {
 import styled from "styled-components";
 import ExpandMoreOutlinedIcon from "@material-ui/icons/ExpandMoreOutlined";
 import ExpandLessOutlinedIcon from "@material-ui/icons/ExpandLessOutlined";
-import { SidebarAddClassModal } from "../Semester/SidebarAddClassModal";
+import { SidebarAddClassModal } from "./SidebarAddClassModal";
 import { convertToDNDCourses } from "../../utils/schedule-helpers";
 import { fetchCourse } from "../../api";
 import { Droppable } from "react-beautiful-dnd";
