@@ -1,13 +1,13 @@
 import * as React from "react";
 import styled from "styled-components";
-import { ScheduleCourse, SeasonWord, Status } from "../../../common/types";
+import { ScheduleCourse, SeasonWord, Status } from "../../../../common/types";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
-import { changeSemesterStatusForActivePlanAction } from "../state/actions/userPlansActions";
-import { AppState } from "../state/reducers/state";
-import { SemesterType } from "./Year/SemesterType";
-import { DNDSchedule } from "../models/types";
-import { getPositionOfYearInSchedule } from "../utils";
+import { changeSemesterStatusForActivePlanAction } from "../../state/actions/userPlansActions";
+import { AppState } from "../../state/reducers/state";
+import { SemesterType } from "./SemesterType";
+import { DNDSchedule } from "../../models/types";
+import { getPositionOfYearInSchedule } from "../../utils";
 
 const Container = styled.div`
   display: flex;
@@ -75,7 +75,7 @@ export const SemesterTopComponent = (props: Props) => {
       status = status.replace("HOVER", "") as Status;
     }
     setStatus(status);
-  }, [props]);
+  }, [props.status]);
 
   /**
    * Triggers when a semester status is changed.
@@ -116,7 +116,7 @@ export const SemesterTopComponent = (props: Props) => {
           <SemesterType
             year={yearPosition}
             status={props.status}
-            onChange={(event: any) =>
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
               handleChange(event, props.semester as SeasonWord)
             }
           />

@@ -1,7 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import { ScheduleCourse, SeasonWord, StatusEnum } from "../../../common/types";
-import { DNDSchedule, DNDScheduleTerm } from "../models/types";
+import {
+  ScheduleCourse,
+  SeasonWord,
+  StatusEnum,
+} from "../../../../common/types";
+import { DNDSchedule, DNDScheduleTerm } from "../../models/types";
 import { SemesterBlock } from "./SemesterBlock";
 import { SemesterTop } from "./SemesterTop";
 

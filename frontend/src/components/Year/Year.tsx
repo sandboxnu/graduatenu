@@ -1,7 +1,5 @@
 import * as React from "react";
 import styled from "styled-components";
-import { YearTop } from ".";
-import { SemesterBlock } from "../";
 import { DNDSchedule, DNDScheduleTerm } from "../../models/types";
 import { SEMESTER_MIN_HEIGHT } from "../../constants";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
@@ -20,7 +18,7 @@ import {
   SeasonWord,
   StatusEnum,
 } from "../../../../common/types";
-import SemesterContainer from "../SemesterContainer";
+import SemesterContainer from "../Semester/SemesterContainer";
 
 interface ReduxStoreYearProps {
   academicYear: number;

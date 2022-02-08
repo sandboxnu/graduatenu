@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { Dispatch } from "redux";
 import { changeSemesterStatusForActivePlanAction } from "../../state/actions/userPlansActions";
 import { AppState } from "../../state/reducers/state";
-import { SemesterType } from "./SemesterType";
+import { SemesterType } from "../Semester/SemesterType";
 import { DNDSchedule } from "../../models/types";
 import { getPositionOfYearInSchedule } from "../../utils";
 
