@@ -56,7 +56,8 @@ typings/
 
 # dotenv environment variables file
 .env
-!frontend/.env*
+# Frontend .env files shouldn't contain secrets 
+!frontend/.env* 
 
 # next.js build output
 .next
