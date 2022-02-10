@@ -56,7 +56,7 @@ type Props = SemesterTopProps &
 interface SemesterTopState {
   tappedSemester?: SeasonWord;
   status: Status;
-  semester: String;
+  semester: SeasonWord;
 }
 
 export const SemesterTopComponent = (props: Props) => {
@@ -80,7 +80,7 @@ export const SemesterTopComponent = (props: Props) => {
    * Triggers when a semester status is changed.
    * Updates this component's label state and dispatches the status change to the schedule.
    */
-  const handleChange = (event: any, tappedSemester: SeasonWord | null) => {
+  const handleChange = (event: any, tappedSemester: SeasonWord) => {
     const curStatus: Status = event.target.value;
 
     setStatus(curStatus);
@@ -88,7 +88,7 @@ export const SemesterTopComponent = (props: Props) => {
     props.handleStatusChange(
       curStatus,
       props.year,
-      tappedSemester!,
+      tappedSemester,
       props.transferCourses
     );
   };
@@ -106,7 +106,7 @@ export const SemesterTopComponent = (props: Props) => {
     <Container>
       <div style={textContainerStyle}>
         <SemesterText>
-          {semesterMapping[props.semester as SeasonWord]}{" "}
+          {semesterMapping[props.semester]}{" "}
           {props.semester === "fall" ? year - 1 : year}
           {isEditable && <span style={{ fontWeight: "normal" }}> - </span>}
         </SemesterText>
@@ -115,7 +115,7 @@ export const SemesterTopComponent = (props: Props) => {
             year={yearPosition}
             status={status}
             onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-              handleChange(event, props.semester as SeasonWord)
+              handleChange(event, props.semester)
             }
           />
         )}
