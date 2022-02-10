@@ -36,7 +36,7 @@ export const setStudentEmailAction = createAction(
 
 export const setStudentAcademicYearAction = createAction(
   "student/SET_ACADEMIC_YEAR",
-  (academicYear: number) => ({
+  (academicYear: number | null) => ({
     academicYear,
   })
 )();

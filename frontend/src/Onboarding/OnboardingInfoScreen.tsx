@@ -38,8 +38,8 @@ const marginBottomSpace = 12;
 interface OnboardingReduxDispatchProps {
   setStudentAction: (student: IUserData) => void;
   setFullName: (fullName: string) => void;
-  setAcademicYear: (academicYear: number) => void;
-  setGraduationYear: (graduationYear: number) => void;
+  setAcademicYear: (academicYear: number | null) => void;
+  setGraduationYear: (graduationYear: number | null) => void;
   setCatalogYear: (catalogYear: number | null) => void;
   setMajor: (major: string | null) => void;
   setConcentration: (concentration: string | null) => void;
@@ -337,9 +337,9 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   setMajor: (major: string | null) => dispatch(setStudentMajorAction(major)),
   setConcentration: (concentration: string | null) =>
     dispatch(setStudentConcentrationAction(concentration)),
-  setAcademicYear: (academicYear: number) =>
+  setAcademicYear: (academicYear: number | null) =>
     dispatch(setStudentAcademicYearAction(academicYear)),
-  setGraduationYear: (gradYear: number) =>
+  setGraduationYear: (gradYear: number | null) =>
     dispatch(setStudentGraduationYearAction(gradYear)),
   setCatalogYear: (catalogYear: number | null) =>
     dispatch(setStudentCatalogYearAction(catalogYear)),
