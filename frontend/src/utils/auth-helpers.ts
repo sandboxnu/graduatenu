@@ -22,3 +22,10 @@ export function removeAuthTokenFromCookies() {
     domain: window.location.hostname,
   });
 }
+
+export function setAuthTokenAsCookie(token: string) {
+  Cookies.set(AUTH_TOKEN_COOKIE_KEY, token, {
+    path: "/",
+    domain: window.location.hostname,
+  });
+}

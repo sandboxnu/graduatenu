@@ -10,7 +10,11 @@ import {
   setStudentAcademicYearAction,
 } from "../state/actions/studentActions";
 import { fetchMajorsAndPlans } from "../utils/fetchMajorsAndPlans";
-import { authCookieExists, AUTH_TOKEN_COOKIE_KEY } from "../utils/auth-helpers";
+import {
+  authCookieExists,
+  AUTH_TOKEN_COOKIE_KEY,
+  setAuthTokenAsCookie,
+} from "../utils/auth-helpers";
 import { getScheduleCoursesFromSimplifiedCourseDataAPI } from "../utils/course-helpers";
 import { LoadingScreen } from "../components/common/FullPageLoading";
 import { setAdvisorAction } from "../state/actions/advisorActions";
@@ -73,10 +77,7 @@ export const RedirectScreen: React.FC<Props> = ({ redirectUrl }) => {
           path: "/",
           domain: window.location.hostname,
         });
-        Cookies.set(AUTH_TOKEN_COOKIE_KEY, cookie, {
-          path: "/",
-          domain: window.location.hostname,
-        }); // set persisting cookie for all paths
+        setAuthTokenAsCookie(cookie); // set persisting cookie for all paths
         fetchActiveUser(cookie)
           .then(response => {
             setIsAdvisor(response.user.isAdvisor);

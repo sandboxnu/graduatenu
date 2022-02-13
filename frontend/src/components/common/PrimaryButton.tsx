@@ -1,18 +1,14 @@
 import React from "react";
-import { Button, Tooltip } from "@material-ui/core";
-import {
-  createStyles,
-  withStyles,
-  makeStyles,
-  Theme,
-} from "@material-ui/core/styles";
+import { Button } from "@material-ui/core";
+import { withStyles, Theme } from "@material-ui/core/styles";
 
-const ColorButton = withStyles((theme: Theme) => ({
+const ColorButton = withStyles((_theme: Theme) => ({
   root: {
     color: "#ffffff",
     paddingVertical: "8px",
     paddingHorizontal: "16px",
     backgroundColor: "#EB5757",
+    width: "100%",
     "&:hover": {
       backgroundColor: "#DB4747",
     },
@@ -22,8 +18,7 @@ const ColorButton = withStyles((theme: Theme) => ({
   },
 }))(Button);
 
-
-const SecondaryColorButton = withStyles((theme: Theme) => ({
+const SecondaryColorButton = withStyles((_theme: Theme) => ({
   root: {
     color: "#EB5757",
     borderColor: "#EB5757",
@@ -32,7 +27,7 @@ const SecondaryColorButton = withStyles((theme: Theme) => ({
     backgroundColor: "#ffffff",
     "&:hover": {
       backgroundColor: "#DB4747",
-      color: "#ffffff"
+      color: "#ffffff",
     },
     "&.Mui-disabled": {
       pointerEvents: "auto",
@@ -47,6 +42,7 @@ export function PrimaryButton(props: any) {
       color="primary"
       onClick={props.onClick}
       disabled={props.disabled}
+      type={props.type}
     >
       {props.children}
     </ColorButton>

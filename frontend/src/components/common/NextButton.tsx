@@ -28,6 +28,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface Props {
+  type?: "button" | "reset" | "submit" | undefined;
   text?: string;
   onClick?: () => void;
   disabled?: boolean;
@@ -37,6 +38,7 @@ export const NextButton: React.FC<Props> = props => {
   const classes = useStyles();
   return (
     <ColorButton
+      type={props.type || undefined}
       variant="contained"
       color="primary"
       className={classes.margin}

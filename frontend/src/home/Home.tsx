@@ -283,7 +283,6 @@ class HomeComponent extends React.Component<Props> {
 
   logOut = async () => {
     await this.updatePlan();
-    window.location.reload();
     removeAuthTokenFromCookies();
 
     alert(

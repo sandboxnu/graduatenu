@@ -394,7 +394,7 @@ export {};
 //  * be passed down as props from the parent component.
 //  */
 
-// export const SignupScreen = connect(
+// export const SignupScreenV2 = connect(
 //   mapStateToProps,
 //   mapDispatchToProps
 // )(withRouter(SignupScreenComponent));

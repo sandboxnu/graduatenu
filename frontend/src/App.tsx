@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { Onboarding } from "./Onboarding/Onboarding";
+import { LandingScreen } from "./Onboarding/LandingScreen";
 import { HomeWrapper } from "./home/HomeWrapper";
 import { OnboardingInfoScreen } from "./Onboarding/OnboardingInfoScreen";
 import { CompletedCoursesScreen } from "./Onboarding/CompletedCoursesScreen";
@@ -20,6 +20,8 @@ import { StudentsList } from "./advising/ManageStudents/StudentsList";
 import { TemplateBuilderPage } from "./advising/Templates/TemplateBuilderPage";
 import { CourseManagmentPage } from "./advising/CourseManagment";
 import { GenericStudentView } from "./advising/ManageStudents/GenericStudentView";
+import { LoginScreen } from "./Onboarding/LoginScreen";
+import { SignupScreen } from "./Onboarding/SignupScreen";
 import ErrorHandler from "./error/ErrorHandler";
 import { ErrorBoundary } from "react-error-boundary";
 import { FrontendErrorPage } from "./error/ErrorPages";
@@ -57,9 +59,9 @@ export const App = ({ store }: { store: Store }) => {
               />
               <ProtectedRoute path="/advisor" component={AdvisorRouter} />
               {/* requires not logged in */}
-              <UnprotectedRoute path="/" component={Onboarding} />
-              {/* <Route path="/signup" component={SignupScreen} />
-                <Route path="/login" component={LoginScreen} /> */}
+              <UnprotectedRoute path="/login" component={LoginScreen} />
+              <UnprotectedRoute path="/signup" component={SignupScreen} />
+              <UnprotectedRoute path="/" component={LandingScreen} />
             </Switch>
           </ErrorHandler>
         </ErrorBoundary>
