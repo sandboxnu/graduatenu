@@ -1,6 +1,8 @@
 import { ClassSerializerInterceptor, ValidationPipe } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { NestFactory, Reflector } from '@nestjs/core';
 import { AppModule } from './app.module';
+import { EnvironmentVariables } from './environment-variables';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
@@ -26,7 +28,10 @@ async function bootstrap() {
    */
   app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
 
-  await app.listen(3000);
+  const configService: ConfigService<EnvironmentVariables, true> = app.get(
+    ConfigService,
+  );
+  await app.listen(configService.get('PORT'));
 }
 
 bootstrap();

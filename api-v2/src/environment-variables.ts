@@ -6,4 +6,5 @@ export interface EnvironmentVariables {
   DB_URL: string;
   JWT_SECRET_KEY: string;
   JWT_EXPIRE_TIME: number;
+  PORT: number;
 }
