@@ -28,9 +28,12 @@ async function bootstrap() {
    */
   app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
 
+  app.setGlobalPrefix('api');
+
   const configService: ConfigService<EnvironmentVariables, true> = app.get(
     ConfigService,
   );
+
   await app.listen(configService.get('PORT'));
 }
 
