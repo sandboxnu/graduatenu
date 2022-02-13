@@ -43,8 +43,8 @@ import ScheduleChangeTracker from "../../utils/ScheduleChangeTracker";
 import { courseToString } from "../../utils/course-helpers";
 
 const OutsideContainer = styled.div`
+  flex: 1;
   width: 100%;
-  height: 90%;
 `;
 
 const Container = styled.div<any>`

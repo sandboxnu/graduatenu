@@ -11,7 +11,7 @@ import { getPositionOfYearInSchedule } from "../../utils";
 
 const Container = styled.div`
   display: flex;
-  flex: 1;
+  flex: 0;
   flex-direction: row;
   height: 36px;
   background-color: #eb5757;
