@@ -13,8 +13,6 @@ import { connect } from "react-redux";
 import { Dispatch } from "redux";
 import { fetchMajorsAndPlans } from "../utils/fetchMajorsAndPlans";
 import { Major } from "../../../common/types";
-import { PrimaryButton } from "../components/common/PrimaryButton";
-import { logoutUser, registerUser } from "../services/UserService";
 import { History } from "history";
 import { RouteComponentProps, withRouter } from "react-router";
 
@@ -186,19 +184,6 @@ export class LandingScreenComponent extends React.Component<Props> {
             <PrimaryLinkButton to="/signup" style={{ marginRight: "1em" }}>
               Sign Up
             </PrimaryLinkButton>
-            <LoginButtonContainer>
-              <PrimaryButton
-                variant="contained"
-                onClick={async () => {
-                  await registerUser({
-                    email: "myuser@gmail.com",
-                    password: "hello1234",
-                  });
-                }}
-              >
-                Dev Signup
-              </PrimaryButton>
-            </LoginButtonContainer>
           </LoginButtonContainer>
         </Header>
         <Banner>
@@ -208,7 +193,7 @@ export class LandingScreenComponent extends React.Component<Props> {
               Navigate the Northeastern graduation requirements and create a
               personalized plan of study.
             </BannerInfoText>
-            <WhiteLinkButton to="/onboarding">Get Started</WhiteLinkButton>
+            <WhiteLinkButton to="/signup">Get Started</WhiteLinkButton>
           </BannerInfo>
           <TitlePicture src={titlePicture} alt="title-picture"></TitlePicture>
         </Banner>

@@ -9,11 +9,7 @@ import { PrimaryButton } from "../components/common/PrimaryButton";
 import { Dispatch } from "redux";
 import { setStudentAction } from "../state/actions/studentActions";
 import { loginUser } from "../services/UserService";
-import {
-  AUTH_TOKEN_COOKIE_KEY,
-  setAuthTokenAsCookie,
-} from "../utils/auth-helpers";
-import Cookies from "js-cookie";
+import { setAuthTokenAsCookie } from "../utils/auth-helpers";
 import { AppState } from "../state/reducers/state";
 import { SecondaryLinkButton } from "../components/common/LinkButtons";
 
@@ -128,7 +124,7 @@ const LoginScreenComponent: React.FC<Props> = props => {
    */
   const submit = async () => {
     // Regex to determine if email string is a valid address
-    const validEmail: boolean = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(
+    const validEmail: boolean = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(
       state.emailStr
     );
 
@@ -161,6 +157,9 @@ const LoginScreenComponent: React.FC<Props> = props => {
           props.setStudent(data.user);
           setAuthTokenAsCookie(data.user.token);
 
+          /**
+           * TODO: Need a better way to check if the user is onboarded or not.
+           */
           const isOnboarded = data.user.catalogYear !== null;
           if (isOnboarded) {
             // redirect to home if the user had finished onboarding
