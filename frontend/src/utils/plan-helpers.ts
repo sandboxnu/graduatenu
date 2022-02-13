@@ -57,3 +57,11 @@ export function convertPlanToUpdatePlanData(
     last_viewer: userId,
   };
 }
+
+export const nullOrString = (value: string) => {
+  return value == "" ? null : value;
+};
+
+export const nullOrNumber = (value: number): number | null => {
+  return Boolean(value) ? value : null;
+};

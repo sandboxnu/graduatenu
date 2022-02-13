@@ -24,6 +24,7 @@ import {
   getUserConcentrationFromState,
   getCompletedCourseScheduleFromState,
   getCompletedCourseCounterFromState,
+  getCompletedCoursesFromState,
 } from "../state";
 import { AppState } from "../state/reducers/state";
 import { addNewPlanAction } from "../state/actions/userPlansActions";
@@ -153,6 +154,7 @@ const TransferableCreditScreen: React.FC = () => {
     catalogYear,
     completedCourseSchedule,
     transferCourses,
+    coursesCompleted,
     allPlans,
     completedCourseCounter,
   } = useSelector(
@@ -164,6 +166,7 @@ const TransferableCreditScreen: React.FC = () => {
       graduationYear: getGraduationYearFromState(state)!,
       coopCycle: getUserCoopCycleFromState(state),
       transferCourses: safelyGetTransferCoursesFromState(state),
+      coursesCompleted: getCompletedCoursesFromState(state),
       completedCourseSchedule: getCompletedCourseScheduleFromState(state),
       completedCourseCounter: getCompletedCourseCounterFromState(state),
       catalogYear: getUserCatalogYearFromState(state),
@@ -193,6 +196,20 @@ const TransferableCreditScreen: React.FC = () => {
           coop_cycle: coopCycle,
           concentration: concentration,
           catalog_year: catalogYear,
+          courses_transfer: transferCourses.map(course => {
+            return {
+              subject: course.subject,
+              course_id: course.classId,
+              completion: "TRANSFER",
+            };
+          }),
+          courses_completed: coursesCompleted.map(course => {
+            return {
+              subject: course.subject,
+              course_id: course.classId,
+              completion: "PASSED",
+            };
+          }),
         }
       );
 

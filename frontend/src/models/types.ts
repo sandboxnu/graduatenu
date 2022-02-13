@@ -161,8 +161,8 @@ export interface IUserData {
   major: string | null;
   concentration: string | null;
   coopCycle: string | null;
-  nuId: string;
-  isAdvisor: boolean;
+  nuId?: string;
+  isAdvisor?: boolean;
   primaryPlanId?: number;
   examCredits: TransferableExam[];
   transferCourses: ScheduleCourse[];

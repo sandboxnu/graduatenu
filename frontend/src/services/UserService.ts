@@ -1,13 +1,12 @@
-import { mockKhouryClassesData } from "../data/mockData";
 import {
   ILoginData,
   IUpdateUser,
   IUpdateUserData,
   IUpdateUserPassword,
+  IUserData,
 } from "../models/types";
 
-// unused right now as Khoury auth is being used
-export const registerUser = (user: IUpdateUserData) =>
+export const registerUser = (user: ILoginData) =>
   fetch(`/api/users`, {
     method: "POST",
     body: JSON.stringify({ user: user }),
@@ -16,17 +15,47 @@ export const registerUser = (user: IUpdateUserData) =>
     },
   }).then(response => response.json());
 
-// unused right now as Khoury auth is being used
-export const loginUser = (user: ILoginData) =>
-  fetch("/api/users/login", {
+interface UserDataWithToken extends IUserData {
+  token: string;
+}
+
+interface LoginUserPayload {
+  error?: any;
+  user?: UserDataWithToken;
+}
+
+interface LoginUserResponse {
+  status: number;
+  data: LoginUserPayload;
+}
+
+export const loginUser = (user: ILoginData): Promise<LoginUserResponse> =>
+  fetch("/api/users/sign_in", {
     method: "POST",
     body: JSON.stringify({ user: user }),
     headers: {
       "Content-Type": "application/json",
     },
-  }).then(response => response.json());
+  }).then(async response => {
+    const data: LoginUserPayload = await response.json();
+    const isInvalidCreds =
+      data.error && data.error["email or password"] !== undefined;
+    const status = isInvalidCreds ? 401 : response.status;
 
-// unused right now as Khoury auth is being used
+    return {
+      status,
+      data,
+    };
+  });
+
+export const logoutUser = () => {
+  fetch("/api/users/sign_out", {
+    method: "DELETE",
+  }).then(response => {
+    return response.status;
+  });
+};
+
 export const updatePassword = (
   token: string,
   userPassword: IUpdateUserPassword
@@ -64,40 +93,5 @@ export const updateUser = (user: IUpdateUser, userData: IUpdateUserData) =>
     headers: {
       "Content-Type": "application/json",
       Authorization: "Token " + user.token,
-    },
-  }).then(response => response.json());
-
-export const simulateKhouryStudentLogin = () =>
-  fetch(`/api/v1/admin_hook`, {
-    method: "POST",
-    body: JSON.stringify({
-      email: "gamburg.m@northeastern.edu",
-      nu_id: "001806666",
-      is_advisor: false,
-      major: "Computer Science, BSCS",
-      first_name: "Mitch",
-      last_name: "Gamburg",
-      courses: mockKhouryClassesData,
-      photo_url:
-        "https://prod-web.neu.edu/wasapp/EnterprisePhotoService/PhotoServlet?vid=CCS&er=d1d26b1327817a8d34ce75336e0334cb78f33e63cf907ea82da6d6abcfc15d66244bb291baec1799cf77970e4a519a1cf7d48edaddb97c01",
-    }),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  }).then(response => response.json());
-
-export const simulateKhouryAdvisorLogin = () =>
-  fetch(`/api/v1/admin_hook`, {
-    method: "POST",
-    body: JSON.stringify({
-      email: "a.ressing@northeastern.edu",
-      is_advisor: true,
-      first_name: "Ali",
-      last_name: "Ressing",
-      photo_url:
-        "https://prod-web.neu.edu/wasapp/EnterprisePhotoService/PhotoServlet?vid=CCS&er=d1d26b1327817a8d34ce75336e0334cb78f33e63cf907ea82da6d6abcfc15d66244bb291baec1799cf77970e4a519a1cf7d48edaddb97c01",
-    }),
-    headers: {
-      "Content-Type": "application/json",
     },
   }).then(response => response.json());
