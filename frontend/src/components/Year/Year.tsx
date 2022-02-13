@@ -1,9 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
-import { YearTop } from ".";
-import { SemesterBlock } from "../";
 import { DNDSchedule } from "../../models/types";
-import { SEMESTER_MIN_HEIGHT } from "../../constants";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import {
@@ -15,7 +12,12 @@ import { AppState } from "../../state/reducers/state";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
 import { toggleYearExpandedForActivePlanAction } from "../../state/actions/userPlansActions";
-import { ScheduleCourse } from "../../../../common/types";
+import {
+  ScheduleCourse,
+  SeasonWord,
+  StatusEnum,
+} from "../../../../common/types";
+import SemesterContainer from "../Semester/SemesterContainer";
 
 interface ReduxStoreYearProps {
   academicYear: number;
@@ -40,14 +42,16 @@ const YearTopWrapper = styled.div<any>`
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   margin-left: ${props => (props.collapsibleYears ? "-28px" : "-4px")};
 `;
 
-const YearBody = styled.div`
+const SemestersWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  min-height: ${SEMESTER_MIN_HEIGHT}px;
+  align-items: stretch;
+  justify-content: space-between;
+  width: 100%;
 `;
 
 class YearComponent extends React.Component<Props> {
@@ -59,13 +63,14 @@ class YearComponent extends React.Component<Props> {
     const { index, schedule, isEditable, collapsibleYears } = this.props;
     const year = schedule.years[index];
     const isExpanded = !this.props.closedYears.has(index) || !isEditable;
+    const semesters: SeasonWord[] = ["fall", "spring", "summer1", "summer2"];
 
     return (
       <div style={{ width: "100%", marginBottom: 28 }}>
         <YearTopWrapper collapsibleYears={collapsibleYears}>
           <div
             onClick={this.handleExpandedChange.bind(this)}
-            style={{ marginRight: 4 }}
+            style={{ marginRight: 4, marginTop: 5 }}
           >
             {collapsibleYears &&
               (isExpanded ? (
@@ -74,37 +79,25 @@ class YearComponent extends React.Component<Props> {
                 <KeyboardArrowDownIcon />
               ))}
           </div>
-          <YearTop
-            year={year}
-            fallStatus={schedule.yearMap[year].fall.status}
-            springStatus={schedule.yearMap[year].spring.status}
-            summer1Status={schedule.yearMap[year].summer1.status}
-            summer2Status={schedule.yearMap[year].summer2.status}
-            schedule={schedule}
-            isEditable={isEditable}
-            transferCourses={this.props.transferCourses}
-          />
+          <SemestersWrapper>
+            {semesters.map((semester, i) => {
+              const scheduleTerm = schedule.yearMap[year][semester];
+              return (
+                <SemesterContainer
+                  isEditable={isEditable}
+                  semester={scheduleTerm}
+                  year={year}
+                  semesterStatus={scheduleTerm.status as StatusEnum}
+                  schedule={schedule}
+                  transferCourses={this.props.transferCourses}
+                  semesterWord={semester}
+                  isExpanded={isExpanded}
+                  key={i}
+                />
+              );
+            })}
+          </SemestersWrapper>
         </YearTopWrapper>
-        {isExpanded && (
-          <YearBody>
-            <SemesterBlock
-              isEditable={isEditable}
-              semester={schedule.yearMap[year].fall}
-            />
-            <SemesterBlock
-              isEditable={isEditable}
-              semester={schedule.yearMap[year].spring}
-            />
-            <SemesterBlock
-              isEditable={isEditable}
-              semester={schedule.yearMap[year].summer1}
-            />
-            <SemesterBlock
-              isEditable={isEditable}
-              semester={schedule.yearMap[year].summer2}
-            />
-          </YearBody>
-        )}
       </div>
     );
   }
