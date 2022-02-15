@@ -27,6 +27,9 @@ async function bootstrap() {
    */
   app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
 
+  /**
+   * Tranform all data returned from controllers to the ServerResponse shape.
+   */
   app.useGlobalInterceptors(new TransformResponseInterceptor());
 
   await app.listen(3000);

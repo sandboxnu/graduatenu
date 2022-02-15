@@ -12,6 +12,9 @@ export interface ServerResponse<T> {
   data: T;
 }
 
+/**
+ * Transforms all outgoing data into the ServerResponse shape above.
+ */
 @Injectable()
 export class TransformResponseInterceptor<T>
   implements NestInterceptor<T, ServerResponse<T>> {
