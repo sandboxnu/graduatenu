@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
-import { Redirect, useHistory } from "react-router";
+import { Redirect } from "react-router";
 import { batch, useDispatch } from "react-redux";
 import { fetchActiveUser } from "../services/UserService";
 import {
-  setStudentAction,
   setCompletedCoursesAction,
-  setTransferCoursesAction,
   setStudentAcademicYearAction,
+  setStudentAction,
+  setTransferCoursesAction,
 } from "../state/actions/studentActions";
-import { fetchMajorsAndPlans } from "../utils/fetchMajorsAndPlans";
 import {
-  authCookieExists,
   AUTH_TOKEN_COOKIE_KEY,
+  authCookieExists,
   setAuthTokenAsCookie,
 } from "../utils/auth-helpers";
 import { getScheduleCoursesFromSimplifiedCourseDataAPI } from "../utils/course-helpers";
@@ -32,96 +31,61 @@ export const RedirectScreen: React.FC<Props> = ({ redirectUrl }) => {
   const [needsToGoToOnboarding, setNeedsToGoToOnboarding] = useState<
     boolean | undefined
   >();
-  const history = useHistory();
-
-  const calculateAcademicYear = (completedCourses: ScheduleCourse[]) => {
-    // sort the courses from the earliest to lastest semester
-    if (completedCourses && completedCourses.length != 0) {
-      const sortedCourses = JSON.parse(JSON.stringify(completedCourses)).sort(
-        (first: ScheduleCourse, second: ScheduleCourse) => {
-          if (Number(first.semester!) < Number(second.semester!)) {
-            return -1;
-          } else if (Number(second.semester!) < Number(first.semester!)) {
-            return 1;
-          } else {
-            return 0;
-          }
-        }
-      );
-
-      const earliestSemesterYear = sortedCourses[0].semester?.substring(0, 4);
-      const latestSemesterYear = sortedCourses[
-        sortedCourses.length - 1
-      ].semester?.substring(0, 4);
-      const academicYear =
-        Number(latestSemesterYear) - Number(earliestSemesterYear) + 1;
-      return academicYear;
-    } else {
-      return 1;
-    }
-  };
-
-  // component did mount
   useEffect(() => {
     setIsLoading(true);
     setIsError(false);
-    fetchMajorsAndPlans(history)(dispatch).then(majors => {
-      const cookie = Cookies.get(AUTH_TOKEN_COOKIE_KEY);
-      if (cookie) {
-        Cookies.remove(AUTH_TOKEN_COOKIE_KEY, {
-          path: "/redirect",
-          domain: window.location.hostname,
-        });
-        // remove cookie if it already exists
-        Cookies.remove(AUTH_TOKEN_COOKIE_KEY, {
-          path: "/",
-          domain: window.location.hostname,
-        });
-        setAuthTokenAsCookie(cookie); // set persisting cookie for all paths
-        fetchActiveUser(cookie)
-          .then(response => {
-            setIsAdvisor(response.user.isAdvisor);
-            if (!response.user.isAdvisor) {
-              // student
+    const cookie = Cookies.get(AUTH_TOKEN_COOKIE_KEY);
+    if (cookie) {
+      Cookies.remove(AUTH_TOKEN_COOKIE_KEY, {
+        path: "/redirect",
+        domain: window.location.hostname,
+      });
+      Cookies.remove(AUTH_TOKEN_COOKIE_KEY, {
+        path: "/",
+        domain: window.location.hostname,
+      });
+      setAuthTokenAsCookie(cookie); // set persisting cookie for all paths
+      fetchActiveUser(cookie)
+        .then(response => {
+          setIsAdvisor(response.user.isAdvisor);
+          if (!response.user.isAdvisor) {
+            // student
 
-              dispatch(setStudentAction(response.user));
-              Promise.all([
-                getScheduleCoursesFromSimplifiedCourseDataAPI(
-                  response.user.coursesCompleted
-                ).then(courses => {
-                  batch(() => {
-                    dispatch(setCompletedCoursesAction(courses));
-                    dispatch(
-                      setStudentAcademicYearAction(
-                        calculateAcademicYear(courses)
-                      )
-                    );
-                  });
-                }),
-                getScheduleCoursesFromSimplifiedCourseDataAPI(
-                  response.user.coursesTransfer
-                ).then(courses => {
-                  dispatch(setTransferCoursesAction(courses));
-                }),
-              ]).then(() => {
-                setNeedsToGoToOnboarding(
-                  !response.user.graduationYear || !response.user.academicYear
-                );
-                setIsLoading(false); // this update must come last, to make sure other state variables are correctly set before we redirect
-              });
-            } else {
-              dispatch(setAdvisorAction(response.user));
-              setIsLoading(false);
-            }
-          })
-          .catch(e => {
-            // TODO: Log error to some service like rollbar
-            console.log(e);
-            setIsError(true);
-          });
-      }
-    });
-  }, []);
+            dispatch(setStudentAction(response.user));
+            Promise.all([
+              getScheduleCoursesFromSimplifiedCourseDataAPI(
+                response.user.coursesCompleted
+              ).then(courses => {
+                batch(() => {
+                  dispatch(setCompletedCoursesAction(courses));
+                  dispatch(
+                    setStudentAcademicYearAction(calculateAcademicYear(courses))
+                  );
+                });
+              }),
+              getScheduleCoursesFromSimplifiedCourseDataAPI(
+                response.user.coursesTransfer
+              ).then(courses => {
+                dispatch(setTransferCoursesAction(courses));
+              }),
+            ]).then(() => {
+              setNeedsToGoToOnboarding(
+                !response.user.graduationYear || !response.user.academicYear
+              );
+              setIsLoading(false); // this update must come last, to make sure other state variables are correctly set before we redirect
+            });
+          } else {
+            dispatch(setAdvisorAction(response.user));
+            setIsLoading(false);
+          }
+        })
+        .catch(e => {
+          // TODO: Log error to some service like rollbar
+          console.log(e);
+          setIsError(true);
+        });
+    }
+  }, [dispatch]);
 
   if ((authCookieExists() && isError) || !authCookieExists()) {
     // jwt token expired or does not exist
@@ -155,5 +119,23 @@ export const RedirectScreen: React.FC<Props> = ({ redirectUrl }) => {
   } else {
     // advisor
     return <Redirect to="/advisor/appointments" />;
+  }
+};
+
+const calculateAcademicYear = (completedCourses: ScheduleCourse[]) => {
+  // sort the courses from the earliest to lastest semester
+  if (completedCourses && completedCourses.length !== 0) {
+    const sortedCourses = [...completedCourses].sort((first, second) => {
+      if (!first.semester || !second.semester) return 0;
+      return Number(first.semester) - Number(second.semester);
+    });
+
+    const earliestSemesterYear = sortedCourses[0].semester?.substring(0, 4);
+    const latestSemesterYear = sortedCourses[
+      sortedCourses.length - 1
+    ].semester?.substring(0, 4);
+    return Number(latestSemesterYear) - Number(earliestSemesterYear) + 1;
+  } else {
+    return 1;
   }
 };
