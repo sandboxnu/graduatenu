@@ -11,10 +11,11 @@ import {
 import { ScheduleCourse } from '../../../../common/types';
 
 export class CreateStudentDto {
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   fullName: string;
 
+  @IsOptional()
   @IsString()
   nuid: string;
 

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { withRouter, RouteComponentProps, Link } from "react-router-dom";
 import styled from "styled-components";
 import { TextField } from "@material-ui/core";
-import { Major } from "../../../common/types";
+import { Major, StatusEnum } from "../../../common/types";
 import { ILoginData, IUserData, NamedSchedule } from "../models/types";
 import { PrimaryButton } from "../components/common/PrimaryButton";
 import { Dispatch } from "redux";
@@ -12,6 +12,9 @@ import { loginUser } from "../services/UserService";
 import { setAuthTokenAsCookie } from "../utils/auth-helpers";
 import { AppState } from "../state/reducers/state";
 import { SecondaryLinkButton } from "../components/common/LinkButtons";
+import { STATUS_CODES } from "http";
+import { ServerErrorResponse } from "../services/types";
+import { isServerError } from "../services/isServerError";
 
 const Wrapper = styled.div`
   display: flex;
@@ -140,11 +143,12 @@ const LoginScreenComponent: React.FC<Props> = props => {
       };
 
       try {
-        const { status, data } = await loginUser(user);
+        const loggedInUser = await loginUser(user);
 
-        if (data.error || !data.user) {
+        if (isServerError(loggedInUser)) {
           // handle response errros
-          const isUnauthorized = status === 401;
+          const { statusCode } = loggedInUser;
+          const isUnauthorized = statusCode === 401;
 
           setState({
             ...state,
@@ -154,13 +158,13 @@ const LoginScreenComponent: React.FC<Props> = props => {
           });
         } else {
           // update redux store with logged in user and set cookies
-          props.setStudent(data.user);
-          setAuthTokenAsCookie(data.user.token);
+          props.setStudent(loggedInUser);
+          setAuthTokenAsCookie(loggedInUser.token);
 
           /**
            * TODO: Need a better way to check if the user is onboarded or not.
            */
-          const isOnboarded = data.user.catalogYear !== null;
+          const isOnboarded = loggedInUser.catalogYear !== null;
           if (isOnboarded) {
             // redirect to home if the user had finished onboarding
             props.history.push("/home");

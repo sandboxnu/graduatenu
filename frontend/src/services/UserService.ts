@@ -5,93 +5,102 @@ import {
   IUpdateUserPassword,
   IUserData,
 } from "../models/types";
-
-export const registerUser = (user: ILoginData) =>
-  fetch(`/api/users`, {
-    method: "POST",
-    body: JSON.stringify({ user: user }),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  }).then(response => response.json());
+import { ServerResponse } from "./types";
 
 interface UserDataWithToken extends IUserData {
   token: string;
 }
 
-interface LoginUserPayload {
-  error?: any;
-  user?: UserDataWithToken;
-}
-
-interface LoginUserResponse {
-  status: number;
-  data: LoginUserPayload;
-}
-
-export const loginUser = (user: ILoginData): Promise<LoginUserResponse> =>
-  fetch("/api/users/sign_in", {
+export const registerUser = async (
+  user: ILoginData
+): Promise<ServerResponse<UserDataWithToken>> => {
+  const response = await fetch(`/api/auth/register`, {
     method: "POST",
-    body: JSON.stringify({ user: user }),
+    body: JSON.stringify(user),
     headers: {
       "Content-Type": "application/json",
     },
-  }).then(async response => {
-    const data: LoginUserPayload = await response.json();
-    const isInvalidCreds =
-      data.error && data.error["email or password"] !== undefined;
-    const status = isInvalidCreds ? 401 : response.status;
-
-    return {
-      status,
-      data,
-    };
   });
 
-export const logoutUser = () => {
-  fetch("/api/users/sign_out", {
-    method: "DELETE",
-  }).then(response => {
-    return response.status;
-  });
+  const data: ServerResponse<UserDataWithToken> = await response.json();
+
+  return data;
 };
 
-export const updatePassword = (
-  token: string,
-  userPassword: IUpdateUserPassword
-) =>
-  fetch(`/api/users/password`, {
-    method: "PUT",
-    body: JSON.stringify({ user: userPassword }),
+export const loginUser = async (
+  user: ILoginData
+): Promise<ServerResponse<UserDataWithToken>> => {
+  const response = await fetch("/api/auth/login", {
+    method: "POST",
+    body: JSON.stringify(user),
     headers: {
       "Content-Type": "application/json",
-      Authorization: "Token " + token,
     },
-  }).then(response => response.json());
+  });
+
+  const data: ServerResponse<UserDataWithToken> = await response.json();
+
+  console.log("Login data: ", data);
+
+  return data;
+};
+
+export const logoutUser = async () => {
+  const response = await fetch("/api/users/sign_out", {
+    method: "DELETE",
+  });
+
+  return response.status;
+};
+
+export const updatePassword = async (
+  token: string,
+  userPassword: IUpdateUserPassword
+) => {
+  const response = await fetch(`/api/me`, {
+    method: "PATCH",
+    body: JSON.stringify({ password: userPassword }),
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  return await response.json();
+};
 
 /**
  * Service function object to get the user data of the logged in user
  * @param token
  */
-export const fetchActiveUser = (token: string) =>
-  fetch(`/api/users/current`, {
+export const fetchActiveUser = async (token: string) => {
+  const response = await fetch(`/api/me`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Authorization: "Token " + token,
+      Authorization: `Bearer ${token}`,
     },
-  }).then(response => response.json());
+  });
+
+  return response.json();
+};
 
 /**
  * Service function object to update the user data
  * @param userData
  */
-export const updateUser = (user: IUpdateUser, userData: IUpdateUserData) =>
-  fetch(`/api/users/${user.id}`, {
+export const updateUser = async (
+  user: IUpdateUser,
+  updatedUser: IUpdateUserData
+) => {
+  const response = await fetch(`/api/me`, {
     method: "PUT",
-    body: JSON.stringify({ user: userData }),
+    body: JSON.stringify(updatedUser),
     headers: {
       "Content-Type": "application/json",
-      Authorization: "Token " + user.token,
+      Authorization: `Bearer ${user.token}`,
     },
-  }).then(response => response.json());
+  });
+
+  return response.json();
+};
