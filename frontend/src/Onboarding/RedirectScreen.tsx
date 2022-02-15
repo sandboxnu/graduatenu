@@ -11,7 +11,7 @@ import {
 } from "../state/actions/studentActions";
 import {
   AUTH_TOKEN_COOKIE_KEY,
-  authCookieExists,
+  getAuthToken,
   setAuthTokenAsCookie,
 } from "../utils/auth-helpers";
 import { getScheduleCoursesFromSimplifiedCourseDataAPI } from "../utils/course-helpers";
@@ -87,7 +87,7 @@ export const RedirectScreen: React.FC<Props> = ({ redirectUrl }) => {
     }
   }, [dispatch]);
 
-  if ((authCookieExists() && isError) || !authCookieExists()) {
+  if ((getAuthToken() && isError) || !getAuthToken()) {
     // jwt token expired or does not exist
     // remove cookie if it already exists
     Cookies.remove(AUTH_TOKEN_COOKIE_KEY, {
