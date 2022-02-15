@@ -136,3 +136,6 @@ api/config/local_env.yml
 !api-v2/**/*.json
 api-v2/dist
 
+# db data
+infrastructure/develop/graduatenu-db-data
+

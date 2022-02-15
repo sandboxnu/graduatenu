@@ -7,9 +7,11 @@ config({ path: `.env.${process.env.NODE_ENV}` });
 
 const ormconfig: TypeOrmModuleOptions = {
   type: 'postgres',
-  url: process.env.DB_URL,
-  username: process.env.DB_USERNAME,
-  password: process.env.DB_PASSWORD || '',
+  host: process.env.POSTGRES_HOST,
+  port: parseInt(process.env.POSTGRES_PORT, 10),
+  username: process.env.POSTGRES_USERNAME,
+  password: process.env.POSTGRES_PASSWORD || '',
+  database: process.env.POSTGRES_DATABASE,
   synchronize: process.env.NODE_ENV !== 'production',
   entities: [Student, Plan],
   migrations: ['src/migrations/*.ts'],

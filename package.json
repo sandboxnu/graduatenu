@@ -12,6 +12,8 @@
   ],
   "scripts": {
     "start": "cd infrastructure/develop && ./compose-build.sh && ./run-servers.sh dev-build",
+    "db:up": "docker-compose -f infrastructure/develop/docker-compose.yml up -d",
+    "db:down": "docker-compose -f infrastructure/develop/docker-compose.yml down",
     "prod-start": "docker-compose up --build",
     "prod-start-aws": "cd infrastructure/develop && ./compose-build.sh && ./run-servers.sh prod-build",
     "generate-documentation": "cd api && rdoc && cd .. && mv api/doc docs",
