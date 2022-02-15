@@ -23,7 +23,7 @@ const Wrapper = styled.div`
 const TitleLocation = styled.div`
   margin-top: 96px;
   margin-bottom: 48px;
-  width: 256;
+  width: 256px;
   font-family: .Helvetica Neue DeskInterface;
   font-style: normal;
   font-weight: bold;
@@ -41,7 +41,6 @@ const Box = styled.div`
 
 const DotWrapper = styled.div`
   display: flex;
-  width: 256;
   height: 11px;
   margin-top: 6px;
   margin-bottom: 48px;
@@ -79,6 +78,7 @@ const ScrollWrapper = styled.div`
   &::-webkit-scrollbar-thumb:hover {
     background-color: rgba(0, 0, 0, 0.5);
   }
+
   &::-webkit-scrollbar-thumb {
     background-clip: padding-box;
     background-color: #c1c1c1;
@@ -88,10 +88,12 @@ const ScrollWrapper = styled.div`
     border-width: 3px 3px 3px 4px;
     box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
   }
+
   &::-webkit-scrollbar {
     -webkit-appearance: none;
     width: 16px;
   }
+
   &::-webkit-scrollbar-track:vertical {
     border-left: 1px solid #e7e7e7;
     box-shadow: 1px 0 1px 0 #f6f6f6 inset, -1px 0 1px 0 #f6f6f6 inset;
@@ -113,7 +115,12 @@ const theme = createMuiTheme({
   },
 });
 
-const steps = ["", "", "", ""];
+const steps = [
+  "Student Profile",
+  "Completed Courses",
+  "Transfer Courses",
+  "AP/IB Courses",
+];
 
 interface SelectableCourseProps {
   readonly onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -139,6 +146,25 @@ const SelectableCourse: React.FC<SelectableCourseProps> = ({
   return (
     <CourseWrapper>
       <Checkbox
+        style={{ width: 2, height: 2 }}
+        icon={<CheckBoxOutlineBlankIcon style={{ fontSize: 20 }} />}
+        checkedIcon={
+          <CheckBoxIcon style={{ fontSize: 20, color: "#EB5757" }} />
+        }
+        onChange={onChange}
+      />
+      <CourseText>{courseText}</CourseText>
+    </CourseWrapper>
+  );
+};
+
+const ControlledSelectableCourse: React.FC<SelectableCourseProps & {
+  checked: boolean;
+}> = ({ courseText, onChange, checked }) => {
+  return (
+    <CourseWrapper>
+      <Checkbox
+        checked={checked}
         style={{ width: 2, height: 2 }}
         icon={<CheckBoxOutlineBlankIcon style={{ fontSize: 20 }} />}
         checkedIcon={
@@ -230,4 +256,5 @@ export {
   SelectableCourse,
   TitleText,
   ScrollWrapper,
+  ControlledSelectableCourse,
 };

@@ -104,12 +104,10 @@ export const studentReducer = (
       case getType(addTransferClassAction): {
         const { courses } = action.payload;
         draft.student!.transferCourses.push(...courses);
-
         return draft;
       }
       case getType(removeTransferClassAction): {
         const { course } = action.payload;
-
         draft.student!.transferCourses = draft.student!.transferCourses.filter(
           c => c.classId !== course.classId
         );

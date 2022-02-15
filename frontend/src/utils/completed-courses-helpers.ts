@@ -1,34 +1,10 @@
-import {
-  DNDScheduleCourse,
-  DNDSchedule,
-  ISimplifiedCourseData,
-  ISimplifiedCourseDataAPI,
-} from "../models/types";
+import { DNDSchedule } from "../models/types";
 import {
   ScheduleCourse,
   ScheduleTerm,
   ScheduleYear,
-  SeasonWord,
 } from "../../../common/types";
 import { convertToDNDSchedule } from "./schedule-helpers";
-import { deepCopy } from "./deepCopy";
-import { alterScheduleToHaveCorrectYears } from ".";
-
-/**
- * Returns the sum of all credits in the courses
- * @param courses
- */
-export function sumCreditsFromList(courses: ScheduleCourse[]): number {
-  if (!courses) {
-    return 0;
-  }
-
-  let sum = 0;
-  for (const course of courses) {
-    sum += course.numCreditsMax;
-  }
-  return sum;
-}
 
 /**
  * Returns the student's standing based on the number of credits completed
@@ -61,11 +37,11 @@ export function numToTerm(
   yearMap: { [key: number]: ScheduleYear }
 ): ScheduleTerm {
   let year = yearMap[years[Math.floor(index / 4)]];
-  if (index % 4 == 0) {
+  if (index % 4 === 0) {
     return year.fall;
-  } else if (index % 4 == 1) {
+  } else if (index % 4 === 1) {
     return year.spring;
-  } else if (index % 4 == 2) {
+  } else if (index % 4 === 2) {
     return year.summer1;
   } else {
     return year.summer2;
@@ -93,22 +69,10 @@ export function getNextTerm(is_summer: boolean, classes: ScheduleCourse[]) {
   return classes.splice(0, counter);
 }
 
-export function getSimplifiedCourseData(
-  courses: ISimplifiedCourseData[],
-  completion: string,
-  semester: string = ""
-): ISimplifiedCourseDataAPI[] {
-  return courses.map(course => {
-    return {
-      subject: course.subject,
-      course_id: course.classId.toString(),
-      semester: semester,
-      completion: completion,
-    };
-  });
-}
-/*
-  Parses a student's completed courses into a schedule with courses randomly populated into the schedule.
+/**
+ * Parses a student's completed courses into a schedule with courses randomly populated into the schedule.
+ * Note: we approximate "when" courses were taken by sorting by prereq order
+ * @param completedCourses the completed courses
  */
 export function parseCompletedCourses(
   completedCourses: ScheduleCourse[]
@@ -116,39 +80,8 @@ export function parseCompletedCourses(
   const years: number[] = [];
   const yearMap: { [key: number]: ScheduleYear } = {};
 
-  // sorts courses to add by course ID so that it's sorta sorted by when they've likely taken the class
-  const coursesToAdd = completedCourses.sort(
-    (course1: ScheduleCourse, course2: ScheduleCourse) =>
-      course1.classId.toString().localeCompare(course2.classId.toString())
-  );
-
-  let classTerm = 0;
-  let populatingYear = 999;
-
-  // if there are no more years to populate, add a new year
-  const addYearCheck = () => {
-    if (classTerm % 4 === 0) {
-      addBlankScheduleYear(years, yearMap, populatingYear);
-      populatingYear++;
-    }
-  };
-  // while there are still completed classes left to take
-  while (coursesToAdd.length != 0) {
-    addYearCheck();
-    let curTerm = numToTerm(classTerm, years, yearMap);
-    // while the current term is not a class term, continue searching for the next class term.
-    while (classTerm + 1 <= years.length * 4 && curTerm.status != "CLASSES") {
-      classTerm += 1;
-      addYearCheck();
-      curTerm = numToTerm(classTerm, years, yearMap);
-    }
-    let newCourses = getNextTerm(
-      classTerm % 4 == 2 || classTerm % 4 == 3,
-      coursesToAdd
-    );
-    curTerm.classes = newCourses;
-    classTerm += 1;
-  }
+  addBlankScheduleYear(years, yearMap, 2022);
+  yearMap[years[0]].fall.classes = [...completedCourses];
   const [schedule, counter] = convertToDNDSchedule({ years, yearMap }, 0);
   return { schedule, counter };
 }

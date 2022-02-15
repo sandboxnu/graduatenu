@@ -2,13 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { AppState } from "../state/reducers/state";
 import { Dispatch } from "redux";
-import {
-  ScheduleCourse,
-  Major,
-  IRequiredCourse,
-  Requirement,
-} from "../../../common/types";
-import { withRouter, RouteComponentProps } from "react-router-dom";
+import { IRequiredCourse, Major, ScheduleCourse } from "../../../common/types";
+import { RouteComponentProps, withRouter } from "react-router-dom";
 import {
   CourseText,
   OnboardingSelectionTemplate,
@@ -16,34 +11,11 @@ import {
   TitleText,
 } from "./GenericOnboarding";
 import { AddBlock } from "../components/ClassBlocks/AddBlock";
-import { Link as ButtonLink, Collapse, Grid, Paper } from "@material-ui/core";
+import { Collapse, Grid, Link as ButtonLink, Paper } from "@material-ui/core";
 import { setCompletedRequirementsAction } from "../state/actions/studentActions";
 import { getUserMajorFromState } from "../state";
 import { AddClassSearchModal } from "../components/AddClassSearchModal";
-
-/**
- * Flattens the Requirement[] into only a list of Requirements/Requirement sets
- * This means that all inner lists will only contain one class or a list of the primary class and its labs/recitations
- * @param reqs
- */
-function flatten(reqs: Requirement[]): IRequiredCourse[][] {
-  return reqs.map(flattenOne).reduce((array, cur) => array.concat(cur), []);
-}
-
-function flattenOne(req: Requirement): IRequiredCourse[][] {
-  if (req.type === "COURSE") {
-    return [[req as IRequiredCourse]];
-  } else if (
-    req.type === "AND" &&
-    req.courses.filter(c => c.type === "COURSE").length
-  ) {
-    return [req.courses as IRequiredCourse[]];
-  } else if (req.type === "AND" || req.type === "OR") {
-    return flatten(req.courses);
-  } else {
-    return [];
-  }
-}
+import { flatten } from "../utils/course-helpers";
 
 interface CompletedCoursesScreenProps {
   major: Major;

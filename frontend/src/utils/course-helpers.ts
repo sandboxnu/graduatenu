@@ -7,6 +7,8 @@ import {
   ScheduleCourse,
   INEUPrereq,
   INEUPrereqCourse,
+  Requirement,
+  IRequiredCourse,
 } from "../../../common/types";
 
 export async function getScheduleCoursesFromSimplifiedCourseDataAPI(
@@ -55,3 +57,32 @@ export async function getScheduleCourseCoreqs(
   }
   return coursesCoreqs;
 }
+
+/**
+ * Flattens the Requirement[] into only a list of Requirements/Requirement sets
+ * This means that all inner lists will only contain one class or a list of the primary class and its labs/recitations
+ * @param reqs
+ */
+export function flatten(reqs: Requirement[]): IRequiredCourse[][] {
+  return reqs.map(flattenOne).reduce((array, cur) => array.concat(cur), []);
+}
+
+function flattenOne(req: Requirement): IRequiredCourse[][] {
+  if (req.type === "COURSE") {
+    return [[req as IRequiredCourse]];
+  } else if (
+    req.type === "AND" &&
+    req.courses.filter(c => c.type === "COURSE").length
+  ) {
+    return [req.courses as IRequiredCourse[]];
+  } else if (req.type === "AND" || req.type === "OR") {
+    return flatten(req.courses);
+  } else {
+    return [];
+  }
+}
+
+export const courseToString = (c: {
+  subject: string;
+  classId: number | string;
+}) => `${c.subject}${c.classId}`;
