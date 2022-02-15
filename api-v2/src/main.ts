@@ -1,6 +1,7 @@
 import { ClassSerializerInterceptor, ValidationPipe } from '@nestjs/common';
 import { NestFactory, Reflector } from '@nestjs/core';
 import { AppModule } from './app.module';
+import { TransformResponseInterceptor } from './interceptors/transform-response-interceptor';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
@@ -25,6 +26,8 @@ async function bootstrap() {
    * of the type with the appropriate decorators.
    */
   app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
+
+  app.useGlobalInterceptors(new TransformResponseInterceptor());
 
   await app.listen(3000);
 }
