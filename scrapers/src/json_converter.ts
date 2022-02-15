@@ -34,6 +34,8 @@ export const parseRequirement = (
       return parseRequiredRange(req);
     case "COURSE":
       return parseRequiredSimple(req);
+    case "CREDITS":
+      throw new Error("unimplemented!");
   }
 };
 
