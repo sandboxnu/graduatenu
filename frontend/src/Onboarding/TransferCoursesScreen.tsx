@@ -14,13 +14,13 @@ import styled from "styled-components";
 import { fetchCourse } from "../api";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import {
-  ControlledSelectableCourse,
+  SelectableCourse,
   OnboardingSelectionTemplate,
 } from "./GenericOnboarding";
 import { Grid, Paper } from "@material-ui/core";
 import { AddClassSearchModal } from "../components/AddClassSearchModal";
 import { AddBlock } from "../components/ClassBlocks/AddBlock";
-import { courseToString, flatten } from "../utils/course-helpers";
+import { courseEq, coursesToString, flatten } from "../utils/course-helpers";
 
 const TitleText = styled.div`
   font-size: 12px;
@@ -37,8 +37,6 @@ type TransferCoursesScreenProps = {
   setTransferCourses: (transferCourses: ScheduleCourse[]) => void;
 } & RouteComponentProps;
 
-const coursesToString = (c: IRequiredCourse[]) =>
-  c.map(courseToString).join(",");
 const mappableFetchCourse = (c: IRequiredCourse) =>
   fetchCourse(c.subject, String(c.classId));
 const fetchAndFilterCourses = async (cs: IRequiredCourse[]) => {
@@ -46,9 +44,6 @@ const fetchAndFilterCourses = async (cs: IRequiredCourse[]) => {
   // filter will get rid of null values, so cast is safe
   return courses.filter(c => c !== null) as ScheduleCourse[];
 };
-
-const courseEq = (c1: IRequiredCourse, c2: IRequiredCourse) =>
-  c1.classId === c2.classId && c1.subject === c2.subject;
 
 const TransferCoursesScreenComponent: React.FC<TransferCoursesScreenProps> = () => {
   const major = useSelector((state: AppState) => getUserMajorFromState(state)!);
@@ -104,7 +99,7 @@ const TransferCoursesScreenComponent: React.FC<TransferCoursesScreenProps> = () 
       r => !courses.some(c => courseEq(r, c))
     );
     return (
-      <ControlledSelectableCourse
+      <SelectableCourse
         checked={filtered.length !== selectedRequirements.length}
         courseText={courses
           .map(({ subject, classId }) => subject + classId)

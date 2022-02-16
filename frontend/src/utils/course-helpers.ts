@@ -1,14 +1,11 @@
 import { fetchCourse } from "../api";
+import { ISimplifiedCourseDataAPI } from "../models/types";
 import {
-  ISimplifiedCourseData,
-  ISimplifiedCourseDataAPI,
-} from "../models/types";
-import {
-  ScheduleCourse,
   INEUPrereq,
   INEUPrereqCourse,
-  Requirement,
   IRequiredCourse,
+  Requirement,
+  ScheduleCourse,
 } from "../../../common/types";
 
 export async function getScheduleCoursesFromSimplifiedCourseDataAPI(
@@ -27,10 +24,7 @@ export async function getScheduleCoursesFromSimplifiedCourseDataAPI(
 }
 
 function isINEUPrereqCourse(val: INEUPrereq): val is INEUPrereqCourse {
-  if (val as INEUPrereqCourse) {
-    return true;
-  }
-  return false;
+  return !!(val as INEUPrereqCourse);
 }
 
 export async function getScheduleCourseCoreqs(
@@ -86,3 +80,9 @@ export const courseToString = (c: {
   subject: string;
   classId: number | string;
 }) => `${c.subject}${c.classId}`;
+
+export const courseEq = (c1: IRequiredCourse, c2: IRequiredCourse) =>
+  c1.classId === c2.classId && c1.subject === c2.subject;
+
+export const coursesToString = (c: IRequiredCourse[]) =>
+  c.map(courseToString).join(",");

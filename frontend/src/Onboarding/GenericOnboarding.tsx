@@ -24,7 +24,7 @@ const TitleLocation = styled.div`
   margin-top: 96px;
   margin-bottom: 48px;
   width: 256px;
-  font-family: .Helvetica Neue DeskInterface;
+  font-family: .Helvetica Neue DeskInterface, serif;
   font-style: normal;
   font-weight: bold;
   font-size: 24px;
@@ -125,6 +125,7 @@ const steps = [
 interface SelectableCourseProps {
   readonly onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   readonly courseText: string;
+  readonly checked: boolean;
 }
 
 interface GenericOnboardingTemplateProps {
@@ -142,25 +143,8 @@ interface OnboardingSelectionTemplateProps {
 const SelectableCourse: React.FC<SelectableCourseProps> = ({
   courseText,
   onChange,
+  checked,
 }) => {
-  return (
-    <CourseWrapper>
-      <Checkbox
-        style={{ width: 2, height: 2 }}
-        icon={<CheckBoxOutlineBlankIcon style={{ fontSize: 20 }} />}
-        checkedIcon={
-          <CheckBoxIcon style={{ fontSize: 20, color: "#EB5757" }} />
-        }
-        onChange={onChange}
-      />
-      <CourseText>{courseText}</CourseText>
-    </CourseWrapper>
-  );
-};
-
-const ControlledSelectableCourse: React.FC<SelectableCourseProps & {
-  checked: boolean;
-}> = ({ courseText, onChange, checked }) => {
   return (
     <CourseWrapper>
       <Checkbox
@@ -205,7 +189,7 @@ const GenericOnboardingTemplate: React.FC<GenericOnboardingTemplateProps> = ({
 };
 
 const OnboardingSelectionTemplateComponent: React.FC<OnboardingSelectionTemplateProps &
-  RouteComponentProps<{}>> = ({
+  RouteComponentProps> = ({
   screen,
   mainTitleText,
   onSubmit,
@@ -253,8 +237,7 @@ export {
   GenericOnboardingTemplate,
   OnboardingSelectionTemplate,
   MainTitleText,
-  SelectableCourse,
   TitleText,
   ScrollWrapper,
-  ControlledSelectableCourse,
+  SelectableCourse,
 };
