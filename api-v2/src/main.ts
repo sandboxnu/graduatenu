@@ -3,6 +3,7 @@ import { ConfigService } from '@nestjs/config';
 import { NestFactory, Reflector } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { EnvironmentVariables } from './environment-variables';
+import { TransformResponseInterceptor } from './interceptors/transform-response-interceptor';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
@@ -28,6 +29,14 @@ async function bootstrap() {
    */
   app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
 
+  /**
+   * Tranform all data returned from controllers to the ServerResponse shape.
+   */
+  app.useGlobalInterceptors(new TransformResponseInterceptor());
+
+  /**
+   * All paths are prefixed with /api.
+   */
   app.setGlobalPrefix('api');
 
   const configService: ConfigService<EnvironmentVariables, true> = app.get(
