@@ -10,7 +10,7 @@ ENV DISABLE_DATABASE_ENVIRONMENT_CHECK 1
 
 COPY Gemfile /app/Gemfile
 COPY Gemfile.lock /app/Gemfile.lock
-RUN bundle install --without development test
+# RUN bundle install --without development test
 COPY . /app
 
 # Add a script to be executed every time the container starts.
