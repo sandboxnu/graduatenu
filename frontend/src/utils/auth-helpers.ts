@@ -2,11 +2,6 @@ import Cookies from "js-cookie";
 
 export const AUTH_TOKEN_COOKIE_KEY = "auth_token";
 
-export function authCookieExists() {
-  return !!getAuthToken();
-}
-
-// only use this when you know that the user is logged in
 export function getAuthToken() {
   return Cookies.get(AUTH_TOKEN_COOKIE_KEY)!;
 }
