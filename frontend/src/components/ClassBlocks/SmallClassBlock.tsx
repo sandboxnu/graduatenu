@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { DNDScheduleCourse } from "../../models/types";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { IconButton } from "@material-ui/core";
+import { courseToString } from "../../utils/course-helpers";
 
 const Wrapper = styled.div`
   display: flex;
@@ -44,7 +45,7 @@ export const SmallClassBlock: React.FC<SmallClassBlockProps> = ({
   return (
     <Wrapper>
       <TextWrapper>
-        <Title>{course.subject + course.classId}</Title>
+        <Title>{courseToString(course)}</Title>
         <Subtitle>{course.name}</Subtitle>
       </TextWrapper>
       <div style={{ visibility: hovering ? "visible" : "hidden" }}>

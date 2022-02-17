@@ -1,12 +1,11 @@
 import { fetchCourse } from "../api";
+import { ISimplifiedCourseDataAPI } from "../models/types";
 import {
-  ISimplifiedCourseData,
-  ISimplifiedCourseDataAPI,
-} from "../models/types";
-import {
-  ScheduleCourse,
   INEUPrereq,
   INEUPrereqCourse,
+  IRequiredCourse,
+  Requirement,
+  ScheduleCourse,
 } from "../../../common/types";
 
 export async function getScheduleCoursesFromSimplifiedCourseDataAPI(
@@ -25,10 +24,7 @@ export async function getScheduleCoursesFromSimplifiedCourseDataAPI(
 }
 
 function isINEUPrereqCourse(val: INEUPrereq): val is INEUPrereqCourse {
-  if (val as INEUPrereqCourse) {
-    return true;
-  }
-  return false;
+  return !!(val as INEUPrereqCourse);
 }
 
 export async function getScheduleCourseCoreqs(
@@ -55,3 +51,39 @@ export async function getScheduleCourseCoreqs(
   }
   return coursesCoreqs;
 }
+
+/**
+ * Flattens the Requirement[] into only a list of Requirements/Requirement sets
+ * This means that all inner lists will only contain one class or a list of the primary class and its labs/recitations
+ * @param reqs
+ */
+export function flatten(reqs: Requirement[]): IRequiredCourse[][] {
+  return reqs.map(flattenOne).reduce((array, cur) => array.concat(cur), []);
+}
+
+function flattenOne(req: Requirement): IRequiredCourse[][] {
+  if (req.type === "COURSE") {
+    return [[req as IRequiredCourse]];
+  } else if (
+    req.type === "AND" &&
+    req.courses.filter(c => c.type === "COURSE").length
+  ) {
+    return [req.courses as IRequiredCourse[]];
+  } else if (req.type === "AND" || req.type === "OR") {
+    return flatten(req.courses);
+  } else {
+    return [];
+  }
+}
+
+export const courseToString = (c: {
+  subject: string;
+  classId: number | string;
+}) => `${c.subject}${c.classId}`;
+
+type CourseIdentifier = { classId: number | string; subject: string };
+export const courseEq = (c1: CourseIdentifier, c2: CourseIdentifier) =>
+  String(c1.classId) === String(c2.classId) && c1.subject === c2.subject;
+
+export const coursesToString = (c: IRequiredCourse[]) =>
+  c.map(courseToString).join(",");

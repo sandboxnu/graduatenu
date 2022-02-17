@@ -8,6 +8,7 @@ import * as Yup from "yup";
 import styled from "styled-components";
 import { IPlanData, ITemplatePlan, IUserData } from "../models/types";
 import {
+  setStudentAcademicYearAction,
   setStudentAction,
   setStudentCatalogYearAction,
   setStudentConcentrationAction,
@@ -26,7 +27,6 @@ import { SaveInParentConcentrationDropdown } from "../components/ConcentrationDr
 import { BASE_FORMATTED_COOP_CYCLES } from "../plans/coopCycles";
 import { nullOrNumber, nullOrString } from "../utils/plan-helpers";
 import { NextButton } from "../components/common/NextButton";
-import { createInitialStudent } from "../utils/student-helpers";
 
 const StyleForm = styled(Form)`
   display: flex;
@@ -38,6 +38,7 @@ const marginBottomSpace = 12;
 interface OnboardingReduxDispatchProps {
   setStudentAction: (student: IUserData) => void;
   setFullName: (fullName: string) => void;
+  setAcademicYear: (academicYear: number | null) => void;
   setGraduationYear: (graduationYear: number | null) => void;
   setCatalogYear: (catalogYear: number | null) => void;
   setMajor: (major: string | null) => void;
@@ -57,6 +58,7 @@ type Props = OnboardingReduxDispatchProps &
 const OnboardingScreenComponent: React.FC<Props> = ({
   majors,
   setFullName,
+  setAcademicYear,
   setGraduationYear,
   setCatalogYear,
   setMajor,
@@ -89,6 +91,10 @@ const OnboardingScreenComponent: React.FC<Props> = ({
     fullName: Yup.string()
       .max(255)
       .required("Required"),
+    academicYear: Yup.string()
+      .max(255)
+      .nullable()
+      .required("Required"),
     gradYear: Yup.string()
       .max(255)
       .nullable()
@@ -117,6 +123,7 @@ const OnboardingScreenComponent: React.FC<Props> = ({
 
   const handleSubmit = (values: {
     fullName: string;
+    academicYear: string;
     gradYear: string;
     catalogYear: string;
     major: string;
@@ -124,6 +131,7 @@ const OnboardingScreenComponent: React.FC<Props> = ({
     coopCycle: string;
   }): void => {
     setFullName(values.fullName);
+    setAcademicYear(nullOrNumber(parseInt(values.academicYear)));
     setGraduationYear(nullOrNumber(parseInt(values.gradYear)));
     setCatalogYear(nullOrNumber(parseInt(values.catalogYear)));
     setMajor(values.major);
@@ -138,6 +146,7 @@ const OnboardingScreenComponent: React.FC<Props> = ({
       <Formik
         initialValues={{
           fullName: "",
+          academicYear: "",
           gradYear: "",
           catalogYear: "",
           major: "",
@@ -171,6 +180,29 @@ const OnboardingScreenComponent: React.FC<Props> = ({
                 errors.fullName && touched.fullName && errors.fullName
               }
             />
+            <TextField
+              style={{ marginBottom: marginBottomSpace }}
+              id="academicYear"
+              name="academicYear"
+              select
+              label="Academic Year"
+              variant="outlined"
+              value={values.academicYear}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={touched.academicYear && Boolean(errors.academicYear)}
+              helperText={
+                errors.academicYear &&
+                touched.academicYear &&
+                errors.academicYear
+              }
+            >
+              <MenuItem value={1}>1st Year</MenuItem>
+              <MenuItem value={2}>2nd Year</MenuItem>
+              <MenuItem value={3}>3rd Year</MenuItem>
+              <MenuItem value={4}>4th Year</MenuItem>
+              <MenuItem value={5}>5th Year</MenuItem>
+            </TextField>
             <TextField
               style={{ marginBottom: marginBottomSpace }}
               id="gradYear"
@@ -305,6 +337,8 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   setMajor: (major: string | null) => dispatch(setStudentMajorAction(major)),
   setConcentration: (concentration: string | null) =>
     dispatch(setStudentConcentrationAction(concentration)),
+  setAcademicYear: (academicYear: number | null) =>
+    dispatch(setStudentAcademicYearAction(academicYear)),
   setGraduationYear: (gradYear: number | null) =>
     dispatch(setStudentGraduationYearAction(gradYear)),
   setCatalogYear: (catalogYear: number | null) =>

@@ -1,33 +1,33 @@
 import {
-  setCurrentClassCounterForActivePlanAction,
-  incrementCurrentClassCounterForActivePlanAction,
-  toggleYearExpandedForActivePlanAction,
-  setActivePlanCatalogYearAction,
-  setActivePlanStatusAction,
-  updateActivePlanTimestampAction,
   expandAllYearsForActivePlanAction,
+  incrementCurrentClassCounterForActivePlanAction,
+  renameCourseInActivePlanAction,
+  setActivePlanCatalogYearAction,
   setActivePlanConcentrationAction,
   setActivePlanNameAction,
-  renameCourseInActivePlanAction,
+  setActivePlanStatusAction,
+  setCurrentClassCounterForActivePlanAction,
+  toggleYearExpandedForActivePlanAction,
+  updateActivePlanTimestampAction,
 } from "./../actions/userPlansActions";
 import { DNDSchedule, DNDScheduleYear, IPlanData } from "../../models/types";
 import produce from "immer";
 import { getType } from "typesafe-actions";
-import { UserPlansAction, StudentAction } from "../actions";
+import { StudentAction, UserPlansAction } from "../actions";
 import {
-  setActivePlanAction,
+  addCoursesToActivePlanAction,
   addNewPlanAction,
+  changeSemesterStatusForActivePlanAction,
   deletePlan,
-  setUserPlansAction,
-  updateActivePlanAction,
+  removeClassFromActivePlanAction,
+  setActivePlanAction,
+  setActivePlanCoopCycleAction,
   setActivePlanDNDScheduleAction,
   setActivePlanMajorAction,
-  setActivePlanCoopCycleAction,
   setActivePlanScheduleAction,
-  addCoursesToActivePlanAction,
-  removeClassFromActivePlanAction,
+  setUserPlansAction,
   undoRemoveClassFromActivePlanAction,
-  changeSemesterStatusForActivePlanAction,
+  updateActivePlanAction,
   updateSemesterForActivePlanAction,
 } from "../actions/userPlansActions";
 import { resetStudentAction } from "../actions/studentActions";
@@ -255,13 +255,12 @@ export const userPlansReducer = (
             plan,
             activePlan.courseCounter
           );
-          const newScheduleWithCorrectYears = alterScheduleToHaveCorrectYears(
+          draft.plans[
+            activePlanName
+          ].schedule = alterScheduleToHaveCorrectYears(
             newSchedule,
-            academicYear,
-            graduationYear
+            academicYear
           );
-
-          draft.plans[activePlanName].schedule = newScheduleWithCorrectYears;
         }
 
         // remove all classes
