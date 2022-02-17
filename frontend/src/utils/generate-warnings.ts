@@ -34,6 +34,7 @@ import {
 } from "../../../common/types";
 import { flattenRequirements } from "./flattenRequirements";
 import { sortRequirementGroupsByConstraint } from "./requirementGroupUtils";
+import { courseEq, courseToString } from "./course-helpers";
 
 /*
 CreditRange interface to track the min and max credits for a particular season.
@@ -101,7 +102,7 @@ export function produceWarnings(
     addCourse: (toAdd: ScheduleCourse | INEUCourse, termId: number) => {
       const code = courseCode(toAdd);
       const allTerms = taken.get(code);
-      if (allTerms != undefined) {
+      if (allTerms !== undefined) {
         allTerms.terms.push(termId);
       } else {
         var courseI: CourseInfo = {
@@ -619,11 +620,7 @@ function hashableCourseIsRequired(
   hashableCourse: HashableCourse,
   requiredCourses: IRequiredCourse[]
 ): boolean {
-  return requiredCourses.some(
-    (requiredCourse: IRequiredCourse) =>
-      requiredCourse.classId === Number(hashableCourse.classId) &&
-      requiredCourse.subject === hashableCourse.subject
-  );
+  return requiredCourses.some(c => courseEq(c, hashableCourse));
 }
 
 /**
@@ -1050,7 +1047,7 @@ export const courseCode = (
     | ScheduleCourse
     | HashableCourse
 ) => {
-  return "" + course.subject + course.classId;
+  return courseToString(course);
 };
 
 /**

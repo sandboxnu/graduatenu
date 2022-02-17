@@ -10,6 +10,7 @@ import {
 import { Schedule, ScheduleCourse, SeasonWord } from "../../../common/types";
 import { findExamplePlanFromCoopCycle } from "./plan-helpers";
 import { deepCopy } from "./deepCopy";
+import { courseEq, courseToString } from "./course-helpers";
 
 export function generateBlankCoopPlan(
   major: string,
@@ -541,33 +542,17 @@ export function scheduleHasClasses(schedule: Schedule): boolean {
  */
 export function getCompletedCourseStrings(schedule: DNDSchedule): string[] {
   let fulfilled: string[] = [];
-
+  const pushFulfilled = (term: DNDScheduleTerm) => {
+    if (term.status !== "INACTIVE") {
+      fulfilled = [...fulfilled, ...term.classes.map(courseToString)];
+    }
+  };
   for (const y of schedule.years) {
     const year: DNDScheduleYear = schedule.yearMap[y];
-
-    if (year.fall.status !== "INACTIVE") {
-      for (const course of year.fall.classes) {
-        fulfilled.push(course.subject + course.classId);
-      }
-    }
-
-    if (year.spring.status !== "INACTIVE") {
-      for (const course of year.spring.classes) {
-        fulfilled.push(course.subject + course.classId);
-      }
-    }
-
-    if (year.summer1.status !== "INACTIVE") {
-      for (const course of year.summer1.classes) {
-        fulfilled.push(course.subject + course.classId);
-      }
-    }
-
-    if (year.summer2.status !== "INACTIVE") {
-      for (const course of year.summer2.classes) {
-        fulfilled.push(course.subject + course.classId);
-      }
-    }
+    pushFulfilled(year.fall);
+    pushFulfilled(year.spring);
+    pushFulfilled(year.summer1);
+    pushFulfilled(year.summer2);
   }
 
   return fulfilled;
@@ -623,11 +608,7 @@ export function findCourseWarnings(
  * @returns whether or not this course is in the term
  */
 function isCourseInTerm(courseToAdd: ScheduleCourse, term: DNDScheduleTerm) {
-  return term.classes.some(
-    course =>
-      String(courseToAdd.classId) === String(course.classId) &&
-      courseToAdd.subject === course.subject
-  );
+  return term.classes.some(c => courseEq(c, courseToAdd));
 }
 
 /**

@@ -19,6 +19,7 @@ import { Tooltip } from "@material-ui/core";
 import { UndoDelete } from "./UndoDelete";
 import { APExamGroups2020To2021 } from "../../../common/ap_exams";
 import { IBExamGroups2020To2021 } from "../../../common/ib_exams";
+import { courseEq, courseToString } from "../utils/course-helpers";
 
 interface TransferCreditsProps {
   transferCredits: ScheduleCourse[];
@@ -89,10 +90,7 @@ function findExamText(
   for (const examGroup of examGroups) {
     for (const transferableExam of examGroup.transferableExams) {
       for (const mappableCourse of transferableExam.mappableCourses) {
-        if (
-          mappableCourse.subject === course.subject &&
-          String(mappableCourse.classId) === course.classId
-        ) {
+        if (courseEq(mappableCourse, course)) {
           return `${transferableExam.type} ${transferableExam.name}`;
         }
       }
@@ -193,7 +191,7 @@ class TransferCreditsComponent extends React.Component<
       if (!!scheduleCourse) {
         return (
           <Tooltip title={renderTooltip(scheduleCourse)} placement="top">
-            <ClassWrapper key={scheduleCourse.subject + scheduleCourse.classId}>
+            <ClassWrapper key={courseToString(scheduleCourse)}>
               <NonDraggableClassBlock
                 course={scheduleCourse}
                 onDelete={this.onDeleteClass.bind(this, scheduleCourse)}

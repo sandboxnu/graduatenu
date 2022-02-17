@@ -81,8 +81,9 @@ export const courseToString = (c: {
   classId: number | string;
 }) => `${c.subject}${c.classId}`;
 
-export const courseEq = (c1: IRequiredCourse, c2: IRequiredCourse) =>
-  c1.classId === c2.classId && c1.subject === c2.subject;
+type CourseIdentifier = { classId: number | string; subject: string };
+export const courseEq = (c1: CourseIdentifier, c2: CourseIdentifier) =>
+  String(c1.classId) === String(c2.classId) && c1.subject === c2.subject;
 
 export const coursesToString = (c: IRequiredCourse[]) =>
   c.map(courseToString).join(",");

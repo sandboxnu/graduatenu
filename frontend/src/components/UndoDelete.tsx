@@ -3,6 +3,7 @@ import React from "react";
 import styled from "styled-components";
 import CloseIcon from "@material-ui/icons/Close";
 import { ScheduleCourse } from "../../../common/types";
+import { courseToString } from "../utils/course-helpers";
 
 interface UndoDeleteProps {
   deletedClass: ScheduleCourse | undefined;
@@ -50,10 +51,7 @@ export class UndoDeleteComponent extends React.Component<
           message={
             <span>
               {!!this.props.deletedClass
-                ? "Removed " +
-                  this.props.deletedClass.subject +
-                  this.props.deletedClass.classId +
-                  ": " +
+                ? `Removed ${courseToString(this.props.deletedClass)}: ` +
                   this.props.deletedClass.name
                 : "Removed Class"}
             </span>

@@ -40,6 +40,7 @@ import {
 } from "../../utils/schedule-helpers";
 import { UndoDelete } from "../UndoDelete";
 import ScheduleChangeTracker from "../../utils/ScheduleChangeTracker";
+import { courseToString } from "../../utils/course-helpers";
 
 const OutsideContainer = styled.div`
   width: 100%;
@@ -198,7 +199,7 @@ class EditableSemesterBlockComponent extends React.Component<
 
   onDeleteClass = (course: DNDScheduleCourse, semester: DNDScheduleTerm) => {
     ScheduleChangeTracker.getInstance().addRemoveClassChange(
-      course.subject + course.classId,
+      courseToString(course),
       semester.termId
     );
     this.setState(
@@ -326,7 +327,7 @@ class EditableSemesterBlockComponent extends React.Component<
             );
             courses.forEach(course => {
               ScheduleChangeTracker.getInstance().addAddClassChange(
-                course.subject + course.classId,
+                courseToString(course),
                 this.props.semester.termId
               );
             });

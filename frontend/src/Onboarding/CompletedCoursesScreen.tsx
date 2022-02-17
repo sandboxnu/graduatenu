@@ -15,7 +15,12 @@ import { Collapse, Grid, Link as ButtonLink, Paper } from "@material-ui/core";
 import { setCompletedRequirementsAction } from "../state/actions/studentActions";
 import { getUserMajorFromState } from "../state";
 import { AddClassSearchModal } from "../components/AddClassSearchModal";
-import { courseEq, coursesToString, flatten } from "../utils/course-helpers";
+import {
+  courseEq,
+  coursesToString,
+  courseToString,
+  flatten,
+} from "../utils/course-helpers";
 
 interface CompletedCoursesScreenProps {
   major: Major;
@@ -96,9 +101,7 @@ class CompletedCoursesComponent extends Component<Props, State> {
       <SelectableCourse
         key={coursesToString(courses)}
         checked={filtered.length !== requirements.length}
-        courseText={courses
-          .map(({ subject, classId }) => subject + classId)
-          .join(" and ")}
+        courseText={courses.map(courseToString).join(" and ")}
         onChange={e => {
           this.setState({
             completedRequirements: e.target.checked
