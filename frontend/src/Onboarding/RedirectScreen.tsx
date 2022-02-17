@@ -87,7 +87,7 @@ export const RedirectScreen: React.FC<Props> = ({ redirectUrl }) => {
     }
   }, [dispatch]);
 
-  if ((getAuthToken() && isError) || !getAuthToken()) {
+  if (isError || !getAuthToken()) {
     // jwt token expired or does not exist
     // remove cookie if it already exists
     Cookies.remove(AUTH_TOKEN_COOKIE_KEY, {
