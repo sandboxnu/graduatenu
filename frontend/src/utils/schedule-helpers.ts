@@ -48,7 +48,7 @@ export function generateInitialSchedule(
   }
 
   return [
-    alterScheduleToHaveCorrectYears(schedule, academicYear, graduationYear),
+    alterScheduleToHaveCorrectYears(schedule, academicYear),
     courseCounter,
   ];
 }
@@ -71,8 +71,7 @@ export function generateBlankCompletedCourseSchedule(
   const [schedule, counter] = generateBlankCoopPlan(major, coopCycle, allPlans);
   const yearCorrectedSchedule = alterScheduleToHaveCorrectYears(
     schedule,
-    academicYear,
-    graduationYear
+    academicYear
   );
 
   completedCourseSchedule.years.forEach(year => {
@@ -144,7 +143,7 @@ export function generateInitialScheduleNoCoopCycle(
   const schedule = generateYearlessSchedule(dndCourses, numYears);
 
   return [
-    alterScheduleToHaveCorrectYears(schedule, academicYear, graduationYear),
+    alterScheduleToHaveCorrectYears(schedule, academicYear),
     courseCounter,
   ];
 }
@@ -226,30 +225,30 @@ export function generateInitialScheduleFromExistingPlan(
   );
   let [schedule, courseCounter] = convertToDNDSchedule(currentPlan!, 0);
   // set correct year numbers
-  schedule = alterScheduleToHaveCorrectYears(
-    schedule,
-    academicYear,
-    graduationYear
-  );
+  schedule = alterScheduleToHaveCorrectYears(schedule, academicYear);
 
   return [schedule, courseCounter];
 }
-/*
-Modifies schedule years to be correct based on academic and graduation year.
-School years in the schedule are based on the ending year. For example, the 2019
-- 2020 school year is all represented by 2020. 
+
+export const calculateScheduleStartYear = (academicYear: number): number => {
+  const today = new Date();
+  // School academic year begins in September
+  // ie, the 2022 school year starts in September 2021
+  const schoolYear = today.getFullYear() + (today.getMonth() <= 8 ? 0 : 1);
+  // current year (2022) - 3rd year = started in 2019 + 1 = 2020
+  return schoolYear - academicYear + 1;
+};
+
+/**
+ * Modifies schedule years to be correct based on academic and graduation year.
+ * School years in the schedule are based on the ending year. For example, the 2019
+ * - 2020 school year is all represented by 2020.
  */
 export function alterScheduleToHaveCorrectYears(
   schedule: DNDSchedule,
-  academicYear: number,
-  graduationYear: number
+  academicYear: number
 ): DNDSchedule {
-  const currentCalendarYear = new Date().getFullYear();
-  // Starting in September, students move up in academic year
-  const currentYear =
-    new Date().getMonth() <= 8 ? currentCalendarYear : currentCalendarYear + 1;
-  const numYearsInSchool = graduationYear - currentYear + academicYear;
-  const startingYear = graduationYear - numYearsInSchool + 1;
+  const startingYear = calculateScheduleStartYear(academicYear);
 
   const newYearMap: { [key: number]: DNDScheduleYear } = {};
   const newYears: number[] = [];

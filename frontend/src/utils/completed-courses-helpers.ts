@@ -4,7 +4,10 @@ import {
   ScheduleTerm,
   ScheduleYear,
 } from "../../../common/types";
-import { convertToDNDSchedule } from "./schedule-helpers";
+import {
+  calculateScheduleStartYear,
+  convertToDNDSchedule,
+} from "./schedule-helpers";
 
 /**
  * Returns the student's standing based on the number of credits completed
@@ -70,17 +73,21 @@ export function getNextTerm(is_summer: boolean, classes: ScheduleCourse[]) {
 }
 
 /**
- * Parses a student's completed courses into a schedule with courses randomly populated into the schedule.
- * Note: we approximate "when" courses were taken by sorting by prereq order
+ * Parses a student's completed courses into a schedule with courses just all shoved into the first fall semester.
  * @param completedCourses the completed courses
+ * @param academicYear the academic year of the student (eg 3 for current 3rd year)
  */
 export function parseCompletedCourses(
-  completedCourses: ScheduleCourse[]
+  completedCourses: ScheduleCourse[],
+  academicYear: number
 ): { schedule: DNDSchedule; counter: number } {
   const years: number[] = [];
   const yearMap: { [key: number]: ScheduleYear } = {};
-
-  addBlankScheduleYear(years, yearMap, 2022);
+  addBlankScheduleYear(
+    years,
+    yearMap,
+    calculateScheduleStartYear(academicYear)
+  );
   yearMap[years[0]].fall.classes = [...completedCourses];
   const [schedule, counter] = convertToDNDSchedule({ years, yearMap }, 0);
   return { schedule, counter };

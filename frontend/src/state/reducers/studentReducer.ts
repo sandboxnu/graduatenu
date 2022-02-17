@@ -3,30 +3,26 @@ import produce from "immer";
 import { getType } from "typesafe-actions";
 import { StudentAction, UserPlansAction } from "../actions";
 import {
-  setStudentAcademicYearAction,
-  setStudentGraduationYearAction,
-  setStudentCoopCycleAction,
-  setStudentExamCreditsAction,
-  resetStudentAction,
-  setStudentMajorAction,
-  setStudentAction,
   addTransferClassAction,
   removeTransferClassAction,
+  resetStudentAction,
   setCompletedCoursesAction,
   setCompletedRequirementsAction,
-  setTransferCoursesAction,
+  setStudentAcademicYearAction,
+  setStudentAction,
   setStudentCatalogYearAction,
   setStudentConcentrationAction,
-  setStudentIdAction,
-  setStudentFullNameAction,
+  setStudentCoopCycleAction,
   setStudentEmailAction,
+  setStudentExamCreditsAction,
+  setStudentFullNameAction,
+  setStudentGraduationYearAction,
+  setStudentIdAction,
+  setStudentMajorAction,
+  setTransferCoursesAction,
 } from "../actions/studentActions";
 import { DNDSchedule, IUserData } from "../../models/types";
-import { ScheduleCourse } from "../../../../common/types";
-import {
-  alterScheduleToHaveCorrectYears,
-  parseCompletedCourses,
-} from "../../utils";
+import { parseCompletedCourses } from "../../utils";
 
 export interface StudentState {
   student?: IUserData;
@@ -119,19 +115,13 @@ export const studentReducer = (
         return draft;
       }
       case getType(setCompletedCoursesAction): {
-        // sort the completed courses so that when we add it to the schedule, it'll be more or less in order
-        // for some reason it doesn't register classID as a string so I use toString
-        const completedCourses = action.payload.completedCourses.sort(
-          (course1: ScheduleCourse, course2: ScheduleCourse) =>
-            course1.classId.toString().localeCompare(course2.classId.toString())
+        const student = draft.student!;
+        student.completedCourses = action.payload.completedCourses;
+        const { schedule, counter } = parseCompletedCourses(
+          student.completedCourses,
+          student.academicYear!
         );
-        draft.student!.completedCourses = completedCourses;
-        const { schedule, counter } = parseCompletedCourses(completedCourses);
-        draft.completedCourseSchedule = alterScheduleToHaveCorrectYears(
-          schedule,
-          draft.student!.academicYear!,
-          draft.student!.graduationYear!
-        );
+        draft.completedCourseSchedule = schedule;
         draft.completedCourseCounter = counter;
         return draft;
       }

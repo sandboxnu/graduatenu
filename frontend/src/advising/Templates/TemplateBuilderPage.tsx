@@ -5,7 +5,7 @@ import {
   deleteTemplatePlan,
   fetchTemplate,
 } from "../../services/TemplateService";
-import { useSelector, shallowEqual, useDispatch, batch } from "react-redux";
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import {
   getActivePlanFromState,
   getActivePlanNameFromState,
@@ -100,8 +100,7 @@ export const TemplateBuilderPage = () => {
         userInfo.user.graduationYear && userInfo.user.academicYear
           ? alterScheduleToHaveCorrectYears(
               JSON.parse(JSON.stringify(activePlan.schedule)),
-              userInfo.user.academicYear,
-              userInfo.user.graduationYear
+              userInfo.user.academicYear
             )
           : activePlan.schedule;
 
