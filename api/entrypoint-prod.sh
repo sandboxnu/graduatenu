@@ -1,9 +1,6 @@
 #!/bin/bash
 set -e
 
-cd /app
-bundle install --without development test
-
 # Remove a potentially pre-existing server.pid for Rails.
 rm -f /app/tmp/pids/server.pid
 
