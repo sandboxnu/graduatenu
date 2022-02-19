@@ -33,6 +33,8 @@ import { TransferCredits } from "../TransferCreditHolder";
 import { LoadingSpinner } from "../common/LoadingSpinner";
 import ScheduleChangeTracker from "../../utils/ScheduleChangeTracker";
 import { Comments } from "./Comments";
+import { OutlinedButton } from "../common/OutlinedButton";
+import AddSemesterButton from "./AddSemesterButton";
 
 const OuterContainer = styled.div`
   display: flex;
@@ -102,6 +104,7 @@ const ScheduleComponent: React.FC<ScheduleProps> = ({
           collapsibleYears={collapsibleYears}
         />
       ))}
+      <AddSemesterButton />
     </>
   ) : (
     <LoadingSpinner isTall />
