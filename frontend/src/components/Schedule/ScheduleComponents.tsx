@@ -33,8 +33,7 @@ import { TransferCredits } from "../TransferCreditHolder";
 import { LoadingSpinner } from "../common/LoadingSpinner";
 import ScheduleChangeTracker from "../../utils/ScheduleChangeTracker";
 import { Comments } from "./Comments";
-import { OutlinedButton } from "../common/OutlinedButton";
-import AddSemesterButton from "./AddSemesterButton";
+import { AddSemesterButton } from "./AddSemesterButton";
 
 const OuterContainer = styled.div`
   display: flex;

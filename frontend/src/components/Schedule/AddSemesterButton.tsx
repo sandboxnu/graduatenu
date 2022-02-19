@@ -1,7 +1,7 @@
 import React from "react";
 import { WhiteColorButton } from "../common/ColoredButtons";
 
-const AddSemesterButton = () => {
+export const AddSemesterButton = () => {
   return (
     <WhiteColorButton
       variant="contained"
@@ -17,5 +17,3 @@ const AddSemesterButton = () => {
     </WhiteColorButton>
   );
 };
-
-export default AddSemesterButton;
