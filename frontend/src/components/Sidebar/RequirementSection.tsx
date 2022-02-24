@@ -24,6 +24,7 @@ import { AppState } from "../../state/reducers/state";
 import { getCurrentClassCounterFromState } from "../../state";
 import { incrementCurrentClassCounterForActivePlanAction } from "../../state/actions/userPlansActions";
 import { Dispatch } from "redux";
+import { courseToString } from "../../utils/course-helpers";
 
 const SectionHeaderWrapper = styled.div`
   display: flex;
@@ -239,8 +240,8 @@ class RequirementSectionComponent extends React.Component<
 
     for (let i = 0; i < dndCourses.length; i++) {
       let course: DNDScheduleCourse = dndCourses[i];
-      classData[course.subject + course.classId] = course;
-      indexData[course.subject + course.classId] = i;
+      classData[courseToString(course)] = course;
+      indexData[courseToString(course)] = i;
     }
 
     return {
@@ -358,13 +359,15 @@ class RequirementSectionComponent extends React.Component<
     course: IRequiredCourse,
     andCourse?: IRequiredCourse
   ) {
+    const courseString = courseToString(course);
     const convertedCourse: DNDScheduleCourse = this.state.classData[
-      course.subject + course.classId
+      courseString
     ];
 
     if (andCourse) {
+      const andCourseString = courseToString(andCourse);
       const convertedLab: DNDScheduleCourse = this.state.classData[
-        andCourse.subject + andCourse.classId
+        andCourseString
       ];
 
       if (convertedCourse == null) {
@@ -372,23 +375,13 @@ class RequirementSectionComponent extends React.Component<
       } else {
         return (
           <SidebarClassBlock
-            key={
-              course.subject +
-              course.classId +
-              andCourse.subject +
-              andCourse.classId +
-              index
-            }
+            key={`${courseString}${andCourseString}${index}`}
             class={convertedCourse}
             lab={convertedLab}
-            index={this.state.indexData[course.subject + course.classId]}
+            index={this.state.indexData[courseString]}
             completed={
-              this.props.completedCourses.includes(
-                course.subject + course.classId
-              ) &&
-              this.props.completedCourses.includes(
-                andCourse.subject + andCourse.classId
-              )
+              this.props.completedCourses.includes(courseString) &&
+              this.props.completedCourses.includes(andCourseString)
             }
             currentClassCounter={this.props.currentClassCounter}
             level={level}
@@ -402,12 +395,10 @@ class RequirementSectionComponent extends React.Component<
       } else {
         return (
           <SidebarClassBlock
-            key={course.subject + course.classId}
+            key={courseString}
             class={convertedCourse}
-            index={this.state.indexData[course.subject + course.classId]}
-            completed={this.props.completedCourses.includes(
-              course.subject + course.classId
-            )}
+            index={this.state.indexData[courseString]}
+            completed={this.props.completedCourses.includes(courseString)}
             currentClassCounter={this.props.currentClassCounter}
             level={level}
             isEditable={this.props.isEditable}

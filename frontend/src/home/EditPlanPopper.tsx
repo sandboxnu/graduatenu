@@ -2,30 +2,27 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Popper from "@material-ui/core/Popper";
 import { Autocomplete } from "@material-ui/lab";
-import { TextField, Button, Tooltip } from "@material-ui/core";
+import { Button, TextField, Tooltip } from "@material-ui/core";
 import { EditPlanButton } from "./EditPlanButton";
 import styled from "styled-components";
 import { batch, connect } from "react-redux";
 import { AppState } from "../state/reducers/state";
 import { Dispatch } from "redux";
-import { DNDSchedule } from "../models/types";
+import { DNDSchedule, IPlanData } from "../models/types";
 import {
   getAcademicYearFromState,
   getActivePlanFromState,
   getGraduationYearFromState,
-  getUserIdFromState,
-  getUserPrimaryPlanIdFromState,
-  safelyGetTransferCoursesFromState,
-} from "../state";
-import { IPlanData } from "../models/types";
-import { Major, Schedule, ScheduleCourse } from "../../../common/types";
-import {
   getMajorsFromState,
   getPlansFromState,
   getTakenCreditsFromState,
   getUserFullNameFromState,
+  getUserIdFromState,
+  getUserPrimaryPlanIdFromState,
   safelyGetActivePlanCatalogYearFromState,
+  safelyGetTransferCoursesFromState,
 } from "../state";
+import { Major, Schedule, ScheduleCourse } from "../../../common/types";
 import {
   alterScheduleToHaveCorrectYears,
   clearSchedule,
@@ -36,17 +33,17 @@ import {
 } from "../utils";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import {
-  setActivePlanCoopCycleAction,
-  setActivePlanMajorAction,
-  setActivePlanDNDScheduleAction,
-  setCurrentClassCounterForActivePlanAction,
   setActivePlanCatalogYearAction,
+  setActivePlanCoopCycleAction,
+  setActivePlanDNDScheduleAction,
+  setActivePlanMajorAction,
+  setCurrentClassCounterForActivePlanAction,
 } from "../state/actions/userPlansActions";
 import { SaveOnChangeConcentrationDropdown } from "../components/ConcentrationDropdown";
 import { setPrimaryPlan } from "../services/PlanService";
 import {
-  SnackbarAlert,
   ALERT_STATUS,
+  SnackbarAlert,
 } from "../components/common/SnackbarAlert";
 import { BASE_FORMATTED_COOP_CYCLES } from "../plans/coopCycles";
 
@@ -62,10 +59,12 @@ const TopRow = styled.div`
 const EditProfileButton = styled(Link)`
   font-size: 0.8em;
   color: #eb5757;
+
   &:focus,
   &:visited,
   &:link {
     text-decoration: none;
+
     &:hover {
       text-decoration: underline;
     }
@@ -378,8 +377,7 @@ export class EditPlanPopperComponent extends React.Component<
     this.props.setActivePlanDNDSchedule(
       alterScheduleToHaveCorrectYears(
         clearSchedule(this.props.plan.schedule),
-        this.props.academicYear,
-        this.props.graduationYear
+        this.props.academicYear
       ),
       this.props.transferCourses
     );

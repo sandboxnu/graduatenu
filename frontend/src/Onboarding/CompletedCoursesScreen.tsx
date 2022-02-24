@@ -2,48 +2,25 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { AppState } from "../state/reducers/state";
 import { Dispatch } from "redux";
+import { IRequiredCourse, Major, ScheduleCourse } from "../../../common/types";
+import { RouteComponentProps, withRouter } from "react-router-dom";
 import {
-  ScheduleCourse,
-  Major,
-  IRequiredCourse,
-  Requirement,
-} from "../../../common/types";
-import { withRouter, RouteComponentProps } from "react-router-dom";
-import {
+  SelectableCourse,
   CourseText,
   OnboardingSelectionTemplate,
-  SelectableCourse,
   TitleText,
 } from "./GenericOnboarding";
 import { AddBlock } from "../components/ClassBlocks/AddBlock";
-import { Link as ButtonLink, Collapse, Grid, Paper } from "@material-ui/core";
+import { Collapse, Grid, Link as ButtonLink, Paper } from "@material-ui/core";
 import { setCompletedRequirementsAction } from "../state/actions/studentActions";
 import { getUserMajorFromState } from "../state";
 import { AddClassSearchModal } from "../components/AddClassSearchModal";
-
-/**
- * Flattens the Requirement[] into only a list of Requirements/Requirement sets
- * This means that all inner lists will only contain one class or a list of the primary class and its labs/recitations
- * @param reqs
- */
-function flatten(reqs: Requirement[]): IRequiredCourse[][] {
-  return reqs.map(flattenOne).reduce((array, cur) => array.concat(cur), []);
-}
-
-function flattenOne(req: Requirement): IRequiredCourse[][] {
-  if (req.type === "COURSE") {
-    return [[req as IRequiredCourse]];
-  } else if (
-    req.type === "AND" &&
-    req.courses.filter(c => c.type === "COURSE").length
-  ) {
-    return [req.courses as IRequiredCourse[]];
-  } else if (req.type === "AND" || req.type === "OR") {
-    return flatten(req.courses);
-  } else {
-    return [];
-  }
-}
+import {
+  courseEq,
+  coursesToString,
+  courseToString,
+  flatten,
+} from "../utils/course-helpers";
 
 interface CompletedCoursesScreenProps {
   major: Major;
@@ -89,29 +66,6 @@ class CompletedCoursesComponent extends Component<Props, State> {
     this.props.setCompletedRequirements(this.state.completedRequirements);
   }
 
-  /**
-   * Handles a class when it has been checked off. If it is being unchecked, it removes it,
-   * and if it is being checked, it adds it to the list of completed requirements
-   * @param e
-   * @param course
-   */
-  async onChecked(e: any, course: IRequiredCourse) {
-    const checked = e.target.checked;
-
-    if (checked) {
-      this.setState(prevState => ({
-        completedRequirements: [...prevState.completedRequirements, course],
-      }));
-    } else {
-      let courses = this.state.completedRequirements.filter(
-        c => c.subject !== course.subject && c.classId !== course.classId
-      );
-      this.setState({
-        completedRequirements: courses,
-      });
-    }
-  }
-
   // changes the expanding state of the specific section
   onExpand(requirementGroup: string, change: Boolean) {
     this.state.expandedSections.set(requirementGroup, change);
@@ -139,15 +93,22 @@ class CompletedCoursesComponent extends Component<Props, State> {
 
   // Renders one course/courseset (if it contains labs/recitiations, and seperated)
   renderCourse(courses: IRequiredCourse[]) {
-    let allCourse = courses.map(course => course.subject + course.classId);
-    const onChange = (e: React.ChangeEvent<HTMLInputElement>) =>
-      courses.forEach(course => this.onChecked(e, course));
-
+    const requirements = this.state.completedRequirements;
+    const filtered = requirements.filter(
+      r => !courses.some(c => courseEq(r, c))
+    );
     return (
       <SelectableCourse
-        key={allCourse[0]}
-        onChange={onChange}
-        courseText={allCourse.join(" and ")}
+        key={coursesToString(courses)}
+        checked={filtered.length !== requirements.length}
+        courseText={courses.map(courseToString).join(" and ")}
+        onChange={e => {
+          this.setState({
+            completedRequirements: e.target.checked
+              ? [...requirements, ...courses]
+              : filtered,
+          });
+        }}
       />
     );
   }

@@ -10,6 +10,7 @@ import {
 import { Schedule, ScheduleCourse, SeasonWord } from "../../../common/types";
 import { findExamplePlanFromCoopCycle } from "./plan-helpers";
 import { deepCopy } from "./deepCopy";
+import { courseEq, courseToString } from "./course-helpers";
 
 export function generateBlankCoopPlan(
   major: string,
@@ -48,7 +49,7 @@ export function generateInitialSchedule(
   }
 
   return [
-    alterScheduleToHaveCorrectYears(schedule, academicYear, graduationYear),
+    alterScheduleToHaveCorrectYears(schedule, academicYear),
     courseCounter,
   ];
 }
@@ -71,8 +72,7 @@ export function generateBlankCompletedCourseSchedule(
   const [schedule, counter] = generateBlankCoopPlan(major, coopCycle, allPlans);
   const yearCorrectedSchedule = alterScheduleToHaveCorrectYears(
     schedule,
-    academicYear,
-    graduationYear
+    academicYear
   );
 
   completedCourseSchedule.years.forEach(year => {
@@ -144,7 +144,7 @@ export function generateInitialScheduleNoCoopCycle(
   const schedule = generateYearlessSchedule(dndCourses, numYears);
 
   return [
-    alterScheduleToHaveCorrectYears(schedule, academicYear, graduationYear),
+    alterScheduleToHaveCorrectYears(schedule, academicYear),
     courseCounter,
   ];
 }
@@ -226,30 +226,30 @@ export function generateInitialScheduleFromExistingPlan(
   );
   let [schedule, courseCounter] = convertToDNDSchedule(currentPlan!, 0);
   // set correct year numbers
-  schedule = alterScheduleToHaveCorrectYears(
-    schedule,
-    academicYear,
-    graduationYear
-  );
+  schedule = alterScheduleToHaveCorrectYears(schedule, academicYear);
 
   return [schedule, courseCounter];
 }
-/*
-Modifies schedule years to be correct based on academic and graduation year.
-School years in the schedule are based on the ending year. For example, the 2019
-- 2020 school year is all represented by 2020. 
+
+export const calculateScheduleStartYear = (academicYear: number): number => {
+  const today = new Date();
+  // School academic year begins in September
+  // ie, the 2022 school year starts in September 2021
+  const schoolYear = today.getFullYear() + (today.getMonth() <= 8 ? 0 : 1);
+  // current year (2022) - 3rd year = started in 2019 + 1 = 2020
+  return schoolYear - academicYear + 1;
+};
+
+/**
+ * Modifies schedule years to be correct based on academic and graduation year.
+ * School years in the schedule are based on the ending year. For example, the 2019
+ * - 2020 school year is all represented by 2020.
  */
 export function alterScheduleToHaveCorrectYears(
   schedule: DNDSchedule,
-  academicYear: number,
-  graduationYear: number
+  academicYear: number
 ): DNDSchedule {
-  const currentCalendarYear = new Date().getFullYear();
-  // Starting in September, students move up in academic year
-  const currentYear =
-    new Date().getMonth() <= 8 ? currentCalendarYear : currentCalendarYear + 1;
-  const numYearsInSchool = graduationYear - currentYear + academicYear;
-  const startingYear = graduationYear - numYearsInSchool + 1;
+  const startingYear = calculateScheduleStartYear(academicYear);
 
   const newYearMap: { [key: number]: DNDScheduleYear } = {};
   const newYears: number[] = [];
@@ -542,33 +542,17 @@ export function scheduleHasClasses(schedule: Schedule): boolean {
  */
 export function getCompletedCourseStrings(schedule: DNDSchedule): string[] {
   let fulfilled: string[] = [];
-
+  const pushFulfilled = (term: DNDScheduleTerm) => {
+    if (term.status !== "INACTIVE") {
+      fulfilled = [...fulfilled, ...term.classes.map(courseToString)];
+    }
+  };
   for (const y of schedule.years) {
     const year: DNDScheduleYear = schedule.yearMap[y];
-
-    if (year.fall.status !== "INACTIVE") {
-      for (const course of year.fall.classes) {
-        fulfilled.push(course.subject + course.classId);
-      }
-    }
-
-    if (year.spring.status !== "INACTIVE") {
-      for (const course of year.spring.classes) {
-        fulfilled.push(course.subject + course.classId);
-      }
-    }
-
-    if (year.summer1.status !== "INACTIVE") {
-      for (const course of year.summer1.classes) {
-        fulfilled.push(course.subject + course.classId);
-      }
-    }
-
-    if (year.summer2.status !== "INACTIVE") {
-      for (const course of year.summer2.classes) {
-        fulfilled.push(course.subject + course.classId);
-      }
-    }
+    pushFulfilled(year.fall);
+    pushFulfilled(year.spring);
+    pushFulfilled(year.summer1);
+    pushFulfilled(year.summer2);
   }
 
   return fulfilled;
@@ -624,11 +608,7 @@ export function findCourseWarnings(
  * @returns whether or not this course is in the term
  */
 function isCourseInTerm(courseToAdd: ScheduleCourse, term: DNDScheduleTerm) {
-  return term.classes.some(
-    course =>
-      String(courseToAdd.classId) === String(course.classId) &&
-      courseToAdd.subject === course.subject
-  );
+  return term.classes.some(c => courseEq(c, courseToAdd));
 }
 
 /**

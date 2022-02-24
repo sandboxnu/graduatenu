@@ -58,11 +58,6 @@ const ButtonContainer = styled.div`
 `;
 
 interface ReduxStoreLoginScreenProps {
-  setAcademicYear: (academicYear: number) => void;
-  setGraduationYear: (graduationYear: number) => void;
-  setUserCoopCycle: (coopCycle: string) => void;
-  setSchedules: (schedules: NamedSchedule[]) => void;
-  setPlanStr: (planStr: string) => void;
   setStudent: (student: IUserData) => void;
 }
 interface ReduxStoreSignupScreenProps {
