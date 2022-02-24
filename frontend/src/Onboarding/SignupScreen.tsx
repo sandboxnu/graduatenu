@@ -107,11 +107,11 @@ const SignupScreenComponent: React.FC<Props> = ({
       email: string;
       password: string;
     }) => {
-      const signedUpUser = await registerUser({
+      // TODO: finish this part after aryan's stuff gets merged to create a student
+      const res = await registerUser({
         email,
         password,
       });
-
       if (res.errors == null) {
         const { status, data } = await loginUser({
           email,
