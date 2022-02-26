@@ -23,8 +23,8 @@ interface SemesterContainerProps {
 const SemesterContainerWrapper = styled.div<any>`
   display: flex;
   flex-direction: column;
-
-  width: 24%;
+  margin-bottom: 28px;
+  width: 100%;
 `;
 
 export const SemesterContainer = (props: SemesterContainerProps) => {

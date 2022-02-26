@@ -33,7 +33,6 @@ import { TransferCredits } from "../TransferCreditHolder";
 import { LoadingSpinner } from "../common/LoadingSpinner";
 import ScheduleChangeTracker from "../../utils/ScheduleChangeTracker";
 import { Comments } from "./Comments";
-import { AddSemesterButton } from "./AddSemesterButton";
 
 const OuterContainer = styled.div`
   display: flex;
@@ -55,7 +54,6 @@ const LeftScroll = styled.div<any>`
   overflow-x: hidden;
   overflow-y: scroll;
   flex: 19;
-  margin-bottoom: 30px;
 `;
 
 const Container = styled.div`
@@ -103,7 +101,6 @@ const ScheduleComponent: React.FC<ScheduleProps> = ({
           collapsibleYears={collapsibleYears}
         />
       ))}
-      <AddSemesterButton />
     </>
   ) : (
     <LoadingSpinner isTall />
