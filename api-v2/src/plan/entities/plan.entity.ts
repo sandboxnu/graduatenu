@@ -21,7 +21,6 @@ export class Plan {
     () => Student,
     student => student.plans,
     {
-      cascade: true,
       onDelete: 'CASCADE',
     },
   )
