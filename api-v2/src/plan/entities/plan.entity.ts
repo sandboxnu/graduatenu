@@ -40,7 +40,7 @@ export class Plan {
   @Column({ nullable: true })
   concentration: string;
 
-  @Column({ type: 'smallint', default: 2018 })
+  @Column({ type: 'smallint' })
   catalogYear: number;
 
   @Column({ type: 'json' })
