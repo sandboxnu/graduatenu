@@ -42,16 +42,16 @@ export class PlanService {
     planId: number,
     loggedInStudent: Student,
   ): Promise<boolean> {
-    try {
-      const { student: planOwner } = await this.findOne(planId);
-      return StudentService.compareStudents(planOwner, loggedInStudent);
-    } catch (_error) {
-      /**
-       * findOne failed probably since the plan doesn't exist. A plan that doesn't
-       * exist isn't owner by the anyone so returning false.
-       */
+    const { student: planOwner } = await this.findOne(planId);
+
+    /**
+     * A plan that doesn't exist isn't owned by the anyone so returning false.
+     */
+    if (!planOwner) {
       return false;
     }
+
+    return StudentService.compareStudents(planOwner, loggedInStudent);
   }
 
   async update(id: number, updatePlanDto: UpdatePlanDto) {
