@@ -8,9 +8,9 @@ npm install
 
 ## Running the app
 
-1. Run `yarn db:up` from the project root to run the database in docker. You can run `yarn db:down` from the project root to take down the database when you're done.
+1. Run `yarn dev:db:up` from the project root to run the database in docker. You can run `yarn dev:db:down` from the project root to take down the database when you're done.
 
-2. Run `yarn start:dev` to run the server in watch mode.
+2. Run `yarn dev` from within the api-v2 directory to run the server in watch mode.
 
 ## Test
 
