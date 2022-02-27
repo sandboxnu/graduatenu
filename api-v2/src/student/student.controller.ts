@@ -28,7 +28,7 @@ export class StudentController {
   constructor(private readonly studentService: StudentService) {}
 
   @UseGuards(JwtAuthGuard)
-  @Get('/me')
+  @Get('me')
   async getMe(
     @Req() req: AuthenticatedRequest,
     @Query('isWithPlans', new DefaultValuePipe(false), ParseBoolPipe)
@@ -43,7 +43,7 @@ export class StudentController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Patch('/me')
+  @Patch('me')
   async updateMe(
     @Req() req: AuthenticatedRequest,
     @Body() updateStudentDto: UpdateStudentDto,
@@ -57,7 +57,7 @@ export class StudentController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Delete('/me')
+  @Delete('me')
   async removeMe(@Req() req: AuthenticatedRequest): Promise<DeleteResult> {
     try {
       const uuid = req.user.uuid;
