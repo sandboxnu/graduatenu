@@ -102,7 +102,7 @@ export class StudentService {
     return deleteResult;
   }
 
-  static compareStudents(student1: Student, student2: Student): boolean {
+  static isEqualStudents(student1: Student, student2: Student): boolean {
     return student1.uuid === student2.uuid;
   }
 }

@@ -51,7 +51,7 @@ export class PlanService {
       return false;
     }
 
-    return StudentService.compareStudents(planOwner, loggedInStudent);
+    return StudentService.isEqualStudents(planOwner, loggedInStudent);
   }
 
   async update(id: number, updatePlanDto: UpdatePlanDto) {
