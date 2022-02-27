@@ -6,7 +6,6 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { CourseWarning, IWarning } from '../../../../frontend/src/models/types';
 import { Schedule } from '../../../../common/types';
 import { Student } from '../../student/entities/student.entity';
 
@@ -42,12 +41,6 @@ export class Plan {
 
   @Column({ type: 'smallint' })
   catalogYear: number;
-
-  @Column({ type: 'json' })
-  courseWarnings: CourseWarning[];
-
-  @Column({ type: 'json' })
-  warnings: IWarning[];
 
   @CreateDateColumn()
   createdAt: Date;
