@@ -18,7 +18,7 @@ import {
   StatusEnum,
 } from "../../../../common/types";
 import SemesterContainer from "../Semester/SemesterContainer";
-import { AddSemesterButton } from "../Schedule/AddSemesterButton";
+import { AddYearButton } from "../Schedule/AddYearButton";
 
 interface ReduxStoreYearProps {
   academicYear: number;
@@ -49,8 +49,7 @@ const YearTopWrapper = styled.div<any>`
 
 const SemestersWrapper = styled.div`
   display: grid;
-  column-gap: 1%;
-  grid-template-columns: 24% 24% 24% 24%;
+  grid-template-columns: 25% 25% 25% 25%;
   width: 100%;
 `;
 
@@ -96,7 +95,7 @@ class YearComponent extends React.Component<Props> {
                 />
               );
             })}
-            {schedule.years.length === index + 1 && <AddSemesterButton />}
+            {schedule.years.length === index + 1 && <AddYearButton />}
           </SemestersWrapper>
         </YearTopWrapper>
       </div>
