@@ -1,6 +1,5 @@
 import React from "react";
-import { connect } from "react-redux";
-import { Dispatch } from "redux";
+import { useDispatch, useSelector } from "react-redux";
 import { IPlanData } from "../../models/types";
 import {
   getActivePlanFromState,
@@ -11,32 +10,22 @@ import {
   updateActivePlanAction,
   updateActivePlanFetchingAction,
 } from "../../state/actions/userPlansActions";
-import { AppState } from "../../state/reducers/state";
 import { WhiteColorButton } from "../common/ColoredButtons";
 import { addYear } from "../../services/PlanService";
 import { convertPlanToUpdatePlanData } from "../../utils/plan-helpers";
-import { LoadingSpinner } from "../common/LoadingSpinner";
 
-type Props = ReduxStoreAddYearButtonProps & ReduxDispatchAddYearButtonProps;
+const AddYearButtonComponent = () => {
+  const activePlan = useSelector(getActivePlanFromState);
+  const userId = useSelector(getUserIdFromState);
+  const isUpdating = useSelector(getIsUpdatingFromState);
 
-interface ReduxStoreAddYearButtonProps {
-  activePlan: IPlanData;
-  userId: number;
-  isUpdating: boolean;
-}
+  const dispatch = useDispatch();
 
-interface ReduxDispatchAddYearButtonProps {
-  updateActivePlan: (newPlan: Partial<IPlanData>) => void;
-  updateActivePlanFetching: () => void;
-}
+  const updateActivePlan = (newPlan: Partial<IPlanData>) =>
+    dispatch(updateActivePlanAction(newPlan));
+  const updateActivePlanFetching = () =>
+    dispatch(updateActivePlanFetchingAction());
 
-const AddYearButtonComponent = ({
-  activePlan,
-  userId,
-  isUpdating,
-  updateActivePlan,
-  updateActivePlanFetching,
-}: Props) => {
   const handleNewSemester = async () => {
     updateActivePlanFetching();
     const res = await addYear(
@@ -68,24 +57,4 @@ const AddYearButtonComponent = ({
   );
 };
 
-const mapStateToProps = (state: AppState) => ({
-  activePlan: getActivePlanFromState(state),
-  userId: getUserIdFromState(state),
-  isUpdating: getIsUpdatingFromState(state),
-});
-
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-  updateActivePlan: (newPlan: Partial<IPlanData>) =>
-    dispatch(updateActivePlanAction(newPlan)),
-  updateActivePlanFetching: () => dispatch(updateActivePlanFetchingAction()),
-});
-
-export const AddYearButton = connect<
-  ReduxStoreAddYearButtonProps,
-  ReduxDispatchAddYearButtonProps,
-  {},
-  AppState
->(
-  mapStateToProps,
-  mapDispatchToProps
-)(AddYearButtonComponent);
+export const AddYearButton = AddYearButtonComponent;
