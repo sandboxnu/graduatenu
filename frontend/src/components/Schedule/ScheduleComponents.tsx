@@ -54,7 +54,6 @@ const LeftScroll = styled.div<any>`
   overflow-x: hidden;
   overflow-y: scroll;
   flex: 19;
-  margin-bottoom: 30px;
 `;
 
 const Container = styled.div`
