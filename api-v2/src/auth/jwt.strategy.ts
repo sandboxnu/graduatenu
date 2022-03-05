@@ -29,10 +29,12 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
    * @param jwtPayload decoded payload stored in the JWT
    */
   async validate(jwtPayload: JwtPayload): Promise<Student> {
-    try {
-      return await this.authService.validateJwtPayload(jwtPayload);
-    } catch (_error) {
+    const student = await this.authService.validateJwtPayload(jwtPayload);
+
+    if (!student) {
       throw new UnauthorizedException('Invalid JWT');
     }
+
+    return student;
   }
 }

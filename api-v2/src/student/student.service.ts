@@ -9,7 +9,6 @@ import {
 import { CreateStudentDto } from './dto/create-student.dto';
 import { UpdateStudentDto } from './dto/update-student.dto';
 import { Student } from './entities/student.entity';
-import { StudentNotFoundError } from './student-not-found.error';
 
 @Injectable()
 export class StudentService {
@@ -23,19 +22,20 @@ export class StudentService {
     const { email } = createStudentDto;
     const userInDb = await this.studentRepository.findOne({ where: { email } });
     if (userInDb) {
-      throw new Error('A user with the email is already registered');
+      return null;
     }
 
     const newStudent = this.studentRepository.create(createStudentDto);
+
     try {
       return this.studentRepository.save(newStudent);
     } catch (error) {
-      throw new Error(error.message);
+      return null;
     }
   }
 
-  findAll(): Promise<Student[]> {
-    return this.studentRepository.find();
+  async findAll(): Promise<Student[]> {
+    return await this.studentRepository.find();
   }
 
   async findByUuid(
@@ -70,7 +70,7 @@ export class StudentService {
     const student = await this.studentRepository.findOne(findOptions);
 
     if (!student) {
-      throw new StudentNotFoundError();
+      return null;
     }
 
     return student;
@@ -86,7 +86,7 @@ export class StudentService {
     );
 
     if (updateResult.affected === 0) {
-      throw new StudentNotFoundError();
+      return null;
     }
 
     return updateResult;
@@ -96,7 +96,7 @@ export class StudentService {
     const deleteResult = await this.studentRepository.delete(uuid);
 
     if (deleteResult.affected === 0) {
-      throw new StudentNotFoundError();
+      return null;
     }
 
     return deleteResult;

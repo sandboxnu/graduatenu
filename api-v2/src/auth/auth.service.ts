@@ -24,6 +24,10 @@ export class AuthService {
     // create a new student
     const newStudent = await this.studentService.create(createStudentDto);
 
+    if (!newStudent) {
+      return null;
+    }
+
     // login the new student by generating a new access token
     newStudent.accessToken = this._generateAccessToken(newStudent);
 
@@ -41,7 +45,7 @@ export class AuthService {
     const student = await this.studentService.findByEmail(email);
 
     if (!student) {
-      throw new Error('Student with given email not found');
+      return null;
     }
 
     // validate creds
@@ -49,7 +53,7 @@ export class AuthService {
     const isValidPassword = await bcrypt.compare(password, trueHashedPassword);
 
     if (!isValidPassword) {
-      throw new Error('Invalid password');
+      return null;
     }
 
     // generate and sign token
