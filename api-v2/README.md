@@ -24,3 +24,19 @@ $ yarn test:e2e
 # test coverage
 $ yarn test:cov
 ```
+
+## Design Decisions
+
+A running log of design decisions that were taken. These can and will probably change as the server scales.
+
+- If you want to change the way things work, start a discussion, make the change and document it here!
+
+- If you're making changes to the codebase, please ensure that your changes follow the design documented here!
+
+### Error Handling
+
+- Services will be HTTP agnostic and not throw HTTP errors.
+
+- Services will not throw errors in general, and will return `null` for exceptional behavior. For instance, if a user with the same email already exists, return `null` and expect the controller to handle this.
+
+- Controllers will handle the case when services return `null` and throw appropriate HTTP errors.
