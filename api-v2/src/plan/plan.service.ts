@@ -20,6 +20,7 @@ export class PlanService {
     try {
       return this.planRepository.save(newPlan);
     } catch (_error) {
+      // TODO: Add logging for errors here and in every service method.
       return null;
     }
   }

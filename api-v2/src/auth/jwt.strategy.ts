@@ -32,7 +32,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     const student = await this.authService.validateJwtPayload(jwtPayload);
 
     if (!student) {
-      throw new UnauthorizedException('Invalid JWT');
+      throw new UnauthorizedException();
     }
 
     return student;

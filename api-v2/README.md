@@ -37,6 +37,6 @@ A running log of design decisions that were taken. These can and will probably c
 
 - Services will be HTTP agnostic and not throw HTTP errors.
 
-- Services will not throw errors in general, and will return `null` for exceptional behavior. For instance, if a user with the same email already exists, return `null` and expect the controller to handle this.
+- Services will not throw errors in general, and will return `null` for exceptional behavior. For instance, if a user with the same email already exists, return `null` and expect the controller to handle this. This isn't great since we loose the error that actually happened and so we probably want to implement more specific error handling than just returning `null` at the service level.
 
 - Controllers will handle the case when services return `null` and throw appropriate HTTP errors.
