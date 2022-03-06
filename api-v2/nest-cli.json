@@ -1,0 +1,4 @@
+{
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "api-v2/src"
+}
