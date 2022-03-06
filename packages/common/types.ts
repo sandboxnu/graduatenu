@@ -192,7 +192,7 @@ export type Requirement2 =
   | IOrCourse2
   | ICourseRange2
   | IRequiredCourse
-  | Section;
+  | ({ type: "section" } & Section);
 
 /**
  * Represents a requirement where X number of credits need to be completed from a list of courses.
