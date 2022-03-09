@@ -17,7 +17,7 @@ export class Student {
   @PrimaryGeneratedColumn('uuid')
   uuid: string;
 
-  @Column()
+  @Column({ nullable: true })
   nuid: string;
 
   @Column()
@@ -27,7 +27,7 @@ export class Student {
   email: string;
 
   @Column()
-  @Exclude() // excludes password field whenever an instance of Student is returned by a controller
+  @Exclude() // excludes this whenever an instance of Student is returned by a controller
   password: string;
 
   @Column({ type: 'smallint', nullable: true })
