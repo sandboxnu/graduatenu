@@ -31,6 +31,7 @@
     "http-proxy-middleware": "^2.0.3",
     "husky": "^4.2.5"
   },
+  "dependencies": {},
   "jest": {
     "moduleFileExtensions": [
       "ts",

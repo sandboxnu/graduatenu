@@ -17,10 +17,10 @@ export class Student {
   @PrimaryGeneratedColumn('uuid')
   uuid: string;
 
-  @Column({ nullable: true })
+  @Column()
   nuid: string;
 
-  @Column({ nullable: true })
+  @Column()
   fullName: string;
 
   @Column({ unique: true })

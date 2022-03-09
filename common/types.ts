@@ -1,17 +1,7 @@
 /**
  * The response from the server is either an error or the data requested for.
  */
-export type ServerResponse<ExpectedData> =
-  | ServerErrorResponse
-  | ServerDataResponse<ExpectedData>;
-
-/**
- * Structure of a data response from the server.
- */
-export interface ServerDataResponse<Data> {
-  statusCode: number;
-  data: Data;
-}
+export type ServerResponse<ExpectedData> = ServerErrorResponse | ExpectedData;
 
 /**
  * Structure of an error response from the server.
