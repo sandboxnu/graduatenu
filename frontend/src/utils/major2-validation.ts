@@ -9,15 +9,18 @@ import {
   ScheduleCourse,
   Section,
 } from "../../../common/types";
-import { courseToString } from "./course-helpers";
-
-export {};
+import { courseEq, courseToString } from "./course-helpers";
+import { stringify } from "querystring";
 
 // num total credits requirements
 // interface
 
 interface ValidationError {
   message: string;
+}
+
+interface ValidationStackError extends ValidationError {
+  stackTrace: number[];
 }
 
 interface TotalRequiredCreditsError extends ValidationError {
@@ -45,6 +48,16 @@ type Major2ValidationResult = {
   concentrationErrors: Array<Array<ValidationError>>;
 };
 
+type ValidateCourse<T> = (
+  req: T,
+  taken: ScheduleCourse[],
+  tracker: CourseValidationTracker
+) => { result: ValidationError | null; credits: number };
+
+const assertUnreachable = (x: never): never => {
+  throw new Error("This code is unreachable");
+};
+
 function validateMajor2(major: Major2, taken: ScheduleCourse[]) {
   const coursesTaken: Set<string> = new Set();
   const tracker = {
@@ -65,10 +78,68 @@ function validateMajor2(major: Major2, taken: ScheduleCourse[]) {
     major.totalCreditsRequired,
     taken
   );
-  const requirementSectionErrors = major.requirementSections.map(s =>
-    validateSection(s, taken, tracker)
+
+  const requirementAndSectionErrors = major.requirementSections.map(s =>
+    validateAndRequirements(s.requirements, taken, tracker)
   );
+
+  // const requirementOrSectionErrors = major.requirementSections.map(s =>
+  //   validateOrSection(s, taken, tracker)
+  // );
+  //
+  // const requirementSectionErrors = major.requirementSections.map(s =>
+  //   validateSections(s, taken, tracker)
+  // );
 }
+
+type NestedErrorResult = {
+  nested: Array<ValidationStackError>;
+  credits: number;
+};
+
+const validateAndRequirements = (
+  requirements: Requirement2[],
+  taken: ScheduleCourse[],
+  tracker: CourseValidationTracker
+): NestedErrorResult => {
+  const errors = requirements.map(r =>
+    validateSingleAndRequirement(r, taken, tracker)
+  );
+  const credits = errors.reduce((total, e) => e.credits + total, 0);
+  const nested = errors.flatMap((e, index) => {
+    e.nested.forEach(e => e.stackTrace.unshift(index));
+    return e.nested;
+  });
+  return { nested, credits };
+};
+
+const validateSingleAndRequirement = (
+  req: Requirement2,
+  taken: ScheduleCourse[],
+  tracker: CourseValidationTracker
+): NestedErrorResult => {
+  switch (req.type) {
+    case "AND":
+      return validateAndRequirements(req.courses, taken, tracker);
+    case "XOM":
+    case "OR":
+    case "RANGE":
+      return { nested: [], credits: 0 };
+    case "COURSE":
+      const c = taken.find(c => courseEq(c, req));
+      if (c && !tracker.contains(req)) {
+        tracker.addCourse(req);
+        return { nested: [], credits: c.numCreditsMax };
+      }
+      const stringifiedCourse = courseToString(req);
+      const message = `Requirement unsatisfiable, missing course: ${stringifiedCourse}`;
+      return { nested: [{ message, stackTrace: [] }], credits: 0 };
+    case "section":
+      return validateAndRequirements(req.requirements, taken, tracker);
+    default:
+      return assertUnreachable(req);
+  }
+};
 
 function validateTotalCreditsRequired(
   requiredCredits: number,
@@ -100,37 +171,37 @@ function validateSection(
   );
 }
 
-type ValidateCourse<T> = (
-  req: T,
-  taken: ScheduleCourse[],
-  tracker: CourseValidationTracker
-) => { result: ValidationError | null; credits: number };
-
 const validateXomCourses: ValidateCourse<IXofManyCourse> = (
   req,
   taken,
   tracker
 ) => {
-  req.courses.map(course => validateRequirement(course, taken, tracker));
+  // req.courses.map(course => validateRequirement(course, taken, tracker));
+  throw new Error("unimplemented");
 };
+
+function unimple() {
+  throw new Error("unimplemented");
+}
 
 const validateRequirement: ValidateCourse<Requirement2> = (
   req,
   taken,
   tracker
 ) => {
-  switch (req.type) {
-    case "XOM":
-      return validateXomCourses(req, taken, tracker);
-    case "OR":
-      return validateOrCourses(taken, used, requirement);
-    case "RANGE":
-      return validateRangeCourses(take, used, requirement);
-    case "COURSE":
-      return validateCourse(take, used, requirement);
-    case "AND":
-      return validateAndSection(taken, used, requirement);
-    case "section":
-      return validateSection(section, taken, tracker);
-  }
+  throw new Error("unimplemented");
+  // switch (req.type) {
+  //   case "XOM":
+  //     return validateXomCourses(req, taken, tracker);
+  //   case "OR":
+  //     return validateOrCourses(taken, used, requirement);
+  //   case "RANGE":
+  //     return validateRangeCourses(take, used, requirement);
+  //   case "COURSE":
+  //     return validateCourse(take, used, requirement);
+  //   case "AND":
+  //     return validateAndSection(taken, used, requirement);
+  //   case "section":
+  //     return validateSection(section, taken, tracker);
+  // }
 };
