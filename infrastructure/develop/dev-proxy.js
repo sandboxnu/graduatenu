@@ -18,7 +18,7 @@ const proxy = createProxyMiddleware({
 
 app.use("/", proxy);
 
-// Run the server on port 3002
+// Run the proxy on port 3002
 app.listen(3002, () => {
   console.log("GraduateNU is up and ready!");
 });
