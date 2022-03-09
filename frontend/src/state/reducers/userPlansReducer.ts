@@ -1,33 +1,34 @@
 import {
-  setCurrentClassCounterForActivePlanAction,
-  incrementCurrentClassCounterForActivePlanAction,
-  toggleYearExpandedForActivePlanAction,
-  setActivePlanCatalogYearAction,
-  setActivePlanStatusAction,
-  updateActivePlanTimestampAction,
   expandAllYearsForActivePlanAction,
+  incrementCurrentClassCounterForActivePlanAction,
+  renameCourseInActivePlanAction,
+  setActivePlanCatalogYearAction,
   setActivePlanConcentrationAction,
   setActivePlanNameAction,
-  renameCourseInActivePlanAction,
+  setActivePlanStatusAction,
+  setCurrentClassCounterForActivePlanAction,
+  toggleYearExpandedForActivePlanAction,
+  updateActivePlanFetchingAction,
+  updateActivePlanTimestampAction,
 } from "./../actions/userPlansActions";
 import { DNDSchedule, DNDScheduleYear, IPlanData } from "../../models/types";
 import produce from "immer";
 import { getType } from "typesafe-actions";
-import { UserPlansAction, StudentAction } from "../actions";
+import { StudentAction, UserPlansAction } from "../actions";
 import {
-  setActivePlanAction,
+  addCoursesToActivePlanAction,
   addNewPlanAction,
+  changeSemesterStatusForActivePlanAction,
   deletePlan,
-  setUserPlansAction,
-  updateActivePlanAction,
+  removeClassFromActivePlanAction,
+  setActivePlanAction,
+  setActivePlanCoopCycleAction,
   setActivePlanDNDScheduleAction,
   setActivePlanMajorAction,
-  setActivePlanCoopCycleAction,
   setActivePlanScheduleAction,
-  addCoursesToActivePlanAction,
-  removeClassFromActivePlanAction,
+  setUserPlansAction,
   undoRemoveClassFromActivePlanAction,
-  changeSemesterStatusForActivePlanAction,
+  updateActivePlanAction,
   updateSemesterForActivePlanAction,
 } from "../actions/userPlansActions";
 import { resetStudentAction } from "../actions/studentActions";
@@ -65,6 +66,7 @@ export interface UserPlansState {
   closedYears: { [key: string]: number[] }; // map plan name to closedYearsList
   pastSchedule?: DNDSchedule; // used for undo
   activePlanStatus: ActivePlanAutoSaveStatus;
+  isUpdating: boolean;
 }
 
 const initialState: UserPlansState = {
@@ -74,6 +76,7 @@ const initialState: UserPlansState = {
   closedYears: {},
   pastSchedule: undefined,
   activePlanStatus: "Up To Date",
+  isUpdating: false,
 };
 
 export const userPlansReducer = (
@@ -104,6 +107,14 @@ export const userPlansReducer = (
           ...draft.plans[draft.activePlan!],
           ...plan,
         };
+
+        draft.isUpdating = false;
+
+        return draft;
+      }
+      case getType(updateActivePlanFetchingAction): {
+        // only update the fields included in the passed in plan
+        draft.isUpdating = true;
 
         return draft;
       }
@@ -255,13 +266,12 @@ export const userPlansReducer = (
             plan,
             activePlan.courseCounter
           );
-          const newScheduleWithCorrectYears = alterScheduleToHaveCorrectYears(
+          draft.plans[
+            activePlanName
+          ].schedule = alterScheduleToHaveCorrectYears(
             newSchedule,
-            academicYear,
-            graduationYear
+            academicYear
           );
-
-          draft.plans[activePlanName].schedule = newScheduleWithCorrectYears;
         }
 
         // remove all classes

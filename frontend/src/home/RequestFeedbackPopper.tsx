@@ -15,6 +15,7 @@ import { useDebouncedEffect } from "../hooks/useDebouncedEffect";
 import { requestApproval } from "../services/PlanService";
 import { WhiteColorButton } from "../components/common/ColoredButtons";
 import { NORTHEASTERN_RED } from "../constants";
+import { FEEDBACK_BUTTON_FLAG } from "../constants/FeatureFlag";
 
 const SCHEDULE_APPOINTMENT_LINK =
   "https://northeastern.campus.eab.com/student/appointments/new";
@@ -46,7 +47,7 @@ const CalendarContainer = styled.div`
 `;
 
 const StepNumber = styled.div`
-  color: ${NORTHEASTERN_RED}
+  color: ${NORTHEASTERN_RED};
   font-size: 20px;
   font-weight: 800;
   margin: 10px;
@@ -233,7 +234,7 @@ export const RequestFeedbackPopper: React.FC = () => {
         </CalendarContainer>
         <RequestApprovalButton />
       </DefaultModal>
-      <ApprovalStatusButton />
+      {FEEDBACK_BUTTON_FLAG && <ApprovalStatusButton />}
     </>
   );
 };

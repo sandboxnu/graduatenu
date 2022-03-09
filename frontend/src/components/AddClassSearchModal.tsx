@@ -11,7 +11,10 @@ import LinearProgress from "@material-ui/core/LinearProgress";
 import { isCourseInSchedule } from "../utils/schedule-helpers";
 import { PrimaryButton } from "./common/PrimaryButton";
 import { NonDraggableClassBlock } from "./ClassBlocks/NonDraggableClassBlock";
-import { getScheduleCourseCoreqs } from "../utils/course-helpers";
+import {
+  courseToString,
+  getScheduleCourseCoreqs,
+} from "../utils/course-helpers";
 import { AppState } from "../state/reducers/state";
 import { safelyGetActivePlanScheduleFromState } from "../state";
 import { DefaultModal } from "../components/common/DefaultModal";
@@ -144,9 +147,7 @@ export const AddClassSearchModal: React.FC<AddClassSearchModalProps> = props => 
       showCourseInScheduleError = isCourseInSchedule(props.course, schedule);
     }
     return (
-      <SearchResultContainer
-        key={props.course.subject + " " + props.course.classId}
-      >
+      <SearchResultContainer key={courseToString(props.course)}>
         <ResultInfoContainer>
           <CourseName>{props.course.name}</CourseName>
           <SubjectId>
@@ -189,7 +190,7 @@ export const AddClassSearchModal: React.FC<AddClassSearchModalProps> = props => 
       <AddedClassesContainer>
         {selectedCourses.map(selectedCourse => (
           <NonDraggableClassBlock
-            key={selectedCourse.classId + selectedCourse.subject}
+            key={courseToString(selectedCourse)}
             course={selectedCourse}
             onDelete={() => {
               let copy = [...selectedCourses];

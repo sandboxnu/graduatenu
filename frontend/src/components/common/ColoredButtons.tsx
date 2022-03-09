@@ -2,7 +2,7 @@ import { Button } from "@material-ui/core";
 import { withStyles, Theme } from "@material-ui/core/styles";
 import { NORTHEASTERN_RED } from "../../constants";
 
-export const WhiteColorButton = withStyles((theme: Theme) => ({
+export const WhiteColorButton = withStyles((_theme: Theme) => ({
   root: {
     border: "1px solid red",
     color: NORTHEASTERN_RED,
@@ -17,7 +17,7 @@ export const GenericColorButton = (
   backgroundColor: string,
   hoverBackgroundColor: string
 ) =>
-  withStyles((theme: Theme) => ({
+  withStyles((_theme: Theme) => ({
     root: {
       color: "#ffffff",
       backgroundColor: backgroundColor,

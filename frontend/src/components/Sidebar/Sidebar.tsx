@@ -22,6 +22,7 @@ import { findMajorFromName } from "../../utils/plan-helpers";
 import { ScrollWrapper } from "../../Onboarding/GenericOnboarding";
 import { NORTHEASTERN_RED } from "../../constants";
 import { GenericClassBlock } from "./GenericClassBlock";
+import { courseToString } from "../../utils/course-helpers";
 
 const Container = styled.div`
   display: flex;
@@ -154,9 +155,7 @@ const MajorSidebarComponent: React.FC<MajorSidebarProps> = ({
   );
   const completedCourses: string[] = getCompletedCourseStrings(schedule);
   const completedCourseStrings: string[] = transferCourses
-    ? completedCourses.concat(
-        ...transferCourses.map(course => course.subject + course.classId)
-      )
+    ? completedCourses.concat(...transferCourses.map(courseToString))
     : completedCourses;
   const concentrationIsRequired = major.concentrations.minOptions > 0;
 

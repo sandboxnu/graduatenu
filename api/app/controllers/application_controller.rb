@@ -4,6 +4,7 @@ class ApplicationController < ActionController::API
     #protect_from_forgery with: :null_session
 
     include ActionController::HttpAuthentication::Token::ControllerMethods
+    # DeviseController.respond_to :html, :json
 
     before_action :configure_permitted_parameters, if: :devise_controller?
     before_action :authenticate_user
@@ -15,7 +16,7 @@ class ApplicationController < ActionController::API
     private
 
     def configure_permitted_parameters		
-        devise_parameter_sanitizer.permit(:sign_up, keys: [:full_name, :email, :password, :academic_year, :graduation_year, :major, :coop_cycle, :catalog_year])
+        devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :password])
         devise_parameter_sanitizer.permit(:account_update, keys: [:email, :password, :password_confirmation, :current_password])
     end
 
@@ -25,6 +26,7 @@ class ApplicationController < ActionController::API
           authenticate_or_request_with_http_token do |token|
             begin
               jwt_payload = JWT.decode(token, Rails.application.credentials.secret_key_base).first
+
               #remember the currently authenicated users id.
               @current_user_id = jwt_payload['id']
             rescue JWT::ExpiredSignature, JWT::VerificationError, JWT::DecodeError

@@ -12,6 +12,7 @@ import { getCourseNameFromState, getIsAdvisorFromState } from "../../state";
 import { DNDScheduleCourse, DNDScheduleTerm } from "../../models/types";
 import { constant } from "lodash";
 import { renameCourseInActivePlanAction } from "../../state/actions/userPlansActions";
+import { courseToString } from "../../utils/course-helpers";
 
 const Wrapper = styled.div`
   display: flex;
@@ -132,7 +133,7 @@ export const ClassBlockBody: React.FC<ClassBlockBodyProps> = ({
   return (
     <Wrapper>
       <TitleWrapper>
-        <Title>{course.subject + course.classId}</Title>
+        <Title>{courseToString(course)}</Title>
         {isEditBlockName ? (
           editBlockNameIcons()
         ) : (

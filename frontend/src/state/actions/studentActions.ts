@@ -13,16 +13,37 @@ export const setStudentAction = createAction(
   })
 )();
 
+export const setStudentIdAction = createAction(
+  "student/SET_ID",
+  (id: number) => ({
+    id,
+  })
+)();
+
+export const setStudentFullNameAction = createAction(
+  "student/SET_FULL_NAME",
+  (fullName: string) => ({
+    fullName,
+  })
+)();
+
+export const setStudentEmailAction = createAction(
+  "student/SET_EMAIL",
+  (email: string) => ({
+    email,
+  })
+)();
+
 export const setStudentAcademicYearAction = createAction(
   "student/SET_ACADEMIC_YEAR",
-  (academicYear: number) => ({
+  (academicYear: number | null) => ({
     academicYear,
   })
 )();
 
 export const setStudentGraduationYearAction = createAction(
   "student/SET_GRADUATION_YEAR",
-  (graduationYear: number) => ({
+  (graduationYear: number | null) => ({
     graduationYear,
   })
 )();

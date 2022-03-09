@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { IPlanData, ITemplatePlan } from "../../models/types";
 import {
@@ -6,9 +6,9 @@ import {
   findAllPlansForUser,
 } from "../../services/PlanService";
 import {
-  safelyGetActivePlanIdFromState,
   getActivePlanNameFromState,
   getStudentFromState,
+  safelyGetActivePlanIdFromState,
   safelyGetTransferCoursesFromState,
 } from "../../state";
 import {
@@ -17,14 +17,14 @@ import {
 } from "../../state/actions/userPlansActions";
 import { AppState } from "../../state/reducers/state";
 import styled from "styled-components";
-import { Avatar, Tooltip, IconButton } from "@material-ui/core";
+import { Avatar, IconButton, Tooltip } from "@material-ui/core";
 import { ArrowBack, Fullscreen } from "@material-ui/icons";
 import Edit from "@material-ui/icons/Edit";
 import { RedColorButton } from "../../components/common/ColoredButtons";
 import { LoadingSpinner } from "../../components/common/LoadingSpinner";
 import { NonEditableSchedule } from "../../components/Schedule/ScheduleComponents";
 import { SwitchPlanList } from "../../components/SwitchPlan/SwitchPlanList";
-import { PlanTitle, ButtonHeader, ScheduleWrapper, Container } from "./Shared";
+import { ButtonHeader, Container, PlanTitle, ScheduleWrapper } from "./Shared";
 import { useHistory, useParams } from "react-router";
 import { AssignTemplateToUserModal } from "./AssignTemplateToUserModal";
 import { alterScheduleToHaveCorrectYears } from "../../utils/schedule-helpers";
@@ -33,12 +33,14 @@ import { deleteTemplatePlan } from "../../services/TemplateService";
 const StudentViewContainer = styled.div`
   display: flex;
   justify-content: center;
+
   > * {
     border: 1px solid red;
     border-radius: 10px;
     height: 70vh;
     padding: 30px;
   }
+
   * {
     font-family: Roboto;
     font-style: normal;
@@ -68,6 +70,7 @@ const StudentInfoDisplay = styled.div`
 
 const AvatarWrapper = styled.div`
   height: 25%;
+
   > * {
     background-color: #d3898d !important;
     color: #fff !important;
@@ -83,6 +86,7 @@ const StudentInfoTextWrapper = styled.div`
   justify-content: center;
   display: flex;
   flex-direction: column;
+
   > * {
   }
 `;
@@ -112,6 +116,7 @@ const PlanListContainer = styled.div`
   width: 100%;
   height: 30%;
   overflow: hidden;
+
   &:hover {
     overflow-y: auto;
   }
@@ -151,8 +156,7 @@ export const StudentView: React.FC<StudentViewProps> = ({
       link_sharing_enabled: false,
       schedule: alterScheduleToHaveCorrectYears(
         templateData.schedule,
-        student!.academicYear!,
-        student!.graduationYear!
+        student!.academicYear!
       ),
       catalog_year: templateData!.catalogYear,
       major: templateData!.major,

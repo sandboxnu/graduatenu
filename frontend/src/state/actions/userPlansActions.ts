@@ -47,6 +47,11 @@ export const updateActivePlanAction = createAction(
   (plan: Partial<IPlanData>) => ({ plan })
 )();
 
+export const updateActivePlanFetchingAction = createAction(
+  "userPlans/UPDATE_ACTIVE_PLAN_FETCHING",
+  () => void 0
+)();
+
 export const updateActivePlanTimestampAction = createAction(
   "userPlans/UPDATE_ACTIVE_PLAN_TIMESTAMP",
   (timestamp: Date) => ({ timestamp })

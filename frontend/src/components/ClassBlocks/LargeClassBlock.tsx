@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { DNDScheduleCourse } from "../../models/types";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { IconButton } from "@material-ui/core";
+import { courseToString } from "../../utils/course-helpers";
 
 const Wrapper = styled.div`
   display: flex;
@@ -47,7 +48,7 @@ export const LargeClassBlock: React.FC<LargeClassBlockProps> = ({
   return (
     <Wrapper>
       <TitleWrapper>
-        <Title>{course.subject + course.classId}</Title>
+        <Title>{courseToString(course)}</Title>
         <Subtitle>{course.name}</Subtitle>
       </TitleWrapper>
       <div

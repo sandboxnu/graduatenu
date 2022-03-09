@@ -1,48 +1,50 @@
 import React from "react";
 import { Droppable } from "react-beautiful-dnd";
-import { ClassBlock, NonDraggableClassBlock } from "./ClassBlocks";
-import { AddBlock } from "./ClassBlocks/AddBlock";
-import { ClassList, EmptyBlock } from ".";
-import { AddClassSearchModal } from "./AddClassSearchModal";
+import { ClassBlock, NonDraggableClassBlock } from "../ClassBlocks";
+import { AddBlock } from "../ClassBlocks/AddBlock";
+import { ClassList, EmptyBlock } from "..";
+import { AddClassSearchModal } from "../AddClassSearchModal";
 import {
   DNDScheduleTerm,
   CourseWarning,
   DNDScheduleCourse,
   IWarning,
   StatusEnum,
-} from "../models/types";
-import { ScheduleCourse, Status, SeasonWord } from "../../../common/types";
+} from "../../models/types";
+import { ScheduleCourse, Status, SeasonWord } from "../../../../common/types";
 import styled from "styled-components";
-import { AppState } from "../state/reducers/state";
+import { AppState } from "../../state/reducers/state";
 import { connect } from "react-redux";
 import {
   getCourseWarningsFromState,
   getCurrentClassCounterFromState,
   safelyGetTransferCoursesFromState,
   safelyGetWarningsFromState,
-} from "../state";
+} from "../../state";
 import { Dispatch } from "redux";
 import {
   addCoursesToActivePlanAction,
   removeClassFromActivePlanAction,
   undoRemoveClassFromActivePlanAction,
   changeSemesterStatusForActivePlanAction,
-} from "../state/actions/userPlansActions";
+} from "../../state/actions/userPlansActions";
 import { Tooltip } from "@material-ui/core";
 import {
   GENERIC_COURSE_ID,
   GENERIC_COURSE_SUBJECT,
   SEMESTER_MIN_HEIGHT,
-} from "../constants";
+} from "../../constants";
 import {
   convertTermIdToSeason,
   findCourseWarnings,
-} from "../utils/schedule-helpers";
-import { UndoDelete } from "./UndoDelete";
-import ScheduleChangeTracker from "../utils/ScheduleChangeTracker";
+} from "../../utils/schedule-helpers";
+import { UndoDelete } from "../UndoDelete";
+import ScheduleChangeTracker from "../../utils/ScheduleChangeTracker";
+import { courseToString } from "../../utils/course-helpers";
 
 const OutsideContainer = styled.div`
-  width: 25%;
+  flex: 1;
+  width: 100%;
 `;
 
 const Container = styled.div<any>`
@@ -197,7 +199,7 @@ class EditableSemesterBlockComponent extends React.Component<
 
   onDeleteClass = (course: DNDScheduleCourse, semester: DNDScheduleTerm) => {
     ScheduleChangeTracker.getInstance().addRemoveClassChange(
-      course.subject + course.classId,
+      courseToString(course),
       semester.termId
     );
     this.setState(
@@ -325,7 +327,7 @@ class EditableSemesterBlockComponent extends React.Component<
             );
             courses.forEach(course => {
               ScheduleChangeTracker.getInstance().addAddClassChange(
-                course.subject + course.classId,
+                courseToString(course),
                 this.props.semester.termId
               );
             });
