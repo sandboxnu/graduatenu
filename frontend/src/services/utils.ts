@@ -27,7 +27,9 @@ export const apiRequest = async <ExpectedData>(
     headers,
   });
 
-  return response.json() as Promise<ServerResponse<ExpectedData>>;
+  const serverData: ServerResponse<ExpectedData> = await response.json();
+
+  return serverData;
 };
 
 /**
