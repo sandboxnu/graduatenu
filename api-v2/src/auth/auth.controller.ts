@@ -18,19 +18,23 @@ export class AuthController {
   public async register(
     @Body() createStudentDto: CreateStudentDto,
   ): Promise<Student> {
-    try {
-      return await this.authService.register(createStudentDto);
-    } catch (error) {
-      throw new BadRequestException(error.message);
+    const student = await this.authService.register(createStudentDto);
+
+    if (!student) {
+      throw new BadRequestException();
     }
+
+    return student;
   }
 
   @Post('login')
   public async login(@Body() loginUserDto: LoginStudentDto): Promise<Student> {
-    try {
-      return await this.authService.login(loginUserDto);
-    } catch (error) {
-      throw new UnauthorizedException(error.message);
+    const student = await this.authService.login(loginUserDto);
+
+    if (!student) {
+      throw new UnauthorizedException();
     }
+
+    return student;
   }
 }

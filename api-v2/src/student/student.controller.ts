@@ -28,60 +28,77 @@ export class StudentController {
   constructor(private readonly studentService: StudentService) {}
 
   @UseGuards(JwtAuthGuard)
-  @Get('/me')
+  @Get('me')
   async getMe(
     @Req() req: AuthenticatedRequest,
     @Query('isWithPlans', new DefaultValuePipe(false), ParseBoolPipe)
     isWithPlans: boolean,
   ): Promise<Student> {
-    try {
-      const uuid = req.user.uuid;
-      return await this.studentService.findByUuid(uuid, isWithPlans);
-    } catch (error) {
-      throw new BadRequestException(error.message);
+    const uuid = req.user.uuid;
+    const student = await this.studentService.findByUuid(uuid, isWithPlans);
+
+    if (!student) {
+      throw new BadRequestException();
     }
+
+    return student;
   }
 
   @UseGuards(JwtAuthGuard)
-  @Patch('/me')
+  @Patch('me')
   async updateMe(
     @Req() req: AuthenticatedRequest,
     @Body() updateStudentDto: UpdateStudentDto,
   ): Promise<UpdateResult> {
     const uuid = req.user.uuid;
-    try {
-      return await this.studentService.update(uuid, updateStudentDto);
-    } catch (error) {
-      throw new BadRequestException(error.message);
+    const updateResult = await this.studentService.update(
+      uuid,
+      updateStudentDto,
+    );
+
+    if (!updateResult) {
+      throw new BadRequestException();
     }
+
+    return updateResult;
   }
 
   @UseGuards(JwtAuthGuard)
-  @Delete('/me')
+  @Delete('me')
   async removeMe(@Req() req: AuthenticatedRequest): Promise<DeleteResult> {
-    try {
-      const uuid = req.user.uuid;
-      return await this.studentService.remove(uuid);
-    } catch (error) {
-      throw new BadRequestException(error.message);
+    const uuid = req.user.uuid;
+    const deleteResult = await this.studentService.remove(uuid);
+
+    if (!deleteResult) {
+      throw new BadRequestException();
     }
+
+    return deleteResult;
   }
 
   // The following routes are only available in development
   @UseGuards(DevRouteGuard)
   @Post()
   async create(@Body() createStudentDto: CreateStudentDto): Promise<Student> {
-    try {
-      return await this.studentService.create(createStudentDto);
-    } catch (error) {
-      throw new BadRequestException(error.message);
+    const student = await this.studentService.create(createStudentDto);
+
+    if (!student) {
+      throw new BadRequestException();
     }
+
+    return student;
   }
 
   @UseGuards(DevRouteGuard)
   @Get()
-  findAll(): Promise<Student[]> {
-    return this.studentService.findAll();
+  async findAll(): Promise<Student[]> {
+    const students = await this.studentService.findAll();
+
+    if (!students) {
+      throw new BadRequestException();
+    }
+
+    return students;
   }
 
   @UseGuards(DevRouteGuard)
@@ -89,11 +106,13 @@ export class StudentController {
   async findOne(
     @Param('uuid', new ParseUUIDPipe()) uuid: string,
   ): Promise<Student> {
-    try {
-      return await this.studentService.findByUuid(uuid);
-    } catch (error) {
-      throw new BadRequestException(error.message);
+    const student = await this.studentService.findByUuid(uuid);
+
+    if (!student) {
+      throw new BadRequestException();
     }
+
+    return student;
   }
 
   @UseGuards(DevRouteGuard)
@@ -102,11 +121,16 @@ export class StudentController {
     @Param('uuid', new ParseUUIDPipe()) uuid: string,
     @Body() updateStudentDto: UpdateStudentDto,
   ): Promise<UpdateResult> {
-    try {
-      return await this.studentService.update(uuid, updateStudentDto);
-    } catch (error) {
-      throw new BadRequestException(error.message);
+    const updateResult = await this.studentService.update(
+      uuid,
+      updateStudentDto,
+    );
+
+    if (!updateResult) {
+      throw new BadRequestException();
     }
+
+    return updateResult;
   }
 
   @UseGuards(DevRouteGuard)
@@ -114,10 +138,12 @@ export class StudentController {
   async remove(
     @Param('uuid', new ParseUUIDPipe()) uuid: string,
   ): Promise<DeleteResult> {
-    try {
-      return await this.studentService.remove(uuid);
-    } catch (error) {
-      throw new BadRequestException(error.message);
+    const deleteResult = await this.studentService.remove(uuid);
+
+    if (!deleteResult) {
+      throw new BadRequestException();
     }
+
+    return deleteResult;
   }
 }

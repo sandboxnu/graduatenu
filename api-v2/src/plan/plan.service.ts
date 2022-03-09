@@ -2,11 +2,10 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Student } from 'src/student/entities/student.entity';
 import { StudentService } from 'src/student/student.service';
-import { Repository } from 'typeorm';
+import { DeleteResult, Repository, UpdateResult } from 'typeorm';
 import { CreatePlanDto } from './dto/create-plan.dto';
 import { UpdatePlanDto } from './dto/update-plan.dto';
 import { Plan } from './entities/plan.entity';
-import { PlanNotFoundError } from './plan-not-found.error';
 
 @Injectable()
 export class PlanService {
@@ -21,7 +20,8 @@ export class PlanService {
     try {
       return this.planRepository.save(newPlan);
     } catch (_error) {
-      throw new Error('Something went wrong when creating the new Plan');
+      // TODO: Add logging for errors here and in every service method.
+      return null;
     }
   }
 
@@ -31,10 +31,6 @@ export class PlanService {
       relations: ['student'],
     });
 
-    if (!plan) {
-      throw new PlanNotFoundError(id);
-    }
-
     return plan;
   }
 
@@ -42,34 +38,37 @@ export class PlanService {
     planId: number,
     loggedInStudent: Student,
   ): Promise<boolean> {
-    try {
-      const { student: planOwner } = await this.findOne(planId);
-      return StudentService.compareStudents(planOwner, loggedInStudent);
-    } catch (_error) {
-      /**
-       * findOne failed probably since the plan doesn't exist. A plan that doesn't
-       * exist isn't owner by the anyone so returning false.
-       */
+    const { student: planOwner } = await this.findOne(planId);
+
+    /**
+     * A plan that doesn't exist isn't owned by the anyone so returning false.
+     */
+    if (!planOwner) {
       return false;
     }
+
+    return StudentService.isEqualStudents(planOwner, loggedInStudent);
   }
 
-  async update(id: number, updatePlanDto: UpdatePlanDto) {
+  async update(
+    id: number,
+    updatePlanDto: UpdatePlanDto,
+  ): Promise<UpdateResult> {
     const updateResult = await this.planRepository.update(id, updatePlanDto);
 
     if (updateResult.affected === 0) {
       // no plan was updated, which implies a plan with the given id wasn't found
-      throw new PlanNotFoundError(id);
+      return null;
     }
 
     return updateResult;
   }
 
-  async remove(id: number) {
+  async remove(id: number): Promise<DeleteResult> {
     const deleteResult = await this.planRepository.delete(id);
 
     if (deleteResult.affected === 0) {
-      throw new PlanNotFoundError(id);
+      return null;
     }
 
     return deleteResult;

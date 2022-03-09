@@ -260,6 +260,10 @@ export const getActivePlanScheduleFromState = (state: AppState) => {
   return getActivePlanFromState(state).schedule;
 };
 
+export const getIsUpdatingFromState = (state: AppState): boolean => {
+  return state.userPlansState.isUpdating;
+};
+
 export const getClosedYearsFromState = (state: AppState) => {
   return new Set(
     state.userPlansState.closedYears[state.userPlansState.activePlan!]

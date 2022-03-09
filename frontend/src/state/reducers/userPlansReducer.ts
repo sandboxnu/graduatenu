@@ -8,6 +8,7 @@ import {
   setActivePlanStatusAction,
   setCurrentClassCounterForActivePlanAction,
   toggleYearExpandedForActivePlanAction,
+  updateActivePlanFetchingAction,
   updateActivePlanTimestampAction,
 } from "./../actions/userPlansActions";
 import { DNDSchedule, DNDScheduleYear, IPlanData } from "../../models/types";
@@ -65,6 +66,7 @@ export interface UserPlansState {
   closedYears: { [key: string]: number[] }; // map plan name to closedYearsList
   pastSchedule?: DNDSchedule; // used for undo
   activePlanStatus: ActivePlanAutoSaveStatus;
+  isUpdating: boolean;
 }
 
 const initialState: UserPlansState = {
@@ -74,6 +76,7 @@ const initialState: UserPlansState = {
   closedYears: {},
   pastSchedule: undefined,
   activePlanStatus: "Up To Date",
+  isUpdating: false,
 };
 
 export const userPlansReducer = (
@@ -104,6 +107,14 @@ export const userPlansReducer = (
           ...draft.plans[draft.activePlan!],
           ...plan,
         };
+
+        draft.isUpdating = false;
+
+        return draft;
+      }
+      case getType(updateActivePlanFetchingAction): {
+        // only update the fields included in the passed in plan
+        draft.isUpdating = true;
 
         return draft;
       }

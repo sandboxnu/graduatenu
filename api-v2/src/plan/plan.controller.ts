@@ -32,21 +32,25 @@ export class PlanController {
     @Body() createPlanDto: CreatePlanDto,
     @Req() req: AuthenticatedRequest,
   ): Promise<Plan> {
-    try {
-      return await this.planService.create(createPlanDto, req.user);
-    } catch (error) {
-      throw new BadRequestException(error.message);
+    const plan = await this.planService.create(createPlanDto, req.user);
+
+    if (!plan) {
+      throw new BadRequestException();
     }
+
+    return plan;
   }
 
   @UseGuards(JwtAuthGuard, OwnPlanGuard)
   @Get(':id')
   async findOne(@Param('id', ParseIntPipe) id: number): Promise<Plan> {
-    try {
-      return await this.planService.findOne(id);
-    } catch (error) {
-      throw new BadRequestException(error.message);
+    const plan = await this.planService.findOne(id);
+
+    if (!plan) {
+      throw new BadRequestException();
     }
+
+    return plan;
   }
 
   @UseGuards(JwtAuthGuard, OwnPlanGuard)
@@ -55,20 +59,23 @@ export class PlanController {
     @Param('id', ParseIntPipe) id: number,
     @Body() updatePlanDto: UpdatePlanDto,
   ) {
-    try {
-      return await this.planService.update(id, updatePlanDto);
-    } catch (error) {
-      throw new BadRequestException(error.message);
+    const updateResult = await this.planService.update(id, updatePlanDto);
+
+    if (!updateResult) {
+      throw new BadRequestException();
     }
+
+    return updateResult;
   }
 
   @Delete(':id')
   @UseGuards(JwtAuthGuard, OwnPlanGuard)
-  remove(@Param('id', ParseIntPipe) id: number) {
-    try {
-      return this.planService.remove(id);
-    } catch (error) {
-      throw new BadRequestException(error.message);
+  async remove(@Param('id', ParseIntPipe) id: number) {
+    const deleteResult = await this.planService.remove(id);
+    if (!deleteResult) {
+      throw new BadRequestException();
     }
+
+    return deleteResult;
   }
 }

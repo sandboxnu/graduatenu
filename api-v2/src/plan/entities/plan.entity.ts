@@ -6,7 +6,6 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { CourseWarning, IWarning } from '../../../../frontend/src/models/types';
 import { Schedule } from '../../../../common/types';
 import { Student } from '../../student/entities/student.entity';
 
@@ -22,7 +21,6 @@ export class Plan {
     () => Student,
     student => student.plans,
     {
-      cascade: true,
       onDelete: 'CASCADE',
     },
   )
@@ -40,14 +38,8 @@ export class Plan {
   @Column({ nullable: true })
   concentration: string;
 
-  @Column({ type: 'smallint', default: 2018 })
+  @Column({ type: 'smallint' })
   catalogYear: number;
-
-  @Column({ type: 'json' })
-  courseWarnings: CourseWarning[];
-
-  @Column({ type: 'json' })
-  warnings: IWarning[];
 
   @CreateDateColumn()
   createdAt: Date;

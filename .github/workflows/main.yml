@@ -23,17 +23,13 @@ jobs:
           yarn test
   run-api-v2-tests:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node: ["12"]
-      fail-fast: false
     name: API V2 Tests - Node ${{ matrix.node }} compatibility
     steps:
       - uses: actions/checkout@v1
       - name: Setup node
         uses: actions/setup-node@v1
         with:
-          node-version: ${{ matrix.node }}
+          node-version: "16"
       - name: Run Jest Tests
         run: |
           cd api-v2

@@ -4,6 +4,7 @@ import {
   IUpdatePlanData,
   IComment,
   IChangeLog,
+  DNDSchedule,
 } from "../models/types";
 import { getAuthToken } from "../utils/auth-helpers";
 
@@ -217,6 +218,65 @@ export const fetchComments = (planId: number, studentId: number) =>
       }));
     })
   );
+
+/* 
+    Adds a full year to the current plan
+  */
+export const addYear = (
+  userId: number,
+  planId: number,
+  plan: Partial<IUpdatePlanData>
+) => {
+  // Logic here is to simulate backend changing the plan
+  const schedule: DNDSchedule = plan.schedule!;
+  const currYear: number = schedule.years[schedule.years.length - 1] + 1!;
+  const years = [...schedule.years, currYear];
+  const yearMap = {
+    ...schedule.yearMap,
+    [currYear]: {
+      year: currYear,
+      fall: {
+        season: "FL",
+        year: currYear,
+        termId: currYear * 100 + 10,
+        status: "CLASSES",
+        classes: [],
+      },
+      isSummerFull: false,
+      spring: {
+        season: "SP",
+        year: currYear,
+        termId: currYear * 100 + 30,
+        status: "INACTIVE",
+        classes: [],
+      },
+      summer1: {
+        season: "S1",
+        year: currYear,
+        termId: currYear * 100 + 40,
+        status: "INACTIVE",
+        classes: [],
+      },
+      summer2: {
+        season: "S2",
+        year: currYear,
+        termId: currYear * 100 + 60,
+        status: "INACTIVE",
+        classes: [],
+      },
+    },
+  };
+  const newPlan = { ...plan, schedule: { ...schedule, years, yearMap } };
+
+  return fetch(`/api/users/${userId}/plans/${planId}`, {
+    method: "PUT",
+    body: JSON.stringify({ plan: newPlan }),
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Token " + getAuthToken(),
+    },
+  }).then(response => response.json());
+};
 
 /**
  * Sends a comment for a plan
