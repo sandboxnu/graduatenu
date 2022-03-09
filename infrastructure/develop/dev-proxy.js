@@ -5,7 +5,7 @@ const app = express();
 
 /**
  * A proxy that forwards "/api" requests to the server running on port 3001 and all
- * other requests to the fronend running on port 3000.
+ * other requests to the frontend running on port 3000.
  */
 const proxy = createProxyMiddleware({
   target: "http://localhost:3000", // all requests to be routed to frontend running on port 3000
