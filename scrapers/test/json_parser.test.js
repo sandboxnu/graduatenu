@@ -184,7 +184,7 @@ let schedules = [];
 
 let cs_sched = PARENT.then(result => {
   const file_text = fs.readFileSync(
-    "./scrapers/test/mock_parsed_audits/cs_json.json",
+    "test/mock_parsed_audits/cs_json.json",
     "utf-8"
   );
   const file_object = JSON.parse(file_text);
@@ -192,13 +192,13 @@ let cs_sched = PARENT.then(result => {
 });
 let cs_sched2 = PARENT.then(result => {
   const file_text = fs.readFileSync(
-    "./scrapers/test/mock_parsed_audits/cs_json2.json",
+    "test/mock_parsed_audits/cs_json2.json",
     "utf-8"
   );
   const file_object = JSON.parse(file_text);
   return json_parser.toSchedule(file_object, result);
 });
-// const tempSchedule = JSON.parse(fs.readFileSync('./scrapers/test/mock_parsed_audits/sampleScheduleOutput.json', 'utf-8'));
+// const tempSchedule = JSON.parse(fs.readFileSync('test/mock_parsed_audits/sampleScheduleOutput.json', 'utf-8'));
 
 schedules.push(cs_sched);
 schedules.push(cs_sched2);

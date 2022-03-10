@@ -84,7 +84,7 @@ expect.extend({
 test("Tests warnings produce properly for cs_sched_1.json", () => {
   // read in a schedule
   let cs_sched = fs.readFileSync(
-    "./scrapers/test/mock_schedules/cs_sched_1.json",
+    "test/mock_schedules/cs_sched_1.json",
     "utf-8"
   );
   let cs_sched_obj = JSON.parse(cs_sched);
@@ -145,7 +145,7 @@ test("Tests warnings produce properly for cs_sched_1.json", () => {
 test("Tests warnings produce properly for cs_sched_2.json", () => {
   // read in a schedule
   let cs_sched = fs.readFileSync(
-    "./scrapers/test/mock_schedules/cs_sched_2.json",
+    "test/mock_schedules/cs_sched_2.json",
     "utf-8"
   );
   let cs_sched_obj = JSON.parse(cs_sched);
@@ -191,16 +191,10 @@ test("Tests warnings produce properly for cs_sched_2.json", () => {
 });
 
 test("perfect schedule, no requirement group warnings for cs_pos_1.json", () => {
-  let cs_sched = fs.readFileSync(
-    "./scrapers/test/mock_schedules/cs_pos_1.json",
-    "utf-8"
-  );
+  let cs_sched = fs.readFileSync("test/mock_schedules/cs_pos_1.json", "utf-8");
   let cs_sched_obj = JSON.parse(cs_sched);
 
-  let csMajor = fs.readFileSync(
-    "./scrapers/test/mock_majors/bscs.json",
-    "utf-8"
-  );
+  let csMajor = fs.readFileSync("test/mock_majors/bscs.json", "utf-8");
 
   let csMajor_obj = JSON.parse(csMajor);
 
@@ -232,16 +226,10 @@ test("perfect schedule, no requirement group warnings for cs_pos_1.json", () => 
 });
 
 test("Range section warning produced for cs_pos_2.json", () => {
-  let cs_sched = fs.readFileSync(
-    "./scrapers/test/mock_schedules/cs_pos_2.json",
-    "utf-8"
-  );
+  let cs_sched = fs.readFileSync("test/mock_schedules/cs_pos_2.json", "utf-8");
   let cs_sched_obj = JSON.parse(cs_sched);
 
-  let csMajor = fs.readFileSync(
-    "./scrapers/test/mock_majors/bscs.json",
-    "utf-8"
-  );
+  let csMajor = fs.readFileSync("test/mock_majors/bscs.json", "utf-8");
 
   let csMajor_obj = JSON.parse(csMajor);
 
@@ -280,15 +268,12 @@ test("Range section warning produced for cs_pos_2.json", () => {
 
 test("Requirement group warnings produced appropriately for cs_sched_1.json", () => {
   let cs_sched = fs.readFileSync(
-    "./scrapers/test/mock_schedules/cs_sched_1.json",
+    "test/mock_schedules/cs_sched_1.json",
     "utf-8"
   );
   let cs_sched_obj = JSON.parse(cs_sched);
 
-  let csMajor = fs.readFileSync(
-    "./scrapers/test/mock_majors/bscs.json",
-    "utf-8"
-  );
+  let csMajor = fs.readFileSync("test/mock_majors/bscs.json", "utf-8");
 
   let csMajor_obj = JSON.parse(csMajor);
 
@@ -343,15 +328,12 @@ test("Requirement group warnings produced appropriately for cs_sched_1.json", ()
 
 test("Requirement group warnings produced appropriately for cs_sched_2.json", () => {
   let cs_sched = fs.readFileSync(
-    "./scrapers/test/mock_schedules/cs_sched_2.json",
+    "test/mock_schedules/cs_sched_2.json",
     "utf-8"
   );
   let cs_sched_obj = JSON.parse(cs_sched);
 
-  let csMajor = fs.readFileSync(
-    "./scrapers/test/mock_majors/bscs.json",
-    "utf-8"
-  );
+  let csMajor = fs.readFileSync("test/mock_majors/bscs.json", "utf-8");
 
   let csMajor_obj = JSON.parse(csMajor);
 
