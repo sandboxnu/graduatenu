@@ -8,4 +8,5 @@ export interface EnvironmentVariables {
   POSTGRES_DATABASE: string;
   JWT_SECRET_KEY: string;
   JWT_EXPIRE_TIME: number;
+  PORT: number;
 }
