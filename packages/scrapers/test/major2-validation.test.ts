@@ -16,4 +16,12 @@ test("simple", () => {
   // [d, e, a, b] -> true
   // [d, c] -> false
   // [d, a, b] -> false
+
+
+  // counterexample
+  // (a | b | c) & a, [a, b]
+  // generative recursion -> non structural recursion
+
+  // ((a | b) & (b | d)) & (a & b), [a, b, d]
+  // generative recursion -> non structural recursion
 });
