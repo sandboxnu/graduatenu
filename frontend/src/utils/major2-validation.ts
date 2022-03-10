@@ -150,11 +150,12 @@ function* validateRequirement(
   tracker: CourseValidationTracker
 ): Generator<ReturnType> {
   switch (r.type) {
-    case "AND": return validateAndRequirement(r, tracker);
-    case "XOM": return validateXomRequirement(r, tracker);
+    case "AND":
+      return validateAndRequirement(r, tracker);
+    case "XOM":
+      return validateXomRequirement(r, tracker);
     case "OR":
       return validateOrRequirement(r, tracker);
-      break;
     case "RANGE":
       break;
     case "COURSE":
@@ -166,21 +167,67 @@ function* validateRequirement(
   }
 }
 
+function getNextOkOrNull(it: Iterator<ReturnType>) {
+  let next = it.next();
+  while (!next.done) {
+    if (next.value.ok) return next;
+    next = it.next();
+  }
+  return null;
+}
+
 function* validateAndRequirement(
   r: IAndCourse2,
   tracker: CourseValidationTracker
 ) {
-  const results = [];
-  for (const c of r.courses) {
-    const result = validateRequirement(c, tracker);
-    for (const next of result) {
-      if (next.ok) {
-        results.push(result);
-        break;
-        // save execution context
+  let nextRequirement = 0;
+  // list of [context, the index of the requirement it belongs to]
+  const contexts: [Generator<ReturnType>, number][] = [];
+  while (nextRequirement < r.courses.length) {
+    const c = r.courses[nextRequirement];
+    const context = validateRequirement(c, tracker);
+    const nextOk = getNextOkOrNull(context);
+    if (nextOk) {
+      // push a tuple
+      nextRequirement += 1;
+      contexts.push([context, nextRequirement]);
+      continue;
+    }
+    // there is no next ok. pop and retry
+    while (true) {
+      const pop = contexts.pop();
+      if (!pop) {
+        // if we were the first, then exit
+        return { ok: false };
       }
+      const [prevContext, nextIdx] = pop;
+      const next = getNextOkOrNull(prevContext);
+      if (next) {
+        // continue with the index after the previous context
+        contexts.push([prevContext, nextIdx]);
+        nextRequirement = nextIdx;
+        break;
+      }
+      // pop the next context
+    }
   }
-  return { ok: true };
+  while (true) {
+    // handle retry logic
+    yield { ok: true };
+    const pop = contexts.pop();
+    if (!pop) {
+      // if we were the first, then exit
+      return { ok: false };
+    }
+    const [prevContext, nextIdx] = pop;
+    const next = getNextOkOrNull(prevContext);
+    if (next) {
+      // continue with the index after the previous context
+      contexts.push([prevContext, nextIdx]);
+      nextRequirement = nextIdx;
+      break;
+    }
+  }
 }
 
 function* validateOrRequirement(
@@ -213,6 +260,7 @@ function validateCourseRequirement(
   return { ok: false };
 }
 
-function validateXomRequirement(r: IXofManyCourse, tracker: CourseValidationTracker) {
-  r.
-}
+function validateXomRequirement(
+  r: IXofManyCourse,
+  tracker: CourseValidationTracker
+) {}

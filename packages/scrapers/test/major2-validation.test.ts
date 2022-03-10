@@ -16,12 +16,45 @@ test("simple", () => {
   // [d, e, a, b] -> true
   // [d, c] -> false
   // [d, a, b] -> false
-
-
   // counterexample
   // (a | b | c) & a, [a, b]
-  // generative recursion -> non structural recursion
-
-  // ((a | b) & (b | d)) & (a & b), [a, b, d]
-  // generative recursion -> non structural recursion
+  // generative recursion -> non-structural recursion
+  // ((a | b) & (b | d)) & a, [a, b, d]
+  // generative recursion -> non0-structural recursion
+  // ((a    ) & (b    )) & error -> ideally we pop all the way back to when we used 'a'
+  // ((a    ) & (    d)) & error
+  // ((  | b) & (    d)) & a -> OK
+  // OR we can use a-normal form! above gets transformed into the following:
+  // let 1 = a | b
+  // let 2 = b | d
+  // let 3 = 1 & 2
+  // let 4 = a
+  // 3 & 4
+  // let's say we implement this. what next?
+  // => we need errors!
+  // what error should we use? probably the deepest one in the ANF expression
+  // => also, what is the solution?
+  // if the solution is different from the default one, we should display a warning telling student where they will need to override
+  // to do this, diff our solution w the default one
+  // default: meaning the one the audit uses by default (w/out overrides)
+  // => are there other solutions?
+  // idk if we'll need this yet
+  // but wait! how simple is the anf _really_?
+  // ((a & b) | (c & d)) & b
+  // let 1 = a & b
+  // let 2 = c & d
+  // let 3 = 1 | 2
+  // let 4 = 3 & b
+  // problem! we evaluate 1 and 2, but we should only evaluate 1 _or_ 2
+  // solution:
+  // And(l, r) -> If((l,true), (true, r), false)
+  // Or(l, r)  -> If((l,false), true, (false, r))
+  // ((a & b) | (c & d)) & b =>
+  // let 1 = (If (a & b) then true else (c & d))
+  // let 4 = (If 1 then b else false)
+  // transform & of more than 2 items
+  // (a & b & c) =>
+  // let 1 = if a then b else false
+  // let 2 = if 1 then c else false
+  //
 });
