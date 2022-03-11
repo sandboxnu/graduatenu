@@ -71,4 +71,10 @@ test("simple", () => {
   // compute all cases, take the intersection.
   // consider all non-intersecting options, permute
   // reach out to Pete Manolios (logic and computation)
+
+  // dillon idea
+  // important idea: iterate by course, not by req.
+  // 1. create mapping [course -> list of atoms that it could satisfy], where atom = range or coursereq
+  // 2. pick the first course. perform backtracking with each course.
+  // important: include the case where the course is not used.
 });
