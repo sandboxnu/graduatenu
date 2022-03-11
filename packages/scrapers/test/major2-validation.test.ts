@@ -9,6 +9,7 @@ test("simple", () => {
   // (a | (b & c)) & (a | (b & c)), [a, b, c] -> true
   // (a | b | c | d) & (a | b), [b, d] -> true
   // (a | b | c | d) & (a | b), [b] -> false
+
   // foundations
   // https://catalog.northeastern.edu/undergraduate/computer-information-science/computer-science/bscs/#programrequirementstext
   // (((a & b) | c) & (d | e)) & (d | e)
@@ -16,6 +17,7 @@ test("simple", () => {
   // [d, e, a, b] -> true
   // [d, c] -> false
   // [d, a, b] -> false
+
   // counterexample
   // (a | b | c) & a, [a, b]
   // generative recursion -> non-structural recursion
@@ -24,12 +26,14 @@ test("simple", () => {
   // ((a    ) & (b    )) & error -> ideally we pop all the way back to when we used 'a'
   // ((a    ) & (    d)) & error
   // ((  | b) & (    d)) & a -> OK
+
   // OR we can use a-normal form! above gets transformed into the following:
   // let 1 = a | b
   // let 2 = b | d
   // let 3 = 1 & 2
   // let 4 = a
   // 3 & 4
+
   // let's say we implement this. what next?
   // => we need errors!
   // what error should we use? probably the deepest one in the ANF expression
@@ -39,12 +43,14 @@ test("simple", () => {
   // default: meaning the one the audit uses by default (w/out overrides)
   // => are there other solutions?
   // idk if we'll need this yet
+
   // but wait! how simple is the anf _really_?
   // ((a & b) | (c & d)) & b
   // let 1 = a & b
   // let 2 = c & d
   // let 3 = 1 | 2
   // let 4 = 3 & b
+
   // problem! we evaluate 1 and 2, but we should only evaluate 1 _or_ 2
   // solution:
   // And(l, r) -> If((l,true), (true, r), false)
@@ -57,4 +63,12 @@ test("simple", () => {
   // let 1 = if a then b else false
   // let 2 = if 1 then c else false
   //
+
+  // david feedback
+  // doesn't seem too complicated?
+
+  // sumit
+  // compute all cases, take the intersection.
+  // consider all non-intersecting options, permute
+  // reach out to Pete Manolios (logic and computation)
 });
