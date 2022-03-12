@@ -77,4 +77,11 @@ test("simple", () => {
   // 1. create mapping [course -> list of atoms that it could satisfy], where atom = range or coursereq
   // 2. pick the first course. perform backtracking with each course.
   // important: include the case where the course is not used.
+  // potential problem: might be very slow. it runs into solutions LAST, vs previous req, will go through everything
+
+  // things to do:
+  // - 1. look into how we can use https://github.com/charkour/csps, perhaps read into background of how
+  //      csps work: http://aima.cs.berkeley.edu/
+  // - 2. begin thinking about how to structure/design a program for dillon's algorithm.
+  // -    would be a way to structural recursion backtracking.
 });
