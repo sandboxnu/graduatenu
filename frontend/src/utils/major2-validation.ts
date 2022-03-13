@@ -6,12 +6,10 @@ import {
   Major2,
   Requirement2,
   ScheduleCourse,
-  Section,
   IRequiredCourse,
-  INEUCourse,
   ICourseRange2,
 } from "../../../common/types";
-import { courseEq, courseToString } from "./course-helpers";
+import { courseToString } from "./course-helpers";
 
 // num total credits requirements
 
@@ -43,9 +41,16 @@ export function validateMajor2(major: Major2, taken: ScheduleCourse[]) {
   //   taken
   // );
   //
-  // const requirementAndSectionErrors = major.requirementSections.map(s =>
-  //   validateAndRequirements(s.requirements, taken, tracker)
-  // );
+  const solutions = validateAndRequirement(
+    {
+      type: "AND",
+      courses: major.requirementSections.map(s => ({
+        ...s,
+        type: "SECTION" as const,
+      })),
+    },
+    tracker
+  );
   throw new Error("unimplemented!");
 }
 
@@ -57,12 +62,12 @@ function validateRangeRequirement(
   let exceptions = new Set(req.exceptions.map(courseToString));
   courses = courses.filter(c => !exceptions.has(courseToString(c)));
 
-  const combinate = (array: Array<any>) => {
+  const combinate = <T>(array: Array<T>) => {
     const combinate2 = (
       n: number,
-      src: Array<any>,
-      got: Array<any>,
-      all: Array<any>
+      src: Array<T>,
+      got: Array<T>,
+      all: Array<Array<T>>
     ) => {
       if (n === 0) {
         if (got.length > 0) {
@@ -75,7 +80,7 @@ function validateRangeRequirement(
       }
       return;
     };
-    let all: any[] = [];
+    let all: T[][] = [];
     for (let i = 1; i < array.length; i++) {
       combinate2(i, array, [], all);
     }
@@ -83,7 +88,7 @@ function validateRangeRequirement(
     return all;
   };
 
-  const combinatedCourses: Array<Array<ScheduleCourse>> = combinate(courses);
+  const combinatedCourses = combinate(courses);
 
   return combinatedCourses.flatMap(c => {
     // edge case of 3 + 5 credits or non - 4 + 1 credits to fulfil a credit req of 4 or 8
@@ -109,24 +114,27 @@ function validateSectionRequirement(
   return undefined;
 }
 
-const validateRequirement = (
+// invariant: the solutions returned will each ALWAYS have no duplicate courses
+export const validateRequirement = (
   req: Requirement2,
-  taken: ScheduleCourse[],
   tracker: CourseValidationTracker
-) => {
+): Array<Solution> => {
   switch (req.type) {
     case "AND":
       return validateAndRequirement(req, tracker);
     case "XOM":
-      return validateXomRequirement(req, tracker);
+      // return validateXomRequirement(req, tracker);
+      throw "unimpl";
     case "OR":
       return validateOrRequirement(req, tracker);
     case "RANGE":
-      return validateRangeRequirement(req, tracker);
+      // return validateRangeRequirement(req, tracker);
+      throw "unimpl";
     case "COURSE":
       return validateCourseRequirement(req, tracker);
     case "section":
-      return validateSectionRequirement(req.requirements, taken, tracker);
+      // return validateSectionRequirement(req.requirements, tracker);
+      throw "unimpl";
     default:
       return assertUnreachable(req);
   }
@@ -154,12 +162,81 @@ function validateTotalCreditsRequired(
 function validateAndRequirement(
   r: IAndCourse2,
   tracker: CourseValidationTracker
-) {}
+) {
+  const allChildRequirementSolutions = r.courses.map(r =>
+    validateRequirement(r, tracker)
+  );
+  // return all possible solutions
+  /*
+  CS2810 -> Array<Solution> -> [{ min: 4, max: 4, sol: [CS2810]}]
+
+  (CS2810 or CS2800) -> ???
+  -> Array<Solution> -> [{ min: 4, max: 4, sol: [CS2810]}, { min: 4, max: 4, sol: [CS2800]}]
+
+  (CS2810 or CS2800) and (CS2810 or DS3000)
+
+  [{ min: 4, max: 4, sol: [CS2810]}, { min: 4, max: 4, sol: [CS2800]}] -> solutions for r1
+  [{ min: 4, max: 4, sol: [CS2810]}, { min: 4, max: 4, sol: [DS3000]}] -> solutions for r2
+
+  final set of solutions
+  [{ min: 8, max: 8, sol: [CS2810, DS3000]},
+   { min: 8, max: 8, sol: [CS2800, CS2810]},
+   { min: 8, max: 8, sol: [CS2800, DS3000]}]
+   */
+
+  // valid solutions for all the requirements so far
+  let solutionsSoFar: Array<Solution> = [
+    { maxCredits: 0, minCredits: 0, sol: [] },
+  ];
+
+  for (let childRequirementSolutions of allChildRequirementSolutions) {
+    let solutionsSoFarWithChild: Array<Solution> = [];
+    for (let solutionSoFar of solutionsSoFar) {
+      for (let childSolution of childRequirementSolutions) {
+        // if the intersection of us and the solution so far is empty, combine them and add to current solutions
+        let childCourses = new Set(childSolution.sol);
+        let solutionCourses = new Set(solutionSoFar.sol);
+        if (isIntersectionEmpty(childCourses, solutionCourses)) {
+          solutionsSoFarWithChild.push(
+            combineSolutions(solutionSoFar, childSolution)
+          );
+        }
+      }
+    }
+    // if there were no solutions added, then there are no valid solutions for the whole and
+    if (solutionsSoFarWithChild.length === 0) {
+      return [];
+    }
+    solutionsSoFar = solutionsSoFarWithChild;
+  }
+  return solutionsSoFar;
+}
+
+function isIntersectionEmpty(s1: Set<string>, s2: Set<string>): boolean {
+  let base = s1.size < s2.size ? s1 : s2;
+  for (let entry of s1) {
+    if (s2.has(entry)) {
+      return false;
+    }
+  }
+  return true;
+}
+
+// assumes the solutions share no courses
+function combineSolutions(s1: Solution, s2: Solution) {
+  return {
+    minCredits: s1.minCredits + s2.minCredits,
+    maxCredits: s1.maxCredits + s2.maxCredits,
+    sol: [...s1.sol, ...s2.sol],
+  };
+}
 
 function validateOrRequirement(
   r: IOrCourse2,
   tracker: CourseValidationTracker
-) {}
+) {
+  return r.courses.flatMap(r => validateRequirement(r, tracker));
+}
 
 function validateCourseRequirement(
   r: IRequiredCourse,
