@@ -411,7 +411,7 @@ export interface ScheduleTerm {
  */
 export interface ScheduleCourse {
   name: string;
-  classId: string;
+  classId: string; // Should this be a number?
   subject: string;
   prereqs?: INEUAndPrereq | INEUOrPrereq;
   coreqs?: INEUAndPrereq | INEUOrPrereq;
