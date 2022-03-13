@@ -8,6 +8,7 @@ import {
   ScheduleCourse,
   IRequiredCourse,
   ICourseRange2,
+  Section,
 } from "../../../common/types";
 import { courseToString } from "./course-helpers";
 
@@ -98,7 +99,7 @@ function validateRangeRequirement(
         {
           minCredits: credits,
           maxCredits: credits,
-          sol: c,
+          sol: c.map(courseToString),
         },
       ];
     }
@@ -107,11 +108,11 @@ function validateRangeRequirement(
 }
 
 function validateSectionRequirement(
-  requirements: Requirement2[],
-  taken: ScheduleCourse[],
+  requirements: Section,
   tracker: CourseValidationTracker
 ) {
-  return undefined;
+  const courses = requirements.requirements;
+  return validateAndRequirement({ type: "AND", courses }, tracker);
 }
 
 // invariant: the solutions returned will each ALWAYS have no duplicate courses
@@ -128,13 +129,11 @@ export const validateRequirement = (
     case "OR":
       return validateOrRequirement(req, tracker);
     case "RANGE":
-      // return validateRangeRequirement(req, tracker);
-      throw "unimpl";
+      return validateRangeRequirement(req, tracker);
     case "COURSE":
       return validateCourseRequirement(req, tracker);
-    case "section":
-      // return validateSectionRequirement(req.requirements, tracker);
-      throw "unimpl";
+    case "SECTION":
+      return validateSectionRequirement(req, tracker);
     default:
       return assertUnreachable(req);
   }
