@@ -9,59 +9,33 @@ import {
   Section,
   IRequiredCourse,
   INEUCourse,
+  ICourseRange2,
 } from "../../../common/types";
 import { courseEq, courseToString } from "./course-helpers";
 
 // num total credits requirements
-// interface
-
-interface ValidationError {
-  message: string;
-}
-
-interface ValidationStackError extends ValidationError {
-  stackTrace: number[];
-}
-
-interface TotalRequiredCreditsError extends ValidationError {
-  requiredCredits: number;
-  takenCredits: number;
-}
 
 interface CourseValidationTracker {
-  used: {
-    contains(input: IScheduleCourse): boolean;
-    // remember all the changes we make from here on out.
-    // if we ever want to revert everything, just call popUntil(idx)
-    pushMarker(): number;
-    popUntilMarker(id: number): void;
-    pushCourse(toAdd: IScheduleCourse): void;
-  };
-  taken: {
-    get(input: IScheduleCourse): null | ScheduleCourse;
-  };
+  contains(input: IScheduleCourse): boolean;
+
+  pushCourse(toAdd: IScheduleCourse): void;
+
+  get(input: IScheduleCourse): ScheduleCourse | null;
+
+  getAll(subject: string, start: number, end: number): Array<ScheduleCourse>;
 }
 
-type Major2ValidationResult = {
-  name: string;
-  isValid: boolean;
-  totalCreditsRequiredError: ValidationError | null;
-  // invariant: is the same length as major requirementSections
-  // and inner array has the same length of requirement array
-  requirementSectionErrors: Array<Array<ValidationError>>;
-  // invariant: is the same length as # of concentration sections
-  // assumption: we will only validate a single concentration
-  concentrationErrors: Array<Array<ValidationError>>;
+type Solution = {
+  minCredits: number;
+  maxCredits: number;
+  sol: Array<string>;
 };
 
 const assertUnreachable = (x: never): never => {
   throw new Error("This code is unreachable");
 };
 
-export function validateMajor2(
-  major: Major2,
-  taken: ScheduleCourse[]
-): Major2ValidationResult {
+export function validateMajor2(major: Major2, taken: ScheduleCourse[]) {
   const coursesTaken: Set<string> = new Set();
 
   // const totalCreditsRequiredError = validateTotalCreditsRequired(
@@ -75,50 +49,84 @@ export function validateMajor2(
   throw new Error("unimplemented!");
 }
 
-type NestedErrorResult = {
-  nested: Array<ValidationStackError>;
-  credits: number;
-};
+function validateRangeRequirement(
+  req: ICourseRange2,
+  tracker: CourseValidationTracker
+) {
+  let courses = tracker.getAll(req.subject, req.idRangeStart, req.idRangeEnd);
+  let exceptions = new Set(req.exceptions.map(courseToString));
+  courses = courses.filter(c => !exceptions.has(courseToString(c)));
 
-const validateAndRequirements = (
+  const combinate = (array: Array<any>) => {
+    const combinate2 = (
+      n: number,
+      src: Array<any>,
+      got: Array<any>,
+      all: Array<any>
+    ) => {
+      if (n === 0) {
+        if (got.length > 0) {
+          all.push(got);
+        }
+        return;
+      }
+      for (let j = 0; j < src.length; j++) {
+        combinate2(n - 1, src.slice(j + 1), got.concat([src[j]]), all);
+      }
+      return;
+    };
+    let all: any[] = [];
+    for (let i = 1; i < array.length; i++) {
+      combinate2(i, array, [], all);
+    }
+    all.push(array);
+    return all;
+  };
+
+  const combinatedCourses: Array<Array<ScheduleCourse>> = combinate(courses);
+
+  return combinatedCourses.flatMap(c => {
+    // edge case of 3 + 5 credits or non - 4 + 1 credits to fulfil a credit req of 4 or 8
+    const credits = c.reduce((a, b) => a + b.numCreditsMax, 0);
+    if (credits === req.creditsRequired) {
+      return [
+        {
+          minCredits: credits,
+          maxCredits: credits,
+          sol: c,
+        },
+      ];
+    }
+    return [];
+  });
+}
+
+function validateSectionRequirement(
   requirements: Requirement2[],
   taken: ScheduleCourse[],
   tracker: CourseValidationTracker
-): NestedErrorResult => {
-  const errors = requirements.map(r =>
-    validateSingleAndRequirement(r, taken, tracker)
-  );
-  const credits = errors.reduce((total, e) => e.credits + total, 0);
-  const nested = errors.flatMap((e, index) => {
-    e.nested.forEach(e => e.stackTrace.unshift(index));
-    return e.nested;
-  });
-  return { nested, credits };
-};
+) {
+  return undefined;
+}
 
-const validateSingleAndRequirement = (
+const validateRequirement = (
   req: Requirement2,
   taken: ScheduleCourse[],
   tracker: CourseValidationTracker
-): NestedErrorResult => {
+) => {
   switch (req.type) {
     case "AND":
-      return validateAndRequirements(req.courses, taken, tracker);
+      return validateAndRequirement(req, tracker);
     case "XOM":
+      return validateXomRequirement(req, tracker);
     case "OR":
+      return validateOrRequirement(req, tracker);
     case "RANGE":
-      return { nested: [], credits: 0 };
+      return validateRangeRequirement(req, tracker);
     case "COURSE":
-      const c = taken.find(c => courseEq(c, req));
-      if (c && !tracker.contains(req)) {
-        tracker.addCourse(req);
-        return { nested: [], credits: c.numCreditsMax };
-      }
-      const stringifiedCourse = courseToString(req);
-      const message = `Requirement unsatisfiable, missing course: ${stringifiedCourse}`;
-      return { nested: [{ message, stackTrace: [] }], credits: 0 };
+      return validateCourseRequirement(req, tracker);
     case "section":
-      return validateAndRequirements(req.requirements, taken, tracker);
+      return validateSectionRequirement(req.requirements, taken, tracker);
     default:
       return assertUnreachable(req);
   }
@@ -127,7 +135,7 @@ const validateSingleAndRequirement = (
 function validateTotalCreditsRequired(
   requiredCredits: number,
   coursesTaken: ScheduleCourse[]
-): TotalRequiredCreditsError | null {
+) {
   const takenCredits = coursesTaken.reduce(
     (total, course) => total + course.numCreditsMax,
     0
@@ -143,121 +151,31 @@ function validateTotalCreditsRequired(
   return null;
 }
 
-type ReturnType = { ok: boolean };
-
-function* validateRequirement(
-  r: Requirement2,
-  tracker: CourseValidationTracker
-): Generator<ReturnType> {
-  switch (r.type) {
-    case "AND":
-      return validateAndRequirement(r, tracker);
-    case "XOM":
-      return validateXomRequirement(r, tracker);
-    case "OR":
-      return validateOrRequirement(r, tracker);
-    case "RANGE":
-      break;
-    case "COURSE":
-      return validateCourseRequirement(r, tracker);
-    case "section":
-      break;
-    default:
-      assertUnreachable(r);
-  }
-}
-
-function getNextOkOrNull(it: Iterator<ReturnType>) {
-  let next = it.next();
-  while (!next.done) {
-    if (next.value.ok) return next;
-    next = it.next();
-  }
-  return null;
-}
-
-function* validateAndRequirement(
+function validateAndRequirement(
   r: IAndCourse2,
   tracker: CourseValidationTracker
-) {
-  let nextRequirement = 0;
-  // list of [context, the index of the requirement it belongs to]
-  const contexts: [Generator<ReturnType>, number][] = [];
-  while (nextRequirement < r.courses.length) {
-    const c = r.courses[nextRequirement];
-    const context = validateRequirement(c, tracker);
-    const nextOk = getNextOkOrNull(context);
-    if (nextOk) {
-      // push a tuple
-      nextRequirement += 1;
-      contexts.push([context, nextRequirement]);
-      continue;
-    }
-    // there is no next ok. pop and retry
-    while (true) {
-      const pop = contexts.pop();
-      if (!pop) {
-        // if we were the first, then exit
-        return { ok: false };
-      }
-      const [prevContext, nextIdx] = pop;
-      const next = getNextOkOrNull(prevContext);
-      if (next) {
-        // continue with the index after the previous context
-        contexts.push([prevContext, nextIdx]);
-        nextRequirement = nextIdx;
-        break;
-      }
-      // pop the next context
-    }
-  }
-  while (true) {
-    // handle retry logic
-    yield { ok: true };
-    const pop = contexts.pop();
-    if (!pop) {
-      // if we were the first, then exit
-      return { ok: false };
-    }
-    const [prevContext, nextIdx] = pop;
-    const next = getNextOkOrNull(prevContext);
-    if (next) {
-      // continue with the index after the previous context
-      contexts.push([prevContext, nextIdx]);
-      nextRequirement = nextIdx;
-      break;
-    }
-  }
-}
+) {}
 
-function* validateOrRequirement(
+function validateOrRequirement(
   r: IOrCourse2,
   tracker: CourseValidationTracker
-) {
-  for (const c of r.courses) {
-    const marker = tracker.used.pushMarker();
-    const result = validateRequirement(c, tracker);
-    for (const next of result) {
-      if (next.ok) {
-        // create context we can jump back to
-        yield { ok: true };
-      }
-    }
-    tracker.used.popUntilMarker(marker);
-  }
-  return { ok: false };
-}
+) {}
 
 function validateCourseRequirement(
   r: IRequiredCourse,
   tracker: CourseValidationTracker
 ) {
-  const c = tracker.taken.get(r);
-  if (c && !tracker.used.contains(r)) {
-    tracker.used.pushCourse(r);
-    return { ok: true };
+  const c = tracker.get(r);
+  if (c) {
+    return [
+      {
+        minCredits: c.numCreditsMin,
+        maxCredits: c.numCreditsMax,
+        sol: [courseToString(c)],
+      },
+    ];
   }
-  return { ok: false };
+  return [];
 }
 
 function validateXomRequirement(

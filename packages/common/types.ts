@@ -241,7 +241,7 @@ export interface ICourseRange2 {
   subject: string;
   idRangeStart: number;
   idRangeEnd: number;
-  exceptions: Requirement2[];
+  exceptions: IRequiredCourse[];
 }
 
 /**
