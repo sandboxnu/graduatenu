@@ -17,8 +17,6 @@ import { courseToString } from "./course-helpers";
 interface CourseValidationTracker {
   contains(input: IScheduleCourse): boolean;
 
-  pushCourse(toAdd: IScheduleCourse): void;
-
   get(input: IScheduleCourse): ScheduleCourse | null;
 
   getAll(subject: string, start: number, end: number): Array<ScheduleCourse>;
@@ -42,6 +40,23 @@ export function validateMajor2(major: Major2, taken: ScheduleCourse[]) {
   //   taken
   // );
   //
+
+  const currentCourses = new Map(taken.map(t => [courseToString(t), t]));
+  const tracker: CourseValidationTracker = {
+    contains(input: IScheduleCourse): boolean {
+      return currentCourses.has(courseToString(input));
+    },
+    get(input: IScheduleCourse): ScheduleCourse | null {
+      const course = currentCourses.get(courseToString(input));
+      if (course) {
+        return course;
+      }
+      return null;
+    },
+    getAll(subject: string, start: number, end: number): Array<ScheduleCourse> {
+      throw new Error("unimplemented!");
+    },
+  };
 
   const courses = major.requirementSections.map(s => ({
     ...s,
