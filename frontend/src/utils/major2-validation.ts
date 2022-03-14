@@ -42,13 +42,16 @@ export function validateMajor2(major: Major2, taken: ScheduleCourse[]) {
   //   taken
   // );
   //
+
+  const courses = major.requirementSections.map(s => ({
+    ...s,
+    type: "SECTION" as const,
+  }));
+
   const solutions = validateAndRequirement(
     {
       type: "AND",
-      courses: major.requirementSections.map(s => ({
-        ...s,
-        type: "SECTION" as const,
-      })),
+      courses,
     },
     tracker
   );
@@ -62,32 +65,6 @@ function validateRangeRequirement(
   let courses = tracker.getAll(req.subject, req.idRangeStart, req.idRangeEnd);
   let exceptions = new Set(req.exceptions.map(courseToString));
   courses = courses.filter(c => !exceptions.has(courseToString(c)));
-
-  const combinate = <T>(array: Array<T>) => {
-    const combinate2 = (
-      n: number,
-      src: Array<T>,
-      got: Array<T>,
-      all: Array<Array<T>>
-    ) => {
-      if (n === 0) {
-        if (got.length > 0) {
-          all.push(got);
-        }
-        return;
-      }
-      for (let j = 0; j < src.length; j++) {
-        combinate2(n - 1, src.slice(j + 1), got.concat([src[j]]), all);
-      }
-      return;
-    };
-    let all: T[][] = [];
-    for (let i = 1; i < array.length; i++) {
-      combinate2(i, array, [], all);
-    }
-    all.push(array);
-    return all;
-  };
 
   const combinatedCourses = combinate(courses);
 
@@ -105,6 +82,32 @@ function validateRangeRequirement(
     }
     return [];
   });
+}
+
+function combinate<T>(array: Array<T>) {
+  const combinate2 = (
+    n: number,
+    src: Array<T>,
+    got: Array<T>,
+    all: Array<Array<T>>
+  ) => {
+    if (n === 0) {
+      if (got.length > 0) {
+        all.push(got);
+      }
+      return;
+    }
+    for (let j = 0; j < src.length; j++) {
+      combinate2(n - 1, src.slice(j + 1), got.concat([src[j]]), all);
+    }
+    return;
+  };
+  let all: T[][] = [];
+  for (let i = 1; i < array.length; i++) {
+    combinate2(i, array, [], all);
+  }
+  all.push(array);
+  return all;
 }
 
 function validateSectionRequirement(
@@ -188,9 +191,11 @@ function validateAndRequirement(
     { maxCredits: 0, minCredits: 0, sol: [] },
   ];
 
+  // Diff solutions of each requirement in the AND
   for (let childRequirementSolutions of allChildRequirementSolutions) {
     let solutionsSoFarWithChild: Array<Solution> = [];
     for (let solutionSoFar of solutionsSoFar) {
+      // Each solution of each subsolution
       for (let childSolution of childRequirementSolutions) {
         // if the intersection of us and the solution so far is empty, combine them and add to current solutions
         let childCourses = new Set(childSolution.sol);
@@ -254,7 +259,24 @@ function validateCourseRequirement(
   return [];
 }
 
+/*
+ Min 8 creds:[
+ {max: 4, min: 4, sol:[CS2800]},
+ {max: 4, min: 4, sol:[CS300]},
+ {max: 4, min: 4, sol:[CS3500, CS3501]},
+ ]
+ */
+
+// Currently treated as an OR requirement but checks if minNumCredits is met
+
 function validateXomRequirement(
   r: IXofManyCourse,
   tracker: CourseValidationTracker
-) {}
+) {
+  const allChildRequirementSolutions = r.courses.flatMap(r =>
+    validateRequirement(r, tracker)
+  );
+  return allChildRequirementSolutions.filter(
+    sol => sol.minCredits >= r.numCreditsMin
+  );
+}
