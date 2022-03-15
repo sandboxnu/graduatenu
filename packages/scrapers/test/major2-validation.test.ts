@@ -8,6 +8,7 @@ import {
   IXofManyCourse,
   Requirement2,
   ScheduleCourse,
+  Section,
 } from "../../common/types";
 import { courseToString } from "frontend/src/utils/course-helpers";
 
@@ -95,17 +96,28 @@ import { courseToString } from "frontend/src/utils/course-helpers";
 // - 2. begin thinking about how to structure/design a program for dillon's algorithm.
 // -    would be a way to structural recursion backtracking.
 
-const course = (subject: string, classId: number): IRequiredCourse => ({
-  subject,
-  type: "COURSE",
-  classId: classId,
-});
+const course = (
+  subject: string,
+  classId: number,
+  credits?: number
+): IRequiredCourse => {
+  const c: any = {
+    subject,
+    type: "COURSE" as const,
+    classId: classId,
+  };
+  if (credits) {
+    c.numCreditsMax = credits;
+    c.numCreditsMin = credits;
+  }
+  return c;
+};
 const convert = ({ classId, ...c }: IRequiredCourse): ScheduleCourse => ({
-  ...c,
   classId: String(classId),
   name: "",
   numCreditsMax: 4,
   numCreditsMin: 4,
+  ...c,
 });
 const or = (...courses: Requirement2[]): IOrCourse2 => ({
   type: "OR",
@@ -137,10 +149,20 @@ const xom = (
   numCreditsMin,
   courses,
 });
-const solution = (...sol: string[]) => ({
+const section = (
+  title: string,
+  minRequirementCount: number,
+  requirements: Requirement2[]
+): { type: "SECTION" } & Section => ({
+  title,
+  requirements,
+  minRequirementCount,
+  type: "SECTION",
+});
+const solution = (...sol: (string | IRequiredCourse)[]) => ({
   minCredits: sol.length * 4,
   maxCredits: sol.length * 4,
-  sol,
+  sol: sol.map(s => (typeof s === "string" ? s : courseToString(s))),
 });
 const makeTracker = (...courses: IRequiredCourse[]) => {
   const taken = courses.map(convert);
@@ -165,7 +187,7 @@ const makeTracker = (...courses: IRequiredCourse[]) => {
     },
   };
 };
-describe("validateRequirement", () => {
+describe("validateRequirement suite", () => {
   // (CS2810 or CS2800) and (CS2810 or DS3000)
   const cs2800 = course("CS", 2800);
   const cs2810 = course("CS", 2810);
@@ -210,16 +232,6 @@ describe("validateRequirement", () => {
       solution("CS2800", "CS2810"),
     ]);
   });
-  const cs2801 = course("CS", 2801);
-  const cs4820 = course("CS", 4820);
-  const cs4805 = course("CS", 4805);
-  const cs4810 = course("CS", 4810);
-  const cs4830 = course("CS", 4830);
-  const cs3950 = course("CS", 3950);
-  const cs4950 = course("CS", 4950);
-  const cy4770 = course("CS", 4770);
-
-  const tracker = makeTracker();
   test("range of courses with exception", () => {
     expect(validateRequirement(rangeException, tracker)).toEqual([
       solution("CS2800"),
@@ -232,5 +244,34 @@ describe("validateRequirement", () => {
       solution("CS2800", "DS3000"),
       solution("CS2810", "DS3000"),
     ]);
+  });
+  const cs2801 = course("CS", 2801, 1);
+  const cs4820 = course("CS", 4820);
+  const cs4805 = course("CS", 4805);
+  const cs4810 = course("CS", 4810);
+  const cs4830 = course("CS", 4830);
+  const cs3950 = course("CS", 3950);
+  const cs4950 = course("CS", 4950);
+  const cy4770 = course("CS", 4770);
+  const foundations = section("Foundations", 2, [
+    xom(8, [or(and(cs2800, cs2801), cs4820), or(cs4805, cs4810)]),
+    xom(8, [cs4805, cs4810, cs4820, cs4830, and(cs3950, cs4950), cy4770]),
+  ]);
+  const foundationsCourses1 = makeTracker(
+    cs2801,
+    cs2800,
+    cs4810,
+    cs4805,
+    cs3950,
+    cs4950
+  );
+  test("integration", () => {
+    expect(validateRequirement(foundations, foundationsCourses1)).toEqual([]);
+  });
+
+  test("section", () => {
+    const tracker = makeTracker(cs2800, cs2810);
+    const r = section("s1", 2, [cs2800, cs2810, cs3500]);
+    expect(validateRequirement(r, tracker)).toEqual([solution(cs2800, cs2810)]);
   });
 });

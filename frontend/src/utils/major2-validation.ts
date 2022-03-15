@@ -28,7 +28,7 @@ type Solution = {
   sol: Array<string>;
 };
 
-const assertUnreachable = (x: never): never => {
+const assertUnreachable = (_: never): never => {
   throw new Error("This code is unreachable");
 };
 
@@ -67,6 +67,67 @@ export function validateMajor2(major: Major2, taken: ScheduleCourse[]) {
     major.totalCreditsRequired,
     taken
   );
+}
+
+// invariant: the solutions returned will each ALWAYS have no duplicate courses
+export const validateRequirement = (
+  req: Requirement2,
+  tracker: CourseValidationTracker
+): Array<Solution> => {
+  switch (req.type) {
+    // base cases
+    case "RANGE":
+      return validateRangeRequirement(req, tracker);
+    case "COURSE":
+      return validateCourseRequirement(req, tracker);
+    // inductive cases
+    case "AND":
+      return validateAndRequirement(req, tracker);
+    case "XOM":
+      return validateXomRequirement(req, tracker);
+    case "OR":
+      return validateOrRequirement(req, tracker);
+    case "SECTION":
+      return validateSectionRequirement(req, tracker);
+    default:
+      return assertUnreachable(req);
+  }
+};
+
+function validateTotalCreditsRequired(
+  requiredCredits: number,
+  coursesTaken: ScheduleCourse[]
+) {
+  const takenCredits = coursesTaken.reduce(
+    (total, course) => total + course.numCreditsMax,
+    0
+  );
+
+  if (takenCredits < requiredCredits) {
+    return {
+      message: `Total credits taken ${takenCredits} does not meet number of required credits ${requiredCredits}`,
+      takenCredits,
+      requiredCredits,
+    };
+  }
+  return null;
+}
+
+function validateCourseRequirement(
+  r: IRequiredCourse,
+  tracker: CourseValidationTracker
+) {
+  const c = tracker.get(r);
+  if (c) {
+    return [
+      {
+        minCredits: c.numCreditsMin,
+        maxCredits: c.numCreditsMax,
+        sol: [courseToString(c)],
+      },
+    ];
+  }
+  return [];
 }
 
 function validateRangeRequirement(
@@ -108,82 +169,6 @@ function validateRangeRequirement(
     unfinishedSolutionsSoFar.push(...unfinishedSolutionsWithCourse);
   }
   return finishedSolutions;
-}
-
-function combinate<T>(array: Array<T>) {
-  const combinate2 = (
-    n: number,
-    src: Array<T>,
-    got: Array<T>,
-    all: Array<Array<T>>
-  ) => {
-    if (n === 0) {
-      if (got.length > 0) {
-        all.push(got);
-      }
-      return;
-    }
-    for (let j = 0; j < src.length; j++) {
-      combinate2(n - 1, src.slice(j + 1), got.concat([src[j]]), all);
-    }
-    return;
-  };
-  let all: T[][] = [];
-  for (let i = 1; i < array.length; i++) {
-    combinate2(i, array, [], all);
-  }
-  all.push(array);
-  return all;
-}
-
-function validateSectionRequirement(
-  requirements: Section,
-  tracker: CourseValidationTracker
-) {
-  const courses = requirements.requirements;
-  return validateAndRequirement({ type: "AND", courses }, tracker);
-}
-
-// invariant: the solutions returned will each ALWAYS have no duplicate courses
-export const validateRequirement = (
-  req: Requirement2,
-  tracker: CourseValidationTracker
-): Array<Solution> => {
-  switch (req.type) {
-    case "AND":
-      return validateAndRequirement(req, tracker);
-    case "XOM":
-      return validateXomRequirement(req, tracker);
-    case "OR":
-      return validateOrRequirement(req, tracker);
-    case "RANGE":
-      return validateRangeRequirement(req, tracker);
-    case "COURSE":
-      return validateCourseRequirement(req, tracker);
-    case "SECTION":
-      return validateSectionRequirement(req, tracker);
-    default:
-      return assertUnreachable(req);
-  }
-};
-
-function validateTotalCreditsRequired(
-  requiredCredits: number,
-  coursesTaken: ScheduleCourse[]
-) {
-  const takenCredits = coursesTaken.reduce(
-    (total, course) => total + course.numCreditsMax,
-    0
-  );
-
-  if (takenCredits < requiredCredits) {
-    return {
-      message: `Total credits taken ${takenCredits} does not meet number of required credits ${requiredCredits}`,
-      takenCredits,
-      requiredCredits,
-    };
-  }
-  return null;
 }
 
 function validateAndRequirement(
@@ -260,40 +245,6 @@ function combineSolutions(s1: Solution, s2: Solution) {
   };
 }
 
-function validateOrRequirement(
-  r: IOrCourse2,
-  tracker: CourseValidationTracker
-) {
-  return r.courses.flatMap(r => validateRequirement(r, tracker));
-}
-
-function validateCourseRequirement(
-  r: IRequiredCourse,
-  tracker: CourseValidationTracker
-) {
-  const c = tracker.get(r);
-  if (c) {
-    return [
-      {
-        minCredits: c.numCreditsMin,
-        maxCredits: c.numCreditsMax,
-        sol: [courseToString(c)],
-      },
-    ];
-  }
-  return [];
-}
-
-/*
- Min 8 creds:[
- {max: 4, min: 4, sol:[CS2800]},
- {max: 4, min: 4, sol:[CS300]},
- {max: 4, min: 4, sol:[CS3500, CS3501]},
- ]
- */
-
-// Currently treated as an OR requirement but checks if minNumCredits is met
-
 function validateXomRequirement(
   r: IXofManyCourse,
   tracker: CourseValidationTracker
@@ -303,7 +254,6 @@ function validateXomRequirement(
   );
 
   let unfinishedSolutionsSoFar: Array<Solution> = [];
-
   let finishedSolutions: Array<Solution> = [];
 
   // Diff solutions of each requirement in the req
@@ -328,6 +278,65 @@ function validateXomRequirement(
         finishedSolutions.push(childSolution);
       } else {
         unfinishedSolutionsWithChild.push(childSolution);
+      }
+    }
+    unfinishedSolutionsSoFar.push(...unfinishedSolutionsWithChild);
+  }
+  return finishedSolutions;
+}
+
+function validateOrRequirement(
+  r: IOrCourse2,
+  tracker: CourseValidationTracker
+) {
+  return r.courses.flatMap(r => validateRequirement(r, tracker));
+}
+
+function validateSectionRequirement(
+  r: Section,
+  tracker: CourseValidationTracker
+) {
+  if (r.minRequirementCount < 1) {
+    throw new Error("Section requirement count must be >= 1");
+  }
+
+  const allChildRequirementSolutions = r.requirements.map(r =>
+    validateRequirement(r, tracker)
+  );
+
+  type Solution1 = Solution & { count: number };
+  // invariant: requirementCount of unfinished solutions < minRequirementCount
+  let unfinishedSolutionsSoFar: Array<Solution1> = [];
+  let finishedSolutions: Array<Solution> = [];
+
+  // Diff solutions of each requirement in the req
+  for (let childRequirementSolutions of allChildRequirementSolutions) {
+    let unfinishedSolutionsWithChild: Array<Solution1> = [];
+    for (let childSolution of childRequirementSolutions) {
+      for (let {
+        count: solutionSoFarCount,
+        ...solutionSoFar
+      } of unfinishedSolutionsSoFar) {
+        // if the intersection of us and the solution so far is empty, combine them and add to current solutions
+        let childCourses = new Set(childSolution.sol);
+        let solutionCourses = new Set(solutionSoFar.sol);
+        if (isIntersectionEmpty(childCourses, solutionCourses)) {
+          const currentSol = combineSolutions(solutionSoFar, childSolution);
+          const currentSolCount = solutionSoFarCount + 1;
+          if (currentSolCount === r.minRequirementCount) {
+            finishedSolutions.push(currentSol);
+          } else {
+            unfinishedSolutionsWithChild.push({
+              ...currentSol,
+              count: currentSolCount,
+            });
+          }
+        }
+      }
+      if (r.minRequirementCount === 1) {
+        finishedSolutions.push(childSolution);
+      } else {
+        unfinishedSolutionsWithChild.push({ ...childSolution, count: 1 });
       }
     }
     unfinishedSolutionsSoFar.push(...unfinishedSolutionsWithChild);
