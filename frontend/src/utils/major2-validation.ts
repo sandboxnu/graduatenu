@@ -1,15 +1,15 @@
 import {
+  Concentrations2,
   IAndCourse2,
+  ICourseRange2,
   IOrCourse2,
+  IRequiredCourse,
   IScheduleCourse,
   IXofManyCourse,
   Major2,
   Requirement2,
   ScheduleCourse,
-  IRequiredCourse,
-  ICourseRange2,
   Section,
-  Concentrations2,
 } from "../../../common/types";
 import { courseToString } from "./course-helpers";
 
@@ -18,6 +18,102 @@ type Solution = {
   maxCredits: number;
   sol: Array<string>;
 };
+
+type MajorValidationError =
+  | CourseError
+  | RangeError
+  | AndError
+  | OrError
+  | XOMError
+  | SectionError;
+type CourseError = {
+  type: "COURSE";
+  requiredCourse: string;
+};
+const CourseError = (c: IRequiredCourse): CourseError => ({
+  type: "COURSE",
+  requiredCourse: courseToString(c),
+});
+type RangeError = {
+  type: "RANGE";
+  requiredCredits: number;
+  maxPossibleCredits: number;
+};
+const RangeError = (
+  r: ICourseRange2,
+  maxPossibleCredits: number
+): RangeError => ({
+  type: "RANGE",
+  requiredCredits: r.creditsRequired,
+  maxPossibleCredits,
+});
+type AndError = {
+  type: "AND";
+  error:
+    | {
+        type: "UNSATISFIED_CHILD";
+        childErrors: Array<{ childIndex: number } & MajorValidationError>;
+      }
+    | {
+        type: "NO_SOLUTION";
+        discoveredAtChild: number;
+      };
+};
+const AndErrorUnsatChild = (
+  childErrors: Array<MajorValidationError & { childIndex: number }>
+): AndError => ({
+  type: "AND",
+  error: { type: "UNSATISFIED_CHILD", childErrors },
+});
+const AndErrorNoSolution = (idx: number): AndError => ({
+  type: "AND",
+  error: { type: "NO_SOLUTION", discoveredAtChild: idx },
+});
+type OrError = {
+  type: "OR";
+  childErrors: Array<{ childIndex: number } & MajorValidationError>;
+};
+const OrError = (
+  childErrors: Array<{ childIndex: number } & MajorValidationError>
+): OrError => ({
+  type: "OR",
+  childErrors,
+});
+type XOMError = {
+  type: "XOM";
+  childErrors: Array<{ childIndex: number } & MajorValidationError>;
+  minRequiredCredits: number;
+  maxPossibleCredits: number;
+};
+const XOMError = (
+  r: IXofManyCourse,
+  childErrors: Array<{ childIndex: number } & MajorValidationError>,
+  maxPossibleCredits: number
+): XOMError => ({
+  type: "XOM",
+  childErrors,
+  minRequiredCredits: r.numCreditsMin,
+  maxPossibleCredits,
+});
+type SectionError = {
+  type: "SECTION";
+  childErrors: Array<{ childIndex: number } & MajorValidationError>;
+  minRequiredChildCount: number;
+  maxPossibleChildCount: number;
+};
+const SectionError = (
+  r: Section,
+  childErrors: Array<{ childIndex: number } & MajorValidationError>,
+  max: number
+): SectionError => ({
+  type: "SECTION",
+  childErrors,
+  minRequiredChildCount: r.minRequirementCount,
+  maxPossibleChildCount: max,
+});
+type Result<T, E> = { ok: T; type: "OK" } | { err: E; type: "ERR" };
+const Ok = <T, E>(ok: T): Result<T, E> => ({ ok, type: "OK" });
+const Err = <T, E>(err: E): Result<T, E> => ({ err, type: "ERR" });
 
 const assertUnreachable = (_: never): never => {
   throw new Error("This code is unreachable");
@@ -121,6 +217,40 @@ export function validateMajor2(
     },
     tracker
   );
+  if (solutions.type === "ERR") {
+    /*
+    error base cases:
+    - requirement course - single error
+    - range - single error
+    - or
+    - xom
+    - section
+    - and
+    - - in the above cases (excluding course) we can include child errors
+
+    or: you didn't satisfy 1 or more of these. here's why: <all child errors>
+    xom: you didn't satisfy the min credit count. <non-valid child errors>
+    section: you didn't satisfy the min child count. <non-valid child errors>
+    and: you didn't satisfy all the children. <non-valid child errors>
+
+    (a & b)
+    a errors ->
+    And([child 0 failed: a not satisfied])
+
+    type Error: SingleError | ParentError
+
+    type SingleError:
+    - type: "SINGLE"
+    - req type:
+    - message: string
+
+    type ParentError extends
+    - type: "PARENT"
+    - req type: what req caused the error
+    - message: string
+    - child errors: Array<{ childIndex: number, e: Error }>
+    */
+  }
 
   throw new Error("unimplemented!");
 
@@ -188,7 +318,7 @@ function convertToConcentrationsArray(
 export const validateRequirement = (
   req: Requirement2,
   tracker: CourseValidationTracker
-): Array<Solution> => {
+): Result<Array<Solution>, MajorValidationError> => {
   switch (req.type) {
     // base cases
     case "RANGE":
@@ -231,27 +361,28 @@ function validateTotalCreditsRequired(
 function validateCourseRequirement(
   r: IRequiredCourse,
   tracker: CourseValidationTracker
-) {
+): Result<Array<Solution>, MajorValidationError> {
   const c = tracker.get(r);
   if (c) {
-    return [
+    return Ok([
       {
         minCredits: c.numCreditsMin,
         maxCredits: c.numCreditsMax,
         sol: [courseToString(c)],
       },
-    ];
+    ]);
   }
-  return [];
+  return Err(CourseError(r));
 }
 
 function validateRangeRequirement(
   r: ICourseRange2,
   tracker: CourseValidationTracker
-) {
-  let courses = tracker.getAll(r.subject, r.idRangeStart, r.idRangeEnd);
+): Result<Array<Solution>, MajorValidationError> {
   const exceptions = new Set(r.exceptions.map(courseToString));
-  courses = courses.filter(c => !exceptions.has(courseToString(c)));
+  let courses = tracker
+    .getAll(r.subject, r.idRangeStart, r.idRangeEnd)
+    .filter(c => !exceptions.has(courseToString(c)));
 
   let unfinishedSolutionsSoFar: Array<Solution> = [];
   let finishedSolutions: Array<Solution> = [];
@@ -282,7 +413,14 @@ function validateRangeRequirement(
     }
     unfinishedSolutionsSoFar.push(...unfinishedSolutionsWithCourse);
   }
-  return finishedSolutions;
+  if (finishedSolutions.length > 0) {
+    return Ok(finishedSolutions);
+  }
+  const max = unfinishedSolutionsSoFar.reduce(
+    (a, b) => Math.max(a, b.minCredits),
+    0
+  );
+  return Err(RangeError(r, max));
 }
 
 /**
@@ -304,10 +442,14 @@ function validateRangeRequirement(
 function validateAndRequirement(
   r: IAndCourse2,
   tracker: CourseValidationTracker
-) {
-  const allChildRequirementSolutions = r.courses.map(r =>
-    validateRequirement(r, tracker)
+): Result<Array<Solution>, MajorValidationError> {
+  const [allChildRequirementSolutions, childErrors] = splitChildResults(
+    r.courses,
+    tracker
   );
+  if (childErrors.length > 0) {
+    return Err(AndErrorUnsatChild(childErrors));
+  }
 
   // valid solutions for all the requirements so far
   let solutionsSoFar: Array<Solution> = [
@@ -315,11 +457,16 @@ function validateAndRequirement(
   ];
 
   // Diff solutions of each requirement in the AND
-  for (let childRequirementSolutions of allChildRequirementSolutions) {
-    let solutionsSoFarWithChild: Array<Solution> = [];
-    for (let solutionSoFar of solutionsSoFar) {
+  for (
+    let childIdx = 0;
+    childIdx < allChildRequirementSolutions.length;
+    childIdx += 1
+  ) {
+    const childRequirementSolutions = allChildRequirementSolutions[childIdx];
+    const solutionsSoFarWithChild: Array<Solution> = [];
+    for (const solutionSoFar of solutionsSoFar) {
       // Each solution of each subsolution
-      for (let childSolution of childRequirementSolutions) {
+      for (const childSolution of childRequirementSolutions) {
         // if the intersection of us and the solution so far is empty, combine them and add to current solutions
         if (tracker.hasEnoughCoursesForBoth(childSolution, solutionSoFar)) {
           solutionsSoFarWithChild.push(
@@ -330,20 +477,24 @@ function validateAndRequirement(
     }
     // if there were no solutions added, then there are no valid solutions for the whole and
     if (solutionsSoFarWithChild.length === 0) {
-      return [];
+      return Err(AndErrorNoSolution(childIdx));
     }
     solutionsSoFar = solutionsSoFarWithChild;
   }
-  return solutionsSoFar;
+  return Ok(solutionsSoFar);
 }
 
 function validateXomRequirement(
   r: IXofManyCourse,
   tracker: CourseValidationTracker
-) {
-  const allChildRequirementSolutions = r.courses.map(r =>
-    validateRequirement(r, tracker)
+): Result<Array<Solution>, MajorValidationError> {
+  const [allChildRequirementSolutions, childErrors] = splitChildResults(
+    r.courses,
+    tracker
   );
+  if (allChildRequirementSolutions.length === 0 && r.numCreditsMin > 0) {
+    return Err(XOMError(r, childErrors, 0));
+  }
 
   let unfinishedSolutionsSoFar: Array<Solution> = [];
   let finishedSolutions: Array<Solution> = [];
@@ -371,27 +522,44 @@ function validateXomRequirement(
     }
     unfinishedSolutionsSoFar.push(...unfinishedSolutionsWithChild);
   }
-  return finishedSolutions;
+  if (finishedSolutions.length > 0) {
+    return Ok(finishedSolutions);
+  }
+  const max = unfinishedSolutionsSoFar.reduce(
+    (a, b) => Math.max(a, b.minCredits),
+    0
+  );
+  return Err(XOMError(r, childErrors, max));
 }
 
 function validateOrRequirement(
   r: IOrCourse2,
   tracker: CourseValidationTracker
-) {
-  return r.courses.flatMap(r => validateRequirement(r, tracker));
+): Result<Array<Solution>, MajorValidationError> {
+  const [oks, errs] = splitChildResults(r.courses, tracker);
+  if (oks.length === 0) {
+    return Err(OrError(errs));
+  }
+  return Ok(oks.flat());
 }
 
 function validateSectionRequirement(
   r: Section,
   tracker: CourseValidationTracker
-) {
+): Result<Array<Solution>, MajorValidationError> {
   if (r.minRequirementCount < 1) {
     throw new Error("Section requirement count must be >= 1");
   }
 
-  const allChildRequirementSolutions = r.requirements.map(r =>
-    validateRequirement(r, tracker)
+  const [allChildRequirementSolutions, childErrors] = splitChildResults(
+    r.requirements,
+    tracker
   );
+  if (allChildRequirementSolutions.length < r.minRequirementCount) {
+    return Err(
+      SectionError(r, childErrors, allChildRequirementSolutions.length)
+    );
+  }
 
   type Solution1 = Solution & { count: number };
   // invariant: requirementCount of unfinished solutions < minRequirementCount
@@ -427,7 +595,14 @@ function validateSectionRequirement(
     }
     unfinishedSolutionsSoFar.push(...unfinishedSolutionsWithChild);
   }
-  return finishedSolutions;
+  if (finishedSolutions.length > 0) {
+    return Ok(finishedSolutions);
+  }
+  const max = unfinishedSolutionsSoFar.reduce(
+    (a, b) => Math.max(a, b.count),
+    0
+  );
+  return Err(SectionError(r, childErrors, max));
 }
 
 // assumes the solutions share no courses
@@ -437,4 +612,19 @@ function combineSolutions(s1: Solution, s2: Solution) {
     maxCredits: s1.maxCredits + s2.maxCredits,
     sol: [...s1.sol, ...s2.sol],
   };
+}
+
+function splitChildResults(
+  reqs: Requirement2[],
+  tracker: CourseValidationTracker
+): [Solution[][], Array<MajorValidationError & { childIndex: number }>] {
+  const oks = [];
+  const errs = [];
+  for (let i = 0; i < reqs.length; i += 1) {
+    const c = reqs[i];
+    const result = validateRequirement(c, tracker);
+    if (result.type === "OK") oks.push(result.ok);
+    else errs.push({ ...result.err, childIndex: i });
+  }
+  return [oks, errs];
 }
