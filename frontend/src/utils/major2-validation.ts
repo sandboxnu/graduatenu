@@ -12,16 +12,6 @@ import {
 } from "../../../common/types";
 import { courseToString } from "./course-helpers";
 
-// num total credits requirements
-
-interface CourseValidationTracker {
-  contains(input: IScheduleCourse): boolean;
-
-  get(input: IScheduleCourse): ScheduleCourse | null;
-
-  getAll(subject: string, start: number, end: number): Array<ScheduleCourse>;
-}
-
 type Solution = {
   minCredits: number;
   maxCredits: number;
@@ -32,21 +22,86 @@ const assertUnreachable = (_: never): never => {
   throw new Error("This code is unreachable");
 };
 
+interface CourseValidationTracker {
+  get(input: IScheduleCourse): ScheduleCourse | null;
+
+  getCount(input: IScheduleCourse): number;
+
+  getAll(subject: string, start: number, end: number): Array<ScheduleCourse>;
+
+  hasEnoughCoursesForBoth(s1: Solution, s2: Solution): boolean;
+}
+
+// exported for testing
+export class Major2ValidationTracker implements CourseValidationTracker {
+  private currentCourses: Map<string, [ScheduleCourse, number]>;
+
+  constructor(courses: ScheduleCourse[]) {
+    this.currentCourses = new Map();
+    for (const c of courses) {
+      const cs = courseToString(c);
+      let tup = this.currentCourses.get(cs);
+      if (!tup) {
+        // assume each course instance is the same
+        tup = [c, 0];
+        this.currentCourses.set(cs, tup);
+      }
+      tup[1] += 1;
+    }
+  }
+
+  get(input: IScheduleCourse) {
+    return this.currentCourses.get(courseToString(input))?.[0] ?? null;
+  }
+
+  getCount(input: IScheduleCourse) {
+    return this.currentCourses.get(courseToString(input))?.[1] ?? 0;
+  }
+
+  getAll(subject: string, start: number, end: number) {
+    return Array.from(this.currentCourses.values()).flatMap(([c, count]) => {
+      let cid = Number(c.classId);
+      let valid = c.subject === subject && cid >= start && cid <= end;
+      if (!valid) return [];
+      return Array(count).fill(c);
+    });
+  }
+
+  hasEnoughCoursesForBoth(s1: Solution, s2: Solution) {
+    let s1map = Major2ValidationTracker.createTakenMap(s1);
+    let s2map = Major2ValidationTracker.createTakenMap(s2);
+    // iterate through the solution with fewer courses for speed
+    let [fst, snd] =
+      s1.sol.length < s2.sol.length ? [s1map, s2map] : [s2map, s1map];
+    // for all courses in both solutions, check we have enough courses
+    for (let [cs, fstCount] of fst) {
+      let sndCount = snd.get(cs);
+      if (!sndCount) continue;
+      const neededCount = fstCount + sndCount;
+      const tup = this.currentCourses.get(cs);
+      if (!tup) {
+        throw new Error("Solution contained a course that the tracker did not");
+      }
+      const actualCount = tup[1];
+      if (actualCount < neededCount) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  private static createTakenMap(s: Solution): Map<string, number> {
+    const map = new Map();
+    for (const c of s.sol) {
+      const val = map.get(c) ?? 0;
+      map.set(c, val + 1);
+    }
+    return map;
+  }
+}
+
 export function validateMajor2(major: Major2, taken: ScheduleCourse[]) {
-  const currentCourses = new Map(taken.map(t => [courseToString(t), t]));
-  const tracker: CourseValidationTracker = {
-    contains(input: IScheduleCourse): boolean {
-      return currentCourses.has(courseToString(input));
-    },
-    get(input: IScheduleCourse): ScheduleCourse | null {
-      return currentCourses.get(courseToString(input)) ?? null;
-    },
-    getAll(subject: string, start: number, end: number): Array<ScheduleCourse> {
-      return taken.filter(
-        c => c.subject === subject && +c.classId >= start && +c.classId <= end
-      );
-    },
-  };
+  const tracker = new Major2ValidationTracker(taken);
 
   const courses = major.requirementSections.map(s => ({
     ...s,
@@ -151,14 +206,13 @@ function validateRangeRequirement(
       maxCredits: course.numCreditsMax,
     };
     for (let solutionSoFar of unfinishedSolutionsSoFar) {
-      let solutionCourses = new Set(solutionSoFar.sol);
-      if (!solutionCourses.has(cs)) {
-        const currentSol: Solution = combineSolutions(solutionSoFar, courseSol);
-        if (currentSol.minCredits >= r.creditsRequired) {
-          finishedSolutions.push(currentSol);
-        } else {
-          unfinishedSolutionsWithCourse.push(currentSol);
-        }
+      // TODO: if i take a course twice, can both count in the same range?
+      // for now assume yes. but ask khoury, then remove this note
+      const currentSol: Solution = combineSolutions(solutionSoFar, courseSol);
+      if (currentSol.minCredits >= r.creditsRequired) {
+        finishedSolutions.push(currentSol);
+      } else {
+        unfinishedSolutionsWithCourse.push(currentSol);
       }
     }
     if (course.numCreditsMin >= r.creditsRequired) {
@@ -171,6 +225,22 @@ function validateRangeRequirement(
   return finishedSolutions;
 }
 
+/**
+ * CS2810 -> Array<Solution> -> [{ min: 4, max: 4, sol: [CS2810]}]
+ *
+ * (CS2810 or CS2800) -> ???
+ * -> Array<Solution> -> [{ min: 4, max: 4, sol: [CS2810]}, { min: 4, max: 4, sol: [CS2800]}]
+ *
+ * (CS2810 or CS2800) and (CS2810 or DS3000)
+ *
+ * [{ min: 4, max: 4, sol: [CS2810]}, { min: 4, max: 4, sol: [CS2800]}] -> solutions for r1
+ * [{ min: 4, max: 4, sol: [CS2810]}, { min: 4, max: 4, sol: [DS3000]}] -> solutions for r2
+ *
+ * final set of solutions
+ * [{ min: 8, max: 8, sol: [CS2810, DS3000]},
+ * { min: 8, max: 8, sol: [CS2800, CS2810]},
+ * { min: 8, max: 8, sol: [CS2800, DS3000]}]
+ **/
 function validateAndRequirement(
   r: IAndCourse2,
   tracker: CourseValidationTracker
@@ -178,23 +248,6 @@ function validateAndRequirement(
   const allChildRequirementSolutions = r.courses.map(r =>
     validateRequirement(r, tracker)
   );
-  // return all possible solutions
-  /*
-  CS2810 -> Array<Solution> -> [{ min: 4, max: 4, sol: [CS2810]}]
-
-  (CS2810 or CS2800) -> ???
-  -> Array<Solution> -> [{ min: 4, max: 4, sol: [CS2810]}, { min: 4, max: 4, sol: [CS2800]}]
-
-  (CS2810 or CS2800) and (CS2810 or DS3000)
-
-  [{ min: 4, max: 4, sol: [CS2810]}, { min: 4, max: 4, sol: [CS2800]}] -> solutions for r1
-  [{ min: 4, max: 4, sol: [CS2810]}, { min: 4, max: 4, sol: [DS3000]}] -> solutions for r2
-
-  final set of solutions
-  [{ min: 8, max: 8, sol: [CS2810, DS3000]},
-   { min: 8, max: 8, sol: [CS2800, CS2810]},
-   { min: 8, max: 8, sol: [CS2800, DS3000]}]
-   */
 
   // valid solutions for all the requirements so far
   let solutionsSoFar: Array<Solution> = [
@@ -208,9 +261,7 @@ function validateAndRequirement(
       // Each solution of each subsolution
       for (let childSolution of childRequirementSolutions) {
         // if the intersection of us and the solution so far is empty, combine them and add to current solutions
-        let childCourses = new Set(childSolution.sol);
-        let solutionCourses = new Set(solutionSoFar.sol);
-        if (isIntersectionEmpty(childCourses, solutionCourses)) {
+        if (tracker.hasEnoughCoursesForBoth(childSolution, solutionSoFar)) {
           solutionsSoFarWithChild.push(
             combineSolutions(solutionSoFar, childSolution)
           );
@@ -224,25 +275,6 @@ function validateAndRequirement(
     solutionsSoFar = solutionsSoFarWithChild;
   }
   return solutionsSoFar;
-}
-
-function isIntersectionEmpty(s1: Set<string>, s2: Set<string>): boolean {
-  let base = s1.size < s2.size ? s1 : s2;
-  for (let entry of s1) {
-    if (s2.has(entry)) {
-      return false;
-    }
-  }
-  return true;
-}
-
-// assumes the solutions share no courses
-function combineSolutions(s1: Solution, s2: Solution) {
-  return {
-    minCredits: s1.minCredits + s2.minCredits,
-    maxCredits: s1.maxCredits + s2.maxCredits,
-    sol: [...s1.sol, ...s2.sol],
-  };
 }
 
 function validateXomRequirement(
@@ -262,10 +294,7 @@ function validateXomRequirement(
     for (let childSolution of childRequirementSolutions) {
       // Each solution of each subsolution
       for (let solutionSoFar of unfinishedSolutionsSoFar) {
-        // if the intersection of us and the solution so far is empty, combine them and add to current solutions
-        let childCourses = new Set(childSolution.sol);
-        let solutionCourses = new Set(solutionSoFar.sol);
-        if (isIntersectionEmpty(childCourses, solutionCourses)) {
+        if (tracker.hasEnoughCoursesForBoth(childSolution, solutionSoFar)) {
           const currentSol = combineSolutions(solutionSoFar, childSolution);
           if (currentSol.minCredits >= r.numCreditsMin) {
             finishedSolutions.push(currentSol);
@@ -317,10 +346,7 @@ function validateSectionRequirement(
         count: solutionSoFarCount,
         ...solutionSoFar
       } of unfinishedSolutionsSoFar) {
-        // if the intersection of us and the solution so far is empty, combine them and add to current solutions
-        let childCourses = new Set(childSolution.sol);
-        let solutionCourses = new Set(solutionSoFar.sol);
-        if (isIntersectionEmpty(childCourses, solutionCourses)) {
+        if (tracker.hasEnoughCoursesForBoth(childSolution, solutionSoFar)) {
           const currentSol = combineSolutions(solutionSoFar, childSolution);
           const currentSolCount = solutionSoFarCount + 1;
           if (currentSolCount === r.minRequirementCount) {
@@ -342,4 +368,13 @@ function validateSectionRequirement(
     unfinishedSolutionsSoFar.push(...unfinishedSolutionsWithChild);
   }
   return finishedSolutions;
+}
+
+// assumes the solutions share no courses
+function combineSolutions(s1: Solution, s2: Solution) {
+  return {
+    minCredits: s1.minCredits + s2.minCredits,
+    maxCredits: s1.maxCredits + s2.maxCredits,
+    sol: [...s1.sol, ...s2.sol],
+  };
 }
