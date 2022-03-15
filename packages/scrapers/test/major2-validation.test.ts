@@ -210,11 +210,20 @@ describe("validateRequirement", () => {
       solution("CS2800", "CS2810"),
     ]);
   });
+  const cs2801 = course("CS", 2801);
+  const cs4820 = course("CS", 4820);
+  const cs4805 = course("CS", 4805);
+  const cs4810 = course("CS", 4810);
+  const cs4830 = course("CS", 4830);
+  const cs3950 = course("CS", 3950);
+  const cs4950 = course("CS", 4950);
+  const cy4770 = course("CS", 4770);
+
+  const tracker = makeTracker();
   test("range of courses with exception", () => {
     expect(validateRequirement(rangeException, tracker)).toEqual([
       solution("CS2800"),
       solution("CS3500"),
-      solution("CS2800", "CS3500"),
     ]);
   });
   test("XOM requirement", () => {

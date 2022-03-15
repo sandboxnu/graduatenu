@@ -70,29 +70,44 @@ export function validateMajor2(major: Major2, taken: ScheduleCourse[]) {
 }
 
 function validateRangeRequirement(
-  req: ICourseRange2,
+  r: ICourseRange2,
   tracker: CourseValidationTracker
 ) {
-  let courses = tracker.getAll(req.subject, req.idRangeStart, req.idRangeEnd);
-  const exceptions = new Set(req.exceptions.map(courseToString));
+  let courses = tracker.getAll(r.subject, r.idRangeStart, r.idRangeEnd);
+  const exceptions = new Set(r.exceptions.map(courseToString));
   courses = courses.filter(c => !exceptions.has(courseToString(c)));
 
-  const combinatedCourses = combinate(courses);
+  let unfinishedSolutionsSoFar: Array<Solution> = [];
+  let finishedSolutions: Array<Solution> = [];
+  // Diff solutions of each requirement in the req
 
-  return combinatedCourses.flatMap(c => {
-    // edge case of 3 + 5 credits or non - 4 + 1 credits to fulfil a credit req of 4 or 8
-    const credits = c.reduce((a, b) => a + b.numCreditsMax, 0);
-    if (credits >= req.creditsRequired) {
-      return [
-        {
-          minCredits: credits,
-          maxCredits: credits,
-          sol: c.map(courseToString),
-        },
-      ];
+  for (let course of courses) {
+    let unfinishedSolutionsWithCourse: Array<Solution> = [];
+    const cs = courseToString(course);
+    const courseSol = {
+      sol: [cs],
+      minCredits: course.numCreditsMin,
+      maxCredits: course.numCreditsMax,
+    };
+    for (let solutionSoFar of unfinishedSolutionsSoFar) {
+      let solutionCourses = new Set(solutionSoFar.sol);
+      if (!solutionCourses.has(cs)) {
+        const currentSol: Solution = combineSolutions(solutionSoFar, courseSol);
+        if (currentSol.minCredits >= r.creditsRequired) {
+          finishedSolutions.push(currentSol);
+        } else {
+          unfinishedSolutionsWithCourse.push(currentSol);
+        }
+      }
     }
-    return [];
-  });
+    if (course.numCreditsMin >= r.creditsRequired) {
+      finishedSolutions.push(courseSol);
+    } else {
+      unfinishedSolutionsWithCourse.push(courseSol);
+    }
+    unfinishedSolutionsSoFar.push(...unfinishedSolutionsWithCourse);
+  }
+  return finishedSolutions;
 }
 
 function combinate<T>(array: Array<T>) {
