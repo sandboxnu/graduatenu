@@ -33,28 +33,18 @@ const assertUnreachable = (x: never): never => {
 };
 
 export function validateMajor2(major: Major2, taken: ScheduleCourse[]) {
-  const coursesTaken: Set<string> = new Set();
-
-  // const totalCreditsRequiredError = validateTotalCreditsRequired(
-  //   major.totalCreditsRequired,
-  //   taken
-  // );
-  //
-
   const currentCourses = new Map(taken.map(t => [courseToString(t), t]));
   const tracker: CourseValidationTracker = {
     contains(input: IScheduleCourse): boolean {
       return currentCourses.has(courseToString(input));
     },
     get(input: IScheduleCourse): ScheduleCourse | null {
-      const course = currentCourses.get(courseToString(input));
-      if (course) {
-        return course;
-      }
-      return null;
+      return currentCourses.get(courseToString(input)) ?? null;
     },
     getAll(subject: string, start: number, end: number): Array<ScheduleCourse> {
-      throw new Error("unimplemented!");
+      return taken.filter(
+        c => c.subject === subject && +c.classId >= start && +c.classId <= end
+      );
     },
   };
 
@@ -70,7 +60,13 @@ export function validateMajor2(major: Major2, taken: ScheduleCourse[]) {
     },
     tracker
   );
+
   throw new Error("unimplemented!");
+
+  const totalCreditsRequiredError = validateTotalCreditsRequired(
+    major.totalCreditsRequired,
+    taken
+  );
 }
 
 function validateRangeRequirement(
@@ -78,7 +74,7 @@ function validateRangeRequirement(
   tracker: CourseValidationTracker
 ) {
   let courses = tracker.getAll(req.subject, req.idRangeStart, req.idRangeEnd);
-  let exceptions = new Set(req.exceptions.map(courseToString));
+  const exceptions = new Set(req.exceptions.map(courseToString));
   courses = courses.filter(c => !exceptions.has(courseToString(c)));
 
   const combinatedCourses = combinate(courses);
@@ -86,7 +82,7 @@ function validateRangeRequirement(
   return combinatedCourses.flatMap(c => {
     // edge case of 3 + 5 credits or non - 4 + 1 credits to fulfil a credit req of 4 or 8
     const credits = c.reduce((a, b) => a + b.numCreditsMax, 0);
-    if (credits === req.creditsRequired) {
+    if (credits >= req.creditsRequired) {
       return [
         {
           minCredits: credits,
@@ -142,8 +138,7 @@ export const validateRequirement = (
     case "AND":
       return validateAndRequirement(req, tracker);
     case "XOM":
-      // return validateXomRequirement(req, tracker);
-      throw "unimpl";
+      return validateXomRequirement(req, tracker);
     case "OR":
       return validateOrRequirement(req, tracker);
     case "RANGE":
@@ -288,10 +283,39 @@ function validateXomRequirement(
   r: IXofManyCourse,
   tracker: CourseValidationTracker
 ) {
-  const allChildRequirementSolutions = r.courses.flatMap(r =>
+  const allChildRequirementSolutions = r.courses.map(r =>
     validateRequirement(r, tracker)
   );
-  return allChildRequirementSolutions.filter(
-    sol => sol.minCredits >= r.numCreditsMin
-  );
+
+  let unfinishedSolutionsSoFar: Array<Solution> = [];
+
+  let finishedSolutions: Array<Solution> = [];
+
+  // Diff solutions of each requirement in the req
+  for (let childRequirementSolutions of allChildRequirementSolutions) {
+    let unfinishedSolutionsWithChild: Array<Solution> = [];
+    for (let childSolution of childRequirementSolutions) {
+      // Each solution of each subsolution
+      for (let solutionSoFar of unfinishedSolutionsSoFar) {
+        // if the intersection of us and the solution so far is empty, combine them and add to current solutions
+        let childCourses = new Set(childSolution.sol);
+        let solutionCourses = new Set(solutionSoFar.sol);
+        if (isIntersectionEmpty(childCourses, solutionCourses)) {
+          const currentSol = combineSolutions(solutionSoFar, childSolution);
+          if (currentSol.minCredits >= r.numCreditsMin) {
+            finishedSolutions.push(currentSol);
+          } else {
+            unfinishedSolutionsWithChild.push(currentSol);
+          }
+        }
+      }
+      if (childSolution.minCredits >= r.numCreditsMin) {
+        finishedSolutions.push(childSolution);
+      } else {
+        unfinishedSolutionsWithChild.push(childSolution);
+      }
+    }
+    unfinishedSolutionsSoFar.push(...unfinishedSolutionsWithChild);
+  }
+  return finishedSolutions;
 }

@@ -1,9 +1,11 @@
 import { validateRequirement } from "frontend/src/utils/major2-validation";
 import {
   IAndCourse2,
+  ICourseRange2,
   IOrCourse2,
   IRequiredCourse,
   IScheduleCourse,
+  IXofManyCourse,
   Requirement2,
   ScheduleCourse,
 } from "../../common/types";
@@ -113,6 +115,28 @@ const and = (...courses: Requirement2[]): IAndCourse2 => ({
   type: "AND",
   courses,
 });
+const range = (
+  creditsRequired: number,
+  subject: string,
+  idRangeStart: number,
+  idRangeEnd: number,
+  exceptions: IRequiredCourse[]
+): ICourseRange2 => ({
+  type: "RANGE",
+  creditsRequired,
+  subject,
+  idRangeStart,
+  idRangeEnd,
+  exceptions,
+});
+const xom = (
+  numCreditsMin: number,
+  courses: Requirement2[]
+): IXofManyCourse => ({
+  type: "XOM",
+  numCreditsMin,
+  courses,
+});
 const solution = (...sol: string[]) => ({
   minCredits: sol.length * 4,
   maxCredits: sol.length * 4,
@@ -146,10 +170,14 @@ describe("validateRequirement", () => {
   const cs2800 = course("CS", 2800);
   const cs2810 = course("CS", 2810);
   const ds3000 = course("DS", 3000);
+  const cs3500 = course("CS", 3500);
   const cs2810orcs2800 = or(cs2810, cs2800);
   const cs2810ords3000 = or(cs2810, ds3000);
+  const cs2000tocs3000 = range(8, "CS", 2000, 3000, []);
+  const rangeException = range(4, "CS", 2000, 4000, [cs2810]);
+  const xom8credits = xom(8, [cs2800, cs2810, ds3000]);
   const input = and(cs2810orcs2800, cs2810ords3000);
-  const tracker = makeTracker(cs2800, cs2810, ds3000);
+  const tracker = makeTracker(cs2800, cs2810, ds3000, cs3500);
   test("or 1", () => {
     expect(validateRequirement(cs2810orcs2800, tracker)).toEqual([
       solution("CS2810"),
@@ -176,5 +204,24 @@ describe("validateRequirement", () => {
         tracker
       )
     ).toEqual([]);
+  });
+  test("range of courses", () => {
+    expect(validateRequirement(cs2000tocs3000, tracker)).toEqual([
+      solution("CS2800", "CS2810"),
+    ]);
+  });
+  test("range of courses with exception", () => {
+    expect(validateRequirement(rangeException, tracker)).toEqual([
+      solution("CS2800"),
+      solution("CS3500"),
+      solution("CS2800", "CS3500"),
+    ]);
+  });
+  test("XOM requirement", () => {
+    expect(validateRequirement(xom8credits, tracker)).toEqual([
+      solution("CS2800", "CS2810"),
+      solution("CS2800", "DS3000"),
+      solution("CS2810", "DS3000"),
+    ]);
   });
 });
