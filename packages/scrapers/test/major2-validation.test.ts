@@ -1,8 +1,10 @@
 import {
   Major2ValidationTracker,
+  validateConcentrations,
   validateRequirement,
 } from "frontend/src/utils/major2-validation";
 import {
+  Concentrations2,
   IAndCourse2,
   ICourseRange2,
   IOrCourse2,
@@ -166,6 +168,13 @@ const solution = (...sol: (string | TestCourse)[]) => {
     sol: sol.map(s => (typeof s === "string" ? s : courseToString(s))),
   };
 };
+const concentrations = (
+  minOptions: number,
+  ...concentrationOptions: Section[]
+): Concentrations2 => ({
+  minOptions,
+  concentrationOptions,
+});
 const makeTracker = (...courses: TestCourse[]) => {
   return new Major2ValidationTracker(courses.map(convert));
 };
@@ -271,5 +280,16 @@ describe("validateRequirement suite", () => {
     const tracker = makeTracker(cs2800, cs2800);
     const r = range(8, "CS", 2000, 3000, []);
     expect(validateRequirement(r, tracker).length).toBeGreaterThan(0);
+  });
+  test("concentrations", () => {
+    const twoConcentrations = concentrations(
+      2,
+      section("1", 1, [cs2800]),
+      section("2", 1, [cs2810]),
+      section("3", 1, [ds3000])
+    );
+    expect(
+      validateConcentrations([1, "3"], twoConcentrations, tracker)
+    ).toEqual([solution(cs2810, ds3000)]);
   });
 });

@@ -167,7 +167,7 @@ export interface Major2 {
   requirementSections: Section[];
   totalCreditsRequired: number;
   yearVersion: number;
-  concentrations: Concentrations;
+  concentrations: Concentrations2;
 }
 
 /**
