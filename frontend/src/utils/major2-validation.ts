@@ -391,8 +391,10 @@ function validateRangeRequirement(
     for (let solutionSoFar of solutionsSoFar) {
       // TODO: if i take a course twice, can both count in the same range?
       // for now assume yes. but ask khoury, then remove this note
-      const currentSol: Solution = combineSolutions(solutionSoFar, courseSol);
-      solutionsSoFarWithCourse.push(currentSol);
+      if (tracker.hasEnoughCoursesForBoth(solutionSoFar, courseSol)) {
+        const currentSol: Solution = combineSolutions(solutionSoFar, courseSol);
+        solutionsSoFarWithCourse.push(currentSol);
+      }
     }
     solutionsSoFarWithCourse.push(courseSol);
     solutionsSoFar.push(...solutionsSoFarWithCourse);
@@ -420,10 +422,7 @@ function validateAndRequirement(
   r: IAndCourse2,
   tracker: CourseValidationTracker
 ): Result<Array<Solution>, MajorValidationError> {
-  const [allChildRequirementSolutions, childErrors] = splitChildResults(
-    r.courses,
-    tracker
-  );
+  const [allChildReqSolutions, childErrors] = splitAndSort(r.courses, tracker);
   if (childErrors.length > 0) {
     return Err(AndErrorUnsatChild(childErrors));
   }
@@ -436,10 +435,10 @@ function validateAndRequirement(
   // Diff solutions of each requirement in the AND
   for (
     let childIdx = 0;
-    childIdx < allChildRequirementSolutions.length;
+    childIdx < allChildReqSolutions.length;
     childIdx += 1
   ) {
-    const childRequirementSolutions = allChildRequirementSolutions[childIdx];
+    const childRequirementSolutions = allChildReqSolutions[childIdx];
     const solutionsSoFarWithChild: Array<Solution> = [];
     for (const solutionSoFar of solutionsSoFar) {
       // Each solution of each subsolution
@@ -465,10 +464,8 @@ function validateXomRequirement(
   r: IXofManyCourse,
   tracker: CourseValidationTracker
 ): Result<Array<Solution>, MajorValidationError> {
-  const [allChildRequirementSolutions, childErrors] = splitChildResults(
-    r.courses,
-    tracker
-  );
+  const splitResults = splitAndSort(r.courses, tracker);
+  const [allChildRequirementSolutions, childErrors] = splitResults;
   if (allChildRequirementSolutions.length === 0 && r.numCreditsMin > 0) {
     return Err(XOMError(r, childErrors, 0));
   }
@@ -513,7 +510,8 @@ function validateOrRequirement(
   r: IOrCourse2,
   tracker: CourseValidationTracker
 ): Result<Array<Solution>, MajorValidationError> {
-  const [oks, errs] = splitChildResults(r.courses, tracker);
+  const results = validateRequirements(r.courses, tracker);
+  const [oks, errs] = splitChildResults(results);
   if (oks.length === 0) {
     return Err(OrError(errs));
   }
@@ -528,10 +526,8 @@ function validateSectionRequirement(
     throw new Error("Section requirement count must be >= 1");
   }
 
-  const [allChildRequirementSolutions, childErrors] = splitChildResults(
-    r.requirements,
-    tracker
-  );
+  const splitResults = splitAndSort(r.requirements, tracker);
+  const [allChildRequirementSolutions, childErrors] = splitResults;
   if (allChildRequirementSolutions.length < r.minRequirementCount) {
     return Err(
       SectionError(r, childErrors, allChildRequirementSolutions.length)
@@ -591,17 +587,38 @@ function combineSolutions(s1: Solution, s2: Solution) {
   };
 }
 
-function splitChildResults(
-  reqs: Requirement2[],
+function splitAndSort(
+  rs: Requirement2[],
   tracker: CourseValidationTracker
+): [Solution[][], Array<ChildError>] {
+  const results = validateRequirements(rs, tracker);
+  const [sols, errs] = splitChildResults(results);
+  // const sols2 = sortByNumSolutions(sols);
+  return [sols, errs];
+}
+
+function splitChildResults(
+  reqs: Result<Solution[], MajorValidationError>[]
 ): [Solution[][], Array<ChildError>] {
   const oks = [];
   const errs = [];
   for (let i = 0; i < reqs.length; i += 1) {
-    const c = reqs[i];
-    const result = validateRequirement(c, tracker);
+    const result = reqs[i];
     if (result.type === "OK") oks.push(result.ok);
     else errs.push({ ...result.err, childIndex: i });
   }
   return [oks, errs];
+}
+
+function validateRequirements(
+  rs: Requirement2[],
+  tracker: CourseValidationTracker
+) {
+  return rs.map(r => validateRequirement(r, tracker));
+}
+
+function sortByNumSolutions(list: Solution[][]) {
+  return list
+    .sort((a, b) => a.length - b.length)
+    .map(s => s.sort((s1, s2) => s1.sol.length - s2.sol.length));
 }

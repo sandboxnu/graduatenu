@@ -234,12 +234,12 @@ describe("validateRequirement suite", () => {
   });
   test("range of courses", () => {
     expect(validateRequirement(cs2000tocs3000, tracker)).toEqual(
-      Ok([solution("CS2800", "CS2810")])
+      Ok([solution(cs2800), solution("CS2800", "CS2810"), solution(cs2810)])
     );
   });
   test("range of courses with exception", () => {
     expect(validateRequirement(rangeException, tracker)).toEqual(
-      Ok([solution("CS2800"), solution("CS3500")])
+      Ok([solution("CS2800"), solution(cs2800, cs3500), solution("CS3500")])
     );
   });
   test("XOM requirement", () => {
@@ -299,7 +299,7 @@ describe("validateRequirement suite", () => {
     const tracker = makeTracker(cs2800, cs2800);
     const r = range(8, "CS", 2000, 3000, []);
     expect(validateRequirement(r, tracker)).toEqual(
-      Ok([solution(cs2800, cs2800)])
+      Ok([solution(cs2800), solution(cs2800, cs2800), solution(cs2800)])
     );
   });
   test("concentrations", () => {
@@ -389,8 +389,8 @@ function convertToRequirement2(r: Requirement): Requirement2 {
         courses: r.ranges.map(r => ({
           type: "RANGE",
           exceptions: [],
-          idRangeEnd: r.idRangeStart,
-          idRangeStart: r.idRangeEnd,
+          idRangeStart: r.idRangeStart,
+          idRangeEnd: r.idRangeEnd,
           subject: r.subject,
         })),
       };
@@ -407,7 +407,7 @@ function convertToRequirement2(r: Requirement): Requirement2 {
   }
 }
 
-test("full major", () => {
+describe("integration suite", () => {
   const bscs2 = convertToMajor2(bscs as any);
   const taken = [
     course("CS", 1200, 1),
@@ -454,7 +454,17 @@ test("full major", () => {
     course("MATH", 3527),
     course("ARTG", 1250),
     course("ARTG", 2400),
-  ].map(convert);
-  expect(validateMajor2(bscs2, taken)).toEqual({});
+  ];
+  const tracker = makeTracker(...taken);
+  const scheduleCourses = taken.map(convert);
+  for (const r of bscs2.requirementSections) {
+    test(r.title, () => {
+      validateRequirement(sectionToReq2(r), tracker);
+    });
+  }
+  test("full major", () => {
+    expect(validateMajor2(bscs2, scheduleCourses)).toEqual({});
+  });
+
   // const bscsMajor2 =convertToMajor2(bscs as Major);
 });
