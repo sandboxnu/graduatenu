@@ -3,7 +3,7 @@ import {
   Err,
   Major2ValidationTracker,
   Ok,
-  validateConcentrations,
+  getConcentrationsRequirement,
   validateRequirement,
 } from "frontend/src/utils/major2-validation";
 import {
@@ -299,7 +299,10 @@ describe("validateRequirement suite", () => {
       section("3", 1, [ds3000])
     );
     expect(
-      validateConcentrations([1, "3"], twoConcentrations, tracker)
+      validateRequirement(
+        getConcentrationsRequirement([1, "3"], twoConcentrations),
+        tracker
+      )
     ).toEqual(Ok([solution(cs2810, ds3000)]));
   });
 });

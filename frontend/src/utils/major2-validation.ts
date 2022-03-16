@@ -26,16 +26,29 @@ type MajorValidationError =
   | OrError
   | XOMError
   | SectionError;
+const MajorValidationErrorType = {
+  Course: "COURSE",
+  Range: "RANGE",
+  And: {
+    Type: "AND",
+    UnsatChild: "AND_UNSAT_CHILD",
+    NoSolution: "AND_NO_SOLUTION",
+  },
+  Or: "OR",
+  XofMany: "XOM",
+  Section: "SECTION",
+} as const;
+type ChildError = MajorValidationError & { childIndex: number };
 type CourseError = {
-  type: "COURSE";
+  type: typeof MajorValidationErrorType.Course;
   requiredCourse: string;
 };
 const CourseError = (c: IRequiredCourse): CourseError => ({
-  type: "COURSE",
+  type: MajorValidationErrorType.Course,
   requiredCourse: courseToString(c),
 });
 type RangeError = {
-  type: "RANGE";
+  type: typeof MajorValidationErrorType.Range;
   requiredCredits: number;
   maxPossibleCredits: number;
 };
@@ -43,74 +56,77 @@ const RangeError = (
   r: ICourseRange2,
   maxPossibleCredits: number
 ): RangeError => ({
-  type: "RANGE",
+  type: MajorValidationErrorType.Range,
   requiredCredits: r.creditsRequired,
   maxPossibleCredits,
 });
 type AndError = {
-  type: "AND";
+  type: typeof MajorValidationErrorType.And.Type;
   error:
     | {
-        type: "UNSATISFIED_CHILD";
-        childErrors: Array<{ childIndex: number } & MajorValidationError>;
+        type: typeof MajorValidationErrorType.And.UnsatChild;
+        childErrors: Array<ChildError>;
       }
     | {
-        type: "NO_SOLUTION";
+        type: typeof MajorValidationErrorType.And.NoSolution;
         discoveredAtChild: number;
       };
 };
-const AndErrorUnsatChild = (
-  childErrors: Array<MajorValidationError & { childIndex: number }>
-): AndError => ({
-  type: "AND",
-  error: { type: "UNSATISFIED_CHILD", childErrors },
+const AndErrorUnsatChild = (childErrors: Array<ChildError>): AndError => ({
+  type: MajorValidationErrorType.And.Type,
+  error: { type: MajorValidationErrorType.And.UnsatChild, childErrors },
 });
 export const AndErrorNoSolution = (idx: number): AndError => ({
-  type: "AND",
-  error: { type: "NO_SOLUTION", discoveredAtChild: idx },
+  type: MajorValidationErrorType.And.Type,
+  error: {
+    type: MajorValidationErrorType.And.NoSolution,
+    discoveredAtChild: idx,
+  },
 });
 type OrError = {
-  type: "OR";
-  childErrors: Array<{ childIndex: number } & MajorValidationError>;
+  type: typeof MajorValidationErrorType.Or;
+  childErrors: Array<ChildError>;
 };
-const OrError = (
-  childErrors: Array<{ childIndex: number } & MajorValidationError>
-): OrError => ({
-  type: "OR",
+const OrError = (childErrors: Array<ChildError>): OrError => ({
+  type: MajorValidationErrorType.Or,
   childErrors,
 });
 type XOMError = {
-  type: "XOM";
-  childErrors: Array<{ childIndex: number } & MajorValidationError>;
+  type: typeof MajorValidationErrorType.XofMany;
+  childErrors: Array<ChildError>;
   minRequiredCredits: number;
   maxPossibleCredits: number;
 };
 const XOMError = (
   r: IXofManyCourse,
-  childErrors: Array<{ childIndex: number } & MajorValidationError>,
+  childErrors: Array<ChildError>,
   maxPossibleCredits: number
 ): XOMError => ({
-  type: "XOM",
+  type: MajorValidationErrorType.XofMany,
   childErrors,
   minRequiredCredits: r.numCreditsMin,
   maxPossibleCredits,
 });
 type SectionError = {
-  type: "SECTION";
-  childErrors: Array<{ childIndex: number } & MajorValidationError>;
+  type: typeof MajorValidationErrorType.Section;
+  childErrors: Array<ChildError>;
   minRequiredChildCount: number;
   maxPossibleChildCount: number;
 };
 const SectionError = (
   r: Section,
-  childErrors: Array<{ childIndex: number } & MajorValidationError>,
+  childErrors: Array<ChildError>,
   max: number
 ): SectionError => ({
-  type: "SECTION",
+  type: MajorValidationErrorType.Section,
   childErrors,
   minRequiredChildCount: r.minRequirementCount,
   maxPossibleChildCount: max,
 });
+type TotalCreditsRequirementError = {
+  takenCredits: number;
+  requiredCredits: number;
+};
 type Result<T, E> = { ok: T; type: "OK" } | { err: E; type: "ERR" };
 export const Ok = <T, E>(ok: T): Result<T, E> => ({ ok, type: "OK" });
 export const Err = <T, E>(err: E): Result<T, E> => ({ err, type: "ERR" });
@@ -200,72 +216,58 @@ export class Major2ValidationTracker implements CourseValidationTracker {
 }
 
 // students may not have chosen a concentration yet
+type MajorValidationResult = {
+  ok: boolean;
+  majorRequirementsError: MajorValidationError | null;
+  totalCreditsRequirementError: TotalCreditsRequirementError | null;
+  solutions: Solution[] | null;
+};
+
 export function validateMajor2(
   major: Major2,
   taken: ScheduleCourse[],
   concentrations?: string | number | (string | number)[]
-) {
+): MajorValidationResult {
   const tracker = new Major2ValidationTracker(taken);
-  validateConcentrations(concentrations, major.concentrations, tracker);
-
-  const courses = major.requirementSections.map(sectionToReq2);
-
-  const solutions = validateSectionRequirement(
+  const concentrationReq = getConcentrationsRequirement(
+    concentrations,
+    major.concentrations
+  );
+  const majorReqs = [
+    ...major.requirementSections.map(sectionToReq2),
+    concentrationReq,
+  ];
+  const requirementsResult = validateSectionRequirement(
     {
       title: "Overall Major Validation (Generated by Major validation)",
-      requirements: courses,
-      minRequirementCount: courses.length,
+      requirements: majorReqs,
+      minRequirementCount: majorReqs.length,
     },
     tracker
   );
-  if (solutions.type === "ERR") {
-    /*
-    error base cases:
-    - requirement course - single error
-    - range - single error
-    - or
-    - xom
-    - section
-    - and
-    - - in the above cases (excluding course) we can include child errors
-
-    or: you didn't satisfy 1 or more of these. here's why: <all child errors>
-    xom: you didn't satisfy the min credit count. <non-valid child errors>
-    section: you didn't satisfy the min child count. <non-valid child errors>
-    and: you didn't satisfy all the children. <non-valid child errors>
-
-    (a & b)
-    a errors ->
-    And([child 0 failed: a not satisfied])
-
-    type Error: SingleError | ParentError
-
-    type SingleError:
-    - type: "SINGLE"
-    - req type:
-    - message: string
-
-    type ParentError extends
-    - type: "PARENT"
-    - req type: what req caused the error
-    - message: string
-    - child errors: Array<{ childIndex: number, e: Error }>
-    */
-  }
-
-  throw new Error("unimplemented!");
-
-  const totalCreditsRequiredError = validateTotalCreditsRequired(
+  const creditsResult = validateTotalCreditsRequired(
     major.totalCreditsRequired,
     taken
   );
+
+  let [solutions, majorRequirementsError] =
+    requirementsResult.type === "OK"
+      ? [requirementsResult.ok, null]
+      : [null, requirementsResult.err];
+  let totalCreditsRequirementError =
+    creditsResult.type === "ERR" ? creditsResult.err : null;
+  return {
+    ok: Boolean(totalCreditsRequirementError ?? majorRequirementsError),
+    solutions,
+    majorRequirementsError,
+    totalCreditsRequirementError,
+  };
 }
 
-export function validateConcentrations(
+export function getConcentrationsRequirement(
   inputConcentrations: undefined | string | number | (string | number)[],
-  concentrationsRequirement: Concentrations2,
-  tracker: Major2ValidationTracker
-) {
+  concentrationsRequirement: Concentrations2
+): Requirement2 {
   const selectedConcentrations = convertToConcentrationsArray(
     inputConcentrations
   );
@@ -290,14 +292,12 @@ export function validateConcentrations(
     }
     concentrationRequirements.push(found);
   }
-  return validateSectionRequirement(
-    {
-      title: "Concentrations Section (Generated by concentration validation)",
-      requirements: concentrationRequirements.map(sectionToReq2),
-      minRequirementCount: concentrationsRequirement.minOptions,
-    },
-    tracker
-  );
+  return {
+    type: "SECTION",
+    title: "Concentrations Section (Generated by concentration validation)",
+    requirements: concentrationRequirements.map(sectionToReq2),
+    minRequirementCount: concentrationsRequirement.minOptions,
+  };
 }
 
 function convertToConcentrationsArray(
@@ -343,20 +343,19 @@ export const validateRequirement = (
 function validateTotalCreditsRequired(
   requiredCredits: number,
   coursesTaken: ScheduleCourse[]
-) {
+): Result<null, TotalCreditsRequirementError> {
   const takenCredits = coursesTaken.reduce(
-    (total, course) => total + course.numCreditsMax,
+    (total, course) => total + course.numCreditsMin,
     0
   );
 
   if (takenCredits < requiredCredits) {
-    return {
-      message: `Total credits taken ${takenCredits} does not meet number of required credits ${requiredCredits}`,
+    return Err({
       takenCredits,
       requiredCredits,
-    };
+    });
   }
-  return null;
+  return Ok(null);
 }
 
 function validateCourseRequirement(
@@ -618,7 +617,7 @@ function combineSolutions(s1: Solution, s2: Solution) {
 function splitChildResults(
   reqs: Requirement2[],
   tracker: CourseValidationTracker
-): [Solution[][], Array<MajorValidationError & { childIndex: number }>] {
+): [Solution[][], Array<ChildError>] {
   const oks = [];
   const errs = [];
   for (let i = 0; i < reqs.length; i += 1) {
