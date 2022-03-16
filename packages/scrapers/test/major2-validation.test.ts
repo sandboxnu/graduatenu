@@ -1,5 +1,8 @@
 import {
+  AndErrorNoSolution,
+  Err,
   Major2ValidationTracker,
+  Ok,
   validateConcentrations,
   validateRequirement,
 } from "frontend/src/utils/major2-validation";
@@ -192,23 +195,23 @@ describe("validateRequirement suite", () => {
   const input = and(cs2810orcs2800, cs2810ords3000);
   const tracker = makeTracker(cs2800, cs2810, ds3000, cs3500);
   test("or 1", () => {
-    expect(validateRequirement(cs2810orcs2800, tracker)).toEqual([
-      solution("CS2810"),
-      solution("CS2800"),
-    ]);
+    expect(validateRequirement(cs2810orcs2800, tracker)).toEqual(
+      Ok([solution("CS2810"), solution("CS2800")])
+    );
   });
   test("or 2", () => {
-    expect(validateRequirement(cs2810ords3000, tracker)).toEqual([
-      solution("CS2810"),
-      solution("DS3000"),
-    ]);
+    expect(validateRequirement(cs2810ords3000, tracker)).toEqual(
+      Ok([solution("CS2810"), solution("DS3000")])
+    );
   });
   test("and of ors", () => {
-    expect(validateRequirement(input, tracker)).toEqual([
-      solution("CS2810", "DS3000"),
-      solution("CS2800", "CS2810"),
-      solution("CS2800", "DS3000"),
-    ]);
+    expect(validateRequirement(input, tracker)).toEqual(
+      Ok([
+        solution("CS2810", "DS3000"),
+        solution("CS2800", "CS2810"),
+        solution("CS2800", "DS3000"),
+      ])
+    );
   });
   test("and no solutions", () => {
     expect(
@@ -216,25 +219,26 @@ describe("validateRequirement suite", () => {
         and(and(cs2810, cs2800), and(cs2810, cs2800)),
         tracker
       )
-    ).toEqual([]);
+    ).toEqual(Err(AndErrorNoSolution(1)));
   });
   test("range of courses", () => {
-    expect(validateRequirement(cs2000tocs3000, tracker)).toEqual([
-      solution("CS2800", "CS2810"),
-    ]);
+    expect(validateRequirement(cs2000tocs3000, tracker)).toEqual(
+      Ok([solution("CS2800", "CS2810")])
+    );
   });
   test("range of courses with exception", () => {
-    expect(validateRequirement(rangeException, tracker)).toEqual([
-      solution("CS2800"),
-      solution("CS3500"),
-    ]);
+    expect(validateRequirement(rangeException, tracker)).toEqual(
+      Ok([solution("CS2800"), solution("CS3500")])
+    );
   });
   test("XOM requirement", () => {
-    expect(validateRequirement(xom8credits, tracker)).toEqual([
-      solution("CS2800", "CS2810"),
-      solution("CS2800", "DS3000"),
-      solution("CS2810", "DS3000"),
-    ]);
+    expect(validateRequirement(xom8credits, tracker)).toEqual(
+      Ok([
+        solution("CS2800", "CS2810"),
+        solution("CS2800", "DS3000"),
+        solution("CS2810", "DS3000"),
+      ])
+    );
   });
   const cs2801 = course("CS", 2801, 1);
   const cs4820 = course("CS", 4820);
@@ -265,21 +269,27 @@ describe("validateRequirement suite", () => {
     cs4950
   );
   test("integration", () => {
-    expect(validateRequirement(foundations, foundationsCourses1)).toEqual([
-      solution(cs2800, cs2801, cs4810, cs4805, cs3950, cs4950, cs4950),
-      solution(cs2800, cs2801, cs4805, cs4810, cs3950, cs4950, cs4950),
-    ]);
+    expect(validateRequirement(foundations, foundationsCourses1)).toEqual(
+      Ok([
+        solution(cs2800, cs2801, cs4810, cs4805, cs3950, cs4950, cs4950),
+        solution(cs2800, cs2801, cs4805, cs4810, cs3950, cs4950, cs4950),
+      ])
+    );
   });
 
   test("section", () => {
     const tracker = makeTracker(cs2800, cs2810);
     const r = section("s1", 2, [cs2800, cs2810, cs3500]);
-    expect(validateRequirement(r, tracker)).toEqual([solution(cs2800, cs2810)]);
+    expect(validateRequirement(r, tracker)).toEqual(
+      Ok([solution(cs2800, cs2810)])
+    );
   });
   test("range allows duplicates", () => {
     const tracker = makeTracker(cs2800, cs2800);
     const r = range(8, "CS", 2000, 3000, []);
-    expect(validateRequirement(r, tracker).length).toBeGreaterThan(0);
+    expect(validateRequirement(r, tracker)).toEqual(
+      Ok([solution(cs2800, cs2800)])
+    );
   });
   test("concentrations", () => {
     const twoConcentrations = concentrations(
@@ -290,6 +300,6 @@ describe("validateRequirement suite", () => {
     );
     expect(
       validateConcentrations([1, "3"], twoConcentrations, tracker)
-    ).toEqual([solution(cs2810, ds3000)]);
+    ).toEqual(Ok([solution(cs2810, ds3000)]));
   });
 });
