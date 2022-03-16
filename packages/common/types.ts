@@ -237,7 +237,6 @@ export interface IOrCourse2 {
  */
 export interface ICourseRange2 {
   type: "RANGE";
-  creditsRequired: number;
   subject: string;
   idRangeStart: number;
   idRangeEnd: number;

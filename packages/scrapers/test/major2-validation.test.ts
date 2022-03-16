@@ -5,19 +5,31 @@ import {
   Ok,
   getConcentrationsRequirement,
   validateRequirement,
+  assertUnreachable,
+  sectionToReq2,
+  validateMajor2,
 } from "frontend/src/utils/major2-validation";
 import {
+  ANDSection,
+  Concentration,
   Concentrations2,
   IAndCourse2,
   ICourseRange2,
+  IMajorRequirementGroup,
   IOrCourse2,
   IRequiredCourse,
   IXofManyCourse,
+  Major,
+  Major2,
+  ORSection,
+  RANGESection,
+  Requirement,
   Requirement2,
   ScheduleCourse,
   Section,
 } from "../../common/types";
 import { courseToString } from "frontend/src/utils/course-helpers";
+import bscs from "./mock_majors/bscs.json";
 
 // case where two of the same course is required, should be false
 // a & a, [a] -> false
@@ -137,7 +149,6 @@ const range = (
   exceptions: IRequiredCourse[]
 ): ICourseRange2 => ({
   type: "RANGE",
-  creditsRequired,
   subject,
   idRangeStart,
   idRangeEnd,
@@ -300,9 +311,150 @@ describe("validateRequirement suite", () => {
     );
     expect(
       validateRequirement(
-        getConcentrationsRequirement([1, "3"], twoConcentrations),
+        getConcentrationsRequirement([1, "3"], twoConcentrations)[0],
         tracker
       )
     ).toEqual(Ok([solution(cs2810, ds3000)]));
   });
+});
+
+function convertToMajor2(old: Major): Major2 {
+  return {
+    name: old.name,
+    totalCreditsRequired: old.totalCreditsRequired,
+    yearVersion: old.yearVersion,
+    requirementSections: Object.values(old.requirementGroupMap).map(
+      convertToSection
+    ),
+    concentrations: {
+      minOptions: old.concentrations.minOptions,
+      concentrationOptions: old.concentrations.concentrationOptions.map(c => ({
+        title: c.name,
+        minRequirementCount: c.requirementGroups.length,
+        requirements: Object.values(c.requirementGroupMap)
+          .map(convertToSection)
+          .map(sectionToReq2),
+      })),
+    },
+  };
+}
+
+function convertToSection(r: IMajorRequirementGroup): Section {
+  switch (r.type) {
+    case "AND":
+      return {
+        minRequirementCount: r.requirements.length,
+        requirements: r.requirements.map(convertToRequirement2),
+        title: r.name,
+      };
+    case "OR":
+      return {
+        title: r.name,
+        minRequirementCount: 1,
+        requirements: [
+          {
+            type: "XOM",
+            numCreditsMin: r.numCreditsMin,
+            courses: r.requirements.map(convertToRequirement2),
+          },
+        ],
+      };
+    case "RANGE":
+      return {
+        title: r.name,
+        minRequirementCount: 1,
+        requirements: [convertToRequirement2(r.requirements)],
+      };
+    default:
+      return assertUnreachable(r);
+  }
+}
+
+function convertToRequirement2(r: Requirement): Requirement2 {
+  switch (r.type) {
+    case "OR":
+      return {
+        type: "OR",
+        courses: r.courses.map(convertToRequirement2),
+      };
+    case "AND":
+      return {
+        type: "AND",
+        courses: r.courses.map(convertToRequirement2),
+      };
+    case "RANGE":
+      return {
+        type: "XOM",
+        numCreditsMin: r.creditsRequired,
+        courses: r.ranges.map(r => ({
+          type: "RANGE",
+          exceptions: [],
+          idRangeEnd: r.idRangeStart,
+          idRangeStart: r.idRangeEnd,
+          subject: r.subject,
+        })),
+      };
+    case "COURSE":
+      return r;
+    case "CREDITS":
+      return {
+        type: "XOM",
+        numCreditsMin: r.minCredits,
+        courses: r.courses.map(convertToRequirement2),
+      };
+    default:
+      return assertUnreachable(r);
+  }
+}
+
+test("full major", () => {
+  const bscs2 = convertToMajor2(bscs as any);
+  const taken = [
+    course("CS", 1200, 1),
+    course("CS", 1210, 1),
+    course("CS", 1800),
+    course("CS", 1802, 1),
+    course("CS", 2500),
+    course("CS", 2501, 1),
+    course("CS", 2510),
+    course("CS", 2511, 1),
+    course("CS", 2800),
+    course("CS", 2801, 1),
+    course("CS", 3000),
+    course("CS", 3500),
+    course("CS", 3650),
+    course("CS", 3700),
+    course("CS", 3800),
+    course("CS", 4400),
+    course("CS", 4500),
+    course("CS", 4501),
+    course("THTR", 1170, 1),
+    course("CS", 4410),
+    course("CS", 2550),
+    course("DS", 4300),
+    course("MATH", 1341),
+    course("MATH", 1342),
+    course("MATH", 2331),
+    course("MATH", 3081),
+    course("PHIL", 1145),
+    course("EECE", 2160),
+    course("PHYS", 1151, 3),
+    course("PHYS", 1152, 1),
+    course("PHYS", 1153, 1),
+    course("PHYS", 1155, 3),
+    course("PHYS", 1156, 1),
+    course("PHYS", 1157, 1),
+    course("ENGW", 1111),
+    course("ENGW", 3302),
+    course("CS", 1990),
+    course("CS", 1990),
+    course("HIST", 1130),
+    course("MATH", 2321),
+    course("HONR", 1310),
+    course("MATH", 3527),
+    course("ARTG", 1250),
+    course("ARTG", 2400),
+  ].map(convert);
+  expect(validateMajor2(bscs2, taken)).toEqual({});
+  // const bscsMajor2 =convertToMajor2(bscs as Major);
 });
