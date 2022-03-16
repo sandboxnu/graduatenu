@@ -255,9 +255,9 @@ export function validateMajor2(
       ? [requirementsResult.ok, null]
       : [null, requirementsResult.err];
   let totalCreditsRequirementError =
-    creditsResult.type === "ERR" ? creditsResult.err : null;
+    creditsResult.type === "OK" ? null : creditsResult.err;
   return {
-    ok: Boolean(totalCreditsRequirementError ?? majorRequirementsError),
+    ok: !Boolean(totalCreditsRequirementError ?? majorRequirementsError),
     solutions,
     majorRequirementsError,
     totalCreditsRequirementError,
