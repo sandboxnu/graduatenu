@@ -1,0 +1,104 @@
+{
+  "name": "@graduate/frontend",
+  "version": "1.0.0",
+  "description": "A degree scheduling service for Northeastern students.",
+  "engines": {
+    "node": ">= 12.x"
+  },
+  "proxy": "http://localhost:3001",
+  "dependencies": {
+    "@babel/helper-call-delegate": "^7.8.7",
+    "@babel/runtime": "^7.16.3",
+    "@graduate/common": "*",
+    "@material-ui/core": "^4.6.0",
+    "@material-ui/icons": "^4.5.1",
+    "@material-ui/lab": "^4.0.0-alpha.31",
+    "@material-ui/styles": "^4.7.1",
+    "apollo-boost": "^0.4.4",
+    "cross-env": "5.0.5",
+    "dataloader": "^2.0.0",
+    "formik": "^2.2.9",
+    "graphql-tag": "^2.10.1",
+    "immer": "^9.0.6",
+    "js-cookie": "^2.2.1",
+    "js-levenshtein": "^1.1.6",
+    "lodash": "^4.17.21",
+    "react": "^16.12.0",
+    "react-apollo": "^3.1.3",
+    "react-beautiful-dnd": "^11.0.5",
+    "react-dom": "^16.12.0",
+    "react-error-boundary": "^3.1.4",
+    "react-idle-timer": "^4.5.0",
+    "react-loader-spinner": "^3.1.5",
+    "react-redux": "^7.1.3",
+    "react-router": "^5.1.2",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "^3.1.2",
+    "react-toast-notifications": "^2.4.0",
+    "redux": "^4.0.4",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.3.0",
+    "request-promise": "^4.2.6",
+    "styled-components": "^4.4.0",
+    "timeago.js": "^4.0.2",
+    "typesafe-actions": "^5.1.0",
+    "xlsx": "^0.15.6",
+    "yup": "^0.32.11"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.18",
+    "@types/js-cookie": "^2.2.6",
+    "@types/lodash": "^4.14.165",
+    "@types/node": "^12.7.2",
+    "@types/react-beautiful-dnd": "^11.0.3",
+    "@types/react-loader-spinner": "^3.1.0",
+    "@types/react-redux": "^7.1.5",
+    "@types/react-router": "^5.1.3",
+    "@types/react-router-dom": "^5.1.2",
+    "@types/react-toast-notifications": "^2.0.0",
+    "@types/redux-logger": "^3.0.7",
+    "@types/styled-components": "^4.1.19",
+    "husky": "^3.0.5",
+    "jest": "^24.9.0",
+    "react-app-rewire-alias": "^0.1.6",
+    "react-app-rewired": "^2.1.6",
+    "ts-jest": "^24.0.2",
+    "typescript": "^3.6.3"
+  },
+  "scripts": {
+    "dev": "react-app-rewired start start",
+    "build": "CI=false react-app-rewired build",
+    "docker:build": "docker build -t frontend ../",
+    "docker:run": "docker run -p 3000:80 frontend",
+    "docker:start": "yarn docker:build && yarn docker:run",
+    "test": "jest --updateSnapshot",
+    "eject": "react-app-rewired eject",
+    "type-check": "tsc --noEmit"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "transform": {
+      "\\.(ts|tsx)$": "ts-jest"
+    }
+  }
+}

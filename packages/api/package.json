@@ -1,0 +1,10 @@
+{
+  "name": "@graduate/api",
+  "version": "1.0.0",
+  "description": "Ruby on rails API for graduatenu.com",
+  "scripts": {
+    "dev:build": "docker-compose build",
+    "dev:up": "docker-compose up",
+    "dev": "yarn dev:build && yarn dev:up"
+  }
+}

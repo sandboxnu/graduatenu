@@ -56,26 +56,24 @@ typings/
 
 # dotenv environment variables file
 .env
-# Frontend .env files shouldn't contain secrets 
-!frontend/.env* 
 
 # next.js build output
 .next
 
 # degree audits for testing.
 *.html
-!scrapers/test/mock_audits/*
+!**/scrapers/test/mock_audits/*
 
 # parsed degree jsons for testing.
 *.json
-!scrapers/test/mock_parsed_audits/*
-!scrapers/test/mock_majors/*
+!**/scrapers/test/mock_parsed_audits/*
+!**/scrapers/test/mock_majors/*
 
 # schedules for testing
-!scrapers/test/mock_schedules/*
+!**/scrapers/test/mock_schedules/*
 
 # searchNEU classmap jsons.
-!maps/*
+!**/scrapers/maps/*
 
 # we still want package.json!
 !package.json
@@ -115,7 +113,8 @@ build/**/*
 /coverage
 
 # production
-/build
+build/
+dist/
 
 # misc
 .DS_Store
@@ -123,6 +122,9 @@ build/**/*
 .env.development.local
 .env.test.local
 .env.production.local
+
+# Frontend .env files shouldn't contain secrets 
+!**/frontend/.env* 
 
 npm-debug.log*
 yarn-debug.log*
@@ -132,11 +134,10 @@ yarn-error.log*
 
 .idea/
 graduatenu.code-workspace
-api/config/local_env.yml
+**/api/config/local_env.yml
 
 # api-v2
-!api-v2/**/*.json
-api-v2/dist
+!**/api-v2/**/*.json
 
 # db data
 infrastructure/develop/graduatenu-db-data

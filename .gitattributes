@@ -1,5 +1,0 @@
-# .gitattributes file for linguist configuration.
-
-# to make html test files not contribute towards repo code:
-backend/test/mock_audits/* linguist-generated=true
-backend/test/mock_parsed_audits/* linguist-generated=true
