@@ -5,6 +5,7 @@
   "scripts": {
     "dev:build": "docker-compose build",
     "dev:up": "docker-compose up",
-    "dev": "yarn dev:build && yarn dev:up"
+    "dev": "yarn dev:build && yarn dev:up",
+    "test": "docker-compose run server rails test"
   }
 }

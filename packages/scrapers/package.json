@@ -1,5 +1,5 @@
 {
-  "name": "scrapers",
+  "name": "@graduate/scrapers",
   "version": "1.0.0",
   "description": "scrapers used to generate essential data such as majors and plans",
   "dependencies": {

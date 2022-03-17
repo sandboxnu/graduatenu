@@ -14,9 +14,8 @@ jobs:
           node-version: "14"
       - name: Run Jest Tests
         run: |
-          cd scrapers 
-          yarn install
-          yarn test
+          yarn workspace @graduate/scrappers install
+          yarn workspace @graduate/scrappers test
   run-api-v2-tests:
     runs-on: ubuntu-latest
     name: API V2 Tests
@@ -28,9 +27,8 @@ jobs:
           node-version: "16"
       - name: Run Jest Tests
         run: |
-          cd api-v2
-          yarn install
-          yarn test
+          yarn workspace @graduate/api-v2 install
+          yarn workspace @graduate/api-v2 test
   build-frontend-image:
     runs-on: ubuntu-latest
     steps:
@@ -39,7 +37,7 @@ jobs:
 
       - name: Build Docker image for frontend
         run: |
-          docker build -t frontend -f frontend/Dockerfile .
+          yarn workspace @graduate/frontend docker:build
   build-api-image-and-run-tests:
     runs-on: ubuntu-latest
     steps:
@@ -48,5 +46,4 @@ jobs:
 
       - name: Build Docker image and run tests for api
         run: |
-          cd api
-          docker-compose run server rails test
+          yarn workspace @graduate/api test
