@@ -28,7 +28,7 @@ const getClassMapLinkForTermId = (termId: number) => {
 // ./maps/${TERMID}.json
 const DIR = "maps";
 const getClassMapLinkLocal = (termId: number) => {
-  return `../${DIR}/${termId}.json`;
+  return `./${DIR}/${termId}.json`;
 };
 // also ensure that the maps folder is created
 if (!existsSync(DIR)) {
