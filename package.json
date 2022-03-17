@@ -10,6 +10,12 @@
       "packages/*"
     ]
   },
+  "nohoist": [
+    "**/jest/**",
+    "**/jest",
+    "**/ts-jest",
+    "**/ts-jest/**"
+  ],
   "scripts": {
     "dev": "concurrently -n \"common,api,frontend\" \"yarn workspace @graduate/common dev\" \"yarn workspace @graduate/api dev\" \"yarn workspace @graduate/frontend dev\"",
     "dev:v2": "concurrently -n \"common,api-v2,frontend,proxy\" \"yarn workspace @graduate/common dev\" \"yarn workspace @graduate/api-v2 dev\" \"yarn workspace @graduate/frontend dev\" \"yarn dev:proxy\"",
