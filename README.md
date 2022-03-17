@@ -1,3 +1,9 @@
+# GraduateNU
+
+Run the application locally by running `yarn dev` at the root of the project. This starts up a ruby on rails server + postgres running in a docker container, and a react frontend.
+
+Run any workspace commands using `yarn workspace @graduate/xyz command`.
+
 # GraduateNU - Backend
 
 An automatic plan builder utilizing your current degree audit information to help you graduate.
