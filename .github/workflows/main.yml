@@ -14,8 +14,8 @@ jobs:
           node-version: "14"
       - name: Run Jest Tests
         run: |
-          yarn workspace @graduate/scrappers install
-          yarn workspace @graduate/scrappers test
+          yarn workspace @graduate/scrapers install
+          yarn workspace @graduate/scrapers test
   run-api-v2-tests:
     runs-on: ubuntu-latest
     name: API V2 Tests
