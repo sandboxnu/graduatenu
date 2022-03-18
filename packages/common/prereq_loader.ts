@@ -7,7 +7,7 @@ import {
   ScheduleCourse,
 } from "./types";
 import DataLoader from "dataloader";
-import request from "request-promise";
+import Axios from "axios";
 
 /**
  * Courses should have at least a classId and a subject, in order to query them.
@@ -238,20 +238,15 @@ async function queryCoursePrereqData(
   `;
 
   // make the request.
-  let queryResult = await request({
-    uri: "https://api.searchneu.com/graphql",
-    method: "POST",
-    body: JSON.stringify({ query: querySchema }),
-    headers: {
-      "Content-type": "application/json",
-    },
+  const queryResult = await Axios.post("https://api.searchneu.com/graphql", {
+    query: querySchema,
   });
 
   // result comes back as json, so we need to parse it.
   // it is an object, with a data field.
 
   // the data.
-  let data = JSON.parse(queryResult).data;
+  const data = queryResult.data;
 
   const result: PrereqQueryResult[] = [];
   for (let i = 0; i < courses.length; i += 1) {

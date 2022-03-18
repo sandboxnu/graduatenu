@@ -2,6 +2,7 @@
   "name": "@graduate/api",
   "version": "1.0.0",
   "description": "Ruby on rails API for graduatenu.com",
+  "private": true,
   "scripts": {
     "dev:build": "docker-compose build",
     "dev:up": "docker-compose up",

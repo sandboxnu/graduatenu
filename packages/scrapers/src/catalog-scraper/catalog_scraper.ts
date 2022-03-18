@@ -1,8 +1,8 @@
 import * as cheerio from "cheerio";
 import { Major, IMajorRequirementGroup, Concentration } from "@graduate/common";
 import { createRequirementGroup } from "./reqGroup_scraper";
-import rp from "request-promise";
 import { OPTIONAL_CONCENTRATION } from "./scraper_constants";
+import Axios from "axios";
 
 /**
  * Scrapes the major data from the given course catalog URL.
@@ -10,15 +10,9 @@ import { OPTIONAL_CONCENTRATION } from "./scraper_constants";
  */
 function catalogToMajor(link: string): Promise<Major> {
   return new Promise<Major>((resolve, reject) => {
-    const options = {
-      uri: link,
-      transform: function (body: string) {
-        return cheerio.load(body);
-      },
-    };
-
-    rp(options)
-      .then(($: CheerioStatic) => scrapeMajorDataFromCatalog($))
+    Axios.get(link)
+      .then((r) => cheerio.load(r.data))
+      .then(($) => scrapeMajorDataFromCatalog($))
       .then((scrapedMajor: Major) => {
         resolve(scrapedMajor);
       })

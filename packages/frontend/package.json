@@ -5,6 +5,7 @@
   "engines": {
     "node": ">= 12.x"
   },
+  "private": true,
   "proxy": "http://localhost:3001",
   "dependencies": {
     "@babel/helper-call-delegate": "^7.8.7",

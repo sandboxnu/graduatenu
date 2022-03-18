@@ -1,10 +1,11 @@
 const plan_parser = require("../src/plan_parser.ts");
 const fs = require("fs");
-const rp = require("request-promise");
+const Axios = require("axios");
 
 // plans of study to run tests on.
 
 // majors on which the scraper has been verified to run correctly:
+const rp = (link) => Axios.get(link).then((r) => r.data);
 const supported = [
   "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-science/bscs/#planofstudytext",
   "http://catalog.northeastern.edu/archive/2018-2019/undergraduate/computer-information-science/computer-information-science-combined-majors/bs/#planofstudytext",
