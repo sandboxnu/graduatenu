@@ -7,6 +7,7 @@
     "dev:build": "docker-compose build",
     "dev:up": "docker-compose up",
     "dev": "yarn dev:build && yarn dev:up",
-    "test": "docker-compose run server rails test"
+    "test": "docker-compose run server rails test",
+    "tsc": "echo no-op"
   }
 }

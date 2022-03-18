@@ -21,7 +21,7 @@
     "dev:db:down": "docker-compose -f infrastructure/develop/docker-compose.yml down",
     "prod:start": "concurrently \"yarn workspace @graduate/api dev\" \"yarn workspace @graduate/frontend docker:start\"",
     "lint": "eslint packages/ .ts .tsx",
-    "type-check": "tsc --noEmit"
+    "tsc": "yarn workspaces run tsc --noEmit"
   },
   "devDependencies": {
     "@babel/cli": "^7.17.6",
