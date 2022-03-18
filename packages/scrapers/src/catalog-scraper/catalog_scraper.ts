@@ -1,9 +1,7 @@
-var cheerio = require("cheerio");
-var fs = require("fs");
+import * as cheerio from "cheerio";
 import { Major, IMajorRequirementGroup, Concentration } from "@graduate/common";
 import { createRequirementGroup } from "./reqGroup_scraper";
-
-const rp = require("request-promise");
+import rp from "request-promise";
 import { OPTIONAL_CONCENTRATION } from "./scraper_constants";
 
 /**
@@ -12,7 +10,7 @@ import { OPTIONAL_CONCENTRATION } from "./scraper_constants";
  */
 function catalogToMajor(link: string): Promise<Major> {
   return new Promise<Major>((resolve, reject) => {
-    var options = {
+    const options = {
       uri: link,
       transform: function (body: string) {
         return cheerio.load(body);
