@@ -69,7 +69,7 @@
   },
   "scripts": {
     "dev": "react-app-rewired start start",
-    "build": "CI=false react-app-rewired build",
+    "build": "CI=false SKIP_PREFLIGHT_CHECK=true react-app-rewired build",
     "docker:build": "docker build -t frontend -f Dockerfile ../../",
     "docker:run": "docker run -p 3000:80 frontend",
     "docker:start": "yarn docker:build && yarn docker:run",
