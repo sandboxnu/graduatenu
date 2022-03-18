@@ -8,7 +8,8 @@
     "build": "babel --root-mode upward -d dist -x '.ts' *.ts"
   },
   "devDependencies": {
-    "typescript": "^3.6.3"
+    "typescript": "^3.6.3",
+    "axios": "^0.26.1"
   },
   "dependencies": {}
 }

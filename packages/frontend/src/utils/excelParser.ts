@@ -45,7 +45,7 @@ export function excelToScheduleMultipleSheets(
       );
     } catch (error) {
       setNamedSchedules([]);
-      setError(error);
+      setError(error as string);
     }
   };
 
