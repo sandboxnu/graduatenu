@@ -2,9 +2,9 @@
 
 Run the application locally by running `yarn dev` at the root of the project. This starts up a ruby on rails server + postgres running in a docker container, and a react frontend.
 
-Run any workspace commands using `yarn workspace @graduate/xyz command`.
+Run a command in a specific workspace via `yarn workspace <workspace> <command>`, where `<command>` can be a yarn command like`add <package>`, a custom script like`dev`, or a bin script like `tsc`. .
 
-# GraduateNU - Backend
+## GraduateNU - Backend
 
 An automatic plan builder utilizing your current degree audit information to help you graduate.
 
@@ -34,15 +34,15 @@ Produces a schedule in JSON format.
 Expects a sampleData.json file in the JSON object format specified in the parser_funcs.js file.
 Produces a schedule.json file, with classes sorted by time taken (season, year).
 
-# GraduateNU - Frontend
+## GraduateNU - Frontend
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+### Available Scripts
 
 In the project directory, you can run:
 
-### `npm start`
+#### `npm start`
 
 Runs the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
@@ -50,12 +50,12 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.<br>
 You will also see any lint errors in the console.
 
-### `npm test`
+#### `npm test`
 
 Launches the test runner in the interactive watch mode.<br>
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+#### `npm run build`
 
 Builds the app for production to the `build` folder.<br>
 It correctly bundles React in production mode and optimizes the build for the best performance.
@@ -65,7 +65,7 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+#### `npm run eject`
 
 **Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 

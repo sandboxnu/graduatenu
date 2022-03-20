@@ -1,7 +1,7 @@
 import React from "react";
 import { Modal } from "@material-ui/core";
 import styled from "styled-components";
-import { XButton } from ".";
+import { XButton } from "./XButton";
 
 const CloseButtonWrapper = styled.div`
   position: absolute;
