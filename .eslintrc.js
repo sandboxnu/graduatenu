@@ -4,13 +4,18 @@ module.exports = {
     project: "./packages/*/tsconfig.json",
     sourceType: "module",
   },
-  plugins: ["@typescript-eslint/eslint-plugin", "no-only-tests"],
+  plugins: [
+    "@typescript-eslint/eslint-plugin",
+    "no-only-tests",
+    "monorepo-cop",
+  ],
   extends: [
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
     "prettier",
+    "plugin:monorepo-cop/recommended",
   ],
-  ignorePatterns: [".eslintrc.js"],
+  ignorePatterns: [".eslintrc.js", "dist", "build"],
   root: true,
   env: {
     node: true,

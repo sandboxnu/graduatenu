@@ -20,7 +20,7 @@
     "dev:db:up": "docker-compose -f infrastructure/develop/docker-compose.yml up -d",
     "dev:db:down": "docker-compose -f infrastructure/develop/docker-compose.yml down",
     "prod:start": "concurrently \"yarn workspace @graduate/api dev\" \"yarn workspace @graduate/frontend docker:start\"",
-    "lint": "eslint packages/ .ts .tsx",
+    "lint": "eslint packages/ --ext .ts,.tsx .",
     "tsc": "yarn workspaces run tsc --noEmit"
   },
   "devDependencies": {
@@ -34,6 +34,7 @@
     "eslint": "^8.11.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-monorepo-cop": "^1.0.2",
     "eslint-plugin-no-only-tests": "^2.6.0",
     "express": "^4.17.3",
     "http-proxy-middleware": "^2.0.3",
