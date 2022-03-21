@@ -1,46 +1,47 @@
 {
-  "name": "GraduateNU",
-  "private": true,
+  "name": "graduatenu",
   "engines": {
-    "node": ">= 12.x"
+    "node": ">= 14.x"
   },
   "homepage": "https://graduatenu.com",
-  "workspaces": [
-    "frontend",
-    "scrapers",
-    "api"
-  ],
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ],
+    "nohoist": [
+      "@graduate/frontend/**"
+    ]
+  },
   "scripts": {
-    "start": "cd infrastructure/develop && ./compose-build.sh && ./run-servers.sh dev-build",
-    "start:v2": "concurrently \"yarn dev:server:v2\" \"yarn dev:app\" \"yarn dev:proxy\"",
-    "dev:server:v2": "cd api-v2 && yarn dev",
-    "dev:app": "cd frontend && yarn start",
+    "dev": "concurrently -n \"common,api,frontend\" \"yarn workspace @graduate/common dev\" \"yarn workspace @graduate/api dev\" \"yarn workspace @graduate/frontend dev\"",
+    "dev:v2": "concurrently -n \"common,api-v2,frontend,proxy\" \"yarn workspace @graduate/common dev\" \"yarn workspace @graduate/api-v2 dev\" \"yarn workspace @graduate/frontend dev\" \"yarn dev:proxy\"",
     "dev:proxy": "node infrastructure/develop/dev-proxy.js",
     "dev:db:up": "docker-compose -f infrastructure/develop/docker-compose.yml up -d",
     "dev:db:down": "docker-compose -f infrastructure/develop/docker-compose.yml down",
-    "prod-start": "docker-compose up --build",
-    "prod-start-aws": "cd infrastructure/develop && ./compose-build.sh && ./run-servers.sh prod-build",
-    "generate-documentation": "cd api && rdoc && cd .. && mv api/doc docs",
-    "build": "cd frontend && CI=false react-app-rewired build",
-    "test": "jest",
-    "eject": "cd frontend && react-app-rewired eject",
-    "type-check": "tsc --noEmit"
+    "prod:start": "concurrently \"yarn workspace @graduate/api dev\" \"yarn workspace @graduate/frontend docker:start\"",
+    "lint": "eslint packages/ --ext .ts,.tsx .",
+    "tsc": "yarn workspaces run tsc --noEmit"
   },
   "devDependencies": {
+    "@babel/cli": "^7.17.6",
+    "@babel/core": "^7.17.7",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-typescript": "^7.16.7",
+    "@typescript-eslint/eslint-plugin": "^5.15.0",
+    "@typescript-eslint/parser": "^5.15.0",
     "concurrently": "^7.0.0",
+    "eslint": "^8.11.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-monorepo-cop": "^1.0.2",
+    "eslint-plugin-no-only-tests": "^2.6.0",
+    "express": "^4.17.3",
     "http-proxy-middleware": "^2.0.3",
-    "husky": "^4.2.5"
-  },
-  "dependencies": {},
-  "jest": {
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js"
-    ],
-    "transform": {
-      "\\.(ts|tsx)$": "ts-jest"
-    }
+    "husky": "^4.2.5",
+    "prettier": "^2.5.1",
+    "pretty-quick": "^3.1.3",
+    "typescript": "^4.6.2"
   },
   "husky": {
     "hooks": {

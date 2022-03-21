@@ -1,0 +1,36 @@
+{
+  "name": "@graduate/scrapers",
+  "version": "1.0.0",
+  "description": "scrapers used to generate essential data such as majors and plans",
+  "private": true,
+  "dependencies": {
+    "axios": "^0.26.1",
+    "cheerio": "1.0.0-rc.3",
+    "cross-env": "5.0.5",
+    "dataloader": "^1.4.0"
+  },
+  "devDependencies": {
+    "@types/cheerio": "0.22.13",
+    "@types/jest": "^24.0.18",
+    "@types/node": "^12.7.2",
+    "jest": "^27.5.1",
+    "ts-jest": "^27.1.3"
+  },
+  "dependency": {
+    "@graduate/common": "*"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "transform": {
+      "\\.(ts|tsx)$": "ts-jest"
+    },
+    "testEnvironment": "node"
+  }
+}
