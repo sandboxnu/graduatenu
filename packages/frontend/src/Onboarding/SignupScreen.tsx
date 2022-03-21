@@ -66,10 +66,9 @@ const SignupValidation = Yup.object().shape({
     .min(6, "Must be at least 6 characters")
     .max(255)
     .required("Password is required"),
-  confirmPassword: Yup.string().oneOf(
-    [Yup.ref("password"), null],
-    "Passwords must match"
-  ),
+  confirmPassword: Yup.string()
+    .required("Confirm Password is required")
+    .oneOf([Yup.ref("password"), null], "Passwords must match"),
 });
 
 const marginBottomSpace = 12;
