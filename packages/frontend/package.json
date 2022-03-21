@@ -48,6 +48,7 @@
     "yup": "^0.32.11"
   },
   "devDependencies": {
+    "@types/jest": "^24.0.18",
     "@types/js-cookie": "^2.2.6",
     "@types/lodash": "^4.14.165",
     "@types/node": "^12.7.2",
@@ -60,8 +61,10 @@
     "@types/redux-logger": "^3.0.7",
     "@types/styled-components": "^4.1.19",
     "husky": "^3.0.5",
+    "jest": "^24.9.0",
     "react-app-rewire-alias": "^0.1.6",
     "react-app-rewired": "^2.1.6",
+    "ts-jest": "^24.0.2",
     "typescript": "^3.6.3"
   },
   "scripts": {
@@ -97,7 +100,6 @@
     ],
     "transform": {
       "\\.(ts|tsx)$": "ts-jest"
-    },
-    "testEnvironment": "node"
+    }
   }
 }
