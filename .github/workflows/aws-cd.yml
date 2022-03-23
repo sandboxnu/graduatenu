@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - main
+      - fix-cd-redeploy-path
 
 name: Deploy containers to Amazon ECS
 
