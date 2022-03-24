@@ -170,12 +170,12 @@ const section = (
 });
 const solution = (...sol: (string | TestCourse)[]) => {
   const credits = sol
-    .map(c => (typeof c === "string" ? 4 : c.credits))
+    .map((c) => (typeof c === "string" ? 4 : c.credits))
     .reduce((total, c) => total + c, 0);
   return {
     minCredits: credits,
     maxCredits: credits,
-    sol: sol.map(s => (typeof s === "string" ? s : courseToString(s))),
+    sol: sol.map((s) => (typeof s === "string" ? s : courseToString(s))),
   };
 };
 const concentrations = (
@@ -262,6 +262,7 @@ describe("validateRequirement suite", () => {
   test("and of ors", () => {
     expect(validateRequirement(input, tracker)).toEqual(
       Ok([
+        // (CS2810 or CS2800) and (CS2810 or DS3000)
         solution("CS2810", "DS3000"),
         solution("CS2800", "CS2810"),
         solution("CS2800", "DS3000"),
@@ -364,13 +365,15 @@ function convertToMajor2(old: Major): Major2 {
     ),
     concentrations: {
       minOptions: old.concentrations.minOptions,
-      concentrationOptions: old.concentrations.concentrationOptions.map(c => ({
-        title: c.name,
-        minRequirementCount: c.requirementGroups.length,
-        requirements: Object.values(c.requirementGroupMap)
-          .map(convertToSection)
-          .map(sectionToReq2),
-      })),
+      concentrationOptions: old.concentrations.concentrationOptions.map(
+        (c) => ({
+          title: c.name,
+          minRequirementCount: c.requirementGroups.length,
+          requirements: Object.values(c.requirementGroupMap)
+            .map(convertToSection)
+            .map(sectionToReq2),
+        })
+      ),
     },
   };
 }
@@ -422,7 +425,7 @@ function convertToRequirement2(r: Requirement): Requirement2 {
       return {
         type: "XOM",
         numCreditsMin: r.creditsRequired,
-        courses: r.ranges.map(r => ({
+        courses: r.ranges.map((r) => ({
           type: "RANGE",
           exceptions: [],
           idRangeStart: r.idRangeStart,

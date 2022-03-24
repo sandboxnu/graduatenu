@@ -13,12 +13,19 @@ import {
 } from "@graduate/common";
 import { courseToString } from "./course-helpers";
 
+// general solution: postorder traversal requirements, producing all solutions at each level
+// inductive step: combine child solutions to produce solutions for ourselves
+
+// ------------------------ TYPES ------------------------
+
+// a single solution, containing a list of courses + # of credits satisfied (needed for XOM)
 type Solution = {
   minCredits: number;
   maxCredits: number;
   sol: Array<string>;
 };
 
+// Error types and constructors
 type MajorValidationError =
   | CourseError
   | AndError
@@ -115,6 +122,7 @@ type TotalCreditsRequirementError = {
   takenCredits: number;
   requiredCredits: number;
 };
+// handy result type, is either OK(T) or ERR(E)
 type Result<T, E> = { ok: T; type: "OK" } | { err: E; type: "ERR" };
 export const Ok = <T, E>(ok: T): Result<T, E> => ({ ok, type: "OK" });
 export const Err = <T, E>(err: E): Result<T, E> => ({ err, type: "ERR" });
@@ -128,18 +136,24 @@ export const sectionToReq2 = (s: Section): Requirement2 => ({
   type: "SECTION",
 });
 
+// for keeping track of courses taken
 interface CourseValidationTracker {
+  // retrieve a given schedule course if it exists
   get(input: IScheduleCourse): ScheduleCourse | null;
 
+  // retrieves the number of times a course has been taken
   getCount(input: IScheduleCourse): number;
 
+  // retrieves all matching courses (subject, and within start/end inclusive)
   getAll(subject: string, start: number, end: number): Array<ScheduleCourse>;
 
+  // do we have enough courses to take all classes in both solutions?
   hasEnoughCoursesForBoth(s1: Solution, s2: Solution): boolean;
 }
 
 // exported for testing
 export class Major2ValidationTracker implements CourseValidationTracker {
+  // maps courseString => [course instance, # of times taken]
   private currentCourses: Map<string, [ScheduleCourse, number]>;
 
   constructor(courses: ScheduleCourse[]) {
@@ -182,6 +196,7 @@ export class Major2ValidationTracker implements CourseValidationTracker {
     // for all courses in both solutions, check we have enough courses
     for (let [cs, fstCount] of fst) {
       let sndCount = snd.get(cs);
+      // if not in second solution, we have enough (skip)
       if (!sndCount) continue;
       const neededCount = fstCount + sndCount;
       const tup = this.currentCourses.get(cs);
@@ -189,6 +204,7 @@ export class Major2ValidationTracker implements CourseValidationTracker {
         throw new Error("Solution contained a course that the tracker did not");
       }
       const actualCount = tup[1];
+      // if we don't have enough, return false, otherwise continue
       if (actualCount < neededCount) {
         return false;
       }
@@ -206,14 +222,17 @@ export class Major2ValidationTracker implements CourseValidationTracker {
   }
 }
 
-// students may not have chosen a concentration yet
+// the result of major validation
 type MajorValidationResult = {
+  // true if no errors, false otherwise
   ok: boolean;
   majorRequirementsError: MajorValidationError | null;
   totalCreditsRequirementError: TotalCreditsRequirementError | null;
+  // list of possible solutions, or null of no solution
   solutions: Solution[] | null;
 };
 
+// concentrations are specified by their name or index in the concentrations list
 export function validateMajor2(
   major: Major2,
   taken: ScheduleCourse[],
@@ -228,6 +247,7 @@ export function validateMajor2(
     ...major.requirementSections.map(sectionToReq2),
     ...concentrationReq,
   ];
+  // create a big AND requirement of all the sections and selected concentrations
   const requirementsResult = validateRequirement(
     {
       type: "AND",
@@ -258,9 +278,8 @@ export function getConcentrationsRequirement(
   inputConcentrations: undefined | string | number | (string | number)[],
   concentrationsRequirement: Concentrations2
 ): Requirement2[] {
-  const selectedConcentrations = convertToConcentrationsArray(
-    inputConcentrations
-  );
+  const selectedConcentrations =
+    convertToConcentrationsArray(inputConcentrations);
   if (concentrationsRequirement.concentrationOptions.length === 0) {
     return [];
   }
@@ -288,6 +307,7 @@ export function getConcentrationsRequirement(
   return [{ type: "AND", courses }];
 }
 
+// normalizes input to an array of strings and numbers
 function convertToConcentrationsArray(
   concentrations: undefined | string | number | (string | number)[]
 ) {
@@ -303,7 +323,7 @@ function convertToConcentrationsArray(
   return concentrations;
 }
 
-// invariant: the solutions returned will each ALWAYS have no duplicate courses
+// the solutions returned may have duplicate courses, indicating the # of times a course is taken
 export const validateRequirement = (
   req: Requirement2,
   tracker: CourseValidationTracker
@@ -367,13 +387,15 @@ function validateRangeRequirement(
   r: ICourseRange2,
   tracker: CourseValidationTracker
 ): Result<Array<Solution>, MajorValidationError> {
+  // get the eligible courses (Filter out exceptions)
   const exceptions = new Set(r.exceptions.map(courseToString));
   let courses = tracker
     .getAll(r.subject, r.idRangeStart, r.idRangeEnd)
-    .filter(c => !exceptions.has(courseToString(c)));
+    .filter((c) => !exceptions.has(courseToString(c)));
 
   let solutionsSoFar: Array<Solution> = [];
 
+  // produce all combinations of the courses
   for (let course of courses) {
     let solutionsSoFarWithCourse: Array<Solution> = [];
     const cs = courseToString(course);
@@ -390,6 +412,7 @@ function validateRangeRequirement(
         solutionsSoFarWithCourse.push(currentSol);
       }
     }
+    // include solutions where the only course is ourself
     solutionsSoFarWithCourse.push(courseSol);
     solutionsSoFar.push(...solutionsSoFarWithCourse);
   }
@@ -397,20 +420,46 @@ function validateRangeRequirement(
 }
 
 /**
- * CS2810 -> Array<Solution> -> [{ min: 4, max: 4, sol: [CS2810]}]
- *
- * (CS2810 or CS2800) -> ???
- * -> Array<Solution> -> [{ min: 4, max: 4, sol: [CS2810]}, { min: 4, max: 4, sol: [CS2800]}]
- *
+ * Example:
+ *    <child 1>                <child 2>
  * (CS2810 or CS2800) and (CS2810 or DS3000)
  *
- * [{ min: 4, max: 4, sol: [CS2810]}, { min: 4, max: 4, sol: [CS2800]}] -> solutions for r1
- * [{ min: 4, max: 4, sol: [CS2810]}, { min: 4, max: 4, sol: [DS3000]}] -> solutions for r2
+ * Child Solutions:
+ * Child 1:
+ *   - Solution 1: { min: 4, max: 4, sol: [CS2810]}
+ *   - Solution 2: { min: 4, max: 4, sol: [CS2800]}
+ * Child 2:
+ *   - Solution 1: { min: 4, max: 4, sol: [CS2810]}
+ *   - Solution 2: { min: 4, max: 4, sol: [DS3000]}
  *
- * final set of solutions
- * [{ min: 8, max: 8, sol: [CS2810, DS3000]},
- * { min: 8, max: 8, sol: [CS2800, CS2810]},
- * { min: 8, max: 8, sol: [CS2800, DS3000]}]
+ * For each of the sols so far, try combining with each solution of child 1:
+ * solsSoFar = [[]]
+ *
+ * Try combining base solution with c1s1. It works!
+ * solsSoFarWithChild = [[CS2810]]
+ *
+ * Try combining base solution with c1s2. It works!
+ * solsSoFarWithChild = [[CS2810], [CS2800]]
+ *
+ * Done with Child 1!
+ * set solsSoFar <- solsSoFarWithChild
+ *
+ * For each of the sols so far, try combining with each solution of child 2:
+ * Try combining solsSoFar[0] = [CS2810] with c2s1 = [CS2810]. It doesn't work-- (CS2810 twice)
+ * solsSoFarWithChild = []
+ *
+ * Try combining solsSoFar[0] = [CS2810] with c2s2 = [DS3000]. It works!
+ * solsSoFarWithChild = [[CS2810, DS3000]]
+ *
+ * // next solSoFar
+ *
+ * Try combining solsSoFar[1] = [CS2800] with c2s1 = [CS2810]. It works!
+ * solsSoFarWithChild = [[CS2810, DS3000], [CS2800, CS2810]]
+ *
+ * Try combining solsSoFar[1] = [CS2800] with c2s2 = [DS3000]. It works!
+ * solsSoFarWithChild = [[CS2810, DS3000], [CS2800, CS2810], [CS2800, DS3000]]
+ *
+ * That was the last child, so we are done!
  **/
 function validateAndRequirement(
   r: IAndCourse2,
@@ -446,7 +495,7 @@ function validateAndRequirement(
         }
       }
     }
-    // if there were no solutions added, then there are no valid solutions for the whole and
+    // if there were no solutions added, then there are no valid solutions for the whole AND
     if (solutionsSoFarWithChild.length === 0) {
       return Err(AndErrorNoSolution(childIdx));
     }
@@ -455,25 +504,29 @@ function validateAndRequirement(
   return Ok(solutionsSoFar);
 }
 
+// find all combinations with total credits >= # required credits (kinda)
 function validateXomRequirement(
   r: IXofManyCourse,
   tracker: CourseValidationTracker
 ): Result<Array<Solution>, MajorValidationError> {
   const splitResults = validateAndSplit(r.courses, tracker);
   const [allChildRequirementSolutions, childErrors] = splitResults;
+  // error if there are no solutions, and at least 1 credit is required
   if (allChildRequirementSolutions.length === 0 && r.numCreditsMin > 0) {
     return Err(XOMError(r, childErrors, 0));
   }
 
+  // solutions w #totalcredits < #required
   let unfinishedSolutionsSoFar: Array<Solution> = [];
+  // solutions w #totalCredits >= #required
   let finishedSolutions: Array<Solution> = [];
 
-  // Diff solutions of each requirement in the req
   for (let childRequirementSolutions of allChildRequirementSolutions) {
     let unfinishedSolutionsWithChild: Array<Solution> = [];
+    // for each child, try each childSolution with each unfinishedSolution
     for (let childSolution of childRequirementSolutions) {
-      // Each solution of each subsolution
       for (let solutionSoFar of unfinishedSolutionsSoFar) {
+        // if we have enough credits for both, add it
         if (tracker.hasEnoughCoursesForBoth(childSolution, solutionSoFar)) {
           const currentSol = combineSolutions(solutionSoFar, childSolution);
           if (currentSol.minCredits >= r.numCreditsMin) {
@@ -483,12 +536,14 @@ function validateXomRequirement(
           }
         }
       }
+      // consider the by itself as well (possible we don't take any prior solutions)
       if (childSolution.minCredits >= r.numCreditsMin) {
         finishedSolutions.push(childSolution);
       } else {
         unfinishedSolutionsWithChild.push(childSolution);
       }
     }
+    // add all child+unfinished combinations to unfinished
     unfinishedSolutionsSoFar.push(...unfinishedSolutionsWithChild);
   }
   if (finishedSolutions.length > 0) {
@@ -505,6 +560,7 @@ function validateOrRequirement(
   r: IOrCourse2,
   tracker: CourseValidationTracker
 ): Result<Array<Solution>, MajorValidationError> {
+  // just return concatenated list of child solutions
   const results = validateRequirements(r.courses, tracker);
   const [oks, errs] = splitChildResults(results);
   if (oks.length === 0) {
@@ -523,6 +579,7 @@ function validateSectionRequirement(
 
   const splitResults = validateAndSplit(r.requirements, tracker);
   const [allChildRequirementSolutions, childErrors] = splitResults;
+  // we must have at least the min required # of child solutions
   if (allChildRequirementSolutions.length < r.minRequirementCount) {
     return Err(
       SectionError(r, childErrors, allChildRequirementSolutions.length)
@@ -532,16 +589,18 @@ function validateSectionRequirement(
   type Solution1 = Solution & { count: number };
   // invariant: requirementCount of unfinished solutions < minRequirementCount
   let unfinishedSolutionsSoFar: Array<Solution1> = [];
+  // solutions where requirement count === minRequirementCount
   let finishedSolutions: Array<Solution> = [];
 
-  // Diff solutions of each requirement in the req
   for (let childRequirementSolutions of allChildRequirementSolutions) {
     let unfinishedSolutionsWithChild: Array<Solution1> = [];
+    // for each child, try each childSolution with each unfinishedSolution
     for (let childSolution of childRequirementSolutions) {
       for (let {
         count: solutionSoFarCount,
         ...solutionSoFar
       } of unfinishedSolutionsSoFar) {
+        // if enough for both, combine them, then add to corresponding list
         if (tracker.hasEnoughCoursesForBoth(childSolution, solutionSoFar)) {
           const currentSol = combineSolutions(solutionSoFar, childSolution);
           const currentSolCount = solutionSoFarCount + 1;
@@ -555,6 +614,8 @@ function validateSectionRequirement(
           }
         }
       }
+      // same as XOM, consider the solutions where we don't take prior child solutions
+      // push single child solution by itself
       if (r.minRequirementCount === 1) {
         finishedSolutions.push(childSolution);
       } else {
@@ -573,7 +634,6 @@ function validateSectionRequirement(
   return Err(SectionError(r, childErrors, max));
 }
 
-// assumes the solutions share no courses
 function combineSolutions(s1: Solution, s2: Solution) {
   return {
     minCredits: s1.minCredits + s2.minCredits,
@@ -582,6 +642,7 @@ function combineSolutions(s1: Solution, s2: Solution) {
   };
 }
 
+// validates children and splits their results into solutions and errors
 function validateAndSplit(
   rs: Requirement2[],
   tracker: CourseValidationTracker
@@ -607,5 +668,5 @@ function validateRequirements(
   rs: Requirement2[],
   tracker: CourseValidationTracker
 ) {
-  return rs.map(r => validateRequirement(r, tracker));
+  return rs.map((r) => validateRequirement(r, tracker));
 }
