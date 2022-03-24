@@ -5,10 +5,26 @@
   "private": true,
   "scripts": {
     "dev": "yarn build -w",
-    "build": "babel --root-mode upward -d dist -x '.ts' *.ts"
+    "build": "babel --root-mode upward -d dist -x '.ts' index.ts src",
+    "test": "jest"
   },
   "devDependencies": {
-    "axios": "^0.26.1"
+    "@types/jest": "^27.4.1",
+    "jest": "^27.5.1",
+    "ts-jest": "^27.1.3"
   },
-  "dependencies": {}
+  "dependencies": {
+    "axios": "^0.26.1",
+    "dataloader": "^1.4.0"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "transform": {
+      "\\.(ts|tsx)$": "ts-jest"
+    }
+  }
 }

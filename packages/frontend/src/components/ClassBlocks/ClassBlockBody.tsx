@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { ScheduleCourse } from "@graduate/common";
+import { courseToString, ScheduleCourse } from "@graduate/common";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { IconButton } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
@@ -9,10 +9,8 @@ import { Close as CloseIcon } from "@material-ui/icons";
 import { AppState } from "../../state/reducers/state";
 import { useDispatch, useSelector } from "react-redux";
 import { getCourseNameFromState, getIsAdvisorFromState } from "../../state";
-import { DNDScheduleCourse, DNDScheduleTerm } from "../../models/types";
-import { constant } from "lodash";
+import { DNDScheduleTerm } from "../../models/types";
 import { renameCourseInActivePlanAction } from "../../state/actions/userPlansActions";
-import { courseToString } from "../../utils/course-helpers";
 
 const Wrapper = styled.div`
   display: flex;

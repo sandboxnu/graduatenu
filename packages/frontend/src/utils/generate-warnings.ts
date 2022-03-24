@@ -31,10 +31,11 @@ import {
   StatusEnum,
   ICreditRangeCourse,
   Concentration,
+  courseEq,
+  courseToString,
 } from "@graduate/common";
 import { flattenRequirements } from "./flattenRequirements";
 import { sortRequirementGroupsByConstraint } from "./requirementGroupUtils";
-import { courseEq, courseToString } from "./course-helpers";
 
 /*
 CreditRange interface to track the min and max credits for a particular season.

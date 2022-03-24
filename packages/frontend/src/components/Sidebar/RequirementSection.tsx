@@ -6,6 +6,7 @@ import {
   ICourseRange,
   ISubjectRange,
   ScheduleCourse,
+  courseToString,
 } from "@graduate/common";
 import {
   IRequirementGroupWarning,
@@ -24,7 +25,6 @@ import { AppState } from "../../state/reducers/state";
 import { getCurrentClassCounterFromState } from "../../state";
 import { incrementCurrentClassCounterForActivePlanAction } from "../../state/actions/userPlansActions";
 import { Dispatch } from "redux";
-import { courseToString } from "../../utils/course-helpers";
 
 const SectionHeaderWrapper = styled.div`
   display: flex;

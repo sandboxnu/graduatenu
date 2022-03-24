@@ -7,10 +7,15 @@ import {
   SeasonEnum,
   StatusEnum,
 } from "../models/types";
-import { Schedule, ScheduleCourse, SeasonWord } from "@graduate/common";
+import {
+  Schedule,
+  ScheduleCourse,
+  SeasonWord,
+  courseEq,
+  courseToString,
+} from "@graduate/common";
 import { findExamplePlanFromCoopCycle } from "./plan-helpers";
 import { deepCopy } from "./deepCopy";
-import { courseEq, courseToString } from "./course-helpers";
 
 export function generateBlankCoopPlan(
   major: string,

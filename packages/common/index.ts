@@ -1,7 +1,11 @@
 export const Greeter = (name: string) => `Hello ${name}`;
 
-export { addPrereqsToSchedule, addPrereqsToSchedules } from "./prereq_loader";
-export * from "./types";
-export * from "./ib_exams";
-export * from "./ap_exams";
-export * from "./constants";
+export {
+  addPrereqsToSchedule,
+  addPrereqsToSchedules,
+} from "./src/prereq_loader";
+export * from "./src/types";
+export * from "./src/ib_exams";
+export * from "./src/ap_exams";
+export * from "./src/constants";
+export * from "./src/utils";
