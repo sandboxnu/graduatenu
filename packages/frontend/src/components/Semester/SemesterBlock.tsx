@@ -5,18 +5,13 @@ import { AddBlock } from "../ClassBlocks/AddBlock";
 import { ClassList, EmptyBlock } from "..";
 import { AddClassSearchModal } from "../AddClassSearchModal";
 import {
+  DNDScheduleTerm,
   CourseWarning,
   DNDScheduleCourse,
-  DNDScheduleTerm,
   IWarning,
   StatusEnum,
 } from "../../models/types";
-import {
-  courseToString,
-  ScheduleCourse,
-  SeasonWord,
-  Status,
-} from "@graduate/common";
+import { ScheduleCourse, Status, SeasonWord } from "@graduate/common";
 import styled from "styled-components";
 import { AppState } from "../../state/reducers/state";
 import { connect } from "react-redux";
@@ -29,9 +24,9 @@ import {
 import { Dispatch } from "redux";
 import {
   addCoursesToActivePlanAction,
-  changeSemesterStatusForActivePlanAction,
   removeClassFromActivePlanAction,
   undoRemoveClassFromActivePlanAction,
+  changeSemesterStatusForActivePlanAction,
 } from "../../state/actions/userPlansActions";
 import { Tooltip } from "@material-ui/core";
 import {
@@ -45,6 +40,7 @@ import {
 } from "../../utils/schedule-helpers";
 import { UndoDelete } from "../UndoDelete";
 import ScheduleChangeTracker from "../../utils/ScheduleChangeTracker";
+import { courseToString } from "../../utils/course-helpers";
 
 const OutsideContainer = styled.div`
   flex: 1;

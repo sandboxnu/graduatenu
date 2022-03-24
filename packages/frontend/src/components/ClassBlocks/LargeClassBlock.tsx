@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { DNDScheduleCourse } from "../../models/types";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { IconButton } from "@material-ui/core";
-import { courseToString } from "@graduate/common";
+import { courseToString } from "../../utils/course-helpers";
 
 const Wrapper = styled.div`
   display: flex;

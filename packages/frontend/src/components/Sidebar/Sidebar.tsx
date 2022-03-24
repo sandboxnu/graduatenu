@@ -1,11 +1,6 @@
 import React, { useMemo } from "react";
 import { DNDSchedule, IRequirementGroupWarning } from "../../models/types";
-import {
-  Concentration,
-  Major,
-  ScheduleCourse,
-  courseToString,
-} from "@graduate/common";
+import { Concentration, Major, ScheduleCourse } from "@graduate/common";
 import styled from "styled-components";
 import { RequirementSection } from ".";
 import {
@@ -27,6 +22,7 @@ import { findMajorFromName } from "../../utils/plan-helpers";
 import { ScrollWrapper } from "../../Onboarding/GenericOnboarding";
 import { NORTHEASTERN_RED } from "../../constants";
 import { GenericClassBlock } from "./GenericClassBlock";
+import { courseToString } from "../../utils/course-helpers";
 
 const Container = styled.div`
   display: flex;

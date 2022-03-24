@@ -1,9 +1,5 @@
 const warning_generator = require("../../frontend/src/utils/generate-warnings.ts");
-const cs_sched_1 = require("./mock_schedules/cs_sched_1.json");
-const cs_sched_2 = require("./mock_schedules/cs_sched_2.json");
-const cs_pos_1 = require("./mock_schedules/cs_pos_1.json");
-const cs_pos_2 = require("./mock_schedules/cs_pos_2.json");
-const bscs = require("./mock_majors/bscs.json");
+const fs = require("fs");
 
 // the following code converts parsed audits into new schedules:
 // const json_loader = require("../src/json_loader.ts");
@@ -86,8 +82,15 @@ expect.extend({
 });
 
 test("Tests warnings produce properly for cs_sched_1.json", () => {
+  // read in a schedule
+  let cs_sched = fs.readFileSync(
+    "test/mock_schedules/cs_sched_1.json",
+    "utf-8"
+  );
+  let cs_sched_obj = JSON.parse(cs_sched);
+
   // warning container.
-  let container = warning_generator.produceWarnings(cs_sched_1, []);
+  let container = warning_generator.produceWarnings(cs_sched_obj, []);
 
   // check container is well formed.
   expect(container).toBeValidWarningContainer();
@@ -140,7 +143,13 @@ test("Tests warnings produce properly for cs_sched_1.json", () => {
 });
 
 test("Tests warnings produce properly for cs_sched_2.json", () => {
-  let container = warning_generator.produceWarnings(cs_sched_2, []);
+  // read in a schedule
+  let cs_sched = fs.readFileSync(
+    "test/mock_schedules/cs_sched_2.json",
+    "utf-8"
+  );
+  let cs_sched_obj = JSON.parse(cs_sched);
+  let container = warning_generator.produceWarnings(cs_sched_obj, []);
   expect(container).toBeValidWarningContainer();
   const normal = container.normalWarnings;
   const specific = container.courseWarnings;
@@ -182,13 +191,20 @@ test("Tests warnings produce properly for cs_sched_2.json", () => {
 });
 
 test("perfect schedule, no requirement group warnings for cs_pos_1.json", () => {
+  let cs_sched = fs.readFileSync("test/mock_schedules/cs_pos_1.json", "utf-8");
+  let cs_sched_obj = JSON.parse(cs_sched);
+
+  let csMajor = fs.readFileSync("test/mock_majors/bscs.json", "utf-8");
+
+  let csMajor_obj = JSON.parse(csMajor);
+
   let reqWarnings = warning_generator.produceRequirementGroupWarning(
-    cs_pos_1,
-    bscs
+    cs_sched_obj,
+    csMajor_obj
   );
   let satisfiedGroups = warning_generator.produceSatisfiedReqGroups(
-    cs_pos_1,
-    bscs
+    cs_sched_obj,
+    csMajor_obj
   );
 
   expect(reqWarnings.length).toBe(0);
@@ -210,14 +226,21 @@ test("perfect schedule, no requirement group warnings for cs_pos_1.json", () => 
 });
 
 test("Range section warning produced for cs_pos_2.json", () => {
+  let cs_sched = fs.readFileSync("test/mock_schedules/cs_pos_2.json", "utf-8");
+  let cs_sched_obj = JSON.parse(cs_sched);
+
+  let csMajor = fs.readFileSync("test/mock_majors/bscs.json", "utf-8");
+
+  let csMajor_obj = JSON.parse(csMajor);
+
   let reqWarnings = warning_generator.produceRequirementGroupWarning(
-    cs_pos_2,
-    bscs
+    cs_sched_obj,
+    csMajor_obj
   );
 
   let satisfiedGroups = warning_generator.produceSatisfiedReqGroups(
-    cs_pos_2,
-    bscs
+    cs_sched_obj,
+    csMajor_obj
   );
 
   expect(reqWarnings.length).toBe(1);
@@ -244,13 +267,23 @@ test("Range section warning produced for cs_pos_2.json", () => {
 });
 
 test("Requirement group warnings produced appropriately for cs_sched_1.json", () => {
+  let cs_sched = fs.readFileSync(
+    "test/mock_schedules/cs_sched_1.json",
+    "utf-8"
+  );
+  let cs_sched_obj = JSON.parse(cs_sched);
+
+  let csMajor = fs.readFileSync("test/mock_majors/bscs.json", "utf-8");
+
+  let csMajor_obj = JSON.parse(csMajor);
+
   let reqWarnings = warning_generator.produceRequirementGroupWarning(
-    cs_sched_1,
-    bscs
+    cs_sched_obj,
+    csMajor_obj
   );
   let satisfiedGroups = warning_generator.produceSatisfiedReqGroups(
-    cs_sched_1,
-    bscs
+    cs_sched_obj,
+    csMajor_obj
   );
 
   expect(reqWarnings.length).toEqual(5);
@@ -294,13 +327,23 @@ test("Requirement group warnings produced appropriately for cs_sched_1.json", ()
 });
 
 test("Requirement group warnings produced appropriately for cs_sched_2.json", () => {
+  let cs_sched = fs.readFileSync(
+    "test/mock_schedules/cs_sched_2.json",
+    "utf-8"
+  );
+  let cs_sched_obj = JSON.parse(cs_sched);
+
+  let csMajor = fs.readFileSync("test/mock_majors/bscs.json", "utf-8");
+
+  let csMajor_obj = JSON.parse(csMajor);
+
   let reqWarnings = warning_generator.produceRequirementGroupWarning(
-    cs_sched_2,
-    bscs
+    cs_sched_obj,
+    csMajor_obj
   );
   let satisfiedGroups = warning_generator.produceSatisfiedReqGroups(
-    cs_sched_2,
-    bscs
+    cs_sched_obj,
+    csMajor_obj
   );
 
   expect(reqWarnings.length).toEqual(6);

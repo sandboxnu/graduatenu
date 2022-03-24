@@ -2,19 +2,12 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { AppState } from "../state/reducers/state";
 import { Dispatch } from "redux";
-import {
-  courseEq,
-  coursesToString,
-  courseToString,
-  IRequiredCourse,
-  Major,
-  ScheduleCourse,
-} from "@graduate/common";
+import { IRequiredCourse, Major, ScheduleCourse } from "@graduate/common";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import {
+  SelectableCourse,
   CourseText,
   OnboardingSelectionTemplate,
-  SelectableCourse,
   TitleText,
 } from "./GenericOnboarding";
 import { AddBlock } from "../components/ClassBlocks/AddBlock";
@@ -22,7 +15,12 @@ import { Collapse, Grid, Link as ButtonLink, Paper } from "@material-ui/core";
 import { setCompletedRequirementsAction } from "../state/actions/studentActions";
 import { getUserMajorFromState } from "../state";
 import { AddClassSearchModal } from "../components/AddClassSearchModal";
-import { flatten } from "../utils/course-helpers";
+import {
+  courseEq,
+  coursesToString,
+  courseToString,
+  flatten,
+} from "../utils/course-helpers";
 
 interface CompletedCoursesScreenProps {
   major: Major;

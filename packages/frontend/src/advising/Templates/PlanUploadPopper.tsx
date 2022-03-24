@@ -7,14 +7,14 @@ import {
 } from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
 import React, {
+  useState,
   useCallback,
+  useMemo,
   useContext,
   useEffect,
-  useMemo,
-  useState,
 } from "react";
 import CloseIcon from "@material-ui/icons/Close";
-import { Major, Schedule } from "@graduate/common";
+import { Major, Schedule } from "../../../../common/types";
 import { RedColorButton } from "../../components/common/ColoredButtons";
 import { ExcelWorkbookUpload } from "../../components/ExcelUpload";
 import { ICreateTemplatePlan } from "../../models/types";

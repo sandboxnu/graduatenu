@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { courseToString, ScheduleCourse } from "@graduate/common";
+import { ScheduleCourse } from "@graduate/common";
 import { useSelector } from "react-redux";
+import { Modal } from "@material-ui/core";
 import styled from "styled-components";
+import { XButton } from "./common";
 import { Search } from "./common/Search";
 import { searchCourses } from "../api";
 import AddIcon from "@material-ui/icons/Add";
@@ -9,7 +11,10 @@ import LinearProgress from "@material-ui/core/LinearProgress";
 import { isCourseInSchedule } from "../utils/schedule-helpers";
 import { PrimaryButton } from "./common/PrimaryButton";
 import { NonDraggableClassBlock } from "./ClassBlocks/NonDraggableClassBlock";
-import { getScheduleCourseCoreqs } from "../utils/course-helpers";
+import {
+  courseToString,
+  getScheduleCourseCoreqs,
+} from "../utils/course-helpers";
 import { AppState } from "../state/reducers/state";
 import { safelyGetActivePlanScheduleFromState } from "../state";
 import { DefaultModal } from "./common/DefaultModal";
@@ -59,7 +64,10 @@ const NoResultContainer = styled.div`
 const Loading = styled.div`
   font-size: 10px;
   line-height: 10px;
-  margin: 10px 10px 5px;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  margin-left: 10px;
+  margin-right: 10px;
 `;
 
 const AddedClassesContainer = styled.div``;
