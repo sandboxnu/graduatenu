@@ -24,7 +24,7 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: "16"
-      - uses: yarn install --frozen-lockfile
+      - run: yarn install --frozen-lockfile
       - name: Run Jest Tests
         run: yarn workspace @graduate/api-v2 test
   build-frontend-image:
