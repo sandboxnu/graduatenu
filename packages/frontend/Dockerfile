@@ -10,7 +10,7 @@ COPY packages/frontend/package.json packages/frontend/package.json
 COPY packages/common/package.json packages/common/package.json
 
 # Install at root level
-RUN yarn install --pure-lockfile --non-interactive
+RUN yarn install --frozen-lockfile
 
 # Get src files
 COPY packages/frontend packages/frontend
