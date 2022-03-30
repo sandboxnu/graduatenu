@@ -212,6 +212,7 @@ export class Major2ValidationTracker implements CourseValidationTracker {
     return true;
   }
 
+  // Maps the # of each course required in the given solution
   private static createTakenMap(s: Solution): Map<string, number> {
     const map = new Map();
     for (const c of s.sol) {
@@ -404,6 +405,9 @@ function validateRangeRequirement(
       minCredits: course.numCreditsMin,
       maxCredits: course.numCreditsMax,
     };
+
+    // Adds the current course to all previous valid solutions if there are
+    // enough courses.
     for (let solutionSoFar of solutionsSoFar) {
       // TODO: if i take a course twice, can both count in the same range?
       // for now assume yes. but ask khoury, then remove this note
@@ -467,6 +471,8 @@ function validateAndRequirement(
 ): Result<Array<Solution>, MajorValidationError> {
   const splitResults = validateAndSplit(r.courses, tracker);
   const [allChildReqSolutions, childErrors] = splitResults;
+
+  // AND's children has errors
   if (childErrors.length > 0) {
     return Err(AndErrorUnsatChild(childErrors));
   }
@@ -496,6 +502,7 @@ function validateAndRequirement(
       }
     }
     // if there were no solutions added, then there are no valid solutions for the whole AND
+    // because it requires at least 1 valid sol for each child of the AND
     if (solutionsSoFarWithChild.length === 0) {
       return Err(AndErrorNoSolution(childIdx));
     }
@@ -529,6 +536,8 @@ function validateXomRequirement(
         // if we have enough credits for both, add it
         if (tracker.hasEnoughCoursesForBoth(childSolution, solutionSoFar)) {
           const currentSol = combineSolutions(solutionSoFar, childSolution);
+          // Check if the min credit requirement is met, if it is
+          // I don't need to build on this solution so add to finished
           if (currentSol.minCredits >= r.numCreditsMin) {
             finishedSolutions.push(currentSol);
           } else {
@@ -537,6 +546,12 @@ function validateXomRequirement(
         }
       }
       // consider the by itself as well (possible we don't take any prior solutions)
+      // TODO: Potentially move this above combining child solution with
+      //       unfinished solutions to avoid adding extra courses
+      // Ex: min cred req is 4, and I have 2 courses
+      // { c: CS2811, credit: 1 } and { c: CS2810, credit: 4 }
+      // Current code will add both [CS2811, CS2810] and [CS2810] to sol, when
+      // only [CS2810] is needed
       if (childSolution.minCredits >= r.numCreditsMin) {
         finishedSolutions.push(childSolution);
       } else {
@@ -549,6 +564,7 @@ function validateXomRequirement(
   if (finishedSolutions.length > 0) {
     return Ok(finishedSolutions);
   }
+  // Find the sol with the max credits, as use that as your error
   const max = unfinishedSolutionsSoFar.reduce(
     (a, b) => Math.max(a, b.minCredits),
     0
@@ -561,8 +577,7 @@ function validateOrRequirement(
   tracker: CourseValidationTracker
 ): Result<Array<Solution>, MajorValidationError> {
   // just return concatenated list of child solutions
-  const results = validateRequirements(r.courses, tracker);
-  const [oks, errs] = splitChildResults(results);
+  const [oks, errs] = validateAndSplit(r.courses, tracker);
   if (oks.length === 0) {
     return Err(OrError(errs));
   }
