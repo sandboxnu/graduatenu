@@ -35,6 +35,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       - run: yarn set version berry
+      - run: yarn install --immutable
       - name: Build Docker image for frontend
         run: yarn workspace @graduate/frontend docker:build
   build-api-image-and-run-tests:
