@@ -531,13 +531,6 @@ function validateXomRequirement(
     let unfinishedSolutionsWithChild: Array<Solution> = [];
     // for each child, try each childSolution with each unfinishedSolution
     for (let childSolution of childRequirementSolutions) {
-      // If the child solution alone is enough, we can add it to finished
-      // and omit any combination with this solution
-      if (childSolution.minCredits >= r.numCreditsMin) {
-        finishedSolutions.push(childSolution);
-        continue;
-      }
-
       for (let solutionSoFar of unfinishedSolutionsSoFar) {
         // if we have enough credits for both, add it
         if (tracker.hasEnoughCoursesForBoth(childSolution, solutionSoFar)) {
@@ -552,7 +545,11 @@ function validateXomRequirement(
         }
       }
       // consider the by itself as well (possible we don't take any prior solutions)
-      unfinishedSolutionsWithChild.push(childSolution);
+      if (childSolution.minCredits >= r.numCreditsMin) {
+        finishedSolutions.push(childSolution);
+      } else {
+        unfinishedSolutionsWithChild.push(childSolution);
+      }
     }
     // add all child+unfinished combinations to unfinished
     unfinishedSolutionsSoFar.push(...unfinishedSolutionsWithChild);

@@ -247,10 +247,11 @@ describe("validateRequirement suite", () => {
   const cs2000tocs3000 = range(8, "CS", 2000, 3000, []);
   const rangeException = range(4, "CS", 2000, 4000, [cs2810]);
   const xom8credits = xom(8, [cs2800, cs2810, ds3000]);
-  const xom4credits = xom(4, [cs4950, cs4820]);
+  const xom4credits = xom(4, [cs2500, cs2501]);
+  const xom4creditsWrongOrder = xom(4, [cs2501, cs2500]);
   const input = and(cs2810orcs2800, cs2810ords3000);
   const tracker = makeTracker(cs2800, cs2810, ds3000, cs3500);
-  const xomTracker = makeTracker(cs4950, cs4820);
+  const xomTracker = makeTracker(cs2500, cs2501);
   test("or 1", () => {
     expect(validateRequirement(cs2810orcs2800, tracker)).toEqual(
       Ok([solution("CS2810"), solution("CS2800")])
@@ -300,7 +301,12 @@ describe("validateRequirement suite", () => {
   });
   test("XOM requirement without duplicates", () => {
     expect(validateRequirement(xom4credits, xomTracker)).toEqual(
-      Ok([solution("CS4820")])
+      Ok([solution("CS2500")])
+    );
+  });
+  test("XOM requirement without duplicates in wrong order", () => {
+    expect(validateRequirement(xom4creditsWrongOrder, xomTracker)).toEqual(
+      Ok([solution(cs2501, cs2500), solution("CS2500")])
     );
   });
   const foundations = section("Foundations", 2, [
