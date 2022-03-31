@@ -129,7 +129,7 @@ GEM
     pry-remote (0.1.8)
       pry (~> 0.9)
       slop (~> 3.0)
-    puma (4.3.9)
+    puma (4.3.12)
       nio4r (~> 2.0)
     racc (1.5.2)
     rack (2.2.3)
@@ -216,7 +216,7 @@ DEPENDENCIES
   pry
   pry-byebug
   pry-remote
-  puma (~> 4.3.9)
+  puma (~> 4.3.12)
   rails (~> 6.0.3, >= 6.0.3.6)
   rails-healthcheck
   rdoc
