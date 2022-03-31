@@ -12,7 +12,8 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: "14"
-      - run: yarn install --frozen-lockfile
+      - run: yarn set version berry
+      - run: yarn install --immutable
       - name: Run Jest Tests
         run: yarn workspace @graduate/scrapers test
   run-api-v2-tests:
@@ -24,7 +25,8 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: "16"
-      - run: yarn install --frozen-lockfile
+      - run: yarn set version berry
+      - run: yarn install --immutable
       - name: Run Jest Tests
         run: yarn workspace @graduate/api-v2 test
   build-frontend-image:

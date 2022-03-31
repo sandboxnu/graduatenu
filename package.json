@@ -8,9 +8,6 @@
   "workspaces": {
     "packages": [
       "packages/*"
-    ],
-    "nohoist": [
-      "@graduate/frontend/**"
     ]
   },
   "scripts": {
@@ -47,5 +44,6 @@
     "hooks": {
       "pre-commit": "pretty-quick --staged"
     }
-  }
+  },
+  "packageManager": "yarn@3.2.0"
 }
