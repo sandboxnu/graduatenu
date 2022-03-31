@@ -34,6 +34,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+      - run: yarn set version berry
       - name: Build Docker image for frontend
         run: yarn workspace @graduate/frontend docker:build
   build-api-image-and-run-tests:
