@@ -502,7 +502,6 @@ function validateAndRequirement(
       }
     }
     // if there were no solutions added, then there are no valid solutions for the whole AND
-    // because it requires at least 1 valid sol for each child of the AND
     if (solutionsSoFarWithChild.length === 0) {
       return Err(AndErrorNoSolution(childIdx));
     }
@@ -532,6 +531,13 @@ function validateXomRequirement(
     let unfinishedSolutionsWithChild: Array<Solution> = [];
     // for each child, try each childSolution with each unfinishedSolution
     for (let childSolution of childRequirementSolutions) {
+      // If the child solution alone is enough, we can add it to finished
+      // and omit any combination with this solution
+      if (childSolution.minCredits >= r.numCreditsMin) {
+        finishedSolutions.push(childSolution);
+        continue;
+      }
+
       for (let solutionSoFar of unfinishedSolutionsSoFar) {
         // if we have enough credits for both, add it
         if (tracker.hasEnoughCoursesForBoth(childSolution, solutionSoFar)) {
@@ -546,17 +552,7 @@ function validateXomRequirement(
         }
       }
       // consider the by itself as well (possible we don't take any prior solutions)
-      // TODO: Potentially move this above combining child solution with
-      //       unfinished solutions to avoid adding extra courses
-      // Ex: min cred req is 4, and I have 2 courses
-      // { c: CS2811, credit: 1 } and { c: CS2810, credit: 4 }
-      // Current code will add both [CS2811, CS2810] and [CS2810] to sol, when
-      // only [CS2810] is needed
-      if (childSolution.minCredits >= r.numCreditsMin) {
-        finishedSolutions.push(childSolution);
-      } else {
-        unfinishedSolutionsWithChild.push(childSolution);
-      }
+      unfinishedSolutionsWithChild.push(childSolution);
     }
     // add all child+unfinished combinations to unfinished
     unfinishedSolutionsSoFar.push(...unfinishedSolutionsWithChild);
