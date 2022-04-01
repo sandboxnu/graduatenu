@@ -7,12 +7,12 @@ jobs:
     runs-on: ubuntu-latest
     name: Scraper Tests
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v3
       - name: Setup node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: "14"
-      - run: yarn set version berry
       - run: yarn install --immutable
       - name: Run Jest Tests
         run: yarn packages/scrapers test
@@ -20,12 +20,12 @@ jobs:
     runs-on: ubuntu-latest
     name: API V2 Tests
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v3
       - name: Setup node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: "16"
-      - run: yarn set version berry
       - run: yarn install --immutable
       - name: Run Jest Tests
         run: yarn packages/api-v2 test
@@ -33,8 +33,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
-      - run: yarn set version berry
+        uses: actions/checkout@v3
       - run: yarn install --immutable
       - name: Build Docker image for frontend
         run: yarn packages/frontend docker:build
@@ -42,7 +41,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
-      - run: yarn set version berry
+        uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
       - name: Build Docker image and run tests for api
         run: yarn packages/api test
