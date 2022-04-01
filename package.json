@@ -18,7 +18,12 @@
     "dev:db:down": "docker-compose -f infrastructure/develop/docker-compose.yml down",
     "prod:start": "concurrently \"yarn workspace @graduate/api dev\" \"yarn workspace @graduate/frontend docker:start\"",
     "lint": "eslint packages/ --ext .ts,.tsx .",
-    "tsc": "yarn workspaces run tsc --noEmit"
+    "tsc": "yarn workspaces foreach -v --exclude . run tsc",
+    "g:babel": "babel",
+    "g:cross-env": "cross-env"
+  },
+  "dependencies": {
+    "cross-env": "^7.0.3"
   },
   "devDependencies": {
     "@babel/cli": "^7.17.6",
