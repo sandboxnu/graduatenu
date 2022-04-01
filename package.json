@@ -19,8 +19,8 @@
     "prod:start": "concurrently \"yarn workspace @graduate/api dev\" \"yarn workspace @graduate/frontend docker:start\"",
     "lint": "eslint packages/ --ext .ts,.tsx .",
     "tsc": "yarn workspaces foreach -v --exclude . run tsc",
-    "g:babel": "babel",
-    "g:cross-env": "cross-env"
+    "g:babel": "cd $INIT_CWD babel",
+    "g:cross-env": "cd $INIT_CWD cross-env"
   },
   "dependencies": {
     "cross-env": "^7.0.3"

@@ -7,10 +7,10 @@
   "private": true,
   "scripts": {
     "dev": "yarn build:dev -w",
-    "build": "yarn build:dev && yarn buid:browser && yarn build:module",
-    "build:dev": "g:babel --root-mode upward -d dist -x '.ts' *.ts",
-    "build:browser": "g:cross-env BABEL_ENV=browser g:babel --root-mode upward -d lib -x '.ts' *.ts",
-    "build:module": "g:cross-env BABEL_ENV=module g:babel --root-mode upward -d module -x '.ts' *.ts"
+    "build": "yarn build:dev && yarn build:browser && yarn build:module",
+    "build:dev": "yarn g:babel --root-mode upward -d dist -x '.ts' *.ts",
+    "build:browser": "yarn g:cross-env BABEL_ENV=browser yarn g:babel --root-mode upward -d lib -x '.ts' *.ts",
+    "build:module": "yarn g:cross-env BABEL_ENV=module yarn g:babel --root-mode upward -d module -x '.ts' *.ts"
   },
   "devDependencies": {
     "axios": "^0.26.1",
