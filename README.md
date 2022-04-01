@@ -2,7 +2,7 @@
 
 Run the application locally by running `yarn dev` at the root of the project. This starts up a ruby on rails server + postgres running in a docker container, and a react frontend.
 
-Run a command in a specific workspace via `yarn workspace <workspace> <command>`, where `<command>` can be a yarn command like`add <package>`, a custom script like`dev`, or a bin script like `tsc`. .
+Run a command in a specific workspace via `yarn package/<package> <command>`, where `<command>` can be a yarn command like `add typescript`, a custom script like `dev`, or a bin script like `tsc`.
 
 ## GraduateNU - Backend
 

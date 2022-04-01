@@ -26,8 +26,8 @@ COPY packages/common packages/common
 ARG NODE_OPTIONS=--max_old_space_size=4096
 
 # Build common package and frontend for the browser
-RUN yarn workspace @graduate/common build:browser
-RUN yarn workspace @graduate/frontend build
+RUN yarn packages/common build:browser
+RUN yarn packages/frontend build
 
 ENV NODE_ENV production
 

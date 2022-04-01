@@ -15,7 +15,7 @@ jobs:
       - run: yarn set version berry
       - run: yarn install --immutable
       - name: Run Jest Tests
-        run: yarn workspace @graduate/scrapers test
+        run: yarn packages/scrapers test
   run-api-v2-tests:
     runs-on: ubuntu-latest
     name: API V2 Tests
@@ -28,7 +28,7 @@ jobs:
       - run: yarn set version berry
       - run: yarn install --immutable
       - name: Run Jest Tests
-        run: yarn workspace @graduate/api-v2 test
+        run: yarn packages/api-v2 test
   build-frontend-image:
     runs-on: ubuntu-latest
     steps:
@@ -37,11 +37,12 @@ jobs:
       - run: yarn set version berry
       - run: yarn install --immutable
       - name: Build Docker image for frontend
-        run: yarn workspace @graduate/frontend docker:build
+        run: yarn packages/frontend docker:build
   build-api-image-and-run-tests:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+      - run: yarn set version berry
       - name: Build Docker image and run tests for api
-        run: yarn workspace @graduate/api test
+        run: yarn packages/api test
