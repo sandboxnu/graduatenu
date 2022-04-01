@@ -15,8 +15,6 @@ COPY packages/scrapers/package.json packages/scrapers/package.json
 COPY packages/api-v2/package.json packages/api-v2/package.json
 
 # Install at root level
-RUN ls
-RUN pwd
 RUN yarn install --immutable
 
 # Get src files
@@ -26,15 +24,13 @@ COPY packages/common packages/common
 ARG NODE_OPTIONS=--max_old_space_size=4096
 
 # Build common package and frontend for the browser
+ENV NODE_ENV production
 RUN yarn packages/common build:browser
 RUN yarn packages/frontend build
 
-ENV NODE_ENV production
-
-WORKDIR packages/frontend
-
 FROM nginx:1.16.0-alpine
+
 COPY --from=build /app/packages/frontend/build /usr/share/nginx/html
-COPY --from=build /app/packages/frontend/nginx.conf /etc/nginx/conf.d/default.conf
+COPY packages/frontend/nginx.conf /etc/nginx/conf.d/default.conf
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
