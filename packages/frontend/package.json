@@ -10,7 +10,7 @@
   "scripts": {
     "dev": "SKIP_PREFLIGHT_CHECK=true react-app-rewired start start",
     "start": "yarn build && serve -s build",
-    "build": "CI=false SKIP_PREFLIGHT_CHECK=true react-app-rewired build",
+    "build": "yarn g:cross-env CI=false SKIP_PREFLIGHT_CHECK=true react-app-rewired build",
     "docker:build": "docker build --progress=plain -t frontend -f Dockerfile ../../",
     "docker:run": "docker run -p 3000:80 frontend",
     "docker:start": "yarn docker:build && yarn docker:run",
