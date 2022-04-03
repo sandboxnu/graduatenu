@@ -13,7 +13,7 @@ jobs:
         with:
           node-version: 12
       - uses: bahmutov/npm-install@v1
-      - run: yarn lint
+      - run: yarn packages/frontend-v2 lint
   run-scrapers-tests:
     runs-on: ubuntu-latest
     name: Scraper Tests
