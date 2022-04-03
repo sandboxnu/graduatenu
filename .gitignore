@@ -152,3 +152,6 @@ infrastructure/develop/graduatenu-db-data
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+
+# frontend-v2 
+!**/frontend-v2/**/*.json
