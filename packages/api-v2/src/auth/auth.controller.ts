@@ -5,10 +5,10 @@ import {
   Post,
   UnauthorizedException,
 } from "@nestjs/common";
-import { CreateStudentDto } from "src/student/dto/create-student.dto";
+import { CreateStudentDto } from "@graduate/common/dto/create-student.dto";
 import { Student } from "src/student/entities/student.entity";
 import { AuthService } from "./auth.service";
-import { LoginStudentDto } from "./dto/login-student.dto";
+import { LoginStudentDto } from "@graduate/common/dto/login-student.dto";
 
 @Controller("auth")
 export class AuthController {

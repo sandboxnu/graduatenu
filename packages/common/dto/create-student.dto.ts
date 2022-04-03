@@ -8,7 +8,7 @@ import {
   IsOptional,
   IsObject,
 } from "class-validator";
-import { ScheduleCourse } from "@graduate/common";
+import { ScheduleCourse } from "../types";
 
 export class CreateStudentDto {
   @IsNotEmpty()

@@ -19,6 +19,7 @@
     "typescript": "^4.6.2"
   },
   "dependencies": {
+    "@nestjs/mapped-types": "*",
     "axios": "^0.26.1"
   },
   "jest": {

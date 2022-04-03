@@ -1,6 +1,6 @@
 import { IsArray, IsInt, IsObject, IsString, Max, Min } from "class-validator";
-import { Schedule } from "@graduate/common";
-import { CourseWarning, IWarning } from "../../../../frontend/src/models/types";
+import { Schedule } from "../types";
+import { CourseWarning, IWarning } from "@graduate/frontend/src/models/types";
 
 export class CreatePlanDto {
   @IsString()

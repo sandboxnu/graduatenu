@@ -15,8 +15,8 @@ import {
   DefaultValuePipe,
 } from "@nestjs/common";
 import { StudentService } from "./student.service";
-import { CreateStudentDto } from "./dto/create-student.dto";
-import { UpdateStudentDto } from "./dto/update-student.dto";
+import { CreateStudentDto } from "@graduate/common/dto/create-student.dto";
+import { UpdateStudentDto } from "@graduate/common/dto/update-student.dto";
 import { DeleteResult, UpdateResult } from "typeorm";
 import { Student } from "./entities/student.entity";
 import { JwtAuthGuard } from "src/guards/jwt-auth.guard";
