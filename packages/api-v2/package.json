@@ -26,7 +26,6 @@
     "@nestjs/config": "^1.1.6",
     "@nestjs/core": "^8.0.0",
     "@nestjs/jwt": "^8.0.0",
-    "@nestjs/mapped-types": "*",
     "@nestjs/passport": "^8.1.0",
     "@nestjs/platform-express": "^8.0.0",
     "@nestjs/typeorm": "^8.0.2",
