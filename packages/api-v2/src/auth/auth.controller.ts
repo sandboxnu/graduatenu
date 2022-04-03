@@ -6,9 +6,9 @@ import {
   UnauthorizedException,
 } from "@nestjs/common";
 import { CreateStudentDto } from "@graduate/common/dto/create-student.dto";
-import { Student } from "src/student/entities/student.entity";
 import { AuthService } from "./auth.service";
 import { LoginStudentDto } from "@graduate/common/dto/login-student.dto";
+import { GetStudentResponse } from "@graduate/common/response-types/student-response-type";
 
 @Controller("auth")
 export class AuthController {
@@ -17,7 +17,7 @@ export class AuthController {
   @Post("register")
   public async register(
     @Body() createStudentDto: CreateStudentDto
-  ): Promise<Student> {
+  ): Promise<GetStudentResponse> {
     const student = await this.authService.register(createStudentDto);
 
     if (!student) {
@@ -28,7 +28,9 @@ export class AuthController {
   }
 
   @Post("login")
-  public async login(@Body() loginUserDto: LoginStudentDto): Promise<Student> {
+  public async login(
+    @Body() loginUserDto: LoginStudentDto
+  ): Promise<GetStudentResponse> {
     const student = await this.authService.login(loginUserDto);
 
     if (!student) {

@@ -17,11 +17,13 @@ import {
 import { StudentService } from "./student.service";
 import { CreateStudentDto } from "@graduate/common/dto/create-student.dto";
 import { UpdateStudentDto } from "@graduate/common/dto/update-student.dto";
-import { DeleteResult, UpdateResult } from "typeorm";
-import { Student } from "./entities/student.entity";
 import { JwtAuthGuard } from "src/guards/jwt-auth.guard";
 import { DevRouteGuard } from "src/guards/dev-route.guard";
 import { AuthenticatedRequest } from "src/auth/interfaces/authenticated-request";
+import {
+  GetStudentResponse,
+  UpdateStudentResponse,
+} from "@graduate/common/response-types/student-response-type";
 
 @Controller("students")
 export class StudentController {
@@ -33,7 +35,7 @@ export class StudentController {
     @Req() req: AuthenticatedRequest,
     @Query("isWithPlans", new DefaultValuePipe(false), ParseBoolPipe)
     isWithPlans: boolean
-  ): Promise<Student> {
+  ): Promise<GetStudentResponse> {
     const uuid = req.user.uuid;
     const student = await this.studentService.findByUuid(uuid, isWithPlans);
 
@@ -49,7 +51,7 @@ export class StudentController {
   async updateMe(
     @Req() req: AuthenticatedRequest,
     @Body() updateStudentDto: UpdateStudentDto
-  ): Promise<UpdateResult> {
+  ): Promise<UpdateStudentResponse> {
     const uuid = req.user.uuid;
     const updateResult = await this.studentService.update(
       uuid,
@@ -60,26 +62,33 @@ export class StudentController {
       throw new BadRequestException();
     }
 
-    return updateResult;
+    const student = await this.studentService.findByUuid(uuid, true);
+
+    if (!student) {
+      throw new BadRequestException();
+    }
+
+    return student;
   }
 
   @UseGuards(JwtAuthGuard)
   @Delete("me")
-  async removeMe(@Req() req: AuthenticatedRequest): Promise<DeleteResult> {
+  async removeMe(@Req() req: AuthenticatedRequest): Promise<void> {
     const uuid = req.user.uuid;
     const deleteResult = await this.studentService.remove(uuid);
 
     if (!deleteResult) {
       throw new BadRequestException();
     }
-
-    return deleteResult;
   }
 
   // The following routes are only available in development
   @UseGuards(DevRouteGuard)
   @Post()
-  async create(@Body() createStudentDto: CreateStudentDto): Promise<Student> {
+  // SHould we make a create student response?
+  async create(
+    @Body() createStudentDto: CreateStudentDto
+  ): Promise<GetStudentResponse> {
     const student = await this.studentService.create(createStudentDto);
 
     if (!student) {
@@ -91,7 +100,7 @@ export class StudentController {
 
   @UseGuards(DevRouteGuard)
   @Get()
-  async findAll(): Promise<Student[]> {
+  async findAll(): Promise<GetStudentResponse[]> {
     const students = await this.studentService.findAll();
 
     if (!students) {
@@ -105,7 +114,7 @@ export class StudentController {
   @Get(":uuid")
   async findOne(
     @Param("uuid", new ParseUUIDPipe()) uuid: string
-  ): Promise<Student> {
+  ): Promise<GetStudentResponse> {
     const student = await this.studentService.findByUuid(uuid);
 
     if (!student) {
@@ -120,7 +129,7 @@ export class StudentController {
   async update(
     @Param("uuid", new ParseUUIDPipe()) uuid: string,
     @Body() updateStudentDto: UpdateStudentDto
-  ): Promise<UpdateResult> {
+  ): Promise<UpdateStudentResponse> {
     const updateResult = await this.studentService.update(
       uuid,
       updateStudentDto
@@ -130,20 +139,24 @@ export class StudentController {
       throw new BadRequestException();
     }
 
-    return updateResult;
+    const student = await this.studentService.findByUuid(uuid);
+
+    if (!student) {
+      throw new BadRequestException();
+    }
+
+    return student;
   }
 
   @UseGuards(DevRouteGuard)
   @Delete(":uuid")
   async remove(
     @Param("uuid", new ParseUUIDPipe()) uuid: string
-  ): Promise<DeleteResult> {
+  ): Promise<void> {
     const deleteResult = await this.studentService.remove(uuid);
 
     if (!deleteResult) {
       throw new BadRequestException();
     }
-
-    return deleteResult;
   }
 }
