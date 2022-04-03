@@ -2,7 +2,7 @@
 
 ## New Version
 
-First make sure you run the dev postgres database using `yarn dev:db:up`. Run `yarn dev:db:down` when you're done`.
+First make sure you run the dev postgres database using `yarn dev:db:up`. Run `yarn dev:db:down` when you're done.
 
 Then run the new version of the application by running `yarn dev:v2` at the root of the project. This starts up a NestJS server + NextJS frontend + Proxy. The proxy listens on port [3002](http://localhost:3002/), forwards /api requests to the NestJS server running on port 3001 and all other requests to the frontend on running port 3000.
 
