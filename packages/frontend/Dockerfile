@@ -10,6 +10,7 @@ COPY babel.config.js .
 COPY package.json .
 COPY packages/api/package.json packages/api/package.json
 COPY packages/frontend/package.json packages/frontend/package.json
+COPY packages/frontend-v2/package.json packages/frontend-v2/package.json
 COPY packages/common/package.json packages/common/package.json
 COPY packages/scrapers/package.json packages/scrapers/package.json
 COPY packages/api-v2/package.json packages/api-v2/package.json
