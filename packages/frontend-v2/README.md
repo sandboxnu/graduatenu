@@ -6,10 +6,6 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 Run the application(both frontend and backend) with `yarn dev` from the root of the monorepo.
 
-Run just the frontend dev server with `yarn dev` from this package.
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
 You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
 
 ## Learn More
