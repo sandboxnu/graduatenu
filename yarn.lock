@@ -2137,7 +2137,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@graduate/common@*, @graduate/common@workspace:^, @graduate/common@workspace:packages/common":
+"@graduate/common@*, @graduate/common@workspace:*, @graduate/common@workspace:packages/common":
   version: 0.0.0-use.local
   resolution: "@graduate/common@workspace:packages/common"
   dependencies:
@@ -2151,7 +2151,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@graduate/frontend-v2@workspace:packages/frontend-v2"
   dependencies:
-    "@graduate/common": "workspace:^"
+    "@graduate/common": "workspace:*"
     "@types/eslint": ^8
     "@types/node": 17.0.23
     "@types/react": 17.0.43
