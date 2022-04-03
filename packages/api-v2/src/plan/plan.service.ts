@@ -26,12 +26,10 @@ export class PlanService {
   }
 
   async findOne(id: number): Promise<Plan> {
-    const plan = this.planRepository.findOne({
+    return this.planRepository.findOne({
       where: { id },
       relations: ["student"],
     });
-
-    return plan;
   }
 
   async isPlanOwnedByStudent(

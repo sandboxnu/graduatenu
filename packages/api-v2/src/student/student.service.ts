@@ -38,10 +38,7 @@ export class StudentService {
     return await this.studentRepository.find();
   }
 
-  async findByUuid(
-    uuid: string,
-    isWithPlans: boolean = false
-  ): Promise<Student> {
+  async findByUuid(uuid: string, isWithPlans = false): Promise<Student> {
     const findOptions: FindOneOptions<Student> = { where: { uuid } };
 
     if (isWithPlans) {
@@ -51,10 +48,7 @@ export class StudentService {
     return this.findOne(findOptions);
   }
 
-  async findByEmail(
-    email: string,
-    isWithPlans: boolean = false
-  ): Promise<Student> {
+  async findByEmail(email: string, isWithPlans = false): Promise<Student> {
     const findOptions: FindOneOptions<Student> = { where: { email } };
 
     if (isWithPlans) {
