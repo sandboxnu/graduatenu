@@ -14,7 +14,7 @@ Run the application locally by running `yarn dev` at the root of the project. Th
 
 Run a command in a specific workspace via `yarn package/<package> <command>`, where `<command>` can be a yarn command like `add typescript`, a custom script like `dev`, or a bin script like `tsc`.
 
-## Backend V1
+## GraduateNU - Backend
 
 An automatic plan builder utilizing your current degree audit information to help you graduate.
 
