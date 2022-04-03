@@ -7,37 +7,41 @@ jobs:
     runs-on: ubuntu-latest
     name: Scraper Tests
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v3
       - name: Setup node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: "14"
-      - uses: bahmutov/npm-install@v1
+      - run: yarn install --immutable
       - name: Run Jest Tests
-        run: yarn workspace @graduate/scrapers test
+        run: yarn packages/scrapers test
   run-api-v2-tests:
     runs-on: ubuntu-latest
     name: API V2 Tests
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v3
       - name: Setup node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: "16"
-      - uses: bahmutov/npm-install@v1
+      - run: yarn install --immutable
       - name: Run Jest Tests
-        run: yarn workspace @graduate/api-v2 test
+        run: yarn packages/api-v2 test
   build-frontend-image:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
+      - run: yarn install --immutable
       - name: Build Docker image for frontend
-        run: yarn workspace @graduate/frontend docker:build
+        run: yarn packages/frontend docker:build
   build-api-image-and-run-tests:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
       - name: Build Docker image and run tests for api
-        run: yarn workspace @graduate/api test
+        run: yarn packages/api test

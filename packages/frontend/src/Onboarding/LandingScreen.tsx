@@ -13,9 +13,9 @@ import { connect } from "react-redux";
 import { Dispatch } from "redux";
 import { fetchMajorsAndPlans } from "../utils/fetchMajorsAndPlans";
 import { Major } from "@graduate/common";
-import { History } from "history";
+import { useHistory } from "react-router";
 import { RouteComponentProps, withRouter } from "react-router";
-
+type History = ReturnType<typeof useHistory>;
 const Header = styled.div`
   display: flex;
   flex-direction: row;
@@ -119,7 +119,7 @@ const Footer = styled.div`
 
 interface LandingScreenProps {
   fullName: string;
-  fetchMajorsAndPlans: (history: History<unknown>) => Promise<Major[]>;
+  fetchMajorsAndPlans: (history: History) => Promise<Major[]>;
 }
 
 type Props = LandingScreenProps & RouteComponentProps<{}>;
@@ -229,7 +229,7 @@ export class LandingScreenComponent extends React.Component<Props> {
 }
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  fetchMajorsAndPlans: (history: History<unknown>) =>
+  fetchMajorsAndPlans: (history: History) =>
     fetchMajorsAndPlans(history)(dispatch),
 });
 

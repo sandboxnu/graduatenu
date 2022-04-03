@@ -5,7 +5,8 @@
     "strict": true,
     "isolatedModules": true,
     "noEmit": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "skipLibCheck": true
   },
   "exclude": ["node_modules", "dist"],
   "include": ["**/*.ts"]
