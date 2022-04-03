@@ -1,40 +1,36 @@
 import Axios, { AxiosInstance } from "axios";
-import {
-  GetClubResponse,
-  CreateClubParams,
-  CreateClubResponse,
-} from "@graduate/common";
+import { CreatePlanDto } from "@graduate/common";
 
 class APIClient {
   private axios: AxiosInstance;
   auth = {
-    login: async (p: ): Promise<> => {
-      return (await this.axios.get("/api/club")).data;
+    login: async (): Promise<> => {
+      return (await this.axios.post("/api/auth")).data;
     },
     register: async (): Promise<> => {
-      return (await this.axios.get("/api/club")).data;
+      return (await this.axios.post("/api/auth")).data;
     },
   };
   student = {
-    create: async(): Promise<> => {
-
+    create: async (): Promise<> => {
+      return (await this.axios.post("/api/create")).data;
     },
-    update: async(): Promise<> => {
-
+    update: async (): Promise<> => {
+      return (await this.axios.patch("/api/update")).data;
     },
     student: async (): Promise<> => {
-      return (await this.axios.get("/api/club")).data;
+      return (await this.axios.get("/api/student")).data;
     },
   };
   plans = {
-    create: async(): Promise<> => {
-      return (await this.axios.post()).data;
+    create: async (): Promise<> => {
+      return (await this.axios.post("")).data;
     },
-    update: async(): Promise<> => {
-
+    update: async (): Promise<> => {
+      return (await this.axios.patch("")).data;
     },
-    plan: async (p: ): Promise<> => {
-      return (await this.axios.post("/api/plans", p)).data;
+    plan: async (): Promise<> => {
+      return (await this.axios.post("/api/plans")).data;
     },
   };
 
@@ -43,9 +39,7 @@ class APIClient {
   }
 }
 
-class SearchAPIClient {
-
-}
+class SearchAPIClient {}
 
 export const API = new APIClient(process.env.API_URL);
 export const SearchAPI = new SearchAPIClient();
