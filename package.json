@@ -23,6 +23,7 @@
     "g:cross-env": "cd $INIT_CWD && cross-env"
   },
   "dependencies": {
+    "@babel/plugin-proposal-decorators": "^7.17.8",
     "cross-env": "^7.0.3"
   },
   "devDependencies": {
