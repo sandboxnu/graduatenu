@@ -4,14 +4,7 @@ export * from "./ib_exams";
 export * from "./ap_exams";
 export * from "./constants";
 export * from "./course-utils";
-
-export * from "./dto/create-plan.dto";
-export * from "./dto/create-student.dto";
-export * from "./dto/login-student.dto";
-export * from "./dto/update-plan.dto";
-export * from "./dto/update-student.dto";
-
-export * from "./response-types/plan-response-type";
-export * from "./response-types/student-response-type";
+export * from "./dto-types";
+export * from "./response-types";
 
 // this file IS included in the build

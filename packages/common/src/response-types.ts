@@ -1,5 +1,21 @@
-import { ScheduleCourse } from "../types";
-import { PlanModel } from "./plan-response-type";
+import { Schedule, ScheduleCourse } from "./types";
+
+export class PlanModel {
+  id: number;
+  name: string;
+  student: StudentModel;
+  schedule: Schedule;
+  major: string;
+  coopCycle: string;
+  concentration: string | null;
+  catalogYear: number;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export class GetPlanResponse extends PlanModel {}
+
+export class UpdatePlanResponse extends PlanModel {}
 
 export class StudentModel {
   uuid: string;
