@@ -626,6 +626,19 @@ export interface IScheduleCourse {
   subject: string;
 }
 
+export interface IWarning {
+  message: string;
+  termId: number;
+}
+
+/**
+ * A CourseWarning, specific to a single course, in a single term(id).
+ */
+export interface CourseWarning extends IWarning {
+  subject: string;
+  classId: string;
+}
+
 // types for json_converter.ts
 
 /**

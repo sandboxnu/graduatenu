@@ -15,15 +15,12 @@ import {
   DefaultValuePipe,
 } from "@nestjs/common";
 import { StudentService } from "./student.service";
-import { CreateStudentDto } from "@graduate/common/dto/create-student.dto";
-import { UpdateStudentDto } from "@graduate/common/dto/update-student.dto";
+import { CreateStudentDto } from "@graduate/common";
+import { UpdateStudentDto } from "@graduate/common";
 import { JwtAuthGuard } from "src/guards/jwt-auth.guard";
 import { DevRouteGuard } from "src/guards/dev-route.guard";
 import { AuthenticatedRequest } from "src/auth/interfaces/authenticated-request";
-import {
-  GetStudentResponse,
-  UpdateStudentResponse,
-} from "@graduate/common/response-types/student-response-type";
+import { GetStudentResponse, UpdateStudentResponse } from "@graduate/common";
 
 @Controller("students")
 export class StudentController {
@@ -76,7 +73,7 @@ export class StudentController {
   async removeMe(@Req() req: AuthenticatedRequest): Promise<void> {
     const uuid = req.user.uuid;
     const deleteResult = await this.studentService.remove(uuid);
-
+    console.log("help ashfasdhjfl;ks");
     if (!deleteResult) {
       throw new BadRequestException();
     }
@@ -154,7 +151,6 @@ export class StudentController {
     @Param("uuid", new ParseUUIDPipe()) uuid: string
   ): Promise<void> {
     const deleteResult = await this.studentService.remove(uuid);
-
     if (!deleteResult) {
       throw new BadRequestException();
     }
