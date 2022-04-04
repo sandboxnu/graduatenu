@@ -8,20 +8,22 @@
   "workspaces": {
     "packages": [
       "packages/*"
-    ],
-    "nohoist": [
-      "@graduate/frontend/**"
     ]
   },
   "scripts": {
-    "dev": "concurrently -n \"common,api,frontend\" \"yarn workspace @graduate/common dev\" \"yarn workspace @graduate/api dev\" \"yarn workspace @graduate/frontend dev\"",
-    "dev:v2": "concurrently -n \"common,api-v2,frontend,proxy\" \"yarn workspace @graduate/common dev\" \"yarn workspace @graduate/api-v2 dev\" \"yarn workspace @graduate/frontend dev\" \"yarn dev:proxy\"",
+    "dev": "concurrently -n \"common,api,frontend\" \"yarn packages/common dev\" \"yarn packages/api dev\" \"yarn packages/frontend dev\"",
+    "dev:v2": "concurrently -n \"common,api-v2,frontend,proxy\" \"yarn packages/common dev\" \"yarn packages/api-v2 dev\" \"yarn packages/frontend-v2 dev\" \"yarn dev:proxy\"",
     "dev:proxy": "node infrastructure/develop/dev-proxy.js",
     "dev:db:up": "docker-compose -f infrastructure/develop/docker-compose.yml up -d",
     "dev:db:down": "docker-compose -f infrastructure/develop/docker-compose.yml down",
-    "prod:start": "concurrently \"yarn workspace @graduate/api dev\" \"yarn workspace @graduate/frontend docker:start\"",
+    "prod:start": "concurrently \"yarn packages/api dev\" \"yarn packages/frontend docker:start\"",
     "lint": "eslint packages/ --ext .ts,.tsx .",
-    "tsc": "yarn workspaces run tsc --noEmit"
+    "tsc": "yarn workspaces foreach -v --exclude . run tsc",
+    "g:babel": "cd $INIT_CWD && babel",
+    "g:cross-env": "cd $INIT_CWD && cross-env"
+  },
+  "dependencies": {
+    "cross-env": "^7.0.3"
   },
   "devDependencies": {
     "@babel/cli": "^7.17.6",
@@ -47,5 +49,6 @@
     "hooks": {
       "pre-commit": "pretty-quick --staged"
     }
-  }
+  },
+  "packageManager": "yarn@3.2.0"
 }

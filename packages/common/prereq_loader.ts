@@ -50,7 +50,7 @@ export async function addPrereqsToSchedule(
   const loader: DataLoader<SimpleCourse, PrereqQueryResult> = new DataLoader<
     SimpleCourse,
     PrereqQueryResult
-  >(queryCoursePrereqData);
+  >(queryCoursePrereqData as any);
 
   // return the results
   let results = await prereqifySchedule(schedule, loader);
@@ -74,7 +74,7 @@ export async function addPrereqsToSchedules(
   const loader: DataLoader<SimpleCourse, PrereqQueryResult> = new DataLoader<
     SimpleCourse,
     PrereqQueryResult
-  >(queryCoursePrereqData);
+  >(queryCoursePrereqData as any);
 
   // return the results
   let results = await Promise.all(

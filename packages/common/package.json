@@ -2,13 +2,21 @@
   "name": "@graduate/common",
   "version": "1.0.0",
   "main": "dist/index.js",
+  "module": "module/index.js",
+  "browser": "lib/index.js",
   "private": true,
   "scripts": {
-    "dev": "yarn build -w",
-    "build": "babel --root-mode upward -d dist -x '.ts' *.ts"
+    "dev": "yarn build:dev -w",
+    "build": "yarn build:dev && yarn build:browser && yarn build:module",
+    "build:dev": "yarn g:babel --root-mode upward -d dist -x '.ts' *.ts",
+    "build:browser": "yarn g:cross-env BABEL_ENV=browser yarn g:babel --root-mode upward -d lib -x '.ts' *.ts",
+    "build:module": "yarn g:cross-env BABEL_ENV=module yarn g:babel --root-mode upward -d module -x '.ts' *.ts"
   },
   "devDependencies": {
-    "axios": "^0.26.1"
+    "axios": "^0.26.1",
+    "typescript": "^4.6.2"
   },
-  "dependencies": {}
+  "dependencies": {
+    "dataloader": "^1.4.0"
+  }
 }

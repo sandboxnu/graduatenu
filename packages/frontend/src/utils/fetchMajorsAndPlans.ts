@@ -11,7 +11,8 @@ import {
 import { Dispatch } from "redux";
 import { Major, Schedule } from "@graduate/common";
 import { majorIds } from "../majors";
-import { History } from "history";
+import { useHistory } from "react-router";
+type History = ReturnType<typeof useHistory>;
 
 //graphql schema for searchNEU's majors endpoint.
 const majorSchema: string[] = majorIds.map(({ majorId, year }) => {
@@ -58,7 +59,7 @@ const parsePlans = (res: any): Record<string, Schedule[]> => {
 };
 
 //use fetch utility to make a post request to the searchNEU graphql api endpoint.
-export function fetchMajorsAndPlans(history: History<unknown>) {
+export function fetchMajorsAndPlans(history: History) {
   return (dispatch: Dispatch) => {
     return new Promise<Major[]>((resolve, reject) => {
       dispatch(fetchMajorsPendingAction());
