@@ -9,6 +9,8 @@ import {
   ICourseRange,
   IOrCourse,
   TransferableExam,
+  IWarning,
+  CourseWarning,
 } from "@graduate/common";
 
 /**
@@ -109,18 +111,6 @@ export interface DNDScheduleCourse extends ScheduleCourse {
 /**
  * A Warning.
  */
-export interface IWarning {
-  message: string;
-  termId: number;
-}
-
-/**
- * A CourseWarning, specific to a single course, in a single term(id).
- */
-export interface CourseWarning extends IWarning {
-  subject: string;
-  classId: string;
-}
 
 /**
  * A Container for different types of warnings.
@@ -384,6 +374,7 @@ export interface ICourseWithCount {
   courseName: string;
   count: number;
 }
+
 /** ------------------------------------------------------------------------
  *
  *            OLD STUFF FOLLOWS ! This stuff is big outdated and is only
