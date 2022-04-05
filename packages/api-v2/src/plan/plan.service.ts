@@ -3,8 +3,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Student } from "src/student/entities/student.entity";
 import { StudentService } from "src/student/student.service";
 import { DeleteResult, Repository, UpdateResult } from "typeorm";
-import { CreatePlanDto } from "@graduate/common/dto/create-plan.dto";
-import { UpdatePlanDto } from "@graduate/common/dto/update-plan.dto";
+import { CreatePlanDto, UpdatePlanDto } from "../../../common";
 import { Plan } from "./entities/plan.entity";
 
 @Injectable()

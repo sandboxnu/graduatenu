@@ -2093,7 +2093,7 @@ __metadata:
   resolution: "@graduate/api-v2@workspace:packages/api-v2"
   dependencies:
     "@golevelup/ts-jest": ^0.3.2
-    "@graduate/common": "*"
+    "@graduate/common": "workspace:*"
     "@nestjs/cli": ^8.0.0
     "@nestjs/common": ^8.0.0
     "@nestjs/config": ^1.1.6
@@ -2147,6 +2147,7 @@ __metadata:
     "@babel/plugin-proposal-decorators": ^7.17.8
     "@nestjs/mapped-types": ^1.0.1
     axios: ^0.26.1
+    class-validator: ^0.13.2
     dataloader: ^1.4.0
     jest: ^27.5.1
     ts-jest: ^27.1.4

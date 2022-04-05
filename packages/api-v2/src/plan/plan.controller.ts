@@ -12,12 +12,10 @@ import {
   ParseIntPipe,
 } from "@nestjs/common";
 import { PlanService } from "./plan.service";
-import { CreatePlanDto } from "@graduate/common";
-import { UpdatePlanDto } from "@graduate/common";
 import { JwtAuthGuard } from "src/guards/jwt-auth.guard";
 import { AuthenticatedRequest } from "src/auth/interfaces/authenticated-request";
 import { OwnPlanGuard } from "src/guards/own-plan.guard";
-import { GetPlanResponse } from "@graduate/common";
+import { CreatePlanDto, UpdatePlanDto, GetPlanResponse } from "../../../common";
 
 @Controller("plans")
 export class PlanController {
