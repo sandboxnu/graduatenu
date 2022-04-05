@@ -1,9 +1,8 @@
 import { Injectable } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
-import { CreateStudentDto } from "@graduate/common/dto/create-student.dto";
 import { Student } from "src/student/entities/student.entity";
 import { StudentService } from "src/student/student.service";
-import { LoginStudentDto } from "@graduate/common/dto/login-student.dto";
+import { LoginStudentDto, CreateStudentDto } from "../../../common";
 import { JwtPayload } from "./interfaces/jwt-payload";
 import * as bcrypt from "bcrypt";
 

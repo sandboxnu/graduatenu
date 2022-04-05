@@ -6,8 +6,7 @@ import {
   Repository,
   UpdateResult,
 } from "typeorm";
-import { CreateStudentDto } from "@graduate/common/dto/create-student.dto";
-import { UpdateStudentDto } from "@graduate/common/dto/update-student.dto";
+import { CreateStudentDto, UpdateStudentDto } from "../../../common";
 import { Student } from "./entities/student.entity";
 
 @Injectable()
