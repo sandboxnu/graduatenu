@@ -6,6 +6,7 @@
   "browser": "lib/index.js",
   "private": true,
   "scripts": {
+    "test": "jest",
     "dev": "yarn build:dev -w",
     "build": "yarn build:dev && yarn build:browser && yarn build:module",
     "build:dev": "yarn g:babel --root-mode upward -d dist -x '.ts' *.ts",
@@ -13,10 +14,22 @@
     "build:module": "yarn g:cross-env BABEL_ENV=module yarn g:babel --root-mode upward -d module -x '.ts' *.ts"
   },
   "devDependencies": {
-    "axios": "^0.26.1",
+    "jest": "^27.5.1",
+    "ts-jest": "^27.1.4",
     "typescript": "^4.6.2"
   },
   "dependencies": {
+    "axios": "^0.26.1",
     "dataloader": "^1.4.0"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "transform": {
+      "\\.(ts|tsx)$": "ts-jest"
+    }
   }
 }

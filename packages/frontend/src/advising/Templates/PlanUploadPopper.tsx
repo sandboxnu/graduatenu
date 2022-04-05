@@ -14,7 +14,7 @@ import React, {
   useEffect,
 } from "react";
 import CloseIcon from "@material-ui/icons/Close";
-import { Major, Schedule } from "../../../../common/types";
+import { Major, Schedule } from "@graduate/common";
 import { RedColorButton } from "../../components/common/ColoredButtons";
 import { ExcelWorkbookUpload } from "../../components/ExcelUpload";
 import { ICreateTemplatePlan } from "../../models/types";

@@ -14,8 +14,8 @@ import {
   Result,
   Err,
   Ok,
-} from "@graduate/common";
-import { courseToString } from "./course-helpers";
+} from "./types";
+import { courseToString } from "./course-utils";
 
 /**
  * general solution: postorder traversal requirements, producing all solutions at each level.
@@ -188,22 +188,22 @@ export class Major2ValidationTracker implements CourseValidationTracker {
 
   getAll(subject: string, start: number, end: number) {
     return Array.from(this.currentCourses.values()).flatMap(([c, count]) => {
-      let cid = Number(c.classId);
-      let valid = c.subject === subject && cid >= start && cid <= end;
+      const cid = Number(c.classId);
+      const valid = c.subject === subject && cid >= start && cid <= end;
       if (!valid) return [];
       return Array(count).fill(c);
     });
   }
 
   hasEnoughCoursesForBoth(s1: Solution, s2: Solution) {
-    let s1map = Major2ValidationTracker.createTakenMap(s1);
-    let s2map = Major2ValidationTracker.createTakenMap(s2);
+    const s1map = Major2ValidationTracker.createTakenMap(s1);
+    const s2map = Major2ValidationTracker.createTakenMap(s2);
     // iterate through the solution with fewer courses for speed
-    let [fst, snd] =
+    const [fst, snd] =
       s1.sol.length < s2.sol.length ? [s1map, s2map] : [s2map, s1map];
     // for all courses in both solutions, check we have enough courses
-    for (let [cs, fstCount] of fst) {
-      let sndCount = snd.get(cs);
+    for (const [cs, fstCount] of fst) {
+      const sndCount = snd.get(cs);
       // if not in second solution, we have enough (skip)
       if (!sndCount) continue;
       const neededCount = fstCount + sndCount;
@@ -264,14 +264,14 @@ export function validateMajor2(
     taken
   );
 
-  let [solutions, majorRequirementsError] =
+  const [solutions, majorRequirementsError] =
     requirementsResult.type === ResultType.Ok
       ? [requirementsResult.ok, undefined]
       : [undefined, requirementsResult.err];
   if (solutions) {
     return Ok(solutions);
   }
-  let totalCreditsRequirementError =
+  const totalCreditsRequirementError =
     creditsResult.type === ResultType.Ok ? undefined : creditsResult.err;
   return Err({
     majorRequirementsError,
@@ -398,15 +398,15 @@ function validateRangeRequirement(
 ): Result<Array<Solution>, MajorValidationError> {
   // get the eligible courses (Filter out exceptions)
   const exceptions = new Set(r.exceptions.map(courseToString));
-  let courses = tracker
+  const courses = tracker
     .getAll(r.subject, r.idRangeStart, r.idRangeEnd)
     .filter((c) => !exceptions.has(courseToString(c)));
 
-  let solutionsSoFar: Array<Solution> = [];
+  const solutionsSoFar: Array<Solution> = [];
 
   // produce all combinations of the courses
-  for (let course of courses) {
-    let solutionsSoFarWithCourse: Array<Solution> = [];
+  for (const course of courses) {
+    const solutionsSoFarWithCourse: Array<Solution> = [];
     const cs = courseToString(course);
     const courseSol = {
       sol: [cs],
@@ -416,7 +416,7 @@ function validateRangeRequirement(
 
     // Adds the current course to all previous valid solutions if there are
     // enough courses.
-    for (let solutionSoFar of solutionsSoFar) {
+    for (const solutionSoFar of solutionsSoFar) {
       // TODO: if i take a course twice, can both count in the same range?
       // for now assume yes. but ask khoury, then remove this note
       if (tracker.hasEnoughCoursesForBoth(solutionSoFar, courseSol)) {
@@ -529,15 +529,15 @@ function validateXomRequirement(
   }
 
   // solutions w #totalcredits < #required
-  let unfinishedSolutionsSoFar: Array<Solution> = [];
+  const unfinishedSolutionsSoFar: Array<Solution> = [];
   // solutions w #totalCredits >= #required
-  let finishedSolutions: Array<Solution> = [];
+  const finishedSolutions: Array<Solution> = [];
 
-  for (let childRequirementSolutions of allChildRequirementSolutions) {
-    let unfinishedSolutionsWithChild: Array<Solution> = [];
+  for (const childRequirementSolutions of allChildRequirementSolutions) {
+    const unfinishedSolutionsWithChild: Array<Solution> = [];
     // for each child, try each childSolution with each unfinishedSolution
-    for (let childSolution of childRequirementSolutions) {
-      for (let solutionSoFar of unfinishedSolutionsSoFar) {
+    for (const childSolution of childRequirementSolutions) {
+      for (const solutionSoFar of unfinishedSolutionsSoFar) {
         // if we have enough credits for both, add it
         if (tracker.hasEnoughCoursesForBoth(childSolution, solutionSoFar)) {
           const currentSol = combineSolutions(solutionSoFar, childSolution);
@@ -602,15 +602,15 @@ function validateSectionRequirement(
 
   type Solution1 = Solution & { count: number };
   // invariant: requirementCount of unfinished solutions < minRequirementCount
-  let unfinishedSolutionsSoFar: Array<Solution1> = [];
+  const unfinishedSolutionsSoFar: Array<Solution1> = [];
   // solutions where requirement count === minRequirementCount
-  let finishedSolutions: Array<Solution> = [];
+  const finishedSolutions: Array<Solution> = [];
 
-  for (let childRequirementSolutions of allChildRequirementSolutions) {
-    let unfinishedSolutionsWithChild: Array<Solution1> = [];
+  for (const childRequirementSolutions of allChildRequirementSolutions) {
+    const unfinishedSolutionsWithChild: Array<Solution1> = [];
     // for each child, try each childSolution with each unfinishedSolution
-    for (let childSolution of childRequirementSolutions) {
-      for (let {
+    for (const childSolution of childRequirementSolutions) {
+      for (const {
         count: solutionSoFarCount,
         ...solutionSoFar
       } of unfinishedSolutionsSoFar) {

@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { IRequiredCourse, Major, ScheduleCourse } from "@graduate/common";
+import {
+  courseEq,
+  coursesToString,
+  IRequiredCourse,
+  Major,
+  ScheduleCourse,
+} from "@graduate/common";
 import {
   getCompletedRequirementsFromState,
   getUserMajorFromState,
@@ -19,7 +25,7 @@ import {
 import { Grid, Paper } from "@material-ui/core";
 import { AddClassSearchModal } from "../components/AddClassSearchModal";
 import { AddBlock } from "../components/ClassBlocks/AddBlock";
-import { courseEq, coursesToString, flatten } from "../utils/course-helpers";
+import { flatten } from "../utils/course-helpers";
 
 const TitleText = styled.div`
   font-size: 12px;
@@ -44,7 +50,9 @@ const fetchAndFilterCourses = async (cs: IRequiredCourse[]) => {
   return courses.filter((c) => c !== null) as ScheduleCourse[];
 };
 
-const TransferCoursesScreenComponent: React.FC<TransferCoursesScreenProps> = () => {
+const TransferCoursesScreenComponent: React.FC<
+  TransferCoursesScreenProps
+> = () => {
   const major = useSelector(getUserMajorFromState)!;
   const completedRequirements = useSelector(getCompletedRequirementsFromState);
   const dispatch = useDispatch();

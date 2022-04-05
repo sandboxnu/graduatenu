@@ -3,10 +3,12 @@ import { connect } from "react-redux";
 import { Dispatch } from "redux";
 import styled from "styled-components";
 import {
+  APExamGroups2020To2021,
+  courseEq,
+  courseToString,
+  IBExamGroups2020To2021,
   ScheduleCourse,
-  TransferableExam,
   TransferableExamGroup,
-  IRequiredCourse,
 } from "@graduate/common";
 import { AddClassSearchModal } from "./AddClassSearchModal";
 import {
@@ -17,9 +19,6 @@ import { AddBlock } from "./ClassBlocks/AddBlock";
 import { NonDraggableClassBlock } from "./ClassBlocks/NonDraggableClassBlock";
 import { Tooltip } from "@material-ui/core";
 import { UndoDelete } from "./UndoDelete";
-import { APExamGroups2020To2021 } from "@graduate/common";
-import { IBExamGroups2020To2021 } from "@graduate/common";
-import { courseEq, courseToString } from "../utils/course-helpers";
 
 interface TransferCreditsProps {
   transferCredits: ScheduleCourse[];

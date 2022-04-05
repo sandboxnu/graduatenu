@@ -5,7 +5,7 @@ import {
   Major2ValidationTracker,
   validateMajor2,
   validateRequirement,
-} from "../src/utils/major2-validation";
+} from "../src/major2-validation";
 import {
   Concentrations2,
   IAndCourse2,
@@ -22,8 +22,8 @@ import {
   Section,
   Err,
   Ok,
-} from "@graduate/common";
-import { courseToString } from "../src/utils/course-helpers";
+} from "../src/types";
+import { courseToString } from "../src/course-utils";
 import bscs from "../../scrapers/test/mock_majors/bscs.json";
 
 type TestCourse = IRequiredCourse & { credits: number };
@@ -435,54 +435,47 @@ describe("integration suite", () => {
   }
   test("full major", () => {
     const actual = validateMajor2(bscs2, scheduleCourses);
-    const expected = {
-      ok: true,
-      majorRequirementsError: null,
-      totalCreditsRequirementError: null,
-      solutions: [
-        solution(
-          cs1200,
-          cs1210,
-          cs1800,
-          cs1802,
-          cs2500,
-          cs2501,
-          cs2510,
-          cs2511,
-          cs2800,
-          cs2801,
-          cs3000,
-          cs3500,
-          cs3650,
-          cs3700,
-          cs3800,
-          cs4400,
-          cs4500,
-          cs4501,
-          thtr1170,
-          cs4410,
-          cs2550,
-          ds4300,
-          math1341,
-          math1342,
-          math2331,
-          math3081,
-          phil1145,
-          eece2160,
-          phys1151,
-          phys1152,
-          phys1153,
-          phys1155,
-          phys1156,
-          phys1157,
-          engw1111,
-          engw3302
-        ),
-      ],
-    };
-    expect(actual).toEqual(expected);
-    expect(taken.length).toBeGreaterThan(expected.solutions[0].sol.length);
+    const expected = [
+      solution(
+        cs1200,
+        cs1210,
+        cs1800,
+        cs1802,
+        cs2500,
+        cs2501,
+        cs2510,
+        cs2511,
+        cs2800,
+        cs2801,
+        cs3000,
+        cs3500,
+        cs3650,
+        cs3700,
+        cs3800,
+        cs4400,
+        cs4500,
+        cs4501,
+        thtr1170,
+        cs4410,
+        cs2550,
+        ds4300,
+        math1341,
+        math1342,
+        math2331,
+        math3081,
+        phil1145,
+        eece2160,
+        phys1151,
+        phys1152,
+        phys1153,
+        phys1155,
+        phys1156,
+        phys1157,
+        engw1111,
+        engw3302
+      ),
+    ];
+    expect(actual).toEqual(Ok(expected));
+    expect(taken.length).toBeGreaterThan(expected.length);
   });
-
-  // const bscsMajor2 =convertToMajor2(bscs as Major);
 });
