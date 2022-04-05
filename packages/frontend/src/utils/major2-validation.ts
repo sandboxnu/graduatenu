@@ -10,20 +10,33 @@ import {
   Requirement2,
   ScheduleCourse,
   Section,
+  ResultType,
+  Result,
+  Err,
+  Ok,
 } from "@graduate/common";
 import { courseToString } from "./course-helpers";
 
-// general solution: postorder traversal requirements, producing all solutions at each level
-// inductive step: combine child solutions to produce solutions for ourselves
+/**
+ * general solution: postorder traversal requirements, producing all solutions at each level.
+ * inductive step: combine child solutions to produce solutions for ourselves
+ */
 
 // ------------------------ TYPES ------------------------
 
-// a single solution, containing a list of courses + # of credits satisfied (needed for XOM)
+/**
+ * A single solution, containing a list of courseToString(c) + # of credits satisfied (needed for XOM)
+ */
 type Solution = {
   minCredits: number;
   maxCredits: number;
   sol: Array<string>;
 };
+
+/**
+ * concentrations are specified by their name or index in the accompanying concentrations list
+ */
+type SelectedConcentrationsType = number | string | (number | string)[];
 
 // Error types and constructors
 type MajorValidationError =
@@ -122,19 +135,10 @@ type TotalCreditsRequirementError = {
   takenCredits: number;
   requiredCredits: number;
 };
-// handy result type, is either OK(T) or ERR(E)
-type Result<T, E> = { ok: T; type: "OK" } | { err: E; type: "ERR" };
-export const Ok = <T, E>(ok: T): Result<T, E> => ({ ok, type: "OK" });
-export const Err = <T, E>(err: E): Result<T, E> => ({ err, type: "ERR" });
 
 export const assertUnreachable = (_: never): never => {
   throw new Error("This code is unreachable");
 };
-
-export const sectionToReq2 = (s: Section): Requirement2 => ({
-  ...s,
-  type: "SECTION",
-});
 
 // for keeping track of courses taken
 interface CourseValidationTracker {
@@ -171,7 +175,11 @@ export class Major2ValidationTracker implements CourseValidationTracker {
   }
 
   get(input: IScheduleCourse) {
-    return this.currentCourses.get(courseToString(input))?.[0] ?? null;
+    const course = this.currentCourses.get(courseToString(input));
+    if (course) {
+      return course[0];
+    }
+    return null;
   }
 
   getCount(input: IScheduleCourse) {
@@ -224,30 +232,25 @@ export class Major2ValidationTracker implements CourseValidationTracker {
 }
 
 // the result of major validation
-type MajorValidationResult = {
-  // true if no errors, false otherwise
-  ok: boolean;
-  majorRequirementsError: MajorValidationError | null;
-  totalCreditsRequirementError: TotalCreditsRequirementError | null;
-  // list of possible solutions, or null of no solution
-  solutions: Solution[] | null;
-};
+type MajorValidationResult = Result<
+  Solution[],
+  {
+    majorRequirementsError?: MajorValidationError;
+    totalCreditsRequirementError?: TotalCreditsRequirementError;
+  }
+>;
 
-// concentrations are specified by their name or index in the concentrations list
 export function validateMajor2(
   major: Major2,
   taken: ScheduleCourse[],
-  concentrations?: string | number | (string | number)[]
+  concentrations?: SelectedConcentrationsType
 ): MajorValidationResult {
   const tracker = new Major2ValidationTracker(taken);
   const concentrationReq = getConcentrationsRequirement(
     concentrations,
     major.concentrations
   );
-  const majorReqs = [
-    ...major.requirementSections.map(sectionToReq2),
-    ...concentrationReq,
-  ];
+  const majorReqs = [...major.requirementSections, ...concentrationReq];
   // create a big AND requirement of all the sections and selected concentrations
   const requirementsResult = validateRequirement(
     {
@@ -262,21 +265,27 @@ export function validateMajor2(
   );
 
   let [solutions, majorRequirementsError] =
-    requirementsResult.type === "OK"
-      ? [requirementsResult.ok, null]
-      : [null, requirementsResult.err];
+    requirementsResult.type === ResultType.Ok
+      ? [requirementsResult.ok, undefined]
+      : [undefined, requirementsResult.err];
+  if (solutions) {
+    return Ok(solutions);
+  }
   let totalCreditsRequirementError =
-    creditsResult.type === "OK" ? null : creditsResult.err;
-  return {
-    ok: !Boolean(totalCreditsRequirementError ?? majorRequirementsError),
-    solutions,
+    creditsResult.type === ResultType.Ok ? undefined : creditsResult.err;
+  return Err({
     majorRequirementsError,
     totalCreditsRequirementError,
-  };
+  });
 }
 
+/**
+ * Produces the selected input concentrations to be included in major validation.
+ * @param inputConcentrations the concentrations to include
+ * @param concentrationsRequirement all available concentrations
+ */
 export function getConcentrationsRequirement(
-  inputConcentrations: undefined | string | number | (string | number)[],
+  inputConcentrations: undefined | SelectedConcentrationsType,
   concentrationsRequirement: Concentrations2
 ): Requirement2[] {
   const selectedConcentrations =
@@ -304,8 +313,7 @@ export function getConcentrationsRequirement(
     }
     concentrationRequirements.push(found);
   }
-  const courses = concentrationRequirements.map(sectionToReq2);
-  return [{ type: "AND", courses }];
+  return [{ type: "AND", courses: concentrationRequirements }];
 }
 
 // normalizes input to an array of strings and numbers
@@ -483,12 +491,10 @@ function validateAndRequirement(
   ];
 
   // Diff solutions of each requirement in the AND
-  for (
-    let childIdx = 0;
-    childIdx < allChildReqSolutions.length;
-    childIdx += 1
-  ) {
-    const childRequirementSolutions = allChildReqSolutions[childIdx];
+  for (const [
+    childIdx,
+    childRequirementSolutions,
+  ] of allChildReqSolutions.entries()) {
     const solutionsSoFarWithChild: Array<Solution> = [];
     for (const solutionSoFar of solutionsSoFar) {
       // Each solution of each subsolution
@@ -666,7 +672,7 @@ function splitChildResults(
   const errs = [];
   for (let i = 0; i < reqs.length; i += 1) {
     const result = reqs[i];
-    if (result.type === "OK") oks.push(result.ok);
+    if (result.type === ResultType.Ok) oks.push(result.ok);
     else errs.push({ ...result.err, childIndex: i });
   }
   return [oks, errs];

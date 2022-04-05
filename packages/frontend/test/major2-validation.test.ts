@@ -1,11 +1,8 @@
 import {
   AndErrorNoSolution,
   assertUnreachable,
-  Err,
   getConcentrationsRequirement,
   Major2ValidationTracker,
-  Ok,
-  sectionToReq2,
   validateMajor2,
   validateRequirement,
 } from "../src/utils/major2-validation";
@@ -23,93 +20,11 @@ import {
   Requirement2,
   ScheduleCourse,
   Section,
+  Err,
+  Ok,
 } from "@graduate/common";
 import { courseToString } from "../src/utils/course-helpers";
 import bscs from "../../scrapers/test/mock_majors/bscs.json";
-
-// case where two of the same course is required, should be false
-// a & a, [a] -> false
-// case where course could be used in two places, but only one produces OK
-// (a | c) & a, [a, c] -> true
-// same as above, but not toplevel and
-// (a | (b & c)) & (a | (b & c)), [a, b, c] -> true
-// (a | b | c | d) & (a | b), [b, d] -> true
-// (a | b | c | d) & (a | b), [b] -> false
-
-// foundations
-// https://catalog.northeastern.edu/undergraduate/computer-information-science/computer-science/bscs/#programrequirementstext
-// (((a & b) | c) & (d | e)) & (d | e)
-// [d, e, c] -> true
-// [d, e, a, b] -> true
-// [d, c] -> false
-// [d, a, b] -> false
-
-// counterexample
-// (a | b | c) & a, [a, b]
-// generative recursion -> non-structural recursion
-// ((a | b) & (b | d)) & a, [a, b, d]
-// generative recursion -> non0-structural recursion
-// ((a    ) & (b    )) & error -> ideally we pop all the way back to when we used 'a'
-// ((a    ) & (    d)) & error
-// ((  | b) & (    d)) & a -> OK
-
-// OR we can use a-normal form! above gets transformed into the following:
-// let 1 = a | b
-// let 2 = b | d
-// let 3 = 1 & 2
-// let 4 = a
-// 3 & 4
-
-// let's say we implement this. what next?
-// => we need errors!
-// what error should we use? probably the deepest one in the ANF expression
-// => also, what is the solution?
-// if the solution is different from the default one, we should display a warning telling student where they will need to override
-// to do this, diff our solution w the default one
-// default: meaning the one the audit uses by default (w/out overrides)
-// => are there other solutions?
-// idk if we'll need this yet
-
-// but wait! how simple is the anf _really_?
-// ((a & b) | (c & d)) & b
-// let 1 = a & b
-// let 2 = c & d
-// let 3 = 1 | 2
-// let 4 = 3 & b
-
-// problem! we evaluate 1 and 2, but we should only evaluate 1 _or_ 2
-// solution:
-// And(l, r) -> If((l,true), (true, r), false)
-// Or(l, r)  -> If((l,false), true, (false, r))
-// ((a & b) | (c & d)) & b =>
-// let 1 = (If (a & b) then true else (c & d))
-// let 4 = (If 1 then b else false)
-// transform & of more than 2 items
-// (a & b & c) =>
-// let 1 = if a then b else false
-// let 2 = if 1 then c else false
-//
-
-// david feedback
-// doesn't seem too complicated?
-
-// sumit
-// compute all cases, take the intersection.
-// consider all non-intersecting options, permute
-// reach out to Pete Manolios (logic and computation)
-
-// dillon idea
-// important idea: iterate by course, not by req.
-// 1. create mapping [course -> list of atoms that it could satisfy], where atom = range or coursereq
-// 2. pick the first course. perform backtracking with each course.
-// important: include the case where the course is not used.
-// potential problem: might be very slow. it runs into solutions LAST, vs previous req, will go through everything
-
-// things to do:
-// - 1. look into how we can use https://github.com/charkour/csps, perhaps read into background of how
-//      csps work: http://aima.cs.berkeley.edu/
-// - 2. begin thinking about how to structure/design a program for dillon's algorithm.
-// -    would be a way to structural recursion backtracking.
 
 type TestCourse = IRequiredCourse & { credits: number };
 const course = (
@@ -380,11 +295,12 @@ function convertToMajor2(old: Major): Major2 {
       minOptions: old.concentrations.minOptions,
       concentrationOptions: old.concentrations.concentrationOptions.map(
         (c) => ({
+          type: "SECTION",
           title: c.name,
           minRequirementCount: c.requirementGroups.length,
-          requirements: Object.values(c.requirementGroupMap)
-            .map(convertToSection)
-            .map(sectionToReq2),
+          requirements: Object.values(c.requirementGroupMap).map(
+            convertToSection
+          ),
         })
       ),
     },
@@ -395,12 +311,14 @@ function convertToSection(r: IMajorRequirementGroup): Section {
   switch (r.type) {
     case "AND":
       return {
+        type: "SECTION",
         minRequirementCount: r.requirements.length,
         requirements: r.requirements.map(convertToRequirement2),
         title: r.name,
       };
     case "OR":
       return {
+        type: "SECTION",
         title: r.name,
         minRequirementCount: 1,
         requirements: [
@@ -413,6 +331,7 @@ function convertToSection(r: IMajorRequirementGroup): Section {
       };
     case "RANGE":
       return {
+        type: "SECTION",
         title: r.name,
         minRequirementCount: 1,
         requirements: [convertToRequirement2(r.requirements)],
@@ -511,7 +430,7 @@ describe("integration suite", () => {
   const scheduleCourses = taken.map(convert);
   for (const r of bscs2.requirementSections) {
     test(r.title, () => {
-      validateRequirement(sectionToReq2(r), tracker);
+      validateRequirement(r, tracker);
     });
   }
   test("full major", () => {
