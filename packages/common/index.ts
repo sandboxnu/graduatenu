@@ -1,9 +1,4 @@
-export {
-  addPrereqsToSchedule,
-  addPrereqsToSchedules,
-} from "./src/prereq_loader";
-export * from "./src/types";
-export * from "./src/ib_exams";
-export * from "./src/ap_exams";
-export * from "./src/constants";
-export * from "./src/course-utils";
+export * from "./src";
+// this file is NOT included in the build, because I couldn't figure out how to
+// compile and retain directory structure (lib/index.js, and lib/src/...).
+// it exists because IDE cannot find types if this file does not exist.

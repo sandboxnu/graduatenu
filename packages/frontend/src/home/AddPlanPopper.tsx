@@ -16,9 +16,13 @@ import { IconButton } from "@material-ui/core";
 import { connect } from "react-redux";
 import { AppState } from "../state/reducers/state";
 import { Dispatch } from "redux";
-import { Major, Schedule, ScheduleCourse } from "@graduate/common";
+import {
+  Major,
+  Schedule,
+  ScheduleCourse,
+  addPrereqsToSchedule,
+} from "@graduate/common";
 import { findMajorFromName } from "../utils/plan-helpers";
-import { addPrereqsToSchedule } from "@graduate/common";
 import Loader from "react-loader-spinner";
 import { createPlanForUser } from "../services/PlanService";
 import {
