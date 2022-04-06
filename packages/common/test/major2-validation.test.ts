@@ -134,12 +134,19 @@ const thtr1170 = course("THTR", 1170, 1);
 const cs4410 = course("CS", 4410);
 const cs2550 = course("CS", 2550);
 const ds4300 = course("DS", 4300);
+const cs4300 = course("CS", 4300);
 const math1341 = course("MATH", 1341);
 const math1342 = course("MATH", 1342);
 const math2331 = course("MATH", 2331);
 const math3081 = course("MATH", 3081);
 const phil1145 = course("PHIL", 1145);
 const eece2160 = course("EECE", 2160);
+const chem1211 = course("CHEM", 1211, 3);
+const chem1212 = course("CHEM", 1212, 1);
+const chem1213 = course("CHEM", 1213, 1);
+const chem1214 = course("CHEM", 1214, 3);
+const chem1215 = course("CHEM", 1215, 1);
+const chem1216 = course("CHEM", 1216, 1);
 const phys1151 = course("PHYS", 1151, 3);
 const phys1152 = course("PHYS", 1152, 1);
 const phys1153 = course("PHYS", 1153, 1);
@@ -433,7 +440,7 @@ describe("integration suite", () => {
       validateRequirement(r, tracker);
     });
   }
-  test("full major", () => {
+  test("alex's full major", () => {
     const actual = validateMajor2(bscs2, scheduleCourses);
     const expected = [
       solution(
@@ -477,5 +484,103 @@ describe("integration suite", () => {
     ];
     expect(actual).toEqual(Ok(expected));
     expect(taken.length).toBeGreaterThan(expected.length);
+  });
+  test("cindy's full major", () => {
+    const taken = [
+      cs1200,
+      cs1800,
+      cs1802,
+      cs2500,
+      cs2501,
+      engw1111,
+      cs2510,
+      cs2511,
+      cs2810,
+      cs2800,
+      cs2801,
+      cs3500,
+      math3081,
+      math1341,
+      math1342,
+      math2331,
+      cs1210,
+      cs3000,
+      cs3650,
+      thtr1170,
+      engw3302,
+      chem1211,
+      chem1212,
+      chem1213,
+      chem1214,
+      chem1215,
+      chem1216,
+      cs3700,
+      cs3800,
+      phil1145,
+      phys1151,
+      phys1152,
+      phys1153,
+      phys1155,
+      phys1156,
+      phys1157,
+      ds3000,
+      cs4400,
+      cs4500,
+      cs4501,
+      cs4300,
+      eece2160,
+    ];
+    const baseClasses = [
+      cs1200,
+      cs1210,
+      cs1800,
+      cs1802,
+      cs2500,
+      cs2501,
+      cs2510,
+      cs2511,
+      cs2800,
+      cs2801,
+      cs3000,
+      cs3500,
+      cs3650,
+      cs3700,
+      cs3800,
+      cs4400,
+      cs4500,
+      cs4501,
+      thtr1170,
+      cs4300,
+      cs2810,
+      ds3000,
+      math1341,
+      math1342,
+      math2331,
+      math3081,
+      phil1145,
+      eece2160,
+    ];
+    const engReqs = [engw1111, engw3302];
+    const physReqs = [
+      phys1151,
+      phys1152,
+      phys1153,
+      phys1155,
+      phys1156,
+      phys1157,
+    ];
+    const chemReqs = [
+      chem1211,
+      chem1212,
+      chem1213,
+      chem1214,
+      chem1215,
+      chem1216,
+    ];
+    const expectedWithChem = solution(...baseClasses, ...chemReqs, ...engReqs);
+    const expectedWithPhys = solution(...baseClasses, ...physReqs, ...engReqs);
+    const scheduleCourses = taken.map(convert);
+    const actual = validateMajor2(bscs2, scheduleCourses);
+    expect(actual).toEqual(Ok([expectedWithChem, expectedWithPhys]));
   });
 });
