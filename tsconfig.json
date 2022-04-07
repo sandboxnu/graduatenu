@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": ["dom", "dom.iterable", "esnext", "es5"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -12,10 +12,11 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "preserveConstEnums": true,
-    "noEmit": true,
     "jsx": "react",
+    "outDir": "./build",
+    "noImplicitAny": true,
+    "strictNullChecks": true,
     "downlevelIteration": true
   },
-  "include": ["src"]
+  "include": ["src", "scrapers/src/**/*", "frontend/**/*"]
 }

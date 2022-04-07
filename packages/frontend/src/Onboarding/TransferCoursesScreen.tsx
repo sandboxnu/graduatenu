@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { AppState } from "../state/reducers/state";
-import { IRequiredCourse, Major, ScheduleCourse } from "@graduate/common";
+import {
+  courseEq,
+  coursesToString,
+  IRequiredCourse,
+  Major,
+  ScheduleCourse,
+} from "@graduate/common";
 import {
   getCompletedRequirementsFromState,
   getUserMajorFromState,
@@ -14,13 +19,13 @@ import styled from "styled-components";
 import { fetchCourse } from "../api";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import {
-  SelectableCourse,
   OnboardingSelectionTemplate,
+  SelectableCourse,
 } from "./GenericOnboarding";
 import { Grid, Paper } from "@material-ui/core";
 import { AddClassSearchModal } from "../components/AddClassSearchModal";
 import { AddBlock } from "../components/ClassBlocks/AddBlock";
-import { courseEq, coursesToString, flatten } from "../utils/course-helpers";
+import { flatten } from "../utils/course-helpers";
 
 const TitleText = styled.div`
   font-size: 12px;
@@ -48,10 +53,8 @@ const fetchAndFilterCourses = async (cs: IRequiredCourse[]) => {
 const TransferCoursesScreenComponent: React.FC<
   TransferCoursesScreenProps
 > = () => {
-  const major = useSelector((state: AppState) => getUserMajorFromState(state)!);
-  const completedRequirements = useSelector((state: AppState) =>
-    getCompletedRequirementsFromState(state)
-  );
+  const major = useSelector(getUserMajorFromState)!;
+  const completedRequirements = useSelector(getCompletedRequirementsFromState);
   const dispatch = useDispatch();
   const setCompletedCourses = (completedCourses: ScheduleCourse[]) =>
     dispatch(setCompletedCoursesAction(completedCourses));

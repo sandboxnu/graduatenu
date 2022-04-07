@@ -167,7 +167,7 @@ export interface Major2 {
   requirementSections: Section[];
   totalCreditsRequired: number;
   yearVersion: number;
-  concentrations: Concentrations;
+  concentrations: Concentrations2;
 }
 
 /**
@@ -178,6 +178,7 @@ export interface Major2 {
  *        that are accepted for the section to be fulfilled.
  */
 export interface Section {
+  type: "SECTION";
   title: string;
   requirements: Requirement2[];
   minRequirementCount: number;
@@ -237,11 +238,10 @@ export interface IOrCourse2 {
  */
 export interface ICourseRange2 {
   type: "RANGE";
-  creditsRequired: number;
   subject: string;
   idRangeStart: number;
   idRangeEnd: number;
-  exceptions: Requirement2[];
+  exceptions: IRequiredCourse[];
 }
 
 /**
@@ -411,7 +411,7 @@ export interface ScheduleTerm {
  */
 export interface ScheduleCourse {
   name: string;
-  classId: string;
+  classId: string; // Should this be a number?
   subject: string;
   prereqs?: INEUAndPrereq | INEUOrPrereq;
   coreqs?: INEUAndPrereq | INEUOrPrereq;
@@ -632,3 +632,16 @@ export interface IScheduleCourse {
  * A UserChoice is one of OR or RANGE.
  */
 export type UserChoice = ICourseRange | IOrCourse;
+
+export enum ResultType {
+  Ok = "Ok",
+  Err = "Err",
+}
+export type Result<T, E> =
+  | { ok: T; type: ResultType.Ok }
+  | { err: E; type: ResultType.Err };
+export const Ok = <T, E>(ok: T): Result<T, E> => ({ ok, type: ResultType.Ok });
+export const Err = <T, E>(err: E): Result<T, E> => ({
+  err,
+  type: ResultType.Err,
+});

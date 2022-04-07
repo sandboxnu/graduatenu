@@ -2,8 +2,7 @@ import { Button, IconButton, Snackbar } from "@material-ui/core";
 import React from "react";
 import styled from "styled-components";
 import CloseIcon from "@material-ui/icons/Close";
-import { ScheduleCourse } from "@graduate/common";
-import { courseToString } from "../utils/course-helpers";
+import { courseToString, ScheduleCourse } from "@graduate/common";
 
 interface UndoDeleteProps {
   deletedClass: ScheduleCourse | undefined;

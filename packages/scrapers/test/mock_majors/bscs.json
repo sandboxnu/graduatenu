@@ -3,6 +3,11 @@
   "yearVersion": 2018,
   "isLanguageRequired": false,
   "totalCreditsRequired": 0,
+  "concentrations": {
+    "minOptions": 0,
+    "maxOptions": 0,
+    "concentrationOptions": []
+  },
   "nupaths": [],
   "requirementGroups": [
     "Computer Science Overview",

@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { ScheduleCourse } from "@graduate/common";
+import { courseToString, ScheduleCourse } from "@graduate/common";
 import { useSelector } from "react-redux";
-import { Modal } from "@material-ui/core";
 import styled from "styled-components";
-import { XButton } from "./common";
 import { Search } from "./common/Search";
 import { searchCourses } from "../api";
 import AddIcon from "@material-ui/icons/Add";
@@ -11,10 +9,7 @@ import LinearProgress from "@material-ui/core/LinearProgress";
 import { isCourseInSchedule } from "../utils/schedule-helpers";
 import { PrimaryButton } from "./common/PrimaryButton";
 import { NonDraggableClassBlock } from "./ClassBlocks/NonDraggableClassBlock";
-import {
-  courseToString,
-  getScheduleCourseCoreqs,
-} from "../utils/course-helpers";
+import { getScheduleCourseCoreqs } from "../utils/course-helpers";
 import { AppState } from "../state/reducers/state";
 import { safelyGetActivePlanScheduleFromState } from "../state";
 import { DefaultModal } from "./common/DefaultModal";
@@ -83,6 +78,7 @@ const AddClassButton = styled.div`
   -webkit-border-radius: 50px;
   border-radius: 50px;
   align-items: center;
+
   &:hover {
     background: red;
   }

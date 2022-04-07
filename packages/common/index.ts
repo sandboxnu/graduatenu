@@ -1,7 +1,4 @@
-export const Greeter = (name: string) => `Hello ${name}`;
-
-export { addPrereqsToSchedule, addPrereqsToSchedules } from "./prereq_loader";
-export * from "./types";
-export * from "./ib_exams";
-export * from "./ap_exams";
-export * from "./constants";
+export * from "./src";
+// this file is NOT included in the build, because I couldn't figure out how to
+// compile and retain directory structure (lib/index.js, and lib/src/...).
+// it exists because IDE cannot find types if this file does not exist.

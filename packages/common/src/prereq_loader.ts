@@ -1,10 +1,10 @@
 import {
-  Schedule,
   INEUAndPrereq,
   INEUOrPrereq,
-  ScheduleYear,
-  ScheduleTerm,
+  Schedule,
   ScheduleCourse,
+  ScheduleTerm,
+  ScheduleYear,
 } from "./types";
 import DataLoader from "dataloader";
 import Axios from "axios";
@@ -38,7 +38,6 @@ type PrereqQueryResult = undefined | NonEmptyQueryResult;
  * Asynchronously adds prereqs to a Schedule.
  * Does not do mutation.
  * @param schedule the schedule to add prereqs to
- * @param year the year to grab prereqs from (always uses fall).
  */
 export async function addPrereqsToSchedule(
   schedule: Schedule
@@ -53,16 +52,13 @@ export async function addPrereqsToSchedule(
   >(queryCoursePrereqData as any);
 
   // return the results
-  let results = await prereqifySchedule(schedule, loader);
-
-  return results;
+  return await prereqifySchedule(schedule, loader);
 }
 
 /**
  * Asynchronously adds prereqs to a Schedule.
  * Does not do mutation.
  * @param schedules the schedule to add prereqs to
- * @param year the year to grab prereqs from (always uses fall).
  */
 export async function addPrereqsToSchedules(
   schedules: Schedule[]
@@ -77,11 +73,9 @@ export async function addPrereqsToSchedules(
   >(queryCoursePrereqData as any);
 
   // return the results
-  let results = await Promise.all(
+  return await Promise.all(
     schedules.map((sched: Schedule) => prereqifySchedule(sched, loader))
   );
-
-  return results;
 }
 
 /**
@@ -158,6 +152,7 @@ async function prereqifyScheduleTerm(
 /**
  * Asynchronously adds prereqs to a provided course.
  * @param course the course to add prereqs to
+ * @param termId the term to add the prereqs for
  * @param loader the loader
  */
 async function prereqifyScheduleCourse(
@@ -226,7 +221,7 @@ async function queryCoursePrereqData(
   });
 
   // build the query schema
-  const querySchema: string = `
+  const querySchema = `
   query {
     ${courseSchema.reduce(
       (accumulator: string, currentValue: string, index: number) => {

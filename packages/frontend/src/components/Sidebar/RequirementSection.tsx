@@ -1,15 +1,16 @@
 import React from "react";
 import {
-  IMajorRequirementGroup,
-  Requirement,
-  IRequiredCourse,
+  courseToString,
   ICourseRange,
+  IMajorRequirementGroup,
+  IRequiredCourse,
   ISubjectRange,
+  Requirement,
   ScheduleCourse,
 } from "@graduate/common";
 import {
-  IRequirementGroupWarning,
   DNDScheduleCourse,
+  IRequirementGroupWarning,
 } from "../../models/types";
 import styled from "styled-components";
 import ExpandMoreOutlinedIcon from "@material-ui/icons/ExpandMoreOutlined";
@@ -24,7 +25,6 @@ import { AppState } from "../../state/reducers/state";
 import { getCurrentClassCounterFromState } from "../../state";
 import { incrementCurrentClassCounterForActivePlanAction } from "../../state/actions/userPlansActions";
 import { Dispatch } from "redux";
-import { courseToString } from "../../utils/course-helpers";
 
 const SectionHeaderWrapper = styled.div`
   display: flex;

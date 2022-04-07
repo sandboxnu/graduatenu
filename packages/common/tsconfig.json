@@ -6,7 +6,9 @@
     "isolatedModules": true,
     "noEmit": true,
     "esModuleInterop": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "downlevelIteration": true,
+    "resolveJsonModule": true
   },
   "exclude": ["node_modules", "dist"],
   "include": ["**/*.ts"]
