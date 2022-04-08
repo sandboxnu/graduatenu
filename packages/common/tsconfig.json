@@ -1,9 +1,6 @@
 {
   "compilerOptions": {
-    "experimentalDecorators": true,
-    "strictNullChecks": false,
-    "noImplicitAny": false,
-    "target": "es2017",
+    "target": "es5",
     "module": "commonjs",
     "strict": true,
     "isolatedModules": true,
