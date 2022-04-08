@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@babel/plugin-proposal-decorators": "^7.17.8",
+    "@graduate/common": "workspace:^",
     "cross-env": "^7.0.3"
   },
   "devDependencies": {

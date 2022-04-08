@@ -16,7 +16,8 @@
     "lib": ["dom", "dom.iterable", "esnext"],
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react"
+    "jsx": "react",
+    "experimentalDecorators": true
   },
   "include": ["src"]
 }

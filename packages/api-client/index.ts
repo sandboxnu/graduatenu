@@ -1,35 +1,35 @@
 import Axios, { AxiosInstance } from "axios";
-import { CreatePlanDto } from "@graduate/common";
+import { GetStudentResponse } from "@graduate/common";
 
 class APIClient {
   private axios: AxiosInstance;
   auth = {
-    login: async (): Promise<> => {
+    login: async (): Promise<any> => {
       return (await this.axios.post("/api/auth")).data;
     },
-    register: async (): Promise<> => {
+    register: async (): Promise<any> => {
       return (await this.axios.post("/api/auth")).data;
     },
   };
   student = {
-    create: async (): Promise<> => {
+    create: async (): Promise<any> => {
       return (await this.axios.post("/api/create")).data;
     },
-    update: async (): Promise<> => {
+    update: async (): Promise<any> => {
       return (await this.axios.patch("/api/update")).data;
     },
-    student: async (): Promise<> => {
+    student: async (): Promise<GetStudentResponse> => {
       return (await this.axios.get("/api/student")).data;
     },
   };
   plans = {
-    create: async (): Promise<> => {
+    create: async (): Promise<any> => {
       return (await this.axios.post("")).data;
     },
-    update: async (): Promise<> => {
+    update: async (): Promise<any> => {
       return (await this.axios.patch("")).data;
     },
-    plan: async (): Promise<> => {
+    plan: async (): Promise<any> => {
       return (await this.axios.post("/api/plans")).data;
     },
   };
