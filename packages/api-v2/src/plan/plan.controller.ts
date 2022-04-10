@@ -15,7 +15,12 @@ import { PlanService } from "./plan.service";
 import { JwtAuthGuard } from "src/guards/jwt-auth.guard";
 import { AuthenticatedRequest } from "src/auth/interfaces/authenticated-request";
 import { OwnPlanGuard } from "src/guards/own-plan.guard";
-import { CreatePlanDto, UpdatePlanDto, GetPlanResponse } from "../../../common";
+import {
+  CreatePlanDto,
+  UpdatePlanDto,
+  GetPlanResponse,
+  UpdatePlanResponse,
+} from "../../../common";
 
 @Controller("plans")
 export class PlanController {
@@ -58,7 +63,7 @@ export class PlanController {
   async update(
     @Param("id", ParseIntPipe) id: number,
     @Body() updatePlanDto: UpdatePlanDto
-  ): Promise<UpdatePlanDto> {
+  ): Promise<UpdatePlanResponse> {
     const updateResult = await this.planService.update(id, updatePlanDto);
 
     if (!updateResult) {
