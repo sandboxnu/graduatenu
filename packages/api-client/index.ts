@@ -9,6 +9,9 @@ import {
   UpdatePlanResponse,
   UpdateStudentDto,
   UpdateStudentResponse,
+  INEUAndPrereq,
+  INEUOrPrereq,
+  ScheduleCourse,
 } from "@graduate/common";
 
 class APIClient {
@@ -74,7 +77,100 @@ class APIClient {
   }
 }
 
-class SearchAPIClient {}
+interface SearchClass {
+  name: string;
+  classId: string;
+  subject: string;
+  prereqs?: INEUAndPrereq | INEUOrPrereq;
+  coreqs?: INEUAndPrereq | INEUOrPrereq;
+  maxCredits: number;
+  minCredits: number;
+}
+
+class SearchAPIClient {
+  private axios: AxiosInstance;
+
+  fetchCourse = async (
+    subject: string,
+    classId: string
+  ): Promise<ScheduleCourse> => {
+    const res = await this.axios({
+      method: "post",
+      data: {
+        query: `{ 
+          class(subject: "${subject}", classId: "${classId}") {
+            latestOccurrence {
+              name
+              subject
+              classId
+              maxCredits
+              minCredits
+              prereqs
+              coreqs
+            }
+          }
+        }`,
+      },
+    });
+
+    const courseData = await res.data;
+    if (courseData && courseData.class && courseData.class.latestOccurrence) {
+      const course: ScheduleCourse = courseData.class.latestOccurrence;
+      course.numCreditsMax = courseData.class.latestOccurrence.maxCredits;
+      course.numCreditsMin = courseData.class.latestOccurrence.minCredits;
+      delete courseData.class.latestOccurrence.maxCredits;
+      delete courseData.class.latestOccurrence.minCredits;
+      return course;
+    } else {
+      // throw error?
+    }
+  };
+
+  searchCourse = async (
+    searchQuery: string,
+    minIndex: number = 0,
+    maxIndex: number = 9999
+  ): Promise<ScheduleCourse[]> => {
+    const res = await this.axios({
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      data: JSON.stringify({
+        query: `
+        {
+          search(termId:"202130", query: "${searchQuery}", classIdRange: {min: ${minIndex}, max: ${maxIndex}}) {
+            totalCount 
+            pageInfo { hasNextPage } 
+            nodes { ... on ClassOccurrence { name subject maxCredits minCredits prereqs coreqs classId
+            } 
+          } 
+        } 
+      }`,
+      }),
+    });
+
+    const coursesData = await res.data;
+    const courses: ScheduleCourse[] = [];
+    coursesData.search.nodes.forEach((result: SearchClass) => {
+      const course: ScheduleCourse = {
+        name: result.name,
+        classId: result.classId,
+        subject: result.subject,
+        prereqs: result.prereqs,
+        coreqs: result.coreqs,
+        numCreditsMin: result.minCredits,
+        numCreditsMax: result.maxCredits,
+        semester: null,
+      };
+      courses.push(course);
+    });
+
+    return courses;
+  };
+
+  constructor(baseURL = "https://api.searchneu.com/graphql") {
+    this.axios = Axios.create({ baseURL: baseURL });
+  }
+}
 
 export const API = new APIClient(process.env.API_URL);
-export const SearchAPI = new SearchAPIClient();
+export const SearchAPI = new SearchAPIClient(process.env.SEARCH_URL);
