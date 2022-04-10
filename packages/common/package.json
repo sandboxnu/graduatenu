@@ -4,6 +4,9 @@
   "description": "",
   "author": "",
   "license": "UNLICENSED",
+  "main": "dist/index.js",
+  "module": "module/index.js",
+  "browser": "lib/index.js",
   "private": true,
   "scripts": {
     "test": "jest",

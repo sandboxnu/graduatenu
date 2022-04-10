@@ -2267,7 +2267,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@graduate/api-client@workspace:packages/api-client"
   dependencies:
+    "@babel/plugin-proposal-decorators": ^7.17.8
     "@graduate/common": "*"
+    cross-env: ^7.0.3
   languageName: unknown
   linkType: soft
 
@@ -2322,7 +2324,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@graduate/common@*, @graduate/common@workspace:*, @graduate/common@workspace:^, @graduate/common@workspace:packages/common":
+"@graduate/common@*, @graduate/common@workspace:*, @graduate/common@workspace:packages/common":
   version: 0.0.0-use.local
   resolution: "@graduate/common@workspace:packages/common"
   dependencies:
@@ -9103,7 +9105,6 @@ __metadata:
     "@babel/plugin-proposal-decorators": ^7.17.8
     "@babel/preset-env": ^7.16.11
     "@babel/preset-typescript": ^7.16.7
-    "@graduate/common": "workspace:^"
     "@typescript-eslint/eslint-plugin": ^5.15.0
     "@typescript-eslint/parser": ^5.15.0
     concurrently: ^7.0.0

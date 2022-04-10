@@ -1,10 +1,7 @@
+import { IRequirementGroupWarning, WarningContainer } from "../models/types";
 import {
-  CourseWarning,
-  IRequirementGroupWarning,
   IWarning,
-  WarningContainer,
-} from "../models/types";
-import {
+  CourseWarning,
   ANDSection,
   Concentration,
   courseEq,

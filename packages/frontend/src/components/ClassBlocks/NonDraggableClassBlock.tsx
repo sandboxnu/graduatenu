@@ -2,9 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { Card } from "@material-ui/core";
 import { ClassBlockBody } from "./ClassBlockBody";
-import { ScheduleCourse } from "@graduate/common";
+import { ScheduleCourse, CourseWarning } from "@graduate/common";
 import { GraduateGrey } from "../../constants";
-import { CourseWarning } from "../../models/types";
 
 const Block = styled(Card)`
   height: 30px;
