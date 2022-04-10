@@ -1,40 +1,75 @@
 import Axios, { AxiosInstance } from "axios";
-import { GetStudentResponse } from "@graduate/common";
+import {
+  CreatePlanDto,
+  CreateStudentDto,
+  GetPlanResponse,
+  GetStudentResponse,
+  LoginStudentDto,
+  UpdatePlanDto,
+  UpdatePlanResponse,
+  UpdateStudentDto,
+  UpdateStudentResponse,
+} from "@graduate/common";
 
 class APIClient {
   private axios: AxiosInstance;
   auth = {
-    login: async (): Promise<any> => {
-      return (await this.axios.post("/api/auth")).data;
+    login: async (
+      loginUserDto: LoginStudentDto
+    ): Promise<GetStudentResponse> => {
+      return (await this.axios.post("/api/auth/login", { ...loginUserDto }))
+        .data;
     },
-    register: async (): Promise<any> => {
-      return (await this.axios.post("/api/auth")).data;
+    register: async (
+      createStudentDto: CreateStudentDto
+    ): Promise<GetStudentResponse> => {
+      return (
+        await this.axios.post("/api/auth/register", { ...createStudentDto })
+      ).data;
     },
   };
   student = {
-    create: async (): Promise<any> => {
-      return (await this.axios.post("/api/create")).data;
-    },
-    update: async (): Promise<any> => {
-      return (await this.axios.patch("/api/update")).data;
+    update: async (
+      updateStudentDto: UpdateStudentDto
+    ): Promise<UpdateStudentResponse> => {
+      return (
+        await this.axios.patch("/api/students/me", { ...updateStudentDto })
+      ).data;
     },
     student: async (): Promise<GetStudentResponse> => {
-      return (await this.axios.get("/api/student")).data;
+      return (await this.axios.get("/api/students/me")).data;
+    },
+    studentWithPlan: async (): Promise<GetStudentResponse> => {
+      return (
+        await this.axios.get("/api/students/me", {
+          params: { isWithPlans: true },
+        })
+      ).data;
+    },
+    delete: async (): Promise<void> => {
+      return (await this.axios.delete("/api/students/me")).data;
     },
   };
   plans = {
-    create: async (): Promise<any> => {
-      return (await this.axios.post("")).data;
+    create: async (createPlanDto: CreatePlanDto): Promise<GetPlanResponse> => {
+      return (await this.axios.post("/api/plans", { ...createPlanDto })).data;
     },
-    update: async (): Promise<any> => {
-      return (await this.axios.patch("")).data;
+    get: async (id: number): Promise<GetPlanResponse> => {
+      return (await this.axios.get(`/api/plans/${id}`)).data;
     },
-    plan: async (): Promise<any> => {
-      return (await this.axios.post("/api/plans")).data;
+    update: async (
+      id: number,
+      updatePlanDto: UpdatePlanDto
+    ): Promise<UpdatePlanResponse> => {
+      return (await this.axios.patch(`/api/plans/${id}`, { ...updatePlanDto }))
+        .data;
+    },
+    delete: async (id: number): Promise<void> => {
+      return (await this.axios.delete(`/api/plans/${id}`)).data;
     },
   };
 
-  constructor(baseURL: string = "") {
+  constructor(baseURL = "") {
     this.axios = Axios.create({ baseURL: baseURL });
   }
 }
