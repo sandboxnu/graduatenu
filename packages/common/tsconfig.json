@@ -9,7 +9,8 @@
     "skipLibCheck": true,
     "downlevelIteration": true,
     "resolveJsonModule": true,
-    "strictPropertyInitialization": false
+    "strictPropertyInitialization": false,
+    "experimentalDecorators": true
   },
   "exclude": ["node_modules", "dist"],
   "include": ["**/*.ts"]

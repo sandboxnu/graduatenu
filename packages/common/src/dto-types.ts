@@ -11,7 +11,7 @@ import {
 } from "class-validator";
 import { CourseWarning, IWarning, Schedule, ScheduleCourse } from "./types";
 
-import { PartialType } from "@nestjs/mapped-types";
+// import { PartialType } from "@nestjs/mapped-types";
 
 export class CreatePlanDto {
   @IsString()
@@ -41,7 +41,7 @@ export class CreatePlanDto {
   warnings: IWarning[];
 }
 
-export class UpdatePlanDto extends PartialType(CreatePlanDto) {}
+// export class UpdatePlanDto extends PartialType(CreatePlanDto) {}
 
 export class CreateStudentDto {
   @IsNotEmpty()
@@ -102,7 +102,7 @@ export class CreateStudentDto {
   concentration?: string;
 }
 
-export class UpdateStudentDto extends PartialType(CreateStudentDto) {}
+// export class UpdateStudentDto extends PartialType(CreateStudentDto) {}
 
 export class LoginStudentDto {
   @IsNotEmpty()
