@@ -12,7 +12,7 @@ export function findMajorFromName(
   majors: Major[],
   catalogYear: number | null | undefined
 ): Major | undefined {
-  let major: Major | undefined = majors.find(
+  const major: Major | undefined = majors.find(
     (major) => major.name === name && major.yearVersion === catalogYear
   );
   if (!major) {

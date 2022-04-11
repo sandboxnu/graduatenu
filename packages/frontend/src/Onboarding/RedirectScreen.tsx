@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
-import { Redirect } from "react-router";
+import { Navigate } from "react-router";
 import { batch, useDispatch } from "react-redux";
 import { fetchActiveUser } from "../services/UserService";
 import {
@@ -94,7 +94,7 @@ export const RedirectScreen: React.FC<Props> = ({ redirectUrl }) => {
       path: "/",
       domain: window.location.hostname,
     });
-    return <Redirect to="/" />;
+    return <Navigate to="/" />;
   }
 
   if (isError) {
@@ -106,19 +106,19 @@ export const RedirectScreen: React.FC<Props> = ({ redirectUrl }) => {
   }
 
   if (redirectUrl && redirectUrl !== "/redirect") {
-    return <Redirect to={redirectUrl} />;
+    return <Navigate to={redirectUrl} />;
   }
 
   if (isAdvisor === false) {
     // student
     if (needsToGoToOnboarding) {
-      return <Redirect to="/onboarding" />;
+      return <Navigate to="/onboarding" />;
     } else {
-      return <Redirect to="/home" />;
+      return <Navigate to="/home" />;
     }
   } else {
     // advisor
-    return <Redirect to="/advisor/appointments" />;
+    return <Navigate to="/advisor/appointments" />;
   }
 };
 

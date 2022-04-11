@@ -5,7 +5,6 @@ import { IPlanData, ITemplatePlan, IUpdateTemplatePlan } from "../models/types";
 import { updatePlanForUser } from "../services/PlanService";
 import {
   setActivePlanStatusAction,
-  updateActivePlanAction,
   updateActivePlanTimestampAction,
 } from "../state/actions/userPlansActions";
 import { useCallback, useEffect, useRef } from "react";

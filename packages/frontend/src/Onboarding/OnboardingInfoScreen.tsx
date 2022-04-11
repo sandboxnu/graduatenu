@@ -2,7 +2,7 @@ import { Form, Formik } from "formik";
 import { MenuItem, TextField, Tooltip } from "@material-ui/core";
 import React from "react";
 import { connect } from "react-redux";
-import { RouteComponentProps, useHistory, withRouter } from "react-router";
+import { useNavigate } from "react-router";
 import { Dispatch } from "redux";
 import * as Yup from "yup";
 import styled from "styled-components";
@@ -51,9 +51,7 @@ interface OnboardingReduxStateProps {
   majors: Major[];
 }
 
-type Props = OnboardingReduxDispatchProps &
-  OnboardingReduxStateProps &
-  RouteComponentProps<{}>;
+type Props = OnboardingReduxDispatchProps & OnboardingReduxStateProps;
 
 const OnboardingScreenComponent: React.FC<Props> = ({
   majors,
@@ -65,7 +63,7 @@ const OnboardingScreenComponent: React.FC<Props> = ({
   setConcentration,
   setCoopCycle,
 }: Props) => {
-  const history = useHistory();
+  const history = useNavigate();
 
   const catalogYearSet = [
     ...Array.from(new Set(majors.map((major) => major.yearVersion.toString()))),
@@ -122,7 +120,7 @@ const OnboardingScreenComponent: React.FC<Props> = ({
     setConcentration(nullOrString(values.concentration));
     setCoopCycle(nullOrString(values.coopCycle));
 
-    history.push("/completedCourses");
+    history("/completedCourses");
   };
 
   return (
@@ -343,4 +341,4 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 export const OnboardingInfoScreen = connect(
   mapStateToProps,
   mapDispatchToProps
-)(withRouter(OnboardingScreenComponent));
+)(OnboardingScreenComponent);

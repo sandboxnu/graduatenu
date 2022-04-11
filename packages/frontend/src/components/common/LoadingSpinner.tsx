@@ -1,5 +1,5 @@
 import React from "react";
-import Loader from "react-loader-spinner";
+import { Puff } from "react-loader-spinner";
 import styled from "styled-components";
 import { NORTHEASTERN_RED } from "../../constants";
 const SpinnerWrapper = styled.div<any>`
@@ -18,12 +18,11 @@ interface SpinnerProps {
 export const LoadingSpinner: React.FC<SpinnerProps> = ({ isTall }) => {
   return (
     <SpinnerWrapper isTall={isTall}>
-      <Loader
-        type="Puff"
+      <Puff
         color={NORTHEASTERN_RED}
         height={100}
         width={100}
-        timeout={5000} //5 secs
+        // timeout={5000} //5 secs
       />
     </SpinnerWrapper>
   );

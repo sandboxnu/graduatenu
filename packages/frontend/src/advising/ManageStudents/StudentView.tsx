@@ -25,7 +25,7 @@ import { LoadingSpinner } from "../../components/common/LoadingSpinner";
 import { NonEditableSchedule } from "../../components/Schedule/ScheduleComponents";
 import { SwitchPlanList } from "../../components/SwitchPlan/SwitchPlanList";
 import { ButtonHeader, Container, PlanTitle, ScheduleWrapper } from "./Shared";
-import { useHistory, useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { AssignTemplateToUserModal } from "./AssignTemplateToUserModal";
 import { alterScheduleToHaveCorrectYears } from "../../utils/schedule-helpers";
 import { deleteTemplatePlan } from "../../services/TemplateService";
@@ -127,9 +127,6 @@ const ButtonContainer = styled.div`
   display: flex;
 `;
 
-interface ParamProps {
-  id: string;
-}
 
 interface StudentViewProps {
   user: any;
@@ -137,11 +134,10 @@ interface StudentViewProps {
 }
 
 export const StudentView: React.FC<StudentViewProps> = ({
-  user,
   fetchingStudent,
 }) => {
-  const history = useHistory();
-  const routeParams = useParams<ParamProps>();
+  const history = useNavigate();
+  const routeParams = useParams();
   const id = Number(routeParams.id);
   const [noPlans, setNoPlans] = useState(false);
   const [openModal, setOpenModal] = useState(false);
@@ -241,7 +237,7 @@ export const StudentView: React.FC<StudentViewProps> = ({
               <Tooltip title="Edit this student's plan">
                 <IconButton
                   onClick={() =>
-                    history.push(
+                    history(
                       `/advisor/manageStudents/${
                         student!.id
                       }/expanded/${planId!}?edit=true`
@@ -253,7 +249,7 @@ export const StudentView: React.FC<StudentViewProps> = ({
               </Tooltip>
               <IconButton
                 onClick={() =>
-                  history.push(
+                  history(
                     `/advisor/manageStudents/${student!.id}/expanded/${planId!}`
                   )
                 }
@@ -272,7 +268,7 @@ export const StudentView: React.FC<StudentViewProps> = ({
 
   return (
     <Container>
-      <IconButton onClick={() => history.push(`/advisor/manageStudents`)}>
+      <IconButton onClick={() => history(`/advisor/manageStudents`)}>
         <ArrowBack />
       </IconButton>
       <StudentViewContainer>

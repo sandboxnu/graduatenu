@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { LandingScreen } from "./Onboarding/LandingScreen";
 import { HomeWrapper } from "./home/HomeWrapper";
 import { OnboardingInfoScreen } from "./Onboarding/OnboardingInfoScreen";
@@ -14,8 +14,7 @@ import { NewTemplatesPage } from "./advising/Templates/TemplateInfoPage";
 import { GenericAdvisingTemplateComponent } from "./advising/GenericAdvisingTemplate";
 import TransferableCreditScreen from "./Onboarding/TransferableCreditScreen";
 import { RedirectScreen } from "./Onboarding/RedirectScreen";
-import { ProtectedRoute } from "./components/Routes/ProtectedRoute";
-import { UnprotectedRoute } from "./components/Routes/UnprotectedRoute";
+import { RequireAuth } from "./components/Routes/ProtectedRoute";
 import { StudentsList } from "./advising/ManageStudents/StudentsList";
 import { TemplateBuilderPage } from "./advising/Templates/TemplateBuilderPage";
 import { CourseManagmentPage } from "./advising/CourseManagment";
@@ -29,75 +28,70 @@ import { FrontendErrorPage } from "./error/ErrorPages";
 export const App = ({ store }: { store: Store }) => {
   return (
     <Provider store={store}>
-      <Router>
+      <BrowserRouter>
         <ErrorBoundary FallbackComponent={FrontendErrorPage}>
           <ErrorHandler>
-            <Switch>
-              {/* requires login */}
-              <ProtectedRoute path="/home" component={HomeWrapper} />
-              <ProtectedRoute path="/redirect" component={RedirectScreen} />
-              <ProtectedRoute
-                path="/onboarding"
-                component={OnboardingInfoScreen}
-              />
-              <ProtectedRoute path="/profile" component={Profile} />
-              <ProtectedRoute
-                path="/management"
-                component={CourseManagmentPage}
-              />
-              <ProtectedRoute
-                path="/completedCourses"
-                component={CompletedCoursesScreen}
-              />
-              <ProtectedRoute
-                path="/transferCourses"
-                component={TransferCoursesScreen}
-              />
-              <ProtectedRoute
-                path="/transferableCredits"
-                component={TransferableCreditScreen}
-              />
-              <ProtectedRoute path="/advisor" component={AdvisorRouter} />
+            <Routes>
+              <Route element={<RequireAuth />}>
+                {/* requires login */}
+                <Route path="/home" element={<HomeWrapper />} />
+                <Route path="/redirect" element={<RedirectScreen />} />
+                <Route path="/onboarding" element={<OnboardingInfoScreen />} />
+                <Route path="/profile" element={<Profile />} />
+                <Route path="/management" element={<CourseManagmentPage />} />
+                <Route
+                  path="/completedCourses"
+                  element={<CompletedCoursesScreen />}
+                />
+                <Route
+                  path="/transferCourses"
+                  element={<TransferCoursesScreen />}
+                />
+                <Route
+                  path="/transferableCredits"
+                  element={<TransferableCreditScreen/>}
+                />
+                {/* <Route path="/advisor" element={<AdvisorRouter />} /> */}
+              </Route>
               {/* requires not logged in */}
-              <UnprotectedRoute path="/login" component={LoginScreen} />
-              <UnprotectedRoute path="/signup" component={SignupScreen} />
-              <UnprotectedRoute path="/" component={LandingScreen} />
-            </Switch>
+              <Route path="/login" element={<LoginScreen />} />
+              <Route path="/signup" element={<SignupScreen />} />
+              <Route path="/" element={<LandingScreen />} />
+            </Routes>
           </ErrorHandler>
         </ErrorBoundary>
-      </Router>
+      </BrowserRouter>
     </Provider>
   );
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const AdvisorRouter = (props: any) => {
   const { path } = props.match;
 
   return (
     <GenericAdvisingTemplateComponent>
-      <Switch>
-        <Route path={`${path}/appointments`} component={AppointmentsPage} />
-        <Route exact path={`${path}/manageStudents`} component={StudentsList} />
+      <Routes>
+        <Route path={`${path}/appointments`} element={AppointmentsPage} />
+        <Route path={`${path}/manageStudents`} element={StudentsList} />
         <Route
-          exact
-          path={[
-            `${path}/manageStudents/:id`,
-            `${path}/manageStudents/:id/expanded/:planId`,
-          ]}
-          component={GenericStudentView}
+          path={`${path}/manageStudents/:id/expanded/:planId`}
+          element={GenericStudentView}
         />
-        <Route exact path={`${path}/templates`} component={TemplatesListPage} />
         <Route
-          exact
+          path={`${path}/manageStudents/:id`}
+          element={GenericStudentView}
+        />
+        <Route path={`${path}/templates`} element={TemplatesListPage} />
+        <Route
           path={`${path}/templates/templateBuilder/:templateId`}
-          component={TemplateBuilderPage}
+          element={TemplateBuilderPage}
         />
         <Route
-          exact
           path={`${path}/templates/createTemplate`}
-          component={NewTemplatesPage}
+          element={NewTemplatesPage}
         />
-      </Switch>
+      </Routes>
     </GenericAdvisingTemplateComponent>
   );
 };

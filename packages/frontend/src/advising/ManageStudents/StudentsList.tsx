@@ -4,11 +4,10 @@ import {
   IAbrStudent,
   StudentsAPI,
 } from "../../services/AdvisorService";
-import { getAuthToken } from "../../utils/auth-helpers";
 import styled from "styled-components";
 import { LinearProgress } from "@material-ui/core";
 import { Search } from "../../components/common/Search";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router";
 import { Container } from "./Shared";
 
 const StudentListScrollContainer = styled.div`
@@ -81,11 +80,11 @@ const EMPTY_STUDENT_LIST: IAbrStudent[] = [];
 
 const Student = (props: IAbrStudent) => {
   const { email, fullName, nuId, id } = props;
-  const history = useHistory();
+  const history = useNavigate();
   return (
     <StudentContainer
       key={id}
-      onClick={() => history.push(`/advisor/manageStudents/${id}`)}
+      onClick={() => history(`/advisor/manageStudents/${id}`)}
     >
       {fullName}
       <StudentEmailNUIDContainer>

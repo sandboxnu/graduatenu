@@ -191,8 +191,8 @@ export const AddClassSearchModal: React.FC<AddClassSearchModalProps> = (
             key={courseToString(selectedCourse)}
             course={selectedCourse}
             onDelete={() => {
-              let copy = [...selectedCourses];
-              var index = copy.indexOf(selectedCourse);
+              const copy = [...selectedCourses];
+              const index = copy.indexOf(selectedCourse);
               if (index !== -1) {
                 copy.splice(index, 1);
                 setSelectedCourses(copy);

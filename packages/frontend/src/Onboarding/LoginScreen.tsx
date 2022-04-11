@@ -1,16 +1,13 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
-import { withRouter, RouteComponentProps, Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { TextField } from "@material-ui/core";
-import { Major } from "@graduate/common";
-import { ILoginData, IUserData, NamedSchedule } from "../models/types";
+import { ILoginData } from "../models/types";
 import { PrimaryButton } from "../components/common/PrimaryButton";
-import { Dispatch } from "redux";
 import { setStudentAction } from "../state/actions/studentActions";
 import { loginUser } from "../services/UserService";
 import { setAuthTokenAsCookie } from "../utils/auth-helpers";
-import { AppState } from "../state/reducers/state";
 import { SecondaryLinkButton } from "../components/common/LinkButtons";
 
 const Wrapper = styled.div`
@@ -57,18 +54,6 @@ const ButtonContainer = styled.div`
   gap: 0em 1em;
 `;
 
-interface ReduxStoreLoginScreenProps {
-  setStudent: (student: IUserData) => void;
-}
-interface ReduxStoreSignupScreenProps {
-  majors: Major[];
-  setEmail: (email: string) => void;
-}
-
-type Props = ReduxStoreLoginScreenProps &
-  ReduxStoreSignupScreenProps &
-  RouteComponentProps<{}>;
-
 enum ErrorType {
   INVALID_CREDENTIALS,
   OTHER,
@@ -83,7 +68,9 @@ interface LoginScreenState {
   error?: ErrorType;
 }
 
-const LoginScreenComponent: React.FC<Props> = (props) => {
+const LoginScreenComponent: React.FC = () => {
+  const history = useNavigate();
+  const dispatch = useDispatch();
   const [state, setState] = useState<LoginScreenState>({
     emailStr: "",
     passwordStr: "",
@@ -148,7 +135,7 @@ const LoginScreenComponent: React.FC<Props> = (props) => {
           });
         } else {
           // update redux store with logged in user and set cookies
-          props.setStudent(data.user);
+          dispatch(setStudentAction(data.user))
           setAuthTokenAsCookie(data.user.token);
 
           /**
@@ -157,10 +144,10 @@ const LoginScreenComponent: React.FC<Props> = (props) => {
           const isOnboarded = data.user.catalogYear !== null;
           if (isOnboarded) {
             // redirect to home if the user had finished onboarding
-            props.history.push("/home");
+            history("/home");
           } else {
             // redirect to onboarding if the user hadn't finished onboarding
-            props.history.push("/onboarding");
+            history("/onboarding");
           }
         }
       } catch (err) {
@@ -250,7 +237,8 @@ const LoginScreenComponent: React.FC<Props> = (props) => {
   };
 
   // indicates if the user came from login button on welcome page
-  const { fromOnBoarding } = (props.location.state as any) || {
+  const location = useLocation();
+  const { fromOnBoarding } = (location.state as any) || {
     fromOnBoarding: false,
   };
 
@@ -275,10 +263,8 @@ const LoginScreenComponent: React.FC<Props> = (props) => {
         {" or "}
         <Link
           style={{ color: "#EB5757" }}
-          to={{
-            pathname: fromOnBoarding ? "/onboarding" : "/home",
-            state: { fromOnBoardingGuest: fromOnBoarding },
-          }}
+          to={fromOnBoarding ? "/onboarding" : "/home"}
+          state={{ fromOnBoardingGuest: fromOnBoarding }}
         >
           continue as guest
         </Link>
@@ -291,27 +277,4 @@ const LoginScreenComponent: React.FC<Props> = (props) => {
   );
 };
 
-/**
- * Callback to be passed into connect, responsible for dispatching redux actions to update the appstate.
- * @param dispatch responsible for dispatching actions to the redux store.
- */
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-  setStudent: (user: IUserData) => dispatch(setStudentAction(user)),
-});
-
-/**
- * Callback to be passed into connect, responsible for providing the components
- * with the required redux state.
- * @param state the redux store state.
- */
-const mapStateToProps = (_state: AppState) => ({});
-
-/**
- * Convert this React component to a component that's connected to the redux store.
- * When rendering the connecting component, the props assigned in mapStateToProps, do not need to
- * be passed down as props from the parent component.
- */
-export const LoginScreen = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withRouter(LoginScreenComponent));
+export const LoginScreen = LoginScreenComponent;

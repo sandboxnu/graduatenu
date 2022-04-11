@@ -26,7 +26,7 @@ import {
   setActivePlanAction,
 } from "../state/actions/userPlansActions";
 import { IPlanData } from "../models/types";
-import Loader from "react-loader-spinner";
+import { Puff } from "react-loader-spinner";
 import { deletePlanForUser } from "../services/PlanService";
 import { Alert } from "@material-ui/lab";
 
@@ -236,12 +236,11 @@ export class SwitchPlanPopperComponent extends React.Component<
       </div>
     ) : (
       <SpinnerWrapper>
-        <Loader
-          type="Puff"
+        <Puff
           color="#f50057"
           height={100}
           width={100}
-          timeout={5000} //5 secs
+          // timeout={5000} //5 secs
         />
       </SpinnerWrapper>
     );
@@ -264,7 +263,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 export const SwitchPlanPopper = connect<
   ReduxStoreSwitchPlanProps,
   ReduxDispatchSwitchPlanProps,
-  {},
+  any,
   AppState
 >(
   mapStateToProps,

@@ -22,7 +22,7 @@ import { ArrowBack, Check, FullscreenExit } from "@material-ui/icons";
 import Edit from "@material-ui/icons/Edit";
 import styled from "styled-components";
 import { PlanTitle, ButtonHeader, ScheduleWrapper, Container } from "./Shared";
-import { Prompt, useHistory, useLocation, useParams } from "react-router";
+import { useNavigate, useLocation, useParams } from "react-router";
 import { IUserData } from "../../models/types";
 import {
   approvePlanForUser,
@@ -73,11 +73,6 @@ const AlertWrapper = styled.div`
   margin: 12px 0px 12px 0px;
 `;
 
-interface ParamProps {
-  id: string; // id of the student
-  planId: string; // id of the student's plan
-}
-
 interface ExpandedStudentViewProps {
   user: any;
 }
@@ -94,8 +89,8 @@ export const ExpandedStudentView: React.FC<ExpandedStudentViewProps> = ({
 }) => {
   let interval: number | null = null;
 
-  const history = useHistory();
-  const params = useParams<ParamProps>();
+  const history = useNavigate();
+  const params = useParams();
   const queryParams = useQuery();
   const studentId = Number(params.id);
   const planId = Number(params.planId);
@@ -107,7 +102,7 @@ export const ExpandedStudentView: React.FC<ExpandedStudentViewProps> = ({
     ALERT_STATUS.None
   );
 
-  const { plan, activePlanStatus, advisorId, transferCourses } = useSelector(
+  const { plan, advisorId, transferCourses } = useSelector(
     (state: AppState) => ({
       plan: safelyGetActivePlanFromState(state),
       activePlanStatus: getActivePlanStatusFromState(state),
@@ -164,12 +159,9 @@ export const ExpandedStudentView: React.FC<ExpandedStudentViewProps> = ({
       if (plan && student) {
         updatePlanLastViewed(student.id, plan.id, advisorId);
       }
-    }, VIEWING_BUFFER);
+    }, VIEWING_BUFFER) as unknown as number;
   };
-
-  const shouldBlockNavigation = () => {
-    return activePlanStatus !== "Up To Date";
-  };
+  
 
   const onEditPress = () => setEditMode(!editMode);
 
@@ -192,10 +184,10 @@ export const ExpandedStudentView: React.FC<ExpandedStudentViewProps> = ({
         debounce={250}
         timeout={TIMEOUT}
       />
-      <Prompt
+      {/* <Prompt
         when={shouldBlockNavigation()}
         message="You have unsaved changes, are you sure you want to leave?"
-      />
+      /> */}
       <Container>
         <FullScheduleViewContainer>
           {loading ? (
@@ -205,7 +197,7 @@ export const ExpandedStudentView: React.FC<ExpandedStudentViewProps> = ({
               <ExpandedScheduleStudentInfo>
                 <IconButton
                   onClick={() =>
-                    history.push(`/advisor/manageStudents/${studentId}`)
+                    history(`/advisor/manageStudents/${studentId}`)
                   }
                 >
                   <ArrowBack />
@@ -243,7 +235,7 @@ export const ExpandedStudentView: React.FC<ExpandedStudentViewProps> = ({
                   )}
                   <IconButton
                     onClick={() =>
-                      history.push(`/advisor/manageStudents/${studentId}`)
+                      history(`/advisor/manageStudents/${studentId}`)
                     }
                   >
                     <FullscreenExit />

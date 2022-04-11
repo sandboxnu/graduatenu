@@ -208,7 +208,6 @@ const TransferableCreditScreen: React.FC = () => {
       );
 
     const createPlanPromise = () => {
-      let schedule;
       // if (!!coopCycle) {
       //   schedule = generateBlankCompletedCourseSchedule(
       //     academicYear,
@@ -219,7 +218,7 @@ const TransferableCreditScreen: React.FC = () => {
       //     allPlans
       //   );
       // } else {
-      schedule = generateBlankCompletedCourseScheduleNoCoopCycle(
+      const schedule = generateBlankCompletedCourseScheduleNoCoopCycle(
         academicYear,
         graduationYear,
         completedCourseSchedule!

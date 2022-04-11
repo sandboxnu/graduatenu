@@ -23,7 +23,7 @@ export function generateBlankCoopPlan(
   allPlans: Record<string, Schedule[]>
 ): [DNDSchedule, number] {
   const currentPlan = findExamplePlanFromCoopCycle(allPlans, major, coopCycle);
-  let [schedule, counter] = convertToDNDSchedule(currentPlan!, 0);
+  const [schedule, counter] = convertToDNDSchedule(currentPlan!, 0);
   return [clearSchedule(schedule), counter]; // clear all courses from example plan
 }
 
@@ -42,7 +42,7 @@ export function generateInitialSchedule(
   );
 
   // add in completed courses
-  let year = schedule.years[0];
+  const year = schedule.years[0];
   while (
     dndCourses.length > 0 &&
     year <= schedule.years[schedule.years.length - 1]
@@ -74,7 +74,7 @@ export function generateBlankCompletedCourseSchedule(
   coopCycle: string,
   allPlans: Record<string, Schedule[]>
 ) {
-  const [schedule, counter] = generateBlankCoopPlan(major, coopCycle, allPlans);
+  const [schedule] = generateBlankCoopPlan(major, coopCycle, allPlans);
   const yearCorrectedSchedule = alterScheduleToHaveCorrectYears(
     schedule,
     academicYear
@@ -91,7 +91,7 @@ export function generateYearlessSchedule(
   dndCourses: DNDScheduleCourse[],
   numYears: number
 ) {
-  let yearMap: { [key: number]: DNDScheduleYear } = {};
+  const yearMap: { [key: number]: DNDScheduleYear } = {};
   const yearsList = [];
 
   for (let i = 0; i < numYears; i++) {
@@ -229,11 +229,11 @@ export function generateInitialScheduleFromExistingPlan(
   const currentPlan = allPlans[major].find(
     (p: Schedule) => planToString(p) === coopCycle
   );
-  let [schedule, courseCounter] = convertToDNDSchedule(currentPlan!, 0);
+  const [schedule, courseCounter] = convertToDNDSchedule(currentPlan!, 0);
   // set correct year numbers
-  schedule = alterScheduleToHaveCorrectYears(schedule, academicYear);
+  const actualSchedule = alterScheduleToHaveCorrectYears(schedule, academicYear);
 
-  return [schedule, courseCounter];
+  return [actualSchedule, courseCounter];
 }
 
 export const calculateScheduleStartYear = (academicYear: number): number => {
@@ -357,7 +357,7 @@ export function sumCreditsFromCourses(courses: ScheduleCourse[]): number {
 }
 
 export function getNumCoops(schedule: Schedule): number {
-  var num = 0;
+  let num = 0;
   for (const year of schedule.years) {
     const yearSch = schedule.yearMap[year];
     if (yearSch.fall.status === "COOP" || yearSch.spring.status === "COOP") {
@@ -394,7 +394,7 @@ export const convertToDNDSchedule = (
 ): [DNDSchedule, number] => {
   const newSchedule = deepCopy(schedule) as DNDSchedule;
   for (const year of Object.keys(schedule.yearMap)) {
-    var result = convertToDNDCourses(
+    let result = convertToDNDCourses(
       newSchedule.yearMap[year as any].fall.classes as ScheduleCourse[],
       counter
     );

@@ -10,7 +10,6 @@ import {
   Major,
   ScheduleCourse,
 } from "@graduate/common";
-import { RouteComponentProps, withRouter } from "react-router-dom";
 import {
   CourseText,
   OnboardingSelectionTemplate,
@@ -29,10 +28,10 @@ interface CompletedCoursesScreenProps {
   setCompletedRequirements: (completedRequirements: IRequiredCourse[]) => void;
 }
 
-type Props = CompletedCoursesScreenProps & RouteComponentProps;
+type Props = CompletedCoursesScreenProps;
 
 interface State {
-  expandedSections: Map<String, Boolean>;
+  expandedSections: Map<string, boolean>;
   modalVisible: boolean;
   otherCourses: IRequiredCourse[][];
   completedRequirements: IRequiredCourse[];
@@ -41,7 +40,7 @@ interface State {
 class CompletedCoursesComponent extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
-    let expanded = new Map<String, Boolean>();
+    const expanded = new Map<string, boolean>();
     this.props.major.requirementGroups.forEach((reqGroups) =>
       expanded.set(reqGroups, false)
     );
@@ -69,7 +68,7 @@ class CompletedCoursesComponent extends Component<Props, State> {
   }
 
   // changes the expanding state of the specific section
-  onExpand(requirementGroup: string, change: Boolean) {
+  onExpand(requirementGroup: string, change: boolean) {
     this.state.expandedSections.set(requirementGroup, change);
     this.setState({
       expandedSections: this.state.expandedSections,
@@ -78,7 +77,7 @@ class CompletedCoursesComponent extends Component<Props, State> {
 
   // renders the link for show more or show less for the specific requirementGroup, depending on the boolean
   renderShowLink(requirementGroup: string, more: boolean) {
-    let more_less_string = more ? "more" : "less";
+    const more_less_string = more ? "more" : "less";
     return (
       <ButtonLink
         component="button"
@@ -171,7 +170,7 @@ class CompletedCoursesComponent extends Component<Props, State> {
   // Adds the "other courses" to the state in the form of a IRequiredCourse[][] so that they can be
   // processed by renderAllCourses
   addOtherCourses(courses: ScheduleCourse[]) {
-    let reqCourseMap = courses.map((course: ScheduleCourse) => [
+    const reqCourseMap = courses.map((course: ScheduleCourse) => [
       {
         type: "COURSE",
         classId: +course.classId,
@@ -196,8 +195,8 @@ class CompletedCoursesComponent extends Component<Props, State> {
   }
 
   render() {
-    let reqLen = this.props.major.requirementGroups.length;
-    let split = Math.floor(reqLen / 2);
+    const reqLen = this.props.major.requirementGroups.length;
+    const split = Math.floor(reqLen / 2);
     return (
       <OnboardingSelectionTemplate
         screen={1}
@@ -243,6 +242,6 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     dispatch(setCompletedRequirementsAction(completedReqs)),
 });
 
-export const CompletedCoursesScreen = withRouter(
+export const CompletedCoursesScreen = 
   connect(mapStateToProps, mapDispatchToProps)(CompletedCoursesComponent)
-);
+

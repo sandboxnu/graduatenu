@@ -33,6 +33,8 @@ export const SemesterContainer = (props: SemesterContainerProps) => {
         isEditable={props.isEditable}
         transferCourses={props.transferCourses}
         semester={props.semesterWord}
+        // eslint-disable-next-line @typescript-eslint/no-empty-function
+        handleStatusChange={() => {}}
       />
       {props.isExpanded && (
         <SemesterBlock

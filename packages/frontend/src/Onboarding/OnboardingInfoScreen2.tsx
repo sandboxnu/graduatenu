@@ -1,5 +1,5 @@
 import React from "react";
-import { withRouter, RouteComponentProps, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { TextField, Tooltip } from "@material-ui/core";
 import { GenericOnboardingTemplate } from "./GenericOnboarding";
 import { NextButton } from "../components/common/NextButton";
@@ -10,8 +10,6 @@ import { Major, Schedule, ScheduleCourse } from "@graduate/common";
 import {
   generateBlankCompletedCourseSchedule,
   generateBlankCompletedCourseScheduleNoCoopCycle,
-  generateInitialSchedule,
-  generateInitialScheduleNoCoopCycle,
 } from "../utils";
 import {
   setStudentGraduationYearAction,
@@ -21,7 +19,7 @@ import {
   setStudentConcentrationAction,
   setStudentFullNameAction,
 } from "../state/actions/studentActions";
-import Loader from "react-loader-spinner";
+import { Puff } from "react-loader-spinner";
 import {
   FormControl,
   InputLabel,
@@ -105,7 +103,7 @@ interface OnboardingScreenState {
 
 const marginSpace = 12;
 
-type Props = OnboardingScreenProps & RouteComponentProps;
+type Props = OnboardingScreenProps;
 
 class OnboardingScreenComponent extends React.Component<
   Props,
@@ -251,7 +249,7 @@ class OnboardingScreenComponent extends React.Component<
    * Renders the major drop down
    */
   renderMajorDropDown() {
-    let majorNames = this.props.majors.filter(
+    const majorNames = this.props.majors.filter(
       (major) => major.yearVersion === this.state.catalogYear
     ); //takes in a major object return t if you want to keep it (only when catalog)
     return (
@@ -342,7 +340,7 @@ class OnboardingScreenComponent extends React.Component<
    */
   renderCatalogYearDropDown() {
     //need to make chanegs to options to filter out repeat catalog years
-    let majorSet = [
+    const majorSet = [
       ...Array.from(
         new Set(this.props.majors.map((maj) => maj.yearVersion.toString()))
       ),
@@ -420,12 +418,11 @@ class OnboardingScreenComponent extends React.Component<
       //render a spinnner if the majors/plans are still being fetched.
       return (
         <SpinnerWrapper>
-          <Loader
-            type="Puff"
+          <Puff
             color="#f50057"
             height={100}
             width={100}
-            timeout={5000} //5 secs
+            // timeout={5000} //5 secs -> prop doens't eixst anymore
           />
         </SpinnerWrapper>
       );
@@ -542,4 +539,4 @@ const mapStateToProps = (state: AppState) => ({
 export const OnboardingInfoScreen = connect(
   mapStateToProps,
   mapDispatchToProps
-)(withRouter(OnboardingScreenComponent));
+)(OnboardingScreenComponent);

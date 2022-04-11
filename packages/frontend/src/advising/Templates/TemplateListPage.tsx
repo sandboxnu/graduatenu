@@ -9,7 +9,7 @@ import { IFolderData, ITemplatePlan } from "../../models/types";
 import { getFolderExpandedFromState } from "../../state";
 import { toggleTemplateFolderExpandedAction } from "../../state/actions/advisorActions";
 import { AppState } from "../../state/reducers/state";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   RedColorButton,
   WhiteColorButton,
@@ -254,11 +254,11 @@ const FolderComponent: React.FC<FolderProps> = (props: FolderProps) => {
 };
 
 const Template: React.FC<TemplateProps> = ({ name, id }) => {
-  const history = useHistory();
+  const history = useNavigate();
   return (
     <TemplateName
       onClick={() => {
-        history.push(`/advisor/templates/templateBuilder/${id}`);
+        history(`/advisor/templates/templateBuilder/${id}`);
       }}
     >
       {name}

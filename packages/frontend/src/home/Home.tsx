@@ -6,7 +6,7 @@ import styled from "styled-components";
 import { convertTermIdToYear } from "../utils";
 import { withToast } from "./toastHook";
 import { AppearanceTypes } from "react-toast-notifications";
-import { withRouter, RouteComponentProps, Prompt } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
 import { AppState } from "../state/reducers/state";
 import { Dispatch } from "redux";
@@ -164,8 +164,9 @@ interface ReduxDispatchHomeProps {
 
 type Props = ToastHomeProps &
   ReduxStoreHomeProps &
-  ReduxDispatchHomeProps &
-  RouteComponentProps;
+  ReduxDispatchHomeProps & {
+    navigate: ReturnType<typeof useNavigate>
+  };
 
 const VIEWING_BUFFER = 30000; // 30 seconds
 const TIMEOUT = 900000; // 15 minutes
@@ -191,6 +192,7 @@ class HomeComponent extends React.Component<Props> {
     if (this.shouldBlockNavigation()) {
       window.onbeforeunload = () => true;
     } else {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       //@ts-ignore
       window.onbeforeunload = undefined;
     }
@@ -220,7 +222,7 @@ class HomeComponent extends React.Component<Props> {
           this.props.userId
         );
       }
-    }, VIEWING_BUFFER);
+    }, VIEWING_BUFFER) as unknown as number;
   }
 
   sendPlanUpdates = () => {
@@ -244,7 +246,7 @@ class HomeComponent extends React.Component<Props> {
     // remove existing toasts
     this.props.toastStack.forEach((t) => this.props.removeToast(t.id));
 
-    let numVisibleWarnings: number = 0;
+    let numVisibleWarnings = 0;
     this.props.warnings.forEach((w) => {
       //ensuring we only propogate 5 toasts at a time
       const yearIdx = this.props.activePlan!.schedule.years.indexOf(
@@ -288,7 +290,7 @@ class HomeComponent extends React.Component<Props> {
     alert(
       "Your plan has been updated and you have been logged out. You will be redirected to the welcome screen."
     );
-    this.props.history.push("/");
+    this.props.navigate("/");
     this.props.logOut();
   };
 
@@ -334,10 +336,10 @@ class HomeComponent extends React.Component<Props> {
           debounce={250}
           timeout={TIMEOUT}
         />
-        <Prompt
+        {/* <Prompt -> doesn't exist in react router v6
           when={this.shouldBlockNavigation()}
           message="You have unsaved changes, are you sure you want to leave?"
-        />
+        /> */}
         <HomeTop>
           <HomeTopInnerContainer>
             <HomeText href="#">GraduateNU</HomeText>
@@ -401,10 +403,23 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     dispatch(incrementCurrentClassCounterForActivePlanAction()),
 });
 
+export const withRouter = <T,>(Component: React.FC<T>) => {
+  return (props: T) => {
+    const navigate = useNavigate();
+    
+    return (
+      <Component
+        navigate={navigate}
+        {...props}
+        />
+    );
+  };
+};
+
 export const Home = connect<
   ReduxStoreHomeProps,
   ReduxDispatchHomeProps,
-  {},
+  any,
   AppState
 >(
   mapStateToProps,

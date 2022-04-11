@@ -11,7 +11,7 @@ import {
   moveCourse,
   addCourseFromSidebar,
 } from "../../utils";
-import { Status, SeasonWord, ScheduleCourse } from "@graduate/common";
+import { SeasonWord, Status,  } from "@graduate/common";
 import {
   DNDSchedule,
   DNDScheduleYear,
@@ -79,10 +79,6 @@ interface ScheduleProps {
   readonly schedule?: DNDSchedule;
   readonly isEditable: boolean;
   readonly collapsibleYears: boolean;
-}
-
-interface NonEditableProps {
-  schedule?: DNDSchedule;
 }
 
 const ScheduleComponent: React.FC<ScheduleProps> = ({

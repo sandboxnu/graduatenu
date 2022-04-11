@@ -3,7 +3,7 @@ import { Autocomplete } from "@material-ui/lab";
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import { Link, RouteComponentProps } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import {
   WhiteColorButton,
@@ -70,15 +70,15 @@ interface DropdownProps {
   readonly setValue: (value: string | null) => void;
 }
 
-export const NewTemplatesPage: React.FC<RouteComponentProps<{}>> = ({
-  history,
+export const NewTemplatesPage: React.FC = ({
 }) => {
+  const history = useNavigate();
   const dispatch = useDispatch();
   const [name, setName] = useState("");
   const [major, setMajor] = useState<string | null>(null);
   const [concentration, setConcentration] = useState<string | null>(null);
   const [hasConcentrationError, setHasConcentrationError] = useState(false);
-  const [hasDuplicateFolderName, setHasDuplicateFolderName] = useState(false);
+  const [hasDuplicateFolderName] = useState(false);
   const [showConcentrationError, setShowConcentrationError] = useState(false);
   const [catalogYear, setCatalogYear] = useState<string | null>(null);
   const [coopCycle, setCoopCycle] = useState<string | null>(null);
@@ -167,7 +167,6 @@ export const NewTemplatesPage: React.FC<RouteComponentProps<{}>> = ({
         setSelectedFolderId,
         newFolderName,
         setNewFolderName,
-        setError: () => {},
       }}
     >
       <NewTemplatesPageContainer>
@@ -239,7 +238,7 @@ export const NewTemplatesPage: React.FC<RouteComponentProps<{}>> = ({
           <RedColorButton
             onClick={async () => {
               const planId = await onSubmit();
-              history.push(`/advisor/templates/templateBuilder/${planId}`);
+              history(`/advisor/templates/templateBuilder/${planId}`);
             }}
             style={{ width: buttonSize }}
             disabled={disabled}

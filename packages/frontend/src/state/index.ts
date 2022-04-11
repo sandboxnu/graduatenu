@@ -1,7 +1,7 @@
-import { IPlanData, StatusEnum } from "../models/types";
+import { IPlanData  } from "../models/types";
 import { AppState } from "./reducers/state";
 import { CourseWarning, IWarning, DNDScheduleTerm } from "../models/types";
-import { Concentration, Major, Schedule, ScheduleTerm } from "@graduate/common";
+import { Major, Schedule, ScheduleTerm } from "@graduate/common";
 import { findMajorFromName } from "../utils/plan-helpers";
 import { convertTermIdToSeason, getCreditsTakenInSchedule } from "../utils";
 

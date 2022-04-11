@@ -4,7 +4,7 @@ import { RedColorButton } from "./ColoredButtons";
 import { resetStudentAction } from "../../state/actions/studentActions";
 import { removeAuthTokenFromCookies } from "../../utils/auth-helpers";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router";
 
 const Header = styled.div`
   display: flex;
@@ -23,12 +23,12 @@ const HomeText = styled.a`
 
 export const GraduateHeader: React.FC = () => {
   const dispatch = useDispatch();
-  const history = useHistory();
+  const history = useNavigate();
   const logOut = () => {
     dispatch(resetStudentAction());
     window.location.reload();
     removeAuthTokenFromCookies();
-    history.push("/");
+    history("/");
   };
   return (
     <Header>

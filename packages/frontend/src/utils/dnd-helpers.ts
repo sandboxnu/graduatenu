@@ -156,7 +156,7 @@ export async function addCourseFromSidebar(
     destSemesterSeason
   ];
 
-  let courseData: string[] = draggableId.split(" ");
+  const courseData: string[] = draggableId.split(" ");
   let scheduleCourse: ScheduleCourse | null = null;
 
   if (source.droppableId === GENERIC_COURSE_DROPPABLE_ID) {
@@ -175,7 +175,7 @@ export async function addCourseFromSidebar(
     return;
   }
 
-  let movedClass: DNDScheduleCourse = convertToDNDCourses(
+  const movedClass: DNDScheduleCourse = convertToDNDCourses(
     [scheduleCourse!],
     currentClassCounter
   )[0][0];

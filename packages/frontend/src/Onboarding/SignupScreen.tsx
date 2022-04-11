@@ -2,13 +2,13 @@ import { Form, Formik } from "formik";
 import React from "react";
 import { Dispatch } from "redux";
 import { connect } from "react-redux";
-import { withRouter, RouteComponentProps, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { PrimaryButton } from "../components/common/PrimaryButton";
 import * as Yup from "yup";
 import { TextField } from "@material-ui/core";
 import { IUserData } from "../models/types";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router";
 import { setStudentAction } from "../state/actions/studentActions";
 import { loginUser, registerUser } from "../services/UserService";
 import { setAuthTokenAsCookie } from "../utils/auth-helpers";
@@ -79,20 +79,20 @@ interface SignupReduxStoreProps {
   majors: Major[];
 }
 
-type Props = SignupReduxStoreProps & RouteComponentProps<{}>;
+type Props = SignupReduxStoreProps;
 
 const SignupScreenComponent: React.FC<Props> = ({
   setStudentAction,
   majors,
   isFetchingMajors,
 }) => {
-  const history = useHistory();
+  const history = useNavigate();
 
   if (majors.length === 0) {
     if (isFetchingMajors) {
       return <LoadingSpinner />;
     } else {
-      history.push("/");
+      history("/");
     }
   }
 
@@ -123,7 +123,7 @@ const SignupScreenComponent: React.FC<Props> = ({
             otherInfo.email
           );
           setStudentAction(initialStudent);
-          history.push("/onboarding");
+          history("/onboarding");
         }
       }
     };
@@ -236,4 +236,4 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 export const SignupScreen = connect(
   mapStateToProps,
   mapDispatchToProps
-)(withRouter(SignupScreenComponent));
+)(SignupScreenComponent);

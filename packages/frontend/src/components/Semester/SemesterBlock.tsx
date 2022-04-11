@@ -2,7 +2,8 @@ import React from "react";
 import { Droppable } from "react-beautiful-dnd";
 import { ClassBlock, NonDraggableClassBlock } from "../ClassBlocks";
 import { AddBlock } from "../ClassBlocks/AddBlock";
-import { ClassList, EmptyBlock } from "..";
+import { ClassList } from "../ClassList";
+import { EmptyBlock } from "../EmptyBlock";
 import { AddClassSearchModal } from "../AddClassSearchModal";
 import {
   CourseWarning,
@@ -125,7 +126,6 @@ function renderTooltip(warnings: IWarning[]) {
 const NonEditableSemesterBlockComponent = (props: NonEditProps) => {
   const renderBody = (props: NonEditProps) => {
     const { semester, courseWarnings } = props;
-    const status = semester.status;
     return semester.classes.map((scheduleCourse, index) => {
       if (!!scheduleCourse) {
         return (
@@ -133,6 +133,7 @@ const NonEditableSemesterBlockComponent = (props: NonEditProps) => {
             key={index}
             course={scheduleCourse}
             warnings={findCourseWarnings(courseWarnings, scheduleCourse)}
+            // eslint-disable-next-line @typescript-eslint/no-empty-function
             onDelete={() => {}}
             hideDelete={true}
           />
@@ -408,13 +409,12 @@ const NonEditableSemesterBlock = connect(mapStateToProps)(
   NonEditableSemesterBlockComponent
 );
 
-export class SemesterBlock extends React.Component<SemesterBlockProps> {
-  render() {
-    const { semester, isEditable } = this.props;
+export const SemesterBlock : React.FC<SemesterBlockProps> = (props) => {
+    const { isEditable } = props;
     return isEditable ? (
-      <EditableSemesterBlock {...this.props}></EditableSemesterBlock>
+      <EditableSemesterBlock {...props}></EditableSemesterBlock>
     ) : (
-      <NonEditableSemesterBlock {...this.props}></NonEditableSemesterBlock>
+      <NonEditableSemesterBlock {...props}></NonEditableSemesterBlock>
     );
   }
-}
+

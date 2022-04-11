@@ -231,7 +231,7 @@ export const userPlansReducer = (
         return draft;
       }
       case getType(setActivePlanCoopCycleAction): {
-        const { coopCycle, allPlans, academicYear, graduationYear } =
+        const { coopCycle, allPlans, academicYear } =
           action.payload;
 
         if (!coopCycle) {
@@ -456,7 +456,7 @@ function closePastYears(draft: UserPlansState, academicYear: number) {
   draft.closedYears[draft.activePlan!] = [];
 
   const numYears = draft.plans[draft.activePlan!]?.schedule.years.length;
-  for (var i = 0; i < numYears; i++) {
+  for (let i = 0; i < numYears; i++) {
     if (isYearInPast(i, academicYear)) {
       draft.closedYears[draft.activePlan!].push(i);
     }

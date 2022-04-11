@@ -187,17 +187,17 @@ class RequirementSectionComponent extends React.Component<
    * Stores each DNDScheduleCourse into this.state.classData
    */
   async fetchClassData() {
-    let majorRequirementGroup: IMajorRequirementGroup = this.props.contents;
+    const majorRequirementGroup: IMajorRequirementGroup = this.props.contents;
 
     if (majorRequirementGroup.type === "RANGE") {
       return;
     }
 
-    let requirements: Requirement[] = majorRequirementGroup.requirements.filter(
+    const requirements: Requirement[] = majorRequirementGroup.requirements.filter(
       (requirement) => requirement.type !== "RANGE"
     );
 
-    let promises: Promise<ScheduleCourse | null>[] = [];
+    const promises: Promise<ScheduleCourse | null>[] = [];
 
     function addPromiseForRequirements(reqs: Requirement[]) {
       for (const r of reqs) {
@@ -216,18 +216,18 @@ class RequirementSectionComponent extends React.Component<
     addPromiseForRequirements(requirements);
 
     // resolve promises
-    let scheduleCourses: (ScheduleCourse | null)[] = await Promise.all(
+    const scheduleCourses: (ScheduleCourse | null)[] = await Promise.all(
       promises
     );
     // filter out null scheduleCourses
-    let filteredScheduleCourses: ScheduleCourse[] = scheduleCourses.filter(
+    const filteredScheduleCourses: ScheduleCourse[] = scheduleCourses.filter(
       (scheduleCourse): scheduleCourse is ScheduleCourse =>
         scheduleCourse !== null
     );
 
-    let dndCourses: DNDScheduleCourse[] = filteredScheduleCourses.map(
+    const dndCourses: DNDScheduleCourse[] = filteredScheduleCourses.map(
       (scheduleCourse: ScheduleCourse) => {
-        const [newCourses, counter] = convertToDNDCourses(
+        const [newCourses] = convertToDNDCourses(
           [scheduleCourse!],
           this.props.currentClassCounter
         );
@@ -235,11 +235,11 @@ class RequirementSectionComponent extends React.Component<
       }
     );
 
-    let classData: { [id: string]: DNDScheduleCourse } = {};
-    let indexData: { [id: string]: number } = {};
+    const classData: { [id: string]: DNDScheduleCourse } = {};
+    const indexData: { [id: string]: number } = {};
 
     for (let i = 0; i < dndCourses.length; i++) {
-      let course: DNDScheduleCourse = dndCourses[i];
+      const course: DNDScheduleCourse = dndCourses[i];
       classData[courseToString(course)] = course;
       indexData[courseToString(course)] = i;
     }
@@ -335,7 +335,7 @@ class RequirementSectionComponent extends React.Component<
           Complete {req.creditsRequired} credits from the following ranges that
           are not already required:
         </ANDORText>
-        {req.ranges.map((r: ISubjectRange, index: number) => {
+        {req.ranges.map((r: ISubjectRange) => {
           return (
             <CourseText key={r.subject + r.idRangeStart + " - " + r.idRangeEnd}>
               {r.subject + r.idRangeStart + " through " + r.idRangeEnd}
