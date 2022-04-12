@@ -4,14 +4,14 @@ import {
   CreateStudentDto,
   GetPlanResponse,
   GetStudentResponse,
+  INEUAndPrereq,
+  INEUOrPrereq,
   LoginStudentDto,
+  ScheduleCourse,
   UpdatePlanDto,
   UpdatePlanResponse,
   UpdateStudentDto,
   UpdateStudentResponse,
-  INEUAndPrereq,
-  INEUOrPrereq,
-  ScheduleCourse,
 } from "@graduate/common";
 
 class APIClient {
@@ -128,8 +128,8 @@ class SearchAPIClient {
 
   searchCourse = async (
     searchQuery: string,
-    minIndex: number = 0,
-    maxIndex: number = 9999
+    minIndex = 0,
+    maxIndex = 9999
   ): Promise<ScheduleCourse[]> => {
     const res = await this.axios({
       method: "POST",
@@ -149,9 +149,10 @@ class SearchAPIClient {
     });
 
     const coursesData = await res.data;
-    const courses: ScheduleCourse[] = [];
-    coursesData.search.nodes.forEach((result: SearchClass) => {
-      const course: ScheduleCourse = {
+    const nodes = coursesData.search.nodes;
+
+    return nodes.forEach(
+      (result: SearchClass): ScheduleCourse => ({
         name: result.name,
         classId: result.classId,
         subject: result.subject,
@@ -160,11 +161,8 @@ class SearchAPIClient {
         numCreditsMin: result.minCredits,
         numCreditsMax: result.maxCredits,
         semester: null,
-      };
-      courses.push(course);
-    });
-
-    return courses;
+      })
+    );
   };
 
   constructor(baseURL = "https://api.searchneu.com/graphql") {
