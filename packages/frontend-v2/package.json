@@ -12,7 +12,9 @@
     "@graduate/common": "workspace:*",
     "next": "12.1.4",
     "react": "18.0.0",
-    "react-dom": "18.0.0"
+    "react-dom": "18.0.0",
+    "react-error-boundary": "^3.1.4",
+    "react-toastify": "^8.2.0"
   },
   "devDependencies": {
     "@types/eslint": "^8",
