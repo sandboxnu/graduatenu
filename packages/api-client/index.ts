@@ -13,6 +13,7 @@ import {
   UpdateStudentDto,
   UpdateStudentResponse,
 } from "@graduate/common";
+import { plainToInstance } from "class-transformer";
 
 class APIClient {
   private axios: AxiosInstance;
@@ -20,34 +21,50 @@ class APIClient {
     login: async (
       loginUserDto: LoginStudentDto
     ): Promise<GetStudentResponse> => {
-      return (await this.axios.post("/api/auth/login", { ...loginUserDto }))
-        .data;
+      const data = (
+        await this.axios.post("/api/auth/login", { ...loginUserDto })
+      ).data;
+      return plainToInstance(GetStudentResponse, data, {
+        excludeExtraneousValues: true,
+      });
     },
     register: async (
       createStudentDto: CreateStudentDto
     ): Promise<GetStudentResponse> => {
-      return (
+      const data = (
         await this.axios.post("/api/auth/register", { ...createStudentDto })
       ).data;
+      return plainToInstance(GetStudentResponse, data, {
+        excludeExtraneousValues: true,
+      });
     },
   };
   student = {
     update: async (
       updateStudentDto: UpdateStudentDto
     ): Promise<UpdateStudentResponse> => {
-      return (
+      const data = (
         await this.axios.patch("/api/students/me", { ...updateStudentDto })
       ).data;
+      return plainToInstance(UpdateStudentResponse, data, {
+        excludeExtraneousValues: true,
+      });
     },
     student: async (): Promise<GetStudentResponse> => {
-      return (await this.axios.get("/api/students/me")).data;
+      const data = (await this.axios.get("/api/students/me")).data;
+      return plainToInstance(GetStudentResponse, data, {
+        excludeExtraneousValues: true,
+      });
     },
     studentWithPlan: async (): Promise<GetStudentResponse> => {
-      return (
+      const data = (
         await this.axios.get("/api/students/me", {
           params: { isWithPlans: true },
         })
       ).data;
+      return plainToInstance(GetStudentResponse, data, {
+        excludeExtraneousValues: true,
+      });
     },
     delete: async (): Promise<void> => {
       return (await this.axios.delete("/api/students/me")).data;
@@ -55,17 +72,28 @@ class APIClient {
   };
   plans = {
     create: async (createPlanDto: CreatePlanDto): Promise<GetPlanResponse> => {
-      return (await this.axios.post("/api/plans", { ...createPlanDto })).data;
+      const data = (await this.axios.post("/api/plans", { ...createPlanDto }))
+        .data;
+      return plainToInstance(GetPlanResponse, data, {
+        excludeExtraneousValues: true,
+      });
     },
     get: async (id: number): Promise<GetPlanResponse> => {
-      return (await this.axios.get(`/api/plans/${id}`)).data;
+      const data = (await this.axios.get(`/api/plans/${id}`)).data;
+      return plainToInstance(GetPlanResponse, data, {
+        excludeExtraneousValues: true,
+      });
     },
     update: async (
       id: number,
       updatePlanDto: UpdatePlanDto
     ): Promise<UpdatePlanResponse> => {
-      return (await this.axios.patch(`/api/plans/${id}`, { ...updatePlanDto }))
-        .data;
+      const data = (
+        await this.axios.patch(`/api/plans/${id}`, { ...updatePlanDto })
+      ).data;
+      return plainToInstance(UpdatePlanResponse, data, {
+        excludeExtraneousValues: true,
+      });
     },
     delete: async (id: number): Promise<void> => {
       return (await this.axios.delete(`/api/plans/${id}`)).data;
