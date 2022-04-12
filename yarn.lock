@@ -2010,7 +2010,9 @@ __metadata:
   resolution: "@graduate/api-client@workspace:packages/api-client"
   dependencies:
     "@graduate/common": "*"
+    class-transformer: ^0.5.1
     cross-env: ^7.0.3
+    reflect-metadata: ^0.1.13
   languageName: unknown
   linkType: soft
 
