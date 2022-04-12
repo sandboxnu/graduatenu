@@ -1,0 +1,369 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Scrap catalog page CS & Game Dev matches snapshot 1`] = `
+Object {
+  "courseLists": Array [
+    Object {
+      "courseBody": Array [
+        Object {
+          "description": "Computer Science Overview",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "courseTitle": "CS 1200",
+          "description": "First Year Seminar",
+          "hour": 1,
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "courseTitle": "or ARTF 1000",
+          "description": " Art and Design at Northeastern",
+          "hour": 1,
+          "type": "OR_COURSE",
+        },
+        Object {
+          "courseTitle": "CS 1210",
+          "description": "Professional Development for Khoury Co-op",
+          "hour": 1,
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "courseTitle": "or EEAM 2000",
+          "description": " Professional Development for Co-op",
+          "hour": 1,
+          "type": "OR_COURSE",
+        },
+        Object {
+          "description": "Computer Science Fundamental Courses",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "courseTitle": "CS 1800and CS 1802",
+          "description": "Discrete Structuresand Seminar for CS 1800",
+          "hour": 5,
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "courseTitle": "CS 2500and CS 2501",
+          "description": "Fundamentals of Computer Science 1and Lab for CS 2500",
+          "hour": 5,
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "courseTitle": "CS 2510and CS 2511",
+          "description": "Fundamentals of Computer Science 2and Lab for CS 2510",
+          "hour": 5,
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Computer Science Required Courses",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "courseTitle": "CS 3000",
+          "description": "Algorithms and Data",
+          "hour": 4,
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "courseTitle": "CS 3500and CS 3501",
+          "description": "Object-Oriented Designand Lab for CS 3500",
+          "hour": 5,
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "courseTitle": "CS 3520",
+          "description": "Programming in C++ (Integrative course)",
+          "hour": 4,
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "courseTitle": "CS 3540",
+          "description": "Game Programming (Integrative course)",
+          "hour": 4,
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "courseTitle": "CS 3650",
+          "description": "Computer Systems",
+          "hour": 4,
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "courseTitle": "CS 3700",
+          "description": "Networks and Distributed Systems",
+          "hour": 4,
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "courseTitle": "CS 4300",
+          "description": "Computer Graphics (Integrative course)",
+          "hour": 4,
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "courseTitle": "CS 4500",
+          "description": "Software Development",
+          "hour": 4,
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "courseTitle": "or CS 4530",
+          "description": " Fundamentals of Software Engineering",
+          "hour": 4,
+          "type": "OR_COURSE",
+        },
+        Object {
+          "courseTitle": "CS 4850",
+          "description": "Building Game Engines (Integrative course)",
+          "hour": 4,
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Computer Science Elective Course",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "courseTitle": "CS 4150",
+          "description": "Game Artificial Intelligence (Integrative course)",
+          "hour": 4,
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "courseTitle": "or IS 4300",
+          "description": " Human Computer Interaction",
+          "hour": 4,
+          "type": "OR_COURSE",
+        },
+      ],
+      "description": "Computer Science Courses",
+    },
+    Object {
+      "courseBody": Array [
+        Object {
+          "description": "Game Design Required",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "courseTitle": "GAME 1110",
+          "description": "Games and Society",
+          "hour": 4,
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "courseTitle": "GAME 2500",
+          "description": "Foundations of Game Design",
+          "hour": 4,
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "courseTitle": "GAME 2950",
+          "description": "Game Studio",
+          "hour": 4,
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "courseTitle": "GAME 3400",
+          "description": "Level Design and Game Architecture",
+          "hour": 4,
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "courseTitle": "GAME 3700",
+          "description": "Rapid Idea Prototyping for Games",
+          "hour": 4,
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "courseTitle": "GAME 3800",
+          "description": "Game Concept Development",
+          "hour": 4,
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "courseTitle": "GAME 4700",
+          "description": "Game Design Capstone",
+          "hour": 4,
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Game Design Elective",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "courseTitle": "GAME 1850",
+          "description": "Experimental Game Design",
+          "hour": 4,
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "courseTitle": "or GAME 3300",
+          "description": " Game Interface Design",
+          "hour": 4,
+          "type": "OR_COURSE",
+        },
+        Object {
+          "description": "Khoury/Game-Related Electives",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "description": "Complete three of the following:",
+          "hour": 12,
+          "type": "COMMENT",
+        },
+        Object {
+          "description": "Any course in ARTD, ARTE, ARTF, ARTG, ARTH, and GAME subject areas as long as prerequisites have been met.",
+          "hour": 0,
+          "type": "COMMENT",
+        },
+        Object {
+          "description": "CS 2500 or higher, except CS 5010",
+          "hour": 0,
+          "type": "COMMENT",
+        },
+        Object {
+          "description": "CY 2000 or higher, except CY 4930",
+          "hour": 0,
+          "type": "COMMENT",
+        },
+        Object {
+          "description": "DS 2500 or higher, except DS 4900",
+          "hour": 0,
+          "type": "COMMENT",
+        },
+        Object {
+          "description": "IS 2000 or higher, except IS 4900",
+          "hour": 0,
+          "type": "COMMENT",
+        },
+        Object {
+          "courseTitle": "MATH 1342",
+          "description": "Calculus 2 for Science and Engineering",
+          "hour": 0,
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "courseTitle": "MATH 2331",
+          "description": "Linear Algebra",
+          "hour": 0,
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "courseTitle": "ECON 2350",
+          "description": "Statistics",
+          "hour": 0,
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "courseTitle": "or PSYC 2320",
+          "description": " Statistics in Psychological Research",
+          "hour": 0,
+          "type": "OR_COURSE",
+        },
+      ],
+      "description": "Game Design Courses",
+    },
+    Object {
+      "courseBody": Array [
+        Object {
+          "description": "Psychology",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "courseTitle": "PSYC 1101",
+          "description": "Foundations of Psychology",
+          "hour": 4,
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Mathematics",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "description": "Complete two courses from the following:",
+          "hour": 8,
+          "type": "COMMENT",
+        },
+        Object {
+          "courseTitle": "MATH 1260",
+          "description": "Math Fundamentals for Games (Integrative course)",
+          "hour": 0,
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "courseTitle": "MATH 1341",
+          "description": "Calculus 1 for Science and Engineering",
+          "hour": 0,
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "MATH 1342 or higher",
+          "hour": 0,
+          "type": "COMMENT",
+        },
+      ],
+      "description": "Supporting Courses",
+    },
+    Object {
+      "courseBody": Array [
+        Object {
+          "description": "College Writing",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "courseTitle": "ENGW 1111",
+          "description": "First-Year Writing",
+          "hour": 4,
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Advanced Writing in the Disciplines",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "description": "Students are strongly encouraged to take Advanced Writing in the Technical Professions (ENGW 3302) but may substitute Interdisciplinary Advanced Writing in the Disciplines (ENGW 3315).",
+          "hour": 0,
+          "type": "COMMENT",
+        },
+        Object {
+          "courseTitle": "ENGW 3302",
+          "description": "Advanced Writing in the Technical Professions",
+          "hour": 4,
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "courseTitle": "or ENGW 3315",
+          "description": " Interdisciplinary Advanced Writing in the Disciplines",
+          "hour": 4,
+          "type": "OR_COURSE",
+        },
+      ],
+      "description": "Computer Science Writing Requirement",
+    },
+    Object {
+      "courseBody": Array [
+        Object {
+          "description": "Complete 12 semester hours of general electives.",
+          "hour": 12,
+          "type": "COMMENT",
+        },
+      ],
+      "description": "Required General Electives",
+    },
+  ],
+  "majorName": "Computer Science and Game Development, BS",
+  "prgramRequiredHours": 133,
+  "yearVersion": 2021,
+}
+`;
