@@ -2,13 +2,16 @@ import "react-toastify/dist/ReactToastify.min.css";
 import type { NextPage } from "next";
 import { toast, logger } from "../utils";
 import { useState } from "react";
-import { ClientSideError } from "../components/Error/ClientSideError";
+
+const Bomb: React.FC = () => {
+  throw Error("BOOOOM!");
+};
 
 const Home: NextPage = () => {
   const [isClientSideError, setIsClientSideError] = useState(false);
 
   if (isClientSideError) {
-    return <ClientSideError />;
+    return <Bomb />;
   }
 
   return (
