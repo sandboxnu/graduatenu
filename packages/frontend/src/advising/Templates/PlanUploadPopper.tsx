@@ -166,7 +166,7 @@ export const PlanUploadPopper: React.FC<PlanUploadPopperProps> = ({
       ),
     ];
 
-    const onChange = (e: React.ChangeEvent<{}>, value: string | null) => {
+    const onChange = (e: React.ChangeEvent<any>, value: string | null) => {
       setCatalogYear(value === "" ? null : Number(value));
       setMajor(null);
     };
@@ -203,7 +203,7 @@ export const PlanUploadPopper: React.FC<PlanUploadPopperProps> = ({
       .filter((maj) => maj.yearVersion === catalogYear)
       .map((maj) => maj.name);
 
-    const onChange = (e: React.ChangeEvent<{}>, value: string | null) => {
+    const onChange = (e: React.ChangeEvent<any>, value: string | null) => {
       setMajor(findMajorFromName(value, majors, catalogYear) || null);
     };
 
@@ -237,7 +237,7 @@ export const PlanUploadPopper: React.FC<PlanUploadPopperProps> = ({
 
     const options = ["None", ...BASE_FORMATTED_COOP_CYCLES];
 
-    const onChange = (e: React.ChangeEvent<{}>, value: string | null) => {
+    const onChange = (e: React.ChangeEvent<any>, value: string | null) => {
       setCoopCycle(value || null);
     };
 
@@ -359,7 +359,6 @@ export const PlanUploadPopper: React.FC<PlanUploadPopperProps> = ({
       <Modal
         style={{ outline: "none" }}
         open={visible}
-        onClose={() => {}}
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
       >
@@ -374,7 +373,6 @@ export const PlanUploadPopper: React.FC<PlanUploadPopperProps> = ({
               major={major ?? undefined}
               concentration={concentration}
               setConcentration={setConcentration}
-              setError={() => {}}
               showError={false}
               useLabel
             />

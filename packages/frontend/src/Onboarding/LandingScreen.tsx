@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import titlePicture from "../assets/onboarding-title.png";
 import picture1 from "../assets/onboarding-1.png";
@@ -9,13 +9,9 @@ import {
   PrimaryLinkButton,
   WhiteLinkButton,
 } from "../components/common/LinkButtons";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import { Dispatch } from "redux";
 import { fetchMajorsAndPlans } from "../utils/fetchMajorsAndPlans";
-import { Major } from "@graduate/common";
-import { useHistory } from "react-router";
-import { RouteComponentProps, withRouter } from "react-router";
-type History = ReturnType<typeof useHistory>;
 const Header = styled.div`
   display: flex;
   flex-direction: row;
@@ -117,123 +113,108 @@ const Footer = styled.div`
   justify-content: flex-end;
 `;
 
-interface LandingScreenProps {
-  fullName: string;
-  fetchMajorsAndPlans: (history: History) => Promise<Major[]>;
-}
-
-type Props = LandingScreenProps & RouteComponentProps<{}>;
-export class LandingScreenComponent extends React.Component<Props> {
-  dev: boolean;
-
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      redirectUrl: undefined,
-    };
-
-    this.dev = process.env.NODE_ENV === "development";
-  }
-
-  componentWillMount() {
-    // make an API request to searchNEU to get the supported majors and their corresponding plans.
-    this.props.fetchMajorsAndPlans(this.props.history);
-  }
-
-  renderInfoSection(
-    title: string,
-    desc: string,
-    picture: string,
-    flipped = false
-  ) {
-    if (flipped) {
-      return (
-        <InfoSection>
-          <InfoText>
-            <InfoTextTitle>{title}</InfoTextTitle>
-            <p>{desc}</p>
-          </InfoText>
-          <InfoPictureWrapper>
-            <InfoPicture src={picture} />
-          </InfoPictureWrapper>
-        </InfoSection>
-      );
-    }
+type InfoSectionProps = {
+  title: string;
+  desc: string;
+  picture: string;
+  flipped?: boolean;
+};
+const InfoSectionComponent: React.FC<InfoSectionProps> = ({
+  title,
+  desc,
+  picture,
+  flipped = false,
+}) => {
+  if (flipped) {
     return (
       <InfoSection>
-        <InfoPictureWrapper>
-          <InfoPicture src={picture} />
-        </InfoPictureWrapper>
         <InfoText>
           <InfoTextTitle>{title}</InfoTextTitle>
           <p>{desc}</p>
         </InfoText>
+        <InfoPictureWrapper>
+          <InfoPicture src={picture} />
+        </InfoPictureWrapper>
       </InfoSection>
     );
   }
+  return (
+    <InfoSection>
+      <InfoPictureWrapper>
+        <InfoPicture src={picture} />
+      </InfoPictureWrapper>
+      <InfoText>
+        <InfoTextTitle>{title}</InfoTextTitle>
+        <p>{desc}</p>
+      </InfoText>
+    </InfoSection>
+  );
+};
 
-  render() {
-    return (
-      <>
-        <Header>
-          <h1>GraduateNU</h1>
-          <LoginButtonContainer>
-            <PrimaryLinkButton to="/login" style={{ marginRight: "1em" }}>
-              Login
-            </PrimaryLinkButton>
-            <PrimaryLinkButton to="/signup" style={{ marginRight: "1em" }}>
-              Sign Up
-            </PrimaryLinkButton>
-          </LoginButtonContainer>
-        </Header>
-        <Banner>
-          <BannerInfo>
-            <BannerInfoTitle>Graduate on time.</BannerInfoTitle>
-            <BannerInfoText>
-              Navigate the Northeastern graduation requirements and create a
-              personalized plan of study.
-            </BannerInfoText>
-            <WhiteLinkButton to="/signup">Get Started</WhiteLinkButton>
-          </BannerInfo>
-          <TitlePicture src={titlePicture} alt="title-picture"></TitlePicture>
-        </Banner>
-        <Body>
-          {this.renderInfoSection(
-            "Start!",
-            "Just answer a couple questions and get started with a multi-year plan for your classes.",
-            picture1
-          )}
-          {this.renderInfoSection(
-            "Personalize",
-            "Pick the classes you want. We’ll take care of NU Path, pre-requisites, and everything in between.",
-            picture2,
-            true
-          )}
-          {this.renderInfoSection(
-            "Graduate",
-            "Build a plan of study that lets you graduate faster, with better classes, and a lot less headaches.",
-            picture3
-          )}
-        </Body>
-        <Footer>
-          <a
-            href="https://admin.khoury.northeastern.edu"
-            style={{ textDecoration: "none" }}
-          >
-            <WhiteLinkButton to="/onboarding">Get Started</WhiteLinkButton>
-          </a>
-        </Footer>
-      </>
-    );
-  }
-}
+const LandingScreenComponent: React.FC = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    fetchMajorsAndPlans()(dispatch);
+  }, []);
+  return (
+    <>
+      <Header>
+        <h1>GraduateNU</h1>
+        <LoginButtonContainer>
+          <PrimaryLinkButton to="/login" style={{ marginRight: "1em" }}>
+            Login
+          </PrimaryLinkButton>
+          <PrimaryLinkButton to="/signup" style={{ marginRight: "1em" }}>
+            Sign Up
+          </PrimaryLinkButton>
+        </LoginButtonContainer>
+      </Header>
+      <Banner>
+        <BannerInfo>
+          <BannerInfoTitle>Graduate on time.</BannerInfoTitle>
+          <BannerInfoText>
+            Navigate the Northeastern graduation requirements and create a
+            personalized plan of study.
+          </BannerInfoText>
+          <WhiteLinkButton to="/signup">Get Started</WhiteLinkButton>
+        </BannerInfo>
+        <TitlePicture src={titlePicture} alt="title-picture"></TitlePicture>
+      </Banner>
+      <Body>
+        <InfoSectionComponent
+          title="Start!"
+          desc="Just answer a couple questions and get started with a multi-year plan for your classes."
+          picture={picture1}
+        ></InfoSectionComponent>
+        <InfoSectionComponent
+          title="Personalize"
+          desc="Pick the classes you want. We’ll take care of NU Path, pre-requisites, and everything in between."
+          picture={picture2}
+          flipped
+        ></InfoSectionComponent>
+        <InfoSectionComponent
+          title="Graduate"
+          desc="Build a plan of study that lets you graduate faster, with better classes, and a lot less headaches."
+          picture={picture3}
+        ></InfoSectionComponent>
+      </Body>
+      <Footer>
+        <a
+          href="https://admin.khoury.northeastern.edu"
+          style={{ textDecoration: "none" }}
+        >
+          <WhiteLinkButton to="/onboarding">Get Started</WhiteLinkButton>
+        </a>
+      </Footer>
+    </>
+  );
+};
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  fetchMajorsAndPlans: (history: History) =>
-    fetchMajorsAndPlans(history)(dispatch),
+  fetchMajorsAndPlans: () => fetchMajorsAndPlans()(dispatch),
 });
 
 export const LandingScreen = connect(
   null,
   mapDispatchToProps
-)(withRouter(LandingScreenComponent));
+)(LandingScreenComponent);

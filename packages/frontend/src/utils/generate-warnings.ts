@@ -51,7 +51,7 @@ interface CreditRange {
 seasonCreditTracker is an object of string --> creditRange object.
 This object is meant to encode max and min credit per season.
 */
-let seasonCreditTracker: { [key: string]: CreditRange } = {
+const seasonCreditTracker: { [key: string]: CreditRange } = {
   SM: { seasonMax: 18, seasonMin: 12 },
   S1: { seasonMax: 9, seasonMin: 4 },
   S2: { seasonMax: 9, seasonMin: 4 },
@@ -106,7 +106,7 @@ export function produceWarnings(
       if (allTerms !== undefined) {
         allTerms.terms.push(termId);
       } else {
-        var courseI: CourseInfo = {
+        const courseI: CourseInfo = {
           subject: toAdd.subject,
           classId: toAdd.classId.toString(),
           terms: [termId],
@@ -121,7 +121,7 @@ export function produceWarnings(
         if (allTerms != undefined) {
           allTerms.terms.push(termId);
         } else {
-          var courseI: CourseInfo = {
+          const courseI: CourseInfo = {
             subject: course.subject,
             classId: course.classId.toString(),
             terms: [termId],
@@ -212,11 +212,11 @@ export function produceSatisfiedReqGroups(
   schedule: Schedule,
   major: Major
 ): string[] {
-  let reqWarnings: IRequirementGroupWarning[] = produceRequirementGroupWarning(
+  const reqWarnings: IRequirementGroupWarning[] = produceRequirementGroupWarning(
     schedule,
     major
   );
-  let reqGroups: Set<string> = new Set(major.requirementGroups);
+  const reqGroups: Set<string> = new Set(major.requirementGroups);
 
   for (const unsatisfiedWarning of reqWarnings) {
     reqGroups.delete(unsatisfiedWarning.requirementGroup);
@@ -271,7 +271,7 @@ export function produceRequirementGroupWarning(
   );
 
   for (const requirementGroup of sortedRequirements) {
-    let unsatisfiedRequirement: IRequirementGroupWarning | undefined =
+    const unsatisfiedRequirement: IRequirementGroupWarning | undefined =
       produceUnsatifiedRequirement(requirementGroup, taken, coursesUsed);
     if (unsatisfiedRequirement) {
       res.push(unsatisfiedRequirement);
@@ -320,12 +320,12 @@ function processAndSection(
   taken: Map<string, HashableCourse>,
   coursesUsed: Set<string>
 ): IRequirementGroupWarning | undefined {
-  let satisfied: CreditHourTracker = {
+  const satisfied: CreditHourTracker = {
     hoursCompleted: 0,
   };
-  let messages: string[] = [];
+  const messages: string[] = [];
   for (const requirement of requirementGroup.requirements) {
-    let message: string | undefined = processRequirement(
+    const message: string | undefined = processRequirement(
       requirement,
       taken,
       satisfied,
@@ -340,10 +340,10 @@ function processAndSection(
 
   //if any of the requirements were not satisfied produce warning.
   if (messages.length > 0) {
-    let reqGroupMessage: string = `requirement not satisfied: ${messages.join(
+    const reqGroupMessage = `requirement not satisfied: ${messages.join(
       " AND "
     )}`;
-    let res: IRequirementGroupWarning = {
+    const res: IRequirementGroupWarning = {
       message: reqGroupMessage,
       requirementGroup: requirementGroup.name,
     };
@@ -364,13 +364,13 @@ function processOrSection(
   taken: Map<string, HashableCourse>,
   coursesUsed: Set<string>
 ): IRequirementGroupWarning | undefined {
-  let satisfied: CreditHourTracker = {
+  const satisfied: CreditHourTracker = {
     hoursCompleted: 0,
   };
-  let messages: string[] = [];
-  let minCredsRequired: number = requirementGroup.numCreditsMin;
+  const messages: string[] = [];
+  const minCredsRequired: number = requirementGroup.numCreditsMin;
   for (const requirement of requirementGroup.requirements) {
-    let message: string | undefined = processRequirement(
+    const message: string | undefined = processRequirement(
       requirement,
       taken,
       satisfied,
@@ -388,10 +388,10 @@ function processOrSection(
   }
 
   if (satisfied.hoursCompleted < minCredsRequired) {
-    let reqGroupMessage: string = `requirement not satisfied: need ${
+    const reqGroupMessage = `requirement not satisfied: need ${
       minCredsRequired - satisfied.hoursCompleted
     } credits from: ${messages.join(" OR ")}`;
-    let res: IRequirementGroupWarning = {
+    const res: IRequirementGroupWarning = {
       message: reqGroupMessage,
       requirementGroup: requirementGroup.name,
     };
@@ -412,10 +412,10 @@ function processRangeSection(
   taken: Map<string, HashableCourse>,
   coursesUsed: Set<string>
 ): IRequirementGroupWarning | undefined {
-  let satisfied: CreditHourTracker = {
+  const satisfied: CreditHourTracker = {
     hoursCompleted: 0,
   };
-  let message: string | undefined = processRequirement(
+  const message: string | undefined = processRequirement(
     requirementGroup.requirements,
     taken,
     satisfied,
@@ -425,8 +425,8 @@ function processRangeSection(
 
   // a range section only contains an ICourseRange. So if that wasn't satisfied, simply return the warning generated.
   if (message) {
-    let reqGroupMessage: string = `requirement not satisfied: ${message}`;
-    let res: IRequirementGroupWarning = {
+    const reqGroupMessage = `requirement not satisfied: ${message}`;
+    const res: IRequirementGroupWarning = {
       message: reqGroupMessage,
       requirementGroup: requirementGroup.name,
     };
@@ -476,7 +476,6 @@ function processRequirement(
         taken,
         satisfied,
         coursesUsed,
-        creditHoursNeeded
       );
     }
     // requirement is unsatisfied if doesn't exist in the taken map.
@@ -486,7 +485,6 @@ function processRequirement(
         taken,
         satisfied,
         coursesUsed,
-        creditHoursNeeded
       );
     }
     case "CREDITS": {
@@ -516,7 +514,7 @@ function processIAndCourse(
   creditHoursNeeded: number
 ): string | undefined {
   // requirement is unsatisfied if even one of the requirements in the list is unsatisfied.
-  let processReqMessages: string[] = processRequirementCourses(
+  const processReqMessages: string[] = processRequirementCourses(
     requirement.courses,
     taken,
     satisfied,
@@ -524,7 +522,7 @@ function processIAndCourse(
     creditHoursNeeded
   );
   if (processReqMessages.length > 0) {
-    let reqMessage = `(${processReqMessages.join(" and ")})`;
+    const reqMessage = `(${processReqMessages.join(" and ")})`;
     return reqMessage;
   } else {
     return undefined;
@@ -547,7 +545,7 @@ function processIOrCourse(
   creditHoursNeeded: number
 ): string | undefined {
   // requirement is unsatisfied if all of the requirements in the list have not been satisfied.
-  let processReqMessages: string[] = processRequirementCourses(
+  const processReqMessages: string[] = processRequirementCourses(
     requirement.courses,
     taken,
     satisfied,
@@ -555,7 +553,7 @@ function processIOrCourse(
     creditHoursNeeded
   );
   if (processReqMessages.length === requirement.courses.length) {
-    let reqMessage = `(${processReqMessages.join(" or ")})`;
+    const reqMessage = `(${processReqMessages.join(" or ")})`;
     return reqMessage;
   } else {
     return undefined;
@@ -575,17 +573,16 @@ function processICourseRange(
   taken: Map<string, HashableCourse>,
   satisfied: CreditHourTracker,
   coursesUsed: Set<string>,
-  creditHoursNeeded: number
 ): string | undefined {
   // requirement is unsatisfied if the numCredits for the courseRange hasn't been satisfied.
-  let numCreditsrequired: number = requirement.creditsRequired;
-  let rangeCreditsCompleted: number = 0;
+  const numCreditsrequired: number = requirement.creditsRequired;
+  let rangeCreditsCompleted = 0;
 
   //loop through the taken courses and check if it is in one of the subject ranges for this ICourseRange.
   for (const courseKey of Array.from(taken.keys())) {
     //check the global map to see if it has not been used.
     if (!coursesUsed.has(courseKey)) {
-      let hashableCourse: HashableCourse | undefined = taken.get(courseKey);
+      const hashableCourse: HashableCourse | undefined = taken.get(courseKey);
       if (hashableCourse) {
         if (courseInSubjectRanges(hashableCourse, requirement.ranges)) {
           // use the course
@@ -634,14 +631,14 @@ function processICreditRangeCourse(
   coursesUsed: Set<string>
 ): string | undefined {
   // Requirement is unsatisfied if the number of credits fulfilled within its requirements is within the credit range.
-  let requirementCreditsCompleted: number = 0;
+  let requirementCreditsCompleted = 0;
   const allRequirementCourses = flattenRequirements(requirement.courses);
 
   // Loop through the taken courses and check if it is one of this ICreditRangeCourse's nested courses.
   for (const courseKey of Array.from(taken.keys())) {
     // Check the global map to see if it has not already been used.
     if (!coursesUsed.has(courseKey)) {
-      let hashableCourse: HashableCourse | undefined = taken.get(courseKey);
+      const hashableCourse: HashableCourse | undefined = taken.get(courseKey);
       if (hashableCourse) {
         if (hashableCourseIsRequired(hashableCourse, allRequirementCourses)) {
           // Use the course
@@ -685,11 +682,10 @@ function processIRequiredCourse(
   taken: Map<string, HashableCourse>,
   satisfied: CreditHourTracker,
   coursesUsed: Set<string>,
-  creditHoursNeeded: number
 ): string | undefined {
   // requirement is unsatisfied if doesn't exist in the taken map.
-  let code: string = courseCode(requirement);
-  let hashableCourse: HashableCourse | undefined = taken.get(code);
+  const code: string = courseCode(requirement);
+  const hashableCourse: HashableCourse | undefined = taken.get(code);
   if (hashableCourse) {
     satisfied.hoursCompleted += hashableCourse.credits;
     coursesUsed.add(code);
@@ -714,9 +710,9 @@ function processRequirementCourses(
   coursesUsed: Set<string>,
   creditHoursNeeded: number
 ): string[] {
-  let res: string[] = [];
+  const res: string[] = [];
   for (const requirement of requirements) {
-    let processedReq: string | undefined = processRequirement(
+    const processedReq: string | undefined = processRequirement(
       requirement,
       taken,
       satisfied,
@@ -770,7 +766,7 @@ function addCoursesToMap(
     return;
   }
   for (const course of toAdd.classes) {
-    let hashableCourse: HashableCourse = {
+    const hashableCourse: HashableCourse = {
       subject: course.subject,
       classId: course.classId,
       credits: course.numCreditsMin,
@@ -789,8 +785,8 @@ function courseInSubjectRanges(
   ranges: ISubjectRange[]
 ): boolean {
   // is the course in one of the subject ranges?
-  let subject: string = course.subject;
-  let classId: number = parseInt(course.classId);
+  const subject: string = course.subject;
+  const classId: number = parseInt(course.classId);
   for (const subjRange of ranges) {
     if (
       subjRange.subject === subject &&
@@ -809,9 +805,9 @@ function courseInSubjectRanges(
  * @param ranges the subject ranges.
  */
 function concatSubjectRanges(ranges: ISubjectRange[]): string {
-  let res: string[] = [];
+  const res: string[] = [];
   for (const range of ranges) {
-    let rangeString: string =
+    const rangeString: string =
       range.subject +
       " " +
       range.idRangeStart.toString() +
@@ -833,7 +829,7 @@ function produceNormalWarnings(
   tracker: CourseTakenTracker
 ): IWarning[] {
   let warnings: IWarning[] = [];
-  let status: StatusEnum = term.status as StatusEnum;
+  const status: StatusEnum = term.status as StatusEnum;
   warnings = warnings.concat(
     checkSemesterCredits(
       term.classes,
@@ -882,7 +878,7 @@ function checkPrerequisites(
   // tracker has all courses taken.
   for (const course of toCheck) {
     if (course.prereqs) {
-      let prereqResult = doesPrereqExist(course.prereqs, tracker);
+      const prereqResult = doesPrereqExist(course.prereqs, tracker);
       if (prereqResult) {
         // if prereq doesn't exist, produce a warning.
         warnings.push({
@@ -947,7 +943,7 @@ function checkCorequisites(
   // check each course.
   for (const course of toCheck) {
     if (course.coreqs) {
-      let prereqResult = doesPrereqExist(course.coreqs, coreqTracker);
+      const prereqResult = doesPrereqExist(course.coreqs, coreqTracker);
       if (prereqResult) {
         warnings.push({
           subject: course.subject,
@@ -976,10 +972,8 @@ function checkSemesterCredits(
   season: Season | SeasonEnum,
   status: StatusEnum
 ): IWarning[] {
-  let maxCredits = 0;
   let minCredits = 0;
   for (const course of toCheck) {
-    maxCredits += course.numCreditsMax;
     minCredits += course.numCreditsMin; //use this one!
   }
 
@@ -1078,7 +1072,7 @@ const doesAndPrereqExist = (
   for (const item of prereq.values) {
     if ("type" in item) {
       // does the graph contain the entire prereq?
-      let prereqResult = doesPrereqExist(item, tracker);
+      const prereqResult = doesPrereqExist(item, tracker);
       if (prereqResult) {
         return `AND: {${prereqResult}}`;
       }
@@ -1107,7 +1101,7 @@ const doesOrPrereqExist = (
   // if any one of the prereqs exists, return true.
   for (const item of prereq.values) {
     if ("type" in item) {
-      let prereqResult = doesPrereqExist(item, tracker);
+      const prereqResult = doesPrereqExist(item, tracker);
       if (prereqResult === undefined) {
         return undefined;
       }

@@ -4,10 +4,9 @@ import {
   createStyles,
   withStyles,
   makeStyles,
-  Theme,
 } from "@material-ui/core/styles";
 
-const ColorButton = withStyles((theme: Theme) => ({
+const ColorButton = withStyles(() => ({
   root: {
     color: "#ffffff",
     paddingVertical: "8px",
@@ -19,7 +18,7 @@ const ColorButton = withStyles((theme: Theme) => ({
   },
 }))(Button);
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     margin: {
       marginTop: "24px",

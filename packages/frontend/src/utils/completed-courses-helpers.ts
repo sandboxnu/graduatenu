@@ -35,7 +35,7 @@ export function numToTerm(
   years: number[],
   yearMap: { [key: number]: ScheduleYear }
 ): ScheduleTerm {
-  let year = yearMap[years[Math.floor(index / 4)]];
+  const year = yearMap[years[Math.floor(index / 4)]];
   if (index % 4 === 0) {
     return year.fall;
   } else if (index % 4 === 1) {
@@ -54,7 +54,7 @@ export function numToTerm(
  * @param classes the classes that will populate the schedule
  */
 export function getNextTerm(is_summer: boolean, classes: ScheduleCourse[]) {
-  let maxCredits = is_summer ? 9 : 18;
+  const maxCredits = is_summer ? 9 : 18;
   let counter = 0;
   let credits = 0;
   while (classes.length > counter) {

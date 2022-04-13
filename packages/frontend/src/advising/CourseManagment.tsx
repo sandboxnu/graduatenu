@@ -342,7 +342,7 @@ interface CourseBlockProps {
 }
 
 export const CourseManagmentPage: React.FC = () => {
-  const [searchQuery, setSearchQuery] = useState("");
+  const [, setSearchQuery] = useState("");
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (

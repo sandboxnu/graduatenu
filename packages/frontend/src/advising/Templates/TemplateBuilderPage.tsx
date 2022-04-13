@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { EditableSchedule } from "../../components/Schedule/ScheduleComponents";
-import { useHistory, useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import {
   deleteTemplatePlan,
   fetchTemplate,
@@ -57,18 +57,15 @@ const PlanHeader = styled.div`
 
 const ICONBUTTON_HEIGHT = 30;
 
-interface ParamProps {
-  templateId: string;
-}
 
 export const TemplateBuilderPage = () => {
   const dispatch = useDispatch();
-  const history = useHistory();
+  const history = useNavigate();
   const planName = useSelector((state: AppState) =>
     getActivePlanNameFromState(state)
   );
 
-  const routeParams = useParams<ParamProps>();
+  const routeParams = useParams();
   const [openModal, setOpenModal] = useState(false);
   const [loading, setLoading] = useState(true);
   const [loadingError, setLoadingError] = useState<string | null>(null);
@@ -127,7 +124,7 @@ export const TemplateBuilderPage = () => {
           return;
         }
       }
-      history.push("/advisor/templates");
+      history("/advisor/templates");
     } catch (error) {
       setLoadingError("Something went wrong");
     }
@@ -149,7 +146,7 @@ export const TemplateBuilderPage = () => {
         }
         setLoading(false);
       })
-      .catch((error) => {
+      .catch(() => {
         setLoadingError(
           "There was an error fetching your plan. Try and refresh!"
         );
@@ -218,7 +215,7 @@ export const TemplateBuilderPage = () => {
         </WhiteColorButton>
         <IconButton
           style={{ padding: 3, height: ICONBUTTON_HEIGHT }}
-          onClick={() => history.push("/advisor/templates")}
+          onClick={() => history("/advisor/templates")}
         >
           <CloseIcon />
         </IconButton>

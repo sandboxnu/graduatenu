@@ -153,7 +153,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 });
 
 export const SemesterTop = connect<
-  {},
+  any,
   ReduxDispatchSemesterTopProps,
   SemesterTopProps,
   AppState

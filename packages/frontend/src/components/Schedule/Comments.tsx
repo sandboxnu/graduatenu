@@ -22,11 +22,10 @@ import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import * as timeago from "timeago.js";
 import { TextField } from "@material-ui/core";
 import LinearProgress from "@material-ui/core/LinearProgress";
-import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
+import { createTheme, MuiThemeProvider } from "@material-ui/core/styles";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import { ALERT_STATUS, SnackbarAlert } from "../common/SnackbarAlert";
-import useOnScreen from "../../hooks/useOnScreen";
 
 const CommentsHeader = styled.div`
   display: flex;
@@ -122,7 +121,7 @@ const ContentEnd = styled.div`
   background: rgba(21, 116, 62, 0.68);
 `;
 
-const CommentTheme = createMuiTheme({
+const CommentTheme = createTheme({
   palette: {
     secondary: {
       main: "#15743e",
@@ -158,7 +157,7 @@ export const Comments: React.FC<Props> = (props: Props) => {
   const contentEndRef = useRef<HTMLDivElement>(null);
   const endPageRef = useRef<HTMLDivElement>(null);
 
-  const isEndPageOnScreen = useOnScreen(endPageRef, "-125px");
+  const isEndPageOnScreen = false;
 
   const scrollToBottom = () => {
     if (contentEndRef !== null && contentEndRef.current !== null) {
@@ -215,7 +214,7 @@ export const Comments: React.FC<Props> = (props: Props) => {
             setComments([...comments, response]);
             setAlertStatus(ALERT_STATUS.Success);
           })
-          .catch((e) => setAlertStatus(ALERT_STATUS.Error));
+          .catch(() => setAlertStatus(ALERT_STATUS.Error));
         setComment("");
         if (tab === 0) scrollToBottom();
       }

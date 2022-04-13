@@ -177,7 +177,7 @@ export class EditPlanPopperComponent extends React.Component<
   /**
    * Updates this user's major based on the major selected in the dropdown.
    */
-  onChooseMajor(event: React.SyntheticEvent<{}>, value: any) {
+  onChooseMajor(event: React.SyntheticEvent<any>, value: any) {
     batch(() => {
       this.props.setActivePlanMajor(value);
       this.props.setActivePlanCoopCycle(
@@ -191,7 +191,7 @@ export class EditPlanPopperComponent extends React.Component<
   /**
    * Updates this user's plan based on the plan selected in the dropdown.
    */
-  onChoosePlan(event: React.SyntheticEvent<{}>, value: any) {
+  onChoosePlan(event: React.SyntheticEvent<any>, value: any) {
     const chosenCoopCycle = value === "None" ? "" : value;
     this.props.setActivePlanCoopCycle(
       chosenCoopCycle,
@@ -201,7 +201,7 @@ export class EditPlanPopperComponent extends React.Component<
     );
   }
 
-  onChangeCatalogYear(event: React.SyntheticEvent<{}>, value: any) {
+  onChangeCatalogYear(event: React.SyntheticEvent<any>, value: any) {
     if (value === "") {
       this.props.setActivePlanCatalogYear(null);
     } else {
@@ -254,7 +254,7 @@ export class EditPlanPopperComponent extends React.Component<
   }
 
   renderCatalogYearDropdown() {
-    let catalogYears = [
+    const catalogYears = [
       ...Array.from(
         new Set(this.props.majors.map((maj) => maj.yearVersion.toString()))
       ),
@@ -496,7 +496,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 export const EditPlanPopper = connect<
   ReduxStoreEditPlanProps,
   ReduxDispatchEditPlanProps,
-  {},
+  any,
   AppState
 >(
   mapStateToProps,

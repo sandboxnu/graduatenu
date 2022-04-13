@@ -4,7 +4,6 @@ import {
   courseEq,
   coursesToString,
   IRequiredCourse,
-  Major,
   ScheduleCourse,
 } from "@graduate/common";
 import {
@@ -17,7 +16,6 @@ import {
 } from "../state/actions/studentActions";
 import styled from "styled-components";
 import { fetchCourse } from "../api";
-import { RouteComponentProps, withRouter } from "react-router-dom";
 import {
   OnboardingSelectionTemplate,
   SelectableCourse,
@@ -35,13 +33,6 @@ const TitleText = styled.div`
   font-weight: 500;
 `;
 
-type TransferCoursesScreenProps = {
-  major: Major;
-  completedRequirements: IRequiredCourse[];
-  setCompletedCourses: (completedCourses: ScheduleCourse[]) => void;
-  setTransferCourses: (transferCourses: ScheduleCourse[]) => void;
-} & RouteComponentProps;
-
 const mappableFetchCourse = (c: IRequiredCourse) =>
   fetchCourse(c.subject, String(c.classId));
 const fetchAndFilterCourses = async (cs: IRequiredCourse[]) => {
@@ -50,9 +41,7 @@ const fetchAndFilterCourses = async (cs: IRequiredCourse[]) => {
   return courses.filter((c) => c !== null) as ScheduleCourse[];
 };
 
-const TransferCoursesScreenComponent: React.FC<
-  TransferCoursesScreenProps
-> = () => {
+const TransferCoursesScreenComponent: React.FC = () => {
   const major = useSelector(getUserMajorFromState)!;
   const completedRequirements = useSelector(getCompletedRequirementsFromState);
   const dispatch = useDispatch();
@@ -69,7 +58,7 @@ const TransferCoursesScreenComponent: React.FC<
   const [completedNonTransfer] = useState(completedRequirements);
 
   const addOtherCourses = (courses: ScheduleCourse[]) => {
-    let reqCourseMap = courses.map((course: ScheduleCourse) => [
+    const reqCourseMap = courses.map((course: ScheduleCourse) => [
       {
         type: "COURSE",
         classId: +course.classId,
@@ -146,16 +135,16 @@ const TransferCoursesScreenComponent: React.FC<
     );
   };
 
-  let renderedMajorReqs = major.requirementGroups
+  const renderedMajorReqs = major.requirementGroups
     .map((r) => <RequirementSection requirementGroup={r} />)
     .filter((r) => r !== null);
-  let split = Math.ceil(renderedMajorReqs.length / 2);
+  const split = Math.ceil(renderedMajorReqs.length / 2);
   return (
     <OnboardingSelectionTemplate
       screen={2}
       mainTitleText={"Select any courses you took as transfer credit:"}
       onSubmit={onSubmit}
-      to={"transferableCredits"}
+      to={"/transferableCredits"}
     >
       <Grid container justify="space-evenly">
         <Grid key={0} item>
@@ -185,4 +174,4 @@ const TransferCoursesScreenComponent: React.FC<
   );
 };
 
-export const TransferCoursesScreen = withRouter(TransferCoursesScreenComponent);
+export const TransferCoursesScreen = TransferCoursesScreenComponent;

@@ -6,8 +6,8 @@ import {
   ScheduleTerm,
   ScheduleYear,
 } from "./types";
-import DataLoader from "dataloader";
 import Axios from "axios";
+import { courseToString } from "./course-utils";
 
 /**
  * Courses should have at least a classId and a subject, in order to query them.
@@ -31,6 +31,32 @@ interface NonEmptyQueryResult {
   name: string;
 }
 
+class DataLoader2<QueryParams, Data> {
+  data: Map<string, Data>;
+  stringifier: (data: QueryParams) => string;
+  loader: (p: QueryParams) => Promise<Data>
+
+  constructor(stringifier: (data:QueryParams) => string, loader: (p: QueryParams) => Promise<Data>) {
+    this.stringifier = stringifier;
+    this.data = new Map();
+    this.loader = loader;
+  }
+
+  async load(params: QueryParams): Promise<null | Data> {
+    const key = this.stringifier(params);
+    if (this.data.has(key)) {
+      return this.data.get(key) ?? null;
+    }
+
+    // try to load it
+    const data = await this.loader(params);
+    this.data.set(key, data);
+    return data;
+  }
+}
+
+type Loader = DataLoader2<SimpleCourse, PrereqQueryResult>;
+
 // prereq query results can be undefined, if the target class doesn't exist.
 type PrereqQueryResult = undefined | NonEmptyQueryResult;
 
@@ -46,10 +72,7 @@ export async function addPrereqsToSchedule(
   // here we give it the year.
   // next parameter given is the termId.
   // last parameter is the loader parameter.
-  const loader: DataLoader<SimpleCourse, PrereqQueryResult> = new DataLoader<
-    SimpleCourse,
-    PrereqQueryResult
-  >(queryCoursePrereqData as any);
+  const loader = new DataLoader2(courseToString, queryCoursePrereqData);
 
   // return the results
   return await prereqifySchedule(schedule, loader);
@@ -67,10 +90,7 @@ export async function addPrereqsToSchedules(
   // here we give it the year.
   // next parameter given is the termId.
   // last parameter is the loader parameter.
-  const loader: DataLoader<SimpleCourse, PrereqQueryResult> = new DataLoader<
-    SimpleCourse,
-    PrereqQueryResult
-  >(queryCoursePrereqData as any);
+  const loader = new DataLoader2(courseToString, queryCoursePrereqData);
 
   // return the results
   return await Promise.all(
@@ -85,7 +105,7 @@ export async function addPrereqsToSchedules(
  */
 async function prereqifySchedule(
   schedule: Schedule,
-  loader: DataLoader<SimpleCourse, PrereqQueryResult>
+  loader: Loader
 ): Promise<Schedule> {
   // does not do mutation!
   const newYearMap: { [key: number]: ScheduleYear } = {};
@@ -112,7 +132,7 @@ async function prereqifySchedule(
  */
 async function prereqifyScheduleYear(
   yearObj: ScheduleYear,
-  loader: DataLoader<SimpleCourse, PrereqQueryResult>
+  loader: Loader
 ): Promise<ScheduleYear> {
   return {
     year: yearObj.year,
@@ -131,7 +151,7 @@ async function prereqifyScheduleYear(
  */
 async function prereqifyScheduleTerm(
   termObj: ScheduleTerm,
-  loader: DataLoader<SimpleCourse, PrereqQueryResult>
+  loader: Loader
 ): Promise<ScheduleTerm> {
   // the new classes.
   const newClasses: Promise<ScheduleCourse[]> = Promise.all(
@@ -158,7 +178,7 @@ async function prereqifyScheduleTerm(
 async function prereqifyScheduleCourse(
   course: ScheduleCourse,
   termId: number,
-  loader: DataLoader<SimpleCourse, PrereqQueryResult>
+  loader: Loader
 ): Promise<ScheduleCourse> {
   // the base prereqified object
   const prereqified: ScheduleCourse = {
@@ -169,7 +189,7 @@ async function prereqifyScheduleCourse(
     name: "",
   };
 
-  let queryResult: PrereqQueryResult;
+  let queryResult: PrereqQueryResult | null;
   try {
     // produces the class.
     queryResult = await loader.load({
@@ -204,12 +224,12 @@ async function prereqifyScheduleCourse(
  * @param courses the courses to lookup prereqs for
  */
 async function queryCoursePrereqData(
-  courses: SimpleCourse[]
-): Promise<PrereqQueryResult[]> {
+  course: SimpleCourse
+): Promise<PrereqQueryResult> {
   // for each one of the courses, map to a string.
   // automatically use the latest occurrence.
-  const courseSchema: string[] = courses.map((course: SimpleCourse) => {
-    return `class(classId: "${course.classId}", subject: "${course.subject}") {
+  const courseSchema = 
+     [`class(classId: "${course.classId}", subject: "${course.subject}") {
       latestOccurrence {
         prereqs
         coreqs
@@ -217,8 +237,7 @@ async function queryCoursePrereqData(
         minCredits
         maxCredits
       }
-    }`;
-  });
+    }`];
 
   // build the query schema
   const querySchema = `
@@ -243,8 +262,6 @@ async function queryCoursePrereqData(
   // the data.
   const data = queryResult.data;
 
-  const result: PrereqQueryResult[] = [];
-  for (let i = 0; i < courses.length; i += 1) {
     // each course${i} property is either null, or an object containing a
     // "latestOccurrence" property object.
     // the occurrence is then guaranteed to have the properties we requested:
@@ -255,14 +272,12 @@ async function queryCoursePrereqData(
     // however, searchNEU stores the classId as a string rather than a number
 
     // if the result was found (aka results were not null), then push
-    const current = data[`course${i}`];
-    if (current) {
-      result.push(current.latestOccurrence);
-    } else {
-      result.push(undefined);
-    }
-  }
 
   // todo: flesh out the provided request.
-  return result;
+  const current = data[`course${0}`];
+  if (current) {
+    return current.latestOccurrence;
+  } else {
+    return undefined
+  }
 }

@@ -11,8 +11,6 @@ import {
 import { Dispatch } from "redux";
 import { Major, Schedule } from "@graduate/common";
 import { majorIds } from "../majors";
-import { useHistory } from "react-router";
-type History = ReturnType<typeof useHistory>;
 
 //graphql schema for searchNEU's majors endpoint.
 const majorSchema: string[] = majorIds.map(({ majorId, year }) => {
@@ -25,7 +23,7 @@ const majorSchema: string[] = majorIds.map(({ majorId, year }) => {
 });
 
 // build a GraphQL query
-const querySchema: string = `
+const querySchema = `
 query {
 ${majorSchema.reduce(
   (accumulator: string, currentValue: string, index: number) => {
@@ -59,9 +57,9 @@ const parsePlans = (res: any): Record<string, Schedule[]> => {
 };
 
 //use fetch utility to make a post request to the searchNEU graphql api endpoint.
-export function fetchMajorsAndPlans(history: History) {
+export function fetchMajorsAndPlans() {
   return (dispatch: Dispatch) => {
-    return new Promise<Major[]>((resolve, reject) => {
+    return new Promise<Major[]>((resolve) => {
       dispatch(fetchMajorsPendingAction());
       dispatch(fetchPlansPendingAction());
       fetch("https://api.searchneu.com/graphql", {
@@ -76,11 +74,12 @@ export function fetchMajorsAndPlans(history: History) {
           };
         })
         .then((res) => {
-          if (res.statusCode >= 400) {
-            history.replace(history.location.pathname, {
-              errorStatusCode: res.statusCode,
-            });
-          }
+          // api changed for react-router 6
+          // if (res.statusCode >= 400) {
+          //   history.replace(history.location.pathname, {
+          //     errorStatusCode: res.statusCode,
+          //   });
+          // }
           return res.data;
         })
         .then((res) => {

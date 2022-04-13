@@ -11,15 +11,7 @@ import {
 } from "../../state";
 import { setActivePlanAction } from "../../state/actions/userPlansActions";
 import { IPlanData } from "../../models/types";
-import Loader from "react-loader-spinner";
 import { LoadingSpinner } from "../common/LoadingSpinner";
-
-const SpinnerWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
 
 const SelectPlanContainer = styled.div`
   justify-content: space-between;
@@ -110,7 +102,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 export const SwitchPlanList = connect<
   ReduxStoreSwitchPlanProps,
   ReduxDispatchSwitchPlanProps,
-  {},
+  any,
   AppState
 >(
   mapStateToProps,

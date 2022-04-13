@@ -11,7 +11,7 @@ interface Props {
   year: number;
 }
 
-const Container = withStyles((theme) => ({
+const Container = withStyles(() => ({
   root: {
     color: "white",
     marginTop: "2px",

@@ -113,7 +113,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 export const Year = connect<
   ReduxStoreYearProps,
   ReduxDispatchYearProps,
-  {},
+  any,
   AppState
 >(
   mapStateToProps,

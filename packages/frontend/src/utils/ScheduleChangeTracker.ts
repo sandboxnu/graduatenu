@@ -37,7 +37,7 @@ class ScheduleChangeTracker {
     course: string,
     isFromSidebar: boolean,
     destinationSemester: number,
-    sourceSemester?: number
+    _sourceSemester?: number
   ): void {
     const destination = this.getSemesterSeasonYear(destinationSemester);
     if (isFromSidebar) {

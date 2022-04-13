@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import sadface from "../assets/white-frown.svg";
 import { WhiteColorButton } from "../components/common/ColoredButtons";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router";
 import { Refresh } from "@material-ui/icons";
 
 const Header = styled.div`
@@ -82,7 +82,7 @@ interface GenericErrorPageProps {
 export const GenericErrorPage: React.FC<GenericErrorPageProps> = ({
   message,
 }: GenericErrorPageProps): JSX.Element => {
-  const history = useHistory();
+  const history = useNavigate();
   return (
     <>
       <Header>
@@ -96,7 +96,7 @@ export const GenericErrorPage: React.FC<GenericErrorPageProps> = ({
             <Message>{message}</Message>
             <Message>
               Please&nbsp;
-              <CustomLink onClick={() => history.go(0)}>
+              <CustomLink onClick={() => history(0)}>
                 refresh your browser
                 <Refresh />
               </CustomLink>
@@ -109,7 +109,7 @@ export const GenericErrorPage: React.FC<GenericErrorPageProps> = ({
             </Message>
 
             <ButtonWrapper>
-              <WhiteColorButton onClick={() => history.goBack()}>
+              <WhiteColorButton onClick={() => history(-1)}>
                 Take me Back
               </WhiteColorButton>
             </ButtonWrapper>

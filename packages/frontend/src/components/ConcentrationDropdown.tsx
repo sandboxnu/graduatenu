@@ -1,4 +1,4 @@
-import { FormControl, FormHelperText, TextField } from "@material-ui/core";
+import { TextField } from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
 import { CSSProperties } from "@material-ui/styles";
 import React, { useEffect } from "react";
@@ -55,7 +55,7 @@ const SaveInParentConcentrationDropdown: React.FC<
   const hasError: boolean =
     !concentration && !!major && major.concentrations.minOptions > 0;
 
-  const onChange = (e: React.SyntheticEvent<{}>, value: any) => {
+  const onChange = (e: React.SyntheticEvent<any>, value: any) => {
     setConcentration(value);
     if (setError) {
       setError(hasError);

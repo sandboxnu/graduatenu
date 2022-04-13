@@ -5,6 +5,7 @@ WORKDIR /app
 # package.json of root and of needed packages
 COPY .yarn .yarn
 COPY .yarnrc.yml .
+COPY .eslintrc.js .
 COPY yarn.lock .
 COPY babel.config.js .
 COPY package.json .

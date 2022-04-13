@@ -171,14 +171,14 @@ export class SidebarAddClassModalComponent extends React.Component<
    * Maps each semester from the current DNDSchedule into a list of semesters for use in input.
    */
   mapScheduleToSemesters() {
-    let semesterList: DNDScheduleTerm[] = [];
-    let schedule: DNDSchedule = this.props.schedule;
-    let years: DNDScheduleYear[] = [];
-    for (let i of schedule.years) {
+    const semesterList: DNDScheduleTerm[] = [];
+    const schedule: DNDSchedule = this.props.schedule;
+    const years: DNDScheduleYear[] = [];
+    for (const i of schedule.years) {
       years.push(schedule.yearMap[i]);
     }
 
-    for (let i in years) {
+    for (const i in years) {
       semesterList.push(years[i].fall);
       semesterList.push(years[i].spring);
       semesterList.push(years[i].summer1);
@@ -199,14 +199,14 @@ export class SidebarAddClassModalComponent extends React.Component<
       queuedCourses: [],
     });
 
-    for (let i in this.props.selectedCourses) {
+    for (const i in this.props.selectedCourses) {
       const courseToAdd: ScheduleCourse | null = await fetchCourse(
         this.props.selectedCourses[i].subject.toUpperCase(),
         this.props.selectedCourses[i].classId.toString()
       );
 
       if (courseToAdd != null) {
-        let curCourses: ScheduleCourse[] = this.state.queuedCourses.slice();
+        const curCourses: ScheduleCourse[] = this.state.queuedCourses.slice();
         curCourses.push(courseToAdd);
         this.setState({
           queuedCourses: curCourses,

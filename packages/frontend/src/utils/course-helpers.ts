@@ -11,7 +11,7 @@ import {
 export async function getScheduleCoursesFromSimplifiedCourseDataAPI(
   courses: ISimplifiedCourseDataAPI[]
 ): Promise<ScheduleCourse[]> {
-  let convertedCourses: ScheduleCourse[] = [];
+  const convertedCourses: ScheduleCourse[] = [];
   await Promise.all(
     courses.map(async (c) => {
       const course = await fetchCourse(c.subject, c.course_id.toString());
@@ -30,7 +30,7 @@ function isINEUPrereqCourse(val: INEUPrereq): val is INEUPrereqCourse {
 export async function getScheduleCourseCoreqs(
   course: ScheduleCourse
 ): Promise<ScheduleCourse[]> {
-  let coursesCoreqs: ScheduleCourse[] = [];
+  const coursesCoreqs: ScheduleCourse[] = [];
 
   const coreq = course.coreqs;
   if (coreq?.type === "and") {

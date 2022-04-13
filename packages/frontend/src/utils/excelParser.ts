@@ -8,7 +8,7 @@ import {
 import { SeasonEnum, StatusEnum } from "../models/types";
 import { convertSeasonToTermId } from "./schedule-helpers";
 
-const BASE_YEAR: number = 1000;
+const BASE_YEAR = 1000;
 
 export function excelToSchedule(
   file: File,
@@ -54,13 +54,13 @@ export function excelToScheduleMultipleSheets(
 
 function parseExcelAndCreateSchedule(worksheet: XLSX.WorkSheet): Schedule {
   // Find beginning of table
-  let startCellIdx = getStartCellIndex(worksheet);
+  const startCellIdx = getStartCellIndex(worksheet);
   if (startCellIdx.length < 2) {
     throw "Parsing Error";
   }
 
   // Get columns that need to be parsed
-  let column: string = startCellIdx.charAt(0).toUpperCase();
+  const column: string = startCellIdx.charAt(0).toUpperCase();
   const fallColumns: string[] = [
     getChar(column, 3),
     getChar(column, 4),
@@ -83,20 +83,20 @@ function parseExcelAndCreateSchedule(worksheet: XLSX.WorkSheet): Schedule {
   ];
 
   // Parse the columns
-  let fall = parseColumn(worksheet, SeasonEnum.FL, fallColumns, startCellIdx);
-  let spring = parseColumn(
+  const fall = parseColumn(worksheet, SeasonEnum.FL, fallColumns, startCellIdx);
+  const spring = parseColumn(
     worksheet,
     SeasonEnum.SP,
     springColumns,
     startCellIdx
   );
-  let summerOne = parseColumn(
+  const summerOne = parseColumn(
     worksheet,
     SeasonEnum.S1,
     summerOneColumns,
     startCellIdx
   );
-  let summerTwo = parseColumn(
+  const summerTwo = parseColumn(
     worksheet,
     SeasonEnum.S2,
     summerTwoColumns,
@@ -159,7 +159,7 @@ function createYears(
     throw "parser parsed inconsitently";
   }
 
-  let years: ScheduleYear[] = [];
+  const years: ScheduleYear[] = [];
   for (let i = 0; i < fall.length; i++) {
     years.push({
       year: fall[i].year,
@@ -294,8 +294,7 @@ function generateNewScheduleTerm(
   season: SeasonEnum,
   year: number
 ): ScheduleTerm {
-  let termId = convertSeasonToTermId(season);
-  let id = year + termId;
+  const termId = convertSeasonToTermId(season);
 
   const scheduleTerm: ScheduleTerm = {
     season: season,
@@ -312,7 +311,7 @@ function getScheduleCourse(
   name: string,
   credits: string
 ): ScheduleCourse {
-  let splitIdSubject = splitClassIdSubject(classIdSubject);
+  const splitIdSubject = splitClassIdSubject(classIdSubject);
   let classId = "9999";
   let subject = "XXXX";
   if (splitIdSubject.length > 1) {
@@ -324,7 +323,7 @@ function getScheduleCourse(
     }
   }
 
-  let parsedClass: ScheduleCourse = {
+  const parsedClass: ScheduleCourse = {
     name: name,
     classId: classId,
     subject: subject,

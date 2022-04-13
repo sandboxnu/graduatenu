@@ -4,13 +4,13 @@ import { red } from "@material-ui/core/colors";
 import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
-import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
+import { createTheme, ThemeProvider } from "@material-ui/core/styles";
 import { makeStyles } from "@material-ui/core/styles";
 import { Checkbox, Paper } from "@material-ui/core";
 import CheckBoxIcon from "@material-ui/icons/CheckBox";
 import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
-import { RouteComponentProps, withRouter } from "react-router-dom";
 import { NextButton } from "../components/common/NextButton";
+import { useNavigate } from "react-router";
 
 const Wrapper = styled.div`
   display: flex;
@@ -46,7 +46,7 @@ const DotWrapper = styled.div`
   margin-bottom: 48px;
 `;
 
-const MainTitleText = styled.div`
+export const MainTitleText = styled.div`
   font-size: 16px;
   margin-left: 4px;
   margin-top: 10px;
@@ -54,7 +54,7 @@ const MainTitleText = styled.div`
   font-weight: 500;
 `;
 
-const TitleText = styled.div`
+export const TitleText = styled.div`
   font-size: 12px;
   margin-left: 4px;
   margin-top: 16px;
@@ -68,13 +68,13 @@ const CourseWrapper = styled.div`
   align-items: center;
 `;
 
-const CourseText = styled.p`
+export const CourseText = styled.p`
   font-size: 12px;
   margin: 1px;
   font-weight: 400;
 `;
 
-const ScrollWrapper = styled.div`
+export const ScrollWrapper = styled.div`
   &::-webkit-scrollbar-thumb:hover {
     background-color: rgba(0, 0, 0, 0.5);
   }
@@ -107,7 +107,7 @@ const useStyles = makeStyles({
   },
 });
 
-const theme = createMuiTheme({
+const theme = createTheme({
   palette: {
     primary: {
       main: "#EB5757",
@@ -140,7 +140,7 @@ interface OnboardingSelectionTemplateProps {
   readonly to: string;
 }
 
-const SelectableCourse: React.FC<SelectableCourseProps> = ({
+export const SelectableCourse: React.FC<SelectableCourseProps> = ({
   courseText,
   onChange,
   checked,
@@ -161,7 +161,7 @@ const SelectableCourse: React.FC<SelectableCourseProps> = ({
   );
 };
 
-const GenericOnboardingTemplate: React.FC<GenericOnboardingTemplateProps> = ({
+export const GenericOnboardingTemplate: React.FC<GenericOnboardingTemplateProps> = ({
   screen,
   children,
 }) => {
@@ -188,9 +188,8 @@ const GenericOnboardingTemplate: React.FC<GenericOnboardingTemplateProps> = ({
   );
 };
 
-const OnboardingSelectionTemplateComponent: React.FC<
-  OnboardingSelectionTemplateProps & RouteComponentProps
-> = ({ screen, mainTitleText, onSubmit, to, history, children }) => {
+const OnboardingSelectionTemplateComponent: React.FC<OnboardingSelectionTemplateProps> = ({ screen, mainTitleText, onSubmit, to, children }) => {
+  const history = useNavigate();
   return (
     <GenericOnboardingTemplate screen={screen}>
       <MainTitleText>{mainTitleText}</MainTitleText>
@@ -211,7 +210,7 @@ const OnboardingSelectionTemplateComponent: React.FC<
       <div
         onClick={() => {
           onSubmit().then(() => {
-            history.push(to);
+            history(to);
           });
         }}
         style={{ textDecoration: "none" }}
@@ -222,16 +221,5 @@ const OnboardingSelectionTemplateComponent: React.FC<
   );
 };
 
-const OnboardingSelectionTemplate = withRouter(
-  OnboardingSelectionTemplateComponent
-);
+export const OnboardingSelectionTemplate = OnboardingSelectionTemplateComponent;
 
-export {
-  CourseText,
-  GenericOnboardingTemplate,
-  OnboardingSelectionTemplate,
-  MainTitleText,
-  TitleText,
-  ScrollWrapper,
-  SelectableCourse,
-};

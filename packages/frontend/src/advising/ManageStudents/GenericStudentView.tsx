@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { batch, useDispatch } from "react-redux";
-import { useParams, useRouteMatch } from "react-router";
+import { useParams, useMatch } from "react-router";
 import { fetchUser } from "../../services/AdvisorService";
 import {
   setStudentAction,
@@ -10,10 +10,7 @@ import { getScheduleCoursesFromSimplifiedCourseDataAPI } from "../../utils/cours
 import { ExpandedStudentView } from "./ExpandedStudentView";
 import { StudentView } from "./StudentView";
 
-interface ParamProps {
-  id: string; // id of the student
-  planId: string; // id of the student's plan
-}
+
 
 /**
  * This component represents a standard or expanded student view within the advisor workflow.
@@ -25,10 +22,10 @@ export const GenericStudentView: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState<any>();
   const dispatch = useDispatch();
-  const params = useParams<ParamProps>();
+  const params = useParams();
   const userId = Number(params.id);
 
-  const isExpanded = !!useRouteMatch(
+  const isExpanded = !!useMatch(
     "/advisor/manageStudents/:id/expanded/:planId"
   );
 

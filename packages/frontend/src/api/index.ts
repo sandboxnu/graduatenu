@@ -58,8 +58,8 @@ export const fetchCourse = async (
 
 export const searchCourses = async (
   searchQuery: string,
-  minIndex: number = 0,
-  maxIndex: number = 9999
+  minIndex = 0,
+  maxIndex = 9999
 ): Promise<ScheduleCourse[]> => {
   const courses: ScheduleCourse[] = [];
   const response = await fetch("https://api.searchneu.com/graphql", {

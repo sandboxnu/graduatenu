@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { withRouter, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { batch, useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { PrimaryButton } from "../components/common/PrimaryButton";
@@ -19,9 +19,8 @@ import {
   getStudentFromState,
   getPlansFromState,
 } from "../state";
-import { Major, Schedule } from "@graduate/common";
+import { Major } from "@graduate/common";
 import { AppState } from "../state/reducers/state";
-import { planToString } from "../utils";
 import { updateUser } from "../services/UserService";
 import { IUpdateUser, IUpdateUserData } from "../models/types";
 import { getAuthToken } from "../utils/auth-helpers";
@@ -105,16 +104,9 @@ const ProfileEmail = styled.div`
   margin-bottom: 10px;
 `;
 
-const ButtonContainer = styled.div`
-  box-sizing: border-box;
-  width: 100%;
-  text-align: center;
-  margin-top: 20px;
-`;
-
 const ProfileComponent: React.FC = () => {
   const dispatch = useDispatch();
-  const { user, majors, plans } = useSelector((state: AppState) => ({
+  const { user, majors } = useSelector((state: AppState) => ({
     user: getStudentFromState(state), // best to update this screen when any part of the user changes
     majors: getMajorsFromState(state),
     plans: getPlansFromState(state),
@@ -128,7 +120,6 @@ const ProfileComponent: React.FC = () => {
   const [coopCycle, setCoopCycle] = useState(user.coopCycle);
   const [catalogYear, setCatalogYear] = useState(user.catalogYear);
   const [gradYear, setGradYear] = useState(user.graduationYear!);
-  const [advisor, setAdvisor] = useState("");
   const [hasConcentrationError, setHasConcentrationError] = useState(false);
   const [showConcentrationError, setShowConcentrationError] = useState(false);
 
@@ -185,7 +176,7 @@ const ProfileComponent: React.FC = () => {
               <TextField {...params} variant="outlined" fullWidth />
             )}
             value={val}
-            onChange={(event: React.SyntheticEvent<{}>, value: any) => {
+            onChange={(event: React.SyntheticEvent<any>, value: any) => {
               setMajor(value);
               setCoopCycle(null);
               setConcentration(null);
@@ -200,7 +191,7 @@ const ProfileComponent: React.FC = () => {
 
   const ProfileCatalogYear = () => {
     const val = String(catalogYear || "None selected");
-    let majorSet = [
+    const majorSet = [
       ...Array.from(new Set(majors.map((maj) => maj.yearVersion.toString()))),
     ];
     return (
@@ -214,7 +205,7 @@ const ProfileComponent: React.FC = () => {
               <TextField {...params} variant="outlined" fullWidth />
             )}
             value={val}
-            onChange={(event: React.SyntheticEvent<{}>, value: any) => {
+            onChange={(event: React.SyntheticEvent<any>, value: any) => {
               setMajor(null);
               setCoopCycle(null);
               setConcentration(null);
@@ -262,7 +253,7 @@ const ProfileComponent: React.FC = () => {
               <TextField {...params} variant="outlined" fullWidth />
             )}
             value={val}
-            onChange={(event: React.SyntheticEvent<{}>, value: any) =>
+            onChange={(event: React.SyntheticEvent<any>, value: any) =>
               setCoopCycle(value)
             }
           />
@@ -400,4 +391,4 @@ const ProfileAdvisor = (props: any) => {
   );
 };
 
-export const Profile = withRouter(ProfileComponent);
+export const Profile = ProfileComponent;

@@ -23,7 +23,7 @@ import {
   addPrereqsToSchedule,
 } from "@graduate/common";
 import { findMajorFromName } from "../utils/plan-helpers";
-import Loader from "react-loader-spinner";
+import { Puff } from "react-loader-spinner";
 import { createPlanForUser } from "../services/PlanService";
 import {
   convertToDNDSchedule,
@@ -168,7 +168,7 @@ const validateValues =
       }
     };
 
-    const validateConcentration = (values: AddPlanPopperFields) => {
+    const validateConcentration = () => {
       // Missing concentration
       if (noConcentrationError) {
         return REQUIRED_FIELD_MESSAGE;
@@ -179,7 +179,7 @@ const validateValues =
       planName: validatePlanName(values),
       planOption: validatePlanOption(values),
       basePlan: validateBasePlan(values),
-      concentration: validateConcentration(values),
+      concentration: validateConcentration(),
     };
   };
 
@@ -200,8 +200,8 @@ const AddPlanPopperComponent: React.FC<Props> = ({
   graduationYear,
   completedCourses,
 }) => {
-  let selectedDNDSchedule = useRef<DNDSchedule | undefined>(undefined);
-  let counter = useRef(0);
+  const selectedDNDSchedule = useRef<DNDSchedule | undefined>(undefined);
+  const counter = useRef(0);
 
   const [visible, setVisible] = useState(false);
   const [noConcentrationError, setNoConcentrationError] = useState(false);
@@ -225,7 +225,7 @@ const AddPlanPopperComponent: React.FC<Props> = ({
   } = values;
 
   const setSchedule = async (schedule: Schedule) => {
-    let preReqSched = await addPrereqsToSchedule(schedule);
+    const preReqSched = await addPrereqsToSchedule(schedule);
     [selectedDNDSchedule.current, counter.current] = convertToDNDSchedule(
       preReqSched,
       0
@@ -495,12 +495,11 @@ const AddPlanPopperComponent: React.FC<Props> = ({
 
   return isFetchingMajors || isFetchingPlans ? (
     <SpinnerWrapper>
-      <Loader
-        type="Puff"
+      <Puff
         color="#f50057"
         height={100}
         width={100}
-        timeout={5000} //5 secs
+        // timeout={5000} //5 secs
       />
     </SpinnerWrapper>
   ) : (

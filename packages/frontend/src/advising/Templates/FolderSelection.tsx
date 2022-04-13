@@ -143,7 +143,7 @@ export const FolderSelection: React.FC = () => {
   }, [folders, newFolderName, selectedFolderId, showErrors]);
 
   const handleTabChange = useCallback(
-    (event: React.ChangeEvent<{}>, newValue: number) => {
+    (event: React.ChangeEvent<any>, newValue: number) => {
       setTabValue(newValue);
     },
     []
