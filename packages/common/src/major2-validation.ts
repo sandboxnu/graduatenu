@@ -15,7 +15,7 @@ import {
   Err,
   Ok,
 } from "./types";
-import { courseToString } from "./course-utils";
+import { assertUnreachable, courseToString } from "./course-utils";
 
 /**
  * general solution: postorder traversal requirements, producing all solutions at each level.
@@ -134,10 +134,6 @@ const SectionError = (
 type TotalCreditsRequirementError = {
   takenCredits: number;
   requiredCredits: number;
-};
-
-export const assertUnreachable = (_: never): never => {
-  throw new Error("This code is unreachable");
 };
 
 // for keeping track of courses taken

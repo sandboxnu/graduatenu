@@ -27,11 +27,29 @@ export type HTMLCatalogCourseList = {
   courseBody: HTMLCatalogCourseListBodyRow[];
 };
 
-export interface HTMLCatalogCourseListBodyRow {
+export type HTMLCatalogCourseListBodyRow =
+  | HTMLCatalogCourseListBodyRowSingle
+  | HTMLCatalogCourseListBodyRowMany;
+
+export interface HTMLCatalogCourseListBodyRowText {
+  type:
+    | CourseListBodyRowType.COMMENT
+    | CourseListBodyRowType.HEADER
+    | CourseListBodyRowType.SUBHEADER;
   description: string;
   hour: number;
-  courseTitle?: string;
-  type: CourseListBodyRowType;
+}
+export interface HTMLCatalogCourseListBodyRowSingle {
+  type: CourseListBodyRowType.OR_COURSE | CourseListBodyRowType.PLAIN_COURSE;
+  description: string;
+  hour: number;
+  courseTitle: string;
+}
+export interface HTMLCatalogCourseListBodyRowMany {
+  description: string;
+  hour: number;
+  // maps from title to description
+  courses: Record<string, string>;
 }
 
 export enum CourseListBodyRowType {
@@ -39,5 +57,6 @@ export enum CourseListBodyRowType {
   SUBHEADER = "SUBHEADER",
   COMMENT = "COMMENT",
   OR_COURSE = "OR_COURSE",
+  AND_COURSE = "AND_COURSE",
   PLAIN_COURSE = "PLAIN_COURSE",
 }

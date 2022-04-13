@@ -1,3 +1,4 @@
+import { assertUnreachable } from "@graduate/common";
 import axios from "axios";
 import * as cheerio from "cheerio";
 import {
@@ -120,7 +121,9 @@ const transformCourseListTable = (
     .each((_idx: number, tr: CheerioElement) => {
       // different row type
       const trClass = tr.attribs["class"];
-      const firstTdClass = $(tr).children()[0].attribs["class"];
+      const tdClass = $(tr).children()[0].attribs["class"];
+
+      // const isCodeCol = Boolean($(tr).children()[0].attribs["class"]);
 
       let courseListBodyRowType: CourseListBodyRowType;
       if (trClass.includes("subheader")) {
@@ -129,8 +132,17 @@ const transformCourseListTable = (
         courseListBodyRowType = CourseListBodyRowType.HEADER;
       } else if (trClass.includes("orclass")) {
         courseListBodyRowType = CourseListBodyRowType.OR_COURSE;
-      } else if (firstTdClass != null) {
+      } else if (tdClass) {
+        if (tdClass !== "codecol") {
+          throw Error(
+            "Expected class to exist with value codecol. Please add this case to the compiler."
+          );
+        }
+
         courseListBodyRowType = CourseListBodyRowType.PLAIN_COURSE;
+        if ($(tdClass).text().includes("and")) {
+          courseListBodyRowType = CourseListBodyRowType.AND_COURSE;
+        }
       } else {
         courseListBodyRowType = CourseListBodyRowType.COMMENT;
       }
@@ -149,42 +161,57 @@ const transformCourseListTable = (
 const constructCourseListBodyRow = (
   $: CheerioStatic,
   tr: CheerioElement,
-  courseListBodyRowType: CourseListBodyRowType
+  type: CourseListBodyRowType
 ): HTMLCatalogCourseListBodyRow => {
-  let hour = 0;
-  let description = "";
-  let courseTitle = "";
-  const courseListRow: {
-    [key in keyof HTMLCatalogCourseListBodyRow]: HTMLCatalogCourseListBodyRow[key];
-  } = {
-    type: courseListBodyRowType,
-    hour,
-    description,
-  };
-  $(tr)
-    .children()
-    .each((_idx: number, td: CheerioElement) => {
-      const tdClass = td.attribs["class"];
-      if (tdClass != null) {
-        if (tdClass.includes("codecol")) {
-          if (tdClass.includes("orclass")) {
-            hour = parseInt($(tr).prev().children().last().text()) || 0;
-          }
-          courseTitle = String($(td).text()).replaceAll(" ", " ");
-          courseListRow["courseTitle"] = courseTitle;
-        }
+  switch (type) {
+    case CourseListBodyRowType.HEADER:
+    case CourseListBodyRowType.SUBHEADER:
+    case CourseListBodyRowType.COMMENT:
+      return { ...constructCourseListBodyRowText($, tr), type };
+    case CourseListBodyRowType.OR_COURSE:
+    case CourseListBodyRowType.PLAIN_COURSE:
+      return { ...constructCourseListBodyRowSingle($, tr), type };
+    case CourseListBodyRowType.AND_COURSE:
+      return { ...constructCourseListBodyRowMany($, tr), type };
+    default:
+      return assertUnreachable(type);
+    // $(tr)
+    //   .children()
+    //   .each((_idx: number, td: CheerioElement) => {
+    //     const tdClass = td.attribs["class"];
 
-        if (tdClass.includes("hourscol")) {
-          hour = parseInt($(td).text()) || 0;
-        }
-      } else {
-        description = $(td).text();
-      }
-    });
-  courseListRow["hour"] = hour;
-  courseListRow["description"] = description;
+    //         description = $(td).text();
+    //         break
+    //       case CourseListBodyRowType.OR_COURSE:
+    //         const hourCol = $(tr).prev().children().last().text();
+    //         hour = parseInt(hourCol.split('-')[0]) || 0;
+    //         courseTitle = String($(td).text()).replaceAll(" ", " ");
+    //         break
+    //       case CourseListBodyRowType.PLAIN_COURSE:
+    //         courseTitle = String($(td).text()).replaceAll(" ", " ");
+    //         break
+    //       case CourseListBodyRowType.AND_COURSE:
+    //         courseTitle = String($(td).text()).replaceAll(" ", " ");
+  }
+  // if (tdClass != null) {
+  //   if (tdClass.includes("codecol")) {
+  //     if (courseListBodyRowType === CourseListBodyRowType.OR_COURSE) {
+  //       const hourCol = $(tr).prev().children().last().text();
+  //       hour = parseInt(hourCol.split('-')[0]) || 0;
+  //     } else if (courseListBodyRowType === CourseListBodyRowType.AND_COURSE) {
+  //       $(tdClass).text()
+  //     }
 
-  return courseListRow;
+  //     courseTitle = String($(td).text()).replaceAll(" ", " ");
+  //     courseListRow["courseTitle"] = courseTitle;
+  //   }
+
+  //   if (tdClass.includes("hourscol")) {
+  //     hour = parseInt($(td).text()) || 0;
+  //   }
+  // } else {
+  //   description = $(td).text();
+  // }
 };
 
 const constructNestedLinks = ($: CheerioStatic, element: CheerioElement) => {

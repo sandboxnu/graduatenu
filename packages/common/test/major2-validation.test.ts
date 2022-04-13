@@ -1,6 +1,5 @@
 import {
   AndErrorNoSolution,
-  assertUnreachable,
   getConcentrationsRequirement,
   Major2ValidationTracker,
   validateMajor2,
@@ -23,7 +22,7 @@ import {
   Err,
   Ok,
 } from "../src/types";
-import { courseToString } from "../src/course-utils";
+import { assertUnreachable, courseToString } from "../src/course-utils";
 import bscs from "../../scrapers/test/mock_majors/bscs.json";
 
 type TestCourse = IRequiredCourse & { credits: number };
