@@ -1,37 +1,417 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Scrap catalog page CS & Game Dev matches snapshot 1`] = `
+exports[`scraper v2 snapshot tests 3 classes per AND (physics) 1`] = `
 Object {
-  "courseLists": Array [
+  "majorName": "Physics, BS",
+  "programRequiredHours": 133,
+  "sections": Array [
     Object {
-      "courseBody": Array [
+      "description": "Physics Major Requirements",
+      "entries": Array [
+        Object {
+          "description": "Introductory Physics",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "description": "Physics 1",
+          "hour": 0,
+          "type": "SUBHEADER",
+        },
+        Object {
+          "description": "Complete one of the following:",
+          "hour": 5,
+          "type": "COMMENT",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "description": "Physics 1",
+              "title": "PHYS 1161",
+            },
+            Object {
+              "description": "Lab for PHYS 1161",
+              "title": "PHYS 1162",
+            },
+          ],
+          "description": "Physics 1 and Lab for PHYS 1161",
+          "hour": 0,
+          "type": "AND_COURSE",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "description": "Physics for Engineering 1",
+              "title": "PHYS 1151",
+            },
+            Object {
+              "description": "Lab for PHYS 1151",
+              "title": "PHYS 1152",
+            },
+            Object {
+              "description": "Interactive Learning Seminar for PHYS 1151",
+              "title": "PHYS 1153",
+            },
+          ],
+          "description": "Physics for Engineering 1 and Lab for PHYS 1151 and Interactive Learning Seminar for PHYS 1151",
+          "hour": 0,
+          "type": "AND_COURSE",
+        },
+        Object {
+          "description": "Physics 2",
+          "hour": 0,
+          "type": "SUBHEADER",
+        },
+        Object {
+          "description": "Complete one of the following:",
+          "hour": 5,
+          "type": "COMMENT",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "description": "Physics 2",
+              "title": "PHYS 1165",
+            },
+            Object {
+              "description": "Lab for PHYS 1165",
+              "title": "PHYS 1166",
+            },
+          ],
+          "description": "Physics 2 and Lab for PHYS 1165",
+          "hour": 0,
+          "type": "AND_COURSE",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "description": "Physics for Engineering 2",
+              "title": "PHYS 1155",
+            },
+            Object {
+              "description": "Lab for PHYS 1155",
+              "title": "PHYS 1156",
+            },
+            Object {
+              "description": "Interactive Learning Seminar for PHYS 1155",
+              "title": "PHYS 1157",
+            },
+          ],
+          "description": "Physics for Engineering 2 and Lab for PHYS 1155 and Interactive Learning Seminar for PHYS 1155",
+          "hour": 0,
+          "type": "AND_COURSE",
+        },
+        Object {
+          "description": "Intermediate Physics",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "description": "Modern Physics",
+          "hour": 4,
+          "title": "PHYS 2303",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "description": "Electronics",
+              "title": "PHYS 2371",
+            },
+            Object {
+              "description": "Lab for PHYS 2371",
+              "title": "PHYS 2372",
+            },
+          ],
+          "description": "Electronics and Lab for PHYS 2371",
+          "hour": 4,
+          "type": "AND_COURSE",
+        },
+        Object {
+          "description": "Advanced Physics",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "description": "Advanced Physics Laboratory",
+          "hour": 4,
+          "title": "PHYS 3600",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Classical Dynamics",
+          "hour": 4,
+          "title": "PHYS 3601",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Electricity and Magnetism 1",
+          "hour": 4,
+          "title": "PHYS 3602",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Electricity and Magnetism 2",
+          "hour": 4,
+          "title": "PHYS 3603",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Quantum Mechanics",
+          "hour": 4,
+          "title": "PHYS 4115",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Thermodynamics and Statistical Mechanics",
+          "hour": 4,
+          "title": "PHYS 4305",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Elective Course",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "description": "Complete one of the following:",
+          "hour": 4,
+          "type": "COMMENT",
+        },
+        Object {
+          "description": "Mathematical and Computational Methods for Physics",
+          "hour": 0,
+          "title": "MATH 4606",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "PHYS 3500 to PHYS 7999",
+          "hour": 0,
+          "type": "COMMENT",
+        },
+        Object {
+          "description": "Experiential Learning",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "description": "Complete one course in experiential learning. See department for approved courses. Note: The experiential learning requirement is waived following a student presentation connected with a co-op and/or research experience. The requirement is often fulfilled by a talk at a Society of Physics Students meeting but can be fulfilled by an adequately documented presentation at a professional meeting or at an appropriate campus event. Contact your faculty adviser for additional information.",
+          "hour": 0,
+          "type": "COMMENT",
+        },
+        Object {
+          "description": "Senior Capstone",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "description": "Principles of Experimental Physics",
+          "hour": 4,
+          "title": "PHYS 5318",
+          "type": "PLAIN_COURSE",
+        },
+      ],
+    },
+    Object {
+      "description": "Supporting Courses",
+      "entries": Array [
+        Object {
+          "description": "Mathematics",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "description": "Calculus 1 for Science and Engineering",
+          "hour": 4,
+          "title": "MATH 1341",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Calculus 2 for Science and Engineering",
+          "hour": 4,
+          "title": "MATH 1342",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Calculus 3 for Science and Engineering",
+          "hour": 4,
+          "title": "MATH 2321",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Differential Equations and Linear Algebra for Engineering",
+          "hour": 4,
+          "title": "MATH 2341",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Linear Algebra",
+          "hour": 4,
+          "title": "MATH 2331",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Probability and Statistics",
+          "hour": 4,
+          "title": "MATH 3081",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Computational Methods",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "description": "Computational Problem Solving in Physics",
+          "hour": 4,
+          "title": "PHYS 1211",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Computing, Data, and Science",
+          "hour": 0,
+          "title": "PHYS 1130",
+          "type": "OR_COURSE",
+        },
+        Object {
+          "description": "Engineering Problem Solving and Computation",
+          "hour": 0,
+          "title": "GE 1111",
+          "type": "OR_COURSE",
+        },
+        Object {
+          "description": "Chemistry",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "description": "General Chemistry 1",
+              "title": "CHEM 1211",
+            },
+            Object {
+              "description": "Lab for CHEM 1211",
+              "title": "CHEM 1212",
+            },
+          ],
+          "description": "General Chemistry 1 and Lab for CHEM 1211",
+          "hour": 5,
+          "type": "AND_COURSE",
+        },
+        Object {
+          "description": "Technical Electives",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "description": "Complete 8 semester hours from the following:",
+          "hour": 8,
+          "type": "COMMENT",
+        },
+        Object {
+          "description": "Statistics and Software",
+          "hour": 0,
+          "title": "MATH 2280",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "MATH 2321 to MATH 5999",
+          "hour": 0,
+          "type": "COMMENT",
+        },
+        Object {
+          "description": "PHYS 2303 to PHYS 7999",
+          "hour": 0,
+          "type": "COMMENT",
+        },
+        Object {
+          "description": "CHEM 2311 to CHEM 5999",
+          "hour": 0,
+          "type": "COMMENT",
+        },
+        Object {
+          "description": "BIOL 2301 to BIOL 5999",
+          "hour": 0,
+          "type": "COMMENT",
+        },
+        Object {
+          "description": "ENVR 2300 to ENVR 5999",
+          "hour": 0,
+          "type": "COMMENT",
+        },
+        Object {
+          "description": "CS 2990 to CS 4900",
+          "hour": 0,
+          "type": "COMMENT",
+        },
+        Object {
+          "description": "CHME 2001 to CHME 4699",
+          "hour": 0,
+          "type": "COMMENT",
+        },
+        Object {
+          "description": "CIVE 2001 to CIVE 4699",
+          "hour": 0,
+          "type": "COMMENT",
+        },
+        Object {
+          "description": "EECE 2001 to EECE 5999",
+          "hour": 0,
+          "type": "COMMENT",
+        },
+        Object {
+          "description": "ME 2001 to ME 4699",
+          "hour": 0,
+          "type": "COMMENT",
+        },
+        Object {
+          "description": "IE 2001 to IE 4699",
+          "hour": 0,
+          "type": "COMMENT",
+        },
+      ],
+    },
+  ],
+  "yearVersion": 2021,
+}
+`;
+
+exports[`scraper v2 snapshot tests CS & Game Dev matches snapshot 1`] = `
+Object {
+  "majorName": "Computer Science and Game Development, BS",
+  "programRequiredHours": 133,
+  "sections": Array [
+    Object {
+      "description": "Computer Science Courses",
+      "entries": Array [
         Object {
           "description": "Computer Science Overview",
           "hour": 0,
           "type": "HEADER",
         },
         Object {
-          "courseTitle": "CS 1200",
           "description": "First Year Seminar",
           "hour": 1,
+          "title": "CS 1200",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "or ARTF 1000",
-          "description": " Art and Design at Northeastern",
-          "hour": 1,
+          "description": "Art and Design at Northeastern",
+          "hour": 0,
+          "title": "ARTF 1000",
           "type": "OR_COURSE",
         },
         Object {
-          "courseTitle": "CS 1210",
           "description": "Professional Development for Khoury Co-op",
           "hour": 1,
+          "title": "CS 1210",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "or EEAM 2000",
-          "description": " Professional Development for Co-op",
-          "hour": 1,
+          "description": "Professional Development for Co-op",
+          "hour": 0,
+          "title": "EEAM 2000",
           "type": "OR_COURSE",
         },
         Object {
@@ -40,22 +420,49 @@ Object {
           "type": "HEADER",
         },
         Object {
-          "courseTitle": "CS 1800and CS 1802",
-          "description": "Discrete Structuresand Seminar for CS 1800",
+          "courses": Array [
+            Object {
+              "description": "Discrete Structures",
+              "title": "CS 1800",
+            },
+            Object {
+              "description": "Seminar for CS 1800",
+              "title": "CS 1802",
+            },
+          ],
+          "description": "Discrete Structures and Seminar for CS 1800",
           "hour": 5,
-          "type": "PLAIN_COURSE",
+          "type": "AND_COURSE",
         },
         Object {
-          "courseTitle": "CS 2500and CS 2501",
-          "description": "Fundamentals of Computer Science 1and Lab for CS 2500",
+          "courses": Array [
+            Object {
+              "description": "Fundamentals of Computer Science 1",
+              "title": "CS 2500",
+            },
+            Object {
+              "description": "Lab for CS 2500",
+              "title": "CS 2501",
+            },
+          ],
+          "description": "Fundamentals of Computer Science 1 and Lab for CS 2500",
           "hour": 5,
-          "type": "PLAIN_COURSE",
+          "type": "AND_COURSE",
         },
         Object {
-          "courseTitle": "CS 2510and CS 2511",
-          "description": "Fundamentals of Computer Science 2and Lab for CS 2510",
+          "courses": Array [
+            Object {
+              "description": "Fundamentals of Computer Science 2",
+              "title": "CS 2510",
+            },
+            Object {
+              "description": "Lab for CS 2510",
+              "title": "CS 2511",
+            },
+          ],
+          "description": "Fundamentals of Computer Science 2 and Lab for CS 2510",
           "hour": 5,
-          "type": "PLAIN_COURSE",
+          "type": "AND_COURSE",
         },
         Object {
           "description": "Computer Science Required Courses",
@@ -63,63 +470,72 @@ Object {
           "type": "HEADER",
         },
         Object {
-          "courseTitle": "CS 3000",
           "description": "Algorithms and Data",
           "hour": 4,
+          "title": "CS 3000",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "CS 3500and CS 3501",
-          "description": "Object-Oriented Designand Lab for CS 3500",
+          "courses": Array [
+            Object {
+              "description": "Object-Oriented Design",
+              "title": "CS 3500",
+            },
+            Object {
+              "description": "Lab for CS 3500",
+              "title": "CS 3501",
+            },
+          ],
+          "description": "Object-Oriented Design and Lab for CS 3500",
           "hour": 5,
-          "type": "PLAIN_COURSE",
+          "type": "AND_COURSE",
         },
         Object {
-          "courseTitle": "CS 3520",
           "description": "Programming in C++ (Integrative course)",
           "hour": 4,
+          "title": "CS 3520",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "CS 3540",
           "description": "Game Programming (Integrative course)",
           "hour": 4,
+          "title": "CS 3540",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "CS 3650",
           "description": "Computer Systems",
           "hour": 4,
+          "title": "CS 3650",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "CS 3700",
           "description": "Networks and Distributed Systems",
           "hour": 4,
+          "title": "CS 3700",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "CS 4300",
           "description": "Computer Graphics (Integrative course)",
           "hour": 4,
+          "title": "CS 4300",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "CS 4500",
           "description": "Software Development",
           "hour": 4,
+          "title": "CS 4500",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "or CS 4530",
-          "description": " Fundamentals of Software Engineering",
-          "hour": 4,
+          "description": "Fundamentals of Software Engineering",
+          "hour": 0,
+          "title": "CS 4530",
           "type": "OR_COURSE",
         },
         Object {
-          "courseTitle": "CS 4850",
           "description": "Building Game Engines (Integrative course)",
           "hour": 4,
+          "title": "CS 4850",
           "type": "PLAIN_COURSE",
         },
         Object {
@@ -128,67 +544,67 @@ Object {
           "type": "HEADER",
         },
         Object {
-          "courseTitle": "CS 4150",
           "description": "Game Artificial Intelligence (Integrative course)",
           "hour": 4,
+          "title": "CS 4150",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "or IS 4300",
-          "description": " Human Computer Interaction",
-          "hour": 4,
+          "description": "Human Computer Interaction",
+          "hour": 0,
+          "title": "IS 4300",
           "type": "OR_COURSE",
         },
       ],
-      "description": "Computer Science Courses",
     },
     Object {
-      "courseBody": Array [
+      "description": "Game Design Courses",
+      "entries": Array [
         Object {
           "description": "Game Design Required",
           "hour": 0,
           "type": "HEADER",
         },
         Object {
-          "courseTitle": "GAME 1110",
           "description": "Games and Society",
           "hour": 4,
+          "title": "GAME 1110",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "GAME 2500",
           "description": "Foundations of Game Design",
           "hour": 4,
+          "title": "GAME 2500",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "GAME 2950",
           "description": "Game Studio",
           "hour": 4,
+          "title": "GAME 2950",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "GAME 3400",
           "description": "Level Design and Game Architecture",
           "hour": 4,
+          "title": "GAME 3400",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "GAME 3700",
           "description": "Rapid Idea Prototyping for Games",
           "hour": 4,
+          "title": "GAME 3700",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "GAME 3800",
           "description": "Game Concept Development",
           "hour": 4,
+          "title": "GAME 3800",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "GAME 4700",
           "description": "Game Design Capstone",
           "hour": 4,
+          "title": "GAME 4700",
           "type": "PLAIN_COURSE",
         },
         Object {
@@ -197,15 +613,15 @@ Object {
           "type": "HEADER",
         },
         Object {
-          "courseTitle": "GAME 1850",
           "description": "Experimental Game Design",
           "hour": 4,
+          "title": "GAME 1850",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "or GAME 3300",
-          "description": " Game Interface Design",
-          "hour": 4,
+          "description": "Game Interface Design",
+          "hour": 0,
+          "title": "GAME 3300",
           "type": "OR_COURSE",
         },
         Object {
@@ -224,63 +640,63 @@ Object {
           "type": "COMMENT",
         },
         Object {
-          "description": "CS 2500 or higher, except CS 5010",
+          "description": "CS 2500 or higher, except CS 5010",
           "hour": 0,
           "type": "COMMENT",
         },
         Object {
-          "description": "CY 2000 or higher, except CY 4930",
+          "description": "CY 2000 or higher, except CY 4930",
           "hour": 0,
           "type": "COMMENT",
         },
         Object {
-          "description": "DS 2500 or higher, except DS 4900",
+          "description": "DS 2500 or higher, except DS 4900",
           "hour": 0,
           "type": "COMMENT",
         },
         Object {
-          "description": "IS 2000 or higher, except IS 4900",
+          "description": "IS 2000 or higher, except IS 4900",
           "hour": 0,
           "type": "COMMENT",
         },
         Object {
-          "courseTitle": "MATH 1342",
           "description": "Calculus 2 for Science and Engineering",
           "hour": 0,
+          "title": "MATH 1342",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "MATH 2331",
           "description": "Linear Algebra",
           "hour": 0,
+          "title": "MATH 2331",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "ECON 2350",
           "description": "Statistics",
           "hour": 0,
+          "title": "ECON 2350",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "or PSYC 2320",
-          "description": " Statistics in Psychological Research",
+          "description": "Statistics in Psychological Research",
           "hour": 0,
+          "title": "PSYC 2320",
           "type": "OR_COURSE",
         },
       ],
-      "description": "Game Design Courses",
     },
     Object {
-      "courseBody": Array [
+      "description": "Supporting Courses",
+      "entries": Array [
         Object {
           "description": "Psychology",
           "hour": 0,
           "type": "HEADER",
         },
         Object {
-          "courseTitle": "PSYC 1101",
           "description": "Foundations of Psychology",
           "hour": 4,
+          "title": "PSYC 1101",
           "type": "PLAIN_COURSE",
         },
         Object {
@@ -294,36 +710,36 @@ Object {
           "type": "COMMENT",
         },
         Object {
-          "courseTitle": "MATH 1260",
           "description": "Math Fundamentals for Games (Integrative course)",
           "hour": 0,
+          "title": "MATH 1260",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "MATH 1341",
           "description": "Calculus 1 for Science and Engineering",
           "hour": 0,
+          "title": "MATH 1341",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "description": "MATH 1342 or higher",
+          "description": "MATH 1342 or higher",
           "hour": 0,
           "type": "COMMENT",
         },
       ],
-      "description": "Supporting Courses",
     },
     Object {
-      "courseBody": Array [
+      "description": "Computer Science Writing Requirement",
+      "entries": Array [
         Object {
           "description": "College Writing",
           "hour": 0,
           "type": "HEADER",
         },
         Object {
-          "courseTitle": "ENGW 1111",
           "description": "First-Year Writing",
           "hour": 4,
+          "title": "ENGW 1111",
           "type": "PLAIN_COURSE",
         },
         Object {
@@ -332,62 +748,1251 @@ Object {
           "type": "HEADER",
         },
         Object {
-          "description": "Students are strongly encouraged to take Advanced Writing in the Technical Professions (ENGW 3302) but may substitute Interdisciplinary Advanced Writing in the Disciplines (ENGW 3315).",
+          "description": "Students are strongly encouraged to take Advanced Writing in the Technical Professions (ENGW 3302) but may substitute Interdisciplinary Advanced Writing in the Disciplines (ENGW 3315).",
           "hour": 0,
           "type": "COMMENT",
         },
         Object {
-          "courseTitle": "ENGW 3302",
           "description": "Advanced Writing in the Technical Professions",
           "hour": 4,
+          "title": "ENGW 3302",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "or ENGW 3315",
-          "description": " Interdisciplinary Advanced Writing in the Disciplines",
-          "hour": 4,
+          "description": "Interdisciplinary Advanced Writing in the Disciplines",
+          "hour": 0,
+          "title": "ENGW 3315",
           "type": "OR_COURSE",
         },
       ],
-      "description": "Computer Science Writing Requirement",
     },
     Object {
-      "courseBody": Array [
+      "description": "Required General Electives",
+      "entries": Array [
         Object {
           "description": "Complete 12 semester hours of general electives.",
           "hour": 12,
           "type": "COMMENT",
         },
       ],
-      "description": "Required General Electives",
     },
   ],
-  "majorName": "Computer Science and Game Development, BS",
-  "prgramRequiredHours": 133,
   "yearVersion": 2021,
 }
 `;
 
-exports[`Scrap catalog page business 1`] = `
+exports[`scraper v2 snapshot tests multiple of the same class per AND (cs)  1`] = `
 Object {
-  "courseLists": Array [
+  "majorName": "Computer Science, BSCS",
+  "programRequiredHours": 133,
+  "sections": Array [
     Object {
-      "courseBody": Array [
+      "description": "Computer Science Requirements",
+      "entries": Array [
+        Object {
+          "description": "Computer Science Overview",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "description": "First Year Seminar",
+          "hour": 1,
+          "title": "CS 1200",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Professional Development for Khoury Co-op",
+          "hour": 1,
+          "title": "CS 1210",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Computer Science Fundamental Courses",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "description": "Discrete Structures",
+              "title": "CS 1800",
+            },
+            Object {
+              "description": "Seminar for CS 1800",
+              "title": "CS 1802",
+            },
+          ],
+          "description": "Discrete Structures and Seminar for CS 1800",
+          "hour": 5,
+          "type": "AND_COURSE",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "description": "Fundamentals of Computer Science 1",
+              "title": "CS 2500",
+            },
+            Object {
+              "description": "Lab for CS 2500",
+              "title": "CS 2501",
+            },
+          ],
+          "description": "Fundamentals of Computer Science 1 and Lab for CS 2500",
+          "hour": 5,
+          "type": "AND_COURSE",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "description": "Fundamentals of Computer Science 2",
+              "title": "CS 2510",
+            },
+            Object {
+              "description": "Lab for CS 2510",
+              "title": "CS 2511",
+            },
+          ],
+          "description": "Fundamentals of Computer Science 2 and Lab for CS 2510",
+          "hour": 5,
+          "type": "AND_COURSE",
+        },
+        Object {
+          "description": "Mathematics of Data Models",
+          "hour": 4,
+          "title": "CS 2810",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Computer Science Required Courses",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "description": "Algorithms and Data",
+          "hour": 4,
+          "title": "CS 3000",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "description": "Object-Oriented Design",
+              "title": "CS 3500",
+            },
+            Object {
+              "description": "Lab for CS 3500",
+              "title": "CS 3501",
+            },
+          ],
+          "description": "Object-Oriented Design and Lab for CS 3500",
+          "hour": 5,
+          "type": "AND_COURSE",
+        },
+        Object {
+          "description": "Computer Systems",
+          "hour": 4,
+          "title": "CS 3650",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Theory of Computation",
+          "hour": 4,
+          "title": "CS 3800",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Software Development",
+          "hour": 4,
+          "title": "CS 4500",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Fundamentals of Software Engineering",
+          "hour": 0,
+          "title": "CS 4530",
+          "type": "OR_COURSE",
+        },
+        Object {
+          "description": "Security Required Course",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "description": "Complete one of the following:",
+          "hour": 4,
+          "type": "COMMENT",
+        },
+        Object {
+          "description": "Foundations of Cybersecurity",
+          "hour": 0,
+          "title": "CY 2550",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Systems Security",
+          "hour": 0,
+          "title": "CY 3740",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Network Security",
+          "hour": 0,
+          "title": "CY 4740",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Presentation Requirement",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "description": "Choose one:",
+          "hour": 4,
+          "type": "COMMENT",
+        },
+        Object {
+          "description": "Public Speaking",
+          "hour": 0,
+          "title": "COMM 1112",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Business and Professional Speaking",
+          "hour": 0,
+          "title": "COMM 1113",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Persuasion and Rhetoric",
+          "hour": 0,
+          "title": "COMM 1210",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Communication and Storytelling",
+          "hour": 0,
+          "title": "COMM 1511",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Improvisation",
+          "hour": 0,
+          "title": "THTR 1125",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Introduction to Acting",
+          "hour": 0,
+          "title": "THTR 1130",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "The Professional Voice",
+          "hour": 0,
+          "title": "THTR 1160",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Acting for the Camera",
+          "hour": 0,
+          "title": "THTR 2345",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Khoury Elective Courses",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "description": "With adviser approval, directed study, research, project study, and appropriate graduate-level courses may also be taken as upper-division electives.",
+          "hour": 0,
+          "type": "COMMENT",
+        },
+        Object {
+          "description": "Complete 8 credits of CS, CY, DS, or IS classes that are not already required. Choose courses within the following ranges:",
+          "hour": 8,
+          "type": "COMMENT",
+        },
+        Object {
+          "description": "CS 2500 or higher, except CS 5010",
+          "hour": 0,
+          "type": "COMMENT",
+        },
+        Object {
+          "description": "CY 2000 or higher, except CY 4930",
+          "hour": 0,
+          "type": "COMMENT",
+        },
+        Object {
+          "description": "DS 2500 or higher, except DS 4900",
+          "hour": 0,
+          "type": "COMMENT",
+        },
+        Object {
+          "description": "IS 2000 or higher, except IS 4900",
+          "hour": 0,
+          "type": "COMMENT",
+        },
+      ],
+    },
+    Object {
+      "description": "Concentration: Artificial Intelligence",
+      "entries": Array [
+        Object {
+          "description": "Artificial Intelligence",
+          "hour": 4,
+          "title": "CS 4100",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Machine Learning and Data Mining 1",
+          "hour": 4,
+          "title": "DS 4400",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Complete two of the following courses not already taken:",
+          "hour": 8,
+          "type": "COMMENT",
+        },
+        Object {
+          "description": "Natural Language Processing",
+          "hour": 0,
+          "title": "CS 4120",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Game Artificial Intelligence",
+          "hour": 0,
+          "title": "CS 4150",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Robotic Science and Systems",
+          "hour": 0,
+          "title": "CS 4610",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Information Retrieval",
+          "hour": 0,
+          "title": "IS 4200",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Machine Learning and Data Mining 2",
+          "hour": 0,
+          "title": "DS 4420",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Cognition",
+          "hour": 0,
+          "title": "PSYC 3466",
+          "type": "PLAIN_COURSE",
+        },
+      ],
+    },
+    Object {
+      "description": "Concentration: Foundations",
+      "entries": Array [
+        Object {
+          "description": "Complete two of the following:",
+          "hour": 8,
+          "type": "COMMENT",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "description": "Logic and Computation",
+              "title": "CS 2800",
+            },
+            Object {
+              "description": "Lab for CS 2800",
+              "title": "CS 2801",
+            },
+          ],
+          "description": "Logic and Computation and Lab for CS 2800",
+          "hour": 0,
+          "type": "AND_COURSE",
+        },
+        Object {
+          "description": "Computer-Aided Reasoning",
+          "hour": 0,
+          "title": "CS 4820",
+          "type": "OR_COURSE",
+        },
+        Object {
+          "description": "Fundamentals of Complexity Theory",
+          "hour": 0,
+          "title": "CS 4805",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Advanced Algorithms",
+          "hour": 0,
+          "title": "CS 4810",
+          "type": "OR_COURSE",
+        },
+        Object {
+          "description": "Complete two of the following courses not already taken:",
+          "hour": 8,
+          "type": "COMMENT",
+        },
+        Object {
+          "description": "Fundamentals of Complexity Theory",
+          "hour": 0,
+          "title": "CS 4805",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Advanced Algorithms",
+          "hour": 0,
+          "title": "CS 4810",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Computer-Aided Reasoning",
+          "hour": 0,
+          "title": "CS 4820",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "System Specification, Verification, and Synthesis",
+          "hour": 0,
+          "title": "CS 4830",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "description": "Introduction to Computer Science Research",
+              "title": "CS 3950",
+            },
+            Object {
+              "description": "Computer Science Research Seminar",
+              "title": "CS 4950",
+            },
+            Object {
+              "description": "Computer Science Research Seminar",
+              "title": "CS 4950",
+            },
+          ],
+          "description": "Introduction to Computer Science Research and Computer Science Research Seminar and Computer Science Research Seminar",
+          "hour": 0,
+          "type": "AND_COURSE",
+        },
+        Object {
+          "description": "Cryptography",
+          "hour": 0,
+          "title": "CY 4770",
+          "type": "PLAIN_COURSE",
+        },
+      ],
+    },
+    Object {
+      "description": "Concentration: Human-Centered Computing",
+      "entries": Array [
+        Object {
+          "description": "Human Computer Interaction",
+          "hour": 4,
+          "title": "IS 4300",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Empirical Research Methods",
+          "hour": 4,
+          "title": "IS 4800",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Complete two of the following courses not already taken:",
+          "hour": 8,
+          "type": "COMMENT",
+        },
+        Object {
+          "description": "Principles of Information Science",
+          "hour": 0,
+          "title": "IS 2000",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Natural Language Processing",
+          "hour": 0,
+          "title": "CS 4120",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Mobile Application Development",
+          "hour": 0,
+          "title": "CS 4520",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Web Development",
+          "hour": 0,
+          "title": "CS 4550",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Information Presentation and Visualization",
+          "hour": 0,
+          "title": "DS 4200",
+          "type": "PLAIN_COURSE",
+        },
+      ],
+    },
+    Object {
+      "description": "Concentration: Software",
+      "entries": Array [
+        Object {
+          "courses": Array [
+            Object {
+              "description": "Logic and Computation",
+              "title": "CS 2800",
+            },
+            Object {
+              "description": "Lab for CS 2800",
+              "title": "CS 2801",
+            },
+          ],
+          "description": "Logic and Computation and Lab for CS 2800",
+          "hour": 5,
+          "type": "AND_COURSE",
+        },
+        Object {
+          "description": "Networks and Distributed Systems",
+          "hour": 4,
+          "title": "CS 3700",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Programming Languages",
+          "hour": 4,
+          "title": "CS 4400",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Complete one of the following courses not already taken:",
+          "hour": 0,
+          "type": "COMMENT",
+        },
+        Object {
+          "description": "Programming in C++",
+          "hour": 0,
+          "title": "CS 3520",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Building Extensible Systems",
+          "hour": 0,
+          "title": "CS 3620",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Large-Scale Parallel Data Processing",
+          "hour": 0,
+          "title": "CS 4240",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Compilers",
+          "hour": 0,
+          "title": "CS 4410",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Web Development",
+          "hour": 0,
+          "title": "CS 4550",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Mobile Application Development",
+          "hour": 0,
+          "title": "CS 4520",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Computer-Aided Reasoning",
+          "hour": 0,
+          "title": "CS 4820",
+          "type": "PLAIN_COURSE",
+        },
+      ],
+    },
+    Object {
+      "description": "Concentration: Systems",
+      "entries": Array [
+        Object {
+          "description": "Networks and Distributed Systems",
+          "hour": 4,
+          "title": "CS 3700",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Complete one of the following courses not already taken:",
+          "hour": 4,
+          "type": "COMMENT",
+        },
+        Object {
+          "description": "Systems Security",
+          "hour": 0,
+          "title": "CY 3740",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Network Security",
+          "hour": 0,
+          "title": "CY 4740",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Complete two of the following courses not already taken:",
+          "hour": 8,
+          "type": "COMMENT",
+        },
+        Object {
+          "description": "Programming in C++",
+          "hour": 0,
+          "title": "CS 3520",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Computer Graphics",
+          "hour": 0,
+          "title": "CS 4300",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Systems Security",
+          "hour": 0,
+          "title": "CY 3740",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Robotic Science and Systems",
+          "hour": 0,
+          "title": "CS 4610",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Mobile and Wireless Systems",
+          "hour": 0,
+          "title": "CS 4710",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Network Security",
+          "hour": 0,
+          "title": "CY 4740",
+          "type": "PLAIN_COURSE",
+        },
+      ],
+    },
+    Object {
+      "description": "Supporting Courses",
+      "entries": Array [
+        Object {
+          "description": "Mathematics Courses",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "description": "Calculus 1 for Science and Engineering",
+          "hour": 4,
+          "title": "MATH 1341",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Introduction to Mathematical Reasoning",
+          "hour": 4,
+          "title": "MATH 1365",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Computing and Social Issues",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "description": "Complete one of the following:",
+          "hour": 4,
+          "type": "COMMENT",
+        },
+        Object {
+          "description": "Issues in Race, Science, and Technology",
+          "hour": 0,
+          "title": "AFAM 2600",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "The Law, Ethics, and Policy of Data and Digital Technologies",
+          "hour": 0,
+          "title": "CY 4170",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Cyberlaw: Privacy, Ethics, and Digital Rights",
+          "hour": 0,
+          "title": "CY 5240",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Literature and Digital Diversity",
+          "hour": 0,
+          "title": "ENGL 2150",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "History of Technology",
+          "hour": 0,
+          "title": "HIST 2220",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Bostonography: The City through Data, Texts, Maps, and Networks",
+          "hour": 0,
+          "title": "INSH 2102",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Knowledge in a Digital World",
+          "hour": 0,
+          "title": "IS 1300",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Knowledge in a Digital World",
+          "hour": 0,
+          "title": "PHIL 1300",
+          "type": "OR_COURSE",
+        },
+        Object {
+          "description": "Technology and Human Values",
+          "hour": 0,
+          "title": "PHIL 1145",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "The Twenty-First-Century Workplace",
+          "hour": 0,
+          "title": "SOCL 1280",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Environment, Technology, and Society",
+          "hour": 0,
+          "title": "SOCL 2485",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Computers and Society",
+          "hour": 0,
+          "title": "SOCL 4528",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Electrical Engineering",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "description": "Fundamentals of Digital Design and Computer Organization",
+          "hour": 4,
+          "title": "EECE 2322",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Science Requirement",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "description": "Complete two courses from one of the following science categories:",
+          "hour": 8,
+          "type": "COMMENT",
+        },
+        Object {
+          "description": "Biology",
+          "hour": 0,
+          "type": "SUBHEADER",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "description": "General Biology 1",
+              "title": "BIOL 1111",
+            },
+            Object {
+              "description": "Lab for BIOL 1111",
+              "title": "BIOL 1112",
+            },
+          ],
+          "description": "General Biology 1 and Lab for BIOL 1111",
+          "hour": 0,
+          "type": "AND_COURSE",
+        },
+        Object {
+          "description": "Then complete one of the following:",
+          "hour": 0,
+          "type": "COMMENT",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "description": "General Biology 2",
+              "title": "BIOL 1113",
+            },
+            Object {
+              "description": "Lab for BIOL 1113",
+              "title": "BIOL 1114",
+            },
+          ],
+          "description": "General Biology 2 and Lab for BIOL 1113",
+          "hour": 0,
+          "type": "AND_COURSE",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "description": "Genetics and Molecular Biology",
+              "title": "BIOL 2301",
+            },
+            Object {
+              "description": "Lab for BIOL 2301",
+              "title": "BIOL 2302",
+            },
+          ],
+          "description": "Genetics and Molecular Biology and Lab for BIOL 2301",
+          "hour": 0,
+          "type": "AND_COURSE",
+        },
+        Object {
+          "description": "Chemistry",
+          "hour": 0,
+          "type": "SUBHEADER",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "description": "General Chemistry 1",
+              "title": "CHEM 1211",
+            },
+            Object {
+              "description": "Lab for CHEM 1211",
+              "title": "CHEM 1212",
+            },
+            Object {
+              "description": "Recitation for CHEM 1211",
+              "title": "CHEM 1213",
+            },
+          ],
+          "description": "General Chemistry 1 and Lab for CHEM 1211 and Recitation for CHEM 1211",
+          "hour": 0,
+          "type": "AND_COURSE",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "description": "General Chemistry 2",
+              "title": "CHEM 1214",
+            },
+            Object {
+              "description": "Lab for CHEM 1214",
+              "title": "CHEM 1215",
+            },
+            Object {
+              "description": "Recitation for CHEM 1214",
+              "title": "CHEM 1216",
+            },
+          ],
+          "description": "General Chemistry 2 and Lab for CHEM 1214 and Recitation for CHEM 1214",
+          "hour": 0,
+          "type": "AND_COURSE",
+        },
+        Object {
+          "description": "Geology/Environmental Science (Option 1)",
+          "hour": 0,
+          "type": "SUBHEADER",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "description": "Dynamic Earth",
+              "title": "ENVR 1200",
+            },
+            Object {
+              "description": "Lab for ENVR 1200",
+              "title": "ENVR 1201",
+            },
+          ],
+          "description": "Dynamic Earth and Lab for ENVR 1200",
+          "hour": 0,
+          "type": "AND_COURSE",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "description": "History of Earth and Life",
+              "title": "ENVR 1202",
+            },
+            Object {
+              "description": "Interpreting Earth History",
+              "title": "ENVR 1203",
+            },
+          ],
+          "description": "History of Earth and Life and Interpreting Earth History",
+          "hour": 0,
+          "type": "AND_COURSE",
+        },
+        Object {
+          "description": "Geology/Environmental Science (Option 2)",
+          "hour": 0,
+          "type": "SUBHEADER",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "description": "Dynamic Earth",
+              "title": "ENVR 1200",
+            },
+            Object {
+              "description": "Lab for ENVR 1200",
+              "title": "ENVR 1201",
+            },
+          ],
+          "description": "Dynamic Earth and Lab for ENVR 1200",
+          "hour": 0,
+          "type": "AND_COURSE",
+        },
+        Object {
+          "description": "Then complete one of the following:",
+          "hour": 0,
+          "type": "COMMENT",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "description": "Earth Materials",
+              "title": "ENVR 2310",
+            },
+            Object {
+              "description": "Lab for ENVR 2310",
+              "title": "ENVR 2311",
+            },
+          ],
+          "description": "Earth Materials and Lab for ENVR 2310",
+          "hour": 0,
+          "type": "AND_COURSE",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "description": "Earth Landforms and Processes",
+              "title": "ENVR 2340",
+            },
+            Object {
+              "description": "Lab for ENVR 2340",
+              "title": "ENVR 2341",
+            },
+          ],
+          "description": "Earth Landforms and Processes and Lab for ENVR 2340",
+          "hour": 0,
+          "type": "AND_COURSE",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "description": "Geographic Information Systems",
+              "title": "ENVR 3300",
+            },
+            Object {
+              "description": "Lab for ENVR 3300",
+              "title": "ENVR 3301",
+            },
+          ],
+          "description": "Geographic Information Systems and Lab for ENVR 3300",
+          "hour": 0,
+          "type": "AND_COURSE",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "description": "Applied Hydrogeology",
+              "title": "ENVR 4500",
+            },
+            Object {
+              "description": "Lab for ENVR 4500",
+              "title": "ENVR 4501",
+            },
+          ],
+          "description": "Applied Hydrogeology and Lab for ENVR 4500",
+          "hour": 0,
+          "type": "AND_COURSE",
+        },
+        Object {
+          "description": "Geology/Environmental Science (Option 3)",
+          "hour": 0,
+          "type": "SUBHEADER",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "description": "History of Earth and Life",
+              "title": "ENVR 1202",
+            },
+            Object {
+              "description": "Interpreting Earth History",
+              "title": "ENVR 1203",
+            },
+          ],
+          "description": "History of Earth and Life and Interpreting Earth History",
+          "hour": 0,
+          "type": "AND_COURSE",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "description": "Ancient Marine Life",
+              "title": "ENVR 5242",
+            },
+            Object {
+              "description": "Lab for ENVR 5242",
+              "title": "ENVR 5243",
+            },
+          ],
+          "description": "Ancient Marine Life and Lab for ENVR 5242",
+          "hour": 0,
+          "type": "AND_COURSE",
+        },
+        Object {
+          "description": "Mathematics",
+          "hour": 0,
+          "type": "SUBHEADER",
+        },
+        Object {
+          "description": "Calculus 2 for Science and Engineering",
+          "hour": 0,
+          "title": "MATH 1342",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Linear Algebra",
+          "hour": 0,
+          "title": "MATH 2331",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Probability and Statistics",
+          "hour": 0,
+          "title": "MATH 3081",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Physics",
+          "hour": 0,
+          "type": "SUBHEADER",
+        },
+        Object {
+          "description": "Complete one of the following sequences:",
+          "hour": 0,
+          "type": "COMMENT",
+        },
+        Object {
+          "description": "Sequence A",
+          "hour": 0,
+          "type": "COMMENT",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "description": "Physics for Life Sciences 1",
+              "title": "PHYS 1145",
+            },
+            Object {
+              "description": "Lab for PHYS 1145",
+              "title": "PHYS 1146",
+            },
+          ],
+          "description": "Physics for Life Sciences 1 and Lab for PHYS 1145",
+          "hour": 0,
+          "type": "AND_COURSE",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "description": "Physics for Life Sciences 2",
+              "title": "PHYS 1147",
+            },
+            Object {
+              "description": "Lab for PHYS 1147",
+              "title": "PHYS 1148",
+            },
+          ],
+          "description": "Physics for Life Sciences 2 and Lab for PHYS 1147",
+          "hour": 0,
+          "type": "AND_COURSE",
+        },
+        Object {
+          "description": "Sequence B",
+          "hour": 0,
+          "type": "COMMENT",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "description": "Physics for Engineering 1",
+              "title": "PHYS 1151",
+            },
+            Object {
+              "description": "Lab for PHYS 1151",
+              "title": "PHYS 1152",
+            },
+            Object {
+              "description": "Interactive Learning Seminar for PHYS 1151",
+              "title": "PHYS 1153",
+            },
+          ],
+          "description": "Physics for Engineering 1 and Lab for PHYS 1151 and Interactive Learning Seminar for PHYS 1151",
+          "hour": 0,
+          "type": "AND_COURSE",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "description": "Physics for Engineering 2",
+              "title": "PHYS 1155",
+            },
+            Object {
+              "description": "Lab for PHYS 1155",
+              "title": "PHYS 1156",
+            },
+            Object {
+              "description": "Interactive Learning Seminar for PHYS 1155",
+              "title": "PHYS 1157",
+            },
+          ],
+          "description": "Physics for Engineering 2 and Lab for PHYS 1155 and Interactive Learning Seminar for PHYS 1155",
+          "hour": 0,
+          "type": "AND_COURSE",
+        },
+        Object {
+          "description": "Sequence C",
+          "hour": 0,
+          "type": "COMMENT",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "description": "Physics 1",
+              "title": "PHYS 1161",
+            },
+            Object {
+              "description": "Lab for PHYS 1161",
+              "title": "PHYS 1162",
+            },
+            Object {
+              "description": "Recitation for PHYS 1161",
+              "title": "PHYS 1163",
+            },
+          ],
+          "description": "Physics 1 and Lab for PHYS 1161 and Recitation for PHYS 1161",
+          "hour": 0,
+          "type": "AND_COURSE",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "description": "Physics 2",
+              "title": "PHYS 1165",
+            },
+            Object {
+              "description": "Lab for PHYS 1165",
+              "title": "PHYS 1166",
+            },
+            Object {
+              "description": "Recitation for PHYS 1165",
+              "title": "PHYS 1167",
+            },
+          ],
+          "description": "Physics 2 and Lab for PHYS 1165 and Recitation for PHYS 1165",
+          "hour": 0,
+          "type": "AND_COURSE",
+        },
+      ],
+    },
+    Object {
+      "description": "Computer Science Writing Requirement",
+      "entries": Array [
+        Object {
+          "description": "College Writing",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "description": "First-Year Writing",
+          "hour": 4,
+          "title": "ENGW 1111",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Advanced Writing in the Disciplines",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "description": "Advanced Writing in the Technical Professions",
+          "hour": 4,
+          "title": "ENGW 3302",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Interdisciplinary Advanced Writing in the Disciplines",
+          "hour": 0,
+          "title": "ENGW 3315",
+          "type": "OR_COURSE",
+        },
+      ],
+    },
+    Object {
+      "description": "Required General Electives",
+      "entries": Array [
+        Object {
+          "description": "Complete 28 credits of general electives.",
+          "hour": 28,
+          "type": "COMMENT",
+        },
+      ],
+    },
+  ],
+  "yearVersion": 2021,
+}
+`;
+
+exports[`scraper v2 snapshot tests nested linked concentration pages (business) 1`] = `
+Object {
+  "majorName": "Bachelor of Science in Business Administration, BSBA",
+  "programRequiredHours": 128,
+  "sections": Array [
+    Object {
+      "description": "Business Requirements",
+      "entries": Array [
         Object {
           "description": "Accounting",
           "hour": 0,
           "type": "HEADER",
         },
         Object {
-          "courseTitle": "ACCT 1201",
           "description": "Financial Accounting and Reporting",
           "hour": 4,
+          "title": "ACCT 1201",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "ACCT 2301",
           "description": "Managerial Accounting",
           "hour": 4,
+          "title": "ACCT 2301",
           "type": "PLAIN_COURSE",
         },
         Object {
@@ -396,9 +2001,9 @@ Object {
           "type": "HEADER",
         },
         Object {
-          "courseTitle": "FINA 2201",
           "description": "Financial Management",
           "hour": 4,
+          "title": "FINA 2201",
           "type": "PLAIN_COURSE",
         },
         Object {
@@ -407,9 +2012,9 @@ Object {
           "type": "HEADER",
         },
         Object {
-          "courseTitle": "MKTG 2201",
           "description": "Introduction to Marketing",
           "hour": 4,
+          "title": "MKTG 2201",
           "type": "PLAIN_COURSE",
         },
         Object {
@@ -418,9 +2023,9 @@ Object {
           "type": "HEADER",
         },
         Object {
-          "courseTitle": "MISM 2301",
           "description": "Management Information Systems",
           "hour": 4,
+          "title": "MISM 2301",
           "type": "PLAIN_COURSE",
         },
         Object {
@@ -429,9 +2034,9 @@ Object {
           "type": "HEADER",
         },
         Object {
-          "courseTitle": "SCHM 2301",
           "description": "Supply Chain and Operations Management",
           "hour": 4,
+          "title": "SCHM 2301",
           "type": "PLAIN_COURSE",
         },
         Object {
@@ -440,9 +2045,9 @@ Object {
           "type": "HEADER",
         },
         Object {
-          "courseTitle": "ORGB 3201",
           "description": "Organizational Behavior",
           "hour": 4,
+          "title": "ORGB 3201",
           "type": "PLAIN_COURSE",
         },
         Object {
@@ -451,9 +2056,9 @@ Object {
           "type": "HEADER",
         },
         Object {
-          "courseTitle": "STRT 4501",
           "description": "Strategy in Action",
           "hour": 4,
+          "title": "STRT 4501",
           "type": "PLAIN_COURSE",
         },
         Object {
@@ -462,9 +2067,9 @@ Object {
           "type": "HEADER",
         },
         Object {
-          "courseTitle": "INTB 1203",
           "description": "International Business and Global Social Responsibility",
           "hour": 4,
+          "title": "INTB 1203",
           "type": "PLAIN_COURSE",
         },
         Object {
@@ -473,31 +2078,31 @@ Object {
           "type": "HEADER",
         },
         Object {
-          "courseTitle": "MGSC 2301",
           "description": "Business Statistics",
           "hour": 4,
+          "title": "MGSC 2301",
           "type": "PLAIN_COURSE",
         },
       ],
-      "description": "Business Requirements",
     },
     Object {
-      "courseBody": Array [
+      "description": "Concentration in Accounting",
+      "entries": Array [
         Object {
           "description": "Required Courses",
           "hour": 0,
           "type": "HEADER",
         },
         Object {
-          "courseTitle": "ACCT 3401",
           "description": "Financial Reporting and Analysis 1",
           "hour": 4,
+          "title": "ACCT 3401",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "ACCT 4501",
           "description": "Financial Reporting and Analysis 2",
           "hour": 4,
+          "title": "ACCT 4501",
           "type": "PLAIN_COURSE",
         },
         Object {
@@ -511,43 +2116,43 @@ Object {
           "type": "COMMENT",
         },
         Object {
-          "courseTitle": "ACCT 3403",
           "description": "Advisory Services and Emerging Accounting Systems",
           "hour": 0,
+          "title": "ACCT 3403",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "ACCT 3416",
           "description": "Strategic Cost Analysis for Decision Making",
           "hour": 0,
+          "title": "ACCT 3416",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "ACCT 4412",
           "description": "Auditing and Other Assurance Services",
           "hour": 0,
+          "title": "ACCT 4412",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "ACCT 4414",
           "description": "Income Tax Determination and Planning",
           "hour": 0,
+          "title": "ACCT 4414",
           "type": "PLAIN_COURSE",
         },
       ],
-      "description": "Concentration in Accounting ",
     },
     Object {
-      "courseBody": Array [
+      "description": "Concentration in Brand Management",
+      "entries": Array [
         Object {
           "description": "Required Course",
           "hour": 0,
           "type": "HEADER",
         },
         Object {
-          "courseTitle": "MKTG 3720",
           "description": "Brand Management",
           "hour": 4,
+          "title": "MKTG 3720",
           "type": "PLAIN_COURSE",
         },
         Object {
@@ -561,81 +2166,81 @@ Object {
           "type": "COMMENT",
         },
         Object {
-          "courseTitle": "MKTG 2720",
           "description": "Enabling Technologies for Consumer Engagement",
           "hour": 0,
+          "title": "MKTG 2720",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "MKTG 3401",
           "description": "Marketing Research",
           "hour": 0,
+          "title": "MKTG 3401",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "or MKTG 3402",
-          "description": " Gaining Insights from Consumer Data",
+          "description": "Gaining Insights from Consumer Data",
           "hour": 0,
+          "title": "MKTG 3402",
           "type": "OR_COURSE",
         },
         Object {
-          "courseTitle": "MKTG 4502",
           "description": "Managing Customer Engagement in a Service World",
           "hour": 0,
+          "title": "MKTG 4502",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "MKTG 4504",
           "description": "Advertising and Brand Promotion",
           "hour": 0,
+          "title": "MKTG 4504",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "MKTG 4506",
           "description": "Consumer Behavior",
           "hour": 0,
+          "title": "MKTG 4506",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "MKTG 4510",
           "description": "New Product Development",
           "hour": 0,
+          "title": "MKTG 4510",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "or ENTR 3330",
-          "description": " Lean Design and Rapid Prototyping",
+          "description": "Lean Design and Rapid Prototyping",
           "hour": 0,
+          "title": "ENTR 3330",
           "type": "OR_COURSE",
         },
         Object {
-          "courseTitle": "or ENTR 3335",
-          "description": " Product Innovation and Portfolio Management",
+          "description": "Product Innovation and Portfolio Management",
           "hour": 0,
+          "title": "ENTR 3335",
           "type": "OR_COURSE",
         },
         Object {
-          "courseTitle": "MKTG 4720",
           "description": "Understanding the Platform Economy",
           "hour": 0,
+          "title": "MKTG 4720",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "ENTR 2301",
           "description": "Innovation!",
           "hour": 0,
+          "title": "ENTR 2301",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "MGMT 3530",
           "description": "Project Management",
           "hour": 0,
+          "title": "MGMT 3530",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "SCHM 3320",
           "description": "Forecasting and Sales  Operations Planning",
           "hour": 0,
+          "title": "SCHM 3320",
           "type": "PLAIN_COURSE",
         },
         Object {
@@ -644,10 +2249,10 @@ Object {
           "type": "COMMENT",
         },
       ],
-      "description": "Concentration in Brand Management",
     },
     Object {
-      "courseBody": Array [
+      "description": "Concentration in Business Analytics",
+      "entries": Array [
         Object {
           "description": "Only one course may double count between another concentration or minor.",
           "hour": 0,
@@ -659,27 +2264,27 @@ Object {
           "type": "HEADER",
         },
         Object {
-          "courseTitle": "MISM 2510",
           "description": "Fundamentals of Information Analytics",
           "hour": 4,
+          "title": "MISM 2510",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "MISM 3403",
           "description": "Data Management in the Enterprise",
           "hour": 4,
+          "title": "MISM 3403",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "or MISM 3405",
-          "description": " Data Wrangling for Business Analytics",
-          "hour": 4,
+          "description": "Data Wrangling for Business Analytics",
+          "hour": 0,
+          "title": "MISM 3405",
           "type": "OR_COURSE",
         },
         Object {
-          "courseTitle": "MISM 3501",
           "description": "Information Visualization for Business",
           "hour": 4,
+          "title": "MISM 3501",
           "type": "PLAIN_COURSE",
         },
         Object {
@@ -693,43 +2298,43 @@ Object {
           "type": "COMMENT",
         },
         Object {
-          "courseTitle": "MISM 3515",
           "description": "Data Mining for Business",
           "hour": 0,
+          "title": "MISM 3515",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "MISM 3525",
           "description": "Modeling for Business Analytics",
           "hour": 0,
+          "title": "MISM 3525",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "MISM 4983",
           "description": "Special Topics in Management Information Systems",
           "hour": 0,
+          "title": "MISM 4983",
           "type": "PLAIN_COURSE",
         },
       ],
-      "description": "Concentration in Business Analytics",
     },
     Object {
-      "courseBody": Array [
+      "description": "Concentration in Corporate Innovation and Venture",
+      "entries": Array [
         Object {
           "description": "Required Courses",
           "hour": 0,
           "type": "HEADER",
         },
         Object {
-          "courseTitle": "ENTR 2301",
           "description": "Innovation!",
           "hour": 4,
+          "title": "ENTR 2301",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "ENTR 4504",
           "description": "Advanced Studies in Corporate Innovation",
           "hour": 4,
+          "title": "ENTR 4504",
           "type": "PLAIN_COURSE",
         },
         Object {
@@ -743,21 +2348,21 @@ Object {
           "type": "COMMENT",
         },
         Object {
-          "courseTitle": "ENTR 2304",
           "description": "Industry Disruption and Corporate Transformation",
           "hour": 0,
+          "title": "ENTR 2304",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "ENTR 3335",
           "description": "Product Innovation and Portfolio Management",
           "hour": 0,
+          "title": "ENTR 3335",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "ENTR 4225",
           "description": "Growth, Acquisitions, and Alliances",
           "hour": 0,
+          "title": "ENTR 4225",
           "type": "PLAIN_COURSE",
         },
         Object {
@@ -766,63 +2371,63 @@ Object {
           "type": "SUBHEADER",
         },
         Object {
-          "courseTitle": "ENTR 2206",
           "description": "Global Social Enterprise",
           "hour": 0,
+          "title": "ENTR 2206",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "ENTR 2215",
           "description": "Understanding Family Enterprise",
           "hour": 0,
+          "title": "ENTR 2215",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "ENTR 2303",
           "description": "Marketing Strategies for Startups",
           "hour": 0,
+          "title": "ENTR 2303",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "ENTR 4983",
           "description": "Special Topics in Entrepreneurship",
           "hour": 0,
+          "title": "ENTR 4983",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "ENTR 4505",
           "description": "Entrepreneurial Growth Strategy for Technology Ventures",
           "hour": 0,
+          "title": "ENTR 4505",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "FINA 4610",
           "description": "Entrepreneurial Finance and Private Equity",
           "hour": 0,
+          "title": "FINA 4610",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "MGMT 3302",
           "description": "Negotiating in Business",
           "hour": 0,
+          "title": "MGMT 3302",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "MGMT 3340",
           "description": "Healthcare Management, Innovation, and Design",
           "hour": 0,
+          "title": "MGMT 3340",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "MGMT 3530",
           "description": "Project Management",
           "hour": 0,
+          "title": "MGMT 3530",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "STRT 4301",
           "description": "Strategic Analysis and Decision Making",
           "hour": 0,
+          "title": "STRT 4301",
           "type": "PLAIN_COURSE",
         },
         Object {
@@ -831,25 +2436,25 @@ Object {
           "type": "COMMENT",
         },
       ],
-      "description": "Concentration in Corporate Innovation and Venture",
     },
     Object {
-      "courseBody": Array [
+      "description": "Concentration in Entrepreneurial Startups",
+      "entries": Array [
         Object {
           "description": "Required Courses",
           "hour": 0,
           "type": "HEADER",
         },
         Object {
-          "courseTitle": "ENTR 2301",
           "description": "Innovation!",
           "hour": 4,
+          "title": "ENTR 2301",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "ENTR 4501",
           "description": "Advanced Studies in Entrepreneurial Startups",
           "hour": 4,
+          "title": "ENTR 4501",
           "type": "PLAIN_COURSE",
         },
         Object {
@@ -863,21 +2468,21 @@ Object {
           "type": "COMMENT",
         },
         Object {
-          "courseTitle": "ENTR 2303",
           "description": "Marketing Strategies for Startups",
           "hour": 0,
+          "title": "ENTR 2303",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "ENTR 3305",
           "description": "Business Model Innovation for Entrepreneurs",
           "hour": 0,
+          "title": "ENTR 3305",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "ENTR 3330",
           "description": "Lean Design and Rapid Prototyping",
           "hour": 0,
+          "title": "ENTR 3330",
           "type": "PLAIN_COURSE",
         },
         Object {
@@ -886,39 +2491,39 @@ Object {
           "type": "SUBHEADER",
         },
         Object {
-          "courseTitle": "ENTR 2206",
           "description": "Global Social Enterprise",
           "hour": 0,
+          "title": "ENTR 2206",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "ENTR 2215",
           "description": "Understanding Family Enterprise",
           "hour": 0,
+          "title": "ENTR 2215",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "ENTR 2304",
           "description": "Industry Disruption and Corporate Transformation",
           "hour": 0,
+          "title": "ENTR 2304",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "ENTR 4983",
           "description": "Special Topics in Entrepreneurship",
           "hour": 0,
+          "title": "ENTR 4983",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "FINA 4610",
           "description": "Entrepreneurial Finance and Private Equity",
           "hour": 0,
+          "title": "FINA 4610",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "MGMT 3302",
           "description": "Negotiating in Business",
           "hour": 0,
+          "title": "MGMT 3302",
           "type": "PLAIN_COURSE",
         },
         Object {
@@ -927,25 +2532,25 @@ Object {
           "type": "COMMENT",
         },
       ],
-      "description": "Concentration in Entrepreneurial Startups",
     },
     Object {
-      "courseBody": Array [
+      "description": "Concentration in Family Business",
+      "entries": Array [
         Object {
           "description": "Required Courses",
           "hour": 0,
           "type": "HEADER",
         },
         Object {
-          "courseTitle": "ENTR 2301",
           "description": "Innovation!",
           "hour": 4,
+          "title": "ENTR 2301",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "ENTR 4503",
           "description": "Advanced Studies in Family Business",
           "hour": 4,
+          "title": "ENTR 4503",
           "type": "PLAIN_COURSE",
         },
         Object {
@@ -959,21 +2564,21 @@ Object {
           "type": "COMMENT",
         },
         Object {
-          "courseTitle": "ENTR 2215",
           "description": "Understanding Family Enterprise",
           "hour": 0,
+          "title": "ENTR 2215",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "ENTR 3302",
           "description": "Managing and Growing the Family Business",
           "hour": 0,
+          "title": "ENTR 3302",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "ENTR 3401",
           "description": "Consulting Operations  Growth in SMEs",
           "hour": 0,
+          "title": "ENTR 3401",
           "type": "PLAIN_COURSE",
         },
         Object {
@@ -982,39 +2587,39 @@ Object {
           "type": "SUBHEADER",
         },
         Object {
-          "courseTitle": "ENTR 2206",
           "description": "Global Social Enterprise",
           "hour": 0,
+          "title": "ENTR 2206",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "ENTR 2303",
           "description": "Marketing Strategies for Startups",
           "hour": 0,
+          "title": "ENTR 2303",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "ENTR 2304",
           "description": "Industry Disruption and Corporate Transformation",
           "hour": 0,
+          "title": "ENTR 2304",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "ENTR 4983",
           "description": "Special Topics in Entrepreneurship",
           "hour": 0,
+          "title": "ENTR 4983",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "FINA 4610",
           "description": "Entrepreneurial Finance and Private Equity",
           "hour": 0,
+          "title": "FINA 4610",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "MGMT 3302",
           "description": "Negotiating in Business",
           "hour": 0,
+          "title": "MGMT 3302",
           "type": "PLAIN_COURSE",
         },
         Object {
@@ -1023,25 +2628,25 @@ Object {
           "type": "COMMENT",
         },
       ],
-      "description": "Concentration in Family Business",
     },
     Object {
-      "courseBody": Array [
+      "description": "Concentration in Finance",
+      "entries": Array [
         Object {
           "description": "Required Course",
           "hour": 0,
           "type": "HEADER",
         },
         Object {
-          "courseTitle": "FINA 3301",
           "description": "Corporate Finance",
           "hour": 4,
+          "title": "FINA 3301",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "or FINA 3303",
-          "description": " Investments",
-          "hour": 4,
+          "description": "Investments",
+          "hour": 0,
+          "title": "FINA 3303",
           "type": "OR_COURSE",
         },
         Object {
@@ -1055,205 +2660,205 @@ Object {
           "type": "COMMENT",
         },
         Object {
-          "courseTitle": "ENTR 3520",
           "description": "Impact Investing and Social Finance",
           "hour": 0,
+          "title": "ENTR 3520",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "or FINA 2720",
-          "description": " Sustainability in the Business Environment",
+          "description": "Sustainability in the Business Environment",
           "hour": 0,
+          "title": "FINA 2720",
           "type": "OR_COURSE",
         },
         Object {
-          "courseTitle": "FINA 2730",
           "description": "Fintech and Financial Innovation",
           "hour": 0,
+          "title": "FINA 2730",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "FINA 3301",
           "description": "Corporate Finance (if not selected as a required course)",
           "hour": 0,
+          "title": "FINA 3301",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "FINA 3303",
           "description": "Investments (if not selected as a required course)",
           "hour": 0,
+          "title": "FINA 3303",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "FINA 4219",
           "description": "Portfolio Management",
           "hour": 0,
+          "title": "FINA 4219",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "FINA 4220",
           "description": "Behavioral Finance",
           "hour": 0,
+          "title": "FINA 4220",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "FINA 4310",
           "description": "Working Capital Management",
           "hour": 0,
+          "title": "FINA 4310",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "FINA 4312",
           "description": "Issues in Corporate Governance",
           "hour": 0,
+          "title": "FINA 4312",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "FINA 4320",
           "description": "International Financial Management",
           "hour": 0,
+          "title": "FINA 4320",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "FINA 4330",
           "description": "Emerging Financial Markets",
           "hour": 0,
+          "title": "FINA 4330",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "FINA 4340",
           "description": "Blockchain Applications in Finance",
           "hour": 0,
+          "title": "FINA 4340",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "FINA 4350",
           "description": "Applied Financial Econometrics",
           "hour": 0,
+          "title": "FINA 4350",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "FINA 4370",
           "description": "Financial Modeling",
           "hour": 0,
+          "title": "FINA 4370",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "FINA 4380",
           "description": "Financial Data Analytics",
           "hour": 0,
+          "title": "FINA 4380",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "FINA 4390",
           "description": "Machine Learning in Finance",
           "hour": 0,
+          "title": "FINA 4390",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "FINA 4410",
           "description": "Valuation and Value Creation",
           "hour": 0,
+          "title": "FINA 4410",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "FINA 4412",
           "description": "Personal Financial Planning",
           "hour": 0,
+          "title": "FINA 4412",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "FINA 4420",
           "description": "Mergers and Acquisitions",
           "hour": 0,
+          "title": "FINA 4420",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "FINA 4512",
           "description": "Financial Risk Management",
           "hour": 0,
+          "title": "FINA 4512",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "FINA 4514",
           "description": "Investment Banking",
           "hour": 0,
+          "title": "FINA 4514",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "FINA 4516",
           "description": "Real Estate Finance",
           "hour": 0,
+          "title": "FINA 4516",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "FINA 4524",
           "description": "Credit Analysis",
           "hour": 0,
+          "title": "FINA 4524",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "FINA 4526",
           "description": "Core Topics in Alternative Investments",
           "hour": 0,
+          "title": "FINA 4526",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "FINA 4602",
           "description": "Turnaround Management",
           "hour": 0,
+          "title": "FINA 4602",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "FINA 4604",
           "description": "Fixed-Income Securities",
           "hour": 0,
+          "title": "FINA 4604",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "FINA 4608",
           "description": "Advanced Financial Strategy",
           "hour": 0,
+          "title": "FINA 4608",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "FINA 4610",
           "description": "Entrepreneurial Finance and Private Equity",
           "hour": 0,
+          "title": "FINA 4610",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "FINA 4983",
           "description": "Special Topics in Finance",
           "hour": 0,
+          "title": "FINA 4983",
           "type": "PLAIN_COURSE",
         },
       ],
-      "description": "Concentration in Finance",
     },
     Object {
-      "courseBody": Array [
+      "description": "Concentration in Fintech",
+      "entries": Array [
         Object {
           "description": "Required Courses",
           "hour": 0,
           "type": "HEADER",
         },
         Object {
-          "courseTitle": "FINA 3303",
           "description": "Investments",
           "hour": 4,
+          "title": "FINA 3303",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "or FINA 3301",
-          "description": " Corporate Finance",
-          "hour": 4,
+          "description": "Corporate Finance",
+          "hour": 0,
+          "title": "FINA 3301",
           "type": "OR_COURSE",
         },
         Object {
-          "courseTitle": "FINA 4380",
           "description": "Financial Data Analytics",
           "hour": 4,
+          "title": "FINA 4380",
           "type": "PLAIN_COURSE",
         },
         Object {
@@ -1267,49 +2872,49 @@ Object {
           "type": "COMMENT",
         },
         Object {
-          "courseTitle": "FINA 2730",
           "description": "Fintech and Financial Innovation",
           "hour": 0,
+          "title": "FINA 2730",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "FINA 4340",
           "description": "Blockchain Applications in Finance",
           "hour": 0,
+          "title": "FINA 4340",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "FINA 4350",
           "description": "Applied Financial Econometrics",
           "hour": 0,
+          "title": "FINA 4350",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "FINA 4390",
           "description": "Machine Learning in Finance",
           "hour": 0,
+          "title": "FINA 4390",
           "type": "PLAIN_COURSE",
         },
       ],
-      "description": "Concentration in Fintech",
     },
     Object {
-      "courseBody": Array [
+      "description": "Concentration in Healthcare Management and Consulting",
+      "entries": Array [
         Object {
           "description": "Required Courses",
           "hour": 0,
           "type": "HEADER",
         },
         Object {
-          "courseTitle": "MGMT 3340",
           "description": "Healthcare Management, Innovation, and Design",
           "hour": 4,
+          "title": "MGMT 3340",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "SCHM 3315",
           "description": "Managing Healthcare Operations and Supply Chain",
           "hour": 4,
+          "title": "SCHM 3315",
           "type": "PLAIN_COURSE",
         },
         Object {
@@ -1323,63 +2928,63 @@ Object {
           "type": "COMMENT",
         },
         Object {
-          "courseTitle": "BUSN 3110",
           "description": "The Consulting Environment",
           "hour": 0,
+          "title": "BUSN 3110",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "ENTR 3220",
           "description": "International Entrepreneurship and Innovation Consulting",
           "hour": 0,
+          "title": "ENTR 3220",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "MGMT 3302",
           "description": "Negotiating in Business",
           "hour": 0,
+          "title": "MGMT 3302",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "MISM 3501",
           "description": "Information Visualization for Business",
           "hour": 0,
+          "title": "MISM 3501",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "MISM 3515",
           "description": "Data Mining for Business",
           "hour": 0,
+          "title": "MISM 3515",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "MGMT 3315",
           "description": "Managing Organizational Change and Disruption",
           "hour": 0,
+          "title": "MGMT 3315",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "MGMT 3530",
           "description": "Project Management",
           "hour": 0,
+          "title": "MGMT 3530",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "MGMT 3420",
           "description": "Managing Human Capital",
           "hour": 0,
+          "title": "MGMT 3420",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "MGMT 4410",
           "description": "Workforce Analytics",
           "hour": 0,
+          "title": "MGMT 4410",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "MGMT 4550",
           "description": "Management Consulting in Organizations",
           "hour": 0,
+          "title": "MGMT 4550",
           "type": "PLAIN_COURSE",
         },
         Object {
@@ -1393,73 +2998,73 @@ Object {
           "type": "COMMENT",
         },
         Object {
-          "courseTitle": "COMM 3201",
           "description": "Health Communication",
           "hour": 0,
+          "title": "COMM 3201",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "COMM 4533",
           "description": "Consultation Skills",
           "hour": 0,
+          "title": "COMM 4533",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "HUSV 2970",
           "description": "Research Methods for Human Services",
           "hour": 0,
+          "title": "HUSV 2970",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "IE 3500",
           "description": "Introduction to Healthcare Systems Engineering",
           "hour": 0,
+          "title": "IE 3500",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "PHTH 2515",
           "description": "Healthcare Policy and Administration",
           "hour": 0,
+          "title": "PHTH 2515",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "PHTH 4515",
           "description": "Critical Issues in Health and Public-Health Policy",
           "hour": 0,
+          "title": "PHTH 4515",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "SOCL 3440",
           "description": "Sociology of Human Service Organizations",
           "hour": 0,
+          "title": "SOCL 3440",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "SOCL 3441",
           "description": "Sociology of Health and Illness",
           "hour": 0,
+          "title": "SOCL 3441",
           "type": "PLAIN_COURSE",
         },
       ],
-      "description": "Concentration in Healthcare Management and Consulting",
     },
     Object {
-      "courseBody": Array [
+      "description": "Concentration in International Business",
+      "entries": Array [
         Object {
           "description": "Required Courses",
           "hour": 0,
           "type": "HEADER",
         },
         Object {
-          "courseTitle": "INTB 1203",
           "description": "International Business and Global Social Responsibility",
           "hour": 4,
+          "title": "INTB 1203",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "or INTB 1209",
-          "description": " International Business and Global Social Responsibility",
-          "hour": 4,
+          "description": "International Business and Global Social Responsibility",
+          "hour": 0,
+          "title": "INTB 1209",
           "type": "OR_COURSE",
         },
         Object {
@@ -1468,15 +3073,15 @@ Object {
           "type": "COMMENT",
         },
         Object {
-          "courseTitle": "INTB 2501",
           "description": "Competing to Win in Emerging Markets",
           "hour": 0,
+          "title": "INTB 2501",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "INTB 3310",
           "description": "Cultural Aspects of International Business",
           "hour": 0,
+          "title": "INTB 3310",
           "type": "PLAIN_COURSE",
         },
         Object {
@@ -1485,7 +3090,7 @@ Object {
           "type": "HEADER",
         },
         Object {
-          "description": "Complete two of the following courses (one if both courses above selected). ",
+          "description": "Complete two of the following courses (one if both courses above selected).",
           "hour": 4,
           "type": "COMMENT",
         },
@@ -1500,27 +3105,27 @@ Object {
           "type": "SUBHEADER",
         },
         Object {
-          "courseTitle": "INTB 3202",
           "description": "Managing the International Assignment",
           "hour": 0,
+          "title": "INTB 3202",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "INTB 3320",
           "description": "International Business Management and Environment",
           "hour": 0,
+          "title": "INTB 3320",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "INTB 4202",
           "description": "Executing Global Strategy",
           "hour": 0,
+          "title": "INTB 4202",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "INTB 4983",
           "description": "Special Topics in International Business",
           "hour": 0,
+          "title": "INTB 4983",
           "type": "PLAIN_COURSE",
         },
         Object {
@@ -1529,33 +3134,33 @@ Object {
           "type": "SUBHEADER",
         },
         Object {
-          "courseTitle": "ENTR 2206",
           "description": "Global Social Enterprise",
           "hour": 0,
+          "title": "ENTR 2206",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "ENTR 3306",
           "description": "Global Entrepreneurship",
           "hour": 0,
+          "title": "ENTR 3306",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "FINA 4320",
           "description": "International Financial Management",
           "hour": 0,
+          "title": "FINA 4320",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "MKTG 4512",
           "description": "International Marketing",
           "hour": 0,
+          "title": "MKTG 4512",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "SCHM 3301",
           "description": "Global Supply Chain Strategy",
           "hour": 0,
+          "title": "SCHM 3301",
           "type": "PLAIN_COURSE",
         },
         Object {
@@ -1564,9 +3169,9 @@ Object {
           "type": "SUBHEADER",
         },
         Object {
-          "courseTitle": "ENTR 4512",
           "description": "Social Entrepreneurship and Sustainable Development in India",
           "hour": 0,
+          "title": "ENTR 4512",
           "type": "PLAIN_COURSE",
         },
         Object {
@@ -1575,19 +3180,19 @@ Object {
           "type": "COMMENT",
         },
       ],
-      "description": "Concentration in International Business",
     },
     Object {
-      "courseBody": Array [
+      "description": "Concentration in Management",
+      "entries": Array [
         Object {
           "description": "Required Course",
           "hour": 0,
           "type": "HEADER",
         },
         Object {
-          "courseTitle": "MGMT 4550",
           "description": "Management Consulting in Organizations",
           "hour": 4,
+          "title": "MGMT 4550",
           "type": "PLAIN_COURSE",
         },
         Object {
@@ -1606,106 +3211,106 @@ Object {
           "type": "COMMENT",
         },
         Object {
-          "courseTitle": "ENTR 2215",
           "description": "Understanding Family Enterprise",
           "hour": 0,
+          "title": "ENTR 2215",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "ENTR 2414",
           "description": "Social Responsibility of Business in an Age of Inequality",
           "hour": 0,
+          "title": "ENTR 2414",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "ENTR 4225",
           "description": "Growth, Acquisitions, and Alliances",
           "hour": 0,
+          "title": "ENTR 4225",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "MGMT 3302",
           "description": "Negotiating in Business",
           "hour": 0,
+          "title": "MGMT 3302",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "MGMT 3305",
           "description": "Power and Influence",
           "hour": 0,
+          "title": "MGMT 3305",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "MGMT 3315",
           "description": "Managing Organizational Change and Disruption",
           "hour": 0,
+          "title": "MGMT 3315",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "MGMT 3340",
           "description": "Healthcare Management, Innovation, and Design",
           "hour": 0,
+          "title": "MGMT 3340",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "MGMT 3350",
           "description": "Managing a Diverse Workforce",
           "hour": 0,
+          "title": "MGMT 3350",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "MGMT 3360",
           "description": "Law and the Legal Process",
           "hour": 0,
+          "title": "MGMT 3360",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "MGMT 3380",
           "description": "Leading with Character",
           "hour": 0,
+          "title": "MGMT 3380",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "MGMT 3420",
           "description": "Managing Human Capital",
           "hour": 0,
+          "title": "MGMT 3420",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "MGMT 3435",
           "description": "Social Networks and Organizations",
           "hour": 0,
+          "title": "MGMT 3435",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "MGMT 3530",
           "description": "Project Management",
           "hour": 0,
+          "title": "MGMT 3530",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "MGMT 4310",
           "description": "The Management Practices of Great Organizations",
           "hour": 0,
+          "title": "MGMT 4310",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "MGMT 4410",
           "description": "Workforce Analytics",
           "hour": 0,
+          "title": "MGMT 4410",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "MGMT 4983",
           "description": "Special Topics in Management",
           "hour": 0,
+          "title": "MGMT 4983",
           "type": "PLAIN_COURSE",
         },
       ],
-      "description": "Concentration in Management",
     },
     Object {
-      "courseBody": Array [
+      "description": "Concentration in Management Information Systems",
+      "entries": Array [
         Object {
           "description": "Only one course may double count between another concentration or minor.",
           "hour": 0,
@@ -1717,9 +3322,9 @@ Object {
           "type": "HEADER",
         },
         Object {
-          "courseTitle": "MISM 3403",
           "description": "Data Management in the Enterprise",
           "hour": 4,
+          "title": "MISM 3403",
           "type": "PLAIN_COURSE",
         },
         Object {
@@ -1733,67 +3338,67 @@ Object {
           "type": "COMMENT",
         },
         Object {
-          "courseTitle": "MISM 2510",
           "description": "Fundamentals of Information Analytics",
           "hour": 0,
+          "title": "MISM 2510",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "MISM 3501",
           "description": "Information Visualization for Business",
           "hour": 0,
+          "title": "MISM 3501",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "MISM 3515",
           "description": "Data Mining for Business",
           "hour": 0,
+          "title": "MISM 3515",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "MISM 4501",
           "description": "Business Systems Integration",
           "hour": 0,
+          "title": "MISM 4501",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "MISM 4983",
           "description": "Special Topics in Management Information Systems",
           "hour": 0,
+          "title": "MISM 4983",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "BUSN 5001",
           "description": "Data-Driven and Technology-Enabled Value Creation in Digital Economy",
           "hour": 0,
+          "title": "BUSN 5001",
           "type": "PLAIN_COURSE",
         },
       ],
-      "description": "Concentration in Management Information Systems",
     },
     Object {
-      "courseBody": Array [
+      "description": "Concentration in Marketing",
+      "entries": Array [
         Object {
           "description": "Required Courses",
           "hour": 0,
           "type": "HEADER",
         },
         Object {
-          "courseTitle": "MKTG 3401",
           "description": "Marketing Research",
           "hour": 4,
+          "title": "MKTG 3401",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "MKTG 3301",
           "description": "Marketing Management",
           "hour": 4,
+          "title": "MKTG 3301",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "or MKTG 4506",
-          "description": " Consumer Behavior",
-          "hour": 4,
+          "description": "Consumer Behavior",
+          "hour": 0,
+          "title": "MKTG 4506",
           "type": "OR_COURSE",
         },
         Object {
@@ -1807,103 +3412,103 @@ Object {
           "type": "COMMENT",
         },
         Object {
-          "courseTitle": "MKTG 2301",
           "description": "Marketing and Society",
           "hour": 0,
+          "title": "MKTG 2301",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "MKTG 3301",
           "description": "Marketing Management (if not selected as a required course)",
           "hour": 0,
+          "title": "MKTG 3301",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "MKTG 3501",
           "description": "Marketing Analytics",
           "hour": 0,
+          "title": "MKTG 3501",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "MKTG 4220",
           "description": "Marketing in Asia",
           "hour": 0,
+          "title": "MKTG 4220",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "MKTG 4420",
           "description": "Sales Management",
           "hour": 0,
+          "title": "MKTG 4420",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "MKTG 4502",
           "description": "Managing Customer Engagement in a Service World",
           "hour": 0,
+          "title": "MKTG 4502",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "MKTG 4504",
           "description": "Advertising and Brand Promotion",
           "hour": 0,
+          "title": "MKTG 4504",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "MKTG 4506",
           "description": "Consumer Behavior (if not selected as a required course)",
           "hour": 0,
+          "title": "MKTG 4506",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "MKTG 4508",
           "description": "Digital Marketing",
           "hour": 0,
+          "title": "MKTG 4508",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "MKTG 4510",
           "description": "New Product Development",
           "hour": 0,
+          "title": "MKTG 4510",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "MKTG 4512",
           "description": "International Marketing",
           "hour": 0,
+          "title": "MKTG 4512",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "MKTG 4983",
           "description": "Special Topics in Marketing",
           "hour": 0,
+          "title": "MKTG 4983",
           "type": "PLAIN_COURSE",
         },
       ],
-      "description": "Concentration in Marketing",
     },
     Object {
-      "courseBody": Array [
+      "description": "Concentration in Marketing Analytics",
+      "entries": Array [
         Object {
           "description": "Required Courses",
           "hour": 0,
           "type": "HEADER",
         },
         Object {
-          "courseTitle": "MKTG 2602",
           "description": "Quantitative Analysis of Consumer Data",
           "hour": 4,
+          "title": "MKTG 2602",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "MKTG 3402",
           "description": "Gaining Insights from Consumer Data",
           "hour": 4,
+          "title": "MKTG 3402",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "MKTG 3501",
           "description": "Marketing Analytics",
           "hour": 4,
+          "title": "MKTG 3501",
           "type": "PLAIN_COURSE",
         },
         Object {
@@ -1917,37 +3522,55 @@ Object {
           "type": "COMMENT",
         },
         Object {
-          "courseTitle": "CS 2500and CS 2501",
-          "description": "Fundamentals of Computer Science 1and Lab for CS 2500",
+          "courses": Array [
+            Object {
+              "description": "Fundamentals of Computer Science 1",
+              "title": "CS 2500",
+            },
+            Object {
+              "description": "Lab for CS 2500",
+              "title": "CS 2501",
+            },
+          ],
+          "description": "Fundamentals of Computer Science 1 and Lab for CS 2500",
           "hour": 0,
-          "type": "PLAIN_COURSE",
+          "type": "AND_COURSE",
         },
         Object {
-          "courseTitle": "DS 2000and DS 2001",
-          "description": "Programming with Dataand Data Science Programming Practicum",
+          "courses": Array [
+            Object {
+              "description": "Programming with Data",
+              "title": "DS 2000",
+            },
+            Object {
+              "description": "Data Science Programming Practicum",
+              "title": "DS 2001",
+            },
+          ],
+          "description": "Programming with Data and Data Science Programming Practicum",
           "hour": 0,
-          "type": "PLAIN_COURSE",
+          "type": "AND_COURSE",
         },
       ],
-      "description": "Concentration in Marketing Analytics",
     },
     Object {
-      "courseBody": Array [
+      "description": "Concentration in Social Innovation and Entrepreneurship",
+      "entries": Array [
         Object {
           "description": "Required Courses",
           "hour": 0,
           "type": "HEADER",
         },
         Object {
-          "courseTitle": "ENTR 2301",
           "description": "Innovation!",
           "hour": 4,
+          "title": "ENTR 2301",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "ENTR 4506",
           "description": "Advanced Studies in Social Innovation  Entrepreneurship",
           "hour": 4,
+          "title": "ENTR 4506",
           "type": "PLAIN_COURSE",
         },
         Object {
@@ -1961,21 +3584,21 @@ Object {
           "type": "COMMENT",
         },
         Object {
-          "courseTitle": "ENTR 2206",
           "description": "Global Social Enterprise",
           "hour": 0,
+          "title": "ENTR 2206",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "ENTR 2414",
           "description": "Social Responsibility of Business in an Age of Inequality",
           "hour": 0,
+          "title": "ENTR 2414",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "ENTR 3520",
           "description": "Impact Investing and Social Finance",
           "hour": 0,
+          "title": "ENTR 3520",
           "type": "PLAIN_COURSE",
         },
         Object {
@@ -1984,45 +3607,45 @@ Object {
           "type": "SUBHEADER",
         },
         Object {
-          "courseTitle": "ENTR 2215",
           "description": "Understanding Family Enterprise",
           "hour": 0,
+          "title": "ENTR 2215",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "ENTR 2303",
           "description": "Marketing Strategies for Startups",
           "hour": 0,
+          "title": "ENTR 2303",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "ENTR 2304",
           "description": "Industry Disruption and Corporate Transformation",
           "hour": 0,
+          "title": "ENTR 2304",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "ENTR 4983",
           "description": "Special Topics in Entrepreneurship",
           "hour": 0,
+          "title": "ENTR 4983",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "FINA 4610",
           "description": "Entrepreneurial Finance and Private Equity",
           "hour": 0,
+          "title": "FINA 4610",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "MGMT 3302",
           "description": "Negotiating in Business",
           "hour": 0,
+          "title": "MGMT 3302",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "MKTG 2301",
           "description": "Marketing and Society",
           "hour": 0,
+          "title": "MKTG 2301",
           "type": "PLAIN_COURSE",
         },
         Object {
@@ -2031,31 +3654,31 @@ Object {
           "type": "COMMENT",
         },
       ],
-      "description": "Concentration in Social Innovation and Entrepreneurship",
     },
     Object {
-      "courseBody": Array [
+      "description": "Concentration in Supply Chain Management",
+      "entries": Array [
         Object {
           "description": "Required Courses",
           "hour": 0,
           "type": "HEADER",
         },
         Object {
-          "courseTitle": "SCHM 3301",
           "description": "Global Supply Chain Strategy",
           "hour": 4,
+          "title": "SCHM 3301",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "SCHM 3305",
           "description": "Sourcing, Procurement, and Negotiation",
           "hour": 4,
+          "title": "SCHM 3305",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "SCHM 3310",
           "description": "Logistics and Transportation Management",
           "hour": 4,
+          "title": "SCHM 3310",
           "type": "PLAIN_COURSE",
         },
         Object {
@@ -2069,40 +3692,40 @@ Object {
           "type": "COMMENT",
         },
         Object {
-          "courseTitle": "SCHM 3308",
           "description": "Supply Chain Analytics and Emerging Technologies",
           "hour": 0,
+          "title": "SCHM 3308",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "SCHM 3315",
           "description": "Managing Healthcare Operations and Supply Chain",
           "hour": 0,
+          "title": "SCHM 3315",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "SCHM 3320",
           "description": "Forecasting and Sales  Operations Planning",
           "hour": 0,
+          "title": "SCHM 3320",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "SCHM 4401",
           "description": "Contemporary Topics in Supply Chain Management",
           "hour": 0,
+          "title": "SCHM 4401",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "SCHM 4983",
           "description": "Special Topics in Supply Chain Management",
           "hour": 0,
+          "title": "SCHM 4983",
           "type": "PLAIN_COURSE",
         },
       ],
-      "description": "Concentration in Supply Chain Management",
     },
     Object {
-      "courseBody": Array [
+      "description": "Supporting Courses",
+      "entries": Array [
         Object {
           "description": "Mathematics",
           "hour": 0,
@@ -2114,51 +3737,51 @@ Object {
           "type": "COMMENT",
         },
         Object {
-          "courseTitle": "MATH 1231",
           "description": "Calculus for Business and Economics",
           "hour": 0,
+          "title": "MATH 1231",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "MATH 1241",
           "description": "Calculus 1",
           "hour": 0,
+          "title": "MATH 1241",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "MATH 1242",
           "description": "Calculus 2",
           "hour": 0,
+          "title": "MATH 1242",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "MATH 1251",
           "description": "Calculus and Differential Equations for Biology 1",
           "hour": 0,
+          "title": "MATH 1251",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "MATH 1252",
           "description": "Calculus and Differential Equations for Biology 2",
           "hour": 0,
+          "title": "MATH 1252",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "MATH 1340",
           "description": "Intensive Calculus for Engineers",
           "hour": 0,
+          "title": "MATH 1340",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "MATH 1341",
           "description": "Calculus 1 for Science and Engineering",
           "hour": 0,
+          "title": "MATH 1341",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "MATH 1342",
           "description": "Calculus 2 for Science and Engineering",
           "hour": 0,
+          "title": "MATH 1342",
           "type": "PLAIN_COURSE",
         },
         Object {
@@ -2167,23 +3790,20 @@ Object {
           "type": "HEADER",
         },
         Object {
-          "courseTitle": "ECON 1115",
           "description": "Principles of Macroeconomics",
           "hour": 4,
+          "title": "ECON 1115",
           "type": "PLAIN_COURSE",
         },
         Object {
-          "courseTitle": "ECON 1116",
           "description": "Principles of Microeconomics",
           "hour": 4,
+          "title": "ECON 1116",
           "type": "PLAIN_COURSE",
         },
       ],
-      "description": "Supporting Courses",
     },
   ],
-  "majorName": "Bachelor of Science in Business Administration, BSBA",
-  "prgramRequiredHours": 128,
   "yearVersion": 2021,
 }
 `;

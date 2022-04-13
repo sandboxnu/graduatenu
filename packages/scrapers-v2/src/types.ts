@@ -1,58 +1,65 @@
 /**
  * Catalog Representations:
  *
- * { catalog { <courseList> ... } }
- * { courseList <desc> <comment> <courseBody> } - table
- * { courseBody { <courseRow | textRow> ...} }
+ * { document { <section> ... } }
+ * { section <desc> <comment> <row[]> }
+ * { row { <textRow | courseRow | multiCourseRow> ...} }
  *    textRow:
  *      { areaHeader <comment> <hour> }
  *      { commentRow <comment> <hour> }
  *      { subHeader  <comment> <hour> }
  *
  *    courseRow:
- *      { courseRow <codehol> <hour> }
- *      { orCourseRow <codehol> <hour> }
+ *      { courseRow <code> <hour> }
+ *      { orCourseRow <code> <hour> }
  *
+ *    multiCourseRow:
+ *      { andCourseRow <hour> { <code, description> ... } }
  */
 
-export type HTMLCatalog = {
+export type HDocument = {
   yearVersion: number;
   majorName: string;
-  prgramRequiredHours: number;
-  courseLists: HTMLCatalogCourseList[];
+  programRequiredHours: number;
+  sections: HSection[];
 };
 
-export type HTMLCatalogCourseList = {
+export type HSection = {
   description: string;
-  courseBody: HTMLCatalogCourseListBodyRow[];
+  entries: HRow[];
 };
 
-export type HTMLCatalogCourseListBodyRow =
-  | HTMLCatalogCourseListBodyRowSingle
-  | HTMLCatalogCourseListBodyRowMany;
+export type HRow = TextRow | CourseRow | MultiCourseRow;
 
-export interface HTMLCatalogCourseListBodyRowText {
-  type:
-    | CourseListBodyRowType.COMMENT
-    | CourseListBodyRowType.HEADER
-    | CourseListBodyRowType.SUBHEADER;
+export interface TextRow {
+  type: TextRowType;
   description: string;
   hour: number;
-}
-export interface HTMLCatalogCourseListBodyRowSingle {
-  type: CourseListBodyRowType.OR_COURSE | CourseListBodyRowType.PLAIN_COURSE;
-  description: string;
-  hour: number;
-  courseTitle: string;
-}
-export interface HTMLCatalogCourseListBodyRowMany {
-  description: string;
-  hour: number;
-  // maps from title to description
-  courses: Record<string, string>;
 }
 
-export enum CourseListBodyRowType {
+export interface CourseRow {
+  type: CourseRowType;
+  description: string;
+  hour: number;
+  title: string;
+}
+
+export interface MultiCourseRow {
+  type: MultiCourseRowType;
+  description: string;
+  hour: number;
+  // may contain duplicates
+  courses: Array<{ title: string; description: string }>;
+}
+
+export type TextRowType =
+  | HRowType.COMMENT
+  | HRowType.HEADER
+  | HRowType.SUBHEADER;
+export type CourseRowType = HRowType.OR_COURSE | HRowType.PLAIN_COURSE;
+export type MultiCourseRowType = HRowType.AND_COURSE;
+
+export enum HRowType {
   HEADER = "HEADER",
   SUBHEADER = "SUBHEADER",
   COMMENT = "COMMENT",

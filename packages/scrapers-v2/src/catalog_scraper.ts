@@ -2,17 +2,22 @@ import { assertUnreachable } from "@graduate/common";
 import axios from "axios";
 import * as cheerio from "cheerio";
 import {
-  CourseListBodyRowType,
-  HTMLCatalog,
-  HTMLCatalogCourseList,
-  HTMLCatalogCourseListBodyRow,
+  CourseRow,
+  CourseRowType,
+  HDocument,
+  HRow,
+  HRowType,
+  HSection,
+  MultiCourseRow,
+  MultiCourseRowType,
+  TextRow,
+  TextRowType,
 } from "./types";
 
 const loadCatalogHTML = async (url: string): Promise<CheerioStatic> => {
   try {
     const { data } = await axios.get(url);
-    const $ = cheerio.load(data);
-    return $;
+    return cheerio.load(data);
   } catch (error) {
     throw error;
   }
@@ -20,13 +25,11 @@ const loadCatalogHTML = async (url: string): Promise<CheerioStatic> => {
 
 export const scrapeMajorDataFromCatalog = async (
   url: string
-): Promise<HTMLCatalog> => {
+): Promise<HDocument> => {
   try {
     const $ = await loadCatalogHTML(url);
     // step 1: Transform scraped table into intermediate representation (IR)
-    const transformedScrapedData = transformMajorDataFromCatalog($);
-
-    return transformedScrapedData;
+    return transformMajorDataFromCatalog($);
   } catch (error) {
     throw error;
   }
@@ -34,7 +37,7 @@ export const scrapeMajorDataFromCatalog = async (
 
 const transformMajorDataFromCatalog = async (
   $: CheerioStatic
-): Promise<HTMLCatalog> => {
+): Promise<HDocument> => {
   const majorName: string = $("#site-title").find("h1").text().trim();
   const catalogYear: string = $("#edition").text().split(" ")[0];
   const yearVersion: number = parseInt(catalogYear.split("-")[0]);
@@ -58,37 +61,32 @@ const transformMajorDataFromCatalog = async (
     ) || 0;
 
   return {
-    prgramRequiredHours,
+    programRequiredHours: prgramRequiredHours,
     yearVersion,
     majorName,
-    courseLists: await courseLists,
+    sections: await courseLists,
   };
 };
 
 const transformCourseLists = async (
   $: CheerioStatic,
   requirementsContainer: Cheerio
-): Promise<HTMLCatalogCourseList[]> => {
+): Promise<HSection[]> => {
   // use a stack to keep track of the course list title and description
   const descriptions: string[] = [];
-  const courseList: HTMLCatalogCourseList[] = [];
+  const courseList: HSection[] = [];
 
-  const children = requirementsContainer.children();
-
-  for (let i = 0; i < children.length; i += 1) {
-    const element = children[i];
+  for (const element of requirementsContainer.children().toArray()) {
     if (element.name.includes("h")) {
-      descriptions.push($(element).text());
+      descriptions.push(parseText($(element)));
     } else if (element.name === "table") {
       const tableDesc = descriptions.pop() || "";
       const courseTable = {
         description: tableDesc,
-        courseBody: transformCourseListTable($, element),
+        entries: transformCourseListTable($, element),
       };
       courseList.push(courseTable);
-    }
-    // TODO: scrape all concentrations for business. only applicable to business
-    else if (
+    } else if (
       element.name === "ul" &&
       $(element).prev().text().includes("concentration")
     ) {
@@ -110,118 +108,157 @@ const transformCourseLists = async (
   return courseList;
 };
 
-const transformCourseListTable = (
-  $: CheerioStatic,
-  table: CheerioElement
-): HTMLCatalogCourseListBodyRow[] => {
-  const courseTable: HTMLCatalogCourseListBodyRow[] = [];
-
-  $(table)
-    .find("tbody > tr")
-    .each((_idx: number, tr: CheerioElement) => {
-      // different row type
-      const trClass = tr.attribs["class"];
-      const tdClass = $(tr).children()[0].attribs["class"];
-
-      // const isCodeCol = Boolean($(tr).children()[0].attribs["class"]);
-
-      let courseListBodyRowType: CourseListBodyRowType;
-      if (trClass.includes("subheader")) {
-        courseListBodyRowType = CourseListBodyRowType.SUBHEADER;
-      } else if (trClass.includes("areaheader")) {
-        courseListBodyRowType = CourseListBodyRowType.HEADER;
-      } else if (trClass.includes("orclass")) {
-        courseListBodyRowType = CourseListBodyRowType.OR_COURSE;
-      } else if (tdClass) {
-        if (tdClass !== "codecol") {
-          throw Error(
-            "Expected class to exist with value codecol. Please add this case to the compiler."
-          );
-        }
-
-        courseListBodyRowType = CourseListBodyRowType.PLAIN_COURSE;
-        if ($(tdClass).text().includes("and")) {
-          courseListBodyRowType = CourseListBodyRowType.AND_COURSE;
-        }
-      } else {
-        courseListBodyRowType = CourseListBodyRowType.COMMENT;
-      }
-
-      const courseListBodyRow = constructCourseListBodyRow(
-        $,
-        tr,
-        courseListBodyRowType
-      );
-      courseTable.push(courseListBodyRow);
-    });
-
-  return courseTable;
-};
-
-const constructCourseListBodyRow = (
-  $: CheerioStatic,
-  tr: CheerioElement,
-  type: CourseListBodyRowType
-): HTMLCatalogCourseListBodyRow => {
-  switch (type) {
-    case CourseListBodyRowType.HEADER:
-    case CourseListBodyRowType.SUBHEADER:
-    case CourseListBodyRowType.COMMENT:
-      return { ...constructCourseListBodyRowText($, tr), type };
-    case CourseListBodyRowType.OR_COURSE:
-    case CourseListBodyRowType.PLAIN_COURSE:
-      return { ...constructCourseListBodyRowSingle($, tr), type };
-    case CourseListBodyRowType.AND_COURSE:
-      return { ...constructCourseListBodyRowMany($, tr), type };
-    default:
-      return assertUnreachable(type);
-    // $(tr)
-    //   .children()
-    //   .each((_idx: number, td: CheerioElement) => {
-    //     const tdClass = td.attribs["class"];
-
-    //         description = $(td).text();
-    //         break
-    //       case CourseListBodyRowType.OR_COURSE:
-    //         const hourCol = $(tr).prev().children().last().text();
-    //         hour = parseInt(hourCol.split('-')[0]) || 0;
-    //         courseTitle = String($(td).text()).replaceAll(" ", " ");
-    //         break
-    //       case CourseListBodyRowType.PLAIN_COURSE:
-    //         courseTitle = String($(td).text()).replaceAll(" ", " ");
-    //         break
-    //       case CourseListBodyRowType.AND_COURSE:
-    //         courseTitle = String($(td).text()).replaceAll(" ", " ");
-  }
-  // if (tdClass != null) {
-  //   if (tdClass.includes("codecol")) {
-  //     if (courseListBodyRowType === CourseListBodyRowType.OR_COURSE) {
-  //       const hourCol = $(tr).prev().children().last().text();
-  //       hour = parseInt(hourCol.split('-')[0]) || 0;
-  //     } else if (courseListBodyRowType === CourseListBodyRowType.AND_COURSE) {
-  //       $(tdClass).text()
-  //     }
-
-  //     courseTitle = String($(td).text()).replaceAll(" ", " ");
-  //     courseListRow["courseTitle"] = courseTitle;
-  //   }
-
-  //   if (tdClass.includes("hourscol")) {
-  //     hour = parseInt($(td).text()) || 0;
-  //   }
-  // } else {
-  //   description = $(td).text();
-  // }
-};
-
 const constructNestedLinks = ($: CheerioStatic, element: CheerioElement) => {
   const base = "https://catalog.northeastern.edu";
   const concentrationsTag = "#concentrationrequirementstext";
-  return Array.from($(element).find("li > a"))
+  return $(element)
+    .find("li > a")
+    .toArray()
     .map((link) => $(link).attr("href"))
     .map((link) => {
       const url = new URL(link, base);
       url.hash = concentrationsTag;
       return url.toString();
     });
+};
+
+const transformCourseListTable = (
+  $: CheerioStatic,
+  table: CheerioElement
+): HRow[] => {
+  const courseTable: HRow[] = [];
+
+  for (const tr of $(table).find("tbody > tr").toArray()) {
+    // different row type
+    const type = getRowType($, tr);
+    const courseListBodyRow = constructCourseListBodyRow($, tr, type);
+    courseTable.push(courseListBodyRow);
+  }
+
+  return courseTable;
+};
+
+const getRowType = ($: CheerioStatic, tr: CheerioElement) => {
+  const trClass = tr.attribs["class"];
+  const td = $(tr.children[0]);
+  const tdClass = $(tr).children()[0].attribs["class"];
+
+  if (trClass.includes("subheader")) {
+    return HRowType.SUBHEADER;
+  } else if (trClass.includes("areaheader")) {
+    return HRowType.HEADER;
+  } else if (trClass.includes("orclass")) {
+    return HRowType.OR_COURSE;
+  } else if (tdClass) {
+    if (tdClass !== "codecol") {
+      throw Error(
+        "Expected class to exist with value codecol. Please add this case to the compiler."
+      );
+    }
+    if (td.find(".code").toArray().length > 1) {
+      return HRowType.AND_COURSE;
+    }
+    return HRowType.PLAIN_COURSE;
+  }
+  return HRowType.COMMENT;
+};
+
+const constructCourseListBodyRow = (
+  $: CheerioStatic,
+  tr: CheerioElement,
+  type: HRowType
+): HRow => {
+  switch (type) {
+    case HRowType.HEADER:
+    case HRowType.SUBHEADER:
+    case HRowType.COMMENT:
+      return constructTextRow($, tr, type);
+    case HRowType.OR_COURSE:
+      return constructOrCourseRow($, tr, type);
+    case HRowType.PLAIN_COURSE:
+      return constructPlainCourseRow($, tr, type);
+    case HRowType.AND_COURSE:
+      return constructMultiCourseRow($, tr, type);
+    default:
+      return assertUnreachable(type);
+  }
+};
+
+const constructTextRow = (
+  $: CheerioStatic,
+  tr: CheerioElement,
+  type: TextRowType
+): TextRow => {
+  const [c1, c2] = ensureLength(2, tr.children).map($);
+  const description = parseText(c1);
+  const hour = parseHour(c2);
+  return { hour, description, type };
+};
+
+const constructPlainCourseRow = (
+  $: CheerioStatic,
+  tr: CheerioElement,
+  type: CourseRowType
+): CourseRow => {
+  const [code, desc, hourCol] = ensureLength(3, tr.children).map($);
+  const title = parseText(code);
+  const description = parseText(desc);
+  const hour = parseHour(hourCol);
+  return { hour, description, type, title: title };
+};
+
+const constructOrCourseRow = (
+  $: CheerioStatic,
+  tr: CheerioElement,
+  type: CourseRowType
+): CourseRow => {
+  const [code, desc] = ensureLength(2, tr.children).map($);
+  // remove "or "
+  const title = parseText(code).substring(3).trim();
+  const description = parseText(desc);
+  // there may be multiple courses in the OR, so we can't backtrack
+  return { hour: 0, description, type, title: title };
+};
+
+const constructMultiCourseRow = (
+  $: CheerioStatic,
+  tr: CheerioElement,
+  type: MultiCourseRowType
+): MultiCourseRow => {
+  const [code, desc, hourCol] = ensureLength(3, tr.children).map($);
+  const titles = code.find(".code").toArray().map($).map(parseText);
+  const firstDescription = desc.contents().first().text();
+  const restDescriptions = desc
+    .children(".blockindent")
+    .toArray()
+    // ignore the first four characters, "and "
+    .map((c) => parseText($(c)).substring(4).trim());
+  const descriptions = [firstDescription, ...restDescriptions];
+  if (titles.length !== descriptions.length) {
+    const msg = `found titles: ${titles.length} !== found descs: ${descriptions.length}`;
+    throw new Error(msg + titles + descriptions);
+  }
+  const courses = titles.map((title, i) => ({
+    title,
+    description: descriptions[i],
+  }));
+  const hour = parseHour(hourCol);
+  return { hour, type, description: descriptions.join(" and "), courses };
+};
+
+const parseHour = (td: Cheerio) => {
+  const hourText = td.text();
+  return parseInt(hourText.split("-")[0]) || 0;
+};
+const parseText = (td: Cheerio) => {
+  // replace &NBSP with space
+  return td.text().replaceAll("\xa0", " ").trim();
+};
+const ensureLength = <T>(n: number, l: T[]) => {
+  const length = l.length;
+  if (length !== n) {
+    const msg = `expected text row to contain exactly ${n} cells, found ${length}`;
+    throw new Error(msg);
+  }
+  return l;
 };
