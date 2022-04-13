@@ -8,4 +8,11 @@ describe("Scrap catalog page", () => {
 
     expect(result).toMatchSnapshot();
   });
+
+  test("business", async () => {
+    const url =
+      "https://catalog.northeastern.edu/undergraduate/business/business-administration-bsba/#programrequirementstext";
+    const result = await scrapeMajorDataFromCatalog(url);
+    expect(result).toMatchSnapshot();
+  });
 });

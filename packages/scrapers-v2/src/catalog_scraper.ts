@@ -31,7 +31,9 @@ export const scrapeMajorDataFromCatalog = async (
   }
 };
 
-const transformMajorDataFromCatalog = ($: CheerioStatic): HTMLCatalog => {
+const transformMajorDataFromCatalog = async (
+  $: CheerioStatic
+): Promise<HTMLCatalog> => {
   const majorName: string = $("#site-title").find("h1").text().trim();
   const catalogYear: string = $("#edition").text().split(" ")[0];
   const yearVersion: number = parseInt(catalogYear.split("-")[0]);
@@ -58,36 +60,52 @@ const transformMajorDataFromCatalog = ($: CheerioStatic): HTMLCatalog => {
     prgramRequiredHours,
     yearVersion,
     majorName,
-    courseLists,
+    courseLists: await courseLists,
   };
 };
 
-const transformCourseLists = (
+const transformCourseLists = async (
   $: CheerioStatic,
   requirementsContainer: Cheerio
-): HTMLCatalogCourseList[] => {
+): Promise<HTMLCatalogCourseList[]> => {
   // use a stack to keep track of the course list title and description
-  let descriptions: string[] = [];
-  let courseList: HTMLCatalogCourseList[] = [];
+  const descriptions: string[] = [];
+  const courseList: HTMLCatalogCourseList[] = [];
 
-  requirementsContainer
-    .children()
-    .each((_idx: number, element: CheerioElement) => {
-      if (element.name.includes("h")) {
-        descriptions.push($(element).text());
-      } else if (element.name === "table") {
-        const tableDesc = descriptions.pop() || "";
-        const courseTable = {
-          description: tableDesc,
-          courseBody: transformCourseListTable($, element),
-        };
-        courseList.push(courseTable);
-      }
-      // TODO: scrap all concentrations for business. only applicable to business
-      // else if (element.name === 'ul' && $(element).prev().text().includes("concentration")) {
-      //   const link = $(element).find("li > a").attr('href');
-      // }
-    });
+  const children = requirementsContainer.children();
+
+  for (let i = 0; i < children.length; i += 1) {
+    const element = children[i];
+    if (element.name.includes("h")) {
+      descriptions.push($(element).text());
+    } else if (element.name === "table") {
+      const tableDesc = descriptions.pop() || "";
+      const courseTable = {
+        description: tableDesc,
+        courseBody: transformCourseListTable($, element),
+      };
+      courseList.push(courseTable);
+    }
+    // TODO: scrape all concentrations for business. only applicable to business
+    else if (
+      element.name === "ul" &&
+      $(element).prev().text().includes("concentration")
+    ) {
+      const links = constructNestedLinks($, element);
+      const mapped = await Promise.all(links.map(loadCatalogHTML));
+      const containerId = "#concentrationrequirementstextcontainer";
+      const concentrations = await Promise.all(
+        mapped.map((concentrationPage) =>
+          transformCourseLists(
+            concentrationPage,
+            concentrationPage(containerId)
+          )
+        )
+      );
+      courseList.push(...concentrations.flat());
+    }
+  }
+
   return courseList;
 };
 
@@ -95,7 +113,7 @@ const transformCourseListTable = (
   $: CheerioStatic,
   table: CheerioElement
 ): HTMLCatalogCourseListBodyRow[] => {
-  let courseTable: HTMLCatalogCourseListBodyRow[] = [];
+  const courseTable: HTMLCatalogCourseListBodyRow[] = [];
 
   $(table)
     .find("tbody > tr")
@@ -133,9 +151,9 @@ const constructCourseListBodyRow = (
   tr: CheerioElement,
   courseListBodyRowType: CourseListBodyRowType
 ): HTMLCatalogCourseListBodyRow => {
-  let hour: number = 0;
-  let description: string = "";
-  let courseTitle: string = "";
+  let hour = 0;
+  let description = "";
+  let courseTitle = "";
   const courseListRow: {
     [key in keyof HTMLCatalogCourseListBodyRow]: HTMLCatalogCourseListBodyRow[key];
   } = {
@@ -152,7 +170,7 @@ const constructCourseListBodyRow = (
           if (tdClass.includes("orclass")) {
             hour = parseInt($(tr).prev().children().last().text()) || 0;
           }
-          courseTitle = $(td).text();
+          courseTitle = String($(td).text()).replaceAll(" ", " ");
           courseListRow["courseTitle"] = courseTitle;
         }
 
@@ -167,4 +185,16 @@ const constructCourseListBodyRow = (
   courseListRow["description"] = description;
 
   return courseListRow;
+};
+
+const constructNestedLinks = ($: CheerioStatic, element: CheerioElement) => {
+  const base = "https://catalog.northeastern.edu";
+  const concentrationsTag = "#concentrationrequirementstext";
+  return Array.from($(element).find("li > a"))
+    .map((link) => $(link).attr("href"))
+    .map((link) => {
+      const url = new URL(link, base);
+      url.hash = concentrationsTag;
+      return url.toString();
+    });
 };
