@@ -24,9 +24,7 @@ class APIClient {
       const data = (
         await this.axios.post("/api/auth/login", { ...loginUserDto })
       ).data;
-      return plainToInstance(GetStudentResponse, data, {
-        excludeExtraneousValues: true,
-      });
+      return plainToInstance(GetStudentResponse, data);
     },
     register: async (
       createStudentDto: CreateStudentDto
@@ -34,9 +32,7 @@ class APIClient {
       const data = (
         await this.axios.post("/api/auth/register", { ...createStudentDto })
       ).data;
-      return plainToInstance(GetStudentResponse, data, {
-        excludeExtraneousValues: true,
-      });
+      return plainToInstance(GetStudentResponse, data);
     },
   };
   student = {
@@ -46,9 +42,7 @@ class APIClient {
       const data = (
         await this.axios.patch("/api/students/me", { ...updateStudentDto })
       ).data;
-      return plainToInstance(UpdateStudentResponse, data, {
-        excludeExtraneousValues: true,
-      });
+      return plainToInstance(UpdateStudentResponse, data);
     },
     student: async (): Promise<GetStudentResponse> => {
       const data = (await this.axios.get("/api/students/me")).data;
@@ -62,9 +56,7 @@ class APIClient {
           params: { isWithPlans: true },
         })
       ).data;
-      return plainToInstance(GetStudentResponse, data, {
-        excludeExtraneousValues: true,
-      });
+      return plainToInstance(GetStudentResponse, data);
     },
     delete: async (): Promise<void> => {
       return (await this.axios.delete("/api/students/me")).data;
@@ -74,9 +66,7 @@ class APIClient {
     create: async (createPlanDto: CreatePlanDto): Promise<GetPlanResponse> => {
       const data = (await this.axios.post("/api/plans", { ...createPlanDto }))
         .data;
-      return plainToInstance(GetPlanResponse, data, {
-        excludeExtraneousValues: true,
-      });
+      return plainToInstance(GetPlanResponse, data);
     },
     get: async (id: number): Promise<GetPlanResponse> => {
       const data = (await this.axios.get(`/api/plans/${id}`)).data;
@@ -91,9 +81,7 @@ class APIClient {
       const data = (
         await this.axios.patch(`/api/plans/${id}`, { ...updatePlanDto })
       ).data;
-      return plainToInstance(UpdatePlanResponse, data, {
-        excludeExtraneousValues: true,
-      });
+      return plainToInstance(UpdatePlanResponse, data);
     },
     delete: async (id: number): Promise<void> => {
       return (await this.axios.delete(`/api/plans/${id}`)).data;
