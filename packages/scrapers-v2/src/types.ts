@@ -38,7 +38,8 @@ export interface TextRow {
 }
 
 export interface CourseRow {
-  type: CourseRowType;
+  // represents COURSE_TYPE output
+  type: CourseRowType; // tells us which case (PLAIN or OR)
   description: string;
   hour: number;
   title: string;
@@ -52,6 +53,14 @@ export interface MultiCourseRow {
   courses: Array<{ title: string; description: string }>;
 }
 
+export interface RangeCourseRow {
+  type: HRowType.RANGE_COURSE;
+  exceptions: Array<{ subject: string; courseId: number }>;
+  subjects: Array<string>;
+  start: number;
+  end: number;
+}
+
 export type TextRowType =
   | HRowType.COMMENT
   | HRowType.HEADER
@@ -59,6 +68,18 @@ export type TextRowType =
 export type CourseRowType = HRowType.OR_COURSE | HRowType.PLAIN_COURSE;
 export type MultiCourseRowType = HRowType.AND_COURSE;
 
+// the different cases we handle for parsing, by SHAPE
+export enum RowParseType {
+  TEXT = "TEXT",
+  OR_COURSE = "OR_COURSE",
+  PLAIN_COURSE = "PLAIN_COURSE",
+  MULTI_COURSE = "MULTI_COURSE",
+  RANGE_1 = "RANGE_1",
+  RANGE_2 = "RANGE_2",
+  RANGE_3 = "RANGE_3", // all map to HRowType.RANGE_COURSE
+}
+
+// the different outputs we have, by TYPE
 export enum HRowType {
   HEADER = "HEADER",
   SUBHEADER = "SUBHEADER",
@@ -66,4 +87,5 @@ export enum HRowType {
   OR_COURSE = "OR_COURSE",
   AND_COURSE = "AND_COURSE",
   PLAIN_COURSE = "PLAIN_COURSE",
+  RANGE_COURSE = "RANGE_COURSE",
 }
