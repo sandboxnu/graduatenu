@@ -11,6 +11,7 @@ import {
   Status,
   SeasonWord,
 } from "@graduate/common";
+import { SearchAPI } from "@graduate/api-client";
 import { XButton } from "../common";
 import { Modal } from "@material-ui/core";
 import { batch, connect } from "react-redux";
@@ -24,7 +25,6 @@ import {
   safelyGetTransferCoursesFromState,
 } from "../../state";
 import { AppState } from "../../state/reducers/state";
-import { fetchCourse } from "../../api";
 import { convertTermIdToSeason } from "../../utils/schedule-helpers";
 
 const InnerSection = styled.section`
@@ -200,7 +200,7 @@ export class SidebarAddClassModalComponent extends React.Component<
     });
 
     for (const i in this.props.selectedCourses) {
-      const courseToAdd: ScheduleCourse | null = await fetchCourse(
+      const courseToAdd: ScheduleCourse | null = await SearchAPI.fetchCourse(
         this.props.selectedCourses[i].subject.toUpperCase(),
         this.props.selectedCourses[i].classId.toString()
       );

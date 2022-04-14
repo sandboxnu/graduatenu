@@ -1,4 +1,3 @@
-import { fetchCourse } from "../api";
 import { ISimplifiedCourseDataAPI } from "../models/types";
 import {
   INEUPrereq,
@@ -7,6 +6,7 @@ import {
   Requirement,
   ScheduleCourse,
 } from "@graduate/common";
+import { SearchAPI } from "@graduate/api-client";
 
 export async function getScheduleCoursesFromSimplifiedCourseDataAPI(
   courses: ISimplifiedCourseDataAPI[]
@@ -14,7 +14,10 @@ export async function getScheduleCoursesFromSimplifiedCourseDataAPI(
   const convertedCourses: ScheduleCourse[] = [];
   await Promise.all(
     courses.map(async (c) => {
-      const course = await fetchCourse(c.subject, c.course_id.toString());
+      const course = await SearchAPI.fetchCourse(
+        c.subject,
+        c.course_id.toString()
+      );
       if (course != null) {
         convertedCourses.push({ ...course, semester: c.semester || null });
       }
@@ -38,7 +41,7 @@ export async function getScheduleCourseCoreqs(
     await Promise.all(
       coreqCourses.map(async (coreqCourse: INEUPrereq) => {
         if (isINEUPrereqCourse(coreqCourse)) {
-          const course = await fetchCourse(
+          const course = await SearchAPI.fetchCourse(
             coreqCourse.subject,
             coreqCourse.classId
           );

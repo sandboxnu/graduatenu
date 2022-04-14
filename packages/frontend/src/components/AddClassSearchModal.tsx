@@ -3,7 +3,7 @@ import { courseToString, ScheduleCourse } from "@graduate/common";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { Search } from "./common/Search";
-import { searchCourses } from "../api";
+import { SearchAPI } from "@graduate/api-client";
 import AddIcon from "@material-ui/icons/Add";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import { isCourseInSchedule } from "../utils/schedule-helpers";
@@ -215,7 +215,7 @@ export const AddClassSearchModal: React.FC<AddClassSearchModalProps> = (
   const fetchCourses = () => {
     if (searchQuery != "") {
       setIsLoading(true);
-      searchCourses(searchQuery)
+      SearchAPI.searchCourses(searchQuery)
         .then((searchedCourses) => {
           setSearchedCourses(searchedCourses);
           setIsLoading(false);

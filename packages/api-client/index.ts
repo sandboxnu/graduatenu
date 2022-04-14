@@ -13,7 +13,6 @@ import {
   UpdateStudentDto,
   UpdateStudentResponse,
 } from "@graduate/common";
-import { API } from "@graduate/api-client";
 import { plainToInstance } from "class-transformer";
 
 class APIClient {
@@ -143,7 +142,7 @@ class SearchAPIClient {
     }
   };
 
-  searchCourse = async (
+  searchCourses = async (
     searchQuery: string,
     minIndex = 0,
     maxIndex = 9999

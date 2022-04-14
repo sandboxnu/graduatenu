@@ -6,6 +6,7 @@ import {
   IRequiredCourse,
   ScheduleCourse,
 } from "@graduate/common";
+import { SearchAPI } from "@graduate/api-client";
 import {
   getCompletedRequirementsFromState,
   getUserMajorFromState,
@@ -15,7 +16,6 @@ import {
   setTransferCoursesAction,
 } from "../state/actions/studentActions";
 import styled from "styled-components";
-import { fetchCourse } from "../api";
 import {
   OnboardingSelectionTemplate,
   SelectableCourse,
@@ -34,7 +34,7 @@ const TitleText = styled.div`
 `;
 
 const mappableFetchCourse = (c: IRequiredCourse) =>
-  fetchCourse(c.subject, String(c.classId));
+  SearchAPI.fetchCourse(c.subject, String(c.classId));
 const fetchAndFilterCourses = async (cs: IRequiredCourse[]) => {
   const courses = await Promise.all(cs.map(mappableFetchCourse));
   // filter will get rid of null values, so cast is safe

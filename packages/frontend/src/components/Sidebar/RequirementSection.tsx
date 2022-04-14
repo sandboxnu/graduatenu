@@ -8,6 +8,7 @@ import {
   Requirement,
   ScheduleCourse,
 } from "@graduate/common";
+import { SearchAPI } from "@graduate/api-client";
 import {
   DNDScheduleCourse,
   IRequirementGroupWarning,
@@ -17,7 +18,6 @@ import ExpandMoreOutlinedIcon from "@material-ui/icons/ExpandMoreOutlined";
 import ExpandLessOutlinedIcon from "@material-ui/icons/ExpandLessOutlined";
 import { SidebarAddClassModal } from "./SidebarAddClassModal";
 import { convertToDNDCourses } from "../../utils/schedule-helpers";
-import { fetchCourse } from "../../api";
 import { Droppable } from "react-beautiful-dnd";
 import { SidebarClassBlock } from "./SidebarClassBlock";
 import { connect } from "react-redux";
@@ -193,9 +193,10 @@ class RequirementSectionComponent extends React.Component<
       return;
     }
 
-    const requirements: Requirement[] = majorRequirementGroup.requirements.filter(
-      (requirement) => requirement.type !== "RANGE"
-    );
+    const requirements: Requirement[] =
+      majorRequirementGroup.requirements.filter(
+        (requirement) => requirement.type !== "RANGE"
+      );
 
     const promises: Promise<ScheduleCourse | null>[] = [];
 
@@ -203,7 +204,7 @@ class RequirementSectionComponent extends React.Component<
       for (const r of reqs) {
         if (r.type === "COURSE") {
           promises.push(
-            fetchCourse(r.subject.toUpperCase(), r.classId.toString())
+            SearchAPI.fetchCourse(r.subject.toUpperCase(), r.classId.toString())
           );
         }
         if (r.type === "AND" || r.type === "OR" || r.type === "CREDITS") {
