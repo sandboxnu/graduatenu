@@ -4,15 +4,17 @@ import {
   CreateStudentDto,
   GetPlanResponse,
   GetStudentResponse,
+  INEUAndPrereq,
+  INEUOrPrereq,
   LoginStudentDto,
+  ScheduleCourse,
   UpdatePlanDto,
   UpdatePlanResponse,
   UpdateStudentDto,
   UpdateStudentResponse,
-  INEUAndPrereq,
-  INEUOrPrereq,
-  ScheduleCourse,
 } from "@graduate/common";
+import { API } from "@graduate/api-client";
+import { plainToInstance } from "class-transformer";
 
 class APIClient {
   private axios: AxiosInstance;
@@ -20,34 +22,42 @@ class APIClient {
     login: async (
       loginUserDto: LoginStudentDto
     ): Promise<GetStudentResponse> => {
-      return (await this.axios.post("/api/auth/login", { ...loginUserDto }))
-        .data;
+      const data = (
+        await this.axios.post("/api/auth/login", { ...loginUserDto })
+      ).data;
+      return plainToInstance(GetStudentResponse, data);
     },
     register: async (
       createStudentDto: CreateStudentDto
     ): Promise<GetStudentResponse> => {
-      return (
+      const data = (
         await this.axios.post("/api/auth/register", { ...createStudentDto })
       ).data;
+      return plainToInstance(GetStudentResponse, data);
     },
   };
   student = {
     update: async (
       updateStudentDto: UpdateStudentDto
     ): Promise<UpdateStudentResponse> => {
-      return (
+      const data = (
         await this.axios.patch("/api/students/me", { ...updateStudentDto })
       ).data;
+      return plainToInstance(UpdateStudentResponse, data);
     },
     student: async (): Promise<GetStudentResponse> => {
-      return (await this.axios.get("/api/students/me")).data;
+      const data = (await this.axios.get("/api/students/me")).data;
+      return plainToInstance(GetStudentResponse, data, {
+        excludeExtraneousValues: true,
+      });
     },
     studentWithPlan: async (): Promise<GetStudentResponse> => {
-      return (
+      const data = (
         await this.axios.get("/api/students/me", {
           params: { isWithPlans: true },
         })
       ).data;
+      return plainToInstance(GetStudentResponse, data);
     },
     delete: async (): Promise<void> => {
       return (await this.axios.delete("/api/students/me")).data;
@@ -55,17 +65,24 @@ class APIClient {
   };
   plans = {
     create: async (createPlanDto: CreatePlanDto): Promise<GetPlanResponse> => {
-      return (await this.axios.post("/api/plans", { ...createPlanDto })).data;
+      const data = (await this.axios.post("/api/plans", { ...createPlanDto }))
+        .data;
+      return plainToInstance(GetPlanResponse, data);
     },
     get: async (id: number): Promise<GetPlanResponse> => {
-      return (await this.axios.get(`/api/plans/${id}`)).data;
+      const data = (await this.axios.get(`/api/plans/${id}`)).data;
+      return plainToInstance(GetPlanResponse, data, {
+        excludeExtraneousValues: true,
+      });
     },
     update: async (
       id: number,
       updatePlanDto: UpdatePlanDto
     ): Promise<UpdatePlanResponse> => {
-      return (await this.axios.patch(`/api/plans/${id}`, { ...updatePlanDto }))
-        .data;
+      const data = (
+        await this.axios.patch(`/api/plans/${id}`, { ...updatePlanDto })
+      ).data;
+      return plainToInstance(UpdatePlanResponse, data);
     },
     delete: async (id: number): Promise<void> => {
       return (await this.axios.delete(`/api/plans/${id}`)).data;
@@ -128,8 +145,8 @@ class SearchAPIClient {
 
   searchCourse = async (
     searchQuery: string,
-    minIndex: number = 0,
-    maxIndex: number = 9999
+    minIndex = 0,
+    maxIndex = 9999
   ): Promise<ScheduleCourse[]> => {
     const res = await this.axios({
       method: "POST",
@@ -149,9 +166,10 @@ class SearchAPIClient {
     });
 
     const coursesData = await res.data;
-    const courses: ScheduleCourse[] = [];
-    coursesData.search.nodes.forEach((result: SearchClass) => {
-      const course: ScheduleCourse = {
+    const nodes = coursesData.search.nodes;
+
+    return nodes.forEach(
+      (result: SearchClass): ScheduleCourse => ({
         name: result.name,
         classId: result.classId,
         subject: result.subject,
@@ -160,11 +178,8 @@ class SearchAPIClient {
         numCreditsMin: result.minCredits,
         numCreditsMax: result.maxCredits,
         semester: null,
-      };
-      courses.push(course);
-    });
-
-    return courses;
+      })
+    );
   };
 
   constructor(baseURL = "https://api.searchneu.com/graphql") {
