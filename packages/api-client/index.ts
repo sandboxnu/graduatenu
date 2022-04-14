@@ -17,79 +17,83 @@ import { plainToInstance } from "class-transformer";
 
 class APIClient {
   private axios: AxiosInstance;
+
   auth = {
     login: async (
       loginUserDto: LoginStudentDto
     ): Promise<GetStudentResponse> => {
-      const data = (
-        await this.axios.post("/api/auth/login", { ...loginUserDto })
-      ).data;
+      const data = (await this.axios.post("/auth/login", { ...loginUserDto }))
+        .data;
       return plainToInstance(GetStudentResponse, data);
     },
     register: async (
       createStudentDto: CreateStudentDto
     ): Promise<GetStudentResponse> => {
       const data = (
-        await this.axios.post("/api/auth/register", { ...createStudentDto })
+        await this.axios.post("/auth/register", { ...createStudentDto })
       ).data;
       return plainToInstance(GetStudentResponse, data);
     },
   };
+
   student = {
     update: async (
       updateStudentDto: UpdateStudentDto
     ): Promise<UpdateStudentResponse> => {
       const data = (
-        await this.axios.patch("/api/students/me", { ...updateStudentDto })
+        await this.axios.patch("/students/me", { ...updateStudentDto })
       ).data;
       return plainToInstance(UpdateStudentResponse, data);
     },
-    student: async (): Promise<GetStudentResponse> => {
-      const data = (await this.axios.get("/api/students/me")).data;
-      return plainToInstance(GetStudentResponse, data, {
-        excludeExtraneousValues: true,
-      });
-    },
-    studentWithPlan: async (): Promise<GetStudentResponse> => {
+    getMe: async (): Promise<GetStudentResponse> => {
       const data = (
-        await this.axios.get("/api/students/me", {
+        await this.axios.get("/students/me", {
+          params: { isWithPlans: false },
+        })
+      ).data;
+      return plainToInstance(GetStudentResponse, data);
+    },
+    getMeWithPlan: async (): Promise<GetStudentResponse> => {
+      const data = (
+        await this.axios.get("/students/me", {
           params: { isWithPlans: true },
         })
       ).data;
       return plainToInstance(GetStudentResponse, data);
     },
     delete: async (): Promise<void> => {
-      return (await this.axios.delete("/api/students/me")).data;
+      return (await this.axios.delete("/students/me")).data;
     },
   };
+
   plans = {
     create: async (createPlanDto: CreatePlanDto): Promise<GetPlanResponse> => {
-      const data = (await this.axios.post("/api/plans", { ...createPlanDto }))
-        .data;
+      const data = (await this.axios.post("/plans", { ...createPlanDto })).data;
       return plainToInstance(GetPlanResponse, data);
     },
-    get: async (id: number): Promise<GetPlanResponse> => {
-      const data = (await this.axios.get(`/api/plans/${id}`)).data;
-      return plainToInstance(GetPlanResponse, data, {
-        excludeExtraneousValues: true,
-      });
+    get: async (id: string): Promise<GetPlanResponse> => {
+      const data = (await this.axios.get(`/plans/${id}`)).data;
+      return plainToInstance(GetPlanResponse, data);
     },
     update: async (
-      id: number,
+      id: string,
       updatePlanDto: UpdatePlanDto
     ): Promise<UpdatePlanResponse> => {
       const data = (
-        await this.axios.patch(`/api/plans/${id}`, { ...updatePlanDto })
+        await this.axios.patch(`/plans/${id}`, { ...updatePlanDto })
       ).data;
       return plainToInstance(UpdatePlanResponse, data);
     },
-    delete: async (id: number): Promise<void> => {
-      return (await this.axios.delete(`/api/plans/${id}`)).data;
+    delete: async (id: string): Promise<void> => {
+      return (await this.axios.delete(`/plans/${id}`)).data;
     },
   };
 
   constructor(baseURL = "") {
-    this.axios = Axios.create({ baseURL: baseURL });
+    this.axios = Axios.create({
+      baseURL: baseURL,
+      headers: { "content-type": "application/json" },
+    });
   }
 }
 
@@ -138,7 +142,7 @@ class SearchAPIClient {
       delete courseData.class.latestOccurrence.minCredits;
       return course;
     } else {
-      // throw error?
+      return null;
     }
   };
 
