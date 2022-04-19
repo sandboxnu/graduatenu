@@ -3,7 +3,7 @@ import { Flex, Heading } from "@chakra-ui/react";
 
 const Home: NextPage = () => {
   return (
-    <Flex width="full" justifyContent="center" my="10">
+    <Flex width="full" justifyContent="center" my="xl">
       <Heading color="primary.main" size="xl">
         Graduate NU
       </Heading>

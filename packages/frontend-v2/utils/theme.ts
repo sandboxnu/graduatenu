@@ -55,6 +55,29 @@ const colors = {
   },
 };
 
+// we only support tablets and up
+const breakpoints = {
+  desktop: "1280px",
+  laptop: "1024px",
+  tablet: "640x",
+};
+
+/**
+ * Default spacing is represented with numbers, we can expand this defnition in
+ * either direction (5xs, ..., 5xl) as needed.
+ */
+const space = {
+  "2xs": "0.25rem",
+  xs: "0.5rem",
+  sm: "0.75rem",
+  md: "1rem",
+  lg: "1.5rem",
+  xl: "2rem",
+  "2xl": "3rem",
+};
+
 export const theme = extendTheme({
   colors,
+  breakpoints,
+  space,
 });
