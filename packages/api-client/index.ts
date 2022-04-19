@@ -71,12 +71,12 @@ class APIClient {
       const data = (await this.axios.post("/plans", { ...createPlanDto })).data;
       return plainToInstance(GetPlanResponse, data);
     },
-    get: async (id: string): Promise<GetPlanResponse> => {
+    get: async (id: string | number): Promise<GetPlanResponse> => {
       const data = (await this.axios.get(`/plans/${id}`)).data;
       return plainToInstance(GetPlanResponse, data);
     },
     update: async (
-      id: string,
+      id: string | number,
       updatePlanDto: UpdatePlanDto
     ): Promise<UpdatePlanResponse> => {
       const data = (
