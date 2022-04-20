@@ -2005,7 +2005,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graduate/api-client@workspace:packages/api-client":
+"@graduate/api-client@workspace:^, @graduate/api-client@workspace:packages/api-client":
   version: 0.0.0-use.local
   resolution: "@graduate/api-client@workspace:packages/api-client"
   dependencies:
@@ -2103,6 +2103,7 @@ __metadata:
   dependencies:
     "@babel/helper-call-delegate": ^7.12.13
     "@babel/runtime": ^7.17.9
+    "@graduate/api-client": "workspace:^"
     "@graduate/common": "*"
     "@material-ui/core": ^4.12.4
     "@material-ui/icons": ^4.11.3
