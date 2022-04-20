@@ -107,6 +107,10 @@ interface SearchClass {
   minCredits: number;
 }
 
+/**
+ * A client for interacting with the Search API. Allows us to fetch
+ * and search for courses.
+ */
 class SearchAPIClient {
   private axios: AxiosInstance;
 
@@ -133,7 +137,7 @@ class SearchAPIClient {
       },
     });
 
-    const courseData = await res.data;
+    const courseData = await res.data.data;
     if (courseData && courseData.class && courseData.class.latestOccurrence) {
       const course: ScheduleCourse = courseData.class.latestOccurrence;
       course.numCreditsMax = courseData.class.latestOccurrence.maxCredits;
@@ -169,10 +173,10 @@ class SearchAPIClient {
     });
 
     const coursesData = await res.data;
-    const nodes = coursesData.search.nodes;
+    const nodes = coursesData.data.search.nodes;
 
-    return nodes.forEach(
-      (result: SearchClass): ScheduleCourse => ({
+    const courses = nodes.map((result: SearchClass) => {
+      return {
         name: result.name,
         classId: result.classId,
         subject: result.subject,
@@ -181,8 +185,10 @@ class SearchAPIClient {
         numCreditsMin: result.minCredits,
         numCreditsMax: result.maxCredits,
         semester: null,
-      })
-    );
+      };
+    });
+
+    return courses;
   };
 
   constructor(baseURL = "https://api.searchneu.com/graphql") {
@@ -191,4 +197,4 @@ class SearchAPIClient {
 }
 
 export const API = new APIClient(process.env.API_URL);
-export const SearchAPI = new SearchAPIClient(process.env.SEARCH_URL);
+export const SearchAPI = new SearchAPIClient();
