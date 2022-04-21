@@ -185,9 +185,16 @@ Object {
           "type": "PLAIN_COURSE",
         },
         Object {
-          "description": "PHYS 3500 to PHYS 7999",
+          "exceptions": Array [],
           "hour": 0,
-          "type": "COMMENT",
+          "subjects": Array [
+            Object {
+              "classIdEnd": 7999,
+              "classIdStart": 3500,
+              "subject": "PHYS",
+            },
+          ],
+          "type": "RANGE_2",
         },
         Object {
           "description": "Experiential Learning",
@@ -316,59 +323,136 @@ Object {
           "type": "PLAIN_COURSE",
         },
         Object {
-          "description": "MATH 2321 to MATH 5999",
+          "exceptions": Array [],
           "hour": 0,
-          "type": "COMMENT",
+          "subjects": Array [
+            Object {
+              "classIdEnd": 5999,
+              "classIdStart": 2321,
+              "subject": "MATH",
+            },
+          ],
+          "type": "RANGE_2",
         },
         Object {
-          "description": "PHYS 2303 to PHYS 7999",
+          "exceptions": Array [],
           "hour": 0,
-          "type": "COMMENT",
+          "subjects": Array [
+            Object {
+              "classIdEnd": 7999,
+              "classIdStart": 2303,
+              "subject": "PHYS",
+            },
+          ],
+          "type": "RANGE_2",
         },
         Object {
-          "description": "CHEM 2311 to CHEM 5999",
+          "exceptions": Array [],
           "hour": 0,
-          "type": "COMMENT",
+          "subjects": Array [
+            Object {
+              "classIdEnd": 5999,
+              "classIdStart": 2311,
+              "subject": "CHEM",
+            },
+          ],
+          "type": "RANGE_2",
         },
         Object {
-          "description": "BIOL 2301 to BIOL 5999",
+          "exceptions": Array [],
           "hour": 0,
-          "type": "COMMENT",
+          "subjects": Array [
+            Object {
+              "classIdEnd": 5999,
+              "classIdStart": 2301,
+              "subject": "BIOL",
+            },
+          ],
+          "type": "RANGE_2",
         },
         Object {
-          "description": "ENVR 2300 to ENVR 5999",
+          "exceptions": Array [],
           "hour": 0,
-          "type": "COMMENT",
+          "subjects": Array [
+            Object {
+              "classIdEnd": 5999,
+              "classIdStart": 2300,
+              "subject": "ENVR",
+            },
+          ],
+          "type": "RANGE_2",
         },
         Object {
-          "description": "CS 2990 to CS 4900",
+          "exceptions": Array [],
           "hour": 0,
-          "type": "COMMENT",
+          "subjects": Array [
+            Object {
+              "classIdEnd": 4900,
+              "classIdStart": 2990,
+              "subject": "CS",
+            },
+          ],
+          "type": "RANGE_2",
         },
         Object {
-          "description": "CHME 2001 to CHME 4699",
+          "exceptions": Array [],
           "hour": 0,
-          "type": "COMMENT",
+          "subjects": Array [
+            Object {
+              "classIdEnd": 4699,
+              "classIdStart": 2001,
+              "subject": "CHME",
+            },
+          ],
+          "type": "RANGE_2",
         },
         Object {
-          "description": "CIVE 2001 to CIVE 4699",
+          "exceptions": Array [],
           "hour": 0,
-          "type": "COMMENT",
+          "subjects": Array [
+            Object {
+              "classIdEnd": 4699,
+              "classIdStart": 2001,
+              "subject": "CIVE",
+            },
+          ],
+          "type": "RANGE_2",
         },
         Object {
-          "description": "EECE 2001 to EECE 5999",
+          "exceptions": Array [],
           "hour": 0,
-          "type": "COMMENT",
+          "subjects": Array [
+            Object {
+              "classIdEnd": 5999,
+              "classIdStart": 2001,
+              "subject": "EECE",
+            },
+          ],
+          "type": "RANGE_2",
         },
         Object {
-          "description": "ME 2001 to ME 4699",
+          "exceptions": Array [],
           "hour": 0,
-          "type": "COMMENT",
+          "subjects": Array [
+            Object {
+              "classIdEnd": 4699,
+              "classIdStart": 2001,
+              "subject": "ME",
+            },
+          ],
+          "type": "RANGE_2",
         },
         Object {
-          "description": "IE 2001 to IE 4699",
+          "exceptions": Array [],
           "hour": 0,
-          "type": "COMMENT",
+          "subjects": Array [
+            Object {
+              "classIdEnd": 4699,
+              "classIdStart": 2001,
+              "subject": "IE",
+            },
+          ],
+          "type": "RANGE_2",
         },
       ],
     },
@@ -1066,9 +1150,16 @@ Object {
           "type": "COMMENT",
         },
         Object {
-          "description": "HIST 1001–HIST 1999",
+          "exceptions": Array [],
           "hour": 0,
-          "type": "COMMENT",
+          "subjects": Array [
+            Object {
+              "classIdEnd": 1999,
+              "classIdStart": 1001,
+              "subject": "HIST",
+            },
+          ],
+          "type": "RANGE_2",
         },
         Object {
           "description": "History Seminar and Historical Writing",
@@ -1150,9 +1241,16 @@ Object {
           "type": "COMMENT",
         },
         Object {
-          "description": "HIST 2303–HIST 5999",
+          "exceptions": Array [],
           "hour": 0,
-          "type": "COMMENT",
+          "subjects": Array [
+            Object {
+              "classIdEnd": 5999,
+              "classIdStart": 2303,
+              "subject": "HIST",
+            },
+          ],
+          "type": "RANGE_2",
         },
         Object {
           "description": "Advanced History",
@@ -1165,9 +1263,16 @@ Object {
           "type": "COMMENT",
         },
         Object {
-          "description": "HIST 3000–HIST 5999",
+          "exceptions": Array [],
           "hour": 0,
-          "type": "COMMENT",
+          "subjects": Array [
+            Object {
+              "classIdEnd": 5999,
+              "classIdStart": 3000,
+              "subject": "HIST",
+            },
+          ],
+          "type": "RANGE_2",
         },
         Object {
           "description": "Capstone",

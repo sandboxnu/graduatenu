@@ -1,12 +1,7 @@
 import { assertUnreachable, unimpl } from "@graduate/common";
 import axios from "axios";
 import * as cheerio from "cheerio";
-import {
-  COURSE_REGEX,
-  RANGE_1_REGEX,
-  RANGE_2_REGEX_TYPE_1,
-  RANGE_2_REGEX_TYPE_2,
-} from "./constants";
+import { COURSE_REGEX, RANGE_1_REGEX, RANGE_2_REGEX } from "./constants";
 import {
   CourseRow,
   HDocument,
@@ -42,8 +37,8 @@ export const scrapeMajorDataFromCatalog = async (
 const transformMajorDataFromCatalog = async (
   $: CheerioStatic
 ): Promise<HDocument> => {
-  const majorName: string = $("#site-title").find("h1").text().trim();
-  const catalogYear: string = $("#edition").text().split(" ")[0];
+  const majorName: string = parseText($("#site-title").find("h1"));
+  const catalogYear: string = parseText($("#edition")).split(" ")[0];
   const yearVersion: number = parseInt(catalogYear.split("-")[0]);
 
   const requirementsContainer = $("#programrequirementstextcontainer");
@@ -53,16 +48,11 @@ const transformMajorDataFromCatalog = async (
     .find("h2")
     .filter(
       (_idx: number, element: CheerioElement) =>
-        $(element).text().includes("Program") &&
-        $(element).text().includes("Requirement")
+        parseText($(element)).includes("Program") &&
+        parseText($(element)).includes("Requirement")
     );
   const prgramRequiredHours =
-    Number(
-      prgramRequiredHeading
-        .next()
-        .text()
-        .split(/[\s\xa0]+/)[0]
-    ) || 0;
+    Number(parseText(prgramRequiredHeading.next()).split(/[\s\xa0]+/)[0]) || 0;
 
   return {
     programRequiredHours: prgramRequiredHours,
@@ -92,7 +82,7 @@ const transformCourseLists = async (
       courseList.push(courseTable);
     } else if (
       element.name === "ul" &&
-      $(element).prev().text().includes("concentration")
+      parseText($(element).prev()).includes("concentration")
     ) {
       const links = constructNestedLinks($, element);
       const mapped = await Promise.all(links.map(loadCatalogHTML));
@@ -165,13 +155,10 @@ const getRowType = ($: CheerioStatic, tr: CheerioElement) => {
     return HRowType.PLAIN_COURSE;
   }
 
-  const tdText = td.text();
+  const tdText = parseText(td);
   if (RANGE_1_REGEX.test(tdText)) {
     return HRowType.RANGE_1;
-  } else if (
-    RANGE_2_REGEX_TYPE_1.test(tdText) ||
-    RANGE_2_REGEX_TYPE_2.test(tdText)
-  ) {
+  } else if (RANGE_2_REGEX.test(tdText)) {
     return HRowType.RANGE_2;
   }
 
@@ -245,7 +232,7 @@ const constructMultiCourseRow = (
 ): MultiCourseRow<HRowType.AND_COURSE> => {
   const [code, desc, hourCol] = ensureLength(3, tr.children).map($);
   const titles = code.find(".code").toArray().map($).map(parseText);
-  const firstDescription = desc.contents().first().text();
+  const firstDescription = parseText(desc.contents().first());
   const restDescriptions = desc
     .children(".blockindent")
     .toArray()
@@ -277,7 +264,7 @@ const constructRange1Row = (
   const hour = parseHour(hourCol);
   // text should match the form:
   // CS 9999 or higher, except CS 9999, CS 9999, CS 3999,... <etc>
-  const text = desc.text();
+  const text = parseText(desc);
   // should match the form [["CS 9999", "CS", "9999"], [...]]
   const matches = Array.from(text.matchAll(COURSE_REGEX));
   const [[, subject, id], ...exceptions] = ensureLengthAtLeast(1, matches);
@@ -301,11 +288,13 @@ const constructRange2Row = (
   // text should match the form:
   // 1. CS 1000 to CS 5999
   // 2. CS 1000-CS 5999
-  const text = desc.text();
+  const text = parseText(desc);
   // should match the form [["CS 9999", "CS", "9999"], [...]]
   const matches = Array.from(text.matchAll(COURSE_REGEX));
-  const [[, subject, classIdStart], [, , classIdEnd], ..._rest] =
-    ensureLengthAtLeast(2, matches);
+  const [[, subject, classIdStart], [, , classIdEnd]] = ensureLength(
+    2,
+    matches
+  );
   return {
     type: HRowType.RANGE_2,
     hour,
