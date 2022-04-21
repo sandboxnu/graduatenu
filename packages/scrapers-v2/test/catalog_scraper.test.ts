@@ -10,8 +10,12 @@ const PHYSICS = format("/undergraduate/science/physics/physics-bs");
 const BSCS = format(
   "/undergraduate/computer-information-science/computer-science/bscs"
 );
-const HISTORY = format(
+const MEDIA_SCREEN_STUDIES_HISTORY = format(
   "/undergraduate/arts-media-design/communication-studies/media-screen-studies-history-ba"
+);
+
+const CS_HISTORY = format(
+  "/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-history-bs"
 );
 
 describe("scraper v2 snapshot tests", () => {
@@ -30,6 +34,12 @@ describe("scraper v2 snapshot tests", () => {
   });
   // Range 2
   test("Test range 2 (history)", async () => {
-    expect(await scrapeMajorDataFromCatalog(HISTORY)).toMatchSnapshot();
+    expect(
+      await scrapeMajorDataFromCatalog(MEDIA_SCREEN_STUDIES_HISTORY)
+    ).toMatchSnapshot();
+  });
+  // Range 3
+  test("Test range 3 (history)", async () => {
+    expect(await scrapeMajorDataFromCatalog(CS_HISTORY)).toMatchSnapshot();
   });
 });

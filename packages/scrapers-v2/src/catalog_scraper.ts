@@ -1,7 +1,13 @@
 import { assertUnreachable, unimpl } from "@graduate/common";
 import axios from "axios";
 import * as cheerio from "cheerio";
-import { COURSE_REGEX, RANGE_1_REGEX, RANGE_2_REGEX } from "./constants";
+import {
+  COURSE_REGEX,
+  RANGE_1_REGEX,
+  RANGE_2_REGEX,
+  RANGE_3_PARSE_REGEX,
+  RANGE_3_REGEX,
+} from "./constants";
 import {
   CourseRow,
   HDocument,
@@ -160,6 +166,8 @@ const getRowType = ($: CheerioStatic, tr: CheerioElement) => {
     return HRowType.RANGE_1;
   } else if (RANGE_2_REGEX.test(tdText)) {
     return HRowType.RANGE_2;
+  } else if (RANGE_3_REGEX.test(tdText)) {
+    return HRowType.RANGE_3;
   }
 
   return HRowType.COMMENT;
@@ -186,7 +194,7 @@ const constructCourseListBodyRow = (
     case HRowType.RANGE_2:
       return constructRange2Row($, tr);
     case HRowType.RANGE_3:
-      return unimpl();
+      return constructRange3Row($, tr);
     default:
       return assertUnreachable(type);
   }
@@ -303,6 +311,33 @@ const constructRange2Row = (
         subject,
         classIdStart: Number(classIdStart),
         classIdEnd: Number(classIdEnd),
+      },
+    ],
+    exceptions: [],
+  };
+};
+
+const constructRange3Row = (
+  $: CheerioStatic,
+  tr: CheerioElement
+): RangeRow<HRowType.RANGE_3> => {
+  const [desc, hourCol] = ensureLength(2, tr.children).map($);
+  const hour = parseHour(hourCol);
+  // text should match the form:
+  // Select from any HIST course numbered 3000 or above.
+  // Complete three HIST courses numbered 2303 or above. Cluster is subject to Department approval.
+  const text = parseText(desc);
+  // should match the form [["CS 9999", "CS", "9999"], [...]]
+  const matches = Array.from(text.matchAll(RANGE_3_PARSE_REGEX));
+  const [[, subject, classIdStart]] = ensureLength(1, matches);
+  return {
+    type: HRowType.RANGE_3,
+    hour,
+    subjects: [
+      {
+        subject,
+        classIdStart: Number(classIdStart),
+        classIdEnd: 9999,
       },
     ],
     exceptions: [],

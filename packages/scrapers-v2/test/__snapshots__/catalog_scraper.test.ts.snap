@@ -1303,6 +1303,571 @@ Object {
 }
 `;
 
+exports[`scraper v2 snapshot tests Test range 3 (history) 1`] = `
+Object {
+  "majorName": "Computer Science and History, BS",
+  "programRequiredHours": 135,
+  "sections": Array [
+    Object {
+      "description": "Computer Science Courses",
+      "entries": Array [
+        Object {
+          "description": "Computer Science Overview",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "description": "First Year Seminar",
+          "hour": 1,
+          "title": "CS 1200",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Professional Development for Khoury Co-op",
+          "hour": 1,
+          "title": "CS 1210",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Computer Science Fundamental Courses",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "description": "Discrete Structures",
+              "title": "CS 1800",
+            },
+            Object {
+              "description": "Seminar for CS 1800",
+              "title": "CS 1802",
+            },
+          ],
+          "description": "Discrete Structures and Seminar for CS 1800",
+          "hour": 5,
+          "type": "AND_COURSE",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "description": "Fundamentals of Computer Science 1",
+              "title": "CS 2500",
+            },
+            Object {
+              "description": "Lab for CS 2500",
+              "title": "CS 2501",
+            },
+          ],
+          "description": "Fundamentals of Computer Science 1 and Lab for CS 2500",
+          "hour": 5,
+          "type": "AND_COURSE",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "description": "Fundamentals of Computer Science 2",
+              "title": "CS 2510",
+            },
+            Object {
+              "description": "Lab for CS 2510",
+              "title": "CS 2511",
+            },
+          ],
+          "description": "Fundamentals of Computer Science 2 and Lab for CS 2510",
+          "hour": 5,
+          "type": "AND_COURSE",
+        },
+        Object {
+          "description": "Computer Science Required Courses",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "description": "Algorithms and Data",
+          "hour": 4,
+          "title": "CS 3000",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Database Design",
+          "hour": 4,
+          "title": "CS 3200",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "description": "Object-Oriented Design",
+              "title": "CS 3500",
+            },
+            Object {
+              "description": "Lab for CS 3500",
+              "title": "CS 3501",
+            },
+          ],
+          "description": "Object-Oriented Design and Lab for CS 3500",
+          "hour": 5,
+          "type": "AND_COURSE",
+        },
+        Object {
+          "description": "Principles of Information Science",
+          "hour": 4,
+          "title": "IS 2000",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Khoury Elective Courses",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "description": "With adviser approval, directed study, research, project study, and appropriate graduate-level courses may also be taken as upper-division electives.",
+          "hour": 0,
+          "type": "COMMENT",
+        },
+        Object {
+          "description": "Complete 16 credits of upper-division CS, CY, DS, or IS courses that are not already required. Choose courses within the following ranges:",
+          "hour": 16,
+          "type": "COMMENT",
+        },
+        Object {
+          "exceptions": Array [
+            Object {
+              "classId": 5010,
+              "subject": "CS",
+            },
+          ],
+          "hour": 0,
+          "subjects": Array [
+            Object {
+              "classIdEnd": 9999,
+              "classIdStart": 2500,
+              "subject": "CS",
+            },
+          ],
+          "type": "RANGE_1",
+        },
+        Object {
+          "exceptions": Array [
+            Object {
+              "classId": 4930,
+              "subject": "CY",
+            },
+          ],
+          "hour": 0,
+          "subjects": Array [
+            Object {
+              "classIdEnd": 9999,
+              "classIdStart": 2000,
+              "subject": "CY",
+            },
+          ],
+          "type": "RANGE_1",
+        },
+        Object {
+          "exceptions": Array [
+            Object {
+              "classId": 4900,
+              "subject": "DS",
+            },
+          ],
+          "hour": 0,
+          "subjects": Array [
+            Object {
+              "classIdEnd": 9999,
+              "classIdStart": 2500,
+              "subject": "DS",
+            },
+          ],
+          "type": "RANGE_1",
+        },
+        Object {
+          "exceptions": Array [
+            Object {
+              "classId": 4900,
+              "subject": "IS",
+            },
+          ],
+          "hour": 0,
+          "subjects": Array [
+            Object {
+              "classIdEnd": 9999,
+              "classIdStart": 2000,
+              "subject": "IS",
+            },
+          ],
+          "type": "RANGE_1",
+        },
+      ],
+    },
+    Object {
+      "description": "History Courses",
+      "entries": Array [
+        Object {
+          "description": "History Required Courses",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "description": "Historical Research and Writing",
+          "hour": 1,
+          "title": "HIST 1200",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "First-Year Seminar",
+          "hour": 4,
+          "title": "HIST 1201",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "The History Seminar",
+          "hour": 4,
+          "title": "HIST 2301",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Historical Writing",
+          "hour": 1,
+          "title": "HIST 2302",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "History Electives",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "description": "Complete one introductory course from the following:",
+          "hour": 4,
+          "type": "COMMENT",
+        },
+        Object {
+          "description": "East Asian Studies",
+          "hour": 0,
+          "title": "ASNS 1150",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Public History, Public Memory",
+          "hour": 0,
+          "title": "HIST 1120",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Introduction to the History of the United States",
+          "hour": 0,
+          "title": "HIST 1130",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Europe: Empires, Revolutions, Wars, and Their Aftermath",
+          "hour": 0,
+          "title": "HIST 1170",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Introduction to Middle Eastern History",
+          "hour": 0,
+          "title": "HIST 1185",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Picturing Modernity: The Photographic Image in Culture and Society",
+          "hour": 0,
+          "title": "HIST 1190",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Introduction to Women’s, Gender, and Sexuality Studies",
+          "hour": 0,
+          "title": "WMNS 1103",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Complete one course from the following:",
+          "hour": 4,
+          "type": "COMMENT",
+        },
+        Object {
+          "description": "Pirates, Planters, and Patriots: Making the Americas, 1492–1804",
+          "hour": 0,
+          "title": "HIST 1218",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Japanese Literature and Culture",
+          "hour": 0,
+          "title": "HIST 1252",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Introduction to Russian Civilization",
+          "hour": 0,
+          "title": "HIST 1285",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "History of Espionage 1: Antiquity to World War II",
+          "hour": 0,
+          "title": "HIST 1389",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Colonial and Revolutionary America",
+          "hour": 0,
+          "title": "HIST 2330",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Intermediate/Advanced History Cluster",
+          "hour": 12,
+          "type": "COMMENT",
+        },
+        Object {
+          "exceptions": Array [],
+          "hour": 0,
+          "subjects": Array [
+            Object {
+              "classIdEnd": 9999,
+              "classIdStart": 2303,
+              "subject": "HIST",
+            },
+          ],
+          "type": "RANGE_3",
+        },
+        Object {
+          "description": "Complete one advanced-level course:",
+          "hour": 4,
+          "type": "COMMENT",
+        },
+        Object {
+          "exceptions": Array [],
+          "hour": 0,
+          "subjects": Array [
+            Object {
+              "classIdEnd": 9999,
+              "classIdStart": 3000,
+              "subject": "HIST",
+            },
+          ],
+          "type": "RANGE_3",
+        },
+        Object {
+          "description": "History Capstone Seminar or Senior Project",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "description": "Complete one capstone experience from the following:",
+          "hour": 4,
+          "type": "COMMENT",
+        },
+        Object {
+          "description": "Capstone Seminar",
+          "hour": 0,
+          "title": "HIST 4701",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Public history concentrators may also select from the following:",
+          "hour": 0,
+          "type": "COMMENT",
+        },
+        Object {
+          "description": "Fieldwork in History 1",
+          "hour": 0,
+          "title": "HIST 4903",
+          "type": "PLAIN_COURSE",
+        },
+      ],
+    },
+    Object {
+      "description": "Integrative Course Requirement",
+      "entries": Array [
+        Object {
+          "description": "The World Since 1945",
+          "hour": 4,
+          "title": "HIST 2211",
+          "type": "PLAIN_COURSE",
+        },
+      ],
+    },
+    Object {
+      "description": "Supporting Courses",
+      "entries": Array [
+        Object {
+          "description": "Research Methods",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "description": "Complete one course from the following:",
+          "hour": 4,
+          "type": "COMMENT",
+        },
+        Object {
+          "description": "Statistics",
+          "hour": 0,
+          "title": "ECON 2350",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Geographic Information Systems",
+          "hour": 0,
+          "title": "ENVR 3300",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Geographical Information Systems",
+          "hour": 0,
+          "title": "ENVR 5260",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Quantitative Techniques",
+          "hour": 0,
+          "title": "POLS 2400",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Statistics in Psychological Research",
+          "hour": 0,
+          "title": "PSYC 2320",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Computing and Social Issues",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "description": "Complete one of the following:",
+          "hour": 4,
+          "type": "COMMENT",
+        },
+        Object {
+          "description": "Issues in Race, Science, and Technology",
+          "hour": 0,
+          "title": "AFAM 2600",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "The Law, Ethics, and Policy of Data and Digital Technologies",
+          "hour": 0,
+          "title": "CY 4170",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Cyberlaw: Privacy, Ethics, and Digital Rights",
+          "hour": 0,
+          "title": "CY 5240",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Literature and Digital Diversity",
+          "hour": 0,
+          "title": "ENGL 2150",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "History of Technology",
+          "hour": 0,
+          "title": "HIST 2220",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Bostonography: The City through Data, Texts, Maps, and Networks",
+          "hour": 0,
+          "title": "INSH 2102",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Knowledge in a Digital World",
+          "hour": 0,
+          "title": "IS 1300",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Knowledge in a Digital World",
+          "hour": 0,
+          "title": "PHIL 1300",
+          "type": "OR_COURSE",
+        },
+        Object {
+          "description": "Technology and Human Values",
+          "hour": 0,
+          "title": "PHIL 1145",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "The Twenty-First-Century Workplace",
+          "hour": 0,
+          "title": "SOCL 1280",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Environment, Technology, and Society",
+          "hour": 0,
+          "title": "SOCL 2485",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Computers and Society",
+          "hour": 0,
+          "title": "SOCL 4528",
+          "type": "PLAIN_COURSE",
+        },
+      ],
+    },
+    Object {
+      "description": "Computer Science Writing Requirement",
+      "entries": Array [
+        Object {
+          "description": "College Writing",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "description": "First-Year Writing",
+          "hour": 4,
+          "title": "ENGW 1111",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "First-Year Writing for Multilingual Writers",
+          "hour": 0,
+          "title": "ENGW 1102",
+          "type": "OR_COURSE",
+        },
+        Object {
+          "description": "Advanced Writing in the Disciplines",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "description": "This requirement is satisfied by HIST 2302 taken in conjunction with HIST 2301.",
+          "hour": 0,
+          "type": "COMMENT",
+        },
+      ],
+    },
+    Object {
+      "description": "Required General Electives",
+      "entries": Array [
+        Object {
+          "description": "Complete 32 credits of general electives.",
+          "hour": 32,
+          "type": "COMMENT",
+        },
+      ],
+    },
+  ],
+  "yearVersion": 2021,
+}
+`;
+
 exports[`scraper v2 snapshot tests multiple of the same class per AND (cs)  1`] = `
 Object {
   "majorName": "Computer Science, BSCS",
