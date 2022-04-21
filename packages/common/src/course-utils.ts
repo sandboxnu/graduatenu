@@ -15,7 +15,3 @@ export const coursesToString = (c: IRequiredCourse[]) =>
 export const assertUnreachable = (_: never): never => {
   throw new Error("This code is unreachable");
 };
-
-export const unimpl = (): never => {
-  throw new Error("unimplmemented!");
-};

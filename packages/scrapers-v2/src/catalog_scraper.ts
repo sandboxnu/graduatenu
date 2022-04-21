@@ -1,4 +1,4 @@
-import { assertUnreachable, unimpl } from "@graduate/common";
+import { assertUnreachable } from "@graduate/common";
 import axios from "axios";
 import * as cheerio from "cheerio";
 import {
@@ -87,9 +87,11 @@ const transformCourseLists = async (
       };
       courseList.push(courseTable);
     } else if (
+      // only necessary for business concentrations
       element.name === "ul" &&
       parseText($(element).prev()).includes("concentration")
     ) {
+      // parse all the business concentration links
       const links = constructNestedLinks($, element);
       const mapped = await Promise.all(links.map(loadCatalogHTML));
       const containerId = "#concentrationrequirementstextcontainer";
@@ -162,6 +164,7 @@ const getRowType = ($: CheerioStatic, tr: CheerioElement) => {
   }
 
   const tdText = parseText(td);
+  // Different range types
   if (RANGE_1_REGEX.test(tdText)) {
     return HRowType.RANGE_1;
   } else if (RANGE_2_REGEX.test(tdText)) {
@@ -173,6 +176,10 @@ const getRowType = ($: CheerioStatic, tr: CheerioElement) => {
   return HRowType.COMMENT;
 };
 
+/**
+ * parse each type of table body row depending on what row type it is,
+ * which is determined by the function `getRowType`
+ */
 const constructCourseListBodyRow = (
   $: CheerioStatic,
   tr: CheerioElement,
