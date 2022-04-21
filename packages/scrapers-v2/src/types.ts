@@ -29,55 +29,16 @@ export type HSection = {
   entries: HRow[];
 };
 
-export type HRow = TextRow | CourseRow | MultiCourseRow;
-
-export interface TextRow {
-  type: TextRowType;
-  description: string;
-  hour: number;
-}
-
-export interface CourseRow {
-  // represents COURSE_TYPE output
-  type: CourseRowType; // tells us which case (PLAIN or OR)
-  description: string;
-  hour: number;
-  title: string;
-}
-
-export interface MultiCourseRow {
-  type: MultiCourseRowType;
-  description: string;
-  hour: number;
-  // may contain duplicates
-  courses: Array<{ title: string; description: string }>;
-}
-
-export interface RangeCourseRow {
-  type: HRowType.RANGE_COURSE;
-  exceptions: Array<{ subject: string; courseId: number }>;
-  subjects: Array<string>;
-  start: number;
-  end: number;
-}
-
-export type TextRowType =
-  | HRowType.COMMENT
-  | HRowType.HEADER
-  | HRowType.SUBHEADER;
-export type CourseRowType = HRowType.OR_COURSE | HRowType.PLAIN_COURSE;
-export type MultiCourseRowType = HRowType.AND_COURSE;
-
-// the different cases we handle for parsing, by SHAPE
-export enum RowParseType {
-  TEXT = "TEXT",
-  OR_COURSE = "OR_COURSE",
-  PLAIN_COURSE = "PLAIN_COURSE",
-  MULTI_COURSE = "MULTI_COURSE",
-  RANGE_1 = "RANGE_1",
-  RANGE_2 = "RANGE_2",
-  RANGE_3 = "RANGE_3", // all map to HRowType.RANGE_COURSE
-}
+export type HRow =
+  | TextRow<HRowType.COMMENT>
+  | TextRow<HRowType.HEADER>
+  | TextRow<HRowType.SUBHEADER>
+  | CourseRow<HRowType.OR_COURSE>
+  | CourseRow<HRowType.PLAIN_COURSE>
+  | MultiCourseRow<HRowType.AND_COURSE>
+  | RangeRow<HRowType.RANGE_1>
+  | RangeRow<HRowType.RANGE_2>
+  | RangeRow<HRowType.RANGE_3>;
 
 // the different outputs we have, by TYPE
 export enum HRowType {
@@ -87,5 +48,40 @@ export enum HRowType {
   OR_COURSE = "OR_COURSE",
   AND_COURSE = "AND_COURSE",
   PLAIN_COURSE = "PLAIN_COURSE",
-  RANGE_COURSE = "RANGE_COURSE",
+  RANGE_1 = "RANGE_1",
+  RANGE_2 = "RANGE_2",
+  RANGE_3 = "RANGE_3",
+}
+
+export interface TextRow<T> {
+  type: T;
+  description: string;
+  hour: number;
+}
+
+export interface CourseRow<T> {
+  type: T;
+  description: string;
+  hour: number;
+  title: string;
+}
+
+export interface MultiCourseRow<T> {
+  type: T;
+  description: string;
+  hour: number;
+  // may contain duplicates
+  courses: Array<{ title: string; description: string }>;
+}
+
+export interface RangeRow<T> {
+  type: T;
+  // not sure if exists
+  hour: number;
+  subjects: Array<{
+    subject: string;
+    classIdStart: number;
+    classIdEnd: number;
+  }>;
+  exceptions: Array<{ subject: string; classId: number }>;
 }

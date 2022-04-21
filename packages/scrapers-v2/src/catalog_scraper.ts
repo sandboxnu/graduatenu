@@ -1,17 +1,15 @@
-import { assertUnreachable } from "@graduate/common";
+import { assertUnreachable, unimpl } from "@graduate/common";
 import axios from "axios";
 import * as cheerio from "cheerio";
 import {
   CourseRow,
-  CourseRowType,
   HDocument,
   HRow,
   HRowType,
   HSection,
   MultiCourseRow,
-  MultiCourseRowType,
+  RangeRow,
   TextRow,
-  TextRowType,
 } from "./types";
 
 const loadCatalogHTML = async (url: string): Promise<CheerioStatic> => {
@@ -138,6 +136,9 @@ const transformCourseListTable = (
   return courseTable;
 };
 
+const COURSE_REGEX = /([A-Z]{2,4})\s{1}([0-9]{4})/g;
+const RANGE_1_REGEX = /([A-Z]{2,4})\s{1}([0-9]{4}) or higher/;
+
 const getRowType = ($: CheerioStatic, tr: CheerioElement) => {
   const trClass = tr.attribs["class"];
   const td = $(tr.children[0]);
@@ -160,6 +161,12 @@ const getRowType = ($: CheerioStatic, tr: CheerioElement) => {
     }
     return HRowType.PLAIN_COURSE;
   }
+
+  const tdText = td.text();
+  if (RANGE_1_REGEX.test(tdText)) {
+    return HRowType.RANGE_1;
+  }
+
   return HRowType.COMMENT;
 };
 
@@ -174,21 +181,27 @@ const constructCourseListBodyRow = (
     case HRowType.COMMENT:
       return constructTextRow($, tr, type);
     case HRowType.OR_COURSE:
-      return constructOrCourseRow($, tr, type);
+      return constructOrCourseRow($, tr);
     case HRowType.PLAIN_COURSE:
-      return constructPlainCourseRow($, tr, type);
+      return constructPlainCourseRow($, tr);
     case HRowType.AND_COURSE:
-      return constructMultiCourseRow($, tr, type);
+      return constructMultiCourseRow($, tr);
+    case HRowType.RANGE_1:
+      return constructRange1Row($, tr);
+    case HRowType.RANGE_2:
+      return unimpl();
+    case HRowType.RANGE_3:
+      return unimpl();
     default:
       return assertUnreachable(type);
   }
 };
 
-const constructTextRow = (
+const constructTextRow = <T>(
   $: CheerioStatic,
   tr: CheerioElement,
-  type: TextRowType
-): TextRow => {
+  type: T
+): TextRow<T> => {
   const [c1, c2] = ensureLength(2, tr.children).map($);
   const description = parseText(c1);
   const hour = parseHour(c2);
@@ -197,34 +210,31 @@ const constructTextRow = (
 
 const constructPlainCourseRow = (
   $: CheerioStatic,
-  tr: CheerioElement,
-  type: CourseRowType
-): CourseRow => {
+  tr: CheerioElement
+): CourseRow<HRowType.PLAIN_COURSE> => {
   const [code, desc, hourCol] = ensureLength(3, tr.children).map($);
   const title = parseText(code);
   const description = parseText(desc);
   const hour = parseHour(hourCol);
-  return { hour, description, type, title: title };
+  return { hour, description, type: HRowType.PLAIN_COURSE, title: title };
 };
 
 const constructOrCourseRow = (
   $: CheerioStatic,
-  tr: CheerioElement,
-  type: CourseRowType
-): CourseRow => {
+  tr: CheerioElement
+): CourseRow<HRowType.OR_COURSE> => {
   const [code, desc] = ensureLength(2, tr.children).map($);
   // remove "or "
   const title = parseText(code).substring(3).trim();
   const description = parseText(desc);
   // there may be multiple courses in the OR, so we can't backtrack
-  return { hour: 0, description, type, title: title };
+  return { hour: 0, description, type: HRowType.OR_COURSE, title: title };
 };
 
 const constructMultiCourseRow = (
   $: CheerioStatic,
-  tr: CheerioElement,
-  type: MultiCourseRowType
-): MultiCourseRow => {
+  tr: CheerioElement
+): MultiCourseRow<HRowType.AND_COURSE> => {
   const [code, desc, hourCol] = ensureLength(3, tr.children).map($);
   const titles = code.find(".code").toArray().map($).map(parseText);
   const firstDescription = desc.contents().first().text();
@@ -243,7 +253,35 @@ const constructMultiCourseRow = (
     description: descriptions[i],
   }));
   const hour = parseHour(hourCol);
-  return { hour, type, description: descriptions.join(" and "), courses };
+  return {
+    hour,
+    type: HRowType.AND_COURSE,
+    description: descriptions.join(" and "),
+    courses,
+  };
+};
+
+const constructRange1Row = (
+  $: CheerioStatic,
+  tr: CheerioElement
+): RangeRow<HRowType.RANGE_1> => {
+  const [desc, hourCol] = ensureLength(2, tr.children).map($);
+  const hour = parseHour(hourCol);
+  // text should match the form:
+  // CS 9999 or higher, except CS 9999, CS 9999, CS 3999,... <etc>
+  const text = desc.text();
+  // should match the form [["CS 9999", "CS", "9999"], [...]]
+  const matches = Array.from(text.matchAll(COURSE_REGEX));
+  const [[, subject, id], ...exceptions] = ensureLengthAtLeast(1, matches);
+  return {
+    type: HRowType.RANGE_1,
+    hour,
+    subjects: [{ subject, classIdStart: Number(id), classIdEnd: 9999 }],
+    exceptions: exceptions.map(([, subject, id]) => ({
+      subject,
+      classId: Number(id),
+    })),
+  };
 };
 
 const parseHour = (td: Cheerio) => {
@@ -258,6 +296,14 @@ const ensureLength = <T>(n: number, l: T[]) => {
   const length = l.length;
   if (length !== n) {
     const msg = `expected text row to contain exactly ${n} cells, found ${length}`;
+    throw new Error(msg);
+  }
+  return l;
+};
+const ensureLengthAtLeast = <T>(n: number, l: T[]) => {
+  const length = l.length;
+  if (length < n) {
+    const msg = `expected text row to contain at least ${n} cells, found ${length}`;
     throw new Error(msg);
   }
   return l;

@@ -640,24 +640,72 @@ Object {
           "type": "COMMENT",
         },
         Object {
-          "description": "CS 2500 or higher, except CS 5010",
+          "exceptions": Array [
+            Object {
+              "classId": 5010,
+              "subject": "CS",
+            },
+          ],
           "hour": 0,
-          "type": "COMMENT",
+          "subjects": Array [
+            Object {
+              "classIdEnd": 9999,
+              "classIdStart": 2500,
+              "subject": "CS",
+            },
+          ],
+          "type": "RANGE_1",
         },
         Object {
-          "description": "CY 2000 or higher, except CY 4930",
+          "exceptions": Array [
+            Object {
+              "classId": 4930,
+              "subject": "CY",
+            },
+          ],
           "hour": 0,
-          "type": "COMMENT",
+          "subjects": Array [
+            Object {
+              "classIdEnd": 9999,
+              "classIdStart": 2000,
+              "subject": "CY",
+            },
+          ],
+          "type": "RANGE_1",
         },
         Object {
-          "description": "DS 2500 or higher, except DS 4900",
+          "exceptions": Array [
+            Object {
+              "classId": 4900,
+              "subject": "DS",
+            },
+          ],
           "hour": 0,
-          "type": "COMMENT",
+          "subjects": Array [
+            Object {
+              "classIdEnd": 9999,
+              "classIdStart": 2500,
+              "subject": "DS",
+            },
+          ],
+          "type": "RANGE_1",
         },
         Object {
-          "description": "IS 2000 or higher, except IS 4900",
+          "exceptions": Array [
+            Object {
+              "classId": 4900,
+              "subject": "IS",
+            },
+          ],
           "hour": 0,
-          "type": "COMMENT",
+          "subjects": Array [
+            Object {
+              "classIdEnd": 9999,
+              "classIdStart": 2000,
+              "subject": "IS",
+            },
+          ],
+          "type": "RANGE_1",
         },
         Object {
           "description": "Calculus 2 for Science and Engineering",
@@ -722,9 +770,16 @@ Object {
           "type": "PLAIN_COURSE",
         },
         Object {
-          "description": "MATH 1342 or higher",
+          "exceptions": Array [],
           "hour": 0,
-          "type": "COMMENT",
+          "subjects": Array [
+            Object {
+              "classIdEnd": 9999,
+              "classIdStart": 1342,
+              "subject": "MATH",
+            },
+          ],
+          "type": "RANGE_1",
         },
       ],
     },
@@ -1014,24 +1069,72 @@ Object {
           "type": "COMMENT",
         },
         Object {
-          "description": "CS 2500 or higher, except CS 5010",
+          "exceptions": Array [
+            Object {
+              "classId": 5010,
+              "subject": "CS",
+            },
+          ],
           "hour": 0,
-          "type": "COMMENT",
+          "subjects": Array [
+            Object {
+              "classIdEnd": 9999,
+              "classIdStart": 2500,
+              "subject": "CS",
+            },
+          ],
+          "type": "RANGE_1",
         },
         Object {
-          "description": "CY 2000 or higher, except CY 4930",
+          "exceptions": Array [
+            Object {
+              "classId": 4930,
+              "subject": "CY",
+            },
+          ],
           "hour": 0,
-          "type": "COMMENT",
+          "subjects": Array [
+            Object {
+              "classIdEnd": 9999,
+              "classIdStart": 2000,
+              "subject": "CY",
+            },
+          ],
+          "type": "RANGE_1",
         },
         Object {
-          "description": "DS 2500 or higher, except DS 4900",
+          "exceptions": Array [
+            Object {
+              "classId": 4900,
+              "subject": "DS",
+            },
+          ],
           "hour": 0,
-          "type": "COMMENT",
+          "subjects": Array [
+            Object {
+              "classIdEnd": 9999,
+              "classIdStart": 2500,
+              "subject": "DS",
+            },
+          ],
+          "type": "RANGE_1",
         },
         Object {
-          "description": "IS 2000 or higher, except IS 4900",
+          "exceptions": Array [
+            Object {
+              "classId": 4900,
+              "subject": "IS",
+            },
+          ],
           "hour": 0,
-          "type": "COMMENT",
+          "subjects": Array [
+            Object {
+              "classIdEnd": 9999,
+              "classIdStart": 2000,
+              "subject": "IS",
+            },
+          ],
+          "type": "RANGE_1",
         },
       ],
     },
