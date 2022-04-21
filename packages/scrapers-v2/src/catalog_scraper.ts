@@ -2,6 +2,12 @@ import { assertUnreachable, unimpl } from "@graduate/common";
 import axios from "axios";
 import * as cheerio from "cheerio";
 import {
+  COURSE_REGEX,
+  RANGE_1_REGEX,
+  RANGE_2_REGEX_TYPE_1,
+  RANGE_2_REGEX_TYPE_2,
+} from "./constants";
+import {
   CourseRow,
   HDocument,
   HRow,
@@ -136,9 +142,6 @@ const transformCourseListTable = (
   return courseTable;
 };
 
-const COURSE_REGEX = /([A-Z]{2,4})\s{1}([0-9]{4})/g;
-const RANGE_1_REGEX = /([A-Z]{2,4})\s{1}([0-9]{4}) or higher/;
-
 const getRowType = ($: CheerioStatic, tr: CheerioElement) => {
   const trClass = tr.attribs["class"];
   const td = $(tr.children[0]);
@@ -165,6 +168,11 @@ const getRowType = ($: CheerioStatic, tr: CheerioElement) => {
   const tdText = td.text();
   if (RANGE_1_REGEX.test(tdText)) {
     return HRowType.RANGE_1;
+  } else if (
+    RANGE_2_REGEX_TYPE_1.test(tdText) ||
+    RANGE_2_REGEX_TYPE_2.test(tdText)
+  ) {
+    return HRowType.RANGE_2;
   }
 
   return HRowType.COMMENT;
@@ -189,7 +197,7 @@ const constructCourseListBodyRow = (
     case HRowType.RANGE_1:
       return constructRange1Row($, tr);
     case HRowType.RANGE_2:
-      return unimpl();
+      return constructRange2Row($, tr);
     case HRowType.RANGE_3:
       return unimpl();
     default:
@@ -281,6 +289,34 @@ const constructRange1Row = (
       subject,
       classId: Number(id),
     })),
+  };
+};
+
+const constructRange2Row = (
+  $: CheerioStatic,
+  tr: CheerioElement
+): RangeRow<HRowType.RANGE_2> => {
+  const [desc, hourCol] = ensureLength(2, tr.children).map($);
+  const hour = parseHour(hourCol);
+  // text should match the form:
+  // 1. CS 1000 to CS 5999
+  // 2. CS 1000-CS 5999
+  const text = desc.text();
+  // should match the form [["CS 9999", "CS", "9999"], [...]]
+  const matches = Array.from(text.matchAll(COURSE_REGEX));
+  const [[, subject, classIdStart], [, , classIdEnd], ..._rest] =
+    ensureLengthAtLeast(2, matches);
+  return {
+    type: HRowType.RANGE_2,
+    hour,
+    subjects: [
+      {
+        subject,
+        classIdStart: Number(classIdStart),
+        classIdEnd: Number(classIdEnd),
+      },
+    ],
+    exceptions: [],
   };
 };
 

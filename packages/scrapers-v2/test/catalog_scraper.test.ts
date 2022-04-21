@@ -10,6 +10,10 @@ const PHYSICS = format("/undergraduate/science/physics/physics-bs");
 const BSCS = format(
   "/undergraduate/computer-information-science/computer-science/bscs"
 );
+const HISTORY = format(
+  "/undergraduate/arts-media-design/communication-studies/media-screen-studies-history-ba"
+);
+
 describe("scraper v2 snapshot tests", () => {
   test("CS & Game Dev matches snapshot", async () => {
     expect(await scrapeMajorDataFromCatalog(CS_GAME_DEV)).toMatchSnapshot();
@@ -23,5 +27,9 @@ describe("scraper v2 snapshot tests", () => {
   // CS 4950 is in the same AND twice for the Foundations concentration
   test("multiple of the same class per AND (cs) ", async () => {
     expect(await scrapeMajorDataFromCatalog(BSCS)).toMatchSnapshot();
+  });
+  // Range 2
+  test("Test range 2 (history)", async () => {
+    expect(await scrapeMajorDataFromCatalog(HISTORY)).toMatchSnapshot();
   });
 });

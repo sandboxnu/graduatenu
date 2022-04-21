@@ -836,6 +836,368 @@ Object {
 }
 `;
 
+exports[`scraper v2 snapshot tests Test range 2 (history) 1`] = `
+Object {
+  "majorName": "Media and Screen Studies and History, BA",
+  "programRequiredHours": 130,
+  "sections": Array [
+    Object {
+      "description": "Media and Screen Studies Requirements",
+      "entries": Array [
+        Object {
+          "description": "Media and Screen Studies Common Requirements",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "description": "Media, Culture, and Society",
+          "hour": 4,
+          "title": "MSCR 1220",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Media and Social Change",
+          "hour": 4,
+          "title": "MSCR 1320",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Media History",
+          "hour": 0,
+          "title": "MSCR 1420",
+          "type": "OR_COURSE",
+        },
+        Object {
+          "description": "Foundation Course",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "description": "Complete one of the following:",
+          "hour": 4,
+          "type": "COMMENT",
+        },
+        Object {
+          "description": "Introduction to Film Production",
+          "hour": 0,
+          "title": "MSCR 1230",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Understanding Media",
+          "hour": 0,
+          "title": "MSCR 2220",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Diversity or Globalization Course",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "description": "Complete one of the following:",
+          "hour": 4,
+          "type": "COMMENT",
+        },
+        Object {
+          "description": "Gender and Film",
+          "hour": 0,
+          "title": "MSCR 3392",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Global Media",
+          "hour": 0,
+          "title": "MSCR 2325",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Digital Feminisms",
+          "hour": 0,
+          "title": "MSCR 2505",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Media and Identity",
+          "hour": 0,
+          "title": "MSCR 3437",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Writing-Intensive",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "description": "Complete two of the following:",
+          "hour": 8,
+          "type": "COMMENT",
+        },
+        Object {
+          "description": "Digital Feminisms",
+          "hour": 0,
+          "title": "MSCR 2505",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Film Theory",
+          "hour": 0,
+          "title": "MSCR 3600",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Digital Media Culture",
+          "hour": 0,
+          "title": "MSCR 3420",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Media Audiences",
+          "hour": 0,
+          "title": "MSCR 3422",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Queer Media",
+          "hour": 0,
+          "title": "MSCR 3700",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "TV History",
+          "hour": 0,
+          "title": "MSCR 4208",
+          "type": "PLAIN_COURSE",
+        },
+      ],
+    },
+    Object {
+      "description": "Media and Screen Studies Electives",
+      "entries": Array [
+        Object {
+          "description": "Complete three courses from MSCR or from the following:",
+          "hour": 12,
+          "type": "COMMENT",
+        },
+        Object {
+          "description": "Video Basics",
+          "hour": 0,
+          "title": "ARTD 2380",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Video: Sound and Image",
+          "hour": 0,
+          "title": "ARTD 3480",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Experimental Video",
+          "hour": 0,
+          "title": "ARTD 3485",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Sound Production for Digital Media",
+          "hour": 0,
+          "title": "COMM 1450",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Television Field Production",
+          "hour": 0,
+          "title": "COMM 2550",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Television Studio Production",
+          "hour": 0,
+          "title": "COMM 2655",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Digital Editing for TV",
+          "hour": 0,
+          "title": "COMM 3655",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Special Effects and Postproduction for Television",
+          "hour": 0,
+          "title": "COMM 3750",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Production Capstone",
+          "hour": 0,
+          "title": "COMM 4755",
+          "type": "PLAIN_COURSE",
+        },
+      ],
+    },
+    Object {
+      "description": "History Requirements",
+      "entries": Array [
+        Object {
+          "description": "History Colloquium",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "description": "Historical Research and Writing",
+          "hour": 1,
+          "title": "HIST 1200",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "First-Year Seminar",
+          "hour": 4,
+          "title": "HIST 1201",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Introductory-Level Course",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "description": "Complete one course in the following range, not used to fulfill another requirement:",
+          "hour": 4,
+          "type": "COMMENT",
+        },
+        Object {
+          "description": "HIST 1001–HIST 1999",
+          "hour": 0,
+          "type": "COMMENT",
+        },
+        Object {
+          "description": "History Seminar and Historical Writing",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "description": "The History Seminar",
+          "hour": 4,
+          "title": "HIST 2301",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Historical Writing",
+          "hour": 1,
+          "title": "HIST 2302",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Pre-1800 History Elective",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "description": "Complete one course from the following:",
+          "hour": 4,
+          "type": "COMMENT",
+        },
+        Object {
+          "description": "Introduction to Latin American History",
+          "hour": 0,
+          "title": "HIST 1187",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Pirates, Planters, and Patriots: Making the Americas, 1492–1804",
+          "hour": 0,
+          "title": "HIST 1218",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Japanese Literature and Culture",
+          "hour": 0,
+          "title": "HIST 1252",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Europe in the Middle Ages, 500–1500",
+          "hour": 0,
+          "title": "HIST 1272",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Introduction to Russian Civilization",
+          "hour": 0,
+          "title": "HIST 1285",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Colonial and Revolutionary America",
+          "hour": 0,
+          "title": "HIST 2330",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Renaissance to Enlightenment",
+          "hour": 0,
+          "title": "HIST 2370",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Intermediate/Advanced History Cluster",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "description": "Complete three courses in the following range:",
+          "hour": 12,
+          "type": "COMMENT",
+        },
+        Object {
+          "description": "HIST 2303–HIST 5999",
+          "hour": 0,
+          "type": "COMMENT",
+        },
+        Object {
+          "description": "Advanced History",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "description": "Complete one course in the following range:",
+          "hour": 4,
+          "type": "COMMENT",
+        },
+        Object {
+          "description": "HIST 3000–HIST 5999",
+          "hour": 0,
+          "type": "COMMENT",
+        },
+        Object {
+          "description": "Capstone",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "description": "Capstone Seminar",
+          "hour": 0,
+          "title": "HIST 4701",
+          "type": "PLAIN_COURSE",
+        },
+      ],
+    },
+    Object {
+      "description": "Integrative Requirement",
+      "entries": Array [
+        Object {
+          "description": "History of Information in the United States: Media, Technology, Law",
+          "hour": 4,
+          "title": "HIST 1357",
+          "type": "PLAIN_COURSE",
+        },
+      ],
+    },
+  ],
+  "yearVersion": 2021,
+}
+`;
+
 exports[`scraper v2 snapshot tests multiple of the same class per AND (cs)  1`] = `
 Object {
   "majorName": "Computer Science, BSCS",
