@@ -6,7 +6,7 @@ import {
   DNDScheduleCourse,
 } from "../models/types";
 import { ScheduleCourse } from "@graduate/common";
-import { SearchAPI } from "@graduate/api-client";
+import { fetchCourse } from "../api";
 import { convertToDNDCourses } from ".";
 import { GENERIC_COURSE_DROPPABLE_ID } from "../constants";
 
@@ -168,7 +168,7 @@ export async function addCourseFromSidebar(
       numCreditsMax: 0,
     };
   } else {
-    scheduleCourse = await SearchAPI.fetchCourse(courseData[0], courseData[1]);
+    scheduleCourse = await fetchCourse(courseData[0], courseData[1]);
   }
 
   if (scheduleCourse === null) {
@@ -186,10 +186,7 @@ export async function addCourseFromSidebar(
   let scheduleCourseLab: ScheduleCourse | null = null;
   let movedLab: DNDScheduleCourse;
   if (courseData.length === 4) {
-    scheduleCourseLab = await SearchAPI.fetchCourse(
-      courseData[2],
-      courseData[3]
-    );
+    scheduleCourseLab = await fetchCourse(courseData[2], courseData[3]);
     movedLab = convertToDNDCourses([scheduleCourseLab!], 0)[0][0];
     finishClasses.splice(destination.index, 0, movedClass, movedLab);
   } else {
