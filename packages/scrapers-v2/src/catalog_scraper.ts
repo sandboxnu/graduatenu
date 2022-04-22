@@ -166,9 +166,9 @@ const getRowType = ($: CheerioStatic, tr: CheerioElement) => {
   const tdText = parseText(td);
   // Different range types
   if (RANGE_1_REGEX.test(tdText)) {
-    return HRowType.RANGE_1;
+    return HRowType.RANGE_BOUNDED;
   } else if (RANGE_2_REGEX.test(tdText)) {
-    return HRowType.RANGE_2;
+    return HRowType.RANGE_UNBOUNDED;
   } else if (RANGE_3_REGEX.test(tdText)) {
     return HRowType.RANGE_3;
   }
@@ -196,9 +196,9 @@ const constructCourseListBodyRow = (
       return constructPlainCourseRow($, tr);
     case HRowType.AND_COURSE:
       return constructMultiCourseRow($, tr);
-    case HRowType.RANGE_1:
+    case HRowType.RANGE_BOUNDED:
       return constructRange1Row($, tr);
-    case HRowType.RANGE_2:
+    case HRowType.RANGE_UNBOUNDED:
       return constructRange2Row($, tr);
     case HRowType.RANGE_3:
       return constructRange3Row($, tr);
@@ -274,7 +274,7 @@ const constructMultiCourseRow = (
 const constructRange1Row = (
   $: CheerioStatic,
   tr: CheerioElement
-): RangeRow<HRowType.RANGE_1> => {
+): RangeRow<HRowType.RANGE_BOUNDED> => {
   const [desc, hourCol] = ensureLength(2, tr.children).map($);
   const hour = parseHour(hourCol);
   // text should match the form:
@@ -284,7 +284,7 @@ const constructRange1Row = (
   const matches = Array.from(text.matchAll(COURSE_REGEX));
   const [[, subject, id], ...exceptions] = ensureLengthAtLeast(1, matches);
   return {
-    type: HRowType.RANGE_1,
+    type: HRowType.RANGE_BOUNDED,
     hour,
     subjects: [{ subject, classIdStart: Number(id), classIdEnd: 9999 }],
     exceptions: exceptions.map(([, subject, id]) => ({
@@ -297,7 +297,7 @@ const constructRange1Row = (
 const constructRange2Row = (
   $: CheerioStatic,
   tr: CheerioElement
-): RangeRow<HRowType.RANGE_2> => {
+): RangeRow<HRowType.RANGE_UNBOUNDED> => {
   const [desc, hourCol] = ensureLength(2, tr.children).map($);
   const hour = parseHour(hourCol);
   // text should match the form:
@@ -311,7 +311,7 @@ const constructRange2Row = (
     matches
   );
   return {
-    type: HRowType.RANGE_2,
+    type: HRowType.RANGE_UNBOUNDED,
     hour,
     subjects: [
       {
