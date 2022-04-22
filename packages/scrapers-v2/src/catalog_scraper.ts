@@ -3,10 +3,12 @@ import axios from "axios";
 import * as cheerio from "cheerio";
 import {
   COURSE_REGEX,
-  RANGE_1_REGEX,
-  RANGE_2_REGEX,
-  RANGE_3_PARSE_REGEX,
-  RANGE_3_REGEX,
+  RANGE_BOUNDED,
+  RANGE_LOWER_BOUNDED_MAYBE_EXCEPTIONS_1,
+  RANGE_LOWER_BOUNDED_MAYBE_EXCEPTIONS_2,
+  RANGE_LOWER_BOUNDED_PARSE,
+  RANGE_UNBOUNDED,
+  SUBJECT_REGEX,
 } from "./constants";
 import {
   CourseRow,
@@ -15,8 +17,11 @@ import {
   HRowType,
   HSection,
   MultiCourseRow,
-  RangeRow,
+  RangeBoundedRow,
+  RangeLowerBoundedRow,
+  RangeUnboundedRow,
   TextRow,
+  WithExceptions,
 } from "./types";
 
 const loadCatalogHTML = async (url: string): Promise<CheerioStatic> => {
@@ -165,12 +170,15 @@ const getRowType = ($: CheerioStatic, tr: CheerioElement) => {
 
   const tdText = parseText(td);
   // Different range types
-  if (RANGE_1_REGEX.test(tdText)) {
+  if (
+    RANGE_LOWER_BOUNDED_MAYBE_EXCEPTIONS_1.test(tdText) ||
+    RANGE_LOWER_BOUNDED_MAYBE_EXCEPTIONS_2.test(tdText)
+  ) {
+    return HRowType.RANGE_LOWER_BOUNDED;
+  } else if (RANGE_BOUNDED.test(tdText)) {
     return HRowType.RANGE_BOUNDED;
-  } else if (RANGE_2_REGEX.test(tdText)) {
+  } else if (RANGE_UNBOUNDED.test(tdText)) {
     return HRowType.RANGE_UNBOUNDED;
-  } else if (RANGE_3_REGEX.test(tdText)) {
-    return HRowType.RANGE_3;
   }
 
   return HRowType.COMMENT;
@@ -196,12 +204,14 @@ const constructCourseListBodyRow = (
       return constructPlainCourseRow($, tr);
     case HRowType.AND_COURSE:
       return constructMultiCourseRow($, tr);
+    case HRowType.RANGE_LOWER_BOUNDED:
+      return constructRangeLowerBoundedMaybeExceptions($, tr);
     case HRowType.RANGE_BOUNDED:
-      return constructRange1Row($, tr);
+      return constructRangeBounded($, tr);
     case HRowType.RANGE_UNBOUNDED:
-      return constructRange2Row($, tr);
-    case HRowType.RANGE_3:
-      return constructRange3Row($, tr);
+      return constructRangeUnbounded($, tr);
+    case HRowType.RANGE_LOWER_BOUNDED_WITH_EXCEPTIONS:
+      throw "should never get here";
     default:
       return assertUnreachable(type);
   }
@@ -271,33 +281,48 @@ const constructMultiCourseRow = (
   };
 };
 
-const constructRange1Row = (
+const constructRangeLowerBoundedMaybeExceptions = (
   $: CheerioStatic,
   tr: CheerioElement
-): RangeRow<HRowType.RANGE_BOUNDED> => {
+):
+  | WithExceptions<
+      RangeLowerBoundedRow<HRowType.RANGE_LOWER_BOUNDED_WITH_EXCEPTIONS>
+    >
+  | RangeLowerBoundedRow<HRowType.RANGE_LOWER_BOUNDED> => {
   const [desc, hourCol] = ensureLength(2, tr.children).map($);
   const hour = parseHour(hourCol);
-  // text should match the form:
-  // CS 9999 or higher, except CS 9999, CS 9999, CS 3999,... <etc>
+  // text should match one of the following:
+  // - CS 9999 or higher[, except CS 9999, CS 9999, CS 3999,... <etc>]
+  // - Select from any HIST course numbered 3000 or above.
+  // - Complete three HIST courses numbered 2303 or above. Cluster is subject to Department approval.
   const text = parseText(desc);
   // should match the form [["CS 9999", "CS", "9999"], [...]]
-  const matches = Array.from(text.matchAll(COURSE_REGEX));
+  const matches = Array.from(text.matchAll(RANGE_LOWER_BOUNDED_PARSE));
   const [[, subject, id], ...exceptions] = ensureLengthAtLeast(1, matches);
-  return {
-    type: HRowType.RANGE_BOUNDED,
-    hour,
-    subjects: [{ subject, classIdStart: Number(id), classIdEnd: 9999 }],
-    exceptions: exceptions.map(([, subject, id]) => ({
+  if (exceptions.length > 0) {
+    return {
+      type: HRowType.RANGE_LOWER_BOUNDED_WITH_EXCEPTIONS,
+      hour,
       subject,
-      classId: Number(id),
-    })),
+      classIdStart: Number(id),
+      exceptions: exceptions.map(([, subject, id]) => ({
+        subject,
+        classId: Number(id),
+      })),
+    };
+  }
+  return {
+    type: HRowType.RANGE_LOWER_BOUNDED,
+    hour,
+    subject,
+    classIdStart: Number(id),
   };
 };
 
-const constructRange2Row = (
+const constructRangeBounded = (
   $: CheerioStatic,
   tr: CheerioElement
-): RangeRow<HRowType.RANGE_UNBOUNDED> => {
+): RangeBoundedRow<HRowType.RANGE_BOUNDED> => {
   const [desc, hourCol] = ensureLength(2, tr.children).map($);
   const hour = parseHour(hourCol);
   // text should match the form:
@@ -311,43 +336,30 @@ const constructRange2Row = (
     matches
   );
   return {
-    type: HRowType.RANGE_UNBOUNDED,
+    type: HRowType.RANGE_BOUNDED,
     hour,
-    subjects: [
-      {
-        subject,
-        classIdStart: Number(classIdStart),
-        classIdEnd: Number(classIdEnd),
-      },
-    ],
-    exceptions: [],
+    subject,
+    classIdStart: Number(classIdStart),
+    classIdEnd: Number(classIdEnd),
   };
 };
 
-const constructRange3Row = (
+const constructRangeUnbounded = (
   $: CheerioStatic,
   tr: CheerioElement
-): RangeRow<HRowType.RANGE_3> => {
+): RangeUnboundedRow<HRowType.RANGE_UNBOUNDED> => {
   const [desc, hourCol] = ensureLength(2, tr.children).map($);
   const hour = parseHour(hourCol);
-  // text should match the form:
-  // Select from any HIST course numbered 3000 or above.
-  // Complete three HIST courses numbered 2303 or above. Cluster is subject to Department approval.
+  // text should match one of the following:
+  // - Any course in ARTD, ARTE, ARTF, ARTG, ARTH, and GAME subject areas as long as prerequisites have been met.
+  // - BIOE, CHME, CIVE, EECE, ME, IE, MEIE, and ENGR to Department approval.
   const text = parseText(desc);
-  // should match the form [["CS 9999", "CS", "9999"], [...]]
-  const matches = Array.from(text.matchAll(RANGE_3_PARSE_REGEX));
-  const [[, subject, classIdStart]] = ensureLength(1, matches);
+  const matches = Array.from(text.match(SUBJECT_REGEX) ?? []);
+  const subjects = ensureLengthAtLeast(3, matches);
   return {
-    type: HRowType.RANGE_3,
+    type: HRowType.RANGE_UNBOUNDED,
     hour,
-    subjects: [
-      {
-        subject,
-        classIdStart: Number(classIdStart),
-        classIdEnd: 9999,
-      },
-    ],
-    exceptions: [],
+    subjects,
   };
 };
 

@@ -41,9 +41,12 @@ export type HRow =
   | CourseRow<HRowType.OR_COURSE>
   | CourseRow<HRowType.PLAIN_COURSE>
   | MultiCourseRow<HRowType.AND_COURSE>
-  | RangeWithExceptions<BoundedRangeRow<HRowType.RANGE_BOUNDED>>
-  | RangeWithExceptions<UnboundedRangeRow<HRowType.RANGE_UNBOUNDED>>
-  | BoundedRangeRow<HRowType.RANGE_BOUNDED>;
+  | RangeLowerBoundedRow<HRowType.RANGE_LOWER_BOUNDED>
+  | WithExceptions<
+      RangeLowerBoundedRow<HRowType.RANGE_LOWER_BOUNDED_WITH_EXCEPTIONS>
+    >
+  | RangeBoundedRow<HRowType.RANGE_BOUNDED>
+  | RangeUnboundedRow<HRowType.RANGE_UNBOUNDED>;
 
 // the different outputs we have, by TYPE
 export enum HRowType {
@@ -53,9 +56,12 @@ export enum HRowType {
   OR_COURSE = "OR_COURSE",
   AND_COURSE = "AND_COURSE",
   PLAIN_COURSE = "PLAIN_COURSE",
+
+  RANGE_LOWER_BOUNDED = "RANGE_LOWER_BOUNDED",
+  RANGE_LOWER_BOUNDED_WITH_EXCEPTIONS = "RANGE_LOWER_BOUNDED_WITH_EXCEPTIONS",
+
   RANGE_BOUNDED = "RANGE_BOUNDED",
   RANGE_UNBOUNDED = "RANGE_UNBOUNDED",
-  RANGE_3 = "RANGE_3",
 }
 
 export interface TextRow<T> {
@@ -79,30 +85,28 @@ export interface MultiCourseRow<T> {
   courses: Array<{ title: string; description: string }>;
 }
 
-// export interface RangeRow<T> {
-//   type: T;
-//   hour: number;
-//   subjects: string,
-//   classIdStart: number,
-//   classIdEnd: number
-// }
-
-export interface BoundedRangeRow<T> {
+export interface RangeBoundedRow<T> {
   type: T;
   hour: number;
-  subjects: string;
+  subject: string;
   classIdStart: number;
   classIdEnd: number;
 }
 
-export interface UnboundedRangeRow<T> {
+export interface RangeUnboundedRow<T> {
   type: T;
   hour: number;
   subjects: Array<string>;
 }
 
-export type RangeWithExceptions<S> = S & {
-  rangeType: "WITH_EXCEPTIONS";
+export interface RangeLowerBoundedRow<T> {
+  type: T;
+  hour: number;
+  subject: string;
+  classIdStart: number;
+}
+
+export type WithExceptions<S> = S & {
   exceptions: Array<{
     subject: string;
     classId: number;
