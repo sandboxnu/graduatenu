@@ -8,7 +8,7 @@ import {
   Requirement,
   ScheduleCourse,
 } from "@graduate/common";
-import { SearchAPI } from "@graduate/api-client";
+import { fetchCourse } from "../../api";
 import {
   DNDScheduleCourse,
   IRequirementGroupWarning,
@@ -204,7 +204,7 @@ class RequirementSectionComponent extends React.Component<
       for (const r of reqs) {
         if (r.type === "COURSE") {
           promises.push(
-            SearchAPI.fetchCourse(r.subject.toUpperCase(), r.classId.toString())
+            fetchCourse(r.subject.toUpperCase(), r.classId.toString())
           );
         }
         if (r.type === "AND" || r.type === "OR" || r.type === "CREDITS") {

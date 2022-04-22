@@ -11,7 +11,7 @@ import {
   Status,
   SeasonWord,
 } from "@graduate/common";
-import { SearchAPI } from "@graduate/api-client";
+import { fetchCourse } from "../../api";
 import { XButton } from "../common";
 import { Modal } from "@material-ui/core";
 import { batch, connect } from "react-redux";
@@ -200,7 +200,7 @@ export class SidebarAddClassModalComponent extends React.Component<
     });
 
     for (const i in this.props.selectedCourses) {
-      const courseToAdd: ScheduleCourse | null = await SearchAPI.fetchCourse(
+      const courseToAdd: ScheduleCourse | null = await fetchCourse(
         this.props.selectedCourses[i].subject.toUpperCase(),
         this.props.selectedCourses[i].classId.toString()
       );
