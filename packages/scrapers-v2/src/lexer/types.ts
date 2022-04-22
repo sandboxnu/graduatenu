@@ -74,7 +74,8 @@ export interface CourseRow<T> {
   type: T;
   description: string;
   hour: number;
-  title: string;
+  subject: string;
+  classId: number;
 }
 
 export interface MultiCourseRow<T> {
@@ -82,7 +83,7 @@ export interface MultiCourseRow<T> {
   description: string;
   hour: number;
   // may contain duplicates
-  courses: Array<{ title: string; description: string }>;
+  courses: Array<{ subject: string; classId: number; description: string }>;
 }
 
 export interface RangeBoundedRow<T> {

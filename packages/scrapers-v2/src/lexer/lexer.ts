@@ -3,6 +3,7 @@ import axios from "axios";
 import * as cheerio from "cheerio";
 import {
   COURSE_REGEX,
+  HEADER_REGEX,
   RANGE_BOUNDED,
   RANGE_LOWER_BOUNDED_MAYBE_EXCEPTIONS_1,
   RANGE_LOWER_BOUNDED_MAYBE_EXCEPTIONS_2,
@@ -53,7 +54,7 @@ const transformMajorDataFromCatalog = async (
   const yearVersion: number = parseInt(catalogYear.split("-")[0]);
 
   const requirementsContainer = $("#programrequirementstextcontainer");
-  const courseLists = transformCourseLists($, requirementsContainer);
+  const courseLists = combineAllCourseListTables($, requirementsContainer);
 
   const prgramRequiredHeading = requirementsContainer
     .find("h2")
@@ -73,7 +74,7 @@ const transformMajorDataFromCatalog = async (
   };
 };
 
-const transformCourseLists = async (
+const combineAllCourseListTables = async (
   $: CheerioStatic,
   requirementsContainer: Cheerio
 ): Promise<HSection[]> => {
@@ -82,9 +83,12 @@ const transformCourseLists = async (
   const courseList: HSection[] = [];
 
   for (const element of requirementsContainer.children().toArray()) {
-    if (element.name.includes("h")) {
+    if (HEADER_REGEX.test(element.name)) {
       descriptions.push(parseText($(element)));
-    } else if (element.name === "table") {
+    } else if (
+      element.name === "table" &&
+      element.attribs["class"] === "sc_courselist"
+    ) {
       const tableDesc = descriptions.pop() || "";
       const courseTable = {
         description: tableDesc,
@@ -102,7 +106,7 @@ const transformCourseLists = async (
       const containerId = "#concentrationrequirementstextcontainer";
       const concentrations = await Promise.all(
         mapped.map((concentrationPage) =>
-          transformCourseLists(
+          combineAllCourseListTables(
             concentrationPage,
             concentrationPage(containerId)
           )
@@ -116,6 +120,7 @@ const transformCourseLists = async (
 };
 
 const constructNestedLinks = ($: CheerioStatic, element: CheerioElement) => {
+  // TODO: add support to non-current catalogs
   const base = "https://catalog.northeastern.edu";
   const concentrationsTag = "#concentrationrequirementstext";
   return $(element)
@@ -233,10 +238,10 @@ const constructPlainCourseRow = (
   tr: CheerioElement
 ): CourseRow<HRowType.PLAIN_COURSE> => {
   const [code, desc, hourCol] = ensureLength(3, tr.children).map($);
-  const title = parseText(code);
+  const { subject, classId } = parseCourseTitle(parseText(code));
   const description = parseText(desc);
   const hour = parseHour(hourCol);
-  return { hour, description, type: HRowType.PLAIN_COURSE, title: title };
+  return { hour, description, type: HRowType.PLAIN_COURSE, subject, classId };
 };
 
 const constructOrCourseRow = (
@@ -245,10 +250,12 @@ const constructOrCourseRow = (
 ): CourseRow<HRowType.OR_COURSE> => {
   const [code, desc] = ensureLength(2, tr.children).map($);
   // remove "or "
-  const title = parseText(code).substring(3).trim();
+  const { subject, classId } = parseCourseTitle(
+    parseText(code).substring(3).trim()
+  );
   const description = parseText(desc);
   // there may be multiple courses in the OR, so we can't backtrack
-  return { hour: 0, description, type: HRowType.OR_COURSE, title: title };
+  return { hour: 0, description, type: HRowType.OR_COURSE, subject, classId };
 };
 
 const constructMultiCourseRow = (
@@ -256,7 +263,12 @@ const constructMultiCourseRow = (
   tr: CheerioElement
 ): MultiCourseRow<HRowType.AND_COURSE> => {
   const [code, desc, hourCol] = ensureLength(3, tr.children).map($);
-  const titles = code.find(".code").toArray().map($).map(parseText);
+  const titles = code
+    .find(".code")
+    .toArray()
+    .map($)
+    .map(parseText)
+    .map(parseCourseTitle);
   const firstDescription = parseText(desc.contents().first());
   const restDescriptions = desc
     .children(".blockindent")
@@ -268,8 +280,9 @@ const constructMultiCourseRow = (
     const msg = `found titles: ${titles.length} !== found descs: ${descriptions.length}`;
     throw new Error(msg + titles + descriptions);
   }
-  const courses = titles.map((title, i) => ({
-    title,
+  const courses = titles.map(({ subject, classId }, i) => ({
+    subject,
+    classId,
     description: descriptions[i],
   }));
   const hour = parseHour(hourCol);
@@ -298,14 +311,17 @@ const constructRangeLowerBoundedMaybeExceptions = (
   const text = parseText(desc);
   // should match the form [["CS 9999", "CS", "9999"], [...]]
   const matches = Array.from(text.matchAll(RANGE_LOWER_BOUNDED_PARSE));
-  const [[, subject, id], ...exceptions] = ensureLengthAtLeast(1, matches);
+  const [[, subject, , , , id], ...exceptions] = ensureLengthAtLeast(
+    1,
+    matches
+  );
   if (exceptions.length > 0) {
     return {
       type: HRowType.RANGE_LOWER_BOUNDED_WITH_EXCEPTIONS,
       hour,
       subject,
       classIdStart: Number(id),
-      exceptions: exceptions.map(([, subject, id]) => ({
+      exceptions: exceptions.map(([, subject, , , , id]) => ({
         subject,
         classId: Number(id),
       })),
@@ -370,6 +386,13 @@ const parseHour = (td: Cheerio) => {
 const parseText = (td: Cheerio) => {
   // replace &NBSP with space
   return td.text().replaceAll("\xa0", " ").trim();
+};
+const parseCourseTitle = (parsedCourse: string) => {
+  const [subject, classId] = ensureLength(2, parsedCourse.split(" "));
+  return {
+    subject,
+    classId: Number(classId),
+  };
 };
 const ensureLength = <T>(n: number, l: T[]) => {
   const length = l.length;
