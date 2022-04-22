@@ -38,49 +38,78 @@ class APIClient {
 
   student = {
     update: async (
-      updateStudentDto: UpdateStudentDto
+      updateStudentDto: UpdateStudentDto,
+      jwt: string
     ): Promise<UpdateStudentResponse> => {
       const data = (
-        await this.axios.patch("/students/me", { ...updateStudentDto })
+        await this.axios.patch(
+          "/students/me",
+          { ...updateStudentDto },
+          { headers: { Authorization: `Bearer ${jwt}` } }
+        )
       ).data;
       return plainToInstance(UpdateStudentResponse, data);
     },
-    getMe: async (): Promise<GetStudentResponse> => {
+    getMe: async (jwt: string): Promise<GetStudentResponse> => {
       const data = (
         await this.axios.get("/students/me", {
           params: { isWithPlans: false },
+          headers: { Authorization: `Bearer ${jwt}` },
         })
       ).data;
       return plainToInstance(GetStudentResponse, data);
     },
-    getMeWithPlan: async (): Promise<GetStudentResponse> => {
+    getMeWithPlan: async (jwt: string): Promise<GetStudentResponse> => {
       const data = (
         await this.axios.get("/students/me", {
           params: { isWithPlans: true },
+          headers: { Authorization: `Bearer ${jwt}` },
         })
       ).data;
       return plainToInstance(GetStudentResponse, data);
     },
-    delete: async (): Promise<void> => {
-      return (await this.axios.delete("/students/me")).data;
+    delete: async (jwt: string): Promise<void> => {
+      return (
+        await this.axios.delete("/students/me", {
+          headers: { Authorization: `Bearer ${jwt}` },
+        })
+      ).data;
     },
   };
 
   plans = {
-    create: async (createPlanDto: CreatePlanDto): Promise<GetPlanResponse> => {
-      const data = (await this.axios.post("/plans", { ...createPlanDto })).data;
+    create: async (
+      createPlanDto: CreatePlanDto,
+      jwt: string
+    ): Promise<GetPlanResponse> => {
+      const data = (
+        await this.axios.post(
+          "/plans",
+          { ...createPlanDto },
+          { headers: { Authorization: `Bearer ${jwt}` } }
+        )
+      ).data;
       return plainToInstance(GetPlanResponse, data);
     },
-    get: async (id: string | number): Promise<GetPlanResponse> => {
-      const data = (await this.axios.get(`/plans/${id}`)).data;
+    get: async (id: string | number, jwt: string): Promise<GetPlanResponse> => {
+      const data = (
+        await this.axios.get(`/plans/${id}`, {
+          headers: { Authorization: `Bearer ${jwt}` },
+        })
+      ).data;
       return plainToInstance(GetPlanResponse, data);
     },
     update: async (
       id: string | number,
-      updatePlanDto: UpdatePlanDto
+      updatePlanDto: UpdatePlanDto,
+      jwt: string
     ): Promise<UpdatePlanResponse> => {
       const data = (
-        await this.axios.patch(`/plans/${id}`, { ...updatePlanDto })
+        await this.axios.patch(
+          `/plans/${id}`,
+          { ...updatePlanDto },
+          { headers: { Authorization: `Bearer ${jwt}` } }
+        )
       ).data;
       return plainToInstance(UpdatePlanResponse, data);
     },
@@ -89,7 +118,7 @@ class APIClient {
     },
   };
 
-  constructor(baseURL = "") {
+  constructor(baseURL = "/api") {
     this.axios = Axios.create({
       baseURL: baseURL,
       headers: { "content-type": "application/json" },
@@ -196,5 +225,5 @@ class SearchAPIClient {
   }
 }
 
-export const API = new APIClient(process.env.API_URL);
+export const API = new APIClient(process.env.NEXT_PUBLIC_API_URL);
 export const SearchAPI = new SearchAPIClient();
