@@ -6,7 +6,7 @@ import {
   IRequiredCourse,
   ScheduleCourse,
 } from "@graduate/common";
-import { SearchAPI } from "@graduate/api-client";
+import { fetchCourse } from "../api";
 import {
   getCompletedRequirementsFromState,
   getUserMajorFromState,
@@ -34,7 +34,7 @@ const TitleText = styled.div`
 `;
 
 const mappableFetchCourse = (c: IRequiredCourse) =>
-  SearchAPI.fetchCourse(c.subject, String(c.classId));
+  fetchCourse(c.subject, String(c.classId));
 const fetchAndFilterCourses = async (cs: IRequiredCourse[]) => {
   const courses = await Promise.all(cs.map(mappableFetchCourse));
   // filter will get rid of null values, so cast is safe
