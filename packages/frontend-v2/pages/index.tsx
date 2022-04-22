@@ -2,6 +2,7 @@ import type { NextPage } from "next";
 import { SeasonEnum } from "@graduate/common";
 import { API } from "@graduate/api-client";
 import { useState } from "react";
+import { SearchAPI } from "@graduate/api-client";
 
 const Home: NextPage = () => {
   // using a type from our common package
@@ -14,6 +15,24 @@ const Home: NextPage = () => {
 
   const [token, setToken] = useState("");
   const [planId, setPlanId] = useState<number>();
+
+  // handler that calls fetchCourse from our api-client package
+  const testFetchCourse = (subject: string, classId: string) => {
+    SearchAPI.fetchCourse(subject.toUpperCase(), classId).then((res) =>
+      console.log(res)
+    );
+  };
+
+  // handler that calls searchCourses from our api-client package
+  const testSearchCourses = (
+    searchQuery: string,
+    minIndex: number,
+    maxIndex: number
+  ) => {
+    SearchAPI.searchCourses(searchQuery, minIndex, maxIndex).then((res) =>
+      console.log(res)
+    );
+  };
 
   return (
     <>
@@ -304,6 +323,22 @@ const Home: NextPage = () => {
           </button>
         </div>
       </div>
+
+      <h2>SearchAPI logging!</h2>
+      <button
+        onClick={() => {
+          testFetchCourse("CS", "2500");
+        }}
+      >
+        fetchCourse
+      </button>
+      <button
+        onClick={() => {
+          testSearchCourses("CS", 0, 9999);
+        }}
+      >
+        searchCourses
+      </button>
     </>
   );
 };
