@@ -1,4 +1,3 @@
-import "react-toastify/dist/ReactToastify.min.css";
 import type { NextPage } from "next";
 import { toast, logger } from "../utils";
 import { useState } from "react";
