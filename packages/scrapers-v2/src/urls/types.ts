@@ -13,3 +13,12 @@ type CollegeKeys = keyof typeof College;
 export type AvailableMajors = {
   [key in CollegeKeys]: Array<string>;
 };
+
+export type MajorPath = {
+  // base: https://catalog.northeastern.edu/archive/2018-2019/undergraduate/
+  college: string;
+  // college: arts-media-design
+  path: Array<string>;
+  // "architecture"
+  // "architecture", "architecture-bs"
+}

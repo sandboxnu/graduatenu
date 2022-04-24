@@ -9,3 +9,11 @@ export const loadHTML = async (url: string): Promise<CheerioStatic> => {
     throw error;
   }
 };
+
+export const appendPath = (base: string, path: string, hash?: string) => {
+  const url = new URL(path, base);
+  if (hash) {
+    url.hash = hash;
+  }
+  return url.toString();
+};

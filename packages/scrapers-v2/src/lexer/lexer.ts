@@ -1,5 +1,5 @@
 import { assertUnreachable } from "@graduate/common";
-import { loadHTML } from "../utils";
+import { appendPath, loadHTML } from "../utils";
 import {
   COURSE_REGEX,
   HEADER_REGEX,
@@ -117,11 +117,7 @@ const constructNestedLinks = ($: CheerioStatic, element: CheerioElement) => {
     .find("li > a")
     .toArray()
     .map((link) => $(link).attr("href"))
-    .map((link) => {
-      const url = new URL(link, base);
-      url.hash = concentrationsTag;
-      return url.toString();
-    });
+    .map((path) => appendPath(base, path, concentrationsTag));
 };
 
 const transformCourseListTable = (

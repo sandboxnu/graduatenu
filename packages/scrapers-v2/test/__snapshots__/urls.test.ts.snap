@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`url scraper scrape 1`] = `
+Object {
+  "ARTS_MEDIA_DESIGN": Array [],
+  "BUSINESS": Array [],
+  "ENGINEERING": Array [],
+  "HEALTH_SCIENCES": Array [],
+  "KHOURY": Array [],
+  "SCIENCE": Array [],
+  "SOCIAL_SCIENCES_HUMANITIES": Array [],
+}
+`;
