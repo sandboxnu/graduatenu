@@ -17,9 +17,7 @@ const Home: NextPage = () => {
 
   // handler that calls fetchCourse from our api-client package
   const testFetchCourse = (subject: string, classId: string) => {
-    SearchAPI.fetchCourse(subject.toUpperCase(), classId).then((res) =>
-      console.log(res)
-    );
+    SearchAPI.fetchCourse(subject, classId).then((res) => console.log(res));
   };
 
   // handler that calls searchCourses from our api-client package
