@@ -1,5 +1,4 @@
 import type { NextPage } from "next";
-import { SeasonEnum } from "@graduate/common";
 import { useState } from "react";
 import { SearchAPI, API } from "@graduate/api-client";
 import { toast, logger } from "../utils";
@@ -8,16 +7,15 @@ const Bomb: React.FC = () => {
   throw Error("BOOOOM!");
 };
 
-
 const Home: NextPage = () => {
   const [isClientSideError, setIsClientSideError] = useState(false);
+
+  const [token, setToken] = useState("");
+  const [planId, setPlanId] = useState<number>();
 
   if (isClientSideError) {
     return <Bomb />;
   }
-
-  const [token, setToken] = useState("");
-  const [planId, setPlanId] = useState<number>();
 
   // handler that calls fetchCourse from our api-client package
   const testFetchCourse = (subject: string, classId: string) => {
