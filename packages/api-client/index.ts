@@ -40,14 +40,14 @@ class APIClient {
   }
 
   auth = {
-    login: async (body: LoginStudentDto): Promise<GetStudentResponse> =>
+    login: (body: LoginStudentDto): Promise<GetStudentResponse> =>
       this.req("POST", "/auth/login", GetStudentResponse, undefined, body),
     register: async (body: CreateStudentDto): Promise<GetStudentResponse> =>
       this.req("POST", "/auth/register", GetStudentResponse, undefined, body),
   };
 
   student = {
-    update: async (
+    update: (
       body: UpdateStudentDto,
       jwt: string
     ): Promise<UpdateStudentResponse> =>
@@ -58,11 +58,11 @@ class APIClient {
         { Authorization: `Bearer ${jwt}` },
         body
       ),
-    getMe: async (jwt: string): Promise<GetStudentResponse> =>
+    getMe: (jwt: string): Promise<GetStudentResponse> =>
       this.req("GET", "/students/me", GetStudentResponse, {
         Authorization: `Bearer ${jwt}`,
       }),
-    getMeWithPlan: async (jwt: string): Promise<GetStudentResponse> =>
+    getMeWithPlan: (jwt: string): Promise<GetStudentResponse> =>
       this.req(
         "GET",
         "students/me",
@@ -71,17 +71,14 @@ class APIClient {
         undefined,
         { isWithPlans: true }
       ),
-    delete: async (jwt: string): Promise<void> =>
+    delete: (jwt: string): Promise<void> =>
       this.req("DELETE", "students/me", undefined, {
         Authorization: `Bearer ${jwt}`,
       }),
   };
 
   plans = {
-    create: async (
-      body: CreatePlanDto,
-      jwt: string
-    ): Promise<GetPlanResponse> =>
+    create: (body: CreatePlanDto, jwt: string): Promise<GetPlanResponse> =>
       this.req(
         "POST",
         "/plans",
@@ -89,11 +86,11 @@ class APIClient {
         { Authorization: `Bearer ${jwt}` },
         body
       ),
-    get: async (id: string | number, jwt: string): Promise<GetPlanResponse> =>
+    get: (id: string | number, jwt: string): Promise<GetPlanResponse> =>
       this.req("GET", `/plans/${id}`, GetPlanResponse, {
         Authorization: `Bearer ${jwt}`,
       }),
-    update: async (
+    update: (
       id: string | number,
       body: UpdatePlanDto,
       jwt: string
