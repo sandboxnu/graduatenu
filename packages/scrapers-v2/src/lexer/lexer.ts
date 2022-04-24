@@ -1,6 +1,5 @@
 import { assertUnreachable } from "@graduate/common";
-import axios from "axios";
-import * as cheerio from "cheerio";
+import { loadHTML } from "../utils";
 import {
   COURSE_REGEX,
   HEADER_REGEX,
@@ -25,20 +24,11 @@ import {
   WithExceptions,
 } from "./types";
 
-const loadCatalogHTML = async (url: string): Promise<CheerioStatic> => {
-  try {
-    const { data } = await axios.get(url);
-    return cheerio.load(data);
-  } catch (error) {
-    throw error;
-  }
-};
-
 export const scrapeMajorDataFromCatalog = async (
   url: string
 ): Promise<HDocument> => {
   try {
-    const $ = await loadCatalogHTML(url);
+    const $ = await loadHTML(url);
     // step 1: Transform scraped table into intermediate representation (IR)
     return transformMajorDataFromCatalog($);
   } catch (error) {
@@ -102,7 +92,7 @@ const combineAllCourseListTables = async (
     ) {
       // parse all the business concentration links
       const links = constructNestedLinks($, element);
-      const mapped = await Promise.all(links.map(loadCatalogHTML));
+      const mapped = await Promise.all(links.map(loadHTML));
       const containerId = "#concentrationrequirementstextcontainer";
       const concentrations = await Promise.all(
         mapped.map((concentrationPage) =>
