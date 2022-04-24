@@ -1,4 +1,4 @@
-import Axios, { AxiosInstance } from "axios";
+import Axios, { AxiosInstance, Method } from "axios";
 import {
   CreatePlanDto,
   CreateStudentDto,
@@ -13,110 +13,24 @@ import {
   UpdateStudentDto,
   UpdateStudentResponse,
 } from "@graduate/common";
-import { plainToInstance } from "class-transformer";
+import { plainToInstance, ClassConstructor } from "class-transformer";
 
 class APIClient {
   private axios: AxiosInstance;
 
-  auth = {
-    login: async (
-      loginUserDto: LoginStudentDto
-    ): Promise<GetStudentResponse> => {
-      const data = (await this.axios.post("/auth/login", { ...loginUserDto }))
-        .data;
-      return plainToInstance(GetStudentResponse, data);
-    },
-    register: async (
-      createStudentDto: CreateStudentDto
-    ): Promise<GetStudentResponse> => {
-      const data = (
-        await this.axios.post("/auth/register", { ...createStudentDto })
-      ).data;
-      return plainToInstance(GetStudentResponse, data);
-    },
-  };
-
-  student = {
-    update: async (
-      updateStudentDto: UpdateStudentDto,
-      jwt: string
-    ): Promise<UpdateStudentResponse> => {
-      const data = (
-        await this.axios.patch(
-          "/students/me",
-          { ...updateStudentDto },
-          { headers: { Authorization: `Bearer ${jwt}` } }
-        )
-      ).data;
-      return plainToInstance(UpdateStudentResponse, data);
-    },
-    getMe: async (jwt: string): Promise<GetStudentResponse> => {
-      const data = (
-        await this.axios.get("/students/me", {
-          params: { isWithPlans: false },
-          headers: { Authorization: `Bearer ${jwt}` },
-        })
-      ).data;
-      return plainToInstance(GetStudentResponse, data);
-    },
-    getMeWithPlan: async (jwt: string): Promise<GetStudentResponse> => {
-      const data = (
-        await this.axios.get("/students/me", {
-          params: { isWithPlans: true },
-          headers: { Authorization: `Bearer ${jwt}` },
-        })
-      ).data;
-      return plainToInstance(GetStudentResponse, data);
-    },
-    delete: async (jwt: string): Promise<void> => {
-      return (
-        await this.axios.delete("/students/me", {
-          headers: { Authorization: `Bearer ${jwt}` },
-        })
-      ).data;
-    },
-  };
-
-  plans = {
-    create: async (
-      createPlanDto: CreatePlanDto,
-      jwt: string
-    ): Promise<GetPlanResponse> => {
-      const data = (
-        await this.axios.post(
-          "/plans",
-          { ...createPlanDto },
-          { headers: { Authorization: `Bearer ${jwt}` } }
-        )
-      ).data;
-      return plainToInstance(GetPlanResponse, data);
-    },
-    get: async (id: string | number, jwt: string): Promise<GetPlanResponse> => {
-      const data = (
-        await this.axios.get(`/plans/${id}`, {
-          headers: { Authorization: `Bearer ${jwt}` },
-        })
-      ).data;
-      return plainToInstance(GetPlanResponse, data);
-    },
-    update: async (
-      id: string | number,
-      updatePlanDto: UpdatePlanDto,
-      jwt: string
-    ): Promise<UpdatePlanResponse> => {
-      const data = (
-        await this.axios.patch(
-          `/plans/${id}`,
-          { ...updatePlanDto },
-          { headers: { Authorization: `Bearer ${jwt}` } }
-        )
-      ).data;
-      return plainToInstance(UpdatePlanResponse, data);
-    },
-    delete: async (id: string): Promise<void> => {
-      return (await this.axios.delete(`/plans/${id}`)).data;
-    },
-  };
+  private async req<T>(
+    method: Method,
+    url: string,
+    responseClass?: ClassConstructor<T>,
+    headers?: any,
+    body?: any,
+    params?: any
+  ): Promise<T> {
+    const res = (
+      await this.axios.request({ method, url, data: body, params, headers })
+    ).data;
+    return responseClass ? plainToInstance(responseClass, res) : res;
+  }
 
   constructor(baseURL = "/api") {
     this.axios = Axios.create({
@@ -124,6 +38,78 @@ class APIClient {
       headers: { "content-type": "application/json" },
     });
   }
+
+  auth = {
+    login: async (body: LoginStudentDto): Promise<GetStudentResponse> =>
+      this.req("POST", "/auth/login", GetStudentResponse, undefined, body),
+    register: async (body: CreateStudentDto): Promise<GetStudentResponse> =>
+      this.req("POST", "/auth/register", GetStudentResponse, undefined, body),
+  };
+
+  student = {
+    update: async (
+      body: UpdateStudentDto,
+      jwt: string
+    ): Promise<UpdateStudentResponse> =>
+      this.req(
+        "PATCH",
+        "/students/me",
+        UpdateStudentResponse,
+        { Authorization: `Bearer ${jwt}` },
+        body
+      ),
+    getMe: async (jwt: string): Promise<GetStudentResponse> =>
+      this.req("GET", "/students/me", GetStudentResponse, {
+        Authorization: `Bearer ${jwt}`,
+      }),
+    getMeWithPlan: async (jwt: string): Promise<GetStudentResponse> =>
+      this.req(
+        "GET",
+        "students/me",
+        GetStudentResponse,
+        { Authorization: `Bearer ${jwt}` },
+        undefined,
+        { isWithPlans: true }
+      ),
+    delete: async (jwt: string): Promise<void> =>
+      this.req("DELETE", "students/me", undefined, {
+        Authorization: `Bearer ${jwt}`,
+      }),
+  };
+
+  plans = {
+    create: async (
+      body: CreatePlanDto,
+      jwt: string
+    ): Promise<GetPlanResponse> =>
+      this.req(
+        "POST",
+        "/plans",
+        GetPlanResponse,
+        { Authorization: `Bearer ${jwt}` },
+        body
+      ),
+    get: async (id: string | number, jwt: string): Promise<GetPlanResponse> =>
+      this.req("GET", `/plans/${id}`, GetPlanResponse, {
+        Authorization: `Bearer ${jwt}`,
+      }),
+    update: async (
+      id: string | number,
+      body: UpdatePlanDto,
+      jwt: string
+    ): Promise<UpdatePlanResponse> =>
+      this.req(
+        "PATCH",
+        `/plans/${id}`,
+        UpdatePlanResponse,
+        { Authorization: `Bearer ${jwt}` },
+        body
+      ),
+    delete: async (id: string | number, jwt: string): Promise<void> =>
+      this.req("DELETE", `/plans/${id}`, undefined, {
+        Authorization: `Bearer ${jwt}`,
+      }),
+  };
 }
 
 interface SearchClass {
@@ -142,6 +128,10 @@ interface SearchClass {
  */
 class SearchAPIClient {
   private axios: AxiosInstance;
+
+  constructor(baseURL = "https://api.searchneu.com/graphql") {
+    this.axios = Axios.create({ baseURL: baseURL });
+  }
 
   fetchCourse = async (
     subject: string,
@@ -167,7 +157,7 @@ class SearchAPIClient {
     });
 
     const courseData = await res.data.data;
-    if (courseData && courseData.class && courseData.class.latestOccurrence) {
+    if (courseData?.class?.latestOccurrence) {
       const course: ScheduleCourse = courseData.class.latestOccurrence;
       course.numCreditsMax = courseData.class.latestOccurrence.maxCredits;
       course.numCreditsMin = courseData.class.latestOccurrence.minCredits;
@@ -219,10 +209,6 @@ class SearchAPIClient {
 
     return courses;
   };
-
-  constructor(baseURL = "https://api.searchneu.com/graphql") {
-    this.axios = Axios.create({ baseURL: baseURL });
-  }
 }
 
 export const API = new APIClient(process.env.NEXT_PUBLIC_API_URL);

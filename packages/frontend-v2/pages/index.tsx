@@ -1,8 +1,7 @@
 import type { NextPage } from "next";
 import { SeasonEnum } from "@graduate/common";
-import { API } from "@graduate/api-client";
 import { useState } from "react";
-import { SearchAPI } from "@graduate/api-client";
+import { SearchAPI, API } from "@graduate/api-client";
 
 const Home: NextPage = () => {
   // using a type from our common package
@@ -314,7 +313,7 @@ const Home: NextPage = () => {
           </button>
           <button
             onClick={async () => {
-              await API.plans.get(planId!, token);
+              await API.plans.delete(planId!, token);
               console.log(`deleted plan ${planId}`);
               setPlanId(undefined);
             }}
