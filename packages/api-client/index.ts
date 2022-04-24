@@ -211,5 +211,5 @@ class SearchAPIClient {
   };
 }
 
-export const API = new APIClient(process.env.NEXT_PUBLIC_API_URL);
+export const API = new APIClient();
 export const SearchAPI = new SearchAPIClient();
