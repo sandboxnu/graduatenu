@@ -3,8 +3,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Student } from "src/student/entities/student.entity";
 import { StudentService } from "src/student/student.service";
 import { DeleteResult, Repository, UpdateResult } from "typeorm";
-import { CreatePlanDto } from "./dto/create-plan.dto";
-import { UpdatePlanDto } from "./dto/update-plan.dto";
+import { CreatePlanDto, UpdatePlanDto } from "../../../common";
 import { Plan } from "./entities/plan.entity";
 
 @Injectable()
@@ -26,12 +25,10 @@ export class PlanService {
   }
 
   async findOne(id: number): Promise<Plan> {
-    const plan = this.planRepository.findOne({
+    return this.planRepository.findOne({
       where: { id },
       relations: ["student"],
     });
-
-    return plan;
   }
 
   async isPlanOwnedByStudent(
