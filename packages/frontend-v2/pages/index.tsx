@@ -2,15 +2,19 @@ import type { NextPage } from "next";
 import { SeasonEnum } from "@graduate/common";
 import { useState } from "react";
 import { SearchAPI, API } from "@graduate/api-client";
+import { toast, logger } from "../utils";
+
+const Bomb: React.FC = () => {
+  throw Error("BOOOOM!");
+};
+
 
 const Home: NextPage = () => {
-  // using a type from our common package
-  const seasons: SeasonEnum[] = [
-    SeasonEnum.FL,
-    SeasonEnum.SP,
-    SeasonEnum.S1,
-    SeasonEnum.S2,
-  ];
+  const [isClientSideError, setIsClientSideError] = useState(false);
+
+  if (isClientSideError) {
+    return <Bomb />;
+  }
 
   const [token, setToken] = useState("");
   const [planId, setPlanId] = useState<number>();
@@ -34,11 +38,6 @@ const Home: NextPage = () => {
   return (
     <>
       <h1>GraduateNU Landing Page:</h1>
-      <h2>Seasons typed using types from our common package!</h2>
-      {seasons.map((season) => (
-        <p key={season}>{season}</p>
-      ))}
-      <br />
       <div>
         <h2>Testing api calls on backend v2</h2>
         <p>All responses will be logged to the console</p>
@@ -322,20 +321,109 @@ const Home: NextPage = () => {
       </div>
 
       <h2>SearchAPI logging!</h2>
-      <button
-        onClick={() => {
-          testFetchCourse("CS", "2500");
-        }}
-      >
-        fetchCourse
-      </button>
-      <button
-        onClick={() => {
-          testSearchCourses("CS", 0, 9999);
-        }}
-      >
-        searchCourses
-      </button>
+      <div>
+        <button
+          onClick={() => {
+            testFetchCourse("CS", "2500");
+          }}
+        >
+          fetchCourse
+        </button>
+        <button
+          onClick={() => {
+            testSearchCourses("CS", 0, 9999);
+          }}
+        >
+          searchCourses
+        </button>
+      </div>
+      <br />
+      <div>
+        <h2>API Error Handling</h2>
+        <div>
+          <h3>Toasts without logging</h3>
+          <button
+            onClick={() =>
+              toast.info("Oh btw here's some info on what you were doing")
+            }
+          >
+            info
+          </button>
+          <button
+            onClick={() =>
+              toast.success("Whatever you were doing was successful")
+            }
+          >
+            success
+          </button>
+          <button
+            onClick={() =>
+              toast.warn("Whatever you were doing was kinda successful")
+            }
+          >
+            warning
+          </button>
+          <button
+            onClick={() => toast.error("Whatever you were doing failed lol")}
+          >
+            error
+          </button>
+        </div>
+      </div>
+      <div>
+        <h3>Toasts with logging</h3>
+        <button
+          onClick={() =>
+            toast.info("Oh btw here's some info on what you were doing", {
+              log: true,
+            })
+          }
+        >
+          info
+        </button>
+        <button
+          onClick={() =>
+            toast.success("Whatever you were doing was successful", {
+              log: true,
+            })
+          }
+        >
+          success
+        </button>
+        <button
+          onClick={() =>
+            toast.warn("Whatever you were doing was kinda successful", {
+              log: true,
+            })
+          }
+        >
+          warning
+        </button>
+        <button
+          onClick={() =>
+            toast.error("Whatever you were doing failed lol", { log: true })
+          }
+        >
+          error
+        </button>
+      </div>
+      <div>
+        <h2>Client Side Error Handling</h2>
+        <button
+          onClick={() => {
+            setIsClientSideError(true);
+          }}
+        >
+          Trigger a client side error
+        </button>
+      </div>
+      <div>
+        <h2>Logging</h2>
+        <button onClick={() => logger.info("Info log")}>info</button>
+        <button onClick={() => logger.debug("Debug log")}>debug</button>
+        <button onClick={() => logger.warn("Warning log")}>warning</button>
+        <button onClick={() => logger.error("Error log")}>error</button>
+      </div>
     </>
   );
 };

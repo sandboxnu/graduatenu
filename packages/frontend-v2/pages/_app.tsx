@@ -1,5 +1,8 @@
+import "react-toastify/dist/ReactToastify.min.css";
 import Head from "next/head";
 import type { AppProps } from "next/app";
+import { ToastContainer } from "react-toastify";
+import { ErrorBoundary } from "../components";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -12,7 +15,10 @@ function MyApp({ Component, pageProps }: AppProps) {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Component {...pageProps} />
+      <ErrorBoundary>
+        <Component {...pageProps} />
+      </ErrorBoundary>
+      <ToastContainer position="bottom-right" />
     </>
   );
 }
