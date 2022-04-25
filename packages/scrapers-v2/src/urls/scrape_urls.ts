@@ -3,12 +3,12 @@ import { AvailableMajors, College, MajorPath } from "./types";
 
 export const scrapeMajorLinks = async (start: number, end: number) => {
   if (start !== end - 1) {
-    throw new Error("start should == end-1")
+    throw new Error("start should == end-1");
   }
 
   if (start < 2016) {
     // this is because there is no HTML version of those catalogs
-    throw new Error("scraping for years before 2016-2017 are not supported")
+    throw new Error("scraping for years before 2016-2017 are not supported");
   }
 
   if (start !== 2021) {
@@ -17,8 +17,10 @@ export const scrapeMajorLinks = async (start: number, end: number) => {
     throw new Error("only current year is supported");
   }
 
-  return scrapeMajorLinksForUrl("https://catalog.northeastern.edu/undergraduate");
-}
+  return scrapeMajorLinksForUrl(
+    "https://catalog.northeastern.edu/undergraduate"
+  );
+};
 
 export const scrapeMajorLinksForUrl = async (
   baseUrl: string
@@ -30,7 +32,10 @@ export const scrapeMajorLinksForUrl = async (
     // - https://catalog.northeastern.edu/archive/2018-2019/undergraduate/
     // college hardcoded path looks like this:
     // - college-information-science
-    const initStack = Object.values(College).map(college => ({ college, path: [] }));
+    const initStack = Object.values(College).map((college) => ({
+      college,
+      path: [],
+    }));
     return dfsMajors(baseUrl, initStack);
   } catch (e) {
     throw e;
@@ -40,7 +45,10 @@ export const scrapeMajorLinksForUrl = async (
 // stack: array<array<string>>
 // each item is a list of paths
 // when an item is "done", we add it to the list corresponding to top-level path
-const dfsMajors = async (base: string, stack: MajorPath[]): Promise<AvailableMajors> => {
+const dfsMajors = async (
+  base: string,
+  stack: MajorPath[]
+): Promise<AvailableMajors> => {
   const done: AvailableMajors = {
     ARTS_MEDIA_DESIGN: [],
     BUSINESS: [],
@@ -48,8 +56,8 @@ const dfsMajors = async (base: string, stack: MajorPath[]): Promise<AvailableMaj
     HEALTH_SCIENCES: [],
     KHOURY: [],
     SCIENCE: [],
-    SOCIAL_SCIENCES_HUMANITIES: []
-  }
+    SOCIAL_SCIENCES_HUMANITIES: [],
+  };
   // for each url: click
   // <page reload>
   // find parent
@@ -61,33 +69,33 @@ const dfsMajors = async (base: string, stack: MajorPath[]): Promise<AvailableMaj
   while (stack.length > 0) {
     const next = stack.pop()!;
     const url = getPath(base, next);
-    console.log(url);
     const $ = await loadHTML(url);
-    const id = ["undergraduate", next.college, ...next.path].join("/");
-    console.log(id)
-    const current = $("#/" + id);
-    console.log(current.text())
+    const id = ["", "undergraduate", next.college, ...next.path, ""].join(
+      "\\/"
+    );
+    const current = $("#" + id);
     const links = current.find("li > a").toArray();
     // console.log(links.map(l => $(l).text()));
     if (links.length > 0) {
       // get children
       // todo: add children to stack
-      const children =  links.map($).map(child => {
+      const children = links.map($).map((child) => {
         const path = child.attr("href");
         const parts = getParts(path);
         const idx = parts.indexOf(next.college);
         const keep = parts.slice(idx + 1);
-        return ({
+        console.log(keep);
+        return {
           college: next.college,
-          path: keep
-        })
-      })
+          path: keep,
+        };
+      });
       stack.push(...children);
     } else {
       // scrape
       // add to done listcon
       const path = getPath(base, next);
-      console.log(path);
+      console.log("adding:", path);
     }
   }
 
@@ -96,7 +104,7 @@ const dfsMajors = async (base: string, stack: MajorPath[]): Promise<AvailableMaj
 
 const isParent = (el: Cheerio) => {
   return el.hasClass("isparent");
-}
+};
 
 // const getChildren = (current: Cheerio) => {
 //
@@ -113,8 +121,8 @@ const getPath = (base: string, major: MajorPath) => {
   // todo: find a better way to append
   // return appendPath(base, relative);
   return `${base}/${relative}`;
-}
+};
 
 const getParts = (url: string) => {
-  return url.split("/").filter(s => s !== "");
-}
+  return url.split("/").filter((s) => s !== "");
+};

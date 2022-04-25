@@ -6,6 +6,7 @@ export const loadHTML = async (url: string): Promise<CheerioStatic> => {
     const { data } = await axios.get(url);
     return cheerio.load(data);
   } catch (error) {
+    console.log("request failed:", url);
     throw error;
   }
 };
