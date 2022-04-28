@@ -1,5 +1,5 @@
 export enum College {
-  ARTS_MEDIA_DESIGN = "arts-media-design",
+  ARTS_MEDIA_DESIGN = "undergraduate/arts-media-design/",
   BUSINESS = "business",
   KHOURY = "computer-information-science",
   ENGINEERING = "engineering",

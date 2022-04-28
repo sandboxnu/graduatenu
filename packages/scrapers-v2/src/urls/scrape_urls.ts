@@ -18,7 +18,7 @@ export const scrapeMajorLinks = async (start: number, end: number) => {
   }
 
   return scrapeMajorLinksForUrl(
-    "https://catalog.northeastern.edu/undergraduate"
+    "https://catalog.northeastern.edu/"
   );
 };
 
@@ -36,11 +36,52 @@ export const scrapeMajorLinksForUrl = async (
       college,
       path: [],
     }));
-    return dfsMajors(baseUrl, initStack);
+    return dfsMajorsV2(baseUrl, Object.values(College)[0]);
+    // return dfsMajors(baseUrl, initStack);
   } catch (e) {
     throw e;
   }
 };
+
+const dfsMajorsV2 = async (
+  baseUrl: string,
+  root: string
+): Promise<AvailableMajors> => {
+  const done: AvailableMajors = {
+    ARTS_MEDIA_DESIGN: [],
+    BUSINESS: [],
+    ENGINEERING: [],
+    HEALTH_SCIENCES: [],
+    KHOURY: [],
+    SCIENCE: [],
+    SOCIAL_SCIENCES_HUMANITIES: [],
+  };
+
+  const stack = [root];
+  while (stack.length > 0) {
+    const top = stack.pop()!;
+    const url = new URL(top, baseUrl);
+    const $ = await loadHTML(url.href);
+    const id = `${url.pathname}`.split("/").join("\\/");
+    const current = $(`#${id}`);
+    const links = current.children();
+
+    if (links.length > 0) {
+      links.each((_idx, element) => {
+        // console.log(isParent($(element)));
+        const child_link = getLinkForEl(baseUrl, $(element));
+        if (!isParent($(element))) {
+          console.log("found: ", child_link);
+        } else {
+          stack.push(child_link);
+        }
+      })
+    }
+
+  }
+
+  return done;
+}
 
 // stack: array<array<string>>
 // each item is a list of paths
@@ -106,16 +147,6 @@ const isParent = (el: Cheerio) => {
   return el.hasClass("isparent");
 };
 
-// const getChildren = (current: Cheerio) => {
-//
-//
-//   const links = parent.find("ul > li > a");
-//
-//   // if is parent:
-//
-//   const el = $(`#${id}`)
-// }
-
 const getPath = (base: string, major: MajorPath) => {
   const relative = [major.college, ...major.path].join("/");
   // todo: find a better way to append
@@ -126,3 +157,14 @@ const getPath = (base: string, major: MajorPath) => {
 const getParts = (url: string) => {
   return url.split("/").filter((s) => s !== "");
 };
+
+const getLinkForEl = (baseUrl: string, element: Cheerio): string => {
+  const aTag = element.find("a");
+  if (aTag.length === 0) {
+    const msg = "Catalog is missing a link for a parent node";
+    throw new Error(msg);
+  }
+
+  const child_link = new URL(aTag.attr("href"), baseUrl).href;
+  return child_link;
+}
