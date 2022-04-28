@@ -1,5 +1,5 @@
 import { appendPath, loadHTML } from "../utils";
-import { AvailableMajors, CatalogHierarchy, College, MajorPath } from "./types";
+import { CatalogHierarchy, College, CatalogPath } from "./types";
 
 export const scrapeMajorLinks = async (start: number, end: number) => {
   if (start !== end - 1) {
@@ -34,15 +34,14 @@ export const scrapeMajorLinks = async (start: number, end: number) => {
 export const scrapeMajorLinksForUrl = async (
   baseUrl: string,
   path: string
-): Promise<MajorPath[]> => {
+): Promise<CatalogHierarchy> => {
   const paths = getPathParts(path);
   try {
     const initStack = Object.values(College).map((college) => ({
       path: [...paths, college],
     }));
-    const majorPaths = await scrapeLinks(baseUrl, initStack);
-    return convertToHierarchy(baseUrl, majorPaths);
-    // return dfsMajors(baseUrl, initStack);
+    const catalogPaths = await scrapeLinks(baseUrl, initStack);
+    return convertToHierarchy(baseUrl, catalogPaths);
   } catch (e) {
     throw e;
   }
@@ -50,19 +49,19 @@ export const scrapeMajorLinksForUrl = async (
 
 const scrapeLinks = async (
   baseUrl: string,
-  initQueue: MajorPath[]
-): Promise<MajorPath[]> => {
-  const done: MajorPath[] = [];
+  initQueue: CatalogPath[]
+): Promise<CatalogPath[]> => {
+  const done: CatalogPath[] = [];
 
   // avoid minors?
   let queue = initQueue;
   while (queue.length > 0) {
     const pages = await Promise.all(getUrlHtmls(queue, baseUrl));
-    const nextQueue: MajorPath[] = [];
+    const nextQueue: CatalogPath[] = [];
     for (const { $, url } of pages) {
       const children = getChildrenForPathId($, url).toArray().map($);
       for (const element of children) {
-        const path = getLinkForEl(baseUrl, element);
+        const path = getLinkForEl(element);
         const bucket = isParent(element) ? nextQueue : done;
         bucket.push({ path });
       }
@@ -75,18 +74,18 @@ const scrapeLinks = async (
 
 const convertToHierarchy = (
   base: string,
-  majorPaths: MajorPath[]
-): AvailableMajors => {
-  const done: CatalogHierarchy = {};
-  const addPath = (path: string[]) => {
-    let obj: CatalogHierarchy = done;
+  catalogPaths: CatalogPath[]
+): CatalogHierarchy => {
+  const hierarchy: CatalogHierarchy = {};
+  const addPathToHierarchy = (path: string[]) => {
+    let obj: CatalogHierarchy = hierarchy;
     for (let i = 0; i < path.length - 1; i += 1) {
       const part = path[i];
       if (!(part in obj)) {
         obj[part] = {};
       }
       const child = obj[part];
-      if (Array.isArray(child)) {
+      if (typeof child === "string") {
         throw new Error(
           "Hierarchy was inconsistent: found a child, where a parent was expected"
         );
@@ -94,13 +93,12 @@ const convertToHierarchy = (
       obj = child;
     }
     const last = path[path.length - 1];
-    obj.push();
+    obj[last] = joinParts(base, path).toString();
   };
-  for (const { path } of majorPaths) {
-    // adds in path
-    addPath(done, path);
+  for (const { path } of catalogPaths) {
+    addPathToHierarchy(path);
   }
-  return [];
+  return hierarchy;
 };
 
 const isParent = (el: Cheerio) => {
@@ -111,7 +109,7 @@ const getPathParts = (url: string) => {
   return url.split("/").filter((s) => s !== "");
 };
 
-const getLinkForEl = (baseUrl: string, element: Cheerio): string[] => {
+const getLinkForEl = (element: Cheerio): string[] => {
   const aTag = element.find("a");
   if (aTag.length === 0) {
     const msg = "Catalog is missing a link for a parent node";
@@ -136,6 +134,6 @@ const joinParts = (base: string, parts: string[]) => {
   return appendPath(base, parts.join("/"));
 };
 
-const getUrlHtmls = (queue: MajorPath[], base: string) => {
+const getUrlHtmls = (queue: CatalogPath[], base: string) => {
   return queue.map(({ path }) => joinParts(base, path)).map(fetchUrlHtml);
 };

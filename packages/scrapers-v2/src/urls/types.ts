@@ -9,19 +9,13 @@ export enum College {
 }
 
 export type CatalogHierarchy = {
-  [part: string]: string[] | CatalogHierarchy;
+  [part: string]: string | CatalogHierarchy;
 };
 
-export type MajorPath = {
+export type CatalogPath = {
   // base: https://catalog.northeastern.edu/
   path: Array<string>;
   // ex: "undergraduate", "computer-information-science"
   // or, in the archive case:
   // ex: "archive", "2018-2019", "undergraduate", "computer-information-science"
 };
-
-/*
-undergraduate/arts-media-design/accelerated-bachelor-graduate-degree-programs
-undergraduate/business/business-administration-bsba
-undergraduate/business/international-business-bsib
- */
