@@ -1,5 +1,5 @@
 export enum College {
-  ARTS_MEDIA_DESIGN = "undergraduate/arts-media-design/",
+  ARTS_MEDIA_DESIGN = "arts-media-design",
   BUSINESS = "business",
   KHOURY = "computer-information-science",
   ENGINEERING = "engineering",
@@ -8,17 +8,20 @@ export enum College {
   SOCIAL_SCIENCES_HUMANITIES = "social-sciences-humanities",
 }
 
-type CollegeKeys = keyof typeof College;
-
-export type AvailableMajors = {
-  [key in CollegeKeys]: Array<string>;
+export type CatalogHierarchy = {
+  [part: string]: string[] | CatalogHierarchy;
 };
 
 export type MajorPath = {
-  // base: https://catalog.northeastern.edu/archive/2018-2019/undergraduate/
-  college: string;
-  // college: arts-media-design
+  // base: https://catalog.northeastern.edu/
   path: Array<string>;
-  // "architecture"
-  // "architecture", "architecture-bs"
-}
+  // ex: "undergraduate", "computer-information-science"
+  // or, in the archive case:
+  // ex: "archive", "2018-2019", "undergraduate", "computer-information-science"
+};
+
+/*
+undergraduate/arts-media-design/accelerated-bachelor-graduate-degree-programs
+undergraduate/business/business-administration-bsba
+undergraduate/business/international-business-bsib
+ */

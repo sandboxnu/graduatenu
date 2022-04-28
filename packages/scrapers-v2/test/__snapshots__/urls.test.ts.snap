@@ -1,13 +1,5260 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`url scraper scrape 1`] = `
-Object {
-  "ARTS_MEDIA_DESIGN": Array [],
-  "BUSINESS": Array [],
-  "ENGINEERING": Array [],
-  "HEALTH_SCIENCES": Array [],
-  "KHOURY": Array [],
-  "SCIENCE": Array [],
-  "SOCIAL_SCIENCES_HUMANITIES": Array [],
-}
+Array [
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "accelerated-bachelor-graduate-degree-programs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "business",
+      "business-administration-bsba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "business",
+      "international-business-bsib",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "business",
+      "accelerated-bachelor-graduate-degree-programs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "accelerated-bachelor-graduate-degree-programs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "engineering",
+      "first-year-engineering",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "engineering",
+      "accelerated-bachelor-graduate-degree-programs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "health-sciences",
+      "accelerated-bachelor-graduate-degree-programs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "accelerated-bachelor-graduate-degree-programs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "accelerated-bachelor-graduate-degree-programs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "architecture",
+      "architecture-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "architecture",
+      "architectural-studies-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "architecture",
+      "architectural-studies-design-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "architecture",
+      "architecture-english-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "engineering",
+      "civil-environmental",
+      "civil-engineering-architectural-studies-bsce",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "marine-environmental",
+      "environmental-sustainability-sciences-landscape-architecture-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "engineering",
+      "civil-environmental",
+      "environmental-engineering-landscape-architecture-bsenve",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "architecture",
+      "landscape-architecture-bla",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "architecture",
+      "architectural-history-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "architecture",
+      "architectural-design-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "architecture",
+      "architectural-science-systems-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "architecture",
+      "urban-landscape-studies-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "art-design",
+      "art-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "art-design",
+      "design-bfa",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "art-design",
+      "game-design-bfa",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "art-design",
+      "media-arts-bfa",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "art-design",
+      "studio-art-bfa",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "behavioral-neuroscience",
+      "behavioral-neuroscience-design-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "business",
+      "business-administration-combined-majors",
+      "design-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "computer-science-design-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "computer-science-game-development-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "computer-science-media-arts-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "communication-studies",
+      "communication-studies-graphic-information-design-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "english",
+      "english-graphic-information-design-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "art-design",
+      "game-art-animation-bfa",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "architecture",
+      "architectural-studies-design-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "art-design",
+      "game-design-music-concentration-music-technology-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "art-design",
+      "graphic-and-information-design-mathematics-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "journalism",
+      "journalism-interaction-design-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "communication-studies",
+      "media-screen-studies-media-art-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "art-design",
+      "media-arts-communication-studies-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "theatre",
+      "theatre-interaction-design-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "theatre",
+      "theatre-interaction-design-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "engineering",
+      "mechanical-industrial",
+      "mechanical-engineering-design-bsme",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "art-design",
+      "animation-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "art-design",
+      "art-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "art-design",
+      "art-history-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "art-design",
+      "creative-fabrication-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "art-design",
+      "experience-design-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "art-design",
+      "game-art-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "art-design",
+      "game-design-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "art-design",
+      "graphic-and-information-design-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "art-design",
+      "immersive-media-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "art-design",
+      "interaction-design-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "art-design",
+      "photography-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "journalism",
+      "photojournalism-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "art-design",
+      "video-arts-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "communication-studies",
+      "communication-studies-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "communication-studies",
+      "communication--media-studies-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "communication-studies",
+      "communication-studies-graphic-information-design-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "communication-studies",
+      "communication-studies-sociology-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "communication-studies",
+      "communication-studies-theatre-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "english",
+      "english-communication-studies-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "human-services",
+      "human-services-communications-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "linguistics",
+      "linguistics-communication-studies-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "art-design",
+      "media-arts-communication-studies-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "communication-studies",
+      "media-screen-studies-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "communication-studies",
+      "media-screen-studies-english-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "communication-studies",
+      "media-screen-studies-history-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "communication-studies",
+      "media-screen-studies-journalism-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "communication-studies",
+      "media-screen-studies-media-art-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "communication-studies",
+      "media-screen-studies-philosophy-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "communication-studies",
+      "media-screen-studies-political-science-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "communication-studies",
+      "media-screen-studies-sociology-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "communication-studies",
+      "media-screen-studies-theatre-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "political-science",
+      "political-science-communication-studies-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "business",
+      "business-administration-combined-majors",
+      "business-administration-communication-studies-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "computer-science-communication-studies-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "communication-studies",
+      "communication-studies-speech-language-pathology-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "health-sciences",
+      "community-health-behavioral-sciences",
+      "health-science-communication-studies-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "communication-studies",
+      "media-screen-studies-theatre-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "music",
+      "music-communication-studies-concentration-industry",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "political-science",
+      "political-science-communication-studies-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "communication-studies",
+      "argumentation-law-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "communication-studies",
+      "cinema-studies-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "communication-studies",
+      "communication-studies-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "communication-studies",
+      "digital-communications-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "communication-studies",
+      "film-production-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "communication-studies",
+      "human-communication-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "communication-studies",
+      "improvisation-storytelling-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "communication-studies",
+      "media-screen-studies-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "communication-studies",
+      "media-production-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "communication-studies",
+      "oratory-public-speaking-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "communication-studies",
+      "political-communication-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "communication-studies",
+      "rhetoric-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "communication-studies",
+      "social-activism-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "communication-studies",
+      "sports-media-communication-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "journalism",
+      "journalism-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "journalism",
+      "journalism-english-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "journalism",
+      "journalism-political-science-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "communication-studies",
+      "media-screen-studies-journalism-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "computer-science-journalism-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "criminology-criminal-justice",
+      "criminal-justice-journalism-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "data-science-journalism-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "journalism",
+      "journalism-interaction-design-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "journalism",
+      "journalism-practice-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "journalism",
+      "journalism-studies-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "journalism",
+      "photojournalism-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "journalism",
+      "public-relations-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "communication-studies",
+      "sports-media-communication-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "music",
+      "music-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "music",
+      "music-concentration-industry-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "music",
+      "music-concentration-music-technology-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "computer-science-concentration-music-composition-technology-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "engineering",
+      "electrical-computer",
+      "electrical-engineering-music-concentration-music-technology-bsee",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "art-design",
+      "game-design-music-concentration-music-technology-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "music",
+      "music-communication-studies-concentration-industry",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "physics",
+      "physics-music-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "psychology",
+      "psychology-music-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "music",
+      "ethnomusicology-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "music",
+      "music-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "music",
+      "music-composition-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "music",
+      "music-industry-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "music",
+      "music-performance-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "music",
+      "music-recording-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "music",
+      "music-technology-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "theatre",
+      "musical-theatre-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "theatre",
+      "performing-arts-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "music",
+      "songwriting-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "theatre",
+      "theatre-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "theatre",
+      "theatre-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "cultures-societies-global-studies",
+      "american-sign-language-theatre-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "communication-studies",
+      "communication-studies-theatre-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "computer-science-theatre-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "sociology-anthropology",
+      "cultural-anthropology-theatre-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "english",
+      "english-theatre-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "communication-studies",
+      "media-screen-studies-theatre-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "communication-studies",
+      "media-screen-studies-theatre-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "theatre",
+      "theatre-interaction-design-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "theatre",
+      "theatre-interaction-design-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "theatre",
+      "global-fashion-studies-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "communication-studies",
+      "improvisation-storytelling-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "theatre",
+      "musical-theatre-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "theatre",
+      "performing-arts-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "theatre",
+      "playwriting-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "theatre",
+      "theatre-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "theatre",
+      "theatre-performance-social-change-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "theatre",
+      "theatrical-design-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "interdisciplinary",
+      "creativity-theory-practice-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "business",
+      "business-administration-combined-majors",
+      "business-administration-communication-studies-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "business",
+      "business-administration-combined-majors",
+      "design-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "business",
+      "business-administration-combined-majors",
+      "business-administration-psychology-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "computer-science-business-administration-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-science",
+      "cybersecurity-business-administration-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "data-science-business-administration-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "economics",
+      "economics-business-administration-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "health-sciences",
+      "community-health-behavioral-sciences",
+      "health-science-business-administration-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "international-affairs",
+      "international-affairs-international-business-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "mathematics",
+      "mathematics-business-administration-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "political-science",
+      "political-science-business-administration-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "business",
+      "concentrations",
+      "accounting",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "business",
+      "concentrations",
+      "brand-management",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "business",
+      "concentrations",
+      "business-analytics",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "business",
+      "concentrations",
+      "corporate-innovation-venture",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "business",
+      "concentrations",
+      "entrepreneurial-startups",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "business",
+      "concentrations",
+      "family-business",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "business",
+      "concentrations",
+      "finance",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "business",
+      "concentrations",
+      "fintech",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "business",
+      "concentrations",
+      "global-business-strategy",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "business",
+      "concentrations",
+      "healthcare-management-consulting",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "business",
+      "concentrations",
+      "international-business",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "business",
+      "concentrations",
+      "management",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "business",
+      "concentrations",
+      "management-information-systems",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "business",
+      "concentrations",
+      "marketing",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "business",
+      "concentrations",
+      "marketing-analytics",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "business",
+      "concentrations",
+      "social-innovation-entrepreneurship",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "business",
+      "concentrations",
+      "supply-chain-management",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "business",
+      "interdisciplinary-minors",
+      "accounting-advisory-services-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "business",
+      "interdisciplinary-minors",
+      "brand-management-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "business",
+      "interdisciplinary-minors",
+      "business-administration-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "business",
+      "interdisciplinary-minors",
+      "business-analytics-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "business",
+      "interdisciplinary-minors",
+      "consulting-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "business",
+      "interdisciplinary-minors",
+      "corporate-innovation-venture-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "business",
+      "interdisciplinary-minors",
+      "emerging-markets-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "business",
+      "interdisciplinary-minors",
+      "entrepreneurial-startups-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "business",
+      "interdisciplinary-minors",
+      "family-business-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "business",
+      "interdisciplinary-minors",
+      "leadership-human-capital-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "business",
+      "interdisciplinary-minors",
+      "management-information-systems-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "business",
+      "interdisciplinary-minors",
+      "marketing-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "business",
+      "interdisciplinary-minors",
+      "marketing-analytics-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "business",
+      "interdisciplinary-minors",
+      "social-innovation-entrepreneurship-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "business",
+      "interdisciplinary-minors",
+      "strategy-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "business",
+      "interdisciplinary-minors",
+      "supply-chain-management-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "business",
+      "interdisciplinary-minors",
+      "sustainable-business-practices-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-science",
+      "bscs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-science",
+      "bacs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-science",
+      "minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "cybersecurity",
+      "cybersecurity-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "data-science",
+      "data-science-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "data-science",
+      "data-science-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "engineering",
+      "chemical",
+      "chemical-engineering-computer-science-bsche",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "engineering",
+      "civil-environmental",
+      "civil-engineering-computer-science-bsce",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "engineering",
+      "electrical-computer",
+      "computer-engineering-computer-science-bscompe",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "computer-science-behavioral-neuroscience-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "computer-science-biology-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "computer-science-business-administration-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "computer-science-cognitive-psychology-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "computer-science-communication-studies-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "computer-science-criminal-justice-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "computer-science-design-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "economics-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "computer-science-english-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "computer-science-environmental-sustainability-sciences-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "computer-science-game-development-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "computer-science-history-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "computer-science-journalism-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "computer-science-linguistics-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "computer-science-mathematics-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "computer-science-media-arts-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "computer-science-concentration-music-composition-technology-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "computer-science-philosophy-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "computer-science-physics-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "computer-science-political-science-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "computer-science-sociology-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "computer-science-theatre-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-science",
+      "cybersecurity-business-administration-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-science",
+      "cybersecurity-criminal-justice-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "cybersecurity-economics-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "data-science-biochemistry-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "data-science-biology-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "data-science-behavioral-neuroscience-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "data-science-business-administration-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "data-science-chemistry-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "data-science-ecology-evolutionary-biology-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "data-science-economics-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "data-science-environmental-sustainability-sciences-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "data-science-health-science-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "data-science-journalism-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "data-science-linguistics-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "data-science-mathematics-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "data-science-physics-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "data-science-psychology-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "engineering",
+      "interdisciplinary-minors",
+      "entrepreneurial-engineering-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "engineering",
+      "interdisciplinary-minors",
+      "design-inovation-engineering-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "engineering",
+      "interdisciplinary-minors",
+      "materials-science-and-engineering-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "engineering",
+      "interdisciplinary-minors",
+      "sustainable-energy-systems-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "engineering",
+      "bioengineering",
+      "bioengineering-bsbioe",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "engineering",
+      "bioengineering",
+      "bioengineering-biochemistry-bsbioe",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "engineering",
+      "chemical",
+      "chemical-engineering-bioengineering-bsche",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "engineering",
+      "chemical",
+      "chemical-engineering-bsche",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "engineering",
+      "chemical",
+      "chemical-engineering-biochemistry-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "engineering",
+      "chemical",
+      "chemical-engineering-bioengineering-bsche",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "engineering",
+      "chemical",
+      "chemical-engineering-computer-science-bsche",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "engineering",
+      "chemical",
+      "chemical-engineering-environmental-engineering-bsche",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "engineering",
+      "chemical",
+      "chemical-engineering-physics-bsche",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "engineering",
+      "chemical",
+      "biochemical-engineering-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "engineering",
+      "civil-environmental",
+      "civil-engineering-bsce",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "engineering",
+      "civil-environmental",
+      "civil-engineering-architectural-studies-bsce",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "engineering",
+      "civil-environmental",
+      "civil-engineering-computer-science-bsce",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "engineering",
+      "chemical",
+      "chemical-engineering-environmental-engineering-bsche",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "engineering",
+      "civil-environmental",
+      "environmental-engineering-bsenve",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "engineering",
+      "civil-environmental",
+      "environmental-engineering-health-sciences-bsenve",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "engineering",
+      "civil-environmental",
+      "environmental-engineering-landscape-architecture-bsenve",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "engineering",
+      "civil-environmental",
+      "architectural-engineering-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "engineering",
+      "civil-environmental",
+      "civil-engineering-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "chemistry-chemical-biology",
+      "environmental-chemistry-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "engineering",
+      "electrical-computer",
+      "computer-engineering-bscompe",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "engineering",
+      "electrical-computer",
+      "computer-engineering-physics-bscompe",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "engineering",
+      "electrical-computer",
+      "computer-engineering-computer-science-bscompe",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "engineering",
+      "electrical-computer",
+      "electrical-engineering-bsee",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "engineering",
+      "electrical-computer",
+      "electrical-engineering-physics-bsee",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "engineering",
+      "electrical-computer",
+      "electrical-engineering-music-concentration-music-technology-bsee",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "engineering",
+      "electrical-computer",
+      "electrical-computer-engineering-bsee-bscompe",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "engineering",
+      "electrical-computer",
+      "biomedical-engineering-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "engineering",
+      "electrical-computer",
+      "computer-engineering-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "engineering",
+      "electrical-computer",
+      "computational-data-analytics-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "engineering",
+      "electrical-computer",
+      "electrical-engineering-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "engineering",
+      "electrical-computer",
+      "robotics-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "engineering",
+      "mechanical-industrial",
+      "bsie",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "engineering",
+      "mechanical-industrial",
+      "bsme",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "engineering",
+      "mechanical-industrial",
+      "mechanical-engineering-design-bsme",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "engineering",
+      "mechanical-industrial",
+      "mechanical-engineering-history-bsme",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "engineering",
+      "mechanical-industrial",
+      "mechanical-engineering-physics-bsme",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "engineering",
+      "mechanical-industrial",
+      "aerospace-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "engineering",
+      "mechanical-industrial",
+      "biomechanical-engineering-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "engineering",
+      "mechanical-industrial",
+      "healthcare-system-operations-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "engineering",
+      "mechanical-industrial",
+      "industrial-engineering-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "engineering",
+      "mechanical-industrial",
+      "mechanical-engineering-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "engineering",
+      "electrical-computer",
+      "robotics-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "interdisciplinary",
+      "health-humanities-society-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "engineering",
+      "mechanical-industrial",
+      "healthcare-system-operations-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "communication-studies",
+      "communication-studies-speech-language-pathology-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "data-science-health-science-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "engineering",
+      "civil-environmental",
+      "environmental-engineering-health-sciences-bsenve",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "health-sciences",
+      "community-health-behavioral-sciences",
+      "health-science-business-administration-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "health-sciences",
+      "community-health-behavioral-sciences",
+      "health-science-communication-studies-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "health-sciences",
+      "community-health-behavioral-sciences",
+      "health-science-psychology-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "health-sciences",
+      "community-health-behavioral-sciences",
+      "health-science-sociology-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "linguistics",
+      "linguistics-speech-language-pathology-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "health-sciences",
+      "clinical-rehabilitation-sciences",
+      "speech-language-pathology-audiology-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "communication-studies",
+      "communication-studies-speech-language-pathology-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "linguistics",
+      "linguistics-speech-language-pathology-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "health-sciences",
+      "clinical-rehabilitation-sciences",
+      "communication-sciences-disorders-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "health-sciences",
+      "clinical-rehabilitation-sciences",
+      "early-intervention-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "health-sciences",
+      "clinical-rehabilitation-sciences",
+      "speech-language-pathology-audiology-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "health-sciences",
+      "clinical-rehabilitation-sciences",
+      "human-movement-science-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "health-sciences",
+      "community-health-behavioral-sciences",
+      "public-health-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "health-sciences",
+      "community-health-behavioral-sciences",
+      "health-science-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "data-science-health-science-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "engineering",
+      "civil-environmental",
+      "environmental-engineering-health-sciences-bsenve",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "health-sciences",
+      "community-health-behavioral-sciences",
+      "health-science-business-administration-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "health-sciences",
+      "community-health-behavioral-sciences",
+      "health-science-communication-studies-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "health-sciences",
+      "community-health-behavioral-sciences",
+      "health-science-psychology-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "health-sciences",
+      "community-health-behavioral-sciences",
+      "health-science-sociology-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "health-sciences",
+      "community-health-behavioral-sciences",
+      "exercise-science-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "health-sciences",
+      "community-health-behavioral-sciences",
+      "global-health-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "health-sciences",
+      "community-health-behavioral-sciences",
+      "health-psychology-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "health-sciences",
+      "community-health-behavioral-sciences",
+      "health-research-methods",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "interdisciplinary",
+      "health-humanities-society-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "engineering",
+      "mechanical-industrial",
+      "healthcare-system-operations-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "health-sciences",
+      "community-health-behavioral-sciences",
+      "mindfulness-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "health-sciences",
+      "community-health-behavioral-sciences",
+      "nutrition-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "health-sciences",
+      "community-health-behavioral-sciences",
+      "public-health-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "health-sciences",
+      "nursing",
+      "bsn",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "health-sciences",
+      "nursing",
+      "accelerated-second-degree-students-bsn",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "health-sciences",
+      "nursing",
+      "wellness-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "health-sciences",
+      "pharmacy",
+      "pharmacy-pharmd",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "health-sciences",
+      "pharmacy",
+      "pharmacy-studies-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "health-sciences",
+      "pharmacy",
+      "pharmaceutical-sciences-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "health-sciences",
+      "pharmacy",
+      "health-sciences-entrepreneurship-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "health-sciences",
+      "pharmacy",
+      "pharmaceutical-sciences-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "behavioral-neuroscience",
+      "behavioral-neuroscience-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "behavioral-neuroscience",
+      "behavioral-neuroscience-design-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "behavioral-neuroscience",
+      "behavioral-neuroscience-philosophy-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "computer-science-behavioral-neuroscience-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "data-science-behavioral-neuroscience-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "behavioral-neuroscience",
+      "behavioral-neuroscience-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "biochemistry",
+      "biochemistry-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "engineering",
+      "bioengineering",
+      "bioengineering-biochemistry-bsbioe",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "engineering",
+      "chemical",
+      "chemical-engineering-biochemistry-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "data-science-biochemistry-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "biochemistry",
+      "biochemistry-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "biology",
+      "biology-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "biology",
+      "cell-molecular-biology-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "biology",
+      "biology-english-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "biology",
+      "biology-mathematics-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "biology",
+      "biology-political-science-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "computer-science-biology-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "data-science-biology-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "biology",
+      "cell-molecular-biology-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "biology",
+      "biology-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "chemistry-chemical-biology",
+      "chemistry-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "data-science-chemistry-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "marine-environmental",
+      "environmental-sustainability-sciences-chemistry-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "chemistry-chemical-biology",
+      "chemistry-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "chemistry-chemical-biology",
+      "environmental-chemistry-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "linguistics",
+      "linguistics-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "cultures-societies-global-studies",
+      "american-sign-language-linguistics-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "computer-science-linguistics-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "data-science-linguistics-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "linguistics",
+      "linguistics-cultural-anthropology-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "linguistics",
+      "linguistics-psychology-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "linguistics",
+      "linguistics-speech-language-pathology-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "linguistics",
+      "linguistics-communication-studies-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "linguistics",
+      "linguistics-english-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "linguistics",
+      "linguistics-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "marine-environmental",
+      "ecology-evolutionary-biology-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "marine-environmental",
+      "environmental-sustainability-sciences-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "marine-environmental",
+      "environmental-studies-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "marine-environmental",
+      "marine-biology-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "computer-science-environmental-sustainability-sciences-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "data-science-ecology-evolutionary-biology-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "data-science-environmental-sustainability-sciences-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "marine-environmental",
+      "environmental-sustainability-sciences-chemistry-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "marine-environmental",
+      "environmental-sustainability-sciences-economics-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "marine-environmental",
+      "environmental-sustainability-sciences-landscape-architecture-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "marine-environmental",
+      "environmental-studies-history-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "marine-environmental",
+      "environmental-studies-international-affairs-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "marine-environmental",
+      "environmental-studies-philosophy-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "marine-environmental",
+      "environmental-studies-political-science-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "sociology-anthropology",
+      "sociology-environmental-studies-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "marine-environmental",
+      "ecology-evolutionary-biology-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "marine-environmental",
+      "environmental-sustainability-sciences-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "marine-environmental",
+      "environmental-studies-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "marine-environmental",
+      "geosciences-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "marine-environmental",
+      "marine-sciences-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "mathematics",
+      "mathematics-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "mathematics",
+      "mathematics-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "biology",
+      "biology-mathematics-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "computer-science-mathematics-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "data-science-mathematics-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "economics",
+      "economics-mathematics-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "art-design",
+      "graphic-and-information-design-mathematics-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "mathematics",
+      "mathematics-business-administration-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "mathematics",
+      "mathematics-cultural-anthropology-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "mathematics",
+      "mathematics-physics-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "mathematics",
+      "mathematics-political-science-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "mathematics",
+      "mathematics-psychology-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "mathematics",
+      "mathematics-sociology-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "mathematics",
+      "mathematics-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "physics",
+      "physics-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "physics",
+      "applied-physics-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "physics",
+      "biomedical-physics-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "mathematics",
+      "mathematics-physics-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "computer-science-physics-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "data-science-physics-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "physics",
+      "physics-music-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "physics",
+      "physics-philosophy-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "engineering",
+      "chemical",
+      "chemical-engineering-physics-bsche",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "engineering",
+      "electrical-computer",
+      "computer-engineering-physics-bscompe",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "engineering",
+      "electrical-computer",
+      "electrical-engineering-physics-bsee",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "engineering",
+      "mechanical-industrial",
+      "mechanical-engineering-physics-bsme",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "physics",
+      "physics-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "psychology",
+      "psychology-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "cultures-societies-global-studies",
+      "american-sign-language-psychology-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "business",
+      "business-administration-combined-majors",
+      "business-administration-psychology-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "computer-science-cognitive-psychology-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "criminology-criminal-justice",
+      "criminal-justice-psychology-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "data-science-psychology-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "economics",
+      "economics-psychology-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "health-sciences",
+      "community-health-behavioral-sciences",
+      "health-science-psychology-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "linguistics",
+      "linguistics-psychology-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "mathematics",
+      "mathematics-psychology-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "psychology",
+      "psychology-music-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "psychology",
+      "psychology-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "chemistry-chemical-biology",
+      "environmental-chemistry-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "interdisciplinary",
+      "scientific-commercialization-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "cultures-societies-global-studies",
+      "africana-studies-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "cultures-societies-global-studies",
+      "africana-studies-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "cultures-societies-global-studies",
+      "africana-studies-political-science-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "cultures-societies-global-studies",
+      "history-culture-law-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "interdisciplinary",
+      "politics-philosophy-economics-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "philosophy-religion",
+      "religious-studies-africana-studies-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "cultures-societies-global-studies",
+      "african-american-studies-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "cultures-societies-global-studies",
+      "african-studies-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "cultures-societies-global-studies",
+      "africana-studies-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "cultures-societies-global-studies",
+      "black-feminist-studies-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "interdisciplinary",
+      "computational-social-sciences-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "interdisciplinary",
+      "digital-methods-in-the-humanities-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "interdisciplinary",
+      "food-systems-sustainability-health-equity-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "health-sciences",
+      "community-health-behavioral-sciences",
+      "global-health-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "interdisciplinary",
+      "health-humanities-society-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "interdisciplinary",
+      "latino-latina-latin-american-caribbean-studies-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "interdisciplinary",
+      "law-public-policy-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "interdisciplinary",
+      "urban-studies-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "interdisciplinary",
+      "womens-gender-sexuality-studies-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "asian-studies",
+      "asian-studies-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "history",
+      "history-asian-studies-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "asian-studies",
+      "east-asian-studies-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "english",
+      "english-criminal-justice-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "history",
+      "history-criminal-justice-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "international-affairs",
+      "international-affairs-criminal-justice-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "criminology-criminal-justice",
+      "criminal-justice-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "computer-science-criminal-justice-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "criminology-criminal-justice",
+      "criminal-justice-journalism-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "criminology-criminal-justice",
+      "criminal-justice-philosophy-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "criminology-criminal-justice",
+      "criminal-justice-political-science-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "criminology-criminal-justice",
+      "criminal-justice-psychology-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "criminology-criminal-justice",
+      "criminal-justice-sociology-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-science",
+      "cybersecurity-criminal-justice-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "human-services",
+      "human-services-criminal-justice-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "criminology-criminal-justice",
+      "criminal-justice-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "cultures-societies-global-studies",
+      "africana-studies-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "cultures-societies-global-studies",
+      "africana-studies-political-science-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "cultures-societies-global-studies",
+      "history-culture-law-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "philosophy-religion",
+      "religious-studies-africana-studies-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "cultures-societies-global-studies",
+      "spanish-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "cultures-societies-global-studies",
+      "spanish-international-affairs-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "cultures-societies-global-studies",
+      "africana-studies-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "cultures-societies-global-studies",
+      "american-sign-language-english-interpreting-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "cultures-societies-global-studies",
+      "american-sign-language-human-services-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "cultures-societies-global-studies",
+      "american-sign-language-linguistics-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "cultures-societies-global-studies",
+      "american-sign-language-psychology-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "cultures-societies-global-studies",
+      "american-sign-language-theatre-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "cultures-societies-global-studies",
+      "african-american-studies-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "cultures-societies-global-studies",
+      "african-studies-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "cultures-societies-global-studies",
+      "africana-studies-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "cultures-societies-global-studies",
+      "american-sign-language-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "cultures-societies-global-studies",
+      "arabic-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "cultures-societies-global-studies",
+      "black-feminist-studies-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "cultures-societies-global-studies",
+      "chinese-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "cultures-societies-global-studies",
+      "film-and-international-culture-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "cultures-societies-global-studies",
+      "german-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "cultures-societies-global-studies",
+      "italian-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "cultures-societies-global-studies",
+      "japanese-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "cultures-societies-global-studies",
+      "french-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "cultures-societies-global-studies",
+      "portuguese-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "cultures-societies-global-studies",
+      "russian-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "cultures-societies-global-studies",
+      "spanish-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "economics",
+      "economics-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "history",
+      "history-economics-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "international-affairs",
+      "economics-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "political-science",
+      "political-science-economics-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "economics",
+      "economics-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "economics-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "cybersecurity-economics-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "data-science-economics-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "economics",
+      "economics-business-administration-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "economics",
+      "economics-human-services-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "economics",
+      "economics-mathematics-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "economics",
+      "economics-philosophy-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "economics",
+      "economics-psychology-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "marine-environmental",
+      "environmental-sustainability-sciences-economics-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "history",
+      "history-economics-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "political-science",
+      "political-science-economics-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "interdisciplinary",
+      "politics-philosophy-economics-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "economics",
+      "economics-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "english",
+      "english-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "computer-science-english-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "english",
+      "english-communication-studies-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "english",
+      "english-criminal-justice-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "english",
+      "english-cultural-anthropology-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "english",
+      "english-graphic-information-design-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "english",
+      "english-philosophy-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "english",
+      "english-political-science-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "english",
+      "english-theatre-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "history",
+      "history-english-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "journalism",
+      "journalism-english-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "linguistics",
+      "linguistics-english-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "communication-studies",
+      "media-screen-studies-english-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "architecture",
+      "architecture-english-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "biology",
+      "biology-english-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "english",
+      "english-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "communication-studies",
+      "rhetoric-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "english",
+      "writing-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "history",
+      "history-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "marine-environmental",
+      "environmental-studies-history-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "history",
+      "history-asian-studies-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "history",
+      "history-criminal-justice-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "history",
+      "history-cultural-anthropology-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "history",
+      "history-economics-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "history",
+      "history-english-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "history",
+      "history-philosophy-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "history",
+      "history-political-science-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "history",
+      "history-religious-studies-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "international-affairs",
+      "international-affairs-history-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "communication-studies",
+      "media-screen-studies-history-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "history",
+      "history-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "computer-science-history-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "history",
+      "history-economics-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "engineering",
+      "mechanical-industrial",
+      "mechanical-engineering-history-bsme",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "history",
+      "history-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "human-services",
+      "human-services-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "human-services",
+      "human-services-international-affairs-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "political-science",
+      "political-science-human-services-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "human-services",
+      "human-services-sociology-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "human-services",
+      "human-services-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "cultures-societies-global-studies",
+      "american-sign-language-human-services-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "economics",
+      "economics-human-services-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "human-services",
+      "human-services-communications-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "human-services",
+      "human-services-criminal-justice-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "human-services",
+      "human-services-sociology-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "political-science",
+      "political-science-human-services-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "human-services",
+      "human-services-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "international-affairs",
+      "international-affairs-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "international-affairs",
+      "african-studies-concentration-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "international-affairs",
+      "asian-studies-concentration-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "international-affairs",
+      "european-studies-concentration-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "international-affairs",
+      "latin-american-studies-concentration-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "international-affairs",
+      "middle-east-studies-concentration-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "marine-environmental",
+      "environmental-studies-international-affairs-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "human-services",
+      "human-services-international-affairs-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "international-affairs",
+      "international-affairs-criminal-justice-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "international-affairs",
+      "cultural-anthropology-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "international-affairs",
+      "economics-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "international-affairs",
+      "international-affairs-history-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "international-affairs",
+      "international-affairs-international-business-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "international-affairs",
+      "religious-studies-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "political-science",
+      "political-science-international-affairs-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "sociology-anthropology",
+      "sociology-international-affairs-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "cultures-societies-global-studies",
+      "spanish-international-affairs-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "international-affairs",
+      "international-affairs-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "international-affairs",
+      "middle-east-studies-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "jewish-studies",
+      "jewish-studies-religion-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "jewish-studies",
+      "jewish-studies-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "philosophy-religion",
+      "philosophy--ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "philosophy-religion",
+      "religious-studies-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "sociology-anthropology",
+      "cultural-anthropology-philosophy-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "sociology-anthropology",
+      "cultural-anthropology-religious-studies-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "english",
+      "english-philosophy-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "marine-environmental",
+      "environmental-studies-philosophy-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "history",
+      "history-philosophy-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "history",
+      "history-religious-studies-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "international-affairs",
+      "religious-studies-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "jewish-studies",
+      "jewish-studies-religion-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "communication-studies",
+      "media-screen-studies-philosophy-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "political-science",
+      "political-science-philosophy-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "philosophy-religion",
+      "religious-studies-africana-studies-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "sociology-anthropology",
+      "sociology-philosophy-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "sociology-anthropology",
+      "sociology-religious-studies-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "philosophy-religion",
+      "philosophy-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "behavioral-neuroscience",
+      "behavioral-neuroscience-philosophy-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "computer-science-philosophy-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "criminology-criminal-justice",
+      "criminal-justice-philosophy-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "economics",
+      "economics-philosophy-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "physics",
+      "physics-philosophy-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "political-science",
+      "political-science-philosophy-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "interdisciplinary",
+      "politics-philosophy-economics-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "philosophy-religion",
+      "information-ethics-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "philosophy-religion",
+      "philosophy-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "philosophy-religion",
+      "religious-studies-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "philosophy-religion",
+      "ethics-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "political-science",
+      "political-science-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "cultures-societies-global-studies",
+      "africana-studies-political-science-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "english",
+      "english-political-science-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "marine-environmental",
+      "environmental-studies-political-science-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "history",
+      "history-political-science-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "journalism",
+      "journalism-political-science-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "political-science",
+      "political-science-communication-studies-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "communication-studies",
+      "media-screen-studies-political-science-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "political-science",
+      "political-science-economics-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "political-science",
+      "political-science-human-services-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "political-science",
+      "political-science-international-affairs-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "political-science",
+      "political-science-philosophy-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "sociology-anthropology",
+      "sociology-political-science-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "political-science",
+      "political-science-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "biology",
+      "biology-political-science-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "computer-science-political-science-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "criminology-criminal-justice",
+      "criminal-justice-political-science-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "mathematics",
+      "mathematics-political-science-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "political-science",
+      "political-science-business-administration-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "political-science",
+      "political-science-communication-studies-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "political-science",
+      "political-science-economics-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "political-science",
+      "political-science-human-services-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "political-science",
+      "political-science-philosophy-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "political-science",
+      "political-science-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "political-science",
+      "american-political-institutions-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "political-science",
+      "international-security-studies-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "sociology-anthropology",
+      "sociology-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "sociology-anthropology",
+      "cultural-anthropology-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "communication-studies",
+      "communication-studies-sociology-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "sociology-anthropology",
+      "cultural-anthropology-philosophy-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "sociology-anthropology",
+      "cultural-anthropology-religious-studies-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "sociology-anthropology",
+      "cultural-anthropology-theatre-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "english",
+      "english-cultural-anthropology-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "history",
+      "history-cultural-anthropology-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "human-services",
+      "human-services-sociology-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "international-affairs",
+      "cultural-anthropology-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "arts-media-design",
+      "communication-studies",
+      "media-screen-studies-sociology-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "sociology-anthropology",
+      "sociology-cultural-anthropology-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "sociology-anthropology",
+      "sociology-environmental-studies-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "sociology-anthropology",
+      "sociology-international-affairs-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "sociology-anthropology",
+      "sociology-philosophy-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "sociology-anthropology",
+      "sociology-political-science-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "sociology-anthropology",
+      "sociology-religious-studies-ba",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "sociology-anthropology",
+      "sociology-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "sociology-anthropology",
+      "cultural-anthropology-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "computer-information-science",
+      "computer-information-science-combined-majors",
+      "computer-science-sociology-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "criminology-criminal-justice",
+      "criminal-justice-sociology-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "health-sciences",
+      "community-health-behavioral-sciences",
+      "health-science-sociology-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "human-services",
+      "human-services-sociology-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "linguistics",
+      "linguistics-cultural-anthropology-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "mathematics",
+      "mathematics-cultural-anthropology-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "science",
+      "mathematics",
+      "mathematics-sociology-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "sociology-anthropology",
+      "sociology-cultural-anthropology-bs",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "sociology-anthropology",
+      "cultural-anthropology-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "sociology-anthropology",
+      "science-technology-studies-minor",
+    ],
+  },
+  Object {
+    "path": Array [
+      "undergraduate",
+      "social-sciences-humanities",
+      "sociology-anthropology",
+      "sociology-minor",
+    ],
+  },
+]
 `;

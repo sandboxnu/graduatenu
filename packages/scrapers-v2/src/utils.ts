@@ -16,5 +16,5 @@ export const appendPath = (base: string, path: string, hash?: string) => {
   if (hash) {
     url.hash = hash;
   }
-  return url.toString();
+  return url;
 };

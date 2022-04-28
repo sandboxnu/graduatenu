@@ -117,7 +117,7 @@ const constructNestedLinks = ($: CheerioStatic, element: CheerioElement) => {
     .find("li > a")
     .toArray()
     .map((link) => $(link).attr("href"))
-    .map((path) => appendPath(base, path, concentrationsTag));
+    .map((path) => appendPath(base, path, concentrationsTag).toString());
 };
 
 const transformCourseListTable = (
