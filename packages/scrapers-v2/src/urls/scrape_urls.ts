@@ -1,6 +1,13 @@
 import { appendPath, loadHTML } from "../utils";
 import { CatalogHierarchy, College, CatalogPath } from "./types";
 
+/**
+ * Scrapes all catalog entries underneath the colleges.
+ * 
+ * @param start starting year (must be end year - 1)
+ * @param end   ending year
+ * @returns     a hierarchy of catalog entry links
+ */
 export const scrapeMajorLinks = async (start: number, end: number) => {
   if (start !== end - 1) {
     throw new Error("start should == end-1");
@@ -47,13 +54,20 @@ export const scrapeMajorLinksForUrl = async (
   }
 };
 
+/**
+ *
+ * Retrieves all sub-entries of the given initial queue in BFS fashion using the catalog sidebar hierarchy.
+ *  
+ * @param baseUrl   the base catalog URL, i.e. https://catalog.northeastern.edu
+ * @param initQueue a queue of parent entries
+ * @returns         a flat list of all the last level children catalog entries
+ */
 const scrapeLinks = async (
   baseUrl: string,
   initQueue: CatalogPath[]
 ): Promise<CatalogPath[]> => {
-  const done: CatalogPath[] = [];
+  const results: CatalogPath[] = [];
 
-  // avoid minors?
   let queue = initQueue;
   while (queue.length > 0) {
     const pages = await Promise.all(getUrlHtmls(queue, baseUrl));
@@ -62,23 +76,32 @@ const scrapeLinks = async (
       const children = getChildrenForPathId($, url).toArray().map($);
       for (const element of children) {
         const path = getLinkForEl(element);
-        const bucket = isParent(element) ? nextQueue : done;
+        const bucket = isParent(element) ? nextQueue : results;
         bucket.push({ path });
       }
     }
     queue = nextQueue;
   }
 
-  return done;
+  return results;
 };
 
+/**
+ * Converts a flat list of entries to catalog hierarchy.
+ * 
+ * @param base         the base catalog URL, i.e. https://catalog.northeastern.edu
+ * @param catalogPaths a flat list of paths
+ * @returns            catalog hierarchy
+ */
 const convertToHierarchy = (
   base: string,
   catalogPaths: CatalogPath[]
 ): CatalogHierarchy => {
   const hierarchy: CatalogHierarchy = {};
-  const addPathToHierarchy = (path: string[]) => {
+  for (const { path } of catalogPaths) {
     let obj: CatalogHierarchy = hierarchy;
+
+    // For each part of the path, add it to the hierarchy
     for (let i = 0; i < path.length - 1; i += 1) {
       const part = path[i];
       if (!(part in obj)) {
@@ -92,11 +115,10 @@ const convertToHierarchy = (
       }
       obj = child;
     }
+
     const last = path[path.length - 1];
+    // Obj should equal the parent of the entry
     obj[last] = joinParts(base, path).toString();
-  };
-  for (const { path } of catalogPaths) {
-    addPathToHierarchy(path);
   }
   return hierarchy;
 };
@@ -112,7 +134,7 @@ const getPathParts = (url: string) => {
 const getLinkForEl = (element: Cheerio): string[] => {
   const aTag = element.find("a");
   if (aTag.length === 0) {
-    const msg = "Catalog is missing a link for a parent node";
+    const msg = "Catalog is missing a link for a parent element.";
     throw new Error(msg);
   }
 
@@ -120,6 +142,7 @@ const getLinkForEl = (element: Cheerio): string[] => {
 };
 
 const getChildrenForPathId = ($: CheerioStatic, url: URL) => {
+  // for getElementById, forward slashes need to be escaped
   const id = url.pathname.split("/").join("\\/");
   const current = $(`#${id}\\/`);
   return current.children();
