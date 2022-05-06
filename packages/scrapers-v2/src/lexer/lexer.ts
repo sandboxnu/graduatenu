@@ -25,7 +25,7 @@ import {
   WithExceptions,
 } from "./types";
 
-const loadCatalogHTML = async (url: string): Promise<CheerioStatic> => {
+export const loadCatalogHTML = async (url: string): Promise<CheerioStatic> => {
   try {
     const { data } = await axios.get(url);
     return cheerio.load(data);
@@ -34,47 +34,55 @@ const loadCatalogHTML = async (url: string): Promise<CheerioStatic> => {
   }
 };
 
-export const scrapeMajorDataFromCatalog = async (
-  url: string
-): Promise<HDocument> => {
+/**
+ * Fetch html for page and convert into intermediate representation (IR)
+ * @param url the url of the page to tokenize
+ */
+export const fetchAndTokenizeHTML = async (url: string): Promise<HDocument> => {
   try {
     const $ = await loadCatalogHTML(url);
-    // step 1: Transform scraped table into intermediate representation (IR)
-    return transformMajorDataFromCatalog($);
+    return tokenizeHTML($);
   } catch (error) {
     throw error;
   }
 };
 
-const transformMajorDataFromCatalog = async (
-  $: CheerioStatic
-): Promise<HDocument> => {
+/**
+ * Tokenize scraped html into intermediate representation (IR)
+ * @param $ the cheerio static for the page to tokenize
+ */
+export const tokenizeHTML = async ($: CheerioStatic): Promise<HDocument> => {
   const majorName: string = parseText($("#site-title").find("h1"));
   const catalogYear: string = parseText($("#edition")).split(" ")[0];
   const yearVersion: number = parseInt(catalogYear.split("-")[0]);
 
   const requirementsContainer = $("#programrequirementstextcontainer");
-  const courseLists = combineAllCourseListTables($, requirementsContainer);
+  const sections = tokenizeSections($, requirementsContainer);
 
-  const prgramRequiredHeading = requirementsContainer
+  const programRequiredHeading = requirementsContainer
     .find("h2")
     .filter(
       (_idx: number, element: CheerioElement) =>
         parseText($(element)).includes("Program") &&
         parseText($(element)).includes("Requirement")
     );
-  const prgramRequiredHours =
-    Number(parseText(prgramRequiredHeading.next()).split(/[\s\xa0]+/)[0]) || 0;
+  const programRequiredHours =
+    Number(parseText(programRequiredHeading.next()).split(/[\s\xa0]+/)[0]) || 0;
 
   return {
-    programRequiredHours: prgramRequiredHours,
+    programRequiredHours,
     yearVersion,
     majorName,
-    sections: await courseLists,
+    sections: await sections,
   };
 };
 
-const combineAllCourseListTables = async (
+/**
+ * Produces overall HSections for each HTML table in the page
+ * @param $
+ * @param requirementsContainer
+ */
+const tokenizeSections = async (
   $: CheerioStatic,
   requirementsContainer: Cheerio
 ): Promise<HSection[]> => {
@@ -92,7 +100,7 @@ const combineAllCourseListTables = async (
       const tableDesc = descriptions.pop() || "";
       const courseTable = {
         description: tableDesc,
-        entries: transformCourseListTable($, element),
+        entries: tokenizeRows($, element),
       };
       courseList.push(courseTable);
     } else if (
@@ -102,14 +110,11 @@ const combineAllCourseListTables = async (
     ) {
       // parse all the business concentration links
       const links = constructNestedLinks($, element);
-      const mapped = await Promise.all(links.map(loadCatalogHTML));
+      const pages = await Promise.all(links.map(loadCatalogHTML));
       const containerId = "#concentrationrequirementstextcontainer";
       const concentrations = await Promise.all(
-        mapped.map((concentrationPage) =>
-          combineAllCourseListTables(
-            concentrationPage,
-            concentrationPage(containerId)
-          )
+        pages.map((concentrationPage) =>
+          tokenizeSections(concentrationPage, concentrationPage(containerId))
         )
       );
       courseList.push(...concentrations.flat());
@@ -119,6 +124,12 @@ const combineAllCourseListTables = async (
   return courseList;
 };
 
+/**
+ * Finds and fetches nested links, for majors with concentration requirements
+ * on separate pages.
+ * @param $
+ * @param element
+ */
 const constructNestedLinks = ($: CheerioStatic, element: CheerioElement) => {
   // TODO: add support to non-current catalogs
   const base = "https://catalog.northeastern.edu";
@@ -134,22 +145,29 @@ const constructNestedLinks = ($: CheerioStatic, element: CheerioElement) => {
     });
 };
 
-const transformCourseListTable = (
-  $: CheerioStatic,
-  table: CheerioElement
-): HRow[] => {
+/**
+ * Converts tables rows into a list of HRows
+ * @param $
+ * @param table
+ */
+const tokenizeRows = ($: CheerioStatic, table: CheerioElement): HRow[] => {
   const courseTable: HRow[] = [];
 
   for (const tr of $(table).find("tbody > tr").toArray()) {
     // different row type
     const type = getRowType($, tr);
-    const courseListBodyRow = constructCourseListBodyRow($, tr, type);
-    courseTable.push(courseListBodyRow);
+    const row = constructRow($, tr, type);
+    courseTable.push(row);
   }
 
   return courseTable;
 };
 
+/**
+ * Pre-parses the row to determine its type
+ * @param $
+ * @param tr
+ */
 const getRowType = ($: CheerioStatic, tr: CheerioElement) => {
   const trClass = tr.attribs["class"];
   const td = $(tr.children[0]);
@@ -190,10 +208,12 @@ const getRowType = ($: CheerioStatic, tr: CheerioElement) => {
 };
 
 /**
- * parse each type of table body row depending on what row type it is,
- * which is determined by the function `getRowType`
+ * Converts a single row based on the passed-in type (determined by {@link getRowType}
+ * @param $
+ * @param tr
+ * @param type
  */
-const constructCourseListBodyRow = (
+const constructRow = (
   $: CheerioStatic,
   tr: CheerioElement,
   type: HRowType

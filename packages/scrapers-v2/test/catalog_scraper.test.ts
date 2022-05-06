@@ -1,4 +1,4 @@
-import { scrapeMajorDataFromCatalog } from "../src/lexer/lexer";
+import { fetchAndTokenizeHTML } from "../src/lexer/lexer";
 
 const format = (path: string) =>
   `https://catalog.northeastern.edu${path}#programrequirementstext`;
@@ -23,30 +23,30 @@ const CHEMICAL_ENG = format(
 
 describe("scraper v2 snapshot tests", () => {
   test("CS & Game Dev matches snapshot", async () => {
-    expect(await scrapeMajorDataFromCatalog(CS_GAME_DEV)).toMatchSnapshot();
+    expect(await fetchAndTokenizeHTML(CS_GAME_DEV)).toMatchSnapshot();
   });
   test("nested linked concentration pages (business)", async () => {
-    expect(await scrapeMajorDataFromCatalog(BUSINESS)).toMatchSnapshot();
+    expect(await fetchAndTokenizeHTML(BUSINESS)).toMatchSnapshot();
   });
   test("3 classes per AND (physics)", async () => {
-    expect(await scrapeMajorDataFromCatalog(PHYSICS)).toMatchSnapshot();
+    expect(await fetchAndTokenizeHTML(PHYSICS)).toMatchSnapshot();
   });
   // CS 4950 is in the same AND twice for the Foundations concentration
   test("multiple of the same class per AND (cs) ", async () => {
-    expect(await scrapeMajorDataFromCatalog(BSCS)).toMatchSnapshot();
+    expect(await fetchAndTokenizeHTML(BSCS)).toMatchSnapshot();
   });
   // Range bounded
   test("Test range bounded (history)", async () => {
     expect(
-      await scrapeMajorDataFromCatalog(MEDIA_SCREEN_STUDIES_HISTORY)
+      await fetchAndTokenizeHTML(MEDIA_SCREEN_STUDIES_HISTORY)
     ).toMatchSnapshot();
   });
   // Range lower bounded
   test("Test range lower bounded (cs & history)", async () => {
-    expect(await scrapeMajorDataFromCatalog(CS_HISTORY)).toMatchSnapshot();
+    expect(await fetchAndTokenizeHTML(CS_HISTORY)).toMatchSnapshot();
   });
   // Range unbounded
   test("Test range unbounded (chemical engineering)", async () => {
-    expect(await scrapeMajorDataFromCatalog(CHEMICAL_ENG)).toMatchSnapshot();
+    expect(await fetchAndTokenizeHTML(CHEMICAL_ENG)).toMatchSnapshot();
   });
 });
