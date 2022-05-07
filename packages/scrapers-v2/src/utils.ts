@@ -20,6 +20,29 @@ export const appendPath = (base: string, path: string, hash?: string) => {
   return url;
 };
 
+export const ensureLength = <T>(n: number, l: T[]) => {
+  const length = l.length;
+  if (length !== n) {
+    const msg = `expected text row to contain exactly ${n} cells, found ${length}`;
+    throw new Error(msg);
+  }
+  return l;
+};
+
+export const ensureLengthAtLeast = <T>(n: number, l: T[]) => {
+  const length = l.length;
+  if (length < n) {
+    const msg = `expected text row to contain at least ${n} cells, found ${length}`;
+    throw new Error(msg);
+  }
+  return l;
+};
+
+export const parseText = (td: Cheerio) => {
+  // replace &NBSP with space
+  return td.text().replaceAll("\xa0", " ").trim();
+};
+
 export const flattenCatalogHierarchy = <T extends { url: string }>(
   hierarchy: CatalogHierarchy<T>
 ): T[] => {

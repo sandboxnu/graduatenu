@@ -1,5 +1,5 @@
 import { assertUnreachable } from "@graduate/common";
-import { appendPath, loadHTML } from "../utils";
+import { appendPath, ensureLength, ensureLengthAtLeast, loadHTML, parseText } from "../utils";
 import {
   COURSE_REGEX,
   HEADER_REGEX,
@@ -389,10 +389,6 @@ const parseHour = (td: Cheerio) => {
   const hourText = td.text();
   return parseInt(hourText.split("-")[0]) || 0;
 };
-const parseText = (td: Cheerio) => {
-  // replace &NBSP with space
-  return td.text().replaceAll("\xa0", " ").trim();
-};
 const parseCourseTitle = (parsedCourse: string) => {
   const [subject, classId] = ensureLength(2, parsedCourse.split(" "));
   return {
@@ -400,19 +396,4 @@ const parseCourseTitle = (parsedCourse: string) => {
     classId: Number(classId),
   };
 };
-const ensureLength = <T>(n: number, l: T[]) => {
-  const length = l.length;
-  if (length !== n) {
-    const msg = `expected text row to contain exactly ${n} cells, found ${length}`;
-    throw new Error(msg);
-  }
-  return l;
-};
-const ensureLengthAtLeast = <T>(n: number, l: T[]) => {
-  const length = l.length;
-  if (length < n) {
-    const msg = `expected text row to contain at least ${n} cells, found ${length}`;
-    throw new Error(msg);
-  }
-  return l;
-};
+

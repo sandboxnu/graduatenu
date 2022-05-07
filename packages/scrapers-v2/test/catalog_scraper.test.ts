@@ -1,25 +1,5 @@
 import { fetchAndTokenizeHTML } from "../src/lexer/lexer";
-
-const format = (path: string) =>
-  `https://catalog.northeastern.edu${path}#programrequirementstext`;
-const CS_GAME_DEV = format(
-  "/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-game-development-bs"
-);
-const BUSINESS = format("/undergraduate/business/business-administration-bsba");
-const PHYSICS = format("/undergraduate/science/physics/physics-bs");
-const BSCS = format(
-  "/undergraduate/computer-information-science/computer-science/bscs"
-);
-const MEDIA_SCREEN_STUDIES_HISTORY = format(
-  "/undergraduate/arts-media-design/communication-studies/media-screen-studies-history-ba"
-);
-
-const CS_HISTORY = format(
-  "/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-history-bs"
-);
-const CHEMICAL_ENG = format(
-  "/undergraduate/engineering/chemical/chemical-engineering-bsche"
-);
+import { CS_GAME_DEV, BUSINESS, PHYSICS, BSCS, MEDIA_SCREEN_STUDIES_HISTORY, CS_HISTORY, CHEMICAL_ENG } from "./testUrls";
 
 describe("scraper v2 snapshot tests", () => {
   test("CS & Game Dev matches snapshot", async () => {
