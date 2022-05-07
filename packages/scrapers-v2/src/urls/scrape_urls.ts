@@ -3,12 +3,15 @@ import { CatalogHierarchy, College, CatalogPath } from "./types";
 
 /**
  * Scrapes all catalog entries underneath the colleges.
- * 
+ *
  * @param start starting year (must be end year - 1)
  * @param end   ending year
  * @returns     a hierarchy of catalog entry links
  */
-export const scrapeMajorLinks = async (start: number, end: number) => {
+export const scrapeMajorLinks = async (
+  start: number,
+  end: number
+): Promise<CatalogHierarchy<{ url: string }>> => {
   if (start !== end - 1) {
     throw new Error("start should == end-1");
   }
@@ -41,7 +44,7 @@ export const scrapeMajorLinks = async (start: number, end: number) => {
 export const scrapeMajorLinksForUrl = async (
   baseUrl: string,
   path: string
-): Promise<CatalogHierarchy> => {
+): Promise<CatalogHierarchy<{ url: string }>> => {
   const paths = getPathParts(path);
   try {
     const initStack = Object.values(College).map((college) => ({
@@ -57,7 +60,7 @@ export const scrapeMajorLinksForUrl = async (
 /**
  *
  * Retrieves all sub-entries of the given initial queue in BFS fashion using the catalog sidebar hierarchy.
- *  
+ *
  * @param baseUrl   the base catalog URL, i.e. https://catalog.northeastern.edu
  * @param initQueue a queue of parent entries
  * @returns         a flat list of all the last level children catalog entries
@@ -88,7 +91,7 @@ const scrapeLinks = async (
 
 /**
  * Converts a flat list of entries to catalog hierarchy.
- * 
+ *
  * @param base         the base catalog URL, i.e. https://catalog.northeastern.edu
  * @param catalogPaths a flat list of paths
  * @returns            catalog hierarchy
@@ -96,10 +99,10 @@ const scrapeLinks = async (
 const convertToHierarchy = (
   base: string,
   catalogPaths: CatalogPath[]
-): CatalogHierarchy => {
-  const hierarchy: CatalogHierarchy = {};
+): CatalogHierarchy<{ url: string }> => {
+  const hierarchy: CatalogHierarchy<{ url: string }> = {};
   for (const { path } of catalogPaths) {
-    let obj: CatalogHierarchy = hierarchy;
+    let obj: CatalogHierarchy<{ url: string }> = hierarchy;
 
     // For each part of the path, add it to the hierarchy
     for (let i = 0; i < path.length - 1; i += 1) {
@@ -108,9 +111,9 @@ const convertToHierarchy = (
         obj[part] = {};
       }
       const child = obj[part];
-      if (typeof child === "string") {
+      if ("url" in child) {
         throw new Error(
-          "Hierarchy was inconsistent: found a child, where a parent was expected"
+          "Hierarchy was inconsistent: found a leaf, where a parent was expected"
         );
       }
       obj = child;
@@ -118,7 +121,7 @@ const convertToHierarchy = (
 
     const last = path[path.length - 1];
     // Obj should equal the parent of the entry
-    obj[last] = joinParts(base, path).toString();
+    obj[last] = { url: joinParts(base, path).toString() };
   }
   return hierarchy;
 };

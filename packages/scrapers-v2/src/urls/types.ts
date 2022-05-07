@@ -8,8 +8,8 @@ export enum College {
   SOCIAL_SCIENCES_HUMANITIES = "social-sciences-humanities",
 }
 
-export type CatalogHierarchy = {
-  [part: string]: string | CatalogHierarchy;
+export type CatalogHierarchy<T> = {
+  [part: string]: T | CatalogHierarchy<T>;
 };
 
 export type CatalogPath = {
