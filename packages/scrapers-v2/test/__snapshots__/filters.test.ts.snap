@@ -1,3 +1,118 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Filters work Filtered majors match snapshot 1`] = `Array []`;
+exports[`Filters work https://catalog.northeastern.edu/undergraduate/arts-media-design/architecture/architectural-design-minor 1`] = `
+Array [
+  Object {
+    "type": "Minor",
+    "url": "https://catalog.northeastern.edu/undergraduate/arts-media-design/architecture/architectural-design-minor",
+  },
+]
+`;
+
+exports[`Filters work https://catalog.northeastern.edu/undergraduate/arts-media-design/communication-studies/media-screen-studies-history-ba#programrequirementstext 1`] = `
+Array [
+  Object {
+    "type": "Major",
+    "url": "https://catalog.northeastern.edu/undergraduate/arts-media-design/communication-studies/media-screen-studies-history-ba#programrequirementstext",
+  },
+]
+`;
+
+exports[`Filters work https://catalog.northeastern.edu/undergraduate/business/business-administration-bsba#programrequirementstext 1`] = `
+Array [
+  Object {
+    "type": "Major",
+    "url": "https://catalog.northeastern.edu/undergraduate/business/business-administration-bsba#programrequirementstext",
+  },
+]
+`;
+
+exports[`Filters work https://catalog.northeastern.edu/undergraduate/business/concentrations/fintech 1`] = `
+Array [
+  Object {
+    "type": "Concentration",
+    "url": "https://catalog.northeastern.edu/undergraduate/business/concentrations/fintech",
+  },
+]
+`;
+
+exports[`Filters work https://catalog.northeastern.edu/undergraduate/business/interdisciplinary-minors/accounting-advisory-services-minor 1`] = `
+Array [
+  Object {
+    "type": "Minor",
+    "url": "https://catalog.northeastern.edu/undergraduate/business/interdisciplinary-minors/accounting-advisory-services-minor",
+  },
+]
+`;
+
+exports[`Filters work https://catalog.northeastern.edu/undergraduate/computer-information-science/accelerated-bachelor-graduate-degree-programs 1`] = `
+Array [
+  Object {
+    "type": "Unknown",
+    "url": "https://catalog.northeastern.edu/undergraduate/computer-information-science/accelerated-bachelor-graduate-degree-programs",
+  },
+]
+`;
+
+exports[`Filters work https://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-concentration-music-composition-technology-bs 1`] = `
+Array [
+  Object {
+    "type": "Major",
+    "url": "https://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-concentration-music-composition-technology-bs",
+  },
+]
+`;
+
+exports[`Filters work https://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-game-development-bs#programrequirementstext 1`] = `
+Array [
+  Object {
+    "type": "Major",
+    "url": "https://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-game-development-bs#programrequirementstext",
+  },
+]
+`;
+
+exports[`Filters work https://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-history-bs#programrequirementstext 1`] = `
+Array [
+  Object {
+    "type": "Major",
+    "url": "https://catalog.northeastern.edu/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-history-bs#programrequirementstext",
+  },
+]
+`;
+
+exports[`Filters work https://catalog.northeastern.edu/undergraduate/computer-information-science/computer-science/bscs#programrequirementstext 1`] = `
+Array [
+  Object {
+    "type": "Major",
+    "url": "https://catalog.northeastern.edu/undergraduate/computer-information-science/computer-science/bscs#programrequirementstext",
+  },
+]
+`;
+
+exports[`Filters work https://catalog.northeastern.edu/undergraduate/engineering/chemical/chemical-engineering-bsche#programrequirementstext 1`] = `
+Array [
+  Object {
+    "type": "Major",
+    "url": "https://catalog.northeastern.edu/undergraduate/engineering/chemical/chemical-engineering-bsche#programrequirementstext",
+  },
+]
+`;
+
+exports[`Filters work https://catalog.northeastern.edu/undergraduate/engineering/mechanical-industrial/aerospace-minor 1`] = `
+Array [
+  Object {
+    "type": "Minor",
+    "url": "https://catalog.northeastern.edu/undergraduate/engineering/mechanical-industrial/aerospace-minor",
+  },
+]
+`;
+
+exports[`Filters work https://catalog.northeastern.edu/undergraduate/social-sciences-humanities/interdisciplinary/womens-gender-sexuality-studies-minor 1`] = `
+Array [
+  Object {
+    "type": "Minor",
+    "url": "https://catalog.northeastern.edu/undergraduate/social-sciences-humanities/interdisciplinary/womens-gender-sexuality-studies-minor",
+  },
+]
+`;
