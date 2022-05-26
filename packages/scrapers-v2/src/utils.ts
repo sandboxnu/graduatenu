@@ -1,7 +1,7 @@
 import axios from "axios";
 import * as cheerio from "cheerio";
 import { CatalogHierarchy } from "./urls/types";
-import { CatalogEntryType, TypedCatalogEntry } from "./classifier/types";
+import { CatalogEntryType, TypedCatalogEntry } from "./classify/types";
 
 export const loadHTML = async (url: string): Promise<CheerioStatic> => {
   try {

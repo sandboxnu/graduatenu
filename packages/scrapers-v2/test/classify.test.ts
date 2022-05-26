@@ -1,4 +1,4 @@
-import { classifyCatalogEntries } from "../src/classifier/classifier";
+import { classifyCatalogEntries } from "../src/classify/classify";
 import {
   ACCELERATED_DEGREE_PROGRAM,
   ACCOUNTING_MINOR,

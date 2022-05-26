@@ -1,4 +1,4 @@
-import { fetchAndTokenizeHTML } from "../src/lexer/lexer";
+import { fetchAndTokenizeHTML } from "../src/tokenize/tokenize";
 import {
   CS_GAME_DEV,
   BUSINESS,

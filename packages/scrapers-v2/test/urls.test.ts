@@ -1,6 +1,6 @@
 // https://catalog.northeastern.edu/undergraduate
 
-import { scrapeMajorLinks } from "../src/urls/scrape_urls";
+import { scrapeMajorLinks } from "../src/urls/urls";
 
 describe("url scraper", () => {
   test("scrape", async () => {
