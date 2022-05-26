@@ -11,7 +11,7 @@ import { CatalogHierarchy, College, CatalogPath } from "./types";
 export const scrapeMajorLinks = async (
   start: number,
   end: number
-): Promise<CatalogHierarchy<{ url: string }>> => {
+): Promise<CatalogHierarchy> => {
   if (start !== end - 1) {
     throw new Error("start should == end-1");
   }
@@ -44,7 +44,7 @@ export const scrapeMajorLinks = async (
 export const scrapeMajorLinksForUrl = async (
   baseUrl: string,
   path: string
-): Promise<CatalogHierarchy<{ url: string }>> => {
+): Promise<CatalogHierarchy> => {
   const paths = getPathParts(path);
   try {
     const initStack = Object.values(College).map((college) => ({
@@ -99,10 +99,10 @@ const scrapeLinks = async (
 const convertToHierarchy = (
   base: string,
   catalogPaths: CatalogPath[]
-): CatalogHierarchy<{ url: string }> => {
-  const hierarchy: CatalogHierarchy<{ url: string }> = {};
+): CatalogHierarchy => {
+  const hierarchy: CatalogHierarchy = {};
   for (const { path } of catalogPaths) {
-    let obj: CatalogHierarchy<{ url: string }> = hierarchy;
+    let obj: CatalogHierarchy = hierarchy;
 
     // For each part of the path, add it to the hierarchy
     for (let i = 0; i < path.length - 1; i += 1) {
@@ -111,7 +111,7 @@ const convertToHierarchy = (
         obj[part] = {};
       }
       const child = obj[part];
-      if ("url" in child) {
+      if (typeof child === "string") {
         throw new Error(
           "Hierarchy was inconsistent: found a leaf, where a parent was expected"
         );

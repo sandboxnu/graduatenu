@@ -1,5 +1,13 @@
 import { fetchAndTokenizeHTML } from "../src/lexer/lexer";
-import { CS_GAME_DEV, BUSINESS, PHYSICS, BSCS, MEDIA_SCREEN_STUDIES_HISTORY, CS_HISTORY, CHEMICAL_ENG } from "./testUrls";
+import {
+  CS_GAME_DEV,
+  BUSINESS,
+  PHYSICS,
+  BSCS,
+  MEDIA_SCREEN_STUDIES_HISTORY,
+  CS_HISTORY,
+  CHEMICAL_ENG,
+} from "./testUrls";
 
 describe("scraper v2 snapshot tests", () => {
   test("CS & Game Dev matches snapshot", async () => {

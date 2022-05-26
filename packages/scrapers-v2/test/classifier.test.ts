@@ -1,4 +1,4 @@
-import { filterCatalogByTypes } from "../src/filters/filters";
+import { classifyCatalogEntries } from "../src/classifier/classifier";
 import {
   ACCELERATED_DEGREE_PROGRAM,
   ACCOUNTING_MINOR,
@@ -29,12 +29,12 @@ const inputs = [
   BUSINESS,
   CHEMICAL_ENG,
   CS_GAME_DEV,
-].map((input) => ({ url: input }));
+];
 
 describe("Filters work", () => {
   for (const url of inputs) {
-    test(url.url, async () => {
-      expect(await filterCatalogByTypes([url])).toMatchSnapshot();
+    test(url, async () => {
+      expect(await classifyCatalogEntries([url])).toMatchSnapshot();
     });
   }
 });

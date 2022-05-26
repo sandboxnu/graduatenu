@@ -1,6 +1,7 @@
 import axios from "axios";
 import * as cheerio from "cheerio";
 import { CatalogHierarchy } from "./urls/types";
+import { CatalogEntryType, TypedCatalogEntry } from "./classifier/types";
 
 export const loadHTML = async (url: string): Promise<CheerioStatic> => {
   try {
@@ -43,17 +44,12 @@ export const parseText = (td: Cheerio) => {
   return td.text().replaceAll("\xa0", " ").trim();
 };
 
-export const flattenCatalogHierarchy = <T extends { url: string }>(
-  hierarchy: CatalogHierarchy<T>
-): T[] => {
-  const list: T[] = [];
-  const isLeaf = (node: T | CatalogHierarchy<T>): node is T => {
-    // note: this doesn't work if "url" happens to be a key in the hierarchy
-    // but that probably won't ever happen... right?
-    return "url" in node;
-  };
-  const recur = (node: T | CatalogHierarchy<T>) => {
-    if (isLeaf(node)) {
+export const flattenCatalogHierarchy = (
+  hierarchy: CatalogHierarchy
+): string[] => {
+  const list: string[] = [];
+  const recur = (node: CatalogHierarchy[string]) => {
+    if (typeof node === "string") {
       // it's a leaf!
       list.push(node);
     } else {
@@ -64,4 +60,11 @@ export const flattenCatalogHierarchy = <T extends { url: string }>(
   };
   recur(hierarchy);
   return list;
+};
+
+export const filterByEntryType = (
+  typedUrls: TypedCatalogEntry[],
+  include: CatalogEntryType[]
+): TypedCatalogEntry[] => {
+  return typedUrls.filter((typedUrl) => include.includes(typedUrl.type));
 };

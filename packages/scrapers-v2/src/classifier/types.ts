@@ -4,3 +4,5 @@ export enum CatalogEntryType {
   Concentration = "Concentration",
   Unknown = "Unknown",
 }
+
+export type TypedCatalogEntry = { url: string; type: CatalogEntryType };

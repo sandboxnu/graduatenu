@@ -1,22 +1,13 @@
 import { ensureLengthAtLeast, loadHTML, parseText } from "../utils";
-import { CatalogEntryType } from "./types";
+import { CatalogEntryType, TypedCatalogEntry } from "./types";
 
-export const filterCatalogByTypes = async (
-  flattenedList: { url: string }[],
-  include?: CatalogEntryType[]
-): Promise<{ url: string; type: CatalogEntryType }[]> => {
-  const typedUrls = await Promise.all(flattenedList.map(addTypeToUrl));
-  return filterByEntryType(
-    typedUrls,
-    include ?? Object.values(CatalogEntryType)
-  );
+export const classifyCatalogEntries = async (
+  flattenedList: string[],
+): Promise<TypedCatalogEntry[]> => {
+  return await Promise.all(flattenedList.map(addTypeToUrl));
 };
 
-const addTypeToUrl = async ({
-  url,
-}: {
-  url: string;
-}): Promise<{ url: string; type: CatalogEntryType }> => {
+const addTypeToUrl = async (url: string): Promise<TypedCatalogEntry> => {
   const $ = await loadHTML(url);
   const type = getUrlType($);
   return { url, type };
@@ -54,9 +45,3 @@ const getUrlType = ($: CheerioStatic): CatalogEntryType => {
   throw new Error(`Unexpected numbers of tabs: ${tabs.length}`);
 };
 
-const filterByEntryType = (
-  typedUrls: { url: string; type: CatalogEntryType }[],
-  include: CatalogEntryType[]
-): { url: string; type: CatalogEntryType }[] => {
-  return typedUrls.filter((typedUrl) => include.includes(typedUrl.type));
-};
