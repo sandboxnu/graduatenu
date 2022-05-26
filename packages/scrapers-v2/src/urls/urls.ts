@@ -121,7 +121,7 @@ const convertToHierarchy = (
 
     const last = path[path.length - 1];
     // Obj should equal the parent of the entry
-    obj[last] = { url: joinParts(base, path).toString() };
+    obj[last] = joinParts(base, path).toString();
   }
   return hierarchy;
 };

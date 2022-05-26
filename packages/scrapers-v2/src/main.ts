@@ -1,8 +1,8 @@
-import { scrapeMajorLinks } from "./urls/scrape_urls";
-import { classifyCatalogEntries } from "./classify/classifier";
+import { scrapeMajorLinks } from "./urls/urls";
+import { classifyCatalogEntries } from "./classify/classify";
 import { CatalogEntryType } from "./classify/types";
 import { filterByEntryType, flattenCatalogHierarchy } from "./utils";
-import { fetchAndTokenizeHTML } from "./tokenize/lexer";
+import { fetchAndTokenizeHTML } from "./tokenize/tokenize";
 
 export const runScrape = async () => {
   try {
