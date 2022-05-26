@@ -43,7 +43,7 @@ export const parseText = (td: Cheerio) => {
   return td.text().replaceAll("\xa0", " ").trim();
 };
 
-export const flattenCatalogHierarchy = <T>(
+export const flattenCatalogHierarchy = <T extends { url: string }>(
   hierarchy: CatalogHierarchy<T>
 ): T[] => {
   const list: T[] = [];

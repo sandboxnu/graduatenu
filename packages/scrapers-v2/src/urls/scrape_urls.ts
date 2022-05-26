@@ -1,4 +1,3 @@
-import { CatalogEntryType, CatalogHierarchyEntry } from "../filters/types";
 import { appendPath, loadHTML } from "../utils";
 import { CatalogHierarchy, College, CatalogPath } from "./types";
 
@@ -12,7 +11,7 @@ import { CatalogHierarchy, College, CatalogPath } from "./types";
 export const scrapeMajorLinks = async (
   start: number,
   end: number
-): Promise<CatalogHierarchy<CatalogHierarchyEntry>> => {
+): Promise<CatalogHierarchy<{ url: string }>> => {
   if (start !== end - 1) {
     throw new Error("start should == end-1");
   }
@@ -45,7 +44,7 @@ export const scrapeMajorLinks = async (
 export const scrapeMajorLinksForUrl = async (
   baseUrl: string,
   path: string
-): Promise<CatalogHierarchy<CatalogHierarchyEntry>> => {
+): Promise<CatalogHierarchy<{ url: string }>> => {
   const paths = getPathParts(path);
   try {
     const initStack = Object.values(College).map((college) => ({
@@ -100,10 +99,10 @@ const scrapeLinks = async (
 const convertToHierarchy = (
   base: string,
   catalogPaths: CatalogPath[]
-): CatalogHierarchy<CatalogHierarchyEntry> => {
-  const hierarchy: CatalogHierarchy<CatalogHierarchyEntry> = {};
+): CatalogHierarchy<{ url: string }> => {
+  const hierarchy: CatalogHierarchy<{ url: string }> = {};
   for (const { path } of catalogPaths) {
-    let obj: CatalogHierarchy<CatalogHierarchyEntry> = hierarchy;
+    let obj: CatalogHierarchy<{ url: string }> = hierarchy;
 
     // For each part of the path, add it to the hierarchy
     for (let i = 0; i < path.length - 1; i += 1) {
@@ -121,8 +120,8 @@ const convertToHierarchy = (
     }
 
     const last = path[path.length - 1];
-    // Obj should equal the parent of the entry, and each entry is uncategorized before the filter stage
-    obj[last] = { url: joinParts(base, path).toString(), type: CatalogEntryType.Uncategorized };
+    // Obj should equal the parent of the entry
+    obj[last] = { url: joinParts(base, path).toString() };
   }
   return hierarchy;
 };

@@ -3,10 +3,4 @@ export enum CatalogEntryType {
   Minor = "Minor",
   Concentration = "Concentration",
   Unknown = "Unknown",
-  Uncategorized = "Uncategorized"
-}
-
-export type CatalogHierarchyEntry = {
-  type: CatalogEntryType,
-  url: string
 }
