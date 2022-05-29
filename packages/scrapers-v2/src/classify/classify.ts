@@ -7,7 +7,7 @@ export const classifyCatalogEntries = async (
   return await Promise.all(flattenedList.map(addTypeToUrl));
 };
 
-const addTypeToUrl = async (url: string): Promise<TypedCatalogEntry> => {
+export const addTypeToUrl = async (url: string): Promise<TypedCatalogEntry> => {
   const $ = await loadHTML(url);
   const type = getUrlType($);
   return { url, type };

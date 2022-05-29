@@ -47,10 +47,10 @@ export const scrapeMajorLinksForUrl = async (
   path: string
 ): Promise<CatalogHierarchy> => {
   const paths = getPathParts(path);
-  const initQueue = Object.values(College).map((college) => ({
+  const initStack = Object.values(College).map((college) => ({
     path: [...paths, college],
   }));
-  const catalogPaths = await scrapeLinks(baseUrl, initQueue);
+  const catalogPaths = await scrapeLinks(baseUrl, initStack);
   return convertToHierarchy(baseUrl, catalogPaths);
 };
 
