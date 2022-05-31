@@ -1,6 +1,3 @@
-// html element type for headers (h2 or h3)
-export const HEADER_REGEX = /h[23]/g;
-
 // matches subject and courseId, ex: XXXX<space>9999
 export const COURSE_REGEX = /([A-Z]{2,4})\s([0-9]{4})/g;
 

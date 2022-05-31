@@ -3,7 +3,6 @@ import axios from "axios";
 import * as cheerio from "cheerio";
 import {
   COURSE_REGEX,
-  HEADER_REGEX,
   RANGE_BOUNDED,
   RANGE_LOWER_BOUNDED_MAYBE_EXCEPTIONS_1,
   RANGE_LOWER_BOUNDED_MAYBE_EXCEPTIONS_2,
@@ -91,12 +90,15 @@ const tokenizeSections = async (
   const courseList: HSection[] = [];
 
   for (const element of requirementsContainer.children().toArray()) {
-    if (HEADER_REGEX.test(element.name)) {
+    if (element.name === "h2" || element.name === "h3") {
+      // element is h2 or h3 means it's a header text
       descriptions.push(parseText($(element)));
     } else if (
       element.name === "table" &&
       element.attribs["class"] === "sc_courselist"
     ) {
+      // class "sc_courselist" signifies that this table is a list of courses
+      // => parse the table's rows
       const tableDesc = descriptions.pop() || "";
       const courseTable = {
         description: tableDesc,
@@ -108,7 +110,10 @@ const tokenizeSections = async (
       element.name === "ul" &&
       parseText($(element).prev()).includes("concentration")
     ) {
-      // parse all the business concentration links
+      // if we encounter an unordered list and preceding element contains text "concentration",
+      // assume the list is of links for business concentrations.
+      // only applies to:
+      // https://catalog.northeastern.edu/undergraduate/business/business-administration-bsba/#programrequirementstext
       const links = constructNestedLinks($, element);
       const pages = await Promise.all(links.map(loadCatalogHTML));
       const containerId = "#concentrationrequirementstextcontainer";
@@ -171,7 +176,7 @@ const tokenizeRows = ($: CheerioStatic, table: CheerioElement): HRow[] => {
 const getRowType = ($: CheerioStatic, tr: CheerioElement) => {
   const trClass = tr.attribs["class"];
   const td = $(tr.children[0]);
-  const tdClass = $(tr).children()[0].attribs["class"];
+  const tdClass = td.attr("class");
 
   if (trClass.includes("subheader")) {
     return HRowType.SUBHEADER;
