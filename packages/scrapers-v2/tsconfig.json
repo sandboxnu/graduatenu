@@ -20,5 +20,5 @@
     "strictPropertyInitialization": false,
     "experimentalDecorators": true
   },
-  "include": ["src"]
+  "include": ["src", "test"]
 }

@@ -1,6 +1,5 @@
 import { assertUnreachable } from "@graduate/common";
-import axios from "axios";
-import * as cheerio from "cheerio";
+import { appendPath, loadHTML } from "../utils";
 import {
   COURSE_REGEX,
   RANGE_BOUNDED,
@@ -24,22 +23,13 @@ import {
   WithExceptions,
 } from "./types";
 
-export const loadCatalogHTML = async (url: string): Promise<CheerioStatic> => {
-  try {
-    const { data } = await axios.get(url);
-    return cheerio.load(data);
-  } catch (error) {
-    throw error;
-  }
-};
-
 /**
  * Fetch html for page and convert into intermediate representation (IR)
  * @param url the url of the page to tokenize
  */
 export const fetchAndTokenizeHTML = async (url: string): Promise<HDocument> => {
   try {
-    const $ = await loadCatalogHTML(url);
+    const $ = await loadHTML(url);
     return tokenizeHTML($);
   } catch (error) {
     throw error;
@@ -115,7 +105,7 @@ const tokenizeSections = async (
       // only applies to:
       // https://catalog.northeastern.edu/undergraduate/business/business-administration-bsba/#programrequirementstext
       const links = constructNestedLinks($, element);
-      const pages = await Promise.all(links.map(loadCatalogHTML));
+      const pages = await Promise.all(links.map(loadHTML));
       const containerId = "#concentrationrequirementstextcontainer";
       const concentrations = await Promise.all(
         pages.map((concentrationPage) =>
@@ -143,11 +133,7 @@ const constructNestedLinks = ($: CheerioStatic, element: CheerioElement) => {
     .find("li > a")
     .toArray()
     .map((link) => $(link).attr("href"))
-    .map((link) => {
-      const url = new URL(link, base);
-      url.hash = concentrationsTag;
-      return url.toString();
-    });
+    .map((path) => appendPath(base, path, concentrationsTag).toString());
 };
 
 /**
