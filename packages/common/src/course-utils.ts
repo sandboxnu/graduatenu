@@ -11,3 +11,7 @@ export const courseEq = (c1: CourseIdentifier, c2: CourseIdentifier) =>
 
 export const coursesToString = (c: IRequiredCourse[]) =>
   c.map(courseToString).join(",");
+
+export const assertUnreachable = (_: never): never => {
+  throw new Error("This code is unreachable");
+};

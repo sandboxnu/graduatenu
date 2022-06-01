@@ -14,6 +14,7 @@ COPY packages/frontend/package.json packages/frontend/package.json
 COPY packages/frontend-v2/package.json packages/frontend-v2/package.json
 COPY packages/common/package.json packages/common/package.json
 COPY packages/scrapers/package.json packages/scrapers/package.json
+COPY packages/scrapers-v2/package.json packages/scrapers-v2/package.json
 COPY packages/api-v2/package.json packages/api-v2/package.json
 COPY packages/api-client/package.json packages/api-client/package.json
 

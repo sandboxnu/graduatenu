@@ -2155,6 +2155,22 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@graduate/scrapers-v2@workspace:packages/scrapers-v2":
+  version: 0.0.0-use.local
+  resolution: "@graduate/scrapers-v2@workspace:packages/scrapers-v2"
+  dependencies:
+    "@graduate/common": "*"
+    "@types/cheerio": 0.22.13
+    "@types/jest": ^27
+    "@types/node": ^12.7.2
+    axios: ^0.26.1
+    cheerio: 1.0.0-rc.3
+    jest: ^27.5.1
+    ts-jest: ^27.1.3
+    typescript: ^4.6.2
+  languageName: unknown
+  linkType: soft
+
 "@graduate/scrapers@workspace:packages/scrapers":
   version: 0.0.0-use.local
   resolution: "@graduate/scrapers@workspace:packages/scrapers"
