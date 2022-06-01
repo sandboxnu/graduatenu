@@ -6,10 +6,8 @@ import { ClassList } from "../ClassList";
 import { EmptyBlock } from "../EmptyBlock";
 import { AddClassSearchModal } from "../AddClassSearchModal";
 import {
-  CourseWarning,
   DNDScheduleCourse,
   DNDScheduleTerm,
-  IWarning,
   StatusEnum,
 } from "../../models/types";
 import {
@@ -17,6 +15,8 @@ import {
   ScheduleCourse,
   SeasonWord,
   Status,
+  IWarning,
+  CourseWarning,
 } from "@graduate/common";
 import styled from "styled-components";
 import { AppState } from "../../state/reducers/state";

@@ -11,6 +11,7 @@ import {
   Status,
   SeasonWord,
 } from "@graduate/common";
+import { fetchCourse } from "../../api";
 import { XButton } from "../common";
 import { Modal } from "@material-ui/core";
 import { batch, connect } from "react-redux";
@@ -24,7 +25,6 @@ import {
   safelyGetTransferCoursesFromState,
 } from "../../state";
 import { AppState } from "../../state/reducers/state";
-import { fetchCourse } from "../../api";
 import { convertTermIdToSeason } from "../../utils/schedule-helpers";
 
 const InnerSection = styled.section`

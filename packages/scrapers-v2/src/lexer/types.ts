@@ -1,27 +1,6 @@
 /**
- * Catalog Representations:
- *
- * { document { <section> ... } }
- * { section <desc> <comment> <row[]> }
- * { row { <textRow | courseRow | multiCourseRow> ...} }
- *    textRow:
- *      { areaHeader <comment> <hour> }
- *      { commentRow <comment> <hour> }
- *      { subHeader  <comment> <hour> }
- *
- *    courseRow:
- *      { courseRow <code> <hour> }
- *      { orCourseRow <code> <hour> }
- *
- *    multiCourseRow:
- *      { andCourseRow <hour> { <code, description> ... } }
- *
- *    rangeRow:
- *      { boundedRangeRow <hour> <subject> <startId> <endId> }
- *      { unboundedRangeRow <hour> <subj> }
- *      { lowerBoundedRangeRow <hour> <subject> <startId> }
+ * An HTML document (catalog page) has a few identifiable features, along with a bunch of sections.
  */
-
 export type HDocument = {
   yearVersion: number;
   majorName: string;
@@ -29,18 +8,32 @@ export type HDocument = {
   sections: HSection[];
 };
 
+/**
+ * An HTML section (of a document) has a description, and a list of rows that it contains.
+ */
 export type HSection = {
   description: string;
   entries: HRow[];
 };
 
+/**
+ * An HTML row (abbreviated HRow) consists of four main different types of row:
+ * - textRow: a row containing text. either an areaHeader, comment, or subHeader.
+ * - courseRow: a single course, that may have an "OR" annotation
+ * - multiCourseRow: multiple courses (2+). currently only AND courses appear as multiCourseRows
+ * - rangeRow: either bounded, unbounded, or only bounded on the bottom (sometimes with exceptions)
+ */
 export type HRow =
+  // text rows
   | TextRow<HRowType.COMMENT>
   | TextRow<HRowType.HEADER>
   | TextRow<HRowType.SUBHEADER>
+  // course rows
   | CourseRow<HRowType.OR_COURSE>
   | CourseRow<HRowType.PLAIN_COURSE>
+  // multi course rows
   | MultiCourseRow<HRowType.AND_COURSE>
+  // range rows
   | RangeLowerBoundedRow<HRowType.RANGE_LOWER_BOUNDED>
   | WithExceptions<
       RangeLowerBoundedRow<HRowType.RANGE_LOWER_BOUNDED_WITH_EXCEPTIONS>
@@ -48,6 +41,7 @@ export type HRow =
   | RangeBoundedRow<HRowType.RANGE_BOUNDED>
   | RangeUnboundedRow<HRowType.RANGE_UNBOUNDED>;
 
+// an enum to give a unique discriminator to each of the above cases
 // the different outputs we have, by TYPE
 export enum HRowType {
   HEADER = "HEADER",

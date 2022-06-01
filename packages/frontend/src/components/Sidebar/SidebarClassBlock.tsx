@@ -1,6 +1,7 @@
 import React from "react";
 import { Draggable } from "react-beautiful-dnd";
-import { CourseWarning, DNDScheduleCourse } from "../../models/types";
+import { DNDScheduleCourse } from "../../models/types";
+import { CourseWarning } from "@graduate/common";
 import styled from "styled-components";
 import { Card, Tooltip } from "@material-ui/core";
 
