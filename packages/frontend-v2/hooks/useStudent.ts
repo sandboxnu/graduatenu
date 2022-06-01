@@ -1,13 +1,14 @@
 import useSWR, { SWRResponse } from "swr";
 import { API } from "@graduate/api-client";
 import { GetStudentResponse } from "@graduate/common";
-import { AxiosError } from "axios";
+import axios, { AxiosError } from "axios";
+import { redirectUnAuth } from "./utils";
 
 type studentResponse = SWRResponse<GetStudentResponse, AxiosError>;
 
 interface UseStudentReturn {
   student?: studentResponse["data"];
-  isError?: studentResponse["error"];
+  error?: studentResponse["error"];
   isLoading: boolean;
   mutateStudent: studentResponse["mutate"];
 }
@@ -16,14 +17,18 @@ export function useStudentWithPlan(jwt: string): UseStudentReturn {
   const key = `api/students/me`;
   const {
     data: student,
-    error: isError,
+    error,
     mutate: mutateStudent,
   } = useSWR(key, async () => await API.student.getMeWithPlan(jwt));
 
+  if (axios.isAxiosError(error)) {
+    redirectUnAuth(error);
+  }
+
   return {
     student,
-    isError,
+    error,
     mutateStudent,
-    isLoading: !student && !isError,
+    isLoading: !student && !error,
   };
 }
