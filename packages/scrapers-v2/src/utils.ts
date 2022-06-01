@@ -54,6 +54,7 @@ export const convertToHierarchy = (
 
     const last = path[path.length - 1];
     // Obj should equal the parent of the entry
+    // the "leaf" is the full url to the catalog entry
     obj[last] = joinParts(base, path).toString();
   }
   return hierarchy;

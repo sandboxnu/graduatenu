@@ -1,6 +1,6 @@
 # URL scraper
 
-THis folder contains code for scraping the URLs of entries in the catalog, and is based on the sidebar _hierarchy_ that the catalog uses to describe the locations of catalog entries. 
+This folder contains code for scraping the URLs of entries in the catalog, and is based on the sidebar _hierarchy_ that the catalog uses to describe the locations of catalog entries. 
 
 You can think of the catalog sidebar as a bunch of entries, with each entry potentially containing more sub-entries (hence _hierarchical_ in nature).
 
