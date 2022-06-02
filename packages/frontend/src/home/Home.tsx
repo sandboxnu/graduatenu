@@ -1,7 +1,7 @@
 import React from "react";
 import "./Scrollbar.css";
-import { IWarning, IPlanData } from "../models/types";
-import { Major, ScheduleCourse } from "@graduate/common";
+import { IPlanData } from "../models/types";
+import { Major, ScheduleCourse, IWarning } from "@graduate/common";
 import styled from "styled-components";
 import { convertTermIdToYear } from "../utils";
 import { withToast } from "./toastHook";

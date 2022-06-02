@@ -1,16 +1,16 @@
 {
   "compilerOptions": {
+    "experimentalDecorators": true,
+    "strictNullChecks": false,
+    "noImplicitAny": false,
     "target": "es5",
-    "module": "commonjs",
+    "module": "esnext",
     "strict": true,
     "isolatedModules": true,
     "noEmit": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "downlevelIteration": true,
-    "resolveJsonModule": true,
-    "strictPropertyInitialization": false,
-    "experimentalDecorators": true
+    "moduleResolution": "node"
   },
   "exclude": ["node_modules", "dist"],
   "include": ["**/*.ts"]

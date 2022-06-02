@@ -1,4 +1,3 @@
-import { fetchCourse } from "../api";
 import { ISimplifiedCourseDataAPI } from "../models/types";
 import {
   INEUPrereq,
@@ -7,6 +6,7 @@ import {
   Requirement,
   ScheduleCourse,
 } from "@graduate/common";
+import { fetchCourse } from "../api";
 
 export async function getScheduleCoursesFromSimplifiedCourseDataAPI(
   courses: ISimplifiedCourseDataAPI[]

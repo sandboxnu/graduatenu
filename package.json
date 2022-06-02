@@ -11,8 +11,9 @@
     ]
   },
   "scripts": {
-    "dev": "concurrently -n \"common,api,frontend\" \"yarn packages/common dev\" \"yarn packages/api dev\" \"yarn packages/frontend dev\"",
-    "dev:v2": "concurrently -n \"common,api-v2,frontend,proxy\" \"yarn packages/common dev\" \"yarn packages/api-v2 dev\" \"yarn packages/frontend-v2 dev\" \"yarn dev:proxy\"",
+    "dev": "yarn foreach \"@graduate/(common|api|frontend|api-client)\" run dev",
+    "dev:v2": "concurrently \"yarn foreach '@graduate/(common|api-v2|frontend-v2|api-client)' run dev\" \"yarn dev:proxy\"",
+    "foreach": "yarn workspaces foreach --parallel --verbose --interlaced --include",
     "dev:proxy": "node infrastructure/develop/dev-proxy.js",
     "dev:db:up": "docker-compose -f infrastructure/develop/docker-compose.yml up -d",
     "dev:db:down": "docker-compose -f infrastructure/develop/docker-compose.yml down",
@@ -23,6 +24,7 @@
     "g:cross-env": "cd $INIT_CWD && cross-env"
   },
   "dependencies": {
+    "@babel/plugin-proposal-decorators": "^7.17.8",
     "cross-env": "^7.0.3"
   },
   "devDependencies": {

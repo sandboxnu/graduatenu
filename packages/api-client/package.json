@@ -1,0 +1,23 @@
+{
+  "name": "@graduate/api-client",
+  "version": "1.0.0",
+  "description": "Sandbox/GraduateNU Team",
+  "main": "dist/index.js",
+  "module": "module/index.js",
+  "browser": "lib/index.js",
+  "scripts": {
+    "test": "jest",
+    "dev": "yarn build:dev -w",
+    "build": "yarn build:dev && yarn build:browser && yarn build:module",
+    "build:dev": "yarn g:babel --root-mode upward -d dist -x '.ts' index.ts",
+    "build:browser": "yarn g:cross-env BABEL_ENV=browser yarn g:babel --root-mode upward -d lib -x '.ts' index.ts",
+    "build:module": "yarn g:cross-env BABEL_ENV=module yarn g:babel --root-mode upward -d module -x '.ts' index.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@graduate/common": "*",
+    "class-transformer": "^0.5.1",
+    "reflect-metadata": "^0.1.13"
+  }
+}

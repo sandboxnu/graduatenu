@@ -6,6 +6,7 @@ import {
   IRequiredCourse,
   ScheduleCourse,
 } from "@graduate/common";
+import { fetchCourse } from "../api";
 import {
   getCompletedRequirementsFromState,
   getUserMajorFromState,
@@ -15,7 +16,6 @@ import {
   setTransferCoursesAction,
 } from "../state/actions/studentActions";
 import styled from "styled-components";
-import { fetchCourse } from "../api";
 import {
   OnboardingSelectionTemplate,
   SelectableCourse,

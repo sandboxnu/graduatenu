@@ -1,4 +1,4 @@
-import { appendPath, loadHTML } from "../utils";
+import { convertToHierarchy, joinParts, loadHTML } from "../utils";
 import { CatalogHierarchy, College, CatalogPath } from "./types";
 
 /**
@@ -46,15 +46,11 @@ export const scrapeMajorLinksForUrl = async (
   path: string
 ): Promise<CatalogHierarchy> => {
   const paths = getPathParts(path);
-  try {
-    const initStack = Object.values(College).map((college) => ({
-      path: [...paths, college],
-    }));
-    const catalogPaths = await scrapeLinks(baseUrl, initStack);
-    return convertToHierarchy(baseUrl, catalogPaths);
-  } catch (e) {
-    throw e;
-  }
+  const initQueue = Object.values(College).map((college) => ({
+    path: [...paths, college],
+  }));
+  const catalogPaths = await scrapeLinks(baseUrl, initQueue);
+  return convertToHierarchy(baseUrl, catalogPaths);
 };
 
 /**
@@ -89,43 +85,6 @@ const scrapeLinks = async (
   return results;
 };
 
-/**
- * Converts a flat list of entries to catalog hierarchy.
- *
- * @param base         the base catalog URL, i.e. https://catalog.northeastern.edu
- * @param catalogPaths a flat list of paths
- * @returns            catalog hierarchy
- */
-const convertToHierarchy = (
-  base: string,
-  catalogPaths: CatalogPath[]
-): CatalogHierarchy => {
-  const hierarchy: CatalogHierarchy = {};
-  for (const { path } of catalogPaths) {
-    let obj: CatalogHierarchy = hierarchy;
-
-    // For each part of the path, add it to the hierarchy
-    for (let i = 0; i < path.length - 1; i += 1) {
-      const part = path[i];
-      if (!(part in obj)) {
-        obj[part] = {};
-      }
-      const child = obj[part];
-      if (typeof child === "string") {
-        throw new Error(
-          "Hierarchy was inconsistent: found a leaf, where a parent was expected"
-        );
-      }
-      obj = child;
-    }
-
-    const last = path[path.length - 1];
-    // Obj should equal the parent of the entry
-    obj[last] = joinParts(base, path).toString();
-  }
-  return hierarchy;
-};
-
 const isParent = (el: Cheerio) => {
   return el.hasClass("isparent");
 };
@@ -145,20 +104,18 @@ const getLinkForEl = (element: Cheerio): string[] => {
 };
 
 const getChildrenForPathId = ($: CheerioStatic, url: URL) => {
-  // for getElementById, forward slashes need to be escaped
+  // The catalog entries have an ID equal to the path, with a trailing slash
+  // We select the element via its ID
+  // Note: for getElementById, forward slashes need to be escaped
   const id = url.pathname.split("/").join("\\/");
   const current = $(`#${id}\\/`);
   return current.children();
 };
 
-const fetchUrlHtml = (url: URL) =>
-  new Promise<{ $: CheerioStatic; url: URL }>((res) => {
-    loadHTML(url.href).then((r) => res({ $: r, url }));
-  });
-
-const joinParts = (base: string, parts: string[]) => {
-  return appendPath(base, parts.join("/"));
-};
+const fetchUrlHtml = async (url: URL): Promise<{ $: CheerioStatic; url: URL }> => {
+  const r = await loadHTML(url.href);
+  return { $: r, url };
+}
 
 const getUrlHtmls = (queue: CatalogPath[], base: string) => {
   return queue.map(({ path }) => joinParts(base, path)).map(fetchUrlHtml);
