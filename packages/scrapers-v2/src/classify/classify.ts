@@ -2,7 +2,7 @@ import { ensureLengthAtLeast, loadHTML, parseText } from "../utils";
 import { CatalogEntryType, TypedCatalogEntry } from "./types";
 
 export const classifyCatalogEntries = async (
-  flattenedList: string[],
+  flattenedList: string[]
 ): Promise<TypedCatalogEntry[]> => {
   return await Promise.all(flattenedList.map(addTypeToUrl));
 };
@@ -18,16 +18,18 @@ const getUrlType = ($: CheerioStatic): CatalogEntryType => {
 
   if (!tabsContainer || tabsContainer.length === 0) {
     return CatalogEntryType.Unknown;
+  } else if (tabsContainer.length === 1) {
+    return getUrlTypeFromTabs($, tabsContainer.find("ul > li"));
   }
+  throw new Error(
+    `Expected 1 tab container, but found ${tabsContainer.length}.`
+  );
+};
 
-  if (tabsContainer.length > 1) {
-    throw new Error(
-      `Expected 1 tab container, but found ${tabsContainer.length}.`
-    );
-  }
-  const tabs = tabsContainer.find("ul > li");
+const getUrlTypeFromTabs = ($: CheerioStatic, tabs: Cheerio) => {
   const [, middleTab] = ensureLengthAtLeast(2, tabs.toArray().map($));
   const middleTabText = parseText(middleTab);
+
   if (tabs.length === 2) {
     if (middleTabText === "Minor Requirements") {
       return CatalogEntryType.Minor;
@@ -44,4 +46,3 @@ const getUrlType = ($: CheerioStatic): CatalogEntryType => {
 
   throw new Error(`Unexpected numbers of tabs: ${tabs.length}`);
 };
-
