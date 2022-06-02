@@ -77,6 +77,11 @@ const Home: NextPage = () => {
                 password: "aryan1234",
               });
               console.log(student);
+              // Set to local storage for use in testUseStudentPage
+              console.log(
+                "token set in local storage, visit testusestudent to test"
+              );
+              localStorage.setItem("token", student.accessToken!);
               setToken(student.accessToken!);
             }}
           >

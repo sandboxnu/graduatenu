@@ -9,6 +9,8 @@ async function bootstrap() {
     logger: ["log", "error", "warn", "debug", "verbose"],
   });
 
+  app.enableCors();
+
   /**
    * Global pipe that ensures all incoming data is validated according to the
    * class-validator decorators in the incoming data's type.
