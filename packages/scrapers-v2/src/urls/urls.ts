@@ -2,7 +2,8 @@ import { convertToHierarchy, joinParts, loadHTML } from "../utils";
 import { CatalogHierarchy, College, CatalogPath } from "./types";
 
 /**
- * Scrapes all catalog entries underneath the colleges.
+ * Scrapes all catalog entries underneath the colleges for the specified catalog
+ * year (given in the form of two numbers to avoid ambiguity: ex, 2021-2022).
  *
  * @param start starting year (must be end year - 1)
  * @param end   ending year
@@ -112,10 +113,10 @@ const getChildrenForPathId = ($: CheerioStatic, url: URL) => {
   return current.children();
 };
 
-const fetchUrlHtml = async (url: URL): Promise<{ $: CheerioStatic; url: URL }> => {
+const fetchUrlHtml = async (url: URL) => {
   const r = await loadHTML(url.href);
   return { $: r, url };
-}
+};
 
 const getUrlHtmls = (queue: CatalogPath[], base: string) => {
   return queue.map(({ path }) => joinParts(base, path)).map(fetchUrlHtml);

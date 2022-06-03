@@ -16,7 +16,7 @@ const addTypeToUrl = async (url: string): Promise<TypedCatalogEntry> => {
 const getUrlType = ($: CheerioStatic): CatalogEntryType => {
   const tabsContainer = $("#contentarea #tabs");
 
-  if (!tabsContainer || tabsContainer.length === 0) {
+  if (tabsContainer.length === 0) {
     return CatalogEntryType.Unknown;
   } else if (tabsContainer.length === 1) {
     return getUrlTypeFromTabs($, tabsContainer.find("ul > li"));
@@ -36,7 +36,7 @@ const getUrlTypeFromTabs = ($: CheerioStatic, tabs: Cheerio) => {
     } else if (middleTabText === "Concentration Requirements") {
       return CatalogEntryType.Concentration;
     }
-    throw new Error(`Expected minor, but found ${middleTabText}`);
+    throw new Error(`Expected minor or concentration text, but found "${middleTabText}"`);
   } else if (tabs.length === 3) {
     if (middleTabText === "Program Requirements") {
       return CatalogEntryType.Major;
