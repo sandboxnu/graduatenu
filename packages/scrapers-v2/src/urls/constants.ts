@@ -1,0 +1,1 @@
+export const baseCatalogUrl = "https://catalog.northeastern.edu";

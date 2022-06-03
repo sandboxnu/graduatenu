@@ -1,4 +1,5 @@
 import { convertToHierarchy, joinParts, loadHTML } from "../utils";
+import { baseCatalogUrl } from "./constants";
 import { CatalogHierarchy, College, CatalogPath } from "./types";
 
 /**
@@ -29,7 +30,7 @@ export const scrapeMajorLinks = async (start: number, end: number) => {
   }
 
   return scrapeMajorLinksForUrl(
-    "https://catalog.northeastern.edu",
+    baseCatalogUrl,
     "undergraduate"
   );
 };
