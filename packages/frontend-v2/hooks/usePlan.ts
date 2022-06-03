@@ -2,7 +2,7 @@ import useSWR, { SWRResponse } from "swr";
 import { API } from "@graduate/api-client";
 import { GetPlanResponse } from "@graduate/common";
 import axios, { AxiosError } from "axios";
-import { redirectUnAuth } from "./utils";
+import { useRedirectUnAuth } from "./utils";
 
 type planResponse = SWRResponse<GetPlanResponse, AxiosError>;
 
@@ -13,8 +13,9 @@ interface UsePlanReturn {
   mutatePlan: planResponse["mutate"];
 }
 
-export function usePlan(planId: string, jwt: string): UsePlanReturn {
+export function usePlan(planId: number, jwt: string): UsePlanReturn {
   const key = `api/plans/${planId}`;
+  const redirect = useRedirectUnAuth();
   const {
     data: plan,
     error,
@@ -22,7 +23,7 @@ export function usePlan(planId: string, jwt: string): UsePlanReturn {
   } = useSWR(key, async () => await API.plans.get(planId, jwt));
 
   if (axios.isAxiosError(error)) {
-    redirectUnAuth(error);
+    redirect(error);
   }
 
   return {

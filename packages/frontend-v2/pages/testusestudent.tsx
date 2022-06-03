@@ -1,16 +1,13 @@
-import { NextPage } from "next";
-import { useStudentWithPlan } from "../hooks/useStudent";
-import { useEffect, useState } from "react";
+import {NextPage} from "next";
+import {useStudentWithPlan} from "../hooks/useStudent";
+import {useLocalStorage} from "../hooks/useLocalStorage";
 
 const TestUseStudent: NextPage = () => {
-  const [token, setToken] = useState("");
 
-  useEffect(() => {
-    // Perform localStorage action
-    setToken(String(localStorage.getItem("token")));
-  }, []);
+  // Perform localStorage action
+  const [tokenInStorage, ] = useLocalStorage("token", "");
 
-  const { student, error, isLoading } = useStudentWithPlan(token);
+  const {student, error, isLoading} = useStudentWithPlan(tokenInStorage);
   if (error) {
     // handle error
   } else if (isLoading) {

@@ -2,7 +2,7 @@ import useSWR, { SWRResponse } from "swr";
 import { API } from "@graduate/api-client";
 import { GetStudentResponse } from "@graduate/common";
 import axios, { AxiosError } from "axios";
-import { redirectUnAuth } from "./utils";
+import { useRedirectUnAuth } from "./utils";
 
 type studentResponse = SWRResponse<GetStudentResponse, AxiosError>;
 
@@ -15,6 +15,8 @@ interface UseStudentReturn {
 
 export function useStudentWithPlan(jwt: string): UseStudentReturn {
   const key = `api/students/me`;
+  const redirect = useRedirectUnAuth();
+
   const {
     data: student,
     error,
@@ -22,7 +24,7 @@ export function useStudentWithPlan(jwt: string): UseStudentReturn {
   } = useSWR(key, async () => await API.student.getMeWithPlan(jwt));
 
   if (axios.isAxiosError(error)) {
-    redirectUnAuth(error);
+    redirect(error);
   }
 
   return {

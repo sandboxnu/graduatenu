@@ -2,6 +2,7 @@ import type { NextPage } from "next";
 import { useState } from "react";
 import { SearchAPI, API } from "@graduate/api-client";
 import { toast, logger } from "../utils";
+import {useLocalStorage} from "../hooks/useLocalStorage";
 
 const Bomb: React.FC = () => {
   throw Error("BOOOOM!");
@@ -10,8 +11,9 @@ const Bomb: React.FC = () => {
 const Home: NextPage = () => {
   const [isClientSideError, setIsClientSideError] = useState(false);
 
-  const [token, setToken] = useState("");
   const [planId, setPlanId] = useState<number>();
+  const [tokenInStorage, setTokenInStorage] = useLocalStorage("token", "");
+  const [_planIdInStorage, setPlanIdInStorage] = useLocalStorage("plan", 0);
 
   if (isClientSideError) {
     return <Bomb />;
@@ -55,7 +57,7 @@ const Home: NextPage = () => {
                 nuid: "000000000",
               });
               console.log(student);
-              setToken(student.accessToken!);
+              setTokenInStorage(student.accessToken!);
             }}
           >
             Register
@@ -63,7 +65,7 @@ const Home: NextPage = () => {
 
           <button
             onClick={async () => {
-              setToken("");
+              setTokenInStorage("");
               console.log("Logged out, token reset");
             }}
           >
@@ -81,8 +83,7 @@ const Home: NextPage = () => {
               console.log(
                 "token set in local storage, visit testusestudent to test"
               );
-              localStorage.setItem("token", student.accessToken!);
-              setToken(student.accessToken!);
+              setTokenInStorage(student.accessToken!);
             }}
           >
             Login
@@ -92,7 +93,7 @@ const Home: NextPage = () => {
           <h3>Student Routes</h3>
           <button
             onClick={async () => {
-              const student = await API.student.getMe(token);
+              const student = await API.student.getMe(tokenInStorage);
               console.log(student);
             }}
           >
@@ -100,7 +101,7 @@ const Home: NextPage = () => {
           </button>
           <button
             onClick={async () => {
-              const student = await API.student.getMeWithPlan(token);
+              const student = await API.student.getMeWithPlan(tokenInStorage);
               console.log(student);
             }}
           >
@@ -112,7 +113,7 @@ const Home: NextPage = () => {
                 {
                   fullName: "Aryan Shah Updated",
                 },
-                token
+                tokenInStorage
               );
               console.log("fullname updated");
               console.log(student);
@@ -122,8 +123,8 @@ const Home: NextPage = () => {
           </button>
           <button
             onClick={async () => {
-              await API.student.delete(token);
-              setToken("");
+              await API.student.delete(tokenInStorage);
+              setTokenInStorage("");
               console.log("deleted user");
             }}
           >
@@ -277,10 +278,14 @@ const Home: NextPage = () => {
                     },
                   },
                 },
-                token
+                tokenInStorage
               );
               console.log(plan);
               setPlanId(plan.id);
+              setPlanIdInStorage(plan.id);
+              console.log(
+                "plan set in local storage, visit testuseplan to test"
+              );
             }}
           >
             Create plan
@@ -295,7 +300,7 @@ const Home: NextPage = () => {
                     yearMap: {},
                   },
                 },
-                token
+                tokenInStorage
               );
               console.log("Changed 4 years to 5");
               console.log(plan);
@@ -305,7 +310,7 @@ const Home: NextPage = () => {
           </button>
           <button
             onClick={async () => {
-              const plan = await API.plans.get(planId!, token);
+              const plan = await API.plans.get(planId!, tokenInStorage);
               console.log(plan);
             }}
           >
@@ -313,9 +318,10 @@ const Home: NextPage = () => {
           </button>
           <button
             onClick={async () => {
-              await API.plans.delete(planId!, token);
+              await API.plans.delete(planId!, tokenInStorage);
               console.log(`deleted plan ${planId}`);
               setPlanId(undefined);
+              setPlanIdInStorage(0);
             }}
           >
             Delete created plan

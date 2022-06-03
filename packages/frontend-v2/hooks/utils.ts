@@ -1,13 +1,15 @@
-import { AxiosError } from "axios";
-import { useRouter } from "next/router";
+import {AxiosError} from "axios";
+import {useRouter} from "next/router";
 
-export const redirectUnAuth = (error: AxiosError) => {
-  if (
-    error.response &&
-    (error.response.status === 401 || error.response.status === 403)
-  ) {
-    const router = useRouter();
-    router.push("/login");
-    // redirect to login
+export const useRedirectUnAuth = () => {
+  const router = useRouter();
+  return (error: AxiosError) => {
+    if (
+      error.response &&
+      (error.response.status === 401 || error.response.status === 403)
+    ) {
+      router.push("/login");
+      // redirect to login
+    }
   }
 };

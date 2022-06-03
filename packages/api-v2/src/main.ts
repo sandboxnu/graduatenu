@@ -9,6 +9,7 @@ async function bootstrap() {
     logger: ["log", "error", "warn", "debug", "verbose"],
   });
 
+  // Enabled for testing :(
   app.enableCors();
 
   /**
