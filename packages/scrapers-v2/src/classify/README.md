@@ -22,6 +22,13 @@ is classified as Unknown.
 Also, as with other stages, if we encounter any case not exactly matching the above table, we treat it as an error, and
 error out. This is for the sake of _correctness_, as cases we do not support **should explicitly be errors**.
 
+### Examples
+
+- [Major example](https://catalog.northeastern.edu/undergraduate/computer-information-science/computer-science/bscs/)
+- [Minor example](https://catalog.northeastern.edu/undergraduate/business/interdisciplinary-minors/accounting-advisory-services-minor/)
+- [Concentration example](https://catalog.northeastern.edu/undergraduate/business/concentrations/fintech/)
+- [Unknown example](https://catalog.northeastern.edu/undergraduate/computer-information-science/accelerated-bachelor-graduate-degree-programs/)
+
 ## Implementation Details
 
 We rely on each page to have its tabs container identifiable by the following selector: `#contentarea #tabs`. We then
