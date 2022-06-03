@@ -1,5 +1,4 @@
 import {
-  CourseWarning,
   DNDSchedule,
   DNDScheduleCourse,
   DNDScheduleTerm,
@@ -8,6 +7,7 @@ import {
   StatusEnum,
 } from "../models/types";
 import {
+  CourseWarning,
   courseEq,
   courseToString,
   Schedule,
