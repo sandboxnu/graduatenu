@@ -8,8 +8,8 @@ export const useRedirectUnAuth = () => {
       error.response &&
       (error.response.status === 401 || error.response.status === 403)
     ) {
-      router.push("/login");
       // redirect to login
+      router.push("/login");
     }
   }
 };

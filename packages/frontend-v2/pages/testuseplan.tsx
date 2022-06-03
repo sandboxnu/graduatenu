@@ -17,7 +17,7 @@ const TestUsePlan: NextPage = () => {
   console.log(plan);
   return (
     <>
-      <h1> You could usePlan!</h1>
+      {plan ? <h1> You could usePlan!</h1> : <h1>Plan could not have been fetched</h1>}
       <p>{plan?.id}</p>
     </>
   );
