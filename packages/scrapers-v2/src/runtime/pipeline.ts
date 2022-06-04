@@ -4,13 +4,14 @@ import { classifyCatalogEntries } from "../classify/classify";
 import { scrapeMajorLinks } from "../urls/urls";
 import { CatalogEntryType } from "../classify/types";
 import { Err, Ok, Result, ResultType } from "@graduate/common";
+import { HDocument } from "../tokenize/types";
 
 enum Phase {
-  Urls,
-  Flatten,
-  Classify,
-  Filter,
-  Tokenize,
+  Urls = "Urls",
+  Flatten = "Flatten",
+  Classify = "Classify",
+  Filter = "Filter",
+  Tokenize = "Tokenize",
 }
 
 type Pipeline<T> = [Phase[], Result<T, unknown[]>];
@@ -52,9 +53,37 @@ export const runPipeline = async () => {
         Promise.all(filteredUrls.map(({ url }) => fetchAndTokenizeHTML(url)))
       )
     )
-    .then((pipeline) => {
-      // todo: log the result => errors if they exist, otherwise result
-      const [phases, result] = pipeline;
-      console.log(`completed ${phases.length} phases!`);
-    });
+    .then(conclude);
 };
+
+const conclude = (pipeline: Pipeline<[HDocument[]]>) => {
+  // todo: log the result => errors if they exist, otherwise result
+  const [phases, result] = pipeline;
+  if (result.type === ResultType.Ok) {
+    console.log(`successfully scraped all majors! wow :)`);
+  } else {
+    console.log(`failed to scrape`);
+    console.log(`errored on stage: ${phases[phases.length - 1]}`);
+    console.log(`had ${result.err.length} errors`);
+    for (let i = 0; i < result.err.length; i += 1) {
+      console.log(`err # ${i}:`);
+      console.log(result.err[i]);
+    }
+    console.log(`done printing stacktraces`);
+  }
+};
+
+/*
+// code that i would like to write
+const singleScrapePipeline = () => {
+const [links, failed] = scrapeLinks()
+// retry logic?
+let done = 0
+let total = ???
+links.forEach(link => runPipeline(link).then(() => done++);
+}
+
+const runPipeline = () => {
+
+}
+ */
