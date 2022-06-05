@@ -1,429 +1,63 @@
 import type { NextPage } from "next";
-import { useState } from "react";
-import { SearchAPI, API } from "@graduate/api-client";
-import { toast, logger } from "../utils";
-
-const Bomb: React.FC = () => {
-  throw Error("BOOOOM!");
-};
+import { Box, Button, Flex, Heading, Image, SimpleGrid, Text } from "@chakra-ui/react";
 
 const Home: NextPage = () => {
-  const [isClientSideError, setIsClientSideError] = useState(false);
 
-  const [token, setToken] = useState("");
-  const [planId, setPlanId] = useState<number>();
-
-  if (isClientSideError) {
-    return <Bomb />;
-  }
-
-  // handler that calls fetchCourse from our api-client package
-  const testFetchCourse = (subject: string, classId: string) => {
-    SearchAPI.fetchCourse(subject, classId).then((res) => console.log(res));
-  };
-
-  // handler that calls searchCourses from our api-client package
-  const testSearchCourses = (
-    searchQuery: string,
-    minIndex: number,
-    maxIndex: number
-  ) => {
-    SearchAPI.searchCourses(searchQuery, minIndex, maxIndex).then((res) =>
-      console.log(res)
-    );
-  };
-
+  // ya overall this stuff is messy, todo: clean this up and make things more consistent, rn its a lot of arbitrary
+  // padding and margins T-T, also need to import new font for logo
   return (
-    <>
-      <h1>GraduateNU Landing Page:</h1>
-      <div>
-        <h2>Testing api calls on backend v2</h2>
-        <p>All responses will be logged to the console</p>
+    <Box>
+      <Flex flexDirection="row" justifyContent="space-between" alignItems="center" paddingLeft="1.5%" paddingRight="1.5%"
+      paddingBottom="1%" paddingTop="1%" boxShadow="0px 4px 7px lightgrey">
+        <Heading size="xl" color="blue.700">GraduateNU</Heading>
+        <Button size="lg" color="primary.main" colorScheme="primary" variant="outline">
+          Sign In
+        </Button>
+      </Flex>
 
-        <div>
-          <h3>Auth Routes</h3>
-          <button
-            onClick={async () => {
-              const student = await API.auth.register({
-                fullName: "Aryan Shah",
-                email: "aryan1@gmail.com",
-                password: "aryan1234",
-                academicYear: 2019,
-                graduateYear: 2023,
-                catalogYear: 2019,
-                major: "Computer Science",
-                nuid: "000000000",
-              });
-              console.log(student);
-              setToken(student.accessToken!);
-            }}
-          >
-            Register
-          </button>
-
-          <button
-            onClick={async () => {
-              setToken("");
-              console.log("Logged out, token reset");
-            }}
-          >
-            Logout
-          </button>
-
-          <button
-            onClick={async () => {
-              const student = await API.auth.login({
-                email: "aryan1@gmail.com",
-                password: "aryan1234",
-              });
-              console.log(student);
-              setToken(student.accessToken!);
-            }}
-          >
-            Login
-          </button>
-        </div>
-        <div>
-          <h3>Student Routes</h3>
-          <button
-            onClick={async () => {
-              const student = await API.student.getMe(token);
-              console.log(student);
-            }}
-          >
-            Get me
-          </button>
-          <button
-            onClick={async () => {
-              const student = await API.student.getMeWithPlan(token);
-              console.log(student);
-            }}
-          >
-            Get me with plan
-          </button>
-          <button
-            onClick={async () => {
-              const student = await API.student.update(
-                {
-                  fullName: "Aryan Shah Updated",
-                },
-                token
-              );
-              console.log("fullname updated");
-              console.log(student);
-            }}
-          >
-            Update me
-          </button>
-          <button
-            onClick={async () => {
-              await API.student.delete(token);
-              setToken("");
-              console.log("deleted user");
-            }}
-          >
-            Delete me
-          </button>
-        </div>
-        <div>
-          <h3>Plan Routes</h3>
-          <button
-            onClick={async () => {
-              const plan = await API.plans.create(
-                {
-                  name: "Plan 1",
-                  major: "Computer Science",
-                  coopCycle: "Fall",
-                  concentration: "Software",
-                  catalogYear: 2019,
-                  courseWarnings: [],
-                  warnings: [],
-                  schedule: {
-                    years: [2019, 2020, 2021, 2022],
-                    yearMap: {
-                      "2019": {
-                        year: 2019,
-                        fall: {
-                          season: "FL",
-                          year: 2019,
-                          termId: 1,
-                          status: "CLASSES",
-                          classes: [],
-                        },
-                        spring: {
-                          season: "SP",
-                          year: 2019,
-                          termId: 1,
-                          status: "CLASSES",
-                          classes: [],
-                        },
-                        summer1: {
-                          season: "S1",
-                          year: 2019,
-                          termId: 1,
-                          status: "CLASSES",
-                          classes: [],
-                        },
-                        summer2: {
-                          season: "S2",
-                          year: 2019,
-                          termId: 1,
-                          status: "CLASSES",
-                          classes: [],
-                        },
-                        isSummerFull: false,
-                      },
-                      "2020": {
-                        year: 2020,
-                        fall: {
-                          season: "FL",
-                          year: 2020,
-                          termId: 1,
-                          status: "CLASSES",
-                          classes: [],
-                        },
-                        spring: {
-                          season: "SP",
-                          year: 2020,
-                          termId: 1,
-                          status: "CLASSES",
-                          classes: [],
-                        },
-                        summer1: {
-                          season: "S1",
-                          year: 2020,
-                          termId: 1,
-                          status: "CLASSES",
-                          classes: [],
-                        },
-                        summer2: {
-                          season: "S2",
-                          year: 2020,
-                          termId: 1,
-                          status: "CLASSES",
-                          classes: [],
-                        },
-                        isSummerFull: false,
-                      },
-                      "2021": {
-                        year: 2021,
-                        fall: {
-                          season: "FL",
-                          year: 2021,
-                          termId: 1,
-                          status: "CLASSES",
-                          classes: [],
-                        },
-                        spring: {
-                          season: "SP",
-                          year: 2021,
-                          termId: 1,
-                          status: "CLASSES",
-                          classes: [],
-                        },
-                        summer1: {
-                          season: "S1",
-                          year: 2021,
-                          termId: 1,
-                          status: "CLASSES",
-                          classes: [],
-                        },
-                        summer2: {
-                          season: "S2",
-                          year: 2021,
-                          termId: 1,
-                          status: "CLASSES",
-                          classes: [],
-                        },
-                        isSummerFull: false,
-                      },
-                      "2022": {
-                        year: 2022,
-                        fall: {
-                          season: "FL",
-                          year: 2022,
-                          termId: 1,
-                          status: "CLASSES",
-                          classes: [],
-                        },
-                        spring: {
-                          season: "SP",
-                          year: 2022,
-                          termId: 1,
-                          status: "CLASSES",
-                          classes: [],
-                        },
-                        summer1: {
-                          season: "S1",
-                          year: 2022,
-                          termId: 1,
-                          status: "CLASSES",
-                          classes: [],
-                        },
-                        summer2: {
-                          season: "S2",
-                          year: 2022,
-                          termId: 1,
-                          status: "CLASSES",
-                          classes: [],
-                        },
-                        isSummerFull: false,
-                      },
-                    },
-                  },
-                },
-                token
-              );
-              console.log(plan);
-              setPlanId(plan.id);
-            }}
-          >
-            Create plan
-          </button>
-          <button
-            onClick={async () => {
-              const plan = await API.plans.update(
-                planId!,
-                {
-                  schedule: {
-                    years: [2019, 2020, 2021, 2022, 2023],
-                    yearMap: {},
-                  },
-                },
-                token
-              );
-              console.log("Changed 4 years to 5");
-              console.log(plan);
-            }}
-          >
-            Update created plan
-          </button>
-          <button
-            onClick={async () => {
-              const plan = await API.plans.get(planId!, token);
-              console.log(plan);
-            }}
-          >
-            Get created plan
-          </button>
-          <button
-            onClick={async () => {
-              await API.plans.delete(planId!, token);
-              console.log(`deleted plan ${planId}`);
-              setPlanId(undefined);
-            }}
-          >
-            Delete created plan
-          </button>
-        </div>
-      </div>
-
-      <h2>SearchAPI logging!</h2>
-      <div>
-        <button
-          onClick={() => {
-            testFetchCourse("CS", "2500");
-          }}
-        >
-          fetchCourse
-        </button>
-        <button
-          onClick={() => {
-            testSearchCourses("CS", 0, 9999);
-          }}
-        >
-          searchCourses
-        </button>
-      </div>
-      <br />
-      <div>
-        <h2>API Error Handling</h2>
-        <div>
-          <h3>Toasts without logging</h3>
-          <button
-            onClick={() =>
-              toast.info("Oh btw here's some info on what you were doing")
-            }
-          >
-            info
-          </button>
-          <button
-            onClick={() =>
-              toast.success("Whatever you were doing was successful")
-            }
-          >
-            success
-          </button>
-          <button
-            onClick={() =>
-              toast.warn("Whatever you were doing was kinda successful")
-            }
-          >
-            warning
-          </button>
-          <button
-            onClick={() => toast.error("Whatever you were doing failed lol")}
-          >
-            error
-          </button>
-        </div>
-      </div>
-      <div>
-        <h3>Toasts with logging</h3>
-        <button
-          onClick={() =>
-            toast.info("Oh btw here's some info on what you were doing", {
-              log: true,
-            })
-          }
-        >
-          info
-        </button>
-        <button
-          onClick={() =>
-            toast.success("Whatever you were doing was successful", {
-              log: true,
-            })
-          }
-        >
-          success
-        </button>
-        <button
-          onClick={() =>
-            toast.warn("Whatever you were doing was kinda successful", {
-              log: true,
-            })
-          }
-        >
-          warning
-        </button>
-        <button
-          onClick={() =>
-            toast.error("Whatever you were doing failed lol", { log: true })
-          }
-        >
-          error
-        </button>
-      </div>
-      <div>
-        <h2>Client Side Error Handling</h2>
-        <button
-          onClick={() => {
-            setIsClientSideError(true);
-          }}
-        >
-          Trigger a client side error
-        </button>
-      </div>
-      <div>
-        <h2>Logging</h2>
-        <button onClick={() => logger.info("Info log")}>info</button>
-        <button onClick={() => logger.debug("Debug log")}>debug</button>
-        <button onClick={() => logger.warn("Warning log")}>warning</button>
-        <button onClick={() => logger.error("Error log")}>error</button>
-      </div>
-    </>
+      <Flex paddingTop="3%" height="50%" flexDirection="row" alignItems="center" justifyContent="center">
+        <Image marginLeft="-5%" marginRight="5%" boxSize="600px" src="/husky.svg" alt="husky"/>
+        <Flex flexDirection="column" width="35%" alignItems="center">
+          <Box>
+            <Heading  fontSize="7xl" color="primary.main">
+              Graduate
+            </Heading>
+            <Heading fontSize="7xl" color="blue.700">
+              your way
+            </Heading>
+            <Text fontSize="3xl" color="blue.700" paddingTop="4%">
+              Navigate the Northeastern graduation requirements and create a personalized plan of study.
+            </Text>
+          </Box>
+          <Button marginRight="30%" marginTop="13%" size="lg" color="primary.main" colorScheme="primary" variant="outline" width="25%">
+            Get Started
+          </Button>
+        </Flex>
+      </Flex>
+      <Flex marginTop="9%" paddingTop="5%" paddingBottom="12%" backgroundColor="blue.50" flexDirection="column" alignItems="center">
+        <Heading size="2xl" color="blue.700">How It Works</Heading>
+        <SimpleGrid columns={3} paddingLeft="13%" paddingTop="7%">
+          <Image paddingTop="5%" src="/landing_start.svg" />
+          <Image paddingLeft="5%" src="/landing_personalize.svg" />
+          <Image paddingTop="5%" src="/landing_graduate.svg" />
+          {/** TODO: turn these into components? */}
+          <Box>
+            <Heading paddingTop="10%" size="lg" color="blue.700">Start</Heading>
+            <Text paddingTop="3%" width="55%" color="blue.700" fontWeight="semibold">Just answer a couple questions and get started with a multi-year plan for your classes.</Text>
+          </Box>
+          <Box>
+            <Heading paddingTop="10%" size="lg" color="blue.700">Personalize</Heading>
+            <Text paddingTop="3%" width="55%" color="blue.700" fontWeight="semibold">Pick the classes you want. We'll take care of NU Path, pre-requisites, and everything in between.</Text>
+          </Box>
+          <Box>
+            <Heading paddingTop="10%" size="lg" color="blue.700">Graduate</Heading>
+            <Text paddingTop="3%" width="55%" color="blue.700" fontWeight="semibold">Build a plan of study that lets you graduate faster, with better classes, and a lot less headaches.</Text>
+          </Box>
+        </SimpleGrid>
+      </Flex>
+    </Box>
   );
+
 };
 
 export default Home;

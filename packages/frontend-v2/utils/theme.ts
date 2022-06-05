@@ -16,7 +16,7 @@ const colors = {
   },
   blue: {
     main: "#6080aa",
-    50: "#e5f3ff",
+    50: "#eff2f6",
     100: "#c9d7e9",
     200: "#aabdd6",
     300: "#8aa2c2",
@@ -54,6 +54,10 @@ const colors = {
     900: "#001306",
   },
 };
+
+const fonts = {
+
+}
 
 // we only support tablets and up
 const breakpoints = {
