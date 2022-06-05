@@ -4,6 +4,8 @@ import { SearchAPI, API } from "@graduate/api-client";
 import { toast, logger } from "../utils";
 import {useLocalStorage} from "../hooks/useLocalStorage";
 import { Button } from "@chakra-ui/react";
+import axios from "axios";
+import {GetStudentResponse} from "@graduate/common";
 
 const Bomb: React.FC = () => {
   throw Error("BOOOOM!");
@@ -36,12 +38,25 @@ const Home: NextPage = () => {
     );
   };
 
+  const clearDataBase = async () => {
+    const res = await axios.get("http://localhost:3002/api/students");
+    const uuids = res.data.map((student: GetStudentResponse) => student.uuid);
+    for (const uuid of uuids) {
+      await axios.delete(`http://localhost:3002/api/students/${uuid}`);
+    }
+    console.log("cleared students");
+  }
+
   return (
     <>
       <h1>GraduateNU Landing Page:</h1>
       <div>
         <h2>Testing api calls on backend v2</h2>
         <p>All responses will be logged to the console</p>
+
+        <Button
+        onClick={clearDataBase}
+        >Delete clear DB</Button>
 
         <div>
           <h3>Auth Routes</h3>
