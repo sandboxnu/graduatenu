@@ -56,7 +56,7 @@ const Home: NextPage = () => {
 
         <Button
         onClick={clearDataBase}
-        >Delete clear DB</Button>
+        >Clear DB</Button>
 
         <div>
           <h3>Auth Routes</h3>
