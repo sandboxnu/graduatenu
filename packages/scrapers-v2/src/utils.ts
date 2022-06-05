@@ -2,10 +2,24 @@ import axios from "axios";
 import * as cheerio from "cheerio";
 import { CatalogEntryType, TypedCatalogEntry } from "./classify/types";
 import { CatalogHierarchy, CatalogPath } from "./urls/types";
+import { Err, Ok, Result } from "@graduate/common";
 
-export const loadHTML = async (url: string): Promise<CheerioStatic> => {
-  const { data } = await axios.get(url);
-  return cheerio.load(data);
+export const loadHtmlWithUrl = async (
+  url: URL
+): Promise<{ url: URL; result: Result<CheerioStatic, unknown> }> => {
+  const result = await loadHTML(url.href);
+  return { url, result };
+};
+
+export const loadHTML = async (
+  url: string
+): Promise<Result<CheerioStatic, unknown>> => {
+  try {
+    const { data } = await axios.get(url);
+    return Ok(await cheerio.load(data));
+  } catch (error) {
+    return Err(error);
+  }
 };
 
 export const appendPath = (base: string, path: string, hash?: string) => {
@@ -62,7 +76,7 @@ export const filterByEntryType = (
   include: CatalogEntryType[]
 ): TypedCatalogEntry[] => {
   return typedUrls.filter((typedUrl) => include.includes(typedUrl.type));
-}
+};
 
 export const joinParts = (base: string, parts: string[]) => {
   return appendPath(base, parts.join("/"));

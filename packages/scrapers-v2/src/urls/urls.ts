@@ -1,5 +1,6 @@
-import { convertToHierarchy, joinParts, loadHTML } from "../utils";
-import { CatalogHierarchy, College, CatalogPath } from "./types";
+import { joinParts, loadHtmlWithUrl } from "../utils";
+import { CatalogPath, CatalogURLResult, College } from "./types";
+import { ResultType } from "@graduate/common";
 
 /**
  * Scrapes all catalog entries underneath the colleges for the specified catalog
@@ -12,7 +13,7 @@ import { CatalogHierarchy, College, CatalogPath } from "./types";
 export const scrapeMajorLinks = async (
   start: number,
   end: number
-): Promise<CatalogHierarchy> => {
+): Promise<CatalogURLResult> => {
   if (start !== end - 1) {
     throw new Error("start should == end-1");
   }
@@ -37,6 +38,9 @@ export const scrapeMajorLinks = async (
 /**
  * Given a baseUrl and a path, attempts to scrape the major catalog based on the sidebar
  * hierarchy.
+ *
+ * Assumes that the provided baseURL + path have direct sub-entries
+ * for each of the colleges.
  * @param baseUrl the base url of the major catalog. should look something
  *                like "https://catalog.northeastern.edu"
  * @param path    the path of the major catalog. something like "/undergraduate"
@@ -45,13 +49,12 @@ export const scrapeMajorLinks = async (
 export const scrapeMajorLinksForUrl = async (
   baseUrl: string,
   path: string
-): Promise<CatalogHierarchy> => {
+): Promise<CatalogURLResult> => {
   const paths = getPathParts(path);
   const initStack = Object.values(College).map((college) => ({
     path: [...paths, college],
   }));
-  const catalogPaths = await scrapeLinks(baseUrl, initStack);
-  return convertToHierarchy(baseUrl, catalogPaths);
+  return await scrapeLinks(baseUrl, initStack);
 };
 
 /**
@@ -62,17 +65,19 @@ export const scrapeMajorLinksForUrl = async (
  * @param initQueue a queue of parent entries
  * @returns         a flat list of all the last level children catalog entries
  */
-const scrapeLinks = async (
+export const scrapeLinks = async (
   baseUrl: string,
   initQueue: CatalogPath[]
-): Promise<CatalogPath[]> => {
+): Promise<CatalogURLResult> => {
   const results: CatalogPath[] = [];
+  const unfinished = [];
 
   let queue = initQueue;
   while (queue.length > 0) {
-    const pages = await Promise.all(getUrlHtmls(queue, baseUrl));
+    const { ok, errors } = await getUrlHtmls(queue, baseUrl);
+    unfinished.push(...errors);
     const nextQueue: CatalogPath[] = [];
-    for (const { $, url } of pages) {
+    for (const { $, url } of ok) {
       const children = getChildrenForPathId($, url).toArray().map($);
       for (const element of children) {
         const path = getLinkForEl(element);
@@ -83,7 +88,10 @@ const scrapeLinks = async (
     queue = nextQueue;
   }
 
-  return results;
+  const entries = results.map(({ path }) =>
+    joinParts(baseUrl, path).toString()
+  );
+  return { entries, unfinished };
 };
 
 const isParent = (el: Cheerio) => {
@@ -113,11 +121,20 @@ const getChildrenForPathId = ($: CheerioStatic, url: URL) => {
   return current.children();
 };
 
-const fetchUrlHtml = async (url: URL) => {
-  const r = await loadHTML(url.href);
-  return { $: r, url };
-};
+const getUrlHtmls = async (queue: CatalogPath[], base: string) => {
+  const fetchResults = await Promise.all(
+    queue.map(({ path }) => joinParts(base, path)).map(loadHtmlWithUrl)
+  );
 
-const getUrlHtmls = (queue: CatalogPath[], base: string) => {
-  return queue.map(({ path }) => joinParts(base, path)).map(fetchUrlHtml);
+  // todo: separate this into result utils?
+  const ok = [];
+  const errors = [];
+  for (const { url, result } of fetchResults) {
+    if (result.type === ResultType.Ok) {
+      ok.push({ $: result.ok, url });
+      continue;
+    }
+    errors.push({ error: result.err, url });
+  }
+  return { ok, errors };
 };
