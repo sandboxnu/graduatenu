@@ -1,5 +1,6 @@
-import { ensureLengthAtLeast, loadHTML, parseText } from "../utils";
+import { ensureLengthAtLeast, loadHTML, loadHtmlWithUrl, parseText } from "../utils";
 import { CatalogEntryType, TypedCatalogEntry } from "./types";
+import { ResultType } from "@graduate/common";
 
 export const classifyCatalogEntries = async (
   flattenedList: string[]
@@ -9,8 +10,11 @@ export const classifyCatalogEntries = async (
 
 export const addTypeToUrl = async (url: string): Promise<TypedCatalogEntry> => {
   const $ = await loadHTML(url);
-  const type = getUrlType($);
-  return { url, type };
+  if ($.type === ResultType.Ok) {
+    const type = getUrlType($.ok);
+    return { url, type };
+  }
+  throw $.err;
 };
 
 const getUrlType = ($: CheerioStatic): CatalogEntryType => {

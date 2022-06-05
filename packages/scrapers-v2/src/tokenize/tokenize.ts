@@ -1,5 +1,11 @@
-import { assertUnreachable } from "@graduate/common";
-import { appendPath, ensureLength, ensureLengthAtLeast, loadHTML, parseText } from "../utils";
+import { assertUnreachable, ResultType } from "@graduate/common";
+import {
+  appendPath,
+  ensureLength,
+  ensureLengthAtLeast,
+  loadHTML,
+  parseText,
+} from "../utils";
 import {
   COURSE_REGEX,
   RANGE_BOUNDED,
@@ -28,12 +34,11 @@ import {
  * @param url the url of the page to tokenize
  */
 export const fetchAndTokenizeHTML = async (url: string): Promise<HDocument> => {
-  try {
-    const $ = await loadHTML(url);
-    return tokenizeHTML($);
-  } catch (error) {
-    throw error;
+  const $ = await loadHTML(url);
+  if ($.type === ResultType.Ok) {
+    return tokenizeHTML($.ok);
   }
+  throw $.err;
 };
 
 /**
@@ -105,7 +110,16 @@ const tokenizeSections = async (
       // only applies to:
       // https://catalog.northeastern.edu/undergraduate/business/business-administration-bsba/#programrequirementstext
       const links = constructNestedLinks($, element);
-      const pages = await Promise.all(links.map(loadHTML));
+      const pages = await Promise.all(
+        links.map((url) =>
+          loadHTML(url).then((result) => {
+            if (result.type === ResultType.Ok) {
+              return result.ok;
+            }
+            throw result.err;
+          })
+        )
+      );
       const containerId = "#concentrationrequirementstextcontainer";
       const concentrations = await Promise.all(
         pages.map((concentrationPage) =>
@@ -401,4 +415,3 @@ const parseCourseTitle = (parsedCourse: string) => {
     classId: Number(classId),
   };
 };
-
