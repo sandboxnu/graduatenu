@@ -7,19 +7,18 @@ import { Err, Ok, Result } from "@graduate/common";
 export const loadHtmlWithUrl = async (
   url: URL
 ): Promise<{ url: URL; result: Result<CheerioStatic, unknown> }> => {
-  const result = await loadHTML(url.href);
+  let result: Result<CheerioStatic, unknown>;
+  try {
+    result = Ok(await loadHTML(url.href));
+  } catch (error) {
+    result = Err(error);
+  }
   return { url, result };
 };
 
-export const loadHTML = async (
-  url: string
-): Promise<Result<CheerioStatic, unknown>> => {
-  try {
-    const { data } = await axios.get(url);
-    return Ok(await cheerio.load(data));
-  } catch (error) {
-    return Err(error);
-  }
+export const loadHTML = async (url: string): Promise<CheerioStatic> => {
+  const { data } = await axios.get(url);
+  return cheerio.load(data);
 };
 
 export const appendPath = (base: string, path: string, hash?: string) => {

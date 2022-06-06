@@ -1,6 +1,5 @@
-import { ensureLengthAtLeast, loadHTML, loadHtmlWithUrl, parseText } from "../utils";
+import { ensureLengthAtLeast, loadHTML, parseText } from "../utils";
 import { CatalogEntryType, TypedCatalogEntry } from "./types";
-import { ResultType } from "@graduate/common";
 
 export const classifyCatalogEntries = async (
   flattenedList: string[]
@@ -9,12 +8,8 @@ export const classifyCatalogEntries = async (
 };
 
 export const addTypeToUrl = async (url: string): Promise<TypedCatalogEntry> => {
-  const $ = await loadHTML(url);
-  if ($.type === ResultType.Ok) {
-    const type = getUrlType($.ok);
-    return { url, type };
-  }
-  throw $.err;
+  const type = getUrlType(await loadHTML(url));
+  return { url, type };
 };
 
 const getUrlType = ($: CheerioStatic): CatalogEntryType => {
@@ -43,5 +38,7 @@ const getUrlTypeFromTabs = ($: CheerioStatic, tabs: Cheerio) => {
     return CatalogEntryType.Major;
   }
 
-  throw new Error(`Middle tab text did not match one of the expected types: ${middleTabText}`);
+  throw new Error(
+    `Middle tab text did not match one of the expected types: ${middleTabText}`
+  );
 };

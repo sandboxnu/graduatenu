@@ -57,4 +57,4 @@ export type CatalogURLResult = {
   unfinished: Array<EntryError>;
 };
 
-export type EntryError = { url: URL, error: unknown };
+export type EntryError = { url: URL; error: unknown };

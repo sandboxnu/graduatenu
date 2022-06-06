@@ -8,6 +8,8 @@ const INTERVAL_MS = 10;
  * to start failing with weird errors. To fix this, limit the in-flight request count.
  *
  * Taken from https://medium.com/@matthew_1129/axios-js-maximum-concurrent-requests-b15045eb69d0
+ *
+ * See axios documentation on interceptors: https://axios-http.com/docs/interceptors
  */
 export const createInterceptors = () => {
   let PENDING_REQUESTS = 0; // create new axios instance

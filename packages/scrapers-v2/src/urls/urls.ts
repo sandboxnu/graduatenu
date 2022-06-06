@@ -51,10 +51,10 @@ export const scrapeMajorLinksForUrl = async (
   path: string
 ): Promise<CatalogURLResult> => {
   const paths = getPathParts(path);
-  const initStack = Object.values(College).map((college) => ({
+  const initQueue = Object.values(College).map((college) => ({
     path: [...paths, college],
   }));
-  return await scrapeLinks(baseUrl, initStack);
+  return await scrapeLinks(baseUrl, initQueue);
 };
 
 /**
@@ -65,7 +65,7 @@ export const scrapeMajorLinksForUrl = async (
  * @param initQueue a queue of parent entries
  * @returns         a flat list of all the last level children catalog entries
  */
-export const scrapeLinks = async (
+const scrapeLinks = async (
   baseUrl: string,
   initQueue: CatalogPath[]
 ): Promise<CatalogURLResult> => {
@@ -126,7 +126,6 @@ const getUrlHtmls = async (queue: CatalogPath[], base: string) => {
     queue.map(({ path }) => joinParts(base, path)).map(loadHtmlWithUrl)
   );
 
-  // todo: separate this into result utils?
   const ok = [];
   const errors = [];
   for (const { url, result } of fetchResults) {
