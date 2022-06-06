@@ -10,7 +10,6 @@ import { logProgress, logResults } from "./logger";
 export const runPipeline = async () => {
   const unregisterAxiosInterceptors = createInterceptors();
   const { entries, unfinished } = await scrapeMajorLinks(2021, 2022);
-  // todo: retry logic for unfinished
   if (unfinished.length > 0) {
     console.log("didn't finish searching some entries", ...unfinished);
   }
@@ -24,8 +23,6 @@ export const runPipeline = async () => {
   const results = await logProgress(pipelines);
   logResults(results);
   unregisterAxiosInterceptors();
-
-  // todo: save outputs to file
 };
 
 const createPipeline = (input: string): Promise<Pipeline<string>> => {

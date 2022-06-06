@@ -36,7 +36,6 @@ export const createInterceptors = () => {
     return Promise.reject(error);
   };
 
-  // todo: use an axios instance rather than modifying global defaults
   const requestId = axios.interceptors.request.use(requestInterceptor);
   const responseId = axios.interceptors.response.use(
     responseSuccessInterceptor,
