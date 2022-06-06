@@ -34,19 +34,14 @@ const getUrlTypeFromTabs = ($: CheerioStatic, tabs: Cheerio) => {
   const [, middleTab] = ensureLengthAtLeast(2, tabs.toArray().map($));
   const middleTabText = parseText(middleTab);
 
-  if (tabs.length === 2) {
-    if (middleTabText === "Minor Requirements") {
-      return CatalogEntryType.Minor;
-    } else if (middleTabText === "Concentration Requirements") {
-      return CatalogEntryType.Concentration;
-    }
-    throw new Error(`Expected minor or concentration text, but found "${middleTabText}"`);
-  } else if (tabs.length === 3) {
-    if (middleTabText === "Program Requirements") {
-      return CatalogEntryType.Major;
-    }
-    throw new Error(`Expected minor, but found ${middleTabText}`);
+  // most entries have 3 tabs, but some have 2 or rarely 4
+  if (middleTabText === "Minor Requirements") {
+    return CatalogEntryType.Minor;
+  } else if (middleTabText === "Concentration Requirements") {
+    return CatalogEntryType.Concentration;
+  } else if (middleTabText === "Program Requirements") {
+    return CatalogEntryType.Major;
   }
 
-  throw new Error(`Unexpected numbers of tabs: ${tabs.length}`);
+  throw new Error(`Middle tab text did not match one of the expected types: ${middleTabText}`);
 };

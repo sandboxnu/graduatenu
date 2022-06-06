@@ -3,38 +3,9 @@ import { addTypeToUrl } from "../classify/classify";
 import { scrapeMajorLinks } from "../urls/urls";
 import { CatalogEntryType, TypedCatalogEntry } from "../classify/types";
 import { Err, Ok, ResultType } from "@graduate/common";
-import { HDocument } from "../tokenize/types";
 import { Phase, Pipeline } from "./types";
 import { createInterceptors } from "./axios";
-
-const createPipeline = <T>(input: T): Promise<Pipeline<T>> => {
-  return Promise.resolve({
-    trace: [],
-    result: Ok(input),
-  });
-};
-
-const addPhase = <Input, Args extends any[], Output>(
-  phase: Phase,
-  next:
-    | ((...args: [Input, ...Args]) => Promise<Output>)
-    | ((...args: [Input, ...Args]) => Output),
-  ...args: Args
-) => {
-  return async (input: Pipeline<Input>): Promise<Pipeline<Output>> => {
-    const { trace, result } = input;
-    const newTrace = [...trace, phase];
-    if (result.type === ResultType.Ok) {
-      try {
-        const applied = await next(result.ok, ...args);
-        return { trace: newTrace, result: Ok(applied) };
-      } catch (e) {
-        return { trace: newTrace, result: Err([e]) };
-      }
-    }
-    return { trace, result };
-  };
-};
+import { logProgress, logResults } from "./logger";
 
 export const runPipeline = async () => {
   const unregisterAxiosInterceptors = createInterceptors();
@@ -50,8 +21,41 @@ export const runPipeline = async () => {
       .then(addPhase(Phase.Filter, filterEntryType, [CatalogEntryType.Major]))
       .then(addPhase(Phase.Tokenize, tokenizeEntry))
   );
-  await recordProgress(pipelines);
+  const results = await logProgress(pipelines);
+  logResults(results);
   unregisterAxiosInterceptors();
+
+  // todo: save outputs to file
+};
+
+const createPipeline = (input: string): Promise<Pipeline<string>> => {
+  return Promise.resolve({
+    id: input,
+    trace: [],
+    result: Ok(input),
+  });
+};
+
+const addPhase = <Input, Args extends any[], Output>(
+  phase: Phase,
+  next:
+    | ((...args: [Input, ...Args]) => Promise<Output>)
+    | ((...args: [Input, ...Args]) => Output),
+  ...args: Args
+) => {
+  return async (input: Pipeline<Input>): Promise<Pipeline<Output>> => {
+    const { id, trace, result } = input;
+    if (result.type === ResultType.Err) {
+      return { id, trace, result };
+    }
+    const newTrace = [...trace, phase];
+    try {
+      const applied = await next(result.ok, ...args);
+      return { id, trace: newTrace, result: Ok(applied) };
+    } catch (e) {
+      return { id, trace: newTrace, result: Err([e]) };
+    }
+  };
 };
 
 const filterEntryType = (
@@ -61,73 +65,20 @@ const filterEntryType = (
   if (types.includes(entry.type)) {
     return entry;
   }
-  throw `filtered out, as the type "${entry.type}" does not match one of: "${types}"`;
+  throw new FilterError(entry.type, types);
 };
 
-const tokenizeEntry = (entry: TypedCatalogEntry) => {
-  return fetchAndTokenizeHTML(entry.url);
-};
+export class FilterError {
+  actual;
+  allowed;
 
-const recordProgress = async (
-  pipelines: Array<Promise<Pipeline<HDocument>>>
-) => {
-  // set handlers to log the result of each pipeline
-  for (const promise of pipelines) {
-    promise.then(({ result, trace }) => {
-      // for success log ".", for failure log "<n>" for the stage # that errored (starting at 1)
-      if (result.type === ResultType.Ok) {
-        process.stdout.write(".");
-      } else {
-        process.stdout.write(String(trace.length));
-      }
-    });
-  }
-
-  const awaited = await Promise.all(pipelines);
-  process.stdout.write("\n");
-  const stats = new FieldLogger();
-
-  for (let i = 0; i < awaited.length; i += 1) {
-    const { trace, result } = awaited[i];
-    if (result.type === ResultType.Ok || typeof result.err[0] === "string") {
-      stats.record("status", result.type === ResultType.Ok ? "ok" : "filtered");
-      continue;
-    }
-
-    stats.record("status", "error");
-    stats.record("stage failures", trace[trace.length - 1]);
-
-    for (const err of result.err) {
-      if (err instanceof Error) {
-        stats.record("errors", err.message);
-      } else {
-        console.log(err);
-        stats.record("errors", "uncategorized");
-      }
-    }
-  }
-
-  stats.print();
-};
-
-class FieldLogger {
-  private fields: Record<string, Map<any, number>> = {};
-
-  record(field: string, value: any) {
-    if (!(field in this.fields)) {
-      this.fields[field] = new Map();
-    }
-    const map = this.fields[field];
-    map.set(value, (map.get(value) ?? 0) + 1);
-  }
-
-  print() {
-    for (const [field, map] of Object.entries(this.fields)) {
-      console.log(field, ":");
-      const entries = Array.from(map.entries()).sort((a, b) => b[1] - a[1]);
-      for (const entry of entries) {
-        console.log("\t", ...entry);
-      }
-    }
+  constructor(actual: CatalogEntryType, allowed: CatalogEntryType[]) {
+    this.actual = actual;
+    this.allowed = allowed;
   }
 }
+
+const tokenizeEntry = async (entry: TypedCatalogEntry) => {
+  const tokenized = await fetchAndTokenizeHTML(entry.url);
+  return { ...entry, tokenized };
+};

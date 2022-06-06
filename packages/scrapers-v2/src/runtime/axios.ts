@@ -4,6 +4,9 @@ const MAX_REQUESTS_COUNT = 100;
 const INTERVAL_MS = 10;
 
 /**
+ * The scrapers (by default) try to make a lot of HTTP requests, and too many at once cause some
+ * to start failing with weird errors. To fix this, limit the in-flight request count.
+ *
  * Taken from https://medium.com/@matthew_1129/axios-js-maximum-concurrent-requests-b15045eb69d0
  */
 export const createInterceptors = () => {
