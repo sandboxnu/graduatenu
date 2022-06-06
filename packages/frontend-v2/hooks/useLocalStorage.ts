@@ -1,5 +1,7 @@
 import { useState, Dispatch, SetStateAction } from "react";
 
+// NextJS executes server side code first, and then client side. Window object is only present client side,
+// so window could be undefined. This ensures the window object exists before we use it.
 const isWindow = typeof window !== "undefined";
 
 export function useLocalStorage<T>(
