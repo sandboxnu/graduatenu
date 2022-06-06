@@ -1,14 +1,8 @@
 import { ensureLengthAtLeast, loadHTML, parseText } from "../utils";
 import { CatalogEntryType, TypedCatalogEntry } from "./types";
 
-export const classifyCatalogEntries = async (
-  flattenedList: string[]
-): Promise<TypedCatalogEntry[]> => {
-  return await Promise.all(flattenedList.map(addTypeToUrl));
-};
-
-export const addTypeToUrl = async (url: string): Promise<TypedCatalogEntry> => {
-  const type = getUrlType(await loadHTML(url));
+export const addTypeToUrl = async (url: URL): Promise<TypedCatalogEntry> => {
+  const type = getUrlType(await loadHTML(url.href));
   return { url, type };
 };
 

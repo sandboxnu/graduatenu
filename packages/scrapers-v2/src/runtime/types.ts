@@ -9,7 +9,7 @@ export enum Phase {
 }
 
 export type Pipeline<T> = {
-  id: string;
+  id: URL;
   trace: Phase[];
   result: Result<T, unknown[]>;
 };

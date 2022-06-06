@@ -37,7 +37,7 @@ export const logResults = <T>(results: Pipeline<T>[]) => {
       stats.recordField("status", "filtered");
       stats.recordField("filtered", result.err[0].actual);
       if (result.err[0].actual === CatalogEntryType.Unknown) {
-        console.log("entry with unknown type:", id);
+        console.log("entry with unknown type:", id.toString());
       }
       continue;
     }
@@ -59,7 +59,7 @@ export const logResults = <T>(results: Pipeline<T>[]) => {
 
 class StatsLogger {
   private fields: Record<string, Map<any, number>> = {};
-  private errors: Map<string, { err: Error; count: number; annot: string, entries: string[] }[]> =
+  private errors: Map<string, { err: Error; count: number; annot: string, entryIds: URL[] }[]> =
     new Map();
 
   recordField(field: string, value: any) {
@@ -71,20 +71,20 @@ class StatsLogger {
     this.record(field, value);
   }
 
-  recordError(err: Error, entryId: string) {
+  recordError(err: Error, entryId: URL) {
     const key = err.stack ?? "had no stacktrace";
     const storedErrors = this.errors.get(key) ?? [];
     for (const stored of storedErrors) {
       if (err.stack === stored.err.stack) {
         stored.count += 1;
-        stored.entries.push(entryId);
+        stored.entryIds.push(entryId);
         this.record("errors", stored.annot);
         return;
       }
     }
     const id = storedErrors.length === 0 ? "" : ` #${storedErrors.length}`;
     const annot = `${err.message}${id}`;
-    storedErrors.push({ err, count: 1, annot, entries: [entryId] });
+    storedErrors.push({ err, count: 1, annot, entryIds: [entryId] });
     this.errors.set(key, storedErrors);
     this.record("errors", annot);
   }
@@ -102,10 +102,10 @@ class StatsLogger {
     const errors = Array.from(this.errors.values())
       .flat()
       .sort((a, b) => b.count - a.count);
-    for (const { err, count, annot, entries } of errors) {
+    for (const { err, count, annot, entryIds } of errors) {
       console.log(annot, count);
       console.error(err);
-      console.log(entries);
+      console.log(entryIds.map(url => url.toString()));
     }
 
     // log normal metrics (including error aggregates)

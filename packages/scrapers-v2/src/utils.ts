@@ -1,7 +1,7 @@
 import axios from "axios";
 import * as cheerio from "cheerio";
 import { CatalogEntryType, TypedCatalogEntry } from "./classify/types";
-import { CatalogHierarchy, CatalogPath } from "./urls/types";
+import { CatalogHierarchy } from "./urls/types";
 import { Err, Ok, Result } from "@graduate/common";
 
 export const loadHtmlWithUrl = async (
@@ -81,19 +81,22 @@ export const joinParts = (base: string, parts: string[]) => {
   return appendPath(base, parts.join("/"));
 };
 
+export const getPathParts = (path: string) => {
+  return path.split("/").filter((s) => s !== "");
+};
+
 /**
  * Converts a flat list of entries to catalog hierarchy.
  *
- * @param base         the base catalog URL, i.e. https://catalog.northeastern.edu
- * @param catalogPaths a flat list of paths
- * @returns            catalog hierarchy
+ * @param urls a flat list of URLs
+ * @returns the resulting catalog hierarchy
  */
 export const convertToHierarchy = (
-  base: string,
-  catalogPaths: CatalogPath[]
+  urls: URL[]
 ): CatalogHierarchy => {
   const hierarchy: CatalogHierarchy = {};
-  for (const { path } of catalogPaths) {
+  for (const url of urls) {
+    const path = getPathParts(url.pathname);
     let obj: CatalogHierarchy = hierarchy;
 
     // For each part of the path, add it to the hierarchy
@@ -117,7 +120,7 @@ export const convertToHierarchy = (
     const last = path[path.length - 1];
     // Obj should equal the parent of the entry
     // the "leaf" is the full url to the catalog entry
-    obj[last] = joinParts(base, path).toString();
+    obj[last] = url.href;
   }
   return hierarchy;
 };

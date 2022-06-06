@@ -33,8 +33,8 @@ import {
  * Fetch html for page and convert into intermediate representation (IR)
  * @param url the url of the page to tokenize
  */
-export const fetchAndTokenizeHTML = async (url: string): Promise<HDocument> => {
-  return tokenizeHTML(await loadHTML(url));
+export const fetchAndTokenizeHTML = async (url: URL): Promise<HDocument> => {
+  return tokenizeHTML(await loadHTML(url.href));
 };
 
 /**

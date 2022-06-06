@@ -36,24 +36,13 @@ export type CatalogHierarchy = {
 };
 
 /**
- * Represents a path to a catalog entry.
- *
- * ex: "undergraduate", "computer-information-science"
- * or, in the archive case:
- * ex: "archive", "2018-2019", "undergraduate", "computer-information-science"
- */
-export type CatalogPath = {
-  path: Array<string>;
-};
-
-/**
  * Represents the result of an attempted catalog URL scrape (to find URLs to entries).
  *
  * Produces a list of entry URLs, as well a queue of unfinished URLs that still need
  * to be searched. Will produce unfinished URLs if visiting a URL fails.
  */
 export type CatalogURLResult = {
-  entries: string[];
+  entries: URL[];
   unfinished: Array<EntryError>;
 };
 

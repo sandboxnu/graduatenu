@@ -1,5 +1,5 @@
-import { joinParts, loadHtmlWithUrl } from "../utils";
-import { CatalogPath, CatalogURLResult, College } from "./types";
+import { getPathParts, joinParts, loadHtmlWithUrl } from "../utils";
+import { CatalogURLResult, College } from "./types";
 import { ResultType } from "@graduate/common";
 
 /**
@@ -51,9 +51,9 @@ export const scrapeMajorLinksForUrl = async (
   path: string
 ): Promise<CatalogURLResult> => {
   const paths = getPathParts(path);
-  const initQueue = Object.values(College).map((college) => ({
-    path: [...paths, college],
-  }));
+  const initQueue = Object.values(College).map((college) =>
+    joinParts(baseUrl, [...paths, college])
+  );
   return await scrapeLinks(baseUrl, initQueue);
 };
 
@@ -67,39 +67,33 @@ export const scrapeMajorLinksForUrl = async (
  */
 const scrapeLinks = async (
   baseUrl: string,
-  initQueue: CatalogPath[]
+  initQueue: URL[]
 ): Promise<CatalogURLResult> => {
-  const results: CatalogPath[] = [];
+  const entries: URL[] = [];
   const unfinished = [];
 
   let queue = initQueue;
   while (queue.length > 0) {
-    const { ok, errors } = await getUrlHtmls(queue, baseUrl);
+    const { ok, errors } = await getUrlHtmls(queue);
     unfinished.push(...errors);
-    const nextQueue: CatalogPath[] = [];
+    const nextQueue: URL[] = [];
     for (const { $, url } of ok) {
       const children = getChildrenForPathId($, url).toArray().map($);
       for (const element of children) {
         const path = getLinkForEl(element);
-        const bucket = isParent(element) ? nextQueue : results;
-        bucket.push({ path });
+        const url = joinParts(baseUrl, path);
+        const bucket = isParent(element) ? nextQueue : entries;
+        bucket.push(url);
       }
     }
     queue = nextQueue;
   }
 
-  const entries = results.map(({ path }) =>
-    joinParts(baseUrl, path).toString()
-  );
   return { entries, unfinished };
 };
 
 const isParent = (el: Cheerio) => {
   return el.hasClass("isparent");
-};
-
-const getPathParts = (url: string) => {
-  return url.split("/").filter((s) => s !== "");
 };
 
 const getLinkForEl = (element: Cheerio): string[] => {
@@ -121,10 +115,8 @@ const getChildrenForPathId = ($: CheerioStatic, url: URL) => {
   return current.children();
 };
 
-const getUrlHtmls = async (queue: CatalogPath[], base: string) => {
-  const fetchResults = await Promise.all(
-    queue.map(({ path }) => joinParts(base, path)).map(loadHtmlWithUrl)
-  );
+const getUrlHtmls = async (queue: URL[]) => {
+  const fetchResults = await Promise.all(queue.map(loadHtmlWithUrl));
 
   const ok = [];
   const errors = [];

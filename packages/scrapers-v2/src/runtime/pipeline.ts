@@ -25,7 +25,7 @@ export const runPipeline = async () => {
   unregisterAxiosInterceptors();
 };
 
-const createPipeline = (input: string): Promise<Pipeline<string>> => {
+const createPipeline = (input: URL): Promise<Pipeline<URL>> => {
   return Promise.resolve({
     id: input,
     trace: [],
