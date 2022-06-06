@@ -15,7 +15,7 @@ const Home: NextPage = () => {
 const Header = (): JSX.Element => {
   return (
     <Flex flexDirection="row" justifyContent="space-between" alignItems="center" 
-      pl="1.5%" pr="1.5%" pb="1%" pt="1%" boxShadow="0px 4px 7px lightgrey">
+      p="1% 1.5% 1% 1.5%" boxShadow="0px 4px 7px lightgrey">
       <Heading size="xl" color="blue.700">GraduateNU</Heading>
       <PrimaryOutlineButton text="Sign In" size="md" />
     </Flex>
