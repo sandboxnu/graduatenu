@@ -51,9 +51,9 @@ const Info = (): JSX.Element => {
     <Flex mt="9%" pt="5%" pb="12%" backgroundColor="blue.50" flexDirection="column" alignItems="center">
       <Heading size="2xl" color="blue.700">How It Works</Heading>
       <SimpleGrid columns={3} pl="13%" pt="7%">
-        <Image pt="5%" src="/landing_start.svg" />
-        <Image pl="5%" src="/landing_personalize.svg" />
-        <Image pt="5%" src="/landing_graduate.svg" />
+        <Image pt="5%" src="/landing_start.svg" alt="Start" />
+        <Image pl="5%" src="/landing_personalize.svg" alt="Personalize" />
+        <Image pt="5%" src="/landing_graduate.svg" alt="Graduate" />
         <InfoSection title="Start" desc="Just answer a couple questions and get started with a multi-year plan for your classes."/>
         <InfoSection title="Personalize" desc="Pick the classes you want. We'll take care of NU Path, pre-requisites, and everything in between."/>
         <InfoSection title="Graduate" desc="Build a plan of study that lets you graduate faster, with better classes, and a lot less headaches."/>
