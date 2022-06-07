@@ -1,5 +1,5 @@
 import { extendTheme } from "@chakra-ui/react";
-import { Button } from "./component_styles/component_styles"
+import { Button } from "./component_styles/buttons"
 
 const colors = {
   primary: {

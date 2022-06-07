@@ -24,7 +24,7 @@ const Header = (): JSX.Element => {
 const Banner = (): JSX.Element => {
   return (
     <Flex pt={{ desktop: "75px", laptop: "50px", tablet: "40px" }} pb={{ desktop: "175px", laptop: "150px", tablet: "100px"}}>
-      <HStack spacing={{ desktop: "100px", laptop: "75px", tablet: "50px" }} justifyContent="center">
+      <Stack direction="row" spacing={{ desktop: "100px", laptop: "75px", tablet: "50px" }} justifyContent="center">
         <Image boxSize={{ desktop: "550px", laptop: "500px", tablet: "400px" }} src="/husky.svg" alt="husky"/>
         <Flex w="35%" flexDirection="column" alignItems="center">
           <Box>
@@ -40,7 +40,7 @@ const Banner = (): JSX.Element => {
           </Box>
           <Button mr={{ desktop: "120px", laptop: "100px", tablet: "50px" }} mt="15%">Get Started</Button>
         </Flex>
-      </HStack>
+      </Stack>
     </Flex>
   );
 }
