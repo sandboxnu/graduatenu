@@ -1,52 +1,18 @@
-import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
-
-// the max number of requests that can be in-flight at any time
-const MAX_REQUESTS_COUNT = 100;
-// how often a request should check if it can fetch
-const INTERVAL_MS = 10;
+import axios from "axios";
+import { Agent } from "https";
 
 /**
  * The scrapers (by default) try to make a lot of HTTP requests, and too many at
- * once cause some to start failing with weird errors. To fix this, limit the
- * in-flight request count.
- *
- * Taken from
- * https://medium.com/@matthew_1129/axios-js-maximum-concurrent-requests-b15045eb69d0
- *
- * See axios documentation on interceptors: https://axios-http.com/docs/interceptors
+ * once cause some to start failing with weird errors. To fix this, we share TCP
+ * sockets between requests and utilize `keepAlive` by installing an agent.
  */
-export const createInterceptors = () => {
-  let PENDING_REQUESTS = 0; // create new axios instance
-  // const api = axios.create({})
-
-  const requestInterceptor = (config: AxiosRequestConfig) => {
-    return new Promise((resolve) => {
-      const interval = setInterval(() => {
-        if (PENDING_REQUESTS < MAX_REQUESTS_COUNT) {
-          PENDING_REQUESTS++;
-          clearInterval(interval);
-          resolve(config);
-        }
-      }, INTERVAL_MS);
-    });
-  };
-
-  const responseSuccessInterceptor = (response: AxiosResponse) => {
-    PENDING_REQUESTS = Math.max(0, PENDING_REQUESTS - 1);
-    return Promise.resolve(response);
-  };
-  const responseFailureIntercepture = (error: unknown) => {
-    PENDING_REQUESTS = Math.max(0, PENDING_REQUESTS - 1);
-    return Promise.reject(error);
-  };
-
-  const requestId = axios.interceptors.request.use(requestInterceptor);
-  const responseId = axios.interceptors.response.use(
-    responseSuccessInterceptor,
-    responseFailureIntercepture
-  );
+export const createAgent = () => {
+  const temp = axios.defaults.httpsAgent;
+  axios.defaults.httpsAgent = new Agent({
+    keepAlive: true,
+    maxSockets: 100,
+  });
   return () => {
-    axios.interceptors.request.eject(requestId);
-    axios.interceptors.response.eject(responseId);
+    axios.defaults.httpsAgent = temp;
   };
 };

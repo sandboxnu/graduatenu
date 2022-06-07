@@ -34,7 +34,7 @@ The first step is the only step that cannot occur for each entry separately: scr
 
 Eventually, it may be beneficial to add retry logic for the URLs that fail.
 
-There is one problem: making a lot of HTTP requests at the same time can overload node. To get around this, we limit the number of in-flight requests that axios can make to 100. The code for this lives in `axios.ts`. All the stages that make HTTP requests are affected by this (urls, classify, and tokenize), so we install the limiters before and after running the entire pipeline.
+Also, when making a many requests, it is helpful to utilize TCP socket `keepAlive` property to re-use sockets between requests (can google for more info). To do this, we install an agent.
 
 ### step 2: PIPELINE
 

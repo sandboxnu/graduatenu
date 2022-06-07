@@ -4,7 +4,7 @@ import { scrapeMajorLinks } from "../urls/urls";
 import { CatalogEntryType, TypedCatalogEntry } from "../classify/types";
 import { Err, Ok, ResultType } from "@graduate/common";
 import { Pipeline, StageLabel } from "./types";
-import { createInterceptors } from "./axios";
+import { createAgent } from "./axios";
 import { logProgress, logResults } from "./logger";
 
 /**
@@ -13,7 +13,7 @@ import { logProgress, logResults } from "./logger";
  * in `scrapers-v2` dir. Also see `main.ts`.
  */
 export const runPipeline = async () => {
-  const unregisterAxiosInterceptors = createInterceptors();
+  const unregisterAgent = createAgent();
   const { entries, unfinished } = await scrapeMajorLinks(2021, 2022);
   if (unfinished.length > 0) {
     console.log("didn't finish searching some entries", ...unfinished);
@@ -28,8 +28,8 @@ export const runPipeline = async () => {
       .then(addPhase(StageLabel.Tokenize, tokenizeEntry))
   );
   const results = await logProgress(pipelines);
+  unregisterAgent();
   logResults(results);
-  unregisterAxiosInterceptors();
 };
 
 // convenience constructor for making a pipeline
