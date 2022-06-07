@@ -23,7 +23,7 @@ const Header = (): JSX.Element => {
 
 const Banner = (): JSX.Element => {
   return (
-    <Flex pt={{ desktop: "75px", laptop: "50px", tablet: "40px" }} pb={{ desktop: "175px", laptop: "150px", tablet: "100px"}}>
+    <Box pt={{ desktop: "75px", laptop: "50px", tablet: "40px" }} pb={{ desktop: "175px", laptop: "150px", tablet: "100px"}}>
       <HStack direction="row" spacing={{ desktop: "100px", laptop: "75px", tablet: "50px" }} justifyContent="center">
         <Image boxSize={{ desktop: "550px", laptop: "500px", tablet: "400px" }} src="/husky.svg" alt="husky"/>
         <Flex w="35%" flexDirection="column" alignItems="center">
@@ -41,15 +41,14 @@ const Banner = (): JSX.Element => {
           <Button mr={{ desktop: "120px", laptop: "100px", tablet: "50px" }} mt="15%">Get Started</Button>
         </Flex>
       </HStack>
-    </Flex>
+    </Box>
   );
 }
 
 const Info = (): JSX.Element => {
   return (
-    <Flex pt={{ desktop: "95px", laptop: "100px", tablet: "75px" }} 
-          pb={{ desktop: "125px", laptop: "130px", tablet: "105px" }} backgroundColor="blue.50" flexDirection="column" 
-          alignItems="center" justifyContent="center">
+    <Box pt={{ desktop: "95px", laptop: "100px", tablet: "75px" }} 
+          pb={{ desktop: "125px", laptop: "130px", tablet: "105px" }} backgroundColor="blue.50">
       <VStack direction="column">
         <Heading mb={{ desktop: "95px", laptop: "75px", tablet: "65px" }} size="2xl" color="blue.700">How It Works</Heading>
         <SimpleGrid columns={3} justifyItems="center" pl="5%" pr="5%"> 
@@ -61,7 +60,7 @@ const Info = (): JSX.Element => {
           <InfoSection title="Graduate" desc="Build a plan of study that lets you graduate faster, with better classes, and a lot less headaches."/>
         </SimpleGrid>
       </VStack>
-    </Flex>
+    </Box>
   );
 }
 
