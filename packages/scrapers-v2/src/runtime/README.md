@@ -46,7 +46,7 @@ The way we put the pipeline together is by using Promises: we can very easily ap
 
 To do this, we use the `addPhase` function. It essentially takes a function and wraps it in a try/catch so that errors don't break the whole scraper.
 
-The types for this function are a little hard to read, but essentially it just wraps each stage in a try/catch, so that if the stage errors out, the scrape doesn't explode.
+The types for this function are a little hard to read, but these exist just to make sure everything is type-checked properly.
 
 It also skips the stage if there was already an error earlier on in the pipeline.
 
@@ -54,7 +54,7 @@ It also allows for labelling stages with a `Phase`, to record what stages the pi
 
 #### `Pipeline` datatype
 
-The `Pipeline` datatype is just to give us some handy bookkeeping, namely an identifier (URL to the entry), the aforementioned trace of the phases completed, and the current value in the pipeline as a result (either ok or error). 
+The `Pipeline` datatype is just to give us some handy bookkeeping, namely an identifier (URL to the entry), the aforementioned trace of the phases completed, and the current value in the pipeline as a result (either ok or error).
 
 ### step 3: logging
 
@@ -95,4 +95,3 @@ See the bottom of the notion page for an up-to-date list of future work.
 - show diff at each stage
 - specify select URLs to run on for faster dev feedback loop
 - specify select stages to run for faster dev feedback loop
-

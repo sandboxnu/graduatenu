@@ -3,13 +3,20 @@ import { ResultType } from "@graduate/common";
 import { FilterError } from "./pipeline";
 import { CatalogEntryType } from "../classify/types";
 
+/**
+ * Logs the progress of the scrape so the developer knows the scraper isn't deadlocked.
+ *
+ * As each individual entry pipeline completes, its status is logged. `.` for
+ * success, `-` for filtered out, or a # representing the stage it errored on.
+ *
+ * @param pipelines The in-progress pipelines
+ */
 export const logProgress = async <T>(
   pipelines: Array<Promise<Pipeline<T>>>
 ) => {
   // set handlers to log the result of each pipeline
   for (const promise of pipelines) {
     promise.then(({ result, trace }) => {
-      // for success log ".", for failure log "<n>" for the stage # that errored (starting at 1)
       if (result.type === ResultType.Ok) {
         process.stdout.write(".");
       } else if (result.err[0] instanceof FilterError) {
@@ -25,6 +32,16 @@ export const logProgress = async <T>(
   return awaited;
 };
 
+/**
+ * Logs scrape summary information, error messages, and the URLs of the catalog
+ * entries that errored.
+ *
+ * Note: To display fewer stacktraces, the logger will try to aggregate them.
+ * However, this doesn't always work with async stacktraces, so there might
+ * sometimes appear two of the same stacktrace.
+ *
+ * @param results The completed pipelines
+ */
 export const logResults = <T>(results: Pipeline<T>[]) => {
   const stats = new StatsLogger();
 
@@ -57,11 +74,33 @@ export const logResults = <T>(results: Pipeline<T>[]) => {
   stats.print();
 };
 
+/**
+ * Allows for "recording" fields (and errors) to print a breakdown of the
+ * different values at the end.
+ *
+ * Each field value will be added to a tally. The # of occurrences of each value
+ * for a field are then displayed when `print()` is called.
+ *
+ * Errors are also tallied. Error grouping is done by comparing stacktrace. This
+ * doesn't quite work for async stacktraces, so sometimes two of the same error
+ * are displayed separately.
+ */
 class StatsLogger {
+  // field -> value -> count
   private fields: Record<string, Map<any, number>> = {};
-  private errors: Map<string, { err: Error; count: number; annot: string, entryIds: URL[] }[]> =
-    new Map();
+  // message -> list -> stacktrace
+  private errors: Map<
+    string,
+    Array<{ err: Error; count: number; annot: string; entryIds: URL[] }>
+  > = new Map();
 
+  /**
+   * Records a field and its value, with the goal of printing the counts for
+   * each different value the field has at the end.
+   *
+   * @param field The name of the field
+   * @param value The value of the field
+   */
   recordField(field: string, value: any) {
     if (field === "errors") {
       throw new Error(
@@ -71,10 +110,19 @@ class StatsLogger {
     this.record(field, value);
   }
 
+  /**
+   * Records an error for a specific entry. Error uniqueness is determined by
+   * stack trace. This doesn't quite work for async stacktraces, so sometimes
+   * two of the same error are displayed separately.
+   *
+   * @param err     The error
+   * @param entryId The entry URL
+   */
   recordError(err: Error, entryId: URL) {
-    const key = err.stack ?? "had no stacktrace";
+    const key = err.message ?? "had no stacktrace";
     const storedErrors = this.errors.get(key) ?? [];
     for (const stored of storedErrors) {
+      // if the stacktrace matches, increment the count
       if (err.stack === stored.err.stack) {
         stored.count += 1;
         stored.entryIds.push(entryId);
@@ -84,6 +132,7 @@ class StatsLogger {
     }
     const id = storedErrors.length === 0 ? "" : ` #${storedErrors.length}`;
     const annot = `${err.message}${id}`;
+    // stacktrace didn't match, so add a new stacktrace entry for this error message
     storedErrors.push({ err, count: 1, annot, entryIds: [entryId] });
     this.errors.set(key, storedErrors);
     this.record("errors", annot);
@@ -97,6 +146,12 @@ class StatsLogger {
     map.set(value, (map.get(value) ?? 0) + 1);
   }
 
+  /**
+   * Prints field and error information.
+   *
+   * Prints stacktraces (with URLs) first, then aggregate information. Also
+   * prints in order of # of occurrences.
+   */
   print() {
     // log errors with stacktraces
     const errors = Array.from(this.errors.values())
@@ -105,7 +160,7 @@ class StatsLogger {
     for (const { err, count, annot, entryIds } of errors) {
       console.log(annot, count);
       console.error(err);
-      console.log(entryIds.map(url => url.toString()));
+      console.log(entryIds.map((url) => url.toString()));
     }
 
     // log normal metrics (including error aggregates)

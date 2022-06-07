@@ -1,15 +1,19 @@
 import { Result } from "@graduate/common";
 
-export enum Phase {
-  Urls = "Urls",
-  Flatten = "Flatten",
+/** Represents the label for a stage in the scraper pipeline */
+export enum StageLabel {
   Classify = "Classify",
   Filter = "Filter",
   Tokenize = "Tokenize",
 }
 
+/**
+ * Represents a pipeline value, at some point in the scraper pipeline. Contains
+ * a trace of the stages that have been run, as well as the resulting value
+ * (either an error, or OK), and the URL the pipeline was run on.
+ */
 export type Pipeline<T> = {
   id: URL;
-  trace: Phase[];
+  trace: StageLabel[];
   result: Result<T, unknown[]>;
 };

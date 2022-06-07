@@ -1,13 +1,17 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 
+// the max number of requests that can be in-flight at any time
 const MAX_REQUESTS_COUNT = 100;
+// how often a request should check if it can fetch
 const INTERVAL_MS = 10;
 
 /**
- * The scrapers (by default) try to make a lot of HTTP requests, and too many at once cause some
- * to start failing with weird errors. To fix this, limit the in-flight request count.
+ * The scrapers (by default) try to make a lot of HTTP requests, and too many at
+ * once cause some to start failing with weird errors. To fix this, limit the
+ * in-flight request count.
  *
- * Taken from https://medium.com/@matthew_1129/axios-js-maximum-concurrent-requests-b15045eb69d0
+ * Taken from
+ * https://medium.com/@matthew_1129/axios-js-maximum-concurrent-requests-b15045eb69d0
  *
  * See axios documentation on interceptors: https://axios-http.com/docs/interceptors
  */

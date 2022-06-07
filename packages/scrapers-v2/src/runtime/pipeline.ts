@@ -3,10 +3,15 @@ import { addTypeToUrl } from "../classify/classify";
 import { scrapeMajorLinks } from "../urls/urls";
 import { CatalogEntryType, TypedCatalogEntry } from "../classify/types";
 import { Err, Ok, ResultType } from "@graduate/common";
-import { Phase, Pipeline } from "./types";
+import { Pipeline, StageLabel } from "./types";
 import { createInterceptors } from "./axios";
 import { logProgress, logResults } from "./logger";
 
+/**
+ * Runs a full scrape of the catalog, logging the results to the console.
+ * Currently, does nothing with the output. To run from cli, run `yarn scrape`
+ * in `scrapers-v2` dir. Also see `main.ts`.
+ */
 export const runPipeline = async () => {
   const unregisterAxiosInterceptors = createInterceptors();
   const { entries, unfinished } = await scrapeMajorLinks(2021, 2022);
@@ -16,15 +21,18 @@ export const runPipeline = async () => {
 
   const pipelines = entries.map((entry) =>
     createPipeline(entry)
-      .then(addPhase(Phase.Classify, addTypeToUrl))
-      .then(addPhase(Phase.Filter, filterEntryType, [CatalogEntryType.Major]))
-      .then(addPhase(Phase.Tokenize, tokenizeEntry))
+      .then(addPhase(StageLabel.Classify, addTypeToUrl))
+      .then(
+        addPhase(StageLabel.Filter, filterEntryType, [CatalogEntryType.Major])
+      )
+      .then(addPhase(StageLabel.Tokenize, tokenizeEntry))
   );
   const results = await logProgress(pipelines);
   logResults(results);
   unregisterAxiosInterceptors();
 };
 
+// convenience constructor for making a pipeline
 const createPipeline = (input: URL): Promise<Pipeline<URL>> => {
   return Promise.resolve({
     id: input,
@@ -33,8 +41,17 @@ const createPipeline = (input: URL): Promise<Pipeline<URL>> => {
   });
 };
 
+/**
+ * Wraps the provided function with a try/catch so that errors don't break the
+ * whole scraper.
+ *
+ * @param phase The identifier for the stage, to be recorded in pipeline trace.
+ * @param next  The function representing this stage. the first argument of this
+ *   function must be the primary entry input.
+ * @param args  Any additional arguments the stage function requires.
+ */
 const addPhase = <Input, Args extends any[], Output>(
-  phase: Phase,
+  phase: StageLabel,
   next:
     | ((...args: [Input, ...Args]) => Promise<Output>)
     | ((...args: [Input, ...Args]) => Output),
