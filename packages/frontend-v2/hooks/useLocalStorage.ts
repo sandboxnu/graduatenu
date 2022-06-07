@@ -31,6 +31,7 @@ export function useLocalStorage<T>(
     }
   };
 
+  // TODO: add removeValue function
 
 
   return [storedValue, setValue];
