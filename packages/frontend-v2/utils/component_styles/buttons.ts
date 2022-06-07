@@ -18,11 +18,13 @@ export const Button: ComponentStyleConfig = {
     },
   },
   variants: { // can create new button variants here
-    primaryOutline: {
+    outline: {
       border: '2px solid',
       borderColor: 'primary.main',
       color: 'primary.main',
+      colorScheme: 'primary',
     },
+
     solid: {
       bg: 'primary.main',
       color: 'white',
@@ -31,7 +33,7 @@ export const Button: ComponentStyleConfig = {
   // default size and variant values
   defaultProps: {
     size: 'md',
-    variant: 'primaryOutline',
+    variant: 'outline',
     colorScheme: 'primary',
   },
 }

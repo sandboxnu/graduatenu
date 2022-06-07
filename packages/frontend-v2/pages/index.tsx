@@ -16,7 +16,7 @@ const Header = (): JSX.Element => {
   return (
     <Flex layerStyle="headerContainer">
       <Logo />
-      <Button variant="primaryOutline" size="sm"> Sign In</Button>
+      <Button size="sm"> Sign In</Button>
     </Flex>
   );
 }
