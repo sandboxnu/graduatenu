@@ -48,7 +48,8 @@ export const tokenizeHTML = async ($: CheerioStatic): Promise<HDocument> => {
   const catalogYear: string = parseText($("#edition")).split(" ")[0];
   const yearVersion: number = parseInt(catalogYear.split("-")[0]);
 
-  const requirementsContainer = $("#programrequirementstextcontainer");
+  const requirementsId = getRequirementsId($);
+  const requirementsContainer = $(requirementsId);
   const sections = await tokenizeSections($, requirementsContainer);
 
   const programRequiredHeading = requirementsContainer
@@ -67,6 +68,14 @@ export const tokenizeHTML = async ($: CheerioStatic): Promise<HDocument> => {
     majorName,
     sections: sections,
   };
+};
+
+const getRequirementsId = ($: CheerioStatic) => {
+  const tabsContainerArr = $("#contentarea #tabs").toArray().map($);
+  const [tabsContainer] = ensureLength(1, tabsContainerArr);
+  const tabsArr = tabsContainer.find("ul > li > a").toArray().map($);
+  const [, middleTab] = ensureLengthAtLeast(2, tabsArr);
+  return middleTab.attr("href");
 };
 
 /**
@@ -110,7 +119,7 @@ const tokenizeSections = async (
       // https://catalog.northeastern.edu/undergraduate/business/business-administration-bsba/#programrequirementstext
       const links = constructNestedLinks($, element);
       const pages = await Promise.all(links.map(loadHTML));
-      const containerId = "#concentrationrequirementstextcontainer";
+      const containerId = getRequirementsId($);
       const concentrations = await Promise.all(
         pages.map((concentrationPage) =>
           tokenizeSections(concentrationPage, concentrationPage(containerId))
