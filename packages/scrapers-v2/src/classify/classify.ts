@@ -9,11 +9,24 @@ export const addTypeToUrl = async (url: URL): Promise<TypedCatalogEntry> => {
 const getUrlType = (url: URL, $: CheerioStatic): CatalogEntryType => {
   const tabsContainer = $("#contentarea #tabs");
 
-  if (tabsContainer.length === 0) {
-    return CatalogEntryType.Unknown;
-  } else if (tabsContainer.length === 1) {
+  if (tabsContainer.length === 1) {
     return getUrlTypeDetailed(url, $, tabsContainer.find("ul > li"));
+  } else if (tabsContainer.length === 0) {
+    const textContainer = $("[id$='requirementstextcontainer']");
+    if (textContainer.length !== 1) {
+      return CatalogEntryType.Unknown;
+    }
+    const id = textContainer.attr("id");
+    if (id === "minorrequirementstextcontainer") {
+      return CatalogEntryType.Minor;
+    } else if (id === "programrequirementstextcontainer") {
+      return CatalogEntryType.Major;
+    } else if (id === "concentrationrequirementstextcontainer") {
+      return CatalogEntryType.Concentration;
+    }
+    return CatalogEntryType.Unknown;
   }
+
   throw new Error(
     `Expected 1 tab container, but found ${tabsContainer.length}.`
   );
