@@ -1,12 +1,13 @@
 import { fetchAndTokenizeHTML } from "../src/tokenize/tokenize";
 import {
-  CS_GAME_DEV,
-  BUSINESS,
-  PHYSICS,
   BSCS,
-  MEDIA_SCREEN_STUDIES_HISTORY,
-  CS_HISTORY,
+  BUSINESS,
   CHEMICAL_ENG,
+  CS_GAME_DEV,
+  CS_HISTORY,
+  CS_MATH,
+  MEDIA_SCREEN_STUDIES_HISTORY,
+  PHYSICS,
 } from "./testUrls";
 
 describe("scraper v2 snapshot tests", () => {
@@ -28,6 +29,10 @@ describe("scraper v2 snapshot tests", () => {
     expect(
       await fetchAndTokenizeHTML(MEDIA_SCREEN_STUDIES_HISTORY)
     ).toMatchSnapshot();
+  });
+  // Range bounded with exceptions
+  test("Test range bounded with exceptions (cs and math)", async () => {
+    expect(await fetchAndTokenizeHTML(CS_MATH)).toMatchSnapshot();
   });
   // Range lower bounded
   test("Test range lower bounded (cs & history)", async () => {

@@ -41,3 +41,6 @@ export const CS_MUSIC_WITH_TECH_MAJOR = format(
 export const WOMEN_GENDER_SEXUALITY_MINOR = format(
   "/undergraduate/social-sciences-humanities/interdisciplinary/womens-gender-sexuality-studies-minor"
 );
+export const CS_MATH = format(
+  "/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-mathematics-bs"
+);

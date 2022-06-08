@@ -8,7 +8,7 @@ import {
 } from "../utils";
 import {
   COURSE_REGEX,
-  RANGE_BOUNDED,
+  RANGE_BOUNDED_MAYBE_EXCEPTIONS,
   RANGE_LOWER_BOUNDED_MAYBE_EXCEPTIONS_1,
   RANGE_LOWER_BOUNDED_MAYBE_EXCEPTIONS_2,
   RANGE_LOWER_BOUNDED_PARSE,
@@ -119,7 +119,7 @@ const tokenizeSections = async (
       // https://catalog.northeastern.edu/undergraduate/business/business-administration-bsba/#programrequirementstext
       const links = constructNestedLinks($, element);
       const pages = await Promise.all(links.map(loadHTML));
-      const containerId = getRequirementsId($);
+      const containerId = "#concentrationrequirementstextcontainer";
       const concentrations = await Promise.all(
         pages.map((concentrationPage) =>
           tokenizeSections(concentrationPage, concentrationPage(containerId))
@@ -205,7 +205,7 @@ const getRowType = ($: CheerioStatic, tr: CheerioElement) => {
     RANGE_LOWER_BOUNDED_MAYBE_EXCEPTIONS_2.test(tdText)
   ) {
     return HRowType.RANGE_LOWER_BOUNDED;
-  } else if (RANGE_BOUNDED.test(tdText)) {
+  } else if (RANGE_BOUNDED_MAYBE_EXCEPTIONS.test(tdText)) {
     return HRowType.RANGE_BOUNDED;
   } else if (RANGE_UNBOUNDED.test(tdText)) {
     return HRowType.RANGE_UNBOUNDED;
@@ -238,13 +238,14 @@ const constructRow = (
     case HRowType.AND_COURSE:
       return constructMultiCourseRow($, tr);
     case HRowType.RANGE_LOWER_BOUNDED:
+    case HRowType.RANGE_LOWER_BOUNDED_WITH_EXCEPTIONS:
       return constructRangeLowerBoundedMaybeExceptions($, tr);
     case HRowType.RANGE_BOUNDED:
-      return constructRangeBounded($, tr);
+    case HRowType.RANGE_BOUNDED_WITH_EXCEPTIONS:
+      return constructRangeBoundedMaybeExceptions($, tr);
     case HRowType.RANGE_UNBOUNDED:
       return constructRangeUnbounded($, tr);
-    case HRowType.RANGE_LOWER_BOUNDED_WITH_EXCEPTIONS:
-      throw "should never get here";
+
     default:
       return assertUnreachable(type);
   }
@@ -363,10 +364,12 @@ const constructRangeLowerBoundedMaybeExceptions = (
   };
 };
 
-const constructRangeBounded = (
+const constructRangeBoundedMaybeExceptions = (
   $: CheerioStatic,
   tr: CheerioElement
-): RangeBoundedRow<HRowType.RANGE_BOUNDED> => {
+):
+  | RangeBoundedRow<HRowType.RANGE_BOUNDED>
+  | WithExceptions<RangeBoundedRow<HRowType.RANGE_BOUNDED_WITH_EXCEPTIONS>> => {
   const [desc, hourCol] = ensureLength(2, tr.children).map($);
   const hour = parseHour(hourCol);
   // text should match the form:
@@ -375,16 +378,27 @@ const constructRangeBounded = (
   const text = parseText(desc);
   // should match the form [["CS 9999", "CS", "9999"], [...]]
   const matches = Array.from(text.matchAll(COURSE_REGEX));
-  const [[, subject, classIdStart], [, , classIdEnd]] = ensureLength(
-    2,
-    matches
-  );
-  return {
-    type: HRowType.RANGE_BOUNDED,
+  const [[, subject, classIdStart], [, , classIdEnd], ...exceptions] =
+    ensureLengthAtLeast(2, matches);
+  const result = {
     hour,
     subject,
     classIdStart: Number(classIdStart),
     classIdEnd: Number(classIdEnd),
+  };
+  if (exceptions.length > 0) {
+    return {
+      ...result,
+      type: HRowType.RANGE_BOUNDED_WITH_EXCEPTIONS,
+      exceptions: exceptions.map(([, subject, id]) => ({
+        subject,
+        classId: Number(id),
+      })),
+    };
+  }
+  return {
+    ...result,
+    type: HRowType.RANGE_BOUNDED,
   };
 };
 

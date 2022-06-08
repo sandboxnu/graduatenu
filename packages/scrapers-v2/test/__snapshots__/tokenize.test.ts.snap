@@ -1321,6 +1321,474 @@ Object {
 }
 `;
 
+exports[`scraper v2 snapshot tests Test range bounded with exceptions (cs and math) 1`] = `
+Object {
+  "majorName": "Computer Science and Mathematics, BS",
+  "programRequiredHours": 133,
+  "sections": Array [
+    Object {
+      "description": "Computer Science Courses",
+      "entries": Array [
+        Object {
+          "description": "Computer Science Overview",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "classId": 1200,
+          "description": "First Year Seminar",
+          "hour": 1,
+          "subject": "CS",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 1210,
+          "description": "Professional Development for Khoury Co-op",
+          "hour": 1,
+          "subject": "CS",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Computer Science Fundamental Courses",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 1800,
+              "description": "Discrete Structures",
+              "subject": "CS",
+            },
+            Object {
+              "classId": 1802,
+              "description": "Seminar for CS 1800",
+              "subject": "CS",
+            },
+          ],
+          "description": "Discrete Structures and Seminar for CS 1800",
+          "hour": 5,
+          "type": "AND_COURSE",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 2500,
+              "description": "Fundamentals of Computer Science 1",
+              "subject": "CS",
+            },
+            Object {
+              "classId": 2501,
+              "description": "Lab for CS 2500",
+              "subject": "CS",
+            },
+          ],
+          "description": "Fundamentals of Computer Science 1 and Lab for CS 2500",
+          "hour": 5,
+          "type": "AND_COURSE",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 2510,
+              "description": "Fundamentals of Computer Science 2",
+              "subject": "CS",
+            },
+            Object {
+              "classId": 2511,
+              "description": "Lab for CS 2510",
+              "subject": "CS",
+            },
+          ],
+          "description": "Fundamentals of Computer Science 2 and Lab for CS 2510",
+          "hour": 5,
+          "type": "AND_COURSE",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 2800,
+              "description": "Logic and Computation",
+              "subject": "CS",
+            },
+            Object {
+              "classId": 2801,
+              "description": "Lab for CS 2800",
+              "subject": "CS",
+            },
+          ],
+          "description": "Logic and Computation and Lab for CS 2800",
+          "hour": 5,
+          "type": "AND_COURSE",
+        },
+        Object {
+          "description": "Computer Science Required Courses",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "classId": 3000,
+          "description": "Algorithms and Data",
+          "hour": 4,
+          "subject": "CS",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 3500,
+              "description": "Object-Oriented Design",
+              "subject": "CS",
+            },
+            Object {
+              "classId": 3501,
+              "description": "Lab for CS 3500",
+              "subject": "CS",
+            },
+          ],
+          "description": "Object-Oriented Design and Lab for CS 3500",
+          "hour": 5,
+          "type": "AND_COURSE",
+        },
+        Object {
+          "classId": 3800,
+          "description": "Theory of Computation",
+          "hour": 4,
+          "subject": "CS",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 4300,
+          "description": "Computer Graphics",
+          "hour": 4,
+          "subject": "CS",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 4100,
+          "description": "Artificial Intelligence",
+          "hour": 0,
+          "subject": "CS",
+          "type": "OR_COURSE",
+        },
+        Object {
+          "classId": 4500,
+          "description": "Software Development",
+          "hour": 4,
+          "subject": "CS",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 4530,
+          "description": "Fundamentals of Software Engineering",
+          "hour": 0,
+          "subject": "CS",
+          "type": "OR_COURSE",
+        },
+        Object {
+          "description": "Khoury Elective Courses",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "description": "With adviser approval, a directed study, research, project study, or appropriate graduate-level course may also be taken as a computer science elective.",
+          "hour": 0,
+          "type": "COMMENT",
+        },
+        Object {
+          "description": "Complete eight semester hours of CS, CY, DS, or IS classes that are not already required. Choose courses within the following ranges:",
+          "hour": 8,
+          "type": "COMMENT",
+        },
+        Object {
+          "classIdStart": 2500,
+          "exceptions": Array [
+            Object {
+              "classId": 5010,
+              "subject": "CS",
+            },
+          ],
+          "hour": 0,
+          "subject": "CS",
+          "type": "RANGE_LOWER_BOUNDED_WITH_EXCEPTIONS",
+        },
+        Object {
+          "classIdStart": 2000,
+          "exceptions": Array [
+            Object {
+              "classId": 4930,
+              "subject": "CY",
+            },
+          ],
+          "hour": 0,
+          "subject": "CY",
+          "type": "RANGE_LOWER_BOUNDED_WITH_EXCEPTIONS",
+        },
+        Object {
+          "classIdStart": 2500,
+          "exceptions": Array [
+            Object {
+              "classId": 4900,
+              "subject": "DS",
+            },
+          ],
+          "hour": 0,
+          "subject": "DS",
+          "type": "RANGE_LOWER_BOUNDED_WITH_EXCEPTIONS",
+        },
+        Object {
+          "classIdStart": 2000,
+          "exceptions": Array [
+            Object {
+              "classId": 4900,
+              "subject": "IS",
+            },
+          ],
+          "hour": 0,
+          "subject": "IS",
+          "type": "RANGE_LOWER_BOUNDED_WITH_EXCEPTIONS",
+        },
+      ],
+    },
+    Object {
+      "description": "Mathematics Courses",
+      "entries": Array [
+        Object {
+          "description": "Calculus Courses",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "classId": 1341,
+          "description": "Calculus 1 for Science and Engineering",
+          "hour": 4,
+          "subject": "MATH",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 1342,
+          "description": "Calculus 2 for Science and Engineering",
+          "hour": 4,
+          "subject": "MATH",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 2321,
+          "description": "Calculus 3 for Science and Engineering",
+          "hour": 4,
+          "subject": "MATH",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Mathematics Courses",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "classId": 2331,
+          "description": "Linear Algebra",
+          "hour": 4,
+          "subject": "MATH",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 2341,
+          "description": "Differential Equations and Linear Algebra for Engineering",
+          "hour": 4,
+          "subject": "MATH",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 3081,
+          "description": "Probability and Statistics",
+          "hour": 4,
+          "subject": "MATH",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 3175,
+          "description": "Group Theory",
+          "hour": 4,
+          "subject": "MATH",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 3527,
+          "description": "Number Theory 1",
+          "hour": 4,
+          "subject": "MATH",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Mathematics Electives",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "description": "Complete three courses in the following range:",
+          "hour": 12,
+          "type": "COMMENT",
+        },
+        Object {
+          "classIdEnd": 4999,
+          "classIdStart": 3001,
+          "exceptions": Array [
+            Object {
+              "classId": 4000,
+              "subject": "MATH",
+            },
+          ],
+          "hour": 0,
+          "subject": "MATH",
+          "type": "RANGE_BOUNDED_WITH_EXCEPTIONS",
+        },
+      ],
+    },
+    Object {
+      "description": "Supporting Course",
+      "entries": Array [
+        Object {
+          "description": "Complete one of the following:",
+          "hour": 4,
+          "type": "COMMENT",
+        },
+        Object {
+          "classId": 2600,
+          "description": "Issues in Race, Science, and Technology",
+          "hour": 0,
+          "subject": "AFAM",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 4170,
+          "description": "The Law, Ethics, and Policy of Data and Digital Technologies",
+          "hour": 0,
+          "subject": "CY",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 5240,
+          "description": "Cyberlaw: Privacy, Ethics, and Digital Rights",
+          "hour": 0,
+          "subject": "CY",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 2150,
+          "description": "Literature and Digital Diversity",
+          "hour": 0,
+          "subject": "ENGL",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 2220,
+          "description": "History of Technology",
+          "hour": 0,
+          "subject": "HIST",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 2102,
+          "description": "Bostonography: The City through Data, Texts, Maps, and Networks",
+          "hour": 0,
+          "subject": "INSH",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 1300,
+          "description": "Knowledge in a Digital World",
+          "hour": 0,
+          "subject": "IS",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 1300,
+          "description": "Knowledge in a Digital World",
+          "hour": 0,
+          "subject": "PHIL",
+          "type": "OR_COURSE",
+        },
+        Object {
+          "classId": 1145,
+          "description": "Technology and Human Values",
+          "hour": 0,
+          "subject": "PHIL",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 1280,
+          "description": "The Twenty-First-Century Workplace",
+          "hour": 0,
+          "subject": "SOCL",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 2485,
+          "description": "Environment, Technology, and Society",
+          "hour": 0,
+          "subject": "SOCL",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 4528,
+          "description": "Computers and Society",
+          "hour": 0,
+          "subject": "SOCL",
+          "type": "PLAIN_COURSE",
+        },
+      ],
+    },
+    Object {
+      "description": "Computer Science Writing Requirement",
+      "entries": Array [
+        Object {
+          "description": "College Writing",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "classId": 1111,
+          "description": "First-Year Writing",
+          "hour": 4,
+          "subject": "ENGW",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Advanced Writing in the Disciplines",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "classId": 3302,
+          "description": "Advanced Writing in the Technical Professions",
+          "hour": 4,
+          "subject": "ENGW",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 3315,
+          "description": "Interdisciplinary Advanced Writing in the Disciplines",
+          "hour": 0,
+          "subject": "ENGW",
+          "type": "OR_COURSE",
+        },
+      ],
+    },
+    Object {
+      "description": "Required General Electives",
+      "entries": Array [
+        Object {
+          "description": "Complete 28 semester hours of general electives.",
+          "hour": 28,
+          "type": "COMMENT",
+        },
+      ],
+    },
+  ],
+  "yearVersion": 2021,
+}
+`;
+
 exports[`scraper v2 snapshot tests Test range lower bounded (cs & history) 1`] = `
 Object {
   "majorName": "Computer Science and History, BS",
