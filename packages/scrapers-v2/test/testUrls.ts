@@ -1,5 +1,5 @@
 export const format = (path: string) =>
-  new URL(`https://catalog.northeastern.edu${path}#programrequirementstext`);
+  new URL(`https://catalog.northeastern.edu${path}`);
 export const CS_GAME_DEV = format(
   "/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-game-development-bs"
 );
@@ -43,4 +43,17 @@ export const WOMEN_GENDER_SEXUALITY_MINOR = format(
 );
 export const CS_MATH = format(
   "/undergraduate/computer-information-science/computer-information-science-combined-majors/computer-science-mathematics-bs"
+);
+export const DIGITAL_METHODS_HUMANITIES_MINOR = format(
+  "/undergraduate/social-sciences-humanities/interdisciplinary/digital-methods-in-the-humanities-minor"
+);
+export const MATH_POLYSCI = format(
+  "/undergraduate/science/mathematics/mathematics-political-science-bs/"
+);
+export const GLOBAL_BUS_STRATEGY_MINOR = format(
+  "/undergraduate/business/concentrations/global-business-strategy/"
+);
+
+export const ARCH_ENGLISH = format(
+  "/undergraduate/arts-media-design/architecture/architecture-english-bs/"
 );
