@@ -1,5 +1,10 @@
 import { useState, Dispatch, useEffect } from "react";
 
+// Enum used for formik data, these entries can be deleted later.
+// These are here for testing purposes.
+export enum LocalStorageKey {
+  token = "token"
+}
 
 /**
  * Using this hook allows for any component to access localstorage.
@@ -8,7 +13,7 @@ import { useState, Dispatch, useEffect } from "react";
  * @param defaultValue Default value returned if the hook cannot access the value in localstorage.
  */
 export function useLocalStorage<T>(
-  key: string,
+  key: LocalStorageKey,
   defaultValue: T
 ): [T, Dispatch<T>] {
   const [storedValue, setStoredValue] = useState<T>(defaultValue);

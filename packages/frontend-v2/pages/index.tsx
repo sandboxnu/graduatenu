@@ -1,11 +1,11 @@
 import type { NextPage } from "next";
 import { useState } from "react";
-import { SearchAPI, API } from "@graduate/api-client";
-import { toast, logger } from "../utils";
-import {useLocalStorage} from "../hooks/useLocalStorage";
+import { API, SearchAPI } from "@graduate/api-client";
+import { logger, toast } from "../utils";
+import { LocalStorageKey, useLocalStorage } from "../hooks/useLocalStorage";
 import { Button } from "@chakra-ui/react";
 import axios from "axios";
-import {GetStudentResponse} from "@graduate/common";
+import { GetStudentResponse } from "@graduate/common";
 
 const Bomb: React.FC = () => {
   throw Error("BOOOOM!");
@@ -15,8 +15,7 @@ const Home: NextPage = () => {
   const [isClientSideError, setIsClientSideError] = useState(false);
 
   const [planId, setPlanId] = useState<number>();
-  const [tokenInStorage, setTokenInStorage] = useLocalStorage("token", "");
-  const [_planIdInStorage, setPlanIdInStorage] = useLocalStorage("plan", 0);
+  const [tokenInStorage, setTokenInStorage] = useLocalStorage(LocalStorageKey.token, "");
 
   if (isClientSideError) {
     return <Bomb />;
@@ -296,7 +295,6 @@ const Home: NextPage = () => {
               );
               console.log(plan);
               setPlanId(plan.id);
-              setPlanIdInStorage(plan.id);
               console.log(
                 "plan set in local storage, visit testuseplan to test"
               );
@@ -335,7 +333,6 @@ const Home: NextPage = () => {
               await API.plans.delete(planId!, tokenInStorage);
               console.log(`deleted plan ${planId}`);
               setPlanId(undefined);
-              setPlanIdInStorage(0);
             }}
           >
             Delete created plan

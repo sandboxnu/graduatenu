@@ -1,13 +1,13 @@
-import { NextPage } from "next";
-import { useStudentWithPlans } from "../hooks/useStudentWithPlans";
-import { useLocalStorage } from "../hooks/useLocalStorage";
-import { API } from "@graduate/api-client";
-import { Button } from "@chakra-ui/react";
+import {NextPage} from "next";
+import {useStudentWithPlans} from "../hooks/useStudentWithPlans";
+import {LocalStorageKey, useLocalStorage} from "../hooks/useLocalStorage";
+import {API} from "@graduate/api-client";
+import {Button} from "@chakra-ui/react";
 
 const TestUseStudent: NextPage = () => {
 
   // Perform localStorage action
-  const [tokenInStorage,] = useLocalStorage("token", "");
+  const [tokenInStorage,] = useLocalStorage(LocalStorageKey.token, "");
 
   const {student, error, isLoading, mutateStudent} = useStudentWithPlans(tokenInStorage);
   if (error) {
