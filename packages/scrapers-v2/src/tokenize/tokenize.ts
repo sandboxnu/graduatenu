@@ -196,9 +196,13 @@ const getRowType = ($: CheerioStatic, tr: CheerioElement, tds: Cheerio[]) => {
       if (trClasses.has("orclass") !== tdClasses.has("orclass")) {
         throw new Error("td and tr orclass were not consistent");
       }
+      const hasMultipleCourses = td.find(".code").toArray().length > 1;
       if (tdClasses.has("orclass")) {
+        if (hasMultipleCourses) {
+          return HRowType.OR_OF_AND_COURSE;
+        }
         return HRowType.OR_COURSE;
-      } else if (td.find(".code").toArray().length > 1) {
+      } else if (hasMultipleCourses) {
         return HRowType.AND_COURSE;
       }
       return HRowType.PLAIN_COURSE;
@@ -232,7 +236,7 @@ const getRowType = ($: CheerioStatic, tr: CheerioElement, tds: Cheerio[]) => {
  * Converts a single row based on the passed-in type (determined by {@link getRowType}
  *
  * @param $
- * @param tr
+ * @param tds
  * @param type
  */
 const constructRow = (
@@ -250,7 +254,8 @@ const constructRow = (
     case HRowType.PLAIN_COURSE:
       return constructPlainCourseRow($, tds);
     case HRowType.AND_COURSE:
-      return constructMultiCourseRow($, tds);
+    case HRowType.OR_OF_AND_COURSE:
+      return constructMultiCourseRow($, tds, type);
     case HRowType.RANGE_LOWER_BOUNDED:
     case HRowType.RANGE_LOWER_BOUNDED_WITH_EXCEPTIONS:
       return constructRangeLowerBoundedMaybeExceptions($, tds);
@@ -306,9 +311,13 @@ const constructOrCourseRow = (
 
 const constructMultiCourseRow = (
   $: CheerioStatic,
-  tds: Cheerio[]
-): MultiCourseRow<HRowType.AND_COURSE> => {
-  const [code, desc, hourCol] = ensureLength(3, tds);
+  tds: Cheerio[],
+  type: HRowType.AND_COURSE | HRowType.OR_OF_AND_COURSE
+):
+  | MultiCourseRow<HRowType.AND_COURSE>
+  | MultiCourseRow<HRowType.OR_OF_AND_COURSE> => {
+  // some ORs of ANDs don't have a third cell for hour column
+  const [code, desc, hourCol] = ensureLengthAtLeast(2, tds);
   const titles = code
     .find(".code")
     .toArray()
@@ -331,10 +340,10 @@ const constructMultiCourseRow = (
     classId,
     description: descriptions[i],
   }));
-  const hour = parseHour(hourCol);
+  const hour = hourCol ? parseHour(hourCol) : 0;
   return {
     hour,
-    type: HRowType.AND_COURSE,
+    type,
     description: descriptions.join(" and "),
     courses,
   };

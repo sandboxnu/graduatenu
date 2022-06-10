@@ -2,6 +2,7 @@ import { Pipeline, StageLabel } from "./types";
 import { ResultType } from "@graduate/common";
 import { FilterError } from "./pipeline";
 import { CatalogEntryType } from "../classify/types";
+import { HDocument } from "../tokenize/types";
 
 /**
  * Logs the progress of the scrape so the developer knows the scraper isn't deadlocked.
@@ -42,19 +43,18 @@ export const logProgress = async <T>(
  *
  * @param results The completed pipelines
  */
-export const logResults = <T>(results: Pipeline<T>[]) => {
+export const logResults = (
+  results: Pipeline<{
+    tokenized: HDocument;
+    type: CatalogEntryType;
+    url: URL;
+  }>[]
+) => {
   const stats = new StatsLogger();
 
-  for (let i = 0; i < results.length; i += 1) {
-    const { trace, result, id } = results[i];
+  for (const { result, trace, id } of results) {
     if (result.type === ResultType.Ok) {
-      logOkResult(stats);
-    } else if (result.err[0] instanceof FilterError) {
-      stats.recordField("status", "filtered");
-      stats.recordField("filtered", result.err[0].actual);
-      if (result.err[0].actual === CatalogEntryType.Unknown) {
-        console.log("entry with unknown type:", id.toString());
-      }
+      logOkResult(stats, result, id);
     } else {
       logErrResult(stats, id, trace, result.err);
     }
@@ -63,11 +63,38 @@ export const logResults = <T>(results: Pipeline<T>[]) => {
   stats.print();
 };
 
-const logOkResult = (stats: StatsLogger) => {
+const logOkResult = (
+  stats: StatsLogger,
+  result: { ok: { tokenized: HDocument; type: CatalogEntryType } },
+  id: URL
+) => {
   stats.recordField("status", "ok");
-}
 
-const logErrResult = (stats: StatsLogger, id: URL, trace: StageLabel[], errors: unknown[]) => {
+  // record OK values
+  const { tokenized, type } = result.ok;
+  stats.recordField("status", "ok");
+  stats.recordField("entry type", type);
+  if (type === CatalogEntryType.Major && tokenized.programRequiredHours <= 0) {
+    // only applies to majors, because concentrations and minors don't have hours requirement
+    stats.recordError(new Error("major with hours <= 0"), id);
+  }
+};
+
+const logErrResult = (
+  stats: StatsLogger,
+  id: URL,
+  trace: StageLabel[],
+  errors: unknown[]
+) => {
+  // special case the filter error
+  if (errors[0] instanceof FilterError) {
+    stats.recordField("status", "filtered");
+    stats.recordField("filtered", errors[0].actual);
+    if (errors[0].actual === CatalogEntryType.Unknown) {
+      console.log("entry with unknown type:", id.toString());
+    }
+  }
+
   stats.recordField("status", "error");
   stats.recordField("stage failures", trace[trace.length - 1]);
 
@@ -78,7 +105,7 @@ const logErrResult = (stats: StatsLogger, id: URL, trace: StageLabel[], errors: 
       stats.recordError(new Error(`non-error value: ${err}`), id);
     }
   }
-}
+};
 
 /**
  * Allows for "recording" fields (and errors) to print a breakdown of the
@@ -147,8 +174,9 @@ class StatsLogger {
   /**
    * Increments the count for a field, stored in this.fields, or adds it if it
    * doesn't exist. Compares values with reference equality
-   * @param field the field name
-   * @param value the value
+   *
+   * @param field The field name
+   * @param value The value
    */
   private record(field: string, value: any) {
     if (!(field in this.fields)) {

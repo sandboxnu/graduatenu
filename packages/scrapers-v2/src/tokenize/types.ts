@@ -35,6 +35,7 @@ export type HRow =
   | CourseRow<HRowType.PLAIN_COURSE>
   // multi course rows
   | MultiCourseRow<HRowType.AND_COURSE>
+  | MultiCourseRow<HRowType.OR_OF_AND_COURSE>
   // range rows
   | RangeLowerBoundedRow<HRowType.RANGE_LOWER_BOUNDED>
   | WithExceptions<
@@ -52,6 +53,7 @@ export enum HRowType {
   COMMENT = "COMMENT",
   OR_COURSE = "OR_COURSE",
   AND_COURSE = "AND_COURSE",
+  OR_OF_AND_COURSE = "OR_OF_AND_COURSE",
   PLAIN_COURSE = "PLAIN_COURSE",
 
   RANGE_LOWER_BOUNDED = "RANGE_LOWER_BOUNDED",
