@@ -15,9 +15,8 @@ const Home: NextPage = () => {
   const [isClientSideError, setIsClientSideError] = useState(false);
 
   const [planId, setPlanId] = useState<number>();
-  const [tokenInStorage, setTokenInStorage] = useLocalStorage(
-    LocalStorageKey.Token,
-    ""
+  const [tokenInStorage, setTokenInStorage] = useLocalStorage<string>(
+    LocalStorageKey.Token
   );
 
   if (isClientSideError) {
@@ -111,7 +110,7 @@ const Home: NextPage = () => {
           <h3>Student Routes</h3>
           <Button
             onClick={async () => {
-              const student = await API.student.getMe(tokenInStorage);
+              const student = await API.student.getMe(tokenInStorage!);
               console.log(student);
             }}
           >
@@ -119,7 +118,7 @@ const Home: NextPage = () => {
           </Button>
           <Button
             onClick={async () => {
-              const student = await API.student.getMeWithPlan(tokenInStorage);
+              const student = await API.student.getMeWithPlan(tokenInStorage!);
               console.log(student);
             }}
           >
@@ -131,7 +130,7 @@ const Home: NextPage = () => {
                 {
                   fullName: "Aryan Shah Updated",
                 },
-                tokenInStorage
+                tokenInStorage!
               );
               console.log("fullname updated");
               console.log(student);
@@ -141,7 +140,7 @@ const Home: NextPage = () => {
           </Button>
           <Button
             onClick={async () => {
-              await API.student.delete(tokenInStorage);
+              await API.student.delete(tokenInStorage!);
               setTokenInStorage("");
               console.log("deleted user");
             }}
@@ -296,7 +295,7 @@ const Home: NextPage = () => {
                     },
                   },
                 },
-                tokenInStorage
+                tokenInStorage!
               );
               console.log(plan);
               setPlanId(plan.id);
@@ -317,7 +316,7 @@ const Home: NextPage = () => {
                     yearMap: {},
                   },
                 },
-                tokenInStorage
+                tokenInStorage!
               );
               console.log("Changed 4 years to 5");
               console.log(plan);
@@ -327,7 +326,7 @@ const Home: NextPage = () => {
           </Button>
           <Button
             onClick={async () => {
-              const plan = await API.plans.get(planId!, tokenInStorage);
+              const plan = await API.plans.get(planId!, tokenInStorage!);
               console.log(plan);
             }}
           >
@@ -335,7 +334,7 @@ const Home: NextPage = () => {
           </Button>
           <Button
             onClick={async () => {
-              await API.plans.delete(planId!, tokenInStorage);
+              await API.plans.delete(planId!, tokenInStorage!);
               console.log(`deleted plan ${planId}`);
               setPlanId(undefined);
             }}

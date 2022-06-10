@@ -13,7 +13,7 @@ import {
   UpdateStudentDto,
   UpdateStudentResponse,
 } from "@graduate/common";
-import { plainToInstance, ClassConstructor } from "class-transformer";
+import { ClassConstructor, plainToInstance } from "class-transformer";
 
 class APIClient {
   private axios: AxiosInstance;
@@ -133,7 +133,7 @@ class SearchAPIClient {
   fetchCourse = async (
     subject: string,
     classId: string
-  ): Promise<ScheduleCourse> => {
+  ): Promise<ScheduleCourse | null> => {
     const res = await this.axios({
       method: "post",
       data: {
