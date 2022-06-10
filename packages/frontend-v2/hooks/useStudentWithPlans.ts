@@ -1,15 +1,18 @@
-import useSWR, {KeyedMutator, SWRResponse} from "swr";
+import useSWR, { KeyedMutator, SWRResponse } from "swr";
 import { API } from "@graduate/api-client";
 import { GetStudentResponse } from "@graduate/common";
 import { AxiosError } from "axios";
 
-type StudentResponse = Omit<SWRResponse<GetStudentResponse, AxiosError>, "data" | "mutate">;
+type StudentResponse = Omit<
+  SWRResponse<GetStudentResponse, AxiosError>,
+  "data" | "mutate"
+>;
 
 type UseStudentReturn = StudentResponse & {
-  isLoading: boolean,
+  isLoading: boolean;
   mutateStudent: KeyedMutator<GetStudentResponse>;
   student?: GetStudentResponse;
-}
+};
 
 /**
  * Returns the student with plan using SWR.
@@ -19,16 +22,15 @@ type UseStudentReturn = StudentResponse & {
 export function useStudentWithPlans(jwt: string): UseStudentReturn {
   const key = `api/students/me`;
 
-  const {
-    data,
-    mutate,
-    ...rest
-  } = useSWR(key, async () => await API.student.getMeWithPlan(jwt));
+  const { data, mutate, ...rest } = useSWR(
+    key,
+    async () => await API.student.getMeWithPlan(jwt)
+  );
 
   return {
+    ...rest,
     student: data,
     mutateStudent: mutate,
     isLoading: !data && !rest.error,
-    ...rest
   };
 }

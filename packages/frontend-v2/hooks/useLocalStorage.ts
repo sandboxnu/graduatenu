@@ -1,9 +1,12 @@
-import { useState, Dispatch, useEffect } from "react";
+import { Dispatch, useEffect, useState } from "react";
 
-// Enum used for formik data, these entries can be deleted later.
-// These are here for testing purposes.
+/**
+ * Enum declared to be able to look up usages of storage keys and ensures
+ * the keys are unique.
+ */
 export enum LocalStorageKey {
-  token = "token"
+  // Delete later, this is for testing.
+  Token = "Token",
 }
 
 /**
@@ -21,23 +24,22 @@ export function useLocalStorage<T>(
   useEffect(() => {
     try {
       const item = window.localStorage.getItem(key);
-      setStoredValue(item ? JSON.parse(item) : defaultValue);
+      if (item) setStoredValue(JSON.parse(item));
     } catch (error) {
       console.error(error);
     }
-  }, [])
+  }, []);
 
   const setValue = (value: T) => {
     try {
       setStoredValue(value);
       window?.localStorage.setItem(key, JSON.stringify(value));
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
   // TODO: add removeValue function
-
 
   return [storedValue, setValue];
 }

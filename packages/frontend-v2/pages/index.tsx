@@ -15,7 +15,10 @@ const Home: NextPage = () => {
   const [isClientSideError, setIsClientSideError] = useState(false);
 
   const [planId, setPlanId] = useState<number>();
-  const [tokenInStorage, setTokenInStorage] = useLocalStorage(LocalStorageKey.token, "");
+  const [tokenInStorage, setTokenInStorage] = useLocalStorage(
+    LocalStorageKey.Token,
+    ""
+  );
 
   if (isClientSideError) {
     return <Bomb />;
@@ -40,9 +43,13 @@ const Home: NextPage = () => {
   const clearDataBase = async () => {
     const res = await axios.get("http://localhost:3002/api/students");
     const uuids = res.data.map((student: GetStudentResponse) => student.uuid);
-    await Promise.all(uuids.map((uuid: string) => axios.delete(`http://localhost:3002/api/students/${uuid}`)));
+    await Promise.all(
+      uuids.map((uuid: string) =>
+        axios.delete(`http://localhost:3002/api/students/${uuid}`)
+      )
+    );
     console.log("cleared students");
-  }
+  };
 
   return (
     <>
@@ -51,9 +58,7 @@ const Home: NextPage = () => {
         <h2>Testing api calls on backend v2</h2>
         <p>All responses will be logged to the console</p>
 
-        <Button
-        onClick={clearDataBase}
-        >Clear DB</Button>
+        <Button onClick={clearDataBase}>Clear DB</Button>
 
         <div>
           <h3>Auth Routes</h3>
