@@ -11,6 +11,11 @@ type UseStudentReturn = StudentResponse & {
   student?: GetStudentResponse;
 }
 
+/**
+ * Returns the student with plan using SWR.
+ * @param jwt JWT for authentication to fetch the data from db.
+ * Will later be removed when we switch to cookies.
+ */
 export function useStudentWithPlans(jwt: string): UseStudentReturn {
   const key = `api/students/me`;
 

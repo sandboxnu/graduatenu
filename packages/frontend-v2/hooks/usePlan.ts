@@ -11,6 +11,11 @@ type UsePlanReturn = PlanResponse & {
   mutatePlan: KeyedMutator<GetPlanResponse>;
 }
 
+/**
+ * Gets the specified plan from the given planId in SWR.
+ * @param planId The specific plan to retrieve.
+ * @param jwt JWT for authentication. Will later be removed when we switch to cookies.
+ */
 export function usePlan(planId: number, jwt: string): UsePlanReturn {
   const key = `api/plans/${planId}`;
 
