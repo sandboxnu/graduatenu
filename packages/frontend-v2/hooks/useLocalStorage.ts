@@ -1,33 +1,33 @@
-import { useState, Dispatch, SetStateAction } from "react";
+import { useState, Dispatch, useEffect } from "react";
 
-// NextJS executes server side code first, and then client side. Window object is only present client side,
-// so window could be undefined. This ensures the window object exists before we use it.
-const isWindow = typeof window !== "undefined";
 
+/**
+ * Using this hook allows for any component to access localstorage.
+ * Accessing the hook allows for the functionality of setting and getting a value in localstorage.
+ * @param key Key for the localstorage value.
+ * @param defaultValue Default value returned if the hook cannot access the value in localstorage.
+ */
 export function useLocalStorage<T>(
   key: string,
-  initialValue: T
-): [T, Dispatch<SetStateAction<T>>] {
-  const [storedValue, setStoredValue] = useState<T>(() => {
+  defaultValue: T
+): [T, Dispatch<T>] {
+  const [storedValue, setStoredValue] = useState<T>(defaultValue);
+
+  useEffect(() => {
     try {
-      const item = isWindow && window.localStorage.getItem(key);
-      return item ? JSON.parse(item) : initialValue;
+      const item = window.localStorage.getItem(key);
+      setStoredValue(item ? JSON.parse(item) : defaultValue);
     } catch (error) {
       console.error(error);
-      return initialValue;
     }
-  });
+  }, [])
 
-  const setValue = (value: T | ((value: T) => T)) => {
+  const setValue = (value: T) => {
     try {
-      const valueToStore =
-        value instanceof Function ? value(storedValue) : value;
-      setStoredValue(valueToStore);
-
-      isWindow &&
-      window.localStorage.setItem(key, JSON.stringify(valueToStore));
+      setStoredValue(value);
+      window?.localStorage.setItem(key, JSON.stringify(value));
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
   };
 

@@ -41,9 +41,7 @@ const Home: NextPage = () => {
   const clearDataBase = async () => {
     const res = await axios.get("http://localhost:3002/api/students");
     const uuids = res.data.map((student: GetStudentResponse) => student.uuid);
-    for (const uuid of uuids) {
-      await axios.delete(`http://localhost:3002/api/students/${uuid}`);
-    }
+    await Promise.all(uuids.map((uuid: string) => axios.delete(`http://localhost:3002/api/students/${uuid}`)));
     console.log("cleared students");
   }
 

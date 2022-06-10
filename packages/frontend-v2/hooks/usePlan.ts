@@ -1,35 +1,29 @@
-import useSWR, { SWRResponse } from "swr";
+import useSWR, {KeyedMutator, SWRResponse} from "swr";
 import { API } from "@graduate/api-client";
-import { GetPlanResponse } from "@graduate/common";
-import axios, { AxiosError } from "axios";
-import { useRedirectUnAuth } from "./utils";
+import {GetPlanResponse} from "@graduate/common";
+import { AxiosError } from "axios";
 
-type planResponse = SWRResponse<GetPlanResponse, AxiosError>;
+type PlanResponse = Omit<SWRResponse<GetPlanResponse, AxiosError>, "data" | "mutate">;
 
-interface UsePlanReturn {
-  plan?: planResponse["data"];
-  error?: planResponse["error"];
+type UsePlanReturn = PlanResponse & {
+  plan?: GetPlanResponse;
   isLoading: boolean;
-  mutatePlan: planResponse["mutate"];
+  mutatePlan: KeyedMutator<GetPlanResponse>;
 }
 
 export function usePlan(planId: number, jwt: string): UsePlanReturn {
   const key = `api/plans/${planId}`;
-  const redirect = useRedirectUnAuth();
+
   const {
-    data: plan,
-    error,
-    mutate: mutatePlan,
+    data,
+    mutate,
+    ...rest
   } = useSWR(key, async () => await API.plans.get(planId, jwt));
 
-  if (axios.isAxiosError(error)) {
-    redirect(error);
-  }
-
   return {
-    plan,
-    error,
-    mutatePlan,
-    isLoading: !plan && !error,
+    plan: data,
+    mutatePlan: mutate,
+    isLoading: !data && !rest.error,
+    ...rest
   };
 }

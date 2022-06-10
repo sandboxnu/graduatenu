@@ -1,6 +1,6 @@
-import {NextPage} from "next";
-import {useLocalStorage} from "../hooks/useLocalStorage";
-import {usePlan} from "../hooks/usePlan";
+import { NextPage } from "next";
+import { useLocalStorage } from "../hooks/useLocalStorage";
+import { usePlan } from "../hooks/usePlan";
 
 const TestUsePlan: NextPage = () => {
 
