@@ -1,7 +1,11 @@
 import type { NextPage } from "next";
 import { useState } from "react";
-import { SearchAPI, API } from "@graduate/api-client";
-import { toast, logger } from "../utils";
+import { API, SearchAPI } from "@graduate/api-client";
+import { logger, toast } from "../utils";
+import { LocalStorageKey, useLocalStorage } from "../hooks/useLocalStorage";
+import { Button } from "@chakra-ui/react";
+import axios from "axios";
+import { GetStudentResponse } from "@graduate/common";
 
 const Bomb: React.FC = () => {
   throw Error("BOOOOM!");
@@ -10,8 +14,11 @@ const Bomb: React.FC = () => {
 const Home: NextPage = () => {
   const [isClientSideError, setIsClientSideError] = useState(false);
 
-  const [token, setToken] = useState("");
   const [planId, setPlanId] = useState<number>();
+  const [tokenInStorage, setTokenInStorage] = useLocalStorage(
+    LocalStorageKey.Token,
+    ""
+  );
 
   if (isClientSideError) {
     return <Bomb />;
@@ -33,6 +40,17 @@ const Home: NextPage = () => {
     );
   };
 
+  const clearDataBase = async () => {
+    const res = await axios.get("http://localhost:3002/api/students");
+    const uuids = res.data.map((student: GetStudentResponse) => student.uuid);
+    await Promise.all(
+      uuids.map((uuid: string) =>
+        axios.delete(`http://localhost:3002/api/students/${uuid}`)
+      )
+    );
+    console.log("cleared students");
+  };
+
   return (
     <>
       <h1>GraduateNU Landing Page:</h1>
@@ -40,9 +58,11 @@ const Home: NextPage = () => {
         <h2>Testing api calls on backend v2</h2>
         <p>All responses will be logged to the console</p>
 
+        <Button onClick={clearDataBase}>Clear DB</Button>
+
         <div>
           <h3>Auth Routes</h3>
-          <button
+          <Button
             onClick={async () => {
               const student = await API.auth.register({
                 fullName: "Aryan Shah",
@@ -55,79 +75,83 @@ const Home: NextPage = () => {
                 nuid: "000000000",
               });
               console.log(student);
-              setToken(student.accessToken!);
+              setTokenInStorage(student.accessToken!);
             }}
           >
             Register
-          </button>
+          </Button>
 
-          <button
+          <Button
             onClick={async () => {
-              setToken("");
+              setTokenInStorage("");
               console.log("Logged out, token reset");
             }}
           >
             Logout
-          </button>
+          </Button>
 
-          <button
+          <Button
             onClick={async () => {
               const student = await API.auth.login({
                 email: "aryan1@gmail.com",
                 password: "aryan1234",
               });
               console.log(student);
-              setToken(student.accessToken!);
+              // Set to local storage for use in testUseStudentPage
+              console.log(
+                "token set in local storage, visit testusestudent to test"
+              );
+              setTokenInStorage(student.accessToken!);
             }}
           >
             Login
-          </button>
+          </Button>
         </div>
         <div>
           <h3>Student Routes</h3>
-          <button
+          <Button
             onClick={async () => {
-              const student = await API.student.getMe(token);
+              const student = await API.student.getMe(tokenInStorage);
               console.log(student);
             }}
           >
             Get me
-          </button>
-          <button
+          </Button>
+          <Button
             onClick={async () => {
-              const student = await API.student.getMeWithPlan(token);
+              const student = await API.student.getMeWithPlan(tokenInStorage);
               console.log(student);
             }}
           >
             Get me with plan
-          </button>
-          <button
+          </Button>
+          <Button
             onClick={async () => {
               const student = await API.student.update(
                 {
                   fullName: "Aryan Shah Updated",
                 },
-                token
+                tokenInStorage
               );
               console.log("fullname updated");
               console.log(student);
             }}
           >
             Update me
-          </button>
-          <button
+          </Button>
+          <Button
             onClick={async () => {
-              await API.student.delete(token);
-              setToken("");
+              await API.student.delete(tokenInStorage);
+              setTokenInStorage("");
               console.log("deleted user");
             }}
           >
             Delete me
-          </button>
+          </Button>
         </div>
         <div>
           <h3>Plan Routes</h3>
-          <button
+          <Button
             onClick={async () => {
               const plan = await API.plans.create(
                 {
@@ -272,15 +296,18 @@ const Home: NextPage = () => {
                     },
                   },
                 },
-                token
+                tokenInStorage
               );
               console.log(plan);
               setPlanId(plan.id);
+              console.log(
+                "plan set in local storage, visit testuseplan to test"
+              );
             }}
           >
             Create plan
-          </button>
-          <button
+          </Button>
+          <Button
             onClick={async () => {
               const plan = await API.plans.update(
                 planId!,
@@ -290,87 +317,87 @@ const Home: NextPage = () => {
                     yearMap: {},
                   },
                 },
-                token
+                tokenInStorage
               );
               console.log("Changed 4 years to 5");
               console.log(plan);
             }}
           >
             Update created plan
-          </button>
-          <button
+          </Button>
+          <Button
             onClick={async () => {
-              const plan = await API.plans.get(planId!, token);
+              const plan = await API.plans.get(planId!, tokenInStorage);
               console.log(plan);
             }}
           >
             Get created plan
-          </button>
-          <button
+          </Button>
+          <Button
             onClick={async () => {
-              await API.plans.delete(planId!, token);
+              await API.plans.delete(planId!, tokenInStorage);
               console.log(`deleted plan ${planId}`);
               setPlanId(undefined);
             }}
           >
             Delete created plan
-          </button>
+          </Button>
         </div>
       </div>
 
       <h2>SearchAPI logging!</h2>
       <div>
-        <button
+        <Button
           onClick={() => {
             testFetchCourse("CS", "2500");
           }}
         >
           fetchCourse
-        </button>
-        <button
+        </Button>
+        <Button
           onClick={() => {
             testSearchCourses("CS", 0, 9999);
           }}
         >
           searchCourses
-        </button>
+        </Button>
       </div>
       <br />
       <div>
         <h2>API Error Handling</h2>
         <div>
           <h3>Toasts without logging</h3>
-          <button
+          <Button
             onClick={() =>
               toast.info("Oh btw here's some info on what you were doing")
             }
           >
             info
-          </button>
-          <button
+          </Button>
+          <Button
             onClick={() =>
               toast.success("Whatever you were doing was successful")
             }
           >
             success
-          </button>
-          <button
+          </Button>
+          <Button
             onClick={() =>
               toast.warn("Whatever you were doing was kinda successful")
             }
           >
             warning
-          </button>
-          <button
+          </Button>
+          <Button
             onClick={() => toast.error("Whatever you were doing failed lol")}
           >
             error
-          </button>
+          </Button>
         </div>
       </div>
       <div>
         <h3>Toasts with logging</h3>
-        <button
+        <Button
           onClick={() =>
             toast.info("Oh btw here's some info on what you were doing", {
               log: true,
@@ -378,8 +405,8 @@ const Home: NextPage = () => {
           }
         >
           info
-        </button>
-        <button
+        </Button>
+        <Button
           onClick={() =>
             toast.success("Whatever you were doing was successful", {
               log: true,
@@ -387,8 +414,8 @@ const Home: NextPage = () => {
           }
         >
           success
-        </button>
-        <button
+        </Button>
+        <Button
           onClick={() =>
             toast.warn("Whatever you were doing was kinda successful", {
               log: true,
@@ -396,31 +423,31 @@ const Home: NextPage = () => {
           }
         >
           warning
-        </button>
-        <button
+        </Button>
+        <Button
           onClick={() =>
             toast.error("Whatever you were doing failed lol", { log: true })
           }
         >
           error
-        </button>
+        </Button>
       </div>
       <div>
         <h2>Client Side Error Handling</h2>
-        <button
+        <Button
           onClick={() => {
             setIsClientSideError(true);
           }}
         >
           Trigger a client side error
-        </button>
+        </Button>
       </div>
       <div>
         <h2>Logging</h2>
-        <button onClick={() => logger.info("Info log")}>info</button>
-        <button onClick={() => logger.debug("Debug log")}>debug</button>
-        <button onClick={() => logger.warn("Warning log")}>warning</button>
-        <button onClick={() => logger.error("Error log")}>error</button>
+        <Button onClick={() => logger.info("Info log")}>info</Button>
+        <Button onClick={() => logger.debug("Debug log")}>debug</Button>
+        <Button onClick={() => logger.warn("Warning log")}>warning</Button>
+        <Button onClick={() => logger.error("Error log")}>error</Button>
       </div>
     </>
   );
