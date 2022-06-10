@@ -170,8 +170,9 @@ const tokenizeRows = ($: CheerioStatic, table: CheerioElement): HRow[] => {
 
   for (const tr of $(table).find("tbody > tr").toArray()) {
     // different row type
-    const type = getRowType($, tr);
-    const row = constructRow($, tr, type);
+    const tds = $(tr).find("td").toArray().map($);
+    const type = getRowType($, tr, tds);
+    const row = constructRow($, tds, type);
     courseTable.push(row);
   }
 
@@ -183,28 +184,32 @@ const tokenizeRows = ($: CheerioStatic, table: CheerioElement): HRow[] => {
  *
  * @param $
  * @param tr
+ * @param tds
  */
-const getRowType = ($: CheerioStatic, tr: CheerioElement) => {
-  const trClass = tr.attribs["class"];
-  const td = $(tr.children[0]);
-  const tdClass = td.attr("class");
+const getRowType = ($: CheerioStatic, tr: CheerioElement, tds: Cheerio[]) => {
+  const trClasses = new Set(tr.attribs["class"].split(" "));
+  const td = tds[0];
+  const tdClasses = new Set(td.attr("class")?.split(" "));
 
-  if (trClass.includes("subheader")) {
+  if (tdClasses.size > 0) {
+    if (tdClasses.has("codecol")) {
+      if (trClasses.has("orclass") !== tdClasses.has("orclass")) {
+        throw new Error("td and tr orclass were not consistent");
+      }
+      if (tdClasses.has("orclass")) {
+        return HRowType.OR_COURSE;
+      } else if (td.find(".code").toArray().length > 1) {
+        return HRowType.AND_COURSE;
+      }
+      return HRowType.PLAIN_COURSE;
+    }
+    throw Error(`td class was not "codecol": "${tdClasses}"`);
+  }
+
+  if (trClasses.has("subheader")) {
     return HRowType.SUBHEADER;
-  } else if (trClass.includes("areaheader")) {
+  } else if (trClasses.has("areaheader")) {
     return HRowType.HEADER;
-  } else if (trClass.includes("orclass")) {
-    return HRowType.OR_COURSE;
-  } else if (tdClass) {
-    if (tdClass !== "codecol") {
-      throw Error(
-        "Expected class to exist with value codecol. Please add this case to the compiler."
-      );
-    }
-    if (td.find(".code").toArray().length > 1) {
-      return HRowType.AND_COURSE;
-    }
-    return HRowType.PLAIN_COURSE;
   }
 
   const tdText = parseText(td);
@@ -232,28 +237,28 @@ const getRowType = ($: CheerioStatic, tr: CheerioElement) => {
  */
 const constructRow = (
   $: CheerioStatic,
-  tr: CheerioElement,
+  tds: Cheerio[],
   type: HRowType
 ): HRow => {
   switch (type) {
     case HRowType.HEADER:
     case HRowType.SUBHEADER:
     case HRowType.COMMENT:
-      return constructTextRow($, tr, type);
+      return constructTextRow($, tds, type);
     case HRowType.OR_COURSE:
-      return constructOrCourseRow($, tr);
+      return constructOrCourseRow($, tds);
     case HRowType.PLAIN_COURSE:
-      return constructPlainCourseRow($, tr);
+      return constructPlainCourseRow($, tds);
     case HRowType.AND_COURSE:
-      return constructMultiCourseRow($, tr);
+      return constructMultiCourseRow($, tds);
     case HRowType.RANGE_LOWER_BOUNDED:
     case HRowType.RANGE_LOWER_BOUNDED_WITH_EXCEPTIONS:
-      return constructRangeLowerBoundedMaybeExceptions($, tr);
+      return constructRangeLowerBoundedMaybeExceptions($, tds);
     case HRowType.RANGE_BOUNDED:
     case HRowType.RANGE_BOUNDED_WITH_EXCEPTIONS:
-      return constructRangeBoundedMaybeExceptions($, tr);
+      return constructRangeBoundedMaybeExceptions($, tds);
     case HRowType.RANGE_UNBOUNDED:
-      return constructRangeUnbounded($, tr);
+      return constructRangeUnbounded($, tds);
 
     default:
       return assertUnreachable(type);
@@ -262,10 +267,13 @@ const constructRow = (
 
 const constructTextRow = <T>(
   $: CheerioStatic,
-  tr: CheerioElement,
+  tds: Cheerio[],
   type: T
 ): TextRow<T> => {
-  const [c1, c2] = ensureLength(2, tr.children).map($);
+  if (tds.length !== 2) {
+    throw new Error(tds.toString());
+  }
+  const [c1, c2] = ensureLength(2, tds);
   const description = parseText(c1);
   const hour = parseHour(c2);
   return { hour, description, type };
@@ -273,9 +281,9 @@ const constructTextRow = <T>(
 
 const constructPlainCourseRow = (
   $: CheerioStatic,
-  tr: CheerioElement
+  tds: Cheerio[]
 ): CourseRow<HRowType.PLAIN_COURSE> => {
-  const [code, desc, hourCol] = ensureLength(3, tr.children).map($);
+  const [code, desc, hourCol] = ensureLength(3, tds);
   const { subject, classId } = parseCourseTitle(parseText(code));
   const description = parseText(desc);
   const hour = parseHour(hourCol);
@@ -284,9 +292,9 @@ const constructPlainCourseRow = (
 
 const constructOrCourseRow = (
   $: CheerioStatic,
-  tr: CheerioElement
+  tds: Cheerio[]
 ): CourseRow<HRowType.OR_COURSE> => {
-  const [code, desc] = ensureLength(2, tr.children).map($);
+  const [code, desc] = ensureLength(2, tds);
   // remove "or "
   const { subject, classId } = parseCourseTitle(
     parseText(code).substring(3).trim()
@@ -298,9 +306,9 @@ const constructOrCourseRow = (
 
 const constructMultiCourseRow = (
   $: CheerioStatic,
-  tr: CheerioElement
+  tds: Cheerio[]
 ): MultiCourseRow<HRowType.AND_COURSE> => {
-  const [code, desc, hourCol] = ensureLength(3, tr.children).map($);
+  const [code, desc, hourCol] = ensureLength(3, tds);
   const titles = code
     .find(".code")
     .toArray()
@@ -334,13 +342,13 @@ const constructMultiCourseRow = (
 
 const constructRangeLowerBoundedMaybeExceptions = (
   $: CheerioStatic,
-  tr: CheerioElement
+  tds: Cheerio[]
 ):
   | WithExceptions<
       RangeLowerBoundedRow<HRowType.RANGE_LOWER_BOUNDED_WITH_EXCEPTIONS>
     >
   | RangeLowerBoundedRow<HRowType.RANGE_LOWER_BOUNDED> => {
-  const [desc, hourCol] = ensureLength(2, tr.children).map($);
+  const [desc, hourCol] = ensureLength(2, tds);
   const hour = parseHour(hourCol);
   // text should match one of the following:
   // - CS 9999 or higher[, except CS 9999, CS 9999, CS 3999,... <etc>]
@@ -375,11 +383,11 @@ const constructRangeLowerBoundedMaybeExceptions = (
 
 const constructRangeBoundedMaybeExceptions = (
   $: CheerioStatic,
-  tr: CheerioElement
+  tds: Cheerio[]
 ):
   | RangeBoundedRow<HRowType.RANGE_BOUNDED>
   | WithExceptions<RangeBoundedRow<HRowType.RANGE_BOUNDED_WITH_EXCEPTIONS>> => {
-  const [desc, hourCol] = ensureLength(2, tr.children).map($);
+  const [desc, hourCol] = ensureLength(2, tds);
   const hour = parseHour(hourCol);
   // text should match the form:
   // 1. CS 1000 to CS 5999
@@ -413,9 +421,9 @@ const constructRangeBoundedMaybeExceptions = (
 
 const constructRangeUnbounded = (
   $: CheerioStatic,
-  tr: CheerioElement
+  tds: Cheerio[]
 ): RangeUnboundedRow<HRowType.RANGE_UNBOUNDED> => {
-  const [desc, hourCol] = ensureLength(2, tr.children).map($);
+  const [desc, hourCol] = ensureLength(2, tds);
   const hour = parseHour(hourCol);
   // text should match one of the following:
   // - Any course in ARTD, ARTE, ARTF, ARTG, ARTH, and GAME subject areas as long as prerequisites have been met.
