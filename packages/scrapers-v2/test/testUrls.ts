@@ -32,7 +32,7 @@ export const FINTECH_CONCENTRATION = format(
 export const AEROSPACE_MINOR = format(
   "/undergraduate/engineering/mechanical-industrial/aerospace-minor"
 );
-export const ACCELERATED_DEGREE_PROGRAM = format(
+export const ACCEL_DEG_PROG_KHOURY = format(
   "/undergraduate/computer-information-science/accelerated-bachelor-graduate-degree-programs"
 );
 export const CS_MUSIC_WITH_TECH_MAJOR = format(
@@ -56,4 +56,22 @@ export const GLOBAL_BUS_STRATEGY_MINOR = format(
 
 export const ARCH_ENGLISH = format(
   "/undergraduate/arts-media-design/architecture/architecture-english-bs/"
+);
+export const ACCEL_DEG_PROG_CAMD = format(
+  "/undergraduate/arts-media-design/accelerated-bachelor-graduate-degree-programs"
+);
+export const ACCEL_DEG_PROG_BUSINESS = format(
+  "/undergraduate/business/accelerated-bachelor-graduate-degree-programs"
+);
+export const ACCEL_DEG_PROG_ENG = format(
+  "/undergraduate/engineering/accelerated-bachelor-graduate-degree-programs"
+);
+export const ACCEL_DEG_PROG_HEALTH = format(
+  "/undergraduate/health-sciences/accelerated-bachelor-graduate-degree-programs"
+);
+export const ACCEL_DEG_PROG_COS = format(
+  "/undergraduate/science/accelerated-bachelor-graduate-degree-programs"
+);
+export const ACCEL_DEG_PROG_CSSH = format(
+  "/undergraduate/social-sciences-humanities/accelerated-bachelor-graduate-degree-programs"
 );

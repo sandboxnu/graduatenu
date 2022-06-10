@@ -6,17 +6,48 @@ export const addTypeToUrl = async (url: URL): Promise<TypedCatalogEntry> => {
   return { url, type };
 };
 
-const getUrlType = (url: URL, $: CheerioStatic): CatalogEntryType => {
-  const tabsContainer = $("#contentarea #tabs");
+const getUrlType = (url: URL, $: CheerioStatic) => {
+  const typeFromName = getTypeFromNameEnding($);
+  if (typeFromName !== CatalogEntryType.Unknown) {
+    return typeFromName;
+  }
+  const typeFromTabs = getTypeFromTabs($);
+  if (typeFromTabs !== CatalogEntryType.Unknown) {
+    return typeFromTabs;
+  }
+  const typeFromContainer = getTypeFromContainer($);
+  if (typeFromContainer !== CatalogEntryType.Unknown) {
+    return typeFromContainer;
+  }
+  return CatalogEntryType.Unknown;
+};
 
-  if (tabsContainer.length === 1) {
-    return getUrlTypeDetailed(url, $, tabsContainer.find("ul > li"));
-  } else if (tabsContainer.length === 0) {
-    const textContainer = $("[id$='requirementstextcontainer']");
-    if (textContainer.length !== 1) {
-      return CatalogEntryType.Unknown;
-    }
-    const id = textContainer.attr("id");
+const getTypeFromNameEnding = ($: CheerioStatic) => {
+  const nameEnding = getNameEnding($);
+  if (nameEnding && isMajorEnding(nameEnding)) {
+    return CatalogEntryType.Major;
+  } else if (nameEnding?.toLowerCase() === "minor") {
+    return CatalogEntryType.Minor;
+  }
+  return CatalogEntryType.Unknown;
+};
+
+const getTypeFromTabs = ($: CheerioStatic) => {
+  const tabsContainer = $("#contentarea #tabs");
+  if (tabsContainer.length === 0) {
+    return CatalogEntryType.Unknown;
+  } else if (tabsContainer.length === 1) {
+    return getTypeFromTabText(tabsContainer.find("ul > li").toArray().map($));
+  }
+  throw new Error(
+    `Expected 0 or 1 tab container, but found ${tabsContainer.length}.`
+  );
+};
+
+const getTypeFromContainer = ($: CheerioStatic) => {
+  const container = $("[id$='requirementstextcontainer']");
+  if (container.length === 1) {
+    const id = container.attr("id");
     if (id === "minorrequirementstextcontainer") {
       return CatalogEntryType.Minor;
     } else if (id === "programrequirementstextcontainer") {
@@ -24,40 +55,21 @@ const getUrlType = (url: URL, $: CheerioStatic): CatalogEntryType => {
     } else if (id === "concentrationrequirementstextcontainer") {
       return CatalogEntryType.Concentration;
     }
-    return CatalogEntryType.Unknown;
   }
-
-  throw new Error(
-    `Expected 1 tab container, but found ${tabsContainer.length}.`
-  );
-};
-
-const getUrlTypeDetailed = (url: URL, $: CheerioStatic, tabs: Cheerio) => {
-  if (url.href.slice(-6) === "-minor") {
-    return CatalogEntryType.Minor;
-  }
-
-  const urlEnding = getUrlEnding(url);
-  const nameEnding = getNameEnding($);
-  if (isMajorEnding(urlEnding) || isMajorEnding(nameEnding)) {
-    return CatalogEntryType.Major;
-  }
-
-  return getUrlTypeFromTabs($, tabs);
-};
-
-const getUrlEnding = (url: URL) => {
-  const href = url.href;
-  const hyphen = href.lastIndexOf("-");
-  const slash = href.lastIndexOf("/");
-  return href.slice(Math.max(hyphen, slash) + 1);
+  return CatalogEntryType.Unknown;
 };
 
 const getNameEnding = ($: CheerioStatic) => {
   const name = parseText($("#site-title").find("h1"));
   const degree = name.lastIndexOf(",");
-  // assume ", "<degree>
-  return name.substring(degree + 2);
+  if (degree !== -1) {
+    // assume ", "<degree>
+    return name
+      .substring(degree + 2)
+      .toLowerCase()
+      .trim();
+  }
+  return null;
 };
 
 const isMajorEnding = (ending: string) => {
@@ -68,20 +80,19 @@ const isMajorEnding = (ending: string) => {
   return bs || ba || ba1;
 };
 
-const getUrlTypeFromTabs = ($: CheerioStatic, tabs: Cheerio) => {
-  const [, middleTab] = ensureLengthAtLeast(2, tabs.toArray().map($));
-  const middleTabText = parseText(middleTab);
-
+const getTypeFromTabText = (tabs: Cheerio[]) => {
   // most entries have 3 tabs, but some have 2 or rarely 4
-  if (middleTabText === "Minor Requirements") {
-    return CatalogEntryType.Minor;
-  } else if (middleTabText === "Concentration Requirements") {
-    return CatalogEntryType.Concentration;
-  } else if (middleTabText === "Program Requirements") {
-    return CatalogEntryType.Major;
-  }
+  const [, tab] = ensureLengthAtLeast(2, tabs);
+  const tabText = parseText(tab);
 
-  throw new Error(
-    `Middle tab text did not match one of the expected types: ${middleTabText}`
-  );
+  switch (tabText.toLowerCase()) {
+    case "minor requirements":
+      return CatalogEntryType.Minor;
+    case "concentration requirements":
+      return CatalogEntryType.Concentration;
+    case "program requirements":
+      return CatalogEntryType.Major;
+    default:
+      return CatalogEntryType.Unknown;
+  }
 };
