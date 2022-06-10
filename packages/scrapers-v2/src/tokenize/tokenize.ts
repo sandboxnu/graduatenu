@@ -48,8 +48,7 @@ export const tokenizeHTML = async ($: CheerioStatic): Promise<HDocument> => {
   const catalogYear: string = parseText($("#edition")).split(" ")[0];
   const yearVersion: number = parseInt(catalogYear.split("-")[0]);
 
-  const requirementsId = getRequirementsId($);
-  const requirementsContainer = $(requirementsId);
+  const requirementsContainer = getRequirementsContainer($);
   const sections = await tokenizeSections($, requirementsContainer);
 
   const programRequiredHeading = requirementsContainer
@@ -70,12 +69,22 @@ export const tokenizeHTML = async ($: CheerioStatic): Promise<HDocument> => {
   };
 };
 
-const getRequirementsId = ($: CheerioStatic) => {
-  const tabsContainerArr = $("#contentarea #tabs").toArray().map($);
-  const [tabsContainer] = ensureLength(1, tabsContainerArr);
-  const tabsArr = tabsContainer.find("ul > li > a").toArray().map($);
-  const [, middleTab] = ensureLengthAtLeast(2, tabsArr);
-  return middleTab.attr("href");
+const getRequirementsContainer = ($: CheerioStatic) => {
+  const tabsContainer = $("#contentarea #tabs");
+  if (tabsContainer.length === 0) {
+    // had no tabs, so just look for id ending in "requirementstextcontainer"
+    const container = $("[id$='requirementstextcontainer']");
+    if (container.length === 1) {
+      return container;
+    }
+    throw new Error(`unexpected # of matching ids: ${container.length}`);
+  } else if (tabsContainer.length === 1) {
+    const tabsArr = tabsContainer.find("ul > li > a").toArray().map($);
+    const [, requirementsTab] = ensureLengthAtLeast(2, tabsArr);
+    const containerId = requirementsTab.attr("href");
+    return $(containerId);
+  }
+  throw new Error("unable to find a requirementstextcontainer");
 };
 
 /**
