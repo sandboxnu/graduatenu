@@ -1,6 +1,8 @@
 import axios from "axios";
 import * as cheerio from "cheerio";
 import { Err, Ok, Result } from "@graduate/common";
+import { existsSync } from "fs";
+import { mkdir, readFile, writeFile } from "fs/promises";
 
 export const loadHtmlWithUrl = async (
   url: URL
@@ -14,9 +16,32 @@ export const loadHtmlWithUrl = async (
   return { url, result };
 };
 
+// whether to cache catalog pages
+const USE_CACHE = false;
 export const loadHTML = async (url: string): Promise<CheerioStatic> => {
-  const { data } = await axios.get(url);
+  const data = await cachedGetRequest(url);
   return cheerio.load(data);
+};
+
+const cachedGetRequest = async (url: string) => {
+  if (!USE_CACHE) {
+    const { data } = await axios.get(url);
+    return data;
+  }
+
+  if (!existsSync("./catalogCache")) {
+    await mkdir("./catalogCache");
+  }
+
+  // https://stackoverflow.com/questions/35511331/how-to-make-a-valid-filename-from-an-arbitrary-string-in-javascript
+  const path = `./catalogCache/${url.replaceAll(/[\/|\\:*?"<>]/g, "-")}`;
+  if (existsSync(path)) {
+    return await readFile(path);
+  }
+
+  const { data } = await axios.get(url);
+  await writeFile(path, data);
+  return data;
 };
 
 export const appendPath = (base: string, path: string, hash?: string) => {
