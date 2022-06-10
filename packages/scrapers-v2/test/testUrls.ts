@@ -53,7 +53,7 @@ export const MATH_POLYSCI = format(
 export const GLOBAL_BUS_STRATEGY_MINOR = format(
   "/undergraduate/business/concentrations/global-business-strategy/"
 );
-
+// no tabs
 export const ARCH_ENGLISH = format(
   "/undergraduate/arts-media-design/architecture/architecture-english-bs/"
 );
@@ -74,4 +74,8 @@ export const ACCEL_DEG_PROG_COS = format(
 );
 export const ACCEL_DEG_PROG_CSSH = format(
   "/undergraduate/social-sciences-humanities/accelerated-bachelor-graduate-degree-programs"
+);
+// OR of ANDs
+export const BIOENG_BIOCHEM = format(
+  "/undergraduate/engineering/bioengineering/bioengineering-biochemistry-bsbioe"
 );

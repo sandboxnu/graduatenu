@@ -1,5 +1,7 @@
 import { fetchAndTokenizeHTML } from "../src/tokenize/tokenize";
 import {
+  ARCH_ENGLISH,
+  BIOENG_BIOCHEM,
   BSCS,
   BUSINESS,
   CHEMICAL_ENG,
@@ -41,5 +43,13 @@ describe("scraper v2 snapshot tests", () => {
   // Range unbounded
   test("Test range unbounded (chemical engineering)", async () => {
     expect(await fetchAndTokenizeHTML(CHEMICAL_ENG)).toMatchSnapshot();
+  });
+  // Or of ands
+  test("Test OR of ANDs (bioengineering biochemistry)", async () => {
+    expect(await fetchAndTokenizeHTML(BIOENG_BIOCHEM)).toMatchSnapshot();
+  });
+  // no tabs
+  test("Test NO tabs (architecture and english)", async () => {
+    expect(await fetchAndTokenizeHTML(ARCH_ENGLISH)).toMatchSnapshot();
   });
 });

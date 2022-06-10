@@ -24,8 +24,15 @@ There are a lot of different types of rows. Here's a breakdown:
     - OrCourseRow (description, subject, hour, classId)
   - MultiCourseRow
     - AndCourseRow (hour, list of (classId, subject, ...))
+    - OrOfAndCourseRow (hour, list of (classId, subject, ...))
   - RangeRow
     - boundedRangeRow (hour, subject, startId, endId)
     - unboundedRangeRow (hour, subj)
     - lowerBoundedRangeRow (hour, subject, startId)
     - lowerBoundedRangeRowWithExceptions (hour, subject, startId, exceptionsIds[])
+
+### Edge cases
+
+Some catalog entries do not have tabs, so instead of finding the courses container via the tabs, we just look throughout the page for an element with id ending in `requirementstextcontainer`.
+
+Some courses are also an OR of ANDs, for example, [this one](https://catalog.northeastern.edu/undergraduate/engineering/bioengineering/bioengineering-biochemistry-bsbioe/#programrequirementstext) - search "phys 1155". In this case, it is an OR of the previous row, but also is an AND, having its own sub-courses. Additionally, rows of this type have no column for hours.
