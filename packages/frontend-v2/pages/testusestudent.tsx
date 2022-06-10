@@ -6,10 +6,10 @@ import { Button } from "@chakra-ui/react";
 
 const TestUseStudent: NextPage = () => {
   // Perform localStorage action
-  const [tokenInStorage] = useLocalStorage(LocalStorageKey.Token, "");
+  const [tokenInStorage] = useLocalStorage<string>(LocalStorageKey.Token);
 
   const { student, error, isLoading, mutateStudent } =
-    useStudentWithPlans(tokenInStorage);
+    useStudentWithPlans(tokenInStorage ? tokenInStorage : "");
   if (error) {
     console.error(error);
     return <h1>Could not load student</h1>;
@@ -28,7 +28,7 @@ const TestUseStudent: NextPage = () => {
         <Button
           onClick={async () => {
             const newName = "Aryan Shah Updated with Mutation";
-            if (student) {
+            if (student && tokenInStorage) {
               await mutateStudent(
                 API.student.update({ fullName: newName }, tokenInStorage),
                 { optimisticData: { ...student, fullName: newName } }

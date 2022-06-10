@@ -5,13 +5,12 @@ import { useStudentWithPlans } from "../hooks/useStudentWithPlans";
 
 const TestUsePlan: NextPage = () => {
   // Perform localStorage action
-  const [tokenInStorage] = useLocalStorage(LocalStorageKey.Token, "");
-
+  const [tokenInStorage] = useLocalStorage<string>(LocalStorageKey.Token);
   const {
     student,
     error: studentError,
     isLoading: studentIsLoading,
-  } = useStudentWithPlans(tokenInStorage);
+  } = useStudentWithPlans(tokenInStorage ? tokenInStorage : "");
   if (studentError) {
     return <h1>student could not be fetched</h1>;
     // handle error
@@ -20,9 +19,10 @@ const TestUsePlan: NextPage = () => {
   }
   return (
     <>
-      {student?.plans.map((plan) => (
-        <Plan key={plan.id} id={plan.id} tokenInStorage={tokenInStorage} />
-      ))}
+      {tokenInStorage &&
+        student?.plans.map((plan) => (
+          <Plan key={plan.id} id={plan.id} tokenInStorage={tokenInStorage} />
+        ))}
     </>
   );
 };
