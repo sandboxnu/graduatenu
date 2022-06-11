@@ -51,15 +51,10 @@ export const tokenizeHTML = async ($: CheerioStatic): Promise<HDocument> => {
   const requirementsContainer = getRequirementsContainer($);
   const sections = await tokenizeSections($, requirementsContainer);
 
-  const programRequiredHeading = requirementsContainer
-    .find("h2")
-    .filter(
-      (_idx: number, element: CheerioElement) =>
-        parseText($(element)).includes("Program") &&
-        parseText($(element)).includes("Requirement")
-    );
-  const programRequiredHours =
-    Number(parseText(programRequiredHeading.next()).split(/[\s\xa0]+/)[0]) || 0;
+  const programRequiredHours = getProgramRequiredHours(
+    $,
+    requirementsContainer
+  );
 
   return {
     programRequiredHours,
@@ -85,6 +80,34 @@ const getRequirementsContainer = ($: CheerioStatic) => {
     return $(containerId);
   }
   throw new Error("unable to find a requirementstextcontainer");
+};
+
+const getProgramRequiredHours = (
+  $: CheerioStatic,
+  requirementsContainer: Cheerio
+) => {
+  const programRequiredHeading = requirementsContainer
+    .find("h2")
+    .filter((_, element) => {
+      const text = parseText($(element)).toLowerCase();
+      // "program requirement", "program requirements", or "program credit requirements"
+      return /program (\w+ )?requirement(s?)/.test(text);
+    });
+
+  const nextAll = programRequiredHeading.nextAll().toArray().map($);
+  if (nextAll.length >= 1) {
+    for (const next of [nextAll[0], nextAll[nextAll.length - 1]]) {
+      // keep if matches "minimum of <n>" or "<n>"
+      const parts = parseText(next).split(/[\s\xa0]+/);
+      if (/\d+/.test(parts[0])) {
+        return Number(parts[0]);
+      } else if (/\d+/.test(parts[2])) {
+        return Number(parts[2]);
+      }
+    }
+  }
+
+  return 0;
 };
 
 /**

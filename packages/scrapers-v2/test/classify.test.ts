@@ -18,6 +18,7 @@ import {
   GLOBAL_BUS_STRATEGY_MINOR,
   MATH_POLYSCI,
   MEDIA_SCREEN_STUDIES_HISTORY,
+  PHARMD,
   WOMEN_GENDER_SEXUALITY_MINOR,
 } from "./testUrls";
 import { CatalogEntryType } from "../src/classify/types";
@@ -39,6 +40,9 @@ const MAJORS = [
   new URL(
     "https://catalog.northeastern.edu/undergraduate/science/behavioral-neuroscience/behavioral-neuroscience-philosophy-bs/"
   ),
+
+  // non standard ending (ends in "pharmd")
+  PHARMD,
 ];
 
 const CONCENTRATIONS = [

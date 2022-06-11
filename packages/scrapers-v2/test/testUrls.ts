@@ -79,3 +79,15 @@ export const ACCEL_DEG_PROG_CSSH = format(
 export const BIOENG_BIOCHEM = format(
   "/undergraduate/engineering/bioengineering/bioengineering-biochemistry-bsbioe"
 );
+export const PUBLIC_HEALTH_BA = format(
+  "/undergraduate/health-sciences/community-health-behavioral-sciences/public-health-ba"
+);
+export const PHARM_SCI_BS = format(
+  "/undergraduate/health-sciences/pharmacy/pharmaceutical-sciences-bs"
+);
+export const PHARM_STUDIES_BS = format(
+  "/undergraduate/health-sciences/pharmacy/pharmacy-studies-bs"
+);
+export const PHARMD = format(
+  "/undergraduate/health-sciences/pharmacy/pharmacy-pharmd"
+);
