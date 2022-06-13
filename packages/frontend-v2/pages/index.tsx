@@ -34,15 +34,15 @@ const Header = (): JSX.Element => {
 const Banner = (): JSX.Element => {
   return (
     <Box
-      pt={{ desktop: "75px", laptop: "50px", tablet: "40px" }}
-      pb={{ desktop: "175px", laptop: "150px", tablet: "100px" }}
+      pt={{ desktop: "5rem", laptop: "3rem", tablet: "2.5rem" }}
+      pb={{ desktop: "11rem", laptop: "9rem", tablet: "6.25rem" }}
     >
       <HStack
-        spacing={{ desktop: "100px", laptop: "75px", tablet: "50px" }}
+        spacing={{ desktop: "6.25rem", laptop: "5rem", tablet: "3rem" }}
         justifyContent="center"
       >
         <Image
-          boxSize={{ desktop: "550px", laptop: "500px", tablet: "400px" }}
+          boxSize={{ desktop: "34.25rem", laptop: "31.25rem", tablet: "25rem" }}
           src="/husky.svg"
           alt="husky"
         />
@@ -70,7 +70,7 @@ const Banner = (): JSX.Element => {
             </Text>
           </Box>
           <Button
-            mr={{ desktop: "120px", laptop: "100px", tablet: "50px" }}
+            mr={{ desktop: "7.5rem", laptop: "6.25rem", tablet: "3.25rem" }}
             mt="15%"
           >
             Get Started
@@ -116,13 +116,13 @@ const Info = (): JSX.Element => {
 
   return (
     <Box
-      pt={{ desktop: "95px", laptop: "100px", tablet: "75px" }}
-      pb={{ desktop: "125px", laptop: "130px", tablet: "105px" }}
+      pt={{ desktop: "6rem", laptop: "6.25rem", tablet: "5rem" }}
+      pb={{ desktop: "7.75rem", laptop: "8rem", tablet: "6.5rem" }}
       backgroundColor="blue.50"
     >
       <VStack>
         <Heading
-          mb={{ desktop: "95px", laptop: "75px", tablet: "65px" }}
+          mb={{ desktop: "6rem", laptop: "5rem", tablet: "4rem" }}
           size="2xl"
           color="blue.700"
         >
@@ -130,10 +130,18 @@ const Info = (): JSX.Element => {
         </Heading>
         <SimpleGrid columns={3} justifyItems="center" pl="5%" pr="5%">
           {infoImageData.map((info) => (
-            <InfoImage imageSource={info.imageSource} altInfo={info.altInfo} />
+            <InfoImage
+              key={info.altInfo}
+              imageSource={info.imageSource}
+              altInfo={info.altInfo}
+            />
           ))}
           {infoSectionData.map((info) => (
-            <InfoSection title={info.title} description={info.description} />
+            <InfoSection
+              key={info.title}
+              title={info.title}
+              description={info.description}
+            />
           ))}
         </SimpleGrid>
       </VStack>
@@ -149,7 +157,7 @@ interface InfoImageProps {
 const InfoImage = ({ imageSource, altInfo }: InfoImageProps): JSX.Element => {
   return (
     <Image
-      boxSize={{ desktop: "250px", laptop: "200px", tablet: "150px" }}
+      boxSize={{ desktop: "15.5rem", laptop: "12.5rem", tablet: "9.5rem" }}
       pt="5%"
       pb="5%"
       src={imageSource}
