@@ -1,5 +1,5 @@
 import { extendTheme } from "@chakra-ui/react";
-import { Button } from "./component_styles/buttons"
+import { Button } from "./components/buttons";
 
 const colors = {
   primary: {
@@ -58,7 +58,7 @@ const colors = {
 
 const fonts = {
   logo: "Montserrat Alternates",
-}
+};
 
 // we only support tablets and up
 const breakpoints = {
@@ -81,23 +81,10 @@ const space = {
   "2xl": "3rem",
 };
 
-/**
- * Customized component styles can be configured and passed to the theme provider
- */
+/** Customized component styles can be configured and passed to the theme provider */
 const components = {
   Button,
-}
-
-// Allows us to reuse common styles across pages
-const layerStyles = {
-  headerContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    p: "1% 1.5% 1% 1.5%",
-    boxShadow: "0px 4px 7px lightgrey",
-  },
-}
+};
 
 export const theme = extendTheme({
   colors,
@@ -105,5 +92,4 @@ export const theme = extendTheme({
   breakpoints,
   space,
   components,
-  layerStyles,
 });
