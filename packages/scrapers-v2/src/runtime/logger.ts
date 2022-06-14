@@ -1,4 +1,4 @@
-import { Pipeline } from "./types";
+import { Pipeline, StageLabel } from "./types";
 import { ResultType } from "@graduate/common";
 import { FilterError } from "./pipeline";
 import { CatalogEntryType } from "../classify/types";
@@ -48,31 +48,37 @@ export const logResults = <T>(results: Pipeline<T>[]) => {
   for (let i = 0; i < results.length; i += 1) {
     const { trace, result, id } = results[i];
     if (result.type === ResultType.Ok) {
-      stats.recordField("status", "ok");
-      continue;
+      logOkResult(stats);
     } else if (result.err[0] instanceof FilterError) {
       stats.recordField("status", "filtered");
       stats.recordField("filtered", result.err[0].actual);
       if (result.err[0].actual === CatalogEntryType.Unknown) {
         console.log("entry with unknown type:", id.toString());
       }
-      continue;
-    }
-
-    stats.recordField("status", "error");
-    stats.recordField("stage failures", trace[trace.length - 1]);
-
-    for (const err of result.err) {
-      if (err instanceof Error) {
-        stats.recordError(err, id);
-      } else {
-        stats.recordError(new Error(`non-error value: ${err}`), id);
-      }
+    } else {
+      logErrResult(stats, id, trace, result.err);
     }
   }
 
   stats.print();
 };
+
+const logOkResult = (stats: StatsLogger) => {
+  stats.recordField("status", "ok");
+}
+
+const logErrResult = (stats: StatsLogger, id: URL, trace: StageLabel[], errors: unknown[]) => {
+  stats.recordField("status", "error");
+  stats.recordField("stage failures", trace[trace.length - 1]);
+
+  for (const err of errors) {
+    if (err instanceof Error) {
+      stats.recordError(err, id);
+    } else {
+      stats.recordError(new Error(`non-error value: ${err}`), id);
+    }
+  }
+}
 
 /**
  * Allows for "recording" fields (and errors) to print a breakdown of the
@@ -138,6 +144,12 @@ class StatsLogger {
     this.record("errors", annot);
   }
 
+  /**
+   * Increments the count for a field, stored in this.fields, or adds it if it
+   * doesn't exist. Compares values with reference equality
+   * @param field the field name
+   * @param value the value
+   */
   private record(field: string, value: any) {
     if (!(field in this.fields)) {
       this.fields[field] = new Map();

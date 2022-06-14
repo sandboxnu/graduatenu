@@ -12,9 +12,9 @@ import { logProgress, logResults } from "./logger";
  * Currently, does nothing with the output. To run from cli, run `yarn scrape`
  * in `scrapers-v2` dir. Also see `main.ts`.
  */
-export const runPipeline = async () => {
+export const runPipeline = async (yearStart: number, yearEnd: number) => {
   const unregisterAgent = createAgent();
-  const { entries, unfinished } = await scrapeMajorLinks(2021, 2022);
+  const { entries, unfinished } = await scrapeMajorLinks(yearStart, yearEnd);
   if (unfinished.length > 0) {
     console.log("didn't finish searching some entries", ...unfinished);
   }

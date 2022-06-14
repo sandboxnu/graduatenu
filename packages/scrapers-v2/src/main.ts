@@ -1,3 +1,3 @@
 import { runPipeline } from "./runtime/pipeline";
 
-runPipeline();
+runPipeline(2021, 2022);
