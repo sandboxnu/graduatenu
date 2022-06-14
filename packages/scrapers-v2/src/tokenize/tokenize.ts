@@ -1,11 +1,5 @@
 import { assertUnreachable } from "@graduate/common";
-import {
-  appendPath,
-  ensureLength,
-  ensureLengthAtLeast,
-  loadHTML,
-  parseText,
-} from "../utils";
+import { appendPath, ensureLength, ensureLengthAtLeast, loadHTML, parseText } from "../utils";
 import {
   COURSE_REGEX,
   RANGE_BOUNDED_MAYBE_EXCEPTIONS,
@@ -98,7 +92,9 @@ const getProgramRequiredHours = (
   if (nextAll.length >= 1) {
     for (const next of [nextAll[0], nextAll[nextAll.length - 1]]) {
       // keep if matches "minimum of <n>" or "<n>"
+      // regex matches space characters (\x) and non-breaking space (\xa0)
       const parts = parseText(next).split(/[\s\xa0]+/);
+      // regex matches digits (\d) groups of at least 1 (+)
       if (/\d+/.test(parts[0])) {
         return Number(parts[0]);
       } else if (/\d+/.test(parts[2])) {

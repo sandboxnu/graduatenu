@@ -2,11 +2,11 @@ import { ensureLengthAtLeast, loadHTML, parseText } from "../utils";
 import { CatalogEntryType, TypedCatalogEntry } from "./types";
 
 export const addTypeToUrl = async (url: URL): Promise<TypedCatalogEntry> => {
-  const type = getUrlType(url, await loadHTML(url.href));
+  const type = getUrlType(await loadHTML(url.href));
   return { url, type };
 };
 
-const getUrlType = (url: URL, $: CheerioStatic) => {
+const getUrlType = ($: CheerioStatic) => {
   const typeFromName = getTypeFromNameEnding($);
   if (typeFromName !== CatalogEntryType.Unknown) {
     return typeFromName;

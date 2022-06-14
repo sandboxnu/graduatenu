@@ -16,13 +16,23 @@ export const loadHtmlWithUrl = async (
   return { url, result };
 };
 
-// whether to cache catalog pages
+/**
+ * Whether to cache the response bodies of requests. if set to true,
+ * `cachedGetRequest` will cache requests.
+ */
 const USE_CACHE = false;
 export const loadHTML = async (url: string): Promise<CheerioStatic> => {
   const data = await cachedGetRequest(url);
   return cheerio.load(data);
 };
 
+/**
+ * If use cache is true, will attempt to look for request body in
+ * `./catalogCache` before fetching. If does not exist, will save the response
+ * in `./catalogCache` before returning response.
+ *
+ * @param url
+ */
 const cachedGetRequest = async (url: string) => {
   if (!USE_CACHE) {
     const { data } = await axios.get(url);
