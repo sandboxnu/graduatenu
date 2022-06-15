@@ -1,5 +1,11 @@
 import { assertUnreachable } from "@graduate/common";
-import { appendPath, ensureLength, ensureLengthAtLeast, loadHTML, parseText } from "../utils";
+import {
+  appendPath,
+  ensureLength,
+  ensureLengthAtLeast,
+  loadHTML,
+  parseText,
+} from "../utils";
 import {
   COURSE_REGEX,
   RANGE_BOUNDED_MAYBE_EXCEPTIONS,
@@ -58,6 +64,13 @@ export const tokenizeHTML = async ($: CheerioStatic): Promise<HDocument> => {
   };
 };
 
+/**
+ * Retrieves the cheerio container containing the degree requirements. If there
+ * are no tabs, tries to look for ID ending in 'requirementstextcontainer',
+ * otherwise tries to find second tab href.
+ *
+ * @param $
+ */
 const getRequirementsContainer = ($: CheerioStatic) => {
   const tabsContainer = $("#contentarea #tabs");
   if (tabsContainer.length === 0) {
@@ -76,6 +89,14 @@ const getRequirementsContainer = ($: CheerioStatic) => {
   throw new Error("unable to find a requirementstextcontainer");
 };
 
+/**
+ * Retrieves the # of required course-hours for this degree. Looks for a heading
+ * with text "program requirements" (ish), and then checks first and last line,
+ * first and third word, if it matches a number. if so, returns that #, else 0.
+ *
+ * @param $
+ * @param requirementsContainer
+ */
 const getProgramRequiredHours = (
   $: CheerioStatic,
   requirementsContainer: Cheerio

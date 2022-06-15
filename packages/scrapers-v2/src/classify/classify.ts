@@ -6,6 +6,7 @@ export const addTypeToUrl = async (url: URL): Promise<TypedCatalogEntry> => {
   return { url, type };
 };
 
+// try to get the type from each strategy, in order (name, tabs, container)
 const getUrlType = ($: CheerioStatic) => {
   const typeFromName = getTypeFromNameEnding($);
   if (typeFromName !== CatalogEntryType.Unknown) {
