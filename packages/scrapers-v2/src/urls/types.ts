@@ -22,26 +22,14 @@ export enum College {
 }
 
 /**
- * Represents the structure of catalog hierarchy, with each level represented
- * by an object. The "leaf"s are the full URLs to each entry.
+ * Represents the result of an attempted catalog URL scrape (to find URLs to entries).
  *
- * For example, the entry
- * /undergraduate/computer-information-science/computer-science/bscs/
- * would be accessed by
- * hierarchy["undergraduate"]["computer-information-science"]["computer-science"]["bscs"]
- * and would yield the full string URL to the entry.
+ * Produces a list of entry URLs, as well a queue of unfinished URLs that still need
+ * to be searched. Will produce unfinished URLs if visiting a URL fails.
  */
-export type CatalogHierarchy = {
-  [part: string]: string | CatalogHierarchy;
+export type CatalogURLResult = {
+  entries: URL[];
+  unfinished: Array<EntryError>;
 };
 
-/**
- * Represents a path to a catalog entry.
- *
- * ex: "undergraduate", "computer-information-science"
- * or, in the archive case:
- * ex: "archive", "2018-2019", "undergraduate", "computer-information-science"
- */
-export type CatalogPath = {
-  path: Array<string>;
-};
+export type EntryError = { url: URL; error: unknown };

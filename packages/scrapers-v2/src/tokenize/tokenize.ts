@@ -1,5 +1,11 @@
 import { assertUnreachable } from "@graduate/common";
-import { appendPath, ensureLength, ensureLengthAtLeast, loadHTML, parseText } from "../utils";
+import {
+  appendPath,
+  ensureLength,
+  ensureLengthAtLeast,
+  loadHTML,
+  parseText,
+} from "../utils";
 import {
   COURSE_REGEX,
   RANGE_BOUNDED,
@@ -25,20 +31,17 @@ import {
 
 /**
  * Fetch html for page and convert into intermediate representation (IR)
- * @param url the url of the page to tokenize
+ *
+ * @param url The url of the page to tokenize
  */
-export const fetchAndTokenizeHTML = async (url: string): Promise<HDocument> => {
-  try {
-    const $ = await loadHTML(url);
-    return tokenizeHTML($);
-  } catch (error) {
-    throw error;
-  }
+export const fetchAndTokenizeHTML = async (url: URL): Promise<HDocument> => {
+  return await tokenizeHTML(await loadHTML(url.href));
 };
 
 /**
  * Tokenize scraped html into intermediate representation (IR)
- * @param $ the cheerio static for the page to tokenize
+ *
+ * @param $ The cheerio static for the page to tokenize
  */
 export const tokenizeHTML = async ($: CheerioStatic): Promise<HDocument> => {
   const majorName: string = parseText($("#site-title").find("h1"));
@@ -46,7 +49,7 @@ export const tokenizeHTML = async ($: CheerioStatic): Promise<HDocument> => {
   const yearVersion: number = parseInt(catalogYear.split("-")[0]);
 
   const requirementsContainer = $("#programrequirementstextcontainer");
-  const sections = tokenizeSections($, requirementsContainer);
+  const sections = await tokenizeSections($, requirementsContainer);
 
   const programRequiredHeading = requirementsContainer
     .find("h2")
@@ -62,12 +65,13 @@ export const tokenizeHTML = async ($: CheerioStatic): Promise<HDocument> => {
     programRequiredHours,
     yearVersion,
     majorName,
-    sections: await sections,
+    sections: sections,
   };
 };
 
 /**
  * Produces overall HSections for each HTML table in the page
+ *
  * @param $
  * @param requirementsContainer
  */
@@ -120,8 +124,9 @@ const tokenizeSections = async (
 };
 
 /**
- * Finds and fetches nested links, for majors with concentration requirements
- * on separate pages.
+ * Finds and fetches nested links, for majors with concentration requirements on
+ * separate pages.
+ *
  * @param $
  * @param element
  */
@@ -138,6 +143,7 @@ const constructNestedLinks = ($: CheerioStatic, element: CheerioElement) => {
 
 /**
  * Converts tables rows into a list of HRows
+ *
  * @param $
  * @param table
  */
@@ -156,6 +162,7 @@ const tokenizeRows = ($: CheerioStatic, table: CheerioElement): HRow[] => {
 
 /**
  * Pre-parses the row to determine its type
+ *
  * @param $
  * @param tr
  */
@@ -200,6 +207,7 @@ const getRowType = ($: CheerioStatic, tr: CheerioElement) => {
 
 /**
  * Converts a single row based on the passed-in type (determined by {@link getRowType}
+ *
  * @param $
  * @param tr
  * @param type
@@ -401,4 +409,3 @@ const parseCourseTitle = (parsedCourse: string) => {
     classId: Number(classId),
   };
 };
-

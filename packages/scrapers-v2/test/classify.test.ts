@@ -1,4 +1,4 @@
-import { classifyCatalogEntries } from "../src/classify/classify";
+import { addTypeToUrl } from "../src/classify/classify";
 import {
   ACCELERATED_DEGREE_PROGRAM,
   ACCOUNTING_MINOR,
@@ -33,8 +33,8 @@ const inputs = [
 
 describe("Filters work", () => {
   for (const url of inputs) {
-    test(url, async () => {
-      expect(await classifyCatalogEntries([url])).toMatchSnapshot();
+    test(url.href, async () => {
+      expect(await addTypeToUrl(url)).toMatchSnapshot();
     });
   }
 });

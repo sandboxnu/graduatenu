@@ -2,7 +2,7 @@
 
 This folder contains code for the **tokenize** (aka lexing) stage of the scraper, which handles converting the HTML of a course catalog page into distinct recognized pieces, known as "tokens".
 
-If the tokenizer finds a token that it does not recognize, it should explicitly error, to make the devs aware of an unhandled case (so that they can later add support for it). 
+If the tokenizer finds a token that it does not recognize, it should explicitly error, to make the devs aware of an unhandled case (so that they can later add support for it).
 
 ## Catalog Page Structure
 
