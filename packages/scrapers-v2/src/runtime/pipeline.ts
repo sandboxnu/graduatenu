@@ -19,14 +19,20 @@ export const runPipeline = async (yearStart: number, yearEnd: number) => {
     console.log("didn't finish searching some entries", ...unfinished);
   }
 
-  const pipelines = entries.map((entry) =>
-    createPipeline(entry)
+  // can use for debugging logging throughout the stages
+  // const stats = new StatsLogger();
+  const pipelines = entries.map((entry) => {
+    return createPipeline(entry)
       .then(addPhase(StageLabel.Classify, addTypeToUrl))
       .then(
-        addPhase(StageLabel.Filter, filterEntryType, [CatalogEntryType.Major])
+        addPhase(StageLabel.Filter, filterEntryType, [
+          CatalogEntryType.Minor,
+          CatalogEntryType.Major,
+          CatalogEntryType.Concentration,
+        ])
       )
-      .then(addPhase(StageLabel.Tokenize, tokenizeEntry))
-  );
+      .then(addPhase(StageLabel.Tokenize, tokenizeEntry));
+  });
   const results = await logProgress(pipelines);
   unregisterAgent();
   logResults(results);

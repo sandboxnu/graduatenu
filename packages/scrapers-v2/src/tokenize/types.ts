@@ -1,5 +1,6 @@
 /**
- * An HTML document (catalog page) has a few identifiable features, along with a bunch of sections.
+ * An HTML document (catalog page) has a few identifiable features, along with a
+ * bunch of sections.
  */
 export type HDocument = {
   yearVersion: number;
@@ -8,9 +9,7 @@ export type HDocument = {
   sections: HSection[];
 };
 
-/**
- * An HTML section (of a document) has a description, and a list of rows that it contains.
- */
+/** An HTML section (of a document) has a description, and a list of rows that it contains. */
 export type HSection = {
   description: string;
   entries: HRow[];
@@ -18,10 +17,13 @@ export type HSection = {
 
 /**
  * An HTML row (abbreviated HRow) consists of four main different types of row:
- * - textRow: a row containing text. either an areaHeader, comment, or subHeader.
- * - courseRow: a single course, that may have an "OR" annotation
- * - multiCourseRow: multiple courses (2+). currently only AND courses appear as multiCourseRows
- * - rangeRow: either bounded, unbounded, or only bounded on the bottom (sometimes with exceptions)
+ *
+ * - TextRow: a row containing text. either an areaHeader, comment, or subHeader.
+ * - CourseRow: a single course, that may have an "OR" annotation
+ * - MultiCourseRow: multiple courses (2+). currently only AND courses appear as
+ *   multiCourseRows
+ * - RangeRow: either bounded, unbounded, or only bounded on the bottom (sometimes
+ *   with exceptions)
  */
 export type HRow =
   // text rows
@@ -33,12 +35,14 @@ export type HRow =
   | CourseRow<HRowType.PLAIN_COURSE>
   // multi course rows
   | MultiCourseRow<HRowType.AND_COURSE>
+  | MultiCourseRow<HRowType.OR_OF_AND_COURSE>
   // range rows
   | RangeLowerBoundedRow<HRowType.RANGE_LOWER_BOUNDED>
   | WithExceptions<
       RangeLowerBoundedRow<HRowType.RANGE_LOWER_BOUNDED_WITH_EXCEPTIONS>
     >
   | RangeBoundedRow<HRowType.RANGE_BOUNDED>
+  | WithExceptions<RangeBoundedRow<HRowType.RANGE_BOUNDED_WITH_EXCEPTIONS>>
   | RangeUnboundedRow<HRowType.RANGE_UNBOUNDED>;
 
 // an enum to give a unique discriminator to each of the above cases
@@ -49,12 +53,15 @@ export enum HRowType {
   COMMENT = "COMMENT",
   OR_COURSE = "OR_COURSE",
   AND_COURSE = "AND_COURSE",
+  OR_OF_AND_COURSE = "OR_OF_AND_COURSE",
   PLAIN_COURSE = "PLAIN_COURSE",
 
   RANGE_LOWER_BOUNDED = "RANGE_LOWER_BOUNDED",
   RANGE_LOWER_BOUNDED_WITH_EXCEPTIONS = "RANGE_LOWER_BOUNDED_WITH_EXCEPTIONS",
 
   RANGE_BOUNDED = "RANGE_BOUNDED",
+  RANGE_BOUNDED_WITH_EXCEPTIONS = "RANGE_BOUNDED_WITH_EXCEPTIONS",
+
   RANGE_UNBOUNDED = "RANGE_UNBOUNDED",
 }
 

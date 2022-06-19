@@ -8,7 +8,7 @@ import {
 } from "../utils";
 import {
   COURSE_REGEX,
-  RANGE_BOUNDED,
+  RANGE_BOUNDED_MAYBE_EXCEPTIONS,
   RANGE_LOWER_BOUNDED_MAYBE_EXCEPTIONS_1,
   RANGE_LOWER_BOUNDED_MAYBE_EXCEPTIONS_2,
   RANGE_LOWER_BOUNDED_PARSE,
@@ -48,18 +48,13 @@ export const tokenizeHTML = async ($: CheerioStatic): Promise<HDocument> => {
   const catalogYear: string = parseText($("#edition")).split(" ")[0];
   const yearVersion: number = parseInt(catalogYear.split("-")[0]);
 
-  const requirementsContainer = $("#programrequirementstextcontainer");
+  const requirementsContainer = getRequirementsContainer($);
   const sections = await tokenizeSections($, requirementsContainer);
 
-  const programRequiredHeading = requirementsContainer
-    .find("h2")
-    .filter(
-      (_idx: number, element: CheerioElement) =>
-        parseText($(element)).includes("Program") &&
-        parseText($(element)).includes("Requirement")
-    );
-  const programRequiredHours =
-    Number(parseText(programRequiredHeading.next()).split(/[\s\xa0]+/)[0]) || 0;
+  const programRequiredHours = getProgramRequiredHours(
+    $,
+    requirementsContainer
+  );
 
   return {
     programRequiredHours,
@@ -67,6 +62,69 @@ export const tokenizeHTML = async ($: CheerioStatic): Promise<HDocument> => {
     majorName,
     sections: sections,
   };
+};
+
+/**
+ * Retrieves the cheerio container containing the degree requirements. If there
+ * are no tabs, tries to look for ID ending in 'requirementstextcontainer',
+ * otherwise tries to find second tab href.
+ *
+ * @param $
+ */
+const getRequirementsContainer = ($: CheerioStatic) => {
+  const tabsContainer = $("#contentarea #tabs");
+  if (tabsContainer.length === 0) {
+    // had no tabs, so just look for id ending in "requirementstextcontainer"
+    const container = $("[id$='requirementstextcontainer']");
+    if (container.length === 1) {
+      return container;
+    }
+    throw new Error(`unexpected # of matching ids: ${container.length}`);
+  } else if (tabsContainer.length === 1) {
+    const tabsArr = tabsContainer.find("ul > li > a").toArray().map($);
+    const [, requirementsTab] = ensureLengthAtLeast(2, tabsArr);
+    const containerId = requirementsTab.attr("href");
+    return $(containerId);
+  }
+  throw new Error("unable to find a requirementstextcontainer");
+};
+
+/**
+ * Retrieves the # of required course-hours for this degree. Looks for a heading
+ * with text "program requirements" (ish), and then checks first and last line,
+ * first and third word, if it matches a number. if so, returns that #, else 0.
+ *
+ * @param $
+ * @param requirementsContainer
+ */
+const getProgramRequiredHours = (
+  $: CheerioStatic,
+  requirementsContainer: Cheerio
+) => {
+  const programRequiredHeading = requirementsContainer
+    .find("h2")
+    .filter((_, element) => {
+      const text = parseText($(element)).toLowerCase();
+      // "program requirement", "program requirements", or "program credit requirements"
+      return /program (\w+ )?requirement(s?)/.test(text);
+    });
+
+  const nextAll = programRequiredHeading.nextAll().toArray().map($);
+  if (nextAll.length >= 1) {
+    for (const next of [nextAll[0], nextAll[nextAll.length - 1]]) {
+      // keep if matches "minimum of <n>" or "<n>"
+      // regex matches space characters (\x) and non-breaking space (\xa0)
+      const parts = parseText(next).split(/[\s\xa0]+/);
+      // regex matches digits (\d) groups of at least 1 (+)
+      if (/\d+/.test(parts[0])) {
+        return Number(parts[0]);
+      } else if (/\d+/.test(parts[2])) {
+        return Number(parts[2]);
+      }
+    }
+  }
+
+  return 0;
 };
 
 /**
@@ -152,8 +210,9 @@ const tokenizeRows = ($: CheerioStatic, table: CheerioElement): HRow[] => {
 
   for (const tr of $(table).find("tbody > tr").toArray()) {
     // different row type
-    const type = getRowType($, tr);
-    const row = constructRow($, tr, type);
+    const tds = $(tr).find("td").toArray().map($);
+    const type = getRowType($, tr, tds);
+    const row = constructRow($, tds, type);
     courseTable.push(row);
   }
 
@@ -165,28 +224,36 @@ const tokenizeRows = ($: CheerioStatic, table: CheerioElement): HRow[] => {
  *
  * @param $
  * @param tr
+ * @param tds
  */
-const getRowType = ($: CheerioStatic, tr: CheerioElement) => {
-  const trClass = tr.attribs["class"];
-  const td = $(tr.children[0]);
-  const tdClass = td.attr("class");
+const getRowType = ($: CheerioStatic, tr: CheerioElement, tds: Cheerio[]) => {
+  const trClasses = new Set(tr.attribs["class"].split(" "));
+  const td = tds[0];
+  const tdClasses = new Set(td.attr("class")?.split(" "));
 
-  if (trClass.includes("subheader")) {
+  if (tdClasses.size > 0) {
+    if (tdClasses.has("codecol")) {
+      if (trClasses.has("orclass") !== tdClasses.has("orclass")) {
+        throw new Error("td and tr orclass were not consistent");
+      }
+      const hasMultipleCourses = td.find(".code").toArray().length > 1;
+      if (tdClasses.has("orclass")) {
+        if (hasMultipleCourses) {
+          return HRowType.OR_OF_AND_COURSE;
+        }
+        return HRowType.OR_COURSE;
+      } else if (hasMultipleCourses) {
+        return HRowType.AND_COURSE;
+      }
+      return HRowType.PLAIN_COURSE;
+    }
+    throw Error(`td class was not "codecol": "${tdClasses}"`);
+  }
+
+  if (trClasses.has("subheader")) {
     return HRowType.SUBHEADER;
-  } else if (trClass.includes("areaheader")) {
+  } else if (trClasses.has("areaheader")) {
     return HRowType.HEADER;
-  } else if (trClass.includes("orclass")) {
-    return HRowType.OR_COURSE;
-  } else if (tdClass) {
-    if (tdClass !== "codecol") {
-      throw Error(
-        "Expected class to exist with value codecol. Please add this case to the compiler."
-      );
-    }
-    if (td.find(".code").toArray().length > 1) {
-      return HRowType.AND_COURSE;
-    }
-    return HRowType.PLAIN_COURSE;
   }
 
   const tdText = parseText(td);
@@ -196,7 +263,7 @@ const getRowType = ($: CheerioStatic, tr: CheerioElement) => {
     RANGE_LOWER_BOUNDED_MAYBE_EXCEPTIONS_2.test(tdText)
   ) {
     return HRowType.RANGE_LOWER_BOUNDED;
-  } else if (RANGE_BOUNDED.test(tdText)) {
+  } else if (RANGE_BOUNDED_MAYBE_EXCEPTIONS.test(tdText)) {
     return HRowType.RANGE_BOUNDED;
   } else if (RANGE_UNBOUNDED.test(tdText)) {
     return HRowType.RANGE_UNBOUNDED;
@@ -209,33 +276,35 @@ const getRowType = ($: CheerioStatic, tr: CheerioElement) => {
  * Converts a single row based on the passed-in type (determined by {@link getRowType}
  *
  * @param $
- * @param tr
+ * @param tds
  * @param type
  */
 const constructRow = (
   $: CheerioStatic,
-  tr: CheerioElement,
+  tds: Cheerio[],
   type: HRowType
 ): HRow => {
   switch (type) {
     case HRowType.HEADER:
     case HRowType.SUBHEADER:
     case HRowType.COMMENT:
-      return constructTextRow($, tr, type);
+      return constructTextRow($, tds, type);
     case HRowType.OR_COURSE:
-      return constructOrCourseRow($, tr);
+      return constructOrCourseRow($, tds);
     case HRowType.PLAIN_COURSE:
-      return constructPlainCourseRow($, tr);
+      return constructPlainCourseRow($, tds);
     case HRowType.AND_COURSE:
-      return constructMultiCourseRow($, tr);
+    case HRowType.OR_OF_AND_COURSE:
+      return constructMultiCourseRow($, tds, type);
     case HRowType.RANGE_LOWER_BOUNDED:
-      return constructRangeLowerBoundedMaybeExceptions($, tr);
-    case HRowType.RANGE_BOUNDED:
-      return constructRangeBounded($, tr);
-    case HRowType.RANGE_UNBOUNDED:
-      return constructRangeUnbounded($, tr);
     case HRowType.RANGE_LOWER_BOUNDED_WITH_EXCEPTIONS:
-      throw "should never get here";
+      return constructRangeLowerBoundedMaybeExceptions($, tds);
+    case HRowType.RANGE_BOUNDED:
+    case HRowType.RANGE_BOUNDED_WITH_EXCEPTIONS:
+      return constructRangeBoundedMaybeExceptions($, tds);
+    case HRowType.RANGE_UNBOUNDED:
+      return constructRangeUnbounded($, tds);
+
     default:
       return assertUnreachable(type);
   }
@@ -243,10 +312,13 @@ const constructRow = (
 
 const constructTextRow = <T>(
   $: CheerioStatic,
-  tr: CheerioElement,
+  tds: Cheerio[],
   type: T
 ): TextRow<T> => {
-  const [c1, c2] = ensureLength(2, tr.children).map($);
+  if (tds.length !== 2) {
+    throw new Error(tds.toString());
+  }
+  const [c1, c2] = ensureLength(2, tds);
   const description = parseText(c1);
   const hour = parseHour(c2);
   return { hour, description, type };
@@ -254,9 +326,9 @@ const constructTextRow = <T>(
 
 const constructPlainCourseRow = (
   $: CheerioStatic,
-  tr: CheerioElement
+  tds: Cheerio[]
 ): CourseRow<HRowType.PLAIN_COURSE> => {
-  const [code, desc, hourCol] = ensureLength(3, tr.children).map($);
+  const [code, desc, hourCol] = ensureLength(3, tds);
   const { subject, classId } = parseCourseTitle(parseText(code));
   const description = parseText(desc);
   const hour = parseHour(hourCol);
@@ -265,9 +337,9 @@ const constructPlainCourseRow = (
 
 const constructOrCourseRow = (
   $: CheerioStatic,
-  tr: CheerioElement
+  tds: Cheerio[]
 ): CourseRow<HRowType.OR_COURSE> => {
-  const [code, desc] = ensureLength(2, tr.children).map($);
+  const [code, desc] = ensureLength(2, tds);
   // remove "or "
   const { subject, classId } = parseCourseTitle(
     parseText(code).substring(3).trim()
@@ -279,9 +351,13 @@ const constructOrCourseRow = (
 
 const constructMultiCourseRow = (
   $: CheerioStatic,
-  tr: CheerioElement
-): MultiCourseRow<HRowType.AND_COURSE> => {
-  const [code, desc, hourCol] = ensureLength(3, tr.children).map($);
+  tds: Cheerio[],
+  type: HRowType.AND_COURSE | HRowType.OR_OF_AND_COURSE
+):
+  | MultiCourseRow<HRowType.AND_COURSE>
+  | MultiCourseRow<HRowType.OR_OF_AND_COURSE> => {
+  // some ORs of ANDs don't have a third cell for hour column
+  const [code, desc, hourCol] = ensureLengthAtLeast(2, tds);
   const titles = code
     .find(".code")
     .toArray()
@@ -304,10 +380,10 @@ const constructMultiCourseRow = (
     classId,
     description: descriptions[i],
   }));
-  const hour = parseHour(hourCol);
+  const hour = hourCol ? parseHour(hourCol) : 0;
   return {
     hour,
-    type: HRowType.AND_COURSE,
+    type,
     description: descriptions.join(" and "),
     courses,
   };
@@ -315,13 +391,13 @@ const constructMultiCourseRow = (
 
 const constructRangeLowerBoundedMaybeExceptions = (
   $: CheerioStatic,
-  tr: CheerioElement
+  tds: Cheerio[]
 ):
   | WithExceptions<
       RangeLowerBoundedRow<HRowType.RANGE_LOWER_BOUNDED_WITH_EXCEPTIONS>
     >
   | RangeLowerBoundedRow<HRowType.RANGE_LOWER_BOUNDED> => {
-  const [desc, hourCol] = ensureLength(2, tr.children).map($);
+  const [desc, hourCol] = ensureLength(2, tds);
   const hour = parseHour(hourCol);
   // text should match one of the following:
   // - CS 9999 or higher[, except CS 9999, CS 9999, CS 3999,... <etc>]
@@ -354,11 +430,13 @@ const constructRangeLowerBoundedMaybeExceptions = (
   };
 };
 
-const constructRangeBounded = (
+const constructRangeBoundedMaybeExceptions = (
   $: CheerioStatic,
-  tr: CheerioElement
-): RangeBoundedRow<HRowType.RANGE_BOUNDED> => {
-  const [desc, hourCol] = ensureLength(2, tr.children).map($);
+  tds: Cheerio[]
+):
+  | RangeBoundedRow<HRowType.RANGE_BOUNDED>
+  | WithExceptions<RangeBoundedRow<HRowType.RANGE_BOUNDED_WITH_EXCEPTIONS>> => {
+  const [desc, hourCol] = ensureLength(2, tds);
   const hour = parseHour(hourCol);
   // text should match the form:
   // 1. CS 1000 to CS 5999
@@ -366,24 +444,35 @@ const constructRangeBounded = (
   const text = parseText(desc);
   // should match the form [["CS 9999", "CS", "9999"], [...]]
   const matches = Array.from(text.matchAll(COURSE_REGEX));
-  const [[, subject, classIdStart], [, , classIdEnd]] = ensureLength(
-    2,
-    matches
-  );
-  return {
-    type: HRowType.RANGE_BOUNDED,
+  const [[, subject, classIdStart], [, , classIdEnd], ...exceptions] =
+    ensureLengthAtLeast(2, matches);
+  const result = {
     hour,
     subject,
     classIdStart: Number(classIdStart),
     classIdEnd: Number(classIdEnd),
   };
+  if (exceptions.length > 0) {
+    return {
+      ...result,
+      type: HRowType.RANGE_BOUNDED_WITH_EXCEPTIONS,
+      exceptions: exceptions.map(([, subject, id]) => ({
+        subject,
+        classId: Number(id),
+      })),
+    };
+  }
+  return {
+    ...result,
+    type: HRowType.RANGE_BOUNDED,
+  };
 };
 
 const constructRangeUnbounded = (
   $: CheerioStatic,
-  tr: CheerioElement
+  tds: Cheerio[]
 ): RangeUnboundedRow<HRowType.RANGE_UNBOUNDED> => {
-  const [desc, hourCol] = ensureLength(2, tr.children).map($);
+  const [desc, hourCol] = ensureLength(2, tds);
   const hour = parseHour(hourCol);
   // text should match one of the following:
   // - Any course in ARTD, ARTE, ARTF, ARTG, ARTH, and GAME subject areas as long as prerequisites have been met.

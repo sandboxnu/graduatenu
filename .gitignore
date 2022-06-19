@@ -158,3 +158,6 @@ infrastructure/develop/graduatenu-db-data
 
 # frontend-v2 
 !**/frontend-v2/**/*.json
+
+# scraper cache
+**/catalogCache/
