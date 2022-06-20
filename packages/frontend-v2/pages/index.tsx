@@ -12,6 +12,18 @@ import {
 } from "@chakra-ui/react";
 import { Logo, HeaderContainer } from "../components";
 
+type InfoSectionProps = InfoImageProps & InfoTextProps;
+
+interface InfoImageProps {
+  imageSource: string;
+  altInfo: string;
+}
+
+interface InfoTextProps {
+  title: string;
+  description: string;
+}
+
 const Home: NextPage = () => {
   return (
     <Box>
@@ -82,32 +94,24 @@ const Banner = (): JSX.Element => {
 };
 
 const Info = (): JSX.Element => {
-  const infoImageData = [
+  const infoSectionData = [
     {
       imageSource: "/landing_start.svg",
       altInfo: "Start",
-    },
-    {
-      imageSource: "/landing_personalize.svg",
-      altInfo: "Personalize",
-    },
-    {
-      imageSource: "/landing_graduate.svg",
-      altInfo: "Graduate",
-    },
-  ];
-  const infoSectionData = [
-    {
       title: "Start",
       description:
         "Just answer a couple questions and get started with a multi-year plan for your classes.",
     },
     {
+      imageSource: "/landing_personalize.svg",
+      altInfo: "Personalize",
       title: "Personalize",
       description:
         "Pick the classes you want. We'll take care of NU Path, pre-requisites, and everything in between.",
     },
     {
+      imageSource: "/landing_graduate.svg",
+      altInfo: "Graduate",
       title: "Graduate",
       description:
         "Build a plan of study that lets you graduate faster, with better classes, and a lot less headaches.",
@@ -129,16 +133,11 @@ const Info = (): JSX.Element => {
           How It Works
         </Heading>
         <SimpleGrid columns={3} justifyItems="center" pl="5%" pr="5%">
-          {infoImageData.map((info) => (
-            <InfoImage
-              key={info.altInfo}
-              imageSource={info.imageSource}
-              altInfo={info.altInfo}
-            />
-          ))}
           {infoSectionData.map((info) => (
             <InfoSection
               key={info.title}
+              imageSource={info.imageSource}
+              altInfo={info.altInfo}
               title={info.title}
               description={info.description}
             />
@@ -149,10 +148,19 @@ const Info = (): JSX.Element => {
   );
 };
 
-interface InfoImageProps {
-  imageSource: string;
-  altInfo: string;
-}
+const InfoSection = ({
+  imageSource,
+  altInfo,
+  title,
+  description,
+}: InfoSectionProps): JSX.Element => {
+  return (
+    <Flex flexDirection="column" w="55%">
+      <InfoImage imageSource={imageSource} altInfo={altInfo} />
+      <InfoText title={title} description={description} />
+    </Flex>
+  );
+};
 
 const InfoImage = ({ imageSource, altInfo }: InfoImageProps): JSX.Element => {
   return (
@@ -166,14 +174,9 @@ const InfoImage = ({ imageSource, altInfo }: InfoImageProps): JSX.Element => {
   );
 };
 
-interface InfoSectionProps {
-  title: string;
-  description: string;
-}
-
-const InfoSection = ({ title, description }: InfoSectionProps): JSX.Element => {
+const InfoText = ({ title, description }: InfoTextProps): JSX.Element => {
   return (
-    <Box w="55%">
+    <Box>
       <Heading
         pt="10%"
         fontSize={{ desktop: "3xl", laptop: "2xl", tablet: "xl" }}
