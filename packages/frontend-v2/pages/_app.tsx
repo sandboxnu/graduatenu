@@ -5,6 +5,7 @@ import { theme } from "../utils";
 import "react-toastify/dist/ReactToastify.min.css";
 import { ToastContainer } from "react-toastify";
 import { ErrorBoundary } from "../components";
+import "@fontsource/montserrat-alternates";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

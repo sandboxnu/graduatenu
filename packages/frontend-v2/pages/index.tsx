@@ -1,454 +1,193 @@
 import type { NextPage } from "next";
-import { useState } from "react";
-import { API, SearchAPI } from "@graduate/api-client";
-import { logger, toast } from "../utils";
-import { LocalStorageKey, useLocalStorage } from "../hooks/useLocalStorage";
-import { Button } from "@chakra-ui/react";
-import axios from "axios";
-import { GetStudentResponse } from "@graduate/common";
+import {
+  Box,
+  Button,
+  Flex,
+  Heading,
+  HStack,
+  Image,
+  SimpleGrid,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
+import { Logo, HeaderContainer } from "../components";
 
-const Bomb: React.FC = () => {
-  throw Error("BOOOOM!");
-};
+type InfoSectionProps = InfoImageProps & InfoTextProps;
+
+interface InfoImageProps {
+  imageSource: string;
+  altInfo: string;
+}
+
+interface InfoTextProps {
+  title: string;
+  description: string;
+}
 
 const Home: NextPage = () => {
-  const [isClientSideError, setIsClientSideError] = useState(false);
-
-  const [planId, setPlanId] = useState<number>();
-  const [tokenInStorage, setTokenInStorage] = useLocalStorage<string>(
-    LocalStorageKey.Token
+  return (
+    <Box>
+      <Header />
+      <Banner />
+      <Info />
+    </Box>
   );
+};
 
-  if (isClientSideError) {
-    return <Bomb />;
-  }
+const Header = (): JSX.Element => {
+  return (
+    <HeaderContainer>
+      <Logo />
+      <Button size="sm">Sign In</Button>
+    </HeaderContainer>
+  );
+};
 
-  // handler that calls fetchCourse from our api-client package
-  const testFetchCourse = (subject: string, classId: string) => {
-    SearchAPI.fetchCourse(subject, classId).then((res) => console.log(res));
-  };
+const Banner = (): JSX.Element => {
+  return (
+    <Box
+      pt={{ desktop: "5rem", laptop: "3rem", tablet: "2.5rem" }}
+      pb={{ desktop: "11rem", laptop: "9rem", tablet: "6.25rem" }}
+    >
+      <HStack
+        spacing={{ desktop: "6.25rem", laptop: "5rem", tablet: "3rem" }}
+        justifyContent="center"
+      >
+        <Image
+          boxSize={{ desktop: "34.25rem", laptop: "31.25rem", tablet: "25rem" }}
+          src="/husky.svg"
+          alt="husky"
+        />
+        <Flex w="35%" flexDirection="column" alignItems="center">
+          <Box>
+            <Heading
+              fontSize={{ desktop: "7xl", laptop: "6xl", tablet: "5xl" }}
+              color="primary.main"
+            >
+              Graduate
+            </Heading>
+            <Heading
+              fontSize={{ desktop: "7xl", laptop: "6xl", tablet: "5xl" }}
+              color="blue.700"
+            >
+              your way
+            </Heading>
+            <Text
+              pt="5%"
+              fontSize={{ desktop: "3xl", laptop: "2xl", tablet: "xl" }}
+              color="blue.700"
+            >
+              Navigate the Northeastern graduation requirements and create a
+              personalized plan of study.
+            </Text>
+          </Box>
+          <Button
+            mr={{ desktop: "7.5rem", laptop: "6.25rem", tablet: "3.25rem" }}
+            mt="15%"
+          >
+            Get Started
+          </Button>
+        </Flex>
+      </HStack>
+    </Box>
+  );
+};
 
-  // handler that calls searchCourses from our api-client package
-  const testSearchCourses = (
-    searchQuery: string,
-    minIndex: number,
-    maxIndex: number
-  ) => {
-    SearchAPI.searchCourses(searchQuery, minIndex, maxIndex).then((res) =>
-      console.log(res)
-    );
-  };
-
-  const clearDataBase = async () => {
-    const res = await axios.get("http://localhost:3002/api/students");
-    const uuids = res.data.map((student: GetStudentResponse) => student.uuid);
-    await Promise.all(
-      uuids.map((uuid: string) =>
-        axios.delete(`http://localhost:3002/api/students/${uuid}`)
-      )
-    );
-    console.log("cleared students");
-  };
+const Info = (): JSX.Element => {
+  const infoSectionData = [
+    {
+      imageSource: "/landing_start.svg",
+      altInfo: "Start",
+      title: "Start",
+      description:
+        "Just answer a couple questions and get started with a multi-year plan for your classes.",
+    },
+    {
+      imageSource: "/landing_personalize.svg",
+      altInfo: "Personalize",
+      title: "Personalize",
+      description:
+        "Pick the classes you want. We'll take care of NU Path, pre-requisites, and everything in between.",
+    },
+    {
+      imageSource: "/landing_graduate.svg",
+      altInfo: "Graduate",
+      title: "Graduate",
+      description:
+        "Build a plan of study that lets you graduate faster, with better classes, and a lot less headaches.",
+    },
+  ];
 
   return (
-    <>
-      <h1>GraduateNU Landing Page:</h1>
-      <div>
-        <h2>Testing api calls on backend v2</h2>
-        <p>All responses will be logged to the console</p>
+    <Box
+      pt={{ desktop: "6rem", laptop: "6.25rem", tablet: "5rem" }}
+      pb={{ desktop: "7.75rem", laptop: "8rem", tablet: "6.5rem" }}
+      backgroundColor="blue.50"
+    >
+      <VStack>
+        <Heading
+          mb={{ desktop: "6rem", laptop: "5rem", tablet: "4rem" }}
+          size="2xl"
+          color="blue.700"
+        >
+          How It Works
+        </Heading>
+        <SimpleGrid columns={3} justifyItems="center" pl="5%" pr="5%">
+          {infoSectionData.map((info) => (
+            <InfoSection
+              key={info.title}
+              imageSource={info.imageSource}
+              altInfo={info.altInfo}
+              title={info.title}
+              description={info.description}
+            />
+          ))}
+        </SimpleGrid>
+      </VStack>
+    </Box>
+  );
+};
 
-        <Button onClick={clearDataBase}>Clear DB</Button>
+const InfoSection = ({
+  imageSource,
+  altInfo,
+  title,
+  description,
+}: InfoSectionProps): JSX.Element => {
+  return (
+    <Flex flexDirection="column" w="55%">
+      <InfoImage imageSource={imageSource} altInfo={altInfo} />
+      <InfoText title={title} description={description} />
+    </Flex>
+  );
+};
 
-        <div>
-          <h3>Auth Routes</h3>
-          <Button
-            onClick={async () => {
-              const student = await API.auth.register({
-                fullName: "Aryan Shah",
-                email: "aryan1@gmail.com",
-                password: "aryan1234",
-                academicYear: 2019,
-                graduateYear: 2023,
-                catalogYear: 2019,
-                major: "Computer Science",
-                nuid: "000000000",
-              });
-              console.log(student);
-              setTokenInStorage(student.accessToken!);
-            }}
-          >
-            Register
-          </Button>
+const InfoImage = ({ imageSource, altInfo }: InfoImageProps): JSX.Element => {
+  return (
+    <Image
+      boxSize={{ desktop: "15.5rem", laptop: "12.5rem", tablet: "9.5rem" }}
+      pt="5%"
+      pb="5%"
+      src={imageSource}
+      alt={altInfo}
+    />
+  );
+};
 
-          <Button
-            onClick={async () => {
-              setTokenInStorage("");
-              console.log("Logged out, token reset");
-            }}
-          >
-            Logout
-          </Button>
-
-          <Button
-            onClick={async () => {
-              const student = await API.auth.login({
-                email: "aryan1@gmail.com",
-                password: "aryan1234",
-              });
-              console.log(student);
-              // Set to local storage for use in testUseStudentPage
-              console.log(
-                "token set in local storage, visit testusestudent to test"
-              );
-              setTokenInStorage(student.accessToken!);
-            }}
-          >
-            Login
-          </Button>
-        </div>
-        <div>
-          <h3>Student Routes</h3>
-          <Button
-            onClick={async () => {
-              const student = await API.student.getMe(tokenInStorage!);
-              console.log(student);
-            }}
-          >
-            Get me
-          </Button>
-          <Button
-            onClick={async () => {
-              const student = await API.student.getMeWithPlan(tokenInStorage!);
-              console.log(student);
-            }}
-          >
-            Get me with plan
-          </Button>
-          <Button
-            onClick={async () => {
-              const student = await API.student.update(
-                {
-                  fullName: "Aryan Shah Updated",
-                },
-                tokenInStorage!
-              );
-              console.log("fullname updated");
-              console.log(student);
-            }}
-          >
-            Update me
-          </Button>
-          <Button
-            onClick={async () => {
-              await API.student.delete(tokenInStorage!);
-              setTokenInStorage("");
-              console.log("deleted user");
-            }}
-          >
-            Delete me
-          </Button>
-        </div>
-        <div>
-          <h3>Plan Routes</h3>
-          <Button
-            onClick={async () => {
-              const plan = await API.plans.create(
-                {
-                  name: "Plan 1",
-                  major: "Computer Science",
-                  coopCycle: "Fall",
-                  concentration: "Software",
-                  catalogYear: 2019,
-                  courseWarnings: [],
-                  warnings: [],
-                  schedule: {
-                    years: [2019, 2020, 2021, 2022],
-                    yearMap: {
-                      "2019": {
-                        year: 2019,
-                        fall: {
-                          season: "FL",
-                          year: 2019,
-                          termId: 1,
-                          status: "CLASSES",
-                          classes: [],
-                        },
-                        spring: {
-                          season: "SP",
-                          year: 2019,
-                          termId: 1,
-                          status: "CLASSES",
-                          classes: [],
-                        },
-                        summer1: {
-                          season: "S1",
-                          year: 2019,
-                          termId: 1,
-                          status: "CLASSES",
-                          classes: [],
-                        },
-                        summer2: {
-                          season: "S2",
-                          year: 2019,
-                          termId: 1,
-                          status: "CLASSES",
-                          classes: [],
-                        },
-                        isSummerFull: false,
-                      },
-                      "2020": {
-                        year: 2020,
-                        fall: {
-                          season: "FL",
-                          year: 2020,
-                          termId: 1,
-                          status: "CLASSES",
-                          classes: [],
-                        },
-                        spring: {
-                          season: "SP",
-                          year: 2020,
-                          termId: 1,
-                          status: "CLASSES",
-                          classes: [],
-                        },
-                        summer1: {
-                          season: "S1",
-                          year: 2020,
-                          termId: 1,
-                          status: "CLASSES",
-                          classes: [],
-                        },
-                        summer2: {
-                          season: "S2",
-                          year: 2020,
-                          termId: 1,
-                          status: "CLASSES",
-                          classes: [],
-                        },
-                        isSummerFull: false,
-                      },
-                      "2021": {
-                        year: 2021,
-                        fall: {
-                          season: "FL",
-                          year: 2021,
-                          termId: 1,
-                          status: "CLASSES",
-                          classes: [],
-                        },
-                        spring: {
-                          season: "SP",
-                          year: 2021,
-                          termId: 1,
-                          status: "CLASSES",
-                          classes: [],
-                        },
-                        summer1: {
-                          season: "S1",
-                          year: 2021,
-                          termId: 1,
-                          status: "CLASSES",
-                          classes: [],
-                        },
-                        summer2: {
-                          season: "S2",
-                          year: 2021,
-                          termId: 1,
-                          status: "CLASSES",
-                          classes: [],
-                        },
-                        isSummerFull: false,
-                      },
-                      "2022": {
-                        year: 2022,
-                        fall: {
-                          season: "FL",
-                          year: 2022,
-                          termId: 1,
-                          status: "CLASSES",
-                          classes: [],
-                        },
-                        spring: {
-                          season: "SP",
-                          year: 2022,
-                          termId: 1,
-                          status: "CLASSES",
-                          classes: [],
-                        },
-                        summer1: {
-                          season: "S1",
-                          year: 2022,
-                          termId: 1,
-                          status: "CLASSES",
-                          classes: [],
-                        },
-                        summer2: {
-                          season: "S2",
-                          year: 2022,
-                          termId: 1,
-                          status: "CLASSES",
-                          classes: [],
-                        },
-                        isSummerFull: false,
-                      },
-                    },
-                  },
-                },
-                tokenInStorage!
-              );
-              console.log(plan);
-              setPlanId(plan.id);
-              console.log(
-                "plan set in local storage, visit testuseplan to test"
-              );
-            }}
-          >
-            Create plan
-          </Button>
-          <Button
-            onClick={async () => {
-              const plan = await API.plans.update(
-                planId!,
-                {
-                  schedule: {
-                    years: [2019, 2020, 2021, 2022, 2023],
-                    yearMap: {},
-                  },
-                },
-                tokenInStorage!
-              );
-              console.log("Changed 4 years to 5");
-              console.log(plan);
-            }}
-          >
-            Update created plan
-          </Button>
-          <Button
-            onClick={async () => {
-              const plan = await API.plans.get(planId!, tokenInStorage!);
-              console.log(plan);
-            }}
-          >
-            Get created plan
-          </Button>
-          <Button
-            onClick={async () => {
-              await API.plans.delete(planId!, tokenInStorage!);
-              console.log(`deleted plan ${planId}`);
-              setPlanId(undefined);
-            }}
-          >
-            Delete created plan
-          </Button>
-        </div>
-      </div>
-
-      <h2>SearchAPI logging!</h2>
-      <div>
-        <Button
-          onClick={() => {
-            testFetchCourse("CS", "2500");
-          }}
-        >
-          fetchCourse
-        </Button>
-        <Button
-          onClick={() => {
-            testSearchCourses("CS", 0, 9999);
-          }}
-        >
-          searchCourses
-        </Button>
-      </div>
-      <br />
-      <div>
-        <h2>API Error Handling</h2>
-        <div>
-          <h3>Toasts without logging</h3>
-          <Button
-            onClick={() =>
-              toast.info("Oh btw here's some info on what you were doing")
-            }
-          >
-            info
-          </Button>
-          <Button
-            onClick={() =>
-              toast.success("Whatever you were doing was successful")
-            }
-          >
-            success
-          </Button>
-          <Button
-            onClick={() =>
-              toast.warn("Whatever you were doing was kinda successful")
-            }
-          >
-            warning
-          </Button>
-          <Button
-            onClick={() => toast.error("Whatever you were doing failed lol")}
-          >
-            error
-          </Button>
-        </div>
-      </div>
-      <div>
-        <h3>Toasts with logging</h3>
-        <Button
-          onClick={() =>
-            toast.info("Oh btw here's some info on what you were doing", {
-              log: true,
-            })
-          }
-        >
-          info
-        </Button>
-        <Button
-          onClick={() =>
-            toast.success("Whatever you were doing was successful", {
-              log: true,
-            })
-          }
-        >
-          success
-        </Button>
-        <Button
-          onClick={() =>
-            toast.warn("Whatever you were doing was kinda successful", {
-              log: true,
-            })
-          }
-        >
-          warning
-        </Button>
-        <Button
-          onClick={() =>
-            toast.error("Whatever you were doing failed lol", { log: true })
-          }
-        >
-          error
-        </Button>
-      </div>
-      <div>
-        <h2>Client Side Error Handling</h2>
-        <Button
-          onClick={() => {
-            setIsClientSideError(true);
-          }}
-        >
-          Trigger a client side error
-        </Button>
-      </div>
-      <div>
-        <h2>Logging</h2>
-        <Button onClick={() => logger.info("Info log")}>info</Button>
-        <Button onClick={() => logger.debug("Debug log")}>debug</Button>
-        <Button onClick={() => logger.warn("Warning log")}>warning</Button>
-        <Button onClick={() => logger.error("Error log")}>error</Button>
-      </div>
-    </>
+const InfoText = ({ title, description }: InfoTextProps): JSX.Element => {
+  return (
+    <Box>
+      <Heading
+        pt="10%"
+        fontSize={{ desktop: "3xl", laptop: "2xl", tablet: "xl" }}
+        color="blue.700"
+      >
+        {title}
+      </Heading>
+      <Text pt="3%" color="blue.700" fontWeight="semibold">
+        {description}
+      </Text>
+    </Box>
   );
 };
 
