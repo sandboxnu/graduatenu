@@ -1,6 +1,7 @@
 import { loadHtmlWithUrl } from "../utils";
 import { CatalogURLResult, College } from "./types";
 import { ResultType } from "@graduate/common";
+import { join } from "path";
 
 /**
  * Scrapes all catalog entries underneath the colleges for the specified catalog
@@ -44,16 +45,15 @@ export const scrapeMajorLinks = async (
  *
  * @param baseUrl The base url of the major catalog. should look something like
  *   "https://catalog.northeastern.edu"
- * @param path    The path of the major catalog. something like "/undergraduate"
- *   or "archive/2018-2019/undergraduate/". trailing or leading slashes are ok.
+ * @param path    The path of the major catalog. something like
+ *   "/undergraduate/" or "/archive/2018-2019/undergraduate".
  */
 export const scrapeMajorLinksForUrl = async (
   baseUrl: string,
   path: string
 ): Promise<CatalogURLResult> => {
-  const p = path !== "" ? `/${path}` : "";
   const initQueue = Object.values(College).map(
-    (college) => new URL(`${baseUrl}${p}/${college}/`)
+    (college) => new URL(join(baseUrl, path, `${college}/`))
   );
   return await scrapeLinks(baseUrl, initQueue);
 };
@@ -85,7 +85,7 @@ const scrapeLinks = async (
       const children = getChildrenForPathId($, url).toArray().map($);
       for (const element of children) {
         const path = getLinkForEl(element);
-        const url = new URL(`${baseUrl}${path}`);
+        const url = new URL(join(baseUrl, path));
         if (!seen.has(url.href)) {
           const bucket = isParent(element) ? nextQueue : entries;
           bucket.push(url);

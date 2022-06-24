@@ -6,7 +6,6 @@ import { Agent } from "https";
  * once cause some to start failing with weird errors. To fix this, we share TCP
  * sockets between requests and utilize `keepAlive` by installing an agent.
  */
-
 export const createAgent = () => {
   axios.defaults.httpsAgent = new Agent({
     keepAlive: true,
