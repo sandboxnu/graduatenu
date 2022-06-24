@@ -53,7 +53,7 @@ export const scrapeMajorLinksForUrl = async (
   path: string
 ): Promise<CatalogURLResult> => {
   const initQueue = Object.values(College).map(
-    (college) => new URL(join(baseUrl, path, `${college}/`))
+    (college) => new URL(join(baseUrl, path, college, "/"))
   );
   return await scrapeLinks(baseUrl, initQueue);
 };
@@ -121,7 +121,6 @@ const getChildrenForPathId = ($: CheerioStatic, url: URL) => {
   // We select the element via its ID
   // Note: for getElementById, forward slashes need to be escaped
   const id = url.pathname.replaceAll("/", "\\/");
-  // const id = url.pathname.split("/").join("\\/");
   const current = $(`#${id}`);
   return current.children();
 };

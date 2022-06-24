@@ -34,7 +34,7 @@ export const runPipeline = async (yearStart: number, yearEnd: number) => {
       .then(addPhase(StageLabel.Tokenize, tokenizeEntry));
   });
   const results = await logProgress(pipelines);
-  unregisterAgent();
+  await unregisterAgent();
   logResults(results);
 };
 

@@ -2,7 +2,7 @@ import * as cheerio from "cheerio";
 import { Err, Ok, Result } from "@graduate/common";
 import { existsSync } from "fs";
 import { mkdir, readFile, writeFile } from "fs/promises";
-import axios from "axios";
+import undici from "undici";
 
 export const loadHtmlWithUrl = async (
   url: URL
@@ -35,8 +35,7 @@ export const loadHTML = async (url: string): Promise<CheerioStatic> => {
  */
 const cachedGetRequest = async (url: string) => {
   if (!USE_CACHE) {
-    const { data } = await axios.get(url);
-    return data;
+    return await wrappedGetRequest(url);
   }
 
   if (!existsSync("./catalogCache")) {
@@ -49,17 +48,17 @@ const cachedGetRequest = async (url: string) => {
     return await readFile(path);
   }
 
-  const { data } = await axios.get(url);
+  const data = await wrappedGetRequest(url);
   await writeFile(path, data);
   return data;
 };
 
-export const appendPath = (base: string, path: string, hash?: string) => {
-  const url = new URL(path, base);
-  if (hash) {
-    url.hash = hash;
+const wrappedGetRequest = async (url: string) => {
+  const response = await undici.request(url, { maxRedirections: 1 });
+  if (response.statusCode !== 200) {
+    throw new Error(`non-ok status code: ${response.statusCode}, url: ${url}`);
   }
-  return url;
+  return await response.body.text();
 };
 
 export const ensureLength = <T>(n: number, l: T[]) => {
@@ -83,12 +82,4 @@ export const ensureLengthAtLeast = <T>(n: number, l: T[]) => {
 export const parseText = (td: Cheerio) => {
   // replace &NBSP with space
   return td.text().replaceAll("\xa0", " ").trim();
-};
-
-export const joinParts = (base: string, parts: string[]) => {
-  return appendPath(base, parts.join("/"));
-};
-
-export const getPathParts = (path: string) => {
-  return path.split("/").filter((s) => s !== "");
 };

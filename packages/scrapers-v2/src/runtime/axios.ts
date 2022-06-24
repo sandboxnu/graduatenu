@@ -1,5 +1,4 @@
-import axios from "axios";
-import { Agent } from "https";
+import { getGlobalDispatcher, Pool, setGlobalDispatcher } from "undici";
 
 /**
  * The scrapers (by default) try to make a lot of HTTP requests, and too many at
@@ -7,9 +6,11 @@ import { Agent } from "https";
  * sockets between requests and utilize `keepAlive` by installing an agent.
  */
 export const createAgent = () => {
-  axios.defaults.httpsAgent = new Agent({
-    keepAlive: true,
-    maxSockets: 100,
-  });
-  return () => axios.defaults.httpsAgent.destroy();
+  setGlobalDispatcher(
+    new Pool("https://catalog.northeastern.edu", {
+      pipelining: 10,
+      connections: 25,
+    })
+  );
+  return () => getGlobalDispatcher().destroy();
 };

@@ -3145,6 +3145,7 @@ __metadata:
     ts-jest: ^27.1.3
     ts-node: ^10.8.0
     typescript: ^4.6.2
+    undici: ^5.5.1
   languageName: unknown
   linkType: soft
 
@@ -17422,6 +17423,13 @@ __metadata:
     has-symbols: ^1.0.2
     which-boxed-primitive: ^1.0.2
   checksum: 89d950e18fb45672bc6b3c961f1e72c07beb9640c7ceed847b571ba6f7d2af570ae1a2584cfee268b9d9ea1e3293f7e33e0bc29eaeb9f8e8a0bab057ff9e6bba
+  languageName: node
+  linkType: hard
+
+"undici@npm:^5.5.1":
+  version: 5.5.1
+  resolution: "undici@npm:5.5.1"
+  checksum: c041c9093df7ec683479a9555581206a7c7bebfc1ed6e8669920e55618461fc4ce08938e2fbf8ef7d692c2813c44392b5ed25c58396ee4a72ffd1f1f953712c9
   languageName: node
   linkType: hard
 

@@ -7,7 +7,8 @@
     "@graduate/common": "*",
     "axios": "^0.26.1",
     "cheerio": "1.0.0-rc.3",
-    "ts-node": "^10.8.0"
+    "ts-node": "^10.8.0",
+    "undici": "^5.5.1"
   },
   "devDependencies": {
     "@types/cheerio": "0.22.13",
