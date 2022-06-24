@@ -3139,7 +3139,6 @@ __metadata:
     "@types/cheerio": 0.22.13
     "@types/jest": ^27
     "@types/node": ^16
-    axios: ^0.26.1
     cheerio: 1.0.0-rc.3
     jest: ^27.5.1
     ts-jest: ^27.1.3

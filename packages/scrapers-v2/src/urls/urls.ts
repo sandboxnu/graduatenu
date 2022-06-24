@@ -92,9 +92,6 @@ const scrapeLinks = async (
           seen.add(url.href);
         }
       }
-      if (children.length === 0) {
-        console.log("no children for url:", url.href);
-      }
     }
     queue = nextQueue;
   }
