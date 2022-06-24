@@ -1,8 +1,8 @@
-import axios from "axios";
 import * as cheerio from "cheerio";
 import { Err, Ok, Result } from "@graduate/common";
 import { existsSync } from "fs";
 import { mkdir, readFile, writeFile } from "fs/promises";
+import axios from "axios";
 
 export const loadHtmlWithUrl = async (
   url: URL

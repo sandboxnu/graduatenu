@@ -1,4 +1,4 @@
-import { getPathParts, joinParts, loadHtmlWithUrl } from "../utils";
+import { loadHtmlWithUrl } from "../utils";
 import { CatalogURLResult, College } from "./types";
 import { ResultType } from "@graduate/common";
 
@@ -51,9 +51,9 @@ export const scrapeMajorLinksForUrl = async (
   baseUrl: string,
   path: string
 ): Promise<CatalogURLResult> => {
-  const paths = getPathParts(path);
-  const initQueue = Object.values(College).map((college) =>
-    joinParts(baseUrl, [...paths, college])
+  const p = path !== "" ? `/${path}` : "";
+  const initQueue = Object.values(College).map(
+    (college) => new URL(`${baseUrl}${p}/${college}/`)
   );
   return await scrapeLinks(baseUrl, initQueue);
 };
@@ -85,12 +85,15 @@ const scrapeLinks = async (
       const children = getChildrenForPathId($, url).toArray().map($);
       for (const element of children) {
         const path = getLinkForEl(element);
-        const url = joinParts(baseUrl, path);
+        const url = new URL(`${baseUrl}${path}`);
         if (!seen.has(url.href)) {
           const bucket = isParent(element) ? nextQueue : entries;
           bucket.push(url);
           seen.add(url.href);
         }
+      }
+      if (children.length === 0) {
+        console.log("no children for url:", url.href);
       }
     }
     queue = nextQueue;
@@ -103,22 +106,23 @@ const isParent = (el: Cheerio) => {
   return el.hasClass("isparent");
 };
 
-const getLinkForEl = (element: Cheerio): string[] => {
+const getLinkForEl = (element: Cheerio) => {
   const aTag = element.find("a");
   if (aTag.length === 0) {
     const msg = "Catalog is missing a link for a parent element.";
     throw new Error(msg);
   }
 
-  return getPathParts(aTag.attr("href"));
+  return aTag.attr("href");
 };
 
 const getChildrenForPathId = ($: CheerioStatic, url: URL) => {
   // The catalog entries have an ID equal to the path, with a trailing slash
   // We select the element via its ID
   // Note: for getElementById, forward slashes need to be escaped
-  const id = url.pathname.split("/").join("\\/");
-  const current = $(`#${id}\\/`);
+  const id = url.pathname.replaceAll("/", "\\/");
+  // const id = url.pathname.split("/").join("\\/");
+  const current = $(`#${id}`);
   return current.children();
 };
 
