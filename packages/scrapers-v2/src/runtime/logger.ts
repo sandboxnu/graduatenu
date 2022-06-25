@@ -2,7 +2,7 @@ import { Pipeline, StageLabel } from "./types";
 import { ResultType } from "@graduate/common";
 import { FilterError } from "./pipeline";
 import { CatalogEntryType } from "../classify/types";
-import { HDocument } from "../tokenize/types";
+import { HDocument, HRowType } from "../tokenize/types";
 
 /**
  * Logs the progress of the scrape so the developer knows the scraper isn't deadlocked.
@@ -77,6 +77,40 @@ const logOkResult = (
   if (type === CatalogEntryType.Major && tokenized.programRequiredHours <= 0) {
     // only applies to majors, because concentrations and minors don't have hours requirement
     stats.recordError(new Error("major with hours <= 0"), id);
+  }
+
+  const reduce = (t: HRowType) => {
+    switch (t) {
+      case HRowType.RANGE_LOWER_BOUNDED:
+        return HRowType.RANGE_BOUNDED;
+      case HRowType.RANGE_LOWER_BOUNDED_WITH_EXCEPTIONS:
+        return HRowType.RANGE_BOUNDED;
+      case HRowType.RANGE_BOUNDED:
+        return HRowType.RANGE_BOUNDED;
+      case HRowType.RANGE_BOUNDED_WITH_EXCEPTIONS:
+        return HRowType.RANGE_BOUNDED;
+      case HRowType.RANGE_UNBOUNDED:
+        return HRowType.RANGE_BOUNDED;
+      default:
+        return t;
+    }
+  };
+
+  // we want to record all the possible transitions
+  // we also want to record all the different comment types
+  for (const { entries } of result.ok.tokenized.sections) {
+    for (let i = 0; i < entries.length - 1; i += 1) {
+      const curr = reduce(entries[i].type);
+      const next = reduce(entries[i + 1].type);
+      stats.recordField("transitions", `${curr} -> ${next}`);
+    }
+    for (const r of entries) {
+      if (r.type === HRowType.HEADER) {
+        stats.recordField("header", r.description);
+      } else if (r.type === HRowType.SUBHEADER) {
+        stats.recordField("subheader", r.description);
+      }
+    }
   }
 };
 
