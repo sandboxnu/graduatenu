@@ -20,14 +20,14 @@ it does have ts support, but it's easier to test it with javascript (the tester 
 
 - [x] come up with overall plan impl
   - [x] research library for parsing
-  - [ ] proof of concept
+  - [x] proof of concept
 - [ ] comment parser
   - [ ] aggregate comment data from recording
   - [ ] section comments
   - [ ] xom comments
   - note: here might need info of whether hour is null or 0. maybe impl?
 - [ ] major2 parser
-  - [ ] base cases
+  - [x] base cases
   - [ ] recursive cases
   - [ ] test it out + fix bugs
   - [ ] recursive cases with comments
@@ -74,3 +74,16 @@ grammar in regex notation:
   - (section comment)(requirement)+
 - what is a delimiter? comment? or header? subheader?
   - probably review this after writing first bit and testing
+
+# nearley learnings
+
+- [as a generator](http://humans-who-read-grammars.blogspot.com/2018/04/having-fun-with-phrase-structure.html)
+- [learning nearley medium article](https://gajus.medium.com/parsing-absolutely-anything-in-javascript-using-earley-algorithm-886edcc31e5e)
+-
+
+## takeaways after proof of concept (nearley)
+
+- managing types are a huge pain, because we don't get types from nearley
+  - having to write the parse functions without type safety is awful
+- how do we split RANGEs? maybe add an intermediary stage wouldn't be too bad actually
+- generates very nicely, and is easy to specify the parse transitions (left recursive automatically)

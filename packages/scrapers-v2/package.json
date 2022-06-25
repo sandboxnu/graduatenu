@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "test": "jest",
-    "scrape": "yarn generate-parser && ts-node ./src/main.ts",
+    "scrape": "ts-node ./src/main.ts",
     "parser:generate": "nearleyc src/parse/grammar.ne -o src/parse/grammar.js",
     "parser:test": "nearley-test src/parse/grammar.js"
   },
