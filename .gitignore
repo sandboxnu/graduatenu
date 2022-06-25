@@ -161,3 +161,4 @@ infrastructure/develop/graduatenu-db-data
 
 # scraper cache
 **/catalogCache/
+packages/scrapers-v2/src/parse/grammar.js
