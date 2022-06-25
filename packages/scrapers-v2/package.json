@@ -3,6 +3,12 @@
   "version": "1.0.0",
   "description": "scrapers used to generate essential data such as majors and plans",
   "private": true,
+  "scripts": {
+    "test": "jest",
+    "scrape": "yarn generate-parser && ts-node ./src/main.ts",
+    "parser:generate": "nearleyc src/parse/grammar.ne -o src/parse/grammar.js",
+    "parser:test": "nearley-test src/parse/grammar.js"
+  },
   "dependencies": {
     "@graduate/common": "*",
     "cheerio": "1.0.0-rc.3",
@@ -12,14 +18,12 @@
   "devDependencies": {
     "@types/cheerio": "0.22.13",
     "@types/jest": "^27",
+    "@types/nearley": "^2",
     "@types/node": "^16",
     "jest": "^27.5.1",
+    "nearley": "^2.20.1",
     "ts-jest": "^27.1.3",
     "typescript": "^4.6.2"
-  },
-  "scripts": {
-    "test": "jest",
-    "scrape": "ts-node ./src/main.ts"
   },
   "jest": {
     "moduleFileExtensions": [
