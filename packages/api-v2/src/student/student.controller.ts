@@ -23,8 +23,8 @@ import {
   SignUpDto,
   GetStudentResponse,
   OnboardStudentDto,
-  UpdateStudentResponse,
   UpdateStudentDto,
+  UpdateStudentResponse,
 } from "../../../common";
 
 @Controller("students")
