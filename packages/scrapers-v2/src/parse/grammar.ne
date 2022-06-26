@@ -24,22 +24,35 @@ const postprocess = require("./postprocess");
 %}
 
 # main entrypoint
-main -> requirement2 :+                               {% id %}
+## ranges may produce arrays of requirements
+main -> requirement2 :+                               {% d => d[0].flat() %}
 requirement2 ->
-    orCourse {% id %}
-  | andCourse {% id %}
-  | course {% id %}
-  | range {% id %}
+    orCourse                                          {% id %}
+  | andCourse                                         {% id %}
+  | course                                            {% id %}
+  | range                                             {% id %}
 
-course -> %PLAIN_COURSE                               {% id %}
+# atoms
+course -> %PLAIN_COURSE                               {% postprocess.processCourse %}
+## may produce a list of requirements
 range ->
-    %RANGE_LOWER_BOUNDED {% id %}
-  | %RANGE_LOWER_BOUNDED_WITH_EXCEPTIONS {% id %}
-  | %RANGE_BOUNDED {% id %}
-  | %RANGE_BOUNDED_WITH_EXCEPTIONS {% id %}
-  | %RANGE_UNBOUNDED                                  {% id %}
+    %RANGE_LOWER_BOUNDED                              {% postprocess.processRangeLB %}
+  | %RANGE_LOWER_BOUNDED_WITH_EXCEPTIONS              {% postprocess.processRangeLBE %}
+  | %RANGE_BOUNDED                                    {% postprocess.processRangeB %}
+  | %RANGE_BOUNDED_WITH_EXCEPTIONS                    {% postprocess.processRangeBE %}
+  | %RANGE_UNBOUNDED                                  {% postprocess.processRangeU %}
 
-# an OR always follows a plainCourse or andCourse
+# recursive cases
+## always begins with a plainCourse or andCourse
 orCourse ->
-  (course {% id %} | andCourse {% id %}) (%OR_COURSE {% id %} | %OR_OF_AND_COURSE {% id %}) :+
-andCourse -> %AND_COURSE :+
+  ( course                                            {% id %}
+  | andCourse                                         {% id %}
+  )
+  ( %OR_COURSE                                        {% postprocess.processCourse %}
+  | %OR_OF_AND_COURSE                                 {% postprocess.processOrOfAnd %}
+  ) :+                                                {% postprocess.processOr %}
+andCourse ->
+  ( %AND_COURSE                                       {% postprocess.processOrOfAnd %}
+  ) :+                                                {% postprocess.processAnd %}
+
+# comment cases

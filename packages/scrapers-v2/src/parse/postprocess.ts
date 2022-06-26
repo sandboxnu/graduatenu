@@ -1,59 +1,157 @@
+import { HRow, HRowType } from "../tokenize/types";
 import {
-  CourseRow,
-  HRowType,
-  RangeBoundedRow,
-  RangeLowerBoundedRow,
-  RangeUnboundedRow,
-  WithExceptions,
-} from "../tokenize/types";
-import { IOrCourse2, IRequiredCourse, Requirement2 } from "@graduate/common";
+  IAndCourse2,
+  IOrCourse2,
+  IRequiredCourse,
+  Requirement2,
+} from "@graduate/common";
 
-export const processCourse = (tokens: [CourseRow<any>]): IRequiredCourse => {
-  const { classId, subject } = tokens[0];
+// grab the wrapper of the row type enum from tokenize types
+type GetRow<RowType> = HRow & { type: RowType };
+// sometimes produces a list, if a row token maps to multiple requirements
+type Processor<RowType> = (
+  tokens: [GetRow<RowType>]
+) => Requirement2 | Requirement2[];
+
+// utility for parsing a list of simple courses to IRequiredCourse
+const convertCourses = (
+  cs: Array<{ subject: string; classId: number }>
+): IRequiredCourse[] => {
+  return cs.map((c) => ({ ...c, type: "COURSE" }));
+};
+
+export const processCourse: Processor<
+  HRowType.PLAIN_COURSE | HRowType.OR_COURSE
+> = (tokens): IRequiredCourse => {
+  const { subject, classId } = tokens[0];
   return { type: "COURSE", classId, subject };
 };
 
-export const processOr = (
-  tokens: [Requirement2, ...CourseRow<HRowType.OR_COURSE>[]]
-): IOrCourse2 => {
-  const [req, ...ors] = tokens;
-  const parsedOrs = ors.map((c) => processCourse([c]));
-  return { type: "OR", courses: [req, ...parsedOrs] };
-};
-
-const Range = (
-  subject: string,
-  idRangeStart: number,
-  idRangeEnd: number,
-  exceptions = []
+export const processRangeLB: Processor<HRowType.RANGE_LOWER_BOUNDED> = (
+  tokens
 ) => {
+  const { classIdStart, subject } = tokens[0];
   return {
-    exceptions,
-    idRangeEnd,
-    idRangeStart,
-    subject,
     type: "RANGE",
+    subject,
+    idRangeStart: classIdStart,
+    idRangeEnd: 9999,
+    exceptions: [],
   };
 };
-export const processRange = ([range]: [
-  | RangeLowerBoundedRow<HRowType.RANGE_LOWER_BOUNDED>
-  | WithExceptions<
-      RangeLowerBoundedRow<HRowType.RANGE_LOWER_BOUNDED_WITH_EXCEPTIONS>
-    >
-  | RangeBoundedRow<HRowType.RANGE_BOUNDED>
-  | WithExceptions<RangeBoundedRow<HRowType.RANGE_BOUNDED_WITH_EXCEPTIONS>>
-  | RangeUnboundedRow<HRowType.RANGE_UNBOUNDED>
-]) /*: ICourseRange2*/ => {
-  switch (range.type) {
-    case HRowType.RANGE_UNBOUNDED:
-      break;
-    case HRowType.RANGE_LOWER_BOUNDED:
-      break;
-    case HRowType.RANGE_LOWER_BOUNDED_WITH_EXCEPTIONS:
-      break;
-    case HRowType.RANGE_BOUNDED:
-      break;
-    case HRowType.RANGE_BOUNDED_WITH_EXCEPTIONS:
-      break;
-  }
+
+export const processRangeLBE: Processor<
+  HRowType.RANGE_LOWER_BOUNDED_WITH_EXCEPTIONS
+> = (tokens) => {
+  const { subject, classIdStart, exceptions: es } = tokens[0];
+  const exceptions = convertCourses(es);
+  return {
+    type: "RANGE",
+    subject,
+    idRangeStart: classIdStart,
+    idRangeEnd: 9999,
+    exceptions,
+  };
 };
+
+export const processRangeB: Processor<HRowType.RANGE_BOUNDED> = (tokens) => {
+  const { subject, classIdStart, classIdEnd } = tokens[0];
+  return {
+    type: "RANGE",
+    subject,
+    idRangeStart: classIdStart,
+    idRangeEnd: classIdEnd,
+    exceptions: [],
+  };
+};
+
+export const processRangeBE: Processor<
+  HRowType.RANGE_BOUNDED_WITH_EXCEPTIONS
+> = (tokens) => {
+  const { subject, classIdStart, classIdEnd, exceptions: es } = tokens[0];
+  const exceptions = convertCourses(es);
+  return {
+    type: "RANGE",
+    subject,
+    idRangeStart: classIdStart,
+    idRangeEnd: classIdEnd,
+    exceptions,
+  };
+};
+
+export const processRangeU: Processor<HRowType.RANGE_UNBOUNDED> = (tokens) => {
+  const { subjects } = tokens[0];
+  return subjects.map((subject) => ({
+    type: "RANGE",
+    subject,
+    idRangeStart: 0,
+    idRangeEnd: 9999,
+    exceptions: [],
+  }));
+};
+
+export const processOr = (
+  tokens: [Requirement2, Requirement2[]]
+): IOrCourse2 => {
+  const [req, ors] = tokens;
+  return { type: "OR", courses: [req, ...ors] };
+};
+
+export const processOrOfAnd: Processor<
+  HRowType.OR_OF_AND_COURSE | HRowType.AND_COURSE
+> = (tokens) => {
+  const { courses: cs } = tokens[0];
+  const courses = convertCourses(cs);
+  return {
+    type: "AND",
+    courses,
+  };
+};
+
+export const processAnd = (tokens: [IAndCourse2[]]): IAndCourse2 => {
+  const courses = [];
+  for (const { courses: cs } of tokens[0]) {
+    courses.push(...cs);
+  }
+  return {
+    type: "AND",
+    courses,
+  };
+};
+
+// const Range = (
+//   subject: string,
+//   idRangeStart: number,
+//   idRangeEnd: number,
+//   exceptions = []
+// ) => {
+//   return {
+//     exceptions,
+//     idRangeEnd,
+//     idRangeStart,
+//     subject,
+//     type: "RANGE",
+//   };
+// };
+// export const processRange = ([range]: [
+//   | RangeLowerBoundedRow<HRowType.RANGE_LOWER_BOUNDED>
+//   | WithExceptions<
+//       RangeLowerBoundedRow<HRowType.RANGE_LOWER_BOUNDED_WITH_EXCEPTIONS>
+//     >
+//   | RangeBoundedRow<HRowType.RANGE_BOUNDED>
+//   | WithExceptions<RangeBoundedRow<HRowType.RANGE_BOUNDED_WITH_EXCEPTIONS>>
+//   | RangeUnboundedRow<HRowType.RANGE_UNBOUNDED>
+// ]) /*: ICourseRange2*/ => {
+//   switch (range.type) {
+//     case HRowType.RANGE_UNBOUNDED:
+//       break;
+//     case HRowType.RANGE_LOWER_BOUNDED:
+//       break;
+//     case HRowType.RANGE_LOWER_BOUNDED_WITH_EXCEPTIONS:
+//       break;
+//     case HRowType.RANGE_BOUNDED:
+//       break;
+//     case HRowType.RANGE_BOUNDED_WITH_EXCEPTIONS:
+//       break;
+//   }
+// };

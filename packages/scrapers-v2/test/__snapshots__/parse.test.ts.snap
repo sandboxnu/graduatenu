@@ -5,17 +5,13 @@ Array [
   Array [
     Object {
       "classId": 2500,
-      "description": "",
-      "hour": 4,
       "subject": "CS",
-      "type": "PLAIN_COURSE",
+      "type": "COURSE",
     },
     Object {
       "classId": 2500,
-      "description": "",
-      "hour": 4,
       "subject": "CS",
-      "type": "PLAIN_COURSE",
+      "type": "COURSE",
     },
   ],
 ]
@@ -24,31 +20,26 @@ Array [
 exports[`parse or courses 1`] = `
 Array [
   Array [
-    Array [
-      Object {
-        "classId": 2500,
-        "description": "",
-        "hour": 4,
-        "subject": "CS",
-        "type": "PLAIN_COURSE",
-      },
-      Array [
+    Object {
+      "courses": Array [
         Object {
-          "classId": 2501,
-          "description": "",
-          "hour": 1,
+          "classId": 2500,
           "subject": "CS",
-          "type": "OR_COURSE",
+          "type": "COURSE",
         },
         Object {
           "classId": 2501,
-          "description": "",
-          "hour": 1,
           "subject": "CS",
-          "type": "OR_COURSE",
+          "type": "COURSE",
+        },
+        Object {
+          "classId": 2501,
+          "subject": "CS",
+          "type": "COURSE",
         },
       ],
-    ],
+      "type": "OR",
+    },
   ],
 ]
 `;
