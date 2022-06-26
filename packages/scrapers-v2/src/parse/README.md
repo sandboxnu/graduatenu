@@ -87,6 +87,7 @@ grammar in regex notation:
   - having to write the parse functions without type safety is awful
 - how do we split RANGEs? maybe add an intermediary stage wouldn't be too bad actually
 - generates very nicely, and is easy to specify the parse transitions (left recursive automatically)
+- we should potentially modify the range definitions to account for high/low courseId instead of using 0-9999
 
 guide to learning nearley syntax
 

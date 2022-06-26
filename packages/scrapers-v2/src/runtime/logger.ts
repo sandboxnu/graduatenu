@@ -99,18 +99,28 @@ const logOkResult = (
   // we want to record all the possible transitions
   // we also want to record all the different comment types
   for (const { entries } of result.ok.tokenized.sections) {
-    for (let i = 0; i < entries.length - 1; i += 1) {
-      const curr = reduce(entries[i].type);
-      const next = reduce(entries[i + 1].type);
-      stats.recordField("transitions", `${curr} -> ${next}`);
-    }
+    // for (let i = 0; i < entries.length - 1; i += 1) {
+    //   const curr = reduce(entries[i].type);
+    //   const next = reduce(entries[i + 1].type);
+    //   stats.recordField("transitions", `${curr} -> ${next}`);
+    // }
     for (const r of entries) {
-      if (r.type === HRowType.HEADER) {
-        stats.recordField("header", r.description);
-      } else if (r.type === HRowType.SUBHEADER) {
-        stats.recordField("subheader", r.description);
-      } else if (r.type === HRowType.COMMENT) {
-        stats.recordField("comment", r.description);
+      if (
+        r.type === HRowType.HEADER ||
+        r.type === HRowType.SUBHEADER
+        // r.type === HRowType.COMMENT
+      ) {
+        const desc = r.description.toLowerCase();
+        const complete = desc.includes("complete");
+        const choose = desc.includes("choose");
+        const includes = complete || choose;
+        const nonzero = r.hour !== 0;
+
+        if (includes && nonzero) {
+          stats.recordField("includes & nonzero", desc);
+        } else if (includes && !nonzero) {
+          stats.recordError(new Error("includes and was zero"), id);
+        }
       }
     }
   }

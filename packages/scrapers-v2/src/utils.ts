@@ -20,7 +20,7 @@ export const loadHtmlWithUrl = async (
  * Whether to cache the response bodies of requests. if set to true,
  * `cachedGetRequest` will cache requests.
  */
-const USE_CACHE = false;
+const USE_CACHE = true;
 export const loadHTML = async (url: string): Promise<CheerioStatic> => {
   const data = await cachedGetRequest(url);
   return cheerio.load(data);
