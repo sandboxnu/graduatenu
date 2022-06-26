@@ -1,45 +1,113 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`parse course 1`] = `
+exports[`parse and 1`] = `
 Array [
-  Array [
-    Object {
-      "classId": 2500,
-      "subject": "CS",
-      "type": "COURSE",
-    },
-    Object {
-      "classId": 2500,
-      "subject": "CS",
-      "type": "COURSE",
-    },
-  ],
+  Object {
+    "courses": Array [
+      Object {
+        "classId": 2500,
+        "description": "",
+        "subject": "CS",
+        "type": "COURSE",
+      },
+      Object {
+        "classId": 2501,
+        "description": "",
+        "subject": "CS",
+        "type": "COURSE",
+      },
+      Object {
+        "classId": 2510,
+        "description": "",
+        "subject": "CS",
+        "type": "COURSE",
+      },
+      Object {
+        "classId": 2511,
+        "description": "",
+        "subject": "CS",
+        "type": "COURSE",
+      },
+      Object {
+        "classId": 3500,
+        "description": "",
+        "subject": "CS",
+        "type": "COURSE",
+      },
+      Object {
+        "classId": 2501,
+        "description": "",
+        "subject": "CS",
+        "type": "COURSE",
+      },
+    ],
+    "type": "AND",
+  },
 ]
 `;
 
-exports[`parse or courses 1`] = `
+exports[`parse and and or 1`] = `
 Array [
-  Array [
-    Object {
-      "courses": Array [
-        Object {
-          "classId": 2500,
-          "subject": "CS",
-          "type": "COURSE",
-        },
-        Object {
-          "classId": 2501,
-          "subject": "CS",
-          "type": "COURSE",
-        },
-        Object {
-          "classId": 2501,
-          "subject": "CS",
-          "type": "COURSE",
-        },
-      ],
-      "type": "OR",
-    },
-  ],
+  Object {
+    "courses": Array [
+      Object {
+        "classId": 2500,
+        "subject": "CS",
+        "type": "COURSE",
+      },
+      Object {
+        "classId": 2501,
+        "subject": "CS",
+        "type": "COURSE",
+      },
+      Object {
+        "classId": 2501,
+        "subject": "CS",
+        "type": "COURSE",
+      },
+    ],
+    "type": "OR",
+  },
+  Object {
+    "courses": Array [
+      Object {
+        "classId": 2500,
+        "description": "",
+        "subject": "CS",
+        "type": "COURSE",
+      },
+      Object {
+        "classId": 2501,
+        "description": "",
+        "subject": "CS",
+        "type": "COURSE",
+      },
+      Object {
+        "classId": 2510,
+        "description": "",
+        "subject": "CS",
+        "type": "COURSE",
+      },
+      Object {
+        "classId": 2511,
+        "description": "",
+        "subject": "CS",
+        "type": "COURSE",
+      },
+      Object {
+        "classId": 3500,
+        "description": "",
+        "subject": "CS",
+        "type": "COURSE",
+      },
+      Object {
+        "classId": 2501,
+        "description": "",
+        "subject": "CS",
+        "type": "COURSE",
+      },
+    ],
+    "type": "AND",
+  },
 ]
 `;

@@ -1,6 +1,6 @@
 import { HRow, HRowType } from "../src/tokenize/types";
 import { parseRows } from "../src/parse/parse";
-import { IOrCourse2, IRequiredCourse } from "@graduate/common";
+import { IOrCourse2, IRequiredCourse, Requirement2 } from "@graduate/common";
 
 const course: HRow = {
   type: HRowType.PLAIN_COURSE,
@@ -36,11 +36,71 @@ describe("parse", () => {
     // streaming-type parser, so produces an extra array
     // expect(parseRows([course, course])).toEqual([[output, output]]);
     // expect(parseRows([course])).toEqual([[output]]);
-    expect(parseRows([course, course])).toMatchSnapshot();
+    expect(parseRows([course, course])).toStrictEqual<Requirement2[]>([
+      output,
+      output,
+    ]);
   });
 
   test("or courses", () => {
     // expect(parseRows([course, orCourse, orCourse])).toEqual([[orCourseOutput]]);
-    expect(parseRows([course, orCourse, orCourse])).toMatchSnapshot();
+    expect(parseRows([course, orCourse, orCourse])).toStrictEqual<
+      Requirement2[]
+    >([orCourseOutput]);
+  });
+
+  test("and", () => {
+    const input: HRow[] = [
+      {
+        type: HRowType.AND_COURSE,
+        description: "",
+        hour: 0,
+        courses: [
+          { subject: "CS", classId: 2500, description: "" },
+          { subject: "CS", classId: 2501, description: "" },
+          { subject: "CS", classId: 2510, description: "" },
+          { subject: "CS", classId: 2511, description: "" },
+        ],
+      },
+      {
+        type: HRowType.AND_COURSE,
+        description: "",
+        hour: 0,
+        courses: [
+          { subject: "CS", classId: 3500, description: "" },
+          { subject: "CS", classId: 2501, description: "" },
+        ],
+      },
+    ];
+    expect(parseRows(input)).toMatchSnapshot();
+  });
+
+  test("and and or", () => {
+    const input: HRow[] = [
+      course,
+      orCourse,
+      orCourse,
+      {
+        type: HRowType.AND_COURSE,
+        description: "",
+        hour: 0,
+        courses: [
+          { subject: "CS", classId: 2500, description: "" },
+          { subject: "CS", classId: 2501, description: "" },
+          { subject: "CS", classId: 2510, description: "" },
+          { subject: "CS", classId: 2511, description: "" },
+        ],
+      },
+      {
+        type: HRowType.AND_COURSE,
+        description: "",
+        hour: 0,
+        courses: [
+          { subject: "CS", classId: 3500, description: "" },
+          { subject: "CS", classId: 2501, description: "" },
+        ],
+      },
+    ];
+    expect(parseRows(input)).toMatchSnapshot();
   });
 });
