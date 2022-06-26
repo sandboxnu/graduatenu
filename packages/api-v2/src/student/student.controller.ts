@@ -1,28 +1,29 @@
 import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-  ParseUUIDPipe,
   BadRequestException,
-  UseGuards,
-  Req,
-  Query,
-  ParseBoolPipe,
+  Body,
+  Controller,
   DefaultValuePipe,
+  Delete,
+  Get,
+  Param,
+  ParseBoolPipe,
+  ParseUUIDPipe,
+  Patch,
+  Post,
+  Query,
+  Req,
+  UseGuards,
 } from "@nestjs/common";
 import { StudentService } from "./student.service";
 import { JwtAuthGuard } from "src/guards/jwt-auth.guard";
 import { DevRouteGuard } from "src/guards/dev-route.guard";
 import { AuthenticatedRequest } from "src/auth/interfaces/authenticated-request";
 import {
-  GetStudentResponse,
-  UpdateStudentResponse,
   CreateStudentDto,
+  GetStudentResponse,
+  OnboardStudentDto,
   UpdateStudentDto,
+  UpdateStudentResponse,
 } from "../../../common";
 
 @Controller("students")
@@ -56,6 +57,32 @@ export class StudentController {
     const updateResult = await this.studentService.update(
       uuid,
       updateStudentDto
+    );
+
+    if (!updateResult) {
+      throw new BadRequestException();
+    }
+
+    const student = await this.studentService.findByUuid(uuid, true);
+
+    if (!student) {
+      throw new BadRequestException();
+    }
+
+    return student;
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Patch("onboard")
+  async onBoard(
+    @Req() req: AuthenticatedRequest,
+    @Body() updateStudentDto: OnboardStudentDto
+  ): Promise<UpdateStudentResponse> {
+    const uuid = req.user.uuid;
+    const updateResult = await this.studentService.update(
+      uuid,
+
+      { ...updateStudentDto, isOnboarded: true }
     );
 
     if (!updateResult) {
