@@ -28,8 +28,8 @@ it does have ts support, but it's easier to test it with javascript (the tester 
   - note: here might need info of whether hour is null or 0. maybe impl?
 - [ ] major2 parser
   - [x] base cases
-  - [ ] recursive cases
-  - [ ] test it out + fix bugs
+  - [x] recursive cases
+  - [x] test it out + fix bugs
   - [ ] recursive cases with comments
   - [ ] more testing
   - [ ] connect to pipeline pipeline
@@ -87,6 +87,19 @@ grammar in regex notation:
   - having to write the parse functions without type safety is awful
 - how do we split RANGEs? maybe add an intermediary stage wouldn't be too bad actually
 - generates very nicely, and is easy to specify the parse transitions (left recursive automatically)
+
+guide to learning nearley syntax
+
+- AFAICT `:?` `:+` and `:*` mean the same thing as their regexp counterparts, and all modify how many times a matcher is applied
+- the order of operations is as follows:
+  - tokens, and the `:?`... operators
+  - parentheses (construct a group)
+  - apply post process function
+  - the `|` (union) operator
+- for each rule, all the matched tokens are passed to the post process function as the first argument via an array
+- in the rule `example -> TEST _ TEST {% processTest %}`, processTest would receive an array of three elements, the first being whatever matched TEST, the second \_, and etc.
+- in the rule `example -> TEST:+ _ TEST`, the post process function would still receive a single array of three items, but the first item would be a list of the one or more things that TEST matched.
+- for each result, the parser will produce an array of the possible parsings of the provided tokens. this should usually be a list of one item, but it may be more.
 
 ## notes for comment implementation later on
 
