@@ -1,20 +1,81 @@
-for this project we are using NearleyJS to parse.
+# parse
 
-the definition of parse is convert a stream of tokens into an AST (abstract syntax tree). this is a programming language concept.
+the definition of parse (PL) is to convert a stream of tokens into an AST (abstract syntax tree).
+
+in our case, we are parsing program requirement table rows (our "tokens") into major2 (AST).
 
 if you look at the Major2 definition (encompassing Requirement2), it looks like a tree (each node can have more nodes, or leafs). where a node is something like a SECTION or an AND, and a leaf is something like a COURSE or a RANGE.
 
-beacuse we already have a tokenize stage, we will be replacing the tokenize part of the parser (which moo requires) with arbitrary token matching. see [here](https://nearley.js.org/docs/tokenizers#custom-token-matchers).
+for this stage we are using [NearleyJS](https://nearley.js.org/) to parse.
+
+## intro
+
+this assumes the reader is somewhat familiar with regex.
+
+concretely, a parser allows you to specify a "grammar" for your tokens (think of a grammar as a list of rules). these rules are specified in a very similar way to a regular expression.
+
+in nearley, we can write a rule: `greeting -> %HELLO _ %THERE`, which defines `greeting` to be a series of three tokens, where the first is HELLO and the last is THERE (\_ colloquially means whitespace). we can then provide a JS function to convert the matched tokens into our AST.
+
+similar to regex, you can also use the `?`, `\*`, and `+` symbols to match multiple tokens, or indicate optional-ness.
+
+at a high level, nearley allows us to just specify a bunch of rules, and then builds a parser from them to convert tokens -> AST.
+
+nearley has its own syntax and file extension for specifying rules. we then use the nearley compiler `nearleyc` to process the grammar and generate a parser. the resulting `.js` file we then use in the `parse.ts` file for parsing.
 
 ## development
+
+we are using the "arbitrary token matching" feature of nearley. see [here](https://nearley.js.org/docs/tokenizers#custom-token-matchers).
 
 if you need to make updates to the grammar, you may do so by editing the `grammar.ne` file.
 
 to regenerate the parser, run `yarn parser:generate`. other commands are also provided by nearley, see the [tooling page](https://nearley.js.org/docs/tooling) for more information (like how to generate examples matching grammar!).
 
-### wb typescript?
+wb typescript? it does have ts support, but it's easier to test it with javascript (the tester only accepts js files). and we don't need types anyway
 
-it does have ts support, but it's easier to test it with javascript (the tester only accepts js files). and we don't need types anyway
+## strategy
+
+high-level grammar (in regex notation):
+
+- ICourseRange2
+  - exactly matches a range case
+- IRequiredCourse
+  - exactly matches a course case
+- IAndCourse2
+  - `(requirement)(AND_COURSE)+`
+  - note: need to make sure this captures the max # of ANDs (avoid nested case parsing backwards)
+- IOrCourse2
+  - `(requirement)(OR_COURSE|OR_OF_AND_COURSE)+`
+  - note: need to also parse the inner AND, but should be simple
+- IXofManyCourse (min # of credits)
+  - xofmany comment? "take at least 3 credits" or use as fallback with creditHours column
+  - `(xom comment)(requirement)+(delimiter)`
+- Section (min # of requirements)
+  - section comment -> "take at least 3 of the following"
+  - `(section comment)(requirement)+(delimiter)`
+- what is a delimiter? comment? or header? subheader?
+  - probably review this after writing first bit and testing
+
+## nearley learnings
+
+- [as a generator](http://humans-who-read-grammars.blogspot.com/2018/04/having-fun-with-phrase-structure.html)
+- [learning nearley medium article](https://gajus.medium.com/parsing-absolutely-anything-in-javascript-using-earley-algorithm-886edcc31e5e)
+
+alex guide to nearley syntax
+
+- nearley EBNF seems to slightly differ from the wikipedia article, which is sadge. lean on the [examples](https://github.com/kach/nearley/blob/master/examples/fun-lang.ne) a lot.
+- as far as i can tell, `:?` `:+` and `:*` mean the same thing as their regexp counterparts, and all modify how many times a matcher is applied
+- the order of binding/operations is as follows:
+  - the `:?`... operators
+  - tokens next to each other
+  - parentheses (construct a group)
+  - apply post process function
+  - the `|` (union) operator
+- for each rule, all the matched tokens are passed to the post process function as the first argument via an array
+- in the rule `example -> TEST _ TEST {% processTest %}`, processTest would receive an array of three elements, the first being whatever matched TEST, the second \_, and etc.
+- in the rule `example -> TEST:+ _ TEST`, the post process function would still receive a single array of three items, but the first item would be a list of the one or more things that TEST matched.
+- for each result, the parser will produce an array of the possible parsings of the provided tokens. this should usually be a list of one item, but it may be more.
+
+# ALEX DEVELOPMENT NOTES DELETE LATER
 
 ## todolist
 
@@ -36,51 +97,6 @@ it does have ts support, but it's easier to test it with javascript (the tester 
   - [ ] aggregate metrics and impl sanity checks
   - [ ] more bugfixing
 
-## strategy
-
-grammar -> how does it actually parse?
-
-have a stage for parsing comments -> recognize how it's going to be parsed. do we need comment types?
-
-- HEADER
-- SUBHEADER
-- COMMENT
-- OR_COURSE
-- AND_COURSE
-- OR_OF_AND_COURSE
-- PLAIN_COURSE
-- RANGE_LOWER_BOUNDED
-- RANGE_LOWER_BOUNDED_WITH_EXCEPTIONS
-- RANGE_BOUNDED
-- RANGE_BOUNDED_WITH_EXCEPTIONS
-- RANGE_UNBOUNDED
-
-grammar in regex notation:
-
-- ICourseRange2
-  - exactly matches a range case
-- IRequiredCourse
-  - exactly matches a course case
-- IAndCourse2
-  - (requirement)(AND_COURSE)+
-  - note: need to make sure this captures the max # of ANDs (avoid nested case parsing backwards)
-- IOrCourse2
-  - (requirement)(OR_COURSE|OR_OF_AND_COURSE)+
-  - note: need to also parse the inner AND, but should be simple
-- IXofManyCourse (min # of credits)
-  - xofmany comment? "take at least 3 credits" or use as fallback with creditHours column
-- Section (min # of requirements)
-  - section comment -> "take at least 3 of the following"
-  - (section comment)(requirement)+
-- what is a delimiter? comment? or header? subheader?
-  - probably review this after writing first bit and testing
-
-# nearley learnings
-
-- [as a generator](http://humans-who-read-grammars.blogspot.com/2018/04/having-fun-with-phrase-structure.html)
-- [learning nearley medium article](https://gajus.medium.com/parsing-absolutely-anything-in-javascript-using-earley-algorithm-886edcc31e5e)
--
-
 ## takeaways after proof of concept (nearley)
 
 - managing types are a huge pain, because we don't get types from nearley
@@ -88,19 +104,6 @@ grammar in regex notation:
 - how do we split RANGEs? maybe add an intermediary stage wouldn't be too bad actually
 - generates very nicely, and is easy to specify the parse transitions (left recursive automatically)
 - we should potentially modify the range definitions to account for high/low courseId instead of using 0-9999
-
-guide to learning nearley syntax
-
-- AFAICT `:?` `:+` and `:*` mean the same thing as their regexp counterparts, and all modify how many times a matcher is applied
-- the order of operations is as follows:
-  - tokens, and the `:?`... operators
-  - parentheses (construct a group)
-  - apply post process function
-  - the `|` (union) operator
-- for each rule, all the matched tokens are passed to the post process function as the first argument via an array
-- in the rule `example -> TEST _ TEST {% processTest %}`, processTest would receive an array of three elements, the first being whatever matched TEST, the second \_, and etc.
-- in the rule `example -> TEST:+ _ TEST`, the post process function would still receive a single array of three items, but the first item would be a list of the one or more things that TEST matched.
-- for each result, the parser will produce an array of the possible parsings of the provided tokens. this should usually be a list of one item, but it may be more.
 
 ## notes for comment implementation later on
 
