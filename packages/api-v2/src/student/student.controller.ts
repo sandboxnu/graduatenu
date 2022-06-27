@@ -79,11 +79,10 @@ export class StudentController {
     @Body() updateStudentDto: OnboardStudentDto
   ): Promise<UpdateStudentResponse> {
     const uuid = req.user.uuid;
-    const updateResult = await this.studentService.update(
-      uuid,
-
-      { ...updateStudentDto, isOnboarded: true }
-    );
+    const updateResult = await this.studentService.update(uuid, {
+      ...updateStudentDto,
+      isOnboarded: true,
+    });
 
     if (!updateResult) {
       throw new BadRequestException();
