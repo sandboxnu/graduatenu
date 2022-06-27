@@ -73,7 +73,7 @@ export class StudentController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Patch("onboard")
+  @Patch("me/onboard")
   async onBoard(
     @Req() req: AuthenticatedRequest,
     @Body() updateStudentDto: OnboardStudentDto
