@@ -1,5 +1,6 @@
 import { HRow, HRowType } from "./types";
 import { StatsLogger as StatsLoggerType } from "../runtime/logger";
+import { Err, Ok, Result, ResultType } from "@graduate/common";
 import { ensureLength } from "../utils";
 
 type TextRowTypes = HRow & {
@@ -7,28 +8,50 @@ type TextRowTypes = HRow & {
 };
 export const categorizeTextRow = (
   row: TextRowTypes,
-  stats: StatsLoggerType
+  stats?: StatsLoggerType
 ) => {
-  if (row.type === HRowType.HEADER || row.type === HRowType.SUBHEADER) {
-    if (includesChoiceKeyword(row.description)) {
-      return parseCommentRow(row, stats);
-    }
-  } else {
+  // only 8 (~four of each) of the header types match regex
+  // ignore headers for now (even the matching ones)
+  if (row.type === HRowType.COMMENT) {
     return parseCommentRow(row, stats);
   }
 };
 
-const includesChoiceKeyword = (s: string) => {
-  return CHOICE_KEYWORD.test(s);
-};
+const CHOICE_KEYWORD =
+  /(complete|choose) ((at least|any|from|a minimum of) )?(?<countString>\w+)/g;
 
-const CHOICE_KEYWORD = /(complete|choose)\s(\w+)/g;
-
-export const parseCommentRow = (row: TextRowTypes, stats: StatsLoggerType) => {
+export const parseCommentRow = (row: TextRowTypes, stats?: StatsLoggerType) => {
   const desc = row.description.toLowerCase();
-  const matches = ensureLength(1, Array.from(desc.matchAll(CHOICE_KEYWORD)));
-  const [[, , countString]] = matches;
+  const m = Array.from(desc.matchAll(CHOICE_KEYWORD));
+  // const matches = ensureLengthAtLeast(1, m);
+  if (m.length < 1) {
+    stats?.recordField("comments not containing keyword", desc);
+    stats?.recordField("comments status", "missing keyword");
+    return;
+  }
+  const matches = m;
+  // use the first match, ignore the others
+  const countString = matches[0].groups?.["countString"];
   const count = parseCountString(countString, stats);
+  if (count.type === ResultType.Ok) {
+    if (!Number.isInteger(count.ok)) {
+      stats?.recordField("comments status", "nan with text: " + countString);
+      throw new Error("was nan");
+    }
+    stats?.recordField("comments status", "obtained count: " + count.ok);
+  } else {
+    if (row.hour !== 0) {
+      stats?.recordField("comments status", "non-matching numeric text");
+      stats?.recordField("non-matching numberic text", desc);
+    } else {
+      // was zero
+      stats?.recordField(
+        "comments status",
+        "hour = 0; non-matching numeric text"
+      );
+      stats?.recordField("hour = zero + non-matching", desc);
+    }
+  }
 
   return; // ok
 };
@@ -55,24 +78,23 @@ const NUMS = {
   // 'nineteen': 19,
 };
 
-const parseCountString = (s: unknown, stats: StatsLoggerType) => {
+const parseCountString = (
+  s: unknown,
+  stats?: StatsLoggerType
+): Result<number, null> => {
   if (!(typeof s === "string")) {
     throw new Error(`received unexpected non-string type: ${typeof s}`);
   }
 
   if (s in NUMS) {
     // case "one" | "two" | "three" ...
-    return NUMS[s as keyof typeof NUMS];
+    return Ok(NUMS[s as keyof typeof NUMS]);
   } else if (/\d+/.test(s)) {
-    // case "<n>"
-    return Number(s);
-  } else if (/\d+sh/.test(s)) {
-    // case "<n>sh"
-    return Number(s.slice(0, -2));
-  } else if (/\(\d+\)/.test(s)) {
-    // case "(<n>)"
-    return Number(s.slice(1, -1));
+    // cases "<n>", "(<n>)", or "<n>sh"
+    const [[n]] = ensureLength(1, Array.from(s.matchAll(/\d+/g)));
+    return Ok(Number(n));
   }
 
-  throw new Error(`received non-matching numeric text: ${s}`);
+  stats?.recordField("received non-matching numeric text", s);
+  return Err(null);
 };

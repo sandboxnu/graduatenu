@@ -28,6 +28,7 @@ export type HSection = {
 export type HRow =
   // text rows
   | TextRow<HRowType.COMMENT>
+  | CountAndHoursRow<HRowType.COMMENT_COUNT>
   | TextRow<HRowType.HEADER>
   | TextRow<HRowType.SUBHEADER>
   // course rows
@@ -51,6 +52,8 @@ export enum HRowType {
   HEADER = "HEADER",
   SUBHEADER = "SUBHEADER",
   COMMENT = "COMMENT",
+  COMMENT_COUNT = "COMMENT_COUNT",
+
   OR_COURSE = "OR_COURSE",
   AND_COURSE = "AND_COURSE",
   OR_OF_AND_COURSE = "OR_OF_AND_COURSE",
@@ -68,6 +71,13 @@ export enum HRowType {
 export interface TextRow<T> {
   type: T;
   description: string;
+  hour: number;
+}
+
+export interface CountAndHoursRow<T> {
+  type: T;
+  description: string;
+  parsedCount: number;
   hour: number;
 }
 

@@ -39,7 +39,7 @@ import { categorizeTextRow } from "./textCategorize";
  */
 export const fetchAndTokenizeHTML = async (
   url: URL,
-  stats: StatsLogger
+  stats?: StatsLogger
 ): Promise<HDocument> => {
   return await tokenizeHTML(await loadHTML(url.href), stats);
 };
@@ -51,7 +51,7 @@ export const fetchAndTokenizeHTML = async (
  */
 export const tokenizeHTML = async (
   $: CheerioStatic,
-  stats: StatsLogger
+  stats?: StatsLogger
 ): Promise<HDocument> => {
   const majorName: string = parseText($("#site-title").find("h1"));
   const catalogYear: string = parseText($("#edition")).split(" ")[0];
