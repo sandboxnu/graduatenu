@@ -28,6 +28,7 @@ import {
   WithExceptions,
 } from "./types";
 import { join } from "path";
+import { BASE_URL } from "../constants";
 
 /**
  * Fetch html for page and convert into intermediate representation (IR)
@@ -190,12 +191,11 @@ const tokenizeSections = async (
  */
 const constructNestedLinks = ($: CheerioStatic, element: CheerioElement) => {
   // TODO: add support to non-current catalogs
-  const base = "https://catalog.northeastern.edu";
   return $(element)
     .find("li > a")
     .toArray()
     .map((link) => $(link).attr("href"))
-    .map((path) => join(base, path));
+    .map((path) => join(BASE_URL, path));
 };
 
 /**

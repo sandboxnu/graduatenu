@@ -2,6 +2,7 @@ import { loadHtmlWithUrl } from "../utils";
 import { CatalogURLResult, College } from "./types";
 import { ResultType } from "@graduate/common";
 import { join } from "path";
+import { BASE_URL } from "../constants";
 
 /**
  * Scrapes all catalog entries underneath the colleges for the specified catalog
@@ -30,10 +31,7 @@ export const scrapeMajorLinks = async (
     throw new Error("only current year is supported");
   }
 
-  return scrapeMajorLinksForUrl(
-    "https://catalog.northeastern.edu",
-    "undergraduate"
-  );
+  return scrapeMajorLinksForUrl(BASE_URL, "undergraduate");
 };
 
 /**
