@@ -64,7 +64,7 @@ const wrappedGetRequest = async (url: string) => {
 export const ensureLength = <T>(n: number, l: T[]) => {
   const length = l.length;
   if (length !== n) {
-    const msg = `expected text row to contain exactly ${n} cells, found ${length}`;
+    const msg = `expected array length to equal exactly ${n}, but was ${length}`;
     throw new Error(msg);
   }
   return l;
@@ -73,7 +73,7 @@ export const ensureLength = <T>(n: number, l: T[]) => {
 export const ensureLengthAtLeast = <T>(n: number, l: T[]) => {
   const length = l.length;
   if (length < n) {
-    const msg = `expected text row to contain at least ${n} cells, found ${length}`;
+    const msg = `expected array to be >= ${n}, but was ${length}`;
     throw new Error(msg);
   }
   return l;
