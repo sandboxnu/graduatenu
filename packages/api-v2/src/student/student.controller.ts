@@ -15,9 +15,9 @@ import {
   DefaultValuePipe,
 } from "@nestjs/common";
 import { StudentService } from "./student.service";
-import { JwtAuthGuard } from "src/guards/jwt-auth.guard";
-import { DevRouteGuard } from "src/guards/dev-route.guard";
-import { AuthenticatedRequest } from "src/auth/interfaces/authenticated-request";
+import { JwtAuthGuard } from "../guards/jwt-auth.guard";
+import { DevRouteGuard } from "../guards/dev-route.guard";
+import { AuthenticatedRequest } from "../auth/interfaces/authenticated-request";
 import {
   GetStudentResponse,
   UpdateStudentResponse,
