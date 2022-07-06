@@ -1,7 +1,7 @@
 import { TypeOrmModuleOptions } from "@nestjs/typeorm";
 import { config } from "dotenv";
 import { Plan } from "./src/plan/entities/plan.entity";
-import { Student } from "src/student/entities/student.entity";
+import { Student } from "./src/student/entities/student.entity";
 
 config({ path: `.env.${process.env.NODE_ENV}` });
 
@@ -18,6 +18,7 @@ const ormconfig: TypeOrmModuleOptions = {
   cli: {
     migrationsDir: "src/migrations",
   },
+  keepConnectionAlive: true,
 };
 
 export default ormconfig;
