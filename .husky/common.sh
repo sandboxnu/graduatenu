@@ -1,4 +1,3 @@
-#!/usr/bin/env sh
 
 # taken from https://typicode.github.io/husky/#/?id=yarn-on-windows
 
