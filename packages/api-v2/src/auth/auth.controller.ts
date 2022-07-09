@@ -2,6 +2,7 @@ import {
   BadRequestException,
   Body,
   Controller,
+  Logger,
   Post,
   UnauthorizedException,
 } from "@nestjs/common";
@@ -14,6 +15,7 @@ import {
 
 @Controller("auth")
 export class AuthController {
+  private readonly logger: Logger = new Logger();
   constructor(private readonly authService: AuthService) {}
 
   @Post("register")
@@ -23,6 +25,7 @@ export class AuthController {
     const student = await this.authService.register(createStudentDto);
 
     if (!student) {
+      this.logger.warn(`${this.register.name}`);
       throw new BadRequestException();
     }
 
@@ -36,6 +39,7 @@ export class AuthController {
     const student = await this.authService.login(loginUserDto);
 
     if (!student) {
+      this.logger.warn(`${AuthController.name} - ${this.login.name}`);
       throw new UnauthorizedException();
     }
 
