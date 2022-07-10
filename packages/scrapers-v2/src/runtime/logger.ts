@@ -109,6 +109,8 @@ const logOkResult = (
         stats.recordField("header", r.description);
       } else if (r.type === HRowType.SUBHEADER) {
         stats.recordField("subheader", r.description);
+      } else if (r.type === HRowType.COMMENT) {
+        stats.recordField("comment", r.description);
       }
     }
   }
