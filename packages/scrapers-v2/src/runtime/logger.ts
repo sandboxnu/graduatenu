@@ -93,6 +93,7 @@ const logErrResult = (
     if (errors[0].actual === CatalogEntryType.Unknown) {
       console.log("entry with unknown type:", id.toString());
     }
+    return;
   }
 
   stats.recordField("status", "error");

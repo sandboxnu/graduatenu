@@ -1,6 +1,5 @@
 import { assertUnreachable } from "@graduate/common";
 import {
-  appendPath,
   ensureLength,
   ensureLengthAtLeast,
   loadHTML,
@@ -28,6 +27,8 @@ import {
   TextRow,
   WithExceptions,
 } from "./types";
+import { join } from "path";
+import { BASE_URL } from "../constants";
 
 /**
  * Fetch html for page and convert into intermediate representation (IR)
@@ -190,13 +191,11 @@ const tokenizeSections = async (
  */
 const constructNestedLinks = ($: CheerioStatic, element: CheerioElement) => {
   // TODO: add support to non-current catalogs
-  const base = "https://catalog.northeastern.edu";
-  const concentrationsTag = "#concentrationrequirementstext";
   return $(element)
     .find("li > a")
     .toArray()
     .map((link) => $(link).attr("href"))
-    .map((path) => appendPath(base, path, concentrationsTag).toString());
+    .map((path) => join(BASE_URL, path));
 };
 
 /**

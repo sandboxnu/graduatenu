@@ -1,6 +1,8 @@
-import { getPathParts, joinParts, loadHtmlWithUrl } from "../utils";
+import { loadHtmlWithUrl } from "../utils";
 import { CatalogURLResult, College } from "./types";
 import { ResultType } from "@graduate/common";
+import { join } from "path";
+import { BASE_URL } from "../constants";
 
 /**
  * Scrapes all catalog entries underneath the colleges for the specified catalog
@@ -29,10 +31,7 @@ export const scrapeMajorLinks = async (
     throw new Error("only current year is supported");
   }
 
-  return scrapeMajorLinksForUrl(
-    "https://catalog.northeastern.edu",
-    "undergraduate"
-  );
+  return scrapeMajorLinksForUrl(BASE_URL, "undergraduate");
 };
 
 /**
@@ -44,16 +43,15 @@ export const scrapeMajorLinks = async (
  *
  * @param baseUrl The base url of the major catalog. should look something like
  *   "https://catalog.northeastern.edu"
- * @param path    The path of the major catalog. something like "/undergraduate"
- *   or "archive/2018-2019/undergraduate/". trailing or leading slashes are ok.
+ * @param path    The path of the major catalog. something like
+ *   "/undergraduate/" or "/archive/2018-2019/undergraduate".
  */
 export const scrapeMajorLinksForUrl = async (
   baseUrl: string,
   path: string
 ): Promise<CatalogURLResult> => {
-  const paths = getPathParts(path);
-  const initQueue = Object.values(College).map((college) =>
-    joinParts(baseUrl, [...paths, college])
+  const initQueue = Object.values(College).map(
+    (college) => new URL(join(baseUrl, path, college, "/"))
   );
   return await scrapeLinks(baseUrl, initQueue);
 };
@@ -85,7 +83,7 @@ const scrapeLinks = async (
       const children = getChildrenForPathId($, url).toArray().map($);
       for (const element of children) {
         const path = getLinkForEl(element);
-        const url = joinParts(baseUrl, path);
+        const url = new URL(join(baseUrl, path));
         if (!seen.has(url.href)) {
           const bucket = isParent(element) ? nextQueue : entries;
           bucket.push(url);
@@ -103,22 +101,22 @@ const isParent = (el: Cheerio) => {
   return el.hasClass("isparent");
 };
 
-const getLinkForEl = (element: Cheerio): string[] => {
+const getLinkForEl = (element: Cheerio) => {
   const aTag = element.find("a");
   if (aTag.length === 0) {
     const msg = "Catalog is missing a link for a parent element.";
     throw new Error(msg);
   }
 
-  return getPathParts(aTag.attr("href"));
+  return aTag.attr("href");
 };
 
 const getChildrenForPathId = ($: CheerioStatic, url: URL) => {
   // The catalog entries have an ID equal to the path, with a trailing slash
   // We select the element via its ID
   // Note: for getElementById, forward slashes need to be escaped
-  const id = url.pathname.split("/").join("\\/");
-  const current = $(`#${id}\\/`);
+  const id = url.pathname.replaceAll("/", "\\/");
+  const current = $(`#${id}`);
   return current.children();
 };
 
