@@ -79,23 +79,6 @@ const logOkResult = (
     stats.recordError(new Error("major with hours <= 0"), id);
   }
 
-  const reduce = (t: HRowType) => {
-    switch (t) {
-      case HRowType.RANGE_LOWER_BOUNDED:
-        return HRowType.RANGE_BOUNDED;
-      case HRowType.RANGE_LOWER_BOUNDED_WITH_EXCEPTIONS:
-        return HRowType.RANGE_BOUNDED;
-      case HRowType.RANGE_BOUNDED:
-        return HRowType.RANGE_BOUNDED;
-      case HRowType.RANGE_BOUNDED_WITH_EXCEPTIONS:
-        return HRowType.RANGE_BOUNDED;
-      case HRowType.RANGE_UNBOUNDED:
-        return HRowType.RANGE_BOUNDED;
-      default:
-        return t;
-    }
-  };
-
   // we want to record all the possible transitions
   // we also want to record all the different comment types
   for (const { entries } of result.ok.tokenized.sections) {
@@ -107,21 +90,35 @@ const logOkResult = (
     for (const r of entries) {
       if (
         r.type === HRowType.HEADER ||
-        r.type === HRowType.SUBHEADER
-        // r.type === HRowType.COMMENT
+        r.type === HRowType.SUBHEADER ||
+        r.type === HRowType.COMMENT
       ) {
+        // const desc = r.description.toLowerCase();
+        // const complete = desc.includes("complete");
+        // const choose = desc.includes("choose");
+        // const includes = complete || choose;
+        // const nonzero = r.hour !== 0;
+        //
+        // if (includes && nonzero) {
+        //   stats.recordField("includes & nonzero", `${desc} >> ${r.hour}`);
+        // } else if (includes && !nonzero) {
+        //   // str
+        //   stats.recordField("includes and was zero", desc);
+        // }
+        // categorizeTextRow(r, stats);
+      } /*else if (r.type === HRowType.COMMENT) {
         const desc = r.description.toLowerCase();
         const complete = desc.includes("complete");
         const choose = desc.includes("choose");
         const includes = complete || choose;
         const nonzero = r.hour !== 0;
-
-        if (includes && nonzero) {
-          stats.recordField("includes & nonzero", desc);
-        } else if (includes && !nonzero) {
-          stats.recordError(new Error("includes and was zero"), id);
+        if (!includes) {
+          stats.recordField("!includes", desc);
         }
-      }
+        if (!nonzero) {
+          stats.recordField("!nonzero", desc);
+        }
+      }*/
     }
   }
 };
@@ -165,7 +162,7 @@ const logErrResult = (
  * doesn't quite work for async stacktraces, so sometimes two of the same error
  * are displayed separately.
  */
-class StatsLogger {
+export class StatsLogger {
   // field -> value -> count
   private fields: Record<string, Map<any, number>> = {};
   // message -> list -> stacktrace
