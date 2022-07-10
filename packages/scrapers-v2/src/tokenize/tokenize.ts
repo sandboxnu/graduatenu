@@ -29,14 +29,19 @@ import {
 } from "./types";
 import { join } from "path";
 import { BASE_URL } from "../constants";
+import { StatsLogger } from "../runtime/logger";
+import { categorizeTextRow } from "./textCategorize";
 
 /**
  * Fetch html for page and convert into intermediate representation (IR)
  *
  * @param url The url of the page to tokenize
  */
-export const fetchAndTokenizeHTML = async (url: URL): Promise<HDocument> => {
-  return await tokenizeHTML(await loadHTML(url.href));
+export const fetchAndTokenizeHTML = async (
+  url: URL,
+  stats: StatsLogger
+): Promise<HDocument> => {
+  return await tokenizeHTML(await loadHTML(url.href), stats);
 };
 
 /**
@@ -44,7 +49,10 @@ export const fetchAndTokenizeHTML = async (url: URL): Promise<HDocument> => {
  *
  * @param $ The cheerio static for the page to tokenize
  */
-export const tokenizeHTML = async ($: CheerioStatic): Promise<HDocument> => {
+export const tokenizeHTML = async (
+  $: CheerioStatic,
+  stats: StatsLogger
+): Promise<HDocument> => {
   const majorName: string = parseText($("#site-title").find("h1"));
   const catalogYear: string = parseText($("#edition")).split(" ")[0];
   const yearVersion: number = parseInt(catalogYear.split("-")[0]);
@@ -56,6 +64,18 @@ export const tokenizeHTML = async ($: CheerioStatic): Promise<HDocument> => {
     $,
     requirementsContainer
   );
+
+  for (const s of sections) {
+    for (const r of s.entries) {
+      if (
+        r.type === HRowType.HEADER ||
+        r.type === HRowType.SUBHEADER ||
+        r.type === HRowType.COMMENT
+      ) {
+        categorizeTextRow(r, stats);
+      }
+    }
+  }
 
   return {
     programRequiredHours,

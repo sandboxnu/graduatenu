@@ -42,3 +42,24 @@ Some courses are also an OR of ANDs, for example, [this one](https://catalog.nor
 to find the hours, we look for the **program requirements** header, one of "program requirements", "program requirement", and "program credit requirement".
 
 following the header, there is paragraphs in number >= 1. Either the first or last paragraph should begin with text "minimum of <n> ..." of "<n> total credits ...", so we look for that.
+
+### Comment parsing
+
+- tbd note: some hour cols may be failing to parse as numbers, such as "8-9" (BSCS) -> NaN
+
+  - fix: check if contains non-numerics -> error (aggregate)
+
+- comment rows
+  - if !includes "choose" or "complete" -> ERROR
+  - includesCount -> "(choose)|(complete) <numeric word>"
+    - match `[hasHourCol, includesCount]`
+      - includesCount: true, hourCol: false -> requirementCount // EDGE CASE: SUB RANGE
+      - includesCount: true, hourCol: true ->
+        - iCount <= <count>/4 < iCount-1 -> requirementCount (?) // EDGE CASE: SUB RANGE
+        - if not -> creditHourCount (?)
+      - includesCount: false -> ERROR
+- header and subheader rows
+  - if includes "choose" or "complete": -> treat as comment row
+  - doesn't include "choose" or "complete" -> sectionLabel
+
+OR new strat: just use HOURS, but ahead-of-time check if all the following tokens are satisfiable as a XOM or SECTION (slow)
