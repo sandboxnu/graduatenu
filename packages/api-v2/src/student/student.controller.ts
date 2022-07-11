@@ -5,6 +5,7 @@ import {
   DefaultValuePipe,
   Delete,
   Get,
+  InternalServerErrorException,
   Param,
   ParseBoolPipe,
   ParseUUIDPipe,
@@ -19,11 +20,11 @@ import { JwtAuthGuard } from "src/guards/jwt-auth.guard";
 import { DevRouteGuard } from "src/guards/dev-route.guard";
 import { AuthenticatedRequest } from "src/auth/interfaces/authenticated-request";
 import {
-  CreateStudentDto,
+  SignUpDto,
   GetStudentResponse,
   OnboardStudentDto,
-  UpdateStudentDto,
   UpdateStudentResponse,
+  UpdateStudentDto,
 } from "../../../common";
 
 @Controller("students")
@@ -76,22 +77,22 @@ export class StudentController {
   @Patch("me/onboard")
   async onBoard(
     @Req() req: AuthenticatedRequest,
-    @Body() updateStudentDto: OnboardStudentDto
+    @Body() onboardStudentDto: OnboardStudentDto
   ): Promise<UpdateStudentResponse> {
     const uuid = req.user.uuid;
     const updateResult = await this.studentService.update(uuid, {
-      ...updateStudentDto,
+      ...onboardStudentDto,
       isOnboarded: true,
     });
 
     if (!updateResult) {
-      throw new BadRequestException();
+      throw new InternalServerErrorException();
     }
 
     const student = await this.studentService.findByUuid(uuid, true);
 
     if (!student) {
-      throw new BadRequestException();
+      throw new InternalServerErrorException();
     }
 
     return student;
@@ -111,7 +112,7 @@ export class StudentController {
   @UseGuards(DevRouteGuard)
   @Post()
   async create(
-    @Body() createStudentDto: CreateStudentDto
+    @Body() createStudentDto: SignUpDto
   ): Promise<GetStudentResponse> {
     const student = await this.studentService.create(createStudentDto);
 
@@ -152,7 +153,7 @@ export class StudentController {
   @Patch(":uuid")
   async update(
     @Param("uuid", new ParseUUIDPipe()) uuid: string,
-    @Body() updateStudentDto: UpdateStudentDto
+    @Body() updateStudentDto: SignUpDto
   ): Promise<UpdateStudentResponse> {
     const updateResult = await this.studentService.update(
       uuid,

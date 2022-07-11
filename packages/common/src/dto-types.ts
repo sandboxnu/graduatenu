@@ -1,5 +1,6 @@
 import {
   IsArray,
+  IsBoolean,
   IsEmail,
   IsInt,
   IsNotEmpty,
@@ -75,7 +76,7 @@ export class UpdatePlanDto {
   warnings?: IWarning[];
 }
 
-export class CreateStudentDto {
+export class SignUpDto {
   @IsNotEmpty()
   @IsEmail()
   email: string;
@@ -146,6 +147,10 @@ export class UpdateStudentDto {
   @IsOptional()
   @IsString()
   concentration?: string;
+
+  @IsOptional()
+  @IsBoolean()
+  isOnboarded?: boolean;
 }
 
 export class OnboardStudentDto {
