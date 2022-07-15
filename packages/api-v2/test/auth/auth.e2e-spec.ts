@@ -51,7 +51,7 @@ describe("AuthController (e2e)", () => {
     await request(app.getHttpServer())
       .post("/auth/register")
       .send(testUser)
-      .expect({ statusCode: 400, message: "Bad Request" });
+      .expect(400);
   });
 
   it("logs in with valid credentials", async () => {
@@ -71,6 +71,6 @@ describe("AuthController (e2e)", () => {
         email: "test-auth@gmail.com",
         password: "i<3graduate",
       })
-      .expect({ statusCode: 401, message: "Unauthorized" });
+      .expect(401);
   });
 });

@@ -120,7 +120,7 @@ describe("PlanController (e2e)", () => {
   });
 
   it("fails to get a plan for an unauthorized user", async () => {
-    await request(app.getHttpServer()).get("/plans/1").expect(401);
+    await request(app.getHttpServer()).get(`/plans/${planID}`).expect(401);
   });
 
   it("updates a user's plan by id", async () => {
@@ -133,7 +133,7 @@ describe("PlanController (e2e)", () => {
 
   it("fails to update a plan for an unauthorized user", async () => {
     await request(app.getHttpServer())
-      .patch("/plans/1")
+      .patch(`/plans/${planID}`)
       .send({ catalogYear: 2018 })
       .expect(401);
   });
