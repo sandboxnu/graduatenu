@@ -5,4 +5,4 @@ export enum CatalogEntryType {
   Unknown = "Unknown",
 }
 
-export type TypedCatalogEntry = { url: string; type: CatalogEntryType };
+export type TypedCatalogEntry = { url: URL; type: CatalogEntryType };

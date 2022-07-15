@@ -217,7 +217,7 @@ Object {
           "type": "HEADER",
         },
         Object {
-          "description": "Complete one course in experiential learning. See department for approved courses. Note: The experiential learning requirement is waived following a student presentation connected with a co-op and/or research experience. The requirement is often fulfilled by a talk at a Society of Physics Students meeting but can be fulfilled by an adequately documented presentation at a professional meeting or at an appropriate campus event. Contact your faculty adviser for additional information.",
+          "description": "Complete one course in experiential learning. See department for approved courses. Note: The experiential learning requirement is waived following a student presentation connected with a co-op and/or research experience. The requirement is often fulfilled by a talk at a Society of Physics Students meeting but can be fulfilled by an adequately documented presentation at a professional meeting or at an appropriate campus event. Contact your faculty advisor for additional information.",
           "hour": 0,
           "type": "COMMENT",
         },
@@ -429,8 +429,58 @@ Object {
         },
       ],
     },
+    Object {
+      "description": "Astrophysics Concentration (Optional)",
+      "entries": Array [
+        Object {
+          "description": "Astrophysics Core",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "classId": 1111,
+          "description": "Astronomy",
+          "hour": 4,
+          "subject": "PHYS",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "The following courses may be counted toward major electives, if they are listed as applicable options in the approved curriculum:",
+          "hour": 0,
+          "type": "SUBHEADER",
+        },
+        Object {
+          "classId": 3111,
+          "description": "Astrophysical Processes: Decoding the Universe",
+          "hour": 4,
+          "subject": "PHYS",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 4111,
+          "description": "Multimessenger Astrophysics",
+          "hour": 4,
+          "subject": "PHYS",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 5117,
+          "description": "Advanced Astrophysics Topics",
+          "hour": 4,
+          "subject": "PHYS",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 5118,
+          "description": "General Relativity and Cosmology",
+          "hour": 0,
+          "subject": "PHYS",
+          "type": "OR_COURSE",
+        },
+      ],
+    },
   ],
-  "yearVersion": 2021,
+  "yearVersion": 2022,
 }
 `;
 
@@ -700,6 +750,11 @@ Object {
           "type": "HEADER",
         },
         Object {
+          "description": "Complete one of the following:",
+          "hour": 0,
+          "type": "COMMENT",
+        },
+        Object {
           "classId": 1850,
           "description": "Experimental Game Design",
           "hour": 4,
@@ -709,6 +764,13 @@ Object {
         Object {
           "classId": 3300,
           "description": "Game Interface Design",
+          "hour": 0,
+          "subject": "GAME",
+          "type": "OR_COURSE",
+        },
+        Object {
+          "classId": 4000,
+          "description": "Topics in Game Design",
           "hour": 0,
           "subject": "GAME",
           "type": "OR_COURSE",
@@ -734,6 +796,11 @@ Object {
             "GAME",
           ],
           "type": "RANGE_UNBOUNDED",
+        },
+        Object {
+          "description": "If GAME 4000 (or any other topics course in the subjects listed above) is completed more than once, the additional completions may be allowed toward the Game Design electives.",
+          "hour": 0,
+          "type": "COMMENT",
         },
         Object {
           "classIdStart": 2500,
@@ -881,16 +948,18 @@ Object {
           "type": "HEADER",
         },
         Object {
-          "description": "Students are strongly encouraged to take Advanced Writing in the Technical Professions (ENGW 3302) but may substitute Interdisciplinary Advanced Writing in the Disciplines (ENGW 3315).",
-          "hour": 0,
-          "type": "COMMENT",
-        },
-        Object {
           "classId": 3302,
           "description": "Advanced Writing in the Technical Professions",
           "hour": 4,
           "subject": "ENGW",
           "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 3314,
+          "description": "Advanced Writing in the Arts, Media, and Design",
+          "hour": 0,
+          "subject": "ENGW",
+          "type": "OR_COURSE",
         },
         Object {
           "classId": 3315,
@@ -912,7 +981,1290 @@ Object {
       ],
     },
   ],
-  "yearVersion": 2021,
+  "yearVersion": 2022,
+}
+`;
+
+exports[`scraper v2 snapshot tests Test NO tabs (architecture and english) 1`] = `
+Object {
+  "majorName": "Architecture and English, BS",
+  "programRequiredHours": 128,
+  "sections": Array [
+    Object {
+      "description": "Architecture Requirements",
+      "entries": Array [
+        Object {
+          "description": "Required Courses",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "classId": 1110,
+          "description": "Fundamental Architectural Representation",
+          "hour": 4,
+          "subject": "ARCH",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 1120,
+          "description": "Fundamental Architectural Design",
+          "hour": 6,
+          "subject": "ARCH",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 1310,
+          "description": "Buildings and Cities, A Global History",
+          "hour": 4,
+          "subject": "ARCH",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 1450,
+          "description": "Understanding Design",
+          "hour": 4,
+          "subject": "ARCH",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 2130,
+          "description": "Site, Space, and Program",
+          "hour": 6,
+          "subject": "ARCH",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 2240,
+          "description": "Architectonic Systems",
+          "hour": 4,
+          "subject": "ARCH",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Architecure History Electives",
+          "hour": 8,
+          "type": "HEADER",
+        },
+        Object {
+          "classIdEnd": 2399,
+          "classIdStart": 2300,
+          "hour": 0,
+          "subject": "ARCH",
+          "type": "RANGE_BOUNDED",
+        },
+        Object {
+          "description": "Electives",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "description": "Complete two of the following:",
+          "hour": 8,
+          "type": "COMMENT",
+        },
+        Object {
+          "classId": 3370,
+          "description": "Advanced Topics in Architectural History",
+          "hour": 0,
+          "subject": "ARCH",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 3450,
+          "description": "Advanced Architectural Communication",
+          "hour": 0,
+          "subject": "ARCH",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 5310,
+          "description": "Design Tactics and Operations",
+          "hour": 0,
+          "subject": "ARCH",
+          "type": "PLAIN_COURSE",
+        },
+      ],
+    },
+    Object {
+      "description": "English Requirements",
+      "entries": Array [
+        Object {
+          "description": "English Course-Level Requirement",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "description": "In addition to the capstone, two of the courses completed from the lists below must be numbered 3000–4999.",
+          "hour": 0,
+          "type": "COMMENT",
+        },
+        Object {
+          "description": "Introduction to College",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "classId": 1000,
+          "description": "English at Northeastern",
+          "hour": 1,
+          "subject": "ENGL",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Foundational Courses",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "classId": 1400,
+          "description": "Introduction to Literary Studies",
+          "hour": 4,
+          "subject": "ENGL",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 1160,
+          "description": "Introduction to Rhetoric",
+          "hour": 4,
+          "subject": "ENGL",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 1410,
+          "description": "Introduction to Research on Writing",
+          "hour": 0,
+          "subject": "ENGL",
+          "type": "OR_COURSE",
+        },
+        Object {
+          "description": "Diversity",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "description": "Complete one of the following. This course may also be used to fulfill an additional English requirement below:",
+          "hour": 4,
+          "type": "COMMENT",
+        },
+        Object {
+          "classId": 2150,
+          "description": "Literature and Digital Diversity",
+          "hour": 0,
+          "subject": "ENGL",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 2296,
+          "description": "Early African-American Literature",
+          "hour": 0,
+          "subject": "ENGL",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 2450,
+          "description": "Postcolonial Literature",
+          "hour": 0,
+          "subject": "ENGL",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 2455,
+          "description": "American Women Writers",
+          "hour": 0,
+          "subject": "ENGL",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 2760,
+          "description": "Writing in Global Contexts",
+          "hour": 0,
+          "subject": "ENGL",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 3663,
+          "description": "The African American Novel",
+          "hour": 0,
+          "subject": "ENGL",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 3678,
+          "description": "Bedrooms and Battlefields: Hebrew Bible and the Origins of Sex, Gender, and Ethnicity",
+          "hour": 0,
+          "subject": "ENGL",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 3685,
+          "description": "Modern and Contemporary Jewish Literature",
+          "hour": 0,
+          "subject": "ENGL/JWSS",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Pre–Nineteenth-Century Literature",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "description": "Complete one of the following:",
+          "hour": 4,
+          "type": "COMMENT",
+        },
+        Object {
+          "classId": 1600,
+          "description": "Introduction to Shakespeare",
+          "hour": 0,
+          "subject": "ENGL",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 1700,
+          "description": "Global Literatures 1",
+          "hour": 0,
+          "subject": "ENGL",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 2240,
+          "description": "17th-Century British Literature",
+          "hour": 0,
+          "subject": "ENGL",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 2296,
+          "description": "Early African-American Literature",
+          "hour": 0,
+          "subject": "ENGL",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 3678,
+          "description": "Bedrooms and Battlefields: Hebrew Bible and the Origins of Sex, Gender, and Ethnicity",
+          "hour": 0,
+          "subject": "ENGL/JWSS",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Nineteenth-, Twentieth-, and Twenty-First-Century Literature",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "description": "Complete one of the following:",
+          "hour": 4,
+          "type": "COMMENT",
+        },
+        Object {
+          "classId": 2330,
+          "description": "The American Renaissance",
+          "hour": 0,
+          "subject": "ENGL",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 3720,
+          "description": "19th-Century Major Figure",
+          "hour": 0,
+          "subject": "ENGL",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 2301,
+          "description": "The Graphic Novel",
+          "hour": 0,
+          "subject": "ENGL",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 2440,
+          "description": "The Modern Bestseller",
+          "hour": 0,
+          "subject": "ENGL",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 2600,
+          "description": "Irish Literary Culture (Abroad)",
+          "hour": 0,
+          "subject": "ENGL",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 2610,
+          "description": "Contemporary Israeli Literature and Art (Abroad)",
+          "hour": 0,
+          "subject": "ENGL",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 3685,
+          "description": "Modern and Contemporary Jewish Literature",
+          "hour": 0,
+          "subject": "ENGL/JWSS",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 3730,
+          "description": "20th- and 21st-Century Major Figure",
+          "hour": 0,
+          "subject": "ENGL",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Theories and Methods",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "description": "Complete one of the following:",
+          "hour": 4,
+          "type": "COMMENT",
+        },
+        Object {
+          "classId": 1140,
+          "description": "Grammar: The Architecture of English",
+          "hour": 0,
+          "subject": "ENGL",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 1160,
+          "description": "Introduction to Rhetoric",
+          "hour": 0,
+          "subject": "ENGL",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 1410,
+          "description": "Introduction to Research on Writing",
+          "hour": 0,
+          "subject": "ENGL",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 2150,
+          "description": "Literature and Digital Diversity",
+          "hour": 0,
+          "subject": "ENGL",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 3325,
+          "description": "Rhetoric of Law",
+          "hour": 0,
+          "subject": "ENGL",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 3340,
+          "description": "Technologies of Text",
+          "hour": 0,
+          "subject": "ENGL",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 3381,
+          "description": "The Practice and Theory of Teaching Writing",
+          "hour": 0,
+          "subject": "ENGL",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 3700,
+          "description": "Narrative Medicine",
+          "hour": 0,
+          "subject": "ENGL",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 1150,
+          "description": "Introduction to Language and Linguistics",
+          "hour": 0,
+          "subject": "LING",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 2350,
+          "description": "Linguistic Analysis",
+          "hour": 0,
+          "subject": "LING",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 3450,
+          "description": "Syntax",
+          "hour": 0,
+          "subject": "LING",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 3452,
+          "description": "Semantics",
+          "hour": 0,
+          "subject": "LING",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 3454,
+          "description": "History of English",
+          "hour": 0,
+          "subject": "LING",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 3456,
+          "description": "Language and Gender",
+          "hour": 0,
+          "subject": "LING",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 3458,
+          "description": "Topics in Linguistics",
+          "hour": 0,
+          "subject": "LING",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Comparative Literature",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "description": "Complete one of the following:",
+          "hour": 4,
+          "type": "COMMENT",
+        },
+        Object {
+          "classId": 1450,
+          "description": "Reading and Writing in the Digital Age",
+          "hour": 0,
+          "subject": "ENGL",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 1502,
+          "description": "American Literature to 1865",
+          "hour": 0,
+          "subject": "ENGL",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 2150,
+          "description": "Literature and Digital Diversity",
+          "hour": 0,
+          "subject": "ENGL",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 2420,
+          "description": "Contemporary Poetry",
+          "hour": 0,
+          "subject": "ENGL",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 2430,
+          "description": "Contemporary Fiction",
+          "hour": 0,
+          "subject": "ENGL",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 2450,
+          "description": "Postcolonial Literature",
+          "hour": 0,
+          "subject": "ENGL",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 2455,
+          "description": "American Women Writers",
+          "hour": 0,
+          "subject": "ENGL",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 2510,
+          "description": "Horror Fiction",
+          "hour": 0,
+          "subject": "ENGL",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 2520,
+          "description": "Science Fiction",
+          "hour": 0,
+          "subject": "ENGL",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 2600,
+          "description": "Irish Literary Culture (Abroad)",
+          "hour": 0,
+          "subject": "ENGL",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 2620,
+          "description": "What Is Nature?",
+          "hour": 0,
+          "subject": "ENGL",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 2690,
+          "description": "Boston in Literature",
+          "hour": 0,
+          "subject": "ENGL",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 3487,
+          "description": "Film and Text (Abroad)",
+          "hour": 0,
+          "subject": "ENGL",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 3663,
+          "description": "The African American Novel",
+          "hour": 0,
+          "subject": "ENGL",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Writing",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "description": "Complete one of the following:",
+          "hour": 4,
+          "type": "COMMENT",
+        },
+        Object {
+          "classId": 2700,
+          "description": "Creative Writing",
+          "hour": 0,
+          "subject": "ENGL",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 2710,
+          "description": "Style and Editing",
+          "hour": 0,
+          "subject": "ENGL",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 2740,
+          "description": "Writing and Community Engagement",
+          "hour": 0,
+          "subject": "ENGL",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 2760,
+          "description": "Writing in Global Contexts",
+          "hour": 0,
+          "subject": "ENGL",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 2770,
+          "description": "Writing to Heal",
+          "hour": 0,
+          "subject": "ENGL",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 2780,
+          "description": "Visual Writing",
+          "hour": 0,
+          "subject": "ENGL",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 2850,
+          "description": "Writing for Social Media: Theory and Practice",
+          "hour": 0,
+          "subject": "ENGL",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 3375,
+          "description": "Writing Boston",
+          "hour": 0,
+          "subject": "ENGL",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 3376,
+          "description": "Creative Nonfiction",
+          "hour": 0,
+          "subject": "ENGL",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 3377,
+          "description": "Poetry Workshop",
+          "hour": 0,
+          "subject": "ENGL",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 3378,
+          "description": "Fiction Workshop",
+          "hour": 0,
+          "subject": "ENGL",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 3380,
+          "description": "Writing Seminar",
+          "hour": 0,
+          "subject": "ENGL",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 3382,
+          "description": "Publishing in the 21st Century",
+          "hour": 0,
+          "subject": "ENGL",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 3384,
+          "description": "The Writer’s Marketplace",
+          "hour": 0,
+          "subject": "ENGL",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Capstone",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "classId": 4710,
+          "description": "Capstone Seminar",
+          "hour": 4,
+          "subject": "ENGL",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 4720,
+          "description": "Capstone Project",
+          "hour": 0,
+          "subject": "ENGL",
+          "type": "OR_COURSE",
+        },
+        Object {
+          "description": "English Electives",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "description": "Complete two additional ENGL electives.",
+          "hour": 8,
+          "type": "COMMENT",
+        },
+      ],
+    },
+    Object {
+      "description": "Integrative Requirement",
+      "entries": Array [
+        Object {
+          "classId": 2330,
+          "description": "Architecture and the City in the Nineteenth Century",
+          "hour": 4,
+          "subject": "ARCH",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 2340,
+          "description": "Modern Architecture",
+          "hour": 0,
+          "subject": "ARCH",
+          "type": "OR_COURSE",
+        },
+        Object {
+          "classId": 3375,
+          "description": "Writing Boston",
+          "hour": 4,
+          "subject": "ENGL",
+          "type": "PLAIN_COURSE",
+        },
+      ],
+    },
+  ],
+  "yearVersion": 2022,
+}
+`;
+
+exports[`scraper v2 snapshot tests Test OR of ANDs (bioengineering biochemistry) 1`] = `
+Object {
+  "majorName": "Bioengineering and Biochemistry, BSBioE",
+  "programRequiredHours": 139,
+  "sections": Array [
+    Object {
+      "description": "Engineering",
+      "entries": Array [
+        Object {
+          "description": "Required Engineering",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "classId": 2350,
+          "description": "Biomechanics",
+          "hour": 4,
+          "subject": "BIOE",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 2355,
+          "description": "Quantitative Physiology for Bioengineers",
+          "hour": 4,
+          "subject": "BIOE",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 2365,
+              "description": "Bioengineering Measurement, Experimentation, and Statistics",
+              "subject": "BIOE",
+            },
+            Object {
+              "classId": 2366,
+              "description": "Lab for BIOE 2365",
+              "subject": "BIOE",
+            },
+          ],
+          "description": "Bioengineering Measurement, Experimentation, and Statistics and Lab for BIOE 2365",
+          "hour": 5,
+          "type": "AND_COURSE",
+        },
+        Object {
+          "classId": 3210,
+          "description": "Bioelectricity",
+          "hour": 4,
+          "subject": "BIOE",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 3310,
+          "description": "Transport and Fluids for Bioengineers",
+          "hour": 4,
+          "subject": "BIOE",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 3380,
+          "description": "Biomolecular Dynamics and Control",
+          "hour": 4,
+          "subject": "BIOE",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 5410,
+          "description": "Molecular Bioengineering",
+          "hour": 4,
+          "subject": "BIOE",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 5420,
+          "description": "Cellular Engineering",
+          "hour": 4,
+          "subject": "BIOE",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 5430,
+          "description": "Principles and Applications of Tissue Engineering",
+          "hour": 4,
+          "subject": "BIOE",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Bioengineering Capstone",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "classId": 4790,
+          "description": "Capstone Design 1",
+          "hour": 4,
+          "subject": "BIOE",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 4792,
+          "description": "Capstone Design 2",
+          "hour": 4,
+          "subject": "BIOE",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Supplemental Credit",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "description": "2 semester hours from the following course count toward the engineering requirement:",
+          "hour": 2,
+          "type": "COMMENT",
+        },
+        Object {
+          "classId": 1501,
+          "description": "Cornerstone of Engineering 1 1",
+          "hour": 0,
+          "subject": "GE",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "3 semester hours from the following course count toward the engineering requirement:",
+          "hour": 3,
+          "type": "COMMENT",
+        },
+        Object {
+          "classId": 1502,
+          "description": "Cornerstone of Engineering 2 1",
+          "hour": 0,
+          "subject": "GE",
+          "type": "PLAIN_COURSE",
+        },
+      ],
+    },
+    Object {
+      "description": "Mathematics/Science Requirement",
+      "entries": Array [
+        Object {
+          "description": "Required Mathematics/Science",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 1115,
+              "description": "General Biology 1 for Engineers",
+              "subject": "BIOL",
+            },
+            Object {
+              "classId": 1116,
+              "description": "Lab for BIOL 1115",
+              "subject": "BIOL",
+            },
+          ],
+          "description": "General Biology 1 for Engineers and Lab for BIOL 1115",
+          "hour": 5,
+          "type": "AND_COURSE",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 1111,
+              "description": "General Biology 1",
+              "subject": "BIOL",
+            },
+            Object {
+              "classId": 1112,
+              "description": "Lab for BIOL 1111",
+              "subject": "BIOL",
+            },
+          ],
+          "description": "General Biology 1 and Lab for BIOL 1111",
+          "hour": 0,
+          "type": "OR_OF_AND_COURSE",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 2301,
+              "description": "Genetics and Molecular Biology",
+              "subject": "BIOL",
+            },
+            Object {
+              "classId": 2302,
+              "description": "Lab for BIOL 2301",
+              "subject": "BIOL",
+            },
+          ],
+          "description": "Genetics and Molecular Biology and Lab for BIOL 2301",
+          "hour": 5,
+          "type": "AND_COURSE",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 3611,
+              "description": "Biochemistry",
+              "subject": "BIOL",
+            },
+            Object {
+              "classId": 3612,
+              "description": "Lab for BIOL 3611",
+              "subject": "BIOL",
+            },
+          ],
+          "description": "Biochemistry and Lab for BIOL 3611",
+          "hour": 5,
+          "type": "AND_COURSE",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 1151,
+              "description": "General Chemistry for Engineers",
+              "subject": "CHEM",
+            },
+            Object {
+              "classId": 1153,
+              "description": "Recitation for CHEM 1151",
+              "subject": "CHEM",
+            },
+          ],
+          "description": "General Chemistry for Engineers and Recitation for CHEM 1151",
+          "hour": 4,
+          "type": "AND_COURSE",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 2311,
+              "description": "Organic Chemistry 1",
+              "subject": "CHEM",
+            },
+            Object {
+              "classId": 2312,
+              "description": "Lab for CHEM 2311",
+              "subject": "CHEM",
+            },
+          ],
+          "description": "Organic Chemistry 1 and Lab for CHEM 2311",
+          "hour": 5,
+          "type": "AND_COURSE",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 2313,
+              "description": "Organic Chemistry 2",
+              "subject": "CHEM",
+            },
+            Object {
+              "classId": 2314,
+              "description": "Lab for CHEM 2313",
+              "subject": "CHEM",
+            },
+          ],
+          "description": "Organic Chemistry 2 and Lab for CHEM 2313",
+          "hour": 5,
+          "type": "AND_COURSE",
+        },
+        Object {
+          "classId": 1341,
+          "description": "Calculus 1 for Science and Engineering",
+          "hour": 4,
+          "subject": "MATH",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 1342,
+          "description": "Calculus 2 for Science and Engineering",
+          "hour": 4,
+          "subject": "MATH",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 2321,
+          "description": "Calculus 3 for Science and Engineering",
+          "hour": 4,
+          "subject": "MATH",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 2341,
+          "description": "Differential Equations and Linear Algebra for Engineering",
+          "hour": 4,
+          "subject": "MATH",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 1171,
+              "description": "Physics 1 for Bioscience and Bioengineering",
+              "subject": "PHYS",
+            },
+            Object {
+              "classId": 1172,
+              "description": "Lab for PHYS 1171",
+              "subject": "PHYS",
+            },
+            Object {
+              "classId": 1173,
+              "description": "Interactive Learning Seminar for PHYS 1171",
+              "subject": "PHYS",
+            },
+          ],
+          "description": "Physics 1 for Bioscience and Bioengineering and Lab for PHYS 1171 and Interactive Learning Seminar for PHYS 1171",
+          "hour": 5,
+          "type": "AND_COURSE",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 1151,
+              "description": "Physics for Engineering 1",
+              "subject": "PHYS",
+            },
+            Object {
+              "classId": 1152,
+              "description": "Lab for PHYS 1151",
+              "subject": "PHYS",
+            },
+            Object {
+              "classId": 1153,
+              "description": "Interactive Learning Seminar for PHYS 1151",
+              "subject": "PHYS",
+            },
+          ],
+          "description": "Physics for Engineering 1 and Lab for PHYS 1151 and Interactive Learning Seminar for PHYS 1151",
+          "hour": 0,
+          "type": "OR_OF_AND_COURSE",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 1175,
+              "description": "Physics 2 for Bioscience and Bioengineering",
+              "subject": "PHYS",
+            },
+            Object {
+              "classId": 1176,
+              "description": "Lab for PHYS 1175",
+              "subject": "PHYS",
+            },
+            Object {
+              "classId": 1177,
+              "description": "Interactive Learning Seminar for PHYS 1175",
+              "subject": "PHYS",
+            },
+          ],
+          "description": "Physics 2 for Bioscience and Bioengineering and Lab for PHYS 1175 and Interactive Learning Seminar for PHYS 1175",
+          "hour": 5,
+          "type": "AND_COURSE",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 1155,
+              "description": "Physics for Engineering 2",
+              "subject": "PHYS",
+            },
+            Object {
+              "classId": 1156,
+              "description": "Lab for PHYS 1155",
+              "subject": "PHYS",
+            },
+            Object {
+              "classId": 1157,
+              "description": "Interactive Learning Seminar for PHYS 1155",
+              "subject": "PHYS",
+            },
+          ],
+          "description": "Physics for Engineering 2 and Lab for PHYS 1155 and Interactive Learning Seminar for PHYS 1155",
+          "hour": 0,
+          "type": "OR_OF_AND_COURSE",
+        },
+        Object {
+          "description": "Advanced Biology Elective",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "description": "Complete one course in the following range:",
+          "hour": 4,
+          "type": "COMMENT",
+        },
+        Object {
+          "classIdEnd": 5999,
+          "classIdStart": 2311,
+          "hour": 0,
+          "subject": "BIOL",
+          "type": "RANGE_BOUNDED",
+        },
+        Object {
+          "description": "Advanced Chemistry Elective",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "description": "Complete one course in the following range:",
+          "hour": 4,
+          "type": "COMMENT",
+        },
+        Object {
+          "classIdEnd": 5999,
+          "classIdStart": 2310,
+          "hour": 0,
+          "subject": "CHEM",
+          "type": "RANGE_BOUNDED",
+        },
+        Object {
+          "description": "Supplemental Credit",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "description": "1 semester hour from the following course counts toward the mathematics/science requirement:",
+          "hour": 1,
+          "type": "COMMENT",
+        },
+        Object {
+          "classId": 1501,
+          "description": "Cornerstone of Engineering 1 1",
+          "hour": 0,
+          "subject": "GE",
+          "type": "PLAIN_COURSE",
+        },
+      ],
+    },
+    Object {
+      "description": "Professional Development",
+      "entries": Array [
+        Object {
+          "description": "Professional Development",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "classId": 1000,
+          "description": "First-Year Seminar",
+          "hour": 1,
+          "subject": "GE",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 2000,
+          "description": "Introduction to Engineering Co-op Education",
+          "hour": 1,
+          "subject": "ENCP",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 3000,
+          "description": "Professional Issues in Engineering",
+          "hour": 1,
+          "subject": "ENCP",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Additional Required Courses",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "description": "1 semester hour from the following course counts toward the professional development requirement:",
+          "hour": 1,
+          "type": "COMMENT",
+        },
+        Object {
+          "classId": 1501,
+          "description": "Cornerstone of Engineering 1 1",
+          "hour": 0,
+          "subject": "GE",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "1 semester hour from the following course counts toward the professional development requirement:",
+          "hour": 1,
+          "type": "COMMENT",
+        },
+        Object {
+          "classId": 1502,
+          "description": "Cornerstone of Engineering 2 1",
+          "hour": 0,
+          "subject": "GE",
+          "type": "PLAIN_COURSE",
+        },
+      ],
+    },
+    Object {
+      "description": "Writing Requirements",
+      "entries": Array [
+        Object {
+          "description": "A grade of C or higher is required:",
+          "hour": 0,
+          "type": "COMMENT",
+        },
+        Object {
+          "classId": 1111,
+          "description": "First-Year Writing",
+          "hour": 4,
+          "subject": "ENGW",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 3302,
+          "description": "Advanced Writing in the Technical Professions",
+          "hour": 4,
+          "subject": "ENGW",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 3307,
+          "description": "Advanced Writing in the Sciences",
+          "hour": 0,
+          "subject": "ENGW",
+          "type": "OR_COURSE",
+        },
+        Object {
+          "classId": 3315,
+          "description": "Interdisciplinary Advanced Writing in the Disciplines",
+          "hour": 0,
+          "subject": "ENGW",
+          "type": "OR_COURSE",
+        },
+      ],
+    },
+    Object {
+      "description": "Required General Electives",
+      "entries": Array [
+        Object {
+          "description": "Complete 12 semester hours of academic, nonremedial, nonrepetitive courses.",
+          "hour": 12,
+          "type": "COMMENT",
+        },
+      ],
+    },
+    Object {
+      "description": "Integrative Course",
+      "entries": Array [
+        Object {
+          "description": "This course is already required above and also fulfills the integrative requirement.",
+          "hour": 0,
+          "type": "COMMENT",
+        },
+        Object {
+          "classId": 4790,
+          "description": "Capstone Design 1",
+          "hour": 4,
+          "subject": "BIOE",
+          "type": "PLAIN_COURSE",
+        },
+      ],
+    },
+  ],
+  "yearVersion": 2022,
 }
 `;
 
@@ -1317,7 +2669,472 @@ Object {
       ],
     },
   ],
-  "yearVersion": 2021,
+  "yearVersion": 2022,
+}
+`;
+
+exports[`scraper v2 snapshot tests Test range bounded with exceptions (cs and math) 1`] = `
+Object {
+  "majorName": "Computer Science and Mathematics, BS",
+  "programRequiredHours": 132,
+  "sections": Array [
+    Object {
+      "description": "Computer Science Courses",
+      "entries": Array [
+        Object {
+          "description": "Computer Science Overview",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "classId": 1200,
+          "description": "First Year Seminar",
+          "hour": 1,
+          "subject": "CS",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 1210,
+          "description": "Professional Development for Khoury Co-op",
+          "hour": 1,
+          "subject": "CS",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Computer Science Fundamental Courses",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 1800,
+              "description": "Discrete Structures",
+              "subject": "CS",
+            },
+            Object {
+              "classId": 1802,
+              "description": "Seminar for CS 1800",
+              "subject": "CS",
+            },
+          ],
+          "description": "Discrete Structures and Seminar for CS 1800",
+          "hour": 5,
+          "type": "AND_COURSE",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 2500,
+              "description": "Fundamentals of Computer Science 1",
+              "subject": "CS",
+            },
+            Object {
+              "classId": 2501,
+              "description": "Lab for CS 2500",
+              "subject": "CS",
+            },
+          ],
+          "description": "Fundamentals of Computer Science 1 and Lab for CS 2500",
+          "hour": 5,
+          "type": "AND_COURSE",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 2510,
+              "description": "Fundamentals of Computer Science 2",
+              "subject": "CS",
+            },
+            Object {
+              "classId": 2511,
+              "description": "Lab for CS 2510",
+              "subject": "CS",
+            },
+          ],
+          "description": "Fundamentals of Computer Science 2 and Lab for CS 2510",
+          "hour": 5,
+          "type": "AND_COURSE",
+        },
+        Object {
+          "classId": 2800,
+          "description": "Logic and Computation",
+          "hour": 4,
+          "subject": "CS",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Computer Science Required Courses",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "classId": 3000,
+          "description": "Algorithms and Data",
+          "hour": 4,
+          "subject": "CS",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 3500,
+              "description": "Object-Oriented Design",
+              "subject": "CS",
+            },
+            Object {
+              "classId": 3501,
+              "description": "Lab for CS 3500",
+              "subject": "CS",
+            },
+          ],
+          "description": "Object-Oriented Design and Lab for CS 3500",
+          "hour": 5,
+          "type": "AND_COURSE",
+        },
+        Object {
+          "classId": 3800,
+          "description": "Theory of Computation",
+          "hour": 4,
+          "subject": "CS",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 4300,
+          "description": "Computer Graphics",
+          "hour": 4,
+          "subject": "CS",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 4100,
+          "description": "Artificial Intelligence",
+          "hour": 0,
+          "subject": "CS",
+          "type": "OR_COURSE",
+        },
+        Object {
+          "classId": 4500,
+          "description": "Software Development",
+          "hour": 4,
+          "subject": "CS",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 4530,
+          "description": "Fundamentals of Software Engineering",
+          "hour": 0,
+          "subject": "CS",
+          "type": "OR_COURSE",
+        },
+        Object {
+          "description": "Khoury Elective Courses",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "description": "With adviser approval, a directed study, research, project study, or appropriate graduate-level course may also be taken as a computer science elective.",
+          "hour": 0,
+          "type": "COMMENT",
+        },
+        Object {
+          "description": "Complete eight semester hours of CS, CY, DS, or IS classes that are not already required. Choose courses within the following ranges:",
+          "hour": 8,
+          "type": "COMMENT",
+        },
+        Object {
+          "classIdStart": 2500,
+          "exceptions": Array [
+            Object {
+              "classId": 5010,
+              "subject": "CS",
+            },
+          ],
+          "hour": 0,
+          "subject": "CS",
+          "type": "RANGE_LOWER_BOUNDED_WITH_EXCEPTIONS",
+        },
+        Object {
+          "classIdStart": 2000,
+          "exceptions": Array [
+            Object {
+              "classId": 4930,
+              "subject": "CY",
+            },
+          ],
+          "hour": 0,
+          "subject": "CY",
+          "type": "RANGE_LOWER_BOUNDED_WITH_EXCEPTIONS",
+        },
+        Object {
+          "classIdStart": 2500,
+          "exceptions": Array [
+            Object {
+              "classId": 4900,
+              "subject": "DS",
+            },
+          ],
+          "hour": 0,
+          "subject": "DS",
+          "type": "RANGE_LOWER_BOUNDED_WITH_EXCEPTIONS",
+        },
+        Object {
+          "classIdStart": 2000,
+          "exceptions": Array [
+            Object {
+              "classId": 4900,
+              "subject": "IS",
+            },
+          ],
+          "hour": 0,
+          "subject": "IS",
+          "type": "RANGE_LOWER_BOUNDED_WITH_EXCEPTIONS",
+        },
+      ],
+    },
+    Object {
+      "description": "Mathematics Courses",
+      "entries": Array [
+        Object {
+          "description": "Calculus Courses",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "classId": 1341,
+          "description": "Calculus 1 for Science and Engineering",
+          "hour": 4,
+          "subject": "MATH",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 1342,
+          "description": "Calculus 2 for Science and Engineering",
+          "hour": 4,
+          "subject": "MATH",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 2321,
+          "description": "Calculus 3 for Science and Engineering",
+          "hour": 4,
+          "subject": "MATH",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Mathematics Courses",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "classId": 2331,
+          "description": "Linear Algebra",
+          "hour": 4,
+          "subject": "MATH",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 2341,
+          "description": "Differential Equations and Linear Algebra for Engineering",
+          "hour": 4,
+          "subject": "MATH",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 3081,
+          "description": "Probability and Statistics",
+          "hour": 4,
+          "subject": "MATH",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 3175,
+          "description": "Group Theory",
+          "hour": 4,
+          "subject": "MATH",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 3527,
+          "description": "Number Theory 1",
+          "hour": 4,
+          "subject": "MATH",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Mathematics Electives",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "description": "Complete three courses in the following range:",
+          "hour": 12,
+          "type": "COMMENT",
+        },
+        Object {
+          "classIdEnd": 4999,
+          "classIdStart": 3001,
+          "exceptions": Array [
+            Object {
+              "classId": 4000,
+              "subject": "MATH",
+            },
+          ],
+          "hour": 0,
+          "subject": "MATH",
+          "type": "RANGE_BOUNDED_WITH_EXCEPTIONS",
+        },
+      ],
+    },
+    Object {
+      "description": "Supporting Course",
+      "entries": Array [
+        Object {
+          "description": "Complete one of the following:",
+          "hour": 4,
+          "type": "COMMENT",
+        },
+        Object {
+          "classId": 2600,
+          "description": "Issues in Race, Science, and Technology",
+          "hour": 0,
+          "subject": "AFAM",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 4170,
+          "description": "The Law, Ethics, and Policy of Data and Digital Technologies",
+          "hour": 0,
+          "subject": "CY",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 5240,
+          "description": "Cyberlaw: Privacy, Ethics, and Digital Rights",
+          "hour": 0,
+          "subject": "CY",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 2150,
+          "description": "Literature and Digital Diversity",
+          "hour": 0,
+          "subject": "ENGL",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 2220,
+          "description": "History of Technology",
+          "hour": 0,
+          "subject": "HIST",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 2102,
+          "description": "Bostonography: The City through Data, Texts, Maps, and Networks",
+          "hour": 0,
+          "subject": "INSH",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 1300,
+          "description": "Knowledge in a Digital World",
+          "hour": 0,
+          "subject": "IS",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 1300,
+          "description": "Knowledge in a Digital World",
+          "hour": 0,
+          "subject": "PHIL",
+          "type": "OR_COURSE",
+        },
+        Object {
+          "classId": 1145,
+          "description": "Technology and Human Values",
+          "hour": 0,
+          "subject": "PHIL",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 1280,
+          "description": "The Twenty-First-Century Workplace",
+          "hour": 0,
+          "subject": "SOCL",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 2485,
+          "description": "Environment, Technology, and Society",
+          "hour": 0,
+          "subject": "SOCL",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 4528,
+          "description": "Computers and Society",
+          "hour": 0,
+          "subject": "SOCL",
+          "type": "PLAIN_COURSE",
+        },
+      ],
+    },
+    Object {
+      "description": "Computer Science Writing Requirement",
+      "entries": Array [
+        Object {
+          "description": "College Writing",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "classId": 1111,
+          "description": "First-Year Writing",
+          "hour": 4,
+          "subject": "ENGW",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Advanced Writing in the Disciplines",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "classId": 3302,
+          "description": "Advanced Writing in the Technical Professions",
+          "hour": 4,
+          "subject": "ENGW",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 3307,
+          "description": "Advanced Writing in the Sciences",
+          "hour": 0,
+          "subject": "ENGW",
+          "type": "OR_COURSE",
+        },
+        Object {
+          "classId": 3315,
+          "description": "Interdisciplinary Advanced Writing in the Disciplines",
+          "hour": 0,
+          "subject": "ENGW",
+          "type": "OR_COURSE",
+        },
+      ],
+    },
+    Object {
+      "description": "Required General Electives",
+      "entries": Array [
+        Object {
+          "description": "Complete 28 semester hours of general electives.",
+          "hour": 28,
+          "type": "COMMENT",
+        },
+      ],
+    },
+  ],
+  "yearVersion": 2022,
 }
 `;
 
@@ -1342,11 +3159,25 @@ Object {
           "type": "PLAIN_COURSE",
         },
         Object {
+          "classId": 1000,
+          "description": "History at Northeastern",
+          "hour": 0,
+          "subject": "HIST",
+          "type": "OR_COURSE",
+        },
+        Object {
           "classId": 1210,
           "description": "Professional Development for Khoury Co-op",
           "hour": 1,
           "subject": "CS",
           "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 2000,
+          "description": "Professional Development for Co-op",
+          "hour": 0,
+          "subject": "EESH",
+          "type": "OR_COURSE",
         },
         Object {
           "description": "Computer Science Fundamental Courses",
@@ -1594,13 +3425,6 @@ Object {
           "type": "PLAIN_COURSE",
         },
         Object {
-          "classId": 1190,
-          "description": "Picturing Modernity: The Photographic Image in Culture and Society",
-          "hour": 0,
-          "subject": "HIST",
-          "type": "PLAIN_COURSE",
-        },
-        Object {
           "classId": 1103,
           "description": "Introduction to Women’s, Gender, and Sexuality Studies",
           "hour": 0,
@@ -1675,26 +3499,9 @@ Object {
           "type": "HEADER",
         },
         Object {
-          "description": "Complete one capstone experience from the following:",
-          "hour": 4,
-          "type": "COMMENT",
-        },
-        Object {
           "classId": 4701,
           "description": "Capstone Seminar",
-          "hour": 0,
-          "subject": "HIST",
-          "type": "PLAIN_COURSE",
-        },
-        Object {
-          "description": "Public history concentrators may also select from the following:",
-          "hour": 0,
-          "type": "COMMENT",
-        },
-        Object {
-          "classId": 4903,
-          "description": "Fieldwork in History 1",
-          "hour": 0,
+          "hour": 4,
           "subject": "HIST",
           "type": "PLAIN_COURSE",
         },
@@ -1901,7 +3708,7 @@ Object {
       ],
     },
   ],
-  "yearVersion": 2021,
+  "yearVersion": 2022,
 }
 `;
 
@@ -1936,7 +3743,7 @@ Object {
         },
         Object {
           "classId": 3312,
-          "description": "Transport Processes 2 and Separations",
+          "description": "Transport Processes 2",
           "hour": 4,
           "subject": "CHME",
           "type": "PLAIN_COURSE",
@@ -2003,7 +3810,7 @@ Object {
         },
         Object {
           "classId": 4701,
-          "description": "Capstone Design 1: Process Analysis",
+          "description": "Separations and Process Analysis",
           "hour": 4,
           "subject": "CHME",
           "type": "PLAIN_COURSE",
@@ -2012,7 +3819,7 @@ Object {
           "courses": Array [
             Object {
               "classId": 4703,
-              "description": "Capstone Design 2: Chemical Process Design",
+              "description": "Chemical Process Design Capstone",
               "subject": "CHME",
             },
             Object {
@@ -2021,7 +3828,7 @@ Object {
               "subject": "CHME",
             },
           ],
-          "description": "Capstone Design 2: Chemical Process Design and Recitation for CHME 4703",
+          "description": "Chemical Process Design Capstone and Recitation for CHME 4703",
           "hour": 4,
           "type": "AND_COURSE",
         },
@@ -2219,7 +4026,7 @@ Object {
       "description": "Supporting Courses: Advanced Science",
       "entries": Array [
         Object {
-          "description": "Complete one of the following:",
+          "description": "Complete one of the following pairs:",
           "hour": 5,
           "type": "COMMENT",
         },
@@ -2258,7 +4065,7 @@ Object {
           "type": "AND_COURSE",
         },
         Object {
-          "description": "Complete one of the following:",
+          "description": "Complete one of the following pairs:",
           "hour": 5,
           "type": "COMMENT",
         },
@@ -2432,23 +4239,6 @@ Object {
         Object {
           "courses": Array [
             Object {
-              "classId": 4621,
-              "description": "Introduction to Chemical Biology",
-              "subject": "CHEM",
-            },
-            Object {
-              "classId": 4622,
-              "description": "Lab for CHEM 4621",
-              "subject": "CHEM",
-            },
-          ],
-          "description": "Introduction to Chemical Biology and Lab for CHEM 4621",
-          "hour": 0,
-          "type": "AND_COURSE",
-        },
-        Object {
-          "courses": Array [
-            Object {
               "classId": 4628,
               "description": "Introduction to Spectroscopy of Organic Compounds",
               "subject": "CHEM",
@@ -2483,13 +4273,6 @@ Object {
         Object {
           "classId": 3460,
           "description": "Conservation Biology",
-          "hour": 0,
-          "subject": "EEMB",
-          "type": "PLAIN_COURSE",
-        },
-        Object {
-          "classId": 3470,
-          "description": "Coastal Ecology and Sustainability",
           "hour": 0,
           "subject": "EEMB",
           "type": "PLAIN_COURSE",
@@ -2551,7 +4334,7 @@ Object {
         },
         Object {
           "classId": 1000,
-          "description": "Introduction to the Study of Engineering",
+          "description": "First-Year Seminar",
           "hour": 1,
           "subject": "GE",
           "type": "PLAIN_COURSE",
@@ -2643,14 +4426,14 @@ Object {
       ],
     },
   ],
-  "yearVersion": 2021,
+  "yearVersion": 2022,
 }
 `;
 
 exports[`scraper v2 snapshot tests multiple of the same class per AND (cs)  1`] = `
 Object {
   "majorName": "Computer Science, BSCS",
-  "programRequiredHours": 133,
+  "programRequiredHours": 134,
   "sections": Array [
     Object {
       "description": "Computer Science Requirements",
@@ -2878,8 +4661,8 @@ Object {
           "type": "PLAIN_COURSE",
         },
         Object {
-          "classId": 1160,
-          "description": "The Professional Voice",
+          "classId": 1180,
+          "description": "The Dynamic On-Screen Presenter",
           "hour": 0,
           "subject": "THTR",
           "type": "PLAIN_COURSE",
@@ -2953,409 +4736,6 @@ Object {
           "hour": 0,
           "subject": "IS",
           "type": "RANGE_LOWER_BOUNDED_WITH_EXCEPTIONS",
-        },
-      ],
-    },
-    Object {
-      "description": "Concentration: Artificial Intelligence",
-      "entries": Array [
-        Object {
-          "classId": 4100,
-          "description": "Artificial Intelligence",
-          "hour": 4,
-          "subject": "CS",
-          "type": "PLAIN_COURSE",
-        },
-        Object {
-          "classId": 4400,
-          "description": "Machine Learning and Data Mining 1",
-          "hour": 4,
-          "subject": "DS",
-          "type": "PLAIN_COURSE",
-        },
-        Object {
-          "description": "Complete two of the following courses not already taken:",
-          "hour": 8,
-          "type": "COMMENT",
-        },
-        Object {
-          "classId": 4120,
-          "description": "Natural Language Processing",
-          "hour": 0,
-          "subject": "CS",
-          "type": "PLAIN_COURSE",
-        },
-        Object {
-          "classId": 4150,
-          "description": "Game Artificial Intelligence",
-          "hour": 0,
-          "subject": "CS",
-          "type": "PLAIN_COURSE",
-        },
-        Object {
-          "classId": 4610,
-          "description": "Robotic Science and Systems",
-          "hour": 0,
-          "subject": "CS",
-          "type": "PLAIN_COURSE",
-        },
-        Object {
-          "classId": 4200,
-          "description": "Information Retrieval",
-          "hour": 0,
-          "subject": "IS",
-          "type": "PLAIN_COURSE",
-        },
-        Object {
-          "classId": 4420,
-          "description": "Machine Learning and Data Mining 2",
-          "hour": 0,
-          "subject": "DS",
-          "type": "PLAIN_COURSE",
-        },
-        Object {
-          "classId": 3466,
-          "description": "Cognition",
-          "hour": 0,
-          "subject": "PSYC",
-          "type": "PLAIN_COURSE",
-        },
-      ],
-    },
-    Object {
-      "description": "Concentration: Foundations",
-      "entries": Array [
-        Object {
-          "description": "Complete two of the following:",
-          "hour": 8,
-          "type": "COMMENT",
-        },
-        Object {
-          "courses": Array [
-            Object {
-              "classId": 2800,
-              "description": "Logic and Computation",
-              "subject": "CS",
-            },
-            Object {
-              "classId": 2801,
-              "description": "Lab for CS 2800",
-              "subject": "CS",
-            },
-          ],
-          "description": "Logic and Computation and Lab for CS 2800",
-          "hour": 0,
-          "type": "AND_COURSE",
-        },
-        Object {
-          "classId": 4820,
-          "description": "Computer-Aided Reasoning",
-          "hour": 0,
-          "subject": "CS",
-          "type": "OR_COURSE",
-        },
-        Object {
-          "classId": 4805,
-          "description": "Fundamentals of Complexity Theory",
-          "hour": 0,
-          "subject": "CS",
-          "type": "PLAIN_COURSE",
-        },
-        Object {
-          "classId": 4810,
-          "description": "Advanced Algorithms",
-          "hour": 0,
-          "subject": "CS",
-          "type": "OR_COURSE",
-        },
-        Object {
-          "description": "Complete two of the following courses not already taken:",
-          "hour": 8,
-          "type": "COMMENT",
-        },
-        Object {
-          "classId": 4805,
-          "description": "Fundamentals of Complexity Theory",
-          "hour": 0,
-          "subject": "CS",
-          "type": "PLAIN_COURSE",
-        },
-        Object {
-          "classId": 4810,
-          "description": "Advanced Algorithms",
-          "hour": 0,
-          "subject": "CS",
-          "type": "PLAIN_COURSE",
-        },
-        Object {
-          "classId": 4820,
-          "description": "Computer-Aided Reasoning",
-          "hour": 0,
-          "subject": "CS",
-          "type": "PLAIN_COURSE",
-        },
-        Object {
-          "classId": 4830,
-          "description": "System Specification, Verification, and Synthesis",
-          "hour": 0,
-          "subject": "CS",
-          "type": "PLAIN_COURSE",
-        },
-        Object {
-          "courses": Array [
-            Object {
-              "classId": 3950,
-              "description": "Introduction to Computer Science Research",
-              "subject": "CS",
-            },
-            Object {
-              "classId": 4950,
-              "description": "Computer Science Research Seminar",
-              "subject": "CS",
-            },
-            Object {
-              "classId": 4950,
-              "description": "Computer Science Research Seminar",
-              "subject": "CS",
-            },
-          ],
-          "description": "Introduction to Computer Science Research and Computer Science Research Seminar and Computer Science Research Seminar",
-          "hour": 0,
-          "type": "AND_COURSE",
-        },
-        Object {
-          "classId": 4770,
-          "description": "Cryptography",
-          "hour": 0,
-          "subject": "CY",
-          "type": "PLAIN_COURSE",
-        },
-      ],
-    },
-    Object {
-      "description": "Concentration: Human-Centered Computing",
-      "entries": Array [
-        Object {
-          "classId": 4300,
-          "description": "Human Computer Interaction",
-          "hour": 4,
-          "subject": "IS",
-          "type": "PLAIN_COURSE",
-        },
-        Object {
-          "classId": 4800,
-          "description": "Empirical Research Methods",
-          "hour": 4,
-          "subject": "IS",
-          "type": "PLAIN_COURSE",
-        },
-        Object {
-          "description": "Complete two of the following courses not already taken:",
-          "hour": 8,
-          "type": "COMMENT",
-        },
-        Object {
-          "classId": 2000,
-          "description": "Principles of Information Science",
-          "hour": 0,
-          "subject": "IS",
-          "type": "PLAIN_COURSE",
-        },
-        Object {
-          "classId": 4120,
-          "description": "Natural Language Processing",
-          "hour": 0,
-          "subject": "CS",
-          "type": "PLAIN_COURSE",
-        },
-        Object {
-          "classId": 4520,
-          "description": "Mobile Application Development",
-          "hour": 0,
-          "subject": "CS",
-          "type": "PLAIN_COURSE",
-        },
-        Object {
-          "classId": 4550,
-          "description": "Web Development",
-          "hour": 0,
-          "subject": "CS",
-          "type": "PLAIN_COURSE",
-        },
-        Object {
-          "classId": 4200,
-          "description": "Information Presentation and Visualization",
-          "hour": 0,
-          "subject": "DS",
-          "type": "PLAIN_COURSE",
-        },
-      ],
-    },
-    Object {
-      "description": "Concentration: Software",
-      "entries": Array [
-        Object {
-          "courses": Array [
-            Object {
-              "classId": 2800,
-              "description": "Logic and Computation",
-              "subject": "CS",
-            },
-            Object {
-              "classId": 2801,
-              "description": "Lab for CS 2800",
-              "subject": "CS",
-            },
-          ],
-          "description": "Logic and Computation and Lab for CS 2800",
-          "hour": 5,
-          "type": "AND_COURSE",
-        },
-        Object {
-          "classId": 3700,
-          "description": "Networks and Distributed Systems",
-          "hour": 4,
-          "subject": "CS",
-          "type": "PLAIN_COURSE",
-        },
-        Object {
-          "classId": 4400,
-          "description": "Programming Languages",
-          "hour": 4,
-          "subject": "CS",
-          "type": "PLAIN_COURSE",
-        },
-        Object {
-          "description": "Complete one of the following courses not already taken:",
-          "hour": 0,
-          "type": "COMMENT",
-        },
-        Object {
-          "classId": 3520,
-          "description": "Programming in C++",
-          "hour": 0,
-          "subject": "CS",
-          "type": "PLAIN_COURSE",
-        },
-        Object {
-          "classId": 3620,
-          "description": "Building Extensible Systems",
-          "hour": 0,
-          "subject": "CS",
-          "type": "PLAIN_COURSE",
-        },
-        Object {
-          "classId": 4240,
-          "description": "Large-Scale Parallel Data Processing",
-          "hour": 0,
-          "subject": "CS",
-          "type": "PLAIN_COURSE",
-        },
-        Object {
-          "classId": 4410,
-          "description": "Compilers",
-          "hour": 0,
-          "subject": "CS",
-          "type": "PLAIN_COURSE",
-        },
-        Object {
-          "classId": 4550,
-          "description": "Web Development",
-          "hour": 0,
-          "subject": "CS",
-          "type": "PLAIN_COURSE",
-        },
-        Object {
-          "classId": 4520,
-          "description": "Mobile Application Development",
-          "hour": 0,
-          "subject": "CS",
-          "type": "PLAIN_COURSE",
-        },
-        Object {
-          "classId": 4820,
-          "description": "Computer-Aided Reasoning",
-          "hour": 0,
-          "subject": "CS",
-          "type": "PLAIN_COURSE",
-        },
-      ],
-    },
-    Object {
-      "description": "Concentration: Systems",
-      "entries": Array [
-        Object {
-          "classId": 3700,
-          "description": "Networks and Distributed Systems",
-          "hour": 4,
-          "subject": "CS",
-          "type": "PLAIN_COURSE",
-        },
-        Object {
-          "description": "Complete one of the following courses not already taken:",
-          "hour": 4,
-          "type": "COMMENT",
-        },
-        Object {
-          "classId": 3740,
-          "description": "Systems Security",
-          "hour": 0,
-          "subject": "CY",
-          "type": "PLAIN_COURSE",
-        },
-        Object {
-          "classId": 4740,
-          "description": "Network Security",
-          "hour": 0,
-          "subject": "CY",
-          "type": "PLAIN_COURSE",
-        },
-        Object {
-          "description": "Complete two of the following courses not already taken:",
-          "hour": 8,
-          "type": "COMMENT",
-        },
-        Object {
-          "classId": 3520,
-          "description": "Programming in C++",
-          "hour": 0,
-          "subject": "CS",
-          "type": "PLAIN_COURSE",
-        },
-        Object {
-          "classId": 4300,
-          "description": "Computer Graphics",
-          "hour": 0,
-          "subject": "CS",
-          "type": "PLAIN_COURSE",
-        },
-        Object {
-          "classId": 3740,
-          "description": "Systems Security",
-          "hour": 0,
-          "subject": "CY",
-          "type": "PLAIN_COURSE",
-        },
-        Object {
-          "classId": 4610,
-          "description": "Robotic Science and Systems",
-          "hour": 0,
-          "subject": "CS",
-          "type": "PLAIN_COURSE",
-        },
-        Object {
-          "classId": 4710,
-          "description": "Mobile and Wireless Systems",
-          "hour": 0,
-          "subject": "CS",
-          "type": "PLAIN_COURSE",
-        },
-        Object {
-          "classId": 4740,
-          "description": "Network Security",
-          "hour": 0,
-          "subject": "CY",
-          "type": "PLAIN_COURSE",
         },
       ],
     },
@@ -3481,11 +4861,21 @@ Object {
           "type": "HEADER",
         },
         Object {
-          "classId": 2322,
-          "description": "Fundamentals of Digital Design and Computer Organization",
-          "hour": 4,
-          "subject": "EECE",
-          "type": "PLAIN_COURSE",
+          "courses": Array [
+            Object {
+              "classId": 2322,
+              "description": "Fundamentals of Digital Design and Computer Organization",
+              "subject": "EECE",
+            },
+            Object {
+              "classId": 2323,
+              "description": "Lab for EECE 2322",
+              "subject": "EECE",
+            },
+          ],
+          "description": "Fundamentals of Digital Design and Computer Organization and Lab for EECE 2322",
+          "hour": 5,
+          "type": "AND_COURSE",
         },
         Object {
           "description": "Science Requirement",
@@ -3493,7 +4883,7 @@ Object {
           "type": "HEADER",
         },
         Object {
-          "description": "Complete two courses from one of the following science categories:",
+          "description": "Complete two courses (and any required labs) from the following science categories:",
           "hour": 8,
           "type": "COMMENT",
         },
@@ -3518,11 +4908,6 @@ Object {
           "description": "General Biology 1 and Lab for BIOL 1111",
           "hour": 0,
           "type": "AND_COURSE",
-        },
-        Object {
-          "description": "Then complete one of the following:",
-          "hour": 0,
-          "type": "COMMENT",
         },
         Object {
           "courses": Array [
@@ -3608,7 +4993,7 @@ Object {
           "type": "AND_COURSE",
         },
         Object {
-          "description": "Geology/Environmental Science (Option 1)",
+          "description": "Geology/Environmental Science",
           "hour": 0,
           "type": "SUBHEADER",
         },
@@ -3647,11 +5032,6 @@ Object {
           "type": "AND_COURSE",
         },
         Object {
-          "description": "Geology/Environmental Science (Option 2)",
-          "hour": 0,
-          "type": "SUBHEADER",
-        },
-        Object {
           "courses": Array [
             Object {
               "classId": 1200,
@@ -3667,11 +5047,6 @@ Object {
           "description": "Dynamic Earth and Lab for ENVR 1200",
           "hour": 0,
           "type": "AND_COURSE",
-        },
-        Object {
-          "description": "Then complete one of the following:",
-          "hour": 0,
-          "type": "COMMENT",
         },
         Object {
           "courses": Array [
@@ -3742,11 +5117,6 @@ Object {
           "type": "AND_COURSE",
         },
         Object {
-          "description": "Geology/Environmental Science (Option 3)",
-          "hour": 0,
-          "type": "SUBHEADER",
-        },
-        Object {
           "courses": Array [
             Object {
               "classId": 1202,
@@ -3812,16 +5182,6 @@ Object {
           "type": "SUBHEADER",
         },
         Object {
-          "description": "Complete one of the following sequences:",
-          "hour": 0,
-          "type": "COMMENT",
-        },
-        Object {
-          "description": "Sequence A",
-          "hour": 0,
-          "type": "COMMENT",
-        },
-        Object {
           "courses": Array [
             Object {
               "classId": 1145,
@@ -3854,11 +5214,6 @@ Object {
           "description": "Physics for Life Sciences 2 and Lab for PHYS 1147",
           "hour": 0,
           "type": "AND_COURSE",
-        },
-        Object {
-          "description": "Sequence B",
-          "hour": 0,
-          "type": "COMMENT",
         },
         Object {
           "courses": Array [
@@ -3903,11 +5258,6 @@ Object {
           "description": "Physics for Engineering 2 and Lab for PHYS 1155 and Interactive Learning Seminar for PHYS 1155",
           "hour": 0,
           "type": "AND_COURSE",
-        },
-        Object {
-          "description": "Sequence C",
-          "hour": 0,
-          "type": "COMMENT",
         },
         Object {
           "courses": Array [
@@ -4001,8 +5351,384 @@ Object {
         },
       ],
     },
+    Object {
+      "description": "Concentration in Artificial Intelligence",
+      "entries": Array [
+        Object {
+          "classId": 4100,
+          "description": "Artificial Intelligence",
+          "hour": 4,
+          "subject": "CS",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 4400,
+          "description": "Machine Learning and Data Mining 1",
+          "hour": 4,
+          "subject": "DS",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Complete two of the following courses not already taken:",
+          "hour": 8,
+          "type": "COMMENT",
+        },
+        Object {
+          "classId": 4120,
+          "description": "Natural Language Processing",
+          "hour": 0,
+          "subject": "CS",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 4150,
+          "description": "Game Artificial Intelligence",
+          "hour": 0,
+          "subject": "CS",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 4610,
+          "description": "Robotic Science and Systems",
+          "hour": 0,
+          "subject": "CS",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 4200,
+          "description": "Information Retrieval",
+          "hour": 0,
+          "subject": "IS",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 4420,
+          "description": "Machine Learning and Data Mining 2",
+          "hour": 0,
+          "subject": "DS",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 3466,
+          "description": "Cognition",
+          "hour": 0,
+          "subject": "PSYC",
+          "type": "PLAIN_COURSE",
+        },
+      ],
+    },
+    Object {
+      "description": "Concentration in Foundations",
+      "entries": Array [
+        Object {
+          "description": "Complete two of the following:",
+          "hour": 8,
+          "type": "COMMENT",
+        },
+        Object {
+          "classId": 2800,
+          "description": "Logic and Computation",
+          "hour": 0,
+          "subject": "CS",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 4820,
+          "description": "Computer-Aided Reasoning",
+          "hour": 0,
+          "subject": "CS",
+          "type": "OR_COURSE",
+        },
+        Object {
+          "classId": 4805,
+          "description": "Fundamentals of Complexity Theory",
+          "hour": 0,
+          "subject": "CS",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 4810,
+          "description": "Advanced Algorithms",
+          "hour": 0,
+          "subject": "CS",
+          "type": "OR_COURSE",
+        },
+        Object {
+          "description": "Complete two of the following courses not already taken:",
+          "hour": 8,
+          "type": "COMMENT",
+        },
+        Object {
+          "classId": 4805,
+          "description": "Fundamentals of Complexity Theory",
+          "hour": 0,
+          "subject": "CS",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 4810,
+          "description": "Advanced Algorithms",
+          "hour": 0,
+          "subject": "CS",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 4820,
+          "description": "Computer-Aided Reasoning",
+          "hour": 0,
+          "subject": "CS",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 4830,
+          "description": "System Specification, Verification, and Synthesis",
+          "hour": 0,
+          "subject": "CS",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "courses": Array [
+            Object {
+              "classId": 3950,
+              "description": "Introduction to Computer Science Research",
+              "subject": "CS",
+            },
+            Object {
+              "classId": 4950,
+              "description": "Computer Science Research Seminar",
+              "subject": "CS",
+            },
+            Object {
+              "classId": 4950,
+              "description": "Computer Science Research Seminar",
+              "subject": "CS",
+            },
+          ],
+          "description": "Introduction to Computer Science Research and Computer Science Research Seminar and Computer Science Research Seminar",
+          "hour": 0,
+          "type": "AND_COURSE",
+        },
+        Object {
+          "classId": 4770,
+          "description": "Cryptography",
+          "hour": 0,
+          "subject": "CY",
+          "type": "PLAIN_COURSE",
+        },
+      ],
+    },
+    Object {
+      "description": "Concentration in Human-Centered Computing",
+      "entries": Array [
+        Object {
+          "classId": 4300,
+          "description": "Human Computer Interaction",
+          "hour": 4,
+          "subject": "IS",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 4800,
+          "description": "Empirical Research Methods",
+          "hour": 4,
+          "subject": "IS",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Complete two of the following courses not already taken:",
+          "hour": 8,
+          "type": "COMMENT",
+        },
+        Object {
+          "classId": 2000,
+          "description": "Principles of Information Science",
+          "hour": 0,
+          "subject": "IS",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 4120,
+          "description": "Natural Language Processing",
+          "hour": 0,
+          "subject": "CS",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 4550,
+          "description": "Web Development",
+          "hour": 0,
+          "subject": "CS",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 4200,
+          "description": "Information Presentation and Visualization",
+          "hour": 0,
+          "subject": "DS",
+          "type": "PLAIN_COURSE",
+        },
+      ],
+    },
+    Object {
+      "description": "Concentration in Software",
+      "entries": Array [
+        Object {
+          "classId": 2800,
+          "description": "Logic and Computation",
+          "hour": 4,
+          "subject": "CS",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 3700,
+          "description": "Networks and Distributed Systems",
+          "hour": 4,
+          "subject": "CS",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 4400,
+          "description": "Programming Languages",
+          "hour": 4,
+          "subject": "CS",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Complete one of the following courses not already taken:",
+          "hour": 0,
+          "type": "COMMENT",
+        },
+        Object {
+          "classId": 3520,
+          "description": "Programming in C++",
+          "hour": 0,
+          "subject": "CS",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 3620,
+          "description": "Building Extensible Systems",
+          "hour": 0,
+          "subject": "CS",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 4240,
+          "description": "Large-Scale Parallel Data Processing",
+          "hour": 0,
+          "subject": "CS",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 4410,
+          "description": "Compilers",
+          "hour": 0,
+          "subject": "CS",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 4550,
+          "description": "Web Development",
+          "hour": 0,
+          "subject": "CS",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 4820,
+          "description": "Computer-Aided Reasoning",
+          "hour": 0,
+          "subject": "CS",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 4830,
+          "description": "System Specification, Verification, and Synthesis",
+          "hour": 0,
+          "subject": "CS",
+          "type": "PLAIN_COURSE",
+        },
+      ],
+    },
+    Object {
+      "description": "Concentration in Systems",
+      "entries": Array [
+        Object {
+          "classId": 3700,
+          "description": "Networks and Distributed Systems",
+          "hour": 4,
+          "subject": "CS",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Complete one of the following courses not already taken:",
+          "hour": 4,
+          "type": "COMMENT",
+        },
+        Object {
+          "classId": 3740,
+          "description": "Systems Security",
+          "hour": 0,
+          "subject": "CY",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 4740,
+          "description": "Network Security",
+          "hour": 0,
+          "subject": "CY",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "description": "Complete two of the following courses not already taken:",
+          "hour": 8,
+          "type": "COMMENT",
+        },
+        Object {
+          "classId": 3520,
+          "description": "Programming in C++",
+          "hour": 0,
+          "subject": "CS",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 4300,
+          "description": "Computer Graphics",
+          "hour": 0,
+          "subject": "CS",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 3740,
+          "description": "Systems Security",
+          "hour": 0,
+          "subject": "CY",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 4610,
+          "description": "Robotic Science and Systems",
+          "hour": 0,
+          "subject": "CS",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 4710,
+          "description": "Mobile and Wireless Systems",
+          "hour": 0,
+          "subject": "CS",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 4740,
+          "description": "Network Security",
+          "hour": 0,
+          "subject": "CY",
+          "type": "PLAIN_COURSE",
+        },
+      ],
+    },
   ],
-  "yearVersion": 2021,
+  "yearVersion": 2022,
 }
 `;
 
@@ -4194,6 +5920,66 @@ Object {
       ],
     },
     Object {
+      "description": "Concentration in Accounting and Advisory Services",
+      "entries": Array [
+        Object {
+          "description": "Required Courses",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "classId": 3402,
+          "description": "Financial Reporting and Financial Statement Analysis",
+          "hour": 4,
+          "subject": "ACCT",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 3403,
+          "description": "Advisory Services and Emerging Accounting Systems",
+          "hour": 4,
+          "subject": "ACCT",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 5220,
+          "description": "Data Analytics for Advisory Services",
+          "hour": 4,
+          "subject": "ACCT",
+          "type": "PLAIN_COURSE",
+        },
+      ],
+    },
+    Object {
+      "description": "",
+      "entries": Array [
+        Object {
+          "description": "Elective",
+          "hour": 0,
+          "type": "HEADER",
+        },
+        Object {
+          "description": "Complete one of the following:",
+          "hour": 4,
+          "type": "COMMENT",
+        },
+        Object {
+          "classId": 3416,
+          "description": "Strategic Cost Analysis for Decision Making",
+          "hour": 0,
+          "subject": "ACCT",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 4414,
+          "description": "Income Tax Determination and Planning",
+          "hour": 0,
+          "subject": "ACCT",
+          "type": "PLAIN_COURSE",
+        },
+      ],
+    },
+    Object {
       "description": "Concentration in Brand Management",
       "entries": Array [
         Object {
@@ -4217,6 +6003,20 @@ Object {
           "description": "Complete three electives, with at least 8 credits from MKTG courses:",
           "hour": 12,
           "type": "COMMENT",
+        },
+        Object {
+          "classId": 2301,
+          "description": "Innovation!",
+          "hour": 0,
+          "subject": "ENTR",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 3530,
+          "description": "Project Management",
+          "hour": 0,
+          "subject": "MGMT",
+          "type": "PLAIN_COURSE",
         },
         Object {
           "classId": 2720,
@@ -4269,7 +6069,7 @@ Object {
         },
         Object {
           "classId": 3330,
-          "description": "Lean Design and Rapid Prototyping",
+          "description": "Design Thinking for Startups",
           "hour": 0,
           "subject": "ENTR",
           "type": "OR_COURSE",
@@ -4286,27 +6086,6 @@ Object {
           "description": "Understanding the Platform Economy",
           "hour": 0,
           "subject": "MKTG",
-          "type": "PLAIN_COURSE",
-        },
-        Object {
-          "classId": 2301,
-          "description": "Innovation!",
-          "hour": 0,
-          "subject": "ENTR",
-          "type": "PLAIN_COURSE",
-        },
-        Object {
-          "classId": 3530,
-          "description": "Project Management",
-          "hour": 0,
-          "subject": "MGMT",
-          "type": "PLAIN_COURSE",
-        },
-        Object {
-          "classId": 3320,
-          "description": "Forecasting and Sales  Operations Planning",
-          "hour": 0,
-          "subject": "SCHM",
           "type": "PLAIN_COURSE",
         },
         Object {
@@ -4391,7 +6170,7 @@ Object {
       ],
     },
     Object {
-      "description": "Concentration in Corporate Innovation and Venture",
+      "description": "Concentration in Corporate Innovation",
       "entries": Array [
         Object {
           "description": "Required Courses",
@@ -4407,7 +6186,7 @@ Object {
         },
         Object {
           "classId": 4504,
-          "description": "Advanced Studies in Corporate Innovation",
+          "description": "Corporate Innovation Seminar",
           "hour": 4,
           "subject": "ENTR",
           "type": "PLAIN_COURSE",
@@ -4418,7 +6197,7 @@ Object {
           "type": "HEADER",
         },
         Object {
-          "description": "Complete two electives, one of which may come from the additional elective list:",
+          "description": "Complete two electives, one of which may come from the additional electives list:",
           "hour": 8,
           "type": "COMMENT",
         },
@@ -4472,13 +6251,6 @@ Object {
         Object {
           "classId": 4983,
           "description": "Special Topics in Entrepreneurship",
-          "hour": 0,
-          "subject": "ENTR",
-          "type": "PLAIN_COURSE",
-        },
-        Object {
-          "classId": 4505,
-          "description": "Entrepreneurial Growth Strategy for Technology Ventures",
           "hour": 0,
           "subject": "ENTR",
           "type": "PLAIN_COURSE",
@@ -4542,7 +6314,7 @@ Object {
         },
         Object {
           "classId": 4501,
-          "description": "Advanced Studies in Entrepreneurial Startups",
+          "description": "Entrepreneurship Seminar",
           "hour": 4,
           "subject": "ENTR",
           "type": "PLAIN_COURSE",
@@ -4573,7 +6345,7 @@ Object {
         },
         Object {
           "classId": 3330,
-          "description": "Lean Design and Rapid Prototyping",
+          "description": "Design Thinking for Startups",
           "hour": 0,
           "subject": "ENTR",
           "type": "PLAIN_COURSE",
@@ -4600,6 +6372,13 @@ Object {
         Object {
           "classId": 2304,
           "description": "Industry Disruption and Corporate Transformation",
+          "hour": 0,
+          "subject": "ENTR",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 4505,
+          "description": "Entrepreneurial Venture Growth Strategies",
           "hour": 0,
           "subject": "ENTR",
           "type": "PLAIN_COURSE",
@@ -4649,7 +6428,7 @@ Object {
         },
         Object {
           "classId": 4503,
-          "description": "Advanced Studies in Family Business",
+          "description": "Owner and Family Managed Business Seminar",
           "hour": 4,
           "subject": "ENTR",
           "type": "PLAIN_COURSE",
@@ -5277,8 +7056,8 @@ Object {
           "type": "SUBHEADER",
         },
         Object {
-          "classId": 3202,
-          "description": "Managing the International Assignment",
+          "classId": 3205,
+          "description": "Understanding and Managing Cultural Differences",
           "hour": 0,
           "subject": "INTB",
           "type": "PLAIN_COURSE",
@@ -5342,18 +7121,6 @@ Object {
           "description": "Global Supply Chain Strategy",
           "hour": 0,
           "subject": "SCHM",
-          "type": "PLAIN_COURSE",
-        },
-        Object {
-          "description": "Contextual Experience",
-          "hour": 0,
-          "type": "SUBHEADER",
-        },
-        Object {
-          "classId": 4512,
-          "description": "Social Entrepreneurship and Sustainable Development in India",
-          "hour": 0,
-          "subject": "ENTR",
           "type": "PLAIN_COURSE",
         },
         Object {
@@ -5572,13 +7339,6 @@ Object {
           "subject": "MISM",
           "type": "PLAIN_COURSE",
         },
-        Object {
-          "classId": 5001,
-          "description": "Data-Driven and Technology-Enabled Value Creation in Digital Economy",
-          "hour": 0,
-          "subject": "BUSN",
-          "type": "PLAIN_COURSE",
-        },
       ],
     },
     Object {
@@ -5590,22 +7350,15 @@ Object {
           "type": "HEADER",
         },
         Object {
+          "classId": 2602,
+          "description": "Quantitative Analysis of Consumer Data",
+          "hour": 4,
+          "subject": "MKTG",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
           "classId": 3401,
           "description": "Marketing Research",
-          "hour": 4,
-          "subject": "MKTG",
-          "type": "PLAIN_COURSE",
-        },
-        Object {
-          "classId": 3301,
-          "description": "Marketing Management",
-          "hour": 4,
-          "subject": "MKTG",
-          "type": "PLAIN_COURSE",
-        },
-        Object {
-          "classId": 4506,
-          "description": "Consumer Behavior",
           "hour": 0,
           "subject": "MKTG",
           "type": "OR_COURSE",
@@ -5616,8 +7369,8 @@ Object {
           "type": "HEADER",
         },
         Object {
-          "description": "Complete two of the following:",
-          "hour": 8,
+          "description": "Complete three of the following:",
+          "hour": 12,
           "type": "COMMENT",
         },
         Object {
@@ -5628,8 +7381,36 @@ Object {
           "type": "PLAIN_COURSE",
         },
         Object {
+          "classId": 2602,
+          "description": "Quantitative Analysis of Consumer Data (if not taken as a required course)",
+          "hour": 0,
+          "subject": "MKTG",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 2720,
+          "description": "Enabling Technologies for Consumer Engagement",
+          "hour": 0,
+          "subject": "MKTG",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
           "classId": 3301,
-          "description": "Marketing Management (if not selected as a required course)",
+          "description": "Marketing Management",
+          "hour": 0,
+          "subject": "MKTG",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 3401,
+          "description": "Marketing Research (if not taken as a required course)",
+          "hour": 0,
+          "subject": "MKTG",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 3402,
+          "description": "Gaining Insights from Consumer Data",
           "hour": 0,
           "subject": "MKTG",
           "type": "PLAIN_COURSE",
@@ -5642,8 +7423,15 @@ Object {
           "type": "PLAIN_COURSE",
         },
         Object {
-          "classId": 4220,
-          "description": "Marketing in Asia",
+          "classId": 3720,
+          "description": "Brand Management",
+          "hour": 0,
+          "subject": "MKTG",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 4120,
+          "description": "Undergraduate Research Practicum in Marketing",
           "hour": 0,
           "subject": "MKTG",
           "type": "PLAIN_COURSE",
@@ -5671,7 +7459,7 @@ Object {
         },
         Object {
           "classId": 4506,
-          "description": "Consumer Behavior (if not selected as a required course)",
+          "description": "Consumer Behavior",
           "hour": 0,
           "subject": "MKTG",
           "type": "PLAIN_COURSE",
@@ -5693,6 +7481,20 @@ Object {
         Object {
           "classId": 4512,
           "description": "International Marketing",
+          "hour": 0,
+          "subject": "MKTG",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 4520,
+          "description": "Business-to-Business Marketing",
+          "hour": 0,
+          "subject": "MKTG",
+          "type": "PLAIN_COURSE",
+        },
+        Object {
+          "classId": 4720,
+          "description": "Understanding the Platform Economy",
           "hour": 0,
           "subject": "MKTG",
           "type": "PLAIN_COURSE",
@@ -5798,7 +7600,7 @@ Object {
         },
         Object {
           "classId": 4506,
-          "description": "Advanced Studies in Social Innovation  Entrepreneurship",
+          "description": "Seminar in Social Innovation and Entrepreneurship",
           "hour": 4,
           "subject": "ENTR",
           "type": "PLAIN_COURSE",
@@ -5949,13 +7751,6 @@ Object {
           "type": "PLAIN_COURSE",
         },
         Object {
-          "classId": 3320,
-          "description": "Forecasting and Sales  Operations Planning",
-          "hour": 0,
-          "subject": "SCHM",
-          "type": "PLAIN_COURSE",
-        },
-        Object {
           "classId": 4401,
           "description": "Contemporary Topics in Supply Chain Management",
           "hour": 0,
@@ -6062,6 +7857,6 @@ Object {
       ],
     },
   ],
-  "yearVersion": 2021,
+  "yearVersion": 2022,
 }
 `;

@@ -1,12 +1,18 @@
 import { fetchAndTokenizeHTML } from "../src/tokenize/tokenize";
 import {
-  CS_GAME_DEV,
-  BUSINESS,
-  PHYSICS,
+  ARCH_ENGLISH,
+  BIOENG_BIOCHEM,
   BSCS,
-  MEDIA_SCREEN_STUDIES_HISTORY,
-  CS_HISTORY,
+  BUSINESS,
   CHEMICAL_ENG,
+  CS_GAME_DEV,
+  CS_HISTORY,
+  CS_MATH,
+  MEDIA_SCREEN_STUDIES_HISTORY,
+  PHARM_SCI_BS,
+  PHARMD,
+  PHYSICS,
+  PUBLIC_HEALTH_BA,
 } from "./testUrls";
 
 describe("scraper v2 snapshot tests", () => {
@@ -29,6 +35,10 @@ describe("scraper v2 snapshot tests", () => {
       await fetchAndTokenizeHTML(MEDIA_SCREEN_STUDIES_HISTORY)
     ).toMatchSnapshot();
   });
+  // Range bounded with exceptions
+  test("Test range bounded with exceptions (cs and math)", async () => {
+    expect(await fetchAndTokenizeHTML(CS_MATH)).toMatchSnapshot();
+  });
   // Range lower bounded
   test("Test range lower bounded (cs & history)", async () => {
     expect(await fetchAndTokenizeHTML(CS_HISTORY)).toMatchSnapshot();
@@ -36,5 +46,26 @@ describe("scraper v2 snapshot tests", () => {
   // Range unbounded
   test("Test range unbounded (chemical engineering)", async () => {
     expect(await fetchAndTokenizeHTML(CHEMICAL_ENG)).toMatchSnapshot();
+  });
+  // Or of ands
+  test("Test OR of ANDs (bioengineering biochemistry)", async () => {
+    expect(await fetchAndTokenizeHTML(BIOENG_BIOCHEM)).toMatchSnapshot();
+  });
+  // no tabs
+  test("Test NO tabs (architecture and english)", async () => {
+    expect(await fetchAndTokenizeHTML(ARCH_ENGLISH)).toMatchSnapshot();
+  });
+  describe("weird program requirement hours text placement", () => {
+    const get = (url: URL) =>
+      fetchAndTokenizeHTML(url).then((h) => h.programRequiredHours);
+    test("Minimum of x hours", async () => {
+      expect(await get(PUBLIC_HEALTH_BA)).toBeGreaterThan(0);
+    });
+    test("paragraph in front of `x total hrs`", async () => {
+      expect(await get(PHARMD)).toBeGreaterThan(0);
+    });
+    test("paragraph in front of `Minimum of x hrs`", async () => {
+      expect(await get(PHARM_SCI_BS)).toBeGreaterThan(0);
+    });
   });
 });

@@ -1,18 +1,21 @@
-import { convertToHierarchy, joinParts, loadHTML } from "../utils";
-import { CatalogHierarchy, College, CatalogPath } from "./types";
+import { loadHtmlWithUrl } from "../utils";
+import { CatalogURLResult, College } from "./types";
+import { ResultType } from "@graduate/common";
+import { join } from "path";
+import { BASE_URL } from "../constants";
 
 /**
  * Scrapes all catalog entries underneath the colleges for the specified catalog
  * year (given in the form of two numbers to avoid ambiguity: ex, 2021-2022).
  *
- * @param start starting year (must be end year - 1)
- * @param end   ending year
- * @returns     a hierarchy of catalog entry links
+ * @param   start Starting year (must be end year - 1)
+ * @param   end   Ending year
+ * @returns       A hierarchy of catalog entry links
  */
 export const scrapeMajorLinks = async (
   start: number,
   end: number
-): Promise<CatalogHierarchy> => {
+): Promise<CatalogURLResult> => {
   if (start !== end - 1) {
     throw new Error("start should == end-1");
   }
@@ -28,96 +31,106 @@ export const scrapeMajorLinks = async (
     throw new Error("only current year is supported");
   }
 
-  return scrapeMajorLinksForUrl(
-    "https://catalog.northeastern.edu",
-    "undergraduate"
-  );
+  return scrapeMajorLinksForUrl(BASE_URL, "undergraduate");
 };
 
 /**
- * Given a baseUrl and a path, attempts to scrape the major catalog based on the sidebar
- * hierarchy.
- * @param baseUrl the base url of the major catalog. should look something
- *                like "https://catalog.northeastern.edu"
- * @param path    the path of the major catalog. something like "/undergraduate"
- *                or "archive/2018-2019/undergraduate/". trailing or leading slashes are ok.
+ * Given a baseUrl and a path, attempts to scrape the major catalog based on the
+ * sidebar hierarchy.
+ *
+ * Assumes that the provided baseURL + path have direct sub-entries for each of
+ * the colleges.
+ *
+ * @param baseUrl The base url of the major catalog. should look something like
+ *   "https://catalog.northeastern.edu"
+ * @param path    The path of the major catalog. something like
+ *   "/undergraduate/" or "/archive/2018-2019/undergraduate".
  */
 export const scrapeMajorLinksForUrl = async (
   baseUrl: string,
   path: string
-): Promise<CatalogHierarchy> => {
-  const paths = getPathParts(path);
-  const initQueue = Object.values(College).map((college) => ({
-    path: [...paths, college],
-  }));
-  const catalogPaths = await scrapeLinks(baseUrl, initQueue);
-  return convertToHierarchy(baseUrl, catalogPaths);
+): Promise<CatalogURLResult> => {
+  const initQueue = Object.values(College).map(
+    (college) => new URL(join(baseUrl, path, college, "/"))
+  );
+  return await scrapeLinks(baseUrl, initQueue);
 };
 
 /**
+ * Retrieves all sub-entries of the given initial queue in BFS fashion using the
+ * catalog sidebar hierarchy.
  *
- * Retrieves all sub-entries of the given initial queue in BFS fashion using the catalog sidebar hierarchy.
- *
- * @param baseUrl   the base catalog URL, i.e. https://catalog.northeastern.edu
- * @param initQueue a queue of parent entries
- * @returns         a flat list of all the last level children catalog entries
+ * @param   baseUrl   The base catalog URL, i.e. https://catalog.northeastern.edu
+ * @param   initQueue A queue of parent entries
+ * @returns           A flat list of all the last level children catalog entries
  */
 const scrapeLinks = async (
   baseUrl: string,
-  initQueue: CatalogPath[]
-): Promise<CatalogPath[]> => {
-  const results: CatalogPath[] = [];
+  initQueue: URL[]
+): Promise<CatalogURLResult> => {
+  const entries: URL[] = [];
+  const unfinished = [];
 
+  // there are multiple links in the sidebar to the same entry
+  // keep a set to avoid visiting the same entry twice
+  const seen = new Set(initQueue.map((url) => url.href));
   let queue = initQueue;
   while (queue.length > 0) {
-    const pages = await Promise.all(getUrlHtmls(queue, baseUrl));
-    const nextQueue: CatalogPath[] = [];
-    for (const { $, url } of pages) {
+    const { ok, errors } = await getUrlHtmls(queue);
+    unfinished.push(...errors);
+    const nextQueue: URL[] = [];
+    for (const { $, url } of ok) {
       const children = getChildrenForPathId($, url).toArray().map($);
       for (const element of children) {
         const path = getLinkForEl(element);
-        const bucket = isParent(element) ? nextQueue : results;
-        bucket.push({ path });
+        const url = new URL(join(baseUrl, path));
+        if (!seen.has(url.href)) {
+          const bucket = isParent(element) ? nextQueue : entries;
+          bucket.push(url);
+          seen.add(url.href);
+        }
       }
     }
     queue = nextQueue;
   }
 
-  return results;
+  return { entries, unfinished };
 };
 
 const isParent = (el: Cheerio) => {
   return el.hasClass("isparent");
 };
 
-const getPathParts = (url: string) => {
-  return url.split("/").filter((s) => s !== "");
-};
-
-const getLinkForEl = (element: Cheerio): string[] => {
+const getLinkForEl = (element: Cheerio) => {
   const aTag = element.find("a");
   if (aTag.length === 0) {
     const msg = "Catalog is missing a link for a parent element.";
     throw new Error(msg);
   }
 
-  return getPathParts(aTag.attr("href"));
+  return aTag.attr("href");
 };
 
 const getChildrenForPathId = ($: CheerioStatic, url: URL) => {
   // The catalog entries have an ID equal to the path, with a trailing slash
   // We select the element via its ID
   // Note: for getElementById, forward slashes need to be escaped
-  const id = url.pathname.split("/").join("\\/");
-  const current = $(`#${id}\\/`);
+  const id = url.pathname.replaceAll("/", "\\/");
+  const current = $(`#${id}`);
   return current.children();
 };
 
-const fetchUrlHtml = async (url: URL) => {
-  const r = await loadHTML(url.href);
-  return { $: r, url };
-};
+const getUrlHtmls = async (queue: URL[]) => {
+  const fetchResults = await Promise.all(queue.map(loadHtmlWithUrl));
 
-const getUrlHtmls = (queue: CatalogPath[], base: string) => {
-  return queue.map(({ path }) => joinParts(base, path)).map(fetchUrlHtml);
+  const ok = [];
+  const errors = [];
+  for (const { url, result } of fetchResults) {
+    if (result.type === ResultType.Ok) {
+      ok.push({ $: result.ok, url });
+      continue;
+    }
+    errors.push({ error: result.err, url });
+  }
+  return { ok, errors };
 };
