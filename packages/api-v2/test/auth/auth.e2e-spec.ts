@@ -5,7 +5,7 @@ import * as request from "supertest";
 import { Connection } from "typeorm";
 import { AppModule } from "../../src/app.module";
 
-const testData = {
+const testUser = {
   fullName: "Tester",
   nuid: "000000000",
   email: "test-auth@gmail.com",
@@ -43,14 +43,14 @@ describe("AuthController (e2e)", () => {
   it("registers a new user", async () => {
     await request(app.getHttpServer())
       .post("/auth/register")
-      .send(testData)
+      .send(testUser)
       .expect(201);
   });
 
   it("fails to register an existing user", async () => {
     await request(app.getHttpServer())
       .post("/auth/register")
-      .send(testData)
+      .send(testUser)
       .expect({ statusCode: 400, message: "Bad Request" });
   });
 
