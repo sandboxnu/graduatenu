@@ -1,10 +1,41 @@
 import { INestApplication } from "@nestjs/common";
 import { Test, TestingModule } from "@nestjs/testing";
+import { Plan } from "../../src/plan/entities/plan.entity";
+import { Student } from "../../src/student/entities/student.entity";
 import * as request from "supertest";
+import { Connection } from "typeorm";
 import { AppModule } from "../../src/app.module";
+
+const testUser = {
+  fullName: "Tester",
+  nuid: "000000000",
+  email: "test-student@gmail.com",
+  password: "1234567890",
+  academicYear: 2019,
+  graduateYear: 2023,
+  catalogYear: 2019,
+  major: "Computer Science",
+};
+
+const testPlan = {
+  name: "Test Student",
+  schedule: {
+    years: [2019, 2020, 2021, 2022],
+    yearMap: {},
+  },
+  major: "Computer Science",
+  coopCycle: "4 year 2 co-ops",
+  concentration: "Artificial Intelligence",
+  catalogYear: 2019,
+  courseWarnings: [],
+  warnings: [],
+};
 
 describe("StudentController (e2e)", () => {
   let app: INestApplication;
+  let jwtToken: string;
+  let connection: Connection;
+  let uuid: string;
 
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
@@ -13,36 +44,59 @@ describe("StudentController (e2e)", () => {
     app = moduleFixture.createNestApplication();
 
     await app.init();
+
+    connection = app.get(Connection);
   });
 
-  it("should fail to get a student without authorization token", async () => {
-    return request(app.getHttpServer()).get("/students/me").expect(401);
+  afterAll(async () => {
+    await connection
+      .createQueryBuilder()
+      .delete()
+      .from(Student)
+      .where("email = :email", { email: "test-student@gmail.com" })
+      .execute();
+
+    await app.close();
   });
 
   it("should successfully get a student", async () => {
-    const response = await request(app.getHttpServer())
+    // register student
+    const res = await request(app.getHttpServer())
       .post("/auth/register")
-      .send({
-        fullName: "Tester",
-        nuid: "000000000",
-        email: "test-get@gmail.com",
-        password: "1234567890",
-        academicYear: "2019",
-        graduateYear: "2023",
-        catalogYear: "2019",
-        major: "Computer Engineering and Computer Science",
-      })
+      .send(testUser)
       .expect(201);
+
+    // record access token & userID
+    jwtToken = res.body.accessToken;
+    uuid = res.body.uuid;
 
     await request(app.getHttpServer())
       .get("/students/me")
-      .set("Authorization", `Bearer ${response.body.accessToken}`)
+      .set("Authorization", `Bearer ${jwtToken}`)
+      .expect(200);
+  });
+
+  it("should fail to get a student without authorization token", async () => {
+    await request(app.getHttpServer()).get("/students/me").expect(401);
+  });
+
+  it("should get a student with plans", async () => {
+    // create plan for student
+    await connection
+      .createQueryBuilder()
+      .insert()
+      .into(Plan)
+      .values([{ ...testPlan, student: { uuid, ...testUser } }])
+      .execute();
+
+    const res = await request(app.getHttpServer())
+      .get("/students/me")
+      .set("Authorization", `Bearer ${jwtToken}`)
+      .query({ isWithPlans: true })
       .expect(200);
 
-    await request(app.getHttpServer())
-      .delete("/students/me")
-      .set("Authorization", `Bearer ${response.body.accessToken}`)
-      .expect(200);
+    // plan should be defined in the response
+    expect(res.body.plans).toBeDefined();
   });
 
   it("should not update a student without authorization token", () => {
@@ -50,29 +104,10 @@ describe("StudentController (e2e)", () => {
   });
 
   it("should successfully update a student", async () => {
-    const response = await request(app.getHttpServer())
-      .post("/auth/register")
-      .send({
-        fullName: "Tester",
-        nuid: "000000000",
-        email: "test-update@gmail.com",
-        password: "1234567890",
-        academicYear: "2019",
-        graduateYear: "2023",
-        catalogYear: "2019",
-        major: "Computer Engineering and Computer Science",
-      })
-      .expect(201);
-
     await request(app.getHttpServer())
       .patch("/students/me")
       .send({ graduateYear: 2022 })
-      .set("Authorization", `Bearer ${response.body.accessToken}`)
-      .expect(200);
-
-    await request(app.getHttpServer())
-      .delete("/students/me")
-      .set("Authorization", `Bearer ${response.body.accessToken}`)
+      .set("Authorization", `Bearer ${jwtToken}`)
       .expect(200);
   });
 
@@ -81,33 +116,9 @@ describe("StudentController (e2e)", () => {
   });
 
   it("should successfully delete a student", async () => {
-    const response = await request(app.getHttpServer())
-      .post("/auth/register")
-      .send({
-        fullName: "Tester",
-        nuid: "000000000",
-        email: "test-delete@gmail.com",
-        password: "1234567890",
-        academicYear: "2019",
-        graduateYear: "2023",
-        catalogYear: "2019",
-        major: "Computer Engineering and Computer Science",
-      })
-      .expect(201);
-
-    return request(app.getHttpServer())
+    await request(app.getHttpServer())
       .delete("/students/me")
-      .set("Authorization", `Bearer ${response.body.accessToken}`)
+      .set("Authorization", `Bearer ${jwtToken}`)
       .expect(200);
   });
-
-  // it("/ (POST)", () => {});
-
-  // it("/ (GET)", () => {});
-
-  // it("/:uuid (GET)", () => {});
-
-  // it("/:uuid (PATCH)", () => {});
-
-  // it("/:uuid (DELETE)", () => {});
 });
