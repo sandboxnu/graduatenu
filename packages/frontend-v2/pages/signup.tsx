@@ -120,3 +120,5 @@ const Signup: NextPage = () => {
 };
 
 export default Signup;
+
+//TODO: fix logic and validation, then replicate for login
