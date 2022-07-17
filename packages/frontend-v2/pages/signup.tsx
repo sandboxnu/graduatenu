@@ -3,7 +3,7 @@ import { NextPage } from "next";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { classValidatorResolver } from "@hookform/resolvers/class-validator";
-import { CreateStudentDto } from "@graduate/common";
+import { CreateStudentDto } from "../temp/dto-types";
 // import { API } from "@graduate/api-client";
 import {
   Button,
@@ -20,13 +20,13 @@ const Signup: NextPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
+  const resolver = classValidatorResolver(CreateStudentDto);
+
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm({
-    resolver: classValidatorResolver(CreateStudentDto),
-  });
+  } = useForm<CreateStudentDto>({ resolver });
 
   const onSubmitHandler = async (data: any) => {
     console.log(data);
@@ -84,7 +84,7 @@ const Signup: NextPage = () => {
         </InputGroup>
         <FormErrorMessage>{errors.password?.message}</FormErrorMessage>
       </FormControl>
-
+      
       <FormControl isInvalid={errors.confirmPassword != null}>
         <InputGroup>
           <Input
