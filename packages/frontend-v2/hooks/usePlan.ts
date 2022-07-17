@@ -16,15 +16,15 @@ type UsePlanReturn = PlanResponse & {
 
 /**
  * Gets the specified plan from the given planId in SWR.
+ *
  * @param planId The specific plan to retrieve.
- * @param jwt JWT for authentication. Will later be removed when we switch to cookies.
  */
-export function usePlan(planId: number, jwt: string): UsePlanReturn {
+export function usePlan(planId: number): UsePlanReturn {
   const key = `api/plans/${planId}`;
 
   const { data, mutate, ...rest } = useSWR(
     key,
-    async () => await API.plans.get(planId, jwt)
+    async () => await API.plans.get(planId)
   );
 
   return {
