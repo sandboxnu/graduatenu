@@ -20,6 +20,7 @@ export class UpdatePlanResponse extends PlanModel {}
 export class StudentModel {
   uuid: string;
   nuid: string;
+  isOnboarded: boolean;
   fullName: string;
   email: string;
   academicYear: number | undefined;
