@@ -1,11 +1,9 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { NextPage } from "next";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { classValidatorResolver } from "@hookform/resolvers/class-validator";
 import { CreateStudentDto } from "../temp/dto-types";
 import { API } from "@graduate/api-client";
-import { useEffect } from "react";
 import {
   Button,
   FormControl,
@@ -31,18 +29,13 @@ const Signup: NextPage = () => {
     shouldFocusError: true,
   });
 
-  const capitalizeFirstLetter = (s: string | undefined) => s ? s.charAt(0).toUpperCase() + s.slice(1) : undefined;
+  const capitalizeFirstLetter = (s: string | undefined) =>
+    s ? s.charAt(0).toUpperCase() + s.slice(1) : undefined;
 
   // Auto login & onboarding stuff
-  const onSubmitHandler = async ({
-    email,
-    password,
-  }: {
-    email: string;
-    password: string;
-  }) => {
+  const onSubmitHandler = async (payload: CreateStudentDto) => {
     try {
-      const user = await API.auth.register({ email, password });
+      const user = await API.auth.register(payload);
       if (user) {
         if (user.isOnboarded)
           // redirect to home
@@ -70,8 +63,14 @@ const Signup: NextPage = () => {
       )}
 
       <FormControl isInvalid={errors.email != null}>
-        <Input id="email" placeholder="example@email.com" {...register("email")} />
-        <FormErrorMessage>{capitalizeFirstLetter(errors.email?.message)}</FormErrorMessage>
+        <Input
+          id="email"
+          placeholder="example@email.com"
+          {...register("email")}
+        />
+        <FormErrorMessage>
+          {capitalizeFirstLetter(errors.email?.message)}
+        </FormErrorMessage>
       </FormControl>
 
       <FormControl isInvalid={errors.password != null}>
@@ -93,7 +92,9 @@ const Signup: NextPage = () => {
             </Button>
           </InputRightElement>
         </InputGroup>
-        <FormErrorMessage>{capitalizeFirstLetter(errors.password?.message)}</FormErrorMessage>
+        <FormErrorMessage>
+          {capitalizeFirstLetter(errors.password?.message)}
+        </FormErrorMessage>
       </FormControl>
 
       <FormControl isInvalid={errors.passwordConfirm != null}>
@@ -115,7 +116,9 @@ const Signup: NextPage = () => {
             </Button>
           </InputRightElement>
         </InputGroup>
-        <FormErrorMessage>{capitalizeFirstLetter(errors.passwordConfirm?.message)}</FormErrorMessage>
+        <FormErrorMessage>
+          {capitalizeFirstLetter(errors.passwordConfirm?.message)}
+        </FormErrorMessage>
       </FormControl>
 
       <Button
