@@ -69,7 +69,8 @@ export class Student {
   @UpdateDateColumn({ default: () => "NOW()" })
   updatedAt: Date;
 
-  // attached to the student object when the student logs in
+  @Exclude()
+  // attached to the student object to be stored as a cookie only
   accessToken?: string;
 
   @BeforeInsert()

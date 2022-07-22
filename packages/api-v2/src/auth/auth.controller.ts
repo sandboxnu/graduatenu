@@ -26,11 +26,12 @@ export class AuthController {
     @Body() createStudentDto: SignUpDto
   ): Promise<GetStudentResponse> {
     const student = await this.authService.register(createStudentDto);
-    const { accessToken, ...studentInfo } = student;
 
     if (!student) {
       throw new BadRequestException();
     }
+
+    const { accessToken } = student;
 
     const isSecure = process.env.NODE_ENV !== "development";
     // Store JWT token in a cookie
@@ -40,7 +41,7 @@ export class AuthController {
       secure: isSecure,
     });
 
-    return studentInfo;
+    return student;
   }
 
   @Post("login")
@@ -49,11 +50,12 @@ export class AuthController {
     @Body() loginUserDto: LoginStudentDto
   ): Promise<GetStudentResponse> {
     const student = await this.authService.login(loginUserDto);
-    const { accessToken, ...studentInfo } = student;
 
     if (!student) {
       throw new UnauthorizedException();
     }
+
+    const { accessToken } = student;
 
     const isSecure = process.env.NODE_ENV !== "development";
     // Store JWT token in a cookie
@@ -62,7 +64,7 @@ export class AuthController {
       sameSite: "strict",
       secure: isSecure,
     });
-    return studentInfo;
+    return student;
   }
 
   @Get("logout")
