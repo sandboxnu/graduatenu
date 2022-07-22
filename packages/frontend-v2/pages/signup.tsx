@@ -4,7 +4,8 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { classValidatorResolver } from "@hookform/resolvers/class-validator";
 import { CreateStudentDto } from "../temp/dto-types";
-// import { API } from "@graduate/api-client";
+import { API } from "@graduate/api-client";
+import { useEffect } from "react";
 import {
   Button,
   FormControl,
@@ -20,28 +21,38 @@ const Signup: NextPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const resolver = classValidatorResolver(CreateStudentDto);
-
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<CreateStudentDto>({ resolver });
+  } = useForm<CreateStudentDto>({
+    resolver: classValidatorResolver(CreateStudentDto),
+    mode: "onTouched",
+    shouldFocusError: true,
+  });
 
-  const onSubmitHandler = async (data: any) => {
-    console.log(data);
-    // try {
-    //   const user = await API.auth.register({ email, password });
-    //   if (user) {
-    //     if (user.isOnboarded)
-    //       // redirect to home
-    //       console.log("redirect to home");
-    //     // redirect to onboarding
-    //     else console.log("redirect to onboarding");
-    //   }
-    // } catch (err) {
-    //   setApiError("Invalid Credentials. Please try again");
-    // }
+  const capitalizeFirstLetter = (s: string | undefined) => s ? s.charAt(0).toUpperCase() + s.slice(1) : undefined;
+
+  // Auto login & onboarding stuff
+  const onSubmitHandler = async ({
+    email,
+    password,
+  }: {
+    email: string;
+    password: string;
+  }) => {
+    try {
+      const user = await API.auth.register({ email, password });
+      if (user) {
+        if (user.isOnboarded)
+          // redirect to home
+          console.log("redirect to home");
+        // redirect to onboarding
+        else console.log("redirect to onboarding");
+      }
+    } catch (err) {
+      setApiError("Invalid Credentials. Please try again");
+    }
   };
   return (
     <form onSubmit={handleSubmit(onSubmitHandler)}>
@@ -59,8 +70,8 @@ const Signup: NextPage = () => {
       )}
 
       <FormControl isInvalid={errors.email != null}>
-        <Input id="email" placeholder="email" {...register("email")} />
-        <FormErrorMessage>{errors.email?.message}</FormErrorMessage>
+        <Input id="email" placeholder="example@email.com" {...register("email")} />
+        <FormErrorMessage>{capitalizeFirstLetter(errors.email?.message)}</FormErrorMessage>
       </FormControl>
 
       <FormControl isInvalid={errors.password != null}>
@@ -82,17 +93,17 @@ const Signup: NextPage = () => {
             </Button>
           </InputRightElement>
         </InputGroup>
-        <FormErrorMessage>{errors.password?.message}</FormErrorMessage>
+        <FormErrorMessage>{capitalizeFirstLetter(errors.password?.message)}</FormErrorMessage>
       </FormControl>
-      
-      <FormControl isInvalid={errors.confirmPassword != null}>
+
+      <FormControl isInvalid={errors.passwordConfirm != null}>
         <InputGroup>
           <Input
             pr="4.5rem"
             type={showConfirmPassword ? "text" : "password"}
-            id="confirmPassword"
-            placeholder="Enter Password"
-            {...register("confirmPassword")}
+            id="passwordConfirm"
+            placeholder="Confirm Password"
+            {...register("passwordConfirm")}
           />
           <InputRightElement width="4.5rem">
             <Button
@@ -104,7 +115,7 @@ const Signup: NextPage = () => {
             </Button>
           </InputRightElement>
         </InputGroup>
-        <FormErrorMessage>{errors.confirmPassword?.message}</FormErrorMessage>
+        <FormErrorMessage>{capitalizeFirstLetter(errors.passwordConfirm?.message)}</FormErrorMessage>
       </FormControl>
 
       <Button
@@ -120,5 +131,3 @@ const Signup: NextPage = () => {
 };
 
 export default Signup;
-
-//TODO: fix logic and validation, then replicate for login

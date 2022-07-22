@@ -9,6 +9,7 @@ import {
   Max,
   Min,
 } from "class-validator";
+import { IsEqualTo } from "@graduate/common"
 import { CourseWarning, IWarning, Schedule, ScheduleCourse } from "@graduate/common";
 
 export class CreatePlanDto {
@@ -78,11 +79,16 @@ export class UpdatePlanDto {
 export class CreateStudentDto {
   @IsNotEmpty()
   @IsEmail()
-  email: string;
+  email: string
 
   @IsNotEmpty()
   @IsString()
-  password: string;
+  password: string
+
+  @IsNotEmpty()
+  @IsString()
+  @IsEqualTo("password")
+  passwordConfirm: string
 }
 
 export class UpdateStudentDto {
