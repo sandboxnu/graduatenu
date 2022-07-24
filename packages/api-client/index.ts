@@ -1,7 +1,7 @@
 import Axios, { AxiosInstance, Method } from "axios";
 import {
   CreatePlanDto,
-  CreateStudentDto,
+  SignUpStudentDto,
   GetPlanResponse,
   GetStudentResponse,
   INEUAndPrereq,
@@ -42,7 +42,7 @@ class APIClient {
   auth = {
     login: (body: LoginStudentDto): Promise<GetStudentResponse> =>
       this.req("POST", "/auth/login", GetStudentResponse, body),
-    register: (body: CreateStudentDto): Promise<GetStudentResponse> =>
+    register: (body: SignUpStudentDto): Promise<GetStudentResponse> =>
       this.req("POST", "/auth/register", GetStudentResponse, body),
     logout: (): Promise<GetStudentResponse> => this.req("GET", "/auth/logout"),
   };

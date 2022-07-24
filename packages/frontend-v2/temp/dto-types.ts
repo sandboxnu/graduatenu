@@ -9,8 +9,13 @@ import {
   Max,
   Min,
 } from "class-validator";
-import { IsEqualTo } from "@graduate/common"
-import { CourseWarning, IWarning, Schedule, ScheduleCourse } from "@graduate/common";
+import { IsEqualTo } from "@graduate/common";
+import {
+  CourseWarning,
+  IWarning,
+  Schedule,
+  ScheduleCourse,
+} from "@graduate/common";
 
 export class CreatePlanDto {
   @IsString()
@@ -76,19 +81,25 @@ export class UpdatePlanDto {
   warnings?: IWarning[];
 }
 
-export class CreateStudentDto {
-  @IsNotEmpty()
-  @IsEmail()
-  email: string
+export class SignUpStudentDto {
+  @IsNotEmpty({ message: "Email cannot be empty" })
+  @IsEmail({ message: "Email must be an email" })
+  email: string;
 
-  @IsNotEmpty()
-  @IsString()
-  password: string
+  @IsNotEmpty({ message: "Password cannot be empty" })
+  @IsString({
+    message: "Password must only contain alphanumeric values and signs",
+  })
+  password: string;
 
-  @IsNotEmpty()
-  @IsString()
-  @IsEqualTo("password")
-  passwordConfirm: string
+  @IsNotEmpty({ message: "Confirm Password cannot be empty" })
+  @IsString({
+    message: "Confirm Password must only contain alphanumeric values and signs",
+  })
+  @IsEqualTo("password", {
+    message: "Confirm Password must be same as Password",
+  })
+  passwordConfirm: string;
 }
 
 export class UpdateStudentDto {

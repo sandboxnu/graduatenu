@@ -20,7 +20,7 @@ import { JwtAuthGuard } from "src/guards/jwt-auth.guard";
 import { DevRouteGuard } from "src/guards/dev-route.guard";
 import { AuthenticatedRequest } from "src/auth/interfaces/authenticated-request";
 import {
-  SignUpDto,
+  SignUpStudentDto,
   GetStudentResponse,
   OnboardStudentDto,
   UpdateStudentDto,
@@ -112,7 +112,7 @@ export class StudentController {
   @UseGuards(DevRouteGuard)
   @Post()
   async create(
-    @Body() createStudentDto: SignUpDto
+    @Body() createStudentDto: SignUpStudentDto
   ): Promise<GetStudentResponse> {
     const student = await this.studentService.create(createStudentDto);
 
@@ -153,7 +153,7 @@ export class StudentController {
   @Patch(":uuid")
   async update(
     @Param("uuid", new ParseUUIDPipe()) uuid: string,
-    @Body() updateStudentDto: SignUpDto
+    @Body() updateStudentDto: SignUpStudentDto
   ): Promise<UpdateStudentResponse> {
     const updateResult = await this.studentService.update(
       uuid,

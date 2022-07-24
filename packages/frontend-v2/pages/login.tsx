@@ -1,9 +1,3 @@
-import { NextPage } from "next";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { classValidatorResolver } from "@hookform/resolvers/class-validator";
-import { SignUpStudentDto } from "../temp/dto-types";
-import { API } from "@graduate/api-client";
 import {
   Button,
   FormControl,
@@ -12,30 +6,60 @@ import {
   InputGroup,
   Text,
 } from "@chakra-ui/react";
+import { API } from "@graduate/api-client";
+import { classValidatorResolver } from "@hookform/resolvers/class-validator";
+import { NextPage } from "next";
 import { useRouter } from "next/router";
+import { useState, useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { LoginStudentDto } from "../temp/dto-types";
 import { AxiosError } from "axios";
 
-const Signup: NextPage = () => {
+const Login: NextPage = () => {
   const [apiError, setApiError] = useState("");
-
+  const [renderSpinner, setRenderSpinner] = useState(true);
   const router = useRouter();
 
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<SignUpStudentDto>({
-    resolver: classValidatorResolver(SignUpStudentDto),
+  } = useForm<LoginStudentDto>({
+    resolver: classValidatorResolver(LoginStudentDto),
     mode: "onTouched",
     shouldFocusError: true,
   });
 
-  const onSubmitHandler = async (payload: SignUpStudentDto) => {
+  const loginWithCookie = async () => {
+    setRenderSpinner(true);
     try {
-      const user = await API.auth.register(payload);
+      const student = await API.student.getMe();
+      if (student) {
+        if (student.isOnboarded) {
+          // Redirect to home
+          router.push("/home");
+        } else {
+          // Redirect to onboarding
+          router.push("/onboarding");
+        }
+      }
+    } catch (err) {
+      const error = err as AxiosError;
+      console.log(error);
+      setRenderSpinner(false);
+    }
+  };
+
+  useEffect(() => {
+    loginWithCookie();
+  }, []);
+
+  const onSubmitHandler = async (payload: LoginStudentDto) => {
+    try {
+      const user = await API.auth.login(payload);
       if (user) {
         if (user.isOnboarded) {
-          // redirect to home
+          // redirect home
           console.log("redirect to home");
           router.push("/home");
         } else {
@@ -52,9 +76,17 @@ const Signup: NextPage = () => {
       console.log(error);
     }
   };
+
+  if (renderSpinner)
+    return (
+      <Text pt="5%" fontSize="3xl" color="red.300">
+        Loading
+      </Text>
+    );
+
   return (
     <form onSubmit={handleSubmit(onSubmitHandler)}>
-      <h2>Sign Up</h2>
+      <h2>Log In</h2>
       <br />
 
       {apiError && (
@@ -88,28 +120,16 @@ const Signup: NextPage = () => {
         <FormErrorMessage>{errors.password?.message}</FormErrorMessage>
       </FormControl>
 
-      <FormControl isInvalid={errors.passwordConfirm != null}>
-        <InputGroup>
-          <Input
-            type={"password"}
-            id="passwordConfirm"
-            placeholder="Confirm Password"
-            {...register("passwordConfirm")}
-          />
-        </InputGroup>
-        <FormErrorMessage>{errors.passwordConfirm?.message}</FormErrorMessage>
-      </FormControl>
-
       <Button
         mr={{ desktop: "7.5rem", laptop: "6.25rem", tablet: "3.25rem" }}
         mt="15%"
         isLoading={isSubmitting}
         type="submit"
       >
-        Sign Up
+        Log In
       </Button>
     </form>
   );
 };
 
-export default Signup;
+export default Login;

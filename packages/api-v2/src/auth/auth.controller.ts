@@ -12,7 +12,7 @@ import { AuthService } from "./auth.service";
 import {
   GetStudentResponse,
   LoginStudentDto,
-  SignUpDto,
+  SignUpStudentDto,
 } from "../../../common";
 import { Response } from "express";
 
@@ -23,7 +23,7 @@ export class AuthController {
   @Post("register")
   public async register(
     @Res({ passthrough: true }) response: Response,
-    @Body() createStudentDto: SignUpDto
+    @Body() createStudentDto: SignUpStudentDto
   ): Promise<GetStudentResponse> {
     const student = await this.authService.register(createStudentDto);
 

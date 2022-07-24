@@ -77,18 +77,24 @@ export class UpdatePlanDto {
   warnings?: IWarning[];
 }
 
-export class SignUpDto {
-  @IsNotEmpty()
-  @IsEmail()
+export class SignUpStudentDto {
+  @IsNotEmpty({ message: "Email cannot be empty" })
+  @IsEmail({ message: "Email must be an email" })
   email: string;
 
-  @IsNotEmpty()
-  @IsString()
+  @IsNotEmpty({ message: "Password cannot be empty" })
+  @IsString({
+    message: "Password must only contain alphanumeric values and signs",
+  })
   password: string;
 
-  @IsNotEmpty()
-  @IsString()
-  @IsEqualTo('password')
+  @IsNotEmpty({ message: "Confirm Password cannot be empty" })
+  @IsString({
+    message: "Confirm Password must only contain alphanumeric values and signs",
+  })
+  @IsEqualTo("password", {
+    message: "Confirm Password must be same as Password",
+  })
   passwordConfirm: string;
 }
 export class UpdateStudentDto {
