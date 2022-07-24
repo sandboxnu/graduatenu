@@ -13,11 +13,14 @@ import {
   InputRightElement,
   Text,
 } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 
 const Signup: NextPage = () => {
   const [apiError, setApiError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const router = useRouter();
 
   const {
     register,
@@ -37,11 +40,15 @@ const Signup: NextPage = () => {
     try {
       const user = await API.auth.register(payload);
       if (user) {
-        if (user.isOnboarded)
+        if (user.isOnboarded) {
           // redirect to home
           console.log("redirect to home");
-        // redirect to onboarding
-        else console.log("redirect to onboarding");
+          router.push("/home");
+        } else {
+          // redirect to onboarding
+          console.log("redirect to onboarding");
+          router.push("/onboarding");
+        }
       }
     } catch (err) {
       setApiError("Invalid Credentials. Please try again");
