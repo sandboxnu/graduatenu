@@ -46,30 +46,31 @@ describe("StudentController (e2e)", () => {
     await app.init();
 
     connection = app.get(Connection);
-  });
 
-  afterAll(async () => {
-    await connection
-      .createQueryBuilder()
-      .delete()
-      .from(Student)
-      .where("email = :email", { email: "test-student@gmail.com" })
-      .execute();
-
-    await app.close();
-  });
-
-  it("should successfully get a student", async () => {
     // register student
     const res = await request(app.getHttpServer())
       .post("/auth/register")
-      .send(testUser)
-      .expect(201);
+      .send(testUser);
 
     // record access token & userID
     jwtToken = res.body.accessToken;
     uuid = res.body.uuid;
+  });
 
+  afterEach(async () => {
+    // remove student from db
+    await connection
+      .createQueryBuilder()
+      .delete()
+      .from(Student)
+      .execute();
+  });
+
+  afterAll(async () => {
+    await app.close();
+  });
+
+  it("should successfully get a student", async () => {
     await request(app.getHttpServer())
       .get("/students/me")
       .set("Authorization", `Bearer ${jwtToken}`)

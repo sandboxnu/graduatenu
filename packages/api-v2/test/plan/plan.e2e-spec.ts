@@ -17,6 +17,17 @@ const testUser = {
   major: "Computer Science",
 };
 
+const testUser2 = {
+  fullName: "Tester",
+  nuid: "000000000",
+  email: "test-plan2@gmail.com",
+  password: "1234567890",
+  academicYear: 2019,
+  graduateYear: 2023,
+  catalogYear: 2019,
+  major: "Computer Science",
+};
+
 const testPlan = {
   name: "Test Plan",
   schedule: {
@@ -47,6 +58,15 @@ describe("PlanController (e2e)", () => {
     await app.init();
     connection = app.get(Connection);
 
+    // create student
+    const res = await request(app.getHttpServer())
+      .post("/auth/register")
+      .send(testUser);
+
+    // save accessToken and user ID
+    jwtToken = res.body.accessToken;
+    uuid = res.body.uuid;
+
     // insert plan into db
     await connection
       .createQueryBuilder()
@@ -67,37 +87,19 @@ describe("PlanController (e2e)", () => {
   });
 
   afterEach(async () => {
-    // remove plan from db
-    await connection
-      .createQueryBuilder()
-      .delete()
-      .from(Plan)
-      .where("name = :name", { name: "Test Plan" })
-      .execute();
-  });
-
-  afterAll(async () => {
     // remove student from db
     await connection
       .createQueryBuilder()
       .delete()
       .from(Student)
-      .where("email = :email", { email: "test-plan@gmail.com" })
       .execute();
+  });
 
+  afterAll(async () => {
     await app.close();
   });
 
   it("creates a plan for a signed in user", async () => {
-    // create student
-    const res = await request(app.getHttpServer())
-      .post("/auth/register")
-      .send(testUser);
-
-    // save accessToken and user ID
-    jwtToken = res.body.accessToken;
-    uuid = res.body.uuid;
-
     await request(app.getHttpServer())
       .post("/plans")
       .set("Authorization", `Bearer ${jwtToken}`)
@@ -108,6 +110,14 @@ describe("PlanController (e2e)", () => {
   it("fails to create a plan for an unauthorized user", () => {
     return request(app.getHttpServer())
       .post("/plans")
+      .send(testPlan)
+      .expect(401);
+  });
+
+  it("fails to create a plan for a user with an invalid token", () => {
+    return request(app.getHttpServer())
+      .post("/plans")
+      .set("Authorization", "Bearer foo")
       .send(testPlan)
       .expect(401);
   });
@@ -138,6 +148,17 @@ describe("PlanController (e2e)", () => {
       .expect(401);
   });
 
+  it("fails to update a plan that does not belong to a user", async () => {
+    const res = await request(app.getHttpServer())
+      .post("/auth/register")
+      .send(testUser2);
+    
+    await request(app.getHttpServer()).patch(`/plans/${planID}`)
+      .set("Authorization", `Bearer ${res.body.accessToken}`)
+      .send({ catalogYear: 2018 })
+      .expect(403);
+  });
+
   it("deletes a user's plan by id", async () => {
     await request(app.getHttpServer())
       .delete(`/plans/${planID}`)
@@ -148,4 +169,15 @@ describe("PlanController (e2e)", () => {
   it("fails to delete a plan for an unauthorized user", async () => {
     await request(app.getHttpServer()).delete(`/plans/${planID}`).expect(401);
   });
+
+  it("fails to delete a plan that does not belong to a user", async() => {
+    const res = await request(app.getHttpServer())
+      .post("/auth/register")
+      .send(testUser2);
+    
+      await request(app.getHttpServer())
+      .delete(`/plans/${planID}`)
+      .set("Authorization", `Bearer ${res.body.accessToken}`)
+      .expect(403);
+  })
 });
