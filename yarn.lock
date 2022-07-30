@@ -3146,7 +3146,7 @@ __metadata:
     ts-jest: ^27.1.3
     ts-node: ^10.8.0
     typescript: ^4.6.2
-    undici: ^5.5.1
+    undici: ^5.8.0
   languageName: unknown
   linkType: soft
 
@@ -17462,10 +17462,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"undici@npm:^5.5.1":
-  version: 5.5.1
-  resolution: "undici@npm:5.5.1"
-  checksum: c041c9093df7ec683479a9555581206a7c7bebfc1ed6e8669920e55618461fc4ce08938e2fbf8ef7d692c2813c44392b5ed25c58396ee4a72ffd1f1f953712c9
+"undici@npm:^5.8.0":
+  version: 5.8.0
+  resolution: "undici@npm:5.8.0"
+  checksum: 7b486ad064da00628d3906e140b86223023cd3494c811da8d7aa1375c2392fe6a6ac421af236c056fd3d3136bba3a91b99e0505dde071dd946070946eb0718b8
   languageName: node
   linkType: hard
 
