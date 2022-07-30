@@ -11,6 +11,7 @@ module.exports = function (api) {
               targets: {
                 node: "14",
               },
+              loose: true,
             },
           ],
           "@babel/preset-typescript",
