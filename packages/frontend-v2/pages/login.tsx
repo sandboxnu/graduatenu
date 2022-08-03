@@ -14,6 +14,7 @@ import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { LoginStudentDto } from "../temp/dto-types";
 import { AxiosError } from "axios";
+import { logger } from "../utils";
 
 const Login: NextPage = () => {
   const [apiError, setApiError] = useState("");
@@ -45,7 +46,7 @@ const Login: NextPage = () => {
       }
     } catch (err) {
       const error = err as AxiosError;
-      console.log(error);
+      logger.error(error);
       setRenderSpinner(false);
     }
   };
@@ -73,7 +74,7 @@ const Login: NextPage = () => {
       if (error.response?.status === 401)
         setApiError("Invalid credentials, please try again.");
       else setApiError(error.message);
-      console.log(error);
+      logger.error(error);
     }
   };
 

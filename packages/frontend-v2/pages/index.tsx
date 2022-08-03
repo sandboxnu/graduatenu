@@ -11,8 +11,13 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { Logo, HeaderContainer } from "../components";
+import { NextRouter, useRouter } from "next/router";
 
 type InfoSectionProps = InfoImageProps & InfoTextProps;
+
+interface RouterProps {
+  router: NextRouter;
+}
 
 interface InfoImageProps {
   imageSource: string;
@@ -25,25 +30,28 @@ interface InfoTextProps {
 }
 
 const Home: NextPage = () => {
+  const router = useRouter();
   return (
     <Box>
-      <Header />
-      <Banner />
+      <Header router={router} />
+      <Banner router={router} />
       <Info />
     </Box>
   );
 };
 
-const Header = (): JSX.Element => {
+const Header = ({ router }: RouterProps): JSX.Element => {
   return (
     <HeaderContainer>
       <Logo />
-      <Button size="sm">Sign In</Button>
+      <Button size="sm" onClick={() => router.push("/login")}>
+        Sign In
+      </Button>
     </HeaderContainer>
   );
 };
 
-const Banner = (): JSX.Element => {
+const Banner = ({ router }: RouterProps): JSX.Element => {
   return (
     <Box
       pt={{ desktop: "5rem", laptop: "3rem", tablet: "2.5rem" }}
@@ -84,6 +92,7 @@ const Banner = (): JSX.Element => {
           <Button
             mr={{ desktop: "7.5rem", laptop: "6.25rem", tablet: "3.25rem" }}
             mt="15%"
+            onClick={() => router.push("/signup")}
           >
             Get Started
           </Button>

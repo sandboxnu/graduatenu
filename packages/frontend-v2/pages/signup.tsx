@@ -14,6 +14,7 @@ import {
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { AxiosError } from "axios";
+import { logger } from "../utils";
 
 const Signup: NextPage = () => {
   const [apiError, setApiError] = useState("");
@@ -49,7 +50,7 @@ const Signup: NextPage = () => {
       if (error.response?.status === 401)
         setApiError("Invalid credentials, please try again.");
       else setApiError(error.message);
-      console.log(error);
+      logger.error(error);
     }
   };
   return (
