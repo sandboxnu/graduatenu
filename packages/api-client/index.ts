@@ -12,6 +12,7 @@ import {
   UpdatePlanResponse,
   UpdateStudentDto,
   UpdateStudentResponse,
+  OnboardStudentDto,
 } from "@graduate/common";
 import { ClassConstructor, plainToInstance } from "class-transformer";
 
@@ -50,10 +51,12 @@ class APIClient {
   student = {
     update: (body: UpdateStudentDto): Promise<UpdateStudentResponse> =>
       this.req("PATCH", "/students/me", UpdateStudentResponse, body),
+    onboard: (body: OnboardStudentDto): Promise<UpdateStudentResponse> =>
+      this.req("PATCH", "/students/me/onboard", UpdateStudentResponse, body),
     getMe: (): Promise<GetStudentResponse> =>
       this.req("GET", "/students/me", GetStudentResponse),
     getMeWithPlan: (): Promise<GetStudentResponse> =>
-      this.req("GET", "students/me", GetStudentResponse, undefined, {
+      this.req("GET", "/students/me", GetStudentResponse, undefined, {
         isWithPlans: true,
       }),
     delete: (): Promise<void> => this.req("DELETE", "students/me"),
