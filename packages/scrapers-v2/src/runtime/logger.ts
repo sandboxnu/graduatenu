@@ -2,7 +2,7 @@ import { Pipeline, StageLabel } from "./types";
 import { ResultType } from "@graduate/common";
 import { FilterError } from "./pipeline";
 import { CatalogEntryType } from "../classify/types";
-import { HDocument, HRowType } from "../tokenize/types";
+import { HDocument } from "../tokenize/types";
 
 /**
  * Logs the progress of the scrape so the developer knows the scraper isn't deadlocked.
@@ -78,49 +78,6 @@ const logOkResult = (
     // only applies to majors, because concentrations and minors don't have hours requirement
     stats.recordError(new Error("major with hours <= 0"), id);
   }
-
-  // we want to record all the possible transitions
-  // we also want to record all the different comment types
-  for (const { entries } of result.ok.tokenized.sections) {
-    // for (let i = 0; i < entries.length - 1; i += 1) {
-    //   const curr = reduce(entries[i].type);
-    //   const next = reduce(entries[i + 1].type);
-    //   stats.recordField("transitions", `${curr} -> ${next}`);
-    // }
-    for (const r of entries) {
-      if (
-        r.type === HRowType.HEADER ||
-        r.type === HRowType.SUBHEADER ||
-        r.type === HRowType.COMMENT
-      ) {
-        // const desc = r.description.toLowerCase();
-        // const complete = desc.includes("complete");
-        // const choose = desc.includes("choose");
-        // const includes = complete || choose;
-        // const nonzero = r.hour !== 0;
-        //
-        // if (includes && nonzero) {
-        //   stats.recordField("includes & nonzero", `${desc} >> ${r.hour}`);
-        // } else if (includes && !nonzero) {
-        //   // str
-        //   stats.recordField("includes and was zero", desc);
-        // }
-        // categorizeTextRow(r, stats);
-      } /*else if (r.type === HRowType.COMMENT) {
-        const desc = r.description.toLowerCase();
-        const complete = desc.includes("complete");
-        const choose = desc.includes("choose");
-        const includes = complete || choose;
-        const nonzero = r.hour !== 0;
-        if (!includes) {
-          stats.recordField("!includes", desc);
-        }
-        if (!nonzero) {
-          stats.recordField("!nonzero", desc);
-        }
-      }*/
-    }
-  }
 };
 
 const logErrResult = (
@@ -162,7 +119,7 @@ const logErrResult = (
  * doesn't quite work for async stacktraces, so sometimes two of the same error
  * are displayed separately.
  */
-export class StatsLogger {
+class StatsLogger {
   // field -> value -> count
   private fields: Record<string, Map<any, number>> = {};
   // message -> list -> stacktrace
@@ -257,3 +214,14 @@ export class StatsLogger {
     }
   }
 }
+
+const globalLoggerKey = "graduateScraperStatsLogger";
+export const installGlobalStatsLogger = () => {
+  (global as any)[globalLoggerKey] = new StatsLogger();
+};
+export const clearGlobalStatsLogger = () => {
+  delete (global as any)[globalLoggerKey];
+};
+export const getGlobalStatsLogger = (): null | StatsLogger => {
+  return (global as any)[globalLoggerKey];
+};

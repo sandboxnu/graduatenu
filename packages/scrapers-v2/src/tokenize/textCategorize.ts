@@ -1,26 +1,24 @@
 import { HRow, HRowType } from "./types";
-import { StatsLogger as StatsLoggerType } from "../runtime/logger";
 import { Err, Ok, Result, ResultType } from "@graduate/common";
 import { ensureLength } from "../utils";
+import { getGlobalStatsLogger } from "../runtime/logger";
 
 type TextRowTypes = HRow & {
   type: HRowType.COMMENT | HRowType.HEADER | HRowType.SUBHEADER;
 };
-export const categorizeTextRow = (
-  row: TextRowTypes,
-  stats?: StatsLoggerType
-) => {
+export const categorizeTextRow = (row: TextRowTypes) => {
   // only 8 (~four of each) of the header types match regex
   // ignore headers for now (even the matching ones)
   if (row.type === HRowType.COMMENT) {
-    return parseCommentRow(row, stats);
+    return parseCommentRow(row);
   }
 };
 
 const CHOICE_KEYWORD =
   /(complete|choose) ((at least|any|from|a minimum of) )?(?<countString>\w+)/g;
 
-export const parseCommentRow = (row: TextRowTypes, stats?: StatsLoggerType) => {
+export const parseCommentRow = (row: TextRowTypes) => {
+  const stats = getGlobalStatsLogger();
   const desc = row.description.toLowerCase();
   const m = Array.from(desc.matchAll(CHOICE_KEYWORD));
   // const matches = ensureLengthAtLeast(1, m);
@@ -32,7 +30,7 @@ export const parseCommentRow = (row: TextRowTypes, stats?: StatsLoggerType) => {
   const matches = m;
   // use the first match, ignore the others
   const countString = matches[0].groups?.["countString"];
-  const count = parseCountString(countString, stats);
+  const count = parseCountString(countString);
   if (count.type === ResultType.Ok) {
     if (!Number.isInteger(count.ok)) {
       stats?.recordField("comments status", "nan with text: " + countString);
@@ -69,6 +67,8 @@ const NUMS = {
   ten: 10,
   eleven: 11,
   twelve: 12,
+  // at the time of writing, these numbers are not needed
+  // can uncomment them in the future if this changes
   // 'thirteen': 13,
   // 'fourteen': 14,
   // 'fifteen': 15,
@@ -78,10 +78,8 @@ const NUMS = {
   // 'nineteen': 19,
 };
 
-const parseCountString = (
-  s: unknown,
-  stats?: StatsLoggerType
-): Result<number, null> => {
+const parseCountString = (s: unknown): Result<number, null> => {
+  const stats = getGlobalStatsLogger();
   if (!(typeof s === "string")) {
     throw new Error(`received unexpected non-string type: ${typeof s}`);
   }

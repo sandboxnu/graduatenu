@@ -5,7 +5,12 @@ import { CatalogEntryType, TypedCatalogEntry } from "../classify/types";
 import { Err, Ok, ResultType } from "@graduate/common";
 import { Pipeline, StageLabel } from "./types";
 import { createAgent } from "./axios";
-import { logProgress, logResults, StatsLogger } from "./logger";
+import {
+  installGlobalStatsLogger,
+  logProgress,
+  logResults,
+  clearGlobalStatsLogger,
+} from "./logger";
 
 /**
  * Runs a full scrape of the catalog, logging the results to the console.
@@ -20,7 +25,7 @@ export const runPipeline = async (yearStart: number, yearEnd: number) => {
   }
 
   // can use for debugging logging throughout the stages
-  const stats = new StatsLogger();
+  installGlobalStatsLogger();
   const pipelines = entries.map((entry) => {
     return createPipeline(entry)
       .then(addPhase(StageLabel.Classify, addTypeToUrl))
@@ -31,12 +36,12 @@ export const runPipeline = async (yearStart: number, yearEnd: number) => {
           CatalogEntryType.Concentration,
         ])
       )
-      .then(addPhase(StageLabel.Tokenize, tokenizeEntry, stats));
+      .then(addPhase(StageLabel.Tokenize, tokenizeEntry));
   });
   const results = await logProgress(pipelines);
   await unregisterAgent();
   logResults(results);
-  stats.print();
+  clearGlobalStatsLogger();
 };
 
 // convenience constructor for making a pipeline
@@ -99,7 +104,7 @@ export class FilterError {
   }
 }
 
-const tokenizeEntry = async (entry: TypedCatalogEntry, stats: StatsLogger) => {
-  const tokenized = await fetchAndTokenizeHTML(entry.url, stats);
+const tokenizeEntry = async (entry: TypedCatalogEntry) => {
+  const tokenized = await fetchAndTokenizeHTML(entry.url);
   return { ...entry, tokenized };
 };
