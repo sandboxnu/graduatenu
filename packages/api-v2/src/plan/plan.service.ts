@@ -1,13 +1,16 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, Logger } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Student } from "src/student/entities/student.entity";
 import { StudentService } from "src/student/student.service";
 import { DeleteResult, Repository, UpdateResult } from "typeorm";
 import { CreatePlanDto, UpdatePlanDto } from "../../../common";
 import { Plan } from "./entities/plan.entity";
+import { formatServiceCtx } from "src/utils";
 
 @Injectable()
 export class PlanService {
+  private readonly logger: Logger = new Logger();
+
   constructor(
     @InjectRepository(Plan)
     private planRepository: Repository<Plan>
@@ -18,8 +21,7 @@ export class PlanService {
 
     try {
       return this.planRepository.save(newPlan);
-    } catch (_error) {
-      // TODO: Add logging for errors here and in every service method.
+    } catch (error) {
       return null;
     }
   }
@@ -37,10 +39,12 @@ export class PlanService {
   ): Promise<boolean> {
     const { student: planOwner } = await this.findOne(planId);
 
-    /**
-     * A plan that doesn't exist isn't owned by the anyone so returning false.
-     */
+    /** A plan that doesn't exist isn't owned by the anyone so returning false. */
     if (!planOwner) {
+      this.logger.debug(
+        { message: "Plan doesn't exist in db", planId },
+        this.formatPlanServiceCtx("isPlanOwnedByStudent")
+      );
       return false;
     }
 
@@ -55,6 +59,10 @@ export class PlanService {
 
     if (updateResult.affected === 0) {
       // no plan was updated, which implies a plan with the given id wasn't found
+      this.logger.debug(
+        { message: "Plan doesn't exist in db", id },
+        this.formatPlanServiceCtx("update")
+      );
       return null;
     }
 
@@ -65,9 +73,18 @@ export class PlanService {
     const deleteResult = await this.planRepository.delete(id);
 
     if (deleteResult.affected === 0) {
+      // no plan was deleted, which implies a plan with the given id wasn't found
+      this.logger.debug(
+        { message: "Plan doesn't exist in db", id },
+        this.formatPlanServiceCtx("delete")
+      );
       return null;
     }
 
     return deleteResult;
+  }
+
+  private formatPlanServiceCtx(methodName: string): string {
+    return formatServiceCtx(PlanService.name, methodName);
   }
 }

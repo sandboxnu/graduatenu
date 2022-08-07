@@ -40,3 +40,9 @@ A running log of design decisions that were taken. These can and will probably c
 - Services will not throw errors in general, and will return `null` for exceptional behavior. For instance, if a user with the same email already exists, return `null` and expect the controller to handle this. This isn't great since we loose the error that actually happened and so we probably want to implement more specific error handling than just returning `null` at the service level.
 
 - Controllers will handle the case when services return `null` and throw appropriate HTTP errors.
+
+### Logging
+
+- Whenever returning null from a service to indicate an error, be sure to do a debug log indicating the specific reason for returning the null.
+
+- Whenever introducing logging to a service, follow the pattern of creating a private `format[ServiceName]Ctx()` method to create the context string for the new service's logs. Use the method to supply the context string in all the service's logs.

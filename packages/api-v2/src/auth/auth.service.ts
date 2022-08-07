@@ -1,13 +1,16 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, Logger } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import { Student } from "src/student/entities/student.entity";
 import { StudentService } from "src/student/student.service";
 import { LoginStudentDto, CreateStudentDto } from "../../../common";
 import { JwtPayload } from "./interfaces/jwt-payload";
 import * as bcrypt from "bcrypt";
+import { formatServiceCtx } from "src/utils";
 
 @Injectable()
 export class AuthService {
+  private readonly logger: Logger = new Logger();
+
   constructor(
     // used to retrieve user from the db based on creds
     private readonly studentService: StudentService,
@@ -16,9 +19,7 @@ export class AuthService {
     private readonly jwtService: JwtService
   ) {}
 
-  /**
-   * Registers a new student in the db and logs the student in.
-   */
+  /** Registers a new student in the db and logs the student in. */
   async register(createStudentDto: CreateStudentDto): Promise<Student> {
     // create a new student
     const newStudent = await this.studentService.create(createStudentDto);
@@ -33,10 +34,7 @@ export class AuthService {
     return newStudent;
   }
 
-  /**
-   * Validates the login creds and logs the student in if the creds are valid.
-   * Else, throws an error.
-   */
+  /** Validates the login creds and logs the student in if the creds are valid. */
   async login(loginStudentDto: LoginStudentDto): Promise<Student> {
     const { email, password } = loginStudentDto;
 
@@ -44,6 +42,10 @@ export class AuthService {
     const student = await this.studentService.findByEmail(email);
 
     if (!student) {
+      this.logger.debug(
+        { message: "Unknown email", email },
+        AuthService.formatAuthServiceCtx("login")
+      );
       return null;
     }
 
@@ -52,6 +54,10 @@ export class AuthService {
     const isValidPassword = await bcrypt.compare(password, trueHashedPassword);
 
     if (!isValidPassword) {
+      this.logger.debug(
+        { message: "Invalid password", email, password },
+        AuthService.formatAuthServiceCtx("login")
+      );
       return null;
     }
 
@@ -63,7 +69,8 @@ export class AuthService {
 
   /**
    * Generates and signs a JWT that contain's the student's email and uuid.
-   * @param student the student for which the JWT is generated.
+   *
+   * @param student The student for which the JWT is generated.
    */
   private _generateAccessToken({ email, uuid }: Student): string {
     const jwtPayload: JwtPayload = { email, uuid };
@@ -71,10 +78,14 @@ export class AuthService {
   }
 
   /**
-   * Validate's the JWT payload by simply making sure the uuid in the payload
-   * is valid and belongs to a student in the db.
+   * Validate's the JWT payload by simply making sure the uuid in the payload is
+   * valid and belongs to a student in the db.
    */
   async validateJwtPayload({ uuid }: JwtPayload): Promise<Student> {
     return await this.studentService.findByUuid(uuid);
+  }
+
+  private static formatAuthServiceCtx(methodName: string): string {
+    return formatServiceCtx(AuthService.name, methodName);
   }
 }

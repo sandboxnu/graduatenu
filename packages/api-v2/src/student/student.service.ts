@@ -1,5 +1,6 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, Logger } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
+import { formatServiceCtx } from "src/utils";
 import {
   DeleteResult,
   FindOneOptions,
@@ -11,6 +12,8 @@ import { Student } from "./entities/student.entity";
 
 @Injectable()
 export class StudentService {
+  private readonly logger: Logger = new Logger();
+
   constructor(
     @InjectRepository(Student)
     private studentRepository: Repository<Student>
@@ -21,6 +24,10 @@ export class StudentService {
     const { email } = createStudentDto;
     const userInDb = await this.studentRepository.findOne({ where: { email } });
     if (userInDb) {
+      this.logger.debug(
+        { message: "User already exists in db", userInDb },
+        StudentService.formatStudentServiceCtx("create")
+      );
       return null;
     }
 
@@ -63,6 +70,10 @@ export class StudentService {
     const student = await this.studentRepository.findOne(findOptions);
 
     if (!student) {
+      this.logger.debug(
+        { message: "User doesn't exist in db", findOptions },
+        StudentService.formatStudentServiceCtx("findOne")
+      );
       return null;
     }
 
@@ -79,6 +90,10 @@ export class StudentService {
     );
 
     if (updateResult.affected === 0) {
+      this.logger.debug(
+        { message: "User doesn't exist in db", uuid },
+        StudentService.formatStudentServiceCtx("update")
+      );
       return null;
     }
 
@@ -89,6 +104,10 @@ export class StudentService {
     const deleteResult = await this.studentRepository.delete(uuid);
 
     if (deleteResult.affected === 0) {
+      this.logger.debug(
+        { message: "User doesn't exist in db", uuid },
+        StudentService.formatStudentServiceCtx("delete")
+      );
       return null;
     }
 
@@ -97,5 +116,9 @@ export class StudentService {
 
   static isEqualStudents(student1: Student, student2: Student): boolean {
     return student1.uuid === student2.uuid;
+  }
+
+  private static formatStudentServiceCtx(methodName: string) {
+    return formatServiceCtx(StudentService.name, methodName);
   }
 }

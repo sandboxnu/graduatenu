@@ -5,6 +5,8 @@ import ormconfig from "ormconfig";
 import { StudentModule } from "./student/student.module";
 import { AuthModule } from "./auth/auth.module";
 import { PlanModule } from "./plan/plan.module";
+import { APP_INTERCEPTOR } from "@nestjs/core";
+import { LoggingInterceptor } from "./interceptors/logging.interceptor";
 
 @Module({
   imports: [
@@ -16,6 +18,12 @@ import { PlanModule } from "./plan/plan.module";
     StudentModule,
     AuthModule,
     PlanModule,
+  ],
+  providers: [
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: LoggingInterceptor,
+    },
   ],
 })
 export class AppModule {}
