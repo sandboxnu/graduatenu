@@ -8,6 +8,7 @@ import { NestFactory, Reflector } from "@nestjs/core";
 import { GraduateLogger } from "graduate-logger";
 import { AppModule } from "./app.module";
 import { EnvironmentVariables } from "./environment-variables";
+import * as cookieParser from "cookie-parser";
 
 async function bootstrap() {
   // configure custom logger
@@ -28,6 +29,9 @@ async function bootstrap() {
       transform: true, // transforms properties from incoming objects to the type they are decorated with by class-validator
     })
   );
+
+  /** Global middleware to parse cookies from requests. */
+  app.use(cookieParser());
 
   /**
    * Global intercerceptor that transforms outgoing data and strips properties

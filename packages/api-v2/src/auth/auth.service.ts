@@ -2,7 +2,7 @@ import { Injectable, Logger } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import { Student } from "src/student/entities/student.entity";
 import { StudentService } from "src/student/student.service";
-import { LoginStudentDto, CreateStudentDto } from "../../../common";
+import { LoginStudentDto, SignUpDto } from "../../../common";
 import { JwtPayload } from "./interfaces/jwt-payload";
 import * as bcrypt from "bcrypt";
 import { formatServiceCtx } from "src/utils";
@@ -20,7 +20,7 @@ export class AuthService {
   ) {}
 
   /** Registers a new student in the db and logs the student in. */
-  async register(createStudentDto: CreateStudentDto): Promise<Student> {
+  async register(createStudentDto: SignUpDto): Promise<Student> {
     // create a new student
     const newStudent = await this.studentService.create(createStudentDto);
 

@@ -20,6 +20,7 @@ export class UpdatePlanResponse extends PlanModel {}
 export class StudentModel {
   uuid: string;
   nuid: string;
+  isOnboarded: boolean;
   fullName: string;
   email: string;
   academicYear: number | undefined;
@@ -34,7 +35,6 @@ export class StudentModel {
   concentration: string | undefined;
   createdAt: Date;
   updatedAt: Date;
-  accessToken?: string;
 }
 
 export class GetStudentResponse extends StudentModel {}
