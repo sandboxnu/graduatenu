@@ -6,9 +6,9 @@ import {
   Repository,
   UpdateResult,
 } from "typeorm";
-import { CreateStudentDto, UpdateStudentDto } from "../../../common";
+import { SignUpDto } from "../../../common";
 import { Student } from "./entities/student.entity";
-
+import { UpdateStudentDto } from "../../../common/src/dto-types";
 @Injectable()
 export class StudentService {
   constructor(
@@ -16,7 +16,7 @@ export class StudentService {
     private studentRepository: Repository<Student>
   ) {}
 
-  async create(createStudentDto: CreateStudentDto): Promise<Student> {
+  async create(createStudentDto: SignUpDto): Promise<Student> {
     // make sure the user doesn't already exists
     const { email } = createStudentDto;
     const userInDb = await this.studentRepository.findOne({ where: { email } });

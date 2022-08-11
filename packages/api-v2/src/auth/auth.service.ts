@@ -1,8 +1,8 @@
 import { Injectable } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
-import { Student } from "../student/entities/student.entity";
-import { StudentService } from "../student/student.service";
-import { LoginStudentDto, CreateStudentDto } from "../../../common";
+import { Student } from "src/student/entities/student.entity";
+import { StudentService } from "src/student/student.service";
+import { LoginStudentDto, SignUpDto } from "../../../common";
 import { JwtPayload } from "./interfaces/jwt-payload";
 import * as bcrypt from "bcrypt";
 
@@ -16,10 +16,8 @@ export class AuthService {
     private readonly jwtService: JwtService
   ) {}
 
-  /**
-   * Registers a new student in the db and logs the student in.
-   */
-  async register(createStudentDto: CreateStudentDto): Promise<Student> {
+  /** Registers a new student in the db and logs the student in. */
+  async register(createStudentDto: SignUpDto): Promise<Student> {
     // create a new student
     const newStudent = await this.studentService.create(createStudentDto);
 
@@ -63,7 +61,8 @@ export class AuthService {
 
   /**
    * Generates and signs a JWT that contain's the student's email and uuid.
-   * @param student the student for which the JWT is generated.
+   *
+   * @param student The student for which the JWT is generated.
    */
   private _generateAccessToken({ email, uuid }: Student): string {
     const jwtPayload: JwtPayload = { email, uuid };
@@ -71,8 +70,8 @@ export class AuthService {
   }
 
   /**
-   * Validate's the JWT payload by simply making sure the uuid in the payload
-   * is valid and belongs to a student in the db.
+   * Validate's the JWT payload by simply making sure the uuid in the payload is
+   * valid and belongs to a student in the db.
    */
   async validateJwtPayload({ uuid }: JwtPayload): Promise<Student> {
     return await this.studentService.findByUuid(uuid);

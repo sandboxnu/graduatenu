@@ -1,16 +1,13 @@
 import { NextPage } from "next";
-import { LocalStorageKey, useLocalStorage } from "../hooks/useLocalStorage";
 import { usePlan } from "../hooks/usePlan";
 import { useStudentWithPlans } from "../hooks/useStudentWithPlans";
 
 const TestUsePlan: NextPage = () => {
-  // Perform localStorage action
-  const [tokenInStorage] = useLocalStorage<string>(LocalStorageKey.Token);
   const {
     student,
     error: studentError,
     isLoading: studentIsLoading,
-  } = useStudentWithPlans(tokenInStorage ? tokenInStorage : "");
+  } = useStudentWithPlans();
   if (studentError) {
     return <h1>student could not be fetched</h1>;
     // handle error
@@ -19,22 +16,15 @@ const TestUsePlan: NextPage = () => {
   }
   return (
     <>
-      {tokenInStorage &&
-        student?.plans.map((plan) => (
-          <Plan key={plan.id} id={plan.id} tokenInStorage={tokenInStorage} />
-        ))}
+      {student?.plans.map((plan) => (
+        <Plan key={plan.id} id={plan.id} />
+      ))}
     </>
   );
 };
 
-const Plan = ({
-  id,
-  tokenInStorage,
-}: {
-  id: number;
-  tokenInStorage: string;
-}) => {
-  const { plan, error, isLoading } = usePlan(id, tokenInStorage);
+const Plan = ({ id }: { id: number }) => {
+  const { plan, error, isLoading } = usePlan(id);
   if (error) {
     return <h1>plan could not be fetched</h1>;
     // handle error

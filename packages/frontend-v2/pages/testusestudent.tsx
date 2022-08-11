@@ -1,15 +1,10 @@
 import { NextPage } from "next";
 import { useStudentWithPlans } from "../hooks/useStudentWithPlans";
-import { LocalStorageKey, useLocalStorage } from "../hooks/useLocalStorage";
 import { API } from "@graduate/api-client";
 import { Button } from "@chakra-ui/react";
 
 const TestUseStudent: NextPage = () => {
-  // Perform localStorage action
-  const [tokenInStorage] = useLocalStorage<string>(LocalStorageKey.Token);
-
-  const { student, error, isLoading, mutateStudent } =
-    useStudentWithPlans(tokenInStorage ? tokenInStorage : "");
+  const { student, error, isLoading, mutateStudent } = useStudentWithPlans();
   if (error) {
     console.error(error);
     return <h1>Could not load student</h1>;
@@ -28,11 +23,10 @@ const TestUseStudent: NextPage = () => {
         <Button
           onClick={async () => {
             const newName = "Aryan Shah Updated with Mutation";
-            if (student && tokenInStorage) {
-              await mutateStudent(
-                API.student.update({ fullName: newName }, tokenInStorage),
-                { optimisticData: { ...student, fullName: newName } }
-              );
+            if (student) {
+              await mutateStudent(API.student.update({ fullName: newName }), {
+                optimisticData: { ...student, fullName: newName },
+              });
             }
           }}
         >

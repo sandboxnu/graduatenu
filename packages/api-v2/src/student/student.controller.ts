@@ -1,27 +1,29 @@
 import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-  ParseUUIDPipe,
   BadRequestException,
-  UseGuards,
-  Req,
-  Query,
-  ParseBoolPipe,
+  Body,
+  Controller,
   DefaultValuePipe,
+  Delete,
+  Get,
+  InternalServerErrorException,
+  Param,
+  ParseBoolPipe,
+  ParseUUIDPipe,
+  Patch,
+  Post,
+  Query,
+  Req,
+  UseGuards,
 } from "@nestjs/common";
 import { StudentService } from "./student.service";
 import { JwtAuthGuard } from "../guards/jwt-auth.guard";
 import { DevRouteGuard } from "../guards/dev-route.guard";
 import { AuthenticatedRequest } from "../auth/interfaces/authenticated-request";
 import {
+  SignUpDto,
   GetStudentResponse,
+  OnboardStudentDto,
   UpdateStudentResponse,
-  CreateStudentDto,
   UpdateStudentDto,
 } from "../../../common";
 
@@ -72,6 +74,31 @@ export class StudentController {
   }
 
   @UseGuards(JwtAuthGuard)
+  @Patch("me/onboard")
+  async onBoard(
+    @Req() req: AuthenticatedRequest,
+    @Body() onboardStudentDto: OnboardStudentDto
+  ): Promise<UpdateStudentResponse> {
+    const uuid = req.user.uuid;
+    const updateResult = await this.studentService.update(uuid, {
+      ...onboardStudentDto,
+      isOnboarded: true,
+    });
+
+    if (!updateResult) {
+      throw new InternalServerErrorException();
+    }
+
+    const student = await this.studentService.findByUuid(uuid, true);
+
+    if (!student) {
+      throw new InternalServerErrorException();
+    }
+
+    return student;
+  }
+
+  @UseGuards(JwtAuthGuard)
   @Delete("me")
   async removeMe(@Req() req: AuthenticatedRequest): Promise<void> {
     const uuid = req.user.uuid;
@@ -85,7 +112,7 @@ export class StudentController {
   @UseGuards(DevRouteGuard)
   @Post()
   async create(
-    @Body() createStudentDto: CreateStudentDto
+    @Body() createStudentDto: SignUpDto
   ): Promise<GetStudentResponse> {
     const student = await this.studentService.create(createStudentDto);
 
@@ -126,7 +153,7 @@ export class StudentController {
   @Patch(":uuid")
   async update(
     @Param("uuid", new ParseUUIDPipe()) uuid: string,
-    @Body() updateStudentDto: UpdateStudentDto
+    @Body() updateStudentDto: SignUpDto
   ): Promise<UpdateStudentResponse> {
     const updateResult = await this.studentService.update(
       uuid,

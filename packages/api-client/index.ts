@@ -22,9 +22,9 @@ class APIClient {
     method: Method,
     url: string,
     responseClass?: ClassConstructor<T>,
-    headers?: any,
     body?: any,
-    params?: any
+    params?: any,
+    headers?: any
   ): Promise<T> {
     const res = (
       await this.axios.request({ method, url, data: body, params, headers })
@@ -41,71 +41,36 @@ class APIClient {
 
   auth = {
     login: (body: LoginStudentDto): Promise<GetStudentResponse> =>
-      this.req("POST", "/auth/login", GetStudentResponse, undefined, body),
-    register: async (body: CreateStudentDto): Promise<GetStudentResponse> =>
-      this.req("POST", "/auth/register", GetStudentResponse, undefined, body),
+      this.req("POST", "/auth/login", GetStudentResponse, body),
+    register: (body: CreateStudentDto): Promise<GetStudentResponse> =>
+      this.req("POST", "/auth/register", GetStudentResponse, body),
+    logout: (): Promise<GetStudentResponse> => this.req("GET", "/auth/logout"),
   };
 
   student = {
-    update: (
-      body: UpdateStudentDto,
-      jwt: string
-    ): Promise<UpdateStudentResponse> =>
-      this.req(
-        "PATCH",
-        "/students/me",
-        UpdateStudentResponse,
-        { Authorization: `Bearer ${jwt}` },
-        body
-      ),
-    getMe: (jwt: string): Promise<GetStudentResponse> =>
-      this.req("GET", "/students/me", GetStudentResponse, {
-        Authorization: `Bearer ${jwt}`,
+    update: (body: UpdateStudentDto): Promise<UpdateStudentResponse> =>
+      this.req("PATCH", "/students/me", UpdateStudentResponse, body),
+    getMe: (): Promise<GetStudentResponse> =>
+      this.req("GET", "/students/me", GetStudentResponse),
+    getMeWithPlan: (): Promise<GetStudentResponse> =>
+      this.req("GET", "students/me", GetStudentResponse, undefined, {
+        isWithPlans: true,
       }),
-    getMeWithPlan: (jwt: string): Promise<GetStudentResponse> =>
-      this.req(
-        "GET",
-        "students/me",
-        GetStudentResponse,
-        { Authorization: `Bearer ${jwt}` },
-        undefined,
-        { isWithPlans: true }
-      ),
-    delete: (jwt: string): Promise<void> =>
-      this.req("DELETE", "students/me", undefined, {
-        Authorization: `Bearer ${jwt}`,
-      }),
+    delete: (): Promise<void> => this.req("DELETE", "students/me"),
   };
 
   plans = {
-    create: (body: CreatePlanDto, jwt: string): Promise<GetPlanResponse> =>
-      this.req(
-        "POST",
-        "/plans",
-        GetPlanResponse,
-        { Authorization: `Bearer ${jwt}` },
-        body
-      ),
-    get: (id: string | number, jwt: string): Promise<GetPlanResponse> =>
-      this.req("GET", `/plans/${id}`, GetPlanResponse, {
-        Authorization: `Bearer ${jwt}`,
-      }),
+    create: (body: CreatePlanDto): Promise<GetPlanResponse> =>
+      this.req("POST", "/plans", GetPlanResponse, body),
+    get: (id: string | number): Promise<GetPlanResponse> =>
+      this.req("GET", `/plans/${id}`, GetPlanResponse),
     update: (
       id: string | number,
-      body: UpdatePlanDto,
-      jwt: string
+      body: UpdatePlanDto
     ): Promise<UpdatePlanResponse> =>
-      this.req(
-        "PATCH",
-        `/plans/${id}`,
-        UpdatePlanResponse,
-        { Authorization: `Bearer ${jwt}` },
-        body
-      ),
-    delete: async (id: string | number, jwt: string): Promise<void> =>
-      this.req("DELETE", `/plans/${id}`, undefined, {
-        Authorization: `Bearer ${jwt}`,
-      }),
+      this.req("PATCH", `/plans/${id}`, UpdatePlanResponse, body),
+    delete: (id: string | number): Promise<void> =>
+      this.req("DELETE", `/plans/${id}`),
   };
 }
 
@@ -120,8 +85,8 @@ interface SearchClass {
 }
 
 /**
- * A client for interacting with the Search API. Allows us to fetch
- * and search for courses.
+ * A client for interacting with the Search API. Allows us to fetch and search
+ * for courses.
  */
 class SearchAPIClient {
   private axios: AxiosInstance;
