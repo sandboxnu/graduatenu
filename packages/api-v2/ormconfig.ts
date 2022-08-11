@@ -18,7 +18,7 @@ const ormconfig: TypeOrmModuleOptions = {
   cli: {
     migrationsDir: "src/migrations",
   },
-  keepConnectionAlive: true,
+  keepConnectionAlive: process.env.NODE_ENV === "testing",
 };
 
 export default ormconfig;

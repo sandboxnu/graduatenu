@@ -1,9 +1,8 @@
 import { INestApplication } from "@nestjs/common";
-import { Test, TestingModule } from "@nestjs/testing";
 import { Student } from "../../src/student/entities/student.entity";
 import * as request from "supertest";
 import { Connection } from "typeorm";
-import { AppModule } from "../../src/app.module";
+import { dropStudentTable, initializeApp } from "../../test/utils";
 
 const testUser = {
   fullName: "Tester",
@@ -21,13 +20,7 @@ describe("AuthController (e2e)", () => {
   let connection: Connection;
 
   beforeEach(async () => {
-    const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [AppModule],
-    }).compile();
-    app = moduleFixture.createNestApplication();
-
-    await app.init();
-
+    app = await initializeApp()
     connection = app.get(Connection)
 
     // register student
@@ -37,12 +30,7 @@ describe("AuthController (e2e)", () => {
   });
 
   afterEach(async () => {
-    // delete student table
-    await connection
-      .createQueryBuilder()
-      .delete()
-      .from(Student)
-      .execute()
+    await dropStudentTable(connection)
   });
 
   afterAll(async () => {
@@ -64,7 +52,11 @@ describe("AuthController (e2e)", () => {
       })
       .expect(201);
 
-    expect(res.body.accessToken).toBeDefined()
+    expect(res.body.accessToken).toBeDefined();
+    await request(app.getHttpServer())
+      .get("/students/me")
+      .set("Authorization", `Bearer ${res.body.accessToken}`)
+      .expect(200);
   });
 
   it("fails to register an existing user", async () => {
@@ -80,13 +72,14 @@ describe("AuthController (e2e)", () => {
   });
 
   it("logs in with valid credentials", async () => {
-    await request(app.getHttpServer())
+    const res = await request(app.getHttpServer())
       .post("/auth/login")
       .send({
         email: "test-auth@gmail.com",
         password: "1234567890",
       })
       .expect(201);
+      expect(res.body.accessToken).toBeDefined();
   });
 
   it("fails to log in with invalid credentials", () => {

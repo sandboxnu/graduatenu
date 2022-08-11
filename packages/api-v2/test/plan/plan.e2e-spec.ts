@@ -1,10 +1,8 @@
 import { INestApplication } from "@nestjs/common";
-import { Test, TestingModule } from "@nestjs/testing";
 import { Plan } from "../../src/plan/entities/plan.entity";
-import { Student } from "../../src/student/entities/student.entity";
 import * as request from "supertest";
 import { Connection } from "typeorm";
-import { AppModule } from "../../src/app.module";
+import { dropStudentTable, initializeApp } from "../../test/utils";
 
 const testUser = {
   fullName: "Tester",
@@ -50,12 +48,8 @@ describe("PlanController (e2e)", () => {
   let planID: number;
 
   beforeEach(async () => {
-    const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [AppModule],
-    }).compile();
-    app = moduleFixture.createNestApplication();
+    app = await initializeApp()
 
-    await app.init();
     connection = app.get(Connection);
 
     // create student
@@ -66,7 +60,7 @@ describe("PlanController (e2e)", () => {
     // save accessToken and user ID
     jwtToken = res.body.accessToken;
     uuid = res.body.uuid;
-
+  
     // insert plan into db
     await connection
       .createQueryBuilder()
@@ -87,12 +81,7 @@ describe("PlanController (e2e)", () => {
   });
 
   afterEach(async () => {
-    // remove student from db
-    await connection
-      .createQueryBuilder()
-      .delete()
-      .from(Student)
-      .execute();
+    await dropStudentTable(connection)
   });
 
   afterAll(async () => {
@@ -105,6 +94,11 @@ describe("PlanController (e2e)", () => {
       .set("Authorization", `Bearer ${jwtToken}`)
       .send(testPlan)
       .expect(201);
+
+    await request(app.getHttpServer())
+      .get(`/plans/${planID}`)
+      .set("Authorization", `Bearer ${jwtToken}`)
+      .expect(200)
   });
 
   it("fails to create a plan for an unauthorized user", () => {

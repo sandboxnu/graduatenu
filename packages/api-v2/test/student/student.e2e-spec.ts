@@ -1,10 +1,8 @@
 import { INestApplication } from "@nestjs/common";
-import { Test, TestingModule } from "@nestjs/testing";
 import { Plan } from "../../src/plan/entities/plan.entity";
-import { Student } from "../../src/student/entities/student.entity";
 import * as request from "supertest";
 import { Connection } from "typeorm";
-import { AppModule } from "../../src/app.module";
+import { dropStudentTable, initializeApp } from "../../test/utils";
 
 const testUser = {
   fullName: "Tester",
@@ -38,12 +36,7 @@ describe("StudentController (e2e)", () => {
   let uuid: string;
 
   beforeEach(async () => {
-    const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [AppModule],
-    }).compile();
-    app = moduleFixture.createNestApplication();
-
-    await app.init();
+    app = await initializeApp()
 
     connection = app.get(Connection);
 
@@ -58,12 +51,7 @@ describe("StudentController (e2e)", () => {
   });
 
   afterEach(async () => {
-    // remove student from db
-    await connection
-      .createQueryBuilder()
-      .delete()
-      .from(Student)
-      .execute();
+    await dropStudentTable(connection);
   });
 
   afterAll(async () => {
