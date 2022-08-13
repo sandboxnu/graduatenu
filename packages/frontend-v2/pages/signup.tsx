@@ -1,8 +1,6 @@
 import { NextPage } from "next";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { classValidatorResolver } from "@hookform/resolvers/class-validator";
-import { SignUpStudentDto } from "../temp/dto-types";
 import { API } from "@graduate/api-client";
 import {
   Button,
@@ -14,37 +12,29 @@ import {
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { AxiosError } from "axios";
-import { logger } from "../utils";
+import { logger, routeOnboarding } from "../utils";
+import { SignUpStudentDto } from "@graduate/common";
 
 const Signup: NextPage = () => {
   const [apiError, setApiError] = useState("");
-
   const router = useRouter();
 
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
+    watch,
   } = useForm<SignUpStudentDto>({
-    resolver: classValidatorResolver(SignUpStudentDto),
     mode: "onTouched",
     shouldFocusError: true,
   });
 
+  const password = watch("password", "");
+
   const onSubmitHandler = async (payload: SignUpStudentDto) => {
     try {
       const user = await API.auth.register(payload);
-      if (user) {
-        if (user.isOnboarded) {
-          // redirect to home
-          console.log("redirect to home");
-          router.push("/home");
-        } else {
-          // redirect to onboarding
-          console.log("redirect to onboarding");
-          router.push("/onboarding");
-        }
-      }
+      routeOnboarding(user, router);
     } catch (err) {
       const error = err as AxiosError;
       if (error.response?.status === 401)
@@ -71,8 +61,14 @@ const Signup: NextPage = () => {
       <FormControl isInvalid={errors.email != null}>
         <Input
           id="email"
-          placeholder="example@email.com"
-          {...register("email")}
+          placeholder="Example@email.com"
+          {...register("email", {
+            required: "Email is required",
+            pattern: {
+              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+              message: "Invalid email address",
+            },
+          })}
         />
         <FormErrorMessage>{errors.email?.message}</FormErrorMessage>
       </FormControl>
@@ -83,7 +79,9 @@ const Signup: NextPage = () => {
             type={"password"}
             id="password"
             placeholder="Enter Password"
-            {...register("password")}
+            {...register("password", {
+              required: "Password is required",
+            })}
           />
         </InputGroup>
         <FormErrorMessage>{errors.password?.message}</FormErrorMessage>
@@ -95,7 +93,10 @@ const Signup: NextPage = () => {
             type={"password"}
             id="passwordConfirm"
             placeholder="Confirm Password"
-            {...register("passwordConfirm")}
+            {...register("passwordConfirm", {
+              validate: (confirmPass) =>
+                confirmPass === password || "Passwords do not match!",
+            })}
           />
         </InputGroup>
         <FormErrorMessage>{errors.passwordConfirm?.message}</FormErrorMessage>

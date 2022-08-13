@@ -11,13 +11,9 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { Logo, HeaderContainer } from "../components";
-import { NextRouter, useRouter } from "next/router";
+import Link from "next/link";
 
 type InfoSectionProps = InfoImageProps & InfoTextProps;
-
-interface RouterProps {
-  router: NextRouter;
-}
 
 interface InfoImageProps {
   imageSource: string;
@@ -30,28 +26,27 @@ interface InfoTextProps {
 }
 
 const Home: NextPage = () => {
-  const router = useRouter();
   return (
     <Box>
-      <Header router={router} />
-      <Banner router={router} />
+      <Header />
+      <Banner />
       <Info />
     </Box>
   );
 };
 
-const Header = ({ router }: RouterProps): JSX.Element => {
+const Header = (): JSX.Element => {
   return (
     <HeaderContainer>
       <Logo />
-      <Button size="sm" onClick={() => router.push("/login")}>
-        Sign In
-      </Button>
+      <Link href="/login" passHref>
+        <Button size="sm">Sign In</Button>
+      </Link>
     </HeaderContainer>
   );
 };
 
-const Banner = ({ router }: RouterProps): JSX.Element => {
+const Banner = (): JSX.Element => {
   return (
     <Box
       pt={{ desktop: "5rem", laptop: "3rem", tablet: "2.5rem" }}
@@ -89,13 +84,14 @@ const Banner = ({ router }: RouterProps): JSX.Element => {
               personalized plan of study.
             </Text>
           </Box>
-          <Button
-            mr={{ desktop: "7.5rem", laptop: "6.25rem", tablet: "3.25rem" }}
-            mt="15%"
-            onClick={() => router.push("/signup")}
-          >
-            Get Started
-          </Button>
+          <Link href="/signup" passHref>
+            <Button
+              mr={{ desktop: "7.5rem", laptop: "6.25rem", tablet: "3.25rem" }}
+              mt="15%"
+            >
+              Get Started
+            </Button>
+          </Link>
         </Flex>
       </HStack>
     </Box>

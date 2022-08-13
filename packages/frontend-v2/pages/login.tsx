@@ -7,15 +7,13 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { API } from "@graduate/api-client";
-import { classValidatorResolver } from "@hookform/resolvers/class-validator";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { LoginStudentDto } from "../temp/dto-types";
 import { AxiosError } from "axios";
-import { logger } from "../utils";
-
+import { logger, routeOnboarding } from "../utils";
+import { LoginStudentDto } from "@graduate/common";
 const Login: NextPage = () => {
   const [apiError, setApiError] = useState("");
   const [renderSpinner, setRenderSpinner] = useState(true);
@@ -26,7 +24,6 @@ const Login: NextPage = () => {
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<LoginStudentDto>({
-    resolver: classValidatorResolver(LoginStudentDto),
     mode: "onTouched",
     shouldFocusError: true,
   });
@@ -58,17 +55,7 @@ const Login: NextPage = () => {
   const onSubmitHandler = async (payload: LoginStudentDto) => {
     try {
       const user = await API.auth.login(payload);
-      if (user) {
-        if (user.isOnboarded) {
-          // redirect home
-          console.log("redirect to home");
-          router.push("/home");
-        } else {
-          // redirect to onboarding
-          console.log("redirect to onboarding");
-          router.push("/onboarding");
-        }
-      }
+      routeOnboarding(user, router);
     } catch (err) {
       const error = err as AxiosError;
       if (error.response?.status === 401)
@@ -104,7 +91,13 @@ const Login: NextPage = () => {
         <Input
           id="email"
           placeholder="example@email.com"
-          {...register("email")}
+          {...register("email", {
+            required: "Email is required",
+            pattern: {
+              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+              message: "Invalid email address",
+            },
+          })}
         />
         <FormErrorMessage>{errors.email?.message}</FormErrorMessage>
       </FormControl>
@@ -112,10 +105,12 @@ const Login: NextPage = () => {
       <FormControl isInvalid={errors.password != null}>
         <InputGroup>
           <Input
-            type={"password"}
+            type="password"
             id="password"
             placeholder="Enter Password"
-            {...register("password")}
+            {...register("password", {
+              required: "Password is required",
+            })}
           />
         </InputGroup>
         <FormErrorMessage>{errors.password?.message}</FormErrorMessage>
