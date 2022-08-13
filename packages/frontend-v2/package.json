@@ -14,8 +14,6 @@
     "@emotion/styled": "^11",
     "@fontsource/montserrat-alternates": "^4.5.9",
     "@graduate/common": "workspace:*",
-    "@hookform/resolvers": "^2.9.3",
-    "class-validator": "^0.13.2",
     "framer-motion": "^6",
     "next": "12.1.4",
     "react": "18.0.0",
