@@ -31,6 +31,10 @@ export class StudentService {
       return null;
     }
 
+    if (createStudentDto.password !== createStudentDto.passwordConfirm) {
+      return null;
+    }
+
     const newStudent = this.studentRepository.create(createStudentDto);
 
     try {
