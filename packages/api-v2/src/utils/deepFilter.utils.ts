@@ -1,13 +1,18 @@
 /**
- * A basic deep filter that filters out all the provided keys from a given
- * object. If the input isn't a object, then the function doesn't do anything.
+ * A basic deep filter that recursively filters out all the provided keys from a
+ * given object. If the input isn't a object/array of objects, then the function
+ * doesn't do anything.
  *
  * @param   input The input element to filter out the keys from
  * @param   keys  The keys to filter out
- * @returns       The filtered out object if the input is an object, else the
- *   input unchanged
+ * @returns       The filtered out object
  */
 export const deepFilter = (input: unknown, keys: string[]): unknown => {
+  if (Array.isArray(input)) {
+    const filteredArr = input.map((el) => deepFilter(el, keys));
+    return filteredArr;
+  }
+
   if (!isObject(input)) {
     return input;
   }

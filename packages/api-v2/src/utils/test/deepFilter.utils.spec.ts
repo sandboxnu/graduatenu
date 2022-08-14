@@ -66,6 +66,53 @@ describe("deepFilter", () => {
     expect(deepFilter(input, ["secretKey"])).toEqual(expectedVal);
   });
 
+  it("should filter array of objects", () => {
+    const input = [
+      {
+        key1: "val1",
+        secretKey: "secret",
+      },
+      [
+        {
+          key2: 1,
+          secretKey: "secret",
+        },
+        [
+          {
+            key3: [
+              {
+                key4: false,
+                secretKey: "secret",
+              },
+            ],
+          },
+        ],
+      ],
+    ];
+
+    const expectedVal = [
+      {
+        key1: "val1",
+      },
+      [
+        {
+          key2: 1,
+        },
+        [
+          {
+            key3: [
+              {
+                key4: false,
+              },
+            ],
+          },
+        ],
+      ],
+    ];
+
+    expect(deepFilter(input, ["secretKey"])).toEqual(expectedVal);
+  });
+
   it("should filter nothing if key is not present", () => {
     const input = {
       key1: "val1",
