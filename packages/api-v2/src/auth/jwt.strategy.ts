@@ -26,7 +26,11 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
             { message: "Auth cookie missing" },
             JwtStrategy.formatJwtStrategyCtx("jwtFromRequest")
           );
+
+          return null;
         }
+
+        return authCookie;
       },
 
       // Secret to decode the JWT(same one used to encode it)
