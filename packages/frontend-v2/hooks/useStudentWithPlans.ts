@@ -122,7 +122,7 @@ const prepareTermForDnd = (
   courseCount: number
 ): { dndTerm: ScheduleTerm2<string>; updatedCount: number } => {
   /*
-   * course count shuoldn't be needed since in most cases a course will appear only once in a plan,
+   * course count shouldn't be needed since in most cases a course will appear only once in a plan,
    * however we don't enforce that by any means so it's good to be safe
    */
   let updatedCount = courseCount;
