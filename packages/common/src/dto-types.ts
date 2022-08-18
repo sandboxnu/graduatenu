@@ -10,14 +10,14 @@ import {
   Max,
   Min,
 } from "class-validator";
-import { CourseWarning, IWarning, Schedule, ScheduleCourse } from "./types";
+import { CourseWarning, IWarning, ScheduleCourse, Schedule2 } from "./types";
 
 export class CreatePlanDto {
   @IsString()
   name: string;
 
   @IsObject()
-  schedule: Schedule;
+  schedule: Schedule2<null>;
 
   @IsString()
   major: string;
@@ -47,7 +47,7 @@ export class UpdatePlanDto {
 
   @IsOptional()
   @IsObject()
-  schedule?: Schedule;
+  schedule?: Schedule2<null>;
 
   @IsOptional()
   @IsString()
