@@ -3,7 +3,7 @@ import { Plan } from "../../src/plan/entities/plan.entity";
 import * as request from "supertest";
 import { Connection } from "typeorm";
 import { dropStudentTable, initializeApp } from "../../test/utils";
-import { testPlan, testUser1 } from "../../test/testingData";
+import { onboardedUser, testPlan, testUser1 } from "../../test/testingData";
 
 describe("StudentController (e2e)", () => {
   let app: INestApplication;
@@ -74,6 +74,16 @@ describe("StudentController (e2e)", () => {
       .send({ graduateYear: 2022 })
       .set("Cookie", cookie)
       .expect(200);
+  });
+
+  it("should successfully onboard a student", async () => {
+    const res = await request(app.getHttpServer())
+      .patch("/students/me/onboard")
+      .send(onboardedUser)
+      .set("Cookie", cookie)
+      .expect(200);
+
+    expect(res.body.isOnboarded).toBe(true);
   });
 
   it("should not delete a student without authorization token", () => {

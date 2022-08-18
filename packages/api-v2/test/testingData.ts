@@ -8,6 +8,20 @@ export const testUser2 = {
   password: "1234567890",
 };
 
+export const onboardedUser = {
+  fullName: "Tester",
+  nuid: "000000000",
+  academicYear: 2019,
+  graduateYear: 2023,
+  catalogYear: 2019,
+  major: "Computer Science",
+  coopCycle: "4 year 2 co-ops",
+  coursesCompleted: [],
+  coursesTransfered: [],
+  primaryPlanId: 1,
+  concentration: "Artificial Intelligence",
+};
+
 export const testPlan = {
   name: "Test Plan",
   schedule: {
