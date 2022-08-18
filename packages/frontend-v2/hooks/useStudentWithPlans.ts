@@ -57,6 +57,13 @@ export function useStudentWithPlans(): UseStudentReturn {
   };
 }
 
+/**
+ * Prepares a plan for drag and drop by adding drag and drop ids to semester
+ * terms and courses.
+ *
+ * Term and courses need drag and drop ids since they behave as droppable and
+ * draggable components respectively.
+ */
 const preparePlanForDnd = (plan: PlanModel<null>): PlanModel<string> => {
   let courseCount = 0;
   const dndYears: ScheduleYear2<string>[] = [];
@@ -100,10 +107,24 @@ const preparePlanForDnd = (plan: PlanModel<null>): PlanModel<string> => {
   return dndPlan;
 };
 
+/**
+ * Prepares a term for drag and drop by adding a unique id to the term and to
+ * all of the courses within the term.
+ *
+ * @param   term        The term to prepare for dnd
+ * @param   courseCount The count to start from, used to ensure that all courses
+ *   get a unique id
+ * @returns             The term tansformed for drag and drop along with the
+ *   updated course count which can be used to prepare the next term
+ */
 const prepareTermForDnd = (
   term: ScheduleTerm2<null>,
   courseCount: number
 ): { dndTerm: ScheduleTerm2<string>; updatedCount: number } => {
+  /*
+   * course count shuoldn't be needed since in most cases a course will appear only once in a plan,
+   * however we don't enforce that by any means so it's good to be safe
+   */
   let updatedCount = courseCount;
 
   // add a unique dnd id to all courses within the term
