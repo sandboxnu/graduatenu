@@ -4,7 +4,7 @@
   "semi": true,
   "tabWidth": 2,
   "printWidth": 80,
-  "plugins": ["prettier-plugin-jsdoc"],
+  "plugins": ["./node_modules/prettier-plugin-jsdoc"],
   "jsdocVerticalAlignment": true,
   "proseWrap": "never"
 }
