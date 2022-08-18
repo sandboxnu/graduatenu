@@ -9,6 +9,7 @@ import {
   StudentModel,
 } from "@graduate/common";
 import { AxiosError } from "axios";
+import { logger } from "../utils";
 
 type StudentResponse = Omit<
   SWRResponse<GetStudentResponse, AxiosError>,
@@ -34,7 +35,9 @@ export function useStudentWithPlans(): UseStudentReturn {
       const student = await API.student.getMeWithPlan();
 
       if (!student.plans) {
-        throw new Error("Plans not returned along with the student by the API");
+        const errMsg = "Plans not returned along with the student by the API";
+        logger.error("useStudentWithPlans", errMsg);
+        throw new Error(errMsg);
       }
 
       // prepare all of the student's plans for drag and drop by adding drag and drop ids
