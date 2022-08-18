@@ -3,34 +3,22 @@ import { Student } from "../../src/student/entities/student.entity";
 import * as request from "supertest";
 import { Connection } from "typeorm";
 import { dropStudentTable, initializeApp } from "../../test/utils";
-
-const testUser = {
-  fullName: "Tester",
-  nuid: "000000000",
-  email: "test-auth@gmail.com",
-  password: "1234567890",
-  academicYear: 2019,
-  graduateYear: 2023,
-  catalogYear: 2019,
-  major: "Computer Science",
-};
+import { testUser1 } from "../../test/testingData";
 
 describe("AuthController (e2e)", () => {
   let app: INestApplication;
   let connection: Connection;
 
   beforeEach(async () => {
-    app = await initializeApp()
-    connection = app.get(Connection)
+    app = await initializeApp();
+    connection = app.get(Connection);
 
     // register student
-    await request(app.getHttpServer())
-      .post("/auth/register")
-      .send(testUser)
+    await request(app.getHttpServer()).post("/auth/register").send(testUser1);
   });
 
   afterEach(async () => {
-    await dropStudentTable(connection)
+    await dropStudentTable(connection);
   });
 
   afterAll(async () => {
@@ -41,45 +29,41 @@ describe("AuthController (e2e)", () => {
     const res = await request(app.getHttpServer())
       .post("/auth/register")
       .send({
-        fullName: "Tester",
-        nuid: "000000000",
         email: "test-register@gmail.com",
         password: "1234567890",
-        academicYear: 2019,
-        graduateYear: 2023,
-        catalogYear: 2019,
-        major: "Computer Science",
       })
       .expect(201);
 
-    expect(res.body.accessToken).toBeDefined();
+    const cookie = res.header["set-cookie"];
+    expect(cookie).toBeDefined();
+
     await request(app.getHttpServer())
       .get("/students/me")
-      .set("Authorization", `Bearer ${res.body.accessToken}`)
+      .set("Cookie", cookie)
       .expect(200);
   });
 
   it("fails to register an existing user", async () => {
-    connection.createQueryBuilder()
+    connection
+      .createQueryBuilder()
       .insert()
       .into(Student)
-      .values([{...testUser}])
+      .values([{ ...testUser1 }]);
 
     await request(app.getHttpServer())
       .post("/auth/register")
-      .send(testUser)
+      .send(testUser1)
       .expect(400);
   });
 
   it("logs in with valid credentials", async () => {
     const res = await request(app.getHttpServer())
       .post("/auth/login")
-      .send({
-        email: "test-auth@gmail.com",
-        password: "1234567890",
-      })
+      .send(testUser1)
       .expect(201);
-      expect(res.body.accessToken).toBeDefined();
+
+    const cookie = res.header["set-cookie"];
+    expect(cookie).toBeDefined();
   });
 
   it("fails to log in with invalid credentials", () => {

@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
-import { Student } from "src/student/entities/student.entity";
-import { StudentService } from "src/student/student.service";
+import { Student } from "../../src/student/entities/student.entity";
+import { StudentService } from "../../src/student/student.service";
 import { LoginStudentDto, SignUpDto } from "../../../common";
 import { JwtPayload } from "./interfaces/jwt-payload";
 import * as bcrypt from "bcrypt";

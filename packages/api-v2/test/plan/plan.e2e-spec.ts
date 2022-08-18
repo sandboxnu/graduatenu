@@ -3,70 +3,35 @@ import { Plan } from "../../src/plan/entities/plan.entity";
 import * as request from "supertest";
 import { Connection } from "typeorm";
 import { dropStudentTable, initializeApp } from "../../test/utils";
-
-const testUser = {
-  fullName: "Tester",
-  nuid: "000000000",
-  email: "test-plan@gmail.com",
-  password: "1234567890",
-  academicYear: 2019,
-  graduateYear: 2023,
-  catalogYear: 2019,
-  major: "Computer Science",
-};
-
-const testUser2 = {
-  fullName: "Tester",
-  nuid: "000000000",
-  email: "test-plan2@gmail.com",
-  password: "1234567890",
-  academicYear: 2019,
-  graduateYear: 2023,
-  catalogYear: 2019,
-  major: "Computer Science",
-};
-
-const testPlan = {
-  name: "Test Plan",
-  schedule: {
-    years: [2019, 2020, 2021, 2022],
-    yearMap: {},
-  },
-  major: "Computer Science",
-  coopCycle: "4 year 2 co-ops",
-  concentration: "Artificial Intelligence",
-  catalogYear: 2019,
-  courseWarnings: [],
-  warnings: [],
-};
+import { testPlan, testUser1, testUser2 } from "../../test/testingData";
 
 describe("PlanController (e2e)", () => {
   let app: INestApplication;
-  let jwtToken: string;
+  let cookie: any;
   let connection: Connection;
   let uuid: string;
   let planID: number;
 
   beforeEach(async () => {
-    app = await initializeApp()
+    app = await initializeApp();
 
     connection = app.get(Connection);
 
     // create student
     const res = await request(app.getHttpServer())
       .post("/auth/register")
-      .send(testUser);
+      .send(testUser1);
 
     // save accessToken and user ID
-    jwtToken = res.body.accessToken;
+    cookie = res.header["set-cookie"];
     uuid = res.body.uuid;
-  
+
     // insert plan into db
     await connection
       .createQueryBuilder()
       .insert()
       .into(Plan)
-      .values([{ ...testPlan, student: { uuid, ...testUser } }])
+      .values([{ ...testPlan, student: { uuid, ...testUser1 } }])
       .execute();
 
     // record plan ID
@@ -81,7 +46,7 @@ describe("PlanController (e2e)", () => {
   });
 
   afterEach(async () => {
-    await dropStudentTable(connection)
+    await dropStudentTable(connection);
   });
 
   afterAll(async () => {
@@ -91,14 +56,14 @@ describe("PlanController (e2e)", () => {
   it("creates a plan for a signed in user", async () => {
     await request(app.getHttpServer())
       .post("/plans")
-      .set("Authorization", `Bearer ${jwtToken}`)
+      .set("Cookie", cookie)
       .send(testPlan)
       .expect(201);
 
     await request(app.getHttpServer())
       .get(`/plans/${planID}`)
-      .set("Authorization", `Bearer ${jwtToken}`)
-      .expect(200)
+      .set("Cookie", cookie)
+      .expect(200);
   });
 
   it("fails to create a plan for an unauthorized user", () => {
@@ -119,7 +84,7 @@ describe("PlanController (e2e)", () => {
   it("gets a user's plan by id", async () => {
     await request(app.getHttpServer())
       .get(`/plans/${planID}`)
-      .set("Authorization", `Bearer ${jwtToken}`)
+      .set("Cookie", cookie)
       .expect(200);
   });
 
@@ -130,7 +95,7 @@ describe("PlanController (e2e)", () => {
   it("updates a user's plan by id", async () => {
     await request(app.getHttpServer())
       .patch(`/plans/${planID}`)
-      .set("Authorization", `Bearer ${jwtToken}`)
+      .set("Cookie", cookie)
       .send({ catalogYear: 2018 })
       .expect(200);
   });
@@ -146,9 +111,12 @@ describe("PlanController (e2e)", () => {
     const res = await request(app.getHttpServer())
       .post("/auth/register")
       .send(testUser2);
-    
-    await request(app.getHttpServer()).patch(`/plans/${planID}`)
-      .set("Authorization", `Bearer ${res.body.accessToken}`)
+
+    const badCookie = res.header["set-cookie"];
+
+    await request(app.getHttpServer())
+      .patch(`/plans/${planID}`)
+      .set("Cookie", badCookie)
       .send({ catalogYear: 2018 })
       .expect(403);
   });
@@ -156,7 +124,7 @@ describe("PlanController (e2e)", () => {
   it("deletes a user's plan by id", async () => {
     await request(app.getHttpServer())
       .delete(`/plans/${planID}`)
-      .set("Authorization", `Bearer ${jwtToken}`)
+      .set("Cookie", cookie)
       .expect(200);
   });
 
@@ -164,14 +132,16 @@ describe("PlanController (e2e)", () => {
     await request(app.getHttpServer()).delete(`/plans/${planID}`).expect(401);
   });
 
-  it("fails to delete a plan that does not belong to a user", async() => {
+  it("fails to delete a plan that does not belong to a user", async () => {
     const res = await request(app.getHttpServer())
       .post("/auth/register")
       .send(testUser2);
-    
-      await request(app.getHttpServer())
+
+    const badCookie = res.header["set-cookie"];
+
+    await request(app.getHttpServer())
       .delete(`/plans/${planID}`)
-      .set("Authorization", `Bearer ${res.body.accessToken}`)
+      .set("Cookie", badCookie)
       .expect(403);
-  })
+  });
 });

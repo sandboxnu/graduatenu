@@ -31,7 +31,7 @@ export class AuthController {
       throw new BadRequestException();
     }
 
-    const { accessToken } = student;
+    const { accessToken, ...studentInfo } = student;
 
     const isSecure = process.env.NODE_ENV !== "development";
     // Store JWT token in a cookie
@@ -40,8 +40,7 @@ export class AuthController {
       sameSite: "strict",
       secure: isSecure,
     });
-
-    return student;
+    return studentInfo;
   }
 
   @Post("login")
@@ -55,7 +54,7 @@ export class AuthController {
       throw new UnauthorizedException();
     }
 
-    const { accessToken } = student;
+    const { accessToken, ...studentInfo } = student;
 
     const isSecure = process.env.NODE_ENV !== "development";
     // Store JWT token in a cookie
@@ -64,7 +63,7 @@ export class AuthController {
       sameSite: "strict",
       secure: isSecure,
     });
-    return student;
+    return studentInfo;
   }
 
   @Get("logout")

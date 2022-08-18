@@ -3,50 +3,26 @@ import { Plan } from "../../src/plan/entities/plan.entity";
 import * as request from "supertest";
 import { Connection } from "typeorm";
 import { dropStudentTable, initializeApp } from "../../test/utils";
-
-const testUser = {
-  fullName: "Tester",
-  nuid: "000000000",
-  email: "test-student@gmail.com",
-  password: "1234567890",
-  academicYear: 2019,
-  graduateYear: 2023,
-  catalogYear: 2019,
-  major: "Computer Science",
-};
-
-const testPlan = {
-  name: "Test Student",
-  schedule: {
-    years: [2019, 2020, 2021, 2022],
-    yearMap: {},
-  },
-  major: "Computer Science",
-  coopCycle: "4 year 2 co-ops",
-  concentration: "Artificial Intelligence",
-  catalogYear: 2019,
-  courseWarnings: [],
-  warnings: [],
-};
+import { testPlan, testUser1 } from "../../test/testingData";
 
 describe("StudentController (e2e)", () => {
   let app: INestApplication;
-  let jwtToken: string;
+  let cookie: any;
   let connection: Connection;
   let uuid: string;
 
   beforeEach(async () => {
-    app = await initializeApp()
+    app = await initializeApp();
 
     connection = app.get(Connection);
 
     // register student
     const res = await request(app.getHttpServer())
       .post("/auth/register")
-      .send(testUser);
+      .send(testUser1);
 
     // record access token & userID
-    jwtToken = res.body.accessToken;
+    cookie = res.header["set-cookie"];
     uuid = res.body.uuid;
   });
 
@@ -61,7 +37,7 @@ describe("StudentController (e2e)", () => {
   it("should successfully get a student", async () => {
     await request(app.getHttpServer())
       .get("/students/me")
-      .set("Authorization", `Bearer ${jwtToken}`)
+      .set("Cookie", cookie)
       .expect(200);
   });
 
@@ -75,12 +51,12 @@ describe("StudentController (e2e)", () => {
       .createQueryBuilder()
       .insert()
       .into(Plan)
-      .values([{ ...testPlan, student: { uuid, ...testUser } }])
+      .values([{ ...testPlan, student: { uuid, ...testUser1 } }])
       .execute();
 
     const res = await request(app.getHttpServer())
       .get("/students/me")
-      .set("Authorization", `Bearer ${jwtToken}`)
+      .set("Cookie", cookie)
       .query({ isWithPlans: true })
       .expect(200);
 
@@ -96,7 +72,7 @@ describe("StudentController (e2e)", () => {
     await request(app.getHttpServer())
       .patch("/students/me")
       .send({ graduateYear: 2022 })
-      .set("Authorization", `Bearer ${jwtToken}`)
+      .set("Cookie", cookie)
       .expect(200);
   });
 
@@ -107,7 +83,7 @@ describe("StudentController (e2e)", () => {
   it("should successfully delete a student", async () => {
     await request(app.getHttpServer())
       .delete("/students/me")
-      .set("Authorization", `Bearer ${jwtToken}`)
+      .set("Cookie", cookie)
       .expect(200);
   });
 });
