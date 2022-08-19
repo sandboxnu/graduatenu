@@ -5,13 +5,8 @@ export const redirectToOnboardingOrHome = (
   user: GetStudentResponse,
   router: NextRouter
 ) => {
-  if (user) {
-    if (user.isOnboarded) {
-      // redirect to home
-      router.push("/home");
-    } else {
-      // redirect to onboarding
-      router.push("/onboarding");
-    }
-  }
+  // redirect to home
+  if (user.isOnboarded) router.push("/home");
+  // redirect to onboarding
+  else router.push("/onboarding");
 };
