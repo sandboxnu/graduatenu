@@ -7,9 +7,8 @@ import {
   Repository,
   UpdateResult,
 } from "typeorm";
-import { SignUpStudentDto } from "../../../common";
+import { SignUpStudentDto, UpdateStudentDto } from "../../../common";
 import { Student } from "./entities/student.entity";
-import { UpdateStudentDto } from "../../../common/src/dto-types";
 @Injectable()
 export class StudentService {
   private readonly logger: Logger = new Logger();
@@ -86,7 +85,7 @@ export class StudentService {
 
   async update(
     uuid: string,
-    updateStudentDto: Partial<Student>
+    updateStudentDto: UpdateStudentDto
   ): Promise<UpdateResult> {
     const updateResult = await this.studentRepository.update(
       uuid,
