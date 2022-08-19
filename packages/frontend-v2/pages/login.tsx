@@ -12,7 +12,7 @@ import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { AxiosError } from "axios";
-import { logger, routeOnboarding } from "../utils";
+import { logger, redirectToOnboardingOrHome } from "../utils";
 import { LoginStudentDto } from "@graduate/common";
 const Login: NextPage = () => {
   const [apiError, setApiError] = useState("");
@@ -32,15 +32,7 @@ const Login: NextPage = () => {
     setRenderSpinner(true);
     try {
       const student = await API.student.getMe();
-      if (student) {
-        if (student.isOnboarded) {
-          // Redirect to home
-          router.push("/home");
-        } else {
-          // Redirect to onboarding
-          router.push("/onboarding");
-        }
-      }
+      redirectToOnboardingOrHome(student, router);
     } catch (err) {
       const error = err as AxiosError;
       logger.error(error);
@@ -55,7 +47,7 @@ const Login: NextPage = () => {
   const onSubmitHandler = async (payload: LoginStudentDto) => {
     try {
       const user = await API.auth.login(payload);
-      routeOnboarding(user, router);
+      redirectToOnboardingOrHome(user, router);
     } catch (err) {
       const error = err as AxiosError;
       if (error.response?.status === 401)

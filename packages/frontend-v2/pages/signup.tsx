@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { AxiosError } from "axios";
-import { logger, routeOnboarding } from "../utils";
+import { logger, redirectToOnboardingOrHome } from "../utils";
 import { SignUpStudentDto } from "@graduate/common";
 
 const Signup: NextPage = () => {
@@ -34,7 +34,7 @@ const Signup: NextPage = () => {
   const onSubmitHandler = async (payload: SignUpStudentDto) => {
     try {
       const user = await API.auth.register(payload);
-      routeOnboarding(user, router);
+      redirectToOnboardingOrHome(user, router);
     } catch (err) {
       const error = err as AxiosError;
       if (error.response?.status === 401)
