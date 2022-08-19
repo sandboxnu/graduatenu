@@ -54,5 +54,7 @@ export class OwnPlanGuard implements CanActivate {
         formatServiceCtx("OwnPlanGuard", "canActivate")
       );
     }
+
+    return res;
   }
 }

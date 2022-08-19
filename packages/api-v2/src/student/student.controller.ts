@@ -45,6 +45,10 @@ export class StudentController {
       throw new BadRequestException();
     }
 
+    if (!isWithPlans) {
+      student.plans = [];
+    }
+
     return student;
   }
 

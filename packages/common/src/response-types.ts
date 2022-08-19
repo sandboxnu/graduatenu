@@ -31,7 +31,7 @@ export class StudentModel<T> {
   coursesCompleted: ScheduleCourse[] | undefined;
   coursesTransfered: ScheduleCourse[] | undefined;
   primaryPlanId: number | true;
-  plans?: PlanModel<T>[];
+  plans: PlanModel<T>[];
   concentration: string | undefined;
   createdAt: Date;
   updatedAt: Date;

@@ -11,6 +11,8 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { Logo, HeaderContainer } from "../components";
+import { API } from "@graduate/api-client";
+import { useRouter } from "next/router";
 
 type InfoSectionProps = InfoImageProps & InfoTextProps;
 
@@ -24,7 +26,7 @@ interface InfoTextProps {
   description: string;
 }
 
-const Home: NextPage = () => {
+const LandingPage: NextPage = () => {
   return (
     <Box>
       <Header />
@@ -35,10 +37,17 @@ const Home: NextPage = () => {
 };
 
 const Header = (): JSX.Element => {
+  const router = useRouter();
+  const signUp = async () => {
+    await API.auth.login({ email: "aryan@gmail.com", password: "aryan1234" });
+    router.push("/home");
+  };
   return (
     <HeaderContainer>
       <Logo />
-      <Button size="sm">Sign In</Button>
+      <Button size="sm" onClick={signUp}>
+        Sign In
+      </Button>
     </HeaderContainer>
   );
 };
@@ -191,4 +200,4 @@ const InfoText = ({ title, description }: InfoTextProps): JSX.Element => {
   );
 };
 
-export default Home;
+export default LandingPage;

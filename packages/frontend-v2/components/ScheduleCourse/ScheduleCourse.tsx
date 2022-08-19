@@ -1,16 +1,44 @@
-import { Box, Text } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
+import { forwardRef } from "react";
 import { ScheduleCourse2 } from "@graduate/common";
+import { useDraggable } from "@dnd-kit/core";
+import { CSS } from "@dnd-kit/utilities";
 
-interface ScheduleCourseProps {
+interface DraggableScheduleCourseProps {
   scheduleCourse: ScheduleCourse2<string>;
 }
 
-export const ScheduleCourse: React.FC<ScheduleCourseProps> = ({
-  scheduleCourse,
-}) => {
+export const DraggableScheduleCourse: React.FC<
+  DraggableScheduleCourseProps
+> = ({ scheduleCourse }) => {
+  const { setNodeRef, transform, listeners, attributes } = useDraggable({
+    id: scheduleCourse.id,
+  });
+
   return (
-    <Box>
-      <Text>{scheduleCourse.classId}</Text>
-    </Box>
+    <ScheduleCourse
+      ref={setNodeRef}
+      scheduleCourse={scheduleCourse}
+      listeners={listeners}
+      attributes={attributes}
+      transform={CSS.Translate.toString(transform)}
+    />
   );
 };
+
+interface ScheduleCourseProps extends DraggableScheduleCourseProps {
+  listeners?: any;
+  attributes?: any;
+  transform?: string;
+}
+
+export const ScheduleCourse = forwardRef<
+  HTMLElement | null,
+  ScheduleCourseProps
+>(({ scheduleCourse, transform, listeners, attributes }, ref) => {
+  return (
+    <Box ref={ref} {...listeners} {...attributes} transform={transform}>
+      {scheduleCourse.classId}
+    </Box>
+  );
+});
