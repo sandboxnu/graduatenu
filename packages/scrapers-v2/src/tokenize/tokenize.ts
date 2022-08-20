@@ -58,19 +58,6 @@ export const tokenizeHTML = async ($: CheerioStatic): Promise<HDocument> => {
     requirementsContainer
   );
 
-  // TODO: replace with actual categorization
-  for (const s of sections) {
-    for (const r of s.entries) {
-      if (
-        r.type === HRowType.HEADER ||
-        r.type === HRowType.SUBHEADER ||
-        r.type === HRowType.COMMENT
-      ) {
-        categorizeTextRow(r);
-      }
-    }
-  }
-
   return {
     programRequiredHours,
     yearVersion,
@@ -301,7 +288,8 @@ const constructRow = (
     case HRowType.HEADER:
     case HRowType.SUBHEADER:
     case HRowType.COMMENT:
-      return constructTextRow($, tds, type);
+      const textRow = constructTextRow($, tds, type);
+      return categorizeTextRow(textRow);
     case HRowType.OR_COURSE:
       return constructOrCourseRow($, tds);
     case HRowType.PLAIN_COURSE:
@@ -310,14 +298,17 @@ const constructRow = (
     case HRowType.OR_OF_AND_COURSE:
       return constructMultiCourseRow($, tds, type);
     case HRowType.RANGE_LOWER_BOUNDED:
-    case HRowType.RANGE_LOWER_BOUNDED_WITH_EXCEPTIONS:
       return constructRangeLowerBoundedMaybeExceptions($, tds);
     case HRowType.RANGE_BOUNDED:
-    case HRowType.RANGE_BOUNDED_WITH_EXCEPTIONS:
       return constructRangeBoundedMaybeExceptions($, tds);
     case HRowType.RANGE_UNBOUNDED:
       return constructRangeUnbounded($, tds);
 
+    // cases not returned by getType()
+    case HRowType.RANGE_LOWER_BOUNDED_WITH_EXCEPTIONS:
+    case HRowType.RANGE_BOUNDED_WITH_EXCEPTIONS:
+    case HRowType.COMMENT_COUNT:
+      throw new Error("invalid row construction type");
     default:
       return assertUnreachable(type);
   }

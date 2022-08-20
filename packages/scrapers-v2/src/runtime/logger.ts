@@ -120,6 +120,8 @@ const logErrResult = (
  * are displayed separately.
  */
 class StatsLogger {
+  static MAX_PRINT_WIDTH = 120;
+
   // field -> value -> count
   private fields: Record<string, Map<any, number>> = {};
   // message -> list -> stacktrace
@@ -208,8 +210,8 @@ class StatsLogger {
     for (const [field, map] of Object.entries(this.fields)) {
       console.log(field, ":");
       const entries = Array.from(map.entries()).sort((a, b) => b[1] - a[1]);
-      for (const entry of entries) {
-        console.log("\t", ...entry);
+      for (const [value, count] of entries) {
+        console.log("\t", value?.slice(0, StatsLogger.MAX_PRINT_WIDTH), count);
       }
     }
   }

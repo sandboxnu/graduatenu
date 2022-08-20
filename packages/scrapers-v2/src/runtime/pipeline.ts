@@ -6,10 +6,11 @@ import { Err, Ok, ResultType } from "@graduate/common";
 import { Pipeline, StageLabel } from "./types";
 import { createAgent } from "./axios";
 import {
+  clearGlobalStatsLogger,
+  getGlobalStatsLogger,
   installGlobalStatsLogger,
   logProgress,
   logResults,
-  clearGlobalStatsLogger,
 } from "./logger";
 
 /**
@@ -41,6 +42,8 @@ export const runPipeline = async (yearStart: number, yearEnd: number) => {
   const results = await logProgress(pipelines);
   await unregisterAgent();
   logResults(results);
+  // used for debug logging from within pipeline stages
+  getGlobalStatsLogger()?.print();
   clearGlobalStatsLogger();
 };
 

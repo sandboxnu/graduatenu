@@ -3,31 +3,36 @@ import { Err, Ok, Result, ResultType } from "@graduate/common";
 import { ensureLength } from "../utils";
 import { getGlobalStatsLogger } from "../runtime/logger";
 
-type TextRowTypes = HRow & {
-  type: HRowType.COMMENT | HRowType.HEADER | HRowType.SUBHEADER;
-};
+type RowPicker<T extends HRowType> = HRow & { type: T };
+type CommentRow = RowPicker<HRowType.COMMENT>;
+type HeaderRow = RowPicker<HRowType.HEADER>;
+type SubheaderRow = RowPicker<HRowType.SUBHEADER>;
+type ParsedCommentRow = RowPicker<HRowType.COMMENT_COUNT>;
+type TextRowTypes = CommentRow | HeaderRow | SubheaderRow;
+
 export const categorizeTextRow = (row: TextRowTypes) => {
   // only 8 (~four of each) of the header types match regex
   // ignore headers for now (even the matching ones)
   if (row.type === HRowType.COMMENT) {
-    return parseCommentRow(row);
+    return categorizeCommentRow(row);
   }
+  return row;
 };
 
 const CHOICE_KEYWORD =
   /(complete|choose) ((at least|any|from|a minimum of) )?(?<countString>\w+)/g;
 
-export const parseCommentRow = (row: TextRowTypes) => {
+export const categorizeCommentRow = (
+  row: CommentRow
+): CommentRow | ParsedCommentRow => {
   const stats = getGlobalStatsLogger();
   const desc = row.description.toLowerCase();
-  const m = Array.from(desc.matchAll(CHOICE_KEYWORD));
-  // const matches = ensureLengthAtLeast(1, m);
-  if (m.length < 1) {
+  const matches = Array.from(desc.matchAll(CHOICE_KEYWORD));
+  if (matches.length < 1) {
     stats?.recordField("comments not containing keyword", desc);
     stats?.recordField("comments status", "missing keyword");
-    return;
+    return row;
   }
-  const matches = m;
   // use the first match, ignore the others
   const countString = matches[0].groups?.["countString"];
   const count = parseCountString(countString);
@@ -37,6 +42,7 @@ export const parseCommentRow = (row: TextRowTypes) => {
       throw new Error("was nan");
     }
     stats?.recordField("comments status", "obtained count: " + count.ok);
+    return convertToParsedRow(row, count.ok);
   } else {
     if (row.hour !== 0) {
       stats?.recordField("comments status", "non-matching numeric text");
@@ -49,9 +55,15 @@ export const parseCommentRow = (row: TextRowTypes) => {
       );
       stats?.recordField("hour = zero + non-matching", desc);
     }
+    return row;
   }
+};
 
-  return; // ok
+const convertToParsedRow = (
+  row: CommentRow,
+  parsedCount: number
+): ParsedCommentRow => {
+  return { ...row, parsedCount, type: HRowType.COMMENT_COUNT };
 };
 
 const NUMS = {
