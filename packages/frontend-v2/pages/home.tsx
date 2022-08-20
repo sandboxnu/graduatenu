@@ -21,9 +21,11 @@ import {
 import { API } from "@graduate/api-client";
 import { PlanModel, ScheduleCourse2 } from "@graduate/common";
 import { useState } from "react";
-import { createPortal } from "react-dom";
+import { useRouter } from "next/router";
+import { Button } from "@chakra-ui/react";
 
 const HomePage: NextPage = () => {
+  const router = useRouter();
   const { error, student, mutateStudent } = useStudentWithPlans();
 
   // keep track of the course being dragged around so that we can display the drag overlay
@@ -108,17 +110,18 @@ const HomePage: NextPage = () => {
     );
   };
 
+  const logout = async () => {
+    await API.auth.logout();
+    router.push("/");
+  };
+
   return (
     <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
+      <Button onClick={logout}>Logout</Button>
       <Plan plan={primaryPlan} />
-      {createPortal(
-        <DragOverlay dropAnimation={undefined}>
-          {activeCourse ? (
-            <ScheduleCourse scheduleCourse={activeCourse} />
-          ) : null}
-        </DragOverlay>,
-        document.body
-      )}
+      <DragOverlay dropAnimation={undefined}>
+        {activeCourse ? <ScheduleCourse scheduleCourse={activeCourse} /> : null}
+      </DragOverlay>
     </DndContext>
   );
 };
