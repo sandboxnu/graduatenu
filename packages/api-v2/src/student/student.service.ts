@@ -7,9 +7,8 @@ import {
   Repository,
   UpdateResult,
 } from "typeorm";
-import { SignUpDto } from "../../../common";
+import { SignUpStudentDto, UpdateStudentDto } from "../../../common";
 import { Student } from "./entities/student.entity";
-import { UpdateStudentDto } from "../../../common/src/dto-types";
 @Injectable()
 export class StudentService {
   private readonly logger: Logger = new Logger();
@@ -19,7 +18,7 @@ export class StudentService {
     private studentRepository: Repository<Student>
   ) {}
 
-  async create(createStudentDto: SignUpDto): Promise<Student> {
+  async create(createStudentDto: SignUpStudentDto): Promise<Student> {
     // make sure the user doesn't already exists
     const { email } = createStudentDto;
     const userInDb = await this.studentRepository.findOne({ where: { email } });
@@ -28,6 +27,10 @@ export class StudentService {
         { message: "User already exists in db", userInDb },
         StudentService.formatStudentServiceCtx("create")
       );
+      return null;
+    }
+
+    if (createStudentDto.password !== createStudentDto.passwordConfirm) {
       return null;
     }
 

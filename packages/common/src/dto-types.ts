@@ -76,7 +76,7 @@ export class UpdatePlanDto {
   warnings?: IWarning[];
 }
 
-export class SignUpDto {
+export class SignUpStudentDto {
   @IsNotEmpty()
   @IsEmail()
   email: string;
@@ -84,8 +84,11 @@ export class SignUpDto {
   @IsNotEmpty()
   @IsString()
   password: string;
-}
 
+  @IsNotEmpty()
+  @IsString()
+  passwordConfirm: string;
+}
 export class UpdateStudentDto {
   @IsOptional()
   @IsNotEmpty()
