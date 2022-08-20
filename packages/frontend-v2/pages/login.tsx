@@ -9,15 +9,17 @@ import {
 import { API } from "@graduate/api-client";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { AxiosError } from "axios";
 import { logger, redirectToOnboardingOrHome } from "../utils";
 import { LoginStudentDto } from "@graduate/common";
+import { useRedirectIfLoggedIn } from "../hooks/useRedirectIfLoggedIn";
+
 const Login: NextPage = () => {
   const [apiError, setApiError] = useState("");
-  const [renderSpinner, setRenderSpinner] = useState(true);
   const router = useRouter();
+  const renderSpinner = useRedirectIfLoggedIn();
 
   const {
     register,
@@ -27,22 +29,6 @@ const Login: NextPage = () => {
     mode: "onTouched",
     shouldFocusError: true,
   });
-
-  const loginWithCookie = async () => {
-    setRenderSpinner(true);
-    try {
-      const student = await API.student.getMe();
-      redirectToOnboardingOrHome(student, router);
-    } catch (err) {
-      const error = err as AxiosError;
-      logger.error(error);
-      setRenderSpinner(false);
-    }
-  };
-
-  useEffect(() => {
-    loginWithCookie();
-  }, []);
 
   const onSubmitHandler = async (payload: LoginStudentDto) => {
     try {
