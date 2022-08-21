@@ -1,6 +1,7 @@
-import { HRow, HRowType } from "../src/tokenize/types";
+import { HDocument, HRow, HRowType } from "../src/tokenize/types";
 import { parseRows } from "../src/parse/parse";
 import { IOrCourse2, IRequiredCourse, Requirement2 } from "@graduate/common";
+import bscsTokens from "./bscsTokens.json";
 
 const course: HRow = {
   type: HRowType.PLAIN_COURSE,
@@ -31,7 +32,7 @@ const orCourseOutput: IOrCourse2 = {
   type: "OR",
 };
 
-describe("parse", () => {
+describe.skip("parse", () => {
   test("course", () => {
     // streaming-type parser, so produces an extra array
     // expect(parseRows([course, course])).toEqual([[output, output]]);
@@ -103,4 +104,14 @@ describe("parse", () => {
     ];
     expect(parseRows(input)).toMatchSnapshot();
   });
+});
+
+describe("describe", () => {
+  const typedTokens = bscsTokens as HDocument;
+  for (const section of typedTokens.sections) {
+    test(section.description, () => {
+      expect(parseRows(section.entries)).toMatchSnapshot();
+      // expect(() => parseRows(section.entries)).not.toThrow();
+    });
+  }
 });

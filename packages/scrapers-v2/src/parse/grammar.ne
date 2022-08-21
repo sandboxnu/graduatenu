@@ -1,45 +1,72 @@
 @{%
+const { HRowType } = require("../tokenize/types");
+
 // define custom tokens
 // basically just check against the HRowType enum value
-const HEADER = { test: x => x.type === "HEADER" };
-const SUBHEADER = { test: x => x.type === "SUBHEADER" };
-const COMMENT = { test: x => x.type === "COMMENT" };
+const buildMatcher = (enumVariant) => ({ test: x => x.type === enumVariant });
 
-const OR_COURSE = { test: x => x.type === "OR_COURSE" };
-const OR_OF_AND_COURSE = { test: x => x.type === "OR_OF_AND_COURSE" };
+const HEADER = buildMatcher(HRowType.HEADER);
+const SUBHEADER = buildMatcher(HRowType.SUBHEADER);
+const COMMENT = buildMatcher(HRowType.COMMENT);
+const COMMENT_COUNT = buildMatcher(HRowType.COMMENT_COUNT);
 
-const AND_COURSE = { test: x => x.type === "AND_COURSE" };
+const OR_COURSE = buildMatcher(HRowType.OR_COURSE);
+const AND_COURSE = buildMatcher(HRowType.AND_COURSE);
+const OR_OF_AND_COURSE = buildMatcher(HRowType.OR_OF_AND_COURSE);
+const PLAIN_COURSE = buildMatcher(HRowType.PLAIN_COURSE);
 
-const PLAIN_COURSE = { test: x => x.type === "PLAIN_COURSE" };
-const RANGE_LOWER_BOUNDED = { test: x => x.type === "RANGE_LOWER_BOUNDED" };
-const RANGE_LOWER_BOUNDED_WITH_EXCEPTIONS = { test: x => x.type === "RANGE_LOWER_BOUNDED_WITH_EXCEPTIONS" };
-const RANGE_BOUNDED = { test: x => x.type === "RANGE_BOUNDED" };
-const RANGE_BOUNDED_WITH_EXCEPTIONS = { test: x => x.type === "RANGE_BOUNDED_WITH_EXCEPTIONS" };
-const RANGE_UNBOUNDED = { test: x => x.type === "RANGE_UNBOUNDED" };
+const RANGE_LOWER_BOUNDED = buildMatcher(HRowType.RANGE_LOWER_BOUNDED);
+const RANGE_LOWER_BOUNDED_WITH_EXCEPTIONS = buildMatcher(HRowType.RANGE_LOWER_BOUNDED_WITH_EXCEPTIONS);
+
+const RANGE_BOUNDED = buildMatcher(HRowType.RANGE_BOUNDED);
+const RANGE_BOUNDED_WITH_EXCEPTIONS = buildMatcher(HRowType.RANGE_BOUNDED_WITH_EXCEPTIONS);
+
+const RANGE_UNBOUNDED = buildMatcher(HRowType.RANGE_UNBOUNDED);
 %}
 
 @{%
 // import postprocessors
 const mt = () => [];
-const cons = ([first, rest]) => [first, ...rest];
+const cons = ([first, rest]) => [first, ...(rest ? rest : [])];
 const postprocess = require("./postprocess");
+const flat = ([e]) => e.flat();
 %}
 
 # main entrypoint
 ## ranges may produce arrays of requirements, so call flat
-main -> requirement2_list                                  {% d => d[0].flat() %}
-## to avoid ambiguity, ANDs cannot follow ANDs
-requirement2_list ->
-    nonAndCourseList                                       {% id %}
-  | andCourse nonAndCourseList                             {% cons %}
-nonAndCourseList ->
-    null                                                   {% mt %}
-  | (course | range | orCourse) requirement2_list          {% cons %}
+# need to make it so that tokens cannot follow other tokens
+main ->
+  (requirementList commentCountGroup :*)
+  | headerGroup :+
 
-requirement2 ->
-    orCourse                                               {% id %}
-  | andCourse                                              {% id %}
-  | course                                                 {% id %}
+# text cases
+
+headerGroup ->
+    %HEADER
+    %COMMENT :?
+  ( requirementList
+  | commentCountGroup :+
+  )                                                        {% ([hd, cm, rest]) => [hd, cm, ...rest] %}
+
+commentCountGroup ->
+    %COMMENT_COUNT
+  ( requirementList
+  | subGroup :+
+  )                                                        {% cons %}
+
+subGroup -> %SUBHEADER requirementList                     {% cons %}
+
+## to avoid ambiguity, ANDs cannot follow ANDs
+requirementList -> nestedRequirementList                   {% flat %}
+nestedRequirementList ->
+    null                                                   {% mt %}
+  | andCourse null                                         {% cons %}
+  | andCourse nonAndCourse nestedRequirementList           {% ([fst, snd, rest]) => [fst, snd, ...rest] %}
+  | nonAndCourse nestedRequirementList                     {% cons %}
+
+nonAndCourse ->
+    course                                                 {% id %}
+  | orCourse                                               {% id %}
   | range                                                  {% id %}
 
 # atoms
@@ -65,4 +92,3 @@ andCourse ->
   ( %AND_COURSE                                            {% postprocess.processOrOfAnd %}
   ) :+                                                     {% postprocess.processAnd %}
 
-# comment cases
