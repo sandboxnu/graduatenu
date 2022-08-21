@@ -5,7 +5,7 @@ import { AxiosError } from "axios";
 import { preparePlanForDnd } from "../utils";
 
 type StudentResponse = Omit<
-  SWRResponse<GetStudentResponse, AxiosError>,
+  SWRResponse<GetStudentResponse, AxiosError | Error>,
   "data" | "mutate"
 >;
 

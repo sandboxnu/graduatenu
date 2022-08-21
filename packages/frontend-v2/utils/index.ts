@@ -3,3 +3,4 @@ export * from "./logger";
 export * from "./toast";
 export * from "./redirectToOnboardingOrHome";
 export * from "./plan";
+export * from "./logout";

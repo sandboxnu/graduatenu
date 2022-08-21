@@ -1,5 +1,11 @@
 import { NextPage } from "next";
-import { Plan, ScheduleCourse } from "../components";
+import {
+  HeaderContainer,
+  LoadingPage,
+  Logo,
+  Plan,
+  ScheduleCourse,
+} from "../components";
 import {
   fetchStudentAndPrepareForDnd,
   useStudentWithPlans,
@@ -14,6 +20,7 @@ import {
   cleanDndIdsFromPlan,
   findCourseByDndId,
   logger,
+  logout,
   toast,
   updatePlanForStudent,
   updatePlanOnDragEnd,
@@ -34,18 +41,26 @@ const HomePage: NextPage = () => {
 
   if (error) {
     logger.error("HomePage", error);
-    return <p>Error fetching student</p>;
+    return (
+      <PageLayout>
+        <p>Error loading page</p>
+      </PageLayout>
+    );
   }
 
   if (!student) {
-    return <p>Loading...</p>;
+    return <LoadingPage header={<Header />} />;
   }
 
   const primaryPlan = student.plans.find((p) => student.primaryPlanId === p.id);
 
   if (!primaryPlan) {
     // TODO: Handle no plan/no primary plan case
-    throw new Error("Student doesn't have a valid primary plan set");
+    return (
+      <PageLayout>
+        <p>Student has no primary plan</p>
+      </PageLayout>
+    );
   }
 
   const handleDragStart = (event: DragStartEvent): void => {
@@ -109,19 +124,39 @@ const HomePage: NextPage = () => {
     );
   };
 
-  const logout = async () => {
-    await API.auth.logout();
-    router.push("/");
-  };
+  return (
+    <PageLayout>
+      <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
+        <Plan plan={primaryPlan} />
+        <DragOverlay dropAnimation={undefined}>
+          {activeCourse ? (
+            <ScheduleCourse scheduleCourse={activeCourse} />
+          ) : null}
+        </DragOverlay>
+      </DndContext>
+    </PageLayout>
+  );
+};
+
+const PageLayout: React.FC = ({ children }) => {
+  return (
+    <>
+      <Header />
+      {children}
+    </>
+  );
+};
+
+const Header: React.FC = () => {
+  const router = useRouter();
 
   return (
-    <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
-      <Button onClick={logout}>Logout</Button>
-      <Plan plan={primaryPlan} />
-      <DragOverlay dropAnimation={undefined}>
-        {activeCourse ? <ScheduleCourse scheduleCourse={activeCourse} /> : null}
-      </DragOverlay>
-    </DndContext>
+    <HeaderContainer>
+      <Logo />
+      <Button size="sm" onClick={() => logout(router)}>
+        Logout
+      </Button>
+    </HeaderContainer>
   );
 };
 

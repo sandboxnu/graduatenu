@@ -1,5 +1,6 @@
 import { extendTheme } from "@chakra-ui/react";
 import { Button } from "./components/buttons";
+import { Spinner } from "./components/spinners";
 
 const colors = {
   primary: {
@@ -84,6 +85,7 @@ const space = {
 /** Customized component styles can be configured and passed to the theme provider */
 const components = {
   Button,
+  Spinner,
 };
 
 export const theme = extendTheme({
