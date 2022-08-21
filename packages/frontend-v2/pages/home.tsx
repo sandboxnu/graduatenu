@@ -33,7 +33,7 @@ const HomePage: NextPage = () => {
     useState<ScheduleCourse2<string> | null>(null);
 
   if (error) {
-    logger.error("Error", error);
+    logger.error("HomePage", error);
     return <p>Error fetching student</p>;
   }
 
@@ -55,7 +55,6 @@ const HomePage: NextPage = () => {
       primaryPlan.schedule,
       active.id as string // dnd ids are strings
     );
-    console.log("Active: ", activeCourse);
     if (activeCourse) {
       setActiveCourse(activeCourse);
     }
@@ -78,7 +77,7 @@ const HomePage: NextPage = () => {
       updatedPlan = updatePlanOnDragEnd(primaryPlan, active, over);
     } catch (err) {
       // update failed, either due to some logical issue or explicitely thrown error
-      logger.error("updatePlanOnDragEnd", err);
+      logger.debug("updatePlanOnDragEnd", err);
       return;
     }
 
