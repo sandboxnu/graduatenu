@@ -11,8 +11,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { Logo, HeaderContainer } from "../components";
-import { API } from "@graduate/api-client";
-import { useRouter } from "next/router";
+import Link from "next/link";
 
 type InfoSectionProps = InfoImageProps & InfoTextProps;
 
@@ -37,17 +36,12 @@ const LandingPage: NextPage = () => {
 };
 
 const Header = (): JSX.Element => {
-  const router = useRouter();
-  const signUp = async () => {
-    await API.auth.login({ email: "aryan@gmail.com", password: "aryan1234" });
-    router.push("/home");
-  };
   return (
     <HeaderContainer>
       <Logo />
-      <Button size="sm" onClick={signUp}>
-        Sign In
-      </Button>
+      <Link href="/login" passHref>
+        <Button size="sm">Sign In</Button>
+      </Link>
     </HeaderContainer>
   );
 };
@@ -90,12 +84,14 @@ const Banner = (): JSX.Element => {
               personalized plan of study.
             </Text>
           </Box>
-          <Button
-            mr={{ desktop: "7.5rem", laptop: "6.25rem", tablet: "3.25rem" }}
-            mt="15%"
-          >
-            Get Started
-          </Button>
+          <Link href="/signup" passHref>
+            <Button
+              mr={{ desktop: "7.5rem", laptop: "6.25rem", tablet: "3.25rem" }}
+              mt="15%"
+            >
+              Get Started
+            </Button>
+          </Link>
         </Flex>
       </HStack>
     </Box>

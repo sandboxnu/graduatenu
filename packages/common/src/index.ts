@@ -6,5 +6,4 @@ export * from "./constants";
 export * from "./course-utils";
 export * from "./dto-types";
 export * from "./response-types";
-
 // this file IS included in the build
