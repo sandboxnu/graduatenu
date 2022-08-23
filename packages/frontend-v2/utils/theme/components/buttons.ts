@@ -22,12 +22,12 @@ export const Button: ComponentStyleConfig = {
     // can create new button variants here
     outline: {
       border: "2px solid",
-      borderColor: "primary.main",
-      color: "primary.main",
-      colorScheme: "primary",
+      borderColor: "primary.red.main",
+      color: "primary.red.main",
+      colorScheme: "primary.red",
     },
     solid: {
-      bg: "primary.main",
+      bg: "primary.red.main",
       color: "white",
     },
   },
@@ -35,6 +35,6 @@ export const Button: ComponentStyleConfig = {
   defaultProps: {
     size: "md",
     variant: "outline",
-    colorScheme: "primary",
+    colorScheme: "primary.red",
   },
 };
