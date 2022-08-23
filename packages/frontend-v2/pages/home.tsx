@@ -30,10 +30,11 @@ import { PlanModel, ScheduleCourse2 } from "@graduate/common";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { Button } from "@chakra-ui/react";
+import { handleApiClientError } from "../utils/handleApiClientError";
 
 const HomePage: NextPage = () => {
-  const router = useRouter();
   const { error, student, mutateStudent } = useStudentWithPlans();
+  const router = useRouter();
 
   // keep track of the course being dragged around so that we can display the drag overlay
   const [activeCourse, setActiveCourse] =
@@ -41,15 +42,14 @@ const HomePage: NextPage = () => {
 
   if (error) {
     logger.error("HomePage", error);
-    return (
-      <PageLayout>
-        <p>Error loading page</p>
-      </PageLayout>
-    );
+    handleApiClientError(error, router);
+
+    // render the boiler plate page(everything except the plan)
+    return <PageLayout />;
   }
 
   if (!student) {
-    return <LoadingPage header={<Header />} />;
+    return <LoadingPage pageLayout={PageLayout} />;
   }
 
   const primaryPlan = student.plans.find((p) => student.primaryPlanId === p.id);
@@ -138,6 +138,10 @@ const HomePage: NextPage = () => {
   );
 };
 
+/**
+ * This will have everything that can be rendered without the plan(i.e: header,
+ * sidebar, etc)
+ */
 const PageLayout: React.FC = ({ children }) => {
   return (
     <>
