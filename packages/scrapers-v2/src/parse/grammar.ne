@@ -45,24 +45,64 @@ headerGroup ->
     %HEADER
     %COMMENT :?
   ( requirementList
-  | commentCountGroup :+
+  | (commentCountGroup | subHeaderGroup) :+
   )                                                        {% ([hd, cm, rest]) => [hd, cm, ...rest] %}
+
+subHeaderGroup ->
+  %SUBHEADER (commentCountGroup | requirementList)         {% cons %}
 
 commentCountGroup ->
     %COMMENT_COUNT
   ( requirementList
-  | subGroup :+
+  | subHeaderGroup :+
   )                                                        {% cons %}
 
-subGroup -> %SUBHEADER requirementList                     {% cons %}
+
+@{%
+/*
+PROBLEM: when there are subgroups inside of a header, following a comment count, unsure if the subgroups are at the top-level or are within comment count
+SOLUTION: look at the indentation of shit -> HTML parser refactoring :(
+
+header -> (commentCountGroup | subheaderGroup) :+
+subheaderGroup -> SUBHEADER (commentCountGroup | requirementList)
+commentCountGroup -> COMMENT_COUNT (requirementList | subHeaderGroup :+)
+
+header
+- commentCountGroup
+- subheader
+  - commentCountGroup
+
+header
+- subheader
+  - commentCountGroup
+- subheader
+  - commentCount
+    - subheader
+      - requirement list
+    - subheader
+      - requirement list
+
+headeer
+- requirementlist
+header
+- commentCountGroup
+header
+- commentCount
+  - subheader
+    - requirementlist
+  - subheader
+    - requirementlist
+
+*/
+%}
 
 ## to avoid ambiguity, ANDs cannot follow ANDs
 requirementList -> nestedRequirementList                   {% flat %}
 nestedRequirementList ->
     null                                                   {% mt %}
-  | andCourse null                                         {% cons %}
-  | andCourse nonAndCourse nestedRequirementList           {% ([fst, snd, rest]) => [fst, snd, ...rest] %}
-  | nonAndCourse nestedRequirementList                     {% cons %}
+  | andCourse %COMMENT :? null                             {% ([a,b,c]) => [a,b] %}
+  | andCourse %COMMENT :? nonAndCourse %COMMENT :? nestedRequirementList           {% ([a,b,c,d,e]) => [a,b,c,d, ...e] %}
+  | nonAndCourse %COMMENT :? nestedRequirementList                     {% ([a,b,c]) => [a,b,...c] %}
 
 nonAndCourse ->
     course                                                 {% id %}
