@@ -1,4 +1,4 @@
-import { Flex, Spinner } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import { PageSpinner } from "./PageSpinner";
 
 interface LoadingPageProps {
