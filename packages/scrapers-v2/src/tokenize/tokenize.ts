@@ -20,11 +20,13 @@ import {
   HRow,
   HRowType,
   HSection,
+  HToken,
   MultiCourseRow,
   RangeBoundedRow,
   RangeLowerBoundedRow,
   RangeUnboundedRow,
   TextRow,
+  TextRowNoHours,
   WithExceptions,
 } from "./types";
 import { join } from "path";
@@ -62,7 +64,7 @@ export const tokenizeHTML = async ($: CheerioStatic): Promise<HDocument> => {
     programRequiredHours,
     yearVersion,
     majorName,
-    sections: sections,
+    sections,
   };
 };
 
@@ -205,18 +207,38 @@ const constructNestedLinks = ($: CheerioStatic, element: CheerioElement) => {
  * @param $
  * @param table
  */
-const tokenizeRows = ($: CheerioStatic, table: CheerioElement): HRow[] => {
-  const courseTable: HRow[] = [];
+const tokenizeRows = ($: CheerioStatic, table: CheerioElement): HToken[] => {
+  let currentIndentation = 0;
+  const tokens: HToken[] = [];
 
   for (const tr of $(table).find("tbody > tr").toArray()) {
     // different row type
     const tds = $(tr).find("td").toArray().map($);
     const type = getRowType($, tr, tds);
-    const row = constructRow($, tds, type);
-    courseTable.push(row);
+    const { indentation: rowIndentation, ...row } = constructRow($, tds, type);
+
+    // insert indent/dedents appropriately. skip if comment, bc it messes up indentation
+    while (
+      currentIndentation !== rowIndentation &&
+      row.type !== HRowType.COMMENT
+    ) {
+      if (currentIndentation < rowIndentation) {
+        tokens.push({ type: HRowType.ROW_INDENT });
+        currentIndentation += 1;
+      } else {
+        tokens.push({ type: HRowType.ROW_DEDENT });
+        currentIndentation -= 1;
+      }
+    }
+    tokens.push(row);
   }
 
-  return courseTable;
+  while (currentIndentation > 0) {
+    tokens.push({ type: HRowType.ROW_DEDENT });
+    currentIndentation -= 1;
+  }
+
+  return tokens;
 };
 
 /**
@@ -272,6 +294,9 @@ const getRowType = ($: CheerioStatic, tr: CheerioElement, tds: Cheerio[]) => {
   return HRowType.COMMENT;
 };
 
+// type alias for saving keystrokes
+type Indent = { indentation: number };
+
 /**
  * Converts a single row based on the passed-in type (determined by {@link getRowType}
  *
@@ -283,13 +308,13 @@ const constructRow = (
   $: CheerioStatic,
   tds: Cheerio[],
   type: HRowType
-): HRow => {
+): HRow & Indent => {
   switch (type) {
     case HRowType.HEADER:
     case HRowType.SUBHEADER:
     case HRowType.COMMENT:
-      const textRow = constructTextRow($, tds, type);
-      return categorizeTextRow(textRow);
+      const { indentation, ...textRow } = constructTextRow($, tds, type);
+      return { ...categorizeTextRow(textRow), indentation };
     case HRowType.OR_COURSE:
       return constructOrCourseRow($, tds);
     case HRowType.PLAIN_COURSE:
@@ -308,58 +333,92 @@ const constructRow = (
     case HRowType.RANGE_LOWER_BOUNDED_WITH_EXCEPTIONS:
     case HRowType.RANGE_BOUNDED_WITH_EXCEPTIONS:
     case HRowType.COMMENT_COUNT:
+    case HRowType.COMMENT_HOUR:
+    case HRowType.ROW_INDENT:
+    case HRowType.ROW_DEDENT:
       throw new Error("invalid row construction type");
     default:
       return assertUnreachable(type);
   }
 };
 
-const constructTextRow = <T>(
+const constructTextRow = (
   $: CheerioStatic,
   tds: Cheerio[],
-  type: T
-): TextRow<T> => {
+  type: HRowType.HEADER | HRowType.SUBHEADER | HRowType.COMMENT
+): (
+  | TextRowNoHours<HRowType.COMMENT>
+  | TextRow<HRowType.COMMENT_HOUR>
+  | TextRow<HRowType.HEADER>
+  | TextRow<HRowType.SUBHEADER>
+) &
+  Indent => {
   if (tds.length !== 2) {
     throw new Error(tds.toString());
   }
   const [c1, c2] = ensureLength(2, tds);
   const description = parseText(c1);
   const hour = parseHour(c2);
-  return { hour, description, type };
+  const indentation = parseIndentationLevel(c1);
+  if (type === HRowType.COMMENT) {
+    if (hour === 0) {
+      return { description, type, indentation };
+    }
+    return { hour, description, type: HRowType.COMMENT_HOUR, indentation };
+  }
+  return { hour, description, type, indentation };
 };
 
 const constructPlainCourseRow = (
   $: CheerioStatic,
   tds: Cheerio[]
-): CourseRow<HRowType.PLAIN_COURSE> => {
+): CourseRow<HRowType.PLAIN_COURSE> & Indent => {
   const [code, desc, hourCol] = ensureLength(3, tds);
   const { subject, classId } = parseCourseTitle(parseText(code));
   const description = parseText(desc);
   const hour = parseHour(hourCol);
-  return { hour, description, type: HRowType.PLAIN_COURSE, subject, classId };
+  const indentation = parseIndentationLevel(code);
+  return {
+    hour,
+    description,
+    type: HRowType.PLAIN_COURSE,
+    subject,
+    classId,
+    indentation,
+  };
 };
 
 const constructOrCourseRow = (
   $: CheerioStatic,
   tds: Cheerio[]
-): CourseRow<HRowType.OR_COURSE> => {
+): CourseRow<HRowType.OR_COURSE> & Indent => {
   const [code, desc] = ensureLength(2, tds);
   // remove "or "
   const { subject, classId } = parseCourseTitle(
     parseText(code).substring(3).trim()
   );
   const description = parseText(desc);
+  const indentation = parseIndentationLevel(code);
   // there may be multiple courses in the OR, so we can't backtrack
-  return { hour: 0, description, type: HRowType.OR_COURSE, subject, classId };
+  return {
+    hour: 0,
+    description,
+    type: HRowType.OR_COURSE,
+    subject,
+    classId,
+    indentation,
+  };
 };
 
 const constructMultiCourseRow = (
   $: CheerioStatic,
   tds: Cheerio[],
   type: HRowType.AND_COURSE | HRowType.OR_OF_AND_COURSE
-):
+): (
   | MultiCourseRow<HRowType.AND_COURSE>
-  | MultiCourseRow<HRowType.OR_OF_AND_COURSE> => {
+  | MultiCourseRow<HRowType.OR_OF_AND_COURSE>
+) &
+  Indent => {
   // some ORs of ANDs don't have a third cell for hour column
   const [code, desc, hourCol] = ensureLengthAtLeast(2, tds);
   const titles = code
@@ -385,22 +444,26 @@ const constructMultiCourseRow = (
     description: descriptions[i],
   }));
   const hour = hourCol ? parseHour(hourCol) : 0;
+  const indentation = parseIndentationLevel(code);
   return {
     hour,
     type,
     description: descriptions.join(" and "),
     courses,
+    indentation,
   };
 };
 
 const constructRangeLowerBoundedMaybeExceptions = (
   $: CheerioStatic,
   tds: Cheerio[]
-):
+): (
   | WithExceptions<
       RangeLowerBoundedRow<HRowType.RANGE_LOWER_BOUNDED_WITH_EXCEPTIONS>
     >
-  | RangeLowerBoundedRow<HRowType.RANGE_LOWER_BOUNDED> => {
+  | RangeLowerBoundedRow<HRowType.RANGE_LOWER_BOUNDED>
+) &
+  Indent => {
   const [desc, hourCol] = ensureLength(2, tds);
   const hour = parseHour(hourCol);
   // text should match one of the following:
@@ -414,6 +477,7 @@ const constructRangeLowerBoundedMaybeExceptions = (
     1,
     matches
   );
+  const indentation = parseIndentationLevel(desc);
   if (exceptions.length > 0) {
     return {
       type: HRowType.RANGE_LOWER_BOUNDED_WITH_EXCEPTIONS,
@@ -424,6 +488,7 @@ const constructRangeLowerBoundedMaybeExceptions = (
         subject,
         classId: Number(id),
       })),
+      indentation,
     };
   }
   return {
@@ -431,15 +496,18 @@ const constructRangeLowerBoundedMaybeExceptions = (
     hour,
     subject,
     classIdStart: Number(id),
+    indentation,
   };
 };
 
 const constructRangeBoundedMaybeExceptions = (
   $: CheerioStatic,
   tds: Cheerio[]
-):
+): (
   | RangeBoundedRow<HRowType.RANGE_BOUNDED>
-  | WithExceptions<RangeBoundedRow<HRowType.RANGE_BOUNDED_WITH_EXCEPTIONS>> => {
+  | WithExceptions<RangeBoundedRow<HRowType.RANGE_BOUNDED_WITH_EXCEPTIONS>>
+) &
+  Indent => {
   const [desc, hourCol] = ensureLength(2, tds);
   const hour = parseHour(hourCol);
   // text should match the form:
@@ -456,6 +524,7 @@ const constructRangeBoundedMaybeExceptions = (
     classIdStart: Number(classIdStart),
     classIdEnd: Number(classIdEnd),
   };
+  const indentation = parseIndentationLevel(desc);
   if (exceptions.length > 0) {
     return {
       ...result,
@@ -464,18 +533,20 @@ const constructRangeBoundedMaybeExceptions = (
         subject,
         classId: Number(id),
       })),
+      indentation,
     };
   }
   return {
     ...result,
     type: HRowType.RANGE_BOUNDED,
+    indentation,
   };
 };
 
 const constructRangeUnbounded = (
   $: CheerioStatic,
   tds: Cheerio[]
-): RangeUnboundedRow<HRowType.RANGE_UNBOUNDED> => {
+): RangeUnboundedRow<HRowType.RANGE_UNBOUNDED> & Indent => {
   const [desc, hourCol] = ensureLength(2, tds);
   const hour = parseHour(hourCol);
   // text should match one of the following:
@@ -484,15 +555,19 @@ const constructRangeUnbounded = (
   const text = parseText(desc);
   const matches = Array.from(text.match(SUBJECT_REGEX) ?? []);
   const subjects = ensureLengthAtLeast(3, matches);
+  const indentation = parseIndentationLevel(desc);
   return {
     type: HRowType.RANGE_UNBOUNDED,
     hour,
     subjects,
+    indentation,
   };
 };
 
 const parseHour = (td: Cheerio) => {
   const hourText = td.text();
+  // todo: add support for hour ranges
+  // todo: add support for returning null hour
   return parseInt(hourText.split("-")[0]) || 0;
 };
 const parseCourseTitle = (parsedCourse: string) => {
@@ -501,4 +576,8 @@ const parseCourseTitle = (parsedCourse: string) => {
     subject,
     classId: Number(classId),
   };
+};
+
+const parseIndentationLevel = (td: Cheerio) => {
+  return td.find("div.blockindent").length;
 };

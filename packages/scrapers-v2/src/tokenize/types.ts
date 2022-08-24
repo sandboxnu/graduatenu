@@ -12,7 +12,7 @@ export type HDocument = {
 /** An HTML section (of a document) has a description, and a list of rows that it contains. */
 export type HSection = {
   description: string;
-  entries: HRow[];
+  entries: HToken[];
 };
 
 /**
@@ -27,7 +27,8 @@ export type HSection = {
  */
 export type HRow =
   // text rows
-  | TextRow<HRowType.COMMENT>
+  | TextRowNoHours<HRowType.COMMENT>
+  | TextRow<HRowType.COMMENT_HOUR>
   | CountAndHoursRow<HRowType.COMMENT_COUNT>
   | TextRow<HRowType.HEADER>
   | TextRow<HRowType.SUBHEADER>
@@ -46,6 +47,8 @@ export type HRow =
   | WithExceptions<RangeBoundedRow<HRowType.RANGE_BOUNDED_WITH_EXCEPTIONS>>
   | RangeUnboundedRow<HRowType.RANGE_UNBOUNDED>;
 
+export type HToken = HRow | RowIndent | RowDedent;
+
 // an enum to give a unique discriminator to each of the above cases
 // the different outputs we have, by TYPE
 export enum HRowType {
@@ -53,6 +56,7 @@ export enum HRowType {
   SUBHEADER = "SUBHEADER",
   COMMENT = "COMMENT",
   COMMENT_COUNT = "COMMENT_COUNT",
+  COMMENT_HOUR = "COMMENT_HOUR",
 
   OR_COURSE = "OR_COURSE",
   AND_COURSE = "AND_COURSE",
@@ -66,54 +70,56 @@ export enum HRowType {
   RANGE_BOUNDED_WITH_EXCEPTIONS = "RANGE_BOUNDED_WITH_EXCEPTIONS",
 
   RANGE_UNBOUNDED = "RANGE_UNBOUNDED",
+
+  ROW_INDENT = "ROW_INDENT",
+  ROW_DEDENT = "ROW_DEDENT",
 }
 
-export interface TextRow<T> {
+export type RowIndent = { type: HRowType.ROW_INDENT };
+export type RowDedent = { type: HRowType.ROW_DEDENT };
+
+export interface CommonFields<T> {
   type: T;
-  description: string;
   hour: number;
 }
 
-export interface CountAndHoursRow<T> {
+export interface TextRowNoHours<T> {
   type: T;
+  description: string;
+}
+
+export interface TextRow<T> extends CommonFields<T> {
+  description: string;
+}
+
+export interface CountAndHoursRow<T> extends CommonFields<T> {
   description: string;
   parsedCount: number;
-  hour: number;
 }
 
-export interface CourseRow<T> {
-  type: T;
+export interface CourseRow<T> extends CommonFields<T> {
   description: string;
-  hour: number;
   subject: string;
   classId: number;
 }
 
-export interface MultiCourseRow<T> {
-  type: T;
+export interface MultiCourseRow<T> extends CommonFields<T> {
   description: string;
-  hour: number;
   // may contain duplicates
   courses: Array<{ subject: string; classId: number; description: string }>;
 }
 
-export interface RangeBoundedRow<T> {
-  type: T;
-  hour: number;
+export interface RangeBoundedRow<T> extends CommonFields<T> {
   subject: string;
   classIdStart: number;
   classIdEnd: number;
 }
 
-export interface RangeUnboundedRow<T> {
-  type: T;
-  hour: number;
+export interface RangeUnboundedRow<T> extends CommonFields<T> {
   subjects: Array<string>;
 }
 
-export interface RangeLowerBoundedRow<T> {
-  type: T;
-  hour: number;
+export interface RangeLowerBoundedRow<T> extends CommonFields<T> {
   subject: string;
   classIdStart: number;
 }

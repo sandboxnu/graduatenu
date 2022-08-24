@@ -21,7 +21,11 @@ Object {
         Object {
           "description": "Complete one of the following:",
           "hour": 5,
-          "type": "COMMENT",
+          "parsedCount": 1,
+          "type": "COMMENT_COUNT",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "courses": Array [
@@ -63,6 +67,9 @@ Object {
           "type": "AND_COURSE",
         },
         Object {
+          "type": "ROW_DEDENT",
+        },
+        Object {
           "description": "Physics 2",
           "hour": 0,
           "type": "SUBHEADER",
@@ -70,7 +77,11 @@ Object {
         Object {
           "description": "Complete one of the following:",
           "hour": 5,
-          "type": "COMMENT",
+          "parsedCount": 1,
+          "type": "COMMENT_COUNT",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "courses": Array [
@@ -110,6 +121,9 @@ Object {
           "description": "Physics for Engineering 2 and Lab for PHYS 1155 and Interactive Learning Seminar for PHYS 1155",
           "hour": 0,
           "type": "AND_COURSE",
+        },
+        Object {
+          "type": "ROW_DEDENT",
         },
         Object {
           "description": "Intermediate Physics",
@@ -195,7 +209,11 @@ Object {
         Object {
           "description": "Complete one of the following:",
           "hour": 4,
-          "type": "COMMENT",
+          "parsedCount": 1,
+          "type": "COMMENT_COUNT",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classId": 4606,
@@ -212,6 +230,9 @@ Object {
           "type": "RANGE_BOUNDED",
         },
         Object {
+          "type": "ROW_DEDENT",
+        },
+        Object {
           "description": "Experiential Learning",
           "hour": 0,
           "type": "HEADER",
@@ -219,7 +240,8 @@ Object {
         Object {
           "description": "Complete one course in experiential learning. See department for approved courses. Note: The experiential learning requirement is waived following a student presentation connected with a co-op and/or research experience. The requirement is often fulfilled by a talk at a Society of Physics Students meeting but can be fulfilled by an adequately documented presentation at a professional meeting or at an appropriate campus event. Contact your faculty advisor for additional information.",
           "hour": 0,
-          "type": "COMMENT",
+          "parsedCount": 1,
+          "type": "COMMENT_COUNT",
         },
         Object {
           "description": "Senior Capstone",
@@ -341,7 +363,11 @@ Object {
         Object {
           "description": "Complete 8 semester hours from the following:",
           "hour": 8,
-          "type": "COMMENT",
+          "parsedCount": 8,
+          "type": "COMMENT_COUNT",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classId": 2280,
@@ -427,6 +453,9 @@ Object {
           "subject": "IE",
           "type": "RANGE_BOUNDED",
         },
+        Object {
+          "type": "ROW_DEDENT",
+        },
       ],
     },
     Object {
@@ -445,9 +474,15 @@ Object {
           "type": "PLAIN_COURSE",
         },
         Object {
+          "type": "ROW_INDENT",
+        },
+        Object {
           "description": "The following courses may be counted toward major electives, if they are listed as applicable options in the approved curriculum:",
           "hour": 0,
           "type": "SUBHEADER",
+        },
+        Object {
+          "type": "ROW_DEDENT",
         },
         Object {
           "classId": 3111,
@@ -752,7 +787,8 @@ Object {
         Object {
           "description": "Complete one of the following:",
           "hour": 0,
-          "type": "COMMENT",
+          "parsedCount": 1,
+          "type": "COMMENT_COUNT",
         },
         Object {
           "classId": 1850,
@@ -783,7 +819,11 @@ Object {
         Object {
           "description": "Complete three of the following:",
           "hour": 12,
-          "type": "COMMENT",
+          "parsedCount": 3,
+          "type": "COMMENT_COUNT",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "hour": 0,
@@ -799,7 +839,6 @@ Object {
         },
         Object {
           "description": "If GAME 4000 (or any other topics course in the subjects listed above) is completed more than once, the additional completions may be allowed toward the Game Design electives.",
-          "hour": 0,
           "type": "COMMENT",
         },
         Object {
@@ -878,6 +917,9 @@ Object {
           "subject": "PSYC",
           "type": "OR_COURSE",
         },
+        Object {
+          "type": "ROW_DEDENT",
+        },
       ],
     },
     Object {
@@ -903,7 +945,11 @@ Object {
         Object {
           "description": "Complete two courses from the following:",
           "hour": 8,
-          "type": "COMMENT",
+          "parsedCount": 2,
+          "type": "COMMENT_COUNT",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classId": 1260,
@@ -924,6 +970,9 @@ Object {
           "hour": 0,
           "subject": "MATH",
           "type": "RANGE_LOWER_BOUNDED",
+        },
+        Object {
+          "type": "ROW_DEDENT",
         },
       ],
     },
@@ -976,7 +1025,8 @@ Object {
         Object {
           "description": "Complete 12 semester hours of general electives.",
           "hour": 12,
-          "type": "COMMENT",
+          "parsedCount": 12,
+          "type": "COMMENT_COUNT",
         },
       ],
     },
@@ -1046,11 +1096,17 @@ Object {
           "type": "HEADER",
         },
         Object {
+          "type": "ROW_INDENT",
+        },
+        Object {
           "classIdEnd": 2399,
           "classIdStart": 2300,
           "hour": 0,
           "subject": "ARCH",
           "type": "RANGE_BOUNDED",
+        },
+        Object {
+          "type": "ROW_DEDENT",
         },
         Object {
           "description": "Electives",
@@ -1060,7 +1116,11 @@ Object {
         Object {
           "description": "Complete two of the following:",
           "hour": 8,
-          "type": "COMMENT",
+          "parsedCount": 2,
+          "type": "COMMENT_COUNT",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classId": 3370,
@@ -1083,6 +1143,9 @@ Object {
           "subject": "ARCH",
           "type": "PLAIN_COURSE",
         },
+        Object {
+          "type": "ROW_DEDENT",
+        },
       ],
     },
     Object {
@@ -1095,7 +1158,6 @@ Object {
         },
         Object {
           "description": "In addition to the capstone, two of the courses completed from the lists below must be numbered 3000–4999.",
-          "hour": 0,
           "type": "COMMENT",
         },
         Object {
@@ -1144,7 +1206,11 @@ Object {
         Object {
           "description": "Complete one of the following. This course may also be used to fulfill an additional English requirement below:",
           "hour": 4,
-          "type": "COMMENT",
+          "parsedCount": 1,
+          "type": "COMMENT_COUNT",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classId": 2150,
@@ -1203,6 +1269,9 @@ Object {
           "type": "PLAIN_COURSE",
         },
         Object {
+          "type": "ROW_DEDENT",
+        },
+        Object {
           "description": "Pre–Nineteenth-Century Literature",
           "hour": 0,
           "type": "HEADER",
@@ -1210,7 +1279,11 @@ Object {
         Object {
           "description": "Complete one of the following:",
           "hour": 4,
-          "type": "COMMENT",
+          "parsedCount": 1,
+          "type": "COMMENT_COUNT",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classId": 1600,
@@ -1248,6 +1321,9 @@ Object {
           "type": "PLAIN_COURSE",
         },
         Object {
+          "type": "ROW_DEDENT",
+        },
+        Object {
           "description": "Nineteenth-, Twentieth-, and Twenty-First-Century Literature",
           "hour": 0,
           "type": "HEADER",
@@ -1255,7 +1331,11 @@ Object {
         Object {
           "description": "Complete one of the following:",
           "hour": 4,
-          "type": "COMMENT",
+          "parsedCount": 1,
+          "type": "COMMENT_COUNT",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classId": 2330,
@@ -1314,6 +1394,9 @@ Object {
           "type": "PLAIN_COURSE",
         },
         Object {
+          "type": "ROW_DEDENT",
+        },
+        Object {
           "description": "Theories and Methods",
           "hour": 0,
           "type": "HEADER",
@@ -1321,7 +1404,11 @@ Object {
         Object {
           "description": "Complete one of the following:",
           "hour": 4,
-          "type": "COMMENT",
+          "parsedCount": 1,
+          "type": "COMMENT_COUNT",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classId": 1140,
@@ -1429,6 +1516,9 @@ Object {
           "type": "PLAIN_COURSE",
         },
         Object {
+          "type": "ROW_DEDENT",
+        },
+        Object {
           "description": "Comparative Literature",
           "hour": 0,
           "type": "HEADER",
@@ -1436,7 +1526,11 @@ Object {
         Object {
           "description": "Complete one of the following:",
           "hour": 4,
-          "type": "COMMENT",
+          "parsedCount": 1,
+          "type": "COMMENT_COUNT",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classId": 1450,
@@ -1537,6 +1631,9 @@ Object {
           "type": "PLAIN_COURSE",
         },
         Object {
+          "type": "ROW_DEDENT",
+        },
+        Object {
           "description": "Writing",
           "hour": 0,
           "type": "HEADER",
@@ -1544,7 +1641,11 @@ Object {
         Object {
           "description": "Complete one of the following:",
           "hour": 4,
-          "type": "COMMENT",
+          "parsedCount": 1,
+          "type": "COMMENT_COUNT",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classId": 2700,
@@ -1645,6 +1746,9 @@ Object {
           "type": "PLAIN_COURSE",
         },
         Object {
+          "type": "ROW_DEDENT",
+        },
+        Object {
           "description": "Capstone",
           "hour": 0,
           "type": "HEADER",
@@ -1671,7 +1775,8 @@ Object {
         Object {
           "description": "Complete two additional ENGL electives.",
           "hour": 8,
-          "type": "COMMENT",
+          "parsedCount": 2,
+          "type": "COMMENT_COUNT",
         },
       ],
     },
@@ -1819,7 +1924,10 @@ Object {
         Object {
           "description": "2 semester hours from the following course count toward the engineering requirement:",
           "hour": 2,
-          "type": "COMMENT",
+          "type": "COMMENT_HOUR",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classId": 1501,
@@ -1829,9 +1937,15 @@ Object {
           "type": "PLAIN_COURSE",
         },
         Object {
+          "type": "ROW_DEDENT",
+        },
+        Object {
           "description": "3 semester hours from the following course count toward the engineering requirement:",
           "hour": 3,
-          "type": "COMMENT",
+          "type": "COMMENT_HOUR",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classId": 1502,
@@ -1839,6 +1953,9 @@ Object {
           "hour": 0,
           "subject": "GE",
           "type": "PLAIN_COURSE",
+        },
+        Object {
+          "type": "ROW_DEDENT",
         },
       ],
     },
@@ -2093,7 +2210,11 @@ Object {
         Object {
           "description": "Complete one course in the following range:",
           "hour": 4,
-          "type": "COMMENT",
+          "parsedCount": 1,
+          "type": "COMMENT_COUNT",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classIdEnd": 5999,
@@ -2103,6 +2224,9 @@ Object {
           "type": "RANGE_BOUNDED",
         },
         Object {
+          "type": "ROW_DEDENT",
+        },
+        Object {
           "description": "Advanced Chemistry Elective",
           "hour": 0,
           "type": "HEADER",
@@ -2110,7 +2234,11 @@ Object {
         Object {
           "description": "Complete one course in the following range:",
           "hour": 4,
-          "type": "COMMENT",
+          "parsedCount": 1,
+          "type": "COMMENT_COUNT",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classIdEnd": 5999,
@@ -2120,6 +2248,9 @@ Object {
           "type": "RANGE_BOUNDED",
         },
         Object {
+          "type": "ROW_DEDENT",
+        },
+        Object {
           "description": "Supplemental Credit",
           "hour": 0,
           "type": "HEADER",
@@ -2127,7 +2258,10 @@ Object {
         Object {
           "description": "1 semester hour from the following course counts toward the mathematics/science requirement:",
           "hour": 1,
-          "type": "COMMENT",
+          "type": "COMMENT_HOUR",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classId": 1501,
@@ -2135,6 +2269,9 @@ Object {
           "hour": 0,
           "subject": "GE",
           "type": "PLAIN_COURSE",
+        },
+        Object {
+          "type": "ROW_DEDENT",
         },
       ],
     },
@@ -2175,7 +2312,10 @@ Object {
         Object {
           "description": "1 semester hour from the following course counts toward the professional development requirement:",
           "hour": 1,
-          "type": "COMMENT",
+          "type": "COMMENT_HOUR",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classId": 1501,
@@ -2185,9 +2325,15 @@ Object {
           "type": "PLAIN_COURSE",
         },
         Object {
+          "type": "ROW_DEDENT",
+        },
+        Object {
           "description": "1 semester hour from the following course counts toward the professional development requirement:",
           "hour": 1,
-          "type": "COMMENT",
+          "type": "COMMENT_HOUR",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classId": 1502,
@@ -2196,6 +2342,9 @@ Object {
           "subject": "GE",
           "type": "PLAIN_COURSE",
         },
+        Object {
+          "type": "ROW_DEDENT",
+        },
       ],
     },
     Object {
@@ -2203,7 +2352,6 @@ Object {
       "entries": Array [
         Object {
           "description": "A grade of C or higher is required:",
-          "hour": 0,
           "type": "COMMENT",
         },
         Object {
@@ -2242,7 +2390,8 @@ Object {
         Object {
           "description": "Complete 12 semester hours of academic, nonremedial, nonrepetitive courses.",
           "hour": 12,
-          "type": "COMMENT",
+          "parsedCount": 12,
+          "type": "COMMENT_COUNT",
         },
       ],
     },
@@ -2251,7 +2400,6 @@ Object {
       "entries": Array [
         Object {
           "description": "This course is already required above and also fulfills the integrative requirement.",
-          "hour": 0,
           "type": "COMMENT",
         },
         Object {
@@ -2310,7 +2458,11 @@ Object {
         Object {
           "description": "Complete one of the following:",
           "hour": 4,
-          "type": "COMMENT",
+          "parsedCount": 1,
+          "type": "COMMENT_COUNT",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classId": 1230,
@@ -2327,6 +2479,9 @@ Object {
           "type": "PLAIN_COURSE",
         },
         Object {
+          "type": "ROW_DEDENT",
+        },
+        Object {
           "description": "Diversity or Globalization Course",
           "hour": 0,
           "type": "HEADER",
@@ -2334,7 +2489,11 @@ Object {
         Object {
           "description": "Complete one of the following:",
           "hour": 4,
-          "type": "COMMENT",
+          "parsedCount": 1,
+          "type": "COMMENT_COUNT",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classId": 3392,
@@ -2365,6 +2524,9 @@ Object {
           "type": "PLAIN_COURSE",
         },
         Object {
+          "type": "ROW_DEDENT",
+        },
+        Object {
           "description": "Writing-Intensive",
           "hour": 0,
           "type": "HEADER",
@@ -2372,7 +2534,11 @@ Object {
         Object {
           "description": "Complete two of the following:",
           "hour": 8,
-          "type": "COMMENT",
+          "parsedCount": 2,
+          "type": "COMMENT_COUNT",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classId": 2505,
@@ -2416,6 +2582,9 @@ Object {
           "subject": "MSCR",
           "type": "PLAIN_COURSE",
         },
+        Object {
+          "type": "ROW_DEDENT",
+        },
       ],
     },
     Object {
@@ -2424,7 +2593,11 @@ Object {
         Object {
           "description": "Complete three courses from MSCR or from the following:",
           "hour": 12,
-          "type": "COMMENT",
+          "parsedCount": 3,
+          "type": "COMMENT_COUNT",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classId": 2380,
@@ -2489,6 +2662,9 @@ Object {
           "subject": "COMM",
           "type": "PLAIN_COURSE",
         },
+        Object {
+          "type": "ROW_DEDENT",
+        },
       ],
     },
     Object {
@@ -2521,7 +2697,11 @@ Object {
         Object {
           "description": "Complete one course in the following range, not used to fulfill another requirement:",
           "hour": 4,
-          "type": "COMMENT",
+          "parsedCount": 1,
+          "type": "COMMENT_COUNT",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classIdEnd": 1999,
@@ -2529,6 +2709,9 @@ Object {
           "hour": 0,
           "subject": "HIST",
           "type": "RANGE_BOUNDED",
+        },
+        Object {
+          "type": "ROW_DEDENT",
         },
         Object {
           "description": "History Seminar and Historical Writing",
@@ -2557,7 +2740,11 @@ Object {
         Object {
           "description": "Complete one course from the following:",
           "hour": 4,
-          "type": "COMMENT",
+          "parsedCount": 1,
+          "type": "COMMENT_COUNT",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classId": 1187,
@@ -2609,6 +2796,9 @@ Object {
           "type": "PLAIN_COURSE",
         },
         Object {
+          "type": "ROW_DEDENT",
+        },
+        Object {
           "description": "Intermediate/Advanced History Cluster",
           "hour": 0,
           "type": "HEADER",
@@ -2616,7 +2806,11 @@ Object {
         Object {
           "description": "Complete three courses in the following range:",
           "hour": 12,
-          "type": "COMMENT",
+          "parsedCount": 3,
+          "type": "COMMENT_COUNT",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classIdEnd": 5999,
@@ -2626,6 +2820,9 @@ Object {
           "type": "RANGE_BOUNDED",
         },
         Object {
+          "type": "ROW_DEDENT",
+        },
+        Object {
           "description": "Advanced History",
           "hour": 0,
           "type": "HEADER",
@@ -2633,7 +2830,11 @@ Object {
         Object {
           "description": "Complete one course in the following range:",
           "hour": 4,
-          "type": "COMMENT",
+          "parsedCount": 1,
+          "type": "COMMENT_COUNT",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classIdEnd": 5999,
@@ -2643,9 +2844,15 @@ Object {
           "type": "RANGE_BOUNDED",
         },
         Object {
+          "type": "ROW_DEDENT",
+        },
+        Object {
           "description": "Capstone",
           "hour": 0,
           "type": "HEADER",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classId": 4701,
@@ -2653,6 +2860,9 @@ Object {
           "hour": 0,
           "subject": "HIST",
           "type": "PLAIN_COURSE",
+        },
+        Object {
+          "type": "ROW_DEDENT",
         },
       ],
     },
@@ -2834,13 +3044,16 @@ Object {
         },
         Object {
           "description": "With adviser approval, a directed study, research, project study, or appropriate graduate-level course may also be taken as a computer science elective.",
-          "hour": 0,
           "type": "COMMENT",
         },
         Object {
           "description": "Complete eight semester hours of CS, CY, DS, or IS classes that are not already required. Choose courses within the following ranges:",
           "hour": 8,
-          "type": "COMMENT",
+          "parsedCount": 8,
+          "type": "COMMENT_COUNT",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classIdStart": 2500,
@@ -2889,6 +3102,9 @@ Object {
           "hour": 0,
           "subject": "IS",
           "type": "RANGE_LOWER_BOUNDED_WITH_EXCEPTIONS",
+        },
+        Object {
+          "type": "ROW_DEDENT",
         },
       ],
     },
@@ -2969,7 +3185,11 @@ Object {
         Object {
           "description": "Complete three courses in the following range:",
           "hour": 12,
-          "type": "COMMENT",
+          "parsedCount": 3,
+          "type": "COMMENT_COUNT",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classIdEnd": 4999,
@@ -2984,6 +3204,9 @@ Object {
           "subject": "MATH",
           "type": "RANGE_BOUNDED_WITH_EXCEPTIONS",
         },
+        Object {
+          "type": "ROW_DEDENT",
+        },
       ],
     },
     Object {
@@ -2992,7 +3215,11 @@ Object {
         Object {
           "description": "Complete one of the following:",
           "hour": 4,
-          "type": "COMMENT",
+          "parsedCount": 1,
+          "type": "COMMENT_COUNT",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classId": 2600,
@@ -3078,6 +3305,9 @@ Object {
           "subject": "SOCL",
           "type": "PLAIN_COURSE",
         },
+        Object {
+          "type": "ROW_DEDENT",
+        },
       ],
     },
     Object {
@@ -3129,7 +3359,8 @@ Object {
         Object {
           "description": "Complete 28 semester hours of general electives.",
           "hour": 28,
-          "type": "COMMENT",
+          "parsedCount": 28,
+          "type": "COMMENT_COUNT",
         },
       ],
     },
@@ -3285,13 +3516,16 @@ Object {
         },
         Object {
           "description": "With adviser approval, directed study, research, project study, and appropriate graduate-level courses may also be taken as upper-division electives.",
-          "hour": 0,
           "type": "COMMENT",
         },
         Object {
           "description": "Complete 16 credits of upper-division CS, CY, DS, or IS courses that are not already required. Choose courses within the following ranges:",
           "hour": 16,
-          "type": "COMMENT",
+          "parsedCount": 16,
+          "type": "COMMENT_COUNT",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classIdStart": 2500,
@@ -3341,6 +3575,9 @@ Object {
           "subject": "IS",
           "type": "RANGE_LOWER_BOUNDED_WITH_EXCEPTIONS",
         },
+        Object {
+          "type": "ROW_DEDENT",
+        },
       ],
     },
     Object {
@@ -3387,7 +3624,11 @@ Object {
         Object {
           "description": "Complete one introductory course from the following:",
           "hour": 4,
-          "type": "COMMENT",
+          "parsedCount": 1,
+          "type": "COMMENT_COUNT",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classId": 1150,
@@ -3432,9 +3673,16 @@ Object {
           "type": "PLAIN_COURSE",
         },
         Object {
+          "type": "ROW_DEDENT",
+        },
+        Object {
           "description": "Complete one course from the following:",
           "hour": 4,
-          "type": "COMMENT",
+          "parsedCount": 1,
+          "type": "COMMENT_COUNT",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classId": 1218,
@@ -3472,9 +3720,15 @@ Object {
           "type": "PLAIN_COURSE",
         },
         Object {
+          "type": "ROW_DEDENT",
+        },
+        Object {
           "description": "Intermediate/Advanced History Cluster",
           "hour": 12,
-          "type": "COMMENT",
+          "type": "COMMENT_HOUR",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classIdStart": 2303,
@@ -3483,15 +3737,25 @@ Object {
           "type": "RANGE_LOWER_BOUNDED",
         },
         Object {
+          "type": "ROW_DEDENT",
+        },
+        Object {
           "description": "Complete one advanced-level course:",
           "hour": 4,
-          "type": "COMMENT",
+          "parsedCount": 1,
+          "type": "COMMENT_COUNT",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classIdStart": 3000,
           "hour": 0,
           "subject": "HIST",
           "type": "RANGE_LOWER_BOUNDED",
+        },
+        Object {
+          "type": "ROW_DEDENT",
         },
         Object {
           "description": "History Capstone Seminar or Senior Project",
@@ -3530,7 +3794,11 @@ Object {
         Object {
           "description": "Complete one course from the following:",
           "hour": 4,
-          "type": "COMMENT",
+          "parsedCount": 1,
+          "type": "COMMENT_COUNT",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classId": 2350,
@@ -3568,6 +3836,9 @@ Object {
           "type": "PLAIN_COURSE",
         },
         Object {
+          "type": "ROW_DEDENT",
+        },
+        Object {
           "description": "Computing and Social Issues",
           "hour": 0,
           "type": "HEADER",
@@ -3575,7 +3846,11 @@ Object {
         Object {
           "description": "Complete one of the following:",
           "hour": 4,
-          "type": "COMMENT",
+          "parsedCount": 1,
+          "type": "COMMENT_COUNT",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classId": 2600,
@@ -3661,6 +3936,9 @@ Object {
           "subject": "SOCL",
           "type": "PLAIN_COURSE",
         },
+        Object {
+          "type": "ROW_DEDENT",
+        },
       ],
     },
     Object {
@@ -3692,7 +3970,6 @@ Object {
         },
         Object {
           "description": "This requirement is satisfied by HIST 2302 taken in conjunction with HIST 2301.",
-          "hour": 0,
           "type": "COMMENT",
         },
       ],
@@ -3703,7 +3980,8 @@ Object {
         Object {
           "description": "Complete 32 credits of general electives.",
           "hour": 32,
-          "type": "COMMENT",
+          "parsedCount": 32,
+          "type": "COMMENT_COUNT",
         },
       ],
     },
@@ -3840,7 +4118,11 @@ Object {
         Object {
           "description": "Complete one course numbered between 4000 and 5999 in any of the following subject areas:",
           "hour": 4,
-          "type": "COMMENT",
+          "parsedCount": 1,
+          "type": "COMMENT_COUNT",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "hour": 0,
@@ -3857,6 +4139,9 @@ Object {
           "type": "RANGE_UNBOUNDED",
         },
         Object {
+          "type": "ROW_DEDENT",
+        },
+        Object {
           "description": "Supplemental Credit",
           "hour": 0,
           "type": "HEADER",
@@ -3864,7 +4149,10 @@ Object {
         Object {
           "description": "2 semester hours from the following course count toward the engineering requirement:",
           "hour": 2,
-          "type": "COMMENT",
+          "type": "COMMENT_HOUR",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classId": 1501,
@@ -3874,9 +4162,15 @@ Object {
           "type": "PLAIN_COURSE",
         },
         Object {
+          "type": "ROW_DEDENT",
+        },
+        Object {
           "description": "3 semester hours from the following course count toward the engineering requirement:",
           "hour": 3,
-          "type": "COMMENT",
+          "type": "COMMENT_HOUR",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classId": 1502,
@@ -3884,6 +4178,9 @@ Object {
           "hour": 0,
           "subject": "GE",
           "type": "PLAIN_COURSE",
+        },
+        Object {
+          "type": "ROW_DEDENT",
         },
       ],
     },
@@ -3965,7 +4262,11 @@ Object {
         Object {
           "description": "Complete one of the following:",
           "hour": 4,
-          "type": "COMMENT",
+          "parsedCount": 1,
+          "type": "COMMENT_COUNT",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classId": 1111,
@@ -4004,6 +4305,9 @@ Object {
           "type": "AND_COURSE",
         },
         Object {
+          "type": "ROW_DEDENT",
+        },
+        Object {
           "description": "Supplemental Credit",
           "hour": 0,
           "type": "HEADER",
@@ -4011,7 +4315,10 @@ Object {
         Object {
           "description": "1 semester hour from the following course counts toward the mathematics/science requirement:",
           "hour": 1,
-          "type": "COMMENT",
+          "type": "COMMENT_HOUR",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classId": 1501,
@@ -4019,6 +4326,9 @@ Object {
           "hour": 0,
           "subject": "GE",
           "type": "PLAIN_COURSE",
+        },
+        Object {
+          "type": "ROW_DEDENT",
         },
       ],
     },
@@ -4028,7 +4338,11 @@ Object {
         Object {
           "description": "Complete one of the following pairs:",
           "hour": 5,
-          "type": "COMMENT",
+          "parsedCount": 1,
+          "type": "COMMENT_COUNT",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "courses": Array [
@@ -4065,9 +4379,16 @@ Object {
           "type": "AND_COURSE",
         },
         Object {
+          "type": "ROW_DEDENT",
+        },
+        Object {
           "description": "Complete one of the following pairs:",
           "hour": 5,
-          "type": "COMMENT",
+          "parsedCount": 1,
+          "type": "COMMENT_COUNT",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "courses": Array [
@@ -4104,9 +4425,16 @@ Object {
           "type": "AND_COURSE",
         },
         Object {
+          "type": "ROW_DEDENT",
+        },
+        Object {
           "description": "Complete one of the following:",
           "hour": 4,
-          "type": "COMMENT",
+          "parsedCount": 1,
+          "type": "COMMENT_COUNT",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classId": 2301,
@@ -4322,6 +4650,9 @@ Object {
           "subject": "PHYS",
           "type": "PLAIN_COURSE",
         },
+        Object {
+          "type": "ROW_DEDENT",
+        },
       ],
     },
     Object {
@@ -4361,7 +4692,10 @@ Object {
         Object {
           "description": "1 semester hour from the following course counts toward the professional development requirement:",
           "hour": 1,
-          "type": "COMMENT",
+          "type": "COMMENT_HOUR",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classId": 1501,
@@ -4371,9 +4705,15 @@ Object {
           "type": "PLAIN_COURSE",
         },
         Object {
+          "type": "ROW_DEDENT",
+        },
+        Object {
           "description": "1 semester hour from the following course counts toward the professional development requirement:",
           "hour": 1,
-          "type": "COMMENT",
+          "type": "COMMENT_HOUR",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classId": 1502,
@@ -4382,6 +4722,9 @@ Object {
           "subject": "GE",
           "type": "PLAIN_COURSE",
         },
+        Object {
+          "type": "ROW_DEDENT",
+        },
       ],
     },
     Object {
@@ -4389,7 +4732,6 @@ Object {
       "entries": Array [
         Object {
           "description": "A grade of C or higher is required:",
-          "hour": 0,
           "type": "COMMENT",
         },
         Object {
@@ -4421,7 +4763,8 @@ Object {
         Object {
           "description": "Complete 24 semester hours of academic, nonremedial, nonrepetitive courses.",
           "hour": 24,
-          "type": "COMMENT",
+          "parsedCount": 24,
+          "type": "COMMENT_COUNT",
         },
       ],
     },
@@ -4585,7 +4928,11 @@ Object {
         Object {
           "description": "Complete one of the following:",
           "hour": 4,
-          "type": "COMMENT",
+          "parsedCount": 1,
+          "type": "COMMENT_COUNT",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classId": 2550,
@@ -4609,6 +4956,9 @@ Object {
           "type": "PLAIN_COURSE",
         },
         Object {
+          "type": "ROW_DEDENT",
+        },
+        Object {
           "description": "Presentation Requirement",
           "hour": 0,
           "type": "HEADER",
@@ -4616,7 +4966,11 @@ Object {
         Object {
           "description": "Choose one:",
           "hour": 4,
-          "type": "COMMENT",
+          "parsedCount": 1,
+          "type": "COMMENT_COUNT",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classId": 1112,
@@ -4675,19 +5029,25 @@ Object {
           "type": "PLAIN_COURSE",
         },
         Object {
+          "type": "ROW_DEDENT",
+        },
+        Object {
           "description": "Khoury Elective Courses",
           "hour": 0,
           "type": "HEADER",
         },
         Object {
           "description": "With adviser approval, directed study, research, project study, and appropriate graduate-level courses may also be taken as upper-division electives.",
-          "hour": 0,
           "type": "COMMENT",
         },
         Object {
           "description": "Complete 8 credits of CS, CY, DS, or IS classes that are not already required. Choose courses within the following ranges:",
           "hour": 8,
-          "type": "COMMENT",
+          "parsedCount": 8,
+          "type": "COMMENT_COUNT",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classIdStart": 2500,
@@ -4737,6 +5097,9 @@ Object {
           "subject": "IS",
           "type": "RANGE_LOWER_BOUNDED_WITH_EXCEPTIONS",
         },
+        Object {
+          "type": "ROW_DEDENT",
+        },
       ],
     },
     Object {
@@ -4769,7 +5132,11 @@ Object {
         Object {
           "description": "Complete one of the following:",
           "hour": 4,
-          "type": "COMMENT",
+          "parsedCount": 1,
+          "type": "COMMENT_COUNT",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classId": 2600,
@@ -4856,6 +5223,9 @@ Object {
           "type": "PLAIN_COURSE",
         },
         Object {
+          "type": "ROW_DEDENT",
+        },
+        Object {
           "description": "Electrical Engineering",
           "hour": 0,
           "type": "HEADER",
@@ -4885,12 +5255,16 @@ Object {
         Object {
           "description": "Complete two courses (and any required labs) from the following science categories:",
           "hour": 8,
-          "type": "COMMENT",
+          "parsedCount": 2,
+          "type": "COMMENT_COUNT",
         },
         Object {
           "description": "Biology",
           "hour": 0,
           "type": "SUBHEADER",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "courses": Array [
@@ -4944,9 +5318,15 @@ Object {
           "type": "AND_COURSE",
         },
         Object {
+          "type": "ROW_DEDENT",
+        },
+        Object {
           "description": "Chemistry",
           "hour": 0,
           "type": "SUBHEADER",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "courses": Array [
@@ -4993,9 +5373,15 @@ Object {
           "type": "AND_COURSE",
         },
         Object {
+          "type": "ROW_DEDENT",
+        },
+        Object {
           "description": "Geology/Environmental Science",
           "hour": 0,
           "type": "SUBHEADER",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "courses": Array [
@@ -5151,9 +5537,15 @@ Object {
           "type": "AND_COURSE",
         },
         Object {
+          "type": "ROW_DEDENT",
+        },
+        Object {
           "description": "Mathematics",
           "hour": 0,
           "type": "SUBHEADER",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classId": 1342,
@@ -5177,9 +5569,15 @@ Object {
           "type": "PLAIN_COURSE",
         },
         Object {
+          "type": "ROW_DEDENT",
+        },
+        Object {
           "description": "Physics",
           "hour": 0,
           "type": "SUBHEADER",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "courses": Array [
@@ -5303,6 +5701,9 @@ Object {
           "hour": 0,
           "type": "AND_COURSE",
         },
+        Object {
+          "type": "ROW_DEDENT",
+        },
       ],
     },
     Object {
@@ -5347,7 +5748,8 @@ Object {
         Object {
           "description": "Complete 28 credits of general electives.",
           "hour": 28,
-          "type": "COMMENT",
+          "parsedCount": 28,
+          "type": "COMMENT_COUNT",
         },
       ],
     },
@@ -5371,7 +5773,11 @@ Object {
         Object {
           "description": "Complete two of the following courses not already taken:",
           "hour": 8,
-          "type": "COMMENT",
+          "parsedCount": 2,
+          "type": "COMMENT_COUNT",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classId": 4120,
@@ -5415,6 +5821,9 @@ Object {
           "subject": "PSYC",
           "type": "PLAIN_COURSE",
         },
+        Object {
+          "type": "ROW_DEDENT",
+        },
       ],
     },
     Object {
@@ -5423,7 +5832,11 @@ Object {
         Object {
           "description": "Complete two of the following:",
           "hour": 8,
-          "type": "COMMENT",
+          "parsedCount": 2,
+          "type": "COMMENT_COUNT",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classId": 2800,
@@ -5454,9 +5867,16 @@ Object {
           "type": "OR_COURSE",
         },
         Object {
+          "type": "ROW_DEDENT",
+        },
+        Object {
           "description": "Complete two of the following courses not already taken:",
           "hour": 8,
-          "type": "COMMENT",
+          "parsedCount": 2,
+          "type": "COMMENT_COUNT",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classId": 4805,
@@ -5515,6 +5935,9 @@ Object {
           "subject": "CY",
           "type": "PLAIN_COURSE",
         },
+        Object {
+          "type": "ROW_DEDENT",
+        },
       ],
     },
     Object {
@@ -5537,7 +5960,11 @@ Object {
         Object {
           "description": "Complete two of the following courses not already taken:",
           "hour": 8,
-          "type": "COMMENT",
+          "parsedCount": 2,
+          "type": "COMMENT_COUNT",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classId": 2000,
@@ -5566,6 +5993,9 @@ Object {
           "hour": 0,
           "subject": "DS",
           "type": "PLAIN_COURSE",
+        },
+        Object {
+          "type": "ROW_DEDENT",
         },
       ],
     },
@@ -5596,7 +6026,11 @@ Object {
         Object {
           "description": "Complete one of the following courses not already taken:",
           "hour": 0,
-          "type": "COMMENT",
+          "parsedCount": 1,
+          "type": "COMMENT_COUNT",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classId": 3520,
@@ -5647,6 +6081,9 @@ Object {
           "subject": "CS",
           "type": "PLAIN_COURSE",
         },
+        Object {
+          "type": "ROW_DEDENT",
+        },
       ],
     },
     Object {
@@ -5662,7 +6099,11 @@ Object {
         Object {
           "description": "Complete one of the following courses not already taken:",
           "hour": 4,
-          "type": "COMMENT",
+          "parsedCount": 1,
+          "type": "COMMENT_COUNT",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classId": 3740,
@@ -5679,9 +6120,16 @@ Object {
           "type": "PLAIN_COURSE",
         },
         Object {
+          "type": "ROW_DEDENT",
+        },
+        Object {
           "description": "Complete two of the following courses not already taken:",
           "hour": 8,
-          "type": "COMMENT",
+          "parsedCount": 2,
+          "type": "COMMENT_COUNT",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classId": 3520,
@@ -5724,6 +6172,9 @@ Object {
           "hour": 0,
           "subject": "CY",
           "type": "PLAIN_COURSE",
+        },
+        Object {
+          "type": "ROW_DEDENT",
         },
       ],
     },
@@ -5887,7 +6338,11 @@ Object {
         Object {
           "description": "Complete two of the following:",
           "hour": 8,
-          "type": "COMMENT",
+          "parsedCount": 2,
+          "type": "COMMENT_COUNT",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classId": 3403,
@@ -5916,6 +6371,9 @@ Object {
           "hour": 0,
           "subject": "ACCT",
           "type": "PLAIN_COURSE",
+        },
+        Object {
+          "type": "ROW_DEDENT",
         },
       ],
     },
@@ -5961,7 +6419,11 @@ Object {
         Object {
           "description": "Complete one of the following:",
           "hour": 4,
-          "type": "COMMENT",
+          "parsedCount": 1,
+          "type": "COMMENT_COUNT",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classId": 3416,
@@ -5976,6 +6438,9 @@ Object {
           "hour": 0,
           "subject": "ACCT",
           "type": "PLAIN_COURSE",
+        },
+        Object {
+          "type": "ROW_DEDENT",
         },
       ],
     },
@@ -6002,7 +6467,11 @@ Object {
         Object {
           "description": "Complete three electives, with at least 8 credits from MKTG courses:",
           "hour": 12,
-          "type": "COMMENT",
+          "parsedCount": 3,
+          "type": "COMMENT_COUNT",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classId": 2301,
@@ -6090,8 +6559,10 @@ Object {
         },
         Object {
           "description": "A maximum of one course may be applied to requirements of a second concentration.",
-          "hour": 0,
           "type": "COMMENT",
+        },
+        Object {
+          "type": "ROW_DEDENT",
         },
       ],
     },
@@ -6100,7 +6571,6 @@ Object {
       "entries": Array [
         Object {
           "description": "Only one course may double count between another concentration or minor.",
-          "hour": 0,
           "type": "COMMENT",
         },
         Object {
@@ -6144,7 +6614,11 @@ Object {
         Object {
           "description": "Complete one of the following:",
           "hour": 4,
-          "type": "COMMENT",
+          "parsedCount": 1,
+          "type": "COMMENT_COUNT",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classId": 3515,
@@ -6166,6 +6640,9 @@ Object {
           "hour": 0,
           "subject": "MISM",
           "type": "PLAIN_COURSE",
+        },
+        Object {
+          "type": "ROW_DEDENT",
         },
       ],
     },
@@ -6199,7 +6676,11 @@ Object {
         Object {
           "description": "Complete two electives, one of which may come from the additional electives list:",
           "hour": 8,
-          "type": "COMMENT",
+          "parsedCount": 2,
+          "type": "COMMENT_COUNT",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classId": 2304,
@@ -6292,8 +6773,10 @@ Object {
         },
         Object {
           "description": "One course from an approved Dialogue may count toward a concentration elective.",
-          "hour": 0,
           "type": "COMMENT",
+        },
+        Object {
+          "type": "ROW_DEDENT",
         },
       ],
     },
@@ -6327,7 +6810,11 @@ Object {
         Object {
           "description": "Complete two electives, one of which may come from the Additional Electives list:",
           "hour": 8,
-          "type": "COMMENT",
+          "parsedCount": 2,
+          "type": "COMMENT_COUNT",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classId": 2303,
@@ -6406,8 +6893,10 @@ Object {
         },
         Object {
           "description": "One course from an approved Dialogue may count toward an elective.",
-          "hour": 0,
           "type": "COMMENT",
+        },
+        Object {
+          "type": "ROW_DEDENT",
         },
       ],
     },
@@ -6441,7 +6930,11 @@ Object {
         Object {
           "description": "Complete two electives, one of which may come from the Additional Elective list:",
           "hour": 8,
-          "type": "COMMENT",
+          "parsedCount": 2,
+          "type": "COMMENT_COUNT",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classId": 2215,
@@ -6513,8 +7006,10 @@ Object {
         },
         Object {
           "description": "Students may use one course from an approved Dialogue experience toward the elective area of the concentration.",
-          "hour": 0,
           "type": "COMMENT",
+        },
+        Object {
+          "type": "ROW_DEDENT",
         },
       ],
     },
@@ -6548,7 +7043,11 @@ Object {
         Object {
           "description": "Complete three of the following:",
           "hour": 12,
-          "type": "COMMENT",
+          "parsedCount": 3,
+          "type": "COMMENT_COUNT",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classId": 3520,
@@ -6753,6 +7252,9 @@ Object {
           "subject": "FINA",
           "type": "PLAIN_COURSE",
         },
+        Object {
+          "type": "ROW_DEDENT",
+        },
       ],
     },
     Object {
@@ -6792,7 +7294,11 @@ Object {
         Object {
           "description": "Complete two of the following:",
           "hour": 8,
-          "type": "COMMENT",
+          "parsedCount": 2,
+          "type": "COMMENT_COUNT",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classId": 2730,
@@ -6821,6 +7327,9 @@ Object {
           "hour": 0,
           "subject": "FINA",
           "type": "PLAIN_COURSE",
+        },
+        Object {
+          "type": "ROW_DEDENT",
         },
       ],
     },
@@ -6854,7 +7363,11 @@ Object {
         Object {
           "description": "Complete one of the following:",
           "hour": 4,
-          "type": "COMMENT",
+          "parsedCount": 1,
+          "type": "COMMENT_COUNT",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classId": 3110,
@@ -6927,6 +7440,9 @@ Object {
           "type": "PLAIN_COURSE",
         },
         Object {
+          "type": "ROW_DEDENT",
+        },
+        Object {
           "description": "Interdisciplinary Healthcare Focus",
           "hour": 0,
           "type": "HEADER",
@@ -6934,7 +7450,11 @@ Object {
         Object {
           "description": "Complete one of the following:",
           "hour": 4,
-          "type": "COMMENT",
+          "parsedCount": 1,
+          "type": "COMMENT_COUNT",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classId": 3201,
@@ -6992,6 +7512,9 @@ Object {
           "subject": "SOCL",
           "type": "PLAIN_COURSE",
         },
+        Object {
+          "type": "ROW_DEDENT",
+        },
       ],
     },
     Object {
@@ -7019,7 +7542,11 @@ Object {
         Object {
           "description": "Complete one or both of the following:",
           "hour": 4,
-          "type": "COMMENT",
+          "parsedCount": 1,
+          "type": "COMMENT_COUNT",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classId": 2501,
@@ -7036,6 +7563,9 @@ Object {
           "type": "PLAIN_COURSE",
         },
         Object {
+          "type": "ROW_DEDENT",
+        },
+        Object {
           "description": "Electives",
           "hour": 0,
           "type": "HEADER",
@@ -7043,12 +7573,15 @@ Object {
         Object {
           "description": "Complete two of the following courses (one if both courses above selected).",
           "hour": 4,
-          "type": "COMMENT",
+          "parsedCount": 2,
+          "type": "COMMENT_COUNT",
         },
         Object {
           "description": "Note: One course can also count toward a different business concentration.",
-          "hour": 0,
           "type": "COMMENT",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "description": "Managing Internationally",
@@ -7125,8 +7658,10 @@ Object {
         },
         Object {
           "description": "Electives not listed may be approved via the undergraduate dean’s office.",
-          "hour": 0,
           "type": "COMMENT",
+        },
+        Object {
+          "type": "ROW_DEDENT",
         },
       ],
     },
@@ -7152,13 +7687,16 @@ Object {
         },
         Object {
           "description": "Note: Only one non-MGMT course may be used as an elective.",
-          "hour": 0,
           "type": "COMMENT",
         },
         Object {
           "description": "Complete three of the following:",
           "hour": 12,
-          "type": "COMMENT",
+          "parsedCount": 3,
+          "type": "COMMENT_COUNT",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classId": 2215,
@@ -7272,6 +7810,9 @@ Object {
           "subject": "MGMT",
           "type": "PLAIN_COURSE",
         },
+        Object {
+          "type": "ROW_DEDENT",
+        },
       ],
     },
     Object {
@@ -7279,7 +7820,6 @@ Object {
       "entries": Array [
         Object {
           "description": "Only one course may double count between another concentration or minor.",
-          "hour": 0,
           "type": "COMMENT",
         },
         Object {
@@ -7302,7 +7842,11 @@ Object {
         Object {
           "description": "Complete three of the following:",
           "hour": 12,
-          "type": "COMMENT",
+          "parsedCount": 3,
+          "type": "COMMENT_COUNT",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classId": 2510,
@@ -7339,6 +7883,9 @@ Object {
           "subject": "MISM",
           "type": "PLAIN_COURSE",
         },
+        Object {
+          "type": "ROW_DEDENT",
+        },
       ],
     },
     Object {
@@ -7371,7 +7918,11 @@ Object {
         Object {
           "description": "Complete three of the following:",
           "hour": 12,
-          "type": "COMMENT",
+          "parsedCount": 3,
+          "type": "COMMENT_COUNT",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classId": 2301,
@@ -7506,6 +8057,9 @@ Object {
           "subject": "MKTG",
           "type": "PLAIN_COURSE",
         },
+        Object {
+          "type": "ROW_DEDENT",
+        },
       ],
     },
     Object {
@@ -7545,7 +8099,11 @@ Object {
         Object {
           "description": "Complete one of the following:",
           "hour": 4,
-          "type": "COMMENT",
+          "parsedCount": 1,
+          "type": "COMMENT_COUNT",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "courses": Array [
@@ -7581,6 +8139,9 @@ Object {
           "hour": 0,
           "type": "AND_COURSE",
         },
+        Object {
+          "type": "ROW_DEDENT",
+        },
       ],
     },
     Object {
@@ -7613,7 +8174,11 @@ Object {
         Object {
           "description": "Complete two of the following, one of which may come from the additional elective list:",
           "hour": 8,
-          "type": "COMMENT",
+          "parsedCount": 2,
+          "type": "COMMENT_COUNT",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classId": 2206,
@@ -7637,9 +8202,15 @@ Object {
           "type": "PLAIN_COURSE",
         },
         Object {
+          "type": "ROW_DEDENT",
+        },
+        Object {
           "description": "Additional Electives",
           "hour": 0,
           "type": "SUBHEADER",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classId": 2215,
@@ -7692,8 +8263,10 @@ Object {
         },
         Object {
           "description": "One course from an approved Dialogue may count toward an elective.",
-          "hour": 0,
           "type": "COMMENT",
+        },
+        Object {
+          "type": "ROW_DEDENT",
         },
       ],
     },
@@ -7734,7 +8307,11 @@ Object {
         Object {
           "description": "Complete one of the following:",
           "hour": 4,
-          "type": "COMMENT",
+          "parsedCount": 1,
+          "type": "COMMENT_COUNT",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classId": 3308,
@@ -7764,6 +8341,9 @@ Object {
           "subject": "SCHM",
           "type": "PLAIN_COURSE",
         },
+        Object {
+          "type": "ROW_DEDENT",
+        },
       ],
     },
     Object {
@@ -7777,7 +8357,11 @@ Object {
         Object {
           "description": "Complete one of the following:",
           "hour": 4,
-          "type": "COMMENT",
+          "parsedCount": 1,
+          "type": "COMMENT_COUNT",
+        },
+        Object {
+          "type": "ROW_INDENT",
         },
         Object {
           "classId": 1231,
@@ -7834,6 +8418,9 @@ Object {
           "hour": 0,
           "subject": "MATH",
           "type": "PLAIN_COURSE",
+        },
+        Object {
+          "type": "ROW_DEDENT",
         },
         Object {
           "description": "Macroeconomics and Microeconomics",

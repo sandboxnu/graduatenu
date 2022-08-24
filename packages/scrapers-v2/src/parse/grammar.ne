@@ -1,14 +1,25 @@
 @{%
 const { HRowType } = require("../tokenize/types");
 
+/*
+general tips:
+be as specific as you can at the top level.
+
+adding cases to recursive and repeated rules causes ambiguity (bad)
+*/
+
 // define custom tokens
 // basically just check against the HRowType enum value
 const buildMatcher = (enumVariant) => ({ test: x => x.type === enumVariant });
+
+const INDENT = buildMatcher(HRowType.ROW_INDENT);
+const DEDENT = buildMatcher(HRowType.ROW_DEDENT);
 
 const HEADER = buildMatcher(HRowType.HEADER);
 const SUBHEADER = buildMatcher(HRowType.SUBHEADER);
 const COMMENT = buildMatcher(HRowType.COMMENT);
 const COMMENT_COUNT = buildMatcher(HRowType.COMMENT_COUNT);
+const COMMENT_HOUR = buildMatcher(HRowType.COMMENT_HOUR);
 
 const OR_COURSE = buildMatcher(HRowType.OR_COURSE);
 const AND_COURSE = buildMatcher(HRowType.AND_COURSE);
@@ -35,63 +46,43 @@ const flat = ([e]) => e.flat();
 # main entrypoint
 ## ranges may produce arrays of requirements, so call flat
 # need to make it so that tokens cannot follow other tokens
+
+# note that all %COMMENT indentation is ignored in the tokenize stage
 main ->
-  (requirementList commentCountGroup :*)
+    (%COMMENT :+) :? %INDENT requirementList %DEDENT
+  | requirementList commentCountGroup :*
+  | commentCountHeader headerGroup :+
   | headerGroup :+
 
 # text cases
 
 headerGroup ->
     %HEADER
-    %COMMENT :?
+    (%COMMENT :+) :?
   ( requirementList
-  | (commentCountGroup | subHeaderGroup) :+
+  | %INDENT %SUBHEADER :? requirementList %DEDENT
+  | requirementList subHeaderGroup
+  | commentCountGroup :+
+  | subHeaderGroup :+
   )                                                        {% ([hd, cm, rest]) => [hd, cm, ...rest] %}
 
 subHeaderGroup ->
-  %SUBHEADER (commentCountGroup | requirementList)         {% cons %}
-
-commentCountGroup ->
-    %COMMENT_COUNT
-  ( requirementList
-  | subHeaderGroup :+
+    %SUBHEADER
+  ( (commentCountGroup | requirementList)
+  | %INDENT (commentCountGroup | requirementList) %DEDENT
+  | %COMMENT
   )                                                        {% cons %}
 
+commentCountGroup ->
+    commentCountHeader
+  ( (requirementList | subHeaderGroup :+)
+  | %INDENT (requirementList | subHeaderGroup :+) %DEDENT
+  )                                                        {% cons %}
+
+commentCountHeader -> %COMMENT_COUNT | %COMMENT_HOUR
 
 @{%
 /*
-PROBLEM: when there are subgroups inside of a header, following a comment count, unsure if the subgroups are at the top-level or are within comment count
-SOLUTION: look at the indentation of shit -> HTML parser refactoring :(
-
-header -> (commentCountGroup | subheaderGroup) :+
-subheaderGroup -> SUBHEADER (commentCountGroup | requirementList)
-commentCountGroup -> COMMENT_COUNT (requirementList | subHeaderGroup :+)
-
-header
-- commentCountGroup
-- subheader
-  - commentCountGroup
-
-header
-- subheader
-  - commentCountGroup
-- subheader
-  - commentCount
-    - subheader
-      - requirement list
-    - subheader
-      - requirement list
-
-headeer
-- requirementlist
-header
-- commentCountGroup
-header
-- commentCount
-  - subheader
-    - requirementlist
-  - subheader
-    - requirementlist
 
 */
 %}
@@ -123,7 +114,7 @@ range ->
 ## always begins with a plainCourse or andCourse
 orCourse ->
   ( course                                                 {% id %}
-  | andCourse                                              {% id %}
+  | %AND_COURSE                                              {% id %}
   )
   ( %OR_COURSE                                             {% postprocess.processCourse %}
   | %OR_OF_AND_COURSE                                      {% postprocess.processOrOfAnd %}

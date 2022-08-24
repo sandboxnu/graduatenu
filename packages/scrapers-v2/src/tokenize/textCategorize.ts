@@ -5,15 +5,16 @@ import { getGlobalStatsLogger } from "../runtime/logger";
 
 type RowPicker<T extends HRowType> = HRow & { type: T };
 type CommentRow = RowPicker<HRowType.COMMENT>;
+type CommentRowNoHours = RowPicker<HRowType.COMMENT_HOUR>;
 type HeaderRow = RowPicker<HRowType.HEADER>;
 type SubheaderRow = RowPicker<HRowType.SUBHEADER>;
 type ParsedCommentRow = RowPicker<HRowType.COMMENT_COUNT>;
-type TextRowTypes = CommentRow | HeaderRow | SubheaderRow;
+type TextRowTypes = CommentRow | HeaderRow | SubheaderRow | CommentRowNoHours;
 
 export const categorizeTextRow = (row: TextRowTypes) => {
   // only 8 (~four of each) of the header types match regex
   // ignore headers for now (even the matching ones)
-  if (row.type === HRowType.COMMENT) {
+  if (row.type === HRowType.COMMENT || row.type === HRowType.COMMENT_HOUR) {
     return categorizeCommentRow(row);
   }
   return row;
@@ -23,8 +24,8 @@ const CHOICE_KEYWORD =
   /(complete|choose) ((at least|any|from|a minimum of) )?(?<countString>\w+)/g;
 
 export const categorizeCommentRow = (
-  row: CommentRow
-): CommentRow | ParsedCommentRow => {
+  row: CommentRow | CommentRowNoHours
+): CommentRow | CommentRowNoHours | ParsedCommentRow => {
   const stats = getGlobalStatsLogger();
   const desc = row.description.toLowerCase();
   const matches = Array.from(desc.matchAll(CHOICE_KEYWORD));
@@ -44,11 +45,11 @@ export const categorizeCommentRow = (
     stats?.recordField("comments status", "obtained count: " + count.ok);
     return convertToParsedRow(row, count.ok);
   } else {
-    if (row.hour !== 0) {
+    if ("hour" in row) {
       stats?.recordField("comments status", "non-matching numeric text");
       stats?.recordField("non-matching numberic text", desc);
     } else {
-      // was zero
+      // hour was zero
       stats?.recordField(
         "comments status",
         "hour = 0; non-matching numeric text"
@@ -60,10 +61,21 @@ export const categorizeCommentRow = (
 };
 
 const convertToParsedRow = (
-  row: CommentRow,
+  row: CommentRow | CommentRowNoHours,
   parsedCount: number
 ): ParsedCommentRow => {
-  return { ...row, parsedCount, type: HRowType.COMMENT_COUNT };
+  if ("hour" in row) {
+    return { ...row, parsedCount, type: HRowType.COMMENT_COUNT };
+  }
+
+  return {
+    parsedCount,
+    type: HRowType.COMMENT_COUNT,
+    description: row.description,
+    // possible we don't have an hour, but that's fine just use 0
+    // todo: replace with an explicit case for zero hour
+    hour: 0,
+  };
 };
 
 const NUMS = {
