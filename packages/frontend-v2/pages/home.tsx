@@ -4,10 +4,9 @@ import {
   fetchStudentAndPrepareForDnd,
   useStudentWithPlans,
 } from "../hooks/useStudentWithPlans";
-import { DndContext, DragEndEvent, DragStartEvent } from "@dnd-kit/core";
+import { DndContext, DragEndEvent } from "@dnd-kit/core";
 import {
   cleanDndIdsFromPlan,
-  findCourseByDndId,
   logger,
   logout,
   toast,
@@ -15,8 +14,7 @@ import {
   updatePlanOnDragEnd,
 } from "../utils";
 import { API } from "@graduate/api-client";
-import { PlanModel, ScheduleCourse2 } from "@graduate/common";
-import { useState } from "react";
+import { PlanModel } from "@graduate/common";
 import { useRouter } from "next/router";
 import { Button, Grid, GridItem } from "@chakra-ui/react";
 import { handleApiClientError } from "../utils/handleApiClientError";
@@ -24,10 +22,6 @@ import { handleApiClientError } from "../utils/handleApiClientError";
 const HomePage: NextPage = () => {
   const { error, student, mutateStudent } = useStudentWithPlans();
   const router = useRouter();
-
-  // keep track of the course being dragged around so that we can display the drag overlay
-  const [activeCourse, setActiveCourse] =
-    useState<ScheduleCourse2<string> | null>(null);
 
   if (error) {
     logger.error("HomePage", error);
@@ -52,22 +46,7 @@ const HomePage: NextPage = () => {
     );
   }
 
-  const handleDragStart = (event: DragStartEvent): void => {
-    // find the course that is being dragged and set it as the active course
-    const { active } = event;
-    const activeCourse = findCourseByDndId(
-      primaryPlan.schedule,
-      active.id as string // dnd ids are strings
-    );
-    if (activeCourse) {
-      setActiveCourse(activeCourse);
-    }
-  };
-
   const handleDragEnd = (event: DragEndEvent): void => {
-    // no course is being dragged around anymore
-    setActiveCourse(null);
-
     const { active, over } = event;
 
     // course is not dragged over a term
@@ -115,13 +94,8 @@ const HomePage: NextPage = () => {
 
   return (
     <PageLayout>
-      <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
+      <DndContext onDragEnd={handleDragEnd}>
         <Plan plan={primaryPlan} />
-        {/* <DragOverlay dropAnimation={undefined}>
-          {activeCourse ? (
-            <ScheduleCourse scheduleCourse={activeCourse} isDragging={true} />
-          ) : null}
-        </DragOverlay> */}
       </DndContext>
     </PageLayout>
   );

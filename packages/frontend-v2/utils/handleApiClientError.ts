@@ -3,6 +3,17 @@ import { NextRouter } from "next/router";
 import { logger } from "./logger";
 import { toast } from "./toast";
 
+/**
+ * Handles the error returned by our API client.
+ *
+ * - Not authenticated: Redirects to /login
+ * - Not authorized: Toast with custom message
+ * - Any other server side error: Toast
+ * - Client side error: Trigger error boundary by rethrowing
+ *
+ * @param error  The error returned by our api client
+ * @param router Next router to redirect to /login if needed
+ */
 export const handleApiClientError = (
   error: AxiosError | Error,
   router: NextRouter
