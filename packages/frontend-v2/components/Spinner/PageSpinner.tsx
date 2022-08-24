@@ -12,7 +12,7 @@ export const PageSpinner: React.FC = () => {
       justifyContent="center"
       alignItems="center"
     >
-      <Spinner size="xl" />;
+      <Spinner size="xl" />
     </Flex>
   );
 };

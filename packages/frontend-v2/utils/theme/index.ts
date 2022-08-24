@@ -3,7 +3,7 @@ import { Button } from "./components/buttons";
 import { Spinner } from "./components/spinners";
 
 const colors = {
-  // only main, 100, 300, 500, 700, 900 are valid for now: rest of the shades are still being created
+  // only main, 100, 300, 500, 700, 900 are certified by linda: rest of the shades were created using a generator
   primary: {
     blue: {
       dark: {
@@ -47,6 +47,19 @@ const colors = {
       900: "#d63130",
     },
   },
+  neutral: {
+    main: "#e7ebf1",
+    50: "#eff2f6",
+    100: "#d2d7de",
+    200: "#b3bcc8",
+    300: "#f1f5fa",
+    400: "#7586a0",
+    500: "#e7ebf1",
+    600: "#485569",
+    700: "#e2e6ec",
+    800: "#1f242c",
+    900: "#d2d8e2",
+  },
   states: {
     success: {
       main: "#6ba27d",
@@ -80,7 +93,10 @@ const breakpoints = {
  * either direction (5xs, ..., 5xl) as needed.
  */
 const space = {
-  "2xs": "0.25rem",
+  "5xs": "0.05rem",
+  "4xs": "0.125rem",
+  "3xs": "0.25rem",
+  "2xs": "0.325rem",
   xs: "0.5rem",
   sm: "0.75rem",
   md: "1rem",

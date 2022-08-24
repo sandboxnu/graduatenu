@@ -1,21 +1,10 @@
 import { NextPage } from "next";
-import {
-  HeaderContainer,
-  LoadingPage,
-  Logo,
-  Plan,
-  ScheduleCourse,
-} from "../components";
+import { HeaderContainer, LoadingPage, Logo, Plan } from "../components";
 import {
   fetchStudentAndPrepareForDnd,
   useStudentWithPlans,
 } from "../hooks/useStudentWithPlans";
-import {
-  DndContext,
-  DragEndEvent,
-  DragOverlay,
-  DragStartEvent,
-} from "@dnd-kit/core";
+import { DndContext, DragEndEvent, DragStartEvent } from "@dnd-kit/core";
 import {
   cleanDndIdsFromPlan,
   findCourseByDndId,
@@ -29,7 +18,7 @@ import { API } from "@graduate/api-client";
 import { PlanModel, ScheduleCourse2 } from "@graduate/common";
 import { useState } from "react";
 import { useRouter } from "next/router";
-import { Button } from "@chakra-ui/react";
+import { Button, Grid, GridItem } from "@chakra-ui/react";
 import { handleApiClientError } from "../utils/handleApiClientError";
 
 const HomePage: NextPage = () => {
@@ -128,11 +117,11 @@ const HomePage: NextPage = () => {
     <PageLayout>
       <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
         <Plan plan={primaryPlan} />
-        <DragOverlay dropAnimation={undefined}>
+        {/* <DragOverlay dropAnimation={undefined}>
           {activeCourse ? (
-            <ScheduleCourse scheduleCourse={activeCourse} />
+            <ScheduleCourse scheduleCourse={activeCourse} isDragging={true} />
           ) : null}
-        </DragOverlay>
+        </DragOverlay> */}
       </DndContext>
     </PageLayout>
   );
@@ -146,7 +135,12 @@ const PageLayout: React.FC = ({ children }) => {
   return (
     <>
       <Header />
-      {children}
+      <Grid height="200px" templateColumns="repeat(4, 1fr)" gap="md">
+        <GridItem rowSpan={1} colSpan={1} bg="primary.blue.light.main" />
+        <GridItem rowSpan={1} colSpan={3} p="md">
+          {children}
+        </GridItem>
+      </Grid>
     </>
   );
 };

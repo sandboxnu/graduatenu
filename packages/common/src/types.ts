@@ -389,6 +389,14 @@ export interface Schedule2<T> {
 }
 
 export interface ScheduleYear2<T> {
+  /**
+   * This the academic year num(1, 2, 3...) not the calendar year. An academic
+   * year spans from [Calendar Year X, Fall] - [Calendar Year X + 1, Summer 2].
+   *
+   * Storing the academic year num isn't necessary but can be nice since it
+   * prevents us from relying on the order in which ScheduleYears are stored in
+   * a Schedule.
+   */
   year: number;
   fall: ScheduleTerm2<T>;
   spring: ScheduleTerm2<T>;

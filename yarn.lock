@@ -2192,6 +2192,30 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@chakra-ui/icon@npm:3.0.8":
+  version: 3.0.8
+  resolution: "@chakra-ui/icon@npm:3.0.8"
+  dependencies:
+    "@chakra-ui/utils": 2.0.8
+  peerDependencies:
+    "@chakra-ui/system": ">=2.0.0"
+    react: ">=18"
+  checksum: a5ce069f12a1ed871a9281076275cd1d5c52fcc052f8a3492c12625002424cc23d3b29332b45b0ad4befe7e877fd5c4bbbf6444f752e1fd6191f27b8f119a494
+  languageName: node
+  linkType: hard
+
+"@chakra-ui/icons@npm:^2.0.8":
+  version: 2.0.8
+  resolution: "@chakra-ui/icons@npm:2.0.8"
+  dependencies:
+    "@chakra-ui/icon": 3.0.8
+  peerDependencies:
+    "@chakra-ui/system": ">=2.0.0"
+    react: ">=18"
+  checksum: b94a9a2db439d35566874d1c14cec79402b88edd83ce05d8bf962d99550315d87766ae8c277f5e1c4f20672c21d511a1b08f168535ced6e272d84823c84d241a
+  languageName: node
+  linkType: hard
+
 "@chakra-ui/image@npm:1.1.10":
   version: 1.1.10
   resolution: "@chakra-ui/image@npm:1.1.10"
@@ -2759,6 +2783,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@chakra-ui/utils@npm:2.0.8":
+  version: 2.0.8
+  resolution: "@chakra-ui/utils@npm:2.0.8"
+  dependencies:
+    "@types/lodash.mergewith": 4.6.6
+    css-box-model: 1.2.1
+    framesync: 5.3.0
+    lodash.mergewith: 4.6.2
+  checksum: 2689e5aae1a9c31724d7f1d3aa0c0d58ccbb965a3d66a42fc279faff23ba6d5290a5723b7d95cd7528bae6b0012609921c7702a7e267923ed08e3d1d2a434b13
+  languageName: node
+  linkType: hard
+
 "@chakra-ui/visually-hidden@npm:1.1.6":
   version: 1.1.6
   resolution: "@chakra-ui/visually-hidden@npm:1.1.6"
@@ -3287,6 +3323,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@graduate/frontend-v2@workspace:packages/frontend-v2"
   dependencies:
+    "@chakra-ui/icons": ^2.0.8
     "@chakra-ui/react": ^1.8.8
     "@dnd-kit/core": ^6.0.5
     "@emotion/react": ^11
