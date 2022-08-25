@@ -41,7 +41,7 @@ const HomePage: NextPage = () => {
     } else {
       setSelectedPlanId(student.primaryPlanId);
     }
-  }, [student, selectedPlanId]);
+  }, [student]);
 
   // handle error state
   if (error) {
