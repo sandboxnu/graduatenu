@@ -16,7 +16,7 @@ import {
 import { API } from "@graduate/api-client";
 import { PlanModel } from "@graduate/common";
 import { useRouter } from "next/router";
-import { Box, Button, Flex, Grid, GridItem } from "@chakra-ui/react";
+import { Button, Flex, Grid, GridItem } from "@chakra-ui/react";
 import { handleApiClientError } from "../utils/handleApiClientError";
 
 const HomePage: NextPage = () => {

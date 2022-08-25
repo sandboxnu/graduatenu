@@ -1,4 +1,4 @@
-import { Box, Flex, Grid, GridItem } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 import { PlanModel, ScheduleYear2 } from "@graduate/common";
 import { useState } from "react";
 import { ScheduleYear } from "./ScheduleYear";
@@ -32,7 +32,7 @@ export const Plan: React.FC<PlanProps> = ({ plan }) => {
 
   return (
     <Flex flexDirection="column" rowGap="4xs">
-      {plan.schedule.years.map((scheduleYear, idx) => {
+      {plan.schedule.years.map((scheduleYear) => {
         const isExpanded = expandedYears.has(scheduleYear.year);
 
         return (
