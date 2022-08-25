@@ -155,12 +155,17 @@ const testParsesSnapshot = (name: string, url: URL) =>
   });
 
 describe("describe", () => {
+  // computer science
   testParsesSnapshot("bscs", BSCS);
-  testParsesSnapshot("cs game dev", CS_GAME_DEV);
-
   testParsesSnapshot("BACS", BACS);
+
+  // cybersecurity
   testParsesSnapshot("cyber", CYBER);
+
+  // data science
   testParsesSnapshot("ds", DS);
+
+  // khoury combined majors
   testParsesSnapshot("cs chem", CS_CHEM);
   testParsesSnapshot("cs civil e", CS_CIVIL_E);
   testParsesSnapshot("cecs", CECS);
@@ -180,6 +185,8 @@ describe("describe", () => {
   testParsesSnapshot("cs ling", CS_LING);
   testParsesSnapshot("cs math", CS_MATH);
   testParsesSnapshot("cs media arts", CS_MED_ARTS);
+
+  testParsesSnapshot("cs game dev", CS_GAME_DEV);
 });
 
 /*

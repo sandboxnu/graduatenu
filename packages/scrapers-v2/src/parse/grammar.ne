@@ -37,9 +37,9 @@ const RANGE_UNBOUNDED = buildMatcher(HRowType.RANGE_UNBOUNDED);
 
 @{%
 // import postprocessors
+const postprocess = require("./postprocess");
 const mt = () => [];
 const cons = ([first, rest]) => [first, ...(rest ? rest : [])];
-const postprocess = require("./postprocess");
 const flat = ([e]) => e.flat();
 %}
 
@@ -49,77 +49,66 @@ const flat = ([e]) => e.flat();
 
 # note that all %COMMENT indentation is ignored in the tokenize stage
 main ->
-    (%COMMENT :+) :? %INDENT requirementList %DEDENT
-  | requirementList commentCountGroup :*
+    %COMMENT :*
+  ( %INDENT requirementList %DEDENT
+  | requirementList (commentCountGroup :+ | headerGroup :+) :?
   | commentCountHeader headerGroup :+
-  | headerGroup :+
-
-# text cases
+  )
 
 headerGroup ->
-    %HEADER
-    (%COMMENT :+) :?
-  ( requirementList
-  | %INDENT %SUBHEADER :? requirementList %DEDENT
-  | requirementList subHeaderGroup
-  | commentCountGroup :+
-  | subHeaderGroup :+
-  )                                                        {% ([hd, cm, rest]) => [hd, cm, ...rest] %}
+    %HEADER %COMMENT :* 
+  ( %INDENT %SUBHEADER :? requirementList %DEDENT
+  | requirementList (commentCountGroup :+ | subHeaderGroup :+) :?
+  )                                                                            {% ([hd, cm, rest]) => [hd, cm, ...rest] %}
 
 subHeaderGroup ->
-    %SUBHEADER
+    %SUBHEADER %COMMENT :*
   ( (commentCountGroup | requirementList)
   | %INDENT (commentCountGroup | requirementList) %DEDENT
-  | %COMMENT
-  )                                                        {% cons %}
+  )                                                                            {% cons %}
 
 commentCountGroup ->
-    commentCountHeader
+    commentCountHeader %COMMENT :*
   ( (requirementList | subHeaderGroup :+)
   | %INDENT (requirementList | subHeaderGroup :+) %DEDENT
-  )                                                        {% cons %}
+  )                                                                            {% cons %}
 
-commentCountHeader -> %COMMENT_COUNT | %COMMENT_HOUR
-
-@{%
-/*
-
-*/
-%}
+commentCountHeader -> %COMMENT_COUNT | %COMMENT_HOUR                           {% id %}
 
 ## to avoid ambiguity, ANDs cannot follow ANDs
-requirementList -> nestedRequirementList                   {% flat %}
+# is it possible to encode this as a non-empty list?
+requirementList -> nestedRequirementList                                       {% ([l]) => l.filter(item => item !== null).flat() %}
 nestedRequirementList ->
-    null                                                   {% mt %}
-  | andCourse %COMMENT :? null                             {% ([a,b,c]) => [a,b] %}
-  | andCourse %COMMENT :? nonAndCourse %COMMENT :? nestedRequirementList           {% ([a,b,c,d,e]) => [a,b,c,d, ...e] %}
-  | nonAndCourse %COMMENT :? nestedRequirementList                     {% ([a,b,c]) => [a,b,...c] %}
+    null                                                                       {% mt %}
+  | andCourse %COMMENT :? null                                                 {% ([a,b,c]) => [a,b] %}
+  | andCourse %COMMENT :? nonAndCourse %COMMENT :? nestedRequirementList       {% ([a,b,c,d,e]) => [a,b,c,d, ...e] %}
+  | nonAndCourse %COMMENT :? nestedRequirementList                             {% ([a,b,c]) => [a,b,...c] %}
 
 nonAndCourse ->
-    course                                                 {% id %}
-  | orCourse                                               {% id %}
-  | range                                                  {% id %}
+    course                                                                     {% id %}
+  | orCourse                                                                   {% id %}
+  | range                                                                      {% id %}
 
 # atoms
-course -> %PLAIN_COURSE                                    {% postprocess.processCourse %}
+course -> %PLAIN_COURSE                                                        {% postprocess.processCourse %}
 ## unbounded case may produce a list of requirements
 range ->
-    %RANGE_LOWER_BOUNDED                                   {% postprocess.processRangeLB %}
-  | %RANGE_LOWER_BOUNDED_WITH_EXCEPTIONS                   {% postprocess.processRangeLBE %}
-  | %RANGE_BOUNDED                                         {% postprocess.processRangeB %}
-  | %RANGE_BOUNDED_WITH_EXCEPTIONS                         {% postprocess.processRangeBE %}
-  | %RANGE_UNBOUNDED                                       {% postprocess.processRangeU %}
+    %RANGE_LOWER_BOUNDED                                                       {% postprocess.processRangeLB %}
+  | %RANGE_LOWER_BOUNDED_WITH_EXCEPTIONS                                       {% postprocess.processRangeLBE %}
+  | %RANGE_BOUNDED                                                             {% postprocess.processRangeB %}
+  | %RANGE_BOUNDED_WITH_EXCEPTIONS                                             {% postprocess.processRangeBE %}
+  | %RANGE_UNBOUNDED                                                           {% postprocess.processRangeU %}
 
 # recursive cases
 ## always begins with a plainCourse or andCourse
 orCourse ->
-  ( course                                                 {% id %}
-  | %AND_COURSE                                              {% id %}
+  ( course                                                                     {% id %}
+  | %AND_COURSE                                                                {% id %}
   )
-  ( %OR_COURSE                                             {% postprocess.processCourse %}
-  | %OR_OF_AND_COURSE                                      {% postprocess.processOrOfAnd %}
-  ) :+                                                     {% postprocess.processOr %}
+  ( %OR_COURSE                                                                 {% postprocess.processCourse %}
+  | %OR_OF_AND_COURSE                                                          {% postprocess.processOrOfAnd %}
+  ) :+                                                                         {% postprocess.processOr %}
 andCourse ->
-  ( %AND_COURSE                                            {% postprocess.processOrOfAnd %}
-  ) :+                                                     {% postprocess.processAnd %}
+  ( %AND_COURSE                                                                {% postprocess.processOrOfAnd %}
+  ) :+                                                                         {% postprocess.processAnd %}
 
