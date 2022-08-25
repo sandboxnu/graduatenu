@@ -16,7 +16,7 @@ import {
 import { API } from "@graduate/api-client";
 import { PlanModel } from "@graduate/common";
 import { useRouter } from "next/router";
-import { Button, Grid, GridItem } from "@chakra-ui/react";
+import { Box, Button, Flex, Grid, GridItem } from "@chakra-ui/react";
 import { handleApiClientError } from "../utils/handleApiClientError";
 
 const HomePage: NextPage = () => {
@@ -107,15 +107,15 @@ const HomePage: NextPage = () => {
  */
 const PageLayout: React.FC = ({ children }) => {
   return (
-    <>
+    <Flex flexDirection="column" height="100vh">
       <Header />
-      <Grid height="200px" templateColumns="repeat(4, 1fr)" gap="md">
-        <GridItem rowSpan={1} colSpan={1} bg="primary.blue.light.main" />
-        <GridItem rowSpan={1} colSpan={3} p="md">
+      <Grid flex={1} templateColumns="repeat(4, 1fr)" gap="md">
+        <GridItem colSpan={1} bg="primary.blue.light.main" />
+        <GridItem colSpan={3} p="md">
           {children}
         </GridItem>
       </Grid>
-    </>
+    </Flex>
   );
 };
 
