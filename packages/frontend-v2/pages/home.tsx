@@ -38,8 +38,7 @@ const HomePage: NextPage = () => {
     if (!student) {
       // if student doesn't exist then there is no plan to display
       setSelectedPlanId(undefined);
-    } else if (!selectedPlanId) {
-      // if student exists but there is no plan to display, then default to primary plan
+    } else {
       setSelectedPlanId(student.primaryPlanId);
     }
   }, [student, selectedPlanId]);
