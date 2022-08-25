@@ -9,11 +9,20 @@ import {
 import { ScheduleYear2 } from "@graduate/common";
 import { ScheduleTerm } from "./ScheduleTerm";
 
-interface ScheduleYearProps {
+interface ToggleYearProps {
+  isExpanded: boolean;
+  toggleExpanded: () => void;
+}
+
+interface ScheduleYearProps extends ToggleYearProps {
   scheduleYear: ScheduleYear2<string>;
 }
 
-export const ScheduleYear: React.FC<ScheduleYearProps> = ({ scheduleYear }) => {
+export const ScheduleYear: React.FC<ScheduleYearProps> = ({
+  scheduleYear,
+  isExpanded,
+  toggleExpanded,
+}) => {
   // sum all credits over all the courses over each semester
   const totalCreditsThisYear = [
     scheduleYear.fall,
@@ -33,47 +42,67 @@ export const ScheduleYear: React.FC<ScheduleYearProps> = ({ scheduleYear }) => {
   }, 0);
 
   return (
-    <Flex flexDirection="column" height="100%">
+    <Flex flexDirection="column" height="100%" minHeight="inherit">
       <YearHeader
         year={scheduleYear}
         totalCreditsTaken={totalCreditsThisYear}
+        isExpanded={isExpanded}
+        toggleExpanded={toggleExpanded}
       />
-      <Grid templateColumns="repeat(4, 1fr)" flex={1}>
-        <ScheduleTerm scheduleTerm={scheduleYear.fall} />
-        <ScheduleTerm scheduleTerm={scheduleYear.spring} />
-        {/* TODO: support summer full term */}
-        <ScheduleTerm scheduleTerm={scheduleYear.summer1} />
-        <ScheduleTerm scheduleTerm={scheduleYear.summer2} isLastColumn />
-      </Grid>
+      {isExpanded && (
+        <Grid templateColumns="repeat(4, 1fr)" flex={1}>
+          <ScheduleTerm scheduleTerm={scheduleYear.fall} />
+          <ScheduleTerm scheduleTerm={scheduleYear.spring} />
+          {/* TODO: support summer full term */}
+          <ScheduleTerm scheduleTerm={scheduleYear.summer1} />
+          <ScheduleTerm scheduleTerm={scheduleYear.summer2} isLastColumn />
+        </Grid>
+      )}
     </Flex>
   );
 };
 
-interface YearHeaderProps {
+interface YearHeaderProps extends ToggleYearProps {
   year: ScheduleYear2<string>;
   totalCreditsTaken: number;
 }
 
-const YearHeader: React.FC<YearHeaderProps> = ({ year, totalCreditsTaken }) => {
+/** Displays the academic year, credits taken and hide/show button for the year. */
+const YearHeader: React.FC<YearHeaderProps> = ({
+  year,
+  totalCreditsTaken,
+  isExpanded,
+  toggleExpanded,
+}) => {
+  const backgroundColor = isExpanded
+    ? "primary.blue.dark"
+    : "primary.blue.light";
+
   return (
     <Grid templateColumns="repeat(12, 1fr)" alignItems="center">
-      <YearHeaderColumnContainer colSpan={1} justifyContent="center" mr="5xs">
+      <YearHeaderColumnContainer
+        colSpan={1}
+        justifyContent="center"
+        mr="5xs"
+        bg={`${backgroundColor}.main`}
+      >
         <Text fontWeight="bold" color="white">
           Year {year.year}
         </Text>
       </YearHeaderColumnContainer>
-      <YearHeaderColumnContainer colSpan={10} pl="md">
+      <YearHeaderColumnContainer
+        colSpan={10}
+        pl="md"
+        bg={`${backgroundColor}.main`}
+      >
         <Text color="white">{totalCreditsTaken} credits</Text>
       </YearHeaderColumnContainer>
-      <YearHeaderColumnContainer colSpan={1} bg="primary.blue.dark.900">
-        <Button
-          variant="unstyled"
-          width="100%"
-          textTransform="uppercase"
-          color="neutral.main"
-        >
-          hide
-        </Button>
+      <YearHeaderColumnContainer colSpan={1} bg={`${backgroundColor}.700`}>
+        <ToggleExpandedYearButton
+          backgroundColor={backgroundColor}
+          isExpanded={isExpanded}
+          toggleExpanded={toggleExpanded}
+        />
       </YearHeaderColumnContainer>
     </Grid>
   );
@@ -85,14 +114,32 @@ const YearHeaderColumnContainer: React.FC<GridItemProps> = ({
   ...rest
 }) => {
   return (
-    <GridItem
-      height="100%"
-      bg="primary.blue.dark.main"
-      display="flex"
-      alignItems="center"
-      {...rest}
-    >
+    <GridItem height="100%" display="flex" alignItems="center" {...rest}>
       {children}
     </GridItem>
+  );
+};
+
+interface ToggleExpandedYearButtonProps extends ToggleYearProps {
+  backgroundColor: string;
+}
+
+const ToggleExpandedYearButton: React.FC<ToggleExpandedYearButtonProps> = ({
+  backgroundColor,
+  isExpanded,
+  toggleExpanded,
+}) => {
+  return (
+    <Button
+      variant="unstyled"
+      width="100%"
+      textTransform="uppercase"
+      color="neutral.main"
+      onClick={toggleExpanded}
+      _hover={{ bg: `${backgroundColor}.900` }}
+      _active={{ bg: `${backgroundColor}.900` }}
+    >
+      {isExpanded ? "hide" : "show"}
+    </Button>
   );
 };

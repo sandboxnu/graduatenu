@@ -22,7 +22,7 @@ export const ScheduleTerm: React.FC<ScheduleTermProps> = ({
       backgroundColor={isOver ? "neutral.300" : undefined}
       px="sm"
       pt="2xs"
-      pb="sm"
+      pb="xl"
     >
       <ScheduleTermHeader
         season={scheduleTerm.season}
