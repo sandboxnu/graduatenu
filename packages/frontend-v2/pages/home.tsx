@@ -33,16 +33,6 @@ const HomePage: NextPage = () => {
   // keep track of the plan being displayed
   const [selectedPlanId, setSelectedPlanId] = useState<number | undefined>();
 
-  // set the primary plan to be the plan displayed initially
-  useEffect(() => {
-    if (!student) {
-      // if student doesn't exist then there is no plan to display
-      setSelectedPlanId(undefined);
-    } else {
-      setSelectedPlanId(student.primaryPlanId);
-    }
-  }, [student]);
-
   // handle error state
   if (error) {
     logger.error("HomePage", error);
@@ -58,6 +48,18 @@ const HomePage: NextPage = () => {
   }
 
   const selectedPlan = student.plans.find((plan) => selectedPlanId === plan.id);
+
+  // use the primary plan if no plan is selected
+  if (!selectedPlan) {
+    const primaryPlan = student.plans.find(
+      (plan) => student.primaryPlanId === plan.id
+    );
+
+    // ensure a valid primary plan exists
+    if (primaryPlan) {
+      setSelectedPlanId(student.primaryPlanId);
+    }
+  }
 
   /**
    * When a course is dragged and dropped onto a semester
@@ -128,7 +130,9 @@ const HomePage: NextPage = () => {
       <DndContext onDragEnd={handleDragEnd}>
         <Flex flexDirection="column">
           <PlanDropdown
-            selectedPlanId={selectedPlanId}
+            selectedPlanId={
+              selectedPlanId ? selectedPlanId : student.primaryPlanId
+            }
             setSelectedPlanId={setSelectedPlanId}
             plans={student.plans}
           />
