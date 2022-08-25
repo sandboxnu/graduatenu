@@ -30,7 +30,7 @@ export class StudentModel<T> {
   coopCycle: string | undefined;
   coursesCompleted: ScheduleCourse[] | undefined;
   coursesTransfered: ScheduleCourse[] | undefined;
-  primaryPlanId: number | true;
+  primaryPlanId: number;
   plans: PlanModel<T>[];
   concentration: string | undefined;
   createdAt: Date;

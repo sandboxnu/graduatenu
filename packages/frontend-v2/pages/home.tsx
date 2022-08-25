@@ -1,5 +1,11 @@
 import { NextPage } from "next";
-import { HeaderContainer, LoadingPage, Logo, Plan } from "../components";
+import {
+  HeaderContainer,
+  LoadingPage,
+  Logo,
+  Plan,
+  PlanDropdown,
+} from "../components";
 import {
   fetchStudentAndPrepareForDnd,
   useStudentWithPlans,
@@ -18,38 +24,64 @@ import { PlanModel } from "@graduate/common";
 import { useRouter } from "next/router";
 import { Button, Flex, Grid, GridItem } from "@chakra-ui/react";
 import { handleApiClientError } from "../utils/handleApiClientError";
+import { useEffect, useState } from "react";
 
 const HomePage: NextPage = () => {
   const { error, student, mutateStudent } = useStudentWithPlans();
   const router = useRouter();
 
+  // keep track of the plan being displayed
+  const [selectedPlanId, setSelectedPlanId] = useState<number | undefined>();
+
+  // set the primary plan to be the plan displayed initially
+  useEffect(() => {
+    if (!student) {
+      // if student doesn't exist then there is no plan to display
+      setSelectedPlanId(undefined);
+    } else if (!selectedPlanId) {
+      // if student exists but there is no plan to display, then default to primary plan
+      setSelectedPlanId(student.primaryPlanId);
+    }
+  }, [student, selectedPlanId]);
+
+  // handle error state
   if (error) {
     logger.error("HomePage", error);
     handleApiClientError(error, router);
 
-    // render the boiler plate page(everything except the plan)
+    // render just the boiler plate page since we couldn't fetch the student w plans
     return <PageLayout />;
   }
 
+  // handle loading state
   if (!student) {
     return <LoadingPage pageLayout={PageLayout} />;
   }
 
-  const primaryPlan = student.plans.find((p) => student.primaryPlanId === p.id);
+  const selectedPlan = student.plans.find((plan) => selectedPlanId === plan.id);
 
-  if (!primaryPlan) {
-    // TODO: Handle no plan/no primary plan case
-    return (
-      <PageLayout>
-        <p>Student has no primary plan</p>
-      </PageLayout>
-    );
-  }
-
+  /**
+   * When a course is dragged and dropped onto a semester
+   *
+   * 1. Create a copy of the plan with the course remove from the old schedule and
+   *    place into the new schedule
+   * 2. Create a copy of the student with the new updated plan
+   * 3. Optimistically update the local cache with the new student so that the user
+   *    sees the change immidiately
+   * 4. POST the updated plan to db
+   * 5. Refetch the student with the new plan and update the cache with the
+   *    persisted student from our backend
+   * 6. If anything goes wrong in the POST, rollback the optimistic update
+   */
   const handleDragEnd = (event: DragEndEvent): void => {
+    // no plan is being displayed right now, so abort
+    if (!selectedPlan) {
+      return;
+    }
+
     const { active, over } = event;
 
-    // course is not dragged over a term
+    // course is not dragged over a term, so abort
     if (!over) {
       return;
     }
@@ -57,7 +89,7 @@ const HomePage: NextPage = () => {
     // create a new plan with the dragged course moved from old term to term it is dropped on
     let updatedPlan: PlanModel<string>;
     try {
-      updatedPlan = updatePlanOnDragEnd(primaryPlan, active, over);
+      updatedPlan = updatePlanOnDragEnd(selectedPlan, active, over);
     } catch (err) {
       // update failed, either due to some logical issue or explicitely thrown error
       logger.debug("updatePlanOnDragEnd", err);
@@ -95,15 +127,22 @@ const HomePage: NextPage = () => {
   return (
     <PageLayout>
       <DndContext onDragEnd={handleDragEnd}>
-        <Plan plan={primaryPlan} />
+        <Flex flexDirection="column">
+          <PlanDropdown
+            selectedPlanId={selectedPlanId}
+            setSelectedPlanId={setSelectedPlanId}
+            plans={student.plans}
+          />
+          {selectedPlan && <Plan plan={selectedPlan} />}
+        </Flex>
       </DndContext>
     </PageLayout>
   );
 };
 
 /**
- * This will have everything that can be rendered without the plan(i.e: header,
- * sidebar, etc)
+ * This will have everything that can be rendered without the student and
+ * plans(i.e: header, sidebar, etc)
  */
 const PageLayout: React.FC = ({ children }) => {
   return (
