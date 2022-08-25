@@ -7,11 +7,11 @@ import { Pipeline, StageLabel } from "./types";
 import { createAgent } from "./axios";
 import {
   clearGlobalStatsLogger,
-  getGlobalStatsLogger,
   installGlobalStatsLogger,
   logProgress,
   logResults,
 } from "./logger";
+import { parseEntry } from "../parse/parse";
 
 /**
  * Runs a full scrape of the catalog, logging the results to the console.
@@ -27,25 +27,27 @@ export const runPipeline = async (yearStart: number, yearEnd: number) => {
 
   // can use for debugging logging throughout the stages
   installGlobalStatsLogger();
-  const pipelines = entries.map((entry) => {
-    return createPipeline(entry)
-      .then(addPhase(StageLabel.Classify, addTypeToUrl))
-      .then(
-        addPhase(StageLabel.Filter, filterEntryType, [
-          CatalogEntryType.Minor,
-          CatalogEntryType.Major,
-          CatalogEntryType.Concentration,
-        ])
-      )
-      .then(addPhase(StageLabel.Tokenize, tokenizeEntry));
-  });
+  const pipelines = entries.map(singlePipeline);
   const results = await logProgress(pipelines);
   await unregisterAgent();
   logResults(results);
   // used for debug logging from within pipeline stages
-  getGlobalStatsLogger()?.print();
+  // getGlobalStatsLogger()?.print();
   clearGlobalStatsLogger();
 };
+
+export const singlePipeline = (entry: URL) =>
+  createPipeline(entry)
+    .then(addPhase(StageLabel.Classify, addTypeToUrl))
+    .then(
+      addPhase(StageLabel.Filter, filterEntryType, [
+        CatalogEntryType.Minor,
+        CatalogEntryType.Major,
+        CatalogEntryType.Concentration,
+      ])
+    )
+    .then(addPhase(StageLabel.Tokenize, tokenizeEntry))
+    .then(addPhase(StageLabel.Parse, parseEntry));
 
 // convenience constructor for making a pipeline
 const createPipeline = (input: URL): Promise<Pipeline<URL>> => {

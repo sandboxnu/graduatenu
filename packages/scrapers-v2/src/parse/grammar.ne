@@ -50,7 +50,7 @@ const flat = ([e]) => e.flat();
 # note that all %COMMENT indentation is ignored in the tokenize stage
 main ->
     %COMMENT :*
-  ( %INDENT requirementList %DEDENT
+  ( %INDENT requirementList %DEDENT                                            {% ([a,b,c]) => b %}
   | requirementList (commentCountGroup :+ | headerGroup :+) :?
   | commentCountHeader headerGroup :+
   )
