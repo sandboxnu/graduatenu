@@ -30,8 +30,21 @@ const HomePage: NextPage = () => {
   const { error, student, mutateStudent } = useStudentWithPlans();
   const router = useRouter();
 
-  // keep track of the plan being displayed
-  const [selectedPlanId, setSelectedPlanId] = useState<number | undefined>();
+  /*
+   * Keep track of the plan being displayed, initially undef and later either the plan id or null.
+   * undef is used to indicate the initial state where the primary plan should be used, null is to define
+   * the state where no plan should be used.
+   */
+  const [selectedPlanId, setSelectedPlanId] = useState<
+    number | undefined | null
+  >();
+
+  useEffect(() => {
+    // once the student is fetched, set the selected plan id to the primary plan id
+    if (student && selectedPlanId === undefined) {
+      setSelectedPlanId(student.primaryPlanId);
+    }
+  }, [student, selectedPlanId, setSelectedPlanId]);
 
   // handle error state
   if (error) {
@@ -48,18 +61,6 @@ const HomePage: NextPage = () => {
   }
 
   const selectedPlan = student.plans.find((plan) => selectedPlanId === plan.id);
-
-  // use the primary plan if no plan is selected
-  if (!selectedPlan) {
-    const primaryPlan = student.plans.find(
-      (plan) => student.primaryPlanId === plan.id
-    );
-
-    // ensure a valid primary plan exists
-    if (primaryPlan) {
-      setSelectedPlanId(student.primaryPlanId);
-    }
-  }
 
   /**
    * When a course is dragged and dropped onto a semester
@@ -130,9 +131,7 @@ const HomePage: NextPage = () => {
       <DndContext onDragEnd={handleDragEnd}>
         <Flex flexDirection="column">
           <PlanDropdown
-            selectedPlanId={
-              selectedPlanId ? selectedPlanId : student.primaryPlanId
-            }
+            selectedPlanId={selectedPlanId}
             setSelectedPlanId={setSelectedPlanId}
             plans={student.plans}
           />

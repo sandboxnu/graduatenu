@@ -3,9 +3,9 @@ import { Select } from "@chakra-ui/react";
 import { PlanModel } from "@graduate/common";
 
 interface PlanDropdownProps {
-  setSelectedPlanId: Dispatch<SetStateAction<number | undefined>>;
+  setSelectedPlanId: Dispatch<SetStateAction<number | undefined | null>>;
   plans: PlanModel<string>[];
-  selectedPlanId?: number;
+  selectedPlanId: number | undefined | null;
 }
 export const PlanDropdown: React.FC<PlanDropdownProps> = ({
   setSelectedPlanId,
@@ -18,8 +18,14 @@ export const PlanDropdown: React.FC<PlanDropdownProps> = ({
       width="15%"
       mb="sm"
       borderRadius="0"
-      value={selectedPlanId}
+      value={selectedPlanId ? selectedPlanId : undefined}
       onChange={(e) => {
+        if (!e.target.value) {
+          // no plan is selected, indicated using null(different from undef which is the initial state)
+          setSelectedPlanId(null);
+          return;
+        }
+
         const selectedPlanId = parseInt(e.target.value);
         setSelectedPlanId(selectedPlanId);
       }}
