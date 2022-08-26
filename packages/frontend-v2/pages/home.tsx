@@ -45,7 +45,17 @@ const HomePage: NextPage = () => {
     }
   }, [student, selectedPlanId, setSelectedPlanId]);
 
-  // handle error state
+  /**
+   * Handle errors from useStudentWithPlans.
+   *
+   * Unfortunately, error could be from useStudentWithPlans or from
+   * mutateStudent. But mutate student error is handled seperately by rolling
+   * back the update.
+   *
+   * To specifically handle useStudentWithPlans error we check if the student is
+   * not defined. Since if mutate student errors, student will still be defined
+   * since we rollback the student state on error.
+   */
   if (error && !student) {
     logger.error("HomePage", error);
     handleApiClientError(error, router);
