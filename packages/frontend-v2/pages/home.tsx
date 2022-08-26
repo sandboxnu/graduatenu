@@ -15,7 +15,6 @@ import {
   cleanDndIdsFromPlan,
   logger,
   logout,
-  toast,
   updatePlanForStudent,
   updatePlanOnDragEnd,
 } from "../utils";
@@ -47,7 +46,7 @@ const HomePage: NextPage = () => {
   }, [student, selectedPlanId, setSelectedPlanId]);
 
   // handle error state
-  if (error) {
+  if (error && !student) {
     logger.error("HomePage", error);
     handleApiClientError(error, router);
 
@@ -106,24 +105,17 @@ const HomePage: NextPage = () => {
       async () => {
         // remove dnd ids, update the plan, and refetch the student
         const cleanedPlan = cleanDndIdsFromPlan(updatedPlan);
-        try {
-          await API.plans.update(updatedPlan.id, cleanedPlan);
-        } catch (err) {
-          toast.error("Sorry! Something went wrong when updating your plan.", {
-            log: true,
-          });
-
-          // rethrow the error so that swr rollbacks the update
-          throw err;
-        }
+        await API.plans.update(updatedPlan.id, cleanedPlan);
         return fetchStudentAndPrepareForDnd();
       },
       {
         optimisticData: updatedStudent,
-        rollbackOnError: false,
+        rollbackOnError: true,
         revalidate: false,
       }
-    );
+    ).catch((error) => {
+      handleApiClientError(error, router);
+    });
   };
 
   return (
