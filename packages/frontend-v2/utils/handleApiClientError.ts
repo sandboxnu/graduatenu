@@ -3,6 +3,11 @@ import { NextRouter } from "next/router";
 import { logger } from "./logger";
 import { toast } from "./toast";
 
+enum ErrorToastId {
+  UNAUTHORIZED = "unauthorized",
+  SERVER_ERROR = "server error",
+}
+
 /**
  * Handles the error returned by our API client.
  *
@@ -39,7 +44,9 @@ const handleAxiosError = (error: AxiosError, router: NextRouter) => {
     router.push("/login");
   } else if (statusCode === 403) {
     logger.debug("handleApiClientError", "Unauthorized", error);
-    toast.error("Sorry, you don't have valid permissions.");
+    toast.error("Sorry, you don't have valid permissions.", {
+      toastId: ErrorToastId.UNAUTHORIZED,
+    });
   } else {
     logger.debug(
       "handleApiClientError",
@@ -48,6 +55,8 @@ const handleAxiosError = (error: AxiosError, router: NextRouter) => {
     );
 
     // TODO: Add some sort of google form/email for a user to report this error
-    toast.error("Sorry, something went wrong on our end :(");
+    toast.error("Sorry, something went wrong on our end :(", {
+      toastId: ErrorToastId.SERVER_ERROR,
+    });
   }
 };
