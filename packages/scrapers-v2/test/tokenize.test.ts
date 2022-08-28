@@ -1,4 +1,7 @@
-import { fetchAndTokenizeHTML } from "../src/tokenize/tokenize";
+import {
+  fetchAndTokenizeHTML,
+  getRequirementsContainer,
+} from "../src/tokenize/tokenize";
 import {
   ARCH_ENGLISH,
   BIOENG_BIOCHEM,
@@ -14,6 +17,15 @@ import {
   PHYSICS,
   PUBLIC_HEALTH_BA,
 } from "./testUrls";
+import { loadHTML } from "../src/utils";
+import { parseCatalogEntryHtml } from "../src/tokenize/parseCatalogEntryHtml";
+import {
+  ParseHtmlH2,
+  ParseHtmlH3,
+  ParseHtmlH5,
+  ParseHtmlLeafList,
+  ParseHtmlMain,
+} from "../src/tokenize/postprocessCatalogEntryHtml";
 
 describe("scraper v2 snapshot tests", () => {
   test("CS & Game Dev matches snapshot", async () => {
@@ -69,3 +81,53 @@ describe("scraper v2 snapshot tests", () => {
     });
   });
 });
+
+describe("parser", () => {
+  // tests can't serialize the full cheerio outputs, so just take element type (name)
+  const getTokens = async (url: URL) => {
+    const $ = await loadHTML(url.href);
+    return getRequirementsContainer($).children().toArray();
+  };
+
+  test("cs game dev", async () => {
+    const tokens = await getTokens(CS_GAME_DEV);
+
+    expect(tokens.length).toBeGreaterThan(0);
+    expect(simplify(parseCatalogEntryHtml(tokens))).toMatchSnapshot();
+  });
+
+  test("nested linked concentration pages (business)", async () => {
+    const tokens = await getTokens(BUSINESS);
+
+    expect(tokens.length).toBeGreaterThan(0);
+    expect(simplify(parseCatalogEntryHtml(tokens))).toMatchSnapshot();
+  });
+});
+
+const simplify = (input: ParseHtmlMain) => {
+  return {
+    leadingLeafList: simplifyLeafList(input.leadingLeafList),
+    leadingH5s: input.leadingH5s.map(simplifyH35),
+    leadingH3s: input.leadingH3s.map(simplifyH35),
+    h2s: input.h2s.map(simplifyH2),
+  };
+};
+
+const simplifyLeafList = (l: ParseHtmlLeafList) => {
+  return l.map((e) => e.name);
+};
+
+const simplifyH35 = (input: ParseHtmlH5 | ParseHtmlH3) => {
+  return {
+    type: input.header.name,
+    leafList: simplifyLeafList(input.leafList),
+  };
+};
+
+const simplifyH2 = (input: ParseHtmlH2) => {
+  return {
+    type: input.header.name,
+    h3s: input.h3s.map(simplifyH35),
+    leadingLeafList: simplifyLeafList(input.leadingLeafList),
+  };
+};

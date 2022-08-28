@@ -20,7 +20,9 @@
     "lint": "eslint packages/ --ext .ts,.tsx .",
     "tsc": "yarn workspaces foreach -v --exclude . run tsc",
     "g:babel": "cd $INIT_CWD && babel",
-    "g:cross-env": "cd $INIT_CWD && cross-env"
+    "g:cross-env": "cd $INIT_CWD && cross-env",
+    "g:concurrently": "cd $INIT_CWD && concurrently",
+    "postinstall": "husky install"
   },
   "dependencies": {
     "@babel/plugin-proposal-class-properties": "^7.18.6",

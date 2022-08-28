@@ -120,7 +120,7 @@ const logErrResult = (
  * are displayed separately.
  */
 class StatsLogger {
-  static MAX_PRINT_WIDTH = 120;
+  static MAX_PRINT_WIDTH = 140;
 
   // field -> value -> count
   private fields: Record<string, Map<any, number>> = {};
@@ -167,7 +167,11 @@ class StatsLogger {
       }
     }
     const id = storedErrors.length === 0 ? "" : ` #${storedErrors.length}`;
-    const annot = `${err.message}${id}`;
+    const oneLiner = err.message
+      .slice(0, StatsLogger.MAX_PRINT_WIDTH - 10)
+      .replaceAll("\n", ":");
+
+    const annot = `${oneLiner}${id}`;
     // stacktrace didn't match, so add a new stacktrace entry for this error message
     storedErrors.push({ err, count: 1, annot, entryIds: [entryId] });
     this.errors.set(key, storedErrors);
@@ -201,7 +205,7 @@ class StatsLogger {
       .flat()
       .sort((a, b) => b.count - a.count);
     for (const { err, count, annot, entryIds } of errors) {
-      console.log(annot, count);
+      console.log(annot, "occurred:", count);
       console.error(err);
       console.log(entryIds.map((url) => url.toString()));
     }

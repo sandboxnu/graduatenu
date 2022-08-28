@@ -1,4 +1,4 @@
-import { getGlobalDispatcher, Pool, setGlobalDispatcher } from "undici";
+import { Pool, setGlobalDispatcher } from "undici";
 import { BASE_URL } from "../constants";
 
 /**
@@ -9,9 +9,10 @@ import { BASE_URL } from "../constants";
 export const createAgent = () => {
   setGlobalDispatcher(
     new Pool(BASE_URL, {
+      // assume all scrapes will finish within a minute
+      keepAliveTimeout: 60 * 1000,
       pipelining: 10,
       connections: 25,
     })
   );
-  return () => getGlobalDispatcher().destroy();
 };

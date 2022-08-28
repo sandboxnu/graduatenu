@@ -26,7 +26,8 @@ const CHOICE_KEYWORD =
 export const categorizeCommentRow = (
   row: CommentRow | CommentRowNoHours
 ): CommentRow | CommentRowNoHours | ParsedCommentRow => {
-  const stats = getGlobalStatsLogger();
+  // const stats = getGlobalStatsLogger();
+  const stats = null as any;
   const desc = row.description.toLowerCase();
   const matches = Array.from(desc.matchAll(CHOICE_KEYWORD));
   if (matches.length < 1) {

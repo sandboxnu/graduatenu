@@ -19,7 +19,7 @@ import { parseEntry } from "../parse/parse";
  * in `scrapers-v2` dir. Also see `main.ts`.
  */
 export const runPipeline = async (yearStart: number, yearEnd: number) => {
-  const unregisterAgent = createAgent();
+  createAgent();
   const { entries, unfinished } = await scrapeMajorLinks(yearStart, yearEnd);
   if (unfinished.length > 0) {
     console.log("didn't finish searching some entries", ...unfinished);
@@ -29,7 +29,6 @@ export const runPipeline = async (yearStart: number, yearEnd: number) => {
   installGlobalStatsLogger();
   const pipelines = entries.map(singlePipeline);
   const results = await logProgress(pipelines);
-  await unregisterAgent();
   logResults(results);
   // used for debug logging from within pipeline stages
   // getGlobalStatsLogger()?.print();

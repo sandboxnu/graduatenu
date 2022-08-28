@@ -32,6 +32,15 @@ import {
 import { join } from "path";
 import { BASE_URL } from "../constants";
 import { categorizeTextRow } from "./textCategorize";
+import {
+  ParseHtmlH2,
+  ParseHtmlH3,
+  ParseHtmlH5,
+  ParseHtmlLeafList,
+  ParseHtmlMain,
+} from "./postprocessCatalogEntryHtml";
+import { getGlobalStatsLogger } from "../runtime/logger";
+import { parseCatalogEntryHtml } from "./parseCatalogEntryHtml";
 
 /**
  * Fetch html for page and convert into intermediate representation (IR)
@@ -39,33 +48,26 @@ import { categorizeTextRow } from "./textCategorize";
  * @param url The url of the page to tokenize
  */
 export const fetchAndTokenizeHTML = async (url: URL): Promise<HDocument> => {
-  return await tokenizeHTML(await loadHTML(url.href));
-};
-
-/**
- * Tokenize scraped html into intermediate representation (IR)
- *
- * @param $ The cheerio static for the page to tokenize
- */
-export const tokenizeHTML = async ($: CheerioStatic): Promise<HDocument> => {
+  const $ = await loadHTML(url.href);
   const majorName: string = parseText($("#site-title").find("h1"));
   const catalogYear: string = parseText($("#edition")).split(" ")[0];
   const yearVersion: number = parseInt(catalogYear.split("-")[0]);
 
   const requirementsContainer = getRequirementsContainer($);
-  const sections = await tokenizeSections($, requirementsContainer);
-
+  // todo: make tokenizeSections parse out requiredHours and concentrations as well
+  const tokens = requirementsContainer.children().toArray();
+  const structure = parseCatalogEntryHtml(tokens);
+  const sections = await tokenizeSections(
+    url,
+    $,
+    requirementsContainer,
+    structure
+  );
   const programRequiredHours = getProgramRequiredHours(
     $,
     requirementsContainer
   );
-
-  return {
-    programRequiredHours,
-    yearVersion,
-    majorName,
-    sections,
-  };
+  return { programRequiredHours, yearVersion, majorName, sections };
 };
 
 /**
@@ -75,7 +77,7 @@ export const tokenizeHTML = async ($: CheerioStatic): Promise<HDocument> => {
  *
  * @param $
  */
-const getRequirementsContainer = ($: CheerioStatic) => {
+export const getRequirementsContainer = ($: CheerioStatic) => {
   const tabsContainer = $("#contentarea #tabs");
   if (tabsContainer.length === 0) {
     // had no tabs, so just look for id ending in "requirementstextcontainer"
@@ -131,58 +133,124 @@ const getProgramRequiredHours = (
   return 0;
 };
 
+const DEFAULT_NAME = "Default";
+
 /**
  * Produces overall HSections for each HTML table in the page
  *
+ * @param url
  * @param $
  * @param requirementsContainer
+ * @param structure
  */
-const tokenizeSections = async (
+export const tokenizeSections = async (
+  url: URL,
   $: CheerioStatic,
-  requirementsContainer: Cheerio
+  requirementsContainer: Cheerio,
+  structure: ParseHtmlMain
 ): Promise<HSection[]> => {
-  // use a stack to keep track of the course list title and description
-  const descriptions: string[] = [];
-  const courseList: HSection[] = [];
+  // information we need:
+  // - header section -> tables it contains
+  // - header section -> requirement hours
+  // occasionally we will join tables if there is nothing separating them
+  const names: string[] = [];
+  const sections: HSection[] = [];
 
-  for (const element of requirementsContainer.children().toArray()) {
-    if (element.name === "h2" || element.name === "h3") {
-      // element is h2 or h3 means it's a header text
-      descriptions.push(parseText($(element)));
-    } else if (
+  const addSectionFromLeafList = (leafList: ParseHtmlLeafList) => {
+    checkForConcentrations(leafList, names, url);
+    const rows = coalesceRows(leafList, $);
+    if (rows.length > 0) {
+      sections.push({
+        description: names.length > 0 ? names.join(" > ") : DEFAULT_NAME,
+        entries: rows,
+      });
+    }
+  };
+
+  const addSectionFromH5 = (h5: ParseHtmlH5) => {
+    names.push(parseText($(h5.header)));
+    addSectionFromLeafList(h5.leafList);
+    names.pop();
+  };
+
+  const addSectionFromH3 = (h3: ParseHtmlH3) => {
+    names.push(parseText($(h3.header)));
+    addSectionFromLeafList(h3.leafList);
+    names.pop();
+  };
+
+  const addSectionFromH2 = (h2: ParseHtmlH2) => {
+    names.push(parseText($(h2.header)));
+    addSectionFromLeafList(h2.leadingLeafList);
+    for (const h3 of h2.h3s) {
+      addSectionFromH3(h3);
+    }
+    names.pop();
+  };
+
+  addSectionFromLeafList(structure.leadingLeafList);
+  for (const h5 of structure.leadingH5s) {
+    addSectionFromH5(h5);
+  }
+  for (const h3 of structure.leadingH3s) {
+    addSectionFromH3(h3);
+  }
+  for (const h2 of structure.h2s) {
+    addSectionFromH2(h2);
+  }
+
+  return sections;
+};
+
+const coalesceRows = (leafList: ParseHtmlLeafList, $: CheerioStatic) => {
+  const rowsList = [];
+  let hasSeenTable = false;
+  let previousElementWasTable = false;
+  // special case: in some catalog entries, a commentCountGroup exists where the header is separated in its own table
+  // from the rest of the requirements it contains, by a single <pre> tag.
+  for (const element of leafList.filter((e) => e.name !== "pre")) {
+    if (
       element.name === "table" &&
+      // class "sc_courselist" signifies that this table is a list of courses
       element.attribs["class"] === "sc_courselist"
     ) {
-      // class "sc_courselist" signifies that this table is a list of courses
-      // => parse the table's rows
-      const tableDesc = descriptions.pop() || "";
-      const courseTable = {
-        description: tableDesc,
-        entries: tokenizeRows($, element),
-      };
-      courseList.push(courseTable);
-    } else if (
-      // only necessary for business concentrations
-      element.name === "ul" &&
-      parseText($(element).prev()).includes("concentration")
-    ) {
-      // if we encounter an unordered list and preceding element contains text "concentration",
-      // assume the list is of links for business concentrations.
-      // only applies to:
-      // https://catalog.northeastern.edu/undergraduate/business/business-administration-bsba/#programrequirementstext
-      const links = constructNestedLinks($, element);
-      const pages = await Promise.all(links.map(loadHTML));
-      const containerId = "#concentrationrequirementstextcontainer";
-      const concentrations = await Promise.all(
-        pages.map((concentrationPage) =>
-          tokenizeSections(concentrationPage, concentrationPage(containerId))
-        )
-      );
-      courseList.push(...concentrations.flat());
+      if (hasSeenTable && !previousElementWasTable) {
+        // if we encounter more than one group of tables per header, then error as that case is unexpected
+        throw new Error("encountered more than one set clump of tables");
+      }
+      hasSeenTable = true;
+      previousElementWasTable = true;
+      rowsList.push(tokenizeRows($, element));
+    } else {
+      previousElementWasTable = false;
     }
   }
 
-  return courseList;
+  return rowsList.flat();
+};
+
+const checkForConcentrations = (
+  elements: CheerioElement[],
+  names: string[],
+  url: URL
+) => {
+  if (
+    // element.name === "ul" &&
+    names.some((n) => n.toLowerCase().includes("concentration"))
+  ) {
+    // if we encounter an unordered list and preceding element contains text "concentration", assume the list is of links for business concentrations.
+    // const links = constructNestedLinks($, element);
+    // const pages = await Promise.all(links.map(loadHTML));
+    // const containerId = "#concentrationrequirementstextcontainer";
+    // const concentrations = await Promise.all(
+    //   pages.map((concentrationPage) =>
+    //     tokenizeSections(url, concentrationPage, concentrationPage(containerId))
+    //   )
+    // );
+    // courseList.push(...concentrations.flat());
+    // TODO: implement concentrations correctly
+    getGlobalStatsLogger()?.recordField("concentrations", url.href);
+  }
 };
 
 /**
@@ -207,14 +275,17 @@ const constructNestedLinks = ($: CheerioStatic, element: CheerioElement) => {
  * @param $
  * @param table
  */
-const tokenizeRows = ($: CheerioStatic, table: CheerioElement): HToken[] => {
+export const tokenizeRows = (
+  $: CheerioStatic,
+  table: CheerioElement
+): HToken[] => {
   let currentIndentation = 0;
   const tokens: HToken[] = [];
 
   for (const tr of $(table).find("tbody > tr").toArray()) {
     // different row type
     const tds = $(tr).find("td").toArray().map($);
-    const type = getRowType($, tr, tds);
+    const type = getRowType(tr, tds);
     const { indentation: rowIndentation, ...row } = constructRow($, tds, type);
 
     // insert indent/dedents appropriately. skip if comment, bc it messes up indentation
@@ -244,11 +315,10 @@ const tokenizeRows = ($: CheerioStatic, table: CheerioElement): HToken[] => {
 /**
  * Pre-parses the row to determine its type
  *
- * @param $
  * @param tr
  * @param tds
  */
-const getRowType = ($: CheerioStatic, tr: CheerioElement, tds: Cheerio[]) => {
+const getRowType = (tr: CheerioElement, tds: Cheerio[]) => {
   const trClasses = new Set(tr.attribs["class"].split(" "));
   const td = tds[0];
   const tdClasses = new Set(td.attr("class")?.split(" "));
@@ -313,21 +383,21 @@ const constructRow = (
     case HRowType.HEADER:
     case HRowType.SUBHEADER:
     case HRowType.COMMENT:
-      const { indentation, ...textRow } = constructTextRow($, tds, type);
+      const { indentation, ...textRow } = constructTextRow(tds, type);
       return { ...categorizeTextRow(textRow), indentation };
     case HRowType.OR_COURSE:
-      return constructOrCourseRow($, tds);
+      return constructOrCourseRow(tds);
     case HRowType.PLAIN_COURSE:
-      return constructPlainCourseRow($, tds);
+      return constructPlainCourseRow(tds);
     case HRowType.AND_COURSE:
     case HRowType.OR_OF_AND_COURSE:
       return constructMultiCourseRow($, tds, type);
     case HRowType.RANGE_LOWER_BOUNDED:
-      return constructRangeLowerBoundedMaybeExceptions($, tds);
+      return constructRangeLowerBoundedMaybeExceptions(tds);
     case HRowType.RANGE_BOUNDED:
-      return constructRangeBoundedMaybeExceptions($, tds);
+      return constructRangeBoundedMaybeExceptions(tds);
     case HRowType.RANGE_UNBOUNDED:
-      return constructRangeUnbounded($, tds);
+      return constructRangeUnbounded(tds);
 
     // cases not returned by getType()
     case HRowType.RANGE_LOWER_BOUNDED_WITH_EXCEPTIONS:
@@ -343,7 +413,6 @@ const constructRow = (
 };
 
 const constructTextRow = (
-  $: CheerioStatic,
   tds: Cheerio[],
   type: HRowType.HEADER | HRowType.SUBHEADER | HRowType.COMMENT
 ): (
@@ -370,7 +439,6 @@ const constructTextRow = (
 };
 
 const constructPlainCourseRow = (
-  $: CheerioStatic,
   tds: Cheerio[]
 ): CourseRow<HRowType.PLAIN_COURSE> & Indent => {
   const [code, desc, hourCol] = ensureLength(3, tds);
@@ -389,7 +457,6 @@ const constructPlainCourseRow = (
 };
 
 const constructOrCourseRow = (
-  $: CheerioStatic,
   tds: Cheerio[]
 ): CourseRow<HRowType.OR_COURSE> & Indent => {
   const [code, desc] = ensureLength(2, tds);
@@ -455,7 +522,6 @@ const constructMultiCourseRow = (
 };
 
 const constructRangeLowerBoundedMaybeExceptions = (
-  $: CheerioStatic,
   tds: Cheerio[]
 ): (
   | WithExceptions<
@@ -501,7 +567,6 @@ const constructRangeLowerBoundedMaybeExceptions = (
 };
 
 const constructRangeBoundedMaybeExceptions = (
-  $: CheerioStatic,
   tds: Cheerio[]
 ): (
   | RangeBoundedRow<HRowType.RANGE_BOUNDED>
@@ -544,7 +609,6 @@ const constructRangeBoundedMaybeExceptions = (
 };
 
 const constructRangeUnbounded = (
-  $: CheerioStatic,
   tds: Cheerio[]
 ): RangeUnboundedRow<HRowType.RANGE_UNBOUNDED> & Indent => {
   const [desc, hourCol] = ensureLength(2, tds);

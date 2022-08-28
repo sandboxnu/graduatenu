@@ -4,10 +4,12 @@
   "description": "scrapers used to generate essential data such as majors and plans",
   "private": true,
   "scripts": {
-    "test": "yarn parser:generate && jest",
-    "scrape": "yarn parser:generate && ts-node ./src/main.ts",
-    "parser:generate": "nearleyc src/parse/grammar.ne -o src/parse/grammar.js",
-    "parser:test": "nearley-test src/parse/grammar.js"
+    "test": "yarn generate && jest",
+    "scrape": "yarn generate && ts-node ./src/main.ts",
+    "generate": "yarn g:concurrently \"yarn parse:generate\" \"yarn tokenize:generate\"",
+    "parse:generate": "cd src/parse && nearleyc grammar.ne -o grammar.js",
+    "tokenize:generate": "cd src/tokenize && nearleyc catalogEntryGrammar.ne -o catalogEntryGrammar.js",
+    "parse:test": "nearley-test src/parse/grammar.js"
   },
   "dependencies": {
     "@graduate/common": "*",
