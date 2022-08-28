@@ -14,8 +14,11 @@ import { useRouter } from "next/router";
 import { AxiosError } from "axios";
 import { logger, redirectToOnboardingOrHome } from "../utils";
 import { SignUpStudentDto } from "@graduate/common";
+import { HeaderContainer, Logo } from "../components";
 
-const Signup: NextPage = () => {
+const Signup: NextPage = () => {};
+
+const SignupForm = () => {
   const [apiError, setApiError] = useState("");
   const router = useRouter();
 
@@ -111,6 +114,14 @@ const Signup: NextPage = () => {
         Sign Up
       </Button>
     </form>
+  );
+};
+
+const Header = (): JSX.Element => {
+  return (
+    <HeaderContainer>
+      <Logo />
+    </HeaderContainer>
   );
 };
 
