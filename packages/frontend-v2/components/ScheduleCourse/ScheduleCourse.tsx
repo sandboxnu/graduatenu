@@ -3,10 +3,10 @@ import { forwardRef } from "react";
 import { ScheduleCourse2 } from "@graduate/common";
 import { useDraggable } from "@dnd-kit/core";
 import { CSS } from "@dnd-kit/utilities";
-import { DeleteIcon, DragHandleIcon } from "@chakra-ui/icons";
-import { getCourseDisplayString } from "../../utils/course/getCourseDisplayString";
+import { DragHandleIcon } from "@chakra-ui/icons";
 import { CourseTrashButton } from "./CourseTashButton";
 import { GraduateToolTip } from "../GraduateTooltip";
+import { getCourseDisplayString } from "../../utils";
 
 interface DraggableScheduleCourseProps {
   scheduleCourse: ScheduleCourse2<string>;

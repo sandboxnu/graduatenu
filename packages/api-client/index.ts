@@ -102,7 +102,7 @@ class SearchAPIClient {
   fetchCourse = async (
     subject: string,
     classId: string
-  ): Promise<ScheduleCourse | null> => {
+  ): Promise<ScheduleCourse2<null> | null> => {
     const res = await this.axios({
       method: "post",
       data: {
@@ -124,7 +124,8 @@ class SearchAPIClient {
 
     const courseData = await res.data.data;
     if (courseData?.class?.latestOccurrence) {
-      const course: ScheduleCourse = courseData.class.latestOccurrence;
+      const course: ScheduleCourse2<unknown> =
+        courseData.class.latestOccurrence;
       course.numCreditsMax = courseData.class.latestOccurrence.maxCredits;
       course.numCreditsMin = courseData.class.latestOccurrence.minCredits;
       delete courseData.class.latestOccurrence.maxCredits;

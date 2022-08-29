@@ -12,8 +12,11 @@ import {
 import { SearchAPI } from "@graduate/api-client";
 import { ScheduleCourse2 } from "@graduate/common";
 import { useState } from "react";
-import { isEqualCourses } from "../../utils";
-import { getCourseDisplayString } from "../../utils/course/getCourseDisplayString";
+import {
+  isEqualCourses,
+  getCourseDisplayString,
+  getRequiredCourseCoreqs,
+} from "../../utils";
 import { SearchCoursesInput } from "./SearchCoursesInput";
 import { SearchResult } from "./SearchResult";
 import { SelectedCourse } from "./SelectedCourse";
@@ -47,14 +50,18 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
     }
   };
 
-  const addSelectedCourse = (course: ScheduleCourse2<null>) => {
+  const addSelectedCourse = async (course: ScheduleCourse2<null>) => {
     // don't allow courses to be selected multiple times
     if (isCourseAlreadySelected(course)) {
       return;
     }
 
     const updatedSelectedCourses = [...selectedCourses];
-    updatedSelectedCourses.push(course);
+
+    // push course + any coreqs of the course
+    const coreqs = await getRequiredCourseCoreqs(course);
+    updatedSelectedCourses.push(course, ...coreqs);
+
     setSelectedCourses(updatedSelectedCourses);
   };
 
