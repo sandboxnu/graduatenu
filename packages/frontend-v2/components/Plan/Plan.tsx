@@ -1,6 +1,7 @@
 import { Box, Flex } from "@chakra-ui/react";
-import { PlanModel, ScheduleYear2 } from "@graduate/common";
+import { PlanModel, ScheduleCourse2, ScheduleYear2 } from "@graduate/common";
 import { useState } from "react";
+import { isCourseInSchedule } from "../../utils";
 import { ScheduleYear } from "./ScheduleYear";
 
 interface PlanProps {
@@ -46,6 +47,9 @@ export const Plan: React.FC<PlanProps> = ({ plan }) => {
               scheduleYear={scheduleYear}
               isExpanded={isExpanded}
               toggleExpanded={() => toggleExpanded(scheduleYear)}
+              isCourseInCurrSchedule={(course: ScheduleCourse2<unknown>) =>
+                isCourseInSchedule(course, plan.schedule)
+              }
             />
           </Box>
         );

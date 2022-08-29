@@ -63,7 +63,7 @@ export const updatePlanOnDragEnd = (
 };
 
 /** Flattens a schedule to a list of term that are much easier to work with. */
-const flattenScheduleToTerms = <T>(schedule: Schedule2<T>) => {
+export const flattenScheduleToTerms = <T>(schedule: Schedule2<T>) => {
   const scheduleTerms: ScheduleTerm2<T>[] = [];
   schedule.years.forEach((year) =>
     scheduleTerms.push(...[year.fall, year.spring, year.summer1, year.summer2])

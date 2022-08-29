@@ -13,6 +13,7 @@ import {
   UpdateStudentDto,
   UpdateStudentResponse,
   OnboardStudentDto,
+  ScheduleCourse2,
 } from "@graduate/common";
 import { ClassConstructor, plainToInstance } from "class-transformer";
 
@@ -138,7 +139,7 @@ class SearchAPIClient {
     searchQuery: string,
     minIndex = 0,
     maxIndex = 9999
-  ): Promise<ScheduleCourse[]> => {
+  ): Promise<ScheduleCourse2<null>[]> => {
     const res = await this.axios({
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -168,7 +169,6 @@ class SearchAPIClient {
         coreqs: result.coreqs,
         numCreditsMin: result.minCredits,
         numCreditsMax: result.maxCredits,
-        semester: null,
       };
     });
 

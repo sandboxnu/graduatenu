@@ -6,7 +6,7 @@ import {
   GridItemProps,
   Text,
 } from "@chakra-ui/react";
-import { ScheduleYear2 } from "@graduate/common";
+import { ScheduleCourse2, ScheduleYear2 } from "@graduate/common";
 import { ScheduleTerm } from "./ScheduleTerm";
 
 interface ToggleYearProps {
@@ -16,10 +16,12 @@ interface ToggleYearProps {
 
 interface ScheduleYearProps extends ToggleYearProps {
   scheduleYear: ScheduleYear2<string>;
+  isCourseInCurrSchedule: (course: ScheduleCourse2<unknown>) => boolean;
 }
 
 export const ScheduleYear: React.FC<ScheduleYearProps> = ({
   scheduleYear,
+  isCourseInCurrSchedule,
   isExpanded,
   toggleExpanded,
 }) => {
@@ -51,11 +53,24 @@ export const ScheduleYear: React.FC<ScheduleYearProps> = ({
       />
       {isExpanded && (
         <Grid templateColumns="repeat(4, 1fr)" flex={1}>
-          <ScheduleTerm scheduleTerm={scheduleYear.fall} />
-          <ScheduleTerm scheduleTerm={scheduleYear.spring} />
+          <ScheduleTerm
+            scheduleTerm={scheduleYear.fall}
+            isCourseInCurrSchedule={isCourseInCurrSchedule}
+          />
+          <ScheduleTerm
+            scheduleTerm={scheduleYear.spring}
+            isCourseInCurrSchedule={isCourseInCurrSchedule}
+          />
           {/* TODO: support summer full term */}
-          <ScheduleTerm scheduleTerm={scheduleYear.summer1} />
-          <ScheduleTerm scheduleTerm={scheduleYear.summer2} isLastColumn />
+          <ScheduleTerm
+            scheduleTerm={scheduleYear.summer1}
+            isCourseInCurrSchedule={isCourseInCurrSchedule}
+          />
+          <ScheduleTerm
+            scheduleTerm={scheduleYear.summer2}
+            isCourseInCurrSchedule={isCourseInCurrSchedule}
+            isLastColumn
+          />
         </Grid>
       )}
     </Flex>

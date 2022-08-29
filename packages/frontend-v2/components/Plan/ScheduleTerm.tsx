@@ -1,19 +1,30 @@
-import { Grid, GridItem, Heading } from "@chakra-ui/react";
-import { ScheduleTerm2, SeasonEnum } from "@graduate/common";
+import {
+  Button,
+  Grid,
+  GridItem,
+  Heading,
+  useDisclosure,
+} from "@chakra-ui/react";
+import { ScheduleCourse2, ScheduleTerm2, SeasonEnum } from "@graduate/common";
 import { DraggableScheduleCourse } from "../ScheduleCourse";
 import { useDroppable } from "@dnd-kit/core";
 import { logger } from "../../utils";
+import { AddCourseModal } from "../AddCourseModal";
+import { AddIcon } from "@chakra-ui/icons";
 
 interface ScheduleTermProps {
   scheduleTerm: ScheduleTerm2<string>;
+  isCourseInCurrSchedule: (course: ScheduleCourse2<unknown>) => boolean;
   isLastColumn?: boolean;
 }
 
 export const ScheduleTerm: React.FC<ScheduleTermProps> = ({
   scheduleTerm,
+  isCourseInCurrSchedule,
   isLastColumn,
 }) => {
   const { isOver, setNodeRef } = useDroppable({ id: scheduleTerm.id });
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <GridItem
@@ -36,6 +47,12 @@ export const ScheduleTerm: React.FC<ScheduleTermProps> = ({
           />
         ))}
       </Grid>
+      <AddCourseButton onOpen={onOpen} />
+      <AddCourseModal
+        isOpen={isOpen}
+        onClose={onClose}
+        isCourseInCurrSchedule={isCourseInCurrSchedule}
+      />
     </GridItem>
   );
 };
@@ -76,4 +93,25 @@ const getSeasonDisplayWord = (season: SeasonEnum): string => {
   }
 
   return seasonDisplayWord;
+};
+
+interface AddCourseButtonProps {
+  onOpen: () => void;
+}
+
+const AddCourseButton: React.FC<AddCourseButtonProps> = ({ onOpen }) => {
+  return (
+    <Button
+      onClick={onOpen}
+      mt="md"
+      variant="outline"
+      borderColor="primary.blue.light.main"
+      colorScheme="primary.blue.light"
+      color="primary.blue.light.main"
+      leftIcon={<AddIcon w={2} h={2} color="primary.blue.light.main" />}
+      size="sm"
+    >
+      Add Course
+    </Button>
+  );
 };
