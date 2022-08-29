@@ -16,6 +16,7 @@ const Header = (): JSX.Element => {
   return (
     <HeaderContainer>
       <Logo />
+      <h1>Side thing</h1>
     </HeaderContainer>
   );
 };
