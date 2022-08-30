@@ -5,12 +5,7 @@ import {
   Heading,
   useDisclosure,
 } from "@chakra-ui/react";
-import {
-  PlanModel,
-  ScheduleCourse2,
-  ScheduleTerm2,
-  SeasonEnum,
-} from "@graduate/common";
+import { ScheduleCourse2, ScheduleTerm2, SeasonEnum } from "@graduate/common";
 import { DraggableScheduleCourse } from "../ScheduleCourse";
 import { useDroppable } from "@dnd-kit/core";
 import { logger } from "../../utils";

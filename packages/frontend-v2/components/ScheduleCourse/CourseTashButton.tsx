@@ -1,9 +1,10 @@
 import { DeleteIcon } from "@chakra-ui/icons";
 import { ComponentWithAs, IconButton, IconButtonProps } from "@chakra-ui/react";
-import { MouseEventHandler } from "react";
 
-interface CourseTrashButtonType
-  extends ComponentWithAs<"button", Omit<IconButtonProps, "aria-label">> {}
+type CourseTrashButtonType = ComponentWithAs<
+  "button",
+  Omit<IconButtonProps, "aria-label">
+>;
 
 export const CourseTrashButton: CourseTrashButtonType = ({
   onClick,

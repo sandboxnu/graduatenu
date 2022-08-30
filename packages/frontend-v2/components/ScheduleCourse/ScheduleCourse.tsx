@@ -1,4 +1,4 @@
-import { Flex, IconButton, Text, Tooltip } from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
 import { forwardRef } from "react";
 import { ScheduleCourse2 } from "@graduate/common";
 import { useDraggable } from "@dnd-kit/core";

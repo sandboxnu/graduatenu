@@ -6,12 +6,7 @@ import {
   GridItemProps,
   Text,
 } from "@chakra-ui/react";
-import {
-  PlanModel,
-  ScheduleCourse2,
-  ScheduleYear2,
-  SeasonEnum,
-} from "@graduate/common";
+import { ScheduleCourse2, ScheduleYear2, SeasonEnum } from "@graduate/common";
 import { ScheduleTerm } from "./ScheduleTerm";
 
 interface ToggleYearProps {

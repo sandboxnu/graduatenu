@@ -1,12 +1,5 @@
 import { SmallAddIcon } from "@chakra-ui/icons";
-import {
-  Flex,
-  Box,
-  Heading,
-  Tooltip,
-  IconButton,
-  Text,
-} from "@chakra-ui/react";
+import { Flex, Box, Heading, IconButton, Text } from "@chakra-ui/react";
 import { ScheduleCourse2 } from "@graduate/common";
 import { getCourseDisplayString } from "../../utils/course/getCourseDisplayString";
 import { GraduateToolTip } from "../GraduateTooltip";
