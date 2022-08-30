@@ -6,10 +6,7 @@ import {
   Plan,
   PlanDropdown,
 } from "../components";
-import {
-  fetchStudentAndPrepareForDnd,
-  useStudentWithPlans,
-} from "../hooks/useStudentWithPlans";
+import { fetchStudentAndPrepareForDnd, useStudentWithPlans } from "../hooks";
 import { DndContext, DragEndEvent } from "@dnd-kit/core";
 import {
   cleanDndIdsFromPlan,
@@ -107,10 +104,17 @@ const HomePage: NextPage = () => {
       return;
     }
 
+    mutateStudentWithUpdatedPlan(updatedPlan);
+  };
+
+  /**
+   * POSTs the new plan, optimistically updates the SWR cache for student, and
+   * rollbacks on error.
+   */
+  const mutateStudentWithUpdatedPlan = (updatedPlan: PlanModel<string>) => {
     // create a new student object with this updated plan so that we can do an optimistic update till the API returns
     const updatedStudent = updatePlanForStudent(student, updatedPlan);
 
-    // post the new plan and update the cache
     mutateStudent(
       async () => {
         // remove dnd ids, update the plan, and refetch the student
@@ -137,7 +141,12 @@ const HomePage: NextPage = () => {
             setSelectedPlanId={setSelectedPlanId}
             plans={student.plans}
           />
-          {selectedPlan && <Plan plan={selectedPlan} />}
+          {selectedPlan && (
+            <Plan
+              plan={selectedPlan}
+              mutateStudentWithUpdatedPlan={mutateStudentWithUpdatedPlan}
+            />
+          )}
         </Flex>
       </DndContext>
     </PageLayout>

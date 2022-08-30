@@ -15,14 +15,17 @@ type UseStudentReturn = StudentResponse & {
   student?: StudentModel<string>;
 };
 
+export const STUDENT_WITH_PLANS_SWR_KEY = `api/students/me`;
+
 /**
  * Returns the student with plan using SWR. Will later be removed when we switch
  * to cookies.
  */
 export function useStudentWithPlans(): UseStudentReturn {
-  const key = `api/students/me`;
-
-  const { data, mutate, ...rest } = useSWR(key, fetchStudentAndPrepareForDnd);
+  const { data, mutate, ...rest } = useSWR(
+    STUDENT_WITH_PLANS_SWR_KEY,
+    fetchStudentAndPrepareForDnd
+  );
 
   return {
     ...rest,

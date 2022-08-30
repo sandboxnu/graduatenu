@@ -3,6 +3,7 @@ import {
   ScheduleYear2,
   Schedule2,
   ScheduleTerm2,
+  ScheduleCourse2,
 } from "@graduate/common";
 
 /**
@@ -73,16 +74,12 @@ const prepareTermForDnd = (
    * course count shouldn't be needed since in most cases a course will appear only once in a plan,
    * however we don't enforce that by any means so it's good to be safe
    */
-  let updatedCount = courseCount;
 
   // add a unique dnd id to all courses within the term
-  const dndClasses = term.classes.map((course) => {
-    updatedCount++;
-    return {
-      ...course,
-      id: `${course.classId}-${course.subject}-${updatedCount}`,
-    };
-  });
+  const { dndClasses, updatedCount } = prepareClassesForDnd(
+    term.classes,
+    courseCount
+  );
 
   const dndTerm = {
     ...term,
@@ -94,4 +91,21 @@ const prepareTermForDnd = (
     dndTerm,
     updatedCount,
   };
+};
+
+/** Adds a unique dnd id to all the given courses. */
+export const prepareClassesForDnd = (
+  classes: ScheduleCourse2<null>[],
+  courseCount: number
+): { dndClasses: ScheduleCourse2<string>[]; updatedCount: number } => {
+  let updatedCount = courseCount;
+  const dndClasses = classes.map((course) => {
+    updatedCount++;
+    return {
+      ...course,
+      id: `${course.classId}-${course.subject}-${updatedCount}`,
+    };
+  });
+
+  return { dndClasses, updatedCount };
 };

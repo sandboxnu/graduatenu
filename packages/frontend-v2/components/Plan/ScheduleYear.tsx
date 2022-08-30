@@ -6,7 +6,12 @@ import {
   GridItemProps,
   Text,
 } from "@chakra-ui/react";
-import { ScheduleCourse2, ScheduleYear2 } from "@graduate/common";
+import {
+  PlanModel,
+  ScheduleCourse2,
+  ScheduleYear2,
+  SeasonEnum,
+} from "@graduate/common";
 import { ScheduleTerm } from "./ScheduleTerm";
 
 interface ToggleYearProps {
@@ -16,12 +21,22 @@ interface ToggleYearProps {
 
 interface ScheduleYearProps extends ToggleYearProps {
   scheduleYear: ScheduleYear2<string>;
-  isCourseInCurrSchedule: (course: ScheduleCourse2<unknown>) => boolean;
+
+  /** Function to check if the given cousrs exists in the plan being displayed. */
+  isCourseInCurrPlan: (course: ScheduleCourse2<unknown>) => boolean;
+
+  /** Function to add classes to a given term in the plan being displayed. */
+  addClassesToTermInCurrPlan: (
+    classes: ScheduleCourse2<null>[],
+    termYear: number,
+    termSeason: SeasonEnum
+  ) => void;
 }
 
 export const ScheduleYear: React.FC<ScheduleYearProps> = ({
   scheduleYear,
-  isCourseInCurrSchedule,
+  isCourseInCurrPlan,
+  addClassesToTermInCurrPlan,
   isExpanded,
   toggleExpanded,
 }) => {
@@ -55,20 +70,24 @@ export const ScheduleYear: React.FC<ScheduleYearProps> = ({
         <Grid templateColumns="repeat(4, 1fr)" flex={1}>
           <ScheduleTerm
             scheduleTerm={scheduleYear.fall}
-            isCourseInCurrSchedule={isCourseInCurrSchedule}
+            isCourseInCurrPlan={isCourseInCurrPlan}
+            addClassesToTermInCurrPlan={addClassesToTermInCurrPlan}
           />
           <ScheduleTerm
             scheduleTerm={scheduleYear.spring}
-            isCourseInCurrSchedule={isCourseInCurrSchedule}
+            isCourseInCurrPlan={isCourseInCurrPlan}
+            addClassesToTermInCurrPlan={addClassesToTermInCurrPlan}
           />
           {/* TODO: support summer full term */}
           <ScheduleTerm
             scheduleTerm={scheduleYear.summer1}
-            isCourseInCurrSchedule={isCourseInCurrSchedule}
+            isCourseInCurrPlan={isCourseInCurrPlan}
+            addClassesToTermInCurrPlan={addClassesToTermInCurrPlan}
           />
           <ScheduleTerm
             scheduleTerm={scheduleYear.summer2}
-            isCourseInCurrSchedule={isCourseInCurrSchedule}
+            isCourseInCurrPlan={isCourseInCurrPlan}
+            addClassesToTermInCurrPlan={addClassesToTermInCurrPlan}
             isLastColumn
           />
         </Grid>

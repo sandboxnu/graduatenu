@@ -1,14 +1,28 @@
 import { Box, Flex } from "@chakra-ui/react";
-import { PlanModel, ScheduleCourse2, ScheduleYear2 } from "@graduate/common";
+import {
+  PlanModel,
+  ScheduleCourse2,
+  ScheduleYear2,
+  SeasonEnum,
+} from "@graduate/common";
 import { useState } from "react";
-import { isCourseInSchedule } from "../../utils";
+import { addClassesToTerm, isCourseInPlan } from "../../utils";
 import { ScheduleYear } from "./ScheduleYear";
 
 interface PlanProps {
   plan: PlanModel<string>;
+
+  /**
+   * Function to POST the plan and update the SWR cache for "student with plans"
+   * with the given updated plan.
+   */
+  mutateStudentWithUpdatedPlan: (updatedPlan: PlanModel<string>) => void;
 }
 
-export const Plan: React.FC<PlanProps> = ({ plan }) => {
+export const Plan: React.FC<PlanProps> = ({
+  plan,
+  mutateStudentWithUpdatedPlan,
+}) => {
   const [expandedYears, setExpandedYears] = useState<Set<number>>(new Set());
 
   const toggleExpanded = (year: ScheduleYear2<string>) => {
@@ -31,6 +45,15 @@ export const Plan: React.FC<PlanProps> = ({ plan }) => {
     setExpandedYears(updatedSet);
   };
 
+  const addClassesToTermInCurrPlan = (
+    courses: ScheduleCourse2<null>[],
+    termYear: number,
+    termSeason: SeasonEnum
+  ) => {
+    const updatedPlan = addClassesToTerm(courses, termYear, termSeason, plan);
+    mutateStudentWithUpdatedPlan(updatedPlan);
+  };
+
   return (
     <Flex flexDirection="column" rowGap="4xs">
       {plan.schedule.years.map((scheduleYear) => {
@@ -47,9 +70,10 @@ export const Plan: React.FC<PlanProps> = ({ plan }) => {
               scheduleYear={scheduleYear}
               isExpanded={isExpanded}
               toggleExpanded={() => toggleExpanded(scheduleYear)}
-              isCourseInCurrSchedule={(course: ScheduleCourse2<unknown>) =>
-                isCourseInSchedule(course, plan.schedule)
+              isCourseInCurrPlan={(course: ScheduleCourse2<unknown>) =>
+                isCourseInPlan(course, plan)
               }
+              addClassesToTermInCurrPlan={addClassesToTermInCurrPlan}
             />
           </Box>
         );

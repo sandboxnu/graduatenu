@@ -1,13 +1,13 @@
-import { Schedule2, ScheduleCourse2 } from "@graduate/common";
+import { PlanModel, Schedule2, ScheduleCourse2 } from "@graduate/common";
 import { isEqualCourses } from "../course";
 import { flattenScheduleToTerms } from "./updatePlanOnDragEnd";
 
 /** Checks if a course is already present in the schedule. */
-export const isCourseInSchedule = (
+export const isCourseInPlan = (
   course: ScheduleCourse2<unknown>,
-  schedule: Schedule2<unknown>
+  plan: PlanModel<unknown>
 ) => {
-  const courses = flattenScheduleToCourses(schedule);
+  const courses = flattenScheduleToCourses(plan.schedule);
   const res = courses.some((courseInSched) =>
     isEqualCourses(courseInSched, course)
   );

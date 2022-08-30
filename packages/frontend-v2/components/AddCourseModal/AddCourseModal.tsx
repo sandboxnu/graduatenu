@@ -23,14 +23,21 @@ import { SelectedCourse } from "./SelectedCourse";
 
 interface AddCourseModalProps {
   isOpen: boolean;
-  onClose: () => void;
-  isCourseInCurrSchedule: (course: ScheduleCourse2<unknown>) => boolean;
+  /** Function to close the modal UX, returned from the useDisclosure chakra hook */
+  closeModalDisplay: () => void;
+
+  /** Function to check if the given cousrs exists in the plan being displayed. */
+  isCourseInCurrPlan: (course: ScheduleCourse2<unknown>) => boolean;
+
+  /** Function to add classes to the curr term in the plan being displayed. */
+  addClassesToCurrTerm: (courses: ScheduleCourse2<null>[]) => void;
 }
 
 export const AddCourseModal: React.FC<AddCourseModalProps> = ({
   isOpen,
-  onClose,
-  isCourseInCurrSchedule,
+  closeModalDisplay,
+  isCourseInCurrPlan,
+  addClassesToCurrTerm,
 }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -79,15 +86,22 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
     );
   };
 
-  const onCloseModal = () => {
-    setSearchResults([]);
-    setSelectedCourses([]);
-    setSearchTerm("");
+  const addClassesOnClick = async () => {
+    setIsLoading(true);
+    addClassesToCurrTerm(selectedCourses);
     onClose();
   };
 
+  const onClose = () => {
+    setIsLoading(false);
+    setSearchTerm("");
+    setSearchResults([]);
+    setSelectedCourses([]);
+    closeModalDisplay();
+  };
+
   return (
-    <Modal isOpen={isOpen} onClose={onCloseModal} size="lg">
+    <Modal isOpen={isOpen} onClose={onClose} size="lg">
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>Add Courses</ModalHeader>
@@ -111,7 +125,7 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
                 key={getCourseDisplayString(searchResult)}
                 searchResult={searchResult}
                 addSelectedCourse={addSelectedCourse}
-                isResultAlreadyInSchedule={isCourseInCurrSchedule(searchResult)}
+                isResultAlreadyInSchedule={isCourseInCurrPlan(searchResult)}
                 isResultAlreadySelected={isCourseAlreadySelected(searchResult)}
               />
             ))}
@@ -135,7 +149,7 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
             backgroundColor="neutral.main"
             border="none"
             mr={3}
-            onClick={onCloseModal}
+            onClick={addClassesOnClick}
             textTransform="uppercase"
             isLoading={isLoading}
           >

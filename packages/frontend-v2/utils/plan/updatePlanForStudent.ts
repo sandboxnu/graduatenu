@@ -1,4 +1,5 @@
 import { StudentModel, PlanModel } from "@graduate/common";
+import produce, { produceWithPatches } from "immer";
 
 /**
  * Creates a copy of the given student and replaces one of their plans with
@@ -8,19 +9,15 @@ export const updatePlanForStudent = (
   student: StudentModel<string>,
   newPlan: PlanModel<string>
 ): StudentModel<string> => {
-  const updatedPlanIdx = student.plans.findIndex(
-    (plan) => newPlan.id === plan.id
-  );
+  const updatedStudent = produce(student, (draftStudent) => {
+    const updatedPlanIdx = draftStudent.plans.findIndex(
+      (plan) => newPlan.id === plan.id
+    );
 
-  const newPlans = [...student.plans];
-  if (updatedPlanIdx !== -1) {
-    newPlans[updatedPlanIdx] = newPlan;
-  }
-
-  const updatedStudent = {
-    ...student,
-    plans: newPlans,
-  };
+    if (updatedPlanIdx !== -1) {
+      draftStudent.plans[updatedPlanIdx] = newPlan;
+    }
+  });
 
   return updatedStudent;
 };
