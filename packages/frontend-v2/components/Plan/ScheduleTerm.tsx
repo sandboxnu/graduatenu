@@ -15,7 +15,7 @@ import { AddIcon } from "@chakra-ui/icons";
 interface ScheduleTermProps {
   scheduleTerm: ScheduleTerm2<string>;
 
-  /** Functoin to check if a courses exists in the current plan being displayed. */
+  /** Function to check if a courses exists in the current plan being displayed. */
   isCourseInCurrPlan: (course: ScheduleCourse2<unknown>) => boolean;
 
   /** Function to add classes to a given term in the plan being displayed. */

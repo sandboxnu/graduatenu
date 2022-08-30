@@ -4,6 +4,11 @@ import { prepareClassesForDnd } from ".";
 import { logger } from "../logger";
 import { flattenScheduleToTerms } from "./updatePlanOnDragEnd";
 
+/**
+ * Add the given classes to the given term in the plan.
+ *
+ * @returns The updated plan. The original plan isn't touched and remains unchanged.
+ */
 export const addClassesToTerm = (
   classes: ScheduleCourse2<null>[],
   termYear: number,

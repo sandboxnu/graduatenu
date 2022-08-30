@@ -9,14 +9,17 @@ import { isEqualCourses } from "../course";
 import { logger } from "../logger";
 import { flattenScheduleToTerms } from "./updatePlanOnDragEnd";
 
-/** Removes the given course from a term in the given plan. */
+/**
+ * Remove the given class from the given term in the plan.
+ *
+ * @returns The updated plan. The original plan isn't touched and remains unchanged.
+ */
 export const removeCourseFromTerm = (
   courseToRemove: ScheduleCourse2<unknown>,
   termYear: number,
   termSeason: SeasonEnum,
   plan: PlanModel<string>
 ): PlanModel<string> => {
-  console.log("YO");
   const updatedPlan = produce(plan, (draftPlan) => {
     const schedule = draftPlan.schedule;
 
