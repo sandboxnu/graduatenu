@@ -20,10 +20,18 @@ interface ScheduleTermProps {
 
   /** Function to add classes to a given term in the plan being displayed. */
   addClassesToTermInCurrPlan: (
-    courses: ScheduleCourse2<null>[],
+    classes: ScheduleCourse2<null>[],
     termYear: number,
     termSeason: SeasonEnum
   ) => void;
+
+  /** Function to remove a course from a given term in the plan being displayed. */
+  removeCourseFromTermInCurrPlan: (
+    course: ScheduleCourse2<unknown>,
+    termYear: number,
+    termSeason: SeasonEnum
+  ) => void;
+
   isLastColumn?: boolean;
 }
 
@@ -31,6 +39,7 @@ export const ScheduleTerm: React.FC<ScheduleTermProps> = ({
   scheduleTerm,
   isCourseInCurrPlan,
   addClassesToTermInCurrPlan,
+  removeCourseFromTermInCurrPlan,
   isLastColumn,
 }) => {
   const { isOver, setNodeRef } = useDroppable({ id: scheduleTerm.id });
@@ -53,6 +62,14 @@ export const ScheduleTerm: React.FC<ScheduleTermProps> = ({
         {scheduleTerm.classes.map((scheduleCourse) => (
           <DraggableScheduleCourse
             scheduleCourse={scheduleCourse}
+            removeCourse={(course: ScheduleCourse2<unknown>) =>
+              removeCourseFromTermInCurrPlan(
+                course,
+                scheduleTerm.year,
+                scheduleTerm.season
+              )
+            }
+            isEditable
             key={scheduleCourse.id}
           />
         ))}

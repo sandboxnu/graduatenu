@@ -1,15 +1,22 @@
-import { PlanModel, ScheduleCourse2, SeasonEnum } from "@graduate/common";
+import {
+  PlanModel,
+  Schedule,
+  ScheduleCourse2,
+  SeasonEnum,
+} from "@graduate/common";
 import produce from "immer";
-import { prepareClassesForDnd } from ".";
+import { isEqualCourses } from "../course";
 import { logger } from "../logger";
 import { flattenScheduleToTerms } from "./updatePlanOnDragEnd";
 
-export const addClassesToTerm = (
-  classes: ScheduleCourse2<null>[],
+/** Removes the given course from a term in the given plan. */
+export const removeCourseFromTerm = (
+  courseToRemove: ScheduleCourse2<unknown>,
   termYear: number,
   termSeason: SeasonEnum,
   plan: PlanModel<string>
-) => {
+): PlanModel<string> => {
+  console.log("YO");
   const updatedPlan = produce(plan, (draftPlan) => {
     const schedule = draftPlan.schedule;
 
@@ -21,20 +28,14 @@ export const addClassesToTerm = (
 
     if (!term) {
       const errMsg = "Term with given year and season not found.";
-      logger.debug("addClassesToTerm", errMsg, termYear, termSeason, plan);
+      logger.debug("removeCourseFromTerm", errMsg, termYear, termSeason, plan);
       throw new Error("Term with given year and season not found.");
     }
 
-    // populate courses with dnd id
-    const courseCount = terms.reduce(
-      (count, term) => count + term.classes.length,
-      0
+    // remove the course
+    term.classes = term.classes.filter(
+      (course) => !isEqualCourses(course, courseToRemove)
     );
-
-    const { dndClasses } = prepareClassesForDnd(classes, courseCount);
-
-    // add the classes to the term
-    term.classes.push(...dndClasses);
   });
 
   return updatedPlan;

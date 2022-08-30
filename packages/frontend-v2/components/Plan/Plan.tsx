@@ -7,6 +7,7 @@ import {
 } from "@graduate/common";
 import { useState } from "react";
 import { addClassesToTerm, isCourseInPlan } from "../../utils";
+import { removeCourseFromTerm } from "../../utils/plan/removeCourseFromTerm";
 import { ScheduleYear } from "./ScheduleYear";
 
 interface PlanProps {
@@ -46,11 +47,25 @@ export const Plan: React.FC<PlanProps> = ({
   };
 
   const addClassesToTermInCurrPlan = (
-    courses: ScheduleCourse2<null>[],
+    classes: ScheduleCourse2<null>[],
     termYear: number,
     termSeason: SeasonEnum
   ) => {
-    const updatedPlan = addClassesToTerm(courses, termYear, termSeason, plan);
+    const updatedPlan = addClassesToTerm(classes, termYear, termSeason, plan);
+    mutateStudentWithUpdatedPlan(updatedPlan);
+  };
+
+  const removeCourseFromTermInCurrPlan = (
+    course: ScheduleCourse2<unknown>,
+    termYear: number,
+    termSeason: SeasonEnum
+  ) => {
+    const updatedPlan = removeCourseFromTerm(
+      course,
+      termYear,
+      termSeason,
+      plan
+    );
     mutateStudentWithUpdatedPlan(updatedPlan);
   };
 
@@ -74,6 +89,7 @@ export const Plan: React.FC<PlanProps> = ({
                 isCourseInPlan(course, plan)
               }
               addClassesToTermInCurrPlan={addClassesToTermInCurrPlan}
+              removeCourseFromTermInCurrPlan={removeCourseFromTermInCurrPlan}
             />
           </Box>
         );

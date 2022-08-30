@@ -10,11 +10,16 @@ import { getCourseDisplayString } from "../../utils";
 
 interface DraggableScheduleCourseProps {
   scheduleCourse: ScheduleCourse2<string>;
+
+  /** Function to remove the course from whatever the schedule it is part of. */
+  removeCourse?: (course: ScheduleCourse2<unknown>) => void;
+
+  isEditable?: boolean;
 }
 
 export const DraggableScheduleCourse: React.FC<
   DraggableScheduleCourseProps
-> = ({ scheduleCourse }) => {
+> = ({ scheduleCourse, removeCourse, isEditable = false }) => {
   const { setNodeRef, transform, listeners, attributes, isDragging } =
     useDraggable({
       id: scheduleCourse.id,
@@ -24,6 +29,8 @@ export const DraggableScheduleCourse: React.FC<
     <ScheduleCourse
       ref={setNodeRef}
       scheduleCourse={scheduleCourse}
+      removeCourse={removeCourse}
+      isEditable={isEditable}
       isDragging={isDragging}
       listeners={listeners}
       attributes={attributes}
@@ -45,16 +52,22 @@ export const ScheduleCourse = forwardRef<
   ScheduleCourseProps
 >(
   (
-    { scheduleCourse, isDragging = false, transform, listeners, attributes },
+    {
+      scheduleCourse,
+      removeCourse,
+      isEditable = false,
+      isDragging = false,
+      transform,
+      listeners,
+      attributes,
+    },
     ref
   ) => {
     return (
       <GraduateToolTip label={scheduleCourse.name} isDisabled={isDragging}>
         <Flex
           ref={ref}
-          {...listeners}
           {...attributes}
-          as="button"
           transform={transform}
           cursor={isDragging ? "grabbing" : "grab"}
           borderRadius="md"
@@ -63,19 +76,27 @@ export const ScheduleCourse = forwardRef<
           pl="2xs"
           pr="sm"
           py="xs"
-          alignItems="center"
           width="100%"
           _hover={{ bg: "neutral.700" }}
           _active={{ bg: "neutral.900" }}
         >
-          <DragHandleIcon mr="md" color="primary.blue.dark.main" />
-          <Text fontSize="sm" pr="2xs">
-            {getCourseDisplayString(scheduleCourse)}
-          </Text>
-          <Text fontSize="xs" pr="md" noOfLines={1}>
-            {scheduleCourse.name}
-          </Text>
-          <CourseTrashButton marginLeft="auto" />
+          <Flex alignItems="center" {...listeners}>
+            <DragHandleIcon mr="md" color="primary.blue.dark.main" />
+            <Text fontSize="sm" pr="2xs">
+              {getCourseDisplayString(scheduleCourse)}
+            </Text>
+            <Text fontSize="xs" pr="md" noOfLines={1}>
+              {scheduleCourse.name}
+            </Text>
+          </Flex>
+          {isEditable && (
+            <CourseTrashButton
+              marginLeft="auto"
+              onClick={
+                removeCourse ? () => removeCourse(scheduleCourse) : undefined
+              }
+            />
+          )}
         </Flex>
       </GraduateToolTip>
     );

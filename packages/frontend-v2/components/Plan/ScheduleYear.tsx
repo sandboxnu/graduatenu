@@ -26,12 +26,20 @@ interface ScheduleYearProps extends ToggleYearProps {
     termYear: number,
     termSeason: SeasonEnum
   ) => void;
+
+  /** Function to remove a course from a given term in the plan being displayed. */
+  removeCourseFromTermInCurrPlan: (
+    course: ScheduleCourse2<unknown>,
+    termYear: number,
+    termSeason: SeasonEnum
+  ) => void;
 }
 
 export const ScheduleYear: React.FC<ScheduleYearProps> = ({
   scheduleYear,
   isCourseInCurrPlan,
   addClassesToTermInCurrPlan,
+  removeCourseFromTermInCurrPlan,
   isExpanded,
   toggleExpanded,
 }) => {
@@ -67,22 +75,26 @@ export const ScheduleYear: React.FC<ScheduleYearProps> = ({
             scheduleTerm={scheduleYear.fall}
             isCourseInCurrPlan={isCourseInCurrPlan}
             addClassesToTermInCurrPlan={addClassesToTermInCurrPlan}
+            removeCourseFromTermInCurrPlan={removeCourseFromTermInCurrPlan}
           />
           <ScheduleTerm
             scheduleTerm={scheduleYear.spring}
             isCourseInCurrPlan={isCourseInCurrPlan}
             addClassesToTermInCurrPlan={addClassesToTermInCurrPlan}
+            removeCourseFromTermInCurrPlan={removeCourseFromTermInCurrPlan}
           />
           {/* TODO: support summer full term */}
           <ScheduleTerm
             scheduleTerm={scheduleYear.summer1}
             isCourseInCurrPlan={isCourseInCurrPlan}
             addClassesToTermInCurrPlan={addClassesToTermInCurrPlan}
+            removeCourseFromTermInCurrPlan={removeCourseFromTermInCurrPlan}
           />
           <ScheduleTerm
             scheduleTerm={scheduleYear.summer2}
             isCourseInCurrPlan={isCourseInCurrPlan}
             addClassesToTermInCurrPlan={addClassesToTermInCurrPlan}
+            removeCourseFromTermInCurrPlan={removeCourseFromTermInCurrPlan}
             isLastColumn
           />
         </Grid>
