@@ -11,15 +11,11 @@ module.exports = function (api) {
               targets: {
                 node: "14",
               },
-              loose: true,
             },
           ],
           "@babel/preset-typescript",
         ],
-        plugins: [
-          ["@babel/plugin-proposal-decorators", { legacy: true }],
-          ["@babel/plugin-proposal-class-properties", { loose: true }],
-        ],
+        plugins: [["@babel/plugin-proposal-decorators", { version: "legacy" }]],
         babelrcRoots: [".", "packages/*"],
       },
       browser: {
@@ -35,10 +31,7 @@ module.exports = function (api) {
           ],
           "@babel/preset-typescript",
         ],
-        plugins: [
-          ["@babel/plugin-proposal-decorators", { version: "legacy" }],
-          ["@babel/plugin-proposal-class-properties", { loose: true }],
-        ],
+        plugins: [["@babel/plugin-proposal-decorators", { version: "legacy" }]],
         babelrcRoots: [".", "packages/*"],
       },
       module: {
@@ -54,10 +47,7 @@ module.exports = function (api) {
           ],
           "@babel/preset-typescript",
         ],
-        plugins: [
-          ["@babel/plugin-proposal-decorators", { version: "legacy" }],
-          ["@babel/plugin-proposal-class-properties", { loose: true }],
-        ],
+        plugins: [["@babel/plugin-proposal-decorators", { version: "legacy" }]],
         babelrcRoots: [".", "packages/*"],
       },
     },

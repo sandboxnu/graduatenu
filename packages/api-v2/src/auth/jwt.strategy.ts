@@ -3,9 +3,9 @@ import { ConfigService } from "@nestjs/config";
 import { PassportStrategy } from "@nestjs/passport";
 import { Request } from "express";
 import { Strategy } from "passport-jwt";
-import { EnvironmentVariables } from "src/environment-variables";
-import { Student } from "src/student/entities/student.entity";
-import { formatServiceCtx } from "src/utils";
+import { EnvironmentVariables } from "../../src/environment-variables";
+import { Student } from "../../src/student/entities/student.entity";
+import { formatServiceCtx } from "../../src/utils";
 import { AuthService } from "./auth.service";
 import { JwtPayload } from "./interfaces/jwt-payload";
 
