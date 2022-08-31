@@ -1,13 +1,22 @@
-import { ClassSerializerInterceptor, ValidationPipe } from "@nestjs/common";
+import {
+  ClassSerializerInterceptor,
+  LoggerService,
+  ValidationPipe,
+} from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { NestFactory, Reflector } from "@nestjs/core";
+import { GraduateLogger } from "graduate-logger";
 import { AppModule } from "./app.module";
 import { EnvironmentVariables } from "./environment-variables";
 import * as cookieParser from "cookie-parser";
 
 async function bootstrap() {
+  // configure custom logger
+  const graduateLogger: LoggerService = new GraduateLogger();
+  graduateLogger.setLogLevels(["log", "error", "warn", "debug"]);
+
   const app = await NestFactory.create(AppModule, {
-    logger: ["log", "error", "warn", "debug", "verbose"],
+    logger: graduateLogger,
   });
 
   /**

@@ -11,6 +11,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { Logo, HeaderContainer } from "../components";
+import Link from "next/link";
 
 type InfoSectionProps = InfoImageProps & InfoTextProps;
 
@@ -38,7 +39,9 @@ const Header = (): JSX.Element => {
   return (
     <HeaderContainer>
       <Logo />
-      <Button size="sm">Sign In</Button>
+      <Link href="/login" passHref>
+        <Button size="sm">Sign In</Button>
+      </Link>
     </HeaderContainer>
   );
 };
@@ -81,12 +84,14 @@ const Banner = (): JSX.Element => {
               personalized plan of study.
             </Text>
           </Box>
-          <Button
-            mr={{ desktop: "7.5rem", laptop: "6.25rem", tablet: "3.25rem" }}
-            mt="15%"
-          >
-            Get Started
-          </Button>
+          <Link href="/signup" passHref>
+            <Button
+              mr={{ desktop: "7.5rem", laptop: "6.25rem", tablet: "3.25rem" }}
+              mt="15%"
+            >
+              Get Started
+            </Button>
+          </Link>
         </Flex>
       </HStack>
     </Box>

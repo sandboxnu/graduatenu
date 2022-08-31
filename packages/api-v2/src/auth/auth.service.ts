@@ -1,13 +1,16 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, Logger } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import { Student } from "../../src/student/entities/student.entity";
 import { StudentService } from "../../src/student/student.service";
-import { LoginStudentDto, SignUpDto } from "../../../common";
+import { LoginStudentDto, SignUpStudentDto } from "../../../common";
 import { JwtPayload } from "./interfaces/jwt-payload";
 import * as bcrypt from "bcrypt";
+import { formatServiceCtx } from "../../src/utils";
 
 @Injectable()
 export class AuthService {
+  private readonly logger: Logger = new Logger();
+
   constructor(
     // used to retrieve user from the db based on creds
     private readonly studentService: StudentService,
@@ -17,7 +20,7 @@ export class AuthService {
   ) {}
 
   /** Registers a new student in the db and logs the student in. */
-  async register(createStudentDto: SignUpDto): Promise<Student> {
+  async register(createStudentDto: SignUpStudentDto): Promise<Student> {
     // create a new student
     const newStudent = await this.studentService.create(createStudentDto);
 
@@ -31,10 +34,7 @@ export class AuthService {
     return newStudent;
   }
 
-  /**
-   * Validates the login creds and logs the student in if the creds are valid.
-   * Else, throws an error.
-   */
+  /** Validates the login creds and logs the student in if the creds are valid. */
   async login(loginStudentDto: LoginStudentDto): Promise<Student> {
     const { email, password } = loginStudentDto;
 
@@ -42,6 +42,10 @@ export class AuthService {
     const student = await this.studentService.findByEmail(email);
 
     if (!student) {
+      this.logger.debug(
+        { message: "Unknown email", email },
+        AuthService.formatAuthServiceCtx("login")
+      );
       return null;
     }
 
@@ -50,6 +54,10 @@ export class AuthService {
     const isValidPassword = await bcrypt.compare(password, trueHashedPassword);
 
     if (!isValidPassword) {
+      this.logger.debug(
+        { message: "Invalid password", email, password },
+        AuthService.formatAuthServiceCtx("login")
+      );
       return null;
     }
 
@@ -75,5 +83,9 @@ export class AuthService {
    */
   async validateJwtPayload({ uuid }: JwtPayload): Promise<Student> {
     return await this.studentService.findByUuid(uuid);
+  }
+
+  private static formatAuthServiceCtx(methodName: string): string {
+    return formatServiceCtx(AuthService.name, methodName);
   }
 }
