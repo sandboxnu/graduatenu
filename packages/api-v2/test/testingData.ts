@@ -32,6 +32,4 @@ export const testPlan = {
   coopCycle: "4 year 2 co-ops",
   concentration: "Artificial Intelligence",
   catalogYear: 2019,
-  courseWarnings: [],
-  warnings: [],
 };

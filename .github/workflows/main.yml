@@ -3,9 +3,9 @@ name: CI
 on: [push]
 
 jobs:
-  run-frontend-v2-lint:
+  lint:
     runs-on: ubuntu-latest
-    name: Run linting for frontend v2
+    name: Run linting for all packages
     steps:
       - uses: actions/checkout@v3
       - name: install node v16
@@ -13,7 +13,7 @@ jobs:
         with:
           node-version: 16
       - uses: bahmutov/npm-install@v1
-      - run: yarn packages/frontend-v2 lint
+      - run: yarn lint
   run-scrapers-tests:
     runs-on: ubuntu-latest
     name: Scraper Tests

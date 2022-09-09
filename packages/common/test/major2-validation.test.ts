@@ -9,13 +9,10 @@ import {
   Concentrations2,
   IAndCourse2,
   ICourseRange2,
-  IMajorRequirementGroup,
   IOrCourse2,
   IRequiredCourse,
   IXofManyCourse,
-  Major,
   Major2,
-  Requirement,
   Requirement2,
   ScheduleCourse,
   Section,
@@ -23,7 +20,7 @@ import {
   Ok,
 } from "../src/types";
 import { assertUnreachable, courseToString } from "../src/course-utils";
-import bscs from "../../scrapers/test/mock_majors/bscs.json";
+import bscs from "./mock-majors/bscs.json";
 
 type TestCourse = IRequiredCourse & { credits: number };
 const course = (
@@ -289,7 +286,7 @@ describe("validateRequirement suite", () => {
   });
 });
 
-function convertToMajor2(old: Major): Major2 {
+function convertToMajor2(old: any): Major2 {
   return {
     name: old.name,
     totalCreditsRequired: old.totalCreditsRequired,
@@ -300,7 +297,7 @@ function convertToMajor2(old: Major): Major2 {
     concentrations: {
       minOptions: old.concentrations.minOptions,
       concentrationOptions: old.concentrations.concentrationOptions.map(
-        (c) => ({
+        (c: any) => ({
           type: "SECTION",
           title: c.name,
           minRequirementCount: c.requirementGroups.length,
@@ -313,7 +310,7 @@ function convertToMajor2(old: Major): Major2 {
   };
 }
 
-function convertToSection(r: IMajorRequirementGroup): Section {
+function convertToSection(r: any): Section {
   switch (r.type) {
     case "AND":
       return {
@@ -343,11 +340,11 @@ function convertToSection(r: IMajorRequirementGroup): Section {
         requirements: [convertToRequirement2(r.requirements)],
       };
     default:
-      return assertUnreachable(r);
+      return assertUnreachable(r as never);
   }
 }
 
-function convertToRequirement2(r: Requirement): Requirement2 {
+function convertToRequirement2(r: any): Requirement2 {
   switch (r.type) {
     case "OR":
       return {
@@ -363,7 +360,7 @@ function convertToRequirement2(r: Requirement): Requirement2 {
       return {
         type: "XOM",
         numCreditsMin: r.creditsRequired,
-        courses: r.ranges.map((r) => ({
+        courses: r.ranges.map((r: any) => ({
           type: "RANGE",
           exceptions: [],
           idRangeStart: r.idRangeStart,
@@ -380,7 +377,7 @@ function convertToRequirement2(r: Requirement): Requirement2 {
         courses: r.courses.map(convertToRequirement2),
       };
     default:
-      return assertUnreachable(r);
+      return assertUnreachable(r as never);
   }
 }
 

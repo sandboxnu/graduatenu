@@ -5,7 +5,7 @@ import {
 } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { NestFactory, Reflector } from "@nestjs/core";
-import { GraduateLogger } from "graduate-logger";
+import { GraduateLogger } from "src/graduate-logger";
 import { AppModule } from "./app.module";
 import { EnvironmentVariables } from "./environment-variables";
 import * as cookieParser from "cookie-parser";
