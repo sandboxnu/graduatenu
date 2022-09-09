@@ -11,12 +11,14 @@ import {
 } from "@chakra-ui/react";
 import { SearchAPI } from "@graduate/api-client";
 import { ScheduleCourse2 } from "@graduate/common";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import {
   isEqualCourses,
   getCourseDisplayString,
   getRequiredCourseCoreqs,
 } from "../../utils";
+import { handleApiClientError } from "../../utils/handleApiClientError";
 import { SearchCoursesInput } from "./SearchCoursesInput";
 import { SearchResult } from "./SearchResult";
 import { SelectedCourse } from "./SelectedCourse";
@@ -48,12 +50,19 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
     ScheduleCourse2<null>[]
   >([]);
 
+  const router = useRouter();
+
   const searchCourses = async () => {
     if (searchTerm !== "") {
       setIsLoading(true);
-      const results = await SearchAPI.searchCourses(searchTerm);
+      try {
+        const results = await SearchAPI.searchCourses(searchTerm);
+        setSearchResults(results);
+      } catch (error) {
+        // TODO: This an error from Search, we may want to handle this differently.
+        handleApiClientError(error as Error, router);
+      }
       setIsLoading(false);
-      setSearchResults(results);
     }
   };
 
