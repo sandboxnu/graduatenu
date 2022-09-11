@@ -1,1 +1,0 @@
-json.(user, :email, :full_name)

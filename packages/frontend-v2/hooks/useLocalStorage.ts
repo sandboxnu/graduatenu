@@ -1,8 +1,9 @@
 import { Dispatch, useEffect, useState } from "react";
+import { logger } from "../utils";
 
 /**
- * Enum declared to be able to look up usages of storage keys and ensures
- * the keys are unique.
+ * Enum declared to be able to look up usages of storage keys and ensures the
+ * keys are unique.
  */
 export enum LocalStorageKey {
   // Delete later, this is for testing.
@@ -10,11 +11,12 @@ export enum LocalStorageKey {
 }
 
 /**
- * Using this hook allows for any component to access localstorage as NextJS uses SSR, so localstorage
- * may not be accessible upon initial page load.
- * Accessing the hook allows for the functionality of setting and getting a value in localstorage.
- * The storedValue returned is the value in localstorage for the key given to this hook. If it is undefined,
- * the hook will return null.
+ * Using this hook allows for any component to access localstorage as NextJS
+ * uses SSR, so localstorage may not be accessible upon initial page load.
+ * Accessing the hook allows for the functionality of setting and getting a
+ * value in localstorage. The storedValue returned is the value in localstorage
+ * for the key given to this hook. If it is undefined, the hook will return null.
+ *
  * @param key Key for the localstorage value.
  */
 export function useLocalStorage<T>(
@@ -27,16 +29,16 @@ export function useLocalStorage<T>(
       const item = window.localStorage.getItem(key);
       if (item) setStoredValue(JSON.parse(item));
     } catch (error) {
-      console.error(error);
+      logger.error(error);
     }
-  }, []);
+  }, [key]);
 
   const setValue = (value: T) => {
     try {
       setStoredValue(value);
       window?.localStorage.setItem(key, JSON.stringify(value));
     } catch (error) {
-      console.error(error);
+      logger.error(error);
     }
   };
 
