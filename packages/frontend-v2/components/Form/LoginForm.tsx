@@ -1,19 +1,13 @@
-import {
-  Text,
-  FormControl,
-  Input,
-  FormErrorMessage,
-  InputGroup,
-  Button,
-} from "@chakra-ui/react";
+import { Button, Text } from "@chakra-ui/react";
 import { API } from "@graduate/api-client";
 import { LoginStudentDto } from "@graduate/common";
+import { AxiosError } from "axios";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useRedirectIfLoggedIn } from "../../hooks/useRedirectIfLoggedIn";
-import { redirectToOnboardingOrHome, logger } from "../../utils";
-import { AxiosError } from "axios";
+import { logger, redirectToOnboardingOrHome } from "../../utils";
+import { StringInput } from "./Input";
 
 export const LoginForm = () => {
   const [apiError, setApiError] = useState("");
@@ -64,34 +58,29 @@ export const LoginForm = () => {
         </Text>
       )}
 
-      <FormControl isInvalid={errors.email != null}>
-        <Input
-          id="email"
-          placeholder="example@email.com"
-          {...register("email", {
-            required: "Email is required",
-            pattern: {
-              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-              message: "Invalid email address",
-            },
-          })}
-        />
-        <FormErrorMessage>{errors.email?.message}</FormErrorMessage>
-      </FormControl>
+      <StringInput
+        id="email"
+        placeholder="Email"
+        error={errors.email}
+        type="email"
+        {...register("email", {
+          required: "Email is required",
+          pattern: {
+            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+            message: "Invalid email address",
+          },
+        })}
+      />
 
-      <FormControl isInvalid={errors.password != null}>
-        <InputGroup>
-          <Input
-            type="password"
-            id="password"
-            placeholder="Enter Password"
-            {...register("password", {
-              required: "Password is required",
-            })}
-          />
-        </InputGroup>
-        <FormErrorMessage>{errors.password?.message}</FormErrorMessage>
-      </FormControl>
+      <StringInput
+        error={errors.password}
+        type="password"
+        id="password"
+        placeholder="Password"
+        {...register("password", {
+          required: "Password is required",
+        })}
+      />
 
       <Button
         mr={{ desktop: "7.5rem", laptop: "6.25rem", tablet: "3.25rem" }}

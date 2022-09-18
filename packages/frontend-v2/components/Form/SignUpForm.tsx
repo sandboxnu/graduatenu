@@ -1,19 +1,12 @@
-import {
-  Text,
-  Flex,
-  FormControl,
-  Input,
-  FormErrorMessage,
-  InputGroup,
-  Button,
-} from "@chakra-ui/react";
+import { Button, Flex, Text } from "@chakra-ui/react";
 import { API } from "@graduate/api-client";
 import { SignUpStudentDto } from "@graduate/common";
-import { useRouter } from "next/router";
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
-import { redirectToOnboardingOrHome, logger } from "../../utils";
 import { AxiosError } from "axios";
+import { useRouter } from "next/router";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { logger, redirectToOnboardingOrHome } from "../../utils";
+import { StringInput } from "./Input";
 
 export const SignUpForm = () => {
   const [apiError, setApiError] = useState("");
@@ -58,49 +51,41 @@ export const SignUpForm = () => {
           </Text>
         )}
 
-        <FormControl isInvalid={errors.email != null}>
-          <Input
-            id="email"
-            placeholder="Example@email.com"
-            {...register("email", {
-              required: "Email is required",
-              pattern: {
-                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                message: "Invalid email address",
-              },
-            })}
-          />
-          <FormErrorMessage>{errors.email?.message}</FormErrorMessage>
-        </FormControl>
+        <StringInput
+          id="email"
+          placeholder="Email"
+          error={errors.email}
+          type="email"
+          {...register("email", {
+            required: "Email is required",
+            pattern: {
+              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+              message: "Invalid email address",
+            },
+          })}
+        />
 
-        <FormControl isInvalid={errors.password != null}>
-          <InputGroup>
-            <Input
-              type={"password"}
-              id="password"
-              placeholder="Enter Password"
-              {...register("password", {
-                required: "Password is required",
-              })}
-            />
-          </InputGroup>
-          <FormErrorMessage>{errors.password?.message}</FormErrorMessage>
-        </FormControl>
+        <StringInput
+          error={errors.password}
+          type="password"
+          id="password"
+          placeholder="Password"
+          {...register("password", {
+            required: "Password is required",
+          })}
+        />
 
-        <FormControl isInvalid={errors.passwordConfirm != null}>
-          <InputGroup>
-            <Input
-              type={"password"}
-              id="passwordConfirm"
-              placeholder="Confirm Password"
-              {...register("passwordConfirm", {
-                validate: (confirmPass) =>
-                  confirmPass === password || "Passwords do not match!",
-              })}
-            />
-          </InputGroup>
-          <FormErrorMessage>{errors.passwordConfirm?.message}</FormErrorMessage>
-        </FormControl>
+        <StringInput
+          error={errors.passwordConfirm}
+          type="password"
+          id="confirmPassword"
+          placeholder="Confirm Password"
+          {...register("passwordConfirm", {
+            validate: (confirmPass) =>
+              confirmPass === password || "Passwords do not match!",
+            required: true,
+          })}
+        />
 
         <Button
           mr={{ desktop: "7.5rem", laptop: "6.25rem", tablet: "3.25rem" }}
