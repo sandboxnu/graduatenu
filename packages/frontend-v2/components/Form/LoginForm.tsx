@@ -1,12 +1,19 @@
-import { Button, Text } from "@chakra-ui/react";
+import {
+  Text,
+  FormControl,
+  Input,
+  FormErrorMessage,
+  InputGroup,
+  Button,
+} from "@chakra-ui/react";
 import { API } from "@graduate/api-client";
 import { LoginStudentDto } from "@graduate/common";
-import { AxiosError } from "axios";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useRedirectIfLoggedIn } from "../../hooks/useRedirectIfLoggedIn";
-import { logger, redirectToOnboardingOrHome } from "../../utils";
+import { redirectToOnboardingOrHome, logger } from "../../utils";
+import { AxiosError } from "axios";
 import { StringInput } from "./Input";
 
 export const LoginForm = () => {
@@ -81,7 +88,6 @@ export const LoginForm = () => {
           required: "Password is required",
         })}
       />
-
       <Button
         mr={{ desktop: "7.5rem", laptop: "6.25rem", tablet: "3.25rem" }}
         mt="15%"

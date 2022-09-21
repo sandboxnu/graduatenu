@@ -11,13 +11,11 @@ const Login: NextPage = () => {
   );
 };
 
-const Header = (): JSX.Element => {
-  return (
-    <HeaderContainer>
-      <Logo />
-      <h1>Side things</h1>
-    </HeaderContainer>
-  );
-};
+const Header = (): JSX.Element => (
+  <HeaderContainer>
+    <Logo />
+    <h1>Side things</h1>
+  </HeaderContainer>
+);
 
 export default Login;
