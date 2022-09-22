@@ -6,7 +6,8 @@ import {
   LoadingPage,
   Logo,
   Plan,
-  PlanDropdown,
+  Sidebar,
+  PlanDropdown
 } from "../components";
 import { fetchStudentAndPrepareForDnd, useStudentWithPlans } from "../hooks";
 import { DndContext, DragEndEvent } from "@dnd-kit/core";
@@ -24,6 +25,7 @@ import { useRouter } from "next/router";
 import { Button, Flex, Grid, GridItem, useDisclosure } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { AddIcon } from "@chakra-ui/icons";
+import { getMajor2Example } from "../utils/convertMajor";
 
 const HomePage: NextPage = () => {
   const { error, student, mutateStudent } = useStudentWithPlans();
@@ -204,9 +206,11 @@ const PageLayout: React.FC = ({ children }) => {
   return (
     <Flex flexDirection="column" height="100vh">
       <Header />
-      <Grid flex={1} templateColumns="repeat(4, 1fr)" gap="md">
-        <GridItem colSpan={1} bg="primary.blue.light.main" />
-        <GridItem colSpan={3} p="md">
+      <Grid height="200px" templateColumns="repeat(4, 1fr)" gap="md">
+        <GridItem rowSpan={1} colSpan={1} bg="primary.blue.light.main">
+          <Sidebar major={getMajor2Example()} />
+        </GridItem>
+        <GridItem rowSpan={1} colSpan={3} p="md">
           {children}
         </GridItem>
       </Grid>
