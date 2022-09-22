@@ -13,6 +13,7 @@ import {
   UpdateStudentDto,
   UpdateStudentResponse,
   OnboardStudentDto,
+  ScheduleCourse2,
 } from "@graduate/common";
 import { ClassConstructor, plainToInstance } from "class-transformer";
 
@@ -101,7 +102,7 @@ class SearchAPIClient {
   fetchCourse = async (
     subject: string,
     classId: string
-  ): Promise<ScheduleCourse | null> => {
+  ): Promise<ScheduleCourse2<null> | null> => {
     const res = await this.axios({
       method: "post",
       data: {
@@ -123,7 +124,7 @@ class SearchAPIClient {
 
     const courseData = await res.data.data;
     if (courseData?.class?.latestOccurrence) {
-      const course: ScheduleCourse = courseData.class.latestOccurrence;
+      const course: ScheduleCourse2<null> = courseData.class.latestOccurrence;
       course.numCreditsMax = courseData.class.latestOccurrence.maxCredits;
       course.numCreditsMin = courseData.class.latestOccurrence.minCredits;
       delete courseData.class.latestOccurrence.maxCredits;
@@ -138,7 +139,7 @@ class SearchAPIClient {
     searchQuery: string,
     minIndex = 0,
     maxIndex = 9999
-  ): Promise<ScheduleCourse[]> => {
+  ): Promise<ScheduleCourse2<null>[]> => {
     const res = await this.axios({
       method: "POST",
       headers: { "Content-Type": "application/json" },

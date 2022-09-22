@@ -1,5 +1,11 @@
 import { NextPage } from "next";
-import { HeaderContainer, LoadingPage, Logo, Plan } from "../components";
+import {
+  HeaderContainer,
+  LoadingPage,
+  Logo,
+  Plan,
+  Sidebar,
+} from "../components";
 import {
   fetchStudentAndPrepareForDnd,
   useStudentWithPlans,
@@ -18,6 +24,7 @@ import { PlanModel } from "@graduate/common";
 import { useRouter } from "next/router";
 import { Button, Grid, GridItem } from "@chakra-ui/react";
 import { handleApiClientError } from "../utils/handleApiClientError";
+import { getMajor2Example } from "../utils/convertMajor";
 
 const HomePage: NextPage = () => {
   const { error, student, mutateStudent } = useStudentWithPlans();
@@ -110,7 +117,9 @@ const PageLayout: React.FC = ({ children }) => {
     <>
       <Header />
       <Grid height="200px" templateColumns="repeat(4, 1fr)" gap="md">
-        <GridItem rowSpan={1} colSpan={1} bg="primary.blue.light.main" />
+        <GridItem rowSpan={1} colSpan={1} bg="primary.blue.light.main">
+          <Sidebar major={getMajor2Example()} />
+        </GridItem>
         <GridItem rowSpan={1} colSpan={3} p="md">
           {children}
         </GridItem>

@@ -1,4 +1,9 @@
-import { ScheduleCourse, INEUAndPrereq, INEUOrPrereq } from "@graduate/common";
+import {
+  ScheduleCourse,
+  INEUAndPrereq,
+  INEUOrPrereq,
+  ScheduleCourse2,
+} from "@graduate/common";
 
 interface SearchClass {
   name: string;
@@ -13,7 +18,7 @@ interface SearchClass {
 export const fetchCourse = async (
   subject: string,
   classId: string
-): Promise<ScheduleCourse | null> => {
+): Promise<ScheduleCourse2<null> | null> => {
   if (subject.length < 2 || classId.length !== 4 || isNaN(+classId)) {
     return null;
   }
@@ -45,7 +50,7 @@ export const fetchCourse = async (
     json.data.class &&
     json.data.class.latestOccurrence
   ) {
-    const course: ScheduleCourse = json.data.class.latestOccurrence;
+    const course: ScheduleCourse2<null> = json.data.class.latestOccurrence;
     course.numCreditsMax = json.data.class.latestOccurrence.maxCredits;
     course.numCreditsMin = json.data.class.latestOccurrence.minCredits;
     delete json.data.class.latestOccurrence.maxCredits;
