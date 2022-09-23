@@ -5,6 +5,7 @@ import {
   InputGroup,
 } from "@chakra-ui/react";
 import { FieldError } from "react-hook-form";
+import { forwardRef } from "react";
 
 interface InputProps {
   error: FieldError | undefined;
@@ -13,11 +14,14 @@ interface InputProps {
   type: string;
 }
 
-export const StringInput: React.FC<InputProps> = ({ error, ...rest }, ref) => (
-  <FormControl isInvalid={error != undefined}>
-    <InputGroup>
-      <Input {...rest} ref={ref} />
-    </InputGroup>
-    <FormErrorMessage>{error?.message}</FormErrorMessage>
-  </FormControl>
+// eslint-disable-next-line react/display-name
+export const StringInput = forwardRef<HTMLInputElement, InputProps>(
+  ({ error, ...rest }, ref) => (
+    <FormControl isInvalid={error != undefined}>
+      <InputGroup>
+        <Input {...rest} ref={ref} />
+      </InputGroup>
+      <FormErrorMessage>{error?.message}</FormErrorMessage>
+    </FormControl>
+  )
 );

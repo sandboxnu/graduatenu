@@ -1,19 +1,12 @@
-import {
-  Text,
-  FormControl,
-  Input,
-  FormErrorMessage,
-  InputGroup,
-  Button,
-} from "@chakra-ui/react";
+import { Button, Text } from "@chakra-ui/react";
 import { API } from "@graduate/api-client";
 import { LoginStudentDto } from "@graduate/common";
+import { AxiosError } from "axios";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useRedirectIfLoggedIn } from "../../hooks/useRedirectIfLoggedIn";
-import { redirectToOnboardingOrHome, logger } from "../../utils";
-import { AxiosError } from "axios";
+import { logger, redirectToOnboardingOrHome } from "../../utils";
 import { StringInput } from "./Input";
 
 export const LoginForm = () => {
@@ -77,6 +70,7 @@ export const LoginForm = () => {
             message: "Invalid email address",
           },
         })}
+        ref={null}
       />
 
       <StringInput
@@ -87,6 +81,7 @@ export const LoginForm = () => {
         {...register("password", {
           required: "Password is required",
         })}
+        ref={null}
       />
       <Button
         mr={{ desktop: "7.5rem", laptop: "6.25rem", tablet: "3.25rem" }}
