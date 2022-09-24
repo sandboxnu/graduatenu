@@ -14,13 +14,14 @@ import {
   IXofManyCourse,
   Major2,
   Requirement2,
-  ScheduleCourse,
+  ScheduleCourse2,
   Section,
   Err,
   Ok,
 } from "../src/types";
 import { assertUnreachable, courseToString } from "../src/course-utils";
 import bscs from "./mock-majors/bscs.json";
+import { tsUnknownKeyword } from "@babel/types";
 
 type TestCourse = IRequiredCourse & { credits: number };
 const course = (
@@ -33,12 +34,13 @@ const course = (
   classId: classId,
   credits: credits ?? 4,
 });
-const convert = (c: TestCourse): ScheduleCourse => ({
+const convert = (c: TestCourse): ScheduleCourse2<unknown> => ({
   ...c,
   classId: String(c.classId),
   name: courseToString(c),
   numCreditsMax: c.credits,
   numCreditsMin: c.credits,
+  id: null,
 });
 const or = (...courses: Requirement2[]): IOrCourse2 => ({
   type: "OR",
