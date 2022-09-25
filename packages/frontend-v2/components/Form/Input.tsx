@@ -17,7 +17,7 @@ interface InputProps {
 // eslint-disable-next-line react/display-name
 export const StringInput = forwardRef<HTMLInputElement, InputProps>(
   ({ error, ...rest }, ref) => (
-    <FormControl isInvalid={error != undefined} maxHeight='5rem' height='5rem'>
+    <FormControl isInvalid={error != undefined} maxHeight='5.5rem' height='5.5rem'>
       <InputGroup>
         <Input
           {...rest}

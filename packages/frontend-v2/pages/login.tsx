@@ -1,5 +1,5 @@
 import { NextPage } from "next";
-import { HeaderContainer, Logo } from "../components";
+import { HeaderContainer, Logo, SignIn } from "../components";
 import { LoginForm } from "../components/Form";
 
 const Login: NextPage = () => {
@@ -14,8 +14,8 @@ const Login: NextPage = () => {
 const Header = (): JSX.Element => (
   <HeaderContainer>
     <Logo />
-    <h1>Side things</h1>
-  </HeaderContainer>
+    <SignIn />
+    </HeaderContainer>
 );
 
 export default Login;

@@ -1,13 +1,13 @@
-import { Button, Text, Flex } from "@chakra-ui/react";
+import { Button, Flex, Link, Text } from "@chakra-ui/react";
 import { API } from "@graduate/api-client";
 import { LoginStudentDto } from "@graduate/common";
 import { AxiosError } from "axios";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { useRedirectIfLoggedIn } from "../../hooks/useRedirectIfLoggedIn";
-import { logger, redirectToOnboardingOrHome } from "../../utils";
-import { StringInput } from "./Input";
+import { redirectToOnboardingOrHome } from "../../utils";
 import { toast } from "../../utils/toast";
+import { StringInput } from "./Input";
 
 export const LoginForm = () => {
   const router = useRouter();
@@ -53,10 +53,16 @@ export const LoginForm = () => {
           direction="column"
           justifyContent="space-between"
           alignItems="center"
-          width="25%"
-          height="40%"
+          width="30%"
+          height="50%"
         >
-          <Text fontSize="3xl" color="primary.main" as='b'>
+          <Text
+            fontSize="3xl"
+            color="primary.main"
+            as="b"
+            mb="2rem"
+            textAlign="center"
+          >
             Hey there!
           </Text>
 
@@ -65,7 +71,9 @@ export const LoginForm = () => {
             justifyContent="space-evenly"
             alignItems="center"
             width="100%"
-            height="70%"
+            minWidth="15rem"
+            height="80%"
+            minHeight="10rem"
           >
             <StringInput
               id="email"
@@ -91,9 +99,10 @@ export const LoginForm = () => {
               })}
             />
           </Flex>
-          <p>
-            Forgot Password? Click <a href="test">here.</a>
-          </p>
+
+          <Text fontSize="md" textAlign="center">
+            Forgot Password? Click <Link href="/forgotPass" color='primary.main'>here</Link>.
+          </Text>
         </Flex>
 
         <Flex
