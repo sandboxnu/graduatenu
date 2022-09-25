@@ -1,58 +1,79 @@
 import { extendTheme } from "@chakra-ui/react";
 import { Button } from "./components/buttons";
+import { Spinner } from "./components/spinners";
 
 const colors = {
+  // only main, 100, 300, 500, 700, 900 are certified by linda: rest of the shades were created using a generator
   primary: {
-    main: "#eb5756",
-    50: "#ffe5e5",
-    100: "#fbb9ba",
-    200: "#f38d8d",
-    300: "#ec605f",
-    400: "#e63433",
-    500: "#cc1c19",
-    600: "#a01413",
-    700: "#730c0c",
-    800: "#460606",
-    900: "#1e0000",
+    blue: {
+      dark: {
+        main: "#1c3557",
+        50: "#e7f1ff",
+        100: "#a5bddb",
+        200: "#9fbae0",
+        300: "#4a658a",
+        400: "#5483c4",
+        500: "#1c3557",
+        600: "#2d5286",
+        700: "#162c4a",
+        800: "#10233c",
+        900: "#0c1b29",
+      },
+      light: {
+        main: "#6080aa",
+        50: "#e5f3ff",
+        100: "#a5bddb",
+        200: "#aabdd6",
+        300: "#84a1c7",
+        400: "#6988af",
+        500: "#6080aa",
+        600: "#3d5675",
+        700: "#4973a8",
+        800: "#172536",
+        900: "#2d5c98",
+      },
+    },
+    red: {
+      main: "#eb5756",
+      50: "#ffe5e5",
+      100: "#eea7A7",
+      200: "#f38d8d",
+      300: "#f08080",
+      400: "#e63433",
+      500: "#eb5756",
+      600: "#a01413",
+      700: "#e54544",
+      800: "#460606",
+      900: "#d63130",
+    },
   },
-  blue: {
-    main: "#6080aa",
-    50: "#eff2f6",
-    100: "#c9d7e9",
-    200: "#aabdd6",
-    300: "#8aa2c2",
-    400: "#6988af",
-    500: "#506e96",
-    600: "#3d5675",
-    700: "#2a3d55",
-    800: "#172536",
-    900: "#030c19",
-  },
-  gray: {
+  neutral: {
     main: "#e7ebf1",
-    50: "#f9f9fa",
-    100: "#eceeef",
-    200: "#dfe1e3",
-    300: "#d1d3d5",
-    400: "#c2c4c6",
-    500: "#b2b3b5",
-    600: "#9fa0a1",
-    700: "#88898a",
-    800: "#6b6c6d",
-    900: "#3f3f40",
+    50: "#eff2f6",
+    100: "#d2d7de",
+    200: "#b3bcc8",
+    300: "#f1f5fa",
+    400: "#7586a0",
+    500: "#e7ebf1",
+    600: "#485569",
+    700: "#e2e6ec",
+    800: "#1f242c",
+    900: "#d2d8e2",
   },
-  green: {
-    main: "#6ba27d",
-    50: "#e6f8ec",
-    100: "#cce2d4",
-    200: "#afcfb9",
-    300: "#90ba9e",
-    400: "#72a683",
-    500: "#598d6a",
-    600: "#446e51",
-    700: "#2f4e3a",
-    800: "#1a3021",
-    900: "#001306",
+  states: {
+    success: {
+      main: "#6ba27d",
+      50: "#e6f8ec",
+      100: "#afcfb9",
+      200: "#afcfb9",
+      300: "#90ba9e",
+      400: "#72a683",
+      500: "#6ba27d",
+      600: "#446e51",
+      700: "#2b8b4b",
+      800: "#1a3021",
+      900: "#037a28",
+    },
   },
 };
 
@@ -72,7 +93,10 @@ const breakpoints = {
  * either direction (5xs, ..., 5xl) as needed.
  */
 const space = {
-  "2xs": "0.25rem",
+  "5xs": "0.05rem",
+  "4xs": "0.125rem",
+  "3xs": "0.25rem",
+  "2xs": "0.325rem",
   xs: "0.5rem",
   sm: "0.75rem",
   md: "1rem",
@@ -84,6 +108,7 @@ const space = {
 /** Customized component styles can be configured and passed to the theme provider */
 const components = {
   Button,
+  Spinner,
 };
 
 export const theme = extendTheme({

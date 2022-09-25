@@ -9,12 +9,15 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@chakra-ui/icons": "^2.0.8",
     "@chakra-ui/react": "^1.8.8",
+    "@dnd-kit/core": "^6.0.5",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
     "@fontsource/montserrat-alternates": "^4.5.9",
     "@graduate/common": "workspace:*",
     "framer-motion": "^6",
+    "immer": "^9.0.15",
     "next": "12.1.4",
     "react": "18.0.0",
     "react-dom": "18.0.0",

@@ -26,9 +26,7 @@ import {
 export class PlanController {
   constructor(private readonly planService: PlanService) {}
 
-  /**
-   * Creates a plan for the signed in user.
-   */
+  /** Creates a plan for the signed in user. */
   @UseGuards(JwtAuthGuard)
   @Post()
   async create(

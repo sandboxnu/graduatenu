@@ -25,7 +25,7 @@ interface InfoTextProps {
   description: string;
 }
 
-const Home: NextPage = () => {
+const LandingPage: NextPage = () => {
   return (
     <Box>
       <Header />
@@ -65,20 +65,20 @@ const Banner = (): JSX.Element => {
           <Box>
             <Heading
               fontSize={{ desktop: "7xl", laptop: "6xl", tablet: "5xl" }}
-              color="primary.main"
+              color="primary.red.main"
             >
               Graduate
             </Heading>
             <Heading
               fontSize={{ desktop: "7xl", laptop: "6xl", tablet: "5xl" }}
-              color="blue.700"
+              color="primary.blue.dark.main"
             >
               your way
             </Heading>
             <Text
               pt="5%"
               fontSize={{ desktop: "3xl", laptop: "2xl", tablet: "xl" }}
-              color="blue.700"
+              color="primary.blue.dark.main"
             >
               Navigate the Northeastern graduation requirements and create a
               personalized plan of study.
@@ -127,13 +127,13 @@ const Info = (): JSX.Element => {
     <Box
       pt={{ desktop: "6rem", laptop: "6.25rem", tablet: "5rem" }}
       pb={{ desktop: "7.75rem", laptop: "8rem", tablet: "6.5rem" }}
-      backgroundColor="blue.50"
+      backgroundColor="primary.blue.light.50"
     >
       <VStack>
         <Heading
           mb={{ desktop: "6rem", laptop: "5rem", tablet: "4rem" }}
           size="2xl"
-          color="blue.700"
+          color="primary.blue.dark.main"
         >
           How It Works
         </Heading>
@@ -185,15 +185,15 @@ const InfoText = ({ title, description }: InfoTextProps): JSX.Element => {
       <Heading
         pt="10%"
         fontSize={{ desktop: "3xl", laptop: "2xl", tablet: "xl" }}
-        color="blue.700"
+        color="primary.blue.dark.main"
       >
         {title}
       </Heading>
-      <Text pt="3%" color="blue.700" fontWeight="semibold">
+      <Text pt="3%" color="primary.blue.dark.main" fontWeight="semibold">
         {description}
       </Text>
     </Box>
   );
 };
 
-export default Home;
+export default LandingPage;

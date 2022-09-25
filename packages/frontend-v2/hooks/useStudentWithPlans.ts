@@ -1,17 +1,18 @@
 import useSWR, { KeyedMutator, SWRResponse } from "swr";
 import { API } from "@graduate/api-client";
-import { GetStudentResponse } from "@graduate/common";
+import { GetStudentResponse, StudentModel } from "@graduate/common";
 import { AxiosError } from "axios";
+import { preparePlanForDnd } from "../utils";
 
 type StudentResponse = Omit<
-  SWRResponse<GetStudentResponse, AxiosError>,
+  SWRResponse<GetStudentResponse, AxiosError | Error>,
   "data" | "mutate"
 >;
 
 type UseStudentReturn = StudentResponse & {
   isLoading: boolean;
-  mutateStudent: KeyedMutator<GetStudentResponse>;
-  student?: GetStudentResponse;
+  mutateStudent: KeyedMutator<StudentModel<string>>;
+  student?: StudentModel<string>;
 };
 
 /**
@@ -21,10 +22,7 @@ type UseStudentReturn = StudentResponse & {
 export function useStudentWithPlans(): UseStudentReturn {
   const key = `api/students/me`;
 
-  const { data, mutate, ...rest } = useSWR(
-    key,
-    async () => await API.student.getMeWithPlan()
-  );
+  const { data, mutate, ...rest } = useSWR(key, fetchStudentAndPrepareForDnd);
 
   return {
     ...rest,
@@ -33,3 +31,18 @@ export function useStudentWithPlans(): UseStudentReturn {
     isLoading: !data && !rest.error,
   };
 }
+
+/**
+ * Fetches the student with plans and prepares all of the student's plans for
+ * drag and drop by adding drag and drop ids.
+ */
+export const fetchStudentAndPrepareForDnd = async (): Promise<
+  StudentModel<string>
+> => {
+  const student = await API.student.getMeWithPlan();
+  const plansWithDndIds = student.plans.map(preparePlanForDnd);
+  return {
+    ...student,
+    plans: plansWithDndIds,
+  };
+};

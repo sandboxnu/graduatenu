@@ -14,7 +14,7 @@ import { useForm } from "react-hook-form";
 import { AxiosError } from "axios";
 import { logger, redirectToOnboardingOrHome } from "../utils";
 import { LoginStudentDto } from "@graduate/common";
-import { useRedirectIfLoggedIn } from "../hooks/useRedirectIfLoggedIn";
+import { useRedirectIfLoggedIn } from "../hooks";
 
 const Login: NextPage = () => {
   const [apiError, setApiError] = useState("");

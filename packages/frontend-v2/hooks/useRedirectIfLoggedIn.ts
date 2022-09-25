@@ -4,6 +4,12 @@ import { useEffect, useState } from "react";
 import { redirectToOnboardingOrHome, logger } from "../utils";
 import { AxiosError } from "axios";
 
+/**
+ * If the user is already logged in, then redirect to onboarding/home.
+ *
+ * @returns The loading state since this hook makes an API request to check if
+ *   the user is logged in
+ */
 export const useRedirectIfLoggedIn = () => {
   const [renderSpinner, setRenderSpinner] = useState(false);
 

@@ -1,12 +1,12 @@
-import { Schedule, ScheduleCourse } from "./types";
+import { ScheduleCourse, Schedule2 } from "./types";
 
 /** Types our API responds with. */
 
-export class PlanModel {
+export class PlanModel<T> {
   id: number;
   name: string;
-  student: StudentModel;
-  schedule: Schedule;
+  student: StudentModel<null>;
+  schedule: Schedule2<T>;
   major: string;
   coopCycle: string;
   concentration: string | undefined;
@@ -15,11 +15,11 @@ export class PlanModel {
   updatedAt: Date;
 }
 
-export class GetPlanResponse extends PlanModel {}
+export class GetPlanResponse extends PlanModel<null> {}
 
-export class UpdatePlanResponse extends PlanModel {}
+export class UpdatePlanResponse extends PlanModel<null> {}
 
-export class StudentModel {
+export class StudentModel<T> {
   uuid: string;
   nuid: string;
   isOnboarded: boolean;
@@ -32,13 +32,13 @@ export class StudentModel {
   coopCycle: string | undefined;
   coursesCompleted: ScheduleCourse[] | undefined;
   coursesTransfered: ScheduleCourse[] | undefined;
-  primaryPlanId: number | true;
-  plans: PlanModel[];
+  primaryPlanId: number;
+  plans: PlanModel<T>[];
   concentration: string | undefined;
   createdAt: Date;
   updatedAt: Date;
 }
 
-export class GetStudentResponse extends StudentModel {}
+export class GetStudentResponse extends StudentModel<null> {}
 
-export class UpdateStudentResponse extends StudentModel {}
+export class UpdateStudentResponse extends StudentModel<null> {}

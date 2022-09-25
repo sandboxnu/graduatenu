@@ -4,7 +4,7 @@ import { GetPlanResponse } from "@graduate/common";
 import { AxiosError } from "axios";
 
 type PlanResponse = Omit<
-  SWRResponse<GetPlanResponse, AxiosError>,
+  SWRResponse<GetPlanResponse, AxiosError | Error>,
   "data" | "mutate"
 >;
 

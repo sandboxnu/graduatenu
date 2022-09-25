@@ -9,7 +9,7 @@ import {
   Max,
   Min,
 } from "class-validator";
-import { Schedule, ScheduleCourse } from "./types";
+import { Schedule2, ScheduleCourse } from "./types";
 
 /**
  * Data transfer objects for data going into our API. Class validator decorators
@@ -21,7 +21,7 @@ export class CreatePlanDto {
   name: string;
 
   @IsObject()
-  schedule: Schedule;
+  schedule: Schedule2<null>;
 
   @IsString()
   major: string;
@@ -45,7 +45,7 @@ export class UpdatePlanDto {
 
   @IsOptional()
   @IsObject()
-  schedule?: Schedule;
+  schedule?: Schedule2<null>;
 
   @IsOptional()
   @IsString()
