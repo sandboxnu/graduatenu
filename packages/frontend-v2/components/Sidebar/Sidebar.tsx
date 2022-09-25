@@ -46,10 +46,20 @@ export const Sidebar: React.FC<SidebarProps> = ({ major }) => {
 
     for (const requirement of requirements) {
       promises.push(
-        SearchAPI.fetchCourse(
-          requirement.subject,
-          requirement.classId.toString()
-        )
+        new Promise((res, rej) => {
+          res({
+            name: "FAKE API CALL, REPLACE!",
+            classId: requirement.classId.toString(),
+            subject: requirement.subject,
+            numCreditsMin: 4,
+            numCreditsMax: 4,
+            id: null,
+          });
+        })
+        // SearchAPI.fetchCourse(
+        //   requirement.subject,
+        //   requirement.classId.toString()
+        // )
       );
     }
 
@@ -85,8 +95,14 @@ export const Sidebar: React.FC<SidebarProps> = ({ major }) => {
   };
 
   return (
-    <Box p="xs">
-      <Text py="lg" color="primary.red.main" fontWeight={700}>
+    <Box p="xs 0px" backgroundColor="neutral.main">
+      <Text
+        py="lg"
+        px="sm"
+        fontSize="xl"
+        color="primary.red.main"
+        fontWeight={700}
+      >
         {major.name}
       </Text>
       {courseData &&
@@ -107,11 +123,36 @@ const SidebarSection: React.FC<SidebarSectionProps> = ({
 }) => {
   const [opened, setOpened] = useState(false);
   return (
-    <Box>
-      <p>{section.title}</p>
-      {section.requirements.map((requirement) => (
-        <SectionRequirement requirement={requirement} courseData={courseData} />
-      ))}
+    <Box
+      backgroundColor="neutral.main"
+      borderTop="1px solid white"
+      cursor="pointer"
+      userSelect="none"
+    >
+      <Text
+        onClick={() => {
+          setOpened(!opened);
+        }}
+        color="dark.main"
+        fontWeight="bold"
+        py="md"
+        px="sm"
+      >
+        {section.title}
+      </Text>
+      <Box
+        style={{ display: opened ? "" : "none" }}
+        backgroundColor="neutral.900"
+        padding="10px 20px 15px 10px"
+        cursor="default"
+      >
+        {section.requirements.map((requirement) => (
+          <SectionRequirement
+            requirement={requirement}
+            courseData={courseData}
+          />
+        ))}
+      </Box>
     </Box>
   );
 };
