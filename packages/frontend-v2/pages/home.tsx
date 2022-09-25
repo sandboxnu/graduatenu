@@ -53,7 +53,7 @@ const HomePage: NextPage = () => {
     const { active } = event;
     const activeCourse = findCourseByDndId(
       primaryPlan.schedule,
-      active.id as string // dnd ids are strings
+      active.id as string // our dnd ids are strings, we should cast to whatever dnd type we use for dnd ids
     );
     if (activeCourse) {
       setActiveCourse(activeCourse);
