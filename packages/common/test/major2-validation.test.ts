@@ -21,7 +21,6 @@ import {
 } from "../src/types";
 import { assertUnreachable, courseToString } from "../src/course-utils";
 import bscs from "./mock-majors/bscs.json";
-import { tsUnknownKeyword } from "@babel/types";
 
 type TestCourse = IRequiredCourse & { credits: number };
 const course = (
