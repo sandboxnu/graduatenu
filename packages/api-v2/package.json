@@ -18,7 +18,9 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:db:up": "docker-compose -f ../../infrastructure/test/docker-compose.e2e.yml up -d",
+    "test:db:down": "docker-compose -f ../../infrastructure/test/docker-compose.e2e.yml down",
+    "test:e2e": "yarn g:cross-env NODE_ENV=testing jest --config ./test/jest-e2e.json --detectOpenHandles"
   },
   "dependencies": {
     "@graduate/common": "workspace:*",
@@ -34,6 +36,7 @@
     "class-validator": "^0.13.2",
     "cookie-parser": "^1.4.6",
     "dotenv": "^16.0.0",
+    "eslint": "^8.23.0",
     "passport": "^0.5.2",
     "passport-jwt": "^4.0.0",
     "pg": "^8.7.1",
@@ -49,6 +52,7 @@
     "@nestjs/testing": "^8.0.0",
     "@types/bcrypt": "^5.0.0",
     "@types/cookie-parser": "^1",
+    "@types/eslint": "^8",
     "@types/express": "^4.17.13",
     "@types/jest": "^27.0.1",
     "@types/node": "^16.0.0",

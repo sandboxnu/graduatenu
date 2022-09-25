@@ -1,6 +1,6 @@
 import { Injectable, Logger } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { formatServiceCtx } from "src/utils";
+import { formatServiceCtx } from "../../src/utils";
 import {
   DeleteResult,
   FindOneOptions,
@@ -9,6 +9,7 @@ import {
 } from "typeorm";
 import { SignUpStudentDto, UpdateStudentDto } from "../../../common";
 import { Student } from "./entities/student.entity";
+
 @Injectable()
 export class StudentService {
   private readonly logger: Logger = new Logger();

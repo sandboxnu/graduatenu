@@ -30,6 +30,7 @@ export class AuthController {
     if (!student) {
       throw new BadRequestException();
     }
+
     const { accessToken } = student;
 
     const isSecure = process.env.NODE_ENV !== "development";
@@ -63,6 +64,7 @@ export class AuthController {
       sameSite: "strict",
       secure: isSecure,
     });
+
     return student;
   }
 

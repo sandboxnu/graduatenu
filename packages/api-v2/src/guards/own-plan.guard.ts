@@ -5,9 +5,9 @@ import {
   Inject,
   Logger,
 } from "@nestjs/common";
-import { PlanService } from "src/plan/plan.service";
-import { Student } from "src/student/entities/student.entity";
-import { formatServiceCtx } from "src/utils";
+import { PlanService } from "../plan/plan.service";
+import { Student } from "../student/entities/student.entity";
+import { formatServiceCtx } from "../../src/utils";
 
 /**
  * Used to protect GET/PUT/PATCH :id Plan controller methods from being accessed
