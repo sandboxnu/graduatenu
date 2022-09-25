@@ -2,14 +2,25 @@ import { Button, Flex, Text } from "@chakra-ui/react";
 import { API } from "@graduate/api-client";
 import { SignUpStudentDto } from "@graduate/common";
 import { AxiosError } from "axios";
-import { useRouter } from "next/router";
+import { useRouter, NextRouter } from "next/router";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, UseFormRegister, FieldErrors } from "react-hook-form";
 import { logger, redirectToOnboardingOrHome } from "../../utils";
 import { StringInput } from "./Input";
+import { toast } from "../../utils/toast";
+
+interface SignUpFormTopProps {
+  register: UseFormRegister<SignUpStudentDto>;
+  errors: FieldErrors<SignUpStudentDto>;
+  password: string;
+}
+
+interface SignUpFormButton {
+  isSubmitting: boolean;
+  router: NextRouter;
+}
 
 export const SignUpForm = () => {
-  const [apiError, setApiError] = useState("");
   const router = useRouter();
 
   const {
@@ -31,71 +42,143 @@ export const SignUpForm = () => {
       redirectToOnboardingOrHome(user, router);
     } catch (err) {
       const error = err as AxiosError;
-      if (error.response?.status === 401)
-        setApiError("Invalid credentials, please try again.");
-      else setApiError(error.message);
-      logger.error(error);
+      if (error.response?.status === 401) toast.error("Invalid Credentials!");
+      else toast.error("Something went wrong!");
     }
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmitHandler)}>
-      <Flex direction={"column"}>
-        {apiError && (
-          <Text
-            pt="5%"
-            fontSize={{ desktop: "3xl", laptop: "2xl", tablet: "xl" }}
-            color="red.300"
-          >
-            {apiError}
-          </Text>
-        )}
-
-        <StringInput
-          id="email"
-          placeholder="Email"
-          error={errors.email}
-          type="email"
-          {...register("email", {
-            required: "Email is required",
-            pattern: {
-              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-              message: "Invalid email address",
-            },
-          })}
+    <Flex
+      as="form"
+      onSubmit={handleSubmit(onSubmitHandler)}
+      justifyContent="center"
+      alignItems="center"
+    >
+      <Flex
+        direction="column"
+        justifyContent="space-between"
+        alignItems="center"
+        height="83vh"
+        width="md"
+        mt="5rem"
+      >
+        <SignUpFormTopInput
+          errors={errors}
+          password={password}
+          register={register}
         />
-
-        <StringInput
-          error={errors.password}
-          type="password"
-          id="password"
-          placeholder="Password"
-          {...register("password", {
-            required: "Password is required",
-          })}
-        />
-
-        <StringInput
-          error={errors.passwordConfirm}
-          type="password"
-          id="confirmPassword"
-          placeholder="Confirm Password"
-          {...register("passwordConfirm", {
-            validate: (confirmPass) =>
-              confirmPass === password || "Passwords do not match!",
-            required: true,
-          })}
-        />
-
-        <Button
-          mr={{ desktop: "7.5rem", laptop: "6.25rem", tablet: "3.25rem" }}
-          mt="15%"
-          isLoading={isSubmitting}
-          type="submit"
-        >
-          Sign Up
-        </Button>
+        <SignUpFormButton isSubmitting={isSubmitting} router={router} />
       </Flex>
-    </form>
+    </Flex>
   );
 };
+
+const SignUpFormTopInput: React.FC<SignUpFormTopProps> = ({
+  errors,
+  register,
+  password,
+}) => (
+  <Flex
+    direction="column"
+    justifyContent="space-between"
+    alignItems="center"
+    height="40%"
+    width="100%"
+  >
+    <Text
+      fontSize="3xl"
+      color="primary.red.main"
+      as="b"
+      mb="2rem"
+      textAlign="center"
+    >
+      Welcome!
+    </Text>
+
+    <StringInput
+      id="email"
+      placeholder="Email"
+      error={errors.email}
+      type="email"
+      {...register("email", {
+        required: "Email is required",
+        pattern: {
+          value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+          message: "Invalid email address",
+        },
+      })}
+    />
+
+    <StringInput
+      error={errors.password}
+      type="password"
+      id="password"
+      placeholder="Password"
+      {...register("password", {
+        required: "Password is required",
+      })}
+    />
+
+    <StringInput
+      error={errors.passwordConfirm}
+      type="password"
+      id="confirmPassword"
+      placeholder="Confirm Password"
+      {...register("passwordConfirm", {
+        validate: (confirmPass) =>
+          confirmPass === password || "Passwords do not match!",
+        required: true,
+      })}
+    />
+  </Flex>
+);
+
+const SignUpFormButton: React.FC<SignUpFormButton> = ({
+  isSubmitting,
+  router,
+}) => (
+  <Flex
+    direction="row"
+    justifyContent="space-between"
+    alignItems="flex-end"
+    height="25%"
+    textAlign="center"
+    width="100%"
+    mb='1rem'
+  >
+    <Button
+      isLoading={isSubmitting}
+      type="submit"
+      variant="solid"
+      borderRadius="0px"
+      flex="1"
+      mr="1rem"
+      size='sm'
+      backgroundColor='primary.red.100'
+    >
+      PREV
+    </Button>
+    <Button
+      isLoading={isSubmitting}
+      type="submit"
+      variant="solid"
+      borderRadius="0px"
+      flex="1"
+      mr="1rem"
+      size='sm'
+      backgroundColor='orange'
+    >
+      SAVE
+    </Button>
+    <Button
+      onClick={() => router.push("/signup")}
+      variant="solid"
+      backgroundColor="primary.red.main"
+      borderRadius="0px"
+      size='sm'
+      flex="2"
+    >
+      NEXT
+    </Button>
+  </Flex>
+);
