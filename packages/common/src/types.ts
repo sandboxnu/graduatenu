@@ -213,20 +213,30 @@ export interface Concentrations2 {
 /**
  * A clean version of a student's schedule as used in V2 of the App with no
  * redundunt year information.
+ *
+ * @param years A list of the years of this object
  */
 export interface Schedule2<T> {
   years: ScheduleYear2<T>[];
 }
 
+/**
+ * A ScheduleYear, representing a year of a schedule
+ *
+ * @param year         The academic year number(1, 2, 3...) not to be confused
+ *   with the calendar year. One academic year spans from [Calendar Year X,
+ *   Fall] - [Calendar Year X + 1, Summer 2].
+ *
+ *   Storing the academic year num isn't necessary but can be nice since it
+ *   prevents us from relying on the order in which ScheduleYears are stored in
+ *   a Schedule.
+ * @param fall         The fall term
+ * @param spring       The spring term
+ * @param summer1      The summer 1 term
+ * @param summer2      The summer 2 term
+ * @param isSummerFull True if the summer1 should hold the classes for summer full.
+ */
 export interface ScheduleYear2<T> {
-  /**
-   * This is the academic year number(1, 2, 3...) not the calendar year. One
-   * academic year spans from [Calendar Year X, Fall] - [Calendar Year X + 1, Summer 2].
-   *
-   * Storing the academic year num isn't necessary but can be nice since it
-   * prevents us from relying on the order in which ScheduleYears are stored in
-   * a Schedule.
-   */
   year: number;
   fall: ScheduleTerm2<T>;
   spring: ScheduleTerm2<T>;
@@ -239,6 +249,12 @@ export interface ScheduleYear2<T> {
  * A clean version of the ScheduleTerm used by V2 of the App. A generic id field
  * is used for book keeping purposes by the drag and drop library, in cases
  * where we don't care about this id, T can null.
+ *
+ * @param year    The year of this term
+ * @param season  The season of this term
+ * @param status  The status of this term, on coop, classes, or inactive.
+ * @param classes A list of the classes of this term.
+ * @param id      Unique id used as a book keeping field for dnd.
  */
 export interface ScheduleTerm2<T> {
   year: number;
@@ -252,6 +268,15 @@ export interface ScheduleTerm2<T> {
  * A course within a schedule used by V2 of the App. A generic id field is used
  * for book keeping purposes by the drag and drop library, in cases where we
  * don't care about this id, T can null.
+ *
+ * @param name          The name of the course
+ * @param classId       The classId of this course (1210, 1800, etc)
+ * @param subject       The subject of this course (CS, DS, etc)
+ * @param prereqs       The prerequisites for this course
+ * @param coreqs        The corequisites for this course
+ * @param numCreditsMin The minimum number of credits this course gives
+ * @param numCreditsMax The maximum number of credits this course gives
+ * @param id            Unique id used as a book keeping field for dnd.
  */
 export interface ScheduleCourse2<T> {
   name: string;
