@@ -1,4 +1,4 @@
-import { API, SearchAPI } from "@graduate/api-client";
+import { SearchAPI } from "@graduate/api-client";
 import {
   ScheduleCourse2,
   INEUPrereq,

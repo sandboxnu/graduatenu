@@ -1,9 +1,4 @@
-import {
-  PlanModel,
-  Schedule,
-  ScheduleCourse2,
-  SeasonEnum,
-} from "@graduate/common";
+import { PlanModel, ScheduleCourse2, SeasonEnum } from "@graduate/common";
 import produce from "immer";
 import { isEqualCourses } from "../course";
 import { logger } from "../logger";

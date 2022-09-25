@@ -1,5 +1,5 @@
 import { API } from "@graduate/api-client";
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import { NextRouter, useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
@@ -9,23 +9,22 @@ import { useEffect, useState } from "react";
  * @returns The loading state since this hook makes an API request to check if
  *   the user is authenticated
  */
-export const useRedirectIfUnauthorized = (error?: AxiosError | Error) => {
+export const useRedirectIfUnauthorized = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
-  const redirectIfUnauthorized = async () => {
-    setIsLoading(true);
-    try {
-      await API.student.getMe();
-    } catch (error) {
-      redirectOnUnauthorizedError(error, router);
-    }
-    setIsLoading(false);
-  };
-
   useEffect(() => {
+    const redirectIfUnauthorized = async () => {
+      setIsLoading(true);
+      try {
+        await API.student.getMe();
+      } catch (error) {
+        redirectOnUnauthorizedError(error, router);
+      }
+      setIsLoading(false);
+    };
     redirectIfUnauthorized();
-  }, []);
+  }, [router]);
 
   return isLoading;
 };
