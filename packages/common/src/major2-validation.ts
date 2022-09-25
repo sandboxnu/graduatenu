@@ -142,6 +142,7 @@ type TotalCreditsRequirementError = {
 // for keeping track of courses taken
 interface CourseValidationTracker {
   // retrieve a given schedule course if it exists
+  // validation algorithm shouldn't care about the id so we use unknown instead of any/null
   get(input: IScheduleCourse): ScheduleCourse2<unknown> | null;
 
   // retrieves the number of times a course has been taken
