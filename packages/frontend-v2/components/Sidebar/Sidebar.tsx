@@ -21,12 +21,12 @@ interface SidebarProps {
 
 interface SidebarSectionProps {
   section: Section;
-  courseData: { [id: string]: ScheduleCourse2<null> };
+  courseData: Record<string, ScheduleCourse2<null>>;
 }
 
 interface SidebarRequirementProps {
   requirement: Requirement2;
-  courseData: { [id: string]: ScheduleCourse2<null> };
+  courseData: Record<string, ScheduleCourse2<null>>;
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({ major }) => {
@@ -42,39 +42,53 @@ export const Sidebar: React.FC<SidebarProps> = ({ major }) => {
       []
     );
 
-    const promises: Promise<ScheduleCourse2<null> | null>[] = [];
-
-    for (const requirement of requirements) {
-      promises.push(
-        new Promise((res, rej) => {
-          res({
-            name: "FAKE API CALL, REPLACE!",
-            classId: requirement.classId.toString(),
-            subject: requirement.subject,
-            numCreditsMin: 4,
-            numCreditsMax: 4,
-            id: null,
-          });
-        })
-        // SearchAPI.fetchCourse(
-        //   requirement.subject,
-        //   requirement.classId.toString()
-        // )
-      );
-    }
-
-    Promise.all(promises).then((courses) => {
-      const courseMap: { [id: string]: ScheduleCourse2<null> } = {};
-      if (courses) {
-        for (const course of courses) {
-          if (course) {
-            courseMap[`${course.subject}${course.classId}`] = course;
-          }
-        }
-        console.log(courseMap);
-        setCourseData(courseMap);
+    SearchAPI.batchFetchCourses(
+      requirements.map((requirement) => {
+        return {
+          subject: requirement.subject,
+          classId: requirement.classId.toString(),
+        };
+      })
+    ).then((res) => {
+      console.log(res);
+      if (res !== null) {
+        setCourseData(res);
       }
     });
+
+    // const promises: Promise<ScheduleCourse2<null> | null>[] = [];
+
+    // for (const requirement of requirements) {
+    //   promises.push(
+    //     new Promise((res, rej) => {
+    //       res({
+    //         name: "FAKE API CALL, REPLACE!",
+    //         classId: requirement.classId.toString(),
+    //         subject: requirement.subject,
+    //         numCreditsMin: 4,
+    //         numCreditsMax: 4,
+    //         id: null,
+    //       });
+    //     })
+    //     // SearchAPI.fetchCourse(
+    //     //   requirement.subject,
+    //     //   requirement.classId.toString()
+    //     // )
+    //   );
+    // }
+
+    // Promise.all(promises).then((courses) => {
+    //   const courseMap: { [id: string]: ScheduleCourse2<null> } = {};
+    //   if (courses) {
+    //     for (const course of courses) {
+    //       if (course) {
+    //         courseMap[`${course.subject}${course.classId}`] = course;
+    //       }
+    //     }
+    //     console.log(courseMap);
+    //     setCourseData(courseMap);
+    //   }
+    // });
   }, []);
 
   const getRequiredCourses = (
@@ -146,7 +160,7 @@ const SidebarSection: React.FC<SidebarSectionProps> = ({
         padding="10px 20px 15px 10px"
         cursor="default"
       >
-        {section.requirements.map((requirement) => (
+        {section.requirements.map((requirement, index) => (
           <SectionRequirement
             requirement={requirement}
             courseData={courseData}

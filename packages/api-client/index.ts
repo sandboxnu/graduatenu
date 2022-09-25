@@ -88,6 +88,10 @@ interface SearchClass {
   minCredits: number;
 }
 
+interface ClassResult {
+  latestOccurrence: SearchClass | null;
+}
+
 /**
  * A client for interacting with the Search API. Allows us to fetch and search
  * for courses.
@@ -133,6 +137,89 @@ class SearchAPIClient {
     } else {
       return null;
     }
+  };
+
+  batchFetchCourses = async (
+    classes: { subject: string; classId: string }[]
+  ): Promise<Record<string, ScheduleCourse2<null>> | null> => {
+    const baseQuery = `fragment CourseInfo on Class {
+      latestOccurrence {
+          name
+          subject
+          classId
+          maxCredits
+          minCredits
+          prereqs
+          coreqs
+        }
+    }
+    query AllCourses {\n`;
+
+    if (classes.length === 0) {
+      return {};
+    }
+
+    let classQueries = classes.map(({ subject, classId }) => {
+      return `${subject}${classId}: class(subject: "${subject}", classId:"${classId}") {... CourseInfo}`;
+    });
+
+    const finalQuery = baseQuery + classQueries.join("\n") + "\n}";
+
+    const res = await this.axios({
+      method: "post",
+      data: {
+        query: finalQuery,
+      },
+    });
+
+    console.log(finalQuery);
+
+    // Check that we have the data we're expecting (checking for the first
+    // class that we requested).
+    if (
+      res?.data?.data[classes[0].subject + classes[0].classId] === undefined
+    ) {
+      return null;
+    }
+
+    const courseData: Record<string, ScheduleCourse2<null>> = {};
+    const data = await res.data;
+
+    Object.entries(data.data).forEach((entry) => {
+      const key = entry[0];
+      const value = entry[1] as ClassResult;
+      if (value === null || value.latestOccurrence === null) {
+        return;
+      }
+
+      const classData = value.latestOccurrence;
+      const course: ScheduleCourse2<null> = {
+        name: classData.name,
+        classId: classData.classId,
+        subject: classData.subject,
+        numCreditsMax: classData.maxCredits,
+        numCreditsMin: classData.minCredits,
+        prereqs: classData.prereqs,
+        coreqs: classData.coreqs,
+        id: null,
+      };
+      courseData[key] = course;
+    });
+
+    // const courseData = await res.data.data;
+    return courseData;
+
+    // const courseData = await res.data.data;
+    // if (courseData?.class?.latestOccurrence) {
+    //   const course: ScheduleCourse2<null> = courseData.class.latestOccurrence;
+    //   course.numCreditsMax = courseData.class.latestOccurrence.maxCredits;
+    //   course.numCreditsMin = courseData.class.latestOccurrence.minCredits;
+    //   delete courseData.class.latestOccurrence.maxCredits;
+    //   delete courseData.class.latestOccurrence.minCredits;
+    //   return course;
+    // } else {
+    //   return null;
+    // }
   };
 
   searchCourses = async (
