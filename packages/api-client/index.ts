@@ -7,7 +7,6 @@ import {
   INEUAndPrereq,
   INEUOrPrereq,
   LoginStudentDto,
-  ScheduleCourse,
   UpdatePlanDto,
   UpdatePlanResponse,
   UpdateStudentDto,
@@ -124,8 +123,7 @@ class SearchAPIClient {
 
     const courseData = await res.data.data;
     if (courseData?.class?.latestOccurrence) {
-      const course: ScheduleCourse2<unknown> =
-        courseData.class.latestOccurrence;
+      const course: ScheduleCourse2<null> = courseData.class.latestOccurrence;
       course.numCreditsMax = courseData.class.latestOccurrence.maxCredits;
       course.numCreditsMin = courseData.class.latestOccurrence.minCredits;
       delete courseData.class.latestOccurrence.maxCredits;

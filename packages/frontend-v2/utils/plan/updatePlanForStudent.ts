@@ -1,5 +1,5 @@
 import { StudentModel, PlanModel } from "@graduate/common";
-import produce, { produceWithPatches } from "immer";
+import produce from "immer";
 
 /**
  * Creates a copy of the given student and replaces one of their plans with
