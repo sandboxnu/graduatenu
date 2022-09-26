@@ -1,10 +1,4 @@
-import {
-  Button,
-  Grid,
-  GridItem,
-  Heading,
-  useDisclosure,
-} from "@chakra-ui/react";
+import { Grid, GridItem, Heading, useDisclosure } from "@chakra-ui/react";
 import { ScheduleCourse2, ScheduleTerm2, SeasonEnum } from "@graduate/common";
 import { DraggableScheduleCourse } from "../ScheduleCourse";
 import { useDroppable } from "@dnd-kit/core";

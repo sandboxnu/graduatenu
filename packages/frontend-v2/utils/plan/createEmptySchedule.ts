@@ -7,7 +7,7 @@ import {
 
 /** Create an empty schedule with 4 academic years and no classes. */
 export const createEmptySchedule = (): Schedule2<null> => {
-  let years: ScheduleYear2<null>[] = [];
+  const years: ScheduleYear2<null>[] = [];
   for (let year = 1; year <= 4; year++) {
     years.push({
       year,
