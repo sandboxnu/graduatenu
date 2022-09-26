@@ -28,9 +28,6 @@ export class Plan {
   @Column()
   major: string;
 
-  @Column()
-  coopCycle: string;
-
   @Column({ nullable: true })
   concentration: string;
 

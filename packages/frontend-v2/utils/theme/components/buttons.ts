@@ -30,6 +30,10 @@ export const Button: ComponentStyleConfig = {
       bg: "primary.red.main",
       color: "white",
     },
+    blue: {
+      border: "2px solid",
+      backgroundColor: "pr",
+    },
   },
   // default size and variant values
   defaultProps: {

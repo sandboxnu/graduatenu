@@ -7,7 +7,7 @@ import {
 } from "@graduate/common";
 import { useState } from "react";
 import { addClassesToTerm, isCourseInPlan } from "../../utils";
-import { removeCourseFromTerm } from "../../utils/plan/removeCourseFromTerm";
+import { removeCourseFromTerm } from "../../utils/";
 import { ScheduleYear } from "./ScheduleYear";
 
 interface PlanProps {

@@ -17,8 +17,8 @@ import {
   isEqualCourses,
   getCourseDisplayString,
   getRequiredCourseCoreqs,
+  handleApiClientError,
 } from "../../utils";
-import { handleApiClientError } from "../../utils/handleApiClientError";
 import { SearchCoursesInput } from "./SearchCoursesInput";
 import { SearchResult } from "./SearchResult";
 import { SelectedCourse } from "./SelectedCourse";

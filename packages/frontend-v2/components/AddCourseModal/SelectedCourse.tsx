@@ -1,6 +1,6 @@
 import { Flex, Text } from "@chakra-ui/react";
 import { ScheduleCourse2 } from "@graduate/common";
-import { getCourseDisplayString } from "../../utils/course/getCourseDisplayString";
+import { getCourseDisplayString } from "../../utils/";
 import { CourseTrashButton } from "../ScheduleCourse/CourseTashButton";
 
 interface SelectedCourseProps {

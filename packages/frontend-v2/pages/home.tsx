@@ -1,5 +1,7 @@
 import { NextPage } from "next";
 import {
+  AddPlanModal,
+  BlueButton,
   HeaderContainer,
   LoadingPage,
   Logo,
@@ -14,17 +16,23 @@ import {
   logout,
   updatePlanForStudent,
   updatePlanOnDragEnd,
+  handleApiClientError,
 } from "../utils";
 import { API } from "@graduate/api-client";
 import { PlanModel } from "@graduate/common";
 import { useRouter } from "next/router";
-import { Button, Flex, Grid, GridItem } from "@chakra-ui/react";
-import { handleApiClientError } from "../utils/handleApiClientError";
+import { Button, Flex, Grid, GridItem, useDisclosure } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
+import { AddIcon } from "@chakra-ui/icons";
 
 const HomePage: NextPage = () => {
   const { error, student, mutateStudent } = useStudentWithPlans();
   const router = useRouter();
+  const {
+    onOpen: onOpenAddPlanModal,
+    onClose: closeAddPlanModalDisplay,
+    isOpen: isOpenAddPlanModal,
+  } = useDisclosure();
 
   /*
    * Keep track of the plan being displayed, initially undef and later either the plan id or null.
@@ -132,15 +140,29 @@ const HomePage: NextPage = () => {
     });
   };
 
+  const onCloseAddPlanModal = (newPlanId?: number) => {
+    if (newPlanId) {
+      setSelectedPlanId(newPlanId);
+    }
+    closeAddPlanModalDisplay();
+  };
+
   return (
     <PageLayout>
       <DndContext onDragEnd={handleDragEnd}>
         <Flex flexDirection="column">
-          <PlanDropdown
-            selectedPlanId={selectedPlanId}
-            setSelectedPlanId={setSelectedPlanId}
-            plans={student.plans}
-          />
+          <Flex alignItems="center" mb="sm">
+            <PlanDropdown
+              selectedPlanId={selectedPlanId}
+              setSelectedPlanId={setSelectedPlanId}
+              plans={student.plans}
+            />
+            <AddPlanButton
+              onOpen={onOpenAddPlanModal}
+              onClose={onCloseAddPlanModal}
+              isOpen={isOpenAddPlanModal}
+            />
+          </Flex>
           {selectedPlan && (
             <Plan
               plan={selectedPlan}
@@ -150,6 +172,27 @@ const HomePage: NextPage = () => {
         </Flex>
       </DndContext>
     </PageLayout>
+  );
+};
+
+interface AddPlanButtonProps {
+  onOpen: () => void;
+  onClose: (newPlanId?: number) => void;
+  isOpen: boolean;
+}
+
+const AddPlanButton: React.FC<AddPlanButtonProps> = ({
+  onOpen,
+  onClose,
+  isOpen,
+}) => {
+  return (
+    <>
+      <BlueButton leftIcon={<AddIcon />} onClick={onOpen} ml="xs" size="md">
+        Add Plan
+      </BlueButton>
+      <AddPlanModal onClose={onClose} isOpen={isOpen} />
+    </>
   );
 };
 

@@ -11,6 +11,7 @@ import { useDroppable } from "@dnd-kit/core";
 import { logger } from "../../utils";
 import { AddCourseModal } from "../AddCourseModal";
 import { AddIcon } from "@chakra-ui/icons";
+import { BlueButton } from "../Button";
 
 interface ScheduleTermProps {
   scheduleTerm: ScheduleTerm2<string>;
@@ -135,17 +136,13 @@ interface AddCourseButtonProps {
 
 const AddCourseButton: React.FC<AddCourseButtonProps> = ({ onOpen }) => {
   return (
-    <Button
+    <BlueButton
+      leftIcon={<AddIcon w={2} h={2} color="primary.blue.light.main" />}
       onClick={onOpen}
       mt="md"
-      variant="outline"
-      borderColor="primary.blue.light.main"
-      colorScheme="primary.blue.light"
-      color="primary.blue.light.main"
-      leftIcon={<AddIcon w={2} h={2} color="primary.blue.light.main" />}
       size="sm"
     >
       Add Course
-    </Button>
+    </BlueButton>
   );
 };
