@@ -1,12 +1,11 @@
-import { Button, Flex, Text } from "@chakra-ui/react";
+import { Text } from "@chakra-ui/react";
 import { API } from "@graduate/api-client";
 import { SignUpStudentDto } from "@graduate/common";
 import { AxiosError } from "axios";
-import { useRouter, NextRouter } from "next/router";
-import { useState } from "react";
-import { useForm, UseFormRegister, FieldErrors } from "react-hook-form";
-import { logger, redirectToOnboardingOrHome } from "../../utils";
-import { StringInput } from "./Input";
+import { NextRouter, useRouter } from "next/router";
+import { FieldErrors, useForm, UseFormRegister } from "react-hook-form";
+import { AlterSubmitButton, FormButtons, FormFormat, HeaderAndInput, StringInput, SubmitButton } from "..";
+import { redirectToOnboardingOrHome } from "../../utils";
 import { toast } from "../../utils/toast";
 
 interface SignUpFormTopProps {
@@ -48,28 +47,14 @@ export const SignUpForm = () => {
   };
 
   return (
-    <Flex
-      as="form"
-      onSubmit={handleSubmit(onSubmitHandler)}
-      justifyContent="center"
-      alignItems="center"
-    >
-      <Flex
-        direction="column"
-        justifyContent="space-between"
-        alignItems="center"
-        height="83vh"
-        width="md"
-        mt="5rem"
-      >
-        <SignUpFormTopInput
-          errors={errors}
-          password={password}
-          register={register}
-        />
-        <SignUpFormButton isSubmitting={isSubmitting} router={router} />
-      </Flex>
-    </Flex>
+    <FormFormat onSubmit={handleSubmit(onSubmitHandler)}>
+      <SignUpFormTopInput
+        errors={errors}
+        password={password}
+        register={register}
+      />
+      <SignUpFormButton isSubmitting={isSubmitting} router={router} />
+    </FormFormat>
   );
 };
 
@@ -78,18 +63,12 @@ const SignUpFormTopInput: React.FC<SignUpFormTopProps> = ({
   register,
   password,
 }) => (
-  <Flex
-    direction="column"
-    justifyContent="space-between"
-    alignItems="center"
-    height="40%"
-    width="100%"
-  >
+  <HeaderAndInput>
     <Text
       fontSize="3xl"
       color="primary.red.main"
       as="b"
-      mb="2rem"
+      mb="xl"
       textAlign="center"
     >
       Welcome!
@@ -130,55 +109,25 @@ const SignUpFormTopInput: React.FC<SignUpFormTopProps> = ({
         required: true,
       })}
     />
-  </Flex>
+  </HeaderAndInput>
 );
 
 const SignUpFormButton: React.FC<SignUpFormButton> = ({
   isSubmitting,
   router,
 }) => (
-  <Flex
-    direction="row"
-    justifyContent="space-between"
-    alignItems="flex-end"
-    height="25%"
-    textAlign="center"
-    width="100%"
-    mb='1rem'
-  >
-    <Button
+  <FormButtons>
+    <SubmitButton
       isLoading={isSubmitting}
       type="submit"
       variant="solid"
-      borderRadius="0px"
-      flex="1"
-      mr="1rem"
-      size='sm'
-      backgroundColor='primary.red.100'
+      borderRadius="none"
     >
-      PREV
-    </Button>
-    <Button
-      isLoading={isSubmitting}
-      type="submit"
-      variant="solid"
-      borderRadius="0px"
-      flex="1"
-      mr="1rem"
-      size='sm'
-      backgroundColor='orange'
-    >
-      SAVE
-    </Button>
-    <Button
-      onClick={() => router.push("/signup")}
-      variant="solid"
-      backgroundColor="primary.red.main"
-      borderRadius="0px"
-      size='sm'
-      flex="2"
-    >
-      NEXT
-    </Button>
-  </Flex>
+      SIGN UP
+    </SubmitButton>
+    <p>OR</p>
+    <AlterSubmitButton onClick={() => router.push("/login")}>
+      LOGIN
+    </AlterSubmitButton>
+  </FormButtons>
 );

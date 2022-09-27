@@ -7,7 +7,7 @@ export const InputGroup: React.FC = ({ children }) => (
     alignItems="center"
     width="100%"
     height="80%"
-    minHeight="10rem"
+    minHeight="3xs"
   >
     {children}
   </Flex>

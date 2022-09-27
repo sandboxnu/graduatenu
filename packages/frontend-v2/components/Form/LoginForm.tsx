@@ -1,15 +1,14 @@
-import { Button, Flex, Link, Text } from "@chakra-ui/react";
+import { Link, Text } from "@chakra-ui/react";
 import { API } from "@graduate/api-client";
 import { LoginStudentDto } from "@graduate/common";
 import { AxiosError } from "axios";
 import { NextRouter, useRouter } from "next/router";
 import { FieldErrors, useForm, UseFormRegister } from "react-hook-form";
+import { AlterSubmitButton, InputGroup, LoadingPage, StringInput, SubmitButton } from "..";
 import { useRedirectIfLoggedIn } from "../../hooks/useRedirectIfLoggedIn";
 import { redirectToOnboardingOrHome } from "../../utils";
 import { toast } from "../../utils/toast";
-import { LoadingPage } from "../Spinner";
-import { StringInput } from "./Input";
-import { InputGroup } from "./InputGroup";
+import { FormButtons, FormFormat, HeaderAndInput } from "./FormSections";
 
 interface LoginFormTopProps {
   register: UseFormRegister<LoginStudentDto>;
@@ -48,24 +47,10 @@ export const LoginForm = () => {
   if (renderSpinner) return <LoadingPage />;
 
   return (
-    <Flex
-      as="form"
-      onSubmit={handleSubmit(onSubmitHandler)}
-      justifyContent="center"
-      alignItems="center"
-    >
-      <Flex
-        direction="column"
-        justifyContent="space-between"
-        alignItems="center"
-        height="50vh"
-        width="md"
-        mt="5rem"
-      >
-        <LoginFormTopInput errors={errors} register={register} />
-        <LoginFormButton router={router} isSubmitting={isSubmitting} />
-      </Flex>
-    </Flex>
+    <FormFormat onSubmit={handleSubmit(onSubmitHandler)}>
+      <LoginFormTopInput errors={errors} register={register} />
+      <LoginFormButton router={router} isSubmitting={isSubmitting} />
+    </FormFormat>
   );
 };
 
@@ -74,18 +59,12 @@ const LoginFormTopInput: React.FC<LoginFormTopProps> = ({
   register,
 }) => {
   return (
-    <Flex
-      direction="column"
-      justifyContent="space-between"
-      alignItems="center"
-      height="50%"
-      width="100%"
-    >
+    <HeaderAndInput>
       <Text
         fontSize="3xl"
         color="primary.red.main"
         as="b"
-        mb="2rem"
+        mb="xl"
         textAlign="center"
       >
         Hey there!
@@ -124,7 +103,7 @@ const LoginFormTopInput: React.FC<LoginFormTopProps> = ({
         </Link>
         .
       </Text>
-    </Flex>
+    </HeaderAndInput>
   );
 };
 
@@ -132,29 +111,18 @@ const LoginFormButton: React.FC<LoginFormButton> = ({
   isSubmitting,
   router,
 }) => (
-  <Flex
-    direction="column"
-    justifyContent="space-evenly"
-    alignItems="stretch"
-    height="25%"
-    textAlign="center"
-  >
-    <Button
+  <FormButtons>
+    <SubmitButton
       isLoading={isSubmitting}
       type="submit"
       variant="solid"
-      borderRadius="0px"
+      borderRadius="none"
     >
       LOGIN
-    </Button>
+    </SubmitButton>
     <p>OR</p>
-    <Button
-      onClick={() => router.push("/signup")}
-      variant="solid"
-      backgroundColor="blue.700"
-      borderRadius="0px"
-    >
+    <AlterSubmitButton onClick={() => router.push("/signup")}>
       SIGN UP
-    </Button>
-  </Flex>
+    </AlterSubmitButton>
+  </FormButtons>
 );
