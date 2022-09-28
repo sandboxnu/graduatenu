@@ -231,6 +231,8 @@ const SectionRequirement: React.FC<SidebarRequirementProps> = ({
       return (
         <DraggableScheduleCourse
           scheduleCourse={{ ...scheduleCourse, id: scheduleCourse.classId }}
+          isFromSidebar={true}
+          isDisabled={false}
         />
       );
     }

@@ -7,7 +7,7 @@ import {
   Logo,
   Plan,
   Sidebar,
-  PlanDropdown
+  PlanDropdown,
 } from "../components";
 import { fetchStudentAndPrepareForDnd, useStudentWithPlans } from "../hooks";
 import { DndContext, DragEndEvent } from "@dnd-kit/core";
@@ -104,11 +104,14 @@ const HomePage: NextPage = () => {
       return;
     }
 
+    console.log(active);
+
     // create a new plan with the dragged course moved from old term to term it is dropped on
     let updatedPlan: PlanModel<string>;
     try {
       updatedPlan = updatePlanOnDragEnd(selectedPlan, active, over);
     } catch (err) {
+      console.log(err);
       // update failed, either due to some logical issue or explicitely thrown error
       logger.debug("updatePlanOnDragEnd", err);
       return;
@@ -150,8 +153,8 @@ const HomePage: NextPage = () => {
   };
 
   return (
-    <PageLayout>
-      <DndContext onDragEnd={handleDragEnd}>
+    <DndContext onDragEnd={handleDragEnd}>
+      <PageLayout>
         <Flex flexDirection="column">
           <Flex alignItems="center" mb="sm">
             <PlanDropdown
@@ -172,8 +175,8 @@ const HomePage: NextPage = () => {
             />
           )}
         </Flex>
-      </DndContext>
-    </PageLayout>
+      </PageLayout>
+    </DndContext>
   );
 };
 
