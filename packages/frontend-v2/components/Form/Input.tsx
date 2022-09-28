@@ -27,7 +27,7 @@ export const StringInput = forwardRef<HTMLInputElement, InputProps>(
           errorBorderColor="red.300"
         />
       </InputGroup>
-      <FormErrorMessage>{error?.message}</FormErrorMessage>
+      <FormErrorMessage mt='3xs'>{error?.message}</FormErrorMessage>
     </FormControl>
   )
 );

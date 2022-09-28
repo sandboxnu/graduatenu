@@ -2,10 +2,13 @@ import { Flex } from "@chakra-ui/react";
 import { FormEventHandler } from "react";
 
 interface FormStructureProps {
-  onSubmit: FormEventHandler<HTMLDivElement>
+  onSubmit: FormEventHandler<HTMLDivElement>;
 }
 
-export const FormFormat: React.FC<FormStructureProps> = ({ onSubmit, children }) => (
+export const FormFormat: React.FC<FormStructureProps> = ({
+  onSubmit,
+  children,
+}) => (
   <Flex
     as="form"
     onSubmit={onSubmit}
@@ -25,19 +28,19 @@ export const FormFormat: React.FC<FormStructureProps> = ({ onSubmit, children })
   </Flex>
 );
 
-export const HeaderAndInput: React.FC = ({
-  children,
-}) => (
-  <Flex
-    direction="column"
-    justifyContent="space-between"
-    alignItems="center"
-    height="50%"
-    width="100%"
-  >
-    {children}
-  </Flex>
-);
+export const HeaderAndInput: React.FC = ({ children }) => {
+  return (
+    <Flex
+      direction="column"
+      justifyContent="space-between"
+      alignItems="center"
+      height='55%'
+      width="100%"
+    >
+      {children}
+    </Flex>
+  );
+};
 
 export const FormButtons: React.FC = ({ children }) => (
   <Flex
