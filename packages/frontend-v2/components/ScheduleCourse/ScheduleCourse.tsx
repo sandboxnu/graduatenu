@@ -4,7 +4,7 @@ import { ScheduleCourse2 } from "@graduate/common";
 import { useDraggable } from "@dnd-kit/core";
 import { CSS } from "@dnd-kit/utilities";
 import { DragHandleIcon } from "@chakra-ui/icons";
-import { CourseTrashButton } from "./CourseTashButton";
+import { CourseTrashButton } from "./CourseTrashButton";
 import { GraduateToolTip } from "../GraduateTooltip";
 import { getCourseDisplayString } from "../../utils";
 
