@@ -14,7 +14,7 @@ interface DraggableScheduleCourseProps {
   /** Function to remove the course from whatever the schedule it is part of. */
   removeCourse?: (course: ScheduleCourse2<unknown>) => void;
   isEditable?: boolean;
-  isDisabled: boolean;
+  isDisabled?: boolean;
   isFromSidebar?: boolean;
 }
 
@@ -24,14 +24,14 @@ export const DraggableScheduleCourse: React.FC<
   scheduleCourse,
   removeCourse,
   isEditable = false,
-  isFromSidebar,
-  isDisabled,
+  isFromSidebar = false,
+  isDisabled = false,
 }) => {
   const { setNodeRef, transform, listeners, attributes, isDragging } =
     useDraggable({
       id: scheduleCourse.id,
       data: {
-        isFromSidebar: isFromSidebar ?? false,
+        isFromSidebar: isFromSidebar,
         course: scheduleCourse,
       },
       disabled: isDisabled,

@@ -41,6 +41,7 @@ export const updatePlanOnDragEnd = (
     if (!draggedCourse.data.current.isFromSidebar) {
       // Course is from a term, so we need to move it, we don't need to move
       // courses that are from the sidebar.
+
       // remove the class from the old term and add it to the new term
       const oldTerm = scheduleTerms.find((term) =>
         term.classes.some((course) => course.id === draggedCourse.id)
@@ -54,16 +55,16 @@ export const updatePlanOnDragEnd = (
         throw new Error("Course is being dragged over its own term");
       }
 
-      // const course = oldTerm.classes.find(
-      //   (course) => course.id === draggedCourse.id
-      // );
-
       oldTerm.classes = oldTerm.classes.filter(
         (course) => course.id !== draggedCourse.id
       );
     }
 
-    newTerm.classes.push(draggedCourse.data.current.course);
+    // We set a temporary id to the new class because the plan will provide a new id on rerendering, so it doesn't need to be unique.
+    newTerm.classes.push({
+      ...draggedCourse.data.current.course,
+      id: "moving-course-temp",
+    });
   });
 
   return updatedPlan;

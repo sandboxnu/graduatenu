@@ -22,11 +22,13 @@ interface SidebarProps {
 interface SidebarSectionProps {
   section: Section;
   courseData: { [id: string]: ScheduleCourse2<null> };
+  dndIdPrefix: string;
 }
 
 interface SidebarRequirementProps {
   requirement: Requirement2;
   courseData: { [id: string]: ScheduleCourse2<null> };
+  dndIdPrefix: string;
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({ major }) => {
@@ -106,11 +108,12 @@ export const Sidebar: React.FC<SidebarProps> = ({ major }) => {
         {major.name}
       </Text>
       {courseData &&
-        major.requirementSections.map((section) => (
+        major.requirementSections.map((section, index) => (
           <SidebarSection
             key={section.title}
             section={section}
             courseData={courseData}
+            dndIdPrefix={"sidebar-" + index}
           />
         ))}
     </Box>
@@ -120,6 +123,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ major }) => {
 const SidebarSection: React.FC<SidebarSectionProps> = ({
   section,
   courseData,
+  dndIdPrefix,
 }) => {
   const [opened, setOpened] = useState(false);
   return (
@@ -146,10 +150,11 @@ const SidebarSection: React.FC<SidebarSectionProps> = ({
         padding="10px 20px 15px 10px"
         cursor="default"
       >
-        {section.requirements.map((requirement) => (
+        {section.requirements.map((requirement, index) => (
           <SectionRequirement
             requirement={requirement}
             courseData={courseData}
+            dndIdPrefix={dndIdPrefix + "-" + index}
           />
         ))}
       </Box>
@@ -160,6 +165,7 @@ const SidebarSection: React.FC<SidebarSectionProps> = ({
 const SectionRequirement: React.FC<SidebarRequirementProps> = ({
   requirement,
   courseData,
+  dndIdPrefix,
 }) => {
   const renderRequirement = () => {
     switch (requirement.type) {
@@ -184,8 +190,12 @@ const SectionRequirement: React.FC<SidebarRequirementProps> = ({
     return (
       <div>
         <p>Complete {requirement.numCreditsMin} credits from the following</p>
-        {requirement.courses.map((course) => (
-          <SectionRequirement requirement={course} courseData={courseData} />
+        {requirement.courses.map((course, index) => (
+          <SectionRequirement
+            requirement={course}
+            courseData={courseData}
+            dndIdPrefix={dndIdPrefix + "-" + index}
+          />
         ))}
       </div>
     );
@@ -195,8 +205,12 @@ const SectionRequirement: React.FC<SidebarRequirementProps> = ({
     return (
       <div>
         <p>Complete all of the following</p>
-        {requirement.courses.map((course) => (
-          <SectionRequirement requirement={course} courseData={courseData} />
+        {requirement.courses.map((course, index) => (
+          <SectionRequirement
+            requirement={course}
+            courseData={courseData}
+            dndIdPrefix={dndIdPrefix + "-" + index}
+          />
         ))}
       </div>
     );
@@ -206,8 +220,12 @@ const SectionRequirement: React.FC<SidebarRequirementProps> = ({
     return (
       <div>
         <p>Complete one of the following</p>
-        {requirement.courses.map((course) => (
-          <SectionRequirement requirement={course} courseData={courseData} />
+        {requirement.courses.map((course, index) => (
+          <SectionRequirement
+            requirement={course}
+            courseData={courseData}
+            dndIdPrefix={dndIdPrefix + "-" + index}
+          />
         ))}
       </div>
     );
@@ -230,7 +248,10 @@ const SectionRequirement: React.FC<SidebarRequirementProps> = ({
     if (scheduleCourse) {
       return (
         <DraggableScheduleCourse
-          scheduleCourse={{ ...scheduleCourse, id: scheduleCourse.classId }}
+          scheduleCourse={{
+            ...scheduleCourse,
+            id: dndIdPrefix + "-" + courseKey,
+          }}
           isFromSidebar={true}
           isDisabled={false}
         />
@@ -240,7 +261,13 @@ const SectionRequirement: React.FC<SidebarRequirementProps> = ({
   };
 
   const renderSection = (requirement: Section) => {
-    return <SidebarSection section={requirement} courseData={courseData} />;
+    return (
+      <SidebarSection
+        section={requirement}
+        courseData={courseData}
+        dndIdPrefix={dndIdPrefix + "-sec"}
+      />
+    );
   };
 
   return (

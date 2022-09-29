@@ -104,14 +104,12 @@ const HomePage: NextPage = () => {
       return;
     }
 
-    console.log(active);
-
     // create a new plan with the dragged course moved from old term to term it is dropped on
     let updatedPlan: PlanModel<string>;
     try {
       updatedPlan = updatePlanOnDragEnd(selectedPlan, active, over);
     } catch (err) {
-      console.log(err);
+      console.error(err);
       // update failed, either due to some logical issue or explicitely thrown error
       logger.debug("updatePlanOnDragEnd", err);
       return;
