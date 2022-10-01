@@ -56,7 +56,6 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
 
   const onSubmitHandler = async (payload: CreatePlanDtoWithoutSchedule) => {
     const schedule = createEmptySchedule();
-    console.log(schedule);
     const newPlan = {
       ...payload,
       schedule,
