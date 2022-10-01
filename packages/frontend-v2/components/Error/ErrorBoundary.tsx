@@ -1,5 +1,5 @@
 import { ErrorBoundary as ReactErrorBoundary } from "react-error-boundary";
-import { logger } from "../../utils/logger";
+import { logger } from "../../utils";
 import { ClientSideError } from "./ClientSideError";
 
 const clientSideErrorHandler = (

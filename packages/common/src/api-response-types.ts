@@ -8,7 +8,6 @@ export class PlanModel<T> {
   student: StudentModel<null>;
   schedule: Schedule2<T>;
   major: string;
-  coopCycle: string;
   concentration: string | undefined;
   catalogYear: number;
   createdAt: Date;

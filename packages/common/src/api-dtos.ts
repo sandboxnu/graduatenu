@@ -16,26 +16,26 @@ import { Schedule2, ScheduleCourse } from "./types";
  * are used to validate incoming data.
  */
 
-export class CreatePlanDto {
+export class CreatePlanDtoWithoutSchedule {
   @IsString()
   name: string;
-
-  @IsObject()
-  schedule: Schedule2<null>;
 
   @IsString()
   major: string;
 
   @IsString()
-  coopCycle: string;
-
-  @IsString()
-  concentration: string;
+  @IsOptional()
+  concentration?: string;
 
   @IsInt()
   @Min(1898)
   @Max(3000)
   catalogYear: number;
+}
+
+export class CreatePlanDto extends CreatePlanDtoWithoutSchedule {
+  @IsObject()
+  schedule: Schedule2<null>;
 }
 
 export class UpdatePlanDto {
@@ -50,10 +50,6 @@ export class UpdatePlanDto {
   @IsOptional()
   @IsString()
   major?: string;
-
-  @IsOptional()
-  @IsString()
-  coopCycle?: string;
 
   @IsOptional()
   @IsString()

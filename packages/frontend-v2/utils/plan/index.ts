@@ -5,3 +5,5 @@ export * from "./isCourseInPlan";
 export * from "./preparePlanForDnd";
 export * from "./updatePlanForStudent";
 export * from "./updatePlanOnDragEnd";
+export * from "./createEmptySchedule";
+export * from "./removeCourseFromTerm";
