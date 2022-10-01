@@ -8,7 +8,7 @@ import {
   IXofManyCourse,
   Major2,
   Requirement2,
-  ScheduleCourse,
+  ScheduleCourse2,
   Section,
   ResultType,
   Result,
@@ -18,14 +18,16 @@ import {
 import { assertUnreachable, courseToString } from "./course-utils";
 
 /**
- * general solution: postorder traversal requirements, producing all solutions at each level.
- * inductive step: combine child solutions to produce solutions for ourselves
+ * General solution: postorder traversal requirements, producing all solutions
+ * at each level. inductive step: combine child solutions to produce solutions
+ * for ourselves
  */
 
 // ------------------------ TYPES ------------------------
 
 /**
- * A single solution, containing a list of courseToString(c) + # of credits satisfied (needed for XOM)
+ * A single solution, containing a list of courseToString(c) + # of credits
+ * satisfied (needed for XOM)
  */
 type Solution = {
   minCredits: number;
@@ -34,7 +36,8 @@ type Solution = {
 };
 
 /**
- * concentrations are specified by their name or index in the accompanying concentrations list
+ * Concentrations are specified by their name or index in the accompanying
+ * concentrations list
  */
 type SelectedConcentrationsType = number | string | (number | string)[];
 
@@ -139,13 +142,18 @@ type TotalCreditsRequirementError = {
 // for keeping track of courses taken
 interface CourseValidationTracker {
   // retrieve a given schedule course if it exists
-  get(input: IScheduleCourse): ScheduleCourse | null;
+  // validation algorithm shouldn't care about the id so we use unknown instead of any/null
+  get(input: IScheduleCourse): ScheduleCourse2<unknown> | null;
 
   // retrieves the number of times a course has been taken
   getCount(input: IScheduleCourse): number;
 
   // retrieves all matching courses (subject, and within start/end inclusive)
-  getAll(subject: string, start: number, end: number): Array<ScheduleCourse>;
+  getAll(
+    subject: string,
+    start: number,
+    end: number
+  ): Array<ScheduleCourse2<unknown>>;
 
   // do we have enough courses to take all classes in both solutions?
   hasEnoughCoursesForBoth(s1: Solution, s2: Solution): boolean;
@@ -154,9 +162,9 @@ interface CourseValidationTracker {
 // exported for testing
 export class Major2ValidationTracker implements CourseValidationTracker {
   // maps courseString => [course instance, # of times taken]
-  private currentCourses: Map<string, [ScheduleCourse, number]>;
+  private currentCourses: Map<string, [ScheduleCourse2<unknown>, number]>;
 
-  constructor(courses: ScheduleCourse[]) {
+  constructor(courses: ScheduleCourse2<unknown>[]) {
     this.currentCourses = new Map();
     for (const c of courses) {
       const cs = courseToString(c);
@@ -238,7 +246,7 @@ type MajorValidationResult = Result<
 
 export function validateMajor2(
   major: Major2,
-  taken: ScheduleCourse[],
+  taken: ScheduleCourse2<unknown>[],
   concentrations?: SelectedConcentrationsType
 ): MajorValidationResult {
   const tracker = new Major2ValidationTracker(taken);
@@ -277,8 +285,9 @@ export function validateMajor2(
 
 /**
  * Produces the selected input concentrations to be included in major validation.
- * @param inputConcentrations the concentrations to include
- * @param concentrationsRequirement all available concentrations
+ *
+ * @param inputConcentrations       The concentrations to include
+ * @param concentrationsRequirement All available concentrations
  */
 export function getConcentrationsRequirement(
   inputConcentrations: undefined | SelectedConcentrationsType,
@@ -355,7 +364,7 @@ export const validateRequirement = (
 
 function validateTotalCreditsRequired(
   requiredCredits: number,
-  coursesTaken: ScheduleCourse[]
+  coursesTaken: ScheduleCourse2<unknown>[]
 ): Result<null, TotalCreditsRequirementError> {
   const takenCredits = coursesTaken.reduce(
     (total, course) => total + course.numCreditsMin,
@@ -428,33 +437,28 @@ function validateRangeRequirement(
 }
 
 /**
- * Example:
- *    <child 1>                <child 2>
- * (CS2810 or CS2800) and (CS2810 or DS3000)
+ * Example: <child 1> <child 2> (CS2810 or CS2800) and (CS2810 or DS3000)
  *
- * Child Solutions:
- * Child 1:
- *   - Solution 1: { min: 4, max: 4, sol: [CS2810]}
- *   - Solution 2: { min: 4, max: 4, sol: [CS2800]}
- * Child 2:
- *   - Solution 1: { min: 4, max: 4, sol: [CS2810]}
- *   - Solution 2: { min: 4, max: 4, sol: [DS3000]}
+ * Child Solutions: Child 1:
+ *
+ * - Solution 1: { min: 4, max: 4, sol: [CS2810]}
+ * - Solution 2: { min: 4, max: 4, sol: [CS2800]} Child 2:
+ * - Solution 1: { min: 4, max: 4, sol: [CS2810]}
+ * - Solution 2: { min: 4, max: 4, sol: [DS3000]}
  *
  * For each of the sols so far, try combining with each solution of child 1:
  * solsSoFar = [[]]
  *
- * Try combining base solution with c1s1. It works!
- * solsSoFarWithChild = [[CS2810]]
+ * Try combining base solution with c1s1. It works! solsSoFarWithChild = [[CS2810]]
  *
- * Try combining base solution with c1s2. It works!
- * solsSoFarWithChild = [[CS2810], [CS2800]]
+ * Try combining base solution with c1s2. It works! solsSoFarWithChild =
+ * [[CS2810], [CS2800]]
  *
- * Done with Child 1!
- * set solsSoFar <- solsSoFarWithChild
+ * Done with Child 1! set solsSoFar <- solsSoFarWithChild
  *
- * For each of the sols so far, try combining with each solution of child 2:
- * Try combining solsSoFar[0] = [CS2810] with c2s1 = [CS2810]. It doesn't work-- (CS2810 twice)
- * solsSoFarWithChild = []
+ * For each of the sols so far, try combining with each solution of child 2: Try
+ * combining solsSoFar[0] = [CS2810] with c2s1 = [CS2810]. It doesn't work--
+ * (CS2810 twice) solsSoFarWithChild = []
  *
  * Try combining solsSoFar[0] = [CS2810] with c2s2 = [DS3000]. It works!
  * solsSoFarWithChild = [[CS2810, DS3000]]
@@ -468,7 +472,7 @@ function validateRangeRequirement(
  * solsSoFarWithChild = [[CS2810, DS3000], [CS2800, CS2810], [CS2800, DS3000]]
  *
  * That was the last child, so we are done!
- **/
+ */
 function validateAndRequirement(
   r: IAndCourse2,
   tracker: CourseValidationTracker

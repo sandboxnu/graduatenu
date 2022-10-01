@@ -14,7 +14,7 @@ import {
   IXofManyCourse,
   Major2,
   Requirement2,
-  ScheduleCourse,
+  ScheduleCourse2,
   Section,
   Err,
   Ok,
@@ -33,12 +33,13 @@ const course = (
   classId: classId,
   credits: credits ?? 4,
 });
-const convert = (c: TestCourse): ScheduleCourse => ({
+const convert = (c: TestCourse): ScheduleCourse2<unknown> => ({
   ...c,
   classId: String(c.classId),
   name: courseToString(c),
   numCreditsMax: c.credits,
   numCreditsMin: c.credits,
+  id: null,
 });
 const or = (...courses: Requirement2[]): IOrCourse2 => ({
   type: "OR",
