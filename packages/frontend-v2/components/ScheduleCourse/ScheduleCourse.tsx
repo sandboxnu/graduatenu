@@ -5,7 +5,6 @@ import { useDraggable } from "@dnd-kit/core";
 import { CSS } from "@dnd-kit/utilities";
 import { DragHandleIcon } from "@chakra-ui/icons";
 import { CourseTrashButton } from "./CourseTrashButton";
-import { GraduateToolTip } from "../GraduateTooltip";
 import { getCourseDisplayString } from "../../utils";
 
 interface DraggableScheduleCourseProps {
@@ -79,49 +78,44 @@ export const ScheduleCourse = forwardRef<
     ref
   ) => {
     return (
-      <GraduateToolTip label={scheduleCourse.name} isDisabled={isDragging}>
-        <Flex
-          ref={ref}
-          {...attributes}
-          transform={transform}
-          cursor={isDisabled ? "default" : isDragging ? "grabbing" : "grab"}
-          borderRadius="md"
-          boxShadow="md"
-          backgroundColor={isDisabled ? "neutral.main" : "white"}
-          color={isDisabled ? "primary.blue.light.main" : "gray.800"}
-          pl="2xs"
-          pr="sm"
-          py="xs"
-          width="100%"
-          _hover={{ bg: isDisabled ? "neutral.main" : "neutral.700" }}
-          _active={{ bg: isDisabled ? "neutral.main" : "neutral.900" }}
-        >
-          <Flex alignItems="center" {...listeners}>
-            <DragHandleIcon
-              mr="md"
-              color={
-                isDisabled
-                  ? "primary.blue.light.main"
-                  : "primary.blue.dark.main"
-              }
-            />
-            <Text fontSize="sm" pr="2xs">
-              {getCourseDisplayString(scheduleCourse)}
-            </Text>
-            <Text fontSize="xs" pr="md" noOfLines={1}>
-              {scheduleCourse.name}
-            </Text>
-          </Flex>
-          {isEditable && (
-            <CourseTrashButton
-              marginLeft="auto"
-              onClick={
-                removeCourse ? () => removeCourse(scheduleCourse) : undefined
-              }
-            />
-          )}
+      <Flex
+        ref={ref}
+        {...attributes}
+        cursor={isDisabled ? "default" : isDragging ? "grabbing" : "grab"}
+        borderRadius="md"
+        boxShadow="md"
+        backgroundColor={isDisabled ? "neutral.main" : "white"}
+        color={isDisabled ? "primary.blue.light.main" : "gray.800"}
+        pl="2xs"
+        pr="sm"
+        py="xs"
+        width="100%"
+        _hover={{ bg: isDisabled ? "neutral.main" : "neutral.700" }}
+        _active={{ bg: isDisabled ? "neutral.main" : "neutral.900" }}
+      >
+        <Flex alignItems="center" {...listeners}>
+          <DragHandleIcon
+            mr="md"
+            color={
+              isDisabled ? "primary.blue.light.main" : "primary.blue.dark.main"
+            }
+          />
+          <Text fontSize="sm" pr="2xs">
+            {getCourseDisplayString(scheduleCourse)}
+          </Text>
+          <Text fontSize="xs" pr="md" noOfLines={1}>
+            {scheduleCourse.name}
+          </Text>
         </Flex>
-      </GraduateToolTip>
+        {isEditable && (
+          <CourseTrashButton
+            marginLeft="auto"
+            onClick={
+              removeCourse ? () => removeCourse(scheduleCourse) : undefined
+            }
+          />
+        )}
+      </Flex>
     );
   }
 );

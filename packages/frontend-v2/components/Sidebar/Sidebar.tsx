@@ -11,7 +11,7 @@ import {
   ScheduleCourse2,
   Section,
 } from "@graduate/common";
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { DraggableScheduleCourse, ScheduleCourse } from "../ScheduleCourse";
 import { theme } from "../../utils/theme/index";
 
@@ -31,7 +31,7 @@ interface SidebarRequirementProps {
   dndIdPrefix: string;
 }
 
-export const Sidebar: React.FC<SidebarProps> = ({ major }) => {
+export const Sidebar: React.FC<SidebarProps> = memo(({ major }) => {
   const [courseData, setCourseData] = useState({});
 
   useEffect(() => {
@@ -48,20 +48,20 @@ export const Sidebar: React.FC<SidebarProps> = ({ major }) => {
 
     for (const requirement of requirements) {
       promises.push(
-        new Promise((res, rej) => {
-          res({
-            name: "FAKE API CALL, REPLACE!",
-            classId: requirement.classId.toString(),
-            subject: requirement.subject,
-            numCreditsMin: 4,
-            numCreditsMax: 4,
-            id: null,
-          });
-        })
-        // SearchAPI.fetchCourse(
-        //   requirement.subject,
-        //   requirement.classId.toString()
-        // )
+        // new Promise((res, rej) => {
+        //   res({
+        //     name: "FAKE API CALL, REPLACE!",
+        //     classId: requirement.classId.toString(),
+        //     subject: requirement.subject,
+        //     numCreditsMin: 4,
+        //     numCreditsMax: 4,
+        //     id: null,
+        //   });
+        // })
+        SearchAPI.fetchCourse(
+          requirement.subject,
+          requirement.classId.toString()
+        )
       );
     }
 
@@ -118,7 +118,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ major }) => {
         ))}
     </Box>
   );
-};
+});
 
 const SidebarSection: React.FC<SidebarSectionProps> = ({
   section,

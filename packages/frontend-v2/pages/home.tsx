@@ -8,9 +8,15 @@ import {
   Plan,
   Sidebar,
   PlanDropdown,
+  ScheduleCourse,
 } from "../components";
 import { fetchStudentAndPrepareForDnd, useStudentWithPlans } from "../hooks";
-import { DndContext, DragEndEvent } from "@dnd-kit/core";
+import {
+  DndContext,
+  DragEndEvent,
+  DragOverlay,
+  DragStartEvent,
+} from "@dnd-kit/core";
 import {
   cleanDndIdsFromPlan,
   logger,
@@ -44,6 +50,8 @@ const HomePage: NextPage = () => {
   const [selectedPlanId, setSelectedPlanId] = useState<
     number | undefined | null
   >();
+
+  const [activeCourse, setActiveCourse] = useState(null);
 
   useEffect(() => {
     // once the student is fetched, set the selected plan id to the primary plan id
@@ -91,6 +99,12 @@ const HomePage: NextPage = () => {
    *    persisted student from our backend
    * 6. If anything goes wrong in the POST, rollback the optimistic update
    */
+
+  const handleDragStart = (event: DragStartEvent) => {
+    const { active } = event;
+    setActiveCourse(active.data.current?.course);
+  };
+
   const handleDragEnd = (event: DragEndEvent): void => {
     // no plan is being displayed right now, so abort
     if (!selectedPlan) {
@@ -151,7 +165,7 @@ const HomePage: NextPage = () => {
   };
 
   return (
-    <DndContext onDragEnd={handleDragEnd}>
+    <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
       <PageLayout>
         <Flex flexDirection="column">
           <Flex alignItems="center" mb="sm">
@@ -174,6 +188,11 @@ const HomePage: NextPage = () => {
           )}
         </Flex>
       </PageLayout>
+      <DragOverlay>
+        {activeCourse ? (
+          <ScheduleCourse isDisabled={false} scheduleCourse={activeCourse} />
+        ) : null}
+      </DragOverlay>
     </DndContext>
   );
 };
