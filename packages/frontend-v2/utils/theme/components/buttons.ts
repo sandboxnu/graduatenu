@@ -29,6 +29,7 @@ export const Button: ComponentStyleConfig = {
     solid: {
       bg: "primary.red.main",
       color: "white",
+      borderRadius: "0px"
     },
   },
   // default size and variant values

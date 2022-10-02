@@ -1,22 +1,54 @@
-import { NextPage } from "next";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { Text } from "@chakra-ui/react";
 import { API } from "@graduate/api-client";
-import {
-  Button,
-  FormControl,
-  FormErrorMessage,
-  Input,
-  InputGroup,
-  Text,
-} from "@chakra-ui/react";
-import { useRouter } from "next/router";
-import { AxiosError } from "axios";
-import { logger, redirectToOnboardingOrHome } from "../utils";
 import { SignUpStudentDto } from "@graduate/common";
+import { AxiosError } from "axios";
+import { NextPage } from "next";
+import Link from "next/link";
+import { NextRouter, useRouter } from "next/router";
+import { FieldErrors, useForm, UseFormRegister } from "react-hook-form";
+import {
+  AlterSubmitButton,
+  FormButtons,
+  FormFormat,
+  HeaderAndInput,
+  HeaderContainer,
+  InputGroup,
+  Logo,
+  StringInput,
+  SubmitButton,
+} from "../components";
+import { redirectToOnboardingOrHome, toast } from "../utils";
+
+interface SignUpFormTopProps {
+  register: UseFormRegister<SignUpStudentDto>;
+  errors: FieldErrors<SignUpStudentDto>;
+  password: string;
+}
+
+interface SignUpFormButton {
+  isSubmitting: boolean;
+  router: NextRouter;
+}
 
 const Signup: NextPage = () => {
-  const [apiError, setApiError] = useState("");
+  return (
+    <>
+      <Header />
+      <SignUpForm />
+    </>
+  );
+};
+
+const Header = (): JSX.Element => {
+  return (
+    <HeaderContainer>
+      <Logo />
+      <Link href="/login">Log In</Link>
+    </HeaderContainer>
+  );
+};
+
+const SignUpForm = () => {
   const router = useRouter();
 
   const {
@@ -29,6 +61,7 @@ const Signup: NextPage = () => {
     shouldFocusError: true,
   });
 
+  // Need to keep track of this value to ensure that confirm password is equal
   const password = watch("password", "");
 
   const onSubmitHandler = async (payload: SignUpStudentDto) => {
@@ -37,81 +70,97 @@ const Signup: NextPage = () => {
       redirectToOnboardingOrHome(user, router);
     } catch (err) {
       const error = err as AxiosError;
-      if (error.response?.status === 401)
-        setApiError("Invalid credentials, please try again.");
-      else setApiError(error.message);
-      logger.error(error);
+      if (error.response?.status === 401) toast.error("Invalid Credentials!");
+      else toast.error("Something went wrong!");
     }
   };
+
   return (
-    <form onSubmit={handleSubmit(onSubmitHandler)}>
-      <h2>Sign Up</h2>
-      <br />
-
-      {apiError && (
-        <Text
-          pt="5%"
-          fontSize={{ desktop: "3xl", laptop: "2xl", tablet: "xl" }}
-          color="red.300"
-        >
-          {apiError}
-        </Text>
-      )}
-
-      <FormControl isInvalid={errors.email != null}>
-        <Input
-          id="email"
-          placeholder="Example@email.com"
-          {...register("email", {
-            required: "Email is required",
-            pattern: {
-              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-              message: "Invalid email address",
-            },
-          })}
-        />
-        <FormErrorMessage>{errors.email?.message}</FormErrorMessage>
-      </FormControl>
-
-      <FormControl isInvalid={errors.password != null}>
-        <InputGroup>
-          <Input
-            type={"password"}
-            id="password"
-            placeholder="Enter Password"
-            {...register("password", {
-              required: "Password is required",
-            })}
-          />
-        </InputGroup>
-        <FormErrorMessage>{errors.password?.message}</FormErrorMessage>
-      </FormControl>
-
-      <FormControl isInvalid={errors.passwordConfirm != null}>
-        <InputGroup>
-          <Input
-            type={"password"}
-            id="passwordConfirm"
-            placeholder="Confirm Password"
-            {...register("passwordConfirm", {
-              validate: (confirmPass) =>
-                confirmPass === password || "Passwords do not match!",
-            })}
-          />
-        </InputGroup>
-        <FormErrorMessage>{errors.passwordConfirm?.message}</FormErrorMessage>
-      </FormControl>
-
-      <Button
-        mr={{ desktop: "7.5rem", laptop: "6.25rem", tablet: "3.25rem" }}
-        mt="15%"
-        isLoading={isSubmitting}
-        type="submit"
-      >
-        Sign Up
-      </Button>
-    </form>
+    <FormFormat onSubmit={handleSubmit(onSubmitHandler)}>
+      <SignUpFormTopInput
+        errors={errors}
+        password={password}
+        register={register}
+      />
+      <SignUpFormButton isSubmitting={isSubmitting} router={router} />
+    </FormFormat>
   );
 };
+
+const SignUpFormTopInput: React.FC<SignUpFormTopProps> = ({
+  errors,
+  register,
+  password,
+}) => (
+  <HeaderAndInput>
+    <Text
+      fontSize="3xl"
+      color="primary.red.main"
+      as="b"
+      mb="xl"
+      textAlign="center"
+    >
+      Welcome!
+    </Text>
+
+    <InputGroup>
+      <StringInput
+        id="email"
+        placeholder="Email"
+        error={errors.email}
+        type="email"
+        {...register("email", {
+          required: "Email is required",
+          pattern: {
+            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+            message: "Invalid email address",
+          },
+        })}
+      />
+
+      <StringInput
+        error={errors.password}
+        type="password"
+        id="password"
+        placeholder="Password"
+        {...register("password", {
+          required: "Password is required",
+        })}
+      />
+
+      <StringInput
+        error={errors.passwordConfirm}
+        type="password"
+        id="confirmPassword"
+        placeholder="Confirm Password"
+        {...register("passwordConfirm", {
+          validate: (confirmPass) =>
+            confirmPass === password || "Passwords do not match!",
+          required: true,
+        })}
+      />
+    </InputGroup>
+  </HeaderAndInput>
+);
+
+const SignUpFormButton: React.FC<SignUpFormButton> = ({
+  isSubmitting,
+  router,
+}) => (
+  <FormButtons>
+    <SubmitButton
+      isLoading={isSubmitting}
+      type="submit"
+      variant="solid"
+      borderRadius="none"
+    >
+      SIGN UP
+    </SubmitButton>
+    <p>OR</p>
+    <AlterSubmitButton onClick={() => router.push("/login")}>
+      LOGIN
+    </AlterSubmitButton>
+  </FormButtons>
+);
 
 export default Signup;

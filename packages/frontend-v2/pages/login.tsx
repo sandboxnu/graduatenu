@@ -1,23 +1,41 @@
-import {
-  Button,
-  FormControl,
-  FormErrorMessage,
-  Input,
-  InputGroup,
-  Text,
-} from "@chakra-ui/react";
+import { Link, Text } from "@chakra-ui/react";
 import { API } from "@graduate/api-client";
-import { NextPage } from "next";
-import { useRouter } from "next/router";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { AxiosError } from "axios";
-import { logger, redirectToOnboardingOrHome } from "../utils";
 import { LoginStudentDto } from "@graduate/common";
+import { AxiosError } from "axios";
+import { NextPage } from "next";
+import { NextRouter, useRouter } from "next/router";
+import { FieldErrors, useForm, UseFormRegister } from "react-hook-form";
+import { HeaderContainer, Logo, LoadingPage, FormFormat, HeaderAndInput, StringInput, FormButtons, SubmitButton, AlterSubmitButton, InputGroup } from "../components";
 import { useRedirectIfLoggedIn } from "../hooks";
+import { redirectToOnboardingOrHome, toast } from "../utils";
+
+interface LoginFormTopProps {
+  register: UseFormRegister<LoginStudentDto>;
+  errors: FieldErrors<LoginStudentDto>;
+}
+
+interface LoginFormButton {
+  isSubmitting: boolean;
+  router: NextRouter;
+}
 
 const Login: NextPage = () => {
-  const [apiError, setApiError] = useState("");
+  return (
+    <>
+      <Header />
+      <LoginForm />
+    </>
+  );
+};
+
+const Header = (): JSX.Element => (
+  <HeaderContainer>
+    <Logo />
+    <Link href="/signup">Sign Up</Link>
+  </HeaderContainer>
+);
+
+const LoginForm = () => {
   const router = useRouter();
   const renderSpinner = useRedirectIfLoggedIn();
 
@@ -36,39 +54,43 @@ const Login: NextPage = () => {
       redirectToOnboardingOrHome(user, router);
     } catch (err) {
       const error = err as AxiosError;
-      if (error.response?.status === 401)
-        setApiError("Invalid credentials, please try again.");
-      else setApiError(error.message);
-      logger.error(error);
+      if (error.response?.status === 401) toast.error("Invalid Credentials!");
+      else toast.error("Something went wrong!");
     }
   };
 
-  if (renderSpinner)
-    return (
-      <Text pt="5%" fontSize="3xl" color="red.300">
-        Loading
-      </Text>
-    );
+  if (renderSpinner) return <LoadingPage />;
 
   return (
-    <form onSubmit={handleSubmit(onSubmitHandler)}>
-      <h2>Log In</h2>
-      <br />
+    <FormFormat onSubmit={handleSubmit(onSubmitHandler)}>
+      <LoginFormTopInput errors={errors} register={register} />
+      <LoginFormButton router={router} isSubmitting={isSubmitting} />
+    </FormFormat>
+  );
+};
 
-      {apiError && (
-        <Text
-          pt="5%"
-          fontSize={{ desktop: "3xl", laptop: "2xl", tablet: "xl" }}
-          color="red.300"
-        >
-          {apiError}
-        </Text>
-      )}
+const LoginFormTopInput: React.FC<LoginFormTopProps> = ({
+  errors,
+  register,
+}) => {
+  return (
+    <HeaderAndInput>
+      <Text
+        fontSize="3xl"
+        color="primary.red.main"
+        as="b"
+        mb="xl"
+        textAlign="center"
+      >
+        Hey there!
+      </Text>
 
-      <FormControl isInvalid={errors.email != null}>
-        <Input
+      <InputGroup>
+        <StringInput
           id="email"
-          placeholder="example@email.com"
+          placeholder="Email"
+          error={errors.email}
+          type="email"
           {...register("email", {
             required: "Email is required",
             pattern: {
@@ -77,33 +99,47 @@ const Login: NextPage = () => {
             },
           })}
         />
-        <FormErrorMessage>{errors.email?.message}</FormErrorMessage>
-      </FormControl>
 
-      <FormControl isInvalid={errors.password != null}>
-        <InputGroup>
-          <Input
-            type="password"
-            id="password"
-            placeholder="Enter Password"
-            {...register("password", {
-              required: "Password is required",
-            })}
-          />
-        </InputGroup>
-        <FormErrorMessage>{errors.password?.message}</FormErrorMessage>
-      </FormControl>
+        <StringInput
+          error={errors.password}
+          type="password"
+          id="password"
+          placeholder="Password"
+          {...register("password", {
+            required: "Password is required",
+          })}
+        />
+      </InputGroup>
 
-      <Button
-        mr={{ desktop: "7.5rem", laptop: "6.25rem", tablet: "3.25rem" }}
-        mt="15%"
-        isLoading={isSubmitting}
-        type="submit"
-      >
-        Log In
-      </Button>
-    </form>
+      <Text fontSize="md" textAlign="center">
+        Forgot Password? Click{" "}
+        <Link href="/forgotPass" color="primary.red.main">
+          here
+        </Link>
+        .
+      </Text>
+    </HeaderAndInput>
   );
 };
+
+const LoginFormButton: React.FC<LoginFormButton> = ({
+  isSubmitting,
+  router,
+}) => (
+  <FormButtons>
+    <SubmitButton
+      isLoading={isSubmitting}
+      type="submit"
+      variant="solid"
+      borderRadius="none"
+    >
+      LOGIN
+    </SubmitButton>
+    <p>OR</p>
+    <AlterSubmitButton onClick={() => router.push("/signup")}>
+      SIGN UP
+    </AlterSubmitButton>
+  </FormButtons>
+);
 
 export default Login;

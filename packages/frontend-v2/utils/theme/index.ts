@@ -103,7 +103,14 @@ const space = {
   lg: "1.5rem",
   xl: "2rem",
   "2xl": "3rem",
+  "3xl": "4rem",
+  "4xl": "5rem",
+  "5xl": "6rem"
 };
+
+const sizes = {
+  "3xs": "10rem"
+}
 
 /** Customized component styles can be configured and passed to the theme provider */
 const components = {
@@ -117,4 +124,5 @@ export const theme = extendTheme({
   breakpoints,
   space,
   components,
+  sizes
 });
