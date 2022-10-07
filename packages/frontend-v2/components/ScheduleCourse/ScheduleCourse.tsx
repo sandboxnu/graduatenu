@@ -70,7 +70,6 @@ export const ScheduleCourse = forwardRef<
       removeCourse,
       isEditable = false,
       isDragging = false,
-      transform,
       listeners,
       attributes,
       isDisabled,

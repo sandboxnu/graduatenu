@@ -12,8 +12,7 @@ import {
   Section,
 } from "@graduate/common";
 import { memo, useEffect, useState } from "react";
-import { DraggableScheduleCourse, ScheduleCourse } from "../ScheduleCourse";
-import { theme } from "../../utils/theme/index";
+import { DraggableScheduleCourse } from "../ScheduleCourse";
 
 interface SidebarProps {
   major: Major2;
@@ -155,6 +154,7 @@ const SidebarSection: React.FC<SidebarSectionProps> = ({
             requirement={requirement}
             courseData={courseData}
             dndIdPrefix={dndIdPrefix + "-" + index}
+            key={index}
           />
         ))}
       </Box>
@@ -195,6 +195,7 @@ const SectionRequirement: React.FC<SidebarRequirementProps> = ({
             requirement={course}
             courseData={courseData}
             dndIdPrefix={dndIdPrefix + "-" + index}
+            key={index}
           />
         ))}
       </div>
@@ -210,6 +211,7 @@ const SectionRequirement: React.FC<SidebarRequirementProps> = ({
             requirement={course}
             courseData={courseData}
             dndIdPrefix={dndIdPrefix + "-" + index}
+            key={index}
           />
         ))}
       </div>
@@ -225,6 +227,7 @@ const SectionRequirement: React.FC<SidebarRequirementProps> = ({
             requirement={course}
             courseData={courseData}
             dndIdPrefix={dndIdPrefix + "-" + index}
+            key={index}
           />
         ))}
       </div>
