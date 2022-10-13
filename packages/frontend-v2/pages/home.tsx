@@ -28,7 +28,7 @@ import {
 import { API } from "@graduate/api-client";
 import { PlanModel } from "@graduate/common";
 import { useRouter } from "next/router";
-import { Button, Flex, Grid, GridItem, useDisclosure } from "@chakra-ui/react";
+import { Box, Button, Flex, useDisclosure } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { AddIcon } from "@chakra-ui/icons";
 import { getMajor2Example } from "../utils/convertMajor";
@@ -225,18 +225,23 @@ const AddPlanButton: React.FC<AddPlanButtonProps> = ({
  * This will have everything that can be rendered without the student and
  * plans(i.e: header, sidebar, etc)
  */
-const PageLayout: React.FC<PropsWithChildren> = ({ children }) => {
+const PageLayout: React.FC = ({ children }) => {
   return (
-    <Flex flexDirection="column" height="100vh">
+    <Flex flexDirection="column" height="100vh" overflow="hidden">
       <Header />
-      <Grid height="200px" templateColumns="repeat(4, 1fr)" gap="md">
-        <GridItem rowSpan={1} colSpan={1} bg="primary.blue.light.main">
+      <Flex height="100%" overflow="hidden">
+        <Box
+          bg="primary.blue.light.main"
+          overflowY="auto"
+          width="360px"
+          flexShrink={0}
+        >
           <Sidebar major={DEMO_MAJOR} />
-        </GridItem>
-        <GridItem rowSpan={1} colSpan={3} p="md">
+        </Box>
+        <Box p="md" overflow="auto" flexGrow={1}>
           {children}
-        </GridItem>
-      </Grid>
+        </Box>
+      </Flex>
     </Flex>
   );
 };
