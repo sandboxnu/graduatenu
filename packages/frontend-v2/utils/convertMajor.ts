@@ -197,7 +197,7 @@ interface IAndCourse {
 }
 
 import { Major2, Requirement2, Section } from "@graduate/common";
-import bscs from "../../common/test/mock-majors/bscs.json";
+import bscs from "@graduate/common/test/mock-majors/bscs.json";
 
 export const getMajor2Example = () => {
   return convertToMajor2(bscs as any);

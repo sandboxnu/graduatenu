@@ -33,6 +33,8 @@ import { useEffect, useState } from "react";
 import { AddIcon } from "@chakra-ui/icons";
 import { getMajor2Example } from "../utils/convertMajor";
 
+const DEMO_MAJOR = getMajor2Example();
+
 const HomePage: NextPage = () => {
   const { error, student, mutateStudent } = useStudentWithPlans();
   const router = useRouter();
@@ -75,13 +77,14 @@ const HomePage: NextPage = () => {
     logger.error("HomePage", error);
     handleApiClientError(error, router);
 
-    // render just the boiler plate page since we couldn't fetch the student w plans
-    return <PageLayout />;
+    // If we couldn't fetch the student's plan, show a blank page for now.
+    // We might want to show some more actionable error in the future.
+    return <div></div>;
   }
 
   // handle loading state
   if (!student) {
-    return <LoadingPage pageLayout={PageLayout} />;
+    return <LoadingPage />;
   }
 
   const selectedPlan = student.plans.find((plan) => selectedPlanId === plan.id);
@@ -222,13 +225,13 @@ const AddPlanButton: React.FC<AddPlanButtonProps> = ({
  * This will have everything that can be rendered without the student and
  * plans(i.e: header, sidebar, etc)
  */
-const PageLayout: React.FC = ({ children }) => {
+const PageLayout: React.FC<PropsWithChildren> = ({ children }) => {
   return (
     <Flex flexDirection="column" height="100vh">
       <Header />
       <Grid height="200px" templateColumns="repeat(4, 1fr)" gap="md">
         <GridItem rowSpan={1} colSpan={1} bg="primary.blue.light.main">
-          <Sidebar major={getMajor2Example()} />
+          <Sidebar major={DEMO_MAJOR} />
         </GridItem>
         <GridItem rowSpan={1} colSpan={3} p="md">
           {children}

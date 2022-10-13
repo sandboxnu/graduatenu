@@ -30,10 +30,32 @@ interface SidebarRequirementProps {
   dndIdPrefix: string;
 }
 
-export const Sidebar: React.FC<SidebarProps> = memo(({ major }) => {
+// This was moved out of the Sidebar component as it doesn't change
+// from run to run, but the dependency array in the course useEffect
+// would have to include since if it stayed in the component according
+// to the linter.
+const getRequiredCourses = (
+  requirements: Requirement2[],
+  requiredCourses: IRequiredCourse[]
+) => {
+  for (const requirement of requirements) {
+    if (requirement.type === "RANGE") {
+      continue;
+    } else if (requirement.type === "COURSE") {
+      requiredCourses.push(requirement);
+    } else if (requirement.type === "SECTION") {
+      getRequiredCourses(requirement.requirements, requiredCourses);
+    } else {
+      getRequiredCourses(requirement.courses, requiredCourses);
+    }
+  }
+};
+
+const Sidebar: React.FC<SidebarProps> = memo(({ major }) => {
   const [courseData, setCourseData] = useState({});
 
   useEffect(() => {
+    // console.info("QUERYING SEARCH ONCE", Date.now())
     const requirements = major.requirementSections.reduce(
       (courses: IRequiredCourse[], section: Section) => {
         const requiredCourses: IRequiredCourse[] = [];
@@ -42,6 +64,7 @@ export const Sidebar: React.FC<SidebarProps> = memo(({ major }) => {
       },
       []
     );
+    // console.info("Making", requirements.length, "requests")
 
     const promises: Promise<ScheduleCourse2<null> | null>[] = [];
 
@@ -72,28 +95,10 @@ export const Sidebar: React.FC<SidebarProps> = memo(({ major }) => {
             courseMap[`${course.subject}${course.classId}`] = course;
           }
         }
-        console.log(courseMap);
         setCourseData(courseMap);
       }
     });
-  }, []);
-
-  const getRequiredCourses = (
-    requirements: Requirement2[],
-    requiredCourses: IRequiredCourse[]
-  ) => {
-    for (const requirement of requirements) {
-      if (requirement.type === "RANGE") {
-        continue;
-      } else if (requirement.type === "COURSE") {
-        requiredCourses.push(requirement);
-      } else if (requirement.type === "SECTION") {
-        getRequiredCourses(requirement.requirements, requiredCourses);
-      } else {
-        getRequiredCourses(requirement.courses, requiredCourses);
-      }
-    }
-  };
+  }, [major.requirementSections]);
 
   return (
     <Box p="xs 0px" backgroundColor="neutral.main">
@@ -118,6 +123,12 @@ export const Sidebar: React.FC<SidebarProps> = memo(({ major }) => {
     </Box>
   );
 });
+
+// We need to manually set the display name like this because
+// of how we're using memo above.
+Sidebar.displayName = "Sidebar";
+
+export { Sidebar };
 
 const SidebarSection: React.FC<SidebarSectionProps> = ({
   section,
