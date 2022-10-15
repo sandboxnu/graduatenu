@@ -1,6 +1,7 @@
 import { NextPage } from "next";
 import {
   AddPlanModal,
+  EditPlanModal,
   BlueButton,
   HeaderContainer,
   LoadingPage,
@@ -162,6 +163,9 @@ const HomePage: NextPage = () => {
               onClose={onCloseAddPlanModal}
               isOpen={isOpenAddPlanModal}
             />
+            {selectedPlanId && (
+              <EditPlanModal plan={selectedPlan} planId={selectedPlanId} />
+            )}
           </Flex>
           {selectedPlan && (
             <Plan
