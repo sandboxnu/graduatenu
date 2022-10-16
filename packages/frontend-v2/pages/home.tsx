@@ -2,6 +2,7 @@ import { NextPage } from "next";
 import {
   AddPlanModal,
   BlueButton,
+  DeletePlanModal,
   HeaderContainer,
   LoadingPage,
   Logo,
@@ -147,6 +148,18 @@ const HomePage: NextPage = () => {
     closeAddPlanModalDisplay();
   };
 
+  const onCloseDeletePlanModal = (
+    isDeleted: boolean,
+    closeDisplay: () => void
+  ) => {
+    if (isDeleted) {
+      // switch to no plan selection
+      setSelectedPlanId(null);
+    }
+
+    closeDisplay();
+  };
+
   return (
     <PageLayout>
       <DndContext onDragEnd={handleDragEnd}>
@@ -157,6 +170,13 @@ const HomePage: NextPage = () => {
               setSelectedPlanId={setSelectedPlanId}
               plans={student.plans}
             />
+            {selectedPlan && (
+              <DeletePlanModal
+                onClose={onCloseDeletePlanModal}
+                planName={selectedPlan.name}
+                planId={selectedPlan.id}
+              />
+            )}
             <AddPlanButton
               onOpen={onOpenAddPlanModal}
               onClose={onCloseAddPlanModal}
