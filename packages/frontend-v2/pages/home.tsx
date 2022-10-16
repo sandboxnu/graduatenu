@@ -22,16 +22,9 @@ import {
 import { API } from "@graduate/api-client";
 import { PlanModel } from "@graduate/common";
 import { useRouter } from "next/router";
-import {
-  Button,
-  Flex,
-  Grid,
-  GridItem,
-  IconButton,
-  useDisclosure,
-} from "@chakra-ui/react";
+import { Button, Flex, Grid, GridItem, useDisclosure } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { AddIcon, DeleteIcon } from "@chakra-ui/icons";
+import { AddIcon } from "@chakra-ui/icons";
 
 const HomePage: NextPage = () => {
   const { error, student, mutateStudent } = useStudentWithPlans();
@@ -40,11 +33,6 @@ const HomePage: NextPage = () => {
     onOpen: onOpenAddPlanModal,
     onClose: closeAddPlanModalDisplay,
     isOpen: isOpenAddPlanModal,
-  } = useDisclosure();
-  const {
-    onOpen: onOpenDeletePlanModal,
-    onClose: closeDeletePlanModal,
-    isOpen: isOpenDeletePlanModal,
   } = useDisclosure();
 
   /*
@@ -160,13 +148,16 @@ const HomePage: NextPage = () => {
     closeAddPlanModalDisplay();
   };
 
-  const onCloseDeletePlanModal = (isDeleted: boolean) => {
+  const onCloseDeletePlanModal = (
+    isDeleted: boolean,
+    closeDisplay: () => void
+  ) => {
     if (isDeleted) {
       // switch to no plan selection
       setSelectedPlanId(null);
     }
 
-    closeDeletePlanModal();
+    closeDisplay();
   };
 
   return (
@@ -180,10 +171,8 @@ const HomePage: NextPage = () => {
               plans={student.plans}
             />
             {selectedPlan && (
-              <DeletePlanButton
-                onOpen={onOpenDeletePlanModal}
+              <DeletePlanModal
                 onClose={onCloseDeletePlanModal}
-                isOpen={isOpenDeletePlanModal}
                 planName={selectedPlan.name}
                 planId={selectedPlan.id}
               />
@@ -203,43 +192,6 @@ const HomePage: NextPage = () => {
         </Flex>
       </DndContext>
     </PageLayout>
-  );
-};
-
-interface DeletePlanButtonProps {
-  onOpen: () => void;
-  onClose: (isDeleted: boolean) => void;
-  isOpen: boolean;
-  planName: string;
-  planId: number;
-}
-
-const DeletePlanButton: React.FC<DeletePlanButtonProps> = ({
-  onOpen,
-  onClose,
-  isOpen,
-  planName,
-  planId,
-}) => {
-  return (
-    <>
-      <IconButton
-        icon={<DeleteIcon />}
-        aria-label="Delete plan"
-        variant="outline"
-        borderColor="primary.blue.light.main"
-        colorScheme="primary.blue.light"
-        color="primary.blue.light.main"
-        ml="xs"
-        onClick={onOpen}
-      />
-      <DeletePlanModal
-        onClose={onClose}
-        isOpen={isOpen}
-        planName={planName}
-        planId={planId}
-      />
-    </>
   );
 };
 
