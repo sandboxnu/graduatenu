@@ -135,9 +135,10 @@ class SearchAPIClient {
   };
 
   fetchCourses = async (
-    subjectIdPairs: { subject: string; classId: string }[]
-  ): Promise<ScheduleCourse2<null>[]> => {
-    const courseQueryData = subjectIdPairs
+    courseQueryData: { subject: string; classId: string }[]
+  ): Promise<ScheduleCourse2<null>[] | null> => {
+    // formats the request data
+    const input = courseQueryData
       .map((course) => {
         return `{subject: "${course.subject}", classId: "${course.classId}"}`;
       })
@@ -147,7 +148,7 @@ class SearchAPIClient {
       method: "post",
       data: {
         query: `{
-          bulkClasses(input: [${courseQueryData}]) {
+          bulkClasses(input: [${input}]) {
             name
             classId
             subject
@@ -159,7 +160,13 @@ class SearchAPIClient {
       },
     });
 
-    return res.data.data.bulkClasses;
+    const coursesData = await res.data.data;
+
+    if (coursesData.bulkClasses) {
+      return coursesData.bulkClasses;
+    } else {
+      return null;
+    }
   };
 
   searchCourses = async (
