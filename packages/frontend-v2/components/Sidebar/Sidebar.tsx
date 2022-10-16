@@ -1,33 +1,17 @@
 import { Box, Text } from "@chakra-ui/react";
 import { SearchAPI } from "@graduate/api-client";
 import {
-  IAndCourse2,
-  ICourseRange2,
-  IOrCourse2,
   IRequiredCourse,
-  IXofManyCourse,
   Major2,
   Requirement2,
   ScheduleCourse2,
   Section,
 } from "@graduate/common";
 import { memo, useEffect, useState } from "react";
-import { DraggableScheduleCourse } from "../ScheduleCourse";
+import SidebarSection from "./SidebarSection";
 
 interface SidebarProps {
   major: Major2;
-}
-
-interface SidebarSectionProps {
-  section: Section;
-  courseData: { [id: string]: ScheduleCourse2<null> };
-  dndIdPrefix: string;
-}
-
-interface SidebarRequirementProps {
-  requirement: Requirement2;
-  courseData: { [id: string]: ScheduleCourse2<null> };
-  dndIdPrefix: string;
 }
 
 // This was moved out of the Sidebar component as it doesn't change
@@ -129,164 +113,3 @@ const Sidebar: React.FC<SidebarProps> = memo(({ major }) => {
 Sidebar.displayName = "Sidebar";
 
 export { Sidebar };
-
-const SidebarSection: React.FC<SidebarSectionProps> = ({
-  section,
-  courseData,
-  dndIdPrefix,
-}) => {
-  const [opened, setOpened] = useState(false);
-  return (
-    <Box
-      backgroundColor="neutral.main"
-      borderTop="1px solid white"
-      cursor="pointer"
-      userSelect="none"
-    >
-      <Text
-        onClick={() => {
-          setOpened(!opened);
-        }}
-        color="dark.main"
-        fontWeight="bold"
-        py="md"
-        px="sm"
-      >
-        {section.title}
-      </Text>
-      <Box
-        style={{ display: opened ? "" : "none" }}
-        backgroundColor="neutral.900"
-        padding="10px 20px 15px 10px"
-        cursor="default"
-      >
-        {section.requirements.map((requirement, index) => (
-          <SectionRequirement
-            requirement={requirement}
-            courseData={courseData}
-            dndIdPrefix={dndIdPrefix + "-" + index}
-            key={index}
-          />
-        ))}
-      </Box>
-    </Box>
-  );
-};
-
-const SectionRequirement: React.FC<SidebarRequirementProps> = ({
-  requirement,
-  courseData,
-  dndIdPrefix,
-}) => {
-  const renderRequirement = () => {
-    switch (requirement.type) {
-      case "XOM":
-        return renderXOM(requirement);
-      case "AND":
-        return renderAND(requirement);
-      case "OR":
-        return renderOR(requirement);
-      case "RANGE":
-        return renderRange(requirement);
-      case "COURSE":
-        return renderCourse(requirement);
-      case "SECTION":
-        return renderSection(requirement);
-      default:
-        return <p>Unsupported type</p>;
-    }
-  };
-
-  const renderXOM = (requirement: IXofManyCourse) => {
-    return (
-      <div>
-        <p>Complete {requirement.numCreditsMin} credits from the following</p>
-        {requirement.courses.map((course, index) => (
-          <SectionRequirement
-            requirement={course}
-            courseData={courseData}
-            dndIdPrefix={dndIdPrefix + "-" + index}
-            key={index}
-          />
-        ))}
-      </div>
-    );
-  };
-
-  const renderAND = (requirement: IAndCourse2) => {
-    return (
-      <div>
-        <p>Complete all of the following</p>
-        {requirement.courses.map((course, index) => (
-          <SectionRequirement
-            requirement={course}
-            courseData={courseData}
-            dndIdPrefix={dndIdPrefix + "-" + index}
-            key={index}
-          />
-        ))}
-      </div>
-    );
-  };
-
-  const renderOR = (requirement: IOrCourse2) => {
-    return (
-      <div>
-        <p>Complete one of the following</p>
-        {requirement.courses.map((course, index) => (
-          <SectionRequirement
-            requirement={course}
-            courseData={courseData}
-            dndIdPrefix={dndIdPrefix + "-" + index}
-            key={index}
-          />
-        ))}
-      </div>
-    );
-  };
-
-  const renderRange = (requirement: ICourseRange2) => {
-    return (
-      <p>
-        Complete any course in range {requirement.subject}
-        {requirement.idRangeStart} to {requirement.subject}
-        {requirement.idRangeEnd}
-      </p>
-    );
-  };
-
-  const renderCourse = (requirement: IRequiredCourse) => {
-    const courseKey = `${requirement.subject}${requirement.classId}`;
-    const scheduleCourse = courseData[courseKey];
-
-    if (scheduleCourse) {
-      return (
-        <DraggableScheduleCourse
-          scheduleCourse={{
-            ...scheduleCourse,
-            id: dndIdPrefix + "-" + courseKey,
-          }}
-          isFromSidebar={true}
-          isDisabled={false}
-        />
-      );
-    }
-    return <p>Course not found</p>;
-  };
-
-  const renderSection = (requirement: Section) => {
-    return (
-      <SidebarSection
-        section={requirement}
-        courseData={courseData}
-        dndIdPrefix={dndIdPrefix + "-sec"}
-      />
-    );
-  };
-
-  return (
-    <Box pl="xs" pt="xs">
-      {renderRequirement()}
-    </Box>
-  );
-};
