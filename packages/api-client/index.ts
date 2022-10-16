@@ -134,6 +134,34 @@ class SearchAPIClient {
     }
   };
 
+  fetchCourses = async (
+    subjectIdPairs: { subject: string; classId: string }[]
+  ): Promise<ScheduleCourse2<null>[]> => {
+    const courseQueryData = subjectIdPairs
+      .map((course) => {
+        return `{subject: "${course.subject}", classId: "${course.classId}"}`;
+      })
+      .join(",");
+
+    const res = await this.axios({
+      method: "post",
+      data: {
+        query: `{
+          bulkClasses(input: [${courseQueryData}]) {
+            name
+            classId
+            subject
+            latestOccurrence {
+              termId
+            }
+          }
+        }`,
+      },
+    });
+
+    return res.data.data.bulkClasses;
+  };
+
   searchCourses = async (
     searchQuery: string,
     minIndex = 0,

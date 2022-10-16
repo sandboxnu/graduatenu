@@ -52,26 +52,35 @@ const Sidebar: React.FC<SidebarProps> = memo(({ major }) => {
 
     const promises: Promise<ScheduleCourse2<null> | null>[] = [];
 
+    // for (const requirement of requirements) {
+    //   promises.push(
+    //     // new Promise((res, rej) => {
+    //     //   res({
+    //     //     name: "FAKE API CALL, REPLACE!",
+    //     //     classId: requirement.classId.toString(),
+    //     //     subject: requirement.subject,
+    //     //     numCreditsMin: 4,
+    //     //     numCreditsMax: 4,
+    //     //     id: null,
+    //     //   });
+    //     // })
+    //     SearchAPI.fetchCourse(
+    //       requirement.subject,
+    //       requirement.classId.toString()
+    //     )
+    //   );
+    // }
+
+    const coursesQueryData: { subject: string; classId: string }[] = [];
+
     for (const requirement of requirements) {
-      promises.push(
-        // new Promise((res, rej) => {
-        //   res({
-        //     name: "FAKE API CALL, REPLACE!",
-        //     classId: requirement.classId.toString(),
-        //     subject: requirement.subject,
-        //     numCreditsMin: 4,
-        //     numCreditsMax: 4,
-        //     id: null,
-        //   });
-        // })
-        SearchAPI.fetchCourse(
-          requirement.subject,
-          requirement.classId.toString()
-        )
-      );
+      const subject = requirement.subject;
+      const classId = requirement.classId.toString();
+      coursesQueryData.push({ subject, classId });
     }
 
-    Promise.all(promises).then((courses) => {
+    SearchAPI.fetchCourses(coursesQueryData).then((courses) => {
+      console.log(courses);
       const courseMap: { [id: string]: ScheduleCourse2<null> } = {};
       if (courses) {
         for (const course of courses) {
