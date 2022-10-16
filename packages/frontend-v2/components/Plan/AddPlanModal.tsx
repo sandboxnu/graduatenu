@@ -1,9 +1,6 @@
+import { AddIcon } from "@chakra-ui/icons";
 import {
   Button,
-  FormControl,
-  FormErrorMessage,
-  FormLabel,
-  Input,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -11,19 +8,22 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-  Select,
+  useDisclosure,
+  VStack,
 } from "@chakra-ui/react";
 import { API } from "@graduate/api-client";
 import { CreatePlanDtoWithoutSchedule } from "@graduate/common";
 import { useRouter } from "next/router";
+import { Dispatch, SetStateAction } from "react";
 import { useForm } from "react-hook-form";
 import { useSWRConfig } from "swr";
 import { USE_STUDENT_WITH_PLANS_SWR_KEY } from "../../hooks";
 import { createEmptySchedule, handleApiClientError } from "../../utils";
+import { BlueButton } from "../Button";
+import { PlanInput, PlanSelect } from "../Form";
 
 interface AddPlanModalProps {
-  isOpen: boolean;
-  onClose: (newPlanId?: number) => void;
+  setSelectedPlanId: Dispatch<SetStateAction<number | undefined | null>>;
 }
 
 // Mock supported majors till we have scraped and stored majors
@@ -36,11 +36,11 @@ const SUPPORTED_MAJORS = new Map<number, string[]>([
 ]);
 
 export const AddPlanModal: React.FC<AddPlanModalProps> = ({
-  isOpen,
-  onClose,
+  setSelectedPlanId,
 }) => {
   const { mutate } = useSWRConfig();
   const router = useRouter();
+  const { onOpen, onClose, isOpen } = useDisclosure();
   const {
     register,
     handleSubmit,
@@ -75,17 +75,23 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
 
     // refresh the cache and close the modal
     mutate(USE_STUDENT_WITH_PLANS_SWR_KEY);
-    resetFormAndCloseModal(createdPlanId);
+    onCloseAddPlanModal(createdPlanId);
   };
 
-  const resetFormAndCloseModal = (createdPlanId?: number) => {
+  const onCloseAddPlanModal = (newPlanId?: number) => {
     reset();
-    onClose(createdPlanId);
+    if (newPlanId) {
+      setSelectedPlanId(newPlanId);
+    }
+    onClose();
   };
 
   return (
     <>
-      <Modal isOpen={isOpen} onClose={() => resetFormAndCloseModal()} size="md">
+      <BlueButton leftIcon={<AddIcon />} onClick={onOpen} ml="xs" size="md">
+        Add Plan
+      </BlueButton>
+      <Modal isOpen={isOpen} onClose={onCloseAddPlanModal} size="md">
         <ModalOverlay />
         <ModalContent>
           <form onSubmit={handleSubmit(onSubmitHandler)}>
@@ -94,55 +100,41 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
               New Plan
             </ModalHeader>
             <ModalBody>
-              <FormControl isInvalid={errors.name != null} mb="sm">
-                <AddPlanLabel label="Title" />
-                <Input
-                  type="text"
+              <VStack spacing={"sm"}>
+                <PlanInput
+                  label={"Title"}
                   id="name"
+                  type={"text"}
                   placeholder="My Plan"
+                  error={errors.name}
                   {...register("name", {
                     required: "Title is required",
                   })}
                 />
-                <FormErrorMessage>{errors.name?.message}</FormErrorMessage>
-              </FormControl>
-              <FormControl isInvalid={errors.catalogYear != null} mb="sm">
-                <AddPlanLabel label="Catalog Year" />
-                <Select
+
+                <PlanSelect
+                  label={"Catalog Year"}
                   id="catalogYear"
-                  placeholder="Select a Catalog Year "
+                  placeholder="Select a Catalog Year"
+                  error={errors.catalogYear}
+                  array={Array.from(SUPPORTED_MAJORS.keys())}
                   {...register("catalogYear", {
                     required: "Catalog year is required",
                     valueAsNumber: true,
                   })}
-                >
-                  {Array.from(SUPPORTED_MAJORS.keys()).map((catalogYear) => (
-                    <option key={catalogYear} value={catalogYear}>
-                      {catalogYear}
-                    </option>
-                  ))}
-                </Select>
-                <FormErrorMessage>
-                  {errors.catalogYear?.message}
-                </FormErrorMessage>
-              </FormControl>
-              <FormControl isInvalid={errors.catalogYear != null}>
-                <AddPlanLabel label="Major" />
-                <Select
+                />
+
+                <PlanSelect
+                  label={"Major"}
                   id="major"
                   placeholder="Select a Major"
+                  error={errors.major}
+                  array={SUPPORTED_MAJORS.get(catalogYear) ?? []}
                   {...register("major", {
                     required: "Major is required",
                   })}
-                >
-                  {(SUPPORTED_MAJORS.get(catalogYear) ?? []).map((major) => (
-                    <option key={major} value={major}>
-                      {major}
-                    </option>
-                  ))}
-                </Select>
-                <FormErrorMessage>{errors.major?.message}</FormErrorMessage>
-              </FormControl>
+                />
+              </VStack>
             </ModalBody>
             <ModalFooter>
               <Button isLoading={isSubmitting} type="submit" ml="auto">
@@ -153,17 +145,5 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
         </ModalContent>
       </Modal>
     </>
-  );
-};
-
-interface AddPlanLabelProps {
-  label: string;
-}
-
-const AddPlanLabel: React.FC<AddPlanLabelProps> = ({ label }) => {
-  return (
-    <FormLabel color="primary.red.main" size="md" fontWeight="medium" mb="2xs">
-      {label}
-    </FormLabel>
   );
 };

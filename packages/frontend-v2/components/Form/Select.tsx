@@ -15,6 +15,7 @@ type PlanSelectProps = {
   label: string;
   array: Key[];
 };
+
 export const PlanSelect = forwardRef<
   PlanSelectProps,
   ComponentWithAs<"select", SelectProps>
