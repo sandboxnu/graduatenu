@@ -5,10 +5,11 @@ import {
   ScheduleYear2,
   SeasonEnum,
 } from "@graduate/common";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { addClassesToTerm, isCourseInPlan } from "../../utils";
 import { removeCourseFromTerm } from "../../utils/";
 import { ScheduleYear } from "./ScheduleYear";
+import { getCoReqWarnings } from "../../utils/plan/preAndCoReqCheck";
 
 interface PlanProps {
   plan: PlanModel<string>;
@@ -68,6 +69,10 @@ export const Plan: React.FC<PlanProps> = ({
     );
     mutateStudentWithUpdatedPlan(updatedPlan);
   };
+
+  useEffect(() => {
+    console.log(getCoReqWarnings(plan.schedule.years[0].fall))
+  }, [plan])
 
   return (
     <Flex flexDirection="column" rowGap="4xs">

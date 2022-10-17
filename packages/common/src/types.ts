@@ -104,6 +104,16 @@ export interface INEUPrereqOrError {
 export interface courseError {
   [key: string]: INEUPrereqError | undefined
 }
+
+export interface preReqWarnings {
+  [key: string]: {
+    fall: courseError,
+    spring: courseError,
+    summer1: courseError,
+    summer2: courseError
+  }
+}
+
 //                                       NEW MAJOR OBJECT HERE
 /**
  * A Major, containing all the requirements.
