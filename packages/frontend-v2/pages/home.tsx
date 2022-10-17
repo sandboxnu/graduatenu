@@ -2,6 +2,7 @@ import { NextPage } from "next";
 import {
   AddPlanModal,
   EditPlanModal,
+  DeletePlanModal,
   HeaderContainer,
   LoadingPage,
   Logo,
@@ -134,13 +135,6 @@ const HomePage: NextPage = () => {
     });
   };
 
-  // const onCloseAddPlanModal = (newPlanId?: number) => {
-  //   if (newPlanId) {
-  //     setSelectedPlanId(newPlanId);
-  //   }
-  //   closeAddPlanModalDisplay();
-  // };
-
   return (
     <PageLayout>
       <DndContext onDragEnd={handleDragEnd}>
@@ -154,6 +148,13 @@ const HomePage: NextPage = () => {
             <AddPlanModal setSelectedPlanId={setSelectedPlanId} />
             {selectedPlanId && (
               <EditPlanModal plan={selectedPlan} planId={selectedPlanId} />
+            )}
+            {selectedPlan && (
+              <DeletePlanModal
+                setSelectedPlanId={setSelectedPlanId}
+                planName={selectedPlan.name}
+                planId={selectedPlan.id}
+              />
             )}
           </Flex>
           {selectedPlan && (
