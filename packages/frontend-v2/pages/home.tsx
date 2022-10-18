@@ -29,9 +29,8 @@ import {
 import { API } from "@graduate/api-client";
 import { PlanModel } from "@graduate/common";
 import { useRouter } from "next/router";
-import { Box, Button, Flex, useDisclosure } from "@chakra-ui/react";
+import { Box, Button, Flex } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { AddIcon } from "@chakra-ui/icons";
 import { getMajor2Example } from "../utils/convertMajor";
 
 const DEMO_MAJOR = getMajor2Example();
