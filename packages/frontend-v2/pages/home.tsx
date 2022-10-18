@@ -1,7 +1,8 @@
 import { NextPage } from "next";
 import {
   AddPlanModal,
-  BlueButton,
+  EditPlanModal,
+  DeletePlanModal,
   HeaderContainer,
   LoadingPage,
   Logo,
@@ -38,11 +39,6 @@ const DEMO_MAJOR = getMajor2Example();
 const HomePage: NextPage = () => {
   const { error, student, mutateStudent } = useStudentWithPlans();
   const router = useRouter();
-  const {
-    onOpen: onOpenAddPlanModal,
-    onClose: closeAddPlanModalDisplay,
-    isOpen: isOpenAddPlanModal,
-  } = useDisclosure();
 
   /*
    * Keep track of the plan being displayed, initially undef and later either the plan id or null.
@@ -160,13 +156,6 @@ const HomePage: NextPage = () => {
     });
   };
 
-  const onCloseAddPlanModal = (newPlanId?: number) => {
-    if (newPlanId) {
-      setSelectedPlanId(newPlanId);
-    }
-    closeAddPlanModalDisplay();
-  };
-
   return (
     <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
       <PageLayout>
@@ -177,11 +166,17 @@ const HomePage: NextPage = () => {
               setSelectedPlanId={setSelectedPlanId}
               plans={student.plans}
             />
-            <AddPlanButton
-              onOpen={onOpenAddPlanModal}
-              onClose={onCloseAddPlanModal}
-              isOpen={isOpenAddPlanModal}
-            />
+            <AddPlanModal setSelectedPlanId={setSelectedPlanId} />
+            {selectedPlanId && (
+              <EditPlanModal plan={selectedPlan} planId={selectedPlanId} />
+            )}
+            {selectedPlan && (
+              <DeletePlanModal
+                setSelectedPlanId={setSelectedPlanId}
+                planName={selectedPlan.name}
+                planId={selectedPlan.id}
+              />
+            )}
           </Flex>
           {selectedPlan && (
             <Plan
@@ -197,27 +192,6 @@ const HomePage: NextPage = () => {
         ) : null}
       </DragOverlay>
     </DndContext>
-  );
-};
-
-interface AddPlanButtonProps {
-  onOpen: () => void;
-  onClose: (newPlanId?: number) => void;
-  isOpen: boolean;
-}
-
-const AddPlanButton: React.FC<AddPlanButtonProps> = ({
-  onOpen,
-  onClose,
-  isOpen,
-}) => {
-  return (
-    <>
-      <BlueButton leftIcon={<AddIcon />} onClick={onOpen} ml="xs" size="md">
-        Add Plan
-      </BlueButton>
-      <AddPlanModal onClose={onClose} isOpen={isOpen} />
-    </>
   );
 };
 
