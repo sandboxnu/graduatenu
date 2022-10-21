@@ -9,7 +9,7 @@ export const getCoReqWarnings = (term: ScheduleTerm2<unknown>) => {
 
   for (const course of term.classes) {
     // Course has coreqs
-    if (course.coreqs)
+    if (course.coreqs && course.coreqs.values.length !== 0)
       coReqErrors[course.subject + course.classId] = getReqErrors(course.coreqs, seen);
   }
   return coReqErrors;
@@ -19,6 +19,7 @@ export const getPreReqWarnings = (schedule: Schedule2<unknown>) => {
   const preReqErrors: preReqWarnings = {}
   const seen: Set<string> = new Set();
   for (const year of schedule.years) {
+    preReqErrors[year.year] = { fall: {}, spring: {}, summer1: {}, summer2: {} };
     preReqErrors[year.year].fall = getPreReqWarningSem(year.fall, seen);
     preReqErrors[year.year].spring = getPreReqWarningSem(year.spring, seen);
     preReqErrors[year.year].summer1 = getPreReqWarningSem(year.summer1, seen);
@@ -31,38 +32,42 @@ export const getPreReqWarningSem = (term: ScheduleTerm2<unknown>, seen: Set<stri
   const preReqs: courseError = {}
   for (const course of term.classes) {
     // Course has prereqs
-    if (course.prereqs)
+    if (course.prereqs && course.prereqs.values.length !== 0) {
       preReqs[course.subject + course.classId] = getReqErrors(course.prereqs, seen);
+    }
   }
-
   for (const course of term.classes) {
     seen.add(course.subject + course.classId)
   }
+
   return preReqs;
 }
 
-const getReqErrors = (coreq: INEUPrereq, seen: Set<string>): INEUPrereqError | undefined => {
+const getReqErrors = (reqs: INEUPrereq, seen: Set<string>): INEUPrereqError | undefined => {
   // Single course
-  if (isSingleCourse(coreq)) {
-    const singleCoReq = coreq as INEUPrereqCourse;
+  if (isSingleCourse(reqs)) {
+    const singleCoReq = reqs as INEUPrereqCourse;
     return seen.has(singleCoReq.subject + singleCoReq.classId) ? undefined : {
       type: "course",
       subject: singleCoReq.subject,
       classId: singleCoReq.classId
     }
-  } else if (isAndCourse(coreq)) {
-    const andCoReq = coreq as INEUAndPrereq;
+  } else if (isAndCourse(reqs)) {
+    const andCoReq = reqs as INEUAndPrereq;
+    const required = andCoReq.values.map(req => getReqErrors(req, seen)).filter(isError);
+    if (required.length === 0)
+      return undefined
     return {
       type: "and",
-      missing: andCoReq.values.map(req => getReqErrors(req, seen)).filter(isError)
+      missing: required
     }
-  } else if (isOrCourse(coreq)) {
-    const orCoReq = coreq as INEUOrPrereq;
+  } else if (isOrCourse(reqs)) {
+    const orCoReq = reqs as INEUOrPrereq;
     const missing = orCoReq.values.map(req => getReqErrors(req, seen));
     // There is a course that fulfils this or case
     if (missing.includes(undefined)) {
       return undefined
-    // Else this or case is not satisfied
+      // Else this or case is not satisfied
     } else {
       return {
         type: "or",
@@ -73,7 +78,7 @@ const getReqErrors = (coreq: INEUPrereq, seen: Set<string>): INEUPrereqError | u
 }
 
 const isSingleCourse = (course: INEUPrereq): course is INEUPrereqCourse => {
-  return (course as INEUPrereqCourse).classId !== undefined
+  return (course as INEUPrereqCourse).subject !== undefined
 }
 
 
@@ -82,7 +87,7 @@ const isAndCourse = (course: INEUPrereq): course is INEUAndPrereq => {
 }
 
 const isOrCourse = (course: INEUPrereq): course is INEUOrPrereq => {
-  return (course as INEUOrPrereq).type !== 'or'
+  return (course as INEUOrPrereq).type === 'or'
 }
 
 const isError = (error: INEUPrereqError | undefined): error is INEUPrereqError => {

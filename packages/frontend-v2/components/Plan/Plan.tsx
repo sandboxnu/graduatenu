@@ -9,7 +9,7 @@ import { useState, useEffect } from "react";
 import { addClassesToTerm, isCourseInPlan } from "../../utils";
 import { removeCourseFromTerm } from "../../utils/";
 import { ScheduleYear } from "./ScheduleYear";
-import { getCoReqWarnings } from "../../utils/plan/preAndCoReqCheck";
+import { getPreReqWarnings } from "../../utils/plan/preAndCoReqCheck";
 
 interface PlanProps {
   plan: PlanModel<string>;
@@ -71,8 +71,8 @@ export const Plan: React.FC<PlanProps> = ({
   };
 
   useEffect(() => {
-    console.log(getCoReqWarnings(plan.schedule.years[0].fall))
-  }, [plan])
+    console.log(getPreReqWarnings(plan.schedule));
+  }, [plan]);
 
   return (
     <Flex flexDirection="column" rowGap="4xs">
