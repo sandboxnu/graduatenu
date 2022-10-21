@@ -1,4 +1,4 @@
-import { AddIcon } from "@chakra-ui/icons";
+import { EditIcon } from "@chakra-ui/icons";
 import {
   Button,
   Modal,
@@ -12,19 +12,27 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { API } from "@graduate/api-client";
-import { CreatePlanDtoWithoutSchedule } from "@graduate/common";
+import { PlanModel, UpdatePlanDto } from "@graduate/common";
 import { useRouter } from "next/router";
-import { Dispatch, SetStateAction } from "react";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useSWRConfig } from "swr";
 import { USE_STUDENT_WITH_PLANS_SWR_KEY } from "../../hooks";
-import { createEmptySchedule, handleApiClientError } from "../../utils";
+import { handleApiClientError } from "../../utils";
+import { toast } from "../../utils";
 import { BlueButton } from "../Button";
 import { PlanInput, PlanSelect } from "../Form";
 
-interface AddPlanModalProps {
-  setSelectedPlanId: Dispatch<SetStateAction<number | undefined | null>>;
-}
+type EditPlanModalProps = {
+  plan: PlanModel<string> | undefined;
+  planId: number;
+};
+
+type EditPlanInput = {
+  name: string;
+  major: string;
+  catalogYear: number;
+};
 
 // Mock supported majors till we have scraped and stored majors
 const SUPPORTED_MAJORS = new Map<number, string[]>([
@@ -35,8 +43,9 @@ const SUPPORTED_MAJORS = new Map<number, string[]>([
   [2020, ["Computer Science, BSCS"]],
 ]);
 
-export const AddPlanModal: React.FC<AddPlanModalProps> = ({
-  setSelectedPlanId,
+export const EditPlanModal: React.FC<EditPlanModalProps> = ({
+  plan,
+  planId,
 }) => {
   const { mutate } = useSWRConfig();
   const router = useRouter();
@@ -44,69 +53,62 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { isDirty, errors, isSubmitting },
     watch,
     reset,
-  } = useForm<CreatePlanDtoWithoutSchedule>({
+  } = useForm<EditPlanInput>({
     mode: "onTouched",
     shouldFocusError: true,
   });
 
+  useEffect(() => {
+    // Change the default field to the corresponding plan when a plan is selected/edited
+    reset({
+      name: plan?.name,
+      catalogYear: plan?.catalogYear,
+      major: plan?.major,
+    });
+  }, [plan, reset]);
+
   const catalogYear = watch("catalogYear");
 
-  const onSubmitHandler = async (payload: CreatePlanDtoWithoutSchedule) => {
-    const schedule = createEmptySchedule();
-    const newPlan = {
-      ...payload,
-      schedule,
-    };
+  const onSubmitHandler = async (payload: UpdatePlanDto) => {
+    // If no field has been changed, don't send an update request
+    if (!isDirty) return;
 
-    // create the new plan
-    let createdPlanId: number;
     try {
-      const createdPlan = await API.plans.create(newPlan);
-      createdPlanId = createdPlan.id;
+      await API.plans.update(planId, payload);
     } catch (error) {
       handleApiClientError(error as Error, router);
-
-      // don't proceed further if POST failed
       return;
     }
 
-    // refresh the cache and close the modal
     mutate(USE_STUDENT_WITH_PLANS_SWR_KEY);
-    onCloseAddPlanModal(createdPlanId);
-  };
-
-  const onCloseAddPlanModal = (newPlanId?: number) => {
-    reset();
-    if (newPlanId) {
-      setSelectedPlanId(newPlanId);
-    }
-    onClose();
+    toast.success("Update Plan Success");
   };
 
   return (
     <>
-      <BlueButton leftIcon={<AddIcon />} onClick={onOpen} ml="xs" size="md">
-        Add Plan
+      <BlueButton leftIcon={<EditIcon />} onClick={onOpen} ml="xs" size="md">
+        Edit Plan
       </BlueButton>
-      <Modal isOpen={isOpen} onClose={onCloseAddPlanModal} size="md">
+
+      <Modal isOpen={isOpen} onClose={onClose} size="md">
         <ModalOverlay />
         <ModalContent>
           <form onSubmit={handleSubmit(onSubmitHandler)}>
             <ModalCloseButton />
             <ModalHeader color="primary.red.main" fontSize="2xl">
-              New Plan
+              Edit Plan
             </ModalHeader>
             <ModalBody>
               <VStack spacing={"sm"}>
                 <PlanInput
-                  label={"Title"}
-                  id="name"
-                  type={"text"}
-                  placeholder="My Plan"
                   error={errors.name}
+                  label={"Title"}
+                  type={"text"}
+                  id="name"
+                  placeholder="My Plan"
                   {...register("name", {
                     required: "Title is required",
                   })}
@@ -136,9 +138,10 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                 />
               </VStack>
             </ModalBody>
+
             <ModalFooter>
               <Button isLoading={isSubmitting} type="submit" ml="auto">
-                Add Plan
+                Edit Plan
               </Button>
             </ModalFooter>
           </form>
