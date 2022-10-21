@@ -7,10 +7,17 @@ import {
   LoadingPage,
   Logo,
   Plan,
+  Sidebar,
   PlanDropdown,
+  ScheduleCourse,
 } from "../components";
 import { fetchStudentAndPrepareForDnd, useStudentWithPlans } from "../hooks";
-import { DndContext, DragEndEvent } from "@dnd-kit/core";
+import {
+  DndContext,
+  DragEndEvent,
+  DragOverlay,
+  DragStartEvent,
+} from "@dnd-kit/core";
 import {
   cleanDndIdsFromPlan,
   logger,
@@ -22,8 +29,11 @@ import {
 import { API } from "@graduate/api-client";
 import { PlanModel } from "@graduate/common";
 import { useRouter } from "next/router";
-import { Button, Flex, Grid, GridItem } from "@chakra-ui/react";
+import { Box, Button, Flex } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
+import { getMajor2Example } from "../utils/convertMajor";
+
+const DEMO_MAJOR = getMajor2Example();
 
 const HomePage: NextPage = () => {
   const { error, student, mutateStudent } = useStudentWithPlans();
@@ -37,6 +47,8 @@ const HomePage: NextPage = () => {
   const [selectedPlanId, setSelectedPlanId] = useState<
     number | undefined | null
   >();
+
+  const [activeCourse, setActiveCourse] = useState(null);
 
   useEffect(() => {
     // once the student is fetched, set the selected plan id to the primary plan id
@@ -60,13 +72,14 @@ const HomePage: NextPage = () => {
     logger.error("HomePage", error);
     handleApiClientError(error, router);
 
-    // render just the boiler plate page since we couldn't fetch the student w plans
-    return <PageLayout />;
+    // If we couldn't fetch the student's plan, show a blank page for now.
+    // We might want to show some more actionable error in the future.
+    return <div></div>;
   }
 
   // handle loading state
   if (!student) {
-    return <LoadingPage pageLayout={PageLayout} />;
+    return <LoadingPage />;
   }
 
   const selectedPlan = student.plans.find((plan) => selectedPlanId === plan.id);
@@ -84,6 +97,12 @@ const HomePage: NextPage = () => {
    *    persisted student from our backend
    * 6. If anything goes wrong in the POST, rollback the optimistic update
    */
+
+  const handleDragStart = (event: DragStartEvent) => {
+    const { active } = event;
+    setActiveCourse(active.data.current?.course);
+  };
+
   const handleDragEnd = (event: DragEndEvent): void => {
     // no plan is being displayed right now, so abort
     if (!selectedPlan) {
@@ -102,6 +121,7 @@ const HomePage: NextPage = () => {
     try {
       updatedPlan = updatePlanOnDragEnd(selectedPlan, active, over);
     } catch (err) {
+      console.error(err);
       // update failed, either due to some logical issue or explicitely thrown error
       logger.debug("updatePlanOnDragEnd", err);
       return;
@@ -136,8 +156,8 @@ const HomePage: NextPage = () => {
   };
 
   return (
-    <PageLayout>
-      <DndContext onDragEnd={handleDragEnd}>
+    <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
+      <PageLayout>
         <Flex flexDirection="column">
           <Flex alignItems="center" mb="sm">
             <PlanDropdown
@@ -164,8 +184,13 @@ const HomePage: NextPage = () => {
             />
           )}
         </Flex>
-      </DndContext>
-    </PageLayout>
+      </PageLayout>
+      <DragOverlay>
+        {activeCourse ? (
+          <ScheduleCourse isDisabled={false} scheduleCourse={activeCourse} />
+        ) : null}
+      </DragOverlay>
+    </DndContext>
   );
 };
 
@@ -175,14 +200,21 @@ const HomePage: NextPage = () => {
  */
 const PageLayout: React.FC = ({ children }) => {
   return (
-    <Flex flexDirection="column" height="100vh">
+    <Flex flexDirection="column" height="100vh" overflow="hidden">
       <Header />
-      <Grid flex={1} templateColumns="repeat(4, 1fr)" gap="md">
-        <GridItem colSpan={1} bg="primary.blue.light.main" />
-        <GridItem colSpan={3} p="md">
+      <Flex height="100%" overflow="hidden">
+        <Box
+          bg="primary.blue.light.main"
+          overflowY="auto"
+          width="360px"
+          flexShrink={0}
+        >
+          <Sidebar major={DEMO_MAJOR} />
+        </Box>
+        <Box p="md" overflow="auto" flexGrow={1}>
           {children}
-        </GridItem>
-      </Grid>
+        </Box>
+      </Flex>
     </Flex>
   );
 };

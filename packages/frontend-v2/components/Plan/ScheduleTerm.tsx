@@ -44,7 +44,7 @@ export const ScheduleTerm: React.FC<ScheduleTermProps> = ({
     <GridItem
       ref={setNodeRef}
       borderRight={!isLastColumn ? "1px" : undefined}
-      backgroundColor={isOver ? "neutral.300" : undefined}
+      backgroundColor={isOver ? "neutral.300" : "#D2D8E2"}
       px="sm"
       pt="2xs"
       pb="xl"
