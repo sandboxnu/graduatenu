@@ -1,6 +1,7 @@
 import { Flex } from "@chakra-ui/react";
+import { PropsWithChildren } from "react";
 
-export const InputGroup: React.FC = ({ children }) => (
+export const InputGroup: React.FC<PropsWithChildren> = ({ children }) => (
   <Flex
     direction="column"
     justifyContent="space-evenly"

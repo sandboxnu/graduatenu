@@ -30,7 +30,7 @@ import { API } from "@graduate/api-client";
 import { PlanModel } from "@graduate/common";
 import { useRouter } from "next/router";
 import { Box, Button, Flex } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import React, { PropsWithChildren, useEffect, useState } from "react";
 import { getMajor2Example } from "../utils/convertMajor";
 
 const DEMO_MAJOR = getMajor2Example();
@@ -198,7 +198,7 @@ const HomePage: NextPage = () => {
  * This will have everything that can be rendered without the student and
  * plans(i.e: header, sidebar, etc)
  */
-const PageLayout: React.FC = ({ children }) => {
+const PageLayout: React.FC<PropsWithChildren> = ({ children }) => {
   return (
     <Flex flexDirection="column" height="100vh" overflow="hidden">
       <Header />

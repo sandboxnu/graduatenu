@@ -6,7 +6,5 @@ export const redirectToOnboardingOrHome = (
   router: NextRouter
 ) => {
   // redirect to home
-  if (user.isOnboarded) router.push("/home");
-  // redirect to onboarding
-  else router.push("/onboarding");
+  router.push("/home");
 };

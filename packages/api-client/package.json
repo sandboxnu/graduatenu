@@ -8,6 +8,7 @@
   "scripts": {
     "test": "jest",
     "dev": "yarn build:dev -w",
+    "prod": "yarn build:dev",
     "build": "yarn build:dev && yarn build:browser && yarn build:module",
     "build:dev": "yarn g:babel --root-mode upward -d dist -x '.ts' index.ts",
     "build:browser": "yarn g:cross-env BABEL_ENV=browser yarn g:babel --root-mode upward -d lib -x '.ts' index.ts",
