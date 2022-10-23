@@ -66,7 +66,7 @@ const SignUpForm = () => {
 
   const onSubmitHandler = async (payload: SignUpStudentDto) => {
     try {
-      const user = await API.auth.register(payload);
+      await API.auth.register(payload);
       router.push("/home");
     } catch (err) {
       const error = err as AxiosError;
