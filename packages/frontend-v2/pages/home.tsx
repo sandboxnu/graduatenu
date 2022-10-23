@@ -101,24 +101,23 @@ const HomePage: NextPage = () => {
 
   const selectedPlan = student.plans.find((plan) => selectedPlanId === plan.id);
 
-  useEffect(()=> {
-
+  useEffect(() => {
     if (selectedPlan) {
       for (const elem of selectedPlan.schedule.years) {
-          console.log(getCoReqWarnings(elem.fall))
-          console.log(getCoReqWarnings(elem.spring))
-          console.log(getCoReqWarnings(elem.summer2))
-          console.log(getCoReqWarnings(elem.summer1))
+        console.log(getCoReqWarnings(elem.fall));
+        console.log(getCoReqWarnings(elem.spring));
+        console.log(getCoReqWarnings(elem.summer2));
+        console.log(getCoReqWarnings(elem.summer1));
       }
-      
-      for (const elem of selectedPlan.schedule.years) {
-          console.log(getCoReqWarnings(elem.fall))
-          console.log(getCoReqWarnings(elem.spring))
-          console.log(getCoReqWarnings(elem.summer2))
-          console.log(getCoReqWarnings(elem.summer1))
-      }
-  })
 
+      for (const elem of selectedPlan.schedule.years) {
+        console.log(getCoReqWarnings(elem.fall));
+        console.log(getCoReqWarnings(elem.spring));
+        console.log(getCoReqWarnings(elem.summer2));
+        console.log(getCoReqWarnings(elem.summer1));
+      }
+    }
+  });
 
   /**
    * When a course is dragged and dropped onto a semester
