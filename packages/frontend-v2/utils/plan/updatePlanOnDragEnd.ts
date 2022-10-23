@@ -24,39 +24,47 @@ export const updatePlanOnDragEnd = (
     // grab all the terms across the years, since it's easier to work with a flat list of terms
     const scheduleTerms = flattenScheduleToTerms<string>(draftPlan.schedule);
 
-    // remove the class from the old term and add it to the new term
-    const oldTerm = scheduleTerms.find((term) =>
-      term.classes.some((course) => course.id === draggedCourse.id)
-    );
-
     const newTerm = scheduleTerms.find(
       (term) => term.id === draggedOverTerm.id
     );
 
-    if (!newTerm || !oldTerm) {
-      throw new Error(
-        "Term the course is dragged over or dragged from isn't found"
-      );
+    if (!newTerm) {
+      throw new Error("Term the course is dragged over isn't found");
     }
 
-    if (oldTerm === newTerm) {
-      throw new Error("Course is being dragged over its own term");
-    }
-
-    const course = oldTerm.classes.find(
-      (course) => course.id === draggedCourse.id
-    );
-
-    if (!course) {
+    if (!draggedCourse.data.current?.course) {
       throw new Error(
         "The course being dragged is not found in the term it is being dragged from"
       );
     }
 
-    oldTerm.classes = oldTerm.classes.filter(
-      (course) => course.id !== draggedCourse.id
-    );
-    newTerm.classes.push(course);
+    if (!draggedCourse.data.current.isFromSidebar) {
+      // Course is from a term, so we need to move it, we don't need to move
+      // courses that are from the sidebar.
+
+      // remove the class from the old term and add it to the new term
+      const oldTerm = scheduleTerms.find((term) =>
+        term.classes.some((course) => course.id === draggedCourse.id)
+      );
+
+      if (!oldTerm) {
+        throw new Error("Term the course is dragged from isn't found");
+      }
+
+      if (oldTerm === newTerm) {
+        throw new Error("Course is being dragged over its own term");
+      }
+
+      oldTerm.classes = oldTerm.classes.filter(
+        (course) => course.id !== draggedCourse.id
+      );
+    }
+
+    // We set a temporary id to the new class because the plan will provide a new id on rerendering, so it doesn't need to be unique.
+    newTerm.classes.push({
+      ...draggedCourse.data.current.course,
+      id: "moving-course-temp",
+    });
   });
 
   return updatedPlan;

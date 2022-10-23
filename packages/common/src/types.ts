@@ -197,14 +197,12 @@ export interface IOrCourse2 {
 /**
  * Represents a requirement that specifies a range of courses.
  *
- * @param type            The type of requirement.
- * @param creditsRequired The number of credits taken from the range for this
- *   requirement to be fulfilled.
- * @param subject         The subject area of the range of courses.
- * @param idRangeStart    The course ID for the starting range of course numbers.
- * @param idRangeEnd      The course ID for the ending range of course numbers.
- * @param exceptions      The requirements within the mentioned range that do
- *   not count towards fulfulling this requirement.
+ * @param type         The type of requirement.
+ * @param subject      The subject area of the range of courses.
+ * @param idRangeStart The course ID for the starting range of course numbers.
+ * @param idRangeEnd   The course ID for the ending range of course numbers.
+ * @param exceptions   The requirements within the mentioned range that do not
+ *   count towards fulfulling this requirement.
  */
 export interface ICourseRange2 {
   type: "RANGE";

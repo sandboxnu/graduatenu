@@ -5,3 +5,4 @@ export * from "./ScheduleCourse";
 export * from "./Spinner";
 export * from "./Form";
 export * from "./Button"
+export * from "./Sidebar";
