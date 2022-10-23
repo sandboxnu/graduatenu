@@ -39,7 +39,6 @@ const Sidebar: React.FC<SidebarProps> = memo(({ major }) => {
   const [courseData, setCourseData] = useState({});
 
   useEffect(() => {
-    // console.info("QUERYING SEARCH ONCE", Date.now())
     const requirements = major.requirementSections.reduce(
       (courses: IRequiredCourse[], section: Section) => {
         const requiredCourses: IRequiredCourse[] = [];
@@ -48,30 +47,16 @@ const Sidebar: React.FC<SidebarProps> = memo(({ major }) => {
       },
       []
     );
-    // console.info("Making", requirements.length, "requests")
 
-    const promises: Promise<ScheduleCourse2<null> | null>[] = [];
+    const coursesQueryData: { subject: string; classId: string }[] = [];
 
     for (const requirement of requirements) {
-      promises.push(
-        // new Promise((res, rej) => {
-        //   res({
-        //     name: "FAKE API CALL, REPLACE!",
-        //     classId: requirement.classId.toString(),
-        //     subject: requirement.subject,
-        //     numCreditsMin: 4,
-        //     numCreditsMax: 4,
-        //     id: null,
-        //   });
-        // })
-        SearchAPI.fetchCourse(
-          requirement.subject,
-          requirement.classId.toString()
-        )
-      );
+      const subject = requirement.subject;
+      const classId = requirement.classId.toString();
+      coursesQueryData.push({ subject, classId });
     }
 
-    Promise.all(promises).then((courses) => {
+    SearchAPI.fetchCourses(coursesQueryData).then((courses) => {
       const courseMap: { [id: string]: ScheduleCourse2<null> } = {};
       if (courses) {
         for (const course of courses) {
