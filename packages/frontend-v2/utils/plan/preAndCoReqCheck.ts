@@ -1,16 +1,17 @@
 import { courseError, INEUAndPrereq, INEUOrPrereq, INEUPrereq, INEUPrereqCourse, INEUPrereqError, preReqWarnings, Schedule2, ScheduleTerm2 } from "@graduate/common";
+import { courseToString } from "../../../common/src/course-utils";
 
 export const getCoReqWarnings = (term: ScheduleTerm2<unknown>) => {
   const seen: Set<string> = new Set();
   const coReqErrors: courseError = {}
   for (const course of term.classes) {
-    seen.add(course.subject + course.classId);
+    seen.add(courseToString(course));
   }
 
   for (const course of term.classes) {
     // Course has coreqs
     if (course.coreqs && course.coreqs.values.length !== 0)
-      coReqErrors[course.subject + course.classId] = getReqErrors(course.coreqs, seen);
+      coReqErrors[courseToString(course)] = getReqErrors(course.coreqs, seen);
   }
   return coReqErrors;
 }
@@ -33,28 +34,27 @@ export const getPreReqWarningSem = (term: ScheduleTerm2<unknown>, seen: Set<stri
   for (const course of term.classes) {
     // Course has prereqs
     if (course.prereqs && course.prereqs.values.length !== 0) {
-      preReqs[course.subject + course.classId] = getReqErrors(course.prereqs, seen);
+      preReqs[courseToString(course)] = getReqErrors(course.prereqs, seen);
     }
   }
   for (const course of term.classes) {
-    seen.add(course.subject + course.classId)
+    seen.add(courseToString(course))
   }
 
   return preReqs;
 }
 
 const getReqErrors = (reqs: INEUPrereq, seen: Set<string>): INEUPrereqError | undefined => {
-  // Single course
   if (isSingleCourse(reqs)) {
-    const singleCoReq = reqs as INEUPrereqCourse;
-    return seen.has(singleCoReq.subject + singleCoReq.classId) ? undefined : {
+    const singleReq = reqs as INEUPrereqCourse;
+    return seen.has(courseToString(singleReq)) ? undefined : {
       type: "course",
-      subject: singleCoReq.subject,
-      classId: singleCoReq.classId
+      subject: singleReq.subject,
+      classId: singleReq.classId
     }
   } else if (isAndCourse(reqs)) {
-    const andCoReq = reqs as INEUAndPrereq;
-    const required = andCoReq.values.map(req => getReqErrors(req, seen)).filter(isError);
+    const andReq = reqs as INEUAndPrereq;
+    const required = andReq.values.map(req => getReqErrors(req, seen)).filter(isError);
     if (required.length === 0)
       return undefined
     return {
@@ -62,8 +62,8 @@ const getReqErrors = (reqs: INEUPrereq, seen: Set<string>): INEUPrereqError | un
       missing: required
     }
   } else if (isOrCourse(reqs)) {
-    const orCoReq = reqs as INEUOrPrereq;
-    const missing = orCoReq.values.map(req => getReqErrors(req, seen));
+    const orReq = reqs as INEUOrPrereq;
+    const missing = orReq.values.map(req => getReqErrors(req, seen));
     // There is a course that fulfils this or case
     if (missing.includes(undefined)) {
       return undefined
