@@ -1,5 +1,6 @@
-import { courseError, INEUAndPrereq, INEUOrPrereq, INEUPrereq, INEUPrereqCourse, INEUPrereqError, preReqWarnings, Schedule2, ScheduleTerm2 } from "@graduate/common";
-import { courseToString } from "../../../common/src/course-utils";
+import {
+  courseError, INEUAndPrereq, INEUOrPrereq, INEUPrereq, INEUPrereqCourse, INEUPrereqError, preReqWarnings, Schedule2, ScheduleTerm2, courseToString
+} from "@graduate/common";
 
 export const getCoReqWarnings = (term: ScheduleTerm2<unknown>) => {
   const seen: Set<string> = new Set();
