@@ -5,7 +5,18 @@ import { AxiosError } from "axios";
 import { NextPage } from "next";
 import { NextRouter, useRouter } from "next/router";
 import { FieldErrors, useForm, UseFormRegister } from "react-hook-form";
-import { HeaderContainer, Logo, LoadingPage, FormFormat, HeaderAndInput, StringInput, FormButtons, SubmitButton, AlterSubmitButton, InputGroup } from "../components";
+import {
+  HeaderContainer,
+  Logo,
+  LoadingPage,
+  FormFormat,
+  HeaderAndInput,
+  StringInput,
+  FormButtons,
+  SubmitButton,
+  AlterSubmitButton,
+  InputGroup,
+} from "../components";
 import { useRedirectIfLoggedIn } from "../hooks";
 import { redirectToOnboardingOrHome, toast } from "../utils";
 
