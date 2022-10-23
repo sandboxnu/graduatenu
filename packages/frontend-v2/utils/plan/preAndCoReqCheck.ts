@@ -1,19 +1,10 @@
 import {
-  courseError,
-  INEUAndPrereq,
-  INEUOrPrereq,
-  INEUPrereq,
-  INEUPrereqCourse,
-  INEUPrereqError,
-  preReqWarnings,
-  Schedule2,
-  ScheduleTerm2,
-  courseToString,
+  CourseError, INEUAndPrereq, INEUOrPrereq, INEUPrereq, INEUPrereqCourse, INEUPrereqError, PreReqWarnings, Schedule2, ScheduleTerm2, courseToString
 } from "@graduate/common";
 
 export const getCoReqWarnings = (term: ScheduleTerm2<unknown>) => {
   const seen: Set<string> = new Set();
-  const coReqErrors: courseError = {};
+  const coReqErrors: CourseError = {}
   for (const course of term.classes) {
     seen.add(courseToString(course));
   }
@@ -26,8 +17,8 @@ export const getCoReqWarnings = (term: ScheduleTerm2<unknown>) => {
   return coReqErrors;
 };
 
-export const getPreReqWarnings = (schedule: Schedule2<unknown>) => {
-  const preReqErrors: preReqWarnings = {};
+export const getPreReqWarnings = (schedule: Schedule2<unknown>): PreReqWarnings => {
+  const preReqErrors: PreReqWarnings = {}
   const seen: Set<string> = new Set();
   for (const year of schedule.years) {
     preReqErrors[year.year] = {
@@ -44,11 +35,8 @@ export const getPreReqWarnings = (schedule: Schedule2<unknown>) => {
   return preReqErrors;
 };
 
-export const getPreReqWarningSem = (
-  term: ScheduleTerm2<unknown>,
-  seen: Set<string>
-) => {
-  const preReqs: courseError = {};
+export const getPreReqWarningSem = (term: ScheduleTerm2<unknown>, seen: Set<string>): CourseError => {
+  const preReqs: CourseError = {}
   for (const course of term.classes) {
     // Course has prereqs
     if (course.prereqs && course.prereqs.values.length !== 0) {
