@@ -61,7 +61,7 @@ const LoginForm = () => {
 
   const onSubmitHandler = async (payload: LoginStudentDto) => {
     try {
-      const user = await API.auth.login(payload);
+      await API.auth.login(payload);
       router.push("/home");
     } catch (err) {
       const error = err as AxiosError;
