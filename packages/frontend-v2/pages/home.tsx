@@ -10,6 +10,7 @@ import {
   Sidebar,
   PlanDropdown,
   ScheduleCourse,
+  AddYearButton,
 } from "../components";
 import { fetchStudentAndPrepareForDnd, useStudentWithPlans } from "../hooks";
 import {
@@ -112,7 +113,6 @@ const HomePage: NextPage = () => {
    *    persisted student from our backend
    * 6. If anything goes wrong in the POST, rollback the optimistic update
    */
-
   const handleDragStart = (event: DragStartEvent) => {
     const { active } = event;
     setActiveCourse(active.data.current?.course);
@@ -199,10 +199,18 @@ const HomePage: NextPage = () => {
             )}
           </Flex>
           {selectedPlan && (
-            <Plan
-              plan={selectedPlan}
-              mutateStudentWithUpdatedPlan={mutateStudentWithUpdatedPlan}
-            />
+            <>
+              <Plan
+                plan={selectedPlan}
+                mutateStudentWithUpdatedPlan={mutateStudentWithUpdatedPlan}
+              />
+              <Flex mt="sm">
+                <AddYearButton
+                  plan={selectedPlan}
+                  mutateStudentWithUpdatedPlan={mutateStudentWithUpdatedPlan}
+                />
+              </Flex>
+            </>
           )}
         </Flex>
       </PageLayout>
