@@ -18,7 +18,7 @@ import {
   InputGroup,
 } from "../components";
 import { useRedirectIfLoggedIn } from "../hooks";
-import { redirectToOnboardingOrHome, toast } from "../utils";
+import { toast } from "../utils";
 
 interface LoginFormTopProps {
   register: UseFormRegister<LoginStudentDto>;
@@ -62,7 +62,7 @@ const LoginForm = () => {
   const onSubmitHandler = async (payload: LoginStudentDto) => {
     try {
       const user = await API.auth.login(payload);
-      redirectToOnboardingOrHome(user, router);
+      router.push("/home");
     } catch (err) {
       const error = err as AxiosError;
       if (error.response?.status === 401) toast.error("Invalid Credentials!");
