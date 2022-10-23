@@ -13,6 +13,7 @@ import {
 } from "@chakra-ui/react";
 import { API } from "@graduate/api-client";
 import { useRouter } from "next/router";
+import { Dispatch, SetStateAction } from "react";
 import { mutate } from "swr";
 import { USE_STUDENT_WITH_PLANS_SWR_KEY } from "../../hooks";
 import { handleApiClientError } from "../../utils";
@@ -21,26 +22,24 @@ import { GrayButton } from "../Button";
 interface DeletePlanModalProps {
   planName: string;
   planId: number;
-  onClose: (isDeleted: boolean, closeDisplay: () => void) => void;
+  setSelectedPlanId: Dispatch<SetStateAction<number | undefined | null>>;
 }
 export const DeletePlanModal: React.FC<DeletePlanModalProps> = ({
   planName,
   planId,
-  onClose,
+  setSelectedPlanId,
 }) => {
   const router = useRouter();
-  const { onOpen, onClose: closeDisplay, isOpen } = useDisclosure();
+  const { onOpen, onClose, isOpen } = useDisclosure();
 
-  const closeWithoutDelete = () => {
-    onClose(false, closeDisplay);
-  };
   const deletePlan = async () => {
     try {
       await API.plans.delete(planId);
 
       // refresh the cache and close the modal
       mutate(USE_STUDENT_WITH_PLANS_SWR_KEY);
-      onClose(true, closeDisplay);
+      setSelectedPlanId(null);
+      onClose();
     } catch (error) {
       handleApiClientError(error as Error, router);
     }
@@ -58,7 +57,7 @@ export const DeletePlanModal: React.FC<DeletePlanModalProps> = ({
         ml="xs"
         onClick={onOpen}
       />
-      <Modal isOpen={isOpen} onClose={closeWithoutDelete}>
+      <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Delete Plan</ModalHeader>
@@ -70,7 +69,7 @@ export const DeletePlanModal: React.FC<DeletePlanModalProps> = ({
             <Button mr={3} onClick={deletePlan}>
               Delete
             </Button>
-            <GrayButton onClick={closeWithoutDelete}>Nevermind</GrayButton>
+            <GrayButton onClick={onClose}>Nevermind</GrayButton>
           </ModalFooter>
         </ModalContent>
       </Modal>
