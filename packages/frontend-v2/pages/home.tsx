@@ -1,46 +1,34 @@
-import { NextPage } from "next";
+import { Box, Button, Flex } from "@chakra-ui/react";
 import {
-  AddPlanModal,
-  EditPlanModal,
-  DeletePlanModal,
-  HeaderContainer,
-  LoadingPage,
-  Logo,
-  Plan,
-  Sidebar,
-  PlanDropdown,
-  ScheduleCourse,
-  AddYearButton,
-} from "../components";
-import { fetchStudentAndPrepareForDnd, useStudentWithPlans } from "../hooks";
-import {
+  CollisionDetection,
   DndContext,
   DragEndEvent,
   DragOverlay,
   DragStartEvent,
   pointerWithin,
-  rectIntersection,
-  CollisionDetection,
+  rectIntersection
 } from "@dnd-kit/core";
-import {
-  cleanDndIdsFromPlan,
-  logger,
-  logout,
-  updatePlanForStudent,
-  updatePlanOnDragEnd,
-  handleApiClientError,
-} from "../utils";
 import { API } from "@graduate/api-client";
 import { PlanModel } from "@graduate/common";
+import { NextPage } from "next";
 import { useRouter } from "next/router";
-import { Box, Button, Flex } from "@chakra-ui/react";
-import React, { PropsWithChildren, useEffect, useState } from "react";
-import { getMajor2Example } from "../utils/convertMajor";
+import { PropsWithChildren, useEffect, useState } from "react";
 import {
-  getCoReqWarnings,
-  getPreReqWarningSem,
-} from "../utils/plan/preAndCoReqCheck";
+  AddPlanModal, AddYearButton, DeletePlanModal, EditPlanModal, HeaderContainer,
+  LoadingPage,
+  Logo,
+  Plan, PlanDropdown,
+  ScheduleCourse, Sidebar
+} from "../components";
 import { ReqErrorModal } from "../components/Plan/ReqErrorModal";
+import { fetchStudentAndPrepareForDnd, useStudentWithPlans } from "../hooks";
+import {
+  cleanDndIdsFromPlan, handleApiClientError, logger,
+  logout,
+  updatePlanForStudent,
+  updatePlanOnDragEnd
+} from "../utils";
+import { getMajor2Example } from "../utils/convertMajor";
 
 const DEMO_MAJOR = getMajor2Example();
 

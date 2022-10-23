@@ -104,17 +104,29 @@ export interface INEUPrereqOrError {
   missing: INEUPrereqError[];
 }
 
-export interface CourseError {
+export interface TermError {
   [key: string]: INEUPrereqError | undefined
 }
 
-export interface PreReqWarnings {
-  [key: string]: {
-    fall: CourseError,
-    spring: CourseError,
-    summer1: CourseError,
-    summer2: CourseError
-  }
+export interface ScheduleWarnings {
+  type: string
+  years: YearError[]
+}
+
+export interface YearError {
+  year: number;
+  fall: TermError,
+  spring: TermError,
+  summer1: TermError,
+  summer2: TermError
+}
+
+export type PreReqWarnings = ScheduleWarnings & {
+  type: "prereq"
+}
+
+export type CoReqWarnings = ScheduleWarnings & {
+  type: "coreq"
 }
 
 //                                       NEW MAJOR OBJECT HERE

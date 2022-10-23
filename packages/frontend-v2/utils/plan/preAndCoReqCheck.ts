@@ -1,16 +1,28 @@
 import {
-  CourseError, INEUAndPrereq, INEUOrPrereq, INEUPrereq, INEUPrereqCourse, INEUPrereqError, PreReqWarnings, Schedule2, ScheduleTerm2, courseToString
+  CoReqWarnings, courseToString, INEUAndPrereq, INEUOrPrereq, INEUPrereq, INEUPrereqCourse, INEUPrereqError, PreReqWarnings, Schedule2, ScheduleTerm2, TermError
 } from "@graduate/common";
 
-export const getCoReqWarnings = (term: ScheduleTerm2<unknown>) => {
+export const getCoReqWarnings = (schedule: Schedule2<unknown>): CoReqWarnings => {
+  const errors: CoReqWarnings = {
+    type: "coreq",
+    years: schedule.years.map((year) => ({
+      year: year.year,
+      fall: getCoReqWarningsSem(year.fall),
+      spring: getCoReqWarningsSem(year.spring),
+      summer1: getCoReqWarningsSem(year.summer1),
+      summer2: getCoReqWarningsSem(year.summer2)
+    }))
+  }
+  return errors;
+}
+
+export const getCoReqWarningsSem = (term: ScheduleTerm2<unknown>): TermError => {
   const seen: Set<string> = new Set();
-  const coReqErrors: CourseError = {}
+  const coReqErrors: TermError = {}
   for (const course of term.classes) {
     seen.add(courseToString(course));
   }
-
   for (const course of term.classes) {
-    // Course has coreqs
     if (course.coreqs && course.coreqs.values.length !== 0)
       coReqErrors[courseToString(course)] = getReqErrors(course.coreqs, seen);
   }
@@ -18,27 +30,23 @@ export const getCoReqWarnings = (term: ScheduleTerm2<unknown>) => {
 };
 
 export const getPreReqWarnings = (schedule: Schedule2<unknown>): PreReqWarnings => {
-  const preReqErrors: PreReqWarnings = {}
   const seen: Set<string> = new Set();
-  for (const year of schedule.years) {
-    preReqErrors[year.year] = {
-      fall: {},
-      spring: {},
-      summer1: {},
-      summer2: {},
-    };
-    preReqErrors[year.year].fall = getPreReqWarningSem(year.fall, seen);
-    preReqErrors[year.year].spring = getPreReqWarningSem(year.spring, seen);
-    preReqErrors[year.year].summer1 = getPreReqWarningSem(year.summer1, seen);
-    preReqErrors[year.year].summer2 = getPreReqWarningSem(year.summer2, seen);
+  const preReqErrors: PreReqWarnings = {
+    type: "prereq",
+    years: schedule.years.map((year) => ({
+      year: year.year,
+      fall: getPreReqWarningSem(year.fall, seen),
+      spring: getPreReqWarningSem(year.spring, seen),
+      summer1: getPreReqWarningSem(year.summer1, seen),
+      summer2: getPreReqWarningSem(year.summer2, seen),
+    }))
   }
   return preReqErrors;
 };
 
-export const getPreReqWarningSem = (term: ScheduleTerm2<unknown>, seen: Set<string>): CourseError => {
-  const preReqs: CourseError = {}
+export const getPreReqWarningSem = (term: ScheduleTerm2<unknown>, seen: Set<string>): TermError => {
+  const preReqs: TermError = {}
   for (const course of term.classes) {
-    // Course has prereqs
     if (course.prereqs && course.prereqs.values.length !== 0) {
       preReqs[courseToString(course)] = getReqErrors(course.prereqs, seen);
     }
