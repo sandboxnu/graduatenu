@@ -33,6 +33,9 @@ interface ScheduleYearProps extends ToggleYearProps {
     termYear: number,
     termSeason: SeasonEnum
   ) => void;
+
+  /** Function to remove the curr year from the plan */
+  removeYearFromCurrPlan: () => void;
 }
 
 export const ScheduleYear: React.FC<ScheduleYearProps> = ({
@@ -42,6 +45,7 @@ export const ScheduleYear: React.FC<ScheduleYearProps> = ({
   removeCourseFromTermInCurrPlan,
   isExpanded,
   toggleExpanded,
+  removeYearFromCurrPlan,
 }) => {
   // sum all credits over all the courses over each semester
   const totalCreditsThisYear = [
@@ -68,6 +72,7 @@ export const ScheduleYear: React.FC<ScheduleYearProps> = ({
         totalCreditsTaken={totalCreditsThisYear}
         isExpanded={isExpanded}
         toggleExpanded={toggleExpanded}
+        removeYearFromCurrPlan={removeYearFromCurrPlan}
       />
       {isExpanded && (
         <Grid templateColumns="repeat(4, 1fr)" flex={1}>
@@ -106,6 +111,7 @@ export const ScheduleYear: React.FC<ScheduleYearProps> = ({
 interface YearHeaderProps extends ToggleYearProps {
   year: ScheduleYear2<string>;
   totalCreditsTaken: number;
+  removeYearFromCurrPlan: () => void;
 }
 
 /** Displays the academic year, credits taken and hide/show button for the year. */
@@ -114,18 +120,29 @@ const YearHeader: React.FC<YearHeaderProps> = ({
   totalCreditsTaken,
   isExpanded,
   toggleExpanded,
+  removeYearFromCurrPlan,
 }) => {
   const backgroundColor = isExpanded
     ? "primary.blue.dark"
     : "primary.blue.light";
 
+  const hoverBackgrounColor = isExpanded
+    ? "primary.blue.dark.700"
+    : "primary.blue.light.700";
+
   return (
-    <Grid templateColumns="repeat(12, 1fr)" alignItems="center">
+    <Grid
+      templateColumns="repeat(12, 1fr)"
+      alignItems="center"
+      onClick={toggleExpanded}
+      role="group"
+    >
       <YearHeaderColumnContainer
         colSpan={1}
         justifyContent="center"
         mr="5xs"
         bg={`${backgroundColor}.main`}
+        _groupHover={{ backgroundColor: hoverBackgrounColor }}
       >
         <Text fontWeight="bold" color="white">
           Year {year.year}
@@ -135,15 +152,27 @@ const YearHeader: React.FC<YearHeaderProps> = ({
         colSpan={10}
         pl="md"
         bg={`${backgroundColor}.main`}
+        _groupHover={{ backgroundColor: hoverBackgrounColor }}
       >
         <Text color="white">{totalCreditsTaken} credits</Text>
       </YearHeaderColumnContainer>
-      <YearHeaderColumnContainer colSpan={1} bg={`${backgroundColor}.700`}>
-        <ToggleExpandedYearButton
-          backgroundColor={backgroundColor}
-          isExpanded={isExpanded}
-          toggleExpanded={toggleExpanded}
-        />
+      <YearHeaderColumnContainer
+        colSpan={1}
+        justifyContent="center"
+        bg={`${backgroundColor}.main`}
+        _groupHover={{ backgroundColor: hoverBackgrounColor }}
+      >
+        <Button
+          aria-label="Delete course"
+          variant="ghost"
+          color="primary.red.main"
+          colorScheme="primary.red"
+          _hover={{ bg: `${backgroundColor}.900` }}
+          _active={{ bg: `${backgroundColor}.900` }}
+          onClick={removeYearFromCurrPlan}
+        >
+          DELETE
+        </Button>
       </YearHeaderColumnContainer>
     </Grid>
   );
@@ -158,29 +187,5 @@ const YearHeaderColumnContainer: React.FC<GridItemProps> = ({
     <GridItem height="100%" display="flex" alignItems="center" {...rest}>
       {children}
     </GridItem>
-  );
-};
-
-interface ToggleExpandedYearButtonProps extends ToggleYearProps {
-  backgroundColor: string;
-}
-
-const ToggleExpandedYearButton: React.FC<ToggleExpandedYearButtonProps> = ({
-  backgroundColor,
-  isExpanded,
-  toggleExpanded,
-}) => {
-  return (
-    <Button
-      variant="unstyled"
-      width="100%"
-      textTransform="uppercase"
-      color="neutral.main"
-      onClick={toggleExpanded}
-      _hover={{ bg: `${backgroundColor}.900` }}
-      _active={{ bg: `${backgroundColor}.900` }}
-    >
-      {isExpanded ? "hide" : "show"}
-    </Button>
   );
 };

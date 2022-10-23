@@ -6,7 +6,11 @@ import {
   SeasonEnum,
 } from "@graduate/common";
 import { useState } from "react";
-import { addClassesToTerm, isCourseInPlan } from "../../utils";
+import {
+  addClassesToTerm,
+  isCourseInPlan,
+  removeYearFromPlan,
+} from "../../utils";
 import { removeCourseFromTerm } from "../../utils/";
 import { ScheduleYear } from "./ScheduleYear";
 
@@ -69,6 +73,11 @@ export const Plan: React.FC<PlanProps> = ({
     mutateStudentWithUpdatedPlan(updatedPlan);
   };
 
+  const removeYearFromCurrPlan = (yearNum: number) => {
+    const updatedPlan = removeYearFromPlan(plan, yearNum);
+    mutateStudentWithUpdatedPlan(updatedPlan);
+  };
+
   return (
     <Flex flexDirection="column" rowGap="4xs">
       {plan.schedule.years.map((scheduleYear) => {
@@ -90,6 +99,9 @@ export const Plan: React.FC<PlanProps> = ({
               }
               addClassesToTermInCurrPlan={addClassesToTermInCurrPlan}
               removeCourseFromTermInCurrPlan={removeCourseFromTermInCurrPlan}
+              removeYearFromCurrPlan={() =>
+                removeYearFromCurrPlan(scheduleYear.year)
+              }
             />
           </Box>
         );
