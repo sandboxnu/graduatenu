@@ -192,7 +192,7 @@ class SearchAPIClient {
     });
 
     const coursesData = await res.data;
-    const nodes = coursesData.data.search.nodes;
+    const nodes = coursesData?.data?.search?.nodes ?? [];
 
     const courses = nodes.map((result: SearchClass) => {
       return {
