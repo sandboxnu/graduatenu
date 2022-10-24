@@ -3,7 +3,7 @@ import {
   PlanModel,
   ScheduleCourse2,
   ScheduleYear2,
-  SeasonEnum,
+  SeasonEnum
 } from "@graduate/common";
 import { useState } from "react";
 import { addClassesToTerm, removeYearFromPlan } from "../../utils";

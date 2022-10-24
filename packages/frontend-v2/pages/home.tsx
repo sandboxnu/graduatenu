@@ -9,7 +9,7 @@ import {
   rectIntersection
 } from "@dnd-kit/core";
 import { API } from "@graduate/api-client";
-import { PlanModel } from "@graduate/common";
+import { CoReqWarnings, PlanModel, PreReqWarnings } from "@graduate/common";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { PropsWithChildren, useEffect, useState } from "react";
@@ -29,6 +29,7 @@ import {
   updatePlanOnDragEnd
 } from "../utils";
 import { getMajor2Example } from "../utils/convertMajor";
+import { getPreReqWarnings, getCoReqWarnings } from "../utils/plan/preAndCoReqCheck";
 
 const DEMO_MAJOR = getMajor2Example();
 
@@ -58,6 +59,9 @@ const HomePage: NextPage = () => {
   >();
 
   const [activeCourse, setActiveCourse] = useState(null);
+
+  const [coReqWarnings, setCoReqWarnings] = useState<CoReqWarnings | undefined>(undefined)
+  const [preReqWarnings, setPreReqWarnings] = useState<PreReqWarnings | undefined>(undefined)
 
   useEffect(() => {
     // once the student is fetched, set the selected plan id to the primary plan id
@@ -128,6 +132,9 @@ const HomePage: NextPage = () => {
     let updatedPlan: PlanModel<string>;
     try {
       updatedPlan = updatePlanOnDragEnd(selectedPlan, active, over);
+      // TODO: Update states for coreq and prereq
+      setPreReqWarnings(getPreReqWarnings(updatedPlan.schedule))
+      setCoReqWarnings(getCoReqWarnings(updatedPlan.schedule))
     } catch (err) {
       // update failed, either due to some logical issue or explicitely thrown error
       logger.debug("updatePlanOnDragEnd", err);
