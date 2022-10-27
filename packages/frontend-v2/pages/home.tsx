@@ -36,7 +36,11 @@ import { useRouter } from "next/router";
 import { Box, Button, Flex } from "@chakra-ui/react";
 import React, { PropsWithChildren, useEffect, useState } from "react";
 import { getMajor2Example } from "../utils/convertMajor";
-import { getCoReqWarnings } from "../utils/plan/preAndCoReqCheck";
+import {
+  getCoReqWarnings,
+  getPreReqWarningSem,
+} from "../utils/plan/preAndCoReqCheck";
+import { ReqErrorModal } from "../components/Plan/ReqErrorModal";
 
 const DEMO_MAJOR = getMajor2Example();
 
@@ -100,24 +104,6 @@ const HomePage: NextPage = () => {
   }
 
   const selectedPlan = student.plans.find((plan) => selectedPlanId === plan.id);
-
-  useEffect(() => {
-    if (selectedPlan) {
-      for (const elem of selectedPlan.schedule.years) {
-        console.log(getCoReqWarnings(elem.fall));
-        console.log(getCoReqWarnings(elem.spring));
-        console.log(getCoReqWarnings(elem.summer2));
-        console.log(getCoReqWarnings(elem.summer1));
-      }
-
-      for (const elem of selectedPlan.schedule.years) {
-        console.log(getCoReqWarnings(elem.fall));
-        console.log(getCoReqWarnings(elem.spring));
-        console.log(getCoReqWarnings(elem.summer2));
-        console.log(getCoReqWarnings(elem.summer1));
-      }
-    }
-  });
 
   /**
    * When a course is dragged and dropped onto a semester
@@ -204,6 +190,7 @@ const HomePage: NextPage = () => {
               setSelectedPlanId={setSelectedPlanId}
               plans={student.plans}
             />
+            <ReqErrorModal />
             <AddPlanModal setSelectedPlanId={setSelectedPlanId} />
             {selectedPlan && <EditPlanModal plan={selectedPlan} />}
             {selectedPlan && (
