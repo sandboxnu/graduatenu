@@ -1,6 +1,8 @@
 import { Flex } from "@chakra-ui/react";
 import {
+  CoReqWarnings,
   PlanModel,
+  PreReqWarnings,
   ScheduleCourse2,
   ScheduleYear2,
   SeasonEnum
@@ -12,6 +14,8 @@ import { ScheduleYear } from "./ScheduleYear";
 
 interface PlanProps {
   plan: PlanModel<string>;
+  preReqErr: PreReqWarnings | undefined;
+  coReqErr: CoReqWarnings | undefined;
 
   /**
    * Function to POST the plan and update the SWR cache for "student with plans"
@@ -23,6 +27,8 @@ interface PlanProps {
 export const Plan: React.FC<PlanProps> = ({
   plan,
   mutateStudentWithUpdatedPlan,
+  preReqErr,
+  coReqErr,
 }) => {
   const [expandedYears, setExpandedYears] = useState<Set<number>>(new Set());
 
@@ -108,6 +114,12 @@ export const Plan: React.FC<PlanProps> = ({
             flexDirection="column"
           >
             <ScheduleYear
+              yearCoReqError={coReqErr?.years.find(
+                (year) => year.year == scheduleYear.year
+              )}
+              yearPreReqError={preReqErr?.years.find(
+                (year) => year.year == scheduleYear.year
+              )}
               scheduleYear={scheduleYear}
               isExpanded={isExpanded}
               toggleExpanded={() => toggleExpanded(scheduleYear)}

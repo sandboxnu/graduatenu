@@ -1,12 +1,14 @@
-import { Flex } from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
 import { forwardRef, useState } from "react";
-import { ScheduleCourse2 } from "@graduate/common";
+import { INEUPrereqError, ScheduleCourse2 } from "@graduate/common";
 import { useDraggable } from "@dnd-kit/core";
 import { CSS } from "@dnd-kit/utilities";
 import { DeleteIcon } from "@chakra-ui/icons";
 
 interface DraggableScheduleCourseProps {
   scheduleCourse: ScheduleCourse2<string>;
+  coReqErr: INEUPrereqError | undefined;
+  preReqErr: INEUPrereqError | undefined;
 
   /** Function to remove the course from whatever the schedule it is part of. */
   removeCourse?: (course: ScheduleCourse2<unknown>) => void;
@@ -18,6 +20,8 @@ interface DraggableScheduleCourseProps {
 export const DraggableScheduleCourse: React.FC<
   DraggableScheduleCourseProps
 > = ({
+  coReqErr,
+  preReqErr,
   scheduleCourse,
   removeCourse,
   isEditable = false,
@@ -36,6 +40,8 @@ export const DraggableScheduleCourse: React.FC<
 
   return (
     <ScheduleCourse
+      coReqErr={coReqErr}
+      preReqErr={preReqErr}
       ref={setNodeRef}
       scheduleCourse={scheduleCourse}
       removeCourse={removeCourse}
@@ -50,6 +56,8 @@ export const DraggableScheduleCourse: React.FC<
 };
 
 interface ScheduleCourseProps extends DraggableScheduleCourseProps {
+  coReqErr: INEUPrereqError | undefined;
+  preReqErr: INEUPrereqError | undefined;
   isDragging?: boolean;
   listeners?: any;
   attributes?: any;
@@ -65,6 +73,8 @@ export const ScheduleCourse = forwardRef<
 >(
   (
     {
+      coReqErr,
+      preReqErr,
       scheduleCourse,
       removeCourse,
       isEditable = false,
@@ -167,6 +177,11 @@ export const ScheduleCourse = forwardRef<
                 : undefined
             }
           >
+            {(coReqErr != undefined || preReqErr != undefined) && (
+              <Text fontSize="sm" background="red">
+                error
+              </Text>
+            )}
             <DeleteIcon
               color="primary.blue.dark.300"
               transition="color 0.1s ease"

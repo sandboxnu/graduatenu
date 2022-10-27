@@ -1,5 +1,11 @@
 import { GridItem, Heading, useDisclosure } from "@chakra-ui/react";
-import { ScheduleCourse2, ScheduleTerm2, SeasonEnum } from "@graduate/common";
+import {
+  courseToString,
+  ScheduleCourse2,
+  ScheduleTerm2,
+  SeasonEnum,
+  TermError,
+} from "@graduate/common";
 import { DraggableScheduleCourse } from "../ScheduleCourse";
 import { useDroppable } from "@dnd-kit/core";
 import { getSeasonDisplayWord, isCourseInTerm } from "../../utils";
@@ -9,6 +15,8 @@ import { BlueButton } from "../Button";
 
 interface ScheduleTermProps {
   scheduleTerm: ScheduleTerm2<string>;
+  termCoReqErr: TermError | undefined;
+  termPreReqErr: TermError | undefined;
 
   /** Function to add classes to a given term in the plan being displayed. */
   addClassesToTermInCurrPlan: (
@@ -32,6 +40,8 @@ export const ScheduleTerm: React.FC<ScheduleTermProps> = ({
   addClassesToTermInCurrPlan,
   removeCourseFromTermInCurrPlan,
   isLastColumn,
+  termCoReqErr,
+  termPreReqErr,
 }) => {
   const { isOver, setNodeRef } = useDroppable({ id: scheduleTerm.id });
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -59,6 +69,8 @@ export const ScheduleTerm: React.FC<ScheduleTermProps> = ({
       />
       {scheduleTerm.classes.map((scheduleCourse) => (
         <DraggableScheduleCourse
+          coReqErr={termCoReqErr?.[courseToString(scheduleCourse)]}
+          preReqErr={termPreReqErr?.[courseToString(scheduleCourse)]}
           scheduleCourse={scheduleCourse}
           removeCourse={(course: ScheduleCourse2<unknown>) =>
             removeCourseFromTermInCurrPlan(

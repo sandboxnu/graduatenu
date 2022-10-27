@@ -6,7 +6,7 @@ import {
   DragOverlay,
   DragStartEvent,
   pointerWithin,
-  rectIntersection
+  rectIntersection,
 } from "@dnd-kit/core";
 import { API } from "@graduate/api-client";
 import { CoReqWarnings, PlanModel, PreReqWarnings } from "@graduate/common";
@@ -14,22 +14,33 @@ import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { PropsWithChildren, useEffect, useState } from "react";
 import {
-  AddPlanModal, AddYearButton, DeletePlanModal, EditPlanModal, HeaderContainer,
+  AddPlanModal,
+  AddYearButton,
+  DeletePlanModal,
+  EditPlanModal,
+  HeaderContainer,
   LoadingPage,
   Logo,
-  Plan, PlanDropdown,
-  ScheduleCourse, Sidebar
+  Plan,
+  PlanDropdown,
+  ScheduleCourse,
+  Sidebar,
 } from "../components";
 import { ReqErrorModal } from "../components/Plan/ReqErrorModal";
 import { fetchStudentAndPrepareForDnd, useStudentWithPlans } from "../hooks";
 import {
-  cleanDndIdsFromPlan, handleApiClientError, logger,
+  cleanDndIdsFromPlan,
+  handleApiClientError,
+  logger,
   logout,
   updatePlanForStudent,
-  updatePlanOnDragEnd
+  updatePlanOnDragEnd,
 } from "../utils";
 import { getMajor2Example } from "../utils/convertMajor";
-import { getPreReqWarnings, getCoReqWarnings } from "../utils/plan/preAndCoReqCheck";
+import {
+  getPreReqWarnings,
+  getCoReqWarnings,
+} from "../utils/plan/preAndCoReqCheck";
 
 const DEMO_MAJOR = getMajor2Example();
 
@@ -60,13 +71,24 @@ const HomePage: NextPage = () => {
 
   const [activeCourse, setActiveCourse] = useState(null);
 
-  const [coReqWarnings, setCoReqWarnings] = useState<CoReqWarnings | undefined>(undefined)
-  const [preReqWarnings, setPreReqWarnings] = useState<PreReqWarnings | undefined>(undefined)
+  const [coReqWarnings, setCoReqWarnings] = useState<CoReqWarnings | undefined>(
+    undefined
+  );
+  const [preReqWarnings, setPreReqWarnings] = useState<
+    PreReqWarnings | undefined
+  >(undefined);
 
   useEffect(() => {
     // once the student is fetched, set the selected plan id to the primary plan id
     if (student && selectedPlanId === undefined) {
       setSelectedPlanId(student.primaryPlanId);
+    }
+    if (student) {
+      const plan = student.plans.find((plan) => plan.id === selectedPlanId);
+      if (plan) {
+        setPreReqWarnings(getPreReqWarnings(plan.schedule));
+        setCoReqWarnings(getCoReqWarnings(plan.schedule));
+      }
     }
   }, [student, selectedPlanId, setSelectedPlanId]);
 
@@ -137,7 +159,7 @@ const HomePage: NextPage = () => {
       logger.debug("updatePlanOnDragEnd", err);
       return;
     }
-    
+
     setPreReqWarnings(getPreReqWarnings(updatedPlan.schedule));
     setCoReqWarnings(getCoReqWarnings(updatedPlan.schedule));
     mutateStudentWithUpdatedPlan(updatedPlan);
@@ -199,6 +221,8 @@ const HomePage: NextPage = () => {
             <>
               <Plan
                 plan={selectedPlan}
+                coReqErr={coReqWarnings}
+                preReqErr={preReqWarnings}
                 mutateStudentWithUpdatedPlan={mutateStudentWithUpdatedPlan}
               />
               <Flex mt="sm">
@@ -217,6 +241,8 @@ const HomePage: NextPage = () => {
             isDisabled={false}
             scheduleCourse={activeCourse}
             isOverlay={true}
+            coReqErr={undefined}
+            preReqErr={undefined}
           />
         ) : null}
       </DragOverlay>

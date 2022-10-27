@@ -1,6 +1,19 @@
 import { DeleteIcon } from "@chakra-ui/icons";
-import { Flex, Grid, IconButton, Text, Tooltip } from "@chakra-ui/react";
-import { ScheduleCourse2, ScheduleYear2, SeasonEnum } from "@graduate/common";
+import {
+  Flex,
+  Grid,
+  GridItem,
+  GridItemProps,
+  IconButton,
+  Text,
+  Tooltip,
+} from "@chakra-ui/react";
+import {
+  ScheduleCourse2,
+  ScheduleYear2,
+  SeasonEnum,
+  YearError,
+} from "@graduate/common";
 import { ScheduleTerm } from "./ScheduleTerm";
 
 interface ToggleYearProps {
@@ -10,6 +23,8 @@ interface ToggleYearProps {
 
 interface ScheduleYearProps extends ToggleYearProps {
   scheduleYear: ScheduleYear2<string>;
+  yearCoReqError: YearError | undefined;
+  yearPreReqError: YearError | undefined;
 
   /** Function to add classes to a given term in the plan being displayed. */
   addClassesToTermInCurrPlan: (
@@ -36,6 +51,8 @@ export const ScheduleYear: React.FC<ScheduleYearProps> = ({
   isExpanded,
   toggleExpanded,
   removeYearFromCurrPlan,
+  yearCoReqError,
+  yearPreReqError,
 }) => {
   // sum all credits over all the courses over each semester
   const totalCreditsThisYear = [
@@ -67,22 +84,30 @@ export const ScheduleYear: React.FC<ScheduleYearProps> = ({
       {isExpanded && (
         <Grid templateColumns="repeat(4, 1fr)" minHeight="220px">
           <ScheduleTerm
+            termCoReqErr={yearCoReqError?.fall}
+            termPreReqErr={yearPreReqError?.fall}
             scheduleTerm={scheduleYear.fall}
             addClassesToTermInCurrPlan={addClassesToTermInCurrPlan}
             removeCourseFromTermInCurrPlan={removeCourseFromTermInCurrPlan}
           />
           <ScheduleTerm
+            termCoReqErr={yearCoReqError?.spring}
+            termPreReqErr={yearPreReqError?.spring}
             scheduleTerm={scheduleYear.spring}
             addClassesToTermInCurrPlan={addClassesToTermInCurrPlan}
             removeCourseFromTermInCurrPlan={removeCourseFromTermInCurrPlan}
           />
           {/* TODO: support summer full term */}
           <ScheduleTerm
+            termCoReqErr={yearCoReqError?.summer1}
+            termPreReqErr={yearPreReqError?.summer1}
             scheduleTerm={scheduleYear.summer1}
             addClassesToTermInCurrPlan={addClassesToTermInCurrPlan}
             removeCourseFromTermInCurrPlan={removeCourseFromTermInCurrPlan}
           />
           <ScheduleTerm
+            termCoReqErr={yearCoReqError?.summer2}
+            termPreReqErr={yearPreReqError?.summer2}
             scheduleTerm={scheduleYear.summer2}
             addClassesToTermInCurrPlan={addClassesToTermInCurrPlan}
             removeCourseFromTermInCurrPlan={removeCourseFromTermInCurrPlan}
