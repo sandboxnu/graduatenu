@@ -132,15 +132,14 @@ const HomePage: NextPage = () => {
     let updatedPlan: PlanModel<string>;
     try {
       updatedPlan = updatePlanOnDragEnd(selectedPlan, active, over);
-      // TODO: Update states for coreq and prereq
-      setPreReqWarnings(getPreReqWarnings(updatedPlan.schedule))
-      setCoReqWarnings(getCoReqWarnings(updatedPlan.schedule))
     } catch (err) {
       // update failed, either due to some logical issue or explicitely thrown error
       logger.debug("updatePlanOnDragEnd", err);
       return;
     }
-
+    
+    setPreReqWarnings(getPreReqWarnings(updatedPlan.schedule));
+    setCoReqWarnings(getCoReqWarnings(updatedPlan.schedule));
     mutateStudentWithUpdatedPlan(updatedPlan);
   };
 
