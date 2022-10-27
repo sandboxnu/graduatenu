@@ -16,7 +16,7 @@ export const useRedirectIfLoggedIn = () => {
   const loginWithCookie = async () => {
     setRenderSpinner(true);
     try {
-      const student = await API.student.getMe();
+      await API.student.getMe();
       router.push("/home");
     } catch (err) {
       const error = err as AxiosError;
