@@ -166,9 +166,7 @@ const HomePage: NextPage = () => {
               plans={student.plans}
             />
             <AddPlanModal setSelectedPlanId={setSelectedPlanId} />
-            {selectedPlanId && (
-              <EditPlanModal plan={selectedPlan} planId={selectedPlanId} />
-            )}
+            {selectedPlan && <EditPlanModal plan={selectedPlan} />}
             {selectedPlan && (
               <DeletePlanModal
                 setSelectedPlanId={setSelectedPlanId}
