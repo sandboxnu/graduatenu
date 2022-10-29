@@ -8,19 +8,18 @@ interface SearchResultProps {
   searchResult: ScheduleCourse2<null>;
   addSelectedCourse: (course: ScheduleCourse2<null>) => void;
   isResultAlreadySelected: boolean;
-  isResultAlreadyInSchedule: boolean;
+  isResultAlreadyInTerm: boolean;
 }
 
 export const SearchResult: React.FC<SearchResultProps> = ({
   searchResult,
   addSelectedCourse,
   isResultAlreadySelected,
-  isResultAlreadyInSchedule,
+  isResultAlreadyInTerm,
 }) => {
-  const isAddButtonDisabled =
-    isResultAlreadyInSchedule || isResultAlreadySelected;
-  const addButtonTooltip = isResultAlreadyInSchedule
-    ? "This course is already in the schedule."
+  const isAddButtonDisabled = isResultAlreadyInTerm || isResultAlreadySelected;
+  const addButtonTooltip = isResultAlreadyInTerm
+    ? "This course is already in the term."
     : isResultAlreadySelected
     ? "This course is already selected."
     : undefined;
@@ -52,7 +51,7 @@ export const SearchResult: React.FC<SearchResultProps> = ({
           borderRadius="3xl"
           size="sm"
           onClick={() => addSelectedCourse(searchResult)}
-          isDisabled={isResultAlreadyInSchedule || isResultAlreadySelected}
+          isDisabled={isResultAlreadyInTerm || isResultAlreadySelected}
         />
       </GraduateToolTip>
     </Flex>

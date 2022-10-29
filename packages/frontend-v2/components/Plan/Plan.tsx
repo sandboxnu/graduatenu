@@ -6,7 +6,7 @@ import {
   SeasonEnum,
 } from "@graduate/common";
 import { useState } from "react";
-import { addClassesToTerm, isCourseInPlan } from "../../utils";
+import { addClassesToTerm } from "../../utils";
 import { removeCourseFromTerm } from "../../utils/";
 import { ScheduleYear } from "./ScheduleYear";
 
@@ -85,9 +85,6 @@ export const Plan: React.FC<PlanProps> = ({
               scheduleYear={scheduleYear}
               isExpanded={isExpanded}
               toggleExpanded={() => toggleExpanded(scheduleYear)}
-              isCourseInCurrPlan={(course: ScheduleCourse2<unknown>) =>
-                isCourseInPlan(course, plan)
-              }
               addClassesToTermInCurrPlan={addClassesToTermInCurrPlan}
               removeCourseFromTermInCurrPlan={removeCourseFromTermInCurrPlan}
             />

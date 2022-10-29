@@ -17,9 +17,6 @@ interface ToggleYearProps {
 interface ScheduleYearProps extends ToggleYearProps {
   scheduleYear: ScheduleYear2<string>;
 
-  /** Function to check if the given cousrs exists in the plan being displayed. */
-  isCourseInCurrPlan: (course: ScheduleCourse2<unknown>) => boolean;
-
   /** Function to add classes to a given term in the plan being displayed. */
   addClassesToTermInCurrPlan: (
     classes: ScheduleCourse2<null>[],
@@ -37,7 +34,6 @@ interface ScheduleYearProps extends ToggleYearProps {
 
 export const ScheduleYear: React.FC<ScheduleYearProps> = ({
   scheduleYear,
-  isCourseInCurrPlan,
   addClassesToTermInCurrPlan,
   removeCourseFromTermInCurrPlan,
   isExpanded,
@@ -73,26 +69,22 @@ export const ScheduleYear: React.FC<ScheduleYearProps> = ({
         <Grid templateColumns="repeat(4, 1fr)" flex={1}>
           <ScheduleTerm
             scheduleTerm={scheduleYear.fall}
-            isCourseInCurrPlan={isCourseInCurrPlan}
             addClassesToTermInCurrPlan={addClassesToTermInCurrPlan}
             removeCourseFromTermInCurrPlan={removeCourseFromTermInCurrPlan}
           />
           <ScheduleTerm
             scheduleTerm={scheduleYear.spring}
-            isCourseInCurrPlan={isCourseInCurrPlan}
             addClassesToTermInCurrPlan={addClassesToTermInCurrPlan}
             removeCourseFromTermInCurrPlan={removeCourseFromTermInCurrPlan}
           />
           {/* TODO: support summer full term */}
           <ScheduleTerm
             scheduleTerm={scheduleYear.summer1}
-            isCourseInCurrPlan={isCourseInCurrPlan}
             addClassesToTermInCurrPlan={addClassesToTermInCurrPlan}
             removeCourseFromTermInCurrPlan={removeCourseFromTermInCurrPlan}
           />
           <ScheduleTerm
             scheduleTerm={scheduleYear.summer2}
-            isCourseInCurrPlan={isCourseInCurrPlan}
             addClassesToTermInCurrPlan={addClassesToTermInCurrPlan}
             removeCourseFromTermInCurrPlan={removeCourseFromTermInCurrPlan}
             isLastColumn

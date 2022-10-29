@@ -2,16 +2,13 @@ import { Grid, GridItem, Heading, useDisclosure } from "@chakra-ui/react";
 import { ScheduleCourse2, ScheduleTerm2, SeasonEnum } from "@graduate/common";
 import { DraggableScheduleCourse } from "../ScheduleCourse";
 import { useDroppable } from "@dnd-kit/core";
-import { logger } from "../../utils";
+import { isCourseInTerm, logger } from "../../utils";
 import { AddCourseModal } from "../AddCourseModal";
 import { AddIcon } from "@chakra-ui/icons";
 import { BlueButton } from "../Button";
 
 interface ScheduleTermProps {
   scheduleTerm: ScheduleTerm2<string>;
-
-  /** Function to check if a courses exists in the current plan being displayed. */
-  isCourseInCurrPlan: (course: ScheduleCourse2<unknown>) => boolean;
 
   /** Function to add classes to a given term in the plan being displayed. */
   addClassesToTermInCurrPlan: (
@@ -32,13 +29,16 @@ interface ScheduleTermProps {
 
 export const ScheduleTerm: React.FC<ScheduleTermProps> = ({
   scheduleTerm,
-  isCourseInCurrPlan,
   addClassesToTermInCurrPlan,
   removeCourseFromTermInCurrPlan,
   isLastColumn,
 }) => {
   const { isOver, setNodeRef } = useDroppable({ id: scheduleTerm.id });
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const isCourseInCurrTerm = (course: ScheduleCourse2<unknown>) => {
+    return isCourseInTerm(course, scheduleTerm);
+  };
 
   return (
     <GridItem
@@ -73,7 +73,7 @@ export const ScheduleTerm: React.FC<ScheduleTermProps> = ({
       <AddCourseModal
         isOpen={isOpen}
         closeModalDisplay={onClose}
-        isCourseInCurrPlan={isCourseInCurrPlan}
+        isCourseInCurrTerm={isCourseInCurrTerm}
         addClassesToCurrTerm={(courses: ScheduleCourse2<null>[]) =>
           addClassesToTermInCurrPlan(
             courses,
