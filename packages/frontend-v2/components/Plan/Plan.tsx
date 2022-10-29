@@ -31,7 +31,7 @@ export const Plan: React.FC<PlanProps> = ({
 }) => {
   const [expandedYears, setExpandedYears] = useState<Set<number>>(new Set());
 
-  const toggleExpanded = (year: ScheduleYear2<string>) => {
+  const toggleExpanded = (year: ScheduleYear2<unknown>) => {
     if (expandedYears.has(year.year)) {
       removeFromExpandedYears(year);
     } else {
@@ -39,13 +39,13 @@ export const Plan: React.FC<PlanProps> = ({
     }
   };
 
-  const removeFromExpandedYears = (year: ScheduleYear2<string>) => {
+  const removeFromExpandedYears = (year: ScheduleYear2<unknown>) => {
     const updatedSet = new Set(expandedYears);
     updatedSet.delete(year.year);
     setExpandedYears(updatedSet);
   };
 
-  const addToExpandedYears = (year: ScheduleYear2<string>) => {
+  const addToExpandedYears = (year: ScheduleYear2<unknown>) => {
     const updatedSet = new Set(expandedYears);
     updatedSet.add(year.year);
     setExpandedYears(updatedSet);
@@ -74,9 +74,29 @@ export const Plan: React.FC<PlanProps> = ({
     mutateStudentWithUpdatedPlan(updatedPlan);
   };
 
-  const removeYearFromCurrPlan = (yearNum: number) => {
+  const removeYearFromCurrPlan = async (yearNum: number) => {
     const updatedPlan = removeYearFromPlan(plan, yearNum);
     mutateStudentWithUpdatedPlan(updatedPlan);
+
+    /**
+     * We want to ensure that the expanded set remains consistent: years that
+     * were expanded before remain expanded, and years that weren't remain collapsed.
+     *
+     * Years after yearNum were all decremented by 1(because yearNum was
+     * removed). Hence, if a year x + 1 was in the expandedSet previously, add x.
+     */
+    setExpandedYears((prevExpandedYears) => {
+      const updatedExpandedYears = new Set<number>();
+      for (let i = 1; i < updatedPlan.schedule.years.length + 1; i++) {
+        if (i < yearNum && prevExpandedYears.has(i)) {
+          updatedExpandedYears.add(i);
+        } else if (i >= yearNum && prevExpandedYears.has(i + 1)) {
+          updatedExpandedYears.add(i);
+        }
+      }
+
+      return updatedExpandedYears;
+    });
   };
 
   return (

@@ -9,6 +9,7 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  Tooltip,
   useDisclosure,
 } from "@chakra-ui/react";
 import { API } from "@graduate/api-client";
@@ -16,7 +17,7 @@ import { useRouter } from "next/router";
 import { Dispatch, SetStateAction } from "react";
 import { mutate } from "swr";
 import { USE_STUDENT_WITH_PLANS_SWR_KEY } from "../../hooks";
-import { handleApiClientError } from "../../utils";
+import { handleApiClientError, toast } from "../../utils";
 import { GrayButton } from "../Button";
 
 interface DeletePlanModalProps {
@@ -36,9 +37,10 @@ export const DeletePlanModal: React.FC<DeletePlanModalProps> = ({
     try {
       await API.plans.delete(planId);
 
-      // refresh the cache and close the modal
+      // refresh the cache, show success message, and close the modal
       mutate(USE_STUDENT_WITH_PLANS_SWR_KEY);
       setSelectedPlanId(null);
+      toast.success("Plan deleted successfully.");
       onClose();
     } catch (error) {
       handleApiClientError(error as Error, router);
@@ -47,16 +49,18 @@ export const DeletePlanModal: React.FC<DeletePlanModalProps> = ({
 
   return (
     <>
-      <IconButton
-        icon={<DeleteIcon />}
-        aria-label="Delete plan"
-        variant="outline"
-        borderColor="primary.blue.light.main"
-        colorScheme="primary.blue.light"
-        color="primary.blue.light.main"
-        ml="xs"
-        onClick={onOpen}
-      />
+      <Tooltip label={`Delete ${planName}?`} fontSize="md">
+        <IconButton
+          icon={<DeleteIcon />}
+          aria-label="Delete plan"
+          variant="outline"
+          borderColor="primary.blue.light.main"
+          colorScheme="primary.blue.light"
+          color="primary.blue.light.main"
+          ml="xs"
+          onClick={onOpen}
+        />
+      </Tooltip>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
