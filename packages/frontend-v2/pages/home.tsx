@@ -121,7 +121,6 @@ const HomePage: NextPage = () => {
     try {
       updatedPlan = updatePlanOnDragEnd(selectedPlan, active, over);
     } catch (err) {
-      console.error(err);
       // update failed, either due to some logical issue or explicitely thrown error
       logger.debug("updatePlanOnDragEnd", err);
       return;

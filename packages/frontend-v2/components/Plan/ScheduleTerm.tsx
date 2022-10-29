@@ -2,7 +2,7 @@ import { Grid, GridItem, Heading, useDisclosure } from "@chakra-ui/react";
 import { ScheduleCourse2, ScheduleTerm2, SeasonEnum } from "@graduate/common";
 import { DraggableScheduleCourse } from "../ScheduleCourse";
 import { useDroppable } from "@dnd-kit/core";
-import { isCourseInTerm, logger } from "../../utils";
+import { getSeasonDisplayWord, isCourseInTerm } from "../../utils";
 import { AddCourseModal } from "../AddCourseModal";
 import { AddIcon } from "@chakra-ui/icons";
 import { BlueButton } from "../Button";
@@ -37,7 +37,7 @@ export const ScheduleTerm: React.FC<ScheduleTermProps> = ({
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const isCourseInCurrTerm = (course: ScheduleCourse2<unknown>) => {
-    return isCourseInTerm(course, scheduleTerm);
+    return isCourseInTerm(course.classId, course.subject, scheduleTerm);
   };
 
   return (
@@ -101,27 +101,6 @@ const ScheduleTermHeader: React.FC<ScheduleTermHeaderProps> = ({
       {seasonDisplayWord} {year}
     </Heading>
   );
-};
-
-/** Gets the display string shown to the user for a given season */
-const getSeasonDisplayWord = (season: SeasonEnum): string => {
-  const SEASON_TO_SEASON_DISPLAY_WORD = new Map<
-    keyof typeof SeasonEnum,
-    string
-  >([
-    [SeasonEnum.FL, "Fall"],
-    [SeasonEnum.SP, "Spring"],
-    [SeasonEnum.S1, "Summer I"],
-    [SeasonEnum.S2, "Summer II"],
-  ]);
-
-  const seasonDisplayWord = SEASON_TO_SEASON_DISPLAY_WORD.get(season);
-  if (!seasonDisplayWord) {
-    logger.debug("getSeasonDisplayWord", "Unknown season", season);
-    throw new Error("Unknown Season");
-  }
-
-  return seasonDisplayWord;
 };
 
 interface AddCourseButtonProps {

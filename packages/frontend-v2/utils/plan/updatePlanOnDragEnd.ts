@@ -1,6 +1,15 @@
 import { Active, Over } from "@dnd-kit/core";
-import { PlanModel, Schedule2, ScheduleTerm2 } from "@graduate/common";
+import {
+  PlanModel,
+  Schedule2,
+  ScheduleCourse2,
+  ScheduleTerm2,
+} from "@graduate/common";
 import produce from "immer";
+import { toast } from "react-toastify";
+import { getCourseDisplayString } from "../course";
+import { getSeasonDisplayWord } from "./getSeasonDisplayWord";
+import { isCourseInTerm } from "./isCourseInTerm";
 
 /**
  * Updates the schedule of plan when a course is dragged from one term to
@@ -38,23 +47,52 @@ export const updatePlanOnDragEnd = (
       );
     }
 
-    if (!draggedCourse.data.current.isFromSidebar) {
-      // Course is from a term, so we need to move it, we don't need to move
-      // courses that are from the sidebar.
+    const draggedCourseDetails: ScheduleCourse2<unknown> =
+      draggedCourse.data.current.course;
 
-      // remove the class from the old term and add it to the new term
-      const oldTerm = scheduleTerms.find((term) =>
-        term.classes.some((course) => course.id === draggedCourse.id)
+    const oldTerm = scheduleTerms.find((term) =>
+      term.classes.some((course) => course.id === draggedCourse.id)
+    );
+
+    const isFromSidebar = draggedCourse.data.current.isFromSidebar;
+    const isSameTerm = !isFromSidebar && oldTerm && oldTerm.id === newTerm.id;
+
+    /*
+     * Prevent duplicate courses in the same term,
+     * don't need to display error if course is not changing terms.
+     */
+    if (
+      isCourseInTerm(
+        draggedCourseDetails.classId,
+        draggedCourseDetails.subject,
+        newTerm
+      ) &&
+      !isSameTerm
+    ) {
+      toast.error(
+        `Oops, ${getCourseDisplayString(
+          draggedCourseDetails
+        )} already exists in Year ${newTerm.year}, ${getSeasonDisplayWord(
+          newTerm.season
+        )}.`
       );
+      throw new Error("Duplicate course in term.");
+    }
 
+    /*
+     * Course is from a term, so we need to move it, we don't need to move
+     * courses that are from the sidebar.
+     */
+    if (!draggedCourse.data.current.isFromSidebar) {
       if (!oldTerm) {
         throw new Error("Term the course is dragged from isn't found");
       }
 
-      if (oldTerm === newTerm) {
+      if (isSameTerm) {
         throw new Error("Course is being dragged over its own term");
       }
 
+      // remove the class from the old term and add it to the new term
       oldTerm.classes = oldTerm.classes.filter(
         (course) => course.id !== draggedCourse.id
       );
