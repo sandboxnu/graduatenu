@@ -154,6 +154,8 @@ class SearchAPIClient {
             subject
             latestOccurrence {
               termId
+              minCredits
+              maxCredits
             }
           }
         }`,
@@ -163,7 +165,17 @@ class SearchAPIClient {
     const coursesData = await res.data.data;
 
     if (coursesData.bulkClasses) {
-      return coursesData.bulkClasses;
+      return coursesData.bulkClasses.map((course) => {
+        if (course === null) return null;
+
+        return {
+          name: course.name,
+          classId: course.classId,
+          subject: course.subject,
+          numCreditsMin: course?.latestOccurrence?.minCredits,
+          numCreditsMax: course?.latestOccurrence?.maxCredits,
+        };
+      });
     } else {
       return null;
     }
