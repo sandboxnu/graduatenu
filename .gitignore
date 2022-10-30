@@ -41,7 +41,7 @@ dist/
 
 # local and production env files 
 .env.*.local
-.env.production.*
+.env.production*
 
 graduatenu.code-workspace
 

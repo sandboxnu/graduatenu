@@ -5,9 +5,20 @@ import { AxiosError } from "axios";
 import { NextPage } from "next";
 import { NextRouter, useRouter } from "next/router";
 import { FieldErrors, useForm, UseFormRegister } from "react-hook-form";
-import { HeaderContainer, Logo, LoadingPage, FormFormat, HeaderAndInput, StringInput, FormButtons, SubmitButton, AlterSubmitButton, InputGroup } from "../components";
+import {
+  HeaderContainer,
+  Logo,
+  LoadingPage,
+  FormFormat,
+  HeaderAndInput,
+  StringInput,
+  FormButtons,
+  SubmitButton,
+  AlterSubmitButton,
+  InputGroup,
+} from "../components";
 import { useRedirectIfLoggedIn } from "../hooks";
-import { redirectToOnboardingOrHome, toast } from "../utils";
+import { toast } from "../utils";
 
 interface LoginFormTopProps {
   register: UseFormRegister<LoginStudentDto>;
@@ -50,8 +61,8 @@ const LoginForm = () => {
 
   const onSubmitHandler = async (payload: LoginStudentDto) => {
     try {
-      const user = await API.auth.login(payload);
-      redirectToOnboardingOrHome(user, router);
+      await API.auth.login(payload);
+      router.push("/home");
     } catch (err) {
       const error = err as AxiosError;
       if (error.response?.status === 401) toast.error("Invalid Credentials!");
