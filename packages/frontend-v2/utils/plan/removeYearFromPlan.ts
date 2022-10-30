@@ -21,6 +21,12 @@ export const removeYearFromPlan = (
     // re-number all years since a year from the middle could have been taken out
     draftPlan.schedule.years.forEach((year, idx) => {
       year.year = idx + 1;
+
+      // TODO: semester's should not have years?: https://github.com/sandboxnu/graduatenu/issues/494
+      year.fall.year = idx + 1;
+      year.spring.year = idx + 1;
+      year.summer1.year = idx + 1;
+      year.summer2.year = idx + 1;
     });
   });
 
