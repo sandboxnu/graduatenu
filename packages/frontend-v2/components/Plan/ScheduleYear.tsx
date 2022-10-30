@@ -133,23 +133,27 @@ const YearHeader: React.FC<YearHeaderProps> = ({
     : "primary.blue.light.700";
 
   return (
-    <Grid
-      templateColumns="repeat(12, 1fr)"
+    <Flex
       alignItems="center"
-      onClick={toggleExpanded}
-      role="group"
+      backgroundColor={backgroundColor + ".main"}
+      paddingTop="sm"
+      paddingBottom="sm"
     >
-      <YearHeaderColumnContainer
+      <Flex flexDirection="column" marginLeft="md">
+        <Text color="white">Year {year.year}</Text>
+        <Text color="white" fontWeight="bold">
+          {totalCreditsTaken} credits
+        </Text>
+      </Flex>
+      {/* <YearHeaderColumnContainer
         colSpan={1}
         justifyContent="center"
         mr="5xs"
         bg={`${backgroundColor}.main`}
         _groupHover={{ backgroundColor: hoverBackgrounColor }}
       >
-        <Text fontWeight="bold" color="white">
-          Year {year.year}
-        </Text>
-      </YearHeaderColumnContainer>
+        
+      </YearHeaderColumnContainer> */}
       <YearHeaderColumnContainer
         colSpan={10}
         pl="md"
@@ -180,7 +184,7 @@ const YearHeader: React.FC<YearHeaderProps> = ({
           />
         </Tooltip>
       </YearHeaderColumnContainer>
-    </Grid>
+    </Flex>
   );
 };
 

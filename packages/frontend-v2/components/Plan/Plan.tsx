@@ -106,8 +106,9 @@ export const Plan: React.FC<PlanProps> = ({
         return (
           <Box
             key={scheduleYear.year}
-            borderX={isExpanded ? "1px" : undefined}
-            borderBottom={isExpanded ? "1px" : undefined}
+            borderX="1px"
+            borderBottom="1px"
+            borderColor={isExpanded ? undefined : "primary.blue.light.main"}
             minHeight={isExpanded ? "300px" : undefined}
           >
             <ScheduleYear
