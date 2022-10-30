@@ -52,7 +52,8 @@ export const updatePlanOnDragEnd = (
       }
 
       if (oldTerm === newTerm) {
-        throw new Error("Course is being dragged over its own term");
+        // Course is being dragged over its own term, so we do nothing
+        return;
       }
 
       oldTerm.classes = oldTerm.classes.filter(

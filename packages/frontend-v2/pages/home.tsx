@@ -17,6 +17,9 @@ import {
   DragEndEvent,
   DragOverlay,
   DragStartEvent,
+  pointerWithin,
+  rectIntersection,
+  CollisionDetection,
 } from "@dnd-kit/core";
 import {
   cleanDndIdsFromPlan,
@@ -34,6 +37,18 @@ import { useEffect, useState } from "react";
 import { getMajor2Example } from "../utils/convertMajor";
 
 const DEMO_MAJOR = getMajor2Example();
+
+// Algorithm to decide which droppable the course is currently over (if any).
+// See https://docs.dndkit.com/api-documentation/context-provider/collision-detection-algorithms for more info.
+const courseDndCollisisonAlgorithm: CollisionDetection = (args) => {
+  const pointerCollisions = pointerWithin(args);
+  if (pointerCollisions.length > 0) {
+    return pointerCollisions;
+  } else {
+    // Fallback as recommended by the dnd-kit docs
+    return rectIntersection(args);
+  }
+};
 
 const HomePage: NextPage = () => {
   const { error, student, mutateStudent } = useStudentWithPlans();
@@ -156,7 +171,13 @@ const HomePage: NextPage = () => {
   };
 
   return (
-    <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
+    <DndContext
+      onDragStart={handleDragStart}
+      onDragEnd={handleDragEnd}
+      // Changes the default dnd collision algorithm to something
+      // that feels more intuitive.
+      collisionDetection={courseDndCollisisonAlgorithm}
+    >
       <PageLayout>
         <Flex flexDirection="column">
           <Flex alignItems="center" mb="sm">
@@ -185,9 +206,13 @@ const HomePage: NextPage = () => {
           )}
         </Flex>
       </PageLayout>
-      <DragOverlay>
+      <DragOverlay dropAnimation={null}>
         {activeCourse ? (
-          <ScheduleCourse isDisabled={false} scheduleCourse={activeCourse} />
+          <ScheduleCourse
+            isDisabled={false}
+            scheduleCourse={activeCourse}
+            isOverlay={true}
+          />
         ) : null}
       </DragOverlay>
     </DndContext>
