@@ -13,7 +13,6 @@ import {
 } from "../../utils";
 import { removeCourseFromTerm } from "../../utils/";
 import { ScheduleYear } from "./ScheduleYear";
-import { getPreReqWarnings } from "../../utils/plan/preAndCoReqCheck";
 
 interface PlanProps {
   plan: PlanModel<string>;
