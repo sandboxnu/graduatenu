@@ -39,14 +39,15 @@ const SidebarSection: React.FC<SidebarSectionProps> = ({
         padding="10px 20px 15px 10px"
         cursor="default"
       >
-        {section.requirements.map((requirement, index) => (
-          <SectionRequirement
-            requirement={requirement}
-            courseData={courseData}
-            dndIdPrefix={dndIdPrefix + "-" + index}
-            key={index}
-          />
-        ))}
+        {opened &&
+          section.requirements.map((requirement, index) => (
+            <SectionRequirement
+              requirement={requirement}
+              courseData={courseData}
+              dndIdPrefix={dndIdPrefix + "-" + index}
+              key={index}
+            />
+          ))}
       </Box>
     </Box>
   );
