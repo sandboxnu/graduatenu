@@ -44,10 +44,12 @@ export const ScheduleTerm: React.FC<ScheduleTermProps> = ({
     <GridItem
       ref={setNodeRef}
       borderRight={!isLastColumn ? "1px" : undefined}
+      transition="background-color 0.1s ease"
       backgroundColor={isOver ? "neutral.300" : "neutral.main"}
       px="sm"
       pt="2xs"
       pb="xl"
+      userSelect="none"
     >
       <ScheduleTermHeader
         season={scheduleTerm.season}
