@@ -136,8 +136,16 @@ const YearHeader: React.FC<YearHeaderProps> = ({
     <Flex
       alignItems="center"
       backgroundColor={backgroundColor + ".main"}
+      _hover={
+        {
+          // backgroundColor: "primary.blue.light.600"
+        }
+      }
+      transition="background-color 0.15s ease"
       paddingTop="sm"
       paddingBottom="sm"
+      onClick={toggleExpanded}
+      cursor="pointer"
     >
       <Flex flexDirection="column" marginLeft="md">
         <Text color="white">Year {year.year}</Text>
@@ -154,36 +162,23 @@ const YearHeader: React.FC<YearHeaderProps> = ({
       >
         
       </YearHeaderColumnContainer> */}
-      <YearHeaderColumnContainer
-        colSpan={10}
-        pl="md"
-        bg={`${backgroundColor}.main`}
-        _groupHover={{ backgroundColor: hoverBackgrounColor }}
-      >
-        <Text color="white">{totalCreditsTaken} credits</Text>
-      </YearHeaderColumnContainer>
-      <YearHeaderColumnContainer
-        colSpan={1}
-        justifyContent="right"
-        bg={`${backgroundColor}.main`}
-        _groupHover={{ backgroundColor: hoverBackgrounColor }}
-      >
-        <Tooltip label={`Delete year ${year.year}?`} fontSize="md">
-          <IconButton
-            aria-label="Delete course"
-            variant="ghost"
-            color="primary.red.main"
-            icon={<DeleteIcon />}
-            _hover={{ bg: `${backgroundColor}.900` }}
-            _active={{ bg: `${backgroundColor}.900` }}
-            onClick={(e) => {
-              // important to prevent the click from propogating upwards and triggering the toggle
-              e.stopPropagation();
-              removeYearFromCurrPlan();
-            }}
-          />
-        </Tooltip>
-      </YearHeaderColumnContainer>
+      <Tooltip label={`Delete year ${year.year}?`} fontSize="md">
+        <IconButton
+          aria-label="Delete course"
+          variant="ghost"
+          color="white"
+          icon={<DeleteIcon />}
+          marginLeft="auto"
+          marginRight="sm"
+          _hover={{ bg: "white", color: "primary.red.main" }}
+          _active={{ bg: `${backgroundColor}.900` }}
+          onClick={(e) => {
+            // important to prevent the click from propogating upwards and triggering the toggle
+            e.stopPropagation();
+            removeYearFromCurrPlan();
+          }}
+        />
+      </Tooltip>
     </Flex>
   );
 };
