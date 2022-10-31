@@ -41,19 +41,19 @@ export const prepareYearForDnd = (
 ) => {
   let res;
   let updatedCount = courseCount;
-  res = prepareTermForDnd(year.fall, courseCount);
+  res = prepareTermForDnd(year.fall, updatedCount);
   const dndFallTerm = res.dndTerm;
   updatedCount = res.updatedCount;
 
-  res = prepareTermForDnd(year.spring, courseCount);
+  res = prepareTermForDnd(year.spring, updatedCount);
   const dndSpringTerm = res.dndTerm;
   updatedCount = res.updatedCount;
 
-  res = prepareTermForDnd(year.summer1, courseCount);
+  res = prepareTermForDnd(year.summer1, updatedCount);
   const dndSummer1Term = res.dndTerm;
   updatedCount = res.updatedCount;
 
-  res = prepareTermForDnd(year.summer2, courseCount);
+  res = prepareTermForDnd(year.summer2, updatedCount);
   const dndSummer2Term = res.dndTerm;
   updatedCount = res.updatedCount;
 
