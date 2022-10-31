@@ -116,7 +116,12 @@ const SectionRequirement: React.FC<SidebarRequirementProps> = ({
         />
       );
     }
-    return <p>Course not found</p>;
+    return (
+      <p>
+        Course not found ({requirement.subject}
+        {requirement.classId})
+      </p>
+    );
   };
 
   const renderSection = (requirement: Section) => {
