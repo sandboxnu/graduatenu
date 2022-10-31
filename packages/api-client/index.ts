@@ -87,6 +87,21 @@ interface SearchClass {
   minCredits: number;
 }
 
+function occurrenceToCourse(occurrence): ScheduleCourse2<null> | null {
+  if (!occurrence) return null;
+
+  return {
+    name: occurrence.name,
+    subject: occurrence.subject,
+    classId: occurrence.classId,
+    numCreditsMax: occurrence.maxCredits,
+    numCreditsMin: occurrence.minCredits,
+    prereqs: occurrence.prereqs,
+    coreqs: occurrence.coreqs,
+    id: null,
+  };
+}
+
 /**
  * A client for interacting with the Search API. Allows us to fetch and search
  * for courses.
@@ -122,16 +137,7 @@ class SearchAPIClient {
     });
 
     const courseData = await res.data.data;
-    if (courseData?.class?.latestOccurrence) {
-      const course: ScheduleCourse2<null> = courseData.class.latestOccurrence;
-      course.numCreditsMax = courseData.class.latestOccurrence.maxCredits;
-      course.numCreditsMin = courseData.class.latestOccurrence.minCredits;
-      delete courseData.class.latestOccurrence.maxCredits;
-      delete courseData.class.latestOccurrence.minCredits;
-      return course;
-    } else {
-      return null;
-    }
+    return occurrenceToCourse(courseData?.class?.latestOccurrence);
   };
 
   fetchCourses = async (
@@ -149,13 +155,15 @@ class SearchAPIClient {
       data: {
         query: `{
           bulkClasses(input: [${input}]) {
-            name
-            classId
-            subject
             latestOccurrence {
-              termId
+              name
+              subject
+              classId
               minCredits
               maxCredits
+              prereqs
+              coreqs
+              termId
             }
           }
         }`,
@@ -166,15 +174,7 @@ class SearchAPIClient {
 
     if (coursesData.bulkClasses) {
       return coursesData.bulkClasses.map((course) => {
-        if (course === null) return null;
-
-        return {
-          name: course.name,
-          classId: course.classId,
-          subject: course.subject,
-          numCreditsMin: course?.latestOccurrence?.minCredits,
-          numCreditsMax: course?.latestOccurrence?.maxCredits,
-        };
+        return occurrenceToCourse(course?.latestOccurrence);
       });
     } else {
       return null;
