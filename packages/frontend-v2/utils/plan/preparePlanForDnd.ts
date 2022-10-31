@@ -17,30 +17,9 @@ export const preparePlanForDnd = (plan: PlanModel<null>): PlanModel<string> => {
   let courseCount = 0;
   const dndYears: ScheduleYear2<string>[] = [];
   plan.schedule.years.forEach((year) => {
-    let res;
-    res = prepareTermForDnd(year.fall, courseCount);
-    const dndFallTerm = res.dndTerm;
-    courseCount = res.updatedCount;
-
-    res = prepareTermForDnd(year.spring, courseCount);
-    const dndSpringTerm = res.dndTerm;
-    courseCount = res.updatedCount;
-
-    res = prepareTermForDnd(year.summer1, courseCount);
-    const dndSummer1Term = res.dndTerm;
-    courseCount = res.updatedCount;
-
-    res = prepareTermForDnd(year.summer2, courseCount);
-    const dndSummer2Term = res.dndTerm;
-    courseCount = res.updatedCount;
-
-    dndYears.push({
-      ...year,
-      fall: dndFallTerm,
-      spring: dndSpringTerm,
-      summer1: dndSummer1Term,
-      summer2: dndSummer2Term,
-    });
+    const { updatedCount, updatedYear } = prepareYearForDnd(year, courseCount);
+    courseCount = updatedCount;
+    dndYears.push(updatedYear);
   });
 
   const dndSchedule: Schedule2<string> = {
@@ -54,6 +33,42 @@ export const preparePlanForDnd = (plan: PlanModel<null>): PlanModel<string> => {
   };
 
   return dndPlan;
+};
+
+export const prepareYearForDnd = (
+  year: ScheduleYear2<null>,
+  courseCount: number
+) => {
+  let res;
+  let updatedCount = courseCount;
+  res = prepareTermForDnd(year.fall, courseCount);
+  const dndFallTerm = res.dndTerm;
+  updatedCount = res.updatedCount;
+
+  res = prepareTermForDnd(year.spring, courseCount);
+  const dndSpringTerm = res.dndTerm;
+  updatedCount = res.updatedCount;
+
+  res = prepareTermForDnd(year.summer1, courseCount);
+  const dndSummer1Term = res.dndTerm;
+  updatedCount = res.updatedCount;
+
+  res = prepareTermForDnd(year.summer2, courseCount);
+  const dndSummer2Term = res.dndTerm;
+  updatedCount = res.updatedCount;
+
+  const updatedYear = {
+    ...year,
+    fall: dndFallTerm,
+    spring: dndSpringTerm,
+    summer1: dndSummer1Term,
+    summer2: dndSummer2Term,
+  };
+
+  return {
+    updatedCount,
+    updatedYear,
+  };
 };
 
 /**
@@ -108,4 +123,16 @@ export const prepareClassesForDnd = (
   });
 
   return { dndClasses, updatedCount };
+};
+
+export const getCourseCount = (plan: PlanModel<unknown>) => {
+  return plan.schedule.years.reduce(
+    (count, year) =>
+      count +
+      year.fall.classes.length +
+      year.spring.classes.length +
+      year.summer1.classes.length +
+      year.summer2.classes.length,
+    0
+  );
 };

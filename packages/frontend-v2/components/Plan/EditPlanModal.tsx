@@ -24,8 +24,7 @@ import { BlueButton } from "../Button";
 import { PlanInput, PlanSelect } from "../Form";
 
 type EditPlanModalProps = {
-  plan: PlanModel<string> | undefined;
-  planId: number;
+  plan: PlanModel<string>;
 };
 
 type EditPlanInput = {
@@ -43,10 +42,7 @@ const SUPPORTED_MAJORS = new Map<number, string[]>([
   [2020, ["Computer Science, BSCS"]],
 ]);
 
-export const EditPlanModal: React.FC<EditPlanModalProps> = ({
-  plan,
-  planId,
-}) => {
+export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
   const { mutate } = useSWRConfig();
   const router = useRouter();
   const { onOpen, onClose, isOpen } = useDisclosure();
@@ -64,9 +60,9 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({
   useEffect(() => {
     // Change the default field to the corresponding plan when a plan is selected/edited
     reset({
-      name: plan?.name,
-      catalogYear: plan?.catalogYear,
-      major: plan?.major,
+      name: plan.name,
+      catalogYear: plan.catalogYear,
+      major: plan.major,
     });
   }, [plan, reset]);
 
@@ -77,14 +73,14 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({
     if (!isDirty) return;
 
     try {
-      await API.plans.update(planId, payload);
+      await API.plans.update(plan.id, payload);
     } catch (error) {
       handleApiClientError(error as Error, router);
       return;
     }
 
     mutate(USE_STUDENT_WITH_PLANS_SWR_KEY);
-    toast.success("Update Plan Success");
+    toast.success("Plan updated successfully.");
   };
 
   return (
@@ -141,7 +137,7 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({
 
             <ModalFooter>
               <Button isLoading={isSubmitting} type="submit" ml="auto">
-                Edit Plan
+                Save
               </Button>
             </ModalFooter>
           </form>
