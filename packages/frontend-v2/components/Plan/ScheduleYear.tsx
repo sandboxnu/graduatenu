@@ -1,13 +1,5 @@
 import { DeleteIcon } from "@chakra-ui/icons";
-import {
-  Flex,
-  Grid,
-  GridItem,
-  GridItemProps,
-  IconButton,
-  Text,
-  Tooltip,
-} from "@chakra-ui/react";
+import { Flex, Grid, IconButton, Text, Tooltip } from "@chakra-ui/react";
 import { ScheduleCourse2, ScheduleYear2, SeasonEnum } from "@graduate/common";
 import { ScheduleTerm } from "./ScheduleTerm";
 
@@ -128,10 +120,6 @@ const YearHeader: React.FC<YearHeaderProps> = ({
     ? "primary.blue.dark"
     : "primary.blue.light";
 
-  const hoverBackgrounColor = isExpanded
-    ? "primary.blue.dark.700"
-    : "primary.blue.light.700";
-
   return (
     <Flex
       alignItems="center"
@@ -179,17 +167,5 @@ const YearHeader: React.FC<YearHeaderProps> = ({
         />
       </Tooltip>
     </Flex>
-  );
-};
-
-/** A GridItem container for the columns in a year header */
-const YearHeaderColumnContainer: React.FC<GridItemProps> = ({
-  children,
-  ...rest
-}) => {
-  return (
-    <GridItem display="flex" alignItems="center" {...rest}>
-      {children}
-    </GridItem>
   );
 };
