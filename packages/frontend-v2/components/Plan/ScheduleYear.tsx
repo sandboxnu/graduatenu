@@ -140,15 +140,6 @@ const YearHeader: React.FC<YearHeaderProps> = ({
           {totalCreditsTaken} credits
         </Text>
       </Flex>
-      {/* <YearHeaderColumnContainer
-        colSpan={1}
-        justifyContent="center"
-        mr="5xs"
-        bg={`${backgroundColor}.main`}
-        _groupHover={{ backgroundColor: hoverBackgrounColor }}
-      >
-        
-      </YearHeaderColumnContainer> */}
       <Tooltip label={`Delete year ${year.year}?`} fontSize="md">
         <IconButton
           aria-label="Delete course"
