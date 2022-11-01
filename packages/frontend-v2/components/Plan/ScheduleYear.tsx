@@ -68,7 +68,7 @@ export const ScheduleYear: React.FC<ScheduleYearProps> = ({
   }, 0);
 
   return (
-    <Flex flexDirection="column" height="100%" minHeight="inherit">
+    <Flex flexDirection="column">
       <YearHeader
         year={scheduleYear}
         totalCreditsTaken={totalCreditsThisYear}
@@ -77,7 +77,7 @@ export const ScheduleYear: React.FC<ScheduleYearProps> = ({
         removeYearFromCurrPlan={removeYearFromCurrPlan}
       />
       {isExpanded && (
-        <Grid templateColumns="repeat(4, 1fr)" flex={1}>
+        <Grid templateColumns="repeat(4, 1fr)" minHeight="220px">
           <ScheduleTerm
             scheduleTerm={scheduleYear.fall}
             isCourseInCurrPlan={isCourseInCurrPlan}
@@ -136,16 +136,15 @@ const YearHeader: React.FC<YearHeaderProps> = ({
     <Flex
       alignItems="center"
       backgroundColor={backgroundColor + ".main"}
-      _hover={
-        {
-          // backgroundColor: "primary.blue.light.600"
-        }
-      }
+      _hover={{
+        backgroundColor: "primary.blue.light.600",
+      }}
       transition="background-color 0.15s ease"
       paddingTop="sm"
       paddingBottom="sm"
       onClick={toggleExpanded}
       cursor="pointer"
+      userSelect="none"
     >
       <Flex flexDirection="column" marginLeft="md">
         <Text color="white">Year {year.year}</Text>
@@ -189,7 +188,7 @@ const YearHeaderColumnContainer: React.FC<GridItemProps> = ({
   ...rest
 }) => {
   return (
-    <GridItem height="100%" display="flex" alignItems="center" {...rest}>
+    <GridItem display="flex" alignItems="center" {...rest}>
       {children}
     </GridItem>
   );
