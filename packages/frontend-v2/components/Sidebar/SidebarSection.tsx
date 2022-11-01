@@ -1,5 +1,9 @@
 import { Box, Text } from "@chakra-ui/react";
-import { ScheduleCourse2, Section } from "@graduate/common";
+import {
+  MajorValidationError,
+  ScheduleCourse2,
+  Section,
+} from "@graduate/common";
 import { useState } from "react";
 import SectionRequirement from "./SectionRequirement";
 
@@ -7,21 +11,20 @@ interface SidebarSectionProps {
   section: Section;
   courseData: { [id: string]: ScheduleCourse2<null> };
   dndIdPrefix: string;
+  validationStatus?: MajorValidationError;
 }
 
 const SidebarSection: React.FC<SidebarSectionProps> = ({
   section,
   courseData,
   dndIdPrefix,
+  validationStatus,
 }) => {
   const [opened, setOpened] = useState(false);
+
+  const isComplete = validationStatus == undefined;
   return (
-    <Box
-      backgroundColor="neutral.main"
-      borderTop="1px solid white"
-      cursor="pointer"
-      userSelect="none"
-    >
+    <Box borderTop="1px solid white" cursor="pointer" userSelect="none">
       <Text
         onClick={() => {
           setOpened(!opened);
@@ -30,7 +33,31 @@ const SidebarSection: React.FC<SidebarSectionProps> = ({
         fontWeight="bold"
         py="md"
         px="sm"
+        backgroundColor="neutral.main"
+        transition="background-color 0.1s ease"
+        _hover={{
+          backgroundColor: "neutral.900",
+        }}
+        _active={{
+          backgroundColor: "neutral.200",
+        }}
       >
+        {isComplete ? (
+          <span
+            style={{
+              background: "green",
+              color: "white",
+              padding: "3px 6px",
+              width: "26px",
+              marginRight: "6px",
+              borderRadius: "30px",
+            }}
+          >
+            ✓
+          </span>
+        ) : (
+          ""
+        )}
         {section.title}
       </Text>
       <Box

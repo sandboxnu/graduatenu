@@ -3,15 +3,21 @@ import { SearchAPI } from "@graduate/api-client";
 import {
   IRequiredCourse,
   Major2,
+  MajorValidationError,
+  MajorValidationResult,
+  PlanModel,
   Requirement2,
   ScheduleCourse2,
   Section,
 } from "@graduate/common";
-import { memo, useEffect, useState } from "react";
+import { memo, useEffect, useMemo, useState } from "react";
 import SidebarSection from "./SidebarSection";
+import { validateMajor2 } from "@graduate/common";
+import { getAllCoursesFromPlan } from "../../utils/plan/getAllCoursesFromPlan";
 
 interface SidebarProps {
   major: Major2;
+  selectedPlan: PlanModel<string> | undefined;
 }
 
 // This was moved out of the Sidebar component as it doesn't change
@@ -35,7 +41,21 @@ const getRequiredCourses = (
   }
 };
 
-const Sidebar: React.FC<SidebarProps> = memo(({ major }) => {
+const Sidebar: React.FC<SidebarProps> = memo(({ major, selectedPlan }) => {
+  // console.log(major)
+
+  // let validationStatus: MajorValidationResult | undefined = undefined
+  let validationStatus: MajorValidationResult | undefined = useMemo(() => {
+    if (selectedPlan) {
+      const takenCourses = getAllCoursesFromPlan(selectedPlan);
+      validationStatus = validateMajor2(major, takenCourses, undefined);
+      console.log(validationStatus);
+      return validationStatus;
+    } else {
+      return undefined;
+    }
+  }, [selectedPlan, major]);
+
   const [courseData, setCourseData] = useState({});
 
   useEffect(() => {
@@ -81,14 +101,45 @@ const Sidebar: React.FC<SidebarProps> = memo(({ major }) => {
         {major.name}
       </Text>
       {courseData &&
-        major.requirementSections.map((section, index) => (
-          <SidebarSection
-            key={section.title}
-            section={section}
-            courseData={courseData}
-            dndIdPrefix={"sidebar-" + index}
-          />
-        ))}
+        major.requirementSections.map((section, index) => {
+          let sectionValidationError: MajorValidationError | undefined =
+            undefined;
+          if (validationStatus && validationStatus.type == "Err") {
+            if (!validationStatus.err.majorRequirementsError)
+              throw new Error("Top level requirement should have an error.");
+            if (validationStatus.err.majorRequirementsError.type !== "AND")
+              throw new Error("Top level requirement error should be AND.");
+            const andReq = validationStatus.err.majorRequirementsError?.error;
+            if (andReq.type == "AND_UNSAT_CHILD") {
+              sectionValidationError = andReq.childErrors.find((error) => {
+                return error.childIndex === index;
+              });
+            } else if (
+              andReq.type == "AND_NO_SOLUTION" &&
+              andReq.discoveredAtChild == index
+            ) {
+              // If a range is invalid, but everything else is okay, it seems to create a No Solution error for that section.
+              sectionValidationError = {
+                type: "SECTION",
+                sectionTitle: section.title,
+                childErrors: [],
+                minRequiredChildCount: 0,
+                maxPossibleChildCount: 0,
+              };
+              // throw new Error("No solution found to major requirements.")
+            }
+          }
+
+          return (
+            <SidebarSection
+              key={section.title}
+              section={section}
+              validationStatus={sectionValidationError}
+              courseData={courseData}
+              dndIdPrefix={"sidebar-" + index}
+            />
+          );
+        })}
     </Box>
   );
 });

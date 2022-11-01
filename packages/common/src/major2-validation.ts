@@ -42,7 +42,7 @@ type Solution = {
 type SelectedConcentrationsType = number | string | (number | string)[];
 
 // Error types and constructors
-type MajorValidationError =
+export type MajorValidationError =
   | CourseError
   | AndError
   | OrError
@@ -236,7 +236,7 @@ export class Major2ValidationTracker implements CourseValidationTracker {
 }
 
 // the result of major validation
-type MajorValidationResult = Result<
+export type MajorValidationResult = Result<
   Solution[],
   {
     majorRequirementsError?: MajorValidationError;
@@ -439,7 +439,9 @@ function validateRangeRequirement(
 /**
  * Example: <child 1> <child 2> (CS2810 or CS2800) and (CS2810 or DS3000)
  *
- * Child Solutions: Child 1:
+ * Child Solutions:
+ *
+ * Child 1:
  *
  * - Solution 1: { min: 4, max: 4, sol: [CS2810]}
  * - Solution 2: { min: 4, max: 4, sol: [CS2800]} Child 2:
