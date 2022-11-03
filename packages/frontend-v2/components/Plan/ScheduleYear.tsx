@@ -160,25 +160,21 @@ const YearHeader: React.FC<YearHeaderProps> = ({
       </YearHeaderColumnContainer>
       <YearHeaderColumnContainer
         colSpan={1}
-        justifyContent="right"
+        justifyContent="center"
         bg={`${backgroundColor}.main`}
         _groupHover={{ backgroundColor: hoverBackgrounColor }}
       >
-        <Tooltip label={`Delete year ${year.year}?`} fontSize="md">
-          <IconButton
-            aria-label="Delete course"
-            variant="ghost"
-            color="primary.red.main"
-            icon={<DeleteIcon />}
-            _hover={{ bg: `${backgroundColor}.900` }}
-            _active={{ bg: `${backgroundColor}.900` }}
-            onClick={(e) => {
-              // important to prevent the click from propogating upwards and triggering the toggle
-              e.stopPropagation();
-              removeYearFromCurrPlan();
-            }}
-          />
-        </Tooltip>
+        <IconButton
+          aria-label="Delete course"
+          variant="ghost"
+          color="primary.red.main"
+          colorScheme="primary.red"
+          _hover={{ bg: `${backgroundColor}.900` }}
+          _active={{ bg: `${backgroundColor}.900` }}
+          onClick={removeYearFromCurrPlan}
+        >
+          DELETE
+        </IconButton>
       </YearHeaderColumnContainer>
     </Grid>
   );
