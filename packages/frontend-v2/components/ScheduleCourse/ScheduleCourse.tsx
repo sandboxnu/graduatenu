@@ -106,7 +106,8 @@ export const ScheduleCourse = forwardRef<
             alignItems: "center",
             flexGrow: 1,
             background: "",
-            padding: "8px 8px",
+            padding:
+              scheduleCourse.classId === "CO-OP" ? "48px 8px" : "8px 8px",
             cursor: isOverlay ? "grabbing" : "grab",
           }}
           {...listeners}

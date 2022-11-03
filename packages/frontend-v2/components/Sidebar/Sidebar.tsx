@@ -8,11 +8,21 @@ import {
   Section,
 } from "@graduate/common";
 import { memo, useEffect, useState } from "react";
+import { DraggableScheduleCourse } from "../ScheduleCourse";
 import SidebarSection from "./SidebarSection";
 
 interface SidebarProps {
   major: Major2;
 }
+
+const COOP_BLOCK: ScheduleCourse2<string> = {
+  name: "Cooperative Education",
+  classId: "CO-OP",
+  subject: "CO-OP",
+  numCreditsMax: 8,
+  numCreditsMin: 8,
+  id: "co-op-block",
+};
 
 // This was moved out of the Sidebar component as it doesn't change
 // from run to run, but the dependency array in the course useEffect
@@ -80,6 +90,13 @@ const Sidebar: React.FC<SidebarProps> = memo(({ major }) => {
       >
         {major.name}
       </Text>
+      <Box padding="10px 20px 15px 20px">
+        <DraggableScheduleCourse
+          scheduleCourse={COOP_BLOCK}
+          isFromSidebar={true}
+          isDisabled={false}
+        />
+      </Box>
       {courseData &&
         major.requirementSections.map((section, index) => (
           <SidebarSection
