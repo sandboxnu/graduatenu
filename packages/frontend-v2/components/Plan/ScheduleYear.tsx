@@ -76,23 +76,16 @@ export const ScheduleYear: React.FC<ScheduleYearProps> = ({
   const [displayReqErrors, setDisplayReqErrors] = useState(false);
 
   useEffect(() => {
-    // if (yearCoReqError?.fall?.)
     const classes = [];
-    if (yearPreReqError?.fall)
-      for (const val of Object.values(yearPreReqError.fall))
-        if (val != undefined) classes.push(val);
-    if (yearPreReqError?.spring)
-      for (const val of Object.values(yearPreReqError.spring))
-        if (val != undefined) classes.push(val);
-    if (yearPreReqError?.summer1)
-      for (const val of Object.values(yearPreReqError.summer1))
-        if (val != undefined) classes.push(val);
-    if (yearPreReqError?.summer2)
-      for (const val of Object.values(yearPreReqError.summer2))
-        if (val != undefined) classes.push(val);
-
-    console.log(classes);
-    setDisplayReqErrors(classes.length > 0);
+    classes.push(...Object.values(yearPreReqError?.fall ?? {}));
+    classes.push(...Object.values(yearPreReqError?.spring ?? {}));
+    classes.push(...Object.values(yearPreReqError?.summer1 ?? {}));
+    classes.push(...Object.values(yearPreReqError?.summer2 ?? {}));
+    classes.push(...Object.values(yearCoReqError?.fall ?? {}));
+    classes.push(...Object.values(yearCoReqError?.spring ?? {}));
+    classes.push(...Object.values(yearCoReqError?.summer1 ?? {}));
+    classes.push(...Object.values(yearCoReqError?.summer2 ?? {}));
+    setDisplayReqErrors(classes.filter((c) => c != undefined).length > 0);
   }, [yearCoReqError, yearPreReqError]);
 
   return (
