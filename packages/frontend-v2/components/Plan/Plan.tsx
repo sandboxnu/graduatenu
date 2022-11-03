@@ -5,8 +5,12 @@ import {
   ScheduleYear2,
   SeasonEnum,
 } from "@graduate/common";
-import { useState, useEffect } from "react";
-import { addClassesToTerm, isCourseInPlan } from "../../utils";
+import { useState } from "react";
+import {
+  addClassesToTerm,
+  isCourseInPlan,
+  removeYearFromPlan,
+} from "../../utils";
 import { removeCourseFromTerm } from "../../utils/";
 import { ScheduleYear } from "./ScheduleYear";
 import { getPreReqWarnings } from "../../utils/plan/preAndCoReqCheck";
@@ -70,9 +74,10 @@ export const Plan: React.FC<PlanProps> = ({
     mutateStudentWithUpdatedPlan(updatedPlan);
   };
 
-  useEffect(() => {
-    console.log(getPreReqWarnings(plan.schedule));
-  }, [plan]);
+  const removeYearFromCurrPlan = (yearNum: number) => {
+    const updatedPlan = removeYearFromPlan(plan, yearNum);
+    mutateStudentWithUpdatedPlan(updatedPlan);
+  };
 
   return (
     <Flex flexDirection="column" rowGap="4xs">
@@ -95,6 +100,9 @@ export const Plan: React.FC<PlanProps> = ({
               }
               addClassesToTermInCurrPlan={addClassesToTermInCurrPlan}
               removeCourseFromTermInCurrPlan={removeCourseFromTermInCurrPlan}
+              removeYearFromCurrPlan={() =>
+                removeYearFromCurrPlan(scheduleYear.year)
+              }
             />
           </Box>
         );

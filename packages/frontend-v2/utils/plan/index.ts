@@ -8,3 +8,4 @@ export * from "./updatePlanOnDragEnd";
 export * from "./createEmptySchedule";
 export * from "./removeCourseFromTerm";
 export * from "./addEmptyDndYearToPlan";
+export * from "./removeYearFromPlan";
