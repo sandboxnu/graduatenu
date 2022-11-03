@@ -88,16 +88,10 @@ const HomePage: NextPage = () => {
       if (plan) {
         setPreReqWarnings(getPreReqWarnings(plan.schedule));
         setCoReqWarnings(getCoReqWarnings(plan.schedule));
-        console.log(plan.schedule)
       }
     }
   }, [student, selectedPlanId, setSelectedPlanId]);
 
-  useEffect(() => {
-    console.log(preReqWarnings);
-    console.log(coReqWarnings);
-  }, [preReqWarnings, coReqWarnings])
-  
 
   /**
    * Handle errors from useStudentWithPlans.

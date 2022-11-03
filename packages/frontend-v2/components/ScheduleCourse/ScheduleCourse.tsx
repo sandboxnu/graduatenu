@@ -1,6 +1,10 @@
 import { Flex, Text } from "@chakra-ui/react";
 import { forwardRef, useState } from "react";
-import { INEUPrereqError, ScheduleCourse2 } from "@graduate/common";
+import {
+  courseToString,
+  INEUPrereqError,
+  ScheduleCourse2,
+} from "@graduate/common";
 import { useDraggable } from "@dnd-kit/core";
 import { CSS } from "@dnd-kit/utilities";
 import { DeleteIcon } from "@chakra-ui/icons";
@@ -144,12 +148,17 @@ export const ScheduleCourse = forwardRef<
             ></path>
           </svg>
           <p style={{ fontWeight: "bold" }}>
-            {scheduleCourse.classId}{" "}
+            {`${courseToString(scheduleCourse)} `}
             <span style={{ marginLeft: "2px", fontWeight: "normal" }}>
               {scheduleCourse.name}
             </span>
           </p>
         </div>
+        {(coReqErr != undefined || preReqErr != undefined) && (
+          <Text fontSize="sm" background="red">
+            error
+          </Text>
+        )}
         {isEditable && hovered && (
           <Flex
             width="32px"
@@ -177,11 +186,6 @@ export const ScheduleCourse = forwardRef<
                 : undefined
             }
           >
-            {(coReqErr != undefined || preReqErr != undefined) && (
-              <Text fontSize="sm" background="red">
-                error
-              </Text>
-            )}
             <DeleteIcon
               color="primary.blue.dark.300"
               transition="color 0.1s ease"

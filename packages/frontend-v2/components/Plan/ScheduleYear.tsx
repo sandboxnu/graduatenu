@@ -1,9 +1,9 @@
-import { DeleteIcon } from "@chakra-ui/icons";
+import { DeleteIcon, WarningIcon } from "@chakra-ui/icons";
 import {
   Flex,
   Grid,
-  GridItem,
-  GridItemProps,
+  // GridItem,
+  // GridItemProps,
   IconButton,
   Text,
   Tooltip,
@@ -15,6 +15,7 @@ import {
   YearError,
 } from "@graduate/common";
 import { ScheduleTerm } from "./ScheduleTerm";
+import { useState, useEffect } from "react";
 
 interface ToggleYearProps {
   isExpanded: boolean;
@@ -72,6 +73,28 @@ export const ScheduleYear: React.FC<ScheduleYearProps> = ({
     return totalCreditsForYear + totalCreditsThisTerm;
   }, 0);
 
+  const [displayReqErrors, setDisplayReqErrors] = useState(false);
+
+  useEffect(() => {
+    // if (yearCoReqError?.fall?.)
+    const classes = [];
+    if (yearPreReqError?.fall)
+      for (const val of Object.values(yearPreReqError.fall))
+        if (val != undefined) classes.push(val);
+    if (yearPreReqError?.spring)
+      for (const val of Object.values(yearPreReqError.spring))
+        if (val != undefined) classes.push(val);
+    if (yearPreReqError?.summer1)
+      for (const val of Object.values(yearPreReqError.summer1))
+        if (val != undefined) classes.push(val);
+    if (yearPreReqError?.summer2)
+      for (const val of Object.values(yearPreReqError.summer2))
+        if (val != undefined) classes.push(val);
+
+    console.log(classes);
+    setDisplayReqErrors(classes.length > 0);
+  }, [yearCoReqError, yearPreReqError]);
+
   return (
     <Flex flexDirection="column">
       <YearHeader
@@ -80,6 +103,7 @@ export const ScheduleYear: React.FC<ScheduleYearProps> = ({
         isExpanded={isExpanded}
         toggleExpanded={toggleExpanded}
         removeYearFromCurrPlan={removeYearFromCurrPlan}
+        displayReqErrors={displayReqErrors}
       />
       {isExpanded && (
         <Grid templateColumns="repeat(4, 1fr)" minHeight="220px">
@@ -121,6 +145,7 @@ export const ScheduleYear: React.FC<ScheduleYearProps> = ({
 
 interface YearHeaderProps extends ToggleYearProps {
   year: ScheduleYear2<string>;
+  displayReqErrors: boolean;
   totalCreditsTaken: number;
   removeYearFromCurrPlan: () => void;
 }
@@ -132,6 +157,7 @@ const YearHeader: React.FC<YearHeaderProps> = ({
   isExpanded,
   toggleExpanded,
   removeYearFromCurrPlan,
+  displayReqErrors,
 }) => {
   const backgroundColor = isExpanded
     ? "primary.blue.dark"
@@ -140,6 +166,7 @@ const YearHeader: React.FC<YearHeaderProps> = ({
   return (
     <Flex
       alignItems="center"
+      justifyContent='space-between'
       backgroundColor={backgroundColor + ".main"}
       _hover={{
         backgroundColor: "primary.blue.light.600",
@@ -157,23 +184,41 @@ const YearHeader: React.FC<YearHeaderProps> = ({
           {totalCreditsTaken} credits
         </Text>
       </Flex>
-      <Tooltip label={`Delete year ${year.year}?`} fontSize="md">
-        <IconButton
-          aria-label="Delete course"
-          variant="ghost"
-          color="white"
-          icon={<DeleteIcon />}
-          marginLeft="auto"
-          marginRight="sm"
-          _hover={{ bg: "white", color: "primary.red.main" }}
-          _active={{ bg: `${backgroundColor}.900` }}
-          onClick={(e) => {
-            // important to prevent the click from propogating upwards and triggering the toggle
-            e.stopPropagation();
-            removeYearFromCurrPlan();
-          }}
-        />
-      </Tooltip>
+      <Flex>
+        {displayReqErrors && (
+          <Tooltip label={`There are coreq and/or Prereq errors`} fontSize="md">
+            <IconButton
+              aria-label="There are coreq and/or prereq errors!"
+              variant="ghost"
+              color="primary.red.main"
+              icon={<WarningIcon />}
+              _hover={{ bg: `white` }}
+              _active={{ }}
+              onClick={() => {
+                // open modal
+                console.log("open modal");
+              }}
+            />
+          </Tooltip>
+        )}
+        <Tooltip label={`Delete year ${year.year}?`} fontSize="md">
+          <IconButton
+            aria-label="Delete course"
+            variant="ghost"
+            color="white"
+            icon={<DeleteIcon />}
+            marginLeft="auto"
+            marginRight="sm"
+            _hover={{ bg: "white", color: "primary.red.main" }}
+            _active={{ bg: `${backgroundColor}.900` }}
+            onClick={(e) => {
+              // important to prevent the click from propogating upwards and triggering the toggle
+              e.stopPropagation();
+              removeYearFromCurrPlan();
+            }}
+          />
+        </Tooltip>
+      </Flex>
     </Flex>
   );
 };
