@@ -159,7 +159,7 @@ const YearHeader: React.FC<YearHeaderProps> = ({
   return (
     <Flex
       alignItems="center"
-      justifyContent='space-between'
+      justifyContent="space-between"
       backgroundColor={backgroundColor + ".main"}
       _hover={{
         backgroundColor: "primary.blue.light.600",
@@ -186,11 +186,7 @@ const YearHeader: React.FC<YearHeaderProps> = ({
               color="primary.red.main"
               icon={<WarningIcon />}
               _hover={{ bg: `white` }}
-              _active={{ }}
-              onClick={() => {
-                // open modal
-                console.log("open modal");
-              }}
+              _active={{}}
             />
           </Tooltip>
         )}
