@@ -1,8 +1,20 @@
 import {
-  CoReqWarnings, courseToString, INEUAndPrereq, INEUOrPrereq, INEUPrereq, INEUPrereqCourse, INEUPrereqError, PreReqWarnings, Schedule2, ScheduleTerm2, TermError
+  CoReqWarnings,
+  courseToString,
+  INEUAndPrereq,
+  INEUOrPrereq,
+  INEUPrereq,
+  INEUPrereqCourse,
+  INEUPrereqError,
+  PreReqWarnings,
+  Schedule2,
+  ScheduleTerm2,
+  TermError,
 } from "@graduate/common";
 
-export const getCoReqWarnings = (schedule: Schedule2<unknown>): CoReqWarnings => {
+export const getCoReqWarnings = (
+  schedule: Schedule2<unknown>
+): CoReqWarnings => {
   const errors: CoReqWarnings = {
     type: "coreq",
     years: schedule.years.map((year) => ({
@@ -10,15 +22,17 @@ export const getCoReqWarnings = (schedule: Schedule2<unknown>): CoReqWarnings =>
       fall: getCoReqWarningsSem(year.fall),
       spring: getCoReqWarningsSem(year.spring),
       summer1: getCoReqWarningsSem(year.summer1),
-      summer2: getCoReqWarningsSem(year.summer2)
-    }))
-  }
+      summer2: getCoReqWarningsSem(year.summer2),
+    })),
+  };
   return errors;
-}
+};
 
-export const getCoReqWarningsSem = (term: ScheduleTerm2<unknown>): TermError => {
+export const getCoReqWarningsSem = (
+  term: ScheduleTerm2<unknown>
+): TermError => {
   const seen: Set<string> = new Set();
-  const coReqErrors: TermError = {}
+  const coReqErrors: TermError = {};
   for (const course of term.classes) {
     seen.add(courseToString(course));
   }
@@ -29,7 +43,9 @@ export const getCoReqWarningsSem = (term: ScheduleTerm2<unknown>): TermError => 
   return coReqErrors;
 };
 
-export const getPreReqWarnings = (schedule: Schedule2<unknown>): PreReqWarnings => {
+export const getPreReqWarnings = (
+  schedule: Schedule2<unknown>
+): PreReqWarnings => {
   const seen: Set<string> = new Set();
   const preReqErrors: PreReqWarnings = {
     type: "prereq",
@@ -44,8 +60,11 @@ export const getPreReqWarnings = (schedule: Schedule2<unknown>): PreReqWarnings 
   return preReqErrors;
 };
 
-export const getPreReqWarningSem = (term: ScheduleTerm2<unknown>, seen: Set<string>): TermError => {
-  const preReqs: TermError = {}
+export const getPreReqWarningSem = (
+  term: ScheduleTerm2<unknown>,
+  seen: Set<string>
+): TermError => {
+  const preReqs: TermError = {};
   for (const course of term.classes) {
     if (course.prereqs && course.prereqs.values.length !== 0) {
       preReqs[courseToString(course)] = getReqErrors(course.prereqs, seen);

@@ -170,7 +170,7 @@ export const ScheduleCourse = forwardRef<
             }}
             _active={{ background: "primary.red.900" }}
           >
-            <ReqErrorModal />
+            <ReqErrorModal coReqErr={coReqErr} preReqErr={preReqErr} />
           </Flex>
         )}
         {isEditable && hovered && (
