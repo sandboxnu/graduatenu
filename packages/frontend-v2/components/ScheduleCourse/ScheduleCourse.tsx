@@ -1,13 +1,14 @@
-import { DeleteIcon, WarningIcon } from "@chakra-ui/icons";
+import { DeleteIcon } from "@chakra-ui/icons";
 import { Flex } from "@chakra-ui/react";
 import { useDraggable } from "@dnd-kit/core";
 import { CSS } from "@dnd-kit/utilities";
 import {
   courseToString,
   INEUPrereqError,
-  ScheduleCourse2
+  ScheduleCourse2,
 } from "@graduate/common";
 import { forwardRef, useState } from "react";
+import { ReqErrorModal } from "../Plan/ReqErrorModal";
 
 interface DraggableScheduleCourseProps {
   scheduleCourse: ScheduleCourse2<string>;
@@ -169,11 +170,7 @@ export const ScheduleCourse = forwardRef<
             }}
             _active={{ background: "primary.red.900" }}
           >
-            <WarningIcon
-              color="primary.red.main"
-              transition="color 0.1s ease"
-              // Open Modal here
-            />
+            <ReqErrorModal />
           </Flex>
         )}
         {isEditable && hovered && (

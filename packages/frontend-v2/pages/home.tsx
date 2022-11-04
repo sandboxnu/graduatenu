@@ -6,7 +6,7 @@ import {
   DragOverlay,
   DragStartEvent,
   pointerWithin,
-  rectIntersection
+  rectIntersection,
 } from "@dnd-kit/core";
 import { API } from "@graduate/api-client";
 import { CoReqWarnings, PlanModel, PreReqWarnings } from "@graduate/common";
@@ -24,7 +24,7 @@ import {
   Plan,
   PlanDropdown,
   ScheduleCourse,
-  Sidebar
+  Sidebar,
 } from "../components";
 import { ReqErrorModal } from "../components/Plan/ReqErrorModal";
 import { fetchStudentAndPrepareForDnd, useStudentWithPlans } from "../hooks";
@@ -34,12 +34,12 @@ import {
   logger,
   logout,
   updatePlanForStudent,
-  updatePlanOnDragEnd
+  updatePlanOnDragEnd,
 } from "../utils";
 import { getMajor2Example } from "../utils/convertMajor";
 import {
   getCoReqWarnings,
-  getPreReqWarnings
+  getPreReqWarnings,
 } from "../utils/plan/preAndCoReqCheck";
 
 const DEMO_MAJOR = getMajor2Example();
@@ -91,7 +91,6 @@ const HomePage: NextPage = () => {
       }
     }
   }, [student, selectedPlanId, setSelectedPlanId]);
-
 
   /**
    * Handle errors from useStudentWithPlans.
@@ -207,7 +206,6 @@ const HomePage: NextPage = () => {
               setSelectedPlanId={setSelectedPlanId}
               plans={student.plans}
             />
-            <ReqErrorModal />
             <AddPlanModal setSelectedPlanId={setSelectedPlanId} />
             {selectedPlan && <EditPlanModal plan={selectedPlan} />}
             {selectedPlan && (

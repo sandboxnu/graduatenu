@@ -1,3 +1,4 @@
+import { WarningIcon } from "@chakra-ui/icons";
 import {
   Modal,
   ModalOverlay,
@@ -14,8 +15,11 @@ export const ReqErrorModal = ({}) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
-      <Button onClick={onOpen}>Open Modal</Button>
-
+      <WarningIcon
+        color="primary.red.main"
+        transition="color 0.1s ease"
+        onClick={onOpen}
+      />
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
