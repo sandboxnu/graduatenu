@@ -5,7 +5,7 @@ import { CSS } from "@dnd-kit/utilities";
 import {
   courseToString,
   INEUPrereqError,
-  ScheduleCourse2,
+  ScheduleCourse2
 } from "@graduate/common";
 import { forwardRef, useState } from "react";
 import { ReqErrorModal } from "../Plan/ReqErrorModal";
@@ -170,7 +170,7 @@ export const ScheduleCourse = forwardRef<
             }}
             _active={{ background: "primary.red.900" }}
           >
-            <ReqErrorModal coReqErr={coReqErr} preReqErr={preReqErr} />
+            <ReqErrorModal course={} coReqErr={coReqErr} preReqErr={preReqErr} />
           </Flex>
         )}
         {isEditable && hovered && (

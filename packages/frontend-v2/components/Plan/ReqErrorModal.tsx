@@ -1,23 +1,27 @@
 import { WarningIcon } from "@chakra-ui/icons";
 import {
-  Modal,
-  ModalOverlay,
+  Button, Flex, Modal,
+  ModalBody, ModalCloseButton,
   ModalContent,
-  ModalHeader,
   ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-  useDisclosure,
-  Button,
+  ModalHeader,
+  ModalOverlay, Text, useDisclosure
 } from "@chakra-ui/react";
-import { courseEq, courseToString, INEUPrereqError } from "@graduate/common";
+import {
+  assertUnreachable,
+  courseToString,
+  INEUPrereqError,
+  ScheduleCourse2
+} from "@graduate/common";
 
 interface ReqErrorModalProps {
+  course: ScheduleCourse2<string>,
   preReqErr: INEUPrereqError | undefined;
   coReqErr: INEUPrereqError | undefined;
 }
 
 export const ReqErrorModal: React.FC<ReqErrorModalProps> = ({
+  course,
   coReqErr,
   preReqErr,
 }) => {
@@ -34,9 +38,14 @@ export const ReqErrorModal: React.FC<ReqErrorModalProps> = ({
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Modal Title</ModalHeader>
+          <ModalHeader>Course Errors for {courseToString(course)}</ModalHeader>
           <ModalCloseButton />
-          <ModalBody>{parseCourse(coReqErr)}</ModalBody>
+          <ModalBody>
+            <Text fontSize="lg">CoReq Errors</Text>
+            <ParseCourse course={coReqErr} />
+            <Text fontSize="lg">PreReq Errors</Text>
+            <ParseCourse course={preReqErr} />
+          </ModalBody>
 
           <ModalFooter>
             <Button colorScheme="blue" mr={3} onClick={onClose}>
@@ -50,32 +59,43 @@ export const ReqErrorModal: React.FC<ReqErrorModalProps> = ({
   );
 };
 
+interface ParseCourseProps {
+  course: INEUPrereqError | undefined;
+}
+
 // Look through the course error until there are no more errors!
-const parseCourse = (course: INEUPrereqError | undefined): string => {
+const ParseCourse: React.FC<ParseCourseProps> = ({ course }) => {
   if (course == undefined) {
-    return "";
+    return <></>;
   }
 
-  let out = "";
-
-  switch (course["type"]) {
+  switch (course.type) {
     case "course":
-      // code block
-      out = courseToString(course);
-      break;
+      return <Text fontSize="sm">{courseToString(course)}</Text>;
     case "and":
-      for (const req of course.missing) {
-        out += parseCourse(req);
-      }
-      break;
+      return (
+        <>
+          <Text fontSize="sm">AND</Text>
+          <Flex ml="1rem" direction="column">
+            {course.missing.map((c, index) => (
+              <ParseCourse course={c} key={index} />
+            ))}
+          </Flex>
+        </>
+      );
     case "or":
-      for (const req of course.missing) {
-        out += parseCourse(req);
-      }
-      break;
+      return (
+        <>
+          <Text fontSize="sm">OR</Text>
+          <Flex ml="1rem" direction="column">
+            {course.missing.map((c, index) => (
+              <ParseCourse course={c} key={index} />
+            ))}
+          </Flex>
+        </>
+      );
     default:
-      return "idk :)";
+      assertUnreachable(course);
   }
-
-  return out;
+  return <></>;
 };
