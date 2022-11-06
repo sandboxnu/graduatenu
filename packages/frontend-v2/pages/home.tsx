@@ -26,7 +26,6 @@ import {
   ScheduleCourse,
   Sidebar,
 } from "../components";
-import { ReqErrorModal } from "../components/Plan/ReqErrorModal";
 import { fetchStudentAndPrepareForDnd, useStudentWithPlans } from "../hooks";
 import {
   cleanDndIdsFromPlan,
