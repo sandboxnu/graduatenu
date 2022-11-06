@@ -71,7 +71,7 @@ export const ReqErrorModal: React.FC<ReqErrorModalProps> = ({
           </ModalBody>
 
           <ModalFooter>
-            <Button variant='outline' mr={3} onClick={onClose}>
+            <Button variant="outline" mr={3} onClick={onClose}>
               Close
             </Button>
           </ModalFooter>
