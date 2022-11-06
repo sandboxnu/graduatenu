@@ -31,13 +31,26 @@ export const ReqErrorModal: React.FC<ReqErrorModalProps> = ({
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
-    <>
+    <Flex
+      justifySelf="stretch"
+      alignSelf="stretch"
+      _hover={{
+        background: "primary.red.main",
+        fill: "white",
+        svg: { color: "white" },
+      }}
+      _active={{ background: "primary.red.900" }}
+      onClick={() => {
+        onOpen();
+      }}
+    >
       <WarningIcon
         color="primary.red.main"
-        transition="color 0.1s ease"
-        onClick={() => {
-          onOpen();
-        }}
+        width="2rem"
+        alignSelf="center"
+        alignItems="center"
+        justifySelf="center"
+        transition="background 0.15s ease"
       />
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
@@ -77,7 +90,7 @@ export const ReqErrorModal: React.FC<ReqErrorModalProps> = ({
           </ModalFooter>
         </ModalContent>
       </Modal>
-    </>
+    </Flex>
   );
 };
 
