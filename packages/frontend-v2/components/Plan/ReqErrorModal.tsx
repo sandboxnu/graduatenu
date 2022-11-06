@@ -1,21 +1,25 @@
 import { WarningIcon } from "@chakra-ui/icons";
 import {
-  Button, Flex, Modal,
-  ModalBody, ModalCloseButton,
+  Button,
+  Flex,
+  Modal,
+  ModalBody,
   ModalContent,
   ModalFooter,
   ModalHeader,
-  ModalOverlay, Text, useDisclosure
+  ModalOverlay,
+  Text,
+  useDisclosure,
 } from "@chakra-ui/react";
 import {
   assertUnreachable,
   courseToString,
   INEUPrereqError,
-  ScheduleCourse2
+  ScheduleCourse2,
 } from "@graduate/common";
 
 interface ReqErrorModalProps {
-  course: ScheduleCourse2<string>,
+  course: ScheduleCourse2<string>;
   preReqErr: INEUPrereqError | undefined;
   coReqErr: INEUPrereqError | undefined;
 }
@@ -38,20 +42,38 @@ export const ReqErrorModal: React.FC<ReqErrorModalProps> = ({
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Course Errors for {courseToString(course)}</ModalHeader>
-          <ModalCloseButton />
+          <ModalHeader
+            textAlign="center"
+            backgroundColor="#D9D9D9"
+            borderTopRadius="md"
+          >
+            Course Errors for {courseToString(course)}
+          </ModalHeader>
           <ModalBody>
-            <Text fontSize="lg">CoReq Errors</Text>
-            <ParseCourse course={coReqErr} />
-            <Text fontSize="lg">PreReq Errors</Text>
-            <ParseCourse course={preReqErr} />
+            <Text fontSize="sm" mb="sm" color="red" textAlign="center">
+              It looks like you are missing prerequisites for this course
+            </Text>
+            <Text fontWeight="semibold" mb="xs">{`${courseToString(
+              course
+            )} requires the following:`}</Text>
+            {coReqErr && (
+              <Flex direction="column">
+                <Text fontWeight="semibold">CoReq Errors</Text>
+                <ParseCourse course={coReqErr} />
+              </Flex>
+            )}
+            {preReqErr && (
+              <Flex direction="column">
+                <Text fontWeight="semibold">PreReq Errors</Text>
+                <ParseCourse course={preReqErr} />
+              </Flex>
+            )}
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={onClose}>
+            <Button variant='outline' mr={3} onClick={onClose}>
               Close
             </Button>
-            <Button variant="ghost">Secondary Action</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
@@ -71,11 +93,11 @@ const ParseCourse: React.FC<ParseCourseProps> = ({ course }) => {
 
   switch (course.type) {
     case "course":
-      return <Text fontSize="sm">{courseToString(course)}</Text>;
+      return <Text fontSize="md">{courseToString(course)}</Text>;
     case "and":
       return (
         <>
-          <Text fontSize="sm">AND</Text>
+          <Text fontSize="md">AND</Text>
           <Flex ml="1rem" direction="column">
             {course.missing.map((c, index) => (
               <ParseCourse course={c} key={index} />
