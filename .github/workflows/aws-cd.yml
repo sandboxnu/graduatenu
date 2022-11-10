@@ -1,66 +1,66 @@
-# on:
-#   push:
-#     branches:
-#       - main
+on:
+  push:
+    branches:
+      - duy/staging-infra
 
-# name: Deploy containers to Amazon ECS
+name: Deploy containers to Amazon ECS
 
-# jobs:
-#   deploy:
-#     name: Continuous delivery to AWS
-#     runs-on: ubuntu-latest
+jobs:
+  deploy:
+    name: Continuous delivery to AWS
+    runs-on: ubuntu-latest
 
-#     steps:
-#       - name: Checkout
-#         uses: actions/checkout@v2
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
 
-#       - name: Configure AWS credentials
-#         uses: aws-actions/configure-aws-credentials@v1
-#         with:
-#           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-#           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-#           aws-region: us-east-1
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
 
-#       - name: Login to Amazon ECR
-#         id: login-ecr
-#         uses: aws-actions/amazon-ecr-login@v1
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
 
-#       - name: Build, tag, and push rails image to Amazon ECR
-#         id: build-rails-image
-#         env:
-#           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-#           ECR_REPOSITORY: graduatenu-rails
-#           IMAGE_TAG: ${{ github.sha }}
-#         run: |
-#           # Build a docker container and
-#           # push it to ECR so that it can
-#           # be deployed to ECS.
-#           cd packages/api
-#           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f Dockerfile.prod .
-#           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-#           echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+      - name: Build, tag, and push rails image to Amazon ECR
+        id: build-rails-image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: graduatenu-rails
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          # Build a docker container and
+          # push it to ECR so that it can
+          # be deployed to ECS.
+          # cd packages/api
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f infrastructure/prod/Dockerfile.app .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
 
-#       - name: Build, tag, and push node image to Amazon ECR
-#         id: build-node-image
-#         env:
-#           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-#           ECR_REPOSITORY: graduatenu-node
-#           IMAGE_TAG: ${{ github.sha }}
-#         run: |
-#           # Build a docker container and
-#           # push it to ECR so that it can
-#           # be deployed to ECS.
-#           cd packages/frontend
-#           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f Dockerfile ../../
-#           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-#           echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+      - name: Build, tag, and push node image to Amazon ECR
+        id: build-node-image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: graduatenu-node
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          # Build a docker container and
+          # push it to ECR so that it can
+          # be deployed to ECS.
+          # cd packages/frontend
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f infrastructure/prod/Dockerfile.server .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
 
-#       - name: Update & Deploy ECS task definitions
-#         run: |
-#           # - create new revision for task definition with latest image.
-#           # - redeploy ECS services with the latest revision.
-#           ./infrastructure/prod/redeploy.sh staging
+      - name: Update & Deploy ECS task definitions
+        run: |
+          # - create new revision for task definition with latest image.
+          # - redeploy ECS services with the latest revision.
+          ./infrastructure/prod/redeploy.sh staging
 
-#       - name: Logout of Amazon ECR
-#         if: always()
-#         run: docker logout ${{ steps.login-ecr.outputs.registry }}
+      - name: Logout of Amazon ECR
+        if: always()
+        run: docker logout ${{ steps.login-ecr.outputs.registry }}
