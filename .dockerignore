@@ -1,0 +1,11 @@
+**/.next
+**/dist
+**/node_modules
+**/.DS_Store
+**/README.md
+**/.gitignore
+.dockerignore
+.prettierignore
+.LICENSE
+.git
+.yarn/cache
