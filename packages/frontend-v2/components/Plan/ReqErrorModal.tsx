@@ -17,6 +17,7 @@ import {
   INEUPrereqError,
   ScheduleCourse2,
 } from "@graduate/common";
+import { useState } from "react";
 
 interface ReqErrorModalProps {
   course: ScheduleCourse2<string>;
@@ -29,6 +30,8 @@ export const ReqErrorModal: React.FC<ReqErrorModalProps> = ({
   coReqErr,
   preReqErr,
 }) => {
+  const [page, setPage] = useState(0);
+
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <Flex
@@ -69,14 +72,14 @@ export const ReqErrorModal: React.FC<ReqErrorModalProps> = ({
             <Text fontWeight="semibold" mb="xs">{`${courseToString(
               course
             )} requires the following:`}</Text>
-            {coReqErr && (
-              <Flex direction="column">
+            {coReqErr && page == 0 && (
+              <Flex direction="column" paddingX="sm">
                 <Text fontWeight="semibold">CoReq Errors</Text>
                 <ParseCourse course={coReqErr} />
               </Flex>
             )}
-            {preReqErr && (
-              <Flex direction="column">
+            {preReqErr && page == 1 && (
+              <Flex direction="column" paddingX="sm">
                 <Text fontWeight="semibold">PreReq Errors</Text>
                 <ParseCourse course={preReqErr} />
               </Flex>
@@ -84,9 +87,30 @@ export const ReqErrorModal: React.FC<ReqErrorModalProps> = ({
           </ModalBody>
 
           <ModalFooter>
-            <Button variant="outline" mr={3} onClick={onClose}>
-              Close
-            </Button>
+            <Flex
+              justifyContent="space-between"
+              width="100%"
+              alignItems="center"
+            >
+              <Button
+                variant="solidRed"
+                mr={3}
+                onClick={() => {
+                  onClose();
+                  setPage(0);
+                }}
+              >
+                Close
+              </Button>
+              <Text fontSize="sm">{`Page ${page + 1} of 2`}</Text>
+              <Button
+                variant="solidBlue"
+                mr={3}
+                onClick={() => setPage(page == 0 ? 1 : 0)}
+              >
+                {page == 0 ? "Next" : "Prev"}
+              </Button>
+            </Flex>
           </ModalFooter>
         </ModalContent>
       </Modal>
