@@ -17,7 +17,7 @@ import {
   INEUPrereqError,
   ScheduleCourse2,
 } from "@graduate/common";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface ReqErrorModalProps {
   course: ScheduleCourse2<string>;
@@ -33,6 +33,16 @@ export const ReqErrorModal: React.FC<ReqErrorModalProps> = ({
   const [page, setPage] = useState(0);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
+  useEffect(() => {
+    // if no coreq set default to page 2 (prereq page)
+    if (!coReqErr) {
+      setPage(1);
+      let onlyOne = true;
+    } else if (!preReqErr) {
+      setPage(0);
+      let onlyOne = true;
+    }
+  });
   return (
     <Flex
       justifySelf="stretch"
