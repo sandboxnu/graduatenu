@@ -1,3 +1,5 @@
+# STOPPED (Cannotpullcontainererror: pull image manifest has been retried 1 time(s): failed to resolve ref 316729054138.dkr.ecr.us-east-1.amazonaws.com/graduatenu-rails:b7f23f44044d7b5fd23ffbfe7bde6b74a0e71a13: 316729054138.dkr.ecr.us-east-1.amazonaws.com/graduatenu-rails:b7f23f44044d7b5fd23ffbfe7bde6b74a0e71a13: not found)
+
 on:
   push:
     branches:
@@ -38,7 +40,7 @@ jobs:
           # cd packages/api
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f infrastructure/prod/Dockerfile.server .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-          echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+          echo "image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
 
       - name: Build, tag, and push node image to Amazon ECR
         id: build-node-image
@@ -53,7 +55,7 @@ jobs:
           # cd packages/frontend
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f infrastructure/prod/Dockerfile.app .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-          echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+          echo "image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
 
       - name: Update & Deploy ECS task definitions
         run: |
