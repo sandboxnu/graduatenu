@@ -83,7 +83,7 @@ export const updatePlanOnDragEnd = (
      * Course is from a term, so we need to move it, we don't need to move
      * courses that are from the sidebar.
      */
-    if (!draggedCourse.data.current.isFromSidebar) {
+    if (!isFromSidebar) {
       if (!oldTerm) {
         throw new Error("Term the course is dragged from isn't found");
       }

@@ -74,8 +74,15 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
 
     const updatedSelectedCourses = [...selectedCourses];
 
-    // push course + any coreqs of the course
-    const coreqs = await getRequiredCourseCoreqs(course);
+    // grab any coreqs of the course that haven't already been selected/added to the term
+    const coreqs = (await getRequiredCourseCoreqs(course)).filter((coreq) => {
+      const isAlreadySelected = selectedCourses.find((selectedCourse) =>
+        isEqualCourses(selectedCourse, coreq)
+      );
+      const isAlreadyAdded = isCourseInCurrTerm(coreq);
+      return isAlreadyAdded || isAlreadySelected;
+    });
+
     updatedSelectedCourses.push(course, ...coreqs);
 
     setSelectedCourses(updatedSelectedCourses);
