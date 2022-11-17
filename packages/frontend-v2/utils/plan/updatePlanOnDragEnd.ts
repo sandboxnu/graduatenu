@@ -15,6 +15,8 @@ import { isCourseInTerm } from "./isCourseInTerm";
  * Updates the schedule of plan when a course is dragged from one term to
  * another term by removing the course from the old term and adding it to the new term.
  *
+ * Throws an error if no change should be made.
+ *
  * The given plan isn't mutated, and a completely new plan is returned.
  *
  * @param   plan

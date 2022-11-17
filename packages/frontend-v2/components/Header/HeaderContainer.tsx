@@ -1,6 +1,7 @@
 import { Flex } from "@chakra-ui/react";
+import React, { PropsWithChildren } from "react";
 
-export const HeaderContainer: React.FC = ({ children }) => {
+export const HeaderContainer: React.FC<PropsWithChildren> = ({ children }) => {
   return (
     <Flex
       flexDirection="row"

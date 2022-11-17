@@ -87,6 +87,21 @@ interface SearchClass {
   minCredits: number;
 }
 
+function occurrenceToCourse(occurrence): ScheduleCourse2<null> | null {
+  if (!occurrence) return null;
+
+  return {
+    name: occurrence.name,
+    subject: occurrence.subject,
+    classId: occurrence.classId,
+    numCreditsMax: occurrence.maxCredits,
+    numCreditsMin: occurrence.minCredits,
+    prereqs: occurrence.prereqs,
+    coreqs: occurrence.coreqs,
+    id: null,
+  };
+}
+
 /**
  * A client for interacting with the Search API. Allows us to fetch and search
  * for courses.
@@ -122,13 +137,45 @@ class SearchAPIClient {
     });
 
     const courseData = await res.data.data;
-    if (courseData?.class?.latestOccurrence) {
-      const course: ScheduleCourse2<null> = courseData.class.latestOccurrence;
-      course.numCreditsMax = courseData.class.latestOccurrence.maxCredits;
-      course.numCreditsMin = courseData.class.latestOccurrence.minCredits;
-      delete courseData.class.latestOccurrence.maxCredits;
-      delete courseData.class.latestOccurrence.minCredits;
-      return course;
+    return occurrenceToCourse(courseData?.class?.latestOccurrence);
+  };
+
+  fetchCourses = async (
+    courseQueryData: { subject: string; classId: string }[]
+  ): Promise<ScheduleCourse2<null>[] | null> => {
+    // formats the request data
+    const input = courseQueryData
+      .map((course) => {
+        return `{subject: "${course.subject}", classId: "${course.classId}"}`;
+      })
+      .join(",");
+
+    const res = await this.axios({
+      method: "post",
+      data: {
+        query: `{
+          bulkClasses(input: [${input}]) {
+            latestOccurrence {
+              name
+              subject
+              classId
+              minCredits
+              maxCredits
+              prereqs
+              coreqs
+              termId
+            }
+          }
+        }`,
+      },
+    });
+
+    const coursesData = await res.data.data;
+
+    if (coursesData.bulkClasses) {
+      return coursesData.bulkClasses.map((course) => {
+        return occurrenceToCourse(course?.latestOccurrence);
+      });
     } else {
       return null;
     }
@@ -157,7 +204,7 @@ class SearchAPIClient {
     });
 
     const coursesData = await res.data;
-    const nodes = coursesData.data.search.nodes;
+    const nodes = coursesData?.data?.search?.nodes ?? [];
 
     const courses = nodes.map((result: SearchClass) => {
       return {

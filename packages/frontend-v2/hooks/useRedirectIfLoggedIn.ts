@@ -1,7 +1,7 @@
 import { API } from "@graduate/api-client";
 import router from "next/router";
 import { useEffect, useState } from "react";
-import { redirectToOnboardingOrHome, logger } from "../utils";
+import { logger } from "../utils";
 import { AxiosError } from "axios";
 
 /**
@@ -16,8 +16,8 @@ export const useRedirectIfLoggedIn = () => {
   const loginWithCookie = async () => {
     setRenderSpinner(true);
     try {
-      const student = await API.student.getMe();
-      redirectToOnboardingOrHome(student, router);
+      await API.student.getMe();
+      router.push("/home");
     } catch (err) {
       const error = err as AxiosError;
       logger.error(error);

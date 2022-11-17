@@ -10,6 +10,7 @@ import {
   Sidebar,
   PlanDropdown,
   ScheduleCourse,
+  AddYearButton,
 } from "../components";
 import { fetchStudentAndPrepareForDnd, useStudentWithPlans } from "../hooks";
 import {
@@ -17,6 +18,9 @@ import {
   DragEndEvent,
   DragOverlay,
   DragStartEvent,
+  pointerWithin,
+  rectIntersection,
+  CollisionDetection,
 } from "@dnd-kit/core";
 import {
   cleanDndIdsFromPlan,
@@ -30,10 +34,22 @@ import { API } from "@graduate/api-client";
 import { PlanModel } from "@graduate/common";
 import { useRouter } from "next/router";
 import { Box, Button, Flex } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import React, { PropsWithChildren, useEffect, useState } from "react";
 import { getMajor2Example } from "../utils/convertMajor";
 
 const DEMO_MAJOR = getMajor2Example();
+
+// Algorithm to decide which droppable the course is currently over (if any).
+// See https://docs.dndkit.com/api-documentation/context-provider/collision-detection-algorithms for more info.
+const courseDndCollisisonAlgorithm: CollisionDetection = (args) => {
+  const pointerCollisions = pointerWithin(args);
+  if (pointerCollisions.length > 0) {
+    return pointerCollisions;
+  } else {
+    // Fallback as recommended by the dnd-kit docs
+    return rectIntersection(args);
+  }
+};
 
 const HomePage: NextPage = () => {
   const { error, student, mutateStudent } = useStudentWithPlans();
@@ -97,7 +113,6 @@ const HomePage: NextPage = () => {
    *    persisted student from our backend
    * 6. If anything goes wrong in the POST, rollback the optimistic update
    */
-
   const handleDragStart = (event: DragStartEvent) => {
     const { active } = event;
     setActiveCourse(active.data.current?.course);
@@ -155,7 +170,13 @@ const HomePage: NextPage = () => {
   };
 
   return (
-    <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
+    <DndContext
+      onDragStart={handleDragStart}
+      onDragEnd={handleDragEnd}
+      // Changes the default dnd collision algorithm to something
+      // that feels more intuitive.
+      collisionDetection={courseDndCollisisonAlgorithm}
+    >
       <PageLayout>
         <Flex flexDirection="column">
           <Flex alignItems="center" mb="sm">
@@ -165,9 +186,7 @@ const HomePage: NextPage = () => {
               plans={student.plans}
             />
             <AddPlanModal setSelectedPlanId={setSelectedPlanId} />
-            {selectedPlanId && (
-              <EditPlanModal plan={selectedPlan} planId={selectedPlanId} />
-            )}
+            {selectedPlan && <EditPlanModal plan={selectedPlan} />}
             {selectedPlan && (
               <DeletePlanModal
                 setSelectedPlanId={setSelectedPlanId}
@@ -177,16 +196,28 @@ const HomePage: NextPage = () => {
             )}
           </Flex>
           {selectedPlan && (
-            <Plan
-              plan={selectedPlan}
-              mutateStudentWithUpdatedPlan={mutateStudentWithUpdatedPlan}
-            />
+            <>
+              <Plan
+                plan={selectedPlan}
+                mutateStudentWithUpdatedPlan={mutateStudentWithUpdatedPlan}
+              />
+              <Flex mt="sm">
+                <AddYearButton
+                  plan={selectedPlan}
+                  mutateStudentWithUpdatedPlan={mutateStudentWithUpdatedPlan}
+                />
+              </Flex>
+            </>
           )}
         </Flex>
       </PageLayout>
-      <DragOverlay>
+      <DragOverlay dropAnimation={null}>
         {activeCourse ? (
-          <ScheduleCourse isDisabled={false} scheduleCourse={activeCourse} />
+          <ScheduleCourse
+            isDisabled={false}
+            scheduleCourse={activeCourse}
+            isOverlay={true}
+          />
         ) : null}
       </DragOverlay>
     </DndContext>
@@ -197,7 +228,7 @@ const HomePage: NextPage = () => {
  * This will have everything that can be rendered without the student and
  * plans(i.e: header, sidebar, etc)
  */
-const PageLayout: React.FC = ({ children }) => {
+const PageLayout: React.FC<PropsWithChildren> = ({ children }) => {
   return (
     <Flex flexDirection="column" height="100vh" overflow="hidden">
       <Header />

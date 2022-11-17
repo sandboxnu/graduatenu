@@ -1,11 +1,10 @@
-import { Flex, Text } from "@chakra-ui/react";
-import { forwardRef } from "react";
+import { Flex } from "@chakra-ui/react";
+import { forwardRef, useState } from "react";
 import { ScheduleCourse2 } from "@graduate/common";
 import { useDraggable } from "@dnd-kit/core";
 import { CSS } from "@dnd-kit/utilities";
-import { DragHandleIcon } from "@chakra-ui/icons";
-import { CourseTrashButton } from "./CourseTrashButton";
-import { getCourseDisplayString } from "../../utils";
+import { DeleteIcon } from "@chakra-ui/icons";
+import { CourseDragIcon } from "./CourseDragIcon";
 
 interface DraggableScheduleCourseProps {
   scheduleCourse: ScheduleCourse2<string>;
@@ -57,6 +56,7 @@ interface ScheduleCourseProps extends DraggableScheduleCourseProps {
   attributes?: any;
   transform?: string;
   isDisabled: boolean;
+  isOverlay?: boolean;
 }
 
 // eslint-disable-next-line react/display-name
@@ -69,52 +69,97 @@ export const ScheduleCourse = forwardRef<
       scheduleCourse,
       removeCourse,
       isEditable = false,
-      isDragging = false,
       listeners,
       attributes,
-      isDisabled,
+      isOverlay = false,
     },
     ref
   ) => {
+    const [hovered, setHovered] = useState(false);
+    // This component uses some plain HTML elements instead of Chakra
+    // components due to strange performance degradation with dnd-kit.
+    // While it seems unintuitive, replacing Flex with div and the
+    // DragHandleIcon with an equivalent SVG significantly improved
+    // dnd responsiveness.
     return (
-      <Flex
+      <div
+        style={{
+          backgroundColor: "white",
+          display: "flex",
+          borderRadius: "5px",
+          fontSize: "14px",
+          alignItems: "center",
+          transition: "transform 0.15s ease",
+          transform: hovered ? "scale(1.04)" : "scale(1)",
+        }}
+        onMouseEnter={() => {
+          setHovered(true);
+        }}
+        onMouseLeave={() => {
+          setHovered(false);
+        }}
         ref={ref}
         {...attributes}
-        cursor={isDisabled ? "default" : isDragging ? "grabbing" : "grab"}
-        borderRadius="md"
-        boxShadow="md"
-        backgroundColor={isDisabled ? "neutral.main" : "white"}
-        color={isDisabled ? "primary.blue.light.main" : "gray.800"}
-        pl="2xs"
-        pr="sm"
-        py="xs"
-        width="100%"
-        _hover={{ bg: isDisabled ? "neutral.main" : "neutral.700" }}
-        _active={{ bg: isDisabled ? "neutral.main" : "neutral.900" }}
       >
-        <Flex alignItems="center" {...listeners}>
-          <DragHandleIcon
-            mr="md"
-            color={
-              isDisabled ? "primary.blue.light.main" : "primary.blue.dark.main"
-            }
-          />
-          <Text fontSize="sm" pr="2xs">
-            {getCourseDisplayString(scheduleCourse)}
-          </Text>
-          <Text fontSize="xs" pr="md" noOfLines={1}>
-            {scheduleCourse.name}
-          </Text>
-        </Flex>
-        {isEditable && (
-          <CourseTrashButton
-            marginLeft="auto"
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            flexGrow: 1,
+            background: "",
+            padding: "8px 8px",
+            cursor: isOverlay ? "grabbing" : "grab",
+          }}
+          {...listeners}
+        >
+          <CourseDragIcon />
+          <p style={{ fontWeight: "bold" }}>
+            {scheduleCourse.classId}{" "}
+            <span style={{ marginLeft: "2px", fontWeight: "normal" }}>
+              {scheduleCourse.name}
+            </span>
+          </p>
+        </div>
+        {isEditable && hovered && (
+          <Flex
+            width="32px"
+            alignSelf="stretch"
+            flexShrink={0}
+            alignItems="center"
+            justifyContent="center"
+            borderRadius="0px 5px 5px 0px"
+            transition="background 0.15s ease"
+            _hover={{
+              background: "primary.blue.dark.main",
+              fill: "white",
+              svg: {
+                color: "white",
+              },
+            }}
+            _active={{
+              background: "primary.blue.dark.900",
+            }}
             onClick={
-              removeCourse ? () => removeCourse(scheduleCourse) : undefined
+              removeCourse
+                ? () => {
+                    removeCourse(scheduleCourse);
+                  }
+                : undefined
             }
-          />
+          >
+            <DeleteIcon
+              color="primary.blue.dark.300"
+              transition="color 0.1s ease"
+            />
+          </Flex>
         )}
-      </Flex>
+        {(isOverlay || (isEditable && !hovered)) && (
+          // This is a spacer to take up the same amount of space as the delete button
+          // so we don't have the text of the course shifting around when it's hovered
+          // or dragged.
+          <div style={{ width: "32px", height: "32px", flexShrink: 0 }}></div>
+        )}
+      </div>
     );
   }
 );

@@ -83,6 +83,40 @@ export interface INEUPrereqCourse {
   missing?: true;
 }
 
+export type INEUPrereqError =
+  | INEUPreReqCourseError
+  | INEUPrereqAndError
+  | INEUPrereqOrError;
+
+export interface INEUPreReqCourseError {
+  type: "course";
+  subject: string;
+  classId: string;
+}
+
+export interface INEUPrereqAndError {
+  type: "and";
+  missing: INEUPrereqError[];
+}
+
+export interface INEUPrereqOrError {
+  type: "or";
+  missing: INEUPrereqError[];
+}
+
+export interface courseError {
+  [key: string]: INEUPrereqError | undefined;
+}
+
+export interface preReqWarnings {
+  [key: string]: {
+    fall: courseError;
+    spring: courseError;
+    summer1: courseError;
+    summer2: courseError;
+  };
+}
+
 //                                       NEW MAJOR OBJECT HERE
 /**
  * A Major, containing all the requirements.
