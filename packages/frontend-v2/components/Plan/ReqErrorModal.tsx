@@ -17,7 +17,7 @@ import {
   INEUPrereqError,
   ScheduleCourse2,
 } from "@graduate/common";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 interface ReqErrorModalProps {
   course: ScheduleCourse2<string>;
@@ -33,16 +33,6 @@ export const ReqErrorModal: React.FC<ReqErrorModalProps> = ({
   const [page, setPage] = useState(0);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
-  useEffect(() => {
-    // if no coreq set default to page 2 (prereq page)
-    if (!coReqErr) {
-      setPage(1);
-      let onlyOne = true;
-    } else if (!preReqErr) {
-      setPage(0);
-      let onlyOne = true;
-    }
-  });
   return (
     <Flex
       justifySelf="stretch"
@@ -79,18 +69,19 @@ export const ReqErrorModal: React.FC<ReqErrorModalProps> = ({
             <Text fontSize="sm" mb="sm" color="red" textAlign="center">
               It looks like you are missing prerequisites for this course
             </Text>
-            <Text fontWeight="semibold" mb="xs">{`${courseToString(
-              course
-            )} requires the following:`}</Text>
             {coReqErr && page == 0 && (
-              <Flex direction="column" paddingX="sm">
-                <Text fontWeight="semibold">CoReq Errors</Text>
+              <Flex direction="column">
+                <Text fontWeight="semibold" mb="xs" textAlign='center'>
+                  CoReq Errors
+                </Text>
                 <ParseCourse course={coReqErr} />
               </Flex>
             )}
-            {preReqErr && page == 1 && (
-              <Flex direction="column" paddingX="sm">
-                <Text fontWeight="semibold">PreReq Errors</Text>
+            {preReqErr && (page == 1 || !coReqErr) && (
+              <Flex direction="column">
+                <Text fontWeight="semibold" mb="xs" textAlign='center'>
+                  PreReq Errors
+                </Text>
                 <ParseCourse course={preReqErr} />
               </Flex>
             )}
@@ -112,14 +103,18 @@ export const ReqErrorModal: React.FC<ReqErrorModalProps> = ({
               >
                 Close
               </Button>
-              <Text fontSize="sm">{`Page ${page + 1} of 2`}</Text>
-              <Button
-                variant="solidBlue"
-                mr={3}
-                onClick={() => setPage(page == 0 ? 1 : 0)}
-              >
-                {page == 0 ? "Next" : "Prev"}
-              </Button>
+              {coReqErr && preReqErr && (
+                <Text fontSize="sm">{`Page ${page + 1} of 2`}</Text>
+              )}
+              {coReqErr && preReqErr && (
+                <Button
+                  variant="solidBlue"
+                  mr={3}
+                  onClick={() => setPage(page == 0 ? 1 : 0)}
+                >
+                  {page == 0 ? "Next" : "Prev"}
+                </Button>
+              )}
             </Flex>
           </ModalFooter>
         </ModalContent>
