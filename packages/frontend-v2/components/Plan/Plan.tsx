@@ -1,4 +1,4 @@
-import { Box, Flex } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import {
   PlanModel,
   ScheduleCourse2,
@@ -104,11 +104,12 @@ export const Plan: React.FC<PlanProps> = ({
         const isExpanded = expandedYears.has(scheduleYear.year);
 
         return (
-          <Box
+          <Flex
             key={scheduleYear.year}
-            borderX={isExpanded ? "1px" : undefined}
-            borderBottom={isExpanded ? "1px" : undefined}
-            minHeight={isExpanded ? "300px" : undefined}
+            borderX="1px"
+            borderBottom="1px"
+            borderColor={isExpanded ? undefined : "primary.blue.light.main"}
+            flexDirection="column"
           >
             <ScheduleYear
               scheduleYear={scheduleYear}
@@ -123,7 +124,7 @@ export const Plan: React.FC<PlanProps> = ({
                 removeYearFromCurrPlan(scheduleYear.year)
               }
             />
-          </Box>
+          </Flex>
         );
       })}
     </Flex>
