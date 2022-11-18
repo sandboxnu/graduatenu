@@ -42,15 +42,10 @@ const getRequiredCourses = (
 };
 
 const Sidebar: React.FC<SidebarProps> = memo(({ major, selectedPlan }) => {
-  // console.log(major)
-
-  // let validationStatus: MajorValidationResult | undefined = undefined
   let validationStatus: MajorValidationResult | undefined = useMemo(() => {
     if (selectedPlan) {
       const takenCourses = getAllCoursesFromPlan(selectedPlan);
-      validationStatus = validateMajor2(major, takenCourses, undefined);
-      console.log(validationStatus);
-      return validationStatus;
+      return validateMajor2(major, takenCourses, undefined);
     } else {
       return undefined;
     }
