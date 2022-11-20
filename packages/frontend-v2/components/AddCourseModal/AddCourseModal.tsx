@@ -80,7 +80,7 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
         isEqualCourses(selectedCourse, coreq)
       );
       const isAlreadyAdded = isCourseInCurrTerm(coreq);
-      return isAlreadyAdded || isAlreadySelected;
+      return !(isAlreadyAdded || isAlreadySelected);
     });
 
     updatedSelectedCourses.push(course, ...coreqs);
