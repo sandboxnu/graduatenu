@@ -1,5 +1,6 @@
 import { WarningIcon } from "@chakra-ui/icons";
 import {
+  Box,
   Button,
   Flex,
   Modal,
@@ -31,6 +32,8 @@ export const ReqErrorModal: React.FC<ReqErrorModalProps> = ({
   preReqErr,
 }) => {
   const [page, setPage] = useState(0);
+  console.log(coReqErr);
+  console.log(preReqErr);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
@@ -71,18 +74,18 @@ export const ReqErrorModal: React.FC<ReqErrorModalProps> = ({
             </Text>
             {coReqErr && page == 0 && (
               <Flex direction="column">
-                <Text fontWeight="semibold" mb="xs" textAlign='center'>
+                <Text fontWeight="semibold" mb="xs" textAlign="center">
                   CoReq Errors
                 </Text>
-                <ParseCourse course={coReqErr} />
+                <ParseCourse course={coReqErr} parent={true} />
               </Flex>
             )}
             {preReqErr && (page == 1 || !coReqErr) && (
               <Flex direction="column">
-                <Text fontWeight="semibold" mb="xs" textAlign='center'>
+                <Text fontWeight="semibold" mb="xs" textAlign="center">
                   PreReq Errors
                 </Text>
-                <ParseCourse course={preReqErr} />
+                <ParseCourse course={preReqErr} parent={true} />
               </Flex>
             )}
           </ModalBody>
@@ -125,41 +128,98 @@ export const ReqErrorModal: React.FC<ReqErrorModalProps> = ({
 
 interface ParseCourseProps {
   course: INEUPrereqError | undefined;
+  parent: boolean;
 }
 
 // Look through the course error until there are no more errors!
-const ParseCourse: React.FC<ParseCourseProps> = ({ course }) => {
+// TODO: Fix the styling!
+const ParseCourse: React.FC<ParseCourseProps> = ({ course, parent }) => {
   if (course == undefined) {
     return <></>;
   }
 
   switch (course.type) {
     case "course":
-      return <Text fontSize="md">{courseToString(course)}</Text>;
-    case "and":
       return (
         <>
-          <Text fontSize="md">AND</Text>
-          <Flex ml="1rem" direction="column">
-            {course.missing.map((c, index) => (
-              <ParseCourse course={c} key={index} />
-            ))}
-          </Flex>
+          {parent ? (
+            <BorderContainer>
+              <Text fontSize="md">{courseToString(course)}</Text>
+            </BorderContainer>
+          ) : (
+            <Text fontSize="md">{courseToString(course)}</Text>
+          )}
         </>
+      );
+
+    case "and":
+      return (
+        <Flex ml={parent ? "0" : "sm"} direction="column">
+          {parent ? (
+            <>
+              {course.missing.map((c, index) => (
+                <BorderContainer key={index}>
+                  <Flex direction="column" key={index}>
+                    <ParseCourse course={c} parent={true} />
+                    {index < course.missing.length - 1 && (
+                      <Text fontSize="md">AND</Text>
+                    )}
+                  </Flex>
+                </BorderContainer>
+              ))}
+            </>
+          ) : (
+            <BorderContainer>
+              {course.missing.map((c, index) => (
+                <BorderContainer key={index}>
+                  <ParseCourse course={c} parent={true} />
+                  {index < course.missing.length - 1 && (
+                    <Text fontSize="md">AND</Text>
+                  )}
+                </BorderContainer>
+              ))}
+            </BorderContainer>
+          )}
+        </Flex>
       );
     case "or":
       return (
-        <>
-          <Text fontSize="sm">OR</Text>
-          <Flex ml="1rem" direction="column">
-            {course.missing.map((c, index) => (
-              <ParseCourse course={c} key={index} />
-            ))}
-          </Flex>
-        </>
+        <Flex ml={parent ? "0" : "sm"} direction="column">
+          {course.missing.map((c, index) => (
+            <Flex
+              direction="column"
+              justifyContent="center"
+              alignItems="center"
+              key={index}
+            >
+              <BorderContainer>
+                <ParseCourse course={c} parent={false} />
+              </BorderContainer>
+              {index < course.missing.length - 1 && (
+                <Text fontSize="md">OR</Text>
+              )}
+            </Flex>
+          ))}
+        </Flex>
       );
     default:
       assertUnreachable(course);
   }
   return <></>;
+};
+
+const BorderContainer: React.FC<React.PropsWithChildren> = ({ children }) => {
+  return (
+    <Box
+      border="solid"
+      borderWidth="thin"
+      alignSelf="stretch"
+      padding="xs"
+      marginY="xs"
+      borderRadius="lg"
+      borderColor="grey"
+    >
+      {children}
+    </Box>
+  );
 };
