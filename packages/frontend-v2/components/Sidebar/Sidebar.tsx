@@ -99,11 +99,14 @@ const Sidebar: React.FC<SidebarProps> = memo(({ major, selectedPlan }) => {
         major.requirementSections.map((section, index) => {
           let sectionValidationError: MajorValidationError | undefined =
             undefined;
+
+          // Find the error for this sidebar component
           if (validationStatus && validationStatus.type == "Err") {
             if (!validationStatus.err.majorRequirementsError)
               throw new Error("Top level requirement should have an error.");
             if (validationStatus.err.majorRequirementsError.type !== "AND")
               throw new Error("Top level requirement error should be AND.");
+
             const andReq = validationStatus.err.majorRequirementsError?.error;
             if (andReq.type == "AND_UNSAT_CHILD") {
               sectionValidationError = andReq.childErrors.find((error) => {
@@ -113,7 +116,8 @@ const Sidebar: React.FC<SidebarProps> = memo(({ major, selectedPlan }) => {
               andReq.type == "AND_NO_SOLUTION" &&
               andReq.discoveredAtChild == index
             ) {
-              // If a range is invalid, but everything else is okay, it seems to create a No Solution error for that section.
+              // Create a section error so we don't display a check on the section that
+              // caused the "no solution" error.
               sectionValidationError = {
                 type: "SECTION",
                 sectionTitle: section.title,
@@ -121,7 +125,6 @@ const Sidebar: React.FC<SidebarProps> = memo(({ major, selectedPlan }) => {
                 minRequiredChildCount: 0,
                 maxPossibleChildCount: 0,
               };
-              // throw new Error("No solution found to major requirements.")
             }
           }
 

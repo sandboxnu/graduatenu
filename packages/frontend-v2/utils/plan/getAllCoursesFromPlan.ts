@@ -9,7 +9,7 @@ const YearSeasons: ("fall" | "spring" | "summer1" | "summer2")[] = [
 
 /**
  * Gets all courses from the given plan. Courses taken multiple times are
- * included in the result.
+ * included in the result multiple times.
  *
  * @param   plan The plan to pull courses from.
  * @returns      All courses in the plan.
