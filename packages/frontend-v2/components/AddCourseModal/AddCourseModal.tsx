@@ -28,8 +28,8 @@ interface AddCourseModalProps {
   /** Function to close the modal UX, returned from the useDisclosure chakra hook */
   closeModalDisplay: () => void;
 
-  /** Function to check if the given cousrs exists in the plan being displayed. */
-  isCourseInCurrPlan: (course: ScheduleCourse2<unknown>) => boolean;
+  /** Function to check if the given course exists in the plan being displayed. */
+  isCourseInCurrTerm: (course: ScheduleCourse2<unknown>) => boolean;
 
   /** Function to add classes to the curr term in the plan being displayed. */
   addClassesToCurrTerm: (courses: ScheduleCourse2<null>[]) => void;
@@ -38,7 +38,7 @@ interface AddCourseModalProps {
 export const AddCourseModal: React.FC<AddCourseModalProps> = ({
   isOpen,
   closeModalDisplay,
-  isCourseInCurrPlan,
+  isCourseInCurrTerm,
   addClassesToCurrTerm,
 }) => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -74,8 +74,15 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
 
     const updatedSelectedCourses = [...selectedCourses];
 
-    // push course + any coreqs of the course
-    const coreqs = await getRequiredCourseCoreqs(course);
+    // grab any coreqs of the course that haven't already been selected/added to the term
+    const coreqs = (await getRequiredCourseCoreqs(course)).filter((coreq) => {
+      const isAlreadySelected = selectedCourses.find((selectedCourse) =>
+        isEqualCourses(selectedCourse, coreq)
+      );
+      const isAlreadyAdded = isCourseInCurrTerm(coreq);
+      return !(isAlreadyAdded || isAlreadySelected);
+    });
+
     updatedSelectedCourses.push(course, ...coreqs);
 
     setSelectedCourses(updatedSelectedCourses);
@@ -134,7 +141,7 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
                 key={getCourseDisplayString(searchResult)}
                 searchResult={searchResult}
                 addSelectedCourse={addSelectedCourse}
-                isResultAlreadyInSchedule={isCourseInCurrPlan(searchResult)}
+                isResultAlreadyInTerm={isCourseInCurrTerm(searchResult)}
                 isResultAlreadySelected={isCourseAlreadySelected(searchResult)}
               />
             ))}
