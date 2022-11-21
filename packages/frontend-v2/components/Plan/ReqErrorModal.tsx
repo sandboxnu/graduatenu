@@ -154,37 +154,47 @@ const ParseCourse: React.FC<ParseCourseProps> = ({ course, parent }) => {
 
     case "and":
       return (
-        <Flex ml={parent ? "0" : "sm"} direction="column">
-          {parent ? (
+        <Flex direction="column">
+          {course.missing.map((c, index) => (
+            <Flex direction="column" key={index}>
+              <BorderContainer>
+                <ParseCourse course={c} parent={false} />
+              </BorderContainer>
+              {index < course.missing.length - 1 && (
+                <Text fontSize="md" textAlign="center">
+                  AND
+                </Text>
+              )}
+            </Flex>
+          ))}
+          {/* {parent ? (
+            <BorderContainer>
+              {course.missing.map((c, index) => (
+                <Flex direction="column" key={index}>
+                  <ParseCourse course={c} parent={false} />
+                  {index < course.missing.length - 1 && (
+                    <Text fontSize="md" textAlign='center'>AND</Text>
+                  )}
+                </Flex>
+              ))}
+            </BorderContainer>
+          ) : (
             <>
               {course.missing.map((c, index) => (
                 <BorderContainer key={index}>
-                  <Flex direction="column" key={index}>
-                    <ParseCourse course={c} parent={true} />
-                    {index < course.missing.length - 1 && (
-                      <Text fontSize="md">AND</Text>
-                    )}
-                  </Flex>
-                </BorderContainer>
-              ))}
-            </>
-          ) : (
-            <BorderContainer>
-              {course.missing.map((c, index) => (
-                <BorderContainer key={index}>
-                  <ParseCourse course={c} parent={true} />
+                  <ParseCourse course={c} parent={false} />
                   {index < course.missing.length - 1 && (
-                    <Text fontSize="md">AND</Text>
+                    <Text fontSize="md" textAlign='center'>AND</Text>
                   )}
                 </BorderContainer>
               ))}
-            </BorderContainer>
-          )}
+            </>
+          )} */}
         </Flex>
       );
     case "or":
       return (
-        <Flex ml={parent ? "0" : "sm"} direction="column">
+        <Flex direction="column">
           {course.missing.map((c, index) => (
             <Flex
               direction="column"
@@ -215,7 +225,7 @@ const BorderContainer: React.FC<React.PropsWithChildren> = ({ children }) => {
       borderWidth="thin"
       alignSelf="stretch"
       padding="xs"
-      marginY="xs"
+      margin="3xs"
       borderRadius="lg"
       borderColor="grey"
     >
