@@ -6,6 +6,7 @@ import { DeleteResult, Repository, UpdateResult } from "typeorm";
 import { CreatePlanDto, UpdatePlanDto } from "../../../common";
 import { Plan } from "./entities/plan.entity";
 import { formatServiceCtx } from "../../src/utils";
+import { MajorService } from "../major/major.service";
 
 @Injectable()
 export class PlanService {
@@ -13,10 +14,27 @@ export class PlanService {
 
   constructor(
     @InjectRepository(Plan)
-    private planRepository: Repository<Plan>
+    private planRepository: Repository<Plan>,
+    private readonly majorService: MajorService
   ) {}
 
   create(createPlanDto: CreatePlanDto, student: Student): Promise<Plan> {
+    // validate the major, year, and concentration
+    const { major: majorName, catalogYear } = createPlanDto;
+    const major = this.majorService.findByMajorAndYear(majorName, catalogYear);
+    if (!major) {
+      this.logger.debug(
+        {
+          message: "Attempting to create a plan with an unsupported major.",
+          major,
+          catalogYear,
+        },
+        this.formatPlanServiceCtx("create")
+      );
+
+      return null;
+    }
+
     const newPlan = this.planRepository.create({ ...createPlanDto, student });
 
     try {

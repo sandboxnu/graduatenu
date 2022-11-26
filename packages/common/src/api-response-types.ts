@@ -1,4 +1,4 @@
-import { ScheduleCourse, Schedule2 } from "./types";
+import { ScheduleCourse, Schedule2, Major2 } from "./types";
 
 /** Types our API responds with. */
 
@@ -41,3 +41,8 @@ export class StudentModel<T> {
 export class GetStudentResponse extends StudentModel<null> {}
 
 export class UpdateStudentResponse extends StudentModel<null> {}
+
+export class GetSupportedMajorsResponse {
+  // { year => { majorName => Major2 }}
+  supportedMajors: Record<string, Record<string, Major2>>;
+}
