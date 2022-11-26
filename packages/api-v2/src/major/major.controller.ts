@@ -1,9 +1,8 @@
 import { GetSupportedMajorsResponse, Major2 } from "@graduate/common";
 import {
-  BadRequestException,
   Controller,
   Get,
-  // NotFoundException,
+  NotFoundException,
   Param,
   ParseIntPipe,
 } from "@nestjs/common";
@@ -21,7 +20,7 @@ export class MajorController {
   ): Major2 {
     const major = this.majorService.findByMajorAndYear(majorName, catalogYear);
     if (!major) {
-      throw new BadRequestException();
+      throw new NotFoundException();
     }
 
     return major;

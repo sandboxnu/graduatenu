@@ -2,7 +2,7 @@ import { createMock } from "@golevelup/ts-jest";
 import { Test, TestingModule } from "@nestjs/testing";
 import { MajorService } from "../major.service";
 
-describe("Majorervice", () => {
+describe("MajorService", () => {
   let service: MajorService;
 
   beforeEach(async () => {

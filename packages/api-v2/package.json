@@ -21,7 +21,7 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:db:up": "docker-compose -f ../../infrastructure/test/docker-compose.e2e.yml up -d",
     "test:db:down": "docker-compose -f ../../infrastructure/test/docker-compose.e2e.yml down",
-    "test:e2e": "yarn g:cross-env NODE_ENV=testing TERM=dumb jest --config ./test/jest-e2e.json --detectOpenHandles"
+    "test:e2e": "yarn g:cross-env NODE_ENV=testing jest --config ./test/jest-e2e.json --detectOpenHandles"
   },
   "dependencies": {
     "@graduate/common": "workspace:*",
