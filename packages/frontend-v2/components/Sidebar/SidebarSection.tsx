@@ -11,18 +11,17 @@ interface SidebarSectionProps {
   section: Section;
   courseData: { [id: string]: ScheduleCourse2<null> };
   dndIdPrefix: string;
-  validationStatus?: MajorValidationError;
+  isValid: boolean;
 }
 
 const SidebarSection: React.FC<SidebarSectionProps> = ({
   section,
   courseData,
   dndIdPrefix,
-  validationStatus,
+  isValid,
 }) => {
   const [opened, setOpened] = useState(false);
 
-  const isComplete = validationStatus == undefined;
   return (
     <Box borderTop="1px solid white" cursor="pointer" userSelect="none">
       <Text
@@ -42,7 +41,7 @@ const SidebarSection: React.FC<SidebarSectionProps> = ({
           backgroundColor: "neutral.200",
         }}
       >
-        {isComplete ? (
+        {isValid ? (
           <span
             style={{
               background: "green",

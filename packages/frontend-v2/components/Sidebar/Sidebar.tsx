@@ -101,11 +101,14 @@ const Sidebar: React.FC<SidebarProps> = memo(({ major, selectedPlan }) => {
           const sectionValidationError: MajorValidationError | undefined =
             getSectionError(index, validationStatus);
 
+          const sectionIsValid =
+            selectedPlan !== undefined && sectionValidationError === undefined;
+
           return (
             <SidebarSection
               key={section.title}
               section={section}
-              validationStatus={sectionValidationError}
+              isValid={sectionIsValid}
               courseData={courseData}
               dndIdPrefix={"sidebar-" + index}
             />

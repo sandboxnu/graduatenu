@@ -46,6 +46,20 @@ export const getSectionError = (
         minRequiredChildCount: 0,
         maxPossibleChildCount: 0,
       };
+    } else if (andReq.type == MajorValidationErrorType.And.UnsatChildAndNoSolution) {
+      if (andReq.noSolution.discoveredAtChild === index) {
+        return {
+          type: "SECTION",
+          sectionTitle: "No Solution Section",
+          childErrors: [],
+          minRequiredChildCount: 0,
+          maxPossibleChildCount: 0,
+        };
+      } else {
+        return andReq.unsatChildErrors.childErrors.find((error) => {
+          return error.childIndex === index;
+        });
+      }
     }
 
     return undefined;
