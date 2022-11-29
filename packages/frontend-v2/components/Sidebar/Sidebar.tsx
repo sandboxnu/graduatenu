@@ -3,15 +3,22 @@ import { SearchAPI } from "@graduate/api-client";
 import {
   IRequiredCourse,
   Major2,
+  MajorValidationError,
+  MajorValidationResult,
+  PlanModel,
   Requirement2,
   ScheduleCourse2,
   Section,
 } from "@graduate/common";
-import { memo, useEffect, useState } from "react";
+import { memo, useEffect, useMemo, useState } from "react";
 import SidebarSection from "./SidebarSection";
+import { validateMajor2 } from "@graduate/common";
+import { getAllCoursesFromPlan } from "../../utils/plan/getAllCoursesFromPlan";
+import { getSectionError } from "../../utils/plan/getSectionError";
 
 interface SidebarProps {
   major: Major2;
+  selectedPlan: PlanModel<string> | undefined;
 }
 
 // This was moved out of the Sidebar component as it doesn't change
@@ -35,7 +42,16 @@ const getRequiredCourses = (
   }
 };
 
-const Sidebar: React.FC<SidebarProps> = memo(({ major }) => {
+const Sidebar: React.FC<SidebarProps> = memo(({ major, selectedPlan }) => {
+  const validationStatus: MajorValidationResult | undefined = useMemo(() => {
+    if (selectedPlan) {
+      const takenCourses = getAllCoursesFromPlan(selectedPlan);
+      return validateMajor2(major, takenCourses, undefined);
+    } else {
+      return undefined;
+    }
+  }, [selectedPlan, major]);
+
   const [courseData, setCourseData] = useState({});
 
   useEffect(() => {
@@ -81,14 +97,20 @@ const Sidebar: React.FC<SidebarProps> = memo(({ major }) => {
         {major.name}
       </Text>
       {courseData &&
-        major.requirementSections.map((section, index) => (
-          <SidebarSection
-            key={section.title}
-            section={section}
-            courseData={courseData}
-            dndIdPrefix={"sidebar-" + index}
-          />
-        ))}
+        major.requirementSections.map((section, index) => {
+          const sectionValidationError: MajorValidationError | undefined =
+            getSectionError(index, validationStatus);
+
+          return (
+            <SidebarSection
+              key={section.title}
+              section={section}
+              validationStatus={sectionValidationError}
+              courseData={courseData}
+              dndIdPrefix={"sidebar-" + index}
+            />
+          );
+        })}
     </Box>
   );
 });
