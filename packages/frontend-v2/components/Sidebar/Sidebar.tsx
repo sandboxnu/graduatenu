@@ -14,6 +14,7 @@ import { memo, useEffect, useMemo, useState } from "react";
 import SidebarSection from "./SidebarSection";
 import { validateMajor2 } from "@graduate/common";
 import { getAllCoursesFromPlan } from "../../utils/plan/getAllCoursesFromPlan";
+import { getSectionError } from "../../utils/plan/getSectionError";
 
 interface SidebarProps {
   major: Major2;
@@ -97,36 +98,8 @@ const Sidebar: React.FC<SidebarProps> = memo(({ major, selectedPlan }) => {
       </Text>
       {courseData &&
         major.requirementSections.map((section, index) => {
-          let sectionValidationError: MajorValidationError | undefined =
-            undefined;
-
-          // Find the error for this sidebar component
-          if (validationStatus && validationStatus.type == "Err") {
-            if (!validationStatus.err.majorRequirementsError)
-              throw new Error("Top level requirement should have an error.");
-            if (validationStatus.err.majorRequirementsError.type !== "AND")
-              throw new Error("Top level requirement error should be AND.");
-
-            const andReq = validationStatus.err.majorRequirementsError?.error;
-            if (andReq.type == "AND_UNSAT_CHILD") {
-              sectionValidationError = andReq.childErrors.find((error) => {
-                return error.childIndex === index;
-              });
-            } else if (
-              andReq.type == "AND_NO_SOLUTION" &&
-              andReq.discoveredAtChild == index
-            ) {
-              // Create a section error so we don't display a check on the section that
-              // caused the "no solution" error.
-              sectionValidationError = {
-                type: "SECTION",
-                sectionTitle: section.title,
-                childErrors: [],
-                minRequiredChildCount: 0,
-                maxPossibleChildCount: 0,
-              };
-            }
-          }
+          const sectionValidationError: MajorValidationError | undefined =
+            getSectionError(index, validationStatus);
 
           return (
             <SidebarSection

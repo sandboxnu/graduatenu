@@ -48,7 +48,7 @@ export type MajorValidationError =
   | OrError
   | XOMError
   | SectionError;
-const MajorValidationErrorType = {
+export const MajorValidationErrorType = {
   Course: "COURSE",
   Range: "RANGE",
   And: {
