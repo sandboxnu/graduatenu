@@ -1,9 +1,5 @@
 import { Box, Text } from "@chakra-ui/react";
-import {
-  MajorValidationError,
-  ScheduleCourse2,
-  Section,
-} from "@graduate/common";
+import { ScheduleCourse2, Section } from "@graduate/common";
 import { useState } from "react";
 import SectionRequirement from "./SectionRequirement";
 
