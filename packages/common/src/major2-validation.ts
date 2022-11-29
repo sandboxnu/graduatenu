@@ -514,7 +514,6 @@ function validateAndRequirement(
   r: IAndCourse2,
   tracker: CourseValidationTracker
 ): Result<Array<Solution>, MajorValidationError> {
-  // const splitResults = validateAndSplit(r.courses, tracker);
   const results = validateRequirements(r.courses, tracker);
   const [allChildReqSolutions, childErrors] = splitChildResults(results);
 
