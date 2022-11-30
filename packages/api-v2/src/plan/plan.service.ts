@@ -19,7 +19,7 @@ export class PlanService {
   ) {}
 
   create(createPlanDto: CreatePlanDto, student: Student): Promise<Plan> {
-    // validate the major, year, and concentration
+    // validate the major, year
     const { major: majorName, catalogYear } = createPlanDto;
     const major = this.majorService.findByMajorAndYear(majorName, catalogYear);
     if (!major) {
@@ -44,27 +44,38 @@ export class PlanService {
     }
   }
 
-  async findOne(id: number): Promise<Plan> {
-    return this.planRepository.findOne({
+  /** Returns the plan if it exists, else returns nothing. */
+  async findOne(id: number): Promise<Plan | void> {
+    const plan = await this.planRepository.findOne({
       where: { id },
       relations: ["student"],
     });
+
+    if (!plan) {
+      this.logger.debug(
+        { message: "Plan doesn't exist in db", id },
+        this.formatPlanServiceCtx
+      );
+      return;
+    }
+
+    return plan;
   }
 
   async isPlanOwnedByStudent(
     planId: number,
     loggedInStudent: Student
   ): Promise<boolean> {
-    const { student: planOwner } = await this.findOne(planId);
-
-    /** A plan that doesn't exist isn't owned by the anyone so returning false. */
-    if (!planOwner) {
+    const plan = await this.findOne(planId);
+    if (!plan) {
       this.logger.debug(
         { message: "Plan doesn't exist in db", planId },
         this.formatPlanServiceCtx("isPlanOwnedByStudent")
       );
       return false;
     }
+
+    const planOwner = plan.student;
 
     return StudentService.isEqualStudents(planOwner, loggedInStudent);
   }
@@ -73,6 +84,49 @@ export class PlanService {
     id: number,
     updatePlanDto: UpdatePlanDto
   ): Promise<UpdateResult> {
+    const { major: newMajorName, catalogYear: newCatalogYear } = updatePlanDto;
+
+    // validate the major, year pair if either one is being updated
+    if (newCatalogYear || newMajorName) {
+      let catalogYear = newCatalogYear;
+      let majorName = newMajorName;
+
+      // if either one isn't updated, fetch it from db
+      if (!newCatalogYear || !newMajorName) {
+        const plan = await this.findOne(id);
+
+        // updating a non-existing plan
+        if (!plan) {
+          return null;
+        }
+
+        if (!newCatalogYear) {
+          catalogYear = plan.catalogYear;
+        }
+
+        if (!newMajorName) {
+          majorName = plan.major;
+        }
+      }
+
+      const major = this.majorService.findByMajorAndYear(
+        majorName,
+        catalogYear
+      );
+      if (!major) {
+        this.logger.debug(
+          {
+            message: "Attempting to create a plan with an unsupported major.",
+            major,
+            catalogYear,
+          },
+          this.formatPlanServiceCtx("create")
+        );
+
+        return null;
+      }
+    }
+
     const updateResult = await this.planRepository.update(id, updatePlanDto);
 
     if (updateResult.affected === 0) {

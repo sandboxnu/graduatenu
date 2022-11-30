@@ -7,7 +7,6 @@ import {
   ParseIntPipe,
 } from "@nestjs/common";
 import { MajorService } from "./major.service";
-import { SUPPORTED_MAJORS } from "./majors";
 
 @Controller("majors")
 export class MajorController {
@@ -28,14 +27,7 @@ export class MajorController {
 
   @Get("supportedMajors")
   getSupportedMajors(): GetSupportedMajorsResponse {
-    const supportedMajors = {};
-
-    // filter out the major predicates
-    Object.keys(SUPPORTED_MAJORS).forEach((year) => {
-      const { majors } = SUPPORTED_MAJORS[year];
-      supportedMajors[year] = majors;
-    });
-
+    const supportedMajors = this.majorService.getSupportedMajors();
     return { supportedMajors };
   }
 }

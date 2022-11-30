@@ -1,7 +1,7 @@
 import { Major2 } from "@graduate/common";
 import { Injectable, Logger } from "@nestjs/common";
 import { formatServiceCtx } from "../utils";
-import { isSupportedYear, SUPPORTED_MAJORS } from "./majors";
+import { SUPPORTED_MAJOR_YEARS, SUPPORTED_MAJORS } from "./majors";
 
 @Injectable()
 export class MajorService {
@@ -10,7 +10,7 @@ export class MajorService {
   constructor() {}
 
   findByMajorAndYear(majorName: string, catalogYear: number): Major2 | null {
-    if (!isSupportedYear(catalogYear)) {
+    if (!SUPPORTED_MAJOR_YEARS.includes(catalogYear.toString())) {
       this.logger.debug(
         { mesage: "Major year not found", catalogYear },
         MajorService.formatMajorServiceCtx("findByMajorAndYear")
@@ -18,8 +18,8 @@ export class MajorService {
       return null;
     }
 
-    const { majors, isSupportedMajorName } = SUPPORTED_MAJORS[catalogYear];
-    if (!isSupportedMajorName(majorName)) {
+    const { majors, supportedMajorNames } = SUPPORTED_MAJORS[catalogYear];
+    if (!supportedMajorNames.includes(majorName)) {
       this.logger.debug(
         { mesage: "Major within year not found", majorName, catalogYear },
         MajorService.formatMajorServiceCtx("findByMajorAndYear")
@@ -28,6 +28,17 @@ export class MajorService {
     }
 
     return majors[majorName];
+  }
+
+  getSupportedMajors(): Record<string, string[]> {
+    // filter out the majors themselves
+    const supportedMajors = {};
+    SUPPORTED_MAJOR_YEARS.map((year) => {
+      const { supportedMajorNames } = SUPPORTED_MAJORS[year];
+      supportedMajors[year] = supportedMajorNames;
+    });
+
+    return supportedMajors;
   }
 
   private static formatMajorServiceCtx(methodName: string) {

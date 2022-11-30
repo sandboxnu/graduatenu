@@ -1,20 +1,15 @@
 import { Major2 } from "@graduate/common";
-import { isSupportedMajor2022, SUPPORTED_MAJORS_2022 } from "./2022";
+import { SUPPORED_MAJORS_NAMES_2022, SUPPORTED_MAJORS_2022 } from "./2022";
 
-const SUPPORED_YEARS = [2022] as const;
-type SUPPORTED_YEARS_TUPLE_TYPE = typeof SUPPORED_YEARS;
-type SUPPORTED_YEARS_TYPE = SUPPORTED_YEARS_TUPLE_TYPE[number];
-
-export const isSupportedYear = (year: number): year is SUPPORTED_YEARS_TYPE => {
-  return SUPPORED_YEARS.includes(year as SUPPORTED_YEARS_TYPE);
-};
-
+/** Year => { Major Name => Major2, Supported Major Names => [Major Name] } */
 export const SUPPORTED_MAJORS: Record<
-  SUPPORTED_YEARS_TYPE,
-  { majors: Record<string, Major2>; isSupportedMajorName: (string) => boolean }
+  string,
+  { majors: Record<string, Major2>; supportedMajorNames: string[] }
 > = {
-  2022: {
+  "2022": {
     majors: SUPPORTED_MAJORS_2022,
-    isSupportedMajorName: isSupportedMajor2022,
+    supportedMajorNames: SUPPORED_MAJORS_NAMES_2022,
   },
 };
+
+export const SUPPORTED_MAJOR_YEARS = Object.keys(SUPPORTED_MAJORS);
