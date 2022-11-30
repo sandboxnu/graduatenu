@@ -7,8 +7,6 @@ import { SUPPORTED_MAJOR_YEARS, SUPPORTED_MAJORS } from "./majors";
 export class MajorService {
   private readonly logger: Logger = new Logger();
 
-  constructor() {}
-
   findByMajorAndYear(majorName: string, catalogYear: number): Major2 | null {
     if (!SUPPORTED_MAJOR_YEARS.includes(catalogYear.toString())) {
       this.logger.debug(

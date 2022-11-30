@@ -95,7 +95,7 @@ export class PlanService {
       if (!newCatalogYear || !newMajorName) {
         const plan = await this.findOne(id);
 
-        // updating a non-existing plan
+        // updating a non-existent plan
         if (!plan) {
           return null;
         }
