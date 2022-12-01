@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - duy/staging-infra
+      - main
 
 name: Deploy containers to Amazon ECS
 
