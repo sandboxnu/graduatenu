@@ -1,5 +1,3 @@
-# STOPPED (Cannotpullcontainererror: pull image manifest has been retried 1 time(s): failed to resolve ref 316729054138.dkr.ecr.us-east-1.amazonaws.com/graduatenu-rails:b7f23f44044d7b5fd23ffbfe7bde6b74a0e71a13: 316729054138.dkr.ecr.us-east-1.amazonaws.com/graduatenu-rails:b7f23f44044d7b5fd23ffbfe7bde6b74a0e71a13: not found)
-
 on:
   push:
     branches:
