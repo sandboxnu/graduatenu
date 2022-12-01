@@ -9,7 +9,6 @@ import {
   ScheduleCourse2,
   Section,
 } from "@graduate/common";
-import { isValidElement } from "react";
 import { DraggableScheduleCourse } from "../ScheduleCourse";
 import SidebarSection from "./SidebarSection";
 
