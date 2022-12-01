@@ -11,6 +11,7 @@ import {
   PlanDropdown,
   ScheduleCourse,
   AddYearButton,
+  SidebarContainer,
 } from "../components";
 import { fetchStudentAndPrepareForDnd, useStudentWithPlans } from "../hooks";
 import {
@@ -35,9 +36,6 @@ import { PlanModel } from "@graduate/common";
 import { useRouter } from "next/router";
 import { Box, Button, Flex } from "@chakra-ui/react";
 import React, { PropsWithChildren, useEffect, useState } from "react";
-import { getMajor2Example } from "../utils/convertMajor";
-
-const DEMO_MAJOR = getMajor2Example();
 
 // Algorithm to decide which droppable the course is currently over (if any).
 // See https://docs.dndkit.com/api-documentation/context-provider/collision-detection-algorithms for more info.
@@ -88,7 +86,7 @@ const HomePage: NextPage = () => {
     logger.error("HomePage", error);
     handleApiClientError(error, router);
 
-    // If we couldn't fetch the student's plan, show a blank page for now.
+    // If we couldn't fetch the student, show a blank page for now.
     // We might want to show some more actionable error in the future.
     return <div></div>;
   }
@@ -178,38 +176,55 @@ const HomePage: NextPage = () => {
       collisionDetection={courseDndCollisisonAlgorithm}
     >
       <PageLayout>
-        <Flex flexDirection="column">
-          <Flex alignItems="center" mb="sm">
-            <PlanDropdown
-              selectedPlanId={selectedPlanId}
-              setSelectedPlanId={setSelectedPlanId}
-              plans={student.plans}
+        <Box
+          bg="primary.blue.light.main"
+          overflowY="auto"
+          width="360px"
+          flexShrink={0}
+        >
+          {selectedPlan === undefined ? (
+            <SidebarContainer title="No plan selected" />
+          ) : (
+            <Sidebar
+              majorName={selectedPlan.major}
+              catalogYear={selectedPlan.catalogYear}
             />
-            <AddPlanModal setSelectedPlanId={setSelectedPlanId} />
-            {selectedPlan && <EditPlanModal plan={selectedPlan} />}
-            {selectedPlan && (
-              <DeletePlanModal
+          )}
+        </Box>
+        <Box p="md" overflow="auto" flexGrow={1}>
+          <Flex flexDirection="column">
+            <Flex alignItems="center" mb="sm">
+              <PlanDropdown
+                selectedPlanId={selectedPlanId}
                 setSelectedPlanId={setSelectedPlanId}
-                planName={selectedPlan.name}
-                planId={selectedPlan.id}
+                plans={student.plans}
               />
-            )}
-          </Flex>
-          {selectedPlan && (
-            <>
-              <Plan
-                plan={selectedPlan}
-                mutateStudentWithUpdatedPlan={mutateStudentWithUpdatedPlan}
-              />
-              <Flex mt="sm">
-                <AddYearButton
+              <AddPlanModal setSelectedPlanId={setSelectedPlanId} />
+              {selectedPlan && <EditPlanModal plan={selectedPlan} />}
+              {selectedPlan && (
+                <DeletePlanModal
+                  setSelectedPlanId={setSelectedPlanId}
+                  planName={selectedPlan.name}
+                  planId={selectedPlan.id}
+                />
+              )}
+            </Flex>
+            {selectedPlan && (
+              <>
+                <Plan
                   plan={selectedPlan}
                   mutateStudentWithUpdatedPlan={mutateStudentWithUpdatedPlan}
                 />
-              </Flex>
-            </>
-          )}
-        </Flex>
+                <Flex mt="sm">
+                  <AddYearButton
+                    plan={selectedPlan}
+                    mutateStudentWithUpdatedPlan={mutateStudentWithUpdatedPlan}
+                  />
+                </Flex>
+              </>
+            )}
+          </Flex>
+        </Box>
       </PageLayout>
       <DragOverlay dropAnimation={null}>
         {activeCourse ? (
@@ -233,17 +248,7 @@ const PageLayout: React.FC<PropsWithChildren> = ({ children }) => {
     <Flex flexDirection="column" height="100vh" overflow="hidden">
       <Header />
       <Flex height="100%" overflow="hidden">
-        <Box
-          bg="primary.blue.light.main"
-          overflowY="auto"
-          width="360px"
-          flexShrink={0}
-        >
-          <Sidebar major={DEMO_MAJOR} />
-        </Box>
-        <Box p="md" overflow="auto" flexGrow={1}>
-          {children}
-        </Box>
+        {children}
       </Flex>
     </Flex>
   );
