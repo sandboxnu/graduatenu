@@ -16,7 +16,8 @@ type MajorReturn = MajorResponse & {
 /**
  * Gets the major by the major name and year.
  *
- * @param majorName The name of the major, ex: "Computer Science, BSCS".
+ * @param catalogYear
+ * @param majorName   The name of the major, ex: "Computer Science, BSCS".
  */
 export function useMajor(catalogYear: number, majorName: string): MajorReturn {
   const key = `api/majors/${catalogYear}/${majorName}`;
