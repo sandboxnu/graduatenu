@@ -110,12 +110,12 @@ const Sidebar: React.FC<SidebarProps> = memo(({ majorName, catalogYear }) => {
   );
 });
 
-interface EmptySidebarWithMessageProps {
+interface SidebarContainerProps {
   title: string;
 }
 
 export const SidebarContainer: React.FC<
-  PropsWithChildren<EmptySidebarWithMessageProps>
+  PropsWithChildren<SidebarContainerProps>
 > = ({ title, children }) => {
   return (
     <Box p="xs 0px" backgroundColor="neutral.main">
