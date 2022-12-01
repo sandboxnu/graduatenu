@@ -9,6 +9,7 @@ import {
   ScheduleCourse2,
   Section,
 } from "@graduate/common";
+import { isValidElement } from "react";
 import { DraggableScheduleCourse } from "../ScheduleCourse";
 import SidebarSection from "./SidebarSection";
 
@@ -127,6 +128,7 @@ const SectionRequirement: React.FC<SidebarRequirementProps> = ({
   const renderSection = (requirement: Section) => {
     return (
       <SidebarSection
+        isValid
         section={requirement}
         courseData={courseData}
         dndIdPrefix={dndIdPrefix + "-sec"}
