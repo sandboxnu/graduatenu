@@ -83,7 +83,10 @@ export interface INEUPrereqCourse {
   missing?: true;
 }
 
-export type INEUPrereqError = INEUPreReqCourseError | INEUPrereqAndError | INEUPrereqOrError
+export type INEUPrereqError =
+  | INEUPreReqCourseError
+  | INEUPrereqAndError
+  | INEUPrereqOrError;
 
 export interface INEUPreReqCourseError {
   type: "course";
@@ -102,16 +105,16 @@ export interface INEUPrereqOrError {
 }
 
 export interface courseError {
-  [key: string]: INEUPrereqError | undefined
+  [key: string]: INEUPrereqError | undefined;
 }
 
 export interface preReqWarnings {
   [key: string]: {
-    fall: courseError,
-    spring: courseError,
-    summer1: courseError,
-    summer2: courseError
-  }
+    fall: courseError;
+    spring: courseError;
+    summer1: courseError;
+    summer2: courseError;
+  };
 }
 
 //                                       NEW MAJOR OBJECT HERE

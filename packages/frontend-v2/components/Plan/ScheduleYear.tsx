@@ -1,13 +1,5 @@
 import { DeleteIcon } from "@chakra-ui/icons";
-import {
-  Flex,
-  Grid,
-  GridItem,
-  GridItemProps,
-  IconButton,
-  Text,
-  Tooltip,
-} from "@chakra-ui/react";
+import { Flex, Grid, IconButton, Text, Tooltip } from "@chakra-ui/react";
 import { ScheduleCourse2, ScheduleYear2, SeasonEnum } from "@graduate/common";
 import { ScheduleTerm } from "./ScheduleTerm";
 
@@ -18,9 +10,6 @@ interface ToggleYearProps {
 
 interface ScheduleYearProps extends ToggleYearProps {
   scheduleYear: ScheduleYear2<string>;
-
-  /** Function to check if the given cousrs exists in the plan being displayed. */
-  isCourseInCurrPlan: (course: ScheduleCourse2<unknown>) => boolean;
 
   /** Function to add classes to a given term in the plan being displayed. */
   addClassesToTermInCurrPlan: (
@@ -42,7 +31,6 @@ interface ScheduleYearProps extends ToggleYearProps {
 
 export const ScheduleYear: React.FC<ScheduleYearProps> = ({
   scheduleYear,
-  isCourseInCurrPlan,
   addClassesToTermInCurrPlan,
   removeCourseFromTermInCurrPlan,
   isExpanded,
@@ -68,7 +56,7 @@ export const ScheduleYear: React.FC<ScheduleYearProps> = ({
   }, 0);
 
   return (
-    <Flex flexDirection="column" height="100%" minHeight="inherit">
+    <Flex flexDirection="column">
       <YearHeader
         year={scheduleYear}
         totalCreditsTaken={totalCreditsThisYear}
@@ -77,29 +65,25 @@ export const ScheduleYear: React.FC<ScheduleYearProps> = ({
         removeYearFromCurrPlan={removeYearFromCurrPlan}
       />
       {isExpanded && (
-        <Grid templateColumns="repeat(4, 1fr)" flex={1}>
+        <Grid templateColumns="repeat(4, 1fr)" minHeight="220px">
           <ScheduleTerm
             scheduleTerm={scheduleYear.fall}
-            isCourseInCurrPlan={isCourseInCurrPlan}
             addClassesToTermInCurrPlan={addClassesToTermInCurrPlan}
             removeCourseFromTermInCurrPlan={removeCourseFromTermInCurrPlan}
           />
           <ScheduleTerm
             scheduleTerm={scheduleYear.spring}
-            isCourseInCurrPlan={isCourseInCurrPlan}
             addClassesToTermInCurrPlan={addClassesToTermInCurrPlan}
             removeCourseFromTermInCurrPlan={removeCourseFromTermInCurrPlan}
           />
           {/* TODO: support summer full term */}
           <ScheduleTerm
             scheduleTerm={scheduleYear.summer1}
-            isCourseInCurrPlan={isCourseInCurrPlan}
             addClassesToTermInCurrPlan={addClassesToTermInCurrPlan}
             removeCourseFromTermInCurrPlan={removeCourseFromTermInCurrPlan}
           />
           <ScheduleTerm
             scheduleTerm={scheduleYear.summer2}
-            isCourseInCurrPlan={isCourseInCurrPlan}
             addClassesToTermInCurrPlan={addClassesToTermInCurrPlan}
             removeCourseFromTermInCurrPlan={removeCourseFromTermInCurrPlan}
             isLastColumn
@@ -128,70 +112,43 @@ const YearHeader: React.FC<YearHeaderProps> = ({
     ? "primary.blue.dark"
     : "primary.blue.light";
 
-  const hoverBackgrounColor = isExpanded
-    ? "primary.blue.dark.700"
-    : "primary.blue.light.700";
-
   return (
-    <Grid
-      templateColumns="repeat(12, 1fr)"
+    <Flex
       alignItems="center"
+      backgroundColor={backgroundColor + ".main"}
+      _hover={{
+        backgroundColor: "primary.blue.light.600",
+      }}
+      transition="background-color 0.15s ease"
+      paddingTop="sm"
+      paddingBottom="sm"
       onClick={toggleExpanded}
-      role="group"
+      cursor="pointer"
+      userSelect="none"
     >
-      <YearHeaderColumnContainer
-        colSpan={1}
-        justifyContent="center"
-        mr="5xs"
-        bg={`${backgroundColor}.main`}
-        _groupHover={{ backgroundColor: hoverBackgrounColor }}
-      >
-        <Text fontWeight="bold" color="white">
-          Year {year.year}
+      <Flex flexDirection="column" marginLeft="md">
+        <Text color="white">Year {year.year}</Text>
+        <Text color="white" fontWeight="bold">
+          {totalCreditsTaken} credits
         </Text>
-      </YearHeaderColumnContainer>
-      <YearHeaderColumnContainer
-        colSpan={10}
-        pl="md"
-        bg={`${backgroundColor}.main`}
-        _groupHover={{ backgroundColor: hoverBackgrounColor }}
-      >
-        <Text color="white">{totalCreditsTaken} credits</Text>
-      </YearHeaderColumnContainer>
-      <YearHeaderColumnContainer
-        colSpan={1}
-        justifyContent="right"
-        bg={`${backgroundColor}.main`}
-        _groupHover={{ backgroundColor: hoverBackgrounColor }}
-      >
-        <Tooltip label={`Delete year ${year.year}?`} fontSize="md">
-          <IconButton
-            aria-label="Delete course"
-            variant="ghost"
-            color="primary.red.main"
-            icon={<DeleteIcon />}
-            _hover={{ bg: `${backgroundColor}.900` }}
-            _active={{ bg: `${backgroundColor}.900` }}
-            onClick={(e) => {
-              // important to prevent the click from propogating upwards and triggering the toggle
-              e.stopPropagation();
-              removeYearFromCurrPlan();
-            }}
-          />
-        </Tooltip>
-      </YearHeaderColumnContainer>
-    </Grid>
-  );
-};
-
-/** A GridItem container for the columns in a year header */
-const YearHeaderColumnContainer: React.FC<GridItemProps> = ({
-  children,
-  ...rest
-}) => {
-  return (
-    <GridItem height="100%" display="flex" alignItems="center" {...rest}>
-      {children}
-    </GridItem>
+      </Flex>
+      <Tooltip label={`Delete year ${year.year}?`} fontSize="md">
+        <IconButton
+          aria-label="Delete course"
+          variant="ghost"
+          color="white"
+          icon={<DeleteIcon />}
+          marginLeft="auto"
+          marginRight="sm"
+          _hover={{ bg: "white", color: "primary.red.main" }}
+          _active={{ bg: `${backgroundColor}.900` }}
+          onClick={(e) => {
+            // important to prevent the click from propogating upwards and triggering the toggle
+            e.stopPropagation();
+            removeYearFromCurrPlan();
+          }}
+        />
+      </Tooltip>
+    </Flex>
   );
 };
