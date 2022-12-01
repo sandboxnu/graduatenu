@@ -18,6 +18,7 @@ import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useSWRConfig } from "swr";
 import { USE_STUDENT_WITH_PLANS_SWR_KEY } from "../../hooks";
+import { useSupportedMajors } from "../../hooks/useSupportedMajors";
 import { handleApiClientError } from "../../utils";
 import { toast } from "../../utils";
 import { BlueButton } from "../Button";
@@ -33,16 +34,8 @@ type EditPlanInput = {
   catalogYear: number;
 };
 
-// Mock supported majors till we have scraped and stored majors
-const SUPPORTED_MAJORS = new Map<number, string[]>([
-  [
-    2019,
-    ["Computer Science, BSCS", "Computer Science and Cognitive Psycology, BS"],
-  ],
-  [2020, ["Computer Science, BSCS"]],
-]);
-
 export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
+  const { data, error: supportedMajorsError } = useSupportedMajors();
   const { mutate } = useSWRConfig();
   const router = useRouter();
   const { onOpen, onClose, isOpen } = useDisclosure();
@@ -66,11 +59,18 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
     });
   }, [plan, reset]);
 
+  if (supportedMajorsError) {
+    handleApiClientError(supportedMajorsError, router);
+  }
+
   const catalogYear = watch("catalogYear");
 
   const onSubmitHandler = async (payload: UpdatePlanDto) => {
     // If no field has been changed, don't send an update request
-    if (!isDirty) return;
+    if (!isDirty) {
+      toast.info("No fields have been updated.");
+      return;
+    }
 
     try {
       await API.plans.update(plan.id, payload);
@@ -115,7 +115,7 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                   id="catalogYear"
                   placeholder="Select a Catalog Year"
                   error={errors.catalogYear}
-                  array={Array.from(SUPPORTED_MAJORS.keys())}
+                  array={Array.from(Object.keys(data?.supportedMajors ?? {}))}
                   {...register("catalogYear", {
                     required: "Catalog year is required",
                     valueAsNumber: true,
@@ -127,7 +127,7 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                   id="major"
                   placeholder="Select a Major"
                   error={errors.major}
-                  array={SUPPORTED_MAJORS.get(catalogYear) ?? []}
+                  array={data?.supportedMajors[catalogYear] ?? []}
                   {...register("major", {
                     required: "Major is required",
                   })}

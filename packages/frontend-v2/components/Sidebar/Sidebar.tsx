@@ -2,16 +2,20 @@ import { Box, Text } from "@chakra-ui/react";
 import { SearchAPI } from "@graduate/api-client";
 import {
   IRequiredCourse,
-  Major2,
   Requirement2,
   ScheduleCourse2,
   Section,
 } from "@graduate/common";
-import { memo, useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import { memo, PropsWithChildren, useEffect, useState } from "react";
+import { useMajor } from "../../hooks/useMajor";
+import { handleApiClientError } from "../../utils";
 import SidebarSection from "./SidebarSection";
+import axios from "axios";
 
 interface SidebarProps {
-  major: Major2;
+  majorName: string;
+  catalogYear: number;
 }
 
 // This was moved out of the Sidebar component as it doesn't change
@@ -35,10 +39,16 @@ const getRequiredCourses = (
   }
 };
 
-const Sidebar: React.FC<SidebarProps> = memo(({ major }) => {
+const Sidebar: React.FC<SidebarProps> = memo(({ majorName, catalogYear }) => {
+  const router = useRouter();
   const [courseData, setCourseData] = useState({});
+  const { major, isLoading, error } = useMajor(catalogYear, majorName);
 
   useEffect(() => {
+    if (!major) {
+      return;
+    }
+
     const requirements = major.requirementSections.reduce(
       (courses: IRequiredCourse[], section: Section) => {
         const requiredCourses: IRequiredCourse[] = [];
@@ -67,19 +77,26 @@ const Sidebar: React.FC<SidebarProps> = memo(({ major }) => {
         setCourseData(courseMap);
       }
     });
-  }, [major.requirementSections]);
+  }, [major]);
+
+  if (isLoading) {
+    return <SidebarContainer title="Loading..." />;
+  }
+
+  if (!major) {
+    if (error) {
+      if (axios.isAxiosError(error) && error.response?.status === 404) {
+        return <SidebarContainer title="Major not found" />;
+      }
+
+      handleApiClientError(error, router);
+    }
+
+    return <SidebarContainer title="" />;
+  }
 
   return (
-    <Box p="xs 0px" backgroundColor="neutral.main">
-      <Text
-        py="lg"
-        px="sm"
-        fontSize="xl"
-        color="primary.red.main"
-        fontWeight={700}
-      >
-        {major.name}
-      </Text>
+    <SidebarContainer title={major.name}>
       {courseData &&
         major.requirementSections.map((section, index) => (
           <SidebarSection
@@ -89,9 +106,32 @@ const Sidebar: React.FC<SidebarProps> = memo(({ major }) => {
             dndIdPrefix={"sidebar-" + index}
           />
         ))}
-    </Box>
+    </SidebarContainer>
   );
 });
+
+interface EmptySidebarWithMessageProps {
+  title: string;
+}
+
+export const SidebarContainer: React.FC<
+  PropsWithChildren<EmptySidebarWithMessageProps>
+> = ({ title, children }) => {
+  return (
+    <Box p="xs 0px" backgroundColor="neutral.main">
+      <Text
+        py="lg"
+        px="sm"
+        fontSize="xl"
+        color="primary.red.main"
+        fontWeight={700}
+      >
+        {title}
+      </Text>
+      {children}
+    </Box>
+  );
+};
 
 // We need to manually set the display name like this because
 // of how we're using memo above.
