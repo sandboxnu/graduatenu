@@ -116,11 +116,11 @@ export class PlanService {
       if (!major) {
         this.logger.debug(
           {
-            message: "Attempting to create a plan with an unsupported major.",
+            message: "Attempting to update a plan with an unsupported major.",
             major,
             catalogYear,
           },
-          this.formatPlanServiceCtx("create")
+          this.formatPlanServiceCtx("update")
         );
 
         return null;
