@@ -20,7 +20,7 @@
     "frontend:docker:build": "docker build -t graduatenu-frontend -f infrastructure/prod/Dockerfile.app .",
     "frontend:docker:run": "docker run -p 3000:3000 graduatenu-frontend",
     "backend:docker:build": "docker build -t graduatenu-backend -f infrastructure/prod/Dockerfile.server .",
-    "backend:docker:run": "docker run -p 3001:3001 graduatenu-server",
+    "backend:docker:run": "docker run -p 3001:3001 graduatenu-backend",
     "lint": "eslint packages/ --ext .ts,.tsx .",
     "tsc": "yarn workspaces foreach -v --exclude . run tsc",
     "g:babel": "cd $INIT_CWD && babel",
