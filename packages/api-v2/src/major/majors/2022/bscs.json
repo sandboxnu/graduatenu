@@ -70,6 +70,28 @@
       "minRequirementCount": 1,
       "requirements": [
         {
+          "type": "COURSE",
+          "classId": "2550",
+          "subject": "CY"
+        },
+        {
+          "type": "COURSE",
+          "classId": "3740",
+          "subject": "CY"
+        },
+        {
+          "type": "COURSE",
+          "classId": "4740",
+          "subject": "CY"
+        }
+      ],
+      "title": "Security Required Course"
+    },
+    {
+      "type": "SECTION",
+      "minRequirementCount": 1,
+      "requirements": [
+        {
           "type": "OR",
           "courses": [
             { "type": "COURSE", "classId": 1112, "subject": "COMM" },
@@ -190,13 +212,6 @@
           "courses": [
             { "type": "COURSE", "classId": 1113, "subject": "BIOL" },
             { "type": "COURSE", "classId": 1114, "subject": "BIOL" }
-          ]
-        },
-        {
-          "type": "AND",
-          "courses": [
-            { "type": "COURSE", "classId": 2301, "subject": "BIOL" },
-            { "type": "COURSE", "classId": 2302, "subject": "BIOL" }
           ]
         },
         {
