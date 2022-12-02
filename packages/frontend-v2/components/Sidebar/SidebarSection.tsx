@@ -1,4 +1,4 @@
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Flex, Spinner, Text } from "@chakra-ui/react";
 import { ScheduleCourse2, Section } from "@graduate/common";
 import { useState } from "react";
 import SectionRequirement from "./SectionRequirement";
@@ -8,6 +8,7 @@ interface SidebarSectionProps {
   courseData: { [id: string]: ScheduleCourse2<null> };
   dndIdPrefix: string;
   isValid: boolean;
+  loading?: boolean;
 }
 
 const SidebarSection: React.FC<SidebarSectionProps> = ({
@@ -15,6 +16,7 @@ const SidebarSection: React.FC<SidebarSectionProps> = ({
   courseData,
   dndIdPrefix,
   isValid,
+  loading,
 }) => {
   const [opened, setOpened] = useState(false);
 
@@ -61,7 +63,14 @@ const SidebarSection: React.FC<SidebarSectionProps> = ({
         padding="10px 20px 15px 10px"
         cursor="default"
       >
+        {loading && (
+          <Flex alignItems="center">
+            <Spinner size="sm"></Spinner>
+            <Text marginLeft="xs">Loading...</Text>
+          </Flex>
+        )}
         {opened &&
+          !loading &&
           section.requirements.map((requirement, index) => (
             <SectionRequirement
               requirement={requirement}

@@ -53,6 +53,7 @@ const Sidebar: React.FC<SidebarProps> = memo(({ major, selectedPlan }) => {
   }, [selectedPlan, major]);
 
   const [courseData, setCourseData] = useState({});
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const requirements = major.requirementSections.reduce(
@@ -73,7 +74,7 @@ const Sidebar: React.FC<SidebarProps> = memo(({ major, selectedPlan }) => {
     }
 
     SearchAPI.fetchCourses(coursesQueryData).then((courses) => {
-      const courseMap: { [id: string]: ScheduleCourse2<null> } = {};
+      const courseMap: { [id: string]: ScheduleCourse2<null> } = courseData;
       if (courses) {
         for (const course of courses) {
           if (course) {
@@ -81,6 +82,7 @@ const Sidebar: React.FC<SidebarProps> = memo(({ major, selectedPlan }) => {
           }
         }
         setCourseData(courseMap);
+        setLoading(false);
       }
     });
   }, [major.requirementSections]);
@@ -111,6 +113,7 @@ const Sidebar: React.FC<SidebarProps> = memo(({ major, selectedPlan }) => {
               isValid={sectionIsValid}
               courseData={courseData}
               dndIdPrefix={"sidebar-" + index}
+              loading={loading}
             />
           );
         })}
