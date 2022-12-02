@@ -87,7 +87,9 @@ interface SearchClass {
   minCredits: number;
 }
 
-function occurrenceToCourse(occurrence): ScheduleCourse2<null> | null {
+function occurrenceToCourse(
+  occurrence: SearchClass
+): ScheduleCourse2<null> | null {
   if (!occurrence) return null;
 
   return {
@@ -173,7 +175,7 @@ class SearchAPIClient {
     const coursesData = await res.data.data;
 
     if (coursesData.bulkClasses) {
-      return coursesData.bulkClasses.map((course) => {
+      return coursesData.bulkClasses.map((course: any) => {
         return occurrenceToCourse(course?.latestOccurrence);
       });
     } else {

@@ -12,7 +12,7 @@ const ormconfig: TypeOrmModuleOptions = {
   username: process.env.POSTGRES_USERNAME,
   password: process.env.POSTGRES_PASSWORD || "",
   database: process.env.POSTGRES_DATABASE,
-  synchronize: process.env.NODE_ENV !== "production",
+  synchronize: true,
   entities: [Student, Plan],
   migrations: ["src/migrations/*.ts"],
   cli: {

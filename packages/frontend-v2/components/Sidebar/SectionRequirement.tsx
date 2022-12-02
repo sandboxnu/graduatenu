@@ -127,6 +127,7 @@ const SectionRequirement: React.FC<SidebarRequirementProps> = ({
   const renderSection = (requirement: Section) => {
     return (
       <SidebarSection
+        isValid
         section={requirement}
         courseData={courseData}
         dndIdPrefix={dndIdPrefix + "-sec"}
