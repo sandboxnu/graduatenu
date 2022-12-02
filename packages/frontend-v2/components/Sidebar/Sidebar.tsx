@@ -2,7 +2,6 @@ import { Box, Text } from "@chakra-ui/react";
 import { SearchAPI } from "@graduate/api-client";
 import {
   IRequiredCourse,
-  Major2,
   Requirement2,
   ScheduleCourse2,
   Section,

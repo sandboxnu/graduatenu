@@ -1,7 +1,8 @@
 import {
   Major2,
-  SupportedMajorForYear,
+  SupportedMajorsForYear,
   SupportedMajors,
+  SupportedConcentrations,
 } from "@graduate/common";
 import { Injectable, Logger } from "@nestjs/common";
 import { formatServiceCtx } from "../utils";
@@ -37,22 +38,106 @@ export class MajorService {
     SUPPORTED_MAJOR_YEARS.forEach((year) => {
       const { supportedMajorNames } = SUPPORTED_MAJORS[year];
 
-      const supportedMajorForYear: SupportedMajorForYear = {};
+      const supportedMajorForYear: SupportedMajorsForYear = {};
       supportedMajorNames.forEach((majorName) => {
-        const major = this.findByMajorAndYear(majorName, parseInt(year, 10));
-        const concentrations = major.concentrations.concentrationOptions.map(
-          (concentration) => concentration.title
+        const supportedConcentrations = this.getConcentrationsInfoForMajor(
+          majorName,
+          parseInt(year)
         );
-        supportedMajorForYear[majorName] = {
-          concentrations,
-          minRequiredConcentrations: major.concentrations.minOptions,
-        };
+        supportedMajorForYear[majorName] = supportedConcentrations;
       });
 
       supportedMajors[year] = supportedMajorForYear;
     });
 
     return supportedMajors;
+  }
+
+  getConcentrationsInfoForMajor(
+    majorName: string,
+    catalogYear: number
+  ): SupportedConcentrations | null {
+    const major = this.findByMajorAndYear(majorName, catalogYear);
+    if (!major) {
+      return null;
+    }
+
+    const concentrations = major.concentrations.concentrationOptions.map(
+      (concentration) => concentration.title
+    );
+
+    return {
+      concentrations,
+      minRequiredConcentrations: major.concentrations.minOptions,
+    };
+  }
+
+  isValidConcentrationForMajor(
+    majorName: string,
+    catalogYear: number,
+    concentrationName: string
+  ): boolean {
+    console.log("CONCENTRATION: ", concentrationName);
+    const concentrationsInfo = this.getConcentrationsInfoForMajor(
+      majorName,
+      catalogYear
+    );
+
+    console.log("CONCENTRATIONS INFOR: ", concentrationsInfo);
+
+    if (!concentrationsInfo) {
+      this.logger.debug(
+        {
+          message: "Concentration info for major not found.",
+          majorName,
+          catalogYear,
+          concentrationName,
+        },
+        MajorService.formatMajorServiceCtx("isValidConcentrationForMajor")
+      );
+
+      return false;
+    }
+
+    const { concentrations, minRequiredConcentrations } = concentrationsInfo;
+
+    if (minRequiredConcentrations > 0 && !concentrationName) {
+      this.logger.debug(
+        {
+          message:
+            "Concentration not provided for major with a required concentration.",
+          majorName,
+          catalogYear,
+          concentrationName,
+          minRequiredConcentrations,
+        },
+        MajorService.formatMajorServiceCtx("isValidConcentrationForMajor")
+      );
+
+      return false;
+    }
+
+    const isValidConcentrationName = concentrations.some(
+      (c) => c === concentrationName
+    );
+
+    console.log("IS VALID CONCENTRATION: ", isValidConcentrationName);
+
+    if (!isValidConcentrationName) {
+      this.logger.debug(
+        {
+          message: "Invalid concentration name for major.",
+          majorName,
+          catalogYear,
+          concentrationName,
+        },
+        MajorService.formatMajorServiceCtx("isValidConcentrationForMajor")
+      );
+
+      return false;
+    }
+
+    return true;
   }
 
   private static formatMajorServiceCtx(methodName: string) {

@@ -440,14 +440,16 @@ export interface IScheduleCourse {
   subject: string;
 }
 
+export type SupportedConcentrations = {
+  concentrations: string[];
+  minRequiredConcentrations: number;
+};
+
 // { majorName => { concentration, minRequiredConcentrations } }
-export type SupportedMajorForYear = Record<
-  string,
-  { concentrations: string[]; minRequiredConcentrations: number }
->;
+export type SupportedMajorsForYear = Record<string, SupportedConcentrations>;
 
 // { year => supported majors }
-export type SupportedMajors = Record<string, SupportedMajorForYear>;
+export type SupportedMajors = Record<string, SupportedMajorsForYear>;
 
 /**
  * Types for a some result from an algorithim. Currently used for the result of
