@@ -64,34 +64,30 @@ export const ReqErrorModal: React.FC<ReqErrorModalProps> = ({
             Course Errors for {courseToString(course)}
           </ModalHeader>
           <ModalBody>
-            <Flex direction="column">
-              <Text fontWeight="semibold" mb="xs" textAlign="center">
-                CoRequisite Errors
-              </Text>
-              <ParseCourse course={coReqErr} parent={true} />
-            </Flex>
-            <Flex direction="column">
-              <Text fontWeight="semibold" mb="xs" textAlign="center">
-                PreRequisite Errors
-              </Text>
-              <ParseCourse course={preReqErr} parent={true} />
-            </Flex>
+            {coReqErr && (
+              <Flex direction="column">
+                <Text fontWeight="semibold" mb="xs" textAlign="center">
+                  CoRequisite Errors
+                </Text>
+                <ParseCourse course={coReqErr} parent={true} />
+              </Flex>
+            )}
+            {preReqErr && (
+              <Flex direction="column">
+                <Text fontWeight="semibold" mb="xs" textAlign="center">
+                  PreRequisite Errors
+                </Text>
+                <ParseCourse course={preReqErr} parent={true} />
+              </Flex>
+            )}
           </ModalBody>
 
           <ModalFooter>
-            <Flex
-              justifyContent="end"
-              width="100%"
-              alignItems="center"
-            >
-              <Button
-                variant="solidBlue"
-                mr={3}
-                onClick={onClose}
-              >
+            <Flex justifyContent="end" width="100%" alignItems="center">
+              <Button variant="solidBlue" mr={3} onClick={onClose}>
                 Close
               </Button>
-            </Flex> 
+            </Flex>
           </ModalFooter>
         </ModalContent>
       </Modal>

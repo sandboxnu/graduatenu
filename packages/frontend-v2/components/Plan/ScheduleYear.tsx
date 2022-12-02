@@ -2,8 +2,6 @@ import { DeleteIcon, WarningIcon } from "@chakra-ui/icons";
 import {
   Flex,
   Grid,
-  // GridItem,
-  // GridItemProps,
   IconButton,
   Text,
   Tooltip,
@@ -179,7 +177,7 @@ const YearHeader: React.FC<YearHeaderProps> = ({
       </Flex>
       <Flex>
         {displayReqErrors && (
-          <Tooltip label={`There are coreq and/or Prereq errors`} fontSize="md">
+          <Tooltip label={`There are coreq and/or prereq errors`} fontSize="md">
             <IconButton
               aria-label="There are coreq and/or prereq errors!"
               variant="ghost"
