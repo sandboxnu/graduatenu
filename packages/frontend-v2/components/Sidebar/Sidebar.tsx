@@ -10,7 +10,7 @@ import {
   ScheduleCourse2,
   Section,
 } from "@graduate/common";
-import { memo, useEffect, useState } from "react";
+import { memo, useEffect, useMemo, useState } from "react";
 import { DraggableScheduleCourse } from "../ScheduleCourse";
 import SidebarSection from "./SidebarSection";
 import { validateMajor2 } from "@graduate/common";
