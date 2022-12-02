@@ -10,7 +10,7 @@ COPY packages/common/package.json packages/common/package.json
 
 
 # Install at root level
-RUN yarn install
+RUN yarn install > /dev/null
 
 # Get src files
 COPY packages/api-v2 packages/api-v2
