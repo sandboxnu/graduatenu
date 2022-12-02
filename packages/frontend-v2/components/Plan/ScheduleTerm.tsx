@@ -1,4 +1,4 @@
-import { Grid, GridItem, Heading, useDisclosure } from "@chakra-ui/react";
+import { GridItem, Heading, useDisclosure } from "@chakra-ui/react";
 import { ScheduleCourse2, ScheduleTerm2, SeasonEnum } from "@graduate/common";
 import { DraggableScheduleCourse } from "../ScheduleCourse";
 import { useDroppable } from "@dnd-kit/core";
@@ -46,6 +46,8 @@ export const ScheduleTerm: React.FC<ScheduleTermProps> = ({
       borderRight={!isLastColumn ? "1px" : undefined}
       transition="background-color 0.1s ease"
       backgroundColor={isOver ? "neutral.300" : "neutral.main"}
+      display="flex"
+      flexDirection="column"
       px="sm"
       pt="2xs"
       pb="xl"
@@ -55,22 +57,20 @@ export const ScheduleTerm: React.FC<ScheduleTermProps> = ({
         season={scheduleTerm.season}
         year={scheduleTerm.year}
       />
-      <Grid gap="2xs">
-        {scheduleTerm.classes.map((scheduleCourse) => (
-          <DraggableScheduleCourse
-            scheduleCourse={scheduleCourse}
-            removeCourse={(course: ScheduleCourse2<unknown>) =>
-              removeCourseFromTermInCurrPlan(
-                course,
-                scheduleTerm.year,
-                scheduleTerm.season
-              )
-            }
-            isEditable
-            key={scheduleCourse.id}
-          />
-        ))}
-      </Grid>
+      {scheduleTerm.classes.map((scheduleCourse) => (
+        <DraggableScheduleCourse
+          scheduleCourse={scheduleCourse}
+          removeCourse={(course: ScheduleCourse2<unknown>) =>
+            removeCourseFromTermInCurrPlan(
+              course,
+              scheduleTerm.year,
+              scheduleTerm.season
+            )
+          }
+          isEditable
+          key={scheduleCourse.id}
+        />
+      ))}
       <AddCourseButton onOpen={onOpen} />
       <AddCourseModal
         isOpen={isOpen}
