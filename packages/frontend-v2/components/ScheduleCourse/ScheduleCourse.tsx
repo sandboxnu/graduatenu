@@ -89,9 +89,10 @@ export const ScheduleCourse = forwardRef<
           fontSize: "14px",
           alignItems: "center",
           flex: scheduleCourse.classId === "Experiential Learning" ? 1 : 0,
-          marginBottom: "5px",
+          marginBottom: "6px",
           transition: "transform 0.15s ease",
           transform: hovered ? "scale(1.04)" : "scale(1)",
+          justifyContent: "space-between",
         }}
         onMouseEnter={() => {
           setHovered(true);
