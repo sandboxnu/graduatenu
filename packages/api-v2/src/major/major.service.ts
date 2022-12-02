@@ -1,4 +1,8 @@
-import { Major2 } from "@graduate/common";
+import {
+  Major2,
+  SupportedMajorForYear,
+  SupportedMajors,
+} from "@graduate/common";
 import { Injectable, Logger } from "@nestjs/common";
 import { formatServiceCtx } from "../utils";
 import { SUPPORTED_MAJOR_YEARS, SUPPORTED_MAJORS } from "./majors";
@@ -28,12 +32,24 @@ export class MajorService {
     return majors[majorName];
   }
 
-  getSupportedMajors(): Record<string, string[]> {
-    // filter out the majors themselves
-    const supportedMajors = {};
-    SUPPORTED_MAJOR_YEARS.map((year) => {
+  getSupportedMajors(): SupportedMajors {
+    const supportedMajors: SupportedMajors = {};
+    SUPPORTED_MAJOR_YEARS.forEach((year) => {
       const { supportedMajorNames } = SUPPORTED_MAJORS[year];
-      supportedMajors[year] = supportedMajorNames;
+
+      const supportedMajorForYear: SupportedMajorForYear = {};
+      supportedMajorNames.forEach((majorName) => {
+        const major = this.findByMajorAndYear(majorName, parseInt(year, 10));
+        const concentrations = major.concentrations.concentrationOptions.map(
+          (concentration) => concentration.title
+        );
+        supportedMajorForYear[majorName] = {
+          concentrations,
+          minRequiredConcentrations: major.concentrations.minOptions,
+        };
+      });
+
+      supportedMajors[year] = supportedMajorForYear;
     });
 
     return supportedMajors;

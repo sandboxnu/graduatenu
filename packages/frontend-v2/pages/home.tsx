@@ -188,6 +188,7 @@ const HomePage: NextPage = () => {
             <Sidebar
               majorName={selectedPlan.major}
               catalogYear={selectedPlan.catalogYear}
+              concentrationName={selectedPlan.concentration}
             />
           )}
         </Box>

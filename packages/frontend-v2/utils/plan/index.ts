@@ -10,3 +10,4 @@ export * from "./removeCourseFromTerm";
 export * from "./getSeasonDisplayWord";
 export * from "./addEmptyDndYearToPlan";
 export * from "./removeYearFromPlan";
+export * from "./supportedMajors";
