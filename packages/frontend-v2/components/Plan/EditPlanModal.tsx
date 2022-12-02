@@ -35,7 +35,8 @@ type EditPlanInput = {
 };
 
 export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
-  const { data, error: supportedMajorsError } = useSupportedMajors();
+  const { supportedMajorsData, error: supportedMajorsError } =
+    useSupportedMajors();
   const { mutate } = useSWRConfig();
   const router = useRouter();
   const { onOpen, onClose, isOpen } = useDisclosure();
@@ -115,7 +116,9 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                   id="catalogYear"
                   placeholder="Select a Catalog Year"
                   error={errors.catalogYear}
-                  array={Array.from(Object.keys(data?.supportedMajors ?? {}))}
+                  array={Array.from(
+                    Object.keys(supportedMajorsData?.supportedMajors ?? {})
+                  )}
                   {...register("catalogYear", {
                     required: "Catalog year is required",
                     valueAsNumber: true,
@@ -127,7 +130,9 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                   id="major"
                   placeholder="Select a Major"
                   error={errors.major}
-                  array={data?.supportedMajors[catalogYear] ?? []}
+                  array={
+                    supportedMajorsData?.supportedMajors[catalogYear] ?? []
+                  }
                   {...register("major", {
                     required: "Major is required",
                   })}

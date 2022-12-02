@@ -30,7 +30,8 @@ interface AddPlanModalProps {
 export const AddPlanModal: React.FC<AddPlanModalProps> = ({
   setSelectedPlanId,
 }) => {
-  const { data, error: supportedMajorsError } = useSupportedMajors();
+  const { supportedMajorsData, error: supportedMajorsError } =
+    useSupportedMajors();
   const { mutate } = useSWRConfig();
   const router = useRouter();
   const { onOpen, onClose, isOpen } = useDisclosure();
@@ -114,7 +115,9 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                   id="catalogYear"
                   placeholder="Select a Catalog Year"
                   error={errors.catalogYear}
-                  array={Array.from(Object.keys(data?.supportedMajors ?? {}))}
+                  array={Array.from(
+                    Object.keys(supportedMajorsData?.supportedMajors ?? {})
+                  )}
                   {...register("catalogYear", {
                     required: "Catalog year is required",
                     valueAsNumber: true,
@@ -126,7 +129,9 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                   id="major"
                   placeholder="Select a Major"
                   error={errors.major}
-                  array={data?.supportedMajors[catalogYear] ?? []}
+                  array={
+                    supportedMajorsData?.supportedMajors[catalogYear] ?? []
+                  }
                   {...register("major", {
                     required: "Major is required",
                   })}

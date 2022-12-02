@@ -9,7 +9,7 @@ type SupportedMajorsResponse = Omit<
 >;
 
 type SupportedMajorsReturn = SupportedMajorsResponse & {
-  data?: GetSupportedMajorsResponse;
+  supportedMajorsData?: GetSupportedMajorsResponse;
   isLoading: boolean;
 };
 
@@ -24,7 +24,7 @@ export function useSupportedMajors(): SupportedMajorsReturn {
 
   return {
     ...rest,
-    data,
+    supportedMajorsData: data,
     isLoading: !data && !rest.error,
   };
 }

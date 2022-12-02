@@ -59,7 +59,8 @@ const Sidebar: React.FC<SidebarProps> = memo(({ majorName, catalogYear }) => {
     );
 
     const coursesQueryData: { subject: string; classId: string }[] = [];
-
+    console.log("MAJOR: ", major);
+    console.log("REQUIREMENTS: ", requirements);
     for (const requirement of requirements) {
       const subject = requirement.subject;
       const classId = requirement.classId.toString();
