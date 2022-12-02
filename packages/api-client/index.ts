@@ -4,8 +4,8 @@ import {
   SignUpStudentDto,
   GetPlanResponse,
   GetStudentResponse,
-  INEUAndPrereq,
-  INEUOrPrereq,
+  INEUAndReq,
+  INEUOrReq,
   LoginStudentDto,
   UpdatePlanDto,
   UpdatePlanResponse,
@@ -81,8 +81,8 @@ interface SearchClass {
   name: string;
   classId: string;
   subject: string;
-  prereqs?: INEUAndPrereq | INEUOrPrereq;
-  coreqs?: INEUAndPrereq | INEUOrPrereq;
+  prereqs?: INEUAndReq | INEUOrReq;
+  coreqs?: INEUAndReq | INEUOrReq;
   maxCredits: number;
   minCredits: number;
 }

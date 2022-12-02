@@ -4,7 +4,7 @@ import { useDraggable } from "@dnd-kit/core";
 import { CSS } from "@dnd-kit/utilities";
 import {
   courseToString,
-  INEUPrereqError,
+  INEUReqError,
   ScheduleCourse2,
 } from "@graduate/common";
 import { forwardRef, useState } from "react";
@@ -12,8 +12,8 @@ import { ReqErrorModal } from "../Plan/ReqErrorModal";
 
 interface DraggableScheduleCourseProps {
   scheduleCourse: ScheduleCourse2<string>;
-  coReqErr: INEUPrereqError | undefined;
-  preReqErr: INEUPrereqError | undefined;
+  coReqErr: INEUReqError | undefined;
+  preReqErr: INEUReqError | undefined;
 
   /** Function to remove the course from whatever the schedule it is part of. */
   removeCourse?: (course: ScheduleCourse2<unknown>) => void;
@@ -61,8 +61,8 @@ export const DraggableScheduleCourse: React.FC<
 };
 
 interface ScheduleCourseProps extends DraggableScheduleCourseProps {
-  coReqErr: INEUPrereqError | undefined;
-  preReqErr: INEUPrereqError | undefined;
+  coReqErr: INEUReqError | undefined;
+  preReqErr: INEUReqError | undefined;
   isDragging?: boolean;
   listeners?: any;
   attributes?: any;

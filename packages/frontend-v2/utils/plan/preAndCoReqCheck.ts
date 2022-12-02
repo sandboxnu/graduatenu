@@ -1,11 +1,11 @@
 import {
   CoReqWarnings,
   courseToString,
-  INEUAndPrereq,
-  INEUOrPrereq,
+  INEUAndReq,
+  INEUOrReq,
   INEUPrereq,
-  INEUPrereqCourse,
-  INEUPrereqError,
+  INEUReqCourse,
+  INEUReqError,
   PreReqWarnings,
   Schedule2,
   ScheduleTerm2,
@@ -80,9 +80,9 @@ export const getPreReqWarningSem = (
 const getReqErrors = (
   reqs: INEUPrereq,
   seen: Set<string>
-): INEUPrereqError | undefined => {
+): INEUReqError | undefined => {
   if (isSingleCourse(reqs)) {
-    const singleReq = reqs as INEUPrereqCourse;
+    const singleReq = reqs as INEUReqCourse;
     return seen.has(courseToString(singleReq))
       ? undefined
       : {
@@ -91,7 +91,7 @@ const getReqErrors = (
           classId: singleReq.classId,
         };
   } else if (isAndCourse(reqs)) {
-    const andReq = reqs as INEUAndPrereq;
+    const andReq = reqs as INEUAndReq;
     const required = andReq.values
       .map((req) => getReqErrors(req, seen))
       .filter(isError);
@@ -101,7 +101,7 @@ const getReqErrors = (
       missing: required,
     };
   } else if (isOrCourse(reqs)) {
-    const orReq = reqs as INEUOrPrereq;
+    const orReq = reqs as INEUOrReq;
     const missing = orReq.values.map((req) => getReqErrors(req, seen));
     // There is a course that fulfils this or case
     if (missing.includes(undefined)) {
@@ -116,20 +116,20 @@ const getReqErrors = (
   }
 };
 
-const isSingleCourse = (course: INEUPrereq): course is INEUPrereqCourse => {
-  return (course as INEUPrereqCourse).subject !== undefined;
+const isSingleCourse = (course: INEUPrereq): course is INEUReqCourse => {
+  return (course as INEUReqCourse).subject !== undefined;
 };
 
-const isAndCourse = (course: INEUPrereq): course is INEUAndPrereq => {
-  return (course as INEUAndPrereq).type === "and";
+const isAndCourse = (course: INEUPrereq): course is INEUAndReq => {
+  return (course as INEUAndReq).type === "and";
 };
 
-const isOrCourse = (course: INEUPrereq): course is INEUOrPrereq => {
-  return (course as INEUOrPrereq).type === "or";
+const isOrCourse = (course: INEUPrereq): course is INEUOrReq => {
+  return (course as INEUOrReq).type === "or";
 };
 
 const isError = (
-  error: INEUPrereqError | undefined
-): error is INEUPrereqError => {
+  error: INEUReqError | undefined
+): error is INEUReqError => {
   return !!error;
 };

@@ -15,14 +15,14 @@ import {
 import {
   assertUnreachable,
   courseToString,
-  INEUPrereqError,
+  INEUReqError,
   ScheduleCourse2,
 } from "@graduate/common";
 
 interface ReqErrorModalProps {
   course: ScheduleCourse2<string>;
-  preReqErr: INEUPrereqError | undefined;
-  coReqErr: INEUPrereqError | undefined;
+  preReqErr: INEUReqError | undefined;
+  coReqErr: INEUReqError | undefined;
 }
 
 export const ReqErrorModal: React.FC<ReqErrorModalProps> = ({
@@ -96,7 +96,7 @@ export const ReqErrorModal: React.FC<ReqErrorModalProps> = ({
 };
 
 interface ParseCourseProps {
-  course: INEUPrereqError | undefined;
+  course: INEUReqError | undefined;
   parent: boolean;
 }
 
