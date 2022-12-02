@@ -102,7 +102,7 @@ export const ScheduleCourse = forwardRef<
           display: "flex",
           borderRadius: "5px",
           fontSize: "14px",
-          alignItems: "center",
+          alignItems: "stretch",
           flex: scheduleCourse.classId === "Experiential Learning" ? 1 : 0,
           marginBottom: "6px",
           transition: "transform 0.15s ease",
@@ -155,52 +155,54 @@ export const ScheduleCourse = forwardRef<
             </span>
           </p>
         </div>
-        {(coReqErr != undefined || preReqErr != undefined) && (
-          <ReqErrorModal
-            course={scheduleCourse}
-            coReqErr={coReqErr}
-            preReqErr={preReqErr}
-          />
-        )}
-        {isEditable && hovered && (
-          <Flex
-            width="32px"
-            alignSelf="stretch"
-            flexShrink={0}
-            alignItems="center"
-            justifyContent="center"
-            borderRadius="0px 5px 5px 0px"
-            transition="background 0.15s ease"
-            _hover={{
-              background: "primary.blue.dark.main",
-              fill: "white",
-              svg: {
-                color: "white",
-              },
-            }}
-            _active={{
-              background: "primary.blue.dark.900",
-            }}
-            onClick={
-              removeCourse
-                ? () => {
-                    removeCourse(scheduleCourse);
-                  }
-                : undefined
-            }
-          >
-            <DeleteIcon
-              color="primary.blue.dark.300"
-              transition="color 0.1s ease"
+        <Flex>
+          {(coReqErr != undefined || preReqErr != undefined) && (
+            <ReqErrorModal
+              course={scheduleCourse}
+              coReqErr={coReqErr}
+              preReqErr={preReqErr}
             />
-          </Flex>
-        )}
-        {(isOverlay || (isEditable && !hovered)) && (
-          // This is a spacer to take up the same amount of space as the delete button
-          // so we don't have the text of the course shifting around when it's hovered
-          // or dragged.
-          <div style={{ width: "32px", height: "32px", flexShrink: 0 }}></div>
-        )}
+          )}
+          {isEditable && hovered && (
+            <Flex
+              width="32px"
+              alignSelf="stretch"
+              flexShrink={0}
+              alignItems="center"
+              justifyContent="center"
+              borderRadius="0px 5px 5px 0px"
+              transition="background 0.15s ease"
+              _hover={{
+                background: "primary.blue.dark.main",
+                fill: "white",
+                svg: {
+                  color: "white",
+                },
+              }}
+              _active={{
+                background: "primary.blue.dark.900",
+              }}
+              onClick={
+                removeCourse
+                  ? () => {
+                      removeCourse(scheduleCourse);
+                    }
+                  : undefined
+              }
+            >
+              <DeleteIcon
+                color="primary.blue.dark.300"
+                transition="color 0.1s ease"
+              />
+            </Flex>
+          )}
+          {(isOverlay || (isEditable && !hovered)) && (
+            // This is a spacer to take up the same amount of space as the delete button
+            // so we don't have the text of the course shifting around when it's hovered
+            // or dragged.
+            <div style={{ width: "32px", height: "32px", flexShrink: 0 }}></div>
+          )}
+        </Flex>
       </div>
     );
   }
