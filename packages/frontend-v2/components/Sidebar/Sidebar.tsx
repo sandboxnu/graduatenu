@@ -85,6 +85,10 @@ const Sidebar: React.FC<SidebarProps> = memo(({ major, selectedPlan }) => {
         setLoading(false);
       }
     });
+    // We don't want to make another request when only courseData changes,
+    // we're just appending to it rather than replacing it, hence the
+    // technical dependency.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [major.requirementSections]);
 
   return (
