@@ -12,8 +12,8 @@ import { ReqErrorModal } from "../Plan/ReqErrorModal";
 
 interface DraggableScheduleCourseProps {
   scheduleCourse: ScheduleCourse2<string>;
-  coReqErr: INEUReqError | undefined;
-  preReqErr: INEUReqError | undefined;
+  coReqErr?: INEUReqError;
+  preReqErr?: INEUReqError;
 
   /** Function to remove the course from whatever the schedule it is part of. */
   removeCourse?: (course: ScheduleCourse2<unknown>) => void;
@@ -25,10 +25,10 @@ interface DraggableScheduleCourseProps {
 export const DraggableScheduleCourse: React.FC<
   DraggableScheduleCourseProps
 > = ({
-  coReqErr,
-  preReqErr,
   scheduleCourse,
   removeCourse,
+  preReqErr = undefined,
+  coReqErr = undefined,
   isEditable = false,
   isFromSidebar = false,
   isDisabled = false,
@@ -61,8 +61,8 @@ export const DraggableScheduleCourse: React.FC<
 };
 
 interface ScheduleCourseProps extends DraggableScheduleCourseProps {
-  coReqErr: INEUReqError | undefined;
-  preReqErr: INEUReqError | undefined;
+  coReqErr?: INEUReqError;
+  preReqErr?: INEUReqError;
   isDragging?: boolean;
   listeners?: any;
   attributes?: any;
@@ -78,8 +78,8 @@ export const ScheduleCourse = forwardRef<
 >(
   (
     {
-      coReqErr,
-      preReqErr,
+      coReqErr = undefined,
+      preReqErr = undefined,
       scheduleCourse,
       removeCourse,
       isEditable = false,

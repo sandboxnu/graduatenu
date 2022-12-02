@@ -21,14 +21,14 @@ import {
 
 interface ReqErrorModalProps {
   course: ScheduleCourse2<string>;
-  preReqErr: INEUReqError | undefined;
-  coReqErr: INEUReqError | undefined;
+  preReqErr?: INEUReqError;
+  coReqErr?: INEUReqError;
 }
 
 export const ReqErrorModal: React.FC<ReqErrorModalProps> = ({
   course,
-  coReqErr,
-  preReqErr,
+  coReqErr = undefined,
+  preReqErr = undefined,
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
@@ -96,13 +96,16 @@ export const ReqErrorModal: React.FC<ReqErrorModalProps> = ({
 };
 
 interface ParseCourseProps {
-  course: INEUReqError | undefined;
+  course?: INEUReqError;
   parent: boolean;
 }
 
 // Look through the course error until there are no more errors!
 // TODO: Fix the styling!
-const ParseCourse: React.FC<ParseCourseProps> = ({ course, parent }) => {
+const ParseCourse: React.FC<ParseCourseProps> = ({
+  course = undefined,
+  parent,
+}) => {
   if (course == undefined) {
     return <></>;
   }

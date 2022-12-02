@@ -1,11 +1,5 @@
 import { DeleteIcon, WarningIcon } from "@chakra-ui/icons";
-import {
-  Flex,
-  Grid,
-  IconButton,
-  Text,
-  Tooltip,
-} from "@chakra-ui/react";
+import { Flex, Grid, IconButton, Text, Tooltip } from "@chakra-ui/react";
 import {
   ScheduleCourse2,
   ScheduleYear2,
@@ -22,8 +16,8 @@ interface ToggleYearProps {
 
 interface ScheduleYearProps extends ToggleYearProps {
   scheduleYear: ScheduleYear2<string>;
-  yearCoReqError: YearError | undefined;
-  yearPreReqError: YearError | undefined;
+  yearCoReqError?: YearError;
+  yearPreReqError?: YearError;
 
   /** Function to add classes to a given term in the plan being displayed. */
   addClassesToTermInCurrPlan: (
@@ -50,8 +44,8 @@ export const ScheduleYear: React.FC<ScheduleYearProps> = ({
   isExpanded,
   toggleExpanded,
   removeYearFromCurrPlan,
-  yearCoReqError,
-  yearPreReqError,
+  yearCoReqError = undefined,
+  yearPreReqError = undefined,
 }) => {
   // sum all credits over all the courses over each semester
   const totalCreditsThisYear = [

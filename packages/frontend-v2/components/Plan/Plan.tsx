@@ -5,7 +5,7 @@ import {
   PreReqWarnings,
   ScheduleCourse2,
   ScheduleYear2,
-  SeasonEnum
+  SeasonEnum,
 } from "@graduate/common";
 import { useState } from "react";
 import { addClassesToTerm, removeYearFromPlan } from "../../utils";
@@ -14,8 +14,8 @@ import { ScheduleYear } from "./ScheduleYear";
 
 interface PlanProps {
   plan: PlanModel<string>;
-  preReqErr: PreReqWarnings | undefined;
-  coReqErr: CoReqWarnings | undefined;
+  preReqErr?: PreReqWarnings;
+  coReqErr?: CoReqWarnings;
 
   /**
    * Function to POST the plan and update the SWR cache for "student with plans"
@@ -27,8 +27,8 @@ interface PlanProps {
 export const Plan: React.FC<PlanProps> = ({
   plan,
   mutateStudentWithUpdatedPlan,
-  preReqErr,
-  coReqErr,
+  preReqErr = undefined,
+  coReqErr = undefined,
 }) => {
   const [expandedYears, setExpandedYears] = useState<Set<number>>(new Set());
 

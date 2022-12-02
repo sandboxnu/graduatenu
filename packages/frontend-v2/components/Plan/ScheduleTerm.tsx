@@ -15,8 +15,8 @@ import { BlueButton } from "../Button";
 
 interface ScheduleTermProps {
   scheduleTerm: ScheduleTerm2<string>;
-  termCoReqErr: TermError | undefined;
-  termPreReqErr: TermError | undefined;
+  termCoReqErr?: TermError;
+  termPreReqErr?: TermError;
 
   /** Function to add classes to a given term in the plan being displayed. */
   addClassesToTermInCurrPlan: (
@@ -40,8 +40,8 @@ export const ScheduleTerm: React.FC<ScheduleTermProps> = ({
   addClassesToTermInCurrPlan,
   removeCourseFromTermInCurrPlan,
   isLastColumn,
-  termCoReqErr,
-  termPreReqErr,
+  termCoReqErr = undefined,
+  termPreReqErr = undefined,
 }) => {
   const { isOver, setNodeRef } = useDroppable({ id: scheduleTerm.id });
   const { isOpen, onOpen, onClose } = useDisclosure();
