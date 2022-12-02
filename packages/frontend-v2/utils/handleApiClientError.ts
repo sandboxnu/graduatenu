@@ -35,7 +35,10 @@ export const handleApiClientError = (
 
 const handleAxiosError = (error: AxiosError, router: NextRouter) => {
   const statusCode = error.response?.status;
-  if (statusCode === 401) {
+  if (statusCode === 400) {
+    logger.debug("handleApiClientError", "Bad Request", error);
+    toast.error("Sorry, we sent some invalid data. Try again.");
+  } else if (statusCode === 401) {
     logger.debug(
       "handleApiClientError",
       "Unauthenticated, redirecting to login",
