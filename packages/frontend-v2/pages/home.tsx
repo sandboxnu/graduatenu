@@ -136,7 +136,6 @@ const HomePage: NextPage = () => {
     try {
       updatedPlan = updatePlanOnDragEnd(selectedPlan, active, over);
     } catch (err) {
-      console.error(err);
       // update failed, either due to some logical issue or explicitely thrown error
       logger.debug("updatePlanOnDragEnd", err);
       return;
@@ -178,7 +177,7 @@ const HomePage: NextPage = () => {
       // that feels more intuitive.
       collisionDetection={courseDndCollisisonAlgorithm}
     >
-      <PageLayout>
+      <PageLayout selectedPlan={selectedPlan}>
         <Flex flexDirection="column">
           <Flex alignItems="center" mb="sm">
             <PlanDropdown
@@ -225,11 +224,18 @@ const HomePage: NextPage = () => {
   );
 };
 
+interface PageLayoutProps {
+  selectedPlan: PlanModel<string> | undefined;
+}
+
 /**
  * This will have everything that can be rendered without the student and
  * plans(i.e: header, sidebar, etc)
  */
-const PageLayout: React.FC<PropsWithChildren> = ({ children }) => {
+const PageLayout: React.FC<PropsWithChildren<PageLayoutProps>> = ({
+  children,
+  selectedPlan,
+}) => {
   return (
     <Flex flexDirection="column" height="100vh" overflow="hidden">
       <Header />
@@ -240,7 +246,7 @@ const PageLayout: React.FC<PropsWithChildren> = ({ children }) => {
           width="360px"
           flexShrink={0}
         >
-          <Sidebar major={DEMO_MAJOR} />
+          <Sidebar major={DEMO_MAJOR} selectedPlan={selectedPlan} />
         </Box>
         <Box p="md" overflow="auto" flexGrow={1}>
           {children}

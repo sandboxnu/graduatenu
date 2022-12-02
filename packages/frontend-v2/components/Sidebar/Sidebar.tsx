@@ -3,6 +3,9 @@ import { SearchAPI } from "@graduate/api-client";
 import {
   IRequiredCourse,
   Major2,
+  MajorValidationError,
+  MajorValidationResult,
+  PlanModel,
   Requirement2,
   ScheduleCourse2,
   Section,
@@ -10,9 +13,13 @@ import {
 import { memo, useEffect, useState } from "react";
 import { DraggableScheduleCourse } from "../ScheduleCourse";
 import SidebarSection from "./SidebarSection";
+import { validateMajor2 } from "@graduate/common";
+import { getAllCoursesFromPlan } from "../../utils/plan/getAllCoursesFromPlan";
+import { getSectionError } from "../../utils/plan/getSectionError";
 
 interface SidebarProps {
   major: Major2;
+  selectedPlan: PlanModel<string> | undefined;
 }
 
 const COOP_BLOCK: ScheduleCourse2<string> = {
@@ -45,7 +52,16 @@ const getRequiredCourses = (
   }
 };
 
-const Sidebar: React.FC<SidebarProps> = memo(({ major }) => {
+const Sidebar: React.FC<SidebarProps> = memo(({ major, selectedPlan }) => {
+  const validationStatus: MajorValidationResult | undefined = useMemo(() => {
+    if (selectedPlan) {
+      const takenCourses = getAllCoursesFromPlan(selectedPlan);
+      return validateMajor2(major, takenCourses, undefined);
+    } else {
+      return undefined;
+    }
+  }, [selectedPlan, major]);
+
   const [courseData, setCourseData] = useState({});
 
   useEffect(() => {
@@ -98,14 +114,23 @@ const Sidebar: React.FC<SidebarProps> = memo(({ major }) => {
         />
       </Box>
       {courseData &&
-        major.requirementSections.map((section, index) => (
-          <SidebarSection
-            key={section.title}
-            section={section}
-            courseData={courseData}
-            dndIdPrefix={"sidebar-" + index}
-          />
-        ))}
+        major.requirementSections.map((section, index) => {
+          const sectionValidationError: MajorValidationError | undefined =
+            getSectionError(index, validationStatus);
+
+          const sectionIsValid =
+            selectedPlan !== undefined && sectionValidationError === undefined;
+
+          return (
+            <SidebarSection
+              key={section.title}
+              section={section}
+              isValid={sectionIsValid}
+              courseData={courseData}
+              dndIdPrefix={"sidebar-" + index}
+            />
+          );
+        })}
     </Box>
   );
 });
