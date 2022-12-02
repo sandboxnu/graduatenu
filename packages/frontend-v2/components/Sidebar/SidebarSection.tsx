@@ -41,7 +41,7 @@ const SidebarSection: React.FC<SidebarSectionProps> = ({
       >
         {opened && (
           <>
-            {section.minRequirementCount > 1 && (
+            {section.minRequirementCount < section.requirements.length && (
               <Text>
                 Complete {section.minRequirementCount} of the following
               </Text>
