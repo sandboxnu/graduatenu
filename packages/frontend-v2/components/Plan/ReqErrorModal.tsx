@@ -85,7 +85,7 @@ export const ReqErrorModal: React.FC<ReqErrorModalProps> = ({
               alignItems="center"
             >
               <Button
-                variant="solidRed"
+                variant="solidBlue"
                 mr={3}
                 onClick={onClose}
               >
