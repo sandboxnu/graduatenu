@@ -88,6 +88,8 @@ export const ScheduleCourse = forwardRef<
           borderRadius: "5px",
           fontSize: "14px",
           alignItems: "center",
+          flex: scheduleCourse.classId === "Experiential Learning" ? 1 : 0,
+          marginBottom: "5px",
           transition: "transform 0.15s ease",
           transform: hovered ? "scale(1.04)" : "scale(1)",
         }}
@@ -104,10 +106,8 @@ export const ScheduleCourse = forwardRef<
           style={{
             display: "flex",
             alignItems: "center",
-            flexGrow: 1,
             background: "",
-            padding:
-              scheduleCourse.classId === "CO-OP" ? "48px 8px" : "8px 8px",
+            padding: "8px 8px",
             cursor: isOverlay ? "grabbing" : "grab",
           }}
           {...listeners}
