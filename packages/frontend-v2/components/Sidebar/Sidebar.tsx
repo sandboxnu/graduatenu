@@ -67,7 +67,7 @@ const Sidebar: React.FC<SidebarProps> = memo(({ selectedPlan }) => {
   const validationStatus: MajorValidationResult | undefined = useMemo(() => {
     if (major) {
       const takenCourses = getAllCoursesFromPlan(selectedPlan);
-      return validateMajor2(major, takenCourses, undefined);
+      return validateMajor2(major, takenCourses, selectedPlan.concentration);
     } else {
       return undefined;
     }
@@ -140,6 +140,12 @@ const Sidebar: React.FC<SidebarProps> = memo(({ selectedPlan }) => {
     return <SidebarContainer title="" />;
   }
 
+  const concentrationValidationError: MajorValidationError | undefined =
+    getSectionError(major.requirementSections.length, validationStatus);
+  console.log("Result: ", validationStatus);
+
+  const concentrationIsValid = concentrationValidationError === undefined;
+
   return (
     <Box p="xs 0px" backgroundColor="neutral.main">
       <Text
@@ -179,7 +185,7 @@ const Sidebar: React.FC<SidebarProps> = memo(({ selectedPlan }) => {
           })}
           {concentration && (
             <SidebarSection
-              isValid={true}
+              isValid={concentrationIsValid}
               section={concentration}
               courseData={courseData}
               dndIdPrefix="sidebar-concentration"
