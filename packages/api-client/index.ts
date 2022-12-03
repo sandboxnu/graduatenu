@@ -4,8 +4,8 @@ import {
   SignUpStudentDto,
   GetPlanResponse,
   GetStudentResponse,
-  INEUAndPrereq,
-  INEUOrPrereq,
+  INEUAndReq,
+  INEUOrReq,
   LoginStudentDto,
   UpdatePlanDto,
   UpdatePlanResponse,
@@ -90,13 +90,15 @@ interface SearchClass {
   name: string;
   classId: string;
   subject: string;
-  prereqs?: INEUAndPrereq | INEUOrPrereq;
-  coreqs?: INEUAndPrereq | INEUOrPrereq;
+  prereqs?: INEUAndReq | INEUOrReq;
+  coreqs?: INEUAndReq | INEUOrReq;
   maxCredits: number;
   minCredits: number;
 }
 
-function occurrenceToCourse(occurrence): ScheduleCourse2<null> | null {
+function occurrenceToCourse(
+  occurrence: SearchClass
+): ScheduleCourse2<null> | null {
   if (!occurrence) return null;
 
   return {
@@ -182,7 +184,7 @@ class SearchAPIClient {
     const coursesData = await res.data.data;
 
     if (coursesData.bulkClasses) {
-      return coursesData.bulkClasses.map((course) => {
+      return coursesData.bulkClasses.map((course: any) => {
         return occurrenceToCourse(course?.latestOccurrence);
       });
     } else {

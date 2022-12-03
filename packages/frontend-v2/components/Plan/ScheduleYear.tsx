@@ -1,7 +1,13 @@
-import { DeleteIcon } from "@chakra-ui/icons";
+import { DeleteIcon, WarningIcon } from "@chakra-ui/icons";
 import { Flex, Grid, IconButton, Text, Tooltip } from "@chakra-ui/react";
-import { ScheduleCourse2, ScheduleYear2, SeasonEnum } from "@graduate/common";
+import {
+  ScheduleCourse2,
+  ScheduleYear2,
+  SeasonEnum,
+  YearError,
+} from "@graduate/common";
 import { ScheduleTerm } from "./ScheduleTerm";
+import { useState, useEffect } from "react";
 
 interface ToggleYearProps {
   isExpanded: boolean;
@@ -10,6 +16,8 @@ interface ToggleYearProps {
 
 interface ScheduleYearProps extends ToggleYearProps {
   scheduleYear: ScheduleYear2<string>;
+  yearCoReqError?: YearError;
+  yearPreReqError?: YearError;
 
   /** Function to add classes to a given term in the plan being displayed. */
   addClassesToTermInCurrPlan: (
@@ -36,6 +44,8 @@ export const ScheduleYear: React.FC<ScheduleYearProps> = ({
   isExpanded,
   toggleExpanded,
   removeYearFromCurrPlan,
+  yearCoReqError = undefined,
+  yearPreReqError = undefined,
 }) => {
   // sum all credits over all the courses over each semester
   const totalCreditsThisYear = [
@@ -55,6 +65,21 @@ export const ScheduleYear: React.FC<ScheduleYearProps> = ({
     return totalCreditsForYear + totalCreditsThisTerm;
   }, 0);
 
+  const [displayReqErrors, setDisplayReqErrors] = useState(false);
+
+  useEffect(() => {
+    const classes = [];
+    classes.push(...Object.values(yearPreReqError?.fall ?? {}));
+    classes.push(...Object.values(yearPreReqError?.spring ?? {}));
+    classes.push(...Object.values(yearPreReqError?.summer1 ?? {}));
+    classes.push(...Object.values(yearPreReqError?.summer2 ?? {}));
+    classes.push(...Object.values(yearCoReqError?.fall ?? {}));
+    classes.push(...Object.values(yearCoReqError?.spring ?? {}));
+    classes.push(...Object.values(yearCoReqError?.summer1 ?? {}));
+    classes.push(...Object.values(yearCoReqError?.summer2 ?? {}));
+    setDisplayReqErrors(classes.filter((c) => c != undefined).length > 0);
+  }, [yearCoReqError, yearPreReqError]);
+
   return (
     <Flex flexDirection="column">
       <YearHeader
@@ -63,26 +88,35 @@ export const ScheduleYear: React.FC<ScheduleYearProps> = ({
         isExpanded={isExpanded}
         toggleExpanded={toggleExpanded}
         removeYearFromCurrPlan={removeYearFromCurrPlan}
+        displayReqErrors={displayReqErrors}
       />
       {isExpanded && (
         <Grid templateColumns="repeat(4, 1fr)" minHeight="220px">
           <ScheduleTerm
+            termCoReqErr={yearCoReqError?.fall}
+            termPreReqErr={yearPreReqError?.fall}
             scheduleTerm={scheduleYear.fall}
             addClassesToTermInCurrPlan={addClassesToTermInCurrPlan}
             removeCourseFromTermInCurrPlan={removeCourseFromTermInCurrPlan}
           />
           <ScheduleTerm
+            termCoReqErr={yearCoReqError?.spring}
+            termPreReqErr={yearPreReqError?.spring}
             scheduleTerm={scheduleYear.spring}
             addClassesToTermInCurrPlan={addClassesToTermInCurrPlan}
             removeCourseFromTermInCurrPlan={removeCourseFromTermInCurrPlan}
           />
           {/* TODO: support summer full term */}
           <ScheduleTerm
+            termCoReqErr={yearCoReqError?.summer1}
+            termPreReqErr={yearPreReqError?.summer1}
             scheduleTerm={scheduleYear.summer1}
             addClassesToTermInCurrPlan={addClassesToTermInCurrPlan}
             removeCourseFromTermInCurrPlan={removeCourseFromTermInCurrPlan}
           />
           <ScheduleTerm
+            termCoReqErr={yearCoReqError?.summer2}
+            termPreReqErr={yearPreReqError?.summer2}
             scheduleTerm={scheduleYear.summer2}
             addClassesToTermInCurrPlan={addClassesToTermInCurrPlan}
             removeCourseFromTermInCurrPlan={removeCourseFromTermInCurrPlan}
@@ -96,6 +130,7 @@ export const ScheduleYear: React.FC<ScheduleYearProps> = ({
 
 interface YearHeaderProps extends ToggleYearProps {
   year: ScheduleYear2<string>;
+  displayReqErrors: boolean;
   totalCreditsTaken: number;
   removeYearFromCurrPlan: () => void;
 }
@@ -107,6 +142,7 @@ const YearHeader: React.FC<YearHeaderProps> = ({
   isExpanded,
   toggleExpanded,
   removeYearFromCurrPlan,
+  displayReqErrors,
 }) => {
   const backgroundColor = isExpanded
     ? "primary.blue.dark"
@@ -115,6 +151,7 @@ const YearHeader: React.FC<YearHeaderProps> = ({
   return (
     <Flex
       alignItems="center"
+      justifyContent="space-between"
       backgroundColor={backgroundColor + ".main"}
       _hover={{
         backgroundColor: "primary.blue.light.600",
@@ -132,23 +169,37 @@ const YearHeader: React.FC<YearHeaderProps> = ({
           {totalCreditsTaken} credits
         </Text>
       </Flex>
-      <Tooltip label={`Delete year ${year.year}?`} fontSize="md">
-        <IconButton
-          aria-label="Delete course"
-          variant="ghost"
-          color="white"
-          icon={<DeleteIcon />}
-          marginLeft="auto"
-          marginRight="sm"
-          _hover={{ bg: "white", color: "primary.red.main" }}
-          _active={{ bg: `${backgroundColor}.900` }}
-          onClick={(e) => {
-            // important to prevent the click from propogating upwards and triggering the toggle
-            e.stopPropagation();
-            removeYearFromCurrPlan();
-          }}
-        />
-      </Tooltip>
+      <Flex>
+        {displayReqErrors && (
+          <Tooltip label={`There are coreq and/or prereq errors`} fontSize="md">
+            <IconButton
+              aria-label="There are coreq and/or prereq errors!"
+              variant="ghost"
+              color="primary.red.main"
+              icon={<WarningIcon />}
+              _hover={{ bg: `white` }}
+              _active={{}}
+            />
+          </Tooltip>
+        )}
+        <Tooltip label={`Delete year ${year.year}?`} fontSize="md">
+          <IconButton
+            aria-label="Delete course"
+            variant="ghost"
+            color="white"
+            icon={<DeleteIcon />}
+            marginLeft="auto"
+            marginRight="sm"
+            _hover={{ bg: "white", color: "primary.red.main" }}
+            _active={{ bg: `${backgroundColor}.900` }}
+            onClick={(e) => {
+              // important to prevent the click from propogating upwards and triggering the toggle
+              e.stopPropagation();
+              removeYearFromCurrPlan();
+            }}
+          />
+        </Tooltip>
+      </Flex>
     </Flex>
   );
 };

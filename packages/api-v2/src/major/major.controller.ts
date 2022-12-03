@@ -1,4 +1,4 @@
-import { GetSupportedMajorsResponse, Major2 } from "@graduate/common";
+import { GetSupportedMajorsResponse, Major2 } from "../../../common";
 import {
   Controller,
   Get,

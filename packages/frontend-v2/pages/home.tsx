@@ -1,41 +1,45 @@
-import { NextPage } from "next";
+import { Box, Button, Flex } from "@chakra-ui/react";
 import {
-  AddPlanModal,
-  EditPlanModal,
-  DeletePlanModal,
-  HeaderContainer,
-  LoadingPage,
-  Logo,
-  Plan,
-  Sidebar,
-  PlanDropdown,
-  ScheduleCourse,
-  AddYearButton,
-  SidebarContainer,
-} from "../components";
-import { fetchStudentAndPrepareForDnd, useStudentWithPlans } from "../hooks";
-import {
+  CollisionDetection,
   DndContext,
   DragEndEvent,
   DragOverlay,
   DragStartEvent,
   pointerWithin,
   rectIntersection,
-  CollisionDetection,
 } from "@dnd-kit/core";
+import { API } from "@graduate/api-client";
+import { CoReqWarnings, PlanModel, PreReqWarnings } from "@graduate/common";
+import { NextPage } from "next";
+import { useRouter } from "next/router";
+import { PropsWithChildren, useEffect, useState } from "react";
+import {
+  AddPlanModal,
+  AddYearButton,
+  DeletePlanModal,
+  EditPlanModal,
+  HeaderContainer,
+  LoadingPage,
+  Logo,
+  Plan,
+  PlanDropdown,
+  ScheduleCourse,
+  Sidebar,
+  SidebarContainer,
+} from "../components";
+import { fetchStudentAndPrepareForDnd, useStudentWithPlans } from "../hooks";
 import {
   cleanDndIdsFromPlan,
+  handleApiClientError,
   logger,
   logout,
   updatePlanForStudent,
   updatePlanOnDragEnd,
-  handleApiClientError,
 } from "../utils";
-import { API } from "@graduate/api-client";
-import { PlanModel } from "@graduate/common";
-import { useRouter } from "next/router";
-import { Box, Button, Flex } from "@chakra-ui/react";
-import React, { PropsWithChildren, useEffect, useState } from "react";
+import {
+  getCoReqWarnings,
+  getPreReqWarnings,
+} from "../utils/plan/preAndCoReqCheck";
 
 // Algorithm to decide which droppable the course is currently over (if any).
 // See https://docs.dndkit.com/api-documentation/context-provider/collision-detection-algorithms for more info.
@@ -64,10 +68,24 @@ const HomePage: NextPage = () => {
 
   const [activeCourse, setActiveCourse] = useState(null);
 
+  const [coReqWarnings, setCoReqWarnings] = useState<CoReqWarnings | undefined>(
+    undefined
+  );
+  const [preReqWarnings, setPreReqWarnings] = useState<
+    PreReqWarnings | undefined
+  >(undefined);
+
   useEffect(() => {
     // once the student is fetched, set the selected plan id to the primary plan id
     if (student && selectedPlanId === undefined) {
       setSelectedPlanId(student.primaryPlanId);
+    }
+    if (student) {
+      const plan = student.plans.find((plan) => plan.id === selectedPlanId);
+      if (plan) {
+        setPreReqWarnings(getPreReqWarnings(plan.schedule));
+        setCoReqWarnings(getCoReqWarnings(plan.schedule));
+      }
     }
   }, [student, selectedPlanId, setSelectedPlanId]);
 
@@ -139,6 +157,8 @@ const HomePage: NextPage = () => {
       return;
     }
 
+    setPreReqWarnings(getPreReqWarnings(updatedPlan.schedule));
+    setCoReqWarnings(getCoReqWarnings(updatedPlan.schedule));
     mutateStudentWithUpdatedPlan(updatedPlan);
   };
 
@@ -185,11 +205,7 @@ const HomePage: NextPage = () => {
           {selectedPlan === undefined ? (
             <SidebarContainer title="No plan selected" />
           ) : (
-            <Sidebar
-              majorName={selectedPlan.major}
-              catalogYear={selectedPlan.catalogYear}
-              concentrationName={selectedPlan.concentration}
-            />
+            <Sidebar selectedPlan={selectedPlan} />
           )}
         </Box>
         <Box p="md" overflow="auto" flexGrow={1}>
@@ -214,6 +230,8 @@ const HomePage: NextPage = () => {
               <>
                 <Plan
                   plan={selectedPlan}
+                  coReqErr={coReqWarnings}
+                  preReqErr={preReqWarnings}
                   mutateStudentWithUpdatedPlan={mutateStudentWithUpdatedPlan}
                 />
                 <Flex mt="sm">
@@ -233,6 +251,8 @@ const HomePage: NextPage = () => {
             isDisabled={false}
             scheduleCourse={activeCourse}
             isOverlay={true}
+            coReqErr={undefined}
+            preReqErr={undefined}
           />
         ) : null}
       </DragOverlay>
