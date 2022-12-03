@@ -106,23 +106,22 @@ const Sidebar: React.FC<SidebarProps> = memo(({ selectedPlan }) => {
     }
 
     SearchAPI.fetchCourses(coursesQueryData).then((courses) => {
-      const courseMap: { [id: string]: ScheduleCourse2<null> } = {};
+      const courseMap: { [id: string]: ScheduleCourse2<null> } = courseData;
       if (courses) {
         for (const course of courses) {
           if (course) {
             courseMap[`${course.subject}${course.classId}`] = course;
           }
         }
+        setCourseData(courseMap);
+        setLoading(false);
       }
-
-      setCourseData(courseMap);
-      setLoading(false);
     });
     // We don't want to make another request when only courseData changes,
     // we're just appending to it rather than replacing it, hence the
     // technical dependency.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [major]);
+  }, [major, concentration?.requirements]);
 
   if (isLoading) {
     return <SidebarContainer title="Loading..." />;
@@ -142,21 +141,11 @@ const Sidebar: React.FC<SidebarProps> = memo(({ selectedPlan }) => {
 
   const concentrationValidationError: MajorValidationError | undefined =
     getSectionError(major.requirementSections.length, validationStatus);
-  console.log("Result: ", validationStatus);
 
   const concentrationIsValid = concentrationValidationError === undefined;
 
   return (
-    <Box p="xs 0px" backgroundColor="neutral.main">
-      <Text
-        py="lg"
-        px="sm"
-        fontSize="xl"
-        color="primary.red.main"
-        fontWeight={700}
-      >
-        {major.name}
-      </Text>
+    <SidebarContainer title={major.name} subtitle={selectedPlan.concentration}>
       <Box padding="10px 20px 15px 20px">
         <DraggableScheduleCourse
           scheduleCourse={COOP_BLOCK}
@@ -193,7 +182,7 @@ const Sidebar: React.FC<SidebarProps> = memo(({ selectedPlan }) => {
           )}
         </>
       )}
-    </Box>
+    </SidebarContainer>
   );
 });
 

@@ -12,13 +12,10 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { API } from "@graduate/api-client";
-import {
-  CreatePlanDtoWithoutSchedule,
-  GetSupportedMajorsResponse,
-} from "@graduate/common";
+import { CreatePlanDtoWithoutSchedule } from "@graduate/common";
 import { useRouter } from "next/router";
 import { Dispatch, SetStateAction } from "react";
-import { FormState, useForm, UseFormRegister } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useSWRConfig } from "swr";
 import { USE_STUDENT_WITH_PLANS_SWR_KEY } from "../../hooks";
 import { useSupportedMajors } from "../../hooks/useSupportedMajors";
@@ -61,8 +58,6 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
 
   const catalogYear = watch("catalogYear");
   const majorName = watch("major");
-
-  console.log("Supported major: ", supportedMajorsData);
 
   const onSubmitHandler = async (payload: CreatePlanDtoWithoutSchedule) => {
     const schedule = createEmptySchedule();

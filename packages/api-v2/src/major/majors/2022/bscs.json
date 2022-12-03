@@ -469,8 +469,7 @@
             ]
           },
           {
-            "type": "XOM",
-            "numCreditsMin": 8,
+            "type": "OR",
             "courses": [
               { "type": "COURSE", "classId": 3520, "subject": "CS" },
               { "type": "COURSE", "classId": 3620, "subject": "CS" },

@@ -115,9 +115,27 @@ export class PlanService {
       concentration: newConcentrationName,
     } = updatePlanDto;
 
-    // TODO(#512): Check for valid concentration when a major and year is updated, but concentration is not
     // validate the major, year, concentration pair if either one is being update
     if (newCatalogYear || newMajorName || newConcentrationName) {
+      /*
+       * Temporarily force clients to update the concentration name if they update the major/year.
+       * Need this since we don't check if the concentration is valid if they didn't update their concentration.
+       * TODO(#512): Check for valid concentration when a major and year is updated, but concentration is not.
+       */
+      if ((newCatalogYear || newMajorName) && !newConcentrationName) {
+        this.logger.debug(
+          {
+            message:
+              "Attempting to update a plan year/major without updating the concentration.",
+            newMajorName,
+            newCatalogYear,
+            newConcentrationName,
+          },
+          this.formatPlanServiceCtx("update")
+        );
+
+        return null;
+      }
       let catalogYear = newCatalogYear;
       let majorName = newMajorName;
       let concentrationName = newConcentrationName;

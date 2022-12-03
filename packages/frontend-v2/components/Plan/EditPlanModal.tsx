@@ -107,11 +107,11 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
               Edit Plan
             </ModalHeader>
             <ModalBody>
-              <VStack spacing={"sm"}>
+              <VStack spacing="sm">
                 <PlanInput
                   error={errors.name}
-                  label={"Title"}
-                  type={"text"}
+                  label="Title"
+                  type="text"
                   id="name"
                   placeholder="My Plan"
                   {...register("name", {
@@ -120,7 +120,7 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                 />
 
                 <PlanSelect
-                  label={"Catalog Year"}
+                  label="Catalog Year"
                   id="catalogYear"
                   placeholder="Select a Catalog Year"
                   error={errors.catalogYear}
@@ -132,7 +132,7 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                 />
 
                 <PlanSelect
-                  label={"Major"}
+                  label="Major"
                   id="major"
                   placeholder="Select a Major"
                   error={errors.major}

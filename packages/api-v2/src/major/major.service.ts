@@ -77,13 +77,10 @@ export class MajorService {
     catalogYear: number,
     concentrationName: string
   ): boolean {
-    console.log("CONCENTRATION: ", concentrationName);
     const concentrationsInfo = this.getConcentrationsInfoForMajor(
       majorName,
       catalogYear
     );
-
-    console.log("CONCENTRATIONS INFOR: ", concentrationsInfo);
 
     if (!concentrationsInfo) {
       this.logger.debug(
@@ -120,8 +117,6 @@ export class MajorService {
     const isValidConcentrationName = concentrations.some(
       (c) => c === concentrationName
     );
-
-    console.log("IS VALID CONCENTRATION: ", isValidConcentrationName);
 
     if (!isValidConcentrationName) {
       this.logger.debug(
