@@ -18,6 +18,7 @@ import { Dispatch, SetStateAction } from "react";
 import { useForm } from "react-hook-form";
 import { useSWRConfig } from "swr";
 import { USE_STUDENT_WITH_PLANS_SWR_KEY } from "../../hooks";
+import { useSupportedMajors } from "../../hooks/useSupportedMajors";
 import { createEmptySchedule, handleApiClientError } from "../../utils";
 import { BlueButton } from "../Button";
 import { PlanInput, PlanSelect } from "../Form";
@@ -26,18 +27,11 @@ interface AddPlanModalProps {
   setSelectedPlanId: Dispatch<SetStateAction<number | undefined | null>>;
 }
 
-// Mock supported majors till we have scraped and stored majors
-const SUPPORTED_MAJORS = new Map<number, string[]>([
-  [
-    2019,
-    ["Computer Science, BSCS", "Computer Science and Cognitive Psycology, BS"],
-  ],
-  [2020, ["Computer Science, BSCS"]],
-]);
-
 export const AddPlanModal: React.FC<AddPlanModalProps> = ({
   setSelectedPlanId,
 }) => {
+  const { supportedMajorsData, error: supportedMajorsError } =
+    useSupportedMajors();
   const { mutate } = useSWRConfig();
   const router = useRouter();
   const { onOpen, onClose, isOpen } = useDisclosure();
@@ -51,6 +45,10 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
     mode: "onTouched",
     shouldFocusError: true,
   });
+
+  if (supportedMajorsError) {
+    handleApiClientError(supportedMajorsError, router);
+  }
 
   const catalogYear = watch("catalogYear");
 
@@ -117,7 +115,9 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                   id="catalogYear"
                   placeholder="Select a Catalog Year"
                   error={errors.catalogYear}
-                  array={Array.from(SUPPORTED_MAJORS.keys())}
+                  array={Array.from(
+                    Object.keys(supportedMajorsData?.supportedMajors ?? {})
+                  )}
                   {...register("catalogYear", {
                     required: "Catalog year is required",
                     valueAsNumber: true,
@@ -129,7 +129,9 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                   id="major"
                   placeholder="Select a Major"
                   error={errors.major}
-                  array={SUPPORTED_MAJORS.get(catalogYear) ?? []}
+                  array={
+                    supportedMajorsData?.supportedMajors[catalogYear] ?? []
+                  }
                   {...register("major", {
                     required: "Major is required",
                   })}

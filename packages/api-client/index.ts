@@ -13,6 +13,8 @@ import {
   UpdateStudentResponse,
   OnboardStudentDto,
   ScheduleCourse2,
+  Major2,
+  GetSupportedMajorsResponse,
 } from "@graduate/common";
 import { ClassConstructor, plainToInstance } from "class-transformer";
 
@@ -74,6 +76,13 @@ class APIClient {
       this.req("PATCH", `/plans/${id}`, UpdatePlanResponse, body),
     delete: (id: string | number): Promise<void> =>
       this.req("DELETE", `/plans/${id}`),
+  };
+
+  majors = {
+    get: (catalogYear: number, majorName: string): Promise<Major2> =>
+      this.req<Major2>("GET", `/majors/${catalogYear}/${majorName}`),
+    getSupportedMajors: (): Promise<GetSupportedMajorsResponse> =>
+      this.req("GET", `/majors/supportedMajors`, GetSupportedMajorsResponse),
   };
 }
 

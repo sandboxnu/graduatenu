@@ -2,7 +2,6 @@ import { Box, Text } from "@chakra-ui/react";
 import { SearchAPI } from "@graduate/api-client";
 import {
   IRequiredCourse,
-  Major2,
   MajorValidationError,
   MajorValidationResult,
   PlanModel,
@@ -10,16 +9,19 @@ import {
   ScheduleCourse2,
   Section,
 } from "@graduate/common";
-import { memo, useEffect, useMemo, useState } from "react";
+import { memo, PropsWithChildren, useEffect, useMemo, useState } from "react";
 import { DraggableScheduleCourse } from "../ScheduleCourse";
 import SidebarSection from "./SidebarSection";
 import { validateMajor2 } from "@graduate/common";
 import { getAllCoursesFromPlan } from "../../utils/plan/getAllCoursesFromPlan";
 import { getSectionError } from "../../utils/plan/getSectionError";
+import { handleApiClientError } from "../../utils";
+import axios from "axios";
+import { useRouter } from "next/router";
+import { useMajor } from "../../hooks/useMajor";
 
 interface SidebarProps {
-  major: Major2;
-  selectedPlan: PlanModel<string> | undefined;
+  selectedPlan: PlanModel<string>;
 }
 
 const COOP_BLOCK: ScheduleCourse2<string> = {
@@ -52,9 +54,14 @@ const getRequiredCourses = (
   }
 };
 
-const Sidebar: React.FC<SidebarProps> = memo(({ major, selectedPlan }) => {
+const Sidebar: React.FC<SidebarProps> = memo(({ selectedPlan }) => {
+  const router = useRouter();
+  const { major, isLoading, error } = useMajor(
+    selectedPlan.catalogYear,
+    selectedPlan.major
+  );
   const validationStatus: MajorValidationResult | undefined = useMemo(() => {
-    if (selectedPlan) {
+    if (major) {
       const takenCourses = getAllCoursesFromPlan(selectedPlan);
       return validateMajor2(major, takenCourses, undefined);
     } else {
@@ -66,6 +73,10 @@ const Sidebar: React.FC<SidebarProps> = memo(({ major, selectedPlan }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (!major) {
+      return;
+    }
+
     const requirements = major.requirementSections.reduce(
       (courses: IRequiredCourse[], section: Section) => {
         const requiredCourses: IRequiredCourse[] = [];
@@ -76,7 +87,6 @@ const Sidebar: React.FC<SidebarProps> = memo(({ major, selectedPlan }) => {
     );
 
     const coursesQueryData: { subject: string; classId: string }[] = [];
-
     for (const requirement of requirements) {
       const subject = requirement.subject;
       const classId = requirement.classId.toString();
@@ -99,7 +109,23 @@ const Sidebar: React.FC<SidebarProps> = memo(({ major, selectedPlan }) => {
     // we're just appending to it rather than replacing it, hence the
     // technical dependency.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [major.requirementSections]);
+  }, [major]);
+
+  if (isLoading) {
+    return <SidebarContainer title="Loading..." />;
+  }
+
+  if (!major) {
+    if (error) {
+      if (axios.isAxiosError(error) && error.response?.status === 404) {
+        return <SidebarContainer title="Major not found" />;
+      }
+
+      handleApiClientError(error, router);
+    }
+
+    return <SidebarContainer title="" />;
+  }
 
   return (
     <Box p="xs 0px" backgroundColor="neutral.main">
@@ -124,8 +150,7 @@ const Sidebar: React.FC<SidebarProps> = memo(({ major, selectedPlan }) => {
           const sectionValidationError: MajorValidationError | undefined =
             getSectionError(index, validationStatus);
 
-          const sectionIsValid =
-            selectedPlan !== undefined && sectionValidationError === undefined;
+          const sectionIsValid = sectionValidationError === undefined;
 
           return (
             <SidebarSection
@@ -141,6 +166,29 @@ const Sidebar: React.FC<SidebarProps> = memo(({ major, selectedPlan }) => {
     </Box>
   );
 });
+
+interface SidebarContainerProps {
+  title: string;
+}
+
+export const SidebarContainer: React.FC<
+  PropsWithChildren<SidebarContainerProps>
+> = ({ title, children }) => {
+  return (
+    <Box p="xs 0px" backgroundColor="neutral.main">
+      <Text
+        py="lg"
+        px="sm"
+        fontSize="xl"
+        color="primary.red.main"
+        fontWeight={700}
+      >
+        {title}
+      </Text>
+      {children}
+    </Box>
+  );
+};
 
 // We need to manually set the display name like this because
 // of how we're using memo above.

@@ -69,16 +69,23 @@ const SidebarSection: React.FC<SidebarSectionProps> = ({
             <Text marginLeft="xs">Loading...</Text>
           </Flex>
         )}
-        {opened &&
-          !loading &&
-          section.requirements.map((requirement, index) => (
-            <SectionRequirement
-              requirement={requirement}
-              courseData={courseData}
-              dndIdPrefix={dndIdPrefix + "-" + index}
-              key={index}
-            />
-          ))}
+        {opened && !loading && (
+          <>
+            {section.minRequirementCount < section.requirements.length && (
+              <Text>
+                Complete {section.minRequirementCount} of the following
+              </Text>
+            )}
+            {section.requirements.map((requirement, index) => (
+              <SectionRequirement
+                requirement={requirement}
+                courseData={courseData}
+                dndIdPrefix={dndIdPrefix + "-" + index}
+                key={index}
+              />
+            ))}
+          </>
+        )}
       </Box>
     </Box>
   );
