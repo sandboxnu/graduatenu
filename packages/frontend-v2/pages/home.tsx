@@ -25,6 +25,7 @@ import {
   PlanDropdown,
   ScheduleCourse,
   Sidebar,
+  SidebarContainer,
 } from "../components";
 import { fetchStudentAndPrepareForDnd, useStudentWithPlans } from "../hooks";
 import {
@@ -35,13 +36,10 @@ import {
   updatePlanForStudent,
   updatePlanOnDragEnd,
 } from "../utils";
-import { getMajor2Example } from "../utils/convertMajor";
 import {
   getCoReqWarnings,
   getPreReqWarnings,
 } from "../utils/plan/preAndCoReqCheck";
-
-const DEMO_MAJOR = getMajor2Example();
 
 // Algorithm to decide which droppable the course is currently over (if any).
 // See https://docs.dndkit.com/api-documentation/context-provider/collision-detection-algorithms for more info.
@@ -106,7 +104,7 @@ const HomePage: NextPage = () => {
     logger.error("HomePage", error);
     handleApiClientError(error, router);
 
-    // If we couldn't fetch the student's plan, show a blank page for now.
+    // If we couldn't fetch the student, show a blank page for now.
     // We might want to show some more actionable error in the future.
     return <div></div>;
   }
@@ -197,41 +195,55 @@ const HomePage: NextPage = () => {
       // that feels more intuitive.
       collisionDetection={courseDndCollisisonAlgorithm}
     >
-      <PageLayout selectedPlan={selectedPlan}>
-        <Flex flexDirection="column">
-          <Flex alignItems="center" mb="sm">
-            <PlanDropdown
-              selectedPlanId={selectedPlanId}
-              setSelectedPlanId={setSelectedPlanId}
-              plans={student.plans}
-            />
-            <AddPlanModal setSelectedPlanId={setSelectedPlanId} />
-            {selectedPlan && <EditPlanModal plan={selectedPlan} />}
-            {selectedPlan && (
-              <DeletePlanModal
+      <PageLayout>
+        <Box
+          bg="primary.blue.light.main"
+          overflowY="auto"
+          width="360px"
+          flexShrink={0}
+        >
+          {selectedPlan === undefined ? (
+            <SidebarContainer title="No plan selected" />
+          ) : (
+            <Sidebar selectedPlan={selectedPlan} />
+          )}
+        </Box>
+        <Box p="md" overflow="auto" flexGrow={1}>
+          <Flex flexDirection="column">
+            <Flex alignItems="center" mb="sm">
+              <PlanDropdown
+                selectedPlanId={selectedPlanId}
                 setSelectedPlanId={setSelectedPlanId}
-                planName={selectedPlan.name}
-                planId={selectedPlan.id}
+                plans={student.plans}
               />
-            )}
-          </Flex>
-          {selectedPlan && (
-            <>
-              <Plan
-                plan={selectedPlan}
-                coReqErr={coReqWarnings}
-                preReqErr={preReqWarnings}
-                mutateStudentWithUpdatedPlan={mutateStudentWithUpdatedPlan}
-              />
-              <Flex mt="sm">
-                <AddYearButton
+              <AddPlanModal setSelectedPlanId={setSelectedPlanId} />
+              {selectedPlan && <EditPlanModal plan={selectedPlan} />}
+              {selectedPlan && (
+                <DeletePlanModal
+                  setSelectedPlanId={setSelectedPlanId}
+                  planName={selectedPlan.name}
+                  planId={selectedPlan.id}
+                />
+              )}
+            </Flex>
+            {selectedPlan && (
+              <>
+                <Plan
                   plan={selectedPlan}
+                  coReqErr={coReqWarnings}
+                  preReqErr={preReqWarnings}
                   mutateStudentWithUpdatedPlan={mutateStudentWithUpdatedPlan}
                 />
-              </Flex>
-            </>
-          )}
-        </Flex>
+                <Flex mt="sm">
+                  <AddYearButton
+                    plan={selectedPlan}
+                    mutateStudentWithUpdatedPlan={mutateStudentWithUpdatedPlan}
+                  />
+                </Flex>
+              </>
+            )}
+          </Flex>
+        </Box>
       </PageLayout>
       <DragOverlay dropAnimation={null}>
         {activeCourse ? (
@@ -248,33 +260,16 @@ const HomePage: NextPage = () => {
   );
 };
 
-interface PageLayoutProps {
-  selectedPlan: PlanModel<string> | undefined;
-}
-
 /**
  * This will have everything that can be rendered without the student and
  * plans(i.e: header, sidebar, etc)
  */
-const PageLayout: React.FC<PropsWithChildren<PageLayoutProps>> = ({
-  children,
-  selectedPlan,
-}) => {
+const PageLayout: React.FC<PropsWithChildren> = ({ children }) => {
   return (
     <Flex flexDirection="column" height="100vh" overflow="hidden">
       <Header />
       <Flex height="100%" overflow="hidden">
-        <Box
-          bg="primary.blue.light.main"
-          overflowY="auto"
-          width="360px"
-          flexShrink={0}
-        >
-          <Sidebar major={DEMO_MAJOR} selectedPlan={selectedPlan} />
-        </Box>
-        <Box p="md" overflow="auto" flexGrow={1}>
-          {children}
-        </Box>
+        {children}
       </Flex>
     </Flex>
   );

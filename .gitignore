@@ -51,6 +51,7 @@ graduatenu.code-workspace
 
 # Local DB data 
 infrastructure/develop/graduatenu-db-data
+infrastructure/test/graduatenu-db-data
 
 # Yarn2 gitignore for non-zero installs
 .pnp.*

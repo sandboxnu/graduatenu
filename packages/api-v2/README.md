@@ -13,7 +13,9 @@
 $ yarn test
 
 # e2e tests
+$ yarn test:db:up
 $ yarn test:e2e
+$ yarn test:db:down
 
 # test coverage
 $ yarn test:cov

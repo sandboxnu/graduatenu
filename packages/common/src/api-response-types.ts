@@ -41,3 +41,8 @@ export class StudentModel<T> {
 export class GetStudentResponse extends StudentModel<null> {}
 
 export class UpdateStudentResponse extends StudentModel<null> {}
+
+export class GetSupportedMajorsResponse {
+  // { year => { majorName => Major2 }}
+  supportedMajors: Record<string, string[]>;
+}
