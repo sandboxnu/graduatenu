@@ -19,13 +19,38 @@ export class PlanService {
   ) {}
 
   create(createPlanDto: CreatePlanDto, student: Student): Promise<Plan> {
-    // validate the major, year
-    const { major: majorName, catalogYear } = createPlanDto;
+    // validate the major, year, concentration
+    const {
+      major: majorName,
+      catalogYear,
+      concentration: concentrationName,
+    } = createPlanDto;
     const major = this.majorService.findByMajorAndYear(majorName, catalogYear);
     if (!major) {
       this.logger.debug(
         {
           message: "Attempting to create a plan with an unsupported major.",
+          major,
+          catalogYear,
+        },
+        this.formatPlanServiceCtx("create")
+      );
+
+      return null;
+    }
+
+    const isValidConcentrationForMajor =
+      this.majorService.isValidConcentrationForMajor(
+        majorName,
+        catalogYear,
+        concentrationName
+      );
+
+    if (!isValidConcentrationForMajor) {
+      this.logger.debug(
+        {
+          message:
+            "Attempting to create a plan with an unsupported concentration.",
           major,
           catalogYear,
         },
@@ -84,15 +109,39 @@ export class PlanService {
     id: number,
     updatePlanDto: UpdatePlanDto
   ): Promise<UpdateResult> {
-    const { major: newMajorName, catalogYear: newCatalogYear } = updatePlanDto;
+    const {
+      major: newMajorName,
+      catalogYear: newCatalogYear,
+      concentration: newConcentrationName,
+    } = updatePlanDto;
 
-    // validate the major, year pair if either one is being updated
-    if (newCatalogYear || newMajorName) {
+    // validate the major, year, concentration pair if either one is being update
+    if (newCatalogYear || newMajorName || newConcentrationName) {
+      /*
+       * Temporarily force clients to update the concentration name if they update the major/year.
+       * Need this since we don't check if the concentration is valid if they didn't update their concentration.
+       * TODO(#512): Check for valid concentration when a major and year is updated, but concentration is not.
+       */
+      if ((newCatalogYear || newMajorName) && !newConcentrationName) {
+        this.logger.debug(
+          {
+            message:
+              "Attempting to update a plan year/major without updating the concentration.",
+            newMajorName,
+            newCatalogYear,
+            newConcentrationName,
+          },
+          this.formatPlanServiceCtx("update")
+        );
+
+        return null;
+      }
       let catalogYear = newCatalogYear;
       let majorName = newMajorName;
+      let concentrationName = newConcentrationName;
 
       // if either one isn't updated, fetch it from db
-      if (!newCatalogYear || !newMajorName) {
+      if (!newCatalogYear || !newMajorName || !newConcentrationName) {
         const plan = await this.findOne(id);
 
         // updating a non-existent plan
@@ -107,6 +156,10 @@ export class PlanService {
         if (!newMajorName) {
           majorName = plan.major;
         }
+
+        if (!newConcentrationName) {
+          concentrationName = plan.concentration;
+        }
       }
 
       const major = this.majorService.findByMajorAndYear(
@@ -117,6 +170,27 @@ export class PlanService {
         this.logger.debug(
           {
             message: "Attempting to update a plan with an unsupported major.",
+            major,
+            catalogYear,
+          },
+          this.formatPlanServiceCtx("update")
+        );
+
+        return null;
+      }
+
+      const isValidConcentrationForMajor =
+        this.majorService.isValidConcentrationForMajor(
+          majorName,
+          catalogYear,
+          concentrationName
+        );
+
+      if (!isValidConcentrationForMajor) {
+        this.logger.debug(
+          {
+            message:
+              "Attempting to update a plan with an unsupported concentration.",
             major,
             catalogYear,
           },

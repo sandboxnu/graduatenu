@@ -60,10 +60,14 @@ const Sidebar: React.FC<SidebarProps> = memo(({ selectedPlan }) => {
     selectedPlan.catalogYear,
     selectedPlan.major
   );
+  const concentration = major?.concentrations.concentrationOptions.find(
+    (concentration) => concentration.title === selectedPlan.concentration
+  );
+
   const validationStatus: MajorValidationResult | undefined = useMemo(() => {
     if (major) {
       const takenCourses = getAllCoursesFromPlan(selectedPlan);
-      return validateMajor2(major, takenCourses, undefined);
+      return validateMajor2(major, takenCourses, selectedPlan.concentration);
     } else {
       return undefined;
     }
@@ -77,7 +81,13 @@ const Sidebar: React.FC<SidebarProps> = memo(({ selectedPlan }) => {
       return;
     }
 
-    const requirements = major.requirementSections.reduce(
+    const concentrationRequirements: IRequiredCourse[] = [];
+    getRequiredCourses(
+      concentration?.requirements ?? [],
+      concentrationRequirements
+    );
+
+    const majorRequirements = major.requirementSections.reduce(
       (courses: IRequiredCourse[], section: Section) => {
         const requiredCourses: IRequiredCourse[] = [];
         getRequiredCourses(section.requirements, requiredCourses);
@@ -85,6 +95,8 @@ const Sidebar: React.FC<SidebarProps> = memo(({ selectedPlan }) => {
       },
       []
     );
+
+    const requirements = majorRequirements.concat(concentrationRequirements);
 
     const coursesQueryData: { subject: string; classId: string }[] = [];
     for (const requirement of requirements) {
@@ -109,7 +121,7 @@ const Sidebar: React.FC<SidebarProps> = memo(({ selectedPlan }) => {
     // we're just appending to it rather than replacing it, hence the
     // technical dependency.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [major]);
+  }, [major, concentration?.requirements]);
 
   if (isLoading) {
     return <SidebarContainer title="Loading..." />;
@@ -127,17 +139,13 @@ const Sidebar: React.FC<SidebarProps> = memo(({ selectedPlan }) => {
     return <SidebarContainer title="" />;
   }
 
+  const concentrationValidationError: MajorValidationError | undefined =
+    getSectionError(major.requirementSections.length, validationStatus);
+
+  const concentrationIsValid = concentrationValidationError === undefined;
+
   return (
-    <Box p="xs 0px" backgroundColor="neutral.main">
-      <Text
-        py="lg"
-        px="sm"
-        fontSize="xl"
-        color="primary.red.main"
-        fontWeight={700}
-      >
-        {major.name}
-      </Text>
+    <SidebarContainer title={major.name} subtitle={selectedPlan.concentration}>
       <Box padding="10px 20px 15px 20px">
         <DraggableScheduleCourse
           scheduleCourse={COOP_BLOCK}
@@ -145,46 +153,63 @@ const Sidebar: React.FC<SidebarProps> = memo(({ selectedPlan }) => {
           isDisabled={false}
         />
       </Box>
-      {courseData &&
-        major.requirementSections.map((section, index) => {
-          const sectionValidationError: MajorValidationError | undefined =
-            getSectionError(index, validationStatus);
+      {courseData && (
+        <>
+          {major.requirementSections.map((section, index) => {
+            const sectionValidationError: MajorValidationError | undefined =
+              getSectionError(index, validationStatus);
 
-          const sectionIsValid = sectionValidationError === undefined;
+            const sectionIsValid = sectionValidationError === undefined;
 
-          return (
+            return (
+              <SidebarSection
+                key={section.title}
+                section={section}
+                isValid={sectionIsValid}
+                courseData={courseData}
+                dndIdPrefix={"sidebar-" + index}
+                loading={loading}
+              />
+            );
+          })}
+          {concentration && (
             <SidebarSection
-              key={section.title}
-              section={section}
-              isValid={sectionIsValid}
+              isValid={concentrationIsValid}
+              section={concentration}
               courseData={courseData}
-              dndIdPrefix={"sidebar-" + index}
-              loading={loading}
+              dndIdPrefix="sidebar-concentration"
             />
-          );
-        })}
-    </Box>
+          )}
+        </>
+      )}
+    </SidebarContainer>
   );
 });
 
 interface SidebarContainerProps {
   title: string;
+  subtitle?: string;
 }
 
 export const SidebarContainer: React.FC<
   PropsWithChildren<SidebarContainerProps>
-> = ({ title, children }) => {
+> = ({ title, subtitle, children }) => {
   return (
     <Box p="xs 0px" backgroundColor="neutral.main">
-      <Text
-        py="lg"
-        px="sm"
-        fontSize="xl"
-        color="primary.red.main"
-        fontWeight={700}
-      >
-        {title}
-      </Text>
+      <Box py="lg" px="sm">
+        <Text fontSize="xl" color="primary.red.main" fontWeight={700}>
+          {title}
+        </Text>
+        {subtitle && (
+          <Text
+            fontSize="md"
+            color="primary.blue.dark.main"
+            fontWeight="semibold"
+          >
+            {subtitle}
+          </Text>
+        )}
+      </Box>
       {children}
     </Box>
   );

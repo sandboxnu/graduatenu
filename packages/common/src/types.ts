@@ -452,6 +452,17 @@ export interface IScheduleCourse {
   subject: string;
 }
 
+export type SupportedConcentrations = {
+  concentrations: string[];
+  minRequiredConcentrations: number;
+};
+
+// { majorName => { concentration, minRequiredConcentrations } }
+export type SupportedMajorsForYear = Record<string, SupportedConcentrations>;
+
+// { year => supported majors }
+export type SupportedMajors = Record<string, SupportedMajorsForYear>;
+
 /**
  * Types for a some result from an algorithim. Currently used for the result of
  * the Major 2 validation algorithm.

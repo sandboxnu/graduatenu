@@ -19,9 +19,15 @@ import { useForm } from "react-hook-form";
 import { useSWRConfig } from "swr";
 import { USE_STUDENT_WITH_PLANS_SWR_KEY } from "../../hooks";
 import { useSupportedMajors } from "../../hooks/useSupportedMajors";
-import { createEmptySchedule, handleApiClientError } from "../../utils";
+import {
+  createEmptySchedule,
+  extractSupportedMajorNames,
+  extractSupportedMajorYears,
+  handleApiClientError,
+} from "../../utils";
 import { BlueButton } from "../Button";
 import { PlanInput, PlanSelect } from "../Form";
+import { PlanConcentrationsSelect } from "./PlanConcentrationsSelect";
 
 interface AddPlanModalProps {
   setSelectedPlanId: Dispatch<SetStateAction<number | undefined | null>>;
@@ -51,6 +57,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
   }
 
   const catalogYear = watch("catalogYear");
+  const majorName = watch("major");
 
   const onSubmitHandler = async (payload: CreatePlanDtoWithoutSchedule) => {
     const schedule = createEmptySchedule();
@@ -98,11 +105,11 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
               New Plan
             </ModalHeader>
             <ModalBody>
-              <VStack spacing={"sm"}>
+              <VStack spacing="sm">
                 <PlanInput
-                  label={"Title"}
+                  label="Title"
                   id="name"
-                  type={"text"}
+                  type="text"
                   placeholder="My Plan"
                   error={errors.name}
                   {...register("name", {
@@ -111,13 +118,11 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                 />
 
                 <PlanSelect
-                  label={"Catalog Year"}
+                  label="Catalog Year"
                   id="catalogYear"
                   placeholder="Select a Catalog Year"
                   error={errors.catalogYear}
-                  array={Array.from(
-                    Object.keys(supportedMajorsData?.supportedMajors ?? {})
-                  )}
+                  array={extractSupportedMajorYears(supportedMajorsData)}
                   {...register("catalogYear", {
                     required: "Catalog year is required",
                     valueAsNumber: true,
@@ -125,16 +130,25 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                 />
 
                 <PlanSelect
-                  label={"Major"}
+                  label="Major"
                   id="major"
                   placeholder="Select a Major"
                   error={errors.major}
-                  array={
-                    supportedMajorsData?.supportedMajors[catalogYear] ?? []
-                  }
+                  array={extractSupportedMajorNames(
+                    catalogYear,
+                    supportedMajorsData
+                  )}
                   {...register("major", {
                     required: "Major is required",
                   })}
+                />
+
+                <PlanConcentrationsSelect
+                  catalogYear={catalogYear}
+                  majorName={majorName}
+                  supportedMajorsData={supportedMajorsData}
+                  register={register}
+                  errors={errors}
                 />
               </VStack>
             </ModalBody>
