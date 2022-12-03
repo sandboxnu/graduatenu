@@ -40,3 +40,19 @@ jobs:
       - run: yarn install --immutable
       - name: Run Jest Tests
         run: yarn packages/api-v2 test
+  build-frontend-image:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - run: yarn install --immutable
+      - name: Build Docker image for frontend
+        run: yarn frontend:docker:build
+  build-backend-image:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - run: yarn install --immutable
+      - name: Build Docker image for backend
+        run: yarn backend:docker:build

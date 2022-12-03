@@ -3,16 +3,33 @@ import { SearchAPI } from "@graduate/api-client";
 import {
   IRequiredCourse,
   Major2,
+  MajorValidationError,
+  MajorValidationResult,
+  PlanModel,
   Requirement2,
   ScheduleCourse2,
   Section,
 } from "@graduate/common";
-import { memo, useEffect, useState } from "react";
+import { memo, useEffect, useMemo, useState } from "react";
+import { DraggableScheduleCourse } from "../ScheduleCourse";
 import SidebarSection from "./SidebarSection";
+import { validateMajor2 } from "@graduate/common";
+import { getAllCoursesFromPlan } from "../../utils/plan/getAllCoursesFromPlan";
+import { getSectionError } from "../../utils/plan/getSectionError";
 
 interface SidebarProps {
   major: Major2;
+  selectedPlan: PlanModel<string> | undefined;
 }
+
+const COOP_BLOCK: ScheduleCourse2<string> = {
+  name: "Co-op Education",
+  classId: "Experiential Learning",
+  subject: "CO-OP",
+  numCreditsMax: 8,
+  numCreditsMin: 8,
+  id: "co-op-block",
+};
 
 // This was moved out of the Sidebar component as it doesn't change
 // from run to run, but the dependency array in the course useEffect
@@ -35,8 +52,18 @@ const getRequiredCourses = (
   }
 };
 
-const Sidebar: React.FC<SidebarProps> = memo(({ major }) => {
+const Sidebar: React.FC<SidebarProps> = memo(({ major, selectedPlan }) => {
+  const validationStatus: MajorValidationResult | undefined = useMemo(() => {
+    if (selectedPlan) {
+      const takenCourses = getAllCoursesFromPlan(selectedPlan);
+      return validateMajor2(major, takenCourses, undefined);
+    } else {
+      return undefined;
+    }
+  }, [selectedPlan, major]);
+
   const [courseData, setCourseData] = useState({});
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const requirements = major.requirementSections.reduce(
@@ -57,7 +84,7 @@ const Sidebar: React.FC<SidebarProps> = memo(({ major }) => {
     }
 
     SearchAPI.fetchCourses(coursesQueryData).then((courses) => {
-      const courseMap: { [id: string]: ScheduleCourse2<null> } = {};
+      const courseMap: { [id: string]: ScheduleCourse2<null> } = courseData;
       if (courses) {
         for (const course of courses) {
           if (course) {
@@ -65,8 +92,13 @@ const Sidebar: React.FC<SidebarProps> = memo(({ major }) => {
           }
         }
         setCourseData(courseMap);
+        setLoading(false);
       }
     });
+    // We don't want to make another request when only courseData changes,
+    // we're just appending to it rather than replacing it, hence the
+    // technical dependency.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [major.requirementSections]);
 
   return (
@@ -80,15 +112,32 @@ const Sidebar: React.FC<SidebarProps> = memo(({ major }) => {
       >
         {major.name}
       </Text>
+      <Box padding="10px 20px 15px 20px">
+        <DraggableScheduleCourse
+          scheduleCourse={COOP_BLOCK}
+          isFromSidebar={true}
+          isDisabled={false}
+        />
+      </Box>
       {courseData &&
-        major.requirementSections.map((section, index) => (
-          <SidebarSection
-            key={section.title}
-            section={section}
-            courseData={courseData}
-            dndIdPrefix={"sidebar-" + index}
-          />
-        ))}
+        major.requirementSections.map((section, index) => {
+          const sectionValidationError: MajorValidationError | undefined =
+            getSectionError(index, validationStatus);
+
+          const sectionIsValid =
+            selectedPlan !== undefined && sectionValidationError === undefined;
+
+          return (
+            <SidebarSection
+              key={section.title}
+              section={section}
+              isValid={sectionIsValid}
+              courseData={courseData}
+              dndIdPrefix={"sidebar-" + index}
+              loading={loading}
+            />
+          );
+        })}
     </Box>
   );
 });

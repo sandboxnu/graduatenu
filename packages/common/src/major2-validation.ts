@@ -42,30 +42,31 @@ type Solution = {
 type SelectedConcentrationsType = number | string | (number | string)[];
 
 // Error types and constructors
-type MajorValidationError =
+export type MajorValidationError =
   | CourseError
   | AndError
   | OrError
   | XOMError
   | SectionError;
-const MajorValidationErrorType = {
+export const MajorValidationErrorType = {
   Course: "COURSE",
   Range: "RANGE",
   And: {
     Type: "AND",
     UnsatChild: "AND_UNSAT_CHILD",
     NoSolution: "AND_NO_SOLUTION",
+    UnsatChildAndNoSolution: "AND_UNSAT_CHILD_AND_NO_SOLUTION",
   },
   Or: "OR",
   XofMany: "XOM",
   Section: "SECTION",
 } as const;
-type ChildError = MajorValidationError & { childIndex: number };
+export type ChildError = MajorValidationError & { childIndex: number };
 type CourseError = {
   type: typeof MajorValidationErrorType.Course;
   requiredCourse: string;
 };
-const CourseError = (c: IRequiredCourse): CourseError => ({
+export const CourseError = (c: IRequiredCourse): CourseError => ({
   type: MajorValidationErrorType.Course,
   requiredCourse: courseToString(c),
 });
@@ -79,9 +80,43 @@ type AndError = {
     | {
         type: typeof MajorValidationErrorType.And.NoSolution;
         discoveredAtChild: number;
+      }
+    | {
+        type: typeof MajorValidationErrorType.And.UnsatChildAndNoSolution;
+        noSolution: {
+          type: typeof MajorValidationErrorType.And.NoSolution;
+          discoveredAtChild: number;
+        };
+        unsatChildErrors: {
+          type: typeof MajorValidationErrorType.And.UnsatChild;
+          childErrors: Array<ChildError>;
+        };
       };
 };
-const AndErrorUnsatChild = (childErrors: Array<ChildError>): AndError => ({
+
+export const AndErrorUnsatChildAndNoSolution = (
+  unsatChildErrors: Array<ChildError>,
+  noSolutionIndex: number
+): AndError => {
+  return {
+    type: MajorValidationErrorType.And.Type,
+    error: {
+      type: MajorValidationErrorType.And.UnsatChildAndNoSolution,
+      noSolution: {
+        type: MajorValidationErrorType.And.NoSolution,
+        discoveredAtChild: noSolutionIndex,
+      },
+      unsatChildErrors: {
+        type: MajorValidationErrorType.And.UnsatChild,
+        childErrors: unsatChildErrors,
+      },
+    },
+  };
+};
+
+export const AndErrorUnsatChild = (
+  childErrors: Array<ChildError>
+): AndError => ({
   type: MajorValidationErrorType.And.Type,
   error: { type: MajorValidationErrorType.And.UnsatChild, childErrors },
 });
@@ -123,7 +158,7 @@ type SectionError = {
   minRequiredChildCount: number;
   maxPossibleChildCount: number;
 };
-const SectionError = (
+export const SectionError = (
   r: Section,
   childErrors: Array<ChildError>,
   max: number
@@ -134,7 +169,7 @@ const SectionError = (
   minRequiredChildCount: r.minRequirementCount,
   maxPossibleChildCount: max,
 });
-type TotalCreditsRequirementError = {
+export type TotalCreditsRequirementError = {
   takenCredits: number;
   requiredCredits: number;
 };
@@ -236,7 +271,7 @@ export class Major2ValidationTracker implements CourseValidationTracker {
 }
 
 // the result of major validation
-type MajorValidationResult = Result<
+export type MajorValidationResult = Result<
   Solution[],
   {
     majorRequirementsError?: MajorValidationError;
@@ -439,7 +474,9 @@ function validateRangeRequirement(
 /**
  * Example: <child 1> <child 2> (CS2810 or CS2800) and (CS2810 or DS3000)
  *
- * Child Solutions: Child 1:
+ * Child Solutions:
+ *
+ * Child 1:
  *
  * - Solution 1: { min: 4, max: 4, sol: [CS2810]}
  * - Solution 2: { min: 4, max: 4, sol: [CS2800]} Child 2:
@@ -477,13 +514,8 @@ function validateAndRequirement(
   r: IAndCourse2,
   tracker: CourseValidationTracker
 ): Result<Array<Solution>, MajorValidationError> {
-  const splitResults = validateAndSplit(r.courses, tracker);
-  const [allChildReqSolutions, childErrors] = splitResults;
-
-  // AND's children has errors
-  if (childErrors.length > 0) {
-    return Err(AndErrorUnsatChild(childErrors));
-  }
+  const results = validateRequirements(r.courses, tracker);
+  const [allChildReqSolutions, childErrors] = splitChildResults(results);
 
   // valid solutions for all the requirements so far
   let solutionsSoFar: Array<Solution> = [
@@ -491,10 +523,7 @@ function validateAndRequirement(
   ];
 
   // Diff solutions of each requirement in the AND
-  for (const [
-    childIdx,
-    childRequirementSolutions,
-  ] of allChildReqSolutions.entries()) {
+  for (const childRequirementSolutions of allChildReqSolutions.values()) {
     const solutionsSoFarWithChild: Array<Solution> = [];
     for (const solutionSoFar of solutionsSoFar) {
       // Each solution of each subsolution
@@ -509,10 +538,26 @@ function validateAndRequirement(
     }
     // if there were no solutions added, then there are no valid solutions for the whole AND
     if (solutionsSoFarWithChild.length === 0) {
-      return Err(AndErrorNoSolution(childIdx));
+      const actualIndex = results.findIndex((solution) => {
+        return (
+          solution.type === ResultType.Ok &&
+          solution.ok === childRequirementSolutions
+        );
+      });
+      if (childErrors.length > 0) {
+        return Err(AndErrorUnsatChildAndNoSolution(childErrors, actualIndex));
+      } else {
+        return Err(AndErrorNoSolution(actualIndex));
+      }
     }
     solutionsSoFar = solutionsSoFarWithChild;
   }
+
+  // AND's children has errors
+  if (childErrors.length > 0) {
+    return Err(AndErrorUnsatChild(childErrors));
+  }
+
   return Ok(solutionsSoFar);
 }
 

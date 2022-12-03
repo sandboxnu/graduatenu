@@ -1,41 +1,45 @@
-import { NextPage } from "next";
+import { Box, Button, Flex } from "@chakra-ui/react";
 import {
-  AddPlanModal,
-  EditPlanModal,
-  DeletePlanModal,
-  HeaderContainer,
-  LoadingPage,
-  Logo,
-  Plan,
-  Sidebar,
-  PlanDropdown,
-  ScheduleCourse,
-  AddYearButton,
-} from "../components";
-import { fetchStudentAndPrepareForDnd, useStudentWithPlans } from "../hooks";
-import {
+  CollisionDetection,
   DndContext,
   DragEndEvent,
   DragOverlay,
   DragStartEvent,
   pointerWithin,
   rectIntersection,
-  CollisionDetection,
 } from "@dnd-kit/core";
+import { API } from "@graduate/api-client";
+import { CoReqWarnings, PlanModel, PreReqWarnings } from "@graduate/common";
+import { NextPage } from "next";
+import { useRouter } from "next/router";
+import { PropsWithChildren, useEffect, useState } from "react";
+import {
+  AddPlanModal,
+  AddYearButton,
+  DeletePlanModal,
+  EditPlanModal,
+  HeaderContainer,
+  LoadingPage,
+  Logo,
+  Plan,
+  PlanDropdown,
+  ScheduleCourse,
+  Sidebar,
+} from "../components";
+import { fetchStudentAndPrepareForDnd, useStudentWithPlans } from "../hooks";
 import {
   cleanDndIdsFromPlan,
+  handleApiClientError,
   logger,
   logout,
   updatePlanForStudent,
   updatePlanOnDragEnd,
-  handleApiClientError,
 } from "../utils";
-import { API } from "@graduate/api-client";
-import { PlanModel } from "@graduate/common";
-import { useRouter } from "next/router";
-import { Box, Button, Flex } from "@chakra-ui/react";
-import React, { PropsWithChildren, useEffect, useState } from "react";
 import { getMajor2Example } from "../utils/convertMajor";
+import {
+  getCoReqWarnings,
+  getPreReqWarnings,
+} from "../utils/plan/preAndCoReqCheck";
 
 const DEMO_MAJOR = getMajor2Example();
 
@@ -66,10 +70,24 @@ const HomePage: NextPage = () => {
 
   const [activeCourse, setActiveCourse] = useState(null);
 
+  const [coReqWarnings, setCoReqWarnings] = useState<CoReqWarnings | undefined>(
+    undefined
+  );
+  const [preReqWarnings, setPreReqWarnings] = useState<
+    PreReqWarnings | undefined
+  >(undefined);
+
   useEffect(() => {
     // once the student is fetched, set the selected plan id to the primary plan id
     if (student && selectedPlanId === undefined) {
       setSelectedPlanId(student.primaryPlanId);
+    }
+    if (student) {
+      const plan = student.plans.find((plan) => plan.id === selectedPlanId);
+      if (plan) {
+        setPreReqWarnings(getPreReqWarnings(plan.schedule));
+        setCoReqWarnings(getCoReqWarnings(plan.schedule));
+      }
     }
   }, [student, selectedPlanId, setSelectedPlanId]);
 
@@ -141,6 +159,8 @@ const HomePage: NextPage = () => {
       return;
     }
 
+    setPreReqWarnings(getPreReqWarnings(updatedPlan.schedule));
+    setCoReqWarnings(getCoReqWarnings(updatedPlan.schedule));
     mutateStudentWithUpdatedPlan(updatedPlan);
   };
 
@@ -177,7 +197,7 @@ const HomePage: NextPage = () => {
       // that feels more intuitive.
       collisionDetection={courseDndCollisisonAlgorithm}
     >
-      <PageLayout>
+      <PageLayout selectedPlan={selectedPlan}>
         <Flex flexDirection="column">
           <Flex alignItems="center" mb="sm">
             <PlanDropdown
@@ -199,6 +219,8 @@ const HomePage: NextPage = () => {
             <>
               <Plan
                 plan={selectedPlan}
+                coReqErr={coReqWarnings}
+                preReqErr={preReqWarnings}
                 mutateStudentWithUpdatedPlan={mutateStudentWithUpdatedPlan}
               />
               <Flex mt="sm">
@@ -217,6 +239,8 @@ const HomePage: NextPage = () => {
             isDisabled={false}
             scheduleCourse={activeCourse}
             isOverlay={true}
+            coReqErr={undefined}
+            preReqErr={undefined}
           />
         ) : null}
       </DragOverlay>
@@ -224,11 +248,18 @@ const HomePage: NextPage = () => {
   );
 };
 
+interface PageLayoutProps {
+  selectedPlan: PlanModel<string> | undefined;
+}
+
 /**
  * This will have everything that can be rendered without the student and
  * plans(i.e: header, sidebar, etc)
  */
-const PageLayout: React.FC<PropsWithChildren> = ({ children }) => {
+const PageLayout: React.FC<PropsWithChildren<PageLayoutProps>> = ({
+  children,
+  selectedPlan,
+}) => {
   return (
     <Flex flexDirection="column" height="100vh" overflow="hidden">
       <Header />
@@ -239,7 +270,7 @@ const PageLayout: React.FC<PropsWithChildren> = ({ children }) => {
           width="360px"
           flexShrink={0}
         >
-          <Sidebar major={DEMO_MAJOR} />
+          <Sidebar major={DEMO_MAJOR} selectedPlan={selectedPlan} />
         </Box>
         <Box p="md" overflow="auto" flexGrow={1}>
           {children}

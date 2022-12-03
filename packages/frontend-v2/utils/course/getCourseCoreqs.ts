@@ -2,7 +2,7 @@ import { SearchAPI } from "@graduate/api-client";
 import {
   ScheduleCourse2,
   INEUPrereq,
-  INEUPrereqCourse,
+  INEUReqCourse,
 } from "@graduate/common";
 
 /** Get all the required(ANDs only) coreqs for a given course. */
@@ -36,6 +36,6 @@ export async function getRequiredCourseCoreqs(
 }
 
 /** Type Guard: Asserts that the given val is a SearchNEU pre-req course. */
-const isINEUPrereqCourse = (val: INEUPrereq): val is INEUPrereqCourse => {
-  return !!(val as INEUPrereqCourse);
+const isINEUPrereqCourse = (val: INEUPrereq): val is INEUReqCourse => {
+  return !!(val as INEUReqCourse);
 };

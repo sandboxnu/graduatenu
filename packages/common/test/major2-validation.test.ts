@@ -1,7 +1,15 @@
 import {
   AndErrorNoSolution,
+  AndErrorUnsatChild,
+  AndErrorUnsatChildAndNoSolution,
+  ChildError,
+  CourseError,
   getConcentrationsRequirement,
   Major2ValidationTracker,
+  MajorValidationError,
+  MajorValidationResult,
+  SectionError,
+  TotalCreditsRequirementError,
   validateMajor2,
   validateRequirement,
 } from "../src/major2-validation";
@@ -18,6 +26,7 @@ import {
   Section,
   Err,
   Ok,
+  ResultType,
 } from "../src/types";
 import { assertUnreachable, courseToString } from "../src/course-utils";
 import bscs from "./mock-majors/bscs.json";
@@ -88,6 +97,12 @@ const solution = (...sol: (string | TestCourse)[]) => {
     minCredits: credits,
     maxCredits: credits,
     sol: sol.map((s) => (typeof s === "string" ? s : courseToString(s))),
+  };
+};
+const child = (error: MajorValidationError, index: number): ChildError => {
+  return {
+    childIndex: index,
+    ...error,
   };
 };
 const concentrations = (
@@ -581,3 +596,132 @@ describe("integration suite", () => {
     expect(actual).toEqual(Ok([expectedWithChem, expectedWithPhys]));
   });
 });
+
+const MajorErr = (
+  reqsError?: MajorValidationError,
+  creditsError?: TotalCreditsRequirementError
+): MajorValidationResult => {
+  return {
+    err: {
+      majorRequirementsError: reqsError,
+      totalCreditsRequirementError: creditsError,
+    },
+    type: ResultType.Err,
+  };
+};
+
+const Major2 = (
+  requirementSections: Section[],
+  name = "Demo Major",
+  yearVersion = 0,
+  totalCreditsRequired = 0
+): Major2 => {
+  return {
+    name: name,
+    totalCreditsRequired: totalCreditsRequired,
+    yearVersion: yearVersion,
+    requirementSections: requirementSections,
+    concentrations: {
+      minOptions: 0,
+      concentrationOptions: [],
+    },
+  };
+};
+
+describe("NoSolution and UnsatChild", () => {
+  const capstone = section("Capstone", 1, [
+    or(course("CS", 4100), course("CS", 4300)),
+  ]);
+  const elective = section("Elective", 1, [
+    xom(8, [
+      range(0, "CS", 2500, 5010, []),
+      range(0, "DS", 2000, 4900, []),
+      range(0, "IS", 2000, 4900, []),
+    ]),
+  ]);
+  const presentation = section("Presentation", 1, [course("THTR", 1170)]);
+
+  const base = Major2([capstone, elective, presentation]);
+  const courses = [course("CS", 4100), course("CS", 4300)];
+  const convertedCourses = courses.map(convert);
+  // Former bug case
+  test("Base Case", () => {
+    const actual = validateMajor2(base, convertedCourses);
+    expect(actual).toEqual(
+      MajorErr(
+        AndErrorUnsatChildAndNoSolution(
+          [
+            child(
+              SectionError(presentation, [courseErr("THTR", 1170, 0)], 0),
+              2
+            ),
+          ],
+          1
+        )
+      )
+    );
+  });
+
+  // All indices should stay the same
+  const order1 = Major2([elective, capstone, presentation]);
+  test("Order Change 1", () => {
+    const actual = validateMajor2(order1, convertedCourses);
+    expect(actual).toEqual(
+      MajorErr(
+        AndErrorUnsatChildAndNoSolution(
+          [
+            child(
+              SectionError(presentation, [courseErr("THTR", 1170, 0)], 0),
+              2
+            ),
+          ],
+          1
+        )
+      )
+    );
+  });
+
+  // UnSat and NoSolution index change.
+  const order2 = Major2([presentation, elective, capstone]);
+  test("Order Change 2", () => {
+    const actual = validateMajor2(order2, convertedCourses);
+    expect(actual).toEqual(
+      MajorErr(
+        AndErrorUnsatChildAndNoSolution(
+          [
+            child(
+              SectionError(presentation, [courseErr("THTR", 1170, 0)], 0),
+              0
+            ),
+          ],
+          2
+        )
+      )
+    );
+  });
+
+  // If there are enough courses for both, no NoSolution
+  const enough = [
+    course("CS", 4100),
+    course("CS", 4300),
+    course("CS", 4410),
+  ].map(convert);
+  test("Enough Courses", () => {
+    const actual = validateMajor2(base, enough);
+    expect(actual).toEqual(
+      MajorErr(
+        AndErrorUnsatChild([
+          child(SectionError(presentation, [courseErr("THTR", 1170, 0)], 0), 2),
+        ])
+      )
+    );
+  });
+});
+
+const courseErr = (
+  subject: string,
+  courseNum: number,
+  childIndex: number
+): ChildError => {
+  return child(CourseError(course(subject, courseNum)), childIndex);
+};
