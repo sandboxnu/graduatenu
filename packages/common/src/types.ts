@@ -45,7 +45,7 @@ export type Status = keyof typeof StatusEnum;
 export type Season = keyof typeof SeasonEnum;
 
 /** A SearchNEU prerequisite object. */
-export type INEUPrereq = INEUAndPrereq | INEUOrPrereq | INEUPrereqCourse;
+export type INEUPrereq = INEUAndReq | INEUOrReq | INEUReqCourse;
 /**
  * A SearchNEU AND prerequisite object.
  *
@@ -53,7 +53,7 @@ export type INEUPrereq = INEUAndPrereq | INEUOrPrereq | INEUPrereqCourse;
  * @param values The prerequisites that must be completed for this prereq. to be
  *   marked as done.
  */
-export interface INEUAndPrereq {
+export interface INEUAndReq {
   type: "and";
   values: INEUPrereq[];
 }
@@ -65,7 +65,7 @@ export interface INEUAndPrereq {
  * @param values The prerequisites of which one must be completed for this
  *   prerequisite to be marked as done.
  */
-export interface INEUOrPrereq {
+export interface INEUOrReq {
   type: "or";
   values: INEUPrereq[];
 }
@@ -77,44 +77,56 @@ export interface INEUOrPrereq {
  * @param subject The subject of this prerequisite course.
  * @param missing True if the class is missing.
  */
-export interface INEUPrereqCourse {
+export interface INEUReqCourse {
   classId: string;
   subject: string;
   missing?: true;
 }
 
-export type INEUPrereqError =
-  | INEUPreReqCourseError
-  | INEUPrereqAndError
-  | INEUPrereqOrError;
+export type INEUReqError =
+  | INEUReqCourseError
+  | INEUReqAndError
+  | INEUReqOrError;
 
-export interface INEUPreReqCourseError {
+export interface INEUReqCourseError {
   type: "course";
   subject: string;
   classId: string;
 }
 
-export interface INEUPrereqAndError {
+export interface INEUReqAndError {
   type: "and";
-  missing: INEUPrereqError[];
+  missing: INEUReqError[];
 }
 
-export interface INEUPrereqOrError {
+export interface INEUReqOrError {
   type: "or";
-  missing: INEUPrereqError[];
+  missing: INEUReqError[];
 }
 
-export interface courseError {
-  [key: string]: INEUPrereqError | undefined;
+export interface TermError {
+  [key: string]: INEUReqError | undefined
 }
 
-export interface preReqWarnings {
-  [key: string]: {
-    fall: courseError;
-    spring: courseError;
-    summer1: courseError;
-    summer2: courseError;
-  };
+export interface ScheduleWarnings {
+  type: string
+  years: YearError[]
+}
+
+export interface YearError {
+  year: number;
+  fall: TermError,
+  spring: TermError,
+  summer1: TermError,
+  summer2: TermError
+}
+
+export type PreReqWarnings = ScheduleWarnings & {
+  type: "prereq"
+}
+
+export type CoReqWarnings = ScheduleWarnings & {
+  type: "coreq"
 }
 
 //                                       NEW MAJOR OBJECT HERE
@@ -314,8 +326,8 @@ export interface ScheduleCourse2<T> {
   name: string;
   classId: string;
   subject: string;
-  prereqs?: INEUAndPrereq | INEUOrPrereq;
-  coreqs?: INEUAndPrereq | INEUOrPrereq;
+  prereqs?: INEUAndReq | INEUOrReq;
+  coreqs?: INEUAndReq | INEUOrReq;
   numCreditsMin: number;
   numCreditsMax: number;
   id: T;
@@ -388,8 +400,8 @@ export interface ScheduleCourse {
   name: string;
   classId: string; // Should this be a number?
   subject: string;
-  prereqs?: INEUAndPrereq | INEUOrPrereq;
-  coreqs?: INEUAndPrereq | INEUOrPrereq;
+  prereqs?: INEUAndReq | INEUOrReq;
+  coreqs?: INEUAndReq | INEUOrReq;
   numCreditsMin: number;
   numCreditsMax: number;
   semester?: string | null;

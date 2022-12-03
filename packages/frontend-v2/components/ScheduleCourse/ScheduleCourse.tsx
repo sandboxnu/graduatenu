@@ -1,12 +1,19 @@
+import { DeleteIcon } from "@chakra-ui/icons";
 import { Flex } from "@chakra-ui/react";
-import { forwardRef, useState } from "react";
-import { ScheduleCourse2 } from "@graduate/common";
 import { useDraggable } from "@dnd-kit/core";
 import { CSS } from "@dnd-kit/utilities";
-import { DeleteIcon } from "@chakra-ui/icons";
+import {
+  courseToString,
+  INEUReqError,
+  ScheduleCourse2,
+} from "@graduate/common";
+import { forwardRef, useState } from "react";
+import { ReqErrorModal } from "../Plan/ReqErrorModal";
 
 interface DraggableScheduleCourseProps {
   scheduleCourse: ScheduleCourse2<string>;
+  coReqErr?: INEUReqError;
+  preReqErr?: INEUReqError;
 
   /** Function to remove the course from whatever the schedule it is part of. */
   removeCourse?: (course: ScheduleCourse2<unknown>) => void;
@@ -20,6 +27,8 @@ export const DraggableScheduleCourse: React.FC<
 > = ({
   scheduleCourse,
   removeCourse,
+  preReqErr = undefined,
+  coReqErr = undefined,
   isEditable = false,
   isFromSidebar = false,
   isDisabled = false,
@@ -36,6 +45,8 @@ export const DraggableScheduleCourse: React.FC<
 
   return (
     <ScheduleCourse
+      coReqErr={coReqErr}
+      preReqErr={preReqErr}
       ref={setNodeRef}
       scheduleCourse={scheduleCourse}
       removeCourse={removeCourse}
@@ -50,6 +61,8 @@ export const DraggableScheduleCourse: React.FC<
 };
 
 interface ScheduleCourseProps extends DraggableScheduleCourseProps {
+  coReqErr?: INEUReqError;
+  preReqErr?: INEUReqError;
   isDragging?: boolean;
   listeners?: any;
   attributes?: any;
@@ -65,6 +78,8 @@ export const ScheduleCourse = forwardRef<
 >(
   (
     {
+      coReqErr = undefined,
+      preReqErr = undefined,
       scheduleCourse,
       removeCourse,
       isEditable = false,
@@ -87,7 +102,7 @@ export const ScheduleCourse = forwardRef<
           display: "flex",
           borderRadius: "5px",
           fontSize: "14px",
-          alignItems: "center",
+          alignItems: "stretch",
           flex: scheduleCourse.classId === "Experiential Learning" ? 1 : 0,
           marginBottom: "6px",
           transition: "transform 0.15s ease",
@@ -134,51 +149,60 @@ export const ScheduleCourse = forwardRef<
             ></path>
           </svg>
           <p style={{ fontWeight: "bold" }}>
-            {scheduleCourse.classId}{" "}
+            {`${courseToString(scheduleCourse)} `}
             <span style={{ marginLeft: "2px", fontWeight: "normal" }}>
               {scheduleCourse.name}
             </span>
           </p>
         </div>
-        {isEditable && hovered && (
-          <Flex
-            width="32px"
-            alignSelf="stretch"
-            flexShrink={0}
-            alignItems="center"
-            justifyContent="center"
-            borderRadius="0px 5px 5px 0px"
-            transition="background 0.15s ease"
-            _hover={{
-              background: "primary.blue.dark.main",
-              fill: "white",
-              svg: {
-                color: "white",
-              },
-            }}
-            _active={{
-              background: "primary.blue.dark.900",
-            }}
-            onClick={
-              removeCourse
-                ? () => {
-                    removeCourse(scheduleCourse);
-                  }
-                : undefined
-            }
-          >
-            <DeleteIcon
-              color="primary.blue.dark.300"
-              transition="color 0.1s ease"
+        <Flex>
+          {(coReqErr != undefined || preReqErr != undefined) && (
+            <ReqErrorModal
+              course={scheduleCourse}
+              coReqErr={coReqErr}
+              preReqErr={preReqErr}
             />
-          </Flex>
-        )}
-        {(isOverlay || (isEditable && !hovered)) && (
-          // This is a spacer to take up the same amount of space as the delete button
-          // so we don't have the text of the course shifting around when it's hovered
-          // or dragged.
-          <div style={{ width: "32px", height: "32px", flexShrink: 0 }}></div>
-        )}
+          )}
+          {isEditable && hovered && (
+            <Flex
+              width="32px"
+              alignSelf="stretch"
+              flexShrink={0}
+              alignItems="center"
+              justifyContent="center"
+              borderRadius="0px 5px 5px 0px"
+              transition="background 0.15s ease"
+              _hover={{
+                background: "primary.blue.dark.main",
+                fill: "white",
+                svg: {
+                  color: "white",
+                },
+              }}
+              _active={{
+                background: "primary.blue.dark.900",
+              }}
+              onClick={
+                removeCourse
+                  ? () => {
+                      removeCourse(scheduleCourse);
+                    }
+                  : undefined
+              }
+            >
+              <DeleteIcon
+                color="primary.blue.dark.300"
+                transition="color 0.1s ease"
+              />
+            </Flex>
+          )}
+          {(isOverlay || (isEditable && !hovered)) && (
+            // This is a spacer to take up the same amount of space as the delete button
+            // so we don't have the text of the course shifting around when it's hovered
+            // or dragged.
+            <div style={{ width: "32px", height: "32px", flexShrink: 0 }}></div>
+          )}
+        </Flex>
       </div>
     );
   }
