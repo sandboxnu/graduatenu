@@ -27,7 +27,7 @@ interface SidebarProps {
 const COOP_BLOCK: ScheduleCourse2<string> = {
   name: "Co-op Education",
   classId: "Experiential Learning",
-  subject: "CO-OP",
+  subject: "",
   numCreditsMax: 8,
   numCreditsMin: 8,
   id: "co-op-block",

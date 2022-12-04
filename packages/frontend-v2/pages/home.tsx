@@ -18,15 +18,14 @@ import {
   AddYearButton,
   DeletePlanModal,
   EditPlanModal,
-  HeaderContainer,
   LoadingPage,
-  Logo,
   Plan,
   PlanDropdown,
   ScheduleCourse,
   Sidebar,
   SidebarContainer,
 } from "../components";
+import { GraduateHeader } from "../components/Header/GraduateHeader";
 import { fetchStudentAndPrepareForDnd, useStudentWithPlans } from "../hooks";
 import {
   cleanDndIdsFromPlan,
@@ -279,12 +278,13 @@ const Header: React.FC = () => {
   const router = useRouter();
 
   return (
-    <HeaderContainer>
-      <Logo />
-      <Button size="sm" onClick={() => logout(router)}>
-        Logout
-      </Button>
-    </HeaderContainer>
+    <GraduateHeader
+      rightContent={
+        <Button size="sm" onClick={() => logout(router)}>
+          Logout
+        </Button>
+      }
+    />
   );
 };
 

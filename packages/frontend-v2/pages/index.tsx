@@ -10,8 +10,8 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import { Logo, HeaderContainer } from "../components";
 import Link from "next/link";
+import { GraduateHeader } from "../components/Header/GraduateHeader";
 
 type InfoSectionProps = InfoImageProps & InfoTextProps;
 
@@ -37,12 +37,13 @@ const LandingPage: NextPage = () => {
 
 const Header = (): JSX.Element => {
   return (
-    <HeaderContainer>
-      <Logo />
-      <Link href="/login" passHref>
-        <Button size="sm">Sign In</Button>
-      </Link>
-    </HeaderContainer>
+    <GraduateHeader
+      rightContent={
+        <Link href="/login" passHref>
+          <Button size="sm">Sign In</Button>
+        </Link>
+      }
+    />
   );
 };
 

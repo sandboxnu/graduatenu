@@ -11,12 +11,11 @@ import {
   FormButtons,
   FormFormat,
   HeaderAndInput,
-  HeaderContainer,
   InputGroup,
-  Logo,
   StringInput,
   SubmitButton,
 } from "../components";
+import { GraduateHeader } from "../components/Header/GraduateHeader";
 import { toast } from "../utils";
 
 interface SignUpFormTopProps {
@@ -40,12 +39,7 @@ const Signup: NextPage = () => {
 };
 
 const Header = (): JSX.Element => {
-  return (
-    <HeaderContainer>
-      <Logo />
-      <Link href="/login">Log In</Link>
-    </HeaderContainer>
-  );
+  return <GraduateHeader rightContent={<Link href="/login">Log In</Link>} />;
 };
 
 const SignUpForm = () => {

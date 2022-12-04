@@ -6,8 +6,6 @@ import { NextPage } from "next";
 import { NextRouter, useRouter } from "next/router";
 import { FieldErrors, useForm, UseFormRegister } from "react-hook-form";
 import {
-  HeaderContainer,
-  Logo,
   LoadingPage,
   FormFormat,
   HeaderAndInput,
@@ -17,6 +15,7 @@ import {
   AlterSubmitButton,
   InputGroup,
 } from "../components";
+import { GraduateHeader } from "../components/Header/GraduateHeader";
 import { useRedirectIfLoggedIn } from "../hooks";
 import { toast } from "../utils";
 
@@ -40,10 +39,7 @@ const Login: NextPage = () => {
 };
 
 const Header = (): JSX.Element => (
-  <HeaderContainer>
-    <Logo />
-    <Link href="/signup">Sign Up</Link>
-  </HeaderContainer>
+  <GraduateHeader rightContent={<Link href="/signup">Sign Up</Link>} />
 );
 
 const LoginForm = () => {
@@ -122,13 +118,13 @@ const LoginFormTopInput: React.FC<LoginFormTopProps> = ({
         />
       </InputGroup>
 
-      <Text fontSize="md" textAlign="center">
+      {/* <Text fontSize="md" textAlign="center">
         Forgot Password? Click{" "}
         <Link href="/forgotPass" color="primary.red.main">
           here
         </Link>
         .
-      </Text>
+      </Text> */}
     </HeaderAndInput>
   );
 };
