@@ -10,7 +10,6 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import { Logo, HeaderContainer } from "../components";
 import Link from "next/link";
 import { GraduateHeader } from "../components/Header/GraduateHeader";
 

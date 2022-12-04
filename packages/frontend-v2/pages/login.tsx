@@ -6,8 +6,6 @@ import { NextPage } from "next";
 import { NextRouter, useRouter } from "next/router";
 import { FieldErrors, useForm, UseFormRegister } from "react-hook-form";
 import {
-  HeaderContainer,
-  Logo,
   LoadingPage,
   FormFormat,
   HeaderAndInput,

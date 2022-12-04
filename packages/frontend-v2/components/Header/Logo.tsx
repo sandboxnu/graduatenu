@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const Logo = (): JSX.Element => {
   return (
-    <Link href="/">
+    <Link href="/" passHref>
       <HStack alignItems="center" spacing="2xs">
         <Image
           src="/logo.png"

@@ -1,5 +1,4 @@
-import { ExternalLinkIcon } from "@chakra-ui/icons";
-import { Box, Button, Flex, Link } from "@chakra-ui/react";
+import { Box, Button, Flex } from "@chakra-ui/react";
 import {
   CollisionDetection,
   DndContext,
@@ -17,14 +16,9 @@ import { PropsWithChildren, useEffect, useState } from "react";
 import {
   AddPlanModal,
   AddYearButton,
-  AlterSubmitButton,
-  BlueButton,
   DeletePlanModal,
   EditPlanModal,
-  GrayButton,
-  HeaderContainer,
   LoadingPage,
-  Logo,
   Plan,
   PlanDropdown,
   ScheduleCourse,
