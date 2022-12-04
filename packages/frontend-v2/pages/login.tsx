@@ -120,13 +120,13 @@ const LoginFormTopInput: React.FC<LoginFormTopProps> = ({
         />
       </InputGroup>
 
-      <Text fontSize="md" textAlign="center">
+      {/* <Text fontSize="md" textAlign="center">
         Forgot Password? Click{" "}
         <Link href="/forgotPass" color="primary.red.main">
           here
         </Link>
         .
-      </Text>
+      </Text> */}
     </HeaderAndInput>
   );
 };

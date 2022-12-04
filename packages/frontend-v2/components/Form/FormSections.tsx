@@ -16,7 +16,6 @@ export const FormFormat: React.FC<
   >
     <Flex
       direction="column"
-      justifyContent="space-between"
       alignItems="center"
       height="50vh"
       width="md"
