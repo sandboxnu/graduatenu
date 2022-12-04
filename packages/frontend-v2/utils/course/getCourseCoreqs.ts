@@ -1,7 +1,7 @@
 import { SearchAPI } from "@graduate/api-client";
 import {
   ScheduleCourse2,
-  INEUPrereq,
+  INEUReq,
   INEUReqCourse,
 } from "@graduate/common";
 
@@ -17,7 +17,7 @@ export async function getRequiredCourseCoreqs(
 
     // fetch the course details for all required coreqs from SearchNEUs API
     await Promise.all(
-      coreqCourses.map(async (coreqCourse: INEUPrereq) => {
+      coreqCourses.map(async (coreqCourse: INEUReq) => {
         if (isINEUPrereqCourse(coreqCourse)) {
           const course = await SearchAPI.fetchCourse(
             coreqCourse.subject,
@@ -36,6 +36,6 @@ export async function getRequiredCourseCoreqs(
 }
 
 /** Type Guard: Asserts that the given val is a SearchNEU pre-req course. */
-const isINEUPrereqCourse = (val: INEUPrereq): val is INEUReqCourse => {
+const isINEUPrereqCourse = (val: INEUReq): val is INEUReqCourse => {
   return !!(val as INEUReqCourse);
 };

@@ -45,7 +45,7 @@ export type Status = keyof typeof StatusEnum;
 export type Season = keyof typeof SeasonEnum;
 
 /** A SearchNEU prerequisite object. */
-export type INEUPrereq = INEUAndReq | INEUOrReq | INEUReqCourse;
+export type INEUReq = INEUAndReq | INEUOrReq | INEUReqCourse;
 /**
  * A SearchNEU AND prerequisite object.
  *
@@ -55,7 +55,7 @@ export type INEUPrereq = INEUAndReq | INEUOrReq | INEUReqCourse;
  */
 export interface INEUAndReq {
   type: "and";
-  values: INEUPrereq[];
+  values: INEUReq[];
 }
 
 /**
@@ -67,7 +67,7 @@ export interface INEUAndReq {
  */
 export interface INEUOrReq {
   type: "or";
-  values: INEUPrereq[];
+  values: INEUReq[];
 }
 
 /**
