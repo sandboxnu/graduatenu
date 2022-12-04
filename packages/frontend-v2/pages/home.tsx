@@ -1,4 +1,5 @@
-import { Box, Button, Flex } from "@chakra-ui/react";
+import { ExternalLinkIcon } from "@chakra-ui/icons";
+import { Box, Button, Flex, Link } from "@chakra-ui/react";
 import {
   CollisionDetection,
   DndContext,
@@ -16,8 +17,11 @@ import { PropsWithChildren, useEffect, useState } from "react";
 import {
   AddPlanModal,
   AddYearButton,
+  AlterSubmitButton,
+  BlueButton,
   DeletePlanModal,
   EditPlanModal,
+  GrayButton,
   HeaderContainer,
   LoadingPage,
   Logo,
@@ -27,6 +31,7 @@ import {
   Sidebar,
   SidebarContainer,
 } from "../components";
+import { GraduateHeader } from "../components/Header/GraduateHeader";
 import { fetchStudentAndPrepareForDnd, useStudentWithPlans } from "../hooks";
 import {
   cleanDndIdsFromPlan,
@@ -279,12 +284,13 @@ const Header: React.FC = () => {
   const router = useRouter();
 
   return (
-    <HeaderContainer>
-      <Logo />
-      <Button size="sm" onClick={() => logout(router)}>
-        Logout
-      </Button>
-    </HeaderContainer>
+    <GraduateHeader
+      rightContent={
+        <Button size="sm" onClick={() => logout(router)}>
+          Logout
+        </Button>
+      }
+    />
   );
 };
 

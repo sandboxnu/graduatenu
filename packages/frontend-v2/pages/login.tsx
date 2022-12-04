@@ -17,6 +17,7 @@ import {
   AlterSubmitButton,
   InputGroup,
 } from "../components";
+import { GraduateHeader } from "../components/Header/GraduateHeader";
 import { useRedirectIfLoggedIn } from "../hooks";
 import { toast } from "../utils";
 
@@ -40,10 +41,7 @@ const Login: NextPage = () => {
 };
 
 const Header = (): JSX.Element => (
-  <HeaderContainer>
-    <Logo />
-    <Link href="/signup">Sign Up</Link>
-  </HeaderContainer>
+  <GraduateHeader rightContent={<Link href="/signup">Sign Up</Link>} />
 );
 
 const LoginForm = () => {
