@@ -3,7 +3,7 @@ import {
   courseToString,
   INEUAndReq,
   INEUOrReq,
-  INEUPrereq,
+  INEUReq,
   INEUReqCourse,
   INEUReqError,
   PreReqWarnings,
@@ -78,7 +78,7 @@ export const getPreReqWarningSem = (
 };
 
 const getReqErrors = (
-  reqs: INEUPrereq,
+  reqs: INEUReq,
   seen: Set<string>
 ): INEUReqError | undefined => {
   if (isSingleCourse(reqs)) {
@@ -116,15 +116,15 @@ const getReqErrors = (
   }
 };
 
-const isSingleCourse = (course: INEUPrereq): course is INEUReqCourse => {
+const isSingleCourse = (course: INEUReq): course is INEUReqCourse => {
   return (course as INEUReqCourse).subject !== undefined;
 };
 
-const isAndCourse = (course: INEUPrereq): course is INEUAndReq => {
+const isAndCourse = (course: INEUReq): course is INEUAndReq => {
   return (course as INEUAndReq).type === "and";
 };
 
-const isOrCourse = (course: INEUPrereq): course is INEUOrReq => {
+const isOrCourse = (course: INEUReq): course is INEUOrReq => {
   return (course as INEUOrReq).type === "or";
 };
 
