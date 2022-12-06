@@ -15,7 +15,7 @@ COPY packages/api-client/package.json packages/api-client/package.json
 COPY packages/common/package.json packages/common/package.json
 
 # Install at root level
-RUN yarn install
+RUN yarn install > /dev/null
 
 # Get src files
 COPY packages/frontend-v2 packages/frontend-v2
