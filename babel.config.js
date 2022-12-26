@@ -15,7 +15,10 @@ module.exports = function (api) {
           ],
           "@babel/preset-typescript",
         ],
-        plugins: [["@babel/plugin-proposal-decorators", { version: "legacy" }]],
+        plugins: [
+          ["@babel/plugin-proposal-decorators", { version: "legacy" }],
+          "@babel/plugin-proposal-class-properties",
+        ],
         babelrcRoots: [".", "packages/*"],
       },
       browser: {
@@ -47,7 +50,10 @@ module.exports = function (api) {
           ],
           "@babel/preset-typescript",
         ],
-        plugins: [["@babel/plugin-proposal-decorators", { version: "legacy" }]],
+        plugins: [
+          ["@babel/plugin-proposal-decorators", { version: "legacy" }],
+          "@babel/plugin-proposal-class-properties",
+        ],
         babelrcRoots: [".", "packages/*"],
       },
     },
