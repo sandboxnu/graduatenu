@@ -47,6 +47,7 @@ describe("PlanController (e2e)", () => {
 
   afterEach(async () => {
     await dropStudentTable(connection);
+    await connection.close();
   });
 
   afterAll(async () => {

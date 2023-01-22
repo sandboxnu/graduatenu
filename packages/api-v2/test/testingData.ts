@@ -25,8 +25,16 @@ export const onboardedUser = {
 export const testPlan = {
   name: "Test Plan",
   schedule: {
-    years: [2019, 2020, 2021, 2022],
-    yearMap: {},
+    years: [
+      {
+        year: 2019,
+        fall: {},
+        spring: {},
+        summer1: {},
+        summer2: {},
+        isSummerFull: false,
+      },
+    ],
   },
   major: "Computer Science",
   coopCycle: "4 year 2 co-ops",
