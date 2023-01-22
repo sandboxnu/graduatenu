@@ -93,6 +93,7 @@ export const ScheduleYear: React.FC<ScheduleYearProps> = ({
       {isExpanded && (
         <Grid templateColumns="repeat(4, 1fr)" minHeight="220px">
           <ScheduleTerm
+            scheduleYear={scheduleYear}
             termCoReqErr={yearCoReqError?.fall}
             termPreReqErr={yearPreReqError?.fall}
             scheduleTerm={scheduleYear.fall}
@@ -100,6 +101,7 @@ export const ScheduleYear: React.FC<ScheduleYearProps> = ({
             removeCourseFromTermInCurrPlan={removeCourseFromTermInCurrPlan}
           />
           <ScheduleTerm
+            scheduleYear={scheduleYear}
             termCoReqErr={yearCoReqError?.spring}
             termPreReqErr={yearPreReqError?.spring}
             scheduleTerm={scheduleYear.spring}
@@ -108,6 +110,7 @@ export const ScheduleYear: React.FC<ScheduleYearProps> = ({
           />
           {/* TODO: support summer full term */}
           <ScheduleTerm
+            scheduleYear={scheduleYear}
             termCoReqErr={yearCoReqError?.summer1}
             termPreReqErr={yearPreReqError?.summer1}
             scheduleTerm={scheduleYear.summer1}
@@ -115,6 +118,7 @@ export const ScheduleYear: React.FC<ScheduleYearProps> = ({
             removeCourseFromTermInCurrPlan={removeCourseFromTermInCurrPlan}
           />
           <ScheduleTerm
+            scheduleYear={scheduleYear}
             termCoReqErr={yearCoReqError?.summer2}
             termPreReqErr={yearPreReqError?.summer2}
             scheduleTerm={scheduleYear.summer2}

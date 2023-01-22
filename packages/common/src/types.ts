@@ -304,7 +304,6 @@ export interface ScheduleTerm2<T> {
   season: SeasonEnum;
   status: StatusEnum;
   classes: ScheduleCourse2<T>[];
-
   id: T;
 }
 
