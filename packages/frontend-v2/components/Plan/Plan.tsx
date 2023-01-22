@@ -11,6 +11,7 @@ import { useState } from "react";
 import { addClassesToTerm, removeYearFromPlan } from "../../utils";
 import { removeCourseFromTerm } from "../../utils/";
 import { ScheduleYear } from "./ScheduleYear";
+import { useDroppable } from "@dnd-kit/core";
 
 interface PlanProps {
   plan: PlanModel<string>;
@@ -39,6 +40,8 @@ export const Plan: React.FC<PlanProps> = ({
       addToExpandedYears(year);
     }
   };
+
+  const { setNodeRef } = useDroppable({ id: 'plan' });
 
   const removeFromExpandedYears = (year: ScheduleYear2<unknown>) => {
     const updatedSet = new Set(expandedYears);
@@ -101,7 +104,7 @@ export const Plan: React.FC<PlanProps> = ({
   };
 
   return (
-    <Flex flexDirection="column" rowGap="4xs">
+    <Flex flexDirection="column" rowGap="4xs" ref={setNodeRef}>
       {plan.schedule.years.map((scheduleYear) => {
         const isExpanded = expandedYears.has(scheduleYear.year);
 

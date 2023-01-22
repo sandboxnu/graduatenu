@@ -71,6 +71,8 @@ interface ScheduleCourseProps extends DraggableScheduleCourseProps {
   isOverlay?: boolean;
 }
 
+// TODO: ADD styling for overlay dragging
+
 // eslint-disable-next-line react/display-name
 export const ScheduleCourse = forwardRef<
   HTMLElement | null,
@@ -83,6 +85,7 @@ export const ScheduleCourse = forwardRef<
       scheduleCourse,
       removeCourse,
       isEditable = false,
+      isDragging = false,
       listeners,
       attributes,
       isOverlay = false,
@@ -98,8 +101,9 @@ export const ScheduleCourse = forwardRef<
     return (
       <div
         style={{
-          backgroundColor: "white",
+          backgroundColor: isOverlay ? "lightgrey" : "white",
           display: "flex",
+          visibility: isDragging ? "hidden" : "",
           borderRadius: "5px",
           fontSize: "14px",
           alignItems: "stretch",
@@ -122,7 +126,6 @@ export const ScheduleCourse = forwardRef<
           style={{
             display: "flex",
             alignItems: "center",
-            background: "",
             padding: "8px 8px",
             cursor: isOverlay ? "grabbing" : "grab",
           }}

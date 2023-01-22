@@ -29,82 +29,95 @@ import { isCourseInTerm } from "./isCourseInTerm";
 export const updatePlanOnDragEnd = (
   plan: PlanModel<string>,
   draggedCourse: Active,
-  draggedOverTerm: Over
+  draggedOverTerm: Over | null = null
 ): PlanModel<string> => {
   const updatedPlan = produce(plan, (draftPlan) => {
     // grab all the terms across the years, since it's easier to work with a flat list of terms
     const scheduleTerms = flattenScheduleToTerms<string>(draftPlan.schedule);
 
-    const newTerm = scheduleTerms.find(
-      (term) => term.id === draggedOverTerm.id
-    );
-
-    if (!newTerm) {
-      throw new Error("Term the course is dragged over isn't found");
-    }
-
-    if (!draggedCourse.data.current?.course) {
-      throw new Error(
-        "The course being dragged is not found in the term it is being dragged from"
-      );
-    }
-
-    const draggedCourseDetails: ScheduleCourse2<unknown> =
-      draggedCourse.data.current.course;
-
-    const oldTerm = scheduleTerms.find((term) =>
-      term.classes.some((course) => course.id === draggedCourse.id)
-    );
-
-    const isFromSidebar = draggedCourse.data.current.isFromSidebar;
-    const isSameTerm = !isFromSidebar && oldTerm && oldTerm.id === newTerm.id;
-
-    /*
-     * Prevent duplicate courses in the same term,
-     * don't need to display error if course is not changing terms.
-     */
-    if (
-      isCourseInTerm(
-        draggedCourseDetails.classId,
-        draggedCourseDetails.subject,
-        newTerm
-      ) &&
-      !isSameTerm
-    ) {
-      toast.error(
-        `Oops, ${getCourseDisplayString(
-          draggedCourseDetails
-        )} already exists in Year ${newTerm.year}, ${getSeasonDisplayWord(
-          newTerm.season
-        )}.`
-      );
-      throw new Error("Duplicate course in term.");
-    }
-
-    /*
-     * Course is from a term, so we need to move it, we don't need to move
-     * courses that are from the sidebar.
-     */
-    if (!isFromSidebar) {
-      if (!oldTerm) {
+    // If it is not being dragged over a droppable, then we delete the course
+    if (draggedOverTerm == null) {
+      const newTerm = scheduleTerms.find(term => term.classes.some((course) => course.id === draggedCourse.id));
+      if (!newTerm) {
         throw new Error("Term the course is dragged from isn't found");
       }
 
-      if (isSameTerm) {
-        throw new Error("Course is being dragged over its own term");
-      }
-
-      // remove the class from the old term and add it to the new term
-      oldTerm.classes = oldTerm.classes.filter(
+      // remove the class from the old term
+      newTerm.classes = newTerm.classes.filter(
         (course) => course.id !== draggedCourse.id
       );
-    }
+    } else {
+      const newTerm = scheduleTerms.find(
+        (term) => term.id === draggedOverTerm.id
+      );
 
-    // We set a temporary id to the new class because the plan will provide a new id on rerendering, so it doesn't need to be unique.
-    newTerm.classes.push({
-      ...draggedCourse.data.current.course,
-      id: "moving-course-temp",
-    });
+      if (!newTerm) {
+        throw new Error("Term the course is dragged over isn't found");
+      }
+
+      if (!draggedCourse.data.current?.course) {
+        throw new Error(
+          "The course being dragged is not found in the term it is being dragged from"
+        );
+      }
+
+      const draggedCourseDetails: ScheduleCourse2<unknown> =
+        draggedCourse.data.current.course;
+
+      const oldTerm = scheduleTerms.find((term) =>
+        term.classes.some((course) => course.id === draggedCourse.id)
+      );
+
+      const isFromSidebar = draggedCourse.data.current.isFromSidebar;
+      const isSameTerm = !isFromSidebar && oldTerm && oldTerm.id === newTerm.id;
+
+      /*
+       * Prevent duplicate courses in the same term,
+       * don't need to display error if course is not changing terms.
+       */
+      if (
+        isCourseInTerm(
+          draggedCourseDetails.classId,
+          draggedCourseDetails.subject,
+          newTerm
+        ) &&
+        !isSameTerm
+      ) {
+        toast.error(
+          `Oops, ${getCourseDisplayString(
+            draggedCourseDetails
+          )} already exists in Year ${newTerm.year}, ${getSeasonDisplayWord(
+            newTerm.season
+          )}.`
+        );
+        throw new Error("Duplicate course in term.");
+      }
+
+      /*
+       * Course is from a term, so we need to move it, we don't need to move
+       * courses that are from the sidebar.
+       */
+      if (!isFromSidebar) {
+        if (!oldTerm) {
+          throw new Error("Term the course is dragged from isn't found");
+        }
+
+        if (isSameTerm) {
+          throw new Error("Course is being dragged over its own term");
+        }
+
+        // remove the class from the old term and add it to the new term
+        oldTerm.classes = oldTerm.classes.filter(
+          (course) => course.id !== draggedCourse.id
+        );
+      }
+
+      // We set a temporary id to the new class because the plan will provide a new id on rerendering, so it doesn't need to be unique.
+      newTerm.classes.push({
+        ...draggedCourse.data.current.course,
+        id: "moving-course-temp",
+      });
+    }
   });
 
   return updatedPlan;
