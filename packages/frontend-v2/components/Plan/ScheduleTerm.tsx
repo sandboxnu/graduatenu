@@ -3,6 +3,7 @@ import {
   courseToString,
   ScheduleCourse2,
   ScheduleTerm2,
+  ScheduleYear2,
   SeasonEnum,
   TermError,
 } from "@graduate/common";
@@ -15,6 +16,7 @@ import { BlueButton } from "../Button";
 
 interface ScheduleTermProps {
   scheduleTerm: ScheduleTerm2<string>;
+  scheduleYear: ScheduleYear2<string>;
   termCoReqErr?: TermError;
   termPreReqErr?: TermError;
 
@@ -38,6 +40,7 @@ interface ScheduleTermProps {
 export const ScheduleTerm: React.FC<ScheduleTermProps> = ({
   scheduleTerm,
   addClassesToTermInCurrPlan,
+  scheduleYear,
   removeCourseFromTermInCurrPlan,
   isLastColumn,
   termCoReqErr = undefined,
@@ -65,7 +68,7 @@ export const ScheduleTerm: React.FC<ScheduleTermProps> = ({
     >
       <ScheduleTermHeader
         season={scheduleTerm.season}
-        year={scheduleTerm.year}
+        year={scheduleYear.year}
       />
       {scheduleTerm.classes.map((scheduleCourse) => (
         <DraggableScheduleCourse
@@ -75,7 +78,7 @@ export const ScheduleTerm: React.FC<ScheduleTermProps> = ({
           removeCourse={(course: ScheduleCourse2<unknown>) =>
             removeCourseFromTermInCurrPlan(
               course,
-              scheduleTerm.year,
+              scheduleYear.year,
               scheduleTerm.season
             )
           }
@@ -91,7 +94,7 @@ export const ScheduleTerm: React.FC<ScheduleTermProps> = ({
         addClassesToCurrTerm={(courses: ScheduleCourse2<null>[]) =>
           addClassesToTermInCurrPlan(
             courses,
-            scheduleTerm.year,
+            scheduleYear.year,
             scheduleTerm.season
           )
         }
