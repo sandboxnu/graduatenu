@@ -18,6 +18,6 @@
     "experimentalDecorators": true,
     "downlevelIteration": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "public/worker.js"],
   "exclude": ["node_modules"]
 }

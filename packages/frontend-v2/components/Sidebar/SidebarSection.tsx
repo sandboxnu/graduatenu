@@ -2,12 +2,13 @@ import { Box, Flex, Spinner, Text } from "@chakra-ui/react";
 import { ScheduleCourse2, Section } from "@graduate/common";
 import { useState } from "react";
 import SectionRequirement from "./SectionRequirement";
+import { SidebarValidationStatus } from "./Sidebar";
 
 interface SidebarSectionProps {
   section: Section;
   courseData: { [id: string]: ScheduleCourse2<null> };
   dndIdPrefix: string;
-  isValid: boolean;
+  isValid: SidebarValidationStatus;
   loading?: boolean;
 }
 
@@ -39,22 +40,28 @@ const SidebarSection: React.FC<SidebarSectionProps> = ({
           backgroundColor: "neutral.200",
         }}
       >
-        {isValid ? (
-          <span
-            style={{
-              background: "green",
-              color: "white",
-              padding: "3px 6px",
-              width: "26px",
-              marginRight: "6px",
-              borderRadius: "30px",
+        <span
+          style={{
+            background: isValid === SidebarValidationStatus.Complete ? "green" : "grey",
+            color: "white",
+            padding: "3px 6px",
+            width: "26px",
+            height: "26px",
+            display: "inline-flex",
+            alignItems: "center",
+            justifyContent: "center",
+            marginRight: "6px",
+            borderRadius: "30px"
             }}
-          >
-            ✓
-          </span>
-        ) : (
-          ""
-        )}
+          >{
+              isValid === SidebarValidationStatus.Complete ? "✓" : undefined
+            }
+            {
+              isValid === SidebarValidationStatus.Error ? "X" : undefined
+            }
+            {
+              isValid === SidebarValidationStatus.Loading ? <Spinner size="xs" color="white"></Spinner> : undefined
+            }</span>
         {section.title}
       </Text>
       <Box

@@ -9,19 +9,25 @@ import {
   ScheduleCourse2,
   Section,
 } from "@graduate/common";
-import { memo, PropsWithChildren, useEffect, useMemo, useState } from "react";
+import { memo, PropsWithChildren, useEffect, useRef, useState } from "react";
 import { DraggableScheduleCourse } from "../ScheduleCourse";
 import SidebarSection from "./SidebarSection";
-import { validateMajor2 } from "@graduate/common";
 import { getAllCoursesFromPlan } from "../../utils/plan/getAllCoursesFromPlan";
 import { getSectionError } from "../../utils/plan/getSectionError";
 import { handleApiClientError } from "../../utils";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useMajor } from "../../hooks/useMajor";
+import { WorkerMessage, WorkerPostInfo } from "../../worker";
 
 interface SidebarProps {
   selectedPlan: PlanModel<string>;
+}
+
+export enum SidebarValidationStatus {
+  Loading = "Loading",
+  Error = "Error",
+  Complete = "Complete"
 }
 
 const COOP_BLOCK: ScheduleCourse2<string> = {
@@ -64,18 +70,64 @@ const Sidebar: React.FC<SidebarProps> = memo(({ selectedPlan }) => {
     (concentration) => concentration.title === selectedPlan.concentration
   );
 
-  const validationStatus: MajorValidationResult | undefined = useMemo(() => {
-    if (major) {
-      const takenCourses = getAllCoursesFromPlan(selectedPlan);
-      return validateMajor2(major, takenCourses, selectedPlan.concentration);
-    } else {
-      return undefined;
+  const workerRef = useRef<Worker>();
+
+  const [validationStatus, setValidationStatus] = useState<MajorValidationResult | undefined>(undefined);
+
+  const revalidateMajor = ()=>{
+    setValidationStatus(undefined);
+    if (!selectedPlan || !major || !workerRef.current) return;
+    
+    const validationInfo: WorkerPostInfo = {
+      major: major,
+      taken: getAllCoursesFromPlan(selectedPlan),
+      concentration: selectedPlan.concentration
+    } 
+    workerRef.current?.postMessage(validationInfo)
+  }
+
+  // Set up the web worker to handle major validation for us. This helps keep the
+  // UI thread free to display our app, preventing UI freezes while our schedule
+  // is being validated.
+  useEffect(()=>{
+    if (!workerRef.current) {
+      workerRef.current = new Worker(new URL("../../worker.ts", import.meta.url));
+      workerRef.current.onmessage = (message: MessageEvent<WorkerMessage>) => {
+        switch (message.data.type) {
+          case "Loaded":
+            revalidateMajor()
+            break;
+          case "ValidationResult":
+            setValidationStatus(message.data.result);
+            break;
+          default:
+            throw new Error("Invalid worker message!");
+        }
+      }
     }
-  }, [selectedPlan, major]);
+    return () => {
+      workerRef.current?.terminate();
+      workerRef.current = undefined;
+    }
+  // LINT NOTE: We don't actually want a dependency to the local function 
+  // revalidateMajor because it will change every time, so we're choosing 
+  // to omit it here:
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+
+  // Whenever our plan/major changes, we revalidate if the worker
+  // is initialized.
+  // LINT NOTE: We don't actually want a dependency to the local function 
+  // revalidateMajor because it will change every time, so we're choosing 
+  // to omit it here:
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => revalidateMajor(), [selectedPlan, major])
 
   const [courseData, setCourseData] = useState({});
   const [loading, setLoading] = useState(true);
 
+  // Get course names/data from SearchNEU's API
   useEffect(() => {
     if (!major) {
       return;
@@ -139,10 +191,17 @@ const Sidebar: React.FC<SidebarProps> = memo(({ selectedPlan }) => {
     return <SidebarContainer title="" />;
   }
 
+  
   const concentrationValidationError: MajorValidationError | undefined =
     getSectionError(major.requirementSections.length, validationStatus);
 
-  const concentrationIsValid = concentrationValidationError === undefined;
+  let concentrationValidationStatus = SidebarValidationStatus.Complete
+  if (validationStatus === undefined) {
+    concentrationValidationStatus = SidebarValidationStatus.Loading
+  }
+  else if (concentrationValidationError) {
+    concentrationValidationStatus = SidebarValidationStatus.Error
+  }
 
   return (
     <SidebarContainer title={major.name} subtitle={selectedPlan.concentration}>
@@ -159,13 +218,19 @@ const Sidebar: React.FC<SidebarProps> = memo(({ selectedPlan }) => {
             const sectionValidationError: MajorValidationError | undefined =
               getSectionError(index, validationStatus);
 
-            const sectionIsValid = sectionValidationError === undefined;
+            let sectionValidationStatus = SidebarValidationStatus.Complete
+            if (validationStatus === undefined) {
+              sectionValidationStatus = SidebarValidationStatus.Loading
+            }
+            else if (sectionValidationError) {
+              sectionValidationStatus = SidebarValidationStatus.Error
+            }
 
             return (
               <SidebarSection
                 key={section.title}
                 section={section}
-                isValid={sectionIsValid}
+                isValid={sectionValidationStatus}
                 courseData={courseData}
                 dndIdPrefix={"sidebar-" + index}
                 loading={loading}
@@ -174,7 +239,7 @@ const Sidebar: React.FC<SidebarProps> = memo(({ selectedPlan }) => {
           })}
           {concentration && (
             <SidebarSection
-              isValid={concentrationIsValid}
+              isValid={concentrationValidationStatus}
               section={concentration}
               courseData={courseData}
               dndIdPrefix="sidebar-concentration"
