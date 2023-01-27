@@ -48,28 +48,6 @@ export const addClassesToTerm = (
         );
     }
 
-    const seasonEnumToTermSeason = {
-      FL: "fall",
-      SP: "spring",
-      S1: "summer1",
-      S2: "summer2",
-    };
-
-    // const term = scheduleYear[termSeason]
-
-    // find the term
-    // const term = scheduleYear].find(
-    //   (termToCheck) => termToCheck.year === termYear && termToCheck.season === termSeason
-    // );
-
-    // (term) => {
-    //   return term.year === termYear && term.season === termSeason
-    // }
-
-    // function test(term) {
-    //   return term.year === termYear && term.season === termSeason
-    // }
-
     const terms = flattenScheduleToTerms(schedule);
 
     // populate courses with dnd id
