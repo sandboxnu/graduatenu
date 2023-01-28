@@ -3,7 +3,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Student } from "../student/entities/student.entity";
 import { StudentService } from "../student/student.service";
 import { DeleteResult, Repository, UpdateResult } from "typeorm";
-import { CreatePlanDto, UpdatePlanDto } from "../../../common";
+import { CreatePlanDto, UpdatePlanDto } from "@graduate/common";
 import { Plan } from "./entities/plan.entity";
 import { formatServiceCtx } from "../../src/utils";
 import { MajorService } from "../major/major.service";
