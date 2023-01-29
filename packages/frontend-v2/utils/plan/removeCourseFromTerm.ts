@@ -15,8 +15,6 @@ export const removeCourseFromTerm = (
   plan: PlanModel<string>
 ): PlanModel<string> => {
   const updatedPlan = produce(plan, (draftPlan) => {
-    const schedule = draftPlan.schedule;
-
     const term = findTerm(termSeason, plan, termYear);
 
     // remove the course
