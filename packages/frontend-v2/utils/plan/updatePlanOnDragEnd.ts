@@ -4,12 +4,15 @@ import {
   Schedule2,
   ScheduleCourse2,
   ScheduleTerm2,
+  SeasonEnum,
 } from "@graduate/common";
 import produce from "immer";
 import { toast } from "react-toastify";
 import { getCourseDisplayString } from "../course";
 import { getSeasonDisplayWord } from "./getSeasonDisplayWord";
 import { isCourseInTerm } from "./isCourseInTerm";
+import { logger } from "../logger";
+import { TEMPORARY_REDIRECT_STATUS } from "next/dist/shared/lib/constants";
 
 /**
  * Updates the schedule of plan when a course is dragged from one term to
@@ -40,7 +43,19 @@ export const updatePlanOnDragEnd = (
     );
 
     if (!newTerm) {
-      throw new Error("Term the course is dragged over isn't found");
+      throw new Error("Term of the course that is dragged over isn't found");
+    }
+
+    console.log(plan);
+
+    const year = plan.schedule.years.find((year) => {
+      console.log(year);
+      const res = Object.values(year).find((term) => term.id === newTerm.id);
+      return res;
+    });
+
+    if (!year) {
+      throw new Error("Year of the course that is dragged over isn't found");
     }
 
     if (!draggedCourse.data.current?.course) {
@@ -74,7 +89,7 @@ export const updatePlanOnDragEnd = (
       toast.error(
         `Oops, ${getCourseDisplayString(
           draggedCourseDetails
-        )} already exists in Year ${newTerm.year}, ${getSeasonDisplayWord(
+        )} already exists in Year ${year.year}, ${getSeasonDisplayWord(
           newTerm.season
         )}.`
       );
@@ -118,4 +133,43 @@ export const flattenScheduleToTerms = <T>(schedule: Schedule2<T>) => {
   );
 
   return scheduleTerms;
+};
+
+/** Finds a current term and season from a year and plan */
+export const findTerm = (
+  termSeason: SeasonEnum,
+  plan: PlanModel<string>,
+  termYear: number
+) => {
+  const scheduleYear = plan.schedule.years.find(
+    (year) => termYear === year.year
+  );
+
+  if (!scheduleYear) {
+    const errMsg = "Term with given year and season not found.";
+    logger.debug("UpdatePlanOnDragEnd.ts", errMsg, termYear, termSeason, plan);
+    throw new Error("Term with given year and season not found.");
+  }
+
+  let term = undefined;
+
+  switch (termSeason) {
+    case SeasonEnum.FL:
+      term = scheduleYear.fall;
+      break;
+    case SeasonEnum.SP:
+      term = scheduleYear.spring;
+      break;
+    case SeasonEnum.S1:
+      term = scheduleYear.summer1;
+      break;
+    case SeasonEnum.S2:
+      term = scheduleYear.summer2;
+      break;
+    case SeasonEnum.SM:
+      throw new Error(
+        "Full summer doesn't exist right now come back when it exists!"
+      );
+  }
+  return term;
 };

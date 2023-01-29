@@ -17,32 +17,28 @@ export const createEmptySchedule = (): Schedule2<null> => {
   };
 };
 
-export const createEmptyYear = (year: number) => {
+export const createEmptyYear = (year: number): ScheduleYear2<null> => {
   return {
     year,
     fall: {
-      year,
       season: SeasonEnum.FL,
       status: StatusEnum.CLASSES,
       classes: [],
       id: null,
     },
     spring: {
-      year,
       season: SeasonEnum.SP,
       status: StatusEnum.CLASSES,
       classes: [],
       id: null,
     },
     summer1: {
-      year,
       season: SeasonEnum.S1,
       status: StatusEnum.INACTIVE,
       classes: [],
       id: null,
     },
     summer2: {
-      year,
       season: SeasonEnum.S2,
       status: StatusEnum.INACTIVE,
       classes: [],

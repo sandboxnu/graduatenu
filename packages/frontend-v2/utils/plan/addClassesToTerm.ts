@@ -2,7 +2,7 @@ import { PlanModel, ScheduleCourse2, SeasonEnum } from "@graduate/common";
 import produce from "immer";
 import { prepareClassesForDnd } from ".";
 import { logger } from "../logger";
-import { flattenScheduleToTerms } from "./updatePlanOnDragEnd";
+import { findTerm, flattenScheduleToTerms } from "./updatePlanOnDragEnd";
 
 /**
  * Add the given classes to the given term in the plan.
@@ -19,34 +19,7 @@ export const addClassesToTerm = (
     const schedule = draftPlan.schedule;
     schedule.years;
 
-    const scheduleYear = schedule.years.find((year) => termYear === year.year);
-
-    if (!scheduleYear) {
-      const errMsg = "Term with given year and season not found.";
-      logger.debug("addClassesToTerm", errMsg, termYear, termSeason, plan);
-      throw new Error("Term with given year and season not found.");
-    }
-
-    let term = undefined;
-
-    switch (termSeason) {
-      case SeasonEnum.FL:
-        term = scheduleYear.fall;
-        break;
-      case SeasonEnum.SP:
-        term = scheduleYear.spring;
-        break;
-      case SeasonEnum.S1:
-        term = scheduleYear.summer1;
-        break;
-      case SeasonEnum.S2:
-        term = scheduleYear.summer2;
-        break;
-      case SeasonEnum.SM:
-        throw new Error(
-          "Full summer doesn't exist right now come back when it exists!"
-        );
-    }
+    const term = findTerm(termSeason, plan, termYear);
 
     const terms = flattenScheduleToTerms(schedule);
 
