@@ -201,6 +201,8 @@ export class PlanService {
       }
     }
 
+    console.log("UPDATE DTO: ", updatePlanDto);
+
     const updateResult = await this.planRepository.update(id, updatePlanDto);
 
     if (updateResult.affected === 0) {
