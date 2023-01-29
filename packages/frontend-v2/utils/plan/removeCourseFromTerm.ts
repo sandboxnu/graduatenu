@@ -1,8 +1,7 @@
 import { PlanModel, ScheduleCourse2, SeasonEnum } from "@graduate/common";
 import produce from "immer";
 import { isEqualCourses } from "../course";
-import { logger } from "../logger";
-import { findTerm, flattenScheduleToTerms } from "./updatePlanOnDragEnd";
+import { findTerm } from "./updatePlanOnDragEnd";
 
 /**
  * Remove the given class from the given term in the plan.
@@ -19,9 +18,6 @@ export const removeCourseFromTerm = (
     const schedule = draftPlan.schedule;
 
     const term = findTerm(termSeason, plan, termYear);
-
-    // find the term
-    const terms = flattenScheduleToTerms(schedule);
 
     // remove the course
     term.classes = term.classes.filter(

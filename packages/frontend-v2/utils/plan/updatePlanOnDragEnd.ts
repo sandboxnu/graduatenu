@@ -12,7 +12,6 @@ import { getCourseDisplayString } from "../course";
 import { getSeasonDisplayWord } from "./getSeasonDisplayWord";
 import { isCourseInTerm } from "./isCourseInTerm";
 import { logger } from "../logger";
-import { TEMPORARY_REDIRECT_STATUS } from "next/dist/shared/lib/constants";
 
 /**
  * Updates the schedule of plan when a course is dragged from one term to

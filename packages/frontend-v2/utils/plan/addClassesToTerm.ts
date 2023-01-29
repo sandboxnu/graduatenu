@@ -1,7 +1,6 @@
 import { PlanModel, ScheduleCourse2, SeasonEnum } from "@graduate/common";
 import produce from "immer";
 import { prepareClassesForDnd } from ".";
-import { logger } from "../logger";
 import { findTerm, flattenScheduleToTerms } from "./updatePlanOnDragEnd";
 
 /**
