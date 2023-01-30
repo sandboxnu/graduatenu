@@ -35,6 +35,7 @@ interface ScheduleYearProps extends ToggleYearProps {
 
   /** Function to remove the curr year from the plan */
   removeYearFromCurrPlan: () => void;
+  setIsRemove?: (val: boolean) => void
 }
 
 export const ScheduleYear: React.FC<ScheduleYearProps> = ({
@@ -44,6 +45,7 @@ export const ScheduleYear: React.FC<ScheduleYearProps> = ({
   isExpanded,
   toggleExpanded,
   removeYearFromCurrPlan,
+  setIsRemove,
   yearCoReqError = undefined,
   yearPreReqError = undefined,
 }) => {
@@ -98,6 +100,7 @@ export const ScheduleYear: React.FC<ScheduleYearProps> = ({
             scheduleTerm={scheduleYear.fall}
             addClassesToTermInCurrPlan={addClassesToTermInCurrPlan}
             removeCourseFromTermInCurrPlan={removeCourseFromTermInCurrPlan}
+            setIsRemove={setIsRemove}
           />
           <ScheduleTerm
             termCoReqErr={yearCoReqError?.spring}
@@ -105,6 +108,7 @@ export const ScheduleYear: React.FC<ScheduleYearProps> = ({
             scheduleTerm={scheduleYear.spring}
             addClassesToTermInCurrPlan={addClassesToTermInCurrPlan}
             removeCourseFromTermInCurrPlan={removeCourseFromTermInCurrPlan}
+            setIsRemove={setIsRemove}
           />
           {/* TODO: support summer full term */}
           <ScheduleTerm
@@ -113,6 +117,7 @@ export const ScheduleYear: React.FC<ScheduleYearProps> = ({
             scheduleTerm={scheduleYear.summer1}
             addClassesToTermInCurrPlan={addClassesToTermInCurrPlan}
             removeCourseFromTermInCurrPlan={removeCourseFromTermInCurrPlan}
+            setIsRemove={setIsRemove}
           />
           <ScheduleTerm
             termCoReqErr={yearCoReqError?.summer2}
@@ -120,6 +125,7 @@ export const ScheduleYear: React.FC<ScheduleYearProps> = ({
             scheduleTerm={scheduleYear.summer2}
             addClassesToTermInCurrPlan={addClassesToTermInCurrPlan}
             removeCourseFromTermInCurrPlan={removeCourseFromTermInCurrPlan}
+            setIsRemove={setIsRemove}
             isLastColumn
           />
         </Grid>

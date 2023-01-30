@@ -67,6 +67,8 @@ const HomePage: NextPage = () => {
 
   const [activeCourse, setActiveCourse] = useState(null);
 
+  const [isRemove, setIsRemove] = useState<boolean>(false);
+
   const [coReqWarnings, setCoReqWarnings] = useState<CoReqWarnings | undefined>(
     undefined
   );
@@ -227,6 +229,7 @@ const HomePage: NextPage = () => {
                   coReqErr={coReqWarnings}
                   preReqErr={preReqWarnings}
                   mutateStudentWithUpdatedPlan={mutateStudentWithUpdatedPlan}
+                  setIsRemove={setIsRemove}
                 />
                 <Flex mt="sm">
                   <AddYearButton
@@ -247,6 +250,7 @@ const HomePage: NextPage = () => {
             isOverlay={true}
             coReqErr={undefined}
             preReqErr={undefined}
+            isRemove={isRemove}
           />
         ) : null}
       </DragOverlay>
