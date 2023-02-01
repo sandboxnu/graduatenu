@@ -18,7 +18,7 @@ import { handleApiClientError } from "../../utils";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useMajor } from "../../hooks/useMajor";
-import { WorkerMessage, WorkerPostInfo } from "../../worker";
+import { WorkerMessage, WorkerMessageType, WorkerPostInfo } from "../../validation-worker/worker-messages";
 
 interface SidebarProps {
   selectedPlan: PlanModel<string>;
@@ -60,6 +60,9 @@ const getRequiredCourses = (
   }
 };
 
+// A number to help avoid displaying stale validation info.
+let currentRequestNum = 0;
+
 const Sidebar: React.FC<SidebarProps> = memo(({ selectedPlan }) => {
   const router = useRouter();
   const { major, isLoading, error } = useMajor(
@@ -78,10 +81,12 @@ const Sidebar: React.FC<SidebarProps> = memo(({ selectedPlan }) => {
     setValidationStatus(undefined);
     if (!selectedPlan || !major || !workerRef.current) return;
     
+    currentRequestNum += 1
     const validationInfo: WorkerPostInfo = {
       major: major,
       taken: getAllCoursesFromPlan(selectedPlan),
-      concentration: selectedPlan.concentration
+      concentration: selectedPlan.concentration,
+      requestNumber: currentRequestNum
     } 
     workerRef.current?.postMessage(validationInfo)
   }
@@ -91,14 +96,21 @@ const Sidebar: React.FC<SidebarProps> = memo(({ selectedPlan }) => {
   // is being validated.
   useEffect(()=>{
     if (!workerRef.current) {
-      workerRef.current = new Worker(new URL("../../worker.ts", import.meta.url));
+      workerRef.current = new Worker(new URL("../../validation-worker/worker.ts", import.meta.url));
       workerRef.current.onmessage = (message: MessageEvent<WorkerMessage>) => {
         switch (message.data.type) {
-          case "Loaded":
+          case WorkerMessageType.Loaded:
             revalidateMajor()
             break;
-          case "ValidationResult":
-            setValidationStatus(message.data.result);
+          case WorkerMessageType.ValidationResult:
+
+            // Only update valdation information if it was from the latest request.
+            // This helps us avoid displaying outdated information that could be sent
+            // due to race conditions.
+            if (message.data.requestNumber === currentRequestNum) {
+              setValidationStatus(message.data.result);
+            }
+
             break;
           default:
             throw new Error("Invalid worker message!");
@@ -230,7 +242,7 @@ const Sidebar: React.FC<SidebarProps> = memo(({ selectedPlan }) => {
               <SidebarSection
                 key={section.title}
                 section={section}
-                isValid={sectionValidationStatus}
+                validationStatus={sectionValidationStatus}
                 courseData={courseData}
                 dndIdPrefix={"sidebar-" + index}
                 loading={loading}
@@ -239,7 +251,7 @@ const Sidebar: React.FC<SidebarProps> = memo(({ selectedPlan }) => {
           })}
           {concentration && (
             <SidebarSection
-              isValid={concentrationValidationStatus}
+              validationStatus={concentrationValidationStatus}
               section={concentration}
               courseData={courseData}
               dndIdPrefix="sidebar-concentration"
