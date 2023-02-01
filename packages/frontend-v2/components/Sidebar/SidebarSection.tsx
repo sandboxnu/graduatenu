@@ -26,7 +26,7 @@ const SidebarSection: React.FC<SidebarSectionProps> = ({
 
   return (
     <Box borderTop="1px solid white" cursor="pointer" userSelect="none">
-      <Text
+      <Box
         onClick={() => {
           setOpened(!opened);
         }}
@@ -77,7 +77,7 @@ const SidebarSection: React.FC<SidebarSectionProps> = ({
               opacity={validationStatus === SidebarValidationStatus.Loading ? 1 : 0} transition="opacity 0.25s ease"/>
             </Box>
         {section.title}
-      </Text>
+      </Box>
       <Box
         style={{ display: opened ? "" : "none" }}
         backgroundColor="neutral.900"
