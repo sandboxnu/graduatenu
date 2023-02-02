@@ -3,7 +3,6 @@ import {
   courseToString,
   ScheduleCourse2,
   ScheduleTerm2,
-  ScheduleYear2,
   SeasonEnum,
   TermError,
 } from "@graduate/common";
