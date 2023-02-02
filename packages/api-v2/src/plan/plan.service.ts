@@ -109,7 +109,6 @@ export class PlanService {
     id: number,
     updatePlanDto: UpdatePlanDto
   ): Promise<UpdateResult> {
-    console.log("HAI");
     const {
       major: newMajorName,
       catalogYear: newCatalogYear,
@@ -139,7 +138,6 @@ export class PlanService {
     const isScheduleUpdate = newSchedule && !isMajorInfoUpdate;
 
     if (!(isMajorInfoUpdate || isScheduleUpdate)) {
-      console.log("YO");
       this.logger.debug(
         { message: "Either update all major fields or only the schedule", id },
         this.formatPlanServiceCtx("update")
