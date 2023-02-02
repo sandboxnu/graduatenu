@@ -1,7 +1,7 @@
 import { PlanModel, ScheduleCourse2, SeasonEnum } from "@graduate/common";
 import produce from "immer";
 import { isEqualCourses } from "../course";
-import { findTerm } from "./updatePlanOnDragEnd";
+import { findTerm } from "./findTerm";
 
 /**
  * Remove the given class from the given term in the plan.

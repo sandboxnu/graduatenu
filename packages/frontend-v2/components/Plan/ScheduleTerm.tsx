@@ -16,7 +16,7 @@ import { BlueButton } from "../Button";
 
 interface ScheduleTermProps {
   scheduleTerm: ScheduleTerm2<string>;
-  scheduleYear: ScheduleYear2<string>;
+  yearNum: number;
   termCoReqErr?: TermError;
   termPreReqErr?: TermError;
 
@@ -40,7 +40,7 @@ interface ScheduleTermProps {
 export const ScheduleTerm: React.FC<ScheduleTermProps> = ({
   scheduleTerm,
   addClassesToTermInCurrPlan,
-  scheduleYear,
+  yearNum,
   removeCourseFromTermInCurrPlan,
   isLastColumn,
   termCoReqErr = undefined,
@@ -66,21 +66,14 @@ export const ScheduleTerm: React.FC<ScheduleTermProps> = ({
       pb="xl"
       userSelect="none"
     >
-      <ScheduleTermHeader
-        season={scheduleTerm.season}
-        year={scheduleYear.year}
-      />
+      <ScheduleTermHeader season={scheduleTerm.season} year={yearNum} />
       {scheduleTerm.classes.map((scheduleCourse) => (
         <DraggableScheduleCourse
           coReqErr={termCoReqErr?.[courseToString(scheduleCourse)]}
           preReqErr={termPreReqErr?.[courseToString(scheduleCourse)]}
           scheduleCourse={scheduleCourse}
           removeCourse={(course: ScheduleCourse2<unknown>) =>
-            removeCourseFromTermInCurrPlan(
-              course,
-              scheduleYear.year,
-              scheduleTerm.season
-            )
+            removeCourseFromTermInCurrPlan(course, yearNum, scheduleTerm.season)
           }
           isEditable
           key={scheduleCourse.id}
@@ -92,11 +85,7 @@ export const ScheduleTerm: React.FC<ScheduleTermProps> = ({
         closeModalDisplay={onClose}
         isCourseInCurrTerm={isCourseInCurrTerm}
         addClassesToCurrTerm={(courses: ScheduleCourse2<null>[]) =>
-          addClassesToTermInCurrPlan(
-            courses,
-            scheduleYear.year,
-            scheduleTerm.season
-          )
+          addClassesToTermInCurrPlan(courses, yearNum, scheduleTerm.season)
         }
       />
     </GridItem>

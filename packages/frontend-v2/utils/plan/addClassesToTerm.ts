@@ -1,7 +1,8 @@
 import { PlanModel, ScheduleCourse2, SeasonEnum } from "@graduate/common";
 import produce from "immer";
 import { prepareClassesForDnd } from ".";
-import { findTerm, flattenScheduleToTerms } from "./updatePlanOnDragEnd";
+import { findTerm } from "./findTerm";
+import { flattenScheduleToTerms } from "./updatePlanOnDragEnd";
 
 /**
  * Add the given classes to the given term in the plan.
@@ -16,13 +17,11 @@ export const addClassesToTerm = (
 ) => {
   const updatedPlan = produce(plan, (draftPlan) => {
     const schedule = draftPlan.schedule;
-    schedule.years;
 
     const term = findTerm(termSeason, plan, termYear);
 
-    const terms = flattenScheduleToTerms(schedule);
-
     // populate courses with dnd id
+    const terms = flattenScheduleToTerms(schedule);
     const courseCount = terms.reduce(
       (count, term) => count + term.classes.length,
       0
