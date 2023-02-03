@@ -18,11 +18,8 @@ import { handleApiClientError, SIDEBAR_DND_ID_PREFIX } from "../../utils";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useMajor } from "../../hooks/useMajor";
-import {
-  WorkerMessage,
-  WorkerMessageType,
-  WorkerPostInfo,
-} from "../../validation-worker/worker-messages";
+import { WorkerMessage, WorkerMessageType, WorkerPostInfo } from "../../validation-worker/worker-messages";
+import { useFetchSearchCourses } from "../../hooks/useFetchSearchCourses";
 
 interface SidebarProps {
   selectedPlan: PlanModel<string>;
@@ -145,10 +142,10 @@ const Sidebar: React.FC<SidebarProps> = memo(({ selectedPlan }) => {
   const [courseData, setCourseData] = useState({});
   const [loading, setLoading] = useState(true);
 
-  // Get course names/data from SearchNEU's API
-  useEffect(() => {
+  
+  const getAllCoursesInMajor = ():  { subject: string; classId: string }[]=>{
     if (!major) {
-      return;
+      return [];
     }
 
     const concentrationRequirements: IRequiredCourse[] = [];
@@ -175,23 +172,18 @@ const Sidebar: React.FC<SidebarProps> = memo(({ selectedPlan }) => {
       coursesQueryData.push({ subject, classId });
     }
 
-    SearchAPI.fetchCourses(coursesQueryData).then((courses) => {
-      const courseMap: { [id: string]: ScheduleCourse2<null> } = courseData;
-      if (courses) {
-        for (const course of courses) {
-          if (course) {
-            courseMap[`${course.subject}${course.classId}`] = course;
-          }
-        }
-        setCourseData(courseMap);
-        setLoading(false);
-      }
-    });
-    // We don't want to make another request when only courseData changes,
-    // we're just appending to it rather than replacing it, hence the
-    // technical dependency.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [major, concentration?.requirements]);
+    if(coursesQueryData){
+      return coursesQueryData
+    } else {
+      return []
+    }
+  }
+
+  const courses = getAllCoursesInMajor();
+
+  const fetchCourses = () => {
+    useFetchSearchCourses(courses)
+  }
 
   if (isLoading) {
     return <SidebarContainer title="Loading..." />;
