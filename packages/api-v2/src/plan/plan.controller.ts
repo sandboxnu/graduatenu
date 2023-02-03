@@ -20,7 +20,7 @@ import {
   UpdatePlanDto,
   GetPlanResponse,
   UpdatePlanResponse,
-} from "../../../common";
+} from "@graduate/common";
 
 @Controller("plans")
 export class PlanController {

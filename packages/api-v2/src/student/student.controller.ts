@@ -25,7 +25,7 @@ import {
   OnboardStudentDto,
   UpdateStudentDto,
   UpdateStudentResponse,
-} from "../../../common";
+} from "@graduate/common";
 
 @Controller("students")
 export class StudentController {
