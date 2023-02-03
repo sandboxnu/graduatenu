@@ -15,7 +15,7 @@ type SearchCoursesReturn = SearchCoursesResponse & {
  * @param subject - the type of class that we are fetching from SearchNEU
  * @param classId - the identification number of the class as a string
  */
-export function useFetchSearchCourses(searchQuery: string, minIndex = 0, maxIndex = 9999): SearchCoursesReturn{
+export function useSearchCourses(searchQuery: string, minIndex = 0, maxIndex = 9999): SearchCoursesReturn{
     
     const key = `
     {
