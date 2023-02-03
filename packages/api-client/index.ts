@@ -18,6 +18,7 @@ import {
 } from "@graduate/common";
 import { ClassConstructor, plainToInstance } from "class-transformer";
 
+
 class APIClient {
   private axios: AxiosInstance;
 
@@ -125,25 +126,12 @@ class SearchAPIClient {
   }
 
   fetchCourse = async (
-    subject: string,
-    classId: string
-  ): Promise<ScheduleCourse2<null> | null> => {
+    query: string
+  ): Promise<ScheduleCourse2<null>> => {
     const res = await this.axios({
       method: "post",
       data: {
-        query: `{ 
-          class(subject: "${subject}", classId: "${classId}") {
-            latestOccurrence {
-              name
-              subject
-              classId
-              maxCredits
-              minCredits
-              prereqs
-              coreqs
-            }
-          }
-        }`,
+        query: query,
       },
     });
 
@@ -152,32 +140,14 @@ class SearchAPIClient {
   };
 
   fetchCourses = async (
-    courseQueryData: { subject: string; classId: string }[]
-  ): Promise<ScheduleCourse2<null>[] | null> => {
-    // formats the request data
-    const input = courseQueryData
-      .map((course) => {
-        return `{subject: "${course.subject}", classId: "${course.classId}"}`;
-      })
-      .join(",");
+    query: string
+  ): Promise<ScheduleCourse2<null>[]> => {
+
 
     const res = await this.axios({
       method: "post",
       data: {
-        query: `{
-          bulkClasses(input: [${input}]) {
-            latestOccurrence {
-              name
-              subject
-              classId
-              minCredits
-              maxCredits
-              prereqs
-              coreqs
-              termId
-            }
-          }
-        }`,
+        query: query,
       },
     });
 
@@ -193,24 +163,13 @@ class SearchAPIClient {
   };
 
   searchCourses = async (
-    searchQuery: string,
-    minIndex = 0,
-    maxIndex = 9999
+    query: string
   ): Promise<ScheduleCourse2<null>[]> => {
     const res = await this.axios({
       method: "POST",
       headers: { "Content-Type": "application/json" },
       data: JSON.stringify({
-        query: `
-        {
-          search(termId:"202130", query: "${searchQuery}", classIdRange: {min: ${minIndex}, max: ${maxIndex}}) {
-            totalCount 
-            pageInfo { hasNextPage } 
-            nodes { ... on ClassOccurrence { name subject maxCredits minCredits prereqs coreqs classId
-            } 
-          } 
-        } 
-      }`,
+        query: query,
       }),
     });
 
