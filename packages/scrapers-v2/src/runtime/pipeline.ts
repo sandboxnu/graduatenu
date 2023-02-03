@@ -40,6 +40,27 @@ export const runPipeline = async (yearStart: number, yearEnd: number) => {
   });
   const results = await logProgress(pipelines);
   await unregisterAgent();
+
+
+  // DEBUG CLEANUP LATER
+  let oneResult = (await pipelines[20]).result
+  if (oneResult.type === ResultType.Ok) {
+    console.info(oneResult.ok)
+  } else {
+    console.error(oneResult.err)
+  }
+
+  pipelines.forEach(async (promise)=>{
+    let res = (await promise).result
+    if (res.type === ResultType.Ok) {
+      console.info(JSON.stringify(res.ok, null, 4))
+    } else {
+      console.error(res.err)
+    }
+  })
+
+  // END DEBUG CLEANUP LATER
+
   logResults(results);
   clearGlobalStatsLogger();
 };

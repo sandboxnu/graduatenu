@@ -1,0 +1,1303 @@
+{
+    "url": "https://catalog.northeastern.edu/undergraduate/computer-information-science/computer-science/bscs/",
+    "type": "Major",
+    "tokenized": {
+        "programRequiredHours": 134,
+        "yearVersion": 2022,
+        "majorName": "Computer Science, BSCS",
+        "sections": [
+            {
+                "description": "Computer Science Requirements",
+                "entries": [
+                    {
+                        "hour": 0,
+                        "description": "Computer Science Overview",
+                        "type": "HEADER"
+                    },
+                    {
+                        "hour": 1,
+                        "description": "First Year Seminar",
+                        "type": "PLAIN_COURSE",
+                        "subject": "CS",
+                        "classId": 1200
+                    },
+                    {
+                        "hour": 1,
+                        "description": "Professional Development for Khoury Co-op",
+                        "type": "PLAIN_COURSE",
+                        "subject": "CS",
+                        "classId": 1210
+                    },
+                    {
+                        "hour": 0,
+                        "description": "Computer Science Fundamental Courses",
+                        "type": "HEADER"
+                    },
+                    {
+                        "hour": 5,
+                        "type": "AND_COURSE",
+                        "description": "Discrete Structures and Seminar for CS 1800",
+                        "courses": [
+                            {
+                                "subject": "CS",
+                                "classId": 1800,
+                                "description": "Discrete Structures"
+                            },
+                            {
+                                "subject": "CS",
+                                "classId": 1802,
+                                "description": "Seminar for CS 1800"
+                            }
+                        ]
+                    },
+                    {
+                        "hour": 5,
+                        "type": "AND_COURSE",
+                        "description": "Fundamentals of Computer Science 1 and Lab for CS 2500",
+                        "courses": [
+                            {
+                                "subject": "CS",
+                                "classId": 2500,
+                                "description": "Fundamentals of Computer Science 1"
+                            },
+                            {
+                                "subject": "CS",
+                                "classId": 2501,
+                                "description": "Lab for CS 2500"
+                            }
+                        ]
+                    },
+                    {
+                        "hour": 5,
+                        "type": "AND_COURSE",
+                        "description": "Fundamentals of Computer Science 2 and Lab for CS 2510",
+                        "courses": [
+                            {
+                                "subject": "CS",
+                                "classId": 2510,
+                                "description": "Fundamentals of Computer Science 2"
+                            },
+                            {
+                                "subject": "CS",
+                                "classId": 2511,
+                                "description": "Lab for CS 2510"
+                            }
+                        ]
+                    },
+                    {
+                        "hour": 4,
+                        "description": "Mathematics of Data Models",
+                        "type": "PLAIN_COURSE",
+                        "subject": "CS",
+                        "classId": 2810
+                    },
+                    {
+                        "hour": 0,
+                        "description": "Computer Science Required Courses",
+                        "type": "HEADER"
+                    },
+                    {
+                        "hour": 4,
+                        "description": "Algorithms and Data",
+                        "type": "PLAIN_COURSE",
+                        "subject": "CS",
+                        "classId": 3000
+                    },
+                    {
+                        "hour": 5,
+                        "type": "AND_COURSE",
+                        "description": "Object-Oriented Design and Lab for CS 3500",
+                        "courses": [
+                            {
+                                "subject": "CS",
+                                "classId": 3500,
+                                "description": "Object-Oriented Design"
+                            },
+                            {
+                                "subject": "CS",
+                                "classId": 3501,
+                                "description": "Lab for CS 3500"
+                            }
+                        ]
+                    },
+                    {
+                        "hour": 4,
+                        "description": "Computer Systems",
+                        "type": "PLAIN_COURSE",
+                        "subject": "CS",
+                        "classId": 3650
+                    },
+                    {
+                        "hour": 4,
+                        "description": "Theory of Computation",
+                        "type": "PLAIN_COURSE",
+                        "subject": "CS",
+                        "classId": 3800
+                    },
+                    {
+                        "hour": 4,
+                        "description": "Software Development",
+                        "type": "PLAIN_COURSE",
+                        "subject": "CS",
+                        "classId": 4500
+                    },
+                    {
+                        "hour": 0,
+                        "description": "Fundamentals of Software Engineering",
+                        "type": "OR_COURSE",
+                        "subject": "CS",
+                        "classId": 4530
+                    },
+                    {
+                        "hour": 0,
+                        "description": "Security Required Course",
+                        "type": "HEADER"
+                    },
+                    {
+                        "hour": 4,
+                        "description": "Complete one of the following:",
+                        "type": "COMMENT"
+                    },
+                    {
+                        "hour": 0,
+                        "description": "Foundations of Cybersecurity",
+                        "type": "PLAIN_COURSE",
+                        "subject": "CY",
+                        "classId": 2550
+                    },
+                    {
+                        "hour": 0,
+                        "description": "Systems Security",
+                        "type": "PLAIN_COURSE",
+                        "subject": "CY",
+                        "classId": 3740
+                    },
+                    {
+                        "hour": 0,
+                        "description": "Network Security",
+                        "type": "PLAIN_COURSE",
+                        "subject": "CY",
+                        "classId": 4740
+                    },
+                    {
+                        "hour": 0,
+                        "description": "Presentation Requirement",
+                        "type": "HEADER"
+                    },
+                    {
+                        "hour": 4,
+                        "description": "Choose one:",
+                        "type": "COMMENT"
+                    },
+                    {
+                        "hour": 0,
+                        "description": "Public Speaking",
+                        "type": "PLAIN_COURSE",
+                        "subject": "COMM",
+                        "classId": 1112
+                    },
+                    {
+                        "hour": 0,
+                        "description": "Business and Professional Speaking",
+                        "type": "PLAIN_COURSE",
+                        "subject": "COMM",
+                        "classId": 1113
+                    },
+                    {
+                        "hour": 0,
+                        "description": "Persuasion and Rhetoric",
+                        "type": "PLAIN_COURSE",
+                        "subject": "COMM",
+                        "classId": 1210
+                    },
+                    {
+                        "hour": 0,
+                        "description": "Communication and Storytelling",
+                        "type": "PLAIN_COURSE",
+                        "subject": "COMM",
+                        "classId": 1511
+                    },
+                    {
+                        "hour": 0,
+                        "description": "Improvisation",
+                        "type": "PLAIN_COURSE",
+                        "subject": "THTR",
+                        "classId": 1125
+                    },
+                    {
+                        "hour": 0,
+                        "description": "Introduction to Acting",
+                        "type": "PLAIN_COURSE",
+                        "subject": "THTR",
+                        "classId": 1130
+                    },
+                    {
+                        "hour": 0,
+                        "description": "The Dynamic On-Screen Presenter",
+                        "type": "PLAIN_COURSE",
+                        "subject": "THTR",
+                        "classId": 1180
+                    },
+                    {
+                        "hour": 0,
+                        "description": "Acting for the Camera",
+                        "type": "PLAIN_COURSE",
+                        "subject": "THTR",
+                        "classId": 2345
+                    },
+                    {
+                        "hour": 0,
+                        "description": "Khoury Elective Courses",
+                        "type": "HEADER"
+                    },
+                    {
+                        "hour": 0,
+                        "description": "With adviser approval, directed study, research, project study, and appropriate graduate-level courses may also be taken as upper-division electives.",
+                        "type": "COMMENT"
+                    },
+                    {
+                        "hour": 8,
+                        "description": "Complete 8 credits of CS, CY, DS, or IS classes that are not already required. Choose courses within the following ranges:",
+                        "type": "COMMENT"
+                    },
+                    {
+                        "type": "RANGE_LOWER_BOUNDED_WITH_EXCEPTIONS",
+                        "hour": 0,
+                        "subject": "CS",
+                        "classIdStart": 2500,
+                        "exceptions": [
+                            {
+                                "subject": "CS",
+                                "classId": 5010
+                            }
+                        ]
+                    },
+                    {
+                        "type": "RANGE_LOWER_BOUNDED_WITH_EXCEPTIONS",
+                        "hour": 0,
+                        "subject": "CY",
+                        "classIdStart": 2000,
+                        "exceptions": [
+                            {
+                                "subject": "CY",
+                                "classId": 4930
+                            }
+                        ]
+                    },
+                    {
+                        "type": "RANGE_LOWER_BOUNDED_WITH_EXCEPTIONS",
+                        "hour": 0,
+                        "subject": "DS",
+                        "classIdStart": 2500,
+                        "exceptions": [
+                            {
+                                "subject": "DS",
+                                "classId": 4900
+                            }
+                        ]
+                    },
+                    {
+                        "type": "RANGE_LOWER_BOUNDED_WITH_EXCEPTIONS",
+                        "hour": 0,
+                        "subject": "IS",
+                        "classIdStart": 2000,
+                        "exceptions": [
+                            {
+                                "subject": "IS",
+                                "classId": 4900
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "description": "Supporting Courses",
+                "entries": [
+                    {
+                        "hour": 0,
+                        "description": "Mathematics Courses",
+                        "type": "HEADER"
+                    },
+                    {
+                        "hour": 4,
+                        "description": "Calculus 1 for Science and Engineering",
+                        "type": "PLAIN_COURSE",
+                        "subject": "MATH",
+                        "classId": 1341
+                    },
+                    {
+                        "hour": 4,
+                        "description": "Introduction to Mathematical Reasoning",
+                        "type": "PLAIN_COURSE",
+                        "subject": "MATH",
+                        "classId": 1365
+                    },
+                    {
+                        "hour": 0,
+                        "description": "Computing and Social Issues",
+                        "type": "HEADER"
+                    },
+                    {
+                        "hour": 4,
+                        "description": "Complete one of the following:",
+                        "type": "COMMENT"
+                    },
+                    {
+                        "hour": 0,
+                        "description": "Issues in Race, Science, and Technology",
+                        "type": "PLAIN_COURSE",
+                        "subject": "AFAM",
+                        "classId": 2600
+                    },
+                    {
+                        "hour": 0,
+                        "description": "The Law, Ethics, and Policy of Data and Digital Technologies",
+                        "type": "PLAIN_COURSE",
+                        "subject": "CY",
+                        "classId": 4170
+                    },
+                    {
+                        "hour": 0,
+                        "description": "Cyberlaw: Privacy, Ethics, and Digital Rights",
+                        "type": "PLAIN_COURSE",
+                        "subject": "CY",
+                        "classId": 5240
+                    },
+                    {
+                        "hour": 0,
+                        "description": "Literature and Digital Diversity",
+                        "type": "PLAIN_COURSE",
+                        "subject": "ENGL",
+                        "classId": 2150
+                    },
+                    {
+                        "hour": 0,
+                        "description": "History of Technology",
+                        "type": "PLAIN_COURSE",
+                        "subject": "HIST",
+                        "classId": 2220
+                    },
+                    {
+                        "hour": 0,
+                        "description": "Bostonography: The City through Data, Texts, Maps, and Networks",
+                        "type": "PLAIN_COURSE",
+                        "subject": "INSH",
+                        "classId": 2102
+                    },
+                    {
+                        "hour": 0,
+                        "description": "Knowledge in a Digital World",
+                        "type": "PLAIN_COURSE",
+                        "subject": "IS",
+                        "classId": 1300
+                    },
+                    {
+                        "hour": 0,
+                        "description": "Knowledge in a Digital World",
+                        "type": "OR_COURSE",
+                        "subject": "PHIL",
+                        "classId": 1300
+                    },
+                    {
+                        "hour": 0,
+                        "description": "Technology and Human Values",
+                        "type": "PLAIN_COURSE",
+                        "subject": "PHIL",
+                        "classId": 1145
+                    },
+                    {
+                        "hour": 0,
+                        "description": "The Twenty-First-Century Workplace",
+                        "type": "PLAIN_COURSE",
+                        "subject": "SOCL",
+                        "classId": 1280
+                    },
+                    {
+                        "hour": 0,
+                        "description": "Environment, Technology, and Society",
+                        "type": "PLAIN_COURSE",
+                        "subject": "SOCL",
+                        "classId": 2485
+                    },
+                    {
+                        "hour": 0,
+                        "description": "Computers and Society",
+                        "type": "PLAIN_COURSE",
+                        "subject": "SOCL",
+                        "classId": 4528
+                    },
+                    {
+                        "hour": 0,
+                        "description": "Electrical Engineering",
+                        "type": "HEADER"
+                    },
+                    {
+                        "hour": 5,
+                        "type": "AND_COURSE",
+                        "description": "Fundamentals of Digital Design and Computer Organization and Lab for EECE 2322",
+                        "courses": [
+                            {
+                                "subject": "EECE",
+                                "classId": 2322,
+                                "description": "Fundamentals of Digital Design and Computer Organization"
+                            },
+                            {
+                                "subject": "EECE",
+                                "classId": 2323,
+                                "description": "Lab for EECE 2322"
+                            }
+                        ]
+                    },
+                    {
+                        "hour": 0,
+                        "description": "Science Requirement",
+                        "type": "HEADER"
+                    },
+                    {
+                        "hour": 8,
+                        "description": "Complete two courses (and any required labs) from the following science categories:",
+                        "type": "COMMENT"
+                    },
+                    {
+                        "hour": 0,
+                        "description": "Biology",
+                        "type": "SUBHEADER"
+                    },
+                    {
+                        "hour": 0,
+                        "type": "AND_COURSE",
+                        "description": "General Biology 1 and Lab for BIOL 1111",
+                        "courses": [
+                            {
+                                "subject": "BIOL",
+                                "classId": 1111,
+                                "description": "General Biology 1"
+                            },
+                            {
+                                "subject": "BIOL",
+                                "classId": 1112,
+                                "description": "Lab for BIOL 1111"
+                            }
+                        ]
+                    },
+                    {
+                        "hour": 0,
+                        "type": "AND_COURSE",
+                        "description": "General Biology 2 and Lab for BIOL 1113",
+                        "courses": [
+                            {
+                                "subject": "BIOL",
+                                "classId": 1113,
+                                "description": "General Biology 2"
+                            },
+                            {
+                                "subject": "BIOL",
+                                "classId": 1114,
+                                "description": "Lab for BIOL 1113"
+                            }
+                        ]
+                    },
+                    {
+                        "hour": 0,
+                        "type": "AND_COURSE",
+                        "description": "Genetics and Molecular Biology and Lab for BIOL 2301",
+                        "courses": [
+                            {
+                                "subject": "BIOL",
+                                "classId": 2301,
+                                "description": "Genetics and Molecular Biology"
+                            },
+                            {
+                                "subject": "BIOL",
+                                "classId": 2302,
+                                "description": "Lab for BIOL 2301"
+                            }
+                        ]
+                    },
+                    {
+                        "hour": 0,
+                        "description": "Chemistry",
+                        "type": "SUBHEADER"
+                    },
+                    {
+                        "hour": 0,
+                        "type": "AND_COURSE",
+                        "description": "General Chemistry 1 and Lab for CHEM 1211 and Recitation for CHEM 1211",
+                        "courses": [
+                            {
+                                "subject": "CHEM",
+                                "classId": 1211,
+                                "description": "General Chemistry 1"
+                            },
+                            {
+                                "subject": "CHEM",
+                                "classId": 1212,
+                                "description": "Lab for CHEM 1211"
+                            },
+                            {
+                                "subject": "CHEM",
+                                "classId": 1213,
+                                "description": "Recitation for CHEM 1211"
+                            }
+                        ]
+                    },
+                    {
+                        "hour": 0,
+                        "type": "AND_COURSE",
+                        "description": "General Chemistry 2 and Lab for CHEM 1214 and Recitation for CHEM 1214",
+                        "courses": [
+                            {
+                                "subject": "CHEM",
+                                "classId": 1214,
+                                "description": "General Chemistry 2"
+                            },
+                            {
+                                "subject": "CHEM",
+                                "classId": 1215,
+                                "description": "Lab for CHEM 1214"
+                            },
+                            {
+                                "subject": "CHEM",
+                                "classId": 1216,
+                                "description": "Recitation for CHEM 1214"
+                            }
+                        ]
+                    },
+                    {
+                        "hour": 0,
+                        "description": "Geology/Environmental Science",
+                        "type": "SUBHEADER"
+                    },
+                    {
+                        "hour": 0,
+                        "type": "AND_COURSE",
+                        "description": "Dynamic Earth and Lab for ENVR 1200",
+                        "courses": [
+                            {
+                                "subject": "ENVR",
+                                "classId": 1200,
+                                "description": "Dynamic Earth"
+                            },
+                            {
+                                "subject": "ENVR",
+                                "classId": 1201,
+                                "description": "Lab for ENVR 1200"
+                            }
+                        ]
+                    },
+                    {
+                        "hour": 0,
+                        "type": "AND_COURSE",
+                        "description": "History of Earth and Life and Interpreting Earth History",
+                        "courses": [
+                            {
+                                "subject": "ENVR",
+                                "classId": 1202,
+                                "description": "History of Earth and Life"
+                            },
+                            {
+                                "subject": "ENVR",
+                                "classId": 1203,
+                                "description": "Interpreting Earth History"
+                            }
+                        ]
+                    },
+                    {
+                        "hour": 0,
+                        "type": "AND_COURSE",
+                        "description": "Dynamic Earth and Lab for ENVR 1200",
+                        "courses": [
+                            {
+                                "subject": "ENVR",
+                                "classId": 1200,
+                                "description": "Dynamic Earth"
+                            },
+                            {
+                                "subject": "ENVR",
+                                "classId": 1201,
+                                "description": "Lab for ENVR 1200"
+                            }
+                        ]
+                    },
+                    {
+                        "hour": 0,
+                        "type": "AND_COURSE",
+                        "description": "Earth Materials and Lab for ENVR 2310",
+                        "courses": [
+                            {
+                                "subject": "ENVR",
+                                "classId": 2310,
+                                "description": "Earth Materials"
+                            },
+                            {
+                                "subject": "ENVR",
+                                "classId": 2311,
+                                "description": "Lab for ENVR 2310"
+                            }
+                        ]
+                    },
+                    {
+                        "hour": 0,
+                        "type": "AND_COURSE",
+                        "description": "Earth Landforms and Processes and Lab for ENVR 2340",
+                        "courses": [
+                            {
+                                "subject": "ENVR",
+                                "classId": 2340,
+                                "description": "Earth Landforms and Processes"
+                            },
+                            {
+                                "subject": "ENVR",
+                                "classId": 2341,
+                                "description": "Lab for ENVR 2340"
+                            }
+                        ]
+                    },
+                    {
+                        "hour": 0,
+                        "type": "AND_COURSE",
+                        "description": "Geographic Information Systems and Lab for ENVR 3300",
+                        "courses": [
+                            {
+                                "subject": "ENVR",
+                                "classId": 3300,
+                                "description": "Geographic Information Systems"
+                            },
+                            {
+                                "subject": "ENVR",
+                                "classId": 3301,
+                                "description": "Lab for ENVR 3300"
+                            }
+                        ]
+                    },
+                    {
+                        "hour": 0,
+                        "type": "AND_COURSE",
+                        "description": "Applied Hydrogeology and Lab for ENVR 4500",
+                        "courses": [
+                            {
+                                "subject": "ENVR",
+                                "classId": 4500,
+                                "description": "Applied Hydrogeology"
+                            },
+                            {
+                                "subject": "ENVR",
+                                "classId": 4501,
+                                "description": "Lab for ENVR 4500"
+                            }
+                        ]
+                    },
+                    {
+                        "hour": 0,
+                        "type": "AND_COURSE",
+                        "description": "History of Earth and Life and Interpreting Earth History",
+                        "courses": [
+                            {
+                                "subject": "ENVR",
+                                "classId": 1202,
+                                "description": "History of Earth and Life"
+                            },
+                            {
+                                "subject": "ENVR",
+                                "classId": 1203,
+                                "description": "Interpreting Earth History"
+                            }
+                        ]
+                    },
+                    {
+                        "hour": 0,
+                        "type": "AND_COURSE",
+                        "description": "Ancient Marine Life and Lab for ENVR 5242",
+                        "courses": [
+                            {
+                                "subject": "ENVR",
+                                "classId": 5242,
+                                "description": "Ancient Marine Life"
+                            },
+                            {
+                                "subject": "ENVR",
+                                "classId": 5243,
+                                "description": "Lab for ENVR 5242"
+                            }
+                        ]
+                    },
+                    {
+                        "hour": 0,
+                        "description": "Mathematics",
+                        "type": "SUBHEADER"
+                    },
+                    {
+                        "hour": 0,
+                        "description": "Calculus 2 for Science and Engineering",
+                        "type": "PLAIN_COURSE",
+                        "subject": "MATH",
+                        "classId": 1342
+                    },
+                    {
+                        "hour": 0,
+                        "description": "Linear Algebra",
+                        "type": "PLAIN_COURSE",
+                        "subject": "MATH",
+                        "classId": 2331
+                    },
+                    {
+                        "hour": 0,
+                        "description": "Probability and Statistics",
+                        "type": "PLAIN_COURSE",
+                        "subject": "MATH",
+                        "classId": 3081
+                    },
+                    {
+                        "hour": 0,
+                        "description": "Physics",
+                        "type": "SUBHEADER"
+                    },
+                    {
+                        "hour": 0,
+                        "type": "AND_COURSE",
+                        "description": "Physics for Life Sciences 1 and Lab for PHYS 1145",
+                        "courses": [
+                            {
+                                "subject": "PHYS",
+                                "classId": 1145,
+                                "description": "Physics for Life Sciences 1"
+                            },
+                            {
+                                "subject": "PHYS",
+                                "classId": 1146,
+                                "description": "Lab for PHYS 1145"
+                            }
+                        ]
+                    },
+                    {
+                        "hour": 0,
+                        "type": "AND_COURSE",
+                        "description": "Physics for Life Sciences 2 and Lab for PHYS 1147",
+                        "courses": [
+                            {
+                                "subject": "PHYS",
+                                "classId": 1147,
+                                "description": "Physics for Life Sciences 2"
+                            },
+                            {
+                                "subject": "PHYS",
+                                "classId": 1148,
+                                "description": "Lab for PHYS 1147"
+                            }
+                        ]
+                    },
+                    {
+                        "hour": 0,
+                        "type": "AND_COURSE",
+                        "description": "Physics for Engineering 1 and Lab for PHYS 1151 and Interactive Learning Seminar for PHYS 1151",
+                        "courses": [
+                            {
+                                "subject": "PHYS",
+                                "classId": 1151,
+                                "description": "Physics for Engineering 1"
+                            },
+                            {
+                                "subject": "PHYS",
+                                "classId": 1152,
+                                "description": "Lab for PHYS 1151"
+                            },
+                            {
+                                "subject": "PHYS",
+                                "classId": 1153,
+                                "description": "Interactive Learning Seminar for PHYS 1151"
+                            }
+                        ]
+                    },
+                    {
+                        "hour": 0,
+                        "type": "AND_COURSE",
+                        "description": "Physics for Engineering 2 and Lab for PHYS 1155 and Interactive Learning Seminar for PHYS 1155",
+                        "courses": [
+                            {
+                                "subject": "PHYS",
+                                "classId": 1155,
+                                "description": "Physics for Engineering 2"
+                            },
+                            {
+                                "subject": "PHYS",
+                                "classId": 1156,
+                                "description": "Lab for PHYS 1155"
+                            },
+                            {
+                                "subject": "PHYS",
+                                "classId": 1157,
+                                "description": "Interactive Learning Seminar for PHYS 1155"
+                            }
+                        ]
+                    },
+                    {
+                        "hour": 0,
+                        "type": "AND_COURSE",
+                        "description": "Physics 1 and Lab for PHYS 1161 and Recitation for PHYS 1161",
+                        "courses": [
+                            {
+                                "subject": "PHYS",
+                                "classId": 1161,
+                                "description": "Physics 1"
+                            },
+                            {
+                                "subject": "PHYS",
+                                "classId": 1162,
+                                "description": "Lab for PHYS 1161"
+                            },
+                            {
+                                "subject": "PHYS",
+                                "classId": 1163,
+                                "description": "Recitation for PHYS 1161"
+                            }
+                        ]
+                    },
+                    {
+                        "hour": 0,
+                        "type": "AND_COURSE",
+                        "description": "Physics 2 and Lab for PHYS 1165 and Recitation for PHYS 1165",
+                        "courses": [
+                            {
+                                "subject": "PHYS",
+                                "classId": 1165,
+                                "description": "Physics 2"
+                            },
+                            {
+                                "subject": "PHYS",
+                                "classId": 1166,
+                                "description": "Lab for PHYS 1165"
+                            },
+                            {
+                                "subject": "PHYS",
+                                "classId": 1167,
+                                "description": "Recitation for PHYS 1165"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "description": "Computer Science Writing Requirement",
+                "entries": [
+                    {
+                        "hour": 0,
+                        "description": "College Writing",
+                        "type": "HEADER"
+                    },
+                    {
+                        "hour": 4,
+                        "description": "First-Year Writing",
+                        "type": "PLAIN_COURSE",
+                        "subject": "ENGW",
+                        "classId": 1111
+                    },
+                    {
+                        "hour": 0,
+                        "description": "Advanced Writing in the Disciplines",
+                        "type": "HEADER"
+                    },
+                    {
+                        "hour": 4,
+                        "description": "Advanced Writing in the Technical Professions",
+                        "type": "PLAIN_COURSE",
+                        "subject": "ENGW",
+                        "classId": 3302
+                    },
+                    {
+                        "hour": 0,
+                        "description": "Interdisciplinary Advanced Writing in the Disciplines",
+                        "type": "OR_COURSE",
+                        "subject": "ENGW",
+                        "classId": 3315
+                    }
+                ]
+            },
+            {
+                "description": "Required General Electives",
+                "entries": [
+                    {
+                        "hour": 28,
+                        "description": "Complete 28 credits of general electives.",
+                        "type": "COMMENT"
+                    }
+                ]
+            },
+            {
+                "description": "Concentration in Artificial Intelligence",
+                "entries": [
+                    {
+                        "hour": 4,
+                        "description": "Artificial Intelligence",
+                        "type": "PLAIN_COURSE",
+                        "subject": "CS",
+                        "classId": 4100
+                    },
+                    {
+                        "hour": 4,
+                        "description": "Machine Learning and Data Mining 1",
+                        "type": "PLAIN_COURSE",
+                        "subject": "DS",
+                        "classId": 4400
+                    },
+                    {
+                        "hour": 8,
+                        "description": "Complete two of the following courses not already taken:",
+                        "type": "COMMENT"
+                    },
+                    {
+                        "hour": 0,
+                        "description": "Natural Language Processing",
+                        "type": "PLAIN_COURSE",
+                        "subject": "CS",
+                        "classId": 4120
+                    },
+                    {
+                        "hour": 0,
+                        "description": "Game Artificial Intelligence",
+                        "type": "PLAIN_COURSE",
+                        "subject": "CS",
+                        "classId": 4150
+                    },
+                    {
+                        "hour": 0,
+                        "description": "Robotic Science and Systems",
+                        "type": "PLAIN_COURSE",
+                        "subject": "CS",
+                        "classId": 4610
+                    },
+                    {
+                        "hour": 0,
+                        "description": "Information Retrieval",
+                        "type": "PLAIN_COURSE",
+                        "subject": "IS",
+                        "classId": 4200
+                    },
+                    {
+                        "hour": 0,
+                        "description": "Machine Learning and Data Mining 2",
+                        "type": "PLAIN_COURSE",
+                        "subject": "DS",
+                        "classId": 4420
+                    },
+                    {
+                        "hour": 0,
+                        "description": "Cognition",
+                        "type": "PLAIN_COURSE",
+                        "subject": "PSYC",
+                        "classId": 3466
+                    }
+                ]
+            },
+            {
+                "description": "Concentration in Foundations",
+                "entries": [
+                    {
+                        "hour": 8,
+                        "description": "Complete two of the following:",
+                        "type": "COMMENT"
+                    },
+                    {
+                        "hour": 0,
+                        "description": "Logic and Computation",
+                        "type": "PLAIN_COURSE",
+                        "subject": "CS",
+                        "classId": 2800
+                    },
+                    {
+                        "hour": 0,
+                        "description": "Computer-Aided Reasoning",
+                        "type": "OR_COURSE",
+                        "subject": "CS",
+                        "classId": 4820
+                    },
+                    {
+                        "hour": 0,
+                        "description": "Fundamentals of Complexity Theory",
+                        "type": "PLAIN_COURSE",
+                        "subject": "CS",
+                        "classId": 4805
+                    },
+                    {
+                        "hour": 0,
+                        "description": "Advanced Algorithms",
+                        "type": "OR_COURSE",
+                        "subject": "CS",
+                        "classId": 4810
+                    },
+                    {
+                        "hour": 8,
+                        "description": "Complete two of the following courses not already taken:",
+                        "type": "COMMENT"
+                    },
+                    {
+                        "hour": 0,
+                        "description": "Fundamentals of Complexity Theory",
+                        "type": "PLAIN_COURSE",
+                        "subject": "CS",
+                        "classId": 4805
+                    },
+                    {
+                        "hour": 0,
+                        "description": "Advanced Algorithms",
+                        "type": "PLAIN_COURSE",
+                        "subject": "CS",
+                        "classId": 4810
+                    },
+                    {
+                        "hour": 0,
+                        "description": "Computer-Aided Reasoning",
+                        "type": "PLAIN_COURSE",
+                        "subject": "CS",
+                        "classId": 4820
+                    },
+                    {
+                        "hour": 0,
+                        "description": "System Specification, Verification, and Synthesis",
+                        "type": "PLAIN_COURSE",
+                        "subject": "CS",
+                        "classId": 4830
+                    },
+                    {
+                        "hour": 0,
+                        "type": "AND_COURSE",
+                        "description": "Introduction to Computer Science Research and Computer Science Research Seminar and Computer Science Research Seminar",
+                        "courses": [
+                            {
+                                "subject": "CS",
+                                "classId": 3950,
+                                "description": "Introduction to Computer Science Research"
+                            },
+                            {
+                                "subject": "CS",
+                                "classId": 4950,
+                                "description": "Computer Science Research Seminar"
+                            },
+                            {
+                                "subject": "CS",
+                                "classId": 4950,
+                                "description": "Computer Science Research Seminar"
+                            }
+                        ]
+                    },
+                    {
+                        "hour": 0,
+                        "description": "Cryptography",
+                        "type": "PLAIN_COURSE",
+                        "subject": "CY",
+                        "classId": 4770
+                    }
+                ]
+            },
+            {
+                "description": "Concentration in Human-Centered Computing",
+                "entries": [
+                    {
+                        "hour": 4,
+                        "description": "Human Computer Interaction",
+                        "type": "PLAIN_COURSE",
+                        "subject": "IS",
+                        "classId": 4300
+                    },
+                    {
+                        "hour": 4,
+                        "description": "Empirical Research Methods",
+                        "type": "PLAIN_COURSE",
+                        "subject": "IS",
+                        "classId": 4800
+                    },
+                    {
+                        "hour": 8,
+                        "description": "Complete two of the following courses not already taken:",
+                        "type": "COMMENT"
+                    },
+                    {
+                        "hour": 0,
+                        "description": "Principles of Information Science",
+                        "type": "PLAIN_COURSE",
+                        "subject": "IS",
+                        "classId": 2000
+                    },
+                    {
+                        "hour": 0,
+                        "description": "Natural Language Processing",
+                        "type": "PLAIN_COURSE",
+                        "subject": "CS",
+                        "classId": 4120
+                    },
+                    {
+                        "hour": 0,
+                        "description": "Web Development",
+                        "type": "PLAIN_COURSE",
+                        "subject": "CS",
+                        "classId": 4550
+                    },
+                    {
+                        "hour": 0,
+                        "description": "Information Presentation and Visualization",
+                        "type": "PLAIN_COURSE",
+                        "subject": "DS",
+                        "classId": 4200
+                    }
+                ]
+            },
+            {
+                "description": "Concentration in Software",
+                "entries": [
+                    {
+                        "hour": 4,
+                        "description": "Logic and Computation",
+                        "type": "PLAIN_COURSE",
+                        "subject": "CS",
+                        "classId": 2800
+                    },
+                    {
+                        "hour": 4,
+                        "description": "Networks and Distributed Systems",
+                        "type": "PLAIN_COURSE",
+                        "subject": "CS",
+                        "classId": 3700
+                    },
+                    {
+                        "hour": 4,
+                        "description": "Programming Languages",
+                        "type": "PLAIN_COURSE",
+                        "subject": "CS",
+                        "classId": 4400
+                    },
+                    {
+                        "hour": 0,
+                        "description": "Complete one of the following courses not already taken:",
+                        "type": "COMMENT"
+                    },
+                    {
+                        "hour": 0,
+                        "description": "Programming in C++",
+                        "type": "PLAIN_COURSE",
+                        "subject": "CS",
+                        "classId": 3520
+                    },
+                    {
+                        "hour": 0,
+                        "description": "Building Extensible Systems",
+                        "type": "PLAIN_COURSE",
+                        "subject": "CS",
+                        "classId": 3620
+                    },
+                    {
+                        "hour": 0,
+                        "description": "Large-Scale Parallel Data Processing",
+                        "type": "PLAIN_COURSE",
+                        "subject": "CS",
+                        "classId": 4240
+                    },
+                    {
+                        "hour": 0,
+                        "description": "Compilers",
+                        "type": "PLAIN_COURSE",
+                        "subject": "CS",
+                        "classId": 4410
+                    },
+                    {
+                        "hour": 0,
+                        "description": "Web Development",
+                        "type": "PLAIN_COURSE",
+                        "subject": "CS",
+                        "classId": 4550
+                    },
+                    {
+                        "hour": 0,
+                        "description": "Computer-Aided Reasoning",
+                        "type": "PLAIN_COURSE",
+                        "subject": "CS",
+                        "classId": 4820
+                    },
+                    {
+                        "hour": 0,
+                        "description": "System Specification, Verification, and Synthesis",
+                        "type": "PLAIN_COURSE",
+                        "subject": "CS",
+                        "classId": 4830
+                    }
+                ]
+            },
+            {
+                "description": "Concentration in Systems",
+                "entries": [
+                    {
+                        "hour": 4,
+                        "description": "Networks and Distributed Systems",
+                        "type": "PLAIN_COURSE",
+                        "subject": "CS",
+                        "classId": 3700
+                    },
+                    {
+                        "hour": 4,
+                        "description": "Complete one of the following courses not already taken:",
+                        "type": "COMMENT"
+                    },
+                    {
+                        "hour": 0,
+                        "description": "Systems Security",
+                        "type": "PLAIN_COURSE",
+                        "subject": "CY",
+                        "classId": 3740
+                    },
+                    {
+                        "hour": 0,
+                        "description": "Network Security",
+                        "type": "PLAIN_COURSE",
+                        "subject": "CY",
+                        "classId": 4740
+                    },
+                    {
+                        "hour": 8,
+                        "description": "Complete two of the following courses not already taken:",
+                        "type": "COMMENT"
+                    },
+                    {
+                        "hour": 0,
+                        "description": "Programming in C++",
+                        "type": "PLAIN_COURSE",
+                        "subject": "CS",
+                        "classId": 3520
+                    },
+                    {
+                        "hour": 0,
+                        "description": "Computer Graphics",
+                        "type": "PLAIN_COURSE",
+                        "subject": "CS",
+                        "classId": 4300
+                    },
+                    {
+                        "hour": 0,
+                        "description": "Systems Security",
+                        "type": "PLAIN_COURSE",
+                        "subject": "CY",
+                        "classId": 3740
+                    },
+                    {
+                        "hour": 0,
+                        "description": "Robotic Science and Systems",
+                        "type": "PLAIN_COURSE",
+                        "subject": "CS",
+                        "classId": 4610
+                    },
+                    {
+                        "hour": 0,
+                        "description": "Mobile and Wireless Systems",
+                        "type": "PLAIN_COURSE",
+                        "subject": "CS",
+                        "classId": 4710
+                    },
+                    {
+                        "hour": 0,
+                        "description": "Network Security",
+                        "type": "PLAIN_COURSE",
+                        "subject": "CY",
+                        "classId": 4740
+                    }
+                ]
+            }
+        ]
+    }
+}

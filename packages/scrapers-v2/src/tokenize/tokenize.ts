@@ -317,7 +317,8 @@ const constructRow = (
       return constructRangeBoundedMaybeExceptions($, tds);
     case HRowType.RANGE_UNBOUNDED:
       return constructRangeUnbounded($, tds);
-
+    case HRowType.COMMENT_COUNT:
+      throw new Error("We don't support comment counts yet!")
     default:
       return assertUnreachable(type);
   }
