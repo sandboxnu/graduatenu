@@ -1,0 +1,16 @@
+version: "3"
+
+services:
+  postgres:
+    image: postgres:13
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_USERNAME: postgres
+      POSTGRES_PASSWORD: graduatenu
+      POSTGRES_DB: test
+    volumes:
+      - ./graduatenu-db-data:/var/lib/postgresql/data
+
+volumes:
+  graduatenu_db_data:

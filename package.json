@@ -11,20 +11,23 @@
     ]
   },
   "scripts": {
-    "dev": "yarn foreach \"@graduate/(common|api|frontend|api-client)\" run dev",
     "dev:v2": "concurrently \"yarn foreach '@graduate/(common|api-v2|frontend-v2|api-client)' run dev\" \"yarn dev:proxy\"",
+    "prod:v2": "concurrently \"yarn foreach '@graduate/(common|api-v2|frontend-v2|api-client)' run prod\" \"yarn dev:proxy\"",
     "foreach": "yarn workspaces foreach --parallel --verbose --interlaced --include",
     "dev:proxy": "node infrastructure/develop/dev-proxy.js",
     "dev:db:up": "docker-compose -f infrastructure/develop/docker-compose.yml up -d",
     "dev:db:down": "docker-compose -f infrastructure/develop/docker-compose.yml down",
-    "prod:start": "concurrently \"yarn packages/api dev\" \"yarn packages/frontend docker:start\"",
+    "frontend:docker:build": "docker build -t graduatenu-frontend -f infrastructure/prod/Dockerfile.app .",
+    "frontend:docker:run": "docker run -p 3000:3000 graduatenu-frontend",
+    "backend:docker:build": "docker build -t graduatenu-backend -f infrastructure/prod/Dockerfile.server .",
+    "backend:docker:run": "docker run -p 3001:3001 graduatenu-backend",
     "lint": "eslint packages/ --ext .ts,.tsx .",
     "tsc": "yarn workspaces foreach -v --exclude . run tsc",
     "g:babel": "cd $INIT_CWD && babel",
-    "g:cross-env": "cd $INIT_CWD && cross-env",
-    "postinstall": "husky install"
+    "g:cross-env": "cd $INIT_CWD && cross-env"
   },
   "dependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.18.6",
     "@babel/plugin-proposal-decorators": "^7.17.8",
     "cross-env": "^7.0.3"
   },

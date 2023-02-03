@@ -1,7 +1,15 @@
 import {
   AndErrorNoSolution,
+  AndErrorUnsatChild,
+  AndErrorUnsatChildAndNoSolution,
+  ChildError,
+  CourseError,
   getConcentrationsRequirement,
   Major2ValidationTracker,
+  MajorValidationError,
+  MajorValidationResult,
+  SectionError,
+  TotalCreditsRequirementError,
   validateMajor2,
   validateRequirement,
 } from "../src/major2-validation";
@@ -9,21 +17,19 @@ import {
   Concentrations2,
   IAndCourse2,
   ICourseRange2,
-  IMajorRequirementGroup,
   IOrCourse2,
   IRequiredCourse,
   IXofManyCourse,
-  Major,
   Major2,
-  Requirement,
   Requirement2,
-  ScheduleCourse,
+  ScheduleCourse2,
   Section,
   Err,
   Ok,
+  ResultType,
 } from "../src/types";
 import { assertUnreachable, courseToString } from "../src/course-utils";
-import bscs from "../../scrapers/test/mock_majors/bscs.json";
+import bscs from "./mock-majors/bscs.json";
 
 type TestCourse = IRequiredCourse & { credits: number };
 const course = (
@@ -36,12 +42,13 @@ const course = (
   classId: classId,
   credits: credits ?? 4,
 });
-const convert = (c: TestCourse): ScheduleCourse => ({
+const convert = (c: TestCourse): ScheduleCourse2<unknown> => ({
   ...c,
   classId: String(c.classId),
   name: courseToString(c),
   numCreditsMax: c.credits,
   numCreditsMin: c.credits,
+  id: null,
 });
 const or = (...courses: Requirement2[]): IOrCourse2 => ({
   type: "OR",
@@ -90,6 +97,12 @@ const solution = (...sol: (string | TestCourse)[]) => {
     minCredits: credits,
     maxCredits: credits,
     sol: sol.map((s) => (typeof s === "string" ? s : courseToString(s))),
+  };
+};
+const child = (error: MajorValidationError, index: number): ChildError => {
+  return {
+    childIndex: index,
+    ...error,
   };
 };
 const concentrations = (
@@ -289,7 +302,7 @@ describe("validateRequirement suite", () => {
   });
 });
 
-function convertToMajor2(old: Major): Major2 {
+function convertToMajor2(old: any): Major2 {
   return {
     name: old.name,
     totalCreditsRequired: old.totalCreditsRequired,
@@ -300,7 +313,7 @@ function convertToMajor2(old: Major): Major2 {
     concentrations: {
       minOptions: old.concentrations.minOptions,
       concentrationOptions: old.concentrations.concentrationOptions.map(
-        (c) => ({
+        (c: any) => ({
           type: "SECTION",
           title: c.name,
           minRequirementCount: c.requirementGroups.length,
@@ -313,7 +326,7 @@ function convertToMajor2(old: Major): Major2 {
   };
 }
 
-function convertToSection(r: IMajorRequirementGroup): Section {
+function convertToSection(r: any): Section {
   switch (r.type) {
     case "AND":
       return {
@@ -343,11 +356,11 @@ function convertToSection(r: IMajorRequirementGroup): Section {
         requirements: [convertToRequirement2(r.requirements)],
       };
     default:
-      return assertUnreachable(r);
+      return assertUnreachable(r as never);
   }
 }
 
-function convertToRequirement2(r: Requirement): Requirement2 {
+function convertToRequirement2(r: any): Requirement2 {
   switch (r.type) {
     case "OR":
       return {
@@ -363,7 +376,7 @@ function convertToRequirement2(r: Requirement): Requirement2 {
       return {
         type: "XOM",
         numCreditsMin: r.creditsRequired,
-        courses: r.ranges.map((r) => ({
+        courses: r.ranges.map((r: any) => ({
           type: "RANGE",
           exceptions: [],
           idRangeStart: r.idRangeStart,
@@ -380,7 +393,7 @@ function convertToRequirement2(r: Requirement): Requirement2 {
         courses: r.courses.map(convertToRequirement2),
       };
     default:
-      return assertUnreachable(r);
+      return assertUnreachable(r as never);
   }
 }
 
@@ -583,3 +596,132 @@ describe("integration suite", () => {
     expect(actual).toEqual(Ok([expectedWithChem, expectedWithPhys]));
   });
 });
+
+const MajorErr = (
+  reqsError?: MajorValidationError,
+  creditsError?: TotalCreditsRequirementError
+): MajorValidationResult => {
+  return {
+    err: {
+      majorRequirementsError: reqsError,
+      totalCreditsRequirementError: creditsError,
+    },
+    type: ResultType.Err,
+  };
+};
+
+const Major2 = (
+  requirementSections: Section[],
+  name = "Demo Major",
+  yearVersion = 0,
+  totalCreditsRequired = 0
+): Major2 => {
+  return {
+    name: name,
+    totalCreditsRequired: totalCreditsRequired,
+    yearVersion: yearVersion,
+    requirementSections: requirementSections,
+    concentrations: {
+      minOptions: 0,
+      concentrationOptions: [],
+    },
+  };
+};
+
+describe("NoSolution and UnsatChild", () => {
+  const capstone = section("Capstone", 1, [
+    or(course("CS", 4100), course("CS", 4300)),
+  ]);
+  const elective = section("Elective", 1, [
+    xom(8, [
+      range(0, "CS", 2500, 5010, []),
+      range(0, "DS", 2000, 4900, []),
+      range(0, "IS", 2000, 4900, []),
+    ]),
+  ]);
+  const presentation = section("Presentation", 1, [course("THTR", 1170)]);
+
+  const base = Major2([capstone, elective, presentation]);
+  const courses = [course("CS", 4100), course("CS", 4300)];
+  const convertedCourses = courses.map(convert);
+  // Former bug case
+  test("Base Case", () => {
+    const actual = validateMajor2(base, convertedCourses);
+    expect(actual).toEqual(
+      MajorErr(
+        AndErrorUnsatChildAndNoSolution(
+          [
+            child(
+              SectionError(presentation, [courseErr("THTR", 1170, 0)], 0),
+              2
+            ),
+          ],
+          1
+        )
+      )
+    );
+  });
+
+  // All indices should stay the same
+  const order1 = Major2([elective, capstone, presentation]);
+  test("Order Change 1", () => {
+    const actual = validateMajor2(order1, convertedCourses);
+    expect(actual).toEqual(
+      MajorErr(
+        AndErrorUnsatChildAndNoSolution(
+          [
+            child(
+              SectionError(presentation, [courseErr("THTR", 1170, 0)], 0),
+              2
+            ),
+          ],
+          1
+        )
+      )
+    );
+  });
+
+  // UnSat and NoSolution index change.
+  const order2 = Major2([presentation, elective, capstone]);
+  test("Order Change 2", () => {
+    const actual = validateMajor2(order2, convertedCourses);
+    expect(actual).toEqual(
+      MajorErr(
+        AndErrorUnsatChildAndNoSolution(
+          [
+            child(
+              SectionError(presentation, [courseErr("THTR", 1170, 0)], 0),
+              0
+            ),
+          ],
+          2
+        )
+      )
+    );
+  });
+
+  // If there are enough courses for both, no NoSolution
+  const enough = [
+    course("CS", 4100),
+    course("CS", 4300),
+    course("CS", 4410),
+  ].map(convert);
+  test("Enough Courses", () => {
+    const actual = validateMajor2(base, enough);
+    expect(actual).toEqual(
+      MajorErr(
+        AndErrorUnsatChild([
+          child(SectionError(presentation, [courseErr("THTR", 1170, 0)], 0), 2),
+        ])
+      )
+    );
+  });
+});
+
+const courseErr = (
+  subject: string,
+  courseNum: number,
+  childIndex: number
+): ChildError => {
+  return child(CourseError(course(subject, courseNum)), childIndex);
+};

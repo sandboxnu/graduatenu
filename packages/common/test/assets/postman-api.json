@@ -1,0 +1,369 @@
+{
+  "info": {
+    "_postman_id": "4d5090bc-f868-4ab5-b772-d6d8a8a4b5c7",
+    "name": "GraduateNU",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "12208846"
+  },
+  "item": [
+    {
+      "name": "Create Student",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"fullName\":\"Aryan Shah\",\n    \"email\":\"aryan10@gmail.com\",\n    \"password\":\"aryan1234\",\n    \"academicYear\":2019,\n    \"graduateYear\":2023,\n    \"catalogYear\":2018,\n    \"major\":\"Computer Science\",\n    \"createdAt\":12,\n    \"nuid\": \"000000000\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{API_URL}}/{{STUDENTS}}",
+          "host": ["{{API_URL}}"],
+          "path": ["{{STUDENTS}}"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Students",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{API_URL}}/{{STUDENTS}}?isWithPlans=true",
+          "host": ["{{API_URL}}"],
+          "path": ["{{STUDENTS}}"],
+          "query": [
+            {
+              "key": "isWithPlans",
+              "value": "true"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete Student",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{API_URL}}/{{STUDENTS}}/:uuid",
+          "host": ["{{API_URL}}"],
+          "path": ["{{STUDENTS}}", ":uuid"],
+          "variable": [
+            {
+              "key": "uuid",
+              "value": "88f1c807-cef5-4b5d-9800-0eac2024a169"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Login Student",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"email\":\"aryan101@gmail.com\",\n    \"password\":\"aryan1234\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{API_URL}}/{{AUTH}}/login",
+          "host": ["{{API_URL}}"],
+          "path": ["{{AUTH}}", "login"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Logout Student",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Cookie",
+            "value": "auth_cookie=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFyeWFuMUBnbWFpbC5jb20iLCJ1dWlkIjoiZGNhMWM5NTUtYzUxMS00YTVjLTk4OTMtOTEyNTdjN2JmY2ZhIiwiaWF0IjoxNjU4NTI4MTMyLCJleHAiOjE2NTg2MTQ1MzJ9.RGRYvmfrpdIrJU0RkfWkqgeRiCwDgkMBBM_fs8FJ7p4; Path=/; HttpOnly;",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{API_URL}}/{{AUTH}}/logout",
+          "host": ["{{API_URL}}"],
+          "path": ["{{AUTH}}", "logout"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Student",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{API_URL}}/{{STUDENTS}}/:uuid",
+          "host": ["{{API_URL}}"],
+          "path": ["{{STUDENTS}}", ":uuid"],
+          "variable": [
+            {
+              "key": "uuid",
+              "value": "e577d120-92ff-4001-ace3-a9a5cd916efe"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Register Student",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"fullName\":\"Aryan Shah\",\n    \"email\":\"aryan101@gmail.com\",\n    \"password\":\"aryan1234\",\n    \"passwordConfirm\":\"aryan1234\",\n    \"academicYear\":2019,\n    \"graduateYear\":2023,\n    \"catalogYear\":2019,\n    \"major\":\"Computer Science\",\n    \"nuid\":\"000000000\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{API_URL}}/{{AUTH}}/register",
+          "host": ["{{API_URL}}"],
+          "path": ["{{AUTH}}", "register"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Me",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "Cookie",
+            "value": "auth_cookie=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFyeWFuMUBnbWFpbC5jb20iLCJ1dWlkIjoiZGNhMWM5NTUtYzUxMS00YTVjLTk4OTMtOTEyNTdjN2JmY2ZhIiwiaWF0IjoxNjU4NTI2Nzg0LCJleHAiOjE2NTg2MTMxODR9.zZqQAIwwJuz7aj9S3vb8oPyeeVCPyFXi-RitHurR4u8; Path=/; HttpOnly;",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{API_URL}}/{{STUDENTS}}/me?isWithPlans=true",
+          "host": ["{{API_URL}}"],
+          "path": ["{{STUDENTS}}", "me"],
+          "query": [
+            {
+              "key": "isWithPlans",
+              "value": "true"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete Me",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{API_URL}}/{{STUDENTS}}/me",
+          "host": ["{{API_URL}}"],
+          "path": ["{{STUDENTS}}", "me"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Onboard",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFyeWFuMUBnbWFpbC5jb20iLCJ1dWlkIjoiZGQyMmU1ODEtMzEwOS00ZmE2LThkN2MtZGQ0NDI5ZDhmMWQ5IiwiaWF0IjoxNjU2M",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"fullName\":\"Aryan Shah\",\n    \"academicYear\":2019,\n    \"graduateYear\":2023,\n    \"catalogYear\":2019,\n    \"major\":\"Computer Science\",\n    \"nuid\":\"000000000\",\n    \"coopCycle\": \"fall\",\n    \"coursesCompleted\": {},\n    \"coursesTransfered\": {},\n    \"primaryPlanId\": 1,\n    \"concentration\": \"AI\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{API_URL}}/{{STUDENTS}}/me/onboard",
+          "host": ["{{API_URL}}"],
+          "path": ["{{STUDENTS}}", "me", "onboard"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update Student",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"primaryPlanId\": 1\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{API_URL}}/{{STUDENTS}}/me",
+          "host": ["{{API_URL}}"],
+          "path": ["{{STUDENTS}}", "me"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Plan",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"name\": \"New Plan\",\n    \"major\": \"Computer Science\",\n    \"coopCycle\": \"Fall\",\n    \"concentration\": \"Software\",\n    \"catalogYear\": 2019,\n    \"courseWarnings\": [],\n    \"warnings\": [],\n    \"schedule\": {\n        \"years\": [\n            {\n                \"year\": 2019,\n                \"fall\": {\n                    \"season\": \"FL\",\n                    \"year\": 2019,\n                    \"termId\": 1,\n                    \"status\": \"CLASSES\",\n                    \"classes\": []\n                },\n                \"spring\": {\n                    \"season\": \"SP\",\n                    \"year\": 2019,\n                    \"termId\": 1,\n                    \"status\": \"CLASSES\",\n                    \"classes\": []\n                },\n                \"summer1\": {\n                    \"season\": \"S1\",\n                    \"year\": 2019,\n                    \"termId\": 1,\n                    \"status\": \"CLASSES\",\n                    \"classes\": []\n                },\n                \"summer2\": {\n                    \"season\": \"S2\",\n                    \"year\": 2019,\n                    \"termId\": 1,\n                    \"status\": \"CLASSES\",\n                    \"classes\": []\n                },\n                \"isSummerFull\": false\n            },\n            {\n                \"year\": 2020,\n                \"fall\": {\n                    \"season\": \"FL\",\n                    \"year\": 2020,\n                    \"termId\": 1,\n                    \"status\": \"CLASSES\",\n                    \"classes\": []\n                },\n                \"spring\": {\n                    \"season\": \"SP\",\n                    \"year\": 2020,\n                    \"termId\": 1,\n                    \"status\": \"CLASSES\",\n                    \"classes\": []\n                },\n                \"summer1\": {\n                    \"season\": \"S1\",\n                    \"year\": 2020,\n                    \"termId\": 1,\n                    \"status\": \"CLASSES\",\n                    \"classes\": []\n                },\n                \"summer2\": {\n                    \"season\": \"S2\",\n                    \"year\": 2020,\n                    \"termId\": 1,\n                    \"status\": \"CLASSES\",\n                    \"classes\": []\n                },\n                \"isSummerFull\": false\n            },\n            {\n                \"year\": 2021,\n                \"fall\": {\n                    \"season\": \"FL\",\n                    \"year\": 2021,\n                    \"termId\": 1,\n                    \"status\": \"CLASSES\",\n                    \"classes\": []\n                },\n                \"spring\": {\n                    \"season\": \"SP\",\n                    \"year\": 2021,\n                    \"termId\": 1,\n                    \"status\": \"CLASSES\",\n                    \"classes\": []\n                },\n                \"summer1\": {\n                    \"season\": \"S1\",\n                    \"year\": 2021,\n                    \"termId\": 1,\n                    \"status\": \"CLASSES\",\n                    \"classes\": []\n                },\n                \"summer2\": {\n                    \"season\": \"S2\",\n                    \"year\": 2021,\n                    \"termId\": 1,\n                    \"status\": \"CLASSES\",\n                    \"classes\": []\n                },\n                \"isSummerFull\": false\n            },\n            {\n                \"year\": 2022,\n                \"fall\": {\n                    \"season\": \"FL\",\n                    \"year\": 2022,\n                    \"termId\": 1,\n                    \"status\": \"CLASSES\",\n                    \"classes\": []\n                },\n                \"spring\": {\n                    \"season\": \"SP\",\n                    \"year\": 2022,\n                    \"termId\": 1,\n                    \"status\": \"CLASSES\",\n                    \"classes\": []\n                },\n                \"summer1\": {\n                    \"season\": \"S1\",\n                    \"year\": 2022,\n                    \"termId\": 1,\n                    \"status\": \"CLASSES\",\n                    \"classes\": []\n                },\n                \"summer2\": {\n                    \"season\": \"S2\",\n                    \"year\": 2022,\n                    \"termId\": 1,\n                    \"status\": \"CLASSES\",\n                    \"classes\": []\n                },\n                \"isSummerFull\": false\n            }\n        ]\n    }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{API_URL}}/{{PLANS}}/",
+          "host": ["{{API_URL}}"],
+          "path": ["{{PLANS}}", ""]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update Plan",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"schedule\": {}\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{API_URL}}/{{PLANS}}/1",
+          "host": ["{{API_URL}}"],
+          "path": ["{{PLANS}}", "1"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Plan",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{API_URL}}/{{PLANS}}/1",
+          "host": ["{{API_URL}}"],
+          "path": ["{{PLANS}}", "1"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete Plan",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{API_URL}}/{{PLANS}}/1",
+          "host": ["{{API_URL}}"],
+          "path": ["{{PLANS}}", "1"]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [""]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [""]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "API_URL",
+      "value": "http://localhost:3001/api"
+    },
+    {
+      "key": "PLANS",
+      "value": "plans"
+    },
+    {
+      "key": "STUDENTS",
+      "value": "students"
+    },
+    {
+      "key": "AUTH",
+      "value": "auth"
+    }
+  ]
+}

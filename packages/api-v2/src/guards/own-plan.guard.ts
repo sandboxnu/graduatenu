@@ -3,9 +3,11 @@ import {
   CanActivate,
   ExecutionContext,
   Inject,
+  Logger,
 } from "@nestjs/common";
-import { PlanService } from "src/plan/plan.service";
-import { Student } from "src/student/entities/student.entity";
+import { PlanService } from "../plan/plan.service";
+import { Student } from "../student/entities/student.entity";
+import { formatServiceCtx } from "../../src/utils";
 
 /**
  * Used to protect GET/PUT/PATCH :id Plan controller methods from being accessed
@@ -14,6 +16,8 @@ import { Student } from "src/student/entities/student.entity";
  */
 @Injectable()
 export class OwnPlanGuard implements CanActivate {
+  private readonly logger: Logger = new Logger();
+
   constructor(@Inject(PlanService) private readonly planService: PlanService) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
@@ -35,14 +39,22 @@ export class OwnPlanGuard implements CanActivate {
     const planId = request.params.id;
 
     /**
-     * Allow methods that don't have an id param, since they shouldn't be guarded
-     * by this guard in the first place.
+     * Allow methods that don't have an id param, since they shouldn't be
+     * guarded by this guard in the first place.
      */
     if (!planId) {
       return true;
     }
 
     // ensure the plan is owned by the logged in user
-    return await this.planService.isPlanOwnedByStudent(planId, loggedInUser);
+    const res = this.planService.isPlanOwnedByStudent(planId, loggedInUser);
+    if (!res) {
+      this.logger.debug(
+        { message: "Plan not owned by student", loggedInUser, planId },
+        formatServiceCtx("OwnPlanGuard", "canActivate")
+      );
+    }
+
+    return res;
   }
 }

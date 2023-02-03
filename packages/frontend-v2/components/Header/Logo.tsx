@@ -1,11 +1,25 @@
-import { Heading, HStack } from "@chakra-ui/react";
+import { Heading, HStack, Image } from "@chakra-ui/react";
+import Link from "next/link";
 
 export const Logo = (): JSX.Element => {
   return (
-    <HStack flexDirection="row" alignItems="center" spacing="2px">
-      <Heading size="lg" color="primary.main" fontFamily="logo">Graduate</Heading>
-      <Heading size="xl" color="blue.700" pb="2%">NU</Heading>
-    </HStack>
+    <Link href="/" passHref>
+      <HStack alignItems="center" spacing="2xs">
+        <Image
+          src="/logo.png"
+          objectFit="contain"
+          boxSize="50"
+          alt="GraduateNU logo"
+        />
+        <HStack alignItems="center" spacing="2px">
+          <Heading size="lg" color="primary.red.main" fontFamily="logo">
+            Graduate
+          </Heading>
+          <Heading size="xl" color="primary.blue.dark.main" pb="2%">
+            NU
+          </Heading>
+        </HStack>
+      </HStack>
+    </Link>
   );
-
-}
+};

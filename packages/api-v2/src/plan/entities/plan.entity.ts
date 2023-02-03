@@ -6,7 +6,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
-import { Schedule } from "@graduate/common";
+import { Schedule2 } from "@graduate/common";
 import { Student } from "../../student/entities/student.entity";
 
 @Entity()
@@ -23,13 +23,10 @@ export class Plan {
   student: Student;
 
   @Column({ type: "json" })
-  schedule: Schedule;
+  schedule: Schedule2<null>;
 
   @Column()
   major: string;
-
-  @Column()
-  coopCycle: string;
 
   @Column({ nullable: true })
   concentration: string;

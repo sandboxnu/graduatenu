@@ -12,9 +12,9 @@ import {
   ParseIntPipe,
 } from "@nestjs/common";
 import { PlanService } from "./plan.service";
-import { JwtAuthGuard } from "src/guards/jwt-auth.guard";
-import { AuthenticatedRequest } from "src/auth/interfaces/authenticated-request";
-import { OwnPlanGuard } from "src/guards/own-plan.guard";
+import { JwtAuthGuard } from "../guards/jwt-auth.guard";
+import { AuthenticatedRequest } from "../auth/interfaces/authenticated-request";
+import { OwnPlanGuard } from "../guards/own-plan.guard";
 import {
   CreatePlanDto,
   UpdatePlanDto,
@@ -26,9 +26,7 @@ import {
 export class PlanController {
   constructor(private readonly planService: PlanService) {}
 
-  /**
-   * Creates a plan for the signed in user.
-   */
+  /** Creates a plan for the signed in user. */
   @UseGuards(JwtAuthGuard)
   @Post()
   async create(

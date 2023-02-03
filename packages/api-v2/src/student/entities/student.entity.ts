@@ -1,11 +1,11 @@
 import {
-  Entity,
-  Column,
-  PrimaryGeneratedColumn,
   BeforeInsert,
+  Column,
   CreateDateColumn,
-  UpdateDateColumn,
+  Entity,
   OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from "typeorm";
 import * as bcrypt from "bcrypt";
 import { Exclude } from "class-transformer";
@@ -20,8 +20,11 @@ export class Student {
   @Column({ nullable: true })
   nuid: string;
 
-  @Column()
+  @Column({ nullable: true })
   fullName: string;
+
+  @Column({ default: false })
+  isOnboarded: boolean;
 
   @Column({ unique: true })
   email: string;
@@ -66,7 +69,8 @@ export class Student {
   @UpdateDateColumn({ default: () => "NOW()" })
   updatedAt: Date;
 
-  // attached to the student object when the student logs in
+  @Exclude()
+  // attached to the student object to be stored as a cookie only
   accessToken?: string;
 
   @BeforeInsert()

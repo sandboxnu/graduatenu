@@ -3,9 +3,9 @@ name: CI
 on: [push]
 
 jobs:
-  run-frontend-v2-lint:
+  lint:
     runs-on: ubuntu-latest
-    name: Run linting for frontend v2
+    name: Run linting for all packages
     steps:
       - uses: actions/checkout@v3
       - name: install node v16
@@ -13,20 +13,7 @@ jobs:
         with:
           node-version: 16
       - uses: bahmutov/npm-install@v1
-      - run: yarn packages/frontend-v2 lint
-  run-scrapers-tests:
-    runs-on: ubuntu-latest
-    name: Scraper Tests
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-      - name: Setup node
-        uses: actions/setup-node@v3
-        with:
-          node-version: "14"
-      - run: yarn install --immutable
-      - name: Run Jest Tests
-        run: yarn packages/scrapers test
+      - run: yarn lint
   run-scrapers-v2-tests:
     runs-on: ubuntu-latest
     name: Scraper V2 Tests
@@ -60,12 +47,12 @@ jobs:
         uses: actions/checkout@v3
       - run: yarn install --immutable
       - name: Build Docker image for frontend
-        run: yarn packages/frontend docker:build
-  build-api-image-and-run-tests:
+        run: yarn frontend:docker:build
+  build-backend-image:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-      - name: Build Docker image and run tests for api
-        run: yarn packages/api test
+      - run: yarn install --immutable
+      - name: Build Docker image for backend
+        run: yarn backend:docker:build

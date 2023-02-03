@@ -13,4 +13,4 @@ services:
       - ./graduatenu-db-data:/var/lib/postgresql/data
 
 volumes:
-  graudatenu_db_data:
+  graduatenu_db_data:

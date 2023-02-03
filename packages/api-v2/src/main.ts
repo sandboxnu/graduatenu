@@ -1,12 +1,22 @@
-import { ClassSerializerInterceptor, ValidationPipe } from "@nestjs/common";
+import {
+  ClassSerializerInterceptor,
+  LoggerService,
+  ValidationPipe,
+} from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { NestFactory, Reflector } from "@nestjs/core";
+import { GraduateLogger } from "src/graduate-logger";
 import { AppModule } from "./app.module";
 import { EnvironmentVariables } from "./environment-variables";
+import * as cookieParser from "cookie-parser";
 
 async function bootstrap() {
+  // configure custom logger
+  const graduateLogger: LoggerService = new GraduateLogger();
+  graduateLogger.setLogLevels(["log", "error", "warn", "debug"]);
+
   const app = await NestFactory.create(AppModule, {
-    logger: ["log", "error", "warn", "debug", "verbose"],
+    logger: graduateLogger,
   });
 
   /**
@@ -20,17 +30,18 @@ async function bootstrap() {
     })
   );
 
+  /** Global middleware to parse cookies from requests. */
+  app.use(cookieParser());
+
   /**
    * Global intercerceptor that transforms outgoing data and strips properties
-   * with the "@Exclude" decorator from being sent in the response.
-   * For this to work, returned objects in controllers have to be an actual instance
-   * of the type with the appropriate decorators.
+   * with the "@Exclude" decorator from being sent in the response. For this to
+   * work, returned objects in controllers have to be an actual instance of the
+   * type with the appropriate decorators.
    */
   app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
 
-  /**
-   * All paths are prefixed with /api.
-   */
+  /** All paths are prefixed with /api. */
   app.setGlobalPrefix("api");
 
   const configService: ConfigService<EnvironmentVariables, true> =
