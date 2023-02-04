@@ -2,12 +2,13 @@ import { Box, Flex, Spinner, Text } from "@chakra-ui/react";
 import { ScheduleCourse2, Section } from "@graduate/common";
 import { useState } from "react";
 import SectionRequirement from "./SectionRequirement";
+import { SidebarValidationStatus } from "./Sidebar";
 
 interface SidebarSectionProps {
   section: Section;
   courseData: { [id: string]: ScheduleCourse2<null> };
   dndIdPrefix: string;
-  isValid: boolean;
+  validationStatus: SidebarValidationStatus;
   loading?: boolean;
 }
 
@@ -15,14 +16,17 @@ const SidebarSection: React.FC<SidebarSectionProps> = ({
   section,
   courseData,
   dndIdPrefix,
-  isValid,
+  validationStatus,
   loading,
 }) => {
   const [opened, setOpened] = useState(false);
 
+  const grey = "neutral.400"
+  const green = "states.success.900"
+
   return (
     <Box borderTop="1px solid white" cursor="pointer" userSelect="none">
-      <Text
+      <Box
         onClick={() => {
           setOpened(!opened);
         }}
@@ -38,25 +42,42 @@ const SidebarSection: React.FC<SidebarSectionProps> = ({
         _active={{
           backgroundColor: "neutral.200",
         }}
+        display="flex"
+        position="sticky"
+        top="0px"
+        zIndex={1}
+        boxShadow="0px 5px 10px -6px #00000099"
       >
-        {isValid ? (
-          <span
-            style={{
-              background: "green",
-              color: "white",
-              padding: "3px 6px",
-              width: "26px",
-              marginRight: "6px",
-              borderRadius: "30px",
-            }}
+        <Box
+          bg={validationStatus === SidebarValidationStatus.Complete ? green : 
+            validationStatus === SidebarValidationStatus.Error ? grey : "transparent"}
+          borderWidth="1px"
+          borderColor={validationStatus === SidebarValidationStatus.Complete ? green : grey}
+          color={validationStatus === SidebarValidationStatus.Loading ? grey : "white"}
+          padding="sm md"
+          width="26px"
+          height="26px"
+          display="flex"
+          transition="background 0.25s ease, color 0.25s ease, border 0.25s ease"
+          alignItems="center"
+          justifyContent="center"
+          marginRight="8px"
+          borderRadius="8px"
           >
-            ✓
-          </span>
-        ) : (
-          ""
-        )}
+            <Text 
+              position="absolute" 
+              opacity={validationStatus === SidebarValidationStatus.Complete ? 1 : 0} transition="opacity 0.25s ease">✓</Text>
+            <Text 
+              position="absolute" 
+              opacity={validationStatus === SidebarValidationStatus.Error ? 1 : 0} transition="opacity 0.25s ease">X</Text>
+            <Spinner 
+              size="xs" 
+              color="grey" 
+              position="absolute" 
+              opacity={validationStatus === SidebarValidationStatus.Loading ? 1 : 0} transition="opacity 0.25s ease"/>
+            </Box>
         {section.title}
-      </Text>
+      </Box>
       <Box
         style={{ display: opened ? "" : "none" }}
         backgroundColor="neutral.900"
