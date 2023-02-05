@@ -1,9 +1,10 @@
-import { HRow, HRowType } from "../tokenize/types";
+import { HRow, HRowType, TextRow } from "../tokenize/types";
 import {
   IAndCourse2,
   IOrCourse2,
   IRequiredCourse,
   Requirement2,
+  Section,
 } from "@graduate/common";
 
 // grab the wrapper of the row type enum from tokenize types
@@ -19,6 +20,15 @@ const convertCourses = (
 ): IRequiredCourse[] => {
   return cs.map((c) => ({ ...c, type: "COURSE" }));
 };
+
+export const processSection = ([header, requirements]: [TextRow<HRowType.HEADER>, Requirement2[]]): Section => {
+  return {
+    type: "SECTION",
+    title: header.description,
+    requirements: requirements,
+    minRequirementCount: requirements.length
+  }
+}
 
 export const processCourse: Processor<
   HRowType.PLAIN_COURSE | HRowType.OR_COURSE

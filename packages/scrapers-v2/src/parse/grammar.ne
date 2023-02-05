@@ -27,7 +27,12 @@ const postprocess = require("./postprocess");
 
 # main entrypoint
 ## ranges may produce arrays of requirements, so call flat
-main -> requirement2_list                                  {% d => d[0].flat() %}
+main -> requirement2_section                                  {% d => d[0].flat() %}
+
+# sections!
+requirement2_section ->
+    %HEADER requirement2_list                              {% postprocess.processSection %}
+
 ## to avoid ambiguity, ANDs cannot follow ANDs
 requirement2_list ->
     nonAndCourseList                                       {% id %}
@@ -66,3 +71,4 @@ andCourse ->
   ) :+                                                     {% postprocess.processAnd %}
 
 # comment cases
+comment -> %COMMENT
