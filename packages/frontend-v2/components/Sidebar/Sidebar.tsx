@@ -65,10 +65,11 @@ let currentRequestNum = 0;
 
 const Sidebar: React.FC<SidebarProps> = memo(({ selectedPlan }) => {
   const router = useRouter();
-  const { major, isLoading: isMajorLoading, error } = useMajor(
-    selectedPlan.catalogYear,
-    selectedPlan.major
-  );
+  const {
+    major,
+    isLoading: isMajorLoading,
+    error,
+  } = useMajor(selectedPlan.catalogYear, selectedPlan.major);
   const concentration = major?.concentrations.concentrationOptions.find(
     (concentration) => concentration.title === selectedPlan.concentration
   );
@@ -140,8 +141,7 @@ const Sidebar: React.FC<SidebarProps> = memo(({ selectedPlan }) => {
 
   const [courseData, setCourseData] = useState({});
 
-  
-  const getAllCoursesInMajor = ():  { subject: string; classId: string }[]=>{
+  const getAllCoursesInMajor = (): { subject: string; classId: string }[] => {
     if (!major) {
       return [];
     }
@@ -170,16 +170,17 @@ const Sidebar: React.FC<SidebarProps> = memo(({ selectedPlan }) => {
       coursesQueryData.push({ subject, classId });
     }
 
-    if(coursesQueryData){
-      return coursesQueryData
+    if (coursesQueryData) {
+      return coursesQueryData;
     } else {
-      return []
+      return [];
     }
-  }
+  };
 
   const majorCourses = getAllCoursesInMajor();
 
-  const {courses, isLoading: isCoursesLoading} = useFetchSearchCourses(majorCourses)
+  const { courses, isLoading: isCoursesLoading } =
+    useFetchSearchCourses(majorCourses);
 
   const courseMap: { [id: string]: ScheduleCourse2<null> } = courseData;
   if (courses) {
@@ -188,8 +189,7 @@ const Sidebar: React.FC<SidebarProps> = memo(({ selectedPlan }) => {
         courseMap[`${course.subject}${course.classId}`] = course;
       }
     }
-    setCourseData(courseMap);
-    if(isCoursesLoading){
+    if (isCoursesLoading) {
     }
   }
 
@@ -245,7 +245,7 @@ const Sidebar: React.FC<SidebarProps> = memo(({ selectedPlan }) => {
                 key={section.title}
                 section={section}
                 validationStatus={sectionValidationStatus}
-                courseData={courseData}
+                courseData={courseMap}
                 dndIdPrefix={`${SIDEBAR_DND_ID_PREFIX}-${index}`}
                 loading={isCoursesLoading}
               />
