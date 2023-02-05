@@ -1,5 +1,4 @@
 import { Box, Text } from "@chakra-ui/react";
-import { SearchAPI } from "@graduate/api-client";
 import {
   IRequiredCourse,
   MajorValidationError,
@@ -19,7 +18,6 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { useMajor } from "../../hooks/useMajor";
 import { WorkerMessage, WorkerMessageType, WorkerPostInfo } from "../../validation-worker/worker-messages";
-import { useSearchCourses } from "../../hooks/userSearchCourses";
 import { useFetchSearchCourses } from "../../hooks/useFetchSearchCourses";
 
 interface SidebarProps {
@@ -67,7 +65,7 @@ let currentRequestNum = 0;
 
 const Sidebar: React.FC<SidebarProps> = memo(({ selectedPlan }) => {
   const router = useRouter();
-  const { major, isLoading, error } = useMajor(
+  const { major, isLoading: isMajorLoading, error } = useMajor(
     selectedPlan.catalogYear,
     selectedPlan.major
   );
@@ -139,7 +137,6 @@ const Sidebar: React.FC<SidebarProps> = memo(({ selectedPlan }) => {
   useEffect(() => revalidateMajor(), [selectedPlan, major])
 
   const [courseData, setCourseData] = useState({});
-  const [loading, setLoading] = useState(true);
 
   
   const getAllCoursesInMajor = ():  { subject: string; classId: string }[]=>{
@@ -178,13 +175,23 @@ const Sidebar: React.FC<SidebarProps> = memo(({ selectedPlan }) => {
     }
   }
 
-  const courses = getAllCoursesInMajor();
+  const majorCourses = getAllCoursesInMajor();
 
-  const fetchCourses = () => {
-    useFetchSearchCourses(courses)
+  const {courses, isLoading: isCoursesLoading} = useFetchSearchCourses(majorCourses)
+
+  const courseMap: { [id: string]: ScheduleCourse2<null> } = courseData;
+  if (courses) {
+    for (const course of courses) {
+      if (course) {
+        courseMap[`${course.subject}${course.classId}`] = course;
+      }
+    }
+    setCourseData(courseMap);
+    if(isCoursesLoading){
+    }
   }
 
-  if (isLoading) {
+  if (isMajorLoading) {
     return <SidebarContainer title="Loading..." />;
   }
 
@@ -242,7 +249,7 @@ const Sidebar: React.FC<SidebarProps> = memo(({ selectedPlan }) => {
                 validationStatus={sectionValidationStatus}
                 courseData={courseData}
                 dndIdPrefix={"sidebar-" + index}
-                loading={loading}
+                loading={isCoursesLoading}
               />
             );
           })}
