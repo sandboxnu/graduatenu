@@ -8,6 +8,7 @@ import { PlanModule } from "./plan/plan.module";
 import { APP_INTERCEPTOR } from "@nestjs/core";
 import { LoggingInterceptor } from "./interceptors/logging.interceptor";
 import { MajorModule } from "./major/major.module";
+import { EmailModule } from "./email/email.module";
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { MajorModule } from "./major/major.module";
     AuthModule,
     PlanModule,
     MajorModule,
+    EmailModule,
   ],
   providers: [
     {
