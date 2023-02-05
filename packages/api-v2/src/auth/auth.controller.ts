@@ -15,10 +15,14 @@ import {
   SignUpStudentDto,
 } from "@graduate/common";
 import { Response } from "express";
+import EmailConformationService from "src/email/emailConformation.service";
 
 @Controller("auth")
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  constructor(
+    private readonly authService: AuthService,
+    private readonly emailConfirmationService: EmailConformationService
+  ) {}
 
   @Post("register")
   public async register(
@@ -40,7 +44,9 @@ export class AuthController {
       sameSite: "strict",
       secure: isSecure,
     });
-
+    await this.emailConfirmationService.sendVerificationLink(
+      createStudentDto.email
+    );
     return student;
   }
 
