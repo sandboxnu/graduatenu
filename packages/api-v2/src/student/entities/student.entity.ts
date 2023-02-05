@@ -29,6 +29,9 @@ export class Student {
   @Column({ unique: true })
   email: string;
 
+  @Column({ default: false })
+  isEmailConfirmed: boolean;
+
   @Column()
   @Exclude() // excludes this whenever an instance of Student is returned by a controller
   password: string;
