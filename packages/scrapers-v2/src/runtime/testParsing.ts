@@ -1,14 +1,21 @@
 import bscs from "@graduate/scrapers-v2/test/bscs-tokens.json"
 import { parseRows } from "../parse/parse"
-import { HRow, HRowType } from "@graduate/scrapers-v2/src/tokenize/types";
+import { HDocument, HRow, HRowType } from "@graduate/scrapers-v2/src/tokenize/types";
+import { CatalogEntryType } from "../classify/types";
 
+
+interface prevStep {
+  tokenized: HDocument;
+  url: string;
+  type: CatalogEntryType;
+}
 
 const bscsTokens: HRow[] = [
-      // {
-      //     "hour": 0,
-      //     "description": "Computer Science Overview",
-      //     "type":HRowType.HEADER
-      // },
+      {
+          "hour": 0,
+          "description": "Computer Science Overview",
+          "type":HRowType.HEADER
+      },
       {
           "hour": 1,
           "description": "First Year Seminar",
@@ -23,11 +30,11 @@ const bscsTokens: HRow[] = [
           "subject": "CS",
           "classId": 1210
       },
-      // {
-      //     "hour": 0,
-      //     "description": "Computer Science Fundamental Courses",
-      //     "type":HRowType.HEADER
-      // },
+      {
+          "hour": 0,
+          "description": "Computer Science Fundamental Courses",
+          "type":HRowType.HEADER
+      },
       {
           "hour": 5,
           "type":HRowType.AND_COURSE,
@@ -86,11 +93,11 @@ const bscsTokens: HRow[] = [
           "subject": "CS",
           "classId": 2810
       },
-      // {
-      //     "hour": 0,
-      //     "description": "Computer Science Required Courses",
-      //     "type":HRowType.HEADER
-      // },
+      {
+          "hour": 0,
+          "description": "Computer Science Required Courses",
+          "type":HRowType.HEADER
+      },
       {
           "hour": 4,
           "description": "Algorithms and Data",
@@ -143,16 +150,16 @@ const bscsTokens: HRow[] = [
           "subject": "CS",
           "classId": 4530
       },
-      // {
-      //     "hour": 0,
-      //     "description": "Security Required Course",
-      //     "type":HRowType.HEADER
-      // },
-      // {
-      //     "hour": 4,
-      //     "description": "Complete one of the following:",
-      //     "type":HRowType.COMMENT
-      // },
+      {
+          "hour": 0,
+          "description": "Security Required Course",
+          "type":HRowType.HEADER
+      },
+      {
+          "hour": 4,
+          "description": "Complete one of the following:",
+          "type":HRowType.COMMENT
+      },
       {
           "hour": 0,
           "description": "Foundations of Cybersecurity",
@@ -174,16 +181,16 @@ const bscsTokens: HRow[] = [
           "subject": "CY",
           "classId": 4740
       },
-      // {
-      //     "hour": 0,
-      //     "description": "Presentation Requirement",
-      //     "type":HRowType.HEADER
-      // },
-      // {
-      //     "hour": 4,
-      //     "description": "Choose one:",
-      //     "type":HRowType.COMMENT
-      // },
+      {
+          "hour": 0,
+          "description": "Presentation Requirement",
+          "type":HRowType.HEADER
+      },
+      {
+          "hour": 4,
+          "description": "Choose one:",
+          "type":HRowType.COMMENT
+      },
       {
           "hour": 0,
           "description": "Public Speaking",
@@ -240,21 +247,21 @@ const bscsTokens: HRow[] = [
           "subject": "THTR",
           "classId": 2345
       },
-      // {
-      //     "hour": 0,
-      //     "description": "Khoury Elective Courses",
-      //     "type":HRowType.HEADER
-      // },
-      // {
-      //     "hour": 0,
-      //     "description": "With adviser approval, directed study, research, project study, and appropriate graduate-level courses may also be taken as upper-division electives.",
-      //     "type":HRowType.COMMENT
-      // },
-      // {
-      //     "hour": 8,
-      //     "description": "Complete 8 credits of CS, CY, DS, or IS classes that are not already required. Choose courses within the following ranges:",
-      //     "type":HRowType.COMMENT
-      // },
+      {
+          "hour": 0,
+          "description": "Khoury Elective Courses",
+          "type":HRowType.HEADER
+      },
+      {
+          "hour": 0,
+          "description": "With adviser approval, directed study, research, project study, and appropriate graduate-level courses may also be taken as upper-division electives.",
+          "type":HRowType.COMMENT
+      },
+      {
+          "hour": 8,
+          "description": "Complete 8 credits of CS, CY, DS, or IS classes that are not already required. Choose courses within the following ranges:",
+          "type":HRowType.COMMENT
+      },
       {
           "type":HRowType.RANGE_LOWER_BOUNDED_WITH_EXCEPTIONS,
           "hour": 0,
@@ -305,7 +312,33 @@ const bscsTokens: HRow[] = [
       }
   ]
 
-const parsed = parseRows(bscsTokens)
-console.log(JSON.stringify(parsed, null, 4))
+const importedTokens = bscs as prevStep
+
+// const tokens = bscsTokens.filter((row)=>row.type !== HRowType.COMMENT)
+
+// const parsed = parseRows(tokens)
+// console.log(JSON.stringify(parsed, null, 4))
+
+// const tokenized = bscs
+
+let nonConcentrations = importedTokens.tokenized.sections.filter(metaSection => {
+  return !metaSection.description.toLowerCase().startsWith("Concentration")
+})
+
+let entries: HRow[][] = nonConcentrations.map((metaSection)=>metaSection.entries)
+
+let allEntries = entries.reduce((prev: HRow[], current: HRow[])=>{
+  return prev.concat(current)
+}, [])
+
+allEntries = allEntries.filter((row)=>row.type !== HRowType.COMMENT && row.type !== HRowType.SUBHEADER)
+
+const allEntriesParsed = parseRows(allEntries)
+console.log(JSON.stringify(allEntriesParsed, null, 4))
+
+const concentrations = importedTokens.tokenized.sections.filter(metaSection => {
+  return metaSection.description.toLowerCase().startsWith("Concentration")
+})
+
 
 export {}

@@ -25,7 +25,7 @@ export const processSection = ([header, requirements]: [TextRow<HRowType.HEADER>
   return {
     type: "SECTION",
     title: header.description,
-    requirements: requirements,
+    requirements: requirements.flat(),
     minRequirementCount: requirements.length
   }
 }
