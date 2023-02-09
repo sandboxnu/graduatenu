@@ -18,7 +18,6 @@ import {
 } from "@graduate/common";
 import { ClassConstructor, plainToInstance } from "class-transformer";
 
-
 class APIClient {
   private axios: AxiosInstance;
 
@@ -127,7 +126,7 @@ class SearchAPIClient {
 
   fetchCourse = async (
     query: string
-  ): Promise<ScheduleCourse2<null>> => {
+  ): Promise<ScheduleCourse2<null> | null> => {
     const res = await this.axios({
       method: "post",
       data: {
@@ -139,11 +138,7 @@ class SearchAPIClient {
     return occurrenceToCourse(courseData?.class?.latestOccurrence);
   };
 
-  fetchCourses = async (
-    query: string
-  ): Promise<ScheduleCourse2<null>[]> => {
-
-
+  fetchCourses = async (query: string): Promise<ScheduleCourse2<null>[]> => {
     const res = await this.axios({
       method: "post",
       data: {
@@ -158,13 +153,11 @@ class SearchAPIClient {
         return occurrenceToCourse(course?.latestOccurrence);
       });
     } else {
-      return null;
+      return [];
     }
   };
 
-  searchCourses = async (
-    query: string
-  ): Promise<ScheduleCourse2<null>[]> => {
+  searchCourses = async (query: string): Promise<ScheduleCourse2<null>[]> => {
     const res = await this.axios({
       method: "POST",
       headers: { "Content-Type": "application/json" },

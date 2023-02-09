@@ -9,7 +9,7 @@ type FetchCourseResponse = Omit<
 >;
 
 type FetchCourseReturn = FetchCourseResponse & {
-  course?: ScheduleCourse2<null>;
+  course?: ScheduleCourse2<null> | null;
   isLoading: boolean;
 };
 
@@ -38,7 +38,7 @@ export function useFetchSearchCourse(
 export const fetchSearchCourse = async (
   subject: string,
   classId: string
-): Promise<ScheduleCourse2<null>> => {
+): Promise<ScheduleCourse2<null> | null> => {
   const course = await SearchAPI.fetchCourse(constructKey(subject, classId));
 
   return course;
