@@ -1,12 +1,9 @@
 import { Box, Text } from "@chakra-ui/react";
 import {
-  IRequiredCourse,
   MajorValidationError,
   MajorValidationResult,
   PlanModel,
-  Requirement2,
   ScheduleCourse2,
-  Section,
 } from "@graduate/common";
 import { memo, PropsWithChildren, useEffect, useRef, useState } from "react";
 import { DraggableScheduleCourse } from "../ScheduleCourse";
@@ -17,7 +14,11 @@ import { handleApiClientError } from "../../utils";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useMajor } from "../../hooks/useMajor";
-import { WorkerMessage, WorkerMessageType, WorkerPostInfo } from "../../validation-worker/worker-messages";
+import {
+  WorkerMessage,
+  WorkerMessageType,
+  WorkerPostInfo,
+} from "../../validation-worker/worker-messages";
 import { useFetchSearchCourses } from "../../hooks/useFetchSearchCourses";
 import { getAllCoursesInMajor } from "../../utils/plan/getAllCoursesInMajor";
 
@@ -28,7 +29,7 @@ interface SidebarProps {
 export enum SidebarValidationStatus {
   Loading = "Loading",
   Error = "Error",
-  Complete = "Complete"
+  Complete = "Complete",
 }
 
 const COOP_BLOCK: ScheduleCourse2<string> = {
@@ -69,35 +70,38 @@ const Sidebar: React.FC<SidebarProps> = memo(({ selectedPlan }) => {
 
   const workerRef = useRef<Worker>();
 
-  const [validationStatus, setValidationStatus] = useState<MajorValidationResult | undefined>(undefined);
+  const [validationStatus, setValidationStatus] = useState<
+    MajorValidationResult | undefined
+  >(undefined);
 
-  const revalidateMajor = ()=>{
+  const revalidateMajor = () => {
     setValidationStatus(undefined);
     if (!selectedPlan || !major || !workerRef.current) return;
-    
-    currentRequestNum += 1
+
+    currentRequestNum += 1;
     const validationInfo: WorkerPostInfo = {
       major: major,
       taken: getAllCoursesFromPlan(selectedPlan),
       concentration: selectedPlan.concentration,
-      requestNumber: currentRequestNum
-    } 
-    workerRef.current?.postMessage(validationInfo)
-  }
+      requestNumber: currentRequestNum,
+    };
+    workerRef.current?.postMessage(validationInfo);
+  };
 
   // Set up the web worker to handle major validation for us. This helps keep the
   // UI thread free to display our app, preventing UI freezes while our schedule
   // is being validated.
-  useEffect(()=>{
+  useEffect(() => {
     if (!workerRef.current) {
-      workerRef.current = new Worker(new URL("../../validation-worker/worker.ts", import.meta.url));
+      workerRef.current = new Worker(
+        new URL("../../validation-worker/worker.ts", import.meta.url)
+      );
       workerRef.current.onmessage = (message: MessageEvent<WorkerMessage>) => {
         switch (message.data.type) {
           case WorkerMessageType.Loaded:
-            revalidateMajor()
+            revalidateMajor();
             break;
           case WorkerMessageType.ValidationResult:
-
             // Only update valdation information if it was from the latest request.
             // This helps us avoid displaying outdated information that could be sent
             // due to race conditions.
@@ -109,25 +113,25 @@ const Sidebar: React.FC<SidebarProps> = memo(({ selectedPlan }) => {
           default:
             throw new Error("Invalid worker message!");
         }
-      }
+      };
     }
     return () => {
       workerRef.current?.terminate();
       workerRef.current = undefined;
-    }
-  // LINT NOTE: We don't actually want a dependency to the local function 
-  // revalidateMajor because it will change every time, so we're choosing 
-  // to omit it here:
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+    };
+    // LINT NOTE: We don't actually want a dependency to the local function
+    // revalidateMajor because it will change every time, so we're choosing
+    // to omit it here:
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // Whenever our plan/major changes, we revalidate if the worker
   // is initialized.
-  // LINT NOTE: We don't actually want a dependency to the local function 
-  // revalidateMajor because it will change every time, so we're choosing 
+  // LINT NOTE: We don't actually want a dependency to the local function
+  // revalidateMajor because it will change every time, so we're choosing
   // to omit it here:
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => revalidateMajor(), [selectedPlan, major])
+  useEffect(() => revalidateMajor(), [selectedPlan, major]);
 
   const majorCourses = getAllCoursesInMajor(major, concentration);
 
@@ -152,16 +156,14 @@ const Sidebar: React.FC<SidebarProps> = memo(({ selectedPlan }) => {
     return <SidebarContainer title="" />;
   }
 
-  
   const concentrationValidationError: MajorValidationError | undefined =
     getSectionError(major.requirementSections.length, validationStatus);
 
-  let concentrationValidationStatus = SidebarValidationStatus.Complete
+  let concentrationValidationStatus = SidebarValidationStatus.Complete;
   if (validationStatus === undefined) {
-    concentrationValidationStatus = SidebarValidationStatus.Loading
-  }
-  else if (concentrationValidationError) {
-    concentrationValidationStatus = SidebarValidationStatus.Error
+    concentrationValidationStatus = SidebarValidationStatus.Loading;
+  } else if (concentrationValidationError) {
+    concentrationValidationStatus = SidebarValidationStatus.Error;
   }
 
   return (
@@ -179,12 +181,11 @@ const Sidebar: React.FC<SidebarProps> = memo(({ selectedPlan }) => {
             const sectionValidationError: MajorValidationError | undefined =
               getSectionError(index, validationStatus);
 
-            let sectionValidationStatus = SidebarValidationStatus.Complete
+            let sectionValidationStatus = SidebarValidationStatus.Complete;
             if (validationStatus === undefined) {
-              sectionValidationStatus = SidebarValidationStatus.Loading
-            }
-            else if (sectionValidationError) {
-              sectionValidationStatus = SidebarValidationStatus.Error
+              sectionValidationStatus = SidebarValidationStatus.Loading;
+            } else if (sectionValidationError) {
+              sectionValidationStatus = SidebarValidationStatus.Error;
             }
 
             return (
