@@ -11,7 +11,6 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { ScheduleCourse2 } from "@graduate/common";
-import { useRouter } from "next/router";
 import { useState } from "react";
 import { useSearchCourses } from "../../hooks/useSearchCourses";
 import {

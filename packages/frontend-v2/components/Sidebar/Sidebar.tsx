@@ -1,12 +1,9 @@
 import { Box, Text } from "@chakra-ui/react";
 import {
-  IRequiredCourse,
   MajorValidationError,
   MajorValidationResult,
   PlanModel,
-  Requirement2,
   ScheduleCourse2,
-  Section,
 } from "@graduate/common";
 import { memo, PropsWithChildren, useEffect, useRef, useState } from "react";
 import { DraggableScheduleCourse } from "../ScheduleCourse";
@@ -17,7 +14,11 @@ import { handleApiClientError, SIDEBAR_DND_ID_PREFIX } from "../../utils";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useMajor } from "../../hooks/useMajor";
-import { WorkerMessage, WorkerMessageType, WorkerPostInfo } from "../../validation-worker/worker-messages";
+import {
+  WorkerMessage,
+  WorkerMessageType,
+  WorkerPostInfo,
+} from "../../validation-worker/worker-messages";
 import { useFetchSearchCourses } from "../../hooks/useFetchSearchCourses";
 import { getAllCoursesInMajor } from "../../utils/plan/getAllCoursesInMajor";
 
