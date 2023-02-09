@@ -1,28 +1,24 @@
 import { Search2Icon } from "@chakra-ui/icons";
 import { InputGroup, InputLeftElement, Input } from "@chakra-ui/react";
-import { ScheduleCourse2 } from "@graduate/common";
-import { Dispatch, SetStateAction, KeyboardEventHandler } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  KeyboardEventHandler,
+  useState,
+} from "react";
 
 interface SearchCoursesInputProps {
-  searchTerm: string;
-  setSearchTerm: Dispatch<SetStateAction<string>>;
-  searchCourses: () => void;
-  setSearchResults: Dispatch<SetStateAction<ScheduleCourse2<null>[]>>;
+  setSearchQuery: Dispatch<SetStateAction<string>>;
 }
 
 export const SearchCoursesInput: React.FC<SearchCoursesInputProps> = ({
-  searchTerm,
-  setSearchTerm,
-  searchCourses,
-  setSearchResults,
+  setSearchQuery,
 }) => {
+  const [searchTerm, setSearchTerm] = useState("");
+
   const onKeyDown: KeyboardEventHandler<HTMLInputElement> = (e) => {
     if (e.key === "Enter") {
-      if (searchTerm === "") {
-        setSearchResults([]);
-      } else {
-        searchCourses();
-      }
+      setSearchQuery(searchTerm);
     }
   };
 
