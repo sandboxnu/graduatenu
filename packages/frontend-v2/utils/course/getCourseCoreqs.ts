@@ -1,9 +1,6 @@
 import { SearchAPI } from "@graduate/api-client";
-import {
-  ScheduleCourse2,
-  INEUReq,
-  INEUReqCourse,
-} from "@graduate/common";
+import { ScheduleCourse2, INEUReq, INEUReqCourse } from "@graduate/common";
+import { fetchSearchCourse } from "../../hooks/useFetchSearchCourse";
 
 /** Get all the required(ANDs only) coreqs for a given course. */
 export async function getRequiredCourseCoreqs(
@@ -19,7 +16,7 @@ export async function getRequiredCourseCoreqs(
     await Promise.all(
       coreqCourses.map(async (coreqCourse: INEUReq) => {
         if (isINEUPrereqCourse(coreqCourse)) {
-          const course = await SearchAPI.fetchCourse(
+          const course = await fetchSearchCourse(
             coreqCourse.subject,
             coreqCourse.classId
           );
