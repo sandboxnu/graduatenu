@@ -1,4 +1,3 @@
-import { SearchAPI } from "@graduate/api-client";
 import { ScheduleCourse2, INEUReq, INEUReqCourse } from "@graduate/common";
 import { fetchSearchCourse } from "../../hooks/useFetchSearchCourse";
 
