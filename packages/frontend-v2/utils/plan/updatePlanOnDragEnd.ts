@@ -34,16 +34,16 @@ export const updatePlanOnDragEnd = (
   const updatedPlan = produce(plan, (draftPlan) => {
     // grab all the terms across the years, since it's easier to work with a flat list of terms
     const scheduleTerms = flattenScheduleToTerms<string>(draftPlan.schedule);
-
+    
+    const oldTerm = scheduleTerms.find(term => term.classes.some((course) => course.id === draggedCourse.id));
     // If it is not being dragged over a droppable, then we delete the course
     if (draggedOverTerm == null) {
-      const newTerm = scheduleTerms.find(term => term.classes.some((course) => course.id === draggedCourse.id));
-      if (!newTerm) {
+      if (!oldTerm) {
         throw new Error("Term the course is dragged from isn't found");
       }
 
       // remove the class from the old term
-      newTerm.classes = newTerm.classes.filter(
+      oldTerm.classes = newTerm.classes.filter(
         (course) => course.id !== draggedCourse.id
       );
     } else {
@@ -64,9 +64,6 @@ export const updatePlanOnDragEnd = (
       const draggedCourseDetails: ScheduleCourse2<unknown> =
         draggedCourse.data.current.course;
 
-      const oldTerm = scheduleTerms.find((term) =>
-        term.classes.some((course) => course.id === draggedCourse.id)
-      );
 
       const isFromSidebar = draggedCourse.data.current.isFromSidebar;
       const isSameTerm = !isFromSidebar && oldTerm && oldTerm.id === newTerm.id;
