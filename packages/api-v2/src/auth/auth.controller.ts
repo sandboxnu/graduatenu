@@ -15,13 +15,13 @@ import {
   SignUpStudentDto,
 } from "@graduate/common";
 import { Response } from "express";
-import EmailConformationService from "src/email/emailConformation.service";
+import EmailConfirmationService from "src/emailConfirmation/emailConfirmation.service";
 
 @Controller("auth")
 export class AuthController {
   constructor(
     private readonly authService: AuthService,
-    private readonly emailConfirmationService: EmailConformationService
+    private readonly emailConfirmationService: EmailConfirmationService
   ) {}
 
   @Post("register")
