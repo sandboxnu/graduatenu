@@ -43,7 +43,7 @@ export const updatePlanOnDragEnd = (
       }
 
       // remove the class from the old term
-      oldTerm.classes = newTerm.classes.filter(
+      oldTerm.classes = oldTerm.classes.filter(
         (course) => course.id !== draggedCourse.id
       );
     } else {
