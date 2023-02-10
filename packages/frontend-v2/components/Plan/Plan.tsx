@@ -11,11 +11,13 @@ import { useState } from "react";
 import { addClassesToTerm, removeYearFromPlan } from "../../utils";
 import { removeCourseFromTerm } from "../../utils/";
 import { ScheduleYear } from "./ScheduleYear";
+import { useDroppable } from "@dnd-kit/core";
 
 interface PlanProps {
   plan: PlanModel<string>;
   preReqErr?: PreReqWarnings;
   coReqErr?: CoReqWarnings;
+  setIsRemove?: (val: boolean) => void
 
   /**
    * Function to POST the plan and update the SWR cache for "student with plans"
@@ -29,6 +31,7 @@ export const Plan: React.FC<PlanProps> = ({
   mutateStudentWithUpdatedPlan,
   preReqErr = undefined,
   coReqErr = undefined,
+  setIsRemove
 }) => {
   const [expandedYears, setExpandedYears] = useState<Set<number>>(new Set());
 
@@ -39,6 +42,8 @@ export const Plan: React.FC<PlanProps> = ({
       addToExpandedYears(year);
     }
   };
+
+  const { setNodeRef } = useDroppable({ id: 'plan' });
 
   const removeFromExpandedYears = (year: ScheduleYear2<unknown>) => {
     const updatedSet = new Set(expandedYears);
@@ -101,7 +106,7 @@ export const Plan: React.FC<PlanProps> = ({
   };
 
   return (
-    <Flex flexDirection="column" rowGap="4xs">
+    <Flex flexDirection="column" rowGap="4xs" ref={setNodeRef}>
       {plan.schedule.years.map((scheduleYear) => {
         const isExpanded = expandedYears.has(scheduleYear.year);
 
@@ -128,6 +133,7 @@ export const Plan: React.FC<PlanProps> = ({
               removeYearFromCurrPlan={() =>
                 removeYearFromCurrPlan(scheduleYear.year)
               }
+              setIsRemove={setIsRemove}
             />
           </Flex>
         );
