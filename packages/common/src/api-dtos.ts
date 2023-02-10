@@ -193,3 +193,9 @@ export class LoginStudentDto {
   @IsString()
   password: string;
 }
+
+export class ConfirmEmailDto {
+  @IsString()
+  @IsNotEmpty()
+  token: string;
+}
