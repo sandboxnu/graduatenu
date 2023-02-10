@@ -26,6 +26,7 @@ async function bootstrap() {
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true, // strips properties from incoming objects that aren't decorated with class-validator
+      transformOptions: { exposeUnsetFields: false },
       transform: true, // transforms properties from incoming objects to the type they are decorated with by class-validator
     })
   );

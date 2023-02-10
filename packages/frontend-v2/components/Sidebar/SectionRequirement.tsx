@@ -10,6 +10,7 @@ import {
   Section,
 } from "@graduate/common";
 import { DraggableScheduleCourse } from "../ScheduleCourse";
+import { SidebarValidationStatus } from "./Sidebar";
 import SidebarSection from "./SidebarSection";
 
 interface SidebarRequirementProps {
@@ -127,7 +128,7 @@ const SectionRequirement: React.FC<SidebarRequirementProps> = ({
   const renderSection = (requirement: Section) => {
     return (
       <SidebarSection
-        isValid
+        validationStatus={SidebarValidationStatus.Complete}
         section={requirement}
         courseData={courseData}
         dndIdPrefix={dndIdPrefix + "-sec"}

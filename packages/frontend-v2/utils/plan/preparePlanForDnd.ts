@@ -41,19 +41,19 @@ export const prepareYearForDnd = (
 ) => {
   let res;
   let updatedCount = courseCount;
-  res = prepareTermForDnd(year.fall, updatedCount);
+  res = prepareTermForDnd(year.fall, updatedCount, year.year);
   const dndFallTerm = res.dndTerm;
   updatedCount = res.updatedCount;
 
-  res = prepareTermForDnd(year.spring, updatedCount);
+  res = prepareTermForDnd(year.spring, updatedCount, year.year);
   const dndSpringTerm = res.dndTerm;
   updatedCount = res.updatedCount;
 
-  res = prepareTermForDnd(year.summer1, updatedCount);
+  res = prepareTermForDnd(year.summer1, updatedCount, year.year);
   const dndSummer1Term = res.dndTerm;
   updatedCount = res.updatedCount;
 
-  res = prepareTermForDnd(year.summer2, updatedCount);
+  res = prepareTermForDnd(year.summer2, updatedCount, year.year);
   const dndSummer2Term = res.dndTerm;
   updatedCount = res.updatedCount;
 
@@ -83,7 +83,8 @@ export const prepareYearForDnd = (
  */
 const prepareTermForDnd = (
   term: ScheduleTerm2<null>,
-  courseCount: number
+  courseCount: number,
+  yearNumber: number
 ): { dndTerm: ScheduleTerm2<string>; updatedCount: number } => {
   /*
    * course count shouldn't be needed since in most cases a course will appear only once in a plan,
@@ -98,7 +99,7 @@ const prepareTermForDnd = (
 
   const dndTerm = {
     ...term,
-    id: `${term.year}-${term.season}`, // add a unique dnd id to all terms
+    id: `${yearNumber}-${term.season}`, // add a unique dnd id to all terms
     classes: dndClasses,
   };
 

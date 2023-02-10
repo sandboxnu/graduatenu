@@ -13,7 +13,7 @@ import {
   GetStudentResponse,
   LoginStudentDto,
   SignUpStudentDto,
-} from "../../../common";
+} from "@graduate/common";
 import { Response } from "express";
 
 @Controller("auth")

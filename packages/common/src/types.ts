@@ -105,29 +105,29 @@ export interface INEUReqOrError {
 }
 
 export interface TermError {
-  [key: string]: INEUReqError | undefined
+  [key: string]: INEUReqError | undefined;
 }
 
 export interface ScheduleWarnings {
-  type: string
-  years: YearError[]
+  type: string;
+  years: YearError[];
 }
 
 export interface YearError {
   year: number;
-  fall: TermError,
-  spring: TermError,
-  summer1: TermError,
-  summer2: TermError
+  fall: TermError;
+  spring: TermError;
+  summer1: TermError;
+  summer2: TermError;
 }
 
 export type PreReqWarnings = ScheduleWarnings & {
-  type: "prereq"
-}
+  type: "prereq";
+};
 
 export type CoReqWarnings = ScheduleWarnings & {
-  type: "coreq"
-}
+  type: "coreq";
+};
 
 //                                       NEW MAJOR OBJECT HERE
 /**
@@ -301,7 +301,6 @@ export interface ScheduleYear2<T> {
  * @param id      Unique id used as a book keeping field for dnd.
  */
 export interface ScheduleTerm2<T> {
-  year: number;
   season: SeasonEnum;
   status: StatusEnum;
   classes: ScheduleCourse2<T>[];
