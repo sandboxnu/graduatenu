@@ -2,7 +2,7 @@ import { Module } from "@nestjs/common";
 import { ConfigModule } from "@nestjs/config";
 import EmailService from "./email.service";
 import { JwtModule } from "@nestjs/jwt";
-import EmailConformationService from "./emailConformation.service";
+import EmailConfirmationService from "../emailConfirmation/emailConfirmation.service";
 
 @Module({
   imports: [
@@ -15,7 +15,7 @@ import EmailConformationService from "./emailConformation.service";
     }),
   ],
   controllers: [],
-  providers: [EmailService, EmailConformationService],
-  exports: [EmailService, EmailConformationService],
+  providers: [EmailService, EmailConfirmationService],
+  exports: [EmailService, EmailConfirmationService],
 })
 export class EmailModule {}

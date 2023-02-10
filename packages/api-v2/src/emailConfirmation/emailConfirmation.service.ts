@@ -2,10 +2,10 @@ import { Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { JwtService } from "@nestjs/jwt";
 import { EnvironmentVariables } from "src/environment-variables";
-import EmailService from "./email.service";
+import EmailService from "../email/email.service";
 
 @Injectable()
-export default class EmailConformationService {
+export default class EmailConfirmationService {
   constructor(
     private readonly jwtService: JwtService,
     private readonly configService: ConfigService<EnvironmentVariables, true>,
@@ -26,4 +26,6 @@ export default class EmailConformationService {
       text,
     });
   }
+
+  public confirmEmail;
 }
