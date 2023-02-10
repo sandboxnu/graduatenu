@@ -322,7 +322,7 @@ const importedTokens = bscs as prevStep
 // const tokenized = bscs
 
 let nonConcentrations = importedTokens.tokenized.sections.filter(metaSection => {
-  return !metaSection.description.toLowerCase().startsWith("Concentration")
+  return !metaSection.description.toLowerCase().startsWith("concentration")
 })
 
 let entries: HRow[][] = nonConcentrations.map((metaSection)=>metaSection.entries)
