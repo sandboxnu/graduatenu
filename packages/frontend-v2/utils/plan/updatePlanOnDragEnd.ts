@@ -54,6 +54,15 @@ export const updatePlanOnDragEnd = (
       if (!newTerm) {
         throw new Error("Term the course is dragged over isn't found");
       }
+      
+      const year = plan.schedule.years.find((year) => {
+        const res = Object.values(year).find((term) => term.id === newTerm.id);
+        return res;
+      });
+  
+      if (!year) {
+        throw new Error("Year of the course that is dragged over isn't found");
+      }
 
       if (!draggedCourse.data.current?.course) {
         throw new Error(
@@ -83,7 +92,7 @@ export const updatePlanOnDragEnd = (
         toast.error(
           `Oops, ${getCourseDisplayString(
             draggedCourseDetails
-          )} already exists in Year ${newTerm.year}, ${getSeasonDisplayWord(
+          )} already exists in Year ${year.year}, ${getSeasonDisplayWord(
             newTerm.season
           )}.`
         );
