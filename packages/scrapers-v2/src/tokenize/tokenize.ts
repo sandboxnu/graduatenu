@@ -15,6 +15,7 @@ import {
   SUBJECT_REGEX,
 } from "./constants";
 import {
+  CountAndHoursRow,
   CourseRow,
   HDocument,
   HRow,
@@ -282,6 +283,10 @@ const getRowType = ($: CheerioStatic, tr: CheerioElement, tds: Cheerio[]) => {
     return HRowType.RANGE_UNBOUNDED;
   }
 
+  if (sectionInfoAll.includes(tdText.toLowerCase())) {
+    return HRowType.SECTION_INFO;
+  }
+
   return HRowType.COMMENT;
 };
 
@@ -317,6 +322,8 @@ const constructRow = (
       return constructRangeBoundedMaybeExceptions($, tds);
     case HRowType.RANGE_UNBOUNDED:
       return constructRangeUnbounded($, tds);
+    case HRowType.SECTION_INFO:
+      return constructSectionInfo($, tds);
     case HRowType.COMMENT_COUNT:
       throw new Error("We don't support comment counts yet!")
     default:
@@ -499,6 +506,46 @@ const constructRangeUnbounded = (
     hour,
     subjects,
   };
+};
+
+const sectionInfoOnes = [
+  "Choose one:",
+  "Complete one of the following:"
+].map(text=>text.toLowerCase())
+
+const sectionInfoTwos = [
+  "Complete two courses (and any required labs) from the following science categories:"
+].map(text=>text.toLowerCase())
+
+const sectionInfoAll = [...sectionInfoOnes, ...sectionInfoTwos]
+
+const constructSectionInfo = (
+  $: CheerioStatic,
+  tds: Cheerio[]
+): CountAndHoursRow<HRowType.SECTION_INFO> => {
+  const [c1, c2] = ensureLength(2, tds, tds.toString());
+  const hour = parseHour(c2);
+  const description = parseText(c1);
+
+  if (sectionInfoOnes.includes(description.toLowerCase())) {
+    return {
+      hour,
+      description,
+      type: HRowType.SECTION_INFO,
+      parsedCount: 1
+    }
+  }
+
+  if (sectionInfoTwos.includes(description.toLowerCase())) {
+    return {
+      hour,
+      description,
+      type: HRowType.SECTION_INFO,
+      parsedCount: 2
+    }
+  }
+
+  throw new Error("Parsed text not in recognised list! (shouldn't be possible :) ).");
 };
 
 const parseHour = (td: Cheerio) => {

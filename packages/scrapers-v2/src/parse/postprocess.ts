@@ -1,4 +1,4 @@
-import { HRow, HRowType, TextRow } from "../tokenize/types";
+import { CountAndHoursRow, HRow, HRowType, TextRow } from "../tokenize/types";
 import {
   IAndCourse2,
   IOrCourse2,
@@ -27,6 +27,13 @@ export const processSection = ([header, requirements]: [TextRow<HRowType.HEADER>
     title: header.description,
     requirements: requirements.flat(),
     minRequirementCount: requirements.length
+  }
+}
+
+export const processSectionWithInfo = ([header, info, requirements]: [TextRow<HRowType.HEADER>,CountAndHoursRow<HRowType.SECTION_INFO>,  Requirement2[]]): Section => {
+  return {
+    ...processSection([header, requirements]),
+    minRequirementCount: info.parsedCount
   }
 }
 
@@ -118,13 +125,10 @@ export const processOrOfAnd: Processor<
   };
 };
 
-export const processAnd = (tokens: [IAndCourse2[]]): IAndCourse2 => {
-  const courses = [];
-  for (const { courses: cs } of tokens[0]) {
-    courses.push(...cs);
-  }
-  return {
-    type: "AND",
-    courses,
-  };
+export const processAnd = (tokens: [IAndCourse2[]]): IAndCourse2[] => {
+  // const courses = [];
+  // for (const { courses: cs } of tokens[0]) {
+  //   courses.push(...cs);
+  // }
+  return tokens[0]
 };

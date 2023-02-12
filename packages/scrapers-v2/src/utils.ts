@@ -61,10 +61,10 @@ const wrappedGetRequest = async (url: string) => {
   return await response.body.text();
 };
 
-export const ensureLength = <T>(n: number, l: T[]) => {
+export const ensureLength = <T>(n: number, l: T[], extraMessage?: String) => {
   const length = l.length;
   if (length !== n) {
-    const msg = `expected array length to equal exactly ${n}, but was ${length}`;
+    const msg = `expected array length to equal exactly ${n}, but was ${length}${extraMessage ?? ""}`;
     throw new Error(msg);
   }
   return l;

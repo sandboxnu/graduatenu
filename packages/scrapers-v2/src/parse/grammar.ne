@@ -4,6 +4,7 @@
 const HEADER = { test: x => x.type === "HEADER" };
 const SUBHEADER = { test: x => x.type === "SUBHEADER" };
 const COMMENT = { test: x => x.type === "COMMENT" };
+const SECTION_INFO = { test: x => x.type === "SECTION_INFO" };
 
 const OR_COURSE = { test: x => x.type === "OR_COURSE" };
 const OR_OF_AND_COURSE = { test: x => x.type === "OR_OF_AND_COURSE" };
@@ -32,6 +33,7 @@ main -> requirement2_section:+                             {% id %}
 # sections!
 requirement2_section ->
     %HEADER requirement2_list                              {% postprocess.processSection %}
+  | %HEADER %SECTION_INFO requirement2_list                {% postprocess.processSectionWithInfo %}
 
 ## to avoid ambiguity, ANDs cannot follow ANDs
 requirement2_list ->
