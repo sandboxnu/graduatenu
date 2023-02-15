@@ -26,8 +26,8 @@ $ yarn test:cov
 1. If you make an entity(db) change, you will need to generate new migrations and then run those migrations locally to alter your database schemas. You can do so as follows:
 
 - Make the change to the .entity.ts file
-- Run `yarn migration:generate - "<NameOfTheChange>"`. This will generate a new migration file that describes the change to the db schema(s). You will loose all local data when running this command.
-- Run `yarn migration:run` to run the newly generated migration.
+- Run `yarn dev:migration:generate - "<NameOfTheChange>"`. This will generate a new migration file that describes the change to the db schema(s). You will loose all local data when running this command.
+- Run `yarn dev:migration:run` to run the newly generated migration.
 
 2. Each migration should have a cohesive set of changes to our entities. If you have unrelated db changes then please generate multiple migrations. A good rule of thumb: if you find it hard to name your migration then you probably need to split it.
 

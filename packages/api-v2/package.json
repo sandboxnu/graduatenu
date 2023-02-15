@@ -24,8 +24,8 @@
     "test:e2e": "yarn g:cross-env NODE_ENV=testing jest --config ./test/jest-e2e.json --detectOpenHandles",
     "typeorm": "yarn g:cross-env NODE_ENV=development ts-node --project ./tsconfig.json ../../node_modules/typeorm/cli.js",
     "dev:db:reset": "yarn typeorm schema:drop",
-    "migration:generate": "yarn dev:db:reset && yarn typeorm migration:run && yarn typeorm migration:generate",
-    "migration:run": "yarn build && yarn typeorm migration:run"
+    "dev:migration:generate": "yarn dev:db:reset && yarn typeorm migration:run && yarn typeorm migration:generate",
+    "dev:migration:run": "yarn build && yarn typeorm migration:run"
   },
   "dependencies": {
     "@graduate/common": "workspace:*",
