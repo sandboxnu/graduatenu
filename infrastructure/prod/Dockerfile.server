@@ -8,7 +8,6 @@ COPY .yarn .yarn
 COPY packages/api-v2/package.json packages/api-v2/package.json
 COPY packages/common/package.json packages/common/package.json
 
-
 # Install at root level
 RUN yarn install > /dev/null
 
@@ -16,10 +15,10 @@ RUN yarn install > /dev/null
 COPY packages/api-v2 packages/api-v2
 COPY packages/common packages/common
 
-RUN yarn packages/api-v2 build
-RUN yarn packages/common build
-
 # Build server and common dependency
+RUN yarn packages/common build
+RUN yarn packages/api-v2 build
+
 FROM node:16-alpine AS runner
 WORKDIR /server
 
@@ -28,12 +27,13 @@ ENV NODE_ENV production
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nestjs
 
-COPY --from=builder /server/node_modules ./node_modules
-COPY --from=builder --chown=nestjs:nodejs /server/packages/api-v2/dist ./
+COPY --from=builder --chown=nestjs:nodejs /server/node_modules ./node_modules
+COPY --from=builder --chown=nestjs:nodejs /server/packages/common ./packages/common
+COPY --from=builder --chown=nestjs:nodejs /server/packages/api-v2/dist ./packages/api-v2
 
 USER nestjs
 
 EXPOSE 3001
 ENV PORT 3001
 
-CMD ["node", "api-v2/src/main.js"]
+CMD ["node", "packages/api-v2/src/main.js"]
