@@ -34,6 +34,7 @@ interface ScheduleTermProps {
   ) => void;
 
   isLastColumn?: boolean;
+  setIsRemove?: (val: boolean) => void
 }
 
 export const ScheduleTerm: React.FC<ScheduleTermProps> = ({
@@ -42,6 +43,7 @@ export const ScheduleTerm: React.FC<ScheduleTermProps> = ({
   yearNum,
   removeCourseFromTermInCurrPlan,
   isLastColumn,
+  setIsRemove,
   termCoReqErr = undefined,
   termPreReqErr = undefined,
 }) => {
@@ -76,6 +78,7 @@ export const ScheduleTerm: React.FC<ScheduleTermProps> = ({
           }
           isEditable
           key={scheduleCourse.id}
+          setIsRemove={setIsRemove}
         />
       ))}
       <AddCourseButton onOpen={onOpen} />

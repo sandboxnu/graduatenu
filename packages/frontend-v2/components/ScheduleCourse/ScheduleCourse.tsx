@@ -7,7 +7,7 @@ import {
   INEUReqError,
   ScheduleCourse2,
 } from "@graduate/common";
-import { forwardRef, useState } from "react";
+import { forwardRef, useEffect, useState } from "react";
 import { ReqErrorModal } from "../Plan/ReqErrorModal";
 
 interface DraggableScheduleCourseProps {
@@ -20,6 +20,7 @@ interface DraggableScheduleCourseProps {
   isEditable?: boolean;
   isDisabled?: boolean;
   isFromSidebar?: boolean;
+  setIsRemove?: (val: boolean) => void;
 }
 
 export const DraggableScheduleCourse: React.FC<
@@ -32,8 +33,9 @@ export const DraggableScheduleCourse: React.FC<
   isEditable = false,
   isFromSidebar = false,
   isDisabled = false,
+  setIsRemove,
 }) => {
-  const { setNodeRef, transform, listeners, attributes, isDragging } =
+  const { setNodeRef, transform, listeners, attributes, isDragging, over } =
     useDraggable({
       id: scheduleCourse.id,
       data: {
@@ -42,6 +44,10 @@ export const DraggableScheduleCourse: React.FC<
       },
       disabled: isDisabled,
     });
+
+  useEffect(() => {
+    if (setIsRemove) setIsRemove(over === null);
+  }, [over, setIsRemove]);
 
   return (
     <ScheduleCourse
@@ -69,7 +75,10 @@ interface ScheduleCourseProps extends DraggableScheduleCourseProps {
   transform?: string;
   isDisabled: boolean;
   isOverlay?: boolean;
+  isRemove?: boolean;
 }
+
+// TODO: ADD styling for overlay dragging
 
 // eslint-disable-next-line react/display-name
 export const ScheduleCourse = forwardRef<
@@ -83,9 +92,11 @@ export const ScheduleCourse = forwardRef<
       scheduleCourse,
       removeCourse,
       isEditable = false,
+      isDragging = false,
       listeners,
       attributes,
       isOverlay = false,
+      isRemove,
     },
     ref
   ) => {
@@ -95,11 +106,14 @@ export const ScheduleCourse = forwardRef<
     // While it seems unintuitive, replacing Flex with div and the
     // DragHandleIcon with an equivalent SVG significantly improved
     // dnd responsiveness.
+
     return (
       <div
         style={{
-          backgroundColor: "white",
+          backgroundColor:
+            isOverlay ? "lightgrey" : "white",
           display: "flex",
+          visibility: isDragging ? "hidden" : "",
           borderRadius: "5px",
           fontSize: "14px",
           alignItems: "stretch",
@@ -108,6 +122,7 @@ export const ScheduleCourse = forwardRef<
           transition: "transform 0.15s ease",
           transform: hovered ? "scale(1.04)" : "scale(1)",
           justifyContent: "space-between",
+          opacity: isOverlay && isRemove ? "0.5" : "1"
         }}
         onMouseEnter={() => {
           setHovered(true);
@@ -122,7 +137,6 @@ export const ScheduleCourse = forwardRef<
           style={{
             display: "flex",
             alignItems: "center",
-            background: "",
             padding: "8px 8px",
             cursor: isOverlay ? "grabbing" : "grab",
           }}

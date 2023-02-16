@@ -67,6 +67,8 @@ const HomePage: NextPage = () => {
 
   const [activeCourse, setActiveCourse] = useState(null);
 
+  const [isRemove, setIsRemove] = useState<boolean>(false);
+
   const [coReqWarnings, setCoReqWarnings] = useState<CoReqWarnings | undefined>(
     undefined
   );
@@ -140,11 +142,6 @@ const HomePage: NextPage = () => {
     }
 
     const { active, over } = event;
-
-    // course is not dragged over a term, so abort
-    if (!over) {
-      return;
-    }
 
     // create a new plan with the dragged course moved from old term to term it is dropped on
     let updatedPlan: PlanModel<string>;
@@ -232,6 +229,7 @@ const HomePage: NextPage = () => {
                   coReqErr={coReqWarnings}
                   preReqErr={preReqWarnings}
                   mutateStudentWithUpdatedPlan={mutateStudentWithUpdatedPlan}
+                  setIsRemove={setIsRemove}
                 />
                 <Flex mt="sm">
                   <AddYearButton
@@ -252,6 +250,7 @@ const HomePage: NextPage = () => {
             isOverlay={true}
             coReqErr={undefined}
             preReqErr={undefined}
+            isRemove={isRemove}
           />
         ) : null}
       </DragOverlay>
