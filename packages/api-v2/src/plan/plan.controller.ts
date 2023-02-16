@@ -21,13 +21,14 @@ import {
   GetPlanResponse,
   UpdatePlanResponse,
 } from "@graduate/common";
+import { EmailConfirmationGuard } from "src/guards/emailConfirmation.guard";
 
 @Controller("plans")
 export class PlanController {
   constructor(private readonly planService: PlanService) {}
 
   /** Creates a plan for the signed in user. */
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, EmailConfirmationGuard)
   @Post()
   async create(
     @Body() createPlanDto: CreatePlanDto,
@@ -42,7 +43,7 @@ export class PlanController {
     return plan;
   }
 
-  @UseGuards(JwtAuthGuard, OwnPlanGuard)
+  @UseGuards(JwtAuthGuard, OwnPlanGuard, EmailConfirmationGuard)
   @Get(":id")
   async findOne(
     @Param("id", ParseIntPipe) id: number
@@ -56,7 +57,7 @@ export class PlanController {
     return plan;
   }
 
-  @UseGuards(JwtAuthGuard, OwnPlanGuard)
+  @UseGuards(JwtAuthGuard, OwnPlanGuard, EmailConfirmationGuard)
   @Patch(":id")
   async update(
     @Param("id", ParseIntPipe) id: number,
@@ -78,7 +79,7 @@ export class PlanController {
   }
 
   @Delete(":id")
-  @UseGuards(JwtAuthGuard, OwnPlanGuard)
+  @UseGuards(JwtAuthGuard, OwnPlanGuard, EmailConfirmationGuard)
   async remove(@Param("id", ParseIntPipe) id: number): Promise<void> {
     const deleteResult = await this.planService.remove(id);
     if (!deleteResult) {
