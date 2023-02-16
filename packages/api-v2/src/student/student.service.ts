@@ -118,6 +118,15 @@ export class StudentService {
     return deleteResult;
   }
 
+  public async markEmailAsConfirmed(email: string): Promise<UpdateResult> {
+    return this.studentRepository.update(
+      { email },
+      {
+        isEmailConfirmed: true,
+      }
+    );
+  }
+
   static isEqualStudents(student1: Student, student2: Student): boolean {
     return student1.uuid === student2.uuid;
   }

@@ -26,12 +26,13 @@ import {
   UpdateStudentDto,
   UpdateStudentResponse,
 } from "@graduate/common";
+import { EmailConfirmationGuard } from "src/guards/emailConfirmation.guard";
 
 @Controller("students")
 export class StudentController {
   constructor(private readonly studentService: StudentService) {}
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, EmailConfirmationGuard)
   @Get("me")
   async getMe(
     @Req() req: AuthenticatedRequest,
@@ -52,7 +53,7 @@ export class StudentController {
     return student;
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, EmailConfirmationGuard)
   @Patch("me")
   async updateMe(
     @Req() req: AuthenticatedRequest,
@@ -77,7 +78,7 @@ export class StudentController {
     return student;
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, EmailConfirmationGuard)
   @Patch("me/onboard")
   async onBoard(
     @Req() req: AuthenticatedRequest,
@@ -102,7 +103,8 @@ export class StudentController {
     return student;
   }
 
-  @UseGuards(JwtAuthGuard)
+  // TODO: Should users need to be confirmed to delete their account
+  @UseGuards(JwtAuthGuard, EmailConfirmationGuard)
   @Delete("me")
   async removeMe(@Req() req: AuthenticatedRequest): Promise<void> {
     const uuid = req.user.uuid;
