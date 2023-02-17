@@ -3,11 +3,12 @@ import { ConfigModule } from "@nestjs/config";
 import EmailService from "./email.service";
 import { JwtModule } from "@nestjs/jwt";
 import EmailConfirmationService from "../emailConfirmation/emailConfirmation.service";
-import { StudentService } from "src/student/student.service";
+import { StudentModule } from "src/student/student.module";
+import { EmailConfirmationController } from "src/emailConfirmation/emailConfirmation.controller";
 
 @Module({
   imports: [
-    StudentService,
+    StudentModule,
     ConfigModule,
     JwtModule.register({
       secret: process.env.JWT_SECRET_KEY,
@@ -16,7 +17,7 @@ import { StudentService } from "src/student/student.service";
       },
     }),
   ],
-  controllers: [],
+  controllers: [EmailConfirmationController],
   providers: [EmailService, EmailConfirmationService],
   exports: [EmailService, EmailConfirmationService],
 })

@@ -62,6 +62,7 @@ export default class EmailConfirmationService {
     if (student.isEmailConfirmed) {
       throw new BadRequestException("Email already confirmed");
     }
+    // TODO: Disable old JWT token
     await this.sendVerificationLink(student.email);
   }
 }
