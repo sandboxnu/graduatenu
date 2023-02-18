@@ -25,3 +25,5 @@ export const RANGE_BOUNDED_MAYBE_EXCEPTIONS =
 
 // Case 5 and 6
 export const RANGE_UNBOUNDED = /([A-Z]{2,4}, ){2,}and ([A-Z]{2,4})/;
+
+export const XOM_REGEX = /^complete \d+ credits.+choose courses within the following ranges:$|^complete (one|two) of the following courses not already taken:$/

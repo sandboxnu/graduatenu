@@ -28,8 +28,9 @@ export type HSection = {
 export type HRow =
   // text rows
   | TextRow<HRowType.COMMENT>
-  | CountAndHoursRow<HRowType.COMMENT_COUNT>
+  | CountAndHoursRow<HRowType.COMMENT_COUNT> // <-- Can probably just remove this!
   | CountAndHoursRow<HRowType.SECTION_INFO>
+  | TextRow<HRowType.X_OF_MANY>
   | TextRow<HRowType.HEADER>
   | TextRow<HRowType.SUBHEADER>
   // course rows
@@ -68,6 +69,8 @@ export enum HRowType {
   RANGE_BOUNDED_WITH_EXCEPTIONS = "RANGE_BOUNDED_WITH_EXCEPTIONS",
 
   RANGE_UNBOUNDED = "RANGE_UNBOUNDED",
+
+  X_OF_MANY = "X_OF_MANY"
 }
 
 export interface TextRow<T> {

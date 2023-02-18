@@ -68,3 +68,5 @@ packages/scrapers-v2/src/parse/grammar.js
 
 # Coverage
 coverage/
+
+major_output

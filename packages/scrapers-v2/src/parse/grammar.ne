@@ -17,6 +17,8 @@ const RANGE_LOWER_BOUNDED_WITH_EXCEPTIONS = { test: x => x.type === "RANGE_LOWER
 const RANGE_BOUNDED = { test: x => x.type === "RANGE_BOUNDED" };
 const RANGE_BOUNDED_WITH_EXCEPTIONS = { test: x => x.type === "RANGE_BOUNDED_WITH_EXCEPTIONS" };
 const RANGE_UNBOUNDED = { test: x => x.type === "RANGE_UNBOUNDED" };
+
+const X_OF_MANY = { test: x => x.type === "X_OF_MANY" };
 %}
 
 @{%
@@ -36,9 +38,11 @@ requirement2_section ->
   | %HEADER %SECTION_INFO requirement2_list                {% postprocess.processSectionWithInfo %}
 
 ## to avoid ambiguity, ANDs cannot follow ANDs
+## similarly, XOMs cannot contain other XOMs
 requirement2_list ->
     nonAndCourseList                                       {% id %}
   | andCourse nonAndCourseList                             {% cons %}
+  | %X_OF_MANY requirement2_list                           {% postprocess.processXOM %}
 nonAndCourseList ->
     null                                                   {% mt %}
   | (course | range | orCourse) requirement2_list          {% cons %}

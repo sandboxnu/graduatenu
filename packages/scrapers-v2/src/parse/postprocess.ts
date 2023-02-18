@@ -3,6 +3,7 @@ import {
   IAndCourse2,
   IOrCourse2,
   IRequiredCourse,
+  IXofManyCourse,
   Requirement2,
   Section,
 } from "@graduate/common";
@@ -132,3 +133,11 @@ export const processAnd = (tokens: [IAndCourse2[]]): IAndCourse2[] => {
   // }
   return tokens[0]
 };
+
+export const processXOM = ([xom, reqs]: [TextRow<HRowType.X_OF_MANY>, Requirement2[]]): IXofManyCourse[] => {
+  return [{
+    type: "XOM",
+    numCreditsMin: xom.hour,
+    courses: reqs
+  }]
+}

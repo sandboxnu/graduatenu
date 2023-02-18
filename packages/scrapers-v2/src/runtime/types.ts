@@ -5,6 +5,8 @@ export enum StageLabel {
   Classify = "Classify",
   Filter = "Filter",
   Tokenize = "Tokenize",
+  Parse = "Parse",
+  Save = "Save"
 }
 
 /**

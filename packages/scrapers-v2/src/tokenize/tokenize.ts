@@ -13,6 +13,7 @@ import {
   RANGE_LOWER_BOUNDED_PARSE,
   RANGE_UNBOUNDED,
   SUBJECT_REGEX,
+  XOM_REGEX,
 } from "./constants";
 import {
   CountAndHoursRow,
@@ -287,6 +288,10 @@ const getRowType = ($: CheerioStatic, tr: CheerioElement, tds: Cheerio[]) => {
     return HRowType.SECTION_INFO;
   }
 
+  if (tdText.toLowerCase().match(XOM_REGEX)) {
+    return HRowType.X_OF_MANY;
+  }
+
   return HRowType.COMMENT;
 };
 
@@ -326,6 +331,8 @@ const constructRow = (
       return constructSectionInfo($, tds);
     case HRowType.COMMENT_COUNT:
       throw new Error("We don't support comment counts yet!")
+    case HRowType.X_OF_MANY:
+      return constructXOfMany($, tds);
     default:
       return assertUnreachable(type);
   }
@@ -547,6 +554,21 @@ const constructSectionInfo = (
 
   throw new Error("Parsed text not in recognised list! (shouldn't be possible :) ).");
 };
+
+const constructXOfMany = (
+  $: CheerioStatic,
+  tds: Cheerio[]
+): TextRow<HRowType.X_OF_MANY> => {
+  const [c1, c2] = ensureLength(2, tds, tds.toString())
+  const hour = parseHour(c2)
+  const description = parseText(c1)
+
+  return {
+    type: HRowType.X_OF_MANY,
+    description,
+    hour,
+  }
+}
 
 const parseHour = (td: Cheerio) => {
   const hourText = td.text();
