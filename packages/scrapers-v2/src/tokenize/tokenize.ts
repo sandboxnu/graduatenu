@@ -13,7 +13,8 @@ import {
   RANGE_LOWER_BOUNDED_PARSE,
   RANGE_UNBOUNDED,
   SUBJECT_REGEX,
-  XOM_REGEX,
+  XOM_REGEX_CREDITS,
+  XOM_REGEX_NUMBER
 } from "./constants";
 import {
   CountAndHoursRow,
@@ -22,6 +23,7 @@ import {
   HRow,
   HRowType,
   HSection,
+  HSectionType,
   MultiCourseRow,
   RangeBoundedRow,
   RangeLowerBoundedRow,
@@ -169,9 +171,12 @@ const tokenizeSections = async (
       // class "sc_courselist" signifies that this table is a list of courses
       // => parse the table's rows
       const tableDesc = descriptions.pop() || "";
-      const courseTable = {
+      const courseTable: HSection = {
         description: tableDesc,
         entries: tokenizeRows($, element),
+        type: tableDesc.toLowerCase().includes("concentration") 
+          ? HSectionType.CONCENTRATION 
+          : HSectionType.PRIMARY
       };
       courseList.push(courseTable);
     } else if (
@@ -288,7 +293,8 @@ const getRowType = ($: CheerioStatic, tr: CheerioElement, tds: Cheerio[]) => {
     return HRowType.SECTION_INFO;
   }
 
-  if (tdText.toLowerCase().match(XOM_REGEX)) {
+  if (tdText.toLowerCase().match(XOM_REGEX_CREDITS) 
+      || tdText.toLowerCase().match(XOM_REGEX_NUMBER)) {
     return HRowType.X_OF_MANY;
   }
 
@@ -555,13 +561,42 @@ const constructSectionInfo = (
   throw new Error("Parsed text not in recognised list! (shouldn't be possible :) ).");
 };
 
+const XOM_NUMBERS = new Map([
+  ["one", 1],
+  ["two", 2],
+  ["three", 3],
+  ["four", 4],
+  ["five", 5],
+  ["six", 6],
+  ["seven", 7],
+  ["eight", 8],
+  ["nine", 9],
+  ["ten", 10]
+])
+
 const constructXOfMany = (
   $: CheerioStatic,
   tds: Cheerio[]
 ): TextRow<HRowType.X_OF_MANY> => {
   const [c1, c2] = ensureLength(2, tds, tds.toString())
-  const hour = parseHour(c2)
+  let hour = parseHour(c2)
   const description = parseText(c1)
+
+  
+  if (!hour) {
+    let matchesNumber = description.toLowerCase().match(XOM_REGEX_NUMBER)
+    if (matchesNumber) {
+      let numberTranslation = XOM_NUMBERS.get(matchesNumber[1])
+      if (numberTranslation != undefined) {
+        hour = numberTranslation * 4
+      }
+    }
+    
+    let matchesCredits = description.toLowerCase().match(XOM_REGEX_CREDITS)
+    if (matchesCredits) {
+      hour = Number(matchesCredits[1])
+    }
+  }
 
   return {
     type: HRowType.X_OF_MANY,

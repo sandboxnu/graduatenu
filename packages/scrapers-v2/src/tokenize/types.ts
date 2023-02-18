@@ -10,10 +10,24 @@ export type HDocument = {
 };
 
 /** An HTML section (of a document) has a description, and a list of rows that it contains. */
-export type HSection = {
+export type HSection = PrimaryHSection | ConcentrationHSection;
+
+export enum HSectionType {
+  PRIMARY = "PRIMARY",
+  CONCENTRATION = "CONCENTRATION"
+}
+
+export type PrimaryHSection = {
   description: string;
   entries: HRow[];
-};
+  type: HSectionType.PRIMARY
+}
+
+export type ConcentrationHSection = {
+  description: string;
+  entries: HRow[];
+  type: HSectionType.CONCENTRATION
+}
 
 /**
  * An HTML row (abbreviated HRow) consists of four main different types of row:

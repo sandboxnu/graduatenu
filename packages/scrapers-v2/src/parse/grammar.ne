@@ -29,20 +29,25 @@ const postprocess = require("./postprocess");
 %}
 
 # main entrypoint
-## ranges may produce arrays of requirements, so call flat
 main -> requirement2_section:+                             {% id %}
 
 # sections!
 requirement2_section ->
-    %HEADER requirement2_list                              {% postprocess.processSection %}
-  | %HEADER %SECTION_INFO requirement2_list                {% postprocess.processSectionWithInfo %}
+    %HEADER top_level_requirement2_list                {% postprocess.processSection %}
+  | %HEADER %SECTION_INFO top_level_requirement2_list  {% postprocess.processSectionWithInfo %}
+
+xom -> 
+  %X_OF_MANY requirement2_list                           {% postprocess.processXOM %}
+
+## XOMs must be at the top-level of a section
+top_level_requirement2_list ->
+    requirement2_list xom:+                                {% tokens => tokens.flat() %}
+  | requirement2_list                                      {% id %}
 
 ## to avoid ambiguity, ANDs cannot follow ANDs
-## similarly, XOMs cannot contain other XOMs
 requirement2_list ->
     nonAndCourseList                                       {% id %}
   | andCourse nonAndCourseList                             {% cons %}
-  | %X_OF_MANY requirement2_list                           {% postprocess.processXOM %}
 nonAndCourseList ->
     null                                                   {% mt %}
   | (course | range | orCourse) requirement2_list          {% cons %}

@@ -23,11 +23,12 @@ const convertCourses = (
 };
 
 export const processSection = ([header, requirements]: [TextRow<HRowType.HEADER>, Requirement2[]]): Section => {
+  let reqs = requirements.flat()
   return {
     type: "SECTION",
     title: header.description,
-    requirements: requirements.flat(),
-    minRequirementCount: requirements.length
+    requirements: reqs,
+    minRequirementCount: reqs.length
   }
 }
 
@@ -138,6 +139,6 @@ export const processXOM = ([xom, reqs]: [TextRow<HRowType.X_OF_MANY>, Requiremen
   return [{
     type: "XOM",
     numCreditsMin: xom.hour,
-    courses: reqs
+    courses: reqs.flat()
   }]
 }

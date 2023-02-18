@@ -11,7 +11,7 @@ import {
   logResults,
   clearGlobalStatsLogger,
 } from "./logger";
-import { HDocument, HRow, HRowType, TextRow } from "../tokenize/types";
+import { ConcentrationHSection, HDocument, HRow, HRowType, HSectionType, TextRow } from "../tokenize/types";
 import { parseRows } from "../parse/parse";
 import {writeFile} from "fs/promises"
 
@@ -22,12 +22,12 @@ import {writeFile} from "fs/promises"
  */
 export const runPipeline = async (yearStart: number, yearEnd: number) => {
   const unregisterAgent = createAgent();
-  // const { entries, unfinished } = await scrapeMajorLinks(yearStart, yearEnd);
-  // if (unfinished.length > 0) {
-  //   console.log("didn't finish searching some entries", ...unfinished);
-  // }
+  const { entries, unfinished } = await scrapeMajorLinks(yearStart, yearEnd);
+  if (unfinished.length > 0) {
+    console.log("didn't finish searching some entries", ...unfinished);
+  }
 
-  const entries = [new URL("https://catalog.northeastern.edu/undergraduate/computer-information-science/computer-science/bscs/")]
+  // const entries = [new URL("https://catalog.northeastern.edu/undergraduate/computer-information-science/computer-science/bscs/")]
 
   // can use for debugging logging throughout the stages
   installGlobalStatsLogger();
@@ -122,7 +122,7 @@ const tokenizeEntry = async (entry: TypedCatalogEntry): Promise<TokenizedCatalog
 
 const parseEntry = async (entry: TokenizedCatalogEntry): Promise<ParsedCatalogEntry> => {
   const nonConcentrations = entry.tokenized.sections.filter(metaSection => {
-    return !metaSection.description.toLowerCase().startsWith("concentration")
+    return metaSection.type === HSectionType.PRIMARY
   })
   
   const entries: HRow[][] = nonConcentrations.map((metaSection)=>metaSection.entries)
@@ -136,7 +136,7 @@ const parseEntry = async (entry: TokenizedCatalogEntry): Promise<ParsedCatalogEn
   let mainReqsParsed = parseRows(allEntries)
 
   let concentrations = entry.tokenized.sections.filter(metaSection => {
-    return metaSection.description.toLowerCase().startsWith("concentration")
+    return metaSection.type === HSectionType.CONCENTRATION
   })
   .map((concentration): Section => {
     // Add in header based on section name if one isn't already present.
@@ -149,16 +149,11 @@ const parseEntry = async (entry: TokenizedCatalogEntry): Promise<ParsedCatalogEn
       }
       concentration.entries = [newHeader, ...concentration.entries]
     }
-    try {
-      let parsed = parseRows(concentration.entries)
-      if (parsed.length === 1 && parsed[0].type == "SECTION") {
-        return parsed[0]
-      } else {
-        throw new Error(`Concentration "${concentration.description}" cannot be parsed!`)
-      }
-    } catch (e) {
-      // console.error(e)
-      throw new Error("error lol")
+    let parsed = parseRows(concentration.entries)
+    if (parsed.length === 1 && parsed[0].type == "SECTION") {
+      return parsed[0]
+    } else {
+      throw new Error(`Concentration "${concentration.description}" cannot be parsed!`)
     }
   })
 
