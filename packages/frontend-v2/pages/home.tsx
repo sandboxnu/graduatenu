@@ -9,7 +9,12 @@ import {
   rectIntersection,
 } from "@dnd-kit/core";
 import { API } from "@graduate/api-client";
-import { CoReqWarnings, PlanModel, PreReqWarnings } from "@graduate/common";
+import {
+  CoReqWarnings,
+  PlanModel,
+  PreReqWarnings,
+  ScheduleCourse2,
+} from "@graduate/common";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { PropsWithChildren, useEffect, useState } from "react";
@@ -24,6 +29,7 @@ import {
   ScheduleCourse,
   Sidebar,
   SidebarContainer,
+  SIDEBAR_DND_ID_PREFIX,
 } from "../components";
 import { GraduateHeader } from "../components/Header/GraduateHeader";
 import { fetchStudentAndPrepareForDnd, useStudentWithPlans } from "../hooks";
@@ -65,7 +71,8 @@ const HomePage: NextPage = () => {
     number | undefined | null
   >();
 
-  const [activeCourse, setActiveCourse] = useState(null);
+  const [activeCourse, setActiveCourse] =
+    useState<ScheduleCourse2<string> | null>(null);
 
   const [isRemove, setIsRemove] = useState<boolean>(false);
 
@@ -132,7 +139,7 @@ const HomePage: NextPage = () => {
    */
   const handleDragStart = (event: DragStartEvent) => {
     const { active } = event;
-    setActiveCourse(active.data.current?.course);
+    setActiveCourse({ ...active.data.current?.course, id: active.id });
   };
 
   const handleDragEnd = (event: DragEndEvent): void => {
@@ -251,6 +258,7 @@ const HomePage: NextPage = () => {
             coReqErr={undefined}
             preReqErr={undefined}
             isRemove={isRemove}
+            isFromSidebar={activeCourse.id.startsWith(SIDEBAR_DND_ID_PREFIX)}
           />
         ) : null}
       </DragOverlay>
