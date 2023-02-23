@@ -11,7 +11,7 @@ export class InitialMigration1675976227120 implements MigrationInterface {
       `CREATE TABLE IF NOT EXISTS "plan" ("id" SERIAL NOT NULL, "name" character varying NOT NULL, "schedule" json NOT NULL, "major" character varying NOT NULL, "concentration" character varying, "catalogYear" smallint NOT NULL, "createdAt" TIMESTAMP NOT NULL DEFAULT now(), "updatedAt" TIMESTAMP NOT NULL DEFAULT now(), "studentUuid" uuid, CONSTRAINT "PK_54a2b686aed3b637654bf7ddbb3" PRIMARY KEY ("id"))`
     );
     await queryRunner.query(
-      `ALTER TABLE "plan" DROP CONSTRAINT IF EXISTS "FK_d45229c252c6776e9f4a58502b0"; ALTER TABLE "plan" ADD CONSTRAINT IF NOT EXISTS "FK_d45229c252c6776e9f4a58502b0" FOREIGN KEY ("studentUuid") REFERENCES "student"("uuid") ON DELETE CASCADE ON UPDATE NO ACTION`
+      `ALTER TABLE "plan" DROP CONSTRAINT IF EXISTS "FK_d45229c252c6776e9f4a58502b0"; ALTER TABLE "plan" ADD CONSTRAINT "FK_d45229c252c6776e9f4a58502b0" FOREIGN KEY ("studentUuid") REFERENCES "student"("uuid") ON DELETE CASCADE ON UPDATE NO ACTION`
     );
   }
 
