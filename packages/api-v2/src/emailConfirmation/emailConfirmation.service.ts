@@ -1,12 +1,19 @@
-import { BadRequestException, Injectable } from "@nestjs/common";
+import { BadRequestException, Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { JwtService } from "@nestjs/jwt";
 import { EnvironmentVariables } from "src/environment-variables";
 import EmailService from "../email/email.service";
 import { StudentService } from "src/student/student.service";
+import { UpdateResult } from "typeorm";
+import {
+  EmailAlreadyConfirmed,
+  UnableToSendEmail,
+} from "./emailConfirmationErrors";
+import { Err } from "@graduate/common";
 
 @Injectable()
 export default class EmailConfirmationService {
+  private readonly logger: Logger = new Logger();
   constructor(
     private readonly jwtService: JwtService,
     private readonly configService: ConfigService<EnvironmentVariables, true>,
@@ -14,7 +21,7 @@ export default class EmailConfirmationService {
     private readonly studentService: StudentService
   ) {}
 
-  public sendVerificationLink(email: string) {
+  public sendVerificationLink(email: string): Promise<any> {
     const payload = { email };
     const token = this.jwtService.sign(payload);
     const url = `${this.configService.get(
@@ -29,40 +36,74 @@ export default class EmailConfirmationService {
     });
   }
 
-  public async confirmEmail(email: string) {
+  public async confirmEmail(
+    email: string
+  ): Promise<UpdateResult | EmailAlreadyConfirmed> {
     const student = await this.studentService.findByEmail(email);
 
     if (student.isEmailConfirmed) {
-      throw new BadRequestException("Email already confirmed");
+      this.logger.debug({
+        message: "Email is already confirmed",
+        student,
+      });
+      return new EmailAlreadyConfirmed();
     }
 
-    await this.studentService.markEmailAsConfirmed(email);
+    return await this.studentService.markEmailAsConfirmed(email);
   }
 
-  public async decodeConfirmationToken(token: string) {
+  public async decodeConfirmationToken(token: string): Promise<string | Error> {
     try {
       const payload = await this.jwtService.verify(token, {
         secret: this.configService.get("JWT_SECRET_KEY"),
       });
 
-      if (typeof payload === "object" && "email" in payload) {
+      if (
+        typeof payload === "object" &&
+        "email" in payload &&
+        typeof payload.email === "string"
+      ) {
         return payload.email;
       }
-      throw new BadRequestException();
+      this.logger.debug({
+        message: "Invalid payload",
+        payload,
+      });
+      return new Error();
     } catch (error) {
       if (error?.name === "TokenExpiredError") {
-        throw new BadRequestException("Email confirmation token expired");
+        this.logger.debug({
+          message: "Email confirmation token expired",
+          error,
+        });
+        return new Error();
       }
-      throw new BadRequestException("Bad confirmation token");
+      this.logger.debug({
+        message: "Bad confirmation token",
+      });
+      return new Error();
     }
   }
 
-  public async resendConfirmationLink(uuid: string) {
+  public async resendConfirmationLink(
+    uuid: string
+  ): Promise<EmailAlreadyConfirmed | UnableToSendEmail> {
     const student = await this.studentService.findByUuid(uuid);
     if (student.isEmailConfirmed) {
-      throw new BadRequestException("Email already confirmed");
+      this.logger.debug({
+        message: "Email is already confirmed",
+        student,
+      });
+      return new EmailAlreadyConfirmed();
     }
     // TODO: Disable old JWT token
-    await this.sendVerificationLink(student.email);
+    const result = await this.sendVerificationLink(student.email);
+    if (!result) {
+      this.logger.debug({
+        message: "Unable to send verification link",
+      });
+      return new UnableToSendEmail();
+    }
+    return result;
   }
 }
