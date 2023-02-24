@@ -24,7 +24,7 @@ export default class EmailService {
     });
   }
 
-  sendMail(options: Mail.Options) {
+  sendMail(options: Mail.Options): Promise<any> {
     return this.nodemailerTransport.sendMail(options);
   }
 }
