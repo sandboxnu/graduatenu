@@ -1,3 +1,4 @@
+import { InfoIcon } from "@chakra-ui/icons";
 import {
   Modal,
   ModalOverlay,
@@ -9,6 +10,8 @@ import {
   Button,
   VStack,
   Text,
+  Tooltip,
+  Flex,
 } from "@chakra-ui/react";
 import { ScheduleCourse2 } from "@graduate/common";
 import { useState } from "react";
@@ -113,9 +116,16 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
             gap="2xs"
           >
             {error && (
-              <Text fontWeight="semibold" textAlign="center">
-                Error searching courses
-              </Text>
+              <Tooltip label="We rely on SearchNEU to search for courses, and there may be an ongoing issue on their end. We recommend refreshing the page and trying again soon. If the issue persists, help us by clicking the Bug/Feature button to report the bug">
+                <Flex alignItems={"center"} justifyContent={"center"}>
+                  <InfoIcon marginRight={"4px"} />
+                  <Text fontSize="xs" fontWeight="semibold" textAlign="center">
+                    {
+                      "Oops, sorry we couldn't search for courses... try again in a little bit!"
+                    }
+                  </Text>
+                </Flex>
+              </Tooltip>
             )}
             {courses &&
               courses.map((searchResult) => (

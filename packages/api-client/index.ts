@@ -125,12 +125,25 @@ class SearchAPIClient {
   }
 
   fetchCourse = async (
-    query: string
-  ): Promise<ScheduleCourse2<null> | null> => {
+    subject: string,
+    classId: string
+  ): Promise<ScheduleCourse2<null>> => {
     const res = await this.axios({
       method: "post",
       data: {
-        query: query,
+        query: `{ 
+          class(subject: "${subject}", classId: "${classId}") {
+            latestOccurrence {
+              name
+              subject
+              classId
+              maxCredits
+              minCredits
+              prereqs
+              coreqs
+            }
+          }
+        }`,
       },
     });
 
@@ -138,11 +151,32 @@ class SearchAPIClient {
     return occurrenceToCourse(courseData?.class?.latestOccurrence);
   };
 
-  fetchCourses = async (query: string): Promise<ScheduleCourse2<null>[]> => {
+  fetchCourses = async (
+    courses: { subject: string; classId: string }[]
+  ): Promise<ScheduleCourse2<null>[]> => {
+    const input = courses
+      .map((course) => {
+        return `{subject: "${course.subject}", classId: "${course.classId}"}`;
+      })
+      .join(",");
+
     const res = await this.axios({
       method: "post",
       data: {
-        query: query,
+        query: `{
+        bulkClassess(input: [${input}]) {
+          latestOccurrence {
+            name
+            subject
+            classId
+            minCredits
+            maxCredits
+            prereqs
+            coreqs
+            termId
+          }
+        }
+      }`,
       },
     });
 
@@ -153,16 +187,29 @@ class SearchAPIClient {
         return occurrenceToCourse(course?.latestOccurrence);
       });
     } else {
-      return [];
+      throw Error("Courses could not be fetched");
     }
   };
 
-  searchCourses = async (query: string): Promise<ScheduleCourse2<null>[]> => {
+  searchCourses = async (
+    searchQuery: string,
+    minIndex = 0,
+    maxIndex = 9999
+  ): Promise<ScheduleCourse2<null>[]> => {
     const res = await this.axios({
       method: "POST",
       headers: { "Content-Type": "application/json" },
       data: JSON.stringify({
-        query: query,
+        query: `
+        {
+          searchs(termId:"202130", query: "${searchQuery}", classIdRange: {min: ${minIndex}, max: ${maxIndex}}) {
+            totalCount 
+            pageInfo { hasNextPage } 
+            nodes { ... on ClassOccurrence { name subject maxCredits minCredits prereqs coreqs classId
+            } 
+          } 
+        } 
+      }`,
       }),
     });
 
