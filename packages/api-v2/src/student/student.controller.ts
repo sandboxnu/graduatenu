@@ -103,7 +103,6 @@ export class StudentController {
     return student;
   }
 
-  // TODO: Should users need to be confirmed to delete their account
   @UseGuards(JwtAuthGuard, EmailConfirmationGuard)
   @Delete("me")
   async removeMe(@Req() req: AuthenticatedRequest): Promise<void> {
