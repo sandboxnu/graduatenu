@@ -15,53 +15,24 @@ type SearchCoursesReturn = SearchCoursesResponse & {
 };
 
 /**
- * @param subject - The type of class that we are fetching from SearchNEU
- * @param classId - The identification number of the class as a string
+ * @param searchQuery - The user query term for the class they are searching for
+ * @param minIndex    - The lower bound of course ID to search by. Default 0
+ * @param maxIndex    - The upper bound of course ID to search by. Default 9999
  */
 export function useSearchCourses(
   searchQuery: string,
   minIndex = 0,
   maxIndex = 9999
 ): SearchCoursesReturn {
-  const key = constructKey(searchQuery, minIndex, maxIndex);
-
   const { data, mutate, ...rest } = useSWR(
-    key,
-    async () => await getSearchCourses(searchQuery, minIndex, maxIndex)
+    `/searchCourses/${searchQuery}/${minIndex}/${maxIndex}`,
+    async () => await SearchAPI.searchCourses(searchQuery, minIndex, maxIndex)
   );
 
   return {
     ...rest,
-    courses: data,
+    courses: searchQuery ? data : [],
     isLoading: !data && !rest.error,
     mutateCourses: mutate,
   };
 }
-
-export const getSearchCourses = async (
-  searchQuery: string,
-  minIndex = 0,
-  maxIndex = 9999
-): Promise<ScheduleCourse2<null>[]> => {
-  if (!searchQuery) {
-    return [];
-  }
-
-  const key = constructKey(searchQuery, minIndex, maxIndex);
-  const courses = await SearchAPI.searchCourses(key);
-
-  return courses;
-};
-
-const constructKey = (searchQuery: string, minIndex = 0, maxIndex = 9999) => {
-  return `
-    {
-      search(termId:"202130", query: "${searchQuery}", classIdRange: {min: ${minIndex}, max: ${maxIndex}}) {
-        totalCount 
-        pageInfo { hasNextPage } 
-        nodes { ... on ClassOccurrence { name subject maxCredits minCredits prereqs coreqs classId
-        } 
-      } 
-    } 
-  }`;
-};

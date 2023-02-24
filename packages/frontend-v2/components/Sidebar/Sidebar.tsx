@@ -11,7 +11,7 @@ import SidebarSection from "./SidebarSection";
 import { getAllCoursesFromPlan } from "../../utils/plan/getAllCoursesFromPlan";
 import { getSectionError } from "../../utils/plan/getSectionError";
 import { handleApiClientError } from "../../utils";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useRouter } from "next/router";
 import { useMajor } from "../../hooks/useMajor";
 import {
@@ -19,7 +19,7 @@ import {
   WorkerMessageType,
   WorkerPostInfo,
 } from "../../validation-worker/worker-messages";
-import { useFetchSearchCourses } from "../../hooks/useFetchSearchCourses";
+import { useFetchCourses } from "../../hooks/useFetchCourses";
 import { getAllCoursesInMajor } from "../../utils/plan/getAllCoursesInMajor";
 
 interface SidebarProps {
@@ -41,9 +41,12 @@ const COOP_BLOCK: ScheduleCourse2<string> = {
   id: "co-op-block",
 };
 
-const createCourseMap = (courses: ScheduleCourse2<null>[] | undefined) => {
+const createCourseMap = (
+  courses: ScheduleCourse2<null>[] | undefined,
+  courseErrors: Error | AxiosError | undefined
+) => {
   const courseData: { [id: string]: ScheduleCourse2<null> } = {};
-  if (courses) {
+  if (courses && !courseErrors) {
     for (const course of courses) {
       if (course) {
         courseData[`${course.subject}${course.classId}`] = course;
@@ -135,10 +138,13 @@ const Sidebar: React.FC<SidebarProps> = memo(({ selectedPlan }) => {
 
   const majorCourses = getAllCoursesInMajor(major, concentration);
 
-  const { courses, isLoading: isCoursesLoading } =
-    useFetchSearchCourses(majorCourses);
+  const {
+    courses,
+    isLoading: isCoursesLoading,
+    error: courseErrors,
+  } = useFetchCourses(majorCourses);
 
-  const courseData = createCourseMap(courses);
+  const courseData = createCourseMap(courses, courseErrors);
 
   if (isMajorLoading) {
     return <SidebarContainer title="Loading..." />;

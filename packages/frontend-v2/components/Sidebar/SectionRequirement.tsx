@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Tooltip } from "@chakra-ui/react";
 import {
   IAndCourse2,
   ICourseRange2,
@@ -9,7 +9,10 @@ import {
   ScheduleCourse2,
   Section,
 } from "@graduate/common";
-import { DraggableScheduleCourse } from "../ScheduleCourse";
+import {
+  DraggableScheduleCourse,
+  PlaceholderScheduleCourse,
+} from "../ScheduleCourse";
 import { SidebarValidationStatus } from "./Sidebar";
 import SidebarSection from "./SidebarSection";
 
@@ -117,12 +120,8 @@ const SectionRequirement: React.FC<SidebarRequirementProps> = ({
         />
       );
     }
-    return (
-      <p>
-        Course not found ({requirement.subject}
-        {requirement.classId})
-      </p>
-    );
+
+    return <PlaceholderScheduleCourse course={requirement} />;
   };
 
   const renderSection = (requirement: Section) => {
