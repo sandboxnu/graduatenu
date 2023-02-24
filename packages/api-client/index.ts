@@ -164,7 +164,7 @@ class SearchAPIClient {
       method: "post",
       data: {
         query: `{
-        bulkClassess(input: [${input}]) {
+        bulkClasses(input: [${input}]) {
           latestOccurrence {
             name
             subject
@@ -202,7 +202,7 @@ class SearchAPIClient {
       data: JSON.stringify({
         query: `
         {
-          searchs(termId:"202130", query: "${searchQuery}", classIdRange: {min: ${minIndex}, max: ${maxIndex}}) {
+          search(termId:"202130", query: "${searchQuery}", classIdRange: {min: ${minIndex}, max: ${maxIndex}}) {
             totalCount 
             pageInfo { hasNextPage } 
             nodes { ... on ClassOccurrence { name subject maxCredits minCredits prereqs coreqs classId
