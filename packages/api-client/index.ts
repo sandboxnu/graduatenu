@@ -96,11 +96,7 @@ interface SearchClass {
   minCredits: number;
 }
 
-function occurrenceToCourse(
-  occurrence: SearchClass
-): ScheduleCourse2<null> | null {
-  if (!occurrence) return null;
-
+function occurrenceToCourse(occurrence: SearchClass): ScheduleCourse2<null> {
   return {
     name: occurrence.name,
     subject: occurrence.subject,
@@ -148,7 +144,9 @@ class SearchAPIClient {
     });
 
     const courseData = await res.data.data;
-    return occurrenceToCourse(courseData?.class?.latestOccurrence);
+    if (courseData && courseData.class && courseData.class.latestOccurrence) {
+      return occurrenceToCourse(courseData?.class?.latestOccurrence);
+    }
   };
 
   fetchCourses = async (
