@@ -1,15 +1,14 @@
-import { BadRequestException, Injectable, Logger } from "@nestjs/common";
+import { Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { JwtService } from "@nestjs/jwt";
 import { EnvironmentVariables } from "src/environment-variables";
-import EmailService from "../email/email.service";
 import { StudentService } from "src/student/student.service";
 import { UpdateResult } from "typeorm";
+import EmailService from "../email/email.service";
 import {
   EmailAlreadyConfirmed,
-  UnableToSendEmail,
+  UnableToSendEmail
 } from "./emailConfirmationErrors";
-import { Err } from "@graduate/common";
 
 @Injectable()
 export default class EmailConfirmationService {

@@ -4,16 +4,16 @@ import {
   Controller,
   Post,
   Req,
-  UseGuards,
+  UseGuards
 } from "@nestjs/common";
 
-import { ConfirmEmailDto, Err } from "@graduate/common";
+import { ConfirmEmailDto } from "@graduate/common";
 import { AuthenticatedRequest } from "src/auth/interfaces/authenticated-request";
 import { JwtAuthGuard } from "src/guards/jwt-auth.guard";
 import EmailConfirmationService from "./emailConfirmation.service";
 import {
   EmailAlreadyConfirmed,
-  UnableToSendEmail,
+  UnableToSendEmail
 } from "./emailConfirmationErrors";
 
 @Controller("email-confirmation")
