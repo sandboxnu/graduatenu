@@ -3,7 +3,6 @@ import { Button } from "./components/buttons";
 import { Spinner } from "./components/spinners";
 
 const colors = {
-  // only main, 100, 300, 500, 700, 900 are certified by linda: rest of the shades were created using a generator
   primary: {
     blue: {
       dark: {
@@ -27,7 +26,7 @@ const colors = {
         300: "#84a1c7",
         400: "#6988af",
         500: "#6080aa",
-        600: "#3d5675",
+        600: "#7481A4",
         700: "#4973a8",
         800: "#172536",
         900: "#2d5c98",
@@ -105,12 +104,12 @@ const space = {
   "2xl": "3rem",
   "3xl": "4rem",
   "4xl": "5rem",
-  "5xl": "6rem"
+  "5xl": "6rem",
 };
 
 const sizes = {
-  "3xs": "10rem"
-}
+  "3xs": "10rem",
+};
 
 /** Customized component styles can be configured and passed to the theme provider */
 const components = {
@@ -124,5 +123,5 @@ export const theme = extendTheme({
   breakpoints,
   space,
   components,
-  sizes
+  sizes,
 });

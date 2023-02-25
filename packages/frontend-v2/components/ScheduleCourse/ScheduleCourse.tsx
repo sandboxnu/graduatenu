@@ -1,4 +1,4 @@
-import { DeleteIcon } from "@chakra-ui/icons";
+import { CloseIcon, DeleteIcon } from "@chakra-ui/icons";
 import { Flex } from "@chakra-ui/react";
 import { useDraggable } from "@dnd-kit/core";
 import { CSS } from "@dnd-kit/utilities";
@@ -8,6 +8,7 @@ import {
   ScheduleCourse2,
 } from "@graduate/common";
 import { forwardRef, useEffect, useState } from "react";
+import { DELETE_COURSE_AREA_DND_ID } from "../../pages/home";
 import { ReqErrorModal } from "../Plan/ReqErrorModal";
 import { COOP_BLOCK } from "../Sidebar";
 
@@ -15,12 +16,12 @@ interface DraggableScheduleCourseProps {
   scheduleCourse: ScheduleCourse2<string>;
   coReqErr?: INEUReqError;
   preReqErr?: INEUReqError;
-
   /** Function to remove the course from whatever the schedule it is part of. */
   removeCourse?: (course: ScheduleCourse2<unknown>) => void;
   isEditable?: boolean;
   isDisabled?: boolean;
   isFromSidebar?: boolean;
+  /** Only provide this prop to the overlay course being dragged around the screen. */
   setIsRemove?: (val: boolean) => void;
 }
 
@@ -47,7 +48,7 @@ export const DraggableScheduleCourse: React.FC<
     });
 
   useEffect(() => {
-    if (setIsRemove) setIsRemove(over === null);
+    if (setIsRemove) setIsRemove(over?.id === DELETE_COURSE_AREA_DND_ID);
   }, [over, setIsRemove]);
 
   return (
@@ -71,12 +72,19 @@ export const DraggableScheduleCourse: React.FC<
 interface ScheduleCourseProps extends DraggableScheduleCourseProps {
   coReqErr?: INEUReqError;
   preReqErr?: INEUReqError;
+  /**
+   * Does this static course have an overlay on the screen that is being dragged
+   * around? Is dragging applies to static courses(not the overlay being dragged
+   * around). Hence, this field is always false for overlays.
+   */
   isDragging?: boolean;
   listeners?: any;
   attributes?: any;
   transform?: string;
   isDisabled: boolean;
+  /** Is this the course being dragged around? */
   isOverlay?: boolean;
+  /** Is the course overlay being dragged over the delete course area? */
   isRemove?: boolean;
 }
 
@@ -102,6 +110,7 @@ export const ScheduleCourse = forwardRef<
     ref
   ) => {
     const [hovered, setHovered] = useState(false);
+    const isValidRemove = isRemove && !isFromSidebar;
 
     /*
     This component uses some plain HTML elements instead of Chakra
@@ -113,11 +122,7 @@ export const ScheduleCourse = forwardRef<
     return (
       <div
         style={{
-          backgroundColor: isRemove
-            ? "lightgrey"
-            : isOverlay
-            ? "lightgrey"
-            : "white",
+          backgroundColor: isOverlay ? "lightgrey" : "white",
           display: "flex",
           /*
           Visibility for the copy of the course left behind when the course
@@ -133,7 +138,6 @@ export const ScheduleCourse = forwardRef<
           transition: "transform 0.15s ease",
           transform: hovered ? "scale(1.04)" : "scale(1)",
           justifyContent: "space-between",
-          opacity: isRemove && !isFromSidebar ? "0.5" : "1",
         }}
         onMouseEnter={() => {
           setHovered(true);
@@ -144,23 +148,12 @@ export const ScheduleCourse = forwardRef<
         ref={ref}
         {...attributes}
       >
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            padding: "8px 8px",
-            cursor: isOverlay ? "grabbing" : "grab",
-          }}
-          {...listeners}
-        >
-          <ScheduleCourseDragIcon />
-          <p style={{ fontWeight: "bold" }}>
-            {`${courseToString(scheduleCourse)} `}
-            <span style={{ marginLeft: "2px", fontWeight: "normal" }}>
-              {scheduleCourse.name}
-            </span>
-          </p>
-        </div>
+        <ScheduleCourseDraggedContents
+          scheduleCourse={scheduleCourse}
+          listeners={listeners}
+          isOverlay={isOverlay}
+          isValidRemove={isValidRemove}
+        />
         <Flex>
           {(coReqErr != undefined || preReqErr != undefined) && (
             <ReqErrorModal
@@ -236,5 +229,69 @@ const ScheduleCourseDragIcon: React.FC = () => {
         d="M3,2 C2.44771525,2 2,1.55228475 2,1 C2,0.44771525 2.44771525,0 3,0 C3.55228475,0 4,0.44771525 4,1 C4,1.55228475 3.55228475,2 3,2 Z M3,6 C2.44771525,6 2,5.55228475 2,5 C2,4.44771525 2.44771525,4 3,4 C3.55228475,4 4,4.44771525 4,5 C4,5.55228475 3.55228475,6 3,6 Z M3,10 C2.44771525,10 2,9.55228475 2,9 C2,8.44771525 2.44771525,8 3,8 C3.55228475,8 4,8.44771525 4,9 C4,9.55228475 3.55228475,10 3,10 Z M7,2 C6.44771525,2 6,1.55228475 6,1 C6,0.44771525 6.44771525,0 7,0 C7.55228475,0 8,0.44771525 8,1 C8,1.55228475 7.55228475,2 7,2 Z M7,6 C6.44771525,6 6,5.55228475 6,5 C6,4.44771525 6.44771525,4 7,4 C7.55228475,4 8,4.44771525 8,5 C8,5.55228475 7.55228475,6 7,6 Z M7,10 C6.44771525,10 6,9.55228475 6,9 C6,8.44771525 6.44771525,8 7,8 C7.55228475,8 8,8.44771525 8,9 C8,9.55228475 7.55228475,10 7,10 Z"
       ></path>
     </svg>
+  );
+};
+
+/** The course components that are dragged around. */
+interface ScheduleCourseDraggedContentsProps {
+  scheduleCourse: ScheduleCourse2<unknown>;
+  listeners: any;
+  isOverlay: boolean;
+  isValidRemove?: boolean;
+}
+const ScheduleCourseDraggedContents: React.FC<
+  ScheduleCourseDraggedContentsProps
+> = ({ scheduleCourse, listeners, isOverlay, isValidRemove }) => {
+  return (
+    <div
+      style={{
+        padding: "8px 8px",
+        cursor: isOverlay ? "grabbing" : "grab",
+      }}
+      {...listeners}
+    >
+      {isValidRemove && <ScheduleCourseRemoveOverlay />}
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          width: "100%",
+          height: "100%",
+          opacity: isValidRemove ? 0.2 : 1,
+        }}
+      >
+        <ScheduleCourseDragIcon />
+        <p style={{ fontWeight: "bold" }}>
+          {`${courseToString(scheduleCourse)} `}
+          <span style={{ marginLeft: "2px", fontWeight: "normal" }}>
+            {scheduleCourse.name}
+          </span>
+        </p>
+      </div>
+    </div>
+  );
+};
+
+/**
+ * The cross icon overlay that appears over a dragged course when it is over the
+ * delete area.
+ */
+const ScheduleCourseRemoveOverlay: React.FC = () => {
+  return (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        position: "absolute",
+        top: "0",
+        left: "0",
+        width: "100%",
+        height: "100%",
+        zIndex: 10,
+      }}
+    >
+      <CloseIcon color="white" width="25px" height="25px" />
+    </div>
   );
 };

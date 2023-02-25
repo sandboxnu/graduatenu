@@ -7,6 +7,7 @@ import {
   DragStartEvent,
   pointerWithin,
   rectIntersection,
+  useDroppable,
 } from "@dnd-kit/core";
 import { API } from "@graduate/api-client";
 import {
@@ -45,6 +46,8 @@ import {
   getCoReqWarnings,
   getPreReqWarnings,
 } from "../utils/plan/preAndCoReqCheck";
+
+export const DELETE_COURSE_AREA_DND_ID = "delete-course-area";
 
 // Algorithm to decide which droppable the course is currently over (if any).
 // See https://docs.dndkit.com/api-documentation/context-provider/collision-detection-algorithms for more info.
@@ -268,11 +271,17 @@ const HomePage: NextPage = () => {
 
 /**
  * This will have everything that can be rendered without the student and
- * plans(i.e: header, sidebar, etc)
+ * plans(i.e: header, sidebar, etc).
  */
 const PageLayout: React.FC<PropsWithChildren> = ({ children }) => {
+  const { setNodeRef } = useDroppable({ id: DELETE_COURSE_AREA_DND_ID });
   return (
-    <Flex flexDirection="column" height="100vh" overflow="hidden">
+    <Flex
+      flexDirection="column"
+      height="100vh"
+      overflow="hidden"
+      ref={setNodeRef}
+    >
       <Header />
       <Flex height="100%" overflow="hidden">
         {children}
