@@ -36,5 +36,4 @@ USER nestjs
 EXPOSE 3001
 ENV PORT 3001
 
-ENTRYPOINT ["./entrypoint.server.sh"]
 CMD ["node", "dist/src/main.js"]
