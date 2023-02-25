@@ -3,6 +3,7 @@ import { Button } from "./components/buttons";
 import { Spinner } from "./components/spinners";
 
 const colors = {
+  // only main, 100, 300, 500, 700, 900 are certified by linda: rest of the shades were created using a generator
   primary: {
     blue: {
       dark: {
@@ -26,7 +27,7 @@ const colors = {
         300: "#84a1c7",
         400: "#6988af",
         500: "#6080aa",
-        600: "#7481A4",
+        600: "#3d5675",
         700: "#4973a8",
         800: "#172536",
         900: "#2d5c98",
