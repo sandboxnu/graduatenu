@@ -21,8 +21,4 @@ const ormconfig: TypeOrmModuleOptions = {
   keepConnectionAlive: process.env.NODE_ENV === "testing",
 };
 
-console.log(
-  `Connecting to ${process.env.POSTGRES_HOST} on port ${process.env.POSTGRES_PORT}`
-);
-
 export default ormconfig;

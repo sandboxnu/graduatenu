@@ -1,0 +1,37 @@
+version: "3"
+
+services:
+  postgres:
+    container_name: postgres_docker_db
+    image: postgres:13
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_USERNAME: postgres
+      POSTGRES_PASSWORD: graduatenu
+      POSTGRES_DB: dev
+    volumes:
+      - ./graduatenu-db-data:/var/lib/postgresql/data
+    networks:
+      - common-net
+  api:
+    build:
+      context: ../../
+      dockerfile: ./infrastructure/prod/Dockerfile.server
+    depends_on:
+      - postgres
+    ports:
+      - 4001:3001
+    env_file:
+      - "../../packages/api-v2/.env.development"
+    environment:
+      - POSTGRES_HOST=postgres_docker_db
+      - POSTGRES_PORT=5432
+    networks:
+      - common-net
+
+volumes:
+  graduatenu_db_data:
+
+networks:
+  common-net: {}
