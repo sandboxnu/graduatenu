@@ -8,7 +8,7 @@ fi
 AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
 AWS_DEFAULT_REGION="us-east-1"
 REPOS=( "graduatenu-rails" "graduatenu-node" )
-LATEST_HASH=$(git ls-remote https://github.com/sandboxnu/graduatenu.git main | awk '{ print $1 }')
+LATEST_HASH=$(git ls-remote https://github.com/sandboxnu/graduatenu.git demo-majors | awk '{ print $1 }')
 ECS_CLUSTER="$1-graduatenu"
 TASK_FAMILIES=( "${ECS_CLUSTER}-api" "${ECS_CLUSTER}-web" )
 SERVICES=( "${ECS_CLUSTER}-api" "${ECS_CLUSTER}-web" )
