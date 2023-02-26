@@ -2,7 +2,6 @@ on:
   push:
     branches:
       - main
-      - aryan/style-delete-on-drag-outside
 
 name: Deploy containers to Amazon ECS
 
