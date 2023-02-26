@@ -22,7 +22,11 @@ import {writeFile} from "fs/promises"
  */
 export const runPipeline = async (yearStart: number, yearEnd: number) => {
   const unregisterAgent = createAgent();
-  const { entries, unfinished } = await scrapeMajorLinks(yearStart, yearEnd);
+  // const { entries, unfinished } = await scrapeMajorLinks(yearStart, yearEnd);
+  const { entries, unfinished } = {
+    entries: [new URL("https://catalog.northeastern.edu/archive/2021-2022/undergraduate/science/linguistics/linguistics-english-ba/")],
+    unfinished: []
+  };
   if (unfinished.length > 0) {
     console.log("didn't finish searching some entries", ...unfinished);
   }
@@ -48,7 +52,7 @@ export const runPipeline = async (yearStart: number, yearEnd: number) => {
   const results = await logProgress(pipelines);
   await unregisterAgent();
 
-  // logResults(results);
+  logResults(results);
   clearGlobalStatsLogger();
 };
 
@@ -125,7 +129,17 @@ const parseEntry = async (entry: TokenizedCatalogEntry): Promise<ParsedCatalogEn
     return metaSection.type === HSectionType.PRIMARY
   })
   
-  const entries: HRow[][] = nonConcentrations.map((metaSection)=>metaSection.entries)
+  const entries: HRow[][] = nonConcentrations.map((metaSection)=>{
+    if (metaSection.entries.length >= 1 && metaSection.entries[0].type != HRowType.HEADER) {
+      const newHeader: TextRow<HRowType.HEADER> = {
+        type: HRowType.HEADER,
+        description: metaSection.description,
+        hour: 0
+      }
+      metaSection.entries = [newHeader, ...metaSection.entries]
+    }
+    return metaSection.entries
+  })
   
   let allEntries = entries.reduce((prev: HRow[], current: HRow[])=>{
     return prev.concat(current)
@@ -175,7 +189,7 @@ const parseEntry = async (entry: TokenizedCatalogEntry): Promise<ParsedCatalogEn
   }
 }
 
-const saveResults = async (entry: ParsedCatalogEntry): Promise<TypedCatalogEntry> => {
+const saveResults = async (entry: ParsedCatalogEntry): Promise<ParsedCatalogEntry> => {
   const path = `./major_output/${entry.url.pathname.slice(1).replaceAll(/\//g, "__")}.json`
   return writeFile(path, JSON.stringify(entry.parsed, null, 4))
     .then(()=>{

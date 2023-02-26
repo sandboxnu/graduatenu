@@ -1,5 +1,5 @@
 import { Pipeline, StageLabel } from "./types";
-import { ResultType } from "@graduate/common";
+import { Major2, ResultType } from "@graduate/common";
 import { FilterError } from "./pipeline";
 import { CatalogEntryType } from "../classify/types";
 import { HDocument } from "../tokenize/types";
@@ -45,7 +45,7 @@ export const logProgress = async <T>(
  */
 export const logResults = (
   results: Pipeline<{
-    tokenized: HDocument;
+    parsed: Major2;
     type: CatalogEntryType;
     url: URL;
   }>[]
@@ -53,6 +53,7 @@ export const logResults = (
   const stats = new StatsLogger();
 
   for (const { result, trace, id } of results) {
+    stats.recordField("status", "total")
     if (result.type === ResultType.Ok) {
       logOkResult(stats, result, id);
     } else {
@@ -65,16 +66,14 @@ export const logResults = (
 
 const logOkResult = (
   stats: StatsLogger,
-  result: { ok: { tokenized: HDocument; type: CatalogEntryType } },
+  result: { ok: { parsed: Major2; type: CatalogEntryType } },
   id: URL
 ) => {
-  stats.recordField("status", "ok");
-
   // record OK values
-  const { tokenized, type } = result.ok;
+  const { parsed, type } = result.ok;
   stats.recordField("status", "ok");
   stats.recordField("entry type", type);
-  if (type === CatalogEntryType.Major && tokenized.programRequiredHours <= 0) {
+  if (type === CatalogEntryType.Major && parsed.totalCreditsRequired <= 0) {
     // only applies to majors, because concentrations and minors don't have hours requirement
     stats.recordError(new Error("major with hours <= 0"), id);
   }
@@ -99,13 +98,13 @@ const logErrResult = (
   stats.recordField("status", "error");
   stats.recordField("stage failures", trace[trace.length - 1]);
 
-  for (const err of errors) {
-    if (err instanceof Error) {
-      stats.recordError(err, id);
-    } else {
-      stats.recordError(new Error(`non-error value: ${err}`), id);
-    }
-  }
+  // for (const err of errors) {
+  //   if (err instanceof Error) {
+  //     stats.recordError(err, id);
+  //   } else {
+  //     stats.recordError(new Error(`non-error value: ${err}`), id);
+  //   }
+  // }
 };
 
 /**
