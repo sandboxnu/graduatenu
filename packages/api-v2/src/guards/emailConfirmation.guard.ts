@@ -1,3 +1,4 @@
+import { emailConfirmationMsg } from "@graduate/common";
 import {
   Injectable,
   CanActivate,
@@ -12,7 +13,7 @@ export class EmailConfirmationGuard implements CanActivate {
     const request: AuthenticatedRequest = context.switchToHttp().getRequest();
 
     if (!request.user?.isEmailConfirmed) {
-      throw new UnauthorizedException("Confirm your email first");
+      throw new UnauthorizedException(emailConfirmationMsg);
     }
 
     return true;
