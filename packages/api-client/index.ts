@@ -15,6 +15,7 @@ import {
   ScheduleCourse2,
   Major2,
   GetSupportedMajorsResponse,
+  ConfirmEmailDto,
 } from "@graduate/common";
 import { ClassConstructor, plainToInstance } from "class-transformer";
 
@@ -49,6 +50,11 @@ class APIClient {
       this.req("POST", "/auth/register", GetStudentResponse, body),
     logout: (): Promise<GetStudentResponse> => this.req("GET", "/auth/logout"),
   };
+
+  email = {
+    confirm: (body: ConfirmEmailDto): Promise<void> => this.req("POST", "/email-confirmation/confirm", null, body),
+    resendConfirmationLink: (): Promise<void> => this.req("POST", "/email-confirmation/resend-confirmation-link")
+  }
 
   student = {
     update: (body: UpdateStudentDto): Promise<UpdateStudentResponse> =>
