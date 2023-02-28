@@ -6,4 +6,5 @@ export * from "./course-utils";
 export * from "./api-dtos";
 export * from "./api-response-types";
 export * from "./major2-validation";
+export * from "./constants";
 // this file IS included in the build
