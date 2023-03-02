@@ -177,7 +177,45 @@ class SearchAPIClient {
       }`,
       },
     });
+    const coursesData = await res.data.data;
 
+    if (coursesData.bulkClasses) {
+      return coursesData.bulkClasses.map((course: any) => {
+        return occurrenceToCourse(course?.latestOccurrence);
+      });
+    } else {
+      throw Error("Courses could not be fetched");
+    }
+  };
+
+  fetchAllCourses = async (
+    courses: { subject: string; classId: string }[]
+  ): Promise<ScheduleCourse2<null>[]> => {
+    const input = courses
+      .map((course) => {
+        return `{subject: "${course.subject}", classId: "${course.classId}"}`;
+      })
+      .join(",");
+
+    const res = await this.axios({
+      method: "post",
+      data: {
+        query: `{
+        bulkClasses(input: [${input}]) {
+          allOccurrences {
+            name
+            subject
+            classId
+            minCredits
+            maxCredits
+            prereqs
+            coreqs
+            termId
+          }
+        }
+      }`,
+      },
+    });
     const coursesData = await res.data.data;
 
     if (coursesData.bulkClasses) {
