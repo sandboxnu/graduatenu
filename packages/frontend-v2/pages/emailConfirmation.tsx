@@ -3,9 +3,18 @@ import { API } from "@graduate/api-client";
 import { NextPage } from "next";
 import router from "next/router";
 import { GraduateHeader } from "../components/Header/GraduateHeader";
+import { useStudentWithPlans } from "../hooks";
 import { toast } from "../utils";
 
 const EmailConfirmation: NextPage = () => {
+
+  const { student } = useStudentWithPlans();
+  
+  // Email is already confirmed
+  if (student) {
+    router.push('/home')
+  }
+
   const handleResendConfirmationEmail = async () => {
     try {
       await API.email.resendConfirmationLink();
