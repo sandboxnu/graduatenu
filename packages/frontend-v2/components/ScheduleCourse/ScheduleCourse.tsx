@@ -135,8 +135,9 @@ export const ScheduleCourse = forwardRef<
           alignItems: "stretch",
           flex: scheduleCourse.classId === COOP_BLOCK.classId ? 1 : 0,
           marginBottom: "6px",
-          transition: "transform 0.15s ease",
+          transition: "transform 0.15s ease, opacity 0.25s ease",
           transform: hovered ? "scale(1.04)" : "scale(1)",
+          opacity: isValidRemove ? 0.35 : 1,
           justifyContent: "space-between",
         }}
         onMouseEnter={() => {
@@ -152,7 +153,7 @@ export const ScheduleCourse = forwardRef<
           scheduleCourse={scheduleCourse}
           listeners={listeners}
           isOverlay={isOverlay}
-          isValidRemove={isValidRemove}
+          isValidRemove={false}
         />
         <Flex>
           {(coReqErr != undefined || preReqErr != undefined) && (
