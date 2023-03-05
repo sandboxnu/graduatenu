@@ -16,6 +16,8 @@ To run the two seperately, visit the frontend and api-v2 packages(sub directorie
 
 We use docker and prod builds for our production app. It is a good idea to test out whether the app builds and runs the way it would in production.
 
+NOTE: We don't support running the full stack production app locally yet. It can be done through NGIX, I am lazy.
+
 - To run just the frontend
   - `yarn frontend:docker:build` and `yarn frontend:docker:run`.
   - Visit the containerized frontend at port [4000](http://localhost:4000).
