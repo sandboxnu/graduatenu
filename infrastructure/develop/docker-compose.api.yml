@@ -1,11 +1,12 @@
 version: "3"
 
 services:
+  # the db can be connected to by any container running in common-net at
+  # host=container_name and port 5432
   postgres:
-    container_name: postgres_docker_db
+    # this allows us to have a predictable name for the container running the db
+    container_name: postgres-api-compose
     image: postgres:13
-    ports:
-      - "5433:5432"
     environment:
       POSTGRES_USERNAME: postgres
       POSTGRES_PASSWORD: graduatenu
@@ -20,18 +21,23 @@ services:
       dockerfile: ./infrastructure/prod/Dockerfile.server
     depends_on:
       - postgres
+    # port 4001 on localhost is connected to 3001 of the container
     ports:
       - 4001:3001
     env_file:
       - "../../packages/api-v2/.env.development"
+    # env vars here override the env vars in the env_file above
     environment:
-      - POSTGRES_HOST=postgres_docker_db
-      - POSTGRES_PORT=5432
+      # we are no longer connecting to the db on localhost, the host is the name of the container
+      - POSTGRES_HOST=postgres-api-compose
     networks:
       - common-net
 
 volumes:
   graduatenu_db_data:
 
+# placing the 2 containers in the same network allows
+# the API to connect to the db without the db needing
+# a port that is connected to localhost
 networks:
   common-net: {}

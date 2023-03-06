@@ -1,7 +1,6 @@
 on:
   push:
     branches:
-      - aryan/fix-prod-initial-migration
       - main
 
 name: Deploy containers to Amazon ECS
