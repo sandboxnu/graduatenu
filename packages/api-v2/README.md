@@ -21,6 +21,16 @@ $ yarn test:db:down
 $ yarn test:cov
 ```
 
+## Making Entity Changes
+
+1. If you make an entity(db) change, you will need to generate new migrations and then run those migrations locally to alter your database schemas. You can do so as follows:
+
+- Make the change to the .entity.ts file
+- Run `yarn dev:migration:generate - "<NameOfTheChange>"`. This will generate a new migration file that describes the change to the db schema(s). You will lose all local data when running this command.
+- Run `yarn dev:migration:run` to run the newly generated migration.
+
+2. Each migration should have a cohesive set of changes to our entities. If you have unrelated db changes then please generate multiple migrations. A good rule of thumb: if you find it hard to name your migration then you probably need to split it.
+
 ## Design Decisions
 
 A running log of design decisions that were taken. These can and will probably change as the server scales.
@@ -33,7 +43,7 @@ A running log of design decisions that were taken. These can and will probably c
 
 - Services will be HTTP agnostic and not throw HTTP errors.
 
-- Services will not throw errors in general, and will return `null` for exceptional behavior. For instance, if a user with the same email already exists, return `null` and expect the controller to handle this. This isn't great since we loose the error that actually happened and so we probably want to implement more specific error handling than just returning `null` at the service level.
+- Services will not throw errors in general, and will return `null` for exceptional behavior. For instance, if a user with the same email already exists, return `null` and expect the controller to handle this. This isn't great since we lose the error that actually happened and so we probably want to implement more specific error handling than just returning `null` at the service level.
 
 - Controllers will handle the case when services return `null` and throw appropriate HTTP errors.
 

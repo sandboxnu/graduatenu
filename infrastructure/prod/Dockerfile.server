@@ -27,13 +27,14 @@ ENV NODE_ENV production
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nestjs
 
-COPY --from=builder --chown=nestjs:nodejs /server/node_modules ./node_modules
-COPY --from=builder --chown=nestjs:nodejs /server/packages/common ./packages/common
-COPY --from=builder --chown=nestjs:nodejs /server/packages/api-v2/dist ./packages/api-v2
+COPY --from=builder --chown=nestjs:nodejs /server . 
+COPY infrastructure/prod/entrypoint.server.sh ./entrypoint.server.sh
+RUN chmod +x entrypoint.server.sh
 
 USER nestjs
 
 EXPOSE 3001
 ENV PORT 3001
 
-CMD ["node", "packages/api-v2/src/main.js"]
+ENTRYPOINT ["./entrypoint.server.sh"]
+CMD ["node", "dist/src/main.js"]
