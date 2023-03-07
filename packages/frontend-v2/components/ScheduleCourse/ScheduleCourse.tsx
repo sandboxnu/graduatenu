@@ -1,4 +1,4 @@
-import { CloseIcon, DeleteIcon } from "@chakra-ui/icons";
+import { DeleteIcon } from "@chakra-ui/icons";
 import { Flex } from "@chakra-ui/react";
 import { useDraggable } from "@dnd-kit/core";
 import { CSS } from "@dnd-kit/utilities";
@@ -8,7 +8,7 @@ import {
   ScheduleCourse2,
 } from "@graduate/common";
 import { forwardRef, useEffect, useState } from "react";
-import { DELETE_COURSE_AREA_DND_ID } from "../../pages/home";
+import { DELETE_COURSE_AREA_DND_ID, isCourseFromSidebar } from "../../utils";
 import { ReqErrorModal } from "../Plan/ReqErrorModal";
 import { COOP_BLOCK } from "../Sidebar";
 
@@ -20,11 +20,11 @@ interface DraggableScheduleCourseProps {
   removeCourse?: (course: ScheduleCourse2<unknown>) => void;
   isEditable?: boolean;
   isDisabled?: boolean;
-  isFromSidebar?: boolean;
   /** Only provide this prop to the overlay course being dragged around the screen. */
   setIsRemove?: (val: boolean) => void;
 }
 
+/** This is the static course on the page that can be dragged around. */
 export const DraggableScheduleCourse: React.FC<
   DraggableScheduleCourseProps
 > = ({
@@ -33,7 +33,6 @@ export const DraggableScheduleCourse: React.FC<
   preReqErr = undefined,
   coReqErr = undefined,
   isEditable = false,
-  isFromSidebar = false,
   isDisabled = false,
   setIsRemove,
 }) => {
@@ -41,7 +40,6 @@ export const DraggableScheduleCourse: React.FC<
     useDraggable({
       id: scheduleCourse.id,
       data: {
-        isFromSidebar: isFromSidebar,
         course: scheduleCourse,
       },
       disabled: isDisabled,
@@ -64,14 +62,33 @@ export const DraggableScheduleCourse: React.FC<
       attributes={attributes}
       transform={CSS.Translate.toString(transform)}
       isDisabled={isDisabled}
-      isFromSidebar={isFromSidebar}
+    />
+  );
+};
+
+interface DraggedScheduleCourseProps {
+  /** The course being dragged around */
+  activeCourse: ScheduleCourse2<string>;
+  /** Is the course overlay being dragged over the delete course area? */
+  isRemove: boolean;
+}
+
+/** The course overlay that is being dragged around the screen. */
+export const DraggedScheduleCourse: React.FC<DraggedScheduleCourseProps> = ({
+  activeCourse,
+  isRemove,
+}) => {
+  return (
+    <ScheduleCourse
+      isDisabled={false}
+      isOverlay={true}
+      scheduleCourse={activeCourse}
+      isRemove={isRemove}
     />
   );
 };
 
 interface ScheduleCourseProps extends DraggableScheduleCourseProps {
-  coReqErr?: INEUReqError;
-  preReqErr?: INEUReqError;
   /**
    * Does this static course have an overlay on the screen that is being dragged
    * around? Is dragging applies to static courses(not the overlay being dragged
@@ -84,7 +101,6 @@ interface ScheduleCourseProps extends DraggableScheduleCourseProps {
   isDisabled: boolean;
   /** Is this the course being dragged around? */
   isOverlay?: boolean;
-  /** Is the course overlay being dragged over the delete course area? */
   isRemove?: boolean;
 }
 
@@ -105,12 +121,13 @@ export const ScheduleCourse = forwardRef<
       attributes,
       isOverlay = false,
       isRemove,
-      isFromSidebar,
     },
     ref
   ) => {
     const [hovered, setHovered] = useState(false);
+    const isFromSidebar = isCourseFromSidebar(scheduleCourse.id);
     const isValidRemove = isRemove && !isFromSidebar;
+    const isCourseError = coReqErr !== undefined || preReqErr !== undefined;
 
     /*
     This component uses some plain HTML elements instead of Chakra
@@ -120,93 +137,134 @@ export const ScheduleCourse = forwardRef<
     dnd responsiveness.
     */
     return (
-      <div
-        style={{
-          backgroundColor: isOverlay ? "lightgrey" : "white",
-          display: "flex",
-          /*
-          Visibility for the copy of the course left behind when the course
-          is being dragged. Keep sidebar course copies visable but hide
-          copies of courses in the Plan.
-          */
-          visibility: isDragging && !isFromSidebar ? "hidden" : "",
-          borderRadius: "5px",
-          fontSize: "14px",
-          alignItems: "stretch",
-          flex: scheduleCourse.classId === COOP_BLOCK.classId ? 1 : 0,
-          marginBottom: "6px",
-          transition: "transform 0.15s ease, opacity 0.25s ease",
-          transform: hovered ? "scale(1.04)" : "scale(1)",
-          opacity: isValidRemove ? 0.35 : 1,
-          justifyContent: "space-between",
-        }}
-        onMouseEnter={() => {
-          setHovered(true);
-        }}
-        onMouseLeave={() => {
-          setHovered(false);
-        }}
-        ref={ref}
-        {...attributes}
-      >
-        <ScheduleCourseDraggedContents
-          scheduleCourse={scheduleCourse}
-          listeners={listeners}
-          isOverlay={isOverlay}
-          isValidRemove={false}
-        />
-        <Flex>
-          {(coReqErr != undefined || preReqErr != undefined) && (
-            <ReqErrorModal
-              course={scheduleCourse}
-              coReqErr={coReqErr}
-              preReqErr={preReqErr}
-            />
-          )}
-          {isEditable && hovered && (
-            <Flex
-              width="32px"
-              alignSelf="stretch"
-              flexShrink={0}
-              alignItems="center"
-              justifyContent="center"
-              borderRadius="0px 5px 5px 0px"
-              transition="background 0.15s ease"
-              _hover={{
-                background: "primary.blue.dark.main",
-                fill: "white",
-                svg: {
-                  color: "white",
-                },
-              }}
-              _active={{
-                background: "primary.blue.dark.900",
-              }}
-              onClick={
-                removeCourse
-                  ? () => {
-                      removeCourse(scheduleCourse);
-                    }
-                  : undefined
-              }
-            >
-              <DeleteIcon
-                color="primary.blue.dark.300"
-                transition="color 0.1s ease"
+      <div style={{ display: "relative" }}>
+        {isValidRemove && <ScheduleCourseRemoveOverlay />}
+        <div
+          style={{
+            backgroundColor: isOverlay ? "lightgrey" : "white",
+            display: "flex",
+            /*
+            Visibility for the copy of the course left behind when the course
+            is being dragged. Keep sidebar course copies visable but hide
+            copies of courses in the Plan.
+            */
+            visibility: isDragging && !isFromSidebar ? "hidden" : "",
+            borderRadius: "5px",
+            fontSize: "14px",
+            alignItems: "stretch",
+            flex: scheduleCourse.classId === COOP_BLOCK.classId ? 1 : 0,
+            marginBottom: "6px",
+            transition: "transform 0.15s ease, opacity 0.25s ease",
+            transform: hovered ? "scale(1.04)" : "scale(1)",
+            opacity: isValidRemove ? 0.5 : 1,
+            justifyContent: "space-between",
+          }}
+          onMouseEnter={() => {
+            setHovered(true);
+          }}
+          onMouseLeave={() => {
+            setHovered(false);
+          }}
+          ref={ref}
+          {...attributes}
+        >
+          <ScheduleCourseDraggedContents
+            scheduleCourse={scheduleCourse}
+            listeners={listeners}
+            isOverlay={isOverlay}
+          />
+          <Flex>
+            {isCourseError && (
+              <ReqErrorModal
+                course={scheduleCourse}
+                coReqErr={coReqErr}
+                preReqErr={preReqErr}
               />
-            </Flex>
-          )}
-          {(isOverlay || (isEditable && !hovered)) && (
-            // This is a spacer to take up the same amount of space as the delete button
-            // so we don't have the text of the course shifting around when it's hovered
-            // or dragged.
-            <div style={{ width: "32px", height: "32px", flexShrink: 0 }}></div>
-          )}
-        </Flex>
+            )}
+            {isEditable && hovered && (
+              <ScheduleCourseTrashIcon
+                removeCourse={
+                  removeCourse ? () => removeCourse(scheduleCourse) : undefined
+                }
+              />
+            )}
+            {isEditable && !hovered && <ScheduleCourseSpacer />}
+
+            {isOverlay && (
+              // 2 spacers for overlay to account for both the course errors and trash icon
+              <>
+                <ScheduleCourseSpacer />
+                <ScheduleCourseSpacer />
+              </>
+            )}
+          </Flex>
+        </div>
       </div>
     );
   }
 );
+
+/**
+ * The cross icon overlay that appears over a dragged course when it is over the
+ * delete area.
+ */
+const ScheduleCourseRemoveOverlay: React.FC = () => {
+  return (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        position: "absolute",
+        top: "0",
+        left: "0",
+        width: "100%",
+        height: "100%",
+        zIndex: 10,
+      }}
+    >
+      <DeleteIcon color="primary.red.main" width="17.5" height="17.5" />
+    </div>
+  );
+};
+
+/** The course components that are dragged around. */
+interface ScheduleCourseDraggedContentsProps {
+  scheduleCourse: ScheduleCourse2<unknown>;
+  listeners: any;
+  isOverlay: boolean;
+}
+
+const ScheduleCourseDraggedContents: React.FC<
+  ScheduleCourseDraggedContentsProps
+> = ({ scheduleCourse, listeners, isOverlay }) => {
+  return (
+    <div
+      style={{
+        padding: "8px 8px",
+        cursor: isOverlay ? "grabbing" : "grab",
+      }}
+      {...listeners}
+    >
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          width: "100%",
+          height: "100%",
+        }}
+      >
+        <ScheduleCourseDragIcon />
+        <p style={{ fontWeight: "bold" }}>
+          {`${courseToString(scheduleCourse)} `}
+          <span style={{ marginLeft: "2px", fontWeight: "normal" }}>
+            {scheduleCourse.name}
+          </span>
+        </p>
+      </div>
+    </div>
+  );
+};
 
 const ScheduleCourseDragIcon: React.FC = () => {
   return (
@@ -233,66 +291,42 @@ const ScheduleCourseDragIcon: React.FC = () => {
   );
 };
 
-/** The course components that are dragged around. */
-interface ScheduleCourseDraggedContentsProps {
-  scheduleCourse: ScheduleCourse2<unknown>;
-  listeners: any;
-  isOverlay: boolean;
-  isValidRemove?: boolean;
+interface ScheduleCourseTrashIconProps {
+  removeCourse?: () => void;
 }
-const ScheduleCourseDraggedContents: React.FC<
-  ScheduleCourseDraggedContentsProps
-> = ({ scheduleCourse, listeners, isOverlay, isValidRemove }) => {
+const ScheduleCourseTrashIcon: React.FC<ScheduleCourseTrashIconProps> = ({
+  removeCourse,
+}) => {
   return (
-    <div
-      style={{
-        padding: "8px 8px",
-        cursor: isOverlay ? "grabbing" : "grab",
+    <Flex
+      width="32px"
+      alignSelf="stretch"
+      flexShrink={0}
+      alignItems="center"
+      justifyContent="center"
+      borderRadius="0px 5px 5px 0px"
+      transition="background 0.15s ease"
+      _hover={{
+        background: "primary.blue.dark.main",
+        fill: "white",
+        svg: {
+          color: "white",
+        },
       }}
-      {...listeners}
+      _active={{
+        background: "primary.blue.dark.900",
+      }}
+      onClick={removeCourse}
     >
-      {isValidRemove && <ScheduleCourseRemoveOverlay />}
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          width: "100%",
-          height: "100%",
-          opacity: isValidRemove ? 0.2 : 1,
-        }}
-      >
-        <ScheduleCourseDragIcon />
-        <p style={{ fontWeight: "bold" }}>
-          {`${courseToString(scheduleCourse)} `}
-          <span style={{ marginLeft: "2px", fontWeight: "normal" }}>
-            {scheduleCourse.name}
-          </span>
-        </p>
-      </div>
-    </div>
+      <DeleteIcon color="primary.blue.dark.300" transition="color 0.1s ease" />
+    </Flex>
   );
 };
 
 /**
- * The cross icon overlay that appears over a dragged course when it is over the
- * delete area.
+ * This is a spacer to take up the same amount of space as the delete button so
+ * we don't have the text of the course shifting around when it's hovered or dragged.
  */
-const ScheduleCourseRemoveOverlay: React.FC = () => {
-  return (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        position: "absolute",
-        top: "0",
-        left: "0",
-        width: "100%",
-        height: "100%",
-        zIndex: 10,
-      }}
-    >
-      <CloseIcon color="white" width="25px" height="25px" />
-    </div>
-  );
+const ScheduleCourseSpacer: React.FC = () => {
+  return <div style={{ width: "32px", height: "32px", flexShrink: 0 }}></div>;
 };

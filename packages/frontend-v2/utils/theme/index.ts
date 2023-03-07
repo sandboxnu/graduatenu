@@ -109,7 +109,16 @@ const space = {
 };
 
 const sizes = {
+  max: "max-content",
+  min: "min-content",
   "3xs": "10rem",
+  "2xs": "16rem",
+  xs: "20rem",
+  sm: "24rem",
+  md: "28rem",
+  lg: "32rem",
+  xl: "36rem",
+  "2xl": "42rem",
 };
 
 /** Customized component styles can be configured and passed to the theme provider */

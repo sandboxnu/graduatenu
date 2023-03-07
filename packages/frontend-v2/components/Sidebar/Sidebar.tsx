@@ -14,7 +14,7 @@ import { DraggableScheduleCourse } from "../ScheduleCourse";
 import SidebarSection from "./SidebarSection";
 import { getAllCoursesFromPlan } from "../../utils/plan/getAllCoursesFromPlan";
 import { getSectionError } from "../../utils/plan/getSectionError";
-import { handleApiClientError } from "../../utils";
+import { handleApiClientError, SIDEBAR_DND_ID_PREFIX } from "../../utils";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useMajor } from "../../hooks/useMajor";
@@ -33,8 +33,6 @@ export enum SidebarValidationStatus {
   Error = "Error",
   Complete = "Complete",
 }
-
-export const SIDEBAR_DND_ID_PREFIX = "sidebar";
 
 export const COOP_BLOCK: ScheduleCourse2<string> = {
   name: "Co-op Education",
@@ -226,7 +224,6 @@ const Sidebar: React.FC<SidebarProps> = memo(({ selectedPlan }) => {
       <Box padding="10px 20px 15px 20px">
         <DraggableScheduleCourse
           scheduleCourse={COOP_BLOCK}
-          isFromSidebar={true}
           isDisabled={false}
         />
       </Box>

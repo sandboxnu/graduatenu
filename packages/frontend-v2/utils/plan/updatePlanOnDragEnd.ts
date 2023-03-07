@@ -7,8 +7,8 @@ import {
 } from "@graduate/common";
 import produce from "immer";
 import { toast } from "react-toastify";
-import { DELETE_COURSE_AREA_DND_ID } from "../../pages/home";
-import { getCourseDisplayString } from "../course";
+import { DELETE_COURSE_AREA_DND_ID } from "../constants";
+import { getCourseDisplayString, isCourseFromSidebar } from "../course";
 import { getSeasonDisplayWord } from "./getSeasonDisplayWord";
 import { isCourseInTerm } from "./isCourseInTerm";
 
@@ -81,7 +81,7 @@ export const updatePlanOnDragEnd = (
       const draggedCourseDetails: ScheduleCourse2<unknown> =
         draggedCourse.data.current.course;
 
-      const isFromSidebar = draggedCourse.data.current.isFromSidebar;
+      const isFromSidebar = isCourseFromSidebar(draggedCourse.id as string);
       const isSameTerm = !isFromSidebar && oldTerm && oldTerm.id === newTerm.id;
 
       /*

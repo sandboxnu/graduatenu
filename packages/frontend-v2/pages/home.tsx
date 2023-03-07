@@ -23,19 +23,19 @@ import {
   AddPlanModal,
   AddYearButton,
   DeletePlanModal,
+  DraggedScheduleCourse,
   EditPlanModal,
   LoadingPage,
   Plan,
   PlanDropdown,
-  ScheduleCourse,
   Sidebar,
   SidebarContainer,
-  SIDEBAR_DND_ID_PREFIX,
 } from "../components";
 import { GraduateHeader } from "../components/Header/GraduateHeader";
 import { fetchStudentAndPrepareForDnd, useStudentWithPlans } from "../hooks";
 import {
   cleanDndIdsFromPlan,
+  DELETE_COURSE_AREA_DND_ID,
   handleApiClientError,
   logger,
   logout,
@@ -46,8 +46,6 @@ import {
   getCoReqWarnings,
   getPreReqWarnings,
 } from "../utils/plan/preAndCoReqCheck";
-
-export const DELETE_COURSE_AREA_DND_ID = "delete-course-area";
 
 // Algorithm to decide which droppable the course is currently over (if any).
 // See https://docs.dndkit.com/api-documentation/context-provider/collision-detection-algorithms for more info.
@@ -254,14 +252,9 @@ const HomePage: NextPage = () => {
       </PageLayout>
       <DragOverlay dropAnimation={null}>
         {activeCourse ? (
-          <ScheduleCourse
-            isDisabled={false}
-            scheduleCourse={activeCourse}
-            isOverlay={true}
-            coReqErr={undefined}
-            preReqErr={undefined}
+          <DraggedScheduleCourse
+            activeCourse={activeCourse}
             isRemove={isRemove}
-            isFromSidebar={activeCourse.id.startsWith(SIDEBAR_DND_ID_PREFIX)}
           />
         ) : null}
       </DragOverlay>
