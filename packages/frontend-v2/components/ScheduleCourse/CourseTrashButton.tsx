@@ -1,27 +1,36 @@
 import { DeleteIcon } from "@chakra-ui/icons";
-import { ComponentWithAs, IconButton, IconButtonProps } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
+import { MouseEventHandler } from "react";
 
-type CourseTrashButtonType = ComponentWithAs<
-  "button",
-  Omit<IconButtonProps, "aria-label">
->;
+interface CourseTrashButtonProps {
+  onClick: MouseEventHandler<HTMLDivElement> | undefined;
+}
 
-export const CourseTrashButton: CourseTrashButtonType = ({
+export const CourseTrashButton: React.FC<CourseTrashButtonProps> = ({
   onClick,
-  ...rest
 }) => {
   return (
-    <IconButton
-      aria-label="Delete course"
-      icon={<DeleteIcon />}
-      variant="ghost"
-      color="primary.blue.light.main"
-      colorScheme="primary.blue.light"
-      borderRadius="3xl"
-      _hover={{ backgroundColor: "neutral.900" }}
-      size="sm"
+    <Flex
+      width="32px"
+      alignSelf="stretch"
+      flexShrink={0}
+      alignItems="center"
+      justifyContent="center"
+      borderRadius="0px 5px 5px 0px"
+      transition="background 0.15s ease"
+      _hover={{
+        background: "primary.blue.dark.main",
+        fill: "white",
+        svg: {
+          color: "white",
+        },
+      }}
+      _active={{
+        background: "primary.blue.dark.900",
+      }}
       onClick={onClick}
-      {...rest}
-    />
+    >
+      <DeleteIcon color="primary.blue.dark.300" transition="color 0.1s ease" />
+    </Flex>
   );
 };

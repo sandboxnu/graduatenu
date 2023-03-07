@@ -105,12 +105,21 @@ const space = {
   "2xl": "3rem",
   "3xl": "4rem",
   "4xl": "5rem",
-  "5xl": "6rem"
+  "5xl": "6rem",
 };
 
 const sizes = {
-  "3xs": "10rem"
-}
+  max: "max-content",
+  min: "min-content",
+  "3xs": "10rem",
+  "2xs": "16rem",
+  xs: "20rem",
+  sm: "24rem",
+  md: "28rem",
+  lg: "32rem",
+  xl: "36rem",
+  "2xl": "42rem",
+};
 
 /** Customized component styles can be configured and passed to the theme provider */
 const components = {
@@ -124,5 +133,5 @@ export const theme = extendTheme({
   breakpoints,
   space,
   components,
-  sizes
+  sizes,
 });
