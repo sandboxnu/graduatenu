@@ -1,10 +1,5 @@
 import { DeleteIcon } from "@chakra-ui/icons";
-import {
-  ComponentWithAs,
-  Flex,
-  IconButton,
-  IconButtonProps,
-} from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import { MouseEventHandler } from "react";
 
 interface CourseTrashButtonProps {

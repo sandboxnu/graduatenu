@@ -107,10 +107,7 @@ interface ScheduleCourseProps extends DraggableScheduleCourseProps {
 }
 
 // eslint-disable-next-line react/display-name
-export const ScheduleCourse = forwardRef<
-  HTMLElement | null,
-  ScheduleCourseProps
->(
+const ScheduleCourse = forwardRef<HTMLElement | null, ScheduleCourseProps>(
   (
     {
       coReqErr = undefined,
