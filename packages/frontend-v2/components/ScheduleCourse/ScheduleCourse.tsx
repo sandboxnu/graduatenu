@@ -11,6 +11,8 @@ import { forwardRef, useEffect, useState } from "react";
 import { DELETE_COURSE_AREA_DND_ID, isCourseFromSidebar } from "../../utils";
 import { ReqErrorModal } from "../Plan/ReqErrorModal";
 import { COOP_BLOCK } from "../Sidebar";
+import { CourseDragIcon } from "./CourseDragIcon";
+import { CourseTrashButton } from "./CourseTrashButton";
 
 interface DraggableScheduleCourseProps {
   scheduleCourse: ScheduleCourse2<string>;
@@ -182,8 +184,8 @@ export const ScheduleCourse = forwardRef<
               />
             )}
             {isEditable && hovered && (
-              <ScheduleCourseTrashIcon
-                removeCourse={
+              <CourseTrashButton
+                onClick={
                   removeCourse ? () => removeCourse(scheduleCourse) : undefined
                 }
               />
@@ -254,7 +256,7 @@ const ScheduleCourseDraggedContents: React.FC<
           height: "100%",
         }}
       >
-        <ScheduleCourseDragIcon />
+        <CourseDragIcon />
         <p style={{ fontWeight: "bold" }}>
           {`${courseToString(scheduleCourse)} `}
           <span style={{ marginLeft: "2px", fontWeight: "normal" }}>
@@ -263,63 +265,6 @@ const ScheduleCourseDraggedContents: React.FC<
         </p>
       </div>
     </div>
-  );
-};
-
-const ScheduleCourseDragIcon: React.FC = () => {
-  return (
-    <svg
-      viewBox="0 0 10 10"
-      focusable="false"
-      style={{
-        margin: "0px 8px 0px 0px",
-        width: "1em",
-        height: "1em",
-        display: "inline-block",
-        lineHeight: "1em",
-        WebkitFlexShrink: 0,
-        flexShrink: 0,
-        color: "var(--chakra-colors-primary-blue-dark-main)",
-        verticalAlign: "middle",
-      }}
-    >
-      <path
-        fill="currentColor"
-        d="M3,2 C2.44771525,2 2,1.55228475 2,1 C2,0.44771525 2.44771525,0 3,0 C3.55228475,0 4,0.44771525 4,1 C4,1.55228475 3.55228475,2 3,2 Z M3,6 C2.44771525,6 2,5.55228475 2,5 C2,4.44771525 2.44771525,4 3,4 C3.55228475,4 4,4.44771525 4,5 C4,5.55228475 3.55228475,6 3,6 Z M3,10 C2.44771525,10 2,9.55228475 2,9 C2,8.44771525 2.44771525,8 3,8 C3.55228475,8 4,8.44771525 4,9 C4,9.55228475 3.55228475,10 3,10 Z M7,2 C6.44771525,2 6,1.55228475 6,1 C6,0.44771525 6.44771525,0 7,0 C7.55228475,0 8,0.44771525 8,1 C8,1.55228475 7.55228475,2 7,2 Z M7,6 C6.44771525,6 6,5.55228475 6,5 C6,4.44771525 6.44771525,4 7,4 C7.55228475,4 8,4.44771525 8,5 C8,5.55228475 7.55228475,6 7,6 Z M7,10 C6.44771525,10 6,9.55228475 6,9 C6,8.44771525 6.44771525,8 7,8 C7.55228475,8 8,8.44771525 8,9 C8,9.55228475 7.55228475,10 7,10 Z"
-      ></path>
-    </svg>
-  );
-};
-
-interface ScheduleCourseTrashIconProps {
-  removeCourse?: () => void;
-}
-const ScheduleCourseTrashIcon: React.FC<ScheduleCourseTrashIconProps> = ({
-  removeCourse,
-}) => {
-  return (
-    <Flex
-      width="32px"
-      alignSelf="stretch"
-      flexShrink={0}
-      alignItems="center"
-      justifyContent="center"
-      borderRadius="0px 5px 5px 0px"
-      transition="background 0.15s ease"
-      _hover={{
-        background: "primary.blue.dark.main",
-        fill: "white",
-        svg: {
-          color: "white",
-        },
-      }}
-      _active={{
-        background: "primary.blue.dark.900",
-      }}
-      onClick={removeCourse}
-    >
-      <DeleteIcon color="primary.blue.dark.300" transition="color 0.1s ease" />
-    </Flex>
   );
 };
 

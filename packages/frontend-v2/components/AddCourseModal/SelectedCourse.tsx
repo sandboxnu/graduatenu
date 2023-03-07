@@ -25,10 +25,7 @@ export const SelectedCourse: React.FC<SelectedCourseProps> = ({
       <Text fontSize="xs" pr="md">
         {selectedCourse.name}
       </Text>
-      <CourseTrashButton
-        onClick={() => removeSelectedCourse(selectedCourse)}
-        ml="auto"
-      />
+      <CourseTrashButton onClick={() => removeSelectedCourse(selectedCourse)} />
     </Flex>
   );
 };
