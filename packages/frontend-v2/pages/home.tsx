@@ -87,6 +87,7 @@ const HomePage: NextPage = () => {
   useEffect(() => {
     // once the student is fetched, set the selected plan id to the primary plan id
     if (student && selectedPlanId === undefined) {
+      console.log("Student Plan ID: " + student.primaryPlanId);
       setSelectedPlanId(student.primaryPlanId);
     }
     if (student) {
