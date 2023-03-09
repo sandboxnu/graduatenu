@@ -1,4 +1,12 @@
-import { Text } from "@chakra-ui/react";
+import {
+  Box,
+  Image,
+  Flex,
+  Grid,
+  GridItem,
+  Text,
+  Heading,
+} from "@chakra-ui/react";
 import { API } from "@graduate/api-client";
 import { SignUpStudentDto } from "@graduate/common";
 import { AxiosError } from "axios";
@@ -31,10 +39,34 @@ interface SignUpFormButton {
 
 const Signup: NextPage = () => {
   return (
-    <>
+    <Flex direction="column" height="100vh">
       <Header />
-      <SignUpForm />
-    </>
+      <Grid templateColumns="repeat(8, 1fr)" templateRows="1fr" flexGrow={1}>
+        <GridItem colSpan={3}>
+          <SignUpForm />
+        </GridItem>
+        <GridItem
+          colSpan={5}
+          backgroundColor="neutral.main"
+          position="relative"
+        >
+          <Image
+            src="/app_snippet.png"
+            alt="GraduateNU app snippet"
+            width="85%"
+            height="80%"
+            position="absolute"
+            right="0px"
+            bottom="0px"
+            objectFit="cover"
+            objectPosition="0 100%"
+            borderLeft="3px solid black"
+            borderTop="3px solid black"
+            borderRadius="12px 0px 0px 0px"
+          />
+        </GridItem>
+      </Grid>
+    </Flex>
   );
 };
 
@@ -42,7 +74,21 @@ const Header = (): JSX.Element => {
   return <GraduateHeader rightContent={<Link href="/login">Log In</Link>} />;
 };
 
-const SignUpForm = () => {
+const SignUpForm2 = () => {
+  return (
+    // <FormFormat onSubmit={handleSubmit(onSubmitHandler)}>
+    //   <SignUpFormTopInput
+    //     errors={errors}
+    //     password={password}
+    //     register={register}
+    //   />
+    //   <SignUpFormButton isSubmitting={isSubmitting} router={router} />
+    // </FormFormat>
+    <h1>hi</h1>
+  );
+};
+
+const SignUpForm: React.FC = () => {
   const router = useRouter();
 
   const {
@@ -70,14 +116,17 @@ const SignUpForm = () => {
   };
 
   return (
-    <FormFormat onSubmit={handleSubmit(onSubmitHandler)}>
-      <SignUpFormTopInput
-        errors={errors}
-        password={password}
-        register={register}
-      />
-      <SignUpFormButton isSubmitting={isSubmitting} router={router} />
-    </FormFormat>
+    <Flex
+      as="form"
+      onSubmit={handleSubmit(onSubmitHandler)}
+      justifyContent="center"
+      alignItems="center"
+      height="100%"
+    >
+      <Heading as="h1" size="xl" mb="xl">
+        Create an Account
+      </Heading>
+    </Flex>
   );
 };
 
@@ -87,14 +136,8 @@ const SignUpFormTopInput: React.FC<SignUpFormTopProps> = ({
   password,
 }) => (
   <HeaderAndInput>
-    <Text
-      fontSize="3xl"
-      color="primary.red.main"
-      as="b"
-      mb="xl"
-      textAlign="center"
-    >
-      Welcome!
+    <Text fontSize="3xl" as="b" mb="xl" textAlign="center">
+      Create an Account
     </Text>
 
     <InputGroup>
