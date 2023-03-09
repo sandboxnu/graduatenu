@@ -7,6 +7,7 @@ import { emailConfirmationMsg } from "@graduate/common";
 enum ErrorToastId {
   UNAUTHORIZED = "unauthorized",
   SERVER_ERROR = "server error",
+  FORBIDDEN = "forbidden",
 }
 
 /**
@@ -42,7 +43,10 @@ const handleAxiosError = (error: AxiosError, router: NextRouter) => {
     toast.error("Sorry, we sent some invalid data. Try again.");
   } else if (statusCode === 401) {
     const errorMsg = error.response?.data.message;
+    console.log("MESSSAGE: ", errorMsg);
+    console.log(errorMsg, emailConfirmationMsg);
     if (errorMsg === emailConfirmationMsg) {
+      console.log("HERE");
       router.push("/emailConfirmation");
     } else {
       logger.debug(
@@ -51,11 +55,14 @@ const handleAxiosError = (error: AxiosError, router: NextRouter) => {
         error
       );
       router.push("/login");
+      toast.warn("Oops, please login first.", {
+        toastId: ErrorToastId.UNAUTHORIZED,
+      });
     }
   } else if (statusCode === 403) {
     logger.debug("handleApiClientError", "Unauthorized", error);
     toast.error("Sorry, you don't have valid permissions.", {
-      toastId: ErrorToastId.UNAUTHORIZED,
+      toastId: ErrorToastId.FORBIDDEN,
     });
   } else {
     logger.debug(

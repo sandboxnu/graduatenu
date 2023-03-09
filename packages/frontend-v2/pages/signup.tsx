@@ -1,91 +1,20 @@
-import {
-  Box,
-  Image,
-  Flex,
-  Grid,
-  GridItem,
-  Text,
-  Heading,
-} from "@chakra-ui/react";
+import { Flex, Text, Heading, Button } from "@chakra-ui/react";
 import { API } from "@graduate/api-client";
 import { SignUpStudentDto } from "@graduate/common";
 import { AxiosError } from "axios";
 import { NextPage } from "next";
-import Link from "next/link";
-import { NextRouter, useRouter } from "next/router";
-import { FieldErrors, useForm, UseFormRegister } from "react-hook-form";
+import { useRouter } from "next/router";
+import { useForm } from "react-hook-form";
 import {
-  AlterSubmitButton,
-  FormButtons,
-  FormFormat,
-  HeaderAndInput,
-  InputGroup,
-  StringInput,
-  SubmitButton,
+  AuthenticationPageLayout,
+  AuthForm,
+  GraduateLink,
+  GraduateInput,
 } from "../components";
-import { GraduateHeader } from "../components/Header/GraduateHeader";
-import { toast } from "../utils";
-
-interface SignUpFormTopProps {
-  register: UseFormRegister<SignUpStudentDto>;
-  errors: FieldErrors<SignUpStudentDto>;
-  password: string;
-}
-
-interface SignUpFormButton {
-  isSubmitting: boolean;
-  router: NextRouter;
-}
+import { handleApiClientError, toast } from "../utils";
 
 const Signup: NextPage = () => {
-  return (
-    <Flex direction="column" height="100vh">
-      <Header />
-      <Grid templateColumns="repeat(8, 1fr)" templateRows="1fr" flexGrow={1}>
-        <GridItem colSpan={3}>
-          <SignUpForm />
-        </GridItem>
-        <GridItem
-          colSpan={5}
-          backgroundColor="neutral.main"
-          position="relative"
-        >
-          <Image
-            src="/app_snippet.png"
-            alt="GraduateNU app snippet"
-            width="85%"
-            height="80%"
-            position="absolute"
-            right="0px"
-            bottom="0px"
-            objectFit="cover"
-            objectPosition="0 100%"
-            borderLeft="3px solid black"
-            borderTop="3px solid black"
-            borderRadius="12px 0px 0px 0px"
-          />
-        </GridItem>
-      </Grid>
-    </Flex>
-  );
-};
-
-const Header = (): JSX.Element => {
-  return <GraduateHeader rightContent={<Link href="/login">Log In</Link>} />;
-};
-
-const SignUpForm2 = () => {
-  return (
-    // <FormFormat onSubmit={handleSubmit(onSubmitHandler)}>
-    //   <SignUpFormTopInput
-    //     errors={errors}
-    //     password={password}
-    //     register={register}
-    //   />
-    //   <SignUpFormButton isSubmitting={isSubmitting} router={router} />
-    // </FormFormat>
-    <h1>hi</h1>
-  );
+  return <AuthenticationPageLayout form={<SignUpForm />} />;
 };
 
 const SignUpForm: React.FC = () => {
@@ -110,94 +39,74 @@ const SignUpForm: React.FC = () => {
       router.push("/home");
     } catch (err) {
       const error = err as AxiosError;
-      if (error.response?.status === 401) toast.error("Invalid Credentials!");
-      else toast.error("Something went wrong!");
+      if (error.response?.status === 400) {
+        toast.error(
+          "Account with the given email already exists... try signing up instead 😄"
+        );
+      } else {
+        handleApiClientError(error, router);
+      }
     }
   };
 
   return (
-    <Flex
-      as="form"
+    <AuthForm
       onSubmit={handleSubmit(onSubmitHandler)}
-      justifyContent="center"
-      alignItems="center"
-      height="100%"
-    >
-      <Heading as="h1" size="xl" mb="xl">
-        Create an Account
-      </Heading>
-    </Flex>
+      headingText="Create an Account"
+      inputs={
+        <>
+          <GraduateInput
+            id="email"
+            placeholder="Email"
+            error={errors.email}
+            type="email"
+            {...register("email", {
+              required: "Email is required",
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                message: "Invalid email address",
+              },
+            })}
+          />
+          <GraduateInput
+            error={errors.password}
+            type="password"
+            id="password"
+            placeholder="Password"
+            {...register("password", {
+              required: "Password is required",
+            })}
+          />
+          <GraduateInput
+            error={errors.passwordConfirm}
+            type="password"
+            id="confirmPassword"
+            placeholder="Confirm Password"
+            {...register("passwordConfirm", {
+              validate: (confirmPass) =>
+                confirmPass === password || "Passwords do not match!",
+              required: true,
+            })}
+          />
+        </>
+      }
+      footer={
+        <Flex direction="column" width="100%" rowGap="md">
+          <Button
+            variant="solid"
+            borderRadius="lg"
+            isLoading={isSubmitting}
+            type="submit"
+          >
+            Create Account
+          </Button>
+          <Text textAlign="center">
+            Already have an account? <GraduateLink href="/login" text="Login" />
+          </Text>
+        </Flex>
+      }
+    />
   );
 };
-
-const SignUpFormTopInput: React.FC<SignUpFormTopProps> = ({
-  errors,
-  register,
-  password,
-}) => (
-  <HeaderAndInput>
-    <Text fontSize="3xl" as="b" mb="xl" textAlign="center">
-      Create an Account
-    </Text>
-
-    <InputGroup>
-      <StringInput
-        id="email"
-        placeholder="Email"
-        error={errors.email}
-        type="email"
-        {...register("email", {
-          required: "Email is required",
-          pattern: {
-            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-            message: "Invalid email address",
-          },
-        })}
-      />
-
-      <StringInput
-        error={errors.password}
-        type="password"
-        id="password"
-        placeholder="Password"
-        {...register("password", {
-          required: "Password is required",
-        })}
-      />
-
-      <StringInput
-        error={errors.passwordConfirm}
-        type="password"
-        id="confirmPassword"
-        placeholder="Confirm Password"
-        {...register("passwordConfirm", {
-          validate: (confirmPass) =>
-            confirmPass === password || "Passwords do not match!",
-          required: true,
-        })}
-      />
-    </InputGroup>
-  </HeaderAndInput>
-);
-
-const SignUpFormButton: React.FC<SignUpFormButton> = ({
-  isSubmitting,
-  router,
-}) => (
-  <FormButtons>
-    <SubmitButton
-      isLoading={isSubmitting}
-      type="submit"
-      variant="solid"
-      borderRadius="none"
-    >
-      SIGN UP
-    </SubmitButton>
-    <p>OR</p>
-    <AlterSubmitButton onClick={() => router.push("/login")}>
-      LOGIN
-    </AlterSubmitButton>
-  </FormButtons>
-);
 
 export default Signup;

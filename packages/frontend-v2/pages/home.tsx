@@ -18,6 +18,7 @@ import {
   AddYearButton,
   DeletePlanModal,
   EditPlanModal,
+  GraduatePostAuthHeader,
   LoadingPage,
   Plan,
   PlanDropdown,
@@ -25,7 +26,6 @@ import {
   Sidebar,
   SidebarContainer,
 } from "../components";
-import { GraduateHeader } from "../components/Header/GraduateHeader";
 import { fetchStudentAndPrepareForDnd, useStudentWithPlans } from "../hooks";
 import {
   cleanDndIdsFromPlan,
@@ -265,25 +265,11 @@ const HomePage: NextPage = () => {
 const PageLayout: React.FC<PropsWithChildren> = ({ children }) => {
   return (
     <Flex flexDirection="column" height="100vh" overflow="hidden">
-      <Header />
+      <GraduatePostAuthHeader />
       <Flex height="100%" overflow="hidden">
         {children}
       </Flex>
     </Flex>
-  );
-};
-
-const Header: React.FC = () => {
-  const router = useRouter();
-
-  return (
-    <GraduateHeader
-      rightContent={
-        <Button size="sm" onClick={() => logout(router)}>
-          Logout
-        </Button>
-      }
-    />
   );
 };
 

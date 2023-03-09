@@ -4,30 +4,33 @@ import {
   FormErrorMessage,
   InputGroup,
   FormLabel,
+  ComponentWithAs,
+  FormControlProps,
 } from "@chakra-ui/react";
 import { FieldError } from "react-hook-form";
-import { forwardRef } from "react";
+import { forwardRef, HTMLInputTypeAttribute } from "react";
 
 interface InputProps {
-  error: FieldError | undefined;
+  error?: FieldError;
   id: string;
   placeholder: string;
-  type: string;
+  type: HTMLInputTypeAttribute;
 }
 
 // eslint-disable-next-line react/display-name
-export const StringInput = forwardRef<HTMLInputElement, InputProps>(
+export const GraduateInput = forwardRef<HTMLInputElement, InputProps>(
   ({ error, ...rest }, ref) => (
-    <FormControl isInvalid={error != undefined} height="2xl">
-      <InputGroup>
-        <Input
-          {...rest}
-          ref={ref}
-          size="lg"
-          variant="outline"
-          errorBorderColor="red.300"
-        />
-      </InputGroup>
+    <FormControl isInvalid={error != undefined}>
+      <Input
+        {...rest}
+        ref={ref}
+        size="lg"
+        variant="outline"
+        borderColor="neutral.main"
+        borderWidth="2px"
+        borderRadius="lg"
+        errorBorderColor="red.300"
+      />
       <FormErrorMessage mt="3xs">{error?.message}</FormErrorMessage>
     </FormControl>
   )
