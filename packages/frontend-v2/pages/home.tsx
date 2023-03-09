@@ -25,13 +25,13 @@ import {
   DeletePlanModal,
   DraggedScheduleCourse,
   EditPlanModal,
+  GraduatePostAuthHeader,
   LoadingPage,
   Plan,
   PlanDropdown,
   Sidebar,
   SidebarContainer,
 } from "../components";
-import { GraduateHeader } from "../components/Header/GraduateHeader";
 import { fetchStudentAndPrepareForDnd, useStudentWithPlans } from "../hooks";
 import {
   cleanDndIdsFromPlan,
@@ -275,25 +275,11 @@ const PageLayout: React.FC<PropsWithChildren> = ({ children }) => {
       overflow="hidden"
       ref={setNodeRef}
     >
-      <Header />
+      <GraduatePostAuthHeader />
       <Flex height="100%" overflow="hidden">
         {children}
       </Flex>
     </Flex>
-  );
-};
-
-const Header: React.FC = () => {
-  const router = useRouter();
-
-  return (
-    <GraduateHeader
-      rightContent={
-        <Button size="sm" onClick={() => logout(router)}>
-          Logout
-        </Button>
-      }
-    />
   );
 };
 

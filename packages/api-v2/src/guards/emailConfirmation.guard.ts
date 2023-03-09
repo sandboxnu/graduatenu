@@ -4,15 +4,24 @@ import {
   CanActivate,
   ExecutionContext,
   UnauthorizedException,
+  Logger,
 } from "@nestjs/common";
 import { AuthenticatedRequest } from "src/auth/interfaces/authenticated-request";
+import { formatServiceCtx } from "src/utils";
 
 @Injectable()
 export class EmailConfirmationGuard implements CanActivate {
+  private readonly logger: Logger = new Logger();
+
   canActivate(context: ExecutionContext) {
     const request: AuthenticatedRequest = context.switchToHttp().getRequest();
 
     if (!request.user?.isEmailConfirmed) {
+      this.logger.debug(
+        { message: "email not confirmed", user: request.user },
+        formatServiceCtx("OwnPlanGuard", "canActivate")
+      );
+
       throw new UnauthorizedException(emailConfirmationMsg);
     }
 

@@ -2,7 +2,7 @@ import { Flex, Link, Text } from "@chakra-ui/react";
 import { API } from "@graduate/api-client";
 import { NextPage } from "next";
 import router from "next/router";
-import { GraduateHeader } from "../components/Header/GraduateHeader";
+import { GraduatePreAuthHeader } from "../components";
 import { useStudentWithPlans } from "../hooks";
 import { toast } from "../utils";
 
@@ -27,9 +27,7 @@ const EmailConfirmation: NextPage = () => {
 
   return (
     <div>
-      <GraduateHeader
-        rightContent={<Link onClick={() => router.push("/login")}>Log In</Link>}
-      />
+      <GraduatePreAuthHeader />
       <Flex direction="column">
         <Text fontSize="xl" textAlign="center">
           We sent you an email. Click the link in your email to activate your

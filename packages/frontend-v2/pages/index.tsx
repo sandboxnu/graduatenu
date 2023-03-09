@@ -10,8 +10,7 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import Link from "next/link";
-import { GraduateHeader } from "../components/Header/GraduateHeader";
+import { GraduateButtonLink, GraduatePreAuthHeader } from "../components";
 
 type InfoSectionProps = InfoImageProps & InfoTextProps;
 
@@ -28,22 +27,10 @@ interface InfoTextProps {
 const LandingPage: NextPage = () => {
   return (
     <Box>
-      <Header />
+      <GraduatePreAuthHeader />
       <Banner />
       <Info />
     </Box>
-  );
-};
-
-const Header = (): JSX.Element => {
-  return (
-    <GraduateHeader
-      rightContent={
-        <Link href="/login" passHref>
-          <Button size="sm">Sign In</Button>
-        </Link>
-      }
-    />
   );
 };
 
@@ -85,14 +72,13 @@ const Banner = (): JSX.Element => {
               personalized plan of study.
             </Text>
           </Box>
-          <Link href="/signup" passHref>
-            <Button
-              mr={{ desktop: "7.5rem", laptop: "6.25rem", tablet: "3.25rem" }}
-              mt="15%"
-            >
-              Get Started
-            </Button>
-          </Link>
+          <GraduateButtonLink
+            href="/signup"
+            mr={{ desktop: "7.5rem", laptop: "6.25rem", tablet: "3.25rem" }}
+            mt="15%"
+          >
+            Get Started
+          </GraduateButtonLink>
         </Flex>
       </HStack>
     </Box>
