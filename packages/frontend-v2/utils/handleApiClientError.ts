@@ -43,10 +43,7 @@ const handleAxiosError = (error: AxiosError, router: NextRouter) => {
     toast.error("Sorry, we sent some invalid data. Try again.");
   } else if (statusCode === 401) {
     const errorMsg = error.response?.data.message;
-    console.log("MESSSAGE: ", errorMsg);
-    console.log(errorMsg, emailConfirmationMsg);
     if (errorMsg === emailConfirmationMsg) {
-      console.log("HERE");
       router.push("/emailConfirmation");
     } else {
       logger.debug(

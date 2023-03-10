@@ -33,7 +33,7 @@ const EmailConfirmation: NextPage = () => {
           account.
         </Text>
         <Link onClick={handleResendConfirmationEmail}>
-          Didn't get the email? Click here to resend.
+          Didn&apos;t get the email? Click here to resend.
         </Link>
       </Flex>
     </div>

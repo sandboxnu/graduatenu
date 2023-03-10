@@ -1,13 +1,6 @@
-import {
-  Button,
-  Flex,
-  Icon,
-  IconProps,
-  Link as ChakraLink,
-} from "@chakra-ui/react";
+import { Flex, Icon, IconProps, Link as ChakraLink } from "@chakra-ui/react";
 import { HeaderContainer } from "./HeaderContainer";
 import { Logo } from "./Logo";
-import NextLink from "next/link";
 import { GraduateButtonLink } from "../Link";
 
 interface GraduateHeaderProps {

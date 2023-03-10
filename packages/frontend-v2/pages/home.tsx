@@ -1,4 +1,4 @@
-import { Box, Button, Flex } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 import {
   CollisionDetection,
   DndContext,
@@ -38,7 +38,6 @@ import {
   DELETE_COURSE_AREA_DND_ID,
   handleApiClientError,
   logger,
-  logout,
   updatePlanForStudent,
   updatePlanOnDragEnd,
 } from "../utils";

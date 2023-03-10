@@ -1,7 +1,6 @@
 import type { NextPage } from "next";
 import {
   Box,
-  Button,
   Flex,
   Heading,
   HStack,

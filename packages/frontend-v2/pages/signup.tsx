@@ -1,4 +1,4 @@
-import { Flex, Text, Heading, Button } from "@chakra-ui/react";
+import { Flex, Text, Button } from "@chakra-ui/react";
 import { API } from "@graduate/api-client";
 import { SignUpStudentDto } from "@graduate/common";
 import { AxiosError } from "axios";
@@ -35,7 +35,6 @@ const SignUpForm: React.FC = () => {
 
   const onSubmitHandler = async (payload: SignUpStudentDto) => {
     try {
-      console.log("Name: ", payload);
       await API.auth.register(payload);
       router.push("/home");
     } catch (err) {
