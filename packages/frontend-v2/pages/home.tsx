@@ -7,9 +7,15 @@ import {
   DragStartEvent,
   pointerWithin,
   rectIntersection,
+  useDroppable,
 } from "@dnd-kit/core";
 import { API } from "@graduate/api-client";
-import { CoReqWarnings, PlanModel, PreReqWarnings } from "@graduate/common";
+import {
+  CoReqWarnings,
+  PlanModel,
+  PreReqWarnings,
+  ScheduleCourse2,
+} from "@graduate/common";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { PropsWithChildren, useEffect, useState } from "react";
@@ -17,11 +23,11 @@ import {
   AddPlanModal,
   AddYearButton,
   DeletePlanModal,
+  DraggedScheduleCourse,
   EditPlanModal,
   LoadingPage,
   Plan,
   PlanDropdown,
-  ScheduleCourse,
   Sidebar,
   SidebarContainer,
 } from "../components";
@@ -29,6 +35,7 @@ import { GraduateHeader } from "../components/Header/GraduateHeader";
 import { fetchStudentAndPrepareForDnd, useStudentWithPlans } from "../hooks";
 import {
   cleanDndIdsFromPlan,
+  DELETE_COURSE_AREA_DND_ID,
   handleApiClientError,
   logger,
   logout,
@@ -65,7 +72,8 @@ const HomePage: NextPage = () => {
     number | undefined | null
   >();
 
-  const [activeCourse, setActiveCourse] = useState(null);
+  const [activeCourse, setActiveCourse] =
+    useState<ScheduleCourse2<string> | null>(null);
 
   const [isRemove, setIsRemove] = useState<boolean>(false);
 
@@ -132,7 +140,7 @@ const HomePage: NextPage = () => {
    */
   const handleDragStart = (event: DragStartEvent) => {
     const { active } = event;
-    setActiveCourse(active.data.current?.course);
+    setActiveCourse({ ...active.data.current?.course, id: active.id });
   };
 
   const handleDragEnd = (event: DragEndEvent): void => {
@@ -244,12 +252,8 @@ const HomePage: NextPage = () => {
       </PageLayout>
       <DragOverlay dropAnimation={null}>
         {activeCourse ? (
-          <ScheduleCourse
-            isDisabled={false}
-            scheduleCourse={activeCourse}
-            isOverlay={true}
-            coReqErr={undefined}
-            preReqErr={undefined}
+          <DraggedScheduleCourse
+            activeCourse={activeCourse}
             isRemove={isRemove}
           />
         ) : null}
@@ -260,11 +264,17 @@ const HomePage: NextPage = () => {
 
 /**
  * This will have everything that can be rendered without the student and
- * plans(i.e: header, sidebar, etc)
+ * plans(i.e: header, sidebar, etc).
  */
 const PageLayout: React.FC<PropsWithChildren> = ({ children }) => {
+  const { setNodeRef } = useDroppable({ id: DELETE_COURSE_AREA_DND_ID });
   return (
-    <Flex flexDirection="column" height="100vh" overflow="hidden">
+    <Flex
+      flexDirection="column"
+      height="100vh"
+      overflow="hidden"
+      ref={setNodeRef}
+    >
       <Header />
       <Flex height="100%" overflow="hidden">
         {children}

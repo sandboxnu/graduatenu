@@ -7,7 +7,8 @@ import {
 } from "@graduate/common";
 import produce from "immer";
 import { toast } from "react-toastify";
-import { getCourseDisplayString } from "../course";
+import { DELETE_COURSE_AREA_DND_ID } from "../constants";
+import { getCourseDisplayString, isCourseFromSidebar } from "../course";
 import { getSeasonDisplayWord } from "./getSeasonDisplayWord";
 import { isCourseInTerm } from "./isCourseInTerm";
 
@@ -34,10 +35,17 @@ export const updatePlanOnDragEnd = (
   const updatedPlan = produce(plan, (draftPlan) => {
     // grab all the terms across the years, since it's easier to work with a flat list of terms
     const scheduleTerms = flattenScheduleToTerms<string>(draftPlan.schedule);
-    
-    const oldTerm = scheduleTerms.find(term => term.classes.some((course) => course.id === draggedCourse.id));
-    // If it is not being dragged over a droppable, then we delete the course
-    if (draggedOverTerm == null) {
+
+    const oldTerm = scheduleTerms.find((term) =>
+      term.classes.some((course) => course.id === draggedCourse.id)
+    );
+
+    if (!draggedOverTerm) {
+      throw new Error("Course is being dragged over nothing");
+    }
+
+    // If it is being dragged over the delete area droppable, then we delete the course
+    if (draggedOverTerm?.id == DELETE_COURSE_AREA_DND_ID) {
       if (!oldTerm) {
         throw new Error("Term the course is dragged from isn't found");
       }
@@ -54,12 +62,12 @@ export const updatePlanOnDragEnd = (
       if (!newTerm) {
         throw new Error("Term the course is dragged over isn't found");
       }
-      
+
       const year = plan.schedule.years.find((year) => {
         const res = Object.values(year).find((term) => term.id === newTerm.id);
         return res;
       });
-  
+
       if (!year) {
         throw new Error("Year of the course that is dragged over isn't found");
       }
@@ -73,8 +81,7 @@ export const updatePlanOnDragEnd = (
       const draggedCourseDetails: ScheduleCourse2<unknown> =
         draggedCourse.data.current.course;
 
-
-      const isFromSidebar = draggedCourse.data.current.isFromSidebar;
+      const isFromSidebar = isCourseFromSidebar(draggedCourse.id as string);
       const isSameTerm = !isFromSidebar && oldTerm && oldTerm.id === newTerm.id;
 
       /*
