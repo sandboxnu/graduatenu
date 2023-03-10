@@ -6,6 +6,7 @@ import { LoginStudentDto, SignUpStudentDto } from "@graduate/common";
 import { JwtPayload } from "./interfaces/jwt-payload";
 import * as bcrypt from "bcrypt";
 import { formatServiceCtx } from "../../src/utils";
+import { EmailAlreadyExists } from "src/student/student.errors";
 
 @Injectable()
 export class AuthService {
@@ -20,9 +21,15 @@ export class AuthService {
   ) {}
 
   /** Registers a new student in the db and logs the student in. */
-  async register(createStudentDto: SignUpStudentDto): Promise<Student> {
+  async register(
+    createStudentDto: SignUpStudentDto
+  ): Promise<Student | EmailAlreadyExists> {
     // create a new student
     const newStudent = await this.studentService.create(createStudentDto);
+
+    if (newStudent instanceof EmailAlreadyExists) {
+      return new EmailAlreadyExists();
+    }
 
     if (!newStudent) {
       return null;

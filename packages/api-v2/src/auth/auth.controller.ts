@@ -10,12 +10,14 @@ import {
 } from "@nestjs/common";
 import { AuthService } from "./auth.service";
 import {
+  emailAlreadyExistsError,
   GetStudentResponse,
   LoginStudentDto,
   SignUpStudentDto,
 } from "@graduate/common";
 import { Response } from "express";
 import EmailConfirmationService from "src/emailConfirmation/emailConfirmation.service";
+import { EmailAlreadyExists } from "src/student/student.errors";
 
 @Controller("auth")
 export class AuthController {
@@ -30,6 +32,10 @@ export class AuthController {
     @Body() createStudentDto: SignUpStudentDto
   ): Promise<GetStudentResponse> {
     const student = await this.authService.register(createStudentDto);
+
+    if (student instanceof EmailAlreadyExists) {
+      throw new BadRequestException(emailAlreadyExistsError);
+    }
 
     if (!student) {
       throw new BadRequestException();

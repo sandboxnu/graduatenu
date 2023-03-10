@@ -25,8 +25,10 @@ import {
   OnboardStudentDto,
   UpdateStudentDto,
   UpdateStudentResponse,
+  emailAlreadyExistsError,
 } from "@graduate/common";
 import { EmailConfirmationGuard } from "src/guards/emailConfirmation.guard";
+import { EmailAlreadyExists } from "./student.errors";
 
 @Controller("students")
 export class StudentController {
@@ -120,6 +122,10 @@ export class StudentController {
     @Body() createStudentDto: SignUpStudentDto
   ): Promise<GetStudentResponse> {
     const student = await this.studentService.create(createStudentDto);
+
+    if (student instanceof EmailAlreadyExists) {
+      throw new BadRequestException(emailAlreadyExistsError);
+    }
 
     if (!student) {
       throw new BadRequestException();

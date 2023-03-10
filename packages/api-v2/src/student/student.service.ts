@@ -9,6 +9,7 @@ import {
 } from "typeorm";
 import { SignUpStudentDto, UpdateStudentDto } from "@graduate/common";
 import { Student } from "./entities/student.entity";
+import { EmailAlreadyExists } from "./student.errors";
 
 @Injectable()
 export class StudentService {
@@ -19,7 +20,9 @@ export class StudentService {
     private studentRepository: Repository<Student>
   ) {}
 
-  async create(createStudentDto: SignUpStudentDto): Promise<Student> {
+  async create(
+    createStudentDto: SignUpStudentDto
+  ): Promise<Student | EmailAlreadyExists> {
     // make sure the user doesn't already exists
     const { email } = createStudentDto;
     const userInDb = await this.studentRepository.findOne({ where: { email } });
@@ -28,7 +31,7 @@ export class StudentService {
         { message: "User already exists in db", userInDb },
         StudentService.formatStudentServiceCtx("create")
       );
-      return null;
+      return new EmailAlreadyExists();
     }
 
     if (createStudentDto.password !== createStudentDto.passwordConfirm) {

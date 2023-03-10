@@ -1,6 +1,6 @@
 import { Flex, Text, Button } from "@chakra-ui/react";
 import { API } from "@graduate/api-client";
-import { SignUpStudentDto } from "@graduate/common";
+import { emailAlreadyExistsError, SignUpStudentDto } from "@graduate/common";
 import { AxiosError } from "axios";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
@@ -39,7 +39,7 @@ const SignUpForm: React.FC = () => {
       router.push("/home");
     } catch (err) {
       const error = err as AxiosError;
-      if (error.response?.status === 400) {
+      if (error.response?.data?.message === emailAlreadyExistsError) {
         toast.error(
           "Account with the given email already exists... try signing up instead 😄"
         );
