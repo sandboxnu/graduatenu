@@ -7,12 +7,11 @@ import { useStudentWithPlans } from "../hooks";
 import { toast } from "../utils";
 
 const EmailConfirmation: NextPage = () => {
-
   const { student } = useStudentWithPlans();
-  
+
   // Email is already confirmed
   if (student) {
-    router.push('/home')
+    router.push("/home");
   }
 
   const handleResendConfirmationEmail = async () => {

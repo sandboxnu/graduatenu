@@ -9,11 +9,11 @@ const ConfirmEmail: NextPage = () => {
   const router = useRouter();
   const token = router.query.token as string;
 
-  const {student} = useStudentWithPlans();
+  const { student } = useStudentWithPlans();
 
   // Already confirmed
   if (student) {
-    router.push('/home')
+    router.push("/home");
   }
 
   useEffect(() => {
@@ -22,7 +22,7 @@ const ConfirmEmail: NextPage = () => {
         try {
           await API.email.confirm({ token });
           router.push("/home");
-          toast.success('Successfully confirmed email!')
+          toast.success("Successfully confirmed email!");
         } catch (err) {
           toast.error("Something went wrong, try registering again");
           console.error(err);
