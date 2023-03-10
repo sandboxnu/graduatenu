@@ -35,6 +35,7 @@ const SignUpForm: React.FC = () => {
 
   const onSubmitHandler = async (payload: SignUpStudentDto) => {
     try {
+      console.log("Name: ", payload);
       await API.auth.register(payload);
       router.push("/home");
     } catch (err) {
@@ -55,6 +56,22 @@ const SignUpForm: React.FC = () => {
       headingText="Create an Account"
       inputs={
         <>
+          <Flex columnGap="md">
+            <GraduateInput
+              type="text"
+              id="firstName"
+              placeholder="First Name"
+              {...register("firstName")}
+              helpMessage="Optional"
+            />
+            <GraduateInput
+              type="text"
+              id="lastName"
+              placeholder="Last Name"
+              {...register("lastName")}
+              helpMessage="Optional"
+            />
+          </Flex>
           <GraduateInput
             id="email"
             placeholder="Email"
@@ -85,7 +102,7 @@ const SignUpForm: React.FC = () => {
             {...register("passwordConfirm", {
               validate: (confirmPass) =>
                 confirmPass === password || "Passwords do not match!",
-              required: true,
+              required: "Confirm password is required",
             })}
           />
         </>

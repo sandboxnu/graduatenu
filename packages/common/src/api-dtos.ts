@@ -63,6 +63,14 @@ export class UpdatePlanDto {
 }
 
 export class SignUpStudentDto {
+  @IsOptional()
+  @IsString()
+  firstName: string;
+
+  @IsOptional()
+  @IsString()
+  lastName: string;
+
   @IsNotEmpty()
   @IsEmail()
   email: string;
