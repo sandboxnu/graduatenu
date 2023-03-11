@@ -26,9 +26,10 @@ import {
   UpdateStudentDto,
   UpdateStudentResponse,
   emailAlreadyExistsError,
+  weakPasswordError,
 } from "@graduate/common";
 import { EmailConfirmationGuard } from "src/guards/emailConfirmation.guard";
-import { EmailAlreadyExists } from "./student.errors";
+import { EmailAlreadyExists, WeakPassword } from "./student.errors";
 
 @Controller("students")
 export class StudentController {
@@ -125,6 +126,10 @@ export class StudentController {
 
     if (student instanceof EmailAlreadyExists) {
       throw new BadRequestException(emailAlreadyExistsError);
+    }
+
+    if (student instanceof WeakPassword) {
+      throw new BadRequestException(weakPasswordError);
     }
 
     if (!student) {

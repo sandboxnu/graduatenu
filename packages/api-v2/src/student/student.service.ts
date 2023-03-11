@@ -7,9 +7,13 @@ import {
   Repository,
   UpdateResult,
 } from "typeorm";
-import { SignUpStudentDto, UpdateStudentDto } from "@graduate/common";
+import {
+  isStrongPassword,
+  SignUpStudentDto,
+  UpdateStudentDto,
+} from "@graduate/common";
 import { Student } from "./entities/student.entity";
-import { EmailAlreadyExists } from "./student.errors";
+import { EmailAlreadyExists, WeakPassword } from "./student.errors";
 
 @Injectable()
 export class StudentService {
@@ -22,7 +26,7 @@ export class StudentService {
 
   async create(
     createStudentDto: SignUpStudentDto
-  ): Promise<Student | EmailAlreadyExists> {
+  ): Promise<Student | EmailAlreadyExists | WeakPassword> {
     // make sure the user doesn't already exists
     const { email } = createStudentDto;
     const userInDb = await this.studentRepository.findOne({ where: { email } });
@@ -36,6 +40,10 @@ export class StudentService {
 
     if (createStudentDto.password !== createStudentDto.passwordConfirm) {
       return null;
+    }
+
+    if (!isStrongPassword(createStudentDto.password)) {
+      return new WeakPassword();
     }
 
     const newStudent = this.studentRepository.create(createStudentDto);

@@ -1,7 +1,12 @@
 import { Flex, Text, Button } from "@chakra-ui/react";
 import { API } from "@graduate/api-client";
-import { emailAlreadyExistsError, SignUpStudentDto } from "@graduate/common";
-import { AxiosError } from "axios";
+import {
+  emailAlreadyExistsError,
+  isStrongPassword,
+  SignUpStudentDto,
+  weakPasswordError,
+} from "@graduate/common";
+import axios from "axios";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
@@ -38,13 +43,21 @@ const SignUpForm: React.FC = () => {
       await API.auth.register(payload);
       router.push("/home");
     } catch (err) {
-      const error = err as AxiosError;
-      if (error.response?.data?.message === emailAlreadyExistsError) {
-        toast.error(
-          "Account with the given email already exists... try signing up instead 😄"
-        );
+      if (axios.isAxiosError(err)) {
+        const errorMessage = err.response?.data?.message;
+        if (errorMessage === emailAlreadyExistsError) {
+          toast.error(
+            "Account with the given email already exists... try signing up instead 😄"
+          );
+        } else if (errorMessage === weakPasswordError) {
+          toast.error(
+            "Password too weak. Ensure the password is at least 8 characters long and contains digits and letters."
+          );
+        } else {
+          handleApiClientError(err, router);
+        }
       } else {
-        handleApiClientError(error, router);
+        handleApiClientError(err as Error, router);
       }
     }
   };
@@ -90,6 +103,9 @@ const SignUpForm: React.FC = () => {
             id="password"
             placeholder="Password"
             {...register("password", {
+              validate: (pass) =>
+                isStrongPassword(pass) ||
+                "A password should be at least 8 characters with digits and letters.",
               required: "Password is required",
             })}
           />
@@ -112,6 +128,7 @@ const SignUpForm: React.FC = () => {
             variant="solid"
             borderRadius="lg"
             isLoading={isSubmitting}
+            isDisabled={Object.keys(errors).length > 0}
             type="submit"
           >
             Create Account
