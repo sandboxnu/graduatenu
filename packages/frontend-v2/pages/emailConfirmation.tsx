@@ -2,7 +2,7 @@ import { Text, Flex, Heading, Image, Link } from "@chakra-ui/react";
 import { API } from "@graduate/api-client";
 import { NextPage } from "next";
 import router from "next/router";
-import { GraduateLink, GraduatePreAuthHeader } from "../components";
+import { GraduatePreAuthHeader } from "../components";
 import { useStudentWithPlans } from "../hooks";
 import { toast } from "../utils";
 
@@ -37,7 +37,7 @@ const EmailConfirmation: NextPage = () => {
         rowGap="3xl"
       >
         <Flex alignItems="center" direction="column" rowGap="lg">
-          <Image src="/email_confirmation.svg" width="240px" />
+          <Image src="/email_confirmation.svg" width="240px" alt="mail" />
           <Heading as="h1" size="lg">
             Verfiy Your Email
           </Heading>
