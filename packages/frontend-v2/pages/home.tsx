@@ -88,8 +88,9 @@ const HomePage: NextPage = () => {
     // once the student is fetched, set the selected plan id to the primary plan id
     if (student && selectedPlanId === undefined) {
       if(student.primaryPlanId == null){
-        if(student.plans){
-          setSelectedPlanId(student.plans[0].id);
+        if(student.plans.length > 0){
+          const sortedPlans = student.plans.sort((p1, p2) => p1.createdAt.getTime() - p2.createdAt.getTime())
+          setSelectedPlanId(sortedPlans[0].id);
         }
       } else {
         setSelectedPlanId(student.primaryPlanId);
