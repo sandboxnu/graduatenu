@@ -3,7 +3,12 @@ import { addTypeToUrl } from "../classify/classify";
 import { scrapeMajorLinks } from "../urls/urls";
 import { CatalogEntryType, TypedCatalogEntry } from "../classify/types";
 import { Err, Major2, Ok, ResultType, Section } from "@graduate/common";
-import { Pipeline, StageLabel } from "./types";
+import {
+  ParsedCatalogEntry,
+  Pipeline,
+  StageLabel,
+  TokenizedCatalogEntry,
+} from "./types";
 import { createAgent } from "./axios";
 import {
   installGlobalStatsLogger,
@@ -11,9 +16,17 @@ import {
   logResults,
   clearGlobalStatsLogger,
 } from "./logger";
-import { ConcentrationHSection, HDocument, HRow, HRowType, HSectionType, TextRow } from "../tokenize/types";
+import {
+  ConcentrationHSection,
+  HDocument,
+  HRow,
+  HRowType,
+  HSectionType,
+  TextRow,
+} from "../tokenize/types";
 import { parseRows } from "../parse/parse";
-import {writeFile} from "fs/promises"
+import { writeFile } from "fs/promises";
+import { saveComment } from "./saveComment";
 
 /**
  * Runs a full scrape of the catalog, logging the results to the console.
@@ -22,11 +35,12 @@ import {writeFile} from "fs/promises"
  */
 export const runPipeline = async (yearStart: number, yearEnd: number) => {
   const unregisterAgent = createAgent();
-  // const { entries, unfinished } = await scrapeMajorLinks(yearStart, yearEnd);
-  const { entries, unfinished } = {
-    entries: [new URL("https://catalog.northeastern.edu/archive/2021-2022/undergraduate/science/linguistics/linguistics-english-ba/")],
-    unfinished: []
-  };
+  const { entries, unfinished } = await scrapeMajorLinks(yearStart, yearEnd);
+  const comments = new Map();
+  // const { entries, unfinished } = {
+  //   entries: [new URL("https://catalog.northeastern.edu/archive/2021-2022/undergraduate/science/linguistics/linguistics-english-ba/")],
+  //   unfinished: []
+  // };
   if (unfinished.length > 0) {
     console.log("didn't finish searching some entries", ...unfinished);
   }
@@ -46,12 +60,18 @@ export const runPipeline = async (yearStart: number, yearEnd: number) => {
         ])
       )
       .then(addPhase(StageLabel.Tokenize, tokenizeEntry))
+      .then(addPhase(StageLabel.SaveComment, saveComment(comments)))
       .then(addPhase(StageLabel.Parse, parseEntry))
       .then(addPhase(StageLabel.Save, saveResults));
   });
   const results = await logProgress(pipelines);
   await unregisterAgent();
 
+  const obj: { [key: string]: number } = {};
+  Array.from(comments.entries())
+    .sort((a, b) => -a[1] + b[1])
+    .forEach(([key, value]) => (obj[key] = value));
+  writeFile("./comments.json", JSON.stringify(obj, null, 2));
   logResults(results);
   clearGlobalStatsLogger();
 };
@@ -116,60 +136,75 @@ export class FilterError {
   }
 }
 
-type TokenizedCatalogEntry = TypedCatalogEntry & {tokenized: HDocument}
-type ParsedCatalogEntry = TypedCatalogEntry & {parsed: Major2}
-
-const tokenizeEntry = async (entry: TypedCatalogEntry): Promise<TokenizedCatalogEntry> => {
+const tokenizeEntry = async (
+  entry: TypedCatalogEntry
+): Promise<TokenizedCatalogEntry> => {
   const tokenized = await fetchAndTokenizeHTML(entry.url);
   return { ...entry, tokenized };
 };
 
-const parseEntry = async (entry: TokenizedCatalogEntry): Promise<ParsedCatalogEntry> => {
-  const nonConcentrations = entry.tokenized.sections.filter(metaSection => {
-    return metaSection.type === HSectionType.PRIMARY
-  })
-  
-  const entries: HRow[][] = nonConcentrations.map((metaSection)=>{
-    if (metaSection.entries.length >= 1 && metaSection.entries[0].type != HRowType.HEADER) {
+const parseEntry = async (
+  entry: TokenizedCatalogEntry
+): Promise<ParsedCatalogEntry> => {
+  const nonConcentrations = entry.tokenized.sections.filter((metaSection) => {
+    return metaSection.type === HSectionType.PRIMARY;
+  });
+
+  const entries: HRow[][] = nonConcentrations.map((metaSection) => {
+    if (
+      metaSection.entries.length >= 1 &&
+      metaSection.entries[0].type != HRowType.HEADER
+    ) {
       const newHeader: TextRow<HRowType.HEADER> = {
         type: HRowType.HEADER,
         description: metaSection.description,
-        hour: 0
-      }
-      metaSection.entries = [newHeader, ...metaSection.entries]
+        hour: 0,
+      };
+      metaSection.entries = [newHeader, ...metaSection.entries];
     }
-    return metaSection.entries
-  })
-  
-  let allEntries = entries.reduce((prev: HRow[], current: HRow[])=>{
-    return prev.concat(current)
-  }, [])
-  
-  allEntries = allEntries.filter((row)=>row.type !== HRowType.COMMENT && row.type !== HRowType.SUBHEADER)
-  
-  let mainReqsParsed = parseRows(allEntries)
+    return metaSection.entries;
+  });
 
-  let concentrations = entry.tokenized.sections.filter(metaSection => {
-    return metaSection.type === HSectionType.CONCENTRATION
-  })
-  .map((concentration): Section => {
-    // Add in header based on section name if one isn't already present.
-    concentration.entries = concentration.entries.filter((row)=>row.type !== HRowType.COMMENT && row.type !== HRowType.SUBHEADER)
-    if (concentration.entries.length >= 1 && concentration.entries[0].type != HRowType.HEADER) {
-      const newHeader: TextRow<HRowType.HEADER> = {
-        type: HRowType.HEADER,
-        description: concentration.description,
-        hour: 0
+  let allEntries = entries.reduce((prev: HRow[], current: HRow[]) => {
+    return prev.concat(current);
+  }, []);
+
+  allEntries = allEntries.filter(
+    (row) => row.type !== HRowType.COMMENT && row.type !== HRowType.SUBHEADER
+  );
+
+  let mainReqsParsed = parseRows(allEntries);
+
+  let concentrations = entry.tokenized.sections
+    .filter((metaSection) => {
+      return metaSection.type === HSectionType.CONCENTRATION;
+    })
+    .map((concentration): Section => {
+      // Add in header based on section name if one isn't already present.
+      concentration.entries = concentration.entries.filter(
+        (row) =>
+          row.type !== HRowType.COMMENT && row.type !== HRowType.SUBHEADER
+      );
+      if (
+        concentration.entries.length >= 1 &&
+        concentration.entries[0].type != HRowType.HEADER
+      ) {
+        const newHeader: TextRow<HRowType.HEADER> = {
+          type: HRowType.HEADER,
+          description: concentration.description,
+          hour: 0,
+        };
+        concentration.entries = [newHeader, ...concentration.entries];
       }
-      concentration.entries = [newHeader, ...concentration.entries]
-    }
-    let parsed = parseRows(concentration.entries)
-    if (parsed.length === 1 && parsed[0].type == "SECTION") {
-      return parsed[0]
-    } else {
-      throw new Error(`Concentration "${concentration.description}" cannot be parsed!`)
-    }
-  })
+      let parsed = parseRows(concentration.entries);
+      if (parsed.length === 1 && parsed[0].type == "SECTION") {
+        return parsed[0];
+      } else {
+        throw new Error(
+          `Concentration "${concentration.description}" cannot be parsed!`
+        );
+      }
+    });
 
   const major: Major2 = {
     name: entry.tokenized.majorName,
@@ -178,26 +213,30 @@ const parseEntry = async (entry: TokenizedCatalogEntry): Promise<ParsedCatalogEn
     requirementSections: mainReqsParsed,
     concentrations: {
       minOptions: concentrations.length >= 1 ? 1 : 0, // Is there any case where this isn't 0 or 1?
-      concentrationOptions: concentrations
-    }
-  }
+      concentrationOptions: concentrations,
+    },
+  };
 
   return {
     url: entry.url,
     type: entry.type,
-    parsed: major
-  }
-}
+    parsed: major,
+  };
+};
 
-const saveResults = async (entry: ParsedCatalogEntry): Promise<ParsedCatalogEntry> => {
-  const path = `./major_output/${entry.url.pathname.slice(1).replaceAll(/\//g, "__")}.json`
+const saveResults = async (
+  entry: ParsedCatalogEntry
+): Promise<ParsedCatalogEntry> => {
+  const path = `./major_output/${entry.url.pathname
+    .slice(1)
+    .replaceAll(/\//g, "__")}.json`;
   return writeFile(path, JSON.stringify(entry.parsed, null, 4))
-    .then(()=>{
+    .then(() => {
       // console.log("wrote file: " + path)
-      return entry
+      return entry;
     })
-    .catch((e)=>{
-      console.log(e)
-      return entry
-    })
-}
+    .catch((e) => {
+      console.log(e);
+      return entry;
+    });
+};

@@ -13,19 +13,19 @@ Catalogs that are scrape-able (HTML):
 
 export enum College {
   ARTS_MEDIA_DESIGN = "arts-media-design",
-  BUSINESS = "business",
+  // BUSINESS = "business",
   KHOURY = "computer-information-science",
-  ENGINEERING = "engineering",
-  HEALTH_SCIENCES = "health-sciences",
-  SCIENCE = "science",
-  SOCIAL_SCIENCES_HUMANITIES = "social-sciences-humanities",
+  // ENGINEERING = "engineering",
+  // HEALTH_SCIENCES = "health-sciences",
+  // SCIENCE = "science",
+  // SOCIAL_SCIENCES_HUMANITIES = "social-sciences-humanities",
 }
 
 /**
  * Represents the result of an attempted catalog URL scrape (to find URLs to entries).
  *
- * Produces a list of entry URLs, as well a queue of unfinished URLs that still need
- * to be searched. Will produce unfinished URLs if visiting a URL fails.
+ * Produces a list of entry URLs, as well a queue of unfinished URLs that still
+ * need to be searched. Will produce unfinished URLs if visiting a URL fails.
  */
 export type CatalogURLResult = {
   entries: URL[];
