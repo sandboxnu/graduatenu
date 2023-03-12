@@ -52,7 +52,7 @@ class APIClient {
   };
 
   email = {
-    confirm: (body: ConfirmEmailDto): Promise<void> => this.req("POST", "/email-confirmation/confirm", null, body),
+    confirm: (body: ConfirmEmailDto): Promise<void> => this.req("POST", "/email-confirmation/confirm", undefined, body),
     resendConfirmationLink: (): Promise<void> => this.req("POST", "/email-confirmation/resend-confirmation-link")
   }
 
