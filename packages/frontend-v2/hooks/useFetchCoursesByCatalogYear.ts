@@ -34,9 +34,11 @@ export function useFetchCoursesByCatalogYear(courses: courses): FetchCoursesRetu
   };
 }
 
+const isGivenYear = ()
+
 const sortGivenCourses = (courses: courses): ScheduleCourse2<null>[] => {
     SearchAPI.fetchCourses(courses).then((res) => {
-        
+        var 
     })
     return []
     
