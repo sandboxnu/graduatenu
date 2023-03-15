@@ -45,7 +45,7 @@ export const AccountOverview: React.FC<AccountOverviewProps> = ({
         await API.student.update(newStudent);
         return newStudent;
       });
-      toast.success("User successfully updated!");
+      toast.success("Info successfully updated!");
     } catch (error) {
       toast.error("Something went wrong", { log: true });
     }
