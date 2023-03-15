@@ -61,7 +61,7 @@ const SignUpForm = () => {
   const onSubmitHandler = async (payload: SignUpStudentDto) => {
     try {
       await API.auth.register(payload);
-      router.push("/home");
+      router.push("/emailConfirmation");
     } catch (err) {
       const error = err as AxiosError;
       if (error.response?.status === 401) toast.error("Invalid Credentials!");
