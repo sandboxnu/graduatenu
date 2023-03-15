@@ -99,11 +99,6 @@ export class UpdateStudentDto {
   email?: string;
 
   @IsOptional()
-  @IsNotEmpty()
-  @IsString()
-  password?: string;
-
-  @IsOptional()
   @IsInt()
   @Min(1898) // the year NEU was established
   @Max(3000) // will GraduateNU last beyond year 3000?!

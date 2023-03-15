@@ -2,6 +2,7 @@ import { Flex, Icon, IconProps, Link as ChakraLink } from "@chakra-ui/react";
 import { HeaderContainer } from "./HeaderContainer";
 import { Logo } from "./Logo";
 import { GraduateButtonLink } from "../Link";
+import { UserDropdown } from "./UserDropdown";
 
 interface GraduateHeaderProps {
   rightContent: React.ReactNode;
@@ -21,7 +22,10 @@ export const GraduatePostAuthHeader: React.FC = () => {
   return (
     <GraduateHeader
       rightContent={
-        <GraduateButtonLink href="/logout">Logout</GraduateButtonLink>
+        <>
+          <UserDropdown />
+          <GraduateButtonLink href="/logout">Logout</GraduateButtonLink>
+        </>
       }
     />
   );
