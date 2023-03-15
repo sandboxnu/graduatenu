@@ -19,7 +19,7 @@ const EmailConfirmation: NextPage = () => {
     router.push("/login");
   }
 
-  if (!student || isLoading) {
+  if (isLoading) {
     return <LoadingPage />;
   }
 
