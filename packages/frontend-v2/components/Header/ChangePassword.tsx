@@ -14,9 +14,10 @@ import {
   Input,
   FormLabel,
 } from "@chakra-ui/react";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { API } from "@graduate/api-client";
 import { StudentModel } from "@graduate/common";
-import { useState } from "react";
+// import { ChangeEvent, useState } from "react";
 import { toast } from "../../utils";
 
 // TODO: change this to actually make it work
@@ -24,22 +25,16 @@ import { toast } from "../../utils";
 interface ChangePasswordProps {
   student: StudentModel<string>;
 }
-export const ChangePassword: React.FC<ChangePasswordProps> = ({ student }) => {
+export const ChangePassword: React.FC<ChangePasswordProps> = ({  }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [firstName, setFirstName] = useState<string>(
-    student.fullName ? student.fullName.split(" ")[0] : ""
-  );
-  const [lastName, setLastName] = useState<string>(
-    student.fullName ? student.fullName.split(" ")[1] : ""
-  );
+  // const [password, setPassword] = useState<string>(
+  //   student.fullName ? student.fullName.split(" ")[0] : ""
+  // );
+  // const [setLastName] = useState<string>(
+  //   student.fullName ? student.fullName.split(" ")[1] : ""
+  // );
   const onSubmitHandler = async () => {
     try {
-      const newStudent: StudentModel<string> = {
-        ...student,
-        fullName: `${firstName} ${lastName}`,
-      };
-      await API.student.update(newStudent);
-      toast.success("User successfully updated!");
     } catch (error) {
       toast.error("Something went wrong", { log: true });
     }
@@ -63,9 +58,10 @@ export const ChangePassword: React.FC<ChangePasswordProps> = ({ student }) => {
                   <Text>Current password</Text>
                 </FormLabel>
                 <Input
-                  onChange={(event) => setFirstName(event.target.value)}
-                  value={firstName}
-                  type="text"
+                  // onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                    // setFirstName(event.target.value)
+                  // }
+                  type="password"
                   size="md"
                   variant="outline"
                   borderColor="neutral.main"
@@ -78,11 +74,10 @@ export const ChangePassword: React.FC<ChangePasswordProps> = ({ student }) => {
                   <Text>New password</Text>
                 </FormLabel>
                 <Input
-                  onChange={(event) => {
-                    setLastName(event.target.value);
-                  }}
-                  value={lastName}
-                  type="text"
+                  // onChange={(event) => {
+                    // setLastName(event.target.value);
+                  // }}
+                  type="password"
                   size="md"
                   variant="outline"
                   borderColor="neutral.main"
@@ -92,14 +87,14 @@ export const ChangePassword: React.FC<ChangePasswordProps> = ({ student }) => {
               </FormControl>
               <FormControl>
                 <FormLabel>
-                  <Text>Repeat new password</Text>
+                  {/* TODO: maybe change this to repeat? */}
+                  <Text>Confirm new password</Text>
                 </FormLabel>
                 <Input
-                  onChange={(event) => {
-                    setLastName(event.target.value);
-                  }}
-                  value={lastName}
-                  type="text"
+                  // onChange={(event) => {
+                    // setLastName(event.target.value);
+                  // }}
+                  type="password"
                   size="md"
                   variant="outline"
                   borderColor="neutral.main"
