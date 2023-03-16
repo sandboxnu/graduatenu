@@ -1,5 +1,3 @@
-
-
 import useSWR, { SWRResponse } from "swr";
 import { SearchAPI } from "@graduate/api-client";
 import { AxiosError } from "axios";
@@ -21,10 +19,13 @@ type courses = { subject: string; classId: string }[];
  * @param subject - The type of class that we are fetching from SearchNEU
  * @param classId - The identification number of the class as a string
  */
-export function useFetchCoursesByCatalogYear(courses: courses): FetchCoursesReturn {
+export function useFetchCoursesByCatalogYear(
+  courses: courses,
+  catalogYear: number
+): FetchCoursesReturn {
   const { data, ...rest } = useSWR(
     `/fetchCourses/${courses}`,
-    async () => await sortGivenCourses(courses)
+    async () => await SearchAPI.fetchCoursesByCatalogYear(courses, catalogYear)
   );
 
   return {
@@ -32,14 +33,4 @@ export function useFetchCoursesByCatalogYear(courses: courses): FetchCoursesRetu
     courses: data,
     isLoading: !data && !rest.error,
   };
-}
-
-const isGivenYear = ()
-
-const sortGivenCourses = (courses: courses): ScheduleCourse2<null>[] => {
-    SearchAPI.fetchCourses(courses).then((res) => {
-        var 
-    })
-    return []
-    
 }

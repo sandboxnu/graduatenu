@@ -21,6 +21,8 @@ import {
 } from "../../validation-worker/worker-messages";
 import { useFetchCourses } from "../../hooks/useFetchCourses";
 import { getAllCoursesInMajor } from "../../utils/plan/getAllCoursesInMajor";
+import { useFetchCoursesByCatalogYear } from "../../hooks/useFetchCoursesByCatalogYear";
+import { SearchAPI } from "@graduate/api-client";
 
 interface SidebarProps {
   selectedPlan: PlanModel<string>;
@@ -142,7 +144,7 @@ const Sidebar: React.FC<SidebarProps> = memo(({ selectedPlan }) => {
     courses,
     isLoading: isCoursesLoading,
     error: courseErrors,
-  } = useFetchCourses(majorCourses);
+  } = useFetchCoursesByCatalogYear(majorCourses, selectedPlan.catalogYear);
 
   const courseData = createCourseMap(courses, courseErrors);
 

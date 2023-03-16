@@ -94,6 +94,7 @@ interface SearchClass {
   coreqs?: INEUAndReq | INEUOrReq;
   maxCredits: number;
   minCredits: number;
+  termId: string;
 }
 
 function occurrenceToCourse(occurrence: SearchClass): ScheduleCourse2<null> {
@@ -107,6 +108,21 @@ function occurrenceToCourse(occurrence: SearchClass): ScheduleCourse2<null> {
     coreqs: occurrence.coreqs,
     id: null,
   };
+}
+
+function occurrencesToCourseByCatalogYear(
+  occurrences: SearchClass[],
+  catalogYear: number
+): ScheduleCourse2<null> {
+  for (const occurrence of occurrences) {
+    const year = occurrence.termId.slice(0, 4);
+
+    if (year === catalogYear.toString()) {
+      return occurrenceToCourse(occurrence);
+    }
+  }
+
+  return occurrenceToCourse(occurrences[0]);
 }
 
 /**
@@ -188,8 +204,9 @@ class SearchAPIClient {
     }
   };
 
-  fetchAllCourses = async (
-    courses: { subject: string; classId: string }[]
+  fetchCoursesByCatalogYear = async (
+    courses: { subject: string; classId: string }[],
+    catalogYear: number
   ): Promise<ScheduleCourse2<null>[]> => {
     const input = courses
       .map((course) => {
@@ -220,7 +237,10 @@ class SearchAPIClient {
 
     if (coursesData.bulkClasses) {
       return coursesData.bulkClasses.map((course: any) => {
-        return occurrenceToCourse(course?.latestOccurrence);
+        return occurrencesToCourseByCatalogYear(
+          course?.allOccurrences,
+          catalogYear
+        );
       });
     } else {
       throw Error("Courses could not be fetched");
@@ -253,19 +273,44 @@ class SearchAPIClient {
     const nodes = coursesData?.data?.search?.nodes ?? [];
 
     const courses = nodes.map((result: SearchClass) => {
-      return {
-        name: result.name,
-        classId: result.classId,
-        subject: result.subject,
-        prereqs: result.prereqs,
-        coreqs: result.coreqs,
-        numCreditsMin: result.minCredits,
-        numCreditsMax: result.maxCredits,
-      };
+      return occurrenceToCourse(result);
     });
 
     return courses;
   };
+
+  // searchCoursesByCatalogYear = async (
+  //   searchQuery: string,
+  //   minIndex = 0,
+  //   maxIndex = 9999,
+  //   catalogYear
+  // ): Promise<ScheduleCourse2<null>[]> => {
+  //   const res = await this.axios({
+  //     method: "POST",
+  //     headers: { "Content-Type": "application/json" },
+  //     data: JSON.stringify({
+  //       query: `
+  //       {
+  //         search(termId:"202130", query: "${searchQuery}", classIdRange: {min: ${minIndex}, max: ${maxIndex}}) {
+  //           totalCount
+  //           pageInfo { hasNextPage }
+  //           nodes { ... on ClassOccurrence { name subject maxCredits minCredits prereqs coreqs classId
+  //           }
+  //         }
+  //       }
+  //     }`,
+  //     }),
+  //   });
+
+  //   const coursesData = await res.data;
+  //   const nodes = coursesData?.data?.search?.nodes ?? [];
+
+  //   const courses = nodes.map((result: SearchClass) => {
+  //     return occurrenceToCourse(result)
+  //   });
+
+  //   return courses;
+  // };
 }
 
 export const API = new APIClient();
