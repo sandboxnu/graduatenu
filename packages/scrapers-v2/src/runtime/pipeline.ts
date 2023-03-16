@@ -16,14 +16,7 @@ import {
   logResults,
   clearGlobalStatsLogger,
 } from "./logger";
-import {
-  ConcentrationHSection,
-  HDocument,
-  HRow,
-  HRowType,
-  HSectionType,
-  TextRow,
-} from "../tokenize/types";
+import { HRow, HRowType, HSectionType, TextRow } from "../tokenize/types";
 import { parseRows } from "../parse/parse";
 import { writeFile } from "fs/promises";
 import { saveComment } from "./saveComment";
@@ -60,7 +53,7 @@ export const runPipeline = async (yearStart: number, yearEnd: number) => {
         ])
       )
       .then(addPhase(StageLabel.Tokenize, tokenizeEntry))
-      .then(addPhase(StageLabel.SaveComment, saveComment(comments)))
+      .then(addPhase(StageLabel.SaveComment, saveComment, comments))
       .then(addPhase(StageLabel.Parse, parseEntry))
       .then(addPhase(StageLabel.Save, saveResults));
   });
@@ -173,9 +166,9 @@ const parseEntry = async (
     (row) => row.type !== HRowType.COMMENT && row.type !== HRowType.SUBHEADER
   );
 
-  let mainReqsParsed = parseRows(allEntries);
+  const mainReqsParsed = parseRows(allEntries);
 
-  let concentrations = entry.tokenized.sections
+  const concentrations = entry.tokenized.sections
     .filter((metaSection) => {
       return metaSection.type === HSectionType.CONCENTRATION;
     })
@@ -196,7 +189,7 @@ const parseEntry = async (
         };
         concentration.entries = [newHeader, ...concentration.entries];
       }
-      let parsed = parseRows(concentration.entries);
+      const parsed = parseRows(concentration.entries);
       if (parsed.length === 1 && parsed[0].type == "SECTION") {
         return parsed[0];
       } else {
