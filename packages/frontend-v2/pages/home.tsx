@@ -87,13 +87,9 @@ const HomePage: NextPage = () => {
   useEffect(() => {
     // once the student is fetched, set the selected plan id to the primary plan id
     if (student && selectedPlanId === undefined) {
-      if(student.primaryPlanId == null){
-        if(student.plans.length > 0){
-          const sortedPlans = student.plans.sort((p1, p2) => p1.createdAt.getTime() - p2.createdAt.getTime())
-          setSelectedPlanId(sortedPlans[0].id);
-        }
-      } else {
-        setSelectedPlanId(student.primaryPlanId);
+      if(student.plans.length > 0){
+        const sortedPlans = student.plans.sort((p1, p2) => p1.updatedAt.getTime() - p2.updatedAt.getTime())
+        setSelectedPlanId(sortedPlans[0].id);
       }
     }
     if (student) {
