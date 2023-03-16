@@ -84,7 +84,9 @@ const scrapeLinks = async (
       for (const element of children) {
         const path = getLinkForEl(element);
         const url = new URL(join(baseUrl, path));
-        if (!seen.has(url.href)) {
+        if (!seen.has(url.href) && 
+          Object.values(College).some(linkPart => url.href.includes(linkPart))) {
+            
           const bucket = isParent(element) ? nextQueue : entries;
           bucket.push(url);
           seen.add(url.href);
