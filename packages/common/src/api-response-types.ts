@@ -24,7 +24,6 @@ export class StudentModel<T> {
   isOnboarded: boolean;
   fullName: string;
   email: string;
-  isEmailConfirmed: boolean;
   academicYear: number | undefined;
   graduateYear: number | undefined;
   catalogYear: number | undefined;

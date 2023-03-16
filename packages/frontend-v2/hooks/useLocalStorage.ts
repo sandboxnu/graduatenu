@@ -5,6 +5,10 @@ import { logger } from "../utils";
  * Enum declared to be able to look up usages of storage keys and ensures the
  * keys are unique.
  */
+export enum LocalStorageKey {
+  // Delete later, this is for testing.
+  Token = "Token",
+}
 
 /**
  * Using this hook allows for any component to access localstorage as NextJS
@@ -16,7 +20,7 @@ import { logger } from "../utils";
  * @param key Key for the localstorage value.
  */
 export function useLocalStorage<T>(
-  key: string
+  key: LocalStorageKey
 ): [T | null, Dispatch<T>] {
   const [storedValue, setStoredValue] = useState<T | null>(null);
 
