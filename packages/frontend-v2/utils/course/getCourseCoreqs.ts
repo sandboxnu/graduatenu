@@ -1,9 +1,5 @@
 import { SearchAPI } from "@graduate/api-client";
-import {
-  ScheduleCourse2,
-  INEUReq,
-  INEUReqCourse,
-} from "@graduate/common";
+import { ScheduleCourse2, INEUReq, INEUReqCourse } from "@graduate/common";
 
 /** Get all the required(ANDs only) coreqs for a given course. */
 export async function getRequiredCourseCoreqs(

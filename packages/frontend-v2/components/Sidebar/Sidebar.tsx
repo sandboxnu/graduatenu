@@ -1,13 +1,9 @@
 import { Box, Text } from "@chakra-ui/react";
-import { SearchAPI } from "@graduate/api-client";
 import {
-  IRequiredCourse,
   MajorValidationError,
   MajorValidationResult,
   PlanModel,
-  Requirement2,
   ScheduleCourse2,
-  Section,
 } from "@graduate/common";
 import { memo, PropsWithChildren, useEffect, useRef, useState } from "react";
 import { DraggableScheduleCourse } from "../ScheduleCourse";
@@ -15,7 +11,7 @@ import SidebarSection from "./SidebarSection";
 import { getAllCoursesFromPlan } from "../../utils/plan/getAllCoursesFromPlan";
 import { getSectionError } from "../../utils/plan/getSectionError";
 import { handleApiClientError, SIDEBAR_DND_ID_PREFIX } from "../../utils";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useRouter } from "next/router";
 import { useMajor } from "../../hooks/useMajor";
 import {
@@ -23,6 +19,8 @@ import {
   WorkerMessageType,
   WorkerPostInfo,
 } from "../../validation-worker/worker-messages";
+import { useFetchCourses } from "../../hooks/useFetchCourses";
+import { getAllCoursesInMajor } from "../../utils/plan/getAllCoursesInMajor";
 
 interface SidebarProps {
   selectedPlan: PlanModel<string>;
@@ -43,25 +41,20 @@ export const COOP_BLOCK: ScheduleCourse2<string> = {
   id: `${SIDEBAR_DND_ID_PREFIX}-co-op-block"`,
 };
 
-// This was moved out of the Sidebar component as it doesn't change
-// from run to run, but the dependency array in the course useEffect
-// would have to include since if it stayed in the component according
-// to the linter.
-const getRequiredCourses = (
-  requirements: Requirement2[],
-  requiredCourses: IRequiredCourse[]
+const createCourseMap = (
+  courses: ScheduleCourse2<null>[] | undefined,
+  courseErrors: Error | AxiosError | undefined
 ) => {
-  for (const requirement of requirements) {
-    if (requirement.type === "RANGE") {
-      continue;
-    } else if (requirement.type === "COURSE") {
-      requiredCourses.push(requirement);
-    } else if (requirement.type === "SECTION") {
-      getRequiredCourses(requirement.requirements, requiredCourses);
-    } else {
-      getRequiredCourses(requirement.courses, requiredCourses);
+  const courseData: { [id: string]: ScheduleCourse2<null> } = {};
+  if (courses && !courseErrors) {
+    for (const course of courses) {
+      if (course) {
+        courseData[`${course.subject}${course.classId}`] = course;
+      }
     }
   }
+
+  return courseData;
 };
 
 // A number to help avoid displaying stale validation info.
@@ -69,10 +62,11 @@ let currentRequestNum = 0;
 
 const Sidebar: React.FC<SidebarProps> = memo(({ selectedPlan }) => {
   const router = useRouter();
-  const { major, isLoading, error } = useMajor(
-    selectedPlan.catalogYear,
-    selectedPlan.major
-  );
+  const {
+    major,
+    isLoading: isMajorLoading,
+    error,
+  } = useMajor(selectedPlan.catalogYear, selectedPlan.major);
   const concentration = major?.concentrations.concentrationOptions.find(
     (concentration) => concentration.title === selectedPlan.concentration
   );
@@ -142,58 +136,17 @@ const Sidebar: React.FC<SidebarProps> = memo(({ selectedPlan }) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => revalidateMajor(), [selectedPlan, major]);
 
-  const [courseData, setCourseData] = useState({});
-  const [loading, setLoading] = useState(true);
+  const majorCourses = getAllCoursesInMajor(major, concentration);
 
-  // Get course names/data from SearchNEU's API
-  useEffect(() => {
-    if (!major) {
-      return;
-    }
+  const {
+    courses,
+    isLoading: isCoursesLoading,
+    error: courseErrors,
+  } = useFetchCourses(majorCourses);
 
-    const concentrationRequirements: IRequiredCourse[] = [];
-    getRequiredCourses(
-      concentration?.requirements ?? [],
-      concentrationRequirements
-    );
+  const courseData = createCourseMap(courses, courseErrors);
 
-    const majorRequirements = major.requirementSections.reduce(
-      (courses: IRequiredCourse[], section: Section) => {
-        const requiredCourses: IRequiredCourse[] = [];
-        getRequiredCourses(section.requirements, requiredCourses);
-        return courses.concat(requiredCourses);
-      },
-      []
-    );
-
-    const requirements = majorRequirements.concat(concentrationRequirements);
-
-    const coursesQueryData: { subject: string; classId: string }[] = [];
-    for (const requirement of requirements) {
-      const subject = requirement.subject;
-      const classId = requirement.classId.toString();
-      coursesQueryData.push({ subject, classId });
-    }
-
-    SearchAPI.fetchCourses(coursesQueryData).then((courses) => {
-      const courseMap: { [id: string]: ScheduleCourse2<null> } = courseData;
-      if (courses) {
-        for (const course of courses) {
-          if (course) {
-            courseMap[`${course.subject}${course.classId}`] = course;
-          }
-        }
-        setCourseData(courseMap);
-        setLoading(false);
-      }
-    });
-    // We don't want to make another request when only courseData changes,
-    // we're just appending to it rather than replacing it, hence the
-    // technical dependency.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [major, concentration?.requirements]);
-
-  if (isLoading) {
+  if (isMajorLoading) {
     return <SidebarContainer title="Loading..." />;
   }
 
@@ -247,7 +200,7 @@ const Sidebar: React.FC<SidebarProps> = memo(({ selectedPlan }) => {
                 validationStatus={sectionValidationStatus}
                 courseData={courseData}
                 dndIdPrefix={`${SIDEBAR_DND_ID_PREFIX}-${index}`}
-                loading={loading}
+                loading={isCoursesLoading}
               />
             );
           })}
