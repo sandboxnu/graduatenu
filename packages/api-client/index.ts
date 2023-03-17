@@ -146,6 +146,8 @@ class SearchAPIClient {
     const courseData = await res.data.data;
     if (courseData && courseData.class && courseData.class.latestOccurrence) {
       return occurrenceToCourse(courseData?.class?.latestOccurrence);
+    } else {
+      throw Error("Course not found!");
     }
   };
 
