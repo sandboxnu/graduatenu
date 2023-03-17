@@ -1,3 +1,4 @@
+import { InfoIcon } from "@chakra-ui/icons";
 import {
   Modal,
   ModalOverlay,
@@ -8,16 +9,17 @@ import {
   ModalFooter,
   Button,
   VStack,
+  Text,
+  Tooltip,
+  Flex,
 } from "@chakra-ui/react";
-import { SearchAPI } from "@graduate/api-client";
 import { ScheduleCourse2 } from "@graduate/common";
-import { useRouter } from "next/router";
 import { useState } from "react";
+import { useSearchCourses } from "../../hooks/useSearchCourses";
 import {
   isEqualCourses,
   getCourseDisplayString,
   getRequiredCourseCoreqs,
-  handleApiClientError,
 } from "../../utils";
 import { SearchCoursesInput } from "./SearchCoursesInput";
 import { SearchResult } from "./SearchResult";
@@ -41,30 +43,16 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
   isCourseInCurrTerm,
   addClassesToCurrTerm,
 }) => {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const [searchResults, setSearchResults] = useState<ScheduleCourse2<null>[]>(
-    []
-  );
+  const [searchQuery, setSearchQuery] = useState("");
   const [selectedCourses, setSelectedCourses] = useState<
     ScheduleCourse2<null>[]
   >([]);
 
-  const router = useRouter();
-
-  const searchCourses = async () => {
-    if (searchTerm !== "") {
-      setIsLoading(true);
-      try {
-        const results = await SearchAPI.searchCourses(searchTerm);
-        setSearchResults(results);
-      } catch (error) {
-        // TODO: This an error from Search, we may want to handle this differently.
-        handleApiClientError(error as Error, router);
-      }
-      setIsLoading(false);
-    }
-  };
+  const {
+    courses,
+    isLoading: isCoursesLoading,
+    error,
+  } = useSearchCourses(searchQuery);
 
   const addSelectedCourse = async (course: ScheduleCourse2<null>) => {
     // don't allow courses to be selected multiple times
@@ -103,15 +91,11 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
   };
 
   const addClassesOnClick = async () => {
-    setIsLoading(true);
     addClassesToCurrTerm(selectedCourses);
     onClose();
   };
 
   const onClose = () => {
-    setIsLoading(false);
-    setSearchTerm("");
-    setSearchResults([]);
     setSelectedCourses([]);
     closeModalDisplay();
   };
@@ -123,12 +107,7 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
         <ModalHeader>Add Courses</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <SearchCoursesInput
-            searchTerm={searchTerm}
-            setSearchTerm={setSearchTerm}
-            searchCourses={searchCourses}
-            setSearchResults={setSearchResults}
-          />
+          <SearchCoursesInput setSearchQuery={setSearchQuery} />
           <VStack
             height="200px"
             mt="md"
@@ -136,15 +115,30 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
             alignItems="left"
             gap="2xs"
           >
-            {searchResults.map((searchResult) => (
-              <SearchResult
-                key={getCourseDisplayString(searchResult)}
-                searchResult={searchResult}
-                addSelectedCourse={addSelectedCourse}
-                isResultAlreadyInTerm={isCourseInCurrTerm(searchResult)}
-                isResultAlreadySelected={isCourseAlreadySelected(searchResult)}
-              />
-            ))}
+            {error && (
+              <Tooltip label="We rely on SearchNEU to search for courses, and there may be an ongoing issue on their end. We recommend refreshing the page and trying again soon. If the issue persists, help us by clicking the Bug/Feature button to report the bug">
+                <Flex alignItems={"center"} justifyContent={"center"}>
+                  <InfoIcon marginRight={"4px"} />
+                  <Text fontSize="xs" fontWeight="semibold" textAlign="center">
+                    {
+                      "Oops, sorry we couldn't search for courses... try again in a little bit!"
+                    }
+                  </Text>
+                </Flex>
+              </Tooltip>
+            )}
+            {courses &&
+              courses.map((searchResult) => (
+                <SearchResult
+                  key={getCourseDisplayString(searchResult)}
+                  searchResult={searchResult}
+                  addSelectedCourse={addSelectedCourse}
+                  isResultAlreadyInTerm={isCourseInCurrTerm(searchResult)}
+                  isResultAlreadySelected={isCourseAlreadySelected(
+                    searchResult
+                  )}
+                />
+              ))}
           </VStack>
           <VStack maxHeight="200px" mt="md" overflow="scroll" pb="xs">
             {selectedCourses.map((selectedCourse) => (
@@ -167,7 +161,7 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
             mr={3}
             onClick={addClassesOnClick}
             textTransform="uppercase"
-            isLoading={isLoading}
+            isLoading={isCoursesLoading}
           >
             Add
           </Button>

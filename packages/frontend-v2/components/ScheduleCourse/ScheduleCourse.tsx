@@ -1,10 +1,11 @@
 import { DeleteIcon } from "@chakra-ui/icons";
-import { Flex } from "@chakra-ui/react";
+import { Flex, Tooltip } from "@chakra-ui/react";
 import { useDraggable } from "@dnd-kit/core";
 import { CSS } from "@dnd-kit/utilities";
 import {
   courseToString,
   INEUReqError,
+  IRequiredCourse,
   ScheduleCourse2,
 } from "@graduate/common";
 import { forwardRef, useEffect, useState } from "react";
@@ -87,6 +88,37 @@ export const DraggedScheduleCourse: React.FC<DraggedScheduleCourseProps> = ({
       scheduleCourse={activeCourse}
       isRemove={isRemove}
     />
+    );
+  };
+  
+interface PlaceholderScheduleCourseProps {
+  course: IRequiredCourse;
+}
+
+export const PlaceholderScheduleCourse: React.FC<
+  PlaceholderScheduleCourseProps
+> = ({ course }) => {
+  return (
+    <Tooltip label="Sorry, we can't load this course right now :(. We rely on SearchNEU for course fetching, and there may be an ongoing issue on their end. We recommend refreshing the page and trying again soon.">
+      <div
+        style={{
+          backgroundColor: "white",
+          display: "flex",
+          borderRadius: "5px",
+          fontSize: "14px",
+          alignItems: "stretch",
+          marginBottom: "6px",
+          padding: "6px",
+          transition: "transform 0.15s ease",
+          justifyContent: "space-between",
+        }}
+      >
+        <p style={{ fontWeight: "bold" }}>
+          {course.subject}
+          <span style={{ marginLeft: "2px" }}>{course.classId}</span>
+        </p>
+      </div>
+    </Tooltip>
   );
 };
 
