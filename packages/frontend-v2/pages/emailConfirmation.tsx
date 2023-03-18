@@ -10,7 +10,7 @@ const EmailConfirmation: NextPage = () => {
   const { student } = useStudentWithPlans();
 
   // Email is already confirmed
-  if (student) {
+  if (student?.isEmailConfirmed) {
     router.push("/home");
   }
 
@@ -52,6 +52,13 @@ const EmailConfirmation: NextPage = () => {
           fontWeight="bold"
         >
           Didn’t get the email? Click here to resend.
+        </Link>
+        <Text fontSize="xl" textAlign="center">
+          Want to just use the app? Warning: If you do not confirm your email,
+          you cannot recover your account if you forget your password.
+        </Text>
+        <Link onClick={() => router.push("/home")}>
+          I understand, take me to the app!
         </Link>
       </Flex>
     </Flex>

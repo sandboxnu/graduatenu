@@ -17,7 +17,7 @@ const ConfirmEmail: NextPage = () => {
   const { student } = useStudentWithPlans();
 
   // Already confirmed
-  if (student) {
+  if (student?.isEmailConfirmed) {
     router.push("/home");
   }
 
