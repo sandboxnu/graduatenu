@@ -1,8 +1,6 @@
 # Description
 
-Please include a summary of the change and which issue is fixed.
-Please also include relevant motivation and context. 
-List any dependencies that are required for this change.
+Please include a summary of the change and which issue is fixed. Please also include relevant motivation and context. List any dependencies that are required for this change.
 
 Closes # (issue number)
 
@@ -18,17 +16,16 @@ Please delete options that are not relevant.
 
 # How Has This Been Tested?
 
-Please describe how you tested this PR (both manually and with tests)
-Provide instructions so we can reproduce. 
+Please describe how you tested this PR (both manually and with tests) Provide instructions so we can reproduce.
 
 - [ ] Test A
 - [ ] Test B
 
-
 # Checklist:
 
+- [ ] I have run the production builds in docker for the frontend/backend and ensure things run fine. Check README of repo on how to run if not sure.
 - [ ] I have performed a self-review of my own code
-- [ ] I have commented my code where needed 
+- [ ] I have commented my code where needed
 - [ ] I have made corresponding changes to the documentation
 - [ ] My changes generate no new warnings
 - [ ] I have added tests that prove my fix is effective or that my feature works

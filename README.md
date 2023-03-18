@@ -10,6 +10,23 @@ Then run the new version of the application by running `yarn dev:v2` at the root
 
 Visit [http://localhost:3002](http://localhost:3002/) to view the app.
 
+To run the two seperately, visit the frontend and api-v2 packages(sub directories of the monorepo).
+
+## Running the production like app in docker
+
+We use docker and prod builds for our production app. It is a good idea to test out whether the app builds and runs the way it would in production.
+
+NOTE: We don't support running the full stack production app locally yet. It can be done through NGIX, I am lazy.
+
+- To run just the frontend
+  - `yarn frontend:docker:build` and `yarn frontend:docker:run`.
+  - Visit the containerized frontend at port [4000](http://localhost:4000).
+- To run just the backend
+  - `yarn backend:docker:build` and `yarn backend:docker:run`.
+  - Visit the containerized API at port [4001](http://localhost:4001).
+  - To stop the container run `yarn backend:docker:down`.
+  - To debug, `use docker compose --verbose` for the build and run commands depending on which one is failing.
+
 ## Monorepo
 
 This is a monorepo powered by [Yarn workspaces](https://classic.yarnpkg.com/lang/en/docs/workspaces/). The different components of the GraduateNU application exist within their own workspace directory in `/packages`.
