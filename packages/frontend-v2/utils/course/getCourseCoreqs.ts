@@ -3,7 +3,8 @@ import { ScheduleCourse2, INEUReq, INEUReqCourse } from "@graduate/common";
 
 /** Get all the required(ANDs only) coreqs for a given course. */
 export async function getRequiredCourseCoreqs(
-  course: ScheduleCourse2<unknown>
+  course: ScheduleCourse2<unknown>,
+  catalogYear: number
 ): Promise<ScheduleCourse2<null>[]> {
   const coursesCoreqs: ScheduleCourse2<null>[] = [];
 
@@ -17,7 +18,8 @@ export async function getRequiredCourseCoreqs(
         if (isINEUPrereqCourse(coreqCourse)) {
           const course = await SearchAPI.fetchCourse(
             coreqCourse.subject,
-            coreqCourse.classId
+            coreqCourse.classId,
+            catalogYear
           );
 
           if (course != null) {

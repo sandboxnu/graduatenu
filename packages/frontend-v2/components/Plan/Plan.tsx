@@ -17,7 +17,7 @@ interface PlanProps {
   plan: PlanModel<string>;
   preReqErr?: PreReqWarnings;
   coReqErr?: CoReqWarnings;
-  setIsRemove?: (val: boolean) => void
+  setIsRemove?: (val: boolean) => void;
 
   /**
    * Function to POST the plan and update the SWR cache for "student with plans"
@@ -31,7 +31,7 @@ export const Plan: React.FC<PlanProps> = ({
   mutateStudentWithUpdatedPlan,
   preReqErr = undefined,
   coReqErr = undefined,
-  setIsRemove
+  setIsRemove,
 }) => {
   const [expandedYears, setExpandedYears] = useState<Set<number>>(new Set());
 
@@ -43,7 +43,7 @@ export const Plan: React.FC<PlanProps> = ({
     }
   };
 
-  const { setNodeRef } = useDroppable({ id: 'plan' });
+  const { setNodeRef } = useDroppable({ id: "plan" });
 
   const removeFromExpandedYears = (year: ScheduleYear2<unknown>) => {
     const updatedSet = new Set(expandedYears);
@@ -119,6 +119,7 @@ export const Plan: React.FC<PlanProps> = ({
             flexDirection="column"
           >
             <ScheduleYear
+              catalogYear={plan.catalogYear}
               yearCoReqError={coReqErr?.years.find(
                 (year) => year.year == scheduleYear.year
               )}
