@@ -104,7 +104,7 @@ function occurrencesToCourseByCatalogYear(
   for (const occurrence of occurrences) {
     const year = occurrence.termId.slice(0, 4);
 
-    if (year === catalogYear.toString()) {
+    if (year + 1 === catalogYear.toString()) {
       return occurrenceToCourse(occurrence);
     }
   }
