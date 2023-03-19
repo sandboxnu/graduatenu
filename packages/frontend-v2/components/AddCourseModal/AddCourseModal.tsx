@@ -155,20 +155,22 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
           </VStack>
         </ModalBody>
         <ModalFooter>
-          <Button
-            variant="solid"
-            fontWeight="bold"
-            color="primary.blue.light.main"
-            colorScheme="neutral"
-            backgroundColor="neutral.main"
-            border="none"
-            mr={3}
-            onClick={addClassesOnClick}
-            textTransform="uppercase"
-            isLoading={isCoursesLoading}
-          >
-            Add
-          </Button>
+          <Tooltip label="Note that search results will reflect the most recent version of the course you're looking for!">
+            <Button
+              variant="solid"
+              fontWeight="bold"
+              color="primary.blue.light.main"
+              colorScheme="neutral"
+              backgroundColor="neutral.main"
+              border="none"
+              mr={3}
+              onClick={addClassesOnClick}
+              textTransform="uppercase"
+              isLoading={isCoursesLoading}
+            >
+              Add
+            </Button>
+          </Tooltip>
         </ModalFooter>
       </ModalContent>
     </Modal>
