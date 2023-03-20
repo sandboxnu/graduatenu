@@ -25,7 +25,10 @@ import {
   OnboardStudentDto,
   UpdateStudentDto,
   UpdateStudentResponse,
+  emailAlreadyExistsError,
+  weakPasswordError,
 } from "@graduate/common";
+import { EmailAlreadyExists, WeakPassword } from "./student.errors";
 
 @Controller("students")
 export class StudentController {
@@ -119,6 +122,14 @@ export class StudentController {
     @Body() createStudentDto: SignUpStudentDto
   ): Promise<GetStudentResponse> {
     const student = await this.studentService.create(createStudentDto);
+
+    if (student instanceof EmailAlreadyExists) {
+      throw new BadRequestException(emailAlreadyExistsError);
+    }
+
+    if (student instanceof WeakPassword) {
+      throw new BadRequestException(weakPasswordError);
+    }
 
     if (!student) {
       throw new BadRequestException();

@@ -1,9 +1,9 @@
 {
   "info": {
-    "_postman_id": "4d5090bc-f868-4ab5-b772-d6d8a8a4b5c7",
+    "_postman_id": "ea2a3341-9d49-441a-bb9d-f4ab627644ce",
     "name": "GraduateNU",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "_exporter_id": "12208846"
+    "_exporter_id": "18828296"
   },
   "item": [
     {
@@ -327,6 +327,41 @@
           "raw": "{{API_URL}}/{{PLANS}}/1",
           "host": ["{{API_URL}}"],
           "path": ["{{PLANS}}", "1"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Confirm Email",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"token\": \"\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{API_URL}}/email-confirmation/confirm",
+          "host": ["{{API_URL}}"],
+          "path": ["email-confirmation", "confirm"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Resend Confirmation Link",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "{{API_URL}}/email-confirmation/resend-confirmation-link",
+          "host": ["{{API_URL}}"],
+          "path": ["email-confirmation", "resend-confirmation-link"]
         }
       },
       "response": []

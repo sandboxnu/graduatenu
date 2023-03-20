@@ -1,2 +1,1 @@
-export { Logo } from "./Logo";
-export { HeaderContainer } from "./HeaderContainer";
+export * from "./GraduateHeaders";

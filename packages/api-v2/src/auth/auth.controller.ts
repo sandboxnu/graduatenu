@@ -10,15 +10,22 @@ import {
 } from "@nestjs/common";
 import { AuthService } from "./auth.service";
 import {
+  emailAlreadyExistsError,
   GetStudentResponse,
   LoginStudentDto,
   SignUpStudentDto,
+  weakPasswordError,
 } from "@graduate/common";
 import { Response } from "express";
+import EmailConfirmationService from "src/emailConfirmation/emailConfirmation.service";
+import { EmailAlreadyExists, WeakPassword } from "src/student/student.errors";
 
 @Controller("auth")
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  constructor(
+    private readonly authService: AuthService,
+    private readonly emailConfirmationService: EmailConfirmationService
+  ) {}
 
   @Post("register")
   public async register(
@@ -26,6 +33,14 @@ export class AuthController {
     @Body() createStudentDto: SignUpStudentDto
   ): Promise<GetStudentResponse> {
     const student = await this.authService.register(createStudentDto);
+
+    if (student instanceof EmailAlreadyExists) {
+      throw new BadRequestException(emailAlreadyExistsError);
+    }
+
+    if (student instanceof WeakPassword) {
+      throw new BadRequestException(weakPasswordError);
+    }
 
     if (!student) {
       throw new BadRequestException();
@@ -40,7 +55,9 @@ export class AuthController {
       sameSite: "strict",
       secure: isSecure,
     });
-
+    await this.emailConfirmationService.sendVerificationLink(
+      createStudentDto.email
+    );
     return student;
   }
 

@@ -1,32 +1,62 @@
-import { Flex, Icon, IconProps, Link } from "@chakra-ui/react";
+import {
+  Button,
+  Flex,
+  Icon,
+  IconProps,
+  Link as ChakraLink,
+} from "@chakra-ui/react";
 import { HeaderContainer } from "./HeaderContainer";
 import { Logo } from "./Logo";
+import { GraduateButtonLink } from "../Link";
+import { logout } from "../../utils";
+import { useRouter } from "next/router";
 
 interface GraduateHeaderProps {
   rightContent: React.ReactNode;
 }
 
-export const GraduateHeader: React.FC<GraduateHeaderProps> = ({
-  rightContent,
-}) => {
+export const GraduatePreAuthHeader: React.FC = () => {
+  return (
+    <GraduateHeader
+      rightContent={
+        <GraduateButtonLink href="/login">Sign In</GraduateButtonLink>
+      }
+    />
+  );
+};
+
+export const GraduatePostAuthHeader: React.FC = () => {
+  const router = useRouter();
+  return (
+    <GraduateHeader
+      rightContent={
+        <Button size="sm" onClick={() => logout(router)}>
+          Logout
+        </Button>
+      }
+    />
+  );
+};
+
+const GraduateHeader: React.FC<GraduateHeaderProps> = ({ rightContent }) => {
   return (
     <HeaderContainer>
       <Logo />
       <Flex columnGap="md" alignItems="center">
-        <Link
+        <ChakraLink
           href="https://docs.google.com/forms/d/e/1FAIpQLSea4GZNwLL7oSepwCxTeEIc1tm6p0KN1CA8qjNGZiR1rSrenA/viewform"
           isExternal
         >
           <FeedbackIcon mx="2px" />
           Feedback
-        </Link>
-        <Link
+        </ChakraLink>
+        <ChakraLink
           href="https://docs.google.com/forms/d/e/1FAIpQLScpHg7Wv3iJHuZwC38GuKbpANgd48Ab4pmSO0PIOACrELtrCw/viewform"
           isExternal
         >
           <BugIcon mx="2px" />
           Bug/Feature
-        </Link>
+        </ChakraLink>
         {rightContent}
       </Flex>
     </HeaderContainer>

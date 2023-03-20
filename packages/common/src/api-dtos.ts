@@ -63,6 +63,14 @@ export class UpdatePlanDto {
 }
 
 export class SignUpStudentDto {
+  @IsOptional()
+  @IsString()
+  firstName: string;
+
+  @IsOptional()
+  @IsString()
+  lastName: string;
+
   @IsNotEmpty()
   @IsEmail()
   email: string;
@@ -192,4 +200,10 @@ export class LoginStudentDto {
   @IsNotEmpty()
   @IsString()
   password: string;
+}
+
+export class ConfirmEmailDto {
+  @IsString()
+  @IsNotEmpty()
+  token: string;
 }

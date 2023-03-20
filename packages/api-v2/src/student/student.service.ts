@@ -7,8 +7,13 @@ import {
   Repository,
   UpdateResult,
 } from "typeorm";
-import { SignUpStudentDto, UpdateStudentDto } from "@graduate/common";
+import {
+  isStrongPassword,
+  SignUpStudentDto,
+  UpdateStudentDto,
+} from "@graduate/common";
 import { Student } from "./entities/student.entity";
+import { EmailAlreadyExists, WeakPassword } from "./student.errors";
 
 @Injectable()
 export class StudentService {
@@ -19,23 +24,39 @@ export class StudentService {
     private studentRepository: Repository<Student>
   ) {}
 
-  async create(createStudentDto: SignUpStudentDto): Promise<Student> {
+  async create(
+    createStudentDto: SignUpStudentDto
+  ): Promise<Student | EmailAlreadyExists | WeakPassword> {
     // make sure the user doesn't already exists
-    const { email } = createStudentDto;
+    const { email, firstName, lastName, password, passwordConfirm } =
+      createStudentDto;
     const userInDb = await this.studentRepository.findOne({ where: { email } });
     if (userInDb) {
       this.logger.debug(
         { message: "User already exists in db", userInDb },
         StudentService.formatStudentServiceCtx("create")
       );
+      return new EmailAlreadyExists();
+    }
+
+    if (password !== passwordConfirm) {
       return null;
     }
 
-    if (createStudentDto.password !== createStudentDto.passwordConfirm) {
-      return null;
+    if (!isStrongPassword(password)) {
+      return new WeakPassword();
     }
 
-    const newStudent = this.studentRepository.create(createStudentDto);
+    let fullName;
+    if (firstName && lastName) {
+      fullName = `${firstName} ${lastName}`;
+    }
+
+    const newStudent = this.studentRepository.create({
+      fullName,
+      email,
+      password,
+    });
 
     try {
       return this.studentRepository.save(newStudent);
@@ -116,6 +137,15 @@ export class StudentService {
     }
 
     return deleteResult;
+  }
+
+  public async markEmailAsConfirmed(email: string): Promise<UpdateResult> {
+    return this.studentRepository.update(
+      { email },
+      {
+        isEmailConfirmed: true,
+      }
+    );
   }
 
   static isEqualStudents(student1: Student, student2: Student): boolean {

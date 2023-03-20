@@ -1,4 +1,4 @@
-import { Box, Button, Flex } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 import {
   CollisionDetection,
   DndContext,
@@ -25,20 +25,19 @@ import {
   DeletePlanModal,
   DraggedScheduleCourse,
   EditPlanModal,
+  GraduatePostAuthHeader,
   LoadingPage,
   Plan,
   PlanDropdown,
   Sidebar,
   SidebarContainer,
 } from "../components";
-import { GraduateHeader } from "../components/Header/GraduateHeader";
 import { fetchStudentAndPrepareForDnd, useStudentWithPlans } from "../hooks";
 import {
   cleanDndIdsFromPlan,
   DELETE_COURSE_AREA_DND_ID,
   handleApiClientError,
   logger,
-  logout,
   updatePlanForStudent,
   updatePlanOnDragEnd,
 } from "../utils";
@@ -275,25 +274,11 @@ const PageLayout: React.FC<PropsWithChildren> = ({ children }) => {
       overflow="hidden"
       ref={setNodeRef}
     >
-      <Header />
+      <GraduatePostAuthHeader />
       <Flex height="100%" overflow="hidden">
         {children}
       </Flex>
     </Flex>
-  );
-};
-
-const Header: React.FC = () => {
-  const router = useRouter();
-
-  return (
-    <GraduateHeader
-      rightContent={
-        <Button size="sm" onClick={() => logout(router)}>
-          Logout
-        </Button>
-      }
-    />
   );
 };
 

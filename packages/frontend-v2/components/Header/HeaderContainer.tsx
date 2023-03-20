@@ -9,6 +9,7 @@ export const HeaderContainer: React.FC<PropsWithChildren> = ({ children }) => {
       justifyContent="space-between"
       p="1% 1.5% 1% 1.5%"
       boxShadow="0px 4px 7px lightgrey"
+      marginBottom="xs"
     >
       {children}
     </Flex>
