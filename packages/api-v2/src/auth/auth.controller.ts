@@ -14,10 +14,11 @@ import {
   GetStudentResponse,
   LoginStudentDto,
   SignUpStudentDto,
+  weakPasswordError,
 } from "@graduate/common";
 import { Response } from "express";
 import EmailConfirmationService from "src/emailConfirmation/emailConfirmation.service";
-import { EmailAlreadyExists } from "src/student/student.errors";
+import { EmailAlreadyExists, WeakPassword } from "src/student/student.errors";
 
 @Controller("auth")
 export class AuthController {
@@ -35,6 +36,10 @@ export class AuthController {
 
     if (student instanceof EmailAlreadyExists) {
       throw new BadRequestException(emailAlreadyExistsError);
+    }
+
+    if (student instanceof WeakPassword) {
+      throw new BadRequestException(weakPasswordError);
     }
 
     if (!student) {

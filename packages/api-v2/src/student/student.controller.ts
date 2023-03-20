@@ -26,15 +26,15 @@ import {
   UpdateStudentDto,
   UpdateStudentResponse,
   emailAlreadyExistsError,
+  weakPasswordError,
 } from "@graduate/common";
-import { EmailConfirmationGuard } from "src/guards/emailConfirmation.guard";
-import { EmailAlreadyExists } from "./student.errors";
+import { EmailAlreadyExists, WeakPassword } from "./student.errors";
 
 @Controller("students")
 export class StudentController {
   constructor(private readonly studentService: StudentService) {}
 
-  @UseGuards(JwtAuthGuard, EmailConfirmationGuard)
+  @UseGuards(JwtAuthGuard)
   @Get("me")
   async getMe(
     @Req() req: AuthenticatedRequest,
@@ -55,7 +55,7 @@ export class StudentController {
     return student;
   }
 
-  @UseGuards(JwtAuthGuard, EmailConfirmationGuard)
+  @UseGuards(JwtAuthGuard)
   @Patch("me")
   async updateMe(
     @Req() req: AuthenticatedRequest,
@@ -80,7 +80,7 @@ export class StudentController {
     return student;
   }
 
-  @UseGuards(JwtAuthGuard, EmailConfirmationGuard)
+  @UseGuards(JwtAuthGuard)
   @Patch("me/onboard")
   async onBoard(
     @Req() req: AuthenticatedRequest,
@@ -105,7 +105,7 @@ export class StudentController {
     return student;
   }
 
-  @UseGuards(JwtAuthGuard, EmailConfirmationGuard)
+  @UseGuards(JwtAuthGuard)
   @Delete("me")
   async removeMe(@Req() req: AuthenticatedRequest): Promise<void> {
     const uuid = req.user.uuid;
@@ -125,6 +125,10 @@ export class StudentController {
 
     if (student instanceof EmailAlreadyExists) {
       throw new BadRequestException(emailAlreadyExistsError);
+    }
+
+    if (student instanceof WeakPassword) {
+      throw new BadRequestException(weakPasswordError);
     }
 
     if (!student) {

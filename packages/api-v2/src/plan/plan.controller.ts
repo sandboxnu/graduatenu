@@ -21,9 +21,7 @@ import {
   GetPlanResponse,
   UpdatePlanResponse,
 } from "@graduate/common";
-import { EmailConfirmationGuard } from "src/guards/emailConfirmation.guard";
 
-@UseGuards(EmailConfirmationGuard)
 @Controller("plans")
 export class PlanController {
   constructor(private readonly planService: PlanService) {}

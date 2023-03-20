@@ -85,6 +85,7 @@ const LoginForm: React.FC = () => {
             variant="solid"
             borderRadius="lg"
             isLoading={isSubmitting}
+            isDisabled={Object.keys(errors).length > 0}
             type="submit"
           >
             Log In

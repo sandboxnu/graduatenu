@@ -3,3 +3,9 @@ export class EmailAlreadyExists extends Error {
     super();
   }
 }
+
+export class WeakPassword extends Error {
+  constructor() {
+    super();
+  }
+}
