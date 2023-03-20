@@ -11,10 +11,6 @@ export default class EmailService {
   constructor(
     private readonly configService: ConfigService<EnvironmentVariables, true>
   ) {
-    console.log(this.configService.get("EMAIL_SERVICE"));
-    console.log(this.configService.get("EMAIL_USER"));
-    console.log(this.configService.get("EMAIL_PASSWORD"));
-
     this.nodemailerTransport = createTransport({
       service: this.configService.get("EMAIL_SERVICE"),
       auth: {

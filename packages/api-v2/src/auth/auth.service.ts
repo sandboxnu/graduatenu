@@ -6,8 +6,7 @@ import { LoginStudentDto, SignUpStudentDto } from "@graduate/common";
 import { JwtPayload } from "./interfaces/jwt-payload";
 import * as bcrypt from "bcrypt";
 import { formatServiceCtx } from "../../src/utils";
-import { EmailAlreadyExists, WeakPassword } from "src/student/student.errors";
-
+import { EmailAlreadyExists, WeakPassword} from "src/student/student.errors";
 @Injectable()
 export class AuthService {
   private readonly logger: Logger = new Logger();
@@ -98,4 +97,5 @@ export class AuthService {
   private static formatAuthServiceCtx(methodName: string): string {
     return formatServiceCtx(AuthService.name, methodName);
   }
+
 }

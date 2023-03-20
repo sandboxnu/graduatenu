@@ -43,7 +43,7 @@ export const UserDropdown: React.FC = () => {
           <AccountOverview student={student} mutateStudent={mutateStudent} />
         </MenuItem>
         <MenuItem>
-          <ChangePassword student={student} />
+          <ChangePassword/>
         </MenuItem>
         <MenuItem>Log out</MenuItem>
       </MenuList>

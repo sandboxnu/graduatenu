@@ -46,6 +46,7 @@ export const AccountOverview: React.FC<AccountOverviewProps> = ({
         return newStudent;
       });
       toast.success("Info successfully updated!");
+      onClose();
     } catch (error) {
       toast.error("Something went wrong", { log: true });
     }

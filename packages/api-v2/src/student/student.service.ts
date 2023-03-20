@@ -7,13 +7,15 @@ import {
   Repository,
   UpdateResult,
 } from "typeorm";
+import * as bcrypt from "bcrypt";
 import {
+  ChangePasswordDto,
   isStrongPassword,
   SignUpStudentDto,
   UpdateStudentDto,
 } from "@graduate/common";
 import { Student } from "./entities/student.entity";
-import { EmailAlreadyExists, WeakPassword } from "./student.errors";
+import { EmailAlreadyExists, WeakPassword, WrongPassword } from "./student.errors";
 
 @Injectable()
 export class StudentService {
@@ -22,7 +24,7 @@ export class StudentService {
   constructor(
     @InjectRepository(Student)
     private studentRepository: Repository<Student>
-  ) {}
+  ) { }
 
   async create(
     createStudentDto: SignUpStudentDto
@@ -144,5 +146,32 @@ export class StudentService {
 
   private static formatStudentServiceCtx(methodName: string) {
     return formatServiceCtx(StudentService.name, methodName);
+  }
+
+  async changePassword(uuid: any, changePasswordDto: ChangePasswordDto): Promise<void | WeakPassword | WrongPassword> {
+    const { oldPassword, newPassword } = changePasswordDto;
+    const student = await this.findByUuid(uuid);
+
+    const { password: trueHashedPassword } = student;
+    const isValidPassword = await bcrypt.compare(oldPassword, trueHashedPassword);
+
+    if (!isValidPassword) {
+      this.logger.debug(
+        { message: "Invalid password", oldPassword },
+        // AuthService.formatAuthServiceCtx("login")
+      );
+      return new WrongPassword();
+    }
+
+    if (!isStrongPassword(newPassword)) {
+      this.logger.debug(
+        { message: "weak password", oldPassword },
+        // AuthService.formatAuthServiceCtx("login")
+      );
+      return new WeakPassword();
+    }
+
+    await this.studentRepository.update(uuid, { ...student, password: await bcrypt.hash(newPassword, 10) });
+    student.hashPassword();
   }
 }

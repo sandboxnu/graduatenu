@@ -6,6 +6,8 @@ import { AuthController } from "./auth.controller";
 import { AuthService } from "./auth.service";
 import { JwtStrategy } from "./jwt.strategy";
 import { EmailModule } from "src/email/email.module";
+import { TypeOrmModule } from "@nestjs/typeorm";
+import { Student } from "src/student/entities/student.entity";
 
 @Module({
   imports: [
@@ -22,6 +24,7 @@ import { EmailModule } from "src/email/email.module";
         expiresIn: process.env.JWT_EXPIRE_TIME,
       },
     }),
+    TypeOrmModule.forFeature([Student])  
   ],
   controllers: [AuthController],
   providers: [AuthService, JwtStrategy],

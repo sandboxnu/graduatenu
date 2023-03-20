@@ -9,3 +9,9 @@ export class WeakPassword extends Error {
     super();
   }
 }
+
+export class WrongPassword extends Error {
+  constructor() {
+    super();
+  }
+}
