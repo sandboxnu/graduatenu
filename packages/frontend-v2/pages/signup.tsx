@@ -44,7 +44,7 @@ const SignUpForm: React.FC = () => {
   const onSubmitHandler = async (payload: SignUpStudentDto) => {
     try {
       await API.auth.register(payload);
-      router.push("/home");
+      router.push("/emailConfirmation");
     } catch (err) {
       if (axios.isAxiosError(err)) {
         const errorMessage = err.response?.data?.message;

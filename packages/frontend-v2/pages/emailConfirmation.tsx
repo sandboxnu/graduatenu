@@ -1,13 +1,27 @@
 import { Text, Flex, Heading, Image, Link } from "@chakra-ui/react";
 import { API } from "@graduate/api-client";
 import { NextPage } from "next";
-import router from "next/router";
-import { GraduatePreAuthHeader } from "../components";
+import { useRouter } from "next/router";
+import {
+  GraduateLink,
+  GraduatePreAuthHeader,
+  LoadingPage,
+} from "../components";
 import { useStudentWithPlans } from "../hooks";
-import { toast } from "../utils";
+import { handleApiClientError, toast } from "../utils";
 
 const EmailConfirmation: NextPage = () => {
-  const { student } = useStudentWithPlans();
+  const { student, error, isLoading } = useStudentWithPlans();
+  const router = useRouter();
+
+  if (isLoading) {
+    return <LoadingPage />;
+  }
+
+  if (error) {
+    handleApiClientError(error, router);
+    return <></>;
+  }
 
   // Email is already confirmed
   if (student?.isEmailConfirmed) {
@@ -41,24 +55,29 @@ const EmailConfirmation: NextPage = () => {
           <Heading as="h1" size="lg">
             Verfiy Your Email
           </Heading>
-          <Text textAlign="center">
-            Click the link in your email we just sent you to activate your
-            account.
-          </Text>
+          <Flex direction="column" alignItems="center" rowGap="3xs">
+            <Text textAlign="center">
+              We send an email to <Text as="b">{student?.email}</Text>. Click
+              the link in the email to activate your account.
+            </Text>
+            <Text textAlign="center">
+              Want to just use the app? Warning: If you do not confirm your
+              email, you cannot recover your account if you forget your
+              password.
+            </Text>
+            <GraduateLink
+              href="/home"
+              text="I understand, take me to the app."
+            />
+          </Flex>
         </Flex>
         <Link
           onClick={handleResendConfirmationEmail}
           color="primary.blue.light.main"
           fontWeight="bold"
+          fontSize="sm"
         >
           Didn’t get the email? Click here to resend.
-        </Link>
-        <Text fontSize="xl" textAlign="center">
-          Want to just use the app? Warning: If you do not confirm your email,
-          you cannot recover your account if you forget your password.
-        </Text>
-        <Link onClick={() => router.push("/home")}>
-          I understand, take me to the app!
         </Link>
       </Flex>
     </Flex>

@@ -219,7 +219,6 @@ const HomePage: NextPage = () => {
                 setSelectedPlanId={setSelectedPlanId}
                 plans={student.plans}
               />
-              <ConfirmEmailWarningModal student={student} />
               <AddPlanModal setSelectedPlanId={setSelectedPlanId} />
               {selectedPlan && <EditPlanModal plan={selectedPlan} />}
               {selectedPlan && (
