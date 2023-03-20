@@ -106,11 +106,7 @@ interface SearchClass {
   minCredits: number;
 }
 
-function occurrenceToCourse(
-  occurrence: SearchClass
-): ScheduleCourse2<null> | null {
-  if (!occurrence) return null;
-
+function occurrenceToCourse(occurrence: SearchClass): ScheduleCourse2<null> {
   return {
     name: occurrence.name,
     subject: occurrence.subject,
@@ -137,7 +133,7 @@ class SearchAPIClient {
   fetchCourse = async (
     subject: string,
     classId: string
-  ): Promise<ScheduleCourse2<null> | null> => {
+  ): Promise<ScheduleCourse2<null>> => {
     const res = await this.axios({
       method: "post",
       data: {
@@ -158,14 +154,17 @@ class SearchAPIClient {
     });
 
     const courseData = await res.data.data;
-    return occurrenceToCourse(courseData?.class?.latestOccurrence);
+    if (courseData && courseData.class && courseData.class.latestOccurrence) {
+      return occurrenceToCourse(courseData?.class?.latestOccurrence);
+    } else {
+      throw Error("Course not found!");
+    }
   };
 
   fetchCourses = async (
-    courseQueryData: { subject: string; classId: string }[]
-  ): Promise<ScheduleCourse2<null>[] | null> => {
-    // formats the request data
-    const input = courseQueryData
+    courses: { subject: string; classId: string }[]
+  ): Promise<ScheduleCourse2<null>[]> => {
+    const input = courses
       .map((course) => {
         return `{subject: "${course.subject}", classId: "${course.classId}"}`;
       })
@@ -175,19 +174,19 @@ class SearchAPIClient {
       method: "post",
       data: {
         query: `{
-          bulkClasses(input: [${input}]) {
-            latestOccurrence {
-              name
-              subject
-              classId
-              minCredits
-              maxCredits
-              prereqs
-              coreqs
-              termId
-            }
+        bulkClasses(input: [${input}]) {
+          latestOccurrence {
+            name
+            subject
+            classId
+            minCredits
+            maxCredits
+            prereqs
+            coreqs
+            termId
           }
-        }`,
+        }
+      }`,
       },
     });
 
@@ -198,7 +197,7 @@ class SearchAPIClient {
         return occurrenceToCourse(course?.latestOccurrence);
       });
     } else {
-      return null;
+      throw Error("Courses could not be fetched");
     }
   };
 
