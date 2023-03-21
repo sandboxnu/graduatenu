@@ -19,8 +19,6 @@ import {
 import { API } from "@graduate/api-client";
 import { toast } from "../../utils";
 
-// TODO: change this to actually make it work
-
 export const ChangePassword: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [oldPassword, setOldPassword] = useState<string | undefined>();

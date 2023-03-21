@@ -1,4 +1,5 @@
 import { Flex, Text, Button } from "@chakra-ui/react";
+import { InfoOutlineIcon } from "@chakra-ui/icons";
 import { API } from "@graduate/api-client";
 import {
   emailAlreadyExistsError,
@@ -30,18 +31,20 @@ const SignUpForm: React.FC = () => {
     handleSubmit,
     formState: { errors, isSubmitting },
     watch,
+    trigger,
   } = useForm<SignUpStudentDto>({
     mode: "onTouched",
     shouldFocusError: true,
   });
 
-  // Need to keep track of this value to ensure that confirm password is equal
+  // Need to keep track of these values for validation
   const password = watch("password", "");
+  const firstName = watch("firstName", "");
 
   const onSubmitHandler = async (payload: SignUpStudentDto) => {
     try {
       await API.auth.register(payload);
-      router.push("/home");
+      router.push("/emailConfirmation");
     } catch (err) {
       if (axios.isAxiosError(err)) {
         const errorMessage = err.response?.data?.message;
@@ -68,21 +71,37 @@ const SignUpForm: React.FC = () => {
       headingText="Create an Account"
       inputs={
         <>
-          <Flex columnGap="md">
-            <GraduateInput
-              type="text"
-              id="firstName"
-              placeholder="First Name"
-              {...register("firstName")}
-              helpMessage="Optional"
-            />
-            <GraduateInput
-              type="text"
-              id="lastName"
-              placeholder="Last Name"
-              {...register("lastName")}
-              helpMessage="Optional"
-            />
+          <Flex direction="column" rowGap="xs">
+            <Flex columnGap="md">
+              <GraduateInput
+                type="text"
+                id="firstName"
+                placeholder="First Name"
+                {...register("firstName", {
+                  onBlur: () => trigger("lastName"),
+                })}
+              />
+              <GraduateInput
+                type="text"
+                id="lastName"
+                placeholder="Last Name"
+                error={errors.lastName}
+                {...register("lastName", {
+                  validate: (lastName) => {
+                    if (lastName != "" && firstName == "") {
+                      return "Please enter your first name along with your last name.";
+                    }
+                    return true;
+                  },
+                })}
+              />
+            </Flex>
+            <Flex alignItems="center" columnGap="sm" color="gray">
+              <InfoOutlineIcon />
+              <Text color="gray" lineHeight="1">
+                Name is optional. If provided, enter at least your first name.
+              </Text>
+            </Flex>
           </Flex>
           <GraduateInput
             id="email"
@@ -103,6 +122,7 @@ const SignUpForm: React.FC = () => {
             id="password"
             placeholder="Password"
             {...register("password", {
+              onBlur: () => trigger("passwordConfirm"),
               validate: (pass) =>
                 isStrongPassword(pass) ||
                 "A password should be at least 8 characters with digits and letters.",

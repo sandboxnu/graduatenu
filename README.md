@@ -12,7 +12,7 @@ Visit [http://localhost:3002](http://localhost:3002/) to view the app.
 
 To run the two seperately, visit the frontend and api-v2 packages(sub directories of the monorepo).
 
-## Running the production like app in docker
+## Running the prod builds in prod docker configurations locally
 
 We use docker and prod builds for our production app. It is a good idea to test out whether the app builds and runs the way it would in production.
 
