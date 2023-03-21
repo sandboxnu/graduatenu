@@ -19,7 +19,6 @@ const EmailConfirmation: NextPage = () => {
   }
 
   if (error) {
-    console.log("HERERER")
     handleApiClientError(error, router);
     return <></>;
   }
