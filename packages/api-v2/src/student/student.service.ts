@@ -168,7 +168,6 @@ export class StudentService {
     if (!isValidPassword) {
       this.logger.debug(
         { message: "Invalid password", oldPassword },
-        // AuthService.formatAuthServiceCtx("login")
       );
       return new WrongPassword();
     }
@@ -176,7 +175,6 @@ export class StudentService {
     if (!isStrongPassword(newPassword)) {
       this.logger.debug(
         { message: "weak password", oldPassword },
-        // AuthService.formatAuthServiceCtx("login")
       );
       return new WeakPassword();
     }

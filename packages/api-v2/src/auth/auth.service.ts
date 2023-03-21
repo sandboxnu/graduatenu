@@ -18,7 +18,7 @@ export class AuthService {
 
     // used to generate and sign a JWT
     private readonly jwtService: JwtService
-  ) {}
+  ) { }
 
   /** Registers a new student in the db and logs the student in. */
   async register(
@@ -98,5 +98,4 @@ export class AuthService {
   private static formatAuthServiceCtx(methodName: string): string {
     return formatServiceCtx(AuthService.name, methodName);
   }
-
 }
