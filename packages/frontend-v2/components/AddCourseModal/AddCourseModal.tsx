@@ -27,6 +27,7 @@ import { SelectedCourse } from "./SelectedCourse";
 
 interface AddCourseModalProps {
   isOpen: boolean;
+  catalogYear: number;
   /** Function to close the modal UX, returned from the useDisclosure chakra hook */
   closeModalDisplay: () => void;
 
@@ -39,6 +40,7 @@ interface AddCourseModalProps {
 
 export const AddCourseModal: React.FC<AddCourseModalProps> = ({
   isOpen,
+  catalogYear,
   closeModalDisplay,
   isCourseInCurrTerm,
   addClassesToCurrTerm,
@@ -63,13 +65,15 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
     const updatedSelectedCourses = [...selectedCourses];
 
     // grab any coreqs of the course that haven't already been selected/added to the term
-    const coreqs = (await getRequiredCourseCoreqs(course)).filter((coreq) => {
-      const isAlreadySelected = selectedCourses.find((selectedCourse) =>
-        isEqualCourses(selectedCourse, coreq)
-      );
-      const isAlreadyAdded = isCourseInCurrTerm(coreq);
-      return !(isAlreadyAdded || isAlreadySelected);
-    });
+    const coreqs = (await getRequiredCourseCoreqs(course, catalogYear)).filter(
+      (coreq) => {
+        const isAlreadySelected = selectedCourses.find((selectedCourse) =>
+          isEqualCourses(selectedCourse, coreq)
+        );
+        const isAlreadyAdded = isCourseInCurrTerm(coreq);
+        return !(isAlreadyAdded || isAlreadySelected);
+      }
+    );
 
     updatedSelectedCourses.push(course, ...coreqs);
 
@@ -151,20 +155,22 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
           </VStack>
         </ModalBody>
         <ModalFooter>
-          <Button
-            variant="solid"
-            fontWeight="bold"
-            color="primary.blue.light.main"
-            colorScheme="neutral"
-            backgroundColor="neutral.main"
-            border="none"
-            mr={3}
-            onClick={addClassesOnClick}
-            textTransform="uppercase"
-            isLoading={isCoursesLoading}
-          >
-            Add
-          </Button>
+          <Tooltip label="Note that search results will reflect the most recent version of the course you're looking for!">
+            <Button
+              variant="solid"
+              fontWeight="bold"
+              color="primary.blue.light.main"
+              colorScheme="neutral"
+              backgroundColor="neutral.main"
+              border="none"
+              mr={3}
+              onClick={addClassesOnClick}
+              textTransform="uppercase"
+              isLoading={isCoursesLoading}
+            >
+              Add
+            </Button>
+          </Tooltip>
         </ModalFooter>
       </ModalContent>
     </Modal>

@@ -15,6 +15,7 @@ import { BlueButton } from "../Button";
 
 interface ScheduleTermProps {
   scheduleTerm: ScheduleTerm2<string>;
+  catalogYear: number;
   yearNum: number;
   termCoReqErr?: TermError;
   termPreReqErr?: TermError;
@@ -34,11 +35,12 @@ interface ScheduleTermProps {
   ) => void;
 
   isLastColumn?: boolean;
-  setIsRemove?: (val: boolean) => void
+  setIsRemove?: (val: boolean) => void;
 }
 
 export const ScheduleTerm: React.FC<ScheduleTermProps> = ({
   scheduleTerm,
+  catalogYear,
   addClassesToTermInCurrPlan,
   yearNum,
   removeCourseFromTermInCurrPlan,
@@ -84,6 +86,7 @@ export const ScheduleTerm: React.FC<ScheduleTermProps> = ({
       <AddCourseButton onOpen={onOpen} />
       <AddCourseModal
         isOpen={isOpen}
+        catalogYear={catalogYear}
         closeModalDisplay={onClose}
         isCourseInCurrTerm={isCourseInCurrTerm}
         addClassesToCurrTerm={(courses: ScheduleCourse2<null>[]) =>

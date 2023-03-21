@@ -19,10 +19,13 @@ type courses = { subject: string; classId: string }[];
  * @param subject - The type of class that we are fetching from SearchNEU
  * @param classId - The identification number of the class as a string
  */
-export function useFetchCourses(courses: courses): FetchCoursesReturn {
+export function useFetchCourses(
+  courses: courses,
+  catalogYear: number
+): FetchCoursesReturn {
   const { data, ...rest } = useSWR(
     `/fetchCourses/${courses}`,
-    async () => await SearchAPI.fetchCourses(courses)
+    async () => await SearchAPI.fetchCourses(courses, catalogYear)
   );
 
   return {

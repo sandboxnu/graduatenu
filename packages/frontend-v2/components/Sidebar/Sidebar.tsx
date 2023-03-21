@@ -142,7 +142,7 @@ const Sidebar: React.FC<SidebarProps> = memo(({ selectedPlan }) => {
     courses,
     isLoading: isCoursesLoading,
     error: courseErrors,
-  } = useFetchCourses(majorCourses);
+  } = useFetchCourses(majorCourses, selectedPlan.catalogYear);
 
   const courseData = createCourseMap(courses, courseErrors);
 
