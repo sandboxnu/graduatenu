@@ -18,14 +18,21 @@ import {
 } from "@chakra-ui/react";
 import { API } from "@graduate/api-client";
 import { toast } from "../../utils";
+import axios from "axios";
 
 export const ChangePassword: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [oldPassword, setOldPassword] = useState<string | undefined>();
-  const [newPassword, setNewPassword] = useState<string | undefined>();
-  const [confirmNewPassword, setConfirmNewPassword] = useState<
-    string | undefined
-  >();
+  const [oldPassword, setOldPassword] = useState<string>("");
+  const [newPassword, setNewPassword] = useState<string>("");
+  const [confirmNewPassword, setConfirmNewPassword] = useState<string>("");
+
+  const closeModal = () => {
+    onClose()
+    setOldPassword("");
+    setNewPassword("");
+    setConfirmNewPassword("");
+  };
+
   const onSubmitHandler = async () => {
     try {
       if (!oldPassword || !newPassword || !confirmNewPassword) {
@@ -35,13 +42,21 @@ export const ChangePassword: React.FC = () => {
           "Please make sure you've entered your new password correctly"
         );
       } else {
-        await API.auth.changePassword({
+        await API.student.changePassword({
           oldPassword,
           newPassword,
         });
+        toast.success("Password has been changed!");
+        closeModal()
       }
     } catch (error) {
-      toast.error("Something went wrong", { log: true });
+      if (axios.isAxiosError(error)) {
+        toast.error(
+          `${error.response?.data.message}. Please check your inputs and try again.`
+        );
+      } else {
+        toast.error("Something went wrong", { log: true });
+      }
     }
   };
 
@@ -51,7 +66,10 @@ export const ChangePassword: React.FC = () => {
   return (
     <>
       <Text onClick={onOpen}>Change password</Text>
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal
+        isOpen={isOpen}
+        onClose={closeModal}
+      >
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>
@@ -61,7 +79,7 @@ export const ChangePassword: React.FC = () => {
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <Flex rowGap="lg" direction="column">
+            <Flex rowGap="lg" direction="column" as="form">
               <FormControl isInvalid={oldPasswordError}>
                 <FormLabel>
                   <Text>Current password</Text>
@@ -71,6 +89,7 @@ export const ChangePassword: React.FC = () => {
                     setOldPassword(event.target.value)
                   }
                   value={oldPassword}
+                  id="oldPassword"
                   type="password"
                   size="md"
                   variant="outline"
@@ -91,6 +110,7 @@ export const ChangePassword: React.FC = () => {
                     setNewPassword(event.target.value);
                   }}
                   value={newPassword}
+                  id="newPassword"
                   type="password"
                   size="md"
                   variant="outline"
@@ -108,6 +128,7 @@ export const ChangePassword: React.FC = () => {
                     setConfirmNewPassword(event.target.value);
                   }}
                   value={confirmNewPassword}
+                  id="confirmNewPassword"
                   type="password"
                   size="md"
                   variant="outline"
@@ -130,7 +151,7 @@ export const ChangePassword: React.FC = () => {
                 variant="solidWhite"
                 size="md"
                 borderRadius="lg"
-                onClick={onClose}
+                onClick={closeModal}
               >
                 Cancel
               </Button>

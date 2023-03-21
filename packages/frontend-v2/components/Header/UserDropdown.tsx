@@ -6,17 +6,20 @@ import {
   Link,
   Icon,
   IconProps,
+  Text,
 } from "@chakra-ui/react";
 import React from "react";
 import { useStudentWithPlans } from "../../hooks";
-import { handleApiClientError, logger } from "../../utils";
-import router from "next/router";
+import { handleApiClientError, logger, logout} from "../../utils";
+import { useRouter } from "next/router";
 import { LoadingPage } from "../Spinner";
 import { AccountOverview } from "./AccountOverview";
 import { ChangePassword } from "./ChangePassword";
 
 export const UserDropdown: React.FC = () => {
   const { error, student, mutateStudent } = useStudentWithPlans();
+  const router = useRouter();
+  
   if (error && !student) {
     logger.error("HomePage", error);
     handleApiClientError(error, router);
@@ -43,9 +46,11 @@ export const UserDropdown: React.FC = () => {
           <AccountOverview student={student} mutateStudent={mutateStudent} />
         </MenuItem>
         <MenuItem>
-          <ChangePassword/>
+          <ChangePassword />
         </MenuItem>
-        <MenuItem>Log out</MenuItem>
+        <MenuItem onClick={() => logout(router)}>
+          <Text>Logout</Text>
+        </MenuItem>
       </MenuList>
     </Menu>
   );

@@ -24,16 +24,7 @@ export const GraduatePreAuthHeader: React.FC = () => {
 };
 
 export const GraduatePostAuthHeader: React.FC = () => {
-  return (
-    <GraduateHeader
-      rightContent={
-        <>
-          <UserDropdown />
-          <GraduateButtonLink href="/logout">Logout</GraduateButtonLink>
-        </>
-      }
-    />
-  );
+  return <GraduateHeader rightContent={<UserDropdown />} />;
 };
 
 const GraduateHeader: React.FC<GraduateHeaderProps> = ({ rightContent }) => {

@@ -1,5 +1,6 @@
 import {
   BeforeInsert,
+  BeforeUpdate,
   Column,
   CreateDateColumn,
   Entity,
@@ -76,6 +77,7 @@ export class Student {
   // attached to the student object to be stored as a cookie only
   accessToken?: string;
 
+  @BeforeUpdate()
   @BeforeInsert()
   async hashPassword() {
     this.password = await bcrypt.hash(this.password, 10);

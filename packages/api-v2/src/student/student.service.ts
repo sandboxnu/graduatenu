@@ -180,8 +180,6 @@ export class StudentService {
       );
       return new WeakPassword();
     }
-
-    await this.studentRepository.update(uuid, { ...student, password: await bcrypt.hash(newPassword, 10) });
-    student.hashPassword();
+    await this.studentRepository.save(Object.assign(student, {password: newPassword}));
   }
 }
