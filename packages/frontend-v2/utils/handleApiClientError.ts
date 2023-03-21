@@ -2,6 +2,7 @@ import axios, { AxiosError } from "axios";
 import { NextRouter } from "next/router";
 import { logger } from "./logger";
 import { toast } from "./toast";
+import { emailConfirmationMsg } from "@graduate/common";
 
 enum ErrorToastId {
   UNAUTHORIZED = "unauthorized",
@@ -41,15 +42,20 @@ const handleAxiosError = (error: AxiosError, router: NextRouter) => {
     logger.debug("handleApiClientError", "Bad Request", error);
     toast.error("Sorry, we sent some invalid data. Try again.");
   } else if (statusCode === 401) {
-    logger.debug(
-      "handleApiClientError",
-      "Unauthenticated, redirecting to login",
-      error
-    );
-    router.push("/login");
-    toast.warn("Oops, please login first.", {
-      toastId: ErrorToastId.UNAUTHORIZED,
-    });
+    const errorMsg = error.response?.data.message;
+    if (errorMsg === emailConfirmationMsg) {
+      router.push("/emailConfirmation");
+    } else {
+      logger.debug(
+        "handleApiClientError",
+        "Unauthenticated, redirecting to login",
+        error
+      );
+      router.push("/login");
+      toast.warn("Oops, please login first.", {
+        toastId: ErrorToastId.UNAUTHORIZED,
+      });
+    }
   } else if (statusCode === 403) {
     logger.debug("handleApiClientError", "Unauthorized", error);
     toast.error("Sorry, you don't have valid permissions.", {
