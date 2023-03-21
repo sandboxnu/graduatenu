@@ -101,6 +101,10 @@ function occurrencesToCourseByCatalogYear(
   occurrences: SearchClass[],
   catalogYear: number
 ): ScheduleCourse2<null> {
+  if (!occurrences || occurrences.length === 0) {
+    throw Error("Course not found");
+  }
+
   for (const occurrence of occurrences) {
     const year = occurrence.termId.slice(0, 4);
 
