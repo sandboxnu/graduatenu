@@ -31,7 +31,7 @@ export const scrapeMajorLinks = async (
     throw new Error("only current year is supported");
   }
 
-  return scrapeMajorLinksForUrl(BASE_URL, "undergraduate");
+  return scrapeMajorLinksForUrl(BASE_URL, "archive/2021-2022/undergraduate");
 };
 
 /**
@@ -117,7 +117,12 @@ const getChildrenForPathId = ($: CheerioStatic, url: URL) => {
   // The catalog entries have an ID equal to the path, with a trailing slash
   // We select the element via its ID
   // Note: for getElementById, forward slashes need to be escaped
-  const id = url.pathname.replaceAll("/", "\\/");
+  let id = url.pathname;
+  
+  // Remove archive url prefix if present
+  id = id.replaceAll(/^\/archive\/20\d\d-20\d\d/g, "")
+  id = id.replaceAll("/", "\\/")
+
   const current = $(`#${id}`);
   return current.children();
 };
