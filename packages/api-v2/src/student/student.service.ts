@@ -15,7 +15,7 @@ import {
   UpdateStudentDto,
 } from "@graduate/common";
 import { Student } from "./entities/student.entity";
-import { EmailAlreadyExists, WeakPassword, WrongPassword } from "./student.errors";
+import { EmailAlreadyExists, NewPasswordsDontMatch, WeakPassword, WrongPassword } from "./student.errors";
 
 @Injectable()
 export class StudentService {
@@ -159,22 +159,26 @@ export class StudentService {
   }
 
   async changePassword(uuid: any, changePasswordDto: ChangePasswordDto): Promise<void | WeakPassword | WrongPassword> {
-    const { oldPassword, newPassword } = changePasswordDto;
+    const { currentPassword, newPassword, newPasswordConfirm } = changePasswordDto;
     const student = await this.findByUuid(uuid);
 
+    if (newPassword !== newPasswordConfirm) {
+      return new NewPasswordsDontMatch();
+    }
+
     const { password: trueHashedPassword } = student;
-    const isValidPassword = await bcrypt.compare(oldPassword, trueHashedPassword);
+    const isValidPassword = await bcrypt.compare(currentPassword, trueHashedPassword);
 
     if (!isValidPassword) {
       this.logger.debug(
-        { message: "Invalid password", oldPassword },
+        { message: "Invalid password", oldPassword: currentPassword },
       );
       return new WrongPassword();
     }
 
     if (!isStrongPassword(newPassword)) {
       this.logger.debug(
-        { message: "weak password", oldPassword },
+        { message: "weak password", oldPassword: currentPassword },
       );
       return new WeakPassword();
     }

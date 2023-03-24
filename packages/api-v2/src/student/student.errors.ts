@@ -15,3 +15,9 @@ export class WrongPassword extends Error {
     super();
   }
 }
+
+export class NewPasswordsDontMatch extends Error {
+  constructor() {
+    super();
+  }
+}

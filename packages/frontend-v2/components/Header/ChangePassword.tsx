@@ -1,4 +1,3 @@
-import { ChangeEvent, useState } from "react";
 import {
   useDisclosure,
   Button,
@@ -11,67 +10,59 @@ import {
   ModalFooter,
   Text,
   Flex,
-  FormControl,
-  Input,
-  FormLabel,
-  FormErrorMessage,
 } from "@chakra-ui/react";
 import { API } from "@graduate/api-client";
-import { toast } from "../../utils";
+import { handleApiClientError, toast } from "../../utils";
 import axios from "axios";
+import { ChangePasswordDto, isStrongPassword } from "@graduate/common";
+import { useForm } from "react-hook-form";
+import { GraduateInput } from "../Form";
+import { useRouter } from "next/router";
 
 export const ChangePassword: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [oldPassword, setOldPassword] = useState<string>("");
-  const [newPassword, setNewPassword] = useState<string>("");
-  const [confirmNewPassword, setConfirmNewPassword] = useState<string>("");
+  const router = useRouter();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+    watch,
+    trigger,
+  } = useForm<ChangePasswordDto>({
+    mode: "onTouched",
+    shouldFocusError: true,
+  });
+
+  // Need this for validation
+  const password = watch("newPassword", "");
 
   const closeModal = () => {
-    onClose()
-    setOldPassword("");
-    setNewPassword("");
-    setConfirmNewPassword("");
+    onClose();
   };
 
-  const onSubmitHandler = async () => {
+  const onSubmitHandler = async (payload: ChangePasswordDto) => {
     try {
-      if (!oldPassword || !newPassword || !confirmNewPassword) {
-        toast.error("Please make sure all fields are filled out!");
-      } else if (newPassword !== confirmNewPassword) {
-        toast.error(
-          "Please make sure you've entered your new password correctly"
-        );
-      } else {
-        await API.student.changePassword({
-          oldPassword,
-          newPassword,
-        });
-        toast.success("Password has been changed!");
-        closeModal()
-      }
+      await API.student.changePassword(payload);
+      toast.success("Password has been changed!");
+      closeModal();
     } catch (error) {
       if (axios.isAxiosError(error)) {
         toast.error(
           `${error.response?.data.message}. Please check your inputs and try again.`
         );
       } else {
-        toast.error("Something went wrong", { log: true });
+        handleApiClientError(error as Error, router);
       }
     }
   };
 
-  const confirmPasswordError =
-    newPassword !== confirmNewPassword && newPassword !== "";
-  const oldPasswordError = oldPassword === "";
   return (
     <>
       <Text onClick={onOpen}>Change password</Text>
-      <Modal
-        isOpen={isOpen}
-        onClose={closeModal}
-      >
+      <Modal isOpen={isOpen} onClose={closeModal}>
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent as="form" onSubmit={handleSubmit(onSubmitHandler)}>
           <ModalHeader>
             <Text textAlign="center" fontWeight="bold">
               Change Password
@@ -79,69 +70,40 @@ export const ChangePassword: React.FC = () => {
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <Flex rowGap="lg" direction="column" as="form">
-              <FormControl isInvalid={oldPasswordError}>
-                <FormLabel>
-                  <Text>Current password</Text>
-                </FormLabel>
-                <Input
-                  onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                    setOldPassword(event.target.value)
-                  }
-                  value={oldPassword}
-                  id="oldPassword"
-                  type="password"
-                  size="md"
-                  variant="outline"
-                  borderColor="neutral.main"
-                  borderWidth="2px"
-                  borderRadius="md"
-                />
-                {oldPasswordError && (
-                  <FormErrorMessage>Old password required!</FormErrorMessage>
-                )}
-              </FormControl>
-              <FormControl>
-                <FormLabel>
-                  <Text>New password</Text>
-                </FormLabel>
-                <Input
-                  onChange={(event) => {
-                    setNewPassword(event.target.value);
-                  }}
-                  value={newPassword}
-                  id="newPassword"
-                  type="password"
-                  size="md"
-                  variant="outline"
-                  borderColor="neutral.main"
-                  borderWidth="2px"
-                  borderRadius="md"
-                />
-              </FormControl>
-              <FormControl isInvalid={confirmPasswordError}>
-                <FormLabel>
-                  <Text>Confirm new password</Text>
-                </FormLabel>
-                <Input
-                  onChange={(event) => {
-                    setConfirmNewPassword(event.target.value);
-                  }}
-                  value={confirmNewPassword}
-                  id="confirmNewPassword"
-                  type="password"
-                  size="md"
-                  variant="outline"
-                  borderColor="neutral.main"
-                  borderWidth="2px"
-                  borderRadius="md"
-                />
-                {confirmPasswordError && (
-                  <FormErrorMessage>
-                    <Text>Your passwords must match!</Text>
-                  </FormErrorMessage>
-                )}
-              </FormControl>
+            <Flex rowGap="lg" direction="column">
+              <GraduateInput
+                error={errors.currentPassword}
+                type="password"
+                id="currentPassword"
+                placeholder="Current Password"
+                {...register("currentPassword", {
+                  required: "Current password is required",
+                })}
+              />
+              <GraduateInput
+                error={errors.newPassword}
+                type="password"
+                id="newPassword"
+                placeholder="New Password"
+                {...register("newPassword", {
+                  onBlur: () => trigger("newPasswordConfirm"),
+                  validate: (pass) =>
+                    isStrongPassword(pass) ||
+                    "A password should be at least 8 characters with digits and letters.",
+                  required: "New Password is required",
+                })}
+              />
+              <GraduateInput
+                error={errors.newPasswordConfirm}
+                type="password"
+                id="newPasswordConfirm"
+                placeholder="Confirm Password"
+                {...register("newPasswordConfirm", {
+                  validate: (confirmPass) =>
+                    confirmPass === password || "Passwords do not match!",
+                  required: "Confirm password is required",
+                })}
+              />
             </Flex>
           </ModalBody>
 
@@ -159,7 +121,9 @@ export const ChangePassword: React.FC = () => {
                 variant="solid"
                 size="md"
                 borderRadius="lg"
-                onClick={onSubmitHandler}
+                type="submit"
+                isLoading={isSubmitting}
+                isDisabled={Object.keys(errors).length > 0}
               >
                 Save
               </Button>
