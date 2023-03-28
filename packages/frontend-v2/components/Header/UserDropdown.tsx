@@ -7,6 +7,7 @@ import {
   Icon,
   IconProps,
   Text,
+  Spinner,
 } from "@chakra-ui/react";
 import React from "react";
 import { useStudentWithPlans } from "../../hooks";
@@ -24,13 +25,13 @@ export const UserDropdown: React.FC = () => {
     logger.error("HomePage", error);
     handleApiClientError(error, router);
 
-    // If we couldn't fetch the student, show a blank page for now.
+    // If we couldn't fetch the student, we don't display user details for now.
     // We might want to show some more actionable error in the future.
-    return <div></div>;
+    return <></>
   }
 
   if (!student) {
-    return <LoadingPage />;
+    return <Spinner size='md' />  
   }
 
   return (
