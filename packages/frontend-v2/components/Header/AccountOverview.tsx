@@ -16,30 +16,45 @@ import {
 } from "@chakra-ui/react";
 import { API } from "@graduate/api-client";
 import { StudentModel } from "@graduate/common";
-import { useState } from "react";
 import { toast } from "../../utils";
 import { KeyedMutator } from "swr";
+import { useForm } from "react-hook-form";
+import { GraduateInput } from "../Form";
 
 interface AccountOverviewProps {
   student: StudentModel<string>;
   mutateStudent: KeyedMutator<StudentModel<string>>;
 }
+
+interface UpdateName {
+  firstName: string;
+  lastName: string;
+}
+
 export const AccountOverview: React.FC<AccountOverviewProps> = ({
   student,
   mutateStudent,
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [firstName, setFirstName] = useState<string>(
-    student.fullName ? student.fullName.split(" ")[0] : ""
-  );
-  const [lastName, setLastName] = useState<string>(
-    student.fullName ? student.fullName.split(" ")[1] : ""
-  );
-  const onSubmitHandler = async () => {
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+    watch,
+    trigger,
+  } = useForm<UpdateName>({
+    mode: "onTouched",
+    shouldFocusError: true,
+  });
+
+  const firstName = watch("firstName", "");
+
+  const onSubmitHandler = async (payload: UpdateName) => {
     try {
       const newStudent: StudentModel<string> = {
         ...student,
-        fullName: `${firstName} ${lastName}`,
+        fullName: `${payload.firstName} ${payload.lastName}`,
       };
       mutateStudent(async () => {
         await API.student.update(newStudent);
@@ -57,7 +72,7 @@ export const AccountOverview: React.FC<AccountOverviewProps> = ({
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent as="form" onSubmit={handleSubmit(onSubmitHandler)}>
           <ModalHeader>
             <Text textAlign="center" fontWeight="bold">
               Account Overview
@@ -67,40 +82,30 @@ export const AccountOverview: React.FC<AccountOverviewProps> = ({
           <ModalBody>
             <Flex rowGap="lg" direction="column">
               <Flex columnGap="md">
-                <FormControl>
-                  <FormLabel>
-                    <Text>First Name</Text>
-                  </FormLabel>
-                  <Input
-                    onChange={(event) => setFirstName(event.target.value)}
-                    value={firstName}
-                    placeholder="Paws"
-                    type="text"
-                    size="md"
-                    variant="outline"
-                    borderColor="neutral.main"
-                    borderWidth="2px"
-                    borderRadius="md"
-                  />
-                </FormControl>
-                <FormControl>
-                  <FormLabel>
-                    <Text>Last Name</Text>
-                  </FormLabel>
-                  <Input
-                    onChange={(event) => {
-                      setLastName(event.target.value);
-                    }}
-                    value={lastName}
-                    placeholder="Husky"
-                    type="text"
-                    size="md"
-                    variant="outline"
-                    borderColor="neutral.main"
-                    borderWidth="2px"
-                    borderRadius="md"
-                  />
-                </FormControl>
+                <GraduateInput
+                  type="text"
+                  formLabel="First Name"
+                  id="firstName"
+                  placeholder="Cooper"
+                  {...register("firstName", {
+                    onBlur: () => trigger("lastName"),
+                  })}
+                />
+                <GraduateInput
+                  error={errors.lastName}
+                  type="text"
+                  formLabel="Last Name"
+                  id="lastName"
+                  placeholder="The Dog"
+                  {...register("lastName", {
+                    validate: (lastName) => {
+                      if (lastName !== "" && firstName === "") {
+                        return "Please enter your first name along with your last name.";
+                      }
+                      return true;
+                    },
+                  })}
+                />
               </Flex>
               <FormControl>
                 <FormLabel>
@@ -132,9 +137,11 @@ export const AccountOverview: React.FC<AccountOverviewProps> = ({
               </Button>
               <Button
                 variant="solid"
+                isLoading={isSubmitting}
+                isDisabled={Object.keys(errors).length > 0}
                 size="md"
                 borderRadius="lg"
-                onClick={onSubmitHandler}
+                type='submit'
               >
                 Save
               </Button>

@@ -73,6 +73,7 @@ export const ChangePassword: React.FC = () => {
             <Flex rowGap="lg" direction="column">
               <GraduateInput
                 error={errors.currentPassword}
+                formLabel="Current Password"
                 type="password"
                 id="currentPassword"
                 placeholder="Current Password"
@@ -82,6 +83,7 @@ export const ChangePassword: React.FC = () => {
               />
               <GraduateInput
                 error={errors.newPassword}
+                formLabel="New Password"
                 type="password"
                 id="newPassword"
                 placeholder="New Password"
@@ -95,6 +97,7 @@ export const ChangePassword: React.FC = () => {
               />
               <GraduateInput
                 error={errors.newPasswordConfirm}
+                formLabel="Confirm New Password"
                 type="password"
                 id="newPasswordConfirm"
                 placeholder="Confirm Password"
