@@ -20,6 +20,7 @@ import { toast } from "../../utils";
 import { KeyedMutator } from "swr";
 import { useForm } from "react-hook-form";
 import { GraduateInput } from "../Form";
+import { useEffect } from "react";
 
 interface AccountOverviewProps {
   student: StudentModel<string>;
@@ -43,10 +44,18 @@ export const AccountOverview: React.FC<AccountOverviewProps> = ({
     formState: { errors, isSubmitting },
     watch,
     trigger,
+    reset,
   } = useForm<UpdateName>({
     mode: "onTouched",
     shouldFocusError: true,
   });
+
+  useEffect(() => {
+    reset({
+      firstName: student.fullName.split(" ")[0],
+      lastName: student.fullName.split(" ")[1],
+    });
+  }, [reset, student]);
 
   const firstName = watch("firstName", "");
 
@@ -66,6 +75,7 @@ export const AccountOverview: React.FC<AccountOverviewProps> = ({
       toast.error("Something went wrong", { log: true });
     }
   };
+
   return (
     <>
       <Text onClick={onOpen}>Account Overview</Text>
@@ -83,6 +93,7 @@ export const AccountOverview: React.FC<AccountOverviewProps> = ({
             <Flex rowGap="lg" direction="column">
               <Flex columnGap="md">
                 <GraduateInput
+                  defaultValue={student.fullName.split(" ")[0]}
                   type="text"
                   formLabel="First Name"
                   id="firstName"
@@ -141,7 +152,7 @@ export const AccountOverview: React.FC<AccountOverviewProps> = ({
                 isDisabled={Object.keys(errors).length > 0}
                 size="md"
                 borderRadius="lg"
-                type='submit'
+                type="submit"
               >
                 Save
               </Button>

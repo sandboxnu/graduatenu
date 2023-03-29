@@ -13,7 +13,6 @@ import React from "react";
 import { useStudentWithPlans } from "../../hooks";
 import { handleApiClientError, logger, logout} from "../../utils";
 import { useRouter } from "next/router";
-import { LoadingPage } from "../Spinner";
 import { AccountOverview } from "./AccountOverview";
 import { ChangePassword } from "./ChangePassword";
 
