@@ -109,9 +109,11 @@ export class StudentService {
     uuid: string,
     updateStudentDto: UpdateStudentDto
   ): Promise<UpdateResult> {
+    const student = await this.findByUuid(uuid);
+    const updatedStudent = { ...updateStudentDto, password: student.password };
     const updateResult = await this.studentRepository.update(
       uuid,
-      updateStudentDto
+      updatedStudent
     );
 
     if (updateResult.affected === 0) {

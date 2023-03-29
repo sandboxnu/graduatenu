@@ -1,4 +1,9 @@
-import { ScheduleCourse, Schedule2, SupportedMajors } from "./types";
+import {
+  ScheduleCourse,
+  Schedule2,
+  SupportedMajors,
+  ScheduleCourse2,
+} from "./types";
 
 /** Types our API responds with. */
 
@@ -31,7 +36,7 @@ export class StudentModel<T> {
   major: string | undefined;
   coopCycle: string | undefined;
   coursesCompleted: ScheduleCourse[] | undefined;
-  coursesTransfered: ScheduleCourse[] | undefined;
+  coursesTransfered: ScheduleCourse2<null>[] | undefined;
   primaryPlanId: number;
   plans: PlanModel<T>[];
   concentration: string | undefined;

@@ -8,6 +8,7 @@ import {
 } from "@graduate/common";
 import { ScheduleTerm } from "./ScheduleTerm";
 import { useState, useEffect } from "react";
+import { GraduateToolTip } from "../GraduateTooltip";
 
 interface ToggleYearProps {
   isExpanded: boolean;
@@ -35,7 +36,7 @@ interface ScheduleYearProps extends ToggleYearProps {
 
   /** Function to remove the curr year from the plan */
   removeYearFromCurrPlan: () => void;
-  setIsRemove?: (val: boolean) => void
+  setIsRemove?: (val: boolean) => void;
 }
 
 export const ScheduleYear: React.FC<ScheduleYearProps> = ({
@@ -192,7 +193,7 @@ const YearHeader: React.FC<YearHeaderProps> = ({
             />
           </Tooltip>
         )}
-        <Tooltip label={`Delete year ${year.year}?`} fontSize="md">
+        <GraduateToolTip label={`Delete year ${year.year}?`}>
           <IconButton
             aria-label="Delete course"
             variant="ghost"
@@ -208,7 +209,7 @@ const YearHeader: React.FC<YearHeaderProps> = ({
               removeYearFromCurrPlan();
             }}
           />
-        </Tooltip>
+        </GraduateToolTip>
       </Flex>
     </Flex>
   );

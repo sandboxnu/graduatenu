@@ -1,4 +1,5 @@
 import {
+  IsArray,
   IsBoolean,
   IsEmail,
   IsInt,
@@ -134,7 +135,7 @@ export class UpdateStudentDto {
   coursesCompleted?: ScheduleCourse[];
 
   @IsOptional()
-  @IsObject()
+  @IsArray()
   coursesTransfered?: ScheduleCourse[];
 
   @IsOptional()

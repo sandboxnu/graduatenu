@@ -9,9 +9,7 @@ import {
 import { DraggableScheduleCourse } from "../ScheduleCourse";
 import { useDroppable } from "@dnd-kit/core";
 import { getSeasonDisplayWord, isCourseInTerm } from "../../utils";
-import { AddCourseModal } from "../AddCourseModal";
-import { AddIcon } from "@chakra-ui/icons";
-import { BlueButton } from "../Button";
+import { AddCourseButton, AddCourseModal } from "../AddCourseModal";
 
 interface ScheduleTermProps {
   scheduleTerm: ScheduleTerm2<string>;
@@ -34,7 +32,7 @@ interface ScheduleTermProps {
   ) => void;
 
   isLastColumn?: boolean;
-  setIsRemove?: (val: boolean) => void
+  setIsRemove?: (val: boolean) => void;
 }
 
 export const ScheduleTerm: React.FC<ScheduleTermProps> = ({
@@ -59,7 +57,7 @@ export const ScheduleTerm: React.FC<ScheduleTermProps> = ({
       ref={setNodeRef}
       borderRight={!isLastColumn ? "1px" : undefined}
       transition="background-color 0.1s ease"
-      backgroundColor={isOver ? "neutral.300" : "neutral.main"}
+      backgroundColor={isOver ? "neutral.300" : "neutral.900"}
       display="flex"
       flexDirection="column"
       px="sm"
@@ -85,10 +83,11 @@ export const ScheduleTerm: React.FC<ScheduleTermProps> = ({
       <AddCourseModal
         isOpen={isOpen}
         closeModalDisplay={onClose}
-        isCourseInCurrTerm={isCourseInCurrTerm}
-        addClassesToCurrTerm={(courses: ScheduleCourse2<null>[]) =>
+        isCourseAlreadyAdded={isCourseInCurrTerm}
+        addSelectedClasses={(courses: ScheduleCourse2<null>[]) =>
           addClassesToTermInCurrPlan(courses, yearNum, scheduleTerm.season)
         }
+        isAutoSelectCoreqs
       />
     </GridItem>
   );
@@ -108,22 +107,5 @@ const ScheduleTermHeader: React.FC<ScheduleTermHeaderProps> = ({
     <Heading size="sm" pb="sm">
       {seasonDisplayWord} {year}
     </Heading>
-  );
-};
-
-interface AddCourseButtonProps {
-  onOpen: () => void;
-}
-
-const AddCourseButton: React.FC<AddCourseButtonProps> = ({ onOpen }) => {
-  return (
-    <BlueButton
-      leftIcon={<AddIcon w={2} h={2} color="primary.blue.light.main" />}
-      onClick={onOpen}
-      mt="md"
-      size="sm"
-    >
-      Add Course
-    </BlueButton>
   );
 };

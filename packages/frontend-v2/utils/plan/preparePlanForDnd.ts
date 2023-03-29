@@ -112,14 +112,17 @@ const prepareTermForDnd = (
 /** Adds a unique dnd id to all the given courses. */
 export const prepareClassesForDnd = (
   classes: ScheduleCourse2<null>[],
-  courseCount: number
+  courseCount: number,
+  dndIdPrefix?: string
 ): { dndClasses: ScheduleCourse2<string>[]; updatedCount: number } => {
   let updatedCount = courseCount;
   const dndClasses = classes.map((course) => {
     updatedCount++;
+    const dndIdSuffix = `${course.classId}-${course.subject}-${updatedCount}`;
+    const dndId = dndIdPrefix ? `${dndIdPrefix}-${dndIdSuffix}` : dndIdSuffix;
     return {
       ...course,
-      id: `${course.classId}-${course.subject}-${updatedCount}`,
+      id: dndId,
     };
   });
 

@@ -199,12 +199,7 @@ const HomePage: NextPage = () => {
       collisionDetection={courseDndCollisisonAlgorithm}
     >
       <PageLayout>
-        <Box
-          bg="primary.blue.light.main"
-          overflowY="auto"
-          width="360px"
-          flexShrink={0}
-        >
+        <Box bg="neutral.main" overflowY="auto" width="360px" flexShrink={0}>
           {selectedPlan === undefined ? (
             <SidebarContainer title="No plan selected" />
           ) : (

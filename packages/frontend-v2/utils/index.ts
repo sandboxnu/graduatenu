@@ -6,3 +6,4 @@ export * from "./logout";
 export * from "./course";
 export * from "./handleApiClientError";
 export * from "./constants";
+export * from "./student";

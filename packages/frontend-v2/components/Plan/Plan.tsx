@@ -1,4 +1,4 @@
-import { Flex } from "@chakra-ui/react";
+import { Divider, Flex } from "@chakra-ui/react";
 import {
   CoReqWarnings,
   PlanModel,
@@ -12,12 +12,13 @@ import { addClassesToTerm, removeYearFromPlan } from "../../utils";
 import { removeCourseFromTerm } from "../../utils/";
 import { ScheduleYear } from "./ScheduleYear";
 import { useDroppable } from "@dnd-kit/core";
+import { TransferCourses } from "./TransferCourses";
 
 interface PlanProps {
   plan: PlanModel<string>;
   preReqErr?: PreReqWarnings;
   coReqErr?: CoReqWarnings;
-  setIsRemove?: (val: boolean) => void
+  setIsRemove?: (val: boolean) => void;
 
   /**
    * Function to POST the plan and update the SWR cache for "student with plans"
@@ -31,9 +32,11 @@ export const Plan: React.FC<PlanProps> = ({
   mutateStudentWithUpdatedPlan,
   preReqErr = undefined,
   coReqErr = undefined,
-  setIsRemove
+  setIsRemove,
 }) => {
   const [expandedYears, setExpandedYears] = useState<Set<number>>(new Set());
+  const [isTransferCoursesExpanded, setIsTransferCoursesExpanded] =
+    useState<boolean>(false);
 
   const toggleExpanded = (year: ScheduleYear2<unknown>) => {
     if (expandedYears.has(year.year)) {
@@ -43,7 +46,7 @@ export const Plan: React.FC<PlanProps> = ({
     }
   };
 
-  const { setNodeRef } = useDroppable({ id: 'plan' });
+  const { setNodeRef } = useDroppable({ id: "plan" });
 
   const removeFromExpandedYears = (year: ScheduleYear2<unknown>) => {
     const updatedSet = new Set(expandedYears);
@@ -106,38 +109,47 @@ export const Plan: React.FC<PlanProps> = ({
   };
 
   return (
-    <Flex flexDirection="column" rowGap="4xs" ref={setNodeRef}>
-      {plan.schedule.years.map((scheduleYear) => {
-        const isExpanded = expandedYears.has(scheduleYear.year);
+    <Flex direction="column" rowGap="sm">
+      <Flex flexDirection="column" rowGap="4xs" ref={setNodeRef}>
+        {plan.schedule.years.map((scheduleYear) => {
+          const isExpanded = expandedYears.has(scheduleYear.year);
 
-        return (
-          <Flex
-            key={scheduleYear.year}
-            borderX="1px"
-            borderBottom="1px"
-            borderColor={isExpanded ? undefined : "primary.blue.light.main"}
-            flexDirection="column"
-          >
-            <ScheduleYear
-              yearCoReqError={coReqErr?.years.find(
-                (year) => year.year == scheduleYear.year
-              )}
-              yearPreReqError={preReqErr?.years.find(
-                (year) => year.year == scheduleYear.year
-              )}
-              scheduleYear={scheduleYear}
-              isExpanded={isExpanded}
-              toggleExpanded={() => toggleExpanded(scheduleYear)}
-              addClassesToTermInCurrPlan={addClassesToTermInCurrPlan}
-              removeCourseFromTermInCurrPlan={removeCourseFromTermInCurrPlan}
-              removeYearFromCurrPlan={() =>
-                removeYearFromCurrPlan(scheduleYear.year)
-              }
-              setIsRemove={setIsRemove}
-            />
-          </Flex>
-        );
-      })}
+          return (
+            <Flex
+              key={scheduleYear.year}
+              borderX="1px"
+              borderBottom="1px"
+              borderColor={isExpanded ? undefined : "primary.blue.light.main"}
+              flexDirection="column"
+            >
+              <ScheduleYear
+                yearCoReqError={coReqErr?.years.find(
+                  (year) => year.year == scheduleYear.year
+                )}
+                yearPreReqError={preReqErr?.years.find(
+                  (year) => year.year == scheduleYear.year
+                )}
+                scheduleYear={scheduleYear}
+                isExpanded={isExpanded}
+                toggleExpanded={() => toggleExpanded(scheduleYear)}
+                addClassesToTermInCurrPlan={addClassesToTermInCurrPlan}
+                removeCourseFromTermInCurrPlan={removeCourseFromTermInCurrPlan}
+                removeYearFromCurrPlan={() =>
+                  removeYearFromCurrPlan(scheduleYear.year)
+                }
+                setIsRemove={setIsRemove}
+              />
+            </Flex>
+          );
+        })}
+      </Flex>
+      <Divider borderColor="neutral.900" borderWidth={1} />
+      <TransferCourses
+        isExpanded={isTransferCoursesExpanded}
+        toggleExpanded={() =>
+          setIsTransferCoursesExpanded(!isTransferCoursesExpanded)
+        }
+      />
     </Flex>
   );
 };
