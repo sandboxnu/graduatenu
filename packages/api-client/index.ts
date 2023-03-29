@@ -16,6 +16,7 @@ import {
   Major2,
   GetSupportedMajorsResponse,
   ConfirmEmailDto,
+  ChangePasswordDto,
 } from "@graduate/common";
 import { ClassConstructor, plainToInstance } from "class-transformer";
 
@@ -70,6 +71,7 @@ class APIClient {
         isWithPlans: true,
       }),
     delete: (): Promise<void> => this.req("DELETE", "students/me"),
+    changePassword: (body: ChangePasswordDto): Promise<void> => this.req("POST", "/students/changePassword", undefined, body)
   };
 
   plans = {

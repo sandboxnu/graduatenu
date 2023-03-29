@@ -1,15 +1,13 @@
+import { HeaderContainer } from "./HeaderContainer";
+import { Logo } from "./Logo";
+import { GraduateButtonLink } from "../Link";
+import { UserDropdown } from "./UserDropdown";
 import {
-  Button,
   Flex,
   Icon,
   IconProps,
   Link as ChakraLink,
 } from "@chakra-ui/react";
-import { HeaderContainer } from "./HeaderContainer";
-import { Logo } from "./Logo";
-import { GraduateButtonLink } from "../Link";
-import { logout } from "../../utils";
-import { useRouter } from "next/router";
 
 interface GraduateHeaderProps {
   rightContent: React.ReactNode;
@@ -26,16 +24,7 @@ export const GraduatePreAuthHeader: React.FC = () => {
 };
 
 export const GraduatePostAuthHeader: React.FC = () => {
-  const router = useRouter();
-  return (
-    <GraduateHeader
-      rightContent={
-        <Button size="sm" onClick={() => logout(router)}>
-          Logout
-        </Button>
-      }
-    />
-  );
+  return <GraduateHeader rightContent={<UserDropdown />} />;
 };
 
 const GraduateHeader: React.FC<GraduateHeaderProps> = ({ rightContent }) => {

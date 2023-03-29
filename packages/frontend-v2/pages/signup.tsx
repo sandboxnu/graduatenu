@@ -88,7 +88,7 @@ const SignUpForm: React.FC = () => {
                 error={errors.lastName}
                 {...register("lastName", {
                   validate: (lastName) => {
-                    if (lastName != "" && firstName == "") {
+                    if (lastName !== "" && firstName === "") {
                       return "Please enter your first name along with your last name.";
                     }
                     return true;
