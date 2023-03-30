@@ -64,7 +64,7 @@ export const runPipeline = async (yearStart: number, yearEnd: number) => {
   Array.from(comments.entries())
     .sort((a, b) => -a[1].length + b[1].length)
     .forEach(([key, value]) => (obj[key] = value));
-  writeFile("./comments.json", JSON.stringify(obj, null, 2));
+  writeFile("./results/comments.json", JSON.stringify(obj, null, 2));
   logResults(results);
   clearGlobalStatsLogger();
 };
@@ -220,10 +220,10 @@ const parseEntry = async (
 const saveResults = async (
   entry: ParsedCatalogEntry
 ): Promise<ParsedCatalogEntry> => {
-  const path = `./major_output/${entry.url.pathname
-    .slice(1)
-    .replaceAll(/\//g, "__")}.json`;
-  return writeFile(path, JSON.stringify(entry.parsed, null, 4))
+  const name = entry.parsed.name;
+  const degree = name.includes("Minor") ? "minor" : "major";
+  const filePath = `./results/${degree}/${name}/parsed.json`;
+  return writeFile(filePath, JSON.stringify(entry.parsed, null, 2))
     .then(() => {
       // console.log("wrote file: " + path)
       return entry;

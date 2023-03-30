@@ -43,7 +43,7 @@ const cachedGetRequest = async (url: string) => {
   }
 
   // https://stackoverflow.com/questions/35511331/how-to-make-a-valid-filename-from-an-arbitrary-string-in-javascript
-  const path = `./catalogCache/${url.replaceAll(/[\/|\\:*?"<>]/g, "-")}`;
+  const path = `./catalogCache/${url.replaceAll(/[\/|\\:*?"<>]/g, "-")}.html`;
   if (existsSync(path)) {
     return await readFile(path);
   }
@@ -53,7 +53,7 @@ const cachedGetRequest = async (url: string) => {
   return data;
 };
 
-const wrappedGetRequest = async (url: string) => {
+export const wrappedGetRequest = async (url: string) => {
   const response = await undici.request(url, { maxRedirections: 1 });
   if (response.statusCode !== 200) {
     throw new Error(`non-ok status code: ${response.statusCode}, url: ${url}`);
@@ -61,10 +61,12 @@ const wrappedGetRequest = async (url: string) => {
   return await response.body.text();
 };
 
-export const ensureLength = <T>(n: number, l: T[], extraMessage?: String) => {
+export const ensureLength = <T>(n: number, l: T[], extraMessage?: string) => {
   const length = l.length;
   if (length !== n) {
-    const msg = `expected array length to equal exactly ${n}, but was ${length}${extraMessage ?? ""}`;
+    const msg = `expected array length to equal exactly ${n}, but was ${length}${
+      extraMessage ?? ""
+    }`;
     throw new Error(msg);
   }
   return l;

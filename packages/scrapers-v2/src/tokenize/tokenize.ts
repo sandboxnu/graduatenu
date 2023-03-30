@@ -4,6 +4,7 @@ import {
   ensureLengthAtLeast,
   loadHTML,
   parseText,
+  wrappedGetRequest,
 } from "../utils";
 import {
   COURSE_REGEX,
@@ -14,7 +15,7 @@ import {
   RANGE_UNBOUNDED,
   SUBJECT_REGEX,
   XOM_REGEX_CREDITS,
-  XOM_REGEX_NUMBER
+  XOM_REGEX_NUMBER,
 } from "./constants";
 import {
   CountAndHoursRow,
@@ -34,6 +35,9 @@ import {
 import { join } from "path";
 import { BASE_URL } from "../constants";
 import { categorizeTextRow } from "./textCategorize";
+import { existsSync } from "fs";
+import { mkdir, writeFile } from "fs/promises";
+import * as cheerio from "cheerio";
 
 /**
  * Fetch html for page and convert into intermediate representation (IR)
@@ -41,7 +45,29 @@ import { categorizeTextRow } from "./textCategorize";
  * @param url The url of the page to tokenize
  */
 export const fetchAndTokenizeHTML = async (url: URL): Promise<HDocument> => {
-  return await tokenizeHTML(await loadHTML(url.href));
+  const html = await wrappedGetRequest(url.href);
+  const token = await tokenizeHTML(cheerio.load(html));
+  const majorName = token.majorName;
+  const degree = majorName.includes("Minor") ? "minor" : "major";
+  const filePath = `./results/${degree}/${majorName}`;
+  if (!existsSync("./results")) {
+    await mkdir("./results");
+  }
+
+  if (!existsSync("./results/major")) {
+    await mkdir("./results/major");
+  }
+
+  if (!existsSync("./results/minor")) {
+    await mkdir("./results/minor");
+  }
+
+  if (!existsSync(filePath)) {
+    await mkdir(filePath);
+  }
+  await writeFile(`${filePath}/pre_tokenized.html`, html);
+  await writeFile(`${filePath}/token.json`, JSON.stringify(token, null, 2));
+  return token;
 };
 
 /**
@@ -79,7 +105,7 @@ export const tokenizeHTML = async ($: CheerioStatic): Promise<HDocument> => {
     programRequiredHours,
     yearVersion,
     majorName,
-    sections: sections,
+    sections,
   };
 };
 
@@ -174,9 +200,9 @@ const tokenizeSections = async (
       const courseTable: HSection = {
         description: tableDesc,
         entries: tokenizeRows($, element),
-        type: tableDesc.toLowerCase().includes("concentration") 
-          ? HSectionType.CONCENTRATION 
-          : HSectionType.PRIMARY
+        type: tableDesc.toLowerCase().includes("concentration")
+          ? HSectionType.CONCENTRATION
+          : HSectionType.PRIMARY,
       };
       courseList.push(courseTable);
     } else if (
@@ -293,8 +319,10 @@ const getRowType = ($: CheerioStatic, tr: CheerioElement, tds: Cheerio[]) => {
     return HRowType.SECTION_INFO;
   }
 
-  if (tdText.toLowerCase().match(XOM_REGEX_CREDITS) 
-      || tdText.toLowerCase().match(XOM_REGEX_NUMBER)) {
+  if (
+    tdText.toLowerCase().match(XOM_REGEX_CREDITS) ||
+    tdText.toLowerCase().match(XOM_REGEX_NUMBER)
+  ) {
     return HRowType.X_OF_MANY;
   }
 
@@ -336,7 +364,7 @@ const constructRow = (
     case HRowType.SECTION_INFO:
       return constructSectionInfo($, tds);
     case HRowType.COMMENT_COUNT:
-      throw new Error("We don't support comment counts yet!")
+      throw new Error("We don't support comment counts yet!");
     case HRowType.X_OF_MANY:
       return constructXOfMany($, tds);
     default:
@@ -521,16 +549,15 @@ const constructRangeUnbounded = (
   };
 };
 
-const sectionInfoOnes = [
-  "Choose one:",
-  "Complete one of the following:"
-].map(text=>text.toLowerCase())
+const sectionInfoOnes = ["Choose one:", "Complete one of the following:"].map(
+  (text) => text.toLowerCase()
+);
 
 const sectionInfoTwos = [
-  "Complete two courses (and any required labs) from the following science categories:"
-].map(text=>text.toLowerCase())
+  "Complete two courses (and any required labs) from the following science categories:",
+].map((text) => text.toLowerCase());
 
-const sectionInfoAll = [...sectionInfoOnes, ...sectionInfoTwos]
+const sectionInfoAll = [...sectionInfoOnes, ...sectionInfoTwos];
 
 const constructSectionInfo = (
   $: CheerioStatic,
@@ -545,8 +572,8 @@ const constructSectionInfo = (
       hour,
       description,
       type: HRowType.SECTION_INFO,
-      parsedCount: 1
-    }
+      parsedCount: 1,
+    };
   }
 
   if (sectionInfoTwos.includes(description.toLowerCase())) {
@@ -554,11 +581,13 @@ const constructSectionInfo = (
       hour,
       description,
       type: HRowType.SECTION_INFO,
-      parsedCount: 2
-    }
+      parsedCount: 2,
+    };
   }
 
-  throw new Error("Parsed text not in recognised list! (shouldn't be possible :) ).");
+  throw new Error(
+    "Parsed text not in recognised list! (shouldn't be possible :) )."
+  );
 };
 
 const XOM_NUMBERS = new Map([
@@ -571,30 +600,29 @@ const XOM_NUMBERS = new Map([
   ["seven", 7],
   ["eight", 8],
   ["nine", 9],
-  ["ten", 10]
-])
+  ["ten", 10],
+]);
 
 const constructXOfMany = (
   $: CheerioStatic,
   tds: Cheerio[]
 ): TextRow<HRowType.X_OF_MANY> => {
-  const [c1, c2] = ensureLength(2, tds, tds.toString())
-  let hour = parseHour(c2)
-  const description = parseText(c1)
+  const [c1, c2] = ensureLength(2, tds, tds.toString());
+  let hour = parseHour(c2);
+  const description = parseText(c1);
 
-  
   if (!hour) {
-    let matchesNumber = description.toLowerCase().match(XOM_REGEX_NUMBER)
+    const matchesNumber = description.toLowerCase().match(XOM_REGEX_NUMBER);
     if (matchesNumber) {
-      let numberTranslation = XOM_NUMBERS.get(matchesNumber[1])
+      const numberTranslation = XOM_NUMBERS.get(matchesNumber[1]);
       if (numberTranslation != undefined) {
-        hour = numberTranslation * 4
+        hour = numberTranslation * 4;
       }
     }
-    
-    let matchesCredits = description.toLowerCase().match(XOM_REGEX_CREDITS)
+
+    const matchesCredits = description.toLowerCase().match(XOM_REGEX_CREDITS);
     if (matchesCredits) {
-      hour = Number(matchesCredits[1])
+      hour = Number(matchesCredits[1]);
     }
   }
 
@@ -602,8 +630,8 @@ const constructXOfMany = (
     type: HRowType.X_OF_MANY,
     description,
     hour,
-  }
-}
+  };
+};
 
 const parseHour = (td: Cheerio) => {
   const hourText = td.text();

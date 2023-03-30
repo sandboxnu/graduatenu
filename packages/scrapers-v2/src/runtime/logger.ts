@@ -2,7 +2,6 @@ import { Pipeline, StageLabel } from "./types";
 import { Major2, ResultType } from "@graduate/common";
 import { FilterError } from "./pipeline";
 import { CatalogEntryType } from "../classify/types";
-import { HDocument } from "../tokenize/types";
 
 /**
  * Logs the progress of the scrape so the developer knows the scraper isn't deadlocked.
@@ -53,7 +52,7 @@ export const logResults = (
   const stats = new StatsLogger();
 
   for (const { result, trace, id } of results) {
-    stats.recordField("status", "total")
+    stats.recordField("status", "total");
     if (result.type === ResultType.Ok) {
       logOkResult(stats, result, id);
     } else {
