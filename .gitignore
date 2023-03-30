@@ -65,6 +65,7 @@ infrastructure/test/graduatenu-db-data
 # Scraper cache
 **/catalogCache/
 packages/scrapers-v2/src/parse/grammar.js
+packages/scrapers-v2/results
 
 # Coverage
 coverage/
