@@ -50,7 +50,7 @@ const SignUpForm: React.FC = () => {
         const errorMessage = err.response?.data?.message;
         if (errorMessage === emailAlreadyExistsError) {
           toast.error(
-            "Account with the given email already exists... try signing up instead 😄"
+            "Account with the given email already exists... try logging in instead 😄"
           );
         } else if (errorMessage === weakPasswordError) {
           toast.error(

@@ -21,3 +21,15 @@ export class NewPasswordsDontMatch extends Error {
     super();
   }
 }
+
+export class NoSuchEmail extends Error {
+  constructor() {
+    super();
+  }
+}
+
+export class EmailNotConfirmed extends Error {
+  constructor() {
+    super();
+  }
+}

@@ -75,7 +75,7 @@ export class SignUpStudentDto {
   @IsEmail()
   email: string;
 
-@IsNotEmpty()
+  @IsNotEmpty()
   @IsString()
   password: string;
 
@@ -215,4 +215,24 @@ export class ChangePasswordDto {
   @IsString()
   @IsNotEmpty()
   newPasswordConfirm: string;
+}
+
+export class ForgotPasswordDto {
+  @IsString()
+  @IsNotEmpty()
+  email: string;
+}
+
+export class ResetPasswordDto {
+  @IsNotEmpty()
+  @IsString()
+  token: string
+
+  @IsString()
+  @IsNotEmpty()
+  password: string;
+
+  @IsString()
+  @IsNotEmpty()
+  passwordConfirm: string;
 }
