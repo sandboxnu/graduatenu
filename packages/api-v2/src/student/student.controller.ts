@@ -27,12 +27,14 @@ import {
   UpdateStudentResponse,
   emailAlreadyExistsError,
   weakPasswordError,
+  ChangePasswordDto,
+  wrongPasswordError,
 } from "@graduate/common";
-import { EmailAlreadyExists, WeakPassword } from "./student.errors";
+import { EmailAlreadyExists, WeakPassword, WrongPassword } from "./student.errors";
 
 @Controller("students")
 export class StudentController {
-  constructor(private readonly studentService: StudentService) {}
+  constructor(private readonly studentService: StudentService) { }
 
   @UseGuards(JwtAuthGuard)
   @Get("me")
@@ -112,6 +114,21 @@ export class StudentController {
     const deleteResult = await this.studentService.remove(uuid);
     if (!deleteResult) {
       throw new BadRequestException();
+    }
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Post("changePassword")
+  public async changePassword(
+    @Req() req: AuthenticatedRequest,
+    @Body() changePasswordDto: ChangePasswordDto
+  ): Promise<void> {
+    const changePasswordResult = await this.studentService.changePassword(req.user.uuid, changePasswordDto);
+    if (changePasswordResult instanceof WrongPassword) {
+      throw new BadRequestException(wrongPasswordError);
+    }
+    if (changePasswordResult instanceof WeakPassword) {
+      throw new BadRequestException(weakPasswordError)
     }
   }
 

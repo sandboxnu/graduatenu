@@ -13,6 +13,7 @@ import { AddCourseButton, AddCourseModal } from "../AddCourseModal";
 
 interface ScheduleTermProps {
   scheduleTerm: ScheduleTerm2<string>;
+  catalogYear: number;
   yearNum: number;
   termCoReqErr?: TermError;
   termPreReqErr?: TermError;
@@ -37,6 +38,7 @@ interface ScheduleTermProps {
 
 export const ScheduleTerm: React.FC<ScheduleTermProps> = ({
   scheduleTerm,
+  catalogYear,
   addClassesToTermInCurrPlan,
   yearNum,
   removeCourseFromTermInCurrPlan,
@@ -82,6 +84,7 @@ export const ScheduleTerm: React.FC<ScheduleTermProps> = ({
       <AddCourseButton onOpen={onOpen} />
       <AddCourseModal
         isOpen={isOpen}
+        catalogYear={catalogYear}
         closeModalDisplay={onClose}
         isCourseAlreadyAdded={isCourseInCurrTerm}
         addSelectedClasses={(courses: ScheduleCourse2<null>[]) =>

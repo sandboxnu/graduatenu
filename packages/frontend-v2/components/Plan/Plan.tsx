@@ -123,6 +123,7 @@ export const Plan: React.FC<PlanProps> = ({
               flexDirection="column"
             >
               <ScheduleYear
+                catalogYear={plan.catalogYear}
                 yearCoReqError={coReqErr?.years.find(
                   (year) => year.year == scheduleYear.year
                 )}

@@ -53,7 +53,7 @@ const EmailConfirmation: NextPage = () => {
         <Flex alignItems="center" direction="column" rowGap="lg">
           <Image src="/email_confirmation.svg" width="240px" alt="mail" />
           <Heading as="h1" size="lg">
-            Verfiy Your Email
+            Verify Your Email
           </Heading>
           <Flex direction="column" alignItems="center" rowGap="3xs">
             <Text textAlign="center">

@@ -76,7 +76,7 @@ export class SignUpStudentDto {
   @IsEmail()
   email: string;
 
-  @IsNotEmpty()
+@IsNotEmpty()
   @IsString()
   password: string;
 
@@ -98,11 +98,6 @@ export class UpdateStudentDto {
   @IsNotEmpty()
   @IsEmail()
   email?: string;
-
-  @IsOptional()
-  @IsNotEmpty()
-  @IsString()
-  password?: string;
 
   @IsOptional()
   @IsInt()
@@ -207,4 +202,18 @@ export class ConfirmEmailDto {
   @IsString()
   @IsNotEmpty()
   token: string;
+}
+
+export class ChangePasswordDto {
+  @IsString()
+  @IsNotEmpty()
+  currentPassword: string;
+
+  @IsString()
+  @IsNotEmpty()
+  newPassword: string;
+
+  @IsString()
+  @IsNotEmpty()
+  newPasswordConfirm: string;
 }

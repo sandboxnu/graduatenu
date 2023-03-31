@@ -16,6 +16,7 @@ import {
   Major2,
   GetSupportedMajorsResponse,
   ConfirmEmailDto,
+  ChangePasswordDto,
 } from "@graduate/common";
 import { ClassConstructor, plainToInstance } from "class-transformer";
 
@@ -70,6 +71,7 @@ class APIClient {
         isWithPlans: true,
       }),
     delete: (): Promise<void> => this.req("DELETE", "students/me"),
+    changePassword: (body: ChangePasswordDto): Promise<void> => this.req("POST", "/students/changePassword", undefined, body)
   };
 
   plans = {
@@ -102,6 +104,27 @@ interface SearchClass {
   coreqs?: INEUAndReq | INEUOrReq;
   maxCredits: number;
   minCredits: number;
+  termId: string;
+}
+
+function occurrencesToCourseByCatalogYear(
+  occurrences: SearchClass[],
+  catalogYear: number
+): ScheduleCourse2<null> {
+  if (!occurrences || occurrences.length === 0) {
+    throw Error("Course not found");
+  }
+
+  for (const occurrence of occurrences) {
+    const year = occurrence.termId.slice(0, 4);
+
+    if (year + 1 === catalogYear.toString()) {
+      return occurrenceToCourse(occurrence);
+    }
+  }
+
+  // if course not found for given catalog year, return the latest occurrence
+  return occurrenceToCourse(occurrences[0]);
 }
 
 function occurrenceToCourse(occurrence: SearchClass): ScheduleCourse2<null> {
@@ -130,14 +153,15 @@ class SearchAPIClient {
 
   fetchCourse = async (
     subject: string,
-    classId: string
+    classId: string,
+    catalogYear: number
   ): Promise<ScheduleCourse2<null>> => {
     const res = await this.axios({
       method: "post",
       data: {
         query: `{ 
           class(subject: "${subject}", classId: "${classId}") {
-            latestOccurrence {
+            allOccurrences {
               name
               subject
               classId
@@ -152,15 +176,19 @@ class SearchAPIClient {
     });
 
     const courseData = await res.data.data;
-    if (courseData && courseData.class && courseData.class.latestOccurrence) {
-      return occurrenceToCourse(courseData?.class?.latestOccurrence);
+    if (courseData && courseData.class && courseData.class.allOccurrences) {
+      return occurrencesToCourseByCatalogYear(
+        courseData?.class?.allOccurrences,
+        catalogYear
+      );
     } else {
       throw Error("Course not found!");
     }
   };
 
   fetchCourses = async (
-    courses: { subject: string; classId: string }[]
+    courses: { subject: string; classId: string }[],
+    catalogYear: number
   ): Promise<ScheduleCourse2<null>[]> => {
     const input = courses
       .map((course) => {
@@ -173,7 +201,7 @@ class SearchAPIClient {
       data: {
         query: `{
         bulkClasses(input: [${input}]) {
-          latestOccurrence {
+          allOccurrences {
             name
             subject
             classId
@@ -192,7 +220,10 @@ class SearchAPIClient {
 
     if (coursesData.bulkClasses) {
       return coursesData.bulkClasses.map((course: any) => {
-        return occurrenceToCourse(course?.latestOccurrence);
+        return occurrencesToCourseByCatalogYear(
+          course?.allOccurrences,
+          catalogYear
+        );
       });
     } else {
       throw Error("Courses could not be fetched");

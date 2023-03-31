@@ -17,6 +17,7 @@ interface ToggleYearProps {
 
 interface ScheduleYearProps extends ToggleYearProps {
   scheduleYear: ScheduleYear2<string>;
+  catalogYear: number;
   yearCoReqError?: YearError;
   yearPreReqError?: YearError;
 
@@ -41,6 +42,7 @@ interface ScheduleYearProps extends ToggleYearProps {
 
 export const ScheduleYear: React.FC<ScheduleYearProps> = ({
   scheduleYear,
+  catalogYear,
   addClassesToTermInCurrPlan,
   removeCourseFromTermInCurrPlan,
   isExpanded,
@@ -97,6 +99,7 @@ export const ScheduleYear: React.FC<ScheduleYearProps> = ({
         <Grid templateColumns="repeat(4, 1fr)" minHeight="220px">
           <ScheduleTerm
             yearNum={scheduleYear.year}
+            catalogYear={catalogYear}
             termCoReqErr={yearCoReqError?.fall}
             termPreReqErr={yearPreReqError?.fall}
             scheduleTerm={scheduleYear.fall}
@@ -106,6 +109,7 @@ export const ScheduleYear: React.FC<ScheduleYearProps> = ({
           />
           <ScheduleTerm
             yearNum={scheduleYear.year}
+            catalogYear={catalogYear}
             termCoReqErr={yearCoReqError?.spring}
             termPreReqErr={yearPreReqError?.spring}
             scheduleTerm={scheduleYear.spring}
@@ -115,6 +119,7 @@ export const ScheduleYear: React.FC<ScheduleYearProps> = ({
           />
           {/* TODO: support summer full term */}
           <ScheduleTerm
+            catalogYear={catalogYear}
             yearNum={scheduleYear.year}
             termCoReqErr={yearCoReqError?.summer1}
             termPreReqErr={yearPreReqError?.summer1}
@@ -124,6 +129,7 @@ export const ScheduleYear: React.FC<ScheduleYearProps> = ({
             setIsRemove={setIsRemove}
           />
           <ScheduleTerm
+            catalogYear={catalogYear}
             yearNum={scheduleYear.year}
             termCoReqErr={yearCoReqError?.summer2}
             termPreReqErr={yearPreReqError?.summer2}
