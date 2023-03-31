@@ -87,6 +87,7 @@ interface TransferCoursesBodyProps {
   transferCourses: ScheduleCourse2<null>[];
   addTransferCourses: (newTransferCourses: ScheduleCourse2<null>[]) => void;
 }
+
 const TransferCoursesBody: React.FC<TransferCoursesBodyProps> = ({
   transferCourses,
   addTransferCourses,

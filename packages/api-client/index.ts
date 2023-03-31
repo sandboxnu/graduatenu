@@ -71,7 +71,8 @@ class APIClient {
         isWithPlans: true,
       }),
     delete: (): Promise<void> => this.req("DELETE", "students/me"),
-    changePassword: (body: ChangePasswordDto): Promise<void> => this.req("POST", "/students/changePassword", undefined, body)
+    changePassword: (body: ChangePasswordDto): Promise<void> =>
+      this.req("POST", "/students/changePassword", undefined, body),
   };
 
   plans = {
@@ -109,10 +110,14 @@ interface SearchClass {
 
 function occurrencesToCourseByCatalogYear(
   occurrences: SearchClass[],
-  catalogYear: number
+  catalogYear?: number
 ): ScheduleCourse2<null> {
   if (!occurrences || occurrences.length === 0) {
     throw Error("Course not found");
+  }
+
+  if (!catalogYear) {
+    return occurrenceToCourse(occurrences[0]);
   }
 
   for (const occurrence of occurrences) {
@@ -151,10 +156,17 @@ class SearchAPIClient {
     this.axios = Axios.create({ baseURL: baseURL });
   }
 
+  /**
+   * Fetch a course for a given major catalog year. The catalog year determines
+   * the co-reqs and pre-reqs for the course.
+   *
+   * If not specified(we don't care about the pre-reqs and co-reqs), then return
+   * the course for any catalog year.
+   */
   fetchCourse = async (
     subject: string,
     classId: string,
-    catalogYear: number
+    catalogYear?: number
   ): Promise<ScheduleCourse2<null>> => {
     const res = await this.axios({
       method: "post",

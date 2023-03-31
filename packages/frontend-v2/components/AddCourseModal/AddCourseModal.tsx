@@ -27,7 +27,7 @@ import { SelectedCourse } from "./SelectedCourse";
 
 interface AddCourseModalProps {
   isOpen: boolean;
-  catalogYear: number;
+  catalogYear?: number;
   /** Function to close the modal UX, returned from the useDisclosure chakra hook */
   closeModalDisplay: () => void;
 
