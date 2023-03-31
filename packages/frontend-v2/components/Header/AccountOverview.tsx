@@ -52,8 +52,8 @@ export const AccountOverview: React.FC<AccountOverviewProps> = ({
 
   useEffect(() => {
     reset({
-      firstName: student.fullName.split(" ")[0],
-      lastName: student.fullName.split(" ")[1],
+      firstName: student.fullName?.split(" ")[0],
+      lastName: student.fullName?.split(" ")[1],
     });
   }, [reset, student]);
 
@@ -93,7 +93,6 @@ export const AccountOverview: React.FC<AccountOverviewProps> = ({
             <Flex rowGap="lg" direction="column">
               <Flex columnGap="md">
                 <GraduateInput
-                  defaultValue={student.fullName.split(" ")[0]}
                   type="text"
                   formLabel="First Name"
                   id="firstName"

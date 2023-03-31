@@ -24,10 +24,10 @@ export class GetPlanResponse extends PlanModel<null> {}
 export class UpdatePlanResponse extends PlanModel<null> {}
 
 export class StudentModel<T> {
-  uuid: string;
-  nuid: string;
+  uuid: string | undefined;
+  nuid: string | undefined;
   isOnboarded: boolean;
-  fullName: string;
+  fullName: string | undefined;
   email: string;
   isEmailConfirmed: boolean;
   academicYear: number | undefined;
@@ -37,7 +37,7 @@ export class StudentModel<T> {
   coopCycle: string | undefined;
   coursesCompleted: ScheduleCourse[] | undefined;
   coursesTransfered: ScheduleCourse2<null>[] | undefined;
-  primaryPlanId: number;
+  primaryPlanId: number | undefined;
   plans: PlanModel<T>[];
   concentration: string | undefined;
   createdAt: Date;
