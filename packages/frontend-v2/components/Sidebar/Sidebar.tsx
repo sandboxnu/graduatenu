@@ -1,4 +1,4 @@
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import {
   MajorValidationError,
   MajorValidationResult,
@@ -10,7 +10,11 @@ import { DraggableScheduleCourse } from "../ScheduleCourse";
 import SidebarSection from "./SidebarSection";
 import { getAllCoursesFromPlan } from "../../utils/plan/getAllCoursesFromPlan";
 import { getSectionError } from "../../utils/plan/getSectionError";
-import { handleApiClientError, SIDEBAR_DND_ID_PREFIX } from "../../utils";
+import {
+  handleApiClientError,
+  SIDEBAR_DND_ID_PREFIX,
+  totalCreditsInSchedule,
+} from "../../utils";
 import axios, { AxiosError } from "axios";
 import { useRouter } from "next/router";
 import { useMajor } from "../../hooks/useMajor";
@@ -38,7 +42,7 @@ export const COOP_BLOCK: ScheduleCourse2<string> = {
   classId: "Experiential Learning",
   subject: "",
   numCreditsMax: 8,
-  numCreditsMin: 8,
+  numCreditsMin: 0,
   id: `${SIDEBAR_DND_ID_PREFIX}-co-op-block"`,
 };
 
@@ -180,17 +184,14 @@ const Sidebar: React.FC<SidebarProps> = memo(
       concentrationValidationStatus = SidebarValidationStatus.Error;
     }
 
+    const totalCreditsTaken = totalCreditsInSchedule(selectedPlan.schedule);
+
     return (
       <SidebarContainer
         title={major.name}
         subtitle={selectedPlan.concentration}
+        credits={totalCreditsTaken}
       >
-        <Box padding="10px 20px 15px 20px">
-          <DraggableScheduleCourse
-            scheduleCourse={COOP_BLOCK}
-            isDisabled={false}
-          />
-        </Box>
         {courseData && (
           <>
             {major.requirementSections.map((section, index) => {
@@ -233,26 +234,46 @@ const Sidebar: React.FC<SidebarProps> = memo(
 interface SidebarContainerProps {
   title: string;
   subtitle?: string;
+  credits?: number;
 }
 
 export const SidebarContainer: React.FC<
   PropsWithChildren<SidebarContainerProps>
-> = ({ title, subtitle, children }) => {
+> = ({ title, subtitle, credits, children }) => {
   return (
-    <Box p="xs 0px" backgroundColor="neutral.main">
-      <Box py="lg" px="sm">
-        <Text fontSize="xl" color="primary.red.main" fontWeight={700}>
-          {title}
-        </Text>
-        {subtitle && (
-          <Text
-            fontSize="md"
+    <Box pt="xl" backgroundColor="neutral.main">
+      <Box px="md" pb="md">
+        <Box pb="sm">
+          <Heading
+            as="h1"
+            fontSize="2xl"
             color="primary.blue.dark.main"
-            fontWeight="semibold"
+            fontWeight="bold"
           >
-            {subtitle}
-          </Text>
+            {title}
+          </Heading>
+          {subtitle && (
+            <Text fontSize="sm" color="primary.blue.dark.main">
+              {subtitle}
+            </Text>
+          )}
+        </Box>
+        {credits && (
+          <Flex mb="sm" alignItems="baseline" columnGap="xs">
+            <Text
+              fontSize="2xl"
+              color="primary.blue.dark.main"
+              fontWeight="bold"
+            >
+              {credits}
+            </Text>
+            <Text color="primary.blue.dark.main">Completed Credits</Text>
+          </Flex>
         )}
+        <DraggableScheduleCourse
+          scheduleCourse={COOP_BLOCK}
+          isDisabled={false}
+        />
       </Box>
       {children}
     </Box>
