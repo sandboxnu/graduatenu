@@ -24,6 +24,7 @@ import { getAllCoursesInMajor } from "../../utils/plan/getAllCoursesInMajor";
 
 interface SidebarProps {
   selectedPlan: PlanModel<string>;
+  transferCourses: ScheduleCourse2<unknown>[];
 }
 
 export enum SidebarValidationStatus {
@@ -60,163 +61,174 @@ const createCourseMap = (
 // A number to help avoid displaying stale validation info.
 let currentRequestNum = 0;
 
-const Sidebar: React.FC<SidebarProps> = memo(({ selectedPlan }) => {
-  const router = useRouter();
-  const {
-    major,
-    isLoading: isMajorLoading,
-    error,
-  } = useMajor(selectedPlan.catalogYear, selectedPlan.major);
-  const concentration = major?.concentrations.concentrationOptions.find(
-    (concentration) => concentration.title === selectedPlan.concentration
-  );
+const Sidebar: React.FC<SidebarProps> = memo(
+  ({ selectedPlan, transferCourses }) => {
+    const router = useRouter();
+    const {
+      major,
+      isLoading: isMajorLoading,
+      error,
+    } = useMajor(selectedPlan.catalogYear, selectedPlan.major);
+    const concentration = major?.concentrations.concentrationOptions.find(
+      (concentration) => concentration.title === selectedPlan.concentration
+    );
 
-  const workerRef = useRef<Worker>();
+    const workerRef = useRef<Worker>();
 
-  const [validationStatus, setValidationStatus] = useState<
-    MajorValidationResult | undefined
-  >(undefined);
+    const [validationStatus, setValidationStatus] = useState<
+      MajorValidationResult | undefined
+    >(undefined);
 
-  const revalidateMajor = () => {
-    setValidationStatus(undefined);
-    if (!selectedPlan || !major || !workerRef.current) return;
+    const revalidateMajor = () => {
+      setValidationStatus(undefined);
+      if (!selectedPlan || !major || !workerRef.current) return;
 
-    currentRequestNum += 1;
-    const validationInfo: WorkerPostInfo = {
-      major: major,
-      taken: getAllCoursesFromPlan(selectedPlan),
-      concentration: selectedPlan.concentration,
-      requestNumber: currentRequestNum,
-    };
-    workerRef.current?.postMessage(validationInfo);
-  };
-
-  // Set up the web worker to handle major validation for us. This helps keep the
-  // UI thread free to display our app, preventing UI freezes while our schedule
-  // is being validated.
-  useEffect(() => {
-    if (!workerRef.current) {
-      workerRef.current = new Worker(
-        new URL("../../validation-worker/worker.ts", import.meta.url)
-      );
-      workerRef.current.onmessage = (message: MessageEvent<WorkerMessage>) => {
-        switch (message.data.type) {
-          case WorkerMessageType.Loaded:
-            revalidateMajor();
-            break;
-          case WorkerMessageType.ValidationResult:
-            // Only update valdation information if it was from the latest request.
-            // This helps us avoid displaying outdated information that could be sent
-            // due to race conditions.
-            if (message.data.requestNumber === currentRequestNum) {
-              setValidationStatus(message.data.result);
-            }
-
-            break;
-          default:
-            throw new Error("Invalid worker message!");
-        }
+      currentRequestNum += 1;
+      const coursesTaken = [
+        ...getAllCoursesFromPlan(selectedPlan),
+        ...transferCourses,
+      ];
+      const validationInfo: WorkerPostInfo = {
+        major: major,
+        taken: coursesTaken,
+        concentration: selectedPlan.concentration,
+        requestNumber: currentRequestNum,
       };
-    }
-    return () => {
-      workerRef.current?.terminate();
-      workerRef.current = undefined;
+      workerRef.current?.postMessage(validationInfo);
     };
+
+    // Set up the web worker to handle major validation for us. This helps keep the
+    // UI thread free to display our app, preventing UI freezes while our schedule
+    // is being validated.
+    useEffect(() => {
+      if (!workerRef.current) {
+        workerRef.current = new Worker(
+          new URL("../../validation-worker/worker.ts", import.meta.url)
+        );
+        workerRef.current.onmessage = (
+          message: MessageEvent<WorkerMessage>
+        ) => {
+          switch (message.data.type) {
+            case WorkerMessageType.Loaded:
+              revalidateMajor();
+              break;
+            case WorkerMessageType.ValidationResult:
+              // Only update valdation information if it was from the latest request.
+              // This helps us avoid displaying outdated information that could be sent
+              // due to race conditions.
+              if (message.data.requestNumber === currentRequestNum) {
+                setValidationStatus(message.data.result);
+              }
+
+              break;
+            default:
+              throw new Error("Invalid worker message!");
+          }
+        };
+      }
+      return () => {
+        workerRef.current?.terminate();
+        workerRef.current = undefined;
+      };
+      // LINT NOTE: We don't actually want a dependency to the local function
+      // revalidateMajor because it will change every time, so we're choosing
+      // to omit it here:
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    // Whenever our plan/major changes, we revalidate if the worker
+    // is initialized.
     // LINT NOTE: We don't actually want a dependency to the local function
     // revalidateMajor because it will change every time, so we're choosing
     // to omit it here:
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    useEffect(() => revalidateMajor(), [selectedPlan, major]);
 
-  // Whenever our plan/major changes, we revalidate if the worker
-  // is initialized.
-  // LINT NOTE: We don't actually want a dependency to the local function
-  // revalidateMajor because it will change every time, so we're choosing
-  // to omit it here:
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => revalidateMajor(), [selectedPlan, major]);
+    const majorCourses = getAllCoursesInMajor(major, concentration);
 
-  const majorCourses = getAllCoursesInMajor(major, concentration);
+    const {
+      courses,
+      isLoading: isCoursesLoading,
+      error: courseErrors,
+    } = useFetchCourses(majorCourses, selectedPlan.catalogYear);
 
-  const {
-    courses,
-    isLoading: isCoursesLoading,
-    error: courseErrors,
-  } = useFetchCourses(majorCourses, selectedPlan.catalogYear);
+    const courseData = createCourseMap(courses, courseErrors);
 
-  const courseData = createCourseMap(courses, courseErrors);
-
-  if (isMajorLoading) {
-    return <SidebarContainer title="Loading..." />;
-  }
-
-  if (!major) {
-    if (error) {
-      if (axios.isAxiosError(error) && error.response?.status === 404) {
-        return <SidebarContainer title="Major not found" />;
-      }
-
-      handleApiClientError(error, router);
+    if (isMajorLoading) {
+      return <SidebarContainer title="Loading..." />;
     }
 
-    return <SidebarContainer title="" />;
-  }
+    if (!major) {
+      if (error) {
+        if (axios.isAxiosError(error) && error.response?.status === 404) {
+          return <SidebarContainer title="Major not found" />;
+        }
 
-  const concentrationValidationError: MajorValidationError | undefined =
-    getSectionError(major.requirementSections.length, validationStatus);
+        handleApiClientError(error, router);
+      }
 
-  let concentrationValidationStatus = SidebarValidationStatus.Complete;
-  if (validationStatus === undefined) {
-    concentrationValidationStatus = SidebarValidationStatus.Loading;
-  } else if (concentrationValidationError) {
-    concentrationValidationStatus = SidebarValidationStatus.Error;
-  }
+      return <SidebarContainer title="" />;
+    }
 
-  return (
-    <SidebarContainer title={major.name} subtitle={selectedPlan.concentration}>
-      <Box padding="10px 20px 15px 20px">
-        <DraggableScheduleCourse
-          scheduleCourse={COOP_BLOCK}
-          isDisabled={false}
-        />
-      </Box>
-      {courseData && (
-        <>
-          {major.requirementSections.map((section, index) => {
-            const sectionValidationError: MajorValidationError | undefined =
-              getSectionError(index, validationStatus);
+    const concentrationValidationError: MajorValidationError | undefined =
+      getSectionError(major.requirementSections.length, validationStatus);
 
-            let sectionValidationStatus = SidebarValidationStatus.Complete;
-            if (validationStatus === undefined) {
-              sectionValidationStatus = SidebarValidationStatus.Loading;
-            } else if (sectionValidationError) {
-              sectionValidationStatus = SidebarValidationStatus.Error;
-            }
+    let concentrationValidationStatus = SidebarValidationStatus.Complete;
+    if (validationStatus === undefined) {
+      concentrationValidationStatus = SidebarValidationStatus.Loading;
+    } else if (concentrationValidationError) {
+      concentrationValidationStatus = SidebarValidationStatus.Error;
+    }
 
-            return (
+    return (
+      <SidebarContainer
+        title={major.name}
+        subtitle={selectedPlan.concentration}
+      >
+        <Box padding="10px 20px 15px 20px">
+          <DraggableScheduleCourse
+            scheduleCourse={COOP_BLOCK}
+            isDisabled={false}
+          />
+        </Box>
+        {courseData && (
+          <>
+            {major.requirementSections.map((section, index) => {
+              const sectionValidationError: MajorValidationError | undefined =
+                getSectionError(index, validationStatus);
+
+              let sectionValidationStatus = SidebarValidationStatus.Complete;
+              if (validationStatus === undefined) {
+                sectionValidationStatus = SidebarValidationStatus.Loading;
+              } else if (sectionValidationError) {
+                sectionValidationStatus = SidebarValidationStatus.Error;
+              }
+
+              return (
+                <SidebarSection
+                  key={section.title}
+                  section={section}
+                  validationStatus={sectionValidationStatus}
+                  courseData={courseData}
+                  dndIdPrefix={`${SIDEBAR_DND_ID_PREFIX}-${index}`}
+                  loading={isCoursesLoading}
+                />
+              );
+            })}
+            {concentration && (
               <SidebarSection
-                key={section.title}
-                section={section}
-                validationStatus={sectionValidationStatus}
+                validationStatus={concentrationValidationStatus}
+                section={concentration}
                 courseData={courseData}
-                dndIdPrefix={`${SIDEBAR_DND_ID_PREFIX}-${index}`}
-                loading={isCoursesLoading}
+                dndIdPrefix={`${SIDEBAR_DND_ID_PREFIX}-concentration`}
               />
-            );
-          })}
-          {concentration && (
-            <SidebarSection
-              validationStatus={concentrationValidationStatus}
-              section={concentration}
-              courseData={courseData}
-              dndIdPrefix={`${SIDEBAR_DND_ID_PREFIX}-concentration`}
-            />
-          )}
-        </>
-      )}
-    </SidebarContainer>
-  );
-});
+            )}
+          </>
+        )}
+      </SidebarContainer>
+    );
+  }
+);
 
 interface SidebarContainerProps {
   title: string;

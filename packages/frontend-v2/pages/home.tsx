@@ -21,7 +21,6 @@ import { useRouter } from "next/router";
 import { PropsWithChildren, useEffect, useState } from "react";
 import {
   AddPlanModal,
-  AddYearButton,
   DeletePlanModal,
   DraggedScheduleCourse,
   EditPlanModal,
@@ -203,7 +202,10 @@ const HomePage: NextPage = () => {
           {selectedPlan === undefined ? (
             <SidebarContainer title="No plan selected" />
           ) : (
-            <Sidebar selectedPlan={selectedPlan} />
+            <Sidebar
+              selectedPlan={selectedPlan}
+              transferCourses={student.coursesTransfered || []}
+            />
           )}
         </Box>
         <Box p="md" overflow="auto" flexGrow={1}>
@@ -225,21 +227,13 @@ const HomePage: NextPage = () => {
               )}
             </Flex>
             {selectedPlan && (
-              <>
-                <Plan
-                  plan={selectedPlan}
-                  coReqErr={coReqWarnings}
-                  preReqErr={preReqWarnings}
-                  mutateStudentWithUpdatedPlan={mutateStudentWithUpdatedPlan}
-                  setIsRemove={setIsRemove}
-                />
-                <Flex mt="sm">
-                  <AddYearButton
-                    plan={selectedPlan}
-                    mutateStudentWithUpdatedPlan={mutateStudentWithUpdatedPlan}
-                  />
-                </Flex>
-              </>
+              <Plan
+                plan={selectedPlan}
+                coReqErr={coReqWarnings}
+                preReqErr={preReqWarnings}
+                mutateStudentWithUpdatedPlan={mutateStudentWithUpdatedPlan}
+                setIsRemove={setIsRemove}
+              />
             )}
           </Flex>
         </Box>

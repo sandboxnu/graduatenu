@@ -3,13 +3,15 @@ import {
   ChevronUpIcon,
   InfoOutlineIcon,
 } from "@chakra-ui/icons";
-import { Flex, Grid, Text, useDisclosure } from "@chakra-ui/react";
+import { Flex, Grid, Stack, Text, useDisclosure } from "@chakra-ui/react";
 import { API } from "@graduate/api-client";
 import { ScheduleCourse2, StudentModel } from "@graduate/common";
+import { useRouter } from "next/router";
 import { fetchStudentAndPrepareForDnd, useStudentWithPlans } from "../../hooks";
 import {
   cleanDndIdsFromStudent,
   getCourseDisplayString,
+  handleApiClientError,
   isEqualCourses,
 } from "../../utils";
 import { AddCourseButton, AddCourseModal } from "../AddCourseModal";
@@ -26,6 +28,8 @@ export const TransferCourses: React.FC<TransferCoursesToggleProps> = ({
   toggleExpanded,
 }) => {
   const { student, isLoading, mutateStudent } = useStudentWithPlans();
+  const router = useRouter();
+
   /*
   Simply refrain from displaying the transfer courses section if 
   the student can't be fetched. Top level page would've handled
@@ -45,15 +49,17 @@ export const TransferCourses: React.FC<TransferCoursesToggleProps> = ({
     0
   );
 
-  const addTransferCourses = (newTransferCourses: ScheduleCourse2<null>[]) => {
+  const updateTransferCourses = (
+    updatedTransferCourses: ScheduleCourse2<null>[]
+  ) => {
     const updatedStudent: StudentModel<string> = {
       ...student,
-      coursesTransfered: [...transferCourses, ...newTransferCourses],
+      coursesTransfered: updatedTransferCourses,
     };
 
     mutateStudent(
       async () => {
-        // have to clean all dnd ids before mutating the student
+        // have to clean all dnd ids before sending the student to our API
         const studentWithoutDndIds = cleanDndIdsFromStudent(updatedStudent);
         await API.student.update(studentWithoutDndIds);
         return fetchStudentAndPrepareForDnd();
@@ -63,7 +69,9 @@ export const TransferCourses: React.FC<TransferCoursesToggleProps> = ({
         rollbackOnError: true,
         revalidate: false,
       }
-    );
+    ).catch((error) => {
+      handleApiClientError(error, router);
+    });
   };
 
   return (
@@ -76,7 +84,7 @@ export const TransferCourses: React.FC<TransferCoursesToggleProps> = ({
       {isExpanded && (
         <TransferCoursesBody
           transferCourses={transferCourses}
-          addTransferCourses={addTransferCourses}
+          updateTransferCourses={updateTransferCourses}
         />
       )}
     </Flex>
@@ -85,12 +93,14 @@ export const TransferCourses: React.FC<TransferCoursesToggleProps> = ({
 
 interface TransferCoursesBodyProps {
   transferCourses: ScheduleCourse2<null>[];
-  addTransferCourses: (newTransferCourses: ScheduleCourse2<null>[]) => void;
+  updateTransferCourses: (
+    updateTransferCourses: ScheduleCourse2<null>[]
+  ) => void;
 }
 
 const TransferCoursesBody: React.FC<TransferCoursesBodyProps> = ({
   transferCourses,
-  addTransferCourses,
+  updateTransferCourses,
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -98,6 +108,17 @@ const TransferCoursesBody: React.FC<TransferCoursesBodyProps> = ({
     return transferCourses.some((transferCourse) =>
       isEqualCourses(transferCourse, course)
     );
+  };
+
+  const addTransferCourses = (newTransferCourses: ScheduleCourse2<null>[]) => {
+    updateTransferCourses([...transferCourses, ...newTransferCourses]);
+  };
+
+  const removeTransferCourse = (courseToRemove: ScheduleCourse2<null>) => {
+    const updatedTransferCourses = transferCourses.filter(
+      (transferCourse) => !isEqualCourses(courseToRemove, transferCourse)
+    );
+    updateTransferCourses(updatedTransferCourses);
   };
 
   return (
@@ -112,6 +133,7 @@ const TransferCoursesBody: React.FC<TransferCoursesBodyProps> = ({
         <NonDraggableScheduleCourse
           key={getCourseDisplayString(course)}
           scheduleCourse={course}
+          removeCourse={() => removeTransferCourse(course)}
         />
       ))}
       <AddCourseButton
@@ -139,6 +161,19 @@ const TransferCoursesHeader: React.FC<TransferCoursesHeaderProps> = ({
   toggleExpanded,
   totalTransferCredits,
 }) => {
+  const transferCoursesHelperText = (
+    <Stack>
+      <Text>Northeastern courses that you have credits for.</Text>
+      <Text>
+        These are courses you do not need to take because you complete advanced
+        examinations in high school or college-level courses at an accredited
+        higher education institution.
+      </Text>
+      <Text>
+        We use this data to check the requirements you satisfy for you major.
+      </Text>
+    </Stack>
+  );
   return (
     <Flex
       alignItems="center"
@@ -161,10 +196,7 @@ const TransferCoursesHeader: React.FC<TransferCoursesHeaderProps> = ({
           <Text color="primary.blue.dark.main" fontWeight="bold">
             Your Transfer Courses
           </Text>
-          <GraduateToolTip
-            label="Northeastern courses that you have credits for."
-            placement="top"
-          >
+          <GraduateToolTip label={transferCoursesHelperText} placement="top">
             <InfoOutlineIcon />
           </GraduateToolTip>
         </Flex>

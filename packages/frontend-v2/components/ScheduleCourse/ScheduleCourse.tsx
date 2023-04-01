@@ -97,12 +97,20 @@ export const DraggedScheduleCourse: React.FC<DraggedScheduleCourseProps> = ({
 
 interface NonDraggableScheduleCourseProps {
   scheduleCourse: ScheduleCourse2<unknown>;
+  removeCourse: (course: ScheduleCourse2<unknown>) => void;
 }
 
 export const NonDraggableScheduleCourse: React.FC<
   NonDraggableScheduleCourseProps
-> = ({ scheduleCourse }) => {
-  return <ScheduleCourse scheduleCourse={scheduleCourse} isDisabled={false} />;
+> = ({ scheduleCourse, removeCourse }) => {
+  return (
+    <ScheduleCourse
+      scheduleCourse={scheduleCourse}
+      isDisabled={false}
+      isEditable={true}
+      removeCourse={removeCourse}
+    />
+  );
 };
 
 interface PlaceholderScheduleCourseProps {

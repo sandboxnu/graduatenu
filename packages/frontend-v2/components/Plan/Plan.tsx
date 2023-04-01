@@ -13,6 +13,7 @@ import { removeCourseFromTerm } from "../../utils/";
 import { ScheduleYear } from "./ScheduleYear";
 import { useDroppable } from "@dnd-kit/core";
 import { TransferCourses } from "./TransferCourses";
+import { AddYearButton } from "./AddYearButton";
 
 interface PlanProps {
   plan: PlanModel<string>;
@@ -143,6 +144,12 @@ export const Plan: React.FC<PlanProps> = ({
             </Flex>
           );
         })}
+      </Flex>
+      <Flex>
+        <AddYearButton
+          plan={plan}
+          mutateStudentWithUpdatedPlan={mutateStudentWithUpdatedPlan}
+        />
       </Flex>
       <Divider borderColor="neutral.900" borderWidth={1} />
       <TransferCourses
