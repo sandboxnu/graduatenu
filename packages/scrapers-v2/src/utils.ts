@@ -85,3 +85,19 @@ export const parseText = (td: Cheerio) => {
   // replace &NBSP with space
   return td.text().replaceAll("\xa0", " ").trim();
 };
+
+/**
+ * Exits the whole program with an error message.
+ * 
+ * Should be used only when the trace isn't going to matter and you want a 
+ * slightly cleaner error message (good for command line arg errors for example).
+ * 
+ * To use this you may have to "return" the value to convince TypeScript that the 
+ * program won't keep running, but since the type is "never", you won't have to
+ * modify the function signature.
+ * @param message the error message to exit with.
+ */
+export const fatalError = (message: string): never => {
+  console.error(message)
+  process.exit(1)
+}

@@ -2,7 +2,7 @@ import { loadHtmlWithUrl } from "../utils";
 import { CatalogURLResult, College } from "./types";
 import { ResultType } from "@graduate/common";
 import { join } from "path";
-import { BASE_URL } from "../constants";
+import { BASE_URL, CURRENT_CATALOG_YEAR, EARLIEST_CATALOG_YEAR } from "../constants";
 
 /**
  * Scrapes all catalog entries underneath the colleges for the specified catalog
@@ -13,25 +13,25 @@ import { BASE_URL } from "../constants";
  * @returns       A hierarchy of catalog entry links
  */
 export const scrapeMajorLinks = async (
-  start: number,
-  end: number
+  start: number
 ): Promise<CatalogURLResult> => {
-  if (start !== end - 1) {
-    throw new Error("start should == end-1");
-  }
-
-  if (start < 2016) {
+  if (start < EARLIEST_CATALOG_YEAR) {
     // this is because there is no HTML version of those catalogs
-    throw new Error("scraping for years before 2016-2017 are not supported");
+    throw new Error("Scraping for years before 2016-2017 is not supported.");
+  } else if (start > CURRENT_CATALOG_YEAR) {
+    throw new Error(
+      "Either you're scraping for a year in the future (which won't work unless time travel has been invented since this message was written), or you need to update CURRENT_CATALOG_YEAR in constants.ts."
+    );
   }
 
-  if (start !== 2021) {
-    // todo: implement generic scraping from overall archive
-    // https://registrar.northeastern.edu/group/academic-catalogs/
-    throw new Error("only current year is supported");
+  if (start === CURRENT_CATALOG_YEAR) {
+    return scrapeMajorLinksForUrl(BASE_URL, "undergraduate");
+  } else {
+    return scrapeMajorLinksForUrl(
+      BASE_URL,
+      `archive/${start}-${start + 1}/undergraduate`
+    );
   }
-
-  return scrapeMajorLinksForUrl(BASE_URL, "archive/2021-2022/undergraduate");
 };
 
 /**
@@ -84,9 +84,10 @@ const scrapeLinks = async (
       for (const element of children) {
         const path = getLinkForEl(element);
         const url = new URL(join(baseUrl, path));
-        if (!seen.has(url.href) && 
-          Object.values(College).some(linkPart => url.href.includes(linkPart))) {
-            
+        if (
+          !seen.has(url.href) &&
+          Object.values(College).some((linkPart) => url.href.includes(linkPart))
+        ) {
           const bucket = isParent(element) ? nextQueue : entries;
           bucket.push(url);
           seen.add(url.href);
@@ -118,10 +119,10 @@ const getChildrenForPathId = ($: CheerioStatic, url: URL) => {
   // We select the element via its ID
   // Note: for getElementById, forward slashes need to be escaped
   let id = url.pathname;
-  
+
   // Remove archive url prefix if present
-  id = id.replaceAll(/^\/archive\/20\d\d-20\d\d/g, "")
-  id = id.replaceAll("/", "\\/")
+  id = id.replaceAll(/^\/archive\/20\d\d-20\d\d/g, "");
+  id = id.replaceAll("/", "\\/");
 
   const current = $(`#${id}`);
   return current.children();

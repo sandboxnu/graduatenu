@@ -48,8 +48,10 @@ export const fetchAndTokenizeHTML = async (url: URL): Promise<HDocument> => {
   const html = await wrappedGetRequest(url.href);
   const token = await tokenizeHTML(cheerio.load(html));
   const majorName = token.majorName;
+  const year = token.yearVersion;
   const degree = majorName.includes("Minor") ? "minor" : "major";
-  const filePath = `./results/${degree}/${majorName}`;
+
+  const filePath = join("results", degree, majorName);
   if (!existsSync("./results")) {
     await mkdir("./results");
   }
@@ -65,8 +67,8 @@ export const fetchAndTokenizeHTML = async (url: URL): Promise<HDocument> => {
   if (!existsSync(filePath)) {
     await mkdir(filePath);
   }
-  await writeFile(`${filePath}/pre_tokenized.html`, html);
-  await writeFile(`${filePath}/token.json`, JSON.stringify(token, null, 2));
+  await writeFile(`${filePath}/html-${year}.html`, html);
+  await writeFile(`${filePath}/tokens-${year}.json`, JSON.stringify(token, null, 2));
   return token;
 };
 

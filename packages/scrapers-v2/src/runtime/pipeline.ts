@@ -26,9 +26,9 @@ import { saveComment } from "./saveComment";
  * Currently, does nothing with the output. To run from cli, run `yarn scrape`
  * in `scrapers-v2` dir. Also see `main.ts`.
  */
-export const runPipeline = async (yearStart: number, yearEnd: number) => {
+export const runPipeline = async (yearStart: number) => {
   const unregisterAgent = createAgent();
-  const { entries, unfinished } = await scrapeMajorLinks(yearStart, yearEnd);
+  const { entries, unfinished } = await scrapeMajorLinks(yearStart);
   const comments = new Map();
   // const { entries, unfinished } = {
   //   entries: [new URL("https://catalog.northeastern.edu/archive/2021-2022/undergraduate/science/linguistics/linguistics-english-ba/")],
@@ -221,8 +221,9 @@ const saveResults = async (
   entry: ParsedCatalogEntry
 ): Promise<ParsedCatalogEntry> => {
   const name = entry.parsed.name;
+  const year = entry.parsed.yearVersion;
   const degree = name.includes("Minor") ? "minor" : "major";
-  const filePath = `./results/${degree}/${name}/parsed.json`;
+  const filePath = `./results/${degree}/${name}/parsed-${year}.json`;
   return writeFile(filePath, JSON.stringify(entry.parsed, null, 2))
     .then(() => {
       // console.log("wrote file: " + path)
