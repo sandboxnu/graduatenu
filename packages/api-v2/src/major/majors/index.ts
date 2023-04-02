@@ -1,5 +1,11 @@
 import { Major2 } from "@graduate/common";
-import { SUPPORED_MAJORS_NAMES_2022, SUPPORTED_MAJORS_2022 } from "./2022";
+import * as computer_science_bscs_2022 from "./computer-science-bscs/computer-science-bscs-2022.json";
+
+const SUPPORTED_MAJORS_2022: Record<string, Major2> = {
+  "Computer Science, BSCS": computer_science_bscs_2022 as any,
+};
+
+const SUPPORED_MAJORS_NAMES_2022 = Object.keys(SUPPORTED_MAJORS_2022);
 
 /** Year => { Major Name => Major2, Supported Major Names => [Major Name] } */
 export const SUPPORTED_MAJORS: Record<
