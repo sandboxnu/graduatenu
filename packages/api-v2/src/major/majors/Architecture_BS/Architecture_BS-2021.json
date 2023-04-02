@@ -1,0 +1,307 @@
+{
+  "name": "Architecture, BS",
+  "totalCreditsRequired": 142,
+  "yearVersion": 2021,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "SEMESTER 1",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1000,
+          "subject": "ARCH"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARCH",
+              "classId": 1310,
+              "description": "Buildings and Cities, A Global History",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARCH",
+              "classId": 1311,
+              "description": "Recitation for ARCH 1310",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "SEMESTER 2",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1110,
+          "subject": "ARCH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1120,
+          "subject": "ARCH"
+        },
+        {
+          "type": "RANGE",
+          "subject": "ARCH",
+          "idRangeStart": 2300,
+          "idRangeEnd": 2399,
+          "exceptions": []
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "SEMESTER 3",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2130,
+          "subject": "ARCH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2240,
+          "subject": "ARCH"
+        },
+        {
+          "type": "RANGE",
+          "subject": "ARCH",
+          "idRangeStart": 2300,
+          "idRangeEnd": 2399,
+          "exceptions": []
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "SEMESTER 4",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2140,
+          "subject": "ARCH"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARCH",
+              "classId": 2340,
+              "description": "Modern Architecture",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARCH",
+              "classId": 2341,
+              "description": "Recitation for ARCH 2340",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARCH",
+              "classId": 3210,
+              "description": "Environmental Systems",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARCH",
+              "classId": 3211,
+              "description": "Recitation for ARCH 3210",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 3450,
+          "subject": "ARCH"
+        }
+      ],
+      "minRequirementCount": 4
+    },
+    {
+      "type": "SECTION",
+      "title": "SEMESTER 5",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3155,
+          "subject": "ARCH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3361,
+          "subject": "ARCH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3363,
+          "subject": "ARCH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3363,
+          "subject": "ARCH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3440,
+          "subject": "ARCH"
+        }
+      ],
+      "minRequirementCount": 5
+    },
+    {
+      "type": "SECTION",
+      "title": "SEMESTER 6",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3170,
+          "subject": "ARCH"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARCH",
+              "classId": 5230,
+              "description": "Structural Systems",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARCH",
+              "classId": 5231,
+              "description": "Recitation for ARCH 5230",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "SEMESTER 7",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3370,
+          "subject": "ARCH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5115,
+          "subject": "ARCH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5310,
+          "subject": "ARCH"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "SEMESTER 8",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 5120,
+          "subject": "ARCH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5220,
+          "subject": "ARCH"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "SEMESTER 1",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1111,
+          "subject": "ENGW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1241,
+          "subject": "MATH"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "SEMESTER 2",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1141,
+          "subject": "PHYS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2000,
+          "subject": "EEAM"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "SEMESTER 6",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3314,
+              "subject": "ENGW"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3315,
+              "subject": "ENGW"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Cooperative Education",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3945,
+          "subject": "COOP"
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}
