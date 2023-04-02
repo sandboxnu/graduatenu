@@ -11,6 +11,8 @@ import {
 import { AuthService } from "./auth.service";
 import {
   emailAlreadyExistsError,
+  emailDoesNotExistError,
+  emailHasNotBeenConfirmed,
   ForgotPasswordDto,
   GetStudentResponse,
   LoginStudentDto,
@@ -95,18 +97,17 @@ export class AuthController {
     const student = await this.authService.forgotPassword(forgotPasswordData.email);
 
     if (student instanceof NoSuchEmail) {
-      throw new BadRequestException("Email does not exist")
+      throw new BadRequestException(emailDoesNotExistError)
     }
     if (student instanceof EmailNotConfirmed) {
-      throw new BadRequestException('Email has not been confirmed')
+      throw new BadRequestException(emailHasNotBeenConfirmed)
     }
   }
 
   @Post("reset-password")
   public async resetPassword(
-    @Res({passthrough: true}) response: Response,
     @Body() resetPasswordData: ResetPasswordDto
-  ): Promise<GetStudentResponse | Error> {
+  ): Promise<void | Error> {
     const email = await this.authService.decodeResetPassToken(resetPasswordData.token)
     // Unsure what errors to write here
     if (email instanceof InvalidPayload) {
@@ -124,20 +125,9 @@ export class AuthController {
 
     const resetPasswordResult = await this.authService.resetPassword(email, resetPasswordData);
     if (resetPasswordResult instanceof WeakPassword) {
-      throw new BadRequestException("Weak Password")
+      throw new BadRequestException(weakPasswordError)
     }
 
-    const { accessToken } = resetPasswordResult;
-
-    const isSecure = process.env.NODE_ENV !== "development";
-    // Store JWT token in a cookie
-    response.cookie("auth_cookie", accessToken, {
-      httpOnly: true,
-      sameSite: "strict",
-      secure: isSecure,
-    });
-
-    return resetPasswordResult; 
   }
 
   @Get("logout")

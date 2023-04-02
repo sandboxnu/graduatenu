@@ -3,10 +3,11 @@ import { API } from "@graduate/api-client";
 import { ForgotPasswordDto } from "@graduate/common";
 import { AxiosError } from "axios";
 import { NextPage } from "next";
-import { NextRouter, useRouter } from "next/router";
-import { SetStateAction, useState } from "react";
+import { useRouter } from "next/router";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import {
+  ForgotPasswordForm,
   GraduateInput,
   GraduateLink,
   GraduatePreAuthHeader,
@@ -24,17 +25,10 @@ const ForgotPassword: NextPage = () => {
   );
 };
 
-interface ForgotPasswordFormProps {
-  setSubmitted: (submitted: SetStateAction<boolean>) => void;
-  router: NextRouter;
-  setEmail: (email: SetStateAction<string>) => void;
-}
-
-const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({
-  setSubmitted,
-  router,
-  setEmail,
-}) => {
+const ForgotPasswordContent: React.FC = () => {
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [email, setEmail] = useState("");
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -48,71 +42,12 @@ const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({
     try {
       await API.auth.forgotPassword(payload);
       setEmail(payload.email);
-      setSubmitted(true);
+      setIsSubmitted(true);
     } catch (err) {
       const error = err as AxiosError;
       handleApiClientError(error, router);
     }
   };
-
-  return (
-    <Flex
-      shadow="2xl"
-      px="4xl"
-      py="2xl"
-      borderRadius="2xl"
-      width="xl"
-      justifyContent="center"
-      as="form"
-      onSubmit={handleSubmit(onSubmitHandler)}
-      alignItems="center"
-      direction="column"
-      rowGap="2xl"
-    >
-      <Flex direction="column" alignItems="center" rowGap="sm">
-        <Heading as="h1" size="xl">
-          Forgot Password?
-        </Heading>
-        <Text size="xs" textAlign='center'>
-          No worries, we&apos;ll make email you instructions to reset your
-          password.
-        </Text>
-      </Flex>
-
-      <Flex direction="column" width="100%" rowGap="md">
-        <GraduateInput
-          id="email"
-          placeholder="Email"
-          error={errors.email}
-          type="email"
-          {...register("email", {
-            required: "Email is required",
-            pattern: {
-              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-              message: "Invalid email address",
-            },
-          })}
-        />
-        <Button
-          variant="solid"
-          borderRadius="lg"
-          isLoading={isSubmitting}
-          isDisabled={Object.keys(errors).length > 0}
-          type="submit"
-        >
-          Reset Password
-        </Button>
-      </Flex>
-
-      <GraduateLink href="/login" text="Back to login" />
-    </Flex>
-  );
-};
-
-const ForgotPasswordContent: React.FC = () => {
-  const [submitted, setSubmitted] = useState(false);
-  const [email, setEmail] = useState("");
-  const router = useRouter();
 
   const resendEmail = async () => {
     try {
@@ -130,11 +65,39 @@ const ForgotPasswordContent: React.FC = () => {
 
   return (
     <>
-      {!submitted ? (
+      {!isSubmitted ? (
         <ForgotPasswordForm
-          setEmail={setEmail}
-          setSubmitted={setSubmitted}
-          router={router}
+          onSubmit={handleSubmit(onSubmitHandler)}
+          headingText="Forgot Password?"
+          subheaderText="No worries, we'll make email you instructions to reset your
+          password."
+          mainContent={
+            <>
+              <GraduateInput
+                id="email"
+                placeholder="Email"
+                error={errors.email}
+                type="email"
+                {...register("email", {
+                  required: "Email is required",
+                  pattern: {
+                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                    message: "Invalid email address",
+                  },
+                })}
+              />
+              <Button
+                variant="solid"
+                borderRadius="lg"
+                isLoading={isSubmitting}
+                isDisabled={Object.keys(errors).length > 0}
+                type="submit"
+              >
+                Reset Password
+              </Button>
+            </>
+          }
+          footer={<GraduateLink href="/login" text="Back to login" />}
         />
       ) : (
         <Flex
@@ -148,13 +111,12 @@ const ForgotPasswordContent: React.FC = () => {
           direction="column"
           rowGap="2xl"
         >
-          <Flex direction="column" alignItems="center" rowGap="sm">
-            <Heading as="h1" size="xl">
+          <Flex direction="column" alignItems="center" rowGap="sm" textAlign='center'>
+            <Heading as="h1" size="xl" >
               Check Your Email
             </Heading>
             <Text size="xs">
-              We sent a reset password link to
-              <b>{email}</b>
+              We sent a reset password link to <br/><b>{email}</b>
             </Text>
           </Flex>
 
