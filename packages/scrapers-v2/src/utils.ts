@@ -101,3 +101,9 @@ export const fatalError = (message: string): never => {
   console.error(message)
   process.exit(1)
 }
+
+export const majorNameToFileName = (majorName: string): string => {
+  return majorName
+    .replaceAll(",", "")
+    .replaceAll(" ", "_")
+}

@@ -3,6 +3,7 @@ import {
   ensureLength,
   ensureLengthAtLeast,
   loadHTML,
+  majorNameToFileName,
   parseText,
   wrappedGetRequest,
 } from "../utils";
@@ -33,7 +34,7 @@ import {
   WithExceptions,
 } from "./types";
 import { join } from "path";
-import { BASE_URL } from "../constants";
+import { BASE_URL, STORE_TOKENS_AND_HTML } from "../constants";
 import { categorizeTextRow } from "./textCategorize";
 import { existsSync } from "fs";
 import { mkdir, writeFile } from "fs/promises";
@@ -51,7 +52,7 @@ export const fetchAndTokenizeHTML = async (url: URL): Promise<HDocument> => {
   const year = token.yearVersion;
   const degree = majorName.includes("Minor") ? "minor" : "major";
 
-  const filePath = join("results", degree, majorName);
+  const filePath = join("results", degree, majorNameToFileName(majorName));
   if (!existsSync("./results")) {
     await mkdir("./results");
   }
@@ -67,8 +68,10 @@ export const fetchAndTokenizeHTML = async (url: URL): Promise<HDocument> => {
   if (!existsSync(filePath)) {
     await mkdir(filePath);
   }
-  await writeFile(`${filePath}/html-${year}.html`, html);
-  await writeFile(`${filePath}/tokens-${year}.json`, JSON.stringify(token, null, 2));
+  if (STORE_TOKENS_AND_HTML) {
+    await writeFile(`${filePath}/html-${year}.html`, html);
+    await writeFile(`${filePath}/tokens-${year}.json`, JSON.stringify(token, null, 2));
+  }
   return token;
 };
 

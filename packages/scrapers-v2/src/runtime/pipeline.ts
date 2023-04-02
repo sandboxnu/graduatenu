@@ -20,6 +20,7 @@ import { HRow, HRowType, HSectionType, TextRow } from "../tokenize/types";
 import { parseRows } from "../parse/parse";
 import { writeFile } from "fs/promises";
 import { saveComment } from "./saveComment";
+import { majorNameToFileName } from "../utils";
 
 /**
  * Runs a full scrape of the catalog, logging the results to the console.
@@ -220,10 +221,10 @@ const parseEntry = async (
 const saveResults = async (
   entry: ParsedCatalogEntry
 ): Promise<ParsedCatalogEntry> => {
-  const name = entry.parsed.name;
+  const name = majorNameToFileName(entry.parsed.name);
   const year = entry.parsed.yearVersion;
   const degree = name.includes("Minor") ? "minor" : "major";
-  const filePath = `./results/${degree}/${name}/parsed-${year}.json`;
+  const filePath = `./results/${degree}/${name}/${name}-${year}.json`;
   return writeFile(filePath, JSON.stringify(entry.parsed, null, 2))
     .then(() => {
       // console.log("wrote file: " + path)
