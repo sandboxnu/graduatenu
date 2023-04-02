@@ -70,17 +70,17 @@
       "requirements": [
         {
           "type": "COURSE",
-          "classId": "2550",
+          "classId": 2550,
           "subject": "CY"
         },
         {
           "type": "COURSE",
-          "classId": "3740",
+          "classId": 3740,
           "subject": "CY"
         },
         {
           "type": "COURSE",
-          "classId": "4740",
+          "classId": 4740,
           "subject": "CY"
         }
       ],
