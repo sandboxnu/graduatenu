@@ -1,0 +1,312 @@
+{
+  "name": "Graphic and Information Design and Mathematics, BS",
+  "totalCreditsRequired": 128,
+  "yearVersion": 2022,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Art and Design at Northeastern",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1000,
+              "subject": "ARTF"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1000,
+              "subject": "MATH"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Art and Design Fundamentals",
+      "requirements": [
+        {
+          "type": "RANGE",
+          "subject": "ARTF",
+          "idRangeStart": 1141,
+          "idRangeEnd": 1149,
+          "exceptions": []
+        },
+        {
+          "type": "COURSE",
+          "classId": 1122,
+          "subject": "ARTF"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Art and Design History",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2210,
+          "subject": "ARTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2215,
+          "subject": "ARTH"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Design",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1250,
+          "subject": "ARTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2250,
+          "subject": "ARTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2252,
+          "subject": "ARTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3350,
+          "subject": "ARTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3451,
+          "subject": "ARTG"
+        }
+      ],
+      "minRequirementCount": 5
+    },
+    {
+      "type": "SECTION",
+      "title": "Degree Project",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4550,
+          "subject": "ARTG"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Art and Design Elective",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2360,
+          "subject": "ARTD"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2380,
+          "subject": "ARTD"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2260,
+          "subject": "ARTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1120,
+          "subject": "ARTF"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1121,
+          "subject": "ARTF"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARTF",
+              "classId": 1124,
+              "description": "Form and Structure",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARTF",
+              "classId": 1125,
+              "description": "Form and Structure Tools",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2223,
+          "subject": "ARTF"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2400,
+          "subject": "ARTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3351,
+          "subject": "ARTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3450,
+          "subject": "ARTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3460,
+          "subject": "ARTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4552,
+          "subject": "ARTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4553,
+          "subject": "ARTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4554,
+          "subject": "ARTG"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Math Reasoning",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1365,
+          "subject": "MATH"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Calculus",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1341,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1342,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2321,
+          "subject": "MATH"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Intermediate Math",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2341,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2331,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3081,
+          "subject": "MATH"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Advanced Elective",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3150,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3175,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3560,
+          "subject": "MATH"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Mathematics Elective",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 4,
+          "courses": [
+            {
+              "type": "RANGE",
+              "subject": "MATH",
+              "idRangeStart": 3101,
+              "idRangeEnd": 4899,
+              "exceptions": []
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Integrative Requirement",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3451,
+          "subject": "ARTG"
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}
