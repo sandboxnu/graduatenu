@@ -1,0 +1,279 @@
+{
+  "name": "Media and Screen Studies and Journalism, BA",
+  "totalCreditsRequired": 129,
+  "yearVersion": 2021,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Media and Screen Studies Common Requirements",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1220,
+          "subject": "MSCR"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1320,
+              "subject": "MSCR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1420,
+              "subject": "MSCR"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Foundation Course",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1230,
+          "subject": "MSCR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2220,
+          "subject": "MSCR"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Diversity or Globalization Course",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3392,
+          "subject": "MSCR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2325,
+          "subject": "MSCR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2505,
+          "subject": "MSCR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3437,
+          "subject": "MSCR"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Writing-Intensive",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2505,
+              "subject": "MSCR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3600,
+              "subject": "MSCR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3420,
+              "subject": "MSCR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3422,
+              "subject": "MSCR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3700,
+              "subject": "MSCR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4208,
+              "subject": "MSCR"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Media and Screen Studies Electives",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2380,
+          "subject": "ARTD"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3480,
+          "subject": "ARTD"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3485,
+          "subject": "ARTD"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1450,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2550,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2655,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3655,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3750,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4755,
+          "subject": "COMM"
+        }
+      ],
+      "minRequirementCount": 9
+    },
+    {
+      "type": "SECTION",
+      "title": "Journalism Foundations",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "JRNL",
+              "classId": 1101,
+              "description": "Journalism 1: Fundamentals of Reporting",
+              "type": "COURSE"
+            },
+            {
+              "subject": "JRNL",
+              "classId": 1102,
+              "description": "Journalist’s Toolbox",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 1150,
+          "subject": "JRNL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2201,
+          "subject": "JRNL"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Journalism and Advanced Writing",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2301,
+          "subject": "JRNL"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Television News",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 5314,
+          "subject": "JRNL"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Ethics and Issues",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4650,
+          "subject": "JRNL"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Journalism Electives",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 12,
+          "courses": [
+            {
+              "type": "RANGE",
+              "subject": "JRNL",
+              "idRangeStart": 2000,
+              "idRangeEnd": 5999,
+              "exceptions": []
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Integrative Course",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4623,
+          "subject": "MSCR"
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}
