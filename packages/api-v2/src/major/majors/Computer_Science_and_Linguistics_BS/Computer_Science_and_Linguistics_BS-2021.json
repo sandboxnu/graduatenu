@@ -1,0 +1,536 @@
+{
+  "name": "Computer Science and Linguistics, BS",
+  "totalCreditsRequired": 133,
+  "yearVersion": 2021,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Computer Science Overview",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1200,
+          "subject": "CS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1210,
+          "subject": "CS"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Computer Science Fundamental Courses",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CS",
+              "classId": 1800,
+              "description": "Discrete Structures",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CS",
+              "classId": 1802,
+              "description": "Seminar for CS 1800",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CS",
+              "classId": 2500,
+              "description": "Fundamentals of Computer Science 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CS",
+              "classId": 2501,
+              "description": "Lab for CS 2500",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CS",
+              "classId": 2510,
+              "description": "Fundamentals of Computer Science 2",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CS",
+              "classId": 2511,
+              "description": "Lab for CS 2510",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Computer Science Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3000,
+          "subject": "CS"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CS",
+              "classId": 3500,
+              "description": "Object-Oriented Design",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CS",
+              "classId": 3501,
+              "description": "Lab for CS 3500",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 3800,
+          "subject": "CS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4100,
+          "subject": "CS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4120,
+          "subject": "CS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4400,
+          "subject": "CS"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 4500,
+              "subject": "CS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4530,
+              "subject": "CS"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 7
+    },
+    {
+      "type": "SECTION",
+      "title": "Khoury Elective Courses",
+      "requirements": [
+        {
+          "type": "RANGE",
+          "subject": "CS",
+          "idRangeStart": 2500,
+          "idRangeEnd": 9999,
+          "exceptions": [
+            {
+              "subject": "CS",
+              "classId": 5010,
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "RANGE",
+          "subject": "CY",
+          "idRangeStart": 2000,
+          "idRangeEnd": 9999,
+          "exceptions": [
+            {
+              "subject": "CY",
+              "classId": 4930,
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "RANGE",
+          "subject": "DS",
+          "idRangeStart": 2500,
+          "idRangeEnd": 9999,
+          "exceptions": [
+            {
+              "subject": "DS",
+              "classId": 4900,
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "RANGE",
+          "subject": "IS",
+          "idRangeStart": 2000,
+          "idRangeEnd": 9999,
+          "exceptions": [
+            {
+              "subject": "IS",
+              "classId": 4900,
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 4
+    },
+    {
+      "type": "SECTION",
+      "title": "Linguistics Foundations",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1150,
+          "subject": "LING"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2350,
+          "subject": "LING"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3412,
+          "subject": "LING"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Linguistic Structure",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 12,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3420,
+              "subject": "LING"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3422,
+              "subject": "LING"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3424,
+              "subject": "LING"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3450,
+              "subject": "LING"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3452,
+              "subject": "LING"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Psychology Requirements",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2320,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3464,
+          "subject": "PSYC"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Laboratory/Directed Study",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4891,
+          "subject": "LING"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4991,
+          "subject": "LING"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4610,
+          "subject": "PSYC"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Seminar Requirement",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 4654,
+              "subject": "LING"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4658,
+              "subject": "PSYC"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Linguistics Elective",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2700,
+          "subject": "DEAF"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3466,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4520,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4522,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4524,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4610,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4658,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4660,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4674,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4891,
+          "subject": "LING"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4970,
+          "subject": "LING"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4971,
+          "subject": "LING"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4991,
+          "subject": "LING"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4991,
+          "subject": "PSYC"
+        }
+      ],
+      "minRequirementCount": 14
+    },
+    {
+      "type": "SECTION",
+      "title": "Mathematics Requirement",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1341,
+          "subject": "MATH"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Computing and Social Issues",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2600,
+          "subject": "AFAM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4170,
+          "subject": "CY"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5240,
+          "subject": "CY"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2220,
+          "subject": "HIST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2150,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2102,
+          "subject": "INSH"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1300,
+              "subject": "IS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1300,
+              "subject": "PHIL"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 1145,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1280,
+          "subject": "SOCL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2485,
+          "subject": "SOCL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4528,
+          "subject": "SOCL"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "College Writing",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1111,
+          "subject": "ENGW"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Advanced Writing in the Disciplines",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3302,
+              "subject": "ENGW"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3315,
+              "subject": "ENGW"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Required General Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}
