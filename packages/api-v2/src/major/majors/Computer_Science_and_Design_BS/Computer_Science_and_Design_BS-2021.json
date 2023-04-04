@@ -170,6 +170,19 @@
             },
             {
               "type": "RANGE",
+              "subject": "CY",
+              "idRangeStart": 2000,
+              "idRangeEnd": 9999,
+              "exceptions": [
+                {
+                  "subject": "CY",
+                  "classId": 4900,
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "RANGE",
               "subject": "DS",
               "idRangeStart": 2500,
               "idRangeEnd": 9999,
@@ -280,19 +293,96 @@
     {
       "type": "SECTION",
       "title": "Design Elective",
-      "requirements": [],
-      "minRequirementCount": 0
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 4,
+          "courses": [
+            {
+              "type": "RANGE",
+              "subject": "ARTG",
+              "idRangeStart": 1000,
+              "idRangeEnd": 9999,
+              "exceptions": []
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
     },
     {
       "type": "SECTION",
       "title": "Art + Design History Elective",
-      "requirements": [],
-      "minRequirementCount": 0
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 4,
+          "courses": [
+            {
+              "type": "RANGE",
+              "subject": "ARTH",
+              "idRangeStart": 1000,
+              "idRangeEnd": 9999,
+              "exceptions": []
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
     },
     {
       "type": "SECTION",
       "title": "Art + Design Elective",
-      "requirements": [],
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 4,
+          "courses": [
+            {
+              "type": "RANGE",
+              "subject": "ARTG",
+              "idRangeStart": 1000,
+              "idRangeEnd": 9999,
+              "exceptions": []
+            },
+            {
+              "type": "RANGE",
+              "subject": "ARTE",
+              "idRangeStart": 1000,
+              "idRangeEnd": 9999,
+              "exceptions": []
+            },
+            {
+              "type": "RANGE",
+              "subject": "ARTD",
+              "idRangeStart": 1000,
+              "idRangeEnd": 9999,
+              "exceptions": []
+            },
+            {
+              "type": "RANGE",
+              "subject": "ARTH",
+              "idRangeStart": 1000,
+              "idRangeEnd": 9999,
+              "exceptions": []
+            },
+            {
+              "type": "RANGE",
+              "subject": "ARTS",
+              "idRangeStart": 1000,
+              "idRangeEnd": 9999,
+              "exceptions": []
+            },
+            {
+              "type": "RANGE",
+              "subject": "GAME",
+              "idRangeStart": 1000,
+              "idRangeEnd": 9999,
+              "exceptions": []
+            }
+          ]
+        }
+      ],
       "minRequirementCount": 0
     },
     {
@@ -306,12 +396,6 @@
         }
       ],
       "minRequirementCount": 1
-    },
-    {
-      "type": "SECTION",
-      "title": "Design Options",
-      "requirements": [],
-      "minRequirementCount": 0
     },
     {
       "type": "SECTION",
@@ -369,137 +453,157 @@
       "title": "Degree-Focused Electives",
       "requirements": [
         {
-          "type": "COURSE",
-          "classId": 1101,
-          "subject": "PSYC"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3452,
-          "subject": "PSYC"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3464,
-          "subject": "PSYC"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3466,
-          "subject": "PSYC"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3200,
-          "subject": "CS"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3520,
-          "subject": "CS"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3540,
-          "subject": "CS"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3650,
-          "subject": "CS"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3700,
-          "subject": "CS"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3800,
-          "subject": "CS"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4100,
-          "subject": "CS"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4150,
-          "subject": "CS"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4300,
-          "subject": "CS"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4400,
-          "subject": "CS"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4520,
-          "subject": "CS"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4550,
-          "subject": "CS"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4850,
-          "subject": "CS"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4991,
-          "subject": "CS"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4992,
-          "subject": "CS"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4993,
-          "subject": "CS"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3000,
-          "subject": "DS"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4200,
-          "subject": "DS"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4300,
-          "subject": "DS"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4400,
-          "subject": "DS"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4420,
-          "subject": "DS"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2000,
-          "subject": "IS"
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "RANGE",
+              "subject": "ARTG",
+              "idRangeStart": 1000,
+              "idRangeEnd": 9999,
+              "exceptions": []
+            },
+            {
+              "type": "RANGE",
+              "subject": "ARTE",
+              "idRangeStart": 1000,
+              "idRangeEnd": 9999,
+              "exceptions": []
+            },
+            {
+              "type": "COURSE",
+              "classId": 1101,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3452,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3464,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3466,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3200,
+              "subject": "CS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3520,
+              "subject": "CS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3540,
+              "subject": "CS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3650,
+              "subject": "CS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3700,
+              "subject": "CS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3800,
+              "subject": "CS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4100,
+              "subject": "CS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4150,
+              "subject": "CS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4300,
+              "subject": "CS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4400,
+              "subject": "CS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4520,
+              "subject": "CS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4550,
+              "subject": "CS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4850,
+              "subject": "CS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4991,
+              "subject": "CS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4992,
+              "subject": "CS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4993,
+              "subject": "CS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3000,
+              "subject": "DS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4200,
+              "subject": "DS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4300,
+              "subject": "DS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4400,
+              "subject": "DS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4420,
+              "subject": "DS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2000,
+              "subject": "IS"
+            }
+          ]
         }
       ],
-      "minRequirementCount": 26
+      "minRequirementCount": 2
     },
     {
       "type": "SECTION",
@@ -623,12 +727,6 @@
         }
       ],
       "minRequirementCount": 1
-    },
-    {
-      "type": "SECTION",
-      "title": "Required General Electives",
-      "requirements": [],
-      "minRequirementCount": 0
     }
   ],
   "concentrations": {
