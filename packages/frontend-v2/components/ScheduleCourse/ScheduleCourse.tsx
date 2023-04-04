@@ -121,7 +121,7 @@ export const PlaceholderScheduleCourse: React.FC<
   PlaceholderScheduleCourseProps
 > = ({ course }) => {
   return (
-    <Tooltip label="Sorry, we can't load this course right now :(. We rely on SearchNEU for course fetching, and there may be an ongoing issue on their end. We recommend refreshing the page and trying again soon.">
+    <Tooltip label="Sorry, we can't load this course right now 😞. We rely on SearchNEU for course fetching, and there may be an ongoing issue on their end. We recommend refreshing the page and trying again soon.">
       <div
         style={{
           backgroundColor: "white",

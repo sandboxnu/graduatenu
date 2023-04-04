@@ -6,8 +6,11 @@ export const extractSupportedMajorYears = (
   return Object.keys(supportedMajorsData?.supportedMajors ?? {});
 };
 export const extractSupportedMajorNames = (
-  catalogYear: number,
+  catalogYear?: number,
   supportedMajorsData?: GetSupportedMajorsResponse
 ): string[] => {
+  if (!catalogYear) {
+    return [];
+  }
   return Object.keys(supportedMajorsData?.supportedMajors[catalogYear] ?? {});
 };

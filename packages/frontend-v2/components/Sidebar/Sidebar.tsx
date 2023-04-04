@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, Text } from "@chakra-ui/react";
+import { Box, Flex, Heading, Link, Stack, Text } from "@chakra-ui/react";
 import {
   MajorValidationError,
   MajorValidationResult,
@@ -25,11 +25,6 @@ import {
 } from "../../validation-worker/worker-messages";
 import { useFetchCourses } from "../../hooks/useFetchCourses";
 import { getAllCoursesInMajor } from "../../utils/plan/getAllCoursesInMajor";
-
-interface SidebarProps {
-  selectedPlan: PlanModel<string>;
-  transferCourses: ScheduleCourse2<unknown>[];
-}
 
 export enum SidebarValidationStatus {
   Loading = "Loading",
@@ -64,6 +59,11 @@ const createCourseMap = (
 
 // A number to help avoid displaying stale validation info.
 let currentRequestNum = 0;
+
+interface SidebarProps {
+  selectedPlan: PlanModel<string>;
+  transferCourses: ScheduleCourse2<unknown>[];
+}
 
 const Sidebar: React.FC<SidebarProps> = memo(
   ({ selectedPlan, transferCourses }) => {
@@ -184,13 +184,15 @@ const Sidebar: React.FC<SidebarProps> = memo(
       concentrationValidationStatus = SidebarValidationStatus.Error;
     }
 
-    const totalCreditsTaken = totalCreditsInSchedule(selectedPlan.schedule);
+    const creditsTaken = totalCreditsInSchedule(selectedPlan.schedule);
 
     return (
       <SidebarContainer
         title={major.name}
         subtitle={selectedPlan.concentration}
-        credits={totalCreditsTaken}
+        creditsTaken={creditsTaken}
+        creditsToTake={major.totalCreditsRequired}
+        renderCoopBlock
       >
         {courseData && (
           <>
@@ -231,15 +233,59 @@ const Sidebar: React.FC<SidebarProps> = memo(
   }
 );
 
+interface NoMajorSidebarProps {
+  selectedPlan: PlanModel<string>;
+}
+
+export const NoMajorSidebar: React.FC<NoMajorSidebarProps> = ({
+  selectedPlan,
+}) => {
+  const creditsTaken = totalCreditsInSchedule(selectedPlan.schedule);
+  return (
+    <SidebarContainer
+      title="No Major"
+      creditsTaken={creditsTaken}
+      renderCoopBlock
+    >
+      <Stack px="md">
+        <Text>
+          A major has not been selected for this plan. Please select one if you
+          would like to see major requirements. If we do not support your major,
+          you can{" "}
+          <Link fontWeight="bold" color="primary.blue.light.main" href="">
+            request it here
+          </Link>
+          .
+        </Text>
+        <Text>
+          Use the “Add Course” button in the schedule to add a course to a
+          semester.
+        </Text>
+      </Stack>
+    </SidebarContainer>
+  );
+};
+
 interface SidebarContainerProps {
   title: string;
   subtitle?: string;
-  credits?: number;
+  creditsTaken?: number;
+  creditsToTake?: number;
+  renderCoopBlock?: boolean;
 }
 
-export const SidebarContainer: React.FC<
-  PropsWithChildren<SidebarContainerProps>
-> = ({ title, subtitle, credits, children }) => {
+export const NoPlanSidebar: React.FC = () => {
+  return <SidebarContainer title="No Plan Selected" />;
+};
+
+const SidebarContainer: React.FC<PropsWithChildren<SidebarContainerProps>> = ({
+  title,
+  subtitle,
+  creditsTaken,
+  creditsToTake,
+  renderCoopBlock,
+  children,
+}) => {
   return (
     <Box pt="xl" backgroundColor="neutral.main">
       <Box px="md" pb="md">
@@ -258,22 +304,25 @@ export const SidebarContainer: React.FC<
             </Text>
           )}
         </Box>
-        {credits && (
+        {creditsTaken !== undefined && (
           <Flex mb="sm" alignItems="baseline" columnGap="xs">
             <Text
               fontSize="2xl"
               color="primary.blue.dark.main"
               fontWeight="bold"
             >
-              {credits}
+              {creditsTaken}
+              {creditsToTake !== undefined && `/${creditsToTake}`}
             </Text>
             <Text color="primary.blue.dark.main">Completed Credits</Text>
           </Flex>
         )}
-        <DraggableScheduleCourse
-          scheduleCourse={COOP_BLOCK}
-          isDisabled={false}
-        />
+        {renderCoopBlock && (
+          <DraggableScheduleCourse
+            scheduleCourse={COOP_BLOCK}
+            isDisabled={false}
+          />
+        )}
       </Box>
       {children}
     </Box>

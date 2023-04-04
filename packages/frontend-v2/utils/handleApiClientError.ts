@@ -8,6 +8,7 @@ enum ErrorToastId {
   UNAUTHORIZED = "unauthorized",
   SERVER_ERROR = "server error",
   FORBIDDEN = "forbidden",
+  BAD_DATA = "bad data",
 }
 
 /**
@@ -40,7 +41,12 @@ const handleAxiosError = (error: AxiosError, router: NextRouter) => {
 
   if (statusCode === 400) {
     logger.debug("handleApiClientError", "Bad Request", error);
-    toast.error("Sorry, we sent some invalid data. Try again.");
+    toast.error(
+      "Sorry, we sent some invalid data. Try again and if this persists please report it to us through the bug report button at the top.",
+      {
+        toastId: ErrorToastId.BAD_DATA,
+      }
+    );
   } else if (statusCode === 401) {
     const errorMsg = error.response?.data.message;
     if (errorMsg === emailConfirmationMsg) {
@@ -69,8 +75,11 @@ const handleAxiosError = (error: AxiosError, router: NextRouter) => {
     );
 
     // TODO: Add some sort of google form/email for a user to report this error
-    toast.error("Sorry, something went wrong on our end :(", {
-      toastId: ErrorToastId.SERVER_ERROR,
-    });
+    toast.error(
+      "Sorry, something went wrong on our end :( Try again and if this persists please report it to us through the bug report button at the top.",
+      {
+        toastId: ErrorToastId.SERVER_ERROR,
+      }
+    );
   }
 };

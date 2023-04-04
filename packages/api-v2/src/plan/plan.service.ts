@@ -19,45 +19,51 @@ export class PlanService {
   ) {}
 
   create(createPlanDto: CreatePlanDto, student: Student): Promise<Plan> {
-    // validate the major, year, concentration
     const {
       major: majorName,
       catalogYear,
       concentration: concentrationName,
     } = createPlanDto;
-    const major = this.majorService.findByMajorAndYear(majorName, catalogYear);
-    if (!major) {
-      this.logger.debug(
-        {
-          message: "Attempting to create a plan with an unsupported major.",
-          major,
-          catalogYear,
-        },
-        this.formatPlanServiceCtx("create")
-      );
 
-      return null;
-    }
-
-    const isValidConcentrationForMajor =
-      this.majorService.isValidConcentrationForMajor(
+    // if the plan has a major, then validate the major, year, concentration
+    if (majorName) {
+      const major = this.majorService.findByMajorAndYear(
         majorName,
-        catalogYear,
-        concentrationName
+        catalogYear
       );
+      if (!major) {
+        this.logger.debug(
+          {
+            message: "Attempting to create a plan with an unsupported major.",
+            major,
+            catalogYear,
+          },
+          this.formatPlanServiceCtx("create")
+        );
 
-    if (!isValidConcentrationForMajor) {
-      this.logger.debug(
-        {
-          message:
-            "Attempting to create a plan with an unsupported concentration.",
-          major,
+        return null;
+      }
+
+      const isValidConcentrationForMajor =
+        this.majorService.isValidConcentrationForMajor(
+          majorName,
           catalogYear,
-        },
-        this.formatPlanServiceCtx("create")
-      );
+          concentrationName
+        );
 
-      return null;
+      if (!isValidConcentrationForMajor) {
+        this.logger.debug(
+          {
+            message:
+              "Attempting to create a plan with an unsupported concentration.",
+            major,
+            catalogYear,
+          },
+          this.formatPlanServiceCtx("create")
+        );
+
+        return null;
+      }
     }
 
     const newPlan = this.planRepository.create({ ...createPlanDto, student });
@@ -114,6 +120,7 @@ export class PlanService {
       catalogYear: newCatalogYear,
       concentration: newConcentrationName,
       schedule: newSchedule,
+      name: newName,
     } = updatePlanDto;
 
     const currentPlan = await this.findOne(id);
@@ -127,17 +134,27 @@ export class PlanService {
     }
 
     /**
-     * Either all info related to major needs to be updated, or only the
-     * schedule needs to be updated.
+     * If the major is being updated, all the fields related to the major
+     * (catalog year, concentration) are updated.
      *
      * TODO: Fix the DTO issue that populates undefined values for fields not
      * present. https://github.com/sandboxnu/graduatenu/issues/533
      */
     const isMajorInfoUpdate =
       newMajorName && newCatalogYear && newConcentrationName;
+
+    /** Wipe Major => Remove existing major from the plan. */
+    const isWipeMajorUpdate =
+      !newMajorName &&
+      !newCatalogYear &&
+      !newConcentrationName &&
+      currentPlan.major;
+
     const isScheduleUpdate = newSchedule && !isMajorInfoUpdate;
 
-    if (!(isMajorInfoUpdate || isScheduleUpdate)) {
+    if (
+      !(isWipeMajorUpdate || isMajorInfoUpdate || isScheduleUpdate || newName)
+    ) {
       this.logger.debug(
         { message: "Either update all major fields or only the schedule", id },
         this.formatPlanServiceCtx("update")
@@ -145,61 +162,87 @@ export class PlanService {
       return null;
     }
 
-    // validate the major, year, concentration pair if either one is being update
-    const major = this.majorService.findByMajorAndYear(
-      newMajorName,
-      newCatalogYear
-    );
-
-    if (!major) {
-      this.logger.debug(
-        {
-          message: "Attempting to update a plan with an unsupported major.",
-          newMajorName,
-          newCatalogYear,
-        },
-        this.formatPlanServiceCtx("update")
-      );
-
-      return null;
-    }
-
-    const isValidConcentrationForMajor =
-      this.majorService.isValidConcentrationForMajor(
+    // validate the major info if major is being updated
+    if (isMajorInfoUpdate) {
+      // validate the major, year, concentration pair if either one is being update
+      const major = this.majorService.findByMajorAndYear(
         newMajorName,
-        newCatalogYear,
-        newConcentrationName
+        newCatalogYear
       );
 
-    if (!isValidConcentrationForMajor) {
-      this.logger.debug(
-        {
-          message:
-            "Attempting to update a plan with an unsupported concentration.",
+      if (!major) {
+        this.logger.debug(
+          {
+            message: "Attempting to update a plan with an unsupported major.",
+            newMajorName,
+            newCatalogYear,
+          },
+          this.formatPlanServiceCtx("update")
+        );
+
+        return null;
+      }
+
+      const isValidConcentrationForMajor =
+        this.majorService.isValidConcentrationForMajor(
           newMajorName,
           newCatalogYear,
-        },
-        this.formatPlanServiceCtx("update")
-      );
+          newConcentrationName
+        );
 
-      return null;
+      if (!isValidConcentrationForMajor) {
+        this.logger.debug(
+          {
+            message:
+              "Attempting to update a plan with an unsupported concentration.",
+            newMajorName,
+            newCatalogYear,
+          },
+          this.formatPlanServiceCtx("update")
+        );
+
+        return null;
+      }
     }
 
     /**
-     * If schedule is not being updated, we use previous schedule or else we use
-     * new schedule. This is needed cause we get schedule: undefined in the DTO
-     * if schedule is not being updated. Hence, if we simply update the plan
-     * with the DTO we override the schedule with undefined in the database,
-     * essentially wiping it out.
+     * If some fields are not being updated, we use previous values. This is
+     * needed cause we fields not being updated are still in the DTO for some
+     * reason. Hence, if we simply update the plan with the DTO we override the
+     * fields not being updated with undefined in the database, essentially
+     * wiping it out.
      *
      * This should go away with TODO: https://github.com/sandboxnu/graduatenu/issues/533
      */
+    let name = currentPlan.name;
     let schedule = currentPlan.schedule;
+    let major = isWipeMajorUpdate ? undefined : currentPlan.major;
+    let catalogYear = isWipeMajorUpdate ? undefined : currentPlan.catalogYear;
+    let concentration = isWipeMajorUpdate
+      ? undefined
+      : currentPlan.concentration;
+
     if (newSchedule) {
       schedule = newSchedule;
     }
 
-    const newPlan = { ...updatePlanDto, schedule };
+    if (newName) {
+      name = newName;
+    }
+
+    if (newMajorName) {
+      major = newMajorName;
+      catalogYear = newCatalogYear;
+      concentration = newConcentrationName;
+    }
+
+    const newPlan = {
+      name,
+      major,
+      catalogYear,
+      concentration,
+      schedule,
+    };
     const updateResult = await this.planRepository.update(id, newPlan);
 
     return updateResult;

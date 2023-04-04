@@ -22,7 +22,8 @@ export class CreatePlanDtoWithoutSchedule {
   name: string;
 
   @IsString()
-  major: string;
+  @IsOptional()
+  major?: string;
 
   @IsString()
   @IsOptional()
@@ -31,7 +32,8 @@ export class CreatePlanDtoWithoutSchedule {
   @IsInt()
   @Min(1898)
   @Max(3000)
-  catalogYear: number;
+  @IsOptional()
+  catalogYear?: number;
 }
 
 export class CreatePlanDto extends CreatePlanDtoWithoutSchedule {
@@ -76,7 +78,7 @@ export class SignUpStudentDto {
   @IsEmail()
   email: string;
 
-@IsNotEmpty()
+  @IsNotEmpty()
   @IsString()
   password: string;
 

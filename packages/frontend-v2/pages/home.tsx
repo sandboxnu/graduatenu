@@ -26,10 +26,11 @@ import {
   EditPlanModal,
   GraduatePostAuthHeader,
   LoadingPage,
+  NoMajorSidebar,
+  NoPlanSidebar,
   Plan,
   PlanDropdown,
   Sidebar,
-  SidebarContainer,
 } from "../components";
 import { fetchStudentAndPrepareForDnd, useStudentWithPlans } from "../hooks";
 import {
@@ -189,6 +190,18 @@ const HomePage: NextPage = () => {
     });
   };
 
+  let renderedSidebar = <NoPlanSidebar />;
+  if (selectedPlan) {
+    if (selectedPlan.major) {
+      renderedSidebar = (
+        <Sidebar
+          selectedPlan={selectedPlan}
+          transferCourses={student.coursesTransfered || []}
+        />
+      );
+    } else renderedSidebar = <NoMajorSidebar selectedPlan={selectedPlan} />;
+  }
+
   return (
     <DndContext
       onDragStart={handleDragStart}
@@ -199,14 +212,7 @@ const HomePage: NextPage = () => {
     >
       <PageLayout>
         <Box bg="neutral.main" overflowY="auto" width="360px" flexShrink={0}>
-          {selectedPlan === undefined ? (
-            <SidebarContainer title="No plan selected" />
-          ) : (
-            <Sidebar
-              selectedPlan={selectedPlan}
-              transferCourses={student.coursesTransfered || []}
-            />
-          )}
+          {renderedSidebar}
         </Box>
         <Box p="md" overflow="auto" flexGrow={1}>
           <Flex flexDirection="column">

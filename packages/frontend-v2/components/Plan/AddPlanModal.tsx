@@ -1,6 +1,10 @@
 import { AddIcon } from "@chakra-ui/icons";
 import {
+  Text,
+  Stack,
   Button,
+  Checkbox,
+  Flex,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -8,17 +12,19 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-  useDisclosure,
   VStack,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { API } from "@graduate/api-client";
-import { CreatePlanDtoWithoutSchedule } from "@graduate/common";
+import { CreatePlanDto, CreatePlanDtoWithoutSchedule } from "@graduate/common";
 import { useRouter } from "next/router";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useSWRConfig } from "swr";
-import { USE_STUDENT_WITH_PLANS_SWR_KEY } from "../../hooks";
-import { useSupportedMajors } from "../../hooks/useSupportedMajors";
+import { mutate } from "swr";
+import {
+  useSupportedMajors,
+  USE_STUDENT_WITH_PLANS_SWR_KEY,
+} from "../../hooks";
 import {
   createEmptySchedule,
   extractSupportedMajorNames,
@@ -27,6 +33,7 @@ import {
 } from "../../utils";
 import { BlueButton } from "../Button";
 import { PlanInput, PlanSelect } from "../Form";
+import { HelperToolTip } from "../Help";
 import { PlanConcentrationsSelect } from "./PlanConcentrationsSelect";
 
 interface AddPlanModalProps {
@@ -36,11 +43,10 @@ interface AddPlanModalProps {
 export const AddPlanModal: React.FC<AddPlanModalProps> = ({
   setSelectedPlanId,
 }) => {
+  const router = useRouter();
+  const { onOpen, onClose: onCloseDisplay, isOpen } = useDisclosure();
   const { supportedMajorsData, error: supportedMajorsError } =
     useSupportedMajors();
-  const { mutate } = useSWRConfig();
-  const router = useRouter();
-  const { onOpen, onClose, isOpen } = useDisclosure();
   const {
     register,
     handleSubmit,
@@ -51,18 +57,19 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
     mode: "onTouched",
     shouldFocusError: true,
   });
+  const [isNoMajorSelected, setIsNoMajorSelected] = useState(false);
 
   if (supportedMajorsError) {
     handleApiClientError(supportedMajorsError, router);
   }
 
-  const catalogYear = watch("catalogYear");
-  const majorName = watch("major");
-
   const onSubmitHandler = async (payload: CreatePlanDtoWithoutSchedule) => {
     const schedule = createEmptySchedule();
-    const newPlan = {
-      ...payload,
+    const newPlan: CreatePlanDto = {
+      name: payload.name,
+      catalogYear: isNoMajorSelected ? undefined : payload.catalogYear,
+      major: isNoMajorSelected ? undefined : payload.major,
+      concentration: isNoMajorSelected ? undefined : payload.concentration,
       schedule,
     };
 
@@ -80,23 +87,38 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
 
     // refresh the cache and close the modal
     mutate(USE_STUDENT_WITH_PLANS_SWR_KEY);
-    onCloseAddPlanModal(createdPlanId);
+    onCloseAddPlanModal();
+    setSelectedPlanId(createdPlanId);
   };
 
-  const onCloseAddPlanModal = (newPlanId?: number) => {
+  const onCloseAddPlanModal = () => {
     reset();
-    if (newPlanId) {
-      setSelectedPlanId(newPlanId);
-    }
-    onClose();
+    setIsNoMajorSelected(false);
+    onCloseDisplay();
   };
+
+  const catalogYear = watch("catalogYear");
+  const majorName = watch("major");
+
+  const noMajorHelperLabel = (
+    <Stack>
+      <Text>
+        You can opt out of selecting a major for this plan if you are unsure or
+        if we do not support your major.
+      </Text>
+      <Text>
+        Without a selected major, we won&apos;t be able to display the major
+        requirements.
+      </Text>
+    </Stack>
+  );
 
   return (
     <>
       <BlueButton leftIcon={<AddIcon />} onClick={onOpen} ml="xs" size="md">
         Add Plan
       </BlueButton>
-      <Modal isOpen={isOpen} onClose={onCloseAddPlanModal} size="md">
+      <Modal isOpen={isOpen} onClose={() => onCloseAddPlanModal()} size="md">
         <ModalOverlay />
         <ModalContent>
           <form onSubmit={handleSubmit(onSubmitHandler)}>
@@ -105,7 +127,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
               New Plan
             </ModalHeader>
             <ModalBody>
-              <VStack spacing="sm">
+              <VStack spacing="sm" alignItems="start">
                 <PlanInput
                   label="Title"
                   id="name"
@@ -116,40 +138,62 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                     required: "Title is required",
                   })}
                 />
+                <Flex alignItems="center">
+                  <Text
+                    color="primary.red.main"
+                    size="md"
+                    fontWeight="medium"
+                    mb="0"
+                    mr="2xs"
+                  >
+                    No Major
+                  </Text>
+                  <Checkbox
+                    mb="0"
+                    mr="xs"
+                    borderColor="primary.blue.dark.main"
+                    isChecked={isNoMajorSelected}
+                    onChange={() => setIsNoMajorSelected(!isNoMajorSelected)}
+                  />
+                  <HelperToolTip label={noMajorHelperLabel} />
+                </Flex>
+                {!isNoMajorSelected && (
+                  <>
+                    <PlanSelect
+                      label="Catalog Year"
+                      id="catalogYear"
+                      placeholder="Select a Catalog Year"
+                      error={errors.catalogYear}
+                      array={extractSupportedMajorYears(supportedMajorsData)}
+                      {...register("catalogYear", {
+                        required: "Catalog year is required",
+                        valueAsNumber: true,
+                      })}
+                    />
 
-                <PlanSelect
-                  label="Catalog Year"
-                  id="catalogYear"
-                  placeholder="Select a Catalog Year"
-                  error={errors.catalogYear}
-                  array={extractSupportedMajorYears(supportedMajorsData)}
-                  {...register("catalogYear", {
-                    required: "Catalog year is required",
-                    valueAsNumber: true,
-                  })}
-                />
-
-                <PlanSelect
-                  label="Major"
-                  id="major"
-                  placeholder="Select a Major"
-                  error={errors.major}
-                  array={extractSupportedMajorNames(
-                    catalogYear,
-                    supportedMajorsData
-                  )}
-                  {...register("major", {
-                    required: "Major is required",
-                  })}
-                />
-
-                <PlanConcentrationsSelect
-                  catalogYear={catalogYear}
-                  majorName={majorName}
-                  supportedMajorsData={supportedMajorsData}
-                  register={register}
-                  errors={errors}
-                />
+                    <PlanSelect
+                      label="Major"
+                      id="major"
+                      placeholder="Select a Major"
+                      helperText='First select your catalog year. If you still cannot find your major, select "No Major" above.'
+                      error={errors.major}
+                      array={extractSupportedMajorNames(
+                        catalogYear,
+                        supportedMajorsData
+                      )}
+                      {...register("major", {
+                        required: "Major is required",
+                      })}
+                    />
+                    <PlanConcentrationsSelect
+                      catalogYear={catalogYear}
+                      majorName={majorName}
+                      supportedMajorsData={supportedMajorsData}
+                      register={register}
+                      errors={errors}
+                    />
+                  </>
+                )}
               </VStack>
             </ModalBody>
             <ModalFooter>

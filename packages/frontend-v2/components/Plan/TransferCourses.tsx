@@ -1,8 +1,4 @@
-import {
-  ChevronDownIcon,
-  ChevronUpIcon,
-  InfoOutlineIcon,
-} from "@chakra-ui/icons";
+import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
 import { Flex, Grid, Stack, Text, useDisclosure } from "@chakra-ui/react";
 import { API } from "@graduate/api-client";
 import { ScheduleCourse2, StudentModel } from "@graduate/common";
@@ -15,7 +11,7 @@ import {
   isEqualCourses,
 } from "../../utils";
 import { AddCourseButton, AddCourseModal } from "../AddCourseModal";
-import { GraduateToolTip } from "../GraduateTooltip";
+import { HelperToolTip } from "../Help";
 import { NonDraggableScheduleCourse } from "../ScheduleCourse";
 
 interface TransferCoursesToggleProps {
@@ -196,9 +192,7 @@ const TransferCoursesHeader: React.FC<TransferCoursesHeaderProps> = ({
           <Text color="primary.blue.dark.main" fontWeight="bold">
             Your Transfer Courses
           </Text>
-          <GraduateToolTip label={transferCoursesHelperText} placement="top">
-            <InfoOutlineIcon />
-          </GraduateToolTip>
+          <HelperToolTip label={transferCoursesHelperText} />
         </Flex>
         <Text color="primary.blue.light.main" fontWeight="bold">
           {totalTransferCredits} credits

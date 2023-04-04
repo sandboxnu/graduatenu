@@ -26,8 +26,10 @@ export const totalCreditsInYear = (
 export const totalCreditsInSchedule = (
   schedule: Schedule2<unknown>
 ): number => {
-  return schedule.years.reduce(
-    (totalCredits, year) => totalCreditsInYear(year) + totalCredits,
-    0
+  return (
+    schedule.years.reduce(
+      (totalCredits, year) => totalCreditsInYear(year) + totalCredits,
+      0
+    ) ?? 0
   );
 };

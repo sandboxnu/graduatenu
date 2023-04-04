@@ -25,13 +25,13 @@ export class Plan {
   @Column({ type: "json" })
   schedule: Schedule2<null>;
 
-  @Column()
+  @Column({ nullable: true })
   major: string;
 
   @Column({ nullable: true })
   concentration: string;
 
-  @Column({ type: "smallint" })
+  @Column({ nullable: true, type: "smallint" })
   catalogYear: number;
 
   @CreateDateColumn()

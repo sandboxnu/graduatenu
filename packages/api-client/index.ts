@@ -121,10 +121,13 @@ function occurrencesToCourseByCatalogYear(
   }
 
   for (const occurrence of occurrences) {
-    const year = occurrence.termId.slice(0, 4);
+    const termId = occurrence.termId;
+    if (!termId) {
+      const year = occurrence?.termId?.slice(0, 4);
 
-    if (year + 1 === catalogYear.toString()) {
-      return occurrenceToCourse(occurrence);
+      if (year + 1 === catalogYear.toString()) {
+        return occurrenceToCourse(occurrence);
+      }
     }
   }
 
