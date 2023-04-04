@@ -740,7 +740,7 @@
             ]
           }
         ],
-        "minRequirementCount": 7
+        "minRequirementCount": 3
       },
       {
         "type": "SECTION",
