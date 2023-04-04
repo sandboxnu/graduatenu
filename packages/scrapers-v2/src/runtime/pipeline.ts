@@ -137,7 +137,7 @@ const tokenizeEntry = async (
   return { ...entry, tokenized };
 };
 
-const parseEntry = async (
+export const parseEntry = async (
   entry: TokenizedCatalogEntry
 ): Promise<ParsedCatalogEntry> => {
   const nonConcentrations = entry.tokenized.sections.filter((metaSection) => {
@@ -191,7 +191,7 @@ const parseEntry = async (
         concentration.entries = [newHeader, ...concentration.entries];
       }
       const parsed = parseRows(concentration.entries);
-      if (parsed.length === 1 && parsed[0].type == "SECTION") {
+      if (parsed.length >= 1 && parsed[0].type == "SECTION") {
         return parsed[0];
       } else {
         throw new Error(
