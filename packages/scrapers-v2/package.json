@@ -7,6 +7,7 @@
     "test": "yarn parser:generate && jest",
     "scrape": "yarn parser:generate && ts-node ./src/main.ts",
     "test-parse": "ts-node ./src/runtime/testParsing.ts",
+    "justdoit": "ts-node ./src/dothething.ts",
     "parser:generate": "nearleyc src/parse/grammar.ne -o src/parse/grammar.js",
     "parser:test": "nearley-test src/parse/grammar.js"
   },
