@@ -505,7 +505,8 @@
             }
           ]
         }
-      ]
+      ],
+      "minRequirementCount": 1
     },
     {
       "type": "SECTION",
