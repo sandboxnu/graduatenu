@@ -48,16 +48,55 @@
           "type": "AND",
           "courses": [
             {
-              "subject": "CS",
-              "classId": 2500,
-              "description": "Fundamentals of Computer Science 1",
-              "type": "COURSE"
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "CS",
+                  "classId": 2500,
+                  "description": "Fundamentals of Computer Science 1",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "CS",
+                  "classId": 2501,
+                  "description": "Lab for CS 2500",
+                  "type": "COURSE"
+                }
+              ]
             },
             {
-              "subject": "CS",
-              "classId": 2501,
-              "description": "Lab for CS 2500",
-              "type": "COURSE"
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "CS",
+                  "classId": 2510,
+                  "description": "Fundamentals of Computer Science 2",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "CS",
+                  "classId": 2511,
+                  "description": "Lab for CS 2510",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "CS",
+                  "classId": 3500,
+                  "description": "Object-Oriented Design",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "CS",
+                  "classId": 3501,
+                  "description": "Lab for CS 3500",
+                  "type": "COURSE"
+                }
+              ]
             }
           ]
         },
@@ -65,77 +104,48 @@
           "type": "AND",
           "courses": [
             {
-              "subject": "CS",
-              "classId": 2510,
-              "description": "Fundamentals of Computer Science 2",
-              "type": "COURSE"
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "DS",
+                  "classId": 2000,
+                  "description": "Programming with Data",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "DS",
+                  "classId": 2001,
+                  "description": "Data Science Programming Practicum",
+                  "type": "COURSE"
+                }
+              ]
             },
             {
-              "subject": "CS",
-              "classId": 2511,
-              "description": "Lab for CS 2510",
-              "type": "COURSE"
-            }
-          ]
-        },
-        {
-          "type": "AND",
-          "courses": [
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "DS",
+                  "classId": 2500,
+                  "description": "Intermediate Programming with Data",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "DS",
+                  "classId": 2501,
+                  "description": "Lab for DS 2500",
+                  "type": "COURSE"
+                }
+              ]
+            },
             {
-              "subject": "CS",
+              "type": "COURSE",
               "classId": 3500,
-              "description": "Object-Oriented Design",
-              "type": "COURSE"
-            },
-            {
-              "subject": "CS",
-              "classId": 3501,
-              "description": "Lab for CS 3500",
-              "type": "COURSE"
+              "subject": "DS"
             }
           ]
-        },
-        {
-          "type": "AND",
-          "courses": [
-            {
-              "subject": "DS",
-              "classId": 2000,
-              "description": "Programming with Data",
-              "type": "COURSE"
-            },
-            {
-              "subject": "DS",
-              "classId": 2001,
-              "description": "Data Science Programming Practicum",
-              "type": "COURSE"
-            }
-          ]
-        },
-        {
-          "type": "AND",
-          "courses": [
-            {
-              "subject": "DS",
-              "classId": 2500,
-              "description": "Intermediate Programming with Data",
-              "type": "COURSE"
-            },
-            {
-              "subject": "DS",
-              "classId": 2501,
-              "description": "Lab for DS 2500",
-              "type": "COURSE"
-            }
-          ]
-        },
-        {
-          "type": "COURSE",
-          "classId": 3500,
-          "subject": "DS"
         }
       ],
-      "minRequirementCount": 6
+      "minRequirementCount": 1
     },
     {
       "type": "SECTION",
@@ -371,6 +381,16 @@
       "requirements": [
         {
           "type": "COURSE",
+          "classId": 2210,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2320,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
           "classId": 2350,
           "subject": "ECON"
         },
@@ -383,16 +403,6 @@
           "type": "COURSE",
           "classId": 3081,
           "subject": "MATH"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2210,
-          "subject": "PHTH"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2320,
-          "subject": "PSYC"
         }
       ],
       "minRequirementCount": 1
@@ -488,73 +498,79 @@
       "title": "Upper-Division Elective",
       "requirements": [
         {
-          "type": "RANGE",
-          "subject": "CS",
-          "idRangeStart": 2500,
-          "idRangeEnd": 9999,
-          "exceptions": [
+          "type": "XOM",
+          "numCreditsMin": 4,
+          "courses": [
             {
+              "type": "RANGE",
               "subject": "CS",
-              "classId": 5010,
-              "type": "COURSE"
-            }
-          ]
-        },
-        {
-          "type": "RANGE",
-          "subject": "CY",
-          "idRangeStart": 2000,
-          "idRangeEnd": 9999,
-          "exceptions": [
+              "idRangeStart": 2500,
+              "idRangeEnd": 9999,
+              "exceptions": [
+                {
+                  "subject": "CS",
+                  "classId": 5010,
+                  "type": "COURSE"
+                }
+              ]
+            },
             {
+              "type": "RANGE",
               "subject": "CY",
-              "classId": 4930,
-              "type": "COURSE"
-            }
-          ]
-        },
-        {
-          "type": "RANGE",
-          "subject": "DS",
-          "idRangeStart": 2500,
-          "idRangeEnd": 9999,
-          "exceptions": [
+              "idRangeStart": 2000,
+              "idRangeEnd": 9999,
+              "exceptions": [
+                {
+                  "subject": "CY",
+                  "classId": 4930,
+                  "type": "COURSE"
+                }
+              ]
+            },
             {
+              "type": "RANGE",
               "subject": "DS",
-              "classId": 4900,
-              "type": "COURSE"
-            }
-          ]
-        },
-        {
-          "type": "RANGE",
-          "subject": "HSCI",
-          "idRangeStart": 4000,
-          "idRangeEnd": 9999,
-          "exceptions": []
-        },
-        {
-          "type": "RANGE",
-          "subject": "IS",
-          "idRangeStart": 2000,
-          "idRangeEnd": 9999,
-          "exceptions": [
+              "idRangeStart": 2500,
+              "idRangeEnd": 9999,
+              "exceptions": [
+                {
+                  "subject": "DS",
+                  "classId": 4900,
+                  "type": "COURSE"
+                }
+              ]
+            },
             {
+              "type": "RANGE",
               "subject": "IS",
-              "classId": 4900,
-              "type": "COURSE"
+              "idRangeStart": 2000,
+              "idRangeEnd": 9999,
+              "exceptions": [
+                {
+                  "subject": "IS",
+                  "classId": 4900,
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "RANGE",
+              "subject": "PHTH",
+              "idRangeStart": 4000,
+              "idRangeEnd": 9999,
+              "exceptions": []
+            },
+            {
+              "type": "RANGE",
+              "subject": "HSCI",
+              "idRangeStart": 4000,
+              "idRangeEnd": 9999,
+              "exceptions": []
             }
           ]
-        },
-        {
-          "type": "RANGE",
-          "subject": "PHTH",
-          "idRangeStart": 4000,
-          "idRangeEnd": 9999,
-          "exceptions": []
         }
       ],
-      "minRequirementCount": 6
+      "minRequirementCount": 1
     },
     {
       "type": "SECTION",
@@ -567,12 +583,6 @@
         }
       ],
       "minRequirementCount": 1
-    },
-    {
-      "type": "SECTION",
-      "title": "Required General Electives",
-      "requirements": [],
-      "minRequirementCount": 0
     }
   ],
   "concentrations": {
