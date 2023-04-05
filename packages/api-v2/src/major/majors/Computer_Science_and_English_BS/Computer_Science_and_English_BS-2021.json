@@ -117,37 +117,52 @@
       "title": "Computing Focus",
       "requirements": [
         {
-          "type": "COURSE",
-          "classId": 3800,
-          "subject": "CS"
+          "type": "AND",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3800,
+              "subject": "CS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4120,
+              "subject": "CS"
+            }
+          ]
         },
         {
-          "type": "COURSE",
-          "classId": 4120,
-          "subject": "CS"
+          "type": "AND",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3800,
+              "subject": "CS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4400,
+              "subject": "CS"
+            }
+          ]
         },
         {
-          "type": "COURSE",
-          "classId": 3800,
-          "subject": "CS"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4400,
-          "subject": "CS"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3000,
-          "subject": "DS"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4200,
-          "subject": "DS"
+          "type": "AND",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3000,
+              "subject": "DS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4200,
+              "subject": "DS"
+            }
+          ]
         }
       ],
-      "minRequirementCount": 6
+      "minRequirementCount": 1
     },
     {
       "type": "SECTION",
@@ -243,12 +258,6 @@
     },
     {
       "type": "SECTION",
-      "title": "English Course-Level Requirement",
-      "requirements": [],
-      "minRequirementCount": 0
-    },
-    {
-      "type": "SECTION",
       "title": "Introduction to College",
       "requirements": [
         {
@@ -341,7 +350,7 @@
           ]
         }
       ],
-      "minRequirementCount": 8
+      "minRequirementCount": 1
     },
     {
       "type": "SECTION",
@@ -728,8 +737,22 @@
     {
       "type": "SECTION",
       "title": "English Electives",
-      "requirements": [],
-      "minRequirementCount": 0
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "RANGE",
+              "subject": "ENGL",
+              "idRangeStart": 0,
+              "idRangeEnd": 9999,
+              "exceptions": []
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
     },
     {
       "type": "SECTION",
@@ -869,12 +892,6 @@
         }
       ],
       "minRequirementCount": 1
-    },
-    {
-      "type": "SECTION",
-      "title": "Required General Electives",
-      "requirements": [],
-      "minRequirementCount": 0
     }
   ],
   "concentrations": {
