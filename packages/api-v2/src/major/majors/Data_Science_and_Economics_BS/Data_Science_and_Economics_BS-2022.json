@@ -48,16 +48,55 @@
           "type": "AND",
           "courses": [
             {
-              "subject": "CS",
-              "classId": 2500,
-              "description": "Fundamentals of Computer Science 1",
-              "type": "COURSE"
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "CS",
+                  "classId": 2500,
+                  "description": "Fundamentals of Computer Science 1",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "CS",
+                  "classId": 2501,
+                  "description": "Lab for CS 2500",
+                  "type": "COURSE"
+                }
+              ]
             },
             {
-              "subject": "CS",
-              "classId": 2501,
-              "description": "Lab for CS 2500",
-              "type": "COURSE"
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "CS",
+                  "classId": 2510,
+                  "description": "Fundamentals of Computer Science 2",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "CS",
+                  "classId": 2511,
+                  "description": "Lab for CS 2510",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "CS",
+                  "classId": 3500,
+                  "description": "Object-Oriented Design",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "CS",
+                  "classId": 3501,
+                  "description": "Lab for CS 3500",
+                  "type": "COURSE"
+                }
+              ]
             }
           ]
         },
@@ -65,77 +104,48 @@
           "type": "AND",
           "courses": [
             {
-              "subject": "CS",
-              "classId": 2510,
-              "description": "Fundamentals of Computer Science 2",
-              "type": "COURSE"
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "DS",
+                  "classId": 2000,
+                  "description": "Programming with Data",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "DS",
+                  "classId": 2001,
+                  "description": "Data Science Programming Practicum",
+                  "type": "COURSE"
+                }
+              ]
             },
             {
-              "subject": "CS",
-              "classId": 2511,
-              "description": "Lab for CS 2510",
-              "type": "COURSE"
-            }
-          ]
-        },
-        {
-          "type": "AND",
-          "courses": [
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "DS",
+                  "classId": 2500,
+                  "description": "Intermediate Programming with Data",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "DS",
+                  "classId": 2501,
+                  "description": "Lab for DS 2500",
+                  "type": "COURSE"
+                }
+              ]
+            },
             {
-              "subject": "CS",
+              "type": "COURSE",
               "classId": 3500,
-              "description": "Object-Oriented Design",
-              "type": "COURSE"
-            },
-            {
-              "subject": "CS",
-              "classId": 3501,
-              "description": "Lab for CS 3500",
-              "type": "COURSE"
+              "subject": "DS"
             }
           ]
-        },
-        {
-          "type": "AND",
-          "courses": [
-            {
-              "subject": "DS",
-              "classId": 2000,
-              "description": "Programming with Data",
-              "type": "COURSE"
-            },
-            {
-              "subject": "DS",
-              "classId": 2001,
-              "description": "Data Science Programming Practicum",
-              "type": "COURSE"
-            }
-          ]
-        },
-        {
-          "type": "AND",
-          "courses": [
-            {
-              "subject": "DS",
-              "classId": 2500,
-              "description": "Intermediate Programming with Data",
-              "type": "COURSE"
-            },
-            {
-              "subject": "DS",
-              "classId": 2501,
-              "description": "Lab for DS 2500",
-              "type": "COURSE"
-            }
-          ]
-        },
-        {
-          "type": "COURSE",
-          "classId": 3500,
-          "subject": "DS"
         }
       ],
-      "minRequirementCount": 6
+      "minRequirementCount": 1
     },
     {
       "type": "SECTION",
@@ -295,42 +305,53 @@
       "title": "Economics Electives",
       "requirements": [
         {
-          "type": "RANGE",
-          "subject": "ECON",
-          "idRangeStart": 1200,
-          "idRangeEnd": 1999,
-          "exceptions": []
-        },
-        {
-          "type": "RANGE",
-          "subject": "ECON",
-          "idRangeStart": 1200,
-          "idRangeEnd": 1999,
-          "exceptions": []
-        },
-        {
-          "type": "RANGE",
-          "subject": "ECON",
-          "idRangeStart": 2990,
-          "idRangeEnd": 4689,
-          "exceptions": []
-        },
-        {
-          "type": "RANGE",
-          "subject": "ECON",
-          "idRangeStart": 4900,
-          "idRangeEnd": 4999,
-          "exceptions": []
-        },
-        {
-          "type": "RANGE",
-          "subject": "ECON",
-          "idRangeStart": 5200,
-          "idRangeEnd": 5999,
-          "exceptions": []
+          "type": "XOM",
+          "numCreditsMin": 20,
+          "courses": [
+            {
+              "type": "XOM",
+              "numCreditsMin": 0,
+              "courses": [
+                {
+                  "type": "RANGE",
+                  "subject": "ECON",
+                  "idRangeStart": 1200,
+                  "idRangeEnd": 1999,
+                  "exceptions": []
+                }
+              ]
+            },
+            {
+              "type": "XOM",
+              "numCreditsMin": 12,
+              "courses": [
+                {
+                  "type": "RANGE",
+                  "subject": "ECON",
+                  "idRangeStart": 2990,
+                  "idRangeEnd": 4689,
+                  "exceptions": []
+                },
+                {
+                  "type": "RANGE",
+                  "subject": "ECON",
+                  "idRangeStart": 4900,
+                  "idRangeEnd": 4999,
+                  "exceptions": []
+                },
+                {
+                  "type": "RANGE",
+                  "subject": "ECON",
+                  "idRangeStart": 5200,
+                  "idRangeEnd": 5999,
+                  "exceptions": []
+                }
+              ]
+            }
+          ]
         }
       ],
-      "minRequirementCount": 5
+      "minRequirementCount": 1
     },
     {
       "type": "SECTION",
@@ -513,39 +534,6 @@
         }
       ],
       "minRequirementCount": 1
-    },
-    {
-      "type": "SECTION",
-      "title": "Required General Electives",
-      "requirements": [],
-      "minRequirementCount": 0
-    },
-    {
-      "type": "SECTION",
-      "title": "Economics GPA Requirement",
-      "requirements": [
-        {
-          "type": "COURSE",
-          "classId": 2315,
-          "subject": "ECON"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2316,
-          "subject": "ECON"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2350,
-          "subject": "ECON"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2560,
-          "subject": "ECON"
-        }
-      ],
-      "minRequirementCount": 4
     }
   ],
   "concentrations": {
