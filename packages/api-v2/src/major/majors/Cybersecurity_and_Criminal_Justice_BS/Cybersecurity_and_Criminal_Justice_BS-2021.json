@@ -572,7 +572,7 @@
           "classId": 3000,
           "subject": "CRIM"
         },
-        { // <--------------------- Dunno how to handle this will get back to it later
+        { 
           "type": "COURSE",
           "classId": 4000,
           "subject": "CRIM"

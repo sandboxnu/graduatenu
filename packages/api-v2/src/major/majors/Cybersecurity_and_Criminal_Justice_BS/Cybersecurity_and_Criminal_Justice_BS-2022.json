@@ -588,7 +588,7 @@
           "subject": "CRIM"
         }
       ],
-      "minRequirementCount": 2 // <------ dont know what to do here yet must fix this one and the 2021 one
+      "minRequirementCount": 2
     },
     {
       "type": "SECTION",
