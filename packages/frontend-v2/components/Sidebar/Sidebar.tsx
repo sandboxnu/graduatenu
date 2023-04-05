@@ -253,7 +253,12 @@ export const NoMajorSidebar: React.FC<NoMajorSidebarProps> = ({
           A major has not been selected for this plan. Please select one if you
           would like to see major requirements. If we do not support your major,
           you can{" "}
-          <Link fontWeight="bold" color="primary.blue.light.main" href="">
+          <Link
+            fontWeight="bold"
+            color="primary.blue.light.main"
+            href="https://forms.gle/o5AHSuFSwDJREEPp7"
+            isExternal
+          >
             request it here
           </Link>
           .
