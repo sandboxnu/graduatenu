@@ -14,7 +14,7 @@ import { EmailModule } from "./email/email.module";
   imports: [
     TypeOrmModule.forRoot(ormconfig),
     ConfigModule.forRoot({
-      envFilePath: [`.env.${process.env.NODE_ENV}`],
+      envFilePath: [`.env.${process.env.NODE_ENV}.local`],
       isGlobal: true,
     }),
     StudentModule,
