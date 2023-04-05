@@ -122,8 +122,8 @@ function occurrencesToCourseByCatalogYear(
 
   for (const occurrence of occurrences) {
     const termId = occurrence.termId;
-    if (!termId) {
-      const year = occurrence?.termId?.slice(0, 4);
+    if (termId) {
+      const year = termId.slice(0, 4);
 
       if (year + 1 === catalogYear.toString()) {
         return occurrenceToCourse(occurrence);

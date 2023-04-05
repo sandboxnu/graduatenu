@@ -8,8 +8,11 @@ import {
 import { memo, PropsWithChildren, useEffect, useRef, useState } from "react";
 import { DraggableScheduleCourse } from "../ScheduleCourse";
 import SidebarSection from "./SidebarSection";
-import { getAllCoursesFromPlan } from "../../utils/plan/getAllCoursesFromPlan";
-import { getSectionError } from "../../utils/plan/getSectionError";
+import {
+  getAllCoursesFromPlan,
+  getSectionError,
+  getAllCoursesInMajor,
+} from "../../utils";
 import {
   handleApiClientError,
   SIDEBAR_DND_ID_PREFIX,
@@ -17,14 +20,12 @@ import {
 } from "../../utils";
 import axios, { AxiosError } from "axios";
 import { useRouter } from "next/router";
-import { useMajor } from "../../hooks/useMajor";
 import {
   WorkerMessage,
   WorkerMessageType,
   WorkerPostInfo,
 } from "../../validation-worker/worker-messages";
-import { useFetchCourses } from "../../hooks/useFetchCourses";
-import { getAllCoursesInMajor } from "../../utils/plan/getAllCoursesInMajor";
+import { useFetchCourses, useMajor } from "../../hooks";
 
 export enum SidebarValidationStatus {
   Loading = "Loading",

@@ -21,8 +21,10 @@ import { useRouter } from "next/router";
 import { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useSWRConfig } from "swr";
-import { USE_STUDENT_WITH_PLANS_SWR_KEY } from "../../hooks";
-import { useSupportedMajors } from "../../hooks/useSupportedMajors";
+import {
+  USE_STUDENT_WITH_PLANS_SWR_KEY,
+  useSupportedMajors,
+} from "../../hooks";
 import {
   extractSupportedMajorNames,
   extractSupportedMajorYears,
