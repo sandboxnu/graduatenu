@@ -1,6 +1,6 @@
 {
   "name": "Computer Science and Physics, BS",
-  "totalCreditsRequired": 135,
+  "totalCreditsRequired": 136,
   "yearVersion": 2022,
   "requirementSections": [
     {
@@ -76,9 +76,10 @@
           ]
         },
         {
-          "type": "COURSE",
+          "subject": "CS",
           "classId": 2800,
-          "subject": "CS"
+          "description": "Logic and Computation",
+          "type": "COURSE"
         }
       ],
       "minRequirementCount": 4
@@ -235,17 +236,17 @@
         },
         {
           "type": "COURSE",
-          "classId": 4150,
-          "subject": "CS"
-        },
-        {
-          "type": "COURSE",
           "classId": 4300,
           "subject": "CS"
         },
         {
           "type": "COURSE",
           "classId": 4410,
+          "subject": "CS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4150,
           "subject": "CS"
         },
         {
@@ -483,24 +484,18 @@
             },
             {
               "type": "COURSE",
-              "classId": 3307,
+              "classId": 3315,
               "subject": "ENGW"
             },
             {
               "type": "COURSE",
-              "classId": 3315,
+              "classId": 3307,
               "subject": "ENGW"
             }
           ]
         }
       ],
       "minRequirementCount": 1
-    },
-    {
-      "type": "SECTION",
-      "title": "Required General Electives",
-      "requirements": [],
-      "minRequirementCount": 0
     }
   ],
   "concentrations": {
