@@ -60,6 +60,7 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
     formState: { isDirty, errors, isSubmitting },
     watch,
     reset,
+    setValue,
   } = useForm<EditPlanInput>({
     mode: "onTouched",
     shouldFocusError: true,
@@ -215,6 +216,9 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                       )}
                       {...register("major", {
                         required: "Major is required",
+                        onChange: () => {
+                          setValue("concentration", "");
+                        },
                       })}
                     />
                     <PlanConcentrationsSelect

@@ -53,6 +53,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
     formState: { errors, isSubmitting },
     watch,
     reset,
+    setValue,
   } = useForm<CreatePlanDtoWithoutSchedule>({
     mode: "onTouched",
     shouldFocusError: true,
@@ -183,6 +184,9 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                       )}
                       {...register("major", {
                         required: "Major is required",
+                        onChange: () => {
+                          setValue("concentration", "");
+                        },
                       })}
                     />
                     <PlanConcentrationsSelect

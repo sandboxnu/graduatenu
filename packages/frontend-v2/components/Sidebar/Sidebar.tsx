@@ -74,7 +74,7 @@ const Sidebar: React.FC<SidebarProps> = memo(
       isLoading: isMajorLoading,
       error,
     } = useMajor(selectedPlan.catalogYear, selectedPlan.major);
-    const concentration = major?.concentrations.concentrationOptions.find(
+    const concentration = major?.concentrations?.concentrationOptions.find(
       (concentration) => concentration.title === selectedPlan.concentration
     );
 

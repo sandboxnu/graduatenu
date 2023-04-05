@@ -285,10 +285,14 @@ export function validateMajor2(
   concentrations?: SelectedConcentrationsType
 ): MajorValidationResult {
   const tracker = new Major2ValidationTracker(taken);
-  const concentrationReq = getConcentrationsRequirement(
-    concentrations,
-    major.concentrations
-  );
+  let concentrationReq: Requirement2[] = [];
+  if (major.concentrations) {
+    concentrationReq = getConcentrationsRequirement(
+      concentrations,
+      major.concentrations
+    );
+  }
+
   const majorReqs = [...major.requirementSections, ...concentrationReq];
   // create a big AND requirement of all the sections and selected concentrations
   const requirementsResult = validateRequirement(
