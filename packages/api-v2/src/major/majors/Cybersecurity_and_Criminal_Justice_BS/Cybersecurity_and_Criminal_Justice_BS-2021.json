@@ -524,8 +524,22 @@
     {
       "type": "SECTION",
       "title": "Criminal Justice Elective",
-      "requirements": [],
-      "minRequirementCount": 0
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 4,
+          "courses": [
+            {
+              "type": "RANGE",
+              "exceptions": [],
+              "idRangeStart": 0,
+              "idRangeEnd": 9999,
+              "subject": "CRIM"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
     },
     {
       "type": "SECTION",
@@ -558,7 +572,7 @@
           "classId": 3000,
           "subject": "CRIM"
         },
-        {
+        { // <--------------------- Dunno how to handle this will get back to it later
           "type": "COURSE",
           "classId": 4000,
           "subject": "CRIM"
@@ -624,12 +638,6 @@
         }
       ],
       "minRequirementCount": 1
-    },
-    {
-      "type": "SECTION",
-      "title": "Required General Electives",
-      "requirements": [],
-      "minRequirementCount": 0
     }
   ],
   "concentrations": {
