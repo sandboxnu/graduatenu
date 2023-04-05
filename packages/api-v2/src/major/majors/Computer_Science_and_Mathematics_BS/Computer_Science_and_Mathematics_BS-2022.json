@@ -76,9 +76,10 @@
           ]
         },
         {
-          "type": "COURSE",
+          "subject": "CS",
           "classId": 2800,
-          "subject": "CS"
+          "description": "Logic and Computation",
+          "type": "COURSE"
         }
       ],
       "minRequirementCount": 4
@@ -152,59 +153,65 @@
       "title": "Khoury Elective Courses",
       "requirements": [
         {
-          "type": "RANGE",
-          "subject": "CS",
-          "idRangeStart": 2500,
-          "idRangeEnd": 9999,
-          "exceptions": [
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
             {
+              "type": "RANGE",
               "subject": "CS",
-              "classId": 5010,
-              "type": "COURSE"
-            }
-          ]
-        },
-        {
-          "type": "RANGE",
-          "subject": "CY",
-          "idRangeStart": 2000,
-          "idRangeEnd": 9999,
-          "exceptions": [
+              "idRangeStart": 2500,
+              "idRangeEnd": 9999,
+              "exceptions": [
+                {
+                  "subject": "CS",
+                  "classId": 5010,
+                  "type": "COURSE"
+                }
+              ]
+            },
             {
+              "type": "RANGE",
               "subject": "CY",
-              "classId": 4930,
-              "type": "COURSE"
-            }
-          ]
-        },
-        {
-          "type": "RANGE",
-          "subject": "DS",
-          "idRangeStart": 2500,
-          "idRangeEnd": 9999,
-          "exceptions": [
+              "idRangeStart": 2000,
+              "idRangeEnd": 9999,
+              "exceptions": [
+                {
+                  "subject": "CY",
+                  "classId": 4930,
+                  "type": "COURSE"
+                }
+              ]
+            },
             {
+              "type": "RANGE",
               "subject": "DS",
-              "classId": 4900,
-              "type": "COURSE"
-            }
-          ]
-        },
-        {
-          "type": "RANGE",
-          "subject": "IS",
-          "idRangeStart": 2000,
-          "idRangeEnd": 9999,
-          "exceptions": [
+              "idRangeStart": 2500,
+              "idRangeEnd": 9999,
+              "exceptions": [
+                {
+                  "subject": "DS",
+                  "classId": 4900,
+                  "type": "COURSE"
+                }
+              ]
+            },
             {
+              "type": "RANGE",
               "subject": "IS",
-              "classId": 4900,
-              "type": "COURSE"
+              "idRangeStart": 2000,
+              "idRangeEnd": 9999,
+              "exceptions": [
+                {
+                  "subject": "IS",
+                  "classId": 4900,
+                  "type": "COURSE"
+                }
+              ]
             }
           ]
         }
       ],
-      "minRequirementCount": 4
+      "minRequirementCount": 1
     },
     {
       "type": "SECTION",
@@ -396,12 +403,6 @@
         }
       ],
       "minRequirementCount": 1
-    },
-    {
-      "type": "SECTION",
-      "title": "Required General Electives",
-      "requirements": [],
-      "minRequirementCount": 0
     }
   ],
   "concentrations": {
