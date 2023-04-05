@@ -534,8 +534,22 @@
     {
       "type": "SECTION",
       "title": "Criminal Justice Elective",
-      "requirements": [],
-      "minRequirementCount": 0
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 4,
+          "courses": [
+            {
+              "type": "RANGE",
+              "exceptions": [],
+              "idRangeStart": 3000,
+              "idRangeEnd": 5999,
+              "subject": "CRIM"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
     },
     {
       "type": "SECTION",
@@ -574,7 +588,7 @@
           "subject": "CRIM"
         }
       ],
-      "minRequirementCount": 2
+      "minRequirementCount": 2 // <------ dont know what to do here yet must fix this one and the 2021 one
     },
     {
       "type": "SECTION",
@@ -634,12 +648,6 @@
         }
       ],
       "minRequirementCount": 1
-    },
-    {
-      "type": "SECTION",
-      "title": "Required General Electives",
-      "requirements": [],
-      "minRequirementCount": 0
     }
   ],
   "concentrations": {

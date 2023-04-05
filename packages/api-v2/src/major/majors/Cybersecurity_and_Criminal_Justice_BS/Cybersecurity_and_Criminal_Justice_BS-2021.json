@@ -532,8 +532,8 @@
             {
               "type": "RANGE",
               "exceptions": [],
-              "idRangeStart": 0,
-              "idRangeEnd": 9999,
+              "idRangeStart": 3000,
+              "idRangeEnd": 5999,
               "subject": "CRIM"
             }
           ]
