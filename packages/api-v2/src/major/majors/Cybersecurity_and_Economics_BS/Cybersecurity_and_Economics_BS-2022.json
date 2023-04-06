@@ -453,7 +453,7 @@
     },
     {
       "type": "SECTION",
-      "title": "Required Courses",
+      "title": "Economics Required Courses",
       "requirements": [
         {
           "type": "COURSE",
@@ -556,39 +556,6 @@
         }
       ],
       "minRequirementCount": 1
-    },
-    {
-      "type": "SECTION",
-      "title": "Required General Electives",
-      "requirements": [],
-      "minRequirementCount": 0
-    },
-    {
-      "type": "SECTION",
-      "title": "Economics GPA Requirement",
-      "requirements": [
-        {
-          "type": "COURSE",
-          "classId": 2315,
-          "subject": "ECON"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2316,
-          "subject": "ECON"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2350,
-          "subject": "ECON"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2560,
-          "subject": "ECON"
-        }
-      ],
-      "minRequirementCount": 4
     }
   ],
   "concentrations": {
