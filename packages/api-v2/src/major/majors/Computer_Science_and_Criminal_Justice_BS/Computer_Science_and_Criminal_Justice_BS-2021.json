@@ -120,6 +120,9 @@
     {
       "type": "SECTION",
       "title": "Khoury Elective Courses",
+      "warnings": [
+        "With advisor approval, directed study, research, project study, and appropriate graduate-level courses may also be taken as upper-division electives."
+      ],
       "requirements": [
         {
           "type": "XOM",
@@ -337,8 +340,22 @@
     {
       "type": "SECTION",
       "title": "Criminal Justice Elective",
-      "requirements": [],
-      "minRequirementCount": 0
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 4,
+          "courses": [
+            {
+              "type": "RANGE",
+              "subject": "CRIM",
+              "idRangeStart": 3000,
+              "idRangeEnd": 5999,
+              "exceptions": []
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
     },
     {
       "type": "SECTION",
@@ -477,12 +494,6 @@
         }
       ],
       "minRequirementCount": 1
-    },
-    {
-      "type": "SECTION",
-      "title": "Required General Electives",
-      "requirements": [],
-      "minRequirementCount": 0
     }
   ],
   "concentrations": {
