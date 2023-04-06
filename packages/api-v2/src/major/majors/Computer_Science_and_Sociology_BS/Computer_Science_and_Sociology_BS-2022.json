@@ -8,34 +8,14 @@
       "title": "Computer Science Overview",
       "requirements": [
         {
-          "type": "OR",
-          "courses": [
-            {
-              "type": "COURSE",
-              "classId": 1200,
-              "subject": "CS"
-            },
-            {
-              "type": "COURSE",
-              "classId": 1000,
-              "subject": "SOCL"
-            }
-          ]
+          "type": "COURSE",
+          "classId": 1200,
+          "subject": "CS"
         },
         {
-          "type": "OR",
-          "courses": [
-            {
-              "type": "COURSE",
-              "classId": 1210,
-              "subject": "CS"
-            },
-            {
-              "type": "COURSE",
-              "classId": 2000,
-              "subject": "EESH"
-            }
-          ]
+          "type": "COURSE",
+          "classId": 1210,
+          "subject": "CS"
         }
       ],
       "minRequirementCount": 2
@@ -145,26 +125,31 @@
           "type": "OR",
           "courses": [
             {
-              "type": "COURSE",
-              "classId": 4500,
-              "subject": "CS"
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 4500,
+                  "subject": "CS"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 4530,
+                  "subject": "CS"
+                }
+              ]
             },
             {
               "type": "COURSE",
-              "classId": 4530,
-              "subject": "CS"
+              "classId": 3500,
+              "subject": "IS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4200,
+              "subject": "DS"
             }
           ]
-        },
-        {
-          "type": "COURSE",
-          "classId": 4200,
-          "subject": "DS"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3500,
-          "subject": "IS"
         }
       ],
       "minRequirementCount": 1
@@ -176,6 +161,7 @@
         {
           "type": "XOM",
           "numCreditsMin": 12,
+          "warnings": ["Complete 12 credits of upper-division CS, CY, DS, or IS classes that are not already required."],
           "courses": [
             {
               "type": "RANGE",
@@ -232,7 +218,7 @@
           ]
         }
       ],
-      "minRequirementCount": 1
+      "minRequirementCount": 3
     },
     {
       "type": "SECTION",
@@ -241,16 +227,11 @@
         {
           "type": "COURSE",
           "classId": 1101,
-          "subject": "ANTH"
+          "subject": "SOCL"
         },
         {
           "type": "COURSE",
-          "classId": 2305,
-          "subject": "ANTH"
-        },
-        {
-          "type": "COURSE",
-          "classId": 1101,
+          "classId": 3300,
           "subject": "SOCL"
         },
         {
@@ -265,8 +246,13 @@
         },
         {
           "type": "COURSE",
-          "classId": 3300,
-          "subject": "SOCL"
+          "classId": 1101,
+          "subject": "ANTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2305,
+          "subject": "ANTH"
         }
       ],
       "minRequirementCount": 6
@@ -275,27 +261,27 @@
       "type": "SECTION",
       "title": "Sociology Electives",
       "requirements": [
-        {
-          "type": "RANGE",
-          "subject": "SOCL",
-          "idRangeStart": 1000,
-          "idRangeEnd": 1999,
-          "exceptions": []
-        },
-        {
-          "type": "RANGE",
-          "subject": "SOCL",
-          "idRangeStart": 2000,
-          "idRangeEnd": 3999,
-          "exceptions": []
-        },
-        {
-          "type": "RANGE",
-          "subject": "SOCL",
-          "idRangeStart": 4000,
-          "idRangeEnd": 4999,
-          "exceptions": []
-        }
+          {
+            "type": "RANGE",
+            "subject": "SOCL",
+            "idRangeStart": 1000,
+            "idRangeEnd": 1999,
+            "exceptions": []
+          },
+          {
+            "type": "RANGE",
+            "subject": "SOCL",
+            "idRangeStart": 2000,
+            "idRangeEnd": 3999,
+            "exceptions": []
+          },
+          {
+            "type": "RANGE",
+            "subject": "SOCL",
+            "idRangeStart": 4000,
+            "idRangeEnd": 4999,
+            "exceptions": []
+          }
       ],
       "minRequirementCount": 3
     },
@@ -316,19 +302,24 @@
       "title": "Integrative Course Requirement",
       "requirements": [
         {
-          "type": "COURSE",
-          "classId": 1280,
-          "subject": "SOCL"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2485,
-          "subject": "SOCL"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4528,
-          "subject": "SOCL"
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1280,
+              "subject": "SOCL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2485,
+              "subject": "SOCL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4528,
+              "subject": "SOCL"
+            }
+          ]
         }
       ],
       "minRequirementCount": 1
@@ -360,28 +351,27 @@
       "title": "Advanced Writing in the Disciplines",
       "requirements": [
         {
-          "type": "COURSE",
-          "classId": 3302,
-          "subject": "ENGW"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3308,
-          "subject": "ENGW"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3315,
-          "subject": "ENGW"
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3302,
+              "subject": "ENGW"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3308,
+              "subject": "ENGW"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3315,
+              "subject": "ENGW"
+            }
+          ]
         }
       ],
       "minRequirementCount": 1
-    },
-    {
-      "type": "SECTION",
-      "title": "Required General Electives",
-      "requirements": [],
-      "minRequirementCount": 0
     }
   ],
   "concentrations": {

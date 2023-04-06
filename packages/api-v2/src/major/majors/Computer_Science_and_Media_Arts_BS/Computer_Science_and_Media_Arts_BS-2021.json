@@ -308,6 +308,7 @@
     {
       "type": "SECTION",
       "title": "Media Arts Electives",
+      "warnings": ["Complete any six courses as long as prerequisites have been met. At least two must be a 3000-level course."],
       "requirements": [
         {
           "type": "AND",
@@ -402,7 +403,7 @@
           "subject": "ARTH"
         }
       ],
-      "minRequirementCount": 16
+      "minRequirementCount": 6
     },
     {
       "type": "SECTION",
@@ -433,69 +434,74 @@
       "title": "Computing and Social Issues",
       "requirements": [
         {
-          "type": "COURSE",
-          "classId": 2600,
-          "subject": "AFAM"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4170,
-          "subject": "CY"
-        },
-        {
-          "type": "COURSE",
-          "classId": 5240,
-          "subject": "CY"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2150,
-          "subject": "ENGL"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2220,
-          "subject": "HIST"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2102,
-          "subject": "INSH"
-        },
-        {
           "type": "OR",
-          "courses": [
+          "courses":[
             {
               "type": "COURSE",
-              "classId": 1300,
-              "subject": "IS"
+              "classId": 2600,
+              "subject": "AFAM"
             },
             {
               "type": "COURSE",
-              "classId": 1300,
+              "classId": 4170,
+              "subject": "CY"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5240,
+              "subject": "CY"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2150,
+              "subject": "ENGL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2220,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2102,
+              "subject": "INSH"
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 1300,
+                  "subject": "IS"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 1300,
+                  "subject": "PHIL"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 1145,
               "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1280,
+              "subject": "SOCL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2485,
+              "subject": "SOCL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4528,
+              "subject": "SOCL"
             }
           ]
-        },
-        {
-          "type": "COURSE",
-          "classId": 1145,
-          "subject": "PHIL"
-        },
-        {
-          "type": "COURSE",
-          "classId": 1280,
-          "subject": "SOCL"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2485,
-          "subject": "SOCL"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4528,
-          "subject": "SOCL"
         }
       ],
       "minRequirementCount": 1
@@ -516,12 +522,6 @@
         }
       ],
       "minRequirementCount": 2
-    },
-    {
-      "type": "SECTION",
-      "title": "Required General Electives",
-      "requirements": [],
-      "minRequirementCount": 0
     }
   ],
   "concentrations": {

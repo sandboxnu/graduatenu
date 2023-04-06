@@ -259,7 +259,7 @@
           ]
         }
       ],
-      "minRequirementCount": 1
+      "minRequirementCount": 3
     },
     {
       "type": "SECTION",
@@ -288,19 +288,24 @@
       "title": "Laboratory/Directed Study",
       "requirements": [
         {
-          "type": "COURSE",
-          "classId": 4891,
-          "subject": "LING"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4991,
-          "subject": "LING"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4610,
-          "subject": "PSYC"
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 4891,
+              "subject": "LING"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4991,
+              "subject": "LING"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4610,
+              "subject": "PSYC"
+            }
+          ]
         }
       ],
       "minRequirementCount": 1
@@ -332,77 +337,92 @@
       "title": "Linguistics Elective",
       "requirements": [
         {
-          "type": "COURSE",
-          "classId": 2700,
-          "subject": "DEAF"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3466,
-          "subject": "PSYC"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4520,
-          "subject": "PSYC"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4522,
-          "subject": "PSYC"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4524,
-          "subject": "PSYC"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4610,
-          "subject": "PSYC"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4658,
-          "subject": "PSYC"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4660,
-          "subject": "PSYC"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4674,
-          "subject": "PSYC"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4891,
-          "subject": "LING"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4970,
-          "subject": "LING"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4971,
-          "subject": "LING"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4991,
-          "subject": "LING"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4991,
-          "subject": "PSYC"
+          "type": "OR",
+          "courses": [
+            {
+              "type": "RANGE",
+              "creditsRequired": 4,
+              "subject": "LING",
+              "idRangeStart": 3000,
+              "idRangeEnd": 4799,
+              "exceptions": [
+    
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 2700,
+              "subject": "DEAF"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3466,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4520,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4522,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4524,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4610,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4658,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4660,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4674,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4891,
+              "subject": "LING"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4970,
+              "subject": "LING"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4971,
+              "subject": "LING"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4991,
+              "subject": "LING"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4991,
+              "subject": "PSYC"
+            }
+          ]
         }
       ],
-      "minRequirementCount": 14
+      "minRequirementCount": 1
     },
     {
       "type": "SECTION",
@@ -421,69 +441,74 @@
       "title": "Computing and Social Issues",
       "requirements": [
         {
-          "type": "COURSE",
-          "classId": 2600,
-          "subject": "AFAM"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4170,
-          "subject": "CY"
-        },
-        {
-          "type": "COURSE",
-          "classId": 5240,
-          "subject": "CY"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2220,
-          "subject": "HIST"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2150,
-          "subject": "ENGL"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2102,
-          "subject": "INSH"
-        },
-        {
           "type": "OR",
           "courses": [
             {
               "type": "COURSE",
-              "classId": 1300,
-              "subject": "IS"
+              "classId": 2600,
+              "subject": "AFAM"
             },
             {
               "type": "COURSE",
-              "classId": 1300,
+              "classId": 4170,
+              "subject": "CY"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5240,
+              "subject": "CY"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2220,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2150,
+              "subject": "ENGL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2102,
+              "subject": "INSH"
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 1300,
+                  "subject": "IS"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 1300,
+                  "subject": "PHIL"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 1145,
               "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1280,
+              "subject": "SOCL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2485,
+              "subject": "SOCL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4528,
+              "subject": "SOCL"
             }
           ]
-        },
-        {
-          "type": "COURSE",
-          "classId": 1145,
-          "subject": "PHIL"
-        },
-        {
-          "type": "COURSE",
-          "classId": 1280,
-          "subject": "SOCL"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2485,
-          "subject": "SOCL"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4528,
-          "subject": "SOCL"
         }
       ],
       "minRequirementCount": 1
@@ -521,12 +546,6 @@
         }
       ],
       "minRequirementCount": 1
-    },
-    {
-      "type": "SECTION",
-      "title": "Required General Electives",
-      "requirements": [],
-      "minRequirementCount": 0
     }
   ],
   "concentrations": {

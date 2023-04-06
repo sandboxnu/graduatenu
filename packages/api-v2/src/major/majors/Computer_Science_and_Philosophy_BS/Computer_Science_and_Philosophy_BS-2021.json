@@ -147,6 +147,7 @@
     {
       "type": "SECTION",
       "title": "Khoury Elective",
+      "warnings": ["Complete 8 credits of upper-division CS, CY, DS, or IS classes that are not already required."],
       "requirements": [
         {
           "type": "XOM",
@@ -269,6 +270,7 @@
     {
       "type": "SECTION",
       "title": "Electives",
+      "warnings": ["Take four additional PHIL courses, at least one of which is 4000 or above"],
       "requirements": [],
       "minRequirementCount": 0
     },
@@ -338,12 +340,6 @@
         }
       ],
       "minRequirementCount": 1
-    },
-    {
-      "type": "SECTION",
-      "title": "Required General Electives",
-      "requirements": [],
-      "minRequirementCount": 0
     }
   ],
   "concentrations": {

@@ -8,34 +8,14 @@
       "title": "Computer Science Overview",
       "requirements": [
         {
-          "type": "OR",
-          "courses": [
-            {
-              "type": "COURSE",
-              "classId": 1200,
-              "subject": "CS"
-            },
-            {
-              "type": "COURSE",
-              "classId": 1000,
-              "subject": "PHIL"
-            }
-          ]
+          "type": "COURSE",
+          "classId": 1200,
+          "subject": "CS"
         },
         {
-          "type": "OR",
-          "courses": [
-            {
-              "type": "COURSE",
-              "classId": 1210,
-              "subject": "CS"
-            },
-            {
-              "type": "COURSE",
-              "classId": 2000,
-              "subject": "EESH"
-            }
-          ]
+          "type": "COURSE",
+          "classId": 1210,
+          "subject": "CS"
         }
       ],
       "minRequirementCount": 2
@@ -103,9 +83,21 @@
       "title": "Computer Science Required Courses",
       "requirements": [
         {
-          "type": "COURSE",
-          "classId": 2800,
-          "subject": "CS"
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CS",
+              "classId": 2800,
+              "description": "Logic and Computation",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CS",
+              "classId": 2801,
+              "description": "Lab for CS 2800",
+              "type": "COURSE"
+            }
+          ]
         },
         {
           "type": "COURSE",
@@ -155,6 +147,7 @@
     {
       "type": "SECTION",
       "title": "Khoury Elective",
+      "warnings": ["Complete 8 credits of upper-division CS, CY, DS, or IS classes that are not already required."],
       "requirements": [
         {
           "type": "XOM",
@@ -227,11 +220,6 @@
           "subject": "PHIL"
         },
         {
-          "type": "COURSE",
-          "classId": 1145,
-          "subject": "PHIL"
-        },
-        {
           "type": "OR",
           "courses": [
             {
@@ -253,6 +241,11 @@
         },
         {
           "type": "COURSE",
+          "classId": 1145,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
           "classId": 4515,
           "subject": "PHIL"
         },
@@ -271,7 +264,7 @@
             },
             {
               "type": "COURSE",
-              "classId": 4050,
+              "classId": "4050",
               "subject": "PHIL"
             }
           ]
@@ -282,6 +275,7 @@
     {
       "type": "SECTION",
       "title": "Electives",
+      "warnings": ["Take four additional PHIL courses, at least one of which is 4000 or above"],
       "requirements": [],
       "minRequirementCount": 0
     },
@@ -351,12 +345,6 @@
         }
       ],
       "minRequirementCount": 1
-    },
-    {
-      "type": "SECTION",
-      "title": "Required General Electives",
-      "requirements": [],
-      "minRequirementCount": 0
     }
   ],
   "concentrations": {
