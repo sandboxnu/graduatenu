@@ -234,38 +234,42 @@
       "title": "History Electives",
       "requirements": [
         {
-          "type": "COURSE",
-          "classId": 1150,
-          "subject": "ASNS"
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1150,
+              "subject": "ASNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1120,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1130,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1170,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1185,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1103,
+              "subject": "WMNS"
+            }
+          ]
         },
         {
-          "type": "COURSE",
-          "classId": 1120,
-          "subject": "HIST"
-        },
-        {
-          "type": "COURSE",
-          "classId": 1130,
-          "subject": "HIST"
-        },
-        {
-          "type": "COURSE",
-          "classId": 1170,
-          "subject": "HIST"
-        },
-        {
-          "type": "COURSE",
-          "classId": 1185,
-          "subject": "HIST"
-        },
-        {
-          "type": "COURSE",
-          "classId": 1103,
-          "subject": "WMNS"
-        },
-        {
-          "type": "XOM",
-          "numCreditsMin": 4,
+          "type": "OR",
           "courses": [
             {
               "type": "COURSE",
@@ -291,14 +295,26 @@
               "type": "COURSE",
               "classId": 2330,
               "subject": "HIST"
-            },
+            }
+          ]
+        },
+        {
+          "type": "XOM",
+          "numCreditsMin": 12,
+          "courses": [
             {
               "type": "RANGE",
               "subject": "HIST",
               "idRangeStart": 2303,
               "idRangeEnd": 9999,
               "exceptions": []
-            },
+            }
+          ]
+        },
+        {
+          "type": "XOM",
+          "numCreditsMin": 4,
+          "courses": [
             {
               "type": "RANGE",
               "subject": "HIST",
@@ -309,7 +325,7 @@
           ]
         }
       ],
-      "minRequirementCount": 7
+      "minRequirementCount": 6
     },
     {
       "type": "SECTION",
@@ -408,19 +424,14 @@
           "subject": "INSH"
         },
         {
-          "type": "OR",
-          "courses": [
-            {
-              "type": "COURSE",
-              "classId": 1300,
-              "subject": "IS"
-            },
-            {
-              "type": "COURSE",
-              "classId": 1300,
-              "subject": "PHIL"
-            }
-          ]
+          "type": "COURSE",
+          "classId": 1300,
+          "subject": "IS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1300,
+          "subject": "PHIL"
         },
         {
           "type": "COURSE",
@@ -470,13 +481,23 @@
     {
       "type": "SECTION",
       "title": "Advanced Writing in the Disciplines",
-      "requirements": [],
-      "minRequirementCount": 0
-    },
-    {
-      "type": "SECTION",
-      "title": "Required General Electives",
-      "requirements": [],
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2301,
+              "subject": "ENGW"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2302,
+              "subject": "ENGW"
+            }
+          ]
+        }
+      ],
       "minRequirementCount": 0
     }
   ],
