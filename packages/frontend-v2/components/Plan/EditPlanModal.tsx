@@ -148,8 +148,6 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
     onCloseDisplay();
   };
 
-  console.log("catalogYear", catalogYear);
-
   return (
     <>
       <BlueButton leftIcon={<EditIcon />} onClick={onOpen} ml="xs" size="md">
