@@ -142,14 +142,19 @@
           "subject": "IS"
         },
         {
-          "type": "COURSE",
-          "classId": 4200,
-          "subject": "IS"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4300,
-          "subject": "IS"
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 4200,
+              "subject": "IS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4300,
+              "subject": "IS"
+            }
+          ]
         }
       ],
       "minRequirementCount": 6
@@ -217,7 +222,7 @@
           ]
         }
       ],
-      "minRequirementCount": 1
+      "minRequirementCount": 2
     },
     {
       "type": "SECTION",
@@ -397,19 +402,14 @@
           "subject": "INSH"
         },
         {
-          "type": "OR",
-          "courses": [
-            {
-              "type": "COURSE",
-              "classId": 1300,
-              "subject": "IS"
-            },
-            {
-              "type": "COURSE",
-              "classId": 1300,
-              "subject": "PHIL"
-            }
-          ]
+          "type": "COURSE",
+          "classId": 1300,
+          "subject": "IS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1300,
+          "subject": "PHIL"
         },
         {
           "type": "COURSE",
@@ -461,65 +461,26 @@
       "title": "Advanced Writing in the Disciplines",
       "requirements": [
         {
-          "type": "XOM",
-          "numCreditsMin": 4,
-          "courses": [
-            {
-              "type": "COURSE",
-              "classId": 3302,
-              "subject": "ENGW"
-            },
-            {
-              "type": "COURSE",
-              "classId": 3308,
-              "subject": "ENGW"
-            },
-            {
-              "type": "COURSE",
-              "classId": 3315,
-              "subject": "ENGW"
-            }
-          ]
+          "type": "COURSE",
+          "classId": 3302,
+          "subject": "ENGW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3308,
+          "subject": "ENGW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3315,
+          "subject": "ENGW"
         }
       ],
       "minRequirementCount": 1
-    },
-    {
-      "type": "SECTION",
-      "title": "Required General Electives",
-      "requirements": [],
-      "minRequirementCount": 0
-    },
-    {
-      "type": "SECTION",
-      "title": "Economics GPA Requirement",
-      "requirements": [
-        {
-          "type": "COURSE",
-          "classId": 2315,
-          "subject": "ECON"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2316,
-          "subject": "ECON"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2350,
-          "subject": "ECON"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2560,
-          "subject": "ECON"
-        }
-      ],
-      "minRequirementCount": 4
     }
   ],
   "concentrations": {
     "minOptions": 0,
-    "concentrationOptions": []
+    "concentrationOptions": [] 
   }
 }
