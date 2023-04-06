@@ -135,65 +135,74 @@
     {
       "type": "SECTION",
       "title": "Khoury Elective Courses",
+      "warnings": [
+        "With adviser approval, a directed study, research, project study, or appropriate graduate-level course may also be taken as a computer science elective."
+      ],
       "requirements": [
         {
-          "type": "RANGE",
-          "subject": "CS",
-          "idRangeStart": 2500,
-          "idRangeEnd": 9999,
-          "exceptions": [
+          "type": "XOM",
+          "numCreditsMin": 12,
+          "courses": [
             {
+              "type": "RANGE",
               "subject": "CS",
-              "classId": 5010,
-              "type": "COURSE"
-            }
-          ]
-        },
-        {
-          "type": "RANGE",
-          "subject": "CY",
-          "idRangeStart": 2000,
-          "idRangeEnd": 9999,
-          "exceptions": [
+              "idRangeStart": 2500,
+              "idRangeEnd": 9999,
+              "exceptions": [
+                {
+                  "subject": "CS",
+                  "classId": 5010,
+                  "type": "COURSE"
+                }
+              ]
+            },
             {
+              "type": "RANGE",
               "subject": "CY",
-              "classId": 4930,
-              "type": "COURSE"
-            }
-          ]
-        },
-        {
-          "type": "RANGE",
-          "subject": "DS",
-          "idRangeStart": 2500,
-          "idRangeEnd": 9999,
-          "exceptions": [
+              "idRangeStart": 2000,
+              "idRangeEnd": 9999,
+              "exceptions": [
+                {
+                  "subject": "CY",
+                  "classId": 4930,
+                  "type": "COURSE"
+                }
+              ]
+            },
             {
+              "type": "RANGE",
               "subject": "DS",
-              "classId": 4900,
-              "type": "COURSE"
-            }
-          ]
-        },
-        {
-          "type": "RANGE",
-          "subject": "IS",
-          "idRangeStart": 2000,
-          "idRangeEnd": 9999,
-          "exceptions": [
+              "idRangeStart": 2500,
+              "idRangeEnd": 9999,
+              "exceptions": [
+                {
+                  "subject": "DS",
+                  "classId": 4900,
+                  "type": "COURSE"
+                }
+              ]
+            },
             {
+              "type": "RANGE",
               "subject": "IS",
-              "classId": 4900,
-              "type": "COURSE"
+              "idRangeStart": 2000,
+              "idRangeEnd": 9999,
+              "exceptions": [
+                {
+                  "subject": "IS",
+                  "classId": 4900,
+                  "type": "COURSE"
+                }
+              ]
             }
           ]
         }
       ],
-      "minRequirementCount": 4
+      "minRequirementCount": 1
     },
     {
       "type": "SECTION",
-      "title": "Required Courses",
+      "title": "Required Psychology Courses",
       "requirements": [
         {
           "type": "COURSE",
@@ -216,6 +225,9 @@
     {
       "type": "SECTION",
       "title": "Statistics",
+      "warnings": [
+        "Complete the following course. Students who receive transfer credit for the Advanced Placement Statistics exam may complete the 1 SH PSYC 2315 course (requires department approval)."
+      ],
       "requirements": [
         {
           "type": "COURSE",
@@ -299,6 +311,9 @@
     {
       "type": "SECTION",
       "title": "Psychology Electives",
+      "warnings": [
+        "With prior approval, directed study research and Honors Project courses can also be counted (PSYC 4970, PSYC 4971, PSYC 4991"
+      ],
       "requirements": [
         {
           "type": "XOM",
@@ -536,12 +551,6 @@
         }
       ],
       "minRequirementCount": 1
-    },
-    {
-      "type": "SECTION",
-      "title": "Required General Electives",
-      "requirements": [],
-      "minRequirementCount": 0
     }
   ],
   "concentrations": {
