@@ -129,7 +129,7 @@
           ]
         }
       ],
-      "minRequirementCount": 1
+      "minRequirementCount": 3
     },
     {
       "type": "SECTION",
@@ -167,7 +167,7 @@
           ]
         }
       ],
-      "minRequirementCount": 3
+      "minRequirementCount": 4
     },
     {
       "type": "SECTION",
@@ -282,7 +282,7 @@
           ]
         }
       ],
-      "minRequirementCount": 1
+      "minRequirementCount": 2
     },
     {
       "type": "SECTION",
