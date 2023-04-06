@@ -6,6 +6,10 @@
     {
       "type": "SECTION",
       "title": "Computer Science Overview",
+      "warnings": [
+        "Students entering through the biology department may take Biology at Northeastern (BIOL 1000) instead of CS 1200.",
+        "Students entering through the biology department may take Professional Development for Co-op (EESC 2000) instead of CS 1210."
+      ],
       "requirements": [
         {
           "type": "COURSE",
@@ -135,6 +139,9 @@
     {
       "type": "SECTION",
       "title": "Khoury Elective Courses",
+      "warnings": [
+        "With adviser approval, a directed study, research, project study, or appropriate graduate-level course may also be taken as a computer science elective."
+      ],
       "requirements": [
         {
           "type": "XOM",
@@ -377,97 +384,109 @@
       "title": "Intermediate and Advanced Biology Electives",
       "requirements": [
         {
-          "type": "COURSE",
-          "classId": 2327,
-          "subject": "BIOL"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3401,
-          "subject": "BIOL"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3403,
-          "subject": "BIOL"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3413,
-          "subject": "BIOL"
-        },
-        {
-          "type": "AND",
+          "type": "XOM",
+          "numCreditsMin": 4,
           "courses": [
             {
-              "subject": "EEMB",
-              "classId": 2302,
-              "description": "Ecology",
-              "type": "COURSE"
+              "type": "COURSE",
+              "classId": 2327,
+              "subject": "BIOL"
             },
             {
-              "subject": "EEMB",
-              "classId": 2303,
-              "description": "Lab for EEMB 2302",
-              "type": "COURSE"
+              "type": "COURSE",
+              "classId": 3401,
+              "subject": "BIOL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3403,
+              "subject": "BIOL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3413,
+              "subject": "BIOL"
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "EEMB",
+                  "classId": 2302,
+                  "description": "Ecology",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "EEMB",
+                  "classId": 2303,
+                  "description": "Lab for EEMB 2302",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 2400,
+              "subject": "EEMB"
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "EEMB",
+                  "classId": 2700,
+                  "description": "Marine Biology",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "EEMB",
+                  "classId": 2701,
+                  "description": "Lab for EEMB 2700",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 3460,
+              "subject": "EEMB"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3466,
+              "subject": "EEMB"
             }
           ]
         },
         {
-          "type": "COURSE",
-          "classId": 2400,
-          "subject": "EEMB"
-        },
-        {
-          "type": "AND",
+          "type": "XOM",
+          "numCreditsMin": 4,
           "courses": [
             {
-              "subject": "EEMB",
-              "classId": 2700,
-              "description": "Marine Biology",
-              "type": "COURSE"
+              "type": "RANGE",
+              "subject": "BIOL",
+              "idRangeStart": 2311,
+              "idRangeEnd": 4999,
+              "exceptions": []
             },
             {
+              "type": "RANGE",
               "subject": "EEMB",
-              "classId": 2701,
-              "description": "Lab for EEMB 2700",
-              "type": "COURSE"
+              "idRangeStart": 2290,
+              "idRangeEnd": 5515,
+              "exceptions": []
+            },
+            {
+              "type": "RANGE",
+              "subject": "EEMB",
+              "idRangeStart": 5548,
+              "idRangeEnd": 5569,
+              "exceptions": []
             }
           ]
-        },
-        {
-          "type": "COURSE",
-          "classId": 3460,
-          "subject": "EEMB"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3466,
-          "subject": "EEMB"
-        },
-        {
-          "type": "RANGE",
-          "subject": "BIOL",
-          "idRangeStart": 2311,
-          "idRangeEnd": 4999,
-          "exceptions": []
-        },
-        {
-          "type": "RANGE",
-          "subject": "EEMB",
-          "idRangeStart": 2290,
-          "idRangeEnd": 5515,
-          "exceptions": []
-        },
-        {
-          "type": "RANGE",
-          "subject": "EEMB",
-          "idRangeStart": 5548,
-          "idRangeEnd": 5569,
-          "exceptions": []
         }
       ],
-      "minRequirementCount": 12
+      "minRequirementCount": 2
     },
     {
       "type": "SECTION",
@@ -736,12 +755,6 @@
         }
       ],
       "minRequirementCount": 1
-    },
-    {
-      "type": "SECTION",
-      "title": "Required General Electives",
-      "requirements": [],
-      "minRequirementCount": 0
     }
   ],
   "concentrations": {
