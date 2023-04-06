@@ -61,6 +61,7 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
     watch,
     reset,
     setValue,
+    control,
   } = useForm<EditPlanInput>({
     mode: "onTouched",
     shouldFocusError: true,
@@ -147,6 +148,8 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
     onCloseDisplay();
   };
 
+  console.log("catalogYear", catalogYear);
+
   return (
     <>
       <BlueButton leftIcon={<EditIcon />} onClick={onOpen} ml="xs" size="md">
@@ -196,38 +199,40 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                   <>
                     <PlanSelect
                       label="Catalog Year"
-                      id="catalogYear"
-                      placeholder="Select a Catalog Year"
-                      error={errors.catalogYear}
-                      array={extractSupportedMajorYears(supportedMajorsData)}
-                      {...register("catalogYear", {
-                        required: "Catalog year is required",
-                        valueAsNumber: true,
-                      })}
+                      noValueOptionLabel="Select a Catalog Year"
+                      name="catalogYear"
+                      control={control}
+                      options={extractSupportedMajorYears(supportedMajorsData)}
+                      onChangeSideEffect={(val: string | null) => {
+                        const newYear = val ? parseInt(val, 10) : null;
+                        if (newYear !== catalogYear) {
+                          setValue("major", "");
+                        }
+                      }}
+                      rules={{ required: "Catalog year is required." }}
+                      isNumeric
                     />
                     <PlanSelect
                       label="Major"
-                      id="major"
-                      placeholder="Select a Major"
-                      error={errors.major}
-                      array={extractSupportedMajorNames(
+                      noValueOptionLabel="Select a Major"
+                      name="major"
+                      control={control}
+                      options={extractSupportedMajorNames(
                         catalogYear,
                         supportedMajorsData
                       )}
-                      {...register("major", {
-                        required: "Major is required",
-                        onChange: () => {
-                          setValue("concentration", "");
-                        },
-                      })}
+                      onChangeSideEffect={() => {
+                        setValue("concentration", "");
+                      }}
+                      rules={{ required: "Major is required." }}
+                      isSearchable
                     />
                     <PlanConcentrationsSelect
                       catalogYear={catalogYear}
                       majorName={majorName}
                       supportedMajorsData={supportedMajorsData}
-                      register={register}
-                      errors={errors}
-                    />{" "}
+                      control={control}
+                    />
                   </>
                 )}
               </VStack>
