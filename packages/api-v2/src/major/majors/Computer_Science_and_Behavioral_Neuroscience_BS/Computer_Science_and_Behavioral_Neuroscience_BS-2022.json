@@ -6,6 +6,10 @@
     {
       "type": "SECTION",
       "title": "Overview",
+      "warnings": [
+        "Students entering through the behavioral neuroscience program may take Behavioral Neuroscience at Northeastern (BNSC 1000).",
+        "Students entering through the behavioral neuroscience program may take Professional Development for Co-op (EESC 2000)."
+      ],
       "requirements": [
         {
           "type": "COURSE",
@@ -135,6 +139,9 @@
     {
       "type": "SECTION",
       "title": "Statistics Foundation",
+      "warnings": [
+        "Students who receive transfer credit for the Advanced Placement Statistics exam may complete the 1 SH PSYC 2315 course (requires department permission)."
+      ],
       "requirements": [
         {
           "type": "AND",
@@ -159,7 +166,7 @@
           "subject": "PSYC"
         }
       ],
-      "minRequirementCount": 2
+      "minRequirementCount": 1
     },
     {
       "type": "SECTION",
@@ -340,25 +347,23 @@
         {
           "type": "OR",
           "courses": [
-            [
-              {
-                "type": "AND",
-                "courses": [
-                  {
-                    "subject": "PT",
-                    "classId": 5410,
-                    "description": "Functional Human Neuroanatomy",
-                    "type": "COURSE"
-                  },
-                  {
-                    "subject": "PT",
-                    "classId": 5411,
-                    "description": "Lab for PT 5410",
-                    "type": "COURSE"
-                  }
-                ]
-              }
-            ],
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "PT",
+                  "classId": 5410,
+                  "description": "Functional Human Neuroanatomy",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "PT",
+                  "classId": 5411,
+                  "description": "Lab for PT 5410",
+                  "type": "COURSE"
+                }
+              ]
+            },
             {
               "type": "COURSE",
               "classId": 3200,
@@ -551,85 +556,91 @@
       "title": "Upper-Division Elective",
       "requirements": [
         {
-          "type": "RANGE",
-          "subject": "CS",
-          "idRangeStart": 2500,
-          "idRangeEnd": 9999,
-          "exceptions": [
+          "type": "XOM",
+          "numCreditsMin": 4,
+          "courses": [
             {
+              "type": "RANGE",
               "subject": "CS",
-              "classId": 5010,
-              "type": "COURSE"
-            }
-          ]
-        },
-        {
-          "type": "RANGE",
-          "subject": "CY",
-          "idRangeStart": 2000,
-          "idRangeEnd": 9999,
-          "exceptions": [
+              "idRangeStart": 2500,
+              "idRangeEnd": 9999,
+              "exceptions": [
+                {
+                  "subject": "CS",
+                  "classId": 5010,
+                  "type": "COURSE"
+                }
+              ]
+            },
             {
+              "type": "RANGE",
               "subject": "CY",
-              "classId": 4930,
-              "type": "COURSE"
-            }
-          ]
-        },
-        {
-          "type": "RANGE",
-          "subject": "DS",
-          "idRangeStart": 2500,
-          "idRangeEnd": 9999,
-          "exceptions": [
+              "idRangeStart": 2000,
+              "idRangeEnd": 9999,
+              "exceptions": [
+                {
+                  "subject": "CY",
+                  "classId": 4930,
+                  "type": "COURSE"
+                }
+              ]
+            },
             {
+              "type": "RANGE",
               "subject": "DS",
-              "classId": 4900,
-              "type": "COURSE"
-            }
-          ]
-        },
-        {
-          "type": "RANGE",
-          "subject": "IS",
-          "idRangeStart": 2000,
-          "idRangeEnd": 9999,
-          "exceptions": [
+              "idRangeStart": 2500,
+              "idRangeEnd": 9999,
+              "exceptions": [
+                {
+                  "subject": "DS",
+                  "classId": 4900,
+                  "type": "COURSE"
+                }
+              ]
+            },
             {
+              "type": "RANGE",
               "subject": "IS",
-              "classId": 4900,
-              "type": "COURSE"
+              "idRangeStart": 2000,
+              "idRangeEnd": 9999,
+              "exceptions": [
+                {
+                  "subject": "IS",
+                  "classId": 4900,
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "RANGE",
+              "subject": "BNSC",
+              "idRangeStart": 4970,
+              "idRangeEnd": 9999,
+              "exceptions": []
+            },
+            {
+              "type": "RANGE",
+              "subject": "BIOL",
+              "idRangeStart": 3400,
+              "idRangeEnd": 9999,
+              "exceptions": []
+            },
+            {
+              "type": "COURSE",
+              "classId": 6309,
+              "subject": "BINF"
+            },
+            {
+              "type": "RANGE",
+              "subject": "PSYC",
+              "idRangeStart": 3200,
+              "idRangeEnd": 9999,
+              "exceptions": []
             }
           ]
-        },
-        {
-          "type": "RANGE",
-          "subject": "BNSC",
-          "idRangeStart": 4970,
-          "idRangeEnd": 9999,
-          "exceptions": []
-        },
-        {
-          "type": "RANGE",
-          "subject": "BIOL",
-          "idRangeStart": 3400,
-          "idRangeEnd": 9999,
-          "exceptions": []
-        },
-        {
-          "type": "COURSE",
-          "classId": 6309,
-          "subject": "BINF"
-        },
-        {
-          "type": "RANGE",
-          "subject": "PSYC",
-          "idRangeStart": 3200,
-          "idRangeEnd": 9999,
-          "exceptions": []
         }
       ],
-      "minRequirementCount": 8
+      "minRequirementCount": 1
     },
     {
       "type": "SECTION",
@@ -687,12 +698,6 @@
         }
       ],
       "minRequirementCount": 1
-    },
-    {
-      "type": "SECTION",
-      "title": "Required General Electives",
-      "requirements": [],
-      "minRequirementCount": 0
     }
   ],
   "concentrations": {
