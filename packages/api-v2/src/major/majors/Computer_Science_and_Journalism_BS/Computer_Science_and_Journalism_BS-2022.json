@@ -208,6 +208,19 @@
                   "type": "COURSE"
                 }
               ]
+            },
+            {
+              "type": "RANGE",
+              "subject": "IS",
+              "idRangeStart": 2000,
+              "idRangeEnd": 9999,
+              "exceptions": [
+                {
+                  "subject": "IS",
+                  "classId": 4900,
+                  "type": "COURSE"
+                }
+              ]
             }
           ]
         }
@@ -273,7 +286,7 @@
           "subject": "JRNL"
         }
       ],
-      "minRequirementCount": 4
+      "minRequirementCount": 5
     },
     {
       "type": "SECTION",
@@ -305,8 +318,21 @@
     {
       "type": "SECTION",
       "title": "Journalism Electives",
-      "requirements": [],
-      "minRequirementCount": 0
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "RANGE",
+              "subject": "JRNL",
+              "idRangeStart": 0,
+              "idRangeEnd": 9999
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
     },
     {
       "type": "SECTION",
@@ -367,19 +393,14 @@
           "subject": "INSH"
         },
         {
-          "type": "OR",
-          "courses": [
-            {
-              "type": "COURSE",
-              "classId": 1300,
-              "subject": "IS"
-            },
-            {
-              "type": "COURSE",
-              "classId": 1300,
-              "subject": "PHIL"
-            }
-          ]
+          "type": "COURSE",
+          "classId": 1300,
+          "subject": "IS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1300,
+          "subject": "PHIL"
         },
         {
           "type": "COURSE",
@@ -427,12 +448,6 @@
         }
       ],
       "minRequirementCount": 1
-    },
-    {
-      "type": "SECTION",
-      "title": "Required General Electives",
-      "requirements": [],
-      "minRequirementCount": 0
     }
   ],
   "concentrations": {
