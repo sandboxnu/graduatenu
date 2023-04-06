@@ -155,6 +155,9 @@
     {
       "type": "SECTION",
       "title": "Khoury Elective",
+      "warnings": [
+        "With adviser approval, directed study, research, project study, and appropriate graduate-level courses may also be taken as upper-division electives."
+      ],
       "requirements": [
         {
           "type": "XOM",
@@ -394,13 +397,20 @@
     {
       "type": "SECTION",
       "title": "Communication Studies Electives",
+      "warnings": ["Junior/Senior Honors Project 1 (COMM 4970) is excluded."],
       "requirements": [
         {
-          "type": "RANGE",
-          "subject": "COMM",
-          "idRangeStart": 1131,
-          "idRangeEnd": 4996,
-          "exceptions": []
+          "type": "XOM",
+          "numCreditsMin": 12,
+          "courses": [
+            {
+              "type": "RANGE",
+              "subject": "COMM",
+              "idRangeStart": 1131,
+              "idRangeEnd": 4996,
+              "exceptions": []
+            }
+          ]
         }
       ],
       "minRequirementCount": 1
@@ -504,6 +514,9 @@
     {
       "type": "SECTION",
       "title": "Advanced Writing in the Disciplines",
+      "warnings": [
+        "If Advocacy Writing (COMM 3409) is selected it will also satisfy a communication studies elective requirement. One additional general elective will be then required in its place."
+      ],
       "requirements": [
         {
           "type": "COURSE",
@@ -527,12 +540,6 @@
         }
       ],
       "minRequirementCount": 1
-    },
-    {
-      "type": "SECTION",
-      "title": "Required General Electives",
-      "requirements": [],
-      "minRequirementCount": 0
     }
   ],
   "concentrations": {
