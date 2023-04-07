@@ -271,7 +271,6 @@
           "type": "XOM",
           "numCreditsMin": 12,
           "courses": [
-            [
               {
                 "type": "RANGE",
                 "subject": "ARTD",
@@ -313,8 +312,7 @@
                 "idRangeStart": 0,
                 "idRangeEnd": 9999,
                 "exceptions": []
-              }
-            ],
+              },
             {
               "type": "RANGE",
               "subject": "CS",
