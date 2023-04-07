@@ -90,19 +90,14 @@
       "type": "SECTION",
       "minRequirementCount": 1,
       "requirements": [
-        {
-          "type": "OR",
-          "courses": [
-            { "type": "COURSE", "classId": 1112, "subject": "COMM" },
-            { "type": "COURSE", "classId": 1113, "subject": "COMM" },
-            { "type": "COURSE", "classId": 1210, "subject": "COMM" },
-            { "type": "COURSE", "classId": 1511, "subject": "COMM" },
-            { "type": "COURSE", "classId": 1125, "subject": "THTR" },
-            { "type": "COURSE", "classId": 1130, "subject": "THTR" },
-            { "type": "COURSE", "classId": 1180, "subject": "THTR" },
-            { "type": "COURSE", "classId": 2345, "subject": "THTR" }
-          ]
-        }
+          { "type": "COURSE", "classId": 1112, "subject": "COMM" },
+          { "type": "COURSE", "classId": 1113, "subject": "COMM" },
+          { "type": "COURSE", "classId": 1210, "subject": "COMM" },
+          { "type": "COURSE", "classId": 1511, "subject": "COMM" },
+          { "type": "COURSE", "classId": 1125, "subject": "THTR" },
+          { "type": "COURSE", "classId": 1130, "subject": "THTR" },
+          { "type": "COURSE", "classId": 1180, "subject": "THTR" },
+          { "type": "COURSE", "classId": 2345, "subject": "THTR" }
       ],
       "title": "Presentation Requirement"
     },
@@ -161,23 +156,18 @@
       "title": "Computing and Social Issues",
       "minRequirementCount": 1,
       "requirements": [
-        {
-          "type": "OR",
-          "courses": [
-            { "type": "COURSE", "classId": 2600, "subject": "AFAM" },
-            { "type": "COURSE", "classId": 4170, "subject": "CY" },
-            { "type": "COURSE", "classId": 5240, "subject": "CY" },
-            { "type": "COURSE", "classId": 2150, "subject": "ENGL" },
-            { "type": "COURSE", "classId": 2220, "subject": "HIST" },
-            { "type": "COURSE", "classId": 2102, "subject": "INSH" },
-            { "type": "COURSE", "classId": 1300, "subject": "IS" },
-            { "type": "COURSE", "classId": 1300, "subject": "PHIL" },
-            { "type": "COURSE", "classId": 1145, "subject": "PHIL" },
-            { "type": "COURSE", "classId": 1280, "subject": "SOCL" },
-            { "type": "COURSE", "classId": 2485, "subject": "SOCL" },
-            { "type": "COURSE", "classId": 4528, "subject": "SOCL" }
-          ]
-        }
+          { "type": "COURSE", "classId": 2600, "subject": "AFAM" },
+          { "type": "COURSE", "classId": 4170, "subject": "CY" },
+          { "type": "COURSE", "classId": 5240, "subject": "CY" },
+          { "type": "COURSE", "classId": 2150, "subject": "ENGL" },
+          { "type": "COURSE", "classId": 2220, "subject": "HIST" },
+          { "type": "COURSE", "classId": 2102, "subject": "INSH" },
+          { "type": "COURSE", "classId": 1300, "subject": "IS" },
+          { "type": "COURSE", "classId": 1300, "subject": "PHIL" },
+          { "type": "COURSE", "classId": 1145, "subject": "PHIL" },
+          { "type": "COURSE", "classId": 1280, "subject": "SOCL" },
+          { "type": "COURSE", "classId": 2485, "subject": "SOCL" },
+          { "type": "COURSE", "classId": 4528, "subject": "SOCL" }
       ]
     },
     {
