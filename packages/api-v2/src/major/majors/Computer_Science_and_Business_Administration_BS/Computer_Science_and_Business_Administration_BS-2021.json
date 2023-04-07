@@ -466,7 +466,10 @@
       {
         "type": "SECTION",
         "title": "Brand Management",
-        "warnings": ["Complete three electives, with at least 8 credits from MKTG courses:"],
+        "warnings": [
+          "After the first course, also complete three electives, with at least 8 credits from MKTG courses:",
+          "A maximum of one course may be applied to requirements of a second concentration."
+        ],
         "requirements": [
           {
             "type": "COURSE",
@@ -559,7 +562,10 @@
       },
       {
         "type": "SECTION",
-        "title": "Required Courses",
+        "title": "Business Analytics",
+        "warnings": [
+          "Only one course may double count between another concentration or minor."
+        ],
         "requirements": [
           {
             "type": "COURSE",
@@ -585,35 +591,38 @@
             "type": "COURSE",
             "classId": 3501,
             "subject": "MISM"
+          },
+          {
+            "type": "XOM",
+            "numCreditsMin": 4,
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 3515,
+                "subject": "MISM"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3525,
+                "subject": "MISM"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4983,
+                "subject": "MISM"
+              }
+            ]
           }
         ],
-        "minRequirementCount": 3
+        "minRequirementCount": 4
       },
       {
         "type": "SECTION",
-        "title": "Elective",
-        "requirements": [
-          {
-            "type": "COURSE",
-            "classId": 3515,
-            "subject": "MISM"
-          },
-          {
-            "type": "COURSE",
-            "classId": 3525,
-            "subject": "MISM"
-          },
-          {
-            "type": "COURSE",
-            "classId": 4983,
-            "subject": "MISM"
-          }
+        "title": "Corporate Innovation and Venture",
+        "warnings": [
+          "Take the first two courses and two electives (following groups). Only one of the electives can come from the last group.",
+          "One course from an approved Dialogue may count toward a concentration elective."
         ],
-        "minRequirementCount": 1
-      },
-      {
-        "type": "SECTION",
-        "title": "Required Courses",
         "requirements": [
           {
             "type": "COURSE",
@@ -624,85 +633,94 @@
             "type": "COURSE",
             "classId": 4504,
             "subject": "ENTR"
+          },
+          {
+            "type": "XOM",
+            "numCreditsMin": 4,
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 2304,
+                "subject": "ENTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3335,
+                "subject": "ENTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4225,
+                "subject": "ENTR"
+              }
+            ]
+          },
+          {
+            "type": "XOM",
+            "numCreditsMin": 4,
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 2206,
+                "subject": "ENTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2215,
+                "subject": "ENTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2303,
+                "subject": "ENTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4983,
+                "subject": "ENTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4505,
+                "subject": "ENTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4610,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3302,
+                "subject": "MGMT"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3340,
+                "subject": "MGMT"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3530,
+                "subject": "MGMT"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4301,
+                "subject": "STRT"
+              }
+            ]
           }
         ],
-        "minRequirementCount": 2
+        "minRequirementCount": 4
       },
       {
         "type": "SECTION",
-        "title": "Electives",
-        "requirements": [
-          {
-            "type": "COURSE",
-            "classId": 2304,
-            "subject": "ENTR"
-          },
-          {
-            "type": "COURSE",
-            "classId": 3335,
-            "subject": "ENTR"
-          },
-          {
-            "type": "COURSE",
-            "classId": 4225,
-            "subject": "ENTR"
-          },
-          {
-            "type": "COURSE",
-            "classId": 2206,
-            "subject": "ENTR"
-          },
-          {
-            "type": "COURSE",
-            "classId": 2215,
-            "subject": "ENTR"
-          },
-          {
-            "type": "COURSE",
-            "classId": 2303,
-            "subject": "ENTR"
-          },
-          {
-            "type": "COURSE",
-            "classId": 4983,
-            "subject": "ENTR"
-          },
-          {
-            "type": "COURSE",
-            "classId": 4505,
-            "subject": "ENTR"
-          },
-          {
-            "type": "COURSE",
-            "classId": 4610,
-            "subject": "FINA"
-          },
-          {
-            "type": "COURSE",
-            "classId": 3302,
-            "subject": "MGMT"
-          },
-          {
-            "type": "COURSE",
-            "classId": 3340,
-            "subject": "MGMT"
-          },
-          {
-            "type": "COURSE",
-            "classId": 3530,
-            "subject": "MGMT"
-          },
-          {
-            "type": "COURSE",
-            "classId": 4301,
-            "subject": "STRT"
-          }
+        "title": "Entrepreneurial Startups",
+        "warnings": [
+          "Take the first two courses and two electives (following groups). Only one of the electives can come from the last group.",
+          "One course from an approved Dialogue may count toward a concentration elective."
         ],
-        "minRequirementCount": 13
-      },
-      {
-        "type": "SECTION",
-        "title": "Required Courses",
         "requirements": [
           {
             "type": "COURSE",
@@ -713,65 +731,74 @@
             "type": "COURSE",
             "classId": 4501,
             "subject": "ENTR"
+          },
+          {
+            "type": "XOM",
+            "numCreditsMin": 4,
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 2303,
+                "subject": "ENTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3305,
+                "subject": "ENTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3330,
+                "subject": "ENTR"
+              }
+            ]
+          },
+          {
+            "type": "XOM",
+            "numCreditsMin": 4,
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 2206,
+                "subject": "ENTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2215,
+                "subject": "ENTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2304,
+                "subject": "ENTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4983,
+                "subject": "ENTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4610,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3302,
+                "subject": "MGMT"
+              }
+            ]
           }
         ],
-        "minRequirementCount": 2
+        "minRequirementCount": 4
       },
       {
         "type": "SECTION",
-        "title": "Electives",
-        "requirements": [
-          {
-            "type": "COURSE",
-            "classId": 2303,
-            "subject": "ENTR"
-          },
-          {
-            "type": "COURSE",
-            "classId": 3305,
-            "subject": "ENTR"
-          },
-          {
-            "type": "COURSE",
-            "classId": 3330,
-            "subject": "ENTR"
-          },
-          {
-            "type": "COURSE",
-            "classId": 2206,
-            "subject": "ENTR"
-          },
-          {
-            "type": "COURSE",
-            "classId": 2215,
-            "subject": "ENTR"
-          },
-          {
-            "type": "COURSE",
-            "classId": 2304,
-            "subject": "ENTR"
-          },
-          {
-            "type": "COURSE",
-            "classId": 4983,
-            "subject": "ENTR"
-          },
-          {
-            "type": "COURSE",
-            "classId": 4610,
-            "subject": "FINA"
-          },
-          {
-            "type": "COURSE",
-            "classId": 3302,
-            "subject": "MGMT"
-          }
+        "title": "Family Business",
+        "warnings": [
+          "Take the first two courses and two electives (following groups). Only one of the electives can come from the last group.",
+          "One course from an approved Dialogue may count toward a concentration elective."
         ],
-        "minRequirementCount": 9
-      },
-      {
-        "type": "SECTION",
-        "title": "Required Courses",
         "requirements": [
           {
             "type": "COURSE",
@@ -782,65 +809,70 @@
             "type": "COURSE",
             "classId": 4503,
             "subject": "ENTR"
+          },
+          {
+            "type": "XOM",
+            "numCreditsMin": 4,
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 2215,
+                "subject": "ENTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3302,
+                "subject": "ENTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3401,
+                "subject": "ENTR"
+              }
+            ]
+          },
+          {
+            "type": "XOM",
+            "numCreditsMin": 4,
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 2206,
+                "subject": "ENTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2303,
+                "subject": "ENTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2304,
+                "subject": "ENTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4983,
+                "subject": "ENTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4610,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3302,
+                "subject": "MGMT"
+              }
+            ]
           }
         ],
-        "minRequirementCount": 2
+        "minRequirementCount": 4
       },
       {
         "type": "SECTION",
-        "title": "Electives",
-        "requirements": [
-          {
-            "type": "COURSE",
-            "classId": 2215,
-            "subject": "ENTR"
-          },
-          {
-            "type": "COURSE",
-            "classId": 3302,
-            "subject": "ENTR"
-          },
-          {
-            "type": "COURSE",
-            "classId": 3401,
-            "subject": "ENTR"
-          },
-          {
-            "type": "COURSE",
-            "classId": 2206,
-            "subject": "ENTR"
-          },
-          {
-            "type": "COURSE",
-            "classId": 2303,
-            "subject": "ENTR"
-          },
-          {
-            "type": "COURSE",
-            "classId": 2304,
-            "subject": "ENTR"
-          },
-          {
-            "type": "COURSE",
-            "classId": 4983,
-            "subject": "ENTR"
-          },
-          {
-            "type": "COURSE",
-            "classId": 4610,
-            "subject": "FINA"
-          },
-          {
-            "type": "COURSE",
-            "classId": 3302,
-            "subject": "MGMT"
-          }
-        ],
-        "minRequirementCount": 9
-      },
-      {
-        "type": "SECTION",
-        "title": "Required Course",
+        "title": "Finance",
         "requirements": [
           {
             "type": "OR",
@@ -856,14 +888,7 @@
                 "subject": "FINA"
               }
             ]
-          }
-        ],
-        "minRequirementCount": 1
-      },
-      {
-        "type": "SECTION",
-        "title": "Electives",
-        "requirements": [
+          },
           {
             "type": "XOM",
             "numCreditsMin": 12,
@@ -1021,11 +1046,14 @@
             ]
           }
         ],
-        "minRequirementCount": 1
+        "minRequirementCount": 2
       },
       {
         "type": "SECTION",
-        "title": "Required Courses",
+        "title": "Fintech",
+        "warnings": [
+          "Only one course may be double counted with another concentration."
+        ],
         "requirements": [
           {
             "type": "OR",
@@ -1046,14 +1074,7 @@
             "type": "COURSE",
             "classId": 4380,
             "subject": "FINA"
-          }
-        ],
-        "minRequirementCount": 2
-      },
-      {
-        "type": "SECTION",
-        "title": "Electives",
-        "requirements": [
+          },
           {
             "type": "XOM",
             "numCreditsMin": 8,
@@ -1081,11 +1102,14 @@
             ]
           }
         ],
-        "minRequirementCount": 1
+        "minRequirementCount": 3
       },
       {
         "type": "SECTION",
-        "title": "Required Courses",
+        "title": "Healthcare Management and Consulting",
+        "warnings": [
+          "Only one course may be double counted with another concentration."
+        ],
         "requirements": [
           {
             "type": "COURSE",
@@ -1096,117 +1120,120 @@
             "type": "COURSE",
             "classId": 3315,
             "subject": "SCHM"
+          },
+          {
+            "type": "XOM",
+            "numCreditsMin": 4,
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 3110,
+                "subject": "BUSN"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3220,
+                "subject": "ENTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3302,
+                "subject": "MGMT"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3501,
+                "subject": "MISM"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3515,
+                "subject": "MISM"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3315,
+                "subject": "MGMT"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3530,
+                "subject": "MGMT"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3420,
+                "subject": "MGMT"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4410,
+                "subject": "MGMT"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4550,
+                "subject": "MGMT"
+              }
+            ]
+          },
+          {
+            "type": "XOM",
+            "numCreditsMin": 4,
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 3201,
+                "subject": "COMM"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4533,
+                "subject": "COMM"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2970,
+                "subject": "HUSV"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3500,
+                "subject": "IE"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2515,
+                "subject": "PHTH"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4515,
+                "subject": "PHTH"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3440,
+                "subject": "SOCL"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3441,
+                "subject": "SOCL"
+              }
+            ]
           }
         ],
-        "minRequirementCount": 2
+        "minRequirementCount": 4
       },
       {
         "type": "SECTION",
-        "title": "Implementation/Consulting Elective",
-        "requirements": [
-          {
-            "type": "COURSE",
-            "classId": 3110,
-            "subject": "BUSN"
-          },
-          {
-            "type": "COURSE",
-            "classId": 3220,
-            "subject": "ENTR"
-          },
-          {
-            "type": "COURSE",
-            "classId": 3302,
-            "subject": "MGMT"
-          },
-          {
-            "type": "COURSE",
-            "classId": 3501,
-            "subject": "MISM"
-          },
-          {
-            "type": "COURSE",
-            "classId": 3515,
-            "subject": "MISM"
-          },
-          {
-            "type": "COURSE",
-            "classId": 3315,
-            "subject": "MGMT"
-          },
-          {
-            "type": "COURSE",
-            "classId": 3530,
-            "subject": "MGMT"
-          },
-          {
-            "type": "COURSE",
-            "classId": 3420,
-            "subject": "MGMT"
-          },
-          {
-            "type": "COURSE",
-            "classId": 4410,
-            "subject": "MGMT"
-          },
-          {
-            "type": "COURSE",
-            "classId": 4550,
-            "subject": "MGMT"
-          }
+        "title": "International Business",
+        "warnings": [
+          "If you complete both INTB 2501 and INTB 3310, one may count for the elective requirement (last group).",
+          "Electives not listed may be approved via the undergraduate dean's office.",
+          "Students may double count up to one course in another business concentration."
         ],
-        "minRequirementCount": 1
-      },
-      {
-        "type": "SECTION",
-        "title": "Interdisciplinary Healthcare Focus",
-        "requirements": [
-          {
-            "type": "COURSE",
-            "classId": 3201,
-            "subject": "COMM"
-          },
-          {
-            "type": "COURSE",
-            "classId": 4533,
-            "subject": "COMM"
-          },
-          {
-            "type": "COURSE",
-            "classId": 2970,
-            "subject": "HUSV"
-          },
-          {
-            "type": "COURSE",
-            "classId": 3500,
-            "subject": "IE"
-          },
-          {
-            "type": "COURSE",
-            "classId": 2515,
-            "subject": "PHTH"
-          },
-          {
-            "type": "COURSE",
-            "classId": 4515,
-            "subject": "PHTH"
-          },
-          {
-            "type": "COURSE",
-            "classId": 3440,
-            "subject": "SOCL"
-          },
-          {
-            "type": "COURSE",
-            "classId": 3441,
-            "subject": "SOCL"
-          }
-        ],
-        "minRequirementCount": 1
-      },
-      {
-        "type": "SECTION",
-        "title": "Required Courses",
         "requirements": [
           {
             "type": "OR",
@@ -1224,91 +1251,91 @@
             ]
           },
           {
-            "type": "COURSE",
-            "classId": 2501,
-            "subject": "INTB"
+            "type": "OR",
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 2501,
+                "subject": "INTB"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3310,
+                "subject": "INTB"
+              }
+            ]
           },
           {
-            "type": "COURSE",
-            "classId": 3310,
-            "subject": "INTB"
+            "type": "XOM",
+            "numCreditsMin": 8,
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 3202,
+                "subject": "INTB"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3320,
+                "subject": "INTB"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4202,
+                "subject": "INTB"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4983,
+                "subject": "INTB"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2206,
+                "subject": "ENTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3306,
+                "subject": "ENTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4320,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4512,
+                "subject": "MKTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3301,
+                "subject": "SCHM"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4512,
+                "subject": "ENTR"
+              }
+            ]
           }
         ],
         "minRequirementCount": 3
       },
       {
         "type": "SECTION",
-        "title": "Electives",
-        "requirements": [
-          {
-            "type": "COURSE",
-            "classId": 3202,
-            "subject": "INTB"
-          },
-          {
-            "type": "COURSE",
-            "classId": 3320,
-            "subject": "INTB"
-          },
-          {
-            "type": "COURSE",
-            "classId": 4202,
-            "subject": "INTB"
-          },
-          {
-            "type": "COURSE",
-            "classId": 4983,
-            "subject": "INTB"
-          },
-          {
-            "type": "COURSE",
-            "classId": 2206,
-            "subject": "ENTR"
-          },
-          {
-            "type": "COURSE",
-            "classId": 3306,
-            "subject": "ENTR"
-          },
-          {
-            "type": "COURSE",
-            "classId": 4320,
-            "subject": "FINA"
-          },
-          {
-            "type": "COURSE",
-            "classId": 4512,
-            "subject": "MKTG"
-          },
-          {
-            "type": "COURSE",
-            "classId": 3301,
-            "subject": "SCHM"
-          },
-          {
-            "type": "COURSE",
-            "classId": 4512,
-            "subject": "ENTR"
-          }
+        "title": "Management",
+        "warnings": [
+          "Only one non-MGMT course may be used as an elective (last group)."
         ],
-        "minRequirementCount": 10
-      },
-      {
-        "type": "SECTION",
-        "title": "Required Course",
         "requirements": [
           {
             "type": "COURSE",
             "classId": 4550,
             "subject": "MGMT"
-          }
-        ],
-        "minRequirementCount": 1
-      },
-      {
-        "type": "SECTION",
-        "title": "Electives",
-        "requirements": [
+          },
           {
             "type": "XOM",
             "numCreditsMin": 12,
@@ -1396,11 +1423,11 @@
             ]
           }
         ],
-        "minRequirementCount": 1
+        "minRequirementCount": 2
       },
       {
         "type": "SECTION",
-        "title": "Required Courses",
+        "title": "Marketing",
         "requirements": [
           {
             "type": "COURSE",
@@ -1421,14 +1448,7 @@
                 "subject": "MKTG"
               }
             ]
-          }
-        ],
-        "minRequirementCount": 2
-      },
-      {
-        "type": "SECTION",
-        "title": "Electives",
-        "requirements": [
+          },
           {
             "type": "XOM",
             "numCreditsMin": 8,
@@ -1496,11 +1516,14 @@
             ]
           }
         ],
-        "minRequirementCount": 1
+        "minRequirementCount": 3
       },
       {
         "type": "SECTION",
-        "title": "Required Courses",
+        "title": "Marketing Analytics",
+        "warnings": [
+          "Students may double count up to one course in another business concentration."
+        ],
         "requirements": [
           {
             "type": "COURSE",
@@ -1516,54 +1539,56 @@
             "type": "COURSE",
             "classId": 3501,
             "subject": "MKTG"
-          }
-        ],
-        "minRequirementCount": 3
-      },
-      {
-        "type": "SECTION",
-        "title": "Elective",
-        "requirements": [
-          {
-            "type": "AND",
-            "courses": [
-              {
-                "subject": "CS",
-                "classId": 2500,
-                "description": "Fundamentals of Computer Science 1",
-                "type": "COURSE"
-              },
-              {
-                "subject": "CS",
-                "classId": 2501,
-                "description": "Lab for CS 2500",
-                "type": "COURSE"
-              }
-            ]
           },
           {
-            "type": "AND",
+            "type": "OR",
             "courses": [
               {
-                "subject": "DS",
-                "classId": 2000,
-                "description": "Programming with Data",
-                "type": "COURSE"
+                "type": "AND",
+                "courses": [
+                  {
+                    "subject": "CS",
+                    "classId": 2500,
+                    "description": "Fundamentals of Computer Science 1",
+                    "type": "COURSE"
+                  },
+                  {
+                    "subject": "CS",
+                    "classId": 2501,
+                    "description": "Lab for CS 2500",
+                    "type": "COURSE"
+                  }
+                ]
               },
               {
-                "subject": "DS",
-                "classId": 2001,
-                "description": "Data Science Programming Practicum",
-                "type": "COURSE"
+                "type": "AND",
+                "courses": [
+                  {
+                    "subject": "DS",
+                    "classId": 2000,
+                    "description": "Programming with Data",
+                    "type": "COURSE"
+                  },
+                  {
+                    "subject": "DS",
+                    "classId": 2001,
+                    "description": "Data Science Programming Practicum",
+                    "type": "COURSE"
+                  }
+                ]
               }
             ]
           }
         ],
-        "minRequirementCount": 1
+        "minRequirementCount": 4
       },
       {
         "type": "SECTION",
-        "title": "Required Courses",
+        "title": "Social Innovation and Entrepreneurship",
+        "warnings": [
+          "Take the first two courses and two electives (following groups). Only one of the electives can come from the last group.",
+          "One course from an approved Dialogue may count toward a concentration elective."
+        ],
         "requirements": [
           {
             "type": "COURSE",
@@ -1574,70 +1599,75 @@
             "type": "COURSE",
             "classId": 4506,
             "subject": "ENTR"
+          },
+          {
+            "type": "XOM",
+            "numCreditsMin": 4,
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 2206,
+                "subject": "ENTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2414,
+                "subject": "ENTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3520,
+                "subject": "ENTR"
+              }
+            ]
+          },
+          {
+            "type": "XOM",
+            "numCreditsMin": 4,
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 2215,
+                "subject": "ENTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2303,
+                "subject": "ENTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2304,
+                "subject": "ENTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4983,
+                "subject": "ENTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4610,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3302,
+                "subject": "MGMT"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2301,
+                "subject": "MKTG"
+              }
+            ]
           }
         ],
-        "minRequirementCount": 2
+        "minRequirementCount": 4
       },
       {
         "type": "SECTION",
-        "title": "Electives",
-        "requirements": [
-          {
-            "type": "COURSE",
-            "classId": 2206,
-            "subject": "ENTR"
-          },
-          {
-            "type": "COURSE",
-            "classId": 2414,
-            "subject": "ENTR"
-          },
-          {
-            "type": "COURSE",
-            "classId": 3520,
-            "subject": "ENTR"
-          },
-          {
-            "type": "COURSE",
-            "classId": 2215,
-            "subject": "ENTR"
-          },
-          {
-            "type": "COURSE",
-            "classId": 2303,
-            "subject": "ENTR"
-          },
-          {
-            "type": "COURSE",
-            "classId": 2304,
-            "subject": "ENTR"
-          },
-          {
-            "type": "COURSE",
-            "classId": 4983,
-            "subject": "ENTR"
-          },
-          {
-            "type": "COURSE",
-            "classId": 4610,
-            "subject": "FINA"
-          },
-          {
-            "type": "COURSE",
-            "classId": 3302,
-            "subject": "MGMT"
-          },
-          {
-            "type": "COURSE",
-            "classId": 2301,
-            "subject": "MKTG"
-          }
-        ],
-        "minRequirementCount": 10
-      },
-      {
-        "type": "SECTION",
-        "title": "Required Courses",
+        "title": "Supply Chain Management",
         "requirements": [
           {
             "type": "COURSE",
@@ -1653,41 +1683,40 @@
             "type": "COURSE",
             "classId": 3310,
             "subject": "SCHM"
+          },
+          {
+            "type": "XOM",
+            "numCreditsMin": 4,
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 3308,
+                "subject": "SCHM"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3315,
+                "subject": "SCHM"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3320,
+                "subject": "SCHM"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4401,
+                "subject": "SCHM"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4983,
+                "subject": "SCHM"
+              }
+            ]
           }
         ],
-        "minRequirementCount": 3
-      },
-      {
-        "type": "SECTION",
-        "title": "Elective",
-        "requirements": [
-          {
-            "type": "COURSE",
-            "classId": 3308,
-            "subject": "SCHM"
-          },
-          {
-            "type": "COURSE",
-            "classId": 3315,
-            "subject": "SCHM"
-          },
-          {
-            "type": "COURSE",
-            "classId": 3320,
-            "subject": "SCHM"
-          },
-          {
-            "type": "COURSE",
-            "classId": 4401,
-            "subject": "SCHM"
-          },
-          {
-            "type": "COURSE",
-            "classId": 4983,
-            "subject": "SCHM"
-          }
-        ],
-        "minRequirementCount": 1
+        "minRequirementCount": 4
       }
     ]
   }
