@@ -597,7 +597,9 @@
       {
         "type": "SECTION",
         "title": "Cyber Operations",
-        "warnings": ["Your degree automatically defaults to the Cybersecurity Elective options, contact your advisor to switch!"],
+        "warnings": [
+          "Your degree automatically defaults to the Cybersecurity Elective options, contact your advisor to switch!"
+        ],
         "requirements": [
           {
             "type": "COURSE",
