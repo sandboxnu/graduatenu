@@ -52,16 +52,55 @@
           "type": "AND",
           "courses": [
             {
-              "subject": "CS",
-              "classId": 2500,
-              "description": "Fundamentals of Computer Science 1",
-              "type": "COURSE"
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "CS",
+                  "classId": 2500,
+                  "description": "Fundamentals of Computer Science 1",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "CS",
+                  "classId": 2501,
+                  "description": "Lab for CS 2500",
+                  "type": "COURSE"
+                }
+              ]
             },
             {
-              "subject": "CS",
-              "classId": 2501,
-              "description": "Lab for CS 2500",
-              "type": "COURSE"
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "CS",
+                  "classId": 2510,
+                  "description": "Fundamentals of Computer Science 2",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "CS",
+                  "classId": 2511,
+                  "description": "Lab for CS 2510",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "CS",
+                  "classId": 3500,
+                  "description": "Object-Oriented Design",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "CS",
+                  "classId": 3501,
+                  "description": "Lab for CS 3500",
+                  "type": "COURSE"
+                }
+              ]
             }
           ]
         },
@@ -69,77 +108,48 @@
           "type": "AND",
           "courses": [
             {
-              "subject": "CS",
-              "classId": 2510,
-              "description": "Fundamentals of Computer Science 2",
-              "type": "COURSE"
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "DS",
+                  "classId": 2000,
+                  "description": "Programming with Data",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "DS",
+                  "classId": 2001,
+                  "description": "Data Science Programming Practicum",
+                  "type": "COURSE"
+                }
+              ]
             },
             {
-              "subject": "CS",
-              "classId": 2511,
-              "description": "Lab for CS 2510",
-              "type": "COURSE"
-            }
-          ]
-        },
-        {
-          "type": "AND",
-          "courses": [
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "DS",
+                  "classId": 2500,
+                  "description": "Intermediate Programming with Data",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "DS",
+                  "classId": 2501,
+                  "description": "Lab for DS 2500",
+                  "type": "COURSE"
+                }
+              ]
+            },
             {
-              "subject": "CS",
+              "type": "COURSE",
               "classId": 3500,
-              "description": "Object-Oriented Design",
-              "type": "COURSE"
-            },
-            {
-              "subject": "CS",
-              "classId": 3501,
-              "description": "Lab for CS 3500",
-              "type": "COURSE"
+              "subject": "DS"
             }
           ]
-        },
-        {
-          "type": "AND",
-          "courses": [
-            {
-              "subject": "DS",
-              "classId": 2000,
-              "description": "Programming with Data",
-              "type": "COURSE"
-            },
-            {
-              "subject": "DS",
-              "classId": 2001,
-              "description": "Data Science Programming Practicum",
-              "type": "COURSE"
-            }
-          ]
-        },
-        {
-          "type": "AND",
-          "courses": [
-            {
-              "subject": "DS",
-              "classId": 2500,
-              "description": "Intermediate Programming with Data",
-              "type": "COURSE"
-            },
-            {
-              "subject": "DS",
-              "classId": 2501,
-              "description": "Lab for DS 2500",
-              "type": "COURSE"
-            }
-          ]
-        },
-        {
-          "type": "COURSE",
-          "classId": 3500,
-          "subject": "DS"
         }
       ],
-      "minRequirementCount": 6
+      "minRequirementCount": 1
     },
     {
       "type": "SECTION",
@@ -269,7 +279,7 @@
         },
         {
           "type": "COURSE",
-          "classId": 1180,
+          "classId": 1160,
           "subject": "THTR"
         },
         {
@@ -445,6 +455,11 @@
         },
         {
           "type": "COURSE",
+          "classId": 4542,
+          "subject": "EECE"
+        },
+        {
+          "type": "COURSE",
           "classId": 5639,
           "subject": "EECE"
         },
@@ -594,12 +609,6 @@
         }
       ],
       "minRequirementCount": 1
-    },
-    {
-      "type": "SECTION",
-      "title": "Required General Electives",
-      "requirements": [],
-      "minRequirementCount": 0
     }
   ],
   "concentrations": {
