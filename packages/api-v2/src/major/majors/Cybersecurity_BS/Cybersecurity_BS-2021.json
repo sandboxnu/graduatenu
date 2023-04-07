@@ -290,247 +290,6 @@
     },
     {
       "type": "SECTION",
-      "title": "Law Requirement",
-      "requirements": [
-        {
-          "type": "OR",
-          "courses": [
-            {
-              "type": "COURSE",
-              "classId": 4170,
-              "subject": "CY"
-            },
-            {
-              "type": "COURSE",
-              "classId": 5240,
-              "subject": "CY"
-            }
-          ]
-        }
-      ],
-      "minRequirementCount": 1
-    },
-    {
-      "type": "SECTION",
-      "title": "Cybersecurity Electives",
-      "requirements": [
-        {
-          "type": "XOM",
-          "numCreditsMin": 16,
-          "courses": [
-            {
-              "type": "COURSE",
-              "classId": 2525,
-              "subject": "COMM"
-            },
-            {
-              "type": "COURSE",
-              "classId": 2551,
-              "subject": "COMM"
-            },
-            {
-              "type": "COURSE",
-              "classId": 2340,
-              "subject": "CRIM"
-            },
-            {
-              "type": "COURSE",
-              "classId": 4040,
-              "subject": "CRIM"
-            },
-            {
-              "type": "AND",
-              "courses": [
-                {
-                  "subject": "CS",
-                  "classId": 2800,
-                  "description": "Logic and Computation",
-                  "type": "COURSE"
-                },
-                {
-                  "subject": "CS",
-                  "classId": 2801,
-                  "description": "Lab for CS 2800",
-                  "type": "COURSE"
-                }
-              ]
-            },
-            {
-              "type": "COURSE",
-              "classId": 4240,
-              "subject": "CS"
-            },
-            {
-              "type": "COURSE",
-              "classId": 4400,
-              "subject": "CS"
-            },
-            {
-              "type": "COURSE",
-              "classId": 4500,
-              "subject": "CS"
-            },
-            {
-              "type": "OR",
-              "courses": [
-                {
-                  "type": "COURSE",
-                  "classId": 4710,
-                  "subject": "CS"
-                },
-                {
-                  "type": "COURSE",
-                  "classId": 6710,
-                  "subject": "CS"
-                }
-              ]
-            },
-            {
-              "type": "COURSE",
-              "classId": 5010,
-              "subject": "CY"
-            },
-            {
-              "type": "COURSE",
-              "classId": 5200,
-              "subject": "CY"
-            },
-            {
-              "type": "COURSE",
-              "classId": 5210,
-              "subject": "CY"
-            },
-            {
-              "type": "COURSE",
-              "classId": 5770,
-              "subject": "CY"
-            },
-            {
-              "type": "COURSE",
-              "classId": 4300,
-              "subject": "DS"
-            },
-            {
-              "type": "COURSE",
-              "classId": 4400,
-              "subject": "DS"
-            },
-            {
-              "type": "AND",
-              "courses": [
-                {
-                  "subject": "EECE",
-                  "classId": 2322,
-                  "description": "Fundamentals of Digital Design and Computer Organization",
-                  "type": "COURSE"
-                },
-                {
-                  "subject": "EECE",
-                  "classId": 2323,
-                  "description": "Lab for EECE 2322",
-                  "type": "COURSE"
-                }
-              ]
-            },
-            {
-              "type": "COURSE",
-              "classId": 3324,
-              "subject": "EECE"
-            },
-            {
-              "type": "AND",
-              "courses": [
-                {
-                  "subject": "EECE",
-                  "classId": 4534,
-                  "description": "Microprocessor-Based Design",
-                  "type": "COURSE"
-                },
-                {
-                  "subject": "EECE",
-                  "classId": 4535,
-                  "description": "Lab for EECE 4534",
-                  "type": "COURSE"
-                }
-              ]
-            },
-            {
-              "type": "COURSE",
-              "classId": 4300,
-              "subject": "IS"
-            },
-            {
-              "type": "COURSE",
-              "classId": 1101,
-              "subject": "LPSC"
-            },
-            {
-              "type": "COURSE",
-              "classId": 2301,
-              "subject": "LPSC"
-            },
-            {
-              "type": "COURSE",
-              "classId": 3303,
-              "subject": "LPSC"
-            },
-            {
-              "type": "COURSE",
-              "classId": 3527,
-              "subject": "MATH"
-            },
-            {
-              "type": "COURSE",
-              "classId": 4575,
-              "subject": "MATH"
-            },
-            {
-              "type": "COURSE",
-              "classId": 2301,
-              "subject": "MISM"
-            },
-            {
-              "type": "COURSE",
-              "classId": 2390,
-              "subject": "POLS"
-            },
-            {
-              "type": "COURSE",
-              "classId": 3307,
-              "subject": "POLS"
-            },
-            {
-              "type": "COURSE",
-              "classId": 3324,
-              "subject": "POLS"
-            },
-            {
-              "type": "COURSE",
-              "classId": 3406,
-              "subject": "POLS"
-            },
-            {
-              "type": "COURSE",
-              "classId": 3408,
-              "subject": "POLS"
-            },
-            {
-              "type": "COURSE",
-              "classId": 3420,
-              "subject": "POLS"
-            },
-            {
-              "type": "COURSE",
-              "classId": 3423,
-              "subject": "POLS"
-            }
-          ]
-        }
-      ],
-      "minRequirementCount": 1
-    },
-    {
-      "type": "SECTION",
       "title": "Electrical Engineering Required Course",
       "requirements": [
         {
@@ -596,12 +355,6 @@
         }
       ],
       "minRequirementCount": 1
-    },
-    {
-      "type": "SECTION",
-      "title": "Required General Electives",
-      "requirements": [],
-      "minRequirementCount": 0
     }
   ],
   "concentrations": {
@@ -609,7 +362,242 @@
     "concentrationOptions": [
       {
         "type": "SECTION",
-        "title": "Cyber Operations Required Courses",
+        "title": "Cybersecurity Electives",
+        "requirements": [
+          {
+            "type": "OR",
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 4170,
+                "subject": "CY"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5240,
+                "subject": "CY"
+              }
+            ]
+          },
+          {
+            "type": "XOM",
+            "numCreditsMin": 16,
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 2525,
+                "subject": "COMM"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2551,
+                "subject": "COMM"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2340,
+                "subject": "CRIM"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4040,
+                "subject": "CRIM"
+              },
+              {
+                "type": "AND",
+                "courses": [
+                  {
+                    "subject": "CS",
+                    "classId": 2800,
+                    "description": "Logic and Computation",
+                    "type": "COURSE"
+                  },
+                  {
+                    "subject": "CS",
+                    "classId": 2801,
+                    "description": "Lab for CS 2800",
+                    "type": "COURSE"
+                  }
+                ]
+              },
+              {
+                "type": "COURSE",
+                "classId": 4240,
+                "subject": "CS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4400,
+                "subject": "CS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4500,
+                "subject": "CS"
+              },
+              {
+                "type": "OR",
+                "courses": [
+                  {
+                    "type": "COURSE",
+                    "classId": 4710,
+                    "subject": "CS"
+                  },
+                  {
+                    "type": "COURSE",
+                    "classId": 6710,
+                    "subject": "CS"
+                  }
+                ]
+              },
+              {
+                "type": "COURSE",
+                "classId": 5010,
+                "subject": "CY"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5200,
+                "subject": "CY"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5210,
+                "subject": "CY"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5770,
+                "subject": "CY"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4300,
+                "subject": "DS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4400,
+                "subject": "DS"
+              },
+              {
+                "type": "AND",
+                "courses": [
+                  {
+                    "subject": "EECE",
+                    "classId": 2322,
+                    "description": "Fundamentals of Digital Design and Computer Organization",
+                    "type": "COURSE"
+                  },
+                  {
+                    "subject": "EECE",
+                    "classId": 2323,
+                    "description": "Lab for EECE 2322",
+                    "type": "COURSE"
+                  }
+                ]
+              },
+              {
+                "type": "COURSE",
+                "classId": 3324,
+                "subject": "EECE"
+              },
+              {
+                "type": "AND",
+                "courses": [
+                  {
+                    "subject": "EECE",
+                    "classId": 4534,
+                    "description": "Microprocessor-Based Design",
+                    "type": "COURSE"
+                  },
+                  {
+                    "subject": "EECE",
+                    "classId": 4535,
+                    "description": "Lab for EECE 4534",
+                    "type": "COURSE"
+                  }
+                ]
+              },
+              {
+                "type": "COURSE",
+                "classId": 4300,
+                "subject": "IS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 1101,
+                "subject": "LPSC"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2301,
+                "subject": "LPSC"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3303,
+                "subject": "LPSC"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3527,
+                "subject": "MATH"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4575,
+                "subject": "MATH"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2301,
+                "subject": "MISM"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2390,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3307,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3324,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3406,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3408,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3420,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3423,
+                "subject": "POLS"
+              }
+            ]
+          }
+        ],
+        "minRequirementCount": 2
+      },
+      {
+        "type": "SECTION",
+        "title": "Cyber Operations",
+        "warnings": ["Your degree automatically defaults to the Cybersecurity Elective options, contact your advisor to switch!"],
         "requirements": [
           {
             "type": "COURSE",
@@ -625,9 +613,45 @@
             "type": "COURSE",
             "classId": 5240,
             "subject": "CY"
+          },
+          {
+            "type": "XOM",
+            "numCreditsMin": 8,
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 4500,
+                "subject": "CY"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4240,
+                "subject": "CY"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5200,
+                "subject": "CY"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5210,
+                "subject": "CY"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3324,
+                "subject": "EECE"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4535,
+                "subject": "EECE"
+              }
+            ]
           }
         ],
-        "minRequirementCount": 3
+        "minRequirementCount": 4
       }
     ]
   }
