@@ -280,6 +280,7 @@
     },
     {
       "type": "SECTION",
+      "warnings": ["At least one must be at the 4000 level."],
       "title": "Electives",
       "requirements": [
         {
@@ -455,7 +456,7 @@
           "subject": "PSYC"
         }
       ],
-      "minRequirementCount": 32
+      "minRequirementCount": 2
     },
     {
       "type": "SECTION",
