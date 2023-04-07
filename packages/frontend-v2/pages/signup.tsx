@@ -17,7 +17,7 @@ import {
   GraduateLink,
   GraduateInput,
 } from "../components";
-import { handleApiClientError, toast } from "../utils";
+import { handleApiClientError, toast, WEAK_PASSWORD_MSG } from "../utils";
 
 const Signup: NextPage = () => {
   return <AuthenticationPageLayout form={<SignUpForm />} />;
@@ -50,7 +50,7 @@ const SignUpForm: React.FC = () => {
         const errorMessage = err.response?.data?.message;
         if (errorMessage === emailAlreadyExistsError) {
           toast.error(
-            "Account with the given email already exists... try signing up instead 😄"
+            "Account with the given email already exists... try logging in instead 😄"
           );
         } else if (errorMessage === weakPasswordError) {
           toast.error(
@@ -125,7 +125,7 @@ const SignUpForm: React.FC = () => {
               onBlur: () => trigger("passwordConfirm"),
               validate: (pass) =>
                 isStrongPassword(pass) ||
-                "A password should be at least 8 characters with digits and letters.",
+                WEAK_PASSWORD_MSG,
               required: "Password is required",
             })}
           />

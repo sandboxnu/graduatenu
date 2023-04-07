@@ -2,7 +2,14 @@ import axios, { AxiosError } from "axios";
 import { NextRouter } from "next/router";
 import { logger } from "./logger";
 import { toast } from "./toast";
-import { emailConfirmationMsg } from "@graduate/common";
+import {
+  emailAlreadyExistsError,
+  emailConfirmationMsg,
+  emailDoesNotExistError,
+  emailHasNotBeenConfirmed,
+  weakPasswordError,
+  wrongPasswordError,
+} from "@graduate/common";
 
 enum ErrorToastId {
   UNAUTHORIZED = "unauthorized",
@@ -41,12 +48,32 @@ const handleAxiosError = (error: AxiosError, router: NextRouter) => {
 
   if (statusCode === 400) {
     logger.debug("handleApiClientError", "Bad Request", error);
-    toast.error(
-      "Sorry, we sent some invalid data. Try again and if this persists please report it to us through the bug report button at the top.",
-      {
-        toastId: ErrorToastId.BAD_DATA,
-      }
-    );
+    let toastMsg = "";
+    const errorMsg = error.response?.data.message;
+
+    switch (errorMsg) {
+      case emailAlreadyExistsError:
+        toastMsg = "The email you submitted already exists.";
+        break;
+      case emailDoesNotExistError:
+        toastMsg = "The email you entered does not exist. Please try again.";
+        break;
+      case emailHasNotBeenConfirmed:
+        toastMsg =
+          "The given email has not been confirmed yet. We can't reset your password.";
+        break;
+      case weakPasswordError:
+        toastMsg = "The entered password is too weak";
+        break;
+      case wrongPasswordError:
+        toastMsg = "Incorrect Password!";
+        break;
+      default:
+        toastMsg = `Sorry, we sent some invalid data. Try again and if this persists please report it to us through the bug report button at the top.`;
+        break;
+    }
+
+    toast.error(toastMsg, { toastId: ErrorToastId.BAD_DATA });
   } else if (statusCode === 401) {
     const errorMsg = error.response?.data.message;
     if (errorMsg === emailConfirmationMsg) {

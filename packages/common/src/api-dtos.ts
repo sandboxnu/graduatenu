@@ -219,3 +219,23 @@ export class ChangePasswordDto {
   @IsNotEmpty()
   newPasswordConfirm: string;
 }
+
+export class ForgotPasswordDto {
+  @IsString()
+  @IsNotEmpty()
+  email: string;
+}
+
+export class ResetPasswordDto {
+  @IsNotEmpty()
+  @IsString()
+  token: string
+
+  @IsString()
+  @IsNotEmpty()
+  password: string;
+
+  @IsString()
+  @IsNotEmpty()
+  passwordConfirm: string;
+}

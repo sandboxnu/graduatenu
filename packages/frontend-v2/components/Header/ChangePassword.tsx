@@ -12,7 +12,7 @@ import {
   Flex,
 } from "@chakra-ui/react";
 import { API } from "@graduate/api-client";
-import { handleApiClientError, toast } from "../../utils";
+import { handleApiClientError, toast, WEAK_PASSWORD_MSG } from "../../utils";
 import axios from "axios";
 import { ChangePasswordDto, isStrongPassword } from "@graduate/common";
 import { useForm } from "react-hook-form";
@@ -90,8 +90,7 @@ export const ChangePassword: React.FC = () => {
                 {...register("newPassword", {
                   onBlur: () => trigger("newPasswordConfirm"),
                   validate: (pass) =>
-                    isStrongPassword(pass) ||
-                    "A password should be at least 8 characters with digits and letters.",
+                    isStrongPassword(pass) || WEAK_PASSWORD_MSG,
                   required: "New Password is required",
                 })}
               />
