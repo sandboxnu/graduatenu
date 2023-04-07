@@ -455,11 +455,6 @@
         },
         {
           "type": "COURSE",
-          "classId": 4542,
-          "subject": "EECE"
-        },
-        {
-          "type": "COURSE",
           "classId": 5639,
           "subject": "EECE"
         },
