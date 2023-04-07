@@ -454,43 +454,6 @@
       },
       {
         "type": "SECTION",
-        "title": "Accounting and Advisory Services",
-        "requirements": [
-          {
-            "type": "COURSE",
-            "classId": 3402,
-            "subject": "ACCT"
-          },
-          {
-            "type": "COURSE",
-            "classId": 3403,
-            "subject": "ACCT"
-          },
-          {
-            "type": "COURSE",
-            "classId": 5220,
-            "subject": "ACCT"
-          },
-          {
-            "type": "OR",
-            "courses": [
-              {
-                "type": "COURSE",
-                "classId": 3416,
-                "subject": "ACCT"
-              },
-              {
-                "type": "COURSE",
-                "classId": 4414,
-                "subject": "ACCT"
-              }
-            ]
-          }
-        ],
-        "minRequirementCount": 4
-      },
-      {
-        "type": "SECTION",
         "title": "Brand Management",
         "warnings": [
           "After the first course, also complete three electives, with at least 8 credits from MKTG courses:",
@@ -575,6 +538,11 @@
                 "type": "COURSE",
                 "classId": 3530,
                 "subject": "MGMT"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3320,
+                "subject": "SCHM"
               }
             ]
           }
@@ -639,7 +607,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Corporate Innovation",
+        "title": "Corporate Innovation and Venture",
         "warnings": [
           "Take the first two courses and two electives (following groups). Only one of the electives can come from the last group.",
           "One course from an approved Dialogue may count toward a concentration elective."
@@ -698,6 +666,11 @@
               {
                 "type": "COURSE",
                 "classId": 4983,
+                "subject": "ENTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4505,
                 "subject": "ENTR"
               },
               {
@@ -786,11 +759,6 @@
               {
                 "type": "COURSE",
                 "classId": 2304,
-                "subject": "ENTR"
-              },
-              {
-                "type": "COURSE",
-                "classId": 4505,
                 "subject": "ENTR"
               },
               {
@@ -1292,7 +1260,7 @@
             "courses": [
               {
                 "type": "COURSE",
-                "classId": 3205,
+                "classId": 3202,
                 "subject": "INTB"
               },
               {
@@ -1334,6 +1302,11 @@
                 "type": "COURSE",
                 "classId": 3301,
                 "subject": "SCHM"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4512,
+                "subject": "ENTR"
               }
             ]
           }
@@ -1446,16 +1419,21 @@
         "title": "Marketing",
         "requirements": [
           {
+            "type": "COURSE",
+            "classId": 3401,
+            "subject": "MKTG"
+          },
+          {
             "type": "OR",
             "courses": [
               {
                 "type": "COURSE",
-                "classId": 2602,
+                "classId": 3301,
                 "subject": "MKTG"
               },
               {
                 "type": "COURSE",
-                "classId": 3401,
+                "classId": 4506,
                 "subject": "MKTG"
               }
             ]
@@ -1471,42 +1449,12 @@
               },
               {
                 "type": "COURSE",
-                "classId": 2602,
-                "subject": "MKTG"
-              },
-              {
-                "type": "COURSE",
-                "classId": 2720,
-                "subject": "MKTG"
-              },
-              {
-                "type": "COURSE",
                 "classId": 3301,
                 "subject": "MKTG"
               },
               {
                 "type": "COURSE",
-                "classId": 3401,
-                "subject": "MKTG"
-              },
-              {
-                "type": "COURSE",
-                "classId": 3402,
-                "subject": "MKTG"
-              },
-              {
-                "type": "COURSE",
                 "classId": 3501,
-                "subject": "MKTG"
-              },
-              {
-                "type": "COURSE",
-                "classId": 3720,
-                "subject": "MKTG"
-              },
-              {
-                "type": "COURSE",
-                "classId": 4120,
                 "subject": "MKTG"
               },
               {
@@ -1551,23 +1499,13 @@
               },
               {
                 "type": "COURSE",
-                "classId": 4520,
-                "subject": "MKTG"
-              },
-              {
-                "type": "COURSE",
-                "classId": 4720,
-                "subject": "MKTG"
-              },
-              {
-                "type": "COURSE",
                 "classId": 4983,
                 "subject": "MKTG"
               }
             ]
           }
         ],
-        "minRequirementCount": 2
+        "minRequirementCount": 3
       },
       {
         "type": "SECTION",
@@ -1747,6 +1685,11 @@
               {
                 "type": "COURSE",
                 "classId": 3315,
+                "subject": "SCHM"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3320,
                 "subject": "SCHM"
               },
               {
