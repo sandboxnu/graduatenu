@@ -17,6 +17,8 @@ import {
   GetSupportedMajorsResponse,
   ConfirmEmailDto,
   ChangePasswordDto,
+  ForgotPasswordDto,
+  ResetPasswordDto,
 } from "@graduate/common";
 import { ClassConstructor, plainToInstance } from "class-transformer";
 
@@ -50,6 +52,8 @@ class APIClient {
     register: (body: SignUpStudentDto): Promise<GetStudentResponse> =>
       this.req("POST", "/auth/register", GetStudentResponse, body),
     logout: (): Promise<GetStudentResponse> => this.req("GET", "/auth/logout"),
+    forgotPassword: (body: ForgotPasswordDto): Promise<void> => this.req("POST", "/auth/forgot-password", undefined, body),
+    resetPassword: (body: ResetPasswordDto): Promise<GetStudentResponse> => this.req("POST", "/auth/reset-password", GetStudentResponse, body),
   };
 
   email = {
@@ -71,7 +75,8 @@ class APIClient {
         isWithPlans: true,
       }),
     delete: (): Promise<void> => this.req("DELETE", "students/me"),
-    changePassword: (body: ChangePasswordDto): Promise<void> => this.req("POST", "/students/changePassword", undefined, body)
+    changePassword: (body: ChangePasswordDto): Promise<void> =>
+      this.req("POST", "/students/changePassword", undefined, body),
   };
 
   plans = {
@@ -109,17 +114,24 @@ interface SearchClass {
 
 function occurrencesToCourseByCatalogYear(
   occurrences: SearchClass[],
-  catalogYear: number
+  catalogYear?: number
 ): ScheduleCourse2<null> {
   if (!occurrences || occurrences.length === 0) {
     throw Error("Course not found");
   }
 
-  for (const occurrence of occurrences) {
-    const year = occurrence.termId.slice(0, 4);
+  if (!catalogYear) {
+    return occurrenceToCourse(occurrences[0]);
+  }
 
-    if (year + 1 === catalogYear.toString()) {
-      return occurrenceToCourse(occurrence);
+  for (const occurrence of occurrences) {
+    const termId = occurrence.termId;
+    if (termId) {
+      const year = termId.slice(0, 4);
+
+      if (year + 1 === catalogYear.toString()) {
+        return occurrenceToCourse(occurrence);
+      }
     }
   }
 
@@ -151,10 +163,17 @@ class SearchAPIClient {
     this.axios = Axios.create({ baseURL: baseURL });
   }
 
+  /**
+   * Fetch a course for a given major catalog year. The catalog year determines
+   * the co-reqs and pre-reqs for the course.
+   *
+   * If not specified(we don't care about the pre-reqs and co-reqs), then return
+   * the course for any catalog year.
+   */
   fetchCourse = async (
     subject: string,
     classId: string,
-    catalogYear: number
+    catalogYear?: number
   ): Promise<ScheduleCourse2<null>> => {
     const res = await this.axios({
       method: "post",

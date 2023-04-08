@@ -15,7 +15,7 @@ import {
 } from "@chakra-ui/react";
 import { ScheduleCourse2 } from "@graduate/common";
 import { useState } from "react";
-import { useSearchCourses } from "../../hooks/useSearchCourses";
+import { useSearchCourses } from "../../hooks";
 import {
   isEqualCourses,
   getCourseDisplayString,
@@ -27,23 +27,27 @@ import { SelectedCourse } from "./SelectedCourse";
 
 interface AddCourseModalProps {
   isOpen: boolean;
-  catalogYear: number;
+  catalogYear?: number;
   /** Function to close the modal UX, returned from the useDisclosure chakra hook */
   closeModalDisplay: () => void;
 
   /** Function to check if the given course exists in the plan being displayed. */
-  isCourseInCurrTerm: (course: ScheduleCourse2<unknown>) => boolean;
+  isCourseAlreadyAdded: (course: ScheduleCourse2<unknown>) => boolean;
 
   /** Function to add classes to the curr term in the plan being displayed. */
-  addClassesToCurrTerm: (courses: ScheduleCourse2<null>[]) => void;
+  addSelectedClasses: (courses: ScheduleCourse2<null>[]) => void;
+
+  /** Should we autoselect coreqs for courses that are selected. */
+  isAutoSelectCoreqs?: boolean;
 }
 
 export const AddCourseModal: React.FC<AddCourseModalProps> = ({
   isOpen,
   catalogYear,
   closeModalDisplay,
-  isCourseInCurrTerm,
-  addClassesToCurrTerm,
+  isCourseAlreadyAdded,
+  addSelectedClasses,
+  isAutoSelectCoreqs,
 }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCourses, setSelectedCourses] = useState<
@@ -65,15 +69,15 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
     const updatedSelectedCourses = [...selectedCourses];
 
     // grab any coreqs of the course that haven't already been selected/added to the term
-    const coreqs = (await getRequiredCourseCoreqs(course, catalogYear)).filter(
-      (coreq) => {
-        const isAlreadySelected = selectedCourses.find((selectedCourse) =>
-          isEqualCourses(selectedCourse, coreq)
-        );
-        const isAlreadyAdded = isCourseInCurrTerm(coreq);
-        return !(isAlreadyAdded || isAlreadySelected);
-      }
-    );
+    const coreqs = isAutoSelectCoreqs
+      ? (await getRequiredCourseCoreqs(course, catalogYear)).filter((coreq) => {
+          const isAlreadySelected = selectedCourses.find((selectedCourse) =>
+            isEqualCourses(selectedCourse, coreq)
+          );
+          const isAlreadyAdded = isCourseAlreadyAdded(coreq);
+          return !(isAlreadyAdded || isAlreadySelected);
+        })
+      : [];
 
     updatedSelectedCourses.push(course, ...coreqs);
 
@@ -95,7 +99,7 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
   };
 
   const addClassesOnClick = async () => {
-    addClassesToCurrTerm(selectedCourses);
+    addSelectedClasses(selectedCourses);
     onClose();
   };
 
@@ -137,7 +141,7 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
                   key={getCourseDisplayString(searchResult)}
                   searchResult={searchResult}
                   addSelectedCourse={addSelectedCourse}
-                  isResultAlreadyInTerm={isCourseInCurrTerm(searchResult)}
+                  isResultAlreadyAdded={isCourseAlreadyAdded(searchResult)}
                   isResultAlreadySelected={isCourseAlreadySelected(
                     searchResult
                   )}

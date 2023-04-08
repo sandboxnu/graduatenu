@@ -62,7 +62,7 @@ const colors = {
   },
   states: {
     success: {
-      main: "#6ba27d",
+      main: "#5BBF7C",
       50: "#e6f8ec",
       100: "#afcfb9",
       200: "#afcfb9",

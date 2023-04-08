@@ -8,6 +8,8 @@ import {
 } from "@graduate/common";
 import { ScheduleTerm } from "./ScheduleTerm";
 import { useState, useEffect } from "react";
+import { GraduateToolTip } from "../GraduateTooltip";
+import { totalCreditsInYear } from "../../utils";
 
 interface ToggleYearProps {
   isExpanded: boolean;
@@ -51,24 +53,7 @@ export const ScheduleYear: React.FC<ScheduleYearProps> = ({
   yearCoReqError = undefined,
   yearPreReqError = undefined,
 }) => {
-  // sum all credits over all the courses over each semester
-  const totalCreditsThisYear = [
-    scheduleYear.fall,
-    scheduleYear.spring,
-    scheduleYear.summer1,
-    scheduleYear.summer2,
-  ].reduce((totalCreditsForYear, term) => {
-    // sum all credits over all courses
-    const totalCreditsThisTerm = term.classes.reduce(
-      (totalCreditsForTerm, course) => {
-        return totalCreditsForTerm + course.numCreditsMin;
-      },
-      0
-    );
-
-    return totalCreditsForYear + totalCreditsThisTerm;
-  }, 0);
-
+  const totalCreditsThisYear = totalCreditsInYear(scheduleYear);
   const [displayReqErrors, setDisplayReqErrors] = useState(false);
 
   useEffect(() => {
@@ -198,7 +183,7 @@ const YearHeader: React.FC<YearHeaderProps> = ({
             />
           </Tooltip>
         )}
-        <Tooltip label={`Delete year ${year.year}?`} fontSize="md">
+        <GraduateToolTip label={`Delete year ${year.year}?`}>
           <IconButton
             aria-label="Delete course"
             variant="ghost"
@@ -214,7 +199,7 @@ const YearHeader: React.FC<YearHeaderProps> = ({
               removeYearFromCurrPlan();
             }}
           />
-        </Tooltip>
+        </GraduateToolTip>
       </Flex>
     </Flex>
   );

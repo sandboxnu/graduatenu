@@ -21,16 +21,16 @@ import { useRouter } from "next/router";
 import { PropsWithChildren, useEffect, useState } from "react";
 import {
   AddPlanModal,
-  AddYearButton,
   DeletePlanModal,
   DraggedScheduleCourse,
   EditPlanModal,
   GraduatePostAuthHeader,
   LoadingPage,
+  NoMajorSidebar,
+  NoPlanSidebar,
   Plan,
   PlanDropdown,
   Sidebar,
-  SidebarContainer,
 } from "../components";
 import { fetchStudentAndPrepareForDnd, useStudentWithPlans } from "../hooks";
 import {
@@ -193,6 +193,18 @@ const HomePage: NextPage = () => {
     });
   };
 
+  let renderedSidebar = <NoPlanSidebar />;
+  if (selectedPlan) {
+    if (selectedPlan.major) {
+      renderedSidebar = (
+        <Sidebar
+          selectedPlan={selectedPlan}
+          transferCourses={student.coursesTransfered || []}
+        />
+      );
+    } else renderedSidebar = <NoMajorSidebar selectedPlan={selectedPlan} />;
+  }
+
   return (
     <DndContext
       onDragStart={handleDragStart}
@@ -202,17 +214,8 @@ const HomePage: NextPage = () => {
       collisionDetection={courseDndCollisisonAlgorithm}
     >
       <PageLayout>
-        <Box
-          bg="primary.blue.light.main"
-          overflowY="auto"
-          width="360px"
-          flexShrink={0}
-        >
-          {selectedPlan === undefined ? (
-            <SidebarContainer title="No plan selected" />
-          ) : (
-            <Sidebar selectedPlan={selectedPlan} />
-          )}
+        <Box bg="neutral.main" overflowY="auto" width="360px" flexShrink={0}>
+          {renderedSidebar}
         </Box>
         <Box p="md" overflow="auto" flexGrow={1}>
           <Flex flexDirection="column">
@@ -233,21 +236,13 @@ const HomePage: NextPage = () => {
               )}
             </Flex>
             {selectedPlan && (
-              <>
-                <Plan
-                  plan={selectedPlan}
-                  coReqErr={coReqWarnings}
-                  preReqErr={preReqWarnings}
-                  mutateStudentWithUpdatedPlan={mutateStudentWithUpdatedPlan}
-                  setIsRemove={setIsRemove}
-                />
-                <Flex mt="sm">
-                  <AddYearButton
-                    plan={selectedPlan}
-                    mutateStudentWithUpdatedPlan={mutateStudentWithUpdatedPlan}
-                  />
-                </Flex>
-              </>
+              <Plan
+                plan={selectedPlan}
+                coReqErr={coReqWarnings}
+                preReqErr={preReqWarnings}
+                mutateStudentWithUpdatedPlan={mutateStudentWithUpdatedPlan}
+                setIsRemove={setIsRemove}
+              />
             )}
           </Flex>
         </Box>

@@ -12,8 +12,8 @@ export const GraduateToolTip: ComponentWithAs<"div", TooltipProps> = ({
     <Tooltip
       hasArrow
       fontSize="xs"
-      backgroundColor="primary.blue.light.100"
-      color="primary.blue.light.700"
+      backgroundColor="primary.blue.dark.main"
+      color="white"
       borderRadius="sm"
       {...rest}
     >
