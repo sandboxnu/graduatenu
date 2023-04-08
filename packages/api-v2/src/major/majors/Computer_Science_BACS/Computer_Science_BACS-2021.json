@@ -1,7 +1,7 @@
 {
-  "name": "Computer Science, BSCS",
+  "name": "Computer Science, BACS",
   "totalCreditsRequired": 133,
-  "yearVersion": 2022,
+  "yearVersion": 2021,
   "requirementSections": [
     {
       "type": "SECTION",
@@ -120,19 +120,9 @@
           "subject": "CS"
         },
         {
-          "type": "OR",
-          "courses": [
-            {
-              "type": "COURSE",
-              "classId": 4500,
-              "subject": "CS"
-            },
-            {
-              "type": "COURSE",
-              "classId": 4530,
-              "subject": "CS"
-            }
-          ]
+          "type": "COURSE",
+          "classId": 4500,
+          "subject": "CS"
         }
       ],
       "minRequirementCount": 5
@@ -200,11 +190,6 @@
         },
         {
           "type": "COURSE",
-          "classId": 1180,
-          "subject": "THTR"
-        },
-        {
-          "type": "COURSE",
           "classId": 2345,
           "subject": "THTR"
         }
@@ -217,7 +202,7 @@
       "requirements": [
         {
           "type": "XOM",
-          "numCreditsMin": 8,
+          "numCreditsMin": 4,
           "courses": [
             {
               "type": "RANGE",
@@ -295,91 +280,7 @@
     },
     {
       "type": "SECTION",
-      "title": "Computing and Social Issues",
-      "requirements": [
-        {
-          "type": "COURSE",
-          "classId": 2600,
-          "subject": "AFAM"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4170,
-          "subject": "CY"
-        },
-        {
-          "type": "COURSE",
-          "classId": 5240,
-          "subject": "CY"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2150,
-          "subject": "ENGL"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2220,
-          "subject": "HIST"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2102,
-          "subject": "INSH"
-        },
-        {
-          "type": "OR",
-          "courses": [
-            {
-              "type": "COURSE",
-              "classId": 1300,
-              "subject": "IS"
-            },
-            {
-              "type": "COURSE",
-              "classId": 1300,
-              "subject": "PHIL"
-            }
-          ]
-        },
-        {
-          "type": "COURSE",
-          "classId": 1145,
-          "subject": "PHIL"
-        },
-        {
-          "type": "COURSE",
-          "classId": 1280,
-          "subject": "SOCL"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2485,
-          "subject": "SOCL"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4528,
-          "subject": "SOCL"
-        }
-      ],
-      "minRequirementCount": 1
-    },
-    {
-      "type": "SECTION",
-      "title": "Electrical Engineering",
-      "requirements": [
-        {
-          "type": "COURSE",
-          "classId": 2322,
-          "subject": "EECE"
-        }
-      ],
-      "minRequirementCount": 1
-    },
-    {
-      "type": "SECTION",
-      "title": "Science Requirement",
+      "title": "Science Courses",
       "requirements": [
         {
           "type": "AND",
@@ -402,32 +303,21 @@
           "type": "AND",
           "courses": [
             {
-              "subject": "BIOL",
-              "classId": 1113,
-              "description": "General Biology 2",
+              "subject": "CHEM",
+              "classId": 1101,
+              "description": "General Chemistry for Health Sciences",
               "type": "COURSE"
             },
             {
-              "subject": "BIOL",
-              "classId": 1114,
-              "description": "Lab for BIOL 1113",
-              "type": "COURSE"
-            }
-          ]
-        },
-        {
-          "type": "AND",
-          "courses": [
-            {
-              "subject": "BIOL",
-              "classId": 2301,
-              "description": "Genetics and Molecular Biology",
+              "subject": "CHEM",
+              "classId": 1102,
+              "description": "Lab for CHEM 1101",
               "type": "COURSE"
             },
             {
-              "subject": "BIOL",
-              "classId": 2302,
-              "description": "Lab for BIOL 2301",
+              "subject": "CHEM",
+              "classId": 1103,
+              "description": "Recitation for CHEM 1101",
               "type": "COURSE"
             }
           ]
@@ -437,43 +327,14 @@
           "courses": [
             {
               "subject": "CHEM",
-              "classId": 1211,
-              "description": "General Chemistry 1",
+              "classId": 1151,
+              "description": "General Chemistry for Engineers",
               "type": "COURSE"
             },
             {
               "subject": "CHEM",
-              "classId": 1212,
-              "description": "Lab for CHEM 1211",
-              "type": "COURSE"
-            },
-            {
-              "subject": "CHEM",
-              "classId": 1213,
-              "description": "Recitation for CHEM 1211",
-              "type": "COURSE"
-            }
-          ]
-        },
-        {
-          "type": "AND",
-          "courses": [
-            {
-              "subject": "CHEM",
-              "classId": 1214,
-              "description": "General Chemistry 2",
-              "type": "COURSE"
-            },
-            {
-              "subject": "CHEM",
-              "classId": 1215,
-              "description": "Lab for CHEM 1214",
-              "type": "COURSE"
-            },
-            {
-              "subject": "CHEM",
-              "classId": 1216,
-              "description": "Recitation for CHEM 1214",
+              "classId": 1153,
+              "description": "Recitation for CHEM 1151",
               "type": "COURSE"
             }
           ]
@@ -508,108 +369,6 @@
               "subject": "ENVR",
               "classId": 1203,
               "description": "Interpreting Earth History",
-              "type": "COURSE"
-            }
-          ]
-        },
-        {
-          "type": "AND",
-          "courses": [
-            {
-              "subject": "ENVR",
-              "classId": 1200,
-              "description": "Dynamic Earth",
-              "type": "COURSE"
-            },
-            {
-              "subject": "ENVR",
-              "classId": 1201,
-              "description": "Lab for ENVR 1200",
-              "type": "COURSE"
-            }
-          ]
-        },
-        {
-          "type": "AND",
-          "courses": [
-            {
-              "subject": "ENVR",
-              "classId": 2310,
-              "description": "Earth Materials",
-              "type": "COURSE"
-            },
-            {
-              "subject": "ENVR",
-              "classId": 2311,
-              "description": "Lab for ENVR 2310",
-              "type": "COURSE"
-            }
-          ]
-        },
-        {
-          "type": "AND",
-          "courses": [
-            {
-              "subject": "ENVR",
-              "classId": 2340,
-              "description": "Earth Landforms and Processes",
-              "type": "COURSE"
-            },
-            {
-              "subject": "ENVR",
-              "classId": 2341,
-              "description": "Lab for ENVR 2340",
-              "type": "COURSE"
-            }
-          ]
-        },
-        {
-          "type": "AND",
-          "courses": [
-            {
-              "subject": "ENVR",
-              "classId": 3300,
-              "description": "Geographic Information Systems",
-              "type": "COURSE"
-            },
-            {
-              "subject": "ENVR",
-              "classId": 3301,
-              "description": "Lab for ENVR 3300",
-              "type": "COURSE"
-            }
-          ]
-        },
-        {
-          "type": "AND",
-          "courses": [
-            {
-              "subject": "ENVR",
-              "classId": 4500,
-              "description": "Applied Hydrogeology",
-              "type": "COURSE"
-            },
-            {
-              "subject": "ENVR",
-              "classId": 4501,
-              "description": "Lab for ENVR 4500",
-              "type": "COURSE"
-            }
-          ]
-        },
-        {
-          "type": "AND",
-          "courses": [
-            {
-              "subject": "ENVR",
-              "classId": 5242,
-              "description": "Ancient Marine Life",
-              "type": "COURSE"
-            },
-            {
-              "subject": "ENVR",
-              "classId": 5243,
-              "description": "Lab for ENVR 5242",
               "type": "COURSE"
             }
           ]
@@ -651,23 +410,6 @@
           "courses": [
             {
               "subject": "PHYS",
-              "classId": 1147,
-              "description": "Physics for Life Sciences 2",
-              "type": "COURSE"
-            },
-            {
-              "subject": "PHYS",
-              "classId": 1148,
-              "description": "Lab for PHYS 1147",
-              "type": "COURSE"
-            }
-          ]
-        },
-        {
-          "type": "AND",
-          "courses": [
-            {
-              "subject": "PHYS",
               "classId": 1151,
               "description": "Physics for Engineering 1",
               "type": "COURSE"
@@ -691,29 +433,6 @@
           "courses": [
             {
               "subject": "PHYS",
-              "classId": 1155,
-              "description": "Physics for Engineering 2",
-              "type": "COURSE"
-            },
-            {
-              "subject": "PHYS",
-              "classId": 1156,
-              "description": "Lab for PHYS 1155",
-              "type": "COURSE"
-            },
-            {
-              "subject": "PHYS",
-              "classId": 1157,
-              "description": "Interactive Learning Seminar for PHYS 1155",
-              "type": "COURSE"
-            }
-          ]
-        },
-        {
-          "type": "AND",
-          "courses": [
-            {
-              "subject": "PHYS",
               "classId": 1161,
               "description": "Physics 1",
               "type": "COURSE"
@@ -723,37 +442,60 @@
               "classId": 1162,
               "description": "Lab for PHYS 1161",
               "type": "COURSE"
-            },
-            {
-              "subject": "PHYS",
-              "classId": 1163,
-              "description": "Recitation for PHYS 1161",
-              "type": "COURSE"
             }
           ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Computing and Social Issues",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2600,
+          "subject": "AFAM"
         },
         {
-          "type": "AND",
-          "courses": [
-            {
-              "subject": "PHYS",
-              "classId": 1165,
-              "description": "Physics 2",
-              "type": "COURSE"
-            },
-            {
-              "subject": "PHYS",
-              "classId": 1166,
-              "description": "Lab for PHYS 1165",
-              "type": "COURSE"
-            },
-            {
-              "subject": "PHYS",
-              "classId": 1167,
-              "description": "Recitation for PHYS 1165",
-              "type": "COURSE"
-            }
-          ]
+          "type": "COURSE",
+          "classId": 4170,
+          "subject": "CY"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5240,
+          "subject": "CY"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2150,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2102,
+          "subject": "INSH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1145,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1280,
+          "subject": "SOCL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2485,
+          "subject": "SOCL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4528,
+          "subject": "SOCL"
         }
       ],
       "minRequirementCount": 1
@@ -854,11 +596,10 @@
         "title": "Concentration: Foundations",
         "requirements": [
           {
-            "type": "XOM",
-            "numCreditsMin": 8,
+            "type": "OR",
             "courses": [
               {
-                "type": "OR",
+                "type": "AND",
                 "courses": [
                   {
                     "subject": "CS",
@@ -867,26 +608,32 @@
                     "type": "COURSE"
                   },
                   {
-                    "type": "COURSE",
-                    "classId": 4820,
-                    "subject": "CS"
+                    "subject": "CS",
+                    "classId": 2801,
+                    "description": "Lab for CS 2800",
+                    "type": "COURSE"
                   }
                 ]
               },
               {
-                "type": "OR",
-                "courses": [
-                  {
-                    "type": "COURSE",
-                    "classId": 4805,
-                    "subject": "CS"
-                  },
-                  {
-                    "type": "COURSE",
-                    "classId": 4810,
-                    "subject": "CS"
-                  }
-                ]
+                "type": "COURSE",
+                "classId": 4820,
+                "subject": "CS"
+              }
+            ]
+          },
+          {
+            "type": "OR",
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 4805,
+                "subject": "CS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4810,
+                "subject": "CS"
               }
             ]
           },
@@ -945,7 +692,7 @@
             ]
           }
         ],
-        "minRequirementCount": 2
+        "minRequirementCount": 3
       },
       {
         "type": "SECTION",
@@ -977,6 +724,11 @@
               },
               {
                 "type": "COURSE",
+                "classId": 4520,
+                "subject": "CS"
+              },
+              {
+                "type": "COURSE",
                 "classId": 4550,
                 "subject": "CS"
               },
@@ -995,10 +747,21 @@
         "title": "Concentration: Software",
         "requirements": [
           {
-            "subject": "CS",
-            "classId": 2800,
-            "description": "Logic and Computation",
-            "type": "COURSE"
+            "type": "AND",
+            "courses": [
+              {
+                "subject": "CS",
+                "classId": 2800,
+                "description": "Logic and Computation",
+                "type": "COURSE"
+              },
+              {
+                "subject": "CS",
+                "classId": 2801,
+                "description": "Lab for CS 2800",
+                "type": "COURSE"
+              }
+            ]
           },
           {
             "type": "COURSE",
@@ -1041,7 +804,7 @@
               },
               {
                 "type": "COURSE",
-                "classId": 4830,
+                "classId": 4520,
                 "subject": "CS"
               },
               {
