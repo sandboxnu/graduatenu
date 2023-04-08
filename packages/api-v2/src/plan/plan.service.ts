@@ -35,7 +35,7 @@ export class PlanService {
         this.logger.debug(
           {
             message: "Attempting to create a plan with an unsupported major.",
-            major,
+            majorName,
             catalogYear,
           },
           this.formatPlanServiceCtx("create")
@@ -56,7 +56,7 @@ export class PlanService {
           {
             message:
               "Attempting to create a plan with an unsupported concentration.",
-            major,
+            majorName,
             catalogYear,
           },
           this.formatPlanServiceCtx("create")

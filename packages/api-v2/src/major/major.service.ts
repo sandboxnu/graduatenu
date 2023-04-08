@@ -62,13 +62,14 @@ export class MajorService {
       return null;
     }
 
-    const concentrations = major.concentrations.concentrationOptions.map(
-      (concentration) => concentration.title
-    );
+    const concentrations =
+      major.concentrations?.concentrationOptions.map(
+        (concentration) => concentration.title
+      ) ?? [];
 
     return {
       concentrations,
-      minRequiredConcentrations: major.concentrations.minOptions,
+      minRequiredConcentrations: major.concentrations?.minOptions ?? 0,
     };
   }
 
@@ -97,6 +98,11 @@ export class MajorService {
     }
 
     const { concentrations, minRequiredConcentrations } = concentrationsInfo;
+
+    // major doesn't have any concentrations
+    if (concentrations.length === 0) {
+      return concentrationName === "";
+    }
 
     if (minRequiredConcentrations > 0 && !concentrationName) {
       this.logger.debug(

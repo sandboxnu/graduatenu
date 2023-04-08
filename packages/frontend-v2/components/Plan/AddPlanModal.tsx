@@ -53,6 +53,8 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
     formState: { errors, isSubmitting },
     watch,
     reset,
+    setValue,
+    control,
   } = useForm<CreatePlanDtoWithoutSchedule>({
     mode: "onTouched",
     shouldFocusError: true,
@@ -161,36 +163,40 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                   <>
                     <PlanSelect
                       label="Catalog Year"
-                      id="catalogYear"
-                      placeholder="Select a Catalog Year"
-                      error={errors.catalogYear}
-                      array={extractSupportedMajorYears(supportedMajorsData)}
-                      {...register("catalogYear", {
-                        required: "Catalog year is required",
-                        valueAsNumber: true,
-                      })}
+                      noValueOptionLabel="Select a Catalog Year"
+                      name="catalogYear"
+                      control={control}
+                      options={extractSupportedMajorYears(supportedMajorsData)}
+                      onChangeSideEffect={(val: string | null) => {
+                        const newYear = val ? parseInt(val, 10) : null;
+                        if (newYear !== catalogYear) {
+                          setValue("major", "");
+                        }
+                      }}
+                      rules={{ required: "Catalog year is required." }}
+                      isNumeric
                     />
-
                     <PlanSelect
                       label="Major"
-                      id="major"
-                      placeholder="Select a Major"
-                      helperText='First select your catalog year. If you still cannot find your major, select "No Major" above.'
-                      error={errors.major}
-                      array={extractSupportedMajorNames(
+                      noValueOptionLabel="Select a Major"
+                      name="major"
+                      control={control}
+                      options={extractSupportedMajorNames(
                         catalogYear,
                         supportedMajorsData
                       )}
-                      {...register("major", {
-                        required: "Major is required",
-                      })}
+                      onChangeSideEffect={() => {
+                        setValue("concentration", "");
+                      }}
+                      rules={{ required: "Major is required." }}
+                      helperText='First select your catalog year. If you still cannot find your major, select "No Major" above.'
+                      isSearchable
                     />
                     <PlanConcentrationsSelect
                       catalogYear={catalogYear}
                       majorName={majorName}
                       supportedMajorsData={supportedMajorsData}
-                      register={register}
-                      errors={errors}
+                      control={control}
                     />
                   </>
                 )}

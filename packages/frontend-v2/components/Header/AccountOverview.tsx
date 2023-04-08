@@ -51,10 +51,12 @@ export const AccountOverview: React.FC<AccountOverviewProps> = ({
   });
 
   useEffect(() => {
-    reset({
-      firstName: student.fullName?.split(" ")[0],
-      lastName: student.fullName?.split(" ")[1],
-    });
+    if (student.fullName) {
+      reset({
+        firstName: student.fullName.split(" ")[0],
+        lastName: student.fullName.split(" ")[1],
+      });
+    }
   }, [reset, student]);
 
   const firstName = watch("firstName", "");
