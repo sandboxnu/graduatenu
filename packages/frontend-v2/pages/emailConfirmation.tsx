@@ -1,14 +1,14 @@
-import { Text, Flex, Heading, Image, Link } from "@chakra-ui/react";
-import { API } from "@graduate/api-client";
+import { Text, Flex, Heading, Image } from "@chakra-ui/react";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import {
   GraduateLink,
   GraduatePreAuthHeader,
   LoadingPage,
+  ResendEmailVerificationLink,
 } from "../components";
 import { useStudentWithPlans } from "../hooks";
-import { handleApiClientError, toast } from "../utils";
+import { handleApiClientError } from "../utils";
 
 const EmailConfirmation: NextPage = () => {
   const { student, error, isLoading } = useStudentWithPlans();
@@ -27,18 +27,6 @@ const EmailConfirmation: NextPage = () => {
   if (student?.isEmailConfirmed) {
     router.push("/home");
   }
-
-  const handleResendConfirmationEmail = async () => {
-    try {
-      await API.email.resendConfirmationLink();
-      toast.success("Successfully resent email!");
-    } catch (err) {
-      toast.error(
-        "Something went wrong and we couldn't send you a new confirmation email. Try again in a some time.",
-        { log: true }
-      );
-    }
-  };
 
   return (
     <Flex direction="column" height="100vh">
@@ -61,7 +49,7 @@ const EmailConfirmation: NextPage = () => {
               the link in the email to activate your account.
             </Text>
             <Text textAlign="center">
-              Want to just use the app? Warning: If you do not confirm your
+              Want to just use the app? Warning: If you do not verifiy your
               email, you cannot recover your account if you forget your
               password.
             </Text>
@@ -71,14 +59,7 @@ const EmailConfirmation: NextPage = () => {
             />
           </Flex>
         </Flex>
-        <Link
-          onClick={handleResendConfirmationEmail}
-          color="primary.blue.light.main"
-          fontWeight="bold"
-          fontSize="sm"
-        >
-          Didn’t get the email? Click here to resend.
-        </Link>
+        <ResendEmailVerificationLink label="Didn’t get the email? Click here to resend." />
       </Flex>
     </Flex>
   );

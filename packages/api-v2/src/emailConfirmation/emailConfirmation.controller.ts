@@ -4,16 +4,20 @@ import {
   Controller,
   Post,
   Req,
-  UseGuards
+  UseGuards,
 } from "@nestjs/common";
 
-import { ConfirmEmailDto } from "@graduate/common";
+import {
+  ConfirmEmailDto,
+  emailAlreadyConfirmed,
+  unableToSendEmail,
+} from "@graduate/common";
 import { AuthenticatedRequest } from "src/auth/interfaces/authenticated-request";
 import { JwtAuthGuard } from "src/guards/jwt-auth.guard";
 import EmailConfirmationService from "./emailConfirmation.service";
 import {
   EmailAlreadyConfirmed,
-  UnableToSendEmail
+  UnableToSendEmail,
 } from "./emailConfirmationErrors";
 
 @Controller("email-confirmation")
@@ -47,9 +51,9 @@ export class EmailConfirmationController {
       request.user.uuid
     );
     if (result instanceof EmailAlreadyConfirmed) {
-      throw new BadRequestException("Email is already confirmed");
+      throw new BadRequestException(emailAlreadyConfirmed);
     } else if (result instanceof UnableToSendEmail) {
-      throw new BadRequestException("Unable to send email");
+      throw new BadRequestException(unableToSendEmail);
     }
   }
 }

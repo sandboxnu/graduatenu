@@ -39,7 +39,7 @@ const SidebarSection: React.FC<SidebarSectionProps> = ({
         Please ensure that you have a closer look yourself.
       </Text>
       {section.warnings.map((warning, idx) => (
-        <Text>
+        <Text key={idx}>
           {idx + 1}. {warning}
         </Text>
       ))}
