@@ -30,7 +30,7 @@ export const SearchCoursesInput: React.FC<SearchCoursesInputProps> = ({
       <Input
         value={searchTerm}
         onChange={(e) => {
-          setSearchTerm(e.target.value.trim());
+          setSearchTerm(e.target.value);
         }}
         onKeyDown={onKeyDown}
         borderRadius={10}

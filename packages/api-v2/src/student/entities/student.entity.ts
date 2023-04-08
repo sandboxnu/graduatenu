@@ -10,7 +10,7 @@ import {
 } from "typeorm";
 import * as bcrypt from "bcrypt";
 import { Exclude } from "class-transformer";
-import { ScheduleCourse } from "@graduate/common";
+import { ScheduleCourse, ScheduleCourse2 } from "@graduate/common";
 import { Plan } from "../../plan/entities/plan.entity";
 
 @Entity()
@@ -56,7 +56,7 @@ export class Student {
   coursesCompleted: ScheduleCourse[];
 
   @Column({ type: "json", nullable: true })
-  coursesTransfered: ScheduleCourse[];
+  coursesTransfered: ScheduleCourse2<null>[];
 
   @Column({ nullable: true })
   primaryPlanId: number;

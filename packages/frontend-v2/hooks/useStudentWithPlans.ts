@@ -44,6 +44,7 @@ export const fetchStudentAndPrepareForDnd = async (): Promise<
 > => {
   const student = await API.student.getMeWithPlan();
   const plansWithDndIds = student.plans.map(preparePlanForDnd);
+
   return {
     ...student,
     plans: plansWithDndIds,

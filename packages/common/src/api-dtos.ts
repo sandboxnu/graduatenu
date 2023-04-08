@@ -1,4 +1,5 @@
 import {
+  IsArray,
   IsBoolean,
   IsEmail,
   IsInt,
@@ -21,7 +22,8 @@ export class CreatePlanDtoWithoutSchedule {
   name: string;
 
   @IsString()
-  major: string;
+  @IsOptional()
+  major?: string;
 
   @IsString()
   @IsOptional()
@@ -30,7 +32,8 @@ export class CreatePlanDtoWithoutSchedule {
   @IsInt()
   @Min(1898)
   @Max(3000)
-  catalogYear: number;
+  @IsOptional()
+  catalogYear?: number;
 }
 
 export class CreatePlanDto extends CreatePlanDtoWithoutSchedule {
@@ -75,7 +78,7 @@ export class SignUpStudentDto {
   @IsEmail()
   email: string;
 
-@IsNotEmpty()
+  @IsNotEmpty()
   @IsString()
   password: string;
 
@@ -129,7 +132,7 @@ export class UpdateStudentDto {
   coursesCompleted?: ScheduleCourse[];
 
   @IsOptional()
-  @IsObject()
+  @IsArray()
   coursesTransfered?: ScheduleCourse[];
 
   @IsOptional()
@@ -215,4 +218,24 @@ export class ChangePasswordDto {
   @IsString()
   @IsNotEmpty()
   newPasswordConfirm: string;
+}
+
+export class ForgotPasswordDto {
+  @IsString()
+  @IsNotEmpty()
+  email: string;
+}
+
+export class ResetPasswordDto {
+  @IsNotEmpty()
+  @IsString()
+  token: string
+
+  @IsString()
+  @IsNotEmpty()
+  password: string;
+
+  @IsString()
+  @IsNotEmpty()
+  passwordConfirm: string;
 }

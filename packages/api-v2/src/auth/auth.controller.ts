@@ -11,14 +11,25 @@ import {
 import { AuthService } from "./auth.service";
 import {
   emailAlreadyExistsError,
+  emailDoesNotExistError,
+  emailHasNotBeenConfirmed,
+  ForgotPasswordDto,
+  forgotPasswordTokenExpiredError,
   GetStudentResponse,
   LoginStudentDto,
+  ResetPasswordDto,
   SignUpStudentDto,
   weakPasswordError,
 } from "@graduate/common";
 import { Response } from "express";
 import EmailConfirmationService from "src/emailConfirmation/emailConfirmation.service";
-import { EmailAlreadyExists, WeakPassword } from "src/student/student.errors";
+import {
+  EmailAlreadyExists,
+  EmailNotConfirmed,
+  NoSuchEmail,
+  WeakPassword,
+} from "src/student/student.errors";
+import { BadToken, InvalidPayload, TokenExpiredError } from "./auth.errors";
 
 @Controller("auth")
 export class AuthController {
@@ -83,6 +94,52 @@ export class AuthController {
     });
 
     return student;
+  }
+
+  @Post("forgot-password")
+  public async forgotPassword(
+    @Body() forgotPasswordData: ForgotPasswordDto
+  ): Promise<void> {
+    const student = await this.authService.forgotPassword(
+      forgotPasswordData.email
+    );
+
+    if (student instanceof NoSuchEmail) {
+      throw new BadRequestException(emailDoesNotExistError);
+    }
+    if (student instanceof EmailNotConfirmed) {
+      throw new BadRequestException(emailHasNotBeenConfirmed);
+    }
+  }
+
+  @Post("reset-password")
+  public async resetPassword(
+    @Body() resetPasswordData: ResetPasswordDto
+  ): Promise<void | Error> {
+    const email = await this.authService.decodeResetPassToken(
+      resetPasswordData.token
+    );
+    // Unsure what errors to write here
+    if (email instanceof InvalidPayload) {
+      throw new BadRequestException();
+    }
+    if (email instanceof BadToken) {
+      throw new BadRequestException();
+    }
+    if (email instanceof TokenExpiredError) {
+      throw new BadRequestException(forgotPasswordTokenExpiredError);
+    }
+    if (email instanceof Error) {
+      throw new BadRequestException();
+    }
+
+    const resetPasswordResult = await this.authService.resetPassword(
+      email,
+      resetPasswordData
+    );
+    if (resetPasswordResult instanceof WeakPassword) {
+      throw new BadRequestException(weakPasswordError);
+    }
   }
 
   @Get("logout")

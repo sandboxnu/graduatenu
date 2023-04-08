@@ -4,7 +4,7 @@ import { ScheduleCourse2, INEUReq, INEUReqCourse } from "@graduate/common";
 /** Get all the required(ANDs only) coreqs for a given course. */
 export async function getRequiredCourseCoreqs(
   course: ScheduleCourse2<unknown>,
-  catalogYear: number
+  catalogYear?: number
 ): Promise<ScheduleCourse2<null>[]> {
   const coursesCoreqs: ScheduleCourse2<null>[] = [];
 

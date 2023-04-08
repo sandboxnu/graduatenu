@@ -13,6 +13,7 @@ Please delete options that are not relevant.
 - [ ] Breaking change (fix or feature that would cause existing functionality to not work as expected)
 - [ ] This change requires a documentation update
 - [ ] This requires a run of `yarn install`
+- [ ] This has migration changes and requires a run of `yarn dev:migration:run`
 
 # How Has This Been Tested?
 
