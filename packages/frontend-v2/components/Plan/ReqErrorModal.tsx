@@ -20,7 +20,7 @@ import {
 } from "@graduate/common";
 
 interface ReqErrorModalProps {
-  course: ScheduleCourse2<string>;
+  course: ScheduleCourse2<unknown>;
   preReqErr?: INEUReqError;
   coReqErr?: INEUReqError;
 }

@@ -1,4 +1,9 @@
-import { ScheduleCourse, Schedule2, SupportedMajors } from "./types";
+import {
+  ScheduleCourse,
+  Schedule2,
+  SupportedMajors,
+  ScheduleCourse2,
+} from "./types";
 
 /** Types our API responds with. */
 
@@ -19,10 +24,10 @@ export class GetPlanResponse extends PlanModel<null> {}
 export class UpdatePlanResponse extends PlanModel<null> {}
 
 export class StudentModel<T> {
-  uuid: string;
-  nuid: string;
+  uuid: string | undefined;
+  nuid: string | undefined;
   isOnboarded: boolean;
-  fullName: string;
+  fullName: string | undefined;
   email: string;
   isEmailConfirmed: boolean;
   academicYear: number | undefined;
@@ -31,8 +36,8 @@ export class StudentModel<T> {
   major: string | undefined;
   coopCycle: string | undefined;
   coursesCompleted: ScheduleCourse[] | undefined;
-  coursesTransfered: ScheduleCourse[] | undefined;
-  primaryPlanId: number;
+  coursesTransfered: ScheduleCourse2<null>[] | undefined;
+  primaryPlanId: number | undefined;
   plans: PlanModel<T>[];
   concentration: string | undefined;
   createdAt: Date;

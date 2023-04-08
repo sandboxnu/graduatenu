@@ -3,3 +3,7 @@ export * from "./usePlan";
 export * from "./useRedirectIfLoggedIn";
 export * from "./useRedirectIfUnauthorized";
 export * from "./useStudentWithPlans";
+export * from "./useSupportedMajors";
+export * from "./useMajor";
+export * from "./useSearchCourses";
+export * from "./useFetchCourses";

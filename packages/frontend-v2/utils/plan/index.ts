@@ -11,3 +11,7 @@ export * from "./getSeasonDisplayWord";
 export * from "./addEmptyDndYearToPlan";
 export * from "./removeYearFromPlan";
 export * from "./supportedMajors";
+export * from "./totalCredits";
+export * from "./getAllCoursesFromPlan";
+export * from "./getSectionError";
+export * from "./getAllCoursesInMajor";

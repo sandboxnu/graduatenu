@@ -1,3 +1,9 @@
+import {
+  CheckIcon,
+  ChevronDownIcon,
+  ChevronUpIcon,
+  SmallCloseIcon,
+} from "@chakra-ui/icons";
 import { Box, Flex, Spinner, Text } from "@chakra-ui/react";
 import { ScheduleCourse2, Section } from "@graduate/common";
 import { useState } from "react";
@@ -21,19 +27,28 @@ const SidebarSection: React.FC<SidebarSectionProps> = ({
 }) => {
   const [opened, setOpened] = useState(false);
 
-  const grey = "neutral.400"
-  const green = "states.success.900"
+  const grey = "neutral.400";
+  const green = "states.success.main";
 
   return (
-    <Box borderTop="1px solid white" cursor="pointer" userSelect="none">
-      <Box
+    <Box
+      borderTopWidth="1px"
+      borderTopColor="neutral.900"
+      cursor="pointer"
+      userSelect="none"
+    >
+      <Flex
         onClick={() => {
           setOpened(!opened);
         }}
+        direction="row"
+        justifyContent="space-between"
+        alignItems="flex-start"
         color="dark.main"
         fontWeight="bold"
         py="md"
-        px="sm"
+        px="md"
+        margin="0"
         backgroundColor="neutral.main"
         transition="background-color 0.1s ease"
         _hover={{
@@ -46,38 +61,72 @@ const SidebarSection: React.FC<SidebarSectionProps> = ({
         position="sticky"
         top="0px"
         zIndex={1}
-        boxShadow="0px 5px 10px -6px #00000099"
       >
-        <Box
-          bg={validationStatus === SidebarValidationStatus.Complete ? green : 
-            validationStatus === SidebarValidationStatus.Error ? grey : "transparent"}
-          borderWidth="1px"
-          borderColor={validationStatus === SidebarValidationStatus.Complete ? green : grey}
-          color={validationStatus === SidebarValidationStatus.Loading ? grey : "white"}
-          padding="sm md"
-          width="26px"
-          height="26px"
-          display="flex"
-          transition="background 0.25s ease, color 0.25s ease, border 0.25s ease"
-          alignItems="center"
-          justifyContent="center"
-          marginRight="8px"
-          borderRadius="8px"
+        <Flex direction="row">
+          <Box
+            bg={
+              validationStatus === SidebarValidationStatus.Complete
+                ? green
+                : validationStatus === SidebarValidationStatus.Error
+                ? grey
+                : "transparent"
+            }
+            borderColor={
+              validationStatus === SidebarValidationStatus.Complete
+                ? green
+                : grey
+            }
+            color={
+              validationStatus === SidebarValidationStatus.Loading
+                ? grey
+                : "white"
+            }
+            borderWidth="1px"
+            width="18px"
+            height="18px"
+            display="flex"
+            transition="background 0.25s ease, color 0.25s ease, border 0.25s ease"
+            alignItems="center"
+            justifyContent="center"
+            marginRight="sm"
+            borderRadius="2xl"
+            mt="4xs"
           >
-            <Text 
-              position="absolute" 
-              opacity={validationStatus === SidebarValidationStatus.Complete ? 1 : 0} transition="opacity 0.25s ease">✓</Text>
-            <Text 
-              position="absolute" 
-              opacity={validationStatus === SidebarValidationStatus.Error ? 1 : 0} transition="opacity 0.25s ease">X</Text>
-            <Spinner 
-              size="xs" 
-              color="grey" 
-              position="absolute" 
-              opacity={validationStatus === SidebarValidationStatus.Loading ? 1 : 0} transition="opacity 0.25s ease"/>
-            </Box>
-        {section.title}
-      </Box>
+            {validationStatus === SidebarValidationStatus.Complete && (
+              <CheckIcon
+                position="absolute"
+                transition="opacity 0.25s ease"
+                boxSize="9px"
+              />
+            )}
+            {validationStatus === SidebarValidationStatus.Error && (
+              <SmallCloseIcon
+                position="absolute"
+                transition="opacity 0.25s ease"
+                boxSize="13px"
+              />
+            )}
+            {validationStatus === SidebarValidationStatus.Loading && (
+              <Spinner
+                size="xs"
+                color="grey"
+                position="absolute"
+                transition="opacity 0.25s ease"
+              />
+            )}
+          </Box>
+          <Text color="primary.blue.dark.main" mt="0" fontSize="sm">
+            {section.title}
+          </Text>
+        </Flex>
+        <Box>
+          {opened ? (
+            <ChevronUpIcon boxSize="25px" color="primary.blue.dark.main" />
+          ) : (
+            <ChevronDownIcon boxSize="25px" color="primary.blue.dark.main" />
+          )}
+        </Box>
+      </Flex>
       <Box
         style={{ display: opened ? "" : "none" }}
         backgroundColor="neutral.900"

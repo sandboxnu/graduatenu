@@ -11,6 +11,7 @@ import * as bcrypt from "bcrypt";
 import {
   ChangePasswordDto,
   isStrongPassword,
+  ResetPasswordDto,
   SignUpStudentDto,
   UpdateStudentDto,
 } from "@graduate/common";
@@ -111,9 +112,11 @@ export class StudentService {
     uuid: string,
     updateStudentDto: UpdateStudentDto
   ): Promise<UpdateResult> {
+    const student = await this.findByUuid(uuid);
+    const updatedStudent = { ...updateStudentDto, password: student.password };
     const updateResult = await this.studentRepository.update(
       uuid,
-      updateStudentDto
+      updatedStudent
     );
 
     if (updateResult.affected === 0) {
@@ -182,6 +185,25 @@ export class StudentService {
       );
       return new WeakPassword();
     }
-    await this.studentRepository.save(Object.assign(student, {password: newPassword}));
+    await this.studentRepository.save(Object.assign(student, { password: newPassword }));
+  }
+
+  async resetPassword(email, resetPasswordData: ResetPasswordDto): Promise<Student | Error> {
+    const { password, passwordConfirm } = resetPasswordData;
+
+    const student = await this.findByEmail(email)
+
+    if (password !== passwordConfirm) {
+      return new NewPasswordsDontMatch();
+    }
+
+    if (!isStrongPassword(password)) {
+      this.logger.debug(
+        { message: "weak password", password },
+      );
+      return new WeakPassword();
+    }
+
+    return await this.studentRepository.save(Object.assign(student, { password }))
   }
 }

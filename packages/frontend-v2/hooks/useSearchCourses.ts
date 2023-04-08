@@ -26,7 +26,8 @@ export function useSearchCourses(
 ): SearchCoursesReturn {
   const { data, mutate, ...rest } = useSWR(
     `/searchCourses/${searchQuery}/${minIndex}/${maxIndex}`,
-    async () => await SearchAPI.searchCourses(searchQuery, minIndex, maxIndex)
+    async () =>
+      await SearchAPI.searchCourses(searchQuery.trim(), minIndex, maxIndex)
   );
 
   return {
