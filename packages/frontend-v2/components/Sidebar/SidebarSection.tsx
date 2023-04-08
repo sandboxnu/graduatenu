@@ -3,12 +3,14 @@ import {
   ChevronDownIcon,
   ChevronUpIcon,
   SmallCloseIcon,
+  WarningTwoIcon,
 } from "@chakra-ui/icons";
-import { Box, Flex, Spinner, Text } from "@chakra-ui/react";
+import { Box, Flex, Spinner, Stack, Text } from "@chakra-ui/react";
 import { ScheduleCourse2, Section } from "@graduate/common";
 import { useState } from "react";
 import SectionRequirement from "./SectionRequirement";
 import { SidebarValidationStatus } from "./Sidebar";
+import { GraduateToolTip } from "../GraduateTooltip";
 
 interface SidebarSectionProps {
   section: Section;
@@ -29,6 +31,20 @@ const SidebarSection: React.FC<SidebarSectionProps> = ({
 
   const grey = "neutral.400";
   const green = "states.success.main";
+
+  const warningLabel = section.warnings && (
+    <Stack>
+      <Text>
+        Unfortunately we currently have no way of verifying the following.
+        Please ensure that you have a closer look yourself.
+      </Text>
+      {section.warnings.map((warning, idx) => (
+        <Text>
+          {idx + 1}. {warning}
+        </Text>
+      ))}
+    </Stack>
+  );
 
   return (
     <Box
@@ -119,13 +135,18 @@ const SidebarSection: React.FC<SidebarSectionProps> = ({
             {section.title}
           </Text>
         </Flex>
-        <Box>
+        <Flex ml="xs" alignItems="center">
+          {section.warnings && (
+            <GraduateToolTip label={warningLabel} placement="top">
+              <WarningTwoIcon boxSize="15px" color="states.warning.main" />
+            </GraduateToolTip>
+          )}
           {opened ? (
             <ChevronUpIcon boxSize="25px" color="primary.blue.dark.main" />
           ) : (
             <ChevronDownIcon boxSize="25px" color="primary.blue.dark.main" />
           )}
-        </Box>
+        </Flex>
       </Flex>
       <Box
         style={{ display: opened ? "" : "none" }}
