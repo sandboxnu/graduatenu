@@ -482,7 +482,7 @@
           ]
         }
       ],
-      "minRequirementCount": 0
+      "minRequirementCount": 1
     }
   ],
   "concentrations": {

@@ -327,7 +327,8 @@
               "type": "RANGE",
               "subject": "JRNL",
               "idRangeStart": 0,
-              "idRangeEnd": 9999
+              "idRangeEnd": 9999,
+              "exceptions": []
             }
           ]
         }
