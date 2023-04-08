@@ -17,7 +17,12 @@ import {
   LoadingPage,
 } from "../components";
 import axios from "axios";
-import { handleApiClientError, toast, WEAK_PASSWORD_MSG } from "../utils";
+import {
+  handleApiClientError,
+  noLeadOrTrailWhitespacePattern,
+  toast,
+  WEAK_PASSWORD_MSG,
+} from "../utils";
 import { handlWeakPasswordError } from "../utils/error";
 
 const ResetPassword: NextPage = () => {
@@ -94,6 +99,7 @@ const ResetPasswordContent: React.FC = () => {
                   validate: (pass) =>
                     isStrongPassword(pass) || WEAK_PASSWORD_MSG,
                   required: "New Password is required",
+                  pattern: noLeadOrTrailWhitespacePattern,
                 })}
               />
               <GraduateInput

@@ -30,6 +30,7 @@ import {
   extractSupportedMajorNames,
   extractSupportedMajorYears,
   handleApiClientError,
+  noLeadOrTrailWhitespacePattern,
 } from "../../utils";
 import { BlueButton } from "../Button";
 import { PlanInput, PlanSelect } from "../Form";
@@ -138,6 +139,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                   error={errors.name}
                   {...register("name", {
                     required: "Title is required",
+                    pattern: noLeadOrTrailWhitespacePattern,
                   })}
                 />
                 <Flex alignItems="center">

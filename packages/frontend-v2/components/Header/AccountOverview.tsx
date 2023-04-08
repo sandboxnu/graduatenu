@@ -16,7 +16,7 @@ import {
 } from "@chakra-ui/react";
 import { API } from "@graduate/api-client";
 import { StudentModel } from "@graduate/common";
-import { toast } from "../../utils";
+import { noLeadOrTrailWhitespacePattern, toast } from "../../utils";
 import { KeyedMutator } from "swr";
 import { useForm } from "react-hook-form";
 import { GraduateInput } from "../Form";
@@ -99,8 +99,10 @@ export const AccountOverview: React.FC<AccountOverviewProps> = ({
                   formLabel="First Name"
                   id="firstName"
                   placeholder="Cooper"
+                  error={errors.firstName}
                   {...register("firstName", {
                     onBlur: () => trigger("lastName"),
+                    pattern: noLeadOrTrailWhitespacePattern,
                   })}
                 />
                 <GraduateInput
@@ -116,6 +118,7 @@ export const AccountOverview: React.FC<AccountOverviewProps> = ({
                       }
                       return true;
                     },
+                    pattern: noLeadOrTrailWhitespacePattern,
                   })}
                 />
               </Flex>

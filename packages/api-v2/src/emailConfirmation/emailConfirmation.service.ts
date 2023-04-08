@@ -7,7 +7,7 @@ import { UpdateResult } from "typeorm";
 import EmailService from "../email/email.service";
 import {
   EmailAlreadyConfirmed,
-  UnableToSendEmail
+  UnableToSendEmail,
 } from "./emailConfirmationErrors";
 
 @Injectable()
@@ -26,11 +26,11 @@ export default class EmailConfirmationService {
     const url = `${this.configService.get(
       "EMAIL_CONFIRMATION_URL"
     )}?token=${token}`;
-    const text = `Welcome to Graduate, to confirm click here: ${url}`;
+    const text = `Welcome to GraduateNU! Visit the following link to confirm click your email: ${url}`;
 
     return this.emailService.sendMail({
       to: email,
-      subject: "Email Confirmation",
+      subject: "GradauteNU - Email Verification",
       text,
     });
   }
