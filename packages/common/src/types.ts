@@ -160,6 +160,7 @@ export interface Section {
   title: string;
   requirements: Requirement2[];
   minRequirementCount: number;
+  warnings?: string[];
 }
 
 /** Represents a degree requirement that allows a Section to be completed. */

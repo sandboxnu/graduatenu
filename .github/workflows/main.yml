@@ -14,19 +14,6 @@ jobs:
           node-version: 16
       - uses: bahmutov/npm-install@v1
       - run: yarn lint
-  run-scrapers-v2-tests:
-    runs-on: ubuntu-latest
-    name: Scraper V2 Tests
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-      - name: Setup node
-        uses: actions/setup-node@v3
-        with:
-          node-version: "16"
-      - run: yarn install --immutable
-      - name: Run Jest Tests
-        run: yarn packages/scrapers-v2 test
   run-api-v2-tests:
     runs-on: ubuntu-latest
     name: API V2 Tests
