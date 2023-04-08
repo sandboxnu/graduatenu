@@ -1,6 +1,10 @@
 import { Button, Flex, Heading, Text } from "@chakra-ui/react";
 import { API } from "@graduate/api-client";
-import { isStrongPassword, ResetPasswordDto } from "@graduate/common";
+import {
+  forgotPasswordTokenExpiredError,
+  isStrongPassword,
+  ResetPasswordDto,
+} from "@graduate/common";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -12,8 +16,9 @@ import {
   GraduatePreAuthHeader,
   LoadingPage,
 } from "../components";
-import { AxiosError } from "axios";
-import { handleApiClientError, WEAK_PASSWORD_MSG } from "../utils";
+import axios from "axios";
+import { handleApiClientError, toast, WEAK_PASSWORD_MSG } from "../utils";
+import { handlWeakPasswordError } from "../utils/error";
 
 const ResetPassword: NextPage = () => {
   return (
@@ -42,17 +47,29 @@ const ResetPasswordContent: React.FC = () => {
   });
 
   if (!token) {
-    return (<LoadingPage />)
+    return <LoadingPage />;
   }
 
   const onSubmitHandler = async (payload: ResetPasswordDto) => {
     try {
-      const payloadWithToken = {...payload, token}
+      const payloadWithToken = { ...payload, token };
       await API.auth.resetPassword(payloadWithToken);
       setIsSubmitted(true);
     } catch (err) {
-      const error = err as AxiosError;
-      handleApiClientError(error, router);
+      if (axios.isAxiosError(err)) {
+        const errorMessage = err.response?.data?.message;
+        if (errorMessage === forgotPasswordTokenExpiredError) {
+          toast.error(
+            "Aw it's been a while since we sent this email to change your password. Please request a new one."
+          );
+          return;
+        }
+
+        if (handlWeakPasswordError(errorMessage)) {
+          return;
+        }
+      }
+      handleApiClientError(err as Error, router);
     }
   };
 
@@ -125,7 +142,7 @@ const ResetPasswordContent: React.FC = () => {
             variant="solid"
             borderRadius="lg"
             isDisabled={Object.keys(errors).length > 0}
-            onClick={() => router.push('/login')}
+            onClick={() => router.push("/login")}
           >
             Continue to Log In
           </Button>

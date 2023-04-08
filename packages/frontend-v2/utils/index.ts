@@ -4,6 +4,6 @@ export * from "./toast";
 export * from "./plan";
 export * from "./logout";
 export * from "./course";
-export * from "./handleApiClientError";
+export * from "./error/handleApiClientError";
 export * from "./constants";
 export * from "./student";

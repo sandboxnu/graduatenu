@@ -1,6 +1,10 @@
 import { Flex, Button, Text, Heading, Link } from "@chakra-ui/react";
 import { API } from "@graduate/api-client";
-import { ForgotPasswordDto } from "@graduate/common";
+import {
+  ForgotPasswordDto,
+  emailDoesNotExistError,
+  emailHasNotBeenConfirmed,
+} from "@graduate/common";
 import { AxiosError } from "axios";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
@@ -13,6 +17,7 @@ import {
   GraduatePreAuthHeader,
 } from "../components";
 import { handleApiClientError, toast } from "../utils";
+import axios from "axios";
 
 const ForgotPassword: NextPage = () => {
   return (
@@ -44,8 +49,24 @@ const ForgotPasswordContent: React.FC = () => {
       setEmail(payload.email);
       setIsSubmitted(true);
     } catch (err) {
-      const error = err as AxiosError;
-      handleApiClientError(error, router);
+      if (axios.isAxiosError(err)) {
+        const errorMessage = err.response?.data?.message;
+        if (errorMessage === emailDoesNotExistError) {
+          toast.error(
+            "The email you entered does not exist. Please check your email and try again."
+          );
+          return;
+        }
+
+        if (errorMessage === emailHasNotBeenConfirmed) {
+          toast.error(
+            "The given email has not been confirmed yet so we can't reset your password 😔."
+          );
+          return;
+        }
+      }
+
+      handleApiClientError(err as Error, router);
     }
   };
 
@@ -111,12 +132,18 @@ const ForgotPasswordContent: React.FC = () => {
           direction="column"
           rowGap="2xl"
         >
-          <Flex direction="column" alignItems="center" rowGap="sm" textAlign='center'>
-            <Heading as="h1" size="xl" >
+          <Flex
+            direction="column"
+            alignItems="center"
+            rowGap="sm"
+            textAlign="center"
+          >
+            <Heading as="h1" size="xl">
               Check Your Email
             </Heading>
             <Text size="xs">
-              We sent a reset password link to <br/><b>{email}</b>
+              We sent a reset password link to <br />
+              <b>{email}</b>
             </Text>
           </Flex>
 

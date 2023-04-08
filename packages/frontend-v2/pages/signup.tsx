@@ -5,7 +5,6 @@ import {
   emailAlreadyExistsError,
   isStrongPassword,
   SignUpStudentDto,
-  weakPasswordError,
 } from "@graduate/common";
 import axios from "axios";
 import { NextPage } from "next";
@@ -18,6 +17,7 @@ import {
   GraduateInput,
 } from "../components";
 import { handleApiClientError, toast, WEAK_PASSWORD_MSG } from "../utils";
+import { handlWeakPasswordError } from "../utils/error";
 
 const Signup: NextPage = () => {
   return <AuthenticationPageLayout form={<SignUpForm />} />;
@@ -52,16 +52,15 @@ const SignUpForm: React.FC = () => {
           toast.error(
             "Account with the given email already exists... try logging in instead 😄"
           );
-        } else if (errorMessage === weakPasswordError) {
-          toast.error(
-            "Password too weak. Ensure the password is at least 8 characters long and contains digits and letters."
-          );
-        } else {
-          handleApiClientError(err, router);
+          return;
         }
-      } else {
-        handleApiClientError(err as Error, router);
+
+        if (handlWeakPasswordError(errorMessage)) {
+          return;
+        }
       }
+
+      handleApiClientError(err as Error, router);
     }
   };
 
@@ -123,9 +122,7 @@ const SignUpForm: React.FC = () => {
             placeholder="Password"
             {...register("password", {
               onBlur: () => trigger("passwordConfirm"),
-              validate: (pass) =>
-                isStrongPassword(pass) ||
-                WEAK_PASSWORD_MSG,
+              validate: (pass) => isStrongPassword(pass) || WEAK_PASSWORD_MSG,
               required: "Password is required",
             })}
           />

@@ -14,6 +14,7 @@ import {
   emailDoesNotExistError,
   emailHasNotBeenConfirmed,
   ForgotPasswordDto,
+  forgotPasswordTokenExpiredError,
   GetStudentResponse,
   LoginStudentDto,
   ResetPasswordDto,
@@ -22,7 +23,12 @@ import {
 } from "@graduate/common";
 import { Response } from "express";
 import EmailConfirmationService from "src/emailConfirmation/emailConfirmation.service";
-import { EmailAlreadyExists, EmailNotConfirmed, NoSuchEmail, WeakPassword } from "src/student/student.errors";
+import {
+  EmailAlreadyExists,
+  EmailNotConfirmed,
+  NoSuchEmail,
+  WeakPassword,
+} from "src/student/student.errors";
 import { BadToken, InvalidPayload, TokenExpiredError } from "./auth.errors";
 
 @Controller("auth")
@@ -30,7 +36,7 @@ export class AuthController {
   constructor(
     private readonly authService: AuthService,
     private readonly emailConfirmationService: EmailConfirmationService
-  ) { }
+  ) {}
 
   @Post("register")
   public async register(
@@ -94,13 +100,15 @@ export class AuthController {
   public async forgotPassword(
     @Body() forgotPasswordData: ForgotPasswordDto
   ): Promise<void> {
-    const student = await this.authService.forgotPassword(forgotPasswordData.email);
+    const student = await this.authService.forgotPassword(
+      forgotPasswordData.email
+    );
 
     if (student instanceof NoSuchEmail) {
-      throw new BadRequestException(emailDoesNotExistError)
+      throw new BadRequestException(emailDoesNotExistError);
     }
     if (student instanceof EmailNotConfirmed) {
-      throw new BadRequestException(emailHasNotBeenConfirmed)
+      throw new BadRequestException(emailHasNotBeenConfirmed);
     }
   }
 
@@ -108,26 +116,30 @@ export class AuthController {
   public async resetPassword(
     @Body() resetPasswordData: ResetPasswordDto
   ): Promise<void | Error> {
-    const email = await this.authService.decodeResetPassToken(resetPasswordData.token)
+    const email = await this.authService.decodeResetPassToken(
+      resetPasswordData.token
+    );
     // Unsure what errors to write here
     if (email instanceof InvalidPayload) {
-      throw new BadRequestException()
-    } 
+      throw new BadRequestException();
+    }
     if (email instanceof BadToken) {
-      throw new BadRequestException()
+      throw new BadRequestException();
     }
     if (email instanceof TokenExpiredError) {
-      throw new BadRequestException()
+      throw new BadRequestException(forgotPasswordTokenExpiredError);
     }
     if (email instanceof Error) {
-      throw new BadRequestException()
+      throw new BadRequestException();
     }
 
-    const resetPasswordResult = await this.authService.resetPassword(email, resetPasswordData);
+    const resetPasswordResult = await this.authService.resetPassword(
+      email,
+      resetPasswordData
+    );
     if (resetPasswordResult instanceof WeakPassword) {
-      throw new BadRequestException(weakPasswordError)
+      throw new BadRequestException(weakPasswordError);
     }
-
   }
 
   @Get("logout")

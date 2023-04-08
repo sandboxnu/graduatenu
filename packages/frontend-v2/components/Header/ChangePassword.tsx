@@ -14,10 +14,15 @@ import {
 import { API } from "@graduate/api-client";
 import { handleApiClientError, toast, WEAK_PASSWORD_MSG } from "../../utils";
 import axios from "axios";
-import { ChangePasswordDto, isStrongPassword } from "@graduate/common";
+import {
+  ChangePasswordDto,
+  isStrongPassword,
+  wrongPasswordError,
+} from "@graduate/common";
 import { useForm } from "react-hook-form";
 import { GraduateInput } from "../Form";
 import { useRouter } from "next/router";
+import { handlWeakPasswordError } from "../../utils/error";
 
 export const ChangePassword: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -48,12 +53,18 @@ export const ChangePassword: React.FC = () => {
       closeModal();
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        toast.error(
-          `${error.response?.data.message}. Please check your inputs and try again.`
-        );
-      } else {
-        handleApiClientError(error as Error, router);
+        const errorMessage = error.response?.data?.message;
+        if (errorMessage === wrongPasswordError) {
+          toast.error("Incorrect Password!");
+          return;
+        }
+
+        if (handlWeakPasswordError(errorMessage)) {
+          return;
+        }
       }
+
+      handleApiClientError(error as Error, router);
     }
   };
 
