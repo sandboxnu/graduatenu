@@ -190,7 +190,7 @@
           ]
         }
       ],
-      "minRequirementCount": 2
+      "minRequirementCount": 1
     },
     {
       "type": "SECTION",
@@ -223,7 +223,7 @@
           ]
         }
       ],
-      "minRequirementCount": 2
+      "minRequirementCount": 1
     },
     {
       "type": "SECTION",
@@ -266,19 +266,24 @@
           ]
         }
       ],
-      "minRequirementCount": 6
+      "minRequirementCount": 1
     },
     {
       "type": "SECTION",
       "title": "Art History",
       "requirements": [
         {
-          "type": "RANGE",
-          "creditsRequired": 4,
-          "subject": "ARTH",
-          "idRangeStart": 0,
-          "idRangeEnd": 9999,
-          "exceptions": []
+          "type": "XOM",
+          "numCreditsMin": 4,
+          "courses": [
+            {
+              "type": "RANGE",
+              "subject": "ARTH",
+              "idRangeStart": 0,
+              "idRangeEnd": 9999,
+              "exceptions": []
+            }
+          ]
         }
       ],
       "minRequirementCount": 1

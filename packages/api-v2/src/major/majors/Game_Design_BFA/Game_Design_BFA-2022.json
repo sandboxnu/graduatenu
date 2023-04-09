@@ -108,14 +108,34 @@
           ]
         },
         {
-          "type": "COURSE",
-          "classId": 2220,
-          "subject": "ARTF"
+          "type": "AND",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2220,
+              "subject": "ARTF"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2221,
+              "subject": "ARTF"
+            }
+          ]
         },
         {
-          "type": "COURSE",
-          "classId": 2370,
-          "subject": "ARTD"
+          "type": "AND",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2370,
+              "subject": "ARTD"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2371,
+              "subject": "ARTD"
+            }
+          ]
         }
       ],
       "minRequirementCount": 4
@@ -190,7 +210,7 @@
           ]
         }
       ],
-      "minRequirementCount": 2
+      "minRequirementCount": 1
     },
     {
       "type": "SECTION",
@@ -223,7 +243,7 @@
           ]
         }
       ],
-      "minRequirementCount": 2
+      "minRequirementCount": 1
     },
     {
       "type": "SECTION",
@@ -239,9 +259,19 @@
               "subject": "ARTF"
             },
             {
-              "type": "COURSE",
-              "classId": 2223,
-              "subject": "ARTF"
+              "type": "AND",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 2223,
+                  "subject": "ARTF"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 2224,
+                  "subject": "ARTF"
+                }
+              ]
             },
             {
               "type": "COURSE",
@@ -266,19 +296,24 @@
           ]
         }
       ],
-      "minRequirementCount": 6
+      "minRequirementCount": 1
     },
     {
       "type": "SECTION",
       "title": "Art History",
       "requirements": [
         {
-          "type": "RANGE",
-          "creditsRequired": 4,
-          "subject": "ARTH",
-          "idRangeStart": 0,
-          "idRangeEnd": 9999,
-          "exceptions": []
+          "type": "XOM",
+          "numCreditsMin": 4,
+          "courses": [
+            {
+              "type": "RANGE",
+              "subject": "ARTH",
+              "idRangeStart": 0,
+              "idRangeEnd": 9999,
+              "exceptions": []
+            }
+          ]
         }
       ],
       "minRequirementCount": 1

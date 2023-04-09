@@ -382,6 +382,10 @@
     {
       "type": "SECTION",
       "title": "Linguistics Elective",
+      "warnings": [
+        "Complete one LING course, not counted elsewhere, numbered 3000–4799, or one of the following.",
+        "With prior approval, directed study research, independent study, and Honors Project courses can also be counted (last 5 courses)."
+      ],
       "requirements": [
         {
           "type": "COURSE",
