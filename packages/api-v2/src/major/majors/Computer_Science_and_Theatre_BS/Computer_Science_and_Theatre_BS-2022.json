@@ -190,12 +190,6 @@
     },
     {
       "type": "SECTION",
-      "title": "Theatre",
-      "requirements": [],
-      "minRequirementCount": 0
-    },
-    {
-      "type": "SECTION",
       "title": "Foundational Stages",
       "requirements": [
         {

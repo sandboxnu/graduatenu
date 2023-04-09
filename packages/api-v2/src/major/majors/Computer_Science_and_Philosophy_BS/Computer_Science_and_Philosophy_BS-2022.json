@@ -275,9 +275,23 @@
     {
       "type": "SECTION",
       "title": "Electives",
-      "warnings": ["Take four additional PHIL courses, at least one of which is 4000 or above"],
-      "requirements": [],
-      "minRequirementCount": 0
+      "warnings": ["At least one of the following must be 4000 or above"],
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 16,
+          "courses": [
+            {
+              "type": "RANGE",
+              "subject": "PHIL",
+              "idRangeStart": 0,
+              "idRangeEnd": 9999,
+              "exceptions": []
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
     },
     {
       "type": "SECTION",
