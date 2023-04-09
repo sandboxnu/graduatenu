@@ -293,7 +293,13 @@
               "idRangeStart": 2303,
               "idRangeEnd": 9999,
               "exceptions": []
-            },
+            }
+          ]
+        },
+        {
+          "type": "XOM",
+          "numCreditsMin": 4,
+          "courses": [
             {
               "type": "RANGE",
               "subject": "HIST",
@@ -304,11 +310,12 @@
           ]
         }
       ],
-      "minRequirementCount": 5
+      "minRequirementCount": 4
     },
     {
       "type": "SECTION",
       "title": "History Capstone Seminar or Senior Project",
+      "warnings": ["Only Public History concentrators may also select the second course."],
       "requirements": [
         {
           "type": "COURSE",
@@ -321,7 +328,7 @@
           "subject": "HIST"
         }
       ],
-      "minRequirementCount": 2
+      "minRequirementCount": 1
     },
     {
       "type": "SECTION",
@@ -455,28 +462,6 @@
             {
               "type": "COURSE",
               "classId": 1102,
-              "subject": "ENGW"
-            }
-          ]
-        }
-      ],
-      "minRequirementCount": 1
-    },
-    {
-      "type": "SECTION",
-      "title": "Advanced Writing in the Disciplines",
-      "requirements": [
-        {
-          "type": "AND",
-          "courses": [
-            {
-              "type": "COURSE",
-              "classId": 2301,
-              "subject": "ENGW"
-            },
-            {
-              "type": "COURSE",
-              "classId": 2302,
               "subject": "ENGW"
             }
           ]

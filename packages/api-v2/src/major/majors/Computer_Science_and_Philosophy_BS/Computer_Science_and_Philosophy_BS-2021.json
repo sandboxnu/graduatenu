@@ -147,7 +147,6 @@
     {
       "type": "SECTION",
       "title": "Khoury Elective",
-      "warnings": ["Complete 8 credits of upper-division CS, CY, DS, or IS classes that are not already required."],
       "requirements": [
         {
           "type": "XOM",
@@ -291,6 +290,7 @@
     {
       "type": "SECTION",
       "title": "Integrative Course Requirement",
+      "warnings": ["These courses will double count in other areas of your major."],
       "requirements": [
         {
           "type": "COURSE",

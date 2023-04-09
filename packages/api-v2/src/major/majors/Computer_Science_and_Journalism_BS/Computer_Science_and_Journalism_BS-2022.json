@@ -333,7 +333,7 @@
           ]
         }
       ],
-      "minRequirementCount": 2
+      "minRequirementCount": 1
     },
     {
       "type": "SECTION",
@@ -441,6 +441,7 @@
     {
       "type": "SECTION",
       "title": "Advanced Writing in the Disciplines",
+      "warnings": ["This course also fulfils a requirement above."],
       "requirements": [
         {
           "type": "COURSE",

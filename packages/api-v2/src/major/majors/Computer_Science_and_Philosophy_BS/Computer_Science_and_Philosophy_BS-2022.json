@@ -8,14 +8,34 @@
       "title": "Computer Science Overview",
       "requirements": [
         {
-          "type": "COURSE",
-          "classId": 1200,
-          "subject": "CS"
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1200,
+              "subject": "CS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1000,
+              "subject": "PHIL"
+            }
+          ]
         },
         {
-          "type": "COURSE",
-          "classId": 1210,
-          "subject": "CS"
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1210,
+              "subject": "CS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2000,
+              "subject": "EESH"
+            }
+          ]
         }
       ],
       "minRequirementCount": 2
@@ -147,7 +167,6 @@
     {
       "type": "SECTION",
       "title": "Khoury Elective",
-      "warnings": ["Complete 8 credits of upper-division CS, CY, DS, or IS classes that are not already required."],
       "requirements": [
         {
           "type": "XOM",
@@ -220,6 +239,11 @@
           "subject": "PHIL"
         },
         {
+          "type": "COURSE",
+          "classId": 1145,
+          "subject": "PHIL"
+        },
+        {
           "type": "OR",
           "courses": [
             {
@@ -241,11 +265,6 @@
         },
         {
           "type": "COURSE",
-          "classId": 1145,
-          "subject": "PHIL"
-        },
-        {
-          "type": "COURSE",
           "classId": 4515,
           "subject": "PHIL"
         },
@@ -264,7 +283,7 @@
             },
             {
               "type": "COURSE",
-              "classId": "4050",
+              "classId": 4050,
               "subject": "PHIL"
             }
           ]
@@ -296,6 +315,9 @@
     {
       "type": "SECTION",
       "title": "Integrative Course Requirement",
+      "warnings": [
+        "These courses will double count in other areas of your major:"
+      ],
       "requirements": [
         {
           "type": "COURSE",

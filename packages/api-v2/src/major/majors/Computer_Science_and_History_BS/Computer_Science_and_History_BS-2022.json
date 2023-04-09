@@ -325,7 +325,7 @@
           ]
         }
       ],
-      "minRequirementCount": 6
+      "minRequirementCount": 4
     },
     {
       "type": "SECTION",
@@ -471,28 +471,6 @@
             {
               "type": "COURSE",
               "classId": 1102,
-              "subject": "ENGW"
-            }
-          ]
-        }
-      ],
-      "minRequirementCount": 1
-    },
-    {
-      "type": "SECTION",
-      "title": "Advanced Writing in the Disciplines",
-      "requirements": [
-        {
-          "type": "AND",
-          "courses": [
-            {
-              "type": "COURSE",
-              "classId": 2301,
-              "subject": "ENGW"
-            },
-            {
-              "type": "COURSE",
-              "classId": 2302,
               "subject": "ENGW"
             }
           ]

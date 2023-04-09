@@ -308,7 +308,7 @@
     {
       "type": "SECTION",
       "title": "Media Arts Electives",
-      "warnings": ["Complete any six courses as long as prerequisites have been met. At least two must be a 3000-level course."],
+      "warnings": ["At least two of the following courses must be a 3000-level course."],
       "requirements": [
         {
           "type": "AND",
