@@ -220,7 +220,7 @@
           ]
         }
       ],
-      "minRequirementCount": 2
+      "minRequirementCount": 1
     },
     {
       "type": "SECTION",
@@ -262,6 +262,7 @@
     {
       "type": "SECTION",
       "title": "Economics Electives",
+      "warnings": ["No more than 2 of the four required courses can be in the ECON 1200-1999 range"],
       "requirements": [
         {
           "type": "RANGE",

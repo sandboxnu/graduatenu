@@ -326,6 +326,10 @@
     {
       "type": "SECTION",
       "title": "Diversity",
+      "warnings": [
+        "This course may also be used to fulfill an additional English requirement below",
+        "Between the following sections, at least two of the chosen courses must be numbered 3000-4999: Diversity, Pre-Nineteenth-Century Literature, Nineteenth-, Twentieth-, and Twenty-First-Century Literature, Theories and Methods, Comparative Literature, Writing, English Electives"
+      ],
       "requirements": [
         {
           "type": "COURSE",
@@ -378,6 +382,9 @@
     {
       "type": "SECTION",
       "title": "Literary Periods",
+      "warnings": [
+        "Between the following sections, at least two of the chosen courses must be numbered 3000-4999: Diversity, Pre-Nineteenth-Century Literature, Nineteenth-, Twentieth-, and Twenty-First-Century Literature, Theories and Methods, Comparative Literature, Writing, English Electives"
+      ],
       "requirements": [
         {
           "type": "XOM",
@@ -497,6 +504,9 @@
     {
       "type": "SECTION",
       "title": "Theories and Methods",
+      "warnings": [
+        "Between the following sections, at least two of the chosen courses must be numbered 3000-4999: Diversity, Pre-Nineteenth-Century Literature, Nineteenth-, Twentieth-, and Twenty-First-Century Literature, Theories and Methods, Comparative Literature, Writing, English Electives"
+      ],
       "requirements": [
         {
           "type": "COURSE",
@@ -579,6 +589,9 @@
     {
       "type": "SECTION",
       "title": "Comparative Course",
+      "warnings": [
+        "Between the following sections, at least two of the chosen courses must be numbered 3000-4999: Diversity, Pre-Nineteenth-Century Literature, Nineteenth-, Twentieth-, and Twenty-First-Century Literature, Theories and Methods, Comparative Literature, Writing, English Electives"
+      ],
       "requirements": [
         {
           "type": "XOM",
@@ -667,6 +680,9 @@
     {
       "type": "SECTION",
       "title": "Writing",
+      "warnings": [
+        "Between the following sections, at least two of the chosen courses must be numbered 3000-4999: Diversity, Pre-Nineteenth-Century Literature, Nineteenth-, Twentieth-, and Twenty-First-Century Literature, Theories and Methods, Comparative Literature, Writing, English Electives"
+      ],
       "requirements": [
         {
           "type": "COURSE",
@@ -744,6 +760,9 @@
     {
       "type": "SECTION",
       "title": "English Electives",
+      "warnings": [
+        "Between the following sections, at least two of the chosen courses must be numbered 3000-4999: Diversity, Pre-Nineteenth-Century Literature, Nineteenth-, Twentieth-, and Twenty-First-Century Literature, Theories and Methods, Comparative Literature, Writing, English Electives"
+      ],
       "requirements": [
         {
           "type": "XOM",

@@ -399,57 +399,6 @@
     },
     {
       "type": "SECTION",
-      "title": "Interaction Design Option",
-      "requirements": [
-        {
-          "type": "COURSE",
-          "classId": 2400,
-          "subject": "ARTG"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3700,
-          "subject": "ARTG"
-        }
-      ],
-      "minRequirementCount": 2
-    },
-    {
-      "type": "SECTION",
-      "title": "Graphic and Information Design Option",
-      "requirements": [
-        {
-          "type": "COURSE",
-          "classId": 2252,
-          "subject": "ARTG"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3450,
-          "subject": "ARTG"
-        }
-      ],
-      "minRequirementCount": 2
-    },
-    {
-      "type": "SECTION",
-      "title": "Experience Design Option",
-      "requirements": [
-        {
-          "type": "COURSE",
-          "classId": 3462,
-          "subject": "ARTG"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3463,
-          "subject": "ARTG"
-        }
-      ],
-      "minRequirementCount": 2
-    },
-    {
-      "type": "SECTION",
       "title": "Degree-Focused Electives",
       "requirements": [
         {
@@ -730,7 +679,59 @@
     }
   ],
   "concentrations": {
-    "minOptions": 0,
-    "concentrationOptions": []
+    "minOptions": 1,
+    "concentrationOptions": [
+      {
+        "type": "SECTION",
+        "title": "Interaction Design Option",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 2400,
+            "subject": "ARTG"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3700,
+            "subject": "ARTG"
+          }
+        ],
+        "minRequirementCount": 2
+      },
+      {
+        "type": "SECTION",
+        "title": "Graphic and Information Design Option",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 2252,
+            "subject": "ARTG"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3450,
+            "subject": "ARTG"
+          }
+        ],
+        "minRequirementCount": 2
+      },
+      {
+        "type": "SECTION",
+        "title": "Experience Design Option",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 3462,
+            "subject": "ARTG"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3463,
+            "subject": "ARTG"
+          }
+        ],
+        "minRequirementCount": 2
+      }
+    ]
   }
 }
