@@ -161,7 +161,6 @@
         {
           "type": "XOM",
           "numCreditsMin": 12,
-          "warnings": ["Complete 12 credits of upper-division CS, CY, DS, or IS classes that are not already required."],
           "courses": [
             {
               "type": "RANGE",
@@ -218,7 +217,7 @@
           ]
         }
       ],
-      "minRequirementCount": 3
+      "minRequirementCount": 1
     },
     {
       "type": "SECTION",

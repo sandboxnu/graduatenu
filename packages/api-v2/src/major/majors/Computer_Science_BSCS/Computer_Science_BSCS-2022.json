@@ -798,7 +798,7 @@
     "concentrationOptions": [
       {
         "type": "SECTION",
-        "title": "Concentration: Artificial Intelligence",
+        "title": "Artificial Intelligence",
         "requirements": [
           {
             "type": "COURSE",
@@ -851,7 +851,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Concentration: Foundations",
+        "title": "Foundations",
         "requirements": [
           {
             "type": "XOM",
@@ -949,7 +949,10 @@
       },
       {
         "type": "SECTION",
-        "title": "Concentration: Human-Centered Computing",
+        "title": "Human-Centered Computing",
+        "warnings": [
+          "The concentration in human-centered computing requires a fall co-op pattern."
+        ],
         "requirements": [
           {
             "type": "COURSE",
@@ -992,7 +995,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Concentration: Software",
+        "title": "Software",
         "requirements": [
           {
             "subject": "CS",
@@ -1056,7 +1059,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Concentration: Systems",
+        "title": "Systems",
         "requirements": [
           {
             "type": "COURSE",

@@ -566,6 +566,9 @@
     {
       "type": "SECTION",
       "title": "Criminal Justice Co-op Integration",
+      "warnings": [
+        "Co-op students should complete at least one of the following courses. CRIM 3000 is required for the first co-op. CRIM 4000 is required if a second co-op is taken:"
+      ],
       "requirements": [
         {
           "type": "COURSE",

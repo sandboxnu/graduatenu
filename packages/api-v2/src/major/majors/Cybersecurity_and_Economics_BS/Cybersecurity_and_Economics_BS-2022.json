@@ -491,37 +491,46 @@
     {
       "type": "SECTION",
       "title": "Electives",
+      "warnings": [
+        "At most two of the following may be at the 1000 level."
+      ],
       "requirements": [
         {
-          "type": "RANGE",
-          "subject": "ECON",
-          "idRangeStart": 1200,
-          "idRangeEnd": 1999,
-          "exceptions": []
-        },
-        {
-          "type": "RANGE",
-          "subject": "ECON",
-          "idRangeStart": 2990,
-          "idRangeEnd": 4689,
-          "exceptions": []
-        },
-        {
-          "type": "RANGE",
-          "subject": "ECON",
-          "idRangeStart": 4900,
-          "idRangeEnd": 4999,
-          "exceptions": []
-        },
-        {
-          "type": "RANGE",
-          "subject": "ECON",
-          "idRangeStart": 5200,
-          "idRangeEnd": 5999,
-          "exceptions": []
+          "type": "XOM",
+          "numCreditsMin": 16,
+          "courses": [
+            {
+              "type": "RANGE",
+              "subject": "ECON",
+              "idRangeStart": 1200,
+              "idRangeEnd": 1999,
+              "exceptions": []
+            },
+            {
+              "type": "RANGE",
+              "subject": "ECON",
+              "idRangeStart": 2990,
+              "idRangeEnd": 4689,
+              "exceptions": []
+            },
+            {
+              "type": "RANGE",
+              "subject": "ECON",
+              "idRangeStart": 4900,
+              "idRangeEnd": 4999,
+              "exceptions": []
+            },
+            {
+              "type": "RANGE",
+              "subject": "ECON",
+              "idRangeStart": 5200,
+              "idRangeEnd": 5999,
+              "exceptions": []
+            }
+          ]
         }
       ],
-      "minRequirementCount": 4
+      "minRequirementCount": 1
     },
     {
       "type": "SECTION",

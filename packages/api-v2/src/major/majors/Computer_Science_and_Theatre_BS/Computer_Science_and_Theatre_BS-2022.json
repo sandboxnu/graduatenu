@@ -8,14 +8,34 @@
       "title": "Required Courses",
       "requirements": [
         {
-          "type": "COURSE",
-          "classId": 1200,
-          "subject": "CS"
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1200,
+              "subject": "CS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1000,
+              "subject": "THTR"
+            }
+          ]
         },
         {
-          "type": "COURSE",
-          "classId": 1210,
-          "subject": "CS"
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1210,
+              "subject": "CS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2000,
+              "subject": "EEAM"
+            }
+          ]
         },
         {
           "type": "AND",
@@ -186,7 +206,7 @@
           ]
         }
       ],
-      "minRequirementCount": 2
+      "minRequirementCount": 1
     },
     {
       "type": "SECTION",
@@ -261,7 +281,7 @@
           ]
         }
       ],
-      "minRequirementCount": 2
+      "minRequirementCount": 1
     },
     {
       "type": "SECTION",
@@ -510,6 +530,11 @@
             {
               "type": "COURSE",
               "classId": 3302,
+              "subject": "ENGW"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3314,
               "subject": "ENGW"
             },
             {

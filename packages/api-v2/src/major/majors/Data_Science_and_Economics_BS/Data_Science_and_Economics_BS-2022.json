@@ -303,50 +303,41 @@
     {
       "type": "SECTION",
       "title": "Economics Electives",
+      "warnings": [
+        "No more than two of the following may be in the ECON 1200 to ECON 1999 range."
+      ],
       "requirements": [
         {
           "type": "XOM",
           "numCreditsMin": 20,
           "courses": [
             {
-              "type": "XOM",
-              "numCreditsMin": 0,
-              "courses": [
-                {
-                  "type": "RANGE",
-                  "subject": "ECON",
-                  "idRangeStart": 1200,
-                  "idRangeEnd": 1999,
-                  "exceptions": []
-                }
-              ]
+              "type": "RANGE",
+              "subject": "ECON",
+              "idRangeStart": 1200,
+              "idRangeEnd": 1999,
+              "exceptions": []
             },
             {
-              "type": "XOM",
-              "numCreditsMin": 12,
-              "courses": [
-                {
-                  "type": "RANGE",
-                  "subject": "ECON",
-                  "idRangeStart": 2990,
-                  "idRangeEnd": 4689,
-                  "exceptions": []
-                },
-                {
-                  "type": "RANGE",
-                  "subject": "ECON",
-                  "idRangeStart": 4900,
-                  "idRangeEnd": 4999,
-                  "exceptions": []
-                },
-                {
-                  "type": "RANGE",
-                  "subject": "ECON",
-                  "idRangeStart": 5200,
-                  "idRangeEnd": 5999,
-                  "exceptions": []
-                }
-              ]
+              "type": "RANGE",
+              "subject": "ECON",
+              "idRangeStart": 2990,
+              "idRangeEnd": 4689,
+              "exceptions": []
+            },
+            {
+              "type": "RANGE",
+              "subject": "ECON",
+              "idRangeStart": 4900,
+              "idRangeEnd": 4999,
+              "exceptions": []
+            },
+            {
+              "type": "RANGE",
+              "subject": "ECON",
+              "idRangeStart": 5200,
+              "idRangeEnd": 5999,
+              "exceptions": []
             }
           ]
         }

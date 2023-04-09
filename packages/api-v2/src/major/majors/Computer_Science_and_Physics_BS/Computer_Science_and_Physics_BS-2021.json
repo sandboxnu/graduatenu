@@ -146,7 +146,7 @@
     },
     {
       "type": "SECTION",
-      "title": "Required Courses",
+      "title": "Physics Required Courses",
       "requirements": [
         {
           "type": "AND",
@@ -271,11 +271,14 @@
           "subject": "PHYS"
         }
       ],
-      "minRequirementCount": 6
+      "minRequirementCount": 1
     },
     {
       "type": "SECTION",
       "title": "Khoury Elective",
+      "warnings": [
+        "The computer science elective is not required if the student has completed the computer science capstone (above)"
+      ],
       "requirements": [
         {
           "type": "XOM",
@@ -341,6 +344,9 @@
     {
       "type": "SECTION",
       "title": "Physics Elective",
+      "warnings": [
+        "Only one physics elective is required if the student has completed the physics capstone (above)."
+      ],
       "requirements": [
         {
           "type": "XOM",

@@ -396,6 +396,9 @@
     {
       "type": "SECTION",
       "title": "Ecology and Evolutionary Biology Topical Requirement",
+      "warnings": [
+        "Complete 16 semester hours of the following. At least one course must be taken from each list."
+      ],
       "requirements": [
         {
           "type": "XOM",
