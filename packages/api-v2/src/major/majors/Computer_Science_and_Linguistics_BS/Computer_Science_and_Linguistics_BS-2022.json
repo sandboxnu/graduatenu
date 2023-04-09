@@ -347,12 +347,17 @@
           "type": "OR",
           "courses": [
             {
-              "type": "RANGE",
-              "creditsRequired": 4,
-              "subject": "LING",
-              "idRangeStart": 3000,
-              "idRangeEnd": 4799,
-              "exceptions": []
+              "type": "XOM",
+              "numCreditsMin": 4,
+              "courses": [
+                {
+                  "type": "RANGE",
+                  "subject": "LING",
+                  "idRangeStart": 3000,
+                  "idRangeEnd": 4799,
+                  "exceptions": []
+                }
+              ]
             },
             {
               "type": "COURSE",
