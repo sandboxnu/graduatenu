@@ -2,16 +2,7 @@ import { HeaderContainer } from "./HeaderContainer";
 import { Logo } from "./Logo";
 import { GraduateButtonLink } from "../Link";
 import { UserDropdown } from "./UserDropdown";
-import {
-  Flex,
-  Icon,
-  IconProps,
-  Link as ChakraLink,
-} from "@chakra-ui/react";
-
-interface GraduateHeaderProps {
-  rightContent: React.ReactNode;
-}
+import { Flex, Icon, IconProps, Link as ChakraLink } from "@chakra-ui/react";
 
 export const GraduatePreAuthHeader: React.FC = () => {
   return (
@@ -26,6 +17,14 @@ export const GraduatePreAuthHeader: React.FC = () => {
 export const GraduatePostAuthHeader: React.FC = () => {
   return <GraduateHeader rightContent={<UserDropdown />} />;
 };
+
+export const GraduateDisabledAppHeader: React.FC = () => {
+  return <GraduateHeader />;
+};
+
+interface GraduateHeaderProps {
+  rightContent?: React.ReactNode;
+}
 
 const GraduateHeader: React.FC<GraduateHeaderProps> = ({ rightContent }) => {
   return (

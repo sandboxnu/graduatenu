@@ -78,7 +78,7 @@ const SidebarSection: React.FC<SidebarSectionProps> = ({
         top="0px"
         zIndex={1}
       >
-        <Flex direction="row">
+        <Flex direction="row" height="100%" columnGap="sm">
           <Box
             bg={
               validationStatus === SidebarValidationStatus.Complete
@@ -104,9 +104,9 @@ const SidebarSection: React.FC<SidebarSectionProps> = ({
             transition="background 0.25s ease, color 0.25s ease, border 0.25s ease"
             alignItems="center"
             justifyContent="center"
-            marginRight="sm"
             borderRadius="2xl"
             mt="4xs"
+            p="xs"
           >
             {validationStatus === SidebarValidationStatus.Complete && (
               <CheckIcon

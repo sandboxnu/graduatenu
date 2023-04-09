@@ -7,3 +7,4 @@ export * from "./useSupportedMajors";
 export * from "./useMajor";
 export * from "./useSearchCourses";
 export * from "./useFetchCourses";
+export * from "./useWindowSize";
