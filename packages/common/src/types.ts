@@ -239,6 +239,7 @@ export interface IRequiredCourse {
   type: "COURSE";
   classId: number;
   subject: string;
+  description?: string;
 }
 
 /**
