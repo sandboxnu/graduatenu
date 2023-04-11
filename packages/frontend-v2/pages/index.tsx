@@ -97,7 +97,7 @@ const Banner = (): JSX.Element => {
 const Info = (): JSX.Element => {
   const infoSectionData = [
     {
-      imageSource: "/landing_start.svg",
+      imageSource: "/landing_start.png",
       altInfo: "Start",
       title: "Start",
       description:
@@ -171,6 +171,7 @@ const InfoImage = ({ imageSource, altInfo }: InfoImageProps): JSX.Element => {
       pb="5%"
       src={imageSource}
       alt={altInfo}
+      objectFit="contain"
     />
   );
 };
