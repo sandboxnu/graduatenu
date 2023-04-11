@@ -3,7 +3,7 @@ import { config } from "dotenv";
 import { Plan } from "./src/plan/entities/plan.entity";
 import { Student } from "./src/student/entities/student.entity";
 
-config({ path: `.env.${process.env.NODE_ENV}` });
+config({ path: `.env.${process.env.NODE_ENV}.local` });
 
 const ormconfig: TypeOrmModuleOptions = {
   type: "postgres",

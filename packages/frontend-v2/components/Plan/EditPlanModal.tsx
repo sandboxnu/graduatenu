@@ -29,6 +29,7 @@ import {
   extractSupportedMajorNames,
   extractSupportedMajorYears,
   handleApiClientError,
+  noLeadOrTrailWhitespacePattern,
 } from "../../utils";
 import { toast } from "../../utils";
 import { BlueButton } from "../Button";
@@ -172,6 +173,7 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                   placeholder="My Plan"
                   {...register("name", {
                     required: "Title is required",
+                    pattern: noLeadOrTrailWhitespacePattern,
                   })}
                 />
                 <Flex alignItems="center">

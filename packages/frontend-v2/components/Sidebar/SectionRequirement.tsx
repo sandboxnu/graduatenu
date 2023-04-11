@@ -15,6 +15,7 @@ import {
 } from "../ScheduleCourse";
 import { SidebarValidationStatus } from "./Sidebar";
 import SidebarSection from "./SidebarSection";
+import { getCourseDisplayString } from "../../utils";
 
 interface SidebarRequirementProps {
   requirement: Requirement2;
@@ -99,7 +100,16 @@ const SectionRequirement: React.FC<SidebarRequirementProps> = ({
       <p>
         Complete any course in range {requirement.subject}
         {requirement.idRangeStart} to {requirement.subject}
-        {requirement.idRangeEnd}
+        {requirement.idRangeEnd}{" "}
+        {requirement.exceptions.length > 0 && (
+          <>
+            except{" "}
+            {requirement.exceptions
+              .map(getCourseDisplayString)
+              .join(", ")
+              .slice(0, -1)}
+          </>
+        )}
       </p>
     );
   };

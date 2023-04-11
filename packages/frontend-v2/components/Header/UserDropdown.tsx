@@ -8,10 +8,11 @@ import {
   IconProps,
   Text,
   Spinner,
+  Flex,
 } from "@chakra-ui/react";
 import React from "react";
 import { useStudentWithPlans } from "../../hooks";
-import { handleApiClientError, logger, logout} from "../../utils";
+import { handleApiClientError, logger, logout } from "../../utils";
 import { useRouter } from "next/router";
 import { AccountOverview } from "./AccountOverview";
 import { ChangePassword } from "./ChangePassword";
@@ -19,27 +20,27 @@ import { ChangePassword } from "./ChangePassword";
 export const UserDropdown: React.FC = () => {
   const { error, student, mutateStudent } = useStudentWithPlans();
   const router = useRouter();
-  
+
   if (error && !student) {
     logger.error("HomePage", error);
     handleApiClientError(error, router);
 
     // If we couldn't fetch the student, we don't display user details for now.
     // We might want to show some more actionable error in the future.
-    return <></>
+    return <></>;
   }
 
   if (!student) {
-    return <Spinner size='md' />  
+    return <Spinner size="md" />;
   }
 
   return (
     <Menu>
       <MenuButton as={Link}>
-        <>
-          <UserIcon mx="2px" />
+        <Flex alignItems="center">
+          <UserIcon mx="2px" boxSize="20px" />
           {student.fullName}
-        </>
+        </Flex>
       </MenuButton>
       <MenuList>
         <MenuItem>

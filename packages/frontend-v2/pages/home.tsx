@@ -86,8 +86,10 @@ const HomePage: NextPage = () => {
   useEffect(() => {
     // once the student is fetched, set the selected plan id to the primary plan id
     if (student && selectedPlanId === undefined) {
-      if(student.plans.length > 0){
-        const sortedPlans = student.plans.sort((p1, p2) => p1.updatedAt.getTime() - p2.updatedAt.getTime())
+      if (student.plans.length > 0) {
+        const sortedPlans = student.plans.sort(
+          (p1, p2) => p1.updatedAt.getTime() - p2.updatedAt.getTime()
+        );
         setSelectedPlanId(sortedPlans[0].id);
       }
     }
@@ -214,7 +216,12 @@ const HomePage: NextPage = () => {
       collisionDetection={courseDndCollisisonAlgorithm}
     >
       <PageLayout>
-        <Box bg="neutral.main" overflowY="auto" width="360px" flexShrink={0}>
+        <Box
+          bg="neutral.main"
+          overflowY="auto"
+          width={{ desktop: "360px", tablet: "300px" }}
+          flexShrink={0}
+        >
           {renderedSidebar}
         </Box>
         <Box p="md" overflow="auto" flexGrow={1}>

@@ -2,11 +2,20 @@ import { Injectable, Logger } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import { Student } from "../../src/student/entities/student.entity";
 import { StudentService } from "../../src/student/student.service";
-import { LoginStudentDto, ResetPasswordDto, SignUpStudentDto } from "@graduate/common";
+import {
+  LoginStudentDto,
+  ResetPasswordDto,
+  SignUpStudentDto,
+} from "@graduate/common";
 import { JwtPayload } from "./interfaces/jwt-payload";
 import * as bcrypt from "bcrypt";
 import { formatServiceCtx } from "../../src/utils";
-import { EmailAlreadyExists, EmailNotConfirmed, NoSuchEmail, WeakPassword } from "src/student/student.errors";
+import {
+  EmailAlreadyExists,
+  EmailNotConfirmed,
+  NoSuchEmail,
+  WeakPassword,
+} from "src/student/student.errors";
 import { ConfigService } from "@nestjs/config";
 import { EnvironmentVariables } from "src/environment-variables";
 import EmailService from "src/email/email.service";
@@ -28,7 +37,7 @@ export class AuthService {
 
     // For sending emails
     private readonly emailService: EmailService
-  ) { }
+  ) {}
 
   /** Registers a new student in the db and logs the student in. */
   async register(
@@ -94,36 +103,38 @@ export class AuthService {
       this.logger.debug(
         { message: "Unknown email", email },
         AuthService.formatAuthServiceCtx("forgotPassword")
-      )
-      return new NoSuchEmail()
+      );
+      return new NoSuchEmail();
     }
 
     if (!student.isEmailConfirmed) {
       this.logger.debug(
         { message: "Student has not confirmed email", email },
         AuthService.formatAuthServiceCtx("forgotPassword")
-      )
+      );
       return new EmailNotConfirmed();
     }
 
     const payload = { email };
     const token = this.jwtService.sign(payload);
-    const url = `${this.configService.get("FORGOT_PASSWORD_URL")}?token=${token}`
+    const url = `${this.configService.get(
+      "FORGOT_PASSWORD_URL"
+    )}?token=${token}`;
 
-    const text = `Click the following link to reset your password: ${url}.\n If you did not request this, we recommend changing your password as soon as possible`
+    const text = `Click the following link to reset your password: ${url}.\n If you did not request this, we recommend changing your password as soon as possible`;
 
     return this.emailService.sendMail({
       to: email,
       subject: "GraduateNU - Reset Password",
       text,
-    })
+    });
   }
 
   async decodeResetPassToken(token: string): Promise<string | Error> {
     try {
       const payload = await this.jwtService.verify(token, {
-        secret: this.configService.get("JWT_SECRET_KEY")
-      })
+        secret: this.configService.get("JWT_SECRET_KEY"),
+      });
 
       if (
         typeof payload === "object" &&
@@ -152,8 +163,11 @@ export class AuthService {
     }
   }
 
-  async resetPassword(email: string, resetPasswordData: ResetPasswordDto): Promise<Student | WeakPassword> {
-    return await this.studentService.resetPassword(email, resetPasswordData)
+  async resetPassword(
+    email: string,
+    resetPasswordData: ResetPasswordDto
+  ): Promise<Student | WeakPassword> {
+    return await this.studentService.resetPassword(email, resetPasswordData);
   }
 
   /**

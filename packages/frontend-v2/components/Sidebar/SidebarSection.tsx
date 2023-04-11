@@ -3,12 +3,14 @@ import {
   ChevronDownIcon,
   ChevronUpIcon,
   SmallCloseIcon,
+  WarningTwoIcon,
 } from "@chakra-ui/icons";
-import { Box, Flex, Spinner, Text } from "@chakra-ui/react";
+import { Box, Flex, Spinner, Stack, Text } from "@chakra-ui/react";
 import { ScheduleCourse2, Section } from "@graduate/common";
 import { useState } from "react";
 import SectionRequirement from "./SectionRequirement";
 import { SidebarValidationStatus } from "./Sidebar";
+import { GraduateToolTip } from "../GraduateTooltip";
 
 interface SidebarSectionProps {
   section: Section;
@@ -29,6 +31,20 @@ const SidebarSection: React.FC<SidebarSectionProps> = ({
 
   const grey = "neutral.400";
   const green = "states.success.main";
+
+  const warningLabel = section.warnings && (
+    <Stack py="xs">
+      <Text>
+        Unfortunately, we currently have no way of verifying the following.
+        Please ensure that you have a closer look yourself.
+      </Text>
+      {section.warnings.map((warning, idx) => (
+        <Text key={idx}>
+          {idx + 1}. {warning}
+        </Text>
+      ))}
+    </Stack>
+  );
 
   return (
     <Box
@@ -62,7 +78,7 @@ const SidebarSection: React.FC<SidebarSectionProps> = ({
         top="0px"
         zIndex={1}
       >
-        <Flex direction="row">
+        <Flex direction="row" height="100%" columnGap="sm">
           <Box
             bg={
               validationStatus === SidebarValidationStatus.Complete
@@ -88,9 +104,9 @@ const SidebarSection: React.FC<SidebarSectionProps> = ({
             transition="background 0.25s ease, color 0.25s ease, border 0.25s ease"
             alignItems="center"
             justifyContent="center"
-            marginRight="sm"
             borderRadius="2xl"
             mt="4xs"
+            p="xs"
           >
             {validationStatus === SidebarValidationStatus.Complete && (
               <CheckIcon
@@ -119,13 +135,18 @@ const SidebarSection: React.FC<SidebarSectionProps> = ({
             {section.title}
           </Text>
         </Flex>
-        <Box>
+        <Flex ml="xs" alignItems="center">
+          {section.warnings && section.warnings.length > 0 && (
+            <GraduateToolTip label={warningLabel} placement="top">
+              <WarningTwoIcon boxSize="15px" color="states.warning.main" />
+            </GraduateToolTip>
+          )}
           {opened ? (
             <ChevronUpIcon boxSize="25px" color="primary.blue.dark.main" />
           ) : (
             <ChevronDownIcon boxSize="25px" color="primary.blue.dark.main" />
           )}
-        </Box>
+        </Flex>
       </Flex>
       <Box
         style={{ display: opened ? "" : "none" }}

@@ -1,6 +1,6 @@
 /** Only the details we need to display a course. */
 type CourseDisplayDetails = {
-  classId: string;
+  classId: string | number;
   subject: string;
 } & {
   [key: string]: any;

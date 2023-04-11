@@ -5,7 +5,6 @@ import { ComponentWithAs, Tooltip, TooltipProps } from "@chakra-ui/react";
  * Couldn't get it to work for some reason though.
  */
 export const GraduateToolTip: ComponentWithAs<"div", TooltipProps> = ({
-  children,
   ...rest
 }) => {
   return (
@@ -16,8 +15,6 @@ export const GraduateToolTip: ComponentWithAs<"div", TooltipProps> = ({
       color="white"
       borderRadius="sm"
       {...rest}
-    >
-      {children}
-    </Tooltip>
+    />
   );
 };

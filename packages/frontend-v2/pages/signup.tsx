@@ -16,7 +16,12 @@ import {
   GraduateLink,
   GraduateInput,
 } from "../components";
-import { handleApiClientError, toast, WEAK_PASSWORD_MSG } from "../utils";
+import {
+  handleApiClientError,
+  noLeadOrTrailWhitespacePattern,
+  toast,
+  WEAK_PASSWORD_MSG,
+} from "../utils";
 import { handlWeakPasswordError } from "../utils/error";
 
 const Signup: NextPage = () => {
@@ -76,8 +81,10 @@ const SignUpForm: React.FC = () => {
                 type="text"
                 id="firstName"
                 placeholder="First Name"
+                error={errors.firstName}
                 {...register("firstName", {
                   onBlur: () => trigger("lastName"),
+                  pattern: noLeadOrTrailWhitespacePattern,
                 })}
               />
               <GraduateInput
@@ -92,6 +99,7 @@ const SignUpForm: React.FC = () => {
                     }
                     return true;
                   },
+                  pattern: noLeadOrTrailWhitespacePattern,
                 })}
               />
             </Flex>
@@ -124,6 +132,7 @@ const SignUpForm: React.FC = () => {
               onBlur: () => trigger("passwordConfirm"),
               validate: (pass) => isStrongPassword(pass) || WEAK_PASSWORD_MSG,
               required: "Password is required",
+              pattern: noLeadOrTrailWhitespacePattern,
             })}
           />
           <GraduateInput

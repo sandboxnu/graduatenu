@@ -48,24 +48,30 @@ const Banner = (): JSX.Element => {
           src="/husky.svg"
           alt="husky"
         />
-        <Flex w="35%" flexDirection="column" alignItems="center">
+        <Flex w="35%" flexDirection="column" alignItems="start">
           <Box>
             <Heading
               fontSize={{ desktop: "7xl", laptop: "6xl", tablet: "5xl" }}
               color="primary.red.main"
+              fontWeight="normal"
+              lineHeight="1"
+              mb="0"
             >
               Graduate
             </Heading>
             <Heading
-              fontSize={{ desktop: "7xl", laptop: "6xl", tablet: "5xl" }}
+              fontSize={{ desktop: "8xl", laptop: "7xl", tablet: "6xl" }}
               color="primary.blue.dark.main"
+              fontWeight="bold"
+              lineHeight="1"
             >
-              your way
+              Your Way
             </Heading>
             <Text
-              pt="5%"
-              fontSize={{ desktop: "3xl", laptop: "2xl", tablet: "xl" }}
+              mt="2xl"
+              fontSize={{ desktop: "2xl", laptop: "2xl", tablet: "xl" }}
               color="primary.blue.dark.main"
+              lineHeight="1.1"
             >
               Navigate the Northeastern graduation requirements and create a
               personalized plan of study.
@@ -74,7 +80,11 @@ const Banner = (): JSX.Element => {
           <GraduateButtonLink
             href="/signup"
             mr={{ desktop: "7.5rem", laptop: "6.25rem", tablet: "3.25rem" }}
-            mt="15%"
+            mt="2xl"
+            variant="solid"
+            borderRadius="lg"
+            px="3xl"
+            py="lg"
           >
             Get Started
           </GraduateButtonLink>
@@ -87,18 +97,18 @@ const Banner = (): JSX.Element => {
 const Info = (): JSX.Element => {
   const infoSectionData = [
     {
-      imageSource: "/landing_start.svg",
+      imageSource: "/landing_start.png",
       altInfo: "Start",
       title: "Start",
       description:
-        "Just answer a couple questions and get started with a multi-year plan for your classes.",
+        "Select a major and concentration to get started with a multi-year plan.",
     },
     {
       imageSource: "/landing_personalize.svg",
       altInfo: "Personalize",
       title: "Personalize",
       description:
-        "Pick the classes you want. We'll take care of NU Path, pre-requisites, and everything in between.",
+        "Create multiple plans to experiment with different majors, concentrations, and plans of study. Pick the classes you want. We'll take care of NUPath, prerequisites, and everything in between.",
     },
     {
       imageSource: "/landing_graduate.svg",
@@ -113,7 +123,7 @@ const Info = (): JSX.Element => {
     <Box
       pt={{ desktop: "6rem", laptop: "6.25rem", tablet: "5rem" }}
       pb={{ desktop: "7.75rem", laptop: "8rem", tablet: "6.5rem" }}
-      backgroundColor="primary.blue.light.50"
+      backgroundColor="#F5F6F8"
     >
       <VStack>
         <Heading
@@ -161,6 +171,7 @@ const InfoImage = ({ imageSource, altInfo }: InfoImageProps): JSX.Element => {
       pb="5%"
       src={imageSource}
       alt={altInfo}
+      objectFit="contain"
     />
   );
 };
@@ -172,10 +183,11 @@ const InfoText = ({ title, description }: InfoTextProps): JSX.Element => {
         pt="10%"
         fontSize={{ desktop: "3xl", laptop: "2xl", tablet: "xl" }}
         color="primary.blue.dark.main"
+        textAlign="center"
       >
         {title}
       </Heading>
-      <Text pt="3%" color="primary.blue.dark.main" fontWeight="semibold">
+      <Text pt="3%" textAlign="center">
         {description}
       </Text>
     </Box>

@@ -5,3 +5,5 @@ export const emailHasNotBeenConfirmed = "Email has not been confirmed";
 export const weakPasswordError = "Weak password";
 export const wrongPasswordError = "Incorrect Password";
 export const forgotPasswordTokenExpiredError = "Token expired";
+export const unableToSendEmail = "Unable to send email";
+export const emailAlreadyConfirmed = "Email already confirmed";
