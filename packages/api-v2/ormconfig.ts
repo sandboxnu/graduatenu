@@ -3,7 +3,11 @@ import { config } from "dotenv";
 import { Plan } from "./src/plan/entities/plan.entity";
 import { Student } from "./src/student/entities/student.entity";
 
-config({ path: `.env.${process.env.NODE_ENV}.local` });
+const result = config({ path: `.env.${process.env.NODE_ENV}.local` });
+if (result.error) {
+  console.error(`FATAL ERROR: ".env.${process.env.NODE_ENV}.local" is missing or invalid! Exiting...`);
+  process.exit()
+}
 
 const ormconfig: TypeOrmModuleOptions = {
   type: "postgres",
