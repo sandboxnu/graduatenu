@@ -180,6 +180,11 @@ const YearHeader: React.FC<YearHeaderProps> = ({
               icon={<WarningIcon />}
               _hover={{ bg: `white` }}
               _active={{}}
+              onClick={(e) => {
+                if (isExpanded) {
+                  e.stopPropagation();
+                }
+              }}
             />
           </Tooltip>
         )}
