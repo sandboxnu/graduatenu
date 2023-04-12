@@ -1,12 +1,5 @@
 import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
-import {
-  Flex,
-  Grid,
-  GridItem,
-  Stack,
-  Text,
-  useDisclosure,
-} from "@chakra-ui/react";
+import { Flex, Grid, Stack, Text, useDisclosure } from "@chakra-ui/react";
 import { API } from "@graduate/api-client";
 import { ScheduleCourse2, StudentModel } from "@graduate/common";
 import { useRouter } from "next/router";

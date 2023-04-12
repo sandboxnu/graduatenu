@@ -52,8 +52,10 @@ class APIClient {
     register: (body: SignUpStudentDto): Promise<GetStudentResponse> =>
       this.req("POST", "/auth/register", GetStudentResponse, body),
     logout: (): Promise<GetStudentResponse> => this.req("GET", "/auth/logout"),
-    forgotPassword: (body: ForgotPasswordDto): Promise<void> => this.req("POST", "/auth/forgot-password", undefined, body),
-    resetPassword: (body: ResetPasswordDto): Promise<GetStudentResponse> => this.req("POST", "/auth/reset-password", GetStudentResponse, body),
+    forgotPassword: (body: ForgotPasswordDto): Promise<void> =>
+      this.req("POST", "/auth/forgot-password", undefined, body),
+    resetPassword: (body: ResetPasswordDto): Promise<GetStudentResponse> =>
+      this.req("POST", "/auth/reset-password", GetStudentResponse, body),
   };
 
   email = {

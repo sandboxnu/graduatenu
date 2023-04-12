@@ -112,7 +112,9 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
     <Modal isOpen={isOpen} onClose={onClose} size="lg">
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Add Courses</ModalHeader>
+        <ModalHeader color="primary.blue.dark.main" textAlign="center">
+          Add Courses
+        </ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <SearchCoursesInput setSearchQuery={setSearchQuery} />
