@@ -54,6 +54,7 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
   const [selectedCourses, setSelectedCourses] = useState<
     ScheduleCourse2<null>[]
   >([]);
+  const [isLoadingSelectCourse, setIsLoadingSelectCourse] = useState(false);
 
   const {
     courses,
@@ -67,6 +68,7 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
       return;
     }
 
+    setIsLoadingSelectCourse(true);
     const updatedSelectedCourses = [...selectedCourses];
 
     // grab any coreqs of the course that haven't already been selected/added to the term
@@ -83,6 +85,7 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
     updatedSelectedCourses.push(course, ...coreqs);
 
     setSelectedCourses(updatedSelectedCourses);
+    setIsLoadingSelectCourse(false);
   };
 
   const removeSelectedCourse = (course: ScheduleCourse2<null>) => {
@@ -163,6 +166,7 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
                     isResultAlreadySelected={isCourseAlreadySelected(
                       searchResult
                     )}
+                    isSelectingAnotherCourse={isLoadingSelectCourse}
                   />
                 ))}
               {!error && (!courses || courses.length === 0) && (
