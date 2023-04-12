@@ -66,7 +66,7 @@ const SidebarSection: React.FC<SidebarSectionProps> = ({
         px="md"
         margin="0"
         backgroundColor="neutral.main"
-        transition="background-color 0.1s ease"
+        transition="background-color 0.25s ease"
         _hover={{
           backgroundColor: "neutral.900",
         }}
@@ -102,34 +102,38 @@ const SidebarSection: React.FC<SidebarSectionProps> = ({
             height="18px"
             display="flex"
             transition="background 0.25s ease, color 0.25s ease, border 0.25s ease"
+            transitionDelay="0.1s"
             alignItems="center"
             justifyContent="center"
             borderRadius="2xl"
             mt="4xs"
             p="xs"
           >
-            {validationStatus === SidebarValidationStatus.Complete && (
-              <CheckIcon
-                position="absolute"
-                transition="opacity 0.25s ease"
-                boxSize="9px"
-              />
-            )}
-            {validationStatus === SidebarValidationStatus.Error && (
-              <SmallCloseIcon
-                position="absolute"
-                transition="opacity 0.25s ease"
-                boxSize="13px"
-              />
-            )}
-            {validationStatus === SidebarValidationStatus.Loading && (
-              <Spinner
-                size="xs"
-                color="grey"
-                position="absolute"
-                transition="opacity 0.25s ease"
-              />
-            )}
+            {/* 
+              The following three icons appear and disappear based on opacity to allow for transitions (if they're conditionally rendered, then transitions can't occur).
+            */}
+            <CheckIcon
+              position="absolute"
+              opacity={validationStatus === SidebarValidationStatus.Complete ? 1 : 0}
+              transition="opacity 0.25s ease"
+              transitionDelay="0.1s"
+              boxSize="9px"
+            />
+            <SmallCloseIcon
+              position="absolute"
+              opacity={validationStatus === SidebarValidationStatus.Error ? 1 : 0}
+              transition="opacity 0.25s ease"
+              transitionDelay="0.1s"
+              boxSize="13px"
+            />
+            <Spinner
+              size="xs"
+              color="grey"
+              position="absolute"
+              opacity={validationStatus === SidebarValidationStatus.Loading ? 1 : 0}
+              transition="opacity 0.25s ease"
+              transitionDelay="0.1s"
+            />
           </Box>
           <Text color="primary.blue.dark.main" mt="0" fontSize="sm">
             {section.title}
