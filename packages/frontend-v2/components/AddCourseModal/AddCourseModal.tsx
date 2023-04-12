@@ -58,7 +58,7 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
     courses,
     isLoading: isCoursesLoading,
     error,
-  } = useSearchCourses(searchQuery);
+  } = useSearchCourses(searchQuery, catalogYear);
 
   const addSelectedCourse = async (course: ScheduleCourse2<null>) => {
     // don't allow courses to be selected multiple times
