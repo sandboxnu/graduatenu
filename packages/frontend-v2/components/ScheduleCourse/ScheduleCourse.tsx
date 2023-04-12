@@ -317,6 +317,7 @@ const ScheduleCourseDraggedContents: React.FC<
       style={{
         padding: isDraggable ? "8px 8px" : "8px 12px",
         cursor: isOverlay ? "grabbing" : "grab",
+        flexGrow: "1",
       }}
       {...listeners}
     >
@@ -329,9 +330,11 @@ const ScheduleCourseDraggedContents: React.FC<
         }}
       >
         {isDraggable && <CourseDragIcon />}
-        <p style={{ fontWeight: "bold" }}>
+        <p style={{lineHeight: 1.3}}>
+          <span style={{ marginRight: "2px", fontWeight: "bold" }}>
           {`${courseToString(scheduleCourse)} `}
-          <span style={{ marginLeft: "2px", fontWeight: "normal" }}>
+          </span>
+          <span>
             {scheduleCourse.name}
           </span>
         </p>

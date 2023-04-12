@@ -98,6 +98,7 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
 
   const catalogYear = watch("catalogYear");
   const majorName = watch("major");
+  const concentration = watch("concentration");
 
   const onSubmitHandler = async (payload: UpdatePlanDto) => {
     // no submitting till the curr plan has been fetched
@@ -206,7 +207,14 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                       onChangeSideEffect={(val: string | null) => {
                         const newYear = val ? parseInt(val, 10) : null;
                         if (newYear !== catalogYear) {
-                          setValue("major", "");
+                          if (val && supportedMajorsData?.supportedMajors?.[val]?.[majorName]) {
+                            // we can keep the major, but we should check the concentration
+                            if (!supportedMajorsData?.supportedMajors?.[val]?.[majorName]?.concentrations?.includes(concentration)) {
+                              setValue("concentration", "")
+                            }
+                          } else {
+                            setValue("major", "");
+                          }
                         }
                       }}
                       rules={{ required: "Catalog year is required." }}

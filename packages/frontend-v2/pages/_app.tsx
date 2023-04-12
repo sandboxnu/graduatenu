@@ -22,6 +22,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           content="A degree scheduling service for Northeastern Students."
         />
         <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml"></link>
       </Head>
       <ErrorBoundary>
         <ChakraProvider theme={theme}>
