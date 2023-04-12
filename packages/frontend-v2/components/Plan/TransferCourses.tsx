@@ -158,7 +158,7 @@ const TransferCoursesHeader: React.FC<TransferCoursesHeaderProps> = ({
   totalTransferCredits,
 }) => {
   const transferCoursesHelperText = (
-    <Stack>
+    <Stack py="xs">
       <Text>Northeastern courses that you have credits for.</Text>
       <Text>
         These are courses you do not need to take because you complete advanced

@@ -69,7 +69,15 @@ export const ReqErrorModal: React.FC<ReqErrorModalProps> = ({
             borderBottomColor="neutral.main"
           >
             <ModalCloseButton />
-            <Text color="primary.blue.dark.main">Course Errors</Text>
+            <Flex
+              alignItems="center"
+              justifyContent="center"
+              columnGap="2xs"
+              color="primary.blue.dark.main"
+            >
+              <Text>Course Errors</Text>
+              <HelperToolTip label="Based on your catalog year, it is possible that these requirment errors are not valid. We are continuously working towards making these as accurate as possible for your plan." />
+            </Flex>
             <Text fontWeight="normal" fontSize="sm">
               {getCourseDisplayString(course)}: {course.name}
             </Text>
