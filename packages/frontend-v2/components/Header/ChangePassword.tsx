@@ -80,7 +80,11 @@ export const ChangePassword: React.FC = () => {
         <ModalOverlay />
         <ModalContent as="form" onSubmit={handleSubmit(onSubmitHandler)}>
           <ModalHeader>
-            <Text textAlign="center" fontWeight="bold">
+            <Text
+              textAlign="center"
+              fontWeight="bold"
+              color="primary.blue.dark.main"
+            >
               Change Password
             </Text>
           </ModalHeader>

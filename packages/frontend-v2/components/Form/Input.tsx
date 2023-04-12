@@ -24,7 +24,7 @@ export const GraduateInput = forwardRef<HTMLInputElement, InputProps>(
     <FormControl isInvalid={error != undefined}>
       {formLabel && (
         <FormLabel>
-          <Text>{formLabel}</Text>
+          <Text color="primary.blue.dark.main">{formLabel}</Text>
         </FormLabel>
       )}
       <Input
