@@ -173,9 +173,9 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                       onChangeSideEffect={(val: string | null) => {
                         const newYear = val ? parseInt(val, 10) : null;
                         if (newYear !== catalogYear) {
-                          if (val && supportedMajorsData?.supportedMajors?.[val]?.[majorName]) {
+                          if (val && majorName && supportedMajorsData?.supportedMajors?.[val]?.[majorName]) {
                             // we can keep the major, but we should check the concentration
-                            if (!supportedMajorsData?.supportedMajors?.[val]?.[majorName]?.concentrations?.includes(concentration)) {
+                            if (majorName && !supportedMajorsData?.supportedMajors?.[val]?.[majorName]?.concentrations?.includes(concentration ?? "")) {
                               setValue("concentration", "")
                             }
                           } else {
