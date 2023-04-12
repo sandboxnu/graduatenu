@@ -58,6 +58,7 @@ export const DeletePlanModal: React.FC<DeletePlanModalProps> = ({
           colorScheme="primary.blue.light"
           color="primary.blue.light.main"
           ml="xs"
+          borderRadius="lg"
           onClick={onOpen}
         />
       </Tooltip>

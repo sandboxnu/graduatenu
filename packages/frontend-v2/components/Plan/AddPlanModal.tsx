@@ -236,7 +236,6 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                 <Button
                   variant="solid"
                   isLoading={isSubmitting}
-                  isDisabled={Object.keys(errors).length > 0}
                   size="md"
                   borderRadius="lg"
                   type="submit"

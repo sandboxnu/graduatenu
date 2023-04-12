@@ -1,4 +1,4 @@
-import { GridItem, Heading, useDisclosure } from "@chakra-ui/react";
+import { Flex, GridItem, Text, useDisclosure } from "@chakra-ui/react";
 import {
   courseToString,
   ScheduleCourse2,
@@ -8,7 +8,11 @@ import {
 } from "@graduate/common";
 import { DraggableScheduleCourse } from "../ScheduleCourse";
 import { useDroppable } from "@dnd-kit/core";
-import { getSeasonDisplayWord, isCourseInTerm } from "../../utils";
+import {
+  getSeasonDisplayWord,
+  isCourseInTerm,
+  totalCreditsInTerm,
+} from "../../utils";
 import { AddCourseButton, AddCourseModal } from "../AddCourseModal";
 
 interface ScheduleTermProps {
@@ -32,7 +36,6 @@ interface ScheduleTermProps {
     termSeason: SeasonEnum
   ) => void;
 
-  isLastColumn?: boolean;
   setIsRemove?: (val: boolean) => void;
 }
 
@@ -42,7 +45,6 @@ export const ScheduleTerm: React.FC<ScheduleTermProps> = ({
   addClassesToTermInCurrPlan,
   yearNum,
   removeCourseFromTermInCurrPlan,
-  isLastColumn,
   setIsRemove,
   termCoReqErr = undefined,
   termPreReqErr = undefined,
@@ -57,17 +59,19 @@ export const ScheduleTerm: React.FC<ScheduleTermProps> = ({
   return (
     <GridItem
       ref={setNodeRef}
-      borderRight={!isLastColumn ? "1px" : undefined}
       transition="background-color 0.1s ease"
-      backgroundColor={isOver ? "neutral.300" : "neutral.900"}
+      backgroundColor={isOver ? "neutral.main" : "#D2D8E2"}
       display="flex"
       flexDirection="column"
       px="sm"
-      pt="2xs"
+      pt="sm"
       pb="xl"
       userSelect="none"
     >
-      <ScheduleTermHeader season={scheduleTerm.season} year={yearNum} />
+      <ScheduleTermHeader
+        season={scheduleTerm.season}
+        credits={totalCreditsInTerm(scheduleTerm)}
+      />
       {scheduleTerm.classes.map((scheduleCourse) => (
         <DraggableScheduleCourse
           coReqErr={termCoReqErr?.[courseToString(scheduleCourse)]}
@@ -98,17 +102,22 @@ export const ScheduleTerm: React.FC<ScheduleTermProps> = ({
 
 interface ScheduleTermHeaderProps {
   season: SeasonEnum;
-  year: number;
+  credits: number;
 }
 
 const ScheduleTermHeader: React.FC<ScheduleTermHeaderProps> = ({
   season,
-  year,
+  credits,
 }) => {
   const seasonDisplayWord = getSeasonDisplayWord(season);
   return (
-    <Heading size="sm" pb="sm">
-      {seasonDisplayWord} {year}
-    </Heading>
+    <Flex alignItems="start" columnGap="xs" pb="sm">
+      <Text size="sm" textTransform="uppercase" fontWeight="bold">
+        {seasonDisplayWord}
+      </Text>
+      <Text color="primary.blue.light.main" size="xs" fontWeight="medium">
+        {credits} {credits === 1 ? "Credit" : "Credits"}
+      </Text>
+    </Flex>
   );
 };

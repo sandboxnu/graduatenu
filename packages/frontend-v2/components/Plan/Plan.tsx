@@ -116,13 +116,7 @@ export const Plan: React.FC<PlanProps> = ({
           const isExpanded = expandedYears.has(scheduleYear.year);
 
           return (
-            <Flex
-              key={scheduleYear.year}
-              borderX="1px"
-              borderBottom="1px"
-              borderColor={isExpanded ? undefined : "primary.blue.light.main"}
-              flexDirection="column"
-            >
+            <Flex key={scheduleYear.year} flexDirection="column">
               <ScheduleYear
                 catalogYear={plan.catalogYear}
                 yearCoReqError={coReqErr?.years.find(

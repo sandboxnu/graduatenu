@@ -121,7 +121,6 @@ export const ScheduleYear: React.FC<ScheduleYearProps> = ({
             addClassesToTermInCurrPlan={addClassesToTermInCurrPlan}
             removeCourseFromTermInCurrPlan={removeCourseFromTermInCurrPlan}
             setIsRemove={setIsRemove}
-            isLastColumn
           />
         </Grid>
       )}
@@ -165,9 +164,12 @@ const YearHeader: React.FC<YearHeaderProps> = ({
       userSelect="none"
     >
       <Flex flexDirection="column" marginLeft="md">
-        <Text color="white">Year {year.year}</Text>
-        <Text color="white" fontWeight="bold">
-          {totalCreditsTaken} credits
+        <Text color="white" fontWeight="bold" fontSize="lg">
+          Year {year.year}
+        </Text>
+        <Text color="white" fontSize="sm">
+          {totalCreditsTaken} {totalCreditsTaken === 1 ? "Credit" : "Credits"}{" "}
+          Completed
         </Text>
       </Flex>
       <Flex>

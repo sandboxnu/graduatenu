@@ -195,7 +195,8 @@ const TransferCoursesHeader: React.FC<TransferCoursesHeaderProps> = ({
           <HelperToolTip label={transferCoursesHelperText} />
         </Flex>
         <Text color="primary.blue.light.main" fontWeight="bold">
-          {totalTransferCredits} credits
+          {totalTransferCredits}{" "}
+          {totalTransferCredits === 1 ? "Credit" : "Credits"}
         </Text>
       </Flex>
       {isExpanded ? (
