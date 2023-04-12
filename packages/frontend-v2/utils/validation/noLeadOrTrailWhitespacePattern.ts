@@ -5,6 +5,6 @@ import { ValidationRule } from "react-hook-form";
  * trailing whitespaces.
  */
 export const noLeadOrTrailWhitespacePattern: ValidationRule<RegExp> = {
-  value: /^(?!\s).+(?<!\s)$/,
+  value: /^[^\s]+(\s+[^\s]+)*$/,
   message: "No trailing or leading whitespaces allowed.",
 };

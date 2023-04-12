@@ -217,7 +217,6 @@ const ScheduleCourse = forwardRef<HTMLElement | null, ScheduleCourseProps>(
           opacity: isValidRemove ? 0.5 : 1,
           justifyContent: "space-between",
           width: "100%",
-          height: "100%",
         }}
         onMouseEnter={() => {
           setHovered(true);
@@ -330,13 +329,11 @@ const ScheduleCourseDraggedContents: React.FC<
         }}
       >
         {isDraggable && <CourseDragIcon />}
-        <p style={{lineHeight: 1.3}}>
+        <p style={{ lineHeight: 1.3 }}>
           <span style={{ marginRight: "2px", fontWeight: "bold" }}>
-          {`${courseToString(scheduleCourse)} `}
+            {`${courseToString(scheduleCourse)} `}
           </span>
-          <span>
-            {scheduleCourse.name}
-          </span>
+          <span>{scheduleCourse.name}</span>
         </p>
       </div>
     </div>

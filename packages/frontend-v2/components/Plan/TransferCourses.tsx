@@ -1,5 +1,12 @@
 import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
-import { Flex, Grid, Stack, Text, useDisclosure } from "@chakra-ui/react";
+import {
+  Flex,
+  Grid,
+  GridItem,
+  Stack,
+  Text,
+  useDisclosure,
+} from "@chakra-ui/react";
 import { API } from "@graduate/api-client";
 import { ScheduleCourse2, StudentModel } from "@graduate/common";
 import { useRouter } from "next/router";
@@ -124,6 +131,7 @@ const TransferCoursesBody: React.FC<TransferCoursesBodyProps> = ({
       templateColumns="repeat(4, 1fr)"
       rowGap="sm"
       columnGap="sm"
+      alignItems="stretch"
     >
       {transferCourses.map((course) => (
         <NonDraggableScheduleCourse
@@ -136,7 +144,6 @@ const TransferCoursesBody: React.FC<TransferCoursesBodyProps> = ({
         onOpen={onOpen}
         borderColor="#C1CAD9"
         borderWidth="1px"
-        height="100%"
       />
       <AddCourseModal
         isOpen={isOpen}
