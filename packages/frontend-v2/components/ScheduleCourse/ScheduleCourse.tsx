@@ -317,6 +317,7 @@ const ScheduleCourseDraggedContents: React.FC<
       style={{
         padding: isDraggable ? "8px 8px" : "8px 12px",
         cursor: isOverlay ? "grabbing" : "grab",
+        flexGrow: "1",
       }}
       {...listeners}
     >
