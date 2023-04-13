@@ -1,4 +1,4 @@
-import { Divider, Flex } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import {
   CoReqWarnings,
   PlanModel,
@@ -12,7 +12,6 @@ import { addClassesToTerm, removeYearFromPlan } from "../../utils";
 import { removeCourseFromTerm } from "../../utils/";
 import { ScheduleYear } from "./ScheduleYear";
 import { useDroppable } from "@dnd-kit/core";
-import { TransferCourses } from "./TransferCourses";
 import { AddYearButton } from "./AddYearButton";
 
 interface PlanProps {
