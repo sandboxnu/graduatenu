@@ -27,7 +27,7 @@ import {
 import { useForm } from "react-hook-form";
 import { GraduateInput } from "../Form";
 import { useRouter } from "next/router";
-import { handlWeakPasswordError } from "../../utils/error";
+import { handleWeakPasswordError } from "../../utils/error";
 
 export const ChangePassword: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -40,7 +40,7 @@ export const ChangePassword: React.FC = () => {
     watch,
     trigger,
   } = useForm<ChangePasswordDto>({
-    mode: "onTouched",
+    mode: "onChange",
     shouldFocusError: true,
   });
 
@@ -64,7 +64,7 @@ export const ChangePassword: React.FC = () => {
           return;
         }
 
-        if (handlWeakPasswordError(errorMessage)) {
+        if (handleWeakPasswordError(errorMessage)) {
           return;
         }
       }

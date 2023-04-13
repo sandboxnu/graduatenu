@@ -241,6 +241,7 @@ const ScheduleCourse = forwardRef<HTMLElement | null, ScheduleCourseProps>(
         <Flex>
           {isCourseError && (
             <ReqErrorModal
+              setHovered={setHovered}
               course={scheduleCourse}
               coReqErr={coReqErr}
               preReqErr={preReqErr}

@@ -24,8 +24,10 @@ import {
 } from "../../utils";
 import { useFetchCourse } from "../../hooks";
 import { GraduateToolTip } from "../GraduateTooltip";
+import { SetStateAction } from "react";
 
 interface ReqErrorModalProps {
+  setHovered: (isHovered: SetStateAction<boolean>) => void;
   course: ScheduleCourse2<unknown>;
   preReqErr?: INEUReqError;
   coReqErr?: INEUReqError;
@@ -33,6 +35,7 @@ interface ReqErrorModalProps {
 
 export const ReqErrorModal: React.FC<ReqErrorModalProps> = ({
   course,
+  setHovered,
   coReqErr = undefined,
   preReqErr = undefined,
 }) => {
@@ -49,6 +52,7 @@ export const ReqErrorModal: React.FC<ReqErrorModalProps> = ({
       }}
       _active={{ background: "primary.red.900" }}
       onClick={() => {
+        setHovered(false)
         onOpen();
       }}
     >

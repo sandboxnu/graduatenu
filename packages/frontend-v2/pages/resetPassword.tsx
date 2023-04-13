@@ -23,7 +23,7 @@ import {
   toast,
   WEAK_PASSWORD_MSG,
 } from "../utils";
-import { handlWeakPasswordError } from "../utils/error";
+import { handleWeakPasswordError } from "../utils/error";
 
 const ResetPassword: NextPage = () => {
   return (
@@ -70,7 +70,7 @@ const ResetPasswordContent: React.FC = () => {
           return;
         }
 
-        if (handlWeakPasswordError(errorMessage)) {
+        if (handleWeakPasswordError(errorMessage)) {
           return;
         }
       }

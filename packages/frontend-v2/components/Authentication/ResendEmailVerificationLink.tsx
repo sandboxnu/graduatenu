@@ -3,7 +3,8 @@ import { handleApiClientError, toast } from "../../utils";
 import { useRouter } from "next/router";
 import axios from "axios";
 import { emailAlreadyConfirmed, unableToSendEmail } from "@graduate/common";
-import { Link } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
+import { useState } from "react";
 
 interface ResendEmailVerificationLinkProps {
   label: string;
@@ -12,7 +13,9 @@ interface ResendEmailVerificationLinkProps {
 export const ResendEmailVerificationLink: React.FC<
   ResendEmailVerificationLinkProps
 > = ({ label }) => {
+  const [isDisabled, setIsDisabled] = useState(false);
   const router = useRouter();
+
   const handleResendConfirmationEmail = async () => {
     try {
       await API.email.resendConfirmationLink();
@@ -22,7 +25,7 @@ export const ResendEmailVerificationLink: React.FC<
         const errorMessage = err.response?.data?.message;
         if (errorMessage === emailAlreadyConfirmed) {
           router.push("home");
-          toast.info("Your email has already been verfied!");
+          toast.info("Your email has already been verified!");
           return;
         }
 
@@ -38,13 +41,19 @@ export const ResendEmailVerificationLink: React.FC<
   };
 
   return (
-    <Link
-      onClick={handleResendConfirmationEmail}
+    <Button
+      isDisabled={isDisabled}
+      onClick={async () => {
+        setIsDisabled(true);
+        await handleResendConfirmationEmail();
+        setIsDisabled(false);
+      }}
+      variant="link"
       color="primary.blue.light.main"
       fontWeight="bold"
       fontSize="sm"
     >
       {label}
-    </Link>
+    </Button>
   );
 };

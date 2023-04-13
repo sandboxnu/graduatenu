@@ -206,12 +206,12 @@ const Sidebar: React.FC<SidebarProps> = memo(
           Presently, we try to to satisfy as many requirements as possible with
           your plan. Hence, while you are filling your plan in, some of your
           courses may temporarily satisfy a different requirement than intended.
-          We apologise for any confusion and are actively working on improving
+          We apologize for any confusion and are actively working on improving
           this.
         </Text>
         <Text>
           Finally, if you notice something incorrect in your requirements,
-          please let us know through the bug report button uptop!
+          please let us know through the bug report button up top!
         </Text>
       </Stack>
     );
