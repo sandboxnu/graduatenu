@@ -127,7 +127,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
         <ModalContent>
           <form onSubmit={handleSubmit(onSubmitHandler)}>
             <ModalCloseButton />
-            <ModalHeader color="primary.red.main" fontSize="2xl">
+            <ModalHeader color="primary.blue.dark.main" textAlign="center">
               New Plan
             </ModalHeader>
             <ModalBody>
@@ -145,7 +145,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                 />
                 <Flex alignItems="center">
                   <Text
-                    color="primary.red.main"
+                    color="primary.blue.dark.main"
                     size="md"
                     fontWeight="medium"
                     mb="0"
@@ -173,10 +173,21 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                       onChangeSideEffect={(val: string | null) => {
                         const newYear = val ? parseInt(val, 10) : null;
                         if (newYear !== catalogYear) {
-                          if (val && majorName && supportedMajorsData?.supportedMajors?.[val]?.[majorName]) {
+                          if (
+                            val &&
+                            majorName &&
+                            supportedMajorsData?.supportedMajors?.[val]?.[
+                              majorName
+                            ]
+                          ) {
                             // we can keep the major, but we should check the concentration
-                            if (majorName && !supportedMajorsData?.supportedMajors?.[val]?.[majorName]?.concentrations?.includes(concentration ?? "")) {
-                              setValue("concentration", "")
+                            if (
+                              majorName &&
+                              !supportedMajorsData?.supportedMajors?.[val]?.[
+                                majorName
+                              ]?.concentrations?.includes(concentration ?? "")
+                            ) {
+                              setValue("concentration", "");
                             }
                           } else {
                             setValue("major", "");
@@ -212,10 +223,26 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                 )}
               </VStack>
             </ModalBody>
-            <ModalFooter>
-              <Button isLoading={isSubmitting} type="submit" ml="auto">
-                Add Plan
-              </Button>
+            <ModalFooter justifyContent="center">
+              <Flex columnGap="sm">
+                <Button
+                  variant="solidWhite"
+                  size="md"
+                  borderRadius="lg"
+                  onClick={onCloseAddPlanModal}
+                >
+                  Cancel
+                </Button>
+                <Button
+                  variant="solid"
+                  isLoading={isSubmitting}
+                  size="md"
+                  borderRadius="lg"
+                  type="submit"
+                >
+                  Create Plan
+                </Button>
+              </Flex>
             </ModalFooter>
           </form>
         </ModalContent>

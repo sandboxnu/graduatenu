@@ -1,12 +1,11 @@
-import { WarningIcon } from "@chakra-ui/icons";
+import { WarningIcon, WarningTwoIcon } from "@chakra-ui/icons";
 import {
   Box,
-  Button,
   Flex,
   Modal,
   ModalBody,
+  ModalCloseButton,
   ModalContent,
-  ModalFooter,
   ModalHeader,
   ModalOverlay,
   Text,
@@ -14,10 +13,17 @@ import {
 } from "@chakra-ui/react";
 import {
   assertUnreachable,
-  courseToString,
+  INEUReqCourseError,
   INEUReqError,
   ScheduleCourse2,
 } from "@graduate/common";
+import { HelperToolTip } from "../Help";
+import {
+  SEARCH_NEU_FETCH_COURSE_ERROR_MSG,
+  getCourseDisplayString,
+} from "../../utils";
+import { useFetchCourse } from "../../hooks";
+import { GraduateToolTip } from "../GraduateTooltip";
 
 interface ReqErrorModalProps {
   course: ScheduleCourse2<unknown>;
@@ -31,6 +37,7 @@ export const ReqErrorModal: React.FC<ReqErrorModalProps> = ({
   preReqErr = undefined,
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
     <Flex
       justifySelf="stretch"
@@ -58,37 +65,65 @@ export const ReqErrorModal: React.FC<ReqErrorModalProps> = ({
         <ModalContent>
           <ModalHeader
             textAlign="center"
-            backgroundColor="#D9D9D9"
-            borderTopRadius="md"
+            borderBottomWidth="1px"
+            borderBottomColor="neutral.main"
           >
-            Course Errors for {courseToString(course)}
+            <ModalCloseButton />
+            <Flex
+              alignItems="center"
+              justifyContent="center"
+              columnGap="2xs"
+              color="primary.blue.dark.main"
+            >
+              <Text>Course Errors</Text>
+              <HelperToolTip label="Based on your catalog year, it is possible that these requirment errors are not valid. We are continuously working towards making these as accurate as possible for your plan." />
+            </Flex>
+            <Text fontWeight="normal" fontSize="sm">
+              {getCourseDisplayString(course)}: {course.name}
+            </Text>
           </ModalHeader>
-          <ModalBody>
+          <ModalBody mb="sm">
             {coReqErr && (
-              <Flex direction="column">
-                <Text fontWeight="semibold" mb="xs" textAlign="center">
-                  CoRequisite Errors
-                </Text>
+              <Flex direction="column" mb="sm">
+                <Flex
+                  alignItems="center"
+                  mb="xs"
+                  columnGap="2xs"
+                  justifyContent="center"
+                >
+                  <Text fontWeight="semibold" textAlign="center">
+                    Co-requisite Errors
+                  </Text>
+                  <HelperToolTip
+                    label={`You will need to statisfy the following requirement(s) along with ${getCourseDisplayString(
+                      course
+                    )}."`}
+                  />
+                </Flex>
                 <ParseCourse course={coReqErr} parent={true} />
               </Flex>
             )}
             {preReqErr && (
               <Flex direction="column">
-                <Text fontWeight="semibold" mb="xs" textAlign="center">
-                  PreRequisite Errors
-                </Text>
+                <Flex
+                  alignItems="center"
+                  mb="xs"
+                  columnGap="2xs"
+                  justifyContent="center"
+                >
+                  <Text fontWeight="semibold" textAlign="center">
+                    Pre-requisite Errors
+                  </Text>
+                  <HelperToolTip
+                    label={`You will need to statisfy the following requirement(s) before taking ${getCourseDisplayString(
+                      course
+                    )}.`}
+                  />
+                </Flex>
                 <ParseCourse course={preReqErr} parent={true} />
               </Flex>
             )}
           </ModalBody>
-
-          <ModalFooter>
-            <Flex justifyContent="end" width="100%" alignItems="center">
-              <Button variant="solidBlue" mr={3} onClick={onClose}>
-                Close
-              </Button>
-            </Flex>
-          </ModalFooter>
         </ModalContent>
       </Modal>
     </Flex>
@@ -112,17 +147,7 @@ const ParseCourse: React.FC<ParseCourseProps> = ({
 
   switch (course.type) {
     case "course":
-      return (
-        <>
-          {parent ? (
-            <BorderContainer>
-              <Text fontSize="md">{courseToString(course)}</Text>
-            </BorderContainer>
-          ) : (
-            <Text fontSize="md">{courseToString(course)}</Text>
-          )}
-        </>
-      );
+      return <ReqCourseError courseError={course} isParent={parent} />;
 
     case "and":
       return (
@@ -177,5 +202,55 @@ const BorderContainer: React.FC<React.PropsWithChildren> = ({ children }) => {
     >
       {children}
     </Box>
+  );
+};
+
+/** Fetches details for and renders a co-req/pre-req course. */
+const ReqCourseError: React.FC<{
+  courseError: INEUReqCourseError;
+  isParent: boolean;
+}> = ({ courseError, isParent }) => {
+  const { course, error } = useFetchCourse(
+    courseError.subject,
+    courseError.classId
+  );
+
+  /** Render only the course id when loading or if we can't fetch the course name. */
+  let content = (
+    <Text fontSize="md">{getCourseDisplayString(courseError)}: Loading...</Text>
+  );
+
+  if (error) {
+    content = (
+      <Flex alignItems="center" columnGap="2xs">
+        <Text fontSize="md">{getCourseDisplayString(courseError)}</Text>
+        <GraduateToolTip
+          label={SEARCH_NEU_FETCH_COURSE_ERROR_MSG}
+          placement="top"
+        >
+          <WarningTwoIcon boxSize="15px" color="states.warning.main" />
+        </GraduateToolTip>
+      </Flex>
+    );
+  }
+
+  if (course) {
+    content = (
+      <Text fontSize="md">
+        {getCourseDisplayString(course)}: {course.name}
+      </Text>
+    );
+  }
+
+  return (
+    <>
+      {isParent ? (
+        <BorderContainer>
+          <Text fontSize="md">{content}</Text>
+        </BorderContainer>
+      ) : (
+        <Text fontSize="md">{content}</Text>
+      )}
+    </>
   );
 };

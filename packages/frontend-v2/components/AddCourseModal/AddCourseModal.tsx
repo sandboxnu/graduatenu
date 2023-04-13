@@ -10,7 +10,6 @@ import {
   Button,
   VStack,
   Text,
-  Tooltip,
   Flex,
 } from "@chakra-ui/react";
 import { ScheduleCourse2 } from "@graduate/common";
@@ -24,6 +23,8 @@ import {
 import { SearchCoursesInput } from "./SearchCoursesInput";
 import { SearchResult } from "./SearchResult";
 import { SelectedCourse } from "./SelectedCourse";
+import { GraduateToolTip } from "../GraduateTooltip";
+import { HelperToolTip } from "../Help";
 
 interface AddCourseModalProps {
   isOpen: boolean;
@@ -53,12 +54,13 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
   const [selectedCourses, setSelectedCourses] = useState<
     ScheduleCourse2<null>[]
   >([]);
+  const [isLoadingSelectCourse, setIsLoadingSelectCourse] = useState(false);
 
   const {
     courses,
     isLoading: isCoursesLoading,
     error,
-  } = useSearchCourses(searchQuery);
+  } = useSearchCourses(searchQuery, catalogYear);
 
   const addSelectedCourse = async (course: ScheduleCourse2<null>) => {
     // don't allow courses to be selected multiple times
@@ -66,6 +68,7 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
       return;
     }
 
+    setIsLoadingSelectCourse(true);
     const updatedSelectedCourses = [...selectedCourses];
 
     // grab any coreqs of the course that haven't already been selected/added to the term
@@ -82,6 +85,7 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
     updatedSelectedCourses.push(course, ...coreqs);
 
     setSelectedCourses(updatedSelectedCourses);
+    setIsLoadingSelectCourse(false);
   };
 
   const removeSelectedCourse = (course: ScheduleCourse2<null>) => {
@@ -99,12 +103,17 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
   };
 
   const addClassesOnClick = async () => {
+    if (selectedCourses.length === 0) {
+      return;
+    }
+
     addSelectedClasses(selectedCourses);
     onClose();
   };
 
   const onClose = () => {
     setSelectedCourses([]);
+    setSearchQuery("");
     closeModalDisplay();
   };
 
@@ -112,69 +121,108 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
     <Modal isOpen={isOpen} onClose={onClose} size="lg">
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Add Courses</ModalHeader>
+        <ModalHeader color="primary.blue.dark.main">
+          <Flex alignItems="center" justifyContent="center" columnGap="2xs">
+            <Text>Add Courses</Text>
+            <HelperToolTip label="We try our best to search for courses across as many semesters as possible. If you cannot find your course, please report a bug with your plan catalog year and we will try to solve it as soon as possible." />
+          </Flex>
+        </ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <SearchCoursesInput setSearchQuery={setSearchQuery} />
-          <VStack
-            height="200px"
-            mt="md"
-            overflow="scroll"
-            alignItems="left"
-            gap="2xs"
-          >
-            {error && (
-              <Tooltip label="We rely on SearchNEU to search for courses, and there may be an ongoing issue on their end. We recommend refreshing the page and trying again soon. If the issue persists, help us by clicking the Bug/Feature button to report the bug">
-                <Flex alignItems={"center"} justifyContent={"center"}>
-                  <InfoIcon marginRight={"4px"} />
-                  <Text fontSize="xs" fontWeight="semibold" textAlign="center">
-                    {
-                      "Oops, sorry we couldn't search for courses... try again in a little bit!"
-                    }
+          <Flex direction="column" rowGap="md">
+            <SearchCoursesInput setSearchQuery={setSearchQuery} />
+            <VStack
+              height="200px"
+              overflow="scroll"
+              alignItems="left"
+              gap="2xs"
+            >
+              {error && (
+                <GraduateToolTip label="We rely on SearchNEU to search for courses, and there may be an ongoing issue on their end. We recommend refreshing the page and trying again soon. If the issue persists, help us by clicking the Bug/Feature button to report the bug">
+                  <Flex
+                    alignItems="center"
+                    columnGap="xs"
+                    justifyContent="center"
+                  >
+                    <InfoIcon color="primary.blue.dark.main" />
+                    <Text
+                      fontSize="xs"
+                      fontWeight="semibold"
+                      textAlign="center"
+                    >
+                      Oops, sorry we couldn&apos;t search for courses... try
+                      again in a little bit!
+                    </Text>
+                  </Flex>
+                </GraduateToolTip>
+              )}
+              {courses &&
+                courses.map((searchResult) => (
+                  <SearchResult
+                    key={getCourseDisplayString(searchResult)}
+                    searchResult={searchResult}
+                    addSelectedCourse={addSelectedCourse}
+                    isResultAlreadyAdded={isCourseAlreadyAdded(searchResult)}
+                    isResultAlreadySelected={isCourseAlreadySelected(
+                      searchResult
+                    )}
+                    isSelectingAnotherCourse={isLoadingSelectCourse}
+                  />
+                ))}
+              {!error && (!courses || courses.length === 0) && (
+                <Flex
+                  alignItems="center"
+                  justifyContent="center"
+                  columnGap="xs"
+                >
+                  <InfoIcon color="primary.blue.dark.main" />
+                  <Text fontSize="xs">
+                    Search for your course and press enter to see search
+                    results.
                   </Text>
                 </Flex>
-              </Tooltip>
+              )}
+            </VStack>
+            {courses && courses.length > 0 && selectedCourses.length === 0 && (
+              <Flex alignItems="center" justifyContent="center" columnGap="xs">
+                <InfoIcon color="primary.blue.dark.main" />
+                <Text fontSize="xs">
+                  Select the courses you wish to add to this semester using the
+                  &quot;+&quot; button.
+                </Text>
+              </Flex>
             )}
-            {courses &&
-              courses.map((searchResult) => (
-                <SearchResult
-                  key={getCourseDisplayString(searchResult)}
-                  searchResult={searchResult}
-                  addSelectedCourse={addSelectedCourse}
-                  isResultAlreadyAdded={isCourseAlreadyAdded(searchResult)}
-                  isResultAlreadySelected={isCourseAlreadySelected(
-                    searchResult
-                  )}
+            <VStack maxHeight="200px" overflow="scroll" pb="xs">
+              {selectedCourses.map((selectedCourse) => (
+                <SelectedCourse
+                  key={getCourseDisplayString(selectedCourse)}
+                  selectedCourse={selectedCourse}
+                  removeSelectedCourse={removeSelectedCourse}
                 />
               ))}
-          </VStack>
-          <VStack maxHeight="200px" mt="md" overflow="scroll" pb="xs">
-            {selectedCourses.map((selectedCourse) => (
-              <SelectedCourse
-                key={getCourseDisplayString(selectedCourse)}
-                selectedCourse={selectedCourse}
-                removeSelectedCourse={removeSelectedCourse}
-              />
-            ))}
-          </VStack>
+            </VStack>
+          </Flex>
         </ModalBody>
-        <ModalFooter>
-          <Tooltip label="Note that search results will reflect the most recent version of the course you're looking for!">
+        <ModalFooter justifyContent="center">
+          <Flex columnGap="sm">
+            <Button
+              variant="solidWhite"
+              size="md"
+              borderRadius="lg"
+              onClick={onClose}
+            >
+              Cancel
+            </Button>
             <Button
               variant="solid"
-              fontWeight="bold"
-              color="primary.blue.light.main"
-              colorScheme="neutral"
-              backgroundColor="neutral.main"
-              border="none"
-              mr={3}
+              borderRadius="lg"
+              size="md"
               onClick={addClassesOnClick}
-              textTransform="uppercase"
               isLoading={isCoursesLoading}
             >
               Add
             </Button>
-          </Tooltip>
+          </Flex>
         </ModalFooter>
       </ModalContent>
     </Modal>

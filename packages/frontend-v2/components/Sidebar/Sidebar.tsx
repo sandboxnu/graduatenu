@@ -5,7 +5,14 @@ import {
   PlanModel,
   ScheduleCourse2,
 } from "@graduate/common";
-import { memo, PropsWithChildren, useEffect, useRef, useState } from "react";
+import {
+  memo,
+  PropsWithChildren,
+  ReactNode,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { DraggableScheduleCourse } from "../ScheduleCourse";
 import SidebarSection from "./SidebarSection";
 import {
@@ -26,6 +33,7 @@ import {
   WorkerPostInfo,
 } from "../../validation-worker/worker-messages";
 import { useFetchCourses, useMajor } from "../../hooks";
+import { HelperToolTip } from "../Help";
 
 export enum SidebarValidationStatus {
   Loading = "Loading",
@@ -187,12 +195,34 @@ const Sidebar: React.FC<SidebarProps> = memo(
 
     const creditsTaken = totalCreditsInSchedule(selectedPlan.schedule);
 
+    const sidebarHelperText = (
+      <Stack py="xs">
+        <Text>
+          The sidebar is our version of the degree audit. We attempt to display
+          the same requirements you see in the course catalog and validate your
+          plan against them.
+        </Text>
+        <Text>
+          Presently, we try to to satisfy as many requirements as possible with
+          your plan. Hence, while you are filling your plan in, some of your
+          courses may temporarily satisfy a different requirement than intended.
+          We apologise for any confusion and are actively working on improving
+          this.
+        </Text>
+        <Text>
+          Finally, if you notice something incorrect in your requirements,
+          please let us know through the bug report button uptop!
+        </Text>
+      </Stack>
+    );
+
     return (
       <SidebarContainer
         title={major.name}
         subtitle={selectedPlan.concentration}
         creditsTaken={creditsTaken}
         creditsToTake={major.totalCreditsRequired}
+        helperText={sidebarHelperText}
         renderCoopBlock
       >
         {courseData && (
@@ -278,6 +308,7 @@ interface SidebarContainerProps {
   creditsTaken?: number;
   creditsToTake?: number;
   renderCoopBlock?: boolean;
+  helperText?: ReactNode;
 }
 
 export const NoPlanSidebar: React.FC = () => {
@@ -290,20 +321,24 @@ const SidebarContainer: React.FC<PropsWithChildren<SidebarContainerProps>> = ({
   creditsTaken,
   creditsToTake,
   renderCoopBlock,
+  helperText,
   children,
 }) => {
   return (
     <Box pt="xl" backgroundColor="neutral.main">
       <Box px="md" pb="md">
         <Box pb="sm">
-          <Heading
-            as="h1"
-            fontSize="2xl"
-            color="primary.blue.dark.main"
-            fontWeight="bold"
-          >
-            {title}
-          </Heading>
+          <Flex alignItems="center" columnGap="2xs">
+            <Heading
+              as="h1"
+              fontSize="2xl"
+              color="primary.blue.dark.main"
+              fontWeight="bold"
+            >
+              {title}
+            </Heading>
+            {helperText && <HelperToolTip label={helperText} />}
+          </Flex>
           {subtitle && (
             <Text fontSize="sm" color="primary.blue.dark.main">
               {subtitle}

@@ -1,5 +1,5 @@
 import { DeleteIcon } from "@chakra-ui/icons";
-import { Flex, Tooltip } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import { useDraggable } from "@dnd-kit/core";
 import { CSS } from "@dnd-kit/utilities";
 import {
@@ -9,11 +9,16 @@ import {
   ScheduleCourse2,
 } from "@graduate/common";
 import { forwardRef, PropsWithChildren, useEffect, useState } from "react";
-import { DELETE_COURSE_AREA_DND_ID, isCourseFromSidebar } from "../../utils";
+import {
+  DELETE_COURSE_AREA_DND_ID,
+  SEARCH_NEU_FETCH_COURSE_ERROR_MSG,
+  isCourseFromSidebar,
+} from "../../utils";
 import { ReqErrorModal } from "../Plan/ReqErrorModal";
 import { COOP_BLOCK } from "../Sidebar";
 import { CourseDragIcon } from "./CourseDragIcon";
 import { CourseTrashButton } from "./CourseTrashButton";
+import { GraduateToolTip } from "../GraduateTooltip";
 
 interface DraggableScheduleCourseProps {
   scheduleCourse: ScheduleCourse2<string>;
@@ -121,7 +126,7 @@ export const PlaceholderScheduleCourse: React.FC<
   PlaceholderScheduleCourseProps
 > = ({ course }) => {
   return (
-    <Tooltip label="Sorry, we can't load this course right now 😞. We rely on SearchNEU for course fetching, and there may be an ongoing issue on their end. We recommend refreshing the page and trying again soon.">
+    <GraduateToolTip label={SEARCH_NEU_FETCH_COURSE_ERROR_MSG}>
       <div
         style={{
           backgroundColor: "white",
@@ -140,7 +145,7 @@ export const PlaceholderScheduleCourse: React.FC<
           <span style={{ marginLeft: "2px" }}>{course.classId}</span>
         </p>
       </div>
-    </Tooltip>
+    </GraduateToolTip>
   );
 };
 
@@ -217,7 +222,6 @@ const ScheduleCourse = forwardRef<HTMLElement | null, ScheduleCourseProps>(
           opacity: isValidRemove ? 0.5 : 1,
           justifyContent: "space-between",
           width: "100%",
-          height: "100%",
         }}
         onMouseEnter={() => {
           setHovered(true);
@@ -330,13 +334,11 @@ const ScheduleCourseDraggedContents: React.FC<
         }}
       >
         {isDraggable && <CourseDragIcon />}
-        <p style={{lineHeight: 1.3}}>
+        <p style={{ lineHeight: 1.3 }}>
           <span style={{ marginRight: "2px", fontWeight: "bold" }}>
-          {`${courseToString(scheduleCourse)} `}
+            {`${courseToString(scheduleCourse)} `}
           </span>
-          <span>
-            {scheduleCourse.name}
-          </span>
+          <span>{scheduleCourse.name}</span>
         </p>
       </div>
     </div>

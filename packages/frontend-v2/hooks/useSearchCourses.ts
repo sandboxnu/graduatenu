@@ -21,13 +21,21 @@ type SearchCoursesReturn = SearchCoursesResponse & {
  */
 export function useSearchCourses(
   searchQuery: string,
+  catalogYear?: number,
   minIndex = 0,
   maxIndex = 9999
 ): SearchCoursesReturn {
   const { data, mutate, ...rest } = useSWR(
-    `/searchCourses/${searchQuery}/${minIndex}/${maxIndex}`,
+    `/searchCourses/${searchQuery}/${minIndex}/${maxIndex}${
+      catalogYear && `/${catalogYear}`
+    }`,
     async () =>
-      await SearchAPI.searchCourses(searchQuery.trim(), minIndex, maxIndex)
+      await SearchAPI.searchCourses(
+        searchQuery.trim(),
+        catalogYear,
+        minIndex,
+        maxIndex
+      )
   );
 
   return {

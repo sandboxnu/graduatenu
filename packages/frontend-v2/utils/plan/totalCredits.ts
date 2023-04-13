@@ -1,4 +1,11 @@
-import { Schedule2, ScheduleYear2 } from "@graduate/common";
+import { Schedule2, ScheduleTerm2, ScheduleYear2 } from "@graduate/common";
+
+/** The credits for all courses in a term. */
+export const totalCreditsInTerm = (term: ScheduleTerm2<unknown>): number => {
+  return term.classes.reduce((totalCreditsForTerm, course) => {
+    return totalCreditsForTerm + course.numCreditsMin;
+  }, 0);
+};
 
 /** The credits for all courses in a year summed. */
 export const totalCreditsInYear = (
@@ -10,15 +17,7 @@ export const totalCreditsInYear = (
     scheduleYear.summer1,
     scheduleYear.summer2,
   ].reduce((totalCreditsForYear, term) => {
-    // sum all credits over all courses
-    const totalCreditsThisTerm = term.classes.reduce(
-      (totalCreditsForTerm, course) => {
-        return totalCreditsForTerm + course.numCreditsMin;
-      },
-      0
-    );
-
-    return totalCreditsForYear + totalCreditsThisTerm;
+    return totalCreditsForYear + totalCreditsInTerm(term);
   }, 0);
 };
 

@@ -8,3 +8,4 @@ export * from "./useMajor";
 export * from "./useSearchCourses";
 export * from "./useFetchCourses";
 export * from "./useWindowSize";
+export * from "./useFetchCourse";

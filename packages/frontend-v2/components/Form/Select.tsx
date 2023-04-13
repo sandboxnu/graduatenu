@@ -77,7 +77,7 @@ export const PlanSelect: React.FC<PlanSelectProps> = ({
   return (
     <FormControl isInvalid={error != null}>
       <FormLabel
-        color="primary.red.main"
+        color="primary.blue.dark.main"
         size="md"
         fontWeight="medium"
         mb="2xs"

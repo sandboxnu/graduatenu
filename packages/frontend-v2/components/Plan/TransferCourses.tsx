@@ -124,6 +124,7 @@ const TransferCoursesBody: React.FC<TransferCoursesBodyProps> = ({
       templateColumns="repeat(4, 1fr)"
       rowGap="sm"
       columnGap="sm"
+      alignItems="stretch"
     >
       {transferCourses.map((course) => (
         <NonDraggableScheduleCourse
@@ -136,7 +137,6 @@ const TransferCoursesBody: React.FC<TransferCoursesBodyProps> = ({
         onOpen={onOpen}
         borderColor="#C1CAD9"
         borderWidth="1px"
-        height="100%"
       />
       <AddCourseModal
         isOpen={isOpen}
@@ -158,7 +158,7 @@ const TransferCoursesHeader: React.FC<TransferCoursesHeaderProps> = ({
   totalTransferCredits,
 }) => {
   const transferCoursesHelperText = (
-    <Stack>
+    <Stack py="xs">
       <Text>Northeastern courses that you have credits for.</Text>
       <Text>
         These are courses you do not need to take because you complete advanced
@@ -195,7 +195,8 @@ const TransferCoursesHeader: React.FC<TransferCoursesHeaderProps> = ({
           <HelperToolTip label={transferCoursesHelperText} />
         </Flex>
         <Text color="primary.blue.light.main" fontWeight="bold">
-          {totalTransferCredits} credits
+          {totalTransferCredits}{" "}
+          {totalTransferCredits === 1 ? "Credit" : "Credits"}
         </Text>
       </Flex>
       {isExpanded ? (

@@ -9,6 +9,8 @@ interface SearchResultProps {
   addSelectedCourse: (course: ScheduleCourse2<null>) => void;
   isResultAlreadySelected: boolean;
   isResultAlreadyAdded: boolean;
+  /** Another course is currently in the process of being selected. */
+  isSelectingAnotherCourse?: boolean;
 }
 
 export const SearchResult: React.FC<SearchResultProps> = ({
@@ -16,6 +18,7 @@ export const SearchResult: React.FC<SearchResultProps> = ({
   addSelectedCourse,
   isResultAlreadySelected,
   isResultAlreadyAdded,
+  isSelectingAnotherCourse,
 }) => {
   const isAddButtonDisabled = isResultAlreadyAdded || isResultAlreadySelected;
   const addButtonTooltip = isResultAlreadyAdded
@@ -52,6 +55,7 @@ export const SearchResult: React.FC<SearchResultProps> = ({
           size="sm"
           onClick={() => addSelectedCourse(searchResult)}
           isDisabled={isResultAlreadyAdded || isResultAlreadySelected}
+          isLoading={isSelectingAnotherCourse}
         />
       </GraduateToolTip>
     </Flex>

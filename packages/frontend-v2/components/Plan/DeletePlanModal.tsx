@@ -1,6 +1,7 @@
 import { DeleteIcon } from "@chakra-ui/icons";
 import {
   Button,
+  Flex,
   IconButton,
   Modal,
   ModalBody,
@@ -18,7 +19,6 @@ import { Dispatch, SetStateAction } from "react";
 import { mutate } from "swr";
 import { USE_STUDENT_WITH_PLANS_SWR_KEY } from "../../hooks";
 import { handleApiClientError, toast } from "../../utils";
-import { GrayButton } from "../Button";
 
 interface DeletePlanModalProps {
   planName: string;
@@ -58,22 +58,40 @@ export const DeletePlanModal: React.FC<DeletePlanModalProps> = ({
           colorScheme="primary.blue.light"
           color="primary.blue.light.main"
           ml="xs"
+          borderRadius="lg"
           onClick={onOpen}
         />
       </Tooltip>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Delete Plan</ModalHeader>
+          <ModalHeader textAlign="center" color="primary.blue.dark.main">
+            Delete Plan
+          </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             Woah, are you sure you want to delete {planName}?
           </ModalBody>
-          <ModalFooter>
-            <Button mr={3} onClick={deletePlan}>
-              Delete
-            </Button>
-            <GrayButton onClick={onClose}>Nevermind</GrayButton>
+          <ModalFooter justifyContent="center">
+            <Flex columnGap="sm">
+              <Button
+                variant="solidWhite"
+                size="md"
+                borderRadius="lg"
+                onClick={onClose}
+              >
+                Nevermind
+              </Button>
+              <Button
+                variant="solid"
+                size="md"
+                borderRadius="lg"
+                type="submit"
+                onClick={deletePlan}
+              >
+                Delete
+              </Button>
+            </Flex>
           </ModalFooter>
         </ModalContent>
       </Modal>

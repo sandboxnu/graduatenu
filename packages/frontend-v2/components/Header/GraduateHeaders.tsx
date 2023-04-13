@@ -31,17 +31,11 @@ const GraduateHeader: React.FC<GraduateHeaderProps> = ({ rightContent }) => {
     <HeaderContainer>
       <Logo />
       <Flex columnGap="md" alignItems="center">
-        <ChakraLink
-          href="https://docs.google.com/forms/d/e/1FAIpQLSea4GZNwLL7oSepwCxTeEIc1tm6p0KN1CA8qjNGZiR1rSrenA/viewform"
-          isExternal
-        >
+        <ChakraLink href="https://forms.gle/Tg9yuhR8inkrqHdN6" isExternal>
           <FeedbackIcon mx="2px" />
           Feedback
         </ChakraLink>
-        <ChakraLink
-          href="https://docs.google.com/forms/d/e/1FAIpQLScpHg7Wv3iJHuZwC38GuKbpANgd48Ab4pmSO0PIOACrELtrCw/viewform"
-          isExternal
-        >
+        <ChakraLink href="https://forms.gle/Sxg3B9js8KQ2zfJS9" isExternal>
           <BugIcon mx="2px" />
           Bug/Feature
         </ChakraLink>

@@ -15,8 +15,8 @@ export const PlanDropdown: React.FC<PlanDropdownProps> = ({
   return (
     <Select
       placeholder="Select Plan"
-      width="15%"
-      borderRadius="0"
+      width="30%"
+      borderRadius="lg"
       value={selectedPlanId ? selectedPlanId : undefined}
       onChange={(e) => {
         if (!e.target.value) {

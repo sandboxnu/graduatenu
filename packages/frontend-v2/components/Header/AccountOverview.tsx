@@ -89,7 +89,11 @@ export const AccountOverview: React.FC<AccountOverviewProps> = ({
         <ModalOverlay />
         <ModalContent as="form" onSubmit={handleSubmit(onSubmitHandler)}>
           <ModalHeader>
-            <Text textAlign="center" fontWeight="bold">
+            <Text
+              textAlign="center"
+              fontWeight="bold"
+              color="primary.blue.dark.main"
+            >
               Account Overview
             </Text>
           </ModalHeader>
