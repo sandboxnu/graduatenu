@@ -49,7 +49,7 @@ export const AccountOverview: React.FC<AccountOverviewProps> = ({
     trigger,
     reset,
   } = useForm<UpdateName>({
-    mode: "onTouched",
+    mode: "onChange",
     shouldFocusError: true,
   });
 
@@ -152,7 +152,7 @@ export const AccountOverview: React.FC<AccountOverviewProps> = ({
                   >
                     <WarningTwoIcon color="states.warning.main" />
                   </GraduateToolTip>
-                  <ResendEmailVerificationLink label="Send Verfication Email" />
+                  <ResendEmailVerificationLink label="Send Verification Email" />
                 </Flex>
               </FormControl>
             </Flex>
