@@ -36,8 +36,6 @@ export const Plan: React.FC<PlanProps> = ({
   setIsRemove,
 }) => {
   const [expandedYears, setExpandedYears] = useState<Set<number>>(new Set());
-  const [isTransferCoursesExpanded, setIsTransferCoursesExpanded] =
-    useState<boolean>(false);
 
   const toggleExpanded = (year: ScheduleYear2<unknown>) => {
     if (expandedYears.has(year.year)) {
@@ -145,13 +143,6 @@ export const Plan: React.FC<PlanProps> = ({
           mutateStudentWithUpdatedPlan={mutateStudentWithUpdatedPlan}
         />
       </Flex>
-      <Divider borderColor="neutral.900" borderWidth={1} />
-      <TransferCourses
-        isExpanded={isTransferCoursesExpanded}
-        toggleExpanded={() =>
-          setIsTransferCoursesExpanded(!isTransferCoursesExpanded)
-        }
-      />
     </Flex>
   );
 };

@@ -4,3 +4,4 @@ export * from "./AddPlanModal";
 export * from "./EditPlanModal";
 export * from "./DeletePlanModal";
 export * from "./AddYearButton";
+export * from "./TransferCourses";

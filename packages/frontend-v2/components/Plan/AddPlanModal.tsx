@@ -120,7 +120,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
   return (
     <>
       <BlueButton leftIcon={<AddIcon />} onClick={onOpen} ml="xs" size="md">
-        Add Plan
+        New Plan
       </BlueButton>
       <Modal isOpen={isOpen} onClose={() => onCloseAddPlanModal()} size="md">
         <ModalOverlay />
