@@ -1,4 +1,4 @@
-import { Box, Flex } from "@chakra-ui/react";
+import { Box, Divider, Flex } from "@chakra-ui/react";
 import {
   CollisionDetection,
   DndContext,
@@ -31,6 +31,7 @@ import {
   Plan,
   PlanDropdown,
   Sidebar,
+  TransferCourses,
 } from "../components";
 import { fetchStudentAndPrepareForDnd, useStudentWithPlans } from "../hooks";
 import {
@@ -82,6 +83,9 @@ const HomePage: NextPage = () => {
   const [preReqWarnings, setPreReqWarnings] = useState<
     PreReqWarnings | undefined
   >(undefined);
+
+  const [isTransferCoursesExpanded, setIsTransferCoursesExpanded] =
+    useState<boolean>(false);
 
   useEffect(() => {
     // once the student is fetched, set the selected plan id to the last updated plan
@@ -226,8 +230,8 @@ const HomePage: NextPage = () => {
           {renderedSidebar}
         </Box>
         <Box p="md" overflow="auto" flexGrow={1}>
-          <Flex flexDirection="column">
-            <Flex alignItems="center" mb="sm">
+          <Flex flexDirection="column" rowGap="sm">
+            <Flex alignItems="center">
               <PlanDropdown
                 selectedPlanId={selectedPlanId}
                 setSelectedPlanId={setSelectedPlanId}
@@ -244,14 +248,23 @@ const HomePage: NextPage = () => {
               )}
             </Flex>
             {selectedPlan && (
-              <Plan
-                plan={selectedPlan}
-                coReqErr={coReqWarnings}
-                preReqErr={preReqWarnings}
-                mutateStudentWithUpdatedPlan={mutateStudentWithUpdatedPlan}
-                setIsRemove={setIsRemove}
-              />
+              <>
+                <Plan
+                  plan={selectedPlan}
+                  coReqErr={coReqWarnings}
+                  preReqErr={preReqWarnings}
+                  mutateStudentWithUpdatedPlan={mutateStudentWithUpdatedPlan}
+                  setIsRemove={setIsRemove}
+                />
+                <Divider borderColor="neutral.900" borderWidth={1} />
+              </>
             )}
+            <TransferCourses
+              isExpanded={isTransferCoursesExpanded}
+              toggleExpanded={() =>
+                setIsTransferCoursesExpanded(!isTransferCoursesExpanded)
+              }
+            />
           </Flex>
         </Box>
       </PageLayout>

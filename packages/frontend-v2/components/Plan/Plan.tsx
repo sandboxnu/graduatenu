@@ -1,4 +1,4 @@
-import { Divider, Flex } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import {
   CoReqWarnings,
   PlanModel,
@@ -12,7 +12,6 @@ import { addClassesToTerm, removeYearFromPlan } from "../../utils";
 import { removeCourseFromTerm } from "../../utils/";
 import { ScheduleYear } from "./ScheduleYear";
 import { useDroppable } from "@dnd-kit/core";
-import { TransferCourses } from "./TransferCourses";
 import { AddYearButton } from "./AddYearButton";
 
 interface PlanProps {
@@ -36,8 +35,6 @@ export const Plan: React.FC<PlanProps> = ({
   setIsRemove,
 }) => {
   const [expandedYears, setExpandedYears] = useState<Set<number>>(new Set());
-  const [isTransferCoursesExpanded, setIsTransferCoursesExpanded] =
-    useState<boolean>(false);
 
   const toggleExpanded = (year: ScheduleYear2<unknown>) => {
     if (expandedYears.has(year.year)) {
@@ -145,13 +142,6 @@ export const Plan: React.FC<PlanProps> = ({
           mutateStudentWithUpdatedPlan={mutateStudentWithUpdatedPlan}
         />
       </Flex>
-      <Divider borderColor="neutral.900" borderWidth={1} />
-      <TransferCourses
-        isExpanded={isTransferCoursesExpanded}
-        toggleExpanded={() =>
-          setIsTransferCoursesExpanded(!isTransferCoursesExpanded)
-        }
-      />
     </Flex>
   );
 };
