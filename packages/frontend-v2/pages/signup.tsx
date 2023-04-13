@@ -22,7 +22,7 @@ import {
   toast,
   WEAK_PASSWORD_MSG,
 } from "../utils";
-import { handlWeakPasswordError } from "../utils/error";
+import { handleWeakPasswordError } from "../utils/error";
 
 const Signup: NextPage = () => {
   return <AuthenticationPageLayout form={<SignUpForm />} />;
@@ -38,7 +38,7 @@ const SignUpForm: React.FC = () => {
     watch,
     trigger,
   } = useForm<SignUpStudentDto>({
-    mode: "onTouched",
+    mode: "onChange",
     shouldFocusError: true,
   });
 
@@ -60,7 +60,7 @@ const SignUpForm: React.FC = () => {
           return;
         }
 
-        if (handlWeakPasswordError(errorMessage)) {
+        if (handleWeakPasswordError(errorMessage)) {
           return;
         }
       }
