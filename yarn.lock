@@ -2987,7 +2987,7 @@ __metadata:
     "@nestjs/passport": ^8.1.0
     "@nestjs/platform-express": ^8.0.0
     "@nestjs/schematics": ^8.0.0
-    "@nestjs/testing": ^8.0.0
+    "@nestjs/testing": ^9.3.12
     "@nestjs/typeorm": ^8.0.2
     "@types/bcrypt": ^5.0.0
     "@types/cookie-parser": ^1
@@ -3644,22 +3644,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nestjs/testing@npm:^8.0.0":
-  version: 8.4.7
-  resolution: "@nestjs/testing@npm:8.4.7"
+"@nestjs/testing@npm:^9.3.12":
+  version: 9.4.3
+  resolution: "@nestjs/testing@npm:9.4.3"
   dependencies:
-    tslib: 2.4.0
+    tslib: 2.5.3
   peerDependencies:
-    "@nestjs/common": ^8.0.0
-    "@nestjs/core": ^8.0.0
-    "@nestjs/microservices": ^8.0.0
-    "@nestjs/platform-express": ^8.0.0
+    "@nestjs/common": ^9.0.0
+    "@nestjs/core": ^9.0.0
+    "@nestjs/microservices": ^9.0.0
+    "@nestjs/platform-express": ^9.0.0
   peerDependenciesMeta:
     "@nestjs/microservices":
       optional: true
     "@nestjs/platform-express":
       optional: true
-  checksum: 5514f2638ad1dcdabe3c13fa35f8d73dbae5924c051a9747f19c2bbb5491998a3261e6a43562af8a4f67af4fe4a5b6b97406712e3aa28da5d5e3ace0fbab7112
+  checksum: 0f3373a7e451e39cb38c7ee67f793efb1583ab795f6e42a959afd5c50180536886c9ed6ac621102392f85c74191a31c654e66b0225fc94d6433aef044ca8d46a
   languageName: node
   linkType: hard
 
