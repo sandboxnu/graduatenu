@@ -191,14 +191,20 @@ export const parseEntry = async (
         concentration.entries = [newHeader, ...concentration.entries];
       }
       const parsed = parseRows(concentration.entries);
+      // Change this when we allow concentrations to have multiple sections:
       if (parsed.length >= 1 && parsed[0].type == "SECTION") {
-        return parsed[0];
+        return parsed;
       } else {
+        if (parsed.length > 1) {
+          throw new Error(
+            `Concentration "${concentration.description}" has multiple sections which is not supported right now!`
+          )
+        }
         throw new Error(
           `Concentration "${concentration.description}" cannot be parsed!`
         );
       }
-    });
+    }).flat();
 
   const major: Major2 = {
     name: entry.tokenized.majorName,
