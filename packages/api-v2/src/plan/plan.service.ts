@@ -140,8 +140,8 @@ export class PlanService {
      * TODO: Fix the DTO issue that populates undefined values for fields not
      * present. https://github.com/sandboxnu/graduatenu/issues/533
      */
-    const isMajorInfoUpdate =
-      newMajorName && newCatalogYear && newConcentrationName;
+    // It is necessary for this to be OR because we need to run an update if any of these are true. 
+    const isMajorInfoUpdate = newMajorName || newCatalogYear || newConcentrationName;
 
     /** Wipe Major => Remove existing major from the plan. */
     const isWipeMajorUpdate =
