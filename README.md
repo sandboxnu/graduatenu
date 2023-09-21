@@ -8,13 +8,15 @@ GraduateNU aims to empower Northeastern students to customize their plan of stud
 
 2. Make a copy of the packages/api-v2/.env.development and name it .env.development.local. Fill in placeholder secrets.
 
-3. If you haven't run migrations in a while or this is a fresh repo, then run the migrations for the the api using `yarn packages/api-v2 dev:migration:run`. See packages/API-V2/README for more info.
+3. Make a copy of the packages/api-v2/.env.testing and name it .env.testing.local. for running BE tests
 
-4. Then run the new version of the application by running `yarn dev:v2` at the root of the project. This starts up a NestJS server + a NextJS frontend + a Proxy. The proxy listens on port [3002](http://localhost:3002/), forwards /api requests to the NestJS server running on port 3001, and all other requests to the frontend running on port 3000.
+4. If you haven't run migrations in a while or this is a fresh repo, then run the migrations for the the api using `yarn packages/api-v2 dev:migration:run`. See packages/API-V2/README for more info.
 
-5. Visit [http://localhost:3002](http://localhost:3002/) to view the app.
+5. Then run the new version of the application by running `yarn dev:v2` at the root of the project. This starts up a NestJS server + a NextJS frontend + a Proxy. The proxy listens on port [3002](http://localhost:3002/), forwards /api requests to the NestJS server running on port 3001, and all other requests to the frontend running on port 3000.
 
-To run the two seperately, visit the frontend and api-v2 packages(sub directories of the monorepo).
+6. Visit [http://localhost:3002](http://localhost:3002/) to view the app.
+
+To run the two separately, visit the frontend and api-v2 packages(sub directories of the monorepo).
 
 ## Running the prod builds in prod docker configurations locally
 
