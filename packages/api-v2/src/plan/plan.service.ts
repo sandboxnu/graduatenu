@@ -7,6 +7,7 @@ import { CreatePlanDto, UpdatePlanDto } from "@graduate/common";
 import { Plan } from "./entities/plan.entity";
 import { formatServiceCtx } from "../../src/utils";
 import { MajorService } from "../major/major.service";
+import { InvalidConcentration, InvalidMajor } from "./plan.errors";
 
 @Injectable()
 export class PlanService {
@@ -179,7 +180,7 @@ export class PlanService {
           },
           this.formatPlanServiceCtx("update")
         );
-
+        throw new InvalidMajor();
         return null;
       }
 
@@ -201,8 +202,11 @@ export class PlanService {
           this.formatPlanServiceCtx("update")
         );
 
+        throw new InvalidConcentration();
         return null;
       }
+
+      
     }
 
     /**
