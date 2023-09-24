@@ -2973,9 +2973,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@graduate/api-v2@workspace:packages/api-v2":
+"@graduate/api@workspace:packages/api":
   version: 0.0.0-use.local
-  resolution: "@graduate/api-v2@workspace:packages/api-v2"
+  resolution: "@graduate/api@workspace:packages/api"
   dependencies:
     "@golevelup/ts-jest": ^0.3.2
     "@graduate/common": "workspace:*"
@@ -3034,9 +3034,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@graduate/frontend-v2@workspace:packages/frontend-v2":
+"@graduate/frontend@workspace:packages/frontend":
   version: 0.0.0-use.local
-  resolution: "@graduate/frontend-v2@workspace:packages/frontend-v2"
+  resolution: "@graduate/frontend@workspace:packages/frontend"
   dependencies:
     "@chakra-ui/icons": ^2.0.0
     "@chakra-ui/react": ^2.0.0

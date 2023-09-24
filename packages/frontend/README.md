@@ -6,7 +6,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 Run the full stack application with `yarn dev:v2` from the root of the monorepo.
 
-To run only the frontend, use `yarn dev` from the root of this workspace(`packages/frontend-v2`).
+To run only the frontend, use `yarn dev` from the root of this workspace(`packages/frontend`).
 
 You can start editing the pages by modifying files in `pages/`. The pages auto-update as you edit the file.
 

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-cd packages/api-v2
+cd packages/api
 yarn typeorm migration:run 
 exec "$@"
 
