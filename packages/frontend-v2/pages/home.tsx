@@ -102,7 +102,7 @@ const HomePage: NextPage = () => {
       const plan = student.plans.find((plan) => plan.id === selectedPlanId);
       if (plan) {
         setPreReqWarnings(getPreReqWarnings(plan.schedule, student.coursesTransfered));
-        setCoReqWarnings(getCoReqWarnings(plan.schedule, student.coursesTransfered));
+        setCoReqWarnings(getCoReqWarnings(plan.schedule));
       }
     }
   }, [student, selectedPlanId, setSelectedPlanId]);
@@ -171,7 +171,7 @@ const HomePage: NextPage = () => {
     }
 
     setPreReqWarnings(getPreReqWarnings(updatedPlan.schedule, student.coursesTransfered));
-    setCoReqWarnings(getCoReqWarnings(updatedPlan.schedule, student.coursesTransfered));
+    setCoReqWarnings(getCoReqWarnings(updatedPlan.schedule));
     mutateStudentWithUpdatedPlan(updatedPlan);
   };
 
