@@ -7,7 +7,7 @@ import { CreatePlanDto, UpdatePlanDto } from "@graduate/common";
 import { Plan } from "./entities/plan.entity";
 import { formatServiceCtx } from "../../src/utils";
 import { MajorService } from "../major/major.service";
-import { InvalidConcentration, InvalidMajor } from "./plan.errors";
+import { InvalidCatalogYear, InvalidConcentration, InvalidMajor } from "./plan.errors";
 
 @Injectable()
 export class PlanService {
@@ -206,6 +206,25 @@ export class PlanService {
         return null;
       }
 
+      const isValidMajorCatalogueYear = this.majorService.isValidCatalogueYear(
+        newMajorName, 
+        newCatalogYear, 
+        newConcentrationName
+      );
+
+      if(!isValidMajorCatalogueYear){
+        this.logger.debug(
+          {
+            message: "Attempting to add plan with an invalid catalogue year",
+            newMajorName,
+            newCatalogYear,
+          },
+          this.formatPlanServiceCtx("update")
+        );
+
+        throw new InvalidCatalogYear();
+        return null;
+      }
       
     }
 
