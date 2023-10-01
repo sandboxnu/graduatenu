@@ -8,33 +8,41 @@ import {
   INEUReqError,
   PreReqWarnings,
   Schedule2,
+  ScheduleCourse2,
   ScheduleTerm2,
   TermError,
 } from "@graduate/common";
 
 export const getCoReqWarnings = (
-  schedule: Schedule2<unknown>
+  schedule: Schedule2<unknown>,
+  coursesTransfered: ScheduleCourse2<null>[] | undefined
 ): CoReqWarnings => {
   const errors: CoReqWarnings = {
     type: "coreq",
     years: schedule.years.map((year) => ({
       year: year.year,
-      fall: getCoReqWarningsSem(year.fall),
-      spring: getCoReqWarningsSem(year.spring),
-      summer1: getCoReqWarningsSem(year.summer1),
-      summer2: getCoReqWarningsSem(year.summer2),
+      fall: getCoReqWarningsSem(year.fall, coursesTransfered),
+      spring: getCoReqWarningsSem(year.spring, coursesTransfered),
+      summer1: getCoReqWarningsSem(year.summer1, coursesTransfered),
+      summer2: getCoReqWarningsSem(year.summer2, coursesTransfered),
     })),
   };
   return errors;
 };
 
 export const getCoReqWarningsSem = (
-  term: ScheduleTerm2<unknown>
+  term: ScheduleTerm2<unknown>,
+  coursesTransfered: ScheduleCourse2<null>[] | undefined
 ): TermError => {
   const seen: Set<string> = new Set();
   const coReqErrors: TermError = {};
   for (const course of term.classes) {
     seen.add(courseToString(course));
+  }
+  if (coursesTransfered != undefined) {
+    for (const course of coursesTransfered) {
+      seen.add(courseToString(course));
+    }
   }
   for (const course of term.classes) {
     if (course.coreqs && course.coreqs.values.length !== 0)
@@ -44,9 +52,15 @@ export const getCoReqWarningsSem = (
 };
 
 export const getPreReqWarnings = (
-  schedule: Schedule2<unknown>
+  schedule: Schedule2<unknown>,
+  coursesTransfered: ScheduleCourse2<null>[] | undefined
 ): PreReqWarnings => {
   const seen: Set<string> = new Set();
+  if (coursesTransfered != undefined) {
+    for (const course of coursesTransfered) {
+      seen.add(courseToString(course));
+    }
+  }
   const preReqErrors: PreReqWarnings = {
     type: "prereq",
     years: schedule.years.map((year) => ({
