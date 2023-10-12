@@ -160,7 +160,6 @@ export class PlanService {
         { message: "Either update all major fields or only the schedule", id },
         this.formatPlanServiceCtx("update")
       );
-      return null;
     }
 
     // validate the major info if major is being updated
@@ -181,30 +180,8 @@ export class PlanService {
           this.formatPlanServiceCtx("update")
         );
         throw new InvalidMajor();
-        return null;
       }
 
-      const isValidConcentrationForMajor =
-        this.majorService.isValidConcentrationForMajor(
-          newMajorName,
-          newCatalogYear,
-          newConcentrationName
-        );
-
-      if (!isValidConcentrationForMajor) {
-        this.logger.debug(
-          {
-            message:
-              "Attempting to update a plan with an unsupported concentration.",
-            newMajorName,
-            newCatalogYear,
-          },
-          this.formatPlanServiceCtx("update")
-        );
-
-        throw new InvalidConcentration();
-        return null;
-      }
 
       const isValidMajorCatalogueYear = this.majorService.isValidCatalogueYear(
         newMajorName, 
@@ -225,7 +202,27 @@ export class PlanService {
         throw new InvalidCatalogYear();
         return null;
       }
-      
+
+      const isValidConcentrationForMajor =
+      this.majorService.isValidConcentrationForMajor(
+        newMajorName,
+        newCatalogYear,
+        newConcentrationName
+      );
+
+      if (!isValidConcentrationForMajor) {
+        this.logger.debug(
+          {
+            message:
+              "Attempting to update a plan with an unsupported concentration.",
+            newMajorName,
+            newCatalogYear,
+          },
+          this.formatPlanServiceCtx("update")
+        );
+
+        throw new InvalidConcentration();
+      }
     }
 
     /**
