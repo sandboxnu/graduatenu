@@ -141,6 +141,29 @@ export class MajorService {
     return true;
   }
 
+  isValidCatalogueYear(
+    majorName: string,
+    catalogYear: number,
+    concentrationName: string
+  ):boolean{
+
+    const majorsByCatalogue = this.findByMajorAndYear(majorName, catalogYear);
+
+    if(!majorsByCatalogue){
+      this.logger.debug(
+        {
+          message: "Invalid catalogue year for major",
+          majorName,
+          catalogYear,
+          concentrationName,
+        },
+        MajorService.formatMajorServiceCtx("isValidCatalogueYear")
+      )
+      return false;
+    }
+    return true;
+  }
+
   private static formatMajorServiceCtx(methodName: string) {
     return formatServiceCtx(MajorService.name, methodName);
   }

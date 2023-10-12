@@ -7,6 +7,7 @@ import { CreatePlanDto, UpdatePlanDto } from "@graduate/common";
 import { Plan } from "./entities/plan.entity";
 import { formatServiceCtx } from "../../src/utils";
 import { MajorService } from "../major/major.service";
+import { InvalidCatalogYear, InvalidConcentration, InvalidMajor } from "./plan.errors";
 
 @Injectable()
 export class PlanService {
@@ -140,8 +141,8 @@ export class PlanService {
      * TODO: Fix the DTO issue that populates undefined values for fields not
      * present. https://github.com/sandboxnu/graduatenu/issues/533
      */
-    const isMajorInfoUpdate =
-      newMajorName && newCatalogYear && newConcentrationName;
+    // It is necessary for this to be OR because we need to run an update if any of these are true. 
+    const isMajorInfoUpdate = newMajorName || newCatalogYear || newConcentrationName;
 
     /** Wipe Major => Remove existing major from the plan. */
     const isWipeMajorUpdate =
@@ -159,7 +160,6 @@ export class PlanService {
         { message: "Either update all major fields or only the schedule", id },
         this.formatPlanServiceCtx("update")
       );
-      return null;
     }
 
     // validate the major info if major is being updated
@@ -179,16 +179,36 @@ export class PlanService {
           },
           this.formatPlanServiceCtx("update")
         );
+        throw new InvalidMajor();
+      }
 
+
+      const isValidMajorCatalogueYear = this.majorService.isValidCatalogueYear(
+        newMajorName, 
+        newCatalogYear, 
+        newConcentrationName
+      );
+
+      if(!isValidMajorCatalogueYear){
+        this.logger.debug(
+          {
+            message: "Attempting to add plan with an invalid catalogue year",
+            newMajorName,
+            newCatalogYear,
+          },
+          this.formatPlanServiceCtx("update")
+        );
+
+        throw new InvalidCatalogYear();
         return null;
       }
 
       const isValidConcentrationForMajor =
-        this.majorService.isValidConcentrationForMajor(
-          newMajorName,
-          newCatalogYear,
-          newConcentrationName
-        );
+      this.majorService.isValidConcentrationForMajor(
+        newMajorName,
+        newCatalogYear,
+        newConcentrationName
+      );
 
       if (!isValidConcentrationForMajor) {
         this.logger.debug(
@@ -201,7 +221,7 @@ export class PlanService {
           this.formatPlanServiceCtx("update")
         );
 
-        return null;
+        throw new InvalidConcentration();
       }
     }
 
