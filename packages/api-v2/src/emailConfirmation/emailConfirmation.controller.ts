@@ -34,9 +34,8 @@ export class EmailConfirmationController {
     if (email instanceof Error) {
       throw new BadRequestException();
     }
-    const updateResult = await this.emailConfirmationService.confirmEmail(
-      email
-    );
+    const updateResult =
+      await this.emailConfirmationService.confirmEmail(email);
     if (updateResult instanceof EmailAlreadyConfirmed) {
       throw new BadRequestException("Email is already confirmed");
     }

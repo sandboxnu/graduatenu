@@ -30,11 +30,15 @@ import {
   ChangePasswordDto,
   wrongPasswordError,
 } from "@graduate/common";
-import { EmailAlreadyExists, WeakPassword, WrongPassword } from "./student.errors";
+import {
+  EmailAlreadyExists,
+  WeakPassword,
+  WrongPassword,
+} from "./student.errors";
 
 @Controller("students")
 export class StudentController {
-  constructor(private readonly studentService: StudentService) { }
+  constructor(private readonly studentService: StudentService) {}
 
   @UseGuards(JwtAuthGuard)
   @Get("me")
@@ -123,12 +127,15 @@ export class StudentController {
     @Req() req: AuthenticatedRequest,
     @Body() changePasswordDto: ChangePasswordDto
   ): Promise<void> {
-    const changePasswordResult = await this.studentService.changePassword(req.user.uuid, changePasswordDto);
+    const changePasswordResult = await this.studentService.changePassword(
+      req.user.uuid,
+      changePasswordDto
+    );
     if (changePasswordResult instanceof WrongPassword) {
       throw new BadRequestException(wrongPasswordError);
     }
     if (changePasswordResult instanceof WeakPassword) {
-      throw new BadRequestException(weakPasswordError)
+      throw new BadRequestException(weakPasswordError);
     }
   }
 

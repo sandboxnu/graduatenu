@@ -31,9 +31,6 @@ describe("StudentController (e2e)", () => {
 
   afterAll(async () => {
     await dropStudentTable(connection);
-  });
-
-  afterAll(async () => {
     await app.close();
     await connection.close();
   });

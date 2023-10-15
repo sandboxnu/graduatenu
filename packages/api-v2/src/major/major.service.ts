@@ -18,7 +18,6 @@ export class MajorService {
         { mesage: "Major year not found", catalogYear },
         MajorService.formatMajorServiceCtx("findByMajorAndYear")
       );
-      console.log("major year not found");
       return null;
     }
 
@@ -28,7 +27,6 @@ export class MajorService {
         { mesage: "Major within year not found", majorName, catalogYear },
         MajorService.formatMajorServiceCtx("findByMajorAndYear")
       );
-      console.log("major within year not found");
       return null;
     }
 

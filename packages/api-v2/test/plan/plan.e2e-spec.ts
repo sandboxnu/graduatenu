@@ -22,9 +22,7 @@ describe("PlanController (e2e)", () => {
 
   beforeAll(async () => {
     app = await initializeApp();
-  });
 
-  beforeAll(async () => {
     connection = app.get(Connection);
     // create student
     const res = await request(app.getHttpServer())
@@ -59,9 +57,6 @@ describe("PlanController (e2e)", () => {
 
   afterAll(async () => {
     await dropStudentTable(connection);
-  });
-
-  afterAll(async () => {
     await app.close();
     await connection.close();
   });
