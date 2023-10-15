@@ -16,7 +16,12 @@ import {
   UpdateStudentDto,
 } from "@graduate/common";
 import { Student } from "./entities/student.entity";
-import { EmailAlreadyExists, NewPasswordsDontMatch, WeakPassword, WrongPassword } from "./student.errors";
+import {
+  EmailAlreadyExists,
+  NewPasswordsDontMatch,
+  WeakPassword,
+  WrongPassword,
+} from "./student.errors";
 
 @Injectable()
 export class StudentService {
@@ -25,7 +30,7 @@ export class StudentService {
   constructor(
     @InjectRepository(Student)
     private studentRepository: Repository<Student>
-  ) { }
+  ) {}
 
   async create(
     createStudentDto: SignUpStudentDto
@@ -161,8 +166,12 @@ export class StudentService {
     return formatServiceCtx(StudentService.name, methodName);
   }
 
-  async changePassword(uuid: any, changePasswordDto: ChangePasswordDto): Promise<void | WeakPassword | WrongPassword> {
-    const { currentPassword, newPassword, newPasswordConfirm } = changePasswordDto;
+  async changePassword(
+    uuid: any,
+    changePasswordDto: ChangePasswordDto
+  ): Promise<void | WeakPassword | WrongPassword> {
+    const { currentPassword, newPassword, newPasswordConfirm } =
+      changePasswordDto;
     const student = await this.findByUuid(uuid);
 
     if (newPassword !== newPasswordConfirm) {
@@ -170,40 +179,50 @@ export class StudentService {
     }
 
     const { password: trueHashedPassword } = student;
-    const isValidPassword = await bcrypt.compare(currentPassword, trueHashedPassword);
+    const isValidPassword = await bcrypt.compare(
+      currentPassword,
+      trueHashedPassword
+    );
 
     if (!isValidPassword) {
-      this.logger.debug(
-        { message: "Invalid password", oldPassword: currentPassword },
-      );
+      this.logger.debug({
+        message: "Invalid password",
+        oldPassword: currentPassword,
+      });
       return new WrongPassword();
     }
 
     if (!isStrongPassword(newPassword)) {
-      this.logger.debug(
-        { message: "weak password", oldPassword: currentPassword },
-      );
+      this.logger.debug({
+        message: "weak password",
+        oldPassword: currentPassword,
+      });
       return new WeakPassword();
     }
-    await this.studentRepository.save(Object.assign(student, { password: newPassword }));
+    await this.studentRepository.save(
+      Object.assign(student, { password: newPassword })
+    );
   }
 
-  async resetPassword(email, resetPasswordData: ResetPasswordDto): Promise<Student | Error> {
+  async resetPassword(
+    email,
+    resetPasswordData: ResetPasswordDto
+  ): Promise<Student | Error> {
     const { password, passwordConfirm } = resetPasswordData;
 
-    const student = await this.findByEmail(email)
+    const student = await this.findByEmail(email);
 
     if (password !== passwordConfirm) {
       return new NewPasswordsDontMatch();
     }
 
     if (!isStrongPassword(password)) {
-      this.logger.debug(
-        { message: "weak password", password },
-      );
+      this.logger.debug({ message: "weak password", password });
       return new WeakPassword();
     }
 
-    return await this.studentRepository.save(Object.assign(student, { password }))
+    return await this.studentRepository.save(
+      Object.assign(student, { password })
+    );
   }
 }

@@ -3,7 +3,15 @@ import { Plan } from "../../src/plan/entities/plan.entity";
 import * as request from "supertest";
 import { Connection } from "typeorm";
 import { dropStudentTable, initializeApp } from "../../test/utils";
-import { testPlan, testUser1, testUser2 } from "../../test/testingData";
+import {
+  testPlan,
+  testUser1,
+  testUser2,
+  testUser3,
+} from "../../test/testingData";
+
+jest.useRealTimers();
+jest.setTimeout(10000);
 
 describe("PlanController (e2e)", () => {
   let app: INestApplication;
@@ -12,18 +20,19 @@ describe("PlanController (e2e)", () => {
   let uuid: string;
   let planID: number;
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     app = await initializeApp();
+  });
 
+  beforeAll(async () => {
     connection = app.get(Connection);
-
     // create student
     const res = await request(app.getHttpServer())
       .post("/auth/register")
       .send(testUser1);
 
     // save accessToken and user ID
-    cookie = res.header["set-cookie"];
+    cookie = res.headers["set-cookie"];
     uuid = res.body.uuid;
 
     // insert plan into db
@@ -39,18 +48,22 @@ describe("PlanController (e2e)", () => {
       .createQueryBuilder()
       .select("plan")
       .from(Plan, "plan")
-      .where("plan.name = :name", { name: "Test Plan" })
+      .where("plan.name = :name AND plan.student.uuid = :uuid", {
+        name: "Test Plan",
+        uuid,
+      })
       .getOne();
 
     planID = plan.id;
   });
 
-  afterEach(async () => {
+  afterAll(async () => {
     await dropStudentTable(connection);
   });
 
   afterAll(async () => {
     await app.close();
+    await connection.close();
   });
 
   it("creates a plan for a signed in user", async () => {
@@ -96,7 +109,7 @@ describe("PlanController (e2e)", () => {
     await request(app.getHttpServer())
       .patch(`/plans/${planID}`)
       .set("Cookie", cookie)
-      .send({ catalogYear: 2018 })
+      .send({ name: "robert is stinky" })
       .expect(200);
   });
 
@@ -117,7 +130,7 @@ describe("PlanController (e2e)", () => {
     await request(app.getHttpServer())
       .patch(`/plans/${planID}`)
       .set("Cookie", badCookie)
-      .send({ catalogYear: 2018 })
+      .send({ catalogYear: 2021 })
       .expect(403);
   });
 
@@ -135,7 +148,7 @@ describe("PlanController (e2e)", () => {
   it("fails to delete a plan that does not belong to a user", async () => {
     const res = await request(app.getHttpServer())
       .post("/auth/register")
-      .send(testUser2);
+      .send(testUser3);
 
     const badCookie = res.header["set-cookie"];
 

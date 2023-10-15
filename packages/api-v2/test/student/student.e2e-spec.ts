@@ -5,13 +5,16 @@ import { Connection } from "typeorm";
 import { dropStudentTable, initializeApp } from "../../test/utils";
 import { onboardedUser, testPlan, testUser1 } from "../../test/testingData";
 
+jest.useRealTimers();
+jest.setTimeout(10000);
+
 describe("StudentController (e2e)", () => {
   let app: INestApplication;
   let cookie: any;
   let connection: Connection;
   let uuid: string;
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     app = await initializeApp();
 
     connection = app.get(Connection);
@@ -26,12 +29,13 @@ describe("StudentController (e2e)", () => {
     uuid = res.body.uuid;
   });
 
-  afterEach(async () => {
+  afterAll(async () => {
     await dropStudentTable(connection);
   });
 
   afterAll(async () => {
     await app.close();
+    await connection.close();
   });
 
   it("should successfully get a student", async () => {

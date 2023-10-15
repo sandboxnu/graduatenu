@@ -66,9 +66,11 @@ export class AuthController {
       sameSite: "strict",
       secure: isSecure,
     });
-    await this.emailConfirmationService.sendVerificationLink(
-      createStudentDto.email
-    );
+    if (process.env.NODE_ENV !== "testing") {
+      await this.emailConfirmationService.sendVerificationLink(
+        createStudentDto.email
+      );
+    }
     return student;
   }
 
