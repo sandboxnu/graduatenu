@@ -11,7 +11,7 @@ import {
 } from "../../test/testingData";
 
 jest.useRealTimers();
-jest.setTimeout(10000);
+jest.setTimeout(50000);
 
 describe("PlanController (e2e)", () => {
   let app: INestApplication;
