@@ -37,9 +37,9 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: "16"
+      - run: yarn install --immutable
       - name: Start up test db
         run: yarn test:db:up
-      - run: yarn install --immutable
       - name: Run E2E tests
         run: yarn test:e2e
       - name: Tear down test db
