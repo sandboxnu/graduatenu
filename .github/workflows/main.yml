@@ -30,6 +30,17 @@ jobs:
   run-api-e2e-tests:
     runs-on: ubuntu-latest
     name: Backend E2E Tests
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_HOST: localhost
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: graduatenu
+          POSTGRES_DB: test
+        ports:
+          - "5433:5432"
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -38,12 +49,11 @@ jobs:
         with:
           node-version: "16"
       - run: yarn install --immutable
-      - name: Start up test db
-        run: yarn test:db:up
       - name: Run E2E tests
         run: yarn test:e2e
-      - name: Tear down test db
-        run: yarn test:db:down
+        env:
+          POSTGRES_HOST: localhost
+          POSTGRES_PORT: 5433
   build-frontend-image:
     runs-on: ubuntu-latest
     steps:
