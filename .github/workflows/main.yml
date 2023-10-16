@@ -27,6 +27,23 @@ jobs:
       - run: yarn install --immutable
       - name: Run Jest Tests
         run: yarn packages/api-v2 test
+  run-api-e2e-tests:
+    runs-on: ubuntu-latest
+    name: Backend E2E Tests
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+      - name: Start up test db
+        run: yarn test:db:up
+      - run: yarn install --immutable
+      - name: Run E2E tests
+        run: yarn test:e2e
+      - name: Tear down test db
+        run: yarn test:db:down
   build-frontend-image:
     runs-on: ubuntu-latest
     steps:
