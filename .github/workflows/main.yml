@@ -35,8 +35,8 @@ jobs:
         image: postgres
         env:
           POSTGRES_HOST: localhost
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: graduatenu
+          POSTGRES_USER: test
+          POSTGRES_PASSWORD: test
           POSTGRES_DB: test
         ports:
           - "5432:5432"
@@ -54,9 +54,6 @@ jobs:
         env:
           POSTGRES_HOST: localhost
           POSTGRES_PORT: 5432
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: graduatenu
-          POSTGRES_DB: test
   build-frontend-image:
     runs-on: ubuntu-latest
     steps:
