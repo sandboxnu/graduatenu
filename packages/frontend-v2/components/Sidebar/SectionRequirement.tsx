@@ -50,8 +50,8 @@ const SectionRequirement: React.FC<SidebarRequirementProps> = ({
   const renderXOM = (requirement: IXofManyCourse) => {
     return (
       <div>
-        <Text fontSize="sm">
-          Complete {requirement.numCreditsMin} credits from the following
+        <Text fontSize="sm" as="i">
+          Complete {requirement.numCreditsMin} credits from the following:
         </Text>
         {requirement.courses.map((course, index) => (
           <SectionRequirement
@@ -68,7 +68,9 @@ const SectionRequirement: React.FC<SidebarRequirementProps> = ({
   const renderAND = (requirement: IAndCourse2) => {
     return (
       <div>
-        <Text fontSize="sm">Complete all of the following</Text>
+        <Text fontSize="sm" as="i">
+          Complete all of the following:
+        </Text>
         {requirement.courses.map((course, index) => (
           <SectionRequirement
             requirement={course}
@@ -84,7 +86,9 @@ const SectionRequirement: React.FC<SidebarRequirementProps> = ({
   const renderOR = (requirement: IOrCourse2) => {
     return (
       <div>
-        <Text fontSize="sm">Complete one of the following</Text>
+        <Text fontSize="sm" as="i">
+          Complete one of the following:
+        </Text>
         {requirement.courses.map((course, index) => (
           <SectionRequirement
             requirement={course}
@@ -99,7 +103,7 @@ const SectionRequirement: React.FC<SidebarRequirementProps> = ({
 
   const renderRange = (requirement: ICourseRange2) => {
     return (
-      <Text fontSize="sm">
+      <Text fontSize="sm" as="i">
         Complete any course in range {requirement.subject}
         {requirement.idRangeStart} to {requirement.subject}
         {requirement.idRangeEnd}{" "}

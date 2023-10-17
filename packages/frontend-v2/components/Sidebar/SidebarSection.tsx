@@ -173,8 +173,8 @@ const SidebarSection: React.FC<SidebarSectionProps> = ({
         {opened && !loading && (
           <>
             {section.minRequirementCount < section.requirements.length && (
-              <Text fontSize="sm">
-                Complete {section.minRequirementCount} of the following
+              <Text fontSize="sm" as="i">
+                Complete {section.minRequirementCount} of the following:
               </Text>
             )}
             {section.requirements.map((requirement, index) => (
