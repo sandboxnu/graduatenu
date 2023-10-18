@@ -144,15 +144,11 @@ const YearHeader: React.FC<YearHeaderProps> = ({
   removeYearFromCurrPlan,
   displayReqErrors,
 }) => {
-  const backgroundColor = isExpanded
-    ? "primary.blue.dark"
-    : "primary.blue.light";
-
   return (
     <Flex
       alignItems="center"
       justifyContent="space-between"
-      backgroundColor={backgroundColor + ".main"}
+      backgroundColor="primary.blue.light.main"
       _hover={{
         backgroundColor: "primary.blue.light.600",
       }}
@@ -199,7 +195,7 @@ const YearHeader: React.FC<YearHeaderProps> = ({
             marginLeft="auto"
             marginRight="sm"
             _hover={{ bg: "white", color: "primary.red.main" }}
-            _active={{ bg: `${backgroundColor}.900` }}
+            _active={{ bg: "primary.blue.light.900" }}
             onClick={(e) => {
               // important to prevent the click from propogating upwards and triggering the toggle
               e.stopPropagation();
