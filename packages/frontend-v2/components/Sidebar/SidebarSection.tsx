@@ -68,7 +68,7 @@ const SidebarSection: React.FC<SidebarSectionProps> = ({
         backgroundColor="neutral.gray0"
         transition="background-color 0.25s ease"
         _hover={{
-          backgroundColor: "neutral.900",
+          backgroundColor: "neutral.gray",
         }}
         _active={{
           backgroundColor: "neutral.200",
