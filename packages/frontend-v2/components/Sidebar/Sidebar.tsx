@@ -325,7 +325,12 @@ const SidebarContainer: React.FC<PropsWithChildren<SidebarContainerProps>> = ({
   children,
 }) => {
   return (
-    <Box pt="xl" backgroundColor="neutral.main">
+    <Box
+      pt="xl"
+      backgroundColor="neutral.gray0"
+      borderRight="1px"
+      borderRightColor="neutral.900"
+    >
       <Box px="md" pb="md">
         <Box pb="sm">
           <Flex alignItems="center" columnGap="2xs">

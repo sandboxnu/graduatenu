@@ -65,7 +65,7 @@ const SidebarSection: React.FC<SidebarSectionProps> = ({
         py="md"
         px="md"
         margin="0"
-        backgroundColor="neutral.main"
+        backgroundColor="neutral.gray0"
         transition="background-color 0.25s ease"
         _hover={{
           backgroundColor: "neutral.900",
@@ -160,7 +160,9 @@ const SidebarSection: React.FC<SidebarSectionProps> = ({
       </Flex>
       <Box
         style={{ display: opened ? "" : "none" }}
-        backgroundColor="neutral.900"
+        backgroundColor="neutral.gray"
+        borderTopWidth=".5px"
+        borderTopColor="neutral.900"
         padding="10px 20px 15px 10px"
         cursor="default"
       >
