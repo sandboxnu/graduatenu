@@ -150,7 +150,10 @@ const YearHeader: React.FC<YearHeaderProps> = ({
       justifyContent="space-between"
       backgroundColor="primary.blue.light.main"
       _hover={{
-        backgroundColor: "primary.blue.light.600",
+        backgroundColor: "primary.blue.light.400",
+      }}
+      _active={{
+        bg: "primary.blue.light.600",
       }}
       transition="background-color 0.15s ease"
       paddingTop="sm"
