@@ -180,8 +180,8 @@ const YearHeader: React.FC<YearHeaderProps> = ({
               variant="ghost"
               color="primary.red.main"
               icon={<WarningIcon />}
-              _hover={{ bg: 'none', cursor: 'auto' }}
-              _active={{ bg: `${backgroundColor}.900` }}
+              _hover={{ bg: "none", cursor: "auto" }}
+              _active={{ bg: "none" }}
               onClick={(e) => {
                 if (isExpanded) {
                   e.stopPropagation();
