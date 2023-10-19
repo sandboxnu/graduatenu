@@ -143,17 +143,19 @@ export const AccountOverview: React.FC<AccountOverviewProps> = ({
                   borderWidth="2px"
                   borderRadius="md"
                 />
-                <Flex alignItems="center" mt="xs" columnGap="xs">
-                  <GraduateToolTip
-                    placement="top"
-                    label="Your email is not verified yet. If you do not verify your
+                {!student.isEmailConfirmed && (
+                  <Flex alignItems="center" mt="xs" columnGap="xs">
+                    <GraduateToolTip
+                      placement="top"
+                      label="Your email is not verified yet. If you do not verify your
               email, you cannot recover your account if you forget your
               password."
-                  >
-                    <WarningTwoIcon color="states.warning.main" />
-                  </GraduateToolTip>
-                  <ResendEmailVerificationLink label="Send Verification Email" />
-                </Flex>
+                    >
+                      <WarningTwoIcon color="states.warning.main" />
+                    </GraduateToolTip>
+                    <ResendEmailVerificationLink label="Send Verification Email" />
+                  </Flex>
+                )}
               </FormControl>
             </Flex>
           </ModalBody>
