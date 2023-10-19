@@ -71,7 +71,7 @@ const SidebarSection: React.FC<SidebarSectionProps> = ({
           backgroundColor: "neutral.gray",
         }}
         _active={{
-          backgroundColor: "neutral.200",
+          backgroundColor: "neutral.gray2",
         }}
         display="flex"
         position="sticky"

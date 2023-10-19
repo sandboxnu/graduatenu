@@ -178,6 +178,9 @@ const TransferCoursesHeader: React.FC<TransferCoursesHeaderProps> = ({
       _hover={{
         backgroundColor: "neutral.gray",
       }}
+      _active={{
+        backgroundColor: "neutral.gray2",
+      }}
       transition="background-color 0.15s ease"
       paddingTop="xs"
       paddingBottom="xs"
