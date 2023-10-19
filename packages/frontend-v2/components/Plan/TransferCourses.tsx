@@ -71,7 +71,7 @@ export const TransferCourses: React.FC<TransferCoursesToggleProps> = ({
   };
 
   return (
-    <Flex direction="column" backgroundColor={"neutral.main"}>
+    <Flex direction="column" backgroundColor={"#e7ebf1"}>
       <TransferCoursesHeader
         isExpanded={isExpanded}
         toggleExpanded={toggleExpanded}
@@ -174,8 +174,9 @@ const TransferCoursesHeader: React.FC<TransferCoursesHeaderProps> = ({
     <Flex
       alignItems="center"
       justifyContent="space-between"
+      backgroundColor="neutral.gray0"
       _hover={{
-        backgroundColor: "neutral.900",
+        backgroundColor: "neutral.gray",
       }}
       transition="background-color 0.15s ease"
       paddingTop="xs"
