@@ -44,6 +44,7 @@ export const getCoReqWarningsSem = (
   return coReqErrors;
 };
 
+
 export const getPreReqWarnings = (
   schedule: Schedule2<unknown>,
   coursesTransfered: ScheduleCourse2<null>[] | undefined
