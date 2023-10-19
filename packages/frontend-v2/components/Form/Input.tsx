@@ -30,7 +30,7 @@ export const GraduateInput = forwardRef<HTMLInputElement, InputProps>(
       <Input
         {...rest}
         ref={ref}
-        size="lg"
+        size="md"
         variant="outline"
         borderColor="neutral.main"
         borderWidth="2px"
