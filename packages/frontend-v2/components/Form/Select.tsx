@@ -80,7 +80,7 @@ export const PlanSelect: React.FC<PlanSelectProps> = ({
         color="primary.blue.dark.main"
         size="md"
         fontWeight="medium"
-        mb="2xs"
+        mb="1px"
       >
         {label}
       </FormLabel>

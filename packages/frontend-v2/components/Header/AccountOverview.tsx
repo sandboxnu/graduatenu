@@ -130,7 +130,7 @@ export const AccountOverview: React.FC<AccountOverviewProps> = ({
                 />
               </Flex>
               <FormControl>
-                <FormLabel>
+                <FormLabel mb="1px">
                   <Text>Email</Text>
                 </FormLabel>
                 <Input
