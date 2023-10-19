@@ -8,12 +8,13 @@ import {
   INEUReqError,
   PreReqWarnings,
   Schedule2,
+  ScheduleCourse2,
   ScheduleTerm2,
   TermError,
 } from "@graduate/common";
 
 export const getCoReqWarnings = (
-  schedule: Schedule2<unknown>
+  schedule: Schedule2<unknown>,
 ): CoReqWarnings => {
   const errors: CoReqWarnings = {
     type: "coreq",
@@ -29,7 +30,7 @@ export const getCoReqWarnings = (
 };
 
 export const getCoReqWarningsSem = (
-  term: ScheduleTerm2<unknown>
+  term: ScheduleTerm2<unknown>,
 ): TermError => {
   const seen: Set<string> = new Set();
   const coReqErrors: TermError = {};
@@ -44,9 +45,15 @@ export const getCoReqWarningsSem = (
 };
 
 export const getPreReqWarnings = (
-  schedule: Schedule2<unknown>
+  schedule: Schedule2<unknown>,
+  coursesTransfered: ScheduleCourse2<null>[] | undefined
 ): PreReqWarnings => {
   const seen: Set<string> = new Set();
+  if (coursesTransfered != undefined) {
+    for (const course of coursesTransfered) {
+      seen.add(courseToString(course));
+    }
+  }
   const preReqErrors: PreReqWarnings = {
     type: "prereq",
     years: schedule.years.map((year) => ({
