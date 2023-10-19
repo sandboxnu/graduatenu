@@ -114,14 +114,18 @@ const SidebarSection: React.FC<SidebarSectionProps> = ({
             */}
             <CheckIcon
               position="absolute"
-              opacity={validationStatus === SidebarValidationStatus.Complete ? 1 : 0}
+              opacity={
+                validationStatus === SidebarValidationStatus.Complete ? 1 : 0
+              }
               transition="opacity 0.25s ease"
               transitionDelay="0.1s"
               boxSize="9px"
             />
             <SmallCloseIcon
               position="absolute"
-              opacity={validationStatus === SidebarValidationStatus.Error ? 1 : 0}
+              opacity={
+                validationStatus === SidebarValidationStatus.Error ? 1 : 0
+              }
               transition="opacity 0.25s ease"
               transitionDelay="0.1s"
               boxSize="13px"
@@ -130,7 +134,9 @@ const SidebarSection: React.FC<SidebarSectionProps> = ({
               size="xs"
               color="grey"
               position="absolute"
-              opacity={validationStatus === SidebarValidationStatus.Loading ? 1 : 0}
+              opacity={
+                validationStatus === SidebarValidationStatus.Loading ? 1 : 0
+              }
               transition="opacity 0.25s ease"
               transitionDelay="0.1s"
             />
@@ -167,7 +173,7 @@ const SidebarSection: React.FC<SidebarSectionProps> = ({
         {opened && !loading && (
           <>
             {section.minRequirementCount < section.requirements.length && (
-              <Text>
+              <Text fontSize="sm">
                 Complete {section.minRequirementCount} of the following
               </Text>
             )}

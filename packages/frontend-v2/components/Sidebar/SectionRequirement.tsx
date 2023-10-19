@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 import {
   IAndCourse2,
   ICourseRange2,
@@ -50,7 +50,9 @@ const SectionRequirement: React.FC<SidebarRequirementProps> = ({
   const renderXOM = (requirement: IXofManyCourse) => {
     return (
       <div>
-        <p>Complete {requirement.numCreditsMin} credits from the following</p>
+        <Text fontSize="sm">
+          Complete {requirement.numCreditsMin} credits from the following
+        </Text>
         {requirement.courses.map((course, index) => (
           <SectionRequirement
             requirement={course}
@@ -66,7 +68,7 @@ const SectionRequirement: React.FC<SidebarRequirementProps> = ({
   const renderAND = (requirement: IAndCourse2) => {
     return (
       <div>
-        <p>Complete all of the following</p>
+        <Text fontSize="sm">Complete all of the following</Text>
         {requirement.courses.map((course, index) => (
           <SectionRequirement
             requirement={course}
@@ -82,7 +84,7 @@ const SectionRequirement: React.FC<SidebarRequirementProps> = ({
   const renderOR = (requirement: IOrCourse2) => {
     return (
       <div>
-        <p>Complete one of the following</p>
+        <Text fontSize="sm">Complete one of the following</Text>
         {requirement.courses.map((course, index) => (
           <SectionRequirement
             requirement={course}
@@ -97,7 +99,7 @@ const SectionRequirement: React.FC<SidebarRequirementProps> = ({
 
   const renderRange = (requirement: ICourseRange2) => {
     return (
-      <p>
+      <Text fontSize="sm">
         Complete any course in range {requirement.subject}
         {requirement.idRangeStart} to {requirement.subject}
         {requirement.idRangeEnd}{" "}
@@ -110,7 +112,7 @@ const SectionRequirement: React.FC<SidebarRequirementProps> = ({
               .slice(0, -1)}
           </>
         )}
-      </p>
+      </Text>
     );
   };
 
