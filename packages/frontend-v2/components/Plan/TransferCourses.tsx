@@ -133,11 +133,7 @@ const TransferCoursesBody: React.FC<TransferCoursesBodyProps> = ({
           removeCourse={() => removeTransferCourse(course)}
         />
       ))}
-      <AddCourseButton
-        onOpen={onOpen}
-        borderColor="#C1CAD9"
-        borderWidth="1px"
-      />
+      <AddCourseButton onOpen={onOpen} />
       <AddCourseModal
         isOpen={isOpen}
         closeModalDisplay={onClose}
