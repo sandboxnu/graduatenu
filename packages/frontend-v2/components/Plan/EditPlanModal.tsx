@@ -178,6 +178,13 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                   })}
                 />
                 <Flex alignItems="center">
+                  <Checkbox
+                    mb="0"
+                    mr="xs"
+                    borderColor="primary.blue.dark.main"
+                    isChecked={isNoMajorSelected}
+                    onChange={() => setIsNoMajorSelected(!isNoMajorSelected)}
+                  />
                   <Text
                     color="primary.blue.dark.main"
                     size="md"
@@ -187,13 +194,6 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                   >
                     No Major
                   </Text>
-                  <Checkbox
-                    mb="0"
-                    mr="xs"
-                    borderColor="primary.blue.dark.main"
-                    isChecked={isNoMajorSelected}
-                    onChange={() => setIsNoMajorSelected(!isNoMajorSelected)}
-                  />
                   <HelperToolTip label={noMajorHelperLabel} />
                 </Flex>
                 {!isNoMajorSelected && (
