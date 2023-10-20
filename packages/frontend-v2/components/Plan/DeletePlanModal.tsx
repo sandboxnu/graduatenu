@@ -54,6 +54,7 @@ export const DeletePlanModal: React.FC<DeletePlanModalProps> = ({
           icon={<DeleteIcon />}
           aria-label="Delete plan"
           variant="outline"
+          border="1px"
           borderColor="primary.red.main"
           colorScheme="primary.red"
           color="primary.red.main"
