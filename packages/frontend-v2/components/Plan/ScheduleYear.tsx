@@ -144,13 +144,16 @@ const YearHeader: React.FC<YearHeaderProps> = ({
   removeYearFromCurrPlan,
   displayReqErrors,
 }) => {
+  const backgroundColor = isExpanded
+    ? "primary.blue.dark"
+    : "primary.blue.light";
   return (
     <Flex
       alignItems="center"
       justifyContent="space-between"
-      backgroundColor="primary.blue.light.main"
+      backgroundColor={backgroundColor + ".main"}
       _hover={{
-        backgroundColor: "primary.blue.light.400",
+        backgroundColor: "primary.blue.light.600",
       }}
       _active={{
         bg: "primary.blue.light.600",
