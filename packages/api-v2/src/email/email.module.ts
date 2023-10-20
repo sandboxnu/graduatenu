@@ -13,7 +13,7 @@ import { EmailConfirmationController } from "src/emailConfirmation/emailConfirma
     JwtModule.register({
       secret: process.env.JWT_SECRET_KEY,
       signOptions: {
-        expiresIn: process.env.JWT_EXPIRE_TIME,
+        expiresIn: process.env.JWT_EXPIRE_TIME_EMAIL,
       },
     }),
   ],
