@@ -156,7 +156,7 @@ const YearHeader: React.FC<YearHeaderProps> = ({
         backgroundColor: "primary.blue.light.600",
       }}
       _active={{
-        bg: "primary.blue.light.600",
+        bg: "primary.blue.dark.700",
       }}
       transition="background-color 0.15s ease"
       paddingTop="sm"
