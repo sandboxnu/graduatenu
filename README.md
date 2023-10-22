@@ -12,7 +12,7 @@ GraduateNU aims to empower Northeastern students to customize their plan of stud
 
 4. If you haven't run migrations in a while or this is a fresh repo, then run the migrations for the the api using `yarn packages/api dev:migration:run`. See packages/api/README for more info.
 
-5. Then run the new version of the application by running `yarn dev:v2` at the root of the project. This starts up a NestJS server + a NextJS frontend + a Proxy. The proxy listens on port [3002](http://localhost:3002/), forwards /api requests to the NestJS server running on port 3001, and all other requests to the frontend running on port 3000.
+5. Then run the new version of the application by running `yarn dev` at the root of the project. This starts up a NestJS server + a NextJS frontend + a Proxy. The proxy listens on port [3002](http://localhost:3002/), forwards /api requests to the NestJS server running on port 3001, and all other requests to the frontend running on port 3000.
 
 6. Visit [http://localhost:3002](http://localhost:3002/) to view the app.
 

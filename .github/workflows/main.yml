@@ -26,7 +26,7 @@ jobs:
           node-version: "16"
       - run: yarn install --immutable
       - name: Run Jest Tests
-        run: yarn packages/apitest
+        run: yarn packages/api test
   build-frontend-image:
     runs-on: ubuntu-latest
     steps:
