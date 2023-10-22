@@ -8,6 +8,7 @@ import {
   INEUReqError,
   PreReqWarnings,
   Schedule2,
+  ScheduleCourse2,
   ScheduleTerm2,
   TermError,
 } from "@graduate/common";
@@ -44,9 +45,15 @@ export const getCoReqWarningsSem = (
 };
 
 export const getPreReqWarnings = (
-  schedule: Schedule2<unknown>
+  schedule: Schedule2<unknown>,
+  coursesTransfered: ScheduleCourse2<null>[] | undefined
 ): PreReqWarnings => {
   const seen: Set<string> = new Set();
+  if (coursesTransfered != undefined) {
+    for (const course of coursesTransfered) {
+      seen.add(courseToString(course));
+    }
+  }
   const preReqErrors: PreReqWarnings = {
     type: "prereq",
     years: schedule.years.map((year) => ({
@@ -55,8 +62,8 @@ export const getPreReqWarnings = (
       spring: getPreReqWarningSem(year.spring, seen),
       summer1: getPreReqWarningSem(year.summer1, seen),
       summer2: getPreReqWarningSem(year.summer2, seen),
-    }))
-  }
+    })),
+  };
   return preReqErrors;
 };
 
@@ -128,8 +135,6 @@ const isOrCourse = (course: INEUReq): course is INEUOrReq => {
   return (course as INEUOrReq).type === "or";
 };
 
-const isError = (
-  error: INEUReqError | undefined
-): error is INEUReqError => {
+const isError = (error: INEUReqError | undefined): error is INEUReqError => {
   return !!error;
 };
