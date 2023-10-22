@@ -44,8 +44,6 @@ export const AccountOverview: React.FC<AccountOverviewProps> = ({
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-    watch,
-    trigger,
     reset,
   } = useForm<UpdateName>({
     mode: "onChange",
