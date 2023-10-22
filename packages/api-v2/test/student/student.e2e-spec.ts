@@ -5,9 +5,6 @@ import { Connection } from "typeorm";
 import { dropStudentTable, initializeApp } from "../../test/utils";
 import { onboardedUser, testPlan, testUser1 } from "../../test/testingData";
 
-jest.useRealTimers();
-jest.setTimeout(50000);
-
 describe("StudentController (e2e)", () => {
   let app: INestApplication;
   let cookie: any;

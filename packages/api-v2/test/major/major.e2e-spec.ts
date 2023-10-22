@@ -2,9 +2,6 @@ import { INestApplication } from "@nestjs/common";
 import * as request from "supertest";
 import { initializeApp } from "../../test/utils";
 
-jest.useRealTimers();
-jest.setTimeout(50000);
-
 describe("MajorController (e2e)", () => {
   let app: INestApplication;
 

@@ -5,9 +5,6 @@ import { Connection } from "typeorm";
 import { dropStudentTable, initializeApp } from "../../test/utils";
 import { testUser1 } from "../../test/testingData";
 
-jest.useRealTimers();
-jest.setTimeout(50000);
-
 describe("AuthController (e2e)", () => {
   let app: INestApplication;
   let connection: Connection;
