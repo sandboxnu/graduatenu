@@ -15,21 +15,21 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <>
-      <Head>
-        <title>GraduateNU</title>
-        <meta
-          name="description"
-          content="A degree scheduling service for Northeastern Students."
-        />
-        <link rel="icon" href="/favicon.ico" />
-        <link rel="icon" href="/favicon.svg" type="image/svg+xml"></link>
-      </Head>
-      <ErrorBoundary>
-        <ChakraProvider theme={theme}>
-          {disableApp ? <DisabledApp /> : <Component {...pageProps} />}
-        </ChakraProvider>
+      <ErrorBoundary fallback={ErrorPage}>
+        <Head>
+          <title>GraduateNU</title>
+          <meta
+            name="description"
+            content="A degree scheduling service for Northeastern Students."
+          />
+          <link rel="icon" href="/favicon.ico" />
+          <link rel="icon" href="/favicon.svg" type="image/svg+xml"></link>
+        </Head>
+          <ChakraProvider theme={theme}>
+            {disableApp ? <DisabledApp /> : <Component {...pageProps} />}
+          </ChakraProvider>
+        <ToastContainer position="bottom-right" />
       </ErrorBoundary>
-      <ToastContainer position="bottom-right" />
     </>
   );
 }
@@ -67,5 +67,13 @@ const DisabledApp: React.FC = () => {
     </Flex>
   );
 };
+
+const ErrorPage: React.FC = () => {
+  return (
+   <Text size="xl" textAlign="center">
+    THIS PAGE DOES NOT EXIST
+   </Text>
+  );
+}
 
 export default MyApp;
