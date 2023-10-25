@@ -35,7 +35,7 @@ export const AddCourseButton: React.FC<AddCourseButtonProps & ButtonProps> = ({
       color="primary.blue.light.main"
       {...buttonProps}
     >
-      Add Course
+      Add Courses
     </Button>
   );
 };
