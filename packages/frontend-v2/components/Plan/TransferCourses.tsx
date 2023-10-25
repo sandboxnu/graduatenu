@@ -71,7 +71,7 @@ export const TransferCourses: React.FC<TransferCoursesToggleProps> = ({
   };
 
   return (
-    <Flex direction="column" backgroundColor={"#e7ebf1"}>
+    <Flex direction="column" backgroundColor={"neutral.gray"}>
       <TransferCoursesHeader
         isExpanded={isExpanded}
         toggleExpanded={toggleExpanded}
