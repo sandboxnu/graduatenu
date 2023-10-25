@@ -17,7 +17,7 @@ export const AddCourseButton: React.FC<AddCourseButtonProps & ButtonProps> = ({
   const activeStyle = {
     backgroundColor: "neutral.900",
     borderColor: "primary.blue.dark.300",
-    transform: "scale(0.96)"
+    transform: "scale(0.96)",
   };
 
   return (
@@ -34,7 +34,7 @@ export const AddCourseButton: React.FC<AddCourseButtonProps & ButtonProps> = ({
       color="primary.blue.light.main"
       {...buttonProps}
     >
-      Add Course
+      Add Courses
     </Button>
   );
 };
