@@ -11,7 +11,7 @@ describe("StudentController (e2e)", () => {
   let connection: Connection;
   let uuid: string;
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     app = await initializeApp();
 
     connection = app.get(Connection);
@@ -26,12 +26,10 @@ describe("StudentController (e2e)", () => {
     uuid = res.body.uuid;
   });
 
-  afterEach(async () => {
-    await dropStudentTable(connection);
-  });
-
   afterAll(async () => {
+    await dropStudentTable(connection);
     await app.close();
+    await connection.close();
   });
 
   it("should successfully get a student", async () => {

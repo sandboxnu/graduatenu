@@ -1,11 +1,19 @@
 export const testUser1 = {
   email: "test-1@gmail.com",
-  password: "1234567890",
+  password: "1234567890a",
+  passwordConfirm: "1234567890a",
 };
 
 export const testUser2 = {
   email: "test-2@gmail.com",
-  password: "1234567890",
+  password: "1234567890a",
+  passwordConfirm: "1234567890a",
+};
+
+export const testUser3 = {
+  email: "test-3@gmail.com",
+  password: "1234567890a",
+  passwordConfirm: "1234567890a",
 };
 
 export const onboardedUser = {
@@ -25,11 +33,14 @@ export const onboardedUser = {
 export const testPlan = {
   name: "Test Plan",
   schedule: {
-    years: [2019, 2020, 2021, 2022],
-    yearMap: {},
+    years: [
+      {
+        year: 2022,
+      },
+    ],
   },
-  major: "Computer Science",
+  major: "Computer Science, BSCS",
   coopCycle: "4 year 2 co-ops",
   concentration: "Artificial Intelligence",
-  catalogYear: 2019,
+  catalogYear: 2022,
 };

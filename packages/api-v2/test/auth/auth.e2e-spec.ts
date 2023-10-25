@@ -9,7 +9,7 @@ describe("AuthController (e2e)", () => {
   let app: INestApplication;
   let connection: Connection;
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     app = await initializeApp();
     connection = app.get(Connection);
 
@@ -30,7 +30,8 @@ describe("AuthController (e2e)", () => {
       .post("/auth/register")
       .send({
         email: "test-register@gmail.com",
-        password: "1234567890",
+        password: "1234567890a",
+        passwordConfirm: "1234567890a",
       })
       .expect(201);
 
@@ -53,10 +54,20 @@ describe("AuthController (e2e)", () => {
     await request(app.getHttpServer())
       .post("/auth/register")
       .send(testUser1)
+      .expect(201);
+
+    await request(app.getHttpServer())
+      .post("/auth/register")
+      .send(testUser1)
       .expect(400);
   });
 
   it("logs in with valid credentials", async () => {
+    await request(app.getHttpServer())
+      .post("/auth/register")
+      .send(testUser1)
+      .expect(201);
+
     const res = await request(app.getHttpServer())
       .post("/auth/login")
       .send(testUser1)
