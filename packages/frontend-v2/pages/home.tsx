@@ -226,7 +226,7 @@ const HomePage: NextPage = () => {
     >
       <PageLayout>
         <Box
-          bg="neutral.main"
+          bg="neutral.gray"
           overflowY="auto"
           width={{ desktop: "360px", tablet: "300px" }}
           flexShrink={0}

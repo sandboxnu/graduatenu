@@ -33,7 +33,7 @@ export const SearchResult: React.FC<SearchResultProps> = ({
         <Heading size="sm" fontWeight="normal">
           {searchResult.name}
         </Heading>
-        <Text fontSize="12px" color="neutral.main.900" fontStyle="italics">
+        <Text fontSize="12px" fontStyle="italics">
           {getCourseDisplayString(searchResult)}
         </Text>
       </Box>

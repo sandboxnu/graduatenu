@@ -139,7 +139,7 @@ export const AccountOverview: React.FC<AccountOverviewProps> = ({
                   type="email"
                   size="md"
                   variant="outline"
-                  borderColor="neutral.main"
+                  borderColor="neutral.gray"
                   borderWidth="2px"
                   borderRadius="md"
                 />

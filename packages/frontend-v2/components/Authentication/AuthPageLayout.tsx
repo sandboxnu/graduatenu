@@ -15,7 +15,7 @@ export const AuthenticationPageLayout: React.FC<
         <GridItem colSpan={3}>{form}</GridItem>
         <GridItem
           colSpan={5}
-          backgroundColor="neutral.main"
+          backgroundColor="neutral.gray"
           position="relative"
         >
           <Image
