@@ -48,7 +48,6 @@ const colors = {
     },
   },
   neutral: {
-    main: "#e7ebf1",
     gray0: "#f4f6f9",
     gray: "#e7ebf1",
     gray2: "#d2d8e3",
