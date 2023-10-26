@@ -75,6 +75,12 @@ const SignUpForm: React.FC = () => {
       inputs={
         <>
           <Flex direction="column" rowGap="xs">
+            <Flex alignItems="center" columnGap="sm" color="gray">
+              <InfoOutlineIcon />
+              <Text color="gray" lineHeight="1">
+                Name is optional.
+              </Text>
+            </Flex>
             <Flex columnGap="md">
               <GraduateInput
                 type="text"
@@ -85,12 +91,6 @@ const SignUpForm: React.FC = () => {
                   pattern: noLeadOrTrailWhitespacePattern,
                 })}
               />
-            </Flex>
-            <Flex alignItems="center" columnGap="sm" color="gray">
-              <InfoOutlineIcon />
-              <Text color="gray" lineHeight="1">
-                Name is optional.
-              </Text>
             </Flex>
           </Flex>
           <GraduateInput
