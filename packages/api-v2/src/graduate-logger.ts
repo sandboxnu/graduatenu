@@ -1,7 +1,7 @@
 import { ConsoleLogger, LogLevel } from "@nestjs/common";
 import { deepFilter } from "src/utils";
 
-const DENYLIST = ["password"];
+const DENYLIST = ["password", "passwordConfirm"];
 
 export class GraduateLogger extends ConsoleLogger {
   protected stringifyMessage(message: unknown, logLevel: LogLevel) {
