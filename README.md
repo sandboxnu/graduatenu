@@ -49,6 +49,4 @@ The workspaces within this monorepo are:
 
 3. **api-client:** A typescript client responsible for providing a streamlined and typed interface to interact with our API. The frontend uses this client to send request to our API.
 
-4. **scrapers-v2**: A typescript web scraper repsonsible for scraping [Northeastern's course catalog website](https://catalog.northeastern.edu/undergraduate/) for the latest graduation requirements for majors at Northeastern.
-
-5. **common**: All common types and logic used by our frontend, api and scrapers.
+4. **common**: All common types and logic used by our frontend, api and scrapers.
