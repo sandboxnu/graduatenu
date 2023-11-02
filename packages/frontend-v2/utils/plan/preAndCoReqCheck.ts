@@ -14,7 +14,7 @@ import {
 } from "@graduate/common";
 
 export const getCoReqWarnings = (
-  schedule: Schedule2<unknown>,
+  schedule: Schedule2<unknown>
 ): CoReqWarnings => {
   const errors: CoReqWarnings = {
     type: "coreq",
@@ -30,7 +30,7 @@ export const getCoReqWarnings = (
 };
 
 export const getCoReqWarningsSem = (
-  term: ScheduleTerm2<unknown>,
+  term: ScheduleTerm2<unknown>
 ): TermError => {
   const seen: Set<string> = new Set();
   const coReqErrors: TermError = {};
@@ -62,8 +62,8 @@ export const getPreReqWarnings = (
       spring: getPreReqWarningSem(year.spring, seen),
       summer1: getPreReqWarningSem(year.summer1, seen),
       summer2: getPreReqWarningSem(year.summer2, seen),
-    }))
-  }
+    })),
+  };
   return preReqErrors;
 };
 
@@ -135,8 +135,6 @@ const isOrCourse = (course: INEUReq): course is INEUOrReq => {
   return (course as INEUOrReq).type === "or";
 };
 
-const isError = (
-  error: INEUReqError | undefined
-): error is INEUReqError => {
+const isError = (error: INEUReqError | undefined): error is INEUReqError => {
   return !!error;
 };
