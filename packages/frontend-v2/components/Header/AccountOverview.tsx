@@ -31,8 +31,7 @@ interface AccountOverviewProps {
 }
 
 interface UpdateName {
-  firstName: string;
-  lastName: string;
+  fullName: string;
 }
 
 export const AccountOverview: React.FC<AccountOverviewProps> = ({
@@ -45,8 +44,6 @@ export const AccountOverview: React.FC<AccountOverviewProps> = ({
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-    watch,
-    trigger,
     reset,
   } = useForm<UpdateName>({
     mode: "onChange",
@@ -56,19 +53,16 @@ export const AccountOverview: React.FC<AccountOverviewProps> = ({
   useEffect(() => {
     if (student.fullName) {
       reset({
-        firstName: student.fullName.split(" ")[0],
-        lastName: student.fullName.split(" ")[1],
+        fullName: student.fullName,
       });
     }
   }, [reset, student]);
-
-  const firstName = watch("firstName", "");
 
   const onSubmitHandler = async (payload: UpdateName) => {
     try {
       const newStudent: StudentModel<string> = {
         ...student,
-        fullName: `${payload.firstName} ${payload.lastName}`,
+        fullName: payload.fullName,
       };
       mutateStudent(async () => {
         await API.student.update(newStudent);
@@ -103,28 +97,11 @@ export const AccountOverview: React.FC<AccountOverviewProps> = ({
               <Flex columnGap="md">
                 <GraduateInput
                   type="text"
-                  formLabel="First Name"
-                  id="firstName"
-                  placeholder="Cooper"
-                  error={errors.firstName}
-                  {...register("firstName", {
-                    onBlur: () => trigger("lastName"),
-                    pattern: noLeadOrTrailWhitespacePattern,
-                  })}
-                />
-                <GraduateInput
-                  error={errors.lastName}
-                  type="text"
-                  formLabel="Last Name"
-                  id="lastName"
-                  placeholder="The Dog"
-                  {...register("lastName", {
-                    validate: (lastName) => {
-                      if (lastName !== "" && firstName === "") {
-                        return "Please enter your first name along with your last name.";
-                      }
-                      return true;
-                    },
+                  formLabel="Full Name"
+                  id="fullName"
+                  placeholder="Cooper The Dog"
+                  error={errors.fullName}
+                  {...register("fullName", {
                     pattern: noLeadOrTrailWhitespacePattern,
                   })}
                 />

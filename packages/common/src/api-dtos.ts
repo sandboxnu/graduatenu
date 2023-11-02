@@ -68,11 +68,7 @@ export class UpdatePlanDto {
 export class SignUpStudentDto {
   @IsOptional()
   @IsString()
-  firstName: string;
-
-  @IsOptional()
-  @IsString()
-  lastName: string;
+  fullName: string;
 
   @IsNotEmpty()
   @IsEmail()
@@ -229,7 +225,7 @@ export class ForgotPasswordDto {
 export class ResetPasswordDto {
   @IsNotEmpty()
   @IsString()
-  token: string
+  token: string;
 
   @IsString()
   @IsNotEmpty()

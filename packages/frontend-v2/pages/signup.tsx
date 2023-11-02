@@ -44,7 +44,6 @@ const SignUpForm: React.FC = () => {
 
   // Need to keep track of these values for validation
   const password = watch("password", "");
-  const firstName = watch("firstName", "");
 
   const onSubmitHandler = async (payload: SignUpStudentDto) => {
     try {
@@ -76,38 +75,22 @@ const SignUpForm: React.FC = () => {
       inputs={
         <>
           <Flex direction="column" rowGap="xs">
-            <Flex columnGap="md">
-              <GraduateInput
-                type="text"
-                id="firstName"
-                placeholder="First Name"
-                error={errors.firstName}
-                {...register("firstName", {
-                  onBlur: () => trigger("lastName"),
-                  pattern: noLeadOrTrailWhitespacePattern,
-                })}
-              />
-              <GraduateInput
-                type="text"
-                id="lastName"
-                placeholder="Last Name"
-                error={errors.lastName}
-                {...register("lastName", {
-                  validate: (lastName) => {
-                    if (lastName !== "" && firstName === "") {
-                      return "Please enter your first name along with your last name.";
-                    }
-                    return true;
-                  },
-                  pattern: noLeadOrTrailWhitespacePattern,
-                })}
-              />
-            </Flex>
             <Flex alignItems="center" columnGap="sm" color="gray">
               <InfoOutlineIcon />
               <Text color="gray" lineHeight="1">
-                Name is optional. If provided, enter at least your first name.
+                Name is optional.
               </Text>
+            </Flex>
+            <Flex columnGap="md">
+              <GraduateInput
+                type="text"
+                id="fullName"
+                placeholder="Full Name"
+                error={errors.fullName}
+                {...register("fullName", {
+                  pattern: noLeadOrTrailWhitespacePattern,
+                })}
+              />
             </Flex>
           </Flex>
           <GraduateInput

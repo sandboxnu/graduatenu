@@ -36,8 +36,7 @@ export class StudentService {
     createStudentDto: SignUpStudentDto
   ): Promise<Student | EmailAlreadyExists | WeakPassword> {
     // make sure the user doesn't already exists
-    const { email, firstName, lastName, password, passwordConfirm } =
-      createStudentDto;
+    const { email, fullName, password, passwordConfirm } = createStudentDto;
     const userInDb = await this.studentRepository.findOne({ where: { email } });
     if (userInDb) {
       this.logger.debug(
@@ -53,11 +52,6 @@ export class StudentService {
 
     if (!isStrongPassword(password)) {
       return new WeakPassword();
-    }
-
-    let fullName;
-    if (firstName && lastName) {
-      fullName = `${firstName} ${lastName}`;
     }
 
     const newStudent = this.studentRepository.create({
