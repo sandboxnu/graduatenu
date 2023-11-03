@@ -329,7 +329,7 @@ const SidebarContainer: React.FC<PropsWithChildren<SidebarContainerProps>> = ({
       pt="xl"
       backgroundColor="neutral.gray0"
       borderRight="1px"
-      borderRightColor="neutral.900"
+      borderRightColor="neutral.gray2"
     >
       <Box px="md" pb="md">
         <Box pb="sm">

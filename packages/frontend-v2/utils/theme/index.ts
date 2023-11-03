@@ -52,10 +52,7 @@ const colors = {
     gray: "#e7ebf1",
     gray2: "#d2d8e3",
     gray3: "#b4bbc8",
-    300: "#f4f6f9",
-    400: "#7586a0",
-    700: "#e2e6ec",
-    900: "#d2d8e2",
+    gray4: "#7586a0",
   },
   states: {
     success: {

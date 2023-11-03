@@ -260,7 +260,7 @@ const HomePage: NextPage = () => {
                   mutateStudentWithUpdatedPlan={mutateStudentWithUpdatedPlan}
                   setIsRemove={setIsRemove}
                 />
-                <Divider borderColor="neutral.900" borderWidth={1} />
+                <Divider borderColor="neutral.gray2" borderWidth={1} />
               </>
             )}
             <TransferCourses

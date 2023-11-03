@@ -184,7 +184,7 @@ const TransferCoursesHeader: React.FC<TransferCoursesHeaderProps> = ({
       cursor="pointer"
       userSelect="none"
       borderBottomWidth={isExpanded ? "2px" : "0px"}
-      borderBottomColor="neutral.900"
+      borderBottomColor="neutral.gray2"
       paddingX="md"
     >
       <Flex flexDirection="column">

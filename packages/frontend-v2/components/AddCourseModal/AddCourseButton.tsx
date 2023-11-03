@@ -10,13 +10,12 @@ export const AddCourseButton: React.FC<AddCourseButtonProps & ButtonProps> = ({
   ...buttonProps
 }) => {
   const hoverStyle = {
-    backgroundColor: "#F0F3F6",
     borderColor: "neutral.gray3",
   };
 
   const activeStyle = {
-    backgroundColor: "neutral.900",
-    borderColor: "neutral.900",
+    backgroundColor: "neutral.gray2",
+    borderColor: "neutral.gray2",
   };
 
   return (
