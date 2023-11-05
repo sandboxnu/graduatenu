@@ -5,10 +5,11 @@ import ormconfig from "../ormconfig";
 import { StudentModule } from "./student/student.module";
 import { AuthModule } from "./auth/auth.module";
 import { PlanModule } from "./plan/plan.module";
-import { APP_INTERCEPTOR } from "@nestjs/core";
+import { APP_GUARD, APP_INTERCEPTOR } from "@nestjs/core";
 import { LoggingInterceptor } from "./interceptors/logging.interceptor";
 import { MajorModule } from "./major/major.module";
 import { EmailModule } from "./email/email.module";
+import { ThrottlerGuard, ThrottlerModule } from "@nestjs/throttler";
 
 @Module({
   imports: [
@@ -17,6 +18,13 @@ import { EmailModule } from "./email/email.module";
       envFilePath: [`.env.${process.env.NODE_ENV}.local`],
       isGlobal: true,
     }),
+    ThrottlerModule.forRoot([
+      {
+        name: "default", // no more than 100 requests in a minute
+        ttl: 60000,
+        limit: 100,
+      },
+    ]),
     StudentModule,
     AuthModule,
     PlanModule,
@@ -27,6 +35,10 @@ import { EmailModule } from "./email/email.module";
     {
       provide: APP_INTERCEPTOR,
       useClass: LoggingInterceptor,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: ThrottlerGuard,
     },
   ],
 })
