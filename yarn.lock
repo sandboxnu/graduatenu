@@ -3076,7 +3076,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graduate/api-client@workspace:packages/api-client":
+"@graduate/api-client@workspace:*, @graduate/api-client@workspace:packages/api-client":
   version: 0.0.0-use.local
   resolution: "@graduate/api-client@workspace:packages/api-client"
   dependencies:
@@ -3157,6 +3157,7 @@ __metadata:
     "@emotion/react": ^11
     "@emotion/styled": ^11
     "@fontsource/montserrat-alternates": ^4.5.9
+    "@graduate/api-client": "workspace:*"
     "@graduate/common": "workspace:*"
     "@types/eslint": ^8
     "@types/node": 17.0.23
