@@ -60,7 +60,7 @@ export const ScheduleTerm: React.FC<ScheduleTermProps> = ({
     <GridItem
       ref={setNodeRef}
       transition="background-color 0.1s ease"
-      backgroundColor={isOver ? "neutral.gray2" : "neutral.gray"}
+      backgroundColor={isOver ? "neutral.200" : "neutral.100"}
       display="flex"
       flexDirection="column"
       px="sm"

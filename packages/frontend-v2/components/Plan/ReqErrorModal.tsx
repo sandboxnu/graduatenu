@@ -70,7 +70,7 @@ export const ReqErrorModal: React.FC<ReqErrorModalProps> = ({
           <ModalHeader
             textAlign="center"
             borderBottomWidth="1px"
-            borderBottomColor="neutral.gray"
+            borderBottomColor="neutral.100"
           >
             <ModalCloseButton />
             <Flex

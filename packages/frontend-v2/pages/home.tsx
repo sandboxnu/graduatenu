@@ -226,7 +226,7 @@ const HomePage: NextPage = () => {
     >
       <PageLayout>
         <Box
-          bg="neutral.gray"
+          bg="neutral.100"
           overflowY="auto"
           width={{ desktop: "360px", tablet: "300px" }}
           flexShrink={0}
@@ -260,7 +260,7 @@ const HomePage: NextPage = () => {
                   mutateStudentWithUpdatedPlan={mutateStudentWithUpdatedPlan}
                   setIsRemove={setIsRemove}
                 />
-                <Divider borderColor="neutral.gray2" borderWidth={1} />
+                <Divider borderColor="neutral.200" borderWidth={1} />
               </>
             )}
             <TransferCourses

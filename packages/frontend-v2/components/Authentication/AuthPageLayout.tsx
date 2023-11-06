@@ -13,11 +13,7 @@ export const AuthenticationPageLayout: React.FC<
       <GraduatePreAuthHeader />
       <Grid templateColumns="repeat(8, 1fr)" templateRows="1fr" flexGrow={1}>
         <GridItem colSpan={3}>{form}</GridItem>
-        <GridItem
-          colSpan={5}
-          backgroundColor="neutral.gray"
-          position="relative"
-        >
+        <GridItem colSpan={5} backgroundColor="neutral.100" position="relative">
           <Image
             src="/app_snippet.png"
             alt="GraduateNU app snippet"

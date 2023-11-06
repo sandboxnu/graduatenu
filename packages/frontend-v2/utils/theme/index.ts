@@ -48,11 +48,11 @@ const colors = {
     },
   },
   neutral: {
-    gray0: "#f4f6f9",
-    gray: "#e7ebf1",
-    gray2: "#d2d8e3",
-    gray3: "#b4bbc8",
-    gray4: "#7586a0",
+    50: "#f4f6f9",
+    100: "#e7ebf1",
+    200: "#d2d8e3",
+    300: "#b4bbc8",
+    400: "#7586a0",
   },
   states: {
     success: {

@@ -29,7 +29,7 @@ const SidebarSection: React.FC<SidebarSectionProps> = ({
 }) => {
   const [opened, setOpened] = useState(false);
 
-  const grey = "neutral.gray4";
+  const grey = "neutral.400";
   const green = "states.success.main";
 
   const warningLabel = section.warnings && (
@@ -49,7 +49,7 @@ const SidebarSection: React.FC<SidebarSectionProps> = ({
   return (
     <Box
       borderTopWidth="1px"
-      borderTopColor="neutral.gray2"
+      borderTopColor="neutral.200"
       cursor="pointer"
       userSelect="none"
     >
@@ -65,13 +65,13 @@ const SidebarSection: React.FC<SidebarSectionProps> = ({
         py="md"
         px="md"
         margin="0"
-        backgroundColor="neutral.gray0"
+        backgroundColor="neutral.50"
         transition="background-color 0.25s ease"
         _hover={{
-          backgroundColor: "neutral.gray",
+          backgroundColor: "neutral.100",
         }}
         _active={{
-          backgroundColor: "neutral.gray2",
+          backgroundColor: "neutral.200",
         }}
         display="flex"
         position="sticky"
@@ -160,9 +160,9 @@ const SidebarSection: React.FC<SidebarSectionProps> = ({
       </Flex>
       <Box
         style={{ display: opened ? "" : "none" }}
-        backgroundColor="neutral.gray"
+        backgroundColor="neutral.100"
         borderTopWidth=".5px"
-        borderTopColor="neutral.gray2"
+        borderTopColor="neutral.200"
         padding="10px 20px 15px 10px"
         cursor="default"
       >
