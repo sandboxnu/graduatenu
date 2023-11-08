@@ -16,7 +16,7 @@ export const SelectedCourse: React.FC<SelectedCourseProps> = ({
     <Flex
       borderRadius="md"
       boxShadow="md"
-      backgroundColor="neutral.main"
+      backgroundColor="neutral.100"
       alignItems="center"
     >
       <Text pl="sm" pr="2xs">

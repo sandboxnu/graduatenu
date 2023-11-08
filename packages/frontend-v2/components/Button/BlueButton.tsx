@@ -5,6 +5,7 @@ export const BlueButton: ComponentWithAs<"button", ButtonProps> = ({
 }) => {
   return (
     <Button
+      border="1px"
       variant="outline"
       borderColor="primary.blue.light.main"
       colorScheme="primary.blue.light"

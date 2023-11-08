@@ -49,7 +49,7 @@ const SidebarSection: React.FC<SidebarSectionProps> = ({
   return (
     <Box
       borderTopWidth="1px"
-      borderTopColor="neutral.900"
+      borderTopColor="neutral.200"
       cursor="pointer"
       userSelect="none"
     >
@@ -65,10 +65,10 @@ const SidebarSection: React.FC<SidebarSectionProps> = ({
         py="md"
         px="md"
         margin="0"
-        backgroundColor="neutral.main"
+        backgroundColor="neutral.50"
         transition="background-color 0.25s ease"
         _hover={{
-          backgroundColor: "neutral.900",
+          backgroundColor: "neutral.100",
         }}
         _active={{
           backgroundColor: "neutral.200",
@@ -160,7 +160,9 @@ const SidebarSection: React.FC<SidebarSectionProps> = ({
       </Flex>
       <Box
         style={{ display: opened ? "" : "none" }}
-        backgroundColor="neutral.900"
+        backgroundColor="neutral.100"
+        borderTopWidth=".5px"
+        borderTopColor="neutral.200"
         padding="10px 20px 15px 10px"
         cursor="default"
       >
@@ -173,8 +175,8 @@ const SidebarSection: React.FC<SidebarSectionProps> = ({
         {opened && !loading && (
           <>
             {section.minRequirementCount < section.requirements.length && (
-              <Text fontSize="sm">
-                Complete {section.minRequirementCount} of the following
+              <Text fontSize="sm" as="i">
+                Complete {section.minRequirementCount} of the following:
               </Text>
             )}
             {section.requirements.map((requirement, index) => (

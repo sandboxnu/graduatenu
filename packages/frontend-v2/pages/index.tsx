@@ -55,7 +55,7 @@ const Banner = (): JSX.Element => {
               color="primary.red.main"
               fontWeight="normal"
               lineHeight="1"
-              mb="0"
+              mb="-12px"
             >
               Graduate
             </Heading>

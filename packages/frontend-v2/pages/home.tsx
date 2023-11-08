@@ -101,7 +101,9 @@ const HomePage: NextPage = () => {
     if (student) {
       const plan = student.plans.find((plan) => plan.id === selectedPlanId);
       if (plan) {
-        setPreReqWarnings(getPreReqWarnings(plan.schedule, student.coursesTransfered));
+        setPreReqWarnings(
+          getPreReqWarnings(plan.schedule, student.coursesTransfered)
+        );
         setCoReqWarnings(getCoReqWarnings(plan.schedule));
       }
     }
@@ -170,7 +172,9 @@ const HomePage: NextPage = () => {
       return;
     }
 
-    setPreReqWarnings(getPreReqWarnings(updatedPlan.schedule, student.coursesTransfered));
+    setPreReqWarnings(
+      getPreReqWarnings(updatedPlan.schedule, student.coursesTransfered)
+    );
     setCoReqWarnings(getCoReqWarnings(updatedPlan.schedule));
     mutateStudentWithUpdatedPlan(updatedPlan);
   };
@@ -222,7 +226,7 @@ const HomePage: NextPage = () => {
     >
       <PageLayout>
         <Box
-          bg="neutral.main"
+          bg="neutral.100"
           overflowY="auto"
           width={{ desktop: "360px", tablet: "300px" }}
           flexShrink={0}
@@ -256,7 +260,7 @@ const HomePage: NextPage = () => {
                   mutateStudentWithUpdatedPlan={mutateStudentWithUpdatedPlan}
                   setIsRemove={setIsRemove}
                 />
-                <Divider borderColor="neutral.900" borderWidth={1} />
+                <Divider borderColor="neutral.200" borderWidth={1} />
               </>
             )}
             <TransferCourses

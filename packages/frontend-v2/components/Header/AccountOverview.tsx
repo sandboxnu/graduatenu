@@ -107,7 +107,7 @@ export const AccountOverview: React.FC<AccountOverviewProps> = ({
                 />
               </Flex>
               <FormControl>
-                <FormLabel>
+                <FormLabel mb="4xs">
                   <Text>Email</Text>
                 </FormLabel>
                 <Input
@@ -116,7 +116,7 @@ export const AccountOverview: React.FC<AccountOverviewProps> = ({
                   type="email"
                   size="md"
                   variant="outline"
-                  borderColor="neutral.main"
+                  borderColor="neutral.100"
                   borderWidth="2px"
                   borderRadius="md"
                 />

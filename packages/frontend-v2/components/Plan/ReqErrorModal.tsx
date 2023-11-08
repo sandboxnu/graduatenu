@@ -52,7 +52,7 @@ export const ReqErrorModal: React.FC<ReqErrorModalProps> = ({
       }}
       _active={{ background: "primary.red.900" }}
       onClick={() => {
-        setHovered(false)
+        setHovered(false);
         onOpen();
       }}
     >
@@ -70,7 +70,7 @@ export const ReqErrorModal: React.FC<ReqErrorModalProps> = ({
           <ModalHeader
             textAlign="center"
             borderBottomWidth="1px"
-            borderBottomColor="neutral.main"
+            borderBottomColor="neutral.100"
           >
             <ModalCloseButton />
             <Flex
@@ -101,7 +101,7 @@ export const ReqErrorModal: React.FC<ReqErrorModalProps> = ({
                   <HelperToolTip
                     label={`You will need to statisfy the following requirement(s) along with ${getCourseDisplayString(
                       course
-                    )}."`}
+                    )}.`}
                   />
                 </Flex>
                 <ParseCourse course={coReqErr} parent={true} />

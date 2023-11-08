@@ -147,7 +147,6 @@ const YearHeader: React.FC<YearHeaderProps> = ({
   const backgroundColor = isExpanded
     ? "primary.blue.dark"
     : "primary.blue.light";
-
   return (
     <Flex
       alignItems="center"
@@ -155,6 +154,9 @@ const YearHeader: React.FC<YearHeaderProps> = ({
       backgroundColor={backgroundColor + ".main"}
       _hover={{
         backgroundColor: "primary.blue.light.600",
+      }}
+      _active={{
+        bg: "primary.blue.dark.700",
       }}
       transition="background-color 0.15s ease"
       paddingTop="sm"
@@ -180,8 +182,8 @@ const YearHeader: React.FC<YearHeaderProps> = ({
               variant="ghost"
               color="primary.red.main"
               icon={<WarningIcon />}
-              _hover={{ bg: 'none', cursor: 'auto' }}
-              _active={{ bg: `${backgroundColor}.900` }}
+              _hover={{ bg: "none", cursor: "auto" }}
+              _active={{ bg: "none" }}
               onClick={(e) => {
                 if (isExpanded) {
                   e.stopPropagation();
@@ -199,7 +201,7 @@ const YearHeader: React.FC<YearHeaderProps> = ({
             marginLeft="auto"
             marginRight="sm"
             _hover={{ bg: "white", color: "primary.red.main" }}
-            _active={{ bg: `${backgroundColor}.900` }}
+            _active={{ bg: "primary.blue.light.900" }}
             onClick={(e) => {
               // important to prevent the click from propogating upwards and triggering the toggle
               e.stopPropagation();

@@ -36,7 +36,7 @@ export const SearchCoursesInput: React.FC<SearchCoursesInputProps> = ({
         borderRadius={10}
         fontSize="sm"
         color="primary.blue.light.main"
-        backgroundColor="neutral.main"
+        backgroundColor="neutral.100"
         placeholder="SEARCH BY NAME, CRN, ETC."
       />
     </InputGroup>

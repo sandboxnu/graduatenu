@@ -71,7 +71,7 @@ export const TransferCourses: React.FC<TransferCoursesToggleProps> = ({
   };
 
   return (
-    <Flex direction="column" backgroundColor={"neutral.main"}>
+    <Flex direction="column" backgroundColor={"neutral.100"}>
       <TransferCoursesHeader
         isExpanded={isExpanded}
         toggleExpanded={toggleExpanded}
@@ -133,11 +133,7 @@ const TransferCoursesBody: React.FC<TransferCoursesBodyProps> = ({
           removeCourse={() => removeTransferCourse(course)}
         />
       ))}
-      <AddCourseButton
-        onOpen={onOpen}
-        borderColor="#C1CAD9"
-        borderWidth="1px"
-      />
+      <AddCourseButton onOpen={onOpen} />
       <AddCourseModal
         isOpen={isOpen}
         closeModalDisplay={onClose}
@@ -174,8 +170,12 @@ const TransferCoursesHeader: React.FC<TransferCoursesHeaderProps> = ({
     <Flex
       alignItems="center"
       justifyContent="space-between"
+      backgroundColor="neutral.50"
       _hover={{
-        backgroundColor: "neutral.900",
+        backgroundColor: "neutral.100",
+      }}
+      _active={{
+        backgroundColor: "neutral.200",
       }}
       transition="background-color 0.15s ease"
       paddingTop="xs"
@@ -184,7 +184,7 @@ const TransferCoursesHeader: React.FC<TransferCoursesHeaderProps> = ({
       cursor="pointer"
       userSelect="none"
       borderBottomWidth={isExpanded ? "2px" : "0px"}
-      borderBottomColor="neutral.900"
+      borderBottomColor="neutral.200"
       paddingX="md"
     >
       <Flex flexDirection="column">
