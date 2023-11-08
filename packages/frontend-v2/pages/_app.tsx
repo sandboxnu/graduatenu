@@ -25,9 +25,9 @@ function MyApp({ Component, pageProps }: AppProps) {
           <link rel="icon" href="/favicon.ico" />
           <link rel="icon" href="/favicon.svg" type="image/svg+xml"></link>
         </Head>
-          <ChakraProvider theme={theme}>
-            {disableApp ? <DisabledApp /> : <Component {...pageProps} />}
-          </ChakraProvider>
+        <ChakraProvider theme={theme}>
+          {disableApp ? <DisabledApp /> : <Component {...pageProps} />}
+        </ChakraProvider>
         <ToastContainer position="bottom-right" />
       </ErrorBoundary>
     </>
@@ -70,10 +70,10 @@ const DisabledApp: React.FC = () => {
 
 const ErrorPage: React.FC = () => {
   return (
-   <Text size="xl" textAlign="center">
-    THIS PAGE DOES NOT EXIST
-   </Text>
+    <Text size="xl" textAlign="center">
+      THERES A PROBLEM THAT OCCURED HERE.
+    </Text>
   );
-}
+};
 
 export default MyApp;

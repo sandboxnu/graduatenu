@@ -24,7 +24,6 @@ interface InfoTextProps {
 }
 
 const LandingPage: NextPage = () => {
-  throw new Error("testing");
   return (
     <Box>
       <GraduatePreAuthHeader />

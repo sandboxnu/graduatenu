@@ -1,4 +1,4 @@
-import React, { Component, ErrorInfo } from 'react';
+import React, { Component, ErrorInfo } from "react";
 
 interface IProps {
   fallback: React.FC;
@@ -9,13 +9,12 @@ interface IState {
   hasError: boolean;
 }
 
-export class ErrorBoundary extends Component<IProps, IState>{
-
-  state = {hasError: false};
+export class ErrorBoundary extends Component<IProps, IState> {
+  state = { hasError: false };
 
   constructor(props: IProps) {
     super(props);
-    this.state = {hasError: false};
+    this.state = { hasError: false };
   }
 
   static getDerivedStateFromError(error: Error) {
@@ -32,11 +31,8 @@ export class ErrorBoundary extends Component<IProps, IState>{
 
   render() {
     if (this.state.hasError) {
-      return (<>
-      {this.props.fallback}
-      </>)
+      return <>{this.props.fallback}</>;
     }
-
     return this.props.children;
   }
 }
