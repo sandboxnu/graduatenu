@@ -4,19 +4,19 @@
  * Northeastern's abbreviation of the requirement.
  */
 export enum NUPathEnum {
-  ND = "ND",
-  EI = "EI",
-  IC = "IC",
-  FQ = "FQ",
-  SI = "SI",
-  AD = "AD",
-  DD = "DD",
-  ER = "ER",
-  WF = "WF",
-  WD = "WD",
-  WI = "WI",
-  EX = "EX",
-  CE = "CE",
+  ND = "Natural and Designed World",
+  EI = "Creative Expression/Innovation",
+  IC = "Interpreting Culture",
+  FQ = "Formal and Quantitative Reasoning",
+  SI = "Societies and Institutions",
+  AD = "Analyzing/Using Data",
+  DD = "Difference and Diversity",
+  ER = "Ethical Reasoning",
+  WF = "First Year Writing",
+  WD = "Advanced Writing in the Disciplines",
+  WI = "Writing Intensive",
+  EX = "Integration Experience",
+  CE = "Capstone Experience",
 }
 
 /**
