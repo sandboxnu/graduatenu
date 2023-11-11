@@ -12,8 +12,8 @@ export enum NUPathEnum {
   AD = "Analyzing/Using Data",
   DD = "Difference and Diversity",
   ER = "Ethical Reasoning",
-  WF = "First Year Writing",
-  WD = "Advanced Writing in the Disciplines",
+  WF = "1st Yr Writing",
+  WD = "Adv Writ Dscpl",
   WI = "Writing Intensive",
   EX = "Integration Experience",
   CE = "Capstone Experience",
@@ -170,7 +170,8 @@ export type Requirement2 =
   | IOrCourse2
   | ICourseRange2
   | IRequiredCourse
-  | Section;
+  | Section
+  | "nupath";
 
 /**
  * Represents a requirement where X number of credits need to be completed from
@@ -329,6 +330,7 @@ export interface ScheduleCourse2<T> {
   subject: string;
   prereqs?: INEUAndReq | INEUOrReq;
   coreqs?: INEUAndReq | INEUOrReq;
+  nupaths?: NUPath[];
   numCreditsMin: number;
   numCreditsMax: number;
   id: T;
