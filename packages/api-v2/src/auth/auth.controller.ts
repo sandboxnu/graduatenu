@@ -30,6 +30,7 @@ import {
   WeakPassword,
 } from "src/student/student.errors";
 import { BadToken, InvalidPayload, TokenExpiredError } from "./auth.errors";
+import { Throttle } from "@nestjs/throttler";
 
 @Controller("auth")
 export class AuthController {
@@ -74,6 +75,7 @@ export class AuthController {
     return student;
   }
 
+  @Throttle({ default: { limit: 20, ttl: 60000 } }) // restrict to no more than 20 requests per minute
   @Post("login")
   public async login(
     @Res({ passthrough: true }) response: Response,
