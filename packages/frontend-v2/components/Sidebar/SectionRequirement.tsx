@@ -87,7 +87,7 @@ const SectionRequirement: React.FC<SidebarRequirementProps> = ({
     return (
       <div>
         <Text fontSize="sm" as="i">
-          Complete one of the following:
+          Complete 1 of the following:
         </Text>
         {requirement.courses.map((course, index) => (
           <SectionRequirement
