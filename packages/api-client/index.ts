@@ -239,7 +239,6 @@ class SearchAPIClient {
     });
 
     const courseData = await res.data.data;
-    console.log("test");
     if (courseData && courseData.class && courseData.class.allOccurrences) {
       return occurrencesToCourseByCatalogYear(
         courseData?.class?.allOccurrences,
