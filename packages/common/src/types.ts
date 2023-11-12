@@ -1,7 +1,6 @@
 /**
- * Describes an abbreviation for one of Northeastern's NUPath academic breadth
- * requirements. Each two-character NUPath directly corresponds to
- * Northeastern's abbreviation of the requirement.
+ * Describes the term SearchNEU uses for each of Northeastern's NUPath academic
+ * breadth requirements.
  */
 export enum NUPathEnum {
   ND = "Natural and Designed World",
@@ -170,8 +169,7 @@ export type Requirement2 =
   | IOrCourse2
   | ICourseRange2
   | IRequiredCourse
-  | Section
-  | "nupath";
+  | Section;
 
 /**
  * Represents a requirement where X number of credits need to be completed from
