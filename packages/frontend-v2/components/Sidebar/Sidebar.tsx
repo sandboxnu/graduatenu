@@ -360,7 +360,7 @@ const SidebarContainer: React.FC<PropsWithChildren<SidebarContainerProps>> = ({
               {creditsTaken}
               {creditsToTake !== undefined && `/${creditsToTake}`}
             </Text>
-            <Text color="primary.blue.dark.main">Completed Credits</Text>
+            <Text color="primary.blue.dark.main">Credits Completed</Text>
           </Flex>
         )}
         {renderCoopBlock && (

@@ -71,7 +71,7 @@ const Banner = (): JSX.Element => {
               mt="2xl"
               fontSize={{ desktop: "2xl", laptop: "2xl", tablet: "xl" }}
               color="primary.blue.dark.main"
-              lineHeight="1.1"
+              lineHeight="1.3"
             >
               Navigate the Northeastern graduation requirements and create a
               personalized plan of study.

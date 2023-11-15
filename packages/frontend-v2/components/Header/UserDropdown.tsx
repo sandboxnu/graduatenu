@@ -50,7 +50,7 @@ export const UserDropdown: React.FC = () => {
           <ChangePassword />
         </MenuItem>
         <MenuItem onClick={() => logout(router)}>
-          <Text>Logout</Text>
+          <Text>Log Out</Text>
         </MenuItem>
       </MenuList>
     </Menu>

@@ -75,7 +75,7 @@ export const ChangePassword: React.FC = () => {
 
   return (
     <>
-      <Text onClick={onOpen}>Change password</Text>
+      <Text onClick={onOpen}>Change Password</Text>
       <Modal isOpen={isOpen} onClose={closeModal}>
         <ModalOverlay />
         <ModalContent as="form" onSubmit={handleSubmit(onSubmitHandler)}>

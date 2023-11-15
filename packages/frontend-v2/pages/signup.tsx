@@ -143,7 +143,8 @@ const SignUpForm: React.FC = () => {
             Create Account
           </Button>
           <Text textAlign="center">
-            Already have an account? <GraduateLink href="/login" text="Login" />
+            Already have an account?{" "}
+            <GraduateLink href="/login" text="Log In" />
           </Text>
         </Flex>
       }
