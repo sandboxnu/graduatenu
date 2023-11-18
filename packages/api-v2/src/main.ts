@@ -19,6 +19,10 @@ async function bootstrap() {
 
   const app = await NestFactory.create(AppModule, {
     logger: graduateLogger,
+    cors: {
+      origin:
+        "https://graduatenu-frontend-v2-git-christina-move-fro-b625a5-sandboxneu.vercel.app",
+    },
   });
 
   /**
