@@ -23,6 +23,7 @@ async function bootstrap() {
       origin:
         "https://graduatenu-frontend-v2-git-christina-move-fro-b625a5-sandboxneu.vercel.app",
       methods: ["GET", "PUT", "POST", "PATCH", "DELETE"],
+      credentials: true,
     },
   });
 
