@@ -40,7 +40,7 @@ class APIClient {
     return responseClass ? plainToInstance(responseClass, res) : res;
   }
 
-  constructor(baseURL = "/api") {
+  constructor(baseURL = "api.graduate.com") {
     this.axios = Axios.create({
       baseURL: baseURL,
       headers: { "content-type": "application/json" },
