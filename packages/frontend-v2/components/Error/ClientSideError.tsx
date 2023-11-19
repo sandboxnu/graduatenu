@@ -37,8 +37,8 @@ export const ClientSideError: React.FC = () => {
             <GraduateButtonLink
               href={
                 process.env.NODE_ENV == "development"
-                  ? "http://localhost:3002/"
-                  : "https://graduatenu.com/"
+                  ? "http://localhost:3002/home"
+                  : "https://graduatenu.com/home"
               }
               mt="md"
               variant="solid"
