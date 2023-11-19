@@ -7,6 +7,7 @@ import { ToastContainer } from "react-toastify";
 import { ErrorBoundary, GraduateDisabledAppHeader } from "../components";
 import "@fontsource/montserrat-alternates";
 import { useWindowSize } from "../hooks";
+import { ClientSideError } from "../components/Error/ClientSideError";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const { width } = useWindowSize();
@@ -15,7 +16,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <>
-      <ErrorBoundary fallback={ErrorPage}>
+      <ErrorBoundary fallback={ClientSideError}>
         <Head>
           <title>GraduateNU</title>
           <meta
@@ -65,14 +66,6 @@ const DisabledApp: React.FC = () => {
         </Flex>
       </Flex>
     </Flex>
-  );
-};
-
-const ErrorPage: React.FC = () => {
-  return (
-    <Text size="xl" textAlign="center">
-      THERES A PROBLEM THAT OCCURED HERE.
-    </Text>
   );
 };
 
