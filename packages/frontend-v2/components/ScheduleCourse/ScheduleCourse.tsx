@@ -114,6 +114,7 @@ export const NonDraggableScheduleCourse: React.FC<
       isDisabled={false}
       isEditable={true}
       removeCourse={removeCourse}
+      isDraggable={false}
     />
   );
 };
@@ -187,6 +188,7 @@ const ScheduleCourse = forwardRef<HTMLElement | null, ScheduleCourseProps>(
       isRemove,
       isFromSidebar,
       isDraggable,
+      isDisabled,
     },
     ref
   ) => {
@@ -218,7 +220,7 @@ const ScheduleCourse = forwardRef<HTMLElement | null, ScheduleCourseProps>(
           flex: scheduleCourse.classId === COOP_BLOCK.classId ? 1 : 0,
           marginBottom: "6px",
           transition: "transform 0.15s ease, opacity 0.25s ease",
-          transform: hovered ? "scale(1.04)" : "scale(1)",
+          transform: hovered && isDraggable ? "scale(1.04)" : "scale(1)",
           opacity: isValidRemove ? 0.5 : 1,
           justifyContent: "space-between",
           width: "100%",
@@ -321,7 +323,7 @@ const ScheduleCourseDraggedContents: React.FC<
     <div
       style={{
         padding: isDraggable ? "8px 8px" : "8px 12px",
-        cursor: isOverlay ? "grabbing" : "grab",
+        cursor: isOverlay ? "grabbing" : isDraggable ? "grab" : "default",
         flexGrow: "1",
       }}
       {...listeners}
