@@ -131,6 +131,8 @@ const SectionRequirement: React.FC<SidebarRequirementProps> = ({
             ...scheduleCourse,
             id: dndIdPrefix + "-" + courseKey,
           }}
+          isInSidebar
+          isChecked={false}
           isDisabled={false}
         />
       );

@@ -1,5 +1,5 @@
-import { DeleteIcon } from "@chakra-ui/icons";
-import { Flex } from "@chakra-ui/react";
+import { DeleteIcon, CheckIcon } from "@chakra-ui/icons";
+import { Box, Flex } from "@chakra-ui/react";
 import { useDraggable } from "@dnd-kit/core";
 import { CSS } from "@dnd-kit/utilities";
 import {
@@ -24,6 +24,8 @@ interface DraggableScheduleCourseProps {
   scheduleCourse: ScheduleCourse2<string>;
   coReqErr?: INEUReqError;
   preReqErr?: INEUReqError;
+  isInSidebar?: boolean;
+  isChecked?: boolean;
   /** Function to remove the course from whatever the schedule it is part of. */
   removeCourse?: (course: ScheduleCourse2<unknown>) => void;
   isEditable?: boolean;
@@ -40,6 +42,8 @@ export const DraggableScheduleCourse: React.FC<
   removeCourse,
   preReqErr = undefined,
   coReqErr = undefined,
+  isInSidebar = false,
+  isChecked = false,
   isEditable = false,
   isDisabled = false,
   setIsRemove,
@@ -64,6 +68,8 @@ export const DraggableScheduleCourse: React.FC<
       ref={setNodeRef}
       scheduleCourse={scheduleCourse}
       removeCourse={removeCourse}
+      isInSidebar={isInSidebar}
+      isChecked={isChecked}
       isEditable={isEditable}
       isDragging={isDragging}
       listeners={listeners}
@@ -179,6 +185,8 @@ const ScheduleCourse = forwardRef<HTMLElement | null, ScheduleCourseProps>(
       preReqErr = undefined,
       scheduleCourse,
       removeCourse,
+      isInSidebar = false,
+      isChecked = false,
       isEditable = false,
       isDragging = false,
       listeners,
@@ -238,7 +246,7 @@ const ScheduleCourse = forwardRef<HTMLElement | null, ScheduleCourseProps>(
           isOverlay={isOverlay}
           isDraggable={isDraggable}
         />
-        <Flex>
+        <Flex alignItems={"center"}>
           {isCourseError && (
             <ReqErrorModal
               setHovered={setHovered}
@@ -254,6 +262,27 @@ const ScheduleCourse = forwardRef<HTMLElement | null, ScheduleCourseProps>(
               }
             />
           )}
+          {isInSidebar && isChecked && (
+            <Box
+              bg={"states.success.main"}
+              borderColor={"states.success.main"}
+              color={"white"}
+              borderWidth="1px"
+              width="18px"
+              height="18px"
+              display="flex"
+              transition="background 0.25s ease, color 0.25s ease, border 0.25s ease"
+              transitionDelay="0.1s"
+              alignItems="center"
+              justifyContent="center"
+              borderRadius="2xl"
+              margin="8px"
+              p="xs"
+            >
+              <CheckIcon position="absolute" boxSize="9px" />
+            </Box>
+          )}
+
           {isEditable && !hovered && <ScheduleCourseSpacer />}
 
           {isOverlay && !isFromSidebar && (
