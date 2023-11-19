@@ -188,7 +188,6 @@ const ScheduleCourse = forwardRef<HTMLElement | null, ScheduleCourseProps>(
       isRemove,
       isFromSidebar,
       isDraggable,
-      isDisabled,
     },
     ref
   ) => {
