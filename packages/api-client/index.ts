@@ -20,7 +20,7 @@ import {
   ForgotPasswordDto,
   ResetPasswordDto,
   courseToString,
-  NUPath,
+  NUPathEnum,
 } from "@graduate/common";
 import { ClassConstructor, plainToInstance } from "class-transformer";
 
@@ -132,7 +132,7 @@ interface SearchClass {
   subject: string;
   prereqs?: INEUAndReq | INEUOrReq;
   coreqs?: INEUAndReq | INEUOrReq;
-  nupaths?: NUPath[];
+  nupath?: NUPathEnum[];
   maxCredits: number;
   minCredits: number;
   termId: string;
@@ -190,7 +190,7 @@ function occurrenceToCourse(occurrence: SearchClass): ScheduleCourse2<null> {
     numCreditsMin: occurrence.minCredits,
     prereqs: occurrence.prereqs,
     coreqs: occurrence.coreqs,
-    nupaths: occurrence.nupaths,
+    nupaths: occurrence.nupath,
     id: null,
   };
 }
@@ -239,7 +239,6 @@ class SearchAPIClient {
     });
 
     const courseData = await res.data.data;
-    console.log("test");
     if (courseData && courseData.class && courseData.class.allOccurrences) {
       return occurrencesToCourseByCatalogYear(
         courseData?.class?.allOccurrences,
@@ -376,7 +375,7 @@ class SearchAPIClient {
         subject: result.subject,
         prereqs: result.prereqs,
         coreqs: result.coreqs,
-        nupaths: result.nupaths,
+        nupaths: result.nupath,
         numCreditsMin: result.minCredits,
         numCreditsMax: result.maxCredits,
       };

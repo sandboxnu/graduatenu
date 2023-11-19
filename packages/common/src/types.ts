@@ -39,7 +39,6 @@ export enum StatusEnum {
   HOVERCOOP = "HOVERCOOP",
 }
 
-export type NUPath = keyof typeof NUPathEnum;
 export type Status = keyof typeof StatusEnum;
 export type Season = keyof typeof SeasonEnum;
 
@@ -318,6 +317,7 @@ export interface ScheduleTerm2<T> {
  * @param subject       The subject of this course (CS, DS, etc)
  * @param prereqs       The prerequisites for this course
  * @param coreqs        The corequisites for this course
+ * @param nupaths       The nupaths this course fulfills
  * @param numCreditsMin The minimum number of credits this course gives
  * @param numCreditsMax The maximum number of credits this course gives
  * @param id            Unique id used as a book keeping field for dnd.
@@ -328,7 +328,7 @@ export interface ScheduleCourse2<T> {
   subject: string;
   prereqs?: INEUAndReq | INEUOrReq;
   coreqs?: INEUAndReq | INEUOrReq;
-  nupaths?: NUPath[];
+  nupaths?: NUPathEnum[];
   numCreditsMin: number;
   numCreditsMax: number;
   id: T;
