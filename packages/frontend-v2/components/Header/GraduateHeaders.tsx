@@ -8,7 +8,7 @@ export const GraduatePreAuthHeader: React.FC = () => {
   return (
     <GraduateHeader
       rightContent={
-        <GraduateButtonLink href="/login">Sign In</GraduateButtonLink>
+        <GraduateButtonLink href="/login">Log In</GraduateButtonLink>
       }
     />
   );

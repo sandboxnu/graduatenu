@@ -77,7 +77,7 @@ const LoginForm: React.FC = () => {
               required: "Password is required",
             })}
           />
-          <Flex alignSelf='end'>
+          <Flex alignSelf="end">
             <GraduateLink href="/forgotPassword" text="Forgot password?" />
           </Flex>
         </>

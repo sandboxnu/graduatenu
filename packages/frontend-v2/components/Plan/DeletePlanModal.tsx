@@ -81,7 +81,7 @@ export const DeletePlanModal: React.FC<DeletePlanModalProps> = ({
                 borderRadius="lg"
                 onClick={onClose}
               >
-                Nevermind
+                Cancel
               </Button>
               <Button
                 variant="solid"
