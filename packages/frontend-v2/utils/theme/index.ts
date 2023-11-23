@@ -83,6 +83,7 @@ const breakpoints = {
   desktop: "1280px",
   laptop: "1024px",
   tablet: "640px",
+  base: "0px",
 };
 
 /**
