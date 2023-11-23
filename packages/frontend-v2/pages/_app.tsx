@@ -1,5 +1,6 @@
 import Head from "next/head";
 import type { AppProps } from "next/app";
+import { useRouter } from "next/router";
 import { ChakraProvider, Flex, Heading, Text, Image } from "@chakra-ui/react";
 import { theme } from "../utils";
 import "react-toastify/dist/ReactToastify.min.css";
@@ -9,9 +10,11 @@ import "@fontsource/montserrat-alternates";
 import { useWindowSize } from "../hooks";
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const router = useRouter();
   const { width } = useWindowSize();
 
-  const disableApp = width && width <= 1100;
+  const isLandingPage = router.asPath === "/";
+  const disableApp = !isLandingPage && width && width <= 1100;
 
   return (
     <>
