@@ -46,6 +46,7 @@ const Banner = (): JSX.Element => {
     >
       <Flex
         direction={{ tablet: "row", base: "column" }}
+        justifyContent="center"
         alignItems="center"
         mt={{ tablet: "0", base: "130px" }}
       >
@@ -100,6 +101,8 @@ const Banner = (): JSX.Element => {
               Your Way
             </Heading>
             <Text
+              maxW="550px"
+              w={{ tablet: "90%", base: "100%" }}
               mt={{ tablet: "2xl", base: "lg" }}
               mb={{ tablet: "0", base: "2xl" }}
               fontSize={{
@@ -165,7 +168,7 @@ const Info = (): JSX.Element => {
       pb={{ desktop: "7.75rem", laptop: "8rem", tablet: "6.5rem" }}
       backgroundColor="#F5F6F8"
     >
-      <VStack py={{ tablet: "0", base: "2xl" }}>
+      <VStack py={{ tablet: "0", base: "2xl" }} maxW="1280px" mx="auto">
         <Heading
           mb={{ desktop: "6rem", laptop: "5rem", tablet: "4rem" }}
           size="2xl"
