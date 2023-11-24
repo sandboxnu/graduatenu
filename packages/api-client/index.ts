@@ -44,7 +44,7 @@ class APIClient {
     this.axios = Axios.create({
       baseURL: baseURL,
       headers: { "content-type": "application/json" },
-      withCredentials: false,
+      withCredentials: true,
     });
   }
 
