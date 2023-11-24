@@ -1,6 +1,7 @@
-import { Link, Text, Tooltip } from "@chakra-ui/react";
+import { Box, Flex, Icon, Link, Text, Tooltip } from "@chakra-ui/react";
 import { API } from "@graduate/api-client";
 import { Maybe } from "@graduate/common";
+import { useState } from "react";
 import useSWR from "swr";
 
 function timeDifference(current: number, previous: number): string {
@@ -37,6 +38,60 @@ function formatBuildTime(timestamp: number): string {
     minute: "numeric",
   });
 }
+
+export const MetaInfoWidget: React.FC = () => {
+  const [showDevInfo, setShowDevInfo] = useState(false);
+
+  return (
+    <Flex position="relative">
+      <Flex
+        border={
+          process.env.NODE_ENV === "development" ? "1px solid" : "0px solid"
+        }
+        _hover={{
+          background: "neutral.100",
+        }}
+        borderColor="neutral.300"
+        padding="5px"
+        alignItems="center"
+        gap="xs"
+        borderRadius="md"
+        onClick={() => setShowDevInfo((state) => !state)}
+        transition="background 0.15s ease"
+        userSelect="none"
+      >
+        <Icon
+          xmlns="http://www.w3.org/2000/svg"
+          fill="black"
+          viewBox="0 0 24 24"
+        >
+          <path d="M14.6,16.6L19.2,12L14.6,7.4L16,6L22,12L16,18L14.6,16.6M9.4,16.6L4.8,12L9.4,7.4L8,6L2,12L8,18L9.4,16.6Z"></path>
+        </Icon>
+        {process.env.NODE_ENV === "development" && <Text>Dev</Text>}
+      </Flex>
+      {
+        <Box
+          position="absolute"
+          border="1px solid"
+          borderColor="neutral.400"
+          top="80%"
+          left="0px"
+          transition="opacity 0.15s ease, transform 0.15s ease"
+          opacity={showDevInfo ? 1 : 0}
+          transform={showDevInfo ? "scale(1)" : "scale(0.9) translateY(-5px)"}
+          pointerEvents={showDevInfo ? "unset" : "none"}
+          transformOrigin="20% top"
+          padding="md"
+          background="white"
+          borderRadius="md"
+          width="300px"
+        >
+          <MetaInfo />
+        </Box>
+      }
+    </Flex>
+  );
+};
 
 export const MetaInfo: React.FC = () => {
   const { data, error } = useSWR("/meta/info", API.meta.getInfo);
