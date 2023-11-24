@@ -5,7 +5,7 @@ import { Injectable } from "@nestjs/common";
 export class MetaService {
   getMetaInfo(): MetaInfo {
     return {
-      commit: process.env.COMMIT_SHA ?? false,
+      commit: process.env.COMMIT_HASH ?? false,
       commitMessage: process.env.COMMIT_MESSAGE ?? false,
       build_timestamp:
         process.env.BUILD_TIMESTAMP !== undefined

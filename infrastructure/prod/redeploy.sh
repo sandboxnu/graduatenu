@@ -13,14 +13,16 @@ ECS_CLUSTER="$1-graduatenu"
 TASK_FAMILIES=( "${ECS_CLUSTER}-api" "${ECS_CLUSTER}-web" )
 SERVICES=( "${ECS_CLUSTER}-api" "${ECS_CLUSTER}-web" )
 
+INDEXES=(0 1)
+
 if [[ "frontend" = $2 ]]; then
   echo "INFO: Deploying frontend only."
-  REPOS=("graduatenu-node")
+  INDEXES=(1)
 fi
 
 if [[ "backend" = $2 ]]; then
   echo "INFO: Deploying backend only."
-  REPOS=("graduatenu-rails")
+  INDEXES=(0)
 fi
 
 if [[ "current" = $3 ]]; then
@@ -34,7 +36,9 @@ export AWS_PAGER=""
 echo "Redeploying services for cluster: ${ECS_CLUSTER} with last pushed image"
 
 
-for i in "${!REPOS[@]}"; do
+for ii in "${!INDEXES[@]}"; do
+    echo "Deploying ${INDEXES[ii]}..."
+    i=${INDEXES[ii]}
     # Last pushed image should always be tagged with the latest commit hash on main 
     ECR_IMAGE="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${REPOS[$i]}:${CURRENT_HASH}"
     TASK_FAMILY="${TASK_FAMILIES[$i]}"

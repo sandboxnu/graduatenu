@@ -12,8 +12,8 @@ import {
   emailAlreadyConfirmed,
   unableToSendEmail,
 } from "@graduate/common";
-import { AuthenticatedRequest } from "src/auth/interfaces/authenticated-request";
-import { JwtAuthGuard } from "src/guards/jwt-auth.guard";
+import { AuthenticatedRequest } from "../../src/auth/interfaces/authenticated-request";
+import { JwtAuthGuard } from "../../src/guards/jwt-auth.guard";
 import EmailConfirmationService from "./emailConfirmation.service";
 import {
   EmailAlreadyConfirmed,

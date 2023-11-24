@@ -22,13 +22,13 @@ import {
   weakPasswordError,
 } from "@graduate/common";
 import { Response } from "express";
-import EmailConfirmationService from "src/emailConfirmation/emailConfirmation.service";
+import EmailConfirmationService from "../../src/emailConfirmation/emailConfirmation.service";
 import {
   EmailAlreadyExists,
   EmailNotConfirmed,
   NoSuchEmail,
   WeakPassword,
-} from "src/student/student.errors";
+} from "../../src/student/student.errors";
 import { BadToken, InvalidPayload, TokenExpiredError } from "./auth.errors";
 import { Throttle } from "@nestjs/throttler";
 
