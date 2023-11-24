@@ -15,13 +15,6 @@ RUN yarn install > /dev/null
 COPY packages/api-v2 packages/api-v2
 COPY packages/common packages/common
 
-ARG COMMIT
-ARG COMMIT_MESSAGE
-ARG BUILD_TIMESTAMP
-
-ENV COMMIT_HASH $COMMIT
-ENV COMMIT_MESSAGE $COMMIT_MESSAGE
-
 # Build server and common dependency
 RUN yarn packages/common build
 RUN yarn packages/api-v2 build
@@ -36,6 +29,7 @@ ARG BUILD_TIMESTAMP
 ENV NODE_ENV production
 ENV COMMIT_HASH $COMMIT
 ENV COMMIT_MESSAGE $COMMIT_MESSAGE
+ENV BUILD_TIMESTAMP $BUILD_TIMESTAMP
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nestjs
