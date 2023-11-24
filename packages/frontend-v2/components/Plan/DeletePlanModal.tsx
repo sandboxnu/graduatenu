@@ -15,10 +15,14 @@ import {
 } from "@chakra-ui/react";
 import { API } from "@graduate/api-client";
 import { useRouter } from "next/router";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useContext } from "react";
 import { mutate } from "swr";
-import { USE_STUDENT_WITH_PLANS_SWR_KEY } from "../../hooks";
+import {
+  USE_STUDENT_WITH_PLANS_SWR_KEY,
+  useStudentWithPlans,
+} from "../../hooks";
 import { handleApiClientError, toast } from "../../utils";
+import { IsGuestContext } from "../../pages/_app";
 
 interface DeletePlanModalProps {
   planName: string;
@@ -32,10 +36,26 @@ export const DeletePlanModal: React.FC<DeletePlanModalProps> = ({
 }) => {
   const router = useRouter();
   const { onOpen, onClose, isOpen } = useDisclosure();
+  const { isGuest } = useContext(IsGuestContext);
+  const { student } = useStudentWithPlans();
+
+  if (!student) {
+    return <></>;
+  }
 
   const deletePlan = async () => {
     try {
-      await API.plans.delete(planId);
+      if (isGuest) {
+        window.localStorage.setItem(
+          "student",
+          JSON.stringify({
+            ...student,
+            plans: student.plans.filter((plan) => plan.id !== planId),
+          })
+        );
+      } else {
+        await API.plans.delete(planId);
+      }
 
       // refresh the cache, show success message, and close the modal
       mutate(USE_STUDENT_WITH_PLANS_SWR_KEY);

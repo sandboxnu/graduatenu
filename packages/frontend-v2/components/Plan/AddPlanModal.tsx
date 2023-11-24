@@ -16,16 +16,22 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { API } from "@graduate/api-client";
-import { CreatePlanDto, CreatePlanDtoWithoutSchedule } from "@graduate/common";
+import {
+  CreatePlanDto,
+  CreatePlanDtoWithoutSchedule,
+  PlanModel,
+} from "@graduate/common";
 import { useRouter } from "next/router";
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { mutate } from "swr";
 import {
   useSupportedMajors,
   USE_STUDENT_WITH_PLANS_SWR_KEY,
+  useStudentWithPlans,
 } from "../../hooks";
 import {
+  cleanDndIdsFromStudent,
   createEmptySchedule,
   extractSupportedMajorNames,
   extractSupportedMajorYears,
@@ -36,6 +42,7 @@ import { BlueButton } from "../Button";
 import { PlanInput, PlanSelect } from "../Form";
 import { HelperToolTip } from "../Help";
 import { PlanConcentrationsSelect } from "./PlanConcentrationsSelect";
+import { IsGuestContext } from "../../pages/_app";
 
 interface AddPlanModalProps {
   setSelectedPlanId: Dispatch<SetStateAction<number | undefined | null>>;
@@ -61,6 +68,12 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
     shouldFocusError: true,
   });
   const [isNoMajorSelected, setIsNoMajorSelected] = useState(false);
+  const { isGuest } = useContext(IsGuestContext);
+  const { student } = useStudentWithPlans();
+
+  if (!student) {
+    return <></>;
+  }
 
   if (supportedMajorsError) {
     handleApiClientError(supportedMajorsError, router);
@@ -78,14 +91,34 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
 
     // create the new plan
     let createdPlanId: number;
-    try {
-      const createdPlan = await API.plans.create(newPlan);
-      createdPlanId = createdPlan.id;
-    } catch (error) {
-      handleApiClientError(error as Error, router);
+    if (isGuest) {
+      createdPlanId = student.plans.length + 1;
+      // Create plan in local storage
+      const planInLocalStorage: PlanModel<null> = {
+        ...newPlan,
+        id: createdPlanId,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        student: cleanDndIdsFromStudent(student),
+      } as PlanModel<null>;
 
-      // don't proceed further if POST failed
-      return;
+      window.localStorage.setItem(
+        "student",
+        JSON.stringify({
+          ...student,
+          plans: [...student.plans, planInLocalStorage],
+        })
+      );
+    } else {
+      try {
+        const createdPlan = await API.plans.create(newPlan);
+        createdPlanId = createdPlan.id;
+      } catch (error) {
+        handleApiClientError(error as Error, router);
+
+        // don't proceed further if POST failed
+        return;
+      }
     }
 
     // refresh the cache and close the modal

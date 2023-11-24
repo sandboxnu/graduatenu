@@ -13,6 +13,8 @@ import {
 import { AddCourseButton, AddCourseModal } from "../AddCourseModal";
 import { HelperToolTip } from "../Help";
 import { NonDraggableScheduleCourse } from "../ScheduleCourse";
+import { useContext } from "react";
+import { IsGuestContext } from "../../pages/_app";
 
 interface TransferCoursesToggleProps {
   isExpanded: boolean;
@@ -25,6 +27,7 @@ export const TransferCourses: React.FC<TransferCoursesToggleProps> = ({
 }) => {
   const { student, isLoading, mutateStudent } = useStudentWithPlans();
   const router = useRouter();
+  const { isGuest } = useContext(IsGuestContext);
 
   /*
   Simply refrain from displaying the transfer courses section if 
@@ -57,8 +60,15 @@ export const TransferCourses: React.FC<TransferCoursesToggleProps> = ({
       async () => {
         // have to clean all dnd ids before sending the student to our API
         const studentWithoutDndIds = cleanDndIdsFromStudent(updatedStudent);
-        await API.student.update(studentWithoutDndIds);
-        return fetchStudentAndPrepareForDnd();
+        if (isGuest) {
+          window.localStorage.setItem(
+            "student",
+            JSON.stringify(studentWithoutDndIds)
+          );
+        } else {
+          await API.student.update(studentWithoutDndIds);
+        }
+        return fetchStudentAndPrepareForDnd(isGuest);
       },
       {
         optimisticData: updatedStudent,

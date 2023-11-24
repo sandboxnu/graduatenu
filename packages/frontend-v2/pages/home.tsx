@@ -18,7 +18,7 @@ import {
 } from "@graduate/common";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
-import { PropsWithChildren, useEffect, useState } from "react";
+import { PropsWithChildren, useContext, useEffect, useState } from "react";
 import {
   AddPlanModal,
   DeletePlanModal,
@@ -46,6 +46,7 @@ import {
   getCoReqWarnings,
   getPreReqWarnings,
 } from "../utils/plan/preAndCoReqCheck";
+import { IsGuestContext } from "./_app";
 
 // Algorithm to decide which droppable the course is currently over (if any).
 // See https://docs.dndkit.com/api-documentation/context-provider/collision-detection-algorithms for more info.
@@ -86,6 +87,8 @@ const HomePage: NextPage = () => {
 
   const [isTransferCoursesExpanded, setIsTransferCoursesExpanded] =
     useState<boolean>(false);
+
+  const { isGuest } = useContext(IsGuestContext);
 
   useEffect(() => {
     // once the student is fetched, set the selected plan id to the last updated plan
@@ -191,8 +194,26 @@ const HomePage: NextPage = () => {
       async () => {
         // remove dnd ids, update the plan, and refetch the student
         const cleanedPlan = cleanDndIdsFromPlan(updatedPlan);
-        await API.plans.update(updatedPlan.id, cleanedPlan);
-        return fetchStudentAndPrepareForDnd();
+        if (isGuest) {
+          const cleanedPlanWithUpdatedTimeStamp: PlanModel<null> = {
+            ...cleanedPlan,
+            updatedAt: new Date(),
+          };
+          window.localStorage.setItem(
+            "student",
+            JSON.stringify({
+              ...student,
+              plans: student.plans.map((plan) =>
+                plan.id === cleanedPlanWithUpdatedTimeStamp.id
+                  ? cleanedPlanWithUpdatedTimeStamp
+                  : plan
+              ),
+            })
+          );
+        } else {
+          await API.plans.update(updatedPlan.id, cleanedPlan);
+        }
+        return fetchStudentAndPrepareForDnd(isGuest);
       },
       {
         optimisticData: updatedStudent,

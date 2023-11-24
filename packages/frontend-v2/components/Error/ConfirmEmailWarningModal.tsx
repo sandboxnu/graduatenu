@@ -23,13 +23,15 @@ export const ConfirmEmailWarningModal: React.FC<
   ConfirmEmailWarningModalProps
 > = ({ student }) => {
   //TODO: Fix modal show on first time
-  const [alreadyVisited, setAlreadyVisited] = useLocalStorage("alreadyVisited");
+  const [alreadyVisited, setAlreadyVisited] = useLocalStorage(
+    "alreadyVisited",
+    false
+  );
   // By default, open the modal if the user has not visited this page or if the user is not confirmed
   const { onClose, isOpen } = useDisclosure({
     defaultIsOpen: !student.isEmailConfirmed && !alreadyVisited,
   });
-  console.log({student, alreadyVisited})
-  console.log(!student.isEmailConfirmed && !alreadyVisited)
+  console.log(!student.isEmailConfirmed && !alreadyVisited);
 
   const closeModal = () => {
     setAlreadyVisited(true);
@@ -45,7 +47,6 @@ export const ConfirmEmailWarningModal: React.FC<
       toast.error("Something went wrong");
     }
   };
-
 
   return (
     <Modal isOpen={isOpen} onClose={closeModal} size="md">

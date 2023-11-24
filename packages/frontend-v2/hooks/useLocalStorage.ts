@@ -16,9 +16,10 @@ import { logger } from "../utils";
  * @param key Key for the localstorage value.
  */
 export function useLocalStorage<T>(
-  key: string
-): [T | null, Dispatch<T>] {
-  const [storedValue, setStoredValue] = useState<T | null>(null);
+  key: string,
+  defaultValue: T
+): [T, Dispatch<T>] {
+  const [storedValue, setStoredValue] = useState<T>(defaultValue);
 
   useEffect(() => {
     try {
@@ -32,7 +33,7 @@ export function useLocalStorage<T>(
   const setValue = (value: T) => {
     try {
       setStoredValue(value);
-      window?.localStorage.setItem(key, JSON.stringify(value));
+      window.localStorage.setItem(key, JSON.stringify(value));
     } catch (error) {
       logger.error(error);
     }
