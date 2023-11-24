@@ -61,11 +61,14 @@ export class AuthController {
     const { accessToken } = student;
 
     const isSecure = process.env.NODE_ENV !== "development";
+    const domain =
+      process.env.NODE_ENV === "production" ? "graduatenu.com" : "localhost";
     // Store JWT token in a cookie
     response.cookie("auth_cookie", accessToken, {
       httpOnly: true,
       sameSite: "strict",
       secure: isSecure,
+      domain,
     });
     if (process.env.NODE_ENV !== "testing") {
       await this.emailConfirmationService.sendVerificationLink(
@@ -90,11 +93,14 @@ export class AuthController {
     const { accessToken } = student;
 
     const isSecure = process.env.NODE_ENV !== "development";
+    const domain =
+      process.env.NODE_ENV === "production" ? "graduatenu.com" : "localhost";
     // Store JWT token in a cookie
     response.cookie("auth_cookie", accessToken, {
       httpOnly: true,
       sameSite: "strict",
       secure: isSecure,
+      domain,
     });
 
     return student;
@@ -152,10 +158,13 @@ export class AuthController {
     @Res({ passthrough: true }) response: Response
   ): Promise<void> {
     const isSecure = process.env.NODE_ENV !== "development";
+    const domain =
+      process.env.NODE_ENV === "production" ? "graduatenu.com" : "localhost";
     response.clearCookie("auth_cookie", {
       httpOnly: true,
       sameSite: "strict",
       secure: isSecure,
+      domain,
     });
   }
 }
