@@ -2,7 +2,16 @@ import { HeaderContainer } from "./HeaderContainer";
 import { Logo } from "./Logo";
 import { GraduateButtonLink } from "../Link";
 import { UserDropdown } from "./UserDropdown";
-import { Flex, Icon, IconProps, Link as ChakraLink } from "@chakra-ui/react";
+import {
+  Flex,
+  Icon,
+  IconProps,
+  Link as ChakraLink,
+  Box,
+  Text,
+} from "@chakra-ui/react";
+import { useState } from "react";
+import { MetaInfo } from "../MetaInfo/MetaInfo";
 
 export const GraduatePreAuthHeader: React.FC = () => {
   return (
@@ -27,10 +36,61 @@ interface GraduateHeaderProps {
 }
 
 const GraduateHeader: React.FC<GraduateHeaderProps> = ({ rightContent }) => {
+  const [showDevInfo, setShowDevInfo] = useState(false);
+
   return (
     <HeaderContainer>
       <Logo />
       <Flex columnGap="md" alignItems="center">
+        <Flex position="relative">
+          <Flex
+            border={
+              process.env.NODE_ENV === "development" ? "1px solid" : "0px solid"
+            }
+            _hover={{
+              background: "neutral.100",
+            }}
+            borderColor="neutral.300"
+            padding="5px"
+            alignItems="center"
+            gap="xs"
+            borderRadius="md"
+            onClick={() => setShowDevInfo((state) => !state)}
+            transition="background 0.15s ease"
+            userSelect="none"
+          >
+            <Icon
+              xmlns="http://www.w3.org/2000/svg"
+              fill="black"
+              viewBox="0 0 24 24"
+            >
+              <path d="M14.6,16.6L19.2,12L14.6,7.4L16,6L22,12L16,18L14.6,16.6M9.4,16.6L4.8,12L9.4,7.4L8,6L2,12L8,18L9.4,16.6Z"></path>
+            </Icon>
+            {process.env.NODE_ENV === "development" && <Text>Dev</Text>}
+          </Flex>
+          {
+            <Box
+              position="absolute"
+              border="1px solid"
+              borderColor="neutral.400"
+              top="80%"
+              left="0px"
+              transition="opacity 0.15s ease, transform 0.15s ease"
+              opacity={showDevInfo ? 1 : 0}
+              transform={
+                showDevInfo ? "scale(1)" : "scale(0.9) translateY(-5px)"
+              }
+              pointerEvents={showDevInfo ? "unset" : "none"}
+              transformOrigin="20% top"
+              padding="md"
+              background="white"
+              borderRadius="md"
+              width="300px"
+            >
+              <MetaInfo />
+            </Box>
+          }
+        </Flex>
         <ChakraLink href="https://forms.gle/Tg9yuhR8inkrqHdN6" isExternal>
           <FeedbackIcon mx="2px" />
           Feedback

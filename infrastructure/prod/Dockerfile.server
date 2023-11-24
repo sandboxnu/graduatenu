@@ -22,7 +22,13 @@ RUN yarn packages/api-v2 build
 FROM node:16-alpine AS runner
 WORKDIR /server
 
+ARG COMMIT
+ARG COMMIT_MESSAGE
+ARG BUILD_TIMESTAMP
+
 ENV NODE_ENV production
+ENV COMMIT_HASH $COMMIT
+ENV COMMIT_MESSAGE $COMMIT_MESSAGE
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nestjs

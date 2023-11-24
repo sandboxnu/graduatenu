@@ -21,6 +21,7 @@ import {
   ResetPasswordDto,
   courseToString,
   NUPathEnum,
+  GetMetaInfoResponse,
 } from "@graduate/common";
 import { ClassConstructor, plainToInstance } from "class-transformer";
 
@@ -102,6 +103,11 @@ class APIClient {
       this.req<Major2>("GET", `/majors/${catalogYear}/${majorName}`),
     getSupportedMajors: (): Promise<GetSupportedMajorsResponse> =>
       this.req("GET", `/majors/supportedMajors`, GetSupportedMajorsResponse),
+  };
+
+  meta = {
+    getInfo: (): Promise<GetMetaInfoResponse> =>
+      this.req("GET", "/meta/info", GetMetaInfoResponse),
   };
 }
 
