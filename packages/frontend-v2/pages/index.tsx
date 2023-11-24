@@ -7,6 +7,7 @@ import {
   SimpleGrid,
   Text,
   VStack,
+  useMediaQuery,
 } from "@chakra-ui/react";
 import { GraduateButtonLink, GraduatePreAuthHeader } from "../components";
 
@@ -23,11 +24,14 @@ interface InfoTextProps {
 }
 
 const LandingPage: NextPage = () => {
+  const [isMobile] = useMediaQuery("(max-width: 640px)");
+
   return (
     <Box>
       <GraduatePreAuthHeader />
       <Banner />
       <Info />
+      {isMobile && <WhyDesktop />}
     </Box>
   );
 };
@@ -61,7 +65,7 @@ const Banner = (): JSX.Element => {
           alignItems="start"
         >
           <Box
-            w={{ tablet: "100%", base: "80%" }}
+            w={{ tablet: "100%", base: "85%" }}
             textAlign={{ tablet: "left", base: "center" }}
             pt={{ desktop: "0", laptop: "0", base: "1rem" }}
             mx="auto"
@@ -100,7 +104,7 @@ const Banner = (): JSX.Element => {
                 desktop: "2xl",
                 laptop: "2xl",
                 tablet: "xl",
-                base: "md",
+                base: "xl",
               }}
               color="primary.blue.dark.main"
               lineHeight="1.3"
@@ -149,7 +153,7 @@ const Info = (): JSX.Element => {
       altInfo: "Graduate",
       title: "Graduate",
       description:
-        "Build a plan of study that lets you graduate faster, with better classes, and a lot less headaches.",
+        "Build a plan of study that lets you graduate faster, take better classes, and prevent headaches.",
     },
   ];
 
@@ -159,7 +163,7 @@ const Info = (): JSX.Element => {
       pb={{ desktop: "7.75rem", laptop: "8rem", tablet: "6.5rem" }}
       backgroundColor="#F5F6F8"
     >
-      <VStack>
+      <VStack py={{ tablet: "0", base: "2xl" }}>
         <Heading
           mb={{ desktop: "6rem", laptop: "5rem", tablet: "4rem" }}
           size="2xl"
@@ -167,7 +171,12 @@ const Info = (): JSX.Element => {
         >
           How It Works
         </Heading>
-        <SimpleGrid columns={3} justifyItems="center" pl="5%" pr="5%">
+        <SimpleGrid
+          columns={{ tablet: 3, base: 1 }}
+          justifyItems="center"
+          pl="5%"
+          pr="5%"
+        >
           {infoSectionData.map((info) => (
             <InfoSection
               key={info.title}
@@ -190,7 +199,7 @@ const InfoSection = ({
   description,
 }: InfoSectionProps): JSX.Element => {
   return (
-    <Flex flexDirection="column" w="55%">
+    <Flex flexDirection="column" w={{ tablet: "65%", base: "85%" }}>
       <InfoImage imageSource={imageSource} altInfo={altInfo} />
       <InfoText title={title} description={description} />
     </Flex>
@@ -200,9 +209,15 @@ const InfoSection = ({
 const InfoImage = ({ imageSource, altInfo }: InfoImageProps): JSX.Element => {
   return (
     <Image
-      boxSize={{ desktop: "15.5rem", laptop: "12.5rem", tablet: "9.5rem" }}
-      pt="5%"
-      pb="5%"
+      boxSize={{
+        desktop: "15.5rem",
+        laptop: "12.5rem",
+        tablet: "9.5rem",
+        base: "15.5rem",
+      }}
+      mx="auto"
+      mt={{ tablet: "0", base: "5%" }}
+      py="5%"
       src={imageSource}
       alt={altInfo}
       objectFit="contain"
@@ -215,16 +230,48 @@ const InfoText = ({ title, description }: InfoTextProps): JSX.Element => {
     <Box>
       <Heading
         pt="10%"
-        fontSize={{ desktop: "3xl", laptop: "2xl", tablet: "xl" }}
+        fontSize={{ desktop: "3xl", laptop: "2xl", tablet: "xl", base: "2xl" }}
         color="primary.blue.dark.main"
         textAlign="center"
+        mt={{ tablet: "0", base: "-1rem" }}
       >
         {title}
       </Heading>
-      <Text pt="3%" textAlign="center">
+      <Text
+        fontSize={{ tablet: "md", base: "xl" }}
+        pt="3%"
+        textAlign="center"
+        mb={{ tablet: "0", base: "3rem" }}
+      >
         {description}
       </Text>
     </Box>
+  );
+};
+
+const WhyDesktop = (): JSX.Element => {
+  return (
+    <VStack
+      bg="primary.blue.dark.main"
+      py="15%"
+      px="5%"
+      spacing="2rem"
+      color="white"
+      textAlign="center"
+    >
+      <Heading fontSize="2xl">Why are we only on desktop?</Heading>
+      <Text fontSize="xl">
+        GraduateNU aims to empower Northeastern students to customize their plan
+        of study through an intuitive and flexible interface shaped by student
+        feedback.
+      </Text>
+      <Image
+        pt="lg"
+        src="/home_simplified.svg"
+        alt="Home Page"
+        objectFit="contain"
+      />
+    </VStack>
   );
 };
 

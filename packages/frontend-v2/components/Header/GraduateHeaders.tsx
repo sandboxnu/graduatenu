@@ -111,12 +111,12 @@ const MobileHeader: React.FC = () => {
         justifyContent="center"
         alignItems="center"
         bg="primary.blue.dark.main"
-        h="45px"
+        h="55px"
       >
         <Text
           textColor="white"
           textAlign="center"
-          fontSize="xs"
+          fontSize="md"
           fontWeight="bold"
         >
           Open our site on desktop to get started!
