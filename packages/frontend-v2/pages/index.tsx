@@ -7,6 +7,7 @@ import {
   SimpleGrid,
   Text,
   VStack,
+  Link,
   useMediaQuery,
 } from "@chakra-ui/react";
 import { GraduateButtonLink, GraduatePreAuthHeader } from "../components";
@@ -32,6 +33,7 @@ const LandingPage: NextPage = () => {
       <Banner />
       <Info />
       {isMobile && <WhyDesktop />}
+      <Footer />
     </Box>
   );
 };
@@ -272,6 +274,23 @@ const WhyDesktop = (): JSX.Element => {
         objectFit="contain"
       />
     </VStack>
+  );
+};
+
+const Footer = (): JSX.Element => {
+  return (
+    <Flex h="4rem" alignItems="center" justifyContent="center">
+      <Text fontSize="sm" fontWeight="semibold" color="primary.blue.dark.main">
+        Made by students @{" "}
+        <Link
+          textDecoration="underline"
+          href="https://sandboxnu.com"
+          target="_blank"
+        >
+          Sandbox
+        </Link>
+      </Text>
+    </Flex>
   );
 };
 
