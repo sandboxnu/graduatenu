@@ -4,6 +4,12 @@ import { Maybe } from "@graduate/common";
 import { useState } from "react";
 import useSWR from "swr";
 
+// adapted from https://stackoverflow.com/questions/3177836/how-to-format-time-since-xxx-e-g-4-minutes-ago-similar-to-stack-exchange-site
+/**
+ * @param   current  The current time as a JS timestamp (milliseconds)
+ * @param   previous The previous time as a JS timestamp (milliseconds)
+ * @returns          Textual relative time difference
+ */
 function timeDifference(current: number, previous: number): string {
   const msPerMinute = 60 * 1000;
   const msPerHour = msPerMinute * 60;
@@ -14,20 +20,24 @@ function timeDifference(current: number, previous: number): string {
   const elapsed = current - previous;
 
   if (elapsed < msPerMinute) {
-    return Math.round(elapsed / 1000) + " seconds ago";
+    return Math.round(elapsed / 1000) + " second(s) ago";
   } else if (elapsed < msPerHour) {
-    return Math.round(elapsed / msPerMinute) + " minutes ago";
+    return Math.round(elapsed / msPerMinute) + " minute(s) ago";
   } else if (elapsed < msPerDay) {
-    return Math.round(elapsed / msPerHour) + " hours ago";
+    return Math.round(elapsed / msPerHour) + " hour(s) ago";
   } else if (elapsed < msPerMonth) {
-    return "~" + Math.round(elapsed / msPerDay) + " days ago";
+    return "~" + Math.round(elapsed / msPerDay) + " day(s) ago";
   } else if (elapsed < msPerYear) {
-    return "~" + Math.round(elapsed / msPerMonth) + " months ago";
+    return "~" + Math.round(elapsed / msPerMonth) + " month(s) ago";
   } else {
-    return "~" + Math.round(elapsed / msPerYear) + " years ago";
+    return "~" + Math.round(elapsed / msPerYear) + " year(s) ago";
   }
 }
 
+/**
+ * @param   timestamp A JS timestamp (milliseconds)
+ * @returns           Formats the given timestamp as a string time
+ */
 function formatBuildTime(timestamp: number): string {
   return new Date(timestamp).toLocaleDateString("en-US", {
     weekday: "short",
@@ -39,6 +49,7 @@ function formatBuildTime(timestamp: number): string {
   });
 }
 
+/** A clickable dev widget for the header at the top of all pages. */
 export const MetaInfoWidget: React.FC = () => {
   const [showDevInfo, setShowDevInfo] = useState(false);
 
@@ -93,6 +104,7 @@ export const MetaInfoWidget: React.FC = () => {
   );
 };
 
+/** The contents of the meta info widget which displays docker build info. */
 export const MetaInfo: React.FC = () => {
   const { data, error } = useSWR("/meta/info", API.meta.getInfo);
 
@@ -130,6 +142,7 @@ export const MetaInfo: React.FC = () => {
   );
 };
 
+/** Display the given optional commit hash and message. */
 const CommitText: React.FC<{
   commitHash: Maybe<string>;
   commitMessage: Maybe<string>;
@@ -154,6 +167,7 @@ const CommitText: React.FC<{
   }
 };
 
+/** Displays the given optional build time timestamp. */
 const BuildTime: React.FC<{ buildTime: Maybe<string | number> }> = ({
   buildTime,
 }) => {
@@ -169,6 +183,7 @@ const BuildTime: React.FC<{ buildTime: Maybe<string | number> }> = ({
   }
 };
 
+/** A Docker meta info section. */
 export const MetaInfoSection: React.FC<{
   environment: Maybe<string>;
   commitHash: Maybe<string>;

@@ -3,6 +3,7 @@ if [[ $# != 2 ]]; then
   exit 1
 fi
 
+# Accept a few different formats for the commit hash.
 if [[ ${#1} = 40 ]]; then
   ECR_IMAGE_COMMIT_HASH=$1
 elif [[ $1 = "latest-main" ]]; then

@@ -10,6 +10,7 @@ if [[ ! " prod staging " =~ " $1 " ]]; then
   exit 1
 fi
 
+# Accept a few different formats for the commit hash.
 if [[ ${#2} = 40 ]]; then
   ECR_IMAGE_COMMIT_HASH=$2
 elif [[ $2 = "latest-main" ]]; then
@@ -21,6 +22,7 @@ else
   exit 1
 fi
 
+# Only deploy the service specified.
 if [[ $3 = "frontend" ]]; then
   DEPLOY_INDEXES=(1)
 elif [[ $3 = "backend" ]]; then
