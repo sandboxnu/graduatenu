@@ -1,4 +1,4 @@
-import { Button, Flex, Text } from "@chakra-ui/react";
+import { Button, Flex, Text, useConst } from "@chakra-ui/react";
 import { API } from "@graduate/api-client";
 import { LoginStudentDto } from "@graduate/common";
 import { AxiosError } from "axios";
@@ -14,6 +14,8 @@ import {
 } from "../components";
 import { useRedirectIfLoggedIn } from "../hooks";
 import { handleApiClientError, toast } from "../utils";
+import { useContext } from "react";
+import { IsGuestContext } from "./_app";
 
 const Login: NextPage = () => {
   return <AuthenticationPageLayout form={<LoginForm />} />;
@@ -22,6 +24,7 @@ const Login: NextPage = () => {
 const LoginForm: React.FC = () => {
   const router = useRouter();
   const renderSpinner = useRedirectIfLoggedIn();
+  const { setIsGuest } = useContext(IsGuestContext);
 
   const {
     register,
@@ -34,6 +37,7 @@ const LoginForm: React.FC = () => {
 
   const onSubmitHandler = async (payload: LoginStudentDto) => {
     try {
+      setIsGuest(false);
       await API.auth.login(payload);
       router.push("/home");
     } catch (err) {

@@ -72,10 +72,6 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
   const { student } = useStudentWithPlans();
   const { isGuest } = useContext(IsGuestContext);
 
-  if (!student) {
-    return <></>;
-  }
-
   const resetValuesToCurrPlan = useCallback(() => {
     if (!plan) {
       return;
@@ -102,6 +98,10 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
 
   if (supportedMajorsError) {
     handleApiClientError(supportedMajorsError, router);
+  }
+
+  if (!student) {
+    return <></>;
   }
 
   const catalogYear = watch("catalogYear");

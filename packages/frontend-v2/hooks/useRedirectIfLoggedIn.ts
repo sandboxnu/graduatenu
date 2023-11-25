@@ -1,8 +1,9 @@
 import { API } from "@graduate/api-client";
 import router from "next/router";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { logger } from "../utils";
 import { AxiosError } from "axios";
+import { IsGuestContext } from "../pages/_app";
 
 /**
  * If the user is already logged in, then redirect to onboarding/home.
@@ -12,11 +13,13 @@ import { AxiosError } from "axios";
  */
 export const useRedirectIfLoggedIn = () => {
   const [renderSpinner, setRenderSpinner] = useState(false);
+  const { setIsGuest } = useContext(IsGuestContext);
 
   const loginWithCookie = async () => {
     setRenderSpinner(true);
     try {
       await API.student.getMe();
+      setIsGuest(false);
       router.push("/home");
     } catch (err) {
       const error = err as AxiosError;

@@ -17,7 +17,7 @@ interface IsGuestContextType {
 }
 
 export const IsGuestContext = createContext<IsGuestContextType>({
-  isGuest: true,
+  isGuest: false,
   setIsGuest: () => {},
 });
 
@@ -27,7 +27,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   const isLandingPage = router.asPath === "/";
   const disableApp = !isLandingPage && width && width <= 1100;
-  const [isGuest, setIsGuest] = useState(true);
+  const [isGuest, setIsGuest] = useState(false);
 
   return (
     <>
