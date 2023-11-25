@@ -96,6 +96,7 @@ export const MetaInfoWidget: React.FC = () => {
           background="white"
           borderRadius="md"
           width="300px"
+          zIndex={1}
         >
           <MetaInfo />
         </Box>
