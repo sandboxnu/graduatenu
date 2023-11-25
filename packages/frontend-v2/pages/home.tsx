@@ -93,7 +93,7 @@ const HomePage: NextPage = () => {
       if (student.plans.length > 0) {
         const sortedPlans = student.plans.sort(
           (p1, p2) =>
-            new Date(p1.updatedAt).getTime() - new Date(p2.updatedAt).getTime()
+            new Date(p2.updatedAt).getTime() - new Date(p1.updatedAt).getTime()
         );
         setSelectedPlanId(sortedPlans[0].id);
       }
