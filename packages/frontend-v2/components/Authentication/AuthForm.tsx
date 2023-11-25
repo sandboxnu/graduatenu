@@ -3,7 +3,6 @@ import router from "next/router";
 import { FormEventHandler, ReactNode, useContext } from "react";
 import { SecondaryBlueButton } from "../Button/SecondaryBlueButton";
 import { IsGuestContext } from "../../pages/_app";
-import { toast } from "../../utils";
 
 type NewType = ReactNode;
 

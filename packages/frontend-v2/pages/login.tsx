@@ -1,4 +1,4 @@
-import { Button, Flex, Text, useConst } from "@chakra-ui/react";
+import { Button, Flex, Text } from "@chakra-ui/react";
 import { API } from "@graduate/api-client";
 import { LoginStudentDto } from "@graduate/common";
 import { AxiosError } from "axios";

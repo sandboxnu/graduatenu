@@ -46,7 +46,7 @@ export const fetchStudentAndPrepareForDnd = async (
   isGuest: boolean
 ): Promise<StudentModel<string>> => {
   const studentString = window.localStorage.getItem("student");
-  const studentFromLocalStorage = studentString
+  const studentFromLocalStorage: GetStudentResponse = studentString
     ? JSON.parse(studentString)
     : defaultGuestStudent;
 
@@ -54,7 +54,7 @@ export const fetchStudentAndPrepareForDnd = async (
   if (!isGuest) {
     student = await API.student.getMeWithPlan();
   } else {
-    student = studentFromLocalStorage!;
+    student = studentFromLocalStorage;
   }
   const plansWithDndIds = student.plans.map(preparePlanForDnd);
 
