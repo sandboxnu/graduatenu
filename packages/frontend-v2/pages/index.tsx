@@ -266,9 +266,10 @@ const WhyDesktop = (): JSX.Element => {
     >
       <Heading fontSize="2xl">Why are we only on desktop?</Heading>
       <Text fontSize="xl">
-        GraduateNU aims to empower Northeastern students to customize their plan
-        of study through an intuitive and flexible interface shaped by student
-        feedback.
+        We strive to provide our users with the best user experience possible,
+        and as such we are focusing our efforts on the desktop experience. We
+        are doing our best to finalize this experience before providing our
+        mobile users with a great experience as well!
       </Text>
       <Image
         pt="lg"
