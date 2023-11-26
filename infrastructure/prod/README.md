@@ -11,7 +11,7 @@ If you don't want this, you'll need to run modified calls rather than the packag
 - Install Docker
 - Install the AWS CLI
 - Have an AWS Access Key ID and AWS Secret Access Key pair.
-- Run `aws configure`, and input those keys along with us-east-1 as the region. Leave the Default Output Format as None.
+- Run `aws configure`, and input those keys along with us-east-1 as the region. You can set the Default Output Format to json.
 
 ## Steps:
 
