@@ -20,7 +20,7 @@ if [[ $2 = "frontend" ]]; then
 elif [[ $2 = "backend" ]]; then
   REPO="graduatenu-rails"
 else
-  echo "Please choose a service to deploy: 'frontend' or 'backend'"
+  echo "Please choose a service to create an image name for: 'frontend' or 'backend'"
   exit 1
 fi
 
