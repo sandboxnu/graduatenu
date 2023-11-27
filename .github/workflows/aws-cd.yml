@@ -58,7 +58,7 @@ jobs:
         run: |
           # - create new revision for task definition with latest image.
           # - redeploy ECS services with the latest revision.
-          ./infrastructure/prod/redeploy.sh staging
+          ./infrastructure/prod/redeploy.sh staging local-head both
 
       - name: Logout of Amazon ECR
         if: always()
