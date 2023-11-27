@@ -3,6 +3,8 @@ import {
   Schedule2,
   SupportedMajors,
   ScheduleCourse2,
+  MetaInfo,
+  Maybe,
 } from "./types";
 
 /** Types our API responds with. */
@@ -51,4 +53,11 @@ export class UpdateStudentResponse extends StudentModel<null> {}
 export class GetSupportedMajorsResponse {
   // { year => { majorName => {concentrations, minRequiredConcentrations} }}
   supportedMajors: SupportedMajors;
+}
+
+export class GetMetaInfoResponse implements MetaInfo {
+  commit: Maybe<string>;
+  commitMessage: Maybe<string>;
+  build_timestamp: Maybe<number>;
+  environment: Maybe<string>;
 }

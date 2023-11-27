@@ -3,6 +3,7 @@ import { Logo } from "./Logo";
 import { GraduateButtonLink } from "../Link";
 import { UserDropdown } from "./UserDropdown";
 import { Flex, Icon, IconProps, Link as ChakraLink } from "@chakra-ui/react";
+import { MetaInfoWidget } from "../MetaInfo/MetaInfo";
 
 export const GraduatePreAuthHeader: React.FC = () => {
   return (
@@ -31,6 +32,7 @@ const GraduateHeader: React.FC<GraduateHeaderProps> = ({ rightContent }) => {
     <HeaderContainer>
       <Logo />
       <Flex columnGap="md" alignItems="center">
+        <MetaInfoWidget />
         <ChakraLink href="https://forms.gle/Tg9yuhR8inkrqHdN6" isExternal>
           <FeedbackIcon mx="2px" />
           Feedback

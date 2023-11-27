@@ -1,5 +1,5 @@
 import { ConsoleLogger, LogLevel } from "@nestjs/common";
-import { deepFilter } from "src/utils";
+import { deepFilter } from "../src/utils";
 
 const DENYLIST = ["password", "passwordConfirm"];
 

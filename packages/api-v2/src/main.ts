@@ -6,7 +6,7 @@ import {
 } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { NestFactory, Reflector } from "@nestjs/core";
-import { GraduateLogger } from "src/graduate-logger";
+import { GraduateLogger } from "../src/graduate-logger";
 import { AppModule } from "./app.module";
 import { EnvironmentVariables } from "./environment-variables";
 import * as cookieParser from "cookie-parser";
@@ -20,8 +20,9 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
     logger: graduateLogger,
     cors: {
-      origin:
-        "https://graduatenu-frontend-v2-git-christina-move-fro-b625a5-sandboxneu.vercel.app",
+      origin: "https://frontend-staging.graduatenu.com",
+      credentials: true,
+      methods: ["GET", "HEAD", "POST", "PUT", "DELETE", "PATCH"],
     },
   });
 
