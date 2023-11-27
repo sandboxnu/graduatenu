@@ -31,6 +31,7 @@ import {
 } from "../../src/student/student.errors";
 import { BadToken, InvalidPayload, TokenExpiredError } from "./auth.errors";
 import { Throttle } from "@nestjs/throttler";
+import { COOKIE_DOMAIN } from "../../src/constants";
 
 @Controller("auth")
 export class AuthController {
@@ -61,14 +62,13 @@ export class AuthController {
     const { accessToken } = student;
 
     const isSecure = process.env.NODE_ENV !== "development";
-    const domain =
-      process.env.NODE_ENV === "production" ? "graduatenu.com" : "localhost";
+
     // Store JWT token in a cookie
     response.cookie("auth_cookie", accessToken, {
       httpOnly: true,
       sameSite: "strict",
       secure: isSecure,
-      domain,
+      domain: COOKIE_DOMAIN,
     });
     if (process.env.NODE_ENV !== "testing") {
       await this.emailConfirmationService.sendVerificationLink(
@@ -93,14 +93,13 @@ export class AuthController {
     const { accessToken } = student;
 
     const isSecure = process.env.NODE_ENV !== "development";
-    const domain =
-      process.env.NODE_ENV === "production" ? "graduatenu.com" : "localhost";
+
     // Store JWT token in a cookie
     response.cookie("auth_cookie", accessToken, {
       httpOnly: true,
       sameSite: "strict",
       secure: isSecure,
-      domain,
+      domain: COOKIE_DOMAIN,
     });
 
     return student;
@@ -158,13 +157,12 @@ export class AuthController {
     @Res({ passthrough: true }) response: Response
   ): Promise<void> {
     const isSecure = process.env.NODE_ENV !== "development";
-    const domain =
-      process.env.NODE_ENV === "production" ? "graduatenu.com" : "localhost";
+
     response.clearCookie("auth_cookie", {
       httpOnly: true,
       sameSite: "strict",
       secure: isSecure,
-      domain,
+      domain: COOKIE_DOMAIN,
     });
   }
 }
