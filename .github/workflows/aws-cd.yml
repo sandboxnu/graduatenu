@@ -2,7 +2,7 @@ on:
   push:
     branches:
       - main
-      - fix-aws-cd
+      - luke/fix-aws-cd
 
 name: Deploy containers to Amazon ECS
 
