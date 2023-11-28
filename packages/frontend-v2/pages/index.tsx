@@ -58,7 +58,6 @@ const Banner = (): JSX.Element => {
             base: "14rem",
           }}
           mx={{ desktop: "6.25rem", laptop: "5rem", base: "0" }}
-          ml={{ tablet: "0", base: "-2rem" }}
           src="/husky.svg"
           alt="husky"
         />
