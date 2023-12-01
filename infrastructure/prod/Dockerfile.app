@@ -22,6 +22,14 @@ COPY packages/frontend-v2 packages/frontend-v2
 COPY packages/api-client packages/api-client
 COPY packages/common packages/common
 
+ARG COMMIT
+ARG BUILD_TIMESTAMP
+ARG COMMIT_MESSAGE
+
+ENV NEXT_PUBLIC_COMMIT_HASH $COMMIT
+ENV NEXT_PUBLIC_COMMIT_MESSAGE $COMMIT_MESSAGE
+ENV NEXT_PUBLIC_BUILD_TIMESTAMP $BUILD_TIMESTAMP
+
 RUN yarn packages/api-client build
 RUN yarn packages/common build
 RUN yarn packages/frontend-v2 build

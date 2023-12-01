@@ -15,10 +15,10 @@ import {
   EmailNotConfirmed,
   NoSuchEmail,
   WeakPassword,
-} from "src/student/student.errors";
+} from "../../src/student/student.errors";
 import { ConfigService } from "@nestjs/config";
-import { EnvironmentVariables } from "src/environment-variables";
-import EmailService from "src/email/email.service";
+import { EnvironmentVariables } from "../../src/environment-variables";
+import EmailService from "../../src/email/email.service";
 import { BadToken, InvalidPayload, TokenExpiredError } from "./auth.errors";
 
 @Injectable()

@@ -35,7 +35,7 @@ jobs:
           # Build a docker container and
           # push it to ECR so that it can
           # be deployed to ECS.
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f infrastructure/prod/Dockerfile.server .
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG --build-arg="COMMIT=$IMAGE_TAG" --build-arg="BUILD_TIMESTAMP=$(date +%s)" --build-arg="COMMIT_MESSAGE=$(git --no-pager show -s --format=%s)" -f infrastructure/prod/Dockerfile.server .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
 
@@ -49,7 +49,7 @@ jobs:
           # Build a docker container and
           # push it to ECR so that it can
           # be deployed to ECS.
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f infrastructure/prod/Dockerfile.app .
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG --build-arg="COMMIT=$IMAGE_TAG" --build-arg="BUILD_TIMESTAMP=$(date +%s)" --build-arg="COMMIT_MESSAGE=$(git --no-pager show -s --format=%s)" -f infrastructure/prod/Dockerfile.app .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
 
@@ -57,7 +57,7 @@ jobs:
         run: |
           # - create new revision for task definition with latest image.
           # - redeploy ECS services with the latest revision.
-          ./infrastructure/prod/redeploy.sh staging
+          ./infrastructure/prod/redeploy.sh staging local-head both
 
       - name: Logout of Amazon ECR
         if: always()

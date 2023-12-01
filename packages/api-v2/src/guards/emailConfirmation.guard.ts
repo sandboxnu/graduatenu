@@ -6,8 +6,8 @@ import {
   UnauthorizedException,
   Logger,
 } from "@nestjs/common";
-import { AuthenticatedRequest } from "src/auth/interfaces/authenticated-request";
-import { formatServiceCtx } from "src/utils";
+import { AuthenticatedRequest } from "../../src/auth/interfaces/authenticated-request";
+import { formatServiceCtx } from "../../src/utils";
 
 @Injectable()
 export class EmailConfirmationGuard implements CanActivate {

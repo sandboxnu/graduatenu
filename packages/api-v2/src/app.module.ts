@@ -10,6 +10,7 @@ import { LoggingInterceptor } from "./interceptors/logging.interceptor";
 import { MajorModule } from "./major/major.module";
 import { EmailModule } from "./email/email.module";
 import { ThrottlerGuard, ThrottlerModule } from "@nestjs/throttler";
+import { MetaModule } from "./meta/meta.module";
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { ThrottlerGuard, ThrottlerModule } from "@nestjs/throttler";
     PlanModule,
     MajorModule,
     EmailModule,
+    MetaModule,
   ],
   providers: [
     {

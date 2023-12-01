@@ -16,6 +16,7 @@ import {
   Box,
   useMediaQuery,
 } from "@chakra-ui/react";
+import { MetaInfoWidget } from "../MetaInfo/MetaInfo";
 import { HamburgerIcon } from "@chakra-ui/icons";
 
 export const GraduatePreAuthHeader: React.FC = () => {
@@ -49,6 +50,7 @@ const GraduateHeader: React.FC<GraduateHeaderProps> = ({ rightContent }) => {
     <HeaderContainer>
       <Logo />
       <Flex columnGap="md" alignItems="center">
+        <MetaInfoWidget />
         <ChakraLink href="https://forms.gle/Tg9yuhR8inkrqHdN6" isExternal>
           <FeedbackIcon mx="2px" />
           Feedback
