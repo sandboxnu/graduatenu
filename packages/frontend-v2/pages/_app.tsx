@@ -18,7 +18,7 @@ interface IsGuestContextType {
 
 export const IsGuestContext = createContext<IsGuestContextType>({
   isGuest: false,
-  setIsGuest: () => {},
+  setIsGuest: () => undefined,
 });
 
 function MyApp({ Component, pageProps }: AppProps) {
