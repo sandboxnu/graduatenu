@@ -24,7 +24,9 @@ export const AuthForm: React.FC<AuthFormProps> = ({
       height="100%"
       direction="column"
       rowGap="2xl"
-      mx="3xl"
+      mx="auto"
+      w="80%"
+      maxW="450px"
     >
       <Heading as="h1" size="xl">
         {headingText}

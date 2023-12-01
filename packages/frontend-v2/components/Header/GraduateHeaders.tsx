@@ -2,11 +2,29 @@ import { HeaderContainer } from "./HeaderContainer";
 import { Logo } from "./Logo";
 import { GraduateButtonLink } from "../Link";
 import { UserDropdown } from "./UserDropdown";
-import { Flex, Icon, IconProps, Link as ChakraLink } from "@chakra-ui/react";
+import {
+  Flex,
+  Icon,
+  IconProps,
+  Link as ChakraLink,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  IconButton,
+  Text,
+  Box,
+  useMediaQuery,
+} from "@chakra-ui/react";
 import { MetaInfoWidget } from "../MetaInfo/MetaInfo";
+import { HamburgerIcon } from "@chakra-ui/icons";
 
 export const GraduatePreAuthHeader: React.FC = () => {
-  return (
+  const [isMobile] = useMediaQuery("(max-width: 640px)");
+
+  return isMobile ? (
+    <MobileHeader />
+  ) : (
     <GraduateHeader
       rightContent={
         <GraduateButtonLink href="/login">Log In</GraduateButtonLink>
@@ -44,6 +62,69 @@ const GraduateHeader: React.FC<GraduateHeaderProps> = ({ rightContent }) => {
         {rightContent}
       </Flex>
     </HeaderContainer>
+  );
+};
+
+const MobileHeader: React.FC = () => {
+  return (
+    <div>
+      <HeaderContainer fixed>
+        <Logo />
+        <Menu>
+          <MenuButton
+            as={IconButton}
+            aria-label="Menu"
+            icon={<HamburgerIcon />}
+            variant="ghost"
+            color="primary.blue.dark.main"
+            _hover={{
+              backgroundColor: "neutral.100",
+            }}
+            _active={{
+              backgroundColor: "neutral.200",
+            }}
+          />
+          <MenuList>
+            <MenuItem
+              icon={<FeedbackIcon />}
+              as="a"
+              href="https://forms.gle/Tg9yuhR8inkrqHdN6"
+              target="_blank"
+            >
+              Feedback
+            </MenuItem>
+            <MenuItem
+              icon={<BugIcon />}
+              as="a"
+              href="https://forms.gle/Sxg3B9js8KQ2zfJS9"
+              target="_blank"
+            >
+              Bug/Feature
+            </MenuItem>
+          </MenuList>
+        </Menu>
+      </HeaderContainer>
+
+      <Box
+        display={{ tablet: "none", base: "flex" }}
+        top="57px"
+        w="100%"
+        position="fixed"
+        justifyContent="center"
+        alignItems="center"
+        bg="primary.blue.dark.main"
+        h="55px"
+      >
+        <Text
+          textColor="white"
+          textAlign="center"
+          fontSize="md"
+          fontWeight="bold"
+        >
+          Open our site on desktop to get started!
+        </Text>
+      </Box>
+    </div>
   );
 };
 
