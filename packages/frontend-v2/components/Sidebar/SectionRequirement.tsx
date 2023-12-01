@@ -131,6 +131,9 @@ const SectionRequirement: React.FC<SidebarRequirementProps> = ({
             ...scheduleCourse,
             id: dndIdPrefix + "-" + courseKey,
           }}
+          isInSidebar
+          // TODO: isChecked is for when the requirement is added to the plan and validated. When true, this will render a checkmark.
+          isChecked={false}
           isDisabled={false}
         />
       );
