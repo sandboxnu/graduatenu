@@ -1,11 +1,11 @@
 import { Flex, Heading, Image, Text } from "@chakra-ui/react";
-import { GraduatePostAuthHeader } from "../Header";
+import { GraduateDisabledAppHeader } from "../Header";
 import { GraduateButtonLink } from "../Link";
 
 export const ClientSideError: React.FC = () => {
   return (
     <Flex flexDirection="column" height="100vh" overflow="hidden">
-      <GraduatePostAuthHeader />
+      <GraduateDisabledAppHeader />
       <Flex
         height="100%"
         overflow="hidden"
