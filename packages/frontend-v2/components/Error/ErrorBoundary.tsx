@@ -1,22 +1,32 @@
-// import { ErrorBoundary as ReactErrorBoundary } from "react-error-boundary";
-import React, { PropsWithChildren } from "react";
-// import { logger } from "../../utils";
-// import { ClientSideError } from "./ClientSideError";
+import React, { Component } from "react";
 
-// const clientSideErrorHandler = (
-//   error: Error,
-//   { componentStack }: { componentStack: string }
-// ) => {
-//   logger.error(error.message, componentStack);
-// };
+interface ErrorBoundaryProps {
+  fallback: React.FC;
+  children: React.ReactNode;
+}
 
-export const ErrorBoundary: React.FC<PropsWithChildren> = ({ children }) => {
-  return (
-    // <ReactErrorBoundary
-    //   FallbackComponent={ClientSideError}
-    //   onError={clientSideErrorHandler}
-    // >
-    <div>{children}</div>
-    // </ReactErrorBoundary>
-  );
-};
+interface IState {
+  hasError: boolean;
+}
+
+export class ErrorBoundary extends Component<ErrorBoundaryProps, IState> {
+  state = { hasError: false };
+
+  constructor(props: ErrorBoundaryProps) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError(error: Error) {
+    // Update state so the next render will show the fallback UI.
+    console.error(error);
+    return { hasError: true };
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return <>{this.props.fallback}</>;
+    }
+    return this.props.children;
+  }
+}

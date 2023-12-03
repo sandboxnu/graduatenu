@@ -8,6 +8,7 @@ import { ToastContainer } from "react-toastify";
 import { ErrorBoundary, GraduateDisabledAppHeader } from "../components";
 import "@fontsource/montserrat-alternates";
 import { useWindowSize } from "../hooks";
+import { ClientSideError } from "../components/Error/ClientSideError";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -18,21 +19,21 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <>
-      <Head>
-        <title>GraduateNU</title>
-        <meta
-          name="description"
-          content="A degree scheduling service for Northeastern Students."
-        />
-        <link rel="icon" href="/favicon.ico" />
-        <link rel="icon" href="/favicon.svg" type="image/svg+xml"></link>
-      </Head>
-      <ErrorBoundary>
+      <ErrorBoundary fallback={ClientSideError}>
+        <Head>
+          <title>GraduateNU</title>
+          <meta
+            name="description"
+            content="A degree scheduling service for Northeastern Students."
+          />
+          <link rel="icon" href="/favicon.ico" />
+          <link rel="icon" href="/favicon.svg" type="image/svg+xml"></link>
+        </Head>
         <ChakraProvider theme={theme}>
           {disableApp ? <DisabledApp /> : <Component {...pageProps} />}
         </ChakraProvider>
+        <ToastContainer position="bottom-right" />
       </ErrorBoundary>
-      <ToastContainer position="bottom-right" />
     </>
   );
 }
