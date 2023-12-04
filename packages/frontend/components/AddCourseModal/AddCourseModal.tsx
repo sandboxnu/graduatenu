@@ -11,6 +11,8 @@ import {
   VStack,
   Text,
   Flex,
+  Stack,
+  Divider,
 } from "@chakra-ui/react";
 import { ScheduleCourse2 } from "@graduate/common";
 import { useState } from "react";
@@ -25,6 +27,7 @@ import { SearchResult } from "./SearchResult";
 import { SelectedCourse } from "./SelectedCourse";
 import { GraduateToolTip } from "../GraduateTooltip";
 import { HelperToolTip } from "../Help";
+import { NUPathCheckBox } from "./NUPathCheckBox";
 
 interface AddCourseModalProps {
   isOpen: boolean;
@@ -118,58 +121,186 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size="lg">
+    <Modal isOpen={isOpen} onClose={onClose} size="3xl" isCentered>
       <ModalOverlay />
-      <ModalContent>
-        <ModalHeader color="primary.blue.dark.main">
+      <ModalContent minWidth="fit-content" height="fit-content">
+        <ModalHeader
+          color="primary.blue.dark.main"
+          margin-bottom="0"
+          paddingBottom="0"
+          marginLeft="0"
+          marginRight="0"
+          paddingLeft="0"
+          paddingRight="0"
+        >
           <Flex alignItems="center" justifyContent="center" columnGap="2xs">
             <Text>Add Courses</Text>
             <HelperToolTip label="We try our best to search for courses across as many semesters as possible. If you cannot find your course, please report a bug with your plan catalog year and we will try to solve it as soon as possible." />
           </Flex>
+          <Divider
+            borderWidth="2px"
+            colorScheme="gray"
+            orientation="horizontal"
+            flexGrow="1"
+          />
         </ModalHeader>
         <ModalCloseButton />
-        <ModalBody>
-          <Flex direction="column" rowGap="md">
-            <SearchCoursesInput setSearchQuery={setSearchQuery} />
-            <VStack
-              height="200px"
-              overflow="scroll"
-              alignItems="left"
-              gap="2xs"
+        <ModalBody
+          margin-left="0"
+          paddingLeft="0"
+          margin-top="0"
+          paddingTop="0"
+        >
+          <Flex direction="row" justifyContent="left" gap="xl" pl="20px">
+            {/* NUPath sidebar */}
+            <Flex direction="row">
+              <Flex
+                direction="column"
+                justifyContent="left"
+                bg="gray.50"
+                w="250px"
+                margin-right="0"
+                paddingRight="0"
+              >
+                <Flex pt="50px" pb="20px">
+                  <Text fontSize="lg" as="b">
+                    NUPath
+                  </Text>
+                </Flex>
+                <Flex
+                  direction="row"
+                  justifyContent="left"
+                  margin-right="0"
+                  pr="20px"
+                >
+                  <Flex justifyContent="center">
+                    <Stack spacing={1} direction="column">
+                      <NUPathCheckBox
+                        abbreviation="ND"
+                        label="Natural/Designed World"
+                      />
+                      <NUPathCheckBox
+                        abbreviation="EI"
+                        label="Creative/Expressive Inov"
+                      />
+                      <NUPathCheckBox
+                        abbreviation="IC"
+                        label="Interpreting Culture"
+                      />
+                      <NUPathCheckBox
+                        abbreviation="FQ"
+                        label="Formal/Quant Reasoning"
+                      />
+                      <NUPathCheckBox
+                        abbreviation="SI"
+                        label="Societies/Institutions"
+                      />
+                      <NUPathCheckBox
+                        abbreviation="AD"
+                        label="Analyzing/Using Data"
+                      />
+                      <NUPathCheckBox
+                        abbreviation="DD"
+                        label="Difference Diversity"
+                      />
+                      <NUPathCheckBox
+                        abbreviation="ER"
+                        label="Ethical Reasoning"
+                      />
+                      <NUPathCheckBox
+                        abbreviation="WF"
+                        label="First Year Writing"
+                      />
+                      <NUPathCheckBox
+                        abbreviation="WD"
+                        label="Advanced Writing"
+                      />
+                      <NUPathCheckBox
+                        abbreviation="WI"
+                        label="Writing Intensive"
+                      />
+                      <NUPathCheckBox
+                        abbreviation="EX"
+                        label="Integration Experience"
+                      />
+                      <NUPathCheckBox
+                        abbreviation="CE"
+                        label="Capstone Experience"
+                      />
+                    </Stack>
+                  </Flex>
+                </Flex>
+              </Flex>
+              <Divider
+                borderWidth="2px"
+                colorScheme="gray"
+                alignSelf="stretch"
+                orientation="vertical"
+              />
+            </Flex>
+            {/* End NUPath Sidebar */}
+
+            <Flex
+              direction="column"
+              rowGap="md"
+              flexGrow="2"
+              margin="0.5px"
+              padding="5px"
             >
-              {error && (
-                <GraduateToolTip label="We rely on SearchNEU to search for courses, and there may be an ongoing issue on their end. We recommend refreshing the page and trying again soon. If the issue persists, help us by clicking the Bug/Feature button to report the bug">
+              <SearchCoursesInput setSearchQuery={setSearchQuery} />
+              <VStack
+                height="200px"
+                overflow="scroll"
+                alignItems="left"
+                gap="2xs"
+              >
+                {error && (
+                  <GraduateToolTip label="We rely on SearchNEU to search for courses, and there may be an ongoing issue on their end. We recommend refreshing the page and trying again soon. If the issue persists, help us by clicking the Bug/Feature button to report the bug">
+                    <Flex
+                      alignItems="center"
+                      columnGap="xs"
+                      justifyContent="center"
+                    >
+                      <InfoIcon color="primary.blue.dark.main" />
+                      <Text
+                        fontSize="xs"
+                        fontWeight="semibold"
+                        textAlign="center"
+                      >
+                        Oops, sorry we couldn&apos;t search for courses... try
+                        again in a little bit!
+                      </Text>
+                    </Flex>
+                  </GraduateToolTip>
+                )}
+                {courses &&
+                  courses.map((searchResult) => (
+                    <SearchResult
+                      key={getCourseDisplayString(searchResult)}
+                      searchResult={searchResult}
+                      addSelectedCourse={addSelectedCourse}
+                      isResultAlreadyAdded={isCourseAlreadyAdded(searchResult)}
+                      isResultAlreadySelected={isCourseAlreadySelected(
+                        searchResult
+                      )}
+                      isSelectingAnotherCourse={isLoadingSelectCourse}
+                    />
+                  ))}
+                {!error && (!courses || courses.length === 0) && (
                   <Flex
                     alignItems="center"
-                    columnGap="xs"
                     justifyContent="center"
+                    columnGap="xs"
                   >
                     <InfoIcon color="primary.blue.dark.main" />
-                    <Text
-                      fontSize="xs"
-                      fontWeight="semibold"
-                      textAlign="center"
-                    >
-                      Oops, sorry we couldn&apos;t search for courses... try
-                      again in a little bit!
+                    <Text fontSize="xs">
+                      Search for your course and press enter to see search
+                      results.
                     </Text>
                   </Flex>
-                </GraduateToolTip>
-              )}
-              {courses &&
-                courses.map((searchResult) => (
-                  <SearchResult
-                    key={getCourseDisplayString(searchResult)}
-                    searchResult={searchResult}
-                    addSelectedCourse={addSelectedCourse}
-                    isResultAlreadyAdded={isCourseAlreadyAdded(searchResult)}
-                    isResultAlreadySelected={isCourseAlreadySelected(
-                      searchResult
-                    )}
-                    isSelectingAnotherCourse={isLoadingSelectCourse}
-                  />
-                ))}
-              {!error && (!courses || courses.length === 0) && (
+                )}
+              </VStack>
+              {courses && courses.length > 0 && selectedCourses.length === 0 && (
                 <Flex
                   alignItems="center"
                   justifyContent="center"
@@ -177,30 +308,24 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
                 >
                   <InfoIcon color="primary.blue.dark.main" />
                   <Text fontSize="xs">
-                    Search for your course and press enter to see search
-                    results.
+                    Select the courses you wish to add to this semester using
+                    the &quot;+&quot; button.
                   </Text>
                 </Flex>
               )}
-            </VStack>
-            {courses && courses.length > 0 && selectedCourses.length === 0 && (
-              <Flex alignItems="center" justifyContent="center" columnGap="xs">
-                <InfoIcon color="primary.blue.dark.main" />
-                <Text fontSize="xs">
-                  Select the courses you wish to add to this semester using the
-                  &quot;+&quot; button.
-                </Text>
+              <Flex alignItems="flex-start" justifyContent="left">
+                <Text fontSize="lg">Courses to Add:</Text>
               </Flex>
-            )}
-            <VStack maxHeight="200px" overflow="scroll" pb="xs">
-              {selectedCourses.map((selectedCourse) => (
-                <SelectedCourse
-                  key={getCourseDisplayString(selectedCourse)}
-                  selectedCourse={selectedCourse}
-                  removeSelectedCourse={removeSelectedCourse}
-                />
-              ))}
-            </VStack>
+              <VStack maxHeight="200px" overflow="scroll" pb="xs">
+                {selectedCourses.map((selectedCourse) => (
+                  <SelectedCourse
+                    key={getCourseDisplayString(selectedCourse)}
+                    selectedCourse={selectedCourse}
+                    removeSelectedCourse={removeSelectedCourse}
+                  />
+                ))}
+              </VStack>
+            </Flex>
           </Flex>
         </ModalBody>
         <ModalFooter justifyContent="center">

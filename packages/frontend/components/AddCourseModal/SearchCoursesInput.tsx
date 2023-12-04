@@ -1,5 +1,11 @@
 import { Search2Icon } from "@chakra-ui/icons";
-import { InputGroup, InputLeftElement, Input } from "@chakra-ui/react";
+import {
+  InputGroup,
+  InputLeftElement,
+  Input,
+  InputRightElement,
+  Button,
+} from "@chakra-ui/react";
 import {
   Dispatch,
   SetStateAction,
@@ -39,6 +45,11 @@ export const SearchCoursesInput: React.FC<SearchCoursesInputProps> = ({
         backgroundColor="neutral.100"
         placeholder="SEARCH BY NAME, CRN, ETC."
       />
+      <InputRightElement pointerEvents="none">
+        <Button backgroundColor="primary.blue.light.main">
+          <Search2Icon color="white" />
+        </Button>
+      </InputRightElement>
     </InputGroup>
   );
 };

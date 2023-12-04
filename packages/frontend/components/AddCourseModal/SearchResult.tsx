@@ -1,4 +1,4 @@
-import { SmallAddIcon } from "@chakra-ui/icons";
+import { AddIcon } from "@chakra-ui/icons";
 import { Flex, Box, Heading, IconButton, Text } from "@chakra-ui/react";
 import { ScheduleCourse2 } from "@graduate/common";
 import { getCourseDisplayString } from "../../utils";
@@ -45,10 +45,11 @@ export const SearchResult: React.FC<SearchResultProps> = ({
       >
         <IconButton
           aria-label="Add class"
-          icon={<SmallAddIcon />}
+          icon={<AddIcon />}
           variant="solid"
+          borderWidth="2px"
           borderColor="primary.blue.light.main"
-          backgroundColor="primary.blue.light.200"
+          backgroundColor="rgba(0, 0, 0, 0)"
           color="primary.blue.light.main"
           colorScheme="primary.blue.light"
           borderRadius="3xl"
