@@ -23,6 +23,8 @@ import {
   WEAK_PASSWORD_MSG,
 } from "../utils";
 import { handleWeakPasswordError } from "../utils/error";
+import { useContext } from "react";
+import { IsGuestContext } from "./_app";
 
 const Signup: NextPage = () => {
   return <AuthenticationPageLayout form={<SignUpForm />} />;
@@ -30,6 +32,7 @@ const Signup: NextPage = () => {
 
 const SignUpForm: React.FC = () => {
   const router = useRouter();
+  const { setIsGuest } = useContext(IsGuestContext);
 
   const {
     register,
@@ -47,6 +50,7 @@ const SignUpForm: React.FC = () => {
 
   const onSubmitHandler = async (payload: SignUpStudentDto) => {
     try {
+      setIsGuest(false);
       await API.auth.register(payload);
       router.push("/emailConfirmation");
     } catch (err) {

@@ -18,11 +18,12 @@ import {
 import { API } from "@graduate/api-client";
 import { PlanModel, UpdatePlanDto } from "@graduate/common";
 import { useRouter } from "next/router";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useSWRConfig } from "swr";
 import {
   USE_STUDENT_WITH_PLANS_SWR_KEY,
+  useStudentWithPlans,
   useSupportedMajors,
 } from "../../hooks";
 import {
@@ -36,6 +37,7 @@ import { BlueButton } from "../Button";
 import { PlanInput, PlanSelect } from "../Form";
 import { HelperToolTip } from "../Help";
 import { PlanConcentrationsSelect } from "./PlanConcentrationsSelect";
+import { IsGuestContext } from "../../pages/_app";
 
 type EditPlanModalProps = {
   plan: PlanModel<string>;
@@ -67,6 +69,8 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
     mode: "onTouched",
     shouldFocusError: true,
   });
+  const { student } = useStudentWithPlans();
+  const { isGuest } = useContext(IsGuestContext);
 
   const resetValuesToCurrPlan = useCallback(() => {
     if (!plan) {
@@ -96,6 +100,10 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
     handleApiClientError(supportedMajorsError, router);
   }
 
+  if (!student) {
+    return <></>;
+  }
+
   const catalogYear = watch("catalogYear");
   const majorName = watch("major");
   const concentration = watch("concentration");
@@ -121,11 +129,28 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
       concentration: isNoMajorSelected ? undefined : payload.concentration,
     };
 
-    try {
-      await API.plans.update(plan.id, newPlan);
-    } catch (error) {
-      handleApiClientError(error as Error, router);
-      return;
+    if (isGuest) {
+      const newTempPlan = {
+        ...plan,
+        ...newPlan,
+      };
+
+      window.localStorage.setItem(
+        "student",
+        JSON.stringify({
+          ...student,
+          plans: student.plans.map((cur) =>
+            cur.id === plan.id ? newTempPlan : cur
+          ),
+        })
+      );
+    } else {
+      try {
+        await API.plans.update(plan.id, newPlan);
+      } catch (error) {
+        handleApiClientError(error as Error, router);
+        return;
+      }
     }
 
     mutate(USE_STUDENT_WITH_PLANS_SWR_KEY);

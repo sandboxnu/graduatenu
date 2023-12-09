@@ -18,13 +18,14 @@ import {
 } from "@graduate/common";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
-import { PropsWithChildren, useEffect, useState } from "react";
+import { PropsWithChildren, useContext, useEffect, useState } from "react";
 import {
   AddPlanModal,
   DeletePlanModal,
   DraggedScheduleCourse,
   EditPlanModal,
   GraduatePostAuthHeader,
+  GraduatePreAuthHeader,
   LoadingPage,
   NoMajorSidebar,
   NoPlanSidebar,
@@ -39,6 +40,7 @@ import {
   DELETE_COURSE_AREA_DND_ID,
   handleApiClientError,
   logger,
+  toast,
   updatePlanForStudent,
   updatePlanOnDragEnd,
 } from "../utils";
@@ -46,6 +48,7 @@ import {
   getCoReqWarnings,
   getPreReqWarnings,
 } from "../utils/plan/preAndCoReqCheck";
+import { IsGuestContext } from "./_app";
 
 // Algorithm to decide which droppable the course is currently over (if any).
 // See https://docs.dndkit.com/api-documentation/context-provider/collision-detection-algorithms for more info.
@@ -87,6 +90,8 @@ const HomePage: NextPage = () => {
   const [isTransferCoursesExpanded, setIsTransferCoursesExpanded] =
     useState<boolean>(false);
 
+  const { isGuest } = useContext(IsGuestContext);
+
   useEffect(() => {
     // once the student is fetched, set the selected plan id to the last updated plan
     if (student && selectedPlanId === undefined) {
@@ -108,6 +113,18 @@ const HomePage: NextPage = () => {
       }
     }
   }, [student, selectedPlanId, setSelectedPlanId]);
+
+  /**
+   * Render a warning modal to let users know that if they are on a guest
+   * account, we don't save information
+   */
+  useEffect(() => {
+    if (isGuest) {
+      toast.warn(
+        "You are logged in on a guest account. Your data will be saved locally, but not on our servers"
+      );
+    }
+  }, [isGuest]);
 
   /**
    * Handle errors from useStudentWithPlans.
@@ -191,8 +208,26 @@ const HomePage: NextPage = () => {
       async () => {
         // remove dnd ids, update the plan, and refetch the student
         const cleanedPlan = cleanDndIdsFromPlan(updatedPlan);
-        await API.plans.update(updatedPlan.id, cleanedPlan);
-        return fetchStudentAndPrepareForDnd();
+        if (isGuest) {
+          const cleanedPlanWithUpdatedTimeStamp: PlanModel<null> = {
+            ...cleanedPlan,
+            updatedAt: new Date(),
+          };
+          window.localStorage.setItem(
+            "student",
+            JSON.stringify({
+              ...student,
+              plans: student.plans.map((plan) =>
+                plan.id === cleanedPlanWithUpdatedTimeStamp.id
+                  ? cleanedPlanWithUpdatedTimeStamp
+                  : plan
+              ),
+            })
+          );
+        } else {
+          await API.plans.update(updatedPlan.id, cleanedPlan);
+        }
+        return fetchStudentAndPrepareForDnd(isGuest);
       },
       {
         optimisticData: updatedStudent,
@@ -290,6 +325,7 @@ const HomePage: NextPage = () => {
  */
 const PageLayout: React.FC<PropsWithChildren> = ({ children }) => {
   const { setNodeRef } = useDroppable({ id: DELETE_COURSE_AREA_DND_ID });
+  const { isGuest } = useContext(IsGuestContext);
   return (
     <Flex
       flexDirection="column"
@@ -297,7 +333,7 @@ const PageLayout: React.FC<PropsWithChildren> = ({ children }) => {
       overflow="hidden"
       ref={setNodeRef}
     >
-      <GraduatePostAuthHeader />
+      {isGuest ? <GraduatePreAuthHeader /> : <GraduatePostAuthHeader />}
       <Flex height="100%" overflow="hidden">
         {children}
       </Flex>

@@ -1,14 +1,25 @@
-import Head from "next/head";
-import type { AppProps } from "next/app";
-import { useRouter } from "next/router";
-import { ChakraProvider, Flex, Heading, Text, Image } from "@chakra-ui/react";
-import { theme } from "../utils";
-import "react-toastify/dist/ReactToastify.min.css";
-import { ToastContainer } from "react-toastify";
-import { ErrorBoundary, GraduateDisabledAppHeader } from "../components";
+import { Dispatch, SetStateAction, createContext, useState } from "react";
+import { ChakraProvider, Flex, Heading, Image, Text } from "@chakra-ui/react";
 import "@fontsource/montserrat-alternates";
+import type { AppProps } from "next/app";
+import Head from "next/head";
+import { useRouter } from "next/router";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.min.css";
+import { ErrorBoundary, GraduateDisabledAppHeader } from "../components";
 import { useWindowSize } from "../hooks";
+import { theme } from "../utils";
 import { ClientSideError } from "../components/Error/ClientSideError";
+
+interface IsGuestContextType {
+  isGuest: boolean;
+  setIsGuest: Dispatch<SetStateAction<boolean>>;
+}
+
+export const IsGuestContext = createContext<IsGuestContextType>({
+  isGuest: false,
+  setIsGuest: () => undefined,
+});
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -16,6 +27,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   const isLandingPage = router.asPath === "/";
   const disableApp = !isLandingPage && width && width <= 1100;
+  const [isGuest, setIsGuest] = useState(false);
 
   return (
     <>
@@ -30,7 +42,9 @@ function MyApp({ Component, pageProps }: AppProps) {
           <link rel="icon" href="/favicon.svg" type="image/svg+xml"></link>
         </Head>
         <ChakraProvider theme={theme}>
-          {disableApp ? <DisabledApp /> : <Component {...pageProps} />}
+          <IsGuestContext.Provider value={{ isGuest, setIsGuest }}>
+            {disableApp ? <DisabledApp /> : <Component {...pageProps} />}
+          </IsGuestContext.Provider>
         </ChakraProvider>
         <ToastContainer position="bottom-right" />
       </ErrorBoundary>
