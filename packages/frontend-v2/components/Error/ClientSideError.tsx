@@ -35,11 +35,7 @@ export const ClientSideError: React.FC = () => {
               Sorry! We are unable to retrieve the information you need.
             </Text>
             <GraduateButtonLink
-              href={
-                process.env.NODE_ENV == "development"
-                  ? "http://localhost:3002/home"
-                  : "https://graduatenu.com/home"
-              }
+              href="/home"
               mt="md"
               variant="solid"
               borderRadius="lg"
