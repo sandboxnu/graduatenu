@@ -1,4 +1,4 @@
-import { Injectable, Logger } from "@nestjs/common";
+import { BadRequestException, Injectable, Logger } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import { Student } from "../../src/student/entities/student.entity";
 import { StudentService } from "../../src/student/student.service";
@@ -20,6 +20,7 @@ import { ConfigService } from "@nestjs/config";
 import { EnvironmentVariables } from "../../src/environment-variables";
 import EmailService from "../../src/email/email.service";
 import { BadToken, InvalidPayload, TokenExpiredError } from "./auth.errors";
+import { ALLOWED_HOSTS } from "src/constants";
 
 @Injectable()
 export class AuthService {
@@ -190,5 +191,13 @@ export class AuthService {
 
   private static formatAuthServiceCtx(methodName: string): string {
     return formatServiceCtx(AuthService.name, methodName);
+  }
+
+  static throwIfInvalidHostnameForCookie(hostname: string): void {
+    if (!ALLOWED_HOSTS.has(hostname)) {
+      throw new BadRequestException(
+        "Graduate Auth: host not in list of allowed hosts (ALLOWED_HOSTS)."
+      );
+    }
   }
 }

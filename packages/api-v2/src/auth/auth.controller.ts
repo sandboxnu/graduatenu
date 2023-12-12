@@ -5,6 +5,7 @@ import {
   Get,
   HttpCode,
   Post,
+  Req,
   Res,
   UnauthorizedException,
 } from "@nestjs/common";
@@ -21,7 +22,7 @@ import {
   SignUpStudentDto,
   weakPasswordError,
 } from "@graduate/common";
-import { Response } from "express";
+import { Response, Request } from "express";
 import EmailConfirmationService from "../../src/emailConfirmation/emailConfirmation.service";
 import {
   EmailAlreadyExists,
@@ -31,7 +32,6 @@ import {
 } from "../../src/student/student.errors";
 import { BadToken, InvalidPayload, TokenExpiredError } from "./auth.errors";
 import { Throttle } from "@nestjs/throttler";
-import { COOKIE_DOMAIN } from "../../src/constants";
 
 @Controller("auth")
 export class AuthController {
@@ -42,6 +42,7 @@ export class AuthController {
 
   @Post("register")
   public async register(
+    @Req() request: Request,
     @Res({ passthrough: true }) response: Response,
     @Body() createStudentDto: SignUpStudentDto
   ): Promise<GetStudentResponse> {
@@ -63,12 +64,14 @@ export class AuthController {
 
     const isSecure = process.env.NODE_ENV !== "development";
 
+    AuthService.throwIfInvalidHostnameForCookie(request.hostname);
+
     // Store JWT token in a cookie
     response.cookie("auth_cookie", accessToken, {
       httpOnly: true,
       sameSite: "strict",
       secure: isSecure,
-      domain: COOKIE_DOMAIN,
+      domain: request.hostname,
     });
     if (process.env.NODE_ENV !== "testing") {
       await this.emailConfirmationService.sendVerificationLink(
@@ -81,6 +84,7 @@ export class AuthController {
   @Throttle({ default: { limit: 20, ttl: 60000 } }) // restrict to no more than 20 requests per minute
   @Post("login")
   public async login(
+    @Req() request: Request,
     @Res({ passthrough: true }) response: Response,
     @Body() loginUserDto: LoginStudentDto
   ): Promise<GetStudentResponse> {
@@ -94,12 +98,14 @@ export class AuthController {
 
     const isSecure = process.env.NODE_ENV !== "development";
 
+    AuthService.throwIfInvalidHostnameForCookie(request.hostname);
+
     // Store JWT token in a cookie
     response.cookie("auth_cookie", accessToken, {
       httpOnly: true,
       sameSite: "strict",
       secure: isSecure,
-      domain: COOKIE_DOMAIN,
+      domain: request.hostname,
     });
 
     return student;
@@ -154,15 +160,18 @@ export class AuthController {
   @Get("logout")
   @HttpCode(204)
   public async logout(
+    @Req() request: Request,
     @Res({ passthrough: true }) response: Response
   ): Promise<void> {
     const isSecure = process.env.NODE_ENV !== "development";
+
+    AuthService.throwIfInvalidHostnameForCookie(request.hostname);
 
     response.clearCookie("auth_cookie", {
       httpOnly: true,
       sameSite: "strict",
       secure: isSecure,
-      domain: COOKIE_DOMAIN,
+      domain: request.hostname,
     });
   }
 }

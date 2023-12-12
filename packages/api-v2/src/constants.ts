@@ -7,3 +7,9 @@
  */
 export const COOKIE_DOMAIN =
   process.env.NODE_ENV === "production" ? "graduatenu.com" : "localhost";
+
+export const ALLOWED_HOSTS = new Set([
+  "graduatenu.com",
+  "staging.graduatenu.com",
+  "localhost",
+]);
