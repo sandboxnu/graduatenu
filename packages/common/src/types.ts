@@ -255,7 +255,7 @@ export interface Concentrations2 {
 }
 
 /**
- * A clean version of a student's schedule as used in V2 of the App with no
+ * A clean version of a student's schedule as used in of the App with no
  * redundunt year information.
  *
  * @param years A list of the years of this object
@@ -290,9 +290,9 @@ export interface ScheduleYear2<T> {
 }
 
 /**
- * A clean version of the ScheduleTerm used by V2 of the App. A generic id field
- * is used for book keeping purposes by the drag and drop library, in cases
- * where we don't care about this id, T can null.
+ * A clean version of the ScheduleTerm used by of the App. A generic id field is
+ * used for book keeping purposes by the drag and drop library, in cases where
+ * we don't care about this id, T can null.
  *
  * @param year    The year of this term
  * @param season  The season of this term
@@ -308,9 +308,9 @@ export interface ScheduleTerm2<T> {
 }
 
 /**
- * A course within a schedule used by V2 of the App. A generic id field is used
- * for book keeping purposes by the drag and drop library, in cases where we
- * don't care about this id, T can null.
+ * A course within a schedule used by of the App. A generic id field is used for
+ * book keeping purposes by the drag and drop library, in cases where we don't
+ * care about this id, T can null.
  *
  * @param name          The name of the course
  * @param classId       The classId of this course (1210, 1800, etc)
