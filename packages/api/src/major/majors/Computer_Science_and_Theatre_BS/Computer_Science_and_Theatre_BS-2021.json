@@ -1,0 +1,530 @@
+{
+  "name": "Computer Science and Theatre, BS",
+  "totalCreditsRequired": 133,
+  "yearVersion": 2021,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1200,
+          "subject": "CS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1210,
+          "subject": "CS"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CS",
+              "classId": 1800,
+              "description": "Discrete Structures",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CS",
+              "classId": 1802,
+              "description": "Seminar for CS 1800",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CS",
+              "classId": 2500,
+              "description": "Fundamentals of Computer Science 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CS",
+              "classId": 2501,
+              "description": "Lab for CS 2500",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CS",
+              "classId": 2510,
+              "description": "Fundamentals of Computer Science 2",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CS",
+              "classId": 2511,
+              "description": "Lab for CS 2510",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 3000,
+          "subject": "CS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3200,
+          "subject": "CS"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CS",
+              "classId": 3500,
+              "description": "Object-Oriented Design",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CS",
+              "classId": 3501,
+              "description": "Lab for CS 3500",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 4500,
+              "subject": "CS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4530,
+              "subject": "CS"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 4550,
+          "subject": "CS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4300,
+          "subject": "IS"
+        }
+      ],
+      "minRequirementCount": 11
+    },
+    {
+      "type": "SECTION",
+      "title": "Khoury Elective Courses",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "RANGE",
+              "subject": "CS",
+              "idRangeStart": 2500,
+              "idRangeEnd": 9999,
+              "exceptions": [
+                {
+                  "subject": "CS",
+                  "classId": 5010,
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "RANGE",
+              "subject": "CY",
+              "idRangeStart": 2000,
+              "idRangeEnd": 9999,
+              "exceptions": [
+                {
+                  "subject": "CY",
+                  "classId": 4930,
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "RANGE",
+              "subject": "DS",
+              "idRangeStart": 2500,
+              "idRangeEnd": 9999,
+              "exceptions": [
+                {
+                  "subject": "DS",
+                  "classId": 4900,
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "RANGE",
+              "subject": "IS",
+              "idRangeStart": 2000,
+              "idRangeEnd": 9999,
+              "exceptions": [
+                {
+                  "subject": "IS",
+                  "classId": 4900,
+                  "type": "COURSE"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Foundational Stages",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1120,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1131,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1270,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2325,
+          "subject": "THTR"
+        }
+      ],
+      "minRequirementCount": 5
+    },
+    {
+      "type": "SECTION",
+      "title": "Theatre Texts and Context",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1220,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2300,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2315,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2320,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2500,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3200,
+              "subject": "THTR"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Making Theatre",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1100,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2000,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4702,
+          "subject": "THTR"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Intermediate or Advanced Technique",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2300,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2310,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2315,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2330,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2335,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2340,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2342,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2345,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2346,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2380,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2400,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3100,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3200,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3300,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3400,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3450,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3550,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3570,
+              "subject": "THTR"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Integrative Requirement",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2370,
+          "subject": "THTR"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Mathematics",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1341,
+          "subject": "MATH"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Computing and Social Issues",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2600,
+              "subject": "AFAM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4170,
+              "subject": "CY"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5240,
+              "subject": "CY"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2150,
+              "subject": "ENGL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2220,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2102,
+              "subject": "INSH"
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 1300,
+                  "subject": "IS"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 1300,
+                  "subject": "PHIL"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 1145,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1280,
+              "subject": "SOCL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2485,
+              "subject": "SOCL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4528,
+              "subject": "SOCL"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "College Writing",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1111,
+          "subject": "ENGW"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Advanced Writing in the Disciplines",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3302,
+              "subject": "ENGW"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3315,
+              "subject": "ENGW"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

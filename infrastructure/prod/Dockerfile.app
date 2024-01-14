@@ -10,7 +10,7 @@ WORKDIR /app
 # package.json of root and of needed packages
 COPY package.json yarn.lock babel.config.js .yarnrc.yml ./
 COPY .yarn .yarn
-COPY packages/frontend-v2/package.json packages/frontend-v2/package.json
+COPY packages/frontend/package.json packages/frontend/package.json
 COPY packages/api-client/package.json packages/api-client/package.json
 COPY packages/common/package.json packages/common/package.json
 
@@ -18,7 +18,7 @@ COPY packages/common/package.json packages/common/package.json
 RUN yarn install > /dev/null
 
 # Get src files
-COPY packages/frontend-v2 packages/frontend-v2
+COPY packages/frontend packages/frontend
 COPY packages/api-client packages/api-client
 COPY packages/common packages/common
 
@@ -32,7 +32,7 @@ ENV NEXT_PUBLIC_BUILD_TIMESTAMP $BUILD_TIMESTAMP
 
 RUN yarn packages/api-client build
 RUN yarn packages/common build
-RUN yarn packages/frontend-v2 build
+RUN yarn packages/frontend build
 
 # Production image 
 FROM node:16-alpine AS runner
@@ -44,9 +44,9 @@ RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
 COPY --from=builder --chown=nextjs:nodejs /app/node_modules ./node_modules
-COPY --from=builder --chown=nextjs:nodejs /app/packages/frontend-v2/public ./public
-COPY --from=builder --chown=nextjs:nodejs /app/packages/frontend-v2/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/packages/frontend-v2/.next/static ./.next/static
+COPY --from=builder --chown=nextjs:nodejs /app/packages/frontend/public ./public
+COPY --from=builder --chown=nextjs:nodejs /app/packages/frontend/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/packages/frontend/.next/static ./.next/static
 
 USER nextjs
 

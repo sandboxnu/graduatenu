@@ -14,9 +14,9 @@ jobs:
           node-version: 16
       - uses: bahmutov/npm-install@v1
       - run: yarn lint
-  run-api-v2-tests:
+  run-api-tests:
     runs-on: ubuntu-latest
-    name: API V2 Tests
+    name: API Tests
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -26,7 +26,7 @@ jobs:
           node-version: "16"
       - run: yarn install --immutable
       - name: Run Jest Tests
-        run: yarn packages/api-v2 test
+        run: yarn packages/api test
   build-frontend-image:
     runs-on: ubuntu-latest
     steps:
