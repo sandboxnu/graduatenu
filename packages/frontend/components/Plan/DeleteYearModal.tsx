@@ -12,16 +12,14 @@ import {
   ModalOverlay,
   useDisclosure,
 } from "@chakra-ui/react";
-import { API } from "@graduate/api-client";
 import { useRouter } from "next/router";
-import { Dispatch, SetStateAction, useContext } from "react";
+import { Dispatch, SetStateAction } from "react";
 import { mutate } from "swr";
 import {
   USE_STUDENT_WITH_PLANS_SWR_KEY,
   useStudentWithPlans,
 } from "../../hooks";
 import { handleApiClientError, toast } from "../../utils";
-import { IsGuestContext } from "../../pages/_app";
 import { GraduateToolTip } from "../GraduateTooltip";
 
 interface DeleteYearModalProps {
@@ -34,7 +32,6 @@ export const DeleteYearModal: React.FC<DeleteYearModalProps> = ({
 }) => {
   const router = useRouter();
   const { onOpen, onClose, isOpen } = useDisclosure();
-  const { isGuest } = useContext(IsGuestContext);
   const { student } = useStudentWithPlans();
 
   if (!student) {
