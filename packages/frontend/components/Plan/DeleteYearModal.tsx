@@ -40,10 +40,9 @@ export const DeleteYearModal: React.FC<DeleteYearModalProps> = ({
 
   const deleteYear = async () => {
     try {
+      removeYear(yearNum);
       // refresh the cache, show success message, and close the modal
       mutate(USE_STUDENT_WITH_PLANS_SWR_KEY);
-      //   setSelectedPlanId(null);
-      removeYear(yearNum);
       toast.success("Year deleted successfully.");
       onClose();
     } catch (error) {
