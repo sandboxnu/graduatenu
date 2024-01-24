@@ -44,8 +44,7 @@ export const PlanSelect: React.FC<PlanSelectProps> = ({
   noValueOptionLabel,
   useFuzzySearch,
 }) => {
-  console.log("hi");
-  var filterOptions = useFuzzySearch
+  let filterOptions = useFuzzySearch
     ? (option: FilterOptionOption<any>, inputValue: string) => {
         if (inputValue.length !== 0) {
           const list = new Fuse(options, {
