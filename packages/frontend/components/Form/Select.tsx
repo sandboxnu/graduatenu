@@ -28,13 +28,8 @@ type PlanSelectProps = {
   /** An option in the select dropdown that indicates "no selection". */
   noValueOptionLabel?: string;
   /** Fuzzy options to use */
-  fuzzySearchOptions?: IFuzzySearchOptions;
+  useFuzzySearch?: boolean;
 };
-
-interface IFuzzySearchOptions {
-  /** How strongly the fuzzy search tries to match: weak - matches anything */
-  matchStrength: "weak" | "normal" | "strong";
-}
 
 export const PlanSelect: React.FC<PlanSelectProps> = ({
   label,
@@ -47,9 +42,9 @@ export const PlanSelect: React.FC<PlanSelectProps> = ({
   isNumeric,
   isSearchable,
   noValueOptionLabel,
-  fuzzySearchOptions,
+  useFuzzySearch,
 }) => {
-  var filterOptions = fuzzySearchOptions
+  var filterOptions = useFuzzySearch
     ? (option: FilterOptionOption<any>, inputValue: string) => {
         if (inputValue.length !== 0) {
           const list = new Fuse(options, {
@@ -58,14 +53,7 @@ export const PlanSelect: React.FC<PlanSelectProps> = ({
             ignoreLocation: true,
             findAllMatches: true,
             includeScore: true,
-            threshold:
-              fuzzySearchOptions.matchStrength === "weak"
-                ? 0.9
-                : fuzzySearchOptions.matchStrength === "normal"
-                ? 0.6
-                : fuzzySearchOptions.matchStrength === "strong"
-                ? 0.3
-                : 0.0,
+            threshold: 0.4,
           }).search(inputValue);
 
           return list.map((element) => element.item).includes(option.label);

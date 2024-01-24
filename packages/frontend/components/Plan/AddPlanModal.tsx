@@ -245,9 +245,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                       rules={{ required: "Major is required." }}
                       helperText='First select your catalog year. If you still cannot find your major, select "No Major" above.'
                       isSearchable
-                      fuzzySearchOptions={{
-                        matchStrength: "normal",
-                      }}
+                      useFuzzySearch
                     />
                     <PlanConcentrationsSelect
                       catalogYear={catalogYear}
