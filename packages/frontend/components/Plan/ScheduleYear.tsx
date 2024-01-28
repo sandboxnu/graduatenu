@@ -1,4 +1,4 @@
-import { DeleteIcon, WarningIcon } from "@chakra-ui/icons";
+import { WarningIcon } from "@chakra-ui/icons";
 import { Flex, Grid, IconButton, Text, Tooltip } from "@chakra-ui/react";
 import {
   ScheduleCourse2,
@@ -8,8 +8,8 @@ import {
 } from "@graduate/common";
 import { ScheduleTerm } from "./ScheduleTerm";
 import { useState, useEffect } from "react";
-import { GraduateToolTip } from "../GraduateTooltip";
 import { totalCreditsInYear } from "../../utils";
+import { DeleteYearModal } from "./DeleteYearModal";
 
 interface ToggleYearProps {
   isExpanded: boolean;
@@ -192,23 +192,10 @@ const YearHeader: React.FC<YearHeaderProps> = ({
             />
           </Tooltip>
         )}
-        <GraduateToolTip label={`Delete year ${year.year}?`}>
-          <IconButton
-            aria-label="Delete course"
-            variant="ghost"
-            color="white"
-            icon={<DeleteIcon />}
-            marginLeft="auto"
-            marginRight="sm"
-            _hover={{ bg: "white", color: "primary.red.main" }}
-            _active={{ bg: "primary.blue.light.900" }}
-            onClick={(e) => {
-              // important to prevent the click from propogating upwards and triggering the toggle
-              e.stopPropagation();
-              removeYearFromCurrPlan();
-            }}
-          />
-        </GraduateToolTip>
+        <DeleteYearModal
+          yearNum={year.year}
+          removeYear={removeYearFromCurrPlan}
+        />
       </Flex>
     </Flex>
   );

@@ -15,22 +15,21 @@ export const useRedirectIfLoggedIn = () => {
   const [renderSpinner, setRenderSpinner] = useState(false);
   const { setIsGuest } = useContext(IsGuestContext);
 
-  const loginWithCookie = async () => {
-    setRenderSpinner(true);
-    try {
-      await API.student.getMe();
-      setIsGuest(false);
-      router.push("/home");
-    } catch (err) {
-      const error = err as AxiosError;
-      logger.error(error);
-      setRenderSpinner(false);
-    }
-  };
-
   useEffect(() => {
+    const loginWithCookie = async () => {
+      setRenderSpinner(true);
+      try {
+        await API.student.getMe();
+        setIsGuest(false);
+        router.push("/home");
+      } catch (err) {
+        const error = err as AxiosError;
+        logger.error(error);
+        setRenderSpinner(false);
+      }
+    };
     loginWithCookie();
-  }, []);
+  }, [setIsGuest]);
 
   return renderSpinner;
 };
