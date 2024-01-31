@@ -4,6 +4,7 @@ import {
   FormErrorMessage,
   FormHelperText,
 } from "@chakra-ui/react";
+import { useState } from "react";
 import { Control, FieldError, useController } from "react-hook-form";
 import Select from "react-select";
 
@@ -39,8 +40,15 @@ export const PlanSelect: React.FC<PlanSelectProps> = ({
   isSearchable,
   noValueOptionLabel,
 }) => {
+  const [selectIsFocused, setSelectIsFocused] = useState<boolean>(false);
+
   const {
-    field: { onChange: onChangeUpdateValue, value, ...fieldRest },
+    field: {
+      onChange: onChangeUpdateValue,
+      onBlur: onUnfocusSelect,
+      value,
+      ...fieldRest
+    },
     fieldState: { error },
   } = useController({ name, control, rules });
 
@@ -66,6 +74,17 @@ export const PlanSelect: React.FC<PlanSelectProps> = ({
     onChangeUpdateValue(val);
   };
 
+  // action when select is unfocused
+  const onBlur = () => {
+    setSelectIsFocused(false);
+    onUnfocusSelect();
+  };
+
+  // action when select is focused
+  const onFocus = () => {
+    setSelectIsFocused(true);
+  };
+
   let selectedValue = value;
   if (isNumeric) {
     selectedValue = value ? value.toString() : null;
@@ -89,8 +108,16 @@ export const PlanSelect: React.FC<PlanSelectProps> = ({
         onChange={onChange}
         value={selectedOption}
         isSearchable={isSearchable}
+        onBlur={onBlur}
+        onFocus={onFocus}
         defaultValue={noValueOption}
         {...fieldRest}
+        styles={{
+          singleValue: (baseStyles) => ({
+            ...baseStyles,
+            color: selectIsFocused ? "gray" : "black",
+          }),
+        }}
       />
       {helperText && <FormHelperText>{helperText}</FormHelperText>}
       <FormErrorMessage>{error?.message}</FormErrorMessage>
