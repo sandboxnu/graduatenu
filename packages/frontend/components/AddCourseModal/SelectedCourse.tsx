@@ -1,30 +1,48 @@
 import { Flex, Text } from "@chakra-ui/react";
-import { ScheduleCourse2 } from "@graduate/common";
-import { getCourseDisplayString } from "../../utils";
+import { NUPathEnum, ScheduleCourse2 } from "@graduate/common";
+import { getCourseDisplayString } from "../../utils/";
 import { CourseTrashButton } from "../ScheduleCourse/CourseTrashButton";
+import { NUPathLabel } from "./NUPathLabel";
 
 interface SelectedCourseProps {
   selectedCourse: ScheduleCourse2<null>;
+  filteredPaths?: NUPathEnum[];
   removeSelectedCourse: (course: ScheduleCourse2<null>) => void;
 }
 
 export const SelectedCourse: React.FC<SelectedCourseProps> = ({
   selectedCourse,
   removeSelectedCourse,
+  filteredPaths,
 }) => {
   return (
     <Flex
       borderRadius="md"
-      boxShadow="md"
-      backgroundColor="neutral.100"
+      borderColor="gray.100"
+      backgroundColor="white.100"
       alignItems="center"
+      flexGrow="1"
     >
-      <Text pl="sm" pr="2xs">
-        {getCourseDisplayString(selectedCourse)}
-      </Text>
-      <Text fontSize="xs" pr="md">
-        {selectedCourse.name}
-      </Text>
+      <Flex direction="row" flexWrap="wrap">
+        <Text>
+          <Text
+            as="span"
+            fontSize="14px"
+            fontWeight="bold"
+            word-whiteSpace="10px"
+            paddingRight="5px"
+          >
+            {getCourseDisplayString(selectedCourse) + " "}
+          </Text>
+          <Text as="span" size="sm" fontWeight="normal">
+            {selectedCourse.name}
+          </Text>
+        </Text>
+        <NUPathLabel
+          nupaths={selectedCourse.nupaths == null ? [] : selectedCourse.nupaths}
+          filteredPaths={filteredPaths ? filteredPaths : []}
+        />
+      </Flex>
       <CourseTrashButton onClick={() => removeSelectedCourse(selectedCourse)} />
     </Flex>
   );

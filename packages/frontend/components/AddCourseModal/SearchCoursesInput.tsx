@@ -4,7 +4,7 @@ import {
   InputLeftElement,
   Input,
   InputRightElement,
-  Button,
+  IconButton,
 } from "@chakra-ui/react";
 import {
   Dispatch,
@@ -28,6 +28,10 @@ export const SearchCoursesInput: React.FC<SearchCoursesInputProps> = ({
     }
   };
 
+  const onSubmit = () => {
+    setSearchQuery(searchTerm);
+  };
+
   return (
     <InputGroup>
       <InputLeftElement pointerEvents="none">
@@ -45,10 +49,15 @@ export const SearchCoursesInput: React.FC<SearchCoursesInputProps> = ({
         backgroundColor="neutral.100"
         placeholder="SEARCH BY NAME, CRN, ETC."
       />
-      <InputRightElement pointerEvents="none">
-        <Button backgroundColor="primary.blue.light.main">
-          <Search2Icon color="white" />
-        </Button>
+      <InputRightElement>
+        <IconButton
+          aria-label="Search courses"
+          backgroundColor="primary.blue.light.main"
+          borderColor="primary.blue.light.main"
+          colorScheme="primary.blue.light"
+          icon={<Search2Icon color="white" />}
+          onClick={onSubmit}
+        ></IconButton>
       </InputRightElement>
     </InputGroup>
   );
