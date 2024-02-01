@@ -243,8 +243,8 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                         setValue("concentration", "");
                       }}
                       rules={{ required: "Major is required." }}
-                      helperText='First select your catalog year. If you still cannot find your major, select "No Major" above.'
                       isSearchable
+                      isDisabled={!!!catalogYear}
                     />
                     <PlanConcentrationsSelect
                       catalogYear={catalogYear}
