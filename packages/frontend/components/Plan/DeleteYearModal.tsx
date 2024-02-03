@@ -62,7 +62,10 @@ export const DeleteYearModal: React.FC<DeleteYearModalProps> = ({
           marginRight="sm"
           _hover={{ bg: "white", color: "primary.red.main" }}
           _active={{ bg: "primary.blue.light.900" }}
-          onClick={onOpen}
+          onClick={(e) => {
+            e.stopPropagation();
+            onOpen();
+          }}
         />
       </GraduateToolTip>
       <Modal isOpen={isOpen} onClose={onClose}>
