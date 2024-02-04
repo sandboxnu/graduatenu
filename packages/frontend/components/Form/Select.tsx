@@ -25,6 +25,7 @@ type PlanSelectProps = {
   /** Are the field values numbers. */
   isNumeric?: boolean;
   isSearchable?: boolean;
+  isDisabled?: boolean;
   /** An option in the select dropdown that indicates "no selection". */
   noValueOptionLabel?: string;
   /** Fuzzy options to use */
@@ -41,6 +42,7 @@ export const PlanSelect: React.FC<PlanSelectProps> = ({
   rules,
   isNumeric,
   isSearchable,
+  isDisabled,
   noValueOptionLabel,
   useFuzzySearch,
 }) => {
@@ -113,6 +115,7 @@ export const PlanSelect: React.FC<PlanSelectProps> = ({
         onChange={onChange}
         value={selectedOption}
         isSearchable={isSearchable}
+        isDisabled={isDisabled}
         defaultValue={noValueOption}
         filterOption={filterOptions}
         {...fieldRest}

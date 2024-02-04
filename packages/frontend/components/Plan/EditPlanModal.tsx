@@ -268,6 +268,7 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                       }}
                       rules={{ required: "Major is required." }}
                       isSearchable
+                      isDisabled={!!!catalogYear}
                     />
                     <PlanConcentrationsSelect
                       catalogYear={catalogYear}
