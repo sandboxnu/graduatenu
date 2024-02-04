@@ -4,8 +4,10 @@ import {
   FormErrorMessage,
   FormHelperText,
 } from "@chakra-ui/react";
+import Fuse from "fuse.js";
 import { Control, FieldError, useController } from "react-hook-form";
 import Select from "react-select";
+import { FilterOptionOption } from "react-select/dist/declarations/src/filters";
 
 type PlanSelectProps = {
   error?: FieldError;
@@ -25,6 +27,8 @@ type PlanSelectProps = {
   isSearchable?: boolean;
   /** An option in the select dropdown that indicates "no selection". */
   noValueOptionLabel?: string;
+  /** Fuzzy options to use */
+  useFuzzySearch?: boolean;
 };
 
 export const PlanSelect: React.FC<PlanSelectProps> = ({
@@ -38,7 +42,27 @@ export const PlanSelect: React.FC<PlanSelectProps> = ({
   isNumeric,
   isSearchable,
   noValueOptionLabel,
+  useFuzzySearch,
 }) => {
+  const filterOptions = useFuzzySearch
+    ? (option: FilterOptionOption<any>, inputValue: string) => {
+        if (inputValue.length !== 0) {
+          const list = new Fuse(options, {
+            isCaseSensitive: false,
+            shouldSort: true,
+            ignoreLocation: true,
+            findAllMatches: true,
+            includeScore: true,
+            threshold: 0.4,
+          }).search(inputValue);
+
+          return list.map((element) => element.item).includes(option.label);
+        } else {
+          return true;
+        }
+      }
+    : null;
+
   const {
     field: { onChange: onChangeUpdateValue, value, ...fieldRest },
     fieldState: { error },
@@ -90,6 +114,7 @@ export const PlanSelect: React.FC<PlanSelectProps> = ({
         value={selectedOption}
         isSearchable={isSearchable}
         defaultValue={noValueOption}
+        filterOption={filterOptions}
         {...fieldRest}
       />
       {helperText && <FormHelperText>{helperText}</FormHelperText>}

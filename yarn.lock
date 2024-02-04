@@ -7840,6 +7840,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"fuse.js@npm:^7.0.0":
+  version: 7.0.0
+  resolution: "fuse.js@npm:7.0.0"
+  checksum: d15750efec1808370c0cae92ec9473aa7261c59bca1f15f1cf60039ba6f804b8f95340b5cabd83a4ef55839c1034764856e0128e443921f072aa0d8a20e4cacf
+  languageName: node
+  linkType: hard
+
 "gauge@npm:^4.0.3":
   version: 4.0.4
   resolution: "gauge@npm:4.0.4"
@@ -8062,6 +8069,7 @@ __metadata:
     eslint-plugin-monorepo-cop: ^1.0.2
     eslint-plugin-no-only-tests: ^2.6.0
     express: ^4.17.3
+    fuse.js: ^7.0.0
     http-proxy-middleware: ^2.0.3
     husky: ^8.0.0
     nodemailer: ^6.9.1

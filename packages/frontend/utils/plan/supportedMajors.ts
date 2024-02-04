@@ -1,4 +1,7 @@
-import { GetSupportedMajorsResponse } from "@graduate/common";
+import {
+  GetSupportedMajorsResponse,
+  majorNameComparator,
+} from "@graduate/common";
 
 export const extractSupportedMajorYears = (
   supportedMajorsData?: GetSupportedMajorsResponse
@@ -12,5 +15,7 @@ export const extractSupportedMajorNames = (
   if (!catalogYear) {
     return [];
   }
-  return Object.keys(supportedMajorsData?.supportedMajors[catalogYear] ?? {});
+  return Object.keys(
+    supportedMajorsData?.supportedMajors[catalogYear] ?? {}
+  ).sort(majorNameComparator);
 };
