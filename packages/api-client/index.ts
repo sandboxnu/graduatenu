@@ -20,6 +20,8 @@ import {
   ForgotPasswordDto,
   ResetPasswordDto,
   courseToString,
+  NUPathEnum,
+  GetMetaInfoResponse,
 } from "@graduate/common";
 import { ClassConstructor, plainToInstance } from "class-transformer";
 
@@ -103,6 +105,11 @@ class APIClient {
     getSupportedMajors: (): Promise<GetSupportedMajorsResponse> =>
       this.req("GET", `/majors/supportedMajors`, GetSupportedMajorsResponse),
   };
+
+  meta = {
+    getInfo: (): Promise<GetMetaInfoResponse> =>
+      this.req("GET", "/meta/info", GetMetaInfoResponse),
+  };
 }
 
 /**
@@ -132,6 +139,7 @@ interface SearchClass {
   subject: string;
   prereqs?: INEUAndReq | INEUOrReq;
   coreqs?: INEUAndReq | INEUOrReq;
+  nupath?: NUPathEnum[];
   maxCredits: number;
   minCredits: number;
   termId: string;
@@ -189,6 +197,7 @@ function occurrenceToCourse(occurrence: SearchClass): ScheduleCourse2<null> {
     numCreditsMin: occurrence.minCredits,
     prereqs: occurrence.prereqs,
     coreqs: occurrence.coreqs,
+    nupaths: occurrence.nupath,
     id: null,
   };
 }
@@ -229,6 +238,7 @@ class SearchAPIClient {
               minCredits
               prereqs
               coreqs
+              nupath
             }
           }
         }`,
@@ -269,6 +279,7 @@ class SearchAPIClient {
             maxCredits
             prereqs
             coreqs
+            nupath
             termId
           }
         }
@@ -353,7 +364,7 @@ class SearchAPIClient {
           search(termId:"${termId}", query: "${searchQuery}", classIdRange: {min: ${minIndex}, max: ${maxIndex}}) {
             totalCount 
             pageInfo { hasNextPage } 
-            nodes { ... on ClassOccurrence { name subject maxCredits minCredits prereqs coreqs classId
+            nodes { ... on ClassOccurrence { name subject maxCredits minCredits prereqs coreqs nupath classId
             } 
           } 
         } 
@@ -371,6 +382,7 @@ class SearchAPIClient {
         subject: result.subject,
         prereqs: result.prereqs,
         coreqs: result.coreqs,
+        nupaths: result.nupath,
         numCreditsMin: result.minCredits,
         numCreditsMax: result.maxCredits,
       };

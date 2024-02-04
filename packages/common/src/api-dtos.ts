@@ -84,7 +84,6 @@ export class SignUpStudentDto {
 }
 export class UpdateStudentDto {
   @IsOptional()
-  @IsNotEmpty()
   @IsString()
   fullName?: string;
 
