@@ -2,12 +2,20 @@ import { CopyIcon } from "@chakra-ui/icons";
 import { API } from "@graduate/api-client";
 import { CreatePlanDto, PlanModel } from "@graduate/common";
 import { useRouter } from "next/router";
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useState, useContext } from "react";
 import { toast } from "react-toastify";
 import { mutate } from "swr";
-import { USE_STUDENT_WITH_PLANS_SWR_KEY } from "../../hooks";
-import { cleanDndIdsFromPlan, handleApiClientError } from "../../utils";
+import {
+  USE_STUDENT_WITH_PLANS_SWR_KEY,
+  useStudentWithPlans,
+} from "../../hooks";
+import {
+  cleanDndIdsFromPlan,
+  cleanDndIdsFromStudent,
+  handleApiClientError,
+} from "../../utils";
 import { BlueButton } from "../Button";
+import { IsGuestContext } from "../../pages/_app";
 
 interface DuplicatePlanButton {
   plan: PlanModel<string>;
@@ -19,12 +27,14 @@ export const DuplicatePlanButton: React.FC<DuplicatePlanButton> = ({
   setSelectedPlanId,
 }) => {
   const router = useRouter();
+  const { isGuest } = useContext(IsGuestContext);
   const [buttonLoading, setButtonLoading] = useState(false);
+  const { student } = useStudentWithPlans();
 
   const duplicatePlan = async () => {
-    // TODO: figure out when to do with this
+    if (!student) return;
+    // TODO: figure out when to do with this -- debounce stuff
     setButtonLoading(true);
-
     const updatedPlan: CreatePlanDto = {
       name: "Copy of " + plan.name,
       catalogYear: plan.catalogYear,
@@ -32,16 +42,42 @@ export const DuplicatePlanButton: React.FC<DuplicatePlanButton> = ({
       concentration: plan.concentration,
       schedule: cleanDndIdsFromPlan(plan).schedule,
     };
-    try {
-      const createdPlan = await API.plans.create(updatedPlan);
-      mutate(USE_STUDENT_WITH_PLANS_SWR_KEY);
-      setSelectedPlanId(createdPlan.id);
-      toast.success("Plan duplicated successfully");
-      setButtonLoading(false);
-    } catch (error) {
-      handleApiClientError(error as Error, router);
-      setButtonLoading(false);
+
+    let createdPlanId: number;
+    if (isGuest) {
+      // Create the duplicated plan in local storage
+      createdPlanId = student.plans.length + 1;
+      const planLocalStorage: PlanModel<null> = {
+        ...updatedPlan,
+        id: createdPlanId,
+        student: cleanDndIdsFromStudent(student),
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      } as PlanModel<null>;
+
+      // TODO handle QuotaExceededError exception
+      window.localStorage.setItem(
+        "student",
+        JSON.stringify({
+          ...student,
+          plans: [...student.plans, planLocalStorage],
+        })
+      );
+    } else {
+      try {
+        const createdPlan = await API.plans.create(updatedPlan);
+        createdPlanId = createdPlan.id;
+      } catch (error) {
+        handleApiClientError(error as Error, router);
+        // don't proceed further if POST failed
+        setButtonLoading(false);
+        return;
+      }
     }
+    mutate(USE_STUDENT_WITH_PLANS_SWR_KEY);
+    toast.success("Plan duplicated successfully");
+    setSelectedPlanId(createdPlanId);
+    setButtonLoading(false);
   };
 
   return (
