@@ -55,14 +55,19 @@ export const DuplicatePlanButton: React.FC<DuplicatePlanButton> = ({
         updatedAt: new Date(),
       } as PlanModel<null>;
 
-      // TODO handle QuotaExceededError exception
-      window.localStorage.setItem(
-        "student",
-        JSON.stringify({
-          ...student,
-          plans: [...student.plans, planLocalStorage],
-        })
-      );
+      // TODO handle QuotaExceededError exception better
+      try {
+        window.localStorage.setItem(
+          "student",
+          JSON.stringify({
+            ...student,
+            plans: [...student.plans, planLocalStorage],
+          })
+        );
+      } catch (error) {
+        toast.error("Maximum local storage quota exceed. Too many plans.");
+        return;
+      }
     } else {
       try {
         const createdPlan = await API.plans.create(updatedPlan);
