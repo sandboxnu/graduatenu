@@ -36,7 +36,6 @@ import { toast } from "../../utils";
 import { BlueButton } from "../Button";
 import { PlanInput, PlanSelect } from "../Form";
 import { HelperToolTip } from "../Help";
-import { PlanConcentrationsSelect } from "./PlanConcentrationsSelect";
 import { IsGuestContext } from "../../pages/_app";
 
 type EditPlanModalProps = {
@@ -104,9 +103,27 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
     return <></>;
   }
 
+  const title = watch("name");
   const catalogYear = watch("catalogYear");
   const majorName = watch("major");
   const concentration = watch("concentration");
+
+  const selectedMajorConcentrations = supportedMajorsData?.supportedMajors[
+    catalogYear ?? 0
+  ]?.[majorName ?? ""] ?? { concentrations: [], minRequiredConcentrations: 0 };
+  console.log(selectedMajorConcentrations);
+
+  const isConcentrationRequired =
+    selectedMajorConcentrations.minRequiredConcentrations > 0;
+
+  const majorHasConcentrations =
+    selectedMajorConcentrations.concentrations.length > 0;
+
+  const isValidForm =
+    title &&
+    catalogYear &&
+    majorName &&
+    (!isConcentrationRequired || concentration);
 
   const onSubmitHandler = async (payload: UpdatePlanDto) => {
     // no submitting till the curr plan has been fetched
@@ -270,12 +287,20 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                       isSearchable
                       isDisabled={!!!catalogYear}
                     />
-                    <PlanConcentrationsSelect
-                      catalogYear={catalogYear}
-                      majorName={majorName}
-                      supportedMajorsData={supportedMajorsData}
-                      control={control}
-                    />
+                    {majorHasConcentrations && (
+                      <PlanSelect
+                        label="Concentrations"
+                        noValueOptionLabel="Select a Concentration"
+                        name="concentration"
+                        options={selectedMajorConcentrations.concentrations}
+                        control={control}
+                        rules={{
+                          required:
+                            isConcentrationRequired &&
+                            "Concentration is required",
+                        }}
+                      />
+                    )}
                   </>
                 )}
               </VStack>
@@ -294,6 +319,7 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                 <Button
                   variant="solid"
                   isLoading={isSubmitting}
+                  isDisabled={!isValidForm}
                   size="md"
                   borderRadius="lg"
                   type="submit"

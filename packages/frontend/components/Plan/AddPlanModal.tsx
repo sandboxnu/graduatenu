@@ -41,7 +41,6 @@ import {
 import { BlueButton } from "../Button";
 import { PlanInput, PlanSelect } from "../Form";
 import { HelperToolTip } from "../Help";
-import { PlanConcentrationsSelect } from "./PlanConcentrationsSelect";
 import { IsGuestContext } from "../../pages/_app";
 
 interface AddPlanModalProps {
@@ -133,9 +132,27 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
     onCloseDisplay();
   };
 
+  const title = watch("name");
   const catalogYear = watch("catalogYear");
   const majorName = watch("major");
   const concentration = watch("concentration");
+
+  const selectedMajorConcentrations = supportedMajorsData?.supportedMajors[
+    catalogYear ?? 0
+  ]?.[majorName ?? ""] ?? { concentrations: [], minRequiredConcentrations: 0 };
+  console.log(selectedMajorConcentrations);
+
+  const isConcentrationRequired =
+    selectedMajorConcentrations.minRequiredConcentrations > 0;
+
+  const majorHasConcentrations =
+    selectedMajorConcentrations.concentrations.length > 0;
+
+  const isValidForm =
+    title &&
+    catalogYear &&
+    majorName &&
+    (!isConcentrationRequired || concentration);
 
   const noMajorHelperLabel = (
     <Stack>
@@ -247,12 +264,20 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                       isSearchable
                       useFuzzySearch
                     />
-                    <PlanConcentrationsSelect
-                      catalogYear={catalogYear}
-                      majorName={majorName}
-                      supportedMajorsData={supportedMajorsData}
-                      control={control}
-                    />
+                    {majorHasConcentrations && (
+                      <PlanSelect
+                        label="Concentrations"
+                        noValueOptionLabel="Select a Concentration"
+                        name="concentration"
+                        options={selectedMajorConcentrations.concentrations}
+                        control={control}
+                        rules={{
+                          required:
+                            isConcentrationRequired &&
+                            "Concentration is required",
+                        }}
+                      />
+                    )}
                   </>
                 )}
               </VStack>
@@ -270,6 +295,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                 <Button
                   variant="solid"
                   isLoading={isSubmitting}
+                  isDisabled={!isValidForm}
                   size="md"
                   borderRadius="lg"
                   type="submit"
