@@ -24,8 +24,8 @@ export const PlanConcentrationsSelect: React.FC<
 
   return (
     <PlanSelect
-      label="Concentrations"
-      noValueOptionLabel="Select a Concentration"
+      label="Concentration"
+      placeholder="Select a Concentration"
       name="concentration"
       options={supportedMajor.concentrations}
       control={control}
