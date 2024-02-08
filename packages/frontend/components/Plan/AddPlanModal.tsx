@@ -140,7 +140,6 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
   const selectedMajorConcentrations = supportedMajorsData?.supportedMajors[
     catalogYear ?? 0
   ]?.[majorName ?? ""] ?? { concentrations: [], minRequiredConcentrations: 0 };
-  console.log(selectedMajorConcentrations);
 
   const isConcentrationRequired =
     selectedMajorConcentrations.minRequiredConcentrations > 0;
@@ -260,7 +259,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                         setValue("concentration", "");
                       }}
                       rules={{ required: "Major is required." }}
-                      isDisabled={!!!catalogYear}
+                      isDisabled={!catalogYear}
                       isSearchable
                       useFuzzySearch
                     />
