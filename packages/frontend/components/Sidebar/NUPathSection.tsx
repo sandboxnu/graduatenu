@@ -191,7 +191,7 @@ const NUPathSection: React.FC<NUPathSectionProps> = ({
         {opened && !loading && (
           <Box id={dndIdPrefix} pl="xs" pt="xs">
             <Text fontSize="sm" as="i">
-              Complete the following NUpath requirements.
+              Complete the following NUpath requirements:
             </Text>
             <>
               {nuPathDisplayAndAbbr.map(
