@@ -15,19 +15,20 @@ interface NUPathSectionProps {
   loading?: boolean;
 }
 
-const nupathDisplayNames: [nupath: string, display: string][] = [
-  [NUPathEnum.ND, "Natural and Designed World (ND)"],
-  [NUPathEnum.EI, "Creative Expression/Innovation (EI)"],
-  [NUPathEnum.IC, "Interpreting Culture (IC)"],
-  [NUPathEnum.FQ, "Formal and Quantitative Reasoning (FQ)"],
-  [NUPathEnum.AD, "Analyzing/Using Data (AD)"],
-  [NUPathEnum.DD, "Difference and Diversity (DD)"],
-  [NUPathEnum.ER, "Ethical Reasoning (ER)"],
-  [NUPathEnum.WF, "First Year Writing (WF)"],
-  [NUPathEnum.WI, "Writing Intensive (WI)"],
-  [NUPathEnum.WD, "Advanced Writing in the Disciplines (WD)"],
-  [NUPathEnum.EX, "Integration Experience (EX)"],
-  [NUPathEnum.CE, "Capstone Experience (CE)"],
+const nupathAbbreviations: [nupath: string, abbreviation: string][] = [
+  [NUPathEnum.ND, "ND"],
+  [NUPathEnum.EI, "EI"],
+  [NUPathEnum.IC, "IC"],
+  [NUPathEnum.FQ, "FQ"],
+  [NUPathEnum.SI, "SI"],
+  [NUPathEnum.AD, "AD"],
+  [NUPathEnum.DD, "DD"],
+  [NUPathEnum.ER, "ER"],
+  [NUPathEnum.WF, "WF"],
+  [NUPathEnum.WD, "WD"],
+  [NUPathEnum.WI, "WI"],
+  [NUPathEnum.EX, "EX"],
+  [NUPathEnum.CE, "CE"],
 ];
 const grey = "neutral.400";
 const green = "states.success.main";
@@ -65,7 +66,7 @@ const NUPathSection: React.FC<NUPathSectionProps> = ({
   return (
     <Box
       borderTopWidth="1px"
-      borderTopColor="neutral.900"
+      borderTopColor="neutral.200"
       cursor="pointer"
       userSelect="none"
     >
@@ -81,10 +82,10 @@ const NUPathSection: React.FC<NUPathSectionProps> = ({
         py="md"
         px="md"
         margin="0"
-        backgroundColor="neutral.main"
+        backgroundColor="neutral.50"
         transition="background-color 0.25s ease"
         _hover={{
-          backgroundColor: "neutral.900",
+          backgroundColor: "neutral.100",
         }}
         _active={{
           backgroundColor: "neutral.200",
@@ -171,7 +172,9 @@ const NUPathSection: React.FC<NUPathSectionProps> = ({
       </Flex>
       <Box
         style={{ display: opened ? "" : "none" }}
-        backgroundColor="neutral.900"
+        backgroundColor="neutral.100"
+        borderTopWidth=".5px"
+        borderTopColor="neutral.200"
         padding="10px 20px 15px 10px"
         cursor="default"
       >
@@ -183,17 +186,17 @@ const NUPathSection: React.FC<NUPathSectionProps> = ({
         )}
         {opened && !loading && (
           <Box id={dndIdPrefix} pl="xs" pt="xs">
-            <Text fontSize="sm">
+            <Text fontSize="sm" as="i">
               Complete the following NUpath requirements.
             </Text>
             <>
-              {nupathDisplayNames.map(([nupath, displayName], idx) => {
+              {nupathAbbreviations.map(([nupath, abbreviation], idx) => {
                 const numTaken = nupathMap[nupath] || 0;
                 return (
                   <NUPathRequirement
                     key={idx}
+                    abbreviation={abbreviation}
                     nupath={nupath}
-                    displayName={displayName}
                     numTaken={numTaken}
                   />
                 );
@@ -207,14 +210,14 @@ const NUPathSection: React.FC<NUPathSectionProps> = ({
 };
 
 interface NUPathRequirementProps {
+  abbreviation: string;
   nupath: string;
-  displayName: string;
   numTaken: number;
 }
 
 const NUPathRequirement: React.FC<NUPathRequirementProps> = ({
+  abbreviation,
   nupath,
-  displayName,
   numTaken,
 }) => {
   const isSatisfied =
@@ -222,10 +225,7 @@ const NUPathRequirement: React.FC<NUPathRequirementProps> = ({
     (nupath !== NUPathEnum.WI && numTaken >= 1);
 
   return (
-    <>
-      <Text>
-        {displayName} {numTaken} {String(isSatisfied)}
-      </Text>
+    <Flex my="xs" ml="xs" columnGap="xs">
       <Box
         bg={isSatisfied ? green : grey}
         borderColor={isSatisfied ? green : grey}
@@ -234,6 +234,7 @@ const NUPathRequirement: React.FC<NUPathRequirementProps> = ({
         width="18px"
         height="18px"
         display="flex"
+        position="relative"
         transition="background 0.25s ease, color 0.25s ease, border 0.25s ease"
         transitionDelay="0.1s"
         alignItems="center"
@@ -243,6 +244,7 @@ const NUPathRequirement: React.FC<NUPathRequirementProps> = ({
         p="xs"
       >
         <CheckIcon
+          color="white"
           position="absolute"
           opacity={isSatisfied ? 1 : 0}
           transition="opacity 0.25s ease"
@@ -251,13 +253,17 @@ const NUPathRequirement: React.FC<NUPathRequirementProps> = ({
         />
         <SmallCloseIcon
           position="absolute"
-          opacity={isSatisfied ? 1 : 0}
+          opacity={!isSatisfied ? 1 : 0}
           transition="opacity 0.25s ease"
           transitionDelay="0.1s"
           boxSize="13px"
         />
       </Box>
-    </>
+      <Text fontSize="sm" as="b">
+        {abbreviation}
+      </Text>
+      <Text fontSize="sm">{nupath}</Text>
+    </Flex>
   );
 };
 
