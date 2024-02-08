@@ -2,6 +2,7 @@ import { NUPathEnum, ScheduleCourse2 } from "@graduate/common";
 import { SidebarValidationStatus } from "./Sidebar";
 import { useState } from "react";
 import { Box, Flex, Spinner, Text } from "@chakra-ui/react";
+import { HelperToolTip } from "../Help";
 import {
   CheckIcon,
   ChevronDownIcon,
@@ -220,9 +221,8 @@ const NUPathRequirement: React.FC<NUPathRequirementProps> = ({
   nupath,
   numTaken,
 }) => {
-  const isSatisfied =
-    (nupath === NUPathEnum.WI && numTaken >= 2) ||
-    (nupath !== NUPathEnum.WI && numTaken >= 1);
+  const isWI = nupath === NUPathEnum.WI;
+  const isSatisfied = (isWI && numTaken >= 2) || (!isWI && numTaken >= 1);
 
   return (
     <Flex my="xs" ml="xs" columnGap="xs">
@@ -259,10 +259,15 @@ const NUPathRequirement: React.FC<NUPathRequirementProps> = ({
           boxSize="13px"
         />
       </Box>
-      <Text fontSize="sm" as="b">
-        {abbreviation}
-      </Text>
-      <Text fontSize="sm">{nupath}</Text>
+      <Flex alignItems="center" columnGap="3xs">
+        <Text fontSize="sm" as="b">
+          {abbreviation}
+        </Text>
+        <Text fontSize="sm" mr="4xs">
+          {nupath}
+        </Text>
+        {isWI && <HelperToolTip label="Complete 2 Writing Intensive courses" />}
+      </Flex>
     </Flex>
   );
 };
