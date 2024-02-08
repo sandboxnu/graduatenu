@@ -92,13 +92,6 @@ export const PlanSelect: React.FC<PlanSelectProps> = ({
     (option: any) => option.value === selectedValue
   );
 
-  const styles = {
-    control: (baseStyles: any) => ({
-      ...baseStyles,
-      borderColor: "#e7ebf1",
-    }),
-  };
-
   return (
     <FormControl isInvalid={error != null}>
       <FormLabel
@@ -110,7 +103,6 @@ export const PlanSelect: React.FC<PlanSelectProps> = ({
         {label}
       </FormLabel>
       <Select
-        styles={styles}
         options={selectOptions}
         onChange={onChange}
         value={selectedOption}
