@@ -97,10 +97,6 @@ export const PlanSelect: React.FC<PlanSelectProps> = ({
       ...baseStyles,
       borderColor: "#e7ebf1",
     }),
-    dropdownIndicator: (baseStyles: any, state: { isFocused: any }) => ({
-      ...baseStyles,
-      color: state.isFocused ? "#7586a0" : "#b4bbc8",
-    }),
   };
 
   return (
