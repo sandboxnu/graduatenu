@@ -3,13 +3,13 @@
  * breadth requirements.
  */
 export enum NUPathEnum {
-  ND = "Natural and Designed World",
-  EI = "Creative Expression/Innovation",
+  ND = "Natural/Designed World",
+  EI = "Creative Express/Innov",
   IC = "Interpreting Culture",
-  FQ = "Formal and Quantitative Reasoning",
-  SI = "Societies and Institutions",
+  FQ = "Formal/Quant Reasoning",
+  SI = "Societies/Institutions",
   AD = "Analyzing/Using Data",
-  DD = "Difference and Diversity",
+  DD = "Difference/Diversity",
   ER = "Ethical Reasoning",
   WF = "1st Yr Writing",
   WD = "Adv Writ Dscpl",
