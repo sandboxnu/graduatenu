@@ -55,7 +55,7 @@ for service_index in "${!DEPLOY_INDEXES[@]}"; do
     TASK_FAMILY="${TASK_FAMILIES[$i]}"
     SERVICE="${SERVICES[$i]}"
     # fetch template for task definition 
-    TASK_DEFINITION=$(aws ecs describe-task-definition --task-definition "$TASK_FAMILY" --region "$AWS_DEFAULT_REGION")
+    TASK_DEFINITION=$(aws ecs describe-task-definition --task-definition "$TASK_FAMILY" --region "$AWS_DEFAULT_REGION") --include "TAGS"
     # update the template's image to use the latest ECR_IMAGE
     NEW_TASK_DEFINITION=$(echo $TASK_DEFINITION | jq --arg IMAGE "$ECR_IMAGE" '.taskDefinition | .containerDefinitions[0].image = $IMAGE | del(.taskDefinitionArn) | del(.revision) | del(.status) | del(.requiresAttributes) | del(.compatibilities) | del(.registeredAt) | del(.registeredBy)')
     # register the new revision for the task definition 
