@@ -15,21 +15,24 @@ interface NUPathSectionProps {
   dndIdPrefix: string;
   loading?: boolean;
 }
-
-const nupathAbbreviations: [nupath: string, abbreviation: string][] = [
-  [NUPathEnum.ND, "ND"],
-  [NUPathEnum.EI, "EI"],
-  [NUPathEnum.IC, "IC"],
-  [NUPathEnum.FQ, "FQ"],
-  [NUPathEnum.SI, "SI"],
-  [NUPathEnum.AD, "AD"],
-  [NUPathEnum.DD, "DD"],
-  [NUPathEnum.ER, "ER"],
-  [NUPathEnum.WF, "WF"],
-  [NUPathEnum.WD, "WD"],
-  [NUPathEnum.WI, "WI"],
-  [NUPathEnum.EX, "EX"],
-  [NUPathEnum.CE, "CE"],
+const nuPathDisplayAndAbbr: [
+  nupath: string,
+  displayName: string,
+  abbreviation: string
+][] = [
+  [NUPathEnum.ND, "Natural and Designed World", "ND"],
+  [NUPathEnum.EI, "Creative Expression/Innovation", "EI"],
+  [NUPathEnum.IC, "Interpreting Culture", "IC"],
+  [NUPathEnum.FQ, "Formal and Quantitative Reasoning", "FQ"],
+  [NUPathEnum.SI, "Societies and Institutions", "SI"],
+  [NUPathEnum.AD, "Analyzing/Using Data", "AD"],
+  [NUPathEnum.DD, "Difference and Diversity", "DD"],
+  [NUPathEnum.ER, "Ethical Reasoning", "ER"],
+  [NUPathEnum.WF, "First Year Writing", "WF"],
+  [NUPathEnum.WD, "Advanced Writing in the Disciplines", "WD"],
+  [NUPathEnum.WI, "Writing Intensive", "WI"],
+  [NUPathEnum.EX, "Integration Experience", "EX"],
+  [NUPathEnum.CE, "Capstone Experience", "CE"],
 ];
 const grey = "neutral.400";
 const green = "states.success.main";
@@ -191,17 +194,20 @@ const NUPathSection: React.FC<NUPathSectionProps> = ({
               Complete the following NUpath requirements.
             </Text>
             <>
-              {nupathAbbreviations.map(([nupath, abbreviation], idx) => {
-                const numTaken = nupathMap[nupath] || 0;
-                return (
-                  <NUPathRequirement
-                    key={idx}
-                    abbreviation={abbreviation}
-                    nupath={nupath}
-                    numTaken={numTaken}
-                  />
-                );
-              })}
+              {nuPathDisplayAndAbbr.map(
+                ([nupath, displayName, abbreviation], idx) => {
+                  const numTaken = nupathMap[nupath] || 0;
+                  return (
+                    <NUPathRequirement
+                      key={idx}
+                      nupath={nupath}
+                      abbreviation={abbreviation}
+                      displayName={displayName}
+                      numTaken={numTaken}
+                    />
+                  );
+                }
+              )}
             </>
           </Box>
         )}
@@ -211,14 +217,16 @@ const NUPathSection: React.FC<NUPathSectionProps> = ({
 };
 
 interface NUPathRequirementProps {
-  abbreviation: string;
   nupath: string;
+  abbreviation: string;
+  displayName: string;
   numTaken: number;
 }
 
 const NUPathRequirement: React.FC<NUPathRequirementProps> = ({
-  abbreviation,
   nupath,
+  abbreviation,
+  displayName,
   numTaken,
 }) => {
   const isWI = nupath === NUPathEnum.WI;
@@ -264,7 +272,7 @@ const NUPathRequirement: React.FC<NUPathRequirementProps> = ({
           {abbreviation}
         </Text>
         <Text fontSize="sm" mr="4xs">
-          {nupath}
+          {displayName}
         </Text>
         {isWI && <HelperToolTip label="Complete 2 Writing Intensive courses" />}
       </Flex>
