@@ -25,8 +25,8 @@ type PlanSelectProps = {
   /** Are the field values numbers. */
   isNumeric?: boolean;
   isSearchable?: boolean;
-  /** An option in the select dropdown that indicates "no selection". */
-  noValueOptionLabel?: string;
+  /** The default text shown in the input box. */
+  placeholder?: string;
   /** Fuzzy options to use */
   useFuzzySearch?: boolean;
 };
@@ -41,7 +41,7 @@ export const PlanSelect: React.FC<PlanSelectProps> = ({
   rules,
   isNumeric,
   isSearchable,
-  noValueOptionLabel,
+  placeholder,
   useFuzzySearch,
 }) => {
   const filterOptions = useFuzzySearch
@@ -73,12 +73,6 @@ export const PlanSelect: React.FC<PlanSelectProps> = ({
     label: val,
   }));
 
-  let noValueOption;
-  if (noValueOptionLabel) {
-    noValueOption = { value: null, label: noValueOptionLabel };
-    selectOptions.unshift(noValueOption);
-  }
-
   const onChange = (option: any) => {
     let val = option ? option.value : null;
     onChangeSideEffect && onChangeSideEffect(val);
@@ -94,9 +88,9 @@ export const PlanSelect: React.FC<PlanSelectProps> = ({
   if (isNumeric) {
     selectedValue = value ? value.toString() : null;
   }
-  const selectedOption =
-    selectOptions.find((option: any) => option.value === selectedValue) ??
-    noValueOption;
+  const selectedOption = selectOptions.find(
+    (option: any) => option.value === selectedValue
+  );
 
   return (
     <FormControl isInvalid={error != null}>
@@ -113,7 +107,7 @@ export const PlanSelect: React.FC<PlanSelectProps> = ({
         onChange={onChange}
         value={selectedOption}
         isSearchable={isSearchable}
-        defaultValue={noValueOption}
+        placeholder={placeholder}
         filterOption={filterOptions}
         {...fieldRest}
       />
