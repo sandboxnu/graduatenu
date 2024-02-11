@@ -492,3 +492,30 @@ export interface MetaInfo {
   build_timestamp: Maybe<number>;
   environment: Maybe<string>;
 }
+
+export interface HealthCheckResponse {
+  status: string;
+  info: OverallHealthInfo;
+  error: OverallHealthDetails;
+  details: OverallHealthDetails;
+}
+
+export interface OverallHealthInfo {
+  graduate_api?: IndividualServiceHealthInfo;
+  database?: IndividualServiceHealthInfo;
+}
+
+export interface IndividualServiceHealthInfo {
+  status: string;
+}
+export interface OverallHealthDetails {
+  graduate_api?: IndividualServiceHealthDetails;
+  database?: IndividualServiceHealthDetails;
+}
+
+export interface IndividualServiceHealthDetails {
+  status: string;
+  message?: string;
+  statusCode?: number;
+  statusText?: string;
+}
