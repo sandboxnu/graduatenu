@@ -16,6 +16,8 @@ import {
 } from "../../utils";
 import { BlueButton } from "../Button";
 import { IsGuestContext } from "../../pages/_app";
+import { getLocalPlansLength } from "../../utils/plan/getLocalPlansLength";
+import { GraduateToolTip } from "../GraduateTooltip";
 
 interface DuplicatePlanButton {
   plan: PlanModel<string>;
@@ -66,6 +68,7 @@ export const DuplicatePlanButton: React.FC<DuplicatePlanButton> = ({
         );
       } catch (error) {
         toast.error("Maximum local storage quota exceed. Too many plans.");
+        setButtonLoading(false);
         return;
       }
     } else {
@@ -85,15 +88,24 @@ export const DuplicatePlanButton: React.FC<DuplicatePlanButton> = ({
     setButtonLoading(false);
   };
 
+  const disableButton = isGuest && getLocalPlansLength() > 4;
+
   return (
-    <BlueButton
-      onClick={duplicatePlan}
-      leftIcon={<CopyIcon />}
-      ml="xs"
-      size="md"
-      isLoading={buttonLoading}
+    <GraduateToolTip
+      label="Maximum number of plans reached on guest mode. Delete an existing plan or create an account."
+      shouldWrapChildren
+      isDisabled={!disableButton}
     >
-      Duplicate Plan
-    </BlueButton>
+      <BlueButton
+        onClick={duplicatePlan}
+        leftIcon={<CopyIcon />}
+        ml="xs"
+        size="md"
+        isLoading={buttonLoading}
+        disabled={disableButton}
+      >
+        Duplicate Plan
+      </BlueButton>
+    </GraduateToolTip>
   );
 };

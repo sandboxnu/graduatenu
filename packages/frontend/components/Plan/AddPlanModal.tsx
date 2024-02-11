@@ -43,6 +43,8 @@ import { PlanInput, PlanSelect } from "../Form";
 import { HelperToolTip } from "../Help";
 import { PlanConcentrationsSelect } from "./PlanConcentrationsSelect";
 import { IsGuestContext } from "../../pages/_app";
+import { GraduateToolTip } from "../GraduateTooltip";
+import { getLocalPlansLength } from "../../utils/plan/getLocalPlansLength";
 
 interface AddPlanModalProps {
   setSelectedPlanId: Dispatch<SetStateAction<number | undefined | null>>;
@@ -150,11 +152,25 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
     </Stack>
   );
 
+  const disableButton = isGuest && getLocalPlansLength() > 4;
+
   return (
     <>
-      <BlueButton leftIcon={<AddIcon />} onClick={onOpen} ml="xs" size="md">
-        New Plan
-      </BlueButton>
+      <GraduateToolTip
+        label="Maximum number of plans reached on guest mode. Delete an existing plan or create an account."
+        shouldWrapChildren
+        isDisabled={!disableButton}
+      >
+        <BlueButton
+          leftIcon={<AddIcon />}
+          onClick={onOpen}
+          ml="xs"
+          size="md"
+          disabled={disableButton}
+        >
+          New Plan
+        </BlueButton>
+      </GraduateToolTip>
       <Modal isOpen={isOpen} onClose={() => onCloseAddPlanModal()} size="md">
         <ModalOverlay />
         <ModalContent>
