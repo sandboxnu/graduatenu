@@ -33,6 +33,7 @@ const LandingPage: NextPage = () => {
       <Banner />
       <Info />
       {isMobile && <WhyDesktop />}
+      {!isMobile && <GetStarted />}
       <Footer />
     </Box>
   );
@@ -276,6 +277,26 @@ const WhyDesktop = (): JSX.Element => {
         alt="Home Page"
         objectFit="contain"
       />
+    </VStack>
+  );
+};
+
+const GetStarted = (): JSX.Element => {
+  return (
+    <VStack py="6rem">
+      <Heading mb="3rem" size="2xl" color="primary.blue.dark.main">
+        Ready To Get Started?
+      </Heading>
+
+      <GraduateButtonLink
+        href="/signup"
+        variant="solid"
+        borderRadius="lg"
+        px="3xl"
+        py="lg"
+      >
+        Sign Up
+      </GraduateButtonLink>
     </VStack>
   );
 };

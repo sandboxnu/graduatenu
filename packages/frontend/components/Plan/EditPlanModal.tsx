@@ -244,7 +244,7 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                   <>
                     <PlanSelect
                       label="Catalog Year"
-                      noValueOptionLabel="Select a Catalog Year"
+                      placeholder="Select a Catalog Year"
                       name="catalogYear"
                       control={control}
                       options={extractSupportedMajorYears(supportedMajorsData)}
@@ -275,7 +275,7 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                     />
                     <PlanSelect
                       label="Major"
-                      noValueOptionLabel="Select a Major"
+                      placeholder="Select a Major"
                       name="major"
                       control={control}
                       options={extractSupportedMajorNames(
