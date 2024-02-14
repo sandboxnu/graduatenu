@@ -137,15 +137,18 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
   const majorName = watch("major");
   const concentration = watch("concentration");
 
-  const selectedMajorConcentrations = supportedMajorsData?.supportedMajors[
-    catalogYear ?? 0
-  ]?.[majorName ?? ""] ?? { concentrations: [], minRequiredConcentrations: 0 };
+  const yearSupportedMajors =
+    supportedMajorsData?.supportedMajors[catalogYear ?? 0];
+
+  const noConcentrations = { concentrations: [], minRequiredConcentrations: 0 };
+
+  const majorConcentrations =
+    yearSupportedMajors?.[majorName ?? ""] ?? noConcentrations;
 
   const isConcentrationRequired =
-    selectedMajorConcentrations.minRequiredConcentrations > 0;
+    majorConcentrations.minRequiredConcentrations > 0;
 
-  const majorHasConcentrations =
-    selectedMajorConcentrations.concentrations.length > 0;
+  const majorHasConcentrations = majorConcentrations.concentrations.length > 0;
 
   const isValidForm =
     title &&
@@ -268,7 +271,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                         label="Concentrations"
                         noValueOptionLabel="Select a Concentration"
                         name="concentration"
-                        options={selectedMajorConcentrations.concentrations}
+                        options={majorConcentrations.concentrations}
                         control={control}
                         rules={{
                           required:

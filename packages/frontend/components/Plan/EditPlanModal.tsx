@@ -108,16 +108,18 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
   const majorName = watch("major");
   const concentration = watch("concentration");
 
-  const selectedMajorConcentrations = supportedMajorsData?.supportedMajors[
-    catalogYear ?? 0
-  ]?.[majorName ?? ""] ?? { concentrations: [], minRequiredConcentrations: 0 };
-  console.log(selectedMajorConcentrations);
+  const yearSupportedMajors =
+    supportedMajorsData?.supportedMajors[catalogYear ?? 0];
+
+  const noConcentrations = { concentrations: [], minRequiredConcentrations: 0 };
+
+  const majorConcentrations =
+    yearSupportedMajors?.[majorName ?? ""] ?? noConcentrations;
 
   const isConcentrationRequired =
-    selectedMajorConcentrations.minRequiredConcentrations > 0;
+    majorConcentrations.minRequiredConcentrations > 0;
 
-  const majorHasConcentrations =
-    selectedMajorConcentrations.concentrations.length > 0;
+  const majorHasConcentrations = majorConcentrations.concentrations.length > 0;
 
   const isValidForm =
     title &&
@@ -285,14 +287,14 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                       }}
                       rules={{ required: "Major is required." }}
                       isSearchable
-                      isDisabled={!!!catalogYear}
+                      isDisabled={!catalogYear}
                     />
                     {majorHasConcentrations && (
                       <PlanSelect
                         label="Concentrations"
                         noValueOptionLabel="Select a Concentration"
                         name="concentration"
-                        options={selectedMajorConcentrations.concentrations}
+                        options={majorConcentrations.concentrations}
                         control={control}
                         rules={{
                           required:
