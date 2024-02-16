@@ -37,7 +37,6 @@ import {
 import { DuplicatePlanButton } from "../components/Plan/DuplicatePlanButton";
 import { fetchStudentAndPrepareForDnd, useStudentWithPlans } from "../hooks";
 import {
-  // createEmptySchedule,
   DELETE_COURSE_AREA_DND_ID,
   cleanDndIdsFromPlan,
   handleApiClientError,

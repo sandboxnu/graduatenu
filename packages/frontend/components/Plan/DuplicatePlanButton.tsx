@@ -35,8 +35,8 @@ export const DuplicatePlanButton: React.FC<DuplicatePlanButton> = ({
 
   const duplicatePlan = async () => {
     if (!student) return;
-    // TODO: figure out when to do with this -- debounce stuff
     setButtonLoading(true);
+
     const updatedPlan: CreatePlanDto = {
       name: "Copy of " + plan.name,
       catalogYear: plan.catalogYear,
@@ -56,8 +56,6 @@ export const DuplicatePlanButton: React.FC<DuplicatePlanButton> = ({
         createdAt: new Date(),
         updatedAt: new Date(),
       } as PlanModel<null>;
-
-      // TODO handle QuotaExceededError exception better
       try {
         window.localStorage.setItem(
           "student",
@@ -77,7 +75,6 @@ export const DuplicatePlanButton: React.FC<DuplicatePlanButton> = ({
         createdPlanId = createdPlan.id;
       } catch (error) {
         handleApiClientError(error as Error, router);
-        // don't proceed further if POST failed
         setButtonLoading(false);
         return;
       }
