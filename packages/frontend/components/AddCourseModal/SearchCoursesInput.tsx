@@ -35,7 +35,7 @@ export const SearchCoursesInput: React.FC<SearchCoursesInputProps> = ({
   return (
     <InputGroup>
       <InputLeftElement pointerEvents="none">
-        <Search2Icon color="primary.blue.light.main" />
+        <Search2Icon color="neutral.300" />
       </InputLeftElement>
       <Input
         value={searchTerm}
@@ -43,11 +43,10 @@ export const SearchCoursesInput: React.FC<SearchCoursesInputProps> = ({
           setSearchTerm(e.target.value);
         }}
         onKeyDown={onKeyDown}
-        borderRadius={10}
         fontSize="sm"
         color="primary.blue.light.main"
-        backgroundColor="neutral.100"
-        placeholder="SEARCH BY NAME, CRN, ETC."
+        placeholder="Search by name or CRN..."
+        textColor="neutral.300"
       />
       <InputRightElement>
         <IconButton
@@ -57,6 +56,8 @@ export const SearchCoursesInput: React.FC<SearchCoursesInputProps> = ({
           colorScheme="primary.blue.light"
           icon={<Search2Icon color="white" />}
           onClick={onSubmit}
+          borderRadius="5"
+          borderLeftRadius="0"
         ></IconButton>
       </InputRightElement>
     </InputGroup>

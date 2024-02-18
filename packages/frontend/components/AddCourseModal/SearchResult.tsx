@@ -31,58 +31,50 @@ export const SearchResult: React.FC<SearchResultProps> = ({
     : undefined;
 
   return (
-    <Flex direction="column">
-      <Flex justifyContent="space-between" px="md" paddingBottom="10px">
-        <Box maxWidth="250px">
-          <Text>
-            <Text
-              as="span"
-              fontSize="14px"
-              fontWeight="bold"
-              word-whiteSpace="10px"
-              paddingRight="5px"
-            >
-              {getCourseDisplayString(searchResult) + " "}
-            </Text>
-            <Text as="span" size="sm" fontWeight="normal">
-              {searchResult.name}
-            </Text>
+    <Flex justifyContent="space-between" px="md" paddingBottom="10px">
+      <Box maxWidth="250px">
+        <Text>
+          <Text
+            as="span"
+            fontSize="14px"
+            fontWeight="bold"
+            word-whiteSpace="10px"
+            paddingRight="5px"
+          >
+            {getCourseDisplayString(searchResult) + " "}
           </Text>
-        </Box>
-        <NUPathLabel
-          nupaths={searchResult.nupaths == null ? [] : searchResult.nupaths}
-          filteredPaths={filteredPaths}
-        />
-        <GraduateToolTip
-          label={addButtonTooltip}
-          shouldWrapChildren
-          mt="3"
-          isDisabled={!isAddButtonDisabled}
-        >
-          <IconButton
-            aria-label="Add class"
-            icon={<AddIcon />}
-            variant="solid"
-            borderWidth="2px"
-            borderColor="primary.blue.light.main"
-            backgroundColor="rgba(0, 0, 0, 0)"
-            color="primary.blue.light.main"
-            colorScheme="primary.blue.light"
-            borderRadius="3xl"
-            size="xs"
-            onClick={() => addSelectedCourse(searchResult)}
-            isDisabled={isResultAlreadyAdded || isResultAlreadySelected}
-            isLoading={isSelectingAnotherCourse}
-            alignSelf="center"
-          />
-        </GraduateToolTip>
-      </Flex>
-      <Divider
-        borderWidth="1px"
-        colorScheme="gray"
-        orientation="horizontal"
-        flexGrow="1"
+          <Text as="span" size="sm" fontWeight="normal">
+            {searchResult.name}
+          </Text>
+        </Text>
+      </Box>
+      <NUPathLabel
+        nupaths={searchResult.nupaths == null ? [] : searchResult.nupaths}
+        filteredPaths={filteredPaths}
       />
+      <GraduateToolTip
+        label={addButtonTooltip}
+        shouldWrapChildren
+        mt="3"
+        isDisabled={!isAddButtonDisabled}
+      >
+        <IconButton
+          aria-label="Add class"
+          icon={<AddIcon />}
+          variant="solid"
+          borderWidth="2px"
+          borderColor="primary.blue.light.main"
+          backgroundColor="rgba(0, 0, 0, 0)"
+          color="primary.blue.light.main"
+          colorScheme="primary.blue.light"
+          borderRadius="3xl"
+          size="xs"
+          onClick={() => addSelectedCourse(searchResult)}
+          isDisabled={isResultAlreadyAdded || isResultAlreadySelected}
+          isLoading={isSelectingAnotherCourse}
+          alignSelf="center"
+        />
+      </GraduateToolTip>
     </Flex>
   );
 };

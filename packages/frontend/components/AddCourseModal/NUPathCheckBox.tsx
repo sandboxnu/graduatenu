@@ -1,50 +1,31 @@
-import { Checkbox, HStack, Text } from "@chakra-ui/react";
+import { Checkbox, Flex, Text } from "@chakra-ui/react";
 import { NUPathEnum } from "@graduate/common";
-import { useState } from "react";
+import { useMemo } from "react";
 
 interface NUPathCheckProps {
-  abbreviation: string;
-  label: string;
-  filteredPaths: NUPathEnum[];
-  associatedPath: NUPathEnum;
-  setPathState?: React.Dispatch<React.SetStateAction<any>>;
+  nuPath: keyof typeof NUPathEnum;
+  selectedNUPaths: NUPathEnum[];
+  setSelectedNUPaths: React.Dispatch<React.SetStateAction<NUPathEnum[]>>;
 }
 
 export const NUPathCheckBox: React.FC<NUPathCheckProps> = ({
-  abbreviation,
-  label,
-  filteredPaths,
-  associatedPath,
-  setPathState,
+  selectedNUPaths,
+  nuPath,
+  setSelectedNUPaths,
 }) => {
-  const [isChecked, setChecked] = useState<boolean>(false);
+  const isChecked = useMemo(
+    () => selectedNUPaths.includes(NUPathEnum[nuPath]),
+    [nuPath, selectedNUPaths]
+  );
 
   const updateFilters = () => {
-    console.log("triggered update filters");
     if (isChecked) {
-      removePathFilter(associatedPath);
+      setSelectedNUPaths(
+        selectedNUPaths.filter((curNUPath) => curNUPath !== NUPathEnum[nuPath])
+      );
     } else {
-      addPathFilter(associatedPath);
+      setSelectedNUPaths([...selectedNUPaths, NUPathEnum[nuPath]]);
     }
-  };
-
-  const addPathFilter = (path: NUPathEnum) => {
-    const updatedPaths = [...filteredPaths];
-    updatedPaths.push(path);
-
-    setChecked(true);
-
-    if (setPathState != null) setPathState(updatedPaths);
-  };
-
-  const removePathFilter = (path: NUPathEnum) => {
-    const updatedPaths = filteredPaths.filter(
-      (selectedPath) => selectedPath != path
-    );
-
-    setChecked(false);
-
-    if (setPathState != null) setPathState(updatedPaths);
   };
 
   return (
@@ -54,12 +35,12 @@ export const NUPathCheckBox: React.FC<NUPathCheckProps> = ({
       checked={isChecked}
       onChange={updateFilters}
     >
-      <HStack>
-        <Text fontWeight="bold" color="blue.500" fontSize="sm" margin="0">
-          {abbreviation}
+      <Flex justifyContent="space-between" alignItems="baseline">
+        <Text fontWeight="bold" color="primary.blue.light.main" fontSize="sm">
+          {nuPath}
         </Text>
-        <Text fontSize="xs">{label}</Text>
-      </HStack>
+        <Text fontSize="sm">{NUPathEnum[nuPath]}</Text>
+      </Flex>
     </Checkbox>
   );
 };
