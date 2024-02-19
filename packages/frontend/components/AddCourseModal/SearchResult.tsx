@@ -1,13 +1,13 @@
 import { AddIcon } from "@chakra-ui/icons";
-import { Flex, Box, IconButton, Text, Divider } from "@chakra-ui/react";
+import { Box, Flex, IconButton, Text } from "@chakra-ui/react";
 import { NUPathEnum, ScheduleCourse2 } from "@graduate/common";
 import { getCourseDisplayString } from "../../utils/";
 import { GraduateToolTip } from "../GraduateTooltip";
 import { NUPathLabel } from "./NUPathLabel";
 
 interface SearchResultProps {
-  searchResult: ScheduleCourse2<null>;
-  addSelectedCourse: (course: ScheduleCourse2<null>) => void;
+  course: ScheduleCourse2<null>;
+  addSelectedCourse: (course: ScheduleCourse2<null>) => Promise<void>;
   isResultAlreadySelected: boolean;
   isResultAlreadyAdded: boolean;
   /** Another course is currently in the process of being selected. */
@@ -16,7 +16,7 @@ interface SearchResultProps {
 }
 
 export const SearchResult: React.FC<SearchResultProps> = ({
-  searchResult,
+  course,
   addSelectedCourse,
   isResultAlreadySelected,
   isResultAlreadyAdded,
@@ -31,47 +31,42 @@ export const SearchResult: React.FC<SearchResultProps> = ({
     : undefined;
 
   return (
-    <Flex justifyContent="space-between" px="md" paddingBottom="10px">
+    <Flex
+      justifyContent="space-between"
+      padding="1"
+      paddingY="2"
+      borderBottom="2px"
+      borderColor="neutral.100"
+    >
       <Box maxWidth="250px">
         <Text>
-          <Text
-            as="span"
-            fontSize="14px"
-            fontWeight="bold"
-            word-whiteSpace="10px"
-            paddingRight="5px"
-          >
-            {getCourseDisplayString(searchResult) + " "}
+          <Text as="span" fontSize="14px" fontWeight="bold" marginRight="2">
+            {getCourseDisplayString(course)}
           </Text>
           <Text as="span" size="sm" fontWeight="normal">
-            {searchResult.name}
+            {course.name}
           </Text>
         </Text>
       </Box>
       <NUPathLabel
-        nupaths={searchResult.nupaths == null ? [] : searchResult.nupaths}
+        nupaths={course.nupaths ? course.nupaths : []}
         filteredPaths={filteredPaths}
       />
       <GraduateToolTip
         label={addButtonTooltip}
-        shouldWrapChildren
-        mt="3"
         isDisabled={!isAddButtonDisabled}
       >
         <IconButton
           aria-label="Add class"
           icon={<AddIcon />}
-          variant="solid"
-          borderWidth="2px"
-          borderColor="primary.blue.light.main"
-          backgroundColor="rgba(0, 0, 0, 0)"
           color="primary.blue.light.main"
+          borderColor="primary.blue.light.main"
           colorScheme="primary.blue.light"
-          borderRadius="3xl"
+          isRound
           size="xs"
-          onClick={() => addSelectedCourse(searchResult)}
-          isDisabled={isResultAlreadyAdded || isResultAlreadySelected}
+          onClick={() => addSelectedCourse(course)}
           isLoading={isSelectingAnotherCourse}
+          isDisabled={isResultAlreadyAdded || isResultAlreadySelected}
           alignSelf="center"
         />
       </GraduateToolTip>

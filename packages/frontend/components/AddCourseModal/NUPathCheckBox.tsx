@@ -35,8 +35,13 @@ export const NUPathCheckBox: React.FC<NUPathCheckProps> = ({
       checked={isChecked}
       onChange={updateFilters}
     >
-      <Flex justifyContent="space-between" alignItems="baseline">
-        <Text fontWeight="bold" color="primary.blue.light.main" fontSize="sm">
+      <Flex alignItems="baseline">
+        <Text
+          fontWeight="bold"
+          color="primary.blue.light.main"
+          fontSize="sm"
+          marginRight="2"
+        >
           {nuPath}
         </Text>
         <Text fontSize="sm">{NUPathEnum[nuPath]}</Text>

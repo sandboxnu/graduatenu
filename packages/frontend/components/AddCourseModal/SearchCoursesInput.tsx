@@ -15,10 +15,12 @@ import {
 
 interface SearchCoursesInputProps {
   setSearchQuery: Dispatch<SetStateAction<string>>;
+  isCourseSearchLoading: boolean;
 }
 
 export const SearchCoursesInput: React.FC<SearchCoursesInputProps> = ({
   setSearchQuery,
+  isCourseSearchLoading,
 }) => {
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -46,18 +48,20 @@ export const SearchCoursesInput: React.FC<SearchCoursesInputProps> = ({
         fontSize="sm"
         color="primary.blue.light.main"
         placeholder="Search by name or CRN..."
-        textColor="neutral.300"
+        textColor="neutral.500"
       />
       <InputRightElement>
         <IconButton
           aria-label="Search courses"
           backgroundColor="primary.blue.light.main"
           borderColor="primary.blue.light.main"
-          colorScheme="primary.blue.light"
-          icon={<Search2Icon color="white" />}
+          colorScheme="primary.blue.light.main"
+          color="white"
+          icon={<Search2Icon />}
           onClick={onSubmit}
           borderRadius="5"
           borderLeftRadius="0"
+          isLoading={isCourseSearchLoading}
         ></IconButton>
       </InputRightElement>
     </InputGroup>

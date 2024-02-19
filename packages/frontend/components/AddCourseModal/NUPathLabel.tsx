@@ -6,7 +6,7 @@ interface NuPathLabelProps {
   filteredPaths: NUPathEnum[];
 }
 
-const PathToAbbrev = (path: NUPathEnum): string => {
+const pathToAbbrev = (path: NUPathEnum): string => {
   switch (path) {
     case NUPathEnum.AD:
       return "AD";
@@ -45,12 +45,11 @@ export const NUPathLabel: React.FC<NuPathLabelProps> = ({
 }) => {
   return (
     <Flex
-      direction="row"
-      justifyContent="right"
+      justifyContent="end"
       align="center"
-      flexGrow="2"
-      gap="5px"
-      paddingRight="10px"
+      flexGrow="1"
+      gap="1"
+      marginRight="5"
     >
       {nupaths.map((nuPath) => (
         <Flex
@@ -58,15 +57,13 @@ export const NUPathLabel: React.FC<NuPathLabelProps> = ({
           backgroundColor={
             filteredPaths.includes(nuPath, 0) ? "blue.200" : "gray.200"
           }
-          width="25px"
-          height="20px"
-          padding="2px"
-          justify="center"
+          width="7"
+          height="5"
+          justifyContent="center"
+          alignItems="center"
           borderRadius="md"
         >
-          <Text fontSize="2xs" align="center">
-            {PathToAbbrev(nuPath)}
-          </Text>
+          <Text fontSize="xs">{pathToAbbrev(nuPath)}</Text>
         </Flex>
       ))}
     </Flex>

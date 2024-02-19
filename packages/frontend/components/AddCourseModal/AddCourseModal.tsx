@@ -1,34 +1,33 @@
 import { InfoIcon } from "@chakra-ui/icons";
 import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalCloseButton,
-  ModalBody,
-  ModalFooter,
   Button,
-  VStack,
-  Text,
   Flex,
-  Divider,
   Grid,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  Text,
+  VStack,
 } from "@chakra-ui/react";
 import { NUPathEnum, ScheduleCourse2 } from "@graduate/common";
 import { useState } from "react";
 import { useSearchCourses } from "../../hooks";
 import {
-  isEqualCourses,
   getCourseDisplayString,
   getRequiredCourseCoreqs,
+  isEqualCourses,
 } from "../../utils";
-import { SearchCoursesInput } from "./SearchCoursesInput";
-import { SearchResult } from "./SearchResult";
-import { SelectedCourse } from "./SelectedCourse";
+import { sortCoursesByNUPath } from "../../utils/course/sortCoursesByNUPath";
 import { GraduateToolTip } from "../GraduateTooltip";
 import { HelperToolTip } from "../Help";
 import { NUPathCheckBox } from "./NUPathCheckBox";
-import { sortCoursesByNUPath } from "../../utils/course/sortCoursesByNUPath";
+import { SearchCoursesInput } from "./SearchCoursesInput";
+import { SearchResult } from "./SearchResult";
+import { SelectedCourse } from "./SelectedCourse";
 
 interface AddCourseModalProps {
   isOpen: boolean;
@@ -62,13 +61,10 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
   const [selectedNUPaths, setSelectedNUPaths] = useState<NUPathEnum[]>([]);
 
   // TODO search with empty query
-  // useEffect(() => {
-  //   setSearchQuery((searchQuery) => searchQuery + " ");
-  // }, [filteredNuPaths]);
 
   const {
     courses,
-    isLoading: isCoursesLoading,
+    isLoading: isCourseSearchLoading,
     error,
   } = useSearchCourses(searchQuery, catalogYear);
 
@@ -77,7 +73,6 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
     if (isCourseAlreadySelected(course)) {
       return;
     }
-
     setIsLoadingSelectCourse(true);
 
     // grab any coreqs of the course that haven't already been selected/added to the term
@@ -91,7 +86,7 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
         })
       : [];
 
-    const updatedSelectedCourses = [...selectedCourses, ...coreqs];
+    const updatedSelectedCourses = [...selectedCourses, course, ...coreqs];
 
     setSelectedCourses(updatedSelectedCourses);
     setIsLoadingSelectCourse(false);
@@ -135,7 +130,6 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
     let isInFilter = false;
     selectedNUPaths.forEach((curPath) => {
       if (course.nupaths != null && course.nupaths.includes(curPath)) {
-        console.log("detected " + curPath + " in " + course.name);
         isInFilter = true;
       }
     });
@@ -190,13 +184,21 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
             </Flex>
             {/* Course Work Area */}
             <Flex direction="column" rowGap="md">
-              <Flex direction="column" margin="4">
-                <SearchCoursesInput setSearchQuery={setSearchQuery} />
+              <Flex
+                direction="column"
+                padding="4"
+                borderBottom="2px"
+                borderColor="neutral.100"
+              >
+                <SearchCoursesInput
+                  setSearchQuery={setSearchQuery}
+                  isCourseSearchLoading={isCourseSearchLoading}
+                />
                 <Flex
                   direction="column"
                   height="300px"
                   overflow="scroll"
-                  gap="2"
+                  marginTop="4"
                 >
                   {/* No course search */}
                   {!error && (!courses || courses.length === 0) && (
@@ -233,16 +235,14 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
                     sortCoursesByNUPath(
                       filterClassesByPaths(courses),
                       selectedNUPaths
-                    ).map((searchResult) => (
+                    ).map((course) => (
                       <SearchResult
-                        key={getCourseDisplayString(searchResult)}
-                        searchResult={searchResult}
+                        key={getCourseDisplayString(course)}
+                        course={course}
                         addSelectedCourse={addSelectedCourse}
-                        isResultAlreadyAdded={isCourseAlreadyAdded(
-                          searchResult
-                        )}
+                        isResultAlreadyAdded={isCourseAlreadyAdded(course)}
                         isResultAlreadySelected={isCourseAlreadySelected(
-                          searchResult
+                          course
                         )}
                         isSelectingAnotherCourse={isLoadingSelectCourse}
                         filteredPaths={selectedNUPaths}
@@ -286,7 +286,7 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
               borderColor="primary.blue.light.main"
               colorScheme="primary.blue.light.main"
               onClick={addClassesOnClick}
-              isLoading={isCoursesLoading}
+              isDisabled={selectedCourses.length === 0}
             >
               Add
             </Button>
