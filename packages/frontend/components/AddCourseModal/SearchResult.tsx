@@ -12,7 +12,7 @@ interface SearchResultProps {
   isResultAlreadyAdded: boolean;
   /** Another course is currently in the process of being selected. */
   isSelectingAnotherCourse?: boolean;
-  filteredPaths: NUPathEnum[];
+  selectedNUPaths: NUPathEnum[];
 }
 
 export const SearchResult: React.FC<SearchResultProps> = ({
@@ -21,7 +21,7 @@ export const SearchResult: React.FC<SearchResultProps> = ({
   isResultAlreadySelected,
   isResultAlreadyAdded,
   isSelectingAnotherCourse,
-  filteredPaths,
+  selectedNUPaths: filteredPaths,
 }) => {
   const isAddButtonDisabled = isResultAlreadyAdded || isResultAlreadySelected;
   const addButtonTooltip = isResultAlreadyAdded
@@ -33,12 +33,13 @@ export const SearchResult: React.FC<SearchResultProps> = ({
   return (
     <Flex
       justifyContent="space-between"
+      alignItems="end"
       padding="1"
       paddingY="2"
       borderBottom="2px"
       borderColor="neutral.100"
     >
-      <Box maxWidth="250px">
+      <Box flex="2">
         <Text>
           <Text as="span" fontSize="14px" fontWeight="bold" marginRight="2">
             {getCourseDisplayString(course)}
@@ -49,7 +50,7 @@ export const SearchResult: React.FC<SearchResultProps> = ({
         </Text>
       </Box>
       <NUPathLabel
-        nupaths={course.nupaths ? course.nupaths : []}
+        nuPaths={course.nupaths ? course.nupaths : []}
         filteredPaths={filteredPaths}
       />
       <GraduateToolTip
@@ -61,7 +62,7 @@ export const SearchResult: React.FC<SearchResultProps> = ({
           icon={<AddIcon />}
           color="primary.blue.light.main"
           borderColor="primary.blue.light.main"
-          colorScheme="primary.blue.light"
+          colorScheme="primary.blue.light.main"
           isRound
           size="xs"
           onClick={() => addSelectedCourse(course)}

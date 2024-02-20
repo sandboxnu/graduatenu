@@ -1,49 +1,54 @@
-import { Flex, Text } from "@chakra-ui/react";
+import { MinusIcon } from "@chakra-ui/icons";
+import { Box, Flex, IconButton, Text } from "@chakra-ui/react";
 import { NUPathEnum, ScheduleCourse2 } from "@graduate/common";
 import { getCourseDisplayString } from "../../utils/";
-import { CourseTrashButton } from "../ScheduleCourse/CourseTrashButton";
 import { NUPathLabel } from "./NUPathLabel";
 
 interface SelectedCourseProps {
   selectedCourse: ScheduleCourse2<null>;
-  filteredPaths?: NUPathEnum[];
+  selectedNUPaths?: NUPathEnum[];
   removeSelectedCourse: (course: ScheduleCourse2<null>) => void;
 }
 
 export const SelectedCourse: React.FC<SelectedCourseProps> = ({
   selectedCourse,
   removeSelectedCourse,
-  filteredPaths,
+  selectedNUPaths: filteredPaths,
 }) => {
   return (
     <Flex
-      borderRadius="md"
-      borderColor="gray.100"
-      backgroundColor="white.100"
       alignItems="center"
-      flexGrow="1"
+      justifyContent="space-between"
+      padding="2"
+      borderRadius="xl"
+      border="1px"
+      borderColor="neutral.200"
     >
-      <Flex direction="row" flexWrap="wrap">
+      <Box flex="2">
         <Text>
-          <Text
-            as="span"
-            fontSize="14px"
-            fontWeight="bold"
-            word-whiteSpace="10px"
-            paddingRight="5px"
-          >
-            {getCourseDisplayString(selectedCourse) + " "}
+          <Text as="span" fontSize="14px" fontWeight="bold" marginRight="2">
+            {getCourseDisplayString(selectedCourse)}
           </Text>
           <Text as="span" size="sm" fontWeight="normal">
             {selectedCourse.name}
           </Text>
         </Text>
-        <NUPathLabel
-          nupaths={selectedCourse.nupaths == null ? [] : selectedCourse.nupaths}
-          filteredPaths={filteredPaths ? filteredPaths : []}
-        />
-      </Flex>
-      <CourseTrashButton onClick={() => removeSelectedCourse(selectedCourse)} />
+      </Box>
+      <NUPathLabel
+        nuPaths={selectedCourse.nupaths == null ? [] : selectedCourse.nupaths}
+        filteredPaths={filteredPaths ? filteredPaths : []}
+      />
+      <IconButton
+        aria-label="Delete course"
+        icon={<MinusIcon />}
+        color="primary.red.main"
+        borderColor="primary.red.main"
+        colorScheme="primary.red.main"
+        isRound
+        size="xs"
+        onClick={() => removeSelectedCourse(selectedCourse)}
+        alignSelf="center"
+      />
     </Flex>
   );
 };

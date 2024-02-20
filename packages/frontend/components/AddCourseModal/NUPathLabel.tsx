@@ -2,7 +2,7 @@ import { NUPathEnum } from "@graduate/common";
 import { Flex, Text } from "@chakra-ui/react";
 
 interface NuPathLabelProps {
-  nupaths: NUPathEnum[];
+  nuPaths: NUPathEnum[];
   filteredPaths: NUPathEnum[];
 }
 
@@ -40,20 +40,26 @@ const pathToAbbrev = (path: NUPathEnum): string => {
 };
 
 export const NUPathLabel: React.FC<NuPathLabelProps> = ({
-  nupaths,
+  nuPaths,
   filteredPaths,
 }) => {
+  if (nuPaths.length === 0) {
+    return null;
+  }
+
   return (
     <Flex
       justifyContent="end"
       align="center"
-      flexGrow="1"
       gap="1"
       marginRight="5"
+      wrap="wrap"
+      flex="1"
+      flexBasis="0px"
     >
-      {nupaths.map((nuPath) => (
+      {nuPaths.map((nuPath) => (
         <Flex
-          key={nupaths.indexOf(nuPath)}
+          key={nuPaths.indexOf(nuPath)}
           backgroundColor={
             filteredPaths.includes(nuPath, 0) ? "blue.200" : "gray.200"
           }

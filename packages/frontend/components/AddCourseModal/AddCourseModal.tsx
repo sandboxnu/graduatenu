@@ -1,4 +1,4 @@
-import { InfoIcon } from "@chakra-ui/icons";
+import { AddIcon, InfoIcon } from "@chakra-ui/icons";
 import {
   Button,
   Flex,
@@ -145,7 +145,7 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
   return (
     <Modal isOpen={isOpen} onClose={onClose} size="3xl" isCentered>
       <ModalOverlay />
-      <ModalContent minWidth="fit-content">
+      <ModalContent>
         <ModalHeader
           color="primary.blue.dark.main"
           borderBottom="2px"
@@ -183,7 +183,7 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
               </Flex>
             </Flex>
             {/* Course Work Area */}
-            <Flex direction="column" rowGap="md">
+            <Flex direction="column">
               <Flex
                 direction="column"
                 padding="4"
@@ -245,53 +245,59 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
                           course
                         )}
                         isSelectingAnotherCourse={isLoadingSelectCourse}
-                        filteredPaths={selectedNUPaths}
+                        selectedNUPaths={selectedNUPaths}
                       />
                     ))}
                 </Flex>
               </Flex>
 
               {/* Selected Courses Area */}
-              <Flex alignItems="flex-start" justifyContent="left">
-                <Text fontSize="lg">Courses to Add:</Text>
+              <Flex padding="4" direction="column">
+                <Text fontSize="md" fontWeight="bold">
+                  Courses to Add:
+                </Text>
+                <VStack
+                  paddingY="2"
+                  height="130px"
+                  overflow="scroll"
+                  alignItems="stretch"
+                >
+                  {selectedCourses.map((selectedCourse) => (
+                    <SelectedCourse
+                      key={getCourseDisplayString(selectedCourse)}
+                      selectedCourse={selectedCourse}
+                      removeSelectedCourse={removeSelectedCourse}
+                      selectedNUPaths={selectedNUPaths}
+                    />
+                  ))}
+                </VStack>
               </Flex>
-              <VStack height="130px" overflow="scroll" pb="xs">
-                {selectedCourses.map((selectedCourse) => (
-                  <SelectedCourse
-                    key={getCourseDisplayString(selectedCourse)}
-                    selectedCourse={selectedCourse}
-                    removeSelectedCourse={removeSelectedCourse}
-                    filteredPaths={selectedNUPaths}
-                  />
-                ))}
-              </VStack>
+              <ModalFooter justifyContent="end" gap="md">
+                <Button
+                  variant="whiteCancelOutline"
+                  size="md"
+                  borderRadius="lg"
+                  onClick={onClose}
+                >
+                  Cancel
+                </Button>
+                <Button
+                  leftIcon={<AddIcon />}
+                  variant="solid"
+                  borderRadius="lg"
+                  size="md"
+                  backgroundColor="primary.blue.light.main"
+                  borderColor="primary.blue.light.main"
+                  colorScheme="primary.blue.light.main"
+                  onClick={addClassesOnClick}
+                  isDisabled={selectedCourses.length === 0}
+                >
+                  Add Courses
+                </Button>
+              </ModalFooter>
             </Flex>
           </Grid>
         </ModalBody>
-        <ModalFooter justifyContent="center">
-          <Flex columnGap="sm">
-            <Button
-              variant="solidWhite"
-              size="md"
-              borderRadius="lg"
-              onClick={onClose}
-            >
-              Cancel
-            </Button>
-            <Button
-              variant="solid"
-              borderRadius="lg"
-              size="md"
-              backgroundColor="primary.blue.light.main"
-              borderColor="primary.blue.light.main"
-              colorScheme="primary.blue.light.main"
-              onClick={addClassesOnClick}
-              isDisabled={selectedCourses.length === 0}
-            >
-              Add
-            </Button>
-          </Flex>
-        </ModalFooter>
       </ModalContent>
     </Modal>
   );
