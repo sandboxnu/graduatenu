@@ -310,9 +310,11 @@ class SearchAPIClient {
   searchCourses = async (
     searchQuery: string,
     catalogYear?: number,
+    nupath?: NUPathEnum[],
     minIndex = 0,
     maxIndex = 9999
   ): Promise<ScheduleCourse2<null>[]> => {
+    console.log({ searchQuery });
     const termsToSearch = catalogYear
       ? ALL_COURSE_TERM_IDS.filter((termId) =>
           isTermIdInCatalogYear(termId, catalogYear)
@@ -327,7 +329,13 @@ class SearchAPIClient {
     /** Search courses from the latest terms to the older year terms. */
     const allCourses = await Promise.all(
       termsOrderedByYear.map((termId) =>
-        this.searchCoursesForTerm(searchQuery, termId, minIndex, maxIndex)
+        this.searchCoursesForTerm(
+          searchQuery,
+          termId,
+          nupath,
+          minIndex,
+          maxIndex
+        )
       )
     );
 
@@ -351,6 +359,7 @@ class SearchAPIClient {
   private searchCoursesForTerm = async (
     searchQuery: string,
     termId: string,
+    nupath: NUPathEnum[] = [],
     minIndex = 0,
     maxIndex = 9999
   ): Promise<ScheduleCourse2<null>[]> => {
@@ -360,7 +369,9 @@ class SearchAPIClient {
       data: JSON.stringify({
         query: `
         {
-          search(termId:"${termId}", query: "${searchQuery}", classIdRange: {min: ${minIndex}, max: ${maxIndex}}) {
+          search(termId:"${termId}", query: "${searchQuery}", classIdRange: {min: ${minIndex}, max: ${maxIndex}}${
+          nupath.length > 0 ? `, nupath: ${JSON.stringify(nupath)}` : ""
+        }) {
             totalCount 
             pageInfo { hasNextPage } 
             nodes { ... on ClassOccurrence { name subject maxCredits minCredits prereqs coreqs nupath classId
@@ -373,6 +384,8 @@ class SearchAPIClient {
 
     const coursesData = await res.data;
     const nodes = coursesData?.data?.search?.nodes ?? [];
+
+    console.log({ nodes });
 
     const courses = nodes.map((result: SearchClass) => {
       return {

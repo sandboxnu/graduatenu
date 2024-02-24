@@ -66,7 +66,7 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
     courses,
     isLoading: isCourseSearchLoading,
     error,
-  } = useSearchCourses(searchQuery, catalogYear);
+  } = useSearchCourses(searchQuery, catalogYear, selectedNUPaths);
 
   const addSelectedCourse = async (course: ScheduleCourse2<null>) => {
     // don't allow courses to be selected multiple times
@@ -112,28 +112,6 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
     }
     addSelectedClasses(selectedCourses);
     onClose();
-  };
-
-  // filters the given list of courses by nuPaths within the
-  const filterClassesByPaths = (
-    courses: ScheduleCourse2<null>[]
-  ): ScheduleCourse2<null>[] => {
-    if (selectedNUPaths.length == 0) {
-      return courses;
-    }
-    const filteredCourses = courses.filter((course) => hasFilteredPath(course));
-
-    return filteredCourses;
-  };
-
-  const hasFilteredPath = (course: ScheduleCourse2<null>): boolean => {
-    let isInFilter = false;
-    selectedNUPaths.forEach((curPath) => {
-      if (course.nupaths != null && course.nupaths.includes(curPath)) {
-        isInFilter = true;
-      }
-    });
-    return isInFilter;
   };
 
   const onClose = () => {
@@ -232,22 +210,21 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
                   )}
                   {/* Show courses */}
                   {courses &&
-                    sortCoursesByNUPath(
-                      filterClassesByPaths(courses),
-                      selectedNUPaths
-                    ).map((course) => (
-                      <SearchResult
-                        key={getCourseDisplayString(course)}
-                        course={course}
-                        addSelectedCourse={addSelectedCourse}
-                        isResultAlreadyAdded={isCourseAlreadyAdded(course)}
-                        isResultAlreadySelected={isCourseAlreadySelected(
-                          course
-                        )}
-                        isSelectingAnotherCourse={isLoadingSelectCourse}
-                        selectedNUPaths={selectedNUPaths}
-                      />
-                    ))}
+                    sortCoursesByNUPath(courses, selectedNUPaths).map(
+                      (course) => (
+                        <SearchResult
+                          key={getCourseDisplayString(course)}
+                          course={course}
+                          addSelectedCourse={addSelectedCourse}
+                          isResultAlreadyAdded={isCourseAlreadyAdded(course)}
+                          isResultAlreadySelected={isCourseAlreadySelected(
+                            course
+                          )}
+                          isSelectingAnotherCourse={isLoadingSelectCourse}
+                          selectedNUPaths={selectedNUPaths}
+                        />
+                      )
+                    )}
                 </Flex>
               </Flex>
 

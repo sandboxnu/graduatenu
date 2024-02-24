@@ -12,8 +12,8 @@ export const sortCoursesByNUPath = (
 ): ScheduleCourse2<null>[] => {
   return courses.sort((course1, course2) => {
     return (
-      countFilteredPaths(course1, filteredNuPaths) -
-      countFilteredPaths(course2, filteredNuPaths)
+      countFilteredPaths(course2, filteredNuPaths) -
+      countFilteredPaths(course1, filteredNuPaths)
     );
   });
 };
