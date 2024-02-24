@@ -314,7 +314,6 @@ class SearchAPIClient {
     minIndex = 0,
     maxIndex = 9999
   ): Promise<ScheduleCourse2<null>[]> => {
-    console.log({ searchQuery });
     const termsToSearch = catalogYear
       ? ALL_COURSE_TERM_IDS.filter((termId) =>
           isTermIdInCatalogYear(termId, catalogYear)
@@ -384,8 +383,6 @@ class SearchAPIClient {
 
     const coursesData = await res.data;
     const nodes = coursesData?.data?.search?.nodes ?? [];
-
-    console.log({ nodes });
 
     const courses = nodes.map((result: SearchClass) => {
       return {
