@@ -46,6 +46,14 @@ export const Button: ComponentStyleConfig = {
       color: "black",
       borderRadius: "0px",
     },
+    whiteCancelOutline: {
+      border: "2px solid",
+      borderColor: "primary.blue.light.100",
+      color: "primary.blue.light.100",
+      colorScheme: "primary.blue.light.100",
+      bg: "white",
+      borderRadius: "20px",
+    },
   },
   // default size and variant values
   defaultProps: {

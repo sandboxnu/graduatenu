@@ -1,31 +1,54 @@
-import { Flex, Text } from "@chakra-ui/react";
-import { ScheduleCourse2 } from "@graduate/common";
-import { getCourseDisplayString } from "../../utils";
-import { CourseTrashButton } from "../ScheduleCourse/CourseTrashButton";
+import { MinusIcon } from "@chakra-ui/icons";
+import { Box, Flex, IconButton, Text } from "@chakra-ui/react";
+import { NUPathEnum, ScheduleCourse2 } from "@graduate/common";
+import { getCourseDisplayString } from "../../utils/";
+import { NUPathLabel } from "./NUPathLabel";
 
 interface SelectedCourseProps {
   selectedCourse: ScheduleCourse2<null>;
+  selectedNUPaths?: NUPathEnum[];
   removeSelectedCourse: (course: ScheduleCourse2<null>) => void;
 }
 
 export const SelectedCourse: React.FC<SelectedCourseProps> = ({
   selectedCourse,
   removeSelectedCourse,
+  selectedNUPaths: filteredPaths,
 }) => {
   return (
     <Flex
-      borderRadius="md"
-      boxShadow="md"
-      backgroundColor="neutral.100"
       alignItems="center"
+      justifyContent="space-between"
+      padding="2"
+      borderRadius="xl"
+      border="1px"
+      borderColor="neutral.200"
     >
-      <Text pl="sm" pr="2xs">
-        {getCourseDisplayString(selectedCourse)}
-      </Text>
-      <Text fontSize="xs" pr="md">
-        {selectedCourse.name}
-      </Text>
-      <CourseTrashButton onClick={() => removeSelectedCourse(selectedCourse)} />
+      <Box flex="2">
+        <Text>
+          <Text as="span" fontSize="14px" fontWeight="bold" marginRight="2">
+            {getCourseDisplayString(selectedCourse)}
+          </Text>
+          <Text as="span" size="sm" fontWeight="normal">
+            {selectedCourse.name}
+          </Text>
+        </Text>
+      </Box>
+      <NUPathLabel
+        nuPaths={selectedCourse.nupaths == null ? [] : selectedCourse.nupaths}
+        filteredPaths={filteredPaths ? filteredPaths : []}
+      />
+      <IconButton
+        aria-label="Delete course"
+        icon={<MinusIcon />}
+        color="primary.red.main"
+        borderColor="primary.red.main"
+        colorScheme="primary.red.main"
+        isRound
+        size="xs"
+        onClick={() => removeSelectedCourse(selectedCourse)}
+        alignSelf="center"
+      />
     </Flex>
   );
 };

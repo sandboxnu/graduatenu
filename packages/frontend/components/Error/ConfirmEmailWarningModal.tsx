@@ -31,7 +31,6 @@ export const ConfirmEmailWarningModal: React.FC<
   const { onClose, isOpen } = useDisclosure({
     defaultIsOpen: !student.isEmailConfirmed && !alreadyVisited,
   });
-  console.log(!student.isEmailConfirmed && !alreadyVisited);
 
   const closeModal = () => {
     setAlreadyVisited(true);
