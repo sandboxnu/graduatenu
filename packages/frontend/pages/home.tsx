@@ -34,10 +34,11 @@ import {
   Sidebar,
   TransferCourses,
 } from "../components";
+import { DuplicatePlanButton } from "../components/Plan/DuplicatePlanButton";
 import { fetchStudentAndPrepareForDnd, useStudentWithPlans } from "../hooks";
 import {
-  cleanDndIdsFromPlan,
   DELETE_COURSE_AREA_DND_ID,
+  cleanDndIdsFromPlan,
   handleApiClientError,
   logger,
   toast,
@@ -278,6 +279,12 @@ const HomePage: NextPage = () => {
               />
               <AddPlanModal setSelectedPlanId={setSelectedPlanId} />
               {selectedPlan && <EditPlanModal plan={selectedPlan} />}
+              {selectedPlan && (
+                <DuplicatePlanButton
+                  plan={selectedPlan}
+                  setSelectedPlanId={setSelectedPlanId}
+                />
+              )}
               {selectedPlan && (
                 <DeletePlanModal
                   setSelectedPlanId={setSelectedPlanId}
