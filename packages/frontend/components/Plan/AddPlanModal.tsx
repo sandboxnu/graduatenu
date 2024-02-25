@@ -285,8 +285,8 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                     {majorHasConcentrations && (
                       <PlanSelect
                         label="Concentrations"
-                        noValueOptionLabel="Select a Concentration"
                         name="concentration"
+                        placeholder="Select a Concentration"
                         options={majorConcentrations.concentrations}
                         control={control}
                         rules={{
