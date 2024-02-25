@@ -60,8 +60,6 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
   const [isLoadingSelectCourse, setIsLoadingSelectCourse] = useState(false);
   const [selectedNUPaths, setSelectedNUPaths] = useState<NUPathEnum[]>([]);
 
-  // TODO search with empty query
-
   const {
     courses,
     isLoading: isCourseSearchLoading,
