@@ -4,8 +4,10 @@ import {
   FormErrorMessage,
   FormHelperText,
 } from "@chakra-ui/react";
+import Fuse from "fuse.js";
 import { Control, FieldError, useController } from "react-hook-form";
 import Select from "react-select";
+import { FilterOptionOption } from "react-select/dist/declarations/src/filters";
 
 type PlanSelectProps = {
   error?: FieldError;
@@ -23,8 +25,11 @@ type PlanSelectProps = {
   /** Are the field values numbers. */
   isNumeric?: boolean;
   isSearchable?: boolean;
-  /** An option in the select dropdown that indicates "no selection". */
-  noValueOptionLabel?: string;
+  isDisabled?: boolean;
+  /** The default text shown in the input box. */
+  placeholder?: string;
+  /** Fuzzy options to use */
+  useFuzzySearch?: boolean;
 };
 
 export const PlanSelect: React.FC<PlanSelectProps> = ({
@@ -37,8 +42,29 @@ export const PlanSelect: React.FC<PlanSelectProps> = ({
   rules,
   isNumeric,
   isSearchable,
-  noValueOptionLabel,
+  isDisabled,
+  placeholder,
+  useFuzzySearch,
 }) => {
+  const filterOptions = useFuzzySearch
+    ? (option: FilterOptionOption<any>, inputValue: string) => {
+        if (inputValue.length !== 0) {
+          const list = new Fuse(options, {
+            isCaseSensitive: false,
+            shouldSort: true,
+            ignoreLocation: true,
+            findAllMatches: true,
+            includeScore: true,
+            threshold: 0.4,
+          }).search(inputValue);
+
+          return list.map((element) => element.item).includes(option.label);
+        } else {
+          return true;
+        }
+      }
+    : null;
+
   const {
     field: { onChange: onChangeUpdateValue, value, ...fieldRest },
     fieldState: { error },
@@ -48,12 +74,6 @@ export const PlanSelect: React.FC<PlanSelectProps> = ({
     value: val,
     label: val,
   }));
-
-  let noValueOption;
-  if (noValueOptionLabel) {
-    noValueOption = { value: null, label: noValueOptionLabel };
-    selectOptions.unshift(noValueOption);
-  }
 
   const onChange = (option: any) => {
     let val = option ? option.value : null;
@@ -70,9 +90,9 @@ export const PlanSelect: React.FC<PlanSelectProps> = ({
   if (isNumeric) {
     selectedValue = value ? value.toString() : null;
   }
-  const selectedOption =
-    selectOptions.find((option: any) => option.value === selectedValue) ??
-    noValueOption;
+  const selectedOption = selectOptions.find(
+    (option: any) => option.value === selectedValue
+  );
 
   return (
     <FormControl isInvalid={error != null}>
@@ -89,7 +109,9 @@ export const PlanSelect: React.FC<PlanSelectProps> = ({
         onChange={onChange}
         value={selectedOption}
         isSearchable={isSearchable}
-        defaultValue={noValueOption}
+        isDisabled={isDisabled}
+        placeholder={placeholder}
+        filterOption={filterOptions}
         {...fieldRest}
       />
       {helperText && <FormHelperText>{helperText}</FormHelperText>}

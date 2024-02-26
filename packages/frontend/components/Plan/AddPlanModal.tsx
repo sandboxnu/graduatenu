@@ -41,8 +41,9 @@ import {
 import { BlueButton } from "../Button";
 import { PlanInput, PlanSelect } from "../Form";
 import { HelperToolTip } from "../Help";
-import { PlanConcentrationsSelect } from "./PlanConcentrationsSelect";
 import { IsGuestContext } from "../../pages/_app";
+import { GraduateToolTip } from "../GraduateTooltip";
+import { getLocalPlansLength } from "../../utils/plan/getLocalPlansLength";
 
 interface AddPlanModalProps {
   setSelectedPlanId: Dispatch<SetStateAction<number | undefined | null>>;
@@ -133,9 +134,29 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
     onCloseDisplay();
   };
 
+  const title = watch("name");
   const catalogYear = watch("catalogYear");
   const majorName = watch("major");
   const concentration = watch("concentration");
+
+  const yearSupportedMajors =
+    supportedMajorsData?.supportedMajors[catalogYear ?? 0];
+
+  const noConcentrations = { concentrations: [], minRequiredConcentrations: 0 };
+
+  const majorConcentrations =
+    yearSupportedMajors?.[majorName ?? ""] ?? noConcentrations;
+
+  const isConcentrationRequired =
+    majorConcentrations.minRequiredConcentrations > 0;
+
+  const majorHasConcentrations = majorConcentrations.concentrations.length > 0;
+
+  const isValidForm =
+    title &&
+    catalogYear &&
+    majorName &&
+    (!isConcentrationRequired || concentration);
 
   const noMajorHelperLabel = (
     <Stack>
@@ -150,11 +171,25 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
     </Stack>
   );
 
+  const disableButton = isGuest && getLocalPlansLength() > 4;
+
   return (
     <>
-      <BlueButton leftIcon={<AddIcon />} onClick={onOpen} ml="xs" size="md">
-        New Plan
-      </BlueButton>
+      <GraduateToolTip
+        label="Maximum number of plans reached on guest mode. Delete an existing plan or create an account."
+        shouldWrapChildren
+        isDisabled={!disableButton}
+      >
+        <BlueButton
+          leftIcon={<AddIcon />}
+          onClick={onOpen}
+          ml="xs"
+          size="md"
+          disabled={disableButton}
+        >
+          New Plan
+        </BlueButton>
+      </GraduateToolTip>
       <Modal isOpen={isOpen} onClose={() => onCloseAddPlanModal()} size="md">
         <ModalOverlay />
         <ModalContent>
@@ -199,7 +234,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                   <>
                     <PlanSelect
                       label="Catalog Year"
-                      noValueOptionLabel="Select a Catalog Year"
+                      placeholder="Select a Catalog Year"
                       name="catalogYear"
                       control={control}
                       options={extractSupportedMajorYears(supportedMajorsData)}
@@ -232,7 +267,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                     />
                     <PlanSelect
                       label="Major"
-                      noValueOptionLabel="Select a Major"
+                      placeholder="Select a Major"
                       name="major"
                       control={control}
                       options={extractSupportedMajorNames(
@@ -243,15 +278,24 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                         setValue("concentration", "");
                       }}
                       rules={{ required: "Major is required." }}
-                      helperText='First select your catalog year. If you still cannot find your major, select "No Major" above.'
+                      isDisabled={!catalogYear}
                       isSearchable
+                      useFuzzySearch
                     />
-                    <PlanConcentrationsSelect
-                      catalogYear={catalogYear}
-                      majorName={majorName}
-                      supportedMajorsData={supportedMajorsData}
-                      control={control}
-                    />
+                    {majorHasConcentrations && (
+                      <PlanSelect
+                        label="Concentrations"
+                        name="concentration"
+                        placeholder="Select a Concentration"
+                        options={majorConcentrations.concentrations}
+                        control={control}
+                        rules={{
+                          required:
+                            isConcentrationRequired &&
+                            "Concentration is required",
+                        }}
+                      />
+                    )}
                   </>
                 )}
               </VStack>
@@ -269,6 +313,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                 <Button
                   variant="solid"
                   isLoading={isSubmitting}
+                  isDisabled={!isValidForm}
                   size="md"
                   borderRadius="lg"
                   type="submit"

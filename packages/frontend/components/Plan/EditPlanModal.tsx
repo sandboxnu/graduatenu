@@ -36,7 +36,6 @@ import { toast } from "../../utils";
 import { BlueButton } from "../Button";
 import { PlanInput, PlanSelect } from "../Form";
 import { HelperToolTip } from "../Help";
-import { PlanConcentrationsSelect } from "./PlanConcentrationsSelect";
 import { IsGuestContext } from "../../pages/_app";
 
 type EditPlanModalProps = {
@@ -104,9 +103,29 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
     return <></>;
   }
 
+  const title = watch("name");
   const catalogYear = watch("catalogYear");
   const majorName = watch("major");
   const concentration = watch("concentration");
+
+  const yearSupportedMajors =
+    supportedMajorsData?.supportedMajors[catalogYear ?? 0];
+
+  const noConcentrations = { concentrations: [], minRequiredConcentrations: 0 };
+
+  const majorConcentrations =
+    yearSupportedMajors?.[majorName ?? ""] ?? noConcentrations;
+
+  const isConcentrationRequired =
+    majorConcentrations.minRequiredConcentrations > 0;
+
+  const majorHasConcentrations = majorConcentrations.concentrations.length > 0;
+
+  const isValidForm =
+    title &&
+    catalogYear &&
+    majorName &&
+    (!isConcentrationRequired || concentration);
 
   const onSubmitHandler = async (payload: UpdatePlanDto) => {
     // no submitting till the curr plan has been fetched
@@ -225,7 +244,7 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                   <>
                     <PlanSelect
                       label="Catalog Year"
-                      noValueOptionLabel="Select a Catalog Year"
+                      placeholder="Select a Catalog Year"
                       name="catalogYear"
                       control={control}
                       options={extractSupportedMajorYears(supportedMajorsData)}
@@ -256,7 +275,7 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                     />
                     <PlanSelect
                       label="Major"
-                      noValueOptionLabel="Select a Major"
+                      placeholder="Select a Major"
                       name="major"
                       control={control}
                       options={extractSupportedMajorNames(
@@ -268,13 +287,22 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                       }}
                       rules={{ required: "Major is required." }}
                       isSearchable
+                      isDisabled={!catalogYear}
                     />
-                    <PlanConcentrationsSelect
-                      catalogYear={catalogYear}
-                      majorName={majorName}
-                      supportedMajorsData={supportedMajorsData}
-                      control={control}
-                    />
+                    {majorHasConcentrations && (
+                      <PlanSelect
+                        label="Concentrations"
+                        name="concentration"
+                        placeholder="Select a Concentration"
+                        options={majorConcentrations.concentrations}
+                        control={control}
+                        rules={{
+                          required:
+                            isConcentrationRequired &&
+                            "Concentration is required",
+                        }}
+                      />
+                    )}
                   </>
                 )}
               </VStack>
@@ -293,6 +321,7 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                 <Button
                   variant="solid"
                   isLoading={isSubmitting}
+                  isDisabled={!isValidForm}
                   size="md"
                   borderRadius="lg"
                   type="submit"

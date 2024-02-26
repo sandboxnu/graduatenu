@@ -1,30 +1,33 @@
-import { InfoIcon } from "@chakra-ui/icons";
+import { AddIcon, InfoIcon } from "@chakra-ui/icons";
 import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalCloseButton,
-  ModalBody,
-  ModalFooter,
   Button,
-  VStack,
-  Text,
   Flex,
+  Grid,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  Text,
+  VStack,
 } from "@chakra-ui/react";
-import { ScheduleCourse2 } from "@graduate/common";
+import { NUPathEnum, ScheduleCourse2 } from "@graduate/common";
 import { useState } from "react";
 import { useSearchCourses } from "../../hooks";
 import {
-  isEqualCourses,
   getCourseDisplayString,
   getRequiredCourseCoreqs,
+  isEqualCourses,
 } from "../../utils";
+import { sortCoursesByNUPath } from "../../utils/course/sortCoursesByNUPath";
+import { GraduateToolTip } from "../GraduateTooltip";
+import { HelperToolTip } from "../Help";
+import { NUPathCheckBox } from "./NUPathCheckBox";
 import { SearchCoursesInput } from "./SearchCoursesInput";
 import { SearchResult } from "./SearchResult";
 import { SelectedCourse } from "./SelectedCourse";
-import { GraduateToolTip } from "../GraduateTooltip";
-import { HelperToolTip } from "../Help";
 
 interface AddCourseModalProps {
   isOpen: boolean;
@@ -55,21 +58,20 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
     ScheduleCourse2<null>[]
   >([]);
   const [isLoadingSelectCourse, setIsLoadingSelectCourse] = useState(false);
+  const [selectedNUPaths, setSelectedNUPaths] = useState<NUPathEnum[]>([]);
 
   const {
     courses,
-    isLoading: isCoursesLoading,
+    isLoading: isCourseSearchLoading,
     error,
-  } = useSearchCourses(searchQuery, catalogYear);
+  } = useSearchCourses(searchQuery, catalogYear, selectedNUPaths);
 
   const addSelectedCourse = async (course: ScheduleCourse2<null>) => {
     // don't allow courses to be selected multiple times
     if (isCourseAlreadySelected(course)) {
       return;
     }
-
     setIsLoadingSelectCourse(true);
-    const updatedSelectedCourses = [...selectedCourses];
 
     // grab any coreqs of the course that haven't already been selected/added to the term
     const coreqs = isAutoSelectCoreqs
@@ -82,7 +84,7 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
         })
       : [];
 
-    updatedSelectedCourses.push(course, ...coreqs);
+    const updatedSelectedCourses = [...selectedCourses, course, ...coreqs];
 
     setSelectedCourses(updatedSelectedCourses);
     setIsLoadingSelectCourse(false);
@@ -106,7 +108,6 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
     if (selectedCourses.length === 0) {
       return;
     }
-
     addSelectedClasses(selectedCourses);
     onClose();
   };
@@ -118,112 +119,160 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size="lg">
+    <Modal isOpen={isOpen} onClose={onClose} size="3xl" isCentered>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader color="primary.blue.dark.main">
+        <ModalHeader
+          color="primary.blue.dark.main"
+          borderBottom="2px"
+          borderColor="neutral.100"
+        >
           <Flex alignItems="center" justifyContent="center" columnGap="2xs">
             <Text>Add Courses</Text>
             <HelperToolTip label="We try our best to search for courses across as many semesters as possible. If you cannot find your course, please report a bug with your plan catalog year and we will try to solve it as soon as possible." />
           </Flex>
         </ModalHeader>
         <ModalCloseButton />
-        <ModalBody>
-          <Flex direction="column" rowGap="md">
-            <SearchCoursesInput setSearchQuery={setSearchQuery} />
-            <VStack
-              height="200px"
-              overflow="scroll"
-              alignItems="left"
-              gap="2xs"
+        <ModalBody padding="0">
+          <Grid templateColumns="1fr 2fr">
+            {/* NUPath sidebar */}
+            <Flex
+              direction="column"
+              bg="neutral.50"
+              paddingLeft="7"
+              paddingY="9"
+              borderRight="2px"
+              borderColor="neutral.100"
             >
-              {error && (
-                <GraduateToolTip label="We rely on SearchNEU to search for courses, and there may be an ongoing issue on their end. We recommend refreshing the page and trying again soon. If the issue persists, help us by clicking the Bug/Feature button to report the bug">
-                  <Flex
-                    alignItems="center"
-                    columnGap="xs"
-                    justifyContent="center"
-                  >
-                    <InfoIcon color="primary.blue.dark.main" />
-                    <Text
-                      fontSize="xs"
-                      fontWeight="semibold"
-                      textAlign="center"
-                    >
-                      Oops, sorry we couldn&apos;t search for courses... try
-                      again in a little bit!
-                    </Text>
-                  </Flex>
-                </GraduateToolTip>
-              )}
-              {courses &&
-                courses.map((searchResult) => (
-                  <SearchResult
-                    key={getCourseDisplayString(searchResult)}
-                    searchResult={searchResult}
-                    addSelectedCourse={addSelectedCourse}
-                    isResultAlreadyAdded={isCourseAlreadyAdded(searchResult)}
-                    isResultAlreadySelected={isCourseAlreadySelected(
-                      searchResult
-                    )}
-                    isSelectingAnotherCourse={isLoadingSelectCourse}
+              <Text fontSize="lg" as="b" marginBottom="5">
+                NUPath
+              </Text>
+              <Flex direction="column" gap="2">
+                {Object.keys(NUPathEnum).map((nuPath) => (
+                  <NUPathCheckBox
+                    key={nuPath}
+                    nuPath={nuPath as keyof typeof NUPathEnum}
+                    selectedNUPaths={selectedNUPaths}
+                    setSelectedNUPaths={setSelectedNUPaths}
                   />
                 ))}
-              {!error && (!courses || courses.length === 0) && (
-                <Flex
-                  alignItems="center"
-                  justifyContent="center"
-                  columnGap="xs"
-                >
-                  <InfoIcon color="primary.blue.dark.main" />
-                  <Text fontSize="xs">
-                    Search for your course and press enter to see search
-                    results.
-                  </Text>
-                </Flex>
-              )}
-            </VStack>
-            {courses && courses.length > 0 && selectedCourses.length === 0 && (
-              <Flex alignItems="center" justifyContent="center" columnGap="xs">
-                <InfoIcon color="primary.blue.dark.main" />
-                <Text fontSize="xs">
-                  Select the courses you wish to add to this semester using the
-                  &quot;+&quot; button.
-                </Text>
               </Flex>
-            )}
-            <VStack maxHeight="200px" overflow="scroll" pb="xs">
-              {selectedCourses.map((selectedCourse) => (
-                <SelectedCourse
-                  key={getCourseDisplayString(selectedCourse)}
-                  selectedCourse={selectedCourse}
-                  removeSelectedCourse={removeSelectedCourse}
+            </Flex>
+            {/* Course Work Area */}
+            <Flex direction="column">
+              <Flex
+                direction="column"
+                padding="4"
+                borderBottom="2px"
+                borderColor="neutral.100"
+              >
+                <SearchCoursesInput
+                  setSearchQuery={setSearchQuery}
+                  isCourseSearchLoading={isCourseSearchLoading}
                 />
-              ))}
-            </VStack>
-          </Flex>
+                <Flex
+                  direction="column"
+                  height="300px"
+                  overflow="scroll"
+                  marginTop="4"
+                >
+                  {/* No course search */}
+                  {!error && (!courses || courses.length === 0) && (
+                    <Flex alignItems="center" justifyContent="center">
+                      <InfoIcon color="neutral.300" marginRight="2" />
+                      <Text fontSize="sm" color="neutral.300">
+                        Search results will show up here.
+                      </Text>
+                    </Flex>
+                  )}
+                  {/* On error */}
+                  {error && (
+                    <GraduateToolTip label="We rely on SearchNEU to search for courses, and there may be an ongoing issue on their end. We recommend refreshing the page and trying again soon. If the issue persists, help us by clicking the Bug/Feature button to report the bug">
+                      <Flex
+                        alignItems="center"
+                        columnGap="xs"
+                        justifyContent="center"
+                      >
+                        <InfoIcon color="primary.red.main" />
+                        <Text
+                          fontSize="xs"
+                          fontWeight="semibold"
+                          textAlign="center"
+                          color="primary.red.main"
+                        >
+                          Oops, sorry we couldn&apos;t search for courses... try
+                          again in a little bit!
+                        </Text>
+                      </Flex>
+                    </GraduateToolTip>
+                  )}
+                  {/* Show courses */}
+                  {courses &&
+                    sortCoursesByNUPath(courses, selectedNUPaths).map(
+                      (course) => (
+                        <SearchResult
+                          key={getCourseDisplayString(course)}
+                          course={course}
+                          addSelectedCourse={addSelectedCourse}
+                          isResultAlreadyAdded={isCourseAlreadyAdded(course)}
+                          isResultAlreadySelected={isCourseAlreadySelected(
+                            course
+                          )}
+                          isSelectingAnotherCourse={isLoadingSelectCourse}
+                          selectedNUPaths={selectedNUPaths}
+                        />
+                      )
+                    )}
+                </Flex>
+              </Flex>
+
+              {/* Selected Courses Area */}
+              <Flex padding="4" direction="column">
+                <Text fontSize="md" fontWeight="bold">
+                  Courses to Add:
+                </Text>
+                <VStack
+                  paddingY="2"
+                  height="130px"
+                  overflow="scroll"
+                  alignItems="stretch"
+                >
+                  {selectedCourses.map((selectedCourse) => (
+                    <SelectedCourse
+                      key={getCourseDisplayString(selectedCourse)}
+                      selectedCourse={selectedCourse}
+                      removeSelectedCourse={removeSelectedCourse}
+                      selectedNUPaths={selectedNUPaths}
+                    />
+                  ))}
+                </VStack>
+              </Flex>
+              <ModalFooter justifyContent="end" gap="md">
+                <Button
+                  variant="whiteCancelOutline"
+                  size="md"
+                  borderRadius="lg"
+                  onClick={onClose}
+                >
+                  Cancel
+                </Button>
+                <Button
+                  leftIcon={<AddIcon />}
+                  variant="solid"
+                  borderRadius="lg"
+                  size="md"
+                  backgroundColor="primary.blue.light.main"
+                  borderColor="primary.blue.light.main"
+                  colorScheme="primary.blue.light.main"
+                  onClick={addClassesOnClick}
+                  isDisabled={selectedCourses.length === 0}
+                >
+                  Add Courses
+                </Button>
+              </ModalFooter>
+            </Flex>
+          </Grid>
         </ModalBody>
-        <ModalFooter justifyContent="center">
-          <Flex columnGap="sm">
-            <Button
-              variant="solidWhite"
-              size="md"
-              borderRadius="lg"
-              onClick={onClose}
-            >
-              Cancel
-            </Button>
-            <Button
-              variant="solid"
-              borderRadius="lg"
-              size="md"
-              onClick={addClassesOnClick}
-              isLoading={isCoursesLoading}
-            >
-              Add
-            </Button>
-          </Flex>
-        </ModalFooter>
       </ModalContent>
     </Modal>
   );
