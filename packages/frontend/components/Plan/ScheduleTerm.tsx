@@ -89,6 +89,7 @@ export const ScheduleTerm: React.FC<ScheduleTermProps> = ({
       <AddCourseModal
         isOpen={isOpen}
         catalogYear={catalogYear}
+        addTo={getSeasonDisplayWord(scheduleTerm.season)}
         closeModalDisplay={onClose}
         isCourseAlreadyAdded={isCourseInCurrTerm}
         addSelectedClasses={(courses: ScheduleCourse2<null>[]) =>

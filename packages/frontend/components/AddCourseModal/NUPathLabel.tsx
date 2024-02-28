@@ -61,7 +61,7 @@ export const NUPathLabel: React.FC<NuPathLabelProps> = ({
         <Flex
           key={nuPaths.indexOf(nuPath)}
           backgroundColor={
-            filteredPaths.includes(nuPath, 0) ? "blue.200" : "gray.200"
+            filteredPaths.includes(nuPath, 0) ? "blue.100" : "gray.200"
           }
           width="7"
           height="5"

@@ -25,13 +25,11 @@ export const SelectedCourse: React.FC<SelectedCourseProps> = ({
       borderColor="neutral.200"
     >
       <Box flex="2">
-        <Text>
-          <Text as="span" fontSize="14px" fontWeight="bold" marginRight="2">
+        <Text fontSize="sm">
+          <Text as="span" fontWeight="bold" marginRight="2">
             {getCourseDisplayString(selectedCourse)}
           </Text>
-          <Text as="span" size="sm" fontWeight="normal">
-            {selectedCourse.name}
-          </Text>
+          <Text as="span">{selectedCourse.name}</Text>
         </Text>
       </Box>
       <NUPathLabel
