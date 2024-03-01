@@ -39,8 +39,8 @@ export const SearchResult: React.FC<SearchResultProps> = ({
       borderBottom="1px"
       borderColor="neutral.100"
     >
-      <Flex width="100%" mr="md" alignItems="center" minH="20px">
-        <Box lineHeight="1">
+      <Flex width="100%" mr="md" alignItems="center" minH="25px">
+        <Box lineHeight="1.2">
           <Text as="span" fontSize="sm" fontWeight="bold" marginRight="2">
             {getCourseDisplayString(course)}
           </Text>

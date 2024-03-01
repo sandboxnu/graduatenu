@@ -122,7 +122,7 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size="3xl" isCentered>
+    <Modal isOpen={isOpen} onClose={onClose} size="4xl" isCentered>
       <ModalOverlay />
       <ModalContent>
         <ModalHeader

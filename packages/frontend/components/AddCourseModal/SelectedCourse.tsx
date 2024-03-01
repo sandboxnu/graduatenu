@@ -19,12 +19,13 @@ export const SelectedCourse: React.FC<SelectedCourseProps> = ({
     <Flex
       alignItems="center"
       justifyContent="space-between"
-      padding="2"
+      padding="xs"
+      px="sm"
       borderRadius="xl"
       border="1px"
       borderColor="neutral.200"
     >
-      <Box flex="2">
+      <Box lineHeight="1">
         <Text fontSize="sm">
           <Text as="span" fontWeight="bold" marginRight="2">
             {getCourseDisplayString(selectedCourse)}
@@ -46,6 +47,7 @@ export const SelectedCourse: React.FC<SelectedCourseProps> = ({
         size="xs"
         onClick={() => removeSelectedCourse(selectedCourse)}
         alignSelf="center"
+        ml="sm"
       />
     </Flex>
   );
