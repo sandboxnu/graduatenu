@@ -39,20 +39,18 @@ export const SearchResult: React.FC<SearchResultProps> = ({
       borderBottom="1px"
       borderColor="neutral.100"
     >
-      <HStack>
-        <Box>
-          <Text as="span" fontSize="sm" fontWeight="bold" marginRight="2">
-            {getCourseDisplayString(course)}
-          </Text>
-          <Text as="span" fontSize="sm">
-            {course.name}
-          </Text>
-        </Box>
-        <NUPathLabel
-          nuPaths={course.nupaths ? course.nupaths : []}
-          filteredPaths={filteredPaths}
-        />
-      </HStack>
+      <Box flex="2">
+        <Text as="span" fontSize="sm" fontWeight="bold" marginRight="2">
+          {getCourseDisplayString(course)}
+        </Text>
+        <Text as="span" fontSize="sm">
+          {course.name}
+        </Text>
+      </Box>
+      <NUPathLabel
+        nuPaths={course.nupaths ? course.nupaths : []}
+        filteredPaths={filteredPaths}
+      />
       <GraduateToolTip
         label={addButtonTooltip}
         isDisabled={!isAddButtonDisabled}
