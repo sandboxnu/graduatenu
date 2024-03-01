@@ -148,13 +148,12 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
             <Flex
               direction="column"
               bg="neutral.50"
-              paddingLeft="7"
-              paddingY="9"
+              padding="xl"
               borderRight="1px"
               borderColor="neutral.200"
               borderEndStartRadius="lg"
             >
-              <Text fontSize="md" as="b" marginBottom="xs">
+              <Text fontSize="md" fontWeight="bold" marginBottom="xs">
                 NUPath
               </Text>
               <Flex direction="column" gap="2">
