@@ -28,6 +28,7 @@ import { NUPathCheckBox } from "./NUPathCheckBox";
 import { SearchCoursesInput } from "./SearchCoursesInput";
 import { SearchResult } from "./SearchResult";
 import { SelectedCourse } from "./SelectedCourse";
+import { SecondaryButton } from "../Button";
 
 interface AddCourseModalProps {
   isOpen: boolean;
@@ -262,19 +263,11 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
                 </VStack>
               </Flex>
               <ModalFooter justifyContent="end" gap="md">
-                <Button
-                  variant="whiteCancelOutline"
-                  size="md"
-                  borderRadius="lg"
-                  onClick={onClose}
-                >
-                  Cancel
-                </Button>
+                <SecondaryButton onClick={onClose}>Cancel</SecondaryButton>
                 <Button
                   leftIcon={<AddIcon />}
                   variant="solid"
                   borderRadius="lg"
-                  size="md"
                   backgroundColor="primary.blue.light.main"
                   borderColor="primary.blue.light.main"
                   colorScheme="primary.blue.light.main"

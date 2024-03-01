@@ -48,28 +48,20 @@ export const NUPathLabel: React.FC<NuPathLabelProps> = ({
   }
 
   return (
-    <Flex
-      justifyContent="end"
-      align="center"
-      gap="1"
-      marginRight="5"
-      wrap="wrap"
-      flex="1"
-      flexBasis="0px"
-    >
+    <Flex justifyContent="end" gap="1" flex="1" ml="xs">
       {nuPaths.map((nuPath) => (
         <Flex
           key={nuPaths.indexOf(nuPath)}
           backgroundColor={
             filteredPaths.includes(nuPath, 0) ? "blue.100" : "gray.200"
           }
-          width="7"
-          height="5"
+          width="6"
+          height="4"
           justifyContent="center"
           alignItems="center"
-          borderRadius="md"
+          borderRadius="base"
         >
-          <Text fontSize="xs">{pathToAbbrev(nuPath)}</Text>
+          <Text fontSize="2xs">{pathToAbbrev(nuPath)}</Text>
         </Flex>
       ))}
     </Flex>

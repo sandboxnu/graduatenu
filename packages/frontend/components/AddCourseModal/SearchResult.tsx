@@ -1,5 +1,5 @@
 import { AddIcon } from "@chakra-ui/icons";
-import { Box, Flex, IconButton, Text, HStack } from "@chakra-ui/react";
+import { Box, Flex, IconButton, Text } from "@chakra-ui/react";
 import { NUPathEnum, ScheduleCourse2 } from "@graduate/common";
 import { getCourseDisplayString } from "../../utils/";
 import { GraduateToolTip } from "../GraduateTooltip";
@@ -39,18 +39,21 @@ export const SearchResult: React.FC<SearchResultProps> = ({
       borderBottom="1px"
       borderColor="neutral.100"
     >
-      <Box flex="2">
-        <Text as="span" fontSize="sm" fontWeight="bold" marginRight="2">
-          {getCourseDisplayString(course)}
-        </Text>
-        <Text as="span" fontSize="sm">
-          {course.name}
-        </Text>
-      </Box>
-      <NUPathLabel
-        nuPaths={course.nupaths ? course.nupaths : []}
-        filteredPaths={filteredPaths}
-      />
+      <Flex width="100%" mr="md" alignItems="center" minH="20px">
+        <Box lineHeight="1">
+          <Text as="span" fontSize="sm" fontWeight="bold" marginRight="2">
+            {getCourseDisplayString(course)}
+          </Text>
+          <Text as="span" fontSize="sm">
+            {course.name}
+          </Text>
+        </Box>
+        <NUPathLabel
+          nuPaths={course.nupaths ? course.nupaths : []}
+          filteredPaths={filteredPaths}
+        />
+      </Flex>
+
       <GraduateToolTip
         label={addButtonTooltip}
         isDisabled={!isAddButtonDisabled}
