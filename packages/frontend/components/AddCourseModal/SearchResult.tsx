@@ -66,6 +66,7 @@ export const SearchResult: React.FC<SearchResultProps> = ({
           colorScheme="primary.blue.light.main"
           isRound
           size="xs"
+          mr="sm"
           onClick={() => addSelectedCourse(course)}
           isLoading={isSelectingAnotherCourse}
           isDisabled={isResultAlreadyAdded || isResultAlreadySelected}
