@@ -185,7 +185,7 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
                   direction="column"
                   height="300px"
                   overflow="scroll"
-                  marginTop="4"
+                  marginTop="sm"
                 >
                   {/* No course search */}
                   {!error && (!courses || courses.length === 0) && (
@@ -242,12 +242,12 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
               </Flex>
 
               {/* Selected Courses Area */}
-              <Flex padding="4" paddingBottom="0" direction="column">
+              <Flex padding="md" paddingBottom="0" direction="column">
                 <Text fontSize="md" fontWeight="bold">
                   Courses to Add:
                 </Text>
                 <VStack
-                  paddingY="2"
+                  paddingY="xs"
                   height="130px"
                   overflow="scroll"
                   alignItems="stretch"

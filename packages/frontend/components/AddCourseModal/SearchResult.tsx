@@ -34,14 +34,14 @@ export const SearchResult: React.FC<SearchResultProps> = ({
     <Flex
       justifyContent="space-between"
       alignItems="end"
-      padding="1"
-      paddingY="2"
+      padding="2xs"
+      paddingY="xs"
       borderBottom="1px"
       borderColor="neutral.100"
     >
       <Flex width="100%" mr="md" alignItems="center" minH="25px">
         <Box lineHeight="1.2">
-          <Text as="span" fontSize="sm" fontWeight="bold" marginRight="2">
+          <Text as="span" fontSize="sm" fontWeight="bold" marginRight="sm">
             {getCourseDisplayString(course)}
           </Text>
           <Text as="span" fontSize="sm">
