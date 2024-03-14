@@ -16,7 +16,7 @@ interface NUPathSectionProps {
   loading?: boolean;
 }
 const nuPathDisplayAndAbbr: [
-  nupath: string,
+  nupath: NUPathEnum,
   displayName: string,
   abbreviation: string
 ][] = [
@@ -58,11 +58,11 @@ const NUPathSection: React.FC<NUPathSectionProps> = ({
     }
   }
 
-  const wiCount = nupathMap[NUPathEnum.WI];
+  const wiCount = nupathMap[NUPathEnum.WI] || 0;
 
   if (loading) {
     validationStatus = SidebarValidationStatus.Loading;
-  } else if (Object.keys(nupathMap).length === 13 && wiCount && wiCount >= 2) {
+  } else if (Object.keys(nupathMap).length === 13 && wiCount >= 2) {
     // Sidebar is complete if all 13 nupaths have been fulfilled (including 2 writing intensives)
     validationStatus = SidebarValidationStatus.Complete;
   }
@@ -83,8 +83,7 @@ const NUPathSection: React.FC<NUPathSectionProps> = ({
         alignItems="flex-start"
         color="dark.main"
         fontWeight="bold"
-        py="md"
-        px="md"
+        p="md"
         margin="0"
         backgroundColor="neutral.50"
         transition="background-color 0.25s ease"
