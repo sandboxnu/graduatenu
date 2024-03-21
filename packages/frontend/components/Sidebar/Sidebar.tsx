@@ -34,6 +34,7 @@ import {
 } from "../../validation-worker/worker-messages";
 import { useFetchCourses, useMajor } from "../../hooks";
 import { HelperToolTip } from "../Help";
+import NUPathSection from "./NUPathSection";
 
 export enum SidebarValidationStatus {
   Loading = "Loading",
@@ -92,15 +93,16 @@ const Sidebar: React.FC<SidebarProps> = memo(
       MajorValidationResult | undefined
     >(undefined);
 
+    const coursesTaken = [
+      ...getAllCoursesFromPlan(selectedPlan),
+      ...transferCourses,
+    ];
+
     const revalidateMajor = () => {
       setValidationStatus(undefined);
       if (!selectedPlan || !major || !workerRef.current) return;
 
       currentRequestNum += 1;
-      const coursesTaken = [
-        ...getAllCoursesFromPlan(selectedPlan),
-        ...transferCourses,
-      ];
       const validationInfo: WorkerPostInfo = {
         major: major,
         taken: coursesTaken,
@@ -227,6 +229,11 @@ const Sidebar: React.FC<SidebarProps> = memo(
       >
         {courseData && (
           <>
+            <NUPathSection
+              coursesTaken={coursesTaken}
+              dndIdPrefix={`${SIDEBAR_DND_ID_PREFIX}-nupath`}
+              loading={isCoursesLoading}
+            />
             {major.requirementSections.map((section, index) => {
               const sectionValidationError: MajorValidationError | undefined =
                 getSectionError(index, validationStatus);
