@@ -115,6 +115,7 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
   const onClose = () => {
     setSelectedCourses([]);
     setSearchQuery("");
+    setSelectedNUPaths([]);
     closeModalDisplay();
   };
 
