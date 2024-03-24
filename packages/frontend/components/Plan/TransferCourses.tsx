@@ -146,6 +146,7 @@ const TransferCoursesBody: React.FC<TransferCoursesBodyProps> = ({
       <AddCourseButton onOpen={onOpen} />
       <AddCourseModal
         isOpen={isOpen}
+        addTo="Transfer Courses"
         closeModalDisplay={onClose}
         addSelectedClasses={addTransferCourses}
         isCourseAlreadyAdded={isTransferCoursesAlreadyAdded}

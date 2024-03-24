@@ -30,17 +30,18 @@ export const NUPathCheckBox: React.FC<NUPathCheckProps> = ({
 
   return (
     <Checkbox
-      size="lg"
+      size="md"
       colorScheme="blue"
       checked={isChecked}
       onChange={updateFilters}
+      borderColor="neutral.300"
     >
-      <Flex alignItems="baseline">
+      <Flex alignItems="baseline" ml="-0.5">
         <Text
           fontWeight="bold"
           color="primary.blue.light.main"
           fontSize="sm"
-          marginRight="2"
+          marginRight="2xs"
         >
           {nuPath}
         </Text>

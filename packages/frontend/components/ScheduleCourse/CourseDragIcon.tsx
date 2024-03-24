@@ -11,7 +11,7 @@ export const CourseDragIcon: React.FC = () => {
         lineHeight: "1em",
         WebkitFlexShrink: 0,
         flexShrink: 0,
-        color: "var(--chakra-colors-primary-blue-dark-main)",
+        color: "var(--chakra-colors-gray-400)",
         verticalAlign: "middle",
       }}
     >

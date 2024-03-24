@@ -34,25 +34,26 @@ export const SearchResult: React.FC<SearchResultProps> = ({
     <Flex
       justifyContent="space-between"
       alignItems="end"
-      padding="1"
-      paddingY="2"
-      borderBottom="2px"
+      padding="2xs"
+      paddingY="xs"
+      borderBottom="1px"
       borderColor="neutral.100"
     >
-      <Box flex="2">
-        <Text>
-          <Text as="span" fontSize="14px" fontWeight="bold" marginRight="2">
+      <Flex width="100%" mr="md" alignItems="center" minH="25px">
+        <Box lineHeight="1.2">
+          <Text as="span" fontSize="sm" fontWeight="bold" marginRight="sm">
             {getCourseDisplayString(course)}
           </Text>
-          <Text as="span" size="sm" fontWeight="normal">
+          <Text as="span" fontSize="sm">
             {course.name}
           </Text>
-        </Text>
-      </Box>
-      <NUPathLabel
-        nuPaths={course.nupaths ? course.nupaths : []}
-        filteredPaths={filteredPaths}
-      />
+        </Box>
+        <NUPathLabel
+          nuPaths={course.nupaths ? course.nupaths : []}
+          filteredPaths={filteredPaths}
+        />
+      </Flex>
+
       <GraduateToolTip
         label={addButtonTooltip}
         isDisabled={!isAddButtonDisabled}
@@ -65,6 +66,7 @@ export const SearchResult: React.FC<SearchResultProps> = ({
           colorScheme="primary.blue.light.main"
           isRound
           size="xs"
+          mr="sm"
           onClick={() => addSelectedCourse(course)}
           isLoading={isSelectingAnotherCourse}
           isDisabled={isResultAlreadyAdded || isResultAlreadySelected}

@@ -28,10 +28,12 @@ import { NUPathCheckBox } from "./NUPathCheckBox";
 import { SearchCoursesInput } from "./SearchCoursesInput";
 import { SearchResult } from "./SearchResult";
 import { SelectedCourse } from "./SelectedCourse";
+import { SecondaryButton } from "../Button";
 
 interface AddCourseModalProps {
   isOpen: boolean;
   catalogYear?: number;
+  addTo: string;
   /** Function to close the modal UX, returned from the useDisclosure chakra hook */
   closeModalDisplay: () => void;
 
@@ -48,6 +50,7 @@ interface AddCourseModalProps {
 export const AddCourseModal: React.FC<AddCourseModalProps> = ({
   isOpen,
   catalogYear,
+  addTo,
   closeModalDisplay,
   isCourseAlreadyAdded,
   addSelectedClasses,
@@ -120,18 +123,24 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size="3xl" isCentered>
+    <Modal isOpen={isOpen} onClose={onClose} size="4xl" isCentered>
       <ModalOverlay />
       <ModalContent>
         <ModalHeader
           color="primary.blue.dark.main"
-          borderBottom="2px"
-          borderColor="neutral.100"
+          borderBottom="1px"
+          borderColor="neutral.200"
         >
-          <Flex alignItems="center" justifyContent="center" columnGap="2xs">
+          <Flex alignItems="center" justifyContent="center" columnGap="xs">
             <Text>Add Courses</Text>
             <HelperToolTip label="We try our best to search for courses across as many semesters as possible. If you cannot find your course, please report a bug with your plan catalog year and we will try to solve it as soon as possible." />
           </Flex>
+          <Text fontSize="sm" align="center" fontWeight="normal">
+            Select courses to add to{" "}
+            <Text as="span" fontWeight="bold">
+              {addTo}
+            </Text>
+          </Text>
         </ModalHeader>
         <ModalCloseButton />
         <ModalBody padding="0">
@@ -140,12 +149,12 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
             <Flex
               direction="column"
               bg="neutral.50"
-              paddingLeft="7"
-              paddingY="9"
-              borderRight="2px"
-              borderColor="neutral.100"
+              padding="xl"
+              borderRight="1px"
+              borderColor="neutral.200"
+              borderEndStartRadius="lg"
             >
-              <Text fontSize="lg" as="b" marginBottom="5">
+              <Text fontSize="md" fontWeight="bold" marginBottom="xs">
                 NUPath
               </Text>
               <Flex direction="column" gap="2">
@@ -164,8 +173,9 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
               <Flex
                 direction="column"
                 padding="4"
-                borderBottom="2px"
-                borderColor="neutral.100"
+                paddingBottom="0"
+                borderBottom="1px"
+                borderColor="neutral.200"
               >
                 <SearchCoursesInput
                   setSearchQuery={setSearchQuery}
@@ -175,14 +185,18 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
                   direction="column"
                   height="300px"
                   overflow="scroll"
-                  marginTop="4"
+                  marginTop="sm"
                 >
                   {/* No course search */}
                   {!error && (!courses || courses.length === 0) && (
                     <Flex alignItems="center" justifyContent="center">
                       <InfoIcon color="neutral.300" marginRight="2" />
-                      <Text fontSize="sm" color="neutral.300">
-                        Search results will show up here.
+                      <Text
+                        fontSize="sm"
+                        fontWeight="semibold"
+                        color="neutral.400"
+                      >
+                        Search results will show up here...
                       </Text>
                     </Flex>
                   )}
@@ -228,12 +242,12 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
               </Flex>
 
               {/* Selected Courses Area */}
-              <Flex padding="4" direction="column">
+              <Flex padding="md" paddingBottom="0" direction="column">
                 <Text fontSize="md" fontWeight="bold">
                   Courses to Add:
                 </Text>
                 <VStack
-                  paddingY="2"
+                  paddingY="xs"
                   height="130px"
                   overflow="scroll"
                   alignItems="stretch"
@@ -249,19 +263,11 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
                 </VStack>
               </Flex>
               <ModalFooter justifyContent="end" gap="md">
-                <Button
-                  variant="whiteCancelOutline"
-                  size="md"
-                  borderRadius="lg"
-                  onClick={onClose}
-                >
-                  Cancel
-                </Button>
+                <SecondaryButton onClick={onClose}>Cancel</SecondaryButton>
                 <Button
                   leftIcon={<AddIcon />}
                   variant="solid"
                   borderRadius="lg"
-                  size="md"
                   backgroundColor="primary.blue.light.main"
                   borderColor="primary.blue.light.main"
                   colorScheme="primary.blue.light.main"
