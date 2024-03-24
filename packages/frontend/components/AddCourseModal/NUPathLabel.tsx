@@ -55,13 +55,13 @@ export const NUPathLabel: React.FC<NuPathLabelProps> = ({
           backgroundColor={
             filteredPaths.includes(nuPath, 0) ? "blue.100" : "gray.200"
           }
-          width="6"
-          height="4"
+          width="7"
+          height="5"
           justifyContent="center"
           alignItems="center"
           borderRadius="base"
         >
-          <Text fontSize="2xs">{pathToAbbrev(nuPath)}</Text>
+          <Text fontSize="xs">{pathToAbbrev(nuPath)}</Text>
         </Flex>
       ))}
     </Flex>
