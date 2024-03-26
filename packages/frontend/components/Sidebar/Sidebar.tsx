@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, Link, Stack, Text } from "@chakra-ui/react";
+import { Badge, Box, Flex, Heading, Link, Stack, Text } from "@chakra-ui/react";
 import {
   MajorValidationError,
   MajorValidationResult,
@@ -19,6 +19,7 @@ import {
   getAllCoursesFromPlan,
   getSectionError,
   getAllCoursesInMajor,
+  BETA_MAJOR_TOOLTIP_MSG,
 } from "../../utils";
 import {
   handleApiClientError,
@@ -315,6 +316,7 @@ interface SidebarContainerProps {
   creditsTaken?: number;
   creditsToTake?: number;
   renderCoopBlock?: boolean;
+  renderBetaMajorBlock?: boolean;
   helperText?: ReactNode;
 }
 
@@ -328,6 +330,7 @@ const SidebarContainer: React.FC<PropsWithChildren<SidebarContainerProps>> = ({
   creditsTaken,
   creditsToTake,
   renderCoopBlock,
+  renderBetaMajorBlock,
   helperText,
   children,
 }) => {
@@ -340,6 +343,21 @@ const SidebarContainer: React.FC<PropsWithChildren<SidebarContainerProps>> = ({
     >
       <Box px="md" pb="md">
         <Box pb="sm">
+          <Flex alignItems="center" pb="sm">
+            <Badge
+              borderColor="red"
+              borderWidth="1px"
+              variant="outline"
+              colorScheme="red"
+              fontWeight="bold"
+              fontSize="sm"
+              borderRadius="md"
+              mr="sm"
+            >
+              BETA MAJOR
+            </Badge>
+            <HelperToolTip label={BETA_MAJOR_TOOLTIP_MSG} />
+          </Flex>
           <Flex alignItems="center" columnGap="2xs">
             <Heading
               as="h1"

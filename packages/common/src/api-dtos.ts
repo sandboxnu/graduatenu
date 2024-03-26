@@ -34,6 +34,10 @@ export class CreatePlanDtoWithoutSchedule {
   @Max(3000)
   @IsOptional()
   catalogYear?: number;
+
+  @IsBoolean()
+  @IsOptional()
+  agreeToBetaMajor?: boolean;
 }
 
 export class CreatePlanDto extends CreatePlanDtoWithoutSchedule {

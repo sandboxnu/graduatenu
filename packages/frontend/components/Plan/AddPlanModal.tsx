@@ -138,6 +138,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
   const catalogYear = watch("catalogYear");
   const majorName = watch("major");
   const concentration = watch("concentration");
+  const agreeToBetaMajor = watch("agreeToBetaMajor");
 
   const yearSupportedMajors =
     supportedMajorsData?.supportedMajors[catalogYear ?? 0];
@@ -152,11 +153,15 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
 
   const majorHasConcentrations = majorConcentrations.concentrations.length > 0;
 
+  const isValidatedMajor =
+    yearSupportedMajors?.[majorName ?? ""]?.verified ?? false;
+
   const isValidForm =
     title &&
     catalogYear &&
     majorName &&
-    (!isConcentrationRequired || concentration);
+    (!isConcentrationRequired || concentration) &&
+    (!isValidatedMajor ? agreeToBetaMajor : true);
 
   const noMajorHelperLabel = (
     <Stack>
@@ -295,6 +300,20 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                             "Concentration is required",
                         }}
                       />
+                    )}
+                    {majorName && !isValidatedMajor && (
+                      <Flex alignItems="center">
+                        <Checkbox
+                          mr="md"
+                          {...register("agreeToBetaMajor", {
+                            required: "You must agree to continue",
+                          })}
+                        />
+                        <Text>
+                          I understand that I am selecting a beta major and that
+                          the requirements may not be accurate.
+                        </Text>
+                      </Flex>
                     )}
                   </>
                 )}

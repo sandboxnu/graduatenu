@@ -143,6 +143,18 @@ export interface Major2 {
   totalCreditsRequired: number;
   yearVersion: number;
   concentrations?: Concentrations2;
+  metadata?: MajorMetadata;
+}
+
+/**
+ * Metadata for a major.
+ *
+ * @param verified   Whether the major has been manually verified.
+ * @param lastEdited The last time the major was edited MM/DD/YYYY.
+ */
+export interface MajorMetadata {
+  verified: boolean;
+  lastEdited: string;
 }
 
 /**
@@ -456,9 +468,10 @@ export interface IScheduleCourse {
 export type SupportedConcentrations = {
   concentrations: string[];
   minRequiredConcentrations: number;
+  verified: boolean;
 };
 
-// { majorName => { concentration, minRequiredConcentrations } }
+// { majorName => { concentration, minRequiredConcentrations, verified} }
 export type SupportedMajorsForYear = Record<string, SupportedConcentrations>;
 
 // { year => supported majors }
