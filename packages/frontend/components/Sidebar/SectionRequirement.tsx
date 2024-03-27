@@ -110,10 +110,7 @@ const SectionRequirement: React.FC<SidebarRequirementProps> = ({
         {requirement.exceptions.length > 0 && (
           <>
             except{" "}
-            {requirement.exceptions
-              .map(getCourseDisplayString)
-              .join(", ")
-              .slice(0, -1)}
+            {requirement.exceptions.map(getCourseDisplayString).join(", ")}
           </>
         )}
       </Text>
