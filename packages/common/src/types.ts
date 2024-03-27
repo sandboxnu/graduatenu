@@ -505,3 +505,9 @@ export interface MetaInfo {
   build_timestamp: Maybe<number>;
   environment: Maybe<string>;
 }
+
+// option object type for react-select
+export type OptionObject = {
+  label: string | number;
+  value: string;
+};

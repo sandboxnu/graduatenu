@@ -1,7 +1,8 @@
 import {
-  GetMajorsResponse,
   GetSupportedMajorsResponse,
+  OptionObject,
   majorNameComparator,
+  majorOptionObjectComparator,
 } from "@graduate/common";
 
 export const extractSupportedMajorYears = (
@@ -9,6 +10,15 @@ export const extractSupportedMajorYears = (
 ) => {
   return Object.keys(supportedMajorsData?.supportedMajors ?? {});
 };
+
+/**
+ * Returns a list of the supported majors names as strings for the given catalog year.
+ *
+ * @param   catalogYear         Catalog year to search for
+ * @param   supportedMajorsData Supported major data to extract from
+ * @returns                     A list of the supported major names for the
+ *   given catalog year
+ */
 export const extractSupportedMajorNames = (
   catalogYear?: number,
   supportedMajorsData?: GetSupportedMajorsResponse
@@ -16,27 +26,33 @@ export const extractSupportedMajorNames = (
   if (!catalogYear) {
     return [];
   }
-  return Object.keys(
-    supportedMajorsData?.supportedMajors[catalogYear] ?? {}
-  ).sort(majorNameComparator);
+  const majorMap = supportedMajorsData?.supportedMajors[catalogYear];
+  return Object.keys(majorMap ?? {}).sort(majorNameComparator);
 };
 
-export const extractMajorYears = (majorsData?: GetMajorsResponse) => {
-  return Object.keys(majorsData?.majors ?? {});
-};
-export const extractMajorNames = (
+/**
+ * Returns a list of option objects for supported majors (label, value) for the
+ * given catalog year.
+ *
+ * @param   catalogYear         Catalog year to search for
+ * @param   supportedMajorsData Supported major data to extract from
+ * @returns                     A list of the supported major option objects for
+ *   the given catalog year
+ */
+export const extractSupportedMajorOptions = (
   catalogYear?: number,
-  majorsData?: GetMajorsResponse
-): string[] => {
+  supportedMajorsData?: GetSupportedMajorsResponse
+): OptionObject[] => {
   if (!catalogYear) {
     return [];
   }
-  // extract the name to information mapping for the given year
-  let majorMap = majorsData?.majors[catalogYear];
+  const majorMap = supportedMajorsData?.supportedMajors[catalogYear];
   return Object.keys(majorMap ?? {})
-    .map(
-      (majorName) =>
-        majorName + (majorMap?.[majorName].metadata.verified ? "" : " [BETA]")
-    )
-    .sort(majorNameComparator);
+    .map((majorName) => {
+      return {
+        label: majorName + (majorMap?.[majorName].verified ? "" : " [BETA]"),
+        value: majorName,
+      };
+    })
+    .sort(majorOptionObjectComparator);
 };

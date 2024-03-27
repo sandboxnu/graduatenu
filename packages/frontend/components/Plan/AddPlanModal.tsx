@@ -34,6 +34,7 @@ import {
   cleanDndIdsFromStudent,
   createEmptySchedule,
   extractSupportedMajorNames,
+  extractSupportedMajorOptions,
   extractSupportedMajorYears,
   handleApiClientError,
   noLeadOrTrailWhitespacePattern,
@@ -276,6 +277,10 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                       name="major"
                       control={control}
                       options={extractSupportedMajorNames(
+                        catalogYear,
+                        supportedMajorsData
+                      )}
+                      optionObjects={extractSupportedMajorOptions(
                         catalogYear,
                         supportedMajorsData
                       )}

@@ -4,6 +4,7 @@ import {
   FormErrorMessage,
   FormHelperText,
 } from "@chakra-ui/react";
+import { OptionObject } from "@graduate/common";
 import Fuse from "fuse.js";
 import { Control, FieldError, useController } from "react-hook-form";
 import Select from "react-select";
@@ -14,6 +15,11 @@ type PlanSelectProps = {
   label: string;
   helperText?: string;
   options: (string | number)[];
+  /**
+   * Optional list of (label, value) if the select option label and value should
+   * be different
+   */
+  optionObjects?: OptionObject[];
   /** Any side effects as a result of this field changing. */
   onChangeSideEffect?: (val: string | null) => void;
   /** The name of the react hook form field. */
@@ -35,6 +41,7 @@ type PlanSelectProps = {
 export const PlanSelect: React.FC<PlanSelectProps> = ({
   label,
   options,
+  optionObjects,
   helperText,
   onChangeSideEffect,
   name,
@@ -57,8 +64,7 @@ export const PlanSelect: React.FC<PlanSelectProps> = ({
             includeScore: true,
             threshold: 0.4,
           }).search(inputValue);
-
-          return list.map((element) => element.item).includes(option.label);
+          return list.map((element) => element.item).includes(option.value);
         } else {
           return true;
         }
@@ -70,10 +76,12 @@ export const PlanSelect: React.FC<PlanSelectProps> = ({
     fieldState: { error },
   } = useController({ name, control, rules });
 
-  const selectOptions: any[] = options.map((val) => ({
-    value: val,
-    label: val,
-  }));
+  const selectOptions: OptionObject[] = optionObjects
+    ? optionObjects
+    : options.map((val) => ({
+        value: val.toString(),
+        label: val,
+      }));
 
   const onChange = (option: any) => {
     let val = option ? option.value : null;
