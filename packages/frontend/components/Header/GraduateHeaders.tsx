@@ -51,11 +51,11 @@ const GraduateHeader: React.FC<GraduateHeaderProps> = ({ rightContent }) => {
       <Logo />
       <Flex columnGap="md" alignItems="center">
         <MetaInfoWidget />
-        <ChakraLink href="https://forms.gle/Tg9yuhR8inkrqHdN6" isExternal>
+        <ChakraLink href="https://forms.gle/uXDfLFWvgCiYcqgf9" isExternal>
           <FeedbackIcon mx="2px" />
           Feedback
         </ChakraLink>
-        <ChakraLink href="https://forms.gle/Sxg3B9js8KQ2zfJS9" isExternal>
+        <ChakraLink href="https://forms.gle/bXgRXyYTXN8wgYy78" isExternal>
           <BugIcon mx="2px" />
           Bug/Feature
         </ChakraLink>
@@ -88,7 +88,7 @@ const MobileHeader: React.FC = () => {
             <MenuItem
               icon={<FeedbackIcon />}
               as="a"
-              href="https://forms.gle/Tg9yuhR8inkrqHdN6"
+              href="https://forms.gle/uXDfLFWvgCiYcqgf9"
               target="_blank"
             >
               Feedback
@@ -96,7 +96,7 @@ const MobileHeader: React.FC = () => {
             <MenuItem
               icon={<BugIcon />}
               as="a"
-              href="https://forms.gle/Sxg3B9js8KQ2zfJS9"
+              href="https://forms.gle/bXgRXyYTXN8wgYy78"
               target="_blank"
             >
               Bug/Feature
