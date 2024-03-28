@@ -15,10 +15,7 @@ type PlanSelectProps = {
   label: string;
   helperText?: string;
   options: (string | number)[];
-  /**
-   * Optional list of (label, value) if the select option label and value should
-   * be different
-   */
+  /** Optional list of (label, value) if different label and value */
   optionObjects?: OptionObject[];
   /** Any side effects as a result of this field changing. */
   onChangeSideEffect?: (val: string | null) => void;
