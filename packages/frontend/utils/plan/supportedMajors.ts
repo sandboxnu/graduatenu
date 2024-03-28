@@ -50,7 +50,7 @@ export const extractSupportedMajorOptions = (
   return Object.keys(majorMap ?? {})
     .map((majorName) => {
       return {
-        label: majorName + (majorMap?.[majorName].verified ? "" : " [BETA]"),
+        label: (majorMap?.[majorName].verified ? "" : "[BETA] ") + majorName,
         value: majorName,
       };
     })

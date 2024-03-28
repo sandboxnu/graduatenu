@@ -28,6 +28,7 @@ import {
 } from "../../hooks";
 import {
   extractSupportedMajorNames,
+  extractSupportedMajorOptions,
   extractSupportedMajorYears,
   handleApiClientError,
   noLeadOrTrailWhitespacePattern,
@@ -180,6 +181,7 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
 
     mutate(USE_STUDENT_WITH_PLANS_SWR_KEY);
     toast.success("Plan updated successfully.");
+    onCloseModal();
   };
 
   const noMajorHelperLabel = (
@@ -285,6 +287,10 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                       name="major"
                       control={control}
                       options={extractSupportedMajorNames(
+                        catalogYear,
+                        supportedMajorsData
+                      )}
+                      optionObjects={extractSupportedMajorOptions(
                         catalogYear,
                         supportedMajorsData
                       )}
