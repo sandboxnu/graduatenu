@@ -20,6 +20,7 @@ import {
   CreatePlanDto,
   CreatePlanDtoWithoutSchedule,
   PlanModel,
+  convertToOptionObjects,
 } from "@graduate/common";
 import { useRouter } from "next/router";
 import { Dispatch, SetStateAction, useContext, useState } from "react";
@@ -243,7 +244,9 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                       placeholder="Select a Catalog Year"
                       name="catalogYear"
                       control={control}
-                      options={extractSupportedMajorYears(supportedMajorsData)}
+                      options={convertToOptionObjects(
+                        extractSupportedMajorYears(supportedMajorsData)
+                      )}
                       onChangeSideEffect={(val: string | null) => {
                         const newYear = val ? parseInt(val, 10) : null;
                         if (newYear !== catalogYear) {
@@ -276,11 +279,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                       placeholder="Select a Major"
                       name="major"
                       control={control}
-                      options={extractSupportedMajorNames(
-                        catalogYear,
-                        supportedMajorsData
-                      )}
-                      optionObjects={extractSupportedMajorOptions(
+                      options={extractSupportedMajorOptions(
                         catalogYear,
                         supportedMajorsData
                       )}
@@ -297,7 +296,9 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                         label="Concentrations"
                         name="concentration"
                         placeholder="Select a Concentration"
-                        options={majorConcentrations.concentrations}
+                        options={convertToOptionObjects(
+                          majorConcentrations.concentrations
+                        )}
                         control={control}
                         rules={{
                           required:

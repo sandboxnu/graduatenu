@@ -509,5 +509,5 @@ export interface MetaInfo {
 // option object type for react-select
 export type OptionObject = {
   label: string | number;
-  value: string;
+  value: string | number;
 };

@@ -1,4 +1,4 @@
-import { OptionObject } from "./types";
+import type { OptionObject } from "./types";
 
 /** Does the given password satisfy our minimum criteria for strength? */
 export const isStrongPassword = (password: string): boolean => {
@@ -30,13 +30,20 @@ export const majorOptionObjectComparator = (
   a: OptionObject,
   b: OptionObject
 ) => {
-  const trimmedA = a.value
-    .replace(/[^A-Z0-9]/gi, "")
-    .trim()
-    .toLowerCase();
-  const trimmedB = b.value
-    .replace(/[^A-Z0-9]/gi, "")
-    .trim()
-    .toLowerCase();
-  return trimmedB.localeCompare(trimmedA);
+  return majorNameComparator(a.value.toString(), b.value.toString());
+};
+
+/**
+ * Converts a list of strings or numbers into a list of option objects for the
+ * Select component.
+ */
+export const convertToOptionObjects = (
+  options: (string | number)[]
+): OptionObject[] => {
+  return options.map((option) => {
+    return {
+      label: option,
+      value: option,
+    };
+  });
 };

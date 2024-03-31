@@ -16,7 +16,11 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { API } from "@graduate/api-client";
-import { PlanModel, UpdatePlanDto } from "@graduate/common";
+import {
+  PlanModel,
+  UpdatePlanDto,
+  convertToOptionObjects,
+} from "@graduate/common";
 import { useRouter } from "next/router";
 import { useCallback, useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -255,7 +259,9 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                       placeholder="Select a Catalog Year"
                       name="catalogYear"
                       control={control}
-                      options={extractSupportedMajorYears(supportedMajorsData)}
+                      options={convertToOptionObjects(
+                        extractSupportedMajorYears(supportedMajorsData)
+                      )}
                       onChangeSideEffect={(val: string | null) => {
                         const newYear = val ? parseInt(val, 10) : null;
                         if (newYear !== catalogYear) {
@@ -286,11 +292,7 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                       placeholder="Select a Major"
                       name="major"
                       control={control}
-                      options={extractSupportedMajorNames(
-                        catalogYear,
-                        supportedMajorsData
-                      )}
-                      optionObjects={extractSupportedMajorOptions(
+                      options={extractSupportedMajorOptions(
                         catalogYear,
                         supportedMajorsData
                       )}
@@ -306,7 +308,9 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                         label="Concentrations"
                         name="concentration"
                         placeholder="Select a Concentration"
-                        options={majorConcentrations.concentrations}
+                        options={convertToOptionObjects(
+                          majorConcentrations.concentrations
+                        )}
                         control={control}
                         rules={{
                           required:

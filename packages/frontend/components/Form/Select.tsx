@@ -14,9 +14,8 @@ type PlanSelectProps = {
   error?: FieldError;
   label: string;
   helperText?: string;
-  options: (string | number)[];
-  /** Optional list of (label, value) if different label and value */
-  optionObjects?: OptionObject[];
+  /** List of (label, value) if for label and value */
+  options: OptionObject[];
   /** Any side effects as a result of this field changing. */
   onChangeSideEffect?: (val: string | null) => void;
   /** The name of the react hook form field. */
@@ -38,7 +37,6 @@ type PlanSelectProps = {
 export const PlanSelect: React.FC<PlanSelectProps> = ({
   label,
   options,
-  optionObjects,
   helperText,
   onChangeSideEffect,
   name,
@@ -61,7 +59,9 @@ export const PlanSelect: React.FC<PlanSelectProps> = ({
             includeScore: true,
             threshold: 0.4,
           }).search(inputValue);
-          return list.map((element) => element.item).includes(option.value);
+          return list
+            .map((element) => element.item)
+            .includes(option.data.value);
         } else {
           return true;
         }
@@ -72,13 +72,6 @@ export const PlanSelect: React.FC<PlanSelectProps> = ({
     field: { onChange: onChangeUpdateValue, value, ...fieldRest },
     fieldState: { error },
   } = useController({ name, control, rules });
-
-  const selectOptions: OptionObject[] = optionObjects
-    ? optionObjects
-    : options.map((val) => ({
-        value: val.toString(),
-        label: val,
-      }));
 
   const onChange = (option: any) => {
     let val = option ? option.value : null;
@@ -95,7 +88,7 @@ export const PlanSelect: React.FC<PlanSelectProps> = ({
   if (isNumeric) {
     selectedValue = value ? value.toString() : null;
   }
-  const selectedOption = selectOptions.find(
+  const selectedOption = options.find(
     (option: any) => option.value === selectedValue
   );
 
@@ -110,7 +103,7 @@ export const PlanSelect: React.FC<PlanSelectProps> = ({
         {label}
       </FormLabel>
       <Select
-        options={selectOptions}
+        options={options}
         onChange={onChange}
         value={selectedOption}
         isSearchable={isSearchable}
