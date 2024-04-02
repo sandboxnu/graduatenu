@@ -34,7 +34,6 @@ import {
 import {
   cleanDndIdsFromStudent,
   createEmptySchedule,
-  extractSupportedMajorNames,
   extractSupportedMajorOptions,
   extractSupportedMajorYears,
   handleApiClientError,

@@ -31,7 +31,6 @@ import {
   useSupportedMajors,
 } from "../../hooks";
 import {
-  extractSupportedMajorNames,
   extractSupportedMajorOptions,
   extractSupportedMajorYears,
   handleApiClientError,
