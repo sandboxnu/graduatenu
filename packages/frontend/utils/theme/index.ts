@@ -72,6 +72,10 @@ const colors = {
       main: "#fa9f47",
     },
   },
+  informationBadge: {
+    main: "#5F6CF6",
+    back: "#E0EBFC",
+  },
 };
 
 const fonts = {

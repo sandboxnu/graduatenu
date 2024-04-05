@@ -1,18 +1,24 @@
-import { Badge, Box, Flex, Heading, Link, Stack, Text } from "@chakra-ui/react";
+import {
+  Accordion,
+  AccordionButton,
+  AccordionIcon,
+  AccordionItem,
+  AccordionPanel,
+  Badge,
+  Box,
+  Flex,
+  Heading,
+  Link,
+  Stack,
+  Text,
+} from "@chakra-ui/react";
 import {
   MajorValidationError,
   MajorValidationResult,
   PlanModel,
   ScheduleCourse2,
 } from "@graduate/common";
-import {
-  memo,
-  PropsWithChildren,
-  ReactNode,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { memo, PropsWithChildren, useEffect, useRef, useState } from "react";
 import { DraggableScheduleCourse } from "../ScheduleCourse";
 import SidebarSection from "./SidebarSection";
 import {
@@ -36,6 +42,7 @@ import {
 import { useFetchCourses, useMajor } from "../../hooks";
 import { HelperToolTip } from "../Help";
 import NUPathSection from "./NUPathSection";
+import { InfoIcon } from "@chakra-ui/icons";
 
 export enum SidebarValidationStatus {
   Loading = "Loading",
@@ -198,34 +205,12 @@ const Sidebar: React.FC<SidebarProps> = memo(
 
     const creditsTaken = totalCreditsInSchedule(selectedPlan.schedule);
 
-    const sidebarHelperText = (
-      <Stack py="xs">
-        <Text>
-          The sidebar is our version of the degree audit. We attempt to display
-          the same requirements you see in the course catalog and validate your
-          plan against them.
-        </Text>
-        <Text>
-          Presently, we try to to satisfy as many requirements as possible with
-          your plan. Hence, while you are filling your plan in, some of your
-          courses may temporarily satisfy a different requirement than intended.
-          We apologize for any confusion and are actively working on improving
-          this.
-        </Text>
-        <Text>
-          Finally, if you notice something incorrect in your requirements,
-          please let us know through the bug report button up top!
-        </Text>
-      </Stack>
-    );
-
     return (
       <SidebarContainer
         title={major.name}
         subtitle={selectedPlan.concentration}
         creditsTaken={creditsTaken}
         creditsToTake={major.totalCreditsRequired}
-        helperText={sidebarHelperText}
         renderCoopBlock
         renderBetaMajorBlock={major.metadata?.verified !== true}
       >
@@ -318,7 +303,6 @@ interface SidebarContainerProps {
   creditsToTake?: number;
   renderCoopBlock?: boolean;
   renderBetaMajorBlock?: boolean;
-  helperText?: ReactNode;
 }
 
 export const NoPlanSidebar: React.FC = () => {
@@ -332,7 +316,6 @@ const SidebarContainer: React.FC<PropsWithChildren<SidebarContainerProps>> = ({
   creditsToTake,
   renderCoopBlock,
   renderBetaMajorBlock,
-  helperText,
   children,
 }) => {
   return (
@@ -370,7 +353,6 @@ const SidebarContainer: React.FC<PropsWithChildren<SidebarContainerProps>> = ({
             >
               {title}
             </Heading>
-            {helperText && <HelperToolTip label={helperText} />}
           </Flex>
           {subtitle && (
             <Text fontSize="sm" color="primary.blue.dark.main">
@@ -378,6 +360,34 @@ const SidebarContainer: React.FC<PropsWithChildren<SidebarContainerProps>> = ({
             </Text>
           )}
         </Box>
+        <Accordion pb="sm" allowToggle>
+          <AccordionItem
+            borderRadius="lg"
+            backgroundColor="informationBadge.back"
+            border="1px #5F6CF6 solid"
+          >
+            <AccordionButton>
+              <InfoIcon mr="xs" color="informationBadge.main" />
+              <Text
+                fontWeight="semibold"
+                textAlign="left"
+                fontSize="md"
+                flex="1"
+              >
+                Heads up!
+              </Text>
+              <AccordionIcon color="informationBadge.main" />
+            </AccordionButton>
+            <AccordionPanel>
+              <Text fontSize="sm">
+                This is our representation of the degree audit. It may not be
+                fully accurate. Kindly always reference the actual degree audit
+                for validating your graduation eligibility. We are actively
+                working to improve this.
+              </Text>
+            </AccordionPanel>
+          </AccordionItem>
+        </Accordion>
         {creditsTaken !== undefined && (
           <Flex mb="sm" alignItems="baseline" columnGap="xs">
             <Text
