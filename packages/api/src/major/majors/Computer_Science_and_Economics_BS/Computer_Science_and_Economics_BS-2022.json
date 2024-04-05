@@ -1,5 +1,9 @@
 {
   "name": "Computer Science and Economics, BS",
+  "metadata": {
+    "verified": true,
+    "lastEdited": "2/4/2024"
+  },
   "totalCreditsRequired": 134,
   "yearVersion": 2022,
   "requirementSections": [
