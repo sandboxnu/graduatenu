@@ -182,7 +182,6 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
 
   const disableButton = isGuest && getLocalPlansLength() > 4;
   const showCoachMark = !selectedPlanId && !isOpen;
-  // const disableButton = true;
 
   return (
     <>
