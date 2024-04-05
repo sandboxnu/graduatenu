@@ -20,6 +20,7 @@ import {
   CreatePlanDto,
   CreatePlanDtoWithoutSchedule,
   PlanModel,
+  convertToOptionObjects,
 } from "@graduate/common";
 import { useRouter } from "next/router";
 import { Dispatch, SetStateAction, useContext, useState } from "react";
@@ -33,7 +34,7 @@ import {
 import {
   cleanDndIdsFromStudent,
   createEmptySchedule,
-  extractSupportedMajorNames,
+  extractSupportedMajorOptions,
   extractSupportedMajorYears,
   handleApiClientError,
   noLeadOrTrailWhitespacePattern,
@@ -138,6 +139,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
   const catalogYear = watch("catalogYear");
   const majorName = watch("major");
   const concentration = watch("concentration");
+  const agreeToBetaMajor = watch("agreeToBetaMajor");
 
   const yearSupportedMajors =
     supportedMajorsData?.supportedMajors[catalogYear ?? 0];
@@ -152,11 +154,15 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
 
   const majorHasConcentrations = majorConcentrations.concentrations.length > 0;
 
+  const isValidatedMajor =
+    yearSupportedMajors?.[majorName ?? ""]?.verified ?? false;
+
   const isValidForm =
     title &&
     catalogYear &&
     majorName &&
-    (!isConcentrationRequired || concentration);
+    (!isConcentrationRequired || concentration) &&
+    (!isValidatedMajor ? agreeToBetaMajor : true);
 
   const noMajorHelperLabel = (
     <Stack>
@@ -237,7 +243,9 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                       placeholder="Select a Catalog Year"
                       name="catalogYear"
                       control={control}
-                      options={extractSupportedMajorYears(supportedMajorsData)}
+                      options={convertToOptionObjects(
+                        extractSupportedMajorYears(supportedMajorsData)
+                      )}
                       onChangeSideEffect={(val: string | null) => {
                         const newYear = val ? parseInt(val, 10) : null;
                         if (newYear !== catalogYear) {
@@ -270,7 +278,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                       placeholder="Select a Major"
                       name="major"
                       control={control}
-                      options={extractSupportedMajorNames(
+                      options={extractSupportedMajorOptions(
                         catalogYear,
                         supportedMajorsData
                       )}
@@ -287,7 +295,9 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                         label="Concentrations"
                         name="concentration"
                         placeholder="Select a Concentration"
-                        options={majorConcentrations.concentrations}
+                        options={convertToOptionObjects(
+                          majorConcentrations.concentrations
+                        )}
                         control={control}
                         rules={{
                           required:
@@ -295,6 +305,20 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                             "Concentration is required",
                         }}
                       />
+                    )}
+                    {majorName && !isValidatedMajor && (
+                      <Flex alignItems="center">
+                        <Checkbox
+                          mr="md"
+                          {...register("agreeToBetaMajor", {
+                            required: "You must agree to continue",
+                          })}
+                        />
+                        <Text>
+                          I understand that I am selecting a beta major and that
+                          the requirements may not be accurate.
+                        </Text>
+                      </Flex>
                     )}
                   </>
                 )}

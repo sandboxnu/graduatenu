@@ -70,6 +70,7 @@ export class MajorService {
     return {
       concentrations,
       minRequiredConcentrations: major.concentrations?.minOptions ?? 0,
+      verified: major.metadata?.verified ?? false,
     };
   }
 

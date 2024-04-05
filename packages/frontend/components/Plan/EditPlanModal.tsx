@@ -16,7 +16,11 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { API } from "@graduate/api-client";
-import { PlanModel, UpdatePlanDto } from "@graduate/common";
+import {
+  PlanModel,
+  UpdatePlanDto,
+  convertToOptionObjects,
+} from "@graduate/common";
 import { useRouter } from "next/router";
 import { useCallback, useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -27,7 +31,7 @@ import {
   useSupportedMajors,
 } from "../../hooks";
 import {
-  extractSupportedMajorNames,
+  extractSupportedMajorOptions,
   extractSupportedMajorYears,
   handleApiClientError,
   noLeadOrTrailWhitespacePattern,
@@ -47,6 +51,7 @@ type EditPlanInput = {
   major: string;
   catalogYear: number;
   concentration: string;
+  agreeToBetaMajor: boolean;
 };
 
 export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
@@ -107,6 +112,7 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
   const catalogYear = watch("catalogYear");
   const majorName = watch("major");
   const concentration = watch("concentration");
+  const agreeToBetaMajor = watch("agreeToBetaMajor");
 
   const yearSupportedMajors =
     supportedMajorsData?.supportedMajors[catalogYear ?? 0];
@@ -121,11 +127,15 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
 
   const majorHasConcentrations = majorConcentrations.concentrations.length > 0;
 
+  const isValidatedMajor =
+    yearSupportedMajors?.[majorName ?? ""]?.verified ?? false;
+
   const isValidForm =
     title &&
     catalogYear &&
     majorName &&
-    (!isConcentrationRequired || concentration);
+    (!isConcentrationRequired || concentration) &&
+    (!isValidatedMajor ? agreeToBetaMajor : true);
 
   const onSubmitHandler = async (payload: UpdatePlanDto) => {
     // no submitting till the curr plan has been fetched
@@ -174,6 +184,7 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
 
     mutate(USE_STUDENT_WITH_PLANS_SWR_KEY);
     toast.success("Plan updated successfully.");
+    onCloseModal();
   };
 
   const noMajorHelperLabel = (
@@ -247,7 +258,9 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                       placeholder="Select a Catalog Year"
                       name="catalogYear"
                       control={control}
-                      options={extractSupportedMajorYears(supportedMajorsData)}
+                      options={convertToOptionObjects(
+                        extractSupportedMajorYears(supportedMajorsData)
+                      )}
                       onChangeSideEffect={(val: string | null) => {
                         const newYear = val ? parseInt(val, 10) : null;
                         if (newYear !== catalogYear) {
@@ -278,7 +291,7 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                       placeholder="Select a Major"
                       name="major"
                       control={control}
-                      options={extractSupportedMajorNames(
+                      options={extractSupportedMajorOptions(
                         catalogYear,
                         supportedMajorsData
                       )}
@@ -294,7 +307,9 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                         label="Concentrations"
                         name="concentration"
                         placeholder="Select a Concentration"
-                        options={majorConcentrations.concentrations}
+                        options={convertToOptionObjects(
+                          majorConcentrations.concentrations
+                        )}
                         control={control}
                         rules={{
                           required:
@@ -302,6 +317,20 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                             "Concentration is required",
                         }}
                       />
+                    )}
+                    {majorName && !isValidatedMajor && (
+                      <Flex alignItems="center">
+                        <Checkbox
+                          mr="md"
+                          {...register("agreeToBetaMajor", {
+                            required: "You must agree to continue",
+                          })}
+                        />
+                        <Text>
+                          I understand that I am selecting a beta major and that
+                          the requirements may not be accurate.
+                        </Text>
+                      </Flex>
                     )}
                   </>
                 )}

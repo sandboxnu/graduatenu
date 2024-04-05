@@ -6,6 +6,8 @@ export const WEAK_PASSWORD_MSG =
   "A password should be at least 8 characters with digits and letters";
 export const SEARCH_NEU_FETCH_COURSE_ERROR_MSG =
   "Sorry, we can't load details for this course right now 😞. We rely on SearchNEU for our course details, and there may be an ongoing issue on their end. We recommend refreshing the page and trying again soon.";
+export const BETA_MAJOR_TOOLTIP_MSG =
+  "Requirements for beta majors have not been validated and therefore may be inconsistent with your degree audit";
 
 export const defaultGuestStudent: GetStudentResponse = {
   uuid: undefined,
