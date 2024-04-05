@@ -277,7 +277,10 @@ const HomePage: NextPage = () => {
                 setSelectedPlanId={setSelectedPlanId}
                 plans={student.plans}
               />
-              <AddPlanModal setSelectedPlanId={setSelectedPlanId} />
+              <AddPlanModal
+                setSelectedPlanId={setSelectedPlanId}
+                selectedPlanId={selectedPlanId}
+              />
               {selectedPlan && <EditPlanModal plan={selectedPlan} />}
               {selectedPlan && (
                 <DuplicatePlanButton
