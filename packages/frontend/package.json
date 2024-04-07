@@ -16,6 +16,7 @@
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
     "@fontsource/montserrat-alternates": "^4.5.9",
+    "@graduate/api-client": "workspace:*",
     "@graduate/common": "workspace:*",
     "framer-motion": "^6",
     "immer": "^9.0.15",
