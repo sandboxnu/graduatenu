@@ -36,16 +36,29 @@ class APIClient {
     params?: any,
     headers?: any
   ): Promise<T> {
+    const deployedURL = `${window.location.protocol}//api.${window.location.hostname}/api`;
+    const localhostURL = "/api";
+    const baseURL =
+      window.location.hostname === "localhost" ? localhostURL : deployedURL;
+
+    const reqURL = baseURL + url;
+
     const res = (
-      await this.axios.request({ method, url, data: body, params, headers })
+      await this.axios.request({
+        method,
+        url: reqURL,
+        data: body,
+        params,
+        headers,
+      })
     ).data;
     return responseClass ? plainToInstance(responseClass, res) : res;
   }
 
-  constructor(baseURL = "/api") {
+  constructor() {
     this.axios = Axios.create({
-      baseURL: baseURL,
       headers: { "content-type": "application/json" },
+      withCredentials: true,
     });
   }
 
