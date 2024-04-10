@@ -161,11 +161,13 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
     yearSupportedMajors?.[majorName ?? ""]?.verified ?? false;
 
   const isValidForm =
-    title &&
-    catalogYear &&
-    majorName &&
-    (!isConcentrationRequired || concentration) &&
-    (!isValidatedMajor ? agreeToBetaMajor : true);
+    (title &&
+      catalogYear &&
+      majorName &&
+      (!isConcentrationRequired || concentration) &&
+      (!isValidatedMajor ? agreeToBetaMajor : true)) ||
+    // Valid plan for no major selected
+    (title && isNoMajorSelected);
 
   const noMajorHelperLabel = (
     <Stack>
