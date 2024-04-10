@@ -29,7 +29,6 @@ import {
 import { useFetchCourses, useMajor } from "../../hooks";
 import { HelperToolTip } from "../Help";
 import NUPathSection from "./NUPathSection";
-import { InfoIcon } from "@chakra-ui/icons";
 import DropdownWarning from "./DropdownWarning";
 
 export enum SidebarValidationStatus {
