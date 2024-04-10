@@ -14,6 +14,7 @@ import {
   ModalOverlay,
   VStack,
   useDisclosure,
+  Tooltip,
 } from "@chakra-ui/react";
 import { API } from "@graduate/api-client";
 import {
@@ -48,10 +49,12 @@ import { getLocalPlansLength } from "../../utils/plan/getLocalPlansLength";
 
 interface AddPlanModalProps {
   setSelectedPlanId: Dispatch<SetStateAction<number | undefined | null>>;
+  selectedPlanId: number | undefined | null;
 }
 
 export const AddPlanModal: React.FC<AddPlanModalProps> = ({
   setSelectedPlanId,
+  selectedPlanId,
 }) => {
   const router = useRouter();
   const { onOpen, onClose: onCloseDisplay, isOpen } = useDisclosure();
@@ -178,6 +181,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
   );
 
   const disableButton = isGuest && getLocalPlansLength() > 4;
+  const showCoachMark = !selectedPlanId && !isOpen;
 
   return (
     <>
@@ -186,15 +190,26 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
         shouldWrapChildren
         isDisabled={!disableButton}
       >
-        <BlueButton
-          leftIcon={<AddIcon />}
-          onClick={onOpen}
-          ml="xs"
-          size="md"
-          disabled={disableButton}
+        <Tooltip
+          shouldWrapChildren
+          label="Click here to start!"
+          hasArrow
+          fontSize="md"
+          borderRadius="sm"
+          shadow="lg"
+          isDisabled
+          isOpen={showCoachMark}
         >
-          New Plan
-        </BlueButton>
+          <BlueButton
+            leftIcon={<AddIcon />}
+            onClick={onOpen}
+            ml="xs"
+            size="md"
+            disabled={disableButton}
+          >
+            New Plan
+          </BlueButton>
+        </Tooltip>
       </GraduateToolTip>
       <Modal isOpen={isOpen} onClose={() => onCloseAddPlanModal()} size="md">
         <ModalOverlay />
