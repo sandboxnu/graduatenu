@@ -306,14 +306,14 @@ const HomePage: NextPage = () => {
                   setIsRemove={setIsRemove}
                 />
                 <Divider borderColor="neutral.200" borderWidth={1} />
+                <TransferCourses
+                  isExpanded={isTransferCoursesExpanded}
+                  toggleExpanded={() =>
+                    setIsTransferCoursesExpanded(!isTransferCoursesExpanded)
+                  }
+                />
               </>
             )}
-            <TransferCourses
-              isExpanded={isTransferCoursesExpanded}
-              toggleExpanded={() =>
-                setIsTransferCoursesExpanded(!isTransferCoursesExpanded)
-              }
-            />
           </Flex>
         </Box>
       </PageLayout>
