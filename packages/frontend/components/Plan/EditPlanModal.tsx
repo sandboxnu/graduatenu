@@ -131,11 +131,13 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
     yearSupportedMajors?.[majorName ?? ""]?.verified ?? false;
 
   const isValidForm =
-    title &&
-    catalogYear &&
-    majorName &&
-    (!isConcentrationRequired || concentration) &&
-    (!isValidatedMajor ? agreeToBetaMajor : true);
+    (title &&
+      catalogYear &&
+      majorName &&
+      (!isConcentrationRequired || concentration) &&
+      (!isValidatedMajor ? agreeToBetaMajor : true)) ||
+    // Valid plan for no major selected
+    (title && isNoMajorSelected);
 
   const onSubmitHandler = async (payload: UpdatePlanDto) => {
     // no submitting till the curr plan has been fetched
