@@ -1,17 +1,4 @@
-import {
-  Accordion,
-  AccordionButton,
-  AccordionIcon,
-  AccordionItem,
-  AccordionPanel,
-  Badge,
-  Box,
-  Flex,
-  Heading,
-  Link,
-  Stack,
-  Text,
-} from "@chakra-ui/react";
+import { Badge, Box, Flex, Heading, Link, Stack, Text } from "@chakra-ui/react";
 import {
   MajorValidationError,
   MajorValidationResult,
@@ -43,6 +30,7 @@ import { useFetchCourses, useMajor } from "../../hooks";
 import { HelperToolTip } from "../Help";
 import NUPathSection from "./NUPathSection";
 import { InfoIcon } from "@chakra-ui/icons";
+import DropdownWarning from "./DropdownWarning";
 
 export enum SidebarValidationStatus {
   Loading = "Loading",
@@ -360,34 +348,7 @@ const SidebarContainer: React.FC<PropsWithChildren<SidebarContainerProps>> = ({
             </Text>
           )}
         </Box>
-        <Accordion pb="sm" allowToggle>
-          <AccordionItem
-            borderRadius="lg"
-            backgroundColor="informationBadge.back"
-            border="1px #5F6CF6 solid"
-          >
-            <AccordionButton>
-              <InfoIcon mr="xs" color="informationBadge.main" />
-              <Text
-                fontWeight="semibold"
-                textAlign="left"
-                fontSize="md"
-                flex="1"
-              >
-                Heads up!
-              </Text>
-              <AccordionIcon color="informationBadge.main" />
-            </AccordionButton>
-            <AccordionPanel>
-              <Text fontSize="sm">
-                This is our representation of the degree audit. It may not be
-                fully accurate. Kindly always reference the actual degree audit
-                for validating your graduation eligibility. We are actively
-                working to improve this.
-              </Text>
-            </AccordionPanel>
-          </AccordionItem>
-        </Accordion>
+        <DropdownWarning />
         {creditsTaken !== undefined && (
           <Flex mb="sm" alignItems="baseline" columnGap="xs">
             <Text
