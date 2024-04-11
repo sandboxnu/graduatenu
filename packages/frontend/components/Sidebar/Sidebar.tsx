@@ -258,6 +258,7 @@ export const NoMajorSidebar: React.FC<NoMajorSidebarProps> = ({
       title="No Major"
       creditsTaken={creditsTaken}
       renderCoopBlock
+      renderDropdownWarning={false}
     >
       <Stack px="md">
         <Text>
@@ -290,6 +291,7 @@ interface SidebarContainerProps {
   creditsToTake?: number;
   renderCoopBlock?: boolean;
   renderBetaMajorBlock?: boolean;
+  renderDropdownWarning?: boolean;
 }
 
 export const NoPlanSidebar: React.FC = () => {
@@ -303,6 +305,7 @@ const SidebarContainer: React.FC<PropsWithChildren<SidebarContainerProps>> = ({
   creditsToTake,
   renderCoopBlock,
   renderBetaMajorBlock,
+  renderDropdownWarning = true,
   children,
 }) => {
   return (
@@ -348,7 +351,7 @@ const SidebarContainer: React.FC<PropsWithChildren<SidebarContainerProps>> = ({
             </Text>
           )}
         </Box>
-        <DropdownWarning />
+        {renderDropdownWarning && <DropdownWarning />}
         {creditsTaken !== undefined && (
           <Flex mb="sm" alignItems="baseline" columnGap="xs">
             <Text
