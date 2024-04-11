@@ -33,10 +33,10 @@ const SidebarSection: React.FC<SidebarSectionProps> = ({
   const green = "states.success.main";
 
   const warningLabel = section.warnings && (
-    <Stack py="xs">
+    <Stack p="sm">
       <Text>
         Unfortunately, we currently have no way of verifying the following.
-        Please ensure that you have a closer look yourself.
+        Please take a closer look yourself.
       </Text>
       {section.warnings.map((warning, idx) => (
         <Text key={idx}>
@@ -109,7 +109,7 @@ const SidebarSection: React.FC<SidebarSectionProps> = ({
             mt="4xs"
             p="xs"
           >
-            {/* 
+            {/*
               The following three icons appear and disappear based on opacity to allow for transitions (if they're conditionally rendered, then transitions can't occur).
             */}
             <CheckIcon

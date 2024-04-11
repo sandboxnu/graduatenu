@@ -8,7 +8,7 @@ interface HelperToolTipProps {
 
 export const HelperToolTip: React.FC<HelperToolTipProps> = ({ label }) => {
   return (
-    <GraduateToolTip label={label} placement="top">
+    <GraduateToolTip label={label} placement="top" p="sm">
       <QuestionOutlineIcon color="primary.blue.dark.main" />
     </GraduateToolTip>
   );
