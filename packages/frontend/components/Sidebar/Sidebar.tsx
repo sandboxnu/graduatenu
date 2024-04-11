@@ -311,6 +311,7 @@ const SidebarContainer: React.FC<PropsWithChildren<SidebarContainerProps>> = ({
       backgroundColor="neutral.50"
       borderRight="1px"
       borderRightColor="neutral.200"
+      minH="100%"
     >
       <Box px="md" pb="md">
         <Box pb="sm">
