@@ -52,6 +52,7 @@ export const PlanSelect: React.FC<PlanSelectProps> = ({
     ? (option: FilterOptionOption<any>, inputValue: string) => {
         if (inputValue.length !== 0) {
           const list = new Fuse(options, {
+            keys: ["value"],
             isCaseSensitive: false,
             shouldSort: true,
             ignoreLocation: true,
@@ -60,7 +61,7 @@ export const PlanSelect: React.FC<PlanSelectProps> = ({
             threshold: 0.4,
           }).search(inputValue);
           return list
-            .map((element) => element.item)
+            .map((element) => element.item.value)
             .includes(option.data.value);
         } else {
           return true;

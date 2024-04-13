@@ -321,6 +321,8 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                             isConcentrationRequired &&
                             "Concentration is required",
                         }}
+                        isSearchable
+                        useFuzzySearch
                       />
                     )}
                     {majorName && !isValidatedMajor && (
