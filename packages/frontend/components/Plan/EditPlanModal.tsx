@@ -302,6 +302,7 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                       }}
                       rules={{ required: "Major is required." }}
                       isSearchable
+                      useFuzzySearch
                       isDisabled={!catalogYear}
                     />
                     {majorHasConcentrations && (
@@ -318,6 +319,8 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                             isConcentrationRequired &&
                             "Concentration is required",
                         }}
+                        isSearchable
+                        useFuzzySearch
                       />
                     )}
                     {majorName && !isValidatedMajor && (
