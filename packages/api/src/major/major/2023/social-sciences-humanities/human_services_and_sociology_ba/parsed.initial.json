@@ -2,7 +2,7 @@
   "name": "Human Services and Sociology, BA",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/13/2024"
+    "lastEdited": "4/14/2024"
   },
   "totalCreditsRequired": 128,
   "yearVersion": 2023,
@@ -58,12 +58,6 @@
     },
     {
       "type": "SECTION",
-      "title": "Human Services Elective",
-      "requirements": [],
-      "minRequirementCount": 0
-    },
-    {
-      "type": "SECTION",
       "title": "Senior Capstone 1",
       "requirements": [
         {
@@ -95,24 +89,6 @@
         }
       ],
       "minRequirementCount": 3
-    },
-    {
-      "type": "SECTION",
-      "title": "Introductory Electives",
-      "requirements": [],
-      "minRequirementCount": 0
-    },
-    {
-      "type": "SECTION",
-      "title": "Intermediate-Level Elective",
-      "requirements": [],
-      "minRequirementCount": 0
-    },
-    {
-      "type": "SECTION",
-      "title": "Advanced-Level Elective",
-      "requirements": [],
-      "minRequirementCount": 0
     },
     {
       "type": "SECTION",

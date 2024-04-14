@@ -2,7 +2,7 @@
   "name": "Communication Studies and Speech-Language Pathology and Audiology, BS",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/13/2024"
+    "lastEdited": "4/14/2024"
   },
   "totalCreditsRequired": 132,
   "yearVersion": 2023,
@@ -28,12 +28,6 @@
         }
       ],
       "minRequirementCount": 1
-    },
-    {
-      "type": "SECTION",
-      "title": "Communication Studies Requirements",
-      "requirements": [],
-      "minRequirementCount": 0
     },
     {
       "type": "SECTION",
@@ -197,18 +191,6 @@
         }
       ],
       "minRequirementCount": 14
-    },
-    {
-      "type": "SECTION",
-      "title": "Communication Studies Electives",
-      "requirements": [],
-      "minRequirementCount": 0
-    },
-    {
-      "type": "SECTION",
-      "title": "Speech-Language Pathology and Audiology Requirements",
-      "requirements": [],
-      "minRequirementCount": 0
     },
     {
       "type": "SECTION",

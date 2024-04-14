@@ -2,7 +2,7 @@
   "name": "Africana Studies and Human Services, BA",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/13/2024"
+    "lastEdited": "4/14/2024"
   },
   "totalCreditsRequired": 128,
   "yearVersion": 2023,
@@ -159,12 +159,6 @@
     },
     {
       "type": "SECTION",
-      "title": "Electives",
-      "requirements": [],
-      "minRequirementCount": 0
-    },
-    {
-      "type": "SECTION",
       "title": "Foundational Courses",
       "requirements": [
         {
@@ -231,12 +225,6 @@
         }
       ],
       "minRequirementCount": 7
-    },
-    {
-      "type": "SECTION",
-      "title": "Electives",
-      "requirements": [],
-      "minRequirementCount": 0
     },
     {
       "type": "SECTION",

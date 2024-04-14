@@ -2,7 +2,7 @@
   "name": "Linguistics, BS",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/13/2024"
+    "lastEdited": "4/14/2024"
   },
   "totalCreditsRequired": 128,
   "yearVersion": 2023,
@@ -204,12 +204,6 @@
         }
       ],
       "minRequirementCount": 8
-    },
-    {
-      "type": "SECTION",
-      "title": "Supporting Courses",
-      "requirements": [],
-      "minRequirementCount": 0
     }
   ],
   "concentrations": {

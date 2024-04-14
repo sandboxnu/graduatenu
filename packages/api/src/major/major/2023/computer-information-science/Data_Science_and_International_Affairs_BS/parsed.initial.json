@@ -2,7 +2,7 @@
   "name": "Data Science and International Affairs, BS",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/13/2024"
+    "lastEdited": "4/14/2024"
   },
   "totalCreditsRequired": 131,
   "yearVersion": 2023,
@@ -292,18 +292,6 @@
         }
       ],
       "minRequirementCount": 5
-    },
-    {
-      "type": "SECTION",
-      "title": "International Experiential Learning",
-      "requirements": [],
-      "minRequirementCount": 0
-    },
-    {
-      "type": "SECTION",
-      "title": "Global Dynamics Requirement",
-      "requirements": [],
-      "minRequirementCount": 0
     },
     {
       "type": "SECTION",
@@ -829,12 +817,6 @@
     },
     {
       "type": "SECTION",
-      "title": "Regional Analysis Requirement",
-      "requirements": [],
-      "minRequirementCount": 0
-    },
-    {
-      "type": "SECTION",
       "title": "Universitywide Requirements",
       "requirements": [
         {
@@ -1137,12 +1119,6 @@
     },
     {
       "type": "SECTION",
-      "title": "International Affairs Elective",
-      "requirements": [],
-      "minRequirementCount": 1
-    },
-    {
-      "type": "SECTION",
       "title": "",
       "requirements": [
         {
@@ -1287,12 +1263,6 @@
         }
       ],
       "minRequirementCount": 1
-    },
-    {
-      "type": "SECTION",
-      "title": "Required General Electives",
-      "requirements": [],
-      "minRequirementCount": 0
     }
   ],
   "concentrations": {

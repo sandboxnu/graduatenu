@@ -2,7 +2,7 @@
   "name": "Media Arts and Communication Studies, BA",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/13/2024"
+    "lastEdited": "4/14/2024"
   },
   "totalCreditsRequired": 128,
   "yearVersion": 2023,
@@ -177,12 +177,6 @@
     },
     {
       "type": "SECTION",
-      "title": "Art and Design Electives",
-      "requirements": [],
-      "minRequirementCount": 0
-    },
-    {
-      "type": "SECTION",
       "title": "Communication Studies Common Requirements",
       "requirements": [
         {
@@ -349,12 +343,6 @@
         }
       ],
       "minRequirementCount": 1
-    },
-    {
-      "type": "SECTION",
-      "title": "Communication Studies Electives",
-      "requirements": [],
-      "minRequirementCount": 0
     },
     {
       "type": "SECTION",

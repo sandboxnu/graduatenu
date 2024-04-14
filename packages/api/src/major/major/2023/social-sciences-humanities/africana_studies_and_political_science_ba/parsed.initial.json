@@ -2,7 +2,7 @@
   "name": "Africana Studies and Political Science, BA",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/13/2024"
+    "lastEdited": "4/14/2024"
   },
   "totalCreditsRequired": 128,
   "yearVersion": 2023,
@@ -119,12 +119,6 @@
     },
     {
       "type": "SECTION",
-      "title": "African American/African Studies Electives",
-      "requirements": [],
-      "minRequirementCount": 0
-    },
-    {
-      "type": "SECTION",
       "title": "Core Courses",
       "requirements": [
         {
@@ -181,12 +175,6 @@
         }
       ],
       "minRequirementCount": 1
-    },
-    {
-      "type": "SECTION",
-      "title": "Political Science Electives",
-      "requirements": [],
-      "minRequirementCount": 0
     }
   ],
   "concentrations": {

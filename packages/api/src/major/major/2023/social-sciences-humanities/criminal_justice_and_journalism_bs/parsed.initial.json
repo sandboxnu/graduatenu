@@ -2,7 +2,7 @@
   "name": "Criminal Justice and Journalism, BS",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/13/2024"
+    "lastEdited": "4/14/2024"
   },
   "totalCreditsRequired": 129,
   "yearVersion": 2023,
@@ -161,12 +161,6 @@
     },
     {
       "type": "SECTION",
-      "title": "Criminal Justice Elective",
-      "requirements": [],
-      "minRequirementCount": 0
-    },
-    {
-      "type": "SECTION",
       "title": "Introductory Journalism Course",
       "requirements": [
         {
@@ -227,12 +221,6 @@
         }
       ],
       "minRequirementCount": 1
-    },
-    {
-      "type": "SECTION",
-      "title": "Journalism Electives",
-      "requirements": [],
-      "minRequirementCount": 0
     },
     {
       "type": "SECTION",

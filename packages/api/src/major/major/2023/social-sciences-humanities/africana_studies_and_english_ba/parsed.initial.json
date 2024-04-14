@@ -2,7 +2,7 @@
   "name": "Africana Studies and English, BA",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/13/2024"
+    "lastEdited": "4/14/2024"
   },
   "totalCreditsRequired": 128,
   "yearVersion": 2023,
@@ -643,12 +643,6 @@
         }
       ],
       "minRequirementCount": 1
-    },
-    {
-      "type": "SECTION",
-      "title": "English Electives",
-      "requirements": [],
-      "minRequirementCount": 0
     },
     {
       "type": "SECTION",

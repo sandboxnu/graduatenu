@@ -2,7 +2,7 @@
   "name": "Communication Studies and Sociology, BA",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/13/2024"
+    "lastEdited": "4/14/2024"
   },
   "totalCreditsRequired": 128,
   "yearVersion": 2023,
@@ -183,12 +183,6 @@
     },
     {
       "type": "SECTION",
-      "title": "Communication Studies Electives",
-      "requirements": [],
-      "minRequirementCount": 0
-    },
-    {
-      "type": "SECTION",
       "title": "Required Sociology Courses",
       "requirements": [
         {
@@ -213,24 +207,6 @@
         }
       ],
       "minRequirementCount": 4
-    },
-    {
-      "type": "SECTION",
-      "title": "Introductory Electives",
-      "requirements": [],
-      "minRequirementCount": 0
-    },
-    {
-      "type": "SECTION",
-      "title": "Intermediate-Level Elective",
-      "requirements": [],
-      "minRequirementCount": 0
-    },
-    {
-      "type": "SECTION",
-      "title": "Advanced-Level Elective",
-      "requirements": [],
-      "minRequirementCount": 0
     },
     {
       "type": "SECTION",

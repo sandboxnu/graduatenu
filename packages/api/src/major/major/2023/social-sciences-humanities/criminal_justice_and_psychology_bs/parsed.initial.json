@@ -2,7 +2,7 @@
   "name": "Criminal Justice and Psychology, BS",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/13/2024"
+    "lastEdited": "4/14/2024"
   },
   "totalCreditsRequired": 128,
   "yearVersion": 2023,
@@ -177,12 +177,6 @@
         }
       ],
       "minRequirementCount": 2
-    },
-    {
-      "type": "SECTION",
-      "title": "Criminal Justice Electives",
-      "requirements": [],
-      "minRequirementCount": 0
     },
     {
       "type": "SECTION",
@@ -414,12 +408,6 @@
         }
       ],
       "minRequirementCount": 1
-    },
-    {
-      "type": "SECTION",
-      "title": "Electives",
-      "requirements": [],
-      "minRequirementCount": 0
     },
     {
       "type": "SECTION",

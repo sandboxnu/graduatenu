@@ -2,7 +2,7 @@
   "name": "Human Services and International Affairs, BA",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/13/2024"
+    "lastEdited": "4/14/2024"
   },
   "totalCreditsRequired": 128,
   "yearVersion": 2023,
@@ -61,12 +61,6 @@
     },
     {
       "type": "SECTION",
-      "title": "Human Services Electives",
-      "requirements": [],
-      "minRequirementCount": 0
-    },
-    {
-      "type": "SECTION",
       "title": "Required Courses",
       "requirements": [
         {
@@ -111,18 +105,6 @@
         }
       ],
       "minRequirementCount": 4
-    },
-    {
-      "type": "SECTION",
-      "title": "International Experiential Learning",
-      "requirements": [],
-      "minRequirementCount": 0
-    },
-    {
-      "type": "SECTION",
-      "title": "International Affairs Elective",
-      "requirements": [],
-      "minRequirementCount": 1
     },
     {
       "type": "SECTION",
@@ -185,12 +167,6 @@
         }
       ],
       "minRequirementCount": 11
-    },
-    {
-      "type": "SECTION",
-      "title": "Global Dynamics",
-      "requirements": [],
-      "minRequirementCount": 0
     },
     {
       "type": "SECTION",
@@ -713,12 +689,6 @@
         }
       ],
       "minRequirementCount": 85
-    },
-    {
-      "type": "SECTION",
-      "title": "Regional Analysis Requirement",
-      "requirements": [],
-      "minRequirementCount": 0
     },
     {
       "type": "SECTION",

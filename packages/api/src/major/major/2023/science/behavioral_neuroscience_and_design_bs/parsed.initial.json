@@ -2,7 +2,7 @@
   "name": "Behavioral Neuroscience and Design, BS",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/13/2024"
+    "lastEdited": "4/14/2024"
   },
   "totalCreditsRequired": 133,
   "yearVersion": 2023,
@@ -401,18 +401,6 @@
     },
     {
       "type": "SECTION",
-      "title": "Art + Design History Elective",
-      "requirements": [],
-      "minRequirementCount": 0
-    },
-    {
-      "type": "SECTION",
-      "title": "Art + Design Elective",
-      "requirements": [],
-      "minRequirementCount": 0
-    },
-    {
-      "type": "SECTION",
       "title": "Degree Capstone Project",
       "requirements": [
         {
@@ -422,12 +410,6 @@
         }
       ],
       "minRequirementCount": 1
-    },
-    {
-      "type": "SECTION",
-      "title": "Design Option",
-      "requirements": [],
-      "minRequirementCount": 0
     },
     {
       "type": "SECTION",
@@ -595,12 +577,6 @@
         }
       ],
       "minRequirementCount": 1
-    },
-    {
-      "type": "SECTION",
-      "title": "Required General Electives",
-      "requirements": [],
-      "minRequirementCount": 0
     }
   ],
   "concentrations": {

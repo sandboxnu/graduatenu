@@ -2,7 +2,7 @@
   "name": "Cultural Anthropology and Philosophy, BA",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/13/2024"
+    "lastEdited": "4/14/2024"
   },
   "totalCreditsRequired": 128,
   "yearVersion": 2023,
@@ -36,12 +36,6 @@
     },
     {
       "type": "SECTION",
-      "title": "Area Courses",
-      "requirements": [],
-      "minRequirementCount": 0
-    },
-    {
-      "type": "SECTION",
       "title": "Capstone",
       "requirements": [
         {
@@ -51,12 +45,6 @@
         }
       ],
       "minRequirementCount": 1
-    },
-    {
-      "type": "SECTION",
-      "title": "Electives",
-      "requirements": [],
-      "minRequirementCount": 0
     },
     {
       "type": "SECTION",
@@ -119,12 +107,6 @@
     },
     {
       "type": "SECTION",
-      "title": "Advanced Philosophy Electives",
-      "requirements": [],
-      "minRequirementCount": 0
-    },
-    {
-      "type": "SECTION",
       "title": "Critical Philosophy Elective",
       "requirements": [
         {
@@ -169,12 +151,6 @@
         }
       ],
       "minRequirementCount": 8
-    },
-    {
-      "type": "SECTION",
-      "title": "Philosophy Electives",
-      "requirements": [],
-      "minRequirementCount": 0
     },
     {
       "type": "SECTION",

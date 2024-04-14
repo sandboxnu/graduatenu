@@ -2,7 +2,7 @@
   "name": "Criminal Justice and Philosophy, BS",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/13/2024"
+    "lastEdited": "4/14/2024"
   },
   "totalCreditsRequired": 128,
   "yearVersion": 2023,
@@ -183,12 +183,6 @@
     },
     {
       "type": "SECTION",
-      "title": "Criminal Justice Elective",
-      "requirements": [],
-      "minRequirementCount": 0
-    },
-    {
-      "type": "SECTION",
       "title": "Required Courses",
       "requirements": [
         {
@@ -223,12 +217,6 @@
         }
       ],
       "minRequirementCount": 4
-    },
-    {
-      "type": "SECTION",
-      "title": "Advanced Philosophy Electives",
-      "requirements": [],
-      "minRequirementCount": 0
     },
     {
       "type": "SECTION",
@@ -338,18 +326,6 @@
         }
       ],
       "minRequirementCount": 8
-    },
-    {
-      "type": "SECTION",
-      "title": "Philosophy Electives",
-      "requirements": [],
-      "minRequirementCount": 0
-    },
-    {
-      "type": "SECTION",
-      "title": "Integrative Requirement",
-      "requirements": [],
-      "minRequirementCount": 0
     },
     {
       "type": "SECTION",

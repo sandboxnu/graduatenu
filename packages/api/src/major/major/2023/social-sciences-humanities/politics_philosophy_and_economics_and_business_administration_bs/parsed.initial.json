@@ -2,7 +2,7 @@
   "name": "Politics, Philosophy, and Economics and Business Administration, BS",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/13/2024"
+    "lastEdited": "4/14/2024"
   },
   "totalCreditsRequired": 128,
   "yearVersion": 2023,
@@ -97,12 +97,6 @@
         }
       ],
       "minRequirementCount": 1
-    },
-    {
-      "type": "SECTION",
-      "title": "PPE Elective Coursework",
-      "requirements": [],
-      "minRequirementCount": 0
     },
     {
       "type": "SECTION",

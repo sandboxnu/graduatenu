@@ -2,17 +2,11 @@
   "name": "English and Graphic and Information Design, BA",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/13/2024"
+    "lastEdited": "4/14/2024"
   },
   "totalCreditsRequired": 129,
   "yearVersion": 2023,
   "requirementSections": [
-    {
-      "type": "SECTION",
-      "title": "English Course-Level Requirement",
-      "requirements": [],
-      "minRequirementCount": 0
-    },
     {
       "type": "SECTION",
       "title": "Introduction to College",
@@ -453,12 +447,6 @@
     },
     {
       "type": "SECTION",
-      "title": "English Electives",
-      "requirements": [],
-      "minRequirementCount": 0
-    },
-    {
-      "type": "SECTION",
       "title": "Art and Design at Northeastern",
       "requirements": [
         {
@@ -507,12 +495,6 @@
         }
       ],
       "minRequirementCount": 2
-    },
-    {
-      "type": "SECTION",
-      "title": "Art and Design History",
-      "requirements": [],
-      "minRequirementCount": 0
     },
     {
       "type": "SECTION",

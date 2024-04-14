@@ -2,7 +2,7 @@
   "name": "Mechanical Engineering and History, BSME",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/13/2024"
+    "lastEdited": "4/14/2024"
   },
   "totalCreditsRequired": 141,
   "yearVersion": 2023,
@@ -252,12 +252,6 @@
     },
     {
       "type": "SECTION",
-      "title": "History Elective",
-      "requirements": [],
-      "minRequirementCount": 0
-    },
-    {
-      "type": "SECTION",
       "title": "Pre-1800 History Elective",
       "requirements": [
         {
@@ -342,18 +336,6 @@
         }
       ],
       "minRequirementCount": 1
-    },
-    {
-      "type": "SECTION",
-      "title": "Intermediate History",
-      "requirements": [],
-      "minRequirementCount": 0
-    },
-    {
-      "type": "SECTION",
-      "title": "Advanced History",
-      "requirements": [],
-      "minRequirementCount": 0
     },
     {
       "type": "SECTION",

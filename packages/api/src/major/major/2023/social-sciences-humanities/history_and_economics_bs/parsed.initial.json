@@ -2,7 +2,7 @@
   "name": "History and Economics, BS",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/13/2024"
+    "lastEdited": "4/14/2024"
   },
   "totalCreditsRequired": 128,
   "yearVersion": 2023,
@@ -26,12 +26,6 @@
     },
     {
       "type": "SECTION",
-      "title": "Introductory Level",
-      "requirements": [],
-      "minRequirementCount": 0
-    },
-    {
-      "type": "SECTION",
       "title": "History Seminar and Historical Writing",
       "requirements": [
         {
@@ -46,12 +40,6 @@
         }
       ],
       "minRequirementCount": 2
-    },
-    {
-      "type": "SECTION",
-      "title": "History Elective",
-      "requirements": [],
-      "minRequirementCount": 0
     },
     {
       "type": "SECTION",
@@ -124,18 +112,6 @@
         }
       ],
       "minRequirementCount": 1
-    },
-    {
-      "type": "SECTION",
-      "title": "Intermediate/Advanced History Courses",
-      "requirements": [],
-      "minRequirementCount": 0
-    },
-    {
-      "type": "SECTION",
-      "title": "Advanced History",
-      "requirements": [],
-      "minRequirementCount": 0
     },
     {
       "type": "SECTION",

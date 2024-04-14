@@ -2,7 +2,7 @@
   "name": "International Affairs and International Business, BS",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/13/2024"
+    "lastEdited": "4/14/2024"
   },
   "totalCreditsRequired": 128,
   "yearVersion": 2023,
@@ -73,18 +73,6 @@
     },
     {
       "type": "SECTION",
-      "title": "International Experiential Learning",
-      "requirements": [],
-      "minRequirementCount": 1
-    },
-    {
-      "type": "SECTION",
-      "title": "International Affairs Elective",
-      "requirements": [],
-      "minRequirementCount": 1
-    },
-    {
-      "type": "SECTION",
       "title": "NUpath Requirements",
       "requirements": [
         {
@@ -144,12 +132,6 @@
         }
       ],
       "minRequirementCount": 11
-    },
-    {
-      "type": "SECTION",
-      "title": "Regional Analysis Requirement",
-      "requirements": [],
-      "minRequirementCount": 0
     },
     {
       "type": "SECTION",

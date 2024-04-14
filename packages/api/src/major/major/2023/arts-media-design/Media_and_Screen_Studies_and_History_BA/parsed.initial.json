@@ -2,7 +2,7 @@
   "name": "Media and Screen Studies and History, BA",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/13/2024"
+    "lastEdited": "4/14/2024"
   },
   "totalCreditsRequired": 130,
   "yearVersion": 2023,
@@ -292,12 +292,6 @@
     },
     {
       "type": "SECTION",
-      "title": "History Elective",
-      "requirements": [],
-      "minRequirementCount": 0
-    },
-    {
-      "type": "SECTION",
       "title": "Introductory-Level Course",
       "requirements": [
         {
@@ -309,18 +303,6 @@
         }
       ],
       "minRequirementCount": 1
-    },
-    {
-      "type": "SECTION",
-      "title": "Intermediate/Advanced History",
-      "requirements": [],
-      "minRequirementCount": 0
-    },
-    {
-      "type": "SECTION",
-      "title": "Advanced History",
-      "requirements": [],
-      "minRequirementCount": 0
     },
     {
       "type": "SECTION",

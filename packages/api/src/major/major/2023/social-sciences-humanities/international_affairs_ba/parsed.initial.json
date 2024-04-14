@@ -2,7 +2,7 @@
   "name": "International Affairs, BA",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/13/2024"
+    "lastEdited": "4/14/2024"
   },
   "totalCreditsRequired": 128,
   "yearVersion": 2023,
@@ -80,18 +80,6 @@
         }
       ],
       "minRequirementCount": 1
-    },
-    {
-      "type": "SECTION",
-      "title": "Global Dynamics Requirement",
-      "requirements": [],
-      "minRequirementCount": 0
-    },
-    {
-      "type": "SECTION",
-      "title": "Regional Analysis Requirement",
-      "requirements": [],
-      "minRequirementCount": 0
     },
     {
       "type": "SECTION",
@@ -397,12 +385,6 @@
     },
     {
       "type": "SECTION",
-      "title": "International Affairs Elective",
-      "requirements": [],
-      "minRequirementCount": 0
-    },
-    {
-      "type": "SECTION",
       "title": "BA Language Requirements",
       "requirements": [
         {
@@ -462,24 +444,6 @@
         }
       ],
       "minRequirementCount": 11
-    },
-    {
-      "type": "SECTION",
-      "title": "International Experiential Learning",
-      "requirements": [],
-      "minRequirementCount": 0
-    },
-    {
-      "type": "SECTION",
-      "title": "Students pursuing a regional concentration, are required to complete their international semester in the same region.",
-      "requirements": [],
-      "minRequirementCount": 0
-    },
-    {
-      "type": "SECTION",
-      "title": "International Affairs Foreign Language Requirement",
-      "requirements": [],
-      "minRequirementCount": 0
     },
     {
       "type": "SECTION",

@@ -2,7 +2,7 @@
   "name": "History and Philosophy, BA",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/13/2024"
+    "lastEdited": "4/14/2024"
   },
   "totalCreditsRequired": 128,
   "yearVersion": 2023,
@@ -125,30 +125,6 @@
     },
     {
       "type": "SECTION",
-      "title": "History Elective",
-      "requirements": [],
-      "minRequirementCount": 0
-    },
-    {
-      "type": "SECTION",
-      "title": "Introductory Level Elective",
-      "requirements": [],
-      "minRequirementCount": 0
-    },
-    {
-      "type": "SECTION",
-      "title": "Intermediate/Advanced History Cluster",
-      "requirements": [],
-      "minRequirementCount": 0
-    },
-    {
-      "type": "SECTION",
-      "title": "Advanced History Elective",
-      "requirements": [],
-      "minRequirementCount": 0
-    },
-    {
-      "type": "SECTION",
       "title": "History Capstone Seminar or Senior Project",
       "requirements": [
         {
@@ -190,12 +166,6 @@
         }
       ],
       "minRequirementCount": 3
-    },
-    {
-      "type": "SECTION",
-      "title": "Advanced Philosophy Electives",
-      "requirements": [],
-      "minRequirementCount": 0
     },
     {
       "type": "SECTION",
@@ -243,12 +213,6 @@
         }
       ],
       "minRequirementCount": 8
-    },
-    {
-      "type": "SECTION",
-      "title": "Philosophy Electives",
-      "requirements": [],
-      "minRequirementCount": 0
     },
     {
       "type": "SECTION",
