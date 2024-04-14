@@ -5,7 +5,6 @@ import {
   FormHelperText,
 } from "@chakra-ui/react";
 import { OptionObject } from "@graduate/common";
-import Fuse from "fuse.js";
 import { Control, FieldError, useController } from "react-hook-form";
 import Select from "react-select";
 import { FilterOptionOption } from "react-select/dist/declarations/src/filters";
@@ -46,28 +45,40 @@ export const PlanSelect: React.FC<PlanSelectProps> = ({
   isSearchable,
   isDisabled,
   placeholder,
-  useFuzzySearch,
+  // useFuzzySearch,
 }) => {
-  const filterOptions = useFuzzySearch
-    ? (option: FilterOptionOption<any>, inputValue: string) => {
-        if (inputValue.length !== 0) {
-          const list = new Fuse(options, {
-            keys: ["value"],
-            isCaseSensitive: false,
-            shouldSort: true,
-            ignoreLocation: true,
-            findAllMatches: true,
-            includeScore: true,
-            threshold: 0.4,
-          }).search(inputValue);
-          return list
-            .map((element) => element.item.value)
-            .includes(option.data.value);
-        } else {
-          return true;
-        }
-      }
-    : null;
+  const customFilterOption = (
+    option: FilterOptionOption<any>,
+    rawInput: string
+  ) => {
+    const words = rawInput.split(" ");
+    return words.reduce(
+      (acc, cur) =>
+        acc && option.label.toLowerCase().includes(cur.toLowerCase()),
+      true
+    );
+  };
+  // TODO: Find a more efficient way to implement fuzzy search
+  // const filterOptions = useFuzzySearch
+  //   ? (option: FilterOptionOption<any>, inputValue: string) => {
+  //       if (inputValue.length !== 0) {
+  //         const list = new Fuse(options, {
+  //           keys: ["value"],
+  //           isCaseSensitive: false,
+  //           shouldSort: true,
+  //           ignoreLocation: true,
+  //           findAllMatches: true,
+  //           includeScore: true,
+  //           threshold: 0.4,
+  //         }).search(inputValue);
+  //         return list
+  //           .map((element) => element.item.value)
+  //           .includes(option.data.value);
+  //       } else {
+  //         return true;
+  //       }
+  //     }
+  //   : null;
 
   const {
     field: { onChange: onChangeUpdateValue, value, ...fieldRest },
@@ -110,7 +121,7 @@ export const PlanSelect: React.FC<PlanSelectProps> = ({
         isSearchable={isSearchable}
         isDisabled={isDisabled}
         placeholder={placeholder}
-        filterOption={filterOptions}
+        filterOption={customFilterOption}
         {...fieldRest}
       />
       {helperText && <FormHelperText>{helperText}</FormHelperText>}
