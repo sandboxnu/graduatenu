@@ -1,0 +1,1822 @@
+{
+  "name": "Business Administration and Law, BS",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "4/13/2024"
+  },
+  "totalCreditsRequired": 128,
+  "yearVersion": 2023,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Foundational Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1102,
+          "subject": "BUSN"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1103,
+          "subject": "BUSN"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1201,
+          "subject": "ACCT"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2301,
+          "subject": "ACCT"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2201,
+          "subject": "FINA"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1203,
+          "subject": "INTB"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2301,
+          "subject": "MGSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3201,
+          "subject": "ORGB"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4501,
+          "subject": "STRT"
+        }
+      ],
+      "minRequirementCount": 7
+    },
+    {
+      "type": "SECTION",
+      "title": "Business Elective",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2301,
+          "subject": "INNO"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2301,
+          "subject": "MISM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2201,
+          "subject": "MKTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2301,
+          "subject": "SCHM"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Elective",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3416,
+          "subject": "ACCT"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4414,
+          "subject": "ACCT"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Supporting Business Courses",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1115,
+              "subject": "ECON"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1116,
+              "subject": "ECON"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1231,
+              "subject": "MATH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1341,
+              "subject": "MATH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1241,
+              "subject": "MATH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1251,
+              "subject": "MATH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1340,
+              "subject": "MATH"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Core Requirements",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3101,
+          "subject": "LAW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3102,
+          "subject": "LAW"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 24,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3140,
+              "subject": "LAW"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3150,
+              "subject": "LAW"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3160,
+              "subject": "LAW"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3170,
+              "subject": "LAW"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3180,
+              "subject": "LAW"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3210,
+              "subject": "LAW"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3232,
+              "subject": "LAW"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3320,
+              "subject": "LAW"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3321,
+              "subject": "LAW"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4335,
+              "subject": "LAW"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4369,
+              "subject": "LAW"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4501,
+              "subject": "LAW"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4525,
+              "subject": "LAW"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4640,
+              "subject": "LAW"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4664,
+              "subject": "LAW"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4681,
+              "subject": "LAW"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Business",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3304,
+              "subject": "ACCT"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4312,
+              "subject": "FINA"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3420,
+              "subject": "MGMT"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Law",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3120,
+              "subject": "LAW"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3130,
+              "subject": "LAW"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Business Cooperative Education",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3945,
+              "subject": "COOP"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3946,
+              "subject": "COOP"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3947,
+              "subject": "COOP"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3948,
+              "subject": "COOP"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 1,
+    "concentrationOptions": [
+      {
+        "type": "SECTION",
+        "title": "Required Courses",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 3401,
+            "subject": "ACCT"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4501,
+            "subject": "ACCT"
+          }
+        ],
+        "minRequirementCount": 2
+      },
+      {
+        "type": "SECTION",
+        "title": "Electives",
+        "requirements": [
+          {
+            "type": "XOM",
+            "numCreditsMin": 8,
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 3403,
+                "subject": "ACCT"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3416,
+                "subject": "ACCT"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4412,
+                "subject": "ACCT"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4414,
+                "subject": "ACCT"
+              }
+            ]
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Required Courses",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 3402,
+            "subject": "ACCT"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3403,
+            "subject": "ACCT"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5220,
+            "subject": "ACCT"
+          }
+        ],
+        "minRequirementCount": 3
+      },
+      {
+        "type": "SECTION",
+        "title": "Required Course",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 3720,
+            "subject": "MKTG"
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Electives",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 2301,
+            "subject": "INNO"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3530,
+            "subject": "MGMT"
+          },
+          {
+            "type": "COURSE",
+            "classId": 2720,
+            "subject": "MKTG"
+          },
+          {
+            "type": "OR",
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 3401,
+                "subject": "MKTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3402,
+                "subject": "MKTG"
+              }
+            ]
+          },
+          {
+            "type": "COURSE",
+            "classId": 4502,
+            "subject": "MKTG"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4504,
+            "subject": "MKTG"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4506,
+            "subject": "MKTG"
+          },
+          {
+            "type": "OR",
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 4510,
+                "subject": "MKTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3330,
+                "subject": "ENTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3335,
+                "subject": "INNO"
+              }
+            ]
+          },
+          {
+            "type": "COURSE",
+            "classId": 4720,
+            "subject": "MKTG"
+          }
+        ],
+        "minRequirementCount": 9
+      },
+      {
+        "type": "SECTION",
+        "title": "Required Courses",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 2510,
+            "subject": "MISM"
+          },
+          {
+            "type": "OR",
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 3403,
+                "subject": "MISM"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3405,
+                "subject": "MISM"
+              }
+            ]
+          },
+          {
+            "type": "COURSE",
+            "classId": 3501,
+            "subject": "MISM"
+          }
+        ],
+        "minRequirementCount": 3
+      },
+      {
+        "type": "SECTION",
+        "title": "Elective",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 3515,
+            "subject": "MISM"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3525,
+            "subject": "MISM"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4983,
+            "subject": "MISM"
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Required Courses",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 2301,
+            "subject": "INNO"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4504,
+            "subject": "INNO"
+          }
+        ],
+        "minRequirementCount": 2
+      },
+      {
+        "type": "SECTION",
+        "title": "Electives",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 2304,
+            "subject": "INNO"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3335,
+            "subject": "INNO"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4225,
+            "subject": "INNO"
+          },
+          {
+            "type": "COURSE",
+            "classId": 2215,
+            "subject": "ENTR"
+          },
+          {
+            "type": "COURSE",
+            "classId": 2303,
+            "subject": "ENTR"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4983,
+            "subject": "ENTR"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4610,
+            "subject": "FINA"
+          },
+          {
+            "type": "COURSE",
+            "classId": 2206,
+            "subject": "INNO"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3302,
+            "subject": "MGMT"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3340,
+            "subject": "MGMT"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3530,
+            "subject": "MGMT"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4301,
+            "subject": "STRT"
+          }
+        ],
+        "minRequirementCount": 12
+      },
+      {
+        "type": "SECTION",
+        "title": "Required Courses",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 2301,
+            "subject": "INNO"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4501,
+            "subject": "ENTR"
+          }
+        ],
+        "minRequirementCount": 2
+      },
+      {
+        "type": "SECTION",
+        "title": "Electives",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 2303,
+            "subject": "ENTR"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3305,
+            "subject": "ENTR"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3330,
+            "subject": "ENTR"
+          },
+          {
+            "type": "COURSE",
+            "classId": 2215,
+            "subject": "ENTR"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4505,
+            "subject": "ENTR"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4983,
+            "subject": "ENTR"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4610,
+            "subject": "FINA"
+          },
+          {
+            "type": "COURSE",
+            "classId": 2206,
+            "subject": "INNO"
+          },
+          {
+            "type": "COURSE",
+            "classId": 2304,
+            "subject": "INNO"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3302,
+            "subject": "MGMT"
+          }
+        ],
+        "minRequirementCount": 10
+      },
+      {
+        "type": "SECTION",
+        "title": "Required Courses",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 2301,
+            "subject": "INNO"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4503,
+            "subject": "ENTR"
+          }
+        ],
+        "minRequirementCount": 2
+      },
+      {
+        "type": "SECTION",
+        "title": "Electives",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 2215,
+            "subject": "ENTR"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3302,
+            "subject": "ENTR"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3401,
+            "subject": "ENTR"
+          },
+          {
+            "type": "COURSE",
+            "classId": 2303,
+            "subject": "ENTR"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4983,
+            "subject": "ENTR"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4610,
+            "subject": "FINA"
+          },
+          {
+            "type": "COURSE",
+            "classId": 2206,
+            "subject": "INNO"
+          },
+          {
+            "type": "COURSE",
+            "classId": 2304,
+            "subject": "INNO"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3302,
+            "subject": "MGMT"
+          }
+        ],
+        "minRequirementCount": 9
+      },
+      {
+        "type": "SECTION",
+        "title": "Required Course",
+        "requirements": [
+          {
+            "type": "OR",
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 3301,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3303,
+                "subject": "FINA"
+              }
+            ]
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Electives",
+        "requirements": [
+          {
+            "type": "XOM",
+            "numCreditsMin": 12,
+            "courses": [
+              {
+                "type": "OR",
+                "courses": [
+                  {
+                    "type": "COURSE",
+                    "classId": 2720,
+                    "subject": "FINA"
+                  },
+                  {
+                    "type": "COURSE",
+                    "classId": 3520,
+                    "subject": "INNO"
+                  }
+                ]
+              },
+              {
+                "type": "COURSE",
+                "classId": 2730,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3301,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3303,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3401,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4219,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4220,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4310,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4312,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4320,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4330,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4335,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4340,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4350,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4370,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4390,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4410,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4412,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4420,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4512,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4514,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4516,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4524,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4526,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4602,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4604,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4610,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4983,
+                "subject": "FINA"
+              }
+            ]
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Required Courses",
+        "requirements": [
+          {
+            "type": "OR",
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 3303,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3301,
+                "subject": "FINA"
+              }
+            ]
+          },
+          {
+            "type": "COURSE",
+            "classId": 4335,
+            "subject": "FINA"
+          }
+        ],
+        "minRequirementCount": 2
+      },
+      {
+        "type": "SECTION",
+        "title": "Electives",
+        "requirements": [
+          {
+            "type": "XOM",
+            "numCreditsMin": 8,
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 4520,
+                "subject": "CS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2730,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4340,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4350,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4390,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4460,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4605,
+                "subject": "FINA"
+              }
+            ]
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Required Courses",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 3340,
+            "subject": "MGMT"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3315,
+            "subject": "SCHM"
+          }
+        ],
+        "minRequirementCount": 2
+      },
+      {
+        "type": "SECTION",
+        "title": "Implementation/Consulting Elective",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 3110,
+            "subject": "BUSN"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3220,
+            "subject": "ENTR"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3302,
+            "subject": "MGMT"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3501,
+            "subject": "MISM"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3515,
+            "subject": "MISM"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3315,
+            "subject": "MGMT"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3530,
+            "subject": "MGMT"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3420,
+            "subject": "MGMT"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4410,
+            "subject": "MGMT"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4550,
+            "subject": "MGMT"
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Interdisciplinary Healthcare Focus",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 3201,
+            "subject": "COMM"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4533,
+            "subject": "COMM"
+          },
+          {
+            "type": "COURSE",
+            "classId": 2970,
+            "subject": "HUSV"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3500,
+            "subject": "IE"
+          },
+          {
+            "type": "COURSE",
+            "classId": 2515,
+            "subject": "PHTH"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4515,
+            "subject": "PHTH"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3441,
+            "subject": "SOCL"
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Required Courses",
+        "requirements": [
+          {
+            "type": "OR",
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 1203,
+                "subject": "INTB"
+              },
+              {
+                "type": "COURSE",
+                "classId": 1209,
+                "subject": "INTB"
+              }
+            ]
+          },
+          {
+            "type": "COURSE",
+            "classId": 2501,
+            "subject": "INTB"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3310,
+            "subject": "INTB"
+          }
+        ],
+        "minRequirementCount": 3
+      },
+      {
+        "type": "SECTION",
+        "title": "Electives",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 3205,
+            "subject": "INTB"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3320,
+            "subject": "INTB"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4202,
+            "subject": "INTB"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4983,
+            "subject": "INTB"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3306,
+            "subject": "ENTR"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4320,
+            "subject": "FINA"
+          },
+          {
+            "type": "COURSE",
+            "classId": 2206,
+            "subject": "INNO"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4512,
+            "subject": "MKTG"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3301,
+            "subject": "SCHM"
+          }
+        ],
+        "minRequirementCount": 9
+      },
+      {
+        "type": "SECTION",
+        "title": "Required Course",
+        "requirements": [
+          {
+            "type": "OR",
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 4550,
+                "subject": "MGMT"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3380,
+                "subject": "MGMT"
+              }
+            ]
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Electives",
+        "requirements": [
+          {
+            "type": "XOM",
+            "numCreditsMin": 12,
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 2215,
+                "subject": "ENTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2304,
+                "subject": "INNO"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2414,
+                "subject": "INNO"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3205,
+                "subject": "INTB"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3302,
+                "subject": "MGMT"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3305,
+                "subject": "MGMT"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3315,
+                "subject": "MGMT"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3340,
+                "subject": "MGMT"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3350,
+                "subject": "MGMT"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3380,
+                "subject": "MGMT"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3420,
+                "subject": "MGMT"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3435,
+                "subject": "MGMT"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3530,
+                "subject": "MGMT"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4310,
+                "subject": "MGMT"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4410,
+                "subject": "MGMT"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4550,
+                "subject": "MGMT"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4983,
+                "subject": "MGMT"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4301,
+                "subject": "STRT"
+              }
+            ]
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Required Courses",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 3403,
+            "subject": "MISM"
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Electives",
+        "requirements": [
+          {
+            "type": "XOM",
+            "numCreditsMin": 12,
+            "courses": [
+              {
+                "type": "AND",
+                "courses": [
+                  {
+                    "subject": "DS",
+                    "classId": 2000,
+                    "description": "Programming with Data",
+                    "type": "COURSE"
+                  },
+                  {
+                    "subject": "DS",
+                    "classId": 2001,
+                    "description": "Data Science Programming Practicum",
+                    "type": "COURSE"
+                  }
+                ]
+              },
+              {
+                "type": "COURSE",
+                "classId": 3530,
+                "subject": "MGMT"
+              },
+              {
+                "type": "OR",
+                "courses": [
+                  {
+                    "type": "COURSE",
+                    "classId": 3405,
+                    "subject": "MISM"
+                  },
+                  {
+                    "type": "COURSE",
+                    "classId": 2510,
+                    "subject": "MISM"
+                  },
+                  {
+                    "type": "COURSE",
+                    "classId": 3515,
+                    "subject": "MISM"
+                  },
+                  {
+                    "type": "COURSE",
+                    "classId": 3501,
+                    "subject": "MISM"
+                  }
+                ]
+              },
+              {
+                "type": "COURSE",
+                "classId": 2420,
+                "subject": "MISM"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3460,
+                "subject": "MISM"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4405,
+                "subject": "MISM"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4501,
+                "subject": "MISM"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4983,
+                "subject": "MISM"
+              }
+            ]
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Required Courses",
+        "requirements": [
+          {
+            "type": "OR",
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 2602,
+                "subject": "MKTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3401,
+                "subject": "MKTG"
+              }
+            ]
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Electives",
+        "requirements": [
+          {
+            "type": "XOM",
+            "numCreditsMin": 12,
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 4414,
+                "subject": "ENTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2301,
+                "subject": "MKTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2602,
+                "subject": "MKTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2720,
+                "subject": "MKTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3301,
+                "subject": "MKTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3401,
+                "subject": "MKTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3402,
+                "subject": "MKTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3501,
+                "subject": "MKTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3720,
+                "subject": "MKTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4120,
+                "subject": "MKTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4220,
+                "subject": "MKTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4420,
+                "subject": "MKTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4502,
+                "subject": "MKTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4504,
+                "subject": "MKTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4506,
+                "subject": "MKTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4508,
+                "subject": "MKTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4510,
+                "subject": "MKTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4512,
+                "subject": "MKTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4520,
+                "subject": "MKTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4604,
+                "subject": "MKTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4606,
+                "subject": "MKTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4720,
+                "subject": "MKTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4983,
+                "subject": "MKTG"
+              }
+            ]
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Required Courses",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 2602,
+            "subject": "MKTG"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3402,
+            "subject": "MKTG"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3501,
+            "subject": "MKTG"
+          }
+        ],
+        "minRequirementCount": 3
+      },
+      {
+        "type": "SECTION",
+        "title": "Elective",
+        "requirements": [
+          {
+            "type": "AND",
+            "courses": [
+              {
+                "subject": "CS",
+                "classId": 2500,
+                "description": "Fundamentals of Computer Science 1",
+                "type": "COURSE"
+              },
+              {
+                "subject": "CS",
+                "classId": 2501,
+                "description": "Lab for CS 2500",
+                "type": "COURSE"
+              }
+            ]
+          },
+          {
+            "type": "AND",
+            "courses": [
+              {
+                "subject": "DS",
+                "classId": 2000,
+                "description": "Programming with Data",
+                "type": "COURSE"
+              },
+              {
+                "subject": "DS",
+                "classId": 2001,
+                "description": "Data Science Programming Practicum",
+                "type": "COURSE"
+              }
+            ]
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Required Courses",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 2301,
+            "subject": "INNO"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4506,
+            "subject": "INNO"
+          }
+        ],
+        "minRequirementCount": 2
+      },
+      {
+        "type": "SECTION",
+        "title": "Electives",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 2206,
+            "subject": "INNO"
+          },
+          {
+            "type": "COURSE",
+            "classId": 2414,
+            "subject": "INNO"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3520,
+            "subject": "INNO"
+          },
+          {
+            "type": "COURSE",
+            "classId": 2215,
+            "subject": "ENTR"
+          },
+          {
+            "type": "COURSE",
+            "classId": 2303,
+            "subject": "ENTR"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4983,
+            "subject": "ENTR"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4610,
+            "subject": "FINA"
+          },
+          {
+            "type": "COURSE",
+            "classId": 2304,
+            "subject": "INNO"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3302,
+            "subject": "MGMT"
+          },
+          {
+            "type": "COURSE",
+            "classId": 2301,
+            "subject": "MKTG"
+          }
+        ],
+        "minRequirementCount": 10
+      },
+      {
+        "type": "SECTION",
+        "title": "Required Courses",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 3301,
+            "subject": "SCHM"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3305,
+            "subject": "SCHM"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3310,
+            "subject": "SCHM"
+          }
+        ],
+        "minRequirementCount": 3
+      },
+      {
+        "type": "SECTION",
+        "title": "Elective",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 3308,
+            "subject": "SCHM"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3315,
+            "subject": "SCHM"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4401,
+            "subject": "SCHM"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4983,
+            "subject": "SCHM"
+          }
+        ],
+        "minRequirementCount": 1
+      }
+    ]
+  }
+}

@@ -1,0 +1,205 @@
+{
+  "name": "Sociology and Cultural Anthropology, BS",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "4/13/2024"
+  },
+  "totalCreditsRequired": 128,
+  "yearVersion": 2023,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Sociology",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "SOCL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2321,
+          "subject": "SOCL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3300,
+          "subject": "SOCL"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Sociology Electives",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "RANGE",
+              "subject": "SOCL",
+              "idRangeStart": 1110,
+              "idRangeEnd": 1999,
+              "exceptions": []
+            }
+          ]
+        },
+        {
+          "type": "XOM",
+          "numCreditsMin": 4,
+          "courses": [
+            {
+              "type": "RANGE",
+              "subject": "SOCL",
+              "idRangeStart": 2000,
+              "idRangeEnd": 3999,
+              "exceptions": []
+            }
+          ]
+        },
+        {
+          "type": "XOM",
+          "numCreditsMin": 4,
+          "courses": [
+            {
+              "type": "RANGE",
+              "subject": "SOCL",
+              "idRangeStart": 4000,
+              "idRangeEnd": 4999,
+              "exceptions": []
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Experiential Learning",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3945,
+          "subject": "COOP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3487,
+          "subject": "SOCL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4971,
+          "subject": "SOCL"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Cultural Anthropology Core Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "ANTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3410,
+          "subject": "ANTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3421,
+          "subject": "ANTH"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Advanced Area Courses",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 4350,
+              "subject": "ANTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4500,
+              "subject": "ANTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4505,
+              "subject": "ANTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4510,
+              "subject": "ANTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4515,
+              "subject": "ANTH"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Anthropology Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Required Course",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2305,
+          "subject": "ANTH"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Capstone",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 4600,
+              "subject": "SOCL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4600,
+              "subject": "ANTH"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

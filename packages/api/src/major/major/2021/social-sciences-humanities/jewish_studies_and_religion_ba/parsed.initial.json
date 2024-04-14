@@ -1,0 +1,601 @@
+{
+  "name": "Jewish Studies and Religion, BA",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "4/13/2024"
+  },
+  "totalCreditsRequired": 128,
+  "yearVersion": 2021,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1285,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1285,
+              "subject": "JWSS"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 4660,
+          "subject": "JWSS"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Jewish Religion and Thought",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1100,
+          "subject": "HIST"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Israel Studies",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2610,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2100,
+          "subject": "INTL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3470,
+          "subject": "POLS"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Jewish History",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2280,
+          "subject": "HIST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2282,
+          "subject": "HIST"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2285,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2285,
+              "subject": "JWSS"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2431,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2431,
+              "subject": "JWSS"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Jewish Art and Culture",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2610,
+          "subject": "ENGL"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3678,
+              "subject": "ENGL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3678,
+              "subject": "JWSS"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3685,
+              "subject": "ENGL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3685,
+              "subject": "JWSS"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Jewish Studies Electives",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 12,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2610,
+              "subject": "ENGL"
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 3678,
+                  "subject": "ENGL"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 3678,
+                  "subject": "JWSS"
+                }
+              ]
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 3685,
+                  "subject": "ENGL"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 3685,
+                  "subject": "JWSS"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 2280,
+              "subject": "HIST"
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 2282,
+                  "subject": "HIST"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 2282,
+                  "subject": "JWSS"
+                }
+              ]
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 2285,
+                  "subject": "HIST"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 2285,
+                  "subject": "JWSS"
+                }
+              ]
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 2431,
+                  "subject": "HIST"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 2431,
+                  "subject": "JWSS"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 2100,
+              "subject": "INTL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4992,
+              "subject": "JWSS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1120,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1271,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2370,
+              "subject": "POLS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3465,
+              "subject": "POLS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3470,
+              "subject": "POLS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3241,
+              "subject": "SOCL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3270,
+              "subject": "SOCL"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Required Foundational Course",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1110,
+          "subject": "PHIL"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Lived Religion Elective",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1133,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1220,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1260,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1271,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1280,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1295,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1667,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2230,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2390,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2410,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3100,
+          "subject": "PHIL"
+        }
+      ],
+      "minRequirementCount": 11
+    },
+    {
+      "type": "SECTION",
+      "title": "Comparative Religion Elective",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1111,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1130,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1220,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1271,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1275,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1290,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1667,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2395,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3100,
+          "subject": "PHIL"
+        }
+      ],
+      "minRequirementCount": 9
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1104,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1111,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1120,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1130,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1133,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1220,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1260,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1271,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1275,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1280,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1285,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1290,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1295,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1666,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1667,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2230,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2390,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2395,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2410,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3100,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4903,
+          "subject": "PHIL"
+        }
+      ],
+      "minRequirementCount": 21
+    },
+    {
+      "type": "SECTION",
+      "title": "Capstone",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4903,
+          "subject": "PHIL"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Integrative Requirements",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1294,
+              "subject": "HIST/JWSS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1294,
+              "subject": "JWSS"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2431,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2431,
+              "subject": "JWSS"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Hebrew Language Introduction",
+      "requirements": [],
+      "minRequirementCount": 0
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

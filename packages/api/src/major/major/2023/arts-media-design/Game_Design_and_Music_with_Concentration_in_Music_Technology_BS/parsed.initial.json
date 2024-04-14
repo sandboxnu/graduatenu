@@ -1,0 +1,354 @@
+{
+  "name": "Game Design and Music with Concentration in Music Technology, BS",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "4/13/2024"
+  },
+  "totalCreditsRequired": 128,
+  "yearVersion": 2023,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Game Design Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1000,
+          "subject": "ARTF"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Game Design Required",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1110,
+          "subject": "GAME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2500,
+          "subject": "GAME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2950,
+          "subject": "GAME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3400,
+          "subject": "GAME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3700,
+          "subject": "GAME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3800,
+          "subject": "GAME"
+        }
+      ],
+      "minRequirementCount": 6
+    },
+    {
+      "type": "SECTION",
+      "title": "Art + Design Electives",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 16,
+          "courses": [
+            [
+              {
+                "type": "RANGE",
+                "subject": "ARTD",
+                "idRangeStart": 0,
+                "idRangeEnd": 9999,
+                "exceptions": []
+              },
+              {
+                "type": "RANGE",
+                "subject": "ARTE",
+                "idRangeStart": 0,
+                "idRangeEnd": 9999,
+                "exceptions": []
+              },
+              {
+                "type": "RANGE",
+                "subject": "ARTF",
+                "idRangeStart": 0,
+                "idRangeEnd": 9999,
+                "exceptions": []
+              },
+              {
+                "type": "RANGE",
+                "subject": "ARTG",
+                "idRangeStart": 0,
+                "idRangeEnd": 9999,
+                "exceptions": []
+              },
+              {
+                "type": "RANGE",
+                "subject": "ARTH",
+                "idRangeStart": 0,
+                "idRangeEnd": 9999,
+                "exceptions": []
+              },
+              {
+                "type": "RANGE",
+                "subject": "GAME",
+                "idRangeStart": 0,
+                "idRangeEnd": 9999,
+                "exceptions": []
+              }
+            ]
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Music Theory and Composition",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1201,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1202,
+          "subject": "MUSC"
+        },
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2111,
+              "subject": "MUSC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3300,
+              "subject": "MUSC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3541,
+              "subject": "MUSC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2320,
+              "subject": "MUST"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Music in Context",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1001,
+          "subject": "MUSC"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "MUSC",
+              "classId": 1002,
+              "description": "Music in Everyday Life",
+              "type": "COURSE"
+            },
+            {
+              "subject": "MUSC",
+              "classId": 1003,
+              "description": "Lab for MUSC 1002",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Contemporary / Popular Music",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2101,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2310,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2311,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2320,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2336,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2380,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3352,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3353,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3354,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3360,
+          "subject": "MUSI"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3401,
+          "subject": "MUSI"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Music Technology Requirements",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2350,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1220,
+          "subject": "MUST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2102,
+          "subject": "MUST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2431,
+          "subject": "MUST"
+        }
+      ],
+      "minRequirementCount": 4
+    },
+    {
+      "type": "SECTION",
+      "title": "Music Technology Electives",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 4510,
+              "subject": "MUSC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3540,
+              "subject": "MUST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3601,
+              "subject": "MUST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3602,
+              "subject": "MUST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3603,
+              "subject": "MUST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4610,
+              "subject": "MUST"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Integrative Requirement",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1220,
+          "subject": "MUST"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Capstone",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4700,
+          "subject": "GAME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4611,
+          "subject": "MUST"
+        }
+      ],
+      "minRequirementCount": 2
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

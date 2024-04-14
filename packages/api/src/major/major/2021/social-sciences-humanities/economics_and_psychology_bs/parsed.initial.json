@@ -1,0 +1,426 @@
+{
+  "name": "Economics and Psychology, BS",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "4/13/2024"
+  },
+  "totalCreditsRequired": 128,
+  "yearVersion": 2021,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1115,
+          "subject": "ECON"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1116,
+          "subject": "ECON"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2315,
+          "subject": "ECON"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2316,
+          "subject": "ECON"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2560,
+          "subject": "ECON"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4692,
+          "subject": "ECON"
+        }
+      ],
+      "minRequirementCount": 6
+    },
+    {
+      "type": "SECTION",
+      "title": "Economics Electives",
+      "requirements": [
+        {
+          "type": "RANGE",
+          "subject": "ECON",
+          "idRangeStart": 1200,
+          "idRangeEnd": 1999,
+          "exceptions": []
+        },
+        {
+          "type": "RANGE",
+          "subject": "ECON",
+          "idRangeStart": 1200,
+          "idRangeEnd": 1999,
+          "exceptions": []
+        },
+        {
+          "type": "RANGE",
+          "subject": "ECON",
+          "idRangeStart": 3000,
+          "idRangeEnd": 4689,
+          "exceptions": []
+        },
+        {
+          "type": "RANGE",
+          "subject": "ECON",
+          "idRangeStart": 4900,
+          "idRangeEnd": 4999,
+          "exceptions": []
+        },
+        {
+          "type": "RANGE",
+          "subject": "ECON",
+          "idRangeStart": 5200,
+          "idRangeEnd": 5999,
+          "exceptions": []
+        }
+      ],
+      "minRequirementCount": 5
+    },
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2320,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3402,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3450,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3466,
+          "subject": "PSYC"
+        }
+      ],
+      "minRequirementCount": 5
+    },
+    {
+      "type": "SECTION",
+      "title": "Required Lab",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4600,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4606,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4610,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4612,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4614,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4616,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4622,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4624,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4626,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4628,
+          "subject": "PSYC"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Required Seminar",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4654,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4656,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4658,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4660,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4662,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4664,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4666,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4668,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4674,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4676,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4678,
+          "subject": "PSYC"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Psychology Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Other Requirements Outside Major",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1000,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1000,
+              "subject": "ECON"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2000,
+              "subject": "EESC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2000,
+              "subject": "EESH"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 1111,
+          "subject": "ENGW"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1231,
+              "subject": "MATH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1241,
+              "subject": "MATH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1245,
+              "subject": "MATH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1251,
+              "subject": "MATH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1340,
+              "subject": "MATH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1341,
+              "subject": "MATH"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1100,
+              "subject": "CS"
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "DS",
+                  "classId": 2000,
+                  "description": "Programming with Data",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "DS",
+                  "classId": 2001,
+                  "description": "Data Science Programming Practicum",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 2510,
+              "subject": "MISM"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 3945,
+          "subject": "COOP"
+        }
+      ],
+      "minRequirementCount": 6
+    },
+    {
+      "type": "SECTION",
+      "title": "Integrative Course",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 4681,
+              "subject": "ECON"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3416,
+              "subject": "ECON"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "NUpath Not Fulfilled by Major",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Open Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Combined Major Credit/ GPA Requirement",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2315,
+          "subject": "ECON"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2316,
+          "subject": "ECON"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2560,
+          "subject": "ECON"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2320,
+          "subject": "PSYC"
+        }
+      ],
+      "minRequirementCount": 4
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

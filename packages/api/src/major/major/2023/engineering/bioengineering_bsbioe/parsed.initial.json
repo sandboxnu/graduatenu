@@ -1,0 +1,784 @@
+{
+  "name": "Bioengineering, BSBioE",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "4/13/2024"
+  },
+  "totalCreditsRequired": 135,
+  "yearVersion": 2023,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Engineering",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2350,
+          "subject": "BIOE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2355,
+          "subject": "BIOE"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "BIOE",
+              "classId": 2365,
+              "description": "Bioengineering Measurement, Experimentation, and Statistics",
+              "type": "COURSE"
+            },
+            {
+              "subject": "BIOE",
+              "classId": 2366,
+              "description": "Lab for BIOE 2365",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 3210,
+          "subject": "BIOE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3310,
+          "subject": "BIOE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3380,
+          "subject": "BIOE"
+        }
+      ],
+      "minRequirementCount": 6
+    },
+    {
+      "type": "SECTION",
+      "title": "Bioengineering Capstone",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4790,
+          "subject": "BIOE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4792,
+          "subject": "BIOE"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Supplemental Credit",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1501,
+          "subject": "GE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1502,
+          "subject": "GE"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Required Mathematics/Science",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "BIOL",
+              "classId": 1111,
+              "description": "General Biology 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "BIOL",
+              "classId": 1112,
+              "description": "Lab for BIOL 1111",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHEM",
+              "classId": 1151,
+              "description": "General Chemistry for Engineers",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 1153,
+              "description": "Recitation for CHEM 1151",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 1341,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1342,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2321,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2341,
+          "subject": "MATH"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "PHYS",
+                  "classId": 1171,
+                  "description": "Physics 1 for Bioscience and Bioengineering",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "PHYS",
+                  "classId": 1172,
+                  "description": "Lab for PHYS 1171",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "PHYS",
+                  "classId": 1173,
+                  "description": "Interactive Learning Seminar for PHYS 1171",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "PHYS",
+                  "classId": 1151,
+                  "description": "Physics for Engineering 1",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "PHYS",
+                  "classId": 1152,
+                  "description": "Lab for PHYS 1151",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "PHYS",
+                  "classId": 1153,
+                  "description": "Interactive Learning Seminar for PHYS 1151",
+                  "type": "COURSE"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "PHYS",
+                  "classId": 1175,
+                  "description": "Physics 2 for Bioscience and Bioengineering",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "PHYS",
+                  "classId": 1176,
+                  "description": "Lab for PHYS 1175",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "PHYS",
+                  "classId": 1177,
+                  "description": "Interactive Learning Seminar for PHYS 1175",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "PHYS",
+                  "classId": 1155,
+                  "description": "Physics for Engineering 2",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "PHYS",
+                  "classId": 1156,
+                  "description": "Lab for PHYS 1155",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "PHYS",
+                  "classId": 1157,
+                  "description": "Interactive Learning Seminar for PHYS 1155",
+                  "type": "COURSE"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 8
+    },
+    {
+      "type": "SECTION",
+      "title": "Supplemental Credit",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1501,
+          "subject": "GE"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Professional Development",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1000,
+          "subject": "GE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2000,
+          "subject": "ENCP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3000,
+          "subject": "ENCP"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Additional Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1501,
+          "subject": "GE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1502,
+          "subject": "GE"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "​Writing Requirements",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1111,
+          "subject": "ENGW"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3302,
+              "subject": "ENGW"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3315,
+              "subject": "ENGW"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Required General Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    }
+  ],
+  "concentrations": {
+    "minOptions": 1,
+    "concentrationOptions": [
+      {
+        "type": "SECTION",
+        "title": "Required Courses",
+        "requirements": [
+          {
+            "type": "XOM",
+            "numCreditsMin": 12,
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 5630,
+                "subject": "BIOE"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5640,
+                "subject": "BIOE"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5650,
+                "subject": "BIOE"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5665,
+                "subject": "ME"
+              }
+            ]
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Elective Courses",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 4991,
+            "subject": "BIOE"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5060,
+            "subject": "BIOE"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5115,
+            "subject": "BIOE"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5440,
+            "subject": "BIOE"
+          },
+          {
+            "type": "OR",
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 5820,
+                "subject": "BIOE"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5631,
+                "subject": "CHME"
+              }
+            ]
+          },
+          {
+            "type": "COURSE",
+            "classId": 5105,
+            "subject": "CHME"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5632,
+            "subject": "CHME"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4508,
+            "subject": "ME"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4555,
+            "subject": "ME"
+          }
+        ],
+        "minRequirementCount": 9
+      },
+      {
+        "type": "SECTION",
+        "title": "Required Courses",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 5800,
+            "subject": "BIOE"
+          },
+          {
+            "type": "XOM",
+            "numCreditsMin": 8,
+            "courses": [
+              {
+                "type": "OR",
+                "courses": [
+                  {
+                    "type": "COURSE",
+                    "classId": 5235,
+                    "subject": "BIOE"
+                  },
+                  {
+                    "type": "COURSE",
+                    "classId": 5648,
+                    "subject": "BIOE"
+                  }
+                ]
+              },
+              {
+                "type": "COURSE",
+                "classId": 5250,
+                "subject": "BIOE"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5810,
+                "subject": "BIOE"
+              }
+            ]
+          }
+        ],
+        "minRequirementCount": 2
+      },
+      {
+        "type": "SECTION",
+        "title": "Elective Courses",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 4991,
+            "subject": "BIOE"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5060,
+            "subject": "BIOE"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5115,
+            "subject": "BIOE"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5510,
+            "subject": "BIOE"
+          },
+          {
+            "type": "OR",
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 5820,
+                "subject": "BIOE"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5631,
+                "subject": "CHME"
+              }
+            ]
+          },
+          {
+            "type": "COURSE",
+            "classId": 5850,
+            "subject": "BIOE"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5632,
+            "subject": "CHME"
+          },
+          {
+            "type": "COURSE",
+            "classId": 2530,
+            "subject": "EECE"
+          },
+          {
+            "type": "COURSE",
+            "classId": 2750,
+            "subject": "EECE"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3468,
+            "subject": "EECE"
+          },
+          {
+            "type": "AND",
+            "courses": [
+              {
+                "subject": "ME",
+                "classId": 2340,
+                "description": "Introduction to Material Science",
+                "type": "COURSE"
+              },
+              {
+                "subject": "ME",
+                "classId": 2341,
+                "description": "Lab for ME 2340",
+                "type": "COURSE"
+              }
+            ]
+          },
+          {
+            "type": "COURSE",
+            "classId": 4508,
+            "subject": "ME"
+          }
+        ],
+        "minRequirementCount": 12
+      },
+      {
+        "type": "SECTION",
+        "title": "Required Courses",
+        "requirements": [
+          {
+            "type": "OR",
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 5410,
+                "subject": "BIOE"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5411,
+                "subject": "BIOE"
+              }
+            ]
+          },
+          {
+            "type": "COURSE",
+            "classId": 5420,
+            "subject": "BIOE"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5430,
+            "subject": "BIOE"
+          }
+        ],
+        "minRequirementCount": 3
+      },
+      {
+        "type": "SECTION",
+        "title": "Elective Courses",
+        "requirements": [
+          {
+            "type": "XOM",
+            "numCreditsMin": 8,
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 3410,
+                "subject": "BIOE"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4991,
+                "subject": "BIOE"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5060,
+                "subject": "BIOE"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5115,
+                "subject": "BIOE"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5411,
+                "subject": "BIOE"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5440,
+                "subject": "BIOE"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5450,
+                "subject": "BIOE"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5510,
+                "subject": "BIOE"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5650,
+                "subject": "BIOE"
+              },
+              {
+                "type": "OR",
+                "courses": [
+                  {
+                    "type": "COURSE",
+                    "classId": 5820,
+                    "subject": "BIOE"
+                  },
+                  {
+                    "type": "COURSE",
+                    "classId": 5631,
+                    "subject": "CHME"
+                  }
+                ]
+              },
+              {
+                "type": "COURSE",
+                "classId": 5630,
+                "subject": "CHME"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5632,
+                "subject": "CHME"
+              }
+            ]
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Required Courses",
+        "requirements": [
+          {
+            "type": "XOM",
+            "numCreditsMin": 12,
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 5115,
+                "subject": "BIOE"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5710,
+                "subject": "BIOE"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5720,
+                "subject": "BIOE"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5750,
+                "subject": "BIOE"
+              }
+            ]
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Elective Courses",
+        "requirements": [
+          {
+            "type": "XOM",
+            "numCreditsMin": 8,
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 4991,
+                "subject": "BIOE"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5060,
+                "subject": "BIOE"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5440,
+                "subject": "BIOE"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5510,
+                "subject": "BIOE"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5640,
+                "subject": "BIOE"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5760,
+                "subject": "BIOE"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5860,
+                "subject": "BIOE"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5870,
+                "subject": "BIOE"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5880,
+                "subject": "BIOE"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5630,
+                "subject": "CHME"
+              }
+            ]
+          }
+        ],
+        "minRequirementCount": 1
+      }
+    ]
+  }
+}

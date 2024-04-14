@@ -1,0 +1,276 @@
+{
+  "name": "Environmental Studies and History, BA",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "4/13/2024"
+  },
+  "totalCreditsRequired": 128,
+  "yearVersion": 2021,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Science Requirements",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "ENVR"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ENVR",
+              "classId": 1202,
+              "description": "History of Earth and Life",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ENVR",
+              "classId": 1203,
+              "description": "Interpreting Earth History",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 1110,
+          "subject": "ENVR"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Humanities Requirement",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1180,
+          "subject": "PHIL"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Social Science Requirements",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1116,
+          "subject": "ECON"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "POLS",
+              "classId": 1150,
+              "description": "American Government",
+              "type": "COURSE"
+            },
+            {
+              "subject": "POLS",
+              "classId": 1151,
+              "description": "Recitation for POLS 1150",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 1246,
+          "subject": "SOCL"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Environmental Studies Requirements",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3423,
+          "subject": "ECON"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2395,
+          "subject": "POLS"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "History Requirements",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1130,
+          "subject": "HIST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1170,
+          "subject": "HIST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1201,
+          "subject": "HIST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1215,
+          "subject": "HIST"
+        }
+      ],
+      "minRequirementCount": 4
+    },
+    {
+      "type": "SECTION",
+      "title": "History Seminar",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "HIST",
+              "classId": 2301,
+              "description": "The History Seminar",
+              "type": "COURSE"
+            },
+            {
+              "subject": "HIST",
+              "classId": 2302,
+              "description": "Historical Writing",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "History/Geographic-Area Electives",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1150,
+              "subject": "ASNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1180,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1185,
+              "subject": "HIST"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "History-Area Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Required Integrative Course",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ENVR",
+              "classId": 3300,
+              "description": "Geographic Information Systems",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ENVR",
+              "classId": 3301,
+              "description": "Lab for ENVR 3300",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Integrated Elective",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 5210,
+          "subject": "ENVR"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Experiential Learning",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Capstone Course",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 4997,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4997,
+              "subject": "ENVS"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 4900,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4970,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4701,
+          "subject": "HIST"
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

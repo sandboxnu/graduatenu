@@ -1,0 +1,600 @@
+{
+  "name": "Health Science, BS",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "4/13/2024"
+  },
+  "totalCreditsRequired": 132,
+  "yearVersion": 2021,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "YEAR 1",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1260,
+              "subject": "PHTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1261,
+              "subject": "PHTH"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "YEARS 2 and 3",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2210,
+          "subject": "PHTH"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2300,
+              "subject": "PHTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2301,
+              "subject": "PHTH"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2350,
+              "subject": "PHTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2351,
+              "subject": "PHTH"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2515,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4202,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4540,
+          "subject": "PHTH"
+        }
+      ],
+      "minRequirementCount": 6
+    },
+    {
+      "type": "SECTION",
+      "title": "FINAL YEAR",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4120,
+          "subject": "PHTH"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "YEAR 1",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1000,
+          "subject": "HSCI"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "YEAR 2 OR 3",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2000,
+          "subject": "HSCI"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "FINAL YEAR",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4720,
+          "subject": "HSCI"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4730,
+          "subject": "HSCI"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4971,
+          "subject": "HSCI"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4740,
+          "subject": "HSCI"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Selectives",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Society and Health",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2365,
+          "subject": "ANTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3441,
+          "subject": "ANTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3040,
+          "subject": "CRIM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5280,
+          "subject": "HLTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2302,
+          "subject": "LPSC"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1270,
+              "subject": "PHTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1270,
+              "subject": "AFRS"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2414,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5214,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5222,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5230,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5234,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1246,
+          "subject": "SOCL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1295,
+          "subject": "SOCL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2303,
+          "subject": "SOCL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2485,
+          "subject": "SOCL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3441,
+          "subject": "SOCL"
+        }
+      ],
+      "minRequirementCount": 16
+    },
+    {
+      "type": "SECTION",
+      "title": "Policy and Administration",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2206,
+          "subject": "ENTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2800,
+          "subject": "HUSV"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3340,
+          "subject": "MGMT"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3201,
+          "subject": "ORGB"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4511,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4515,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5232,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5234,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3241,
+          "subject": "SOCL"
+        }
+      ],
+      "minRequirementCount": 9
+    },
+    {
+      "type": "SECTION",
+      "title": "Nutrition and Wellness",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1280,
+          "subject": "CAEP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1290,
+          "subject": "CAEP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2012,
+          "subject": "CAEP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2101,
+          "subject": "CAEP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3201,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1120,
+          "subject": "EXSC"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "EXSC",
+              "classId": 4500,
+              "description": "Exercise Physiology 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "EXSC",
+              "classId": 4501,
+              "description": "Lab for EXSC 4500",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 5200,
+          "subject": "EXSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5220,
+          "subject": "EXSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1105,
+          "subject": "HSCI"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1106,
+          "subject": "HSCI"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2350,
+          "subject": "HSCI"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2500,
+          "subject": "HSCI"
+        }
+      ],
+      "minRequirementCount": 13
+    },
+    {
+      "type": "SECTION",
+      "title": "Digital Health",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CS",
+              "classId": 2500,
+              "description": "Fundamentals of Computer Science 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CS",
+              "classId": 2501,
+              "description": "Lab for CS 2500",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "DS",
+              "classId": 2000,
+              "description": "Programming with Data",
+              "type": "COURSE"
+            },
+            {
+              "subject": "DS",
+              "classId": 2001,
+              "description": "Data Science Programming Practicum",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 5101,
+          "subject": "HINF"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5200,
+          "subject": "HINF"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5300,
+          "subject": "HINF"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2000,
+          "subject": "IS"
+        }
+      ],
+      "minRequirementCount": 6
+    },
+    {
+      "type": "SECTION",
+      "title": "Research",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3250,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5202,
+          "subject": "PHTH"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "YEAR 1",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "BIOL",
+              "classId": 1111,
+              "description": "General Biology 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "BIOL",
+              "classId": 1112,
+              "description": "Lab for BIOL 1111",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "BIOL",
+              "classId": 1113,
+              "description": "General Biology 2",
+              "type": "COURSE"
+            },
+            {
+              "subject": "BIOL",
+              "classId": 1114,
+              "description": "Lab for BIOL 1113",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHEM",
+              "classId": 1161,
+              "description": "General Chemistry for Science Majors",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 1162,
+              "description": "Lab for CHEM 1161",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 1163,
+              "description": "Recitation for CHEM 1161",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 1241,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "PSYC"
+        }
+      ],
+      "minRequirementCount": 5
+    },
+    {
+      "type": "SECTION",
+      "title": "YEAR 2 OR 3",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1165,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2100,
+              "subject": "HLTH"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "YEAR 1",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1111,
+          "subject": "ENGW"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "YEAR 2 OR 3",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3306,
+          "subject": "ENGW"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

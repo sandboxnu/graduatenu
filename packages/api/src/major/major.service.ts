@@ -6,37 +6,39 @@ import {
 } from "@graduate/common";
 import { Injectable, Logger } from "@nestjs/common";
 import { formatServiceCtx } from "../utils";
-import { SUPPORTED_MAJOR_YEARS, SUPPORTED_MAJORS } from "./majors";
+// import { SUPPORTED_MAJOR_YEARS, SUPPORTED_MAJORS } from "./majors";
+import { MAJOR_YEARS, MAJORS } from "./majorCollator";
 
 @Injectable()
 export class MajorService {
   private readonly logger: Logger = new Logger();
 
   findByMajorAndYear(majorName: string, catalogYear: number): Major2 | null {
-    if (!SUPPORTED_MAJOR_YEARS.includes(catalogYear.toString())) {
-      this.logger.debug(
-        { mesage: "Major year not found", catalogYear },
-        MajorService.formatMajorServiceCtx("findByMajorAndYear")
-      );
-      return null;
-    }
+    // if (!SUPPORTED_MAJOR_YEARS.includes(catalogYear.toString())) {
+    //   this.logger.debug(
+    //     { mesage: "Major year not found", catalogYear },
+    //     MajorService.formatMajorServiceCtx("findByMajorAndYear")
+    //   );
+    //   return null;
+    // }
 
-    const { majors, supportedMajorNames } = SUPPORTED_MAJORS[catalogYear];
-    if (!supportedMajorNames.includes(majorName)) {
-      this.logger.debug(
-        { mesage: "Major within year not found", majorName, catalogYear },
-        MajorService.formatMajorServiceCtx("findByMajorAndYear")
-      );
-      return null;
-    }
+    // const { majors, supportedMajorNames } = SUPPORTED_MAJORS[catalogYear];
+    // if (!supportedMajorNames.includes(majorName)) {
+    //   this.logger.debug(
+    //     { mesage: "Major within year not found", majorName, catalogYear },
+    //     MajorService.formatMajorServiceCtx("findByMajorAndYear")
+    //   );
+    //   return null;
+    // }
 
-    return majors[majorName];
+    return MAJORS[catalogYear][majorName];
   }
 
   getSupportedMajors(): SupportedMajors {
     const supportedMajors: SupportedMajors = {};
-    SUPPORTED_MAJOR_YEARS.forEach((year) => {
-      const { supportedMajorNames } = SUPPORTED_MAJORS[year];
+    MAJOR_YEARS.forEach((year) => {
+      console.log(MAJOR_YEARS, MAJORS);
+      const supportedMajorNames = Object.keys(MAJORS[year]);
 
       const supportedMajorForYear: SupportedMajorsForYear = {};
       supportedMajorNames.forEach((majorName) => {

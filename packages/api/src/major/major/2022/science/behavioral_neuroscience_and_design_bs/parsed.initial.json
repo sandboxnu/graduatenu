@@ -1,0 +1,615 @@
+{
+  "name": "Behavioral Neuroscience and Design, BS",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "4/13/2024"
+  },
+  "totalCreditsRequired": 133,
+  "yearVersion": 2022,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Behavioral Neuroscience Overview",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1000,
+          "subject": "BNSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2000,
+          "subject": "EESC"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "COS Foundations",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "PSYC"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "BIOL",
+              "classId": 1107,
+              "description": "Foundations of Biology",
+              "type": "COURSE"
+            },
+            {
+              "subject": "BIOL",
+              "classId": 1108,
+              "description": "Lab for BIOL 1107",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2299,
+          "subject": "BIOL"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "BIOL",
+              "classId": 2301,
+              "description": "Genetics and Molecular Biology",
+              "type": "COURSE"
+            },
+            {
+              "subject": "BIOL",
+              "classId": 2302,
+              "description": "Lab for BIOL 2301",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHEM",
+              "classId": 1161,
+              "description": "General Chemistry for Science Majors",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 1162,
+              "description": "Lab for CHEM 1161",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 1163,
+              "description": "Recitation for CHEM 1161",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHEM",
+              "classId": 2311,
+              "description": "Organic Chemistry 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 2312,
+              "description": "Lab for CHEM 2311",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 6
+    },
+    {
+      "type": "SECTION",
+      "title": "Mathematics Foundation",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1251,
+              "subject": "MATH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1341,
+              "subject": "MATH"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Statistics Foundation",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ENVR",
+              "classId": 2500,
+              "description": "Biostatistics",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ENVR",
+              "classId": 2501,
+              "description": "Lab for ENVR 2500",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2320,
+          "subject": "PSYC"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Behavioral Neuroscience Foundations",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3200,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3452,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3458,
+          "subject": "PSYC"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Behavioral Neuroscience Core Courses",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3403,
+              "subject": "BIOL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3415,
+              "subject": "BIOL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3601,
+              "subject": "BIOL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3605,
+              "subject": "BIOL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4705,
+              "subject": "BIOL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4709,
+              "subject": "BIOL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5595,
+              "subject": "BIOL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5601,
+              "subject": "BIOL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3506,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3508,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3510,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4510,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4512,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4514,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4570,
+              "subject": "PSYC"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Art + Design Fundamentals",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1122,
+          "subject": "ARTF"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Art and Design Fundamentals Elective",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARTF",
+              "classId": 1124,
+              "description": "Form and Structure",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARTF",
+              "classId": 1125,
+              "description": "Form and Structure Tools",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARTF",
+              "classId": 2220,
+              "description": "Movement and Time",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARTF",
+              "classId": 2221,
+              "description": "Movement and Time Tools",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARTF",
+              "classId": 2223,
+              "description": "Experience and Interaction",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARTF",
+              "classId": 2224,
+              "description": "Experience and Interaction Tools",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Design Required",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARTG",
+              "classId": 1001,
+              "description": "Design Perspectives: An Introduction to Design in the World",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARTG",
+              "classId": 1002,
+              "description": "Seminar for Design Perspectives",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 1250,
+          "subject": "ARTG"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARTG",
+              "classId": 2250,
+              "description": "Typography 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARTG",
+              "classId": 2251,
+              "description": "Type Tools",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Art + Design History Elective",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Art + Design Elective",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Degree Capstone Project",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4550,
+          "subject": "ARTG"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Design Option",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Experience Design Option",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3462,
+          "subject": "ARTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3463,
+          "subject": "ARTG"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Graphic Design Option",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2252,
+          "subject": "ARTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3350,
+          "subject": "ARTG"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Information Design Option",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3451,
+          "subject": "ARTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4552,
+          "subject": "ARTG"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Interaction Design Option",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARTG",
+              "classId": 2400,
+              "description": "Interaction Design 1: Responsive",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARTG",
+              "classId": 2401,
+              "description": "Interaction Design Tools",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 3700,
+          "subject": "ARTG"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Integrative Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 5587,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5310,
+          "subject": "ARTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4550,
+          "subject": "ARTG"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Upper-Division Elective",
+      "requirements": [
+        {
+          "type": "RANGE",
+          "subject": "BNSC",
+          "idRangeStart": 4970,
+          "idRangeEnd": 9999,
+          "exceptions": []
+        },
+        {
+          "type": "RANGE",
+          "subject": "BIOL",
+          "idRangeStart": 3403,
+          "idRangeEnd": 9999,
+          "exceptions": []
+        },
+        {
+          "type": "RANGE",
+          "subject": "PSYC",
+          "idRangeStart": 3404,
+          "idRangeEnd": 9999,
+          "exceptions": []
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "College Writing",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1111,
+              "subject": "ENGW"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1102,
+              "subject": "ENGW"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Advanced Writing in the Disciplines",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3307,
+              "subject": "ENGW"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3314,
+              "subject": "ENGW"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3315,
+              "subject": "ENGW"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Required General Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

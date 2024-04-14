@@ -1,0 +1,718 @@
+{
+  "name": "Linguistics and English, BA",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "4/13/2024"
+  },
+  "totalCreditsRequired": 128,
+  "yearVersion": 2022,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Linguistics Requirements",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1150,
+          "subject": "LING"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2350,
+          "subject": "LING"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3412,
+          "subject": "LING"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3442,
+          "subject": "LING"
+        }
+      ],
+      "minRequirementCount": 4
+    },
+    {
+      "type": "SECTION",
+      "title": "Linguistic Structure",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 12,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3420,
+              "subject": "LING"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3422,
+              "subject": "LING"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3424,
+              "subject": "LING"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3450,
+              "subject": "LING"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3452,
+              "subject": "LING"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Linguistics Electives",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2700,
+              "subject": "DEAF"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3420,
+              "subject": "LING"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3422,
+              "subject": "LING"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3424,
+              "subject": "LING"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3434,
+              "subject": "LING"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3450,
+              "subject": "LING"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3452,
+              "subject": "LING"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3456,
+              "subject": "LING"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3458,
+              "subject": "LING"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3460,
+              "subject": "LING"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4654,
+              "subject": "LING"
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 4891,
+                  "subject": "LING"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 4970,
+                  "subject": "LING"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 4971,
+                  "subject": "LING"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 4991,
+                  "subject": "LING"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 4993,
+              "subject": "LING"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1115,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3464,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3466,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4522,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4524,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4610,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4612,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4658,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4660,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4674,
+              "subject": "PSYC"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "English Course-Level Requirement",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Foundational Courses",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1160,
+              "subject": "ENGL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1410,
+              "subject": "ENGL"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 1400,
+          "subject": "ENGL"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Diversity",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 4,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2150,
+              "subject": "ENGL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2296,
+              "subject": "ENGL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2455,
+              "subject": "ENGL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2760,
+              "subject": "ENGL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3663,
+              "subject": "ENGL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3678,
+              "subject": "ENGL"
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 3685,
+                  "subject": "ENGL"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 3685,
+                  "subject": "JWSS"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Pre-Nineteenth-Century Literature",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1600,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1700,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2296,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3101,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3120,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3618,
+          "subject": "ENGL"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3678,
+              "subject": "ENGL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3678,
+              "subject": "JWSS"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Nineteenth-, Twentieth-, and Twenty-First-Century Literature",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2301,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2330,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2440,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2600,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2610,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3140,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3619,
+          "subject": "ENGL"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3685,
+              "subject": "ENGL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3685,
+              "subject": "JWSS"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 3720,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3730,
+          "subject": "ENGL"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Theories and Methods",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1140,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1160,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1410,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2150,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3325,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3340,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3381,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3400,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3700,
+          "subject": "ENGL"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Comparative Literature",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1450,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1502,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2150,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2420,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2430,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2455,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2510,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2520,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2600,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2620,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2690,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3487,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3663,
+          "subject": "ENGL"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Writing",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2700,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2710,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2740,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2760,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2770,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2780,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2850,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3375,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3376,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3377,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3378,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3380,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3382,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3384,
+          "subject": "ENGL"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Integrative Course",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3454,
+          "subject": "LING"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Junior/Senior Seminar",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 4710,
+              "subject": "ENGL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4720,
+              "subject": "ENGL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4654,
+              "subject": "LING"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Experiential Learning",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4891,
+          "subject": "LING"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "LING",
+              "classId": 4970,
+              "description": "Junior/Senior Honors Project 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "LING",
+              "classId": 4971,
+              "description": "Junior/Senior Honors Project 2",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 4991,
+          "subject": "LING"
+        }
+      ],
+      "minRequirementCount": 3
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

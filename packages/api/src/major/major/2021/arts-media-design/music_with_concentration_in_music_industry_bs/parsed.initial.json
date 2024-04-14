@@ -1,0 +1,539 @@
+{
+  "name": "Music with Concentration in Music Industry, BS",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "4/13/2024"
+  },
+  "totalCreditsRequired": 128,
+  "yearVersion": 2021,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Music Core",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1000,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1001,
+          "subject": "MUSC"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Music Theory Placement",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1119,
+          "subject": "MUSC"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Music Theory Requirement",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1201,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1204,
+          "subject": "MUSI"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Music in Context",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1100,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1116,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1144,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2107,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2312,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2320,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2340,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3352,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2380,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1131,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2101,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2130,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2313,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2330,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3353,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3351,
+          "subject": "MUSI"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3401,
+          "subject": "MUSI"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3360,
+          "subject": "MUSI"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5900,
+          "subject": "MUSI"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1112,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1113,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2101,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2150,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2310,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2311,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2317,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2340,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2380,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2351,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3352,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3353,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3560,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3401,
+          "subject": "MUSI"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3360,
+          "subject": "MUSI"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2150,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2208,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2209,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2210,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1220,
+          "subject": "MUST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1301,
+          "subject": "MUST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2320,
+          "subject": "MUST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1901,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1902,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1904,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1905,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1906,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1907,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1911,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1912,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1913,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1914,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1915,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1917,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1918,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1919,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1920,
+          "subject": "MUSC"
+        }
+      ],
+      "minRequirementCount": 56
+    },
+    {
+      "type": "SECTION",
+      "title": "Music Industry",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1230,
+          "subject": "MUSI"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Music Industry Electives",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2150,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2210,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2211,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2232,
+          "subject": "MUSI"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2331,
+          "subject": "MUSI"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3341,
+          "subject": "MUSI"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1220,
+          "subject": "MUST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2231,
+          "subject": "MUSI"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2235,
+          "subject": "MUSI"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3333,
+          "subject": "MUSI"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2341,
+          "subject": "MUSI"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2330,
+          "subject": "MUSI"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3332,
+          "subject": "MUSI"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3334,
+          "subject": "MUSI"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3338,
+          "subject": "MUSI"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3340,
+          "subject": "MUSI"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4530,
+          "subject": "MUSI"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3353,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2234,
+          "subject": "MUSI"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3351,
+          "subject": "MUSI"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3360,
+          "subject": "MUSI"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3401,
+          "subject": "MUSI"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4601,
+          "subject": "MUSI"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5900,
+          "subject": "MUSI"
+        }
+      ],
+      "minRequirementCount": 24
+    },
+    {
+      "type": "SECTION",
+      "title": "Economics",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1116,
+          "subject": "ECON"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Accounting",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1209,
+          "subject": "ACCT"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Business Elective",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Capstone for Music Industry",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4530,
+          "subject": "MUSI"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4601,
+          "subject": "MUSI"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5900,
+          "subject": "MUSI"
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

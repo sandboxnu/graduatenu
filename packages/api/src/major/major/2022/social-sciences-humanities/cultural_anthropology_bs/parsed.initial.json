@@ -1,0 +1,96 @@
+{
+  "name": "Cultural Anthropology, BS",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "4/13/2024"
+  },
+  "totalCreditsRequired": 128,
+  "yearVersion": 2022,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Cultural Anthropology",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "SOCL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "ANTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2305,
+          "subject": "ANTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3421,
+          "subject": "ANTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3410,
+          "subject": "ANTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4600,
+          "subject": "ANTH"
+        }
+      ],
+      "minRequirementCount": 6
+    },
+    {
+      "type": "SECTION",
+      "title": "Advanced Area Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4350,
+          "subject": "ANTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4500,
+          "subject": "ANTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4505,
+          "subject": "ANTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4510,
+          "subject": "ANTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4515,
+          "subject": "ANTH"
+        }
+      ],
+      "minRequirementCount": 5
+    },
+    {
+      "type": "SECTION",
+      "title": "Anthropology Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Social Science Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

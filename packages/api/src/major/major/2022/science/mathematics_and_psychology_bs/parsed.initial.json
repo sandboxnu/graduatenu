@@ -1,0 +1,307 @@
+{
+  "name": "Mathematics and Psychology, BS",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "4/13/2024"
+  },
+  "totalCreditsRequired": 128,
+  "yearVersion": 2022,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Problem Solving",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1365,
+          "subject": "MATH"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Calculus",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1341,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1342,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2321,
+          "subject": "MATH"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Intermediate and Advanced Mathematics",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2341,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2331,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3081,
+          "subject": "MATH"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Math Electives",
+      "requirements": [
+        {
+          "type": "RANGE",
+          "subject": "MATH",
+          "idRangeStart": 3001,
+          "idRangeEnd": 5999,
+          "exceptions": []
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Introductory Course",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "PSYC"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Statistics",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2320,
+          "subject": "PSYC"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Area A (Personality/Social Basis of Behavior)",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3400,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3402,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3404,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3406,
+              "subject": "PSYC"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Area B (Biological/Cognitive Basis of Behavior)",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3450,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3452,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3458,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3464,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3466,
+              "subject": "PSYC"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Psychology Laboratory",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4600,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4606,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4610,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4612,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4614,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4616,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4622,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4624,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4626,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4628,
+          "subject": "PSYC"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Psychology Capstone Requirement",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4656,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4658,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4660,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4662,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4664,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4666,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4668,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4674,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4676,
+          "subject": "PSYC"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Psychology Elective",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Integrative Requirement",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4540,
+          "subject": "PSYC"
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

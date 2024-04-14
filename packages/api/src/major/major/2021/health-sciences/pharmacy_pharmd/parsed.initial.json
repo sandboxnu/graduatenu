@@ -1,0 +1,794 @@
+{
+  "name": "Pharmacy, PharmD",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "4/13/2024"
+  },
+  "totalCreditsRequired": 204,
+  "yearVersion": 2021,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "SEMESTER 1",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1000,
+          "subject": "PHMD"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "SEMESTER 2",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1001,
+          "subject": "PHMD"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "SEMESTER 3",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "PHSC",
+              "classId": 2301,
+              "description": "Human Physiology 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHSC",
+              "classId": 2302,
+              "description": "Human Anatomy Lab",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "SEMESTER  4",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "PHMD",
+              "classId": 1201,
+              "description": "Introduction to Pharmacy Practice",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHMD",
+              "classId": 1202,
+              "description": "Lab for PHMD 1201",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "PHSC",
+              "classId": 2303,
+              "description": "Human Physiology 2",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHSC",
+              "classId": 2304,
+              "description": "Human Physiology Lab",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "SEMESTER 5",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3945,
+          "subject": "COOP"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "SEMESTER 6",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2350,
+          "subject": "PHMD"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2320,
+          "subject": "PHSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4501,
+          "subject": "PHSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3411,
+          "subject": "PHSC"
+        }
+      ],
+      "minRequirementCount": 4
+    },
+    {
+      "type": "SECTION",
+      "title": "SEMESTER 7",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3945,
+          "subject": "COOP"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "SEMESTER 8",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "PHMD",
+              "classId": 2310,
+              "description": "Professional Communication in Pharmacy Practice",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHMD",
+              "classId": 2311,
+              "description": "Lab for PHMD 2310",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 5250,
+          "subject": "PHMD"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4502,
+          "subject": "PHSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3412,
+          "subject": "PHSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3419,
+          "subject": "PHSC"
+        }
+      ],
+      "minRequirementCount": 5
+    },
+    {
+      "type": "SECTION",
+      "title": "SEMESTER 9",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3945,
+          "subject": "COOP"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "SEMESTER 10",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3430,
+          "subject": "PHSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2330,
+          "subject": "PHSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4611,
+          "subject": "PHMD"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4612,
+          "subject": "PHMD"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3450,
+          "subject": "PHMD"
+        }
+      ],
+      "minRequirementCount": 5
+    },
+    {
+      "type": "SECTION",
+      "title": "SEMESTER 11, 12, or 13",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 5600,
+          "subject": "PHMD"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "SEMESTER 11",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 5330,
+          "subject": "PHMD"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5360,
+          "subject": "PHSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4621,
+          "subject": "PHMD"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4622,
+          "subject": "PHMD"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4623,
+          "subject": "PHMD"
+        }
+      ],
+      "minRequirementCount": 5
+    },
+    {
+      "type": "SECTION",
+      "title": "SEMESTER 12",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 5560,
+          "subject": "PHMD"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4631,
+          "subject": "PHMD"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4632,
+          "subject": "PHMD"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4633,
+          "subject": "PHMD"
+        }
+      ],
+      "minRequirementCount": 4
+    },
+    {
+      "type": "SECTION",
+      "title": "SEMESTER 13",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4641,
+          "subject": "PHMD"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4642,
+          "subject": "PHMD"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4643,
+          "subject": "PHMD"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5270,
+          "subject": "PHMD"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5450,
+          "subject": "PHMD"
+        }
+      ],
+      "minRequirementCount": 5
+    },
+    {
+      "type": "SECTION",
+      "title": "Open Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Professional Electives",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3480,
+          "subject": "CAEP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5200,
+          "subject": "CAEP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 6203,
+          "subject": "CAEP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5101,
+          "subject": "HINF"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5407,
+          "subject": "HINF"
+        },
+        {
+          "type": "COURSE",
+          "classId": 6205,
+          "subject": "HINF"
+        },
+        {
+          "type": "COURSE",
+          "classId": 6404,
+          "subject": "HINF"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1510,
+          "subject": "HLTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2100,
+          "subject": "HLTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2302,
+          "subject": "HLTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5002,
+          "subject": "HLTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5135,
+          "subject": "HLTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5280,
+          "subject": "HLTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5730,
+          "subject": "HLTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1105,
+          "subject": "HSCI"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2350,
+          "subject": "HSCI"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2500,
+          "subject": "HSCI"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5230,
+          "subject": "HSCI"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1205,
+          "subject": "NRSG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3600,
+          "subject": "PHMD"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4350,
+          "subject": "PHMD"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4581,
+          "subject": "PHMD"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4585,
+          "subject": "PHMD"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4700,
+          "subject": "PHMD"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4890,
+          "subject": "PHMD"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4991,
+          "subject": "PHMD"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4992,
+          "subject": "PHMD"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5223,
+          "subject": "PHMD"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5575,
+          "subject": "PHMD"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5675,
+          "subject": "PHMD"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5900,
+          "subject": "PHMD"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4991,
+          "subject": "PHSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4992,
+          "subject": "PHSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5100,
+          "subject": "PHSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5400,
+          "subject": "PHSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5500,
+          "subject": "PHSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5555,
+          "subject": "PHSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 6218,
+          "subject": "PHSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 6222,
+          "subject": "PHSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 6224,
+          "subject": "PHSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 6290,
+          "subject": "PHSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1270,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5222,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5226,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5230,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5232,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5234,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5300,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5310,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5320,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 6320,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 6250,
+          "subject": "PMST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 6254,
+          "subject": "PMST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "SLPA"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1555,
+          "subject": "SLPA"
+        }
+      ],
+      "minRequirementCount": 55
+    },
+    {
+      "type": "SECTION",
+      "title": "SEMESTER 1",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "BIOL",
+              "classId": 1111,
+              "description": "General Biology 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "BIOL",
+              "classId": 1112,
+              "description": "Lab for BIOL 1111",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1111,
+          "subject": "ENGW"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "SEMESTER 2",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "BIOL",
+              "classId": 1113,
+              "description": "General Biology 2",
+              "type": "COURSE"
+            },
+            {
+              "subject": "BIOL",
+              "classId": 1114,
+              "description": "Lab for BIOL 1113",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 1161,
+          "subject": "CHEM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1162,
+          "subject": "CHEM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1163,
+          "subject": "CHEM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1245,
+          "subject": "MATH"
+        }
+      ],
+      "minRequirementCount": 5
+    },
+    {
+      "type": "SECTION",
+      "title": "SEMESTER 3",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "PHYS",
+              "classId": 1149,
+              "description": "Physics for Pharmacy",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHYS",
+              "classId": 1150,
+              "description": "Lab for PHYS 1149",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHEM",
+              "classId": 2311,
+              "description": "Organic Chemistry 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 2312,
+              "description": "Lab for CHEM 2311",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 2319,
+              "description": "Recitation for CHEM 2311",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "SEMESTER 4",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHEM",
+              "classId": 2313,
+              "description": "Organic Chemistry 2",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 2314,
+              "description": "Lab for CHEM 2313",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 2320,
+              "description": "Recitation for CHEM 2313",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 3306,
+          "subject": "ENGW"
+        }
+      ],
+      "minRequirementCount": 2
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

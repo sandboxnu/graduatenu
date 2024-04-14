@@ -1,0 +1,565 @@
+{
+  "name": "Industrial Engineering, BSIE",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "4/13/2024"
+  },
+  "totalCreditsRequired": 137,
+  "yearVersion": 2021,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Engineering",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "IE",
+              "classId": 2310,
+              "description": "Introduction to Industrial Engineering",
+              "type": "COURSE"
+            },
+            {
+              "subject": "IE",
+              "classId": 2311,
+              "description": "Recitation for IE 2310",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "IE",
+              "classId": 3425,
+              "description": "Engineering Database Systems",
+              "type": "COURSE"
+            },
+            {
+              "subject": "IE",
+              "classId": 3426,
+              "description": "Recitation for IE 3425",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 4510,
+          "subject": "IE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4516,
+          "subject": "IE"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "IE",
+              "classId": 4522,
+              "description": "Human-Machine Systems",
+              "type": "COURSE"
+            },
+            {
+              "subject": "IE",
+              "classId": 4523,
+              "description": "Lab for IE 4522",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 4525,
+          "subject": "IE"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "IE",
+              "classId": 4530,
+              "description": "Manufacturing Systems and Techniques",
+              "type": "COURSE"
+            },
+            {
+              "subject": "IE",
+              "classId": 4531,
+              "description": "Lab for IE 4530",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 7
+    },
+    {
+      "type": "SECTION",
+      "title": "Industrial Engineering Capstone",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4701,
+          "subject": "MEIE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4702,
+          "subject": "MEIE"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Engineering Electives",
+      "requirements": [
+        [
+          {
+            "type": "RANGE",
+            "subject": "CHME",
+            "idRangeStart": 0,
+            "idRangeEnd": 9999,
+            "exceptions": []
+          },
+          {
+            "type": "RANGE",
+            "subject": "CIVE",
+            "idRangeStart": 0,
+            "idRangeEnd": 9999,
+            "exceptions": []
+          },
+          {
+            "type": "RANGE",
+            "subject": "EECE",
+            "idRangeStart": 0,
+            "idRangeEnd": 9999,
+            "exceptions": []
+          },
+          {
+            "type": "RANGE",
+            "subject": "EMGT",
+            "idRangeStart": 0,
+            "idRangeEnd": 9999,
+            "exceptions": []
+          },
+          {
+            "type": "RANGE",
+            "subject": "ENSY",
+            "idRangeStart": 0,
+            "idRangeEnd": 9999,
+            "exceptions": []
+          },
+          {
+            "type": "RANGE",
+            "subject": "IE",
+            "idRangeStart": 0,
+            "idRangeEnd": 9999,
+            "exceptions": []
+          },
+          {
+            "type": "RANGE",
+            "subject": "ME",
+            "idRangeStart": 0,
+            "idRangeEnd": 9999,
+            "exceptions": []
+          },
+          {
+            "type": "RANGE",
+            "subject": "MEIE",
+            "idRangeStart": 0,
+            "idRangeEnd": 9999,
+            "exceptions": []
+          }
+        ]
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Supplemental Credit",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3412,
+              "subject": "IE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3081,
+              "subject": "MATH"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 4512,
+          "subject": "IE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4515,
+          "subject": "IE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4520,
+          "subject": "IE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1501,
+          "subject": "GE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1502,
+          "subject": "GE"
+        }
+      ],
+      "minRequirementCount": 6
+    },
+    {
+      "type": "SECTION",
+      "title": "Required Mathematics/Science",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHEM",
+              "classId": 1151,
+              "description": "General Chemistry for Engineers",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 1153,
+              "description": "Recitation for CHEM 1151",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 1341,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1342,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2321,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2341,
+          "subject": "MATH"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "PHYS",
+              "classId": 1151,
+              "description": "Physics for Engineering 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHYS",
+              "classId": 1152,
+              "description": "Lab for PHYS 1151",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHYS",
+              "classId": 1153,
+              "description": "Interactive Learning Seminar for PHYS 1151",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 6
+    },
+    {
+      "type": "SECTION",
+      "title": "Science Elective",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "BIOL",
+              "classId": 1111,
+              "description": "General Biology 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "BIOL",
+              "classId": 1112,
+              "description": "Lab for BIOL 1111",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "BIOL",
+              "classId": 1115,
+              "description": "General Biology 1 for Engineers",
+              "type": "COURSE"
+            },
+            {
+              "subject": "BIOL",
+              "classId": 1116,
+              "description": "Lab for BIOL 1115",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "BIOL",
+              "classId": 2217,
+              "description": "Integrated Anatomy and Physiology 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "BIOL",
+              "classId": 2218,
+              "description": "Lab for BIOL 2217",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHEM",
+              "classId": 1214,
+              "description": "General Chemistry 2",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 1215,
+              "description": "Lab for CHEM 1214",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 1216,
+              "description": "Recitation for CHEM 1214",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHEM",
+              "classId": 2311,
+              "description": "Organic Chemistry 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 2312,
+              "description": "Lab for CHEM 2311",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 2319,
+              "description": "Recitation for CHEM 2311",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "PHYS",
+              "classId": 1155,
+              "description": "Physics for Engineering 2",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHYS",
+              "classId": 1156,
+              "description": "Lab for PHYS 1155",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHYS",
+              "classId": 1157,
+              "description": "Interactive Learning Seminar for PHYS 1155",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "PHYS",
+              "classId": 1161,
+              "description": "Physics 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHYS",
+              "classId": 1162,
+              "description": "Lab for PHYS 1161",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHYS",
+              "classId": 1163,
+              "description": "Recitation for PHYS 1161",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Supplemental Credit",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3412,
+              "subject": "IE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3081,
+              "subject": "MATH"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 4512,
+          "subject": "IE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4515,
+          "subject": "IE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4520,
+          "subject": "IE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1501,
+          "subject": "GE"
+        }
+      ],
+      "minRequirementCount": 5
+    },
+    {
+      "type": "SECTION",
+      "title": "Required Professional Development",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1000,
+          "subject": "GE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2000,
+          "subject": "ENCP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3000,
+          "subject": "ENCP"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Additional Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1501,
+          "subject": "GE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1502,
+          "subject": "GE"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Writing",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1111,
+          "subject": "ENGW"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3302,
+              "subject": "ENGW"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3315,
+              "subject": "ENGW"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Required General Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

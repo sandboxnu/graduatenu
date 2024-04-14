@@ -1,0 +1,219 @@
+{
+  "name": "Linguistics, BS",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "4/13/2024"
+  },
+  "totalCreditsRequired": 128,
+  "yearVersion": 2023,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Foundational Courses",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1150,
+              "subject": "LING"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1449,
+              "subject": "LING"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2350,
+          "subject": "LING"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3412,
+          "subject": "LING"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Linguistic Structure",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3420,
+          "subject": "LING"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3422,
+          "subject": "LING"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3424,
+          "subject": "LING"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3450,
+          "subject": "LING"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3452,
+          "subject": "LING"
+        }
+      ],
+      "minRequirementCount": 5
+    },
+    {
+      "type": "SECTION",
+      "title": "Language in Context",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3442,
+          "subject": "LING"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3456,
+          "subject": "LING"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Language Change",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3454,
+          "subject": "LING"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3460,
+          "subject": "LING"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Research Experience",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3150,
+          "subject": "LING"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4891,
+          "subject": "LING"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "LING",
+              "classId": 4970,
+              "description": "Junior/Senior Honors Project 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "LING",
+              "classId": 4971,
+              "description": "Junior/Senior Honors Project 2",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 4991,
+          "subject": "LING"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Linguistics Seminar",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4654,
+          "subject": "LING"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Linguistics Electives",
+      "requirements": [
+        {
+          "type": "RANGE",
+          "subject": "LING",
+          "idRangeStart": 3000,
+          "idRangeEnd": 4999,
+          "exceptions": []
+        },
+        {
+          "type": "COURSE",
+          "classId": 2700,
+          "subject": "DEAF"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4610,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4612,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4658,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4660,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4674,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4676,
+          "subject": "PSYC"
+        }
+      ],
+      "minRequirementCount": 8
+    },
+    {
+      "type": "SECTION",
+      "title": "Supporting Courses",
+      "requirements": [],
+      "minRequirementCount": 0
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

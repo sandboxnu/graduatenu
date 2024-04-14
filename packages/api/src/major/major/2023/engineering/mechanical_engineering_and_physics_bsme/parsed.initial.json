@@ -1,0 +1,481 @@
+{
+  "name": "Mechanical Engineering and Physics, BSME",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "4/13/2024"
+  },
+  "totalCreditsRequired": 139,
+  "yearVersion": 2023,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Engineering",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ME",
+              "classId": 2340,
+              "description": "Introduction to Material Science",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ME",
+              "classId": 2341,
+              "description": "Lab for ME 2340",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2350,
+          "subject": "ME"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ME",
+              "classId": 2355,
+              "description": "Mechanics of Materials",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ME",
+              "classId": 2356,
+              "description": "Lab for ME 2355",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ME",
+              "classId": 2380,
+              "description": "Thermodynamics",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ME",
+              "classId": 2381,
+              "description": "Recitation for ME 2380",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ME",
+              "classId": 3455,
+              "description": "Dynamics",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ME",
+              "classId": 3456,
+              "description": "Lab for ME 3455",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3475,
+              "subject": "ME"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3480,
+              "subject": "ME"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ME",
+              "classId": 4505,
+              "description": "Measurement and Analysis with Thermal Science Application",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ME",
+              "classId": 4506,
+              "description": "Lab for ME 4505",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 4508,
+              "subject": "ME"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4565,
+              "subject": "ME"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 4550,
+          "subject": "ME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4555,
+          "subject": "ME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4570,
+          "subject": "ME"
+        }
+      ],
+      "minRequirementCount": 11
+    },
+    {
+      "type": "SECTION",
+      "title": "Mechanical Engineering Capstone",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4701,
+          "subject": "MEIE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4702,
+          "subject": "MEIE"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Supplemental Credit",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1501,
+          "subject": "GE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1502,
+          "subject": "GE"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Required Mathematics/Science",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHEM",
+              "classId": 1151,
+              "description": "General Chemistry for Engineers",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 1153,
+              "description": "Recitation for CHEM 1151",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 1341,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1342,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2321,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2341,
+          "subject": "MATH"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "PHYS",
+              "classId": 1161,
+              "description": "Physics 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHYS",
+              "classId": 1162,
+              "description": "Lab for PHYS 1161",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHYS",
+              "classId": 1163,
+              "description": "Recitation for PHYS 1161",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "PHYS",
+              "classId": 1165,
+              "description": "Physics 2",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHYS",
+              "classId": 1166,
+              "description": "Lab for PHYS 1165",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHYS",
+              "classId": 1167,
+              "description": "Recitation for PHYS 1165",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2303,
+          "subject": "PHYS"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "PHYS",
+              "classId": 2371,
+              "description": "Electronics",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHYS",
+              "classId": 2372,
+              "description": "Lab for PHYS 2371",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 3600,
+          "subject": "PHYS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3601,
+          "subject": "PHYS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3602,
+          "subject": "PHYS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5318,
+          "subject": "PHYS"
+        }
+      ],
+      "minRequirementCount": 13
+    },
+    {
+      "type": "SECTION",
+      "title": "Advanced Physics Elective",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4606,
+          "subject": "PHYS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4621,
+          "subject": "PHYS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4623,
+          "subject": "PHYS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4651,
+          "subject": "PHYS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4652,
+          "subject": "PHYS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5113,
+          "subject": "PHYS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5116,
+          "subject": "PHYS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5117,
+          "subject": "PHYS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5118,
+          "subject": "PHYS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5125,
+          "subject": "PHYS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5260,
+          "subject": "PHYS"
+        }
+      ],
+      "minRequirementCount": 11
+    },
+    {
+      "type": "SECTION",
+      "title": "Supplemental Credit",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1501,
+          "subject": "GE"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Professional Development",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1000,
+          "subject": "GE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2000,
+          "subject": "ENCP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3000,
+          "subject": "ENCP"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Additional Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1501,
+          "subject": "GE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1502,
+          "subject": "GE"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Writing",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1111,
+          "subject": "ENGW"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3302,
+              "subject": "ENGW"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3315,
+              "subject": "ENGW"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Required General Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Integrative Requirement",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 5318,
+          "subject": "PHYS"
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

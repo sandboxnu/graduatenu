@@ -1,0 +1,470 @@
+{
+  "name": "Environmental Studies and Philosophy, BA",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "4/13/2024"
+  },
+  "totalCreditsRequired": 128,
+  "yearVersion": 2022,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Introductory Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "ENVR"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ENVR",
+              "classId": 1200,
+              "description": "Dynamic Earth",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ENVR",
+              "classId": 1201,
+              "description": "Lab for ENVR 1200",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ENVR",
+              "classId": 1400,
+              "description": "Foundations in Environmental and Sustainability Sciences",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ENVR",
+              "classId": 1401,
+              "description": "Lab for ENVR 1400",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "ANTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2401,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1180,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1246,
+          "subject": "SOCL"
+        }
+      ],
+      "minRequirementCount": 7
+    },
+    {
+      "type": "SECTION",
+      "title": "Scientific Foundations of Environmental Systems:",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1110,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3150,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3200,
+          "subject": "ENVR"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Human Foundations of Environmental Systems:",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2515,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2414,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4522,
+          "subject": "SOCL"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Skills Course:",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ENVR",
+              "classId": 3300,
+              "description": "Geographic Information Systems",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ENVR",
+              "classId": 3301,
+              "description": "Lab for ENVR 3300",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives:",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 5110,
+          "subject": "ARTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1110,
+          "subject": "BUSN"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3110,
+          "subject": "BUSN"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5280,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3500,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3466,
+          "subject": "EEMB"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3700,
+          "subject": "EEMB"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3201,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3202,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3701,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4504,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5210,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5350,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5563,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5750,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5800,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2720,
+          "subject": "FINA"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3650,
+          "subject": "JRNL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2301,
+          "subject": "LPSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1180,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1270,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2395,
+          "subject": "POLS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5268,
+          "subject": "PPUA"
+        }
+      ],
+      "minRequirementCount": 23
+    },
+    {
+      "type": "SECTION",
+      "title": "Philosophy Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1115,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1180,
+          "subject": "PHIL"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2325,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2325,
+              "subject": "POLS"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2330,
+          "subject": "PHIL"
+        }
+      ],
+      "minRequirementCount": 4
+    },
+    {
+      "type": "SECTION",
+      "title": "Philosophy of Science/Environment",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1105,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3050,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4510,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4555,
+          "subject": "PHIL"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Restricted Electives",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3100,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3343,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3360,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3435,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3460,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3822,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4500,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4510,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4515,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4535,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4550,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4555,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4901,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4903,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5001,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5002,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5005,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5010,
+          "subject": "PHIL"
+        }
+      ],
+      "minRequirementCount": 18
+    },
+    {
+      "type": "SECTION",
+      "title": "Additional Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Integrative Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4050,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4997,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5210,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5220,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3532,
+          "subject": "COMM"
+        }
+      ],
+      "minRequirementCount": 5
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

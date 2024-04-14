@@ -1,0 +1,78 @@
+{
+  "name": "Political Science and Economics, BA",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "4/11/2024"
+  },
+  "totalCreditsRequired": 128,
+  "yearVersion": 2023,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Political Science Requirements",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1150,
+          "subject": "POLS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1155,
+          "subject": "POLS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1160,
+          "subject": "POLS"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Political Theory",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2325,
+          "subject": "POLS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2328,
+          "subject": "POLS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2330,
+          "subject": "POLS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2332,
+          "subject": "POLS"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Political Science Electives",
+      "requirements": [
+        {
+          "type": "RANGE",
+          "subject": "POLS",
+          "idRangeStart": 2000,
+          "idRangeEnd": 5999,
+          "exceptions": []
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

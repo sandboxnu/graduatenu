@@ -1,0 +1,708 @@
+{
+  "name": "Media Arts, BFA",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "4/13/2024"
+  },
+  "totalCreditsRequired": 134,
+  "yearVersion": 2023,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Introduction to College",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1000,
+          "subject": "ARTF"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Art and Design Fundamentals",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1122,
+          "subject": "ARTF"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARTF",
+              "classId": 1124,
+              "description": "Form and Structure",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARTF",
+              "classId": 1125,
+              "description": "Form and Structure Tools",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARTF",
+              "classId": 2220,
+              "description": "Movement and Time",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARTF",
+              "classId": 2221,
+              "description": "Movement and Time Tools",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARTF",
+              "classId": 2223,
+              "description": "Experience and Interaction",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARTF",
+              "classId": 2224,
+              "description": "Experience and Interaction Tools",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 4
+    },
+    {
+      "type": "SECTION",
+      "title": "Art and Design History",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARTH",
+              "classId": 1001,
+              "description": "Visual Intelligence",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARTH",
+              "classId": 1002,
+              "description": "Seminar in Visual Intelligence",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 3000,
+          "subject": "ARTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4000,
+          "subject": "ARTH"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Media Arts Requirements",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARTD",
+              "classId": 1001,
+              "description": "Media Art, Culture, and Social Justice",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARTD",
+              "classId": 1002,
+              "description": "Seminar for ARTD 1001",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Drawing Fundamentals Elective",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1120,
+              "subject": "ARTF"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1121,
+              "subject": "ARTF"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Media Arts Basics Elective",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARTD",
+              "classId": 2360,
+              "description": "Introduction to Photography",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARTD",
+              "classId": 2361,
+              "description": "Photo Tools",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARTD",
+              "classId": 2370,
+              "description": "Animation Basics",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARTD",
+              "classId": 2371,
+              "description": "Animation Tools",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARTD",
+              "classId": 2380,
+              "description": "Video Basics",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARTD",
+              "classId": 2381,
+              "description": "Video Tools",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Media Arts History Elective",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2210,
+          "subject": "ARTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2211,
+          "subject": "ARTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2212,
+          "subject": "ARTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3000,
+          "subject": "ARTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4000,
+          "subject": "ARTH"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Design Requirement",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARTG",
+              "classId": 1290,
+              "description": "Typographic Systems",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARTG",
+              "classId": 1291,
+              "description": "Studio for Typographic Systems",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Degree Project",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4530,
+          "subject": "ARTD"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Video Arts Electives",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 16,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3000,
+              "subject": "ARTD"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3485,
+              "subject": "ARTD"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2212,
+              "subject": "ARTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2160,
+              "subject": "MSCR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3389,
+              "subject": "MSCR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3446,
+              "subject": "MSCR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2345,
+              "subject": "THTR"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Art and Design Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "University of Arts London",
+      "requirements": [],
+      "minRequirementCount": 0
+    }
+  ],
+  "concentrations": {
+    "minOptions": 1,
+    "concentrationOptions": [
+      {
+        "type": "SECTION",
+        "title": "Media Arts Electives or Concentration",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 2100,
+            "subject": "ARTD"
+          },
+          {
+            "type": "COURSE",
+            "classId": 2340,
+            "subject": "ARTD"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3000,
+            "subject": "ARTD"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3460,
+            "subject": "ARTD"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3470,
+            "subject": "ARTD"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3471,
+            "subject": "ARTD"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3472,
+            "subject": "ARTD"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3473,
+            "subject": "ARTD"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3480,
+            "subject": "ARTD"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3485,
+            "subject": "ARTD"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4565,
+            "subject": "ARTD"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4570,
+            "subject": "ARTD"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4575,
+            "subject": "ARTD"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4660,
+            "subject": "ARTD"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4661,
+            "subject": "ARTD"
+          },
+          {
+            "type": "COURSE",
+            "classId": 2301,
+            "subject": "ARTE"
+          },
+          {
+            "type": "COURSE",
+            "classId": 2500,
+            "subject": "ARTE"
+          },
+          {
+            "type": "COURSE",
+            "classId": 2501,
+            "subject": "ARTE"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3901,
+            "subject": "ARTE"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4901,
+            "subject": "ARTE"
+          },
+          {
+            "type": "COURSE",
+            "classId": 1100,
+            "subject": "ARTH"
+          },
+          {
+            "type": "COURSE",
+            "classId": 1400,
+            "subject": "ARTH"
+          },
+          {
+            "type": "COURSE",
+            "classId": 2210,
+            "subject": "ARTH"
+          },
+          {
+            "type": "COURSE",
+            "classId": 2211,
+            "subject": "ARTH"
+          },
+          {
+            "type": "COURSE",
+            "classId": 2313,
+            "subject": "ARTH"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3000,
+            "subject": "ARTH"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3211,
+            "subject": "ARTH"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4000,
+            "subject": "ARTH"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5100,
+            "subject": "ARTH"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5600,
+            "subject": "ARTH"
+          },
+          {
+            "type": "COURSE",
+            "classId": 2340,
+            "subject": "ARTS"
+          },
+          {
+            "type": "COURSE",
+            "classId": 2341,
+            "subject": "ARTS"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3449,
+            "subject": "ARTS"
+          }
+        ],
+        "minRequirementCount": 33
+      },
+      {
+        "type": "SECTION",
+        "title": "Sound Management at University of Arts London",
+        "requirements": [],
+        "minRequirementCount": 0
+      },
+      {
+        "type": "SECTION",
+        "title": "Animation Requirements",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 2100,
+            "subject": "ARTD"
+          },
+          {
+            "type": "AND",
+            "courses": [
+              {
+                "subject": "ARTD",
+                "classId": 2370,
+                "description": "Animation Basics",
+                "type": "COURSE"
+              },
+              {
+                "subject": "ARTD",
+                "classId": 2371,
+                "description": "Animation Tools",
+                "type": "COURSE"
+              }
+            ]
+          },
+          {
+            "type": "COURSE",
+            "classId": 3000,
+            "subject": "ARTD"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3470,
+            "subject": "ARTD"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4570,
+            "subject": "ARTD"
+          }
+        ],
+        "minRequirementCount": 5
+      },
+      {
+        "type": "SECTION",
+        "title": "Animation Electives",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 3471,
+            "subject": "ARTD"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3472,
+            "subject": "ARTD"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3473,
+            "subject": "ARTD"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4575,
+            "subject": "ARTD"
+          }
+        ],
+        "minRequirementCount": 4
+      },
+      {
+        "type": "SECTION",
+        "title": "Art and Design Elective",
+        "requirements": [],
+        "minRequirementCount": 0
+      },
+      {
+        "type": "SECTION",
+        "title": "Photography Requirements",
+        "requirements": [
+          {
+            "type": "AND",
+            "courses": [
+              {
+                "subject": "ARTD",
+                "classId": 2360,
+                "description": "Introduction to Photography",
+                "type": "COURSE"
+              },
+              {
+                "subject": "ARTD",
+                "classId": 2361,
+                "description": "Photo Tools",
+                "type": "COURSE"
+              }
+            ]
+          },
+          {
+            "type": "COURSE",
+            "classId": 3460,
+            "subject": "ARTD"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4565,
+            "subject": "ARTD"
+          }
+        ],
+        "minRequirementCount": 3
+      },
+      {
+        "type": "SECTION",
+        "title": "Photography Elective",
+        "requirements": [
+          {
+            "type": "OR",
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 3000,
+                "subject": "ARTD"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4660,
+                "subject": "ARTD"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4661,
+                "subject": "ARTD"
+              }
+            ]
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Art and Design Electives",
+        "requirements": [],
+        "minRequirementCount": 0
+      },
+      {
+        "type": "SECTION",
+        "title": "Video Arts Requirements",
+        "requirements": [
+          {
+            "type": "AND",
+            "courses": [
+              {
+                "subject": "ARTD",
+                "classId": 2380,
+                "description": "Video Basics",
+                "type": "COURSE"
+              },
+              {
+                "subject": "ARTD",
+                "classId": 2381,
+                "description": "Video Tools",
+                "type": "COURSE"
+              }
+            ]
+          },
+          {
+            "type": "COURSE",
+            "classId": 3480,
+            "subject": "ARTD"
+          }
+        ],
+        "minRequirementCount": 2
+      }
+    ]
+  }
+}

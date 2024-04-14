@@ -1,0 +1,170 @@
+{
+  "name": "American Sign Language and Human Services, BS",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "4/13/2024"
+  },
+  "totalCreditsRequired": 128,
+  "yearVersion": 2023,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "American Sign Language",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "AMSL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1102,
+          "subject": "AMSL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2101,
+          "subject": "AMSL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2102,
+          "subject": "AMSL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3101,
+          "subject": "AMSL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3102,
+          "subject": "AMSL"
+        }
+      ],
+      "minRequirementCount": 6
+    },
+    {
+      "type": "SECTION",
+      "title": "Social and Cultural World",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1500,
+          "subject": "DEAF"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2500,
+          "subject": "DEAF"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Linguistics",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1150,
+          "subject": "LING"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2700,
+          "subject": "DEAF"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Performance Interpreting",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3500,
+          "subject": "INTP"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Interpreting",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3510,
+          "subject": "INTP"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Human Services",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "HUSV"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2300,
+          "subject": "HUSV"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2970,
+          "subject": "HUSV"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3570,
+          "subject": "HUSV"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3900,
+          "subject": "HUSV"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4700,
+          "subject": "HUSV"
+        }
+      ],
+      "minRequirementCount": 6
+    },
+    {
+      "type": "SECTION",
+      "title": "Human Services Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Integrative Requirement",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4940,
+          "subject": "INTP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4994,
+          "subject": "HUSV"
+        }
+      ],
+      "minRequirementCount": 2
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

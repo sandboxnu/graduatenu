@@ -1,0 +1,226 @@
+{
+  "name": "Nursing, BSN—Accelerated Program for Second-Degree Students",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "4/13/2024"
+  },
+  "totalCreditsRequired": 67,
+  "yearVersion": 2021,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "SEMESTER 1",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2001,
+          "subject": "NRSG"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "NRSG",
+              "classId": 2220,
+              "description": "Health Assessment and Fundamental Nursing Skills",
+              "type": "COURSE"
+            },
+            {
+              "subject": "NRSG",
+              "classId": 2221,
+              "description": "Lab for NRSG 2220",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2350,
+          "subject": "NRSG"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "NRSG",
+              "classId": 3302,
+              "description": "Nursing with Women and Families",
+              "type": "COURSE"
+            },
+            {
+              "subject": "NRSG",
+              "classId": 3303,
+              "description": "Clinical for NRSG 3302",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 4
+    },
+    {
+      "type": "SECTION",
+      "title": "SEMESTER 2",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2210,
+          "subject": "NRSG"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "NRSG",
+              "classId": 3320,
+              "description": "Nursing Care of Adults 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "NRSG",
+              "classId": 3321,
+              "description": "Clinical for NRSG 3320",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "NRSG",
+              "classId": 3400,
+              "description": "Nursing and the Promotion of Mental Health",
+              "type": "COURSE"
+            },
+            {
+              "subject": "NRSG",
+              "classId": 3401,
+              "description": "Clinical for NRSG 3400",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "NRSG",
+              "classId": 3323,
+              "description": "Advanced Assessment and Interventions",
+              "type": "COURSE"
+            },
+            {
+              "subject": "NRSG",
+              "classId": 3324,
+              "description": "Lab for NRSG 3323",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 4
+    },
+    {
+      "type": "SECTION",
+      "title": "SEMESTER 3",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "NRSG",
+              "classId": 3420,
+              "description": "Nursing Care of Adults 2",
+              "type": "COURSE"
+            },
+            {
+              "subject": "NRSG",
+              "classId": 3421,
+              "description": "Clinical for NRSG 3420",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "NRSG",
+              "classId": 4502,
+              "description": "Nursing Care of the Child",
+              "type": "COURSE"
+            },
+            {
+              "subject": "NRSG",
+              "classId": 4503,
+              "description": "Clinical for NRSG 4502",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 5220,
+          "subject": "NRSG"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "SEMESTER 4",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "NRSG",
+              "classId": 4604,
+              "description": "Public Health Community Nursing",
+              "type": "COURSE"
+            },
+            {
+              "subject": "NRSG",
+              "classId": 4605,
+              "description": "Clinical for NRSG 4604",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 4610,
+          "subject": "NRSG"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "NRSG",
+              "classId": 4995,
+              "description": "Comprehensive Nursing Practicum",
+              "type": "COURSE"
+            },
+            {
+              "subject": "NRSG",
+              "classId": 4996,
+              "description": "Clinical for NRSG 4995",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2150,
+          "subject": "NRSG"
+        }
+      ],
+      "minRequirementCount": 4
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}
