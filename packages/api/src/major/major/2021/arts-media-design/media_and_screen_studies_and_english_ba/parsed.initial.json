@@ -2,7 +2,7 @@
   "name": "Media and Screen Studies and English, BA",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/13/2024"
+    "lastEdited": "4/14/2024"
   },
   "totalCreditsRequired": 128,
   "yearVersion": 2021,
@@ -172,12 +172,6 @@
         }
       ],
       "minRequirementCount": 9
-    },
-    {
-      "type": "SECTION",
-      "title": "English Course-Level Requirement",
-      "requirements": [],
-      "minRequirementCount": 0
     },
     {
       "type": "SECTION",
@@ -656,12 +650,6 @@
         }
       ],
       "minRequirementCount": 1
-    },
-    {
-      "type": "SECTION",
-      "title": "English Electives",
-      "requirements": [],
-      "minRequirementCount": 0
     },
     {
       "type": "SECTION",

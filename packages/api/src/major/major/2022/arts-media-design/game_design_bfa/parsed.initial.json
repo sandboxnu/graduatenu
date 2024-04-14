@@ -2,7 +2,7 @@
   "name": "Game Design, BFA",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/13/2024"
+    "lastEdited": "4/14/2024"
   },
   "totalCreditsRequired": 128,
   "yearVersion": 2022,
@@ -294,12 +294,6 @@
         }
       ],
       "minRequirementCount": 7
-    },
-    {
-      "type": "SECTION",
-      "title": "Art History",
-      "requirements": [],
-      "minRequirementCount": 0
     }
   ],
   "concentrations": {

@@ -2,7 +2,7 @@
   "name": "Health Science and Psychology, BS",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/13/2024"
+    "lastEdited": "4/14/2024"
   },
   "totalCreditsRequired": 133,
   "yearVersion": 2022,
@@ -229,12 +229,6 @@
     },
     {
       "type": "SECTION",
-      "title": "Psychology Electives",
-      "requirements": [],
-      "minRequirementCount": 0
-    },
-    {
-      "type": "SECTION",
       "title": "Psychology Lab",
       "requirements": [
         {
@@ -428,12 +422,6 @@
         }
       ],
       "minRequirementCount": 1
-    },
-    {
-      "type": "SECTION",
-      "title": "Open Electives",
-      "requirements": [],
-      "minRequirementCount": 0
     },
     {
       "type": "SECTION",

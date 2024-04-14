@@ -2,7 +2,7 @@
   "name": "Computer Science and Criminal Justice, BS",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/13/2024"
+    "lastEdited": "4/14/2024"
   },
   "totalCreditsRequired": 133,
   "yearVersion": 2021,
@@ -340,12 +340,6 @@
     },
     {
       "type": "SECTION",
-      "title": "Criminal Justice Elective",
-      "requirements": [],
-      "minRequirementCount": 0
-    },
-    {
-      "type": "SECTION",
       "title": "Integrative Course Requirement",
       "requirements": [
         {
@@ -481,12 +475,6 @@
         }
       ],
       "minRequirementCount": 1
-    },
-    {
-      "type": "SECTION",
-      "title": "Required General Electives",
-      "requirements": [],
-      "minRequirementCount": 0
     }
   ],
   "concentrations": {

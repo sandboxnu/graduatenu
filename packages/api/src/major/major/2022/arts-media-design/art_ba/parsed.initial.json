@@ -2,7 +2,7 @@
   "name": "Art, BA",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/13/2024"
+    "lastEdited": "4/14/2024"
   },
   "totalCreditsRequired": 129,
   "yearVersion": 2022,
@@ -137,12 +137,6 @@
         }
       ],
       "minRequirementCount": 3
-    },
-    {
-      "type": "SECTION",
-      "title": "Art History Elective",
-      "requirements": [],
-      "minRequirementCount": 0
     },
     {
       "type": "SECTION",

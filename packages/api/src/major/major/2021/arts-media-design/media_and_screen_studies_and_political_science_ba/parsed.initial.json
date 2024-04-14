@@ -2,7 +2,7 @@
   "name": "Media and Screen Studies and Political Science, BA",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/13/2024"
+    "lastEdited": "4/14/2024"
   },
   "totalCreditsRequired": 128,
   "yearVersion": 2021,
@@ -238,12 +238,6 @@
         }
       ],
       "minRequirementCount": 1
-    },
-    {
-      "type": "SECTION",
-      "title": "Elective Courses",
-      "requirements": [],
-      "minRequirementCount": 0
     },
     {
       "type": "SECTION",

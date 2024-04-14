@@ -2,7 +2,7 @@
   "name": "Business Administration and Design, BS",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/13/2024"
+    "lastEdited": "4/14/2024"
   },
   "totalCreditsRequired": 128,
   "yearVersion": 2022,
@@ -358,24 +358,6 @@
     },
     {
       "type": "SECTION",
-      "title": "Design Elective",
-      "requirements": [],
-      "minRequirementCount": 0
-    },
-    {
-      "type": "SECTION",
-      "title": "Art and Design History Elective",
-      "requirements": [],
-      "minRequirementCount": 0
-    },
-    {
-      "type": "SECTION",
-      "title": "Art and Design Elective",
-      "requirements": [],
-      "minRequirementCount": 0
-    },
-    {
-      "type": "SECTION",
       "title": "Degree Capstone Project",
       "requirements": [
         {
@@ -385,12 +367,6 @@
         }
       ],
       "minRequirementCount": 1
-    },
-    {
-      "type": "SECTION",
-      "title": "Design Option",
-      "requirements": [],
-      "minRequirementCount": 0
     },
     {
       "type": "SECTION",

@@ -2,7 +2,7 @@
   "name": "Pharmacy Studies, BS",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/13/2024"
+    "lastEdited": "4/14/2024"
   },
   "totalCreditsRequired": 164,
   "yearVersion": 2021,
@@ -98,12 +98,6 @@
     },
     {
       "type": "SECTION",
-      "title": "SEMESTER 5",
-      "requirements": [],
-      "minRequirementCount": 0
-    },
-    {
-      "type": "SECTION",
       "title": "SEMESTER 6",
       "requirements": [
         {
@@ -128,12 +122,6 @@
         }
       ],
       "minRequirementCount": 4
-    },
-    {
-      "type": "SECTION",
-      "title": "SEMESTER 7",
-      "requirements": [],
-      "minRequirementCount": 0
     },
     {
       "type": "SECTION",
@@ -178,12 +166,6 @@
         }
       ],
       "minRequirementCount": 5
-    },
-    {
-      "type": "SECTION",
-      "title": "SEMESTER 9",
-      "requirements": [],
-      "minRequirementCount": 0
     },
     {
       "type": "SECTION",
@@ -307,12 +289,6 @@
         }
       ],
       "minRequirementCount": 5
-    },
-    {
-      "type": "SECTION",
-      "title": "Electives",
-      "requirements": [],
-      "minRequirementCount": 0
     },
     {
       "type": "SECTION",

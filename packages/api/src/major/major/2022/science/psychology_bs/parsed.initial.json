@@ -2,7 +2,7 @@
   "name": "Psychology, BS",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/13/2024"
+    "lastEdited": "4/14/2024"
   },
   "totalCreditsRequired": 128,
   "yearVersion": 2022,
@@ -235,18 +235,6 @@
         }
       ],
       "minRequirementCount": 11
-    },
-    {
-      "type": "SECTION",
-      "title": "Psychology Required Electives",
-      "requirements": [],
-      "minRequirementCount": 0
-    },
-    {
-      "type": "SECTION",
-      "title": "Interdisciplinary Cluster",
-      "requirements": [],
-      "minRequirementCount": 0
     },
     {
       "type": "SECTION",

@@ -2,7 +2,7 @@
   "name": "Mathematics and Political Science, BS",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/13/2024"
+    "lastEdited": "4/14/2024"
   },
   "totalCreditsRequired": 128,
   "yearVersion": 2021,
@@ -65,12 +65,6 @@
     },
     {
       "type": "SECTION",
-      "title": "Math Electives",
-      "requirements": [],
-      "minRequirementCount": 0
-    },
-    {
-      "type": "SECTION",
       "title": "Political Science Required Courses",
       "requirements": [
         {
@@ -127,12 +121,6 @@
         }
       ],
       "minRequirementCount": 4
-    },
-    {
-      "type": "SECTION",
-      "title": "Political Science Electives",
-      "requirements": [],
-      "minRequirementCount": 0
     },
     {
       "type": "SECTION",

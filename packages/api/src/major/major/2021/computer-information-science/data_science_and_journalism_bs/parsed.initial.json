@@ -2,7 +2,7 @@
   "name": "Data Science and Journalism, BS",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/13/2024"
+    "lastEdited": "4/14/2024"
   },
   "totalCreditsRequired": 131,
   "yearVersion": 2021,
@@ -324,12 +324,6 @@
     },
     {
       "type": "SECTION",
-      "title": "Journalism Electives",
-      "requirements": [],
-      "minRequirementCount": 0
-    },
-    {
-      "type": "SECTION",
       "title": "Mathematics Requirement",
       "requirements": [
         {
@@ -439,12 +433,6 @@
         }
       ],
       "minRequirementCount": 1
-    },
-    {
-      "type": "SECTION",
-      "title": "Required General Electives",
-      "requirements": [],
-      "minRequirementCount": 0
     }
   ],
   "concentrations": {

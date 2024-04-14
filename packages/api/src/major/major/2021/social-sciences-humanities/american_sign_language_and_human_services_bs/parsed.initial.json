@@ -2,7 +2,7 @@
   "name": "American Sign Language and Human Services, BS",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/13/2024"
+    "lastEdited": "4/14/2024"
   },
   "totalCreditsRequired": 128,
   "yearVersion": 2021,
@@ -138,12 +138,6 @@
         }
       ],
       "minRequirementCount": 6
-    },
-    {
-      "type": "SECTION",
-      "title": "Human Services Electives",
-      "requirements": [],
-      "minRequirementCount": 0
     },
     {
       "type": "SECTION",

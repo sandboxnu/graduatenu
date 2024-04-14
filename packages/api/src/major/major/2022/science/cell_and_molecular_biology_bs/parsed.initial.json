@@ -2,17 +2,11 @@
   "name": "Cell and Molecular Biology, BS",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/13/2024"
+    "lastEdited": "4/14/2024"
   },
   "totalCreditsRequired": 136,
   "yearVersion": 2022,
   "requirementSections": [
-    {
-      "type": "SECTION",
-      "title": "Introduction to College",
-      "requirements": [],
-      "minRequirementCount": 0
-    },
     {
       "type": "SECTION",
       "title": "Introduction to Experiential Learning",

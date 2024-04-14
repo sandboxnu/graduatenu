@@ -2,7 +2,7 @@
   "name": "Computer Science and English, BS",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/13/2024"
+    "lastEdited": "4/14/2024"
   },
   "totalCreditsRequired": 133,
   "yearVersion": 2022,
@@ -732,12 +732,6 @@
     },
     {
       "type": "SECTION",
-      "title": "English Electives",
-      "requirements": [],
-      "minRequirementCount": 0
-    },
-    {
-      "type": "SECTION",
       "title": "Capstone",
       "requirements": [
         {
@@ -912,12 +906,6 @@
         }
       ],
       "minRequirementCount": 1
-    },
-    {
-      "type": "SECTION",
-      "title": "Required General Electives",
-      "requirements": [],
-      "minRequirementCount": 0
     }
   ],
   "concentrations": {

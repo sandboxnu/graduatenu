@@ -2,17 +2,11 @@
   "name": "English and Graphic and Information Design, BA",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/13/2024"
+    "lastEdited": "4/14/2024"
   },
   "totalCreditsRequired": 128,
   "yearVersion": 2022,
   "requirementSections": [
-    {
-      "type": "SECTION",
-      "title": "English Course-Level Requirement",
-      "requirements": [],
-      "minRequirementCount": 0
-    },
     {
       "type": "SECTION",
       "title": "Introduction to College",
@@ -465,12 +459,6 @@
         }
       ],
       "minRequirementCount": 1
-    },
-    {
-      "type": "SECTION",
-      "title": "English Electives",
-      "requirements": [],
-      "minRequirementCount": 0
     },
     {
       "type": "SECTION",

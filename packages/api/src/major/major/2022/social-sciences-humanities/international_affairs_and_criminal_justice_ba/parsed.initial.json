@@ -2,7 +2,7 @@
   "name": "International Affairs and Criminal Justice, BA",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/13/2024"
+    "lastEdited": "4/14/2024"
   },
   "totalCreditsRequired": 128,
   "yearVersion": 2022,
@@ -66,24 +66,6 @@
     },
     {
       "type": "SECTION",
-      "title": "International Experiential Learning",
-      "requirements": [],
-      "minRequirementCount": 0
-    },
-    {
-      "type": "SECTION",
-      "title": "International Affairs Foreign Language Requirement",
-      "requirements": [],
-      "minRequirementCount": 0
-    },
-    {
-      "type": "SECTION",
-      "title": "International Affairs Elective",
-      "requirements": [],
-      "minRequirementCount": 1
-    },
-    {
-      "type": "SECTION",
       "title": "NUpath Requirements",
       "requirements": [
         {
@@ -138,12 +120,6 @@
         }
       ],
       "minRequirementCount": 10
-    },
-    {
-      "type": "SECTION",
-      "title": "Global Dynamics",
-      "requirements": [],
-      "minRequirementCount": 0
     },
     {
       "type": "SECTION",
@@ -654,12 +630,6 @@
     },
     {
       "type": "SECTION",
-      "title": "Regional Analysis Requirement",
-      "requirements": [],
-      "minRequirementCount": 0
-    },
-    {
-      "type": "SECTION",
       "title": "Universitywide Requirements",
       "requirements": [
         {
@@ -1099,12 +1069,6 @@
         }
       ],
       "minRequirementCount": 1
-    },
-    {
-      "type": "SECTION",
-      "title": "Criminal Justice Electives",
-      "requirements": [],
-      "minRequirementCount": 0
     },
     {
       "type": "SECTION",

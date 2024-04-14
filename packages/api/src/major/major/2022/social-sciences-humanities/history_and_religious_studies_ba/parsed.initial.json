@@ -2,7 +2,7 @@
   "name": "History and Religious Studies, BA",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/13/2024"
+    "lastEdited": "4/14/2024"
   },
   "totalCreditsRequired": 128,
   "yearVersion": 2022,
@@ -28,12 +28,6 @@
         }
       ],
       "minRequirementCount": 3
-    },
-    {
-      "type": "SECTION",
-      "title": "Introductory Level",
-      "requirements": [],
-      "minRequirementCount": 0
     },
     {
       "type": "SECTION",
@@ -103,18 +97,6 @@
         }
       ],
       "minRequirementCount": 1
-    },
-    {
-      "type": "SECTION",
-      "title": "Intermediate/Advanced History",
-      "requirements": [],
-      "minRequirementCount": 0
-    },
-    {
-      "type": "SECTION",
-      "title": "Advanced History",
-      "requirements": [],
-      "minRequirementCount": 0
     },
     {
       "type": "SECTION",

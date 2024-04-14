@@ -2,7 +2,7 @@
   "name": "Political Science and Communication Studies, BS",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/13/2024"
+    "lastEdited": "4/14/2024"
   },
   "totalCreditsRequired": 128,
   "yearVersion": 2021,
@@ -290,12 +290,6 @@
         }
       ],
       "minRequirementCount": 15
-    },
-    {
-      "type": "SECTION",
-      "title": "Communication Studies Electives",
-      "requirements": [],
-      "minRequirementCount": 0
     },
     {
       "type": "SECTION",

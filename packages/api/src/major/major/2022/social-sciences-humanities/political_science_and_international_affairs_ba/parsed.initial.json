@@ -2,7 +2,7 @@
   "name": "Political Science and International Affairs, BA",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/13/2024"
+    "lastEdited": "4/14/2024"
   },
   "totalCreditsRequired": 128,
   "yearVersion": 2022,
@@ -110,12 +110,6 @@
     },
     {
       "type": "SECTION",
-      "title": "International Experiential Learning",
-      "requirements": [],
-      "minRequirementCount": 0
-    },
-    {
-      "type": "SECTION",
       "title": "International Relations Elective",
       "requirements": [
         {
@@ -182,12 +176,6 @@
         }
       ],
       "minRequirementCount": 10
-    },
-    {
-      "type": "SECTION",
-      "title": "Global Dynamics Requirement",
-      "requirements": [],
-      "minRequirementCount": 0
     },
     {
       "type": "SECTION",
@@ -695,12 +683,6 @@
         }
       ],
       "minRequirementCount": 82
-    },
-    {
-      "type": "SECTION",
-      "title": "Regional Analysis Requirement",
-      "requirements": [],
-      "minRequirementCount": 0
     },
     {
       "type": "SECTION",

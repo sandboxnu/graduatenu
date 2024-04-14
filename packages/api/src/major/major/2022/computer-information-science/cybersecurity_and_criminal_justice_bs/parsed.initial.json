@@ -2,7 +2,7 @@
   "name": "Cybersecurity and Criminal Justice, BS",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/13/2024"
+    "lastEdited": "4/14/2024"
   },
   "totalCreditsRequired": 134,
   "yearVersion": 2022,
@@ -537,12 +537,6 @@
     },
     {
       "type": "SECTION",
-      "title": "Criminal Justice Elective",
-      "requirements": [],
-      "minRequirementCount": 0
-    },
-    {
-      "type": "SECTION",
       "title": "Criminal Justice Capstone",
       "requirements": [
         {
@@ -638,12 +632,6 @@
         }
       ],
       "minRequirementCount": 1
-    },
-    {
-      "type": "SECTION",
-      "title": "Required General Electives",
-      "requirements": [],
-      "minRequirementCount": 0
     }
   ],
   "concentrations": {

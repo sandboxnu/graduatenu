@@ -2,7 +2,7 @@
   "name": "Health Science, BS",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/13/2024"
+    "lastEdited": "4/14/2024"
   },
   "totalCreditsRequired": 132,
   "yearVersion": 2022,
@@ -169,12 +169,6 @@
         }
       ],
       "minRequirementCount": 5
-    },
-    {
-      "type": "SECTION",
-      "title": "Selectives",
-      "requirements": [],
-      "minRequirementCount": 0
     },
     {
       "type": "SECTION",
@@ -656,12 +650,6 @@
         }
       ],
       "minRequirementCount": 5
-    },
-    {
-      "type": "SECTION",
-      "title": "Electives",
-      "requirements": [],
-      "minRequirementCount": 0
     }
   ],
   "concentrations": {
