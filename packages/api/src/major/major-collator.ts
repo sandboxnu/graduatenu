@@ -30,6 +30,7 @@ async function fileExists(
   );
 }
 
+// TODO: this code is quick and dirty but works. this should be replaced with some dry-er code later.
 async function collateMajors() {
   const fs = await import("fs/promises");
   const path = await import("path");
