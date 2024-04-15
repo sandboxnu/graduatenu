@@ -1,2 +1,2 @@
-raw.initial.html
-tokens.initial.json
+raw.*.html
+tokens.*.json
