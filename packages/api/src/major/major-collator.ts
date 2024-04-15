@@ -3,7 +3,7 @@ import { Major2 } from "@graduate/common";
 const MAJORS: Record<string, Record<string, Major2>> = {};
 const MAJOR_YEARS = new Set<string>();
 
-const rootDir = "./src/major/major";
+const rootDir = "./src/major/majors";
 
 interface YearData {
   year: string;
