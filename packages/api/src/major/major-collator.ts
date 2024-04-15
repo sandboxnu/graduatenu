@@ -31,7 +31,14 @@ async function fileExists(
 }
 
 // TODO: this code is quick and dirty but works. this should be replaced with some dry-er code later.
+/**
+ * Iterates over the ./majors directory, collecting majors and adding them to
+ * the exported MAJORS and MAJOR_YEARS object/set respectively. It prioritizes
+ * parsed.commit.json files over parsed.initial.json files because _.commit._
+ * files have been human-reviewed and _.initial._ files are raw scraper output.
+ */
 async function collateMajors() {
+  // TODO: determine why these needed to be runtime imports (normal import statements didn't work here).
   const fs = await import("fs/promises");
   const path = await import("path");
   const years = (
