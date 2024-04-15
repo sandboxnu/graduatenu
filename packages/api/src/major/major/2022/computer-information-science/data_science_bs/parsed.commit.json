@@ -1,0 +1,617 @@
+{
+  "name": "Data Science, BS",
+  "metadata": {
+    "verified": true,
+    "lastEdited": "2/4/2024"
+  },
+  "totalCreditsRequired": 130,
+  "yearVersion": 2022,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Computer Science Overview",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1200,
+          "subject": "CS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1210,
+          "subject": "CS"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Fundamental Courses",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CS",
+              "classId": 1800,
+              "description": "Discrete Structures",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CS",
+              "classId": 1802,
+              "description": "Seminar for CS 1800",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Programming Sequence Pathways",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "CS",
+                  "classId": 2500,
+                  "description": "Fundamentals of Computer Science 1",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "CS",
+                  "classId": 2501,
+                  "description": "Lab for CS 2500",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "CS",
+                  "classId": 2510,
+                  "description": "Fundamentals of Computer Science 2",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "CS",
+                  "classId": 2511,
+                  "description": "Lab for CS 2510",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "CS",
+                  "classId": 3500,
+                  "description": "Object-Oriented Design",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "CS",
+                  "classId": 3501,
+                  "description": "Lab for CS 3500",
+                  "type": "COURSE"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "DS",
+                  "classId": 2000,
+                  "description": "Programming with Data",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "DS",
+                  "classId": 2001,
+                  "description": "Data Science Programming Practicum",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "DS",
+                  "classId": 2500,
+                  "description": "Intermediate Programming with Data",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "DS",
+                  "classId": 2501,
+                  "description": "Lab for DS 2500",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 3500,
+              "subject": "DS"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Computer Science Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3000,
+          "subject": "CS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3200,
+          "subject": "CS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3520,
+          "subject": "CS"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Data Science Electives",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 12,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 4100,
+              "subject": "CS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4120,
+              "subject": "CS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4200,
+              "subject": "IS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4300,
+              "subject": "IS"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Data Science Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3000,
+          "subject": "DS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4200,
+          "subject": "DS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4300,
+          "subject": "DS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4400,
+          "subject": "DS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4420,
+          "subject": "DS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4440,
+          "subject": "DS"
+        }
+      ],
+      "minRequirementCount": 6
+    },
+    {
+      "type": "SECTION",
+      "title": "Presentation Requirement",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1112,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1113,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1210,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1511,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1125,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1130,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1160,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2345,
+          "subject": "THTR"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Mathematics Foundations",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1341,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1342,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2331,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3081,
+          "subject": "MATH"
+        }
+      ],
+      "minRequirementCount": 4
+    },
+    {
+      "type": "SECTION",
+      "title": "Data Science and Ethics",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1145,
+          "subject": "PHIL"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Khoury Elective Courses",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 4,
+          "courses": [
+            {
+              "type": "RANGE",
+              "subject": "CS",
+              "idRangeStart": 2500,
+              "idRangeEnd": 9999,
+              "exceptions": [
+                {
+                  "subject": "CS",
+                  "classId": 5010,
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "RANGE",
+              "subject": "CY",
+              "idRangeStart": 2000,
+              "idRangeEnd": 9999,
+              "exceptions": [
+                {
+                  "subject": "CY",
+                  "classId": 4930,
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "RANGE",
+              "subject": "DS",
+              "idRangeStart": 2500,
+              "idRangeEnd": 9999,
+              "exceptions": [
+                {
+                  "subject": "DS",
+                  "classId": 4900,
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "RANGE",
+              "subject": "IS",
+              "idRangeStart": 2000,
+              "idRangeEnd": 9999,
+              "exceptions": [
+                {
+                  "subject": "IS",
+                  "classId": 4900,
+                  "type": "COURSE"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Data Science Related Electives in Other Units",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3451,
+          "subject": "ARTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5100,
+          "subject": "ARTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5110,
+          "subject": "ARTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5120,
+          "subject": "ARTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5330,
+          "subject": "ARTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 6100,
+          "subject": "ARTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 6200,
+          "subject": "ARTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 6308,
+          "subject": "BINF"
+        },
+        {
+          "type": "COURSE",
+          "classId": 6309,
+          "subject": "BINF"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2350,
+          "subject": "ECON"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2560,
+          "subject": "ECON"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5639,
+          "subject": "EECE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5642,
+          "subject": "EECE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5644,
+          "subject": "EECE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2500,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4608,
+          "subject": "FINA"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5110,
+          "subject": "GSND"
+        },
+        {
+          "type": "COURSE",
+          "classId": 6350,
+          "subject": "GSND"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5101,
+          "subject": "HINF"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5102,
+          "subject": "HINF"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5300,
+          "subject": "HINF"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5301,
+          "subject": "HINF"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4800,
+          "subject": "IS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5640,
+          "subject": "IE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2321,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4581,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2301,
+          "subject": "MGSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3403,
+          "subject": "MISM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3401,
+          "subject": "MKTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3501,
+          "subject": "MKTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5005,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5010,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2320,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3466,
+          "subject": "PSYC"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "College Writing",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1111,
+          "subject": "ENGW"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Advanced Writing in the Disciplines",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3302,
+              "subject": "ENGW"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3315,
+              "subject": "ENGW"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

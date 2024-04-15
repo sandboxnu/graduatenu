@@ -1,0 +1,300 @@
+{
+  "name": "Game Design, BFA",
+  "metadata": {
+    "verified": true,
+    "lastEdited": "2/4/2024"
+  },
+  "totalCreditsRequired": 128,
+  "yearVersion": 2021,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Art and Design at Northeastern",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1000,
+          "subject": "ARTF"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Game Studies",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1110,
+          "subject": "GAME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2650,
+          "subject": "GAME"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Game Design",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2500,
+          "subject": "GAME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2950,
+          "subject": "GAME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3700,
+          "subject": "GAME"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Game Development",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2260,
+          "subject": "ARTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3300,
+          "subject": "GAME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3400,
+          "subject": "GAME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3800,
+          "subject": "GAME"
+        }
+      ],
+      "minRequirementCount": 4
+    },
+    {
+      "type": "SECTION",
+      "title": "Game Aesthetics",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1122,
+          "subject": "ARTF"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARTF",
+              "classId": 1124,
+              "description": "Form and Structure",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARTF",
+              "classId": 1125,
+              "description": "Form and Structure Tools",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2220,
+          "subject": "ARTF"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2370,
+          "subject": "ARTD"
+        }
+      ],
+      "minRequirementCount": 4
+    },
+    {
+      "type": "SECTION",
+      "title": "Critical Play",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2010,
+          "subject": "GAME"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Capstone",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4700,
+          "subject": "GAME"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Game Design and Development",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1850,
+              "subject": "GAME"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1999,
+              "subject": "GAME"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2991,
+              "subject": "GAME"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3055,
+              "subject": "GAME"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3800,
+              "subject": "GAME"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4460,
+              "subject": "GAME"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4600,
+              "subject": "GAME"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Game Aesthetics and Critical Play",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2355,
+              "subject": "GAME"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2750,
+              "subject": "GAME"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2755,
+              "subject": "GAME"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4155,
+              "subject": "GAME"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Art + Design",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 12,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1120,
+              "subject": "ARTF"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2223,
+              "subject": "ARTF"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3470,
+              "subject": "ARTD"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3472,
+              "subject": "ARTD"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3473,
+              "subject": "ARTD"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3250,
+              "subject": "ARTG"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Art History",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 4,
+          "courses": [
+            {
+              "type": "RANGE",
+              "subject": "ARTH",
+              "idRangeStart": 0,
+              "idRangeEnd": 9999,
+              "exceptions": []
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}
